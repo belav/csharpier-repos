@@ -26,14 +26,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 return;
             }
 
-            TestProjectFixture portableAppFixture = sharedTestState.TestWindowsOsShimsAppFixture.Copy();
+            TestProjectFixture portableAppFixture =
+                sharedTestState.TestWindowsOsShimsAppFixture.Copy();
 
             portableAppFixture.BuiltDotnet.Exec(portableAppFixture.TestProject.AppDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdOutContaining("Reported OS version is newer or equal to the true OS version - no shims.");
+                .Should()
+                .Pass()
+                .And.HaveStdOutContaining(
+                    "Reported OS version is newer or equal to the true OS version - no shims."
+                );
         }
 
         [Fact]
@@ -45,22 +49,27 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             }
 
             // Long paths must also be enabled via a machine-wide setting. Only run the test if it is enabled.
-            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\FileSystem"))
-            {
+            using (
+                RegistryKey key = Registry.LocalMachine.OpenSubKey(
+                    @"SYSTEM\CurrentControlSet\Control\FileSystem"
+                )
+            ) {
                 if (key == null)
                 {
                     return;
                 }
 
                 object longPathsSetting = key.GetValue("LongPathsEnabled", null);
-                if (longPathsSetting == null || !(longPathsSetting is int) || (int)longPathsSetting == 0)
-                {
+                if (
+                    longPathsSetting == null
+                    || !(longPathsSetting is int)
+                    || (int)longPathsSetting == 0
+                ) {
                     return;
                 }
             }
 
-            var fixture = sharedTestState.PortableAppWithLongPathFixture
-                .Copy();
+            var fixture = sharedTestState.PortableAppWithLongPathFixture.Copy();
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
@@ -69,7 +78,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdOutContaining("CreateDirectoryW with long path succeeded");
         }
@@ -88,13 +98,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             {
                 RepoDirectories = new RepoDirectoriesProvider();
 
-                PortableAppWithLongPathFixture = new TestProjectFixture("PortableAppWithLongPath", RepoDirectories)
-                    .EnsureRestored()
-                    .BuildProject();
+                PortableAppWithLongPathFixture = new TestProjectFixture(
+                    "PortableAppWithLongPath",
+                    RepoDirectories
+                ).EnsureRestored().BuildProject();
 
-                TestWindowsOsShimsAppFixture = new TestProjectFixture("TestWindowsOsShimsApp", RepoDirectories)
-                    .EnsureRestored()
-                    .PublishProject();
+                TestWindowsOsShimsAppFixture = new TestProjectFixture(
+                    "TestWindowsOsShimsApp",
+                    RepoDirectories
+                ).EnsureRestored().PublishProject();
             }
 
             public void Dispose()

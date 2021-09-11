@@ -185,13 +185,22 @@ namespace Internal.IL.Stubs
 
         public void Emit(ILOpcode opcode, ILCodeLabel label)
         {
-            Debug.Assert(opcode == ILOpcode.br || opcode == ILOpcode.brfalse ||
-                opcode == ILOpcode.brtrue || opcode == ILOpcode.beq ||
-                opcode == ILOpcode.bge || opcode == ILOpcode.bgt ||
-                opcode == ILOpcode.ble || opcode == ILOpcode.blt ||
-                opcode == ILOpcode.bne_un || opcode == ILOpcode.bge_un ||
-                opcode == ILOpcode.bgt_un || opcode == ILOpcode.ble_un ||
-                opcode == ILOpcode.blt_un || opcode == ILOpcode.leave);
+            Debug.Assert(
+                opcode == ILOpcode.br
+                    || opcode == ILOpcode.brfalse
+                    || opcode == ILOpcode.brtrue
+                    || opcode == ILOpcode.beq
+                    || opcode == ILOpcode.bge
+                    || opcode == ILOpcode.bgt
+                    || opcode == ILOpcode.ble
+                    || opcode == ILOpcode.blt
+                    || opcode == ILOpcode.bne_un
+                    || opcode == ILOpcode.bge_un
+                    || opcode == ILOpcode.bgt_un
+                    || opcode == ILOpcode.ble_un
+                    || opcode == ILOpcode.blt_un
+                    || opcode == ILOpcode.leave
+            );
 
             Emit(opcode);
             _offsetsNeedingPatching.Add(new LabelAndOffset(label, _length));
@@ -469,12 +478,14 @@ namespace Internal.IL.Stubs
 
                 int offset = patch.Offset;
 
-                int delta = _instructions[offset + 3] << 24 |
-                    _instructions[offset + 2] << 16 |
-                    _instructions[offset + 1] << 8 |
-                    _instructions[offset];
+                int delta =
+                    _instructions[offset + 3] << 24
+                    | _instructions[offset + 2] << 16
+                    | _instructions[offset + 1] << 8
+                    | _instructions[offset];
 
-                int value = patch.Label.AbsoluteOffset - _startOffsetForLinking - patch.Offset - delta;
+                int value =
+                    patch.Label.AbsoluteOffset - _startOffsetForLinking - patch.Offset - delta;
 
                 _instructions[offset] = (byte)value;
                 _instructions[offset + 1] = (byte)(value >> 8);
@@ -486,9 +497,15 @@ namespace Internal.IL.Stubs
         public void DefineSequencePoint(string document, int lineNumber)
         {
             // Last sequence point defined for this offset wins.
-            if (_sequencePoints.Count > 0 && _sequencePoints[_sequencePoints.Count - 1].Offset == _length)
-            {
-                _sequencePoints[_sequencePoints.Count - 1] = new ILSequencePoint(_length, document, lineNumber);
+            if (
+                _sequencePoints.Count > 0
+                && _sequencePoints[_sequencePoints.Count - 1].Offset == _length
+            ) {
+                _sequencePoints[_sequencePoints.Count - 1] = new ILSequencePoint(
+                    _length,
+                    document,
+                    lineNumber
+                );
             }
             else
             {
@@ -511,18 +528,20 @@ namespace Internal.IL.Stubs
         internal ILCodeStream _endHandlerStream;
         internal int _endHandlerOffset;
 
-        internal ILExceptionRegionBuilder()
-        {
-        }
+        internal ILExceptionRegionBuilder() { }
 
         internal int TryOffset => _beginTryStream.RelativeToAbsoluteOffset(_beginTryOffset);
         internal int TryLength => _endTryStream.RelativeToAbsoluteOffset(_endTryOffset) - TryOffset;
-        internal int HandlerOffset => _beginHandlerStream.RelativeToAbsoluteOffset(_beginHandlerOffset);
-        internal int HandlerLength => _endHandlerStream.RelativeToAbsoluteOffset(_endHandlerOffset) - HandlerOffset;
-        
+        internal int HandlerOffset =>
+            _beginHandlerStream.RelativeToAbsoluteOffset(_beginHandlerOffset);
+        internal int HandlerLength =>
+            _endHandlerStream.RelativeToAbsoluteOffset(_endHandlerOffset) - HandlerOffset;
+
         internal bool IsDefined =>
-            _beginTryStream != null && _endTryStream != null
-            && _beginHandlerStream != null && _endHandlerStream != null;
+            _beginTryStream != null
+            && _endTryStream != null
+            && _beginHandlerStream != null
+            && _endHandlerStream != null;
     }
 
     /// <summary>
@@ -548,8 +567,14 @@ namespace Internal.IL.Stubs
         private const int MaxStackNotSet = -1;
         private int _maxStack;
 
-        public ILStubMethodIL(MethodDesc owningMethod, byte[] ilBytes, LocalVariableDefinition[] locals, Object[] tokens, ILExceptionRegion[] exceptionRegions = null, MethodDebugInformation debugInfo = null)
-        {
+        public ILStubMethodIL(
+            MethodDesc owningMethod,
+            byte[] ilBytes,
+            LocalVariableDefinition[] locals,
+            Object[] tokens,
+            ILExceptionRegion[] exceptionRegions = null,
+            MethodDebugInformation debugInfo = null
+        ) {
             _ilBytes = ilBytes;
             _locals = locals;
             _tokens = tokens;
@@ -578,10 +603,7 @@ namespace Internal.IL.Stubs
 
         public override MethodDesc OwningMethod
         {
-            get
-            {
-                return _method;
-            }
+            get { return _method; }
         }
 
         public override byte[] GetILBytes()
@@ -610,10 +632,7 @@ namespace Internal.IL.Stubs
         }
         public override bool IsInitLocals
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override LocalVariableDefinition[] GetLocals()
@@ -633,10 +652,7 @@ namespace Internal.IL.Stubs
 
         internal bool IsPlaced
         {
-            get
-            {
-                return _codeStream != null;
-            }
+            get { return _codeStream != null; }
         }
 
         internal int AbsoluteOffset
@@ -648,9 +664,7 @@ namespace Internal.IL.Stubs
             }
         }
 
-        internal ILCodeLabel()
-        {
-        }
+        internal ILCodeLabel() { }
 
         internal void Place(ILCodeStream codeStream, int offsetWithinCodeStream)
         {
@@ -667,9 +681,7 @@ namespace Internal.IL.Stubs
         private ArrayBuilder<Object> _tokens;
         private ArrayBuilder<ILExceptionRegionBuilder> _finallyRegions;
 
-        public ILEmitter()
-        {
-        }
+        public ILEmitter() { }
 
         public ILCodeStream NewCodeStream()
         {
@@ -749,7 +761,13 @@ namespace Internal.IL.Stubs
             {
                 ILCodeStream ilCodeStream = _codeStreams[i];
                 ilCodeStream.PatchLabels();
-                Array.Copy(ilCodeStream._instructions, 0, ilInstructions, copiedLength, ilCodeStream._length);
+                Array.Copy(
+                    ilCodeStream._instructions,
+                    0,
+                    ilInstructions,
+                    copiedLength,
+                    ilCodeStream._length
+                );
                 copiedLength += ilCodeStream._length;
             }
 
@@ -758,17 +776,26 @@ namespace Internal.IL.Stubs
             {
                 ILSequencePoint[] sequencePoints = new ILSequencePoint[numSequencePoints];
                 int copiedSequencePointLength = 0;
-                for (int codeStreamIndex = 0; codeStreamIndex < _codeStreams.Count; codeStreamIndex++)
-                {
+                for (
+                    int codeStreamIndex = 0;
+                    codeStreamIndex < _codeStreams.Count;
+                    codeStreamIndex++
+                ) {
                     ILCodeStream ilCodeStream = _codeStreams[codeStreamIndex];
 
-                    for (int sequencePointIndex = 0; sequencePointIndex < ilCodeStream._sequencePoints.Count; sequencePointIndex++)
-                    {
-                        ILSequencePoint sequencePoint = ilCodeStream._sequencePoints[sequencePointIndex];
+                    for (
+                        int sequencePointIndex = 0;
+                        sequencePointIndex < ilCodeStream._sequencePoints.Count;
+                        sequencePointIndex++
+                    ) {
+                        ILSequencePoint sequencePoint = ilCodeStream._sequencePoints[
+                            sequencePointIndex
+                        ];
                         sequencePoints[copiedSequencePointLength] = new ILSequencePoint(
                             ilCodeStream._startOffsetForLinking + sequencePoint.Offset,
                             sequencePoint.Document,
-                            sequencePoint.LineNumber);
+                            sequencePoint.LineNumber
+                        );
                         copiedSequencePointLength++;
                     }
                 }
@@ -789,13 +816,26 @@ namespace Internal.IL.Stubs
 
                     Debug.Assert(region.IsDefined);
 
-                    exceptionRegions[i] = new ILExceptionRegion(ILExceptionRegionKind.Finally,
-                        region.TryOffset, region.TryLength, region.HandlerOffset, region.HandlerLength,
-                        classToken: 0, filterOffset: 0);
+                    exceptionRegions[i] = new ILExceptionRegion(
+                        ILExceptionRegionKind.Finally,
+                        region.TryOffset,
+                        region.TryLength,
+                        region.HandlerOffset,
+                        region.HandlerLength,
+                        classToken: 0,
+                        filterOffset: 0
+                    );
                 }
             }
 
-            var result = new ILStubMethodIL(owningMethod, ilInstructions, _locals.ToArray(), _tokens.ToArray(), exceptionRegions, debugInfo);
+            var result = new ILStubMethodIL(
+                owningMethod,
+                ilInstructions,
+                _locals.ToArray(),
+                _tokens.ToArray(),
+                exceptionRegions,
+                debugInfo
+            );
             result.CheckStackBalance();
             return result;
         }

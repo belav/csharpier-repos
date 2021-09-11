@@ -28,17 +28,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public EnumTypeModelBinder(
             bool suppressBindingUndefinedValueToEnumType,
             Type modelType,
-            ILoggerFactory loggerFactory)
-            : base(modelType, loggerFactory)
-        {
-        }
+            ILoggerFactory loggerFactory
+        ) : base(modelType, loggerFactory) { }
 
         /// <inheritdoc/>
         protected override void CheckModel(
             ModelBindingContext bindingContext,
             ValueProviderResult valueProviderResult,
-            object? model)
-        {
+            object? model
+        ) {
             if (model == null)
             {
                 base.CheckModel(bindingContext, valueProviderResult, model);
@@ -52,7 +50,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 bindingContext.ModelState.TryAddModelError(
                     bindingContext.ModelName,
                     bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueIsInvalidAccessor(
-                        valueProviderResult.ToString()));
+                        valueProviderResult.ToString()
+                    )
+                );
             }
         }
 
@@ -79,9 +79,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 // 1. valueProviderResult="2,10", model=12, underlying=12, converted=12
                 //
                 var underlying = Convert.ChangeType(
-                    model,
-                    Enum.GetUnderlyingType(modelType),
-                    CultureInfo.InvariantCulture).ToString();
+                        model,
+                        Enum.GetUnderlyingType(modelType),
+                        CultureInfo.InvariantCulture
+                    )
+                    .ToString();
                 var converted = model.ToString();
                 return !string.Equals(underlying, converted, StringComparison.OrdinalIgnoreCase);
             }

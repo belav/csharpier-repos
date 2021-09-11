@@ -23,8 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public ConfigureApiResources(
             IConfiguration configuration,
             IIdentityServerJwtDescriptor localApiDescriptor,
-            ILogger<ConfigureApiResources> logger)
-        {
+            ILogger<ConfigureApiResources> logger
+        ) {
             _configuration = configuration;
             _localApiDescriptor = localApiDescriptor;
             _logger = logger;
@@ -41,14 +41,17 @@ namespace Microsoft.Extensions.DependencyInjection
 
         internal IEnumerable<ApiResource> GetApiResources()
         {
-            var data = _configuration
-                .Get<Dictionary<string, ResourceDefinition>>();
+            var data = _configuration.Get<Dictionary<string, ResourceDefinition>>();
 
             if (data != null)
             {
                 foreach (var kvp in data)
                 {
-                    _logger.LogInformation(LoggerEventIds.ConfiguringAPIResource, "Configuring API resource '{ApiResourceName}'.", kvp.Key);
+                    _logger.LogInformation(
+                        LoggerEventIds.ConfiguringAPIResource,
+                        "Configuring API resource '{ApiResourceName}'.",
+                        kvp.Key
+                    );
                     yield return GetResource(kvp.Key, kvp.Value);
                 }
             }
@@ -58,7 +61,11 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 foreach (var kvp in localResources)
                 {
-                    _logger.LogInformation(LoggerEventIds.ConfiguringLocalAPIResource, "Configuring local API resource '{ApiResourceName}'.", kvp.Key);
+                    _logger.LogInformation(
+                        LoggerEventIds.ConfiguringLocalAPIResource,
+                        "Configuring local API resource '{ApiResourceName}'.",
+                        kvp.Key
+                    );
                     yield return GetResource(kvp.Key, kvp.Value);
                 }
             }
@@ -73,7 +80,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 case ApplicationProfiles.IdentityServerJwt:
                     return GetLocalAPI(name, definition);
                 default:
-                    throw new InvalidOperationException($"Type '{definition.Profile}' is not supported.");
+                    throw new InvalidOperationException(
+                        $"Type '{definition.Profile}' is not supported."
+                    );
             }
         }
 

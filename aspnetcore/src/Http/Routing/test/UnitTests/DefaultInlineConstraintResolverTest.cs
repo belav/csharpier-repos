@@ -48,11 +48,14 @@ namespace Microsoft.AspNetCore.Routing.Tests
         {
             // Arrange, Act & Assert
             var ex = Assert.Throws<RouteCreationException>(
-                () => _constraintResolver.ResolveConstraint("int(5)"));
+                () => _constraintResolver.ResolveConstraint("int(5)")
+            );
 
-            Assert.Equal("Could not find a constructor for constraint type 'IntRouteConstraint'" +
-                         " with the following number of parameters: 1.",
-                         ex.Message);
+            Assert.Equal(
+                "Could not find a constructor for constraint type 'IntRouteConstraint'"
+                    + " with the following number of parameters: 1.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -80,7 +83,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
         {
             // Arrange & Act
             var constraint = _constraintResolver.ResolveConstraint(
-                @"regex(\\b(?<month>\\d{1,2})/(?<day>\\d{1,2})/(?<year>\\d{2,4})\\b)");
+                @"regex(\\b(?<month>\\d{1,2})/(?<day>\\d{1,2})/(?<year>\\d{2,4})\\b)"
+            );
 
             // Assert
             Assert.IsType<RegexInlineRouteConstraint>(constraint);
@@ -278,10 +282,14 @@ namespace Microsoft.AspNetCore.Routing.Tests
             var resolver = GetInlineConstraintResolver(routeOptions);
 
             // Act & Assert
-            var ex = Assert.Throws<RouteCreationException>(() => resolver.ResolveConstraint("custom"));
-            Assert.Equal("The constraint type 'System.String' which is mapped to constraint key 'custom'" +
-                         " must implement the 'IRouteConstraint' interface.",
-                         ex.Message);
+            var ex = Assert.Throws<RouteCreationException>(
+                () => resolver.ResolveConstraint("custom")
+            );
+            Assert.Equal(
+                "The constraint type 'System.String' which is mapped to constraint key 'custom'"
+                    + " must implement the 'IRouteConstraint' interface.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -293,10 +301,14 @@ namespace Microsoft.AspNetCore.Routing.Tests
             var resolver = GetInlineConstraintResolver(routeOptions);
 
             // Act & Assert
-            var ex = Assert.Throws<RouteCreationException>(() => resolver.ResolveConstraint("custom(5,6)"));
-            Assert.Equal("The constructor to use for activating the constraint type 'MultiConstructorRouteConstraint' is ambiguous." +
-                         " Multiple constructors were found with the following number of parameters: 2.",
-                         ex.Message);
+            var ex = Assert.Throws<RouteCreationException>(
+                () => resolver.ResolveConstraint("custom(5,6)")
+            );
+            Assert.Equal(
+                "The constructor to use for activating the constraint type 'MultiConstructorRouteConstraint' is ambiguous."
+                    + " Multiple constructors were found with the following number of parameters: 2.",
+                ex.Message
+            );
         }
 
         // These are cases which parsing does not catch and we'll end up here
@@ -319,10 +331,14 @@ namespace Microsoft.AspNetCore.Routing.Tests
         {
             // Arrange
             // Act & Assert
-            var ex = Assert.Throws<RouteCreationException>(() => _constraintResolver.ResolveConstraint("int(5,6)"));
-            Assert.Equal("Could not find a constructor for constraint type 'IntRouteConstraint'" +
-                         " with the following number of parameters: 2.",
-                         ex.Message);
+            var ex = Assert.Throws<RouteCreationException>(
+                () => _constraintResolver.ResolveConstraint("int(5,6)")
+            );
+            Assert.Equal(
+                "Could not find a constructor for constraint type 'IntRouteConstraint'"
+                    + " with the following number of parameters: 2.",
+                ex.Message
+            );
         }
 
         private IInlineConstraintResolver GetInlineConstraintResolver(RouteOptions routeOptions)
@@ -330,25 +346,25 @@ namespace Microsoft.AspNetCore.Routing.Tests
             var optionsAccessor = new Mock<IOptions<RouteOptions>>();
             optionsAccessor.SetupGet(o => o.Value).Returns(routeOptions);
 
-            return new DefaultInlineConstraintResolver(optionsAccessor.Object, new TestServiceProvider());
+            return new DefaultInlineConstraintResolver(
+                optionsAccessor.Object,
+                new TestServiceProvider()
+            );
         }
 
         private class MultiConstructorRouteConstraint : IRouteConstraint
         {
-            public MultiConstructorRouteConstraint(string pattern, int intArg)
-            {
-            }
+            public MultiConstructorRouteConstraint(string pattern, int intArg) { }
 
-            public MultiConstructorRouteConstraint(int intArg, string pattern)
-            {
-            }
+            public MultiConstructorRouteConstraint(int intArg, string pattern) { }
 
-            public bool Match(HttpContext httpContext,
-                              IRouter route,
-                              string routeKey,
-                              RouteValueDictionary values,
-                              RouteDirection routeDirection)
-            {
+            public bool Match(
+                HttpContext httpContext,
+                IRouter route,
+                string routeKey,
+                RouteValueDictionary values,
+                RouteDirection routeDirection
+            ) {
                 return true;
             }
         }
@@ -361,12 +377,13 @@ namespace Microsoft.AspNetCore.Routing.Tests
             }
 
             public string Pattern { get; private set; }
-            public bool Match(HttpContext httpContext,
-                              IRouter route,
-                              string routeKey,
-                              RouteValueDictionary values,
-                              RouteDirection routeDirection)
-            {
+            public bool Match(
+                HttpContext httpContext,
+                IRouter route,
+                string routeKey,
+                RouteValueDictionary values,
+                RouteDirection routeDirection
+            ) {
                 return true;
             }
         }

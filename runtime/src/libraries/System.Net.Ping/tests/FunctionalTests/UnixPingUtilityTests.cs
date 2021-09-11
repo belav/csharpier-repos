@@ -26,13 +26,17 @@ namespace System.Net.NetworkInformation.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public static void TimeoutIsRespected(int timeout)
         {
-            Process p = ConstructPingProcess(IPAddress.Parse(TestSettings.UnreachableAddress), 50, timeout);
+            Process p = ConstructPingProcess(
+                IPAddress.Parse(TestSettings.UnreachableAddress),
+                50,
+                timeout
+            );
             //suppress Ping output to console/terminal stdout during test execution
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.RedirectStandardOutput = true;
 
             Stopwatch stopWatch = Stopwatch.StartNew();
-                        
+
             p.Start();
             p.WaitForExit();
 
@@ -40,7 +44,10 @@ namespace System.Net.NetworkInformation.Tests
             Assert.True(stopWatch.ElapsedMilliseconds >= timeout);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(50)]
@@ -51,17 +58,25 @@ namespace System.Net.NetworkInformation.Tests
             var stdOutLines = new List<string>();
             var stdErrLines = new List<string>();
 
-            Process p = ConstructPingProcess(await TestSettings.GetLocalIPAddressAsync(), payloadSize, 1000);
+            Process p = ConstructPingProcess(
+                await TestSettings.GetLocalIPAddressAsync(),
+                payloadSize,
+                1000
+            );
             p.StartInfo.RedirectStandardOutput = true;
-            p.OutputDataReceived += delegate (object sendingProcess, DataReceivedEventArgs outputLine) 
-            { 
-                stdOutLines.Add(outputLine.Data); 
+            p.OutputDataReceived += delegate(
+                object sendingProcess,
+                DataReceivedEventArgs outputLine
+            ) {
+                stdOutLines.Add(outputLine.Data);
             };
 
             p.StartInfo.RedirectStandardError = true;
-            p.ErrorDataReceived += delegate (object sendingProcess, DataReceivedEventArgs errorLine) 
-            { 
-                stdErrLines.Add(errorLine.Data); 
+            p.ErrorDataReceived += delegate(
+                object sendingProcess,
+                DataReceivedEventArgs errorLine
+            ) {
+                stdErrLines.Add(errorLine.Data);
             };
 
             p.Start();
@@ -74,7 +89,8 @@ namespace System.Net.NetworkInformation.Tests
                 pingOutput = string.Join("\n", stdOutLines);
                 string stdErr = string.Join("\n", stdErrLines);
                 throw new Exception(
-                    $"[{p.StartInfo.FileName} {p.StartInfo.Arguments}] process did not exit in {TestSettings.PingTimeout} ms.\nStdOut:[{pingOutput}]\nStdErr:[{stdErr}]");
+                    $"[{p.StartInfo.FileName} {p.StartInfo.Arguments}] process did not exit in {TestSettings.PingTimeout} ms.\nStdOut:[{pingOutput}]\nStdErr:[{stdErr}]"
+                );
             }
 
             // Ensure standard output and error are flushed
@@ -86,7 +102,8 @@ namespace System.Net.NetworkInformation.Tests
             {
                 string stdErr = string.Join("\n", stdErrLines);
                 throw new Exception(
-                    $"[{p.StartInfo.FileName} {p.StartInfo.Arguments}] process exit code is {exitCode}.\nStdOut:[{pingOutput}]\nStdErr:[{stdErr}]");
+                    $"[{p.StartInfo.FileName} {p.StartInfo.Arguments}] process exit code is {exitCode}.\nStdOut:[{pingOutput}]\nStdErr:[{stdErr}]"
+                );
             }
 
             try
@@ -108,17 +125,28 @@ namespace System.Net.NetworkInformation.Tests
             {
                 string stdErr = string.Join("\n", stdErrLines);
                 throw new Exception(
-                    $"Parse error for [{p.StartInfo.FileName} {p.StartInfo.Arguments}] process exit code is {exitCode}.\nStdOut:[{pingOutput}]\nStdErr:[{stdErr}]", e);
+                    $"Parse error for [{p.StartInfo.FileName} {p.StartInfo.Arguments}] process exit code is {exitCode}.\nStdOut:[{pingOutput}]\nStdErr:[{stdErr}]",
+                    e
+                );
             }
         }
 
-        private static Process ConstructPingProcess(IPAddress localAddress, int payloadSize, int timeout)
-        {
+        private static Process ConstructPingProcess(
+            IPAddress localAddress,
+            int payloadSize,
+            int timeout
+        ) {
             bool ipv4 = localAddress.AddressFamily == AddressFamily.InterNetwork;
-            string arguments = UnixCommandLinePing.ConstructCommandLine(payloadSize, timeout, localAddress.ToString(), ipv4);
-            string utilityPath = (localAddress.AddressFamily == AddressFamily.InterNetwork)
-                ? UnixCommandLinePing.Ping4UtilityPath
-                : UnixCommandLinePing.Ping6UtilityPath;
+            string arguments = UnixCommandLinePing.ConstructCommandLine(
+                payloadSize,
+                timeout,
+                localAddress.ToString(),
+                ipv4
+            );
+            string utilityPath =
+                (localAddress.AddressFamily == AddressFamily.InterNetwork)
+                    ? UnixCommandLinePing.Ping4UtilityPath
+                    : UnixCommandLinePing.Ping6UtilityPath;
 
             var p = new Process();
             p.StartInfo.FileName = utilityPath;
@@ -132,15 +160,24 @@ namespace System.Net.NetworkInformation.Tests
         {
             int indexOfBytesFrom = pingOutput.IndexOf("bytes from");
             int previousNewLine = pingOutput.LastIndexOf(Environment.NewLine, indexOfBytesFrom);
-            string number = pingOutput.Substring(previousNewLine + 1, indexOfBytesFrom - previousNewLine - 1);
+            string number = pingOutput.Substring(
+                previousNewLine + 1,
+                indexOfBytesFrom - previousNewLine - 1
+            );
             return int.Parse(number);
         }
 
         private static int ParseNumPingsSent(string pingOutput)
         {
             int indexOfPacketsTransmitted = pingOutput.IndexOf("packets transmitted");
-            int previousNewLine = pingOutput.LastIndexOf(Environment.NewLine, indexOfPacketsTransmitted);
-            string number = pingOutput.Substring(previousNewLine + 1, indexOfPacketsTransmitted - previousNewLine - 1);
+            int previousNewLine = pingOutput.LastIndexOf(
+                Environment.NewLine,
+                indexOfPacketsTransmitted
+            );
+            string number = pingOutput.Substring(
+                previousNewLine + 1,
+                indexOfPacketsTransmitted - previousNewLine - 1
+            );
             return int.Parse(number);
         }
     }

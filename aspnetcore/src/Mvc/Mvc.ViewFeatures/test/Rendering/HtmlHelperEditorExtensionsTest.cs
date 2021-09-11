@@ -12,21 +12,40 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
     public class HtmlHelperEditorExtensionsTest
     {
         [Theory]
-        [MemberData(nameof(HtmlHelperDisplayExtensionsTest.EnumUnformattedModels),
-            MemberType = typeof(HtmlHelperDisplayExtensionsTest))]
-        public void Display_UsesTemplateUnFormatted(HtmlHelperDisplayExtensionsTest.FormatModel model, string expectedResult)
-        {
+        [MemberData(
+            nameof(HtmlHelperDisplayExtensionsTest.EnumUnformattedModels),
+            MemberType = typeof(HtmlHelperDisplayExtensionsTest)
+        )]
+        public void Display_UsesTemplateUnFormatted(
+            HtmlHelperDisplayExtensionsTest.FormatModel model,
+            string expectedResult
+        ) {
             // Arrange
             var view = new Mock<IView>();
             view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback((ViewContext v) => v.Writer.WriteAsync(v.ViewData.TemplateInfo.FormattedModelValue.ToString()))
+                .Callback(
+                    (ViewContext v) =>
+                        v.Writer.WriteAsync(v.ViewData.TemplateInfo.FormattedModelValue.ToString())
+                )
                 .Returns(Task.FromResult(0));
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, It.IsAny<string>(), /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            It.IsAny<string>(), /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "EditorTemplates/Status", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "EditorTemplates/Status", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.Found("Status", view.Object))
                 .Verifiable();
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);
@@ -39,20 +58,40 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         }
 
         [Theory]
-        [MemberData(nameof(HtmlHelperDisplayExtensionsTest.EnumFormatModels), MemberType = typeof(HtmlHelperDisplayExtensionsTest))]
-        public void Display_UsesTemplateFormatted(HtmlHelperDisplayExtensionsTest.FormatModel model, string expectedResult)
-        {
+        [MemberData(
+            nameof(HtmlHelperDisplayExtensionsTest.EnumFormatModels),
+            MemberType = typeof(HtmlHelperDisplayExtensionsTest)
+        )]
+        public void Display_UsesTemplateFormatted(
+            HtmlHelperDisplayExtensionsTest.FormatModel model,
+            string expectedResult
+        ) {
             // Arrange
             var view = new Mock<IView>();
             view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-                .Callback((ViewContext v) => v.Writer.WriteAsync(v.ViewData.TemplateInfo.FormattedModelValue.ToString()))
+                .Callback(
+                    (ViewContext v) =>
+                        v.Writer.WriteAsync(v.ViewData.TemplateInfo.FormattedModelValue.ToString())
+                )
                 .Returns(Task.FromResult(0));
             var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
-            viewEngine
-                .Setup(v => v.GetView(/*executingFilePath*/ null, It.IsAny<string>(), /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.GetView( /*executingFilePath*/
+                            null,
+                            It.IsAny<string>(), /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.NotFound(string.Empty, Enumerable.Empty<string>()));
-            viewEngine
-                .Setup(v => v.FindView(It.IsAny<ActionContext>(), "EditorTemplates/Status", /*isMainPage*/ false))
+            viewEngine.Setup(
+                    v =>
+                        v.FindView(
+                            It.IsAny<ActionContext>(),
+                            "EditorTemplates/Status", /*isMainPage*/
+                            false
+                        )
+                )
                 .Returns(ViewEngineResult.Found("Status", view.Object))
                 .Verifiable();
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model, viewEngine.Object);

@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 },
                 new List<IFilterMetadata>(),
                 new Dictionary<string, object>(),
-                controller);
+                controller
+            );
 
             // Act
             filter.OnActionExecuting(context);
@@ -70,7 +71,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 ["TempDataProperty-Test"] = "FirstValue"
             };
 
-            var filter = CreateControllerSaveTempDataPropertyFilter(httpContext, tempData: tempData);
+            var filter = CreateControllerSaveTempDataPropertyFilter(
+                httpContext,
+                tempData: tempData
+            );
             var controller = new TestController();
 
             var controllerType = controller.GetType();
@@ -93,7 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 },
                 new List<IFilterMetadata>(),
                 new Dictionary<string, object>(),
-                controller);
+                controller
+            );
 
             // Act
             filter.OnActionExecuting(context);
@@ -114,7 +119,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 ["Test"] = "Value"
             };
 
-            var filter = CreateControllerSaveTempDataPropertyFilter(httpContext, tempData: tempData);
+            var filter = CreateControllerSaveTempDataPropertyFilter(
+                httpContext,
+                tempData: tempData
+            );
             var controller = new TestController();
 
             var controllerType = controller.GetType();
@@ -136,7 +144,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 },
                 new List<IFilterMetadata>(),
                 new Dictionary<string, object>(),
-                controller);
+                controller
+            );
 
             // Act
             filter.OnActionExecuting(context);
@@ -153,7 +162,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             var httpContext = new DefaultHttpContext();
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
 
-            var filter = CreateControllerSaveTempDataPropertyFilter(httpContext, tempData: tempData);
+            var filter = CreateControllerSaveTempDataPropertyFilter(
+                httpContext,
+                tempData: tempData
+            );
             var controller = new TestController();
 
             var controllerType = controller.GetType();
@@ -175,7 +187,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 },
                 new List<IFilterMetadata>(),
                 new Dictionary<string, object>(),
-                controller);
+                controller
+            );
 
             // Act
             filter.OnActionExecuting(context);
@@ -196,17 +209,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 {
                     Assert.Equal(nameof(TestController.Test2), item.Key);
                     Assert.Equal(42, item.Value);
-                });
+                }
+            );
         }
 
         private ControllerSaveTempDataPropertyFilter CreateControllerSaveTempDataPropertyFilter(
             HttpContext httpContext,
-            TempDataDictionary tempData)
-        {
+            TempDataDictionary tempData
+        ) {
             var factory = new Mock<ITempDataDictionaryFactory>();
-            factory
-                .Setup(f => f.GetTempData(httpContext))
-                .Returns(tempData);
+            factory.Setup(f => f.GetTempData(httpContext)).Returns(tempData);
 
             return new ControllerSaveTempDataPropertyFilter(factory.Object);
         }

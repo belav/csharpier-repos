@@ -17,8 +17,12 @@ namespace Microsoft.AspNetCore.Hosting
         /// Constructs the <see cref="HostingStartupAttribute"/> with the specified type.
         /// </summary>
         /// <param name="hostingStartupType">A type that implements <see cref="IHostingStartup"/>.</param>
-        public HostingStartupAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type hostingStartupType)
-        {
+        public HostingStartupAttribute(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type hostingStartupType
+        ) {
             if (hostingStartupType == null)
             {
                 throw new ArgumentNullException(nameof(hostingStartupType));
@@ -26,7 +30,10 @@ namespace Microsoft.AspNetCore.Hosting
 
             if (!typeof(IHostingStartup).IsAssignableFrom(hostingStartupType))
             {
-                throw new ArgumentException($@"""{hostingStartupType}"" does not implement {typeof(IHostingStartup)}.", nameof(hostingStartupType));
+                throw new ArgumentException(
+                    $@"""{hostingStartupType}"" does not implement {typeof(IHostingStartup)}.",
+                    nameof(hostingStartupType)
+                );
             }
 
             HostingStartupType = hostingStartupType;

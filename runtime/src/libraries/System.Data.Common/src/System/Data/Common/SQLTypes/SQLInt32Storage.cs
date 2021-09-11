@@ -15,9 +15,7 @@ namespace System.Data.Common
         private SqlInt32[] _values = default!; // Late-initialized
 
         public SqlInt32Storage(DataColumn column)
-        : base(column, typeof(SqlInt32), SqlInt32.Null, SqlInt32.Null, StorageType.SqlInt32)
-        {
-        }
+            : base(column, typeof(SqlInt32), SqlInt32.Null, SqlInt32.Null, StorageType.SqlInt32) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -32,7 +30,10 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { sum += _values[record]; }
+                            checked
+                            {
+                                sum += _values[record];
+                            }
                             hasData = true;
                         }
                         if (hasData)
@@ -48,14 +49,20 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { meanSum += (_values[record]).ToSqlInt64(); }
+                            checked
+                            {
+                                meanSum += (_values[record]).ToSqlInt64();
+                            }
                             meanCount++;
                             hasData = true;
                         }
                         if (hasData)
                         {
                             SqlInt32 mean = 0;
-                            checked { mean = (meanSum / meanCount).ToSqlInt32(); }
+                            checked
+                            {
+                                mean = (meanSum / meanCount).ToSqlInt32();
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -73,7 +80,8 @@ namespace System.Data.Common
                             if (IsNull(record))
                                 continue;
                             dsum += (_values[record]).ToSqlDouble();
-                            sqrsum += (_values[record]).ToSqlDouble() * (_values[record]).ToSqlDouble();
+                            sqrsum +=
+                                (_values[record]).ToSqlDouble() * (_values[record]).ToSqlDouble();
                             count++;
                         }
 
@@ -241,8 +249,12 @@ namespace System.Data.Common
             return new SqlInt32[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
-        {
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        ) {
             SqlInt32[] typedStore = (SqlInt32[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, IsNull(record));

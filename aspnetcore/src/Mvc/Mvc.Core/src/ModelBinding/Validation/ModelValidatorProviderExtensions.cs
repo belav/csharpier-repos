@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         /// </summary>
         /// <param name="list">This list of <see cref="IModelValidatorProvider"/>s.</param>
         /// <typeparam name="TModelValidatorProvider">The type to remove.</typeparam>
-        public static void RemoveType<TModelValidatorProvider>(this IList<IModelValidatorProvider> list) where TModelValidatorProvider : IModelValidatorProvider
+        public static void RemoveType<TModelValidatorProvider>(
+            this IList<IModelValidatorProvider> list
+        ) where TModelValidatorProvider : IModelValidatorProvider
         {
             if (list == null)
             {

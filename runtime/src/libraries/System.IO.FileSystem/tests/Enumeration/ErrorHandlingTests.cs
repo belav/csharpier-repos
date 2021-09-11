@@ -12,15 +12,13 @@ namespace System.IO.Tests
     {
         private class IgnoreErrors : FileSystemEnumerator<string>
         {
-            public IgnoreErrors(string directory)
-                : base(directory)
-            { }
+            public IgnoreErrors(string directory) : base(directory) { }
 
             public int ErrorCount { get; private set; }
             public string DirectoryFinished { get; private set; }
 
-            protected override string TransformEntry(ref FileSystemEntry entry)
-                => entry.FileName.ToString();
+            protected override string TransformEntry(ref FileSystemEntry entry) =>
+                entry.FileName.ToString();
 
             protected override bool ContinueOnError(int error)
             {
@@ -28,20 +26,18 @@ namespace System.IO.Tests
                 return true;
             }
 
-            protected override void OnDirectoryFinished(ReadOnlySpan<char> directory)
-                => DirectoryFinished = directory.ToString();
+            protected override void OnDirectoryFinished(ReadOnlySpan<char> directory) =>
+                DirectoryFinished = directory.ToString();
         }
 
         private class LastError : FileSystemEnumerator<string>
         {
-            public LastError(string directory)
-                : base(directory)
-            { }
+            public LastError(string directory) : base(directory) { }
 
             public int Error { get; private set; }
 
-            protected override string TransformEntry(ref FileSystemEntry entry)
-                => entry.FileName.ToString();
+            protected override string TransformEntry(ref FileSystemEntry entry) =>
+                entry.FileName.ToString();
 
             protected override bool ContinueOnError(int error)
             {
@@ -111,12 +107,23 @@ namespace System.IO.Tests
             for (int length = 1; length < lengthCap; length++)
             {
                 string name = new string('a', length);
-                try { File.Create(Path.Join(testDirectory.FullName, name)).Dispose(); }
-                catch { break; }
+                try
+                {
+                    File.Create(Path.Join(testDirectory.FullName, name)).Dispose();
+                }
+                catch
+                {
+                    break;
+                }
                 names.Add(name);
             }
             Assert.InRange(names.Count, 1, int.MaxValue);
-            Assert.Equal(names.OrderBy(n => n), Directory.GetFiles(testDirectory.FullName).Select(n => Path.GetFileName(n)).OrderBy(n => n));
+            Assert.Equal(
+                names.OrderBy(n => n),
+                Directory.GetFiles(testDirectory.FullName)
+                    .Select(n => Path.GetFileName(n))
+                    .OrderBy(n => n)
+            );
         }
 
         [Fact]
@@ -129,12 +136,23 @@ namespace System.IO.Tests
             for (int length = 1; length < lengthCap; length++)
             {
                 string name = new string('a', length);
-                try { Directory.CreateDirectory(Path.Join(testDirectory.FullName, name)); }
-                catch { break; }
+                try
+                {
+                    Directory.CreateDirectory(Path.Join(testDirectory.FullName, name));
+                }
+                catch
+                {
+                    break;
+                }
                 names.Add(name);
             }
             Assert.InRange(names.Count, 1, int.MaxValue);
-            Assert.Equal(names.OrderBy(n => n), Directory.GetDirectories(testDirectory.FullName).Select(n => Path.GetFileName(n)).OrderBy(n => n));
+            Assert.Equal(
+                names.OrderBy(n => n),
+                Directory.GetDirectories(testDirectory.FullName)
+                    .Select(n => Path.GetFileName(n))
+                    .OrderBy(n => n)
+            );
         }
     }
 }

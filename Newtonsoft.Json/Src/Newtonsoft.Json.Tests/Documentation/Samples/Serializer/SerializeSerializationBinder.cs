@@ -57,8 +57,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 return KnownTypes.SingleOrDefault(t => t.Name == typeName);
             }
 
-            public void BindToName(Type serializedType, out string assemblyName, out string typeName)
-            {
+            public void BindToName(
+                Type serializedType,
+                out string assemblyName,
+                out string typeName
+            ) {
                 assemblyName = null;
                 typeName = serializedType.Name;
             }
@@ -80,17 +83,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 KnownTypes = new List<Type> { typeof(Car) }
             };
 
-            Car car = new Car
-            {
-                Maker = "Ford",
-                Model = "Explorer"
-            };
+            Car car = new Car { Maker = "Ford", Model = "Explorer" };
 
-            string json = JsonConvert.SerializeObject(car, Formatting.Indented, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Objects,
-                SerializationBinder = knownTypesBinder
-            });
+            string json = JsonConvert.SerializeObject(
+                car,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Objects,
+                    SerializationBinder = knownTypesBinder
+                }
+            );
 
             Console.WriteLine(json);
             // {
@@ -99,11 +102,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   "Model": "Explorer"
             // }
 
-            object newValue = JsonConvert.DeserializeObject(json, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Objects,
-                SerializationBinder = knownTypesBinder
-            });
+            object newValue = JsonConvert.DeserializeObject(
+                json,
+                new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Objects,
+                    SerializationBinder = knownTypesBinder
+                }
+            );
 
             Console.WriteLine(newValue.GetType().Name);
             // Car

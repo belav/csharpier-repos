@@ -47,8 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <summary>
         ///     Helpers for generating update SQL.
         /// </summary>
-        protected virtual ISqlGenerationHelper SqlGenerationHelper
-            => Dependencies.SqlGenerationHelper;
+        protected virtual ISqlGenerationHelper SqlGenerationHelper =>
+            Dependencies.SqlGenerationHelper;
 
         /// <summary>
         ///     Appends a SQL command for inserting a row to the commands being built.
@@ -60,8 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         public virtual ResultSetMapping AppendInsertOperation(
             StringBuilder commandStringBuilder,
             ModificationCommand command,
-            int commandPosition)
-        {
+            int commandPosition
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(command, nameof(command));
 
@@ -78,7 +78,14 @@ namespace Microsoft.EntityFrameworkCore.Update
             {
                 var keyOperations = operations.Where(o => o.IsKey).ToList();
 
-                return AppendSelectAffectedCommand(commandStringBuilder, name, schema, readOperations, keyOperations, commandPosition);
+                return AppendSelectAffectedCommand(
+                    commandStringBuilder,
+                    name,
+                    schema,
+                    readOperations,
+                    keyOperations,
+                    commandPosition
+                );
             }
 
             return ResultSetMapping.NoResultSet;
@@ -94,8 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         public virtual ResultSetMapping AppendUpdateOperation(
             StringBuilder commandStringBuilder,
             ModificationCommand command,
-            int commandPosition)
-        {
+            int commandPosition
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(command, nameof(command));
 
@@ -107,16 +114,34 @@ namespace Microsoft.EntityFrameworkCore.Update
             var conditionOperations = operations.Where(o => o.IsCondition).ToList();
             var readOperations = operations.Where(o => o.IsRead).ToList();
 
-            AppendUpdateCommand(commandStringBuilder, name, schema, writeOperations, conditionOperations);
+            AppendUpdateCommand(
+                commandStringBuilder,
+                name,
+                schema,
+                writeOperations,
+                conditionOperations
+            );
 
             if (readOperations.Count > 0)
             {
                 var keyOperations = operations.Where(o => o.IsKey).ToList();
 
-                return AppendSelectAffectedCommand(commandStringBuilder, name, schema, readOperations, keyOperations, commandPosition);
+                return AppendSelectAffectedCommand(
+                    commandStringBuilder,
+                    name,
+                    schema,
+                    readOperations,
+                    keyOperations,
+                    commandPosition
+                );
             }
 
-            return AppendSelectAffectedCountCommand(commandStringBuilder, name, schema, commandPosition);
+            return AppendSelectAffectedCountCommand(
+                commandStringBuilder,
+                name,
+                schema,
+                commandPosition
+            );
         }
 
         /// <summary>
@@ -129,18 +154,24 @@ namespace Microsoft.EntityFrameworkCore.Update
         public virtual ResultSetMapping AppendDeleteOperation(
             StringBuilder commandStringBuilder,
             ModificationCommand command,
-            int commandPosition)
-        {
+            int commandPosition
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(command, nameof(command));
 
             var name = command.TableName;
             var schema = command.Schema;
-            var conditionOperations = command.ColumnModifications.Where(o => o.IsCondition).ToList();
+            var conditionOperations = command.ColumnModifications.Where(o => o.IsCondition)
+                .ToList();
 
             AppendDeleteCommand(commandStringBuilder, name, schema, conditionOperations);
 
-            return AppendSelectAffectedCountCommand(commandStringBuilder, name, schema, commandPosition);
+            return AppendSelectAffectedCountCommand(
+                commandStringBuilder,
+                name,
+                schema,
+                commandPosition
+            );
         }
 
         /// <summary>
@@ -154,8 +185,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> writeOperations)
-        {
+            IReadOnlyList<ColumnModification> writeOperations
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(writeOperations, nameof(writeOperations));
@@ -179,8 +210,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             string name,
             string? schema,
             IReadOnlyList<ColumnModification> writeOperations,
-            IReadOnlyList<ColumnModification> conditionOperations)
-        {
+            IReadOnlyList<ColumnModification> conditionOperations
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(writeOperations, nameof(writeOperations));
@@ -202,8 +233,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> conditionOperations)
-        {
+            IReadOnlyList<ColumnModification> conditionOperations
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(conditionOperations, nameof(conditionOperations));
@@ -225,8 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            int commandPosition)
-            => ResultSetMapping.NoResultSet;
+            int commandPosition
+        ) => ResultSetMapping.NoResultSet;
 
         /// <summary>
         ///     Appends a SQL command for selecting affected data.
@@ -244,8 +275,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             string? schema,
             IReadOnlyList<ColumnModification> readOperations,
             IReadOnlyList<ColumnModification> conditionOperations,
-            int commandPosition)
-        {
+            int commandPosition
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(readOperations, nameof(readOperations));
@@ -255,8 +286,7 @@ namespace Microsoft.EntityFrameworkCore.Update
             AppendFromClause(commandStringBuilder, name, schema);
             // TODO: there is no notion of operator - currently all the where conditions check equality
             AppendWhereAffectedClause(commandStringBuilder, conditionOperations);
-            commandStringBuilder.AppendLine(SqlGenerationHelper.StatementTerminator)
-                .AppendLine();
+            commandStringBuilder.AppendLine(SqlGenerationHelper.StatementTerminator).AppendLine();
 
             return ResultSetMapping.LastInResultSet;
         }
@@ -272,8 +302,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> operations)
-        {
+            IReadOnlyList<ColumnModification> operations
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(operations, nameof(operations));
@@ -283,12 +313,12 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             if (operations.Count > 0)
             {
-                commandStringBuilder
-                    .Append(" (")
+                commandStringBuilder.Append(" (")
                     .AppendJoin(
                         operations,
                         SqlGenerationHelper,
-                        (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName))
+                        (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName)
+                    )
                     .Append(")");
             }
         }
@@ -302,8 +332,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual void AppendDeleteCommandHeader(
             StringBuilder commandStringBuilder,
             string name,
-            string? schema)
-        {
+            string? schema
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
 
@@ -322,8 +352,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> operations)
-        {
+            IReadOnlyList<ColumnModification> operations
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(operations, nameof(operations));
@@ -345,9 +375,13 @@ namespace Microsoft.EntityFrameworkCore.Update
                         }
                         else
                         {
-                            g.SqlGenerationHelper.GenerateParameterNamePlaceholder(sb, o.ParameterName);
+                            g.SqlGenerationHelper.GenerateParameterNamePlaceholder(
+                                sb,
+                                o.ParameterName
+                            );
                         }
-                    });
+                    }
+                );
         }
 
         /// <summary>
@@ -357,17 +391,17 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="operations"> The operations representing the data to be read. </param>
         protected virtual void AppendSelectCommandHeader(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> operations)
-        {
+            IReadOnlyList<ColumnModification> operations
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(operations, nameof(operations));
 
-            commandStringBuilder
-                .Append("SELECT ")
+            commandStringBuilder.Append("SELECT ")
                 .AppendJoin(
                     operations,
                     SqlGenerationHelper,
-                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName));
+                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName)
+                );
         }
 
         /// <summary>
@@ -379,14 +413,12 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual void AppendFromClause(
             StringBuilder commandStringBuilder,
             string name,
-            string? schema)
-        {
+            string? schema
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotEmpty(name, nameof(name));
 
-            commandStringBuilder
-                .AppendLine()
-                .Append("FROM ");
+            commandStringBuilder.AppendLine().Append("FROM ");
             SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
         }
 
@@ -397,8 +429,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="operations"> The operations for which there are values. </param>
         protected virtual void AppendValuesHeader(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> operations)
-        {
+            IReadOnlyList<ColumnModification> operations
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(operations, nameof(operations));
 
@@ -417,15 +449,14 @@ namespace Microsoft.EntityFrameworkCore.Update
             StringBuilder commandStringBuilder,
             string name,
             string? schema,
-            IReadOnlyList<ColumnModification> operations)
-        {
+            IReadOnlyList<ColumnModification> operations
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(operations, nameof(operations));
 
             if (operations.Count > 0)
             {
-                commandStringBuilder
-                    .Append("(")
+                commandStringBuilder.Append("(")
                     .AppendJoin(
                         operations,
                         (this, name, schema),
@@ -440,14 +471,18 @@ namespace Microsoft.EntityFrameworkCore.Update
                                 }
                                 else
                                 {
-                                    g.SqlGenerationHelper.GenerateParameterNamePlaceholder(sb, o.ParameterName);
+                                    g.SqlGenerationHelper.GenerateParameterNamePlaceholder(
+                                        sb,
+                                        o.ParameterName
+                                    );
                                 }
                             }
                             else
                             {
                                 sb.Append("DEFAULT");
                             }
-                        })
+                        }
+                    )
                     .Append(")");
             }
         }
@@ -459,17 +494,20 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="operations"> The operations from which to build the conditions. </param>
         protected virtual void AppendWhereClause(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> operations)
-        {
+            IReadOnlyList<ColumnModification> operations
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(operations, nameof(operations));
 
             if (operations.Count > 0)
             {
-                commandStringBuilder
-                    .AppendLine()
+                commandStringBuilder.AppendLine()
                     .Append("WHERE ")
-                    .AppendJoin(operations, (sb, v) => AppendWhereCondition(sb, v, v.UseOriginalValueParameter), " AND ");
+                    .AppendJoin(
+                        operations,
+                        (sb, v) => AppendWhereCondition(sb, v, v.UseOriginalValueParameter),
+                        " AND "
+                    );
             }
         }
 
@@ -480,23 +518,21 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="operations"> The operations from which to build the conditions. </param>
         protected virtual void AppendWhereAffectedClause(
             StringBuilder commandStringBuilder,
-            IReadOnlyList<ColumnModification> operations)
-        {
+            IReadOnlyList<ColumnModification> operations
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(operations, nameof(operations));
 
-            commandStringBuilder
-                .AppendLine()
-                .Append("WHERE ");
+            commandStringBuilder.AppendLine().Append("WHERE ");
 
             AppendRowsAffectedWhereCondition(commandStringBuilder, 1);
 
             if (operations.Count > 0)
             {
-                commandStringBuilder
-                    .Append(" AND ")
+                commandStringBuilder.Append(" AND ")
                     .AppendJoin(
-                        operations, (sb, v) =>
+                        operations,
+                        (sb, v) =>
                         {
                             if (v.IsKey)
                             {
@@ -509,7 +545,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                                     AppendWhereCondition(sb, v, v.UseOriginalValueParameter);
                                 }
                             }
-                        }, " AND ");
+                        },
+                        " AND "
+                    );
             }
         }
 
@@ -520,7 +558,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="expectedRowsAffected"> The expected number of rows affected. </param>
         protected abstract void AppendRowsAffectedWhereCondition(
             StringBuilder commandStringBuilder,
-            int expectedRowsAffected);
+            int expectedRowsAffected
+        );
 
         /// <summary>
         ///     Appends a <c>WHERE</c> condition for the given column.
@@ -533,12 +572,15 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual void AppendWhereCondition(
             StringBuilder commandStringBuilder,
             ColumnModification columnModification,
-            bool useOriginalValue)
-        {
+            bool useOriginalValue
+        ) {
             Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
             Check.NotNull(columnModification, nameof(columnModification));
 
-            SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, columnModification.ColumnName);
+            SqlGenerationHelper.DelimitIdentifier(
+                commandStringBuilder,
+                columnModification.ColumnName
+            );
 
             var parameterValue = useOriginalValue
                 ? columnModification.OriginalValue
@@ -551,17 +593,20 @@ namespace Microsoft.EntityFrameworkCore.Update
             else
             {
                 commandStringBuilder.Append(" = ");
-                if (!columnModification.UseCurrentValueParameter
-                    && !columnModification.UseOriginalValueParameter)
-                {
+                if (
+                    !columnModification.UseCurrentValueParameter
+                    && !columnModification.UseOriginalValueParameter
+                ) {
                     AppendSqlLiteral(commandStringBuilder, columnModification, null, null);
                 }
                 else
                 {
                     SqlGenerationHelper.GenerateParameterNamePlaceholder(
-                        commandStringBuilder, useOriginalValue
-                            ? columnModification.OriginalParameterName!
-                            : columnModification.ParameterName!);
+                        commandStringBuilder,
+                        useOriginalValue
+                          ? columnModification.OriginalParameterName!
+                          : columnModification.ParameterName!
+                    );
                 }
             }
         }
@@ -573,15 +618,14 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="columnModification"> The column for which the condition is being generated. </param>
         protected abstract void AppendIdentityWhereCondition(
             StringBuilder commandStringBuilder,
-            ColumnModification columnModification);
+            ColumnModification columnModification
+        );
 
         /// <summary>
         ///     Appends SQL text that defines the start of a batch.
         /// </summary>
         /// <param name="commandStringBuilder"> The builder to which the SQL should be appended. </param>
-        public virtual void AppendBatchHeader(StringBuilder commandStringBuilder)
-        {
-        }
+        public virtual void AppendBatchHeader(StringBuilder commandStringBuilder) { }
 
         /// <summary>
         ///     Generates SQL that will obtain the next value in the given sequence.
@@ -603,14 +647,25 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="commandStringBuilder"> The builder to which the SQL fragment should be appended. </param>
         /// <param name="name"> The name of the sequence. </param>
         /// <param name="schema"> The schema that contains the sequence, or <see langword="null" /> to use the default schema. </param>
-        public virtual void AppendNextSequenceValueOperation(StringBuilder commandStringBuilder, string name, string? schema)
-        {
+        public virtual void AppendNextSequenceValueOperation(
+            StringBuilder commandStringBuilder,
+            string name,
+            string? schema
+        ) {
             commandStringBuilder.Append("SELECT NEXT VALUE FOR ");
-            SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, Check.NotNull(name, nameof(name)), schema);
+            SqlGenerationHelper.DelimitIdentifier(
+                commandStringBuilder,
+                Check.NotNull(name, nameof(name)),
+                schema
+            );
         }
 
-        private void AppendSqlLiteral(StringBuilder commandStringBuilder, ColumnModification modification, string? tableName, string? schema)
-        {
+        private void AppendSqlLiteral(
+            StringBuilder commandStringBuilder,
+            ColumnModification modification,
+            string? tableName,
+            string? schema
+        ) {
             if (modification.TypeMapping == null)
             {
                 var columnName = modification.ColumnName;
@@ -625,10 +680,16 @@ namespace Microsoft.EntityFrameworkCore.Update
                 }
 
                 throw new InvalidOperationException(
-                    RelationalStrings.UnsupportedDataOperationStoreType(modification.ColumnType, columnName));
+                    RelationalStrings.UnsupportedDataOperationStoreType(
+                        modification.ColumnType,
+                        columnName
+                    )
+                );
             }
 
-            commandStringBuilder.Append(modification.TypeMapping.GenerateProviderValueSqlLiteral(modification.Value));
+            commandStringBuilder.Append(
+                modification.TypeMapping.GenerateProviderValueSqlLiteral(modification.Value)
+            );
         }
     }
 }

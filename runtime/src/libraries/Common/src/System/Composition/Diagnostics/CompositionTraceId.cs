@@ -12,7 +12,6 @@ namespace System.Composition.Diagnostics
 
         Rejection_DefinitionRejected = 1,
         Rejection_DefinitionResurrected = 2,
-
         // Discovery
 
         Discovery_AssemblyLoadFailed = 3,
@@ -20,7 +19,6 @@ namespace System.Composition.Diagnostics
         Discovery_DefinitionMismatchedExportArity = 5,
         Discovery_DefinitionContainsNoExports = 6,
         Discovery_MemberMarkedWithMultipleImportAndImportMany = 7,
-
         // Registration
 
         Registration_ConstructorConventionOverridden = 101,

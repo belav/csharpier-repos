@@ -8,7 +8,9 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
-    [DebuggerDisplay("ConverterStrategy.{JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy}, {JsonTypeInfo.Type.Name}")]
+    [DebuggerDisplay(
+        "ConverterStrategy.{JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy}, {JsonTypeInfo.Type.Name}"
+    )]
     internal struct WriteStackFrame
     {
         /// <summary>

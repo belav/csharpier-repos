@@ -54,7 +54,7 @@ namespace Microsoft.AspNetCore.Authorization.Test
             // Assert
             Assert.False(next.Called);
         }
-        
+
         [Fact]
         public async Task HasEndpointWithoutAuth_AnonymousUser_Allows()
         {
@@ -100,13 +100,18 @@ namespace Microsoft.AspNetCore.Authorization.Test
             // Arrange
             var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
-            policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build());
+            policyProvider.Setup(p => p.GetDefaultPolicyAsync())
+                .ReturnsAsync(new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build());
             policyProvider.Setup(p => p.GetFallbackPolicyAsync()).ReturnsAsync(policy);
             var next = new TestRequestDelegate();
             var authenticationService = new TestAuthenticationService();
 
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(anonymous: true, endpoint: CreateEndpoint(new AuthorizeAttribute()), authenticationService: authenticationService);
+            var context = GetHttpContext(
+                anonymous: true,
+                endpoint: CreateEndpoint(new AuthorizeAttribute()),
+                authenticationService: authenticationService
+            );
 
             // Act
             await middleware.Invoke(context);
@@ -126,7 +131,11 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var authenticationService = new TestAuthenticationService();
 
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(anonymous: true, endpoint: CreateEndpoint(new AuthorizeAttribute()), authenticationService: authenticationService);
+            var context = GetHttpContext(
+                anonymous: true,
+                endpoint: CreateEndpoint(new AuthorizeAttribute()),
+                authenticationService: authenticationService
+            );
 
             // Act
             await middleware.Invoke(context);
@@ -147,7 +156,12 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var authenticationService = new TestAuthenticationService();
 
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(endpoint: CreateEndpoint(new AuthorizeAttribute() { AuthenticationSchemes = "whatever"}), authenticationService: authenticationService);
+            var context = GetHttpContext(
+                endpoint: CreateEndpoint(
+                    new AuthorizeAttribute() { AuthenticationSchemes = "whatever" }
+                ),
+                authenticationService: authenticationService
+            );
 
             // Act
             await middleware.Invoke(context);
@@ -156,19 +170,25 @@ namespace Microsoft.AspNetCore.Authorization.Test
             Assert.False(next.Called);
             Assert.True(authenticationService.ChallengeCalled);
         }
-        
+
         [Fact]
         public async Task HasEndpointWithAuth_AnonymousUser_ChallengePerScheme()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().AddAuthenticationSchemes("schema1", "schema2").Build();
+            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
+                .AddAuthenticationSchemes("schema1", "schema2")
+                .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
             var next = new TestRequestDelegate();
             var authenticationService = new TestAuthenticationService();
 
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(anonymous: true, endpoint: CreateEndpoint(new AuthorizeAttribute()), authenticationService: authenticationService);
+            var context = GetHttpContext(
+                anonymous: true,
+                endpoint: CreateEndpoint(new AuthorizeAttribute()),
+                authenticationService: authenticationService
+            );
 
             // Act
             await middleware.Invoke(context);
@@ -186,13 +206,18 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             var getPolicyCount = 0;
             var getFallbackPolicyCount = 0;
-            policyProvider.Setup(p => p.GetPolicyAsync(It.IsAny<string>())).ReturnsAsync(policy)
+            policyProvider.Setup(p => p.GetPolicyAsync(It.IsAny<string>()))
+                .ReturnsAsync(policy)
                 .Callback(() => getPolicyCount++);
-            policyProvider.Setup(p => p.GetFallbackPolicyAsync()).ReturnsAsync(policy)
+            policyProvider.Setup(p => p.GetFallbackPolicyAsync())
+                .ReturnsAsync(policy)
                 .Callback(() => getFallbackPolicyCount++);
             var next = new TestRequestDelegate();
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(anonymous: true, endpoint: CreateEndpoint(new AuthorizeAttribute("whatever")));
+            var context = GetHttpContext(
+                anonymous: true,
+                endpoint: CreateEndpoint(new AuthorizeAttribute("whatever"))
+            );
 
             // Act & Assert
             await middleware.Invoke(context);
@@ -215,7 +240,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task Invoke_ValidClaimShouldNotFail()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder().RequireClaim("Permission", "CanViewPage").Build();
+            var policy = new AuthorizationPolicyBuilder().RequireClaim("Permission", "CanViewPage")
+                .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
             var next = new TestRequestDelegate();
@@ -241,7 +267,11 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var authenticationService = new TestAuthenticationService();
 
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(anonymous: true, endpoint: CreateEndpoint(new AuthorizeAttribute(), new AllowAnonymousAttribute()), authenticationService: authenticationService);
+            var context = GetHttpContext(
+                anonymous: true,
+                endpoint: CreateEndpoint(new AuthorizeAttribute(), new AllowAnonymousAttribute()),
+                authenticationService: authenticationService
+            );
 
             // Act
             await middleware.Invoke(context);
@@ -262,7 +292,10 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var authenticationService = new TestAuthenticationService();
 
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(endpoint: CreateEndpoint(new AuthorizeAttribute()), authenticationService: authenticationService);
+            var context = GetHttpContext(
+                endpoint: CreateEndpoint(new AuthorizeAttribute()),
+                authenticationService: authenticationService
+            );
 
             // Act
             await middleware.Invoke(context);
@@ -283,7 +316,10 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var authenticationService = new TestAuthenticationService();
 
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(endpoint: CreateEndpoint(new AuthorizeAttribute()), authenticationService: authenticationService);
+            var context = GetHttpContext(
+                endpoint: CreateEndpoint(new AuthorizeAttribute()),
+                authenticationService: authenticationService
+            );
 
             // Act
             await middleware.Invoke(context);
@@ -299,7 +335,12 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task Invoke_SingleValidClaimShouldSucceed()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder().RequireClaim("Permission", "CanViewComment", "CanViewPage").Build();
+            var policy = new AuthorizationPolicyBuilder().RequireClaim(
+                    "Permission",
+                    "CanViewComment",
+                    "CanViewPage"
+                )
+                .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
             var next = new TestRequestDelegate();
@@ -319,11 +360,14 @@ namespace Microsoft.AspNetCore.Authorization.Test
         {
             // Arrange
             HttpContext resource = null;
-            var policy = new AuthorizationPolicyBuilder().RequireAssertion(c =>
-            {
-                resource = c.Resource as HttpContext;
-                return true;
-            }).Build();
+            var policy = new AuthorizationPolicyBuilder().RequireAssertion(
+                    c =>
+                    {
+                        resource = c.Resource as HttpContext;
+                        return true;
+                    }
+                )
+                .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
             var next = new TestRequestDelegate();
@@ -344,15 +388,21 @@ namespace Microsoft.AspNetCore.Authorization.Test
         [Fact]
         public async Task AuthZResourceShouldBeEndpointByDefaultWithCompatSwitch()
         {
-            AppContext.SetSwitch("Microsoft.AspNetCore.Authorization.SuppressUseHttpContextAsAuthorizationResource", isEnabled: true);
+            AppContext.SetSwitch(
+                "Microsoft.AspNetCore.Authorization.SuppressUseHttpContextAsAuthorizationResource",
+                isEnabled: true
+            );
 
             // Arrange
             object resource = null;
-            var policy = new AuthorizationPolicyBuilder().RequireAssertion(c =>
-            {
-                resource = c.Resource;
-                return true;
-            }).Build();
+            var policy = new AuthorizationPolicyBuilder().RequireAssertion(
+                    c =>
+                    {
+                        resource = c.Resource;
+                        return true;
+                    }
+                )
+                .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
             var next = new TestRequestDelegate();
@@ -367,7 +417,7 @@ namespace Microsoft.AspNetCore.Authorization.Test
             // Assert
             Assert.Equal(endpoint, resource);
         }
-        
+
         [Fact]
         public async Task Invoke_RequireUnknownRoleShouldForbid()
         {
@@ -379,7 +429,10 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var authenticationService = new TestAuthenticationService();
 
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(endpoint: CreateEndpoint(new AuthorizeAttribute()), authenticationService: authenticationService);
+            var context = GetHttpContext(
+                endpoint: CreateEndpoint(new AuthorizeAttribute()),
+                authenticationService: authenticationService
+            );
 
             // Act
             await middleware.Invoke(context);
@@ -394,14 +447,19 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task Invoke_RequireUnknownRole_ForbidPerScheme()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder().RequireRole("Wut").AddAuthenticationSchemes("Basic", "Bearer").Build();
+            var policy = new AuthorizationPolicyBuilder().RequireRole("Wut")
+                .AddAuthenticationSchemes("Basic", "Bearer")
+                .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
             var next = new TestRequestDelegate();
             var authenticationService = new TestAuthenticationService();
 
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(endpoint: CreateEndpoint(new AuthorizeAttribute()), authenticationService: authenticationService);
+            var context = GetHttpContext(
+                endpoint: CreateEndpoint(new AuthorizeAttribute()),
+                authenticationService: authenticationService
+            );
 
             // Act
             await middleware.Invoke(context);
@@ -415,8 +473,10 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task Invoke_InvalidClaimShouldForbid()
         {
             // Arrange
-            var policy = new AuthorizationPolicyBuilder()
-                .RequireClaim("Permission", "CanViewComment")
+            var policy = new AuthorizationPolicyBuilder().RequireClaim(
+                    "Permission",
+                    "CanViewComment"
+                )
                 .Build();
             var policyProvider = new Mock<IAuthorizationPolicyProvider>();
             policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
@@ -424,7 +484,10 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var authenticationService = new TestAuthenticationService();
 
             var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
-            var context = GetHttpContext(endpoint: CreateEndpoint(new AuthorizeAttribute()), authenticationService: authenticationService);
+            var context = GetHttpContext(
+                endpoint: CreateEndpoint(new AuthorizeAttribute()),
+                authenticationService: authenticationService
+            );
 
             // Act
             await middleware.Invoke(context);
@@ -435,40 +498,53 @@ namespace Microsoft.AspNetCore.Authorization.Test
             Assert.True(authenticationService.ForbidCalled);
         }
 
-        private AuthorizationMiddleware CreateMiddleware(RequestDelegate requestDelegate = null, IAuthorizationPolicyProvider policyProvider = null)
-        {
+        private AuthorizationMiddleware CreateMiddleware(
+            RequestDelegate requestDelegate = null,
+            IAuthorizationPolicyProvider policyProvider = null
+        ) {
             requestDelegate = requestDelegate ?? ((context) => Task.CompletedTask);
             return new AuthorizationMiddleware(requestDelegate, policyProvider);
         }
 
         private Endpoint CreateEndpoint(params object[] metadata)
         {
-            return new Endpoint(context => Task.CompletedTask, new EndpointMetadataCollection(metadata), "Test endpoint");
+            return new Endpoint(
+                context => Task.CompletedTask,
+                new EndpointMetadataCollection(metadata),
+                "Test endpoint"
+            );
         }
 
         private HttpContext GetHttpContext(
             bool anonymous = false,
             Action<IServiceCollection> registerServices = null,
             Endpoint endpoint = null,
-            IAuthenticationService authenticationService = null)
-        {
+            IAuthenticationService authenticationService = null
+        ) {
             var basicPrincipal = new ClaimsPrincipal(
                 new ClaimsIdentity(
-                    new Claim[] {
+                    new Claim[]
+                    {
                         new Claim("Permission", "CanViewPage"),
                         new Claim(ClaimTypes.Role, "Administrator"),
                         new Claim(ClaimTypes.Role, "User"),
-                        new Claim(ClaimTypes.NameIdentifier, "John")},
-                        "Basic"));
+                        new Claim(ClaimTypes.NameIdentifier, "John")
+                    },
+                    "Basic"
+                )
+            );
 
             var validUser = basicPrincipal;
 
             var bearerIdentity = new ClaimsIdentity(
-                    new Claim[] {
-                        new Claim("Permission", "CupBearer"),
-                        new Claim(ClaimTypes.Role, "Token"),
-                        new Claim(ClaimTypes.NameIdentifier, "John Bear")},
-                        "Bearer");
+                new Claim[]
+                {
+                    new Claim("Permission", "CupBearer"),
+                    new Claim(ClaimTypes.Role, "Token"),
+                    new Claim(ClaimTypes.NameIdentifier, "John Bear")
+                },
+                "Bearer"
+            );
 
             validUser.AddIdentity(bearerIdentity);
 
@@ -478,7 +554,10 @@ namespace Microsoft.AspNetCore.Authorization.Test
             authenticationService = authenticationService ?? Mock.Of<IAuthenticationService>();
 
             serviceCollection.AddSingleton(authenticationService);
-            serviceCollection.AddTransient<IAuthorizationMiddlewareResultHandler, AuthorizationMiddlewareResultHandler>();
+            serviceCollection.AddTransient<
+                IAuthorizationMiddlewareResultHandler,
+                AuthorizationMiddlewareResultHandler
+            >();
             serviceCollection.AddOptions();
             serviceCollection.AddLogging();
             serviceCollection.AddAuthorization();

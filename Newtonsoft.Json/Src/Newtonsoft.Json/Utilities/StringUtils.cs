@@ -56,23 +56,41 @@ namespace Newtonsoft.Json.Utilities
             return format.FormatWith(provider, new object?[] { arg0 });
         }
 
-        public static string FormatWith(this string format, IFormatProvider provider, object? arg0, object? arg1)
-        {
+        public static string FormatWith(
+            this string format,
+            IFormatProvider provider,
+            object? arg0,
+            object? arg1
+        ) {
             return format.FormatWith(provider, new object?[] { arg0, arg1 });
         }
 
-        public static string FormatWith(this string format, IFormatProvider provider, object? arg0, object? arg1, object? arg2)
-        {
+        public static string FormatWith(
+            this string format,
+            IFormatProvider provider,
+            object? arg0,
+            object? arg1,
+            object? arg2
+        ) {
             return format.FormatWith(provider, new object?[] { arg0, arg1, arg2 });
         }
 
-        public static string FormatWith(this string format, IFormatProvider provider, object? arg0, object? arg1, object? arg2, object? arg3)
-        {
+        public static string FormatWith(
+            this string format,
+            IFormatProvider provider,
+            object? arg0,
+            object? arg1,
+            object? arg2,
+            object? arg3
+        ) {
             return format.FormatWith(provider, new object?[] { arg0, arg1, arg2, arg3 });
         }
 
-        private static string FormatWith(this string format, IFormatProvider provider, params object?[] args)
-        {
+        private static string FormatWith(
+            this string format,
+            IFormatProvider provider,
+            params object?[] args
+        ) {
             // leave this a private to force code to use an explicit overload
             // avoids stack memory being reserved for the object array
             ValidationUtils.ArgumentNotNull(format, nameof(format));
@@ -128,8 +146,11 @@ namespace Newtonsoft.Json.Utilities
             buffer[5] = MathUtils.IntToHex(c & '\x000f');
         }
 
-        public static TSource ForgivingCaseSensitiveFind<TSource>(this IEnumerable<TSource> source, Func<TSource, string> valueSelector, string testValue)
-        {
+        public static TSource ForgivingCaseSensitiveFind<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, string> valueSelector,
+            string testValue
+        ) {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -139,7 +160,9 @@ namespace Newtonsoft.Json.Utilities
                 throw new ArgumentNullException(nameof(valueSelector));
             }
 
-            IEnumerable<TSource> caseInsensitiveResults = source.Where(s => string.Equals(valueSelector(s), testValue, StringComparison.OrdinalIgnoreCase));
+            IEnumerable<TSource> caseInsensitiveResults = source.Where(
+                s => string.Equals(valueSelector(s), testValue, StringComparison.OrdinalIgnoreCase)
+            );
             if (caseInsensitiveResults.Count() <= 1)
             {
                 return caseInsensitiveResults.SingleOrDefault();
@@ -147,7 +170,9 @@ namespace Newtonsoft.Json.Utilities
             else
             {
                 // multiple results returned. now filter using case sensitivity
-                IEnumerable<TSource> caseSensitiveResults = source.Where(s => string.Equals(valueSelector(s), testValue, StringComparison.Ordinal));
+                IEnumerable<TSource> caseSensitiveResults = source.Where(
+                    s => string.Equals(valueSelector(s), testValue, StringComparison.Ordinal)
+                );
                 return caseSensitiveResults.SingleOrDefault();
             }
         }
@@ -171,7 +196,7 @@ namespace Newtonsoft.Json.Utilities
                 bool hasNext = (i + 1 < chars.Length);
                 if (i > 0 && hasNext && !char.IsUpper(chars[i + 1]))
                 {
-                    // if the next character is a space, which is not considered uppercase 
+                    // if the next character is a space, which is not considered uppercase
                     // (otherwise we wouldn't be here...)
                     // we want to ensure that the following:
                     // 'FOO bar' is rewritten as 'foo bar', and not as 'foO bar'
@@ -183,7 +208,6 @@ namespace Newtonsoft.Json.Utilities
                     {
                         chars[i] = ToLower(chars[i]);
                     }
-
                     break;
                 }
 

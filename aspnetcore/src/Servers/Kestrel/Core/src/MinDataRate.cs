@@ -21,12 +21,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         {
             if (bytesPerSecond <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bytesPerSecond), CoreStrings.PositiveNumberOrNullMinDataRateRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytesPerSecond),
+                    CoreStrings.PositiveNumberOrNullMinDataRateRequired
+                );
             }
 
             if (gracePeriod <= Heartbeat.Interval)
             {
-                throw new ArgumentOutOfRangeException(nameof(gracePeriod), CoreStrings.FormatMinimumGracePeriodRequired(Heartbeat.Interval.TotalSeconds));
+                throw new ArgumentOutOfRangeException(
+                    nameof(gracePeriod),
+                    CoreStrings.FormatMinimumGracePeriodRequired(Heartbeat.Interval.TotalSeconds)
+                );
             }
 
             BytesPerSecond = bytesPerSecond;

@@ -11,15 +11,15 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             string newLineString = null,
             string suppressUniqueIds = "test",
             RazorSourceDocument source = null,
-            IntermediateNodeWriter nodeWriter = null)
-        {
+            IntermediateNodeWriter nodeWriter = null
+        ) {
             var codeWriter = new CodeWriter();
             var documentNode = new DocumentIntermediateNode();
             var options = RazorCodeGenerationOptions.CreateDesignTimeDefault();
 
             if (source == null)
             {
-                source = TestRazorSourceDocument.Create(); 
+                source = TestRazorSourceDocument.Create();
             }
 
             var codeDocument = RazorCodeDocument.Create(source);
@@ -38,7 +38,13 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 nodeWriter = new DesignTimeNodeWriter();
             }
 
-            var context = new DefaultCodeRenderingContext(codeWriter, nodeWriter, codeDocument, documentNode, options);
+            var context = new DefaultCodeRenderingContext(
+                codeWriter,
+                nodeWriter,
+                codeDocument,
+                documentNode,
+                options
+            );
             context.Visitor = new RenderChildrenVisitor(context);
 
             return context;
@@ -48,8 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             string newLineString = null,
             string suppressUniqueIds = "test",
             RazorSourceDocument source = null,
-            IntermediateNodeWriter nodeWriter = null)
-        {
+            IntermediateNodeWriter nodeWriter = null
+        ) {
             var codeWriter = new CodeWriter();
             var documentNode = new DocumentIntermediateNode();
             var options = RazorCodeGenerationOptions.CreateDefault();
@@ -75,7 +81,13 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 nodeWriter = new RuntimeNodeWriter();
             }
 
-            var context = new DefaultCodeRenderingContext(codeWriter, nodeWriter, codeDocument, documentNode, options);
+            var context = new DefaultCodeRenderingContext(
+                codeWriter,
+                nodeWriter,
+                codeDocument,
+                documentNode,
+                options
+            );
             context.Visitor = new RenderChildrenVisitor(context);
 
             return context;
@@ -94,6 +106,5 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 _context.CodeWriter.WriteLine("Render Children");
             }
         }
-
     }
 }

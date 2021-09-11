@@ -10,8 +10,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
     {
         public static ModelBuilderTest.TestIndexBuilder<TEntity> IsClustered<TEntity>(
             this ModelBuilderTest.TestIndexBuilder<TEntity> builder,
-            bool clustered = true)
-        {
+            bool clustered = true
+        ) {
             switch (builder)
             {
                 case IInfrastructure<IndexBuilder<TEntity>> genericBuilder:
@@ -25,16 +25,20 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             return builder;
         }
 
-        public static ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TDependentEntity> IsMemoryOptimized<TEntity,
-            TDependentEntity>(
+        public static ModelBuilderTest.TestOwnedNavigationBuilder<
+            TEntity,
+            TDependentEntity
+        > IsMemoryOptimized<TEntity, TDependentEntity>(
             this ModelBuilderTest.TestOwnedNavigationBuilder<TEntity, TDependentEntity> builder,
-            bool memoryOptimized = true)
-            where TEntity : class
-            where TDependentEntity : class
+            bool memoryOptimized = true
+        ) where TEntity : class
+          where TDependentEntity : class
         {
             switch (builder)
             {
-                case IInfrastructure<OwnedNavigationBuilder<TEntity, TDependentEntity>> genericBuilder:
+                case IInfrastructure<
+                    OwnedNavigationBuilder<TEntity, TDependentEntity>
+                > genericBuilder:
                     genericBuilder.Instance.IsMemoryOptimized(memoryOptimized);
                     break;
                 case IInfrastructure<OwnedNavigationBuilder> nongenericBuilder:

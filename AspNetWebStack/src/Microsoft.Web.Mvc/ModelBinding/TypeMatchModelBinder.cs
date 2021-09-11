@@ -7,9 +7,13 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public sealed class TypeMatchModelBinder : IExtensibleModelBinder
     {
-        public bool BindModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
-        {
-            ValueProviderResult valueProviderResult = GetCompatibleValueProviderResult(bindingContext);
+        public bool BindModel(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        ) {
+            ValueProviderResult valueProviderResult = GetCompatibleValueProviderResult(
+                bindingContext
+            );
             if (valueProviderResult == null)
             {
                 return false; // conversion would have failed
@@ -23,18 +27,25 @@ namespace Microsoft.Web.Mvc.ModelBinding
             return true;
         }
 
-        internal static ValueProviderResult GetCompatibleValueProviderResult(ExtensibleModelBindingContext bindingContext)
-        {
+        internal static ValueProviderResult GetCompatibleValueProviderResult(
+            ExtensibleModelBindingContext bindingContext
+        ) {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName
+            );
             if (valueProviderResult == null)
             {
                 return null; // the value doesn't exist
             }
 
-            if (!TypeHelpers.IsCompatibleObject(bindingContext.ModelType, valueProviderResult.RawValue))
-            {
+            if (
+                !TypeHelpers.IsCompatibleObject(
+                    bindingContext.ModelType,
+                    valueProviderResult.RawValue
+                )
+            ) {
                 return null; // value is of incompatible type
             }
 

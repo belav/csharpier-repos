@@ -40,8 +40,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 ConstructorCandidate constructorCandidate,
                 ISymbol containingType,
                 ImmutableArray<IParameterSymbol> missingParameters,
-                bool useSubMenuName)
-            {
+                bool useSubMenuName
+            ) {
                 _document = document;
                 _constructorCandidate = constructorCandidate;
                 _containingType = containingType;
@@ -49,26 +49,40 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 _useSubMenuName = useSubMenuName;
             }
 
-            protected override Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
-            {
+            protected override Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            ) {
                 var workspace = _document.Project.Solution.Workspace;
                 var declarationService = _document.GetLanguageService<ISymbolDeclarationService>();
                 var constructor = declarationService.GetDeclarations(
-                    _constructorCandidate.Constructor).Select(r => r.GetSyntax(cancellationToken)).First();
+                        _constructorCandidate.Constructor
+                    )
+                    .Select(r => r.GetSyntax(cancellationToken))
+                    .First();
 
                 var newConstructor = constructor;
-                newConstructor = CodeGenerator.AddParameterDeclarations(newConstructor, _missingParameters, workspace);
-                newConstructor = CodeGenerator.AddStatements(newConstructor, CreateAssignStatements(_constructorCandidate), workspace)
-                                                      .WithAdditionalAnnotations(Formatter.Annotation);
+                newConstructor = CodeGenerator.AddParameterDeclarations(
+                    newConstructor,
+                    _missingParameters,
+                    workspace
+                );
+                newConstructor = CodeGenerator.AddStatements(
+                        newConstructor,
+                        CreateAssignStatements(_constructorCandidate),
+                        workspace
+                    )
+                    .WithAdditionalAnnotations(Formatter.Annotation);
 
                 var syntaxTree = constructor.SyntaxTree;
-                var newRoot = syntaxTree.GetRoot(cancellationToken).ReplaceNode(constructor, newConstructor);
+                var newRoot = syntaxTree.GetRoot(cancellationToken)
+                    .ReplaceNode(constructor, newConstructor);
 
                 return Task.FromResult(_document.WithSyntaxRoot(newRoot));
             }
 
-            private IEnumerable<SyntaxNode> CreateAssignStatements(ConstructorCandidate constructorCandidate)
-            {
+            private IEnumerable<SyntaxNode> CreateAssignStatements(
+                ConstructorCandidate constructorCandidate
+            ) {
                 var factory = _document.GetLanguageService<SyntaxGenerator>();
                 for (var i = 0; i < _missingParameters.Length; ++i)
                 {
@@ -76,8 +90,13 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                     var parameterName = _missingParameters[i].Name;
                     yield return factory.ExpressionStatement(
                         factory.AssignmentStatement(
-                            factory.MemberAccessExpression(factory.ThisExpression(), factory.IdentifierName(memberName)),
-                            factory.IdentifierName(parameterName)));
+                            factory.MemberAccessExpression(
+                                factory.ThisExpression(),
+                                factory.IdentifierName(memberName)
+                            ),
+                            factory.IdentifierName(parameterName)
+                        )
+                    );
                 }
             }
 
@@ -85,7 +104,9 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
             {
                 get
                 {
-                    var parameters = _constructorCandidate.Constructor.Parameters.Select(p => p.ToDisplayString(SimpleFormat));
+                    var parameters = _constructorCandidate.Constructor.Parameters.Select(
+                        p => p.ToDisplayString(SimpleFormat)
+                    );
                     var parameterString = string.Join(", ", parameters);
                     var signature = $"{_containingType.Name}({parameterString})";
 
@@ -96,7 +117,10 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                     else
                     {
                         return _missingParameters[0].IsOptional
-                            ? string.Format(FeaturesResources.Add_optional_parameters_to_0, signature)
+                            ? string.Format(
+                                  FeaturesResources.Add_optional_parameters_to_0,
+                                  signature
+                              )
                             : string.Format(FeaturesResources.Add_parameters_to_0, signature);
                     }
                 }

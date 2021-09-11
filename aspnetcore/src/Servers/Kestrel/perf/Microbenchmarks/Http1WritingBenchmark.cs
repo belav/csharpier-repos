@@ -93,12 +93,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         {
             ResetState();
 
-            return _http1Connection.ResponseBody.WriteAsync(_writeData, 0, _writeData.Length, default(CancellationToken));
+            return _http1Connection.ResponseBody.WriteAsync(
+                _writeData,
+                0,
+                _writeData.Length,
+                default(CancellationToken)
+            );
         }
 
         private TestHttp1Connection MakeHttp1Connection()
         {
-            var options = new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+            var options = new PipeOptions(
+                _memoryPool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            );
             var pair = DuplexPipe.CreateConnectionPair(options, options);
             _pair = pair;
 
@@ -106,7 +116,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                 serverOptions: new KestrelServerOptions(),
                 httpParser: new HttpParser<Http1ParsingHandler>(),
                 dateHeaderValueManager: new DateHeaderValueManager(),
-                log: new MockTrace());
+                log: new MockTrace()
+            );
 
             var connectionContext = TestContextFactory.CreateHttpConnectionContext(
                 serviceContext: serviceContext,
@@ -114,7 +125,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                 transport: pair.Transport,
                 timeoutControl: new TimeoutControl(timeoutHandler: null),
                 memoryPool: _memoryPool,
-                connectionFeatures: new FeatureCollection());
+                connectionFeatures: new FeatureCollection()
+            );
 
             var http1Connection = new TestHttp1Connection(connectionContext);
 

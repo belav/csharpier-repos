@@ -9,7 +9,12 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class FileStream_SafeFileHandle : FileSystemTest
     {
         [Fact]
@@ -40,7 +45,13 @@ namespace System.IO.Tests
         [Fact]
         public void DisposingBufferedFileStreamThatWasClosedViaSafeFileHandleCloseDoesNotThrow()
         {
-            FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, bufferSize: 100);
+            FileStream fs = new FileStream(
+                GetTestFilePath(),
+                FileMode.Create,
+                FileAccess.ReadWrite,
+                FileShare.Read,
+                bufferSize: 100
+            );
             fs.SafeFileHandle.Dispose();
             fs.Dispose(); // must not throw
         }
@@ -50,9 +61,22 @@ namespace System.IO.Tests
         {
             string fileName = GetTestFilePath();
 
-            using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete))
-            using (FileStream fsr = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
-            {
+            using (
+                FileStream fs = new FileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite | FileShare.Delete
+                )
+            )
+            using (
+                FileStream fsr = new FileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.ReadWrite | FileShare.Delete
+                )
+            ) {
                 // write will be buffered
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
 
@@ -66,13 +90,20 @@ namespace System.IO.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNet5CompatFileStreamEnabled))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNet5CompatFileStreamEnabled)
+        )]
         public async Task ThrowWhenHandlePositionIsChanged_sync()
         {
             await ThrowWhenHandlePositionIsChanged(useAsync: false);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported), nameof(PlatformDetection.IsNet5CompatFileStreamEnabled))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported),
+            nameof(PlatformDetection.IsNet5CompatFileStreamEnabled)
+        )]
         public async Task ThrowWhenHandlePositionIsChanged_async()
         {
             await ThrowWhenHandlePositionIsChanged(useAsync: true);
@@ -82,8 +113,16 @@ namespace System.IO.Tests
         {
             string fileName = GetTestFilePath();
 
-            using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite, 0x100, useAsync))
-            {
+            using (
+                FileStream fs = new FileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite,
+                    0x100,
+                    useAsync
+                )
+            ) {
                 // write some data to move the position, flush to ensure OS position is updated
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
                 fs.Flush();
@@ -94,8 +133,14 @@ namespace System.IO.Tests
                     return;
                 }
 
-                using (FileStream fsr = new FileStream(fs.SafeFileHandle, FileAccess.Read, TestBuffer.Length, useAsync))
-                {
+                using (
+                    FileStream fsr = new FileStream(
+                        fs.SafeFileHandle,
+                        FileAccess.Read,
+                        TestBuffer.Length,
+                        useAsync
+                    )
+                ) {
                     Assert.Equal(TestBuffer.Length, fs.Position);
                     Assert.Equal(TestBuffer.Length, fsr.Position);
 
@@ -105,18 +150,23 @@ namespace System.IO.Tests
                     fs.WriteByte(0);
                     fsr.Position = 0;
 
-                    if (useAsync
+                    if (
+                        useAsync
                         // Async I/O behaviors differ due to kernel-based implementation on Windows
                         && OperatingSystem.IsWindows()
                         // ReadAsync which in this case (single byte written to buffer) calls FlushAsync is now 100% async
                         // so it does not complete synchronously anymore
-                        && PlatformDetection.IsNet5CompatFileStreamEnabled) 
-                    {
-                        Assert.Throws<IOException>(() => FSAssert.CompletesSynchronously(fs.ReadAsync(new byte[1], 0, 1)));
+                        && PlatformDetection.IsNet5CompatFileStreamEnabled
+                    ) {
+                        Assert.Throws<IOException>(
+                            () => FSAssert.CompletesSynchronously(fs.ReadAsync(new byte[1], 0, 1))
+                        );
                     }
                     else
                     {
-                        await Assert.ThrowsAsync<IOException>(() => fs.ReadAsync(new byte[1], 0, 1));
+                        await Assert.ThrowsAsync<IOException>(
+                            () => fs.ReadAsync(new byte[1], 0, 1)
+                        );
                     }
 
                     fs.WriteByte(0);

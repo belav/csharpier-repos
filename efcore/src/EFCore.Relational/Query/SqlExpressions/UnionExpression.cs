@@ -29,10 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             string alias,
             SelectExpression source1,
             SelectExpression source2,
-            bool distinct)
-            : base(alias, source1, source2, distinct)
-        {
-        }
+            bool distinct
+        ) : base(alias, source1, source2, distinct) { }
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -81,22 +79,20 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 expressionPrinter.Visit(Source2);
             }
 
-            expressionPrinter.AppendLine()
-                .AppendLine($") AS {Alias}");
+            expressionPrinter.AppendLine().AppendLine($") AS {Alias}");
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is UnionExpression unionExpression
-                    && Equals(unionExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is UnionExpression unionExpression && Equals(unionExpression)
+            );
 
-        private bool Equals(UnionExpression unionExpression)
-            => base.Equals(unionExpression);
+        private bool Equals(UnionExpression unionExpression) => base.Equals(unionExpression);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), GetType());
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), GetType());
     }
 }

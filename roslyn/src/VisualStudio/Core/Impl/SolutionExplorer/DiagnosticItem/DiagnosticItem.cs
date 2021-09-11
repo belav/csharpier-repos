@@ -30,8 +30,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         public override event PropertyChangedEventHandler? PropertyChanged;
 
-        public DiagnosticItem(ProjectId projectId, AnalyzerReference analyzerReference, DiagnosticDescriptor descriptor, ReportDiagnostic effectiveSeverity, string language, IAnalyzersCommandHandler commandHandler)
-            : base(descriptor.Id + ": " + descriptor.Title)
+        public DiagnosticItem(
+            ProjectId projectId,
+            AnalyzerReference analyzerReference,
+            DiagnosticDescriptor descriptor,
+            ReportDiagnostic effectiveSeverity,
+            string language,
+            IAnalyzersCommandHandler commandHandler
+        ) : base(descriptor.Id + ": " + descriptor.Title)
         {
             ProjectId = projectId;
             _analyzerReference = analyzerReference;
@@ -41,18 +47,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             _commandHandler = commandHandler;
         }
 
-        public override ImageMoniker IconMoniker
-            => MapEffectiveSeverityToIconMoniker(EffectiveSeverity);
+        public override ImageMoniker IconMoniker =>
+            MapEffectiveSeverityToIconMoniker(EffectiveSeverity);
 
-        public override IContextMenuController ContextMenuController => _commandHandler.DiagnosticContextMenuController;
+        public override IContextMenuController ContextMenuController =>
+            _commandHandler.DiagnosticContextMenuController;
 
         public override object GetBrowseObject()
         {
             return new BrowseObject(this);
         }
 
-        public Uri? GetHelpLink()
-            => BrowserHelper.GetHelpLink(Descriptor, _language);
+        public Uri? GetHelpLink() => BrowserHelper.GetHelpLink(Descriptor, _language);
 
         internal void UpdateEffectiveSeverity(ReportDiagnostic newEffectiveSeverity)
         {
@@ -65,8 +71,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             }
         }
 
-        private ImageMoniker MapEffectiveSeverityToIconMoniker(ReportDiagnostic effectiveSeverity)
-            => effectiveSeverity switch
+        private ImageMoniker MapEffectiveSeverityToIconMoniker(
+            ReportDiagnostic effectiveSeverity
+        ) =>
+            effectiveSeverity switch
             {
                 ReportDiagnostic.Error => KnownMonikers.CodeErrorRule,
                 ReportDiagnostic.Warn => KnownMonikers.CodeWarningRule,
@@ -90,11 +98,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             ruleSetDocument.Save(pathToRuleSet);
         }
 
-        internal Task<Solution> GetSolutionWithUpdatedAnalyzerConfigSeverityAsync(ReportDiagnostic value, Project project, CancellationToken cancellationToken)
-        {
+        internal Task<Solution> GetSolutionWithUpdatedAnalyzerConfigSeverityAsync(
+            ReportDiagnostic value,
+            Project project,
+            CancellationToken cancellationToken
+        ) {
             var effectiveSeverity = value.ToDiagnosticSeverity() ?? Descriptor.DefaultSeverity;
-            var diagnostic = Diagnostic.Create(Descriptor, Location.None, effectiveSeverity, additionalLocations: null, properties: null);
-            return ConfigurationUpdater.ConfigureSeverityAsync(value, diagnostic, project, cancellationToken);
+            var diagnostic = Diagnostic.Create(
+                Descriptor,
+                Location.None,
+                effectiveSeverity,
+                additionalLocations: null,
+                properties: null
+            );
+            return ConfigurationUpdater.ConfigureSeverityAsync(
+                value,
+                diagnostic,
+                project,
+                cancellationToken
+            );
         }
     }
 }

@@ -9,9 +9,24 @@ using Xunit;
 
 namespace System.Transactions.Tests
 {
-    public enum Phase1Vote { Prepared, ForceRollback, Done };
-    public enum SinglePhaseVote { Committed, Aborted, InDoubt };
-    public enum EnlistmentOutcome { Committed, Aborted, InDoubt };
+    public enum Phase1Vote
+    {
+        Prepared,
+        ForceRollback,
+        Done
+    };
+    public enum SinglePhaseVote
+    {
+        Committed,
+        Aborted,
+        InDoubt
+    };
+    public enum EnlistmentOutcome
+    {
+        Committed,
+        Aborted,
+        InDoubt
+    };
 
     public class TestSinglePhaseEnlistment : ISinglePhaseNotification
     {
@@ -19,8 +34,11 @@ namespace System.Transactions.Tests
         SinglePhaseVote _singlePhaseVote;
         EnlistmentOutcome _expectedOutcome;
 
-        public TestSinglePhaseEnlistment(Phase1Vote phase1Vote, SinglePhaseVote singlePhaseVote, EnlistmentOutcome expectedOutcome)
-        {
+        public TestSinglePhaseEnlistment(
+            Phase1Vote phase1Vote,
+            SinglePhaseVote singlePhaseVote,
+            EnlistmentOutcome expectedOutcome
+        ) {
             _phase1Vote = phase1Vote;
             _singlePhaseVote = singlePhaseVote;
             _expectedOutcome = expectedOutcome;
@@ -31,20 +49,20 @@ namespace System.Transactions.Tests
             switch (_singlePhaseVote)
             {
                 case SinglePhaseVote.Committed:
-                    {
-                        singlePhaseEnlistment.Committed();
-                        break;
-                    }
+                {
+                    singlePhaseEnlistment.Committed();
+                    break;
+                }
                 case SinglePhaseVote.Aborted:
-                    {
-                        singlePhaseEnlistment.Aborted();
-                        break;
-                    }
+                {
+                    singlePhaseEnlistment.Aborted();
+                    break;
+                }
                 case SinglePhaseVote.InDoubt:
-                    {
-                        singlePhaseEnlistment.InDoubt();
-                        break;
-                    }
+                {
+                    singlePhaseEnlistment.InDoubt();
+                    break;
+                }
             }
         }
 
@@ -53,20 +71,20 @@ namespace System.Transactions.Tests
             switch (_phase1Vote)
             {
                 case Phase1Vote.Prepared:
-                    {
-                        preparingEnlistment.Prepared();
-                        break;
-                    }
+                {
+                    preparingEnlistment.Prepared();
+                    break;
+                }
                 case Phase1Vote.ForceRollback:
-                    {
-                        preparingEnlistment.ForceRollback();
-                        break;
-                    }
+                {
+                    preparingEnlistment.ForceRollback();
+                    break;
+                }
                 case Phase1Vote.Done:
-                    {
-                        preparingEnlistment.Done();
-                        break;
-                    }
+                {
+                    preparingEnlistment.Done();
+                    break;
+                }
             }
         }
 
@@ -98,8 +116,13 @@ namespace System.Transactions.Tests
         AutoResetEvent _outcomeReceived;
         Transaction _txToEnlist;
 
-        public TestEnlistment(Phase1Vote phase1Vote, EnlistmentOutcome expectedOutcome, bool volatileEnlistDuringPrepare = false, bool expectEnlistToSucceed = true, AutoResetEvent outcomeReceived = null)
-        {
+        public TestEnlistment(
+            Phase1Vote phase1Vote,
+            EnlistmentOutcome expectedOutcome,
+            bool volatileEnlistDuringPrepare = false,
+            bool expectEnlistToSucceed = true,
+            AutoResetEvent outcomeReceived = null
+        ) {
             _phase1Vote = phase1Vote;
             _expectedOutcome = expectedOutcome;
             _volatileEnlistDuringPrepare = volatileEnlistDuringPrepare;
@@ -113,41 +136,41 @@ namespace System.Transactions.Tests
             switch (_phase1Vote)
             {
                 case Phase1Vote.Prepared:
+                {
+                    if (_volatileEnlistDuringPrepare)
                     {
-                        if (_volatileEnlistDuringPrepare)
+                        TestEnlistment newVol = new TestEnlistment(_phase1Vote, _expectedOutcome);
+                        try
                         {
-                            TestEnlistment newVol = new TestEnlistment(_phase1Vote, _expectedOutcome);
-                            try
-                            {
-                                _txToEnlist.EnlistVolatile(newVol, EnlistmentOptions.None);
-                                Assert.True(_expectEnlistToSucceed);
-                            }
-                            catch (Exception)
-                            {
-                                Assert.False(_expectEnlistToSucceed);
-                            }
+                            _txToEnlist.EnlistVolatile(newVol, EnlistmentOptions.None);
+                            Assert.True(_expectEnlistToSucceed);
                         }
-                        preparingEnlistment.Prepared();
-                        break;
+                        catch (Exception)
+                        {
+                            Assert.False(_expectEnlistToSucceed);
+                        }
                     }
+                    preparingEnlistment.Prepared();
+                    break;
+                }
                 case Phase1Vote.ForceRollback:
+                {
+                    if (_outcomeReceived != null)
                     {
-                        if (_outcomeReceived != null)
-                        {
-                            _outcomeReceived.Set();
-                        }
-                        preparingEnlistment.ForceRollback();
-                        break;
+                        _outcomeReceived.Set();
                     }
+                    preparingEnlistment.ForceRollback();
+                    break;
+                }
                 case Phase1Vote.Done:
+                {
+                    if (_outcomeReceived != null)
                     {
-                        if (_outcomeReceived != null)
-                        {
-                            _outcomeReceived.Set();
-                        }
-                        preparingEnlistment.Done();
-                        break;
+                        _outcomeReceived.Set();
                     }
+                    preparingEnlistment.Done();
+                    break;
+                }
             }
         }
 

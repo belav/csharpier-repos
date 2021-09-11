@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             IForeignKey? foreignKey,
             TKey keyValue,
             IEqualityComparer<TKey> keyComparer,
-            bool fromOriginalValues)
-        {
+            bool fromOriginalValues
+        ) {
             _foreignKey = foreignKey;
             _keyValue = keyValue;
             _fromOriginalValues = fromOriginalValues;
@@ -44,13 +44,13 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public IKeyValueIndex WithOriginalValuesFlag()
-            => new KeyValueIndex<TKey>(_foreignKey, _keyValue, _keyComparer, fromOriginalValues: true);
+        public IKeyValueIndex WithOriginalValuesFlag() =>
+            new KeyValueIndex<TKey>(_foreignKey, _keyValue, _keyComparer, fromOriginalValues: true);
 
-        private bool Equals(KeyValueIndex<TKey> other)
-            => other._fromOriginalValues == _fromOriginalValues
-                && other._foreignKey == _foreignKey
-                && _keyComparer.Equals(_keyValue, other._keyValue);
+        private bool Equals(KeyValueIndex<TKey> other) =>
+            other._fromOriginalValues == _fromOriginalValues
+            && other._foreignKey == _foreignKey
+            && _keyComparer.Equals(_keyValue, other._keyValue);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,11 +58,12 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool Equals(object? obj)
-            => !(obj is null)
-                && (ReferenceEquals(this, obj)
-                    || obj.GetType() == GetType()
-                    && Equals((KeyValueIndex<TKey>)obj));
+        public override bool Equals(object? obj) =>
+            !(obj is null)
+            && (
+                ReferenceEquals(this, obj)
+                || obj.GetType() == GetType() && Equals((KeyValueIndex<TKey>)obj)
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

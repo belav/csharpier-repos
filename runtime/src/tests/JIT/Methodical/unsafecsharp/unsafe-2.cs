@@ -406,8 +406,13 @@ internal class TestApp
         }
         AA.init_all(0);
         loc_x = new AA(0, 100);
-        if (test_128(new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } }, 1, 1) != 100)
-        {
+        if (
+            test_128(
+                new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } },
+                1,
+                1
+            ) != 100
+        ) {
             Console.WriteLine("test_128() failed.");
             return 228;
         }

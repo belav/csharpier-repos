@@ -17,16 +17,21 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public string Name { get; }
         public string[] WorkspaceKinds { get; }
 
-        public ExportIncrementalAnalyzerProviderAttribute(string name, string[] workspaceKinds)
-            : base(typeof(IIncrementalAnalyzerProvider))
+        public ExportIncrementalAnalyzerProviderAttribute(
+            string name,
+            string[] workspaceKinds
+        ) : base(typeof(IIncrementalAnalyzerProvider))
         {
             this.WorkspaceKinds = workspaceKinds;
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.HighPriorityForActiveFile = false;
         }
 
-        public ExportIncrementalAnalyzerProviderAttribute(bool highPriorityForActiveFile, string name, string[] workspaceKinds)
-            : this(name, workspaceKinds)
+        public ExportIncrementalAnalyzerProviderAttribute(
+            bool highPriorityForActiveFile,
+            string name,
+            string[] workspaceKinds
+        ) : this(name, workspaceKinds)
         {
             this.HighPriorityForActiveFile = highPriorityForActiveFile;
         }

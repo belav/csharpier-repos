@@ -23,8 +23,8 @@ namespace System.Drawing
             // When set to false, where Carbon Drawing is used instead.
             // macOS users can force X11 by setting the SYSTEM_DRAWING_COMMON_FORCE_X11 flag.
             public static bool UseX11Drawable { get; } =
-                !RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ||
-                Environment.GetEnvironmentVariable("SYSTEM_DRAWING_COMMON_FORCE_X11") != null;
+                !RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+                || Environment.GetEnvironmentVariable("SYSTEM_DRAWING_COMMON_FORCE_X11") != null;
 
             internal static IntPtr LoadNativeLibrary()
             {
@@ -36,10 +36,21 @@ namespace System.Drawing
                     if (!NativeLibrary.TryLoad("libgdiplus.dylib", assembly, default, out lib))
                     {
                         // homebrew install location
-                        if (!NativeLibrary.TryLoad("/usr/local/lib/libgdiplus.dylib", assembly, default, out lib))
-                        {
+                        if (
+                            !NativeLibrary.TryLoad(
+                                "/usr/local/lib/libgdiplus.dylib",
+                                assembly,
+                                default,
+                                out lib
+                            )
+                        ) {
                             // macports install location
-                            NativeLibrary.TryLoad("/opt/local/lib/libgdiplus.dylib", assembly, default, out lib);
+                            NativeLibrary.TryLoad(
+                                "/opt/local/lib/libgdiplus.dylib",
+                                assembly,
+                                default,
+                                out lib
+                            );
                         }
                     }
                 }
@@ -68,7 +79,11 @@ namespace System.Drawing
             // Imported functions
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdiplusStartup(out IntPtr token, ref StartupInput input, out StartupOutput output);
+            internal static extern int GdiplusStartup(
+                out IntPtr token,
+                ref StartupInput input,
+                out StartupOutput output
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern void GdiplusShutdown(ref ulong token);
@@ -101,10 +116,28 @@ namespace System.Drawing
             internal static extern int GdipGetNearestColor(IntPtr graphics, out int argb);
 
             [DllImport(LibraryName, ExactSpelling = true, CharSet = CharSet.Unicode)]
-            internal static extern int GdipAddPathString(IntPtr path, string s, int lenght, IntPtr family, int style, float emSize, ref RectangleF layoutRect, IntPtr format);
+            internal static extern int GdipAddPathString(
+                IntPtr path,
+                string s,
+                int lenght,
+                IntPtr family,
+                int style,
+                float emSize,
+                ref RectangleF layoutRect,
+                IntPtr format
+            );
 
             [DllImport(LibraryName, ExactSpelling = true, CharSet = CharSet.Unicode)]
-            internal static extern int GdipAddPathStringI(IntPtr path, string s, int lenght, IntPtr family, int style, float emSize, ref Rectangle layoutRect, IntPtr format);
+            internal static extern int GdipAddPathStringI(
+                IntPtr path,
+                string s,
+                int lenght,
+                IntPtr family,
+                int style,
+                float emSize,
+                ref Rectangle layoutRect,
+                IntPtr format
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipCreateFromHWND(IntPtr hwnd, out IntPtr graphics);
@@ -122,31 +155,66 @@ namespace System.Drawing
             internal static extern int GdipSetImagePalette(IntPtr image, IntPtr palette);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetImageBounds(IntPtr image, out RectangleF source, ref GraphicsUnit unit);
+            internal static extern int GdipGetImageBounds(
+                IntPtr image,
+                out RectangleF source,
+                ref GraphicsUnit unit
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetImageThumbnail(IntPtr image, uint width, uint height, out IntPtr thumbImage, IntPtr callback, IntPtr callBackData);
+            internal static extern int GdipGetImageThumbnail(
+                IntPtr image,
+                uint width,
+                uint height,
+                out IntPtr thumbImage,
+                IntPtr callback,
+                IntPtr callBackData
+            );
 
             [DllImport(LibraryName, ExactSpelling = true, CharSet = CharSet.Unicode)]
-            internal static extern int GdipSaveImageToFile(IntPtr image, string filename, ref Guid encoderClsID, IntPtr encoderParameters);
+            internal static extern int GdipSaveImageToFile(
+                IntPtr image,
+                string filename,
+                ref Guid encoderClsID,
+                IntPtr encoderParameters
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipSaveAdd(IntPtr image, IntPtr encoderParameters);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipSaveAddImage(IntPtr image, IntPtr imagenew, IntPtr encoderParameters);
+            internal static extern int GdipSaveAddImage(
+                IntPtr image,
+                IntPtr imagenew,
+                IntPtr encoderParameters
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetImageGraphicsContext(IntPtr image, out IntPtr graphics);
+            internal static extern int GdipGetImageGraphicsContext(
+                IntPtr image,
+                out IntPtr graphics
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipCreatePath(FillMode brushMode, out IntPtr path);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipCreatePath2(PointF[] points, byte[] types, int count, FillMode brushMode, out IntPtr path);
+            internal static extern int GdipCreatePath2(
+                PointF[] points,
+                byte[] types,
+                int count,
+                FillMode brushMode,
+                out IntPtr path
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipCreatePath2I(Point[] points, byte[] types, int count, FillMode brushMode, out IntPtr path);
+            internal static extern int GdipCreatePath2I(
+                Point[] points,
+                byte[] types,
+                int count,
+                FillMode brushMode,
+                out IntPtr path
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipClonePath(IntPtr path, out IntPtr clonePath);
@@ -164,10 +232,18 @@ namespace System.Drawing
             internal static extern int GdipGetPathTypes(IntPtr path, [Out] byte[] types, int count);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetPathPoints(IntPtr path, [Out] PointF[] points, int count);
+            internal static extern int GdipGetPathPoints(
+                IntPtr path,
+                [Out] PointF[] points,
+                int count
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetPathPointsI(IntPtr path, [Out] Point[] points, int count);
+            internal static extern int GdipGetPathPointsI(
+                IntPtr path,
+                [Out] Point[] points,
+                int count
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipGetPathFillMode(IntPtr path, out FillMode fillMode);
@@ -197,7 +273,13 @@ namespace System.Drawing
             internal static extern int GdipGetPathLastPoint(IntPtr path, out PointF lastPoint);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathLine(IntPtr path, float x1, float y1, float x2, float y2);
+            internal static extern int GdipAddPathLine(
+                IntPtr path,
+                float x1,
+                float y1,
+                float x2,
+                float y2
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipAddPathLine2(IntPtr path, PointF[] points, int count);
@@ -206,10 +288,28 @@ namespace System.Drawing
             internal static extern int GdipAddPathLine2I(IntPtr path, Point[] points, int count);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathArc(IntPtr path, float x, float y, float width, float height, float startAngle, float sweepAngle);
+            internal static extern int GdipAddPathArc(
+                IntPtr path,
+                float x,
+                float y,
+                float width,
+                float height,
+                float startAngle,
+                float sweepAngle
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathBezier(IntPtr path, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
+            internal static extern int GdipAddPathBezier(
+                IntPtr path,
+                float x1,
+                float y1,
+                float x2,
+                float y2,
+                float x3,
+                float y3,
+                float x4,
+                float y4
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipAddPathBeziers(IntPtr path, PointF[] points, int count);
@@ -221,61 +321,169 @@ namespace System.Drawing
             internal static extern int GdipAddPathCurveI(IntPtr path, Point[] points, int count);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathCurve2(IntPtr path, PointF[] points, int count, float tension);
+            internal static extern int GdipAddPathCurve2(
+                IntPtr path,
+                PointF[] points,
+                int count,
+                float tension
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathCurve2I(IntPtr path, Point[] points, int count, float tension);
+            internal static extern int GdipAddPathCurve2I(
+                IntPtr path,
+                Point[] points,
+                int count,
+                float tension
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathCurve3(IntPtr path, PointF[] points, int count, int offset, int numberOfSegments, float tension);
+            internal static extern int GdipAddPathCurve3(
+                IntPtr path,
+                PointF[] points,
+                int count,
+                int offset,
+                int numberOfSegments,
+                float tension
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathCurve3I(IntPtr path, Point[] points, int count, int offset, int numberOfSegments, float tension);
+            internal static extern int GdipAddPathCurve3I(
+                IntPtr path,
+                Point[] points,
+                int count,
+                int offset,
+                int numberOfSegments,
+                float tension
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathClosedCurve(IntPtr path, PointF[] points, int count);
+            internal static extern int GdipAddPathClosedCurve(
+                IntPtr path,
+                PointF[] points,
+                int count
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathClosedCurveI(IntPtr path, Point[] points, int count);
+            internal static extern int GdipAddPathClosedCurveI(
+                IntPtr path,
+                Point[] points,
+                int count
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathClosedCurve2(IntPtr path, PointF[] points, int count, float tension);
+            internal static extern int GdipAddPathClosedCurve2(
+                IntPtr path,
+                PointF[] points,
+                int count,
+                float tension
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathClosedCurve2I(IntPtr path, Point[] points, int count, float tension);
+            internal static extern int GdipAddPathClosedCurve2I(
+                IntPtr path,
+                Point[] points,
+                int count,
+                float tension
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathRectangle(IntPtr path, float x, float y, float width, float height);
+            internal static extern int GdipAddPathRectangle(
+                IntPtr path,
+                float x,
+                float y,
+                float width,
+                float height
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathRectangles(IntPtr path, RectangleF[] rects, int count);
+            internal static extern int GdipAddPathRectangles(
+                IntPtr path,
+                RectangleF[] rects,
+                int count
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathEllipse(IntPtr path, float x, float y, float width, float height);
+            internal static extern int GdipAddPathEllipse(
+                IntPtr path,
+                float x,
+                float y,
+                float width,
+                float height
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathEllipseI(IntPtr path, int x, int y, int width, int height);
+            internal static extern int GdipAddPathEllipseI(
+                IntPtr path,
+                int x,
+                int y,
+                int width,
+                int height
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathPie(IntPtr path, float x, float y, float width, float height, float startAngle, float sweepAngle);
+            internal static extern int GdipAddPathPie(
+                IntPtr path,
+                float x,
+                float y,
+                float width,
+                float height,
+                float startAngle,
+                float sweepAngle
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathPieI(IntPtr path, int x, int y, int width, int height, float startAngle, float sweepAngle);
+            internal static extern int GdipAddPathPieI(
+                IntPtr path,
+                int x,
+                int y,
+                int width,
+                int height,
+                float startAngle,
+                float sweepAngle
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipAddPathPolygon(IntPtr path, PointF[] points, int count);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathPath(IntPtr path, IntPtr addingPath, bool connect);
+            internal static extern int GdipAddPathPath(
+                IntPtr path,
+                IntPtr addingPath,
+                bool connect
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathLineI(IntPtr path, int x1, int y1, int x2, int y2);
+            internal static extern int GdipAddPathLineI(
+                IntPtr path,
+                int x1,
+                int y1,
+                int x2,
+                int y2
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathArcI(IntPtr path, int x, int y, int width, int height, float startAngle, float sweepAngle);
+            internal static extern int GdipAddPathArcI(
+                IntPtr path,
+                int x,
+                int y,
+                int width,
+                int height,
+                float startAngle,
+                float sweepAngle
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathBezierI(IntPtr path, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4);
+            internal static extern int GdipAddPathBezierI(
+                IntPtr path,
+                int x1,
+                int y1,
+                int x2,
+                int y2,
+                int x3,
+                int y3,
+                int x4,
+                int y4
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipAddPathBeziersI(IntPtr path, Point[] points, int count);
@@ -284,10 +492,20 @@ namespace System.Drawing
             internal static extern int GdipAddPathPolygonI(IntPtr path, Point[] points, int count);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathRectangleI(IntPtr path, int x, int y, int width, int height);
+            internal static extern int GdipAddPathRectangleI(
+                IntPtr path,
+                int x,
+                int y,
+                int width,
+                int height
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipAddPathRectanglesI(IntPtr path, Rectangle[] rects, int count);
+            internal static extern int GdipAddPathRectanglesI(
+                IntPtr path,
+                Rectangle[] rects,
+                int count
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipFlattenPath(IntPtr path, IntPtr matrix, float floatness);
@@ -296,102 +514,240 @@ namespace System.Drawing
             internal static extern int GdipTransformPath(IntPtr path, IntPtr matrix);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipWarpPath(IntPtr path, IntPtr matrix, PointF[] points, int count, float srcx, float srcy, float srcwidth, float srcheight, WarpMode mode, float flatness);
+            internal static extern int GdipWarpPath(
+                IntPtr path,
+                IntPtr matrix,
+                PointF[] points,
+                int count,
+                float srcx,
+                float srcy,
+                float srcwidth,
+                float srcheight,
+                WarpMode mode,
+                float flatness
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipWidenPath(IntPtr path, IntPtr pen, IntPtr matrix, float flatness);
+            internal static extern int GdipWidenPath(
+                IntPtr path,
+                IntPtr pen,
+                IntPtr matrix,
+                float flatness
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetPathWorldBounds(IntPtr path, out RectangleF bounds, IntPtr matrix, IntPtr pen);
+            internal static extern int GdipGetPathWorldBounds(
+                IntPtr path,
+                out RectangleF bounds,
+                IntPtr matrix,
+                IntPtr pen
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetPathWorldBoundsI(IntPtr path, out Rectangle bounds, IntPtr matrix, IntPtr pen);
+            internal static extern int GdipGetPathWorldBoundsI(
+                IntPtr path,
+                out Rectangle bounds,
+                IntPtr matrix,
+                IntPtr pen
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipIsVisiblePathPoint(IntPtr path, float x, float y, IntPtr graphics, out bool result);
+            internal static extern int GdipIsVisiblePathPoint(
+                IntPtr path,
+                float x,
+                float y,
+                IntPtr graphics,
+                out bool result
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipIsVisiblePathPointI(IntPtr path, int x, int y, IntPtr graphics, out bool result);
+            internal static extern int GdipIsVisiblePathPointI(
+                IntPtr path,
+                int x,
+                int y,
+                IntPtr graphics,
+                out bool result
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipIsOutlineVisiblePathPoint(IntPtr path, float x, float y, IntPtr pen, IntPtr graphics, out bool result);
+            internal static extern int GdipIsOutlineVisiblePathPoint(
+                IntPtr path,
+                float x,
+                float y,
+                IntPtr pen,
+                IntPtr graphics,
+                out bool result
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipIsOutlineVisiblePathPointI(IntPtr path, int x, int y, IntPtr pen, IntPtr graphics, out bool result);
+            internal static extern int GdipIsOutlineVisiblePathPointI(
+                IntPtr path,
+                int x,
+                int y,
+                IntPtr pen,
+                IntPtr graphics,
+                out bool result
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipCreateFontFromLogfont(IntPtr hdc, ref Interop.User32.LOGFONT lf, out IntPtr ptr);
+            internal static extern int GdipCreateFontFromLogfont(
+                IntPtr hdc,
+                ref Interop.User32.LOGFONT lf,
+                out IntPtr ptr
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipCreateFontFromHfont(IntPtr hdc, out IntPtr font, ref Interop.User32.LOGFONT lf);
+            internal static extern int GdipCreateFontFromHfont(
+                IntPtr hdc,
+                out IntPtr font,
+                ref Interop.User32.LOGFONT lf
+            );
 
             [DllImport(LibraryName, ExactSpelling = true, CharSet = CharSet.Unicode)]
-            internal static extern int GdipGetMetafileHeaderFromFile(string filename, IntPtr header);
+            internal static extern int GdipGetMetafileHeaderFromFile(
+                string filename,
+                IntPtr header
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetMetafileHeaderFromMetafile(IntPtr metafile, IntPtr header);
+            internal static extern int GdipGetMetafileHeaderFromMetafile(
+                IntPtr metafile,
+                IntPtr header
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipGetMetafileHeaderFromEmf(IntPtr hEmf, IntPtr header);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetMetafileHeaderFromWmf(IntPtr hWmf, IntPtr wmfPlaceableFileHeader, IntPtr header);
+            internal static extern int GdipGetMetafileHeaderFromWmf(
+                IntPtr hWmf,
+                IntPtr wmfPlaceableFileHeader,
+                IntPtr header
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipGetHemfFromMetafile(IntPtr metafile, out IntPtr hEmf);
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetMetafileDownLevelRasterizationLimit(IntPtr metafile, ref uint metafileRasterizationLimitDpi);
+            internal static extern int GdipGetMetafileDownLevelRasterizationLimit(
+                IntPtr metafile,
+                ref uint metafileRasterizationLimitDpi
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipSetMetafileDownLevelRasterizationLimit(IntPtr metafile, uint metafileRasterizationLimitDpi);
+            internal static extern int GdipSetMetafileDownLevelRasterizationLimit(
+                IntPtr metafile,
+                uint metafileRasterizationLimitDpi
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipCreateFromContext_macosx(IntPtr cgref, int width, int height, out IntPtr graphics);
+            internal static extern int GdipCreateFromContext_macosx(
+                IntPtr cgref,
+                int width,
+                int height,
+                out IntPtr graphics
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipSetVisibleClip_linux(IntPtr graphics, ref Rectangle rect);
+            internal static extern int GdipSetVisibleClip_linux(
+                IntPtr graphics,
+                ref Rectangle rect
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipCreateFromXDrawable_linux(IntPtr drawable, IntPtr display, out IntPtr graphics);
+            internal static extern int GdipCreateFromXDrawable_linux(
+                IntPtr drawable,
+                IntPtr display,
+                out IntPtr graphics
+            );
 
             // Stream functions for non-Win32 (libgdiplus specific)
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipLoadImageFromDelegate_linux(StreamGetHeaderDelegate getHeader,
-                StreamGetBytesDelegate getBytes, StreamPutBytesDelegate putBytes, StreamSeekDelegate doSeek,
-                StreamCloseDelegate close, StreamSizeDelegate size, out IntPtr image);
+            internal static extern int GdipLoadImageFromDelegate_linux(
+                StreamGetHeaderDelegate getHeader,
+                StreamGetBytesDelegate getBytes,
+                StreamPutBytesDelegate putBytes,
+                StreamSeekDelegate doSeek,
+                StreamCloseDelegate close,
+                StreamSizeDelegate size,
+                out IntPtr image
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipSaveImageToDelegate_linux(IntPtr image, StreamGetBytesDelegate getBytes,
-                StreamPutBytesDelegate putBytes, StreamSeekDelegate doSeek, StreamCloseDelegate close,
-                StreamSizeDelegate size, ref Guid encoderClsID, IntPtr encoderParameters);
+            internal static extern int GdipSaveImageToDelegate_linux(
+                IntPtr image,
+                StreamGetBytesDelegate getBytes,
+                StreamPutBytesDelegate putBytes,
+                StreamSeekDelegate doSeek,
+                StreamCloseDelegate close,
+                StreamSizeDelegate size,
+                ref Guid encoderClsID,
+                IntPtr encoderParameters
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipCreateMetafileFromDelegate_linux(StreamGetHeaderDelegate getHeader,
-                StreamGetBytesDelegate getBytes, StreamPutBytesDelegate putBytes, StreamSeekDelegate doSeek,
-                StreamCloseDelegate close, StreamSizeDelegate size, out IntPtr metafile);
+            internal static extern int GdipCreateMetafileFromDelegate_linux(
+                StreamGetHeaderDelegate getHeader,
+                StreamGetBytesDelegate getBytes,
+                StreamPutBytesDelegate putBytes,
+                StreamSeekDelegate doSeek,
+                StreamCloseDelegate close,
+                StreamSizeDelegate size,
+                out IntPtr metafile
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
-            internal static extern int GdipGetMetafileHeaderFromDelegate_linux(StreamGetHeaderDelegate getHeader,
-                StreamGetBytesDelegate getBytes, StreamPutBytesDelegate putBytes, StreamSeekDelegate doSeek,
-                StreamCloseDelegate close, StreamSizeDelegate size, IntPtr header);
+            internal static extern int GdipGetMetafileHeaderFromDelegate_linux(
+                StreamGetHeaderDelegate getHeader,
+                StreamGetBytesDelegate getBytes,
+                StreamPutBytesDelegate putBytes,
+                StreamSeekDelegate doSeek,
+                StreamCloseDelegate close,
+                StreamSizeDelegate size,
+                IntPtr header
+            );
 
             [DllImport(LibraryName, ExactSpelling = true, CharSet = CharSet.Unicode)]
-            internal static extern int GdipRecordMetafileFromDelegate_linux(StreamGetHeaderDelegate getHeader,
-                StreamGetBytesDelegate getBytes, StreamPutBytesDelegate putBytes, StreamSeekDelegate doSeek,
-                StreamCloseDelegate close, StreamSizeDelegate size, IntPtr hdc, EmfType type, ref RectangleF frameRect,
-                MetafileFrameUnit frameUnit, string? description, out IntPtr metafile);
+            internal static extern int GdipRecordMetafileFromDelegate_linux(
+                StreamGetHeaderDelegate getHeader,
+                StreamGetBytesDelegate getBytes,
+                StreamPutBytesDelegate putBytes,
+                StreamSeekDelegate doSeek,
+                StreamCloseDelegate close,
+                StreamSizeDelegate size,
+                IntPtr hdc,
+                EmfType type,
+                ref RectangleF frameRect,
+                MetafileFrameUnit frameUnit,
+                string? description,
+                out IntPtr metafile
+            );
 
             [DllImport(LibraryName, ExactSpelling = true, CharSet = CharSet.Unicode)]
-            internal static extern int GdipRecordMetafileFromDelegateI_linux(StreamGetHeaderDelegate getHeader,
-                StreamGetBytesDelegate getBytes, StreamPutBytesDelegate putBytes, StreamSeekDelegate doSeek,
-                StreamCloseDelegate close, StreamSizeDelegate size, IntPtr hdc, EmfType type, ref Rectangle frameRect,
-                MetafileFrameUnit frameUnit, string? description, out IntPtr metafile);
+            internal static extern int GdipRecordMetafileFromDelegateI_linux(
+                StreamGetHeaderDelegate getHeader,
+                StreamGetBytesDelegate getBytes,
+                StreamPutBytesDelegate putBytes,
+                StreamSeekDelegate doSeek,
+                StreamCloseDelegate close,
+                StreamSizeDelegate size,
+                IntPtr hdc,
+                EmfType type,
+                ref Rectangle frameRect,
+                MetafileFrameUnit frameUnit,
+                string? description,
+                out IntPtr metafile
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipGetPostScriptGraphicsContext(
                 [MarshalAs(UnmanagedType.LPStr)] string filename,
-                int width, int height, double dpix, double dpiy, ref IntPtr graphics);
+                int width,
+                int height,
+                double dpix,
+                double dpiy,
+                ref IntPtr graphics
+            );
 
             [DllImport(LibraryName, ExactSpelling = true)]
             internal static extern int GdipGetPostScriptSavePage(IntPtr graphics);

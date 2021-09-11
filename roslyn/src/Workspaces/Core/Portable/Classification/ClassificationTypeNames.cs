@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Classification
         /// NOTE: Any updates to this class should also be reflected in LSP - see
         /// Features/LanguageServer/Protocol/Handler/SemanticTokens/SemanticTokensHelpers.cs
         /// </remarks>
-        public static ImmutableArray<string> AdditiveTypeNames { get; } = ImmutableArray.Create(StaticSymbol);
+        public static ImmutableArray<string> AdditiveTypeNames { get; } =
+            ImmutableArray.Create(StaticSymbol);
 
         public const string Comment = "comment";
         public const string ExcludedCode = "excluded code";
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Classification
         public const string XmlDocCommentDelimiter = "xml doc comment - delimiter";
         public const string XmlDocCommentEntityReference = "xml doc comment - entity reference";
         public const string XmlDocCommentName = "xml doc comment - name";
-        public const string XmlDocCommentProcessingInstruction = "xml doc comment - processing instruction";
+        public const string XmlDocCommentProcessingInstruction =
+            "xml doc comment - processing instruction";
         public const string XmlDocCommentText = "xml doc comment - text";
 
         public const string XmlLiteralAttributeName = "xml literal - attribute name";
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Classification
         public const string XmlLiteralEmbeddedExpression = "xml literal - embedded expression";
         public const string XmlLiteralEntityReference = "xml literal - entity reference";
         public const string XmlLiteralName = "xml literal - name";
-        public const string XmlLiteralProcessingInstruction = "xml literal - processing instruction";
+        public const string XmlLiteralProcessingInstruction =
+            "xml literal - processing instruction";
         public const string XmlLiteralText = "xml literal - text";
 
         public const string RegexComment = "regex - comment";

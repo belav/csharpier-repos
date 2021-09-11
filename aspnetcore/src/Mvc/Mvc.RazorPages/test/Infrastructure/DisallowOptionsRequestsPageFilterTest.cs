@@ -125,11 +125,22 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             Assert.IsType<OkResult>(context.Result);
         }
 
-        private static PageHandlerExecutingContext GetContext(HandlerMethodDescriptor handlerMethodDescriptor)
-        {
-            var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new PageActionDescriptor());
+        private static PageHandlerExecutingContext GetContext(
+            HandlerMethodDescriptor handlerMethodDescriptor
+        ) {
+            var actionContext = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new PageActionDescriptor()
+            );
             var pageContext = new PageContext(actionContext);
-            return new PageHandlerExecutingContext(pageContext, Array.Empty<IFilterMetadata>(), handlerMethodDescriptor, new Dictionary<string, object>(), new object());
+            return new PageHandlerExecutingContext(
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                handlerMethodDescriptor,
+                new Dictionary<string, object>(),
+                new object()
+            );
         }
     }
 }

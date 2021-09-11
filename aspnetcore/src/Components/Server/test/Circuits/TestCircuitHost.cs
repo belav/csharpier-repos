@@ -15,21 +15,43 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
 {
     internal class TestCircuitHost : CircuitHost
     {
-        private TestCircuitHost(CircuitId circuitId, IServiceScope scope, CircuitOptions options, CircuitClientProxy client, RemoteRenderer renderer, IReadOnlyList<ComponentDescriptor> descriptors, RemoteJSRuntime jsRuntime, CircuitHandler[] circuitHandlers, ILogger logger)
-            : base(circuitId, scope, options, client, renderer, descriptors, jsRuntime, circuitHandlers, logger)
-        {
-        }
+        private TestCircuitHost(
+            CircuitId circuitId,
+            IServiceScope scope,
+            CircuitOptions options,
+            CircuitClientProxy client,
+            RemoteRenderer renderer,
+            IReadOnlyList<ComponentDescriptor> descriptors,
+            RemoteJSRuntime jsRuntime,
+            CircuitHandler[] circuitHandlers,
+            ILogger logger
+        ) : base(
+            circuitId,
+            scope,
+            options,
+            client,
+            renderer,
+            descriptors,
+            jsRuntime,
+            circuitHandlers,
+            logger
+        ) { }
 
         public static CircuitHost Create(
             CircuitId? circuitId = null,
             IServiceScope serviceScope = null,
             RemoteRenderer remoteRenderer = null,
             CircuitHandler[] handlers = null,
-            CircuitClientProxy clientProxy = null)
-        {
+            CircuitClientProxy clientProxy = null
+        ) {
             serviceScope = serviceScope ?? Mock.Of<IServiceScope>();
-            clientProxy = clientProxy ?? new CircuitClientProxy(Mock.Of<IClientProxy>(), Guid.NewGuid().ToString());
-            var jsRuntime = new RemoteJSRuntime(Options.Create(new CircuitOptions()), Mock.Of<ILogger<RemoteJSRuntime>>());
+            clientProxy =
+                clientProxy
+                ?? new CircuitClientProxy(Mock.Of<IClientProxy>(), Guid.NewGuid().ToString());
+            var jsRuntime = new RemoteJSRuntime(
+                Options.Create(new CircuitOptions()),
+                Mock.Of<ILogger<RemoteJSRuntime>>()
+            );
 
             if (remoteRenderer == null)
             {
@@ -39,12 +61,15 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                     new CircuitOptions(),
                     clientProxy,
                     NullLogger.Instance,
-                    null);
+                    null
+                );
             }
 
             handlers = handlers ?? Array.Empty<CircuitHandler>();
             return new TestCircuitHost(
-                circuitId is null ? new CircuitId(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()) : circuitId.Value,
+                circuitId is null
+                  ? new CircuitId(Guid.NewGuid().ToString(), Guid.NewGuid().ToString())
+                  : circuitId.Value,
                 serviceScope,
                 new CircuitOptions(),
                 clientProxy,
@@ -52,7 +77,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 new List<ComponentDescriptor>(),
                 jsRuntime,
                 handlers,
-                NullLogger<CircuitHost>.Instance);
+                NullLogger<CircuitHost>.Instance
+            );
         }
     }
 }

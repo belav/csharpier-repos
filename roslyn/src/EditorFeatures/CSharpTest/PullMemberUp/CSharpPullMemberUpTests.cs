@@ -22,17 +22,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PullMemberUp
 {
     public class CSharpPullMemberUpTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpPullMemberUpCodeRefactoringProvider((IPullMemberUpOptionsService)parameters.fixProviderData);
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) =>
+            new CSharpPullMemberUpCodeRefactoringProvider(
+                (IPullMemberUpOptionsService)parameters.fixProviderData
+            );
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions) => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         #region Quick Action
 
         private async Task TestQuickActionNotProvidedAsync(
             string initialMarkup,
-            TestParameters parameters = default)
-        {
+            TestParameters parameters = default
+        ) {
             using var workspace = CreateWorkspaceFromOptions(initialMarkup, parameters);
             var (actions, _) = await GetCodeActionsAsync(workspace, parameters);
             if (actions.Length == 1)
@@ -53,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PullMemberUp
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestNoRefactoringProvidedWhenPullFieldInInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public interface ITestInterface
@@ -71,7 +79,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestNoRefactoringProvidedWhenMethodDeclarationAlreadyExistsInInterfaceViaQuickAction()
         {
-            var methodTest = @"
+            var methodTest =
+                @"
 namespace PushUpTest
 {
     public interface ITestInterface
@@ -93,7 +102,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestNoRefactoringProvidedWhenPropertyDeclarationAlreadyExistsInInterfaceViaQuickAction()
         {
-            var propertyTest1 = @"
+            var propertyTest1 =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -113,7 +123,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestNoRefactoringProvidedWhenEventDeclarationAlreadyExistsToInterfaceViaQuickAction()
         {
-            var eventTest = @"
+            var eventTest =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -133,7 +144,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestNoRefactoringProvidedInNestedTypesViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 namespace PushUpTest
 {
     public interface ITestInterface
@@ -155,7 +167,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullMethodUpToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -171,7 +184,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -194,7 +208,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullAbstractMethodToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public interface IInterface
@@ -207,7 +222,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public interface IInterface
@@ -226,7 +242,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullGenericsUpToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -242,7 +259,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -264,7 +282,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullSingleEventToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -288,7 +307,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -318,7 +338,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullOneEventFromMultipleEventsToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -332,7 +353,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -352,7 +374,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullPublicEventWithAccessorsToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -376,7 +399,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -406,7 +430,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullPropertyWithPrivateSetterToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -420,7 +445,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -440,7 +466,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullPropertyWithPrivateGetterToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -454,7 +481,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -474,7 +502,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullMemberFromInterfaceToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -488,7 +517,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -507,7 +537,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullIndexerWithOnlySetterToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -524,7 +555,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -548,7 +580,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullIndexerWithOnlyGetterToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -565,7 +598,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -589,7 +623,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestNoRefactoringProvidedWhenPullOverrideMethodUpToClassViaQuickAction()
         {
-            var methodTest = @"
+            var methodTest =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -611,7 +646,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestNoRefactoringProvidedWhenPullOverridePropertyUpToClassViaQuickAction()
         {
-            var propertyTest = @"
+            var propertyTest =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -632,7 +668,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestNoRefactoringProvidedWhenPullOverrideEventUpToClassViaQuickAction()
         {
-            var eventTest = @"
+            var eventTest =
+                @"
 using System;
 
 namespace PushUpTest
@@ -675,7 +712,8 @@ namespace PushUpTest
         {
             // Fields share the same name will be thought as 'override', since it will cause error
             // if two same name fields exist in one class
-            var fieldTest = @"
+            var fieldTest =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -694,7 +732,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullMethodToOrdinaryClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -710,7 +749,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -731,7 +771,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullOneFieldsToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -744,7 +785,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -762,7 +804,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullGenericsUpToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -778,7 +821,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -799,7 +843,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullOneFieldFromMultipleFieldsToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -812,7 +857,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -831,7 +877,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullMiddleFieldWithValueToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -843,7 +890,8 @@ namespace PushUpTest
         public int you, a[||]nd = 4000, someone = 10086;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -862,7 +910,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullOneEventFromMultipleToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -876,7 +925,8 @@ namespace PushUpTest
         private static event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -897,7 +947,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullEventToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -911,7 +962,8 @@ namespace PushUpTest
         private static event EventHandler Eve[||]nt3;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -931,7 +983,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullEventWithBodyToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -955,7 +1008,8 @@ namespace PushUpTest
         };
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -985,7 +1039,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullPropertyToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -999,7 +1054,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1018,7 +1074,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullIndexerToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base 
@@ -1036,7 +1093,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -1059,7 +1117,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullMethodUpAcrossProjectViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -1086,7 +1145,8 @@ namespace Destination
   </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -1119,7 +1179,8 @@ namespace Destination
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullPropertyUpAcrossProjectViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -1147,7 +1208,8 @@ namespace Destination
   </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -1181,7 +1243,8 @@ namespace Destination
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullFieldUpAcrossProjectViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -1205,7 +1268,8 @@ namespace Destination
   </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -1237,7 +1301,8 @@ namespace Destination
         {
             // Moving member from C# to Visual Basic is not supported currently since the FindMostRelevantDeclarationAsync method in
             // AbstractCodeGenerationService will return null.
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <ProjectReference>VBAssembly</ProjectReference>
@@ -1265,7 +1330,8 @@ namespace Destination
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullMethodUpToVBInterfaceViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
     <ProjectReference>VBAssembly</ProjectReference>
@@ -1293,7 +1359,8 @@ namespace Destination
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullFieldUpToVBClassViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <ProjectReference>VBAssembly</ProjectReference>
@@ -1319,7 +1386,8 @@ namespace Destination
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullPropertyUpToVBClassViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
   <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
     <ProjectReference>VBAssembly</ProjectReference>
@@ -1348,7 +1416,8 @@ public class TestClass : VBClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullPropertyUpToVBInterfaceViaQuickAction()
         {
-            var input = @"<Workspace>
+            var input =
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <ProjectReference>VBAssembly</ProjectReference>
         <Document>
@@ -1376,7 +1445,8 @@ public class TestClass : VBInterface
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullEventUpToVBClassViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <ProjectReference>VBAssembly</ProjectReference>
@@ -1401,7 +1471,8 @@ public class TestClass : VBInterface
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullEventUpToVBInterfaceViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
     <ProjectReference>VBAssembly</ProjectReference>
@@ -1433,20 +1504,23 @@ public class TestClass : VBInterface
             IEnumerable<(string name, bool makeAbstract)> selection = null,
             string destinationName = null,
             int index = 0,
-            TestParameters parameters = default)
-        {
+            TestParameters parameters = default
+        ) {
             var service = new TestPullMemberUpService(selection, destinationName);
 
             return TestInRegularAndScript1Async(
-                initialMarkUp, expectedResult,
+                initialMarkUp,
+                expectedResult,
                 index,
-                parameters.WithFixProviderData(service));
+                parameters.WithFixProviderData(service)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullPartialMethodUpToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1469,7 +1543,8 @@ namespace PushUpTest
     {
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1500,7 +1575,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullExtendedPartialMethodUpToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1523,7 +1599,8 @@ namespace PushUpTest
     {
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1554,7 +1631,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullMultipleNonPublicMethodsToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1578,7 +1656,8 @@ namespace PushUpTest
         {}
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1611,7 +1690,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullMultipleNonPublicEventsToInterface()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1625,7 +1705,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1649,7 +1730,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullMethodToInnerInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1663,7 +1745,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1685,7 +1768,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullDifferentMembersFromClassToPartialInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1715,7 +1799,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1759,7 +1844,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullAsyncMethod()
         {
-            var testText = @"
+            var testText =
+                @"
 using System.Threading.Tasks;
 
 internal interface IPullUp { }
@@ -1771,7 +1857,8 @@ internal class PullUp : IPullUp
         await Task.Delay(1000);
     }
 }";
-            var expectedText = @"
+            var expectedText =
+                @"
 using System.Threading.Tasks;
 
 internal interface IPullUp
@@ -1792,7 +1879,8 @@ internal class PullUp : IPullUp
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullMethodWithAbstractOptionToClassViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -1808,7 +1896,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public abstract class Base
@@ -1824,13 +1913,19 @@ namespace PushUpTest
         }
     }
 }";
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("TestMethod", true) }, index: 1);
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("TestMethod", true) },
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullAbstractMethodToClassViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -1843,7 +1938,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public abstract class Base
@@ -1855,13 +1951,19 @@ namespace PushUpTest
     {
     }
 }";
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("TestMethod", true) }, index: 0);
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("TestMethod", true) },
+                index: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullMultipleEventsToClassViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1874,7 +1976,8 @@ namespace PushUpTest
         private static event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1895,7 +1998,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullMultipleAbstractEventsToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1908,7 +2012,8 @@ namespace PushUpTest
         protected abstract event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1932,7 +2037,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullAbstractEventToClassViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1945,7 +2051,8 @@ namespace PushUpTest
         private static abstract event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1960,13 +2067,18 @@ namespace PushUpTest
     }
 }";
 
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("Event3", false) });
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("Event3", false) }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullNonPublicEventToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1979,7 +2091,8 @@ namespace PushUpTest
         private event EventHandler Eve[||]nt3;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -1994,13 +2107,18 @@ namespace PushUpTest
     }
 }";
 
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("Event3", false) });
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("Event3", false) }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullSingleNonPublicEventToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2013,7 +2131,8 @@ namespace PushUpTest
         protected event EventHandler Eve[||]nt3;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2028,13 +2147,18 @@ namespace PushUpTest
     }
 }";
 
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("Event3", false) });
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("Event3", false) }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullNonPublicEventWithAddAndRemoveMethodToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2058,7 +2182,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2083,13 +2208,18 @@ namespace PushUpTest
     }
 }";
 
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("Event1", false) });
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("Event1", false) }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullFieldsToClassViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2102,7 +2232,8 @@ namespace PushUpTest
         public int i, [||]j = 10, k = 100;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2124,7 +2255,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullNonPublicPropertyWithArrowToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2137,7 +2269,8 @@ namespace PushUpTest
         private double Test[||]Property => 2.717;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2158,7 +2291,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullNonPublicPropertyToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2175,7 +2309,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2200,7 +2335,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullNonPublicPropertyWithSingleAccessorToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2216,7 +2352,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2241,7 +2378,8 @@ namespace PushUpTest
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullPropertyToAbstractClassViaDialogWithMakeAbstractOption()
         {
-            var testText = @"
+            var testText =
+                @"
 abstract class B
 {
 }
@@ -2250,7 +2388,8 @@ class D : B
 {
     int [||]X => 7;
 }";
-            var expected = @"
+            var expected =
+                @"
 abstract class B
 {
     private abstract int X { get; }
@@ -2260,13 +2399,19 @@ class D : B
 {
     override int X => 7;
 }";
-            await TestWithPullMemberDialogAsync(testText, expected, selection: new[] { ("X", true) }, index: 1);
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                selection: new[] { ("X", true) },
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task PullEventUpToAbstractClassViaDialogWithMakeAbstractOption()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2279,7 +2424,8 @@ namespace PushUpTest
         private event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2293,13 +2439,19 @@ namespace PushUpTest
         private event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            await TestWithPullMemberDialogAsync(testText, expected, selection: new[] { ("Event3", true) }, index: 1);
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                selection: new[] { ("Event3", true) },
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
         public async Task TestPullEventWithAddAndRemoveMethodToClassViaDialogWithMakeAbstractOption()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2323,7 +2475,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -2348,7 +2501,12 @@ namespace PushUpTest
     }
 }";
 
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("Event1", true) }, index: 1);
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("Event1", true) },
+                index: 1
+            );
         }
 
         #endregion Dialog
@@ -2358,7 +2516,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestArgsIsPartOfHeader()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2378,7 +2537,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2406,7 +2566,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringCaretBeforeAttributes()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2426,7 +2587,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2454,7 +2616,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringCaretBetweenAttributes()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2481,7 +2644,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionWithAttributes1()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2499,7 +2663,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2525,7 +2690,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionWithAttributes2()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2543,7 +2709,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2569,7 +2736,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionWithAttributes3()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2588,7 +2756,8 @@ namespace PushUpTest
         |]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2614,7 +2783,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringInAttributeList()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2639,7 +2809,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringSelectionAttributeList()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2666,7 +2837,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringCaretInAttributeList()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2693,7 +2865,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringCaretBetweenAttributeLists()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2720,7 +2893,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringSelectionAttributeList2()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2747,7 +2921,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringSelectAttributeList()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2772,7 +2947,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringCaretLocAfterAttributes1()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2790,7 +2966,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2816,7 +2993,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringCaretLocAfterAttributes2()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2838,7 +3016,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -2868,7 +3047,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringCaretLoc1()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -2882,7 +3062,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -2904,7 +3085,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelection()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -2918,7 +3100,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -2940,7 +3123,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionComments()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -2955,7 +3139,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -2978,7 +3163,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionComments2()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -2995,7 +3181,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -3020,7 +3207,8 @@ namespace PushUpTest
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionComments3()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -3037,7 +3225,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -3057,7 +3246,6 @@ namespace PushUpTest
 
             await TestInRegularAndScriptAsync(testText, expected);
         }
-
         #endregion
     }
 }

@@ -26,7 +26,11 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             new AvailableTransport
             {
                 Transport = nameof(HttpTransportType.WebSockets),
-                TransferFormats = new List<string> { nameof(TransferFormat.Text), nameof(TransferFormat.Binary) }
+                TransferFormats = new List<string>
+                {
+                    nameof(TransferFormat.Text),
+                    nameof(TransferFormat.Binary)
+                }
             };
 
         private static readonly AvailableTransport _serverSentEventsAvailableTransport =
@@ -40,7 +44,11 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             new AvailableTransport
             {
                 Transport = nameof(HttpTransportType.LongPolling),
-                TransferFormats = new List<string> { nameof(TransferFormat.Text), nameof(TransferFormat.Binary) }
+                TransferFormats = new List<string>
+                {
+                    nameof(TransferFormat.Text),
+                    nameof(TransferFormat.Binary)
+                }
             };
 
         private readonly HttpConnectionManager _manager;
@@ -55,8 +63,11 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             _logger = _loggerFactory.CreateLogger<HttpConnectionDispatcher>();
         }
 
-        public async Task ExecuteAsync(HttpContext context, HttpConnectionDispatcherOptions options, ConnectionDelegate connectionDelegate)
-        {
+        public async Task ExecuteAsync(
+            HttpContext context,
+            HttpConnectionDispatcherOptions options,
+            ConnectionDelegate connectionDelegate
+        ) {
             // Create the log scope and attempt to pass the Connection ID to it so as many logs as possible contain
             // the Connection ID metadata. If this is the negotiate request then the Connection ID for the scope will
             // be set a little later.
@@ -94,8 +105,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             }
         }
 
-        public async Task ExecuteNegotiateAsync(HttpContext context, HttpConnectionDispatcherOptions options)
-        {
+        public async Task ExecuteNegotiateAsync(
+            HttpContext context,
+            HttpConnectionDispatcherOptions options
+        ) {
             // Create the log scope and the scope connectionId param will be set when the connection is created.
             var logScope = new ConnectionLogScope(connectionId: string.Empty);
             using (_logger.BeginScope(logScope))
@@ -113,16 +126,23 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             }
         }
 
-        private async Task ExecuteAsync(HttpContext context, ConnectionDelegate connectionDelegate, HttpConnectionDispatcherOptions options, ConnectionLogScope logScope)
-        {
+        private async Task ExecuteAsync(
+            HttpContext context,
+            ConnectionDelegate connectionDelegate,
+            HttpConnectionDispatcherOptions options,
+            ConnectionLogScope logScope
+        ) {
             var supportedTransports = options.Transports;
 
             // Server sent events transport
             // GET /{path}
             // Accept: text/event-stream
             var headers = context.Request.GetTypedHeaders();
-            if (headers.Accept?.Contains(new Net.Http.Headers.MediaTypeHeaderValue("text/event-stream")) == true)
-            {
+            if (
+                headers.Accept?.Contains(
+                    new Net.Http.Headers.MediaTypeHeaderValue("text/event-stream")
+                ) == true
+            ) {
                 // Connection must already exist
                 var connection = await GetConnectionAsync(context);
                 if (connection == null)
@@ -131,8 +151,16 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                     return;
                 }
 
-                if (!await EnsureConnectionStateAsync(connection, context, HttpTransportType.ServerSentEvents, supportedTransports, logScope, options))
-                {
+                if (
+                    !await EnsureConnectionStateAsync(
+                        connection,
+                        context,
+                        HttpTransportType.ServerSentEvents,
+                        supportedTransports,
+                        logScope,
+                        options
+                    )
+                ) {
                     // Bad connection state. It's already set the response status code.
                     return;
                 }
@@ -143,7 +171,12 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 connection.SupportedFormats = TransferFormat.Text;
 
                 // We only need to provide the Input channel since writing to the application is handled through /send.
-                var sse = new ServerSentEventsServerTransport(connection.Application.Input, connection.ConnectionId, connection, _loggerFactory);
+                var sse = new ServerSentEventsServerTransport(
+                    connection.Application.Input,
+                    connection.ConnectionId,
+                    connection,
+                    _loggerFactory
+                );
 
                 await DoPersistentConnection(connectionDelegate, sse, context, connection);
             }
@@ -157,8 +190,16 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                     return;
                 }
 
-                if (!await EnsureConnectionStateAsync(connection, context, HttpTransportType.WebSockets, supportedTransports, logScope, options))
-                {
+                if (
+                    !await EnsureConnectionStateAsync(
+                        connection,
+                        context,
+                        HttpTransportType.WebSockets,
+                        supportedTransports,
+                        logScope,
+                        options
+                    )
+                ) {
                     // Bad connection state. It's already set the response status code.
                     return;
                 }
@@ -168,7 +209,12 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 // Allow the reads to be canceled
                 connection.Cancellation = new CancellationTokenSource();
 
-                var ws = new WebSocketsServerTransport(options.WebSockets, connection.Application, connection, _loggerFactory);
+                var ws = new WebSocketsServerTransport(
+                    options.WebSockets,
+                    connection.Application,
+                    connection,
+                    _loggerFactory
+                );
 
                 await DoPersistentConnection(connectionDelegate, ws, context, connection);
             }
@@ -184,8 +230,16 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                     return;
                 }
 
-                if (!await EnsureConnectionStateAsync(connection, context, HttpTransportType.LongPolling, supportedTransports, logScope, options))
-                {
+                if (
+                    !await EnsureConnectionStateAsync(
+                        connection,
+                        context,
+                        HttpTransportType.LongPolling,
+                        supportedTransports,
+                        logScope,
+                        options
+                    )
+                ) {
                     // Bad connection state. It's already set the response status code.
                     return;
                 }
@@ -197,16 +251,27 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 }
 
                 // Create a new Tcs every poll to keep track of the poll finishing, so we can properly wait on previous polls
-                var currentRequestTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var currentRequestTcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
-                if (!connection.TryActivateLongPollingConnection(
-                        connectionDelegate, context, options.LongPolling.PollTimeout,
-                        currentRequestTcs.Task, _loggerFactory, _logger))
-                {
+                if (
+                    !connection.TryActivateLongPollingConnection(
+                        connectionDelegate,
+                        context,
+                        options.LongPolling.PollTimeout,
+                        currentRequestTcs.Task,
+                        _loggerFactory,
+                        _logger
+                    )
+                ) {
                     return;
                 }
 
-                var resultTask = await Task.WhenAny(connection.ApplicationTask!, connection.TransportTask!);
+                var resultTask = await Task.WhenAny(
+                    connection.ApplicationTask!,
+                    connection.TransportTask!
+                );
 
                 try
                 {
@@ -229,7 +294,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
 
                             // We should be able to safely dispose because there's no more data being written
                             // We don't need to wait for close here since we've already waited for both sides
-                            await _manager.DisposeAndRemoveAsync(connection, closeGracefully: false);
+                            await _manager.DisposeAndRemoveAsync(
+                                connection,
+                                closeGracefully: false
+                            );
                         }
                         else
                         {
@@ -251,6 +319,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                         connection.MarkInactive();
                     }
                 }
+
                 finally
                 {
                     // Artificial task queue
@@ -260,13 +329,20 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             }
         }
 
-        private async Task DoPersistentConnection(ConnectionDelegate connectionDelegate,
-                                                  IHttpTransport transport,
-                                                  HttpContext context,
-                                                  HttpConnectionContext connection)
-        {
-            if (connection.TryActivatePersistentConnection(connectionDelegate, transport, context, _logger))
-            {
+        private async Task DoPersistentConnection(
+            ConnectionDelegate connectionDelegate,
+            IHttpTransport transport,
+            HttpContext context,
+            HttpConnectionContext connection
+        ) {
+            if (
+                connection.TryActivatePersistentConnection(
+                    connectionDelegate,
+                    transport,
+                    context,
+                    _logger
+                )
+            ) {
                 // Wait for any of them to end
                 await Task.WhenAny(connection.ApplicationTask!, connection.TransportTask!);
 
@@ -274,8 +350,11 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             }
         }
 
-        private async Task ProcessNegotiate(HttpContext context, HttpConnectionDispatcherOptions options, ConnectionLogScope logScope)
-        {
+        private async Task ProcessNegotiate(
+            HttpContext context,
+            HttpConnectionDispatcherOptions options,
+            ConnectionLogScope logScope
+        ) {
             context.Response.ContentType = "application/json";
             string? error = null;
             int clientProtocolVersion = 0;
@@ -285,12 +364,14 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 var queryStringVersionValue = queryStringVersion.ToString();
                 if (!int.TryParse(queryStringVersionValue, out clientProtocolVersion))
                 {
-                    error = $"The client requested an invalid protocol version '{queryStringVersionValue}'";
+                    error =
+                        $"The client requested an invalid protocol version '{queryStringVersionValue}'";
                     Log.InvalidNegotiateProtocolVersion(_logger, queryStringVersionValue);
                 }
                 else if (clientProtocolVersion < options.MinimumProtocolVersion)
                 {
-                    error = $"The client requested version '{clientProtocolVersion}', but the server does not support this version.";
+                    error =
+                        $"The client requested version '{clientProtocolVersion}', but the server does not support this version.";
                     Log.NegotiateProtocolVersionMismatch(_logger, clientProtocolVersion);
                 }
                 else if (clientProtocolVersion > _protocolVersion)
@@ -301,7 +382,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             else if (options.MinimumProtocolVersion > 0)
             {
                 // NegotiateVersion wasn't parsed meaning the client requests version 0.
-                error = $"The client requested version '0', but the server does not support this version.";
+                error =
+                    $"The client requested version '0', but the server does not support this version.";
                 Log.NegotiateProtocolVersionMismatch(_logger, 0);
             }
 
@@ -322,7 +404,15 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             try
             {
                 // Get the bytes for the connection id
-                WriteNegotiatePayload(writer, connection?.ConnectionId, connection?.ConnectionToken, context, options, clientProtocolVersion, error);
+                WriteNegotiatePayload(
+                    writer,
+                    connection?.ConnectionId,
+                    connection?.ConnectionToken,
+                    context,
+                    options,
+                    clientProtocolVersion,
+                    error
+                );
 
                 Log.NegotiationRequest(_logger);
 
@@ -330,15 +420,22 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 context.Response.ContentLength = writer.Length;
                 await writer.CopyToAsync(context.Response.Body);
             }
+
             finally
             {
                 writer.Reset();
             }
         }
 
-        private void WriteNegotiatePayload(IBufferWriter<byte> writer, string? connectionId, string? connectionToken, HttpContext context, HttpConnectionDispatcherOptions options,
-            int clientProtocolVersion, string? error)
-        {
+        private void WriteNegotiatePayload(
+            IBufferWriter<byte> writer,
+            string? connectionId,
+            string? connectionToken,
+            HttpContext context,
+            HttpConnectionDispatcherOptions options,
+            int clientProtocolVersion,
+            string? error
+        ) {
             var response = new NegotiationResponse();
 
             if (!string.IsNullOrEmpty(error))
@@ -353,8 +450,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             response.ConnectionToken = connectionToken;
             response.AvailableTransports = new List<AvailableTransport>();
 
-            if ((options.Transports & HttpTransportType.WebSockets) != 0 && ServerHasWebSockets(context.Features))
-            {
+            if (
+                (options.Transports & HttpTransportType.WebSockets) != 0
+                && ServerHasWebSockets(context.Features)
+            ) {
                 response.AvailableTransports.Add(_webSocketAvailableTransport);
             }
 
@@ -376,7 +475,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             return features.Get<IHttpWebSocketFeature>() != null;
         }
 
-        private static string GetConnectionToken(HttpContext context) => context.Request.Query["id"];
+        private static string GetConnectionToken(HttpContext context) =>
+            context.Request.Query["id"];
 
         private async Task ProcessSend(HttpContext context, HttpConnectionDispatcherOptions options)
         {
@@ -393,7 +493,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             {
                 Log.PostNotAllowedForWebSockets(_logger);
                 context.Response.StatusCode = StatusCodes.Status405MethodNotAllowed;
-                await context.Response.WriteAsync("POST requests are not allowed for WebSocket connections.");
+                await context.Response.WriteAsync(
+                    "POST requests are not allowed for WebSocket connections."
+                );
                 return;
             }
 
@@ -417,14 +519,21 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 {
                     try
                     {
-                        await context.Request.Body.CopyToAsync(connection.ApplicationStream, bufferSize);
+                        await context.Request.Body.CopyToAsync(
+                            connection.ApplicationStream,
+                            bufferSize
+                        );
                     }
                     catch (InvalidOperationException ex)
                     {
                         // PipeWriter will throw an error if it is written to while dispose is in progress and the writer has been completed
                         // Dispose isn't taking WriteLock because it could be held because of backpressure, and calling CancelPendingFlush
                         // then taking the lock introduces a race condition that could lead to a deadlock
-                        Log.ConnectionDisposedWhileWriteInProgress(_logger, connection.ConnectionId, ex);
+                        Log.ConnectionDisposedWhileWriteInProgress(
+                            _logger,
+                            connection.ConnectionId,
+                            ex
+                        );
 
                         context.Response.StatusCode = StatusCodes.Status404NotFound;
                         context.Response.ContentType = "text/plain";
@@ -459,12 +568,14 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
 
                     Log.ReceivedBytes(_logger, connection.ApplicationStream.Length);
                 }
+
                 finally
                 {
                     // Clear the amount of read bytes so logging is accurate
                     connection.ApplicationStream.Reset();
                 }
             }
+
             finally
             {
                 connection.WriteLock.Release();
@@ -486,27 +597,40 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 Log.ReceivedDeleteRequestForUnsupportedTransport(_logger, connection.TransportType);
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync("Cannot terminate this connection using the DELETE endpoint.");
+                await context.Response.WriteAsync(
+                    "Cannot terminate this connection using the DELETE endpoint."
+                );
                 return;
             }
 
             Log.TerminatingConnection(_logger);
 
             // Dispose the connection, but don't wait for it. We assign it here so we can wait in tests
-            connection.DisposeAndRemoveTask = _manager.DisposeAndRemoveAsync(connection, closeGracefully: false);
+            connection.DisposeAndRemoveTask = _manager.DisposeAndRemoveAsync(
+                connection,
+                closeGracefully: false
+            );
 
             context.Response.StatusCode = StatusCodes.Status202Accepted;
             context.Response.ContentType = "text/plain";
         }
 
-        private async Task<bool> EnsureConnectionStateAsync(HttpConnectionContext connection, HttpContext context, HttpTransportType transportType, HttpTransportType supportedTransports, ConnectionLogScope logScope, HttpConnectionDispatcherOptions options)
-        {
+        private async Task<bool> EnsureConnectionStateAsync(
+            HttpConnectionContext connection,
+            HttpContext context,
+            HttpTransportType transportType,
+            HttpTransportType supportedTransports,
+            ConnectionLogScope logScope,
+            HttpConnectionDispatcherOptions options
+        ) {
             if ((supportedTransports & transportType) == 0)
             {
                 context.Response.ContentType = "text/plain";
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
                 Log.TransportNotSupported(_logger, transportType);
-                await context.Response.WriteAsync($"{transportType} transport not supported by this end point type");
+                await context.Response.WriteAsync(
+                    $"{transportType} transport not supported by this end point type"
+                );
                 return false;
             }
 
@@ -582,7 +706,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 {
                     // We want to explicitly create a WindowsPrincipal instead of a ClaimsPrincipal
                     // so methods that WindowsPrincipal overrides like 'IsInRole', work as expected.
-                    newContext.User = new WindowsPrincipal((WindowsIdentity)(windowsIdentity.Clone()));
+                    newContext.User = new WindowsPrincipal(
+                        (WindowsIdentity)(windowsIdentity.Clone())
+                    );
                     skipFirstIdentity = true;
                 }
                 else
@@ -621,7 +747,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             requestFeature.PathBase = existingRequestFeature.PathBase;
             requestFeature.QueryString = existingRequestFeature.QueryString;
             requestFeature.RawTarget = existingRequestFeature.RawTarget;
-            var requestHeaders = new Dictionary<string, StringValues>(existingRequestFeature.Headers.Count, StringComparer.OrdinalIgnoreCase);
+            var requestHeaders = new Dictionary<string, StringValues>(
+                existingRequestFeature.Headers.Count,
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (var header in existingRequestFeature.Headers)
             {
                 requestHeaders[header.Key] = header.Value;
@@ -695,8 +824,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
         }
 
         // This is only used for WebSockets connections, which can connect directly without negotiating
-        private async Task<HttpConnectionContext?> GetOrCreateConnectionAsync(HttpContext context, HttpConnectionDispatcherOptions options)
-        {
+        private async Task<HttpConnectionContext?> GetOrCreateConnectionAsync(
+            HttpContext context,
+            HttpConnectionDispatcherOptions options
+        ) {
             var connectionToken = GetConnectionToken(context);
             HttpConnectionContext? connection;
 
@@ -716,12 +847,18 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             return connection;
         }
 
-        private HttpConnectionContext CreateConnection(HttpConnectionDispatcherOptions options, int clientProtocolVersion = 0)
-        {
+        private HttpConnectionContext CreateConnection(
+            HttpConnectionDispatcherOptions options,
+            int clientProtocolVersion = 0
+        ) {
             var transportPipeOptions = options.TransportPipeOptions;
             var appPipeOptions = options.AppPipeOptions;
 
-            return _manager.CreateConnection(transportPipeOptions, appPipeOptions, clientProtocolVersion);
+            return _manager.CreateConnection(
+                transportPipeOptions,
+                appPipeOptions,
+                clientProtocolVersion
+            );
         }
 
         private class EmptyServiceProvider : IServiceProvider

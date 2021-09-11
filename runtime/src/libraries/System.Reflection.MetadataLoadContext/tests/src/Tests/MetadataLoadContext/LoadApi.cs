@@ -11,8 +11,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void LoadFromByteArraySimpleAssembly()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Assert.NotNull(a);
 
@@ -31,8 +34,11 @@ namespace System.Reflection.Tests
         {
             using (TempFile tf = TempFile.Create(TestData.s_SimpleAssemblyImage))
             {
-                using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-                {
+                using (
+                    MetadataLoadContext lc = new MetadataLoadContext(
+                        new EmptyCoreMetadataAssemblyResolver()
+                    )
+                ) {
                     Assembly a = lc.LoadFromAssemblyPath(tf.Path);
                     Assert.NotNull(a);
 
@@ -50,8 +56,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void LoadFromStreamMemorySimpleAssembly()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Stream peStream = new MemoryStream(TestData.s_SimpleAssemblyImage);
                 Assembly a = lc.LoadFromStream(peStream);
                 Assert.NotNull(a);
@@ -71,8 +80,11 @@ namespace System.Reflection.Tests
         {
             using (TempFile tf = TempFile.Create(TestData.s_SimpleAssemblyImage))
             {
-                using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-                {
+                using (
+                    MetadataLoadContext lc = new MetadataLoadContext(
+                        new EmptyCoreMetadataAssemblyResolver()
+                    )
+                ) {
                     Stream fs = File.OpenRead(tf.Path);
                     Assembly a = lc.LoadFromStream(fs);
                     Assert.NotNull(a);
@@ -91,8 +103,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void LoadFromNonZeroPositionedStreamMemorySimpleAssembly()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Stream peStream = new MemoryStream(TestData.s_SimpleAssemblyImage);
                 peStream.Position = 1;
 
@@ -123,7 +138,9 @@ namespace System.Reflection.Tests
                 Assembly a1 = lc.LoadFromAssemblyName(TestData.s_SimpleAssemblyFullName);
                 Assert.Equal(a, a1);
 
-                Assembly a2 = lc.LoadFromAssemblyName(new AssemblyName(TestData.s_SimpleAssemblyFullName));
+                Assembly a2 = lc.LoadFromAssemblyName(
+                    new AssemblyName(TestData.s_SimpleAssemblyFullName)
+                );
                 Assert.Equal(a, a2);
             }
         }
@@ -142,7 +159,9 @@ namespace System.Reflection.Tests
                 Assembly a1 = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Assert.Equal(a, a1);
 
-                Assembly a2 = lc.LoadFromAssemblyName(new AssemblyName(TestData.s_SimpleAssemblyFullName));
+                Assembly a2 = lc.LoadFromAssemblyName(
+                    new AssemblyName(TestData.s_SimpleAssemblyFullName)
+                );
                 Assert.Equal(a, a2);
 
                 Assembly a3 = lc.LoadFromAssemblyPath(tf1.Path);
@@ -156,34 +175,48 @@ namespace System.Reflection.Tests
         [Fact]
         public static void LoadFromDifferentLocationsMvidMismatch()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 Assert.Equal(TestData.s_SimpleAssemblyFullName, a.GetName().FullName);
                 Guid mvid = a.ManifestModule.ModuleVersionId;
                 Assert.Equal(TestData.s_SimpleAssemblyMvid, mvid);
             }
 
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyRecompiledImage);
                 Assert.Equal(TestData.s_SimpleAssemblyFullName, a.GetName().FullName);
                 Guid mvid = a.ManifestModule.ModuleVersionId;
                 Assert.Equal(TestData.s_SimpleAssemblyRecompiledMvid, mvid);
             }
 
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
-                Assert.Throws<FileLoadException>(() => lc.LoadFromByteArray(TestData.s_SimpleAssemblyRecompiledImage));
+                Assert.Throws<FileLoadException>(
+                    () => lc.LoadFromByteArray(TestData.s_SimpleAssemblyRecompiledImage)
+                );
             }
         }
 
         [Fact]
         public static void LoadFromAssemblyNameNullString()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assert.Throws<ArgumentNullException>(() => lc.LoadFromAssemblyName((string)null));
             }
         }
@@ -191,17 +224,25 @@ namespace System.Reflection.Tests
         [Fact]
         public static void LoadFromAssemblyNameNullAssemblyName()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
-                Assert.Throws<ArgumentNullException>(() => lc.LoadFromAssemblyName((AssemblyName)null));
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
+                Assert.Throws<ArgumentNullException>(
+                    () => lc.LoadFromAssemblyName((AssemblyName)null)
+                );
             }
         }
 
         [Fact]
         public static void LoadFromAssemblyPathNull()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assert.Throws<ArgumentNullException>(() => lc.LoadFromAssemblyPath(null));
             }
         }
@@ -209,8 +250,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void LoadFromByteArrayNull()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assert.Throws<ArgumentNullException>(() => lc.LoadFromByteArray(null));
             }
         }
@@ -218,8 +262,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void LoadFromStreamNull()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assert.Throws<ArgumentNullException>(() => lc.LoadFromStream(null));
             }
         }
@@ -227,8 +274,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void BadImageFormat()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 for (int i = 0; i < 100; i++)
                 {
                     Stream s = new MemoryStream(new byte[i]);
@@ -240,8 +290,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void LoadFromAssemblyNameNeverLoadedAssembly()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
-            {
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            ) {
                 Assert.Throws<FileNotFoundException>(() => lc.LoadFromAssemblyName("NeverSawThis"));
             }
         }

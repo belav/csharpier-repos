@@ -38,7 +38,8 @@ namespace System.Diagnostics
         /// <returns>The array of modules.</returns>
         internal static ProcessModuleCollection GetModules(int processId)
         {
-            ProcessModuleCollection modules = Interop.procfs.ParseMapsModules(processId) ?? new(capacity: 0);
+            ProcessModuleCollection modules =
+                Interop.procfs.ParseMapsModules(processId) ?? new(capacity: 0);
 
             // Move the main executable module to be the first in the list if it's not already
             string? exePath = Process.GetExePath(processId);
@@ -76,14 +77,20 @@ namespace System.Diagnostics
         /// <summary>
         /// Creates a ProcessInfo from the data parsed from a /proc/pid/stat file and the associated tasks directory.
         /// </summary>
-        internal static ProcessInfo CreateProcessInfo(ref Interop.procfs.ParsedStat procFsStat, ref Interop.procfs.ParsedStatus procFsStatus, string? processName = null)
-        {
+        internal static ProcessInfo CreateProcessInfo(
+            ref Interop.procfs.ParsedStat procFsStat,
+            ref Interop.procfs.ParsedStatus procFsStatus,
+            string? processName = null
+        ) {
             int pid = procFsStat.pid;
 
             var pi = new ProcessInfo()
             {
                 ProcessId = pid,
-                ProcessName = processName ?? Process.GetUntruncatedProcessName(ref procFsStat) ?? string.Empty,
+                ProcessName =
+                    processName
+                    ?? Process.GetUntruncatedProcessName(ref procFsStat)
+                    ?? string.Empty,
                 BasePriority = (int)procFsStat.nice,
                 SessionId = procFsStat.session,
                 PoolPagedBytes = (long)procFsStatus.VmSwap,
@@ -109,19 +116,26 @@ namespace System.Diagnostics
                     string dirName = Path.GetFileName(taskDir);
                     int tid;
                     Interop.procfs.ParsedStat stat;
-                    if (int.TryParse(dirName, NumberStyles.Integer, CultureInfo.InvariantCulture, out tid) &&
-                        Interop.procfs.TryReadStatFile(pid, tid, out stat))
-                    {
-                        pi._threadInfoList.Add(new ThreadInfo()
-                        {
-                            _processId = pid,
-                            _threadId = (ulong)tid,
-                            _basePriority = pi.BasePriority,
-                            _currentPriority = (int)stat.nice,
-                            _startAddress = IntPtr.Zero,
-                            _threadState = ProcFsStateToThreadState(stat.state),
-                            _threadWaitReason = ThreadWaitReason.Unknown
-                        });
+                    if (
+                        int.TryParse(
+                            dirName,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out tid
+                        ) && Interop.procfs.TryReadStatFile(pid, tid, out stat)
+                    ) {
+                        pi._threadInfoList.Add(
+                            new ThreadInfo()
+                            {
+                                _processId = pid,
+                                _threadId = (ulong)tid,
+                                _basePriority = pi.BasePriority,
+                                _currentPriority = (int)stat.nice,
+                                _startAddress = IntPtr.Zero,
+                                _threadState = ProcFsStateToThreadState(stat.state),
+                                _threadWaitReason = ThreadWaitReason.Unknown
+                            }
+                        );
                     }
                 }
             }
@@ -148,8 +162,14 @@ namespace System.Diagnostics
             {
                 string dirName = Path.GetFileName(procDir);
                 int pid;
-                if (int.TryParse(dirName, NumberStyles.Integer, CultureInfo.InvariantCulture, out pid))
-                {
+                if (
+                    int.TryParse(
+                        dirName,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out pid
+                    )
+                ) {
                     Debug.Assert(pid >= 0);
                     yield return pid;
                 }
@@ -192,6 +212,5 @@ namespace System.Diagnostics
                     return ThreadState.Unknown;
             }
         }
-
     }
 }

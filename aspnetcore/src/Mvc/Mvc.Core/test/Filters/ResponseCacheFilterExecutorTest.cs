@@ -19,11 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(
-                new CacheProfile
-                {
-                    NoStore = true,
-                    Duration = null
-                });
+                new CacheProfile { NoStore = true, Duration = null }
+            );
             var context = GetActionExecutingContext();
 
             // Act
@@ -37,11 +34,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public void Execute_DoesNotThrowIfDurationIsNotSet_WhenNoStoreIsFalse()
         {
             // Arrange, Act
-            var executor = new ResponseCacheFilterExecutor(
-                new CacheProfile
-                {
-                    Duration = null
-                });
+            var executor = new ResponseCacheFilterExecutor(new CacheProfile { Duration = null });
 
             // Assert
             Assert.NotNull(executor);
@@ -51,18 +44,16 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public void Execute_ThrowsIfDurationIsNotSet_WhenNoStoreIsFalse()
         {
             // Arrange
-            var executor = new ResponseCacheFilterExecutor(
-                new CacheProfile()
-                {
-                    Duration = null
-                });
+            var executor = new ResponseCacheFilterExecutor(new CacheProfile() { Duration = null });
 
             var context = GetActionExecutingContext();
 
             // Act & Assert
             var ex = Assert.Throws<InvalidOperationException>(() => executor.Execute(context));
-            Assert.Equal("If the 'NoStore' property is not set to true, 'Duration' property must be specified.",
-                ex.Message);
+            Assert.Equal(
+                "If the 'NoStore' property is not set to true, 'Duration' property must be specified.",
+                ex.Message
+            );
         }
 
         public static TheoryData<CacheProfile, string> CacheControlData
@@ -226,8 +217,10 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
         [Theory]
         [MemberData(nameof(NoStoreData))]
-        public void Execute_DoesNotSetLocationOrDuration_IfNoStoreIsSet(CacheProfile cacheProfile, string output)
-        {
+        public void Execute_DoesNotSetLocationOrDuration_IfNoStoreIsSet(
+            CacheProfile cacheProfile,
+            string output
+        ) {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(cacheProfile);
             var context = GetActionExecutingContext();
@@ -306,8 +299,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
         [Theory]
         [MemberData(nameof(VaryByHeaderData))]
-        public void ResponseCacheCanSetVaryByHeader(CacheProfile cacheProfile, string varyOutput, string cacheControlOutput)
-        {
+        public void ResponseCacheCanSetVaryByHeader(
+            CacheProfile cacheProfile,
+            string varyOutput,
+            string cacheControlOutput
+        ) {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(cacheProfile);
             var context = GetActionExecutingContext();
@@ -371,7 +367,6 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                         "private,max-age=10"
                     },
                     {
-
                         new CacheProfile
                         {
                             Duration = 31536000,
@@ -388,8 +383,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
         [Theory]
         [MemberData(nameof(VaryByQueryKeyData))]
-        public void ResponseCacheCanSetVaryByQueryKeys(CacheProfile cacheProfile, string[] varyOutput, string cacheControlOutput)
-        {
+        public void ResponseCacheCanSetVaryByQueryKeys(
+            CacheProfile cacheProfile,
+            string[] varyOutput,
+            string cacheControlOutput
+        ) {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(cacheProfile);
             var context = GetActionExecutingContext();
@@ -399,8 +397,14 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             executor.Execute(context);
 
             // Assert
-            Assert.Equal(varyOutput, context.HttpContext.Features.Get<IResponseCachingFeature>().VaryByQueryKeys);
-            Assert.Equal(cacheControlOutput, context.HttpContext.Response.Headers[HeaderNames.CacheControl]);
+            Assert.Equal(
+                varyOutput,
+                context.HttpContext.Features.Get<IResponseCachingFeature>().VaryByQueryKeys
+            );
+            Assert.Equal(
+                cacheControlOutput,
+                context.HttpContext.Response.Headers[HeaderNames.CacheControl]
+            );
         }
 
         [Fact]
@@ -415,12 +419,18 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     NoStore = true,
                     VaryByHeader = null,
                     VaryByQueryKeys = new[] { "Test" }
-                });
+                }
+            );
             var context = GetActionExecutingContext();
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => executor.Execute(context));
-            Assert.Equal("'VaryByQueryKeys' requires the response cache middleware.", exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => executor.Execute(context)
+            );
+            Assert.Equal(
+                "'VaryByQueryKeys' requires the response cache middleware.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -434,14 +444,18 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     Location = ResponseCacheLocation.None,
                     NoStore = true,
                     VaryByHeader = null
-                });
+                }
+            );
             var context = GetActionExecutingContext();
 
             // Act
             executor.Execute(context);
 
             // Assert
-            Assert.Equal("no-store,no-cache", context.HttpContext.Response.Headers["Cache-control"]);
+            Assert.Equal(
+                "no-store,no-cache",
+                context.HttpContext.Response.Headers["Cache-control"]
+            );
             Assert.Equal("no-cache", context.HttpContext.Response.Headers["Pragma"]);
         }
 
@@ -449,11 +463,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public void FilterDurationProperty_OverridesCachePolicySetting()
         {
             // Arrange
-            var executor = new ResponseCacheFilterExecutor(
-                new CacheProfile
-                {
-                    Duration = 10
-                });
+            var executor = new ResponseCacheFilterExecutor(new CacheProfile { Duration = 10 });
             executor.Duration = 20;
             var context = GetActionExecutingContext();
 
@@ -461,7 +471,10 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             executor.Execute(context);
 
             // Assert
-            Assert.Equal("public,max-age=20", context.HttpContext.Response.Headers["Cache-control"]);
+            Assert.Equal(
+                "public,max-age=20",
+                context.HttpContext.Response.Headers["Cache-control"]
+            );
         }
 
         [Fact]
@@ -469,11 +482,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(
-                new CacheProfile
-                {
-                    Duration = 10,
-                    Location = ResponseCacheLocation.None
-                });
+                new CacheProfile { Duration = 10, Location = ResponseCacheLocation.None }
+            );
             executor.Location = ResponseCacheLocation.Client;
             var context = GetActionExecutingContext();
 
@@ -481,18 +491,17 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             executor.Execute(context);
 
             // Assert
-            Assert.Equal("private,max-age=10", context.HttpContext.Response.Headers["Cache-control"]);
+            Assert.Equal(
+                "private,max-age=10",
+                context.HttpContext.Response.Headers["Cache-control"]
+            );
         }
 
         [Fact]
         public void FilterNoStoreProperty_OverridesCachePolicySetting()
         {
             // Arrange
-            var executor = new ResponseCacheFilterExecutor(
-                new CacheProfile
-                {
-                    NoStore = true
-                });
+            var executor = new ResponseCacheFilterExecutor(new CacheProfile { NoStore = true });
             executor.NoStore = false;
             executor.Duration = 10;
             var context = GetActionExecutingContext();
@@ -501,7 +510,10 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             executor.Execute(context);
 
             // Assert
-            Assert.Equal("public,max-age=10", context.HttpContext.Response.Headers["Cache-control"]);
+            Assert.Equal(
+                "public,max-age=10",
+                context.HttpContext.Response.Headers["Cache-control"]
+            );
         }
 
         [Fact]
@@ -509,11 +521,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         {
             // Arrange
             var executor = new ResponseCacheFilterExecutor(
-                new CacheProfile
-                {
-                    NoStore = true,
-                    VaryByHeader = "Accept"
-                });
+                new CacheProfile { NoStore = true, VaryByHeader = "Accept" }
+            );
             executor.VaryByHeader = "Test";
             var context = GetActionExecutingContext();
 
@@ -524,13 +533,19 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             Assert.Equal("Test", context.HttpContext.Response.Headers["Vary"]);
         }
 
-        private ActionExecutingContext GetActionExecutingContext(List<IFilterMetadata> filters = null)
-        {
+        private ActionExecutingContext GetActionExecutingContext(
+            List<IFilterMetadata> filters = null
+        ) {
             return new ActionExecutingContext(
-                new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor()),
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new ActionDescriptor()
+                ),
                 filters ?? new List<IFilterMetadata>(),
                 new Dictionary<string, object>(),
-                new object());
+                new object()
+            );
         }
     }
 }

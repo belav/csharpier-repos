@@ -25,8 +25,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
         {
             get
             {
-                Debug.Assert(!_flow.IsAborted, $"({nameof(AvailabilityAwaitable)} accessed after abort.");
-                Debug.Assert(_flow.Available <= 0, $"({nameof(AvailabilityAwaitable)} accessed with {Available} bytes available.");
+                Debug.Assert(
+                    !_flow.IsAborted,
+                    $"({nameof(AvailabilityAwaitable)} accessed after abort."
+                );
+                Debug.Assert(
+                    _flow.Available <= 0,
+                    $"({nameof(AvailabilityAwaitable)} accessed with {Available} bytes available."
+                );
 
                 return _awaitableProvider.GetAwaitable();
             }
@@ -37,7 +43,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
             // When output flow control is reused the client window size needs to be reset.
             // The client might have changed the window size before the stream is reused.
             _flow = new FlowControl(initialWindowSize);
-            Debug.Assert(_awaitableProvider.ActiveCount == 0, "Queue should have been emptied by the previous stream.");
+            Debug.Assert(
+                _awaitableProvider.ActiveCount == 0,
+                "Queue should have been emptied by the previous stream."
+            );
         }
 
         public void Advance(int bytes)

@@ -20,8 +20,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A comma-separated list of column names. </returns>
         public static string FormatColumns(
             this IEnumerable<IReadOnlyProperty> properties,
-            StoreObjectIdentifier storeObject)
-            => "{" + string.Join(", ", properties.Select(p => "'" + p.GetColumnName(storeObject) + "'")) + "}";
+            StoreObjectIdentifier storeObject
+        ) =>
+            "{"
+            + string.Join(", ", properties.Select(p => "'" + p.GetColumnName(storeObject) + "'"))
+            + "}";
 
         /// <summary>
         ///     Creates a list of column names.
@@ -31,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> A list of column names. </returns>
         public static IReadOnlyList<string>? GetColumnNames(
             this IEnumerable<IReadOnlyProperty> properties,
-            in StoreObjectIdentifier storeObject)
-        {
+            in StoreObjectIdentifier storeObject
+        ) {
             var propertyNames = new List<string>();
             foreach (var property in properties)
             {

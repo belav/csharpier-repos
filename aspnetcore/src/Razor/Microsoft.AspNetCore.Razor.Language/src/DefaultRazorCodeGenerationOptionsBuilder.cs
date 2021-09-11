@@ -9,8 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language
     {
         private bool _designTime;
 
-        public DefaultRazorCodeGenerationOptionsBuilder(RazorConfiguration configuration, string fileKind)
-        {
+        public DefaultRazorCodeGenerationOptionsBuilder(
+            RazorConfiguration configuration,
+            string fileKind
+        ) {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
@@ -52,8 +54,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 SuppressMetadataAttributes,
                 SuppressPrimaryMethodBody,
                 SuppressNullabilityEnforcement,
-                OmitMinimizedComponentAttributeValues)
-            {
+                OmitMinimizedComponentAttributeValues
+            ) {
                 SuppressMetadataSourceChecksumAttributes = SuppressMetadataSourceChecksumAttributes,
             };
         }

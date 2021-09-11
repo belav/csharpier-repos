@@ -41,7 +41,9 @@ namespace Microsoft.AspNetCore.Authentication
             base.Validate(scheme);
             if (string.Equals(scheme, SignInScheme, StringComparison.Ordinal))
             {
-                throw new InvalidOperationException(Resources.Exception_RemoteSignInSchemeCannotBeSelf);
+                throw new InvalidOperationException(
+                    Resources.Exception_RemoteSignInSchemeCannotBeSelf
+                );
             }
         }
 
@@ -53,7 +55,10 @@ namespace Microsoft.AspNetCore.Authentication
             base.Validate();
             if (CallbackPath == null || !CallbackPath.HasValue)
             {
-                throw new ArgumentException(Resources.FormatException_OptionMustBeProvided(nameof(CallbackPath)), nameof(CallbackPath));
+                throw new ArgumentException(
+                    Resources.FormatException_OptionMustBeProvided(nameof(CallbackPath)),
+                    nameof(CallbackPath)
+                );
             }
         }
 
@@ -141,7 +146,8 @@ namespace Microsoft.AspNetCore.Authentication
         public CookieBuilder CorrelationCookie
         {
             get => _correlationCookieBuilder;
-            set => _correlationCookieBuilder = value ?? throw new ArgumentNullException(nameof(value));
+            set =>
+                _correlationCookieBuilder = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         private class CorrelationCookieBuilder : RequestPathBaseCookieBuilder

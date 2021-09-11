@@ -24,10 +24,7 @@ namespace Microsoft.CodeAnalysis
 
         bool Cci.ICustomModifier.IsOptional
         {
-            get
-            {
-                return this.IsOptional;
-            }
+            get { return this.IsOptional; }
         }
 
         Cci.ITypeReference Cci.ICustomModifier.GetModifier(EmitContext context)

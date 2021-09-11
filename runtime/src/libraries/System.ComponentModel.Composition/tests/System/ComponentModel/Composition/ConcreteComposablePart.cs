@@ -12,12 +12,13 @@ namespace System.ComponentModel.Composition
     {
         private readonly List<Export> _exports = new List<Export>();
         private readonly List<ImportDefinition> _imports = new List<ImportDefinition>();
-        private readonly IDictionary<string, IEnumerable<Export>> _setImports = new Dictionary<string, IEnumerable<Export>>();
+        private readonly IDictionary<string, IEnumerable<Export>> _setImports = new Dictionary<
+            string,
+            IEnumerable<Export>
+        >();
         private static IDictionary<string, object> EmptyMetadata = new Dictionary<string, object>();
 
-        public ConcreteComposablePart()
-        {
-        }
+        public ConcreteComposablePart() { }
 
         public override IDictionary<string, object> Metadata
         {
@@ -39,9 +40,18 @@ namespace System.ComponentModel.Composition
             get { return this._imports; }
         }
 
-        public ImportDefinition AddImport(string contractName, ImportCardinality cardinality, bool isRecomposable, bool isPrerequisite)
-        {
-            var import = ImportDefinitionFactory.CreateDefault(contractName, cardinality, isRecomposable, isPrerequisite);
+        public ImportDefinition AddImport(
+            string contractName,
+            ImportCardinality cardinality,
+            bool isRecomposable,
+            bool isPrerequisite
+        ) {
+            var import = ImportDefinitionFactory.CreateDefault(
+                contractName,
+                cardinality,
+                isRecomposable,
+                isPrerequisite
+            );
 
             this.AddImport(import);
             return import;
@@ -71,7 +81,8 @@ namespace System.ComponentModel.Composition
 
         public override void SetImport(ImportDefinition definition, IEnumerable<Export> exports)
         {
-            ContractBasedImportDefinition contractBasedDefinition = (ContractBasedImportDefinition)definition;
+            ContractBasedImportDefinition contractBasedDefinition =
+                (ContractBasedImportDefinition)definition;
             this._setImports[contractBasedDefinition.ContractName] = exports;
 
             foreach (Export export in exports)
@@ -82,8 +93,9 @@ namespace System.ComponentModel.Composition
 
         void IDisposable.Dispose()
         {
-            foreach (var disposable in _exports.Select(export => export.Value).OfType<IDisposable>())
-            {
+            foreach (
+                var disposable in _exports.Select(export => export.Value).OfType<IDisposable>()
+            ) {
                 disposable.Dispose();
             }
         }

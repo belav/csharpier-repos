@@ -17,16 +17,22 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="entityType"> The entity type. </param>
         /// <returns> <see langword="true" /> if the entity type is mapped to a memory-optimized table. </returns>
-        public static bool IsMemoryOptimized(this IReadOnlyEntityType entityType)
-            => entityType[SqlServerAnnotationNames.MemoryOptimized] as bool? ?? false;
+        public static bool IsMemoryOptimized(this IReadOnlyEntityType entityType) =>
+            entityType[SqlServerAnnotationNames.MemoryOptimized] as bool? ?? false;
 
         /// <summary>
         ///     Sets a value indicating whether the entity type is mapped to a memory-optimized table.
         /// </summary>
         /// <param name="entityType"> The entity type. </param>
         /// <param name="memoryOptimized"> The value to set. </param>
-        public static void SetIsMemoryOptimized(this IMutableEntityType entityType, bool memoryOptimized)
-            => entityType.SetOrRemoveAnnotation(SqlServerAnnotationNames.MemoryOptimized, memoryOptimized);
+        public static void SetIsMemoryOptimized(
+            this IMutableEntityType entityType,
+            bool memoryOptimized
+        ) =>
+            entityType.SetOrRemoveAnnotation(
+                SqlServerAnnotationNames.MemoryOptimized,
+                memoryOptimized
+            );
 
         /// <summary>
         ///     Sets a value indicating whether the entity type is mapped to a memory-optimized table.
@@ -38,9 +44,13 @@ namespace Microsoft.EntityFrameworkCore
         public static bool? SetIsMemoryOptimized(
             this IConventionEntityType entityType,
             bool? memoryOptimized,
-            bool fromDataAnnotation = false)
-        {
-            entityType.SetOrRemoveAnnotation(SqlServerAnnotationNames.MemoryOptimized, memoryOptimized, fromDataAnnotation);
+            bool fromDataAnnotation = false
+        ) {
+            entityType.SetOrRemoveAnnotation(
+                SqlServerAnnotationNames.MemoryOptimized,
+                memoryOptimized,
+                fromDataAnnotation
+            );
 
             return memoryOptimized;
         }
@@ -50,7 +60,11 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="entityType"> The entity type. </param>
         /// <returns> The configuration source for the memory-optimized setting. </returns>
-        public static ConfigurationSource? GetIsMemoryOptimizedConfigurationSource(this IConventionEntityType entityType)
-            => entityType.FindAnnotation(SqlServerAnnotationNames.MemoryOptimized)?.GetConfigurationSource();
+        public static ConfigurationSource? GetIsMemoryOptimizedConfigurationSource(
+            this IConventionEntityType entityType
+        ) =>
+            entityType.FindAnnotation(
+                SqlServerAnnotationNames.MemoryOptimized
+            )?.GetConfigurationSource();
     }
 }

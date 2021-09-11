@@ -13,8 +13,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         [InlineData(typeof(List<int>))]
         [InlineData(typeof(string))]
         [InlineData(typeof(object))]
-        public void Constructor_WithImplementationType_ThrowsIfServiceTypeIsOpenGenericAndImplementationTypeIsClosed(Type type)
-        {
+        public void Constructor_WithImplementationType_ThrowsIfServiceTypeIsOpenGenericAndImplementationTypeIsClosed(
+            Type type
+        ) {
             // Arrange
             var serviceDescriptors = new[]
             {
@@ -22,16 +23,14 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             };
 
             // Act and Assert
-            AssertExtensions.Throws<ArgumentException>("descriptors", () => new CallSiteFactory(serviceDescriptors));
+            AssertExtensions.Throws<ArgumentException>(
+                "descriptors",
+                () => new CallSiteFactory(serviceDescriptors)
+            );
         }
 
         public static TheoryData Constructor_WithInstance_ThrowsIfServiceTypeIsOpenGenericData =>
-            new TheoryData<object>
-            {
-                new List<int>(),
-                "Hello world",
-                new object()
-            };
+            new TheoryData<object> { new List<int>(), "Hello world", new object() };
 
         [Theory]
         [MemberData(nameof(Constructor_WithInstance_ThrowsIfServiceTypeIsOpenGenericData))]
@@ -44,7 +43,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             };
 
             // Act and Assert
-            AssertExtensions.Throws<ArgumentException>("descriptors", () => new CallSiteFactory(serviceDescriptors));
+            AssertExtensions.Throws<ArgumentException>(
+                "descriptors",
+                () => new CallSiteFactory(serviceDescriptors)
+            );
         }
 
         [Fact]
@@ -53,11 +55,18 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             // Arrange
             var serviceDescriptors = new[]
             {
-                new ServiceDescriptor(typeof(Tuple<>), _ => new Tuple<int>(1), ServiceLifetime.Transient)
+                new ServiceDescriptor(
+                    typeof(Tuple<>),
+                    _ => new Tuple<int>(1),
+                    ServiceLifetime.Transient
+                )
             };
 
             // Act and Assert
-            AssertExtensions.Throws<ArgumentException>("descriptors", () => new CallSiteFactory(serviceDescriptors));
+            AssertExtensions.Throws<ArgumentException>(
+                "descriptors",
+                () => new CallSiteFactory(serviceDescriptors)
+            );
         }
     }
 }

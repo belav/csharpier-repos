@@ -30,8 +30,11 @@ namespace System.Web.WebPages.Administration.PackageManager
             return PackageManagerModule.GetSource(name) ?? PackageManagerModule.ActiveSource;
         }
 
-        internal static string GetFilterValue(HttpRequestBase request, string cookieName, string key)
-        {
+        internal static string GetFilterValue(
+            HttpRequestBase request,
+            string cookieName,
+            string key
+        ) {
             var value = request.QueryString[key];
             if (String.IsNullOrEmpty(value))
             {
@@ -44,8 +47,11 @@ namespace System.Web.WebPages.Administration.PackageManager
             return value;
         }
 
-        internal static void PersistFilter(HttpResponseBase response, string cookieName, IDictionary<string, string> filterItems)
-        {
+        internal static void PersistFilter(
+            HttpResponseBase response,
+            string cookieName,
+            IDictionary<string, string> filterItems
+        ) {
             var cookie = response.Cookies[cookieName];
             if (cookie == null)
             {
@@ -60,8 +66,8 @@ namespace System.Web.WebPages.Administration.PackageManager
 
         internal static bool IsValidLicenseUrl(Uri licenseUri)
         {
-            return Uri.UriSchemeHttp.Equals(licenseUri.Scheme, StringComparison.OrdinalIgnoreCase) ||
-                   Uri.UriSchemeHttps.Equals(licenseUri.Scheme, StringComparison.OrdinalIgnoreCase);
+            return Uri.UriSchemeHttp.Equals(licenseUri.Scheme, StringComparison.OrdinalIgnoreCase)
+                || Uri.UriSchemeHttps.Equals(licenseUri.Scheme, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>

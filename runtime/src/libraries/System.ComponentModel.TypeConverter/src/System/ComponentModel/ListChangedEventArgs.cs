@@ -8,11 +8,14 @@ namespace System.ComponentModel
 {
     public class ListChangedEventArgs : EventArgs
     {
-        public ListChangedEventArgs(ListChangedType listChangedType, int newIndex) : this(listChangedType, newIndex, -1)
-        {
-        }
+        public ListChangedEventArgs(ListChangedType listChangedType, int newIndex)
+            : this(listChangedType, newIndex, -1) { }
 
-        public ListChangedEventArgs(ListChangedType listChangedType, int newIndex, PropertyDescriptor propDesc) : this(listChangedType, newIndex)
+        public ListChangedEventArgs(
+            ListChangedType listChangedType,
+            int newIndex,
+            PropertyDescriptor propDesc
+        ) : this(listChangedType, newIndex)
         {
             PropertyDescriptor = propDesc;
             OldIndex = newIndex;

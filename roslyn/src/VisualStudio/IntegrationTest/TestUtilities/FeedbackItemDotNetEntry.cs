@@ -47,7 +47,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             EventTime = eventLogRecord.TimeCreated.Value.ToUniversalTime();
             EventId = eventLogRecord.Id;
-            Data = string.Join(";", eventLogRecord.Properties.Select(pr => pr.Value ?? string.Empty));
+            Data = string.Join(
+                ";",
+                eventLogRecord.Properties.Select(pr => pr.Value ?? string.Empty)
+            );
         }
 
         /// <summary>
@@ -55,10 +58,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         public override bool Equals(object obj)
         {
-            if ((obj is FeedbackItemDotNetEntry dotNetEntry)
+            if (
+                (obj is FeedbackItemDotNetEntry dotNetEntry)
                 && (EventId == dotNetEntry.EventId)
-                && (Data == dotNetEntry.Data))
-            {
+                && (Data == dotNetEntry.Data)
+            ) {
                 return true;
             }
 

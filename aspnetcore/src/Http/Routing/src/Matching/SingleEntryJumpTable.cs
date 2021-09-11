@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int defaultDestination,
             int exitDestination,
             string text,
-            int destination)
-        {
+            int destination
+        ) {
             _defaultDestination = defaultDestination;
             _exitDestination = exitDestination;
             _text = text;
@@ -31,15 +31,17 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 return _exitDestination;
             }
 
-            if (segment.Length == _text.Length &&
-                string.Compare(
+            if (
+                segment.Length == _text.Length
+                && string.Compare(
                     path,
                     segment.Start,
                     _text,
                     0,
                     segment.Length,
-                    StringComparison.OrdinalIgnoreCase) == 0)
-            {
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            ) {
                 return _destination;
             }
 

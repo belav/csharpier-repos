@@ -12,15 +12,21 @@ namespace Microsoft.AspNetCore.Components
     {
         private IDataProtector _protector;
 
-        public ProtectedPrerenderComponentApplicationStore(IDataProtectionProvider dataProtectionProvider) : base()
+        public ProtectedPrerenderComponentApplicationStore(
+            IDataProtectionProvider dataProtectionProvider
+        ) : base()
         {
             CreateProtector(dataProtectionProvider);
         }
 
-        public ProtectedPrerenderComponentApplicationStore(string existingState, IDataProtectionProvider dataProtectionProvider)
-        {
+        public ProtectedPrerenderComponentApplicationStore(
+            string existingState,
+            IDataProtectionProvider dataProtectionProvider
+        ) {
             CreateProtector(dataProtectionProvider);
-            ExistingState = JsonSerializer.Deserialize<Dictionary<string, byte[]>>(_protector.Unprotect(Convert.FromBase64String(existingState)));
+            ExistingState = JsonSerializer.Deserialize<Dictionary<string, byte[]>>(
+                _protector.Unprotect(Convert.FromBase64String(existingState))
+            );
         }
 
         protected override byte[] SerializeState(IReadOnlyDictionary<string, byte[]> state)
@@ -35,6 +41,8 @@ namespace Microsoft.AspNetCore.Components
         }
 
         private void CreateProtector(IDataProtectionProvider dataProtectionProvider) =>
-            _protector = dataProtectionProvider.CreateProtector("Microsoft.AspNetCore.Components.Server.State");
+            _protector = dataProtectionProvider.CreateProtector(
+                "Microsoft.AspNetCore.Components.Server.State"
+            );
     }
 }

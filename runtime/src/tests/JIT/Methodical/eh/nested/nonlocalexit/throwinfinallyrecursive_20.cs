@@ -1283,7 +1283,8 @@ class Class1
 
     static public void foo(int i)
     {
-        if (i > 1) return;
+        if (i > 1)
+            return;
         Console.WriteLine("in foo i = {0}", i);
         int j = 0;
         int k = 0;
@@ -1325,51 +1326,80 @@ class Class1
                                                         Console.WriteLine("------------in foo try");
                                                         try
                                                         {
-                                                            Console.WriteLine("-------------in foo try");
+                                                            Console.WriteLine(
+                                                                "-------------in foo try"
+                                                            );
                                                             try
                                                             {
-                                                                Console.WriteLine("--------------in foo try");
+                                                                Console.WriteLine(
+                                                                    "--------------in foo try"
+                                                                );
                                                                 try
                                                                 {
-                                                                    Console.WriteLine("---------------in foo try");
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo try"
+                                                                    );
                                                                     try
                                                                     {
-                                                                        Console.WriteLine("----------------in foo try");
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo try"
+                                                                        );
                                                                         try
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo try");
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo try"
+                                                                            );
                                                                             try
                                                                             {
-                                                                                Console.WriteLine("------------------in foo try");
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo try"
+                                                                                );
                                                                                 try
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo try");
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo try"
+                                                                                    );
                                                                                     try
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo try");
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo try"
+                                                                                        );
                                                                                         goto L20;
                                                                                     }
                                                                                     catch
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo catch");
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo catch"
+                                                                                        );
                                                                                     }
                                                                                     finally
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo finally");
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo finally"
+                                                                                        );
                                                                                         foo(i + 1);
                                                                                         j = 1 / i;
-                                                                                        k = 1 / (j - 1);
+                                                                                        k =
+                                                                                            1
+                                                                                            / (
+                                                                                                j
+                                                                                                - 1
+                                                                                            );
                                                                                     }
                                                                                     L20:
                                                                                     goto L19;
                                                                                 }
                                                                                 catch
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo catch");
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo catch"
+                                                                                    );
                                                                                 }
                                                                                 finally
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo finally");
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo finally"
+                                                                                    );
                                                                                     foo(i + 1);
                                                                                     j = 1 / i;
                                                                                     k = 1 / (j - 1);
@@ -1379,11 +1409,15 @@ class Class1
                                                                             }
                                                                             catch
                                                                             {
-                                                                                Console.WriteLine("------------------in foo catch");
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo catch"
+                                                                                );
                                                                             }
                                                                             finally
                                                                             {
-                                                                                Console.WriteLine("------------------in foo finally");
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo finally"
+                                                                                );
                                                                                 foo(i + 1);
                                                                                 j = 1 / i;
                                                                                 k = 1 / (j - 1);
@@ -1393,11 +1427,15 @@ class Class1
                                                                         }
                                                                         catch
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo catch");
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo catch"
+                                                                            );
                                                                         }
                                                                         finally
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo finally");
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo finally"
+                                                                            );
                                                                             foo(i + 1);
                                                                             j = 1 / i;
                                                                             k = 1 / (j - 1);
@@ -1407,11 +1445,15 @@ class Class1
                                                                     }
                                                                     catch
                                                                     {
-                                                                        Console.WriteLine("----------------in foo catch");
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo catch"
+                                                                        );
                                                                     }
                                                                     finally
                                                                     {
-                                                                        Console.WriteLine("----------------in foo finally");
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo finally"
+                                                                        );
                                                                         foo(i + 1);
                                                                         j = 1 / i;
                                                                         k = 1 / (j - 1);
@@ -1421,11 +1463,15 @@ class Class1
                                                                 }
                                                                 catch
                                                                 {
-                                                                    Console.WriteLine("---------------in foo catch");
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo catch"
+                                                                    );
                                                                 }
                                                                 finally
                                                                 {
-                                                                    Console.WriteLine("---------------in foo finally");
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo finally"
+                                                                    );
                                                                     foo(i + 1);
                                                                     j = 1 / i;
                                                                     k = 1 / (j - 1);
@@ -1435,11 +1481,15 @@ class Class1
                                                             }
                                                             catch
                                                             {
-                                                                Console.WriteLine("--------------in foo catch");
+                                                                Console.WriteLine(
+                                                                    "--------------in foo catch"
+                                                                );
                                                             }
                                                             finally
                                                             {
-                                                                Console.WriteLine("--------------in foo finally");
+                                                                Console.WriteLine(
+                                                                    "--------------in foo finally"
+                                                                );
                                                                 foo(i + 1);
                                                                 j = 1 / i;
                                                                 k = 1 / (j - 1);
@@ -1449,11 +1499,15 @@ class Class1
                                                         }
                                                         catch
                                                         {
-                                                            Console.WriteLine("-------------in foo catch");
+                                                            Console.WriteLine(
+                                                                "-------------in foo catch"
+                                                            );
                                                         }
                                                         finally
                                                         {
-                                                            Console.WriteLine("-------------in foo finally");
+                                                            Console.WriteLine(
+                                                                "-------------in foo finally"
+                                                            );
                                                             foo(i + 1);
                                                             j = 1 / i;
                                                             k = 1 / (j - 1);
@@ -1463,11 +1517,15 @@ class Class1
                                                     }
                                                     catch
                                                     {
-                                                        Console.WriteLine("------------in foo catch");
+                                                        Console.WriteLine(
+                                                            "------------in foo catch"
+                                                        );
                                                     }
                                                     finally
                                                     {
-                                                        Console.WriteLine("------------in foo finally");
+                                                        Console.WriteLine(
+                                                            "------------in foo finally"
+                                                        );
                                                         foo(i + 1);
                                                         j = 1 / i;
                                                         k = 1 / (j - 1);
@@ -1629,7 +1687,6 @@ class Class1
         L1:
         foo(i + 1);
     }
-
 
     static public int Main(string[] args)
     {

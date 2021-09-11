@@ -35,7 +35,9 @@ namespace System.ServiceProcess.Tests
             this._exception = throwException;
             this._serverStream = new NamedPipeServerStream(serviceName);
             _waitClientConnect = this._serverStream.WaitForConnectionAsync();
-            _waitClientConnect = _waitClientConnect.ContinueWith(_ => DebugTrace("TestService " + ServiceName + ": Connected"));
+            _waitClientConnect = _waitClientConnect.ContinueWith(
+                _ => DebugTrace("TestService " + ServiceName + ": Connected")
+            );
             _waitClientConnect.ContinueWith(t => WriteStreamAsync(PipeMessageByteCode.Connected));
             DebugTrace("TestService " + ServiceName + ": Ctor completed");
         }
@@ -104,9 +106,14 @@ namespace System.ServiceProcess.Tests
 
         public async Task WriteStreamAsync(PipeMessageByteCode code, int command = 0)
         {
-            DebugTrace("TestService " + ServiceName + ": WriteStreamAsync writing " + code.ToString());
+            DebugTrace(
+                "TestService " + ServiceName + ": WriteStreamAsync writing " + code.ToString()
+            );
 
-            var toWrite = (code == PipeMessageByteCode.OnCustomCommand) ? new byte[] { (byte)command } : new byte[] { (byte)code };
+            var toWrite =
+                (code == PipeMessageByteCode.OnCustomCommand)
+                    ? new byte[] { (byte)command }
+                    : new byte[] { (byte)code };
 
             // Wait for the client connection before writing to the pipe.
             // Exception: if it's a Stop message, it may be because the test has completed and we're cleaning up the test service so there's no client at all.
@@ -115,7 +122,9 @@ namespace System.ServiceProcess.Tests
             {
                 await _waitClientConnect;
             }
-            await _serverStream.WriteAsync(toWrite, 0, 1).WaitAsync(TimeSpan.FromSeconds(60)).ConfigureAwait(false);
+            await _serverStream.WriteAsync(toWrite, 0, 1)
+                .WaitAsync(TimeSpan.FromSeconds(60))
+                .ConfigureAwait(false);
             DebugTrace("TestService " + ServiceName + ": WriteStreamAsync completed");
         }
 

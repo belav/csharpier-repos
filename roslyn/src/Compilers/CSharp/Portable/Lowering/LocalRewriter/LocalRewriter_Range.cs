@@ -43,12 +43,22 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (node.Type.IsNullableType())
                 {
-                    if (!TryGetNullableMethod(node.Syntax, node.Type, SpecialMember.System_Nullable_T__ctor, out MethodSymbol nullableCtor))
-                    {
+                    if (
+                        !TryGetNullableMethod(
+                            node.Syntax,
+                            node.Type,
+                            SpecialMember.System_Nullable_T__ctor,
+                            out MethodSymbol nullableCtor
+                        )
+                    ) {
                         return BadExpression(node.Syntax, node.Type, node);
                     }
 
-                    return new BoundObjectCreationExpression(node.Syntax, nullableCtor, rangeCreation);
+                    return new BoundObjectCreationExpression(
+                        node.Syntax,
+                        nullableCtor,
+                        rangeCreation
+                    );
                 }
 
                 return rangeCreation;
@@ -62,7 +72,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (NullableNeverHasValue(operand))
                 {
-                    operand = new BoundDefaultExpression(operand.Syntax, operand.Type.GetNullableUnderlyingType());
+                    operand = new BoundDefaultExpression(
+                        operand.Syntax,
+                        operand.Type.GetNullableUnderlyingType()
+                    );
                 }
                 else
                 {
@@ -79,10 +92,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private BoundExpression LiftRangeExpression(BoundRangeExpression node, BoundExpression? left, BoundExpression? right)
-        {
+        private BoundExpression LiftRangeExpression(
+            BoundRangeExpression node,
+            BoundExpression? left,
+            BoundExpression? right
+        ) {
             Debug.Assert(node.Type.IsNullableType());
-            Debug.Assert(left?.Type?.IsNullableType() == true || right?.Type?.IsNullableType() == true);
+            Debug.Assert(
+                left?.Type?.IsNullableType() == true || right?.Type?.IsNullableType() == true
+            );
             Debug.Assert(!(left is null && right is null));
             Debug.Assert(node.MethodOpt is { });
 
@@ -97,13 +115,23 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(condition != null);
 
-            if (!TryGetNullableMethod(node.Syntax, node.Type, SpecialMember.System_Nullable_T__ctor, out MethodSymbol nullableCtor))
-            {
+            if (
+                !TryGetNullableMethod(
+                    node.Syntax,
+                    node.Type,
+                    SpecialMember.System_Nullable_T__ctor,
+                    out MethodSymbol nullableCtor
+                )
+            ) {
                 return BadExpression(node.Syntax, node.Type, node);
             }
 
             // new Nullable(makeRange(left.GetValueOrDefault(), right.GetValueOrDefault()))
-            BoundExpression consequence = new BoundObjectCreationExpression(node.Syntax, nullableCtor, rangeExpr);
+            BoundExpression consequence = new BoundObjectCreationExpression(
+                node.Syntax,
+                nullableCtor,
+                rangeExpr
+            );
 
             // default
             BoundExpression alternative = new BoundDefaultExpression(node.Syntax, node.Type);
@@ -118,26 +146,35 @@ namespace Microsoft.CodeAnalysis.CSharp
                 rewrittenAlternative: alternative,
                 constantValueOpt: null,
                 rewrittenType: node.Type,
-                isRef: false);
+                isRef: false
+            );
 
             return new BoundSequence(
                 syntax: node.Syntax,
                 locals: locals.ToImmutableAndFree(),
                 sideEffects: sideeffects.ToImmutableAndFree(),
                 value: conditionalExpression,
-                type: node.Type);
+                type: node.Type
+            );
 
             BoundExpression? getIndexFromPossibleNullable(BoundExpression? arg)
             {
                 if (arg is null)
                     return null;
 
-                BoundExpression tempOperand = CaptureExpressionInTempIfNeeded(arg, sideeffects, locals);
+                BoundExpression tempOperand = CaptureExpressionInTempIfNeeded(
+                    arg,
+                    sideeffects,
+                    locals
+                );
                 Debug.Assert(tempOperand.Type is { });
 
                 if (tempOperand.Type.IsNullableType())
                 {
-                    BoundExpression operandHasValue = MakeOptimizedHasValue(tempOperand.Syntax, tempOperand);
+                    BoundExpression operandHasValue = MakeOptimizedHasValue(
+                        tempOperand.Syntax,
+                        tempOperand
+                    );
 
                     if (condition is null)
                     {
@@ -145,8 +182,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        TypeSymbol boolType = _compilation.GetSpecialType(SpecialType.System_Boolean);
-                        condition = MakeBinaryOperator(node.Syntax, BinaryOperatorKind.BoolAnd, condition, operandHasValue, boolType, method: null);
+                        TypeSymbol boolType = _compilation.GetSpecialType(
+                            SpecialType.System_Boolean
+                        );
+                        condition = MakeBinaryOperator(
+                            node.Syntax,
+                            BinaryOperatorKind.BoolAnd,
+                            condition,
+                            operandHasValue,
+                            boolType,
+                            method: null
+                        );
                     }
 
                     return MakeOptimizedGetValueOrDefault(tempOperand.Syntax, tempOperand);
@@ -161,8 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression MakeRangeExpression(
             MethodSymbol constructionMethod,
             BoundExpression? left,
-            BoundExpression? right)
-        {
+            BoundExpression? right
+        ) {
             var F = _factory;
             // The construction method may vary based on what well-known
             // members were available during binding. Depending on which member
@@ -184,8 +230,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // means that the `..` expression is missing an argument on
                     // either the left or the right (i.e., `x..` or `..x`)
                     Debug.Assert(left is null ^ right is null);
-                    Debug.Assert(constructionMethod.MetadataName == "StartAt" ||
-                                 constructionMethod.MetadataName == "EndAt");
+                    Debug.Assert(
+                        constructionMethod.MetadataName == "StartAt"
+                            || constructionMethod.MetadataName == "EndAt"
+                    );
                     Debug.Assert(constructionMethod.IsStatic);
                     var arg = left ?? right;
                     Debug.Assert(arg is { });
@@ -207,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // new Index(0, fromEnd: fromEnd)
                 F.New(
                     WellKnownMember.System_Index__ctor,
-                    ImmutableArray.Create<BoundExpression>(F.Literal(0), F.Literal(fromEnd)));
+                    ImmutableArray.Create<BoundExpression>(F.Literal(0), F.Literal(fromEnd))
+                );
         }
     }
 }

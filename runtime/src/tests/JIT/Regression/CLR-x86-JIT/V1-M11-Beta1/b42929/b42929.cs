@@ -11,7 +11,10 @@ namespace Test
         private ulong[] m_aulDummyField;
         private static object[] m_axField4;
 
-        private static bool Static1(object param1, bool[] param3) { return false; }
+        private static bool Static1(object param1, bool[] param3)
+        {
+            return false;
+        }
 
         static void Main1()
         {
@@ -20,6 +23,7 @@ namespace Test
             {
                 //.....
             }
+
             finally
             {
                 long local8 = 230l;

@@ -192,9 +192,7 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             object IEnumerator.Current => Current;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {

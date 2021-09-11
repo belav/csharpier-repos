@@ -22,15 +22,15 @@ namespace System.Linq
 
                     array[index] = g;
                     ++index;
-                }
-                while (g != _lastGrouping);
+                } while (g != _lastGrouping);
             }
 
             return array;
         }
 
-        internal TResult[] ToArray<TResult>(Func<TKey, IEnumerable<TElement>, TResult> resultSelector)
-        {
+        internal TResult[] ToArray<TResult>(
+            Func<TKey, IEnumerable<TElement>, TResult> resultSelector
+        ) {
             TResult[] array = new TResult[_count];
             int index = 0;
             Grouping<TKey, TElement>? g = _lastGrouping;
@@ -44,8 +44,7 @@ namespace System.Linq
                     g.Trim();
                     array[index] = resultSelector(g._key, g._elements);
                     ++index;
-                }
-                while (g != _lastGrouping);
+                } while (g != _lastGrouping);
             }
 
             return array;
@@ -63,8 +62,7 @@ namespace System.Linq
                     Debug.Assert(g != null);
 
                     list.Add(g);
-                }
-                while (g != _lastGrouping);
+                } while (g != _lastGrouping);
             }
 
             return list;

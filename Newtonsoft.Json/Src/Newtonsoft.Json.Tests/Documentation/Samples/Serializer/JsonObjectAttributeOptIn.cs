@@ -76,10 +76,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""ImportantLegalDocuments.docx"",
   ""Size"": 51200
-}", json);
+}",
+                json
+            );
         }
     }
 }

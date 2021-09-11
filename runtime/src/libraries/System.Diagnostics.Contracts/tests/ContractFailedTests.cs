@@ -11,23 +11,29 @@ namespace System.Diagnostics.Contracts.Tests
         [Fact]
         public static void ValidArgs()
         {
-            using (Utilities.WithContractFailed((s, e) =>
-            {
-                Assert.Null(s);
-                Assert.NotNull(e);
-                e.SetHandled();
-            }))
-            {
+            using (
+                Utilities.WithContractFailed(
+                    (s, e) =>
+                    {
+                        Assert.Null(s);
+                        Assert.NotNull(e);
+                        e.SetHandled();
+                    }
+                )
+            ) {
                 Contract.Assert(false);
             }
 
-            using (Utilities.WithContractFailed((s, e) =>
-            {
-                Assert.Null(s);
-                Assert.NotNull(e);
-                e.SetHandled();
-            }))
-            {
+            using (
+                Utilities.WithContractFailed(
+                    (s, e) =>
+                    {
+                        Assert.Null(s);
+                        Assert.NotNull(e);
+                        e.SetHandled();
+                    }
+                )
+            ) {
                 Contract.Assume(false);
             }
         }
@@ -37,27 +43,33 @@ namespace System.Diagnostics.Contracts.Tests
         {
             string message = "This is the failure message";
 
-            using (Utilities.WithContractFailed((s, e) =>
-            {
-                Assert.Null(e.Condition);
-                Assert.False(e.Handled);
-                Assert.Contains(message, e.Message);
-                Assert.False(e.Unwind);
-                e.SetHandled();
-            }))
-            {
+            using (
+                Utilities.WithContractFailed(
+                    (s, e) =>
+                    {
+                        Assert.Null(e.Condition);
+                        Assert.False(e.Handled);
+                        Assert.Contains(message, e.Message);
+                        Assert.False(e.Unwind);
+                        e.SetHandled();
+                    }
+                )
+            ) {
                 Contract.Assert(false, message);
             }
 
-            using (Utilities.WithContractFailed((s, e) =>
-            {
-                Assert.Null(e.Condition);
-                Assert.False(e.Handled);
-                Assert.Contains(message, e.Message);
-                Assert.False(e.Unwind);
-                e.SetHandled();
-            }))
-            {
+            using (
+                Utilities.WithContractFailed(
+                    (s, e) =>
+                    {
+                        Assert.Null(e.Condition);
+                        Assert.False(e.Handled);
+                        Assert.Contains(message, e.Message);
+                        Assert.False(e.Unwind);
+                        e.SetHandled();
+                    }
+                )
+            ) {
                 Contract.Assume(false, message);
             }
         }
@@ -65,25 +77,30 @@ namespace System.Diagnostics.Contracts.Tests
         [Fact]
         public static void FailureKind()
         {
-            using (Utilities.WithContractFailed((s, e) =>
-            {
-                Assert.Equal(ContractFailureKind.Assert, e.FailureKind);
-                e.SetHandled();
-            }))
-            {
+            using (
+                Utilities.WithContractFailed(
+                    (s, e) =>
+                    {
+                        Assert.Equal(ContractFailureKind.Assert, e.FailureKind);
+                        e.SetHandled();
+                    }
+                )
+            ) {
                 Contract.Assert(false);
             }
 
-            using (Utilities.WithContractFailed((s, e) =>
-            {
-                Assert.Equal(ContractFailureKind.Assume, e.FailureKind);
-                e.SetHandled();
-            }))
-            {
+            using (
+                Utilities.WithContractFailed(
+                    (s, e) =>
+                    {
+                        Assert.Equal(ContractFailureKind.Assume, e.FailureKind);
+                        e.SetHandled();
+                    }
+                )
+            ) {
                 Contract.Assume(false);
             }
         }
-
     }
 #endif
 }

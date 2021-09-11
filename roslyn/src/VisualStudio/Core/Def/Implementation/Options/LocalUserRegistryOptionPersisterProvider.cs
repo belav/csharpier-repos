@@ -24,14 +24,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public LocalUserRegistryOptionPersisterProvider(
             IThreadingContext threadingContext,
-            [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider)
-        {
+            [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider
+        ) {
             _threadingContext = threadingContext;
             _serviceProvider = serviceProvider;
         }
 
-        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(CancellationToken cancellationToken)
-        {
+        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(
+            CancellationToken cancellationToken
+        ) {
             if (_lazyPersister is not null)
             {
                 return _lazyPersister;
@@ -39,7 +40,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            _lazyPersister ??= new LocalUserRegistryOptionPersister(_threadingContext, _serviceProvider);
+            _lazyPersister ??= new LocalUserRegistryOptionPersister(
+                _threadingContext,
+                _serviceProvider
+            );
             return _lazyPersister;
         }
     }

@@ -9,10 +9,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
     // 1. Normalize backslash to forward-slash
     // 2. Always include leading slash
     // 3. Always include file name and extensions
-    internal class DefaultMetadataIdentifierFeature : RazorEngineFeatureBase, IMetadataIdentifierFeature
+    internal class DefaultMetadataIdentifierFeature
+        : RazorEngineFeatureBase,
+          IMetadataIdentifierFeature
     {
-        public string GetIdentifier(RazorCodeDocument codeDocument, RazorSourceDocument sourceDocument)
-        {
+        public string GetIdentifier(
+            RazorCodeDocument codeDocument,
+            RazorSourceDocument sourceDocument
+        ) {
             if (codeDocument == null)
             {
                 throw new ArgumentNullException(nameof(codeDocument));
@@ -34,7 +38,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             {
                 identifier = "/" + identifier;
             }
-            
+
             return identifier;
         }
     }

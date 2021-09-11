@@ -41,8 +41,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEditorFormattingService(IIndentationManagerService indentationManagerService)
-            => _indentationManagerService = indentationManagerService;
+        public CSharpEditorFormattingService(
+            IIndentationManagerService indentationManagerService
+        ) => _indentationManagerService = indentationManagerService;
 
         public bool SupportsFormatDocument => true;
         public bool SupportsFormatOnPaste => true;
@@ -52,12 +53,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
         public bool SupportsFormattingOnTypedCharacter(Document document, char ch)
         {
             // Performance: This method checks several options to determine if we should do smart
-            // indent, none of which are controlled by editorconfig. Instead of calling 
+            // indent, none of which are controlled by editorconfig. Instead of calling
             // document.GetOptionsAsync we can use the Workspace's global options and thus save the
             // work of attempting to read in the editorconfig file.
             var options = document.Project.Solution.Workspace.Options;
 
-            var smartIndentOn = options.GetOption(FormattingOptions.SmartIndent, LanguageNames.CSharp) == FormattingOptions.IndentStyle.Smart;
+            var smartIndentOn =
+                options.GetOption(FormattingOptions.SmartIndent, LanguageNames.CSharp)
+                == FormattingOptions.IndentStyle.Smart;
 
             // We consider the proper placement of a close curly or open curly when it is typed at
             // the start of the line to be a smart-indentation operation.  As such, even if "format
@@ -74,19 +77,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             }
 
             // If format-on-typing is not on, then we don't support formatting on any other characters.
-            var autoFormattingOnTyping = options.GetOption(FeatureOnOffOptions.AutoFormattingOnTyping, LanguageNames.CSharp);
+            var autoFormattingOnTyping = options.GetOption(
+                FeatureOnOffOptions.AutoFormattingOnTyping,
+                LanguageNames.CSharp
+            );
             if (!autoFormattingOnTyping)
             {
                 return false;
             }
 
-            if (ch == '}' && !options.GetOption(BraceCompletionOptions.AutoFormattingOnCloseBrace, LanguageNames.CSharp))
-            {
+            if (
+                ch == '}'
+                && !options.GetOption(
+                    BraceCompletionOptions.AutoFormattingOnCloseBrace,
+                    LanguageNames.CSharp
+                )
+            ) {
                 return false;
             }
 
-            if (ch == ';' && !options.GetOption(FeatureOnOffOptions.AutoFormattingOnSemicolon, LanguageNames.CSharp))
-            {
+            if (
+                ch == ';'
+                && !options.GetOption(
+                    FeatureOnOffOptions.AutoFormattingOnSemicolon,
+                    LanguageNames.CSharp
+                )
+            ) {
                 return false;
             }
 
@@ -103,26 +119,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             Document document,
             TextSpan? textSpan,
             DocumentOptionSet? documentOptions,
-            CancellationToken cancellationToken)
-        {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            CancellationToken cancellationToken
+        ) {
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var span = textSpan ?? new TextSpan(0, root.FullSpan.Length);
             var formattingSpan = CommonFormattingHelpers.GetFormattingSpan(root, span);
-            var options = documentOptions ?? await document.GetDocumentOptionsWithInferredIndentationAsync(
-                explicitFormat: true, _indentationManagerService, cancellationToken).ConfigureAwait(false);
+            var options =
+                documentOptions
+                ?? await document.GetDocumentOptionsWithInferredIndentationAsync(
+                        explicitFormat: true,
+                        _indentationManagerService,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-            return Formatter.GetFormattedTextChanges(root,
+            return Formatter.GetFormattedTextChanges(
+                root,
                 SpecializedCollections.SingletonEnumerable(formattingSpan),
-                document.Project.Solution.Workspace, options, cancellationToken);
+                document.Project.Solution.Workspace,
+                options,
+                cancellationToken
+            );
         }
 
         public async Task<IList<TextChange>> GetFormattingChangesOnPasteAsync(
             Document document,
             TextSpan textSpan,
             DocumentOptionSet? documentOptions,
-            CancellationToken cancellationToken)
-        {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            CancellationToken cancellationToken
+        ) {
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var formattingSpan = CommonFormattingHelpers.GetFormattingSpan(root, textSpan);
             var service = document.GetLanguageService<ISyntaxFormattingService>();
@@ -134,47 +162,78 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             var rules = new List<AbstractFormattingRule>() { new PasteFormattingRule() };
             rules.AddRange(service.GetDefaultFormattingRules());
 
-            var options = documentOptions ?? await document.GetDocumentOptionsWithInferredIndentationAsync(
-                explicitFormat: false, indentationManagerService: _indentationManagerService, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var options =
+                documentOptions
+                ?? await document.GetDocumentOptionsWithInferredIndentationAsync(
+                        explicitFormat: false,
+                        indentationManagerService: _indentationManagerService,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-            return Formatter.GetFormattedTextChanges(root, SpecializedCollections.SingletonEnumerable(formattingSpan), document.Project.Solution.Workspace, options, rules, cancellationToken);
+            return Formatter.GetFormattedTextChanges(
+                root,
+                SpecializedCollections.SingletonEnumerable(formattingSpan),
+                document.Project.Solution.Workspace,
+                options,
+                rules,
+                cancellationToken
+            );
         }
 
-        private static IEnumerable<AbstractFormattingRule> GetFormattingRules(Document document, int position, SyntaxToken tokenBeforeCaret)
-        {
+        private static IEnumerable<AbstractFormattingRule> GetFormattingRules(
+            Document document,
+            int position,
+            SyntaxToken tokenBeforeCaret
+        ) {
             var workspace = document.Project.Solution.Workspace;
-            var formattingRuleFactory = workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
-            return formattingRuleFactory.CreateRule(document, position).Concat(GetTypingRules(tokenBeforeCaret)).Concat(Formatter.GetDefaultFormattingRules(document));
+            var formattingRuleFactory =
+                workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            return formattingRuleFactory.CreateRule(document, position)
+                .Concat(GetTypingRules(tokenBeforeCaret))
+                .Concat(Formatter.GetDefaultFormattingRules(document));
         }
 
         Task<IList<TextChange>?> IEditorFormattingService.GetFormattingChangesOnReturnAsync(
-            Document document, int caretPosition, DocumentOptionSet? documentOptions, CancellationToken cancellationToken)
-            => SpecializedTasks.Null<IList<TextChange>>();
+            Document document,
+            int caretPosition,
+            DocumentOptionSet? documentOptions,
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.Null<IList<TextChange>>();
 
         private static async Task<bool> TokenShouldNotFormatOnTypeCharAsync(
-            SyntaxToken token, CancellationToken cancellationToken)
-        {
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        ) {
             // If the token is a )  we only want to format if it's the close paren
             // of a using statement.  That way if we have nested usings, the inner
             // using will align with the outer one when the user types the close paren.
-            if (token.IsKind(SyntaxKind.CloseParenToken) && !token.Parent.IsKind(SyntaxKind.UsingStatement))
-            {
+            if (
+                token.IsKind(SyntaxKind.CloseParenToken)
+                && !token.Parent.IsKind(SyntaxKind.UsingStatement)
+            ) {
                 return true;
             }
 
             // If the token is a :  we only want to format if it's a labeled statement
             // or case.  When the colon is typed we'll want ot immediately have those
             // statements snap to their appropriate indentation level.
-            if (token.IsKind(SyntaxKind.ColonToken) && !(token.Parent.IsKind(SyntaxKind.LabeledStatement) || token.Parent is SwitchLabelSyntax))
-            {
+            if (
+                token.IsKind(SyntaxKind.ColonToken)
+                && !(
+                    token.Parent.IsKind(SyntaxKind.LabeledStatement)
+                    || token.Parent is SwitchLabelSyntax
+                )
+            ) {
                 return true;
             }
 
-            // Only format an { if it is the first token on a line.  We don't want to 
+            // Only format an { if it is the first token on a line.  We don't want to
             // mess with it if it's inside a line.
             if (token.IsKind(SyntaxKind.OpenBraceToken))
             {
-                var text = await token.SyntaxTree!.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                var text = await token.SyntaxTree!.GetTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (!token.IsFirstTokenOnLine(text))
                 {
                     return true;
@@ -189,14 +248,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             char typedChar,
             int caretPosition,
             DocumentOptionSet? documentOptions,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             // first, find the token user just typed.
-            var token = await GetTokenBeforeTheCaretAsync(document, caretPosition, cancellationToken).ConfigureAwait(false);
-            if (token.IsMissing ||
-                !ValidSingleOrMultiCharactersTokenKind(typedChar, token.Kind()) ||
-                token.IsKind(SyntaxKind.EndOfFileToken, SyntaxKind.None))
-            {
+            var token = await GetTokenBeforeTheCaretAsync(
+                    document,
+                    caretPosition,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            if (
+                token.IsMissing
+                || !ValidSingleOrMultiCharactersTokenKind(typedChar, token.Kind())
+                || token.IsKind(SyntaxKind.EndOfFileToken, SyntaxKind.None)
+            ) {
                 return null;
             }
 
@@ -204,19 +269,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             var formattingRules = GetFormattingRules(document, caretPosition, token);
 
             var service = document.GetLanguageService<ISyntaxFactsService>();
-            if (service != null && service.IsInNonUserCode(token.SyntaxTree, caretPosition, cancellationToken))
-            {
+            if (
+                service != null
+                && service.IsInNonUserCode(token.SyntaxTree, caretPosition, cancellationToken)
+            ) {
                 return null;
             }
 
-            var shouldNotFormat = await TokenShouldNotFormatOnTypeCharAsync(token, cancellationToken).ConfigureAwait(false);
+            var shouldNotFormat = await TokenShouldNotFormatOnTypeCharAsync(
+                    token,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (shouldNotFormat)
             {
                 return null;
             }
 
-            var options = documentOptions ?? await document.GetDocumentOptionsWithInferredIndentationAsync(
-                explicitFormat: false, _indentationManagerService, cancellationToken).ConfigureAwait(false);
+            var options =
+                documentOptions
+                ?? await document.GetDocumentOptionsWithInferredIndentationAsync(
+                        explicitFormat: false,
+                        _indentationManagerService,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             // Do not attempt to format on open/close brace if autoformat on close brace feature is
             // off, instead just smart indent.
@@ -247,34 +324,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             // However, we won't touch any of the other code in that block, unlike if we were
             // formatting.
             var onlySmartIndent =
-                (token.IsKind(SyntaxKind.CloseBraceToken) && OnlySmartIndentCloseBrace(options)) ||
-                (token.IsKind(SyntaxKind.OpenBraceToken) && OnlySmartIndentOpenBrace(options));
+                (token.IsKind(SyntaxKind.CloseBraceToken) && OnlySmartIndentCloseBrace(options))
+                || (token.IsKind(SyntaxKind.OpenBraceToken) && OnlySmartIndentOpenBrace(options));
 
             if (onlySmartIndent)
             {
                 // if we're only doing smart indent, then ignore all edits to this token that occur before
-                // the span of the token. They're irrelevant and may screw up other code the user doesn't 
+                // the span of the token. They're irrelevant and may screw up other code the user doesn't
                 // want touched.
-                var tokenEdits = await FormatTokenAsync(document, options, token, formattingRules, cancellationToken).ConfigureAwait(false);
+                var tokenEdits = await FormatTokenAsync(
+                        document,
+                        options,
+                        token,
+                        formattingRules,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return tokenEdits.Where(t => t.Span.Start >= token.FullSpan.Start).ToList();
             }
 
             // if formatting range fails, do format token one at least
-            var changes = await FormatRangeAsync(document, options, token, formattingRules, cancellationToken).ConfigureAwait(false);
+            var changes = await FormatRangeAsync(
+                    document,
+                    options,
+                    token,
+                    formattingRules,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (changes.Count > 0)
             {
                 return changes;
             }
 
-            return await FormatTokenAsync(document, options, token, formattingRules, cancellationToken).ConfigureAwait(false);
+            return await FormatTokenAsync(
+                    document,
+                    options,
+                    token,
+                    formattingRules,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private static bool OnlySmartIndentCloseBrace(DocumentOptionSet options)
         {
             // User does not want auto-formatting (either in general, or for close braces in
             // specific).  So we only smart indent close braces when typed.
-            return !options.GetOption(BraceCompletionOptions.AutoFormattingOnCloseBrace) ||
-                   !options.GetOption(FeatureOnOffOptions.AutoFormattingOnTyping);
+            return !options.GetOption(BraceCompletionOptions.AutoFormattingOnCloseBrace)
+                || !options.GetOption(FeatureOnOffOptions.AutoFormattingOnTyping);
         }
 
         private static bool OnlySmartIndentOpenBrace(DocumentOptionSet options)
@@ -285,9 +383,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             return !options.GetOption(FeatureOnOffOptions.AutoFormattingOnTyping);
         }
 
-        private static async Task<SyntaxToken> GetTokenBeforeTheCaretAsync(Document document, int caretPosition, CancellationToken cancellationToken)
-        {
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+        private static async Task<SyntaxToken> GetTokenBeforeTheCaretAsync(
+            Document document,
+            int caretPosition,
+            CancellationToken cancellationToken
+        ) {
+            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var position = Math.Max(0, caretPosition - 1);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
@@ -295,24 +397,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             return token;
         }
 
-        private static async Task<IList<TextChange>> FormatTokenAsync(Document document, OptionSet options, SyntaxToken token, IEnumerable<AbstractFormattingRule> formattingRules, CancellationToken cancellationToken)
-        {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        private static async Task<IList<TextChange>> FormatTokenAsync(
+            Document document,
+            OptionSet options,
+            SyntaxToken token,
+            IEnumerable<AbstractFormattingRule> formattingRules,
+            CancellationToken cancellationToken
+        ) {
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var formatter = CreateSmartTokenFormatter(options, formattingRules, root);
-            var changes = await formatter.FormatTokenAsync(document.Project.Solution.Workspace, token, cancellationToken).ConfigureAwait(false);
+            var changes = await formatter.FormatTokenAsync(
+                    document.Project.Solution.Workspace,
+                    token,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return changes;
         }
 
-        private static ISmartTokenFormatter CreateSmartTokenFormatter(OptionSet optionSet, IEnumerable<AbstractFormattingRule> formattingRules, SyntaxNode root)
-            => new CSharpSmartTokenFormatter(optionSet, formattingRules, (CompilationUnitSyntax)root);
+        private static ISmartTokenFormatter CreateSmartTokenFormatter(
+            OptionSet optionSet,
+            IEnumerable<AbstractFormattingRule> formattingRules,
+            SyntaxNode root
+        ) => new CSharpSmartTokenFormatter(optionSet, formattingRules, (CompilationUnitSyntax)root);
 
         private static async Task<IList<TextChange>> FormatRangeAsync(
             Document document,
             OptionSet options,
             SyntaxToken endToken,
             IEnumerable<AbstractFormattingRule> formattingRules,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             if (!IsEndToken(endToken))
             {
                 return SpecializedCollections.EmptyList<TextChange>();
@@ -324,59 +440,72 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
                 return SpecializedCollections.EmptyList<TextChange>();
             }
 
-            if (IsInvalidTokenKind(tokenRange.Value.Item1) || IsInvalidTokenKind(tokenRange.Value.Item2))
-            {
+            if (
+                IsInvalidTokenKind(tokenRange.Value.Item1)
+                || IsInvalidTokenKind(tokenRange.Value.Item2)
+            ) {
                 return SpecializedCollections.EmptyList<TextChange>();
             }
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var formatter = new CSharpSmartTokenFormatter(options, formattingRules, (CompilationUnitSyntax)root);
+            var formatter = new CSharpSmartTokenFormatter(
+                options,
+                formattingRules,
+                (CompilationUnitSyntax)root
+            );
 
-            var changes = formatter.FormatRange(document.Project.Solution.Workspace, tokenRange.Value.Item1, tokenRange.Value.Item2, cancellationToken);
+            var changes = formatter.FormatRange(
+                document.Project.Solution.Workspace,
+                tokenRange.Value.Item1,
+                tokenRange.Value.Item2,
+                cancellationToken
+            );
             return changes;
         }
 
-        private static IEnumerable<AbstractFormattingRule> GetTypingRules(SyntaxToken tokenBeforeCaret)
-        {
-            // Typing introduces several challenges around formatting.  
+        private static IEnumerable<AbstractFormattingRule> GetTypingRules(
+            SyntaxToken tokenBeforeCaret
+        ) {
+            // Typing introduces several challenges around formatting.
             // Historically we've shipped several triggers that cause formatting to happen directly while typing.
-            // These include formatting of blocks when '}' is typed, formatting of statements when a ';' is typed, formatting of ```case```s when ':' typed, and many other cases.  
-            // However, formatting during typing can potentially cause problems.  This is because the surrounding code may not be complete, 
+            // These include formatting of blocks when '}' is typed, formatting of statements when a ';' is typed, formatting of ```case```s when ':' typed, and many other cases.
+            // However, formatting during typing can potentially cause problems.  This is because the surrounding code may not be complete,
             // or may otherwise have syntax errors, and thus edits could have unintended consequences.
-            // 
-            // Because of this, we introduce an extra rule into the set of formatting rules whose purpose is to actually make formatting *more* 
-            // conservative and *less* willing willing to make edits to the tree. 
-            // The primary effect this rule has is to assume that more code is on a single line (and thus should stay that way) 
+            //
+            // Because of this, we introduce an extra rule into the set of formatting rules whose purpose is to actually make formatting *more*
+            // conservative and *less* willing willing to make edits to the tree.
+            // The primary effect this rule has is to assume that more code is on a single line (and thus should stay that way)
             // despite what the tree actually looks like.
-            // 
-            // It's ok that this is only during formatting that is caused by an edit because that formatting happens 
-            // implicitly and thus has to be more careful, whereas an explicit format-document call only happens on-demand 
+            //
+            // It's ok that this is only during formatting that is caused by an edit because that formatting happens
+            // implicitly and thus has to be more careful, whereas an explicit format-document call only happens on-demand
             // and can be more aggressive about what it's doing.
-            // 
-            // 
+            //
+            //
             // For example, say you have the following code.
-            // 
+            //
             // ```c#
             // class C
             // {
             //   int P { get {    return
             // }
             // ```
-            // 
+            //
             // Hitting ';' after 'return' should ideally only affect the 'return statement' and change it to:
-            // 
+            //
             // ```c#
             // class C
             // {
             //   int P { get { return;
             // }
             // ```
-            // 
-            // During a normal format-document call, this is not what would happen. 
-            // Specifically, because the parser will consume the '}' into the accessor, 
+            //
+            // During a normal format-document call, this is not what would happen.
+            // Specifically, because the parser will consume the '}' into the accessor,
             // it will think the accessor spans multiple lines, and thus should not stay on a single line.  This will produce:
-            // 
+            //
             // ```c#
             // class C
             // {
@@ -387,33 +516,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
             //       return;
             //     }
             // ```
-            // 
-            // Because it's ok for this to format in that fashion if format-document is invoked, 
-            // but should not happen during typing, we insert a specialized rule *only* during typing to try to control this.  
-            // During normal formatting we add 'keep on single line' suppression rules for blocks we find that are on a single line.  
+            //
+            // Because it's ok for this to format in that fashion if format-document is invoked,
+            // but should not happen during typing, we insert a specialized rule *only* during typing to try to control this.
+            // During normal formatting we add 'keep on single line' suppression rules for blocks we find that are on a single line.
             // But that won't work since this span is not on a single line:
-            // 
+            //
             // ```c#
             // class C
             // {
             //   int P { get [|{    return;
             // }|]
             // ```
-            // 
-            // So, during typing, if we see any parent block is incomplete, we'll assume that 
+            //
+            // So, during typing, if we see any parent block is incomplete, we'll assume that
             // all our parent blocks are incomplete and we will place the suppression span like so:
-            // 
+            //
             // ```c#
             // class C
             // {
             //   int P { get [|{     return;|]
             // }
             // ```
-            // 
-            // This will have the desired effect of keeping these tokens on the same line, but only during typing scenarios.  
-            if (tokenBeforeCaret.Kind() == SyntaxKind.CloseBraceToken ||
-                tokenBeforeCaret.Kind() == SyntaxKind.EndOfFileToken)
-            {
+            //
+            // This will have the desired effect of keeping these tokens on the same line, but only during typing scenarios.
+            if (
+                tokenBeforeCaret.Kind() == SyntaxKind.CloseBraceToken
+                || tokenBeforeCaret.Kind() == SyntaxKind.EndOfFileToken
+            ) {
                 return SpecializedCollections.EmptyEnumerable<AbstractFormattingRule>();
             }
 
@@ -431,9 +561,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
         }
 
         // We'll autoformat on n, t, e, only if they are the last character of the below
-        // keywords.  
-        private static bool ValidSingleOrMultiCharactersTokenKind(char typedChar, SyntaxKind kind)
-            => typedChar switch
+        // keywords.
+        private static bool ValidSingleOrMultiCharactersTokenKind(
+            char typedChar,
+            SyntaxKind kind
+        ) =>
+            typedChar switch
             {
                 'n' => kind == SyntaxKind.RegionKeyword || kind == SyntaxKind.EndRegionKeyword,
                 't' => kind == SyntaxKind.SelectKeyword,
@@ -444,9 +577,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Formatting
         private static bool IsInvalidTokenKind(SyntaxToken token)
         {
             // invalid token to be formatted
-            return token.IsKind(SyntaxKind.None) ||
-                   token.IsKind(SyntaxKind.EndOfDirectiveToken) ||
-                   token.IsKind(SyntaxKind.EndOfFileToken);
+            return token.IsKind(SyntaxKind.None)
+                || token.IsKind(SyntaxKind.EndOfDirectiveToken)
+                || token.IsKind(SyntaxKind.EndOfFileToken);
         }
     }
 }

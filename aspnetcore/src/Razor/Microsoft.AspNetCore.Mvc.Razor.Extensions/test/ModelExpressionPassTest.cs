@@ -17,27 +17,24 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         public void ModelExpressionPass_NonModelExpressionProperty_Ignored()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @addTagHelper TestTagHelper, TestAssembly
-<p foo=""17"">");
+<p foo=""17"">"
+            );
 
             var tagHelpers = new[]
             {
                 TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                    .BoundAttributeDescriptor(attribute =>
-                        attribute
-                            .Name("Foo")
-                            .TypeName("System.Int32"))
-                    .TagMatchingRuleDescriptor(rule =>
-                        rule.RequireTagName("p"))
+                    .BoundAttributeDescriptor(
+                        attribute => attribute.Name("Foo").TypeName("System.Int32")
+                    )
+                    .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
                     .Build()
             };
 
             var engine = CreateEngine(tagHelpers);
-            var pass = new ModelExpressionPass()
-            {
-                Engine = engine,
-            };
+            var pass = new ModelExpressionPass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -46,9 +43,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             // Assert
             var tagHelper = FindTagHelperNode(irDocument);
-            var setProperty = tagHelper.Children.OfType<TagHelperPropertyIntermediateNode>().Single();
+            var setProperty = tagHelper.Children.OfType<TagHelperPropertyIntermediateNode>()
+                .Single();
 
-            var token = Assert.IsAssignableFrom<IntermediateToken>(Assert.Single(setProperty.Children));
+            var token = Assert.IsAssignableFrom<IntermediateToken>(
+                Assert.Single(setProperty.Children)
+            );
             Assert.True(token.IsCSharp);
             Assert.Equal("17", token.Content);
         }
@@ -60,25 +60,23 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             // Using \r\n here because we verify line mappings
             var codeDocument = CreateDocument(
-                "@addTagHelper TestTagHelper, TestAssembly\r\n<p foo=\"Bar\">");
+                "@addTagHelper TestTagHelper, TestAssembly\r\n<p foo=\"Bar\">"
+            );
 
             var tagHelpers = new[]
             {
                 TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                    .BoundAttributeDescriptor(attribute =>
-                        attribute
-                            .Name("Foo")
-                            .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression"))
-                    .TagMatchingRuleDescriptor(rule =>
-                        rule.RequireTagName("p"))
+                    .BoundAttributeDescriptor(
+                        attribute =>
+                            attribute.Name("Foo")
+                                .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression")
+                    )
+                    .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
                     .Build()
             };
 
             var engine = CreateEngine(tagHelpers);
-            var pass = new ModelExpressionPass()
-            {
-                Engine = engine,
-            };
+            var pass = new ModelExpressionPass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -87,10 +85,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             // Assert
             var tagHelper = FindTagHelperNode(irDocument);
-            var setProperty = tagHelper.Children.OfType<TagHelperPropertyIntermediateNode>().Single();
+            var setProperty = tagHelper.Children.OfType<TagHelperPropertyIntermediateNode>()
+                .Single();
 
-            var expression = Assert.IsType<CSharpExpressionIntermediateNode>(Assert.Single(setProperty.Children));
-            Assert.Equal("ModelExpressionProvider.CreateModelExpression(ViewData, __model => __model.Bar)", GetCSharpContent(expression));
+            var expression = Assert.IsType<CSharpExpressionIntermediateNode>(
+                Assert.Single(setProperty.Children)
+            );
+            Assert.Equal(
+                "ModelExpressionProvider.CreateModelExpression(ViewData, __model => __model.Bar)",
+                GetCSharpContent(expression)
+            );
 
             var originalNode = Assert.IsAssignableFrom<IntermediateToken>(expression.Children[2]);
             Assert.Equal(TokenKind.CSharp, originalNode.Kind);
@@ -105,25 +109,23 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             // Using \r\n here because we verify line mappings
             var codeDocument = CreateDocument(
-                "@addTagHelper TestTagHelper, TestAssembly\r\n<p foo=\"@Bar\">");
+                "@addTagHelper TestTagHelper, TestAssembly\r\n<p foo=\"@Bar\">"
+            );
 
             var tagHelpers = new[]
             {
                 TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly")
-                    .BoundAttributeDescriptor(attribute =>
-                        attribute
-                            .Name("Foo")
-                            .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression"))
-                    .TagMatchingRuleDescriptor(rule =>
-                        rule.RequireTagName("p"))
+                    .BoundAttributeDescriptor(
+                        attribute =>
+                            attribute.Name("Foo")
+                                .TypeName("Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression")
+                    )
+                    .TagMatchingRuleDescriptor(rule => rule.RequireTagName("p"))
                     .Build()
             };
 
             var engine = CreateEngine(tagHelpers);
-            var pass = new ModelExpressionPass()
-            {
-                Engine = engine,
-            };
+            var pass = new ModelExpressionPass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -132,10 +134,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             // Assert
             var tagHelper = FindTagHelperNode(irDocument);
-            var setProperty = tagHelper.Children.OfType<TagHelperPropertyIntermediateNode>().Single();
+            var setProperty = tagHelper.Children.OfType<TagHelperPropertyIntermediateNode>()
+                .Single();
 
-            var expression = Assert.IsType<CSharpExpressionIntermediateNode>(Assert.Single(setProperty.Children));
-            Assert.Equal("ModelExpressionProvider.CreateModelExpression(ViewData, __model => Bar)", GetCSharpContent(expression));
+            var expression = Assert.IsType<CSharpExpressionIntermediateNode>(
+                Assert.Single(setProperty.Children)
+            );
+            Assert.Equal(
+                "ModelExpressionProvider.CreateModelExpression(ViewData, __model => Bar)",
+                GetCSharpContent(expression)
+            );
 
             var originalNode = Assert.IsAssignableFrom<IntermediateToken>(expression.Children[1]);
             Assert.Equal(TokenKind.CSharp, originalNode.Kind);
@@ -151,14 +159,18 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
         private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
         {
-            return RazorProjectEngine.Create(b =>
-            {
-                b.Features.Add(new TestTagHelperFeature(tagHelpers));
-            }).Engine;
+            return RazorProjectEngine.Create(
+                b =>
+                {
+                    b.Features.Add(new TestTagHelperFeature(tagHelpers));
+                }
+            ).Engine;
         }
 
-        private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
-        {
+        private DocumentIntermediateNode CreateIRDocument(
+            RazorEngine engine,
+            RazorCodeDocument codeDocument
+        ) {
             for (var i = 0; i < engine.Phases.Count; i++)
             {
                 var phase = engine.Phases[i];

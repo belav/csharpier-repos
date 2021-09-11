@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact]
         public void Test_001_Simple()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 namespace Test
@@ -38,9 +39,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -48,7 +47,8 @@ namespace Test
         {
             // Best type: int
 
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 namespace Test
@@ -65,9 +65,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-              source,
-              expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -75,7 +73,8 @@ namespace Test
         {
             // Best type: double
 
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 namespace Test
@@ -92,9 +91,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact, WorkItem(895655, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/895655")]
@@ -102,7 +99,8 @@ namespace Test
         {
             // Enums conversions
 
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 namespace Test
@@ -124,33 +122,47 @@ namespace Test
 }
 ";
 
-            var comp = CreateCompilation(source, targetFramework: TargetFramework.Mscorlib40Extended);
+            var comp = CreateCompilation(
+                source,
+                targetFramework: TargetFramework.Mscorlib40Extended
+            );
             comp.VerifyDiagnostics(
-    // (15,54): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-    //             var a = new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu};
-    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(15, 54),
-    // (15,88): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-    //             var a = new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu};
-    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(15, 88),
-    // (15,93): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-    //             var a = new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu};
-    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(15, 93),
-    // (17,84): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-    //              System.Console.Write(a.SequenceEqual(new E[]{E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}));
-    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(17, 84),
-    // (17,118): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-    //              System.Console.Write(a.SequenceEqual(new E[]{E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}));
-    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(17, 118),
-    // (17,123): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
-    //              System.Console.Write(a.SequenceEqual(new E[]{E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}));
-    Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(17, 123),
-    // (15,21): error CS0826: No best type found for implicitly-typed array
-    //             var a = new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu};
-    Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}").WithLocation(15, 21),
-    // (17,35): error CS1929: '?[]' does not contain a definition for 'SequenceEqual' and the best extension method overload 'System.Linq.Queryable.SequenceEqual<Test.Program.E>(System.Linq.IQueryable<Test.Program.E>, System.Collections.Generic.IEnumerable<Test.Program.E>)' requires a receiver of type 'System.Linq.IQueryable<Test.Program.E>'
-    //              System.Console.Write(a.SequenceEqual(new E[]{E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}));
-    Diagnostic(ErrorCode.ERR_BadInstanceArgType, "a").WithArguments("?[]", "SequenceEqual", "System.Linq.Queryable.SequenceEqual<Test.Program.E>(System.Linq.IQueryable<Test.Program.E>, System.Collections.Generic.IEnumerable<Test.Program.E>)", "System.Linq.IQueryable<Test.Program.E>").WithLocation(17, 35)
-                );
+                // (15,54): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                //             var a = new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu};
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(15, 54),
+                // (15,88): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                //             var a = new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu};
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(15, 88),
+                // (15,93): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                //             var a = new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu};
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(15, 93),
+                // (17,84): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                //              System.Console.Write(a.SequenceEqual(new E[]{E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}));
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(17, 84),
+                // (17,118): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                //              System.Console.Write(a.SequenceEqual(new E[]{E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}));
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(17, 118),
+                // (17,123): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                //              System.Console.Write(a.SequenceEqual(new E[]{E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}));
+                Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(17, 123),
+                // (15,21): error CS0826: No best type found for implicitly-typed array
+                //             var a = new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu};
+                Diagnostic(
+                        ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
+                        "new [] {E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}"
+                    )
+                    .WithLocation(15, 21),
+                // (17,35): error CS1929: '?[]' does not contain a definition for 'SequenceEqual' and the best extension method overload 'System.Linq.Queryable.SequenceEqual<Test.Program.E>(System.Linq.IQueryable<Test.Program.E>, System.Collections.Generic.IEnumerable<Test.Program.E>)' requires a receiver of type 'System.Linq.IQueryable<Test.Program.E>'
+                //              System.Console.Write(a.SequenceEqual(new E[]{E.START, 0, 0U, 0u, 0L, 0l, 0UL, 0Ul, 0uL, 0ul, 0LU, 0Lu, 0lU, 0lu}));
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "a")
+                    .WithArguments(
+                        "?[]",
+                        "SequenceEqual",
+                        "System.Linq.Queryable.SequenceEqual<Test.Program.E>(System.Linq.IQueryable<Test.Program.E>, System.Collections.Generic.IEnumerable<Test.Program.E>)",
+                        "System.Linq.IQueryable<Test.Program.E>"
+                    )
+                    .WithLocation(17, 35)
+            );
         }
 
         [Fact]
@@ -158,7 +170,8 @@ namespace Test
         {
             // Implicit reference conversions -- From any reference-type to object.
 
-            var source = @"
+            var source =
+                @"
 
 using System.Linq;
 
@@ -190,9 +203,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -200,7 +211,8 @@ namespace Test
         {
             // Implicit reference conversions -- From an array-type S with an element type SE to an array-type T with an element type TE,
 
-            var source = @"
+            var source =
+                @"
 
 using System.Linq;
 
@@ -221,9 +233,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -231,7 +241,8 @@ namespace Test
         {
             // Implicit reference conversions -- From a one-dimensional array-type S[] to System.Collections.Generic.IList<S>.
 
-            var testSrc = @"
+            var testSrc =
+                @"
 using System.Linq;
 using System.Collections.Generic;
 
@@ -251,9 +262,7 @@ namespace Test
     }
 }
 ";
-            var compilation = CompileAndVerify(
-                testSrc,
-                expectedOutput: "True");
+            var compilation = CompileAndVerify(testSrc, expectedOutput: "True");
         }
 
         [Fact]
@@ -261,7 +270,8 @@ namespace Test
         {
             // Implicit reference conversions -- From a one-dimensional array-type S[] to System.Collections.Generic.IReadOnlyList<S>.
 
-            var testSrc = @"
+            var testSrc =
+                @"
 using System.Collections.Generic;
 
 namespace Test
@@ -281,8 +291,15 @@ namespace Test
     }
 }
 ";
-            var mscorlib17626 = MetadataReference.CreateFromImage(TestMetadata.ResourcesNet451.mscorlib);
-            CompileAndVerify(testSrc, new MetadataReference[] { mscorlib17626 }, expectedOutput: "1", targetFramework: TargetFramework.Empty);
+            var mscorlib17626 = MetadataReference.CreateFromImage(
+                TestMetadata.ResourcesNet451.mscorlib
+            );
+            CompileAndVerify(
+                testSrc,
+                new MetadataReference[] { mscorlib17626 },
+                expectedOutput: "1",
+                targetFramework: TargetFramework.Empty
+            );
         }
 
         [Fact]
@@ -290,7 +307,8 @@ namespace Test
         {
             // Implicit reference conversions -- From any delegate-type to System.Delegate.
 
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 
@@ -326,9 +344,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -336,7 +352,8 @@ namespace Test
         {
             // Implicit reference conversions -- From the null type to any reference-type.
 
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 namespace Test
@@ -353,21 +370,20 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
         public void Test_010_TypeParameter()
         {
-            // Implicit reference conversions -- 
-            // For a type-parameter T that is known to be a reference type , the following 
+            // Implicit reference conversions --
+            // For a type-parameter T that is known to be a reference type , the following
             // implicit reference conversions exist:
-            // From T to its effective base class C, from T to any base class of C, 
+            // From T to its effective base class C, from T to any base class of C,
             // and from T to any interface implemented by C.
 
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 namespace Test
@@ -396,9 +412,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -406,7 +420,8 @@ namespace Test
         {
             // Implicit reference conversions -- Boxing conversions
 
-            var testSrc = @"
+            var testSrc =
+                @"
 using System;
 using System.Linq;
 
@@ -432,9 +447,7 @@ namespace Test
     }
 }
 ";
-            var compilation = CompileAndVerify(
-                testSrc,
-                expectedOutput: "True");
+            var compilation = CompileAndVerify(testSrc, expectedOutput: "True");
         }
 
         [Fact]
@@ -442,7 +455,8 @@ namespace Test
         {
             // User-defined implicit conversions.
 
-            var testSrc = @"
+            var testSrc =
+                @"
 using System.Linq;
 
 namespace Test
@@ -475,7 +489,7 @@ namespace Test
 ";
             // NYI: When user-defined conversion lowering is implemented, replace the
             // NYI: error checking below with:
-            // var compilation = CompileAndVerify(testSrc, emitOptions: EmitOptions.CCI, 
+            // var compilation = CompileAndVerify(testSrc, emitOptions: EmitOptions.CCI,
             //    additionalRefs: GetReferences(), expectedOutput: "");
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(testSrc);
             compilation.VerifyDiagnostics();
@@ -486,7 +500,8 @@ namespace Test
         {
             // Lifted user-defined conversions
 
-            var testSrc = @"
+            var testSrc =
+                @"
 using System.Linq;
 namespace Test
 {
@@ -516,7 +531,7 @@ namespace Test
             // NYI: When lifted user-defined conversion lowering is implemented, replace the
             // NYI: error checking below with:
 
-            // var compilation = CompileAndVerify(testSrc, emitOptions: EmitOptions.CCI, 
+            // var compilation = CompileAndVerify(testSrc, emitOptions: EmitOptions.CCI,
             //     additionalRefs: GetReferences(), expectedOutput: "");
 
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(testSrc);
@@ -529,7 +544,8 @@ namespace Test
         {
             // Lifted implicit numeric conversions
 
-            var testSrc = @"
+            var testSrc =
+                @"
 using System.Linq;
 namespace Test
 {
@@ -561,7 +577,8 @@ namespace Test
         {
             // Implicitly conversion from lambda expression to compatible delegate type
 
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace Test
@@ -582,9 +599,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -592,7 +607,8 @@ namespace Test
         {
             // local variable declared as "var" type is used inside an implicitly typed array.
 
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 namespace Test
@@ -615,9 +631,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -625,7 +639,8 @@ namespace Test
         {
             // Array creation expression as element in implicitly typed arrays
 
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace Test
@@ -642,9 +657,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -652,7 +665,8 @@ namespace Test
         {
             // Anonymous object creation expression as element in implicitly typed arrays
 
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace Test
@@ -669,9 +683,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -679,7 +691,8 @@ namespace Test
         {
             // Member access expression as element in implicitly typed arrays
 
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 using NT = Test;
@@ -710,9 +723,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -720,7 +731,8 @@ namespace Test
         {
             // JaggedArray in implicitly typed arrays
 
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace Test
@@ -746,9 +758,7 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
@@ -756,7 +766,8 @@ namespace Test
         {
             // MultiDimensionalArray in implicitly typed arrays
 
-            var testSrc = @"
+            var testSrc =
+                @"
 using System;
 
 namespace Test
@@ -787,7 +798,8 @@ namespace Test
         {
             // Implicitly typed arrays should can be used in creating MultiDimensionalArray
 
-            var testSrc = @"
+            var testSrc =
+                @"
 using System;
 
 namespace Test
@@ -817,7 +829,8 @@ namespace Test
         {
             //  Implicitly typed arrays used in generic method
 
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 namespace Test
@@ -837,17 +850,16 @@ namespace Test
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
         public void Test_023_Query()
         {
-            //  Query expression as element in implicitly typed arrays 
+            //  Query expression as element in implicitly typed arrays
 
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -870,17 +882,16 @@ public class Program
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "True");
+            CompileAndVerify(source, expectedOutput: "True");
         }
 
         [Fact]
         public void Test_023_Literal()
         {
-            //  Query expression as element in implicitly typed arrays 
+            //  Query expression as element in implicitly typed arrays
 
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 
@@ -909,9 +920,7 @@ public class Program
 }
 ";
 
-            CompileAndVerify(
-                source,
-                expectedOutput: "TrueTrueTrueTrueTrueTrueTrueTrueTrue");
+            CompileAndVerify(source, expectedOutput: "TrueTrueTrueTrueTrueTrueTrueTrueTrue");
         }
 
         #endregion
@@ -921,7 +930,8 @@ public class Program
         [Fact]
         public void Error_NonArrayInitExpr()
         {
-            var testSrc = @"
+            var testSrc =
+                @"
 namespace Test
 {
     public class Program
@@ -940,13 +950,15 @@ namespace Test
                 Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "3").WithLocation(8, 46),
                 // (8,49): error CS0846: A nested array initializer is expected
                 //             var a3 = new[,,] { { { 3, 4 } }, 3, 4 };
-                Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "4").WithLocation(8, 49));
+                Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "4").WithLocation(8, 49)
+            );
         }
 
         [Fact]
         public void Error_NonArrayInitExpr_02()
         {
-            var testSrc = @"
+            var testSrc =
+                @"
 namespace Test
 {
     public class Program
@@ -962,17 +974,21 @@ namespace Test
             comp.VerifyDiagnostics(
                 // (8,46): error CS0103: The name 'x' does not exist in the current context
                 //             var a3 = new[,,] { { { 3, 4 } }, x, 4 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x").WithArguments("x").WithLocation(8, 46),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                    .WithArguments("x")
+                    .WithLocation(8, 46),
                 // (8,49): error CS0846: A nested array initializer is expected
                 //             var a3 = new[,,] { { { 3, 4 } }, x, 4 };
-                Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "4").WithLocation(8, 49));
+                Diagnostic(ErrorCode.ERR_ArrayInitializerExpected, "4").WithLocation(8, 49)
+            );
         }
 
         [WorkItem(543571, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543571")]
         [Fact]
         public void CS0826ERR_ImplicitlyTypedArrayNoBestType()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 namespace Test
@@ -993,12 +1009,17 @@ namespace Test
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (16,21): error CS0826: No best type found for implicitly-typed array
-                //             E[] a = new[] { E.FortyTwo, 0 }; // Dev10 error CS0826
-                Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "new[] { E.FortyTwo, 0 }").WithLocation(16, 21));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (16,21): error CS0826: No best type found for implicitly-typed array
+                    //             E[] a = new[] { E.FortyTwo, 0 }; // Dev10 error CS0826
+                    Diagnostic(
+                            ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
+                            "new[] { E.FortyTwo, 0 }"
+                        )
+                        .WithLocation(16, 21)
+                );
         }
-
         #endregion
     }
 }

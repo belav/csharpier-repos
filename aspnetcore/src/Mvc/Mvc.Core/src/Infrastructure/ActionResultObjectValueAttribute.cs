@@ -36,7 +36,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     /// }
     /// </code>
     /// </example>
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Parameter | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public sealed class ActionResultObjectValueAttribute : Attribute
     {
     }

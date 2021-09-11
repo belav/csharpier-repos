@@ -47,11 +47,18 @@ namespace System.Drawing
                         // Convert the frame delay from byte[] to int
                         //
                         byte[] values = frameDelayItem.Value!;
-                        Debug.Assert(values.Length == 4 * FrameCount, "PropertyItem has invalid value byte array");
+                        Debug.Assert(
+                            values.Length == 4 * FrameCount,
+                            "PropertyItem has invalid value byte array"
+                        );
                         _frameDelay = new int[FrameCount];
                         for (int i = 0; i < FrameCount; ++i)
                         {
-                            _frameDelay[i] = values[i * 4] + 256 * values[i * 4 + 1] + 256 * 256 * values[i * 4 + 2] + 256 * 256 * 256 * values[i * 4 + 3];
+                            _frameDelay[i] =
+                                values[i * 4]
+                                + 256 * values[i * 4 + 1]
+                                + 256 * 256 * values[i * 4 + 2]
+                                + 256 * 256 * 256 * values[i * 4 + 3];
                         }
                     }
                 }
@@ -70,10 +77,7 @@ namespace System.Drawing
             /// </summary>
             public bool Animated
             {
-                get
-                {
-                    return _animated;
-                }
+                get { return _animated; }
             }
 
             /// <summary>
@@ -81,10 +85,7 @@ namespace System.Drawing
             /// </summary>
             public int Frame
             {
-                get
-                {
-                    return _frame;
-                }
+                get { return _frame; }
                 set
                 {
                     if (_frame != value)
@@ -110,22 +111,13 @@ namespace System.Drawing
             /// </summary>
             public bool FrameDirty
             {
-                get
-                {
-                    return _frameDirty;
-                }
+                get { return _frameDirty; }
             }
 
             public EventHandler? FrameChangedHandler
             {
-                get
-                {
-                    return _onFrameChangedHandler;
-                }
-                set
-                {
-                    _onFrameChangedHandler = value;
-                }
+                get { return _onFrameChangedHandler; }
+                set { _onFrameChangedHandler = value; }
             }
 
             /// <summary>
@@ -133,10 +125,7 @@ namespace System.Drawing
             /// </summary>
             public int FrameCount
             {
-                get
-                {
-                    return _frameCount;
-                }
+                get { return _frameCount; }
             }
 
             /// <summary>
@@ -149,14 +138,8 @@ namespace System.Drawing
 
             internal int FrameTimer
             {
-                get
-                {
-                    return _frameTimer;
-                }
-                set
-                {
-                    _frameTimer = value;
-                }
+                get { return _frameTimer; }
+                set { _frameTimer = value; }
             }
 
             /// <summary>
@@ -164,10 +147,7 @@ namespace System.Drawing
             /// </summary>
             internal Image Image
             {
-                get
-                {
-                    return _image;
-                }
+                get { return _image; }
             }
 
             /// <summary>

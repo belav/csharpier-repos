@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
         public async Task TestSimpleLambda()
         {
             var code =
-@"using System.Linq;
+                @"using System.Linq;
 class C
 {
     static void Goo()
@@ -47,7 +47,7 @@ class C
         public async Task TestParenthesizedLambda()
         {
             var code =
-@"using System.Linq;
+                @"using System.Linq;
 class C
 {
     static void Goo()
@@ -71,7 +71,7 @@ class C
         public async Task TestAnonymousDelegate()
         {
             var code =
-@"using System.Linq;
+                @"using System.Linq;
 class C
 {
     static void Goo()
@@ -92,13 +92,16 @@ class C
         }
 
         private static async Task<ImmutableArray<BlockSpan>> GetSpansFromWorkspaceAsync(
-            TestWorkspace workspace)
-        {
+            TestWorkspace workspace
+        ) {
             var hostDocument = workspace.Documents.First();
             var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
             var outliningService = document.GetLanguageService<BlockStructureService>();
 
-            var structure = await outliningService.GetBlockStructureAsync(document, CancellationToken.None);
+            var structure = await outliningService.GetBlockStructureAsync(
+                document,
+                CancellationToken.None
+            );
             return structure.Spans;
         }
     }

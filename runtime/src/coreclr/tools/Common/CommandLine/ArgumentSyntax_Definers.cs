@@ -11,7 +11,8 @@ namespace Internal.CommandLine
     {
         private static readonly Func<string, string> s_stringParser = v => v;
         private static readonly Func<string, bool> s_booleanParser = v => bool.Parse(v);
-        private static readonly Func<string, int> s_int32Parser = v => int.Parse(v, CultureInfo.InvariantCulture);
+        private static readonly Func<string, int> s_int32Parser = v =>
+            int.Parse(v, CultureInfo.InvariantCulture);
 
         // Commands
 
@@ -68,18 +69,30 @@ namespace Internal.CommandLine
             return DefineOption(name, defaultValue, s_int32Parser, requireValue);
         }
 
-        public Argument<T> DefineOption<T>(string name, T defaultValue, Func<string, T> valueConverter)
-        {
+        public Argument<T> DefineOption<T>(
+            string name,
+            T defaultValue,
+            Func<string, T> valueConverter
+        ) {
             return DefineOption(name, defaultValue, valueConverter, true);
         }
 
-        public Argument<T> DefineOption<T>(string name, ref T value, Func<string, T> valueConverter, string help)
-        {
+        public Argument<T> DefineOption<T>(
+            string name,
+            ref T value,
+            Func<string, T> valueConverter,
+            string help
+        ) {
             return DefineOption(name, ref value, valueConverter, true, help);
         }
 
-        public Argument<T> DefineOption<T>(string name, ref T value, Func<string, T> valueConverter, bool requireValue, string help)
-        {
+        public Argument<T> DefineOption<T>(
+            string name,
+            ref T value,
+            Func<string, T> valueConverter,
+            bool requireValue,
+            string help
+        ) {
             var option = DefineOption(name, value, valueConverter, requireValue);
             option.Help = help;
 
@@ -102,25 +115,39 @@ namespace Internal.CommandLine
             return DefineOption(name, ref value, s_int32Parser, help);
         }
 
-        public Argument<string> DefineOption(string name, ref string value, bool requireValue, string help)
-        {
+        public Argument<string> DefineOption(
+            string name,
+            ref string value,
+            bool requireValue,
+            string help
+        ) {
             return DefineOption(name, ref value, s_stringParser, requireValue, help);
         }
 
-        public Argument<bool> DefineOption(string name, ref bool value, bool requireValue, string help)
-        {
+        public Argument<bool> DefineOption(
+            string name,
+            ref bool value,
+            bool requireValue,
+            string help
+        ) {
             return DefineOption(name, ref value, s_booleanParser, requireValue, help);
         }
 
-        public Argument<int> DefineOption(string name, ref int value, bool requireValue, string help)
-        {
+        public Argument<int> DefineOption(
+            string name,
+            ref int value,
+            bool requireValue,
+            string help
+        ) {
             return DefineOption(name, ref value, s_int32Parser, requireValue, help);
         }
 
         // Option lists
 
-        public ArgumentList<string> DefineOptionList(string name, IReadOnlyList<string> defaultValue)
-        {
+        public ArgumentList<string> DefineOptionList(
+            string name,
+            IReadOnlyList<string> defaultValue
+        ) {
             return DefineOptionList(name, defaultValue, s_stringParser);
         }
 
@@ -129,28 +156,46 @@ namespace Internal.CommandLine
             return DefineOptionList(name, defaultValue, s_int32Parser);
         }
 
-        public ArgumentList<string> DefineOptionList(string name, IReadOnlyList<string> defaultValue, bool requireValue)
-        {
+        public ArgumentList<string> DefineOptionList(
+            string name,
+            IReadOnlyList<string> defaultValue,
+            bool requireValue
+        ) {
             return DefineOptionList(name, defaultValue, s_stringParser, requireValue);
         }
 
-        public ArgumentList<int> DefineOptionList(string name, IReadOnlyList<int> defaultValue, bool requireValue)
-        {
+        public ArgumentList<int> DefineOptionList(
+            string name,
+            IReadOnlyList<int> defaultValue,
+            bool requireValue
+        ) {
             return DefineOptionList(name, defaultValue, s_int32Parser, requireValue);
         }
 
-        public ArgumentList<T> DefineOptionList<T>(string name, IReadOnlyList<T> defaultValue, Func<string, T> valueConverter)
-        {
+        public ArgumentList<T> DefineOptionList<T>(
+            string name,
+            IReadOnlyList<T> defaultValue,
+            Func<string, T> valueConverter
+        ) {
             return DefineOptionList(name, defaultValue, valueConverter, true);
         }
 
-        public ArgumentList<T> DefineOptionList<T>(string name, ref IReadOnlyList<T> value, Func<string, T> valueConverter, string help)
-        {
+        public ArgumentList<T> DefineOptionList<T>(
+            string name,
+            ref IReadOnlyList<T> value,
+            Func<string, T> valueConverter,
+            string help
+        ) {
             return DefineOptionList(name, ref value, valueConverter, true, help);
         }
 
-        public ArgumentList<T> DefineOptionList<T>(string name, ref IReadOnlyList<T> value, Func<string, T> valueConverter, bool requireValue, string help)
-        {
+        public ArgumentList<T> DefineOptionList<T>(
+            string name,
+            ref IReadOnlyList<T> value,
+            Func<string, T> valueConverter,
+            bool requireValue,
+            string help
+        ) {
             var optionList = DefineOptionList(name, value, valueConverter, requireValue);
             optionList.Help = help;
 
@@ -158,23 +203,37 @@ namespace Internal.CommandLine
             return optionList;
         }
 
-        public ArgumentList<string> DefineOptionList(string name, ref IReadOnlyList<string> value, string help)
-        {
+        public ArgumentList<string> DefineOptionList(
+            string name,
+            ref IReadOnlyList<string> value,
+            string help
+        ) {
             return DefineOptionList(name, ref value, s_stringParser, help);
         }
 
-        public ArgumentList<int> DefineOptionList(string name, ref IReadOnlyList<int> value, string help)
-        {
+        public ArgumentList<int> DefineOptionList(
+            string name,
+            ref IReadOnlyList<int> value,
+            string help
+        ) {
             return DefineOptionList(name, ref value, s_int32Parser, help);
         }
 
-        public ArgumentList<string> DefineOptionList(string name, ref IReadOnlyList<string> value, bool requireValue, string help)
-        {
+        public ArgumentList<string> DefineOptionList(
+            string name,
+            ref IReadOnlyList<string> value,
+            bool requireValue,
+            string help
+        ) {
             return DefineOptionList(name, ref value, s_stringParser, requireValue, help);
         }
 
-        public ArgumentList<int> DefineOptionList(string name, ref IReadOnlyList<int> value, bool requireValue, string help)
-        {
+        public ArgumentList<int> DefineOptionList(
+            string name,
+            ref IReadOnlyList<int> value,
+            bool requireValue,
+            string help
+        ) {
             return DefineOptionList(name, ref value, s_int32Parser, requireValue, help);
         }
 
@@ -195,8 +254,12 @@ namespace Internal.CommandLine
             return DefineParameter(name, defaultValue, s_int32Parser);
         }
 
-        public Argument<T> DefineParameter<T>(string name, ref T value, Func<string, T> valueConverter, string help)
-        {
+        public Argument<T> DefineParameter<T>(
+            string name,
+            ref T value,
+            Func<string, T> valueConverter,
+            string help
+        ) {
             var parameter = DefineParameter(name, value, valueConverter);
             parameter.Help = help;
 
@@ -221,8 +284,10 @@ namespace Internal.CommandLine
 
         // Parameter list
 
-        public ArgumentList<string> DefineParameterList(string name, IReadOnlyList<string> defaultValue)
-        {
+        public ArgumentList<string> DefineParameterList(
+            string name,
+            IReadOnlyList<string> defaultValue
+        ) {
             return DefineParameterList(name, defaultValue, s_stringParser);
         }
 
@@ -231,8 +296,12 @@ namespace Internal.CommandLine
             return DefineParameterList(name, defaultValue, s_int32Parser);
         }
 
-        public ArgumentList<T> DefineParameterList<T>(string name, ref IReadOnlyList<T> value, Func<string, T> valueConverter, string help)
-        {
+        public ArgumentList<T> DefineParameterList<T>(
+            string name,
+            ref IReadOnlyList<T> value,
+            Func<string, T> valueConverter,
+            string help
+        ) {
             var parameterList = DefineParameterList(name, value, valueConverter);
             parameterList.Help = help;
 
@@ -240,13 +309,19 @@ namespace Internal.CommandLine
             return parameterList;
         }
 
-        public ArgumentList<string> DefineParameterList(string name, ref IReadOnlyList<string> value, string help)
-        {
+        public ArgumentList<string> DefineParameterList(
+            string name,
+            ref IReadOnlyList<string> value,
+            string help
+        ) {
             return DefineParameterList(name, ref value, s_stringParser, help);
         }
 
-        public ArgumentList<int> DefineParameterList(string name, ref IReadOnlyList<int> value, string help)
-        {
+        public ArgumentList<int> DefineParameterList(
+            string name,
+            ref IReadOnlyList<int> value,
+            string help
+        ) {
             return DefineParameterList(name, ref value, s_int32Parser, help);
         }
     }

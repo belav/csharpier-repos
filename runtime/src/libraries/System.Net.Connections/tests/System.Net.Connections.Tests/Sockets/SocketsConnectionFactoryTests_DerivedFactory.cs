@@ -24,11 +24,10 @@ namespace System.Net.Connections.Tests
 
         private class CustomConnectionOptions : IConnectionProperties
         {
-            public CustomConnectionOptionsValues Values { get; } = new CustomConnectionOptionsValues();
+            public CustomConnectionOptionsValues Values { get; } =
+                new CustomConnectionOptionsValues();
 
-            public CustomConnectionOptions()
-            {
-            }
+            public CustomConnectionOptions() { }
 
             public bool TryGet(Type propertyKey, [NotNullWhen(true)] out object property)
             {
@@ -45,12 +44,15 @@ namespace System.Net.Connections.Tests
 
         private sealed class CustomFactory : SocketsConnectionFactory
         {
-            public CustomFactory() : base(SocketType.Stream, ProtocolType.Tcp)
-            {
-            }
+            public CustomFactory() : base(SocketType.Stream, ProtocolType.Tcp) { }
 
-            protected override Socket CreateSocket(AddressFamily addressFamily, SocketType socketType, ProtocolType protocolType, EndPoint endPoint, IConnectionProperties options)
-            {
+            protected override Socket CreateSocket(
+                AddressFamily addressFamily,
+                SocketType socketType,
+                ProtocolType protocolType,
+                EndPoint endPoint,
+                IConnectionProperties options
+            ) {
                 Socket socket = new Socket(addressFamily, socketType, protocolType);
 
                 if (options.TryGet(out CustomConnectionOptionsValues vals))
@@ -70,7 +72,10 @@ namespace System.Net.Connections.Tests
         [Fact]
         public async Task DerivedFactory_CanShimSocket()
         {
-            using var server = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, _endPoint);
+            using var server = SocketTestServer.SocketTestServerFactory(
+                SocketImplementationType.Async,
+                _endPoint
+            );
             using Connection connection = await _factory.ConnectAsync(server.EndPoint, _options);
             connection.ConnectionProperties.TryGet(out Socket socket);
 

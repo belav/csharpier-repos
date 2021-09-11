@@ -7,8 +7,13 @@ namespace Microsoft.Extensions.Logging
 {
     internal readonly struct MessageLogger
     {
-        public MessageLogger(ILogger logger, string category, string providerTypeFullName, LogLevel? minLevel, Func<string, string, LogLevel, bool> filter)
-        {
+        public MessageLogger(
+            ILogger logger,
+            string category,
+            string providerTypeFullName,
+            LogLevel? minLevel,
+            Func<string, string, LogLevel, bool> filter
+        ) {
             Logger = logger;
             Category = category;
             ProviderTypeFullName = providerTypeFullName;

@@ -22,7 +22,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             if (_callSiteChain.ContainsKey(serviceType))
             {
-                throw new InvalidOperationException(CreateCircularDependencyExceptionMessage(serviceType));
+                throw new InvalidOperationException(
+                    CreateCircularDependencyExceptionMessage(serviceType)
+                );
             }
         }
 
@@ -33,13 +35,19 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         public void Add(Type serviceType, Type implementationType = null)
         {
-            _callSiteChain[serviceType] = new ChainItemInfo(_callSiteChain.Count, implementationType);
+            _callSiteChain[serviceType] = new ChainItemInfo(
+                _callSiteChain.Count,
+                implementationType
+            );
         }
 
         private string CreateCircularDependencyExceptionMessage(Type type)
         {
             var messageBuilder = new StringBuilder();
-            messageBuilder.AppendFormat(SR.CircularDependencyException, TypeNameHelper.GetTypeDisplayName(type));
+            messageBuilder.AppendFormat(
+                SR.CircularDependencyException,
+                TypeNameHelper.GetTypeDisplayName(type)
+            );
             messageBuilder.AppendLine();
 
             AppendResolutionPath(messageBuilder, type);
@@ -49,8 +57,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private void AppendResolutionPath(StringBuilder builder, Type currentlyResolving = null)
         {
-            foreach (KeyValuePair<Type, ChainItemInfo> pair in _callSiteChain.OrderBy(p => p.Value.Order))
-            {
+            foreach (
+                KeyValuePair<Type, ChainItemInfo> pair in _callSiteChain.OrderBy(p => p.Value.Order)
+            ) {
                 Type serviceType = pair.Key;
                 Type implementationType = pair.Value.ImplementationType;
                 if (implementationType == null || serviceType == implementationType)
@@ -59,9 +68,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 }
                 else
                 {
-                    builder.AppendFormat("{0}({1})",
+                    builder.AppendFormat(
+                        "{0}({1})",
                         TypeNameHelper.GetTypeDisplayName(serviceType),
-                        TypeNameHelper.GetTypeDisplayName(implementationType));
+                        TypeNameHelper.GetTypeDisplayName(implementationType)
+                    );
                 }
 
                 builder.Append(" -> ");

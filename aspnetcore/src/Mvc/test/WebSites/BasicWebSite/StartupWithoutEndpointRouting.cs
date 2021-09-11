@@ -24,18 +24,24 @@ namespace BasicWebSite
             services.AddSingleton(new TestService { Message = "true" });
 
             services.AddAuthentication()
-                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Api", _ => { });
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(
+                    "Api",
+                    _ => { }
+                );
             services.AddTransient<IAuthorizationHandler, ManagerHandler>();
 
-            services
-                .AddMvc(options =>
-                {
-                    options.Conventions.Add(new ApplicationDescription("This is a basic website."));
-                    // Filter that records a value in HttpContext.Items
-                    options.Filters.Add(new TraceResourceFilter());
+            services.AddMvc(
+                    options =>
+                    {
+                        options.Conventions.Add(
+                            new ApplicationDescription("This is a basic website.")
+                        );
+                        // Filter that records a value in HttpContext.Items
+                        options.Filters.Add(new TraceResourceFilter());
 
-                    options.EnableEndpointRouting = false;
-                })
+                        options.EnableEndpointRouting = false;
+                    }
+                )
                 .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters();
 
@@ -56,8 +62,9 @@ namespace BasicWebSite
 
         // For manual debug only (running this test site with F5)
         // This needs to be changed to match the site host
-        private WeatherForecastService CreateWeatherForecastService(IServiceProvider serviceProvider)
-        {
+        private WeatherForecastService CreateWeatherForecastService(
+            IServiceProvider serviceProvider
+        ) {
             var contextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
             var httpContext = contextAccessor.HttpContext;
             if (httpContext == null)
@@ -65,7 +72,9 @@ namespace BasicWebSite
                 throw new InvalidOperationException("Needs a request context!");
             }
             var client = new HttpClient();
-            client.BaseAddress = new Uri($"{httpContext.Request.Scheme}://{httpContext.Request.Host}");
+            client.BaseAddress = new Uri(
+                $"{httpContext.Request.Scheme}://{httpContext.Request.Host}"
+            );
             return new WeatherForecastService(client);
         }
 
@@ -79,18 +88,24 @@ namespace BasicWebSite
             app.UseMiddleware<RequestIdMiddleware>();
 
             // Add MVC to the request pipeline
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    "areaRoute",
-                    "{area:exists}/{controller}/{action}",
-                    new { controller = "Home", action = "Index" });
+            app.UseMvc(
+                routes =>
+                {
+                    routes.MapRoute(
+                        "areaRoute",
+                        "{area:exists}/{controller}/{action}",
+                        new { controller = "Home", action = "Index" }
+                    );
 
-                routes.MapRoute("ActionAsMethod", "{controller}/{action}",
-                    defaults: new { controller = "Home", action = "Index" });
+                    routes.MapRoute(
+                        "ActionAsMethod",
+                        "{controller}/{action}",
+                        defaults: new { controller = "Home", action = "Index" }
+                    );
 
-                routes.MapRoute("PageRoute", "{controller}/{action}/{page}");
-            });
+                    routes.MapRoute("PageRoute", "{controller}/{action}/{page}");
+                }
+            );
         }
     }
 }

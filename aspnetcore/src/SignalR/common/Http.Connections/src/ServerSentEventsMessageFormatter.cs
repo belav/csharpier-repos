@@ -11,13 +11,24 @@ namespace Microsoft.AspNetCore.Http.Connections
 {
     internal static class ServerSentEventsMessageFormatter
     {
-        private static readonly byte[] DataPrefix = { (byte)'d', (byte)'a', (byte)'t', (byte)'a', (byte)':', (byte)' ' };
+        private static readonly byte[] DataPrefix =
+        {
+            (byte)'d',
+            (byte)'a',
+            (byte)'t',
+            (byte)'a',
+            (byte)':',
+            (byte)' '
+        };
         private static readonly byte[] Newline = { (byte)'\r', (byte)'\n' };
 
         private const byte LineFeed = (byte)'\n';
 
-        public static async Task WriteMessageAsync(ReadOnlySequence<byte> payload, Stream output, CancellationToken token)
-        {
+        public static async Task WriteMessageAsync(
+            ReadOnlySequence<byte> payload,
+            Stream output,
+            CancellationToken token
+        ) {
             // Payload does not contain a line feed so write it directly to output
             if (payload.PositionOf(LineFeed) == null)
             {
@@ -47,8 +58,10 @@ namespace Microsoft.AspNetCore.Http.Connections
         /// <param name="source">Source sequence.</param>
         /// <param name="offset">The offset the segment starts at.</param>
         /// <returns>The last memory segment in a sequence.</returns>
-        private static ReadOnlyMemory<byte> GetLastSegment(in ReadOnlySequence<byte> source, out long offset)
-        {
+        private static ReadOnlyMemory<byte> GetLastSegment(
+            in ReadOnlySequence<byte> source,
+            out long offset
+        ) {
             offset = 0;
 
             var totalLength = source.Length;
@@ -67,8 +80,10 @@ namespace Microsoft.AspNetCore.Http.Connections
             throw new InvalidOperationException("Could not get last segment from sequence.");
         }
 
-        private static async Task WriteMessageToMemory(Stream output, ReadOnlySequence<byte> payload)
-        {
+        private static async Task WriteMessageToMemory(
+            Stream output,
+            ReadOnlySequence<byte> payload
+        ) {
             var keepWriting = true;
             while (keepWriting)
             {
@@ -91,7 +106,10 @@ namespace Microsoft.AspNetCore.Http.Connections
                         var memory = GetLastSegment(lineSegment, out var offset);
                         if (memory.Span[memory.Length - 1] == '\r')
                         {
-                            lineSegment = lineSegment.Slice(lineSegment.Start, offset + memory.Length - 1);
+                            lineSegment = lineSegment.Slice(
+                                lineSegment.Start,
+                                offset + memory.Length - 1
+                            );
                         }
                     }
 

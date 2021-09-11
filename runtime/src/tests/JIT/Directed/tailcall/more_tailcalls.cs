@@ -13,7 +13,8 @@ using System.Runtime.CompilerServices;
 
 struct S16
 {
-    public long A, B;
+    public long A,
+        B;
     public override string ToString() => $"{A}, {B}";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -21,7 +22,10 @@ struct S16
 }
 struct S32
 {
-    public long A, B, C, D;
+    public long A,
+        B,
+        C,
+        D;
     public override string ToString() => $"{A}, {B}, {C}, {D}";
 }
 struct SGC
@@ -118,8 +122,8 @@ internal class Program
             result = false;
         }
 
-        void TestCalc<T>(Func<int, int, T> f, T expected, string name)
-            => Test(() => f(numCalcIters, 0), expected, name);
+        void TestCalc<T>(Func<int, int, T> f, T expected, string name) =>
+            Test(() => f(numCalcIters, 0), expected, name);
 
         ClassImpl c = new ClassImpl();
         c.Other = c;
@@ -143,7 +147,15 @@ internal class Program
         TestCalc(CalcStaticRetbuf, expectedS32, "Static non-generic retbuf");
         TestCalc(CalcStaticLong, expectedI8, "Static non-generic long");
         TestCalc(CalcStaticS16, expectedS16, "Static non-generic S16");
-        TestCalc((x, s) => {CalcStaticVoid(x, s); return s_result;}, expected, "Static void");
+        TestCalc(
+            (x, s) =>
+            {
+                CalcStaticVoid(x, s);
+                return s_result;
+            },
+            expected,
+            "Static void"
+        );
         TestCalc(new Instance().CalcInstance, expected, "Instance non-generic");
         TestCalc(new Instance().CalcInstanceRetbuf, expectedS32, "Instance non-generic retbuf");
         TestCalc(c.CalcAbstract, expected, "Abstract class non-generic");
@@ -155,43 +167,147 @@ internal class Program
         TestCalc(new Instance().CalcInstanceCalli, expected, "Instance calli");
         TestCalc(new Instance().CalcInstanceCalliRetbuf, expectedS32, "Instance calli retbuf");
         Test(() => EmptyCalli(), "Empty calli", "Static calli without args");
-        Test(() => ValueTypeInstanceMethodCalli(), "Instance method", "calli to an instance method on a value type");
-        Test(() => ValueTypeExplicitThisInstanceMethodCalli(), "Instance method", "calli to an instance method on a value type with explicit this");
-        Test(() => { var v = new InstanceValueType(); v.CountUp(countUpIters); return v.Count; }, countUpIters, "Value type instance call");
-        Test(() => new Instance().GC("2", 3, "4", 5, "6", "7", "8", 9, ref ten), "2 3 4 5 6 7 8 9 10", "Instance with GC");
-        Test(() => CountUpHeap(countUpIters, new HeapInt(0)), countUpIters, "Count up with heap int");
-        Test(() => { int[] val = new int[1]; CountUpRef(countUpIters, ref val[0]); return val[0]; }, countUpIters, "Count up with byref to heap");
+        Test(
+            () => ValueTypeInstanceMethodCalli(),
+            "Instance method",
+            "calli to an instance method on a value type"
+        );
+        Test(
+            () => ValueTypeExplicitThisInstanceMethodCalli(),
+            "Instance method",
+            "calli to an instance method on a value type with explicit this"
+        );
+        Test(
+            () =>
+            {
+                var v = new InstanceValueType();
+                v.CountUp(countUpIters);
+                return v.Count;
+            },
+            countUpIters,
+            "Value type instance call"
+        );
+        Test(
+            () => new Instance().GC("2", 3, "4", 5, "6", "7", "8", 9, ref ten),
+            "2 3 4 5 6 7 8 9 10",
+            "Instance with GC"
+        );
+        Test(
+            () => CountUpHeap(countUpIters, new HeapInt(0)),
+            countUpIters,
+            "Count up with heap int"
+        );
+        Test(
+            () =>
+            {
+                int[] val = new int[1];
+                CountUpRef(countUpIters, ref val[0]);
+                return val[0];
+            },
+            countUpIters,
+            "Count up with byref to heap"
+        );
         Test(() => GenName1Forward("hello"), "System.String hello", "Static generic string");
-        Test(() => GenName1Forward<object>("hello"), "System.Object hello", "Static generic object");
+        Test(
+            () => GenName1Forward<object>("hello"),
+            "System.Object hello",
+            "Static generic object"
+        );
         Test(() => GenName1Forward(5), "System.Int32 5", "Static generic int");
-        Test(() => GenName2ForwardBoth("hello", (object)"hello2"), "System.String System.Object hello hello2", "Static generic 2 string object");
-        Test(() => GenName2ForwardBoth("hello", 5), "System.String System.Int32 hello 5", "Static generic 2 string int");
-        Test(() => GenName2ForwardOne("hello", "hello2"), "System.String System.String hello hello2", "Static generic 1 string");
-        Test(() => GenName2ForwardOne((object)"hello", "hello2"), "System.Object System.String hello hello2", "Static generic 1 object");
-        Test(() => GenName2ForwardOne(5, "hello2"), "System.Int32 System.String 5 hello2", "Static generic 1 int");
-        Test(() => GenName2ForwardNone("hello", "hello2"), "System.Object System.String hello hello2", "Static generic 0");
-        Test(() => g.NonVirtForward<object, string>("a", 5, "b", "c"),
-             "System.String System.Int32 System.Object System.String a 5 b c", "Instance generic 4");
-        Test(() => g.VirtForward<object, string>("a", 5, "b", "c"),
-             "System.String System.Int32 System.Object System.String a 5 b c", "Virtual instance generic 4");
-        Test(() => GenInterfaceForwardF<string, int, string, object>("a", 5, "c", "d", ig),
-            "System.String System.Int32 System.String System.Object a 5 c d", "Interface generic 4");
-        Test(() => GenInterfaceForwardG<string, int>("a", 5, ig),
-            "System.String System.Int32 a 5", "Interface generic forward G");
-        Test(() => GenInterfaceForwardNone("a", "b", 5, "d", ig2),
-             "System.String System.Object System.Int32 System.Object a b 5 d", "Interface generic 0");
-        Test(() => GenInterfaceForward2("a", "b", ig2),
-             "System.String System.Object a b", "Interface generic without generics on method");
-        Test(() => GenAbstractFString(ga1), "System.String System.Object", "Abstract generic with generic on method 1");
-        Test(() => GenAbstractFInt(ga2), "System.Int32 System.Object", "Abstract generic with generic on method 2");
-        Test(() => GenAbstractGString(ga1), "System.String", "Abstract generic without generic on method 1");
-        Test(() => GenAbstractGInt(ga2), "System.Int32", "Abstract generic without generic on method 2");
+        Test(
+            () => GenName2ForwardBoth("hello", (object)"hello2"),
+            "System.String System.Object hello hello2",
+            "Static generic 2 string object"
+        );
+        Test(
+            () => GenName2ForwardBoth("hello", 5),
+            "System.String System.Int32 hello 5",
+            "Static generic 2 string int"
+        );
+        Test(
+            () => GenName2ForwardOne("hello", "hello2"),
+            "System.String System.String hello hello2",
+            "Static generic 1 string"
+        );
+        Test(
+            () => GenName2ForwardOne((object)"hello", "hello2"),
+            "System.Object System.String hello hello2",
+            "Static generic 1 object"
+        );
+        Test(
+            () => GenName2ForwardOne(5, "hello2"),
+            "System.Int32 System.String 5 hello2",
+            "Static generic 1 int"
+        );
+        Test(
+            () => GenName2ForwardNone("hello", "hello2"),
+            "System.Object System.String hello hello2",
+            "Static generic 0"
+        );
+        Test(
+            () => g.NonVirtForward<object, string>("a", 5, "b", "c"),
+            "System.String System.Int32 System.Object System.String a 5 b c",
+            "Instance generic 4"
+        );
+        Test(
+            () => g.VirtForward<object, string>("a", 5, "b", "c"),
+            "System.String System.Int32 System.Object System.String a 5 b c",
+            "Virtual instance generic 4"
+        );
+        Test(
+            () => GenInterfaceForwardF<string, int, string, object>("a", 5, "c", "d", ig),
+            "System.String System.Int32 System.String System.Object a 5 c d",
+            "Interface generic 4"
+        );
+        Test(
+            () => GenInterfaceForwardG<string, int>("a", 5, ig),
+            "System.String System.Int32 a 5",
+            "Interface generic forward G"
+        );
+        Test(
+            () => GenInterfaceForwardNone("a", "b", 5, "d", ig2),
+            "System.String System.Object System.Int32 System.Object a b 5 d",
+            "Interface generic 0"
+        );
+        Test(
+            () => GenInterfaceForward2("a", "b", ig2),
+            "System.String System.Object a b",
+            "Interface generic without generics on method"
+        );
+        Test(
+            () => GenAbstractFString(ga1),
+            "System.String System.Object",
+            "Abstract generic with generic on method 1"
+        );
+        Test(
+            () => GenAbstractFInt(ga2),
+            "System.Int32 System.Object",
+            "Abstract generic with generic on method 2"
+        );
+        Test(
+            () => GenAbstractGString(ga1),
+            "System.String",
+            "Abstract generic without generic on method 1"
+        );
+        Test(
+            () => GenAbstractGInt(ga2),
+            "System.Int32",
+            "Abstract generic without generic on method 2"
+        );
 
         int[] a = new int[1_000_000];
         a[99] = 1;
-        Test(() => InstantiatingStub1(0, 0, "string", a), a.Length + 1, "Instantiating stub direct");
+        Test(
+            () => InstantiatingStub1(0, 0, "string", a),
+            a.Length + 1,
+            "Instantiating stub direct"
+        );
 
-        Test(() => VirtCallThisHasSideEffects(), 1, "Virtual call where computing \"this\" has side effects");
+        Test(
+            () => VirtCallThisHasSideEffects(),
+            1,
+            "Virtual call where computing \"this\" has side effects"
+        );
 
         if (result)
             Console.WriteLine("All tailcall-via-help succeeded");
@@ -209,10 +325,10 @@ internal class Program
             acc += (int)(x * 1 + s.A * 9 + s.B * 3 + s.C * -4 + s.D * 5);
 
         x--;
-        s.A = 11*x;
-        s.B = 14*x;
-        s.C = -14*x;
-        s.D = 3*x;
+        s.A = 11 * x;
+        s.B = 14 * x;
+        s.C = -14 * x;
+        s.D = 3 * x;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -374,7 +490,15 @@ internal class Program
         IL.Push(acc);
         IL.Push(s_calcStaticCalliOther);
         IL.Emit.Tail();
-        IL.Emit.Calli(new StandAloneMethodSig(CallingConventions.Standard, typeof(int), typeof(int), typeof(S32), typeof(int)));
+        IL.Emit.Calli(
+            new StandAloneMethodSig(
+                CallingConventions.Standard,
+                typeof(int),
+                typeof(int),
+                typeof(S32),
+                typeof(int)
+            )
+        );
         return IL.Return<int>();
     }
 
@@ -387,7 +511,14 @@ internal class Program
         IL.Push(acc);
         IL.Push(s_calcStaticCalli);
         IL.Emit.Tail();
-        IL.Emit.Calli(new StandAloneMethodSig(CallingConventions.Standard, typeof(int), typeof(int), typeof(int)));
+        IL.Emit.Calli(
+            new StandAloneMethodSig(
+                CallingConventions.Standard,
+                typeof(int),
+                typeof(int),
+                typeof(int)
+            )
+        );
         return IL.Return<int>();
     }
 
@@ -414,7 +545,12 @@ internal class Program
         IL.Push(ref s16);
         IL.Push(s_instanceMethodOnValueType);
         IL.Emit.Tail();
-        IL.Emit.Calli(new StandAloneMethodSig(CallingConventions.Standard | CallingConventions.HasThis, typeof(string)));
+        IL.Emit.Calli(
+            new StandAloneMethodSig(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                typeof(string)
+            )
+        );
         return IL.Return<string>();
     }
 
@@ -429,8 +565,15 @@ internal class Program
         IL.Push(ref s16);
         IL.Push(s_instanceMethodOnValueType);
         IL.Emit.Tail();
-        IL.Emit.Calli(new StandAloneMethodSig(CallingConventions.Standard | CallingConventions.HasThis | CallingConventions.ExplicitThis,
-                      typeof(string), typeof(S16).MakeByRefType()));
+        IL.Emit.Calli(
+            new StandAloneMethodSig(
+                CallingConventions.Standard
+                    | CallingConventions.HasThis
+                    | CallingConventions.ExplicitThis,
+                typeof(string),
+                typeof(S16).MakeByRefType()
+            )
+        );
         return IL.Return<string>();
     }
 
@@ -454,7 +597,15 @@ internal class Program
         IL.Push(acc);
         IL.Push(s_calcStaticCalliRetbufOther);
         IL.Emit.Tail();
-        IL.Emit.Calli(new StandAloneMethodSig(CallingConventions.Standard, typeof(S32), typeof(int), typeof(S32), typeof(int)));
+        IL.Emit.Calli(
+            new StandAloneMethodSig(
+                CallingConventions.Standard,
+                typeof(S32),
+                typeof(int),
+                typeof(S32),
+                typeof(int)
+            )
+        );
         return IL.Return<S32>();
     }
 
@@ -467,7 +618,14 @@ internal class Program
         IL.Push(acc);
         IL.Push(s_calcStaticCalliRetbuf);
         IL.Emit.Tail();
-        IL.Emit.Calli(new StandAloneMethodSig(CallingConventions.Standard, typeof(S32), typeof(int), typeof(int)));
+        IL.Emit.Calli(
+            new StandAloneMethodSig(
+                CallingConventions.Standard,
+                typeof(S32),
+                typeof(int),
+                typeof(int)
+            )
+        );
         return IL.Return<S32>();
     }
 
@@ -566,8 +724,7 @@ internal class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static string GenName1<T>(S32 s, T x)
-        => $"{typeof(T).FullName} {x}";
+    private static string GenName1<T>(S32 s, T x) => $"{typeof(T).FullName} {x}";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static string GenName2ForwardBoth<T1, T2>(T1 x, T2 y)
@@ -577,7 +734,12 @@ internal class Program
         IL.Push(x);
         IL.Push(y);
         IL.Emit.Tail();
-        IL.Emit.Call(new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(typeof(T1), typeof(T2)));
+        IL.Emit.Call(
+            new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(
+                typeof(T1),
+                typeof(T2)
+            )
+        );
         return IL.Return<string>();
     }
 
@@ -589,7 +751,12 @@ internal class Program
         IL.Push(x);
         IL.Push(y);
         IL.Emit.Tail();
-        IL.Emit.Call(new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(typeof(T), typeof(string)));
+        IL.Emit.Call(
+            new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(
+                typeof(T),
+                typeof(string)
+            )
+        );
         return IL.Return<string>();
     }
 
@@ -601,17 +768,27 @@ internal class Program
         IL.Push(x);
         IL.Push(y);
         IL.Emit.Tail();
-        IL.Emit.Call(new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(typeof(object), typeof(string)));
+        IL.Emit.Call(
+            new MethodRef(typeof(Program), nameof(GenName2)).MakeGenericMethod(
+                typeof(object),
+                typeof(string)
+            )
+        );
         return IL.Return<string>();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static string GenName2<T1, T2>(S32 s, T1 a, T2 b)
-        => $"{typeof(T1).FullName} {typeof(T2).FullName} {a} {b}";
+    private static string GenName2<T1, T2>(S32 s, T1 a, T2 b) =>
+        $"{typeof(T1).FullName} {typeof(T2).FullName} {a} {b}";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static string GenInterfaceForwardF<T1, T2, T3, T4>(T1 a, T2 b, T3 c, T4 d, IGenInterface<T1, T2> igen)
-    {
+    private static string GenInterfaceForwardF<T1, T2, T3, T4>(
+        T1 a,
+        T2 b,
+        T3 c,
+        T4 d,
+        IGenInterface<T1, T2> igen
+    ) {
         IL.Push(igen);
         IL.Push(new S32());
         IL.Push(a);
@@ -619,7 +796,12 @@ internal class Program
         IL.Push(c);
         IL.Push(d);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(new MethodRef(typeof(IGenInterface<T1, T2>), nameof(IGenInterface<T1, T2>.F)).MakeGenericMethod(typeof(T3), typeof(T4)));
+        IL.Emit.Callvirt(
+            new MethodRef(
+                typeof(IGenInterface<T1, T2>),
+                nameof(IGenInterface<T1, T2>.F)
+            ).MakeGenericMethod(typeof(T3), typeof(T4))
+        );
         return IL.Return<string>();
     }
 
@@ -631,13 +813,20 @@ internal class Program
         IL.Push(a);
         IL.Push(b);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(new MethodRef(typeof(IGenInterface<T1, T2>), nameof(IGenInterface<T1, T2>.G)));
+        IL.Emit.Callvirt(
+            new MethodRef(typeof(IGenInterface<T1, T2>), nameof(IGenInterface<T1, T2>.G))
+        );
         return IL.Return<string>();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static string GenInterfaceForwardNone(string a, object b, int c, object d, IGenInterface<string, object> igen)
-    {
+    private static string GenInterfaceForwardNone(
+        string a,
+        object b,
+        int c,
+        object d,
+        IGenInterface<string, object> igen
+    ) {
         IL.Push(igen);
         IL.Push(new S32());
         IL.Push(a);
@@ -645,19 +834,32 @@ internal class Program
         IL.Push(c);
         IL.Push(d);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(new MethodRef(typeof(IGenInterface<string, object>), nameof(IGenInterface<string, object>.F)).MakeGenericMethod(typeof(int), typeof(object)));
+        IL.Emit.Callvirt(
+            new MethodRef(
+                typeof(IGenInterface<string, object>),
+                nameof(IGenInterface<string, object>.F)
+            ).MakeGenericMethod(typeof(int), typeof(object))
+        );
         return IL.Return<string>();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static string GenInterfaceForward2(string a, object b, IGenInterface<string, object> igen)
-    {
+    private static string GenInterfaceForward2(
+        string a,
+        object b,
+        IGenInterface<string, object> igen
+    ) {
         IL.Push(igen);
         IL.Push(new S32());
         IL.Push(a);
         IL.Push(b);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(new MethodRef(typeof(IGenInterface<string, object>), nameof(IGenInterface<string, object>.G)));
+        IL.Emit.Callvirt(
+            new MethodRef(
+                typeof(IGenInterface<string, object>),
+                nameof(IGenInterface<string, object>.G)
+            )
+        );
         return IL.Return<string>();
     }
 
@@ -666,7 +868,12 @@ internal class Program
     {
         IL.Push(ga);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(new MethodRef(typeof(GenAbstract<string>), nameof(GenAbstract<string>.F)).MakeGenericMethod(typeof(object)));
+        IL.Emit.Callvirt(
+            new MethodRef(
+                typeof(GenAbstract<string>),
+                nameof(GenAbstract<string>.F)
+            ).MakeGenericMethod(typeof(object))
+        );
         return IL.Return<string>();
     }
 
@@ -684,7 +891,11 @@ internal class Program
     {
         IL.Push(ga);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(new MethodRef(typeof(GenAbstract<int>), nameof(GenAbstract<int>.F)).MakeGenericMethod(typeof(object)));
+        IL.Emit.Callvirt(
+            new MethodRef(typeof(GenAbstract<int>), nameof(GenAbstract<int>.F)).MakeGenericMethod(
+                typeof(object)
+            )
+        );
         return IL.Return<string>();
     }
 
@@ -713,14 +924,31 @@ internal class Program
         IL.Emit.Ldarg(nameof(d));
         IL.Push(r + d[99]);
         IL.Emit.Tail();
-        IL.Emit.Call(new MethodRef(typeof(Program), nameof(InstantiatingStub1Other)).MakeGenericMethod(typeof(T)));
+        IL.Emit.Call(
+            new MethodRef(typeof(Program), nameof(InstantiatingStub1Other)).MakeGenericMethod(
+                typeof(T)
+            )
+        );
         return IL.Return<int>();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static int InstantiatingStub1Other<T>(T c0, T c1, T c2, T c3, T c4, T c5, T c6, T c7, int a, int r, Span<int> d, int result)
-    {
-        if (a == d.Length) return result;
+    private static int InstantiatingStub1Other<T>(
+        T c0,
+        T c1,
+        T c2,
+        T c3,
+        T c4,
+        T c5,
+        T c6,
+        T c7,
+        int a,
+        int r,
+        Span<int> d,
+        int result
+    ) {
+        if (a == d.Length)
+            return result;
         else
         {
             IL.Push(a + 1);
@@ -728,7 +956,11 @@ internal class Program
             IL.Push(c0);
             IL.Emit.Ldarg(nameof(d));
             IL.Emit.Tail();
-            IL.Emit.Call(new MethodRef(typeof(Program), nameof(InstantiatingStub1)).MakeGenericMethod(typeof(T)));
+            IL.Emit.Call(
+                new MethodRef(typeof(Program), nameof(InstantiatingStub1)).MakeGenericMethod(
+                    typeof(T)
+                )
+            );
             return IL.Return<int>();
         }
     }
@@ -769,9 +1001,19 @@ internal class Program
         IL.Emit.Pop();
         GenericInstanceFactory fact = new GenericInstanceFactory();
         IL.Push(fact);
-        IL.Emit.Call(new MethodRef(typeof(GenericInstanceFactory), nameof(GenericInstanceFactory.CreateInstance)));
+        IL.Emit.Call(
+            new MethodRef(
+                typeof(GenericInstanceFactory),
+                nameof(GenericInstanceFactory.CreateInstance)
+            )
+        );
         IL.Emit.Tail();
-        IL.Emit.Callvirt(new MethodRef(typeof(GenericInstance<string>), nameof(GenericInstance<string>.NumberOfInstances)));
+        IL.Emit.Callvirt(
+            new MethodRef(
+                typeof(GenericInstance<string>),
+                nameof(GenericInstance<string>.NumberOfInstances)
+            )
+        );
         return IL.Return<int>();
     }
 }
@@ -888,7 +1130,15 @@ class Instance
         IL.Push(acc);
         IL.Push(s_calcInstanceCalliOther);
         IL.Emit.Tail();
-        IL.Emit.Calli(new StandAloneMethodSig(CallingConventions.Standard | CallingConventions.HasThis, typeof(int), typeof(int), typeof(S32), typeof(int)));
+        IL.Emit.Calli(
+            new StandAloneMethodSig(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                typeof(int),
+                typeof(int),
+                typeof(S32),
+                typeof(int)
+            )
+        );
         return IL.Return<int>();
     }
 
@@ -902,7 +1152,14 @@ class Instance
         IL.Push(acc);
         IL.Push(s_calcInstanceCalli);
         IL.Emit.Tail();
-        IL.Emit.Calli(new StandAloneMethodSig(CallingConventions.Standard | CallingConventions.HasThis, typeof(int), typeof(int), typeof(int)));
+        IL.Emit.Calli(
+            new StandAloneMethodSig(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                typeof(int),
+                typeof(int),
+                typeof(int)
+            )
+        );
         return IL.Return<int>();
     }
 
@@ -924,7 +1181,15 @@ class Instance
         IL.Push(acc);
         IL.Push(s_calcInstanceCalliRetbufOther);
         IL.Emit.Tail();
-        IL.Emit.Calli(new StandAloneMethodSig(CallingConventions.Standard | CallingConventions.HasThis, typeof(S32), typeof(int), typeof(S32), typeof(int)));
+        IL.Emit.Calli(
+            new StandAloneMethodSig(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                typeof(S32),
+                typeof(int),
+                typeof(S32),
+                typeof(int)
+            )
+        );
         return IL.Return<S32>();
     }
 
@@ -938,13 +1203,29 @@ class Instance
         IL.Push(acc);
         IL.Push(s_calcInstanceCalliRetbuf);
         IL.Emit.Tail();
-        IL.Emit.Calli(new StandAloneMethodSig(CallingConventions.Standard | CallingConventions.HasThis, typeof(S32), typeof(int), typeof(int)));
+        IL.Emit.Calli(
+            new StandAloneMethodSig(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                typeof(S32),
+                typeof(int),
+                typeof(int)
+            )
+        );
         return IL.Return<S32>();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public string GC(object a, int b, object c, object d, string e, string f, object g, int h, ref int interior)
-    {
+    public string GC(
+        object a,
+        int b,
+        object c,
+        object d,
+        string e,
+        string f,
+        object g,
+        int h,
+        ref int interior
+    ) {
         IL.Push(this);
 
         IL.Push(a);
@@ -952,19 +1233,7 @@ class Instance
         S32 s = new S32();
         IL.Push(s);
 
-        SGC2 sgc = new SGC2
-        {
-            A = b,
-            B =
-            {
-                A = c,
-                B = d,
-                C = e,
-                D = f,
-            },
-            C = g,
-            D = h
-        };
+        SGC2 sgc = new SGC2 { A = b, B = { A = c, B = d, C = e, D = f, }, C = g, D = h };
         IL.Push(sgc);
         IL.Push(ref interior);
 
@@ -974,8 +1243,8 @@ class Instance
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private string GCOther(object a, S32 s, SGC2 gc, ref int interior)
-        => $"{a} {gc.A} {gc.B.A} {gc.B.B} {gc.B.C} {gc.B.D} {gc.C} {gc.D} {interior}";
+    private string GCOther(object a, S32 s, SGC2 gc, ref int interior) =>
+        $"{a} {gc.A} {gc.B.A} {gc.B.B} {gc.B.C} {gc.B.D} {gc.C} {gc.D} {interior}";
 }
 
 struct InstanceValueType
@@ -1186,7 +1455,12 @@ class GenInstance<T1, T2>
         IL.Push(c);
         IL.Push(d);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(new MethodRef(typeof(GenInstance<T1, T2>), nameof(NonVirt)).MakeGenericMethod(typeof(T3), typeof(T4)));
+        IL.Emit.Callvirt(
+            new MethodRef(typeof(GenInstance<T1, T2>), nameof(NonVirt)).MakeGenericMethod(
+                typeof(T3),
+                typeof(T4)
+            )
+        );
         return IL.Return<string>();
     }
 
@@ -1200,15 +1474,20 @@ class GenInstance<T1, T2>
         IL.Push(c);
         IL.Push(d);
         IL.Emit.Tail();
-        IL.Emit.Callvirt(new MethodRef(typeof(GenInstance<T1, T2>), nameof(Virt)).MakeGenericMethod(typeof(T3), typeof(T4)));
+        IL.Emit.Callvirt(
+            new MethodRef(typeof(GenInstance<T1, T2>), nameof(Virt)).MakeGenericMethod(
+                typeof(T3),
+                typeof(T4)
+            )
+        );
         return IL.Return<string>();
     }
 
-    public string NonVirt<T3, T4>(S32 s, T1 a, T2 b, T3 c, T4 d)
-        => $"{typeof(T1).FullName} {typeof(T2).FullName} {typeof(T3).FullName} {typeof(T4).FullName} {a} {b} {c} {d}";
+    public string NonVirt<T3, T4>(S32 s, T1 a, T2 b, T3 c, T4 d) =>
+        $"{typeof(T1).FullName} {typeof(T2).FullName} {typeof(T3).FullName} {typeof(T4).FullName} {a} {b} {c} {d}";
 
-    public virtual string Virt<T3, T4>(S32 s, T1 a, T2 b, T3 c, T4 d)
-        => $"{typeof(T1).FullName} {typeof(T2).FullName} {typeof(T3).FullName} {typeof(T4).FullName} {a} {b} {c} {d}";
+    public virtual string Virt<T3, T4>(S32 s, T1 a, T2 b, T3 c, T4 d) =>
+        $"{typeof(T1).FullName} {typeof(T2).FullName} {typeof(T3).FullName} {typeof(T4).FullName} {a} {b} {c} {d}";
 }
 
 interface IGenInterface<T1, T2>
@@ -1219,11 +1498,10 @@ interface IGenInterface<T1, T2>
 
 class GenInterfaceImpl<T1, T2> : IGenInterface<T1, T2>
 {
-    public string F<T3, T4>(S32 s, T1 a, T2 b, T3 c, T4 d)
-        => $"{typeof(T1).FullName} {typeof(T2).FullName} {typeof(T3).FullName} {typeof(T4).FullName} {a} {b} {c} {d}";
+    public string F<T3, T4>(S32 s, T1 a, T2 b, T3 c, T4 d) =>
+        $"{typeof(T1).FullName} {typeof(T2).FullName} {typeof(T3).FullName} {typeof(T4).FullName} {a} {b} {c} {d}";
 
-    public string G(S32 s, T1 a, T2 b)
-        => $"{typeof(T1).FullName} {typeof(T2).FullName} {a} {b}";
+    public string G(S32 s, T1 a, T2 b) => $"{typeof(T1).FullName} {typeof(T2).FullName} {a} {b}";
 }
 
 abstract class GenAbstract<T1>
@@ -1234,9 +1512,7 @@ abstract class GenAbstract<T1>
 
 class GenAbstractImpl<T1> : GenAbstract<T1>
 {
-    public override string F<T2>()
-        => $"{typeof(T1).FullName} {typeof(T2).FullName}";
+    public override string F<T2>() => $"{typeof(T1).FullName} {typeof(T2).FullName}";
 
-    public override string G()
-        => $"{typeof(T1).FullName}";
+    public override string G() => $"{typeof(T1).FullName}";
 }

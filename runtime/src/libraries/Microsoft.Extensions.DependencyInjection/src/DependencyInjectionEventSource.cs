@@ -12,15 +12,14 @@ namespace Microsoft.Extensions.DependencyInjection
     [EventSource(Name = "Microsoft-Extensions-DependencyInjection")]
     internal sealed class DependencyInjectionEventSource : EventSource
     {
-        public static readonly DependencyInjectionEventSource Log = new DependencyInjectionEventSource();
+        public static readonly DependencyInjectionEventSource Log =
+            new DependencyInjectionEventSource();
 
         // Event source doesn't support large payloads so we chunk formatted call site tree
         private int MaxChunkSize = 10 * 1024;
 
-
-        private DependencyInjectionEventSource() : base(EventSourceSettings.EtwSelfDescribingEventFormat)
-        {
-        }
+        private DependencyInjectionEventSource()
+            : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
 
         // NOTE
         // - The 'Start' and 'Stop' suffixes on the following event names have special meaning in EventSource. They
@@ -30,11 +29,18 @@ namespace Microsoft.Extensions.DependencyInjection
         // - A stop event's event id must be next one after its start event.
         // - Avoid renaming methods or parameters marked with EventAttribute. EventSource uses these to form the event object.
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Parameters to this method are primitive and are trimmer safe.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Parameters to this method are primitive and are trimmer safe."
+        )]
         [Event(1, Level = EventLevel.Verbose)]
-        private void CallSiteBuilt(string serviceType, string callSite, int chunkIndex, int chunkCount)
-        {
+        private void CallSiteBuilt(
+            string serviceType,
+            string callSite,
+            int chunkIndex,
+            int chunkCount
+        ) {
             WriteEvent(1, serviceType, callSite, chunkIndex, chunkCount);
         }
 
@@ -57,8 +63,11 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         [Event(5, Level = EventLevel.Verbose)]
-        public void ScopeDisposed(int serviceProviderHashCode, int scopedServicesResolved, int disposableServices)
-        {
+        public void ScopeDisposed(
+            int serviceProviderHashCode,
+            int scopedServicesResolved,
+            int disposableServices
+        ) {
             WriteEvent(5, serviceProviderHashCode, scopedServicesResolved, disposableServices);
         }
 
@@ -67,7 +76,11 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             if (IsEnabled(EventLevel.Verbose, EventKeywords.All))
             {
-                ScopeDisposed(engine.GetHashCode(), state.ResolvedServicesCount, state.DisposableServicesCount);
+                ScopeDisposed(
+                    engine.GetHashCode(),
+                    state.ResolvedServicesCount,
+                    state.DisposableServicesCount
+                );
             }
         }
 
@@ -86,13 +99,20 @@ namespace Microsoft.Extensions.DependencyInjection
             if (IsEnabled(EventLevel.Verbose, EventKeywords.All))
             {
                 string format = CallSiteJsonFormatter.Instance.Format(callSite);
-                int chunkCount = format.Length / MaxChunkSize + (format.Length % MaxChunkSize > 0 ? 1 : 0);
+                int chunkCount =
+                    format.Length / MaxChunkSize + (format.Length % MaxChunkSize > 0 ? 1 : 0);
 
                 for (int i = 0; i < chunkCount; i++)
                 {
                     CallSiteBuilt(
                         serviceType.ToString(),
-                        format.Substring(i * MaxChunkSize, Math.Min(MaxChunkSize, format.Length - i * MaxChunkSize)), i, chunkCount);
+                        format.Substring(
+                            i * MaxChunkSize,
+                            Math.Min(MaxChunkSize, format.Length - i * MaxChunkSize)
+                        ),
+                        i,
+                        chunkCount
+                    );
                 }
             }
         }
@@ -112,8 +132,11 @@ namespace Microsoft.Extensions.DependencyInjection
         // This is an extension method because this assembly is trimmed at a "type granular" level in Blazor,
         // and the whole DependencyInjectionEventSource type can't be trimmed. So extracting this to a separate
         // type allows for the System.Linq.Expressions usage to be trimmed by the ILLinker.
-        public static void ExpressionTreeGenerated(this DependencyInjectionEventSource source, Type serviceType, Expression expression)
-        {
+        public static void ExpressionTreeGenerated(
+            this DependencyInjectionEventSource source,
+            Type serviceType,
+            Expression expression
+        ) {
             if (source.IsEnabled(EventLevel.Verbose, EventKeywords.All))
             {
                 var visitor = new NodeCountingVisitor();

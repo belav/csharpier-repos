@@ -22,9 +22,7 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
-                ["MinHorizontal"] = MinHorizontal
-            };
+            TestList = new Dictionary<string, Action>() { ["MinHorizontal"] = MinHorizontal };
         }
 
         private static void MinHorizontal()
@@ -95,8 +93,10 @@ namespace JIT.HardwareIntrinsics.X86
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
 
         private static UInt16[] _data = new UInt16[Op1ElementCount];
 
@@ -110,8 +110,15 @@ namespace JIT.HardwareIntrinsics.X86
         {
             var random = new Random();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (ushort)(random.Next(0, ushort.MaxValue)); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt16>, byte>(ref _clsVar), ref Unsafe.As<UInt16, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (ushort)(random.Next(0, ushort.MaxValue));
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<UInt16>, byte>(ref _clsVar),
+                ref Unsafe.As<UInt16, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
         }
 
         public SimpleUnaryOpTest__MinHorizontal()
@@ -120,11 +127,25 @@ namespace JIT.HardwareIntrinsics.X86
 
             var random = new Random();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (ushort)(random.Next(0, ushort.MaxValue)); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt16>, byte>(ref _fld), ref Unsafe.As<UInt16, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (ushort)(random.Next(0, ushort.MaxValue));
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<UInt16>, byte>(ref _fld),
+                ref Unsafe.As<UInt16, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (ushort)(random.Next(0, ushort.MaxValue)); }
-            _dataTable = new SimpleUnaryOpTest__DataTable<UInt16, UInt16>(_data, new UInt16[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (ushort)(random.Next(0, ushort.MaxValue));
+            }
+            _dataTable = new SimpleUnaryOpTest__DataTable<UInt16, UInt16>(
+                _data,
+                new UInt16[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Sse41.IsSupported;
@@ -133,9 +154,7 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunBasicScenario_UnsafeRead()
         {
-            var result = Sse41.MinHorizontal(
-                Unsafe.Read<Vector128<UInt16>>(_dataTable.inArrayPtr)
-            );
+            var result = Sse41.MinHorizontal(Unsafe.Read<Vector128<UInt16>>(_dataTable.inArrayPtr));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -143,9 +162,7 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunBasicScenario_Load()
         {
-            var result = Sse41.MinHorizontal(
-                Sse2.LoadVector128((UInt16*)(_dataTable.inArrayPtr))
-            );
+            var result = Sse41.MinHorizontal(Sse2.LoadVector128((UInt16*)(_dataTable.inArrayPtr)));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -163,10 +180,14 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_UnsafeRead()
         {
-            var result = typeof(Sse41).GetMethod(nameof(Sse41.MinHorizontal), new Type[] { typeof(Vector128<UInt16>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<UInt16>>(_dataTable.inArrayPtr)
-                                     });
+            var result = typeof(Sse41).GetMethod(
+                    nameof(Sse41.MinHorizontal),
+                    new Type[] { typeof(Vector128<UInt16>) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Unsafe.Read<Vector128<UInt16>>(_dataTable.inArrayPtr) }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt16>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -174,10 +195,14 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_Load()
         {
-            var result = typeof(Sse41).GetMethod(nameof(Sse41.MinHorizontal), new Type[] { typeof(Vector128<UInt16>) })
-                                     .Invoke(null, new object[] {
-                                        Sse2.LoadVector128((UInt16*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Sse41).GetMethod(
+                    nameof(Sse41.MinHorizontal),
+                    new Type[] { typeof(Vector128<UInt16>) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Sse2.LoadVector128((UInt16*)(_dataTable.inArrayPtr)) }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt16>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -185,10 +210,14 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunReflectionScenario_LoadAligned()
         {
-            var result = typeof(Sse41).GetMethod(nameof(Sse41.MinHorizontal), new Type[] { typeof(Vector128<UInt16>) })
-                                     .Invoke(null, new object[] {
-                                        Sse2.LoadAlignedVector128((UInt16*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Sse41).GetMethod(
+                    nameof(Sse41.MinHorizontal),
+                    new Type[] { typeof(Vector128<UInt16>) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Sse2.LoadAlignedVector128((UInt16*)(_dataTable.inArrayPtr)) }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt16>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -196,9 +225,7 @@ namespace JIT.HardwareIntrinsics.X86
 
         public void RunClsVarScenario()
         {
-            var result = Sse41.MinHorizontal(
-                _clsVar
-            );
+            var result = Sse41.MinHorizontal(_clsVar);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar, _dataTable.outArrayPtr);
@@ -262,33 +289,54 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector128<UInt16> firstOp, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<UInt16> firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref inArray[0]), firstOp);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(void* firstOp, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            void* firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             UInt16[] inArray = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(UInt16[] firstOp, UInt16[] result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            UInt16[] firstOp,
+            UInt16[] result,
+            [CallerMemberName] string method = ""
+        ) {
             var minValue = firstOp.Min();
             var minIndex = firstOp.ToList().IndexOf(minValue);
-            
+
             if ((result[0] != minValue) || (result[1] != minIndex))
             {
                 Succeeded = false;
@@ -307,7 +355,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!Succeeded)
             {
-                Console.WriteLine($"{nameof(Sse41)}.{nameof(Sse41.MinHorizontal)}<UInt16>(Vector128<UInt16>): {method} failed:");
+                Console.WriteLine(
+                    $"{nameof(Sse41)}.{nameof(Sse41.MinHorizontal)}<UInt16>(Vector128<UInt16>): {method} failed:"
+                );
                 Console.WriteLine($"  firstOp: ({string.Join(", ", firstOp)})");
                 Console.WriteLine($"   result: ({string.Join(", ", result)})");
                 Console.WriteLine();

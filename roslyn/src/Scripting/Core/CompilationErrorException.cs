@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// </summary>
         public ImmutableArray<Diagnostic> Diagnostics { get; }
 
-        public CompilationErrorException(string message, ImmutableArray<Diagnostic> diagnostics)
-            : base(message)
+        public CompilationErrorException(
+            string message,
+            ImmutableArray<Diagnostic> diagnostics
+        ) : base(message)
         {
             if (diagnostics.IsDefault)
             {

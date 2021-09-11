@@ -21,8 +21,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var expectedInstance = new TestViewComponent();
 
             var typeActivator = new Mock<ITypeActivatorCache>();
-            typeActivator
-                .Setup(ta => ta.CreateInstance<object>(It.IsAny<IServiceProvider>(), It.IsAny<Type>()))
+            typeActivator.Setup(
+                    ta => ta.CreateInstance<object>(It.IsAny<IServiceProvider>(), It.IsAny<Type>())
+                )
                 .Returns(expectedInstance);
 
             var activator = new DefaultViewComponentActivator(typeActivator.Object);
@@ -45,8 +46,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var expectedInstance = new VisibilityViewComponent();
 
             var typeActivator = new Mock<ITypeActivatorCache>();
-            typeActivator
-                .Setup(ta => ta.CreateInstance<object>(It.IsAny<IServiceProvider>(), It.IsAny<Type>()))
+            typeActivator.Setup(
+                    ta => ta.CreateInstance<object>(It.IsAny<IServiceProvider>(), It.IsAny<Type>())
+                )
                 .Returns(expectedInstance);
 
             var activator = new DefaultViewComponentActivator(typeActivator.Object);
@@ -112,7 +114,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             [ViewComponentContext]
             protected internal ViewComponentContext C { get; set; }
         }
-
 
         public class ActivablePropertiesViewComponent : IDisposable
         {

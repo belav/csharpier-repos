@@ -91,7 +91,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 }
                 else if (arg2.Contains(kind))
                 {
-                    var re = new RudeEditDiagnostic(kind, TextSpan.FromBounds(1, 2), syntaxNode, new[] { "<1>", "<2>" });
+                    var re = new RudeEditDiagnostic(
+                        kind,
+                        TextSpan.FromBounds(1, 2),
+                        syntaxNode,
+                        new[] { "<1>", "<2>" }
+                    );
                     var d = re.ToDiagnostic(tree);
                     Assert.True(d.GetMessage().Contains("<1>"), kind.ToString());
                     Assert.True(d.GetMessage().Contains("<2>"), kind.ToString());
@@ -99,7 +104,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 }
                 else if (arg3.Contains(kind))
                 {
-                    var re = new RudeEditDiagnostic(kind, TextSpan.FromBounds(1, 2), syntaxNode, new[] { "<1>", "<2>", "<3>" });
+                    var re = new RudeEditDiagnostic(
+                        kind,
+                        TextSpan.FromBounds(1, 2),
+                        syntaxNode,
+                        new[] { "<1>", "<2>", "<3>" }
+                    );
                     var d = re.ToDiagnostic(tree);
                     Assert.True(d.GetMessage().Contains("<1>"), kind.ToString());
                     Assert.True(d.GetMessage().Contains("<2>"), kind.ToString());
@@ -108,7 +118,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 }
                 else
                 {
-                    var re = new RudeEditDiagnostic(kind, TextSpan.FromBounds(1, 2), syntaxNode, new[] { "<1>" });
+                    var re = new RudeEditDiagnostic(
+                        kind,
+                        TextSpan.FromBounds(1, 2),
+                        syntaxNode,
+                        new[] { "<1>" }
+                    );
                     var d = re.ToDiagnostic(tree);
                     Assert.True(d.GetMessage().Contains("<1>"), kind.ToString());
                     Assert.False(d.GetMessage().Contains("{"), kind.ToString());

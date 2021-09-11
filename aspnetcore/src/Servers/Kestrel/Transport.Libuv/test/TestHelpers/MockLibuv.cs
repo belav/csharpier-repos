@@ -22,8 +22,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests.TestHelpers
 
         private readonly string _stackTrace;
 
-        unsafe public MockLibuv()
-            : base(onlyForTesting: true)
+        unsafe public MockLibuv() : base(onlyForTesting: true)
         {
             _stackTrace = Environment.StackTrace;
 
@@ -129,7 +128,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests.TestHelpers
             };
             _uv_unsafe_async_send = handle =>
             {
-                throw new Exception($"Why is this getting called?{Environment.NewLine}{_stackTrace}");
+                throw new Exception(
+                    $"Why is this getting called?{Environment.NewLine}{_stackTrace}"
+                );
             };
 
             _uv_timer_init = (loop, handle) => 0;
@@ -150,15 +151,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests.TestHelpers
 
         public ManualResetEventSlim KestrelThreadBlocker { get; } = new ManualResetEventSlim(true);
 
-        private int UvReadStart(UvStreamHandle handle, uv_alloc_cb allocCallback, uv_read_cb readCallback)
-        {
+        private int UvReadStart(
+            UvStreamHandle handle,
+            uv_alloc_cb allocCallback,
+            uv_read_cb readCallback
+        ) {
             AllocCallback = allocCallback;
             ReadCallback = readCallback;
             return 0;
         }
 
-        unsafe private int UvWrite(UvRequest req, UvStreamHandle handle, uv_buf_t* bufs, int nbufs, uv_write_cb cb)
-        {
+        unsafe private int UvWrite(
+            UvRequest req,
+            UvStreamHandle handle,
+            uv_buf_t* bufs,
+            int nbufs,
+            uv_write_cb cb
+        ) {
             return OnWrite(handle, nbufs, status => cb(req.InternalGetHandle(), status));
         }
     }

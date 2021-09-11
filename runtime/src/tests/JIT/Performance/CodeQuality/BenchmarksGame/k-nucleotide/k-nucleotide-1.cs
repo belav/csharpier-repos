@@ -24,7 +24,6 @@ using Xunit;
 
 namespace BenchmarksGame
 {
-
     public struct ByteString : IEquatable<ByteString>
     {
         public byte[] Array;
@@ -33,20 +32,28 @@ namespace BenchmarksGame
 
         public ByteString(byte[] array, int start, int length)
         {
-            Array = array; Start = start; Length = length;
+            Array = array;
+            Start = start;
+            Length = length;
         }
 
         public ByteString(string text)
         {
-            Start = 0; Length = text.Length;
+            Start = 0;
+            Length = text.Length;
             Array = Encoding.ASCII.GetBytes(text);
         }
 
         public override int GetHashCode()
         {
-            if (Length < 1) return 0;
-            int hc = Length ^ (Array[Start] << 24); if (Length < 2) return hc;
-            hc ^= Array[Start + Length - 1] << 20; if (Length < 3) return hc;
+            if (Length < 1)
+                return 0;
+            int hc = Length ^ (Array[Start] << 24);
+            if (Length < 2)
+                return hc;
+            hc ^= Array[Start + Length - 1] << 20;
+            if (Length < 3)
+                return hc;
             for (int c = Length - 2; c > 0; c--)
                 hc ^= Array[Start + c] << (c & 0xf);
             return hc;
@@ -54,9 +61,11 @@ namespace BenchmarksGame
 
         public bool Equals(ByteString other)
         {
-            if (Length != other.Length) return false;
+            if (Length != other.Length)
+                return false;
             for (int i = 0; i < Length; i++)
-                if (Array[Start + i] != other.Array[other.Start + i]) return false;
+                if (Array[Start + i] != other.Array[other.Start + i])
+                    return false;
             return true;
         }
 
@@ -71,7 +80,8 @@ namespace BenchmarksGame
         public static byte[] GetBytes(this List<string> input)
         {
             int count = 0;
-            for (int i = 0; i < input.Count; i++) count += input[i].Length;
+            for (int i = 0; i < input.Count; i++)
+                count += input[i].Length;
             var byteArray = new byte[count];
             count = 0;
             for (int i = 0; i < input.Count; i++)
@@ -86,7 +96,6 @@ namespace BenchmarksGame
 
     public class KNucleotide_1
     {
-
         public static int Main(string[] args)
         {
             var helpers = new TestHarnessHelpers(bigInput: false);
@@ -108,13 +117,15 @@ namespace BenchmarksGame
             var helpers = new TestHarnessHelpers(bigInput: true);
             bool ok = true;
 
-            Benchmark.Iterate(() =>
-            {
-                using (var inputStream = helpers.GetInputStream())
+            Benchmark.Iterate(
+                () =>
                 {
-                    ok &= Bench(inputStream, helpers, false);
+                    using (var inputStream = helpers.GetInputStream())
+                    {
+                        ok &= Bench(inputStream, helpers, false);
+                    }
                 }
-            });
+            );
             Assert.True(ok);
         }
 
@@ -131,8 +142,10 @@ namespace BenchmarksGame
             while ((line = source.ReadLine()) != null)
             {
                 char c = line[0];
-                if (c == '>') break;
-                if (c != ';') input.Add(line.ToUpper());
+                if (c == '>')
+                    break;
+                if (c != ';')
+                    input.Add(line.ToUpper());
             }
 
             KNucleotide kn = new KNucleotide(input.GetBytes());
@@ -141,9 +154,9 @@ namespace BenchmarksGame
             for (int f = 1; f < 3; f++)
                 ok &= kn.WriteFrequencies(f, helpers.expectedFrequencies[f - 1], verbose);
             int i = 0;
-            foreach (var seq in
-                     new[] { "GGT", "GGTA", "GGTATT", "GGTATTTTAATT",
-                         "GGTATTTTAATTTATAGT"})
+            foreach (
+                var seq in new[] { "GGT", "GGTA", "GGTATT", "GGTATTTTAATT", "GGTATTTTAATTTATAGT" }
+            )
                 ok &= kn.WriteCount(seq, helpers.expectedCountFragments[i++], verbose);
 
             return ok;
@@ -152,18 +165,22 @@ namespace BenchmarksGame
 
     public class KNucleotide
     {
-
         private class Count
         {
             public int V;
-            public Count(int v) { V = v; }
+            public Count(int v)
+            {
+                V = v;
+            }
         }
 
-        private Dictionary<ByteString, Count> frequencies
-            = new Dictionary<ByteString, Count>();
+        private Dictionary<ByteString, Count> frequencies = new Dictionary<ByteString, Count>();
         private byte[] sequence;
 
-        public KNucleotide(byte[] s) { sequence = s; }
+        public KNucleotide(byte[] s)
+        {
+            sequence = s;
+        }
 
         public bool WriteFrequencies(int length, int[] expectedCounts, bool verbose)
         {
@@ -178,11 +195,11 @@ namespace BenchmarksGame
                 ok &= (item.Value.V == expectedCounts[i++]);
                 if (verbose)
                 {
-                    Console.WriteLine("{0} {1:f3}",
-                                item.Key.ToString(), item.Value.V * percent);
+                    Console.WriteLine("{0} {1:f3}", item.Key.ToString(), item.Value.V * percent);
                 }
             }
-            if (verbose) Console.WriteLine();
+            if (verbose)
+                Console.WriteLine();
             return ok;
         }
 
@@ -192,7 +209,8 @@ namespace BenchmarksGame
             Count count;
             if (!frequencies.TryGetValue(new ByteString(fragment), out count))
                 count = new Count(0);
-            if (verbose) Console.WriteLine("{0}\t{1}", count.V, fragment);
+            if (verbose)
+                Console.WriteLine("{0}\t{1}", count.V, fragment);
             return (count.V == expectedCount);
         }
 
@@ -218,11 +236,12 @@ namespace BenchmarksGame
         }
 
         int SortByFrequencyAndCode(
-                KeyValuePair<ByteString, Count> i0,
-                KeyValuePair<ByteString, Count> i1)
-        {
+            KeyValuePair<ByteString, Count> i0,
+            KeyValuePair<ByteString, Count> i1
+        ) {
             int order = i1.Value.V.CompareTo(i0.Value.V);
-            if (order != 0) return order;
+            if (order != 0)
+                return order;
             return i0.Key.ToString().CompareTo(i1.Key.ToString());
         }
     }

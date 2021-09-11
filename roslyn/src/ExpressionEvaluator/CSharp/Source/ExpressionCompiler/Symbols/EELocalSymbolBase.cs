@@ -14,31 +14,51 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
     internal static class LocalSymbolExtensions
     {
-        internal static LocalSymbol ToOtherMethod(this LocalSymbol local, MethodSymbol method, TypeMap typeMap)
-        {
+        internal static LocalSymbol ToOtherMethod(
+            this LocalSymbol local,
+            MethodSymbol method,
+            TypeMap typeMap
+        ) {
             var l = local as EELocalSymbolBase;
             if ((object)l != null)
             {
                 return l.ToOtherMethod(method, typeMap);
             }
             var type = typeMap.SubstituteType(local.TypeWithAnnotations);
-            return new EELocalSymbol(method, local.Locations, local.Name, -1, local.DeclarationKind, type, local.RefKind, local.IsPinned, local.IsCompilerGenerated, local.CanScheduleToStack);
+            return new EELocalSymbol(
+                method,
+                local.Locations,
+                local.Name,
+                -1,
+                local.DeclarationKind,
+                type,
+                local.RefKind,
+                local.IsPinned,
+                local.IsCompilerGenerated,
+                local.CanScheduleToStack
+            );
         }
     }
 
     internal abstract class EELocalSymbolBase : LocalSymbol
     {
-        internal static readonly ImmutableArray<Location> NoLocations = ImmutableArray.Create(NoLocation.Singleton);
+        internal static readonly ImmutableArray<Location> NoLocations = ImmutableArray.Create(
+            NoLocation.Singleton
+        );
 
         internal abstract EELocalSymbolBase ToOtherMethod(MethodSymbol method, TypeMap typeMap);
 
-        internal override ConstantValue GetConstantValue(SyntaxNode node, LocalSymbol inProgress, BindingDiagnosticBag diagnostics)
-        {
+        internal override ConstantValue GetConstantValue(
+            SyntaxNode node,
+            LocalSymbol inProgress,
+            BindingDiagnosticBag diagnostics
+        ) {
             return null;
         }
 
-        internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(BoundExpression boundInitValue)
-        {
+        internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
+            BoundExpression boundInitValue
+        ) {
             return ImmutableBindingDiagnostic<AssemblySymbol>.Empty;
         }
 
@@ -52,8 +72,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             get { return null; }
         }
 
-        internal sealed override LocalSymbol WithSynthesizedLocalKindAndSyntax(SynthesizedLocalKind kind, SyntaxNode syntax)
-        {
+        internal sealed override LocalSymbol WithSynthesizedLocalKindAndSyntax(
+            SynthesizedLocalKind kind,
+            SyntaxNode syntax
+        ) {
             throw ExceptionUtilities.Unreachable;
         }
 
@@ -71,13 +93,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         {
             var type = this.TypeWithAnnotations;
             UseSiteInfo<AssemblySymbol> result = default;
-            if (!DeriveUseSiteInfoFromType(ref result, type, AllowedRequiredModifierType.None) && this.ContainingModule.HasUnifiedReferences)
-            {
-                // If the member is in an assembly with unified references, 
+            if (
+                !DeriveUseSiteInfoFromType(ref result, type, AllowedRequiredModifierType.None)
+                && this.ContainingModule.HasUnifiedReferences
+            ) {
+                // If the member is in an assembly with unified references,
                 // we check if its definition depends on a type from a unified reference.
                 HashSet<TypeSymbol> unificationCheckedTypes = null;
                 var diagnosticInfo = result.DiagnosticInfo;
-                type.GetUnificationUseSiteDiagnosticRecursive(ref diagnosticInfo, this, ref unificationCheckedTypes);
+                type.GetUnificationUseSiteDiagnosticRecursive(
+                    ref diagnosticInfo,
+                    this,
+                    ref unificationCheckedTypes
+                );
                 result = result.AdjustDiagnosticInfo(diagnosticInfo);
             }
 

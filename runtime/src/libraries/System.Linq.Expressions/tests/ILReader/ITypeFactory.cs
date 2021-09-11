@@ -25,10 +25,14 @@ namespace System.Linq.Expressions.Tests
         protected DefaultTypeFactory() { }
 
 #if GETTYPEFROMHANDLEUNSAFE
-        private static readonly MethodInfo s_GetTypeFromHandleUnsafe = typeof(Type).GetMethodAssert("GetTypeFromHandleUnsafe");
+        private static readonly MethodInfo s_GetTypeFromHandleUnsafe = typeof(Type).GetMethodAssert(
+            "GetTypeFromHandleUnsafe"
+        );
 
-        public virtual Type FromHandle(IntPtr handle) => (Type)s_GetTypeFromHandleUnsafe.Invoke(null, new object[] { handle });
-        public Type MakeGenericType(Type definition, Type[] arguments) => definition.MakeGenericType(arguments);
+        public virtual Type FromHandle(IntPtr handle) =>
+            (Type)s_GetTypeFromHandleUnsafe.Invoke(null, new object[] { handle });
+        public Type MakeGenericType(Type definition, Type[] arguments) =>
+            definition.MakeGenericType(arguments);
 #else
         public virtual Type FromHandle(IntPtr handle) => typeof(Unknown);
         public Type MakeGenericType(Type definition, Type[] arguments)
@@ -57,7 +61,8 @@ namespace System.Linq.Expressions.Tests
 static class UnknownTypeFactory
 {
     public static readonly Type Unknown = typeof(Unknown);
-    public static Type GetGenericUnknown(int arity) => Unknown.GetTypeInfo().Assembly.GetType(Unknown.FullName + "`" + arity, throwOnError: false);
+    public static Type GetGenericUnknown(int arity) =>
+        Unknown.GetTypeInfo().Assembly.GetType(Unknown.FullName + "`" + arity, throwOnError: false);
 }
 
 // NB: Putting these in the global namespace in order to make their type name as short as possible when printed

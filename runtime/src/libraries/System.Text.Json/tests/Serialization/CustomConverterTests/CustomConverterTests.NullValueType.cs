@@ -14,8 +14,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class Int32NullConverter : JsonConverter<int>
         {
-            public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override int Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return 0;
@@ -24,8 +27,11 @@ namespace System.Text.Json.Serialization.Tests
                 return reader.GetInt32();
             }
 
-            public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                int value,
+                JsonSerializerOptions options
+            ) {
                 writer.WriteNumberValue(value);
             }
         }
@@ -66,8 +72,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         public class JsonNullableDateTimeOffsetConverter : JsonConverter<DateTimeOffset?>
         {
-            public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override DateTimeOffset? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return default;
@@ -79,11 +88,18 @@ namespace System.Text.Json.Serialization.Tests
                     return default;
                 }
 
-                return DateTimeOffset.ParseExact(value, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture);
+                return DateTimeOffset.ParseExact(
+                    value,
+                    "yyyy/MM/dd HH:mm:ss",
+                    CultureInfo.InvariantCulture
+                );
             }
 
-            public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                DateTimeOffset? value,
+                JsonSerializerOptions options
+            ) {
                 if (!value.HasValue)
                 {
                     writer.WriteNullValue();
@@ -107,7 +123,9 @@ namespace System.Text.Json.Serialization.Tests
             ClassWithNullableAndJsonConverterAttribute obj;
 
             const string BaselineJson = @"{""NullableValue"":""1989/01/01 11:22:33""}";
-            obj = JsonSerializer.Deserialize<ClassWithNullableAndJsonConverterAttribute>(BaselineJson);
+            obj = JsonSerializer.Deserialize<ClassWithNullableAndJsonConverterAttribute>(
+                BaselineJson
+            );
             Assert.NotNull(obj.NullableValue);
 
             const string Json = @"{""NullableValue"":""""}";
@@ -131,12 +149,20 @@ namespace System.Text.Json.Serialization.Tests
             ClassWithNullableAndWithoutJsonConverterAttribute obj;
 
             // The json is not valid with the default converter.
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ClassWithNullableAndWithoutJsonConverterAttribute>(Json));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithNullableAndWithoutJsonConverterAttribute>(
+                        Json
+                    )
+            );
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.Converters.Add(new JsonNullableDateTimeOffsetConverter());
 
-            obj = JsonSerializer.Deserialize<ClassWithNullableAndWithoutJsonConverterAttribute>(Json, options);
+            obj = JsonSerializer.Deserialize<ClassWithNullableAndWithoutJsonConverterAttribute>(
+                Json,
+                options
+            );
             Assert.Null(obj.NullableValue);
             Assert.Null(obj.NullableValues[0]);
 
@@ -154,10 +180,14 @@ namespace System.Text.Json.Serialization.Tests
         /// <summary>
         /// Allow a conversion of ClassThatCanBeNullDependingOnContent to null when its MyInt property is 0.
         /// </summary>
-        private class ClassThatCanBeNullDependingOnContentConverter : JsonConverter<ClassThatCanBeNullDependingOnContent>
+        private class ClassThatCanBeNullDependingOnContentConverter
+            : JsonConverter<ClassThatCanBeNullDependingOnContent>
         {
-            public override ClassThatCanBeNullDependingOnContent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override ClassThatCanBeNullDependingOnContent Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
                     return null;
@@ -179,14 +209,14 @@ namespace System.Text.Json.Serialization.Tests
                     return null;
                 }
 
-                return new ClassThatCanBeNullDependingOnContent
-                {
-                    MyInt = myInt
-                };
+                return new ClassThatCanBeNullDependingOnContent { MyInt = myInt };
             }
 
-            public override void Write(Utf8JsonWriter writer, ClassThatCanBeNullDependingOnContent value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                ClassThatCanBeNullDependingOnContent value,
+                JsonSerializerOptions options
+            ) {
                 writer.WriteStartObject();
 
                 if (value.MyInt == 0)
@@ -207,7 +237,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             ClassThatCanBeNullDependingOnContent obj;
 
-            obj = JsonSerializer.Deserialize<ClassThatCanBeNullDependingOnContent>(@"{""MyInt"":5}");
+            obj = JsonSerializer.Deserialize<ClassThatCanBeNullDependingOnContent>(
+                @"{""MyInt"":5}"
+            );
             Assert.Equal(5, obj.MyInt);
 
             string json;
@@ -218,7 +250,9 @@ namespace System.Text.Json.Serialization.Tests
             json = JsonSerializer.Serialize(obj);
             Assert.Contains(@"""MyInt"":null", json);
 
-            obj = JsonSerializer.Deserialize<ClassThatCanBeNullDependingOnContent>(@"{""MyInt"":0}");
+            obj = JsonSerializer.Deserialize<ClassThatCanBeNullDependingOnContent>(
+                @"{""MyInt"":0}"
+            );
             Assert.Null(obj);
         }
     }

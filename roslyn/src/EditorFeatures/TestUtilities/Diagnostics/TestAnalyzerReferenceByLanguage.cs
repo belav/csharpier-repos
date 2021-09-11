@@ -10,10 +10,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal class TestAnalyzerReferenceByLanguage : AnalyzerReference
     {
-        private readonly IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> _analyzersMap;
+        private readonly IReadOnlyDictionary<
+            string,
+            ImmutableArray<DiagnosticAnalyzer>
+        > _analyzersMap;
 
-        public TestAnalyzerReferenceByLanguage(IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzersMap, string? fullPath = null)
-        {
+        public TestAnalyzerReferenceByLanguage(
+            IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzersMap,
+            string? fullPath = null
+        ) {
             _analyzersMap = analyzersMap;
             FullPath = fullPath;
         }
@@ -22,8 +27,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public override string Display => nameof(TestAnalyzerReferenceByLanguage);
         public override object Id => Display;
 
-        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages()
-            => _analyzersMap.SelectMany(kvp => kvp.Value).ToImmutableArray();
+        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() =>
+            _analyzersMap.SelectMany(kvp => kvp.Value).ToImmutableArray();
 
         public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language)
         {

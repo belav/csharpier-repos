@@ -12,8 +12,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             private readonly IEnumerable<Matcher<T>> _matchers;
 
-            public ChoiceMatcher(params Matcher<T>[] matchers)
-                => _matchers = matchers;
+            public ChoiceMatcher(params Matcher<T>[] matchers) => _matchers = matchers;
 
             public override bool TryMatch(IList<T> sequence, ref int index)
             {
@@ -29,8 +28,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return false;
             }
 
-            public override string ToString()
-                => $"({string.Join("|", _matchers)})";
+            public override string ToString() => $"({string.Join("|", _matchers)})";
         }
     }
 }

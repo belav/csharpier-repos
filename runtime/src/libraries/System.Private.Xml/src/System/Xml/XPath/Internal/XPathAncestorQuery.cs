@@ -10,7 +10,13 @@ namespace MS.Internal.Xml.XPath
     {
         private readonly bool _matchSelf;
 
-        public XPathAncestorQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest, bool matchSelf) : base(qyInput, name, prefix, typeTest)
+        public XPathAncestorQuery(
+            Query qyInput,
+            string name,
+            string prefix,
+            XPathNodeType typeTest,
+            bool matchSelf
+        ) : base(qyInput, name, prefix, typeTest)
         {
             _matchSelf = matchSelf;
         }
@@ -57,8 +63,17 @@ namespace MS.Internal.Xml.XPath
             return this;
         }
 
-        public override XPathNodeIterator Clone() { return new XPathAncestorQuery(this); }
-        public override int CurrentPosition { get { return outputBuffer.Count - count + 1; } }
-        public override QueryProps Properties { get { return base.Properties | QueryProps.Reverse; } }
+        public override XPathNodeIterator Clone()
+        {
+            return new XPathAncestorQuery(this);
+        }
+        public override int CurrentPosition
+        {
+            get { return outputBuffer.Count - count + 1; }
+        }
+        public override QueryProps Properties
+        {
+            get { return base.Properties | QueryProps.Reverse; }
+        }
     }
 }

@@ -41,8 +41,11 @@ namespace Microsoft.DotNet.CoreSetup.Test
         //   is thrown.
         // - If a specified version folder already exists, then it is deleted and replaced
         //   with the contents of the _builtSharedFxDir.
-        public static void AddAvailableSharedFxVersions(string sharedFxDir, string sharedFxBaseDir, params string[] availableVersions)
-        {
+        public static void AddAvailableSharedFxVersions(
+            string sharedFxDir,
+            string sharedFxBaseDir,
+            params string[] availableVersions
+        ) {
             DirectoryInfo sharedFxBaseDirInfo = new DirectoryInfo(sharedFxBaseDir);
 
             if (!sharedFxBaseDirInfo.Exists)
@@ -60,8 +63,12 @@ namespace Microsoft.DotNet.CoreSetup.Test
         // This method adds a list of new framework version folders in the specified
         // sharedFxUberBaseDir. A runtimeconfig file is created that references
         // Microsoft.NETCore.App version=sharedFxBaseVersion
-        public static void AddAvailableSharedUberFxVersions(string sharedFxDir, string sharedUberFxBaseDir, string sharedFxBaseVersion, params string[] availableUberVersions)
-        {
+        public static void AddAvailableSharedUberFxVersions(
+            string sharedFxDir,
+            string sharedUberFxBaseDir,
+            string sharedFxBaseVersion,
+            params string[] availableUberVersions
+        ) {
             DirectoryInfo sharedFxUberBaseDirInfo = new DirectoryInfo(sharedUberFxBaseDir);
 
             if (!sharedFxUberBaseDirInfo.Exists)
@@ -74,7 +81,10 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 string newSharedFxDir = Path.Combine(sharedUberFxBaseDir, version);
                 CopyDirectory(sharedFxDir, newSharedFxDir);
 
-                string runtimeBaseConfig = Path.Combine(newSharedFxDir, "Microsoft.UberFramework.runtimeconfig.json");
+                string runtimeBaseConfig = Path.Combine(
+                    newSharedFxDir,
+                    "Microsoft.UberFramework.runtimeconfig.json"
+                );
                 SharedFramework.SetRuntimeConfigJson(runtimeBaseConfig, sharedFxBaseVersion, null);
             }
         }
@@ -91,16 +101,22 @@ namespace Microsoft.DotNet.CoreSetup.Test
          *   }
          * }
         */
-        public static void SetRuntimeConfigJson(string destFile, string version, int? rollFwdOnNoCandidateFx = null, bool? useUberFramework = false, JArray frameworks = null)
-        {
-            string name = useUberFramework.HasValue && useUberFramework.Value ? "Microsoft.UberFramework" : "Microsoft.NETCore.App";
+        public static void SetRuntimeConfigJson(
+            string destFile,
+            string version,
+            int? rollFwdOnNoCandidateFx = null,
+            bool? useUberFramework = false,
+            JArray frameworks = null
+        ) {
+            string name =
+                useUberFramework.HasValue && useUberFramework.Value
+                    ? "Microsoft.UberFramework"
+                    : "Microsoft.NETCore.App";
 
             JObject runtimeOptions = new JObject(
-                new JProperty("framework",
-                    new JObject(
-                        new JProperty("name", name),
-                        new JProperty("version", version)
-                    )
+                new JProperty(
+                    "framework",
+                    new JObject(new JProperty("name", name), new JProperty("version", version))
                 )
             );
 
@@ -163,8 +179,12 @@ namespace Microsoft.DotNet.CoreSetup.Test
             }
         }
 
-        public static void CreateUberFrameworkArtifacts(string builtSharedFxDir, string builtSharedUberFxDir, string assemblyVersion = null, string fileVersion = null)
-        {
+        public static void CreateUberFrameworkArtifacts(
+            string builtSharedFxDir,
+            string builtSharedUberFxDir,
+            string assemblyVersion = null,
+            string fileVersion = null
+        ) {
             DirectoryInfo dir = new DirectoryInfo(builtSharedUberFxDir);
             if (dir.Exists)
             {
@@ -184,18 +204,33 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 versionInfo.Add(new JProperty("fileVersion", fileVersion));
             }
 
-            JObject depsjson = CreateDepsJson("UberFx", "System.Collections.Immutable/1.0.0", "System.Collections.Immutable", versionInfo);
-            string depsFile = Path.Combine(builtSharedUberFxDir, "Microsoft.UberFramework.deps.json");
+            JObject depsjson = CreateDepsJson(
+                "UberFx",
+                "System.Collections.Immutable/1.0.0",
+                "System.Collections.Immutable",
+                versionInfo
+            );
+            string depsFile = Path.Combine(
+                builtSharedUberFxDir,
+                "Microsoft.UberFramework.deps.json"
+            );
             File.WriteAllText(depsFile, depsjson.ToString());
 
             // Copy the test assembly
             string fileSource = Path.Combine(builtSharedFxDir, "System.Collections.Immutable.dll");
-            string fileDest = Path.Combine(builtSharedUberFxDir, "System.Collections.Immutable.dll");
+            string fileDest = Path.Combine(
+                builtSharedUberFxDir,
+                "System.Collections.Immutable.dll"
+            );
             File.Copy(fileSource, fileDest);
         }
 
-        public static JObject CreateDepsJson(string fxName, string testPackage, string testAssembly, JObject versionInfo = null)
-        {
+        public static JObject CreateDepsJson(
+            string fxName,
+            string testPackage,
+            string testAssembly,
+            JObject versionInfo = null
+        ) {
             // Create the deps.json. Generated file (example)
             /*
                 {
@@ -228,36 +263,34 @@ namespace Microsoft.DotNet.CoreSetup.Test
             }
 
             JObject depsjson = new JObject(
-                new JProperty("runtimeTarget",
+                new JProperty("runtimeTarget", new JObject(new JProperty("name", fxName))),
+                new JProperty(
+                    "targets",
                     new JObject(
-                        new JProperty("name", fxName)
+                        new JProperty(
+                            fxName,
+                            new JObject(
+                                new JProperty(
+                                    testPackage,
+                                    new JObject(
+                                        new JProperty("dependencies", new JObject()),
+                                        new JProperty(
+                                            "runtime",
+                                            new JObject(
+                                                new JProperty(testAssembly + ".dll", versionInfo)
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
                     )
                 ),
-                new JProperty("targets",
+                new JProperty(
+                    "libraries",
                     new JObject(
-                      new JProperty(fxName,
-                          new JObject(
-                              new JProperty(testPackage,
-                                  new JObject(
-                                      new JProperty("dependencies",
-                                        new JObject()
-                                      ),
-                                      new JProperty("runtime",
-                                          new JObject(
-                                              new JProperty(testAssembly + ".dll",
-                                                  versionInfo
-                                              )
-                                          )
-                                      )
-                                  )
-                              )
-                          )
-                      )
-                  )
-              ),
-                  new JProperty("libraries",
-                      new JObject(
-                          new JProperty(testPackage,
+                        new JProperty(
+                            testPackage,
                             new JObject(
                                 new JProperty("type", "assemblyreference"),
                                 new JProperty("serviceable", false),
@@ -272,13 +305,13 @@ namespace Microsoft.DotNet.CoreSetup.Test
         }
 
         public static void AddReferenceToDepsJson(
-            string jsonFile, 
-            string fxNameWithVersion, 
-            string testPackage, 
-            string testPackageVersion, 
+            string jsonFile,
+            string fxNameWithVersion,
+            string testPackage,
+            string testPackageVersion,
             JObject testAssemblyVersionInfo = null,
-            string testAssembly = null)
-        {
+            string testAssembly = null
+        ) {
             JObject depsjson = JObject.Parse(File.ReadAllText(jsonFile));
 
             string testPackageWithVersion = testPackage + "/" + testPackageVersion;
@@ -296,15 +329,13 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 testAssemblyVersionInfo = new JObject();
             }
 
-            var package = new JProperty(testPackageWithVersion,
+            var package = new JProperty(
+                testPackageWithVersion,
                 new JObject(
-                    new JProperty("runtime",
+                    new JProperty(
+                        "runtime",
                         new JObject(
-                            new JProperty(testAssembly,
-                                new JObject(
-                                    testAssemblyVersionInfo
-                                )
-                            )
+                            new JProperty(testAssembly, new JObject(testAssemblyVersionInfo))
                         )
                     )
                 )
@@ -312,7 +343,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
             targetsValue.Add(package);
 
-            var library = new JProperty(testPackageWithVersion,
+            var library = new JProperty(
+                testPackageWithVersion,
                 new JObject(
                     new JProperty("type", "assemblyreference"),
                     new JProperty("serviceable", false),

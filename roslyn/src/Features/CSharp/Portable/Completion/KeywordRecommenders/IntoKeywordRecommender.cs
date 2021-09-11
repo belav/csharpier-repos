@@ -14,17 +14,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class IntoKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public IntoKeywordRecommender()
-            : base(SyntaxKind.IntoKeyword)
-        {
-        }
+        public IntoKeywordRecommender() : base(SyntaxKind.IntoKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return
-                IsValidContextForJoin(context) ||
-                IsValidContextForSelect(context) ||
-                IsValidContextForGroup(context);
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            return IsValidContextForJoin(context)
+                || IsValidContextForSelect(context)
+                || IsValidContextForGroup(context);
         }
 
         private static bool IsValidContextForSelect(CSharpSyntaxContext context)
@@ -70,8 +69,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 return false;
             }
 
-            if (group.ByExpression.Width() == 0 ||
-                group.GroupExpression.Width() == 0)
+            if (group.ByExpression.Width() == 0 || group.GroupExpression.Width() == 0)
             {
                 return false;
             }
@@ -116,8 +114,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             var lastToken = join.RightExpression.GetLastToken(includeSkipped: true);
 
             // join a in expr on o1 equals o2 |
-            if (token == lastToken &&
-                !lastToken.IntersectsWith(context.Position))
+            if (token == lastToken && !lastToken.IntersectsWith(context.Position))
             {
                 return true;
             }

@@ -27,11 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 
             public override SyntaxNode Visit(SyntaxNode node)
             {
-                if (node is ExpressionSyntax expression &&
-                    _matches.Contains(expression))
+                if (node is ExpressionSyntax expression && _matches.Contains(expression))
                 {
-                    return _replacementNode
-                        .WithLeadingTrivia(expression.GetLeadingTrivia())
+                    return _replacementNode.WithLeadingTrivia(expression.GetLeadingTrivia())
                         .WithTrailingTrivia(expression.GetTrailingTrivia())
                         .WithAdditionalAnnotations(_replacementAnnotation);
                 }
@@ -39,13 +37,19 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                 return base.Visit(node);
             }
 
-            public override SyntaxNode VisitParenthesizedExpression(ParenthesizedExpressionSyntax node)
-            {
+            public override SyntaxNode VisitParenthesizedExpression(
+                ParenthesizedExpressionSyntax node
+            ) {
                 var newNode = base.VisitParenthesizedExpression(node);
-                if (node != newNode &&
-                    newNode.IsKind(SyntaxKind.ParenthesizedExpression, out ParenthesizedExpressionSyntax parenthesizedExpression))
-                {
-                    var innerExpression = parenthesizedExpression.OpenParenToken.GetNextToken().Parent;
+                if (
+                    node != newNode
+                    && newNode.IsKind(
+                        SyntaxKind.ParenthesizedExpression,
+                        out ParenthesizedExpressionSyntax parenthesizedExpression
+                    )
+                ) {
+                    var innerExpression =
+                        parenthesizedExpression.OpenParenToken.GetNextToken().Parent;
                     if (innerExpression.HasAnnotation(_replacementAnnotation))
                     {
                         return newNode.WithAdditionalAnnotations(Simplifier.Annotation);
@@ -55,8 +59,11 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                 return newNode;
             }
 
-            public static SyntaxNode Visit(SyntaxNode node, SyntaxNode replacementNode, ISet<ExpressionSyntax> matches)
-                => new Rewriter(replacementNode, matches).Visit(node);
+            public static SyntaxNode Visit(
+                SyntaxNode node,
+                SyntaxNode replacementNode,
+                ISet<ExpressionSyntax> matches
+            ) => new Rewriter(replacementNode, matches).Visit(node);
         }
     }
 }

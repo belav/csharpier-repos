@@ -15,20 +15,18 @@ public class Test
     static ManualResetEvent reuseBeforeReleaseEvent = new ManualResetEvent(false);
     int success = 100;
 
-
     public void CreateMutexThread()
     {
         Console.WriteLine("Inside thread which creates a mutex");
 
         Mutex mutex = new Mutex(true, mutexName);
 
-
         Console.WriteLine("Mutex created");
-        
+
         manualEvent.Set();
         reuseBeforeReleaseEvent.WaitOne();
         mutex.ReleaseMutex();
-        
+
         exitEvent.WaitOne();
     }
 
@@ -39,7 +37,7 @@ public class Test
         bool exists;
 
         Mutex mutex = new Mutex(true, mutexName, out exists);
-        
+
         reuseBeforeReleaseEvent.Set();
         if (exists)
         {
@@ -51,7 +49,6 @@ public class Test
             mutex.WaitOne();
         }
 
-        
         try
         {
             Console.WriteLine("Mutex reused {0}", exists);
@@ -75,7 +72,10 @@ public class Test
         t1.Join();
         t2.Join();
 
-        if (success == 100) Console.WriteLine("Test passed"); else Console.WriteLine("Test failed");
+        if (success == 100)
+            Console.WriteLine("Test passed");
+        else
+            Console.WriteLine("Test failed");
         return (success);
     }
 

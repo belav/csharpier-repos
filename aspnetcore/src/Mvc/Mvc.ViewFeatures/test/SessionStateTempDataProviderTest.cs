@@ -17,7 +17,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
     public class SessionStateTempDataProviderTest
     {
         private static readonly byte[] Bytes = Encoding.UTF8.GetBytes("test value");
-        private static readonly IDictionary<string, object> Dictionary = new Dictionary<string, object>
+        private static readonly IDictionary<string, object> Dictionary = new Dictionary<
+            string,
+            object
+        >
         {
             { "key", "value" },
         };
@@ -29,10 +32,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var testProvider = CreateTempDataProvider();
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                testProvider.LoadTempData(GetHttpContext(sessionEnabled: false));
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    testProvider.LoadTempData(GetHttpContext(sessionEnabled: false));
+                }
+            );
         }
 
         [Fact]
@@ -42,10 +47,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var testProvider = CreateTempDataProvider();
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                testProvider.SaveTempData(GetHttpContext(sessionEnabled: false), Dictionary);
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    testProvider.SaveTempData(GetHttpContext(sessionEnabled: false), Dictionary);
+                }
+            );
         }
 
         [Fact]
@@ -86,7 +93,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var httpContext = new DefaultHttpContext();
             if (sessionEnabled)
             {
-                httpContext.Features.Set<ISessionFeature>(new SessionFeature() { Session = new TestSession() });
+                httpContext.Features.Set<ISessionFeature>(
+                    new SessionFeature() { Session = new TestSession() }
+                );
             }
             return httpContext;
         }
@@ -106,7 +115,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             private Dictionary<string, byte[]> _innerDictionary = new Dictionary<string, byte[]>();
 
-            public IEnumerable<string> Keys { get { return _innerDictionary.Keys; } }
+            public IEnumerable<string> Keys
+            {
+                get { return _innerDictionary.Keys; }
+            }
 
             public string Id => "TestId";
 
@@ -117,8 +129,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return Task.FromResult(0);
             }
 
-            public Task CommitAsync(CancellationToken cancellationToken = default(CancellationToken))
-            {
+            public Task CommitAsync(
+                CancellationToken cancellationToken = default(CancellationToken)
+            ) {
                 return Task.FromResult(0);
             }
 

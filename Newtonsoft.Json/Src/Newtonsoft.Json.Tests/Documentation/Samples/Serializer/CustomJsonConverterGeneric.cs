@@ -43,13 +43,21 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         #region Types
         public class VersionConverter : JsonConverter<Version>
         {
-            public override void WriteJson(JsonWriter writer, Version value, JsonSerializer serializer)
-            {
+            public override void WriteJson(
+                JsonWriter writer,
+                Version value,
+                JsonSerializer serializer
+            ) {
                 writer.WriteValue(value.ToString());
             }
 
-            public override Version ReadJson(JsonReader reader, Type objectType, Version existingValue, bool hasExistingValue, JsonSerializer serializer)
-            {
+            public override Version ReadJson(
+                JsonReader reader,
+                Type objectType,
+                Version existingValue,
+                bool hasExistingValue,
+                JsonSerializer serializer
+            ) {
                 string s = (string)reader.Value;
 
                 return new Version(s);
@@ -73,7 +81,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Version = new Version(10, 0, 4)
             };
 
-            string json = JsonConvert.SerializeObject(p1, Formatting.Indented, new VersionConverter());
+            string json = JsonConvert.SerializeObject(
+                p1,
+                Formatting.Indented,
+                new VersionConverter()
+            );
 
             Console.WriteLine(json);
             // {
@@ -81,7 +93,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   "Version": "10.0.4"
             // }
 
-            NuGetPackage p2 = JsonConvert.DeserializeObject<NuGetPackage>(json, new VersionConverter());
+            NuGetPackage p2 = JsonConvert.DeserializeObject<NuGetPackage>(
+                json,
+                new VersionConverter()
+            );
 
             Console.WriteLine(p2.Version.ToString());
             // 10.0.4

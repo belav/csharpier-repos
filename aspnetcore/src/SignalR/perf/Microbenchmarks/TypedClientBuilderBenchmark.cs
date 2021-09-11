@@ -22,8 +22,11 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
 
         private class DummyProxy : IClientProxy
         {
-            public Task SendCoreAsync(string method, object[] args, CancellationToken cancellationToken = default)
-            {
+            public Task SendCoreAsync(
+                string method,
+                object[] args,
+                CancellationToken cancellationToken = default
+            ) {
                 return Task.CompletedTask;
             }
         }

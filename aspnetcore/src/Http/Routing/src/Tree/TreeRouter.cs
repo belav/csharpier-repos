@@ -50,8 +50,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             ObjectPool<UriBuildingContext> objectPool,
             ILogger routeLogger,
             ILogger constraintLogger,
-            int version)
-        {
+            int version
+        ) {
             if (trees == null)
             {
                 throw new ArgumentNullException(nameof(trees));
@@ -92,8 +92,12 @@ namespace Microsoft.AspNetCore.Routing.Tree
 
             foreach (var entry in linkGenerationEntries)
             {
-
-                var binder = new TemplateBinder(urlEncoder, objectPool, entry.RouteTemplate, entry.Defaults);
+                var binder = new TemplateBinder(
+                    urlEncoder,
+                    objectPool,
+                    entry.RouteTemplate,
+                    entry.Defaults
+                );
                 var outboundMatch = new OutboundMatch() { Entry = entry, TemplateBinder = binder };
                 outboundMatches.Add(outboundMatch);
 
@@ -106,15 +110,20 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 // We only need to keep one OutboundMatch per route template
                 // so in case two entries have the same name and the same template we only keep
                 // the first entry.
-                if (_namedEntries.TryGetValue(entry.RouteName, out var namedMatch) &&
-                    !string.Equals(
+                if (
+                    _namedEntries.TryGetValue(entry.RouteName, out var namedMatch)
+                    && !string.Equals(
                         namedMatch.Entry.RouteTemplate.TemplateText,
                         entry.RouteTemplate.TemplateText,
-                        StringComparison.OrdinalIgnoreCase))
-                {
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     throw new ArgumentException(
-                        Resources.FormatAttributeRoute_DifferentLinkGenerationEntries_SameName(entry.RouteName),
-                        nameof(linkGenerationEntries));
+                        Resources.FormatAttributeRoute_DifferentLinkGenerationEntries_SameName(
+                            entry.RouteName
+                        ),
+                        nameof(linkGenerationEntries)
+                    );
                 }
                 else if (namedMatch == null)
                 {
@@ -161,7 +170,11 @@ namespace Microsoft.AspNetCore.Routing.Tree
 
             for (var i = 0; i < matches.Count; i++)
             {
-                var path = GenerateVirtualPath(context, matches[i].Match.Entry, matches[i].Match.TemplateBinder);
+                var path = GenerateVirtualPath(
+                    context,
+                    matches[i].Match.Entry,
+                    matches[i].Match.TemplateBinder
+                );
                 if (path != null)
                 {
                     return path;
@@ -183,7 +196,11 @@ namespace Microsoft.AspNetCore.Routing.Tree
 
                 // Create a snapshot before processing the route. We'll restore this snapshot before running each
                 // to restore the state. This is likely an "empty" snapshot, which doesn't allocate.
-                var snapshot = context.RouteData.PushState(router: null, values: null, dataTokens: null);
+                var snapshot = context.RouteData.PushState(
+                    router: null,
+                    values: null,
+                    dataTokens: null
+                );
 
                 while (treeEnumerator.MoveNext())
                 {
@@ -195,23 +212,32 @@ namespace Microsoft.AspNetCore.Routing.Tree
 
                         try
                         {
-                            if (!matcher.TryMatch(context.HttpContext.Request.Path, context.RouteData.Values))
-                            {
+                            if (
+                                !matcher.TryMatch(
+                                    context.HttpContext.Request.Path,
+                                    context.RouteData.Values
+                                )
+                            ) {
                                 continue;
                             }
 
-                            if (!RouteConstraintMatcher.Match(
-                                entry.Constraints,
-                                context.RouteData.Values,
-                                context.HttpContext,
-                                this,
-                                RouteDirection.IncomingRequest,
-                                _constraintLogger))
-                            {
+                            if (
+                                !RouteConstraintMatcher.Match(
+                                    entry.Constraints,
+                                    context.RouteData.Values,
+                                    context.HttpContext,
+                                    this,
+                                    RouteDirection.IncomingRequest,
+                                    _constraintLogger
+                                )
+                            ) {
                                 continue;
                             }
 
-                            _logger.RequestMatchedRoute(entry.RouteName, entry.RouteTemplate.TemplateText);
+                            _logger.RequestMatchedRoute(
+                                entry.RouteName,
+                                entry.RouteTemplate.TemplateText
+                            );
                             context.RouteData.Routers.Add(entry.Handler);
 
                             await entry.Handler.RouteAsync(context);
@@ -220,6 +246,7 @@ namespace Microsoft.AspNetCore.Routing.Tree
                                 return;
                             }
                         }
+
                         finally
                         {
                             if (context.Handler == null)
@@ -249,8 +276,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         private VirtualPathData GenerateVirtualPath(
             VirtualPathContext context,
             OutboundRouteEntry entry,
-            TemplateBinder binder)
-        {
+            TemplateBinder binder
+        ) {
             // In attribute the context includes the values that are used to select this entry - typically
             // these will be the standard 'action', 'controller' and maybe 'area' tokens. However, we don't
             // want to pass these to the link generation code, or else they will end up as query parameters.
@@ -292,7 +319,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 context.HttpContext,
                 this,
                 RouteDirection.UrlGeneration,
-                _constraintLogger);
+                _constraintLogger
+            );
 
             if (!matched)
             {

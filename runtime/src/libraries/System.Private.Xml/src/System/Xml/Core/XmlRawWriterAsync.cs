@@ -59,8 +59,12 @@ namespace System.Xml
             throw new InvalidOperationException(SR.Xml_InvalidOperation);
         }
 
-        public override Task WriteDocTypeAsync(string name, string? pubid, string? sysid, string? subset)
-        {
+        public override Task WriteDocTypeAsync(
+            string name,
+            string? pubid,
+            string? sysid,
+            string? subset
+        ) {
             return Task.CompletedTask;
         }
 
@@ -192,8 +196,11 @@ namespace System.Xml
             return WriteEndElementAsync(prefix, localName, ns);
         }
 
-        internal virtual async Task WriteQualifiedNameAsync(string prefix, string localName, string? ns)
-        {
+        internal virtual async Task WriteQualifiedNameAsync(
+            string prefix,
+            string localName,
+            string? ns
+        ) {
             if (prefix.Length != 0)
             {
                 await WriteStringAsync(prefix).ConfigureAwait(false);

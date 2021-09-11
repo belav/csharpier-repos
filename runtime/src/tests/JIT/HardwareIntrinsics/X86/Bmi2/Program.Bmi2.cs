@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["ParallelBitDeposit.UInt32"] = ParallelBitDepositUInt32,
                 ["ParallelBitExtract.UInt32"] = ParallelBitExtractUInt32,
                 ["ZeroHighBits.UInt32"] = ZeroHighBitsUInt32,

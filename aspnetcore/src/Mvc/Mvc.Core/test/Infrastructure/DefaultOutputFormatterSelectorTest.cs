@@ -26,13 +26,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 new TestXmlOutputFormatter(),
                 new TestJsonOutputFormatter(), // This will be chosen based on the content type
             };
-            var selector = CreateSelector(new IOutputFormatter[] { });
+            var selector = CreateSelector(new IOutputFormatter[] {  });
 
             var context = new OutputFormatterWriteContext(
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
             context.HttpContext.Request.Headers[HeaderNames.Accept] = "application/xml"; // This will not be used
 
@@ -40,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var formatter = selector.SelectFormatter(
                 context,
                 formatters,
-                new MediaTypeCollection { "application/json" });
+                new MediaTypeCollection { "application/json" }
+            );
 
             // Assert
             Assert.Same(formatters[1], formatter);
@@ -62,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
             context.HttpContext.Request.Headers[HeaderNames.Accept] = "application/xml"; // This will not be used
 
@@ -70,7 +73,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var formatter = selector.SelectFormatter(
                 context,
                 Array.Empty<IOutputFormatter>(),
-                new MediaTypeCollection { "application/json" });
+                new MediaTypeCollection { "application/json" }
+            );
 
             // Assert
             Assert.Same(formatters[1], formatter);
@@ -81,17 +85,15 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public void SelectFormatter_WithOneProvidedContentType_NoFallback()
         {
             // Arrange
-            var formatters = new List<IOutputFormatter>
-            {
-                new TestXmlOutputFormatter(),
-            };
+            var formatters = new List<IOutputFormatter> { new TestXmlOutputFormatter(), };
             var selector = CreateSelector(formatters);
 
             var context = new OutputFormatterWriteContext(
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
             context.HttpContext.Request.Headers[HeaderNames.Accept] = "application/xml"; // This will not be used
 
@@ -99,7 +101,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var formatter = selector.SelectFormatter(
                 context,
                 Array.Empty<IOutputFormatter>(),
-                new MediaTypeCollection { "application/json" });
+                new MediaTypeCollection { "application/json" }
+            );
 
             // Assert
             Assert.Null(formatter);
@@ -121,18 +124,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 {
                     // Empty accept header, should select based on ObjectResult.ContentTypes.
                     { contentTypes, "", "application/json" },
-
                     // null accept header, should select based on ObjectResult.ContentTypes.
                     { contentTypes, null, "application/json" },
-
                     // The accept header does not match anything in ObjectResult.ContentTypes.
                     // The first formatter that can write the result gets to choose the content type.
                     { contentTypes, "text/custom", "application/json" },
-
                     // Accept header matches ObjectResult.ContentTypes, but no formatter supports the accept header.
                     // The first formatter that can write the result gets to choose the content type.
                     { contentTypes, "text/xml", "application/json" },
-
                     // Filters out Accept headers with 0 quality and selects the one with highest quality.
                     {
                         contentTypes,
@@ -148,8 +147,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public void SelectFormatter_WithMultipleProvidedContentTypes_DoesConneg(
             MediaTypeCollection contentTypes,
             string acceptHeader,
-            string expectedContentType)
-        {
+            string expectedContentType
+        ) {
             // Arrange
             var formatters = new List<IOutputFormatter>
             {
@@ -162,7 +161,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
             context.HttpContext.Request.Headers[HeaderNames.Accept] = acceptHeader;
 
@@ -170,7 +170,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var formatter = selector.SelectFormatter(
                 context,
                 Array.Empty<IOutputFormatter>(),
-                contentTypes);
+                contentTypes
+            );
 
             // Assert
             Assert.Same(formatters[1], formatter);
@@ -193,13 +194,15 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
             // Act
             var formatter = selector.SelectFormatter(
                 context,
                 Array.Empty<IOutputFormatter>(),
-                new MediaTypeCollection());
+                new MediaTypeCollection()
+            );
 
             // Assert
             Assert.Same(formatters[1], formatter);
@@ -221,15 +224,18 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
-            context.HttpContext.Request.Headers[HeaderNames.Accept] = "text/custom,application/custom";
+            context.HttpContext.Request.Headers[HeaderNames.Accept] =
+                "text/custom,application/custom";
 
             // Act
             var formatter = selector.SelectFormatter(
                 context,
                 Array.Empty<IOutputFormatter>(),
-                new MediaTypeCollection());
+                new MediaTypeCollection()
+            );
 
             // Assert
             Assert.Same(formatters[0], formatter);
@@ -243,11 +249,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var options = new MvcOptions()
             {
                 ReturnHttpNotAcceptable = true,
-                OutputFormatters =
-                {
-                    new TestXmlOutputFormatter(),
-                    new TestJsonOutputFormatter(),
-                },
+                OutputFormatters = { new TestXmlOutputFormatter(), new TestJsonOutputFormatter(), },
             };
 
             var selector = CreateSelector(options);
@@ -256,15 +258,18 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
-            context.HttpContext.Request.Headers[HeaderNames.Accept] = "text/custom,application/custom";
+            context.HttpContext.Request.Headers[HeaderNames.Accept] =
+                "text/custom,application/custom";
 
             // Act
             var formatter = selector.SelectFormatter(
                 context,
                 Array.Empty<IOutputFormatter>(),
-                new MediaTypeCollection());
+                new MediaTypeCollection()
+            );
 
             // Assert
             Assert.Null(formatter);
@@ -274,10 +279,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public void SelectFormatter_WithAcceptHeaderOnly_SetsContentTypeIsServerDefinedToFalse()
         {
             // Arrange
-            var formatters = new List<IOutputFormatter>
-            {
-                new ServerContentTypeOnlyFormatter()
-            };
+            var formatters = new List<IOutputFormatter> { new ServerContentTypeOnlyFormatter() };
 
             var selector = CreateSelector(formatters);
 
@@ -285,7 +287,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
             context.HttpContext.Request.Headers[HeaderNames.Accept] = "text/custom";
 
@@ -293,7 +296,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var formatter = selector.SelectFormatter(
                 context,
                 Array.Empty<IOutputFormatter>(),
-                new MediaTypeCollection());
+                new MediaTypeCollection()
+            );
 
             // Assert
             Assert.Null(formatter);
@@ -303,10 +307,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public void SelectFormatter_WithAcceptHeaderAndContentTypes_SetsContentTypeIsServerDefinedWhenExpected()
         {
             // Arrange
-            var formatters = new List<IOutputFormatter>
-            {
-                new ServerContentTypeOnlyFormatter()
-            };
+            var formatters = new List<IOutputFormatter> { new ServerContentTypeOnlyFormatter() };
 
             var selector = CreateSelector(formatters);
 
@@ -314,7 +315,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
             context.HttpContext.Request.Headers[HeaderNames.Accept] = "text/custom, text/custom2";
 
@@ -326,7 +328,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var formatter = selector.SelectFormatter(
                 context,
                 Array.Empty<IOutputFormatter>(),
-                serverDefinedContentTypes);
+                serverDefinedContentTypes
+            );
 
             // Assert
             Assert.Same(formatters[0], formatter);
@@ -337,10 +340,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public void SelectFormatter_WithContentTypesOnly_SetsContentTypeIsServerDefinedToTrue()
         {
             // Arrange
-            var formatters = new List<IOutputFormatter>
-            {
-                new ServerContentTypeOnlyFormatter()
-            };
+            var formatters = new List<IOutputFormatter> { new ServerContentTypeOnlyFormatter() };
 
             var selector = CreateSelector(formatters);
 
@@ -348,7 +348,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
             var serverDefinedContentTypes = new MediaTypeCollection();
             serverDefinedContentTypes.Add("text/custom");
@@ -357,15 +358,17 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var formatter = selector.SelectFormatter(
                 context,
                 Array.Empty<IOutputFormatter>(),
-                serverDefinedContentTypes);
+                serverDefinedContentTypes
+            );
 
             // Assert
             Assert.Same(formatters[0], formatter);
             Assert.Equal(new StringSegment("text/custom"), context.ContentType);
         }
 
-        private static DefaultOutputFormatterSelector CreateSelector(IEnumerable<IOutputFormatter> formatters)
-        {
+        private static DefaultOutputFormatterSelector CreateSelector(
+            IEnumerable<IOutputFormatter> formatters
+        ) {
             var options = new MvcOptions();
             foreach (var formatter in formatters)
             {
@@ -377,7 +380,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static DefaultOutputFormatterSelector CreateSelector(MvcOptions options)
         {
-            return new DefaultOutputFormatterSelector(Options.Create(options), NullLoggerFactory.Instance);
+            return new DefaultOutputFormatterSelector(
+                Options.Create(options),
+                NullLoggerFactory.Instance
+            );
         }
 
         private class CannotWriteFormatter : IOutputFormatter
@@ -403,8 +409,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 SupportedEncodings.Add(Encoding.UTF8);
             }
 
-            public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
-            {
+            public override Task WriteResponseBodyAsync(
+                OutputFormatterWriteContext context,
+                Encoding selectedEncoding
+            ) {
                 return Task.FromResult(0);
             }
         }
@@ -419,8 +427,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 SupportedEncodings.Add(Encoding.UTF8);
             }
 
-            public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
-            {
+            public override Task WriteResponseBodyAsync(
+                OutputFormatterWriteContext context,
+                Encoding selectedEncoding
+            ) {
                 return Task.FromResult(0);
             }
         }
@@ -434,8 +444,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 SupportedEncodings.Add(Encoding.UTF8);
             }
 
-            public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
-            {
+            public override Task WriteResponseBodyAsync(
+                OutputFormatterWriteContext context,
+                Encoding selectedEncoding
+            ) {
                 return Task.FromResult(0);
             }
         }

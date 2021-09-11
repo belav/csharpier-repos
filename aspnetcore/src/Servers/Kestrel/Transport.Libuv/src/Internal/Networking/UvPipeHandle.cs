@@ -7,16 +7,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 {
     internal class UvPipeHandle : UvStreamHandle
     {
-        public UvPipeHandle(ILibuvTrace logger) : base(logger)
-        {
-        }
+        public UvPipeHandle(ILibuvTrace logger) : base(logger) { }
 
-        public void Init(UvLoopHandle loop, Action<Action<IntPtr>, IntPtr> queueCloseHandle, bool ipc = false)
-        {
+        public void Init(
+            UvLoopHandle loop,
+            Action<Action<IntPtr>, IntPtr> queueCloseHandle,
+            bool ipc = false
+        ) {
             CreateHandle(
-                loop.Libuv, 
+                loop.Libuv,
                 loop.ThreadId,
-                loop.Libuv.handle_size(LibuvFunctions.HandleType.NAMED_PIPE), queueCloseHandle);
+                loop.Libuv.handle_size(LibuvFunctions.HandleType.NAMED_PIPE),
+                queueCloseHandle
+            );
 
             _uv.pipe_init(loop, this, ipc);
         }

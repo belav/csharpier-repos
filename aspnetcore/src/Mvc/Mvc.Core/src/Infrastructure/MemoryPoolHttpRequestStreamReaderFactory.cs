@@ -35,8 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// </param>
         public MemoryPoolHttpRequestStreamReaderFactory(
             ArrayPool<byte> bytePool,
-            ArrayPool<char> charPool)
-        {
+            ArrayPool<char> charPool
+        ) {
             if (bytePool == null)
             {
                 throw new ArgumentNullException(nameof(bytePool));
@@ -64,7 +64,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 throw new ArgumentNullException(nameof(encoding));
             }
 
-            return new HttpRequestStreamReader(stream, encoding, DefaultBufferSize, _bytePool, _charPool);
+            return new HttpRequestStreamReader(
+                stream,
+                encoding,
+                DefaultBufferSize,
+                _bytePool,
+                _charPool
+            );
         }
     }
 }

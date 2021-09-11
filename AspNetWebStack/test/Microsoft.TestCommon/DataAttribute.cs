@@ -10,7 +10,10 @@ namespace Microsoft.TestCommon
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public abstract class DataAttribute : Xunit.Sdk.DataAttribute
     {
-        public abstract IEnumerable<Object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes);
+        public abstract IEnumerable<Object[]> GetData(
+            MethodInfo methodUnderTest,
+            Type[] parameterTypes
+        );
 
         public override IEnumerable<Object[]> GetData(MethodInfo methodUnderTest)
         {

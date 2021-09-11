@@ -8,15 +8,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
 {
     internal abstract class SyntaxList : GreenNode
     {
-        internal SyntaxList()
-            : base(SyntaxKind.List)
-        {
-        }
+        internal SyntaxList() : base(SyntaxKind.List) { }
 
         internal SyntaxList(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
-            : base(SyntaxKind.List, diagnostics, annotations)
-        {
-        }
+            : base(SyntaxKind.List, diagnostics, annotations) { }
 
         internal override bool IsList => true;
 
@@ -145,8 +140,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
                 _child1 = child1;
             }
 
-            internal WithTwoChildren(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations, GreenNode child0, GreenNode child1)
-            {
+            internal WithTwoChildren(
+                RazorDiagnostic[] diagnostics,
+                SyntaxAnnotation[] annotations,
+                GreenNode child0,
+                GreenNode child1
+            ) {
                 SlotCount = 2;
                 AdjustFlagsAndWidth(child0);
                 _child0 = child0;
@@ -206,8 +205,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
                 _child2 = child2;
             }
 
-            internal WithThreeChildren(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations, GreenNode child0, GreenNode child1, GreenNode child2)
-                : base(diagnostics, annotations)
+            internal WithThreeChildren(
+                RazorDiagnostic[] diagnostics,
+                SyntaxAnnotation[] annotations,
+                GreenNode child0,
+                GreenNode child1,
+                GreenNode child2
+            ) : base(diagnostics, annotations)
             {
                 SlotCount = 3;
                 AdjustFlagsAndWidth(child0);
@@ -252,7 +256,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
 
             internal override GreenNode SetAnnotations(SyntaxAnnotation[] annotations)
             {
-                return new WithThreeChildren(GetDiagnostics(), annotations, _child0, _child1, _child2);
+                return new WithThreeChildren(
+                    GetDiagnostics(),
+                    annotations,
+                    _child0,
+                    _child1,
+                    _child2
+                );
             }
         }
 
@@ -266,8 +276,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
                 this.InitializeChildren();
             }
 
-            internal WithManyChildrenBase(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations, ArrayElement<GreenNode>[] children)
-                : base(diagnostics, annotations)
+            internal WithManyChildrenBase(
+                RazorDiagnostic[] diagnostics,
+                SyntaxAnnotation[] annotations,
+                ArrayElement<GreenNode>[] children
+            ) : base(diagnostics, annotations)
             {
                 this.children = children;
                 this.InitializeChildren();
@@ -314,15 +327,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
 
         internal sealed class WithManyChildren : WithManyChildrenBase
         {
-            internal WithManyChildren(ArrayElement<GreenNode>[] children)
-                : base(children)
-            {
-            }
+            internal WithManyChildren(ArrayElement<GreenNode>[] children) : base(children) { }
 
-            internal WithManyChildren(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations, ArrayElement<GreenNode>[] children)
-                : base(diagnostics, annotations, children)
-            {
-            }
+            internal WithManyChildren(
+                RazorDiagnostic[] diagnostics,
+                SyntaxAnnotation[] annotations,
+                ArrayElement<GreenNode>[] children
+            ) : base(diagnostics, annotations, children) { }
 
             internal override GreenNode SetDiagnostics(RazorDiagnostic[] errors)
             {
@@ -339,14 +350,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
         {
             private readonly int[] _childOffsets;
 
-            internal WithLotsOfChildren(ArrayElement<GreenNode>[] children)
-                : base(children)
+            internal WithLotsOfChildren(ArrayElement<GreenNode>[] children) : base(children)
             {
                 _childOffsets = CalculateOffsets(children);
             }
 
-            internal WithLotsOfChildren(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations, ArrayElement<GreenNode>[] children, int[] childOffsets)
-                : base(diagnostics, annotations, children)
+            internal WithLotsOfChildren(
+                RazorDiagnostic[] diagnostics,
+                SyntaxAnnotation[] annotations,
+                ArrayElement<GreenNode>[] children,
+                int[] childOffsets
+            ) : base(diagnostics, annotations, children)
             {
                 _childOffsets = childOffsets;
             }
@@ -386,12 +400,22 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
 
             internal override GreenNode SetDiagnostics(RazorDiagnostic[] errors)
             {
-                return new WithLotsOfChildren(errors, this.GetAnnotations(), children, _childOffsets);
+                return new WithLotsOfChildren(
+                    errors,
+                    this.GetAnnotations(),
+                    children,
+                    _childOffsets
+                );
             }
 
             internal override GreenNode SetAnnotations(SyntaxAnnotation[] annotations)
             {
-                return new WithLotsOfChildren(GetDiagnostics(), annotations, children, _childOffsets);
+                return new WithLotsOfChildren(
+                    GetDiagnostics(),
+                    annotations,
+                    children,
+                    _childOffsets
+                );
             }
 
             /// <summary>

@@ -38,7 +38,10 @@ namespace System.DirectoryServices
                     return (PropertyValueCollection)valueTable[name]!;
                 else
                 {
-                    PropertyValueCollection value = new PropertyValueCollection(_entry, propertyName);
+                    PropertyValueCollection value = new PropertyValueCollection(
+                        _entry,
+                        propertyName
+                    );
                     valueTable.Add(name, value);
                     return value;
                 }
@@ -57,7 +60,8 @@ namespace System.DirectoryServices
 
                 _entry.FillCache("");
 
-                UnsafeNativeMethods.IAdsPropertyList propList = (UnsafeNativeMethods.IAdsPropertyList)_entry.AdsObject;
+                UnsafeNativeMethods.IAdsPropertyList propList =
+                    (UnsafeNativeMethods.IAdsPropertyList)_entry.AdsObject;
 
                 return propList.PropertyCount;
             }
@@ -74,8 +78,10 @@ namespace System.DirectoryServices
             if (unmanagedResult != 0)
             {
                 //  property not found (IIS provider returns 0x80005006, other provides return 0x8000500D).
-                if ((unmanagedResult == unchecked((int)0x8000500D)) || (unmanagedResult == unchecked((int)0x80005006)))
-                {
+                if (
+                    (unmanagedResult == unchecked((int)0x8000500D))
+                    || (unmanagedResult == unchecked((int)0x80005006))
+                ) {
                     return false;
                 }
                 else
@@ -173,8 +179,8 @@ namespace System.DirectoryServices
 
         private sealed class PropertyEnumerator : IDictionaryEnumerator, IDisposable
         {
-            private readonly DirectoryEntry _entry;               // clone (to be disposed)
-            private readonly DirectoryEntry _parentEntry;         // original entry to pass to PropertyValueCollection
+            private readonly DirectoryEntry _entry; // clone (to be disposed)
+            private readonly DirectoryEntry _parentEntry; // original entry to pass to PropertyValueCollection
             private string? _currentPropName;
 
             public PropertyEnumerator(DirectoryEntry parent, DirectoryEntry clone)
@@ -208,7 +214,10 @@ namespace System.DirectoryServices
                     if (_currentPropName == null)
                         throw new InvalidOperationException(SR.DSNoCurrentProperty);
 
-                    return new DictionaryEntry(_currentPropName, new PropertyValueCollection(_parentEntry, _currentPropName));
+                    return new DictionaryEntry(
+                        _currentPropName,
+                        new PropertyValueCollection(_parentEntry, _currentPropName)
+                    );
                 }
             }
 
@@ -280,9 +289,7 @@ namespace System.DirectoryServices
 
         private sealed class KeysCollection : ValuesCollection
         {
-            public KeysCollection(PropertyCollection props) : base(props)
-            {
-            }
+            public KeysCollection(PropertyCollection props) : base(props) { }
 
             public override IEnumerator GetEnumerator()
             {
@@ -315,8 +322,11 @@ namespace System.DirectoryServices
             {
                 get
                 {
-                    UnsafeNativeMethods.IAdsPropertyList propList = (UnsafeNativeMethods.IAdsPropertyList)propCollection._entry.AdsObject;
-                    return propCollection[((UnsafeNativeMethods.IAdsPropertyEntry)propList.Item(CurrentIndex)).Name];
+                    UnsafeNativeMethods.IAdsPropertyList propList =
+                        (UnsafeNativeMethods.IAdsPropertyList)propCollection._entry.AdsObject;
+                    return propCollection[
+                        ((UnsafeNativeMethods.IAdsPropertyEntry)propList.Item(CurrentIndex)).Name
+                    ];
                 }
             }
 
@@ -337,17 +347,18 @@ namespace System.DirectoryServices
 
         private sealed class KeysEnumerator : ValuesEnumerator
         {
-            public KeysEnumerator(PropertyCollection collection) : base(collection)
-            {
-            }
+            public KeysEnumerator(PropertyCollection collection) : base(collection) { }
 
             public override object Current
             {
                 get
                 {
-                    UnsafeNativeMethods.IAdsPropertyList propList = (UnsafeNativeMethods.IAdsPropertyList)propCollection._entry.AdsObject;
+                    UnsafeNativeMethods.IAdsPropertyList propList =
+                        (UnsafeNativeMethods.IAdsPropertyList)propCollection._entry.AdsObject;
 
-                    return ((UnsafeNativeMethods.IAdsPropertyEntry)propList.Item(CurrentIndex)).Name;
+                    return (
+                        (UnsafeNativeMethods.IAdsPropertyEntry)propList.Item(CurrentIndex)
+                    ).Name;
                 }
             }
         }

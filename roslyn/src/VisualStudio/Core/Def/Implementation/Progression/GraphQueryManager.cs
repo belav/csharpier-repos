@@ -27,13 +27,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         /// This gate locks manipulation of <see cref="_trackedQueries"/>.
         /// </summary>
         private readonly object _gate = new();
-        private readonly List<ValueTuple<WeakReference<IGraphContext>, List<IGraphQuery>>> _trackedQueries = new();
+        private readonly List<
+            ValueTuple<WeakReference<IGraphContext>, List<IGraphQuery>>
+        > _trackedQueries = new();
 
         // We update all of our tracked queries when this delay elapses.
         private ResettableDelay? _delay;
 
-        internal GraphQueryManager(Workspace workspace, IAsynchronousOperationListener asyncListener)
-        {
+        internal GraphQueryManager(
+            Workspace workspace,
+            IAsynchronousOperationListener asyncListener
+        ) {
             _workspace = workspace;
             _asyncListener = asyncListener;
         }
@@ -48,20 +52,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
             // We want to ensure that no matter what happens, this initial context is completed
             var task = populateTask.SafeContinueWith(
-                _ => context.OnCompleted(), context.CancelToken, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                _ => context.OnCompleted(),
+                context.CancelToken,
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
 
             if (context.TrackChanges)
             {
                 task = task.SafeContinueWith(
                     _ => TrackChangesAfterFirstPopulate(graphQueries, context, solution),
-                    context.CancelToken, TaskContinuationOptions.None, TaskScheduler.Default);
+                    context.CancelToken,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                );
             }
 
             task.CompletesAsyncOperation(asyncToken);
         }
 
-        private void TrackChangesAfterFirstPopulate(List<IGraphQuery> graphQueries, IGraphContext context, Solution solution)
-        {
+        private void TrackChangesAfterFirstPopulate(
+            List<IGraphQuery> graphQueries,
+            IGraphContext context,
+            Solution solution
+        ) {
             var workspace = solution.Workspace;
             var contextWeakReference = new WeakReference<IGraphContext>(context);
 
@@ -87,8 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             }
         }
 
-        private void OnWorkspaceChanged(object sender, WorkspaceChangeEventArgs e)
-            => EnqueueUpdate();
+        private void OnWorkspaceChanged(object sender, WorkspaceChangeEventArgs e) =>
+            EnqueueUpdate();
 
         private void EnqueueUpdate()
         {
@@ -99,8 +113,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 var newDelay = new ResettableDelay(WorkspaceUpdateDelay, _asyncListener);
                 if (Interlocked.CompareExchange(ref _delay, newDelay, null) == null)
                 {
-                    var asyncToken = _asyncListener.BeginAsyncOperation("WorkspaceGraphQueryManager.EnqueueUpdate");
-                    newDelay.Task.SafeContinueWithFromAsync(_ => UpdateAsync(), CancellationToken.None, TaskScheduler.Default)
+                    var asyncToken = _asyncListener.BeginAsyncOperation(
+                        "WorkspaceGraphQueryManager.EnqueueUpdate"
+                    );
+                    newDelay.Task.SafeContinueWithFromAsync(
+                            _ => UpdateAsync(),
+                            CancellationToken.None,
+                            TaskScheduler.Default
+                        )
                         .CompletesAsyncOperation(asyncToken);
                 }
 
@@ -115,11 +135,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             List<ValueTuple<IGraphContext, List<IGraphQuery>>> liveQueries;
             lock (_gate)
             {
-                liveQueries = _trackedQueries.Select(t => ValueTuple.Create(t.Item1.GetTarget(), t.Item2)).Where(t => t.Item1 != null).ToList()!;
+                liveQueries = _trackedQueries.Select(
+                        t => ValueTuple.Create(t.Item1.GetTarget(), t.Item2)
+                    )
+                    .Where(t => t.Item1 != null)
+                    .ToList()!;
             }
 
             var solution = _workspace.CurrentSolution;
-            var tasks = liveQueries.Select(t => PopulateContextGraphAsync(solution, t.Item2, t.Item1)).ToArray();
+            var tasks = liveQueries.Select(
+                    t => PopulateContextGraphAsync(solution, t.Item2, t.Item1)
+                )
+                .ToArray();
             var whenAllTask = Task.WhenAll(tasks);
 
             return whenAllTask.SafeContinueWith(t => PostUpdate(solution), TaskScheduler.Default);
@@ -151,15 +178,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         /// <summary>
         /// Populate the graph of the context with the values for the given Solution.
         /// </summary>
-        private static async Task PopulateContextGraphAsync(Solution solution, List<IGraphQuery> graphQueries, IGraphContext context)
-        {
+        private static async Task PopulateContextGraphAsync(
+            Solution solution,
+            List<IGraphQuery> graphQueries,
+            IGraphContext context
+        ) {
             try
             {
                 var cancellationToken = context.CancelToken;
-                var graphBuilderTasks = graphQueries.Select(q => q.GetGraphAsync(solution, context, cancellationToken)).ToArray();
+                var graphBuilderTasks = graphQueries.Select(
+                        q => q.GetGraphAsync(solution, context, cancellationToken)
+                    )
+                    .ToArray();
                 var graphBuilders = await Task.WhenAll(graphBuilderTasks).ConfigureAwait(false);
 
-                // Perform the actual graph transaction 
+                // Perform the actual graph transaction
                 using var transaction = new GraphTransactionScope();
 
                 // Remove any links that may have been added by a previous population. We don't

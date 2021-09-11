@@ -12,11 +12,19 @@ namespace Internal.Cryptography
     {
         private readonly bool _encrypting;
         private SafeKeyHandle _hKey;
-        private byte[]? _currentIv;  // CNG mutates this with the updated IV for the next stage on each Encrypt/Decrypt call.
-                                     // The base IV holds a copy of the original IV for Reset(), until it is cleared by Dispose().
+        private byte[]? _currentIv; // CNG mutates this with the updated IV for the next stage on each Encrypt/Decrypt call.
+        // The base IV holds a copy of the original IV for Reset(), until it is cleared by Dispose().
 
-        public BasicSymmetricCipherBCrypt(SafeAlgorithmHandle algorithm, CipherMode cipherMode, int blockSizeInBytes, int paddingSizeInBytes, byte[] key, bool ownsParentHandle, byte[]? iv, bool encrypting)
-            : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
+        public BasicSymmetricCipherBCrypt(
+            SafeAlgorithmHandle algorithm,
+            CipherMode cipherMode,
+            int blockSizeInBytes,
+            int paddingSizeInBytes,
+            byte[] key,
+            bool ownsParentHandle,
+            byte[]? iv,
+            bool encrypting
+        ) : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
         {
             Debug.Assert(algorithm != null);
 
@@ -95,7 +103,7 @@ namespace Internal.Cryptography
             if (input.Length != 0)
             {
                 numBytesWritten = Transform(input, output);
-                Debug.Assert(numBytesWritten == input.Length);  // Our implementation of Transform() guarantees this. See comment above.
+                Debug.Assert(numBytesWritten == input.Length); // Our implementation of Transform() guarantees this. See comment above.
             }
 
             Reset();

@@ -7,16 +7,34 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
     public interface IDefaultTagHelperTargetExtension : ICodeTargetExtension
     {
-        void WriteTagHelperBody(CodeRenderingContext context, DefaultTagHelperBodyIntermediateNode node);
+        void WriteTagHelperBody(
+            CodeRenderingContext context,
+            DefaultTagHelperBodyIntermediateNode node
+        );
 
-        void WriteTagHelperCreate(CodeRenderingContext context, DefaultTagHelperCreateIntermediateNode node);
+        void WriteTagHelperCreate(
+            CodeRenderingContext context,
+            DefaultTagHelperCreateIntermediateNode node
+        );
 
-        void WriteTagHelperExecute(CodeRenderingContext context, DefaultTagHelperExecuteIntermediateNode node);
+        void WriteTagHelperExecute(
+            CodeRenderingContext context,
+            DefaultTagHelperExecuteIntermediateNode node
+        );
 
-        void WriteTagHelperHtmlAttribute(CodeRenderingContext context, DefaultTagHelperHtmlAttributeIntermediateNode node);
+        void WriteTagHelperHtmlAttribute(
+            CodeRenderingContext context,
+            DefaultTagHelperHtmlAttributeIntermediateNode node
+        );
 
-        void WriteTagHelperProperty(CodeRenderingContext context, DefaultTagHelperPropertyIntermediateNode node);
+        void WriteTagHelperProperty(
+            CodeRenderingContext context,
+            DefaultTagHelperPropertyIntermediateNode node
+        );
 
-        void WriteTagHelperRuntime(CodeRenderingContext context, DefaultTagHelperRuntimeIntermediateNode node);
+        void WriteTagHelperRuntime(
+            CodeRenderingContext context,
+            DefaultTagHelperRuntimeIntermediateNode node
+        );
     }
 }

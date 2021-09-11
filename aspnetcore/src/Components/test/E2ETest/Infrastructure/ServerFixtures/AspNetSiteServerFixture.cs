@@ -22,14 +22,16 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
 
         public AspNetEnvironment Environment { get; set; } = AspNetEnvironment.Production;
 
-        public List<string> AdditionalArguments { get; set; } = new List<string> { "--test-execution-mode", "server" };
+        public List<string> AdditionalArguments { get; set; } =
+            new List<string> { "--test-execution-mode", "server" };
 
         protected override IHost CreateWebHost()
         {
             if (BuildWebHostMethod == null)
             {
                 throw new InvalidOperationException(
-                    $"No value was provided for {nameof(BuildWebHostMethod)}");
+                    $"No value was provided for {nameof(BuildWebHostMethod)}"
+                );
             }
 
             var assembly = ApplicationAssembly ?? BuildWebHostMethod.Method.DeclaringType.Assembly;
@@ -41,12 +43,17 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
                 host = E2ETestOptions.Instance.Sauce.HostName;
             }
 
-            return BuildWebHostMethod(new[]
-            {
-                "--urls", $"http://{host}:0",
-                "--contentroot", sampleSitePath,
-                "--environment", Environment.ToString(),
-            }.Concat(AdditionalArguments).ToArray());
+            return BuildWebHostMethod(
+                new[]
+                {
+                    "--urls",
+                    $"http://{host}:0",
+                    "--contentroot",
+                    sampleSitePath,
+                    "--environment",
+                    Environment.ToString(),
+                }.Concat(AdditionalArguments).ToArray()
+            );
         }
     }
 }

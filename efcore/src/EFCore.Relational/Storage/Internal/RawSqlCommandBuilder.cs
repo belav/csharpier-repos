@@ -36,8 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         public RawSqlCommandBuilder(
             IRelationalCommandBuilderFactory relationalCommandBuilderFactory,
             ISqlGenerationHelper sqlGenerationHelper,
-            IParameterNameGeneratorFactory parameterNameGeneratorFactory)
-        {
+            IParameterNameGeneratorFactory parameterNameGeneratorFactory
+        ) {
             Check.NotNull(relationalCommandBuilderFactory, nameof(relationalCommandBuilderFactory));
             Check.NotNull(sqlGenerationHelper, nameof(sqlGenerationHelper));
             Check.NotNull(parameterNameGeneratorFactory, nameof(parameterNameGeneratorFactory));
@@ -53,9 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IRelationalCommand Build(string sql)
-            => _relationalCommandBuilderFactory
-                .Create()
+        public virtual IRelationalCommand Build(string sql) =>
+            _relationalCommandBuilderFactory.Create()
                 .Append(Check.NotEmpty(sql, nameof(sql)))
                 .Build();
 
@@ -81,11 +80,18 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
                 {
                     if (string.IsNullOrEmpty(dbParameter.ParameterName))
                     {
-                        dbParameter.ParameterName = _sqlGenerationHelper.GenerateParameterName(parameterNameGenerator.GenerateNext());
+                        dbParameter.ParameterName = _sqlGenerationHelper.GenerateParameterName(
+                            parameterNameGenerator.GenerateNext()
+                        );
                     }
 
-                    substitutions.Add(_sqlGenerationHelper.GenerateParameterName(dbParameter.ParameterName));
-                    relationalCommandBuilder.AddRawParameter(dbParameter.ParameterName, dbParameter);
+                    substitutions.Add(
+                        _sqlGenerationHelper.GenerateParameterName(dbParameter.ParameterName)
+                    );
+                    relationalCommandBuilder.AddRawParameter(
+                        dbParameter.ParameterName,
+                        dbParameter
+                    );
                 }
                 else
                 {
@@ -101,9 +107,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             // ReSharper disable once CoVariantArrayConversion
             sql = string.Format(sql, substitutions.ToArray());
 
-            return new RawSqlCommand(
-                relationalCommandBuilder.Append(sql).Build(),
-                parameterValues);
+            return new RawSqlCommand(relationalCommandBuilder.Append(sql).Build(), parameterValues);
         }
     }
 }

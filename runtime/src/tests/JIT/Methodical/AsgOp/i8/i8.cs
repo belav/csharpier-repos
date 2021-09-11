@@ -665,7 +665,6 @@ internal class test
         return x;
     }
 
-
     public static int Main()
     {
         Int64 x;

@@ -10,7 +10,6 @@ namespace Test
 {
     class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()
@@ -43,14 +42,13 @@ namespace Test
                 {
                     test();
                 }
+
                 finally
                 {
                     test();
                 }
             }
-            catch
-            {
-            }
+            catch { }
 
             // stop recoding
             testLog.StopRecording();
@@ -67,18 +65,18 @@ namespace Test
                 {
                     Console.WriteLine("\ttry 1.1");
                 }
+
                 finally
                 {
                     Console.WriteLine("\tfinally 1.1");
                     throw new Exception();
                 }
             }
+
             finally
             {
                 Console.WriteLine("finally 1");
             }
         }
-
     }
-
 }

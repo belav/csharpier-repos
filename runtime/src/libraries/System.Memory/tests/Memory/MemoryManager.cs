@@ -108,7 +108,7 @@ namespace System.MemoryTests
         [Fact]
         public static void MemoryManagerPinEmptyArray()
         {
-            int[] a = { };
+            int[] a = {  };
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
             MemoryHandle handle = manager.Pin();
             unsafe
@@ -158,10 +158,7 @@ namespace System.MemoryTests
         {
             int[] a = { 91, 92, -93, 94 };
             MemoryManager<int> manager;
-            using (manager = new CustomMemoryForTest<int>(a))
-            {
-
-            }
+            using (manager = new CustomMemoryForTest<int>(a)) { }
             Assert.Throws<ObjectDisposedException>(() => manager.GetSpan());
         }
     }

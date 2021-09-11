@@ -12,11 +12,18 @@ namespace System.Web.Mvc.ExpressionUtil
     // MemberExpression fingerprint class
     // Expression of form xxx.FieldOrProperty
 
-    [SuppressMessage("Microsoft.Usage", "CA2218:OverrideGetHashCodeOnOverridingEquals", Justification = "Overrides AddToHashCodeCombiner() instead.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2218:OverrideGetHashCodeOnOverridingEquals",
+        Justification = "Overrides AddToHashCodeCombiner() instead."
+    )]
     internal sealed class MemberExpressionFingerprint : ExpressionFingerprint
     {
-        public MemberExpressionFingerprint(ExpressionType nodeType, Type type, MemberInfo member)
-            : base(nodeType, type)
+        public MemberExpressionFingerprint(
+            ExpressionType nodeType,
+            Type type,
+            MemberInfo member
+        ) : base(nodeType, type)
         {
             Member = member;
         }
@@ -27,9 +34,7 @@ namespace System.Web.Mvc.ExpressionUtil
         public override bool Equals(object obj)
         {
             MemberExpressionFingerprint other = obj as MemberExpressionFingerprint;
-            return (other != null)
-                   && Equals(this.Member, other.Member)
-                   && this.Equals(other);
+            return (other != null) && Equals(this.Member, other.Member) && this.Equals(other);
         }
 
         internal override void AddToHashCodeCombiner(HashCodeCombiner combiner)

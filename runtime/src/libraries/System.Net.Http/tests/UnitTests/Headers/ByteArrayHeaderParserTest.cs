@@ -25,7 +25,12 @@ namespace System.Net.Http.Tests
         {
             ByteArrayHeaderParser parser = ByteArrayHeaderParser.Parser;
             int index = 0;
-            Assert.Throws<FormatException>(() => { parser.ParseValue(null, null, ref index); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    parser.ParseValue(null, null, ref index);
+                }
+            );
         }
 
         [Fact]
@@ -36,8 +41,12 @@ namespace System.Net.Http.Tests
 
             // Note that Convert.FromBase64String() is tolerant with whitespace characters in the middle of the Base64
             // string:
-            CheckValidParsedValue(" AbCdE fGhI  jKl+/Mn \r\n \t", 0,
-                new byte[] { 1, 176, 157, 17, 241, 161, 34, 50, 165, 251, 243, 39 }, 25);
+            CheckValidParsedValue(
+                " AbCdE fGhI  jKl+/Mn \r\n \t",
+                0,
+                new byte[] { 1, 176, 157, 17, 241, 161, 34, 50, 165, 251, 243, 39 },
+                25
+            );
         }
 
         [Fact]
@@ -65,8 +74,12 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex, byte[] expectedResult, int expectedIndex)
-        {
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            byte[] expectedResult,
+            int expectedIndex
+        ) {
             ByteArrayHeaderParser parser = ByteArrayHeaderParser.Parser;
             object result = 0;
             Assert.True(parser.TryParseValue(input, null, ref startIndex, out result));

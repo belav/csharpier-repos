@@ -137,13 +137,11 @@ namespace System.Linq.Expressions.Compiler
                     // found it, jump is valid!
                     return;
                 }
-                if (j.Kind == LabelScopeKind.Finally ||
-                    j.Kind == LabelScopeKind.Filter)
+                if (j.Kind == LabelScopeKind.Finally || j.Kind == LabelScopeKind.Filter)
                 {
                     break;
                 }
-                if (j.Kind == LabelScopeKind.Try ||
-                    j.Kind == LabelScopeKind.Catch)
+                if (j.Kind == LabelScopeKind.Try || j.Kind == LabelScopeKind.Catch)
                 {
                     _opCode = OpCodes.Leave;
                 }
@@ -178,8 +176,7 @@ namespace System.Linq.Expressions.Compiler
                 {
                     throw Error.ControlCannotLeaveFilterTest();
                 }
-                if (j.Kind == LabelScopeKind.Try ||
-                    j.Kind == LabelScopeKind.Catch)
+                if (j.Kind == LabelScopeKind.Try || j.Kind == LabelScopeKind.Catch)
                 {
                     _opCode = OpCodes.Leave;
                 }
@@ -295,18 +292,15 @@ namespace System.Linq.Expressions.Compiler
     {
         // any "statement like" node that can be jumped into
         Statement,
-
         // these correspond to the node of the same name
         Block,
         Switch,
         Lambda,
         Try,
-
         // these correspond to the part of the try block we're in
         Catch,
         Finally,
         Filter,
-
         // the catch-all value for any other expression type
         // (means we can't jump into it)
         Expression,
@@ -354,7 +348,6 @@ namespace System.Linq.Expressions.Compiler
                 return false;
             }
         }
-
 
         internal bool ContainsTarget(LabelTarget target)
         {

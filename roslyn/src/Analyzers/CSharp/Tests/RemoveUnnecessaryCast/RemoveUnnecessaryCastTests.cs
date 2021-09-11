@@ -15,20 +15,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpRemoveUnnecessaryCastDiagnosticAnalyzer,
-        CSharpRemoveUnnecessaryCastCodeFixProvider>;
+        CSharpRemoveUnnecessaryCastCodeFixProvider
+    >;
 
     public class RemoveUnnecessaryCastTests
     {
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)
+        ]
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [WorkItem(545979, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545979")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task DoNotRemoveCastToErrorType()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -48,15 +53,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     // /0/Test0.cs(5,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(5, 22, 5, 22),
                 },
-                source);
+                source
+            );
         }
 
-        [WorkItem(545137, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545137"), WorkItem(870550, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/870550")]
+        [
+            WorkItem(545137, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545137"),
+            WorkItem(870550, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/870550")
+        ]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task ParenthesizeToKeepParseTheSame1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class Program
 {
     static void Main()
@@ -68,8 +77,7 @@ class Program
  
     static void Goo(bool a, bool b) { }
 }",
-
-            @"
+                @"
 class Program
 {
     static void Main()
@@ -80,7 +88,8 @@ class Program
     }
  
     static void Goo(bool a, bool b) { }
-}");
+}"
+            );
         }
 
         [WorkItem(545146, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545146")]
@@ -88,7 +97,7 @@ class Program
         public async Task ParenthesizeToKeepParseTheSame2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
  
 class C
@@ -99,8 +108,7 @@ class C
         ([|(Action)|]a)();
     }
 }",
-
-            @"
+                @"
 using System;
  
 class C
@@ -110,7 +118,8 @@ class C
         Action a = Console.WriteLine;
         a();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545160, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545160")]
@@ -118,7 +127,7 @@ class C
         public async Task ParenthesizeToKeepParseTheSame3()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
  
 class Program
@@ -128,8 +137,7 @@ class Program
         var x = (Decimal)[|(int)|]-1;
     }
 }",
-
-            @"
+                @"
 using System;
  
 class Program
@@ -138,7 +146,8 @@ class Program
     {
         var x = (Decimal)(-1);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545138, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545138")]
@@ -146,7 +155,7 @@ class Program
         public async Task DoNotRemoveTypeParameterCastToObject()
         {
             var source =
-@"class D
+                @"class D
 {
     void Goo<T>(T obj)
     {
@@ -162,7 +171,7 @@ class Program
         public async Task DoNotRemoveCastInIsTest()
         {
             var source =
-@"using System;
+                @"using System;
 
 class D
 {
@@ -181,7 +190,7 @@ class D
         public async Task DoNotRemoveCastNeedForUserDefinedOperator()
         {
             var source =
-@"class A
+                @"class A
 {
     public static implicit operator A(string x)
     {
@@ -205,7 +214,7 @@ class Program
         public async Task DoNotRemovePointerCast1()
         {
             var source =
-@"unsafe class C
+                @"unsafe class C
 {
     static unsafe void Main()
     {
@@ -224,7 +233,7 @@ class Program
             // op_Equality operator overload being used over reference equality.
 
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -244,7 +253,7 @@ class Program
         public async Task DoNotRemoveCastToAnonymousMethodWhenOnLeftOfAsCast()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -256,7 +265,7 @@ class C
         [|as Action|];
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -265,7 +274,8 @@ class C
         var x = (Action)delegate {
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545147, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545147")]
@@ -273,7 +283,7 @@ class C
         public async Task DoNotRemoveCastInFloatingPointOperation()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -290,7 +300,7 @@ class C
         public async Task DoNotRemoveIdentityCastWhichAffectsOverloadResolution1()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -316,7 +326,7 @@ class Program
         public async Task DoNotRemoveIdentityCastWhichAffectsOverloadResolution2()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -343,7 +353,7 @@ class Program
         public async Task DoNotRemoveIdentityCastWhichAffectsOverloadResolution3()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -371,7 +381,7 @@ class Program
         public async Task DoNotRemoveCastWhichChangesTypeOfInferredLocal()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -388,7 +398,7 @@ class Program
         public async Task DoNotRemoveNeededCastToIListOfObject()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -410,26 +420,29 @@ class C
             await VerifyCS.VerifyCodeFixAsync(source, source);
         }
 
-        [WorkItem(545287, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545287"), WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            WorkItem(545287, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545287"),
+            WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task RemoveUnneededCastInParameterDefaultValue()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class Program
 {
     static void M1(int? i1 = [|(int?)|]null)
     {
     }
 }",
-
-@"
+                @"
 class Program
 {
     static void M1(int? i1 = null)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545289, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545289")]
@@ -437,7 +450,7 @@ class Program
         public async Task RemoveUnneededCastInReturnStatement()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class Program
 {
     static long M2()
@@ -445,15 +458,15 @@ class Program
         return [|(long)|]5;
     }
 }",
-
-@"
+                @"
 class Program
 {
     static long M2()
     {
         return 5;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545288, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
@@ -461,7 +474,7 @@ class Program
         public async Task RemoveUnneededCastInLambda1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -470,8 +483,7 @@ class Program
         Func<long> f1 = () => [|(long)|]5;
     }
 }",
-
-@"
+                @"
 using System;
 class Program
 {
@@ -479,7 +491,8 @@ class Program
     {
         Func<long> f1 = () => 5;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545288, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
@@ -487,7 +500,7 @@ class Program
         public async Task RemoveUnneededCastInLambda2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -496,8 +509,7 @@ class Program
         Func<long> f1 = () => { return [|(long)|]5; };
     }
 }",
-
-@"
+                @"
 using System;
 class Program
 {
@@ -505,7 +517,8 @@ class Program
     {
         Func<long> f1 = () => { return 5; };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545288, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
@@ -513,7 +526,7 @@ class Program
         public async Task RemoveUnneededCastInLambda3()
         {
             var source =
-            @"
+                @"
 using System;
 class Program
 {
@@ -523,7 +536,7 @@ class Program
     }
 }";
             var fixedSource =
-@"
+                @"
 using System;
 class Program
 {
@@ -541,7 +554,9 @@ class Program
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(7,25): error CS1593: Delegate 'Func<long>' does not take 1 arguments
-                        DiagnosticResult.CompilerError("CS1593").WithSpan(7, 25, 7, 49).WithArguments("System.Func<long>", "1"),
+                        DiagnosticResult.CompilerError("CS1593")
+                            .WithSpan(7, 25, 7, 49)
+                            .WithArguments("System.Func<long>", "1"),
                     },
                 },
                 FixedState =
@@ -550,7 +565,9 @@ class Program
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(7,25): error CS1593: Delegate 'Func<long>' does not take 1 arguments
-                        DiagnosticResult.CompilerError("CS1593").WithSpan(7, 25, 7, 43).WithArguments("System.Func<long>", "1"),
+                        DiagnosticResult.CompilerError("CS1593")
+                            .WithSpan(7, 25, 7, 43)
+                            .WithArguments("System.Func<long>", "1"),
                     },
                 },
             }.RunAsync();
@@ -561,7 +578,7 @@ class Program
         public async Task RemoveUnneededCastInLambda4()
         {
             var source =
-            @"
+                @"
 using System;
 class Program
 {
@@ -571,7 +588,7 @@ class Program
     }
 }";
             var fixedSource =
-@"
+                @"
 using System;
 class Program
 {
@@ -589,7 +606,9 @@ class Program
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(7,25): error CS1593: Delegate 'Func<long>' does not take 1 arguments
-                        DiagnosticResult.CompilerError("CS1593").WithSpan(7, 25, 7, 37).WithArguments("System.Func<long>", "1"),
+                        DiagnosticResult.CompilerError("CS1593")
+                            .WithSpan(7, 25, 7, 37)
+                            .WithArguments("System.Func<long>", "1"),
                     },
                 },
                 FixedState =
@@ -598,7 +617,9 @@ class Program
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(7,25): error CS1593: Delegate 'Func<long>' does not take 1 arguments
-                        DiagnosticResult.CompilerError("CS1593").WithSpan(7, 25, 7, 31).WithArguments("System.Func<long>", "1"),
+                        DiagnosticResult.CompilerError("CS1593")
+                            .WithSpan(7, 25, 7, 31)
+                            .WithArguments("System.Func<long>", "1"),
                     },
                 },
             }.RunAsync();
@@ -609,7 +630,7 @@ class Program
         public async Task RemoveUnneededCastInConditionalExpression1()
         {
             var source =
-            @"
+                @"
 class Test
 {
     public static void Main()
@@ -620,7 +641,7 @@ class Test
     }
 }";
             var fixedSource =
-@"
+                @"
 class Test
 {
     public static void Main()
@@ -631,7 +652,7 @@ class Test
     }
 }";
             var batchFixedSource =
-@"
+                @"
 class Test
 {
     public static void Main()
@@ -644,19 +665,9 @@ class Test
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { source },
-                },
-                FixedState =
-                {
-                    Sources = { fixedSource },
-                    MarkupHandling = MarkupMode.Allow,
-                },
-                BatchFixedState =
-                {
-                    Sources = { batchFixedSource },
-                },
+                TestState = { Sources = { source }, },
+                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
+                BatchFixedState = { Sources = { batchFixedSource }, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -666,7 +677,7 @@ class Test
         public async Task RemoveUnneededCastInConditionalExpression2()
         {
             var source =
-            @"
+                @"
 class Test
 {
     public static void Main()
@@ -677,7 +688,7 @@ class Test
     }
 }";
             var fixedSource =
-@"
+                @"
 class Test
 {
     public static void Main()
@@ -688,7 +699,7 @@ class Test
     }
 }";
             var batchFixedSource =
-@"
+                @"
 class Test
 {
     public static void Main()
@@ -701,19 +712,9 @@ class Test
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { source },
-                },
-                FixedState =
-                {
-                    Sources = { fixedSource },
-                    MarkupHandling = MarkupMode.Allow,
-                },
-                BatchFixedState =
-                {
-                    Sources = { batchFixedSource },
-                },
+                TestState = { Sources = { source }, },
+                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
+                BatchFixedState = { Sources = { batchFixedSource }, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
                 DiagnosticSelector = diagnostics => diagnostics[1],
             }.RunAsync();
@@ -724,7 +725,7 @@ class Test
         public async Task RemoveUnneededCastInConditionalExpression3()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class Test
 {
     public static void Main()
@@ -734,8 +735,7 @@ class Test
         long f1 = (b == 5) ? 4 : [|(long)|]5;
     }
 }",
-
-@"
+                @"
 class Test
 {
     public static void Main()
@@ -744,7 +744,8 @@ class Test
 
         long f1 = (b == 5) ? 4 : 5;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545291, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
@@ -752,7 +753,7 @@ class Test
         public async Task DoNotRemoveNeededCastInConditionalExpression()
         {
             var source =
-@"class Test
+                @"class Test
 {
     public static void Main()
     {
@@ -769,7 +770,7 @@ class Test
         public async Task RemoveUnneededCastInConditionalExpression4()
         {
             var source =
-            @"
+                @"
 class Test
 {
     public static void Main()
@@ -780,7 +781,7 @@ class Test
     }
 }";
             var fixedSource =
-@"
+                @"
 class Test
 {
     public static void Main()
@@ -791,7 +792,7 @@ class Test
     }
 }";
             var batchFixedSource =
-@"
+                @"
 class Test
 {
     public static void Main()
@@ -817,7 +818,7 @@ class Test
         public async Task RemoveUnneededCastInsideADelegateConstructor()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 class Test
 {
@@ -830,8 +831,7 @@ class Test
 
     public static void M1(int i) { }
 }",
-
-@"
+                @"
 using System;
 class Test
 {
@@ -843,7 +843,8 @@ class Test
     }
 
     public static void M1(int i) { }
-}");
+}"
+            );
         }
 
         [WorkItem(545419, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545419")]
@@ -851,7 +852,7 @@ class Test
         public async Task DoNotRemoveTriviaWhenRemovingCast()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 class Test
 {
@@ -863,8 +864,7 @@ class Test
         };
     }
 }",
-
-@"
+                @"
 using System;
 class Test
 {
@@ -875,7 +875,8 @@ class Test
             return /*Lambda returning int const*/() => 5 /*Const returned is 5*/;
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545422, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545422")]
@@ -883,7 +884,7 @@ class Test
         public async Task RemoveUnneededCastInsideCaseLabel()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class Test
 {
     static void Main()
@@ -895,8 +896,7 @@ class Test
         }
     }
 }",
-
-@"
+                @"
 class Test
 {
     static void Main()
@@ -907,7 +907,8 @@ class Test
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545578, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545578")]
@@ -915,7 +916,7 @@ class Test
         public async Task RemoveUnneededCastInsideGotoCaseStatement()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class Test
 {
     static void Main()
@@ -928,8 +929,7 @@ class Test
         }
     }
 }",
-
-@"
+                @"
 class Test
 {
     static void Main()
@@ -941,15 +941,19 @@ class Test
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545595, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545595")]
-        [WpfFact(Skip = "529787"), Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
+        [
+            WpfFact(Skip = "529787"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)
+        ]
         public async Task RemoveUnneededCastInCollectionInitializer()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System.Collections.Generic;
 
 class Program
@@ -959,8 +963,7 @@ class Program
         var z = new List<long> { [|(long)0|] };
     }
 }",
-
-@"
+                @"
 using System.Collections.Generic;
 
 class Program
@@ -969,15 +972,19 @@ class Program
     {
         var z = new List<long> { 0 };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(529787, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529787")]
-        [WpfFact(Skip = "529787"), Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
+        [
+            WpfFact(Skip = "529787"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)
+        ]
         public async Task DoNotRemoveNecessaryCastWhichInCollectionInitializer1()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class X : List<int>
@@ -1002,11 +1009,14 @@ class X : List<int>
         }
 
         [WorkItem(529787, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529787")]
-        [WpfFact(Skip = "529787"), Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
+        [
+            WpfFact(Skip = "529787"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)
+        ]
         public async Task DoNotRemoveNecessaryCastWhichInCollectionInitializer2()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class X : List<int>
@@ -1035,7 +1045,7 @@ class X : List<int>
         public async Task RemoveUnneededCastInArrayInitializer()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class X
 {
     static void Goo()
@@ -1051,7 +1061,7 @@ class X
                     // /0/Test0.cs(6,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(6, 22, 6, 22),
                 },
-@"
+                @"
 class X
 {
     static void Goo()
@@ -1059,7 +1069,8 @@ class X
         string x = "";
         var s = new object[] { x };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545616, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545616")]
@@ -1067,7 +1078,7 @@ class X
         public async Task RemoveUnneededCastWithOverloadedBinaryOperator()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 class MyAction
 {
@@ -1082,8 +1093,7 @@ class MyAction
         throw new NotImplementedException();
     }
 }",
-
-@"
+                @"
 using System;
 class MyAction
 {
@@ -1097,7 +1107,8 @@ class MyAction
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545822, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545822")]
@@ -1105,7 +1116,7 @@ class MyAction
         public async Task RemoveUnnecessaryCastShouldInsertWhitespaceWhereNeededToKeepCorrectParsing()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
  
 class Program
@@ -1116,8 +1127,7 @@ class Program
         var x = [|(Action)|](Goo<Guid>)==a;
     }
 }",
-
-@"
+                @"
 using System;
  
 class Program
@@ -1127,7 +1137,8 @@ class Program
         Action a = null;
         var x = (Goo<Guid>) == a;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545560, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545560")]
@@ -1135,7 +1146,7 @@ class Program
         public async Task DoNotRemoveNecessaryCastWithExplicitUserDefinedConversion()
         {
             var source =
-@"using System;
+                @"using System;
 
 class A
 {
@@ -1167,7 +1178,7 @@ class A
         public async Task DoNotRemoveNecessaryCastWithImplicitUserDefinedConversion()
         {
             var source =
-@"class X
+                @"class X
 {
     static void Goo()
     {
@@ -1190,7 +1201,8 @@ class A
                     // /0/Test0.cs(11,18): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(11, 18, 11, 18),
                 },
-                source);
+                source
+            );
         }
 
         [WorkItem(545941, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545941")]
@@ -1202,7 +1214,7 @@ class A
             // Exception.
 
             var source =
-@"using System;
+                @"using System;
 
 class E
 {
@@ -1229,7 +1241,7 @@ class E
             // Exception.
 
             var source =
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1248,7 +1260,7 @@ class C
         public async Task RemoveUnnecessaryCastInThrow()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 
 class E
@@ -1259,8 +1271,7 @@ class E
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 class E
@@ -1270,7 +1281,8 @@ class E
         throw new Exception();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545945, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545945")]
@@ -1278,7 +1290,7 @@ class E
         public async Task DoNotRemoveNecessaryDowncast()
         {
             var source =
-@"class C
+                @"class C
 {
     void Goo(object y)
     {
@@ -1294,7 +1306,7 @@ class E
         public async Task DoNotRemoveNecessaryCastWithinLambda()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1334,7 +1346,7 @@ class Program
         public async Task DoNotRemoveNecessaryCastFromNullToTypeParameter()
         {
             var source =
-@"class X
+                @"class X
 {
     static void Goo<T, S>() where T : class, S
     {
@@ -1350,7 +1362,7 @@ class Program
         public async Task DoNotRemoveNecessaryCastInImplicitlyTypedArray()
         {
             var source =
-@"class X
+                @"class X
 {
     static void Goo()
     {
@@ -1369,7 +1381,8 @@ class Program
                     // /0/Test0.cs(5,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(5, 22, 5, 22),
                 },
-                source);
+                source
+            );
         }
 
         [WorkItem(545750, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545750")]
@@ -1377,7 +1390,7 @@ class Program
         public async Task RemoveUnnecessaryCastToBaseType()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class X
 {
     static void Main()
@@ -1397,7 +1410,7 @@ class X
                     // /0/Test0.cs(11,18): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(11, 18, 11, 18),
                 },
-@"
+                @"
 class X
 {
     static void Main()
@@ -1409,7 +1422,8 @@ class X
     {
         return "";
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545855, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545855")]
@@ -1417,7 +1431,7 @@ class X
         public async Task RemoveUnnecessaryLambdaToDelegateCast()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -1441,8 +1455,7 @@ static class Program
     }
 }
 ",
-
-@"
+                @"
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -1465,7 +1478,8 @@ static class Program
         return true;
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529816, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529816")]
@@ -1473,7 +1487,7 @@ static class Program
         public async Task RemoveUnnecessaryCastInQueryExpression()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 
 class A
@@ -1485,8 +1499,7 @@ class A
         Console.WriteLine(from y in new A() select [|(long)|]0);
     }
 }",
-
-@"
+                @"
 using System;
 
 class A
@@ -1497,7 +1510,8 @@ class A
     {
         Console.WriteLine(from y in new A() select 0);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(529816, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529816")]
@@ -1505,7 +1519,7 @@ class A
         public async Task DoNotRemoveNecessaryCastInQueryExpression()
         {
             var source =
-@"using System;
+                @"using System;
 
 class A
 {
@@ -1534,7 +1548,7 @@ class A
         public async Task DoNotRemoveNecessaryCastInConstructorInitializer()
         {
             var source =
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1574,7 +1588,7 @@ class C
         public async Task DoNotRemoveNecessaryCastFromTypeParameterToInterface()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 
 interface IIncrementable
 {
@@ -1621,7 +1635,7 @@ static class Program
         Console.WriteLine(y.Value);
     }
 }",
-@"using System;
+                @"using System;
 
 interface IIncrementable
 {
@@ -1667,7 +1681,8 @@ static class Program
         Console.WriteLine(x.Value);
         Console.WriteLine(y.Value);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(529831, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529831")]
@@ -1675,7 +1690,7 @@ static class Program
         public async Task RemoveUnnecessaryCastFromTypeParameterToInterface()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 
 interface IIncrementable
@@ -1715,7 +1730,7 @@ static class Program
     }
 }
 ",
- @"
+                @"
 using System;
 
 interface IIncrementable
@@ -1754,7 +1769,8 @@ static class Program
         Console.WriteLine(y.Value);
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545877, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545877")]
@@ -1763,7 +1779,7 @@ static class Program
         {
             // This test has intentional syntax errors
             var source =
-@"using System;
+                @"using System;
 
 class A
 {
@@ -1785,7 +1801,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task RemoveUnneededTargetTypedCast()
         {
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 class Other
 {
     public short GetScopeIdForTelemetry(FixAllScope scope)
@@ -1805,7 +1822,7 @@ class Other
         Other
     }
 }",
-@"
+                @"
 class Other
 {
     public short GetScopeIdForTelemetry(FixAllScope scope)
@@ -1825,7 +1842,7 @@ class Other
         Other
     }
 }"
-);
+            );
         }
 
         [WorkItem(545777, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545777")]
@@ -1833,7 +1850,7 @@ class Other
         public async Task DoNotRemoveImportantTrailingTrivia()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class Program
 {
     static void Main()
@@ -1846,8 +1863,7 @@ class Program
     }
 }
 ",
-
-            @"
+                @"
 class Program
 {
     static void Main()
@@ -1859,7 +1875,8 @@ class Program
             1;
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529791, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529791")]
@@ -1867,7 +1884,7 @@ class Program
         public async Task RemoveUnnecessaryCastToNullable1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class X
 {
     static void Goo()
@@ -1877,8 +1894,7 @@ class X
     }
 }
 ",
-
-            @"
+                @"
 class X
 {
     static void Goo()
@@ -1887,7 +1903,8 @@ class X
         object y = null;
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545842, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545842")]
@@ -1895,7 +1912,7 @@ class X
         public async Task RemoveUnnecessaryCastToNullable2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 static class C
 {
     static void Main()
@@ -1906,8 +1923,7 @@ static class C
     }
 }
 ",
-
-            @"
+                @"
 static class C
 {
     static void Main()
@@ -1917,7 +1933,8 @@ static class C
         long? z = x + y;
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545850, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545850")]
@@ -1925,7 +1942,7 @@ static class C
         public async Task RemoveSurroundingParentheses()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class Program
 {
     static void Main()
@@ -1935,8 +1952,7 @@ class Program
     }
 }
 ",
-
-            @"
+                @"
 class Program
 {
     static void Main()
@@ -1945,7 +1961,8 @@ class Program
         x.ToString();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529846, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529846")]
@@ -1953,7 +1970,7 @@ class Program
         public async Task DoNotRemoveNecessaryCastFromTypeParameterToObject()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Goo<T>(T x, object y)
     {
@@ -1971,7 +1988,7 @@ class Program
         public async Task DoNotRemoveNecessaryCastFromDelegateTypeToMulticastDelegate()
         {
             var source =
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1994,7 +2011,7 @@ class C
             // conversion to int being called instead.
 
             var source =
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2024,7 +2041,7 @@ class C
             // Array bounds must be an int, so the cast below can't be removed.
 
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -2040,7 +2057,7 @@ class C
         public async Task DoNotRemoveNecessaryCastInTernaryExpression()
         {
             var source =
-@"using System;
+                @"using System;
 
 class X
 {
@@ -2060,34 +2077,40 @@ class X
             await VerifyCS.VerifyCodeFixAsync(source, source);
         }
 
-        [WorkItem(545882, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545882"), WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            WorkItem(545882, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545882"),
+            WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task RemoveCastInConstructorInitializer1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     C(int x) { }
     C() : this([|(int)|]1) { }
 }
 ",
-
-@"
+                @"
 class C
 {
     C(int x) { }
     C() : this(1) { }
 }
-");
+"
+            );
         }
 
-        [WorkItem(545958, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545958"), WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            WorkItem(545958, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545958"),
+            WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task RemoveCastInConstructorInitializer2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Collections;
 
 class C
@@ -2097,8 +2120,7 @@ class C
     C() : this([|(IEnumerable)|]"""") { }
 }
 ",
-
-@"
+                @"
 using System.Collections;
 
 class C
@@ -2107,7 +2129,8 @@ class C
     C(object x) { }
     C() : this("""") { }
 }
-");
+"
+            );
         }
 
         [WorkItem(545957, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545957")]
@@ -2115,7 +2138,7 @@ class C
         public async Task DoNotRemoveCastInConstructorInitializer3()
         {
             var source =
-@"class C
+                @"class C
 {
     C(int x)
     {
@@ -2129,8 +2152,11 @@ class C
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(7,16): error CS1503: Argument 1: cannot convert from 'long' to 'int'
-                DiagnosticResult.CompilerError("CS1503").WithSpan(7, 16, 7, 23).WithArguments("1", "long", "int"),
-                source);
+                DiagnosticResult.CompilerError("CS1503")
+                    .WithSpan(7, 16, 7, 23)
+                    .WithArguments("1", "long", "int"),
+                source
+            );
         }
 
         [WorkItem(545842, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545842")]
@@ -2138,7 +2164,7 @@ class C
         public async Task RemoveCastToNullableInArithmeticExpression()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 static class C
 {
     static void Main()
@@ -2149,8 +2175,7 @@ static class C
     }
 }
 ",
-
-@"
+                @"
 static class C
 {
     static void Main()
@@ -2160,7 +2185,8 @@ static class C
         long? z = x + y;
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545942, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545942")]
@@ -2171,7 +2197,7 @@ static class C
             // illegal reference equality test between object and a value type.
 
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2192,7 +2218,7 @@ class Program
             // Note: The cast below can't be removed because its expression doesn't bind.
 
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2213,7 +2239,7 @@ class Program
             // which is illegal.
 
             var source =
-@"unsafe class C
+                @"unsafe class C
 {
     int x = *(int*)null;
 }";
@@ -2229,7 +2255,7 @@ class Program
             // void*, which is illegal.
 
             var source =
-@"unsafe class C
+                @"unsafe class C
 {
     static void Main()
     {
@@ -2250,7 +2276,7 @@ class Program
             // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
 
             var source =
-@"class C
+                @"class C
 {
     public unsafe float ReadSingle(byte* ptr)
     {
@@ -2270,7 +2296,7 @@ class Program
             // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
 
             var source =
-@"class C
+                @"class C
 {
     private unsafe readonly byte* _endPointer;
     private unsafe byte* _currentPointer;
@@ -2295,7 +2321,7 @@ class Program
             // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
 
             var source =
-@"class C
+                @"class C
 {
     private unsafe readonly byte* _endPointer;
     private unsafe byte* _currentPointer;
@@ -2323,7 +2349,7 @@ class Program
             // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
 
             var source =
-@"class C
+                @"class C
 {
     private unsafe readonly byte* _endPointer;
     private unsafe byte* _currentPointer;
@@ -2348,7 +2374,7 @@ class Program
             // https://github.com/dotnet/roslyn/issues/2987 tracks improving cast simplification for this scenario.
 
             var source =
-@"class C
+                @"class C
 {
     private unsafe readonly byte* _endPointer;
     private unsafe byte* _currentPointer;
@@ -2372,7 +2398,7 @@ class Program
         public async Task DoNotRemoveCastToByteFromIntInConditionalExpression()
         {
             var source =
-@"class C
+                @"class C
 {
     object M1(bool b)
     {
@@ -2388,20 +2414,21 @@ class Program
         public async Task RemoveCastToDoubleFromIntWithTwoInConditionalExpression()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     object M1(bool b)
     {
         return b ? [|(double)|]1 : [|(double)|]0;
     }
 }",
-@"class C
+                @"class C
 {
     object M1(bool b)
     {
         return b ? 1 : (double)0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26640, "https://github.com/dotnet/roslyn/issues/26640")]
@@ -2409,7 +2436,7 @@ class Program
         public async Task DoNotRemoveCastToDoubleFromIntInConditionalExpression()
         {
             var source =
-@"class C
+                @"class C
 {
     object M1(bool b)
     {
@@ -2425,7 +2452,7 @@ class Program
         public async Task DoNotRemoveCastToUIntFromCharInConditionalExpression()
         {
             var source =
-@"class C
+                @"class C
 {
     object M1(bool b)
     {
@@ -2441,20 +2468,21 @@ class Program
         public async Task RemoveUnnecessaryNumericCastToSameTypeInConditionalExpression()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     object M1(bool b)
     {
         return b ? [|(int)|]1 : 0;
     }
 }",
-@"class C
+                @"class C
 {
     object M1(bool b)
     {
         return b ? 1 : 0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545894, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545894")]
@@ -2462,7 +2490,7 @@ class Program
         public async Task DoNotRemoveNecessaryCastInAttribute()
         {
             var source =
-@"using System;
+                @"using System;
 
 [A((byte)0)]
 class A : Attribute
@@ -2480,7 +2508,7 @@ class A : Attribute
         public async Task DoNotRemoveNecessaryCastForImplicitNumericCastsThatLoseInformation()
         {
             var source =
-@"using System;
+                @"using System;
 
 class A
 {
@@ -2502,7 +2530,7 @@ class A
             // Note: The cast below can't be removed because X is not sealed.
 
             var source =
-@"using System;
+                @"using System;
 
 class X : IDisposable
 {
@@ -2535,7 +2563,7 @@ class Y : X, IDisposable
         public async Task DoNotRemoveCastToInterfaceForSealedType1()
         {
             var source =
-@"
+                @"
 using System;
 
 interface I
@@ -2566,7 +2594,7 @@ sealed class C : I
         public async Task DoNotRemoveCastToInterfaceForSealedType2()
         {
             var source =
-@"
+                @"
 using System;
 
 interface I
@@ -2600,7 +2628,7 @@ sealed class C : I
         public async Task DoNotRemoveCastToInterfaceForSealedType3()
         {
             var source =
-@"
+                @"
 using System;
 
 interface I
@@ -2630,8 +2658,11 @@ sealed class C : I
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(23,31): error CS0120: An object reference is required for the non-static field, method, or property 'C.Instance'
-                DiagnosticResult.CompilerError("CS0120").WithSpan(23, 31, 23, 39).WithArguments("C.Instance"),
-                source);
+                DiagnosticResult.CompilerError("CS0120")
+                    .WithSpan(23, 31, 23, 39)
+                    .WithArguments("C.Instance"),
+                source
+            );
         }
 
         [WorkItem(545890, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
@@ -2639,7 +2670,7 @@ sealed class C : I
         public async Task DoNotRemoveCastToInterfaceForSealedType4()
         {
             var source =
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -2668,7 +2699,7 @@ sealed class C : I
         public async Task DoNotRemoveCastToInterfaceForSealedType5()
         {
             var source =
-@"
+                @"
 using System;
 
 interface I
@@ -2702,7 +2733,7 @@ sealed class C : I
             // appear at different positions in the member signatures.
 
             var source =
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -2731,7 +2762,7 @@ sealed class C : I
         public async Task DoNotRemoveCastToInterfaceForSealedType7()
         {
             var source =
-@"
+                @"
 using System;
 
 interface I
@@ -2768,7 +2799,7 @@ sealed class C : I
             // appear at different positions in the member signatures.
 
             var source =
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -2796,13 +2827,21 @@ sealed class C : I
                 new[]
                 {
                     // /0/Test0.cs(8,18): error CS0535: 'C' does not implement interface member 'I.this[int, int]'
-                    DiagnosticResult.CompilerError("CS0535").WithSpan(8, 18, 8, 19).WithArguments("C", "I.this[int, int]"),
+                    DiagnosticResult.CompilerError("CS0535")
+                        .WithSpan(8, 18, 8, 19)
+                        .WithArguments("C", "I.this[int, int]"),
                     // /0/Test0.cs(10,16): error CS0548: 'C.this[(int y, ?), int]': property or indexer must have at least one accessor
-                    DiagnosticResult.CompilerError("CS0548").WithSpan(10, 16, 10, 20).WithArguments("C.this[(int y, ?), int]"),
+                    DiagnosticResult.CompilerError("CS0548")
+                        .WithSpan(10, 16, 10, 20)
+                        .WithArguments("C.this[(int y, ?), int]"),
                     // /0/Test0.cs(10,20): error CS1003: Syntax error, '[' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(10, 20, 10, 21).WithArguments("[", "("),
+                    DiagnosticResult.CompilerError("CS1003")
+                        .WithSpan(10, 20, 10, 21)
+                        .WithArguments("[", "("),
                     // /0/Test0.cs(10,27): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type '(int y, ?)'
-                    DiagnosticResult.CompilerError("CS1750").WithSpan(10, 27, 10, 27).WithArguments("int", "(int y, ?)"),
+                    DiagnosticResult.CompilerError("CS1750")
+                        .WithSpan(10, 27, 10, 27)
+                        .WithArguments("int", "(int y, ?)"),
                     // /0/Test0.cs(10,27): error CS1001: Identifier expected
                     DiagnosticResult.CompilerError("CS1001").WithSpan(10, 27, 10, 28),
                     // /0/Test0.cs(10,27): error CS1026: ) expected
@@ -2810,7 +2849,9 @@ sealed class C : I
                     // /0/Test0.cs(10,27): error CS8124: Tuple must contain at least two elements.
                     DiagnosticResult.CompilerError("CS8124").WithSpan(10, 27, 10, 28),
                     // /0/Test0.cs(10,41): error CS1003: Syntax error, ']' expected
-                    DiagnosticResult.CompilerError("CS1003").WithSpan(10, 41, 10, 42).WithArguments("]", ")"),
+                    DiagnosticResult.CompilerError("CS1003")
+                        .WithSpan(10, 41, 10, 42)
+                        .WithArguments("]", ")"),
                     // /0/Test0.cs(10,41): error CS1014: A get or set accessor expected
                     DiagnosticResult.CompilerError("CS1014").WithSpan(10, 41, 10, 42),
                     // /0/Test0.cs(10,41): error CS1514: { expected
@@ -2822,7 +2863,8 @@ sealed class C : I
                     // /0/Test0.cs(16,6): error CS1513: } expected
                     DiagnosticResult.CompilerError("CS1513").WithSpan(16, 6, 16, 6),
                 },
-                source);
+                source
+            );
         }
 
         [WorkItem(545883, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545883")]
@@ -2834,7 +2876,7 @@ sealed class C : I
             // implement IDisposable.Dispose().
 
             var source =
-@"using System;
+                @"using System;
 using System.IO;
 
 sealed class C : MemoryStream
@@ -2862,7 +2904,7 @@ sealed class C : MemoryStream
             // unboxing would change program behavior.
 
             var source =
-@"using System;
+                @"using System;
 
 interface IIncrementable
 {
@@ -2897,7 +2939,7 @@ struct S : IIncrementable
         public async Task RemoveCastToInterfaceForStruct2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2915,7 +2957,7 @@ class Program
     }
 }
 ",
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2932,7 +2974,8 @@ class Program
         return x.GetEnumerator();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(544655, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544655")]
@@ -2943,7 +2986,7 @@ class Program
             // sealed.
 
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 
 class C
@@ -2955,8 +2998,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 class C
@@ -2967,7 +3009,8 @@ class C
         var c = a.Clone();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545926, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545926")]
@@ -2978,7 +3021,7 @@ class C
             // sealed.
 
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 
 class C
@@ -2990,8 +3033,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 class C
@@ -3002,14 +3044,15 @@ class C
         var c = a.Clone(); 
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task RemoveCastToInterfaceForString()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -3021,8 +3064,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -3033,7 +3075,8 @@ class C
         IEnumerable<char> i = s;
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529897, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529897")]
@@ -3044,7 +3087,7 @@ class C
             // sealed.
 
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -3056,8 +3099,7 @@ class Program
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 class Program
@@ -3068,7 +3110,8 @@ class Program
         var y = e.GetTypeCode();
     }
 }
-");
+"
+            );
         }
 
         #endregion
@@ -3080,7 +3123,7 @@ class Program
         public async Task DoNotRemoveCastToObjectInParamArrayArg1()
         {
             var source =
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3103,7 +3146,7 @@ class C
         public async Task DoNotRemoveCastToIntArrayInParamArrayArg2()
         {
             var source =
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3126,7 +3169,7 @@ class C
         public async Task DoNotRemoveCastToObjectArrayInParamArrayArg3()
         {
             var source =
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3149,7 +3192,7 @@ class C
         public async Task RemoveCastToObjectArrayInParamArrayArg1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -3160,8 +3203,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -3171,7 +3213,8 @@ class C
         Goo(null);
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
@@ -3179,7 +3222,7 @@ class C
         public async Task RemoveCastToStringArrayInParamArrayArg2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -3190,8 +3233,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -3201,7 +3243,8 @@ class C
         Goo(null);
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
@@ -3209,7 +3252,7 @@ class C
         public async Task RemoveCastToIntArrayInParamArrayArg3()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class C
 {
     static void Goo(params int[] x) { }
@@ -3220,8 +3263,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     static void Goo(params int[] x) { }
@@ -3231,7 +3273,8 @@ class C
         Goo(null);
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
@@ -3239,7 +3282,7 @@ class C
         public async Task RemoveCastToObjectArrayInParamArrayArg4()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -3250,8 +3293,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -3261,7 +3303,8 @@ class C
         Goo(null, null);
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
@@ -3269,7 +3312,7 @@ class C
         public async Task RemoveCastToObjectInParamArrayArg5()
         {
             await VerifyCS.VerifyCodeFixAsync(
-            @"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -3280,8 +3323,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -3291,7 +3333,8 @@ class C
         Goo(null, null);
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -3319,7 +3362,8 @@ class C
 
     static void Goo(params object[] x) { }
 }
-");
+"
+            );
         }
 
         #endregion
@@ -3334,7 +3378,7 @@ class C
             // in the foreach statement.
 
             var source =
-@"using System.Collections;
+                @"using System.Collections;
 
 class Program
 {
@@ -3356,7 +3400,8 @@ class Program
                     // /0/Test0.cs(7,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(7, 22, 7, 22),
                 },
-                source);
+                source
+            );
         }
 
         [WorkItem(545961, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -3367,7 +3412,7 @@ class Program
             // in the foreach statement.
 
             var source =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -3389,7 +3434,8 @@ class Program
                     // /0/Test0.cs(7,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(7, 22, 7, 22),
                 },
-                source);
+                source
+            );
         }
 
         [WorkItem(545961, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -3401,7 +3447,7 @@ class Program
             // method.
 
             var source =
-@"using System.Collections;
+                @"using System.Collections;
 
 class D
 {
@@ -3436,7 +3482,8 @@ class C
                     // /0/Test0.cs(20,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(20, 22, 20, 22),
                 },
-                source);
+                source
+            );
         }
 
         [WorkItem(545961, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -3447,7 +3494,7 @@ class C
             // C.GetEnumerator() being called rather than D.GetEnumerator().
 
             var source =
-@"using System;
+                @"using System;
 using System.Collections;
 
 class D
@@ -3489,7 +3536,8 @@ class C
                     // /0/Test0.cs(26,22): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(26, 22, 26, 22),
                 },
-                source);
+                source
+            );
         }
 
         [WorkItem(545961, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -3500,7 +3548,7 @@ class C
             // type of 'x'.
 
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -3530,7 +3578,7 @@ class Program
             // of Goo and its override have different default values.
 
             var source =
-@"using System;
+                @"using System;
 
 abstract class Y
 {
@@ -3561,7 +3609,7 @@ class X : Y
             // of Goo and its override have the same default values.
 
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 abstract class Y
@@ -3582,8 +3630,7 @@ class X : Y
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 abstract class Y
@@ -3603,7 +3650,8 @@ class X : Y
         Console.WriteLine(x);
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529916, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529916")]
@@ -3614,7 +3662,7 @@ class X : Y
             // the same method group.
 
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 static class Program
@@ -3627,8 +3675,7 @@ static class Program
     static void Goo(this string x) { }
 }
 ",
-
-@"
+                @"
 using System;
 
 static class Program
@@ -3640,7 +3687,8 @@ static class Program
 
     static void Goo(this string x) { }
 }
-");
+"
+            );
         }
 
         [WorkItem(609497, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/609497")]
@@ -3648,7 +3696,7 @@ static class Program
         public async Task Bugfix_609497()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -3676,7 +3724,7 @@ class Program
             // a different overload being picked.
 
             var source =
-@"using System;
+                @"using System;
 using MyInt = System.Int32;
 
 namespace System
@@ -3719,7 +3767,7 @@ class A
             // a different attribute constructor being picked
 
             var source =
-@"using System;
+                @"using System;
 
 [Flags]
 enum EEEnum
@@ -3762,7 +3810,7 @@ class MyAttributeAttribute : Attribute
         public async Task DoNotRemoveCastIfArgumentIsRestricted_TypedReference()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -3789,7 +3837,7 @@ class Program
         public async Task DoNotRemoveCastOnArgumentsWithOtherDynamicArguments()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -3824,7 +3872,7 @@ class C<T>
         public async Task DoNotRemoveCastOnArgumentsWithOtherDynamicArguments_Bracketed()
         {
             var source =
-@"class C<T>
+                @"class C<T>
 {
     int this[int x, T s, string d = ""abc""]
     {
@@ -3864,7 +3912,7 @@ class C<T>
         public async Task DoNotRemoveCastOnArgumentsWithDynamicReceiverOpt()
         {
             var source =
-@"class C
+                @"class C
 {
     static bool Goo(dynamic d)
     {
@@ -3881,7 +3929,7 @@ class C<T>
         public async Task DoNotRemoveCastOnArgumentsWithDynamicReceiverOpt_1()
         {
             var source =
-@"class C
+                @"class C
 {
     static bool Goo(dynamic d)
     {
@@ -3898,7 +3946,7 @@ class C<T>
         public async Task DoNotRemoveCastOnArgumentsWithDynamicReceiverOpt_2()
         {
             var source =
-@"class C
+                @"class C
 {
     static bool Goo(dynamic d)
     {
@@ -3915,7 +3963,7 @@ class C<T>
         public async Task DoNotRemoveCastOnArgumentsWithDynamicReceiverOpt_3()
         {
             var source =
-@"class C
+                @"class C
 {
     static bool Goo(dynamic d)
     {
@@ -3932,7 +3980,7 @@ class C<T>
         public async Task DoNotRemoveCastOnArgumentsWithOtherDynamicArguments_1()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -3970,7 +4018,7 @@ class C<T>
             // a different attribute constructor being picked
 
             var source =
-@"using System;
+                @"using System;
 
 [A(new[] { (long)0 })]
 class A : Attribute
@@ -3988,7 +4036,7 @@ class A : Attribute
         public async Task DoNotUnnecessaryCastFromEnumToUint()
         {
             var source =
-@"using System;
+                @"using System;
 
 enum E
 {
@@ -4012,7 +4060,7 @@ class C
         public async Task DoNotUnnecessaryCastFromTypeParameterToObject()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Goo<T>(T x, object y)
     {
@@ -4030,7 +4078,7 @@ class C
         public async Task RemoveUnnecessaryCastAndParseCorrect()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
  
@@ -4043,7 +4091,7 @@ class C
 }
 ";
             var fixedSource =
-@"
+                @"
 using System;
 using System.Threading.Tasks;
  
@@ -4067,7 +4115,9 @@ class C
                         // /0/Test0.cs(9,10): error CS0118: 'x' is a variable but is used like a type
                         DiagnosticResult.CompilerError("CS0118").WithSpan(9, 10, 9, 11),
                         // /0/Test0.cs(9,20): error CS1525: Invalid expression term ')'
-                        DiagnosticResult.CompilerError("CS1525").WithSpan(9, 20, 9, 21).WithArguments(")"),
+                        DiagnosticResult.CompilerError("CS1525")
+                            .WithSpan(9, 20, 9, 21)
+                            .WithArguments(")"),
                     },
                 },
                 // The code fix in this case does not produce valid code or a valid syntax tree
@@ -4080,7 +4130,7 @@ class C
         public async Task DoNotRemoveCastIfUserDefinedExplicitCast()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -4109,7 +4159,7 @@ public struct B
         public async Task DoNotRemoveNecessaryCastInTernary()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -4126,7 +4176,7 @@ public struct B
         public async Task DoNotRemoveNecessaryCastInSwitchExpression()
         {
             var source =
-@"namespace ConsoleApplication23
+                @"namespace ConsoleApplication23
 {
     class Program
     {
@@ -4159,7 +4209,7 @@ public struct B
         public async Task DoNotRemoveCastFromBaseToDerivedWithExplicitReference()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -4185,7 +4235,7 @@ class D : C
         public async Task DoNotRemoveCastToTypeParameterWithExceptionConstraint()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4206,7 +4256,7 @@ class Program
         public async Task DoNotRemoveCastToTypeParameterWithExceptionSubTypeConstraint()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4227,7 +4277,7 @@ class Program
         public async Task DoNotRemoveCastThatChangesShapeOfAnonymousTypeObject()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -4251,7 +4301,7 @@ class Program
         public async Task RemoveCastThatDoesntChangeShapeOfAnonymousTypeObject()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -4266,8 +4316,7 @@ class Program
         West
     }
 }",
-
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -4281,47 +4330,50 @@ class Program
         South,
         West
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task Tuple()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     void Main()
     {
         (int, string) tuple = [|((int, string))|](1, ""hello"");
     }
 }",
-@"class C
+                @"class C
 {
     void Main()
     {
         (int, string) tuple = (1, ""hello"");
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task TupleWithDifferentNames()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     void Main()
     {
         (int a, string) tuple = [|((int, string d))|](1, f: ""hello"");
     }
 }",
-@"class C
+                @"class C
 {
     void Main()
     {
         (int a, string) tuple = (1, f: ""hello"");
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
@@ -4329,7 +4381,7 @@ class Program
         public async Task SimpleBoolCast()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     bool M()
     {
@@ -4337,14 +4389,15 @@ class Program
         throw null;
     }
 }",
-@"class C
+                @"class C
 {
     bool M()
     {
         if (!M()) throw null;
         throw null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(12572, "https://github.com/dotnet/roslyn/issues/12572")]
@@ -4353,7 +4406,7 @@ class Program
         {
             // The cast below can't be removed because it could throw a null ref exception.
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4383,7 +4436,7 @@ class Program
         public async Task DoNotRemoveCastOnEnumComparison1()
         {
             var source =
-@"
+                @"
 enum TransferTypeKey
 {
     Transfer,
@@ -4402,8 +4455,11 @@ class Program
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(13,21): error CS0246: The type or namespace name 'InvalidOperationException' could not be found (are you missing a using directive or an assembly reference?)
-                DiagnosticResult.CompilerError("CS0246").WithSpan(13, 21, 13, 46).WithArguments("InvalidOperationException"),
-                source);
+                DiagnosticResult.CompilerError("CS0246")
+                    .WithSpan(13, 21, 13, 46)
+                    .WithArguments("InvalidOperationException"),
+                source
+            );
         }
 
         [WorkItem(17029, "https://github.com/dotnet/roslyn/issues/17029")]
@@ -4411,7 +4467,7 @@ class Program
         public async Task DoNotRemoveCastOnEnumComparison2()
         {
             var source =
-@"
+                @"
 enum TransferTypeKey
 {
     Transfer,
@@ -4430,8 +4486,11 @@ class Program
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(13,21): error CS0246: The type or namespace name 'InvalidOperationException' could not be found (are you missing a using directive or an assembly reference?)
-                DiagnosticResult.CompilerError("CS0246").WithSpan(13, 21, 13, 46).WithArguments("InvalidOperationException"),
-                source);
+                DiagnosticResult.CompilerError("CS0246")
+                    .WithSpan(13, 21, 13, 46)
+                    .WithArguments("InvalidOperationException"),
+                source
+            );
         }
 
         [WorkItem(18978, "https://github.com/dotnet/roslyn/issues/18978")]
@@ -4439,7 +4498,7 @@ class Program
         public async Task DoNotRemoveCastOnCallToMethodWithParamsArgs()
         {
             var source =
-@"
+                @"
 class Program
 {
     public static void Main(string[] args)
@@ -4457,15 +4516,18 @@ class Program
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(12,9): error CS0103: The name 'Console' does not exist in the current context
-                DiagnosticResult.CompilerError("CS0103").WithSpan(12, 9, 12, 16).WithArguments("Console"),
-                source);
+                DiagnosticResult.CompilerError("CS0103")
+                    .WithSpan(12, 9, 12, 16)
+                    .WithArguments("Console"),
+                source
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task DoNotRemoveCastOnCallToMethodWithParamsArgsWithIncorrectMethodDefintion()
         {
             var source =
-@"
+                @"
 class Program
 {
     public static void Main(string[] args)
@@ -4482,8 +4544,11 @@ class Program
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(11,9): error CS0103: The name 'Console' does not exist in the current context
-                DiagnosticResult.CompilerError("CS0103").WithSpan(11, 9, 11, 16).WithArguments("Console"),
-                source);
+                DiagnosticResult.CompilerError("CS0103")
+                    .WithSpan(11, 9, 11, 16)
+                    .WithArguments("Console"),
+                source
+            );
         }
 
         [WorkItem(18978, "https://github.com/dotnet/roslyn/issues/18978")]
@@ -4491,7 +4556,7 @@ class Program
         public async Task RemoveCastOnCallToMethodWithParamsArgsIfImplicitConversionExists()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class Program
 {
     public static void Main(string[] args)
@@ -4505,7 +4570,7 @@ class Program
         System.Console.WriteLine(goo.Length);
     }
 }",
-@"
+                @"
 class Program
 {
     public static void Main(string[] args)
@@ -4518,7 +4583,8 @@ class Program
     {
         System.Console.WriteLine(goo.Length);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20630, "https://github.com/dotnet/roslyn/issues/20630")]
@@ -4526,7 +4592,7 @@ class Program
         public async Task DoNotRemoveCastOnCallToAttributeWithParamsArgs()
         {
             var source =
-@"
+                @"
 using System;
 using System.Reflection;
 
@@ -4555,7 +4621,7 @@ static class Program
         public async Task DoNotRemoveCastOnDictionaryIndexer()
         {
             var source =
-@"
+                @"
 using System;
 using System.Reflection;
 using System.Collections.Generic;
@@ -4623,7 +4689,8 @@ static class Program
             [0] = null,
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20630, "https://github.com/dotnet/roslyn/issues/20630")]
@@ -4631,7 +4698,7 @@ static class Program
         public async Task DoNotRemoveCastOnCallToAttributeWithParamsArgsAndProperty()
         {
             var source =
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -4654,7 +4721,7 @@ static class Program
         public async Task DoNotRemoveCastOnCallToAttributeWithParamsArgsPropertyAndOtherArg()
         {
             var source =
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -4677,7 +4744,7 @@ static class Program
         public async Task DoNotRemoveCastOnCallToAttributeWithParamsArgsNamedArgsAndProperty()
         {
             var source =
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -4700,7 +4767,7 @@ static class Program
         public async Task DoNotRemoveCastOnCallToAttributeWithParamsArgsNamedArgsWithIncorrectMethodDefintion()
         {
             var source =
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -4723,7 +4790,7 @@ static class Program
         public async Task RemoveCastOnCallToAttributeWithParamsArgsWithImplicitCast()
         {
             var source =
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -4738,7 +4805,7 @@ static class Program
 {
 }";
             var fixedSource =
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -4781,7 +4848,7 @@ static class Program
         public async Task RemoveCastOnCallToAttributeWithCastInPropertySetter()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -4795,7 +4862,7 @@ sealed class MarkAttribute : Attribute
 static class Program
 {
 }",
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -4808,7 +4875,8 @@ sealed class MarkAttribute : Attribute
 [Mark(Prop = 1)]
 static class Program
 {
-}");
+}"
+            );
         }
 
         [WorkItem(18510, "https://github.com/dotnet/roslyn/issues/18510")]
@@ -4818,7 +4886,7 @@ static class Program
         public async Task DoNotRemoveCastOnInvalidUnaryOperatorEnumValue1(string op)
         {
             var source =
-$@"
+                $@"
 enum Sign
     {{
         Positive = 1,
@@ -4844,7 +4912,7 @@ enum Sign
         public async Task DoNotRemoveCastOnInvalidUnaryOperatorEnumValue2(string op)
         {
             var source =
-$@"
+                $@"
 enum Sign
     {{
         Positive = 1,
@@ -4868,7 +4936,7 @@ enum Sign
         public async Task RemoveCastOnValidUnaryOperatorEnumValue()
         {
             var source =
-@"
+                @"
 enum Sign
     {
         Positive = 1,
@@ -4884,7 +4952,7 @@ enum Sign
         }
     }";
             var fixedSource =
-@"
+                @"
 enum Sign
     {
         Positive = 1,
@@ -4903,11 +4971,7 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState =
-                {
-                    Sources = { fixedSource },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -4917,7 +4981,7 @@ enum Sign
         public async Task RemoveCastOnValidUnaryOperatorEnumValue_Nullable()
         {
             var source =
-@"
+                @"
 enum Sign
     {
         Positive = 1,
@@ -4933,7 +4997,7 @@ enum Sign
         }
     }";
             var fixedSource =
-@"
+                @"
 enum Sign
     {
         Positive = 1,
@@ -4949,11 +5013,7 @@ enum Sign
         }
     }";
 
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = fixedSource,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = fixedSource, }.RunAsync();
         }
 
         [WorkItem(18510, "https://github.com/dotnet/roslyn/issues/18510")]
@@ -4961,7 +5021,7 @@ enum Sign
         public async Task DoNotRemoveEnumCastToDifferentRepresentation()
         {
             var source =
-@"
+                @"
 enum Sign
     {
         Positive = 1,
@@ -4977,11 +5037,7 @@ enum Sign
         }
     }";
 
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = source,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source, }.RunAsync();
         }
 
         [WorkItem(25456, "https://github.com/dotnet/roslyn/issues/25456#issuecomment-373549735")]
@@ -4989,7 +5045,7 @@ enum Sign
         public async Task DoNotIntroduceDefaultLiteralInSwitchCase()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5014,7 +5070,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInSwitchCase_CastInsideParentheses()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5039,7 +5095,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInSwitchCase_DefaultInsideParentheses()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5064,7 +5120,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInSwitchCase_RemoveDoubleCast()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5077,7 +5133,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void M()
@@ -5103,7 +5159,7 @@ class C
         public async Task RemoveRedundantBoolCast()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -5112,7 +5168,7 @@ class C
         var b = ![|(bool)|]a;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -5120,14 +5176,15 @@ class C
         var a = true;
         var b = !a;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task DoNotIntroduceDefaultLiteralInPatternSwitchCase()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5152,7 +5209,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInPatternSwitchCase_CastInsideParentheses()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5177,7 +5234,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInPatternSwitchCase_DefaultInsideParentheses()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5202,7 +5259,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInPatternSwitchCase_RemoveDoubleCast()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5215,7 +5272,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void M()
@@ -5240,7 +5297,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInPatternSwitchCase_RemoveInsideWhenClause()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5253,7 +5310,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void M()
@@ -5278,7 +5335,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInPatternIs()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5299,7 +5356,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInPatternIs_CastInsideParentheses()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5320,7 +5377,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInPatternIs_DefaultInsideParentheses()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5341,7 +5398,7 @@ class C
         public async Task DoNotIntroduceDefaultLiteralInPatternIs_RemoveDoubleCast()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -5350,7 +5407,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void M()
@@ -5391,7 +5448,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task DoNotOfferToRemoveCastWhenAccessingHiddenProperty()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Fruit
 {
@@ -5417,7 +5475,8 @@ class Tester
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task DoNotOfferToRemoveCastInConstructorWhenItNeeded()
         {
-            var source = @"
+            var source =
+                @"
 class IntegerWrapper
 {
     public IntegerWrapper(int value)
@@ -5445,7 +5504,7 @@ class Tester
         public async Task DoNotOfferToRemoveCastInBaseConstructorInitializerWhenItNeeded()
         {
             var source =
-@"
+                @"
 class B
 {
     B(int a)
@@ -5462,8 +5521,11 @@ class C : B
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(10,19): error CS0122: 'B.B(int)' is inaccessible due to its protection level
-                DiagnosticResult.CompilerError("CS0122").WithSpan(10, 19, 10, 23).WithArguments("B.B(int)"),
-                source);
+                DiagnosticResult.CompilerError("CS0122")
+                    .WithSpan(10, 19, 10, 23)
+                    .WithArguments("B.B(int)"),
+                source
+            );
         }
 
         [WorkItem(31963, "https://github.com/dotnet/roslyn/issues/31963")]
@@ -5471,7 +5533,7 @@ class C : B
         public async Task DoNotOfferToRemoveCastInConstructorInitializerWhenItNeeded()
         {
             var source =
-@"
+                @"
 class B
 {
     B(int a)
@@ -5491,7 +5553,7 @@ class B
         public async Task DoNotRemoveObjectCastInParamsCall()
         {
             var source =
-@"
+                @"
 using System;
 using System.Diagnostics;
 
@@ -5517,7 +5579,7 @@ class Program
         public async Task DoNotRemoveCastFromNullableToUnderlyingType()
         {
             var source =
-            @"
+                @"
 using System.Text;
 
 class C
@@ -5538,7 +5600,7 @@ class C
         public async Task DoNotRemoveCastFromIntPtrToPointer()
         {
             var source =
-            @"
+                @"
 using System;
 
 class C
@@ -5557,7 +5619,7 @@ class C
         public async Task DoNotRemoveCastFromIntPtrToPointerInReturn()
         {
             var source =
-            @"
+                @"
 using System;
 
 class Program
@@ -5576,7 +5638,7 @@ class Program
         public async Task DoNotRemoveCastFromIntPtrToPointerWithTypeParameter()
         {
             var source =
-            @"
+                @"
 using System;
 
 struct Block<T>
@@ -5597,7 +5659,7 @@ struct Block<T>
         public async Task DoNotRemoveCastFromIntPtrToPointerWithAddressAndCast()
         {
             var source =
-            @"
+                @"
 using System;
 
 class C
@@ -5617,7 +5679,7 @@ class C
         public async Task TestArgToLocalFunction1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class Program
 {
     public static void M()
@@ -5632,7 +5694,7 @@ class Program
         }
     }
 }",
-@"
+                @"
 class Program
 {
     public static void M()
@@ -5646,7 +5708,8 @@ class Program
             static void SameScope(decimal sum) { }
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(38347, "https://github.com/dotnet/roslyn/issues/38347")]
@@ -5654,7 +5717,7 @@ class Program
         public async Task TestArgToLocalFunction2()
         {
             var source =
-@"
+                @"
 class Program
 {
     public static void M()
@@ -5670,7 +5733,7 @@ class Program
     }
 }";
             var fixedSource =
-@"
+                @"
 class Program
 {
     public static void M()
@@ -5686,7 +5749,7 @@ class Program
     }
 }";
             var batchFixedSource =
-@"
+                @"
 class Program
 {
     public static void M()
@@ -5717,7 +5780,7 @@ class Program
         public async Task TestFormattableString1()
         {
             var source =
-            @"
+                @"
 using System;
 
 class C
@@ -5736,7 +5799,7 @@ class C
         public async Task TestFormattableString2()
         {
             var source =
-            @"
+                @"
 using System;
 
 class C
@@ -5755,7 +5818,7 @@ class C
         public async Task TestFormattableString3()
         {
             var source =
-            @"
+                @"
 using System;
 
 class C
@@ -5777,7 +5840,7 @@ class C
         public async Task TestFormattableString4()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 class C
@@ -5789,7 +5852,7 @@ class C
 
     private void bar(FormattableString s) { }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -5800,7 +5863,8 @@ class C
     }
 
     private void bar(FormattableString s) { }
-}");
+}"
+            );
         }
 
         [WorkItem(36631, "https://github.com/dotnet/roslyn/issues/36631")]
@@ -5808,7 +5872,7 @@ class C
         public async Task TestFormattableString5()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 class C
@@ -5818,7 +5882,7 @@ class C
         object o = [|(string)|]$"""";
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -5827,7 +5891,8 @@ class C
     {
         object o = $"""";
     }
-}");
+}"
+            );
         }
 
         [WorkItem(36631, "https://github.com/dotnet/roslyn/issues/36631")]
@@ -5835,7 +5900,7 @@ class C
         public async Task TestFormattableString6()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 class C
@@ -5847,7 +5912,7 @@ class C
 
     private void bar(IFormattable s) { }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -5858,7 +5923,8 @@ class C
     }
 
     private void bar(IFormattable s) { }
-}");
+}"
+            );
         }
 
         [WorkItem(36631, "https://github.com/dotnet/roslyn/issues/36631")]
@@ -5866,7 +5932,7 @@ class C
         public async Task TestFormattableString7()
         {
             var source =
-            @"
+                @"
 using System;
 
 class C
@@ -5885,7 +5951,7 @@ class C
         public async Task TestMissingOnInterfaceCallOnNonSealedClass()
         {
             var source =
-@"
+                @"
 using System;
 
 public class DbContext : IDisposable
@@ -5917,8 +5983,11 @@ class C
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 // /0/Test0.cs(26,23): error CS0120: An object reference is required for the non-static field, method, or property 'C._dbContext'
-                DiagnosticResult.CompilerError("CS0120").WithSpan(26, 23, 26, 33).WithArguments("C._dbContext"),
-                source);
+                DiagnosticResult.CompilerError("CS0120")
+                    .WithSpan(26, 23, 26, 33)
+                    .WithArguments("C._dbContext"),
+                source
+            );
         }
 
         [WorkItem(34326, "https://github.com/dotnet/roslyn/issues/34326")]
@@ -5926,7 +5995,7 @@ class C
         public async Task TestMissingOnInterfaceCallOnNonReadOnlyStruct()
         {
             var source =
-@"
+                @"
 using System;
 
 public struct DbContext : IDisposable
@@ -5961,11 +6030,16 @@ class C
                     // /0/Test0.cs(9,24): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(9, 24, 9, 24),
                     // /0/Test0.cs(15,40): error CS0246: The type or namespace name 'MyContext' could not be found (are you missing a using directive or an assembly reference?)
-                    DiagnosticResult.CompilerError("CS0246").WithSpan(15, 40, 15, 49).WithArguments("MyContext"),
+                    DiagnosticResult.CompilerError("CS0246")
+                        .WithSpan(15, 40, 15, 49)
+                        .WithArguments("MyContext"),
                     // /0/Test0.cs(19,23): error CS0120: An object reference is required for the non-static field, method, or property 'C._dbContext'
-                    DiagnosticResult.CompilerError("CS0120").WithSpan(19, 23, 19, 33).WithArguments("C._dbContext"),
+                    DiagnosticResult.CompilerError("CS0120")
+                        .WithSpan(19, 23, 19, 33)
+                        .WithArguments("C._dbContext"),
                 },
-                source);
+                source
+            );
         }
 
         [WorkItem(34326, "https://github.com/dotnet/roslyn/issues/34326")]
@@ -5976,7 +6050,7 @@ class C
             // preserved, the semantics around interfaces are subtle and we don't want to make a change that might
             // negatively impact the user if they make other code changes.
             var source =
-@"
+                @"
 using System;
 
 public struct DbContext : IDisposable
@@ -6011,11 +6085,16 @@ class C
                     // /0/Test0.cs(9,24): error CS1002: ; expected
                     DiagnosticResult.CompilerError("CS1002").WithSpan(9, 24, 9, 24),
                     // /0/Test0.cs(15,49): error CS0246: The type or namespace name 'MyContext' could not be found (are you missing a using directive or an assembly reference?)
-                    DiagnosticResult.CompilerError("CS0246").WithSpan(15, 49, 15, 58).WithArguments("MyContext"),
+                    DiagnosticResult.CompilerError("CS0246")
+                        .WithSpan(15, 49, 15, 58)
+                        .WithArguments("MyContext"),
                     // /0/Test0.cs(19,23): error CS0120: An object reference is required for the non-static field, method, or property 'C._dbContext'
-                    DiagnosticResult.CompilerError("CS0120").WithSpan(19, 23, 19, 33).WithArguments("C._dbContext"),
+                    DiagnosticResult.CompilerError("CS0120")
+                        .WithSpan(19, 23, 19, 33)
+                        .WithArguments("C._dbContext"),
                 },
-                source);
+                source
+            );
         }
 
         [WorkItem(34326, "https://github.com/dotnet/roslyn/issues/34326")]
@@ -6027,7 +6106,7 @@ class C
             // this will break.
 
             var source =
-@"
+                @"
 using System;
 
 public sealed class DbContext : IDisposable
@@ -6053,11 +6132,16 @@ class C
                 new[]
                 {
                     // /0/Test0.cs(14,49): error CS0246: The type or namespace name 'MyContext' could not be found (are you missing a using directive or an assembly reference?)
-                    DiagnosticResult.CompilerError("CS0246").WithSpan(14, 49, 14, 58).WithArguments("MyContext"),
+                    DiagnosticResult.CompilerError("CS0246")
+                        .WithSpan(14, 49, 14, 58)
+                        .WithArguments("MyContext"),
                     // /0/Test0.cs(18,23): error CS0120: An object reference is required for the non-static field, method, or property 'C._dbContext'
-                    DiagnosticResult.CompilerError("CS0120").WithSpan(18, 23, 18, 33).WithArguments("C._dbContext"),
+                    DiagnosticResult.CompilerError("CS0120")
+                        .WithSpan(18, 23, 18, 33)
+                        .WithArguments("C._dbContext"),
                 },
-                source);
+                source
+            );
         }
 
         [WorkItem(29726, "https://github.com/dotnet/roslyn/issues/29726")]
@@ -6065,7 +6149,7 @@ class C
         public async Task TestDefaultLiteralWithNullableCastInCoalesce()
         {
             var source =
-@"
+                @"
 using System;
 
 public class C
@@ -6084,7 +6168,7 @@ public class C
         public async Task TestFPIdentityThatMustRemain1()
         {
             var source =
-@"
+                @"
 using System;
 
 public class C
@@ -6100,7 +6184,7 @@ public class C
         public async Task TestFPIdentityThatMustRemain2()
         {
             var source =
-@"
+                @"
 using System;
 
 public class C
@@ -6121,7 +6205,7 @@ public class C
         public async Task TestFPIdentityThatMustRemain3()
         {
             var source =
-@"
+                @"
 using System;
 
 public class C
@@ -6142,7 +6226,7 @@ public class C
         public async Task TestCanRemoveFPIdentityOnFieldRead()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 public class C
@@ -6154,7 +6238,7 @@ public class C
         var v = [|(float)|]f;
     }
 }",
-@"
+                @"
 using System;
 
 public class C
@@ -6165,7 +6249,8 @@ public class C
     {
         var v = f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(34873, "https://github.com/dotnet/roslyn/issues/34873")]
@@ -6173,7 +6258,7 @@ public class C
         public async Task TestCanRemoveFPIdentityOnFieldWrite()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 public class C
@@ -6185,7 +6270,7 @@ public class C
         f = [|(float)|]f1;
     }
 }",
-@"
+                @"
 using System;
 
 public class C
@@ -6196,7 +6281,8 @@ public class C
     {
         f = f1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(34873, "https://github.com/dotnet/roslyn/issues/34873")]
@@ -6204,7 +6290,7 @@ public class C
         public async Task TestCanRemoveFPIdentityInFieldInitializer()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 public class C
@@ -6212,14 +6298,15 @@ public class C
     static float f1;
     static float f2 = [|(float)|]f1;
 }",
-@"
+                @"
 using System;
 
 public class C
 {
     static float f1;
     static float f2 = f1;
-}");
+}"
+            );
         }
 
         [WorkItem(34873, "https://github.com/dotnet/roslyn/issues/34873")]
@@ -6227,7 +6314,7 @@ public class C
         public async Task TestCanRemoveFPIdentityOnArrayRead()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 public class C
@@ -6239,7 +6326,7 @@ public class C
         var v = [|(float)|]f[0];
     }
 }",
-@"
+                @"
 using System;
 
 public class C
@@ -6250,7 +6337,8 @@ public class C
     {
         var v = f[0];
     }
-}");
+}"
+            );
         }
 
         [WorkItem(34873, "https://github.com/dotnet/roslyn/issues/34873")]
@@ -6258,7 +6346,7 @@ public class C
         public async Task TestCanRemoveFPIdentityOnArrayWrite()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 public class C
@@ -6270,7 +6358,7 @@ public class C
         f[0] = [|(float)|]f2;
     }
 }",
-@"
+                @"
 using System;
 
 public class C
@@ -6281,7 +6369,8 @@ public class C
     {
         f[0] = f2;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(34873, "https://github.com/dotnet/roslyn/issues/34873")]
@@ -6289,7 +6378,7 @@ public class C
         public async Task TestCanRemoveFPIdentityOnArrayInitializer1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 public class C
@@ -6299,7 +6388,7 @@ public class C
         float[] f = { [|(float)|]f2 };
     }
 }",
-@"
+                @"
 using System;
 
 public class C
@@ -6308,7 +6397,8 @@ public class C
     {
         float[] f = { f2 };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(34873, "https://github.com/dotnet/roslyn/issues/34873")]
@@ -6316,7 +6406,7 @@ public class C
         public async Task TestCanRemoveFPIdentityOnArrayInitializer2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 public class C
@@ -6326,7 +6416,7 @@ public class C
         float[] f = new float[] { [|(float)|]f2 };
     }
 }",
-@"
+                @"
 using System;
 
 public class C
@@ -6335,7 +6425,8 @@ public class C
     {
         float[] f = new float[] { f2 };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(34873, "https://github.com/dotnet/roslyn/issues/34873")]
@@ -6343,7 +6434,7 @@ public class C
         public async Task TestCanRemoveFPIdentityOnImplicitArrayInitializer()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 public class C
@@ -6353,7 +6444,7 @@ public class C
         float[] f = new[] { [|(float)|]f2 };
     }
 }",
-@"
+                @"
 using System;
 
 public class C
@@ -6362,7 +6453,8 @@ public class C
     {
         float[] f = new[] { f2 };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(37953, "https://github.com/dotnet/roslyn/issues/37953")]
@@ -6370,7 +6462,7 @@ public class C
         public async Task TestCanRemoveFromUnnecessarySwitchExpressionCast1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 class Program
@@ -6384,7 +6476,7 @@ class Program
             _ => ""Other"",
         };
 }",
-@"
+                @"
 using System;
 
 class Program
@@ -6397,7 +6489,8 @@ class Program
             DayOfWeek.Monday => ""Monday"",
             _ => ""Other"",
         };
-}");
+}"
+            );
         }
 
         [WorkItem(37953, "https://github.com/dotnet/roslyn/issues/37953")]
@@ -6405,7 +6498,7 @@ class Program
         public async Task TestLeaveNecessarySwitchExpressionCast1()
         {
             var source =
-@"
+                @"
 using System;
 
 class Program
@@ -6428,7 +6521,7 @@ class Program
         public async Task TestSignExtensionWithOrAssignment1()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -6451,7 +6544,7 @@ class C
         public async Task TestSignExtensionWithOrBinary1()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -6474,7 +6567,7 @@ class C
         public async Task TestSignExtensionWithOrBinary2()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -6496,8 +6589,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task TestSignExtensionWithAndAssignment1()
         {
-
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 using System;
 
 class C
@@ -6511,7 +6604,7 @@ class C
         return result;
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -6524,15 +6617,16 @@ class C
         result &= random.Next();
         return result;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(40414, "https://github.com/dotnet/roslyn/issues/40414")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task TestSignExtensionWithAndBinary1()
         {
-
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 using System;
 
 class C
@@ -6546,7 +6640,7 @@ class C
         return result;
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -6559,15 +6653,16 @@ class C
         var x = result & random.Next();
         return result;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(40414, "https://github.com/dotnet/roslyn/issues/40414")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task TestSignExtensionWithAndBinary2()
         {
-
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 using System;
 
 class C
@@ -6581,7 +6676,7 @@ class C
         return result;
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -6594,7 +6689,8 @@ class C
         var x = random.Next() & result;
         return result;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(40414, "https://github.com/dotnet/roslyn/issues/40414")]
@@ -6602,7 +6698,7 @@ class C
         public async Task TestSignExtensionWithOrCompilerCase1()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6625,7 +6721,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCase2()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6648,7 +6744,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCase3()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6671,7 +6767,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCase4()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6685,7 +6781,7 @@ public class sign
         object v4 = (ulong)[|(uint)|](ushort)i08 | (ulong)i32_lo;
     }
 }",
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6698,15 +6794,16 @@ public class sign
 
         object v4 = (ulong)(ushort)i08 | (ulong)i32_lo;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(40414, "https://github.com/dotnet/roslyn/issues/40414")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task TestSignExtensionWithOrCompilerCase5()
         {
-
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 public class sign
 {
     public static void Main()
@@ -6720,7 +6817,7 @@ public class sign
         object v5 = (int)i08 | [|(int)|]i32_lo;
     }
 }",
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6733,7 +6830,8 @@ public class sign
 
         object v5 = (int)i08 | i32_lo;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(40414, "https://github.com/dotnet/roslyn/issues/40414")]
@@ -6741,7 +6839,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCase6()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6764,7 +6862,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCase7()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6787,7 +6885,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCase8()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6810,7 +6908,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCase9()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6833,7 +6931,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCaseNullable1()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6856,7 +6954,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCaseNullable2()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6879,7 +6977,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCaseNullable3()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6901,7 +6999,8 @@ public class sign
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task TestSignExtensionWithOrCompilerCaseNullable4()
         {
-            var source = @"
+            var source =
+                @"
 public class sign
 {
     public static void Main()
@@ -6923,8 +7022,8 @@ public class sign
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task TestSignExtensionWithOrCompilerCaseNullable5()
         {
-
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 public class sign
 {
     public static void Main()
@@ -6938,7 +7037,7 @@ public class sign
         object v5 = (int?)i08 | [|(int?)|]i32_lo;
     }
 }",
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6951,7 +7050,8 @@ public class sign
 
         object v5 = (int?)i08 | i32_lo;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(40414, "https://github.com/dotnet/roslyn/issues/40414")]
@@ -6959,7 +7059,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCaseNullable6()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -6982,7 +7082,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCaseNullable7()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -7005,7 +7105,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCaseNullable8()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -7028,7 +7128,7 @@ public class sign
         public async Task TestSignExtensionWithOrCompilerCaseNullable9()
         {
             var source =
-@"
+                @"
 public class sign
 {
     public static void Main()
@@ -7051,7 +7151,7 @@ public class sign
         public async Task DoNotRemoveNullCastInSwitch1()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7071,7 +7171,7 @@ public class sign
         public async Task DoNotRemoveNullCastInSwitch2()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7091,7 +7191,7 @@ public class sign
         public async Task DoNotRemoveNullCastInSwitch3()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7111,7 +7211,7 @@ public class sign
         public async Task DoNotRemoveNullCastInSwitch4()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7131,7 +7231,7 @@ public class sign
         public async Task DoNotRemoveNullCastInSwitch5()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7151,7 +7251,7 @@ public class sign
         public async Task DoNotRemoveDefaultCastInSwitch1()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7171,7 +7271,7 @@ public class sign
         public async Task DoNotRemoveDefaultCastInSwitch2()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7191,7 +7291,7 @@ public class sign
         public async Task DoNotRemoveDefaultCastInSwitch3()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7211,7 +7311,7 @@ public class sign
         public async Task DoNotRemoveDefaultCastInSwitch4()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7231,7 +7331,7 @@ public class sign
         public async Task RemoveDoubleNullCastInSwitch1()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7243,7 +7343,7 @@ public class sign
     }
 }";
             var fixedCode =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -7263,7 +7363,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional1()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7279,7 +7379,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional2()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7295,7 +7395,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional3()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7311,7 +7411,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional4()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7327,7 +7427,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional5()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7343,7 +7443,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional6()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7359,7 +7459,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional7()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7375,7 +7475,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional8()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7391,7 +7491,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional9()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7407,7 +7507,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional10()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7423,7 +7523,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional11()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7439,7 +7539,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional12()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7455,7 +7555,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional13()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x, int? z)
     {
@@ -7471,7 +7571,7 @@ public class sign
         public async Task DoNotRemoveNecessaryCastInConditional14()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x, int? z)
     {
@@ -7487,7 +7587,7 @@ public class sign
         public async Task RemoveUnecessaryCastInConditional1()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7496,7 +7596,7 @@ public class sign
 }";
 
             var fixedCode =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7512,7 +7612,7 @@ public class sign
         public async Task RemoveUnecessaryCastInConditional2()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7521,7 +7621,7 @@ public class sign
 }";
 
             var fixedCode =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7537,7 +7637,7 @@ public class sign
         public async Task RemoveUnecessaryCastInConditional3()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x, int? z)
     {
@@ -7546,7 +7646,7 @@ public class sign
 }";
 
             var fixedCode =
-@"class C
+                @"class C
 {
     void M(bool x, int? z)
     {
@@ -7562,7 +7662,7 @@ public class sign
         public async Task RemoveUnecessaryCastInConditional4()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x, int? z)
     {
@@ -7571,7 +7671,7 @@ public class sign
 }";
 
             var fixedCode =
-@"class C
+                @"class C
 {
     void M(bool x, int? z)
     {
@@ -7587,7 +7687,7 @@ public class sign
         public async Task RemoveUnecessaryCastInConditional5()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7595,7 +7695,7 @@ public class sign
     }
 }";
             var fixedCode =
-@"class C
+                @"class C
 {
     void M(bool x)
     {
@@ -7611,7 +7711,7 @@ public class sign
         public async Task RemoveUnnecessaryCastInConditional6()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x, int? z)
     {
@@ -7619,7 +7719,7 @@ public class sign
     }
 }";
             var fixedCode =
-@"class C
+                @"class C
 {
     void M(bool x, int? z)
     {
@@ -7635,7 +7735,7 @@ public class sign
         public async Task RemoveUnnecessaryCastInConditional7()
         {
             var source =
-@"class C
+                @"class C
 {
     void M(bool x, int? z)
     {
@@ -7643,7 +7743,7 @@ public class sign
     }
 }";
             var fixedCode =
-@"class C
+                @"class C
 {
     void M(bool x, int? z)
     {
@@ -7659,7 +7759,7 @@ public class sign
         public async Task DoNotRemoveNamedArgToParamsParameter1()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public void M()
     {
@@ -7680,7 +7780,7 @@ public class sign
         public async Task DoRemoveNamedArgToParamsParameter1()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public void M()
     {
@@ -7693,7 +7793,7 @@ public class sign
     }
 }";
             var fixedCode =
-@"class Program
+                @"class Program
 {
     public void M()
     {
@@ -7714,7 +7814,7 @@ public class sign
         public async Task DoRemoveNamedArgToParamsParameter2()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public void M()
     {
@@ -7727,7 +7827,7 @@ public class sign
     }
 }";
             var fixedCode =
-@"class Program
+                @"class Program
 {
     public void M()
     {
@@ -7747,7 +7847,7 @@ public class sign
         public async Task ObjectCastInInterpolation1()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public void M(int x, int z)
     {
@@ -7755,7 +7855,7 @@ public class sign
     }
 }";
             var fixedCode =
-@"class Program
+                @"class Program
 {
     public void M(int x, int z)
     {
@@ -7770,7 +7870,7 @@ public class sign
         public async Task ObjectCastInInterpolation2()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public void M(int x, int z)
     {
@@ -7778,7 +7878,7 @@ public class sign
     }
 }";
             var fixedCode =
-@"class Program
+                @"class Program
 {
     public void M(int x, int z)
     {
@@ -7793,7 +7893,7 @@ public class sign
         public async Task TestIdentityDoubleCast()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public void M(object x)
     {
@@ -7801,7 +7901,7 @@ public class sign
     }
 }";
             var fixedCode =
-@"class Program
+                @"class Program
 {
     public void M(object x)
     {
@@ -7816,7 +7916,7 @@ public class sign
         public async Task TestUnintendedReferenceComparison1()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class Symbol
 {
@@ -7846,7 +7946,7 @@ class Program
         public async Task TestUnintendedReferenceComparison2()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class Symbol
 {
@@ -7876,7 +7976,7 @@ class Program
         public async Task TestUnintendedReferenceComparison3()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class Symbol
 {
@@ -7906,7 +8006,7 @@ class Program
         public async Task TestUnintendedReferenceComparison4()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class Symbol
 {
@@ -7936,7 +8036,7 @@ class Program
         public async Task TestUnintendedReferenceComparison5()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class Symbol
 {
@@ -7966,7 +8066,7 @@ class Program
         public async Task TestUnintendedReferenceComparison6()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class Symbol
 {
@@ -7996,7 +8096,7 @@ class Program
         public async Task TestUnintendedReferenceComparison7()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class Symbol
 {
@@ -8026,7 +8126,7 @@ class Program
         public async Task TestUnintendedReferenceComparison8()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class Symbol
 {
@@ -8057,7 +8157,7 @@ class Program
         public async Task DoNotRemoveCastOnParameterInitializer1()
         {
             var source =
-@"enum E : byte { }
+                @"enum E : byte { }
 class C { void F() { void f(E e = (E)byte.MaxValue) { } } }";
 
             await VerifyCS.VerifyCodeFixAsync(source, source);
@@ -8068,7 +8168,7 @@ class C { void F() { void f(E e = (E)byte.MaxValue) { } } }";
         public async Task DoNotRemoveCastOnParameterInitializer2()
         {
             var source =
-@"enum E : byte { }
+                @"enum E : byte { }
 class C { void f(E e = (E)byte.MaxValue) { } }";
 
             await VerifyCS.VerifyCodeFixAsync(source, source);
@@ -8079,7 +8179,7 @@ class C { void f(E e = (E)byte.MaxValue) { } }";
         public async Task DoNotRemoveNonObjectCastInsideInterpolation()
         {
             var source =
-@"
+                @"
 class Other
 {
     void Goo()
@@ -8097,7 +8197,7 @@ class Other
         public async Task DoRemoveObjectCastInsideInterpolation()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class Other
 {
     void Goo()
@@ -8106,7 +8206,7 @@ class Other
         string s = $""{[|(object)|]c:X4}"";
     }
 }",
-@"
+                @"
 class Other
 {
     void Goo()
@@ -8114,7 +8214,8 @@ class Other
         char c = '4';
         string s = $""{c:X4}"";
     }
-}");
+}"
+            );
         }
 
         [WorkItem(47800, "https://github.com/dotnet/roslyn/issues/47800")]
@@ -8122,13 +8223,13 @@ class Other
         public async Task RemoveNativeIntCastsAsIdentity()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class C {
     public nint N(IntPtr x) => [|(nint)|]x;
 }";
             var fixedCode =
-@"using System;
+                @"using System;
 
 public class C {
     public nint N(IntPtr x) => x;
@@ -8149,7 +8250,7 @@ public class C {
         public async Task DoRemoveNativeIntCasts()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class C {
     public nuint N(IntPtr x) => (nuint)(nint)x;
@@ -8170,13 +8271,13 @@ public class C {
         public async Task RemoveNativeUIntCastsAsIdentity()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class C {
     public nuint N(UIntPtr x) => [|(nuint)|]x;
 }";
             var fixedCode =
-@"using System;
+                @"using System;
 
 public class C {
     public nuint N(UIntPtr x) => x;
@@ -8197,7 +8298,7 @@ public class C {
         public async Task DoRemoveNativeIntCastsToInt()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class C {
     public int N(IntPtr x) => (int)(nint)x;
@@ -8218,7 +8319,7 @@ public class C {
         public async Task DoRemoveNativeUIntCasts()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class C {
     public nint N(UIntPtr x) => (nint)(nuint)x;
@@ -8239,7 +8340,7 @@ public class C {
         public async Task RemoveIntPtrCastsAsIdentity()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -8250,7 +8351,7 @@ class C
     }
 }";
             var fixedCode =
-@"
+                @"
 using System;
 
 class C
@@ -8269,7 +8370,7 @@ class C
         public async Task RemoveUIntPtrCastsAsIdentity()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -8280,7 +8381,7 @@ class C
     }
 }";
             var fixedCode =
-@"
+                @"
 using System;
 
 class C
@@ -8299,7 +8400,7 @@ class C
         public async Task DoNotRemoveBitwiseNotOfUnsignedExtendedValue1()
         {
             var source =
-@"
+                @"
 class C
 {
     public static ulong P(ulong a, uint b)
@@ -8323,7 +8424,7 @@ class C
         public async Task DoNotRemoveBitwiseNotOfUnsignedExtendedValue2()
         {
             var source =
-@"
+                @"
 class C
 {
     public static nuint N(nuint a, uint b)
@@ -8347,7 +8448,7 @@ class C
         public async Task DoNotRemoveBitwiseNotOfUnsignedExtendedValue3()
         {
             var source =
-@"
+                @"
 class C
 {
     public static ulong N()
@@ -8370,10 +8471,10 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task DoRemoveBitwiseNotOfSignExtendedValue1()
         {
-
             var test = new VerifyCS.Test()
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     public static long P(long a, int b)
@@ -8381,7 +8482,8 @@ class C
         return a & ~[|(long)|]b;
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     public static long P(long a, int b)
@@ -8399,10 +8501,10 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
         public async Task DoRemoveBitwiseNotOfSignExtendedValue2()
         {
-
             var test = new VerifyCS.Test()
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     public static nint N(nint a, int b)
@@ -8410,7 +8512,8 @@ class C
         return a & ~[|(nint)|]b;
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     public static nint N(nint a, int b)
@@ -8430,7 +8533,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     ushort Goo(string s)
@@ -8447,13 +8551,15 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     uint Goo(string s)
         => s is null ? [|(uint)|]1234 : uint.Parse(s);
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     uint Goo(string s)

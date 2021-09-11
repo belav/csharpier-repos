@@ -275,7 +275,8 @@ internal class TestApp
     }
     private static unsafe long test_395(B* pb)
     {
-        if (pb + 1 > pb) return 100;
+        if (pb + 1 > pb)
+            return 100;
         throw new Exception();
     }
     private static unsafe int Main()
@@ -486,8 +487,13 @@ internal class TestApp
         }
         AA.init_all(0);
         loc_x = new AA(0, 100);
-        if (test_206(new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } }, 1, 1) != 100)
-        {
+        if (
+            test_206(
+                new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } },
+                1,
+                1
+            ) != 100
+        ) {
             Console.WriteLine("test_206() failed.");
             return 306;
         }

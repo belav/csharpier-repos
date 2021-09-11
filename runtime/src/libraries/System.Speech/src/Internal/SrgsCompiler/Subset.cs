@@ -16,8 +16,12 @@ namespace System.Speech.Internal.SrgsCompiler
         /// <summary>
         /// Process the 'subset' element.
         /// </summary>
-        public Subset(ParseElementCollection parent, Backend backend, string text, MatchMode mode)
-            : base(parent._rule)
+        public Subset(
+            ParseElementCollection parent,
+            Backend backend,
+            string text,
+            MatchMode mode
+        ) : base(parent._rule)
         {
             // replace tab, cr, lf with spaces
             foreach (char ch in Helpers._achTrimChars)
@@ -39,10 +43,7 @@ namespace System.Speech.Internal.SrgsCompiler
         #endregion
 
         #region Internal Method
-        void IElement.PostParse(IElement parentElement)
-        {
-        }
-
+        void IElement.PostParse(IElement parentElement) { }
         #endregion
     }
 }

@@ -38,9 +38,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
         /// </summary>
         protected void VerifyNoSpecialSemicolonHandling(string initialMarkup)
         {
-            var expected = initialMarkup.Contains("$$") ?
-                initialMarkup.Replace("$$", ";$$") :
-                initialMarkup.Replace("|]", ";$$|]");
+            var expected = initialMarkup.Contains("$$")
+                ? initialMarkup.Replace("$$", ";$$")
+                : initialMarkup.Replace("|]", ";$$|]");
 
             VerifyTypingSemicolon(initialMarkup, expected);
         }
@@ -62,7 +62,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
             var commandArgs = new TypeCharCommandArgs(view, view.TextBuffer, semicolon);
             var nextHandler = CreateInsertTextHandler(view, semicolon.ToString());
 
-            commandHandler.ExecuteCommand(commandArgs, nextHandler, TestCommandExecutionContext.Create());
+            commandHandler.ExecuteCommand(
+                commandArgs,
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
         }
 
         private static Action CreateInsertTextHandler(ITextView textView, string text)
@@ -75,16 +79,22 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
             };
         }
 
-        protected void Verify(string initialMarkup, string expectedMarkup,
+        protected void Verify(
+            string initialMarkup,
+            string expectedMarkup,
             Action<IWpfTextView, TestWorkspace> execute,
-            Action<TestWorkspace> setOptionsOpt = null)
-        {
+            Action<TestWorkspace> setOptionsOpt = null
+        ) {
             using (var workspace = CreateTestWorkspace(initialMarkup))
             {
                 var testDocument = workspace.Documents.Single();
 
-                Assert.True(testDocument.CursorPosition.HasValue || testDocument.SelectedSpans.Any(), "No caret position or selected spans are set!");
-                var startCaretPosition = testDocument.CursorPosition ?? testDocument.SelectedSpans.Last().End;
+                Assert.True(
+                    testDocument.CursorPosition.HasValue || testDocument.SelectedSpans.Any(),
+                    "No caret position or selected spans are set!"
+                );
+                var startCaretPosition =
+                    testDocument.CursorPosition ?? testDocument.SelectedSpans.Last().End;
 
                 var view = testDocument.GetTextView();
 
@@ -94,7 +104,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
 
                     var isReversed = selectedSpan.Start == startCaretPosition;
 
-                    view.Selection.Select(new SnapshotSpan(view.TextSnapshot, selectedSpan.Start, selectedSpan.Length), isReversed);
+                    view.Selection.Select(
+                        new SnapshotSpan(
+                            view.TextSnapshot,
+                            selectedSpan.Start,
+                            selectedSpan.Length
+                        ),
+                        isReversed
+                    );
                 }
 
                 view.Caret.MoveTo(new SnapshotPoint(view.TextSnapshot, startCaretPosition));
@@ -102,13 +119,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
                 setOptionsOpt?.Invoke(workspace);
 
                 execute(view, workspace);
-                MarkupTestFile.GetPosition(expectedMarkup, out var expectedCode, out int expectedPosition);
+                MarkupTestFile.GetPosition(
+                    expectedMarkup,
+                    out var expectedCode,
+                    out int expectedPosition
+                );
 
                 Assert.Equal(expectedCode, view.TextSnapshot.GetText());
 
                 var endCaretPosition = view.Caret.Position.BufferPosition.Position;
-                Assert.True(expectedPosition == endCaretPosition,
-                    string.Format("Caret positioned incorrectly. Should have been {0}, but was {1}.", expectedPosition, endCaretPosition));
+                Assert.True(
+                    expectedPosition == endCaretPosition,
+                    string.Format(
+                        "Caret positioned incorrectly. Should have been {0}, but was {1}.",
+                        expectedPosition,
+                        endCaretPosition
+                    )
+                );
             }
         }
     }

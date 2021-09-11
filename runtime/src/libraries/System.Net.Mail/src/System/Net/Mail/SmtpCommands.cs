@@ -16,8 +16,11 @@ namespace System.Net.Mail
         private static readonly AsyncCallback s_onReadLine = new AsyncCallback(OnReadLine);
         private static readonly AsyncCallback s_onWrite = new AsyncCallback(OnWrite);
 
-        internal static IAsyncResult BeginSend(SmtpConnection conn, AsyncCallback? callback, object? state)
-        {
+        internal static IAsyncResult BeginSend(
+            SmtpConnection conn,
+            AsyncCallback? callback,
+            object? state
+        ) {
             MultiAsyncResult multiResult = new MultiAsyncResult(conn, callback, state);
             multiResult.Enter();
             IAsyncResult writeResult = conn.BeginFlush(s_onWrite, multiResult);
@@ -41,7 +44,6 @@ namespace System.Net.Mail
             multiResult.CompleteSequence();
             return multiResult;
         }
-
 
         internal static object EndSend(IAsyncResult result, out string response)
         {
@@ -110,8 +112,11 @@ namespace System.Net.Mail
         private static readonly AsyncCallback s_onReadLines = new AsyncCallback(OnReadLines);
         private static readonly AsyncCallback s_onWrite = new AsyncCallback(OnWrite);
 
-        internal static IAsyncResult BeginSend(SmtpConnection conn, AsyncCallback? callback, object? state)
-        {
+        internal static IAsyncResult BeginSend(
+            SmtpConnection conn,
+            AsyncCallback? callback,
+            object? state
+        ) {
             MultiAsyncResult multiResult = new MultiAsyncResult(conn, callback, state);
             multiResult.Enter();
             IAsyncResult writeResult = conn.BeginFlush(s_onWrite, multiResult);
@@ -190,14 +195,23 @@ namespace System.Net.Mail
 
     internal static class AuthCommand
     {
-        internal static IAsyncResult BeginSend(SmtpConnection conn, string type, string message, AsyncCallback? callback, object? state)
-        {
+        internal static IAsyncResult BeginSend(
+            SmtpConnection conn,
+            string type,
+            string message,
+            AsyncCallback? callback,
+            object? state
+        ) {
             PrepareCommand(conn, type, message);
             return ReadLinesCommand.BeginSend(conn, callback, state);
         }
 
-        internal static IAsyncResult BeginSend(SmtpConnection conn, string? message, AsyncCallback? callback, object? state)
-        {
+        internal static IAsyncResult BeginSend(
+            SmtpConnection conn,
+            string? message,
+            AsyncCallback? callback,
+            object? state
+        ) {
             PrepareCommand(conn, message);
             return ReadLinesCommand.BeginSend(conn, callback, state);
         }
@@ -208,7 +222,10 @@ namespace System.Net.Mail
             {
                 throw new SmtpException(SR.SmtpAuthResponseInvalid);
             }
-            System.Diagnostics.Debug.Assert(lines.Length == 1, "Did not expect more than one line response for auth command");
+            System.Diagnostics.Debug.Assert(
+                lines.Length == 1,
+                "Did not expect more than one line response for auth command"
+            );
             return lines[0];
         }
 
@@ -246,8 +263,11 @@ namespace System.Net.Mail
 
     internal static class DataCommand
     {
-        internal static IAsyncResult BeginSend(SmtpConnection conn, AsyncCallback? callback, object? state)
-        {
+        internal static IAsyncResult BeginSend(
+            SmtpConnection conn,
+            AsyncCallback? callback,
+            object? state
+        ) {
             PrepareCommand(conn);
             return CheckCommand.BeginSend(conn, callback, state);
         }
@@ -257,20 +277,23 @@ namespace System.Net.Mail
             switch (statusCode)
             {
                 case SmtpStatusCode.StartMailInput:
-                    {
-                        return;
-                    }
+                {
+                    return;
+                }
                 case SmtpStatusCode.LocalErrorInProcessing:
                 case SmtpStatusCode.TransactionFailed:
                 default:
+                {
+                    if ((int)statusCode < 400)
                     {
-                        if ((int)statusCode < 400)
-                        {
-                            throw new SmtpException(SR.net_webstatus_ServerProtocolViolation, serverResponse);
-                        }
-
-                        throw new SmtpException(statusCode, serverResponse, true);
+                        throw new SmtpException(
+                            SR.net_webstatus_ServerProtocolViolation,
+                            serverResponse
+                        );
                     }
+
+                    throw new SmtpException(statusCode, serverResponse, true);
+                }
             }
         }
 
@@ -307,22 +330,25 @@ namespace System.Net.Mail
             switch (statusCode)
             {
                 case SmtpStatusCode.Ok:
-                    {
-                        return;
-                    }
+                {
+                    return;
+                }
                 case SmtpStatusCode.ExceededStorageAllocation:
                 case SmtpStatusCode.TransactionFailed:
                 case SmtpStatusCode.LocalErrorInProcessing:
                 case SmtpStatusCode.InsufficientStorage:
                 default:
+                {
+                    if ((int)statusCode < 400)
                     {
-                        if ((int)statusCode < 400)
-                        {
-                            throw new SmtpException(SR.net_webstatus_ServerProtocolViolation, serverResponse);
-                        }
-
-                        throw new SmtpException(statusCode, serverResponse, true);
+                        throw new SmtpException(
+                            SR.net_webstatus_ServerProtocolViolation,
+                            serverResponse
+                        );
                     }
+
+                    throw new SmtpException(statusCode, serverResponse, true);
+                }
             }
         }
 
@@ -346,8 +372,12 @@ namespace System.Net.Mail
 
     internal static class EHelloCommand
     {
-        internal static IAsyncResult BeginSend(SmtpConnection conn, string domain, AsyncCallback? callback, object? state)
-        {
+        internal static IAsyncResult BeginSend(
+            SmtpConnection conn,
+            string domain,
+            AsyncCallback? callback,
+            object? state
+        ) {
             PrepareCommand(conn, domain);
             return ReadLinesCommand.BeginSend(conn, callback, state);
         }
@@ -362,7 +392,10 @@ namespace System.Net.Mail
             {
                 if ((int)lines[0].StatusCode < 400)
                 {
-                    throw new SmtpException(SR.net_webstatus_ServerProtocolViolation, lines[0].Line);
+                    throw new SmtpException(
+                        SR.net_webstatus_ServerProtocolViolation,
+                        lines[0].Line
+                    );
                 }
 
                 throw new SmtpException(lines[0].StatusCode, lines[0].Line, true);
@@ -400,8 +433,12 @@ namespace System.Net.Mail
 
     internal static class HelloCommand
     {
-        internal static IAsyncResult BeginSend(SmtpConnection conn, string domain, AsyncCallback? callback, object? state)
-        {
+        internal static IAsyncResult BeginSend(
+            SmtpConnection conn,
+            string domain,
+            AsyncCallback? callback,
+            object? state
+        ) {
             PrepareCommand(conn, domain);
             return CheckCommand.BeginSend(conn, callback, state);
         }
@@ -411,18 +448,21 @@ namespace System.Net.Mail
             switch (statusCode)
             {
                 case SmtpStatusCode.Ok:
-                    {
-                        return;
-                    }
+                {
+                    return;
+                }
                 default:
+                {
+                    if ((int)statusCode < 400)
                     {
-                        if ((int)statusCode < 400)
-                        {
-                            throw new SmtpException(SR.net_webstatus_ServerProtocolViolation, serverResponse);
-                        }
-
-                        throw new SmtpException(statusCode, serverResponse, true);
+                        throw new SmtpException(
+                            SR.net_webstatus_ServerProtocolViolation,
+                            serverResponse
+                        );
                     }
+
+                    throw new SmtpException(statusCode, serverResponse, true);
+                }
             }
         }
 
@@ -456,8 +496,11 @@ namespace System.Net.Mail
 
     internal static class StartTlsCommand
     {
-        internal static IAsyncResult BeginSend(SmtpConnection conn, AsyncCallback? callback, object? state)
-        {
+        internal static IAsyncResult BeginSend(
+            SmtpConnection conn,
+            AsyncCallback? callback,
+            object? state
+        ) {
             PrepareCommand(conn);
             return CheckCommand.BeginSend(conn, callback, state);
         }
@@ -467,20 +510,20 @@ namespace System.Net.Mail
             switch (statusCode)
             {
                 case SmtpStatusCode.ServiceReady:
-                    {
-                        return;
-                    }
+                {
+                    return;
+                }
 
                 case SmtpStatusCode.ClientNotPermitted:
                 default:
+                {
+                    if ((int)statusCode < 400)
                     {
-                        if ((int)statusCode < 400)
-                        {
-                            throw new SmtpException(SR.net_webstatus_ServerProtocolViolation, response);
-                        }
-
-                        throw new SmtpException(statusCode, response, true);
+                        throw new SmtpException(SR.net_webstatus_ServerProtocolViolation, response);
                     }
+
+                    throw new SmtpException(statusCode, response, true);
+                }
             }
         }
 
@@ -513,9 +556,14 @@ namespace System.Net.Mail
 
     internal static class MailCommand
     {
-        internal static IAsyncResult BeginSend(SmtpConnection conn, byte[] command, MailAddress from,
-            bool allowUnicode, AsyncCallback? callback, object? state)
-        {
+        internal static IAsyncResult BeginSend(
+            SmtpConnection conn,
+            byte[] command,
+            MailAddress from,
+            bool allowUnicode,
+            AsyncCallback? callback,
+            object? state
+        ) {
             PrepareCommand(conn, command, from, allowUnicode);
             return CheckCommand.BeginSend(conn, callback, state);
         }
@@ -525,21 +573,21 @@ namespace System.Net.Mail
             switch (statusCode)
             {
                 case SmtpStatusCode.Ok:
-                    {
-                        return;
-                    }
+                {
+                    return;
+                }
                 case SmtpStatusCode.ExceededStorageAllocation:
                 case SmtpStatusCode.LocalErrorInProcessing:
                 case SmtpStatusCode.InsufficientStorage:
                 default:
+                {
+                    if ((int)statusCode < 400)
                     {
-                        if ((int)statusCode < 400)
-                        {
-                            throw new SmtpException(SR.net_webstatus_ServerProtocolViolation, response);
-                        }
-
-                        throw new SmtpException(statusCode, response, true);
+                        throw new SmtpException(SR.net_webstatus_ServerProtocolViolation, response);
                     }
+
+                    throw new SmtpException(statusCode, response, true);
+                }
             }
         }
 
@@ -550,8 +598,12 @@ namespace System.Net.Mail
             CheckResponse(statusCode, response);
         }
 
-        private static void PrepareCommand(SmtpConnection conn, byte[] command, MailAddress from, bool allowUnicode)
-        {
+        private static void PrepareCommand(
+            SmtpConnection conn,
+            byte[] command,
+            MailAddress from,
+            bool allowUnicode
+        ) {
             if (conn.IsStreamOpen)
             {
                 throw new InvalidOperationException(SR.SmtpDataStreamOpen);
@@ -566,8 +618,12 @@ namespace System.Net.Mail
             conn.BufferBuilder.Append(SmtpCommands.CRLF);
         }
 
-        internal static void Send(SmtpConnection conn, byte[] command, MailAddress from, bool allowUnicode)
-        {
+        internal static void Send(
+            SmtpConnection conn,
+            byte[] command,
+            MailAddress from,
+            bool allowUnicode
+        ) {
             PrepareCommand(conn, command, from, allowUnicode);
             string response;
             SmtpStatusCode statusCode = CheckCommand.Send(conn, out response);
@@ -577,8 +633,12 @@ namespace System.Net.Mail
 
     internal static class RecipientCommand
     {
-        internal static IAsyncResult BeginSend(SmtpConnection conn, string to, AsyncCallback? callback, object? state)
-        {
+        internal static IAsyncResult BeginSend(
+            SmtpConnection conn,
+            string to,
+            AsyncCallback? callback,
+            object? state
+        ) {
             PrepareCommand(conn, to);
             return CheckCommand.BeginSend(conn, callback, state);
         }
@@ -589,27 +649,27 @@ namespace System.Net.Mail
             {
                 case SmtpStatusCode.Ok:
                 case SmtpStatusCode.UserNotLocalWillForward:
-                    {
-                        return true;
-                    }
+                {
+                    return true;
+                }
                 case SmtpStatusCode.MailboxUnavailable:
                 case SmtpStatusCode.UserNotLocalTryAlternatePath:
                 case SmtpStatusCode.ExceededStorageAllocation:
                 case SmtpStatusCode.MailboxNameNotAllowed:
                 case SmtpStatusCode.MailboxBusy:
                 case SmtpStatusCode.InsufficientStorage:
-                    {
-                        return false;
-                    }
+                {
+                    return false;
+                }
                 default:
+                {
+                    if ((int)statusCode < 400)
                     {
-                        if ((int)statusCode < 400)
-                        {
-                            throw new SmtpException(SR.net_webstatus_ServerProtocolViolation, response);
-                        }
-
-                        throw new SmtpException(statusCode, response, true);
+                        throw new SmtpException(SR.net_webstatus_ServerProtocolViolation, response);
                     }
+
+                    throw new SmtpException(statusCode, response, true);
+                }
             }
         }
 
@@ -630,7 +690,6 @@ namespace System.Net.Mail
             conn.BufferBuilder.Append(to, true); // Unicode validation was done prior
             conn.BufferBuilder.Append(SmtpCommands.CRLF);
         }
-
 
         internal static bool Send(SmtpConnection conn, string to, out string response)
         {
@@ -687,8 +746,6 @@ namespace System.Net.Mail
         internal static readonly byte[] StartTls = Encoding.ASCII.GetBytes("STARTTLS");
     }
 
-
-
     internal struct LineInfo
     {
         private readonly string _line;
@@ -701,17 +758,11 @@ namespace System.Net.Mail
         }
         internal string Line
         {
-            get
-            {
-                return _line;
-            }
+            get { return _line; }
         }
         internal SmtpStatusCode StatusCode
         {
-            get
-            {
-                return _statusCode;
-            }
+            get { return _statusCode; }
         }
     }
 }

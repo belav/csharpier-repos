@@ -24,10 +24,13 @@ namespace ApiAuthSample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                    .UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(
+                options =>
+                    options.ConfigureWarnings(
+                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                        )
+                        .UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+            );
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -35,11 +38,9 @@ namespace ApiAuthSample
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
+            services.AddAuthentication().AddIdentityServerJwt();
 
-            services.AddMvc()
-                .AddNewtonsoftJson();
+            services.AddMvc().AddNewtonsoftJson();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
         }
@@ -66,11 +67,13 @@ namespace ApiAuthSample
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapFallbackToPage("/Index");
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapFallbackToPage("/Index");
+                }
+            );
         }
     }
 }

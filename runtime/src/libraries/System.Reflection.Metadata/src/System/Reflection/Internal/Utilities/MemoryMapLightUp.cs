@@ -19,14 +19,19 @@ namespace System.Reflection.Internal
                 capacity: 0,
                 access: MemoryMappedFileAccess.Read,
                 inheritability: HandleInheritability.None,
-                leaveOpen: true);
+                leaveOpen: true
+            );
         }
 
         internal static IDisposable CreateViewAccessor(object memoryMap, long start, int size)
         {
             try
             {
-                return ((MemoryMappedFile)memoryMap).CreateViewAccessor(start, size, MemoryMappedFileAccess.Read);
+                return ((MemoryMappedFile)memoryMap).CreateViewAccessor(
+                    start,
+                    size,
+                    MemoryMappedFileAccess.Read
+                );
             }
             catch (UnauthorizedAccessException e)
             {
@@ -34,8 +39,11 @@ namespace System.Reflection.Internal
             }
         }
 
-        internal static bool TryGetSafeBufferAndPointerOffset(object accessor, out SafeBuffer safeBuffer, out long offset)
-        {
+        internal static bool TryGetSafeBufferAndPointerOffset(
+            object accessor,
+            out SafeBuffer safeBuffer,
+            out long offset
+        ) {
             var viewAccessor = (MemoryMappedViewAccessor)accessor;
             safeBuffer = viewAccessor.SafeMemoryMappedViewHandle;
             offset = viewAccessor.PointerOffset;

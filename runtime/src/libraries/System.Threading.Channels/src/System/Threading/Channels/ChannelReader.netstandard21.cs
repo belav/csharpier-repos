@@ -15,8 +15,9 @@ namespace System.Threading.Channels
         /// <see cref="IAsyncEnumerator{T}.MoveNextAsync"/> will return false once no more data is or will ever be available to read.
         /// </remarks>
         /// <returns>The created async enumerable.</returns>
-        public virtual async IAsyncEnumerable<T> ReadAllAsync([EnumeratorCancellation] CancellationToken cancellationToken = default)
-        {
+        public virtual async IAsyncEnumerable<T> ReadAllAsync(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        ) {
             while (await WaitToReadAsync(cancellationToken).ConfigureAwait(false))
             {
                 while (TryRead(out T? item))

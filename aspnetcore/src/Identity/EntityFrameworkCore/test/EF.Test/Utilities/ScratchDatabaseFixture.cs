@@ -23,8 +23,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             }
         }
 
-        private DbContext CreateEmptyContext()
-            => new DbContext(new DbContextOptionsBuilder().UseSqlite(_connection).Options);
+        private DbContext CreateEmptyContext() =>
+            new DbContext(new DbContextOptionsBuilder().UseSqlite(_connection).Options);
 
         public DbConnection Connection => _connection;
 

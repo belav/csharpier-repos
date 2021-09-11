@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Razor.Language
 {
     // Note: RazorSDK is aware of version monikers such as "latest", and "experimental". Update it if we introduce new monikers.
     [DebuggerDisplay("{" + nameof(DebuggerToString) + "(),nq}")]
-    public sealed class RazorLanguageVersion : IEquatable<RazorLanguageVersion>, IComparable<RazorLanguageVersion>
+    public sealed class RazorLanguageVersion
+        : IEquatable<RazorLanguageVersion>,
+          IComparable<RazorLanguageVersion>
     {
         public static readonly RazorLanguageVersion Version_1_0 = new RazorLanguageVersion(1, 0);
 
@@ -26,7 +28,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static readonly RazorLanguageVersion Latest = Version_6_0;
 
-        public static readonly RazorLanguageVersion Experimental = new RazorLanguageVersion(1337, 1337);
+        public static readonly RazorLanguageVersion Experimental = new RazorLanguageVersion(
+            1337,
+            1337
+        );
 
         public static bool TryParse(string languageVersion, out RazorLanguageVersion version)
         {
@@ -40,8 +45,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                 version = Latest;
                 return true;
             }
-            else if (string.Equals(languageVersion, "experimental", StringComparison.OrdinalIgnoreCase))
-            {
+            else if (
+                string.Equals(languageVersion, "experimental", StringComparison.OrdinalIgnoreCase)
+            ) {
                 version = Experimental;
                 return true;
             }
@@ -94,7 +100,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             throw new ArgumentException(
                 Resources.FormatRazorLanguageVersion_InvalidVersion(languageVersion),
-                nameof(languageVersion));
+                nameof(languageVersion)
+            );
         }
 
         // Don't want anyone else constructing language versions.

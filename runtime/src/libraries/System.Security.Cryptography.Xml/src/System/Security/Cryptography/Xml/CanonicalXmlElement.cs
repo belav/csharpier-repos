@@ -12,8 +12,13 @@ namespace System.Security.Cryptography.Xml
     {
         private bool _isInNodeSet;
 
-        public CanonicalXmlElement(string prefix, string localName, string namespaceURI, XmlDocument doc, bool defaultNodeSetInclusionState)
-            : base(prefix, localName, namespaceURI, doc)
+        public CanonicalXmlElement(
+            string prefix,
+            string localName,
+            string namespaceURI,
+            XmlDocument doc,
+            bool defaultNodeSetInclusionState
+        ) : base(prefix, localName, namespaceURI, doc)
         {
             _isInNodeSet = defaultNodeSetInclusionState;
         }
@@ -24,8 +29,11 @@ namespace System.Security.Cryptography.Xml
             set { _isInNodeSet = value; }
         }
 
-        public void Write(StringBuilder strBuilder, DocPosition docPos, AncestralNamespaceContextManager anc)
-        {
+        public void Write(
+            StringBuilder strBuilder,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        ) {
             Hashtable nsLocallyDeclared = new Hashtable();
             SortedList nsListToRender = new SortedList(new NamespaceSortOrder());
             SortedList attrListToRender = new SortedList(new AttributeSortOrder());
@@ -35,15 +43,23 @@ namespace System.Security.Cryptography.Xml
             {
                 foreach (XmlAttribute attr in attrList)
                 {
-                    if (((CanonicalXmlAttribute)attr).IsInNodeSet || Utils.IsNamespaceNode(attr) || Utils.IsXmlNamespaceNode(attr))
-                    {
+                    if (
+                        ((CanonicalXmlAttribute)attr).IsInNodeSet
+                        || Utils.IsNamespaceNode(attr)
+                        || Utils.IsXmlNamespaceNode(attr)
+                    ) {
                         if (Utils.IsNamespaceNode(attr))
                         {
                             anc.TrackNamespaceNode(attr, nsListToRender, nsLocallyDeclared);
                         }
                         else if (Utils.IsXmlNamespaceNode(attr))
                         {
-                            anc.TrackXmlNamespaceNode(attr, nsListToRender, attrListToRender, nsLocallyDeclared);
+                            anc.TrackXmlNamespaceNode(
+                                attr,
+                                nsListToRender,
+                                attrListToRender,
+                                nsLocallyDeclared
+                            );
                         }
                         else if (IsInNodeSet)
                         {
@@ -63,7 +79,12 @@ namespace System.Security.Cryptography.Xml
 
             if (IsInNodeSet)
             {
-                anc.GetNamespacesToRender(this, attrListToRender, nsListToRender, nsLocallyDeclared);
+                anc.GetNamespacesToRender(
+                    this,
+                    attrListToRender,
+                    nsListToRender,
+                    nsLocallyDeclared
+                );
 
                 strBuilder.Append('<').Append(Name);
                 foreach (object attr in nsListToRender.GetKeyList())
@@ -95,8 +116,11 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        public void WriteHash(HashAlgorithm hash, DocPosition docPos, AncestralNamespaceContextManager anc)
-        {
+        public void WriteHash(
+            HashAlgorithm hash,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        ) {
             Hashtable nsLocallyDeclared = new Hashtable();
             SortedList nsListToRender = new SortedList(new NamespaceSortOrder());
             SortedList attrListToRender = new SortedList(new AttributeSortOrder());
@@ -108,15 +132,23 @@ namespace System.Security.Cryptography.Xml
             {
                 foreach (XmlAttribute attr in attrList)
                 {
-                    if (((CanonicalXmlAttribute)attr).IsInNodeSet || Utils.IsNamespaceNode(attr) || Utils.IsXmlNamespaceNode(attr))
-                    {
+                    if (
+                        ((CanonicalXmlAttribute)attr).IsInNodeSet
+                        || Utils.IsNamespaceNode(attr)
+                        || Utils.IsXmlNamespaceNode(attr)
+                    ) {
                         if (Utils.IsNamespaceNode(attr))
                         {
                             anc.TrackNamespaceNode(attr, nsListToRender, nsLocallyDeclared);
                         }
                         else if (Utils.IsXmlNamespaceNode(attr))
                         {
-                            anc.TrackXmlNamespaceNode(attr, nsListToRender, attrListToRender, nsLocallyDeclared);
+                            anc.TrackXmlNamespaceNode(
+                                attr,
+                                nsListToRender,
+                                attrListToRender,
+                                nsLocallyDeclared
+                            );
                         }
                         else if (IsInNodeSet)
                         {
@@ -136,7 +168,12 @@ namespace System.Security.Cryptography.Xml
 
             if (IsInNodeSet)
             {
-                anc.GetNamespacesToRender(this, attrListToRender, nsListToRender, nsLocallyDeclared);
+                anc.GetNamespacesToRender(
+                    this,
+                    attrListToRender,
+                    nsListToRender,
+                    nsLocallyDeclared
+                );
                 rgbData = utf8.GetBytes("<" + Name);
                 hash.TransformBlock(rgbData, 0, rgbData.Length, rgbData, 0);
                 foreach (object attr in nsListToRender.GetKeyList())

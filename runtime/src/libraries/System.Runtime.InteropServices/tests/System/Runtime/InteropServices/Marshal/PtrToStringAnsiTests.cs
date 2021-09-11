@@ -20,6 +20,7 @@ namespace System.Runtime.InteropServices.Tests
                 string result = Marshal.PtrToStringAnsi(ptr, len);
                 Assert.Equal(s.Substring(0, len), result);
             }
+
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);
@@ -44,13 +45,20 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void PtrToStringAnsi_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.PtrToStringAnsi(IntPtr.Zero, 123));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () => Marshal.PtrToStringAnsi(IntPtr.Zero, 123)
+            );
         }
 
         [Fact]
         public void PtrToStringAnsi_NegativeLength_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>("len", null, () => Marshal.PtrToStringAnsi(new IntPtr(123), -77));
+            AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
+                "len",
+                null,
+                () => Marshal.PtrToStringAnsi(new IntPtr(123), -77)
+            );
         }
     }
 }

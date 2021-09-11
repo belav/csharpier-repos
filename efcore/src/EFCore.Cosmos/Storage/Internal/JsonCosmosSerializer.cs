@@ -38,8 +38,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         public override Stream ToStream<T>(T input)
         {
             var streamPayload = new MemoryStream();
-            using (var streamWriter = new StreamWriter(streamPayload, encoding: DefaultEncoding, bufferSize: 1024, leaveOpen: true))
-            {
+            using (
+                var streamWriter = new StreamWriter(
+                    streamPayload,
+                    encoding: DefaultEncoding,
+                    bufferSize: 1024,
+                    leaveOpen: true
+                )
+            ) {
                 using var jsonTextWriter = new JsonTextWriter(streamWriter);
                 jsonTextWriter.Formatting = Formatting.None;
                 GetSerializer().Serialize(jsonTextWriter, input);
@@ -51,7 +57,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             return streamPayload;
         }
 
-        private JsonSerializer GetSerializer()
-            => CosmosClientWrapper.Serializer;
+        private JsonSerializer GetSerializer() => CosmosClientWrapper.Serializer;
     }
 }

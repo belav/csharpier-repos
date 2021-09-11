@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Components.E2ETests.Tests
         public SaveStateTest(
             BrowserFixture browserFixture,
             AspNetSiteServerFixture serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output)
         {
             serverFixture.BuildWebHostMethod = Program.BuildWebHost<SaveState>;
             serverFixture.Environment = AspNetEnvironment.Development;

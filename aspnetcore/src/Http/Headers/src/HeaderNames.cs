@@ -26,7 +26,8 @@ namespace Microsoft.Net.Http.Headers
         public static readonly string AcceptRanges = "Accept-Ranges";
 
         /// <summary>Gets the <c>Access-Control-Allow-Credentials</c> HTTP header name.</summary>
-        public static readonly string AccessControlAllowCredentials = "Access-Control-Allow-Credentials";
+        public static readonly string AccessControlAllowCredentials =
+            "Access-Control-Allow-Credentials";
 
         /// <summary>Gets the <c>Access-Control-Allow-Headers</c> HTTP header name.</summary>
         public static readonly string AccessControlAllowHeaders = "Access-Control-Allow-Headers";
@@ -44,7 +45,8 @@ namespace Microsoft.Net.Http.Headers
         public static readonly string AccessControlMaxAge = "Access-Control-Max-Age";
 
         /// <summary>Gets the <c>Access-Control-Request-Headers</c> HTTP header name.</summary>
-        public static readonly string AccessControlRequestHeaders = "Access-Control-Request-Headers";
+        public static readonly string AccessControlRequestHeaders =
+            "Access-Control-Request-Headers";
 
         /// <summary>Gets the <c>Access-Control-Request-Method</c> HTTP header name.</summary>
         public static readonly string AccessControlRequestMethod = "Access-Control-Request-Method";
@@ -98,7 +100,8 @@ namespace Microsoft.Net.Http.Headers
         public static readonly string ContentSecurityPolicy = "Content-Security-Policy";
 
         /// <summary>Gets the <c>Content-Security-Policy-Report-Only</c> HTTP header name.</summary>
-        public static readonly string ContentSecurityPolicyReportOnly = "Content-Security-Policy-Report-Only";
+        public static readonly string ContentSecurityPolicyReportOnly =
+            "Content-Security-Policy-Report-Only";
 
         /// <summary>Gets the <c>Content-Type</c> HTTP header name.</summary>
         public static readonly string ContentType = "Content-Type";

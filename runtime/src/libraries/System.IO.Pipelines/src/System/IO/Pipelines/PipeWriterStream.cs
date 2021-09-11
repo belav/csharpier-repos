@@ -37,21 +37,32 @@ namespace System.IO.Pipelines
 
         public override long Length => throw new NotSupportedException();
 
-        public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        public override long Position
+        {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
+        }
 
         public override void Flush()
         {
             FlushAsync().GetAwaiter().GetResult();
         }
 
-        public override int Read(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+        public override int Read(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
 
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
 
         public override void SetLength(long value) => throw new NotSupportedException();
 
-        public sealed override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToApm.Begin(WriteAsync(buffer, offset, count, default), callback, state);
+        public sealed override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => TaskToApm.Begin(WriteAsync(buffer, offset, count, default), callback, state);
 
         public sealed override void EndWrite(IAsyncResult asyncResult) =>
             TaskToApm.End(asyncResult);
@@ -59,21 +70,30 @@ namespace System.IO.Pipelines
         public override void Write(byte[] buffer, int offset, int count) =>
             WriteAsync(buffer, offset, count).GetAwaiter().GetResult();
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             if (buffer is null)
             {
                 throw new ArgumentNullException(nameof(buffer));
             }
 
-            ValueTask<FlushResult> valueTask = _pipeWriter.WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken);
+            ValueTask<FlushResult> valueTask = _pipeWriter.WriteAsync(
+                new ReadOnlyMemory<byte>(buffer, offset, count),
+                cancellationToken
+            );
 
             return GetFlushResultAsTask(valueTask);
         }
 
 #if (!NETSTANDARD2_0 && !NETFRAMEWORK)
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             ValueTask<FlushResult> valueTask = _pipeWriter.WriteAsync(buffer, cancellationToken);
 
             return new ValueTask(GetFlushResultAsTask(valueTask));

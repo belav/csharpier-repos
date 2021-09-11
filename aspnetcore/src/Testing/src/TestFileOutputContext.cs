@@ -20,11 +20,49 @@ namespace Microsoft.AspNetCore.Testing
     {
         private static char[] InvalidFileChars = new char[]
         {
-            '\"', '<', '>', '|', '\0',
-            (char)1, (char)2, (char)3, (char)4, (char)5, (char)6, (char)7, (char)8, (char)9, (char)10,
-            (char)11, (char)12, (char)13, (char)14, (char)15, (char)16, (char)17, (char)18, (char)19, (char)20,
-            (char)21, (char)22, (char)23, (char)24, (char)25, (char)26, (char)27, (char)28, (char)29, (char)30,
-            (char)31, ':', '*', '?', '\\', '/', ' ', (char)127
+            '\"',
+            '<',
+            '>',
+            '|',
+            '\0',
+            (char)1,
+            (char)2,
+            (char)3,
+            (char)4,
+            (char)5,
+            (char)6,
+            (char)7,
+            (char)8,
+            (char)9,
+            (char)10,
+            (char)11,
+            (char)12,
+            (char)13,
+            (char)14,
+            (char)15,
+            (char)16,
+            (char)17,
+            (char)18,
+            (char)19,
+            (char)20,
+            (char)21,
+            (char)22,
+            (char)23,
+            (char)24,
+            (char)25,
+            (char)26,
+            (char)27,
+            (char)28,
+            (char)29,
+            (char)30,
+            (char)31,
+            ':',
+            '*',
+            '?',
+            '\\',
+            '/',
+            ' ',
+            (char)127
         };
 
         private readonly TestContext _parent;
@@ -60,7 +98,10 @@ namespace Microsoft.AspNetCore.Testing
 
             if (extension != null && !extension.StartsWith(".", StringComparison.Ordinal))
             {
-                throw new ArgumentException("The extension must start with '.' if one is provided.", nameof(extension));
+                throw new ArgumentException(
+                    "The extension must start with '.' if one is provided.",
+                    nameof(extension)
+                );
             }
 
             var path = Path.Combine(TestClassOutputDirectory, $"{prefix}{extension}");
@@ -77,13 +118,19 @@ namespace Microsoft.AspNetCore.Testing
         // Gets the output directory without appending the TFM or assembly name.
         public static string GetOutputDirectory(Assembly assembly)
         {
-            var attribute = assembly.GetCustomAttributes().OfType<TestOutputDirectoryAttribute>().FirstOrDefault();
+            var attribute = assembly.GetCustomAttributes()
+                .OfType<TestOutputDirectoryAttribute>()
+                .FirstOrDefault();
             return attribute?.BaseDirectory;
         }
 
-        public static string GetAssemblyBaseDirectory(Assembly assembly, string baseDirectory = null)
-        {
-            var attribute = assembly.GetCustomAttributes().OfType<TestOutputDirectoryAttribute>().FirstOrDefault();
+        public static string GetAssemblyBaseDirectory(
+            Assembly assembly,
+            string baseDirectory = null
+        ) {
+            var attribute = assembly.GetCustomAttributes()
+                .OfType<TestOutputDirectoryAttribute>()
+                .FirstOrDefault();
             baseDirectory = baseDirectory ?? attribute?.BaseDirectory;
             if (string.IsNullOrEmpty(baseDirectory))
             {
@@ -95,15 +142,17 @@ namespace Microsoft.AspNetCore.Testing
 
         public static bool GetPreserveExistingLogsInOutput(Assembly assembly)
         {
-            var attribute = assembly.GetCustomAttributes().OfType<TestOutputDirectoryAttribute>().FirstOrDefault();
+            var attribute = assembly.GetCustomAttributes()
+                .OfType<TestOutputDirectoryAttribute>()
+                .FirstOrDefault();
             return attribute.PreserveExistingLogsInOutput;
         }
 
         public static string GetTestClassName(Type type)
         {
             var shortNameAttribute =
-                type.GetCustomAttribute<ShortClassNameAttribute>() ??
-                type.Assembly.GetCustomAttribute<ShortClassNameAttribute>();
+                type.GetCustomAttribute<ShortClassNameAttribute>()
+                ?? type.Assembly.GetCustomAttribute<ShortClassNameAttribute>();
             var name = shortNameAttribute == null ? type.FullName : type.Name;
 
             // Try to shorten the class name using the assembly name

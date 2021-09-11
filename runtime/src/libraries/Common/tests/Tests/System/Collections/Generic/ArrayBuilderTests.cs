@@ -239,7 +239,8 @@ namespace System.Collections.Generic.Tests
         }
     }
 
-    public class ArrayBuilderTestsString : ArrayBuilderTests<string, ArrayBuilderTestsString.Generator>
+    public class ArrayBuilderTestsString
+        : ArrayBuilderTests<string, ArrayBuilderTestsString.Generator>
     {
         public sealed class Generator : IGenerator<string>
         {

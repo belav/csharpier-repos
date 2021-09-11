@@ -19,8 +19,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int defaultDestination,
             int exitDestination,
             string text,
-            int destination)
-        {
+            int destination
+        ) {
             _defaultDestination = defaultDestination;
             _exitDestination = exitDestination;
             _text = text;

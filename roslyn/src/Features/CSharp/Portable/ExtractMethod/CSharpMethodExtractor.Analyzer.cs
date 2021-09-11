@@ -20,31 +20,48 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
     {
         private class CSharpAnalyzer : Analyzer
         {
-            private static readonly HashSet<int> s_nonNoisySyntaxKindSet = new HashSet<int>(new int[] { (int)SyntaxKind.WhitespaceTrivia, (int)SyntaxKind.EndOfLineTrivia });
+            private static readonly HashSet<int> s_nonNoisySyntaxKindSet = new HashSet<int>(
+                new int[] { (int)SyntaxKind.WhitespaceTrivia, (int)SyntaxKind.EndOfLineTrivia }
+            );
 
-            public static Task<AnalyzerResult> AnalyzeAsync(SelectionResult selectionResult, bool localFunction, CancellationToken cancellationToken)
-            {
-                var analyzer = new CSharpAnalyzer(selectionResult, localFunction, cancellationToken);
+            public static Task<AnalyzerResult> AnalyzeAsync(
+                SelectionResult selectionResult,
+                bool localFunction,
+                CancellationToken cancellationToken
+            ) {
+                var analyzer = new CSharpAnalyzer(
+                    selectionResult,
+                    localFunction,
+                    cancellationToken
+                );
                 return analyzer.AnalyzeAsync();
             }
 
-            public CSharpAnalyzer(SelectionResult selectionResult, bool localFunction, CancellationToken cancellationToken)
-                : base(selectionResult, localFunction, cancellationToken)
-            {
-            }
+            public CSharpAnalyzer(
+                SelectionResult selectionResult,
+                bool localFunction,
+                CancellationToken cancellationToken
+            ) : base(selectionResult, localFunction, cancellationToken) { }
 
             protected override VariableInfo CreateFromSymbol(
                 Compilation compilation,
                 ISymbol symbol,
                 ITypeSymbol type,
                 VariableStyle style,
-                bool variableDeclared)
-            {
-                return CreateFromSymbolCommon<LocalDeclarationStatementSyntax>(compilation, symbol, type, style, s_nonNoisySyntaxKindSet);
+                bool variableDeclared
+            ) {
+                return CreateFromSymbolCommon<LocalDeclarationStatementSyntax>(
+                    compilation,
+                    symbol,
+                    type,
+                    style,
+                    s_nonNoisySyntaxKindSet
+                );
             }
 
-            protected override int GetIndexOfVariableInfoToUseAsReturnValue(IList<VariableInfo> variableInfo)
-            {
+            protected override int GetIndexOfVariableInfoToUseAsReturnValue(
+                IList<VariableInfo> variableInfo
+            ) {
                 var numberOfOutParameters = 0;
                 var numberOfRefParameters = 0;
 
@@ -90,15 +107,25 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return -1;
             }
 
-            protected override ITypeSymbol GetRangeVariableType(SemanticModel model, IRangeVariableSymbol symbol)
-            {
-                var info = model.GetSpeculativeTypeInfo(SelectionResult.FinalSpan.Start, SyntaxFactory.ParseName(symbol.Name), SpeculativeBindingOption.BindAsExpression);
-                if (Microsoft.CodeAnalysis.Shared.Extensions.ISymbolExtensions.IsErrorType(info.Type))
-                {
+            protected override ITypeSymbol GetRangeVariableType(
+                SemanticModel model,
+                IRangeVariableSymbol symbol
+            ) {
+                var info = model.GetSpeculativeTypeInfo(
+                    SelectionResult.FinalSpan.Start,
+                    SyntaxFactory.ParseName(symbol.Name),
+                    SpeculativeBindingOption.BindAsExpression
+                );
+                if (
+                    Microsoft.CodeAnalysis.Shared.Extensions.ISymbolExtensions.IsErrorType(
+                        info.Type
+                    )
+                ) {
                     return null;
                 }
 
-                return info.Type == null || info.Type.SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object
+                return info.Type == null
+                || info.Type.SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object
                     ? info.Type
                     : info.ConvertedType;
             }
@@ -111,8 +138,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 var last = csharpSelectionResult.GetLastStatement();
 
                 // single statement case
-                if (first == last ||
-                    first.Span.Contains(last.Span))
+                if (first == last || first.Span.Contains(last.Span))
                 {
                     return new Tuple<SyntaxNode, SyntaxNode>(first, first);
                 }
@@ -123,8 +149,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return new Tuple<SyntaxNode, SyntaxNode>(firstUnderContainer, lastUnderContainer);
             }
 
-            protected override bool ContainsReturnStatementInSelectedCode(IEnumerable<SyntaxNode> jumpOutOfRegionStatements)
-                => jumpOutOfRegionStatements.Where(n => n is ReturnStatementSyntax).Any();
+            protected override bool ContainsReturnStatementInSelectedCode(
+                IEnumerable<SyntaxNode> jumpOutOfRegionStatements
+            ) => jumpOutOfRegionStatements.Where(n => n is ReturnStatementSyntax).Any();
 
             protected override bool ReadOnlyFieldAllowed()
             {
@@ -132,24 +159,31 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return scope == null;
             }
 
-            protected override ITypeSymbol GetSymbolType(SemanticModel semanticModel, ISymbol symbol)
-            {
-                var selectionOperation = semanticModel.GetOperation(SelectionResult.GetContainingScope());
+            protected override ITypeSymbol GetSymbolType(
+                SemanticModel semanticModel,
+                ISymbol symbol
+            ) {
+                var selectionOperation = semanticModel.GetOperation(
+                    SelectionResult.GetContainingScope()
+                );
 
                 switch (symbol)
                 {
-                    case ILocalSymbol localSymbol when localSymbol.NullableAnnotation == NullableAnnotation.Annotated:
-                    case IParameterSymbol parameterSymbol when parameterSymbol.NullableAnnotation == NullableAnnotation.Annotated:
+                    case ILocalSymbol localSymbol
+                          when localSymbol.NullableAnnotation == NullableAnnotation.Annotated:
+                    case IParameterSymbol parameterSymbol
+                          when parameterSymbol.NullableAnnotation == NullableAnnotation.Annotated:
 
-                        // For local symbols and parameters, we can check what the flow state 
-                        // for refences to the symbols are and determine if we can change 
+                        // For local symbols and parameters, we can check what the flow state
+                        // for refences to the symbols are and determine if we can change
                         // the nullability to a less permissive state.
                         var references = selectionOperation.DescendantsAndSelf()
                             .Where(IsSymbolReferencedByOperation);
 
                         if (AreAllReferencesNotNull(references))
                         {
-                            return base.GetSymbolType(semanticModel, symbol).WithNullableAnnotation(NullableAnnotation.NotAnnotated);
+                            return base.GetSymbolType(semanticModel, symbol)
+                                .WithNullableAnnotation(NullableAnnotation.NotAnnotated);
                         }
 
                         return base.GetSymbolType(semanticModel, symbol);
@@ -158,15 +192,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         return base.GetSymbolType(semanticModel, symbol);
                 }
 
-                bool AreAllReferencesNotNull(IEnumerable<IOperation> references)
-                => references.All(r => semanticModel.GetTypeInfo(r.Syntax).Nullability.FlowState == NullableFlowState.NotNull);
+                bool AreAllReferencesNotNull(IEnumerable<IOperation> references) =>
+                    references.All(
+                        r =>
+                            semanticModel.GetTypeInfo(r.Syntax).Nullability.FlowState
+                            == NullableFlowState.NotNull
+                    );
 
-                bool IsSymbolReferencedByOperation(IOperation operation)
-                    => operation switch
+                bool IsSymbolReferencedByOperation(IOperation operation) =>
+                    operation switch
                     {
-                        ILocalReferenceOperation localReference => localReference.Local.Equals(symbol),
-                        IParameterReferenceOperation parameterReference => parameterReference.Parameter.Equals(symbol),
-                        IAssignmentOperation assignment => IsSymbolReferencedByOperation(assignment.Target),
+                        ILocalReferenceOperation localReference
+                          => localReference.Local.Equals(symbol),
+                        IParameterReferenceOperation parameterReference
+                          => parameterReference.Parameter.Equals(symbol),
+                        IAssignmentOperation assignment
+                          => IsSymbolReferencedByOperation(assignment.Target),
                         _ => false
                     };
             }

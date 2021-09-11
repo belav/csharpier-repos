@@ -50,8 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         public CSharpSnapshotGeneratorDependencies(
             ICSharpHelper csharpHelper,
             IRelationalTypeMappingSource relationalTypeMappingSource,
-            IAnnotationCodeGenerator annotationCodeGenerator)
-        {
+            IAnnotationCodeGenerator annotationCodeGenerator
+        ) {
             Check.NotNull(csharpHelper, nameof(csharpHelper));
 
             CSharpHelper = csharpHelper;

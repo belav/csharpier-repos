@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                 Checksum checksum,
                 string language,
                 ImmutableArray<TypeImportCompletionItemInfo> items,
-                int publicItemCount)
-            {
+                int publicItemCount
+            ) {
                 Checksum = checksum;
                 Language = language;
 
@@ -49,8 +49,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                 bool isInternalsVisible,
                 bool isAttributeContext,
                 bool isCaseSensitive,
-                bool hideAdvancedMembers)
-            {
+                bool hideAdvancedMembers
+            ) {
                 var isSameLanguage = Language == language;
                 using var _ = ArrayBuilder<CompletionItem>.GetInstance(out var builder);
 
@@ -100,7 +100,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                     if (!isSameLanguage && info.IsGeneric)
                     {
                         // We don't want to cache this item.
-                        item = ImportCompletionItem.CreateItemWithGenericDisplaySuffix(item, genericTypeSuffix);
+                        item = ImportCompletionItem.CreateItemWithGenericDisplaySuffix(
+                            item,
+                            genericTypeSuffix
+                        );
                     }
 
                     builder.Add(item);
@@ -108,12 +111,22 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
 
                 return builder.ToImmutable();
 
-                static CompletionItem GetAppropriateAttributeItem(CompletionItem attributeItem, bool isCaseSensitive)
-                {
-                    if (attributeItem.DisplayText.TryGetWithoutAttributeSuffix(isCaseSensitive: isCaseSensitive, out var attributeNameWithoutSuffix))
-                    {
+                static CompletionItem GetAppropriateAttributeItem(
+                    CompletionItem attributeItem,
+                    bool isCaseSensitive
+                ) {
+                    if (
+                        attributeItem.DisplayText.TryGetWithoutAttributeSuffix(
+                            isCaseSensitive: isCaseSensitive,
+                            out var attributeNameWithoutSuffix
+                        )
+                    ) {
                         // We don't want to cache this item.
-                        return ImportCompletionItem.CreateAttributeItemWithoutSuffix(attributeItem, attributeNameWithoutSuffix, CompletionItemFlags.Expanded);
+                        return ImportCompletionItem.CreateAttributeItemWithoutSuffix(
+                            attributeItem,
+                            attributeNameWithoutSuffix,
+                            CompletionItemFlags.Expanded
+                        );
                     }
 
                     return attributeItem;
@@ -131,8 +144,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
 
                 private readonly ArrayBuilder<TypeImportCompletionItemInfo> _itemsBuilder;
 
-                public Builder(Checksum checksum, string language, string genericTypeSuffix, EditorBrowsableInfo editorBrowsableInfo)
-                {
+                public Builder(
+                    Checksum checksum,
+                    string language,
+                    string genericTypeSuffix,
+                    EditorBrowsableInfo editorBrowsableInfo
+                ) {
                     _checksum = checksum;
                     _language = language;
                     _genericTypeSuffix = genericTypeSuffix;
@@ -147,16 +164,22 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                         _checksum,
                         _language,
                         _itemsBuilder.ToImmutable(),
-                        _publicItemCount);
+                        _publicItemCount
+                    );
                 }
 
-                public void AddItem(INamedTypeSymbol symbol, string containingNamespace, bool isPublic)
-                {
+                public void AddItem(
+                    INamedTypeSymbol symbol,
+                    string containingNamespace,
+                    bool isPublic
+                ) {
                     // We want to cache items with EditoBrowsableState == Advanced regardless of current "hide adv members" option value
-                    var (isBrowsable, isEditorBrowsableStateAdvanced) = symbol.IsEditorBrowsableWithState(
-                        hideAdvancedMembers: false,
-                        _editorBrowsableInfo.Compilation,
-                        _editorBrowsableInfo);
+                    var (isBrowsable, isEditorBrowsableStateAdvanced) =
+                        symbol.IsEditorBrowsableWithState(
+                            hideAdvancedMembers: false,
+                            _editorBrowsableInfo.Compilation,
+                            _editorBrowsableInfo
+                        );
 
                     if (!isBrowsable)
                     {
@@ -166,13 +189,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
 
                     var isGeneric = symbol.Arity > 0;
 
-                    // Need to determine if a type is an attribute up front since we want to filter out 
-                    // non-attribute types when in attribute context. We can't do this lazily since we don't hold 
-                    // on to symbols. However, the cost of calling `IsAttribute` on every top-level type symbols 
-                    // is prohibitively high, so we opt for the heuristic that would do the simple textual "Attribute" 
+                    // Need to determine if a type is an attribute up front since we want to filter out
+                    // non-attribute types when in attribute context. We can't do this lazily since we don't hold
+                    // on to symbols. However, the cost of calling `IsAttribute` on every top-level type symbols
+                    // is prohibitively high, so we opt for the heuristic that would do the simple textual "Attribute"
                     // suffix check first, then the more expensive symbolic check. As a result, all unimported
                     // attribute types that don't have "Attribute" suffix would be filtered out when in attribute context.
-                    var isAttribute = symbol.Name.HasAttributeSuffix(isCaseSensitive: false) && symbol.IsAttribute();
+                    var isAttribute =
+                        symbol.Name.HasAttributeSuffix(isCaseSensitive: false)
+                        && symbol.IsAttribute();
 
                     var item = ImportCompletionItem.Create(
                         symbol.Name,
@@ -181,27 +206,40 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                         symbol.GetGlyph(),
                         _genericTypeSuffix,
                         CompletionItemFlags.CachedAndExpanded,
-                        extensionMethodData: null);
+                        extensionMethodData: null
+                    );
 
                     if (isPublic)
                         _publicItemCount++;
 
-                    _itemsBuilder.Add(new TypeImportCompletionItemInfo(item, isPublic, isGeneric, isAttribute, isEditorBrowsableStateAdvanced));
+                    _itemsBuilder.Add(
+                        new TypeImportCompletionItemInfo(
+                            item,
+                            isPublic,
+                            isGeneric,
+                            isAttribute,
+                            isEditorBrowsableStateAdvanced
+                        )
+                    );
                 }
 
-                public void Dispose()
-                    => _itemsBuilder.Free();
+                public void Dispose() => _itemsBuilder.Free();
             }
         }
 
-        [ExportWorkspaceServiceFactory(typeof(IImportCompletionCacheService<CacheEntry, CacheEntry>), ServiceLayer.Editor), Shared]
-        private sealed class CacheServiceFactory : AbstractImportCompletionCacheServiceFactory<CacheEntry, CacheEntry>
+        [
+            ExportWorkspaceServiceFactory(
+                typeof(IImportCompletionCacheService<CacheEntry, CacheEntry>),
+                ServiceLayer.Editor
+            ),
+            Shared
+        ]
+        private sealed class CacheServiceFactory
+            : AbstractImportCompletionCacheServiceFactory<CacheEntry, CacheEntry>
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public CacheServiceFactory()
-            {
-            }
+            public CacheServiceFactory() { }
         }
     }
 }

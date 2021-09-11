@@ -10,22 +10,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         private readonly List<string> _messages = new();
 
-        public IReadOnlyList<string> Messages
-            => _messages;
+        public IReadOnlyList<string> Messages => _messages;
 
-        public void Clear()
-            => _messages.Clear();
+        public void Clear() => _messages.Clear();
 
-        public void WriteInformation(string message)
-            => _messages.Add("info: " + message);
+        public void WriteInformation(string message) => _messages.Add("info: " + message);
 
-        public void WriteVerbose(string message)
-            => _messages.Add("verbose: " + message);
+        public void WriteVerbose(string message) => _messages.Add("verbose: " + message);
 
-        public void WriteWarning(string message)
-            => _messages.Add("warn: " + message);
+        public void WriteWarning(string message) => _messages.Add("warn: " + message);
 
-        public void WriteError(string message)
-            => _messages.Add("error: " + message);
+        public void WriteError(string message) => _messages.Add("error: " + message);
     }
 }

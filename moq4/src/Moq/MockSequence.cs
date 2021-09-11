@@ -8,63 +8,66 @@ using Moq.Language.Flow;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	/// Helper class to setup a full trace between many mocks
 	/// </summary>
-	public class MockSequence
-	{
-		int sequenceStep;
-		int sequenceLength;
+    public class MockSequence
+    {
+        int sequenceStep;
+        int sequenceLength;
 
-		/// <summary>
+        /// <summary>
 		/// Initialize a trace setup
 		/// </summary>
-		public MockSequence()
-		{
-			sequenceLength = 0;
-			sequenceStep = 0;
-		}
+        public MockSequence()
+        {
+            sequenceLength = 0;
+            sequenceStep = 0;
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Allow sequence to be repeated
 		/// </summary>
-		public bool Cyclic { get; set; }
+        public bool Cyclic { get; set; }
 
-		private void NextStep()
-		{
-			sequenceStep++;
-			if (Cyclic)
-				sequenceStep = sequenceStep % sequenceLength;
-		}
+        private void NextStep()
+        {
+            sequenceStep++;
+            if (Cyclic)
+                sequenceStep = sequenceStep % sequenceLength;
+        }
 
-		internal ISetupConditionResult<TMock> For<TMock>(Mock<TMock> mock)
-			where TMock : class
-		{
-			var expectationPosition = sequenceLength++;
+        internal ISetupConditionResult<TMock> For<TMock>(Mock<TMock> mock) where TMock : class
+        {
+            var expectationPosition = sequenceLength++;
 
-			return new WhenPhrase<TMock>(mock, new Condition(
-				condition: () => expectationPosition == sequenceStep,
-				success: NextStep));
-		}
-	}
+            return new WhenPhrase<TMock>(
+                mock,
+                new Condition(
+                    condition: () => expectationPosition == sequenceStep,
+                    success: NextStep
+                )
+            );
+        }
+    }
 
-	/// <summary>
+    /// <summary>
 	/// Contains extension methods that are related to <see cref="MockSequence"/>.
 	/// </summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public static class MockSequenceHelper
-	{
-		/// <summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public static class MockSequenceHelper
+    {
+        /// <summary>
 		/// Perform an expectation in the trace.
 		/// </summary>
-		public static ISetupConditionResult<TMock> InSequence<TMock>(
-			this Mock<TMock> mock,
-			MockSequence sequence)
-			where TMock : class
-		{
-			Guard.NotNull(sequence, nameof(sequence));
+        public static ISetupConditionResult<TMock> InSequence<TMock>(
+            this Mock<TMock> mock,
+            MockSequence sequence
+        ) where TMock : class
+        {
+            Guard.NotNull(sequence, nameof(sequence));
 
-			return sequence.For(mock);
-		}
-	}
+            return sequence.For(mock);
+        }
+    }
 }

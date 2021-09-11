@@ -10,11 +10,16 @@ namespace System.Collections.Specialized.Tests
 {
     public class ListDictionaryKeysTests : ICollection_NonGeneric_Tests
     {
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType => typeof(IndexOutOfRangeException);
-        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType => typeof(IndexOutOfRangeException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType =>
+            typeof(IndexOutOfRangeException);
+        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType =>
+            typeof(IndexOutOfRangeException);
 
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
 
@@ -41,14 +46,18 @@ namespace System.Collections.Specialized.Tests
             return Convert.ToBase64String(bytes);
         }
 
-        protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd) => Debug.Assert(false);
+        protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd) =>
+            Debug.Assert(false);
 
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public override void ICollection_NonGeneric_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(int count)
-        {
+        public override void ICollection_NonGeneric_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(
+            int count
+        ) {
             ICollection collection = NonGenericICollectionFactory(count);
             object[] array = new object[count];
             if (count > 0)
@@ -59,8 +68,9 @@ namespace System.Collections.Specialized.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public override void ICollection_NonGeneric_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(int count)
-        {
+        public override void ICollection_NonGeneric_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(
+            int count
+        ) {
             if (count > 0) // Want the T array to have at least 1 element
             {
                 ICollection collection = NonGenericICollectionFactory(count);
@@ -71,8 +81,9 @@ namespace System.Collections.Specialized.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public override void ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(int count)
-        {
+        public override void ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(
+            int count
+        ) {
             ICollection collection = NonGenericICollectionFactory(count);
             object[] array = new object[count];
             if (count == 0)
@@ -82,7 +93,10 @@ namespace System.Collections.Specialized.Tests
                 return;
             }
 
-            Assert.Throws(ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType, () => collection.CopyTo(array, count + 1));
+            Assert.Throws(
+                ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType,
+                () => collection.CopyTo(array, count + 1)
+            );
         }
 
         [Theory]
@@ -94,7 +108,11 @@ namespace System.Collections.Specialized.Tests
 
             ICollection collection = NonGenericICollectionFactory(count);
 
-            Array arr = Array.CreateInstance(typeof(object), new int[1] { count }, new int[1] { 2 });
+            Array arr = Array.CreateInstance(
+                typeof(object),
+                new int[1] { count },
+                new int[1] { 2 }
+            );
             Assert.Equal(1, arr.Rank);
             Assert.Equal(2, arr.GetLowerBound(0));
             if (count == 0)
@@ -104,7 +122,10 @@ namespace System.Collections.Specialized.Tests
                 return;
             }
 
-            Assert.Throws(ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType, () => collection.CopyTo(arr, 0));
+            Assert.Throws(
+                ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType,
+                () => collection.CopyTo(arr, 0)
+            );
         }
     }
 }

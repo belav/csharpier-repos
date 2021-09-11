@@ -12,15 +12,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class WhileKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public WhileKeywordRecommender()
-            : base(SyntaxKind.WhileKeyword)
-        {
-        }
+        public WhileKeywordRecommender() : base(SyntaxKind.WhileKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            if (context.IsStatementContext ||
-                context.IsGlobalStatementContext)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            if (context.IsStatementContext || context.IsGlobalStatementContext)
             {
                 return true;
             }
@@ -32,17 +31,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             // } w|
 
             // Note: the case of
-            //   do 
+            //   do
             //     Goo();
             //   |
             // is taken care of in the IsStatementContext case.
 
             var token = context.TargetToken;
 
-            if (token.Kind() == SyntaxKind.CloseBraceToken &&
-                token.Parent.IsKind(SyntaxKind.Block) &&
-                token.Parent.IsParentKind(SyntaxKind.DoStatement))
-            {
+            if (
+                token.Kind() == SyntaxKind.CloseBraceToken
+                && token.Parent.IsKind(SyntaxKind.Block)
+                && token.Parent.IsParentKind(SyntaxKind.DoStatement)
+            ) {
                 return true;
             }
 

@@ -17,24 +17,24 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
     {
         private DefaultKeyRing _keyRing = new DefaultKeyRing();
 
-        public ProtectedUserStoreTest(ScratchDatabaseFixture fixture)
-            : base(fixture)
-        { }
+        public ProtectedUserStoreTest(ScratchDatabaseFixture fixture) : base(fixture) { }
 
         protected override void SetupAddIdentity(IServiceCollection services)
         {
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            {
-                options.Stores.ProtectPersonalData = true;
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.User.AllowedUserNameCharacters = null;
-            })
-            .AddDefaultTokenProviders()
-            .AddEntityFrameworkStores<TestDbContext>()
-            .AddPersonalDataProtection<SillyEncryptor, DefaultKeyRing>();
+            services.AddIdentity<IdentityUser, IdentityRole>(
+                    options =>
+                    {
+                        options.Stores.ProtectPersonalData = true;
+                        options.Password.RequireDigit = false;
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireUppercase = false;
+                        options.User.AllowedUserNameCharacters = null;
+                    }
+                )
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<TestDbContext>()
+                .AddPersonalDataProtection<SillyEncryptor, DefaultKeyRing>();
         }
 
         public class DefaultKeyRing : ILookupProtectorKeyRing
@@ -65,8 +65,7 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                 return data.Substring(pad.Length);
             }
 
-            public string Protect(string keyId, string data)
-                => _keyRing[keyId] + data;
+            public string Protect(string keyId, string data) => _keyRing[keyId] + data;
         }
 
         /// <summary>
@@ -88,7 +87,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             IdentityResultAssert.IsSuccess(await manager.AddLoginAsync(user, login));
 
             Assert.Equal(user, await manager.FindByEmailAsync("hao@hao.com"));
-            Assert.Equal(user, await manager.FindByLoginAsync(login.LoginProvider, login.ProviderKey));
+            Assert.Equal(
+                user,
+                await manager.FindByLoginAsync(login.LoginProvider, login.ProviderKey)
+            );
 
             IdentityResultAssert.IsSuccess(await manager.SetUserNameAsync(user, newName));
             IdentityResultAssert.IsSuccess(await manager.UpdateAsync(user));
@@ -97,7 +99,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             DefaultKeyRing.Current = "NewPad";
             Assert.NotNull(await manager.FindByNameAsync(newName));
             Assert.Equal(user, await manager.FindByEmailAsync("hao@hao.com"));
-            Assert.Equal(user, await manager.FindByLoginAsync(login.LoginProvider, login.ProviderKey));
+            Assert.Equal(
+                user,
+                await manager.FindByLoginAsync(login.LoginProvider, login.ProviderKey)
+            );
             Assert.Equal("123-456-7890", await manager.GetPhoneNumberAsync(user));
         }
 
@@ -105,11 +110,9 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             public InkProtector() { }
 
-            public string Unprotect(string keyId, string data)
-                => data?.Substring(4);
+            public string Unprotect(string keyId, string data) => data?.Substring(4);
 
-            public string Protect(string keyId, string data)
-                => "ink:" + data;
+            public string Protect(string keyId, string data) => "ink:" + data;
         }
 
         private class CustomUser : IdentityUser
@@ -143,14 +146,19 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             return false;
         }
 
-        private bool FindAuthenticatorKeyInk(DbConnection conn, string id)
-            => FindTokenInk(conn, id, "[AspNetUserStore]", "AuthenticatorKey");
+        private bool FindAuthenticatorKeyInk(DbConnection conn, string id) =>
+            FindTokenInk(conn, id, "[AspNetUserStore]", "AuthenticatorKey");
 
-        private bool FindTokenInk(DbConnection conn, string id, string loginProvider, string tokenName)
-        {
+        private bool FindTokenInk(
+            DbConnection conn,
+            string id,
+            string loginProvider,
+            string tokenName
+        ) {
             using (var command = conn.CreateCommand())
             {
-                command.CommandText = $"SELECT u.Value FROM AspNetUserTokens u WHERE u.LoginProvider = '{loginProvider}' AND u.Name = '{tokenName}' AND u.UserId = '{id}'";
+                command.CommandText =
+                    $"SELECT u.Value FROM AspNetUserTokens u WHERE u.LoginProvider = '{loginProvider}' AND u.Name = '{tokenName}' AND u.UserId = '{id}'";
                 command.CommandType = System.Data.CommandType.Text;
                 using (var reader = command.ExecuteReader())
                 {
@@ -169,16 +177,16 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         /// </summary>
         /// <returns>Task</returns>
         [Fact]
-        public Task CustomPersonalDataPropertiesCanBeProtected()
-            => CustomPersonalDataPropertiesAreProtected<ProtectedIdentityDbContext>(true);
+        public Task CustomPersonalDataPropertiesCanBeProtected() =>
+            CustomPersonalDataPropertiesAreProtected<ProtectedIdentityDbContext>(true);
 
         /// <summary>
         /// Test.
         /// </summary>
         /// <returns>Task</returns>
         [Fact]
-        public Task CustomPersonalDataPropertiesCanBeNotProtected()
-            => CustomPersonalDataPropertiesAreProtected<UnprotectedIdentityDbContext>(false);
+        public Task CustomPersonalDataPropertiesCanBeNotProtected() =>
+            CustomPersonalDataPropertiesAreProtected<UnprotectedIdentityDbContext>(false);
 
         private async Task CustomPersonalDataPropertiesAreProtected<TContext>(bool protect)
             where TContext : DbContext
@@ -186,10 +194,12 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             using (var connection = new SqliteConnection($"DataSource=D{Guid.NewGuid()}.db"))
             {
                 var services = new ServiceCollection().AddLogging();
-                services.AddIdentity<CustomUser, IdentityRole>(options =>
-                {
-                    options.Stores.ProtectPersonalData = protect;
-                })
+                services.AddIdentity<CustomUser, IdentityRole>(
+                        options =>
+                        {
+                            options.Stores.ProtectPersonalData = protect;
+                        }
+                    )
                     .AddEntityFrameworkStores<TContext>()
                     .AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
 
@@ -219,7 +229,14 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                     IdentityResultAssert.IsSuccess(await manager.UpdateAsync(user));
 
                     IdentityResultAssert.IsSuccess(await manager.ResetAuthenticatorKeyAsync(user));
-                    IdentityResultAssert.IsSuccess(await manager.SetAuthenticationTokenAsync(user, "loginProvider", "token", "value"));
+                    IdentityResultAssert.IsSuccess(
+                        await manager.SetAuthenticationTokenAsync(
+                            user,
+                            "loginProvider",
+                            "token",
+                            "value"
+                        )
+                    );
 
                     connection.Open();
                     if (protect)
@@ -254,18 +271,16 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
 
         private class ProtectedIdentityDbContext : IdentityDbContext<CustomUser>
         {
-            public ProtectedIdentityDbContext(DbContextOptions<ProtectedIdentityDbContext> options)
-                : base(options)
-                {
-                }
+            public ProtectedIdentityDbContext(
+                DbContextOptions<ProtectedIdentityDbContext> options
+            ) : base(options) { }
         }
 
         private class UnprotectedIdentityDbContext : IdentityDbContext<CustomUser>
         {
-            public UnprotectedIdentityDbContext(DbContextOptions<UnprotectedIdentityDbContext> options)
-                : base(options)
-            {
-            }
+            public UnprotectedIdentityDbContext(
+                DbContextOptions<UnprotectedIdentityDbContext> options
+            ) : base(options) { }
         }
 
         private class InvalidUser : IdentityUser
@@ -283,17 +298,21 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             using (var scratch = new ScratchDatabaseFixture())
             {
                 var services = new ServiceCollection().AddLogging();
-                services.AddIdentity<CustomUser, IdentityRole>(options =>
-                {
-                    options.Stores.ProtectPersonalData = true;
-                })
+                services.AddIdentity<CustomUser, IdentityRole>(
+                        options =>
+                        {
+                            options.Stores.ProtectPersonalData = true;
+                        }
+                    )
                     .AddEntityFrameworkStores<IdentityDbContext<CustomUser>>()
                     .AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
-                var dbOptions = new DbContextOptionsBuilder().UseSqlite(scratch.Connection)
-                    .UseApplicationServiceProvider(services.BuildServiceProvider())
-                    .Options;
+                var dbOptions =
+                    new DbContextOptionsBuilder().UseSqlite(scratch.Connection)
+                        .UseApplicationServiceProvider(services.BuildServiceProvider()).Options;
                 var dbContext = new IdentityDbContext<InvalidUser>(dbOptions);
-                var e = Assert.Throws<InvalidOperationException>(() => dbContext.Database.EnsureCreated());
+                var e = Assert.Throws<InvalidOperationException>(
+                    () => dbContext.Database.EnsureCreated()
+                );
                 Assert.Equal("[ProtectedPersonalData] only works strings by default.", e.Message);
             }
         }
@@ -303,8 +322,6 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         /// </summary>
         /// <returns>Task</returns>
         [Fact]
-        public override Task CanFindUsersViaUserQuerable()
-            => Task.CompletedTask;
-
+        public override Task CanFindUsersViaUserQuerable() => Task.CompletedTask;
     }
 }

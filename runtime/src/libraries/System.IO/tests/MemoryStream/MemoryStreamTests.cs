@@ -10,12 +10,14 @@ namespace System.IO.Tests
     public class MemoryStreamTests : StandaloneStreamConformanceTests
     {
         protected override Task<Stream> CreateReadOnlyStreamCore(byte[] initialData) =>
-            Task.FromResult<Stream>(new MemoryStream(initialData ?? Array.Empty<byte>(), writable: false));
+            Task.FromResult<Stream>(
+                new MemoryStream(initialData ?? Array.Empty<byte>(), writable: false)
+            );
 
         protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
             Task.FromResult<Stream>(
-                initialData != null ? new MemoryStream(initialData) :
-                new MemoryStream());
+                initialData != null ? new MemoryStream(initialData) : new MemoryStream()
+            );
 
         protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>
             Task.FromResult<Stream>(null);
@@ -26,7 +28,19 @@ namespace System.IO.Tests
             using (MemoryStream ms2 = new MemoryStream())
             {
                 byte[] bytArrRet;
-                byte[] bytArr = new byte[] { byte.MinValue, byte.MaxValue, 1, 2, 3, 4, 5, 6, 128, 250 };
+                byte[] bytArr = new byte[]
+                {
+                    byte.MinValue,
+                    byte.MaxValue,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    128,
+                    250
+                };
 
                 // [] Write to FileStream, check the filestream
                 ms2.Write(bytArr, 0, bytArr.Length);
@@ -50,7 +64,19 @@ namespace System.IO.Tests
             using (MemoryStream ms3 = new MemoryStream())
             {
                 byte[] bytArrRet;
-                byte[] bytArr = new byte[] { byte.MinValue, byte.MaxValue, 1, 2, 3, 4, 5, 6, 128, 250 };
+                byte[] bytArr = new byte[]
+                {
+                    byte.MinValue,
+                    byte.MaxValue,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    128,
+                    250
+                };
 
                 ms2.Write(bytArr, 0, bytArr.Length);
                 ms2.WriteTo(ms3);
@@ -118,8 +144,10 @@ namespace System.IO.Tests
 
         private class ReadWriteOverridingMemoryStream : MemoryStream
         {
-            public bool ReadArrayInvoked, WriteArrayInvoked;
-            public bool ReadAsyncArrayInvoked, WriteAsyncArrayInvoked;
+            public bool ReadArrayInvoked,
+                WriteArrayInvoked;
+            public bool ReadAsyncArrayInvoked,
+                WriteAsyncArrayInvoked;
 
             public override int Read(byte[] buffer, int offset, int count)
             {
@@ -133,14 +161,22 @@ namespace System.IO.Tests
                 base.Write(buffer, offset, count);
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            {
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            ) {
                 ReadAsyncArrayInvoked = true;
                 return base.ReadAsync(buffer, offset, count, cancellationToken);
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            {
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            ) {
                 WriteAsyncArrayInvoked = true;
                 return base.WriteAsync(buffer, offset, count, cancellationToken);
             }

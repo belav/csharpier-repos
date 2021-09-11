@@ -15,10 +15,12 @@ namespace Microsoft.CodeAnalysis.AddParameter
         public CodeFixData(
             IMethodSymbol method,
             Func<CancellationToken, Task<Solution>> createChangedSolutionNonCascading,
-            Func<CancellationToken, Task<Solution>> createChangedSolutionCascading)
-        {
+            Func<CancellationToken, Task<Solution>> createChangedSolutionCascading
+        ) {
             Method = method ?? throw new ArgumentNullException(nameof(method));
-            CreateChangedSolutionNonCascading = createChangedSolutionNonCascading ?? throw new ArgumentNullException(nameof(createChangedSolutionNonCascading));
+            CreateChangedSolutionNonCascading =
+                createChangedSolutionNonCascading
+                ?? throw new ArgumentNullException(nameof(createChangedSolutionNonCascading));
             CreateChangedSolutionCascading = createChangedSolutionCascading;
         }
 

@@ -8,7 +8,10 @@ using Xunit;
 
 namespace System.Net.Http.Enterprise.Tests
 {
-    [ConditionalClass(typeof(EnterpriseTestConfiguration), nameof(EnterpriseTestConfiguration.Enabled))]
+    [ConditionalClass(
+        typeof(EnterpriseTestConfiguration),
+        nameof(EnterpriseTestConfiguration.Enabled)
+    )]
     public class HttpClientAuthenticationTest
     {
         [Theory]
@@ -32,7 +35,9 @@ namespace System.Net.Http.Enterprise.Tests
             handler.Credentials = EnterpriseTestConfiguration.InvalidNetworkCredentials;
             using var client = new HttpClient(handler);
 
-            using HttpResponseMessage response = await client.GetAsync(EnterpriseTestConfiguration.NegotiateAuthWebServer);
+            using HttpResponseMessage response = await client.GetAsync(
+                EnterpriseTestConfiguration.NegotiateAuthWebServer
+            );
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
     }

@@ -29,13 +29,18 @@ namespace Microsoft.AspNetCore.Testing
             set => TestApplicationErrorLogger.ThrowOnUngracefulShutdown = value;
         }
 
-        public List<Type> IgnoredCriticalLogExceptions => TestApplicationErrorLogger.IgnoredExceptions;
+        public List<Type> IgnoredCriticalLogExceptions =>
+            TestApplicationErrorLogger.IgnoredExceptions;
 
-        public Task<LogMessage> WaitForLogMessage(Func<LogMessage, bool> messageFilter)
-            => TestApplicationErrorLogger.WaitForMessage(messageFilter);
+        public Task<LogMessage> WaitForLogMessage(Func<LogMessage, bool> messageFilter) =>
+            TestApplicationErrorLogger.WaitForMessage(messageFilter);
 
-        public override void Initialize(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
-        {
+        public override void Initialize(
+            TestContext context,
+            MethodInfo methodInfo,
+            object[] testMethodArguments,
+            ITestOutputHelper testOutputHelper
+        ) {
             base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 
             TestApplicationErrorLogger = new TestApplicationErrorLogger();

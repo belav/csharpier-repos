@@ -24,16 +24,22 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 // ProblemDetailsFactory depends on the ApiBehaviorOptions instance. We intentionally avoid constructor injecting
                 // it in this options setup to to avoid a DI cycle.
-                _problemDetailsFactory ??= context.HttpContext.RequestServices.GetRequiredService<ProblemDetailsFactory>();
+                _problemDetailsFactory ??=
+                    context.HttpContext.RequestServices.GetRequiredService<ProblemDetailsFactory>();
                 return ProblemDetailsInvalidModelStateResponse(_problemDetailsFactory, context);
             };
 
             ConfigureClientErrorMapping(options);
         }
 
-        internal static IActionResult ProblemDetailsInvalidModelStateResponse(ProblemDetailsFactory problemDetailsFactory, ActionContext context)
-        {
-            var problemDetails = problemDetailsFactory.CreateValidationProblemDetails(context.HttpContext, context.ModelState);
+        internal static IActionResult ProblemDetailsInvalidModelStateResponse(
+            ProblemDetailsFactory problemDetailsFactory,
+            ActionContext context
+        ) {
+            var problemDetails = problemDetailsFactory.CreateValidationProblemDetails(
+                context.HttpContext,
+                context.ModelState
+            );
             ObjectResult result;
             if (problemDetails.Status == 400)
             {
@@ -42,10 +48,7 @@ namespace Microsoft.Extensions.DependencyInjection
             }
             else
             {
-                result = new ObjectResult(problemDetails)
-                {
-                    StatusCode = problemDetails.Status,
-                };
+                result = new ObjectResult(problemDetails) { StatusCode = problemDetails.Status, };
             }
             result.ContentTypes.Add("application/problem+json");
             result.ContentTypes.Add("application/problem+xml");

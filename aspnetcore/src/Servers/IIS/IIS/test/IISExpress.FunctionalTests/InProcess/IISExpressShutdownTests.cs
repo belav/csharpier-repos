@@ -17,10 +17,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class IISExpressShutdownTests : IISFunctionalTestBase
     {
-
-        public IISExpressShutdownTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public IISExpressShutdownTests(PublishedSitesFixture fixture) : base(fixture) { }
 
         [ConditionalFact]
         public async Task ServerShutsDownWhenMainExits()
@@ -39,7 +36,6 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             deploymentResult.AssertWorkerProcessStop();
         }
 
-
         [ConditionalFact]
         [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/28993")]
         public async Task ServerShutsDownWhenMainExitsStress()
@@ -47,17 +43,26 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             var parameters = Fixture.GetBaseDeploymentParameters();
             var deploymentResult = await StartAsync(parameters);
 
-            var load = Helpers.StressLoad(deploymentResult.HttpClient, "/HelloWorld", response => {
-                var statusCode = (int)response.StatusCode;
-                Assert.True(statusCode == 200 || statusCode == 503, "Status code was " + statusCode);
-            });
+            var load = Helpers.StressLoad(
+                deploymentResult.HttpClient,
+                "/HelloWorld",
+                response =>
+                {
+                    var statusCode = (int)response.StatusCode;
+                    Assert.True(
+                        statusCode == 200 || statusCode == 503,
+                        "Status code was " + statusCode
+                    );
+                }
+            );
 
             try
             {
                 await deploymentResult.HttpClient.GetAsync("/Shutdown");
                 await load;
             }
-            catch (HttpRequestException ex) when (ex.InnerException is IOException | ex.InnerException is SocketException)
+            catch (HttpRequestException ex)
+                when (ex.InnerException is IOException | ex.InnerException is SocketException)
             {
                 // Server might close a connection before request completes
             }
@@ -66,7 +71,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         public async Task GracefulShutdown_DoesNotCrashProcess()
         {
             var parameters = Fixture.GetBaseDeploymentParameters();

@@ -12,35 +12,53 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class TestRelationalTypeMappingSource : RelationalTypeMappingSource
     {
-        private static readonly RelationalTypeMapping _string
-            = new StringTypeMapping("just_string(2000)");
+        private static readonly RelationalTypeMapping _string = new StringTypeMapping(
+            "just_string(2000)"
+        );
 
-        private static readonly RelationalTypeMapping _binary
-            = new ByteArrayTypeMapping("just_binary(max)", dbType: DbType.Binary);
+        private static readonly RelationalTypeMapping _binary = new ByteArrayTypeMapping(
+            "just_binary(max)",
+            dbType: DbType.Binary
+        );
 
-        private static readonly RelationalTypeMapping _rowversion
-            = new ByteArrayTypeMapping("rowversion", dbType: DbType.Binary, size: 8);
+        private static readonly RelationalTypeMapping _rowversion = new ByteArrayTypeMapping(
+            "rowversion",
+            dbType: DbType.Binary,
+            size: 8
+        );
 
-        private static readonly RelationalTypeMapping _defaultIntMapping
-            = new IntTypeMapping("default_int_mapping", dbType: DbType.Int32);
+        private static readonly RelationalTypeMapping _defaultIntMapping = new IntTypeMapping(
+            "default_int_mapping",
+            dbType: DbType.Int32
+        );
 
-        private static readonly RelationalTypeMapping _defaultCharMapping
-            = new CharTypeMapping("default_char_mapping", dbType: DbType.Int32);
+        private static readonly RelationalTypeMapping _defaultCharMapping = new CharTypeMapping(
+            "default_char_mapping",
+            dbType: DbType.Int32
+        );
 
-        private static readonly RelationalTypeMapping _defaultLongMapping
-            = new LongTypeMapping("default_long_mapping", dbType: DbType.Int64);
+        private static readonly RelationalTypeMapping _defaultLongMapping = new LongTypeMapping(
+            "default_long_mapping",
+            dbType: DbType.Int64
+        );
 
-        private static readonly RelationalTypeMapping _defaultShortMapping
-            = new ShortTypeMapping("default_short_mapping", dbType: DbType.Int16);
+        private static readonly RelationalTypeMapping _defaultShortMapping = new ShortTypeMapping(
+            "default_short_mapping",
+            dbType: DbType.Int16
+        );
 
-        private static readonly RelationalTypeMapping _defaultByteMapping
-            = new ByteTypeMapping("default_byte_mapping", dbType: DbType.Byte);
+        private static readonly RelationalTypeMapping _defaultByteMapping = new ByteTypeMapping(
+            "default_byte_mapping",
+            dbType: DbType.Byte
+        );
 
-        private static readonly RelationalTypeMapping _defaultBoolMapping
-            = new BoolTypeMapping("default_bool_mapping");
+        private static readonly RelationalTypeMapping _defaultBoolMapping = new BoolTypeMapping(
+            "default_bool_mapping"
+        );
 
-        private static readonly RelationalTypeMapping _someIntMapping
-            = new IntTypeMapping("some_int_mapping");
+        private static readonly RelationalTypeMapping _someIntMapping = new IntTypeMapping(
+            "some_int_mapping"
+        );
 
         private class IntArrayTypeMapping : RelationalTypeMapping
         {
@@ -53,46 +71,49 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                             new ValueComparer<int[]>(
                                 (v1, v2) => v1.SequenceEqual(v2),
                                 v => v.Aggregate(0, (t, e) => (t * 397) ^ e),
-                                v => v.ToArray())),
-                        "some_int_array_mapping"))
-            {
-            }
+                                v => v.ToArray()
+                            )
+                        ),
+                        "some_int_array_mapping"
+                    )
+                ) { }
 
             private IntArrayTypeMapping(RelationalTypeMappingParameters parameters)
-                : base(parameters)
-            {
-            }
+                : base(parameters) { }
 
-            protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-                => new IntArrayTypeMapping(parameters);
+            protected override RelationalTypeMapping Clone(
+                RelationalTypeMappingParameters parameters
+            ) => new IntArrayTypeMapping(parameters);
         }
 
-        private static readonly RelationalTypeMapping _intArray
-            = new IntArrayTypeMapping();
+        private static readonly RelationalTypeMapping _intArray = new IntArrayTypeMapping();
 
-        private static readonly RelationalTypeMapping _defaultDecimalMapping
-            = new DecimalTypeMapping("default_decimal_mapping");
+        private static readonly RelationalTypeMapping _defaultDecimalMapping =
+            new DecimalTypeMapping("default_decimal_mapping");
 
-        private static readonly RelationalTypeMapping _defaultDateTimeMapping
-            = new DateTimeTypeMapping("default_datetime_mapping", dbType: DbType.DateTime2);
+        private static readonly RelationalTypeMapping _defaultDateTimeMapping =
+            new DateTimeTypeMapping("default_datetime_mapping", dbType: DbType.DateTime2);
 
-        private static readonly RelationalTypeMapping _defaultDoubleMapping
-            = new DoubleTypeMapping("default_double_mapping");
+        private static readonly RelationalTypeMapping _defaultDoubleMapping = new DoubleTypeMapping(
+            "default_double_mapping"
+        );
 
-        private static readonly RelationalTypeMapping _defaultDateTimeOffsetMapping
-            = new DateTimeOffsetTypeMapping("default_datetimeoffset_mapping");
+        private static readonly RelationalTypeMapping _defaultDateTimeOffsetMapping =
+            new DateTimeOffsetTypeMapping("default_datetimeoffset_mapping");
 
-        private static readonly RelationalTypeMapping _defaultFloatMapping
-            = new FloatTypeMapping("default_float_mapping");
+        private static readonly RelationalTypeMapping _defaultFloatMapping = new FloatTypeMapping(
+            "default_float_mapping"
+        );
 
-        private static readonly RelationalTypeMapping _defaultGuidMapping
-            = new GuidTypeMapping("default_guid_mapping");
+        private static readonly RelationalTypeMapping _defaultGuidMapping = new GuidTypeMapping(
+            "default_guid_mapping"
+        );
 
-        private static readonly RelationalTypeMapping _defaultTimeSpanMapping
-            = new TimeSpanTypeMapping("default_timespan_mapping");
+        private static readonly RelationalTypeMapping _defaultTimeSpanMapping =
+            new TimeSpanTypeMapping("default_timespan_mapping");
 
-        private readonly IReadOnlyDictionary<Type, RelationalTypeMapping> _simpleMappings
-            = new Dictionary<Type, RelationalTypeMapping>
+        private readonly IReadOnlyDictionary<Type, RelationalTypeMapping> _simpleMappings =
+            new Dictionary<Type, RelationalTypeMapping>
             {
                 { typeof(int), _defaultIntMapping },
                 { typeof(long), _defaultLongMapping },
@@ -111,8 +132,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 { typeof(int[]), _intArray }
             };
 
-        private readonly IReadOnlyDictionary<string, RelationalTypeMapping> _simpleNameMappings
-            = new Dictionary<string, RelationalTypeMapping>
+        private readonly IReadOnlyDictionary<string, RelationalTypeMapping> _simpleNameMappings =
+            new Dictionary<string, RelationalTypeMapping>
             {
                 { "some_int_mapping", _someIntMapping },
                 { "some_string(max)", _string },
@@ -123,10 +144,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public TestRelationalTypeMappingSource(
             TypeMappingSourceDependencies dependencies,
-            RelationalTypeMappingSourceDependencies relationalDependencies)
-            : base(dependencies, relationalDependencies)
-        {
-        }
+            RelationalTypeMappingSourceDependencies relationalDependencies
+        ) : base(dependencies, relationalDependencies) { }
 
         private class TestStringTypeMapping : StringTypeMapping
         {
@@ -135,31 +154,32 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 DbType? dbType,
                 bool unicode = false,
                 int? size = null,
-                bool fixedLength = false)
-                : base(
-                    new RelationalTypeMappingParameters(
-                        new CoreTypeMappingParameters(typeof(string)),
-                        storeType,
-                        StoreTypePostfix.None,
-                        dbType,
-                        unicode,
-                        size,
-                        fixedLength))
-            {
-            }
+                bool fixedLength = false
+            ) : base(
+                new RelationalTypeMappingParameters(
+                    new CoreTypeMappingParameters(typeof(string)),
+                    storeType,
+                    StoreTypePostfix.None,
+                    dbType,
+                    unicode,
+                    size,
+                    fixedLength
+                )
+            ) { }
 
             protected override string ProcessStoreType(
                 RelationalTypeMappingParameters parameters,
                 string storeType,
-                string storeTypeNameBase)
-                => storeTypeNameBase == "some_string"
-                    && parameters.Size != null
-                        ? $"({parameters.Size})some_string"
-                        : storeType;
+                string storeTypeNameBase
+            ) =>
+                storeTypeNameBase == "some_string" && parameters.Size != null
+                    ? $"({parameters.Size})some_string"
+                    : storeType;
         }
 
-        protected override RelationalTypeMapping FindMapping(in RelationalTypeMappingInfo mappingInfo)
-        {
+        protected override RelationalTypeMapping FindMapping(
+            in RelationalTypeMappingInfo mappingInfo
+        ) {
             var clrType = mappingInfo.ClrType;
             var storeTypeName = mappingInfo.StoreTypeName;
 
@@ -169,15 +189,20 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 {
                     var isAnsi = mappingInfo.IsUnicode == false;
                     var isFixedLength = mappingInfo.IsFixedLength == true;
-                    var baseName = (isAnsi ? "ansi_" : "just_") + (isFixedLength ? "string_fixed" : "string");
-                    var size = mappingInfo.Size ?? (mappingInfo.IsKeyOrIndex ? (int?)(isAnsi ? 900 : 450) : null);
+                    var baseName =
+                        (isAnsi ? "ansi_" : "just_") + (isFixedLength ? "string_fixed" : "string");
+                    var size =
+                        mappingInfo.Size
+                        ?? (mappingInfo.IsKeyOrIndex ? (int?)(isAnsi ? 900 : 450) : null);
 
                     return new TestStringTypeMapping(
-                        storeTypeName ?? baseName + "(" + (size == null ? "max" : size.ToString()) + ")",
+                        storeTypeName
+                            ?? baseName + "(" + (size == null ? "max" : size.ToString()) + ")",
                         isAnsi ? DbType.AnsiString : (DbType?)null,
                         !isAnsi,
                         size,
-                        isFixedLength);
+                        isFixedLength
+                    );
                 }
 
                 if (clrType == typeof(byte[]))
@@ -192,19 +217,24 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
                     return new ByteArrayTypeMapping(
                         storeTypeName
-                        ?? (isFixedLength ? "just_binary_fixed(" : "just_binary(") + (size == null ? "max" : size.ToString()) + ")",
+                            ?? (isFixedLength ? "just_binary_fixed(" : "just_binary(")
+                                + (size == null ? "max" : size.ToString())
+                                + ")",
                         DbType.Binary,
-                        size);
+                        size
+                    );
                 }
 
-                if (clrType == typeof(decimal)
-                    && !string.Equals("money", storeTypeName, StringComparison.Ordinal))
-                {
+                if (
+                    clrType == typeof(decimal)
+                    && !string.Equals("money", storeTypeName, StringComparison.Ordinal)
+                ) {
                     var precision = mappingInfo.Precision;
                     var scale = mappingInfo.Scale;
-                    if (precision == _defaultDecimalMapping.Precision
-                        && scale == _defaultDecimalMapping.Scale)
-                    {
+                    if (
+                        precision == _defaultDecimalMapping.Precision
+                        && scale == _defaultDecimalMapping.Scale
+                    ) {
                         return _defaultDecimalMapping;
                     }
 
@@ -212,29 +242,31 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     {
                         return new DecimalTypeMapping(
                             "decimal_mapping(" + precision + ")",
-                            precision: precision);
+                            precision: precision
+                        );
                     }
 
                     return new DecimalTypeMapping(
                         "decimal_mapping(" + precision + "," + scale + ")",
                         precision: precision,
-                        scale: scale);
+                        scale: scale
+                    );
                 }
 
                 if (_simpleMappings.TryGetValue(clrType, out var mapping))
                 {
                     return storeTypeName != null
-                        && !mapping.StoreType.Equals(storeTypeName, StringComparison.Ordinal)
-                            ? mapping.Clone(storeTypeName, mapping.Size)
-                            : mapping;
+                    && !mapping.StoreType.Equals(storeTypeName, StringComparison.Ordinal)
+                        ? mapping.Clone(storeTypeName, mapping.Size)
+                        : mapping;
                 }
             }
 
             return storeTypeName != null
-                && _simpleNameMappings.TryGetValue(storeTypeName, out var mappingFromName)
-                && (clrType == null || mappingFromName.ClrType == clrType)
-                    ? mappingFromName
-                    : null;
+            && _simpleNameMappings.TryGetValue(storeTypeName, out var mappingFromName)
+            && (clrType == null || mappingFromName.ClrType == clrType)
+                ? mappingFromName
+                : null;
         }
 
         protected override string ParseStoreTypeName(
@@ -242,13 +274,23 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             out bool? unicode,
             out int? size,
             out int? precision,
-            out int? scale)
-        {
-            var parsedName = base.ParseStoreTypeName(storeTypeName, out unicode, out size, out precision, out scale);
+            out int? scale
+        ) {
+            var parsedName = base.ParseStoreTypeName(
+                storeTypeName,
+                out unicode,
+                out size,
+                out precision,
+                out scale
+            );
 
-            if (size.HasValue
-                && storeTypeName?.StartsWith("default_decimal_mapping", StringComparison.OrdinalIgnoreCase) == true)
-            {
+            if (
+                size.HasValue
+                && storeTypeName?.StartsWith(
+                    "default_decimal_mapping",
+                    StringComparison.OrdinalIgnoreCase
+                ) == true
+            ) {
                 precision = size;
                 size = null;
                 scale = 0;

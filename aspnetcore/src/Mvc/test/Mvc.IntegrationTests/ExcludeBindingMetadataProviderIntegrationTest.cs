@@ -36,14 +36,18 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(TypesBundle),
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.Form = new FormCollection(new Dictionary<string, StringValues>
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
                 {
-                    { "name", new[] { "Fred" } },
-                    { "type", new[] { "SomeType" } },
-                });
-            });
+                    request.Form = new FormCollection(
+                        new Dictionary<string, StringValues>
+                        {
+                            { "name", new[] { "Fred" } },
+                            { "type", new[] { "SomeType" } },
+                        }
+                    );
+                }
+            );
 
             // Act
             var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -83,20 +87,27 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 }
             }
 
-            var metadataProvider = TestModelMetadataProvider.CreateProvider(options.ModelMetadataDetailsProviders);
+            var metadataProvider = TestModelMetadataProvider.CreateProvider(
+                options.ModelMetadataDetailsProviders
+            );
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
-                    request.Form = new FormCollection(new Dictionary<string, StringValues>
-                    {
-                        { "name", new[] { "Fred" } },
-                        { "type", new[] { "SomeType" } },
-                    });
+                    request.Form = new FormCollection(
+                        new Dictionary<string, StringValues>
+                        {
+                            { "name", new[] { "Fred" } },
+                            { "type", new[] { "SomeType" } },
+                        }
+                    );
                 },
                 metadataProvider: metadataProvider,
-                mvcOptions: options);
+                mvcOptions: options
+            );
 
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "Parameter1",

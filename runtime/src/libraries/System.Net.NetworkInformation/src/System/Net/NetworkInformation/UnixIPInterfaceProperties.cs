@@ -27,18 +27,12 @@ namespace System.Net.NetworkInformation
 
         public override UnicastIPAddressInformationCollection UnicastAddresses
         {
-            get
-            {
-                return _unicastAddresses ?? (_unicastAddresses = GetUnicastAddresses(_uni));
-            }
+            get { return _unicastAddresses ?? (_unicastAddresses = GetUnicastAddresses(_uni)); }
         }
 
         public sealed override MulticastIPAddressInformationCollection MulticastAddresses
         {
-            get
-            {
-                return _multicastAddreses ?? (_multicastAddreses = GetMulticastAddresses(_uni));
-            }
+            get { return _multicastAddreses ?? (_multicastAddreses = GetMulticastAddresses(_uni)); }
         }
 
         public override bool IsDnsEnabled
@@ -47,7 +41,9 @@ namespace System.Net.NetworkInformation
             {
                 if (_dnsAddresses == null)
                 {
-                    throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+                    throw new PlatformNotSupportedException(
+                        SR.net_InformationUnavailableOnPlatform
+                    );
                 }
 
                 return _dnsAddresses.Count > 0;
@@ -60,7 +56,9 @@ namespace System.Net.NetworkInformation
             {
                 if (_dnsSuffix == null)
                 {
-                    throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+                    throw new PlatformNotSupportedException(
+                        SR.net_InformationUnavailableOnPlatform
+                    );
                 }
 
                 return _dnsSuffix;
@@ -73,15 +71,18 @@ namespace System.Net.NetworkInformation
             {
                 if (_dnsAddresses == null)
                 {
-                    throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+                    throw new PlatformNotSupportedException(
+                        SR.net_InformationUnavailableOnPlatform
+                    );
                 }
 
                 return _dnsAddresses;
             }
         }
 
-        private static UnicastIPAddressInformationCollection GetUnicastAddresses(UnixNetworkInterface uni)
-        {
+        private static UnicastIPAddressInformationCollection GetUnicastAddresses(
+            UnixNetworkInterface uni
+        ) {
             var collection = new UnicastIPAddressInformationCollection();
             foreach (UnixUnicastIPAddressInformation address in uni.UnicastAddress)
             {
@@ -91,8 +92,9 @@ namespace System.Net.NetworkInformation
             return collection;
         }
 
-        private static MulticastIPAddressInformationCollection GetMulticastAddresses(UnixNetworkInterface uni)
-        {
+        private static MulticastIPAddressInformationCollection GetMulticastAddresses(
+            UnixNetworkInterface uni
+        ) {
             var collection = new MulticastIPAddressInformationCollection();
 
             if (uni.MulticastAddresess != null)
@@ -110,7 +112,9 @@ namespace System.Net.NetworkInformation
         {
             try
             {
-                return StringParsingHelpers.ParseDnsSuffixFromResolvConfFile(File.ReadAllText(NetworkFiles.EtcResolvConfFile));
+                return StringParsingHelpers.ParseDnsSuffixFromResolvConfFile(
+                    File.ReadAllText(NetworkFiles.EtcResolvConfFile)
+                );
             }
             catch (FileNotFoundException)
             {
@@ -122,7 +126,10 @@ namespace System.Net.NetworkInformation
         {
             try
             {
-                List<IPAddress> internalAddresses = StringParsingHelpers.ParseDnsAddressesFromResolvConfFile(File.ReadAllText(NetworkFiles.EtcResolvConfFile));
+                List<IPAddress> internalAddresses =
+                    StringParsingHelpers.ParseDnsAddressesFromResolvConfFile(
+                        File.ReadAllText(NetworkFiles.EtcResolvConfFile)
+                    );
                 return new InternalIPAddressCollection(internalAddresses);
             }
             catch (FileNotFoundException)

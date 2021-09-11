@@ -63,7 +63,10 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     ++i;
                     if (i >= path.Length)
                     {
-                        throw new JsonPatchException(Resources.FormatInvalidValueForPath(path), null);
+                        throw new JsonPatchException(
+                            Resources.FormatInvalidValueForPath(path),
+                            null
+                        );
                     }
 
                     if (path[i] == '0')
@@ -76,7 +79,10 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                     }
                     else
                     {
-                        throw new JsonPatchException(Resources.FormatInvalidValueForPath(path), null);
+                        throw new JsonPatchException(
+                            Resources.FormatInvalidValueForPath(path),
+                            null
+                        );
                     }
                 }
                 else

@@ -15,16 +15,22 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public ControllerActionEndpointDataSourceFactory(
             ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider,
             IActionDescriptorCollectionProvider actions,
-            ActionEndpointFactory factory)
-        {
+            ActionEndpointFactory factory
+        ) {
             _dataSourceIdProvider = dataSourceIdProvider;
             _actions = actions;
             _factory = factory;
         }
 
-        public ControllerActionEndpointDataSource Create(OrderedEndpointsSequenceProvider orderProvider)
-        {
-            return new ControllerActionEndpointDataSource(_dataSourceIdProvider, _actions, _factory, orderProvider);
+        public ControllerActionEndpointDataSource Create(
+            OrderedEndpointsSequenceProvider orderProvider
+        ) {
+            return new ControllerActionEndpointDataSource(
+                _dataSourceIdProvider,
+                _actions,
+                _factory,
+                orderProvider
+            );
         }
     }
 }

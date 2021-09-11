@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal abstract class SourceUserDefinedOperatorSymbolBase : SourceMemberMethodSymbol
     {
-        private const TypeCompareKind ComparisonForUserDefinedOperators = TypeCompareKind.IgnoreTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes;
+        private const TypeCompareKind ComparisonForUserDefinedOperators =
+            TypeCompareKind.IgnoreTupleNames
+            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes;
         private readonly string _name;
         private readonly bool _isExpressionBodied;
         private ImmutableArray<ParameterSymbol> _lazyParameters;
@@ -30,8 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isExpressionBodied,
             bool isIterator,
             bool isNullableAnalysisEnabled,
-            BindingDiagnosticBag diagnostics) :
-            base(containingType, syntax.GetReference(), location, isIterator: isIterator)
+            BindingDiagnosticBag diagnostics
+        ) : base(containingType, syntax.GetReference(), location, isIterator: isIterator)
         {
             _name = name;
             _isExpressionBodied = isExpressionBodied;
@@ -42,12 +44,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // assume that the return type is non-void; when we do the lazy initialization
             // of the parameters and return type we will update the flag if necessary.
 
-            this.MakeFlags(methodKind, declarationModifiers, returnsVoid: false, isExtensionMethod: false, isNullableAnalysisEnabled: isNullableAnalysisEnabled);
+            this.MakeFlags(
+                methodKind,
+                declarationModifiers,
+                returnsVoid: false,
+                isExtensionMethod: false,
+                isNullableAnalysisEnabled: isNullableAnalysisEnabled
+            );
 
-            if (this.ContainingType.IsInterface &&
-                (methodKind == MethodKind.Conversion || name == WellKnownMemberNames.EqualityOperatorName || name == WellKnownMemberNames.InequalityOperatorName))
-            {
-                // If we have a conversion or equality/inequality operator in an interface, we already have reported that fact as 
+            if (
+                this.ContainingType.IsInterface
+                && (
+                    methodKind == MethodKind.Conversion
+                    || name == WellKnownMemberNames.EqualityOperatorName
+                    || name == WellKnownMemberNames.InequalityOperatorName
+                )
+            ) {
+                // If we have a conversion or equality/inequality operator in an interface, we already have reported that fact as
                 // an error. No need to cascade the error further.
                 return;
             }
@@ -69,7 +82,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 diagnostics.Add(ErrorCode.ERR_OperatorsMustBeStatic, this.Locations[0], this);
             }
 
-            // SPEC: Because an external operator provides no actual implementation, 
+            // SPEC: Because an external operator provides no actual implementation,
             // SPEC: its operator body consists of a semicolon. For expression-bodied
             // SPEC: operators, the body is an expression. For all other operators,
             // SPEC: the operator body consists of a block...
@@ -87,35 +100,51 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             // SPEC: It is an error for the same modifier to appear multiple times in an
             // SPEC: operator declaration.
-            var info = ModifierUtils.CheckAccessibility(this.DeclarationModifiers, this, isExplicitInterfaceImplementation: false);
+            var info = ModifierUtils.CheckAccessibility(
+                this.DeclarationModifiers,
+                this,
+                isExplicitInterfaceImplementation: false
+            );
             if (info != null)
             {
                 diagnostics.Add(info, location);
             }
         }
 
-        protected static DeclarationModifiers MakeDeclarationModifiers(BaseMethodDeclarationSyntax syntax, Location location, BindingDiagnosticBag diagnostics)
-        {
+        protected static DeclarationModifiers MakeDeclarationModifiers(
+            BaseMethodDeclarationSyntax syntax,
+            Location location,
+            BindingDiagnosticBag diagnostics
+        ) {
             var defaultAccess = DeclarationModifiers.Private;
             var allowedModifiers =
-                DeclarationModifiers.AccessibilityMask |
-                DeclarationModifiers.Static |
-                DeclarationModifiers.Extern |
-                DeclarationModifiers.Unsafe;
+                DeclarationModifiers.AccessibilityMask
+                | DeclarationModifiers.Static
+                | DeclarationModifiers.Extern
+                | DeclarationModifiers.Unsafe;
 
             return ModifierUtils.MakeAndCheckNontypeMemberModifiers(
-                syntax.Modifiers, defaultAccess, allowedModifiers, location, diagnostics, modifierErrors: out _);
+                syntax.Modifiers,
+                defaultAccess,
+                allowedModifiers,
+                location,
+                diagnostics,
+                modifierErrors: out _
+            );
         }
 
         protected abstract Location ReturnTypeLocation { get; }
 
-        protected (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(BaseMethodDeclarationSyntax declarationSyntax, TypeSyntax returnTypeSyntax, BindingDiagnosticBag diagnostics)
-        {
+        protected (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(
+            BaseMethodDeclarationSyntax declarationSyntax,
+            TypeSyntax returnTypeSyntax,
+            BindingDiagnosticBag diagnostics
+        ) {
             TypeWithAnnotations returnType;
             ImmutableArray<ParameterSymbol> parameters;
 
-            var binder = this.DeclaringCompilation.
-                GetBinderFactory(declarationSyntax.SyntaxTree).GetBinder(returnTypeSyntax, declarationSyntax, this);
+            var binder = this.DeclaringCompilation.GetBinderFactory(declarationSyntax.SyntaxTree)
+                .GetBinder(returnTypeSyntax, declarationSyntax, this);
 
             SyntaxToken arglistToken;
 
@@ -129,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 allowRefOrOut: true,
                 allowThis: false,
                 addRefReadOnlyModifier: false,
-                diagnostics: diagnostics);
+                diagnostics: diagnostics
+            );
 
             if (arglistToken.Kind() == SyntaxKind.ArgListKeyword)
             {
@@ -137,19 +167,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 // error CS1669: __arglist is not valid in this context
                 diagnostics.Add(ErrorCode.ERR_IllegalVarArgs, new SourceLocation(arglistToken));
-
                 // Regardless of whether __arglist appears in the source code, we do not mark
                 // the operator method as being a varargs method.
             }
 
             returnType = signatureBinder.BindType(returnTypeSyntax, diagnostics);
 
-            // restricted types cannot be returned. 
+            // restricted types cannot be returned.
             // NOTE: Span-like types can be returned (if expression is returnable).
             if (returnType.IsRestrictedType(ignoreSpanLikeTypes: true))
             {
                 // The return type of a method, delegate, or function pointer cannot be '{0}'
-                diagnostics.Add(ErrorCode.ERR_MethodReturnCantBeRefAny, returnTypeSyntax.Location, returnType.Type);
+                diagnostics.Add(
+                    ErrorCode.ERR_MethodReturnCantBeRefAny,
+                    returnTypeSyntax.Location,
+                    returnType.Type
+                );
             }
 
             if (returnType.Type.IsStatic)
@@ -157,7 +190,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // Operators in interfaces was introduced in C# 8, so there's no need to be specially concerned about
                 // maintaining backcompat with the native compiler bug around interfaces.
                 // '{0}': static types cannot be used as return types
-                diagnostics.Add(ErrorFacts.GetStaticClassReturnCode(useWarning: false), returnTypeSyntax.Location, returnType.Type);
+                diagnostics.Add(
+                    ErrorFacts.GetStaticClassReturnCode(useWarning: false),
+                    returnTypeSyntax.Location,
+                    returnType.Type
+                );
             }
 
             return (returnType, parameters);
@@ -169,16 +206,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             this.SetReturnsVoid(_lazyReturnType.IsVoidType());
 
-            // If we have a conversion/equality/inequality operator in an interface or static class then we already 
+            // If we have a conversion/equality/inequality operator in an interface or static class then we already
             // have reported that fact as an error. No need to cascade the error further.
-            if ((this.ContainingType.IsInterfaceType() &&
-                (MethodKind == MethodKind.Conversion || Name == WellKnownMemberNames.EqualityOperatorName || Name == WellKnownMemberNames.InequalityOperatorName)) ||
-                this.ContainingType.IsStatic)
-            {
+            if (
+                (
+                    this.ContainingType.IsInterfaceType()
+                    && (
+                        MethodKind == MethodKind.Conversion
+                        || Name == WellKnownMemberNames.EqualityOperatorName
+                        || Name == WellKnownMemberNames.InequalityOperatorName
+                    )
+                ) || this.ContainingType.IsStatic
+            ) {
                 return;
             }
 
-            // SPEC: All types referenced in an operator declaration must be at least as accessible 
+            // SPEC: All types referenced in an operator declaration must be at least as accessible
             // SPEC: as the operator itself.
 
             CheckEffectiveAccessibility(_lazyReturnType, _lazyParameters, diagnostics);
@@ -186,7 +229,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CheckOperatorSignatures(diagnostics);
         }
 
-        protected abstract (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics);
+        protected abstract (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(
+            BindingDiagnosticBag diagnostics
+        );
 
         private void CheckValueParameters(BindingDiagnosticBag diagnostics)
         {
@@ -203,8 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private void CheckOperatorSignatures(BindingDiagnosticBag diagnostics)
         {
-            // Have we even got the right formal parameter arity? If not then 
-            // we are in an error recovery scenario and we should just bail 
+            // Have we even got the right formal parameter arity? If not then
+            // we are in an error recovery scenario and we should just bail
             // out immediately.
             if (!DoesOperatorHaveCorrectArity(this.Name, this.ParameterCount))
             {
@@ -298,24 +343,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // SPEC: Either S0 or T0 is the class or struct type in which the operator
             // SPEC: declaration takes place.
 
-            if (!MatchesContainingType(source0) &&
-                !MatchesContainingType(target0) &&
+            if (
+                !MatchesContainingType(source0)
+                && !MatchesContainingType(target0)
+                &&
                 // allow conversion between T and Nullable<T> in declaration of Nullable<T>
-                !MatchesContainingType(source) &&
-                !MatchesContainingType(target))
-            {
+                !MatchesContainingType(source)
+                && !MatchesContainingType(target)
+            ) {
                 // CS0556: User-defined conversion must convert to or from the enclosing type
-                diagnostics.Add(ErrorCode.ERR_ConversionNotInvolvingContainedType, this.Locations[0]);
+                diagnostics.Add(
+                    ErrorCode.ERR_ConversionNotInvolvingContainedType,
+                    this.Locations[0]
+                );
                 return;
             }
 
             // SPEC: * S0 and T0 are different types:
 
-            if ((ContainingType.SpecialType == SpecialType.System_Nullable_T)
+            if (
+                (ContainingType.SpecialType == SpecialType.System_Nullable_T)
                     ? source.Equals(target, ComparisonForUserDefinedOperators)
-                    : source0.Equals(target0, ComparisonForUserDefinedOperators))
-            {
-                // CS0555: User-defined operator cannot take an object of the enclosing type 
+                    : source0.Equals(target0, ComparisonForUserDefinedOperators)
+            ) {
+                // CS0555: User-defined operator cannot take an object of the enclosing type
                 // and convert to an object of the enclosing type
                 diagnostics.Add(ErrorCode.ERR_IdentityConversion, this.Locations[0]);
                 return;
@@ -323,8 +374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             // Those are the easy ones. Now we come to:
 
-            // SPEC: 
-            // Excluding user-defined conversions, a conversion does not exist from 
+            // SPEC:
+            // Excluding user-defined conversions, a conversion does not exist from
             // S to T or T to S. For the purposes of these rules, any type parameters
             // associated with S or T are considered to be unique types that have
             // no inheritance relationship with other types, and any constraints on
@@ -340,16 +391,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // is *legal*, even though there is *already* an implicit conversion
             // from U to X<U> because U is constrained to have such a conversion.
             //
-            // In discussing the implications of this rule, let's call the 
+            // In discussing the implications of this rule, let's call the
             // containing type (which may be a class or struct) "C". S and T
-            // are the source and target types.  
+            // are the source and target types.
             //
             // If we have made it this far in the error analysis we already know that
             // exactly one of S and T is C or C? -- if two or zero were, then we'd
-            // have already reported ERR_ConversionNotInvolvingContainedType or 
+            // have already reported ERR_ConversionNotInvolvingContainedType or
             // ERR_IdentityConversion and returned.
             //
-            // WOLOG for the purposes of this discussion let's assume that S is 
+            // WOLOG for the purposes of this discussion let's assume that S is
             // the one that is C or C?, and that T is the one that is neither C nor C?.
             //
             // So the question is: under what circumstances could T-to-S or S-to-T,
@@ -357,29 +408,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             //
             // Let's consider what kinds of types T could be. T cannot be an interface
             // because we've already reported an error and returned if it is. If T is
-            // a delegate, array, enum, pointer, struct or nullable type then there 
-            // is no built-in conversion from T to the user-declared class/struct 
+            // a delegate, array, enum, pointer, struct or nullable type then there
+            // is no built-in conversion from T to the user-declared class/struct
             // C, or to C?. If T is a type parameter, then by assumption the type
             // parameter has no constraints, and therefore is not convertible to
-            // C or C?. 
+            // C or C?.
             //
-            // That leaves T to be a class. We already know that T is not C, (or C?, 
+            // That leaves T to be a class. We already know that T is not C, (or C?,
             // since T is a class) and therefore there is no identity conversion from T to S.
             //
-            // Suppose S is C and C is a class. Then the only way that there can be a 
+            // Suppose S is C and C is a class. Then the only way that there can be a
             // conversion between T and S is if T is a base class of S or S is a base class of T.
             //
             // Suppose S is C and C is a struct. Then the only way that there can be a
             // conversion between T and S is if T is a base class of S. (And T would
             // have to be System.Object or System.ValueType.)
             //
-            // Suppose S is C? and C is a struct. Then the only way that there can be a 
+            // Suppose S is C? and C is a struct. Then the only way that there can be a
             // conversion between T and S is again, if T is a base class of S.
             //
             // Summing up:
             //
             // WOLOG, we assume that T is not C or C?, and S is C or C?. The conversion is
-            // illegal only if T is a class, and either T is a base class of S, or S is a 
+            // illegal only if T is a class, and either T is a base class of S, or S is a
             // base class of T.
 
             if (source.IsDynamic() || target.IsDynamic())
@@ -411,14 +462,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // "same" is the containing class, so it can't be a type parameter
                 Debug.Assert(!same.IsTypeParameter());
 
-                var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(diagnostics, ContainingAssembly);
+                var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
+                    diagnostics,
+                    ContainingAssembly
+                );
 
-                if (same.IsDerivedFrom(different, ComparisonForUserDefinedOperators, useSiteInfo: ref useSiteInfo)) // tomat: ignoreDynamic should be true, but we don't want to introduce breaking change. See bug 605326.
+                if (
+                    same.IsDerivedFrom(
+                        different,
+                        ComparisonForUserDefinedOperators,
+                        useSiteInfo: ref useSiteInfo
+                    )
+                ) // tomat: ignoreDynamic should be true, but we don't want to introduce breaking change. See bug 605326.
                 {
                     // '{0}': user-defined conversions to or from a base type are not allowed
                     diagnostics.Add(ErrorCode.ERR_ConversionWithBase, this.Locations[0], this);
                 }
-                else if (different.IsDerivedFrom(same, ComparisonForUserDefinedOperators, useSiteInfo: ref useSiteInfo)) // tomat: ignoreDynamic should be true, but we don't want to introduce breaking change. See bug 605326.
+                else if (
+                    different.IsDerivedFrom(
+                        same,
+                        ComparisonForUserDefinedOperators,
+                        useSiteInfo: ref useSiteInfo
+                    )
+                ) // tomat: ignoreDynamic should be true, but we don't want to introduce breaking change. See bug 605326.
                 {
                     // '{0}': user-defined conversions to or from a derived type are not allowed
                     diagnostics.Add(ErrorCode.ERR_ConversionWithDerived, this.Locations[0], this);
@@ -474,20 +540,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // here, both because it reports the wrong errors, and because the wording
             // of the error messages is misleading. The native compiler reports two errors:
 
-            // CS0448: The return type for ++ or -- operator must be the 
+            // CS0448: The return type for ++ or -- operator must be the
             //         containing type or derived from the containing type
             //
             // CS0559: The parameter type for ++ or -- operator must be the containing type
             //
-            // Neither error message mentions nullable types. But worse, there is a 
+            // Neither error message mentions nullable types. But worse, there is a
             // situation in which the native compiler reports a misleading error:
             //
             // struct S { public static S operator ++(S? s) { ... } }
             //
             // This reports CS0559, but that is not the error; the *parameter* is perfectly
             // legal. The error is that the return type does not match the parameter type.
-            // 
-            // I have changed the error message to reflect the true error, and we now 
+            //
+            // I have changed the error message to reflect the true error, and we now
             // report 0448, not 0559, in the given scenario. The error is now:
             //
             // CS0448: The return type for ++ or -- operator must match the parameter type
@@ -506,15 +572,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // the return type.
 
             var parameterType = this.GetParameterType(0);
-            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(diagnostics, ContainingAssembly);
+            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
+                diagnostics,
+                ContainingAssembly
+            );
 
             if (!MatchesContainingType(parameterType.StrippedType()))
             {
                 // CS0559: The parameter type for ++ or -- operator must be the containing type
                 diagnostics.Add(ErrorCode.ERR_BadIncDecSignature, this.Locations[0]);
             }
-            else if (!this.ReturnType.EffectiveTypeNoUseSiteDiagnostics.IsEqualToOrDerivedFrom(parameterType, ComparisonForUserDefinedOperators, useSiteInfo: ref useSiteInfo))
-            {
+            else if (
+                !this.ReturnType.EffectiveTypeNoUseSiteDiagnostics.IsEqualToOrDerivedFrom(
+                    parameterType,
+                    ComparisonForUserDefinedOperators,
+                    useSiteInfo: ref useSiteInfo
+                )
+            ) {
                 // CS0448: The return type for ++ or -- operator must match the parameter type
                 //         or be derived from the parameter type
                 diagnostics.Add(ErrorCode.ERR_BadIncDecRetType, this.Locations[0]);
@@ -534,11 +608,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // SPEC: of which must have type T or T? and the second of which must
             // SPEC: have type int or int?, and can return any type.
 
-            if (!MatchesContainingType(this.GetParameterType(0).StrippedType()) ||
-                this.GetParameterType(1).StrippedType().SpecialType != SpecialType.System_Int32)
-            {
-                // CS0546: The first operand of an overloaded shift operator must have the 
-                //         same type as the containing type, and the type of the second 
+            if (
+                !MatchesContainingType(this.GetParameterType(0).StrippedType())
+                || this.GetParameterType(1).StrippedType().SpecialType != SpecialType.System_Int32
+            ) {
+                // CS0546: The first operand of an overloaded shift operator must have the
+                //         same type as the containing type, and the type of the second
                 //         operand must be int
                 diagnostics.Add(ErrorCode.ERR_BadShiftOperatorSignature, this.Locations[0]);
             }
@@ -555,9 +630,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             // SPEC: A binary nonshift operator must take two parameters, at least
             // SPEC: one of which must have the type T or T?, and can return any type.
-            if (!MatchesContainingType(this.GetParameterType(0).StrippedType()) &&
-                !MatchesContainingType(this.GetParameterType(1).StrippedType()))
-            {
+            if (
+                !MatchesContainingType(this.GetParameterType(0).StrippedType())
+                && !MatchesContainingType(this.GetParameterType(1).StrippedType())
+            ) {
                 // CS0563: One of the parameters of a binary operator must be the containing type
                 diagnostics.Add(ErrorCode.ERR_BadBinaryOperatorSignature, this.Locations[0]);
             }
@@ -572,10 +648,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         public sealed override bool ReturnsVoid
@@ -589,26 +662,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override bool IsVararg
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool IsExtensionMethod
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return this.locations;
-            }
+            get { return this.locations; }
         }
 
         internal sealed override int ParameterCount
@@ -642,11 +706,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return ImmutableArray<TypeParameterSymbol>.Empty; }
         }
 
-        public sealed override ImmutableArray<ImmutableArray<TypeWithAnnotations>> GetTypeParameterConstraintTypes()
-            => ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
+        public sealed override ImmutableArray<
+            ImmutableArray<TypeWithAnnotations>
+        > GetTypeParameterConstraintTypes() =>
+            ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
 
-        public sealed override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds()
-            => ImmutableArray<TypeParameterConstraintKind>.Empty;
+        public sealed override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds() =>
+            ImmutableArray<TypeParameterConstraintKind>.Empty;
 
         public sealed override RefKind RefKind
         {
@@ -667,37 +733,74 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _isExpressionBodied; }
         }
 
-        internal sealed override void AfterAddingTypeMembersChecks(ConversionsBase conversions, BindingDiagnosticBag diagnostics)
-        {
+        internal sealed override void AfterAddingTypeMembersChecks(
+            ConversionsBase conversions,
+            BindingDiagnosticBag diagnostics
+        ) {
             // Check constraints on return type and parameters. Note: Dev10 uses the
             // method name location for any such errors. We'll do the same for return
             // type errors but for parameter errors, we'll use the parameter location.
 
             var compilation = DeclaringCompilation;
 
-            this.ReturnType.CheckAllConstraints(compilation, conversions, this.Locations[0], diagnostics);
+            this.ReturnType.CheckAllConstraints(
+                compilation,
+                conversions,
+                this.Locations[0],
+                diagnostics
+            );
 
             foreach (var parameter in this.Parameters)
             {
-                parameter.Type.CheckAllConstraints(compilation, conversions, parameter.Locations[0], diagnostics);
+                parameter.Type.CheckAllConstraints(
+                    compilation,
+                    conversions,
+                    parameter.Locations[0],
+                    diagnostics
+                );
             }
 
-            ParameterHelpers.EnsureIsReadOnlyAttributeExists(compilation, Parameters, diagnostics, modifyCompilation: true);
+            ParameterHelpers.EnsureIsReadOnlyAttributeExists(
+                compilation,
+                Parameters,
+                diagnostics,
+                modifyCompilation: true
+            );
 
             if (ReturnType.ContainsNativeInteger())
             {
-                compilation.EnsureNativeIntegerAttributeExists(diagnostics, ReturnTypeLocation, modifyCompilation: true);
+                compilation.EnsureNativeIntegerAttributeExists(
+                    diagnostics,
+                    ReturnTypeLocation,
+                    modifyCompilation: true
+                );
             }
 
-            ParameterHelpers.EnsureNativeIntegerAttributeExists(compilation, Parameters, diagnostics, modifyCompilation: true);
+            ParameterHelpers.EnsureNativeIntegerAttributeExists(
+                compilation,
+                Parameters,
+                diagnostics,
+                modifyCompilation: true
+            );
 
-            if (compilation.ShouldEmitNullableAttributes(this) &&
-                ReturnTypeWithAnnotations.NeedsNullableAttribute())
-            {
-                compilation.EnsureNullableAttributeExists(diagnostics, ReturnTypeLocation, modifyCompilation: true);
+            if (
+                compilation.ShouldEmitNullableAttributes(this)
+                && ReturnTypeWithAnnotations.NeedsNullableAttribute()
+            ) {
+                compilation.EnsureNullableAttributeExists(
+                    diagnostics,
+                    ReturnTypeLocation,
+                    modifyCompilation: true
+                );
             }
 
-            ParameterHelpers.EnsureNullableAttributeExists(compilation, this, Parameters, diagnostics, modifyCompilation: true);
+            ParameterHelpers.EnsureNullableAttributeExists(
+                compilation,
+                this,
+                Parameters,
+                diagnostics,
+                modifyCompilation: true
+            );
         }
     }
 }

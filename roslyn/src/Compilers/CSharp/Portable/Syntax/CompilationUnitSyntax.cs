@@ -17,8 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             return GetReferenceDirectives(null);
         }
 
-        internal IList<ReferenceDirectiveTriviaSyntax> GetReferenceDirectives(Func<ReferenceDirectiveTriviaSyntax, bool>? filter)
-        {
+        internal IList<ReferenceDirectiveTriviaSyntax> GetReferenceDirectives(
+            Func<ReferenceDirectiveTriviaSyntax, bool>? filter
+        ) {
             // #r directives are always on the first token of the compilation unit.
             var firstToken = (SyntaxNodeOrToken)this.GetFirstToken(includeZeroWidth: true);
             return firstToken.GetDirectives<ReferenceDirectiveTriviaSyntax>(filter);
@@ -36,11 +37,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
         internal Syntax.InternalSyntax.DirectiveStack GetConditionalDirectivesStack()
         {
-            IEnumerable<DirectiveTriviaSyntax> directives = this.GetDirectives(filter: IsActiveConditionalDirective);
+            IEnumerable<DirectiveTriviaSyntax> directives = this.GetDirectives(
+                filter: IsActiveConditionalDirective
+            );
             var directiveStack = Syntax.InternalSyntax.DirectiveStack.Empty;
             foreach (DirectiveTriviaSyntax directive in directives)
             {
-                var internalDirective = (Syntax.InternalSyntax.DirectiveTriviaSyntax)directive.Green;
+                var internalDirective =
+                    (Syntax.InternalSyntax.DirectiveTriviaSyntax)directive.Green;
                 directiveStack = internalDirective.ApplyDirectives(directiveStack);
             }
             return directiveStack;

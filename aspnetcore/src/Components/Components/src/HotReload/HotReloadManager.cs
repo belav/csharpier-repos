@@ -6,14 +6,17 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Components.HotReload;
 
-[assembly: AssemblyMetadata("ReceiveHotReloadDeltaNotification", "Microsoft.AspNetCore.Components.HotReload.HotReloadManager")]
+[assembly: AssemblyMetadata(
+    "ReceiveHotReloadDeltaNotification",
+    "Microsoft.AspNetCore.Components.HotReload.HotReloadManager"
+)]
 [assembly: MetadataUpdateHandler(typeof(HotReloadManager))]
 
 namespace Microsoft.AspNetCore.Components.HotReload
 {
     internal static class HotReloadManager
     {
-       internal static event Action? OnDeltaApplied;
+        internal static event Action? OnDeltaApplied;
 
         public static void DeltaApplied()
         {

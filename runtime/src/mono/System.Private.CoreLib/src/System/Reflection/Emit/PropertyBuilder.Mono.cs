@@ -61,8 +61,18 @@ namespace System.Reflection.Emit
         private CallingConventions callingConvention;
 #endregion
 
-        internal PropertyBuilder(TypeBuilder tb, string name, PropertyAttributes attributes, CallingConventions callingConvention, Type returnType, Type[]? returnModReq, Type[]? returnModOpt, Type[]? parameterTypes, Type[][]? paramModReq, Type[][]? paramModOpt)
-        {
+        internal PropertyBuilder(
+            TypeBuilder tb,
+            string name,
+            PropertyAttributes attributes,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[]? returnModReq,
+            Type[]? returnModOpt,
+            Type[]? parameterTypes,
+            Type[][]? paramModReq,
+            Type[][]? paramModOpt
+        ) {
             this.name = name;
             this.attrs = attributes;
             this.callingConvention = callingConvention;
@@ -146,8 +156,13 @@ namespace System.Reflection.Emit
             throw not_supported();
         }
 
-        public override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
-        {
+        public override object? GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        ) {
             throw not_supported();
         }
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -212,22 +227,27 @@ namespace System.Reflection.Emit
             throw not_supported();
         }
 
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
-        {
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        ) {
             throw not_supported();
         }
 
         public override Module Module
         {
-            get
-            {
-                return base.Module;
-            }
+            get { return base.Module; }
         }
 
         private static Exception not_supported()
         {
-            return new NotSupportedException("The invoked member is not supported in a dynamic module.");
+            return new NotSupportedException(
+                "The invoked member is not supported in a dynamic module."
+            );
         }
     }
 }

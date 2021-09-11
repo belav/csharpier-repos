@@ -16,17 +16,23 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
-    internal abstract class AbstractCodeRefactorDialog_InProc<DialogType, AccessorType> : InProcComponent
+    internal abstract class AbstractCodeRefactorDialog_InProc<DialogType, AccessorType>
+        : InProcComponent
     {
         public virtual void VerifyOpen()
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
-            {
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            ) {
                 var cancellationToken = cancellationTokenSource.Token;
                 while (true)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    var window = JoinableTaskFactory.Run(() => TryGetDialogAsync(cancellationToken));
+                    var window = JoinableTaskFactory.Run(
+                        () => TryGetDialogAsync(cancellationToken)
+                    );
                     if (window is null)
                     {
                         Thread.Yield();
@@ -41,13 +47,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public virtual void VerifyClosed()
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
-            {
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            ) {
                 var cancellationToken = cancellationTokenSource.Token;
                 while (true)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    var window = JoinableTaskFactory.Run(() => TryGetDialogAsync(cancellationToken));
+                    var window = JoinableTaskFactory.Run(
+                        () => TryGetDialogAsync(cancellationToken)
+                    );
                     if (window is null)
                     {
                         return;
@@ -64,14 +75,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return Application.Current.Windows.OfType<DialogType>().Single();
         }
 
-        protected virtual async Task<DialogType> TryGetDialogAsync(CancellationToken cancellationToken)
-        {
+        protected virtual async Task<DialogType> TryGetDialogAsync(
+            CancellationToken cancellationToken
+        ) {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             return Application.Current.Windows.OfType<DialogType>().SingleOrDefault();
         }
 
-        protected virtual async Task ClickAsync(Func<AccessorType, ButtonBase> buttonSelector, CancellationToken cancellationToken)
-        {
+        protected virtual async Task ClickAsync(
+            Func<AccessorType, ButtonBase> buttonSelector,
+            CancellationToken cancellationToken
+        ) {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             var dialog = await GetDialogAsync(cancellationToken);
             var button = buttonSelector(GetAccessor(dialog));

@@ -11,7 +11,9 @@ namespace System
         {
             get
             {
-                return new DateTime(((ulong)(Interop.Sys.GetSystemTimeAsTicks() + UnixEpochTicks)) | KindUtc);
+                return new DateTime(
+                    ((ulong)(Interop.Sys.GetSystemTimeAsTicks() + UnixEpochTicks)) | KindUtc
+                );
             }
         }
 
@@ -19,6 +21,13 @@ namespace System
         private static ulong ToFileTimeLeapSecondsAware(long ticks) => default;
 
         // IsValidTimeWithLeapSeconds is not expected to be called at all for now on non-Windows platforms
-        internal static bool IsValidTimeWithLeapSeconds(int year, int month, int day, int hour, int minute, DateTimeKind kind) => false;
+        internal static bool IsValidTimeWithLeapSeconds(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            DateTimeKind kind
+        ) => false;
     }
 }

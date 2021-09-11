@@ -16,46 +16,65 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             [NotNullWhen(true)] out IOperation trueStatement,
             [NotNullWhen(true)] out IOperation? falseStatement,
             out ISimpleAssignmentOperation? trueAssignment,
-            out ISimpleAssignmentOperation? falseAssignment)
-        {
+            out ISimpleAssignmentOperation? falseAssignment
+        ) {
             falseAssignment = null;
 
             trueStatement = ifOperation.WhenTrue;
             falseStatement = ifOperation.WhenFalse;
 
-            trueStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(trueStatement);
-            falseStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(falseStatement);
+            trueStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(
+                trueStatement
+            );
+            falseStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(
+                falseStatement
+            );
 
-            if (!TryGetAssignmentOrThrow(trueStatement, out trueAssignment, out var trueThrow) ||
-                !TryGetAssignmentOrThrow(falseStatement, out falseAssignment, out var falseThrow))
-            {
+            if (
+                !TryGetAssignmentOrThrow(trueStatement, out trueAssignment, out var trueThrow)
+                || !TryGetAssignmentOrThrow(falseStatement, out falseAssignment, out var falseThrow)
+            ) {
                 return false;
             }
 
             var anyAssignment = trueAssignment ?? falseAssignment;
-            if (UseConditionalExpressionHelpers.HasInconvertibleThrowStatement(
-                    syntaxFacts, anyAssignment?.IsRef == true, trueThrow, falseThrow))
-            {
+            if (
+                UseConditionalExpressionHelpers.HasInconvertibleThrowStatement(
+                    syntaxFacts,
+                    anyAssignment?.IsRef == true,
+                    trueThrow,
+                    falseThrow
+                )
+            ) {
                 return false;
             }
 
             // The left side of both assignment statements has to be syntactically identical (modulo
             // trivia differences).
-            if (trueAssignment != null && falseAssignment != null &&
-                !syntaxFacts.AreEquivalent(trueAssignment.Target.Syntax, falseAssignment.Target.Syntax))
-            {
+            if (
+                trueAssignment != null
+                && falseAssignment != null
+                && !syntaxFacts.AreEquivalent(
+                    trueAssignment.Target.Syntax,
+                    falseAssignment.Target.Syntax
+                )
+            ) {
                 return false;
             }
 
             return UseConditionalExpressionHelpers.CanConvert(
-                syntaxFacts, ifOperation, trueStatement, falseStatement);
+                syntaxFacts,
+                ifOperation,
+                trueStatement,
+                falseStatement
+            );
         }
 
         private static bool TryGetAssignmentOrThrow(
             [NotNullWhen(true)] IOperation? statement,
             out ISimpleAssignmentOperation? assignment,
-            out IThrowOperation? throwOperation)
-        {
+            out IThrowOperation? throwOperation
+        ) {
             assignment = null;
             throwOperation = null;
 
@@ -69,10 +88,11 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
 
             // Both the WhenTrue and WhenFalse statements must be of the form:
             //      target = value;
-            if (statement is IExpressionStatementOperation exprStatement &&
-                exprStatement.Operation is ISimpleAssignmentOperation assignmentOp &&
-                assignmentOp.Target != null)
-            {
+            if (
+                statement is IExpressionStatementOperation exprStatement
+                && exprStatement.Operation is ISimpleAssignmentOperation assignmentOp
+                && assignmentOp.Target != null
+            ) {
                 assignment = assignmentOp;
                 return true;
             }

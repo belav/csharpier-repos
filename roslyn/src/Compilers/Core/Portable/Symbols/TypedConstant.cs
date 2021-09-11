@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis
 
         internal TypedConstant(ITypeSymbolInternal? type, TypedConstantKind kind, object? value)
         {
-            Debug.Assert(kind == TypedConstantKind.Array || !(value is ImmutableArray<TypedConstant>));
+            Debug.Assert(
+                kind == TypedConstantKind.Array || !(value is ImmutableArray<TypedConstant>)
+            );
             Debug.Assert(!(value is ISymbol) || value is ISymbolInternal);
             Debug.Assert(type is object || kind == TypedConstantKind.Error);
 
@@ -31,10 +33,10 @@ namespace Microsoft.CodeAnalysis
             _value = value;
         }
 
-        internal TypedConstant(ITypeSymbolInternal type, ImmutableArray<TypedConstant> array)
-            : this(type, TypedConstantKind.Array, value: array.IsDefault ? null : (object)array)
-        {
-        }
+        internal TypedConstant(
+            ITypeSymbolInternal type,
+            ImmutableArray<TypedConstant> array
+        ) : this(type, TypedConstantKind.Array, value: array.IsDefault ? null : (object)array) { }
 
         /// <summary>
         /// The kind of the constant.
@@ -63,10 +65,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool IsNull
         {
-            get
-            {
-                return _value == null;
-            }
+            get { return _value == null; }
         }
 
         /// <summary>
@@ -96,7 +95,9 @@ namespace Microsoft.CodeAnalysis
             {
                 if (Kind == TypedConstantKind.Array)
                 {
-                    throw new InvalidOperationException("TypedConstant is an array. Use Values property.");
+                    throw new InvalidOperationException(
+                        "TypedConstant is an array. Use Values property."
+                    );
                 }
 
                 return _value;
@@ -112,7 +113,9 @@ namespace Microsoft.CodeAnalysis
             {
                 if (Kind != TypedConstantKind.Array)
                 {
-                    throw new InvalidOperationException("TypedConstant is not an array. Use Value property.");
+                    throw new InvalidOperationException(
+                        "TypedConstant is not an array. Use Value property."
+                    );
                 }
 
                 if (this.IsNull)
@@ -138,8 +141,10 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
 
-            if (_type!.SpecialType == specialType || (_type.TypeKind == TypeKind.Enum && specialType == SpecialType.System_Enum))
-            {
+            if (
+                _type!.SpecialType == specialType
+                || (_type.TypeKind == TypeKind.Enum && specialType == SpecialType.System_Enum)
+            ) {
                 value = (T)_value!;
                 return true;
             }
@@ -153,8 +158,10 @@ namespace Microsoft.CodeAnalysis
         /// TypedConstant isn't computing its own kind from the type symbol because it doesn't
         /// have a way to recognize the well-known type System.Type.
         /// </remarks>
-        internal static TypedConstantKind GetTypedConstantKind(ITypeSymbolInternal type, Compilation compilation)
-        {
+        internal static TypedConstantKind GetTypedConstantKind(
+            ITypeSymbolInternal type,
+            Compilation compilation
+        ) {
             RoslynDebug.Assert(type != null);
 
             switch (type.SpecialType)
@@ -185,8 +192,7 @@ namespace Microsoft.CodeAnalysis
                             return TypedConstantKind.Error;
                     }
 
-                    if (compilation != null &&
-                        compilation.IsSystemTypeReference(type))
+                    if (compilation != null && compilation.IsSystemTypeReference(type))
                     {
                         return TypedConstantKind.Type;
                     }
@@ -209,8 +215,7 @@ namespace Microsoft.CodeAnalysis
 
         public override int GetHashCode()
         {
-            return Hash.Combine(_value,
-                   Hash.Combine(_type, (int)this.Kind));
+            return Hash.Combine(_value, Hash.Combine(_type, (int)this.Kind));
         }
 
         #region Testing & Debugging

@@ -12,7 +12,9 @@ using Microsoft.OData.Edm;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class ComplexNavigationsODataQueryTestFixture : ComplexNavigationsQuerySqlServerFixture, IODataQueryTestFixture
+    public class ComplexNavigationsODataQueryTestFixture
+        : ComplexNavigationsQuerySqlServerFixture,
+          IODataQueryTestFixture
     {
         private IHost _selfHostServer;
 
@@ -20,16 +22,19 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public ComplexNavigationsODataQueryTestFixture()
         {
-            (BaseAddress, ClientFactory, _selfHostServer)
-                = ODataQueryTestFixtureInitializer.Initialize<ComplexNavigationsODataContext>(StoreName, GetEdmModel());
+            (BaseAddress, ClientFactory, _selfHostServer) =
+                ODataQueryTestFixtureInitializer.Initialize<ComplexNavigationsODataContext>(
+                    StoreName,
+                    GetEdmModel()
+                );
         }
 
         public void UpdateConfigureServices<TContext>(IServiceCollection services, string storeName)
             where TContext : DbContext
         {
-            services.AddDbContext<TContext>(b =>
-                b.UseSqlServer(
-                    SqlServerTestStore.CreateConnectionString(storeName)));
+            services.AddDbContext<TContext>(
+                b => b.UseSqlServer(SqlServerTestStore.CreateConnectionString(storeName))
+            );
         }
 
         private static IEdmModel GetEdmModel()

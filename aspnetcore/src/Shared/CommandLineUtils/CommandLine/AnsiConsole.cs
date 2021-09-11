@@ -38,7 +38,9 @@ namespace Microsoft.Extensions.CommandLineUtils
 
         private void SetColor(ConsoleColor color)
         {
-            Console.ForegroundColor = (ConsoleColor)(((int)Console.ForegroundColor & 0x08) | ((int)color & 0x07));
+            Console.ForegroundColor = (ConsoleColor)(
+                ((int)Console.ForegroundColor & 0x08) | ((int)color & 0x07)
+            );
         }
 
         private void SetBold(bool bold)
@@ -61,7 +63,7 @@ namespace Microsoft.Extensions.CommandLineUtils
             }
 
             var escapeScan = 0;
-            for (; ;)
+            for (;;)
             {
                 var escapeIndex = message.IndexOf("\x1b[", escapeScan, StringComparison.Ordinal);
                 if (escapeIndex == -1)
@@ -74,10 +76,11 @@ namespace Microsoft.Extensions.CommandLineUtils
                 {
                     var startIndex = escapeIndex + 2;
                     var endIndex = startIndex;
-                    while (endIndex != message.Length &&
-                        message[endIndex] >= 0x20 &&
-                        message[endIndex] <= 0x3f)
-                    {
+                    while (
+                        endIndex != message.Length
+                        && message[endIndex] >= 0x20
+                        && message[endIndex] <= 0x3f
+                    ) {
                         endIndex += 1;
                     }
 
@@ -92,8 +95,12 @@ namespace Microsoft.Extensions.CommandLineUtils
                     {
                         case 'm':
                             int value;
-                            if (int.TryParse(message.Substring(startIndex, endIndex - startIndex), out value))
-                            {
+                            if (
+                                int.TryParse(
+                                    message.Substring(startIndex, endIndex - startIndex),
+                                    out value
+                                )
+                            ) {
                                 switch (value)
                                 {
                                     case 1:

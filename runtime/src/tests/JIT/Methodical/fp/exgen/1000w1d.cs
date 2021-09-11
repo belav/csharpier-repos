@@ -362,7 +362,23 @@ internal unsafe class testout1
         ulong asgop1 = vtstatic_0.a231_0;
         asgop1 *= (clstatic_0.a21_0);
         uint asgop2 = s_a105_0;
-        asgop2 %= Convert.ToUInt32(Convert.ToUInt32(Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(725656029121525319L))) + Convert.ToInt64(Convert.ToInt64(vtstatic_0.a231_0 + Convert.ToUInt64(Convert.ToInt32(s_arr1d_0[353]) + Convert.ToInt64(cl_0.a291_0))))));
+        asgop2 %= Convert.ToUInt32(
+            Convert.ToUInt32(
+                Convert.ToInt64(
+                    Convert.ToInt64(
+                        Convert.ToUInt16(s_a65_0) - Convert.ToInt64(725656029121525319L)
+                    )
+                )
+                    + Convert.ToInt64(
+                        Convert.ToInt64(
+                            vtstatic_0.a231_0
+                                + Convert.ToUInt64(
+                                    Convert.ToInt32(s_arr1d_0[353]) + Convert.ToInt64(cl_0.a291_0)
+                                )
+                        )
+                    )
+            )
+        );
         Decimal asgop3 = vtstatic_0.a409_0;
         asgop3 += (Convert.ToDecimal(Convert.ToDecimal(a485_0)));
         double asgop4 = clstatic_0.a243_0;
@@ -376,14 +392,32 @@ internal unsafe class testout1
         double asgop8 = vt_0.a95_0;
         asgop8 += ((vt_0.a95_0 - 12517376.0));
         double asgop9 = vtstatic_0.a102_0;
-        asgop9 += ((Convert.ToUInt64(Convert.ToInt32(cl_0.arr3d_0[4, 19, 3]) - Convert.ToInt64(-15L)) / -0.0019531038759242766));
-        clstatic_0.arr2d_0[2, 90] %= (Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(clstatic_0.arr2d_0[2, 143]))))));
+        asgop9 += (
+            (
+                Convert.ToUInt64(Convert.ToInt32(cl_0.arr3d_0[4, 19, 3]) - Convert.ToInt64(-15L))
+                / -0.0019531038759242766
+            )
+        );
+        clstatic_0.arr2d_0[2, 90] %= (
+            Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(clstatic_0.arr2d_0[2, 143])))))
+        );
         int asgop11 = 633029283;
-        asgop11 %= (Convert.ToInt32((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(1714341888U) + -1081314653)))))));
+        asgop11 %= (
+            Convert.ToInt32(
+                (Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(1714341888U) + -1081314653)))))
+            )
+        );
         double asgop12 = -64.0;
-        asgop12 += ((Convert.ToDouble(Convert.ToDecimal(s_a351_0) / Convert.ToDecimal(-60.015625M)) - cl_0.a38_0));
+        asgop12 += (
+            (
+                Convert.ToDouble(Convert.ToDecimal(s_a351_0) / Convert.ToDecimal(-60.015625M))
+                - cl_0.a38_0
+            )
+        );
         short asgop13 = 27760;
-        asgop13 %= Convert.ToInt16((Convert.ToInt16((Convert.ToInt16(Convert.ToInt16(27760 / 1.0000360243524622))))));
+        asgop13 %= Convert.ToInt16(
+            (Convert.ToInt16((Convert.ToInt16(Convert.ToInt16(27760 / 1.0000360243524622)))))
+        );
         float asgop14 = s_a70_0;
         asgop14 -= (20225.0F);
         asgop14 -= (0.0F);
@@ -410,13 +444,39 @@ internal unsafe class testout1
         asgop21 -= ((65536.0F + -41442.11F));
         arr3d_0[4, 182, 3] %= (Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(1353263371))))));
         short asgop28 = 2816;
-        asgop28 -= Convert.ToInt16(Convert.ToInt16(Convert.ToInt16(Convert.ToInt32((Convert.ToInt32(Convert.ToInt64(38108L) - Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(38108L) / 2.6750772758490535E-05))))) - Convert.ToInt32((s_arr1d_0[9]))) * Convert.ToInt64(vtstatic_0.a231_0 - vtstatic_0.a231_0)));
-        asgop28 *= Convert.ToInt16((2816 / Convert.ToInt16(-0.412876725F + Convert.ToSingle(38108L * 0.073906078560850089))));
+        asgop28 -= Convert.ToInt16(
+            Convert.ToInt16(
+                Convert.ToInt16(
+                    Convert.ToInt32(
+                        (
+                            Convert.ToInt32(
+                                Convert.ToInt64(38108L)
+                                    - Convert.ToInt64(
+                                        Convert.ToInt64(
+                                            Convert.ToDouble(38108L) / 2.6750772758490535E-05
+                                        )
+                                    )
+                            )
+                        )
+                    ) - Convert.ToInt32((s_arr1d_0[9]))
+                ) * Convert.ToInt64(vtstatic_0.a231_0 - vtstatic_0.a231_0)
+            )
+        );
+        asgop28 *= Convert.ToInt16(
+            (
+                2816
+                / Convert.ToInt16(-0.412876725F + Convert.ToSingle(38108L * 0.073906078560850089))
+            )
+        );
         double asgop30 = 2.1380342906984283E-12;
         asgop30 -= (clstatic_0.arr1d_0[0]);
-        asgop1 /= (Convert.ToUInt64(Convert.ToUInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(38123L))));
+        asgop1 /= (
+            Convert.ToUInt64(Convert.ToUInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(38123L)))
+        );
         double asgop32 = clstatic_0.a100_0;
-        asgop32 += (Convert.ToDouble(Convert.ToDecimal(0.00048828125M) * Convert.ToDecimal(s_a351_0)));
+        asgop32 += (
+            Convert.ToDouble(Convert.ToDecimal(0.00048828125M) * Convert.ToDecimal(s_a351_0))
+        );
         int asgop33 = cl_0.arr3d_0[4, 19, 3];
         asgop33 -= (s_arr2d_0[2, 244]);
         Decimal asgop34 = vtstatic_0.a475_0;
@@ -424,13 +484,32 @@ internal unsafe class testout1
         double asgop35 = 444.45422262569087;
         asgop35 -= (vtstatic_0.a39_0);
         ulong asgop36 = s_a88_0;
-        asgop36 /= (Convert.ToUInt64(Convert.ToUInt64(Convert.ToUInt16(37453) + Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(clstatic_0.a377_0) / clstatic_0.arr1d_0[467])))));
+        asgop36 /= (
+            Convert.ToUInt64(
+                Convert.ToUInt64(
+                    Convert.ToUInt16(37453)
+                        + Convert.ToInt64(
+                            Convert.ToInt64(
+                                Convert.ToDouble(clstatic_0.a377_0) / clstatic_0.arr1d_0[467]
+                            )
+                        )
+                )
+            )
+        );
         double asgop37 = 7.5655281721000671E-07;
         asgop37 -= (38124.0);
         double asgop38 = vtstatic_0.a122_0;
         asgop38 += (asgop25);
         int asgop39 = cl_0.a61_0;
-        asgop39 %= (Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(Convert.ToInt32(cl_0.a61_0 / 1.0000012787726094)))))));
+        asgop39 %= (
+            Convert.ToInt32(
+                (
+                    Convert.ToInt32(
+                        (Convert.ToInt32(Convert.ToInt32(cl_0.a61_0 / 1.0000012787726094)))
+                    )
+                )
+            )
+        );
         asgop11 /= (cl_0.arr3d_0[4, 19, 3]);
         double asgop41 = clstatic_0.a57_0;
         asgop41 -= (((clstatic_0.a57_0 - (vtstatic_0.a276_0 * -0.00048997655380983267))));
@@ -441,11 +520,49 @@ internal unsafe class testout1
         asgop44 -= ((-1441790.9999475395));
         double asgop45 = -17.875759801349979;
         asgop45 += (141710715.23940727);
-        asgop36 /= (Convert.ToUInt64((Convert.ToUInt64((Convert.ToUInt64((Convert.ToUInt64((s_a88_0 * vtstatic_0.a231_0) / vtstatic_0.a59_0)) / (Convert.ToUInt64(Convert.ToUInt64(Convert.ToInt32(1353263371) + Convert.ToInt64(-1353230603L)) / 512UL)))) / clstatic_0.a21_0))));
-        asgop43 *= (Convert.ToInt64(Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(Convert.ToUInt16(clstatic_0.a151_0 * 24.016151361329026)) - Convert.ToInt64(52042L)))));
+        asgop36 /= (
+            Convert.ToUInt64(
+                (
+                    Convert.ToUInt64(
+                        (
+                            Convert.ToUInt64(
+                                (Convert.ToUInt64((s_a88_0 * vtstatic_0.a231_0) / vtstatic_0.a59_0))
+                                    / (
+                                        Convert.ToUInt64(
+                                            Convert.ToUInt64(
+                                                Convert.ToInt32(1353263371)
+                                                    + Convert.ToInt64(-1353230603L)
+                                            ) / 512UL
+                                        )
+                                    )
+                            )
+                        ) / clstatic_0.a21_0
+                    )
+                )
+            )
+        );
+        asgop43 *= (
+            Convert.ToInt64(
+                Convert.ToInt64(
+                    Convert.ToInt64(
+                        Convert.ToUInt16(Convert.ToUInt16(clstatic_0.a151_0 * 24.016151361329026))
+                            - Convert.ToInt64(52042L)
+                    )
+                )
+            )
+        );
         double asgop48 = clstatic_0.a471_0;
         asgop48 -= (0.1171875);
-        asgop30 += ((Convert.ToDouble(((asgop5 + -1948830609L) - Convert.ToInt64(Convert.ToUInt32(s_a105_0) - Convert.ToInt64(cl_0.a498_0))) * asgop20)));
+        asgop30 += (
+            (
+                Convert.ToDouble(
+                    (
+                        (asgop5 + -1948830609L)
+                        - Convert.ToInt64(Convert.ToUInt32(s_a105_0) - Convert.ToInt64(cl_0.a498_0))
+                    ) * asgop20
+                )
+            )
+        );
         ulong asgop50 = (*a17_0);
         asgop50 /= (Convert.ToUInt64((32UL)));
         float asgop51 = -1.52587891E-05F;
@@ -462,25 +579,114 @@ internal unsafe class testout1
         asgop56 += (((0.00390625 / clstatic_0.a471_0) + (clstatic_0.a471_0 - asgop48)));
         double asgop57 = s_a217_0;
         asgop57 -= (asgop16);
-        asgop30 -= (((((Convert.ToInt32(asgop22 - s_a264_0)) / ((s_a264_0 - 0.0) + (2816 * -0.085940459280303028))) - (Convert.ToUInt16(2816 * (-242.00833333333333 / -17.875759801349979)) * (s_a105_0 / asgop45)))));
+        asgop30 -= (
+            (
+                (
+                    (
+                        (Convert.ToInt32(asgop22 - s_a264_0))
+                        / ((s_a264_0 - 0.0) + (2816 * -0.085940459280303028))
+                    )
+                    - (
+                        Convert.ToUInt16(2816 * (-242.00833333333333 / -17.875759801349979))
+                        * (s_a105_0 / asgop45)
+                    )
+                )
+            )
+        );
         double asgop59 = -2.384185791015625E-07;
         asgop59 -= ((-9.9497139631156921E-07));
-        asgop50 *= ((Convert.ToUInt64(vtstatic_0.a492_0 / (Convert.ToUInt64(vtstatic_0.a492_0 / vtstatic_0.a231_0)))));
-        asgop30 += ((Convert.ToSingle(Convert.ToInt32(Convert.ToInt64(Convert.ToUInt16((Convert.ToUInt16(vtstatic_0.arr2d_0[2, 47] / 1.0000524603924037))) - Convert.ToInt64(38126L)) / clstatic_0.a14_0) * (Convert.ToSingle(2816 / asgop44) / (((1.0000524603924037 + 26.504301752177106) - 0.0) - 27.504353258895193))) * ((Convert.ToDouble(Convert.ToDecimal((Convert.ToDecimal(-128M) + Convert.ToDecimal(0M))) * Convert.ToDecimal((Convert.ToDecimal(-128M) - Convert.ToDecimal(32640M)))) + asgop8) - (((Convert.ToInt32(vtstatic_0.arr2d_0[2, 47] * -5.2457640455332319E-05)) * (Convert.ToInt32((Convert.ToInt32(vt_0.a51_0)) % (Convert.ToInt32(clstatic_0.arr2d_0[2, 280]))))) * s_a385_0))));
-        asgop23 += ((vt_0.a68_0 - (Convert.ToSingle(vtstatic_0.arr2d_0[2, 47] * -4.4824643943765408E-08))));
-        asgop19 %= (Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(clstatic_0.arr2d_0[2, 90]))))));
+        asgop50 *= (
+            (
+                Convert.ToUInt64(
+                    vtstatic_0.a492_0 / (Convert.ToUInt64(vtstatic_0.a492_0 / vtstatic_0.a231_0))
+                )
+            )
+        );
+        asgop30 += (
+            (
+                Convert.ToSingle(
+                    Convert.ToInt32(
+                        Convert.ToInt64(
+                            Convert.ToUInt16(
+                                (Convert.ToUInt16(vtstatic_0.arr2d_0[2, 47] / 1.0000524603924037))
+                            ) - Convert.ToInt64(38126L)
+                        ) / clstatic_0.a14_0
+                    )
+                        * (
+                            Convert.ToSingle(2816 / asgop44)
+                            / (
+                                ((1.0000524603924037 + 26.504301752177106) - 0.0)
+                                - 27.504353258895193
+                            )
+                        )
+                )
+                * (
+                    (
+                        Convert.ToDouble(
+                            Convert.ToDecimal((Convert.ToDecimal(-128M) + Convert.ToDecimal(0M)))
+                                * Convert.ToDecimal(
+                                    (Convert.ToDecimal(-128M) - Convert.ToDecimal(32640M))
+                                )
+                        ) + asgop8
+                    )
+                    - (
+                        (
+                            (Convert.ToInt32(vtstatic_0.arr2d_0[2, 47] * -5.2457640455332319E-05))
+                            * (
+                                Convert.ToInt32(
+                                    (Convert.ToInt32(vt_0.a51_0))
+                                        % (Convert.ToInt32(clstatic_0.arr2d_0[2, 280]))
+                                )
+                            )
+                        ) * s_a385_0
+                    )
+                )
+            )
+        );
+        asgop23 += (
+            (vt_0.a68_0 - (Convert.ToSingle(vtstatic_0.arr2d_0[2, 47] * -4.4824643943765408E-08)))
+        );
+        asgop19 %= (
+            Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(clstatic_0.arr2d_0[2, 90])))))
+        );
         double asgop64 = -3137536.0;
         asgop64 -= (438868385792.0);
         asgop57 += ((0.016251102570564516 + vt_0.a337_0));
-        asgop50 *= (Convert.ToUInt64(Convert.ToInt32(arr3d_0[4, 237, 3]) + Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(-1714341880L) * 0.99999835272063708))));
+        asgop50 *= (
+            Convert.ToUInt64(
+                Convert.ToInt32(arr3d_0[4, 237, 3])
+                    + Convert.ToInt64(
+                        Convert.ToInt64(Convert.ToDouble(-1714341880L) * 0.99999835272063708)
+                    )
+            )
+        );
         double asgop67 = s_a137_0;
         asgop67 -= (0.0);
-        asgop34 += (Convert.ToDecimal(Convert.ToDecimal((Convert.ToDecimal((Convert.ToDecimal(1) / (Convert.ToDecimal(s_arr2d_0[2, 309]) / -1546648892M))) + Convert.ToDecimal(asgop3)))));
+        asgop34 += (
+            Convert.ToDecimal(
+                Convert.ToDecimal(
+                    (
+                        Convert.ToDecimal(
+                            (
+                                Convert.ToDecimal(1)
+                                / (Convert.ToDecimal(s_arr2d_0[2, 309]) / -1546648892M)
+                            )
+                        ) + Convert.ToDecimal(asgop3)
+                    )
+                )
+            )
+        );
         asgop23 -= (0.0F);
         short asgop70 = 8824;
         asgop70 %= Convert.ToInt16((Convert.ToInt16((Convert.ToInt16(8823)))));
         long asgop71 = cl_0.a124_0;
-        asgop71 *= (Convert.ToInt64(Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(cl_0.a124_0) * -2.384185791015625E-07))));
+        asgop71 *= (
+            Convert.ToInt64(
+                Convert.ToInt64(
+                    Convert.ToInt64(Convert.ToDouble(cl_0.a124_0) * -2.384185791015625E-07)
+                )
+            )
+        );
         asgop56 += ((cl_0.arr3d_0[4, 19, 3] * vtstatic_0.a267_0));
         long asgop73 = s_a15_0;
         asgop73 += (-5631858326354467267L);
@@ -514,7 +720,11 @@ internal unsafe class testout1
         asgop90 -= (1674174.7651272968);
         double asgop91 = 7.5263516386749105E-06;
         asgop91 -= (0.0);
-        asgop89 += (Convert.ToDecimal(Convert.ToDecimal((Convert.ToDecimal(-3897661212L) / vtstatic_0.a211_0))));
+        asgop89 += (
+            Convert.ToDecimal(
+                Convert.ToDecimal((Convert.ToDecimal(-3897661212L) / vtstatic_0.a211_0))
+            )
+        );
         double asgop93 = 0.0084382622453688435;
         asgop93 += (18.277276023468914);
         ulong asgop94 = vtstatic_0.a231_0;
@@ -534,7 +744,9 @@ internal unsafe class testout1
         asgop101 /= (-3.3973621624028216E-10);
         long asgop102 = 725656032571715419L;
         asgop102 += (-2453101149405622152L);
-        vtstatic_0.arr1d_0[205] %= (Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(vtstatic_0.arr1d_0[106]))))));
+        vtstatic_0.arr1d_0[205] %= (
+            Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(vtstatic_0.arr1d_0[106])))))
+        );
         double asgop104 = 43175.928129262407;
         asgop104 *= (clstatic_0.arr1d_0[313]);
         long asgop105 = 2800L;
@@ -543,12 +755,28 @@ internal unsafe class testout1
         asgop57 += (asgop32);
         asgop95 += (s_a101_0);
         asgop67 += ((Convert.ToDouble(33L * clstatic_0.arr1d_0[360])));
-        asgop86 *= (Convert.ToInt64(Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(clstatic_0.a14_0) / (Convert.ToDouble(clstatic_0.a14_0 * -5.1312822976762278E-10))))));
+        asgop86 *= (
+            Convert.ToInt64(
+                Convert.ToInt64(
+                    Convert.ToInt64(
+                        Convert.ToDouble(clstatic_0.a14_0)
+                            / (Convert.ToDouble(clstatic_0.a14_0 * -5.1312822976762278E-10))
+                    )
+                )
+            )
+        );
         long asgop111 = clstatic_0.a14_0;
         asgop111 /= (Convert.ToInt64(clstatic_0.a14_0));
         double asgop112 = clstatic_0.a471_0;
         asgop112 -= (asgop99);
-        asgop57 -= (((-1714341880L / ((Convert.ToDouble(((*a17_0)) * -0.015625)) - (s_a65_0 * 351.30872776990873))) - (Convert.ToUInt16(s_a92_0 - 3450190100U) / (2816 / clstatic_0.arr1d_0[488]))));
+        asgop57 -= (
+            (
+                (
+                    -1714341880L
+                    / ((Convert.ToDouble(((*a17_0)) * -0.015625)) - (s_a65_0 * 351.30872776990873))
+                ) - (Convert.ToUInt16(s_a92_0 - 3450190100U) / (2816 / clstatic_0.arr1d_0[488]))
+            )
+        );
         long asgop114 = vtstatic_0.a314_0;
         asgop114 += (-2824L);
         asgop93 -= (0.0);
@@ -574,49 +802,161 @@ internal unsafe class testout1
         asgop127 += (0.0);
         int asgop128 = vtstatic_0.arr2d_0[2, 25];
         asgop128 -= (s_arr1d_0[353]);
-        asgop55 += ((Convert.ToDouble(asgop43 * ((cl_0.a270_0 / -666814.98627027) + (Convert.ToUInt32(Convert.ToInt32(52043) - (Convert.ToInt32(-2.11983101795434M - 1714289842.88016898204566M))) / vtstatic_0.a221_0)))));
-        asgop93 += (((Convert.ToDouble(vt_0.a199_0 * clstatic_0.arr1d_0[58])) + (asgop51 / vtstatic_0.a434_0)));
+        asgop55 += (
+            (
+                Convert.ToDouble(
+                    asgop43
+                        * (
+                            (cl_0.a270_0 / -666814.98627027)
+                            + (
+                                Convert.ToUInt32(
+                                    Convert.ToInt32(52043)
+                                        - (
+                                            Convert.ToInt32(
+                                                -2.11983101795434M - 1714289842.88016898204566M
+                                            )
+                                        )
+                                ) / vtstatic_0.a221_0
+                            )
+                        )
+                )
+            )
+        );
+        asgop93 += (
+            (
+                (Convert.ToDouble(vt_0.a199_0 * clstatic_0.arr1d_0[58]))
+                + (asgop51 / vtstatic_0.a434_0)
+            )
+        );
         int asgop131 = cl_0.arr3d_0[4, 19, 3];
         asgop131 /= (cl_0.arr3d_0[4, 19, 3]);
         double asgop132 = -0.029533917858790955;
         asgop132 -= ((asgop97));
         asgop125 /= ((0.25F / 1.0F));
-        asgop91 -= ((Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(Convert.ToInt32(cl_0.a407_0 + -2.11983101795434M)) - Convert.ToInt64(33L)) * asgop112)));
-        asgop91 += ((((-256.00000023519851 - ((*a448_0))) + ((Convert.ToDouble(33L * (-3.7252902984619141E-09 * 2082408387.8525946))) + vtstatic_0.a122_0)) + asgop38));
+        asgop91 -= (
+            (
+                Convert.ToDouble(
+                    Convert.ToInt64(
+                        Convert.ToInt32(Convert.ToInt32(cl_0.a407_0 + -2.11983101795434M))
+                            - Convert.ToInt64(33L)
+                    ) * asgop112
+                )
+            )
+        );
+        asgop91 += (
+            (
+                (
+                    (-256.00000023519851 - ((*a448_0)))
+                    + (
+                        (Convert.ToDouble(33L * (-3.7252902984619141E-09 * 2082408387.8525946)))
+                        + vtstatic_0.a122_0
+                    )
+                ) + asgop38
+            )
+        );
         double asgop136 = 932.610916323287;
         asgop136 -= ((-180.03194081957008));
-        asgop95 -= ((Convert.ToDouble(Convert.ToDecimal(-32768M) * Convert.ToDecimal(vtstatic_0.a48_0))));
+        asgop95 -= (
+            (Convert.ToDouble(Convert.ToDecimal(-32768M) * Convert.ToDecimal(vtstatic_0.a48_0)))
+        );
         double asgop138 = s_a320_0;
         asgop138 += (77479403.015869245);
         asgop120 += (Convert.ToDecimal(Convert.ToDecimal((Convert.ToDecimal(((*a17_0))) * -96M))));
         ulong asgop140 = vtstatic_0.a231_0;
         asgop140 /= (Convert.ToUInt64(vtstatic_0.a231_0));
         asgop123 -= (((Convert.ToUInt32(207889699 * s_a104_0) / -1.61928840697281)));
-        asgop114 *= (Convert.ToInt64(Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(-1714341880L) * a426_0))));
+        asgop114 *= (
+            Convert.ToInt64(
+                Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(-1714341880L) * a426_0))
+            )
+        );
         double asgop143 = 4398046511104.0;
         asgop143 -= ((-1045356021106026.0));
         double asgop144 = 9.1496436869845726E-09;
         asgop144 -= ((Convert.ToDouble(-1735519511L * -2.05484270636584E-08)));
         asgop120 -= (Convert.ToDecimal(Convert.ToDecimal(asgop89)));
-        asgop93 /= ((((Convert.ToSingle(asgop33 / clstatic_0.a322_0) + clstatic_0.a130_0) * (asgop125 * (clstatic_0.a322_0 - s_a81_0))) - (asgop56)));
-        asgop140 *= (Convert.ToUInt64(Convert.ToInt16(2816) - Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(-1714341880L) * -1.6332798216421103E-06))));
+        asgop93 /= (
+            (
+                (
+                    (Convert.ToSingle(asgop33 / clstatic_0.a322_0) + clstatic_0.a130_0)
+                    * (asgop125 * (clstatic_0.a322_0 - s_a81_0))
+                ) - (asgop56)
+            )
+        );
+        asgop140 *= (
+            Convert.ToUInt64(
+                Convert.ToInt16(2816)
+                    - Convert.ToInt64(
+                        Convert.ToInt64(Convert.ToDouble(-1714341880L) * -1.6332798216421103E-06)
+                    )
+            )
+        );
         asgop126 -= ((((21556 / asgop143) + -0.029533917858790955)));
         long asgop149 = s_a261_0;
         asgop149 -= ((-38126L));
         asgop94 *= (((*a17_0)));
         asgop126 += (((612238865L / asgop132) + asgop9));
         asgop136 -= (4294968408.6428576);
-        asgop94 /= (Convert.ToUInt64(Convert.ToUInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(vtstatic_0.a157_0))));
+        asgop94 /= (
+            Convert.ToUInt64(
+                Convert.ToUInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(vtstatic_0.a157_0))
+            )
+        );
         long asgop154 = clstatic_0.a384_0;
         asgop154 += (((*a301_0)));
-        asgop126 -= (((((-15L / 0.0018310348836790094) - (vtstatic_0.a8_0)) + (Convert.ToInt16((Convert.ToInt16(Convert.ToInt16(1714329579U - 1714300242U))) % (Convert.ToInt16(((*a283_0))))) / asgop7)) + ((Convert.ToInt16(clstatic_0.a413_0 - s_a70_0) * ((Convert.ToDouble(clstatic_0.a69_0 * s_a489_0)) - ((s_a489_0 + -13.742731887401938)))) + asgop85)));
+        asgop126 -= (
+            (
+                (
+                    ((-15L / 0.0018310348836790094) - (vtstatic_0.a8_0))
+                    + (
+                        Convert.ToInt16(
+                            (Convert.ToInt16(Convert.ToInt16(1714329579U - 1714300242U)))
+                                % (Convert.ToInt16(((*a283_0))))
+                        ) / asgop7
+                    )
+                )
+                + (
+                    (
+                        Convert.ToInt16(clstatic_0.a413_0 - s_a70_0)
+                        * (
+                            (Convert.ToDouble(clstatic_0.a69_0 * s_a489_0))
+                            - ((s_a489_0 + -13.742731887401938))
+                        )
+                    ) + asgop85
+                )
+            )
+        );
         double asgop156 = -0.0038986355357907287;
         asgop156 -= (((Convert.ToDouble(clstatic_0.a14_0 * clstatic_0.a120_0))));
         float asgop157 = cl_0.a30_0;
         asgop157 -= (0.0F);
         long asgop158 = 3178757180399035215L;
         asgop158 *= (Convert.ToInt64(Convert.ToInt64(clstatic_0.a14_0)));
-        asgop94 /= (Convert.ToUInt64(Convert.ToUInt64(Convert.ToUInt32(Convert.ToUInt32(Convert.ToInt16(Convert.ToInt32((Convert.ToInt32(Convert.ToInt64(vtstatic_0.a157_0) - Convert.ToInt64(38119L)))) + Convert.ToInt32(2815)) + arr3d_0[4, 237, 3])) + Convert.ToInt64(Convert.ToInt64(Convert.ToInt32(arr3d_0[4, 237, 3]) + Convert.ToInt64(-3428680952L))))));
+        asgop94 /= (
+            Convert.ToUInt64(
+                Convert.ToUInt64(
+                    Convert.ToUInt32(
+                        Convert.ToUInt32(
+                            Convert.ToInt16(
+                                Convert.ToInt32(
+                                    (
+                                        Convert.ToInt32(
+                                            Convert.ToInt64(vtstatic_0.a157_0)
+                                                - Convert.ToInt64(38119L)
+                                        )
+                                    )
+                                ) + Convert.ToInt32(2815)
+                            ) + arr3d_0[4, 237, 3]
+                        )
+                    )
+                        + Convert.ToInt64(
+                            Convert.ToInt64(
+                                Convert.ToInt32(arr3d_0[4, 237, 3]) + Convert.ToInt64(-3428680952L)
+                            )
+                        )
+                )
+            )
+        );
         asgop122 -= ((s_a339_0));
         int asgop161 = vtstatic_0.a113_0;
         asgop161 /= (cl_0.arr3d_0[4, 19, 3]);
@@ -641,23 +981,3820 @@ internal unsafe class testout1
         double asgop173 = clstatic_0.a306_0;
         asgop173 *= (clstatic_0.arr1d_0[387]);
         asgop166 -= (a436_0);
-        if (((((Convert.ToSingle(Convert.ToInt16(Convert.ToInt16(Convert.ToInt32(vt_0.arr3d_0[4, 71, 3]) + Convert.ToInt32((Convert.ToInt32(Convert.ToInt64(-1714341880L) - Convert.ToInt64((-289823010L)))))) * (Convert.ToUInt64(Convert.ToInt32(clstatic_0.a125_0) + Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToDouble(-289823010L) * -9.6610686639407962E-06)) / 1.96557590602558E-06))) / (Convert.ToDouble(Convert.ToUInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(asgop105)) * 0.47619047619047616)))) / (((s_a65_0 * 1.2490569619936947E-05) - clstatic_0.a306_0) + (((Convert.ToUInt32(clstatic_0.a125_0 / Convert.ToSingle(-0.412876725F)) / (asgop173 - 226969.69494047618)) - 0.0) - (asgop12)))) - Convert.ToSingle(Convert.ToUInt16(asgop28 * Convert.ToSingle(Convert.ToSingle(asgop1 / (1 * ((*a479_0)))))) / (Convert.ToUInt32(Convert.ToInt32(Convert.ToDecimal(s_arr1d_0[9]) * 0.9999980231961172123567096051M) / Convert.ToSingle(cl_0.a30_0)) / asgop4))) / ((Convert.ToUInt16((Convert.ToInt32(1424522711M - vt_0.a275_0) - ((Convert.ToInt32(asgop136 + asgop127)))) / Convert.ToSingle(Convert.ToSingle(Convert.ToInt16(s_a351_0 + -3840M) / ((1 + (1 + clstatic_0.arr2d_0[2, 403])) * s_a320_0)))) * (Convert.ToSingle(Convert.ToUInt32(vtstatic_0.a231_0 + 1714341887UL) / (Convert.ToDouble(Convert.ToDecimal(-3840M) / Convert.ToDecimal(-20122720931645959.577092140687M)) + asgop138)) * (asgop157 / s_a44_0))) - vt_0.a20_0)) + (((((Convert.ToInt16(Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(38123L) * vtstatic_0.a493_0)) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(1) + Convert.ToInt64(4681581972605108222L)))) * ((1714341887UL / clstatic_0.arr1d_0[371]) - (vt_0.a29_0))) + asgop123) - ((asgop77 * (Convert.ToUInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(1735886337L)) / vtstatic_0.a255_0)))) - (Convert.ToDouble(Convert.ToDecimal((Convert.ToDecimal((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(vtstatic_0.a255_0 + clstatic_0.arr1d_0[215])) * (s_a65_0 / 38123.99981661429))) * (clstatic_0.a21_0 / ((*a114_0)))))) / (Convert.ToDecimal(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(asgop119) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(-4681581972397180400L))))) * -6.8352963137785907E-18)) / (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt64(clstatic_0.a69_0) - Convert.ToInt64((Convert.ToInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(a206_0)))))) * (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt32(386662224) + Convert.ToInt32(s_arr2d_0[2, 309]))) / (Convert.ToDecimal(1) * vtstatic_0.a475_0)))))) * Convert.ToDecimal(asgop34)))) - ((((Convert.ToSingle(asgop70 / (8823 / 141168.0)) - (asgop53)) * Convert.ToSingle(asgop11 / ((8823 / s_a477_0) + (asgop131 / clstatic_0.a432_0)))) / ((Convert.ToUInt16(asgop39 / ((Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(a206_0) / -107819633.03125)) * Convert.ToInt64(clstatic_0.a14_0)) / (Convert.ToSingle(1 / clstatic_0.a322_0) / (s_a65_0 / -697196.373046875))))) * (vtstatic_0.arr1d_0[205] * (32.0F / (s_a65_0 / 2.6601794673711162E-08))))) - ((((asgop75 * (s_a65_0 / -0.07271575927734375)) + (37453 * 444.45422262569087)) - (Convert.ToUInt32(Convert.ToDecimal(((Convert.ToInt32(Convert.ToInt64(clstatic_0.a14_0) + Convert.ToInt64(Convert.ToInt64(clstatic_0.a21_0 + cl_0.a270_0)))) / cl_0.arr3d_0[4, 19, 3])) / 0.3571276361416189114315102123M) / asgop35))))))) <= (vt_0.a20_0))
-        {
-            int if0_0retval_0 = Convert.ToInt32((Convert.ToInt32(((((Convert.ToDouble(Convert.ToDecimal(asgop120) / Convert.ToDecimal((Convert.ToDecimal(asgop23) / (Convert.ToDecimal((Convert.ToInt32(Convert.ToUInt16(asgop0 + vtstatic_0.a272_0)) - Convert.ToInt32(38126L / clstatic_0.a14_0))) * (Convert.ToDecimal(asgop162) / -128M))))) + (Convert.ToUInt64(Convert.ToUInt32(Convert.ToUInt32((Convert.ToInt32(Convert.ToInt64(asgop6) - Convert.ToInt64((s_a261_0)))) / cl_0.a50_0)) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(Convert.ToUInt16(Convert.ToInt64(asgop149) + Convert.ToInt64(vtstatic_0.a356_0))) - Convert.ToInt64(Convert.ToInt64(Convert.ToUInt32(s_a105_0) - Convert.ToInt64(a452_0)))))) / (Convert.ToUInt32((Convert.ToInt32((Convert.ToInt32(s_a65_0) - (Convert.ToInt32(vtstatic_0.arr2d_0[2, 47] * clstatic_0.a14_0))) * asgop111)) * asgop86) * ((Convert.ToUInt16(Convert.ToInt32((2816 + s_a219_0)) - Convert.ToInt32(cl_0.a311_0))) * (asgop154 / -3.4750246253123208E+25))))) + asgop30) - (((((((Convert.ToDouble(vtstatic_0.a272_0 * (clstatic_0.a14_0 / clstatic_0.a172_0))) + s_a139_0) + (Convert.ToInt16(0.001953125F + 2815.998F) * s_a150_0)) + asgop95) - ((Convert.ToInt64(Convert.ToInt32((Convert.ToInt32(s_a65_0) - ((2816 + (Convert.ToInt32(s_a101_0 + -1731306277.1818183)))))) - Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(s_a158_0) - Convert.ToInt64(-1731287084L))) / 2.5781110577566729E-10))) / (vtstatic_0.a113_0 * 3.7256973298300746E-08)))) - (Convert.ToUInt64(Convert.ToInt16(Convert.ToInt16((Convert.ToInt16(vtstatic_0.a48_0 + 2809M) / 1) * Convert.ToSingle(Convert.ToSingle((Convert.ToUInt16(vtstatic_0.a113_0 / 45412.999868849016)) * (2815.998F / clstatic_0.a135_0))))) - Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32((Convert.ToInt32(vtstatic_0.a113_0 * clstatic_0.a14_0))) + Convert.ToInt64(asgop171))) / ((-1735519511L / -46582407462475096.0) - (asgop166))))) / ((((Convert.ToUInt32((a436_0 + 0.0) + 3897661180.3377886)) * 9.1496436869845726E-09) + asgop144) - ((Convert.ToInt32(1731325207L / clstatic_0.a14_0) / asgop17))))) - ((Convert.ToSingle(Convert.ToUInt32(Convert.ToUInt16(Convert.ToInt32(1731325207L / clstatic_0.a14_0) / Convert.ToSingle(45413F)) + (Convert.ToInt32((Convert.ToInt32(asgop161 * (Convert.ToInt64(Convert.ToInt64(vtstatic_0.a272_0 - 37995UL) / clstatic_0.a14_0)))) * (vtstatic_0.a113_0 / asgop156)))) / (Convert.ToDouble((Convert.ToUInt64(Convert.ToUInt64(Convert.ToInt16(asgop13) + Convert.ToInt64(37995L)) / Convert.ToUInt64(Convert.ToUInt16(Convert.ToUInt16(Convert.ToSingle(37995UL / 0.83665470239799178) + vtstatic_0.a431_0)) + Convert.ToInt64(-38123L)))) * (asgop82 / (s_a65_0 / -1592863.3581561216))))) / ((Convert.ToUInt16((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(Convert.ToInt64(-38123L) - Convert.ToInt64((-1731363330L)))) * (vtstatic_0.a113_0 * 5.4913969573838816E-10))))) % (Convert.ToInt32(Convert.ToInt32(Convert.ToDecimal(Convert.ToInt32(vtstatic_0.a113_0 / 1.05181293921208)) / vtstatic_0.a266_0))))) / Convert.ToSingle(asgop21)) * ((Convert.ToUInt16(vtstatic_0.arr2d_0[2, 25] / 43175.928129262407)) / (-41442.11F * asgop104))) * (Convert.ToSingle(Convert.ToUInt32(vtstatic_0.arr2d_0[2, 25] * a369_0) * (-38123L / asgop101)) * (Convert.ToUInt16(vtstatic_0.arr2d_0[2, 25] / Convert.ToSingle(43175.9258F)) / asgop52))))))) - ((Convert.ToInt16(Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(Convert.ToInt16(Convert.ToUInt16((Convert.ToDecimal(asgop71) / asgop167) - asgop80) - Convert.ToUInt16(Convert.ToInt16(Convert.ToDecimal((Convert.ToInt16(27759 / Convert.ToSingle(9.857599F)) / Convert.ToInt16(s_a105_0 - 3897661215U))) / 0.0935361721915897163356141633M) * Convert.ToSingle(Convert.ToSingle(s_a65_0 * asgop59))))) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt32((Convert.ToInt32((Convert.ToUInt16(vtstatic_0.arr2d_0[2, 25] / (vtstatic_0.arr2d_0[2, 25] * (s_a65_0 / vt_0.a191_0))))) + asgop128)) + Convert.ToInt64((Convert.ToInt64(Convert.ToInt64(Convert.ToUInt32(s_a105_0) - Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(Convert.ToUInt16(Convert.ToDecimal(27759) * 1.3733924132713714470982384092M)) - Convert.ToInt64(-3897623091L))))) * Convert.ToInt64((Convert.ToInt64(Convert.ToDouble(-3897623091L) / clstatic_0.a490_0) + -725656033019148410L)))))))) + Convert.ToInt64(((Convert.ToInt64(asgop2) + Convert.ToInt64(Convert.ToInt32((Convert.ToInt32(s_arr1d_0[353] * vt_0.a327_0))) + Convert.ToInt64((Convert.ToInt64(Convert.ToInt16(27759) + Convert.ToInt64(clstatic_0.a461_0)) - (asgop102))))) + Convert.ToInt64(Convert.ToInt32(((Convert.ToInt32((Convert.ToUInt16(7.5655281721000671E-07 - (asgop37)))) - ((Convert.ToInt32(s_arr1d_0[353] / (s_arr1d_0[353] / 1424492376.0)) / Convert.ToInt32(0.0935361721915897M - 1.0935361721915897M)))) * (Convert.ToInt32(Convert.ToInt64(Convert.ToInt64(Convert.ToUInt32(s_a105_0) - Convert.ToInt64(-2453101145507960936L))) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(s_a15_0))))))) - Convert.ToInt64(Convert.ToInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(Convert.ToInt16(Convert.ToInt16(s_a92_0 - 3450200465U) - vtstatic_0.a119_0)) + Convert.ToInt64(asgop73))))))))) * ((Convert.ToDouble((Convert.ToUInt64(Convert.ToInt16(Convert.ToInt16((Convert.ToInt16(Convert.ToInt16(vtstatic_0.a119_0 / Convert.ToSingle(1.9921056F)))) % (Convert.ToInt16(Convert.ToInt16(vt_0.a32_0 * ((s_arr1d_0[353] / -5811.2136188331888) * (vt_0.a32_0 / clstatic_0.a390_0))))))) + Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(asgop158) / asgop165))) * asgop94) * asgop57)) / (((asgop50 / (asgop18 / asgop54)) - ((Convert.ToInt64(Convert.ToDouble(asgop114) / (Convert.ToUInt32(arr3d_0[4, 237, 3] * 2.0125482504315224) * clstatic_0.a487_0)) / ((2816 / asgop88) - (Convert.ToInt64(Convert.ToDouble(clstatic_0.a14_0) / (2816 / -4827586734080.0)) / asgop90))))) - ((((2816 * (9.857599F * -75.548544143842989)) - cl_0.a49_0) + ((Convert.ToSingle(s_a92_0 / clstatic_0.a379_0) * (arr3d_0[4, 237, 3] / -1329.724264912511)) - (Convert.ToDouble(asgop140 * (s_a65_0 / s_a147_0))))))))))) + ((((Convert.ToSingle(Convert.ToInt16(Convert.ToInt16(Convert.ToInt32(vt_0.arr3d_0[4, 71, 3]) + Convert.ToInt32((Convert.ToInt32(Convert.ToInt64(-1714341880L) - Convert.ToInt64((-289823010L)))))) * (Convert.ToUInt64(Convert.ToInt32(clstatic_0.a125_0) + Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToDouble(-289823010L) * -9.6610686639407962E-06)) / 1.96557590602558E-06))) / (Convert.ToDouble(Convert.ToUInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(asgop105)) * 0.47619047619047616)))) / (((s_a65_0 * 1.2490569619936947E-05) - clstatic_0.a306_0) + (((Convert.ToUInt32(clstatic_0.a125_0 / Convert.ToSingle(-0.412876725F)) / (asgop173 - 226969.69494047618)) - 0.0) - (asgop12)))) - Convert.ToSingle(Convert.ToUInt16(asgop28 * Convert.ToSingle(Convert.ToSingle(asgop1 / (1 * ((*a479_0)))))) / (Convert.ToUInt32(Convert.ToInt32(Convert.ToDecimal(s_arr1d_0[9]) * 0.9999980231961172123567096051M) / Convert.ToSingle(cl_0.a30_0)) / asgop4))) / ((Convert.ToUInt16((Convert.ToInt32(1424522711M - vt_0.a275_0) - ((Convert.ToInt32(asgop136 + asgop127)))) / Convert.ToSingle(Convert.ToSingle(Convert.ToInt16(s_a351_0 + -3840M) / ((1 + (1 + clstatic_0.arr2d_0[2, 403])) * s_a320_0)))) * (Convert.ToSingle(Convert.ToUInt32(vtstatic_0.a231_0 + 1714341887UL) / (Convert.ToDouble(Convert.ToDecimal(-3840M) / Convert.ToDecimal(-20122720931645959.577092140687M)) + asgop138)) * (asgop157 / s_a44_0))) - vt_0.a20_0)) + (((((Convert.ToInt16(Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(38123L) * vtstatic_0.a493_0)) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(1) + Convert.ToInt64(4681581972605108222L)))) * ((1714341887UL / clstatic_0.arr1d_0[371]) - (vt_0.a29_0))) + asgop123) - ((asgop77 * (Convert.ToUInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(1735886337L)) / vtstatic_0.a255_0)))) - (Convert.ToDouble(Convert.ToDecimal((Convert.ToDecimal((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(vtstatic_0.a255_0 + clstatic_0.arr1d_0[215])) * (s_a65_0 / 38123.99981661429))) * (clstatic_0.a21_0 / ((*a114_0)))))) / (Convert.ToDecimal(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(asgop119) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(-4681581972397180400L))))) * -6.8352963137785907E-18)) / (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt64(clstatic_0.a69_0) - Convert.ToInt64((Convert.ToInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(a206_0)))))) * (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt32(386662224) + Convert.ToInt32(s_arr2d_0[2, 309]))) / (Convert.ToDecimal(1) * vtstatic_0.a475_0)))))) * Convert.ToDecimal(asgop34)))) - ((((Convert.ToSingle(asgop70 / (8823 / 141168.0)) - (asgop53)) * Convert.ToSingle(asgop11 / ((8823 / s_a477_0) + (asgop131 / clstatic_0.a432_0)))) / ((Convert.ToUInt16(asgop39 / ((Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(a206_0) / -107819633.03125)) * Convert.ToInt64(clstatic_0.a14_0)) / (Convert.ToSingle(1 / clstatic_0.a322_0) / (s_a65_0 / -697196.373046875))))) * (vtstatic_0.arr1d_0[205] * (32.0F / (s_a65_0 / 2.6601794673711162E-08))))) - ((((asgop75 * (s_a65_0 / -0.07271575927734375)) + (37453 * 444.45422262569087)) - (Convert.ToUInt32(Convert.ToDecimal(((Convert.ToInt32(Convert.ToInt64(clstatic_0.a14_0) + Convert.ToInt64(Convert.ToInt64(clstatic_0.a21_0 + cl_0.a270_0)))) / cl_0.arr3d_0[4, 19, 3])) / 0.3571276361416189114315102123M) / asgop35)))))) + ((((Convert.ToInt16((Convert.ToInt16(Convert.ToInt16((Convert.ToInt16(Convert.ToInt16(Convert.ToInt32(cl_0.arr3d_0[4, 19, 3]) + Convert.ToInt32(s_arr2d_0[2, 247])))) % (Convert.ToInt16(cl_0.a480_0))))) % (Convert.ToInt16(Convert.ToInt16(Convert.ToInt16(Convert.ToInt16(Convert.ToUInt16(Convert.ToInt32(s_arr2d_0[2, 247]) + Convert.ToInt32(8730)) - 25144) * 1) / (clstatic_0.a197_0 * 1242.7939262472885))))) * (Convert.ToUInt16(Convert.ToUInt16(Convert.ToInt16(Convert.ToInt16(1 * clstatic_0.a14_0) / s_a148_0) * asgop100) + (Convert.ToUInt16((Convert.ToUInt16(65536.0F - clstatic_0.a413_0)) % 21556))) * (Convert.ToUInt16(Convert.ToDecimal(Convert.ToInt16(1714341888U - 1714329579U)) * clstatic_0.a162_0) * s_a245_0))) - (asgop126)) - (((((clstatic_0.a151_0 / clstatic_0.arr1d_0[414]) - s_a238_0) + (asgop14 / asgop122)) + asgop91) + ((asgop19 * ((1714341888U / asgop64) / ((Convert.ToUInt16(32768.0F - (-19275.0F))) * (52043 / vt_0.a35_0)))) + asgop55))) - (((((Convert.ToUInt16(clstatic_0.a151_0 * ((*a347_0))) / (-1.52587891E-05F / asgop96)) + (Convert.ToDouble(Convert.ToUInt64(Convert.ToUInt32(Convert.ToUInt32(vt_0.arr3d_0[4, 315, 3] * (1714341888U / asgop168))) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(Convert.ToInt16(clstatic_0.a151_0 / cl_0.arr3d_0[4, 19, 3])) + Convert.ToInt64(Convert.ToInt64(Convert.ToInt32(cl_0.arr3d_0[4, 19, 3]) + Convert.ToInt64(vt_0.a199_0)))))) * (Convert.ToInt64(clstatic_0.a21_0 + clstatic_0.a21_0) / (clstatic_0.a151_0 * (-1.52587891E-05F * -553.00995451249253)))))) - asgop93) - (((Convert.ToUInt64(Convert.ToUInt64((Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(Convert.ToInt32(clstatic_0.a14_0 / (Convert.ToInt64(clstatic_0.a14_0 / clstatic_0.a14_0)))) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(52043) + Convert.ToInt64(1177416765L))))) * asgop163) - (s_a116_0)) + Convert.ToInt64(Convert.ToInt32(arr3d_0[4, 182, 3]) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(Convert.ToInt16(Convert.ToInt64(s_a116_0) + Convert.ToInt64(4225041378952953975L))) - Convert.ToInt64(clstatic_0.a377_0))))) / asgop36)) / ((((clstatic_0.a21_0 / asgop118) - 0.0) * ((Convert.ToUInt16((vtstatic_0.a276_0 / clstatic_0.arr1d_0[363]) - (asgop83))) / asgop24)) - (((Convert.ToDouble(Convert.ToInt64(Convert.ToDouble(clstatic_0.a377_0) / vtstatic_0.a408_0) * clstatic_0.a57_0)) + ((Convert.ToDouble(-4685L * (vtstatic_0.a276_0 * 4.4491889804765315E-11))) + asgop41)))))))))))));
+        if (
+            (
+                (
+                    (
+                        (
+                            Convert.ToSingle(
+                                Convert.ToInt16(
+                                    Convert.ToInt16(
+                                        Convert.ToInt32(vt_0.arr3d_0[4, 71, 3])
+                                            + Convert.ToInt32(
+                                                (
+                                                    Convert.ToInt32(
+                                                        Convert.ToInt64(-1714341880L)
+                                                            - Convert.ToInt64((-289823010L))
+                                                    )
+                                                )
+                                            )
+                                    )
+                                        * (
+                                            Convert.ToUInt64(
+                                                Convert.ToInt32(clstatic_0.a125_0)
+                                                    + Convert.ToInt64(
+                                                        Convert.ToInt64(
+                                                            Convert.ToDouble(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToDouble(-289823010L)
+                                                                        * -9.6610686639407962E-06
+                                                                )
+                                                            ) / 1.96557590602558E-06
+                                                        )
+                                                    )
+                                            )
+                                            / (
+                                                Convert.ToDouble(
+                                                    Convert.ToUInt64(
+                                                        Convert.ToUInt16(s_a65_0)
+                                                            - Convert.ToInt64(asgop105)
+                                                    ) * 0.47619047619047616
+                                                )
+                                            )
+                                        )
+                                )
+                                    / (
+                                        ((s_a65_0 * 1.2490569619936947E-05) - clstatic_0.a306_0)
+                                        + (
+                                            (
+                                                (
+                                                    Convert.ToUInt32(
+                                                        clstatic_0.a125_0
+                                                            / Convert.ToSingle(-0.412876725F)
+                                                    ) / (asgop173 - 226969.69494047618)
+                                                ) - 0.0
+                                            ) - (asgop12)
+                                        )
+                                    )
+                            )
+                            - Convert.ToSingle(
+                                Convert.ToUInt16(
+                                    asgop28
+                                        * Convert.ToSingle(
+                                            Convert.ToSingle(asgop1 / (1 * ((*a479_0))))
+                                        )
+                                )
+                                    / (
+                                        Convert.ToUInt32(
+                                            Convert.ToInt32(
+                                                Convert.ToDecimal(s_arr1d_0[9])
+                                                    * 0.9999980231961172123567096051M
+                                            ) / Convert.ToSingle(cl_0.a30_0)
+                                        ) / asgop4
+                                    )
+                            )
+                        )
+                        / (
+                            (
+                                Convert.ToUInt16(
+                                    (
+                                        Convert.ToInt32(1424522711M - vt_0.a275_0)
+                                        - ((Convert.ToInt32(asgop136 + asgop127)))
+                                    )
+                                        / Convert.ToSingle(
+                                            Convert.ToSingle(
+                                                Convert.ToInt16(s_a351_0 + -3840M)
+                                                    / (
+                                                        (1 + (1 + clstatic_0.arr2d_0[2, 403]))
+                                                        * s_a320_0
+                                                    )
+                                            )
+                                        )
+                                )
+                                * (
+                                    Convert.ToSingle(
+                                        Convert.ToUInt32(vtstatic_0.a231_0 + 1714341887UL)
+                                            / (
+                                                Convert.ToDouble(
+                                                    Convert.ToDecimal(-3840M)
+                                                        / Convert.ToDecimal(
+                                                            -20122720931645959.577092140687M
+                                                        )
+                                                ) + asgop138
+                                            )
+                                    ) * (asgop157 / s_a44_0)
+                                )
+                            ) - vt_0.a20_0
+                        )
+                    )
+                    + (
+                        (
+                            (
+                                (
+                                    (
+                                        Convert.ToInt16(
+                                            Convert.ToInt64(
+                                                Convert.ToInt64(
+                                                    Convert.ToDouble(38123L) * vtstatic_0.a493_0
+                                                )
+                                            )
+                                                - Convert.ToInt64(
+                                                    Convert.ToInt64(
+                                                        Convert.ToInt16(1)
+                                                            + Convert.ToInt64(4681581972605108222L)
+                                                    )
+                                                )
+                                        )
+                                        * ((1714341887UL / clstatic_0.arr1d_0[371]) - (vt_0.a29_0))
+                                    ) + asgop123
+                                )
+                                - (
+                                    (
+                                        asgop77
+                                        * (
+                                            Convert.ToUInt64(
+                                                Convert.ToUInt32(s_a92_0)
+                                                    - Convert.ToInt64(1735886337L)
+                                            ) / vtstatic_0.a255_0
+                                        )
+                                    )
+                                )
+                            )
+                            - (
+                                Convert.ToDouble(
+                                    Convert.ToDecimal(
+                                        (
+                                            Convert.ToDecimal(
+                                                (
+                                                    Convert.ToInt32(
+                                                        (
+                                                            Convert.ToInt32(
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        vtstatic_0.a255_0
+                                                                            + clstatic_0.arr1d_0[
+                                                                                215
+                                                                            ]
+                                                                    )
+                                                                ) * (s_a65_0 / 38123.99981661429)
+                                                            )
+                                                        ) * (clstatic_0.a21_0 / ((*a114_0)))
+                                                    )
+                                                )
+                                            )
+                                            / (
+                                                Convert.ToDecimal(
+                                                    Convert.ToInt64(
+                                                        Convert.ToDouble(
+                                                            Convert.ToInt64(
+                                                                Convert.ToInt32(asgop119)
+                                                                    + Convert.ToInt64(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToUInt16(
+                                                                                s_a65_0
+                                                                            )
+                                                                                - Convert.ToInt64(
+                                                                                    -4681581972397180400L
+                                                                                )
+                                                                        )
+                                                                    )
+                                                            )
+                                                        ) * -6.8352963137785907E-18
+                                                    )
+                                                )
+                                                / (
+                                                    Convert.ToDecimal(
+                                                        Convert.ToInt16(
+                                                            Convert.ToInt64(clstatic_0.a69_0)
+                                                                - Convert.ToInt64(
+                                                                    (
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToUInt32(
+                                                                                s_a92_0
+                                                                            )
+                                                                                - Convert.ToInt64(
+                                                                                    a206_0
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                )
+                                                        )
+                                                    )
+                                                    * (
+                                                        Convert.ToDecimal(
+                                                            Convert.ToInt16(
+                                                                Convert.ToInt32(386662224)
+                                                                    + Convert.ToInt32(
+                                                                        s_arr2d_0[2, 309]
+                                                                    )
+                                                            )
+                                                        )
+                                                        / (Convert.ToDecimal(1) * vtstatic_0.a475_0)
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    ) * Convert.ToDecimal(asgop34)
+                                )
+                            )
+                        )
+                        - (
+                            (
+                                (
+                                    (Convert.ToSingle(asgop70 / (8823 / 141168.0)) - (asgop53))
+                                    * Convert.ToSingle(
+                                        asgop11
+                                            / ((8823 / s_a477_0) + (asgop131 / clstatic_0.a432_0))
+                                    )
+                                )
+                                / (
+                                    (
+                                        Convert.ToUInt16(
+                                            asgop39
+                                                / (
+                                                    (
+                                                        Convert.ToInt64(
+                                                            Convert.ToInt64(
+                                                                Convert.ToDouble(a206_0)
+                                                                    / -107819633.03125
+                                                            )
+                                                        ) * Convert.ToInt64(clstatic_0.a14_0)
+                                                    )
+                                                    / (
+                                                        Convert.ToSingle(1 / clstatic_0.a322_0)
+                                                        / (s_a65_0 / -697196.373046875)
+                                                    )
+                                                )
+                                        )
+                                    )
+                                    * (
+                                        vtstatic_0.arr1d_0[205]
+                                        * (32.0F / (s_a65_0 / 2.6601794673711162E-08))
+                                    )
+                                )
+                            )
+                            - (
+                                (
+                                    (
+                                        (asgop75 * (s_a65_0 / -0.07271575927734375))
+                                        + (37453 * 444.45422262569087)
+                                    )
+                                    - (
+                                        Convert.ToUInt32(
+                                            Convert.ToDecimal(
+                                                (
+                                                    (
+                                                        Convert.ToInt32(
+                                                            Convert.ToInt64(clstatic_0.a14_0)
+                                                                + Convert.ToInt64(
+                                                                    Convert.ToInt64(
+                                                                        clstatic_0.a21_0
+                                                                            + cl_0.a270_0
+                                                                    )
+                                                                )
+                                                        )
+                                                    ) / cl_0.arr3d_0[4, 19, 3]
+                                                )
+                                            ) / 0.3571276361416189114315102123M
+                                        ) / asgop35
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ) <= (vt_0.a20_0)
+        ) {
+            int if0_0retval_0 = Convert.ToInt32(
+                (
+                    Convert.ToInt32(
+                        (
+                            (
+                                (
+                                    (
+                                        Convert.ToDouble(
+                                            Convert.ToDecimal(asgop120)
+                                                / Convert.ToDecimal(
+                                                    (
+                                                        Convert.ToDecimal(asgop23)
+                                                        / (
+                                                            Convert.ToDecimal(
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        Convert.ToUInt16(
+                                                                            asgop0
+                                                                                + vtstatic_0.a272_0
+                                                                        )
+                                                                    )
+                                                                    - Convert.ToInt32(
+                                                                        38126L / clstatic_0.a14_0
+                                                                    )
+                                                                )
+                                                            )
+                                                            * (Convert.ToDecimal(asgop162) / -128M)
+                                                        )
+                                                    )
+                                                )
+                                        )
+                                        + (
+                                            Convert.ToUInt64(
+                                                Convert.ToUInt32(
+                                                    Convert.ToUInt32(
+                                                        (
+                                                            Convert.ToInt32(
+                                                                Convert.ToInt64(asgop6)
+                                                                    - Convert.ToInt64((s_a261_0))
+                                                            )
+                                                        ) / cl_0.a50_0
+                                                    )
+                                                )
+                                                    + Convert.ToInt64(
+                                                        Convert.ToInt64(
+                                                            Convert.ToUInt16(
+                                                                Convert.ToUInt16(
+                                                                    Convert.ToInt64(asgop149)
+                                                                        + Convert.ToInt64(
+                                                                            vtstatic_0.a356_0
+                                                                        )
+                                                                )
+                                                            )
+                                                                - Convert.ToInt64(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToUInt32(s_a105_0)
+                                                                            - Convert.ToInt64(
+                                                                                a452_0
+                                                                            )
+                                                                    )
+                                                                )
+                                                        )
+                                                    )
+                                            )
+                                            / (
+                                                Convert.ToUInt32(
+                                                    (
+                                                        Convert.ToInt32(
+                                                            (
+                                                                Convert.ToInt32(s_a65_0)
+                                                                - (
+                                                                    Convert.ToInt32(
+                                                                        vtstatic_0.arr2d_0[2, 47]
+                                                                            * clstatic_0.a14_0
+                                                                    )
+                                                                )
+                                                            ) * asgop111
+                                                        )
+                                                    ) * asgop86
+                                                )
+                                                * (
+                                                    (
+                                                        Convert.ToUInt16(
+                                                            Convert.ToInt32((2816 + s_a219_0))
+                                                                - Convert.ToInt32(cl_0.a311_0)
+                                                        )
+                                                    ) * (asgop154 / -3.4750246253123208E+25)
+                                                )
+                                            )
+                                        )
+                                    ) + asgop30
+                                )
+                                - (
+                                    (
+                                        (
+                                            (
+                                                (
+                                                    (
+                                                        (
+                                                            Convert.ToDouble(
+                                                                vtstatic_0.a272_0
+                                                                    * (
+                                                                        clstatic_0.a14_0
+                                                                        / clstatic_0.a172_0
+                                                                    )
+                                                            )
+                                                        ) + s_a139_0
+                                                    )
+                                                    + (
+                                                        Convert.ToInt16(0.001953125F + 2815.998F)
+                                                        * s_a150_0
+                                                    )
+                                                ) + asgop95
+                                            )
+                                            - (
+                                                (
+                                                    Convert.ToInt64(
+                                                        Convert.ToInt32(
+                                                            (
+                                                                Convert.ToInt32(s_a65_0)
+                                                                - (
+                                                                    (
+                                                                        2816
+                                                                        + (
+                                                                            Convert.ToInt32(
+                                                                                s_a101_0
+                                                                                    + -1731306277.1818183
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                            - Convert.ToInt64(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToDouble(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToInt32(
+                                                                                s_a158_0
+                                                                            )
+                                                                                - Convert.ToInt64(
+                                                                                    -1731287084L
+                                                                                )
+                                                                        )
+                                                                    ) / 2.5781110577566729E-10
+                                                                )
+                                                            )
+                                                    ) / (vtstatic_0.a113_0 * 3.7256973298300746E-08)
+                                                )
+                                            )
+                                        )
+                                        - (
+                                            Convert.ToUInt64(
+                                                Convert.ToInt16(
+                                                    Convert.ToInt16(
+                                                        (
+                                                            Convert.ToInt16(
+                                                                vtstatic_0.a48_0 + 2809M
+                                                            ) / 1
+                                                        )
+                                                            * Convert.ToSingle(
+                                                                Convert.ToSingle(
+                                                                    (
+                                                                        Convert.ToUInt16(
+                                                                            vtstatic_0.a113_0
+                                                                                / 45412.999868849016
+                                                                        )
+                                                                    )
+                                                                        * (
+                                                                            2815.998F
+                                                                            / clstatic_0.a135_0
+                                                                        )
+                                                                )
+                                                            )
+                                                    )
+                                                )
+                                                    - Convert.ToInt64(
+                                                        Convert.ToInt64(
+                                                            Convert.ToDouble(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToInt32(
+                                                                        (
+                                                                            Convert.ToInt32(
+                                                                                vtstatic_0.a113_0
+                                                                                    * clstatic_0.a14_0
+                                                                            )
+                                                                        )
+                                                                    ) + Convert.ToInt64(asgop171)
+                                                                )
+                                                            )
+                                                                / (
+                                                                    (
+                                                                        -1735519511L
+                                                                        / -46582407462475096.0
+                                                                    ) - (asgop166)
+                                                                )
+                                                        )
+                                                    )
+                                            )
+                                            / (
+                                                (
+                                                    (
+                                                        (
+                                                            Convert.ToUInt32(
+                                                                (a436_0 + 0.0) + 3897661180.3377886
+                                                            )
+                                                        ) * 9.1496436869845726E-09
+                                                    ) + asgop144
+                                                )
+                                                - (
+                                                    (
+                                                        Convert.ToInt32(
+                                                            1731325207L / clstatic_0.a14_0
+                                                        ) / asgop17
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                    - (
+                                        (
+                                            Convert.ToSingle(
+                                                Convert.ToUInt32(
+                                                    Convert.ToUInt16(
+                                                        Convert.ToInt32(
+                                                            1731325207L / clstatic_0.a14_0
+                                                        ) / Convert.ToSingle(45413F)
+                                                    )
+                                                        + (
+                                                            Convert.ToInt32(
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        asgop161
+                                                                            * (
+                                                                                Convert.ToInt64(
+                                                                                    Convert.ToInt64(
+                                                                                        vtstatic_0.a272_0
+                                                                                            - 37995UL
+                                                                                    )
+                                                                                        / clstatic_0.a14_0
+                                                                                )
+                                                                            )
+                                                                    )
+                                                                ) * (vtstatic_0.a113_0 / asgop156)
+                                                            )
+                                                        )
+                                                )
+                                                    / (
+                                                        Convert.ToDouble(
+                                                            (
+                                                                Convert.ToUInt64(
+                                                                    Convert.ToUInt64(
+                                                                        Convert.ToInt16(asgop13)
+                                                                            + Convert.ToInt64(
+                                                                                37995L
+                                                                            )
+                                                                    )
+                                                                        / Convert.ToUInt64(
+                                                                            Convert.ToUInt16(
+                                                                                Convert.ToUInt16(
+                                                                                    Convert.ToSingle(
+                                                                                        37995UL
+                                                                                            / 0.83665470239799178
+                                                                                    )
+                                                                                        + vtstatic_0.a431_0
+                                                                                )
+                                                                            )
+                                                                                + Convert.ToInt64(
+                                                                                    -38123L
+                                                                                )
+                                                                        )
+                                                                )
+                                                            )
+                                                                * (
+                                                                    asgop82
+                                                                    / (
+                                                                        s_a65_0
+                                                                        / -1592863.3581561216
+                                                                    )
+                                                                )
+                                                        )
+                                                    )
+                                            )
+                                            / (
+                                                (
+                                                    Convert.ToUInt16(
+                                                        (
+                                                            Convert.ToInt32(
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        (
+                                                                            Convert.ToInt32(
+                                                                                (
+                                                                                    Convert.ToInt32(
+                                                                                        Convert.ToInt64(
+                                                                                            -38123L
+                                                                                        )
+                                                                                            - Convert.ToInt64(
+                                                                                                (
+                                                                                                    -1731363330L
+                                                                                                )
+                                                                                            )
+                                                                                    )
+                                                                                )
+                                                                                    * (
+                                                                                        vtstatic_0.a113_0
+                                                                                        * 5.4913969573838816E-10
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                                    % (
+                                                                        Convert.ToInt32(
+                                                                            Convert.ToInt32(
+                                                                                Convert.ToDecimal(
+                                                                                    Convert.ToInt32(
+                                                                                        vtstatic_0.a113_0
+                                                                                            / 1.05181293921208
+                                                                                    )
+                                                                                )
+                                                                                    / vtstatic_0.a266_0
+                                                                            )
+                                                                        )
+                                                                    )
+                                                            )
+                                                        ) / Convert.ToSingle(asgop21)
+                                                    )
+                                                    * (
+                                                        (
+                                                            Convert.ToUInt16(
+                                                                vtstatic_0.arr2d_0[2, 25]
+                                                                    / 43175.928129262407
+                                                            )
+                                                        ) / (-41442.11F * asgop104)
+                                                    )
+                                                )
+                                                * (
+                                                    Convert.ToSingle(
+                                                        Convert.ToUInt32(
+                                                            vtstatic_0.arr2d_0[2, 25] * a369_0
+                                                        ) * (-38123L / asgop101)
+                                                    )
+                                                    * (
+                                                        Convert.ToUInt16(
+                                                            vtstatic_0.arr2d_0[2, 25]
+                                                                / Convert.ToSingle(43175.9258F)
+                                                        ) / asgop52
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                            - (
+                                (
+                                    Convert.ToInt16(
+                                        Convert.ToInt64(
+                                            Convert.ToInt64(
+                                                Convert.ToInt16(
+                                                    Convert.ToInt16(
+                                                        Convert.ToUInt16(
+                                                            (Convert.ToDecimal(asgop71) / asgop167)
+                                                                - asgop80
+                                                        )
+                                                            - Convert.ToUInt16(
+                                                                Convert.ToInt16(
+                                                                    Convert.ToDecimal(
+                                                                        (
+                                                                            Convert.ToInt16(
+                                                                                27759
+                                                                                    / Convert.ToSingle(
+                                                                                        9.857599F
+                                                                                    )
+                                                                            )
+                                                                            / Convert.ToInt16(
+                                                                                s_a105_0
+                                                                                    - 3897661215U
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                        / 0.0935361721915897163356141633M
+                                                                )
+                                                                    * Convert.ToSingle(
+                                                                        Convert.ToSingle(
+                                                                            s_a65_0 * asgop59
+                                                                        )
+                                                                    )
+                                                            )
+                                                    )
+                                                )
+                                                    - Convert.ToInt64(
+                                                        Convert.ToInt64(
+                                                            Convert.ToInt32(
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        (
+                                                                            Convert.ToUInt16(
+                                                                                vtstatic_0.arr2d_0[
+                                                                                    2,
+                                                                                    25
+                                                                                ]
+                                                                                    / (
+                                                                                        vtstatic_0.arr2d_0[
+                                                                                            2,
+                                                                                            25
+                                                                                        ]
+                                                                                        * (
+                                                                                            s_a65_0
+                                                                                            / vt_0.a191_0
+                                                                                        )
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                    ) + asgop128
+                                                                )
+                                                            )
+                                                                + Convert.ToInt64(
+                                                                    (
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToUInt32(
+                                                                                    s_a105_0
+                                                                                )
+                                                                                    - Convert.ToInt64(
+                                                                                        Convert.ToInt64(
+                                                                                            Convert.ToUInt16(
+                                                                                                Convert.ToUInt16(
+                                                                                                    Convert.ToDecimal(
+                                                                                                        27759
+                                                                                                    )
+                                                                                                        * 1.3733924132713714470982384092M
+                                                                                                )
+                                                                                            )
+                                                                                                - Convert.ToInt64(
+                                                                                                    -3897623091L
+                                                                                                )
+                                                                                        )
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                        * Convert.ToInt64(
+                                                                            (
+                                                                                Convert.ToInt64(
+                                                                                    Convert.ToDouble(
+                                                                                        -3897623091L
+                                                                                    )
+                                                                                        / clstatic_0.a490_0
+                                                                                )
+                                                                                + -725656033019148410L
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                        )
+                                                    )
+                                            )
+                                        )
+                                            + Convert.ToInt64(
+                                                (
+                                                    (
+                                                        Convert.ToInt64(asgop2)
+                                                        + Convert.ToInt64(
+                                                            Convert.ToInt32(
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        s_arr1d_0[353] * vt_0.a327_0
+                                                                    )
+                                                                )
+                                                            )
+                                                                + Convert.ToInt64(
+                                                                    (
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToInt16(27759)
+                                                                                + Convert.ToInt64(
+                                                                                    clstatic_0.a461_0
+                                                                                )
+                                                                        ) - (asgop102)
+                                                                    )
+                                                                )
+                                                        )
+                                                    )
+                                                    + Convert.ToInt64(
+                                                        Convert.ToInt32(
+                                                            (
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        (
+                                                                            Convert.ToUInt16(
+                                                                                7.5655281721000671E-07
+                                                                                    - (asgop37)
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                    - (
+                                                                        (
+                                                                            Convert.ToInt32(
+                                                                                s_arr1d_0[353]
+                                                                                    / (
+                                                                                        s_arr1d_0[
+                                                                                            353
+                                                                                        ]
+                                                                                        / 1424492376.0
+                                                                                    )
+                                                                            )
+                                                                            / Convert.ToInt32(
+                                                                                0.0935361721915897M
+                                                                                    - 1.0935361721915897M
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                                * (
+                                                                    Convert.ToInt32(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToUInt32(
+                                                                                    s_a105_0
+                                                                                )
+                                                                                    - Convert.ToInt64(
+                                                                                        -2453101145507960936L
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                            + Convert.ToInt64(
+                                                                                Convert.ToInt64(
+                                                                                    Convert.ToUInt16(
+                                                                                        s_a65_0
+                                                                                    )
+                                                                                        - Convert.ToInt64(
+                                                                                            s_a15_0
+                                                                                        )
+                                                                                )
+                                                                            )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                            - Convert.ToInt64(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToUInt32(s_a92_0)
+                                                                        - Convert.ToInt64(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToInt16(
+                                                                                    Convert.ToInt16(
+                                                                                        Convert.ToInt16(
+                                                                                            s_a92_0
+                                                                                                - 3450200465U
+                                                                                        )
+                                                                                            - vtstatic_0.a119_0
+                                                                                    )
+                                                                                )
+                                                                                    + Convert.ToInt64(
+                                                                                        asgop73
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                )
+                                                            )
+                                                    )
+                                                )
+                                            )
+                                    )
+                                    * (
+                                        (
+                                            Convert.ToDouble(
+                                                (
+                                                    Convert.ToUInt64(
+                                                        Convert.ToInt16(
+                                                            Convert.ToInt16(
+                                                                (
+                                                                    Convert.ToInt16(
+                                                                        Convert.ToInt16(
+                                                                            vtstatic_0.a119_0
+                                                                                / Convert.ToSingle(
+                                                                                    1.9921056F
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                )
+                                                                    % (
+                                                                        Convert.ToInt16(
+                                                                            Convert.ToInt16(
+                                                                                vt_0.a32_0
+                                                                                    * (
+                                                                                        (
+                                                                                            s_arr1d_0[
+                                                                                                353
+                                                                                            ]
+                                                                                            / -5811.2136188331888
+                                                                                        )
+                                                                                        * (
+                                                                                            vt_0.a32_0
+                                                                                            / clstatic_0.a390_0
+                                                                                        )
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                    )
+                                                            )
+                                                        )
+                                                            + Convert.ToInt64(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToDouble(asgop158)
+                                                                        / asgop165
+                                                                )
+                                                            )
+                                                    ) * asgop94
+                                                ) * asgop57
+                                            )
+                                        )
+                                        / (
+                                            (
+                                                (asgop50 / (asgop18 / asgop54))
+                                                - (
+                                                    (
+                                                        Convert.ToInt64(
+                                                            Convert.ToDouble(asgop114)
+                                                                / (
+                                                                    Convert.ToUInt32(
+                                                                        arr3d_0[4, 237, 3]
+                                                                            * 2.0125482504315224
+                                                                    ) * clstatic_0.a487_0
+                                                                )
+                                                        )
+                                                        / (
+                                                            (2816 / asgop88)
+                                                            - (
+                                                                Convert.ToInt64(
+                                                                    Convert.ToDouble(
+                                                                        clstatic_0.a14_0
+                                                                    ) / (2816 / -4827586734080.0)
+                                                                ) / asgop90
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                            - (
+                                                (
+                                                    (
+                                                        (2816 * (9.857599F * -75.548544143842989))
+                                                        - cl_0.a49_0
+                                                    )
+                                                    + (
+                                                        (
+                                                            Convert.ToSingle(
+                                                                s_a92_0 / clstatic_0.a379_0
+                                                            )
+                                                            * (
+                                                                arr3d_0[4, 237, 3]
+                                                                / -1329.724264912511
+                                                            )
+                                                        )
+                                                        - (
+                                                            Convert.ToDouble(
+                                                                asgop140 * (s_a65_0 / s_a147_0)
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                            + (
+                                (
+                                    (
+                                        (
+                                            Convert.ToSingle(
+                                                Convert.ToInt16(
+                                                    Convert.ToInt16(
+                                                        Convert.ToInt32(vt_0.arr3d_0[4, 71, 3])
+                                                            + Convert.ToInt32(
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        Convert.ToInt64(
+                                                                            -1714341880L
+                                                                        )
+                                                                            - Convert.ToInt64(
+                                                                                (-289823010L)
+                                                                            )
+                                                                    )
+                                                                )
+                                                            )
+                                                    )
+                                                        * (
+                                                            Convert.ToUInt64(
+                                                                Convert.ToInt32(clstatic_0.a125_0)
+                                                                    + Convert.ToInt64(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToDouble(
+                                                                                Convert.ToInt64(
+                                                                                    Convert.ToDouble(
+                                                                                        -289823010L
+                                                                                    )
+                                                                                        * -9.6610686639407962E-06
+                                                                                )
+                                                                            ) / 1.96557590602558E-06
+                                                                        )
+                                                                    )
+                                                            )
+                                                            / (
+                                                                Convert.ToDouble(
+                                                                    Convert.ToUInt64(
+                                                                        Convert.ToUInt16(s_a65_0)
+                                                                            - Convert.ToInt64(
+                                                                                asgop105
+                                                                            )
+                                                                    ) * 0.47619047619047616
+                                                                )
+                                                            )
+                                                        )
+                                                )
+                                                    / (
+                                                        (
+                                                            (s_a65_0 * 1.2490569619936947E-05)
+                                                            - clstatic_0.a306_0
+                                                        )
+                                                        + (
+                                                            (
+                                                                (
+                                                                    Convert.ToUInt32(
+                                                                        clstatic_0.a125_0
+                                                                            / Convert.ToSingle(
+                                                                                -0.412876725F
+                                                                            )
+                                                                    )
+                                                                    / (
+                                                                        asgop173
+                                                                        - 226969.69494047618
+                                                                    )
+                                                                ) - 0.0
+                                                            ) - (asgop12)
+                                                        )
+                                                    )
+                                            )
+                                            - Convert.ToSingle(
+                                                Convert.ToUInt16(
+                                                    asgop28
+                                                        * Convert.ToSingle(
+                                                            Convert.ToSingle(
+                                                                asgop1 / (1 * ((*a479_0)))
+                                                            )
+                                                        )
+                                                )
+                                                    / (
+                                                        Convert.ToUInt32(
+                                                            Convert.ToInt32(
+                                                                Convert.ToDecimal(s_arr1d_0[9])
+                                                                    * 0.9999980231961172123567096051M
+                                                            ) / Convert.ToSingle(cl_0.a30_0)
+                                                        ) / asgop4
+                                                    )
+                                            )
+                                        )
+                                        / (
+                                            (
+                                                Convert.ToUInt16(
+                                                    (
+                                                        Convert.ToInt32(1424522711M - vt_0.a275_0)
+                                                        - ((Convert.ToInt32(asgop136 + asgop127)))
+                                                    )
+                                                        / Convert.ToSingle(
+                                                            Convert.ToSingle(
+                                                                Convert.ToInt16(s_a351_0 + -3840M)
+                                                                    / (
+                                                                        (
+                                                                            1
+                                                                            + (
+                                                                                1
+                                                                                + clstatic_0.arr2d_0[
+                                                                                    2,
+                                                                                    403
+                                                                                ]
+                                                                            )
+                                                                        ) * s_a320_0
+                                                                    )
+                                                            )
+                                                        )
+                                                )
+                                                * (
+                                                    Convert.ToSingle(
+                                                        Convert.ToUInt32(
+                                                            vtstatic_0.a231_0 + 1714341887UL
+                                                        )
+                                                            / (
+                                                                Convert.ToDouble(
+                                                                    Convert.ToDecimal(-3840M)
+                                                                        / Convert.ToDecimal(
+                                                                            -20122720931645959.577092140687M
+                                                                        )
+                                                                ) + asgop138
+                                                            )
+                                                    ) * (asgop157 / s_a44_0)
+                                                )
+                                            ) - vt_0.a20_0
+                                        )
+                                    )
+                                    + (
+                                        (
+                                            (
+                                                (
+                                                    (
+                                                        Convert.ToInt16(
+                                                            Convert.ToInt64(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToDouble(38123L)
+                                                                        * vtstatic_0.a493_0
+                                                                )
+                                                            )
+                                                                - Convert.ToInt64(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToInt16(1)
+                                                                            + Convert.ToInt64(
+                                                                                4681581972605108222L
+                                                                            )
+                                                                    )
+                                                                )
+                                                        )
+                                                        * (
+                                                            (1714341887UL / clstatic_0.arr1d_0[371])
+                                                            - (vt_0.a29_0)
+                                                        )
+                                                    ) + asgop123
+                                                )
+                                                - (
+                                                    (
+                                                        asgop77
+                                                        * (
+                                                            Convert.ToUInt64(
+                                                                Convert.ToUInt32(s_a92_0)
+                                                                    - Convert.ToInt64(1735886337L)
+                                                            ) / vtstatic_0.a255_0
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                            - (
+                                                Convert.ToDouble(
+                                                    Convert.ToDecimal(
+                                                        (
+                                                            Convert.ToDecimal(
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        (
+                                                                            Convert.ToInt32(
+                                                                                (
+                                                                                    Convert.ToInt32(
+                                                                                        vtstatic_0.a255_0
+                                                                                            + clstatic_0.arr1d_0[
+                                                                                                215
+                                                                                            ]
+                                                                                    )
+                                                                                )
+                                                                                    * (
+                                                                                        s_a65_0
+                                                                                        / 38123.99981661429
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                            * (
+                                                                                clstatic_0.a21_0
+                                                                                / ((*a114_0))
+                                                                            )
+                                                                    )
+                                                                )
+                                                            )
+                                                            / (
+                                                                Convert.ToDecimal(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToDouble(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToInt32(
+                                                                                    asgop119
+                                                                                )
+                                                                                    + Convert.ToInt64(
+                                                                                        Convert.ToInt64(
+                                                                                            Convert.ToUInt16(
+                                                                                                s_a65_0
+                                                                                            )
+                                                                                                - Convert.ToInt64(
+                                                                                                    -4681581972397180400L
+                                                                                                )
+                                                                                        )
+                                                                                    )
+                                                                            )
+                                                                        ) * -6.8352963137785907E-18
+                                                                    )
+                                                                )
+                                                                / (
+                                                                    Convert.ToDecimal(
+                                                                        Convert.ToInt16(
+                                                                            Convert.ToInt64(
+                                                                                clstatic_0.a69_0
+                                                                            )
+                                                                                - Convert.ToInt64(
+                                                                                    (
+                                                                                        Convert.ToInt64(
+                                                                                            Convert.ToUInt32(
+                                                                                                s_a92_0
+                                                                                            )
+                                                                                                - Convert.ToInt64(
+                                                                                                    a206_0
+                                                                                                )
+                                                                                        )
+                                                                                    )
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                    * (
+                                                                        Convert.ToDecimal(
+                                                                            Convert.ToInt16(
+                                                                                Convert.ToInt32(
+                                                                                    386662224
+                                                                                )
+                                                                                    + Convert.ToInt32(
+                                                                                        s_arr2d_0[
+                                                                                            2,
+                                                                                            309
+                                                                                        ]
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                        / (
+                                                                            Convert.ToDecimal(1)
+                                                                            * vtstatic_0.a475_0
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    ) * Convert.ToDecimal(asgop34)
+                                                )
+                                            )
+                                        )
+                                        - (
+                                            (
+                                                (
+                                                    (
+                                                        Convert.ToSingle(
+                                                            asgop70 / (8823 / 141168.0)
+                                                        ) - (asgop53)
+                                                    )
+                                                    * Convert.ToSingle(
+                                                        asgop11
+                                                            / (
+                                                                (8823 / s_a477_0)
+                                                                + (asgop131 / clstatic_0.a432_0)
+                                                            )
+                                                    )
+                                                )
+                                                / (
+                                                    (
+                                                        Convert.ToUInt16(
+                                                            asgop39
+                                                                / (
+                                                                    (
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToDouble(
+                                                                                    a206_0
+                                                                                ) / -107819633.03125
+                                                                            )
+                                                                        )
+                                                                        * Convert.ToInt64(
+                                                                            clstatic_0.a14_0
+                                                                        )
+                                                                    )
+                                                                    / (
+                                                                        Convert.ToSingle(
+                                                                            1 / clstatic_0.a322_0
+                                                                        )
+                                                                        / (
+                                                                            s_a65_0
+                                                                            / -697196.373046875
+                                                                        )
+                                                                    )
+                                                                )
+                                                        )
+                                                    )
+                                                    * (
+                                                        vtstatic_0.arr1d_0[205]
+                                                        * (
+                                                            32.0F
+                                                            / (s_a65_0 / 2.6601794673711162E-08)
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                            - (
+                                                (
+                                                    (
+                                                        (asgop75 * (s_a65_0 / -0.07271575927734375))
+                                                        + (37453 * 444.45422262569087)
+                                                    )
+                                                    - (
+                                                        Convert.ToUInt32(
+                                                            Convert.ToDecimal(
+                                                                (
+                                                                    (
+                                                                        Convert.ToInt32(
+                                                                            Convert.ToInt64(
+                                                                                clstatic_0.a14_0
+                                                                            )
+                                                                                + Convert.ToInt64(
+                                                                                    Convert.ToInt64(
+                                                                                        clstatic_0.a21_0
+                                                                                            + cl_0.a270_0
+                                                                                    )
+                                                                                )
+                                                                        )
+                                                                    ) / cl_0.arr3d_0[4, 19, 3]
+                                                                )
+                                                            ) / 0.3571276361416189114315102123M
+                                                        ) / asgop35
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                                + (
+                                    (
+                                        (
+                                            (
+                                                Convert.ToInt16(
+                                                    (
+                                                        Convert.ToInt16(
+                                                            Convert.ToInt16(
+                                                                (
+                                                                    Convert.ToInt16(
+                                                                        Convert.ToInt16(
+                                                                            Convert.ToInt32(
+                                                                                cl_0.arr3d_0[
+                                                                                    4,
+                                                                                    19,
+                                                                                    3
+                                                                                ]
+                                                                            )
+                                                                                + Convert.ToInt32(
+                                                                                    s_arr2d_0[
+                                                                                        2,
+                                                                                        247
+                                                                                    ]
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                ) % (Convert.ToInt16(cl_0.a480_0))
+                                                            )
+                                                        )
+                                                    )
+                                                        % (
+                                                            Convert.ToInt16(
+                                                                Convert.ToInt16(
+                                                                    Convert.ToInt16(
+                                                                        Convert.ToInt16(
+                                                                            Convert.ToUInt16(
+                                                                                Convert.ToInt32(
+                                                                                    s_arr2d_0[
+                                                                                        2,
+                                                                                        247
+                                                                                    ]
+                                                                                )
+                                                                                    + Convert.ToInt32(
+                                                                                        8730
+                                                                                    )
+                                                                            ) - 25144
+                                                                        ) * 1
+                                                                    )
+                                                                        / (
+                                                                            clstatic_0.a197_0
+                                                                            * 1242.7939262472885
+                                                                        )
+                                                                )
+                                                            )
+                                                        )
+                                                )
+                                                * (
+                                                    Convert.ToUInt16(
+                                                        Convert.ToUInt16(
+                                                            Convert.ToInt16(
+                                                                Convert.ToInt16(
+                                                                    1 * clstatic_0.a14_0
+                                                                ) / s_a148_0
+                                                            ) * asgop100
+                                                        )
+                                                            + (
+                                                                Convert.ToUInt16(
+                                                                    (
+                                                                        Convert.ToUInt16(
+                                                                            65536.0F
+                                                                                - clstatic_0.a413_0
+                                                                        )
+                                                                    ) % 21556
+                                                                )
+                                                            )
+                                                    )
+                                                    * (
+                                                        Convert.ToUInt16(
+                                                            Convert.ToDecimal(
+                                                                Convert.ToInt16(
+                                                                    1714341888U - 1714329579U
+                                                                )
+                                                            ) * clstatic_0.a162_0
+                                                        ) * s_a245_0
+                                                    )
+                                                )
+                                            ) - (asgop126)
+                                        )
+                                        - (
+                                            (
+                                                (
+                                                    (
+                                                        (
+                                                            clstatic_0.a151_0
+                                                            / clstatic_0.arr1d_0[414]
+                                                        ) - s_a238_0
+                                                    ) + (asgop14 / asgop122)
+                                                ) + asgop91
+                                            )
+                                            + (
+                                                (
+                                                    asgop19
+                                                    * (
+                                                        (1714341888U / asgop64)
+                                                        / (
+                                                            (
+                                                                Convert.ToUInt16(
+                                                                    32768.0F - (-19275.0F)
+                                                                )
+                                                            ) * (52043 / vt_0.a35_0)
+                                                        )
+                                                    )
+                                                ) + asgop55
+                                            )
+                                        )
+                                    )
+                                    - (
+                                        (
+                                            (
+                                                (
+                                                    (
+                                                        Convert.ToUInt16(
+                                                            clstatic_0.a151_0 * ((*a347_0))
+                                                        ) / (-1.52587891E-05F / asgop96)
+                                                    )
+                                                    + (
+                                                        Convert.ToDouble(
+                                                            Convert.ToUInt64(
+                                                                Convert.ToUInt32(
+                                                                    Convert.ToUInt32(
+                                                                        vt_0.arr3d_0[4, 315, 3]
+                                                                            * (
+                                                                                1714341888U
+                                                                                / asgop168
+                                                                            )
+                                                                    )
+                                                                )
+                                                                    - Convert.ToInt64(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToInt16(
+                                                                                Convert.ToInt16(
+                                                                                    clstatic_0.a151_0
+                                                                                        / cl_0.arr3d_0[
+                                                                                            4,
+                                                                                            19,
+                                                                                            3
+                                                                                        ]
+                                                                                )
+                                                                            )
+                                                                                + Convert.ToInt64(
+                                                                                    Convert.ToInt64(
+                                                                                        Convert.ToInt32(
+                                                                                            cl_0.arr3d_0[
+                                                                                                4,
+                                                                                                19,
+                                                                                                3
+                                                                                            ]
+                                                                                        )
+                                                                                            + Convert.ToInt64(
+                                                                                                vt_0.a199_0
+                                                                                            )
+                                                                                    )
+                                                                                )
+                                                                        )
+                                                                    )
+                                                            )
+                                                                * (
+                                                                    Convert.ToInt64(
+                                                                        clstatic_0.a21_0
+                                                                            + clstatic_0.a21_0
+                                                                    )
+                                                                    / (
+                                                                        clstatic_0.a151_0
+                                                                        * (
+                                                                            -1.52587891E-05F
+                                                                            * -553.00995451249253
+                                                                        )
+                                                                    )
+                                                                )
+                                                        )
+                                                    )
+                                                ) - asgop93
+                                            )
+                                            - (
+                                                (
+                                                    (
+                                                        Convert.ToUInt64(
+                                                            Convert.ToUInt64(
+                                                                (
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToDouble(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToInt32(
+                                                                                    Convert.ToInt32(
+                                                                                        clstatic_0.a14_0
+                                                                                            / (
+                                                                                                Convert.ToInt64(
+                                                                                                    clstatic_0.a14_0
+                                                                                                        / clstatic_0.a14_0
+                                                                                                )
+                                                                                            )
+                                                                                    )
+                                                                                )
+                                                                                    + Convert.ToInt64(
+                                                                                        Convert.ToInt64(
+                                                                                            Convert.ToUInt16(
+                                                                                                52043
+                                                                                            )
+                                                                                                + Convert.ToInt64(
+                                                                                                    1177416765L
+                                                                                                )
+                                                                                        )
+                                                                                    )
+                                                                            )
+                                                                        ) * asgop163
+                                                                    ) - (s_a116_0)
+                                                                )
+                                                                    + Convert.ToInt64(
+                                                                        Convert.ToInt32(
+                                                                            arr3d_0[4, 182, 3]
+                                                                        )
+                                                                            - Convert.ToInt64(
+                                                                                Convert.ToInt64(
+                                                                                    Convert.ToInt16(
+                                                                                        Convert.ToInt16(
+                                                                                            Convert.ToInt64(
+                                                                                                s_a116_0
+                                                                                            )
+                                                                                                + Convert.ToInt64(
+                                                                                                    4225041378952953975L
+                                                                                                )
+                                                                                        )
+                                                                                    )
+                                                                                        - Convert.ToInt64(
+                                                                                            clstatic_0.a377_0
+                                                                                        )
+                                                                                )
+                                                                            )
+                                                                    )
+                                                            ) / asgop36
+                                                        )
+                                                    )
+                                                    / (
+                                                        (
+                                                            ((clstatic_0.a21_0 / asgop118) - 0.0)
+                                                            * (
+                                                                (
+                                                                    Convert.ToUInt16(
+                                                                        (
+                                                                            vtstatic_0.a276_0
+                                                                            / clstatic_0.arr1d_0[
+                                                                                363
+                                                                            ]
+                                                                        ) - (asgop83)
+                                                                    )
+                                                                ) / asgop24
+                                                            )
+                                                        )
+                                                        - (
+                                                            (
+                                                                (
+                                                                    Convert.ToDouble(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToDouble(
+                                                                                clstatic_0.a377_0
+                                                                            ) / vtstatic_0.a408_0
+                                                                        ) * clstatic_0.a57_0
+                                                                    )
+                                                                )
+                                                                + (
+                                                                    (
+                                                                        Convert.ToDouble(
+                                                                            -4685L
+                                                                                * (
+                                                                                    vtstatic_0.a276_0
+                                                                                    * 4.4491889804765315E-11
+                                                                                )
+                                                                        )
+                                                                    ) + asgop41
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                    )
+                )
+            );
             return if0_0retval_0;
         }
         else
         {
-            if (((((Convert.ToSingle(Convert.ToInt16(Convert.ToInt16(Convert.ToInt32(vt_0.arr3d_0[4, 71, 3]) + Convert.ToInt32((Convert.ToInt32(Convert.ToInt64(-1714341880L) - Convert.ToInt64((-289823010L)))))) * (Convert.ToUInt64(Convert.ToInt32(clstatic_0.a125_0) + Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToDouble(-289823010L) * -9.6610686639407962E-06)) / 1.96557590602558E-06))) / (Convert.ToDouble(Convert.ToUInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(asgop105)) * 0.47619047619047616)))) / (((s_a65_0 * 1.2490569619936947E-05) - clstatic_0.a306_0) + (((Convert.ToUInt32(clstatic_0.a125_0 / Convert.ToSingle(-0.412876725F)) / (asgop173 - 226969.69494047618)) - 0.0) - (asgop12)))) - Convert.ToSingle(Convert.ToUInt16(asgop28 * Convert.ToSingle(Convert.ToSingle(asgop1 / (1 * ((*a479_0)))))) / (Convert.ToUInt32(Convert.ToInt32(Convert.ToDecimal(s_arr1d_0[9]) * 0.9999980231961172123567096051M) / Convert.ToSingle(cl_0.a30_0)) / asgop4))) / ((Convert.ToUInt16((Convert.ToInt32(1424522711M - vt_0.a275_0) - ((Convert.ToInt32(asgop136 + asgop127)))) / Convert.ToSingle(Convert.ToSingle(Convert.ToInt16(s_a351_0 + -3840M) / ((1 + (1 + clstatic_0.arr2d_0[2, 403])) * s_a320_0)))) * (Convert.ToSingle(Convert.ToUInt32(vtstatic_0.a231_0 + 1714341887UL) / (Convert.ToDouble(Convert.ToDecimal(-3840M) / Convert.ToDecimal(-20122720931645959.577092140687M)) + asgop138)) * (asgop157 / s_a44_0))) - vt_0.a20_0)) + (((((Convert.ToInt16(Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(38123L) * vtstatic_0.a493_0)) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(1) + Convert.ToInt64(4681581972605108222L)))) * ((1714341887UL / clstatic_0.arr1d_0[371]) - (vt_0.a29_0))) + asgop123) - ((asgop77 * (Convert.ToUInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(1735886337L)) / vtstatic_0.a255_0)))) - (Convert.ToDouble(Convert.ToDecimal((Convert.ToDecimal((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(vtstatic_0.a255_0 + clstatic_0.arr1d_0[215])) * (s_a65_0 / 38123.99981661429))) * (clstatic_0.a21_0 / ((*a114_0)))))) / (Convert.ToDecimal(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(asgop119) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(-4681581972397180400L))))) * -6.8352963137785907E-18)) / (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt64(clstatic_0.a69_0) - Convert.ToInt64((Convert.ToInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(a206_0)))))) * (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt32(386662224) + Convert.ToInt32(s_arr2d_0[2, 309]))) / (Convert.ToDecimal(1) * vtstatic_0.a475_0)))))) * Convert.ToDecimal(asgop34)))) - ((((Convert.ToSingle(asgop70 / (8823 / 141168.0)) - (asgop53)) * Convert.ToSingle(asgop11 / ((8823 / s_a477_0) + (asgop131 / clstatic_0.a432_0)))) / ((Convert.ToUInt16(asgop39 / ((Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(a206_0) / -107819633.03125)) * Convert.ToInt64(clstatic_0.a14_0)) / (Convert.ToSingle(1 / clstatic_0.a322_0) / (s_a65_0 / -697196.373046875))))) * (vtstatic_0.arr1d_0[205] * (32.0F / (s_a65_0 / 2.6601794673711162E-08))))) - ((((asgop75 * (s_a65_0 / -0.07271575927734375)) + (37453 * 444.45422262569087)) - (Convert.ToUInt32(Convert.ToDecimal(((Convert.ToInt32(Convert.ToInt64(clstatic_0.a14_0) + Convert.ToInt64(Convert.ToInt64(clstatic_0.a21_0 + cl_0.a270_0)))) / cl_0.arr3d_0[4, 19, 3])) / 0.3571276361416189114315102123M) / asgop35))))))) <= (vt_0.a20_0))
-            {
-                if (((((Convert.ToSingle(Convert.ToInt16(Convert.ToInt16(Convert.ToInt32(vt_0.arr3d_0[4, 71, 3]) + Convert.ToInt32((Convert.ToInt32(Convert.ToInt64(-1714341880L) - Convert.ToInt64((-289823010L)))))) * (Convert.ToUInt64(Convert.ToInt32(clstatic_0.a125_0) + Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToDouble(-289823010L) * -9.6610686639407962E-06)) / 1.96557590602558E-06))) / (Convert.ToDouble(Convert.ToUInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(asgop105)) * 0.47619047619047616)))) / (((s_a65_0 * 1.2490569619936947E-05) - clstatic_0.a306_0) + (((Convert.ToUInt32(clstatic_0.a125_0 / Convert.ToSingle(-0.412876725F)) / (asgop173 - 226969.69494047618)) - 0.0) - (asgop12)))) - Convert.ToSingle(Convert.ToUInt16(asgop28 * Convert.ToSingle(Convert.ToSingle(asgop1 / (1 * ((*a479_0)))))) / (Convert.ToUInt32(Convert.ToInt32(Convert.ToDecimal(s_arr1d_0[9]) * 0.9999980231961172123567096051M) / Convert.ToSingle(cl_0.a30_0)) / asgop4))) / ((Convert.ToUInt16((Convert.ToInt32(1424522711M - vt_0.a275_0) - ((Convert.ToInt32(asgop136 + asgop127)))) / Convert.ToSingle(Convert.ToSingle(Convert.ToInt16(s_a351_0 + -3840M) / ((1 + (1 + clstatic_0.arr2d_0[2, 403])) * s_a320_0)))) * (Convert.ToSingle(Convert.ToUInt32(vtstatic_0.a231_0 + 1714341887UL) / (Convert.ToDouble(Convert.ToDecimal(-3840M) / Convert.ToDecimal(-20122720931645959.577092140687M)) + asgop138)) * (asgop157 / s_a44_0))) - vt_0.a20_0)) + (((((Convert.ToInt16(Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(38123L) * vtstatic_0.a493_0)) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(1) + Convert.ToInt64(4681581972605108222L)))) * ((1714341887UL / clstatic_0.arr1d_0[371]) - (vt_0.a29_0))) + asgop123) - ((asgop77 * (Convert.ToUInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(1735886337L)) / vtstatic_0.a255_0)))) - (Convert.ToDouble(Convert.ToDecimal((Convert.ToDecimal((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(vtstatic_0.a255_0 + clstatic_0.arr1d_0[215])) * (s_a65_0 / 38123.99981661429))) * (clstatic_0.a21_0 / ((*a114_0)))))) / (Convert.ToDecimal(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(asgop119) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(-4681581972397180400L))))) * -6.8352963137785907E-18)) / (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt64(clstatic_0.a69_0) - Convert.ToInt64((Convert.ToInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(a206_0)))))) * (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt32(386662224) + Convert.ToInt32(s_arr2d_0[2, 309]))) / (Convert.ToDecimal(1) * vtstatic_0.a475_0)))))) * Convert.ToDecimal(asgop34)))) - ((((Convert.ToSingle(asgop70 / (8823 / 141168.0)) - (asgop53)) * Convert.ToSingle(asgop11 / ((8823 / s_a477_0) + (asgop131 / clstatic_0.a432_0)))) / ((Convert.ToUInt16(asgop39 / ((Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(a206_0) / -107819633.03125)) * Convert.ToInt64(clstatic_0.a14_0)) / (Convert.ToSingle(1 / clstatic_0.a322_0) / (s_a65_0 / -697196.373046875))))) * (vtstatic_0.arr1d_0[205] * (32.0F / (s_a65_0 / 2.6601794673711162E-08))))) - ((((asgop75 * (s_a65_0 / -0.07271575927734375)) + (37453 * 444.45422262569087)) - (Convert.ToUInt32(Convert.ToDecimal(((Convert.ToInt32(Convert.ToInt64(clstatic_0.a14_0) + Convert.ToInt64(Convert.ToInt64(clstatic_0.a21_0 + cl_0.a270_0)))) / cl_0.arr3d_0[4, 19, 3])) / 0.3571276361416189114315102123M) / asgop35))))))) == (vt_0.a20_0))
-                {
-                    if (((((Convert.ToSingle(Convert.ToInt16(Convert.ToInt16(Convert.ToInt32(vt_0.arr3d_0[4, 71, 3]) + Convert.ToInt32((Convert.ToInt32(Convert.ToInt64(-1714341880L) - Convert.ToInt64((-289823010L)))))) * (Convert.ToUInt64(Convert.ToInt32(clstatic_0.a125_0) + Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToDouble(-289823010L) * -9.6610686639407962E-06)) / 1.96557590602558E-06))) / (Convert.ToDouble(Convert.ToUInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(asgop105)) * 0.47619047619047616)))) / (((s_a65_0 * 1.2490569619936947E-05) - clstatic_0.a306_0) + (((Convert.ToUInt32(clstatic_0.a125_0 / Convert.ToSingle(-0.412876725F)) / (asgop173 - 226969.69494047618)) - 0.0) - (asgop12)))) - Convert.ToSingle(Convert.ToUInt16(asgop28 * Convert.ToSingle(Convert.ToSingle(asgop1 / (1 * ((*a479_0)))))) / (Convert.ToUInt32(Convert.ToInt32(Convert.ToDecimal(s_arr1d_0[9]) * 0.9999980231961172123567096051M) / Convert.ToSingle(cl_0.a30_0)) / asgop4))) / ((Convert.ToUInt16((Convert.ToInt32(1424522711M - vt_0.a275_0) - ((Convert.ToInt32(asgop136 + asgop127)))) / Convert.ToSingle(Convert.ToSingle(Convert.ToInt16(s_a351_0 + -3840M) / ((1 + (1 + clstatic_0.arr2d_0[2, 403])) * s_a320_0)))) * (Convert.ToSingle(Convert.ToUInt32(vtstatic_0.a231_0 + 1714341887UL) / (Convert.ToDouble(Convert.ToDecimal(-3840M) / Convert.ToDecimal(-20122720931645959.577092140687M)) + asgop138)) * (asgop157 / s_a44_0))) - vt_0.a20_0)) + (((((Convert.ToInt16(Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(38123L) * vtstatic_0.a493_0)) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(1) + Convert.ToInt64(4681581972605108222L)))) * ((1714341887UL / clstatic_0.arr1d_0[371]) - (vt_0.a29_0))) + asgop123) - ((asgop77 * (Convert.ToUInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(1735886337L)) / vtstatic_0.a255_0)))) - (Convert.ToDouble(Convert.ToDecimal((Convert.ToDecimal((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(vtstatic_0.a255_0 + clstatic_0.arr1d_0[215])) * (s_a65_0 / 38123.99981661429))) * (clstatic_0.a21_0 / ((*a114_0)))))) / (Convert.ToDecimal(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(asgop119) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(-4681581972397180400L))))) * -6.8352963137785907E-18)) / (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt64(clstatic_0.a69_0) - Convert.ToInt64((Convert.ToInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(a206_0)))))) * (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt32(386662224) + Convert.ToInt32(s_arr2d_0[2, 309]))) / (Convert.ToDecimal(1) * vtstatic_0.a475_0)))))) * Convert.ToDecimal(asgop34)))) - ((((Convert.ToSingle(asgop70 / (8823 / 141168.0)) - (asgop53)) * Convert.ToSingle(asgop11 / ((8823 / s_a477_0) + (asgop131 / clstatic_0.a432_0)))) / ((Convert.ToUInt16(asgop39 / ((Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(a206_0) / -107819633.03125)) * Convert.ToInt64(clstatic_0.a14_0)) / (Convert.ToSingle(1 / clstatic_0.a322_0) / (s_a65_0 / -697196.373046875))))) * (vtstatic_0.arr1d_0[205] * (32.0F / (s_a65_0 / 2.6601794673711162E-08))))) - ((((asgop75 * (s_a65_0 / -0.07271575927734375)) + (37453 * 444.45422262569087)) - (Convert.ToUInt32(Convert.ToDecimal(((Convert.ToInt32(Convert.ToInt64(clstatic_0.a14_0) + Convert.ToInt64(Convert.ToInt64(clstatic_0.a21_0 + cl_0.a270_0)))) / cl_0.arr3d_0[4, 19, 3])) / 0.3571276361416189114315102123M) / asgop35))))))) != (vt_0.a20_0))
+            if (
+                (
+                    (
+                        (
+                            (
+                                Convert.ToSingle(
+                                    Convert.ToInt16(
+                                        Convert.ToInt16(
+                                            Convert.ToInt32(vt_0.arr3d_0[4, 71, 3])
+                                                + Convert.ToInt32(
+                                                    (
+                                                        Convert.ToInt32(
+                                                            Convert.ToInt64(-1714341880L)
+                                                                - Convert.ToInt64((-289823010L))
+                                                        )
+                                                    )
+                                                )
+                                        )
+                                            * (
+                                                Convert.ToUInt64(
+                                                    Convert.ToInt32(clstatic_0.a125_0)
+                                                        + Convert.ToInt64(
+                                                            Convert.ToInt64(
+                                                                Convert.ToDouble(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToDouble(
+                                                                            -289823010L
+                                                                        ) * -9.6610686639407962E-06
+                                                                    )
+                                                                ) / 1.96557590602558E-06
+                                                            )
+                                                        )
+                                                )
+                                                / (
+                                                    Convert.ToDouble(
+                                                        Convert.ToUInt64(
+                                                            Convert.ToUInt16(s_a65_0)
+                                                                - Convert.ToInt64(asgop105)
+                                                        ) * 0.47619047619047616
+                                                    )
+                                                )
+                                            )
+                                    )
+                                        / (
+                                            ((s_a65_0 * 1.2490569619936947E-05) - clstatic_0.a306_0)
+                                            + (
+                                                (
+                                                    (
+                                                        Convert.ToUInt32(
+                                                            clstatic_0.a125_0
+                                                                / Convert.ToSingle(-0.412876725F)
+                                                        ) / (asgop173 - 226969.69494047618)
+                                                    ) - 0.0
+                                                ) - (asgop12)
+                                            )
+                                        )
+                                )
+                                - Convert.ToSingle(
+                                    Convert.ToUInt16(
+                                        asgop28
+                                            * Convert.ToSingle(
+                                                Convert.ToSingle(asgop1 / (1 * ((*a479_0))))
+                                            )
+                                    )
+                                        / (
+                                            Convert.ToUInt32(
+                                                Convert.ToInt32(
+                                                    Convert.ToDecimal(s_arr1d_0[9])
+                                                        * 0.9999980231961172123567096051M
+                                                ) / Convert.ToSingle(cl_0.a30_0)
+                                            ) / asgop4
+                                        )
+                                )
+                            )
+                            / (
+                                (
+                                    Convert.ToUInt16(
+                                        (
+                                            Convert.ToInt32(1424522711M - vt_0.a275_0)
+                                            - ((Convert.ToInt32(asgop136 + asgop127)))
+                                        )
+                                            / Convert.ToSingle(
+                                                Convert.ToSingle(
+                                                    Convert.ToInt16(s_a351_0 + -3840M)
+                                                        / (
+                                                            (1 + (1 + clstatic_0.arr2d_0[2, 403]))
+                                                            * s_a320_0
+                                                        )
+                                                )
+                                            )
+                                    )
+                                    * (
+                                        Convert.ToSingle(
+                                            Convert.ToUInt32(vtstatic_0.a231_0 + 1714341887UL)
+                                                / (
+                                                    Convert.ToDouble(
+                                                        Convert.ToDecimal(-3840M)
+                                                            / Convert.ToDecimal(
+                                                                -20122720931645959.577092140687M
+                                                            )
+                                                    ) + asgop138
+                                                )
+                                        ) * (asgop157 / s_a44_0)
+                                    )
+                                ) - vt_0.a20_0
+                            )
+                        )
+                        + (
+                            (
+                                (
+                                    (
+                                        (
+                                            Convert.ToInt16(
+                                                Convert.ToInt64(
+                                                    Convert.ToInt64(
+                                                        Convert.ToDouble(38123L) * vtstatic_0.a493_0
+                                                    )
+                                                )
+                                                    - Convert.ToInt64(
+                                                        Convert.ToInt64(
+                                                            Convert.ToInt16(1)
+                                                                + Convert.ToInt64(
+                                                                    4681581972605108222L
+                                                                )
+                                                        )
+                                                    )
+                                            )
+                                            * (
+                                                (1714341887UL / clstatic_0.arr1d_0[371])
+                                                - (vt_0.a29_0)
+                                            )
+                                        ) + asgop123
+                                    )
+                                    - (
+                                        (
+                                            asgop77
+                                            * (
+                                                Convert.ToUInt64(
+                                                    Convert.ToUInt32(s_a92_0)
+                                                        - Convert.ToInt64(1735886337L)
+                                                ) / vtstatic_0.a255_0
+                                            )
+                                        )
+                                    )
+                                )
+                                - (
+                                    Convert.ToDouble(
+                                        Convert.ToDecimal(
+                                            (
+                                                Convert.ToDecimal(
+                                                    (
+                                                        Convert.ToInt32(
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    (
+                                                                        Convert.ToInt32(
+                                                                            vtstatic_0.a255_0
+                                                                                + clstatic_0.arr1d_0[
+                                                                                    215
+                                                                                ]
+                                                                        )
+                                                                    )
+                                                                        * (
+                                                                            s_a65_0
+                                                                            / 38123.99981661429
+                                                                        )
+                                                                )
+                                                            ) * (clstatic_0.a21_0 / ((*a114_0)))
+                                                        )
+                                                    )
+                                                )
+                                                / (
+                                                    Convert.ToDecimal(
+                                                        Convert.ToInt64(
+                                                            Convert.ToDouble(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToInt32(asgop119)
+                                                                        + Convert.ToInt64(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToUInt16(
+                                                                                    s_a65_0
+                                                                                )
+                                                                                    - Convert.ToInt64(
+                                                                                        -4681581972397180400L
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                )
+                                                            ) * -6.8352963137785907E-18
+                                                        )
+                                                    )
+                                                    / (
+                                                        Convert.ToDecimal(
+                                                            Convert.ToInt16(
+                                                                Convert.ToInt64(clstatic_0.a69_0)
+                                                                    - Convert.ToInt64(
+                                                                        (
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToUInt32(
+                                                                                    s_a92_0
+                                                                                )
+                                                                                    - Convert.ToInt64(
+                                                                                        a206_0
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                    )
+                                                            )
+                                                        )
+                                                        * (
+                                                            Convert.ToDecimal(
+                                                                Convert.ToInt16(
+                                                                    Convert.ToInt32(386662224)
+                                                                        + Convert.ToInt32(
+                                                                            s_arr2d_0[2, 309]
+                                                                        )
+                                                                )
+                                                            )
+                                                            / (
+                                                                Convert.ToDecimal(1)
+                                                                * vtstatic_0.a475_0
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        ) * Convert.ToDecimal(asgop34)
+                                    )
+                                )
+                            )
+                            - (
+                                (
+                                    (
+                                        (Convert.ToSingle(asgop70 / (8823 / 141168.0)) - (asgop53))
+                                        * Convert.ToSingle(
+                                            asgop11
+                                                / (
+                                                    (8823 / s_a477_0)
+                                                    + (asgop131 / clstatic_0.a432_0)
+                                                )
+                                        )
+                                    )
+                                    / (
+                                        (
+                                            Convert.ToUInt16(
+                                                asgop39
+                                                    / (
+                                                        (
+                                                            Convert.ToInt64(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToDouble(a206_0)
+                                                                        / -107819633.03125
+                                                                )
+                                                            ) * Convert.ToInt64(clstatic_0.a14_0)
+                                                        )
+                                                        / (
+                                                            Convert.ToSingle(1 / clstatic_0.a322_0)
+                                                            / (s_a65_0 / -697196.373046875)
+                                                        )
+                                                    )
+                                            )
+                                        )
+                                        * (
+                                            vtstatic_0.arr1d_0[205]
+                                            * (32.0F / (s_a65_0 / 2.6601794673711162E-08))
+                                        )
+                                    )
+                                )
+                                - (
+                                    (
+                                        (
+                                            (asgop75 * (s_a65_0 / -0.07271575927734375))
+                                            + (37453 * 444.45422262569087)
+                                        )
+                                        - (
+                                            Convert.ToUInt32(
+                                                Convert.ToDecimal(
+                                                    (
+                                                        (
+                                                            Convert.ToInt32(
+                                                                Convert.ToInt64(clstatic_0.a14_0)
+                                                                    + Convert.ToInt64(
+                                                                        Convert.ToInt64(
+                                                                            clstatic_0.a21_0
+                                                                                + cl_0.a270_0
+                                                                        )
+                                                                    )
+                                                            )
+                                                        ) / cl_0.arr3d_0[4, 19, 3]
+                                                    )
+                                                ) / 0.3571276361416189114315102123M
+                                            ) / asgop35
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ) <= (vt_0.a20_0)
+            ) {
+                if (
+                    (
+                        (
+                            (
+                                (
+                                    Convert.ToSingle(
+                                        Convert.ToInt16(
+                                            Convert.ToInt16(
+                                                Convert.ToInt32(vt_0.arr3d_0[4, 71, 3])
+                                                    + Convert.ToInt32(
+                                                        (
+                                                            Convert.ToInt32(
+                                                                Convert.ToInt64(-1714341880L)
+                                                                    - Convert.ToInt64((-289823010L))
+                                                            )
+                                                        )
+                                                    )
+                                            )
+                                                * (
+                                                    Convert.ToUInt64(
+                                                        Convert.ToInt32(clstatic_0.a125_0)
+                                                            + Convert.ToInt64(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToDouble(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToDouble(
+                                                                                -289823010L
+                                                                            )
+                                                                                * -9.6610686639407962E-06
+                                                                        )
+                                                                    ) / 1.96557590602558E-06
+                                                                )
+                                                            )
+                                                    )
+                                                    / (
+                                                        Convert.ToDouble(
+                                                            Convert.ToUInt64(
+                                                                Convert.ToUInt16(s_a65_0)
+                                                                    - Convert.ToInt64(asgop105)
+                                                            ) * 0.47619047619047616
+                                                        )
+                                                    )
+                                                )
+                                        )
+                                            / (
+                                                (
+                                                    (s_a65_0 * 1.2490569619936947E-05)
+                                                    - clstatic_0.a306_0
+                                                )
+                                                + (
+                                                    (
+                                                        (
+                                                            Convert.ToUInt32(
+                                                                clstatic_0.a125_0
+                                                                    / Convert.ToSingle(
+                                                                        -0.412876725F
+                                                                    )
+                                                            ) / (asgop173 - 226969.69494047618)
+                                                        ) - 0.0
+                                                    ) - (asgop12)
+                                                )
+                                            )
+                                    )
+                                    - Convert.ToSingle(
+                                        Convert.ToUInt16(
+                                            asgop28
+                                                * Convert.ToSingle(
+                                                    Convert.ToSingle(asgop1 / (1 * ((*a479_0))))
+                                                )
+                                        )
+                                            / (
+                                                Convert.ToUInt32(
+                                                    Convert.ToInt32(
+                                                        Convert.ToDecimal(s_arr1d_0[9])
+                                                            * 0.9999980231961172123567096051M
+                                                    ) / Convert.ToSingle(cl_0.a30_0)
+                                                ) / asgop4
+                                            )
+                                    )
+                                )
+                                / (
+                                    (
+                                        Convert.ToUInt16(
+                                            (
+                                                Convert.ToInt32(1424522711M - vt_0.a275_0)
+                                                - ((Convert.ToInt32(asgop136 + asgop127)))
+                                            )
+                                                / Convert.ToSingle(
+                                                    Convert.ToSingle(
+                                                        Convert.ToInt16(s_a351_0 + -3840M)
+                                                            / (
+                                                                (
+                                                                    1
+                                                                    + (
+                                                                        1
+                                                                        + clstatic_0.arr2d_0[2, 403]
+                                                                    )
+                                                                ) * s_a320_0
+                                                            )
+                                                    )
+                                                )
+                                        )
+                                        * (
+                                            Convert.ToSingle(
+                                                Convert.ToUInt32(vtstatic_0.a231_0 + 1714341887UL)
+                                                    / (
+                                                        Convert.ToDouble(
+                                                            Convert.ToDecimal(-3840M)
+                                                                / Convert.ToDecimal(
+                                                                    -20122720931645959.577092140687M
+                                                                )
+                                                        ) + asgop138
+                                                    )
+                                            ) * (asgop157 / s_a44_0)
+                                        )
+                                    ) - vt_0.a20_0
+                                )
+                            )
+                            + (
+                                (
+                                    (
+                                        (
+                                            (
+                                                Convert.ToInt16(
+                                                    Convert.ToInt64(
+                                                        Convert.ToInt64(
+                                                            Convert.ToDouble(38123L)
+                                                                * vtstatic_0.a493_0
+                                                        )
+                                                    )
+                                                        - Convert.ToInt64(
+                                                            Convert.ToInt64(
+                                                                Convert.ToInt16(1)
+                                                                    + Convert.ToInt64(
+                                                                        4681581972605108222L
+                                                                    )
+                                                            )
+                                                        )
+                                                )
+                                                * (
+                                                    (1714341887UL / clstatic_0.arr1d_0[371])
+                                                    - (vt_0.a29_0)
+                                                )
+                                            ) + asgop123
+                                        )
+                                        - (
+                                            (
+                                                asgop77
+                                                * (
+                                                    Convert.ToUInt64(
+                                                        Convert.ToUInt32(s_a92_0)
+                                                            - Convert.ToInt64(1735886337L)
+                                                    ) / vtstatic_0.a255_0
+                                                )
+                                            )
+                                        )
+                                    )
+                                    - (
+                                        Convert.ToDouble(
+                                            Convert.ToDecimal(
+                                                (
+                                                    Convert.ToDecimal(
+                                                        (
+                                                            Convert.ToInt32(
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        (
+                                                                            Convert.ToInt32(
+                                                                                vtstatic_0.a255_0
+                                                                                    + clstatic_0.arr1d_0[
+                                                                                        215
+                                                                                    ]
+                                                                            )
+                                                                        )
+                                                                            * (
+                                                                                s_a65_0
+                                                                                / 38123.99981661429
+                                                                            )
+                                                                    )
+                                                                ) * (clstatic_0.a21_0 / ((*a114_0)))
+                                                            )
+                                                        )
+                                                    )
+                                                    / (
+                                                        Convert.ToDecimal(
+                                                            Convert.ToInt64(
+                                                                Convert.ToDouble(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToInt32(asgop119)
+                                                                            + Convert.ToInt64(
+                                                                                Convert.ToInt64(
+                                                                                    Convert.ToUInt16(
+                                                                                        s_a65_0
+                                                                                    )
+                                                                                        - Convert.ToInt64(
+                                                                                            -4681581972397180400L
+                                                                                        )
+                                                                                )
+                                                                            )
+                                                                    )
+                                                                ) * -6.8352963137785907E-18
+                                                            )
+                                                        )
+                                                        / (
+                                                            Convert.ToDecimal(
+                                                                Convert.ToInt16(
+                                                                    Convert.ToInt64(
+                                                                        clstatic_0.a69_0
+                                                                    )
+                                                                        - Convert.ToInt64(
+                                                                            (
+                                                                                Convert.ToInt64(
+                                                                                    Convert.ToUInt32(
+                                                                                        s_a92_0
+                                                                                    )
+                                                                                        - Convert.ToInt64(
+                                                                                            a206_0
+                                                                                        )
+                                                                                )
+                                                                            )
+                                                                        )
+                                                                )
+                                                            )
+                                                            * (
+                                                                Convert.ToDecimal(
+                                                                    Convert.ToInt16(
+                                                                        Convert.ToInt32(386662224)
+                                                                            + Convert.ToInt32(
+                                                                                s_arr2d_0[2, 309]
+                                                                            )
+                                                                    )
+                                                                )
+                                                                / (
+                                                                    Convert.ToDecimal(1)
+                                                                    * vtstatic_0.a475_0
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            ) * Convert.ToDecimal(asgop34)
+                                        )
+                                    )
+                                )
+                                - (
+                                    (
+                                        (
+                                            (
+                                                Convert.ToSingle(asgop70 / (8823 / 141168.0))
+                                                - (asgop53)
+                                            )
+                                            * Convert.ToSingle(
+                                                asgop11
+                                                    / (
+                                                        (8823 / s_a477_0)
+                                                        + (asgop131 / clstatic_0.a432_0)
+                                                    )
+                                            )
+                                        )
+                                        / (
+                                            (
+                                                Convert.ToUInt16(
+                                                    asgop39
+                                                        / (
+                                                            (
+                                                                Convert.ToInt64(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToDouble(a206_0)
+                                                                            / -107819633.03125
+                                                                    )
+                                                                )
+                                                                * Convert.ToInt64(clstatic_0.a14_0)
+                                                            )
+                                                            / (
+                                                                Convert.ToSingle(
+                                                                    1 / clstatic_0.a322_0
+                                                                ) / (s_a65_0 / -697196.373046875)
+                                                            )
+                                                        )
+                                                )
+                                            )
+                                            * (
+                                                vtstatic_0.arr1d_0[205]
+                                                * (32.0F / (s_a65_0 / 2.6601794673711162E-08))
+                                            )
+                                        )
+                                    )
+                                    - (
+                                        (
+                                            (
+                                                (asgop75 * (s_a65_0 / -0.07271575927734375))
+                                                + (37453 * 444.45422262569087)
+                                            )
+                                            - (
+                                                Convert.ToUInt32(
+                                                    Convert.ToDecimal(
+                                                        (
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    Convert.ToInt64(
+                                                                        clstatic_0.a14_0
+                                                                    )
+                                                                        + Convert.ToInt64(
+                                                                            Convert.ToInt64(
+                                                                                clstatic_0.a21_0
+                                                                                    + cl_0.a270_0
+                                                                            )
+                                                                        )
+                                                                )
+                                                            ) / cl_0.arr3d_0[4, 19, 3]
+                                                        )
+                                                    ) / 0.3571276361416189114315102123M
+                                                ) / asgop35
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ) == (vt_0.a20_0)
+                ) {
+                    if (
+                        (
+                            (
+                                (
+                                    (
+                                        Convert.ToSingle(
+                                            Convert.ToInt16(
+                                                Convert.ToInt16(
+                                                    Convert.ToInt32(vt_0.arr3d_0[4, 71, 3])
+                                                        + Convert.ToInt32(
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    Convert.ToInt64(-1714341880L)
+                                                                        - Convert.ToInt64(
+                                                                            (-289823010L)
+                                                                        )
+                                                                )
+                                                            )
+                                                        )
+                                                )
+                                                    * (
+                                                        Convert.ToUInt64(
+                                                            Convert.ToInt32(clstatic_0.a125_0)
+                                                                + Convert.ToInt64(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToDouble(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToDouble(
+                                                                                    -289823010L
+                                                                                )
+                                                                                    * -9.6610686639407962E-06
+                                                                            )
+                                                                        ) / 1.96557590602558E-06
+                                                                    )
+                                                                )
+                                                        )
+                                                        / (
+                                                            Convert.ToDouble(
+                                                                Convert.ToUInt64(
+                                                                    Convert.ToUInt16(s_a65_0)
+                                                                        - Convert.ToInt64(asgop105)
+                                                                ) * 0.47619047619047616
+                                                            )
+                                                        )
+                                                    )
+                                            )
+                                                / (
+                                                    (
+                                                        (s_a65_0 * 1.2490569619936947E-05)
+                                                        - clstatic_0.a306_0
+                                                    )
+                                                    + (
+                                                        (
+                                                            (
+                                                                Convert.ToUInt32(
+                                                                    clstatic_0.a125_0
+                                                                        / Convert.ToSingle(
+                                                                            -0.412876725F
+                                                                        )
+                                                                ) / (asgop173 - 226969.69494047618)
+                                                            ) - 0.0
+                                                        ) - (asgop12)
+                                                    )
+                                                )
+                                        )
+                                        - Convert.ToSingle(
+                                            Convert.ToUInt16(
+                                                asgop28
+                                                    * Convert.ToSingle(
+                                                        Convert.ToSingle(asgop1 / (1 * ((*a479_0))))
+                                                    )
+                                            )
+                                                / (
+                                                    Convert.ToUInt32(
+                                                        Convert.ToInt32(
+                                                            Convert.ToDecimal(s_arr1d_0[9])
+                                                                * 0.9999980231961172123567096051M
+                                                        ) / Convert.ToSingle(cl_0.a30_0)
+                                                    ) / asgop4
+                                                )
+                                        )
+                                    )
+                                    / (
+                                        (
+                                            Convert.ToUInt16(
+                                                (
+                                                    Convert.ToInt32(1424522711M - vt_0.a275_0)
+                                                    - ((Convert.ToInt32(asgop136 + asgop127)))
+                                                )
+                                                    / Convert.ToSingle(
+                                                        Convert.ToSingle(
+                                                            Convert.ToInt16(s_a351_0 + -3840M)
+                                                                / (
+                                                                    (
+                                                                        1
+                                                                        + (
+                                                                            1
+                                                                            + clstatic_0.arr2d_0[
+                                                                                2,
+                                                                                403
+                                                                            ]
+                                                                        )
+                                                                    ) * s_a320_0
+                                                                )
+                                                        )
+                                                    )
+                                            )
+                                            * (
+                                                Convert.ToSingle(
+                                                    Convert.ToUInt32(
+                                                        vtstatic_0.a231_0 + 1714341887UL
+                                                    )
+                                                        / (
+                                                            Convert.ToDouble(
+                                                                Convert.ToDecimal(-3840M)
+                                                                    / Convert.ToDecimal(
+                                                                        -20122720931645959.577092140687M
+                                                                    )
+                                                            ) + asgop138
+                                                        )
+                                                ) * (asgop157 / s_a44_0)
+                                            )
+                                        ) - vt_0.a20_0
+                                    )
+                                )
+                                + (
+                                    (
+                                        (
+                                            (
+                                                (
+                                                    Convert.ToInt16(
+                                                        Convert.ToInt64(
+                                                            Convert.ToInt64(
+                                                                Convert.ToDouble(38123L)
+                                                                    * vtstatic_0.a493_0
+                                                            )
+                                                        )
+                                                            - Convert.ToInt64(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToInt16(1)
+                                                                        + Convert.ToInt64(
+                                                                            4681581972605108222L
+                                                                        )
+                                                                )
+                                                            )
+                                                    )
+                                                    * (
+                                                        (1714341887UL / clstatic_0.arr1d_0[371])
+                                                        - (vt_0.a29_0)
+                                                    )
+                                                ) + asgop123
+                                            )
+                                            - (
+                                                (
+                                                    asgop77
+                                                    * (
+                                                        Convert.ToUInt64(
+                                                            Convert.ToUInt32(s_a92_0)
+                                                                - Convert.ToInt64(1735886337L)
+                                                        ) / vtstatic_0.a255_0
+                                                    )
+                                                )
+                                            )
+                                        )
+                                        - (
+                                            Convert.ToDouble(
+                                                Convert.ToDecimal(
+                                                    (
+                                                        Convert.ToDecimal(
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    (
+                                                                        Convert.ToInt32(
+                                                                            (
+                                                                                Convert.ToInt32(
+                                                                                    vtstatic_0.a255_0
+                                                                                        + clstatic_0.arr1d_0[
+                                                                                            215
+                                                                                        ]
+                                                                                )
+                                                                            )
+                                                                                * (
+                                                                                    s_a65_0
+                                                                                    / 38123.99981661429
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                        * (
+                                                                            clstatic_0.a21_0
+                                                                            / ((*a114_0))
+                                                                        )
+                                                                )
+                                                            )
+                                                        )
+                                                        / (
+                                                            Convert.ToDecimal(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToDouble(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToInt32(
+                                                                                asgop119
+                                                                            )
+                                                                                + Convert.ToInt64(
+                                                                                    Convert.ToInt64(
+                                                                                        Convert.ToUInt16(
+                                                                                            s_a65_0
+                                                                                        )
+                                                                                            - Convert.ToInt64(
+                                                                                                -4681581972397180400L
+                                                                                            )
+                                                                                    )
+                                                                                )
+                                                                        )
+                                                                    ) * -6.8352963137785907E-18
+                                                                )
+                                                            )
+                                                            / (
+                                                                Convert.ToDecimal(
+                                                                    Convert.ToInt16(
+                                                                        Convert.ToInt64(
+                                                                            clstatic_0.a69_0
+                                                                        )
+                                                                            - Convert.ToInt64(
+                                                                                (
+                                                                                    Convert.ToInt64(
+                                                                                        Convert.ToUInt32(
+                                                                                            s_a92_0
+                                                                                        )
+                                                                                            - Convert.ToInt64(
+                                                                                                a206_0
+                                                                                            )
+                                                                                    )
+                                                                                )
+                                                                            )
+                                                                    )
+                                                                )
+                                                                * (
+                                                                    Convert.ToDecimal(
+                                                                        Convert.ToInt16(
+                                                                            Convert.ToInt32(
+                                                                                386662224
+                                                                            )
+                                                                                + Convert.ToInt32(
+                                                                                    s_arr2d_0[
+                                                                                        2,
+                                                                                        309
+                                                                                    ]
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                    / (
+                                                                        Convert.ToDecimal(1)
+                                                                        * vtstatic_0.a475_0
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                ) * Convert.ToDecimal(asgop34)
+                                            )
+                                        )
+                                    )
+                                    - (
+                                        (
+                                            (
+                                                (
+                                                    Convert.ToSingle(asgop70 / (8823 / 141168.0))
+                                                    - (asgop53)
+                                                )
+                                                * Convert.ToSingle(
+                                                    asgop11
+                                                        / (
+                                                            (8823 / s_a477_0)
+                                                            + (asgop131 / clstatic_0.a432_0)
+                                                        )
+                                                )
+                                            )
+                                            / (
+                                                (
+                                                    Convert.ToUInt16(
+                                                        asgop39
+                                                            / (
+                                                                (
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToDouble(a206_0)
+                                                                                / -107819633.03125
+                                                                        )
+                                                                    )
+                                                                    * Convert.ToInt64(
+                                                                        clstatic_0.a14_0
+                                                                    )
+                                                                )
+                                                                / (
+                                                                    Convert.ToSingle(
+                                                                        1 / clstatic_0.a322_0
+                                                                    )
+                                                                    / (s_a65_0 / -697196.373046875)
+                                                                )
+                                                            )
+                                                    )
+                                                )
+                                                * (
+                                                    vtstatic_0.arr1d_0[205]
+                                                    * (32.0F / (s_a65_0 / 2.6601794673711162E-08))
+                                                )
+                                            )
+                                        )
+                                        - (
+                                            (
+                                                (
+                                                    (asgop75 * (s_a65_0 / -0.07271575927734375))
+                                                    + (37453 * 444.45422262569087)
+                                                )
+                                                - (
+                                                    Convert.ToUInt32(
+                                                        Convert.ToDecimal(
+                                                            (
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        Convert.ToInt64(
+                                                                            clstatic_0.a14_0
+                                                                        )
+                                                                            + Convert.ToInt64(
+                                                                                Convert.ToInt64(
+                                                                                    clstatic_0.a21_0
+                                                                                        + cl_0.a270_0
+                                                                                )
+                                                                            )
+                                                                    )
+                                                                ) / cl_0.arr3d_0[4, 19, 3]
+                                                            )
+                                                        ) / 0.3571276361416189114315102123M
+                                                    ) / asgop35
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        ) != (vt_0.a20_0)
+                    )
                         Console.WriteLine("Func_0: != true");
                 }
             }
         }
-        return Convert.ToInt32((Convert.ToInt32(((((Convert.ToDouble(Convert.ToDecimal(asgop120) / Convert.ToDecimal((Convert.ToDecimal(asgop23) / (Convert.ToDecimal((Convert.ToInt32(Convert.ToUInt16(asgop0 + vtstatic_0.a272_0)) - Convert.ToInt32(38126L / clstatic_0.a14_0))) * (Convert.ToDecimal(asgop162) / -128M))))) + (Convert.ToUInt64(Convert.ToUInt32(Convert.ToUInt32((Convert.ToInt32(Convert.ToInt64(asgop6) - Convert.ToInt64((s_a261_0)))) / cl_0.a50_0)) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(Convert.ToUInt16(Convert.ToInt64(asgop149) + Convert.ToInt64(vtstatic_0.a356_0))) - Convert.ToInt64(Convert.ToInt64(Convert.ToUInt32(s_a105_0) - Convert.ToInt64(a452_0)))))) / (Convert.ToUInt32((Convert.ToInt32((Convert.ToInt32(s_a65_0) - (Convert.ToInt32(vtstatic_0.arr2d_0[2, 47] * clstatic_0.a14_0))) * asgop111)) * asgop86) * ((Convert.ToUInt16(Convert.ToInt32((2816 + s_a219_0)) - Convert.ToInt32(cl_0.a311_0))) * (asgop154 / -3.4750246253123208E+25))))) + asgop30) - (((((((Convert.ToDouble(vtstatic_0.a272_0 * (clstatic_0.a14_0 / clstatic_0.a172_0))) + s_a139_0) + (Convert.ToInt16(0.001953125F + 2815.998F) * s_a150_0)) + asgop95) - ((Convert.ToInt64(Convert.ToInt32((Convert.ToInt32(s_a65_0) - ((2816 + (Convert.ToInt32(s_a101_0 + -1731306277.1818183)))))) - Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(s_a158_0) - Convert.ToInt64(-1731287084L))) / 2.5781110577566729E-10))) / (vtstatic_0.a113_0 * 3.7256973298300746E-08)))) - (Convert.ToUInt64(Convert.ToInt16(Convert.ToInt16((Convert.ToInt16(vtstatic_0.a48_0 + 2809M) / 1) * Convert.ToSingle(Convert.ToSingle((Convert.ToUInt16(vtstatic_0.a113_0 / 45412.999868849016)) * (2815.998F / clstatic_0.a135_0))))) - Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32((Convert.ToInt32(vtstatic_0.a113_0 * clstatic_0.a14_0))) + Convert.ToInt64(asgop171))) / ((-1735519511L / -46582407462475096.0) - (asgop166))))) / ((((Convert.ToUInt32((a436_0 + 0.0) + 3897661180.3377886)) * 9.1496436869845726E-09) + asgop144) - ((Convert.ToInt32(1731325207L / clstatic_0.a14_0) / asgop17))))) - ((Convert.ToSingle(Convert.ToUInt32(Convert.ToUInt16(Convert.ToInt32(1731325207L / clstatic_0.a14_0) / Convert.ToSingle(45413F)) + (Convert.ToInt32((Convert.ToInt32(asgop161 * (Convert.ToInt64(Convert.ToInt64(vtstatic_0.a272_0 - 37995UL) / clstatic_0.a14_0)))) * (vtstatic_0.a113_0 / asgop156)))) / (Convert.ToDouble((Convert.ToUInt64(Convert.ToUInt64(Convert.ToInt16(asgop13) + Convert.ToInt64(37995L)) / Convert.ToUInt64(Convert.ToUInt16(Convert.ToUInt16(Convert.ToSingle(37995UL / 0.83665470239799178) + vtstatic_0.a431_0)) + Convert.ToInt64(-38123L)))) * (asgop82 / (s_a65_0 / -1592863.3581561216))))) / ((Convert.ToUInt16((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(Convert.ToInt64(-38123L) - Convert.ToInt64((-1731363330L)))) * (vtstatic_0.a113_0 * 5.4913969573838816E-10))))) % (Convert.ToInt32(Convert.ToInt32(Convert.ToDecimal(Convert.ToInt32(vtstatic_0.a113_0 / 1.05181293921208)) / vtstatic_0.a266_0))))) / Convert.ToSingle(asgop21)) * ((Convert.ToUInt16(vtstatic_0.arr2d_0[2, 25] / 43175.928129262407)) / (-41442.11F * asgop104))) * (Convert.ToSingle(Convert.ToUInt32(vtstatic_0.arr2d_0[2, 25] * a369_0) * (-38123L / asgop101)) * (Convert.ToUInt16(vtstatic_0.arr2d_0[2, 25] / Convert.ToSingle(43175.9258F)) / asgop52))))))) - ((Convert.ToInt16(Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(Convert.ToInt16(Convert.ToUInt16((Convert.ToDecimal(asgop71) / asgop167) - asgop80) - Convert.ToUInt16(Convert.ToInt16(Convert.ToDecimal((Convert.ToInt16(27759 / Convert.ToSingle(9.857599F)) / Convert.ToInt16(s_a105_0 - 3897661215U))) / 0.0935361721915897163356141633M) * Convert.ToSingle(Convert.ToSingle(s_a65_0 * asgop59))))) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt32((Convert.ToInt32((Convert.ToUInt16(vtstatic_0.arr2d_0[2, 25] / (vtstatic_0.arr2d_0[2, 25] * (s_a65_0 / vt_0.a191_0))))) + asgop128)) + Convert.ToInt64((Convert.ToInt64(Convert.ToInt64(Convert.ToUInt32(s_a105_0) - Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(Convert.ToUInt16(Convert.ToDecimal(27759) * 1.3733924132713714470982384092M)) - Convert.ToInt64(-3897623091L))))) * Convert.ToInt64((Convert.ToInt64(Convert.ToDouble(-3897623091L) / clstatic_0.a490_0) + -725656033019148410L)))))))) + Convert.ToInt64(((Convert.ToInt64(asgop2) + Convert.ToInt64(Convert.ToInt32((Convert.ToInt32(s_arr1d_0[353] * vt_0.a327_0))) + Convert.ToInt64((Convert.ToInt64(Convert.ToInt16(27759) + Convert.ToInt64(clstatic_0.a461_0)) - (asgop102))))) + Convert.ToInt64(Convert.ToInt32(((Convert.ToInt32((Convert.ToUInt16(7.5655281721000671E-07 - (asgop37)))) - ((Convert.ToInt32(s_arr1d_0[353] / (s_arr1d_0[353] / 1424492376.0)) / Convert.ToInt32(0.0935361721915897M - 1.0935361721915897M)))) * (Convert.ToInt32(Convert.ToInt64(Convert.ToInt64(Convert.ToUInt32(s_a105_0) - Convert.ToInt64(-2453101145507960936L))) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(s_a15_0))))))) - Convert.ToInt64(Convert.ToInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(Convert.ToInt16(Convert.ToInt16(s_a92_0 - 3450200465U) - vtstatic_0.a119_0)) + Convert.ToInt64(asgop73))))))))) * ((Convert.ToDouble((Convert.ToUInt64(Convert.ToInt16(Convert.ToInt16((Convert.ToInt16(Convert.ToInt16(vtstatic_0.a119_0 / Convert.ToSingle(1.9921056F)))) % (Convert.ToInt16(Convert.ToInt16(vt_0.a32_0 * ((s_arr1d_0[353] / -5811.2136188331888) * (vt_0.a32_0 / clstatic_0.a390_0))))))) + Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(asgop158) / asgop165))) * asgop94) * asgop57)) / (((asgop50 / (asgop18 / asgop54)) - ((Convert.ToInt64(Convert.ToDouble(asgop114) / (Convert.ToUInt32(arr3d_0[4, 237, 3] * 2.0125482504315224) * clstatic_0.a487_0)) / ((2816 / asgop88) - (Convert.ToInt64(Convert.ToDouble(clstatic_0.a14_0) / (2816 / -4827586734080.0)) / asgop90))))) - ((((2816 * (9.857599F * -75.548544143842989)) - cl_0.a49_0) + ((Convert.ToSingle(s_a92_0 / clstatic_0.a379_0) * (arr3d_0[4, 237, 3] / -1329.724264912511)) - (Convert.ToDouble(asgop140 * (s_a65_0 / s_a147_0))))))))))) + ((((Convert.ToSingle(Convert.ToInt16(Convert.ToInt16(Convert.ToInt32(vt_0.arr3d_0[4, 71, 3]) + Convert.ToInt32((Convert.ToInt32(Convert.ToInt64(-1714341880L) - Convert.ToInt64((-289823010L)))))) * (Convert.ToUInt64(Convert.ToInt32(clstatic_0.a125_0) + Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToDouble(-289823010L) * -9.6610686639407962E-06)) / 1.96557590602558E-06))) / (Convert.ToDouble(Convert.ToUInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(asgop105)) * 0.47619047619047616)))) / (((s_a65_0 * 1.2490569619936947E-05) - clstatic_0.a306_0) + (((Convert.ToUInt32(clstatic_0.a125_0 / Convert.ToSingle(-0.412876725F)) / (asgop173 - 226969.69494047618)) - 0.0) - (asgop12)))) - Convert.ToSingle(Convert.ToUInt16(asgop28 * Convert.ToSingle(Convert.ToSingle(asgop1 / (1 * ((*a479_0)))))) / (Convert.ToUInt32(Convert.ToInt32(Convert.ToDecimal(s_arr1d_0[9]) * 0.9999980231961172123567096051M) / Convert.ToSingle(cl_0.a30_0)) / asgop4))) / ((Convert.ToUInt16((Convert.ToInt32(1424522711M - vt_0.a275_0) - ((Convert.ToInt32(asgop136 + asgop127)))) / Convert.ToSingle(Convert.ToSingle(Convert.ToInt16(s_a351_0 + -3840M) / ((1 + (1 + clstatic_0.arr2d_0[2, 403])) * s_a320_0)))) * (Convert.ToSingle(Convert.ToUInt32(vtstatic_0.a231_0 + 1714341887UL) / (Convert.ToDouble(Convert.ToDecimal(-3840M) / Convert.ToDecimal(-20122720931645959.577092140687M)) + asgop138)) * (asgop157 / s_a44_0))) - vt_0.a20_0)) + (((((Convert.ToInt16(Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(38123L) * vtstatic_0.a493_0)) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(1) + Convert.ToInt64(4681581972605108222L)))) * ((1714341887UL / clstatic_0.arr1d_0[371]) - (vt_0.a29_0))) + asgop123) - ((asgop77 * (Convert.ToUInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(1735886337L)) / vtstatic_0.a255_0)))) - (Convert.ToDouble(Convert.ToDecimal((Convert.ToDecimal((Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(vtstatic_0.a255_0 + clstatic_0.arr1d_0[215])) * (s_a65_0 / 38123.99981661429))) * (clstatic_0.a21_0 / ((*a114_0)))))) / (Convert.ToDecimal(Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(asgop119) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(s_a65_0) - Convert.ToInt64(-4681581972397180400L))))) * -6.8352963137785907E-18)) / (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt64(clstatic_0.a69_0) - Convert.ToInt64((Convert.ToInt64(Convert.ToUInt32(s_a92_0) - Convert.ToInt64(a206_0)))))) * (Convert.ToDecimal(Convert.ToInt16(Convert.ToInt32(386662224) + Convert.ToInt32(s_arr2d_0[2, 309]))) / (Convert.ToDecimal(1) * vtstatic_0.a475_0)))))) * Convert.ToDecimal(asgop34)))) - ((((Convert.ToSingle(asgop70 / (8823 / 141168.0)) - (asgop53)) * Convert.ToSingle(asgop11 / ((8823 / s_a477_0) + (asgop131 / clstatic_0.a432_0)))) / ((Convert.ToUInt16(asgop39 / ((Convert.ToInt64(Convert.ToInt64(Convert.ToDouble(a206_0) / -107819633.03125)) * Convert.ToInt64(clstatic_0.a14_0)) / (Convert.ToSingle(1 / clstatic_0.a322_0) / (s_a65_0 / -697196.373046875))))) * (vtstatic_0.arr1d_0[205] * (32.0F / (s_a65_0 / 2.6601794673711162E-08))))) - ((((asgop75 * (s_a65_0 / -0.07271575927734375)) + (37453 * 444.45422262569087)) - (Convert.ToUInt32(Convert.ToDecimal(((Convert.ToInt32(Convert.ToInt64(clstatic_0.a14_0) + Convert.ToInt64(Convert.ToInt64(clstatic_0.a21_0 + cl_0.a270_0)))) / cl_0.arr3d_0[4, 19, 3])) / 0.3571276361416189114315102123M) / asgop35)))))) + ((((Convert.ToInt16((Convert.ToInt16(Convert.ToInt16((Convert.ToInt16(Convert.ToInt16(Convert.ToInt32(cl_0.arr3d_0[4, 19, 3]) + Convert.ToInt32(s_arr2d_0[2, 247])))) % (Convert.ToInt16(cl_0.a480_0))))) % (Convert.ToInt16(Convert.ToInt16(Convert.ToInt16(Convert.ToInt16(Convert.ToUInt16(Convert.ToInt32(s_arr2d_0[2, 247]) + Convert.ToInt32(8730)) - 25144) * 1) / (clstatic_0.a197_0 * 1242.7939262472885))))) * (Convert.ToUInt16(Convert.ToUInt16(Convert.ToInt16(Convert.ToInt16(1 * clstatic_0.a14_0) / s_a148_0) * asgop100) + (Convert.ToUInt16((Convert.ToUInt16(65536.0F - clstatic_0.a413_0)) % 21556))) * (Convert.ToUInt16(Convert.ToDecimal(Convert.ToInt16(1714341888U - 1714329579U)) * clstatic_0.a162_0) * s_a245_0))) - (asgop126)) - (((((clstatic_0.a151_0 / clstatic_0.arr1d_0[414]) - s_a238_0) + (asgop14 / asgop122)) + asgop91) + ((asgop19 * ((1714341888U / asgop64) / ((Convert.ToUInt16(32768.0F - (-19275.0F))) * (52043 / vt_0.a35_0)))) + asgop55))) - (((((Convert.ToUInt16(clstatic_0.a151_0 * ((*a347_0))) / (-1.52587891E-05F / asgop96)) + (Convert.ToDouble(Convert.ToUInt64(Convert.ToUInt32(Convert.ToUInt32(vt_0.arr3d_0[4, 315, 3] * (1714341888U / asgop168))) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(Convert.ToInt16(clstatic_0.a151_0 / cl_0.arr3d_0[4, 19, 3])) + Convert.ToInt64(Convert.ToInt64(Convert.ToInt32(cl_0.arr3d_0[4, 19, 3]) + Convert.ToInt64(vt_0.a199_0)))))) * (Convert.ToInt64(clstatic_0.a21_0 + clstatic_0.a21_0) / (clstatic_0.a151_0 * (-1.52587891E-05F * -553.00995451249253)))))) - asgop93) - (((Convert.ToUInt64(Convert.ToUInt64((Convert.ToInt64(Convert.ToDouble(Convert.ToInt64(Convert.ToInt32(Convert.ToInt32(clstatic_0.a14_0 / (Convert.ToInt64(clstatic_0.a14_0 / clstatic_0.a14_0)))) + Convert.ToInt64(Convert.ToInt64(Convert.ToUInt16(52043) + Convert.ToInt64(1177416765L))))) * asgop163) - (s_a116_0)) + Convert.ToInt64(Convert.ToInt32(arr3d_0[4, 182, 3]) - Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(Convert.ToInt16(Convert.ToInt64(s_a116_0) + Convert.ToInt64(4225041378952953975L))) - Convert.ToInt64(clstatic_0.a377_0))))) / asgop36)) / ((((clstatic_0.a21_0 / asgop118) - 0.0) * ((Convert.ToUInt16((vtstatic_0.a276_0 / clstatic_0.arr1d_0[363]) - (asgop83))) / asgop24)) - (((Convert.ToDouble(Convert.ToInt64(Convert.ToDouble(clstatic_0.a377_0) / vtstatic_0.a408_0) * clstatic_0.a57_0)) + ((Convert.ToDouble(-4685L * (vtstatic_0.a276_0 * 4.4491889804765315E-11))) + asgop41)))))))))))));
+        return Convert.ToInt32(
+            (
+                Convert.ToInt32(
+                    (
+                        (
+                            (
+                                (
+                                    Convert.ToDouble(
+                                        Convert.ToDecimal(asgop120)
+                                            / Convert.ToDecimal(
+                                                (
+                                                    Convert.ToDecimal(asgop23)
+                                                    / (
+                                                        Convert.ToDecimal(
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    Convert.ToUInt16(
+                                                                        asgop0 + vtstatic_0.a272_0
+                                                                    )
+                                                                )
+                                                                - Convert.ToInt32(
+                                                                    38126L / clstatic_0.a14_0
+                                                                )
+                                                            )
+                                                        ) * (Convert.ToDecimal(asgop162) / -128M)
+                                                    )
+                                                )
+                                            )
+                                    )
+                                    + (
+                                        Convert.ToUInt64(
+                                            Convert.ToUInt32(
+                                                Convert.ToUInt32(
+                                                    (
+                                                        Convert.ToInt32(
+                                                            Convert.ToInt64(asgop6)
+                                                                - Convert.ToInt64((s_a261_0))
+                                                        )
+                                                    ) / cl_0.a50_0
+                                                )
+                                            )
+                                                + Convert.ToInt64(
+                                                    Convert.ToInt64(
+                                                        Convert.ToUInt16(
+                                                            Convert.ToUInt16(
+                                                                Convert.ToInt64(asgop149)
+                                                                    + Convert.ToInt64(
+                                                                        vtstatic_0.a356_0
+                                                                    )
+                                                            )
+                                                        )
+                                                            - Convert.ToInt64(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToUInt32(s_a105_0)
+                                                                        - Convert.ToInt64(a452_0)
+                                                                )
+                                                            )
+                                                    )
+                                                )
+                                        )
+                                        / (
+                                            Convert.ToUInt32(
+                                                (
+                                                    Convert.ToInt32(
+                                                        (
+                                                            Convert.ToInt32(s_a65_0)
+                                                            - (
+                                                                Convert.ToInt32(
+                                                                    vtstatic_0.arr2d_0[2, 47]
+                                                                        * clstatic_0.a14_0
+                                                                )
+                                                            )
+                                                        ) * asgop111
+                                                    )
+                                                ) * asgop86
+                                            )
+                                            * (
+                                                (
+                                                    Convert.ToUInt16(
+                                                        Convert.ToInt32((2816 + s_a219_0))
+                                                            - Convert.ToInt32(cl_0.a311_0)
+                                                    )
+                                                ) * (asgop154 / -3.4750246253123208E+25)
+                                            )
+                                        )
+                                    )
+                                ) + asgop30
+                            )
+                            - (
+                                (
+                                    (
+                                        (
+                                            (
+                                                (
+                                                    (
+                                                        Convert.ToDouble(
+                                                            vtstatic_0.a272_0
+                                                                * (
+                                                                    clstatic_0.a14_0
+                                                                    / clstatic_0.a172_0
+                                                                )
+                                                        )
+                                                    ) + s_a139_0
+                                                )
+                                                + (
+                                                    Convert.ToInt16(0.001953125F + 2815.998F)
+                                                    * s_a150_0
+                                                )
+                                            ) + asgop95
+                                        )
+                                        - (
+                                            (
+                                                Convert.ToInt64(
+                                                    Convert.ToInt32(
+                                                        (
+                                                            Convert.ToInt32(s_a65_0)
+                                                            - (
+                                                                (
+                                                                    2816
+                                                                    + (
+                                                                        Convert.ToInt32(
+                                                                            s_a101_0
+                                                                                + -1731306277.1818183
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                        - Convert.ToInt64(
+                                                            Convert.ToInt64(
+                                                                Convert.ToDouble(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToInt32(s_a158_0)
+                                                                            - Convert.ToInt64(
+                                                                                -1731287084L
+                                                                            )
+                                                                    )
+                                                                ) / 2.5781110577566729E-10
+                                                            )
+                                                        )
+                                                ) / (vtstatic_0.a113_0 * 3.7256973298300746E-08)
+                                            )
+                                        )
+                                    )
+                                    - (
+                                        Convert.ToUInt64(
+                                            Convert.ToInt16(
+                                                Convert.ToInt16(
+                                                    (Convert.ToInt16(vtstatic_0.a48_0 + 2809M) / 1)
+                                                        * Convert.ToSingle(
+                                                            Convert.ToSingle(
+                                                                (
+                                                                    Convert.ToUInt16(
+                                                                        vtstatic_0.a113_0
+                                                                            / 45412.999868849016
+                                                                    )
+                                                                ) * (2815.998F / clstatic_0.a135_0)
+                                                            )
+                                                        )
+                                                )
+                                            )
+                                                - Convert.ToInt64(
+                                                    Convert.ToInt64(
+                                                        Convert.ToDouble(
+                                                            Convert.ToInt64(
+                                                                Convert.ToInt32(
+                                                                    (
+                                                                        Convert.ToInt32(
+                                                                            vtstatic_0.a113_0
+                                                                                * clstatic_0.a14_0
+                                                                        )
+                                                                    )
+                                                                ) + Convert.ToInt64(asgop171)
+                                                            )
+                                                        )
+                                                            / (
+                                                                (
+                                                                    -1735519511L
+                                                                    / -46582407462475096.0
+                                                                ) - (asgop166)
+                                                            )
+                                                    )
+                                                )
+                                        )
+                                        / (
+                                            (
+                                                (
+                                                    (
+                                                        Convert.ToUInt32(
+                                                            (a436_0 + 0.0) + 3897661180.3377886
+                                                        )
+                                                    ) * 9.1496436869845726E-09
+                                                ) + asgop144
+                                            )
+                                            - (
+                                                (
+                                                    Convert.ToInt32(1731325207L / clstatic_0.a14_0)
+                                                    / asgop17
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                                - (
+                                    (
+                                        Convert.ToSingle(
+                                            Convert.ToUInt32(
+                                                Convert.ToUInt16(
+                                                    Convert.ToInt32(1731325207L / clstatic_0.a14_0)
+                                                        / Convert.ToSingle(45413F)
+                                                )
+                                                    + (
+                                                        Convert.ToInt32(
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    asgop161
+                                                                        * (
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToInt64(
+                                                                                    vtstatic_0.a272_0
+                                                                                        - 37995UL
+                                                                                ) / clstatic_0.a14_0
+                                                                            )
+                                                                        )
+                                                                )
+                                                            ) * (vtstatic_0.a113_0 / asgop156)
+                                                        )
+                                                    )
+                                            )
+                                                / (
+                                                    Convert.ToDouble(
+                                                        (
+                                                            Convert.ToUInt64(
+                                                                Convert.ToUInt64(
+                                                                    Convert.ToInt16(asgop13)
+                                                                        + Convert.ToInt64(37995L)
+                                                                )
+                                                                    / Convert.ToUInt64(
+                                                                        Convert.ToUInt16(
+                                                                            Convert.ToUInt16(
+                                                                                Convert.ToSingle(
+                                                                                    37995UL
+                                                                                        / 0.83665470239799178
+                                                                                )
+                                                                                    + vtstatic_0.a431_0
+                                                                            )
+                                                                        ) + Convert.ToInt64(-38123L)
+                                                                    )
+                                                            )
+                                                        )
+                                                            * (
+                                                                asgop82
+                                                                / (s_a65_0 / -1592863.3581561216)
+                                                            )
+                                                    )
+                                                )
+                                        )
+                                        / (
+                                            (
+                                                Convert.ToUInt16(
+                                                    (
+                                                        Convert.ToInt32(
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    (
+                                                                        Convert.ToInt32(
+                                                                            (
+                                                                                Convert.ToInt32(
+                                                                                    Convert.ToInt64(
+                                                                                        -38123L
+                                                                                    )
+                                                                                        - Convert.ToInt64(
+                                                                                            (
+                                                                                                -1731363330L
+                                                                                            )
+                                                                                        )
+                                                                                )
+                                                                            )
+                                                                                * (
+                                                                                    vtstatic_0.a113_0
+                                                                                    * 5.4913969573838816E-10
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                                % (
+                                                                    Convert.ToInt32(
+                                                                        Convert.ToInt32(
+                                                                            Convert.ToDecimal(
+                                                                                Convert.ToInt32(
+                                                                                    vtstatic_0.a113_0
+                                                                                        / 1.05181293921208
+                                                                                )
+                                                                            ) / vtstatic_0.a266_0
+                                                                        )
+                                                                    )
+                                                                )
+                                                        )
+                                                    ) / Convert.ToSingle(asgop21)
+                                                )
+                                                * (
+                                                    (
+                                                        Convert.ToUInt16(
+                                                            vtstatic_0.arr2d_0[2, 25]
+                                                                / 43175.928129262407
+                                                        )
+                                                    ) / (-41442.11F * asgop104)
+                                                )
+                                            )
+                                            * (
+                                                Convert.ToSingle(
+                                                    Convert.ToUInt32(
+                                                        vtstatic_0.arr2d_0[2, 25] * a369_0
+                                                    ) * (-38123L / asgop101)
+                                                )
+                                                * (
+                                                    Convert.ToUInt16(
+                                                        vtstatic_0.arr2d_0[2, 25]
+                                                            / Convert.ToSingle(43175.9258F)
+                                                    ) / asgop52
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                        - (
+                            (
+                                Convert.ToInt16(
+                                    Convert.ToInt64(
+                                        Convert.ToInt64(
+                                            Convert.ToInt16(
+                                                Convert.ToInt16(
+                                                    Convert.ToUInt16(
+                                                        (Convert.ToDecimal(asgop71) / asgop167)
+                                                            - asgop80
+                                                    )
+                                                        - Convert.ToUInt16(
+                                                            Convert.ToInt16(
+                                                                Convert.ToDecimal(
+                                                                    (
+                                                                        Convert.ToInt16(
+                                                                            27759
+                                                                                / Convert.ToSingle(
+                                                                                    9.857599F
+                                                                                )
+                                                                        )
+                                                                        / Convert.ToInt16(
+                                                                            s_a105_0 - 3897661215U
+                                                                        )
+                                                                    )
+                                                                ) / 0.0935361721915897163356141633M
+                                                            )
+                                                                * Convert.ToSingle(
+                                                                    Convert.ToSingle(
+                                                                        s_a65_0 * asgop59
+                                                                    )
+                                                                )
+                                                        )
+                                                )
+                                            )
+                                                - Convert.ToInt64(
+                                                    Convert.ToInt64(
+                                                        Convert.ToInt32(
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    (
+                                                                        Convert.ToUInt16(
+                                                                            vtstatic_0.arr2d_0[
+                                                                                2,
+                                                                                25
+                                                                            ]
+                                                                                / (
+                                                                                    vtstatic_0.arr2d_0[
+                                                                                        2,
+                                                                                        25
+                                                                                    ]
+                                                                                    * (
+                                                                                        s_a65_0
+                                                                                        / vt_0.a191_0
+                                                                                    )
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                ) + asgop128
+                                                            )
+                                                        )
+                                                            + Convert.ToInt64(
+                                                                (
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToUInt32(
+                                                                                s_a105_0
+                                                                            )
+                                                                                - Convert.ToInt64(
+                                                                                    Convert.ToInt64(
+                                                                                        Convert.ToUInt16(
+                                                                                            Convert.ToUInt16(
+                                                                                                Convert.ToDecimal(
+                                                                                                    27759
+                                                                                                )
+                                                                                                    * 1.3733924132713714470982384092M
+                                                                                            )
+                                                                                        )
+                                                                                            - Convert.ToInt64(
+                                                                                                -3897623091L
+                                                                                            )
+                                                                                    )
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                    * Convert.ToInt64(
+                                                                        (
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToDouble(
+                                                                                    -3897623091L
+                                                                                )
+                                                                                    / clstatic_0.a490_0
+                                                                            ) + -725656033019148410L
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                    )
+                                                )
+                                        )
+                                    )
+                                        + Convert.ToInt64(
+                                            (
+                                                (
+                                                    Convert.ToInt64(asgop2)
+                                                    + Convert.ToInt64(
+                                                        Convert.ToInt32(
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    s_arr1d_0[353] * vt_0.a327_0
+                                                                )
+                                                            )
+                                                        )
+                                                            + Convert.ToInt64(
+                                                                (
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToInt16(27759)
+                                                                            + Convert.ToInt64(
+                                                                                clstatic_0.a461_0
+                                                                            )
+                                                                    ) - (asgop102)
+                                                                )
+                                                            )
+                                                    )
+                                                )
+                                                + Convert.ToInt64(
+                                                    Convert.ToInt32(
+                                                        (
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    (
+                                                                        Convert.ToUInt16(
+                                                                            7.5655281721000671E-07
+                                                                                - (asgop37)
+                                                                        )
+                                                                    )
+                                                                )
+                                                                - (
+                                                                    (
+                                                                        Convert.ToInt32(
+                                                                            s_arr1d_0[353]
+                                                                                / (
+                                                                                    s_arr1d_0[353]
+                                                                                    / 1424492376.0
+                                                                                )
+                                                                        )
+                                                                        / Convert.ToInt32(
+                                                                            0.0935361721915897M
+                                                                                - 1.0935361721915897M
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                            * (
+                                                                Convert.ToInt32(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToUInt32(
+                                                                                s_a105_0
+                                                                            )
+                                                                                - Convert.ToInt64(
+                                                                                    -2453101145507960936L
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                        + Convert.ToInt64(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToUInt16(
+                                                                                    s_a65_0
+                                                                                )
+                                                                                    - Convert.ToInt64(
+                                                                                        s_a15_0
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                        - Convert.ToInt64(
+                                                            Convert.ToInt64(
+                                                                Convert.ToUInt32(s_a92_0)
+                                                                    - Convert.ToInt64(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToInt16(
+                                                                                Convert.ToInt16(
+                                                                                    Convert.ToInt16(
+                                                                                        s_a92_0
+                                                                                            - 3450200465U
+                                                                                    )
+                                                                                        - vtstatic_0.a119_0
+                                                                                )
+                                                                            )
+                                                                                + Convert.ToInt64(
+                                                                                    asgop73
+                                                                                )
+                                                                        )
+                                                                    )
+                                                            )
+                                                        )
+                                                )
+                                            )
+                                        )
+                                )
+                                * (
+                                    (
+                                        Convert.ToDouble(
+                                            (
+                                                Convert.ToUInt64(
+                                                    Convert.ToInt16(
+                                                        Convert.ToInt16(
+                                                            (
+                                                                Convert.ToInt16(
+                                                                    Convert.ToInt16(
+                                                                        vtstatic_0.a119_0
+                                                                            / Convert.ToSingle(
+                                                                                1.9921056F
+                                                                            )
+                                                                    )
+                                                                )
+                                                            )
+                                                                % (
+                                                                    Convert.ToInt16(
+                                                                        Convert.ToInt16(
+                                                                            vt_0.a32_0
+                                                                                * (
+                                                                                    (
+                                                                                        s_arr1d_0[
+                                                                                            353
+                                                                                        ]
+                                                                                        / -5811.2136188331888
+                                                                                    )
+                                                                                    * (
+                                                                                        vt_0.a32_0
+                                                                                        / clstatic_0.a390_0
+                                                                                    )
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                )
+                                                        )
+                                                    )
+                                                        + Convert.ToInt64(
+                                                            Convert.ToInt64(
+                                                                Convert.ToDouble(asgop158)
+                                                                    / asgop165
+                                                            )
+                                                        )
+                                                ) * asgop94
+                                            ) * asgop57
+                                        )
+                                    )
+                                    / (
+                                        (
+                                            (asgop50 / (asgop18 / asgop54))
+                                            - (
+                                                (
+                                                    Convert.ToInt64(
+                                                        Convert.ToDouble(asgop114)
+                                                            / (
+                                                                Convert.ToUInt32(
+                                                                    arr3d_0[4, 237, 3]
+                                                                        * 2.0125482504315224
+                                                                ) * clstatic_0.a487_0
+                                                            )
+                                                    )
+                                                    / (
+                                                        (2816 / asgop88)
+                                                        - (
+                                                            Convert.ToInt64(
+                                                                Convert.ToDouble(clstatic_0.a14_0)
+                                                                    / (2816 / -4827586734080.0)
+                                                            ) / asgop90
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                        - (
+                                            (
+                                                (
+                                                    (2816 * (9.857599F * -75.548544143842989))
+                                                    - cl_0.a49_0
+                                                )
+                                                + (
+                                                    (
+                                                        Convert.ToSingle(
+                                                            s_a92_0 / clstatic_0.a379_0
+                                                        )
+                                                        * (arr3d_0[4, 237, 3] / -1329.724264912511)
+                                                    )
+                                                    - (
+                                                        Convert.ToDouble(
+                                                            asgop140 * (s_a65_0 / s_a147_0)
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                        + (
+                            (
+                                (
+                                    (
+                                        Convert.ToSingle(
+                                            Convert.ToInt16(
+                                                Convert.ToInt16(
+                                                    Convert.ToInt32(vt_0.arr3d_0[4, 71, 3])
+                                                        + Convert.ToInt32(
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    Convert.ToInt64(-1714341880L)
+                                                                        - Convert.ToInt64(
+                                                                            (-289823010L)
+                                                                        )
+                                                                )
+                                                            )
+                                                        )
+                                                )
+                                                    * (
+                                                        Convert.ToUInt64(
+                                                            Convert.ToInt32(clstatic_0.a125_0)
+                                                                + Convert.ToInt64(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToDouble(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToDouble(
+                                                                                    -289823010L
+                                                                                )
+                                                                                    * -9.6610686639407962E-06
+                                                                            )
+                                                                        ) / 1.96557590602558E-06
+                                                                    )
+                                                                )
+                                                        )
+                                                        / (
+                                                            Convert.ToDouble(
+                                                                Convert.ToUInt64(
+                                                                    Convert.ToUInt16(s_a65_0)
+                                                                        - Convert.ToInt64(asgop105)
+                                                                ) * 0.47619047619047616
+                                                            )
+                                                        )
+                                                    )
+                                            )
+                                                / (
+                                                    (
+                                                        (s_a65_0 * 1.2490569619936947E-05)
+                                                        - clstatic_0.a306_0
+                                                    )
+                                                    + (
+                                                        (
+                                                            (
+                                                                Convert.ToUInt32(
+                                                                    clstatic_0.a125_0
+                                                                        / Convert.ToSingle(
+                                                                            -0.412876725F
+                                                                        )
+                                                                ) / (asgop173 - 226969.69494047618)
+                                                            ) - 0.0
+                                                        ) - (asgop12)
+                                                    )
+                                                )
+                                        )
+                                        - Convert.ToSingle(
+                                            Convert.ToUInt16(
+                                                asgop28
+                                                    * Convert.ToSingle(
+                                                        Convert.ToSingle(asgop1 / (1 * ((*a479_0))))
+                                                    )
+                                            )
+                                                / (
+                                                    Convert.ToUInt32(
+                                                        Convert.ToInt32(
+                                                            Convert.ToDecimal(s_arr1d_0[9])
+                                                                * 0.9999980231961172123567096051M
+                                                        ) / Convert.ToSingle(cl_0.a30_0)
+                                                    ) / asgop4
+                                                )
+                                        )
+                                    )
+                                    / (
+                                        (
+                                            Convert.ToUInt16(
+                                                (
+                                                    Convert.ToInt32(1424522711M - vt_0.a275_0)
+                                                    - ((Convert.ToInt32(asgop136 + asgop127)))
+                                                )
+                                                    / Convert.ToSingle(
+                                                        Convert.ToSingle(
+                                                            Convert.ToInt16(s_a351_0 + -3840M)
+                                                                / (
+                                                                    (
+                                                                        1
+                                                                        + (
+                                                                            1
+                                                                            + clstatic_0.arr2d_0[
+                                                                                2,
+                                                                                403
+                                                                            ]
+                                                                        )
+                                                                    ) * s_a320_0
+                                                                )
+                                                        )
+                                                    )
+                                            )
+                                            * (
+                                                Convert.ToSingle(
+                                                    Convert.ToUInt32(
+                                                        vtstatic_0.a231_0 + 1714341887UL
+                                                    )
+                                                        / (
+                                                            Convert.ToDouble(
+                                                                Convert.ToDecimal(-3840M)
+                                                                    / Convert.ToDecimal(
+                                                                        -20122720931645959.577092140687M
+                                                                    )
+                                                            ) + asgop138
+                                                        )
+                                                ) * (asgop157 / s_a44_0)
+                                            )
+                                        ) - vt_0.a20_0
+                                    )
+                                )
+                                + (
+                                    (
+                                        (
+                                            (
+                                                (
+                                                    Convert.ToInt16(
+                                                        Convert.ToInt64(
+                                                            Convert.ToInt64(
+                                                                Convert.ToDouble(38123L)
+                                                                    * vtstatic_0.a493_0
+                                                            )
+                                                        )
+                                                            - Convert.ToInt64(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToInt16(1)
+                                                                        + Convert.ToInt64(
+                                                                            4681581972605108222L
+                                                                        )
+                                                                )
+                                                            )
+                                                    )
+                                                    * (
+                                                        (1714341887UL / clstatic_0.arr1d_0[371])
+                                                        - (vt_0.a29_0)
+                                                    )
+                                                ) + asgop123
+                                            )
+                                            - (
+                                                (
+                                                    asgop77
+                                                    * (
+                                                        Convert.ToUInt64(
+                                                            Convert.ToUInt32(s_a92_0)
+                                                                - Convert.ToInt64(1735886337L)
+                                                        ) / vtstatic_0.a255_0
+                                                    )
+                                                )
+                                            )
+                                        )
+                                        - (
+                                            Convert.ToDouble(
+                                                Convert.ToDecimal(
+                                                    (
+                                                        Convert.ToDecimal(
+                                                            (
+                                                                Convert.ToInt32(
+                                                                    (
+                                                                        Convert.ToInt32(
+                                                                            (
+                                                                                Convert.ToInt32(
+                                                                                    vtstatic_0.a255_0
+                                                                                        + clstatic_0.arr1d_0[
+                                                                                            215
+                                                                                        ]
+                                                                                )
+                                                                            )
+                                                                                * (
+                                                                                    s_a65_0
+                                                                                    / 38123.99981661429
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                        * (
+                                                                            clstatic_0.a21_0
+                                                                            / ((*a114_0))
+                                                                        )
+                                                                )
+                                                            )
+                                                        )
+                                                        / (
+                                                            Convert.ToDecimal(
+                                                                Convert.ToInt64(
+                                                                    Convert.ToDouble(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToInt32(
+                                                                                asgop119
+                                                                            )
+                                                                                + Convert.ToInt64(
+                                                                                    Convert.ToInt64(
+                                                                                        Convert.ToUInt16(
+                                                                                            s_a65_0
+                                                                                        )
+                                                                                            - Convert.ToInt64(
+                                                                                                -4681581972397180400L
+                                                                                            )
+                                                                                    )
+                                                                                )
+                                                                        )
+                                                                    ) * -6.8352963137785907E-18
+                                                                )
+                                                            )
+                                                            / (
+                                                                Convert.ToDecimal(
+                                                                    Convert.ToInt16(
+                                                                        Convert.ToInt64(
+                                                                            clstatic_0.a69_0
+                                                                        )
+                                                                            - Convert.ToInt64(
+                                                                                (
+                                                                                    Convert.ToInt64(
+                                                                                        Convert.ToUInt32(
+                                                                                            s_a92_0
+                                                                                        )
+                                                                                            - Convert.ToInt64(
+                                                                                                a206_0
+                                                                                            )
+                                                                                    )
+                                                                                )
+                                                                            )
+                                                                    )
+                                                                )
+                                                                * (
+                                                                    Convert.ToDecimal(
+                                                                        Convert.ToInt16(
+                                                                            Convert.ToInt32(
+                                                                                386662224
+                                                                            )
+                                                                                + Convert.ToInt32(
+                                                                                    s_arr2d_0[
+                                                                                        2,
+                                                                                        309
+                                                                                    ]
+                                                                                )
+                                                                        )
+                                                                    )
+                                                                    / (
+                                                                        Convert.ToDecimal(1)
+                                                                        * vtstatic_0.a475_0
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                ) * Convert.ToDecimal(asgop34)
+                                            )
+                                        )
+                                    )
+                                    - (
+                                        (
+                                            (
+                                                (
+                                                    Convert.ToSingle(asgop70 / (8823 / 141168.0))
+                                                    - (asgop53)
+                                                )
+                                                * Convert.ToSingle(
+                                                    asgop11
+                                                        / (
+                                                            (8823 / s_a477_0)
+                                                            + (asgop131 / clstatic_0.a432_0)
+                                                        )
+                                                )
+                                            )
+                                            / (
+                                                (
+                                                    Convert.ToUInt16(
+                                                        asgop39
+                                                            / (
+                                                                (
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToDouble(a206_0)
+                                                                                / -107819633.03125
+                                                                        )
+                                                                    )
+                                                                    * Convert.ToInt64(
+                                                                        clstatic_0.a14_0
+                                                                    )
+                                                                )
+                                                                / (
+                                                                    Convert.ToSingle(
+                                                                        1 / clstatic_0.a322_0
+                                                                    )
+                                                                    / (s_a65_0 / -697196.373046875)
+                                                                )
+                                                            )
+                                                    )
+                                                )
+                                                * (
+                                                    vtstatic_0.arr1d_0[205]
+                                                    * (32.0F / (s_a65_0 / 2.6601794673711162E-08))
+                                                )
+                                            )
+                                        )
+                                        - (
+                                            (
+                                                (
+                                                    (asgop75 * (s_a65_0 / -0.07271575927734375))
+                                                    + (37453 * 444.45422262569087)
+                                                )
+                                                - (
+                                                    Convert.ToUInt32(
+                                                        Convert.ToDecimal(
+                                                            (
+                                                                (
+                                                                    Convert.ToInt32(
+                                                                        Convert.ToInt64(
+                                                                            clstatic_0.a14_0
+                                                                        )
+                                                                            + Convert.ToInt64(
+                                                                                Convert.ToInt64(
+                                                                                    clstatic_0.a21_0
+                                                                                        + cl_0.a270_0
+                                                                                )
+                                                                            )
+                                                                    )
+                                                                ) / cl_0.arr3d_0[4, 19, 3]
+                                                            )
+                                                        ) / 0.3571276361416189114315102123M
+                                                    ) / asgop35
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                            + (
+                                (
+                                    (
+                                        (
+                                            Convert.ToInt16(
+                                                (
+                                                    Convert.ToInt16(
+                                                        Convert.ToInt16(
+                                                            (
+                                                                Convert.ToInt16(
+                                                                    Convert.ToInt16(
+                                                                        Convert.ToInt32(
+                                                                            cl_0.arr3d_0[4, 19, 3]
+                                                                        )
+                                                                            + Convert.ToInt32(
+                                                                                s_arr2d_0[2, 247]
+                                                                            )
+                                                                    )
+                                                                )
+                                                            ) % (Convert.ToInt16(cl_0.a480_0))
+                                                        )
+                                                    )
+                                                )
+                                                    % (
+                                                        Convert.ToInt16(
+                                                            Convert.ToInt16(
+                                                                Convert.ToInt16(
+                                                                    Convert.ToInt16(
+                                                                        Convert.ToUInt16(
+                                                                            Convert.ToInt32(
+                                                                                s_arr2d_0[2, 247]
+                                                                            )
+                                                                                + Convert.ToInt32(
+                                                                                    8730
+                                                                                )
+                                                                        ) - 25144
+                                                                    ) * 1
+                                                                )
+                                                                    / (
+                                                                        clstatic_0.a197_0
+                                                                        * 1242.7939262472885
+                                                                    )
+                                                            )
+                                                        )
+                                                    )
+                                            )
+                                            * (
+                                                Convert.ToUInt16(
+                                                    Convert.ToUInt16(
+                                                        Convert.ToInt16(
+                                                            Convert.ToInt16(1 * clstatic_0.a14_0)
+                                                                / s_a148_0
+                                                        ) * asgop100
+                                                    )
+                                                        + (
+                                                            Convert.ToUInt16(
+                                                                (
+                                                                    Convert.ToUInt16(
+                                                                        65536.0F - clstatic_0.a413_0
+                                                                    )
+                                                                ) % 21556
+                                                            )
+                                                        )
+                                                )
+                                                * (
+                                                    Convert.ToUInt16(
+                                                        Convert.ToDecimal(
+                                                            Convert.ToInt16(
+                                                                1714341888U - 1714329579U
+                                                            )
+                                                        ) * clstatic_0.a162_0
+                                                    ) * s_a245_0
+                                                )
+                                            )
+                                        ) - (asgop126)
+                                    )
+                                    - (
+                                        (
+                                            (
+                                                (
+                                                    (clstatic_0.a151_0 / clstatic_0.arr1d_0[414])
+                                                    - s_a238_0
+                                                ) + (asgop14 / asgop122)
+                                            ) + asgop91
+                                        )
+                                        + (
+                                            (
+                                                asgop19
+                                                * (
+                                                    (1714341888U / asgop64)
+                                                    / (
+                                                        (Convert.ToUInt16(32768.0F - (-19275.0F)))
+                                                        * (52043 / vt_0.a35_0)
+                                                    )
+                                                )
+                                            ) + asgop55
+                                        )
+                                    )
+                                )
+                                - (
+                                    (
+                                        (
+                                            (
+                                                (
+                                                    Convert.ToUInt16(
+                                                        clstatic_0.a151_0 * ((*a347_0))
+                                                    ) / (-1.52587891E-05F / asgop96)
+                                                )
+                                                + (
+                                                    Convert.ToDouble(
+                                                        Convert.ToUInt64(
+                                                            Convert.ToUInt32(
+                                                                Convert.ToUInt32(
+                                                                    vt_0.arr3d_0[4, 315, 3]
+                                                                        * (1714341888U / asgop168)
+                                                                )
+                                                            )
+                                                                - Convert.ToInt64(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToInt16(
+                                                                            Convert.ToInt16(
+                                                                                clstatic_0.a151_0
+                                                                                    / cl_0.arr3d_0[
+                                                                                        4,
+                                                                                        19,
+                                                                                        3
+                                                                                    ]
+                                                                            )
+                                                                        )
+                                                                            + Convert.ToInt64(
+                                                                                Convert.ToInt64(
+                                                                                    Convert.ToInt32(
+                                                                                        cl_0.arr3d_0[
+                                                                                            4,
+                                                                                            19,
+                                                                                            3
+                                                                                        ]
+                                                                                    )
+                                                                                        + Convert.ToInt64(
+                                                                                            vt_0.a199_0
+                                                                                        )
+                                                                                )
+                                                                            )
+                                                                    )
+                                                                )
+                                                        )
+                                                            * (
+                                                                Convert.ToInt64(
+                                                                    clstatic_0.a21_0
+                                                                        + clstatic_0.a21_0
+                                                                )
+                                                                / (
+                                                                    clstatic_0.a151_0
+                                                                    * (
+                                                                        -1.52587891E-05F
+                                                                        * -553.00995451249253
+                                                                    )
+                                                                )
+                                                            )
+                                                    )
+                                                )
+                                            ) - asgop93
+                                        )
+                                        - (
+                                            (
+                                                (
+                                                    Convert.ToUInt64(
+                                                        Convert.ToUInt64(
+                                                            (
+                                                                Convert.ToInt64(
+                                                                    Convert.ToDouble(
+                                                                        Convert.ToInt64(
+                                                                            Convert.ToInt32(
+                                                                                Convert.ToInt32(
+                                                                                    clstatic_0.a14_0
+                                                                                        / (
+                                                                                            Convert.ToInt64(
+                                                                                                clstatic_0.a14_0
+                                                                                                    / clstatic_0.a14_0
+                                                                                            )
+                                                                                        )
+                                                                                )
+                                                                            )
+                                                                                + Convert.ToInt64(
+                                                                                    Convert.ToInt64(
+                                                                                        Convert.ToUInt16(
+                                                                                            52043
+                                                                                        )
+                                                                                            + Convert.ToInt64(
+                                                                                                1177416765L
+                                                                                            )
+                                                                                    )
+                                                                                )
+                                                                        )
+                                                                    ) * asgop163
+                                                                ) - (s_a116_0)
+                                                            )
+                                                                + Convert.ToInt64(
+                                                                    Convert.ToInt32(
+                                                                        arr3d_0[4, 182, 3]
+                                                                    )
+                                                                        - Convert.ToInt64(
+                                                                            Convert.ToInt64(
+                                                                                Convert.ToInt16(
+                                                                                    Convert.ToInt16(
+                                                                                        Convert.ToInt64(
+                                                                                            s_a116_0
+                                                                                        )
+                                                                                            + Convert.ToInt64(
+                                                                                                4225041378952953975L
+                                                                                            )
+                                                                                    )
+                                                                                )
+                                                                                    - Convert.ToInt64(
+                                                                                        clstatic_0.a377_0
+                                                                                    )
+                                                                            )
+                                                                        )
+                                                                )
+                                                        ) / asgop36
+                                                    )
+                                                )
+                                                / (
+                                                    (
+                                                        ((clstatic_0.a21_0 / asgop118) - 0.0)
+                                                        * (
+                                                            (
+                                                                Convert.ToUInt16(
+                                                                    (
+                                                                        vtstatic_0.a276_0
+                                                                        / clstatic_0.arr1d_0[363]
+                                                                    ) - (asgop83)
+                                                                )
+                                                            ) / asgop24
+                                                        )
+                                                    )
+                                                    - (
+                                                        (
+                                                            (
+                                                                Convert.ToDouble(
+                                                                    Convert.ToInt64(
+                                                                        Convert.ToDouble(
+                                                                            clstatic_0.a377_0
+                                                                        ) / vtstatic_0.a408_0
+                                                                    ) * clstatic_0.a57_0
+                                                                )
+                                                            )
+                                                            + (
+                                                                (
+                                                                    Convert.ToDouble(
+                                                                        -4685L
+                                                                            * (
+                                                                                vtstatic_0.a276_0
+                                                                                * 4.4491889804765315E-11
+                                                                            )
+                                                                    )
+                                                                ) + asgop41
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                )
+            )
+        );
     }
 
     public static int Main()

@@ -11,15 +11,19 @@ class Test4
     public static string teststr1 = null;
     public static string[] teststr2 = new string[3];
     public static string teststr3 = null;
-    public const string teststr4 = "const string\"";	// special case for DiffObjRef
-    public const string testgenstr4 = "GenC const string\"";  // special case for DiffObjRef
-    public static string teststr5 = null;  // special case for DiffObjRef
+    public const string teststr4 = "const string\""; // special case for DiffObjRef
+    public const string testgenstr4 = "GenC const string\""; // special case for DiffObjRef
+    public static string teststr5 = null; // special case for DiffObjRef
 
     public static bool TestSameObjRef()
     {
         Console.WriteLine();
-        Console.WriteLine("When NGEN'ed, two strings in different modules have different object reference");
-        Console.WriteLine("When NGEN'ed, two strings in the same module have same object reference");
+        Console.WriteLine(
+            "When NGEN'ed, two strings in different modules have different object reference"
+        );
+        Console.WriteLine(
+            "When NGEN'ed, two strings in the same module have same object reference"
+        );
         Console.WriteLine("When JIT'ed, two strings always have same object reference");
         Console.WriteLine();
         Console.WriteLine("Testing SameObjRef");
@@ -34,9 +38,7 @@ class Test4
             b = C.teststr1;
             throw new Exception();
         }
-        catch (System.Exception)
-        {
-        }
+        catch (System.Exception) { }
 
         if ((object)teststr1 != (object)b)
         {
@@ -55,7 +57,9 @@ class Test4
             if ((object)teststr2[0] != (object)C.teststr2[0])
             {
                 passed = false;
-                Console.WriteLine("FAILED, (object) teststr2[0] == (object)C.teststr2[0] is expected");
+                Console.WriteLine(
+                    "FAILED, (object) teststr2[0] == (object)C.teststr2[0] is expected"
+                );
             }
         }
 
@@ -79,9 +83,7 @@ class Test4
         {
             throw new Exception();
         }
-        catch (System.Exception)
-        {
-        }
+        catch (System.Exception) { }
         finally
         {
             teststr2[2] = "array \u47BBelement 2";
@@ -105,30 +107,31 @@ class Test4
                 passed = false;
                 Console.WriteLine("FAILED, (object) teststr3 == (object)C.teststr3() is expected");
             }
-            try
-            {
-            }
+            try { }
+
             finally
             {
                 if ((object)teststr4 != (object)C.teststr4)
                 {
                     passed = false;
-                    Console.WriteLine("FAILED, (object)teststr4 != (object)C.teststr4  is expected");
+                    Console.WriteLine(
+                        "FAILED, (object)teststr4 != (object)C.teststr4  is expected"
+                    );
                 }
                 try
                 {
                     throw new Exception();
                 }
-                catch
-                {
-                }
+                catch { }
                 finally
                 {
                     teststr5 = String.Empty;
                     if ((object)teststr5 != (object)C.teststr5)
                     {
                         passed = false;
-                        Console.WriteLine("FAILED, (object) teststr5 != (object)C.teststr5  is expected");
+                        Console.WriteLine(
+                            "FAILED, (object) teststr5 != (object)C.teststr5  is expected"
+                        );
                     }
                 }
             }
@@ -141,14 +144,14 @@ class Test4
             b = GenC<string>.teststr1;
             throw new Exception();
         }
-        catch (System.Exception)
-        {
-        }
+        catch (System.Exception) { }
 
         if ((object)teststr1 != (object)b)
         {
             passed = false;
-            Console.WriteLine("FAILED, (object)teststr1 == (object)GenC<string>.teststr1 is expected");
+            Console.WriteLine(
+                "FAILED, (object)teststr1 == (object)GenC<string>.teststr1 is expected"
+            );
         }
 
         try
@@ -161,7 +164,9 @@ class Test4
             if ((object)teststr2[0] != (object)GenC<string>.teststr2[0])
             {
                 passed = false;
-                Console.WriteLine("FAILED, (object) teststr2[0] == (object)GenC<string>.teststr2[0] is expected");
+                Console.WriteLine(
+                    "FAILED, (object) teststr2[0] == (object)GenC<string>.teststr2[0] is expected"
+                );
             }
         }
 
@@ -178,16 +183,16 @@ class Test4
         if ((object)teststr2[1] != (object)b)
         {
             passed = false;
-            Console.WriteLine("FAILED, (object) teststr2[1] == (object)GenC<string>.teststr2[1] is expected");
+            Console.WriteLine(
+                "FAILED, (object) teststr2[1] == (object)GenC<string>.teststr2[1] is expected"
+            );
         }
 
         try
         {
             throw new Exception();
         }
-        catch (System.Exception)
-        {
-        }
+        catch (System.Exception) { }
         finally
         {
             teststr2[2] = "GenC array \u47BBelement 2";
@@ -196,7 +201,9 @@ class Test4
         if ((object)teststr2[2] != (object)GenC<string>.teststr2[2])
         {
             passed = false;
-            Console.WriteLine("FAILED, (object)teststr2[2] == (object)GenC<string>.teststr2[2] is expected");
+            Console.WriteLine(
+                "FAILED, (object)teststr2[2] == (object)GenC<string>.teststr2[2] is expected"
+            );
         }
 
         try
@@ -209,32 +216,35 @@ class Test4
             if ((object)teststr3 != (object)GenC<string>.teststr3<int>())
             {
                 passed = false;
-                Console.WriteLine("FAILED, (object) teststr3 == (object)GenC<string>.teststr3<int>() is expected");
+                Console.WriteLine(
+                    "FAILED, (object) teststr3 == (object)GenC<string>.teststr3<int>() is expected"
+                );
             }
-            try
-            {
-            }
+            try { }
+
             finally
             {
                 if ((object)testgenstr4 != (object)GenC<string>.teststr4)
                 {
                     passed = false;
-                    Console.WriteLine("FAILED, (object)testgenstr4 != (object)GenC<string>.teststr4  is expected");
+                    Console.WriteLine(
+                        "FAILED, (object)testgenstr4 != (object)GenC<string>.teststr4  is expected"
+                    );
                 }
                 try
                 {
                     throw new Exception();
                 }
-                catch
-                {
-                }
+                catch { }
                 finally
                 {
                     teststr5 = String.Empty;
                     if ((object)teststr5 != (object)GenC<string>.teststr5)
                     {
                         passed = false;
-                        Console.WriteLine("FAILED, (object) teststr5 != (object)GenC<string>.teststr5  is expected");
+                        Console.WriteLine(
+                            "FAILED, (object) teststr5 != (object)GenC<string>.teststr5  is expected"
+                        );
                     }
                 }
             }
@@ -246,8 +256,12 @@ class Test4
     public static bool TestDiffObjRef()
     {
         Console.WriteLine();
-        Console.WriteLine("When NGEN'ed, two strings in different modules have different object reference");
-        Console.WriteLine("When NGEN'ed, two strings in the same module have same object reference");
+        Console.WriteLine(
+            "When NGEN'ed, two strings in different modules have different object reference"
+        );
+        Console.WriteLine(
+            "When NGEN'ed, two strings in the same module have same object reference"
+        );
         Console.WriteLine("When JIT'ed, two strings always have same object reference");
         Console.WriteLine();
         Console.WriteLine("Testing DiffObjRef");
@@ -262,9 +276,7 @@ class Test4
             b = C.teststr1;
             throw new Exception();
         }
-        catch (System.Exception)
-        {
-        }
+        catch (System.Exception) { }
 
         if ((object)teststr1 == (object)b)
         {
@@ -283,7 +295,9 @@ class Test4
             if ((object)teststr2[0] == (object)C.teststr2[0])
             {
                 passed = false;
-                Console.WriteLine("FAILED, (object) teststr2[0] == (object)C.teststr2[0] is NOT expected");
+                Console.WriteLine(
+                    "FAILED, (object) teststr2[0] == (object)C.teststr2[0] is NOT expected"
+                );
             }
         }
 
@@ -307,9 +321,7 @@ class Test4
         {
             throw new Exception();
         }
-        catch (System.Exception)
-        {
-        }
+        catch (System.Exception) { }
         finally
         {
             teststr2[2] = "array \u47BBelement 2";
@@ -318,7 +330,9 @@ class Test4
         if ((object)teststr2[2] == (object)C.teststr2[2])
         {
             passed = false;
-            Console.WriteLine("FAILED, (object)teststr2[2] == (object)C.teststr2[2] is NOT expected");
+            Console.WriteLine(
+                "FAILED, (object)teststr2[2] == (object)C.teststr2[2] is NOT expected"
+            );
         }
 
         try
@@ -331,11 +345,12 @@ class Test4
             if ((object)teststr3 == (object)C.teststr3())
             {
                 passed = false;
-                Console.WriteLine("FAILED, (object) teststr3 == (object)C.teststr3() is NOT expected");
+                Console.WriteLine(
+                    "FAILED, (object) teststr3 == (object)C.teststr3() is NOT expected"
+                );
             }
-            try
-            {
-            }
+            try { }
+
             finally
             {
                 // Special case for const literal teststr4
@@ -344,15 +359,15 @@ class Test4
                 if ((object)teststr4 != (object)C.teststr4)
                 {
                     passed = false;
-                    Console.WriteLine("FAILED, (object)teststr4 == (object)C.teststr4  is expected");
+                    Console.WriteLine(
+                        "FAILED, (object)teststr4 == (object)C.teststr4  is expected"
+                    );
                 }
                 try
                 {
                     throw new Exception();
                 }
-                catch
-                {
-                }
+                catch { }
                 finally
                 {
                     teststr5 = String.Empty;
@@ -363,7 +378,9 @@ class Test4
                     if ((object)teststr5 != (object)C.teststr5)
                     {
                         passed = false;
-                        Console.WriteLine("FAILED, (object) teststr5 == (object)C.teststr5 is expected");
+                        Console.WriteLine(
+                            "FAILED, (object) teststr5 == (object)C.teststr5 is expected"
+                        );
                     }
                 }
             }
@@ -376,14 +393,14 @@ class Test4
             b = GenC<string>.teststr1;
             throw new Exception();
         }
-        catch (System.Exception)
-        {
-        }
+        catch (System.Exception) { }
 
         if ((object)teststr1 == (object)b)
         {
             passed = false;
-            Console.WriteLine("FAILED, (object)teststr1 == (object)GenC<string>.teststr1 is NOT expected");
+            Console.WriteLine(
+                "FAILED, (object)teststr1 == (object)GenC<string>.teststr1 is NOT expected"
+            );
         }
 
         try
@@ -396,7 +413,9 @@ class Test4
             if ((object)teststr2[0] == (object)GenC<string>.teststr2[0])
             {
                 passed = false;
-                Console.WriteLine("FAILED, (object) teststr2[0] == (object)GenC<string>.teststr2[0] is NOT expected");
+                Console.WriteLine(
+                    "FAILED, (object) teststr2[0] == (object)GenC<string>.teststr2[0] is NOT expected"
+                );
             }
         }
 
@@ -413,16 +432,16 @@ class Test4
         if ((object)teststr2[1] == (object)b)
         {
             passed = false;
-            Console.WriteLine("FAILED, (object) teststr2[1] == (object)GenC<string>.teststr2[1] is NOT expected");
+            Console.WriteLine(
+                "FAILED, (object) teststr2[1] == (object)GenC<string>.teststr2[1] is NOT expected"
+            );
         }
 
         try
         {
             throw new Exception();
         }
-        catch (System.Exception)
-        {
-        }
+        catch (System.Exception) { }
         finally
         {
             teststr2[2] = "GenC array \u47BBelement 2";
@@ -431,7 +450,9 @@ class Test4
         if ((object)teststr2[2] == (object)GenC<string>.teststr2[2])
         {
             passed = false;
-            Console.WriteLine("FAILED, (object)teststr2[2] == (object)GenC<string>.teststr2[2] is NOT expected");
+            Console.WriteLine(
+                "FAILED, (object)teststr2[2] == (object)GenC<string>.teststr2[2] is NOT expected"
+            );
         }
 
         try
@@ -444,11 +465,12 @@ class Test4
             if ((object)teststr3 == (object)GenC<string>.teststr3<int>())
             {
                 passed = false;
-                Console.WriteLine("FAILED, (object) teststr3 == (object)GenC<string>.teststr3<int>() is NOT expected");
+                Console.WriteLine(
+                    "FAILED, (object) teststr3 == (object)GenC<string>.teststr3<int>() is NOT expected"
+                );
             }
-            try
-            {
-            }
+            try { }
+
             finally
             {
                 // Special case for const literal teststr4
@@ -457,15 +479,15 @@ class Test4
                 if ((object)testgenstr4 != (object)GenC<string>.teststr4)
                 {
                     passed = false;
-                    Console.WriteLine("FAILED, (object)testgenstr4 == (object)GenC<string>.teststr4 is expected");
+                    Console.WriteLine(
+                        "FAILED, (object)testgenstr4 == (object)GenC<string>.teststr4 is expected"
+                    );
                 }
                 try
                 {
                     throw new Exception();
                 }
-                catch
-                {
-                }
+                catch { }
                 finally
                 {
                     teststr5 = String.Empty;
@@ -476,7 +498,9 @@ class Test4
                     if ((object)teststr5 != (object)GenC<string>.teststr5)
                     {
                         passed = false;
-                        Console.WriteLine("FAILED, (object) teststr5 == (object)GenC<string>.teststr5 is expected");
+                        Console.WriteLine(
+                            "FAILED, (object) teststr5 == (object)GenC<string>.teststr5 is expected"
+                        );
                     }
                 }
             }
@@ -497,8 +521,12 @@ class Test4
         {
             Console.WriteLine("Usage: Test4.exe [SameObjRef|DiffObjRef]");
             Console.WriteLine();
-            Console.WriteLine("When NGEN'ed, two strings in different modules have different object reference");
-            Console.WriteLine("When NGEN'ed, two strings in the same module have same object reference");
+            Console.WriteLine(
+                "When NGEN'ed, two strings in different modules have different object reference"
+            );
+            Console.WriteLine(
+                "When NGEN'ed, two strings in the same module have same object reference"
+            );
             Console.WriteLine("When JIT'ed, two strings always have same object reference");
             Console.WriteLine();
             return 9;
@@ -515,6 +543,5 @@ class Test4
             Console.WriteLine("FAILED");
             return 1;
         }
-
     }
 }

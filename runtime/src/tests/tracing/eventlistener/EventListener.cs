@@ -14,14 +14,17 @@ namespace Tracing.Tests
         public SimpleEventSource() : base(true) { }
 
         [Event(1)]
-        internal void MathResult(int x, int y, int z, string formula) { this.WriteEvent(1, x, y, z, formula); }
+        internal void MathResult(int x, int y, int z, string formula)
+        {
+            this.WriteEvent(1, x, y, z, formula);
+        }
     }
-    
+
     internal sealed class SimpleEventListener : EventListener
     {
         private readonly string _targetSourceName;
         private readonly EventLevel _level;
-        
+
         public int EventCount { get; private set; } = 0;
 
         public SimpleEventListener(string targetSourceName, EventLevel level)
@@ -30,7 +33,7 @@ namespace Tracing.Tests
             _targetSourceName = targetSourceName;
             _level = level;
         }
-        
+
         protected override void OnEventSourceCreated(EventSource source)
         {
             if (source.Name.Equals(_targetSourceName))
@@ -52,24 +55,24 @@ namespace Tracing.Tests
         static int Main(string[] args)
         {
             bool pass = false;
-            using(var listener = new SimpleEventListener("SimpleEventSource", EventLevel.Verbose))
+            using (var listener = new SimpleEventListener("SimpleEventSource", EventLevel.Verbose))
             {
                 SimpleEventSource eventSource = new SimpleEventSource();
-            
+
                 Console.WriteLine("\tStart: Messaging.");
                 // Send messages
                 // Use random numbers and addition as a simple, human readble checksum
                 Random generator = new Random();
-                for(int i=0; i<messageIterations; i++)
+                for (int i = 0; i < messageIterations; i++)
                 {
-                    int x = generator.Next(1,1000);
-                    int y = generator.Next(1,1000);
-                    string formula = String.Format("{0} + {1} = {2}", x, y, x+y);
-                    
-                    eventSource.MathResult(x, y, x+y, formula);
+                    int x = generator.Next(1, 1000);
+                    int y = generator.Next(1, 1000);
+                    string formula = String.Format("{0} + {1} = {2}", x, y, x + y);
+
+                    eventSource.MathResult(x, y, x + y, formula);
                 }
                 Console.WriteLine("\tEnd: Messaging.\n");
-                
+
                 Console.WriteLine($"\tEventListener received {listener.EventCount} event(s)\n");
                 pass = listener.EventCount == messageIterations;
             }

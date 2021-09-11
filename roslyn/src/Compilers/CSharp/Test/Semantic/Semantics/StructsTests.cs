@@ -22,31 +22,43 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
         [Fact()]
         public void TestInitFieldStruct()
         {
-            var text = @"
+            var text =
+                @"
 public struct A
 {
     A a = new A();   // CS8036
     public static int Main() { return 1; }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-    // (4,7): error CS0573: 'A': cannot have instance property or field initializers in structs
-    //     A a = new A();   // CS8036
-    Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "a").WithArguments("A").WithLocation(4, 7),
-    // (4,7): error CS0523: Struct member 'A.a' of type 'A' causes a cycle in the struct layout
-    //     A a = new A();   // CS8036
-    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "a").WithArguments("A.a", "A").WithLocation(4, 7),
-    // (4,7): warning CS0169: The field 'A.a' is never used
-    //     A a = new A();   // CS8036
-    Diagnostic(ErrorCode.WRN_UnreferencedField, "a").WithArguments("A.a").WithLocation(4, 7)
-    );
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (4,7): error CS0573: 'A': cannot have instance property or field initializers in structs
+                    //     A a = new A();   // CS8036
+                    Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "a")
+                        .WithArguments("A")
+                        .WithLocation(4, 7),
+                    // (4,7): error CS0523: Struct member 'A.a' of type 'A' causes a cycle in the struct layout
+                    //     A a = new A();   // CS8036
+                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "a")
+                        .WithArguments("A.a", "A")
+                        .WithLocation(4, 7),
+                    // (4,7): warning CS0169: The field 'A.a' is never used
+                    //     A a = new A();   // CS8036
+                    Diagnostic(ErrorCode.WRN_UnreferencedField, "a")
+                        .WithArguments("A.a")
+                        .WithLocation(4, 7)
+                );
         }
 
-        [WorkItem(1075325, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1075325"), WorkItem(343, "CodePlex")]
+        [
+            WorkItem(1075325, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1075325"),
+            WorkItem(343, "CodePlex")
+        ]
         [Fact()]
         public void TestInitEventStruct()
         {
-            var text = @"
+            var text =
+                @"
 struct S {
     event System.Action E = null;
 
@@ -56,18 +68,25 @@ struct S {
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-    // (3,25): error CS0573: 'S': cannot have instance property or field initializers in structs
-    //     event System.Action E = null;
-    Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "E").WithArguments("S").WithLocation(3, 25)
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (3,25): error CS0573: 'S': cannot have instance property or field initializers in structs
+                    //     event System.Action E = null;
+                    Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "E")
+                        .WithArguments("S")
+                        .WithLocation(3, 25)
                 );
         }
 
-        [WorkItem(1075325, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1075325"), WorkItem(343, "CodePlex")]
+        [
+            WorkItem(1075325, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1075325"),
+            WorkItem(343, "CodePlex")
+        ]
         [Fact()]
         public void TestStaticInitInStruct()
         {
-            var text = @"
+            var text =
+                @"
 struct S {
     static event System.Action E = M;
     static int F = 10;
@@ -93,7 +112,8 @@ struct S {
         [Fact]
         public void TestConstructorStruct()
         {
-            var text = @"
+            var text =
+                @"
 struct  Goo
 {
     public Goo(int x) : this(5, 6)
@@ -118,7 +138,8 @@ struct  Goo
         [Fact]
         public void TestConstructorStruct02()
         {
-            var text = @"
+            var text =
+                @"
 public struct Struct
 {
     public int x;
@@ -139,7 +160,8 @@ public struct Struct
         [Fact]
         public void TestConstructorStruct03()
         {
-            var text = @"
+            var text =
+                @"
 struct S
 {
     public int i;
@@ -191,7 +213,8 @@ class Program
         [ClrOnlyFact(ClrOnlyReason.MemberOrder)]
         public void TestOverridingBaseConstructorStruct()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public struct Gen<T>
 {
@@ -259,7 +282,8 @@ public class Test
     }
 }
 ";
-            var expectedOutput = @"GenSystem.Int32::Equals
+            var expectedOutput =
+                @"GenSystem.Int32::Equals
 GenSystem.Int32::GetHashCode
 GenSystem.Int32::GetHashCode
 GenSystem.Int32::ToString
@@ -279,7 +303,8 @@ S::ToString";
         [Fact]
         public void TestConstructorForGenericStruct()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 struct C<T>
 {
@@ -309,7 +334,8 @@ class Test
         [Fact]
         public void TestAssigntoDecimalInStructConstructor()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public struct Struct
 {
@@ -326,7 +352,8 @@ class Test
     }
 }
 ";
-            var expectedIL = @"{
+            var expectedIL =
+                @"{
   // Code size        8 (0x8)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -342,15 +369,24 @@ class Test
         {
             var oldMsCorLib = TestMetadata.Net40.mscorlib;
 
-            var c1 = CSharpCompilation.Create("C1",
+            var c1 = CSharpCompilation.Create(
+                "C1",
                 new[] { Parse(@"public struct S { }") },
                 new[] { oldMsCorLib },
-                TestOptions.ReleaseDll);
+                TestOptions.ReleaseDll
+            );
 
-            var c2 = CSharpCompilation.Create("C2",
-                new[] { Parse(@"public class C { void M() { S s = new S(); System.Console.WriteLine(s);} }") },
+            var c2 = CSharpCompilation.Create(
+                "C2",
+                new[]
+                {
+                    Parse(
+                        @"public class C { void M() { S s = new S(); System.Console.WriteLine(s);} }"
+                    )
+                },
                 new[] { MscorlibRef, new CSharpCompilationReference(c1) },
-                TestOptions.ReleaseDll);
+                TestOptions.ReleaseDll
+            );
 
             var c1AsmRef = c2.GetReferencedAssemblySymbol(new CSharpCompilationReference(c1));
 
@@ -366,7 +402,10 @@ class Test
             Assert.True(method.IsDefaultValueTypeConstructor());
 
             //TODO (tomat)
-            CompileAndVerify(c2).VerifyIL("C.M", @"
+            CompileAndVerify(c2)
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -377,13 +416,15 @@ class Test
   IL_0009:  box        ""S""
   IL_000e:  call       ""void System.Console.WriteLine(object)""
   IL_0013:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void SubstitutedSynthesizedStructConstructor()
         {
-            string text = @"
+            string text =
+                @"
 public struct S<T>
 {
 }
@@ -398,7 +439,10 @@ public class C
 }
 ";
 
-            CompileAndVerify(text).VerifyIL("C.M", @"
+            CompileAndVerify(text)
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -409,13 +453,15 @@ public class C
   IL_0009:  box        ""S<int>""
   IL_000e:  call       ""void System.Console.WriteLine(object)""
   IL_0013:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void PublicParameterlessConstructorInMetadata()
         {
-            string ilSource = @"
+            string ilSource =
+                @"
 .class public sequential ansi sealed beforefieldinit S
        extends [mscorlib]System.ValueType
 {
@@ -430,7 +476,8 @@ public class C
 }
 ";
 
-            string csharpSource = @"
+            string csharpSource =
+                @"
 public class C 
 { 
     void M() 
@@ -446,7 +493,10 @@ public class C
             // Calls constructor (vs initobj), then initobj
             var compilation = CreateCompilationWithILAndMscorlib40(csharpSource, ilSource);
             // TODO (tomat)
-            CompileAndVerify(compilation).VerifyIL("C.M", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       35 (0x23)
   .maxstack  1
@@ -460,14 +510,16 @@ public class C
   IL_0018:  box        ""S""
   IL_001d:  call       ""void System.Console.WriteLine(object)""
   IL_0022:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(541309, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541309")]
         [Fact]
         public void PrivateParameterlessConstructorInMetadata()
         {
-            string ilSource = @"
+            string ilSource =
+                @"
 .class public sequential ansi sealed beforefieldinit S
        extends [mscorlib]System.ValueType
 {
@@ -482,7 +534,8 @@ public class C
 }
 ";
 
-            string csharpSource = @"
+            string csharpSource =
+                @"
 public class C 
 { 
     void M() 
@@ -500,7 +553,10 @@ public class C
             // Shouldn't there be an error for trying to call an inaccessible ctor?
             var comp = CreateCompilationWithILAndMscorlib40(csharpSource, ilSource);
 
-            CompileAndVerify(comp).VerifyIL("C.M", @"
+            CompileAndVerify(comp)
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       39 (0x27)
   .maxstack  1
@@ -516,14 +572,16 @@ public class C
   IL_001c:  box        ""S""
   IL_0021:  call       ""void System.Console.WriteLine(object)""
   IL_0026:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(543934, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543934")]
         [Fact]
         public void ObjectCreationExprStructTypeInstanceFieldAssign()
         {
-            var csSource = @"
+            var csSource =
+                @"
 public struct TestStruct
 {
     public int IntI;
@@ -537,9 +595,10 @@ public class TestClass
     }
 }
 ";
-            CreateCompilation(csSource).VerifyDiagnostics(
-                // (13,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new TestStruct().IntI")
+            CreateCompilation(csSource)
+                .VerifyDiagnostics(
+                    // (13,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new TestStruct().IntI")
                 );
         }
 
@@ -547,7 +606,8 @@ public class TestClass
         [Fact]
         public void ObjectCreationExprStructTypePropertyAssign()
         {
-            var csSource = @"
+            var csSource =
+                @"
 public struct S
 {
     int n;
@@ -563,35 +623,39 @@ public class mem033
         new S().P = 1; // CS0131 
     }
 }";
-            CreateCompilation(csSource).VerifyDiagnostics(
-                // (14,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                //         new S().P = 1; // CS0131 
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new S().P")
+            CreateCompilation(csSource)
+                .VerifyDiagnostics(
+                    // (14,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                    //         new S().P = 1; // CS0131
+                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "new S().P")
                 );
         }
-
 
         [WorkItem(545498, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545498")]
         [Fact]
         public void StructMemberNullableTypeCausesCycle()
         {
-            string source = @"
+            string source =
+                @"
 public struct X
 {
     public X? recursiveFld;
 }
 ";
-            CreateCompilation(source, targetFramework: TargetFramework.Mscorlib45).VerifyDiagnostics(
-                // (4,15): error CS0523: Struct member 'X.recursiveFld' of type 'X?' causes a cycle in the struct layout
-                //     public X? recursiveFld;
-                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "recursiveFld").WithArguments("X.recursiveFld", "X?")
+            CreateCompilation(source, targetFramework: TargetFramework.Mscorlib45)
+                .VerifyDiagnostics(
+                    // (4,15): error CS0523: Struct member 'X.recursiveFld' of type 'X?' causes a cycle in the struct layout
+                    //     public X? recursiveFld;
+                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "recursiveFld")
+                        .WithArguments("X.recursiveFld", "X?")
                 );
         }
 
         [Fact]
         public void StructParameterlessCtorNotPublic()
         {
-            string source = @"
+            string source =
+                @"
 public struct X
 {
     private X()
@@ -607,33 +671,41 @@ public struct X1
 }
 
 ";
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-    // (11,5): error CS0568: Structs cannot contain explicit parameterless constructors
-    //     X1()
-    Diagnostic(ErrorCode.ERR_StructsCantContainDefaultConstructor, "X1").WithLocation(11, 5),
-    // (4,13): error CS0568: Structs cannot contain explicit parameterless constructors
-    //     private X()
-    Diagnostic(ErrorCode.ERR_StructsCantContainDefaultConstructor, "X").WithLocation(4, 13)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (11,5): error CS0568: Structs cannot contain explicit parameterless constructors
+                    //     X1()
+                    Diagnostic(ErrorCode.ERR_StructsCantContainDefaultConstructor, "X1")
+                        .WithLocation(11, 5),
+                    // (4,13): error CS0568: Structs cannot contain explicit parameterless constructors
+                    //     private X()
+                    Diagnostic(ErrorCode.ERR_StructsCantContainDefaultConstructor, "X")
+                        .WithLocation(4, 13)
                 );
         }
 
         [Fact]
         public void StructNonAutoPropertyInitializer()
         {
-            var text = @"struct S
+            var text =
+                @"struct S
 {
     public int I { get { throw null; } set {} } = 9;
 }";
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-            // (3,16): error CS8050: Only auto-implemented properties can have initializers.
-            //     public int I {get { throw null; } set {} } = 9;
-            Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "I").WithArguments("S.I").WithLocation(3, 16),
-            // (3,16): error CS0573: 'S': cannot have instance property or field initializers in structs
-            //     public int I {get { throw null; } set {} } = 9;
-            Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "I").WithArguments("S").WithLocation(3, 16)
-);
+                // (3,16): error CS8050: Only auto-implemented properties can have initializers.
+                //     public int I {get { throw null; } set {} } = 9;
+                Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "I")
+                    .WithArguments("S.I")
+                    .WithLocation(3, 16),
+                // (3,16): error CS0573: 'S': cannot have instance property or field initializers in structs
+                //     public int I {get { throw null; } set {} } = 9;
+                Diagnostic(ErrorCode.ERR_FieldInitializerInStruct, "I")
+                    .WithArguments("S")
+                    .WithLocation(3, 16)
+            );
         }
     }
 }

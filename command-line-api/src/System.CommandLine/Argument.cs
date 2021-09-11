@@ -24,15 +24,13 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
-        public Argument()
-        {
-        }
+        public Argument() { }
 
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
         /// <param name="name">The name of the argument.</param>
-        public Argument(string name) 
+        public Argument(string name)
         {
             if (!string.IsNullOrWhiteSpace(name))
             {
@@ -52,10 +50,7 @@ namespace System.CommandLine
             {
                 if (_arity is null)
                 {
-                    return ArgumentArity.Default(
-                        ArgumentType, 
-                        this, 
-                        Parents);
+                    return ArgumentArity.Default(ArgumentType, this, Parents);
                 }
 
                 return _arity;
@@ -71,8 +66,7 @@ namespace System.CommandLine
                 {
                     if (ArgumentType.CanBeBoundFromScalarValue())
                     {
-                        if (Arity.MaximumNumberOfValues == 1 &&
-                            ArgumentType == typeof(bool))
+                        if (Arity.MaximumNumberOfValues == 1 && ArgumentType == typeof(bool))
                         {
                             _convertArguments = ArgumentConverter.TryConvertBoolArgument;
                         }
@@ -84,8 +78,6 @@ namespace System.CommandLine
                 }
 
                 return _convertArguments;
-
-          
             }
             set => _convertArguments = value;
         }
@@ -94,7 +86,7 @@ namespace System.CommandLine
         /// Gets the list of suggestion sources for the argument.
         /// </summary>
         public SuggestionSourceList Suggestions
-        { 
+        {
             get
             {
                 if (_suggestions is null)
@@ -137,14 +129,16 @@ namespace System.CommandLine
             }
         }
 
-        internal List<ValidateSymbol<ArgumentResult>> Validators { get; } = new List<ValidateSymbol<ArgumentResult>>();
+        internal List<ValidateSymbol<ArgumentResult>> Validators { get; } =
+            new List<ValidateSymbol<ArgumentResult>>();
 
         /// <summary>
         /// Adds a custom <see cref="ValidateSymbol{T}(ArgumentResult)"/> to the argument. Validators can be used
         /// to provide custom errors based on user input.
         /// </summary>
         /// <param name="validate">The delegate to validate the parsed argument.</param>
-        public void AddValidator(ValidateSymbol<ArgumentResult> validate) => Validators.Add(validate);
+        public void AddValidator(ValidateSymbol<ArgumentResult> validate) =>
+            Validators.Add(validate);
 
         /// <summary>
         /// Gets the default value for the argument.
@@ -159,7 +153,9 @@ namespace System.CommandLine
         {
             if (_defaultValueFactory is null)
             {
-                throw new InvalidOperationException($"Argument \"{Name}\" does not have a default value");
+                throw new InvalidOperationException(
+                    $"Argument \"{Name}\" does not have a default value"
+                );
             }
 
             return _defaultValueFactory.Invoke(argumentResult);
@@ -188,7 +184,7 @@ namespace System.CommandLine
 
             SetDefaultValueFactory(_ => getDefaultValue());
         }
-        
+
         /// <summary>
         /// Sets a delegate to invoke when the default value for the argument is required.
         /// </summary>
@@ -196,7 +192,8 @@ namespace System.CommandLine
         /// <remarks>In this overload, the <see cref="ArgumentResult"/> is provided to the delegate.</remarks>
         public void SetDefaultValueFactory(Func<ArgumentResult, object?> getDefaultValue)
         {
-            _defaultValueFactory = getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue));
+            _defaultValueFactory =
+                getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue));
         }
 
         /// <summary>
@@ -217,15 +214,17 @@ namespace System.CommandLine
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string?> GetSuggestions(ParseResult? parseResult = null, string? textToMatch = null)
-        {
-            var dynamicSuggestions = Suggestions
-                .SelectMany(source => source.GetSuggestions(parseResult, textToMatch));
+        public override IEnumerable<string?> GetSuggestions(
+            ParseResult? parseResult = null,
+            string? textToMatch = null
+        ) {
+            var dynamicSuggestions = Suggestions.SelectMany(
+                source => source.GetSuggestions(parseResult, textToMatch)
+            );
 
-            return dynamicSuggestions
-                   .Distinct()
-                   .OrderBy(c => c, StringComparer.OrdinalIgnoreCase)
-                   .Containing(textToMatch ?? "");
+            return dynamicSuggestions.Distinct()
+                .OrderBy(c => c, StringComparer.OrdinalIgnoreCase)
+                .Containing(textToMatch ?? "");
         }
 
         /// <inheritdoc />

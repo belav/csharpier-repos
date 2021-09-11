@@ -13,10 +13,22 @@ namespace System.Security.Cryptography.Pkcs
     {
         static partial void PrepareRegistrationDsa(Dictionary<string, CmsSignature> lookup)
         {
-            lookup.Add(Oids.DsaWithSha1, new DSACmsSignature(Oids.DsaWithSha1, HashAlgorithmName.SHA1));
-            lookup.Add(Oids.DsaWithSha256, new DSACmsSignature(Oids.DsaWithSha256, HashAlgorithmName.SHA256));
-            lookup.Add(Oids.DsaWithSha384, new DSACmsSignature(Oids.DsaWithSha384, HashAlgorithmName.SHA384));
-            lookup.Add(Oids.DsaWithSha512, new DSACmsSignature(Oids.DsaWithSha512, HashAlgorithmName.SHA512));
+            lookup.Add(
+                Oids.DsaWithSha1,
+                new DSACmsSignature(Oids.DsaWithSha1, HashAlgorithmName.SHA1)
+            );
+            lookup.Add(
+                Oids.DsaWithSha256,
+                new DSACmsSignature(Oids.DsaWithSha256, HashAlgorithmName.SHA256)
+            );
+            lookup.Add(
+                Oids.DsaWithSha384,
+                new DSACmsSignature(Oids.DsaWithSha384, HashAlgorithmName.SHA384)
+            );
+            lookup.Add(
+                Oids.DsaWithSha512,
+                new DSACmsSignature(Oids.DsaWithSha512, HashAlgorithmName.SHA512)
+            );
             lookup.Add(Oids.Dsa, new DSACmsSignature(null, default));
         }
 
@@ -47,15 +59,17 @@ namespace System.Security.Cryptography.Pkcs
                 string? digestAlgorithmOid,
                 HashAlgorithmName digestAlgorithmName,
                 ReadOnlyMemory<byte>? signatureParameters,
-                X509Certificate2 certificate)
-            {
+                X509Certificate2 certificate
+            ) {
                 if (_expectedDigest != digestAlgorithmName)
                 {
                     throw new CryptographicException(
                         SR.Format(
                             SR.Cryptography_Cms_InvalidSignerHashForSignatureAlg,
                             digestAlgorithmOid,
-                            _signatureAlgorithm));
+                            _signatureAlgorithm
+                        )
+                    );
                 }
 
                 DSA? dsa = certificate.GetDSAPublicKey();
@@ -85,6 +99,7 @@ namespace System.Security.Cryptography.Pkcs
                     return dsa.VerifySignature(valueHash, ieee);
 #if NETCOREAPP || NETSTANDARD2_1
                 }
+
                 finally
                 {
                     CryptoPool.Return(rented, bufSize);
@@ -103,12 +118,13 @@ namespace System.Security.Cryptography.Pkcs
                 AsymmetricAlgorithm? key,
                 bool silent,
                 [NotNullWhen(true)] out string? signatureAlgorithm,
-                [NotNullWhen(true)] out byte[]? signatureValue)
-            {
+                [NotNullWhen(true)] out byte[]? signatureValue
+            ) {
                 // If there's no private key, fall back to the public key for a "no private key" exception.
-                DSA? dsa = key as DSA ??
-                    PkcsPal.Instance.GetPrivateKeyForSigning<DSA>(certificate, silent) ??
-                    certificate.GetDSAPublicKey();
+                DSA? dsa =
+                    key as DSA
+                    ?? PkcsPal.Instance.GetPrivateKeyForSigning<DSA>(certificate, silent)
+                    ?? certificate.GetDSAPublicKey();
 
                 if (dsa == null)
                 {
@@ -118,11 +134,15 @@ namespace System.Security.Cryptography.Pkcs
                 }
 
                 string? oidValue =
-                    hashAlgorithmName == HashAlgorithmName.SHA1 ? Oids.DsaWithSha1 :
-                    hashAlgorithmName == HashAlgorithmName.SHA256 ? Oids.DsaWithSha256 :
-                    hashAlgorithmName == HashAlgorithmName.SHA384 ? Oids.DsaWithSha384 :
-                    hashAlgorithmName == HashAlgorithmName.SHA512 ? Oids.DsaWithSha512 :
-                    null;
+                    hashAlgorithmName == HashAlgorithmName.SHA1
+                        ? Oids.DsaWithSha1
+                        : hashAlgorithmName == HashAlgorithmName.SHA256
+                            ? Oids.DsaWithSha256
+                            : hashAlgorithmName == HashAlgorithmName.SHA384
+                                ? Oids.DsaWithSha384
+                                : hashAlgorithmName == HashAlgorithmName.SHA512
+                                    ? Oids.DsaWithSha512
+                                    : null;
 
                 if (oidValue == null)
                 {
@@ -144,8 +164,10 @@ namespace System.Security.Cryptography.Pkcs
                     {
                         var signature = new ReadOnlySpan<byte>(rented, 0, bytesWritten);
 
-                        if (key != null && !certificate.GetDSAPublicKey()!.VerifySignature(dataHash, signature))
-                        {
+                        if (
+                            key != null
+                            && !certificate.GetDSAPublicKey()!.VerifySignature(dataHash, signature)
+                        ) {
                             // key did not match certificate
                             signatureValue = null;
                             return false;
@@ -155,6 +177,7 @@ namespace System.Security.Cryptography.Pkcs
                         return true;
                     }
                 }
+
                 finally
                 {
                     CryptoPool.Return(rented, bytesWritten);

@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Table table,
             IReadOnlyList<Column> columns,
             string? filter,
-            bool unique)
-        {
+            bool unique
+        ) {
             Name = name;
             Table = table;
             Columns = columns;
@@ -81,19 +81,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string ToString()
-            => ((ITableIndex)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((ITableIndex)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <inheritdoc />
-        ITable ITableIndex.Table
-            => Table;
+        ITable ITableIndex.Table => Table;
 
         /// <inheritdoc />
-        IReadOnlyList<IColumn> ITableIndex.Columns
-            => Columns;
+        IReadOnlyList<IColumn> ITableIndex.Columns => Columns;
 
         /// <inheritdoc />
-        IEnumerable<IIndex> ITableIndex.MappedIndexes
-            => MappedIndexes;
+        IEnumerable<IIndex> ITableIndex.MappedIndexes => MappedIndexes;
     }
 }

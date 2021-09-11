@@ -24,34 +24,29 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="storeType"> The name of the database type. </param>
         /// <param name="dbType"> The <see cref="DbType" /> to be used. </param>
-        public DateTimeOffsetTypeMapping(
-            string storeType,
-            DbType? dbType = null)
-            : base(storeType, typeof(DateTimeOffset), dbType)
-        {
-        }
+        public DateTimeOffsetTypeMapping(string storeType, DbType? dbType = null)
+            : base(storeType, typeof(DateTimeOffset), dbType) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DateTimeOffsetTypeMapping" /> class.
         /// </summary>
         /// <param name="parameters"> Parameter object for <see cref="RelationalTypeMapping" />. </param>
         protected DateTimeOffsetTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+            : base(parameters) { }
 
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
         /// <param name="parameters"> The parameters for this mapping. </param>
         /// <returns> The newly created mapping. </returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new DateTimeOffsetTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new DateTimeOffsetTypeMapping(parameters);
 
         /// <summary>
         ///     Gets the string format to be used to generate SQL literals of this type.
         /// </summary>
-        protected override string SqlLiteralFormatString
-            => "TIMESTAMP '" + DateTimeOffsetFormatConst + "'";
+        protected override string SqlLiteralFormatString =>
+            "TIMESTAMP '" + DateTimeOffsetFormatConst + "'";
     }
 }

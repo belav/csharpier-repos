@@ -12,7 +12,7 @@ namespace XmlFormattersWebSite
     public class HomeController : Controller
     {
         [HttpPost]
-        public IActionResult Index([FromBody]DummyClass dummyObject)
+        public IActionResult Index([FromBody] DummyClass dummyObject)
         {
             if (!ModelState.IsValid)
             {
@@ -39,7 +39,12 @@ namespace XmlFormattersWebSite
                     allErrorMessages.Add(
                         string.Join(
                             ",",
-                            errors.Select(modelError => $"ErrorMessage:{modelError.ErrorMessage};Exception:{modelError.Exception}")));
+                            errors.Select(
+                                modelError =>
+                                    $"ErrorMessage:{modelError.ErrorMessage};Exception:{modelError.Exception}"
+                            )
+                        )
+                    );
                 }
             }
 

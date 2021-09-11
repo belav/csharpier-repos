@@ -32,8 +32,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal Diagnostic? LoadDiagnostic { get; }
 
-        private TextAndVersion(SourceText text, VersionStamp version, string? filePath, Diagnostic? loadDiagnostic)
-        {
+        private TextAndVersion(
+            SourceText text,
+            VersionStamp version,
+            string? filePath,
+            Diagnostic? loadDiagnostic
+        ) {
             Text = text;
             Version = version;
             FilePath = filePath ?? string.Empty;
@@ -47,8 +51,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="version">The version</param>
         /// <param name="filePath">An optional file path that identifies the original of the source text.</param>
         /// <returns></returns>
-        public static TextAndVersion Create(SourceText text, VersionStamp version, string? filePath = null)
-            => Create(text, version, filePath, loadDiagnostic: null);
+        public static TextAndVersion Create(
+            SourceText text,
+            VersionStamp version,
+            string? filePath = null
+        ) => Create(text, version, filePath, loadDiagnostic: null);
 
         /// <summary>
         /// Create a new <see cref="TextAndVersion"/> instance.
@@ -58,8 +65,12 @@ namespace Microsoft.CodeAnalysis
         /// <param name="filePath">An optional file path that identifies the original of the source text.</param>
         /// <param name="loadDiagnostic">Diagnostic describing failure to load the source text.</param>
         /// <returns></returns>
-        internal static TextAndVersion Create(SourceText text, VersionStamp version, string? filePath, Diagnostic? loadDiagnostic)
-        {
+        internal static TextAndVersion Create(
+            SourceText text,
+            VersionStamp version,
+            string? filePath,
+            Diagnostic? loadDiagnostic
+        ) {
             if (text == null)
             {
                 throw new ArgumentNullException(nameof(text));

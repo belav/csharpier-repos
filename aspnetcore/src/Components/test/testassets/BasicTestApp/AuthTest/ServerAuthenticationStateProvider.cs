@@ -26,12 +26,15 @@ namespace BasicTestApp.AuthTest
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             var uri = new Uri(_httpClient.BaseAddress, "/subdir/api/User");
-            var data = await _httpClient.GetFromJsonAsync<ClientSideAuthenticationStateData>(uri.AbsoluteUri);
+            var data = await _httpClient.GetFromJsonAsync<ClientSideAuthenticationStateData>(
+                uri.AbsoluteUri
+            );
             ClaimsIdentity identity;
             if (data.IsAuthenticated)
             {
-                var claims = new[] { new Claim(ClaimTypes.Name, data.UserName) }
-                    .Concat(data.ExposedClaims.Select(c => new Claim(c.Type, c.Value)));
+                var claims = new[] { new Claim(ClaimTypes.Name, data.UserName) }.Concat(
+                    data.ExposedClaims.Select(c => new Claim(c.Type, c.Value))
+                );
                 identity = new ClaimsIdentity(claims, "Server authentication");
             }
             else

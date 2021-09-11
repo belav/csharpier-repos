@@ -19,17 +19,21 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public async Task RequestHeaders_ClientSendsDefaultHeaders_Success()
         {
             string address;
-            using (Utilities.CreateHttpServer(out address, httpContext =>
-                {
-                    var requestHeaders = httpContext.Request.Headers;
-                    // NOTE: The System.Net client only sends the Connection: keep-alive header on the first connection per service-point.
-                    // Assert.Equal(2, requestHeaders.Count);
-                    // Assert.Equal("Keep-Alive", requestHeaders.Get("Connection"));
-                    Assert.False(StringValues.IsNullOrEmpty(requestHeaders["Host"]));
-                    Assert.True(StringValues.IsNullOrEmpty(requestHeaders["Accept"]));
-                    return Task.FromResult(0);
-                }))
-            {
+            using (
+                Utilities.CreateHttpServer(
+                    out address,
+                    httpContext =>
+                    {
+                        var requestHeaders = httpContext.Request.Headers;
+                        // NOTE: The System.Net client only sends the Connection: keep-alive header on the first connection per service-point.
+                        // Assert.Equal(2, requestHeaders.Count);
+                        // Assert.Equal("Keep-Alive", requestHeaders.Get("Connection"));
+                        Assert.False(StringValues.IsNullOrEmpty(requestHeaders["Host"]));
+                        Assert.True(StringValues.IsNullOrEmpty(requestHeaders["Accept"]));
+                        return Task.FromResult(0);
+                    }
+                )
+            ) {
                 string response = await SendRequestAsync(address);
                 Assert.Equal(string.Empty, response);
             }
@@ -39,20 +43,27 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public async Task RequestHeaders_ClientSendsCustomHeaders_Success()
         {
             string address;
-            using (Utilities.CreateHttpServer(out address, httpContext =>
-                {
-                    var requestHeaders = httpContext.Request.Headers;
-                    Assert.Equal(4, requestHeaders.Count);
-                    Assert.False(StringValues.IsNullOrEmpty(requestHeaders["Host"]));
-                    Assert.Equal("close", requestHeaders["Connection"]);
-                    // Apparently Http.Sys squashes request headers together.
-                    Assert.Single(requestHeaders["Custom-Header"]);
-                    Assert.Equal("custom1, and custom2, custom3", requestHeaders["Custom-Header"]);
-                    Assert.Single(requestHeaders["Spacer-Header"]);
-                    Assert.Equal("spacervalue, spacervalue", requestHeaders["Spacer-Header"]);
-                    return Task.FromResult(0);
-                }))
-            {
+            using (
+                Utilities.CreateHttpServer(
+                    out address,
+                    httpContext =>
+                    {
+                        var requestHeaders = httpContext.Request.Headers;
+                        Assert.Equal(4, requestHeaders.Count);
+                        Assert.False(StringValues.IsNullOrEmpty(requestHeaders["Host"]));
+                        Assert.Equal("close", requestHeaders["Connection"]);
+                        // Apparently Http.Sys squashes request headers together.
+                        Assert.Single(requestHeaders["Custom-Header"]);
+                        Assert.Equal(
+                            "custom1, and custom2, custom3",
+                            requestHeaders["Custom-Header"]
+                        );
+                        Assert.Single(requestHeaders["Spacer-Header"]);
+                        Assert.Equal("spacervalue, spacervalue", requestHeaders["Spacer-Header"]);
+                        return Task.FromResult(0);
+                    }
+                )
+            ) {
                 string[] customValues = new string[] { "custom1, and custom2", "custom3" };
 
                 await SendRequestAsync(address, "Custom-Header", customValues);
@@ -63,16 +74,23 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public async Task RequestHeaders_ServerAddsCustomHeaders_Success()
         {
             string address;
-            using (Utilities.CreateHttpServer(out address, httpContext =>
-            {
-                var requestHeaders = httpContext.Request.Headers;
-                var header = KeyValuePair.Create("Custom-Header", new StringValues("custom"));
-                requestHeaders.Add(header);
+            using (
+                Utilities.CreateHttpServer(
+                    out address,
+                    httpContext =>
+                    {
+                        var requestHeaders = httpContext.Request.Headers;
+                        var header = KeyValuePair.Create(
+                            "Custom-Header",
+                            new StringValues("custom")
+                        );
+                        requestHeaders.Add(header);
 
-                Assert.True(requestHeaders.Contains(header));
-                return Task.FromResult(0);
-            }))
-            {
+                        Assert.True(requestHeaders.Contains(header));
+                        return Task.FromResult(0);
+                    }
+                )
+            ) {
                 string response = await SendRequestAsync(address);
                 Assert.Equal(string.Empty, response);
             }
@@ -86,8 +104,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
         }
 
-        private async Task SendRequestAsync(string address, string customHeader, string[] customValues)
-        {
+        private async Task SendRequestAsync(
+            string address,
+            string customHeader,
+            string[] customValues
+        ) {
             var uri = new Uri(address);
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("GET / HTTP/1.1");

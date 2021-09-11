@@ -23,12 +23,13 @@ namespace XmlFormattersWebSite.Controllers
 
         public IEnumerable<string> NonWrappedTypes_Empty()
         {
-            return new string[] { };
+            return new string[] {  };
         }
 
         public IEnumerable<Person> WrappedTypes()
         {
-            return new[] {
+            return new[]
+            {
                 new Person() { Id = 10, Name = "Mike" },
                 new Person() { Id = 11, Name = "Jimmy" }
             };
@@ -36,7 +37,7 @@ namespace XmlFormattersWebSite.Controllers
 
         public IEnumerable<Person> WrappedTypes_Empty()
         {
-            return new Person[] { };
+            return new Person[] {  };
         }
 
         public IEnumerable<string> NonWrappedTypes_NullInstance()

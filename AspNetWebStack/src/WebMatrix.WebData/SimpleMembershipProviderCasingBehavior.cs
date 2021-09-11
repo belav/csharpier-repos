@@ -18,7 +18,6 @@ namespace WebMatrix.WebData
         /// of users exist.
         /// </remarks>
         NormalizeCasing,
-
         /// <summary>
         /// Relies on the database's configured collation to normalize casing for the comparison of user names. User
         /// names are provided to the database exactly as entered by the user.

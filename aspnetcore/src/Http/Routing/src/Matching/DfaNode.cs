@@ -24,7 +24,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         // Just for diagnostics and debugging
         public string Label { get; set; }
-        
+
         public List<Endpoint> Matches { get; private set; }
 
         public Dictionary<string, DfaNode> Literals { get; private set; }
@@ -123,10 +123,13 @@ namespace Microsoft.AspNetCore.Routing.Matching
             builder.Append(" c: ");
             if (Literals != null)
             {
-                builder.AppendJoin(", ", Literals.Select(kvp => $"{kvp.Key}->({FormatNode(kvp.Value)})"));
+                builder.AppendJoin(
+                    ", ",
+                    Literals.Select(kvp => $"{kvp.Key}->({FormatNode(kvp.Value)})")
+                );
             }
             return builder.ToString();
-            
+
             // DfaNodes can be self-referential, don't traverse cycles.
             string FormatNode(DfaNode other)
             {

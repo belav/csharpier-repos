@@ -28,8 +28,11 @@ namespace Internal.TypeSystem
 
             if (type.HasInstantiation)
             {
-                for (int instantiationIndex = 0; instantiationIndex < type.Instantiation.Length; instantiationIndex++)
-                {
+                for (
+                    int instantiationIndex = 0;
+                    instantiationIndex < type.Instantiation.Length;
+                    instantiationIndex++
+                ) {
                     if (type.Instantiation[instantiationIndex].IsConstructedOverType(typesToFind))
                     {
                         return true;
@@ -69,8 +72,11 @@ namespace Internal.TypeSystem
         ///
         /// This function cannot be used to replace MyType in the above example.
         /// </summary>
-        public static TypeDesc ReplaceTypesInConstructionOfType(this TypeDesc type, TypeDesc[] typesToReplace, TypeDesc[] replacementTypes)
-        {
+        public static TypeDesc ReplaceTypesInConstructionOfType(
+            this TypeDesc type,
+            TypeDesc[] typesToReplace,
+            TypeDesc[] replacementTypes
+        ) {
             int directReplacementIndex = Array.IndexOf(typesToReplace, type);
 
             if (directReplacementIndex != -1)
@@ -84,7 +90,10 @@ namespace Internal.TypeSystem
                 for (; instantiationIndex < type.Instantiation.Length; instantiationIndex++)
                 {
                     TypeDesc oldType = type.Instantiation[instantiationIndex];
-                    TypeDesc newType = oldType.ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
+                    TypeDesc newType = oldType.ReplaceTypesInConstructionOfType(
+                        typesToReplace,
+                        replacementTypes
+                    );
                     if ((oldType != newType) || (newInstantiation != null))
                     {
                         if (newInstantiation == null)
@@ -97,13 +106,19 @@ namespace Internal.TypeSystem
                     }
                 }
                 if (newInstantiation != null)
-                    return type.Context.GetInstantiatedType((MetadataType)type.GetTypeDefinition(), new Instantiation(newInstantiation));
+                    return type.Context.GetInstantiatedType(
+                        (MetadataType)type.GetTypeDefinition(),
+                        new Instantiation(newInstantiation)
+                    );
             }
             else if (type.IsParameterizedType)
             {
                 ParameterizedType parameterizedType = (ParameterizedType)type;
                 TypeDesc oldParameter = parameterizedType.ParameterType;
-                TypeDesc newParameter = oldParameter.ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
+                TypeDesc newParameter = oldParameter.ReplaceTypesInConstructionOfType(
+                    typesToReplace,
+                    replacementTypes
+                );
                 if (oldParameter != newParameter)
                 {
                     if (type.IsArray)
@@ -129,9 +144,15 @@ namespace Internal.TypeSystem
             {
                 MethodSignature oldSig = ((FunctionPointerType)type).Signature;
                 MethodSignatureBuilder sigBuilder = new MethodSignatureBuilder(oldSig);
-                sigBuilder.ReturnType = oldSig.ReturnType.ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
+                sigBuilder.ReturnType = oldSig.ReturnType.ReplaceTypesInConstructionOfType(
+                    typesToReplace,
+                    replacementTypes
+                );
                 for (int paramIndex = 0; paramIndex < oldSig.Length; paramIndex++)
-                    sigBuilder[paramIndex] = oldSig[paramIndex].ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
+                    sigBuilder[paramIndex] = oldSig[paramIndex].ReplaceTypesInConstructionOfType(
+                        typesToReplace,
+                        replacementTypes
+                    );
 
                 MethodSignature newSig = sigBuilder.ToSignature();
                 if (newSig != oldSig)
@@ -152,9 +173,15 @@ namespace Internal.TypeSystem
         ///
         /// This function cannot be used to replace MyType in the above example.
         /// </summary>
-        public static MethodDesc ReplaceTypesInConstructionOfMethod(this MethodDesc method, TypeDesc[] typesToReplace, TypeDesc[] replacementTypes)
-        {
-            TypeDesc newOwningType = method.OwningType.ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
+        public static MethodDesc ReplaceTypesInConstructionOfMethod(
+            this MethodDesc method,
+            TypeDesc[] typesToReplace,
+            TypeDesc[] replacementTypes
+        ) {
+            TypeDesc newOwningType = method.OwningType.ReplaceTypesInConstructionOfType(
+                typesToReplace,
+                replacementTypes
+            );
             MethodDesc methodOnOwningType = null;
             bool owningTypeChanged = false;
             if (newOwningType == method.OwningType)
@@ -163,7 +190,11 @@ namespace Internal.TypeSystem
             }
             else
             {
-                methodOnOwningType = TypeSystemHelpers.FindMethodOnExactTypeWithMatchingTypicalMethod(newOwningType, method);
+                methodOnOwningType =
+                    TypeSystemHelpers.FindMethodOnExactTypeWithMatchingTypicalMethod(
+                        newOwningType,
+                        method
+                    );
                 owningTypeChanged = true;
             }
 
@@ -181,7 +212,10 @@ namespace Internal.TypeSystem
                 for (; instantiationIndex < method.Instantiation.Length; instantiationIndex++)
                 {
                     TypeDesc oldType = method.Instantiation[instantiationIndex];
-                    TypeDesc newType = oldType.ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
+                    TypeDesc newType = oldType.ReplaceTypesInConstructionOfType(
+                        typesToReplace,
+                        replacementTypes
+                    );
                     if ((oldType != newType) || (newInstantiation != null))
                     {
                         if (newInstantiation == null)
@@ -195,9 +229,15 @@ namespace Internal.TypeSystem
                 }
 
                 if (newInstantiation != null)
-                    result = method.Context.GetInstantiatedMethod(methodOnOwningType, new Instantiation(newInstantiation));
+                    result = method.Context.GetInstantiatedMethod(
+                        methodOnOwningType,
+                        new Instantiation(newInstantiation)
+                    );
                 else if (owningTypeChanged)
-                    result = method.Context.GetInstantiatedMethod(methodOnOwningType, method.Instantiation);
+                    result = method.Context.GetInstantiatedMethod(
+                        methodOnOwningType,
+                        method.Instantiation
+                    );
                 else
                     result = method;
             }

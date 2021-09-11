@@ -19,14 +19,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         public void DescriptorProvider_FindsVCTH()
         {
             // Arrange
-            var code = @"
+            var code =
+                @"
         public class StringParameterViewComponent
         {
             public string Invoke(string foo, string bar) => null;
         }
 ";
 
-            var compilation = MvcShim.BaseCompilation.AddSyntaxTrees(CSharpSyntaxTree.ParseText(code));
+            var compilation = MvcShim.BaseCompilation.AddSyntaxTrees(
+                CSharpSyntaxTree.ParseText(code)
+            );
 
             var context = TagHelperDescriptorProviderContext.Create();
             context.SetCompilation(compilation);
@@ -37,28 +40,32 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             };
 
             var expectedDescriptor = TagHelperDescriptorBuilder.Create(
-                ViewComponentTagHelperConventions.Kind,
-                "__Generated__StringParameterViewComponentTagHelper",
-                TestCompilation.AssemblyName)
+                    ViewComponentTagHelperConventions.Kind,
+                    "__Generated__StringParameterViewComponentTagHelper",
+                    TestCompilation.AssemblyName
+                )
                 .TypeName("__Generated__StringParameterViewComponentTagHelper")
                 .DisplayName("StringParameterViewComponentTagHelper")
-                .TagMatchingRuleDescriptor(rule =>
-                    rule
-                    .RequireTagName("vc:string-parameter")
-                    .RequireAttributeDescriptor(attribute => attribute.Name("foo"))
-                    .RequireAttributeDescriptor(attribute => attribute.Name("bar")))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                    .Name("foo")
-                    .PropertyName("foo")
-                    .TypeName(typeof(string).FullName)
-                    .DisplayName("string StringParameterViewComponentTagHelper.foo"))
-                .BoundAttributeDescriptor(attribute =>
-                    attribute
-                    .Name("bar")
-                    .PropertyName("bar")
-                    .TypeName(typeof(string).FullName)
-                    .DisplayName("string StringParameterViewComponentTagHelper.bar"))
+                .TagMatchingRuleDescriptor(
+                    rule =>
+                        rule.RequireTagName("vc:string-parameter")
+                            .RequireAttributeDescriptor(attribute => attribute.Name("foo"))
+                            .RequireAttributeDescriptor(attribute => attribute.Name("bar"))
+                )
+                .BoundAttributeDescriptor(
+                    attribute =>
+                        attribute.Name("foo")
+                            .PropertyName("foo")
+                            .TypeName(typeof(string).FullName)
+                            .DisplayName("string StringParameterViewComponentTagHelper.foo")
+                )
+                .BoundAttributeDescriptor(
+                    attribute =>
+                        attribute.Name("bar")
+                            .PropertyName("bar")
+                            .TypeName(typeof(string).FullName)
+                            .DisplayName("string StringParameterViewComponentTagHelper.bar")
+                )
                 .AddMetadata(ViewComponentTagHelperMetadata.Name, "StringParameter")
                 .Build();
 
@@ -66,7 +73,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             provider.Execute(context);
 
             // Assert
-            Assert.Single(context.Results, d => TagHelperDescriptorComparer.Default.Equals(d, expectedDescriptor));
+            Assert.Single(
+                context.Results,
+                d => TagHelperDescriptorComparer.Default.Equals(d, expectedDescriptor)
+            );
         }
     }
 }

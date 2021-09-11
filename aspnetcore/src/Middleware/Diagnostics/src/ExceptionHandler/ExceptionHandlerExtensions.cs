@@ -36,17 +36,21 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="errorHandlingPath"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder app, string errorHandlingPath)
-        {
+        public static IApplicationBuilder UseExceptionHandler(
+            this IApplicationBuilder app,
+            string errorHandlingPath
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            return app.UseExceptionHandler(new ExceptionHandlerOptions
-            {
-                ExceptionHandlingPath = new PathString(errorHandlingPath)
-            });
+            return app.UseExceptionHandler(
+                new ExceptionHandlerOptions
+                {
+                    ExceptionHandlingPath = new PathString(errorHandlingPath)
+                }
+            );
         }
 
         /// <summary>
@@ -56,8 +60,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="configure"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder app, Action<IApplicationBuilder> configure)
-        {
+        public static IApplicationBuilder UseExceptionHandler(
+            this IApplicationBuilder app,
+            Action<IApplicationBuilder> configure
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -71,10 +77,9 @@ namespace Microsoft.AspNetCore.Builder
             configure(subAppBuilder);
             var exceptionHandlerPipeline = subAppBuilder.Build();
 
-            return app.UseExceptionHandler(new ExceptionHandlerOptions
-            {
-                ExceptionHandler = exceptionHandlerPipeline
-            });
+            return app.UseExceptionHandler(
+                new ExceptionHandlerOptions { ExceptionHandler = exceptionHandlerPipeline }
+            );
         }
 
         /// <summary>
@@ -84,8 +89,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder app, ExceptionHandlerOptions options)
-        {
+        public static IApplicationBuilder UseExceptionHandler(
+            this IApplicationBuilder app,
+            ExceptionHandlerOptions options
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

@@ -64,9 +64,9 @@ namespace System.Security.Cryptography
 
             private void ImportFullKeyBlob(byte[] ecfullKeyBlob, bool includePrivateParameters)
             {
-                string blobType = includePrivateParameters ?
-                    Interop.BCrypt.KeyBlobType.BCRYPT_ECCFULLPRIVATE_BLOB :
-                    Interop.BCrypt.KeyBlobType.BCRYPT_ECCFULLPUBLIC_BLOB;
+                string blobType = includePrivateParameters
+                    ? Interop.BCrypt.KeyBlobType.BCRYPT_ECCFULLPRIVATE_BLOB
+                    : Interop.BCrypt.KeyBlobType.BCRYPT_ECCFULLPUBLIC_BLOB;
 
                 SafeNCryptKeyHandle keyHandle = CngKeyLite.ImportKeyBlob(blobType, ecfullKeyBlob);
 
@@ -76,13 +76,20 @@ namespace System.Security.Cryptography
                 ForceSetKeySize(_key.KeySize);
             }
 
-            private void ImportKeyBlob(byte[] ecKeyBlob, string curveName, bool includePrivateParameters)
-            {
-                string blobType = includePrivateParameters ?
-                    Interop.BCrypt.KeyBlobType.BCRYPT_ECCPRIVATE_BLOB :
-                    Interop.BCrypt.KeyBlobType.BCRYPT_ECCPUBLIC_BLOB;
+            private void ImportKeyBlob(
+                byte[] ecKeyBlob,
+                string curveName,
+                bool includePrivateParameters
+            ) {
+                string blobType = includePrivateParameters
+                    ? Interop.BCrypt.KeyBlobType.BCRYPT_ECCPRIVATE_BLOB
+                    : Interop.BCrypt.KeyBlobType.BCRYPT_ECCPUBLIC_BLOB;
 
-                SafeNCryptKeyHandle keyHandle = CngKeyLite.ImportKeyBlob(blobType, ecKeyBlob, curveName);
+                SafeNCryptKeyHandle keyHandle = CngKeyLite.ImportKeyBlob(
+                    blobType,
+                    ecKeyBlob,
+                    curveName
+                );
 
                 Debug.Assert(!keyHandle.IsInvalid);
 
@@ -92,9 +99,9 @@ namespace System.Security.Cryptography
 
             private byte[] ExportKeyBlob(bool includePrivateParameters)
             {
-                string blobType = includePrivateParameters ?
-                    Interop.BCrypt.KeyBlobType.BCRYPT_ECCPRIVATE_BLOB :
-                    Interop.BCrypt.KeyBlobType.BCRYPT_ECCPUBLIC_BLOB;
+                string blobType = includePrivateParameters
+                    ? Interop.BCrypt.KeyBlobType.BCRYPT_ECCPRIVATE_BLOB
+                    : Interop.BCrypt.KeyBlobType.BCRYPT_ECCPUBLIC_BLOB;
 
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
                 {
@@ -104,9 +111,9 @@ namespace System.Security.Cryptography
 
             private byte[] ExportFullKeyBlob(bool includePrivateParameters)
             {
-                string blobType = includePrivateParameters ?
-                    Interop.BCrypt.KeyBlobType.BCRYPT_ECCFULLPRIVATE_BLOB :
-                    Interop.BCrypt.KeyBlobType.BCRYPT_ECCFULLPUBLIC_BLOB;
+                string blobType = includePrivateParameters
+                    ? Interop.BCrypt.KeyBlobType.BCRYPT_ECCFULLPRIVATE_BLOB
+                    : Interop.BCrypt.KeyBlobType.BCRYPT_ECCFULLPUBLIC_BLOB;
 
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
                 {
@@ -126,8 +133,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> pkcs8Password,
                 int kdfCount,
                 Span<byte> destination,
-                out int bytesWritten)
-            {
+                out int bytesWritten
+            ) {
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
                 {
                     return CngKeyLite.TryExportPkcs8KeyBlob(
@@ -135,7 +142,8 @@ namespace System.Security.Cryptography
                         pkcs8Password,
                         kdfCount,
                         destination,
-                        out bytesWritten);
+                        out bytesWritten
+                    );
                 }
             }
 
@@ -148,7 +156,9 @@ namespace System.Security.Cryptography
                     CngKeyLite.GetPropertyAsString(
                         keyHandle,
                         CngKeyLite.KeyPropertyName.Algorithm,
-                        CngPropertyOptions.None));
+                        CngPropertyOptions.None
+                    )
+                );
 
                 ForceSetKeySize(_key.KeySize);
             }

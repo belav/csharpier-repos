@@ -7,14 +7,9 @@ namespace MultipleRuntimeFunctions
     {
         static void MethodWithMultipleRuntimeFunctions()
         {
-            try
-            {
+            try { }
 
-            }
-            finally
-            {
-
-            }
+            finally { }
         }
 
         static void Main(string[] args)

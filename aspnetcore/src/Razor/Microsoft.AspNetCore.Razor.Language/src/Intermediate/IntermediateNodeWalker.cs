@@ -31,6 +31,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                     Visit(child);
                 }
             }
+
             finally
             {
                 _ancestors.RemoveAt(0);

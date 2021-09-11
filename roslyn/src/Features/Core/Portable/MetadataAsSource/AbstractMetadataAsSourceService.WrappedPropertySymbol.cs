@@ -15,8 +15,11 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         {
             private readonly IPropertySymbol _symbol;
 
-            public WrappedPropertySymbol(IPropertySymbol propertySymbol, bool canImplementImplicitly, IDocumentationCommentFormattingService docCommentFormattingService)
-                : base(propertySymbol, canImplementImplicitly, docCommentFormattingService)
+            public WrappedPropertySymbol(
+                IPropertySymbol propertySymbol,
+                bool canImplementImplicitly,
+                IDocumentationCommentFormattingService docCommentFormattingService
+            ) : base(propertySymbol, canImplementImplicitly, docCommentFormattingService)
             {
                 _symbol = propertySymbol;
             }
@@ -59,16 +62,14 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public ImmutableArray<CustomModifier> RefCustomModifiers => _symbol.RefCustomModifiers;
 
-            public ImmutableArray<CustomModifier> TypeCustomModifiers => _symbol.TypeCustomModifiers;
+            public ImmutableArray<CustomModifier> TypeCustomModifiers =>
+                _symbol.TypeCustomModifiers;
 
             ISymbol ISymbol.OriginalDefinition => _symbol.OriginalDefinition;
 
             public new IPropertySymbol OriginalDefinition
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
         }
     }

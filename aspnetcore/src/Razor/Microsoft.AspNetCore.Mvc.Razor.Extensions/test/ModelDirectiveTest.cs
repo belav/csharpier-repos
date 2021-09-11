@@ -17,11 +17,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         public void ModelDirective_GetModelType_GetsTypeFromFirstWellFormedDirective()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @model Type1
 @model Type2
 @model
-");
+"
+            );
 
             var engine = CreateRuntimeEngine();
 
@@ -55,16 +57,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         public void ModelDirectivePass_Execute_ReplacesTModelInBaseType()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @inherits BaseType<TModel>
 @model Type1
-");
+"
+            );
 
             var engine = CreateRuntimeEngine();
-            var pass = new ModelDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new ModelDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -81,17 +82,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         public void ModelDirectivePass_Execute_ReplacesTModelInBaseType_DifferentOrdering()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @model Type1
 @inherits BaseType<TModel>
 @model Type2
-");
+"
+            );
 
             var engine = CreateRuntimeEngine();
-            var pass = new ModelDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new ModelDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -108,16 +108,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         public void ModelDirectivePass_Execute_NoOpWithoutTModel()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @inherits BaseType
 @model Type1
-");
+"
+            );
 
             var engine = CreateRuntimeEngine();
-            var pass = new ModelDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new ModelDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -134,15 +133,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         public void ModelDirectivePass_Execute_ReplacesTModelInBaseType_DefaultDynamic()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @inherits BaseType<TModel>
-");
+"
+            );
 
             var engine = CreateRuntimeEngine();
-            var pass = new ModelDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new ModelDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -159,15 +157,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         public void ModelDirectivePass_DesignTime_AddsTModelUsingDirective()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @inherits BaseType<TModel>
-");
+"
+            );
 
             var engine = CreateDesignTimeEngine();
-            var pass = new ModelDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new ModelDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -188,16 +185,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         public void ModelDirectivePass_DesignTime_WithModel_AddsTModelUsingDirective()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @inherits BaseType<TModel>
 @model SomeType
-");
+"
+            );
 
             var engine = CreateDesignTimeEngine();
-            var pass = new ModelDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new ModelDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -246,19 +242,23 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
         private RazorEngine CreateEngineCore(bool designTime = false)
         {
-            return CreateProjectEngine(b =>
-            {
-                // Notice we're not registering the ModelDirective.Pass here so we can run it on demand.
-                b.AddDirective(ModelDirective.Directive);
+            return CreateProjectEngine(
+                b =>
+                {
+                    // Notice we're not registering the ModelDirective.Pass here so we can run it on demand.
+                    b.AddDirective(ModelDirective.Directive);
 
-                b.Features.Add(new RazorPageDocumentClassifierPass());
-                b.Features.Add(new MvcViewDocumentClassifierPass());
-                b.Features.Add(new DesignTimeOptionsFeature(designTime));
-            }).Engine;
+                    b.Features.Add(new RazorPageDocumentClassifierPass());
+                    b.Features.Add(new MvcViewDocumentClassifierPass());
+                    b.Features.Add(new DesignTimeOptionsFeature(designTime));
+                }
+            ).Engine;
         }
 
-        private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
-        {
+        private DocumentIntermediateNode CreateIRDocument(
+            RazorEngine engine,
+            RazorCodeDocument codeDocument
+        ) {
             for (var i = 0; i < engine.Phases.Count; i++)
             {
                 var phase = engine.Phases[i];
@@ -271,10 +271,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             }
 
             // InheritsDirectivePass needs to run before ModelDirective.
-            var pass = new InheritsDirectivePass()
-            {
-                Engine = engine
-            };
+            var pass = new InheritsDirectivePass() { Engine = engine };
             pass.Execute(codeDocument, codeDocument.GetDocumentIntermediateNode());
 
             return codeDocument.GetDocumentIntermediateNode();
@@ -294,13 +291,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         {
             public NamespaceDeclarationIntermediateNode Node { get; set; }
 
-            public override void VisitNamespaceDeclaration(NamespaceDeclarationIntermediateNode node)
-            {
+            public override void VisitNamespaceDeclaration(
+                NamespaceDeclarationIntermediateNode node
+            ) {
                 Node = node;
             }
         }
 
-        private class DesignTimeOptionsFeature : IConfigureRazorParserOptionsFeature, IConfigureRazorCodeGenerationOptionsFeature
+        private class DesignTimeOptionsFeature
+            : IConfigureRazorParserOptionsFeature,
+              IConfigureRazorCodeGenerationOptionsFeature
         {
             private bool _designTime;
 

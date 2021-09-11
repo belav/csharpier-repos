@@ -29,9 +29,7 @@ namespace Microsoft.AspNetCore.DataProtection
             return new StringLogger(name, this);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public override string ToString()
         {
@@ -59,14 +57,30 @@ namespace Microsoft.AspNetCore.DataProtection
                 return (logLevel >= _factory.MinimumLevel);
             }
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-            {
-                string message = string.Format(CultureInfo.InvariantCulture,
-                    "Provider: {0}" + Environment.NewLine +
-                    "Log level: {1}" + Environment.NewLine +
-                    "Event id: {2}" + Environment.NewLine +
-                    "Exception: {3}" + Environment.NewLine +
-                    "Message: {4}", _name, logLevel, eventId, exception?.ToString(), formatter(state, exception));
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            ) {
+                string message = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Provider: {0}"
+                        + Environment.NewLine
+                        + "Log level: {1}"
+                        + Environment.NewLine
+                        + "Event id: {2}"
+                        + Environment.NewLine
+                        + "Exception: {3}"
+                        + Environment.NewLine
+                        + "Message: {4}",
+                    _name,
+                    logLevel,
+                    eventId,
+                    exception?.ToString(),
+                    formatter(state, exception)
+                );
                 _factory._log.AppendLine(message);
             }
 

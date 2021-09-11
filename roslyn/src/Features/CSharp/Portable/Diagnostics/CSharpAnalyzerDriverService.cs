@@ -19,18 +19,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAnalyzerDriverService()
-        {
-        }
+        public CSharpAnalyzerDriverService() { }
 
         public void ComputeDeclarationsInSpan(
             SemanticModel model,
             TextSpan span,
             bool getSymbol,
             ArrayBuilder<DeclarationInfo> builder,
-            CancellationToken cancellationToken)
-        {
-            CSharpDeclarationComputer.ComputeDeclarationsInSpan(model, span, getSymbol, builder, cancellationToken);
+            CancellationToken cancellationToken
+        ) {
+            CSharpDeclarationComputer.ComputeDeclarationsInSpan(
+                model,
+                span,
+                getSymbol,
+                builder,
+                cancellationToken
+            );
         }
     }
 }

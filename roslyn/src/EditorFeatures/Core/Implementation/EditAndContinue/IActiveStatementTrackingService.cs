@@ -27,11 +27,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
         /// Returns location of the tracking spans in the specified <see cref="Document"/> snapshot.
         /// </summary>
         /// <returns>Empty array if tracking spans are not available for the document.</returns>
-        ValueTask<ImmutableArray<TextSpan>> GetSpansAsync(Document document, CancellationToken cancellationToken);
+        ValueTask<ImmutableArray<TextSpan>> GetSpansAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Updates tracking spans with the latest positions of all active statements in the specified document snapshot and returns them.
         /// </summary>
-        ValueTask<ImmutableArray<ActiveStatementTrackingSpan>> GetAdjustedTrackingSpansAsync(Document document, ITextSnapshot snapshot, CancellationToken cancellationToken);
+        ValueTask<ImmutableArray<ActiveStatementTrackingSpan>> GetAdjustedTrackingSpansAsync(
+            Document document,
+            ITextSnapshot snapshot,
+            CancellationToken cancellationToken
+        );
     }
 }

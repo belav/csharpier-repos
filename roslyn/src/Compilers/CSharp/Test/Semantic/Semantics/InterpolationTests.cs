@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
         public void TestSimpleInterp()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -33,7 +33,7 @@ class Program {
     }
 }";
             string expectedOutput =
-@"Jenny don't change your number 8675309.
+                @"Jenny don't change your number 8675309.
 Jenny don't change your number 8675309     .
 Jenny don't change your number      8675309.
 Jenny don't change your number 867-5309.
@@ -47,7 +47,7 @@ Jenny don't change your number     867-5309.
         public void TestOnlyInterp()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -55,8 +55,7 @@ class Program {
         Console.WriteLine($""{number}"");
     }
 }";
-            string expectedOutput =
-@"8675309";
+            string expectedOutput = @"8675309";
             CompileAndVerify(source, expectedOutput: expectedOutput);
         }
 
@@ -64,7 +63,7 @@ class Program {
         public void TestDoubleInterp01()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -72,8 +71,7 @@ class Program {
         Console.WriteLine($""{number}{number}"");
     }
 }";
-            string expectedOutput =
-@"86753098675309";
+            string expectedOutput = @"86753098675309";
             CompileAndVerify(source, expectedOutput: expectedOutput);
         }
 
@@ -81,7 +79,7 @@ class Program {
         public void TestDoubleInterp02()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -89,8 +87,7 @@ class Program {
         Console.WriteLine($""Jenny don\'t change your number { number :###-####} { number :###-####}."");
     }
 }";
-            string expectedOutput =
-@"Jenny don't change your number 867-5309 867-5309.";
+            string expectedOutput = @"Jenny don't change your number 867-5309 867-5309.";
             CompileAndVerify(source, expectedOutput: expectedOutput);
         }
 
@@ -98,17 +95,18 @@ class Program {
         public void TestEmptyInterp()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
         Console.WriteLine($""Jenny don\'t change your number { /*trash*/ }."");
     }
 }";
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (5,73): error CS1733: Expected expression
-                //         Console.WriteLine("Jenny don\'t change your number \{ /*trash*/ }.");
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(5, 73)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (5,73): error CS1733: Expected expression
+                    //         Console.WriteLine("Jenny don\'t change your number \{ /*trash*/ }.");
+                    Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(5, 73)
                 );
         }
 
@@ -116,7 +114,7 @@ class Program {
         public void TestHalfOpenInterp01()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -124,19 +122,20 @@ class Program {
     }
 }";
             // too many diagnostics perhaps, but it starts the right way.
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (5,60): error CS8076: Missing close delimiter '}' for interpolated expression started with {.
-                //         Console.WriteLine($"Jenny don\'t change your number { ");
-                Diagnostic(ErrorCode.ERR_UnclosedExpressionHole, " {").WithLocation(5, 60),
-                // (5,63): error CS1010: Newline in constant
-                //         Console.WriteLine($"Jenny don\'t change your number { ");
-                Diagnostic(ErrorCode.ERR_NewlineInConst, "").WithLocation(5, 63),
-                // (5,66): error CS1026: ) expected
-                //         Console.WriteLine($"Jenny don\'t change your number { ");
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(5, 66),
-                // (5,66): error CS1002: ; expected
-                //         Console.WriteLine($"Jenny don\'t change your number { ");
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(5, 66)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (5,60): error CS8076: Missing close delimiter '}' for interpolated expression started with {.
+                    //         Console.WriteLine($"Jenny don\'t change your number { ");
+                    Diagnostic(ErrorCode.ERR_UnclosedExpressionHole, " {").WithLocation(5, 60),
+                    // (5,63): error CS1010: Newline in constant
+                    //         Console.WriteLine($"Jenny don\'t change your number { ");
+                    Diagnostic(ErrorCode.ERR_NewlineInConst, "").WithLocation(5, 63),
+                    // (5,66): error CS1026: ) expected
+                    //         Console.WriteLine($"Jenny don\'t change your number { ");
+                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(5, 66),
+                    // (5,66): error CS1002: ; expected
+                    //         Console.WriteLine($"Jenny don\'t change your number { ");
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(5, 66)
                 );
         }
 
@@ -144,7 +143,7 @@ class Program {
         public void TestHalfOpenInterp02()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -152,10 +151,12 @@ class Program {
     }
 }";
             // too many diagnostics perhaps, but it starts the right way.
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (5,71): error CS8077: A single-line comment may not be used in an interpolated string.
-                //         Console.WriteLine($"Jenny don\'t change your number { 8675309 // ");
-                Diagnostic(ErrorCode.ERR_SingleLineCommentInExpressionHole, "//").WithLocation(5, 71)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (5,71): error CS8077: A single-line comment may not be used in an interpolated string.
+                    //         Console.WriteLine($"Jenny don\'t change your number { 8675309 // ");
+                    Diagnostic(ErrorCode.ERR_SingleLineCommentInExpressionHole, "//")
+                        .WithLocation(5, 71)
                 );
         }
 
@@ -163,7 +164,7 @@ class Program {
         public void TestHalfOpenInterp03()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -171,19 +172,20 @@ class Program {
     }
 }";
             // too many diagnostics perhaps, but it starts the right way.
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (5,60): error CS8076: Missing close delimiter '}' for interpolated expression started with {.
-                //         Console.WriteLine($"Jenny don\'t change your number { 8675309 /* ");
-                Diagnostic(ErrorCode.ERR_UnclosedExpressionHole, " {").WithLocation(5, 60),
-                // (5,71): error CS1035: End-of-file found, '*/' expected
-                //         Console.WriteLine($"Jenny don\'t change your number { 8675309 /* ");
-                Diagnostic(ErrorCode.ERR_OpenEndedComment, "").WithLocation(5, 71),
-                // (5,77): error CS1026: ) expected
-                //         Console.WriteLine($"Jenny don\'t change your number { 8675309 /* ");
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(5, 77),
-                // (5,77): error CS1002: ; expected
-                //         Console.WriteLine($"Jenny don\'t change your number { 8675309 /* ");
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(5, 77)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (5,60): error CS8076: Missing close delimiter '}' for interpolated expression started with {.
+                    //         Console.WriteLine($"Jenny don\'t change your number { 8675309 /* ");
+                    Diagnostic(ErrorCode.ERR_UnclosedExpressionHole, " {").WithLocation(5, 60),
+                    // (5,71): error CS1035: End-of-file found, '*/' expected
+                    //         Console.WriteLine($"Jenny don\'t change your number { 8675309 /* ");
+                    Diagnostic(ErrorCode.ERR_OpenEndedComment, "").WithLocation(5, 71),
+                    // (5,77): error CS1026: ) expected
+                    //         Console.WriteLine($"Jenny don\'t change your number { 8675309 /* ");
+                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(5, 77),
+                    // (5,77): error CS1002: ; expected
+                    //         Console.WriteLine($"Jenny don\'t change your number { 8675309 /* ");
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(5, 77)
                 );
         }
 
@@ -191,7 +193,7 @@ class Program {
         public void LambdaInInterp()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -211,7 +213,7 @@ class Program
         public void TwoInserts()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -229,7 +231,7 @@ class Program
         public void TwoInserts02()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -243,16 +245,21 @@ class Program
                             world }."" );
     }
 }";
-            string expectedOutput = @"Hello,
+            string expectedOutput =
+                @"Hello,
 world.";
             CompileAndVerify(source, expectedOutput: expectedOutput);
         }
 
-        [Fact, WorkItem(306, "https://github.com/dotnet/roslyn/issues/306"), WorkItem(308, "https://github.com/dotnet/roslyn/issues/308")]
+        [
+            Fact,
+            WorkItem(306, "https://github.com/dotnet/roslyn/issues/306"),
+            WorkItem(308, "https://github.com/dotnet/roslyn/issues/308")
+        ]
         public void DynamicInterpolation()
         {
             string source =
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 class Program
 {
@@ -267,16 +274,22 @@ class Program
         return () => $""Dynamic: {d}"";
     }
 }";
-            string expectedOutput = @"<>
+            string expectedOutput =
+                @"<>
 <System.String[]>";
-            var verifier = CompileAndVerify(source, new[] { CSharpRef }, expectedOutput: expectedOutput).VerifyDiagnostics();
+            var verifier = CompileAndVerify(
+                    source,
+                    new[] { CSharpRef },
+                    expectedOutput: expectedOutput
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void UnclosedInterpolation01()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -284,19 +297,20 @@ class Program
         Console.WriteLine( $""{"" );
     }
 }";
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (6,29): error CS8076: Missing close delimiter '}' for interpolated expression started with {.
-                //         Console.WriteLine( $"{" );
-                Diagnostic(ErrorCode.ERR_UnclosedExpressionHole, @"""{").WithLocation(6, 29),
-                // (6,31): error CS1010: Newline in constant
-                //         Console.WriteLine( $"{" );
-                Diagnostic(ErrorCode.ERR_NewlineInConst, "").WithLocation(6, 31),
-                // (6,35): error CS1026: ) expected
-                //         Console.WriteLine( $"{" );
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(6, 35),
-                // (6,35): error CS1002: ; expected
-                //         Console.WriteLine( $"{" );
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 35)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (6,29): error CS8076: Missing close delimiter '}' for interpolated expression started with {.
+                    //         Console.WriteLine( $"{" );
+                    Diagnostic(ErrorCode.ERR_UnclosedExpressionHole, @"""{").WithLocation(6, 29),
+                    // (6,31): error CS1010: Newline in constant
+                    //         Console.WriteLine( $"{" );
+                    Diagnostic(ErrorCode.ERR_NewlineInConst, "").WithLocation(6, 31),
+                    // (6,35): error CS1026: ) expected
+                    //         Console.WriteLine( $"{" );
+                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(6, 35),
+                    // (6,35): error CS1002: ; expected
+                    //         Console.WriteLine( $"{" );
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 35)
                 );
         }
 
@@ -304,25 +318,26 @@ class Program
         public void UnclosedInterpolation02()
         {
             string source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         var x = $"";";
             // The precise error messages are not important, but this must be an error.
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (5,19): error CS1010: Newline in constant
-                //         var x = $";
-                Diagnostic(ErrorCode.ERR_NewlineInConst, ";").WithLocation(5, 19),
-                // (5,20): error CS1002: ; expected
-                //         var x = $";
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(5, 20),
-                // (5,20): error CS1513: } expected
-                //         var x = $";
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 20),
-                // (5,20): error CS1513: } expected
-                //         var x = $";
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 20)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (5,19): error CS1010: Newline in constant
+                    //         var x = $";
+                    Diagnostic(ErrorCode.ERR_NewlineInConst, ";").WithLocation(5, 19),
+                    // (5,20): error CS1002: ; expected
+                    //         var x = $";
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(5, 20),
+                    // (5,20): error CS1513: } expected
+                    //         var x = $";
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 20),
+                    // (5,20): error CS1513: } expected
+                    //         var x = $";
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 20)
                 );
         }
 
@@ -330,7 +345,7 @@ class Program
         public void EmptyFormatSpecifier()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -338,10 +353,11 @@ class Program
         Console.WriteLine( $""{3:}"" );
     }
 }";
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (6,32): error CS8089: Empty format specifier.
-                //         Console.WriteLine( $"{3:}" );
-                Diagnostic(ErrorCode.ERR_EmptyFormatSpecifier, ":").WithLocation(6, 32)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (6,32): error CS8089: Empty format specifier.
+                    //         Console.WriteLine( $"{3:}" );
+                    Diagnostic(ErrorCode.ERR_EmptyFormatSpecifier, ":").WithLocation(6, 32)
                 );
         }
 
@@ -349,7 +365,7 @@ class Program
         public void TrailingSpaceInFormatSpecifier()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -357,10 +373,12 @@ class Program
         Console.WriteLine( $""{3:d }"" );
     }
 }";
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (6,32): error CS8088: A format specifier may not contain trailing whitespace.
-                //         Console.WriteLine( $"{3:d }" );
-                Diagnostic(ErrorCode.ERR_TrailingWhitespaceInFormatSpecifier, ":d ").WithLocation(6, 32)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (6,32): error CS8088: A format specifier may not contain trailing whitespace.
+                    //         Console.WriteLine( $"{3:d }" );
+                    Diagnostic(ErrorCode.ERR_TrailingWhitespaceInFormatSpecifier, ":d ")
+                        .WithLocation(6, 32)
                 );
         }
 
@@ -368,7 +386,7 @@ class Program
         public void TrailingSpaceInFormatSpecifier02()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -377,11 +395,16 @@ class Program
 }"" );
     }
 }";
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-    // (6,33): error CS8088: A format specifier may not contain trailing whitespace.
-    //         Console.WriteLine( $@"{3:d
-    Diagnostic(ErrorCode.ERR_TrailingWhitespaceInFormatSpecifier, @":d
-").WithLocation(6, 33)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (6,33): error CS8088: A format specifier may not contain trailing whitespace.
+                    //         Console.WriteLine( $@"{3:d
+                    Diagnostic(
+                            ErrorCode.ERR_TrailingWhitespaceInFormatSpecifier,
+                            @":d
+"
+                        )
+                        .WithLocation(6, 33)
                 );
         }
 
@@ -389,7 +412,7 @@ class Program
         public void MissingInterpolationExpression01()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -397,10 +420,11 @@ class Program
         Console.WriteLine( $""{ }"" );
     }
 }";
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (6,32): error CS1733: Expected expression
-                //         Console.WriteLine( $"{ }" );
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(6, 32)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (6,32): error CS1733: Expected expression
+                    //         Console.WriteLine( $"{ }" );
+                    Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(6, 32)
                 );
         }
 
@@ -408,7 +432,7 @@ class Program
         public void MissingInterpolationExpression02()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -416,10 +440,11 @@ class Program
         Console.WriteLine( $@""{ }"" );
     }
 }";
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (6,33): error CS1733: Expected expression
-                //         Console.WriteLine( $@"{ }" );
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(6, 33)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (6,33): error CS1733: Expected expression
+                    //         Console.WriteLine( $@"{ }" );
+                    Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(6, 33)
                 );
         }
 
@@ -427,7 +452,7 @@ class Program
         public void MissingInterpolationExpression03()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -436,21 +461,53 @@ class Program
             var normal = "$\"";
             var verbat = "$@\"";
             // ensure reparsing of interpolated string token is precise in error scenarios (assertions do not fail)
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source + normal).GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source + normal + " ").GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source + normal + "{").GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source + normal + "{ ").GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source + verbat).GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source + verbat + " ").GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source + verbat + "{").GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source + verbat + "{ ").GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source + normal)
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source + normal + " ")
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source + normal + "{")
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source + normal + "{ ")
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source + verbat)
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source + verbat + " ")
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source + verbat + "{")
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source + verbat + "{ ")
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
         }
 
         [Fact]
         public void MisplacedNewline01()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -461,14 +518,18 @@ class Program
     }
 }";
             // The precise error messages are not important, but this must be an error.
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source).GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source)
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
         }
 
         [Fact]
         public void MisplacedNewline02()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -479,14 +540,18 @@ class Program
     }
 }";
             // The precise error messages are not important, but this must be an error.
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source).GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source)
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
         }
 
         [Fact]
         public void PreprocessorInsideInterpolation()
         {
             string source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -498,14 +563,18 @@ class Program
     }
 }";
             // The precise error messages are not important, but this must be an error.
-            Assert.True(SyntaxFactory.ParseSyntaxTree(source).GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(source)
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
         }
 
         [Fact]
         public void EscapedCurly()
         {
             string source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -513,13 +582,18 @@ class Program
         var s2 = $"" \u007D"";
     }
 }";
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (5,21): error CS8087: A '{' character may only be escaped by doubling '{{' in an interpolated string.
-                //         var s1 = $" \u007B ";
-                Diagnostic(ErrorCode.ERR_EscapedCurly, @"\u007B").WithArguments("{").WithLocation(5, 21),
-                // (6,21): error CS8087: A '}' character may only be escaped by doubling '}}' in an interpolated string.
-                //         var s2 = $" \u007D";
-                Diagnostic(ErrorCode.ERR_EscapedCurly, @"\u007D").WithArguments("}").WithLocation(6, 21)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (5,21): error CS8087: A '{' character may only be escaped by doubling '{{' in an interpolated string.
+                    //         var s1 = $" \u007B ";
+                    Diagnostic(ErrorCode.ERR_EscapedCurly, @"\u007B")
+                        .WithArguments("{")
+                        .WithLocation(5, 21),
+                    // (6,21): error CS8087: A '}' character may only be escaped by doubling '}}' in an interpolated string.
+                    //         var s2 = $" \u007D";
+                    Diagnostic(ErrorCode.ERR_EscapedCurly, @"\u007D")
+                        .WithArguments("}")
+                        .WithLocation(6, 21)
                 );
         }
 
@@ -527,7 +601,7 @@ class Program
         public void NoFillIns01()
         {
             string source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -543,7 +617,7 @@ class Program
         public void BadAlignment()
         {
             string source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -551,19 +625,24 @@ class Program
         var t = $""{1,(int)1E10}"";
     }
 }";
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (5,22): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
-                //         var s = $"{1,1E10}";
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1E10").WithArguments("double", "int").WithLocation(5, 22),
-                // (5,22): error CS0150: A constant value is expected
-                //         var s = $"{1,1E10}";
-                Diagnostic(ErrorCode.ERR_ConstantExpected, "1E10").WithLocation(5, 22),
-                // (6,22): error CS0221: Constant value '10000000000' cannot be converted to a 'int' (use 'unchecked' syntax to override)
-                //         var t = $"{1,(int)1E10}";
-                Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)1E10").WithArguments("10000000000", "int").WithLocation(6, 22),
-                // (6,22): error CS0150: A constant value is expected
-                //         var t = $"{1,(int)1E10}";
-                Diagnostic(ErrorCode.ERR_ConstantExpected, "(int)1E10").WithLocation(6, 22)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (5,22): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
+                    //         var s = $"{1,1E10}";
+                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1E10")
+                        .WithArguments("double", "int")
+                        .WithLocation(5, 22),
+                    // (5,22): error CS0150: A constant value is expected
+                    //         var s = $"{1,1E10}";
+                    Diagnostic(ErrorCode.ERR_ConstantExpected, "1E10").WithLocation(5, 22),
+                    // (6,22): error CS0221: Constant value '10000000000' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    //         var t = $"{1,(int)1E10}";
+                    Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)1E10")
+                        .WithArguments("10000000000", "int")
+                        .WithLocation(6, 22),
+                    // (6,22): error CS0150: A constant value is expected
+                    //         var t = $"{1,(int)1E10}";
+                    Diagnostic(ErrorCode.ERR_ConstantExpected, "(int)1E10").WithLocation(6, 22)
                 );
         }
 
@@ -571,7 +650,7 @@ class Program
         public void NestedInterpolatedVerbatim()
         {
             string source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -586,7 +665,8 @@ class Program
 
         // Since the platform type System.FormattableString is not yet in our platforms (at the
         // time of writing), we explicitly include the required platform types into the sources under test.
-        private const string formattableString = @"
+        private const string formattableString =
+            @"
 /*============================================================
 **
 ** Class:  FormattableString
@@ -726,7 +806,7 @@ namespace System.Runtime.CompilerServices
         public void TargetType01()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -741,7 +821,7 @@ class Program {
         public void TargetType02()
         {
             string source =
-@"using System;
+                @"using System;
 interface I1 { void M(String s); }
 interface I2 { void M(FormattableString s); }
 interface I3 { void M(IFormattable s); }
@@ -776,17 +856,20 @@ class Program {
         public void MissingHelper()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
         IFormattable f = $""test"";
     }
 }";
-            CreateCompilationWithMscorlib40(source).VerifyEmitDiagnostics(
-                // (5,26): error CS0518: Predefined type 'System.Runtime.CompilerServices.FormattableStringFactory' is not defined or imported
-                //         IFormattable f = $"test";
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"$""test""").WithArguments("System.Runtime.CompilerServices.FormattableStringFactory").WithLocation(5, 26)
+            CreateCompilationWithMscorlib40(source)
+                .VerifyEmitDiagnostics(
+                    // (5,26): error CS0518: Predefined type 'System.Runtime.CompilerServices.FormattableStringFactory' is not defined or imported
+                    //         IFormattable f = $"test";
+                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"$""test""")
+                        .WithArguments("System.Runtime.CompilerServices.FormattableStringFactory")
+                        .WithLocation(5, 26)
                 );
         }
 
@@ -794,7 +877,7 @@ class Program {
         public void AsyncInterp()
         {
             string source =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 class Program {
     public static void Main(string[] args)
@@ -809,14 +892,23 @@ class Program {
     }
 }";
             CompileAndVerify(
-                source, references: new[] { MscorlibRef_v4_0_30316_17626, SystemRef_v4_0_30319_17929, SystemCoreRef_v4_0_30319_17929 }, expectedOutput: "Hello, world!", targetFramework: TargetFramework.Empty);
+                source,
+                references: new[]
+                {
+                    MscorlibRef_v4_0_30316_17626,
+                    SystemRef_v4_0_30319_17929,
+                    SystemCoreRef_v4_0_30319_17929
+                },
+                expectedOutput: "Hello, world!",
+                targetFramework: TargetFramework.Empty
+            );
         }
 
         [Fact]
         public void AlignmentExpression()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -830,7 +922,7 @@ class Program {
         public void AlignmentMagnitude()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -842,19 +934,28 @@ class Program {
         Console.WriteLine($""X = { 123 , int.MinValue }."");
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (5,42): warning CS8094: Alignment value 32768 has a magnitude greater than 32767 and may result in a large formatted string.
-                //         Console.WriteLine($"X = { 123 , (32768) }.");
-                Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "32768").WithArguments("32768", "32767").WithLocation(5, 42),
-                // (6,41): warning CS8094: Alignment value -32768 has a magnitude greater than 32767 and may result in a large formatted string.
-                //         Console.WriteLine($"X = { 123 , -(32768) }.");
-                Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "-(32768)").WithArguments("-32768", "32767").WithLocation(6, 41),
-                // (9,41): warning CS8094: Alignment value 2147483647 has a magnitude greater than 32767 and may result in a large formatted string.
-                //         Console.WriteLine($"X = { 123 , int.MaxValue }.");
-                Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "int.MaxValue").WithArguments("2147483647", "32767").WithLocation(9, 41),
-                // (10,41): warning CS8094: Alignment value -2147483648 has a magnitude greater than 32767 and may result in a large formatted string.
-                //         Console.WriteLine($"X = { 123 , int.MinValue }.");
-                Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "int.MinValue").WithArguments("-2147483648", "32767").WithLocation(10, 41)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (5,42): warning CS8094: Alignment value 32768 has a magnitude greater than 32767 and may result in a large formatted string.
+                    //         Console.WriteLine($"X = { 123 , (32768) }.");
+                    Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "32768")
+                        .WithArguments("32768", "32767")
+                        .WithLocation(5, 42),
+                    // (6,41): warning CS8094: Alignment value -32768 has a magnitude greater than 32767 and may result in a large formatted string.
+                    //         Console.WriteLine($"X = { 123 , -(32768) }.");
+                    Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "-(32768)")
+                        .WithArguments("-32768", "32767")
+                        .WithLocation(6, 41),
+                    // (9,41): warning CS8094: Alignment value 2147483647 has a magnitude greater than 32767 and may result in a large formatted string.
+                    //         Console.WriteLine($"X = { 123 , int.MaxValue }.");
+                    Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "int.MaxValue")
+                        .WithArguments("2147483647", "32767")
+                        .WithLocation(9, 41),
+                    // (10,41): warning CS8094: Alignment value -2147483648 has a magnitude greater than 32767 and may result in a large formatted string.
+                    //         Console.WriteLine($"X = { 123 , int.MinValue }.");
+                    Diagnostic(ErrorCode.WRN_AlignmentMagnitude, "int.MinValue")
+                        .WithArguments("-2147483648", "32767")
+                        .WithLocation(10, 41)
                 );
         }
 
@@ -863,7 +964,7 @@ class Program {
         public void InterpolationExpressionMustBeValue01()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -871,10 +972,13 @@ class Program {
         Console.WriteLine($""X = { null }."");
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (5,35): error CS0119: 'string' is a type, which is not valid in the given context
-                //         Console.WriteLine($"X = { String }.");
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "String").WithArguments("string", "type").WithLocation(5, 35)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (5,35): error CS0119: 'string' is a type, which is not valid in the given context
+                    //         Console.WriteLine($"X = { String }.");
+                    Diagnostic(ErrorCode.ERR_BadSKunknown, "String")
+                        .WithArguments("string", "type")
+                        .WithLocation(5, 35)
                 );
         }
 
@@ -882,7 +986,7 @@ class Program {
         public void InterpolationExpressionMustBeValue02()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -891,16 +995,23 @@ class Program {
         Console.WriteLine($""X = { Program.Main(null) }."");
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (5,35): error CS1660: Cannot convert lambda expression to type 'object' because it is not a delegate type
-                //         Console.WriteLine($"X = { x=>3 }.");
-                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "x=>3").WithArguments("lambda expression", "object").WithLocation(5, 35),
-                // (6,43): error CS0428: Cannot convert method group 'Main' to non-delegate type 'object'. Did you intend to invoke the method?
-                //         Console.WriteLine($"X = { Program.Main }.");
-                Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "Main").WithArguments("Main", "object").WithLocation(6, 43),
-                // (7,35): error CS0029: Cannot implicitly convert type 'void' to 'object'
-                //         Console.WriteLine($"X = { Program.Main(null) }.");
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "Program.Main(null)").WithArguments("void", "object").WithLocation(7, 35)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (5,35): error CS1660: Cannot convert lambda expression to type 'object' because it is not a delegate type
+                    //         Console.WriteLine($"X = { x=>3 }.");
+                    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "x=>3")
+                        .WithArguments("lambda expression", "object")
+                        .WithLocation(5, 35),
+                    // (6,43): error CS0428: Cannot convert method group 'Main' to non-delegate type 'object'. Did you intend to invoke the method?
+                    //         Console.WriteLine($"X = { Program.Main }.");
+                    Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "Main")
+                        .WithArguments("Main", "object")
+                        .WithLocation(6, 43),
+                    // (7,35): error CS0029: Cannot implicitly convert type 'void' to 'object'
+                    //         Console.WriteLine($"X = { Program.Main(null) }.");
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "Program.Main(null)")
+                        .WithArguments("void", "object")
+                        .WithLocation(7, 35)
                 );
         }
 
@@ -909,7 +1020,7 @@ class Program {
         public void BadCorelib01()
         {
             var text =
-@"namespace System
+                @"namespace System
 {
     public class Object { }
     public abstract class ValueType { }
@@ -928,11 +1039,14 @@ class Program {
     }
 }";
             CreateEmptyCompilation(text, options: TestOptions.DebugExe)
-            .VerifyEmitDiagnostics(new CodeAnalysis.Emit.EmitOptions(runtimeMetadataVersion: "x.y"),
-                // (15,21): error CS0117: 'string' does not contain a definition for 'Format'
-                //             var s = $"X = { 1 } ";
-                Diagnostic(ErrorCode.ERR_NoSuchMember, @"$""X = { 1 } """).WithArguments("string", "Format").WithLocation(15, 21)
-            );
+                .VerifyEmitDiagnostics(
+                    new CodeAnalysis.Emit.EmitOptions(runtimeMetadataVersion: "x.y"),
+                    // (15,21): error CS0117: 'string' does not contain a definition for 'Format'
+                    //             var s = $"X = { 1 } ";
+                    Diagnostic(ErrorCode.ERR_NoSuchMember, @"$""X = { 1 } """)
+                        .WithArguments("string", "Format")
+                        .WithLocation(15, 21)
+                );
         }
 
         [WorkItem(1097428, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1097428")]
@@ -940,7 +1054,7 @@ class Program {
         public void BadCorelib02()
         {
             var text =
-@"namespace System
+                @"namespace System
 {
     public class Object { }
     public abstract class ValueType { }
@@ -961,18 +1075,21 @@ class Program {
     }
 }";
             CreateEmptyCompilation(text, options: TestOptions.DebugExe)
-            .VerifyEmitDiagnostics(new CodeAnalysis.Emit.EmitOptions(runtimeMetadataVersion: "x.y"),
-                // (17,21): error CS0029: Cannot implicitly convert type 'bool' to 'string'
-                //             var s = $"X = { 1 } ";
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"$""X = { 1 } """).WithArguments("bool", "string").WithLocation(17, 21)
-            );
+                .VerifyEmitDiagnostics(
+                    new CodeAnalysis.Emit.EmitOptions(runtimeMetadataVersion: "x.y"),
+                    // (17,21): error CS0029: Cannot implicitly convert type 'bool' to 'string'
+                    //             var s = $"X = { 1 } ";
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"$""X = { 1 } """)
+                        .WithArguments("bool", "string")
+                        .WithLocation(17, 21)
+                );
         }
 
         [Fact]
         public void SillyCoreLib01()
         {
             var text =
-@"namespace System
+                @"namespace System
 {
     interface IFormattable { }
     namespace Runtime.CompilerServices {
@@ -1005,10 +1122,15 @@ class Program {
         }
     }
 }";
-            var comp = CreateEmptyCompilation(text, options: Test.Utilities.TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
+            var comp = CreateEmptyCompilation(
+                    text,
+                    options: Test.Utilities.TestOptions.UnsafeReleaseDll
+                )
+                .VerifyDiagnostics();
             var compilation = CompileAndVerify(comp, verify: Verification.Fails);
-            compilation.VerifyIL("System.Program.Main",
-@"{
+            compilation.VerifyIL(
+                "System.Program.Main",
+                @"{
   // Code size       35 (0x23)
   .maxstack  2
   IL_0000:  ldstr      ""X = {0} ""
@@ -1022,7 +1144,8 @@ class Program {
   IL_001c:  call       ""System.FormattableString System.Bozo.op_Implicit(System.Bozo)""
   IL_0021:  pop
   IL_0022:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(1097386, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1097386")]
@@ -1030,7 +1153,7 @@ class Program {
         public void Syntax01()
         {
             var text =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -1040,13 +1163,16 @@ class Program
         }
     } 
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (6,40): error CS8087: A '}' character may only be escaped by doubling '}}' in an interpolated string.
-                //         var x = $"{ Math.Abs(value: 1):\}";
-                Diagnostic(ErrorCode.ERR_EscapedCurly, @"\").WithArguments("}").WithLocation(6, 40),
-                // (6,40): error CS1009: Unrecognized escape sequence
-                //         var x = $"{ Math.Abs(value: 1):\}";
-                Diagnostic(ErrorCode.ERR_IllegalEscape, @"\}").WithLocation(6, 40)
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (6,40): error CS8087: A '}' character may only be escaped by doubling '}}' in an interpolated string.
+                    //         var x = $"{ Math.Abs(value: 1):\}";
+                    Diagnostic(ErrorCode.ERR_EscapedCurly, @"\")
+                        .WithArguments("}")
+                        .WithLocation(6, 40),
+                    // (6,40): error CS1009: Unrecognized escape sequence
+                    //         var x = $"{ Math.Abs(value: 1):\}";
+                    Diagnostic(ErrorCode.ERR_IllegalEscape, @"\}").WithLocation(6, 40)
                 );
         }
 
@@ -1055,7 +1181,7 @@ class Program
         public void Syntax02()
         {
             var text =
-@"using S = System;
+                @"using S = System;
 class C
 {
     void M()
@@ -1064,7 +1190,11 @@ class C
     }
 }";
             // the precise diagnostics do not matter, as long as it is an error and not a crash.
-            Assert.True(SyntaxFactory.ParseSyntaxTree(text).GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error));
+            Assert.True(
+                SyntaxFactory.ParseSyntaxTree(text)
+                    .GetDiagnostics()
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+            );
         }
 
         [WorkItem(1097386, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1097386")]
@@ -1072,7 +1202,7 @@ class C
         public void Syntax03()
         {
             var text =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -1082,10 +1212,11 @@ class Program
         }
     } 
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (6,18): error CS8076: Missing close delimiter '}' for interpolated expression started with '{'.
-                //         var x = $"{ Math.Abs(value: 1):}}";
-                Diagnostic(ErrorCode.ERR_UnclosedExpressionHole, @"""{").WithLocation(6, 18)
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (6,18): error CS8076: Missing close delimiter '}' for interpolated expression started with '{'.
+                    //         var x = $"{ Math.Abs(value: 1):}}";
+                    Diagnostic(ErrorCode.ERR_UnclosedExpressionHole, @"""{").WithLocation(6, 18)
                 );
         }
 
@@ -1094,7 +1225,7 @@ class Program
         public void NoUnexpandedForm()
         {
             string source =
-@"using System;
+                @"using System;
 class Program {
     public static void Main(string[] args)
     {
@@ -1105,10 +1236,12 @@ class Program {
         Console.WriteLine($""-{arr2}-"");
     }
 }";
-            CompileAndVerify(source + formattableString, expectedOutput:
-@"--
+            CompileAndVerify(
+                source + formattableString,
+                expectedOutput: @"--
 -System.String[]-
--System.String[]-");
+-System.String[]-"
+            );
         }
 
         [WorkItem(1097386, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1097386")]
@@ -1116,21 +1249,26 @@ class Program {
         public void Dynamic01()
         {
             var text =
-@"class C
+                @"class C
 {
     const dynamic a = a;
     string s = $""{0,a}"";
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
-                // (3,19): error CS0110: The evaluation of the constant value for 'C.a' involves a circular definition
-                //     const dynamic a = a;
-                Diagnostic(ErrorCode.ERR_CircConstValue, "a").WithArguments("C.a").WithLocation(3, 19),
-                // (3,23): error CS0134: 'C.a' is of type 'dynamic'. A const field of a reference type other than string can only be initialized with null.
-                //     const dynamic a = a;
-                Diagnostic(ErrorCode.ERR_NotNullConstRefField, "a").WithArguments("C.a", "dynamic").WithLocation(3, 23),
-                // (4,21): error CS0150: A constant value is expected
-                //     string s = $"{0,a}";
-                Diagnostic(ErrorCode.ERR_ConstantExpected, "a").WithLocation(4, 21)
+            CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics(
+                    // (3,19): error CS0110: The evaluation of the constant value for 'C.a' involves a circular definition
+                    //     const dynamic a = a;
+                    Diagnostic(ErrorCode.ERR_CircConstValue, "a")
+                        .WithArguments("C.a")
+                        .WithLocation(3, 19),
+                    // (3,23): error CS0134: 'C.a' is of type 'dynamic'. A const field of a reference type other than string can only be initialized with null.
+                    //     const dynamic a = a;
+                    Diagnostic(ErrorCode.ERR_NotNullConstRefField, "a")
+                        .WithArguments("C.a", "dynamic")
+                        .WithLocation(3, 23),
+                    // (4,21): error CS0150: A constant value is expected
+                    //     string s = $"{0,a}";
+                    Diagnostic(ErrorCode.ERR_ConstantExpected, "a").WithLocation(4, 21)
                 );
         }
 
@@ -1139,7 +1277,7 @@ class Program {
         public void Syntax04()
         {
             var text =
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
  
 class Program
@@ -1150,13 +1288,14 @@ class Program
         Console.WriteLine(e);
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyDiagnostics(
-                // (8,46): error CS1009: Unrecognized escape sequence
-                //         Expression<Func<string>> e = () => $"\u1{0:\u2}";
-                Diagnostic(ErrorCode.ERR_IllegalEscape, @"\u1").WithLocation(8, 46),
-                // (8,52): error CS1009: Unrecognized escape sequence
-                //         Expression<Func<string>> e = () => $"\u1{0:\u2}";
-                Diagnostic(ErrorCode.ERR_IllegalEscape, @"\u2").WithLocation(8, 52)
+            CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics(
+                    // (8,46): error CS1009: Unrecognized escape sequence
+                    //         Expression<Func<string>> e = () => $"\u1{0:\u2}";
+                    Diagnostic(ErrorCode.ERR_IllegalEscape, @"\u1").WithLocation(8, 46),
+                    // (8,52): error CS1009: Unrecognized escape sequence
+                    //         Expression<Func<string>> e = () => $"\u1{0:\u2}";
+                    Diagnostic(ErrorCode.ERR_IllegalEscape, @"\u2").WithLocation(8, 52)
                 );
         }
 
@@ -1164,7 +1303,7 @@ class Program
         public void MissingConversionFromFormattableStringToIFormattable()
         {
             var text =
-@"namespace System.Runtime.CompilerServices
+                @"namespace System.Runtime.CompilerServices
 {
     public static class FormattableStringFactory
     {
@@ -1189,10 +1328,13 @@ static class C
         System.IFormattable i = $""{""""}"";
     }
 }";
-            CreateCompilationWithMscorlib40AndSystemCore(text).VerifyEmitDiagnostics(
-                // (23,33): error CS0029: Cannot implicitly convert type 'FormattableString' to 'IFormattable'
-                //         System.IFormattable i = $"{""}";
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"$""{""""}""").WithArguments("System.FormattableString", "System.IFormattable").WithLocation(23, 33)
+            CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyEmitDiagnostics(
+                    // (23,33): error CS0029: Cannot implicitly convert type 'FormattableString' to 'IFormattable'
+                    //         System.IFormattable i = $"{""}";
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"$""{""""}""")
+                        .WithArguments("System.FormattableString", "System.IFormattable")
+                        .WithLocation(23, 33)
                 );
         }
     }

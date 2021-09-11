@@ -81,9 +81,11 @@ namespace Microsoft.AspNetCore.Routing
             // Act & Assert
             ExceptionAssert.Throws<RouteCreationException>(
                 () => builder.AddConstraint("controller", 5),
-                "The constraint entry 'controller' - '5' on the route " +
-                "'{controller}/{action}' must have a string value or be of a type which implements '" +
-                typeof(IRouteConstraint) + "'.");
+                "The constraint entry 'controller' - '5' on the route "
+                    + "'{controller}/{action}' must have a string value or be of a type which implements '"
+                    + typeof(IRouteConstraint)
+                    + "'."
+            );
         }
 
         [Fact]
@@ -97,9 +99,12 @@ namespace Microsoft.AspNetCore.Routing
             // Act & Assert
             ExceptionAssert.Throws<InvalidOperationException>(
                 () => builder.AddResolvedConstraint("controller", unresolvedConstraint),
-                @"The constraint entry 'controller' - '" + unresolvedConstraint + "' on the route " +
-                "'{controller}/{action}' could not be resolved by the constraint resolver " +
-                "of type 'DefaultInlineConstraintResolver'.");
+                @"The constraint entry 'controller' - '"
+                    + unresolvedConstraint
+                    + "' on the route "
+                    + "'{controller}/{action}' could not be resolved by the constraint resolver "
+                    + "of type 'DefaultInlineConstraintResolver'."
+            );
         }
 
         [Fact]
@@ -142,7 +147,10 @@ namespace Microsoft.AspNetCore.Routing
             Assert.Equal("name", result.First().Key);
             Assert.IsType<OptionalRouteConstraint>(Assert.Single(result).Value);
             var optionalConstraint = (OptionalRouteConstraint)result.First().Value;
-            var compositeConstraint = Assert.IsType<CompositeRouteConstraint>(optionalConstraint.InnerConstraint); ;
+            var compositeConstraint = Assert.IsType<CompositeRouteConstraint>(
+                optionalConstraint.InnerConstraint
+            );
+            ;
             Assert.Equal(2, compositeConstraint.Constraints.Count());
 
             Assert.Single(compositeConstraint.Constraints, c => c is MinLengthRouteConstraint);
@@ -150,16 +158,17 @@ namespace Microsoft.AspNetCore.Routing
         }
 
         [Theory]
-        [InlineData("abc", "abc", true)]      // simple case
-        [InlineData("abc", "bbb|abc", true)]  // Regex or
-        [InlineData("Abc", "abc", true)]      // Case insensitive
-        [InlineData("Abc ", "abc", false)]    // Matches whole (but no trimming)
-        [InlineData("Abcd", "abc", false)]    // Matches whole (additional non whitespace char)
-        [InlineData("Abc", " abc", false)]    // Matches whole (less one char)
-        public void StringConstraintsMatchingScenarios(string routeValue,
-                                                       string constraintValue,
-                                                       bool shouldMatch)
-        {
+        [InlineData("abc", "abc", true)] // simple case
+        [InlineData("abc", "bbb|abc", true)] // Regex or
+        [InlineData("Abc", "abc", true)] // Case insensitive
+        [InlineData("Abc ", "abc", false)] // Matches whole (but no trimming)
+        [InlineData("Abcd", "abc", false)] // Matches whole (additional non whitespace char)
+        [InlineData("Abc", " abc", false)] // Matches whole (less one char)
+        public void StringConstraintsMatchingScenarios(
+            string routeValue,
+            string constraintValue,
+            bool shouldMatch
+        ) {
             // Arrange
             var routeValues = new RouteValueDictionary(new { controller = routeValue });
 
@@ -168,23 +177,27 @@ namespace Microsoft.AspNetCore.Routing
 
             var constraint = Assert.Single(builder.Build()).Value;
 
-            Assert.Equal(shouldMatch,
+            Assert.Equal(
+                shouldMatch,
                 constraint.Match(
                     httpContext: new Mock<HttpContext>().Object,
                     route: new Mock<IRouter>().Object,
                     routeKey: "controller",
                     values: routeValues,
-                    routeDirection: RouteDirection.IncomingRequest));
+                    routeDirection: RouteDirection.IncomingRequest
+                )
+            );
         }
 
         private static RouteConstraintBuilder CreateBuilder(string template)
         {
             var options = new Mock<IOptions<RouteOptions>>(MockBehavior.Strict);
-            options
-                .SetupGet(o => o.Value)
-                .Returns(new RouteOptions());
+            options.SetupGet(o => o.Value).Returns(new RouteOptions());
 
-            var inlineConstraintResolver = new DefaultInlineConstraintResolver(options.Object, new TestServiceProvider());
+            var inlineConstraintResolver = new DefaultInlineConstraintResolver(
+                options.Object,
+                new TestServiceProvider()
+            );
             return new RouteConstraintBuilder(inlineConstraintResolver, template);
         }
     }

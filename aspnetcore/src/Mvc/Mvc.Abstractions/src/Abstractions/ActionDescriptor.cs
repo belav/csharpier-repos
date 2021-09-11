@@ -54,17 +54,20 @@ namespace Microsoft.AspNetCore.Mvc.Abstractions
         /// <summary>
         /// The set of parameters associated with this action.
         /// </summary>
-        public IList<ParameterDescriptor> Parameters { get; set; } = Array.Empty<ParameterDescriptor>();
+        public IList<ParameterDescriptor> Parameters { get; set; } =
+            Array.Empty<ParameterDescriptor>();
 
         /// <summary>
         /// The set of properties which are model bound.
         /// </summary>
-        public IList<ParameterDescriptor> BoundProperties { get; set; } = Array.Empty<ParameterDescriptor>();
+        public IList<ParameterDescriptor> BoundProperties { get; set; } =
+            Array.Empty<ParameterDescriptor>();
 
         /// <summary>
         /// The set of filters associated with this action.
         /// </summary>
-        public IList<FilterDescriptor> FilterDescriptors { get; set; } = Array.Empty<FilterDescriptor>();
+        public IList<FilterDescriptor> FilterDescriptors { get; set; } =
+            Array.Empty<FilterDescriptor>();
 
         /// <summary>
         /// A friendly name for this action.

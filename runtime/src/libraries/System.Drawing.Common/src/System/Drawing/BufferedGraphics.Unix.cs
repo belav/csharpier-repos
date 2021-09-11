@@ -41,8 +41,11 @@ namespace System.Drawing
         private Bitmap membmp;
         private Graphics? source;
 
-        internal BufferedGraphics(Graphics? targetGraphics, IntPtr targetDc, Rectangle targetRectangle)
-        {
+        internal BufferedGraphics(
+            Graphics? targetGraphics,
+            IntPtr targetDc,
+            Rectangle targetRectangle
+        ) {
             _targetGraphics = targetGraphics;
             _targetDC = targetDc;
             size = targetRectangle;

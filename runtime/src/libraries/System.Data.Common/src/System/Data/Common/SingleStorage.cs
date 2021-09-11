@@ -13,9 +13,7 @@ namespace System.Data.Common
         private float[] _values = default!; // Late-initialized
 
         public SingleStorage(DataColumn column)
-        : base(column, typeof(float), defaultValue, StorageType.Single)
-        {
-        }
+            : base(column, typeof(float), defaultValue, StorageType.Single) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -30,7 +28,10 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { sum += _values[record]; }
+                            checked
+                            {
+                                sum += _values[record];
+                            }
                             hasData = true;
                         }
                         if (hasData)
@@ -46,14 +47,20 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { meanSum += _values[record]; }
+                            checked
+                            {
+                                meanSum += _values[record];
+                            }
                             meanCount++;
                             hasData = true;
                         }
                         if (hasData)
                         {
                             float mean;
-                            checked { mean = (float)(meanSum / meanCount); }
+                            checked
+                            {
+                                mean = (float)(meanSum / meanCount);
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -96,7 +103,6 @@ namespace System.Data.Common
                             return var;
                         }
                         return _nullValue;
-
 
                     case AggregateType.Min:
                         float min = float.MaxValue;
@@ -257,8 +263,12 @@ namespace System.Data.Common
             return new float[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
-        {
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        ) {
             float[] typedStore = (float[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, IsNull(record));

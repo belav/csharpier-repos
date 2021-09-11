@@ -26,6 +26,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     Visit(child);
                 }
             }
+
             finally
             {
                 _ancestors.RemoveAt(0);

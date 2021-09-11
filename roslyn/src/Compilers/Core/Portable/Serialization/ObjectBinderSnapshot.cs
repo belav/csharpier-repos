@@ -19,20 +19,18 @@ namespace Roslyn.Utilities
         public ObjectBinderSnapshot(
             Dictionary<Type, int> typeToIndex,
             List<Type> types,
-            List<Func<ObjectReader, IObjectWritable>> typeReaders)
-        {
+            List<Func<ObjectReader, IObjectWritable>> typeReaders
+        ) {
             _typeToIndex = new Dictionary<Type, int>(typeToIndex);
             _types = types.ToImmutableArray();
             _typeReaders = typeReaders.ToImmutableArray();
         }
 
-        public int GetTypeId(Type type)
-            => _typeToIndex[type];
+        public int GetTypeId(Type type) => _typeToIndex[type];
 
-        public Type GetTypeFromId(int typeId)
-            => _types[typeId];
+        public Type GetTypeFromId(int typeId) => _types[typeId];
 
-        public Func<ObjectReader, IObjectWritable> GetTypeReaderFromId(int typeId)
-            => _typeReaders[typeId];
+        public Func<ObjectReader, IObjectWritable> GetTypeReaderFromId(int typeId) =>
+            _typeReaders[typeId];
     }
 }

@@ -7,26 +7,31 @@ using Microsoft.Extensions.DependencyInjection.ServiceLookup;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    internal sealed class CallSiteJsonFormatter: CallSiteVisitor<CallSiteJsonFormatter.CallSiteFormatterContext, object>
+    internal sealed class CallSiteJsonFormatter
+        : CallSiteVisitor<CallSiteJsonFormatter.CallSiteFormatterContext, object>
     {
         internal static CallSiteJsonFormatter Instance = new CallSiteJsonFormatter();
 
-        private CallSiteJsonFormatter()
-        {
-        }
+        private CallSiteJsonFormatter() { }
 
         public string Format(ServiceCallSite callSite)
         {
             var stringBuilder = new StringBuilder();
-            var context = new CallSiteFormatterContext(stringBuilder, 0, new HashSet<ServiceCallSite>());
+            var context = new CallSiteFormatterContext(
+                stringBuilder,
+                0,
+                new HashSet<ServiceCallSite>()
+            );
 
             VisitCallSite(callSite, context);
 
             return stringBuilder.ToString();
         }
 
-        protected override object VisitConstructor(ConstructorCallSite constructorCallSite, CallSiteFormatterContext argument)
-        {
+        protected override object VisitConstructor(
+            ConstructorCallSite constructorCallSite,
+            CallSiteFormatterContext argument
+        ) {
             argument.WriteProperty("implementationType", constructorCallSite.ImplementationType);
 
             if (constructorCallSite.ParameterCallSites.Length > 0)
@@ -45,8 +50,10 @@ namespace Microsoft.Extensions.DependencyInjection
             return null;
         }
 
-        protected override object VisitCallSiteMain(ServiceCallSite callSite, CallSiteFormatterContext argument)
-        {
+        protected override object VisitCallSiteMain(
+            ServiceCallSite callSite,
+            CallSiteFormatterContext argument
+        ) {
             if (argument.ShouldFormat(callSite))
             {
                 CallSiteFormatterContext childContext = argument.StartObject();
@@ -69,25 +76,33 @@ namespace Microsoft.Extensions.DependencyInjection
             return null;
         }
 
-        protected override object VisitConstant(ConstantCallSite constantCallSite, CallSiteFormatterContext argument)
-        {
+        protected override object VisitConstant(
+            ConstantCallSite constantCallSite,
+            CallSiteFormatterContext argument
+        ) {
             argument.WriteProperty("value", constantCallSite.DefaultValue ?? "");
 
             return null;
         }
 
-        protected override object VisitServiceProvider(ServiceProviderCallSite serviceProviderCallSite, CallSiteFormatterContext argument)
-        {
+        protected override object VisitServiceProvider(
+            ServiceProviderCallSite serviceProviderCallSite,
+            CallSiteFormatterContext argument
+        ) {
             return null;
         }
 
-        protected override object VisitServiceScopeFactory(ServiceScopeFactoryCallSite serviceScopeFactoryCallSite, CallSiteFormatterContext argument)
-        {
+        protected override object VisitServiceScopeFactory(
+            ServiceScopeFactoryCallSite serviceScopeFactoryCallSite,
+            CallSiteFormatterContext argument
+        ) {
             return null;
         }
 
-        protected override object VisitIEnumerable(IEnumerableCallSite enumerableCallSite, CallSiteFormatterContext argument)
-        {
+        protected override object VisitIEnumerable(
+            IEnumerableCallSite enumerableCallSite,
+            CallSiteFormatterContext argument
+        ) {
             argument.WriteProperty("itemType", enumerableCallSite.ItemType);
             argument.WriteProperty("size", enumerableCallSite.ServiceCallSites.Length);
 
@@ -106,8 +121,10 @@ namespace Microsoft.Extensions.DependencyInjection
             return null;
         }
 
-        protected override object VisitFactory(FactoryCallSite factoryCallSite, CallSiteFormatterContext argument)
-        {
+        protected override object VisitFactory(
+            FactoryCallSite factoryCallSite,
+            CallSiteFormatterContext argument
+        ) {
             argument.WriteProperty("method", factoryCallSite.Factory.Method);
 
             return null;
@@ -117,8 +134,11 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             private readonly HashSet<ServiceCallSite> _processedCallSites;
 
-            public CallSiteFormatterContext(StringBuilder builder, int offset, HashSet<ServiceCallSite> processedCallSites)
-            {
+            public CallSiteFormatterContext(
+                StringBuilder builder,
+                int offset,
+                HashSet<ServiceCallSite> processedCallSites
+            ) {
                 Builder = builder;
                 Offset = offset;
                 _processedCallSites = processedCallSites;
@@ -188,7 +208,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
                 else
                 {
-                    Builder.AppendFormat( "null");
+                    Builder.AppendFormat("null");
                 }
             }
 

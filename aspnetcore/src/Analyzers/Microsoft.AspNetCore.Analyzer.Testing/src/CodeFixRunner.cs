@@ -23,10 +23,15 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
             CodeFixProvider codeFixProvider,
             Document document,
             Diagnostic analyzerDiagnostic,
-            int codeFixIndex = 0)
-        {
+            int codeFixIndex = 0
+        ) {
             var actions = new List<CodeAction>();
-            var context = new CodeFixContext(document, analyzerDiagnostic, (a, d) => actions.Add(a), CancellationToken.None);
+            var context = new CodeFixContext(
+                document,
+                analyzerDiagnostic,
+                (a, d) => actions.Add(a),
+                CancellationToken.None
+            );
             await codeFixProvider.RegisterCodeFixesAsync(context);
 
             Assert.NotEmpty(actions);
@@ -43,18 +48,22 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
 
         private async Task EnsureCompilable(Project project)
         {
-            var compilationOptions = ConfigureCompilationOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            var compilationOptions = ConfigureCompilationOptions(
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            );
 
-            var compilation = await project
-                .WithCompilationOptions(compilationOptions)
+            var compilation = await project.WithCompilationOptions(compilationOptions)
                 .GetCompilationAsync();
             var diagnostics = compilation.GetDiagnostics();
             if (diagnostics.Length != 0)
             {
                 var message = string.Join(
                     Environment.NewLine,
-                    diagnostics.Select(d => CSharpDiagnosticFormatter.Instance.Format(d)));
-                throw new InvalidOperationException($"Compilation failed:{Environment.NewLine}{message}");
+                    diagnostics.Select(d => CSharpDiagnosticFormatter.Instance.Format(d))
+                );
+                throw new InvalidOperationException(
+                    $"Compilation failed:{Environment.NewLine}{message}"
+                );
             }
         }
 

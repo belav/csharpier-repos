@@ -42,7 +42,9 @@ namespace System.Net.NetworkInformation.Tests
                 }
 
                 Assert.NotNull(ipProperties.DhcpServerAddresses);
-                _log.WriteLine("- Dhcp Server Addresses: " + ipProperties.DhcpServerAddresses.Count);
+                _log.WriteLine(
+                    "- Dhcp Server Addresses: " + ipProperties.DhcpServerAddresses.Count
+                );
                 foreach (IPAddress dhcp in ipProperties.DhcpServerAddresses)
                 {
                     _log.WriteLine("-- " + dhcp.ToString());
@@ -86,7 +88,10 @@ namespace System.Net.NetworkInformation.Tests
                     _log.WriteLine("--- Preferred Lifetime: " + uni.AddressPreferredLifetime);
                     _log.WriteLine("--- Valid Lifetime: " + uni.AddressValidLifetime);
                     _log.WriteLine("--- Dhcp lease Lifetime: " + uni.DhcpLeaseLifetime);
-                    _log.WriteLine("--- Duplicate Address Detection State: " + uni.DuplicateAddressDetectionState);
+                    _log.WriteLine(
+                        "--- Duplicate Address Detection State: "
+                            + uni.DuplicateAddressDetectionState
+                    );
 
                     Assert.NotNull(uni.IPv4Mask);
                     _log.WriteLine("--- IPv4 Mask: " + uni.IPv4Mask);
@@ -122,7 +127,9 @@ namespace System.Net.NetworkInformation.Tests
 
                 if (!nic.Supports(NetworkInterfaceComponent.IPv4))
                 {
-                    var nie = Assert.Throws<NetworkInformationException>(() => ipProperties.GetIPv4Properties());
+                    var nie = Assert.Throws<NetworkInformationException>(
+                        () => ipProperties.GetIPv4Properties()
+                    );
                     Assert.Equal(SocketError.ProtocolNotSupported, (SocketError)nie.ErrorCode);
                     continue;
                 }
@@ -130,8 +137,14 @@ namespace System.Net.NetworkInformation.Tests
                 IPv4InterfaceProperties ipv4Properties = ipProperties.GetIPv4Properties();
 
                 _log.WriteLine("Index: " + ipv4Properties.Index);
-                _log.WriteLine("IsAutomaticPrivateAddressingActive: " + ipv4Properties.IsAutomaticPrivateAddressingActive);
-                _log.WriteLine("IsAutomaticPrivateAddressingEnabled: " + ipv4Properties.IsAutomaticPrivateAddressingEnabled);
+                _log.WriteLine(
+                    "IsAutomaticPrivateAddressingActive: "
+                        + ipv4Properties.IsAutomaticPrivateAddressingActive
+                );
+                _log.WriteLine(
+                    "IsAutomaticPrivateAddressingEnabled: "
+                        + ipv4Properties.IsAutomaticPrivateAddressingEnabled
+                );
                 _log.WriteLine("IsDhcpEnabled: " + ipv4Properties.IsDhcpEnabled);
                 _log.WriteLine("IsForwardingEnabled: " + ipv4Properties.IsForwardingEnabled);
                 _log.WriteLine("Mtu: " + ipv4Properties.Mtu);
@@ -152,7 +165,9 @@ namespace System.Net.NetworkInformation.Tests
 
                 if (!nic.Supports(NetworkInterfaceComponent.IPv6))
                 {
-                    var nie = Assert.Throws<NetworkInformationException>(() => ipProperties.GetIPv6Properties());
+                    var nie = Assert.Throws<NetworkInformationException>(
+                        () => ipProperties.GetIPv6Properties()
+                    );
                     Assert.Equal(SocketError.ProtocolNotSupported, (SocketError)nie.ErrorCode);
                     continue;
                 }

@@ -15,27 +15,52 @@ using System.Runtime.InteropServices;
 
 namespace ShowLocallocAlignment
 {
-    public struct Struct1 { public int F1; }
-    public struct Struct2 { public int F1; public int F2; }
+    public struct Struct1
+    {
+        public int F1;
+    }
+    public struct Struct2
+    {
+        public int F1;
+        public int F2;
+    }
 
     internal static class App
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void CallTarget1(int arg1, int arg2, int arg3, int arg4, int arg5) { return; }
+        private static void CallTarget1(int arg1, int arg2, int arg3, int arg4, int arg5)
+        {
+            return;
+        }
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void CallTarget2(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) { return; }
+        private static void CallTarget2(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
+        {
+            return;
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private unsafe static void* SnapLocallocBufferAddress1(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
-        {
+        private unsafe static void* SnapLocallocBufferAddress1(
+            int arg1,
+            int arg2,
+            int arg3,
+            int arg4,
+            int arg5,
+            int arg6
+        ) {
             App.CallTarget1(arg1, arg2, arg3, arg4, arg5);
             double* buffer = stackalloc double[16];
             return (void*)buffer;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private unsafe static void* SnapLocallocBufferAddress2(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
-        {
+        private unsafe static void* SnapLocallocBufferAddress2(
+            int arg1,
+            int arg2,
+            int arg3,
+            int arg4,
+            int arg5,
+            int arg6
+        ) {
             App.CallTarget2(arg1, arg2, arg3, arg4, arg5, arg6);
             double* buffer = stackalloc double[16];
             return (void*)buffer;
@@ -52,8 +77,10 @@ namespace ShowLocallocAlignment
             void* ptr2;
 
             required_alignment = 16; // Default to the biggest alignment required
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && (RuntimeInformation.ProcessArchitecture == Architecture.X86))
-            {
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+            ) {
                 required_alignment = 4;
             }
             else if (RuntimeInformation.ProcessArchitecture == Architecture.Arm)
@@ -71,14 +98,15 @@ namespace ShowLocallocAlignment
             fAligned2 = ((address2 % required_alignment) == 0);
 
             Console.Write(
-                "\r\n" +
-                "Address1: {0} ({1:x16})\r\n" +
-                "Address2: {2} ({3:x16})\r\n" +
-                "Required alignment: {4}\r\n" +
-                "\r\n",
-
-                (fAligned1 ? "Aligned" : "Misaligned"), address1,
-                (fAligned2 ? "Aligned" : "Misaligned"), address2,
+                "\r\n"
+                    + "Address1: {0} ({1:x16})\r\n"
+                    + "Address2: {2} ({3:x16})\r\n"
+                    + "Required alignment: {4}\r\n"
+                    + "\r\n",
+                (fAligned1 ? "Aligned" : "Misaligned"),
+                address1,
+                (fAligned2 ? "Aligned" : "Misaligned"),
+                address2,
                 required_alignment
             );
 

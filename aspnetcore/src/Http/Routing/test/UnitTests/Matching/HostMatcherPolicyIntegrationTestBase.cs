@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -181,7 +181,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public async Task Match_HostAndHostWithWildcard_NoSubdomain()
         {
             // Arrange
-            var endpoint = CreateEndpoint("/hello", hosts: new string[] { "contoso.com:8080", "*.contoso.com:8080", });
+            var endpoint = CreateEndpoint(
+                "/hello",
+                hosts: new string[] { "contoso.com:8080", "*.contoso.com:8080", }
+            );
 
             var matcher = CreateMatcher(endpoint);
             var httpContext = CreateContext("/hello", "contoso.com:8080");
@@ -293,7 +296,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public async Task Match_EmptyHostList_MatchesAnyHost()
         {
             // Arrange
-            var endpoint = CreateEndpoint("/hello", hosts: new string[] { });
+            var endpoint = CreateEndpoint("/hello", hosts: new string[] {  });
 
             var matcher = CreateMatcher(endpoint);
             var httpContext = CreateContext("/hello", "contoso.com");
@@ -371,8 +374,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private static Matcher CreateMatcher(params RouteEndpoint[] endpoints)
         {
-            var services = new ServiceCollection()
-                .AddOptions()
+            var services = new ServiceCollection().AddOptions()
                 .AddLogging()
                 .AddRouting()
                 .BuildServiceProvider();
@@ -386,10 +388,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             return builder.Build();
         }
 
-        internal static HttpContext CreateContext(
-            string path,
-            string host,
-            string scheme = null)
+        internal static HttpContext CreateContext(string path, string host, string scheme = null)
         {
             var httpContext = new DefaultHttpContext();
             if (host != null)
@@ -407,8 +406,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             object defaults = null,
             object constraints = null,
             int order = 0,
-            string[] hosts = null)
-        {
+            string[] hosts = null
+        ) {
             var metadata = new List<object>();
             if (hosts != null)
             {
@@ -420,13 +419,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 metadata.Add(new DynamicEndpointMetadata());
             }
 
-            var displayName = "endpoint: " + template + " " + string.Join(", ", hosts ?? new[] { "*:*" });
+            var displayName =
+                "endpoint: " + template + " " + string.Join(", ", hosts ?? new[] { "*:*" });
             return new RouteEndpoint(
                 TestConstants.EmptyRequestDelegate,
                 RoutePatternFactory.Parse(template, defaults, constraints),
                 order,
                 new EndpointMetadataCollection(metadata),
-                displayName);
+                displayName
+            );
         }
 
         internal (Matcher matcher, RouteEndpoint endpoint) CreateMatcher(string template)

@@ -98,7 +98,16 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static void Array_PushPop()
         {
-            var objArray = new object[] { "test7", "test8", "test9", "test10", "test11", "test12", "test13" };
+            var objArray = new object[]
+            {
+                "test7",
+                "test8",
+                "test9",
+                "test10",
+                "test11",
+                "test12",
+                "test13"
+            };
             var jsArray = new Array();
             for (int d = 0; d < objArray.Length; d++)
             {
@@ -117,7 +126,16 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static void Array_PushShift()
         {
-            var objArray = new object[] { "test7", "test8", "test9", "test10", "test11", "test12", "test13" };
+            var objArray = new object[]
+            {
+                "test7",
+                "test8",
+                "test9",
+                "test10",
+                "test11",
+                "test12",
+                "test13"
+            };
             var jsArray = new Array();
             for (int d = 0; d < objArray.Length; d++)
             {
@@ -136,7 +154,16 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static void Array_UnShiftShift()
         {
-            var objArray = new object[] { "test7", "test8", "test9", "test10", "test11", "test12", "test13" };
+            var objArray = new object[]
+            {
+                "test7",
+                "test8",
+                "test9",
+                "test10",
+                "test11",
+                "test12",
+                "test13"
+            };
             var jsArray = new Array();
             for (int d = 0; d < objArray.Length; d++)
             {
@@ -167,7 +194,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             var beasts = new Array("Dodo", "Tiger", "Penguin", "Dodo");
             Assert.Equal(3, beasts.LastIndexOf("Dodo"));
             Assert.Equal(1, beasts.LastIndexOf("Tiger"));
-            Assert.Equal(0, beasts.LastIndexOf("Dodo", 2));  // The array is searched backwards
+            Assert.Equal(0, beasts.LastIndexOf("Dodo", 2)); // The array is searched backwards
             Assert.Equal(-1, beasts.LastIndexOf("giraffe"));
         }
     }

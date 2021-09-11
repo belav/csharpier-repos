@@ -55,9 +55,13 @@ namespace System.Reflection.Emit
         private int table_idx;
 #endregion
 
-        [DynamicDependency(nameof(table_idx))]  // Automatically keeps all previous fields too due to StructLayout
-        internal EventBuilder(TypeBuilder tb, string eventName, EventAttributes eventAttrs, Type eventType)
-        {
+        [DynamicDependency(nameof(table_idx))] // Automatically keeps all previous fields too due to StructLayout
+        internal EventBuilder(
+            TypeBuilder tb,
+            string eventName,
+            EventAttributes eventAttrs,
+            Type eventType
+        ) {
             name = eventName;
             attrs = eventAttrs;
             type = eventType;

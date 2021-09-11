@@ -10,6 +10,12 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
     /// </summary>
     internal interface IPbkdf2Provider
     {
-        byte[] DeriveKey(string password, byte[] salt, KeyDerivationPrf prf, int iterationCount, int numBytesRequested);
+        byte[] DeriveKey(
+            string password,
+            byte[] salt,
+            KeyDerivationPrf prf,
+            int iterationCount,
+            int numBytesRequested
+        );
     }
 }

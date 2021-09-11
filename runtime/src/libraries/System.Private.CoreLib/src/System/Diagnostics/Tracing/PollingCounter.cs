@@ -33,7 +33,11 @@ namespace System.Diagnostics.Tracing
         /// <param name="name">The name.</param>
         /// <param name="eventSource">The event source.</param>
         /// <param name="metricProvider">The delegate to invoke to get the current metric value.</param>
-        public PollingCounter(string name, EventSource eventSource, Func<double> metricProvider) : base(name, eventSource)
+        public PollingCounter(
+            string name,
+            EventSource eventSource,
+            Func<double> metricProvider
+        ) : base(name, eventSource)
         {
             if (metricProvider == null)
                 throw new ArgumentNullException(nameof(metricProvider));
@@ -42,14 +46,18 @@ namespace System.Diagnostics.Tracing
             Publish();
         }
 
-        public override string ToString() => $"PollingCounter '{Name}' Count 1 Mean {_lastVal.ToString("n3")}";
+        public override string ToString() =>
+            $"PollingCounter '{Name}' Count 1 Mean {_lastVal.ToString("n3")}";
 
         private readonly Func<double> _metricProvider;
         private double _lastVal;
 
 #if !ES_BUILD_STANDALONE
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The DynamicDependency will preserve the properties of CounterPayload")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The DynamicDependency will preserve the properties of CounterPayload"
+        )]
         [DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(CounterPayload))]
 #endif
         internal override void WritePayload(float intervalSec, int pollingIntervalMillisec)
@@ -63,7 +71,10 @@ namespace System.Diagnostics.Tracing
                 }
                 catch (Exception ex)
                 {
-                    ReportOutOfBandMessage($"ERROR: Exception during EventCounter {Name} metricProvider callback: " + ex.Message);
+                    ReportOutOfBandMessage(
+                        $"ERROR: Exception during EventCounter {Name} metricProvider callback: "
+                            + ex.Message
+                    );
                 }
 
                 CounterPayload payload = new CounterPayload();
@@ -71,7 +82,7 @@ namespace System.Diagnostics.Tracing
                 payload.DisplayName = DisplayName ?? "";
                 payload.Count = 1; // NOTE: These dumb-looking statistics is intentional
                 payload.IntervalSec = intervalSec;
-                payload.Series = $"Interval={pollingIntervalMillisec}";  // TODO: This may need to change when we support multi-session
+                payload.Series = $"Interval={pollingIntervalMillisec}"; // TODO: This may need to change when we support multi-session
                 payload.CounterType = "Mean";
                 payload.Mean = value;
                 payload.Max = value;
@@ -80,7 +91,11 @@ namespace System.Diagnostics.Tracing
                 payload.StandardDeviation = 0;
                 payload.DisplayUnits = DisplayUnits ?? "";
                 _lastVal = value;
-                EventSource.Write("EventCounters", new EventSourceOptions() { Level = EventLevel.LogAlways }, new PollingPayloadType(payload));
+                EventSource.Write(
+                    "EventCounters",
+                    new EventSourceOptions() { Level = EventLevel.LogAlways },
+                    new PollingPayloadType(payload)
+                );
             }
         }
     }
@@ -91,7 +106,10 @@ namespace System.Diagnostics.Tracing
     [EventData]
     internal sealed class PollingPayloadType
     {
-        public PollingPayloadType(CounterPayload payload) { Payload = payload; }
+        public PollingPayloadType(CounterPayload payload)
+        {
+            Payload = payload;
+        }
         public CounterPayload Payload { get; set; }
     }
 }

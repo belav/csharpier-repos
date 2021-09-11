@@ -24,8 +24,16 @@ namespace System.Runtime.Serialization.Formatters.Binary
             _binaryHeaderEnum = binaryHeaderEnum;
         }
 
-        internal void Set(int objectId, int rank, int[] lengthA, int[]? lowerBoundA, BinaryTypeEnum binaryTypeEnum, object? typeInformation, BinaryArrayTypeEnum binaryArrayTypeEnum, int assemId)
-        {
+        internal void Set(
+            int objectId,
+            int rank,
+            int[] lengthA,
+            int[]? lowerBoundA,
+            BinaryTypeEnum binaryTypeEnum,
+            object? typeInformation,
+            BinaryArrayTypeEnum binaryArrayTypeEnum,
+            int assemId
+        ) {
             _objectId = objectId;
             _binaryArrayTypeEnum = binaryArrayTypeEnum;
             _rank = rank;
@@ -83,10 +91,11 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     {
                         output.WriteInt32(_lengthA[i]);
                     }
-                    if ((_binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset) ||
-                        (_binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset) ||
-                        (_binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset))
-                    {
+                    if (
+                        (_binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset)
+                        || (_binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset)
+                        || (_binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset)
+                    ) {
                         Debug.Assert(_lowerBoundA != null);
                         for (int i = 0; i < _rank; i++)
                         {
@@ -94,7 +103,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         }
                     }
                     output.WriteByte((byte)_binaryTypeEnum);
-                    BinaryTypeConverter.WriteTypeInfo(_binaryTypeEnum, _typeInformation, _assemId, output);
+                    BinaryTypeConverter.WriteTypeInfo(
+                        _binaryTypeEnum,
+                        _typeInformation,
+                        _assemId,
+                        output
+                    );
                     break;
             }
         }
@@ -143,17 +157,22 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     {
                         _lengthA[i] = input.ReadInt32();
                     }
-                    if ((_binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset) ||
-                        (_binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset) ||
-                        (_binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset))
-                    {
+                    if (
+                        (_binaryArrayTypeEnum == BinaryArrayTypeEnum.SingleOffset)
+                        || (_binaryArrayTypeEnum == BinaryArrayTypeEnum.JaggedOffset)
+                        || (_binaryArrayTypeEnum == BinaryArrayTypeEnum.RectangularOffset)
+                    ) {
                         for (int i = 0; i < _rank; i++)
                         {
                             _lowerBoundA[i] = input.ReadInt32();
                         }
                     }
                     _binaryTypeEnum = (BinaryTypeEnum)input.ReadByte();
-                    _typeInformation = BinaryTypeConverter.ReadTypeInfo(_binaryTypeEnum, input, out _assemId);
+                    _typeInformation = BinaryTypeConverter.ReadTypeInfo(
+                        _binaryTypeEnum,
+                        input,
+                        out _assemId
+                    );
                     break;
             }
         }

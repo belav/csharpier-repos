@@ -28,8 +28,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonIgnoreCondition ignoreCondition,
             JsonNumberHandling numberHandling,
             string propertyName,
-            JsonEncodedText jsonPropertyName)
-        {
+            JsonEncodedText jsonPropertyName
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -52,10 +52,18 @@ namespace System.Text.Json.Serialization.Metadata
 
             if (converter == null)
             {
-                converter = propertyTypeInfo.PropertyInfoForTypeInfo.ConverterBase as JsonConverter<T>;
+                converter =
+                    propertyTypeInfo.PropertyInfoForTypeInfo.ConverterBase as JsonConverter<T>;
                 if (converter == null)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.ConverterForPropertyMustBeValid, declaringType, propertyName, typeof(T)));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.ConverterForPropertyMustBeValid,
+                            declaringType,
+                            propertyName,
+                            typeof(T)
+                        )
+                    );
                 }
             }
 
@@ -71,7 +79,8 @@ namespace System.Text.Json.Serialization.Metadata
                 ignoreCondition,
                 numberHandling,
                 propertyName,
-                jsonPropertyName);
+                jsonPropertyName
+            );
 
             return jsonPropertyInfo;
         }
@@ -81,7 +90,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// </summary>
         /// <typeparam name="T">The type of the class or struct.</typeparam>
         /// <returns>A <see cref="JsonTypeInfo{T}"/> instance representing the class or struct.</returns>
-        public static JsonTypeInfo<T> CreateObjectInfo<T>() where T : notnull => new JsonTypeInfoInternal<T>();
+        public static JsonTypeInfo<T> CreateObjectInfo<T>() where T : notnull =>
+            new JsonTypeInfoInternal<T>();
 
         /// <summary>
         /// Initializes metadata for a class or struct.
@@ -99,8 +109,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonSerializerOptions options,
             Func<T>? createObjectFunc,
             Func<JsonSerializerContext, JsonPropertyInfo[]> propInitFunc,
-            JsonNumberHandling numberHandling)
-            where T : notnull
+            JsonNumberHandling numberHandling
+        ) where T : notnull
         {
             if (info == null)
             {
@@ -123,8 +133,15 @@ namespace System.Text.Json.Serialization.Metadata
                 throw new ArgumentNullException(nameof(propInitFunc));
             }
 
-            ((JsonTypeInfoInternal<T>)info).InitializeAsObject(options, createObjectFunc, propInitFunc, numberHandling);
-            Debug.Assert(info.PropertyInfoForTypeInfo!.ConverterStrategy == ConverterStrategy.Object);
+            ((JsonTypeInfoInternal<T>)info).InitializeAsObject(
+                options,
+                createObjectFunc,
+                propInitFunc,
+                numberHandling
+            );
+            Debug.Assert(
+                info.PropertyInfoForTypeInfo!.ConverterStrategy == ConverterStrategy.Object
+            );
         }
 
         /// <summary>
@@ -133,11 +150,19 @@ namespace System.Text.Json.Serialization.Metadata
         /// <typeparam name="T">The generic type definition.</typeparam>
         /// <typeparam name="TConverterReturn">The generic type definition.</typeparam>
         /// <returns>A <see cref="JsonTypeInfo{T}"/> instance representing the type.</returns>
-        public static JsonTypeInfo<T> CreateValueInfo<T, TConverterReturn>(JsonSerializerOptions options, JsonConverter<TConverterReturn> converter)
-            where TConverterReturn : T
+        public static JsonTypeInfo<T> CreateValueInfo<T, TConverterReturn>(
+            JsonSerializerOptions options,
+            JsonConverter<TConverterReturn> converter
+        ) where TConverterReturn : T
         {
             JsonTypeInfo<T> info = new JsonTypeInfoInternal<T>(options);
-            info.PropertyInfoForTypeInfo = JsonPropertyInfo<TConverterReturn>.CreateForSourceGenTypeInfo(typeof(T), runtimeTypeInfo: info, converter, options);
+            info.PropertyInfoForTypeInfo =
+                JsonPropertyInfo<TConverterReturn>.CreateForSourceGenTypeInfo(
+                    typeof(T),
+                    runtimeTypeInfo: info,
+                    converter,
+                    options
+                );
             return info;
         }
     }

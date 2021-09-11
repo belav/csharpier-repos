@@ -7,8 +7,14 @@ using System.Reflection;
 
 namespace System.Diagnostics
 {
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Constructor |
-                    AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Constructor
+            | AttributeTargets.Event
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+    )]
     public sealed class SwitchAttribute : Attribute
     {
         private Type _type;
@@ -29,7 +35,10 @@ namespace System.Diagnostics
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
                 if (value.Length == 0)
-                    throw new ArgumentException(SR.Format(SR.InvalidNullEmptyArgument, nameof(value)), nameof(value));
+                    throw new ArgumentException(
+                        SR.Format(SR.InvalidNullEmptyArgument, nameof(value)),
+                        nameof(value)
+                    );
 
                 _name = value;
             }
@@ -69,12 +78,18 @@ namespace System.Diagnostics
             return ret;
         }
 
-        private static void GetAllRecursive([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type, List<object> switchAttribs)
-        {
+        private static void GetAllRecursive(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
+            List<object> switchAttribs
+        ) {
             GetAllRecursive((MemberInfo)type, switchAttribs);
-            MemberInfo[] members = type.GetMembers(BindingFlags.Public | BindingFlags.NonPublic |
-                                                   BindingFlags.DeclaredOnly | BindingFlags.Instance |
-                                                   BindingFlags.Static);
+            MemberInfo[] members = type.GetMembers(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+            );
 
             foreach (MemberInfo member in members)
             {

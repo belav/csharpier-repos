@@ -21,9 +21,13 @@ namespace System.Diagnostics.Tests
         [Theory]
         [InlineData(DebuggerBrowsableState.Never - 1)]
         [InlineData(DebuggerBrowsableState.RootHidden + 1)]
-        public void Ctor_InvalidState_ThrowsArgumentOutOfRangeException(DebuggerBrowsableState state)
-        {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("state", () => new DebuggerBrowsableAttribute(state));
+        public void Ctor_InvalidState_ThrowsArgumentOutOfRangeException(
+            DebuggerBrowsableState state
+        ) {
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "state",
+                () => new DebuggerBrowsableAttribute(state)
+            );
         }
     }
 }

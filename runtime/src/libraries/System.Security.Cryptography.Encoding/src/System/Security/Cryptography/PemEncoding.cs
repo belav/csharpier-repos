@@ -115,9 +115,10 @@ namespace System.Security.Cryptography
                 int contentStartIndex = preebEndIndex + Ending.Length;
                 int postebLength = PostEBPrefix.Length + label.Length + Ending.Length;
 
-                Span<char> postebBuffer = postebLength > PostebStackBufferSize
-                    ? new char[postebLength]
-                    : postebStackBuffer;
+                Span<char> postebBuffer =
+                    postebLength > PostebStackBufferSize
+                        ? new char[postebLength]
+                        : postebStackBuffer;
                 ReadOnlySpan<char> posteb = WritePostEB(label, postebBuffer);
                 int postebStartIndex = pemData.IndexOfByOffset(posteb, contentStartIndex);
 
@@ -130,21 +131,29 @@ namespace System.Security.Cryptography
 
                 // The PostEB must either end at the end of the string, or
                 // have at least one white space character after it.
-                if (pemEndIndex < pemData.Length - 1 &&
-                    !IsWhiteSpaceCharacter(pemData[pemEndIndex]))
-                {
+                if (
+                    pemEndIndex < pemData.Length - 1 && !IsWhiteSpaceCharacter(pemData[pemEndIndex])
+                ) {
                     goto NextAfterLabel;
                 }
 
                 Range contentRange = contentStartIndex..postebStartIndex;
 
-                if (!TryCountBase64(pemData[contentRange], out int base64start, out int base64end, out int decodedSize))
-                {
+                if (
+                    !TryCountBase64(
+                        pemData[contentRange],
+                        out int base64start,
+                        out int base64end,
+                        out int decodedSize
+                    )
+                ) {
                     goto NextAfterLabel;
                 }
 
                 Range pemRange = preebIndex..pemEndIndex;
-                Range base64range = (contentStartIndex + base64start)..(contentStartIndex + base64end);
+                Range base64range = (contentStartIndex + base64start)..(
+                    contentStartIndex + base64end
+                );
                 fields = new PemFields(labelRange, base64range, pemRange, decodedSize);
                 return true;
 
@@ -175,8 +184,11 @@ namespace System.Security.Cryptography
             }
         }
 
-        private static int IndexOfByOffset(this ReadOnlySpan<char> str, ReadOnlySpan<char> value, int startPosition)
-        {
+        private static int IndexOfByOffset(
+            this ReadOnlySpan<char> str,
+            ReadOnlySpan<char> value,
+            int startPosition
+        ) {
             Debug.Assert(startPosition <= str.Length);
             int index = str.Slice(startPosition).IndexOf(value);
             return index == -1 ? -1 : index + startPosition;
@@ -231,8 +243,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> str,
             out int base64Start,
             out int base64End,
-            out int base64DecodedSize)
-        {
+            out int base64DecodedSize
+        ) {
             base64Start = 0;
             base64End = str.Length;
 
@@ -259,7 +271,6 @@ namespace System.Security.Cryptography
                     {
                         base64End--;
                     }
-
                     continue;
                 }
 
@@ -296,8 +307,7 @@ namespace System.Security.Cryptography
         private static bool IsBase64Character(char ch)
         {
             uint c = (uint)ch;
-            return c == '+' || c == '/' ||
-                   c - '0' < 10 || c - 'A' < 26 || c - 'a' < 26;
+            return c == '+' || c == '/' || c - '0' < 10 || c - 'A' < 26 || c - 'a' < 26;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -356,13 +366,25 @@ namespace System.Security.Cryptography
             const int MaxDataLength = 1_585_834_053;
 
             if (labelLength < 0)
-                throw new ArgumentOutOfRangeException(nameof(labelLength), SR.ArgumentOutOfRange_NeedPositiveNumber);
+                throw new ArgumentOutOfRangeException(
+                    nameof(labelLength),
+                    SR.ArgumentOutOfRange_NeedPositiveNumber
+                );
             if (dataLength < 0)
-                throw new ArgumentOutOfRangeException(nameof(dataLength), SR.ArgumentOutOfRange_NeedPositiveNumber);
+                throw new ArgumentOutOfRangeException(
+                    nameof(dataLength),
+                    SR.ArgumentOutOfRange_NeedPositiveNumber
+                );
             if (labelLength > MaxLabelSize)
-                throw new ArgumentOutOfRangeException(nameof(labelLength), SR.Argument_PemEncoding_EncodedSizeTooLarge);
+                throw new ArgumentOutOfRangeException(
+                    nameof(labelLength),
+                    SR.Argument_PemEncoding_EncodedSizeTooLarge
+                );
             if (dataLength > MaxDataLength)
-                throw new ArgumentOutOfRangeException(nameof(dataLength), SR.Argument_PemEncoding_EncodedSizeTooLarge);
+                throw new ArgumentOutOfRangeException(
+                    nameof(dataLength),
+                    SR.Argument_PemEncoding_EncodedSizeTooLarge
+                );
 
             int preebLength = PreEBPrefix.Length + labelLength + Ending.Length;
             int postebLength = PostEBPrefix.Length + labelLength + Ending.Length;
@@ -423,8 +445,12 @@ namespace System.Security.Cryptography
         ///   </para>
         /// <paramref name="label"/> contains invalid characters.
         /// </exception>
-        public static bool TryWrite(ReadOnlySpan<char> label, ReadOnlySpan<byte> data, Span<char> destination, out int charsWritten)
-        {
+        public static bool TryWrite(
+            ReadOnlySpan<char> label,
+            ReadOnlySpan<byte> data,
+            Span<char> destination,
+            out int charsWritten
+        ) {
             static int Write(ReadOnlySpan<char> str, Span<char> dest, int offset)
             {
                 str.CopyTo(dest.Slice(offset));
@@ -433,7 +459,11 @@ namespace System.Security.Cryptography
 
             static int WriteBase64(ReadOnlySpan<byte> bytes, Span<char> dest, int offset)
             {
-                bool success = Convert.TryToBase64Chars(bytes, dest.Slice(offset), out int base64Written);
+                bool success = Convert.TryToBase64Chars(
+                    bytes,
+                    dest.Slice(offset),
+                    out int base64Written
+                );
 
                 if (!success)
                 {
@@ -466,7 +496,11 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> remainingData = data;
             while (remainingData.Length >= BytesPerLine)
             {
-                charsWritten += WriteBase64(remainingData.Slice(0, BytesPerLine), destination, charsWritten);
+                charsWritten += WriteBase64(
+                    remainingData.Slice(0, BytesPerLine),
+                    destination,
+                    charsWritten
+                );
                 charsWritten += Write(NewLine, destination, charsWritten);
                 remainingData = remainingData.Slice(BytesPerLine);
             }

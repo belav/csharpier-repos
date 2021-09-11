@@ -10,32 +10,46 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteNavigationBarItemService : BrokeredServiceBase, IRemoteNavigationBarItemService
+    internal sealed class RemoteNavigationBarItemService
+        : BrokeredServiceBase,
+          IRemoteNavigationBarItemService
     {
         internal sealed class Factory : FactoryBase<IRemoteNavigationBarItemService>
         {
-            protected override IRemoteNavigationBarItemService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteNavigationBarItemService(arguments);
+            protected override IRemoteNavigationBarItemService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteNavigationBarItemService(arguments);
         }
 
         public RemoteNavigationBarItemService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+            : base(arguments) { }
 
         public ValueTask<ImmutableArray<SerializableNavigationBarItem>> GetItemsAsync(
-            PinnedSolutionInfo solutionInfo, DocumentId documentId, bool supportsCodeGeneration, CancellationToken cancellationToken)
-        {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                var solution = await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
+            PinnedSolutionInfo solutionInfo,
+            DocumentId documentId,
+            bool supportsCodeGeneration,
+            CancellationToken cancellationToken
+        ) {
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
 
-                var document = solution.GetRequiredDocument(documentId);
-                var navigationBarService = document.GetRequiredLanguageService<INavigationBarItemService>();
-                var result = await navigationBarService.GetItemsAsync(document, supportsCodeGeneration, cancellationToken).ConfigureAwait(false);
+                    var document = solution.GetRequiredDocument(documentId);
+                    var navigationBarService =
+                        document.GetRequiredLanguageService<INavigationBarItemService>();
+                    var result = await navigationBarService.GetItemsAsync(
+                            document,
+                            supportsCodeGeneration,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-                return SerializableNavigationBarItem.Dehydrate(result);
-            }, cancellationToken);
+                    return SerializableNavigationBarItem.Dehydrate(result);
+                },
+                cancellationToken
+            );
         }
     }
 }

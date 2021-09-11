@@ -15,15 +15,13 @@ namespace GenericHostWebSite
         // Do not change. This is the pattern our test infrastructure uses to initialize a IHostBuilder from
         // a users app.
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            new HostBuilder()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseStartup<Startup>()
-                        .UseKestrel()
-                        .UseIISIntegration();
-                });
+            new HostBuilder().UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseStartup<Startup>().UseKestrel().UseIISIntegration();
+                    }
+                );
     }
 
     public class TestGenericService

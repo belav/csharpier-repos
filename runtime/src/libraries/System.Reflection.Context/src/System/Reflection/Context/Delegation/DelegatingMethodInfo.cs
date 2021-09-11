@@ -149,8 +149,13 @@ namespace System.Reflection.Context.Delegation
             return UnderlyingMethod.GetParameters();
         }
 
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
-        {
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        ) {
             return UnderlyingMethod.Invoke(obj, invokeAttr, binder, parameters, culture);
         }
 

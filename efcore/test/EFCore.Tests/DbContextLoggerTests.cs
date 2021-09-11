@@ -37,7 +37,13 @@ namespace Microsoft.EntityFrameworkCore
             var stream = new StringWriter();
             var actual = await LogTest(async, stream, b => b.LogTo(stream.WriteLine));
 
-            AssertLog(actual, ContextInitialized, SaveChangesStarting, SaveChangesCompleted, ContextDisposed);
+            AssertLog(
+                actual,
+                ContextInitialized,
+                SaveChangesStarting,
+                SaveChangesCompleted,
+                ContextDisposed
+            );
         }
 
         [ConditionalTheory]
@@ -46,7 +52,11 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Log_with_minimum_level(bool async)
         {
             var stream = new StringWriter();
-            var actual = await LogTest(async, stream, b => b.LogTo(stream.WriteLine, LogLevel.Information));
+            var actual = await LogTest(
+                async,
+                stream,
+                b => b.LogTo(stream.WriteLine, LogLevel.Information)
+            );
 
             AssertLog(actual, ContextInitialized);
         }
@@ -60,11 +70,20 @@ namespace Microsoft.EntityFrameworkCore
             var actual = await LogTest(
                 async,
                 stream,
-                b => b.LogTo(
-                    stream.WriteLine,
-                    new[] { DbLoggerCategory.Infrastructure.Name, DbLoggerCategory.Update.Name }));
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        new[] { DbLoggerCategory.Infrastructure.Name, DbLoggerCategory.Update.Name }
+                    )
+            );
 
-            AssertLog(actual, ContextInitialized, SaveChangesStarting, SaveChangesCompleted, ContextDisposed);
+            AssertLog(
+                actual,
+                ContextInitialized,
+                SaveChangesStarting,
+                SaveChangesCompleted,
+                ContextDisposed
+            );
         }
 
         [ConditionalTheory]
@@ -76,9 +95,8 @@ namespace Microsoft.EntityFrameworkCore
             var actual = await LogTest(
                 async,
                 stream,
-                b => b.LogTo(
-                    stream.WriteLine,
-                    new[] { DbLoggerCategory.Infrastructure.Name }));
+                b => b.LogTo(stream.WriteLine, new[] { DbLoggerCategory.Infrastructure.Name })
+            );
 
             AssertLog(actual, ContextInitialized, ContextDisposed);
         }
@@ -92,10 +110,13 @@ namespace Microsoft.EntityFrameworkCore
             var actual = await LogTest(
                 async,
                 stream,
-                b => b.LogTo(
-                    stream.WriteLine,
-                    new[] { DbLoggerCategory.Infrastructure.Name },
-                    LogLevel.Information));
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        new[] { DbLoggerCategory.Infrastructure.Name },
+                        LogLevel.Information
+                    )
+            );
 
             AssertLog(actual, ContextInitialized);
 
@@ -103,10 +124,13 @@ namespace Microsoft.EntityFrameworkCore
             actual = await LogTest(
                 async,
                 stream,
-                b => b.LogTo(
-                    stream.WriteLine,
-                    new[] { DbLoggerCategory.Update.Name },
-                    LogLevel.Information));
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        new[] { DbLoggerCategory.Update.Name },
+                        LogLevel.Information
+                    )
+            );
 
             Assert.Equal("", actual);
         }
@@ -120,9 +144,8 @@ namespace Microsoft.EntityFrameworkCore
             var actual = await LogTest(
                 async,
                 stream,
-                b => b.LogTo(
-                    stream.WriteLine,
-                    new[] { CoreEventId.ContextInitialized }));
+                b => b.LogTo(stream.WriteLine, new[] { CoreEventId.ContextInitialized })
+            );
 
             AssertLog(actual, ContextInitialized);
         }
@@ -136,9 +159,12 @@ namespace Microsoft.EntityFrameworkCore
             var actual = await LogTest(
                 async,
                 stream,
-                b => b.LogTo(
-                    stream.WriteLine,
-                    new[] { CoreEventId.ContextInitialized, CoreEventId.ContextDisposed }));
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        new[] { CoreEventId.ContextInitialized, CoreEventId.ContextDisposed }
+                    )
+            );
 
             AssertLog(actual, ContextInitialized, ContextDisposed);
         }
@@ -152,17 +178,20 @@ namespace Microsoft.EntityFrameworkCore
             var actual = await LogTest(
                 async,
                 stream,
-                b => b.LogTo(
-                    stream.WriteLine,
-                    new[]
-                    {
-                        CoreEventId.ContextInitialized,
-                        CoreEventId.ContextDisposed,
-                        CoreEventId.StartedTracking,
-                        CoreEventId.StateChanged,
-                        CoreEventId.ValueGenerated,
-                        CoreEventId.CascadeDelete
-                    }));
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        new[]
+                        {
+                            CoreEventId.ContextInitialized,
+                            CoreEventId.ContextDisposed,
+                            CoreEventId.StartedTracking,
+                            CoreEventId.StateChanged,
+                            CoreEventId.ValueGenerated,
+                            CoreEventId.CascadeDelete
+                        }
+                    )
+            );
 
             AssertLog(actual, ContextInitialized, ContextDisposed);
         }
@@ -176,10 +205,13 @@ namespace Microsoft.EntityFrameworkCore
             var actual = await LogTest(
                 async,
                 stream,
-                b => b.LogTo(
-                    stream.WriteLine,
-                    new[] { CoreEventId.ContextInitialized },
-                    LogLevel.Information));
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        new[] { CoreEventId.ContextInitialized },
+                        LogLevel.Information
+                    )
+            );
 
             AssertLog(actual, ContextInitialized);
 
@@ -187,10 +219,13 @@ namespace Microsoft.EntityFrameworkCore
             actual = await LogTest(
                 async,
                 stream,
-                b => b.LogTo(
-                    stream.WriteLine,
-                    new[] { CoreEventId.ContextDisposed },
-                    LogLevel.Information));
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        new[] { CoreEventId.ContextDisposed },
+                        LogLevel.Information
+                    )
+            );
 
             Assert.Equal("", actual);
         }
@@ -202,7 +237,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(stream.WriteLine, (e, l) => e == CoreEventId.SaveChangesCompleted));
+                async,
+                stream,
+                b => b.LogTo(stream.WriteLine, (e, l) => e == CoreEventId.SaveChangesCompleted)
+            );
 
             AssertLog(actual, SaveChangesCompleted);
         }
@@ -216,9 +254,18 @@ namespace Microsoft.EntityFrameworkCore
             var actual = await LogTest(
                 async,
                 stream,
-                b => b.LogTo(
-                    (eventId, logLevel) => eventId == CoreEventId.ContextInitialized,
-                    eventData => stream.Write("Initialized " + ((ContextInitializedEventData)eventData).Context.GetType().Name)));
+                b =>
+                    b.LogTo(
+                        (eventId, logLevel) => eventId == CoreEventId.ContextInitialized,
+                        eventData =>
+                            stream.Write(
+                                "Initialized "
+                                    + (
+                                        (ContextInitializedEventData)eventData
+                                    ).Context.GetType().Name
+                            )
+                    )
+            );
 
             Assert.Equal(@"Initialized LoggingContext" + Environment.NewLine, actual);
         }
@@ -230,11 +277,15 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.None));
+                async,
+                stream,
+                b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.None)
+            );
 
             AssertLog(
                 actual,
-                @"Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+                @"Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
         [ConditionalTheory]
@@ -244,11 +295,20 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.SingleLine));
+                async,
+                stream,
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        LogLevel.Information,
+                        DbContextLoggerOptions.SingleLine
+                    )
+            );
 
             AssertLog(
                 actual,
-                @"Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+                @"Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
         [ConditionalTheory]
@@ -258,14 +318,21 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(
-                    stream.WriteLine,
-                    LogLevel.Information,
-                    DbContextLoggerOptions.SingleLine | DbContextLoggerOptions.DefaultWithLocalTime));
+                async,
+                stream,
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        LogLevel.Information,
+                        DbContextLoggerOptions.SingleLine
+                            | DbContextLoggerOptions.DefaultWithLocalTime
+                    )
+            );
 
             AssertLog(
                 actual,
-                @"info: <Local Date> HH:mm:ss.fff CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) -> Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+                @"info: <Local Date> HH:mm:ss.fff CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) -> Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
         [ConditionalTheory]
@@ -275,12 +342,16 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Level));
+                async,
+                stream,
+                b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Level)
+            );
 
             AssertLog(
                 actual,
                 @"info: 
-      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
         [ConditionalTheory]
@@ -290,12 +361,22 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.LocalTime), 0);
+                async,
+                stream,
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        LogLevel.Information,
+                        DbContextLoggerOptions.LocalTime
+                    ),
+                0
+            );
 
             AssertLog(
                 actual,
                 @"<Local Date> HH:mm:ss.fff 
-      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
         [ConditionalTheory]
@@ -305,12 +386,19 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.UtcTime), 0, true);
+                async,
+                stream,
+                b =>
+                    b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.UtcTime),
+                0,
+                true
+            );
 
             AssertLog(
                 actual,
                 @"YYYY-MM-DDTHH:MM:SS.MMMMMMTZ 
-      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
         [ConditionalTheory]
@@ -320,12 +408,16 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Id));
+                async,
+                stream,
+                b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Id)
+            );
 
             AssertLog(
                 actual,
                 @"CoreEventId.ContextInitialized[10403] 
-      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
         [ConditionalTheory]
@@ -335,12 +427,17 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Category));
+                async,
+                stream,
+                b =>
+                    b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Category)
+            );
 
             AssertLog(
                 actual,
                 @"(Microsoft.EntityFrameworkCore.Infrastructure) 
-      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
         [ConditionalTheory]
@@ -350,13 +447,21 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(
-                    stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Id | DbContextLoggerOptions.Level));
+                async,
+                stream,
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        LogLevel.Information,
+                        DbContextLoggerOptions.Id | DbContextLoggerOptions.Level
+                    )
+            );
 
             AssertLog(
                 actual,
                 @"info: CoreEventId.ContextInitialized[10403] 
-      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
         [ConditionalTheory]
@@ -366,16 +471,23 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(
-                    stream.WriteLine,
-                    LogLevel.Information,
-                    DbContextLoggerOptions.UtcTime | DbContextLoggerOptions.Level),
-                6, true);
+                async,
+                stream,
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        LogLevel.Information,
+                        DbContextLoggerOptions.UtcTime | DbContextLoggerOptions.Level
+                    ),
+                6,
+                true
+            );
 
             AssertLog(
                 actual,
                 @"info: YYYY-MM-DDTHH:MM:SS.MMMMMMTZ 
-      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
         [ConditionalTheory]
@@ -385,33 +497,49 @@ namespace Microsoft.EntityFrameworkCore
         {
             var stream = new StringWriter();
             var actual = await LogTest(
-                async, stream, b => b.LogTo(
-                    stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.DefaultWithUtcTime), 6, true);
+                async,
+                stream,
+                b =>
+                    b.LogTo(
+                        stream.WriteLine,
+                        LogLevel.Information,
+                        DbContextLoggerOptions.DefaultWithUtcTime
+                    ),
+                6,
+                true
+            );
 
             AssertLog(
                 actual,
                 @"info: YYYY-MM-DDTHH:MM:SS.MMMMMMTZ CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
-      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests ");
+      Entity Framework Core X.X.X-any initialized 'LoggingContext' using provider 'Microsoft.EntityFrameworkCore.InMemory' with options: StoreName=DbContextLoggerTests "
+            );
         }
 
-        private static void AssertLog(string actual, params string[] lines)
-            => Assert.Equal(
+        private static void AssertLog(string actual, params string[] lines) =>
+            Assert.Equal(
                 string.Join(Environment.NewLine, lines) + Environment.NewLine,
                 actual,
                 ignoreLineEndingDifferences: true,
-                ignoreWhiteSpaceDifferences: true);
+                ignoreWhiteSpaceDifferences: true
+            );
 
         private static async Task<string> LogTest(
             bool async,
             TextWriter writer,
-            Func<DbContextOptionsBuilder<LoggingContext>, DbContextOptionsBuilder<LoggingContext>> configureLogging,
+            Func<
+                DbContextOptionsBuilder<LoggingContext>,
+                DbContextOptionsBuilder<LoggingContext>
+            > configureLogging,
             int dateAt = 6,
-            bool utc = false)
-        {
-            var options = configureLogging(
-                    new DbContextOptionsBuilder<LoggingContext>()
-                        .UseInMemoryDatabase("DbContextLoggerTests"))
-                .Options;
+            bool utc = false
+        ) {
+            var options =
+                configureLogging(
+                    new DbContextOptionsBuilder<LoggingContext>().UseInMemoryDatabase(
+                        "DbContextLoggerTests"
+                    )
+                ).Options;
 
             string productVersion;
 
@@ -436,8 +564,10 @@ namespace Microsoft.EntityFrameworkCore
                     if (normalized.Contains("20", StringComparison.Ordinal))
                     {
                         // May fail if test happens to span midnight on a change in length; seems unlikely!
-                        var end = (utc ? 28 : DateTime.Now.ToShortDateString().Length + 13) + dateAt;
-                        normalized = normalized.Substring(0, dateAt)
+                        var end =
+                            (utc ? 28 : DateTime.Now.ToShortDateString().Length + 13) + dateAt;
+                        normalized =
+                            normalized.Substring(0, dateAt)
                             + (utc ? "YYYY-MM-DDTHH:MM:SS.MMMMMMTZ" : "<Local Date> HH:mm:ss.fff")
                             + normalized.Substring(end);
                     }
@@ -451,10 +581,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class LoggingContext : DbContext
         {
-            public LoggingContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public LoggingContext(DbContextOptions options) : base(options) { }
         }
     }
 }

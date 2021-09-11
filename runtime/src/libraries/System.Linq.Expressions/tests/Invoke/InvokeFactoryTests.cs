@@ -53,7 +53,9 @@ namespace System.Linq.Expressions.Tests
 
             // Expression[] overload
             {
-                ConstantExpression[] args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable.Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
                 InvocationExpression expr = Expression.Invoke(instance, args);
 
                 AssertInvokeIsOptimized(expr, instance, args);
@@ -61,15 +63,20 @@ namespace System.Linq.Expressions.Tests
 
             // IEnumerable<Expression> overload
             {
-                List<ConstantExpression> args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToList();
+                List<ConstantExpression> args = Enumerable.Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToList();
                 InvocationExpression expr = Expression.Invoke(instance, args);
 
                 AssertInvokeIsOptimized(expr, instance, args);
             }
         }
 
-        private static void AssertInvokeIsOptimized(InvocationExpression expr, Expression expression, IReadOnlyList<Expression> args)
-        {
+        private static void AssertInvokeIsOptimized(
+            InvocationExpression expr,
+            Expression expression,
+            IReadOnlyList<Expression> args
+        ) {
             int n = args.Count;
 
             InvocationExpression updated = Update(expr);

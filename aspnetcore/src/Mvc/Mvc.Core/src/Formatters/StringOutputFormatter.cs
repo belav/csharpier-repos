@@ -41,8 +41,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         }
 
         /// <inheritdoc/>
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding encoding)
-        {
+        public override Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding encoding
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

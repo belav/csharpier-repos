@@ -14,8 +14,11 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         private readonly PathString _pathBase;
         private readonly bool _isWebsocketsSupported;
 
-        internal IISSetupFilter(string pairingToken, PathString pathBase, bool isWebsocketsSupported)
-        {
+        internal IISSetupFilter(
+            string pairingToken,
+            PathString pathBase,
+            bool isWebsocketsSupported
+        ) {
             _pairingToken = pairingToken;
             _pathBase = pathBase;
             _isWebsocketsSupported = isWebsocketsSupported;

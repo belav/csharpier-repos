@@ -16,7 +16,9 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = new Context4285())
             {
                 context.AddRange(
-                    new SubProduct { SomeName = "One" }, new SubProduct2 { SomeName2 = "Two" });
+                    new SubProduct { SomeName = "One" },
+                    new SubProduct2 { SomeName2 = "Two" }
+                );
                 context.SaveChanges();
             }
 
@@ -25,10 +27,16 @@ namespace Microsoft.EntityFrameworkCore
                 var products = context.Products.ToList();
                 var productOne = products.OfType<SubProduct>().Single();
                 Assert.Equal("One", productOne.SomeName);
-                Assert.Equal(nameof(SubProduct), context.Entry(productOne).Property<string>("Discriminator").CurrentValue);
+                Assert.Equal(
+                    nameof(SubProduct),
+                    context.Entry(productOne).Property<string>("Discriminator").CurrentValue
+                );
                 var productTwo = products.OfType<SubProduct2>().Single();
                 Assert.Equal("Two", productTwo.SomeName2);
-                Assert.Equal(nameof(SubProduct2), context.Entry(productTwo).Property<string>("Discriminator").CurrentValue);
+                Assert.Equal(
+                    nameof(SubProduct2),
+                    context.Entry(productTwo).Property<string>("Discriminator").CurrentValue
+                );
             }
         }
 
@@ -38,7 +46,9 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = new Context4285())
             {
                 context.AddRange(
-                    new SubIntProduct { SomeName = "One" }, new SubIntProduct2 { SomeName2 = "Two" });
+                    new SubIntProduct { SomeName = "One" },
+                    new SubIntProduct2 { SomeName2 = "Two" }
+                );
                 context.SaveChanges();
             }
 
@@ -47,10 +57,16 @@ namespace Microsoft.EntityFrameworkCore
                 var products = context.IntProducts.ToList();
                 var productOne = products.OfType<SubIntProduct>().Single();
                 Assert.Equal("One", productOne.SomeName);
-                Assert.Equal(1, context.Entry(productOne).Property<int>("IntDiscriminator").CurrentValue);
+                Assert.Equal(
+                    1,
+                    context.Entry(productOne).Property<int>("IntDiscriminator").CurrentValue
+                );
                 var productTwo = products.OfType<SubIntProduct2>().Single();
                 Assert.Equal("Two", productTwo.SomeName2);
-                Assert.Equal(2, context.Entry(productTwo).Property<int>("IntDiscriminator").CurrentValue);
+                Assert.Equal(
+                    2,
+                    context.Entry(productTwo).Property<int>("IntDiscriminator").CurrentValue
+                );
             }
         }
 
@@ -93,9 +109,8 @@ namespace Microsoft.EntityFrameworkCore
             public DbSet<SubIntProduct> SubIntProducts { get; set; }
             public DbSet<SubIntProduct2> SubIntProducts2 { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseInMemoryDatabase(nameof(Context4285));
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseInMemoryDatabase(nameof(Context4285));
 
             protected override void OnModelCreating(ModelBuilder builder)
             {

@@ -78,9 +78,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <inheritdoc />
         public bool Equals(ModelBindingResult other)
         {
-            return
-                IsModelSet == other.IsModelSet &&
-                object.Equals(Model, other.Model);
+            return IsModelSet == other.IsModelSet && object.Equals(Model, other.Model);
         }
 
         /// <inheritdoc />

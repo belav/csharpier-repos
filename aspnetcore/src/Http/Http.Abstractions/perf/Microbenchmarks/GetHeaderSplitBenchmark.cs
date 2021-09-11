@@ -21,8 +21,13 @@ namespace Microsoft.AspNetCore.Http.Abstractions.Microbenchmarks
             {
                 { "singleValue", new StringValues("single") },
                 { "singleValueQuoted", new StringValues("\"single\"") },
-                { "doubleValue", new StringValues(new [] { "first", "second" }) },
-                { "manyValue", new StringValues(new [] { "first", "second", "third", "fourth", "fifth", "sixth" }) }
+                { "doubleValue", new StringValues(new[] { "first", "second" }) },
+                {
+                    "manyValue",
+                    new StringValues(
+                        new[] { "first", "second", "third", "fourth", "fifth", "sixth" }
+                    )
+                }
             };
             _dictionary = new HeaderDictionary(dict);
         }

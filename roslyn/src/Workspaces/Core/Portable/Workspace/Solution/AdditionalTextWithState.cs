@@ -18,8 +18,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// Create a <see cref="SourceText"/> from a <see cref="TextDocumentState"/>.
         /// </summary>
-        public AdditionalTextWithState(TextDocumentState documentState)
-            => _documentState = documentState ?? throw new ArgumentNullException(nameof(documentState));
+        public AdditionalTextWithState(TextDocumentState documentState) =>
+            _documentState =
+                documentState ?? throw new ArgumentNullException(nameof(documentState));
 
         /// <summary>
         /// Resolved path of the document.

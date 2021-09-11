@@ -21,8 +21,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual void OnBeforeAction(
             IProxyHttpContext httpContext,
             IProxyRouteData routeData,
-            IProxyActionDescriptor actionDescriptor)
-        {
+            IProxyActionDescriptor actionDescriptor
+        ) {
             BeforeAction = new OnBeforeActionEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -42,8 +42,8 @@ namespace Microsoft.AspNetCore.Mvc
         [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterAction")]
         public virtual void OnAfterAction(
             IProxyHttpContext httpContext,
-            IProxyActionDescriptor actionDescriptor)
-        {
+            IProxyActionDescriptor actionDescriptor
+        ) {
             AfterAction = new OnAfterActionEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -62,8 +62,8 @@ namespace Microsoft.AspNetCore.Mvc
         [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeActionMethod")]
         public virtual void OnBeforeActionMethod(
             IProxyActionContext actionContext,
-            IReadOnlyDictionary<string, object> arguments)
-        {
+            IReadOnlyDictionary<string, object> arguments
+        ) {
             BeforeActionMethod = new OnBeforeActionMethodEventData()
             {
                 ActionContext = actionContext,
@@ -82,8 +82,8 @@ namespace Microsoft.AspNetCore.Mvc
         [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterActionMethod")]
         public virtual void OnAfterActionMethod(
             IProxyActionContext actionContext,
-            IProxyActionResult result)
-        {
+            IProxyActionResult result
+        ) {
             AfterActionMethod = new OnAfterActionMethodEventData()
             {
                 ActionContext = actionContext,
@@ -100,8 +100,10 @@ namespace Microsoft.AspNetCore.Mvc
         public OnBeforeActionResultEventData BeforeActionResult { get; set; }
 
         [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeActionResult")]
-        public virtual void OnBeforeActionResult(IProxyActionContext actionContext, IProxyActionResult result)
-        {
+        public virtual void OnBeforeActionResult(
+            IProxyActionContext actionContext,
+            IProxyActionResult result
+        ) {
             BeforeActionResult = new OnBeforeActionResultEventData()
             {
                 ActionContext = actionContext,
@@ -118,8 +120,10 @@ namespace Microsoft.AspNetCore.Mvc
         public OnAfterActionResultEventData AfterActionResult { get; set; }
 
         [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterActionResult")]
-        public virtual void OnAfterActionResult(IProxyActionContext actionContext, IProxyActionResult result)
-        {
+        public virtual void OnAfterActionResult(
+            IProxyActionContext actionContext,
+            IProxyActionResult result
+        ) {
             AfterActionResult = new OnAfterActionResultEventData()
             {
                 ActionContext = actionContext,
@@ -144,8 +148,8 @@ namespace Microsoft.AspNetCore.Mvc
             bool isMainPage,
             IProxyActionResult result,
             string viewName,
-            IProxyView view)
-        {
+            IProxyView view
+        ) {
             ViewFound = new OnViewFoundEventData()
             {
                 ActionContext = actionContext,
@@ -173,8 +177,8 @@ namespace Microsoft.AspNetCore.Mvc
             bool isMainPage,
             IProxyActionResult result,
             string viewName,
-            IEnumerable<string> searchedLocations)
-        {
+            IEnumerable<string> searchedLocations
+        ) {
             ViewNotFound = new OnViewNotFoundEventData()
             {
                 ActionContext = actionContext,
@@ -196,11 +200,7 @@ namespace Microsoft.AspNetCore.Mvc
         [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeView")]
         public virtual void OnBeforeView(IProxyView view, IProxyViewContext viewContext)
         {
-            BeforeView = new OnBeforeViewEventData()
-            {
-                View = view,
-                ViewContext = viewContext,
-            };
+            BeforeView = new OnBeforeViewEventData() { View = view, ViewContext = viewContext, };
         }
 
         public class OnAfterViewEventData
@@ -214,11 +214,7 @@ namespace Microsoft.AspNetCore.Mvc
         [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterView")]
         public virtual void OnAfterView(IProxyView view, IProxyViewContext viewContext)
         {
-            AfterView = new OnAfterViewEventData()
-            {
-                View = view,
-                ViewContext = viewContext,
-            };
+            AfterView = new OnAfterViewEventData() { View = view, ViewContext = viewContext, };
         }
 
         public class OnBeforeViewPageEventData
@@ -236,8 +232,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyPage page,
             IProxyViewContext viewContext,
             IProxyActionDescriptor actionDescriptor,
-            IProxyHttpContext httpContext)
-        {
+            IProxyHttpContext httpContext
+        ) {
             BeforeViewPage = new OnBeforeViewPageEventData()
             {
                 Page = page,
@@ -262,8 +258,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyPage page,
             IProxyViewContext viewContext,
             IProxyActionDescriptor actionDescriptor,
-            IProxyHttpContext httpContext)
-        {
+            IProxyHttpContext httpContext
+        ) {
             AfterViewPage = new OnAfterViewPageEventData()
             {
                 Page = page,
@@ -288,8 +284,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual void OnBeforeViewComponent(
             IProxyActionDescriptor actionDescriptor,
             IProxyViewComponentContext viewComponentContext,
-            object viewComponent)
-        {
+            object viewComponent
+        ) {
             BeforeViewComponent = new OnBeforeViewComponentEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -316,8 +312,8 @@ namespace Microsoft.AspNetCore.Mvc
             IProxyActionDescriptor actionDescriptor,
             IProxyViewComponentContext viewComponentContext,
             IProxyViewComponentResult viewComponentResult,
-            object viewComponent)
-        {
+            object viewComponent
+        ) {
             AfterViewComponent = new OnAfterViewComponentEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -342,8 +338,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual void OnViewComponentBeforeViewExecute(
             IProxyActionDescriptor actionDescriptor,
             IProxyViewComponentContext viewComponentContext,
-            IProxyView view)
-        {
+            IProxyView view
+        ) {
             ViewComponentBeforeViewExecute = new OnViewComponentBeforeViewExecuteEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -367,8 +363,8 @@ namespace Microsoft.AspNetCore.Mvc
         public virtual void OnViewComponentAfterViewExecute(
             IProxyActionDescriptor actionDescriptor,
             IProxyViewComponentContext viewComponentContext,
-            IProxyView view)
-        {
+            IProxyView view
+        ) {
             ViewComponentAfterViewExecute = new OnViewComponentAfterViewExecuteEventData()
             {
                 ActionDescriptor = actionDescriptor,
@@ -405,16 +401,18 @@ namespace Microsoft.AspNetCore.Mvc
             string path,
             int position,
             int length,
-            bool isLiteral)
-        {
-            PageInstrumentationData.Add(new BeginPageInstrumentationData
-            {
-                HttpContext = httpContext,
-                Path = path,
-                Position = position,
-                Length = length,
-                IsLiteral = isLiteral,
-            });
+            bool isLiteral
+        ) {
+            PageInstrumentationData.Add(
+                new BeginPageInstrumentationData
+                {
+                    HttpContext = httpContext,
+                    Path = path,
+                    Position = position,
+                    Length = length,
+                    IsLiteral = isLiteral,
+                }
+            );
         }
 
         [DiagnosticName("Microsoft.AspNetCore.Mvc.Razor.EndInstrumentationContext")]
@@ -423,13 +421,11 @@ namespace Microsoft.AspNetCore.Mvc
             string path,
             int position,
             int length,
-            bool isLiteral)
-        {
-            PageInstrumentationData.Add(new EndPageInstrumentationData
-            {
-                HttpContext = httpContext,
-                Path = path,
-            });
+            bool isLiteral
+        ) {
+            PageInstrumentationData.Add(
+                new EndPageInstrumentationData { HttpContext = httpContext, Path = path, }
+            );
         }
     }
 }

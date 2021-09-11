@@ -27,11 +27,15 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
         private IThreadingContext _threadingContext;
         private IRemoteHostClientProvider _remoteClientProvider;
 
-        protected override AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore)
-        {
+        protected override AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        ) {
             if (_optionService == null)
             {
-                var componentModel = (IComponentModel)serviceProvider.GetService(typeof(SComponentModel));
+                var componentModel = (IComponentModel)serviceProvider.GetService(
+                    typeof(SComponentModel)
+                );
 
                 _optionService = componentModel.GetService<IGlobalOptionService>();
                 _threadingContext = componentModel.GetService<IThreadingContext>();
@@ -50,8 +54,11 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             SetLoggers(_optionService, _threadingContext, _remoteClientProvider);
         }
 
-        public static void SetLoggers(IGlobalOptionService optionService, IThreadingContext threadingContext, IRemoteHostClientProvider remoteClientProvider)
-        {
+        public static void SetLoggers(
+            IGlobalOptionService optionService,
+            IThreadingContext threadingContext,
+            IRemoteHostClientProvider remoteClientProvider
+        ) {
             var loggerTypes = GetLoggerTypes(optionService).ToList();
 
             // first set VS options
@@ -62,7 +69,9 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             SetRoslynLogger(loggerTypes, () => new OutputWindowLogger(options));
 
             // second set RemoteHost options
-            var client = threadingContext.JoinableTaskFactory.Run(() => remoteClientProvider.TryGetRemoteHostClientAsync(CancellationToken.None));
+            var client = threadingContext.JoinableTaskFactory.Run(
+                () => remoteClientProvider.TryGetRemoteHostClientAsync(CancellationToken.None)
+            );
             if (client == null)
             {
                 // Remote host is disabled
@@ -71,13 +80,17 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
 
             var functionIds = GetFunctionIds(options).ToList();
 
-            threadingContext.JoinableTaskFactory.Run(() => client.RunRemoteAsync(
-                WellKnownServiceHubService.RemoteHost,
-                nameof(IRemoteHostService.SetLoggingFunctionIds),
-                solution: null,
-                new object[] { loggerTypes, functionIds },
-                callbackTarget: null,
-                CancellationToken.None));
+            threadingContext.JoinableTaskFactory.Run(
+                () =>
+                    client.RunRemoteAsync(
+                        WellKnownServiceHubService.RemoteHost,
+                        nameof(IRemoteHostService.SetLoggingFunctionIds),
+                        solution: null,
+                        new object[] { loggerTypes, functionIds },
+                        callbackTarget: null,
+                        CancellationToken.None
+                    )
+            );
         }
 
         private static IEnumerable<string> GetFunctionIds(Func<FunctionId, bool> options)
@@ -109,11 +122,14 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             }
         }
 
-        private static void SetRoslynLogger<T>(List<string> loggerTypes, Func<T> creator) where T : ILogger
+        private static void SetRoslynLogger<T>(List<string> loggerTypes, Func<T> creator)
+            where T : ILogger
         {
             if (loggerTypes.Contains(typeof(T).Name))
             {
-                Logger.SetLogger(AggregateLogger.AddOrReplace(creator(), Logger.GetLogger(), l => l is T));
+                Logger.SetLogger(
+                    AggregateLogger.AddOrReplace(creator(), Logger.GetLogger(), l => l is T)
+                );
             }
             else
             {

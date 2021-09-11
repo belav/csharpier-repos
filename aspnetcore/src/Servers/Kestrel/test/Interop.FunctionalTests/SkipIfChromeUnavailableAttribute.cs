@@ -10,15 +10,27 @@ namespace Interop.FunctionalTests
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false)]
     public class SkipIfChromeUnavailableAttribute : Attribute, ITestCondition
     {
-        public bool IsMet => string.IsNullOrEmpty(Environment.GetEnvironmentVariable("JENKINS_HOME")) && (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("CI")) || File.Exists(ResolveChromeExecutablePath()));
+        public bool IsMet =>
+            string.IsNullOrEmpty(Environment.GetEnvironmentVariable("JENKINS_HOME"))
+            && (
+                !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("CI"))
+                || File.Exists(ResolveChromeExecutablePath())
+            );
 
-        public string SkipReason => "This is running on Jenkins or Chrome/Chromium is not installed and this is a dev environment.";
+        public string SkipReason =>
+            "This is running on Jenkins or Chrome/Chromium is not installed and this is a dev environment.";
 
         private static string ResolveChromeExecutablePath()
         {
             if (OperatingSystem.IsWindows())
             {
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Google", "Chrome", "Application", "chrome.exe");
+                return Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                    "Google",
+                    "Chrome",
+                    "Application",
+                    "chrome.exe"
+                );
             }
             else if (OperatingSystem.IsLinux())
             {

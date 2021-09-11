@@ -13,21 +13,19 @@ namespace MS.Internal.Xml.Linq.ComponentModel
 {
     internal sealed class XTypeDescriptionProvider<T> : TypeDescriptionProvider
     {
-        public XTypeDescriptionProvider() : base(TypeDescriptor.GetProvider(typeof(T)))
-        {
-        }
+        public XTypeDescriptionProvider() : base(TypeDescriptor.GetProvider(typeof(T))) { }
 
-        public override ICustomTypeDescriptor GetTypeDescriptor([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type, object instance)
-        {
+        public override ICustomTypeDescriptor GetTypeDescriptor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
+            object instance
+        ) {
             return new XTypeDescriptor<T>(base.GetTypeDescriptor(type, instance));
         }
     }
 
     internal sealed class XTypeDescriptor<T> : CustomTypeDescriptor
     {
-        public XTypeDescriptor(ICustomTypeDescriptor parent) : base(parent)
-        {
-        }
+        public XTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) { }
 
         [RequiresUnreferencedCode(PropertyDescriptor.PropertyDescriptorPropertyTypeMessage)]
         public override PropertyDescriptorCollection GetProperties()
@@ -35,7 +33,11 @@ namespace MS.Internal.Xml.Linq.ComponentModel
             return GetProperties(null);
         }
 
-        [RequiresUnreferencedCode(PropertyDescriptor.PropertyDescriptorPropertyTypeMessage + " " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
+        [RequiresUnreferencedCode(
+            PropertyDescriptor.PropertyDescriptorPropertyTypeMessage
+                + " "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
         public override PropertyDescriptorCollection GetProperties(Attribute[] attributes)
         {
             PropertyDescriptorCollection properties = new PropertyDescriptorCollection(null);
@@ -65,9 +67,7 @@ namespace MS.Internal.Xml.Linq.ComponentModel
 
     internal abstract class XPropertyDescriptor<T, TProperty> : PropertyDescriptor where T : XObject
     {
-        public XPropertyDescriptor(string name) : base(name, null)
-        {
-        }
+        public XPropertyDescriptor(string name) : base(name, null) { }
 
         public override Type ComponentType
         {
@@ -119,40 +119,35 @@ namespace MS.Internal.Xml.Linq.ComponentModel
             }
         }
 
-        public override void ResetValue(object component)
-        {
-        }
+        public override void ResetValue(object component) { }
 
-        public override void SetValue(object component, object value)
-        {
-        }
+        public override void SetValue(object component, object value) { }
 
         public override bool ShouldSerializeValue(object component)
         {
             return false;
         }
 
-        protected virtual void OnChanged(object sender, XObjectChangeEventArgs args)
-        {
-        }
+        protected virtual void OnChanged(object sender, XObjectChangeEventArgs args) { }
 
-        protected virtual void OnChanging(object sender, XObjectChangeEventArgs args)
-        {
-        }
+        protected virtual void OnChanging(object sender, XObjectChangeEventArgs args) { }
     }
 
-    internal sealed class XElementAttributePropertyDescriptor : XPropertyDescriptor<XElement, object>
+    internal sealed class XElementAttributePropertyDescriptor
+        : XPropertyDescriptor<XElement, object>
     {
         private XDeferredSingleton<XAttribute> _value;
         private XAttribute _changeState;
 
-        public XElementAttributePropertyDescriptor() : base("Attribute")
-        {
-        }
+        public XElementAttributePropertyDescriptor() : base("Attribute") { }
 
         public override object GetValue(object component)
         {
-            return _value = new XDeferredSingleton<XAttribute>((e, n) => e.Attribute(n), component as XElement, null);
+            return _value = new XDeferredSingleton<XAttribute>(
+                (e, n) => e.Attribute(n),
+                component as XElement,
+                null
+            );
         }
 
         protected override void OnChanged(object sender, XObjectChangeEventArgs args)
@@ -187,24 +182,28 @@ namespace MS.Internal.Xml.Linq.ComponentModel
             {
                 case XObjectChange.Remove:
                     XAttribute a = sender as XAttribute;
-                    _changeState = a != null && _value.element == a.Parent && _value.name == a.Name ? a : null;
+                    _changeState =
+                        a != null && _value.element == a.Parent && _value.name == a.Name ? a : null;
                     break;
             }
         }
     }
 
-    internal sealed class XElementDescendantsPropertyDescriptor : XPropertyDescriptor<XElement, IEnumerable<XElement>>
+    internal sealed class XElementDescendantsPropertyDescriptor
+        : XPropertyDescriptor<XElement, IEnumerable<XElement>>
     {
         private XDeferredAxis<XElement> _value;
         private XName _changeState;
 
-        public XElementDescendantsPropertyDescriptor() : base("Descendants")
-        {
-        }
+        public XElementDescendantsPropertyDescriptor() : base("Descendants") { }
 
         public override object GetValue(object component)
         {
-            return _value = new XDeferredAxis<XElement>((e, n) => n != null ? e.Descendants(n) : e.Descendants(), component as XElement, null);
+            return _value = new XDeferredAxis<XElement>(
+                (e, n) => n != null ? e.Descendants(n) : e.Descendants(),
+                component as XElement,
+                null
+            );
         }
 
         protected override void OnChanged(object sender, XObjectChangeEventArgs args)
@@ -223,8 +222,12 @@ namespace MS.Internal.Xml.Linq.ComponentModel
                     break;
                 case XObjectChange.Name:
                     e = sender as XElement;
-                    if (e != null && _value.element != e && _value.name != null && (_value.name == e.Name || _value.name == _changeState))
-                    {
+                    if (
+                        e != null
+                        && _value.element != e
+                        && _value.name != null
+                        && (_value.name == e.Name || _value.name == _changeState)
+                    ) {
                         _changeState = null;
                         OnValueChanged(_value.element, EventArgs.Empty);
                     }
@@ -251,13 +254,15 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         private XDeferredSingleton<XElement> _value;
         private XElement _changeState;
 
-        public XElementElementPropertyDescriptor() : base("Element")
-        {
-        }
+        public XElementElementPropertyDescriptor() : base("Element") { }
 
         public override object GetValue(object component)
         {
-            return _value = new XDeferredSingleton<XElement>((e, n) => e.Element(n), component as XElement, null);
+            return _value = new XDeferredSingleton<XElement>(
+                (e, n) => e.Element(n),
+                component as XElement,
+                null
+            );
         }
 
         protected override void OnChanged(object sender, XObjectChangeEventArgs args)
@@ -268,8 +273,12 @@ namespace MS.Internal.Xml.Linq.ComponentModel
             {
                 case XObjectChange.Add:
                     XElement e = sender as XElement;
-                    if (e != null && _value.element == e.Parent && _value.name == e.Name && _value.element.Element(_value.name) == e)
-                    {
+                    if (
+                        e != null
+                        && _value.element == e.Parent
+                        && _value.name == e.Name
+                        && _value.element.Element(_value.name) == e
+                    ) {
                         OnValueChanged(_value.element, EventArgs.Empty);
                     }
                     break;
@@ -285,8 +294,11 @@ namespace MS.Internal.Xml.Linq.ComponentModel
                     e = sender as XElement;
                     if (e != null)
                     {
-                        if (_value.element == e.Parent && _value.name == e.Name && _value.element.Element(_value.name) == e)
-                        {
+                        if (
+                            _value.element == e.Parent
+                            && _value.name == e.Name
+                            && _value.element.Element(_value.name) == e
+                        ) {
                             OnValueChanged(_value.element, EventArgs.Empty);
                         }
                         else if (_changeState == e)
@@ -308,24 +320,33 @@ namespace MS.Internal.Xml.Linq.ComponentModel
                 case XObjectChange.Remove:
                 case XObjectChange.Name:
                     XElement e = sender as XElement;
-                    _changeState = e != null && _value.element == e.Parent && _value.name == e.Name && _value.element.Element(_value.name) == e ? e : null;
+                    _changeState =
+                        e != null
+                        && _value.element == e.Parent
+                        && _value.name == e.Name
+                        && _value.element.Element(_value.name) == e
+                            ? e
+                            : null;
                     break;
             }
         }
     }
 
-    internal sealed class XElementElementsPropertyDescriptor : XPropertyDescriptor<XElement, IEnumerable<XElement>>
+    internal sealed class XElementElementsPropertyDescriptor
+        : XPropertyDescriptor<XElement, IEnumerable<XElement>>
     {
         private XDeferredAxis<XElement> _value;
         private object _changeState;
 
-        public XElementElementsPropertyDescriptor() : base("Elements")
-        {
-        }
+        public XElementElementsPropertyDescriptor() : base("Elements") { }
 
         public override object GetValue(object component)
         {
-            return _value = new XDeferredAxis<XElement>((e, n) => n != null ? e.Elements(n) : e.Elements(), component as XElement, null);
+            return _value = new XDeferredAxis<XElement>(
+                (e, n) => n != null ? e.Elements(n) : e.Elements(),
+                component as XElement,
+                null
+            );
         }
 
         protected override void OnChanged(object sender, XObjectChangeEventArgs args)
@@ -336,23 +357,33 @@ namespace MS.Internal.Xml.Linq.ComponentModel
             {
                 case XObjectChange.Add:
                     XElement e = sender as XElement;
-                    if (e != null && _value.element == e.Parent && (_value.name == e.Name || _value.name == null))
-                    {
+                    if (
+                        e != null
+                        && _value.element == e.Parent
+                        && (_value.name == e.Name || _value.name == null)
+                    ) {
                         OnValueChanged(_value.element, EventArgs.Empty);
                     }
                     break;
                 case XObjectChange.Remove:
                     e = sender as XElement;
-                    if (e != null && _value.element == (_changeState as XContainer) && (_value.name == e.Name || _value.name == null))
-                    {
+                    if (
+                        e != null
+                        && _value.element == (_changeState as XContainer)
+                        && (_value.name == e.Name || _value.name == null)
+                    ) {
                         _changeState = null;
                         OnValueChanged(_value.element, EventArgs.Empty);
                     }
                     break;
                 case XObjectChange.Name:
                     e = sender as XElement;
-                    if (e != null && _value.element == e.Parent && _value.name != null && (_value.name == e.Name || _value.name == (_changeState as XName)))
-                    {
+                    if (
+                        e != null
+                        && _value.element == e.Parent
+                        && _value.name != null
+                        && (_value.name == e.Name || _value.name == (_changeState as XName))
+                    ) {
                         _changeState = null;
                         OnValueChanged(_value.element, EventArgs.Empty);
                     }
@@ -382,9 +413,7 @@ namespace MS.Internal.Xml.Linq.ComponentModel
     {
         private XElement _element;
 
-        public XElementValuePropertyDescriptor() : base("Value")
-        {
-        }
+        public XElementValuePropertyDescriptor() : base("Value") { }
 
         public override bool IsReadOnly
         {
@@ -434,9 +463,7 @@ namespace MS.Internal.Xml.Linq.ComponentModel
     {
         private XElement _element;
 
-        public XElementXmlPropertyDescriptor() : base("Xml")
-        {
-        }
+        public XElementXmlPropertyDescriptor() : base("Xml") { }
 
         public override object GetValue(object component)
         {
@@ -454,13 +481,12 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         }
     }
 
-    internal sealed class XAttributeValuePropertyDescriptor : XPropertyDescriptor<XAttribute, string>
+    internal sealed class XAttributeValuePropertyDescriptor
+        : XPropertyDescriptor<XAttribute, string>
     {
         private XAttribute _attribute;
 
-        public XAttributeValuePropertyDescriptor() : base("Value")
-        {
-        }
+        public XAttributeValuePropertyDescriptor() : base("Value") { }
 
         public override bool IsReadOnly
         {
@@ -500,8 +526,11 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         internal XElement element;
         internal XName name;
 
-        public XDeferredAxis(Func<XElement, XName, IEnumerable<T>> func, XElement element, XName name)
-        {
+        public XDeferredAxis(
+            Func<XElement, XName, IEnumerable<T>> func,
+            XElement element,
+            XName name
+        ) {
             if (func == null)
                 throw new ArgumentNullException(nameof(func));
             if (element == null)

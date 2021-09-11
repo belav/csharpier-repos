@@ -16,18 +16,16 @@ namespace Microsoft.Extensions.Logging.Testing
         private readonly LogLevel _minLevel;
         private readonly DateTimeOffset? _logStart;
 
-        public XunitLoggerProvider(ITestOutputHelper output)
-            : this(output, LogLevel.Trace)
-        {
-        }
+        public XunitLoggerProvider(ITestOutputHelper output) : this(output, LogLevel.Trace) { }
 
         public XunitLoggerProvider(ITestOutputHelper output, LogLevel minLevel)
-            : this(output, minLevel, null)
-        {
-        }
+            : this(output, minLevel, null) { }
 
-        public XunitLoggerProvider(ITestOutputHelper output, LogLevel minLevel, DateTimeOffset? logStart)
-        {
+        public XunitLoggerProvider(
+            ITestOutputHelper output,
+            LogLevel minLevel,
+            DateTimeOffset? logStart
+        ) {
             _output = output;
             _minLevel = minLevel;
             _logStart = logStart;
@@ -38,9 +36,7 @@ namespace Microsoft.Extensions.Logging.Testing
             return new XunitLogger(_output, categoryName, _minLevel, _logStart);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class XunitLogger : ILogger
@@ -51,8 +47,12 @@ namespace Microsoft.Extensions.Logging.Testing
         private readonly ITestOutputHelper _output;
         private DateTimeOffset? _logStart;
 
-        public XunitLogger(ITestOutputHelper output, string category, LogLevel minLogLevel, DateTimeOffset? logStart)
-        {
+        public XunitLogger(
+            ITestOutputHelper output,
+            string category,
+            LogLevel minLogLevel,
+            DateTimeOffset? logStart
+        ) {
             _minLogLevel = minLogLevel;
             _category = category;
             _output = output;
@@ -60,8 +60,12 @@ namespace Microsoft.Extensions.Logging.Testing
         }
 
         public void Log<TState>(
-            LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-        {
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        ) {
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -70,12 +74,13 @@ namespace Microsoft.Extensions.Logging.Testing
             // Buffer the message into a single string in order to avoid shearing the message when running across multiple threads.
             var messageBuilder = new StringBuilder();
 
-            var timestamp = _logStart.HasValue ?
-                $"{(DateTimeOffset.UtcNow - _logStart.Value).TotalSeconds.ToString("N3", CultureInfo.InvariantCulture)}s" :
-                DateTimeOffset.UtcNow.ToString("s", CultureInfo.InvariantCulture);
+            var timestamp = _logStart.HasValue
+                ? $"{(DateTimeOffset.UtcNow - _logStart.Value).TotalSeconds.ToString("N3", CultureInfo.InvariantCulture)}s"
+                : DateTimeOffset.UtcNow.ToString("s", CultureInfo.InvariantCulture);
 
             var firstLinePrefix = $"| [{timestamp}] {_category} {logLevel}: ";
-            var lines = formatter(state, exception).Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+            var lines = formatter(state, exception)
+                .Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
             messageBuilder.AppendLine(firstLinePrefix + lines.FirstOrDefault() ?? string.Empty);
 
             var additionalLinePrefix = "|" + new string(' ', firstLinePrefix.Length - 1);
@@ -86,7 +91,8 @@ namespace Microsoft.Extensions.Logging.Testing
 
             if (exception != null)
             {
-                lines = exception.ToString().Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
+                lines = exception.ToString()
+                    .Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
                 additionalLinePrefix = "| ";
                 foreach (var line in lines)
                 {
@@ -114,17 +120,13 @@ namespace Microsoft.Extensions.Logging.Testing
             }
         }
 
-        public bool IsEnabled(LogLevel logLevel)
-            => logLevel >= _minLogLevel;
+        public bool IsEnabled(LogLevel logLevel) => logLevel >= _minLogLevel;
 
-        public IDisposable BeginScope<TState>(TState state)
-            => new NullScope();
+        public IDisposable BeginScope<TState>(TState state) => new NullScope();
 
         private class NullScope : IDisposable
         {
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

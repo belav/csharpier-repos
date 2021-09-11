@@ -9,10 +9,10 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public sealed class SourceGeneratedDocument : Document
     {
-        internal SourceGeneratedDocument(Project project, SourceGeneratedDocumentState state)
-            : base(project, state)
-        {
-        }
+        internal SourceGeneratedDocument(
+            Project project,
+            SourceGeneratedDocumentState state
+        ) : base(project, state) { }
 
         private new SourceGeneratedDocumentState State => (SourceGeneratedDocumentState)base.State;
 

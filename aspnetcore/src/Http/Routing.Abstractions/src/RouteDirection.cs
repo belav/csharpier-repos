@@ -12,7 +12,6 @@ namespace Microsoft.AspNetCore.Routing
         /// A URL from a client is being processed.
         /// </summary>
         IncomingRequest,
-
         /// <summary>
         /// A URL is being created based on the route definition.
         /// </summary>

@@ -25,9 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public ScopedLoggerFactory(
-            ILoggerFactory loggerFactory,
-            bool dispose)
+        public ScopedLoggerFactory(ILoggerFactory loggerFactory, bool dispose)
         {
             _underlyingFactory = loggerFactory;
             _dispose = dispose;
@@ -41,11 +39,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         /// </summary>
         public static ScopedLoggerFactory Create(
             IServiceProvider internalServiceProvider,
-            IDbContextOptions? contextOptions)
-        {
-            var coreOptions
-                = (contextOptions ?? internalServiceProvider.GetService<IDbContextOptions>())
-                ?.FindExtension<CoreOptionsExtension>();
+            IDbContextOptions? contextOptions
+        ) {
+            var coreOptions = (
+                contextOptions ?? internalServiceProvider.GetService<IDbContextOptions>()
+            )?.FindExtension<CoreOptionsExtension>();
 
             if (coreOptions != null)
             {
@@ -55,9 +53,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 }
 
                 var applicationServiceProvider = coreOptions.ApplicationServiceProvider;
-                if (applicationServiceProvider != null
-                    && applicationServiceProvider != internalServiceProvider)
-                {
+                if (
+                    applicationServiceProvider != null
+                    && applicationServiceProvider != internalServiceProvider
+                ) {
                     var loggerFactory = applicationServiceProvider.GetService<ILoggerFactory>();
                     if (loggerFactory != null)
                     {
@@ -89,8 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ILogger CreateLogger(string categoryName)
-            => _underlyingFactory.CreateLogger(categoryName);
+        public virtual ILogger CreateLogger(string categoryName) =>
+            _underlyingFactory.CreateLogger(categoryName);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -98,7 +97,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void AddProvider(ILoggerProvider provider)
-            => _underlyingFactory.AddProvider(provider);
+        public virtual void AddProvider(ILoggerProvider provider) =>
+            _underlyingFactory.AddProvider(provider);
     }
 }

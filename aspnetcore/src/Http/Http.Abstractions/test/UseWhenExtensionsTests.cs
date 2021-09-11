@@ -33,15 +33,21 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             var context = CreateContext();
             var parent = CreateBuilder();
 
-            parent.UseWhen(TruePredicate, child =>
-            {
-                child.UseWhen(TruePredicate, grandchild =>
+            parent.UseWhen(
+                TruePredicate,
+                child =>
                 {
-                    grandchild.Use(Increment("grandchild"));
-                });
+                    child.UseWhen(
+                        TruePredicate,
+                        grandchild =>
+                        {
+                            grandchild.Use(Increment("grandchild"));
+                        }
+                    );
 
-                child.Use(Increment("child"));
-            });
+                    child.Use(Increment("child"));
+                }
+            );
 
             parent.Use(Increment("parent"));
 
@@ -61,15 +67,21 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             var context = CreateContext();
             var parent = CreateBuilder();
 
-            parent.UseWhen(TruePredicate, child =>
-            {
-                child.UseWhen(TruePredicate, grandchild =>
+            parent.UseWhen(
+                TruePredicate,
+                child =>
                 {
-                    grandchild.Use(Increment("grandchild", terminate: true));
-                });
+                    child.UseWhen(
+                        TruePredicate,
+                        grandchild =>
+                        {
+                            grandchild.Use(Increment("grandchild", terminate: true));
+                        }
+                    );
 
-                child.Use(Increment("child"));
-            });
+                    child.Use(Increment("child"));
+                }
+            );
 
             parent.Use(Increment("parent"));
 
@@ -89,10 +101,13 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             var context = CreateContext();
             var parent = CreateBuilder();
 
-            parent.UseWhen(FalsePredicate, child =>
-            {
-                child.Use(Increment("child"));
-            });
+            parent.UseWhen(
+                FalsePredicate,
+                child =>
+                {
+                    child.Use(Increment("child"));
+                }
+            );
 
             parent.Use(Increment("parent"));
 
@@ -124,8 +139,10 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             return false;
         }
 
-        private static Func<HttpContext, Func<Task>, Task> Increment(string key, bool terminate = false)
-        {
+        private static Func<HttpContext, Func<Task>, Task> Increment(
+            string key,
+            bool terminate = false
+        ) {
             return (context, next) =>
             {
                 if (!context.Items.ContainsKey(key))

@@ -5,8 +5,12 @@ namespace System.Diagnostics
 {
     public partial class DebugProvider
     {
-        public static void FailCore(string stackTrace, string? message, string? detailMessage, string errorSource)
-        {
+        public static void FailCore(
+            string stackTrace,
+            string? message,
+            string? detailMessage,
+            string errorSource
+        ) {
             if (s_FailCore != null)
             {
                 s_FailCore(stackTrace, message, detailMessage, errorSource);
@@ -22,7 +26,11 @@ namespace System.Diagnostics
                 // In Core, we do not show a dialog.
                 // Fail in order to avoid anyone catching an exception and masking
                 // an assert failure.
-                DebugAssertException ex = new DebugAssertException(message, detailMessage, stackTrace);
+                DebugAssertException ex = new DebugAssertException(
+                    message,
+                    detailMessage,
+                    stackTrace
+                );
                 Environment.FailFast(ex.Message, ex, errorSource);
             }
         }
@@ -52,8 +60,11 @@ namespace System.Diagnostics
                 else
                 {
                     int offset;
-                    for (offset = 0; offset < message.Length - WriteChunkLength; offset += WriteChunkLength)
-                    {
+                    for (
+                        offset = 0;
+                        offset < message.Length - WriteChunkLength;
+                        offset += WriteChunkLength
+                    ) {
                         WriteToDebugger(message.Substring(offset, WriteChunkLength));
                     }
                     WriteToDebugger(message.Substring(offset));

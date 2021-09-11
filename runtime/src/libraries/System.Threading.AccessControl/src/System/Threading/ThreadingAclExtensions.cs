@@ -13,11 +13,18 @@ namespace System.Threading
     {
         public static EventWaitHandleSecurity GetAccessControl(this EventWaitHandle handle)
         {
-            return new EventWaitHandleSecurity(handle.GetSafeWaitHandle(), AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group);
+            return new EventWaitHandleSecurity(
+                handle.GetSafeWaitHandle(),
+                AccessControlSections.Access
+                    | AccessControlSections.Owner
+                    | AccessControlSections.Group
+            );
         }
 
-        public static void SetAccessControl(this EventWaitHandle handle, EventWaitHandleSecurity eventSecurity)
-        {
+        public static void SetAccessControl(
+            this EventWaitHandle handle,
+            EventWaitHandleSecurity eventSecurity
+        ) {
             if (eventSecurity == null)
                 throw new ArgumentNullException(nameof(eventSecurity));
 
@@ -26,7 +33,12 @@ namespace System.Threading
 
         public static MutexSecurity GetAccessControl(this Mutex mutex)
         {
-            return new MutexSecurity(mutex.GetSafeWaitHandle(), AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group);
+            return new MutexSecurity(
+                mutex.GetSafeWaitHandle(),
+                AccessControlSections.Access
+                    | AccessControlSections.Owner
+                    | AccessControlSections.Group
+            );
         }
 
         public static void SetAccessControl(this Mutex mutex, MutexSecurity mutexSecurity)
@@ -39,11 +51,18 @@ namespace System.Threading
 
         public static SemaphoreSecurity GetAccessControl(this Semaphore semaphore)
         {
-            return new SemaphoreSecurity(semaphore.GetSafeWaitHandle(), AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group);
+            return new SemaphoreSecurity(
+                semaphore.GetSafeWaitHandle(),
+                AccessControlSections.Access
+                    | AccessControlSections.Owner
+                    | AccessControlSections.Group
+            );
         }
 
-        public static void SetAccessControl(this Semaphore semaphore, SemaphoreSecurity semaphoreSecurity)
-        {
+        public static void SetAccessControl(
+            this Semaphore semaphore,
+            SemaphoreSecurity semaphoreSecurity
+        ) {
             if (semaphoreSecurity == null)
                 throw new ArgumentNullException(nameof(semaphoreSecurity));
 

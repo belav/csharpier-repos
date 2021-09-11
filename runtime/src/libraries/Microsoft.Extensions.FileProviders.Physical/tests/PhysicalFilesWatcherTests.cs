@@ -22,12 +22,21 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
         {
             using (var root = new DisposableFileSystem())
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.RootPath))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
-            {
-                var token = physicalFilesWatcher.CreateFileChangeToken(Path.GetFullPath(Path.Combine(root.RootPath, "..")));
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.RootPath + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: false
+                )
+            ) {
+                var token = physicalFilesWatcher.CreateFileChangeToken(
+                    Path.GetFullPath(Path.Combine(root.RootPath, ".."))
+                );
                 Assert.IsType<NullChangeToken>(token);
 
-                token = physicalFilesWatcher.CreateFileChangeToken(Path.GetFullPath(Path.Combine(root.RootPath, "../")));
+                token = physicalFilesWatcher.CreateFileChangeToken(
+                    Path.GetFullPath(Path.Combine(root.RootPath, "../"))
+                );
                 Assert.IsType<NullChangeToken>(token);
 
                 token = physicalFilesWatcher.CreateFileChangeToken("..");
@@ -36,22 +45,46 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public async Task HandlesOnRenamedEventsThatMatchRootPath()
         {
             using (var root = new DisposableFileSystem())
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.RootPath))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
-            {
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.RootPath + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: false
+                )
+            ) {
                 var token = physicalFilesWatcher.CreateFileChangeToken("**");
                 var called = false;
                 token.RegisterChangeCallback(o => called = true, null);
 
-                fileSystemWatcher.CallOnRenamed(new RenamedEventArgs(WatcherChangeTypes.Renamed, root.RootPath, string.Empty, string.Empty));
+                fileSystemWatcher.CallOnRenamed(
+                    new RenamedEventArgs(
+                        WatcherChangeTypes.Renamed,
+                        root.RootPath,
+                        string.Empty,
+                        string.Empty
+                    )
+                );
                 await Task.Delay(WaitTimeForTokenToFire).ConfigureAwait(false);
                 Assert.False(called, "Callback should not have been triggered");
 
-                fileSystemWatcher.CallOnRenamed(new RenamedEventArgs(WatcherChangeTypes.Renamed, root.RootPath, "old.txt", "new.txt"));
+                fileSystemWatcher.CallOnRenamed(
+                    new RenamedEventArgs(
+                        WatcherChangeTypes.Renamed,
+                        root.RootPath,
+                        "old.txt",
+                        "new.txt"
+                    )
+                );
                 await Task.Delay(WaitTimeForTokenToFire).ConfigureAwait(false);
                 Assert.True(called, "Callback should have been triggered");
             }
@@ -66,7 +99,12 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             var cts3 = new CancellationTokenSource();
 
             var token1 = new TestPollingChangeToken { Id = 1, CancellationTokenSource = cts1 };
-            var token2 = new TestPollingChangeToken { Id = 2, HasChanged = true, CancellationTokenSource = cts2 };
+            var token2 = new TestPollingChangeToken
+            {
+                Id = 2,
+                HasChanged = true,
+                CancellationTokenSource = cts2
+            };
             var token3 = new TestPollingChangeToken { Id = 3, CancellationTokenSource = cts3 };
 
             var tokens = new ConcurrentDictionary<IPollingChangeToken, IPollingChangeToken>
@@ -85,7 +123,10 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             Assert.True(cts2.IsCancellationRequested);
 
             // Ensure token2 is removed from the collection.
-            Assert.Equal(new[] { token1, token3, }, tokens.Keys.OfType<TestPollingChangeToken>().OrderBy(t => t.Id));
+            Assert.Equal(
+                new[] { token1, token3, },
+                tokens.Keys.OfType<TestPollingChangeToken>().OrderBy(t => t.Id)
+            );
         }
 
         [Fact]
@@ -98,11 +139,26 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             var cts4 = new CancellationTokenSource();
             var cts5 = new CancellationTokenSource();
 
-            var token1 = new TestPollingChangeToken { Id = 1, HasChanged = true, CancellationTokenSource = cts1 };
+            var token1 = new TestPollingChangeToken
+            {
+                Id = 1,
+                HasChanged = true,
+                CancellationTokenSource = cts1
+            };
             var token2 = new TestPollingChangeToken { Id = 2, CancellationTokenSource = cts2 };
             var token3 = new TestPollingChangeToken { Id = 3, CancellationTokenSource = cts3 };
-            var token4 = new TestPollingChangeToken { Id = 4, HasChanged = true, CancellationTokenSource = cts4 };
-            var token5 = new TestPollingChangeToken { Id = 5, HasChanged = true, CancellationTokenSource = cts5 };
+            var token4 = new TestPollingChangeToken
+            {
+                Id = 4,
+                HasChanged = true,
+                CancellationTokenSource = cts4
+            };
+            var token5 = new TestPollingChangeToken
+            {
+                Id = 5,
+                HasChanged = true,
+                CancellationTokenSource = cts5
+            };
 
             var tokens = new ConcurrentDictionary<IPollingChangeToken, IPollingChangeToken>
             {
@@ -125,7 +181,10 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             Assert.True(cts5.IsCancellationRequested);
 
             // Ensure changed tokens are removed
-            Assert.Equal(new[] { token2, token3, }, tokens.Keys.OfType<TestPollingChangeToken>().OrderBy(t => t.Id));
+            Assert.Equal(
+                new[] { token2, token3, },
+                tokens.Keys.OfType<TestPollingChangeToken>().OrderBy(t => t.Id)
+            );
         }
 
         [Fact]
@@ -133,8 +192,13 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
         {
             using (var root = new DisposableFileSystem())
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.RootPath))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: true))
-            {
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.RootPath + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: true
+                )
+            ) {
                 physicalFilesWatcher.UseActivePolling = true;
 
                 var changeToken = physicalFilesWatcher.GetOrAddFilePathChangeToken("some-path");
@@ -148,7 +212,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                         var pollingChangeToken = Assert.IsType<PollingFileChangeToken>(token);
                         Assert.NotNull(pollingChangeToken.CancellationTokenSource);
                         Assert.True(pollingChangeToken.ActiveChangeCallbacks);
-                    });
+                    }
+                );
 
                 Assert.NotEmpty(physicalFilesWatcher.PollingChangeTokens);
             }
@@ -159,8 +224,13 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
         {
             using (var root = new DisposableFileSystem())
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.RootPath))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: true))
-            {
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.RootPath + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: true
+                )
+            ) {
                 var changeToken = physicalFilesWatcher.GetOrAddFilePathChangeToken("some-path");
 
                 var compositeChangeToken = Assert.IsType<CompositeChangeToken>(changeToken);
@@ -172,7 +242,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                         var pollingChangeToken = Assert.IsType<PollingFileChangeToken>(token);
                         Assert.Null(pollingChangeToken.CancellationTokenSource);
                         Assert.False(pollingChangeToken.ActiveChangeCallbacks);
-                    });
+                    }
+                );
 
                 Assert.Empty(physicalFilesWatcher.PollingChangeTokens);
             }
@@ -183,8 +254,13 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
         {
             using (var root = new DisposableFileSystem())
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.RootPath))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
-            {
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.RootPath + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: false
+                )
+            ) {
                 var changeToken = physicalFilesWatcher.GetOrAddFilePathChangeToken("some-path");
 
                 Assert.IsType<CancellationChangeToken>(changeToken);
@@ -197,8 +273,13 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
         {
             using (var root = new DisposableFileSystem())
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.RootPath))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.RootPath + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: true))
-            {
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.RootPath + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: true
+                )
+            ) {
                 physicalFilesWatcher.UseActivePolling = true;
 
                 var changeToken = physicalFilesWatcher.GetOrAddWildcardChangeToken("*.cshtml");
@@ -212,7 +293,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                         var pollingChangeToken = Assert.IsType<PollingWildCardChangeToken>(token);
                         Assert.NotNull(pollingChangeToken.CancellationTokenSource);
                         Assert.True(pollingChangeToken.ActiveChangeCallbacks);
-                    });
+                    }
+                );
 
                 Assert.NotEmpty(physicalFilesWatcher.PollingChangeTokens);
             }

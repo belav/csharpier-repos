@@ -16,37 +16,43 @@ namespace SampleStartups
     {
         public static Task Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
+            var config = new ConfigurationBuilder().AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .AddJsonFile("hosting.json", optional: true)
                 .AddCommandLine(args)
                 .Build();
 
-            var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseConfiguration(config) // Default set of configurations to use, may be subsequently overridden 
-                        .UseKestrel()
-                        .UseContentRoot(Directory.GetCurrentDirectory()) // Override the content root with the current directory
-                        .UseUrls("http://*:1000", "https://*:902")
-                        .UseEnvironment(Environments.Development)
-                        .UseWebRoot("public")
-                        .Configure(app =>
-                        {
-                            // Write the application inline, this won't call any startup class in the assembly
+            var host = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseConfiguration(config) // Default set of configurations to use, may be subsequently overridden
+                            .UseKestrel()
+                            .UseContentRoot(Directory.GetCurrentDirectory()) // Override the content root with the current directory
+                            .UseUrls("http://*:1000", "https://*:902")
+                            .UseEnvironment(Environments.Development)
+                            .UseWebRoot("public")
+                            .Configure(
+                                app =>
+                                {
+                                    // Write the application inline, this won't call any startup class in the assembly
 
-                            app.Use(next => context =>
-                            {
-                                return next(context);
-                            });
-                        });
-                })
-                .ConfigureServices(services =>
-                {
-                    // Configure services that the application can see
-                    services.AddSingleton<IMyCustomService, MyCustomService>();
-                })
+                                    app.Use(
+                                        next =>
+                                            context =>
+                                            {
+                                                return next(context);
+                                            }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .ConfigureServices(
+                    services =>
+                    {
+                        // Configure services that the application can see
+                        services.AddSingleton<IMyCustomService, MyCustomService>();
+                    }
+                )
                 .Build();
 
             return host.RunAsync();

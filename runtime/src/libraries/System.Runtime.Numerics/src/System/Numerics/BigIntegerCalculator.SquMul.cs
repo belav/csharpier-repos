@@ -17,10 +17,11 @@ namespace System.Numerics
 
             uint[] bits = new uint[value.Length + value.Length];
 
-            fixed (uint* v = value, b = bits)
-            {
-                Square(v, value.Length,
-                       b, bits.Length);
+            fixed (
+                uint* v = value,
+                    b = bits
+            ) {
+                Square(v, value.Length, b, bits.Length);
             }
 
             return bits;
@@ -30,8 +31,7 @@ namespace System.Numerics
         private static int SquareThreshold = 32;
         private static int AllocationThreshold = 256;
 
-        private static unsafe void Square(uint* value, int valueLength,
-                                          uint* bits, int bitsLength)
+        private static unsafe void Square(uint* value, int valueLength, uint* bits, int bitsLength)
         {
             Debug.Assert(valueLength >= 0);
             Debug.Assert(bitsLength == valueLength + valueLength);
@@ -104,12 +104,10 @@ namespace System.Numerics
                 int bitsHighLength = bitsLength - n2;
 
                 // ... compute z_0 = a_0 * a_0 (squaring again!)
-                Square(valueLow, valueLowLength,
-                       bitsLow, bitsLowLength);
+                Square(valueLow, valueLowLength, bitsLow, bitsLowLength);
 
                 // ... compute z_2 = a_1 * a_1 (squaring again!)
-                Square(valueHigh, valueHighLength,
-                       bitsHigh, bitsHighLength);
+                Square(valueHigh, valueHighLength, bitsHigh, bitsHighLength);
 
                 int foldLength = valueHighLength + 1;
                 int coreLength = foldLength + foldLength;
@@ -122,36 +120,41 @@ namespace System.Numerics
                     new Span<uint>(core, coreLength).Clear();
 
                     // ... compute z_a = a_1 + a_0 (call it fold...)
-                    Add(valueHigh, valueHighLength,
-                        valueLow, valueLowLength,
-                        fold, foldLength);
+                    Add(valueHigh, valueHighLength, valueLow, valueLowLength, fold, foldLength);
 
                     // ... compute z_1 = z_a * z_a - z_0 - z_2
-                    Square(fold, foldLength,
-                           core, coreLength);
-                    SubtractCore(bitsHigh, bitsHighLength,
-                                 bitsLow, bitsLowLength,
-                                 core, coreLength);
+                    Square(fold, foldLength, core, coreLength);
+                    SubtractCore(
+                        bitsHigh,
+                        bitsHighLength,
+                        bitsLow,
+                        bitsLowLength,
+                        core,
+                        coreLength
+                    );
 
                     // ... and finally merge the result! :-)
                     AddSelf(bits + n, bitsLength - n, core, coreLength);
                 }
                 else
                 {
-                    fixed (uint* fold = new uint[foldLength],
-                                 core = new uint[coreLength])
-                    {
+                    fixed (
+                        uint* fold = new uint[foldLength],
+                            core = new uint[coreLength]
+                    ) {
                         // ... compute z_a = a_1 + a_0 (call it fold...)
-                        Add(valueHigh, valueHighLength,
-                            valueLow, valueLowLength,
-                            fold, foldLength);
+                        Add(valueHigh, valueHighLength, valueLow, valueLowLength, fold, foldLength);
 
                         // ... compute z_1 = z_a * z_a - z_0 - z_2
-                        Square(fold, foldLength,
-                               core, coreLength);
-                        SubtractCore(bitsHigh, bitsHighLength,
-                                     bitsLow, bitsLowLength,
-                                     core, coreLength);
+                        Square(fold, foldLength, core, coreLength);
+                        SubtractCore(
+                            bitsHigh,
+                            bitsHighLength,
+                            bitsLow,
+                            bitsLowLength,
+                            core,
+                            coreLength
+                        );
 
                         // ... and finally merge the result! :-)
                         AddSelf(bits + n, bitsLength - n, core, coreLength);
@@ -195,11 +198,12 @@ namespace System.Numerics
 
             uint[] bits = new uint[left.Length + right.Length];
 
-            fixed (uint* l = left, r = right, b = bits)
-            {
-                Multiply(l, left.Length,
-                         r, right.Length,
-                         b, bits.Length);
+            fixed (
+                uint* l = left,
+                    r = right,
+                    b = bits
+            ) {
+                Multiply(l, left.Length, r, right.Length, b, bits.Length);
             }
 
             return bits;
@@ -208,10 +212,14 @@ namespace System.Numerics
         // Mutable for unit testing...
         private static int MultiplyThreshold = 32;
 
-        private static unsafe void Multiply(uint* left, int leftLength,
-                                            uint* right, int rightLength,
-                                            uint* bits, int bitsLength)
-        {
+        private static unsafe void Multiply(
+            uint* left,
+            int leftLength,
+            uint* right,
+            int rightLength,
+            uint* bits,
+            int bitsLength
+        ) {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -240,8 +248,7 @@ namespace System.Numerics
                     ulong carry = 0UL;
                     for (int j = 0; j < leftLength; j++)
                     {
-                        ulong digits = bits[i + j] + carry
-                            + (ulong)left[j] * right[i];
+                        ulong digits = bits[i + j] + carry + (ulong)left[j] * right[i];
                         bits[i + j] = unchecked((uint)digits);
                         carry = digits >> 32;
                     }
@@ -284,14 +291,17 @@ namespace System.Numerics
                 int bitsHighLength = bitsLength - n2;
 
                 // ... compute z_0 = a_0 * b_0 (multiply again)
-                Multiply(leftLow, leftLowLength,
-                         rightLow, rightLowLength,
-                         bitsLow, bitsLowLength);
+                Multiply(leftLow, leftLowLength, rightLow, rightLowLength, bitsLow, bitsLowLength);
 
                 // ... compute z_2 = a_1 * b_1 (multiply again)
-                Multiply(leftHigh, leftHighLength,
-                         rightHigh, rightHighLength,
-                         bitsHigh, bitsHighLength);
+                Multiply(
+                    leftHigh,
+                    leftHighLength,
+                    rightHigh,
+                    rightHighLength,
+                    bitsHigh,
+                    bitsHighLength
+                );
 
                 int leftFoldLength = leftHighLength + 1;
                 int rightFoldLength = rightHighLength + 1;
@@ -307,49 +317,83 @@ namespace System.Numerics
                     new Span<uint>(core, coreLength).Clear();
 
                     // ... compute z_a = a_1 + a_0 (call it fold...)
-                    Add(leftHigh, leftHighLength,
-                        leftLow, leftLowLength,
-                        leftFold, leftFoldLength);
+                    Add(leftHigh, leftHighLength, leftLow, leftLowLength, leftFold, leftFoldLength);
 
                     // ... compute z_b = b_1 + b_0 (call it fold...)
-                    Add(rightHigh, rightHighLength,
-                        rightLow, rightLowLength,
-                        rightFold, rightFoldLength);
+                    Add(
+                        rightHigh,
+                        rightHighLength,
+                        rightLow,
+                        rightLowLength,
+                        rightFold,
+                        rightFoldLength
+                    );
 
                     // ... compute z_1 = z_a * z_b - z_0 - z_2
-                    Multiply(leftFold, leftFoldLength,
-                             rightFold, rightFoldLength,
-                             core, coreLength);
-                    SubtractCore(bitsHigh, bitsHighLength,
-                                 bitsLow, bitsLowLength,
-                                 core, coreLength);
+                    Multiply(
+                        leftFold,
+                        leftFoldLength,
+                        rightFold,
+                        rightFoldLength,
+                        core,
+                        coreLength
+                    );
+                    SubtractCore(
+                        bitsHigh,
+                        bitsHighLength,
+                        bitsLow,
+                        bitsLowLength,
+                        core,
+                        coreLength
+                    );
 
                     // ... and finally merge the result! :-)
                     AddSelf(bits + n, bitsLength - n, core, coreLength);
                 }
                 else
                 {
-                    fixed (uint* leftFold = new uint[leftFoldLength],
-                                 rightFold = new uint[rightFoldLength],
-                                 core = new uint[coreLength])
-                    {
+                    fixed (
+                        uint* leftFold = new uint[leftFoldLength],
+                            rightFold = new uint[rightFoldLength],
+                            core = new uint[coreLength]
+                    ) {
                         // ... compute z_a = a_1 + a_0 (call it fold...)
-                        Add(leftHigh, leftHighLength,
-                            leftLow, leftLowLength,
-                            leftFold, leftFoldLength);
+                        Add(
+                            leftHigh,
+                            leftHighLength,
+                            leftLow,
+                            leftLowLength,
+                            leftFold,
+                            leftFoldLength
+                        );
 
                         // ... compute z_b = b_1 + b_0 (call it fold...)
-                        Add(rightHigh, rightHighLength,
-                            rightLow, rightLowLength,
-                            rightFold, rightFoldLength);
+                        Add(
+                            rightHigh,
+                            rightHighLength,
+                            rightLow,
+                            rightLowLength,
+                            rightFold,
+                            rightFoldLength
+                        );
 
                         // ... compute z_1 = z_a * z_b - z_0 - z_2
-                        Multiply(leftFold, leftFoldLength,
-                                 rightFold, rightFoldLength,
-                                 core, coreLength);
-                        SubtractCore(bitsHigh, bitsHighLength,
-                                     bitsLow, bitsLowLength,
-                                     core, coreLength);
+                        Multiply(
+                            leftFold,
+                            leftFoldLength,
+                            rightFold,
+                            rightFoldLength,
+                            core,
+                            coreLength
+                        );
+                        SubtractCore(
+                            bitsHigh,
+                            bitsHighLength,
+                            bitsLow,
+                            bitsLowLength,
+                            core,
+                            coreLength
+                        );
 
                         // ... and finally merge the result! :-)
                         AddSelf(bits + n, bitsLength - n, core, coreLength);
@@ -358,10 +402,14 @@ namespace System.Numerics
             }
         }
 
-        private static unsafe void SubtractCore(uint* left, int leftLength,
-                                                uint* right, int rightLength,
-                                                uint* core, int coreLength)
-        {
+        private static unsafe void SubtractCore(
+            uint* left,
+            int leftLength,
+            uint* right,
+            int rightLength,
+            uint* core,
+            int coreLength
+        ) {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(coreLength >= 0);

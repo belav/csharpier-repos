@@ -7,12 +7,12 @@ using System.Numerics;
 
 namespace GitHub_20269
 {
-    // This tests a case where 
+    // This tests a case where
     // 1) We merge returns.
     // 2) One of the returns has an operand that is a call to a multi-reg returning method.
     // 3) The call is marked as a tail-call candidate in the importer.
     // 3) The tail call is rejected late in morph.
-    // 
+    //
 
     class Program
     {
@@ -31,7 +31,7 @@ namespace GitHub_20269
             DoNothing(ref x);
 
             // 5 returns are needed to trigger merge of returns
-            switch(i)
+            switch (i)
             {
                 case 1:
                     // This call is a tail-call candidate rejected late.
@@ -48,7 +48,6 @@ namespace GitHub_20269
 
                 default:
                     return new Vector<float>(100.0f);
-
             }
         }
 
@@ -59,8 +58,6 @@ namespace GitHub_20269
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void DoNothing(ref int i)
-        {
-        }
+        public static void DoNothing(ref int i) { }
     }
 }

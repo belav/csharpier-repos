@@ -51,8 +51,13 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             PathString matchedPath;
             PathString remainingPath;
 
-            if (context.Request.Path.StartsWithSegments(_pathBase, out matchedPath, out remainingPath))
-            {
+            if (
+                context.Request.Path.StartsWithSegments(
+                    _pathBase,
+                    out matchedPath,
+                    out remainingPath
+                )
+            ) {
                 var originalPath = context.Request.Path;
                 var originalPathBase = context.Request.PathBase;
                 context.Request.Path = remainingPath;
@@ -62,6 +67,7 @@ namespace Microsoft.AspNetCore.Builder.Extensions
                 {
                     await _next(context);
                 }
+
                 finally
                 {
                     context.Request.Path = originalPath;

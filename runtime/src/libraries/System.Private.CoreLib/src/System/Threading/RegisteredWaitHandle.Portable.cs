@@ -13,9 +13,12 @@ namespace System.Threading
     [UnsupportedOSPlatform("browser")]
     public sealed partial class RegisteredWaitHandle : MarshalByRefObject
     {
-        internal RegisteredWaitHandle(WaitHandle waitHandle, _ThreadPoolWaitOrTimerCallback callbackHelper,
-            int millisecondsTimeout, bool repeating)
-        {
+        internal RegisteredWaitHandle(
+            WaitHandle waitHandle,
+            _ThreadPoolWaitOrTimerCallback callbackHelper,
+            int millisecondsTimeout,
+            bool repeating
+        ) {
             Handle = waitHandle.SafeWaitHandle;
             Callback = callbackHelper;
             TimeoutDurationMs = millisecondsTimeout;
@@ -29,8 +32,7 @@ namespace System.Threading
         private static AutoResetEvent? s_cachedEvent;
 
         private static AutoResetEvent RentEvent() =>
-            Interlocked.Exchange(ref s_cachedEvent, null) ??
-            new AutoResetEvent(false);
+            Interlocked.Exchange(ref s_cachedEvent, null) ?? new AutoResetEvent(false);
 
         private static void ReturnEvent(AutoResetEvent resetEvent)
         {
@@ -128,7 +130,8 @@ namespace System.Threading
                 UserUnregisterWaitHandle = waitObject?.SafeWaitHandle;
                 UserUnregisterWaitHandle?.DangerousAddRef(ref needToRollBackRefCountOnException);
 
-                UserUnregisterWaitHandleValue = UserUnregisterWaitHandle?.DangerousGetHandle() ?? IntPtr.Zero;
+                UserUnregisterWaitHandleValue =
+                    UserUnregisterWaitHandle?.DangerousGetHandle() ?? IntPtr.Zero;
 
                 if (_unregistered)
                 {
@@ -194,6 +197,7 @@ namespace System.Threading
                     EventWaitHandle.Set(handle);
                 }
             }
+
             finally
             {
                 handle?.DangerousRelease();
@@ -214,6 +218,7 @@ namespace System.Threading
             {
                 Debug.Assert(_numRequestedCallbacks != 0);
             }
+
             finally
             {
                 s_callbackLock.Release();
@@ -234,6 +239,7 @@ namespace System.Threading
             {
                 _numRequestedCallbacks++;
             }
+
             finally
             {
                 s_callbackLock.Release();
@@ -259,6 +265,7 @@ namespace System.Threading
                     _signalAfterCallbacksComplete = true;
                 }
             }
+
             finally
             {
                 s_callbackLock.Release();
@@ -279,6 +286,7 @@ namespace System.Threading
                     SignalUserWaitHandle();
                 }
             }
+
             finally
             {
                 s_callbackLock.Release();

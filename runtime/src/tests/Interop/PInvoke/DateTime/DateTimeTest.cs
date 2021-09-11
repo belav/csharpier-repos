@@ -34,17 +34,20 @@ class DateTimeTest
             Assert.AreEqual(currentDate.AddDays(1), NativeDateTime.GetTomorrow(currentDate));
 
             NativeDateTime.GetTomorrowByRef(currentDate, out DateTime nextDay);
-            
+
             Assert.AreEqual(currentDate.AddDays(1), nextDay);
 
             DateWrapper wrapper = new DateWrapper { date = currentDate };
 
-            Assert.AreEqual(currentDate.AddDays(1), NativeDateTime.GetTomorrowWrapped(wrapper).date);
+            Assert.AreEqual(
+                currentDate.AddDays(1),
+                NativeDateTime.GetTomorrowWrapped(wrapper).date
+            );
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Test Failure: {e}"); 
-            return 101; 
+            Console.WriteLine($"Test Failure: {e}");
+            return 101;
         }
         return 100;
     }

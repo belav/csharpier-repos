@@ -11,10 +11,12 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
         {
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapBlazorHub();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapBlazorHub();
+                }
+            );
         }
 
         public class App : Microsoft.AspNetCore.Components.ComponentBase

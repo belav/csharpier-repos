@@ -21,10 +21,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
 
         public Type WrappingType
         {
-            get
-            {
-                return typeof(PersonWrapper);
-            }
+            get { return typeof(PersonWrapper); }
         }
     }
 }

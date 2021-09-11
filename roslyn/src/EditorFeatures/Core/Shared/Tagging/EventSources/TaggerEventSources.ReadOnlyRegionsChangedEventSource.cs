@@ -14,22 +14,24 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         {
             private readonly ITextBuffer _subjectBuffer;
 
-            public ReadOnlyRegionsChangedEventSource(ITextBuffer subjectBuffer, TaggerDelay delay)
-                : base(delay)
+            public ReadOnlyRegionsChangedEventSource(
+                ITextBuffer subjectBuffer,
+                TaggerDelay delay
+            ) : base(delay)
             {
                 Contract.ThrowIfNull(subjectBuffer);
 
                 _subjectBuffer = subjectBuffer;
             }
 
-            public override void Connect()
-                => _subjectBuffer.ReadOnlyRegionsChanged += OnReadOnlyRegionsChanged;
+            public override void Connect() =>
+                _subjectBuffer.ReadOnlyRegionsChanged += OnReadOnlyRegionsChanged;
 
-            public override void Disconnect()
-                => _subjectBuffer.ReadOnlyRegionsChanged -= OnReadOnlyRegionsChanged;
+            public override void Disconnect() =>
+                _subjectBuffer.ReadOnlyRegionsChanged -= OnReadOnlyRegionsChanged;
 
-            private void OnReadOnlyRegionsChanged(object? sender, SnapshotSpanEventArgs e)
-                => this.RaiseChanged();
+            private void OnReadOnlyRegionsChanged(object? sender, SnapshotSpanEventArgs e) =>
+                this.RaiseChanged();
         }
     }
 }

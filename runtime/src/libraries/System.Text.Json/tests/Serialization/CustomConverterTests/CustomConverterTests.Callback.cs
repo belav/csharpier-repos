@@ -18,8 +18,11 @@ namespace System.Text.Json.Serialization.Tests
                 return typeof(Customer).IsAssignableFrom(typeToConvert);
             }
 
-            public override Customer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override Customer Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 // The options are not passed here as that would cause an infinite loop.
                 Customer value = JsonSerializer.Deserialize<Customer>(ref reader);
 
@@ -27,8 +30,11 @@ namespace System.Text.Json.Serialization.Tests
                 return value;
             }
 
-            public override void Write(Utf8JsonWriter writer, Customer value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                Customer value,
+                JsonSerializerOptions options
+            ) {
                 writer.WriteStartArray();
 
                 long bytesWrittenSoFar = writer.BytesCommitted + writer.BytesPending;
@@ -36,7 +42,7 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializer.Serialize(writer, value);
 
                 Debug.Assert(writer.BytesPending == 0);
-                long payloadLength =  writer.BytesCommitted - bytesWrittenSoFar;
+                long payloadLength = writer.BytesCommitted - bytesWrittenSoFar;
                 writer.WriteNumberValue(payloadLength);
                 writer.WriteEndArray();
             }
@@ -55,7 +61,11 @@ namespace System.Text.Json.Serialization.Tests
 
             string result = JsonSerializer.Serialize(customer, options);
             int expectedLength = JsonSerializer.Serialize(customer).Length;
-            Assert.Equal(@"[{""CreditLimit"":0,""Name"":""MyNameHello!"",""Address"":{""City"":null}}," + $"{expectedLength}]", result);
+            Assert.Equal(
+                @"[{""CreditLimit"":0,""Name"":""MyNameHello!"",""Address"":{""City"":null}},"
+                    + $"{expectedLength}]",
+                result
+            );
         }
 
         /// <summary>
@@ -68,8 +78,11 @@ namespace System.Text.Json.Serialization.Tests
                 return typeof(ChildPocoWithConverter).IsAssignableFrom(typeToConvert);
             }
 
-            public override ChildPocoWithConverter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override ChildPocoWithConverter Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 reader.Read();
                 Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
                 Debug.Assert(reader.GetString() == "Child");
@@ -78,15 +91,19 @@ namespace System.Text.Json.Serialization.Tests
                 Debug.Assert(reader.TokenType == JsonTokenType.StartObject);
 
                 // The options are not passed here as that would cause an infinite loop.
-                ChildPocoWithNoConverter value = JsonSerializer.Deserialize<ChildPocoWithNoConverter>(ref reader);
+                ChildPocoWithNoConverter value =
+                    JsonSerializer.Deserialize<ChildPocoWithNoConverter>(ref reader);
 
                 // Should not get here due to exception.
                 Debug.Assert(false);
                 return default;
             }
 
-            public override void Write(Utf8JsonWriter writer, ChildPocoWithConverter value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                ChildPocoWithConverter value,
+                JsonSerializerOptions options
+            ) {
                 writer.WriteStartObject();
                 writer.WritePropertyName("Child");
 
@@ -120,7 +137,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ConverterWithReentryFail()
         {
-            const string Json = @"{""Child"":{""Child"":{""InvalidProperty"":{""NotSupported"":[1]}}}}";
+            const string Json =
+                @"{""Child"":{""Child"":{""InvalidProperty"":{""NotSupported"":[1]}}}}";
 
             NotSupportedException ex;
 
@@ -131,11 +149,22 @@ namespace System.Text.Json.Serialization.Tests
             // - Path does not flow through to custom converters that re-enter the serializer.
             // - "Path:" is not repeated due to having two try\catch blocks (the second block does not append "Path:" again).
 
-            ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<TopLevelPocoWithNoConverter>(Json, options));
+            ex = Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize<TopLevelPocoWithNoConverter>(Json, options)
+            );
             Assert.Contains(typeof(int[,]).ToString(), ex.ToString());
-            Assert.Contains(typeof(ChildPocoWithNoConverterAndInvalidProperty).ToString(), ex.ToString());
-            Assert.Contains("Path: $.InvalidProperty | LineNumber: 0 | BytePositionInLine: 20.", ex.ToString());
-            Assert.Equal(2, ex.ToString().Split(new string[] { "Path:" }, StringSplitOptions.None).Length);
+            Assert.Contains(
+                typeof(ChildPocoWithNoConverterAndInvalidProperty).ToString(),
+                ex.ToString()
+            );
+            Assert.Contains(
+                "Path: $.InvalidProperty | LineNumber: 0 | BytePositionInLine: 20.",
+                ex.ToString()
+            );
+            Assert.Equal(
+                2,
+                ex.ToString().Split(new string[] { "Path:" }, StringSplitOptions.None).Length
+            );
 
             var poco = new TopLevelPocoWithNoConverter()
             {
@@ -151,11 +180,19 @@ namespace System.Text.Json.Serialization.Tests
                 }
             };
 
-            ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(poco, options));
+            ex = Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Serialize(poco, options)
+            );
             Assert.Contains(typeof(int[,]).ToString(), ex.ToString());
-            Assert.Contains(typeof(ChildPocoWithNoConverterAndInvalidProperty).ToString(), ex.ToString());
+            Assert.Contains(
+                typeof(ChildPocoWithNoConverterAndInvalidProperty).ToString(),
+                ex.ToString()
+            );
             Assert.Contains("Path: $.InvalidProperty.", ex.ToString());
-            Assert.Equal(2, ex.ToString().Split(new string[] { "Path:" }, StringSplitOptions.None).Length);
+            Assert.Equal(
+                2,
+                ex.ToString().Split(new string[] { "Path:" }, StringSplitOptions.None).Length
+            );
         }
     }
 }

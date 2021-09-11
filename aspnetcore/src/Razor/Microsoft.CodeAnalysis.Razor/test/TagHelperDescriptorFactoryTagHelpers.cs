@@ -54,7 +54,6 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces.Test
     {
     }
 
-
     [RestrictChildren("p")]
     public class RestrictChildrenTagHelper
     {
@@ -413,10 +412,7 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces.Test
 
     public class DictionaryWithoutParameterlessConstructor : Dictionary<string, string>
     {
-        public DictionaryWithoutParameterlessConstructor(int count)
-            : base()
-        {
-        }
+        public DictionaryWithoutParameterlessConstructor(int count) : base() { }
     }
 
     public class DictionaryOfIntSubclass : Dictionary<int, string>
@@ -457,7 +453,13 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces.Test
     public class MissingAccessorTagHelper : TagHelper
     {
         public string ValidAttribute { get; set; }
-        public string InvalidNoGetAttribute { set { } }
-        public string InvalidNoSetAttribute { get { return string.Empty; } }
+        public string InvalidNoGetAttribute
+        {
+            set { }
+        }
+        public string InvalidNoSetAttribute
+        {
+            get { return string.Empty; }
+        }
     }
 }

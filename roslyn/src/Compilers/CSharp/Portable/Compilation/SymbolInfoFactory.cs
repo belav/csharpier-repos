@@ -15,8 +15,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal static class SymbolInfoFactory
     {
-        internal static SymbolInfo Create(ImmutableArray<Symbol> symbols, LookupResultKind resultKind, bool isDynamic)
-        {
+        internal static SymbolInfo Create(
+            ImmutableArray<Symbol> symbols,
+            LookupResultKind resultKind,
+            bool isDynamic
+        ) {
             if (isDynamic)
             {
                 if (symbols.Length == 1)
@@ -42,7 +45,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                return new SymbolInfo(symbols.GetPublicSymbols(), (symbols.Length > 0) ? resultKind.ToCandidateReason() : CandidateReason.None);
+                return new SymbolInfo(
+                    symbols.GetPublicSymbols(),
+                    (symbols.Length > 0) ? resultKind.ToCandidateReason() : CandidateReason.None
+                );
             }
         }
     }

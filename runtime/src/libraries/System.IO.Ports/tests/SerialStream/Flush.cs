@@ -24,8 +24,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Flush_Open_Close()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.Close();
@@ -39,13 +42,18 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Flush_Open_BaseStreamClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.BaseStream.Close();
 
-                Debug.WriteLine("Verifying Flush throws exception After Open() then BaseStream.Close()");
+                Debug.WriteLine(
+                    "Verifying Flush throws exception After Open() then BaseStream.Close()"
+                );
 
                 VerifyException(serialStream, typeof(ObjectDisposedException));
             }
@@ -55,16 +63,24 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void InBufferFilled_Flush_Once()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 byte[] xmitBytes = new byte[DEFAULT_BUFFER_SIZE];
 
                 Debug.WriteLine("Verifying Flush method after input buffer has been filled");
                 com1.Open();
                 com2.Open();
 
-                for (int i = 0; i < xmitBytes.Length; i++) xmitBytes[i] = (byte)i;
+                for (int i = 0; i < xmitBytes.Length; i++)
+                    xmitBytes[i] = (byte)i;
 
                 com2.Write(xmitBytes, 0, xmitBytes.Length);
 
@@ -78,16 +94,26 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void InBufferFilled_Flush_Multiple()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 byte[] xmitBytes = new byte[DEFAULT_BUFFER_SIZE];
 
-                Debug.WriteLine("Verifying call Flush method several times after input buffer has been filled");
+                Debug.WriteLine(
+                    "Verifying call Flush method several times after input buffer has been filled"
+                );
                 com1.Open();
                 com2.Open();
 
-                for (int i = 0; i < xmitBytes.Length; i++) xmitBytes[i] = (byte)i;
+                for (int i = 0; i < xmitBytes.Length; i++)
+                    xmitBytes[i] = (byte)i;
 
                 com2.Write(xmitBytes, 0, xmitBytes.Length);
 
@@ -103,18 +129,27 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void InBufferFilled_Flush_Cycle()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 byte[] xmitBytes = new byte[DEFAULT_BUFFER_SIZE];
 
                 Debug.WriteLine(
-                    "Verifying call Flush method after input buffer has been filled discarded and filled again");
+                    "Verifying call Flush method after input buffer has been filled discarded and filled again"
+                );
 
                 com1.Open();
                 com2.Open();
 
-                for (int i = 0; i < xmitBytes.Length; i++) xmitBytes[i] = (byte)i;
+                for (int i = 0; i < xmitBytes.Length; i++)
+                    xmitBytes[i] = (byte)i;
 
                 com2.Write(xmitBytes, 0, xmitBytes.Length);
 
@@ -133,9 +168,15 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort), nameof(HasHardwareFlowControl))]
         public void OutBufferFilled_Flush_Once()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
-                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(com1, DEFAULT_BUFFER_SIZE);
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
+                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
+                    com1,
+                    DEFAULT_BUFFER_SIZE
+                );
                 var t = new Task(asyncWriteRndByteArray.WriteRndByteArray);
 
                 Debug.WriteLine("Verifying Flush method after output buffer has been filled");
@@ -157,12 +198,20 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort), nameof(HasHardwareFlowControl))]
         public void OutBufferFilled_Flush_Multiple()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
-                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(com1, DEFAULT_BUFFER_SIZE);
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
+                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
+                    com1,
+                    DEFAULT_BUFFER_SIZE
+                );
                 var t = new Task(asyncWriteRndByteArray.WriteRndByteArray);
 
-                Debug.WriteLine("Verifying call Flush method several times after output buffer has been filled");
+                Debug.WriteLine(
+                    "Verifying call Flush method several times after output buffer has been filled"
+                );
 
                 com1.Open();
                 com1.WriteTimeout = 500;
@@ -183,16 +232,23 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort), nameof(HasHardwareFlowControl))]
         public void OutBufferFilled_Flush_Cycle()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
-                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(com1, DEFAULT_BUFFER_SIZE);
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
+                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
+                    com1,
+                    DEFAULT_BUFFER_SIZE
+                );
                 var t1 = new Task(asyncWriteRndByteArray.WriteRndByteArray);
                 var t2 = new Task(asyncWriteRndByteArray.WriteRndByteArray);
 
                 int elapsedTime;
 
                 Debug.WriteLine(
-                    "Verifying call Flush method after output buffer has been filled discarded and filled again");
+                    "Verifying call Flush method after output buffer has been filled discarded and filled again"
+                );
 
                 com1.Open();
                 com1.WriteTimeout = 500;
@@ -224,22 +280,35 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void InOutBufferFilled_Flush_Once()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
-                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(com1, DEFAULT_BUFFER_SIZE);
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
+                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
+                    com1,
+                    DEFAULT_BUFFER_SIZE
+                );
                 var t = new Task(asyncWriteRndByteArray.WriteRndByteArray);
 
                 byte[] xmitBytes = new byte[DEFAULT_BUFFER_SIZE];
 
-                Debug.WriteLine("Verifying Flush method after input and output buffer has been filled");
+                Debug.WriteLine(
+                    "Verifying Flush method after input and output buffer has been filled"
+                );
 
                 com1.Open();
                 com2.Open();
                 com1.WriteTimeout = 500;
                 com1.Handshake = Handshake.RequestToSend;
 
-                for (int i = 0; i < xmitBytes.Length; i++) xmitBytes[i] = (byte)i;
+                for (int i = 0; i < xmitBytes.Length; i++)
+                    xmitBytes[i] = (byte)i;
 
                 com2.Write(xmitBytes, 0, xmitBytes.Length);
 
@@ -258,24 +327,36 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void InOutBufferFilled_Flush_Multiple()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
-                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(com1, DEFAULT_BUFFER_SIZE);
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
+                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
+                    com1,
+                    DEFAULT_BUFFER_SIZE
+                );
                 var t = new Task(asyncWriteRndByteArray.WriteRndByteArray);
 
                 int elapsedTime = 0;
                 byte[] xmitBytes = new byte[DEFAULT_BUFFER_SIZE];
 
                 Debug.WriteLine(
-                    "Verifying call Flush method several times after input and output buffer has been filled");
+                    "Verifying call Flush method several times after input and output buffer has been filled"
+                );
 
                 com1.Open();
                 com2.Open();
                 com1.WriteTimeout = 500;
                 com1.Handshake = Handshake.RequestToSend;
 
-                for (int i = 0; i < xmitBytes.Length; i++) xmitBytes[i] = (byte)i;
+                for (int i = 0; i < xmitBytes.Length; i++)
+                    xmitBytes[i] = (byte)i;
 
                 com2.Write(xmitBytes, 0, xmitBytes.Length);
 
@@ -301,24 +382,36 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void InOutBufferFilled_Flush_Cycle()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
-                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(com1, DEFAULT_BUFFER_SIZE);
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
+                AsyncWriteRndByteArray asyncWriteRndByteArray = new AsyncWriteRndByteArray(
+                    com1,
+                    DEFAULT_BUFFER_SIZE
+                );
                 var t1 = new Task(asyncWriteRndByteArray.WriteRndByteArray);
                 var t2 = new Task(asyncWriteRndByteArray.WriteRndByteArray);
 
                 byte[] xmitBytes = new byte[DEFAULT_BUFFER_SIZE];
 
                 Debug.WriteLine(
-                    "Verifying call Flush method after input and output buffer has been filled discarded and filled again");
+                    "Verifying call Flush method after input and output buffer has been filled discarded and filled again"
+                );
 
                 com1.Open();
                 com2.Open();
                 com1.WriteTimeout = 500;
                 com1.Handshake = Handshake.RequestToSend;
 
-                for (int i = 0; i < xmitBytes.Length; i++) xmitBytes[i] = (byte)i;
+                for (int i = 0; i < xmitBytes.Length; i++)
+                    xmitBytes[i] = (byte)i;
 
                 com2.Write(xmitBytes, 0, xmitBytes.Length);
 
@@ -351,13 +444,11 @@ namespace System.IO.Ports.Tests
             private readonly SerialPort _com;
             private readonly int _byteLength;
 
-
             public AsyncWriteRndByteArray(SerialPort com, int byteLength)
             {
                 _com = com;
                 _byteLength = byteLength;
             }
-
 
             public void WriteRndByteArray()
             {
@@ -373,9 +464,7 @@ namespace System.IO.Ports.Tests
                 {
                     _com.Write(buffer, 0, buffer.Length);
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
             }
         }
         #endregion
@@ -383,10 +472,13 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyException(Stream serialStream, Type expectedException)
         {
-            Assert.Throws(expectedException, () =>
-            {
-                serialStream.Flush();
-            });
+            Assert.Throws(
+                expectedException,
+                () =>
+                {
+                    serialStream.Flush();
+                }
+            );
         }
 
         private void VerifyFlush(SerialPort com)
@@ -398,7 +490,11 @@ namespace System.IO.Ports.Tests
 
             if (origBytesToRead != com.BytesToRead)
             {
-                Fail("ERROR!!! Expected BytesToRead={0} Actual BytesToRead={1}", origBytesToRead, com.BytesToRead);
+                Fail(
+                    "ERROR!!! Expected BytesToRead={0} Actual BytesToRead={1}",
+                    origBytesToRead,
+                    com.BytesToRead
+                );
             }
 
             if (0 != com.BytesToWrite)
@@ -432,7 +528,11 @@ namespace System.IO.Ports.Tests
 
                 if (i != DEFAULT_BUFFER_SIZE)
                 {
-                    Fail("Err_09778asdh Expected to read {0} bytes actually read {1}", DEFAULT_BUFFER_SIZE, i);
+                    Fail(
+                        "Err_09778asdh Expected to read {0} bytes actually read {1}",
+                        DEFAULT_BUFFER_SIZE,
+                        i
+                    );
                 }
             }
         }

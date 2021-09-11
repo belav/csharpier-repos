@@ -31,7 +31,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         /// compilation model.  This saves the time from having to recreate this for every string literal that features
         /// examine for a particular compilation.
         /// </summary>
-        private static readonly ConditionalWeakTable<Compilation, RegexPatternDetector> _modelToDetector = new();
+        private static readonly ConditionalWeakTable<
+            Compilation,
+            RegexPatternDetector
+        > _modelToDetector = new();
 
         private readonly EmbeddedLanguageInfo _info;
         private readonly INamedTypeSymbol _regexType;
@@ -48,40 +51,47 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         /// Option names are the values from the <see cref="RegexOptions"/> enum.
         /// </summary>
         private static readonly Regex s_languageCommentDetector =
-            new(@"^((//)|(')|(/\*))\s*lang(uage)?\s*=\s*regex(p)?\b((\s*,\s*)(?<option>[a-zA-Z]+))*",
-                RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            new(
+                @"^((//)|(')|(/\*))\s*lang(uage)?\s*=\s*regex(p)?\b((\s*,\s*)(?<option>[a-zA-Z]+))*",
+                RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.Compiled
+            );
 
         private static readonly Dictionary<string, RegexOptions> s_nameToOption =
-            typeof(RegexOptions).GetTypeInfo().DeclaredFields
-                .Where(f => f.FieldType == typeof(RegexOptions))
-                .ToDictionary(f => f.Name, f => (RegexOptions)f.GetValue(null), StringComparer.OrdinalIgnoreCase);
+            typeof(RegexOptions).GetTypeInfo()
+                .DeclaredFields.Where(f => f.FieldType == typeof(RegexOptions))
+                .ToDictionary(
+                    f => f.Name,
+                    f => (RegexOptions)f.GetValue(null),
+                    StringComparer.OrdinalIgnoreCase
+                );
 
         public RegexPatternDetector(
             EmbeddedLanguageInfo info,
             INamedTypeSymbol regexType,
-            HashSet<string> methodNamesOfInterest)
-        {
+            HashSet<string> methodNamesOfInterest
+        ) {
             _info = info;
             _regexType = regexType;
             _methodNamesOfInterest = methodNamesOfInterest;
         }
 
         public static RegexPatternDetector TryGetOrCreate(
-            Compilation compilation, EmbeddedLanguageInfo info)
-        {
+            Compilation compilation,
+            EmbeddedLanguageInfo info
+        ) {
             // Do a quick non-allocating check first.
             if (_modelToDetector.TryGetValue(compilation, out var detector))
             {
                 return detector;
             }
 
-            return _modelToDetector.GetValue(
-                compilation, _ => TryCreate(compilation, info));
+            return _modelToDetector.GetValue(compilation, _ => TryCreate(compilation, info));
         }
 
         private static RegexPatternDetector TryCreate(
-            Compilation compilation, EmbeddedLanguageInfo info)
-        {
+            Compilation compilation,
+            EmbeddedLanguageInfo info
+        ) {
             var regexType = compilation.GetTypeByMetadataName(typeof(Regex).FullName);
             if (regexType == null)
             {
@@ -97,14 +107,22 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             if (!syntaxFacts.IsStringLiteral(token))
                 return false;
 
-            return IsMethodOrConstructorArgument(token, syntaxFacts) ||
-                   HasRegexLanguageComment(token, syntaxFacts, out _);
+            return IsMethodOrConstructorArgument(token, syntaxFacts)
+                || HasRegexLanguageComment(token, syntaxFacts, out _);
         }
 
         private static bool HasRegexLanguageComment(
-            SyntaxToken token, ISyntaxFacts syntaxFacts, out RegexOptions options)
-        {
-            if (HasRegexLanguageComment(token.GetPreviousToken().TrailingTrivia, syntaxFacts, out options))
+            SyntaxToken token,
+            ISyntaxFacts syntaxFacts,
+            out RegexOptions options
+        ) {
+            if (
+                HasRegexLanguageComment(
+                    token.GetPreviousToken().TrailingTrivia,
+                    syntaxFacts,
+                    out options
+                )
+            )
                 return true;
 
             for (var node = token.Parent; node != null; node = node.Parent)
@@ -123,8 +141,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         }
 
         private static bool HasRegexLanguageComment(
-            SyntaxTriviaList list, ISyntaxFacts syntaxFacts, out RegexOptions options)
-        {
+            SyntaxTriviaList list,
+            ISyntaxFacts syntaxFacts,
+            out RegexOptions options
+        ) {
             foreach (var trivia in list)
             {
                 if (HasRegexLanguageComment(trivia, syntaxFacts, out options))
@@ -138,8 +158,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         }
 
         private static bool HasRegexLanguageComment(
-            SyntaxTrivia trivia, ISyntaxFacts syntaxFacts, out RegexOptions options)
-        {
+            SyntaxTrivia trivia,
+            ISyntaxFacts syntaxFacts,
+            out RegexOptions options
+        ) {
             if (syntaxFacts.IsRegularComment(trivia))
             {
                 // Note: ToString on SyntaxTrivia is non-allocating.  It will just return the
@@ -185,9 +207,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             return (true, options);
         }
 
-        private static bool IsMethodOrConstructorArgument(SyntaxToken token, ISyntaxFacts syntaxFacts)
-            => syntaxFacts.IsLiteralExpression(token.Parent) &&
-               syntaxFacts.IsArgument(token.Parent.Parent);
+        private static bool IsMethodOrConstructorArgument(
+            SyntaxToken token,
+            ISyntaxFacts syntaxFacts
+        ) =>
+            syntaxFacts.IsLiteralExpression(token.Parent)
+            && syntaxFacts.IsArgument(token.Parent.Parent);
 
         /// <summary>
         /// Finds public, static methods in <see cref="Regex"/> that have a parameter called
@@ -195,25 +220,32 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         /// where at least one (but not necessarily more) of the parameters should be treated as a
         /// pattern.
         /// </summary>
-        private static HashSet<string> GetMethodNamesOfInterest(INamedTypeSymbol regexType, ISyntaxFacts syntaxFacts)
-        {
+        private static HashSet<string> GetMethodNamesOfInterest(
+            INamedTypeSymbol regexType,
+            ISyntaxFacts syntaxFacts
+        ) {
             var result = syntaxFacts.IsCaseSensitive
                 ? new HashSet<string>()
                 : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            var methods = from method in regexType.GetMembers().OfType<IMethodSymbol>()
-                          where method.DeclaredAccessibility == Accessibility.Public
-                          where method.IsStatic
-                          where method.Parameters.Any(p => p.Name == _patternName)
-                          select method.Name;
+            var methods =
+                from method in regexType.GetMembers().OfType<IMethodSymbol>()
+                where method.DeclaredAccessibility == Accessibility.Public
+                where method.IsStatic
+                where method.Parameters.Any(p => p.Name == _patternName)
+                select method.Name;
 
             result.AddRange(methods);
 
             return result;
         }
 
-        public bool IsRegexPattern(SyntaxToken token, SemanticModel semanticModel, CancellationToken cancellationToken, out RegexOptions options)
-        {
+        public bool IsRegexPattern(
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken,
+            out RegexOptions options
+        ) {
             options = default;
             if (!IsPossiblyPatternToken(token, _info.SyntaxFacts))
             {
@@ -235,26 +267,45 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             var invocationOrCreation = argumentList.Parent;
             if (syntaxFacts.IsInvocationExpression(invocationOrCreation))
             {
-                var invokedExpression = syntaxFacts.GetExpressionOfInvocationExpression(invocationOrCreation);
+                var invokedExpression = syntaxFacts.GetExpressionOfInvocationExpression(
+                    invocationOrCreation
+                );
                 var name = GetNameOfInvokedExpression(invokedExpression);
                 if (_methodNamesOfInterest.Contains(name))
                 {
-                    // Is a string argument to a method that looks like it could be a Regex method.  
+                    // Is a string argument to a method that looks like it could be a Regex method.
                     // Need to do deeper analysis.
 
                     // Note we do not use GetAllSymbols here because we don't want to incur the
                     // allocation.
-                    var symbolInfo = semanticModel.GetSymbolInfo(invocationOrCreation, cancellationToken);
+                    var symbolInfo = semanticModel.GetSymbolInfo(
+                        invocationOrCreation,
+                        cancellationToken
+                    );
                     var method = symbolInfo.Symbol;
-                    if (TryAnalyzeInvocation(argumentNode, semanticModel, method, cancellationToken, out options))
-                    {
+                    if (
+                        TryAnalyzeInvocation(
+                            argumentNode,
+                            semanticModel,
+                            method,
+                            cancellationToken,
+                            out options
+                        )
+                    ) {
                         return true;
                     }
 
                     foreach (var candidate in symbolInfo.CandidateSymbols)
                     {
-                        if (TryAnalyzeInvocation(argumentNode, semanticModel, candidate, cancellationToken, out options))
-                        {
+                        if (
+                            TryAnalyzeInvocation(
+                                argumentNode,
+                                semanticModel,
+                                candidate,
+                                cancellationToken,
+                                out options
+                            )
+                        ) {
                             return true;
                         }
                     }
@@ -268,24 +319,40 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
                 {
                     if (syntaxFacts.StringComparer.Compare(nameof(Regex), name) == 0)
                     {
-                        var constructor = semanticModel.GetSymbolInfo(invocationOrCreation, cancellationToken).GetAnySymbol();
+                        var constructor = semanticModel.GetSymbolInfo(
+                                invocationOrCreation,
+                                cancellationToken
+                            )
+                            .GetAnySymbol();
                         if (_regexType.Equals(constructor?.ContainingType))
                         {
                             // Argument to "new Regex".  Need to do deeper analysis
                             return AnalyzeStringLiteral(
-                                argumentNode, semanticModel, cancellationToken, out options);
+                                argumentNode,
+                                semanticModel,
+                                cancellationToken,
+                                out options
+                            );
                         }
                     }
                 }
             }
             else if (syntaxFacts.IsImplicitObjectCreationExpression(invocationOrCreation))
             {
-                var constructor = semanticModel.GetSymbolInfo(invocationOrCreation, cancellationToken).GetAnySymbol();
+                var constructor = semanticModel.GetSymbolInfo(
+                        invocationOrCreation,
+                        cancellationToken
+                    )
+                    .GetAnySymbol();
                 if (_regexType.Equals(constructor?.ContainingType))
                 {
                     // Argument to "new Regex".  Need to do deeper analysis
                     return AnalyzeStringLiteral(
-                        argumentNode, semanticModel, cancellationToken, out options);
+                        argumentNode,
+                        semanticModel,
+                        cancellationToken,
+                        out options
+                    );
                 }
             }
 
@@ -293,24 +360,35 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         }
 
         private bool TryAnalyzeInvocation(
-            SyntaxNode argumentNode, SemanticModel semanticModel, ISymbol method,
-            CancellationToken cancellationToken, out RegexOptions options)
-        {
-            if (method != null &&
-                method.DeclaredAccessibility == Accessibility.Public &&
-                method.IsStatic &&
-                _regexType.Equals(method.ContainingType))
-            {
+            SyntaxNode argumentNode,
+            SemanticModel semanticModel,
+            ISymbol method,
+            CancellationToken cancellationToken,
+            out RegexOptions options
+        ) {
+            if (
+                method != null
+                && method.DeclaredAccessibility == Accessibility.Public
+                && method.IsStatic
+                && _regexType.Equals(method.ContainingType)
+            ) {
                 return AnalyzeStringLiteral(
-                    argumentNode, semanticModel, cancellationToken, out options);
+                    argumentNode,
+                    semanticModel,
+                    cancellationToken,
+                    out options
+                );
             }
 
             options = default;
             return false;
         }
 
-        public RegexTree TryParseRegexPattern(SyntaxToken token, SemanticModel semanticModel, CancellationToken cancellationToken)
-        {
+        public RegexTree TryParseRegexPattern(
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) {
             if (!this.IsRegexPattern(token, semanticModel, cancellationToken, out var options))
             {
                 return null;
@@ -324,11 +402,15 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             SyntaxNode argumentNode,
             SemanticModel semanticModel,
             CancellationToken cancellationToken,
-            out RegexOptions options)
-        {
+            out RegexOptions options
+        ) {
             options = default;
 
-            var parameter = _info.SemanticFacts.FindParameterForArgument(semanticModel, argumentNode, cancellationToken);
+            var parameter = _info.SemanticFacts.FindParameterForArgument(
+                semanticModel,
+                argumentNode,
+                cancellationToken
+            );
             if (parameter?.Name != _patternName)
             {
                 return false;
@@ -338,8 +420,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             return true;
         }
 
-        private RegexOptions GetRegexOptions(SyntaxNode argumentNode, SemanticModel semanticModel, CancellationToken cancellationToken)
-        {
+        private RegexOptions GetRegexOptions(
+            SyntaxNode argumentNode,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) {
             var syntaxFacts = _info.SyntaxFacts;
             var argumentList = argumentNode.Parent;
             var arguments = syntaxFacts.GetArgumentsOfArgumentList(argumentList);
@@ -385,7 +470,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             var syntaxFacts = _info.SyntaxFacts;
             if (syntaxFacts.IsSimpleMemberAccessExpression(invokedExpression))
             {
-                return syntaxFacts.GetIdentifierOfSimpleName(syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)).ValueText;
+                return syntaxFacts.GetIdentifierOfSimpleName(
+                    syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)
+                ).ValueText;
             }
             else if (syntaxFacts.IsIdentifierName(invokedExpression))
             {
@@ -397,8 +484,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
 
         internal static class TestAccessor
         {
-            public static (bool success, RegexOptions options) TryMatch(string text)
-                => RegexPatternDetector.TryMatch(text);
+            public static (bool success, RegexOptions options) TryMatch(string text) =>
+                RegexPatternDetector.TryMatch(text);
         }
     }
 }

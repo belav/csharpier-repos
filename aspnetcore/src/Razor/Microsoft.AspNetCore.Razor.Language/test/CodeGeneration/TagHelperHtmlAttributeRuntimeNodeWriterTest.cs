@@ -20,7 +20,9 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             var sourceDocument = TestRazorSourceDocument.Create(content);
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
             var documentNode = Lower(codeDocument);
-            var node = documentNode.Children.OfType<HtmlAttributeIntermediateNode>().Single().Children[0] as HtmlAttributeValueIntermediateNode;
+            var node =
+                documentNode.Children.OfType<HtmlAttributeIntermediateNode>().Single().Children[0]
+                as HtmlAttributeValueIntermediateNode;
 
             var context = TestCodeRenderingContext.CreateRuntime();
 
@@ -30,10 +32,11 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"AddHtmlAttributeValue("""", 16, ""hello-world"", 16, 11, true);
+                @"AddHtmlAttributeValue("""", 16, ""hello-world"", 16, 11, true);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -44,7 +47,9 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             var sourceDocument = TestRazorSourceDocument.Create(content);
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
             var documentNode = Lower(codeDocument);
-            var node = documentNode.Children.OfType<HtmlAttributeIntermediateNode>().Single().Children[1] as CSharpExpressionAttributeValueIntermediateNode;
+            var node =
+                documentNode.Children.OfType<HtmlAttributeIntermediateNode>().Single().Children[1]
+                as CSharpExpressionAttributeValueIntermediateNode;
 
             var context = TestCodeRenderingContext.CreateRuntime();
 
@@ -54,7 +59,7 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"
+                @"
 #nullable restore
 #line 1 ""test.cshtml""
 AddHtmlAttributeValue("" "", 27, false, 28, 6, false);
@@ -64,7 +69,8 @@ AddHtmlAttributeValue("" "", 27, false, 28, 6, false);
 #nullable disable
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -76,7 +82,9 @@ AddHtmlAttributeValue("" "", 27, false, 28, 6, false);
             var sourceDocument = TestRazorSourceDocument.Create(content);
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
             var documentNode = Lower(codeDocument);
-            var node = documentNode.Children.OfType<HtmlAttributeIntermediateNode>().Single().Children[1] as CSharpCodeAttributeValueIntermediateNode;
+            var node =
+                documentNode.Children.OfType<HtmlAttributeIntermediateNode>().Single().Children[1]
+                as CSharpCodeAttributeValueIntermediateNode;
 
             var context = TestCodeRenderingContext.CreateRuntime(source: sourceDocument);
 
@@ -86,7 +94,7 @@ AddHtmlAttributeValue("" "", 27, false, 28, 6, false);
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"AddHtmlAttributeValue("" "", 27, new Microsoft.AspNetCore.Mvc.Razor.HelperResult(async(__razor_attribute_value_writer) => {
+                @"AddHtmlAttributeValue("" "", 27, new Microsoft.AspNetCore.Mvc.Razor.HelperResult(async(__razor_attribute_value_writer) => {
     PushWriter(__razor_attribute_value_writer);
 #nullable restore
 #line 1 ""test.cshtml""
@@ -100,7 +108,8 @@ AddHtmlAttributeValue("" "", 27, false, 28, 6, false);
 ), 28, 13, false);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         private DocumentIntermediateNode Lower(RazorCodeDocument codeDocument)
@@ -109,8 +118,10 @@ AddHtmlAttributeValue("" "", 27, false, 28, 6, false);
             return Lower(codeDocument, projectEngine);
         }
 
-        private DocumentIntermediateNode Lower(RazorCodeDocument codeDocument, RazorProjectEngine projectEngine)
-        {
+        private DocumentIntermediateNode Lower(
+            RazorCodeDocument codeDocument,
+            RazorProjectEngine projectEngine
+        ) {
             for (var i = 0; i < projectEngine.Phases.Count; i++)
             {
                 var phase = projectEngine.Phases[i];

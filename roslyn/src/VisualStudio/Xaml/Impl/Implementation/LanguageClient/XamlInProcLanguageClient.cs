@@ -38,11 +38,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             IDiagnosticService diagnosticService,
             IAsynchronousOperationListenerProvider listenerProvider,
             ILspWorkspaceRegistrationService lspWorkspaceRegistrationService,
-            [Import(typeof(SAsyncServiceProvider))] VSShell.IAsyncServiceProvider asyncServiceProvider,
-            IThreadingContext threadingContext)
-            : base(xamlDispatcherFactory, workspace, diagnosticService, listenerProvider, lspWorkspaceRegistrationService, asyncServiceProvider, threadingContext, diagnosticsClientName: null)
-        {
-        }
+            [Import(typeof(SAsyncServiceProvider))]
+                VSShell.IAsyncServiceProvider asyncServiceProvider,
+            IThreadingContext threadingContext
+        ) : base(
+            xamlDispatcherFactory,
+            workspace,
+            diagnosticService,
+            listenerProvider,
+            lspWorkspaceRegistrationService,
+            asyncServiceProvider,
+            threadingContext,
+            diagnosticsClientName: null
+        ) { }
 
         /// <summary>
         /// Gets the name of the language client (displayed in yellow bars).
@@ -51,8 +59,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
 
         protected internal override VSServerCapabilities GetCapabilities()
         {
-            var experimentationService = Workspace.Services.GetRequiredService<IExperimentationService>();
-            var isLspExperimentEnabled = experimentationService.IsExperimentEnabled(StringConstants.EnableLspIntelliSense);
+            var experimentationService =
+                Workspace.Services.GetRequiredService<IExperimentationService>();
+            var isLspExperimentEnabled = experimentationService.IsExperimentEnabled(
+                StringConstants.EnableLspIntelliSense
+            );
 
             return isLspExperimentEnabled ? XamlCapabilities.Current : XamlCapabilities.None;
         }

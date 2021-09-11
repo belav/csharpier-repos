@@ -5,7 +5,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.ActualApiResponseMeta
 {
     public class TryGetActualResponseMetadataController : ControllerBase
     {
-        public async Task<ActionResult<IEnumerable<TryGetActualResponseMetadataModel>>> ActionWithActionResultOfTReturningOkResult()
+        public async Task<
+            ActionResult<IEnumerable<TryGetActualResponseMetadataModel>>
+        > ActionWithActionResultOfTReturningOkResult()
         {
             await Task.Yield();
             var models = new List<TryGetActualResponseMetadataModel>();
@@ -13,7 +15,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.ActualApiResponseMeta
             return Ok(models);
         }
 
-        public async Task<ActionResult<IEnumerable<TryGetActualResponseMetadataModel>>> ActionWithActionResultOfTReturningModel()
+        public async Task<
+            ActionResult<IEnumerable<TryGetActualResponseMetadataModel>>
+        > ActionWithActionResultOfTReturningModel()
         {
             await Task.Yield();
             var models = new List<TryGetActualResponseMetadataModel>();
@@ -21,7 +25,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.ActualApiResponseMeta
             return models;
         }
 
-        public async Task<ActionResult<TryGetActualResponseMetadataModel>> ActionReturningNotFoundAndModel(int id)
+        public async Task<
+            ActionResult<TryGetActualResponseMetadataModel>
+        > ActionReturningNotFoundAndModel(int id)
         {
             await Task.Yield();
 

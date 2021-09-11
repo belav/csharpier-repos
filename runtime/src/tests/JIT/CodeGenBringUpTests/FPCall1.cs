@@ -11,20 +11,26 @@ public class BringUpTest
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static float FPNeg(float x) { return -x; }
+    public static float FPNeg(float x)
+    {
+        return -x;
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static float FPCall1(float f) { 
+    public static float FPCall1(float f)
+    {
         float x = FPNeg(f);
         float zero = x + f;
         return zero;
     }
-                                       
+
     public static int Main()
     {
         float y = FPCall1(-1f);
         Console.WriteLine(y);
-        if (System.Math.Abs(y) <= Single.Epsilon) return Pass;
-        else return Fail;
+        if (System.Math.Abs(y) <= Single.Epsilon)
+            return Pass;
+        else
+            return Fail;
     }
 }

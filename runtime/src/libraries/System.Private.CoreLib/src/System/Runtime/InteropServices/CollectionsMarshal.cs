@@ -15,8 +15,8 @@ namespace System.Runtime.InteropServices
         /// Items should not be added or removed from the <see cref="List{T}"/> while the <see cref="Span{T}"/> is in use.
         /// </summary>
         /// <param name="list">The list to get the data view over.</param>
-        public static Span<T> AsSpan<T>(List<T>? list)
-            => list is null ? default : new Span<T>(list._items, 0, list._size);
+        public static Span<T> AsSpan<T>(List<T>? list) =>
+            list is null ? default : new Span<T>(list._items, 0, list._size);
 
         /// <summary>
         /// Gets either a ref to a <typeparamref name="TValue"/> in the <see cref="Dictionary{TKey, TValue}"/> or a ref null if it does not exist in the <paramref name="dictionary"/>.
@@ -27,7 +27,9 @@ namespace System.Runtime.InteropServices
         /// Items should not be added or removed from the <see cref="Dictionary{TKey, TValue}"/> while the ref <typeparamref name="TValue"/> is in use.
         /// The ref null can be detected using System.Runtime.CompilerServices.Unsafe.IsNullRef
         /// </remarks>
-        public static ref TValue GetValueRefOrNullRef<TKey, TValue>(Dictionary<TKey, TValue> dictionary, TKey key) where TKey : notnull
-            => ref dictionary.FindValue(key);
+        public static ref TValue GetValueRefOrNullRef<TKey, TValue>(
+            Dictionary<TKey, TValue> dictionary,
+            TKey key
+        ) where TKey : notnull => ref dictionary.FindValue(key);
     }
 }

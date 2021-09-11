@@ -16,11 +16,17 @@ namespace System.Xml.Xsl.XsltOld
 
         internal void OnInstructionExecute(Processor processor)
         {
-            Debug.Assert(processor.Debugger != null, "We don't generate calls this function if ! debugger");
+            Debug.Assert(
+                processor.Debugger != null,
+                "We don't generate calls this function if ! debugger"
+            );
             Debug.Assert(DbgData.StyleSheet != null, "We call this function from *EventDbg only");
             processor.OnInstructionExecute();
         }
 
-        internal virtual DbgData DbgData { get { return DbgData.Empty; } }
+        internal virtual DbgData DbgData
+        {
+            get { return DbgData.Empty; }
+        }
     }
 }

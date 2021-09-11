@@ -19,123 +19,157 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     public class UseExpressionBodyForMethodsRefactoringTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new UseExpressionBodyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new UseExpressionBodyCodeRefactoringProvider();
 
         private OptionsCollection UseExpressionBody =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement);
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+            );
 
         private OptionsCollection UseExpressionBodyDisabledDiagnostic =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.WhenPossible, NotificationOption2.None));
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                new CodeStyleOption2<ExpressionBodyPreference>(
+                    ExpressionBodyPreference.WhenPossible,
+                    NotificationOption2.None
+                )
+            );
 
         private OptionsCollection UseBlockBody =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
 
         private OptionsCollection UseBlockBodyDisabledDiagnostic =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, new CodeStyleOption2<ExpressionBodyPreference>(ExpressionBodyPreference.Never, NotificationOption2.None));
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                new CodeStyleOption2<ExpressionBodyPreference>(
+                    ExpressionBodyPreference.Never,
+                    NotificationOption2.None
+                )
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestNotOfferedIfUserPrefersExpressionBodiesAndInBlockBody()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void Goo()
     {
         [||]Bar();
     }
-}", parameters: new TestParameters(options: UseExpressionBody));
+}",
+                parameters: new TestParameters(options: UseExpressionBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestOfferedIfUserPrefersExpressionBodiesWithoutDiagnosticAndInBlockBody()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void Goo()
     {
         [||]Bar();
     }
 }",
-@"class C
+                @"class C
 {
     void Goo() => Bar();
-}", parameters: new TestParameters(options: UseExpressionBodyDisabledDiagnostic));
+}",
+                parameters: new TestParameters(options: UseExpressionBodyDisabledDiagnostic)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestOfferedIfUserPrefersBlockBodiesAndInBlockBody()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void Goo()
     {
         [||]Bar();
     }
 }",
-@"class C
+                @"class C
 {
     void Goo() => Bar();
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestNotOfferedInLambda()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     Action Goo()
     {
         return () => { [||] };
     }
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestNotOfferedIfUserPrefersBlockBodiesAndInExpressionBody()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void Goo() => [||]Bar();
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestOfferedIfUserPrefersBlockBodiesWithoutDiagnosticAndInExpressionBody()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void Goo() => [||]Bar();
 }",
-@"class C
+                @"class C
 {
     void Goo()
     {
         Bar();
     }
-}", parameters: new TestParameters(options: UseBlockBodyDisabledDiagnostic));
+}",
+                parameters: new TestParameters(options: UseBlockBodyDisabledDiagnostic)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestOfferedIfUserPrefersExpressionBodiesAndInExpressionBody()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void Goo() => [||]Bar();
 }",
-@"class C
+                @"class C
 {
     void Goo()
     {
         Bar();
     }
-}", parameters: new TestParameters(options: UseExpressionBody));
+}",
+                parameters: new TestParameters(options: UseExpressionBody)
+            );
         }
 
         [WorkItem(25501, "https://github.com/dotnet/roslyn/issues/25501")]
@@ -143,17 +177,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestOfferedAtStartOfMethod()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     [||]void Goo()
     {
         Bar();
     }
 }",
-@"class C
+                @"class C
 {
     void Goo() => Bar();
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [WorkItem(25501, "https://github.com/dotnet/roslyn/issues/25501")]
@@ -161,17 +197,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestOfferedBeforeMethodOnSameLine()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
 [||]    void Goo()
     {
         Bar();
     }
 }",
-@"class C
+                @"class C
 {
     void Goo() => Bar();
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [WorkItem(25501, "https://github.com/dotnet/roslyn/issues/25501")]
@@ -179,7 +217,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestOfferedBeforeAttributes()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     [||][A]
     void Goo()
@@ -187,11 +225,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         Bar();
     }
 }",
-@"class C
+                @"class C
 {
     [A]
     void Goo() => Bar();
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [WorkItem(25501, "https://github.com/dotnet/roslyn/issues/25501")]
@@ -199,14 +239,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestNotOfferedBeforeComments()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     [||]/// <summary/>
     void Goo()
     {
         Bar();
     }
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [WorkItem(25501, "https://github.com/dotnet/roslyn/issues/25501")]
@@ -214,14 +256,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestNotOfferedInComments()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     /// [||]<summary/>
     void Goo()
     {
         Bar();
     }
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
     }
 }

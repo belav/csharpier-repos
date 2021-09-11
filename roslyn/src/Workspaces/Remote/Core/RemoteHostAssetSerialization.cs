@@ -19,24 +19,45 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal static class RemoteHostAssetSerialization
     {
-        internal static readonly PipeOptions PipeOptionsWithUnlimitedWriterBuffer = new(pauseWriterThreshold: long.MaxValue);
+        internal static readonly PipeOptions PipeOptionsWithUnlimitedWriterBuffer =
+            new(pauseWriterThreshold: long.MaxValue);
 
-        public static async Task WriteDataAsync(ObjectWriter writer, SolutionAssetStorage assetStorage, ISerializerService serializer, int scopeId, Checksum[] checksums, CancellationToken cancellationToken)
-        {
+        public static async Task WriteDataAsync(
+            ObjectWriter writer,
+            SolutionAssetStorage assetStorage,
+            ISerializerService serializer,
+            int scopeId,
+            Checksum[] checksums,
+            CancellationToken cancellationToken
+        ) {
             SolutionAsset? singleAsset = null;
             IReadOnlyDictionary<Checksum, SolutionAsset>? assetMap = null;
 
             if (checksums.Length == 1)
             {
-                singleAsset = (await assetStorage.GetAssetAsync(scopeId, checksums[0], cancellationToken).ConfigureAwait(false)) ?? SolutionAsset.Null;
+                singleAsset =
+                    (
+                        await assetStorage.GetAssetAsync(scopeId, checksums[0], cancellationToken)
+                            .ConfigureAwait(false)
+                    ) ?? SolutionAsset.Null;
             }
             else
             {
-                assetMap = await assetStorage.GetAssetsAsync(scopeId, checksums, cancellationToken).ConfigureAwait(false);
+                assetMap = await assetStorage.GetAssetsAsync(scopeId, checksums, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             var replicationContext = assetStorage.GetReplicationContext(scopeId);
-            WriteData(writer, singleAsset, assetMap, serializer, replicationContext, scopeId, checksums, cancellationToken);
+            WriteData(
+                writer,
+                singleAsset,
+                assetMap,
+                serializer,
+                replicationContext,
+                scopeId,
+                checksums,
+                cancellationToken
+            );
         }
 
         public static void WriteData(
@@ -47,8 +68,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SolutionReplicationContext context,
             int scopeId,
             Checksum[] checksums,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             writer.WriteInt32(scopeId);
 
             // special case
@@ -61,7 +82,14 @@ namespace Microsoft.CodeAnalysis.Remote
             if (singleAsset != null)
             {
                 writer.WriteInt32(1);
-                WriteAsset(writer, serializer, context, checksums[0], singleAsset, cancellationToken);
+                WriteAsset(
+                    writer,
+                    serializer,
+                    context,
+                    checksums[0],
+                    singleAsset,
+                    cancellationToken
+                );
                 return;
             }
 
@@ -73,8 +101,14 @@ namespace Microsoft.CodeAnalysis.Remote
                 WriteAsset(writer, serializer, context, checksum, asset, cancellationToken);
             }
 
-            static void WriteAsset(ObjectWriter writer, ISerializerService serializer, SolutionReplicationContext context, Checksum checksum, SolutionAsset asset, CancellationToken cancellationToken)
-            {
+            static void WriteAsset(
+                ObjectWriter writer,
+                ISerializerService serializer,
+                SolutionReplicationContext context,
+                Checksum checksum,
+                SolutionAsset asset,
+                CancellationToken cancellationToken
+            ) {
                 checksum.WriteTo(writer);
                 writer.WriteInt32((int)asset.Kind);
 
@@ -86,8 +120,13 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        public static async ValueTask<ImmutableArray<(Checksum, object)>> ReadDataAsync(PipeReader pipeReader, int scopeId, ISet<Checksum> checksums, ISerializerService serializerService, CancellationToken cancellationToken)
-        {
+        public static async ValueTask<ImmutableArray<(Checksum, object)>> ReadDataAsync(
+            PipeReader pipeReader,
+            int scopeId,
+            ISet<Checksum> checksums,
+            ISerializerService serializerService,
+            CancellationToken cancellationToken
+        ) {
             // We can cancel at entry, but once the pipe operations are scheduled we rely on both operations running to
             // avoid deadlocks (the exception handler in 'copyTask' ensures progress is made in the blocking read).
             cancellationToken.ThrowIfCancellationRequested();
@@ -103,21 +142,25 @@ namespace Microsoft.CodeAnalysis.Remote
             Exception? copyException = null;
 
             // start a task on a thread pool thread copying from the RPC pipe to a local pipe:
-            var copyTask = Task.Run(async () =>
-            {
-                try
+            var copyTask = Task.Run(
+                async () =>
                 {
-                    await pipeReader.CopyToAsync(localPipe.Writer, cancellationToken).ConfigureAwait(false);
-                }
-                catch (Exception e)
-                {
-                    copyException = e;
-                }
-                finally
-                {
-                    await localPipe.Writer.CompleteAsync(copyException).ConfigureAwait(false);
-                }
-            }, mustNotCancelToken);
+                    try
+                    {
+                        await pipeReader.CopyToAsync(localPipe.Writer, cancellationToken)
+                            .ConfigureAwait(false);
+                    }
+                    catch (Exception e)
+                    {
+                        copyException = e;
+                    }
+                    finally
+                    {
+                        await localPipe.Writer.CompleteAsync(copyException).ConfigureAwait(false);
+                    }
+                },
+                mustNotCancelToken
+            );
 
             // blocking read from the local pipe on the current thread:
             try
@@ -125,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 using var stream = localPipe.Reader.AsStream(leaveOpen: false);
                 return ReadData(stream, scopeId, checksums, serializerService, cancellationToken);
             }
-            catch (EndOfStreamException) when (IsEndOfStreamExceptionExpected(copyException, cancellationToken))
+            catch (EndOfStreamException)
+                when (IsEndOfStreamExceptionExpected(copyException, cancellationToken))
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -139,8 +183,10 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             // Local functions
-            static bool IsEndOfStreamExceptionExpected(Exception? copyException, CancellationToken cancellationToken)
-            {
+            static bool IsEndOfStreamExceptionExpected(
+                Exception? copyException,
+                CancellationToken cancellationToken
+            ) {
                 // The local pipe is only closed in the 'finally' block of 'copyTask'. If the reader fails with an
                 // EndOfStreamException, we known 'copyTask' has already completed its work.
                 if (cancellationToken.IsCancellationRequested)
@@ -162,8 +208,13 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        public static ImmutableArray<(Checksum, object)> ReadData(Stream stream, int scopeId, ISet<Checksum> checksums, ISerializerService serializerService, CancellationToken cancellationToken)
-        {
+        public static ImmutableArray<(Checksum, object)> ReadData(
+            Stream stream,
+            int scopeId,
+            ISet<Checksum> checksums,
+            ISerializerService serializerService,
+            CancellationToken cancellationToken
+        ) {
             Debug.Assert(!checksums.Contains(Checksum.Null));
 
             using var _ = ArrayBuilder<(Checksum, object)>.GetInstance(out var results);

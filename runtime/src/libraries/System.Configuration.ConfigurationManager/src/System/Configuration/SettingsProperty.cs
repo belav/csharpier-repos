@@ -30,8 +30,8 @@ namespace System.Configuration
             SettingsSerializeAs serializeAs,
             SettingsAttributeDictionary attributes,
             bool throwOnErrorDeserializing,
-            bool throwOnErrorSerializing)
-        {
+            bool throwOnErrorSerializing
+        ) {
             Name = name;
             PropertyType = propertyType;
             Provider = provider;
@@ -56,5 +56,4 @@ namespace System.Configuration
             Attributes = new SettingsAttributeDictionary(propertyToCopy.Attributes);
         }
     }
-
 }

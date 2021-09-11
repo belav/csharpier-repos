@@ -56,8 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public RelationalMethodCallTranslatorProviderDependencies(
             ISqlExpressionFactory sqlExpressionFactory,
             IEnumerable<IMethodCallTranslatorPlugin> plugins,
-            IRelationalTypeMappingSource typeMappingSource)
-        {
+            IRelationalTypeMappingSource typeMappingSource
+        ) {
             Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
             Check.NotNull(plugins, nameof(plugins));
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));

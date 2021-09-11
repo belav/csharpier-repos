@@ -8,14 +8,19 @@ namespace DefaultNamespace
     //@ENDRENAME; Verify this renames
     using System;
 
-    internal interface IV2
-    { }
+    internal interface IV2 { }
 
     internal struct V2 : IV2
     {
         //public V2() {} 		ANDREIS: commented due compiler error SC0568
-        public override bool Equals(Object o) { return false; }
-        public override int GetHashCode() { return 0; }
+        public override bool Equals(Object o)
+        {
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return 0;
+        }
     }
 
     // The legendary 37-byte value class.

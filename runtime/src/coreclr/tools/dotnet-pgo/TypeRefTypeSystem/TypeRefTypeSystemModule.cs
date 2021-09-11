@@ -15,8 +15,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
     {
         AssemblyName _name;
         List<TypeRefTypeSystemType> _types = new List<TypeRefTypeSystemType>();
-        Dictionary<string, TypeRefTypeSystemType> _nonNamespacedTypes = new Dictionary<string, TypeRefTypeSystemType>();
-        Dictionary<string, Dictionary<string, TypeRefTypeSystemType>> _namespacedTypes = new Dictionary<string, Dictionary<string, TypeRefTypeSystemType>>();
+        Dictionary<string, TypeRefTypeSystemType> _nonNamespacedTypes = new Dictionary<
+            string,
+            TypeRefTypeSystemType
+        >();
+        Dictionary<string, Dictionary<string, TypeRefTypeSystemType>> _namespacedTypes =
+            new Dictionary<string, Dictionary<string, TypeRefTypeSystemType>>();
 
         public TypeRefTypeSystemModule(TypeSystemContext tsc, AssemblyName name) : base(tsc, null)
         {
@@ -30,7 +34,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             {
                 type = new TypeRefTypeSystemType(nameSpace, name, this);
 
-                Dictionary<string, TypeRefTypeSystemType> nameToTypeDictionary = _nonNamespacedTypes;
+                Dictionary<string, TypeRefTypeSystemType> nameToTypeDictionary =
+                    _nonNamespacedTypes;
                 if (!String.IsNullOrEmpty(nameSpace))
                 {
                     if (!_namespacedTypes.TryGetValue(nameSpace, out nameToTypeDictionary))
@@ -71,12 +76,19 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             return type;
         }
 
-        public override MetadataType GetType(string nameSpace, string name, NotFoundBehavior notFoundBehavior)
-        {
+        public override MetadataType GetType(
+            string nameSpace,
+            string name,
+            NotFoundBehavior notFoundBehavior
+        ) {
             MetadataType type = GetTypeInternal(nameSpace, name);
             if ((type == null) && notFoundBehavior != NotFoundBehavior.ReturnNull)
             {
-                ResolutionFailure failure = ResolutionFailure.GetTypeLoadResolutionFailure(nameSpace, name, this);
+                ResolutionFailure failure = ResolutionFailure.GetTypeLoadResolutionFailure(
+                    nameSpace,
+                    name,
+                    this
+                );
                 ModuleDesc.GetTypeResolutionFailure = failure;
                 if (notFoundBehavior == NotFoundBehavior.Throw)
                     failure.Throw();

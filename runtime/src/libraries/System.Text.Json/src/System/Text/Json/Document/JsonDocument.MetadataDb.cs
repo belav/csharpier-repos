@@ -213,8 +213,11 @@ namespace System.Text.Json
             {
                 // StartArray or StartObject should have length -1, otherwise the length should not be -1.
                 Debug.Assert(
-                    (tokenType == JsonTokenType.StartArray || tokenType == JsonTokenType.StartObject) ==
-                    (length == DbRow.UnknownSize));
+                    (
+                        tokenType == JsonTokenType.StartArray
+                        || tokenType == JsonTokenType.StartObject
+                    ) == (length == DbRow.UnknownSize)
+                );
 
                 if (Length >= _data.Length - DbRow.Size)
                 {
@@ -245,7 +248,10 @@ namespace System.Text.Json
             {
                 Debug.Assert(index >= 0);
                 Debug.Assert(index <= Length - DbRow.Size, $"index {index} is out of bounds");
-                Debug.Assert(index % DbRow.Size == 0, $"index {index} is not at a record start position");
+                Debug.Assert(
+                    index % DbRow.Size == 0,
+                    $"index {index} is not at a record start position"
+                );
             }
 
             internal void SetLength(int index, int length)
@@ -283,7 +289,10 @@ namespace System.Text.Json
 
             internal int FindIndexOfFirstUnsetSizeOrLength(JsonTokenType lookupType)
             {
-                Debug.Assert(lookupType == JsonTokenType.StartObject || lookupType == JsonTokenType.StartArray);
+                Debug.Assert(
+                    lookupType == JsonTokenType.StartObject
+                        || lookupType == JsonTokenType.StartArray
+                );
                 return FindOpenElement(lookupType);
             }
 
@@ -324,7 +333,8 @@ namespace System.Text.Json
             {
                 Debug.Assert(
                     endIndex > startIndex,
-                    $"endIndex={endIndex} was at or before startIndex={startIndex}");
+                    $"endIndex={endIndex} was at or before startIndex={startIndex}"
+                );
 
                 AssertValidIndex(startIndex);
                 Debug.Assert(endIndex <= Length);
@@ -337,19 +347,22 @@ namespace System.Text.Json
                 {
                     Debug.Assert(
                         end.TokenType == JsonTokenType.EndObject,
-                        $"StartObject paired with {end.TokenType}");
+                        $"StartObject paired with {end.TokenType}"
+                    );
                 }
                 else if (start.TokenType == JsonTokenType.StartArray)
                 {
                     Debug.Assert(
                         end.TokenType == JsonTokenType.EndArray,
-                        $"StartArray paired with {end.TokenType}");
+                        $"StartArray paired with {end.TokenType}"
+                    );
                 }
                 else
                 {
                     Debug.Assert(
                         startIndex + DbRow.Size == endIndex,
-                        $"{start.TokenType} should have been one row");
+                        $"{start.TokenType} should have been one row"
+                    );
                 }
 #endif
 
@@ -367,8 +380,11 @@ namespace System.Text.Json
                     locationOffset--;
                 }
 
-                for (int i = (length - DbRow.Size) / sizeof(int); i >= 0; i -= DbRow.Size / sizeof(int))
-                {
+                for (
+                    int i = (length - DbRow.Size) / sizeof(int);
+                    i >= 0;
+                    i -= DbRow.Size / sizeof(int)
+                ) {
                     Debug.Assert(newDbInts[i] >= locationOffset);
                     newDbInts[i] -= locationOffset;
                 }

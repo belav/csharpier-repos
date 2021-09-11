@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (modelExplorer.Metadata.SimpleDisplayProperty != null)
             {
                 var propertyExplorer = modelExplorer.GetExplorerForProperty(
-                    modelExplorer.Metadata.SimpleDisplayProperty);
+                    modelExplorer.Metadata.SimpleDisplayProperty
+                );
                 if (propertyExplorer?.Model != null)
                 {
                     return propertyExplorer.Model.ToString();
@@ -43,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (modelExplorer.Metadata.IsEnum && modelExplorer.Model is Enum modelEnum)
             {
                 var enumStringValue = modelEnum.ToString("d");
-                var enumGroupedDisplayNamesAndValues = modelExplorer.Metadata.EnumGroupedDisplayNamesAndValues;
+                var enumGroupedDisplayNamesAndValues =
+                    modelExplorer.Metadata.EnumGroupedDisplayNamesAndValues;
 
                 Debug.Assert(enumGroupedDisplayNamesAndValues != null);
 
@@ -62,8 +64,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return string.Empty;
             }
 
-            if (!stringResult.Equals(modelExplorer.Model.GetType().FullName, StringComparison.Ordinal))
-            {
+            if (
+                !stringResult.Equals(
+                    modelExplorer.Model.GetType().FullName,
+                    StringComparison.Ordinal
+                )
+            ) {
                 return stringResult;
             }
 

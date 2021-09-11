@@ -11,10 +11,10 @@ internal static partial class Interop
     {
         internal enum LockOperations : int
         {
-            LOCK_SH = 1,    /* shared lock */
-            LOCK_EX = 2,    /* exclusive lock */
-            LOCK_NB = 4,    /* don't block when locking*/
-            LOCK_UN = 8,    /* unlock */
+            LOCK_SH = 1, /* shared lock */
+            LOCK_EX = 2, /* exclusive lock */
+            LOCK_NB = 4, /* don't block when locking*/
+            LOCK_UN = 8, /* unlock */
         }
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_FLock", SetLastError = true)]

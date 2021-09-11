@@ -7,11 +7,7 @@ public class Misc
 { //Only append content to this class as the test suite depends on line info
     public static int CreateObject(int foo, int bar)
     {
-        var f = new Fancy()
-        {
-            Foo = foo,
-            Bar = bar,
-        };
+        var f = new Fancy() { Foo = foo, Bar = bar, };
 
         Console.WriteLine($"{f.Foo} {f.Bar}");
         return f.Foo + f.Bar;
@@ -50,7 +46,8 @@ public class Fancy
     }
 }
 
-public class UserBreak {
+public class UserBreak
+{
     public static void BreakOnDebuggerBreakCommand()
     {
         Debugger.Break();

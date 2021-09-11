@@ -31,40 +31,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         private const int Parameter = 4;
         private const int ParameterAndOverrides = 5;
 
-        public GenerateVariableTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public GenerateVariableTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpGenerateVariableCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpGenerateVariableCodeFixProvider());
 
-        private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(true, NotificationOption2.Suggestion);
+        private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Suggestion
+        );
 
         // specify all options explicitly to override defaults.
-        private OptionsCollection ImplicitTypingEverywhere()
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection ImplicitTypingEverywhere() =>
+            new OptionsCollection(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, onWithInfo },
             };
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleLowercaseIdentifier1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private object goo;
 
@@ -72,21 +74,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
     {
         goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleLowercaseIdentifier2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private readonly object goo;
 
@@ -95,21 +98,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
         goo;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestTestSimpleLowercaseIdentifier3()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     public object goo { get; private set; }
 
@@ -118,21 +122,22 @@ index: ReadonlyFieldIndex);
         goo;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleUppercaseIdentifier1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     public object Goo { get; private set; }
 
@@ -140,21 +145,22 @@ index: PropertyIndex);
     {
         Goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleUppercaseIdentifier2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private object Goo;
 
@@ -163,21 +169,22 @@ index: PropertyIndex);
         Goo;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleUppercaseIdentifier3()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private readonly object Goo;
 
@@ -186,21 +193,22 @@ index: ReadonlyFieldIndex);
         Goo;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleRead1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
         Method([|goo|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     private int goo;
 
@@ -208,14 +216,15 @@ index: PropertyIndex);
     {
         Method(goo);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleReadWithTopLevelNullability()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 class Class
 {
@@ -224,7 +233,7 @@ class Class
         Method([|goo|]);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class Class
 {
@@ -234,14 +243,15 @@ class Class
     {
         Method(goo);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleReadWithNestedNullability()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 using System.Collections.Generic;
 
@@ -252,7 +262,7 @@ class Class
         Method([|goo|]);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System.Collections.Generic;
 
@@ -264,28 +274,36 @@ class Class
     {
         Method(goo);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleWriteCount()
         {
             await TestExactActionSetOfferedAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
         [|goo|] = 1;
     }
 }",
-new[] { string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"), string.Format(FeaturesResources.Generate_property_1_0, "goo", "Class"), string.Format(FeaturesResources.Generate_local_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0, "goo") });
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"),
+                    string.Format(FeaturesResources.Generate_property_1_0, "goo", "Class"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo")
+                }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleWriteInOverrideCount()
         {
             await TestExactActionSetOfferedAsync(
-@"
+                @"
 abstract class Base
 {
     public abstract void Method(int i);
@@ -298,21 +316,32 @@ class Class : Base
         [|goo|] = 1;
     }
 }",
-new[] { string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"), string.Format(FeaturesResources.Generate_property_1_0, "goo", "Class"), string.Format(FeaturesResources.Generate_local_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0_and_overrides_implementations, "goo") });
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"),
+                    string.Format(FeaturesResources.Generate_property_1_0, "goo", "Class"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo"),
+                    string.Format(
+                        FeaturesResources.Generate_parameter_0_and_overrides_implementations,
+                        "goo"
+                    )
+                }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleWrite1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
         [|goo|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     private int goo;
 
@@ -320,21 +349,22 @@ new[] { string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"), str
     {
         goo = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestSimpleWrite2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
         [|goo|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     public int goo { get; private set; }
 
@@ -343,21 +373,22 @@ new[] { string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"), str
         goo = 1;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldInRef()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(ref int i)
     {
         Method(ref this.[|goo|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     private int goo;
 
@@ -365,14 +396,15 @@ index: ReadonlyFieldIndex);
     {
         Method(ref this.[|goo|]);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyInRef()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 class Class
 {
@@ -381,7 +413,7 @@ class Class
         Method(ref this.[|goo|]);
     }
 }",
-@"
+                @"
 using System;
 class Class
 {
@@ -391,14 +423,16 @@ class Class
     {
         Method(ref this.goo);
     }
-}", index: ReadonlyFieldIndex);
+}",
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyInIn()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 class Class
 {
@@ -407,7 +441,7 @@ class Class
         Method(in this.[|goo|]);
     }
 }",
-@"
+                @"
 using System;
 class Class
 {
@@ -417,21 +451,23 @@ class Class
     {
         Method(in this.goo);
     }
-}", index: PropertyIndex);
+}",
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInRef1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(ref int i)
     {
         Method(ref [|goo|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     private int goo;
 
@@ -439,35 +475,42 @@ class Class
     {
         Method(ref goo);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInOutCodeActionCount()
         {
             await TestExactActionSetOfferedAsync(
-@"class Class
+                @"class Class
 {
     void Method(out int i)
     {
         Method(out [|goo|]);
     }
 }",
-new[] { string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"), string.Format(FeaturesResources.Generate_local_0, "goo"), string.Format(FeaturesResources.Generate_parameter_0, "goo") });
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"),
+                    string.Format(FeaturesResources.Generate_local_0, "goo"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "goo")
+                }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInOut1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(out int i)
     {
         Method(out [|goo|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     private int goo;
 
@@ -475,21 +518,22 @@ new[] { string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"), str
     {
         Method(out goo);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateInStaticMember1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     static void Method()
     {
         [|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private static object goo;
 
@@ -497,21 +541,22 @@ new[] { string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"), str
     {
         goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateInStaticMember2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     static void Method()
     {
         [|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private static readonly object goo;
 
@@ -520,21 +565,22 @@ new[] { string.Format(FeaturesResources.Generate_field_1_0, "goo", "Class"), str
         goo;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateInStaticMember3()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     static void Method()
     {
         [|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     public static object goo { get; private set; }
 
@@ -543,21 +589,22 @@ index: ReadonlyFieldIndex);
         goo;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateOffInstance1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         this.[|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private object goo;
 
@@ -565,21 +612,22 @@ index: PropertyIndex);
     {
         this.goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateOffInstance2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         this.[|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private readonly object goo;
 
@@ -588,21 +636,22 @@ index: PropertyIndex);
         this.goo;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateOffInstance3()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         this.[|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     public object goo { get; private set; }
 
@@ -611,21 +660,22 @@ index: ReadonlyFieldIndex);
         this.goo;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateOffWrittenInstance1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         this.[|goo|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     private int goo;
 
@@ -633,21 +683,22 @@ index: PropertyIndex);
     {
         this.goo = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateOffWrittenInstance2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         this.[|goo|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     public int goo { get; private set; }
 
@@ -656,21 +707,22 @@ index: PropertyIndex);
         this.goo = 1;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateOffStatic1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         Class.[|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private static object goo;
 
@@ -678,21 +730,22 @@ index: ReadonlyFieldIndex);
     {
         Class.goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateOffStatic2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         Class.[|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private static readonly object goo;
 
@@ -701,21 +754,22 @@ index: ReadonlyFieldIndex);
         Class.goo;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateOffStatic3()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         Class.[|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     public static object goo { get; private set; }
 
@@ -724,21 +778,22 @@ index: ReadonlyFieldIndex);
         Class.goo;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateOffWrittenStatic1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         Class.[|goo|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     private static int goo;
 
@@ -746,21 +801,22 @@ index: PropertyIndex);
     {
         Class.goo = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateOffWrittenStatic2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         Class.[|goo|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     public static int goo { get; private set; }
 
@@ -769,14 +825,15 @@ index: PropertyIndex);
         Class.goo = 1;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateInstanceIntoSibling1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -787,7 +844,7 @@ index: ReadonlyFieldIndex);
 class D
 {
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -798,14 +855,15 @@ class D
 class D
 {
     internal object goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateInstanceIntoOuter1()
         {
             await TestInRegularAndScriptAsync(
-@"class Outer
+                @"class Outer
 {
     class Class
     {
@@ -815,7 +873,7 @@ class D
         }
     }
 }",
-@"class Outer
+                @"class Outer
 {
     private object goo;
 
@@ -826,14 +884,15 @@ class D
             new Outer().goo;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateInstanceIntoDerived1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class : Base
+                @"class Class : Base
 {
     void Method(Base b)
     {
@@ -844,7 +903,7 @@ class D
 class Base
 {
 }",
-@"class Class : Base
+                @"class Class : Base
 {
     void Method(Base b)
     {
@@ -855,14 +914,15 @@ class Base
 class Base
 {
     internal object goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateStaticIntoDerived1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class : Base
+                @"class Class : Base
 {
     void Method(Base b)
     {
@@ -873,7 +933,7 @@ class Base
 class Base
 {
 }",
-@"class Class : Base
+                @"class Class : Base
 {
     void Method(Base b)
     {
@@ -884,14 +944,15 @@ class Base
 class Base
 {
     protected static object goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateIntoInterfaceFixCount()
         {
             await TestActionCountAsync(
-@"class Class
+                @"class Class
 {
     void Method(I i)
     {
@@ -902,14 +963,15 @@ class Base
 interface I
 {
 }",
-count: 2);
+                count: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateIntoInterface1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(I i)
     {
@@ -920,7 +982,7 @@ count: 2);
 interface I
 {
 }",
-@"class Class
+                @"class Class
 {
     void Method(I i)
     {
@@ -931,14 +993,16 @@ interface I
 interface I
 {
     object Goo { get; set; }
-}", index: ReadonlyFieldIndex);
+}",
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateIntoInterface2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(I i)
     {
@@ -949,7 +1013,7 @@ interface I
 interface I
 {
 }",
-@"class Class
+                @"class Class
 {
     void Method(I i)
     {
@@ -960,14 +1024,15 @@ interface I
 interface I
 {
     object Goo { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateStaticIntoInterfaceMissing()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(I i)
     {
@@ -977,14 +1042,15 @@ interface I
 
 interface I
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateWriteIntoInterfaceFixCount()
         {
             await TestActionCountAsync(
-@"class Class
+                @"class Class
 {
     void Method(I i)
     {
@@ -995,14 +1061,15 @@ interface I
 interface I
 {
 }",
-count: 1);
+                count: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateWriteIntoInterface1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(I i)
     {
@@ -1013,7 +1080,7 @@ count: 1);
 interface I
 {
 }",
-@"class Class
+                @"class Class
 {
     void Method(I i)
     {
@@ -1024,21 +1091,22 @@ interface I
 interface I
 {
     int Goo { get; set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateInGenericType()
         {
             await TestInRegularAndScriptAsync(
-@"class Class<T>
+                @"class Class<T>
 {
     void Method(T t)
     {
         [|goo|] = t;
     }
 }",
-@"class Class<T>
+                @"class Class<T>
 {
     private T goo;
 
@@ -1046,21 +1114,22 @@ interface I
     {
         goo = t;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateInGenericMethod1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method<T>(T t)
     {
         [|goo|] = t;
     }
 }",
-@"class Class
+                @"class Class
 {
     private object goo;
 
@@ -1068,21 +1137,22 @@ interface I
     {
         goo = t;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateInGenericMethod2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method<T>(IList<T> t)
     {
         [|goo|] = t;
     }
 }",
-@"class Class
+                @"class Class
 {
     private IList<object> goo;
 
@@ -1090,14 +1160,15 @@ interface I
     {
         goo = t;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldBeforeFirstField()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -1106,7 +1177,7 @@ interface I
         [|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     int i;
     private object goo;
@@ -1115,14 +1186,15 @@ interface I
     {
         goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldAfterLastField()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -1131,7 +1203,7 @@ interface I
 
     int i;
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -1140,14 +1212,15 @@ interface I
 
     int i;
     private object goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyAfterLastField1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     int Bar;
 
@@ -1156,7 +1229,7 @@ interface I
         [|Goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     int Bar;
 
@@ -1166,14 +1239,15 @@ interface I
     {
         Goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyAfterLastField2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -1182,7 +1256,7 @@ interface I
 
     int Bar;
 }",
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -1192,14 +1266,15 @@ interface I
     int Bar;
 
     public object Goo { get; private set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyBeforeFirstProperty()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     int Quux { get; }
 
@@ -1208,7 +1283,7 @@ interface I
         [|Goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     public object Goo { get; private set; }
     int Quux { get; }
@@ -1217,14 +1292,15 @@ interface I
     {
         Goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyBeforeFirstPropertyEvenWithField1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     int Bar;
 
@@ -1235,7 +1311,7 @@ interface I
         [|Goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     int Bar;
 
@@ -1246,14 +1322,15 @@ interface I
     {
         Goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyAfterLastPropertyEvenWithField2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     int Quux { get; }
 
@@ -1264,7 +1341,7 @@ interface I
         [|Goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     int Quux { get; }
     public object Goo { get; private set; }
@@ -1275,118 +1352,130 @@ interface I
     {
         Goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestMissingInInvocation()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|Goo|]();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestMissingInObjectCreation()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         new [|Goo|]();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestMissingInTypeDeclaration()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|A|] a;
     }
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|A.B|] a;
     }
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|A|].B a;
     }
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         A.[|B|] a;
     }
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|A.B.C|] a;
     }
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|A.B|].C a;
     }
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         A.B.[|C|] a;
     }
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|A|].B.C a;
     }
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         A.[|B|].C a;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539336, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539336")]
@@ -1394,58 +1483,67 @@ interface I
         public async Task TestMissingInAttribute()
         {
             await TestMissingInRegularAndScriptAsync(
-@"[[|A|]]
+                @"[[|A|]]
 class Class
 {
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"[[|A.B|]]
+                @"[[|A.B|]]
 class Class
 {
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"[[|A|].B]
+                @"[[|A|].B]
 class Class
 {
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"[A.[|B|]]
+                @"[A.[|B|]]
 class Class
 {
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"[[|A.B.C|]]
+                @"[[|A.B.C|]]
 class Class
 {
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"[[|A.B|].C]
+                @"[[|A.B|].C]
 class Class
 {
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"[A.B.[|C|]]
+                @"[A.B.[|C|]]
 class Class
 {
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"[[|A|].B.C]
+                @"[[|A|].B.C]
 class Class
 {
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"[A.B.[|C|]]
+                @"[A.B.[|C|]]
 class Class
 {
-}");
+}"
+            );
         }
 
         [WorkItem(539340, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539340")]
@@ -1453,63 +1551,70 @@ class Class
         public async Task TestSpansField()
         {
             await TestSpansAsync(
-@"class C
+                @"class C
 {
     void M()
     {
-        this.[|Goo|] }");
+        this.[|Goo|] }"
+            );
 
             await TestSpansAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         this.[|Goo|];
-    }");
+    }"
+            );
 
             await TestSpansAsync(
-@"class C
+                @"class C
 {
     void M()
     {
-        this.[|Goo|] = 1 }");
+        this.[|Goo|] = 1 }"
+            );
 
             await TestSpansAsync(
-@"class C
+                @"class C
 {
     void M()
     {
-        this.[|Goo|] = 1 + 2 }");
+        this.[|Goo|] = 1 + 2 }"
+            );
 
             await TestSpansAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         this.[|Goo|] = 1 + 2;
-    }");
+    }"
+            );
 
             await TestSpansAsync(
-@"class C
+                @"class C
 {
     void M()
     {
-        this.[|Goo|] += Bar() }");
+        this.[|Goo|] += Bar() }"
+            );
 
             await TestSpansAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         this.[|Goo|] += Bar();
-    }");
+    }"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldInSimpleLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1518,7 +1623,7 @@ class Program
         Func<string, int> f = x => [|goo|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1528,14 +1633,16 @@ class Program
     {
         Func<string, int> f = x => goo;
     }
-}", FieldIndex);
+}",
+                FieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldInParenthesizedLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1544,7 +1651,7 @@ class Program
         Func<int> f = () => [|goo|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1554,7 +1661,9 @@ class Program
     {
         Func<int> f = () => goo;
     }
-}", FieldIndex);
+}",
+                FieldIndex
+            );
         }
 
         [WorkItem(30232, "https://github.com/dotnet/roslyn/issues/30232")]
@@ -1562,7 +1671,7 @@ class Program
         public async Task TestGenerateFieldInAsyncTaskOfTSimpleLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -1572,7 +1681,7 @@ class Program
         Func<string, Task<int>> f = async x => [|goo|];
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -1583,7 +1692,9 @@ class Program
     {
         Func<string, Task<int>> f = async x => goo;
     }
-}", FieldIndex);
+}",
+                FieldIndex
+            );
         }
 
         [WorkItem(30232, "https://github.com/dotnet/roslyn/issues/30232")]
@@ -1591,7 +1702,7 @@ class Program
         public async Task TestGenerateFieldInAsyncTaskOfTParenthesizedLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -1601,7 +1712,7 @@ class Program
         Func<Task<int>> f = async () => [|goo|];
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -1612,7 +1723,9 @@ class Program
     {
         Func<Task<int>> f = async () => goo;
     }
-}", FieldIndex);
+}",
+                FieldIndex
+            );
         }
 
         [WorkItem(539427, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539427")]
@@ -1620,7 +1733,7 @@ class Program
         public async Task TestGenerateFromLambda()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
@@ -1628,7 +1741,7 @@ class Program
             return 2 };
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1639,7 +1752,8 @@ class Class
         goo = () => {
             return 2 };
     }
-}");
+}"
+            );
         }
 
         // TODO: Move to TypeInferrer.InferTypes, or something
@@ -1648,14 +1762,14 @@ class Class
         public async Task TestGenerateInMethodOverload1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
         System.Console.WriteLine([|goo|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     private bool goo;
 
@@ -1663,7 +1777,8 @@ class Class
     {
         System.Console.WriteLine(goo);
     }
-}");
+}"
+            );
         }
 
         // TODO: Move to TypeInferrer.InferTypes, or something
@@ -1672,14 +1787,14 @@ class Class
         public async Task TestGenerateInMethodOverload2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method(int i)
     {
         System.Console.WriteLine(this.[|goo|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     private bool goo;
 
@@ -1687,7 +1802,8 @@ class Class
     {
         System.Console.WriteLine(this.goo);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539468, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -1695,7 +1811,7 @@ class Class
         public async Task TestExplicitProperty1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class : ITest
+                @"class Class : ITest
 {
     bool ITest.[|SomeProp|] { get; set; }
 }
@@ -1703,7 +1819,7 @@ class Class
 interface ITest
 {
 }",
-@"class Class : ITest
+                @"class Class : ITest
 {
     bool ITest.SomeProp { get; set; }
 }
@@ -1711,7 +1827,8 @@ interface ITest
 interface ITest
 {
     bool SomeProp { get; set; }
-}");
+}"
+            );
         }
 
         [WorkItem(539468, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -1719,7 +1836,7 @@ interface ITest
         public async Task TestExplicitProperty2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class : ITest
+                @"class Class : ITest
 {
     bool ITest.[|SomeProp|] { }
 }
@@ -1727,7 +1844,7 @@ interface ITest
 interface ITest
 {
 }",
-@"class Class : ITest
+                @"class Class : ITest
 {
     bool ITest.SomeProp { }
 }
@@ -1735,7 +1852,9 @@ interface ITest
 interface ITest
 {
     bool SomeProp { get; set; }
-}", index: ReadonlyFieldIndex);
+}",
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(539468, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -1743,7 +1862,7 @@ interface ITest
         public async Task TestExplicitProperty3()
         {
             await TestInRegularAndScriptAsync(
-@"class Class : ITest
+                @"class Class : ITest
 {
     bool ITest.[|SomeProp|] { }
 }
@@ -1751,7 +1870,7 @@ interface ITest
 interface ITest
 {
 }",
-@"class Class : ITest
+                @"class Class : ITest
 {
     bool ITest.SomeProp { }
 }
@@ -1759,7 +1878,8 @@ interface ITest
 interface ITest
 {
     bool SomeProp { get; }
-}");
+}"
+            );
         }
 
         [WorkItem(539468, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -1767,14 +1887,15 @@ interface ITest
         public async Task TestExplicitProperty4()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     bool ITest.[|SomeProp|] { }
 }
 
 interface ITest
 {
-}");
+}"
+            );
         }
 
         [WorkItem(539468, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539468")]
@@ -1782,7 +1903,7 @@ interface ITest
         public async Task TestExplicitProperty5()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class : ITest
+                @"class Class : ITest
 {
     bool ITest.[|SomeProp|] { }
 }
@@ -1790,7 +1911,8 @@ interface ITest
 interface ITest
 {
     bool SomeProp { get; }
-}");
+}"
+            );
         }
 
         [WorkItem(539489, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1798,14 +1920,14 @@ interface ITest
         public async Task TestEscapedName()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|@goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private object goo;
 
@@ -1813,7 +1935,8 @@ interface ITest
     {
         @goo;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539489, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1821,14 +1944,14 @@ interface ITest
         public async Task TestEscapedKeyword()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|@int|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private object @int;
 
@@ -1836,7 +1959,8 @@ interface ITest
     {
         @int;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539529, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539529")]
@@ -1844,14 +1968,14 @@ interface ITest
         public async Task TestRefLambda()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|test|] = (ref int x) => x = 10;
     }
 }",
-@"class Class
+                @"class Class
 {
     private object test;
 
@@ -1859,7 +1983,8 @@ interface ITest
     {
         test = (ref int x) => x = 10;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539595, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539595")]
@@ -1867,13 +1992,14 @@ interface ITest
         public async Task TestNotOnError()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void F<U, V>(U u1, V v1)
     {
         Goo<string, int>([|u1|], u2);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539571, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539571")]
@@ -1881,7 +2007,7 @@ interface ITest
         public async Task TestNameSimplification()
         {
             await TestInRegularAndScriptAsync(
-@"namespace TestNs
+                @"namespace TestNs
 {
     class Program
     {
@@ -1894,7 +2020,7 @@ interface ITest
         }
     }
 }",
-@"namespace TestNs
+                @"namespace TestNs
 {
     class Program
     {
@@ -1908,7 +2034,8 @@ interface ITest
             }
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539717, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539717")]
@@ -1916,14 +2043,14 @@ interface ITest
         public async Task TestPostIncrement()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         [|i|]++;
     }
 }",
-@"class Program
+                @"class Program
 {
     private static int i;
 
@@ -1931,7 +2058,8 @@ interface ITest
     {
         i++;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539717, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539717")]
@@ -1939,14 +2067,14 @@ interface ITest
         public async Task TestPreDecrement()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         --[|i|];
     }
 }",
-@"class Program
+                @"class Program
 {
     private static int i;
 
@@ -1954,7 +2082,8 @@ interface ITest
     {
         --i;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539738, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539738")]
@@ -1962,14 +2091,14 @@ interface ITest
         public async Task TestGenerateIntoScript()
         {
             await TestAsync(
-@"using C;
+                @"using C;
 
 static class C
 {
 }
 
 C.[|i|] ++ ;",
-@"using C;
+                @"using C;
 
 static class C
 {
@@ -1977,7 +2106,8 @@ static class C
 }
 
 C.i ++ ;",
-parseOptions: Options.Script);
+                parseOptions: Options.Script
+            );
         }
 
         [WorkItem(539558, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539558")]
@@ -1985,7 +2115,7 @@ parseOptions: Options.Script);
         public async Task BugFix5565()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1996,7 +2126,7 @@ class Program
         [|Goo|]#();
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2008,7 +2138,8 @@ class Program
     {
         Goo#();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539536, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539536")]
@@ -2016,7 +2147,7 @@ class Program
         public async Task BugFix5538()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2027,7 +2158,7 @@ class Program
         new([|goo|])();
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2040,7 +2171,8 @@ class Program
         new(goo)();
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(539665, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539665")]
@@ -2048,7 +2180,7 @@ index: PropertyIndex);
         public async Task BugFix5697()
         {
             await TestInRegularAndScriptAsync(
-@"class C { }
+                @"class C { }
 class D
 {
     void M()
@@ -2057,7 +2189,7 @@ class D
     }
 }
 ",
-@"class C
+                @"class C
 {
     public static int P { get; internal set; }
 }
@@ -2068,7 +2200,8 @@ class D
         C.P = 10;
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(539793, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539793")]
@@ -2076,24 +2209,31 @@ class D
         public async Task TestIncrement()
         {
             await TestExactActionSetOfferedAsync(
-@"class Program
+                @"class Program
 {
     static void Main()
     {
         [|p|]++;
     }
 }",
-new[] { string.Format(FeaturesResources.Generate_field_1_0, "p", "Program"), string.Format(FeaturesResources.Generate_property_1_0, "p", "Program"), string.Format(FeaturesResources.Generate_local_0, "p"), string.Format(FeaturesResources.Generate_parameter_0, "p") });
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_field_1_0, "p", "Program"),
+                    string.Format(FeaturesResources.Generate_property_1_0, "p", "Program"),
+                    string.Format(FeaturesResources.Generate_local_0, "p"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "p")
+                }
+            );
 
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main()
     {
         [|p|]++;
     }
 }",
-@"class Program
+                @"class Program
 {
     private static int p;
 
@@ -2101,7 +2241,8 @@ new[] { string.Format(FeaturesResources.Generate_field_1_0, "p", "Program"), str
     {
         p++;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539834, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539834")]
@@ -2109,13 +2250,14 @@ new[] { string.Format(FeaturesResources.Generate_field_1_0, "p", "Program"), str
         public async Task TestNotInGoto()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main()
     {
         goto [|goo|];
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539826, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539826")]
@@ -2123,14 +2265,14 @@ new[] { string.Format(FeaturesResources.Generate_field_1_0, "p", "Program"), str
         public async Task TestOnLeftOfDot()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main()
     {
         [|goo|].ToString();
     }
 }",
-@"class Program
+                @"class Program
 {
     private static object goo;
 
@@ -2138,7 +2280,8 @@ new[] { string.Format(FeaturesResources.Generate_field_1_0, "p", "Program"), str
     {
         goo.ToString();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539840, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539840")]
@@ -2146,7 +2289,7 @@ new[] { string.Format(FeaturesResources.Generate_field_1_0, "p", "Program"), str
         public async Task TestNotBeforeAlias()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2156,7 +2299,8 @@ class Program
     {
         [|global|]::System.String s;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539871, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539871")]
@@ -2164,7 +2308,7 @@ class Program
         public async Task TestMissingOnGenericName()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C<T>
+                @"class C<T>
 {
     public delegate void Goo<R>(R r);
 
@@ -2172,7 +2316,8 @@ class Program
     {
         Goo<T> r = [|Goo<T>|];
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539934, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539934")]
@@ -2180,7 +2325,7 @@ class Program
         public async Task TestOnDelegateAddition()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     delegate void D();
 
@@ -2189,7 +2334,7 @@ class Program
         D d = [|M1|] + M2;
     }
 }",
-@"class C
+                @"class C
 {
     private D M1 { get; set; }
 
@@ -2200,7 +2345,8 @@ class Program
         D d = M1 + M2;
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(539986, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539986")]
@@ -2208,7 +2354,7 @@ parseOptions: null);
         public async Task TestReferenceTypeParameter1()
         {
             await TestInRegularAndScriptAsync(
-@"class C<T>
+                @"class C<T>
 {
     public void Test()
     {
@@ -2219,7 +2365,7 @@ parseOptions: null);
 class A
 {
 }",
-@"class C<T>
+                @"class C<T>
 {
     public void Test()
     {
@@ -2230,7 +2376,8 @@ class A
 class A
 {
     public static C<object> M { get; internal set; }
-}");
+}"
+            );
         }
 
         [WorkItem(539986, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539986")]
@@ -2238,7 +2385,7 @@ class A
         public async Task TestReferenceTypeParameter2()
         {
             await TestInRegularAndScriptAsync(
-@"class C<T>
+                @"class C<T>
 {
     public void Test()
     {
@@ -2249,7 +2396,7 @@ class A
     {
     }
 }",
-@"class C<T>
+                @"class C<T>
 {
     public void Test()
     {
@@ -2260,7 +2407,8 @@ class A
     {
         public static C<T> M { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(540159, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540159")]
@@ -2268,19 +2416,21 @@ class A
         public async Task TestEmptyIdentifierName()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
         int i = [|@|] }
-}");
+}"
+            );
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
         int i = [|@|]}
-}");
+}"
+            );
         }
 
         [WorkItem(541194, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541194")]
@@ -2288,7 +2438,7 @@ class A
         public async Task TestForeachVar()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -2297,7 +2447,7 @@ class A
         }
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -2309,7 +2459,8 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(541265, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541265")]
@@ -2317,7 +2468,7 @@ class C
         public async Task TestExtensionMethodUsedAsInstance()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2335,7 +2486,7 @@ public static class MyExtension
         return s.Length;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2355,7 +2506,8 @@ public static class MyExtension
         return s.Length;
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541549, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541549")]
@@ -2363,7 +2515,7 @@ parseOptions: null);
         public async Task TestDelegateInvoke()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2373,7 +2525,7 @@ class Program
         f([|x|]);
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2384,7 +2536,8 @@ class Program
         Func<int, int> f = x => x + 1;
         f(x);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(541597, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541597")]
@@ -2392,14 +2545,14 @@ class Program
         public async Task TestComplexAssign1()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         [|a|] = a + 10;
     }
 }",
-@"class Program
+                @"class Program
 {
     private static int a;
 
@@ -2407,7 +2560,8 @@ class Program
     {
         a = a + 10;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(541597, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541597")]
@@ -2415,14 +2569,14 @@ class Program
         public async Task TestComplexAssign2()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         a = [|a|] + 10;
     }
 }",
-@"class Program
+                @"class Program
 {
     private static int a;
 
@@ -2430,7 +2584,8 @@ class Program
     {
         a = a + 10;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(541659, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541659")]
@@ -2438,7 +2593,7 @@ class Program
         public async Task TestTypeNamedVar()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2451,7 +2606,7 @@ class Program
 class var
 {
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2465,7 +2620,8 @@ class Program
 
 class var
 {
-}");
+}"
+            );
         }
 
         [WorkItem(541675, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541675")]
@@ -2473,7 +2629,7 @@ class var
         public async Task TestStaticExtensionMethodArgument()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2490,7 +2646,7 @@ static class MyExtension
         return s.Length;
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2508,7 +2664,8 @@ static class MyExtension
     {
         return s.Length;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539675, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539675")]
@@ -2516,7 +2673,7 @@ static class MyExtension
         public async Task AddBlankLineBeforeCommentBetweenMembers1()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     //method
     static void Main(string[] args)
@@ -2524,7 +2681,7 @@ static class MyExtension
         [|P|] = 10;
     }
 }",
-@"class Program
+                @"class Program
 {
     public static int P { get; private set; }
 
@@ -2533,7 +2690,8 @@ static class MyExtension
     {
         P = 10;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539675, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539675")]
@@ -2541,7 +2699,7 @@ static class MyExtension
         public async Task AddBlankLineBeforeCommentBetweenMembers2()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     //method
     static void Main(string[] args)
@@ -2549,7 +2707,7 @@ static class MyExtension
         [|P|] = 10;
     }
 }",
-@"class Program
+                @"class Program
 {
     private static int P;
 
@@ -2559,7 +2717,8 @@ static class MyExtension
         P = 10;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(543813, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -2567,14 +2726,14 @@ index: ReadonlyFieldIndex);
         public async Task AddBlankLineBetweenMembers1()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         [|P|] = 10;
     }
 }",
-@"class Program
+                @"class Program
 {
     private static int P;
 
@@ -2583,7 +2742,8 @@ index: ReadonlyFieldIndex);
         P = 10;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(543813, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -2591,14 +2751,14 @@ index: ReadonlyFieldIndex);
         public async Task AddBlankLineBetweenMembers2()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         [|P|] = 10;
     }
 }",
-@"class Program
+                @"class Program
 {
     public static int P { get; private set; }
 
@@ -2607,7 +2767,8 @@ index: ReadonlyFieldIndex);
         P = 10;
     }
 }",
-index: 0);
+                index: 0
+            );
         }
 
         [WorkItem(543813, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -2615,7 +2776,7 @@ index: 0);
         public async Task DontAddBlankLineBetweenFields()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     private static int P;
 
@@ -2625,7 +2786,7 @@ index: 0);
         [|A|] = 9;
     }
 }",
-@"class Program
+                @"class Program
 {
     private static int P;
     private static int A;
@@ -2636,7 +2797,8 @@ index: 0);
         A = 9;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(543813, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543813")]
@@ -2644,7 +2806,7 @@ index: ReadonlyFieldIndex);
         public async Task DontAddBlankLineBetweenAutoProperties()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public static int P { get; private set; }
 
@@ -2654,7 +2816,7 @@ index: ReadonlyFieldIndex);
         [|A|] = 9;
     }
 }",
-@"class Program
+                @"class Program
 {
     public static int P { get; private set; }
     public static int A { get; private set; }
@@ -2665,7 +2827,8 @@ index: ReadonlyFieldIndex);
         A = 9;
     }
 }",
-index: 0);
+                index: 0
+            );
         }
 
         [WorkItem(539665, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539665")]
@@ -2673,7 +2836,7 @@ index: 0);
         public async Task TestIntoEmptyClass()
         {
             await TestInRegularAndScriptAsync(
-@"class C { }
+                @"class C { }
 class D
 {
     void M()
@@ -2681,7 +2844,7 @@ class D
         C.[|P|] = 10;
     }
 }",
-@"class C
+                @"class C
 {
     public static int P { get; internal set; }
 }
@@ -2691,7 +2854,8 @@ class D
     {
         C.P = 10;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(540595, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540595")]
@@ -2699,11 +2863,12 @@ class D
         public async Task TestGeneratePropertyInScript()
         {
             await TestAsync(
-@"[|Goo|]",
-@"object Goo { get; private set; }
+                @"[|Goo|]",
+                @"object Goo { get; private set; }
 
 Goo",
-parseOptions: Options.Script);
+                parseOptions: Options.Script
+            );
         }
 
         [WorkItem(542535, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542535")]
@@ -2711,25 +2876,24 @@ parseOptions: Options.Script);
         public async Task TestConstantInParameterValue()
         {
             const string Initial =
-@"class C
+                @"class C
 {   
     const int y = 1 ; 
     public void Goo ( bool x = [|undeclared|] ) { }
 } ";
 
-            await TestActionCountAsync(
-Initial,
-count: 1);
+            await TestActionCountAsync(Initial, count: 1);
 
             await TestInRegularAndScriptAsync(
-Initial,
-@"class C
+                Initial,
+                @"class C
 {   
     const int y = 1 ;
     private const bool undeclared;
 
     public void Goo ( bool x = undeclared ) { }
-} ");
+} "
+            );
         }
 
         [WorkItem(542900, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542900")]
@@ -2737,7 +2901,7 @@ Initial,
         public async Task TestGenerateFromAttributeNamedArgument1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class ProgramAttribute : Attribute
 {
@@ -2746,7 +2910,7 @@ class ProgramAttribute : Attribute
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class ProgramAttribute : Attribute
 {
@@ -2756,7 +2920,8 @@ class ProgramAttribute : Attribute
     static void Main(string[] args)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542900, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542900")]
@@ -2764,7 +2929,7 @@ class ProgramAttribute : Attribute
         public async Task TestGenerateFromAttributeNamedArgument2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class ProgramAttribute : Attribute
 {
@@ -2773,7 +2938,7 @@ class ProgramAttribute : Attribute
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class ProgramAttribute : Attribute
 {
@@ -2784,7 +2949,8 @@ class ProgramAttribute : Attribute
     {
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -2792,7 +2958,7 @@ index: ReadonlyFieldIndex);
         public async Task TestMinimalAccessibility1_InternalPrivate()
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -2803,7 +2969,7 @@ index: ReadonlyFieldIndex);
     {
     }
 }",
-@"class Program
+                @"class Program
 {
     private static C P { get; set; }
 
@@ -2816,7 +2982,8 @@ index: ReadonlyFieldIndex);
     {
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -2824,7 +2991,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility2_InternalProtected()
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -2835,7 +3002,7 @@ parseOptions: null);
     {
     }
 }",
-@"class Program
+                @"class Program
 {
     protected static C P { get; private set; }
 
@@ -2848,7 +3015,8 @@ parseOptions: null);
     {
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -2856,7 +3024,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility3_InternalInternal()
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -2867,7 +3035,7 @@ parseOptions: null);
     {
     }
 }",
-@"class Program
+                @"class Program
 {
     public static C P { get; private set; }
 
@@ -2880,7 +3048,8 @@ parseOptions: null);
     {
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -2888,7 +3057,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility4_InternalProtectedInternal()
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -2899,7 +3068,7 @@ parseOptions: null);
     {
     }
 }",
-@"class Program
+                @"class Program
 {
     public static C P { get; private set; }
 
@@ -2912,7 +3081,8 @@ parseOptions: null);
     {
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -2920,7 +3090,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility5_InternalPublic()
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -2931,7 +3101,7 @@ parseOptions: null);
     {
     }
 }",
-@"class Program
+                @"class Program
 {
     public static C P { get; private set; }
 
@@ -2944,7 +3114,8 @@ parseOptions: null);
     {
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -2952,7 +3123,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility6_PublicInternal()
         {
             await TestAsync(
-@"public class Program
+                @"public class Program
 {
     public static void Main()
     {
@@ -2963,7 +3134,7 @@ parseOptions: null);
     {
     }
 }",
-@"public class Program
+                @"public class Program
 {
     internal static C P { get; private set; }
 
@@ -2976,7 +3147,8 @@ parseOptions: null);
     {
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -2984,7 +3156,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility7_PublicProtectedInternal()
         {
             await TestAsync(
-@"public class Program
+                @"public class Program
 {
     public static void Main()
     {
@@ -2995,7 +3167,7 @@ parseOptions: null);
     {
     }
 }",
-@"public class Program
+                @"public class Program
 {
     protected internal static C P { get; private set; }
 
@@ -3008,7 +3180,8 @@ parseOptions: null);
     {
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3016,7 +3189,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility8_PublicProtected()
         {
             await TestAsync(
-@"public class Program
+                @"public class Program
 {
     public static void Main()
     {
@@ -3027,7 +3200,7 @@ parseOptions: null);
     {
     }
 }",
-@"public class Program
+                @"public class Program
 {
     protected static C P { get; private set; }
 
@@ -3040,7 +3213,8 @@ parseOptions: null);
     {
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3048,7 +3222,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility9_PublicPrivate()
         {
             await TestAsync(
-@"public class Program
+                @"public class Program
 {
     public static void Main()
     {
@@ -3059,7 +3233,7 @@ parseOptions: null);
     {
     }
 }",
-@"public class Program
+                @"public class Program
 {
     private static C P { get; set; }
 
@@ -3072,7 +3246,8 @@ parseOptions: null);
     {
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3080,7 +3255,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility10_PrivatePrivate()
         {
             await TestAsync(
-@"class outer
+                @"class outer
 {
     private class Program
     {
@@ -3094,7 +3269,7 @@ parseOptions: null);
         }
     }
 }",
-@"class outer
+                @"class outer
 {
     private class Program
     {
@@ -3110,7 +3285,8 @@ parseOptions: null);
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3118,7 +3294,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility11_PrivateProtected()
         {
             await TestAsync(
-@"class outer
+                @"class outer
 {
     private class Program
     {
@@ -3132,7 +3308,7 @@ parseOptions: null);
         }
     }
 }",
-@"class outer
+                @"class outer
 {
     private class Program
     {
@@ -3148,7 +3324,8 @@ parseOptions: null);
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3156,7 +3333,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility12_PrivateProtectedInternal()
         {
             await TestAsync(
-@"class outer
+                @"class outer
 {
     private class Program
     {
@@ -3170,7 +3347,7 @@ parseOptions: null);
         }
     }
 }",
-@"class outer
+                @"class outer
 {
     private class Program
     {
@@ -3186,7 +3363,8 @@ parseOptions: null);
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3194,7 +3372,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility13_PrivateInternal()
         {
             await TestAsync(
-@"class outer
+                @"class outer
 {
     private class Program
     {
@@ -3208,7 +3386,7 @@ parseOptions: null);
         }
     }
 }",
-@"class outer
+                @"class outer
 {
     private class Program
     {
@@ -3224,7 +3402,8 @@ parseOptions: null);
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3232,7 +3411,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility14_ProtectedPrivate()
         {
             await TestAsync(
-@"class outer
+                @"class outer
 {
     protected class Program
     {
@@ -3246,7 +3425,7 @@ parseOptions: null);
         }
     }
 }",
-@"class outer
+                @"class outer
 {
     protected class Program
     {
@@ -3262,7 +3441,8 @@ parseOptions: null);
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3270,7 +3450,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility15_ProtectedInternal()
         {
             await TestAsync(
-@"class outer
+                @"class outer
 {
     protected class Program
     {
@@ -3284,7 +3464,7 @@ parseOptions: null);
         }
     }
 }",
-@"class outer
+                @"class outer
 {
     protected class Program
     {
@@ -3300,7 +3480,8 @@ parseOptions: null);
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3308,7 +3489,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility16_ProtectedInternalProtected()
         {
             await TestAsync(
-@"class outer
+                @"class outer
 {
     protected internal class Program
     {
@@ -3322,7 +3503,7 @@ parseOptions: null);
         }
     }
 }",
-@"class outer
+                @"class outer
 {
     protected internal class Program
     {
@@ -3338,7 +3519,8 @@ parseOptions: null);
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(541698, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541698")]
@@ -3346,7 +3528,7 @@ parseOptions: null);
         public async Task TestMinimalAccessibility17_ProtectedInternalInternal()
         {
             await TestAsync(
-@"class outer
+                @"class outer
 {
     protected internal class Program
     {
@@ -3360,7 +3542,7 @@ parseOptions: null);
         }
     }
 }",
-@"class outer
+                @"class outer
 {
     protected internal class Program
     {
@@ -3376,7 +3558,8 @@ parseOptions: null);
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(543153, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543153")]
@@ -3384,7 +3567,7 @@ parseOptions: null);
         public async Task TestAnonymousObjectInitializer1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -3392,7 +3575,7 @@ parseOptions: null);
         a = new { x = [|HERE|] };
     }
 }",
-@"class C
+                @"class C
 {
     private int HERE;
 
@@ -3402,7 +3585,8 @@ parseOptions: null);
         a = new { x = HERE };
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(543124, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543124")]
@@ -3410,14 +3594,15 @@ index: ReadonlyFieldIndex);
         public async Task TestNoGenerationIntoAnonymousType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         var v = new { };
         bool b = v.[|Bar|];
     }
-}");
+}"
+            );
         }
 
         [WorkItem(543543, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543543")]
@@ -3425,7 +3610,7 @@ index: ReadonlyFieldIndex);
         public async Task TestNotOfferedForBoundParametersOfOperators()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public Program(string s)
     {
@@ -3440,7 +3625,8 @@ index: ReadonlyFieldIndex);
     {
         return new Program([|str|]);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544175, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544175")]
@@ -3448,7 +3634,7 @@ index: ReadonlyFieldIndex);
         public async Task TestNotOnNamedParameterName1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class class1
 {
@@ -3460,7 +3646,8 @@ class class1
     public string Goo(int x)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544271, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544271")]
@@ -3468,7 +3655,7 @@ class class1
         public async Task TestNotOnNamedParameterName2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
     public Goo(int a = 42)
     {
@@ -3480,7 +3667,8 @@ class DogBed : Goo
     public DogBed(int b) : base([|a|]: b)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544164, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544164")]
@@ -3488,7 +3676,7 @@ class DogBed : Goo
         public async Task TestPropertyOnObjectInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3499,7 +3687,7 @@ class Bar
         var c = new Goo { [|Gibberish|] = 24 };
     }
 }",
-@"class Goo
+                @"class Goo
 {
     public int Gibberish { get; internal set; }
 }
@@ -3510,7 +3698,8 @@ class Bar
     {
         var c = new Goo { Gibberish = 24 };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(49294, "https://github.com/dotnet/roslyn/issues/49294")]
@@ -3518,7 +3707,7 @@ class Bar
         public async Task TestPropertyInWithInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"record Goo
+                @"record Goo
 {
 }
 
@@ -3529,7 +3718,7 @@ class Bar
         var c = g with { [|Gibberish|] = 24 };
     }
 }",
-@"record Goo
+                @"record Goo
 {
     public int Gibberish { get; internal set; }
 }
@@ -3540,7 +3729,8 @@ class Bar
     {
         var c = g with { Gibberish = 24 };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(13166, "https://github.com/dotnet/roslyn/issues/13166")]
@@ -3548,7 +3738,7 @@ class Bar
         public async Task TestPropertyOnNestedObjectInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"public class Inner
+                @"public class Inner
 {
 }
 
@@ -3558,7 +3748,7 @@ public class Outer
 
     public static Outer X() => new Outer { Inner = { [|InnerValue|] = 5 } };
 }",
-@"public class Inner
+                @"public class Inner
 {
     public int InnerValue { get; internal set; }
 }
@@ -3568,14 +3758,15 @@ public class Outer
     public Inner Inner { get; set; } = new Inner();
 
     public static Outer X() => new Outer { Inner = { InnerValue = 5 } };
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestPropertyOnObjectInitializer1()
         {
             await TestInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3586,7 +3777,7 @@ class Bar
         var c = new Goo { [|Gibberish|] = Gibberish };
     }
 }",
-@"class Goo
+                @"class Goo
 {
     public object Gibberish { get; internal set; }
 }
@@ -3597,14 +3788,15 @@ class Bar
     {
         var c = new Goo { Gibberish = Gibberish };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestPropertyOnObjectInitializer2()
         {
             await TestInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3615,7 +3807,7 @@ class Bar
         var c = new Goo { Gibberish = [|Gibberish|] };
     }
 }",
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3627,14 +3819,15 @@ class Bar
     {
         var c = new Goo { Gibberish = Gibberish };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestFieldOnObjectInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3645,7 +3838,7 @@ class Bar
         var c = new Goo { [|Gibberish|] = 24 };
     }
 }",
-@"class Goo
+                @"class Goo
 {
     internal int Gibberish;
 }
@@ -3657,14 +3850,15 @@ class Bar
         var c = new Goo { Gibberish = 24 };
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestFieldOnObjectInitializer1()
         {
             await TestInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3675,7 +3869,7 @@ class Bar
         var c = new Goo { [|Gibberish|] = Gibberish };
     }
 }",
-@"class Goo
+                @"class Goo
 {
     internal object Gibberish;
 }
@@ -3687,14 +3881,15 @@ class Bar
         var c = new Goo { Gibberish = Gibberish };
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestFieldOnObjectInitializer2()
         {
             await TestInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3705,7 +3900,7 @@ class Bar
         var c = new Goo { Gibberish = [|Gibberish|] };
     }
 }",
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3718,14 +3913,15 @@ class Bar
         var c = new Goo { Gibberish = Gibberish };
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestOnlyPropertyAndFieldOfferedForObjectInitializer()
         {
             await TestActionCountAsync(
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3736,14 +3932,15 @@ class Bar
         var c = new Goo { . [|Gibberish|] = 24 };
     }
 }",
-2);
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateLocalInObjectInitializerValue()
         {
             await TestInRegularAndScriptAsync(
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3754,7 +3951,7 @@ class Bar
         var c = new Goo { Gibberish = [|blah|] };
     }
 }",
-@"class Goo
+                @"class Goo
 {
 }
 
@@ -3766,7 +3963,8 @@ class Bar
         var c = new Goo { Gibberish = blah };
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [WorkItem(544319, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544319")]
@@ -3774,11 +3972,12 @@ index: LocalIndex);
         public async Task TestNotOnIncompleteMember1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class1
 {
-    Console.[|WriteLine|](); }");
+    Console.[|WriteLine|](); }"
+            );
         }
 
         [WorkItem(544319, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544319")]
@@ -3786,11 +3985,12 @@ class Class1
         public async Task TestNotOnIncompleteMember2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class1
 { [|WriteLine|]();
-}");
+}"
+            );
         }
 
         [WorkItem(544319, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544319")]
@@ -3798,12 +3998,13 @@ class Class1
         public async Task TestNotOnIncompleteMember3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class1
 {
     [|WriteLine|]
-}");
+}"
+            );
         }
 
         [WorkItem(544384, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544384")]
@@ -3811,7 +4012,7 @@ class Class1
         public async Task TestPointerType()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static int x;
 
@@ -3831,7 +4032,7 @@ class Class1
         return p2;
     }
 }",
-@"class Program
+                @"class Program
 {
     static int x;
     private static unsafe int* p2;
@@ -3851,7 +4052,8 @@ class Class1
     {
         return p2;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544510, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544510")]
@@ -3859,7 +4061,8 @@ class Class1
         public async Task TestNotOnUsingAlias()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using [|S|] = System ; S . Console . WriteLine ( ""hello world"" ) ; ");
+                @"using [|S|] = System ; S . Console . WriteLine ( ""hello world"" ) ; "
+            );
         }
 
         [WorkItem(544907, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544907")]
@@ -3867,7 +4070,7 @@ class Class1
         public async Task TestExpressionTLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 
 class C
@@ -3877,7 +4080,7 @@ class C
         Expression<Func<int, int>> e = x => [|Goo|];
     }
 }",
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 
 class C
@@ -3888,14 +4091,15 @@ class C
     {
         Expression<Func<int, int>> e = x => Goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestNoGenerationIntoEntirelyHiddenType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -3907,21 +4111,22 @@ class C
 class D
 {
 }
-#line default");
+#line default"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInReturnStatement()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         return [|goo|];
     }
 }",
-@"class Program
+                @"class Program
 {
     private object goo;
 
@@ -3929,14 +4134,15 @@ class D
     {
         return goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestLocal1()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -3947,7 +4153,7 @@ class D
     {
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -3959,14 +4165,15 @@ class D
     {
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestLocalTopLevelNullability()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 class Program
 {
@@ -3979,7 +4186,7 @@ class Program
     {
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class Program
 {
@@ -3993,14 +4200,15 @@ class Program
     {
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestLocalNestedNullability()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 class Program
 {
@@ -4013,7 +4221,7 @@ class Program
     {
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class Program
 {
@@ -4027,26 +4235,28 @@ class Program
     {
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestLocalMissingForVar()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         var x = [|var|];
-    }");
+    }"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestOutLocal1()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -4057,7 +4267,7 @@ index: LocalIndex);
     {
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -4069,7 +4279,8 @@ index: LocalIndex);
     {
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(809542, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/809542")]
@@ -4077,7 +4288,7 @@ index: ReadonlyFieldIndex);
         public async Task TestLocalBeforeComment()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -4088,7 +4299,7 @@ index: ReadonlyFieldIndex);
 #endif
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -4100,7 +4311,8 @@ index: ReadonlyFieldIndex);
 #endif
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(809542, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/809542")]
@@ -4108,7 +4320,7 @@ index: ReadonlyFieldIndex);
         public async Task TestLocalAfterComment()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -4120,7 +4332,7 @@ index: ReadonlyFieldIndex);
 #endif
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -4133,14 +4345,15 @@ index: ReadonlyFieldIndex);
 #endif
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateIntoVisiblePortion()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 #line hidden
 class Program
@@ -4151,7 +4364,7 @@ class Program
         Goo(Program.[|X|])
     }
 }",
-@"using System;
+                @"using System;
 
 #line hidden
 class Program
@@ -4163,14 +4376,15 @@ class Program
     }
 
     public static object X { get; private set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestMissingWhenNoAvailableRegionToGenerateInto()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 #line hidden
 class Program
@@ -4184,14 +4398,15 @@ class Program
 #line hidden
     }
 }
-#line default");
+#line default"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateLocalAvailableIfBlockIsNotHidden()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 #line hidden
 class Program
@@ -4204,7 +4419,7 @@ class Program
 #line hidden
 }
 #line default",
-@"using System;
+                @"using System;
 
 #line hidden
 class Program
@@ -4217,7 +4432,8 @@ class Program
     }
 #line hidden
 }
-#line default");
+#line default"
+            );
         }
 
         [WorkItem(545217, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545217")]
@@ -4225,7 +4441,7 @@ class Program
         public async Task TestGenerateLocalNameSimplificationCSharp7()
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     void goo()
     {
@@ -4240,7 +4456,7 @@ class Program
     {
     }
 }",
-@"class Program
+                @"class Program
 {
     void goo()
     {
@@ -4256,7 +4472,9 @@ class Program
     {
     }
 }",
-index: 3, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7));
+                index: 3,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7)
+            );
         }
 
         [WorkItem(545217, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545217")]
@@ -4264,7 +4482,7 @@ index: 3, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7));
         public async Task TestGenerateLocalNameSimplification()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void goo()
     {
@@ -4279,7 +4497,7 @@ index: 3, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7));
     {
     }
 }",
-@"class Program
+                @"class Program
 {
     void goo()
     {
@@ -4295,21 +4513,22 @@ index: 3, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7));
     {
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestParenthesizedExpression()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         int v = 1 + ([|k|]);
     }
 }",
-@"class Program
+                @"class Program
 {
     private int k;
 
@@ -4317,14 +4536,15 @@ index: LocalIndex);
     {
         int v = 1 + (k);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInSelect()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Linq;
+                @"using System.Linq;
 
 class Program
 {
@@ -4334,7 +4554,7 @@ class Program
                 select [|v|];
     }
 }",
-@"using System.Linq;
+                @"using System.Linq;
 
 class Program
 {
@@ -4345,14 +4565,15 @@ class Program
         var q = from a in args
                 select v;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInChecked()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -4360,7 +4581,7 @@ class Program
         int[] temp = checked([|goo|]);
     }
 }",
-@"class Program
+                @"class Program
 {
     private int[] goo;
 
@@ -4369,21 +4590,22 @@ class Program
         int[] a = null;
         int[] temp = checked(goo);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInArrayRankSpecifier()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         var v = new int[[|k|]];
     }
 }",
-@"class Program
+                @"class Program
 {
     private int k;
 
@@ -4391,21 +4613,22 @@ class Program
     {
         var v = new int[k];
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInConditional1()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main()
     {
         int i = [|goo|] ? bar : baz;
     }
 }",
-@"class Program
+                @"class Program
 {
     private static bool goo;
 
@@ -4413,21 +4636,22 @@ class Program
     {
         int i = goo ? bar : baz;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInConditional2()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main()
     {
         int i = goo ? [|bar|] : baz;
     }
 }",
-@"class Program
+                @"class Program
 {
     private static int bar;
 
@@ -4435,21 +4659,22 @@ class Program
     {
         int i = goo ? bar : baz;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInConditional3()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main()
     {
         int i = goo ? bar : [|baz|];
     }
 }",
-@"class Program
+                @"class Program
 {
     private static int baz;
 
@@ -4457,21 +4682,22 @@ class Program
     {
         int i = goo ? bar : baz;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInCast()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         var x = (int)[|y|];
     }
 }",
-@"class Program
+                @"class Program
 {
     private int y;
 
@@ -4479,14 +4705,15 @@ class Program
     {
         var x = (int)y;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInIf()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -4495,7 +4722,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     private bool goo;
 
@@ -4505,14 +4732,15 @@ class Program
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestInSwitch()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -4521,7 +4749,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     private int goo;
 
@@ -4531,46 +4759,50 @@ class Program
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestMissingOnNamespace()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         [|System|].Console.WriteLine(4);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestMissingOnType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         [|System.Console|].WriteLine(4);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestMissingOnBase()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         [|base|].ToString();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545273, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545273")]
@@ -4578,42 +4810,45 @@ class Program
         public async Task TestGenerateFromAssign1()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         [|undefined|] = 1;
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
         var undefined = 1;
     }
 }",
-index: PropertyIndex, options: ImplicitTypingEverywhere());
+                index: PropertyIndex,
+                options: ImplicitTypingEverywhere()
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestFuncAssignment()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         [|undefined|] = (x) => 2;
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
         System.Func<object, int> undefined = (x) => 2;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(545273, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545273")]
@@ -4621,21 +4856,22 @@ index: PropertyIndex);
         public async Task TestGenerateFromAssign1NotAsVar()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         [|undefined|] = 1;
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
         int undefined = 1;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(545273, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545273")]
@@ -4643,21 +4879,22 @@ index: PropertyIndex);
         public async Task TestGenerateFromAssign2()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         [|undefined|] = new { P = ""1"" };
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
         var undefined = new { P = ""1"" };
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(545269, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545269")]
@@ -4665,7 +4902,7 @@ index: PropertyIndex);
         public async Task TestGenerateInVenus1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
 #line 1 ""goo""
     void Goo()
@@ -4674,14 +4911,16 @@ index: PropertyIndex);
     }
 #line default
 #line hidden
-}");
+}"
+            );
         }
 
         [WorkItem(545269, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545269")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateInVenus2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
 #line 1 ""goo""
@@ -4693,10 +4932,18 @@ class C
 #line hidden
 }
 ";
-            await TestExactActionSetOfferedAsync(code, new[] { string.Format(FeaturesResources.Generate_local_0, "Bar"), string.Format(FeaturesResources.Generate_parameter_0, "Bar") });
+            await TestExactActionSetOfferedAsync(
+                code,
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_local_0, "Bar"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "Bar")
+                }
+            );
 
-            await TestInRegularAndScriptAsync(code,
-@"
+            await TestInRegularAndScriptAsync(
+                code,
+                @"
 class C
 {
 #line 1 ""goo""
@@ -4707,7 +4954,9 @@ class C
 #line default
 #line hidden
 }
-", options: ImplicitTypingEverywhere());
+",
+                options: ImplicitTypingEverywhere()
+            );
         }
 
         [WorkItem(546027, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546027")]
@@ -4715,7 +4964,7 @@ class C
         public async Task TestGeneratePropertyFromAttribute()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 [AttributeUsage(AttributeTargets.Class)]
 class MyAttrAttribute : Attribute
@@ -4726,7 +4975,7 @@ class MyAttrAttribute : Attribute
 class D
 {
 }",
-@"using System;
+                @"using System;
 
 [AttributeUsage(AttributeTargets.Class)]
 class MyAttrAttribute : Attribute
@@ -4737,7 +4986,8 @@ class MyAttrAttribute : Attribute
 [MyAttr(123, Value = 1)]
 class D
 {
-}");
+}"
+            );
         }
 
         [WorkItem(545232, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545232")]
@@ -4745,7 +4995,7 @@ class D
         public async Task TestNewLinePreservationBeforeInsertingLocal()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 namespace CSharpDemoApp
 {
     class Program
@@ -4763,7 +5013,7 @@ namespace CSharpDemoApp
     }
 }
 ",
-@"using System;
+                @"using System;
 namespace CSharpDemoApp
 {
     class Program
@@ -4782,7 +5032,8 @@ namespace CSharpDemoApp
     }
 }
 ",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [WorkItem(863346, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/863346")]
@@ -4790,7 +5041,7 @@ index: LocalIndex);
         public async Task TestGenerateInGenericMethod_Local()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class TestClass<T1>
 {
     static T TestMethod<T>(T item)
@@ -4806,7 +5057,7 @@ class TestClass<T1>
     }
 }
 ",
-@"using System;
+                @"using System;
 class TestClass<T1>
 {
     static T TestMethod<T>(T item)
@@ -4823,7 +5074,8 @@ class TestClass<T1>
     }
 }
 ",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [WorkItem(863346, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/863346")]
@@ -4831,7 +5083,7 @@ index: LocalIndex);
         public async Task TestGenerateInGenericMethod_Property()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class TestClass<T1>
 {
     static T TestMethod<T>(T item)
@@ -4847,7 +5099,7 @@ class TestClass<T1>
     }
 }
 ",
-@"using System;
+                @"using System;
 class TestClass<T1>
 {
     public static Func<T1, object> NewLocal { get; private set; }
@@ -4864,7 +5116,8 @@ class TestClass<T1>
         return function(zoo);
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(865067, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/865067")]
@@ -4872,7 +5125,7 @@ class TestClass<T1>
         public async Task TestWithYieldReturnInMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4882,7 +5135,7 @@ class Program
         yield return [|abc|];
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4893,14 +5146,15 @@ class Program
     {
         yield return abc;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestWithYieldReturnInAsyncMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4910,7 +5164,7 @@ class Program
         yield return [|abc|];
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4921,7 +5175,8 @@ class Program
     {
         yield return abc;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30235, "https://github.com/dotnet/roslyn/issues/30235")]
@@ -4929,7 +5184,7 @@ class Program
         public async Task TestWithYieldReturnInLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4942,7 +5197,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -4956,7 +5211,8 @@ class Program
             yield return abc;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(877580, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/877580")]
@@ -4964,7 +5220,7 @@ class Program
         public async Task TestWithThrow()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4973,7 +5229,7 @@ class Program
         throw [|MyExp|];
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -4983,7 +5239,9 @@ class Program
     {
         throw MyExp;
     }
-}", index: ReadonlyFieldIndex);
+}",
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -4991,14 +5249,14 @@ class Program
         public async Task TestUnsafeField()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|int* a = goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private unsafe int* goo;
 
@@ -5006,7 +5264,8 @@ class Program
     {
         int* a = goo;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5014,14 +5273,14 @@ class Program
         public async Task TestUnsafeField2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|int*[] a = goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private unsafe int*[] goo;
 
@@ -5029,7 +5288,8 @@ class Program
     {
         int*[] a = goo;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5037,14 +5297,14 @@ class Program
         public async Task TestUnsafeFieldInUnsafeClass()
         {
             await TestInRegularAndScriptAsync(
-@"unsafe class Class
+                @"unsafe class Class
 {
     void Method()
     {
         [|int* a = goo|];
     }
 }",
-@"unsafe class Class
+                @"unsafe class Class
 {
     private int* goo;
 
@@ -5052,7 +5312,8 @@ class Program
     {
         int* a = goo;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5060,7 +5321,7 @@ class Program
         public async Task TestUnsafeFieldInNestedClass()
         {
             await TestInRegularAndScriptAsync(
-@"unsafe class Class
+                @"unsafe class Class
 {
     class MyClass
     {
@@ -5070,7 +5331,7 @@ class Program
         }
     }
 }",
-@"unsafe class Class
+                @"unsafe class Class
 {
     class MyClass
     {
@@ -5081,7 +5342,8 @@ class Program
             int* a = goo;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5089,7 +5351,7 @@ class Program
         public async Task TestUnsafeFieldInNestedClass2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     unsafe class MyClass
     {
@@ -5099,7 +5361,7 @@ class Program
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     private static unsafe int* goo;
 
@@ -5110,7 +5372,8 @@ class Program
             int* a = Class.goo;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5118,14 +5381,14 @@ class Program
         public async Task TestUnsafeReadOnlyField()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|int* a = goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private readonly unsafe int* goo;
 
@@ -5134,7 +5397,8 @@ class Program
         int* a = goo;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5142,14 +5406,14 @@ index: ReadonlyFieldIndex);
         public async Task TestUnsafeReadOnlyField2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|int*[] a = goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     private readonly unsafe int*[] goo;
 
@@ -5158,7 +5422,8 @@ index: ReadonlyFieldIndex);
         int*[] a = goo;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5166,14 +5431,14 @@ index: ReadonlyFieldIndex);
         public async Task TestUnsafeReadOnlyFieldInUnsafeClass()
         {
             await TestInRegularAndScriptAsync(
-@"unsafe class Class
+                @"unsafe class Class
 {
     void Method()
     {
         [|int* a = goo|];
     }
 }",
-@"unsafe class Class
+                @"unsafe class Class
 {
     private readonly int* goo;
 
@@ -5182,7 +5447,8 @@ index: ReadonlyFieldIndex);
         int* a = goo;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5190,7 +5456,7 @@ index: ReadonlyFieldIndex);
         public async Task TestUnsafeReadOnlyFieldInNestedClass()
         {
             await TestInRegularAndScriptAsync(
-@"unsafe class Class
+                @"unsafe class Class
 {
     class MyClass
     {
@@ -5200,7 +5466,7 @@ index: ReadonlyFieldIndex);
         }
     }
 }",
-@"unsafe class Class
+                @"unsafe class Class
 {
     class MyClass
     {
@@ -5212,7 +5478,8 @@ index: ReadonlyFieldIndex);
         }
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5220,7 +5487,7 @@ index: ReadonlyFieldIndex);
         public async Task TestUnsafeReadOnlyFieldInNestedClass2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     unsafe class MyClass
     {
@@ -5230,7 +5497,7 @@ index: ReadonlyFieldIndex);
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     private static readonly unsafe int* goo;
 
@@ -5242,7 +5509,8 @@ index: ReadonlyFieldIndex);
         }
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5250,14 +5518,14 @@ index: ReadonlyFieldIndex);
         public async Task TestUnsafeProperty()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|int* a = goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     public unsafe int* goo { get; private set; }
 
@@ -5266,7 +5534,8 @@ index: ReadonlyFieldIndex);
         int* a = goo;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5274,14 +5543,14 @@ index: PropertyIndex);
         public async Task TestUnsafeProperty2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|int*[] a = goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     public unsafe int*[] goo { get; private set; }
 
@@ -5290,7 +5559,8 @@ index: PropertyIndex);
         int*[] a = goo;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5298,14 +5568,14 @@ index: PropertyIndex);
         public async Task TestUnsafePropertyInUnsafeClass()
         {
             await TestInRegularAndScriptAsync(
-@"unsafe class Class
+                @"unsafe class Class
 {
     void Method()
     {
         [|int* a = goo|];
     }
 }",
-@"unsafe class Class
+                @"unsafe class Class
 {
     public int* goo { get; private set; }
 
@@ -5314,7 +5584,8 @@ index: PropertyIndex);
         int* a = goo;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5322,7 +5593,7 @@ index: PropertyIndex);
         public async Task TestUnsafePropertyInNestedClass()
         {
             await TestInRegularAndScriptAsync(
-@"unsafe class Class
+                @"unsafe class Class
 {
     class MyClass
     {
@@ -5332,7 +5603,7 @@ index: PropertyIndex);
         }
     }
 }",
-@"unsafe class Class
+                @"unsafe class Class
 {
     class MyClass
     {
@@ -5344,7 +5615,8 @@ index: PropertyIndex);
         }
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(530177, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530177")]
@@ -5352,7 +5624,7 @@ index: PropertyIndex);
         public async Task TestUnsafePropertyInNestedClass2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     unsafe class MyClass
     {
@@ -5362,7 +5634,7 @@ index: PropertyIndex);
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     public static unsafe int* goo { get; private set; }
 
@@ -5374,7 +5646,8 @@ index: PropertyIndex);
         }
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5382,14 +5655,14 @@ index: PropertyIndex);
         public async Task TestInsideNameOfProperty()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z|]);
     }
 }",
-@"class C
+                @"class C
 {
     public object Z { get; private set; }
 
@@ -5397,7 +5670,8 @@ index: PropertyIndex);
     {
         var x = nameof(Z);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5405,14 +5679,14 @@ index: PropertyIndex);
         public async Task TestInsideNameOfField()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z|]);
     }
 }",
-@"class C
+                @"class C
 {
     private object Z;
 
@@ -5421,7 +5695,8 @@ index: PropertyIndex);
         var x = nameof(Z);
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5429,14 +5704,14 @@ index: ReadonlyFieldIndex);
         public async Task TestInsideNameOfReadonlyField()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z|]);
     }
 }",
-@"class C
+                @"class C
 {
     private readonly object Z;
 
@@ -5445,7 +5720,8 @@ index: ReadonlyFieldIndex);
         var x = nameof(Z);
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5453,14 +5729,14 @@ index: PropertyIndex);
         public async Task TestInsideNameOfLocal()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z|]);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -5468,7 +5744,8 @@ index: PropertyIndex);
         var x = nameof(Z);
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5476,14 +5753,14 @@ index: LocalIndex);
         public async Task TestInsideNameOfProperty2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z.X|]);
     }
 }",
-@"class C
+                @"class C
 {
     public object Z { get; private set; }
 
@@ -5491,7 +5768,8 @@ index: LocalIndex);
     {
         var x = nameof(Z.X);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5499,14 +5777,14 @@ index: LocalIndex);
         public async Task TestInsideNameOfField2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z.X|]);
     }
 }",
-@"class C
+                @"class C
 {
     private object Z;
 
@@ -5515,7 +5793,8 @@ index: LocalIndex);
         var x = nameof(Z.X);
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5523,14 +5802,14 @@ index: ReadonlyFieldIndex);
         public async Task TestInsideNameOfReadonlyField2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z.X|]);
     }
 }",
-@"class C
+                @"class C
 {
     private readonly object Z;
 
@@ -5539,7 +5818,8 @@ index: ReadonlyFieldIndex);
         var x = nameof(Z.X);
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5547,14 +5827,14 @@ index: PropertyIndex);
         public async Task TestInsideNameOfLocal2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z.X|]);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -5562,7 +5842,8 @@ index: PropertyIndex);
         var x = nameof(Z.X);
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5570,14 +5851,14 @@ index: LocalIndex);
         public async Task TestInsideNameOfProperty3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z.X.Y|]);
     }
 }",
-@"class C
+                @"class C
 {
     public object Z { get; private set; }
 
@@ -5585,7 +5866,8 @@ index: LocalIndex);
     {
         var x = nameof(Z.X.Y);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5593,14 +5875,14 @@ index: LocalIndex);
         public async Task TestInsideNameOfField3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z.X.Y|]);
     }
 }",
-@"class C
+                @"class C
 {
     private object Z;
 
@@ -5609,7 +5891,8 @@ index: LocalIndex);
         var x = nameof(Z.X.Y);
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5617,14 +5900,14 @@ index: ReadonlyFieldIndex);
         public async Task TestInsideNameOfReadonlyField3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z.X.Y|]);
     }
 }",
-@"class C
+                @"class C
 {
     private readonly object Z;
 
@@ -5633,7 +5916,8 @@ index: ReadonlyFieldIndex);
         var x = nameof(Z.X.Y);
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5641,14 +5925,14 @@ index: PropertyIndex);
         public async Task TestInsideNameOfLocal3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|Z.X.Y|]);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -5656,7 +5940,8 @@ index: PropertyIndex);
         var x = nameof(Z.X.Y);
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5664,13 +5949,14 @@ index: LocalIndex);
         public async Task TestInsideNameOfMissing()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = [|nameof(1 + 2)|];
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5678,14 +5964,15 @@ index: LocalIndex);
         public async Task TestInsideNameOfMissing2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var y = 1 + 2;
         var x = [|nameof(y)|];
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5693,7 +5980,7 @@ index: LocalIndex);
         public async Task TestInsideNameOfMissing3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -5701,7 +5988,8 @@ index: LocalIndex);
         var z = """";
         var x = [|nameof(y, z)|];
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5709,14 +5997,14 @@ index: LocalIndex);
         public async Task TestInsideNameOfProperty4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|y|], z);
     }
 }",
-@"class C
+                @"class C
 {
     public object y { get; private set; }
 
@@ -5725,7 +6013,8 @@ index: LocalIndex);
         var x = nameof(y, z);
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5733,14 +6022,14 @@ index: PropertyIndex);
         public async Task TestInsideNameOfField4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|y|], z);
     }
 }",
-@"class C
+                @"class C
 {
     private object y;
 
@@ -5748,7 +6037,8 @@ index: PropertyIndex);
     {
         var x = nameof(y, z);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5756,14 +6046,14 @@ index: PropertyIndex);
         public async Task TestInsideNameOfReadonlyField4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|y|], z);
     }
 }",
-@"class C
+                @"class C
 {
     private readonly object y;
 
@@ -5772,7 +6062,8 @@ index: PropertyIndex);
         var x = nameof(y, z);
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5780,14 +6071,14 @@ index: ReadonlyFieldIndex);
         public async Task TestInsideNameOfLocal4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var x = nameof([|y|], z);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -5795,7 +6086,8 @@ index: ReadonlyFieldIndex);
         var x = nameof(y, z);
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5803,7 +6095,7 @@ index: LocalIndex);
         public async Task TestInsideNameOfProperty5()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -5815,7 +6107,7 @@ index: LocalIndex);
         return null;
     }
 }",
-@"class C
+                @"class C
 {
     public object y { get; private set; }
 
@@ -5829,7 +6121,8 @@ index: LocalIndex);
         return null;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5837,7 +6130,7 @@ index: PropertyIndex);
         public async Task TestInsideNameOfField5()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -5849,7 +6142,7 @@ index: PropertyIndex);
         return null;
     }
 }",
-@"class C
+                @"class C
 {
     private object y;
 
@@ -5862,7 +6155,8 @@ index: PropertyIndex);
     {
         return null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5870,7 +6164,7 @@ index: PropertyIndex);
         public async Task TestInsideNameOfReadonlyField5()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -5882,7 +6176,7 @@ index: PropertyIndex);
         return null;
     }
 }",
-@"class C
+                @"class C
 {
     private readonly object y;
 
@@ -5896,7 +6190,8 @@ index: PropertyIndex);
         return null;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1032176, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1032176")]
@@ -5904,7 +6199,7 @@ index: ReadonlyFieldIndex);
         public async Task TestInsideNameOfLocal5()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -5916,7 +6211,7 @@ index: ReadonlyFieldIndex);
         return null;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -5929,7 +6224,8 @@ index: ReadonlyFieldIndex);
         return null;
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -5937,14 +6233,14 @@ index: LocalIndex);
         public async Task TestConditionalAccessProperty()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Main(C a)
     {
         C x = a?[|.Instance|];
     }
 }",
-@"class C
+                @"class C
 {
     public C Instance { get; private set; }
 
@@ -5952,7 +6248,8 @@ index: LocalIndex);
     {
         C x = a?.Instance;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -5960,14 +6257,14 @@ index: LocalIndex);
         public async Task TestConditionalAccessField()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Main(C a)
     {
         C x = a?[|.Instance|];
     }
 }",
-@"class C
+                @"class C
 {
     private C Instance;
 
@@ -5976,7 +6273,8 @@ index: LocalIndex);
         C x = a?.Instance;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -5984,14 +6282,14 @@ index: ReadonlyFieldIndex);
         public async Task TestConditionalAccessReadonlyField()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Main(C a)
     {
         C x = a?[|.Instance|];
     }
 }",
-@"class C
+                @"class C
 {
     private readonly C Instance;
 
@@ -6000,7 +6298,8 @@ index: ReadonlyFieldIndex);
         C x = a?.Instance;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6008,14 +6307,14 @@ index: PropertyIndex);
         public async Task TestConditionalAccessVarProperty()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Main(C a)
     {
         var x = a?[|.Instance|];
     }
 }",
-@"class C
+                @"class C
 {
     public object Instance { get; private set; }
 
@@ -6023,7 +6322,8 @@ index: PropertyIndex);
     {
         var x = a?.Instance;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6031,14 +6331,14 @@ index: PropertyIndex);
         public async Task TestConditionalAccessVarField()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Main(C a)
     {
         var x = a?[|.Instance|];
     }
 }",
-@"class C
+                @"class C
 {
     private object Instance;
 
@@ -6047,7 +6347,8 @@ index: PropertyIndex);
         var x = a?.Instance;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6055,14 +6356,14 @@ index: ReadonlyFieldIndex);
         public async Task TestConditionalAccessVarReadOnlyField()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Main(C a)
     {
         var x = a?[|.Instance|];
     }
 }",
-@"class C
+                @"class C
 {
     private readonly object Instance;
 
@@ -6071,7 +6372,8 @@ index: ReadonlyFieldIndex);
         var x = a?.Instance;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6079,14 +6381,14 @@ index: PropertyIndex);
         public async Task TestConditionalAccessNullableProperty()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Main(C a)
     {
         int? x = a?[|.B|];
     }
 }",
-@"class C
+                @"class C
 {
     public int B { get; private set; }
 
@@ -6094,7 +6396,8 @@ index: PropertyIndex);
     {
         int? x = a?.B;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6102,14 +6405,14 @@ index: PropertyIndex);
         public async Task TestConditionalAccessNullableField()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Main(C a)
     {
         int? x = a?[|.B|];
     }
 }",
-@"class C
+                @"class C
 {
     private int B;
 
@@ -6118,7 +6421,8 @@ index: PropertyIndex);
         int? x = a?.B;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6126,14 +6430,14 @@ index: ReadonlyFieldIndex);
         public async Task TestConditionalAccessNullableReadonlyField()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Main(C a)
     {
         int? x = a?[|.B|];
     }
 }",
-@"class C
+                @"class C
 {
     private readonly int B;
 
@@ -6142,7 +6446,8 @@ index: ReadonlyFieldIndex);
         int? x = a?.B;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6150,7 +6455,7 @@ index: PropertyIndex);
         public async Task TestGeneratePropertyInConditionalAccessExpression()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6163,7 +6468,7 @@ index: PropertyIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6176,7 +6481,8 @@ index: PropertyIndex);
     {
         public C C { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6184,7 +6490,7 @@ index: PropertyIndex);
         public async Task TestGeneratePropertyInConditionalAccessExpression2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6197,7 +6503,7 @@ index: PropertyIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6210,7 +6516,8 @@ index: PropertyIndex);
     {
         public int C { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6218,7 +6525,7 @@ index: PropertyIndex);
         public async Task TestGeneratePropertyInConditionalAccessExpression3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6231,7 +6538,7 @@ index: PropertyIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6244,7 +6551,8 @@ index: PropertyIndex);
     {
         public int C { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6252,7 +6560,7 @@ index: PropertyIndex);
         public async Task TestGeneratePropertyInConditionalAccessExpression4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6265,7 +6573,7 @@ index: PropertyIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6278,7 +6586,8 @@ index: PropertyIndex);
     {
         public object C { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6286,7 +6595,7 @@ index: PropertyIndex);
         public async Task TestGenerateFieldInConditionalAccessExpression()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6299,7 +6608,7 @@ index: PropertyIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6313,7 +6622,8 @@ index: PropertyIndex);
         internal C C;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6321,7 +6631,7 @@ index: ReadonlyFieldIndex);
         public async Task TestGenerateFieldInConditionalAccessExpression2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6334,7 +6644,7 @@ index: ReadonlyFieldIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6348,7 +6658,8 @@ index: ReadonlyFieldIndex);
         internal int C;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6356,7 +6667,7 @@ index: ReadonlyFieldIndex);
         public async Task TestGenerateFieldInConditionalAccessExpression3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6369,7 +6680,7 @@ index: ReadonlyFieldIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6383,7 +6694,8 @@ index: ReadonlyFieldIndex);
         internal int C;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6391,7 +6703,7 @@ index: ReadonlyFieldIndex);
         public async Task TestGenerateFieldInConditionalAccessExpression4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6404,7 +6716,7 @@ index: ReadonlyFieldIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6418,7 +6730,8 @@ index: ReadonlyFieldIndex);
         internal object C;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6426,7 +6739,7 @@ index: ReadonlyFieldIndex);
         public async Task TestGenerateReadonlyFieldInConditionalAccessExpression()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6439,7 +6752,7 @@ index: ReadonlyFieldIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6453,7 +6766,8 @@ index: ReadonlyFieldIndex);
         internal readonly C C;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6461,7 +6775,7 @@ index: PropertyIndex);
         public async Task TestGenerateReadonlyFieldInConditionalAccessExpression2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6474,7 +6788,7 @@ index: PropertyIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6488,7 +6802,8 @@ index: PropertyIndex);
         internal readonly int C;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6496,7 +6811,7 @@ index: PropertyIndex);
         public async Task TestGenerateReadonlyFieldInConditionalAccessExpression3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6509,7 +6824,7 @@ index: PropertyIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6523,7 +6838,8 @@ index: PropertyIndex);
         internal readonly int C;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(1064748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064748")]
@@ -6531,7 +6847,7 @@ index: PropertyIndex);
         public async Task TestGenerateReadonlyFieldInConditionalAccessExpression4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6544,7 +6860,7 @@ index: PropertyIndex);
     {
     }
 }",
-@"class C
+                @"class C
 {
     public E B { get; private set; }
 
@@ -6558,14 +6874,15 @@ index: PropertyIndex);
         internal readonly object C;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldInPropertyInitializers()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6574,7 +6891,7 @@ class Program
 {
     public int MyProperty { get; } = [|y|];
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6584,14 +6901,15 @@ class Program
     private static int y;
 
     public int MyProperty { get; } = y;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateReadonlyFieldInPropertyInitializers()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6600,7 +6918,7 @@ class Program
 {
     public int MyProperty { get; } = [|y|];
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6611,14 +6929,15 @@ class Program
 
     public int MyProperty { get; } = y;
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyInPropertyInitializers()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6627,7 +6946,7 @@ class Program
 {
     public int MyProperty { get; } = [|y|];
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6637,157 +6956,167 @@ class Program
     public static int y { get; private set; }
     public int MyProperty { get; } = y;
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldInExpressionBodiedProperty()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public int Y => [|y|];
 }",
-@"class Program
+                @"class Program
 {
     private int y;
 
     public int Y => y;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateReadonlyFieldInExpressionBodiedProperty()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public int Y => [|y|];
 }",
-@"class Program
+                @"class Program
 {
     private readonly int y;
 
     public int Y => y;
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyInExpressionBodiedProperty()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public int Y => [|y|];
 }",
-@"class Program
+                @"class Program
 {
     public int Y => y;
 
     public int y { get; private set; }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldInExpressionBodiedOperator()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static C operator --(C p) => [|x|];
 }",
-@"class C
+                @"class C
 {
     private static C x;
 
     public static C operator --(C p) => x;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateReadOnlyFieldInExpressionBodiedOperator()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static C operator --(C p) => [|x|];
 }",
-@"class C
+                @"class C
 {
     private static readonly C x;
 
     public static C operator --(C p) => x;
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyInExpressionBodiedOperator()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static C operator --(C p) => [|x|];
 }",
-@"class C
+                @"class C
 {
     public static C x { get; private set; }
 
     public static C operator --(C p) => x;
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldInExpressionBodiedMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static C GetValue(C p) => [|x|];
 }",
-@"class C
+                @"class C
 {
     private static C x;
 
     public static C GetValue(C p) => x;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateReadOnlyFieldInExpressionBodiedMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static C GetValue(C p) => [|x|];
 }",
-@"class C
+                @"class C
 {
     private static readonly C x;
 
     public static C GetValue(C p) => x;
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyInExpressionBodiedMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static C GetValue(C p) => [|x|];
 }",
-@"class C
+                @"class C
 {
     public static C x { get; private set; }
 
     public static C GetValue(C p) => x;
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -6795,24 +7124,25 @@ index: PropertyIndex);
         public async Task TestGeneratePropertyInExpressionBodiedAsyncTaskOfTMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public static async System.Threading.Tasks.Task<C> GetValue(C p) => [|x|];
 }",
-@"class C
+                @"class C
 {
     public static C x { get; private set; }
 
     public static async System.Threading.Tasks.Task<C> GetValue(C p) => x;
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldInDictionaryInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6821,7 +7151,7 @@ class Program
         var x = new Dictionary<string, int> { [[|key|]] = 0 };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6831,14 +7161,15 @@ class Program
     {
         var x = new Dictionary<string, int> { [key] = 0 };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyInDictionaryInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6847,7 +7178,7 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = 0, [[|One|]] = 1, [""Two""] = 2 };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6857,14 +7188,15 @@ class Program
     {
         var x = new Dictionary<string, int> { [""Zero""] = 0, [One] = 1, [""Two""] = 2 };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldInDictionaryInitializer2()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6873,7 +7205,7 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = [|i|] };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6883,14 +7215,15 @@ class Program
     {
         var x = new Dictionary<string, int> { [""Zero""] = i };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateReadOnlyFieldInDictionaryInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6899,7 +7232,7 @@ class Program
         var x = new Dictionary<string, int> { [[|key|]] = 0 };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6910,14 +7243,15 @@ class Program
         var x = new Dictionary<string, int> { [key] = 0 };
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateFieldInDictionaryInitializer3()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6926,7 +7260,7 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = 0, [[|One|]] = 1, [""Two""] = 2 };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6937,14 +7271,15 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = 0, [One] = 1, [""Two""] = 2 };
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateReadOnlyFieldInDictionaryInitializer2()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6953,7 +7288,7 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = [|i|] };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6964,14 +7299,15 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = i };
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyInDictionaryInitializer2()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6980,7 +7316,7 @@ class Program
         var x = new Dictionary<string, int> { [[|key|]] = 0 };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -6991,14 +7327,15 @@ class Program
         var x = new Dictionary<string, int> { [key] = 0 };
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateReadOnlyFieldInDictionaryInitializer3()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7007,7 +7344,7 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = 0, [[|One|]] = 1, [""Two""] = 2 };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7018,14 +7355,15 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = 0, [One] = 1, [""Two""] = 2 };
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyInDictionaryInitializer3()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7034,7 +7372,7 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = [|i|] };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7045,14 +7383,15 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = i };
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateLocalInDictionaryInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7061,7 +7400,7 @@ class Program
         var x = new Dictionary<string, int> { [[|key|]] = 0 };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7071,14 +7410,15 @@ class Program
         var x = new Dictionary<string, int> { [key] = 0 };
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateLocalInDictionaryInitializer2()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7087,7 +7427,7 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = 0, [[|One|]] = 1, [""Two""] = 2 };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7097,14 +7437,15 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = 0, [One] = 1, [""Two""] = 2 };
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateLocalInDictionaryInitializer3()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7113,7 +7454,7 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = [|i|] };
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -7123,14 +7464,15 @@ class Program
         var x = new Dictionary<string, int> { [""Zero""] = i };
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateVariableFromLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -7141,7 +7483,7 @@ class Program
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -7153,14 +7495,15 @@ class Program
             return 0;
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateVariableFromLambda2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -7171,7 +7514,7 @@ class Program
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -7184,14 +7527,15 @@ class Program
         };
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGenerateVariableFromLambda3()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -7202,7 +7546,7 @@ class Program
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -7214,7 +7558,8 @@ class Program
         };
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(8010, "https://github.com/dotnet/roslyn/issues/8010")]
@@ -7222,7 +7567,7 @@ index: PropertyIndex);
         public async Task TestGenerationFromStaticProperty_Field()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -7234,7 +7579,7 @@ public class Test
         }
     }
 }",
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -7247,7 +7592,8 @@ public class Test
             return _field;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(8010, "https://github.com/dotnet/roslyn/issues/8010")]
@@ -7255,7 +7601,7 @@ public class Test
         public async Task TestGenerationFromStaticProperty_ReadonlyField()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -7267,7 +7613,7 @@ public class Test
         }
     }
 }",
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -7281,7 +7627,8 @@ public class Test
         }
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(8010, "https://github.com/dotnet/roslyn/issues/8010")]
@@ -7289,7 +7636,7 @@ index: ReadonlyFieldIndex);
         public async Task TestGenerationFromStaticProperty_Property()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -7301,7 +7648,7 @@ public class Test
         }
     }
 }",
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -7315,7 +7662,8 @@ public class Test
 
     public static int _field { get; private set; }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(8010, "https://github.com/dotnet/roslyn/issues/8010")]
@@ -7323,7 +7671,7 @@ index: PropertyIndex);
         public async Task TestGenerationFromStaticProperty_Local()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -7335,7 +7683,7 @@ public class Test
         }
     }
 }",
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -7348,7 +7696,8 @@ public class Test
         }
     }
 }",
-index: LocalIndex);
+                index: LocalIndex
+            );
         }
 
         [WorkItem(8358, "https://github.com/dotnet/roslyn/issues/8358")]
@@ -7356,7 +7705,7 @@ index: LocalIndex);
         public async Task TestSameNameAsInstanceVariableInContainingType()
         {
             await TestInRegularAndScriptAsync(
-@"class Outer
+                @"class Outer
 {
     int _field;
 
@@ -7368,7 +7717,7 @@ index: LocalIndex);
         }
     }
 }",
-@"class Outer
+                @"class Outer
 {
     int _field;
 
@@ -7381,7 +7730,8 @@ index: LocalIndex);
             _field = field;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(8358, "https://github.com/dotnet/roslyn/issues/8358")]
@@ -7389,7 +7739,7 @@ index: LocalIndex);
         public async Task TestNotOnStaticWithExistingInstance1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int _field;
 
@@ -7397,7 +7747,8 @@ index: LocalIndex);
     {
         C.[|_field|] = 42;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(8358, "https://github.com/dotnet/roslyn/issues/8358")]
@@ -7405,7 +7756,7 @@ index: LocalIndex);
         public async Task TestNotOnStaticWithExistingInstance2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int _field;
 
@@ -7413,21 +7764,22 @@ index: LocalIndex);
     {
         [|_field|] = 42;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TupleRead()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method((int, string) i)
     {
         Method([|tuple|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     private (int, string) tuple;
 
@@ -7435,21 +7787,22 @@ index: LocalIndex);
     {
         Method(tuple);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TupleWithOneNameRead()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method((int a, string) i)
     {
         Method([|tuple|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     private (int a, string) tuple;
 
@@ -7457,21 +7810,22 @@ index: LocalIndex);
     {
         Method(tuple);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TupleWrite()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|tuple|] = (1, ""hello"");
     }
 }",
-@"class Class
+                @"class Class
 {
     private (int, string) tuple;
 
@@ -7479,21 +7833,22 @@ index: LocalIndex);
     {
         tuple = (1, ""hello"");
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TupleWithOneNameWrite()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|tuple|] = (a: 1, ""hello"");
     }
 }",
-@"class Class
+                @"class Class
 {
     private (int a, string) tuple;
 
@@ -7501,14 +7856,15 @@ index: LocalIndex);
     {
         tuple = (a: 1, ""hello"");
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TupleRefReturnProperties()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 class C
 {
@@ -7517,7 +7873,7 @@ class C
         ref int i = ref this.[|Bar|];
     }
 }",
-@"
+                @"
 using System;
 class C
 {
@@ -7527,14 +7883,15 @@ class C
     {
         ref int i = ref this.Bar;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TupleRefWithField()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 class C
 {
@@ -7543,7 +7900,7 @@ class C
         ref int i = ref this.[|bar|];
     }
 }",
-@"
+                @"
 using System;
 class C
 {
@@ -7553,7 +7910,8 @@ class C
     {
         ref int i = ref this.bar;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(17621, "https://github.com/dotnet/roslyn/issues/17621")]
@@ -7561,7 +7919,7 @@ class C
         public async Task TestWithMatchingTypeName1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 public class Goo
@@ -7571,7 +7929,7 @@ public class Goo
         [|String|] = goo;
     }
 }",
-@"
+                @"
 using System;
 
 public class Goo
@@ -7582,7 +7940,8 @@ public class Goo
     }
 
     public string String { get; }
-}");
+}"
+            );
         }
 
         [WorkItem(17621, "https://github.com/dotnet/roslyn/issues/17621")]
@@ -7590,7 +7949,7 @@ public class Goo
         public async Task TestWithMatchingTypeName2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 public class Goo
@@ -7600,7 +7959,7 @@ public class Goo
         [|String|] = goo;
     }
 }",
-@"
+                @"
 using System;
 
 public class Goo
@@ -7611,7 +7970,9 @@ public class Goo
     }
 
     public string String { get; private set; }
-}", index: ReadonlyFieldIndex);
+}",
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(18275, "https://github.com/dotnet/roslyn/issues/18275")]
@@ -7619,7 +7980,7 @@ public class Goo
         public async Task TestContextualKeyword1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 namespace N
 {
     class nameof
@@ -7633,14 +7994,15 @@ class C
     {
         [|nameof|]
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestPreferReadOnlyIfAfterReadOnlyAssignment()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     private readonly int _goo;
 
@@ -7650,7 +8012,7 @@ class C
         [|_bar|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     private readonly int _goo;
     private readonly int _bar;
@@ -7660,14 +8022,15 @@ class C
         _goo = 0;
         _bar = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestPreferReadOnlyIfBeforeReadOnlyAssignment()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     private readonly int _goo;
 
@@ -7677,7 +8040,7 @@ class C
         _goo = 0;
     }
 }",
-@"class Class
+                @"class Class
 {
     private readonly int _bar;
     private readonly int _goo;
@@ -7687,7 +8050,8 @@ class C
         _bar = 1;
         _goo = 0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(19239, "https://github.com/dotnet/roslyn/issues/19239")]
@@ -7695,14 +8059,14 @@ class C
         public async Task TestGenerateReadOnlyPropertyInConstructor()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     public Class()
     {
         [|Bar|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     public Class()
     {
@@ -7710,14 +8074,15 @@ class C
     }
 
     public int Bar { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestPlaceFieldBasedOnSurroundingStatements()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     private int _goo;
     private int _quux;
@@ -7729,7 +8094,7 @@ class C
         _quux = 2;
     }
 }",
-@"class Class
+                @"class Class
 {
     private int _goo;
     private int _bar;
@@ -7741,14 +8106,15 @@ class C
         _bar = 1;
         _quux = 2;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestPlaceFieldBasedOnSurroundingStatements2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     private int goo;
     private int quux;
@@ -7760,7 +8126,7 @@ class C
         this.quux = 2;
     }
 }",
-@"class Class
+                @"class Class
 {
     private int goo;
     private int bar;
@@ -7772,14 +8138,15 @@ class C
         this.bar = 1;
         this.quux = 2;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestPlacePropertyBasedOnSurroundingStatements()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     public int Goo { get; }
     public int Quuz { get; }
@@ -7791,7 +8158,7 @@ class C
         Quux = 2;
     }
 }",
-@"class Class
+                @"class Class
 {
     public int Goo { get; }
     public int Bar { get; }
@@ -7803,14 +8170,16 @@ class C
         Bar = 1;
         Quux = 2;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(19575, "https://github.com/dotnet/roslyn/issues/19575")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestNotOnGenericCodeParsedAsExpression()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class C
 {
     private void GetEvaluationRuleNames()
@@ -7818,14 +8187,16 @@ class C
         [|IEnumerable|] < Int32 >
         return ImmutableArray.CreateRange();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(19575, "https://github.com/dotnet/roslyn/issues/19575")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestOnNonGenericExpressionWithLessThan()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 class C
 {
     private void GetEvaluationRuleNames()
@@ -7834,7 +8205,7 @@ class C
         return ImmutableArray.CreateRange();
     }
 }",
-@"
+                @"
 class C
 {
     public int IEnumerable { get; private set; }
@@ -7844,14 +8215,16 @@ class C
         IEnumerable < Int32
         return ImmutableArray.CreateRange();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(18988, "https://github.com/dotnet/roslyn/issues/18988")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task GroupNonReadonlyFieldsTogether()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 class C
 {
     public bool isDisposed;
@@ -7864,7 +8237,7 @@ class C
         this.[|y|] = 0;
     }
 }",
-@"
+                @"
 class C
 {
     public bool isDisposed;
@@ -7876,14 +8249,16 @@ class C
     {
         this.y = 0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(18988, "https://github.com/dotnet/roslyn/issues/18988")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task GroupReadonlyFieldsTogether()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 class C
 {
     public readonly int x;
@@ -7896,7 +8271,7 @@ class C
         this.[|y|] = 0;
     }
 }",
-@"
+                @"
 class C
 {
     public readonly int x;
@@ -7908,7 +8283,9 @@ class C
     {
         this.y = 0;
     }
-}", index: ReadonlyFieldIndex);
+}",
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(20791, "https://github.com/dotnet/roslyn/issues/20791")]
@@ -7916,7 +8293,7 @@ class C
         public async Task TestWithOutOverload1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -7926,7 +8303,7 @@ class C
     void Goo(int i) { }
     void Goo(out bool b) { }
 }",
-@"class Class
+                @"class Class
 {
     private bool goo;
 
@@ -7937,7 +8314,8 @@ class C
 
     void Goo(int i) { }
     void Goo(out bool b) { }
-}");
+}"
+            );
         }
 
         [WorkItem(20791, "https://github.com/dotnet/roslyn/issues/20791")]
@@ -7945,7 +8323,7 @@ class C
         public async Task TestWithOutOverload2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -7955,7 +8333,7 @@ class C
     void Goo(out bool b) { }
     void Goo(int i) { }
 }",
-@"class Class
+                @"class Class
 {
     private int goo;
 
@@ -7966,7 +8344,8 @@ class C
 
     void Goo(out bool b) { }
     void Goo(int i) { }
-}");
+}"
+            );
         }
 
         [WorkItem(20791, "https://github.com/dotnet/roslyn/issues/20791")]
@@ -7974,7 +8353,7 @@ class C
         public async Task TestWithRefOverload1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -7984,7 +8363,7 @@ class C
     void Goo(int i) { }
     void Goo(ref bool b) { }
 }",
-@"class Class
+                @"class Class
 {
     private bool goo;
 
@@ -7995,7 +8374,8 @@ class C
 
     void Goo(int i) { }
     void Goo(ref bool b) { }
-}");
+}"
+            );
         }
 
         [WorkItem(20791, "https://github.com/dotnet/roslyn/issues/20791")]
@@ -8003,7 +8383,7 @@ class C
         public async Task TestWithRefOverload2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -8013,7 +8393,7 @@ class C
     void Goo(ref bool b) { }
     void Goo(int i) { }
 }",
-@"class Class
+                @"class Class
 {
     private int goo;
 
@@ -8024,7 +8404,8 @@ class C
 
     void Goo(ref bool b) { }
     void Goo(int i) { }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8032,14 +8413,14 @@ class C
         public async Task TestGenerateFieldInExpressionBodiedGetter()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public int Property
     {
         get => [|_field|];
     }
 }",
-@"class Program
+                @"class Program
 {
     private int _field;
 
@@ -8047,7 +8428,8 @@ class C
     {
         get => _field;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8055,7 +8437,7 @@ class C
         public async Task TestGenerateFieldInExpressionBodiedGetterWithDifferentAccessibility()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public int Property
     {
@@ -8063,7 +8445,7 @@ class C
         set => throw new System.NotImplementedException();
     }
 }",
-@"class Program
+                @"class Program
 {
     private int _field;
 
@@ -8072,7 +8454,8 @@ class C
         protected get => _field;
         set => throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8080,14 +8463,14 @@ class C
         public async Task TestGenerateReadonlyFieldInExpressionBodiedGetter()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public int Property
     {
         get => [|_readonlyField|];
     }
 }",
-@"class Program
+                @"class Program
 {
     private readonly int _readonlyField;
 
@@ -8096,7 +8479,8 @@ class C
         get => _readonlyField;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8104,14 +8488,14 @@ index: ReadonlyFieldIndex);
         public async Task TestGeneratePropertyInExpressionBodiedGetter()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public int Property
     {
         get => [|prop|];
     }
 }",
-@"class Program
+                @"class Program
 {
     public int Property
     {
@@ -8119,7 +8503,8 @@ index: ReadonlyFieldIndex);
     }
     public int prop { get; private set; }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8127,14 +8512,14 @@ index: PropertyIndex);
         public async Task TestGenerateFieldInExpressionBodiedSetterInferredFromType()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public int Property
     {
         set => [|_field|] = value;
     }
 }",
-@"class Program
+                @"class Program
 {
     private int _field;
 
@@ -8142,7 +8527,8 @@ index: PropertyIndex);
     {
         set => _field = value;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8150,14 +8536,14 @@ index: PropertyIndex);
         public async Task TestGenerateFieldInExpressionBodiedLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public void Method()
     {
         int Local() => [|_field|];
     }
 }",
-@"class Program
+                @"class Program
 {
     private int _field;
 
@@ -8165,7 +8551,8 @@ index: PropertyIndex);
     {
         int Local() => _field;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8173,14 +8560,14 @@ index: PropertyIndex);
         public async Task TestGenerateReadonlyFieldInExpressionBodiedLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public void Method()
     {
         int Local() => [|_readonlyField|];
     }
 }",
-@"class Program
+                @"class Program
 {
     private readonly int _readonlyField;
 
@@ -8189,7 +8576,8 @@ index: PropertyIndex);
         int Local() => _readonlyField;
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8197,14 +8585,14 @@ index: ReadonlyFieldIndex);
         public async Task TestGeneratePropertyInExpressionBodiedLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public void Method()
     {
         int Local() => [|prop|];
     }
 }",
-@"class Program
+                @"class Program
 {
     public int prop { get; private set; }
 
@@ -8213,7 +8601,8 @@ index: ReadonlyFieldIndex);
         int Local() => prop;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -8221,14 +8610,14 @@ index: PropertyIndex);
         public async Task TestGeneratePropertyInExpressionBodiedAsyncTaskOfTLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public void Method()
     {
         async System.Threading.Tasks.Task<int> Local() => [|prop|];
     }
 }",
-@"class Program
+                @"class Program
 {
     public int prop { get; private set; }
 
@@ -8237,7 +8626,8 @@ index: PropertyIndex);
         async System.Threading.Tasks.Task<int> Local() => prop;
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8245,14 +8635,14 @@ index: PropertyIndex);
         public async Task TestGenerateFieldInExpressionBodiedLocalFunctionInferredFromType()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public void Method()
     {
         int Local() => [|_field|] = 12;
     }
 }",
-@"class Program
+                @"class Program
 {
     private int _field;
 
@@ -8260,7 +8650,8 @@ index: PropertyIndex);
     {
         int Local() => _field = 12;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8268,7 +8659,7 @@ index: PropertyIndex);
         public async Task TestGenerateFieldInBlockBodiedLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -8278,7 +8669,7 @@ index: PropertyIndex);
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     private int _field;
 
@@ -8289,7 +8680,8 @@ index: PropertyIndex);
             return _field;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8297,7 +8689,7 @@ index: PropertyIndex);
         public async Task TestGenerateReadonlyFieldInBlockBodiedLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -8307,7 +8699,7 @@ index: PropertyIndex);
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     private readonly int _readonlyField;
 
@@ -8319,7 +8711,8 @@ index: PropertyIndex);
         }
     }
 }",
-index: ReadonlyFieldIndex);
+                index: ReadonlyFieldIndex
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8327,7 +8720,7 @@ index: ReadonlyFieldIndex);
         public async Task TestGeneratePropertyInBlockBodiedLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -8337,7 +8730,7 @@ index: ReadonlyFieldIndex);
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     public int prop { get; private set; }
 
@@ -8349,14 +8742,15 @@ index: ReadonlyFieldIndex);
         }
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestGeneratePropertyInBlockBodiedAsyncTaskOfTLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -8366,7 +8760,7 @@ index: PropertyIndex);
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     public int prop { get; private set; }
 
@@ -8378,7 +8772,8 @@ index: PropertyIndex);
         }
     }
 }",
-index: PropertyIndex);
+                index: PropertyIndex
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8386,7 +8781,7 @@ index: PropertyIndex);
         public async Task TestGenerateFieldInBlockBodiedLocalFunctionInferredFromType()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -8396,7 +8791,7 @@ index: PropertyIndex);
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     private int _field;
 
@@ -8407,7 +8802,8 @@ index: PropertyIndex);
             return _field = 12;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8415,7 +8811,7 @@ index: PropertyIndex);
         public async Task TestGenerateFieldInBlockBodiedLocalFunctionInsideLambdaExpression()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Program
@@ -8431,7 +8827,7 @@ class Program
         };
     }
 }",
-@"
+                @"
 using System;
 
 class Program
@@ -8448,7 +8844,8 @@ class Program
             }
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26993, "https://github.com/dotnet/roslyn/issues/26993")]
@@ -8456,7 +8853,7 @@ class Program
         public async Task TestGenerateFieldInExpressionBodiedLocalFunctionInsideLambdaExpression()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Program
@@ -8469,7 +8866,7 @@ class Program
         };
     }
 }",
-@"
+                @"
 using System;
 
 class Program
@@ -8483,7 +8880,8 @@ class Program
             int Local() => _field;
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26406, "https://github.com/dotnet/roslyn/issues/26406")]
@@ -8491,7 +8889,7 @@ class Program
         public async Task TestIdentifierInsideLock1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -8500,7 +8898,7 @@ class Program
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     private object goo;
 
@@ -8510,7 +8908,8 @@ class Program
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26406, "https://github.com/dotnet/roslyn/issues/26406")]
@@ -8518,7 +8917,7 @@ class Program
         public async Task TestIdentifierInsideLock2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -8527,7 +8926,7 @@ class Program
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     private readonly object goo;
 
@@ -8537,7 +8936,9 @@ class Program
         {
         }
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [WorkItem(26406, "https://github.com/dotnet/roslyn/issues/26406")]
@@ -8545,7 +8946,7 @@ class Program
         public async Task TestIdentifierInsideLock3()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
@@ -8554,7 +8955,7 @@ class Program
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     public object goo { get; private set; }
 
@@ -8564,7 +8965,9 @@ class Program
         {
         }
     }
-}", index: 2);
+}",
+                index: 2
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8572,7 +8975,7 @@ class Program
         public async Task TestPropertyPatternInIsPattern1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -8587,7 +8990,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -8602,7 +9005,8 @@ class C
     {
         public int X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8610,7 +9014,7 @@ class C
         public async Task TestPropertyPatternInIsPattern2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -8625,7 +9029,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -8640,7 +9044,8 @@ class C
     {
         public int X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8648,7 +9053,7 @@ class C
         public async Task TestPropertyPatternInIsPattern3()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -8668,7 +9073,7 @@ class C
         public Frob X;
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -8688,7 +9093,8 @@ class C
     {
         public Frob X;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8696,7 +9102,7 @@ class C
         public async Task TestPropertyPatternInIsPattern4()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -8711,7 +9117,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -8726,7 +9132,8 @@ class C
     {
         public object X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8734,7 +9141,7 @@ class C
         public async Task TestPropertyPatternInIsPattern5()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -8753,7 +9160,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -8772,7 +9179,8 @@ class C
     class Frob
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8780,7 +9188,7 @@ class C
         public async Task TestPropertyPatternInIsPattern6()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -8795,7 +9203,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -8810,7 +9218,8 @@ class C
     {
         public (int, int) X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8818,7 +9227,7 @@ class C
         public async Task TestPropertyPatternInIsPattern7()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -8834,7 +9243,7 @@ class C
     }
 }
 " + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"
+                @"
 class C
 {
     void M2()
@@ -8850,7 +9259,8 @@ class C
         public (int y, int z) X { get; internal set; }
     }
 }
-" + TestResources.NetFX.ValueTuple.tuplelib_cs);
+" + TestResources.NetFX.ValueTuple.tuplelib_cs
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8858,7 +9268,7 @@ class C
         public async Task TestPropertyPatternInIsPattern8()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -8873,7 +9283,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -8888,7 +9298,8 @@ class C
     {
         public object X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8896,7 +9307,7 @@ class C
         public async Task TestPropertyPatternInIsPattern9()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -8911,7 +9322,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -8926,7 +9337,8 @@ class C
     {
         public int X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8934,7 +9346,7 @@ class C
         public async Task TestPropertyPatternInIsPattern10()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -8949,7 +9361,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -8964,7 +9376,8 @@ class C
     {
         public object X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -8972,7 +9385,7 @@ class C
         public async Task TestPropertyPatternInIsPatternWithNullablePattern()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -8989,7 +9402,7 @@ class C
     {
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -9006,7 +9419,8 @@ class C
     {
         public (int y, object? z) X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -9015,7 +9429,7 @@ class C
         public async Task TestPropertyPatternInCasePattern1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -9032,7 +9446,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -9049,7 +9463,8 @@ class C
     {
         public int X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -9058,7 +9473,7 @@ class C
         public async Task TestPropertyPatternInCasePattern2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -9075,7 +9490,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -9092,7 +9507,8 @@ class C
     {
         public int X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(9090, "https://github.com/dotnet/roslyn/issues/9090")]
@@ -9100,7 +9516,7 @@ class C
         public async Task TestPropertyPatternInIsSwitchExpression1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -9113,7 +9529,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     void M2()
@@ -9126,14 +9542,15 @@ class C
     {
         public int X { get; internal set; }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestPropertyPatternGenerateConstant()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M2()
@@ -9147,7 +9564,7 @@ class C
         public int X;
     }
 }",
-@"
+                @"
 class C
 {
     private const int Y;
@@ -9162,34 +9579,37 @@ class C
     {
         public int X;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestAddParameter()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Method()
     {
         [|goo|];
     }
 }",
-@"class Class
+                @"class Class
 {
     void Method(object goo)
     {
         goo;
     }
-}", index: Parameter);
+}",
+                index: Parameter
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestAddParameter_DoesntAddToInterface()
         {
             await TestInRegularAndScriptAsync(
-@"interface Interface
+                @"interface Interface
 {
     void Method();
 }
@@ -9201,7 +9621,7 @@ class Class
         [|goo|];
     }
 }",
-@"interface Interface
+                @"interface Interface
 {
     void Method();
 }
@@ -9212,14 +9632,16 @@ class Class
     {
         [|goo|];
     }
-}", index: Parameter);
+}",
+                index: Parameter
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestAddParameterAndOverrides_AddsToInterface()
         {
             await TestInRegularAndScriptAsync(
-@"interface Interface
+                @"interface Interface
 {
     void Method();
 }
@@ -9231,7 +9653,7 @@ class Class : Interface
         [|goo|];
     }
 }",
-@"interface Interface
+                @"interface Interface
 {
     void Method(object goo);
 }
@@ -9242,14 +9664,16 @@ class Class : Interface
     {
         [|goo|];
     }
-}", index: ParameterAndOverrides);
+}",
+                index: ParameterAndOverrides
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestAddParameterIsOfCorrectType()
         {
             await TestInRegularAndScriptAsync(
-    @"class Class
+                @"class Class
 {
     void Method()
     {
@@ -9258,7 +9682,7 @@ class Class : Interface
 
     void M1(int a);
 }",
-    @"class Class
+                @"class Class
 {
     void Method(int goo)
     {
@@ -9266,14 +9690,16 @@ class Class : Interface
     }
 
     void M1(int a);
-}", index: Parameter);
+}",
+                index: Parameter
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateVariable)]
         public async Task TestAddParameterAndOverrides_IsOfCorrectType()
         {
             await TestInRegularAndScriptAsync(
-@"interface Interface
+                @"interface Interface
 {
     void Method();
 }
@@ -9287,7 +9713,7 @@ class Class : Interface
 
     void M1(int a);
 }",
-@"interface Interface
+                @"interface Interface
 {
     void Method(int goo);
 }
@@ -9300,7 +9726,9 @@ class Class : Interface
     }
 
     void M1(int a);
-}", index: ParameterAndOverrides);
+}",
+                index: ParameterAndOverrides
+            );
         }
 
         [WorkItem(26502, "https://github.com/dotnet/roslyn/issues/26502")]
@@ -9308,7 +9736,7 @@ class Class : Interface
         public async Task TestNoReadOnlyMembersWhenInLambdaInConstructor()
         {
             await TestExactActionSetOfferedAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -9319,11 +9747,13 @@ class C
             this.[|Field|] = 1;
         };
     }
-}", new[]
-{
-    string.Format(FeaturesResources.Generate_property_1_0, "Field", "C"),
-    string.Format(FeaturesResources.Generate_field_1_0, "Field", "C"),
-});
+}",
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_property_1_0, "Field", "C"),
+                    string.Format(FeaturesResources.Generate_field_1_0, "Field", "C"),
+                }
+            );
         }
 
         [WorkItem(26502, "https://github.com/dotnet/roslyn/issues/26502")]
@@ -9331,7 +9761,7 @@ class C
         public async Task TestNoReadOnlyMembersWhenInLocalFunctionInConstructor()
         {
             await TestExactActionSetOfferedAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -9342,11 +9772,13 @@ class C
             this.[|Field|] = 1;
         };
     }
-}", new[]
-{
-    string.Format(FeaturesResources.Generate_property_1_0, "Field", "C"),
-    string.Format(FeaturesResources.Generate_field_1_0, "Field", "C"),
-});
+}",
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_property_1_0, "Field", "C"),
+                    string.Format(FeaturesResources.Generate_field_1_0, "Field", "C"),
+                }
+            );
         }
 
         [WorkItem(45367, "https://github.com/dotnet/roslyn/issues/45367")]
@@ -9354,7 +9786,7 @@ class C
         public async Task DontOfferPropertyOrFieldInNamespace()
         {
             await TestExactActionSetOfferedAsync(
-@"using System;
+                @"using System;
 
 namespace ConsoleApp5
 {
@@ -9364,11 +9796,13 @@ namespace ConsoleApp5
     {
         [|Error|] = error;
         Offset = offset;
-    }", new[]
-{
-    string.Format(FeaturesResources.Generate_local_0, "Error", "MyException"),
-    string.Format(FeaturesResources.Generate_parameter_0, "Error", "MyException"),
-});
+    }",
+                new[]
+                {
+                    string.Format(FeaturesResources.Generate_local_0, "Error", "MyException"),
+                    string.Format(FeaturesResources.Generate_parameter_0, "Error", "MyException"),
+                }
+            );
         }
 
         [WorkItem(48172, "https://github.com/dotnet/roslyn/issues/48172")]

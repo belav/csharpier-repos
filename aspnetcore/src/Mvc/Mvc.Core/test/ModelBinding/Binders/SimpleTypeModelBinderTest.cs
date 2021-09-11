@@ -23,10 +23,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             // Arrange
             var bindingContext = GetBindingContext(typeof(string));
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
 
             var binder = new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance);
 
@@ -41,18 +38,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [Theory]
         [InlineData("")]
         [InlineData(" \t \r\n ")]
-        public async Task BindModel_ReturnsProvidedWhitespaceString_WhenNotConvertEmptyStringToNull(string value)
-        {
+        public async Task BindModel_ReturnsProvidedWhitespaceString_WhenNotConvertEmptyStringToNull(
+            string value
+        ) {
             // Arrange
             var bindingContext = GetBindingContext(typeof(string));
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
 
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider
-                .ForType(typeof(string))
+            metadataProvider.ForType(typeof(string))
                 .DisplayDetails(d => d.ConvertEmptyStringToNull = false);
             bindingContext.ModelMetadata = metadataProvider.GetMetadataForType(typeof(string));
 
@@ -93,8 +87,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
         [Theory]
         [MemberData(nameof(ConvertibleTypeData))]
-        public async Task BindModel_ReturnsFailure_IfTypeCanBeConverted_AndConversionFails(Type destinationType)
-        {
+        public async Task BindModel_ReturnsFailure_IfTypeCanBeConverted_AndConversionFails(
+            Type destinationType
+        ) {
             // Arrange
             var bindingContext = GetBindingContext(destinationType);
             bindingContext.ValueProvider = new SimpleValueProvider
@@ -170,7 +165,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 return new TheoryData<ModelMetadata>
                 {
                     metadataProvider.GetMetadataForParameter(parameter),
-                    metadataProvider.GetMetadataForProperty(typeof(MetadataClass), nameof(MetadataClass.Property)),
+                    metadataProvider.GetMetadataForProperty(
+                        typeof(MetadataClass),
+                        nameof(MetadataClass.Property)
+                    ),
                     metadataProvider.GetMetadataForType(typeof(int)),
                 };
             }
@@ -178,8 +176,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
         [Theory]
         [MemberData(nameof(IntegerModelMetadataDataSet))]
-        public async Task BindModel_EmptyValueProviderResult_ReturnsFailedAndLogsSuccessfully(ModelMetadata metadata)
-        {
+        public async Task BindModel_EmptyValueProviderResult_ReturnsFailedAndLogsSuccessfully(
+            ModelMetadata metadata
+        ) {
             // Arrange
             var bindingContext = GetBindingContext(typeof(int));
             bindingContext.ModelMetadata = metadata;
@@ -204,10 +203,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             // Arrange
             var bindingContext = GetBindingContext(typeof(string));
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
 
             var binder = new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance);
 
@@ -224,10 +220,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             // Arrange
             var bindingContext = GetBindingContext(typeof(int?));
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "12" }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "12" } };
 
             var binder = new SimpleTypeModelBinder(typeof(int?), NullLoggerFactory.Instance);
 
@@ -245,10 +238,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             // Arrange
             var bindingContext = GetBindingContext(typeof(double?));
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "12.5" }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "12.5" } };
 
             var binder = new SimpleTypeModelBinder(typeof(double?), NullLoggerFactory.Instance);
 
@@ -263,15 +253,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
         [Theory]
         [MemberData(nameof(IntegerModelMetadataDataSet))]
-        public async Task BindModel_ValidValueProviderResult_ReturnsModelAndLogsSuccessfully(ModelMetadata metadata)
-        {
+        public async Task BindModel_ValidValueProviderResult_ReturnsModelAndLogsSuccessfully(
+            ModelMetadata metadata
+        ) {
             // Arrange
             var bindingContext = GetBindingContext(typeof(int));
             bindingContext.ModelMetadata = metadata;
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "42" }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "42" } };
 
             var sink = new TestSink();
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
@@ -377,7 +365,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Assert.Null(bindingContext.Result.Model);
 
             var error = Assert.Single(bindingContext.ModelState["theModelName"].Errors);
-            Assert.Equal("The value '12,5' is not valid.", error.ErrorMessage, StringComparer.Ordinal);
+            Assert.Equal(
+                "The value '12,5' is not valid.",
+                error.ErrorMessage,
+                StringComparer.Ordinal
+            );
             Assert.Null(error.Exception);
         }
 

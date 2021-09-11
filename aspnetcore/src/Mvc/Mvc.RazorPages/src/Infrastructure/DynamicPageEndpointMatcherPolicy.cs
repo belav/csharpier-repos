@@ -20,8 +20,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         private readonly PageLoader _loader;
         private readonly EndpointMetadataComparer _comparer;
 
-        public DynamicPageEndpointMatcherPolicy(DynamicPageEndpointSelectorCache selectorCache, PageLoader loader, EndpointMetadataComparer comparer)
-        {
+        public DynamicPageEndpointMatcherPolicy(
+            DynamicPageEndpointSelectorCache selectorCache,
+            PageLoader loader,
+            EndpointMetadataComparer comparer
+        ) {
             if (selectorCache == null)
             {
                 throw new ArgumentNullException(nameof(selectorCache));
@@ -65,8 +68,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     return true;
                 }
 
-                if (endpoints[i].Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>() != null)
-                {
+                if (
+                    endpoints[i].Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>()
+                    != null
+                ) {
                     // Found a dynamic page endpoint
                     return true;
                 }
@@ -107,7 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 // We don't expect both of these to be provided, and they are internal so there's
                 // no realistic way this could happen.
                 var dynamicPageMetadata = endpoint.Metadata.GetMetadata<DynamicPageMetadata>();
-                var transformerMetadata = endpoint.Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>();
+                var transformerMetadata =
+                    endpoint.Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>();
                 DynamicRouteValueTransformer transformer = null;
                 if (dynamicPageMetadata != null)
                 {
@@ -115,10 +121,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 }
                 else if (transformerMetadata != null)
                 {
-                    transformer = (DynamicRouteValueTransformer)httpContext.RequestServices.GetRequiredService(transformerMetadata.SelectorType);
+                    transformer =
+                        (DynamicRouteValueTransformer)httpContext.RequestServices.GetRequiredService(
+                            transformerMetadata.SelectorType
+                        );
                     if (transformer.State != null)
                     {
-                        throw new InvalidOperationException(Resources.FormatStateShouldBeNullForRouteValueTransformers(transformerMetadata.SelectorType.Name));
+                        throw new InvalidOperationException(
+                            Resources.FormatStateShouldBeNullForRouteValueTransformers(
+                                transformerMetadata.SelectorType.Name
+                            )
+                        );
                     }
                     transformer.State = transformerMetadata.State;
                     dynamicValues = await transformer.TransformAsync(httpContext, originalValues);
@@ -142,8 +155,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     // Having no match for a fallback is a configuration error. We can't really check
                     // during startup that the action you configured exists, so this is the best we can do.
                     throw new InvalidOperationException(
-                        "Cannot find the fallback endpoint specified by route values: " +
-                        "{ " + string.Join(", ", dynamicValues.Select(kvp => $"{kvp.Key}: {kvp.Value}")) + " }.");
+                        "Cannot find the fallback endpoint specified by route values: "
+                            + "{ "
+                            + string.Join(
+                                ", ",
+                                dynamicValues.Select(kvp => $"{kvp.Key}: {kvp.Value}")
+                            )
+                            + " }."
+                    );
                 }
                 else if (endpoints.Count == 0)
                 {
@@ -189,8 +208,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     else
                     {
                         // We're working with a runtime-compiled page and have to Load it.
-                        var compiled = actionDescriptor.CompiledPageDescriptor ??
-                            await _loader.LoadAsync(actionDescriptor, endpoint.Metadata);
+                        var compiled =
+                            actionDescriptor.CompiledPageDescriptor
+                            ?? await _loader.LoadAsync(actionDescriptor, endpoint.Metadata);
                         loadedEndpoints[j] = compiled.Endpoint;
                     }
                 }
@@ -200,14 +220,15 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             }
         }
 
-        private DynamicPageEndpointSelector ResolveSelector(DynamicPageEndpointSelector currentSelector, Endpoint endpoint)
-        {
+        private DynamicPageEndpointSelector ResolveSelector(
+            DynamicPageEndpointSelector currentSelector,
+            Endpoint endpoint
+        ) {
             var selector = _selectorCache.GetEndpointSelector(endpoint);
 
             Debug.Assert(currentSelector == null || ReferenceEquals(currentSelector, selector));
 
             return selector;
         }
-
     }
 }

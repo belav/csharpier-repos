@@ -11,11 +11,14 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class RequestFormLimitsTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupRequestLimitSize>>
+    public class RequestFormLimitsTest
+        : IClassFixture<MvcTestFixture<BasicWebSite.StartupRequestLimitSize>>
     {
         public RequestFormLimitsTest(MvcTestFixture<BasicWebSite.StartupRequestLimitSize> fixture)
         {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = factory.CreateDefaultClient();
         }
 
@@ -39,7 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             var response = await Client.PostAsync(
                 "RequestFormLimits/RequestFormLimitsBeforeAntiforgeryValidation",
-                new FormUrlEncodedContent(kvps));
+                new FormUrlEncodedContent(kvps)
+            );
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
@@ -60,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             var response = await Client.PostAsync(
                 "RequestFormLimits/OverrideControllerLevelLimits",
-                new FormUrlEncodedContent(kvps));
+                new FormUrlEncodedContent(kvps)
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -86,7 +91,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             var response = await Client.PostAsync(
                 "RequestFormLimits/OverrideControllerLevelLimitsUsingDefaultLimits",
-                new FormUrlEncodedContent(kvps));
+                new FormUrlEncodedContent(kvps)
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -109,14 +115,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             var response = await Client.PostAsync(
                 "RequestFormLimits/RequestSizeLimitBeforeRequestFormLimits",
-                new FormUrlEncodedContent(kvps));
+                new FormUrlEncodedContent(kvps)
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             var result = await response.Content.ReadAsStringAsync();
             Assert.Contains(
                 "InvalidOperationException: Request content size is greater than the limit size",
-                result);
+                result
+            );
         }
 
         [Fact]
@@ -135,7 +143,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             var response = await Client.PostAsync(
                 "RequestFormLimits/RequestSizeLimitBeforeRequestFormLimits",
-                new FormUrlEncodedContent(kvps));
+                new FormUrlEncodedContent(kvps)
+            );
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
@@ -156,7 +165,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act
             var response = await Client.PostAsync(
                 "RequestFormLimits/RequestSizeLimitBeforeRequestFormLimits",
-                new FormUrlEncodedContent(kvps));
+                new FormUrlEncodedContent(kvps)
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);

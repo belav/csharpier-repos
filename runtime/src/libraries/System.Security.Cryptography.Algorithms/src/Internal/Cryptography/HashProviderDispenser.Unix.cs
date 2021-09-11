@@ -17,16 +17,21 @@ namespace Internal.Cryptography
             return new EvpHashProvider(evpType);
         }
 
-        internal static HashProvider CreateMacProvider(string hashAlgorithmId, ReadOnlySpan<byte> key)
-        {
+        internal static HashProvider CreateMacProvider(
+            string hashAlgorithmId,
+            ReadOnlySpan<byte> key
+        ) {
             IntPtr evpType = Interop.Crypto.HashAlgorithmToEvp(hashAlgorithmId);
             return new HmacHashProvider(evpType, key);
         }
 
         internal static class OneShotHashProvider
         {
-            public static unsafe int HashData(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination)
-            {
+            public static unsafe int HashData(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination
+            ) {
                 IntPtr evpType = Interop.Crypto.HashAlgorithmToEvp(hashAlgorithmId);
                 Debug.Assert(evpType != IntPtr.Zero);
 
@@ -35,11 +40,18 @@ namespace Internal.Cryptography
                 if (hashSize <= 0 || destination.Length < hashSize)
                     throw new CryptographicException();
 
-                fixed (byte* pSource = source)
-                fixed (byte* pDestination = destination)
+                fixed (byte* pSource = source)fixed (byte* pDestination = destination)
                 {
                     uint length = (uint)destination.Length;
-                    Check(Interop.Crypto.EvpDigestOneShot(evpType, pSource, source.Length, pDestination, ref length));
+                    Check(
+                        Interop.Crypto.EvpDigestOneShot(
+                            evpType,
+                            pSource,
+                            source.Length,
+                            pDestination,
+                            ref length
+                        )
+                    );
                     Debug.Assert(length == hashSize);
                 }
 
@@ -77,7 +89,13 @@ namespace Internal.Cryptography
                 Debug.Assert(destination.Length >= _hashSize);
 
                 uint length = (uint)destination.Length;
-                Check(Interop.Crypto.EvpDigestFinalEx(_ctx, ref MemoryMarshal.GetReference(destination), ref length));
+                Check(
+                    Interop.Crypto.EvpDigestFinalEx(
+                        _ctx,
+                        ref MemoryMarshal.GetReference(destination),
+                        ref length
+                    )
+                );
                 Debug.Assert(length == _hashSize);
 
                 // Reset the algorithm provider.
@@ -91,7 +109,13 @@ namespace Internal.Cryptography
                 Debug.Assert(destination.Length >= _hashSize);
 
                 uint length = (uint)destination.Length;
-                Check(Interop.Crypto.EvpDigestCurrent(_ctx, ref MemoryMarshal.GetReference(destination), ref length));
+                Check(
+                    Interop.Crypto.EvpDigestCurrent(
+                        _ctx,
+                        ref MemoryMarshal.GetReference(destination),
+                        ref length
+                    )
+                );
                 Debug.Assert(length == _hashSize);
 
                 return _hashSize;
@@ -123,7 +147,11 @@ namespace Internal.Cryptography
                     throw new CryptographicException();
                 }
 
-                _hmacCtx = Interop.Crypto.HmacCreate(ref MemoryMarshal.GetReference(key), key.Length, algorithmEvp);
+                _hmacCtx = Interop.Crypto.HmacCreate(
+                    ref MemoryMarshal.GetReference(key),
+                    key.Length,
+                    algorithmEvp
+                );
                 Interop.Crypto.CheckValidOpenSslHandle(_hmacCtx);
             }
 
@@ -135,7 +163,13 @@ namespace Internal.Cryptography
                 Debug.Assert(destination.Length >= _hashSize);
 
                 int length = destination.Length;
-                Check(Interop.Crypto.HmacFinal(_hmacCtx, ref MemoryMarshal.GetReference(destination), ref length));
+                Check(
+                    Interop.Crypto.HmacFinal(
+                        _hmacCtx,
+                        ref MemoryMarshal.GetReference(destination),
+                        ref length
+                    )
+                );
                 Debug.Assert(length == _hashSize);
 
                 Check(Interop.Crypto.HmacReset(_hmacCtx));
@@ -147,7 +181,13 @@ namespace Internal.Cryptography
                 Debug.Assert(destination.Length >= _hashSize);
 
                 int length = destination.Length;
-                Check(Interop.Crypto.HmacCurrent(_hmacCtx, ref MemoryMarshal.GetReference(destination), ref length));
+                Check(
+                    Interop.Crypto.HmacCurrent(
+                        _hmacCtx,
+                        ref MemoryMarshal.GetReference(destination),
+                        ref length
+                    )
+                );
                 Debug.Assert(length == _hashSize);
 
                 return _hashSize;

@@ -33,8 +33,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.dlgate01a.dlgate01a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -64,8 +62,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.dlgate02a.dlgate02a
 {
@@ -97,7 +93,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadDelArgCount, e.Message, "Foo", "0");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadDelArgCount,
+                    e.Message,
+                    "Foo",
+                    "0"
+                );
                 if (ret)
                     return 0;
             }
@@ -107,8 +108,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.dlgate03.dlgate03
 {
@@ -140,8 +139,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.dlgate03a.dlgate03a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -171,8 +168,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.dlgate04a.dlgate04a
 {
@@ -208,8 +203,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.dlgate05.dlgate05
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -243,8 +236,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.dlgate05a.dlgate05a
 {
@@ -281,8 +272,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.dlgate06a.dlgate06a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -318,8 +307,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.evnt01.evnt01
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -353,8 +340,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.evnt01a.evnt01a
 {
@@ -393,8 +378,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.evnt02.evnt02
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -403,12 +386,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     //Optionality should have no effect on delegate assignment</Description>
     // <Expects status=success></Expects>
     // <Code>
-    internal delegate int Foo(dynamic i = null, dynamic j = default(dynamic), dynamic t = default(object));
+    internal delegate int Foo(
+        dynamic i = null,
+        dynamic j = default(dynamic),
+        dynamic t = default(object)
+    );
     public class Test
     {
         private static event Foo even;
-        private static int Bar(dynamic i = default(dynamic), dynamic j = null, dynamic t = default(object))
-        {
+        private static int Bar(
+            dynamic i = default(dynamic),
+            dynamic j = null,
+            dynamic t = default(object)
+        ) {
             if (i == 1)
                 return 1;
             else if (i == 2)
@@ -416,8 +406,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
             return 1;
         }
 
-        private static int Bar2(dynamic i, dynamic j = default(object), dynamic t = default(dynamic))
-        {
+        private static int Bar2(
+            dynamic i,
+            dynamic j = default(object),
+            dynamic t = default(dynamic)
+        ) {
             if (i == 1)
                 return 1;
             else if (i == 2)
@@ -440,8 +433,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.evnt02a.evnt02a
 {
@@ -486,8 +477,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.dlgate.evnt03a.evnt03a
 {
@@ -537,7 +526,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "Foo2", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConv,
+                    e.Message,
+                    "Foo2",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }

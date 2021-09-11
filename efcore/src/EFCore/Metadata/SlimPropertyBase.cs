@@ -41,8 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             string name,
             PropertyInfo? propertyInfo,
             FieldInfo? fieldInfo,
-            PropertyAccessMode propertyAccessMode)
-        {
+            PropertyAccessMode propertyAccessMode
+        ) {
             Name = name;
             _propertyInfo = propertyInfo;
             _fieldInfo = fieldInfo;
@@ -52,7 +52,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets the name of this property-like object.
         /// </summary>
-        public virtual string Name { [DebuggerStepThrough] get; }
+        public virtual string Name
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <summary>
         ///     Gets the type that this property-like object belongs to.
@@ -80,8 +84,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        PropertyAccessMode IReadOnlyPropertyBase.GetPropertyAccessMode()
-            => _propertyAccessMode;
+        PropertyAccessMode IReadOnlyPropertyBase.GetPropertyAccessMode() => _propertyAccessMode;
 
         /// <inheritdoc/>
         IReadOnlyTypeBase IReadOnlyPropertyBase.DeclaringType
@@ -91,30 +94,41 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         }
 
         /// <inheritdoc/>
-        IClrPropertySetter IRuntimePropertyBase.Setter
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _setter, this, static property => new ClrPropertySetterFactory().Create(property));
+        IClrPropertySetter IRuntimePropertyBase.Setter =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _setter,
+                this,
+                static property => new ClrPropertySetterFactory().Create(property)
+            );
 
         /// <inheritdoc/>
-        IClrPropertySetter IRuntimePropertyBase.MaterializationSetter
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _materializationSetter, this, static property =>
-                new ClrPropertyMaterializationSetterFactory().Create(property));
+        IClrPropertySetter IRuntimePropertyBase.MaterializationSetter =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _materializationSetter,
+                this,
+                static property => new ClrPropertyMaterializationSetterFactory().Create(property)
+            );
 
         /// <inheritdoc/>
-        PropertyAccessors IRuntimePropertyBase.Accessors
-            => NonCapturingLazyInitializer.EnsureInitialized(ref _accessors, this, static property =>
-            new PropertyAccessorsFactory().Create(property));
+        PropertyAccessors IRuntimePropertyBase.Accessors =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _accessors,
+                this,
+                static property => new PropertyAccessorsFactory().Create(property)
+            );
 
         /// <inheritdoc/>
         PropertyIndexes IRuntimePropertyBase.PropertyIndexes
         {
-            get => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _indexes, this,
-                static property =>
-                {
-                    var _ = ((IRuntimeEntityType)property.DeclaringEntityType).Counts;
-                });
+            get =>
+                NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _indexes,
+                    this,
+                    static property =>
+                    {
+                        var _ = ((IRuntimeEntityType)property.DeclaringEntityType).Counts;
+                    }
+                );
             set => NonCapturingLazyInitializer.EnsureInitialized(ref _indexes, value);
         }
 
@@ -127,15 +141,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IClrPropertyGetter IPropertyBase.GetGetter()
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _getter, this, static property => new ClrPropertyGetterFactory().Create(property));
+        IClrPropertyGetter IPropertyBase.GetGetter() =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _getter,
+                this,
+                static property => new ClrPropertyGetterFactory().Create(property)
+            );
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IComparer<IUpdateEntry> IPropertyBase.GetCurrentValueComparer()
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _currentValueComparer, this, static property =>
-                new CurrentValueComparerFactory().Create(property));
+        IComparer<IUpdateEntry> IPropertyBase.GetCurrentValueComparer() =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _currentValueComparer,
+                this,
+                static property => new CurrentValueComparerFactory().Create(property)
+            );
     }
 }

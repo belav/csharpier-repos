@@ -27,7 +27,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
                 throw new ArgumentException(
                     Resources.FormatPropertyOfTypeCannotBeNull(
                         nameof(DistributedCacheTagHelperFormattingContext.Html),
-                        typeof(DistributedCacheTagHelperFormattingContext).FullName));
+                        typeof(DistributedCacheTagHelperFormattingContext).FullName
+                    )
+                );
             }
 
             var serialized = Encoding.UTF8.GetBytes(context.Html.ToString());

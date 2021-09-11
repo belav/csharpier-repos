@@ -21,41 +21,56 @@ namespace System.Net.Security.Tests
     {
 #pragma warning disable CS0618 // Ssl2 and Ssl3 are obsolete
         public const SslProtocols AllProtocols =
-            SslProtocols.Ssl2 | SslProtocols.Ssl3 |
-            SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12 | SslProtocols.Tls13;
+            SslProtocols.Ssl2
+            | SslProtocols.Ssl3
+            | SslProtocols.Tls
+            | SslProtocols.Tls11
+            | SslProtocols.Tls12
+            | SslProtocols.Tls13;
 #pragma warning restore CS0618
 
         public const SslProtocols NonTls13Protocols = AllProtocols & (~SslProtocols.Tls13);
 
         private static bool IsKnownPlatformSupportingTls13 => PlatformDetection.SupportsTls13;
         private static bool CipherSuitesPolicySupported => s_cipherSuitePolicySupported.Value;
-        private static bool Tls13Supported { get; set; } = IsKnownPlatformSupportingTls13 || ProtocolsSupported(SslProtocols.Tls13);
-        private static bool CipherSuitesPolicyAndTls13Supported => Tls13Supported && CipherSuitesPolicySupported;
+        private static bool Tls13Supported { get; set; } =
+            IsKnownPlatformSupportingTls13 || ProtocolsSupported(SslProtocols.Tls13);
+        private static bool CipherSuitesPolicyAndTls13Supported =>
+            Tls13Supported && CipherSuitesPolicySupported;
 
-        private static HashSet<TlsCipherSuite> s_tls13CipherSuiteLookup = new HashSet<TlsCipherSuite>(GetTls13CipherSuites());
-        private static HashSet<TlsCipherSuite> s_tls12CipherSuiteLookup = new HashSet<TlsCipherSuite>(GetTls12CipherSuites());
-        private static HashSet<TlsCipherSuite> s_tls10And11CipherSuiteLookup = new HashSet<TlsCipherSuite>(GetTls10And11CipherSuites());
+        private static HashSet<TlsCipherSuite> s_tls13CipherSuiteLookup =
+            new HashSet<TlsCipherSuite>(GetTls13CipherSuites());
+        private static HashSet<TlsCipherSuite> s_tls12CipherSuiteLookup =
+            new HashSet<TlsCipherSuite>(GetTls12CipherSuites());
+        private static HashSet<TlsCipherSuite> s_tls10And11CipherSuiteLookup =
+            new HashSet<TlsCipherSuite>(GetTls10And11CipherSuites());
 
-        private static Dictionary<SslProtocols, HashSet<TlsCipherSuite>> s_protocolCipherSuiteLookup = new Dictionary<SslProtocols, HashSet<TlsCipherSuite>>()
+        private static Dictionary<
+            SslProtocols,
+            HashSet<TlsCipherSuite>
+        > s_protocolCipherSuiteLookup = new Dictionary<SslProtocols, HashSet<TlsCipherSuite>>()
         {
             { SslProtocols.Tls12, s_tls12CipherSuiteLookup },
             { SslProtocols.Tls11, s_tls10And11CipherSuiteLookup },
             { SslProtocols.Tls, s_tls10And11CipherSuiteLookup },
         };
 
-        private static Lazy<bool> s_cipherSuitePolicySupported = new Lazy<bool>(() =>
-        {
-            try
+        private static Lazy<bool> s_cipherSuitePolicySupported = new Lazy<bool>(
+            () =>
             {
-                new CipherSuitesPolicy(Array.Empty<TlsCipherSuite>());
-                return true;
+                try
+                {
+                    new CipherSuitesPolicy(Array.Empty<TlsCipherSuite>());
+                    return true;
+                }
+                catch (PlatformNotSupportedException) { }
+
+                return false;
             }
-            catch (PlatformNotSupportedException) { }
+        );
 
-            return false;
-        });
-
-        private static IReadOnlyList<TlsCipherSuite> SupportedNonTls13CipherSuites = GetSupportedNonTls13CipherSuites();
+        private static IReadOnlyList<TlsCipherSuite> SupportedNonTls13CipherSuites =
+            GetSupportedNonTls13CipherSuites();
 
         [ConditionalFact(nameof(IsKnownPlatformSupportingTls13))]
         public void Tls13IsSupported_GetValue_ReturnsTrue()
@@ -67,36 +82,33 @@ namespace System.Net.Security.Tests
         [ConditionalFact(nameof(Tls13Supported))]
         public void NegotiatedCipherSuite_SslProtocolIsTls13_ShouldBeTls13()
         {
-            var p = new ConnectionParams()
-            {
-                SslProtocols = SslProtocols.Tls13
-            };
+            var p = new ConnectionParams() { SslProtocols = SslProtocols.Tls13 };
 
             NegotiatedParams ret = ConnectAndGetNegotiatedParams(p, p);
             ret.Succeeded();
 
             Assert.True(
                 s_tls13CipherSuiteLookup.Contains(ret.CipherSuite),
-                $"`{ret.CipherSuite}` is not recognized as TLS 1.3 cipher suite");
+                $"`{ret.CipherSuite}` is not recognized as TLS 1.3 cipher suite"
+            );
         }
 
         [Theory]
         [InlineData(SslProtocols.Tls)]
         [InlineData(SslProtocols.Tls11)]
         [InlineData(SslProtocols.Tls12)]
-        public void NegotiatedCipherSuite_SslProtocolIsLowerThanTls13_ShouldMatchTheProtocol(SslProtocols protocol)
-        {
-            var p = new ConnectionParams()
-            {
-                SslProtocols = protocol
-            };
+        public void NegotiatedCipherSuite_SslProtocolIsLowerThanTls13_ShouldMatchTheProtocol(
+            SslProtocols protocol
+        ) {
+            var p = new ConnectionParams() { SslProtocols = protocol };
 
             NegotiatedParams ret = ConnectAndGetNegotiatedParams(p, p);
             if (ret.HasSucceeded)
             {
                 Assert.True(
                     s_protocolCipherSuiteLookup[protocol].Contains(ret.CipherSuite),
-                    $"`{ret.CipherSuite}` is not recognized as {protocol} cipher suite");
+                    $"`{ret.CipherSuite}` is not recognized as {protocol} cipher suite"
+                );
             }
             else
             {
@@ -121,8 +133,10 @@ namespace System.Net.Security.Tests
             CheckPrereqsForNonTls13Tests(1);
             var p = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(TlsCipherSuite.TLS_AES_128_GCM_SHA256,
-                                                 SupportedNonTls13CipherSuites[0]),
+                CipherSuitesPolicy = BuildPolicy(
+                    TlsCipherSuite.TLS_AES_128_GCM_SHA256,
+                    SupportedNonTls13CipherSuites[0]
+                ),
                 EncryptionPolicy = EncryptionPolicy.NoEncryption,
             };
 
@@ -149,9 +163,11 @@ namespace System.Net.Security.Tests
         public void CipherSuitesPolicy_AllowOneOnOneSideTls13_Success()
         {
             bool hasSucceededAtLeastOnce = false;
-            AllowOneOnOneSide(GetTls13CipherSuites(),
-                              RequiredByTls13Spec,
-                              (cs) => hasSucceededAtLeastOnce = true);
+            AllowOneOnOneSide(
+                GetTls13CipherSuites(),
+                RequiredByTls13Spec,
+                (cs) => hasSucceededAtLeastOnce = true
+            );
             Assert.True(hasSucceededAtLeastOnce);
         }
 
@@ -161,20 +177,25 @@ namespace System.Net.Security.Tests
             CheckPrereqsForNonTls13Tests(3);
             var a = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[0],
-                                                 SupportedNonTls13CipherSuites[1])
+                CipherSuitesPolicy = BuildPolicy(
+                    SupportedNonTls13CipherSuites[0],
+                    SupportedNonTls13CipherSuites[1]
+                )
             };
             var b = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[1],
-                                                 SupportedNonTls13CipherSuites[2])
+                CipherSuitesPolicy = BuildPolicy(
+                    SupportedNonTls13CipherSuites[1],
+                    SupportedNonTls13CipherSuites[2]
+                )
             };
 
             for (int i = 0; i < 2; i++)
             {
-                NegotiatedParams ret = i == 0 ?
-                    ConnectAndGetNegotiatedParams(a, b) :
-                    ConnectAndGetNegotiatedParams(b, a);
+                NegotiatedParams ret =
+                    i == 0
+                        ? ConnectAndGetNegotiatedParams(a, b)
+                        : ConnectAndGetNegotiatedParams(b, a);
 
                 ret.Succeeded();
                 ret.CheckCipherSuite(SupportedNonTls13CipherSuites[1]);
@@ -187,20 +208,25 @@ namespace System.Net.Security.Tests
             CheckPrereqsForNonTls13Tests(4);
             var a = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[0],
-                                                 SupportedNonTls13CipherSuites[1])
+                CipherSuitesPolicy = BuildPolicy(
+                    SupportedNonTls13CipherSuites[0],
+                    SupportedNonTls13CipherSuites[1]
+                )
             };
             var b = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[2],
-                                                 SupportedNonTls13CipherSuites[3])
+                CipherSuitesPolicy = BuildPolicy(
+                    SupportedNonTls13CipherSuites[2],
+                    SupportedNonTls13CipherSuites[3]
+                )
             };
 
             for (int i = 0; i < 2; i++)
             {
-                NegotiatedParams ret = i == 0 ?
-                    ConnectAndGetNegotiatedParams(a, b) :
-                    ConnectAndGetNegotiatedParams(b, a);
+                NegotiatedParams ret =
+                    i == 0
+                        ? ConnectAndGetNegotiatedParams(a, b)
+                        : ConnectAndGetNegotiatedParams(b, a);
 
                 ret.Failed();
             }
@@ -212,8 +238,10 @@ namespace System.Net.Security.Tests
             CheckPrereqsForNonTls13Tests(1);
             var p = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[0],
-                                                 TlsCipherSuite.TLS_AES_128_GCM_SHA256)
+                CipherSuitesPolicy = BuildPolicy(
+                    SupportedNonTls13CipherSuites[0],
+                    TlsCipherSuite.TLS_AES_128_GCM_SHA256
+                )
             };
 
             NegotiatedParams ret = ConnectAndGetNegotiatedParams(p, p);
@@ -236,25 +264,31 @@ namespace System.Net.Security.Tests
             CheckPrereqsForNonTls13Tests(2);
             var a = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[0],
-                                                 SupportedNonTls13CipherSuites[1])
+                CipherSuitesPolicy = BuildPolicy(
+                    SupportedNonTls13CipherSuites[0],
+                    SupportedNonTls13CipherSuites[1]
+                )
             };
             var b = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[1],
-                                                 SupportedNonTls13CipherSuites[0])
+                CipherSuitesPolicy = BuildPolicy(
+                    SupportedNonTls13CipherSuites[1],
+                    SupportedNonTls13CipherSuites[0]
+                )
             };
 
             for (int i = 0; i < 2; i++)
             {
                 bool isAClient = i == 0;
-                NegotiatedParams ret = isAClient ?
-                    ConnectAndGetNegotiatedParams(b, a) :
-                    ConnectAndGetNegotiatedParams(a, b);
+                NegotiatedParams ret = isAClient
+                    ? ConnectAndGetNegotiatedParams(b, a)
+                    : ConnectAndGetNegotiatedParams(a, b);
 
                 ret.Succeeded();
-                Assert.True(ret.CipherSuite == SupportedNonTls13CipherSuites[0] ||
-                            ret.CipherSuite == SupportedNonTls13CipherSuites[1]);
+                Assert.True(
+                    ret.CipherSuite == SupportedNonTls13CipherSuites[0]
+                        || ret.CipherSuite == SupportedNonTls13CipherSuites[1]
+                );
             }
         }
 
@@ -264,28 +298,34 @@ namespace System.Net.Security.Tests
             CheckPrereqsForNonTls13Tests(4);
             var a = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[0],
-                                                 SupportedNonTls13CipherSuites[1],
-                                                 SupportedNonTls13CipherSuites[2])
+                CipherSuitesPolicy = BuildPolicy(
+                    SupportedNonTls13CipherSuites[0],
+                    SupportedNonTls13CipherSuites[1],
+                    SupportedNonTls13CipherSuites[2]
+                )
             };
             var b = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[3],
-                                                 SupportedNonTls13CipherSuites[2],
-                                                 SupportedNonTls13CipherSuites[1])
+                CipherSuitesPolicy = BuildPolicy(
+                    SupportedNonTls13CipherSuites[3],
+                    SupportedNonTls13CipherSuites[2],
+                    SupportedNonTls13CipherSuites[1]
+                )
             };
 
             for (int i = 0; i < 2; i++)
             {
                 bool isAClient = i == 0;
-                NegotiatedParams ret = isAClient ?
-                    ConnectAndGetNegotiatedParams(b, a) :
-                    ConnectAndGetNegotiatedParams(a, b);
+                NegotiatedParams ret = isAClient
+                    ? ConnectAndGetNegotiatedParams(b, a)
+                    : ConnectAndGetNegotiatedParams(a, b);
 
                 ret.Succeeded();
 
-                Assert.True(ret.CipherSuite == SupportedNonTls13CipherSuites[1] ||
-                            ret.CipherSuite == SupportedNonTls13CipherSuites[2]);
+                Assert.True(
+                    ret.CipherSuite == SupportedNonTls13CipherSuites[1]
+                        || ret.CipherSuite == SupportedNonTls13CipherSuites[2]
+                );
             }
         }
 
@@ -302,9 +342,10 @@ namespace System.Net.Security.Tests
 
             for (int i = 0; i < 2; i++)
             {
-                NegotiatedParams ret = i == 0 ?
-                    ConnectAndGetNegotiatedParams(a, b) :
-                    ConnectAndGetNegotiatedParams(b, a);
+                NegotiatedParams ret =
+                    i == 0
+                        ? ConnectAndGetNegotiatedParams(a, b)
+                        : ConnectAndGetNegotiatedParams(b, a);
                 ret.Failed();
             }
         }
@@ -317,16 +358,14 @@ namespace System.Net.Security.Tests
                 CipherSuitesPolicy = BuildPolicy(TlsCipherSuite.TLS_AES_128_GCM_SHA256)
             };
 
-            var b = new ConnectionParams()
-            {
-                SslProtocols = NonTls13Protocols
-            };
+            var b = new ConnectionParams() { SslProtocols = NonTls13Protocols };
 
             for (int i = 0; i < 2; i++)
             {
-                NegotiatedParams ret = i == 0 ?
-                    ConnectAndGetNegotiatedParams(a, b) :
-                    ConnectAndGetNegotiatedParams(b, a);
+                NegotiatedParams ret =
+                    i == 0
+                        ? ConnectAndGetNegotiatedParams(a, b)
+                        : ConnectAndGetNegotiatedParams(b, a);
                 ret.Failed();
             }
         }
@@ -345,9 +384,10 @@ namespace System.Net.Security.Tests
 
             for (int i = 0; i < 2; i++)
             {
-                NegotiatedParams ret = i == 0 ?
-                    ConnectAndGetNegotiatedParams(a, b) :
-                    ConnectAndGetNegotiatedParams(b, a);
+                NegotiatedParams ret =
+                    i == 0
+                        ? ConnectAndGetNegotiatedParams(a, b)
+                        : ConnectAndGetNegotiatedParams(b, a);
                 ret.Failed();
             }
         }
@@ -361,16 +401,14 @@ namespace System.Net.Security.Tests
                 CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[0])
             };
 
-            var b = new ConnectionParams()
-            {
-                SslProtocols = SslProtocols.Tls13
-            };
+            var b = new ConnectionParams() { SslProtocols = SslProtocols.Tls13 };
 
             for (int i = 0; i < 2; i++)
             {
-                NegotiatedParams ret = i == 0 ?
-                    ConnectAndGetNegotiatedParams(a, b) :
-                    ConnectAndGetNegotiatedParams(b, a);
+                NegotiatedParams ret =
+                    i == 0
+                        ? ConnectAndGetNegotiatedParams(a, b)
+                        : ConnectAndGetNegotiatedParams(b, a);
                 ret.Failed();
             }
         }
@@ -384,7 +422,9 @@ namespace System.Net.Security.Tests
         [ConditionalFact(nameof(CipherSuitesPolicySupported))]
         public void CipherSuitesPolicy_AllowedCipherSuitesIncludesSubsetOfInput_Success()
         {
-            TlsCipherSuite[] allCipherSuites = (TlsCipherSuite[])Enum.GetValues(typeof(TlsCipherSuite));
+            TlsCipherSuite[] allCipherSuites = (TlsCipherSuite[])Enum.GetValues(
+                typeof(TlsCipherSuite)
+            );
             var r = new Random(123);
             int[] numOfCipherSuites = new int[] { 0, 1, 2, 5, 10, 15, 30 };
 
@@ -414,27 +454,26 @@ namespace System.Net.Security.Tests
             return ret;
         }
 
-        private static void AllowOneOnOneSide(IEnumerable<TlsCipherSuite> cipherSuites,
-                                       Predicate<TlsCipherSuite> mustSucceed,
-                                       Action<TlsCipherSuite> cipherSuitePicked = null)
-        {
+        private static void AllowOneOnOneSide(
+            IEnumerable<TlsCipherSuite> cipherSuites,
+            Predicate<TlsCipherSuite> mustSucceed,
+            Action<TlsCipherSuite> cipherSuitePicked = null
+        ) {
             foreach (TlsCipherSuite cs in cipherSuites)
             {
                 CipherSuitesPolicy csp = BuildPolicy(cs);
 
-                var paramsA = new ConnectionParams()
-                {
-                    CipherSuitesPolicy = csp,
-                };
+                var paramsA = new ConnectionParams() { CipherSuitesPolicy = csp, };
 
                 var paramsB = new ConnectionParams();
                 int score = 0; // 1 for success 0 for fail. Sum should be even
 
                 for (int i = 0; i < 2; i++)
                 {
-                    NegotiatedParams ret = i == 0 ?
-                        ConnectAndGetNegotiatedParams(paramsA, paramsB) :
-                        ConnectAndGetNegotiatedParams(paramsB, paramsA);
+                    NegotiatedParams ret =
+                        i == 0
+                            ? ConnectAndGetNegotiatedParams(paramsA, paramsB)
+                            : ConnectAndGetNegotiatedParams(paramsB, paramsA);
 
                     score += ret.HasSucceeded ? 1 : 0;
                     if (mustSucceed(cs) || ret.HasSucceeded)
@@ -466,11 +505,15 @@ namespace System.Net.Security.Tests
 
                 if (Tls13Supported)
                 {
-                    throw new SkipTestException($"Test requires that at least {minCipherSuites} non TLS 1.3 cipher suites are supported.");
+                    throw new SkipTestException(
+                        $"Test requires that at least {minCipherSuites} non TLS 1.3 cipher suites are supported."
+                    );
                 }
                 else
                 {
-                    throw new Exception($"Less than {minCipherSuites} cipher suites are supported: {string.Join(", ", SupportedNonTls13CipherSuites)}");
+                    throw new Exception(
+                        $"Less than {minCipherSuites} cipher suites are supported: {string.Join(", ", SupportedNonTls13CipherSuites)}"
+                    );
                 }
             }
         }
@@ -592,16 +635,26 @@ namespace System.Net.Security.Tests
             return new CipherSuitesPolicy(cipherSuites);
         }
 
-        private static async Task<Exception> WaitForSecureConnection(SslStream client, SslClientAuthenticationOptions clientOptions, SslStream server, SslServerAuthenticationOptions serverOptions)
-        {
+        private static async Task<Exception> WaitForSecureConnection(
+            SslStream client,
+            SslClientAuthenticationOptions clientOptions,
+            SslStream server,
+            SslServerAuthenticationOptions serverOptions
+        ) {
             Task serverTask = null;
             Task clientTask = null;
 
             // check if failed synchronously
             try
             {
-                serverTask = server.AuthenticateAsServerAsync(serverOptions, CancellationToken.None);
-                clientTask = client.AuthenticateAsClientAsync(clientOptions, CancellationToken.None);
+                serverTask = server.AuthenticateAsServerAsync(
+                    serverOptions,
+                    CancellationToken.None
+                );
+                clientTask = client.AuthenticateAsClientAsync(
+                    clientOptions,
+                    CancellationToken.None
+                );
             }
             catch (Exception e)
             {
@@ -639,7 +692,8 @@ namespace System.Net.Security.Tests
 
             try
             {
-                task = await Task.WhenAny(serverTask, clientTask).WaitAsync(TestConfiguration.PassingTestTimeout);
+                task = await Task.WhenAny(serverTask, clientTask)
+                    .WaitAsync(TestConfiguration.PassingTestTimeout);
                 await task;
             }
             catch (Exception e) when (e is AuthenticationException || e is Win32Exception)
@@ -665,7 +719,8 @@ namespace System.Net.Security.Tests
                 // Fail if server has failed but client has succeeded
                 Assert.Null(failure);
             }
-            catch (Exception e) when (e is AuthenticationException || e is Win32Exception || e is IOException)
+            catch (Exception e)
+                when (e is AuthenticationException || e is Win32Exception || e is IOException)
             {
                 // Fail if server has succeeded but client has failed
                 Assert.NotNull(failure);
@@ -679,17 +734,21 @@ namespace System.Net.Security.Tests
             return failure;
         }
 
-        private static NegotiatedParams ConnectAndGetNegotiatedParams(ConnectionParams serverParams, ConnectionParams clientParams)
-        {
+        private static NegotiatedParams ConnectAndGetNegotiatedParams(
+            ConnectionParams serverParams,
+            ConnectionParams clientParams
+        ) {
             (Stream clientStream, Stream serverStream) = TestHelper.GetConnectedStreams();
 
             using (clientStream)
             using (serverStream)
-            using (SslStream server = new SslStream(serverStream, leaveInnerStreamOpen: false),
-                             client = new SslStream(clientStream, leaveInnerStreamOpen: false))
-            {
+            using (
+                SslStream server = new SslStream(serverStream, leaveInnerStreamOpen: false),
+                    client = new SslStream(clientStream, leaveInnerStreamOpen: false)
+            ) {
                 var serverOptions = new SslServerAuthenticationOptions();
-                serverOptions.ServerCertificate = Configuration.Certificates.GetSelfSignedServerCertificate();
+                serverOptions.ServerCertificate =
+                    Configuration.Certificates.GetSelfSignedServerCertificate();
                 serverOptions.EncryptionPolicy = serverParams.EncryptionPolicy;
                 serverOptions.EnabledSslProtocols = serverParams.SslProtocols;
                 serverOptions.CipherSuitesPolicy = serverParams.CipherSuitesPolicy;
@@ -700,14 +759,26 @@ namespace System.Net.Security.Tests
                 clientOptions.CipherSuitesPolicy = clientParams.CipherSuitesPolicy;
                 clientOptions.TargetHost = "test";
                 clientOptions.RemoteCertificateValidationCallback =
-                    new RemoteCertificateValidationCallback((object sender,
-                                                             X509Certificate certificate,
-                                                             X509Chain chain,
-                                                             SslPolicyErrors sslPolicyErrors) => {
-                                                                 return true;
-                                                             });
+                    new RemoteCertificateValidationCallback(
+                        (
+                            object sender,
+                            X509Certificate certificate,
+                            X509Chain chain,
+                            SslPolicyErrors sslPolicyErrors
+                        ) =>
+                        {
+                            return true;
+                        }
+                    );
 
-                Exception failure = WaitForSecureConnection(client, clientOptions, server, serverOptions).GetAwaiter().GetResult();
+                Exception failure = WaitForSecureConnection(
+                        client,
+                        clientOptions,
+                        server,
+                        serverOptions
+                    )
+                    .GetAwaiter()
+                    .GetResult();
 
                 if (failure == null)
                 {
@@ -717,13 +788,18 @@ namespace System.Net.Security.Tests
                     Task serverTask = server.WriteAsync(data, 0, data.Length);
                     for (int i = 0; i < data.Length; i++)
                     {
-                        Assert.True(client.ReadAsync(receivedData, 0, 1).Wait(TestConfiguration.PassingTestTimeoutMilliseconds),
-                                                                        $"Read task failed to finish in {TestConfiguration.PassingTestTimeoutMilliseconds}ms.");
+                        Assert.True(
+                            client.ReadAsync(receivedData, 0, 1)
+                                .Wait(TestConfiguration.PassingTestTimeoutMilliseconds),
+                            $"Read task failed to finish in {TestConfiguration.PassingTestTimeoutMilliseconds}ms."
+                        );
                         Assert.Equal(data[i], receivedData[0]);
                     }
 
-                    Assert.True(serverTask.Wait(TestConfiguration.PassingTestTimeoutMilliseconds),
-                                $"WriteTask failed to finish in {TestConfiguration.PassingTestTimeoutMilliseconds}ms.");
+                    Assert.True(
+                        serverTask.Wait(TestConfiguration.PassingTestTimeoutMilliseconds),
+                        $"WriteTask failed to finish in {TestConfiguration.PassingTestTimeoutMilliseconds}ms."
+                    );
                     return new NegotiatedParams(server, client);
                 }
                 else

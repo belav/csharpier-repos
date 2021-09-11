@@ -32,47 +32,72 @@ namespace Microsoft.CodeAnalysis.UnsealClass
             var document = context.Document;
             var cancellationToken = context.CancellationToken;
 
-            var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var node = syntaxRoot.FindNode(context.Span, getInnermostNodeForTie: true);
 
-            if (semanticModel.GetSymbolInfo(node, cancellationToken).Symbol is INamedTypeSymbol type &&
-                type.TypeKind == TypeKind.Class && type.IsSealed && !type.IsStatic)
-            {
+            if (
+                semanticModel.GetSymbolInfo(node, cancellationToken).Symbol is INamedTypeSymbol type
+                && type.TypeKind == TypeKind.Class
+                && type.IsSealed
+                && !type.IsStatic
+            ) {
                 var definition = await SymbolFinder.FindSourceDefinitionAsync(
-                    type, document.Project.Solution, cancellationToken).ConfigureAwait(false);
+                        type,
+                        document.Project.Solution,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (definition != null && definition.DeclaringSyntaxReferences.Length > 0)
                 {
                     context.RegisterCodeFix(
                         new MyCodeAction(
                             string.Format(TitleFormat, type.Name),
-                            c => UnsealDeclarationsAsync(document.Project.Solution, definition.DeclaringSyntaxReferences, c)),
-                        context.Diagnostics);
+                            c =>
+                                UnsealDeclarationsAsync(
+                                    document.Project.Solution,
+                                    definition.DeclaringSyntaxReferences,
+                                    c
+                                )
+                        ),
+                        context.Diagnostics
+                    );
                 }
             }
         }
 
         private static async Task<Solution> UnsealDeclarationsAsync(
-            Solution solution, ImmutableArray<SyntaxReference> declarationReferences, CancellationToken cancellationToken)
-        {
-            foreach (var (documentId, syntaxReferences) in
-                declarationReferences.GroupBy(reference => solution.GetDocumentId(reference.SyntaxTree)))
-            {
+            Solution solution,
+            ImmutableArray<SyntaxReference> declarationReferences,
+            CancellationToken cancellationToken
+        ) {
+            foreach (
+                var (documentId, syntaxReferences) in declarationReferences.GroupBy(
+                    reference => solution.GetDocumentId(reference.SyntaxTree)
+                )
+            ) {
                 var document = solution.GetDocument(documentId);
-                var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document.GetSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 var generator = SyntaxGenerator.GetGenerator(document);
                 var editor = new SyntaxEditor(root, generator);
 
                 foreach (var syntaxReference in syntaxReferences)
                 {
-                    var declaration = await syntaxReference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false);
+                    var declaration = await syntaxReference.GetSyntaxAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
                     var modifiers = generator.GetModifiers(declaration);
                     if (modifiers.IsSealed)
                     {
-                        var newDeclaration = generator.WithModifiers(declaration, modifiers.WithIsSealed(false));
+                        var newDeclaration = generator.WithModifiers(
+                            declaration,
+                            modifiers.WithIsSealed(false)
+                        );
 
                         editor.ReplaceNode(declaration, newDeclaration);
                     }
@@ -86,10 +111,10 @@ namespace Microsoft.CodeAnalysis.UnsealClass
 
         private sealed class MyCodeAction : CodeAction.SolutionChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Solution>> createChangedSolution)
-                : base(title, createChangedSolution)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Solution>> createChangedSolution
+            ) : base(title, createChangedSolution) { }
         }
     }
 }

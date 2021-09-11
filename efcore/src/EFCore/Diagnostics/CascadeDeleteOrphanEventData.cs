@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             EntityEntry entityEntry,
             IEntityType parentEntityTypes,
-            EntityState state)
-            : base(eventDefinition, messageGenerator, entityEntry)
+            EntityState state
+        ) : base(eventDefinition, messageGenerator, entityEntry)
         {
             Check.NotNull(parentEntityTypes, nameof(parentEntityTypes));
 

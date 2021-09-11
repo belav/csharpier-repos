@@ -19,14 +19,17 @@ namespace Microsoft.EntityFrameworkCore
         public ConfigurationPatternsTest(CrossStoreFixture fixture)
         {
             Fixture = fixture;
-            ExistingTestStore = Fixture.CreateTestStore(SqlServerTestStoreFactory.Instance, StoreName, Seed);
+            ExistingTestStore = Fixture.CreateTestStore(
+                SqlServerTestStoreFactory.Instance,
+                StoreName,
+                Seed
+            );
         }
 
         [ConditionalFact]
         public void Can_register_multiple_context_types()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddDbContext<MultipleContext1>()
+            var serviceProvider = new ServiceCollection().AddDbContext<MultipleContext1>()
                 .AddDbContext<MultipleContext2>()
                 .BuildServiceProvider();
 
@@ -59,8 +62,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             private readonly DbContextOptions<MultipleContext1> _options;
 
-            public MultipleContext1(DbContextOptions<MultipleContext1> options)
-                : base(options)
+            public MultipleContext1(DbContextOptions<MultipleContext1> options) : base(options)
             {
                 _options = options;
             }
@@ -69,7 +71,10 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.Same(_options, optionsBuilder.Options);
 
-                optionsBuilder.UseSqlServer(SqlServerTestStore.CreateConnectionString(StoreName), b => b.ApplyConfiguration());
+                optionsBuilder.UseSqlServer(
+                    SqlServerTestStore.CreateConnectionString(StoreName),
+                    b => b.ApplyConfiguration()
+                );
 
                 Assert.NotSame(_options, optionsBuilder.Options);
             }
@@ -79,8 +84,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             private readonly DbContextOptions<MultipleContext2> _options;
 
-            public MultipleContext2(DbContextOptions<MultipleContext2> options)
-                : base(options)
+            public MultipleContext2(DbContextOptions<MultipleContext2> options) : base(options)
             {
                 _options = options;
             }
@@ -98,26 +102,30 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_select_appropriate_provider_when_multiple_registered()
         {
-            var serviceProvider
-                = new ServiceCollection()
-                    .AddScoped<SomeService>()
-                    .AddDbContext<MultipleProvidersContext>()
-                    .BuildServiceProvider();
+            var serviceProvider = new ServiceCollection().AddScoped<SomeService>()
+                .AddDbContext<MultipleProvidersContext>()
+                .BuildServiceProvider();
 
             MultipleProvidersContext context1;
             MultipleProvidersContext context2;
 
-            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                using (context1 = serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>())
-                {
+            using (
+                var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>()
+                    .CreateScope()
+            ) {
+                using (
+                    context1 =
+                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                ) {
                     context1.UseSqlServer = true;
 
                     Assert.True(context1.SimpleEntities.Any());
                 }
 
-                using (var context1B = serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>())
-                {
+                using (
+                    var context1B =
+                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                ) {
                     Assert.Same(context1, context1B);
                 }
 
@@ -125,17 +133,23 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(context1, someService.Context);
             }
 
-            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                using (context2 = serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>())
-                {
+            using (
+                var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>()
+                    .CreateScope()
+            ) {
+                using (
+                    context2 =
+                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                ) {
                     context2.UseSqlServer = false;
 
                     Assert.False(context2.SimpleEntities.Any());
                 }
 
-                using (var context2B = serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>())
-                {
+                using (
+                    var context2B =
+                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                ) {
                     Assert.Same(context2, context2B);
                 }
 
@@ -183,7 +197,10 @@ namespace Microsoft.EntityFrameworkCore
             {
                 if (UseSqlServer)
                 {
-                    optionsBuilder.UseSqlServer(SqlServerTestStore.CreateConnectionString(StoreName), b => b.ApplyConfiguration());
+                    optionsBuilder.UseSqlServer(
+                        SqlServerTestStore.CreateConnectionString(StoreName),
+                        b => b.ApplyConfiguration()
+                    );
                 }
                 else
                 {
@@ -215,8 +232,7 @@ namespace Microsoft.EntityFrameworkCore
         }
 
 #pragma warning disable xUnit1013 // Public method should be marked as test
-        public void Dispose()
-            => ExistingTestStore.Dispose();
+        public void Dispose() => ExistingTestStore.Dispose();
 #pragma warning restore xUnit1013 // Public method should be marked as test
 
         [SqlServerConfiguredCondition]
@@ -225,7 +241,11 @@ namespace Microsoft.EntityFrameworkCore
             public NestedContextDifferentStores(CrossStoreFixture fixture)
             {
                 Fixture = fixture;
-                ExistingTestStore = Fixture.CreateTestStore(SqlServerTestStoreFactory.Instance, StoreName, Seed);
+                ExistingTestStore = Fixture.CreateTestStore(
+                    SqlServerTestStoreFactory.Instance,
+                    StoreName,
+                    Seed
+                );
             }
 
             [ConditionalFact]
@@ -236,15 +256,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 await NestedContextTest(
                     () => new BlogContext(inMemoryServiceProvider),
-                    () => new ExternalProviderContext(sqlServerServiceProvider));
+                    () => new ExternalProviderContext(sqlServerServiceProvider)
+                );
             }
 
             [ConditionalFact]
-            public Task Can_use_one_context_nested_inside_another_of_a_different_type_with_implicit_services()
-                => NestedContextTest(() => new BlogContext(), () => new ExternalProviderContext());
+            public Task Can_use_one_context_nested_inside_another_of_a_different_type_with_implicit_services() =>
+                NestedContextTest(() => new BlogContext(), () => new ExternalProviderContext());
 
-            private async Task NestedContextTest(Func<BlogContext> createBlogContext, Func<CrossStoreContext> createSimpleContext)
-            {
+            private async Task NestedContextTest(
+                Func<BlogContext> createBlogContext,
+                Func<CrossStoreContext> createSimpleContext
+            ) {
                 using var context0 = createBlogContext();
                 Assert.Empty(context0.ChangeTracker.Entries());
                 var blog0 = context0.Add(new Blog { Id = 1, Name = "Giddyup" }).Entity;
@@ -262,7 +285,10 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Same(blog0, context0.ChangeTracker.Entries().Select(e => e.Entity).Single());
 
                 var blog0Prime = (await context2.Blogs.ToArrayAsync()).Single();
-                Assert.Same(blog0Prime, context2.ChangeTracker.Entries().Select(e => e.Entity).Single());
+                Assert.Same(
+                    blog0Prime,
+                    context2.ChangeTracker.Entries().Select(e => e.Entity).Single()
+                );
 
                 Assert.Equal(blog0.Id, blog0Prime.Id);
                 Assert.NotSame(blog0, blog0Prime);
@@ -280,17 +306,14 @@ namespace Microsoft.EntityFrameworkCore
             }
 
 #pragma warning disable xUnit1013 // Public method should be marked as test
-            public void Dispose()
-                => ExistingTestStore.Dispose();
+            public void Dispose() => ExistingTestStore.Dispose();
 #pragma warning restore xUnit1013 // Public method should be marked as test
 
             private class BlogContext : DbContext
             {
                 private readonly IServiceProvider _serviceProvider;
 
-                public BlogContext()
-                {
-                }
+                public BlogContext() { }
 
                 public BlogContext(IServiceProvider serviceProvider)
                 {
@@ -299,9 +322,8 @@ namespace Microsoft.EntityFrameworkCore
 
                 public DbSet<Blog> Blogs { get; set; }
 
-                protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                    => optionsBuilder
-                        .UseInMemoryDatabase(nameof(BlogContext))
+                protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                    optionsBuilder.UseInMemoryDatabase(nameof(BlogContext))
                         .UseInternalServiceProvider(_serviceProvider);
             }
 
@@ -315,18 +337,18 @@ namespace Microsoft.EntityFrameworkCore
             {
                 private readonly IServiceProvider _serviceProvider;
 
-                public ExternalProviderContext()
-                {
-                }
+                public ExternalProviderContext() { }
 
                 public ExternalProviderContext(IServiceProvider serviceProvider)
                 {
                     _serviceProvider = serviceProvider;
                 }
 
-                protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                    => optionsBuilder
-                        .UseSqlServer(SqlServerTestStore.CreateConnectionString(StoreName), b => b.ApplyConfiguration())
+                protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                    optionsBuilder.UseSqlServer(
+                            SqlServerTestStore.CreateConnectionString(StoreName),
+                            b => b.ApplyConfiguration()
+                        )
                         .UseInternalServiceProvider(_serviceProvider);
             }
         }

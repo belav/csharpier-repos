@@ -14,7 +14,8 @@ namespace System.Drawing
 {
     public class ImageConverter : TypeConverter
     {
-        private static ReadOnlySpan<byte> PBrush => new byte[] { (byte)'P', (byte)'B', (byte)'r', (byte)'u', (byte)'s', (byte)'h' };
+        private static ReadOnlySpan<byte> PBrush =>
+            new byte[] { (byte)'P', (byte)'B', (byte)'r', (byte)'u', (byte)'s', (byte)'h' };
 
         private static ReadOnlySpan<byte> BMBytes => new byte[] { (byte)'B', (byte)'M' };
 
@@ -28,8 +29,11 @@ namespace System.Drawing
             return destinationType == typeof(byte[]) || destinationType == typeof(string);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
-        {
+        public override object ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        ) {
             if (value is Icon icon)
             {
                 return icon.ToBitmap();
@@ -48,8 +52,12 @@ namespace System.Drawing
             }
         }
 
-        public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
-        {
+        public override object ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        ) {
             if (destinationType == typeof(string))
             {
                 if (value == null)
@@ -102,8 +110,11 @@ namespace System.Drawing
             return null;
         }
 
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext? context, object? value, Attribute[]? attributes)
-        {
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext? context,
+            object? value,
+            Attribute[]? attributes
+        ) {
             return TypeDescriptor.GetProperties(typeof(Image), attributes);
         }
 
@@ -143,9 +154,10 @@ namespace System.Drawing
 
                 // pHeader.signature will always be 0x1c15.
                 // "PBrush" should be the 6 chars after position 12 as well.
-                if (rawData.Length <= headersize + 18 ||
-                    !rawData.Slice(headersize + 12, 6).SequenceEqual(PBrush))
-                {
+                if (
+                    rawData.Length <= headersize + 18
+                    || !rawData.Slice(headersize + 12, 6).SequenceEqual(PBrush)
+                ) {
                     return null;
                 }
 
@@ -154,11 +166,9 @@ namespace System.Drawing
                 return new MemoryStream(rawData.Slice(78).ToArray());
             }
             catch (OutOfMemoryException) // This exception may be caused by creating a new MemoryStream.
-            {
-            }
+            { }
             catch (ArgumentOutOfRangeException) // This exception may get thrown by MemoryMarshal when input array size is less than the size of the output type.
-            {
-            }
+            { }
 
             return null;
         }

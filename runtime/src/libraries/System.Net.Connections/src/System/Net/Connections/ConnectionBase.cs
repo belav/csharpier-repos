@@ -34,8 +34,10 @@ namespace System.Net.Connections
         /// <param name="method">The method to use when closing the connection.</param>
         /// <param name="cancellationToken">A cancellation token for the asynchronous operation.</param>
         /// <returns>A <see cref="ValueTask"/> for the asynchronous operation.</returns>
-        public async ValueTask CloseAsync(ConnectionCloseMethod method = ConnectionCloseMethod.GracefulShutdown, CancellationToken cancellationToken = default)
-        {
+        public async ValueTask CloseAsync(
+            ConnectionCloseMethod method = ConnectionCloseMethod.GracefulShutdown,
+            CancellationToken cancellationToken = default
+        ) {
             if (!_disposed)
             {
                 await CloseAsyncCore(method, cancellationToken).ConfigureAwait(false);
@@ -50,7 +52,10 @@ namespace System.Net.Connections
         /// <param name="method">The method to use when closing the connection.</param>
         /// <param name="cancellationToken">A cancellation token for the asynchronous operation.</param>
         /// <returns>A <see cref="ValueTask"/> for the asynchronous operation.</returns>
-        protected abstract ValueTask CloseAsyncCore(ConnectionCloseMethod method, CancellationToken cancellationToken);
+        protected abstract ValueTask CloseAsyncCore(
+            ConnectionCloseMethod method,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Disposes of the connection.
@@ -61,10 +66,15 @@ namespace System.Net.Connections
         /// </remarks>
         public void Dispose()
         {
-            ValueTask t = CloseAsync(ConnectionCloseMethod.GracefulShutdown, CancellationToken.None);
+            ValueTask t = CloseAsync(
+                ConnectionCloseMethod.GracefulShutdown,
+                CancellationToken.None
+            );
 
-            if (t.IsCompleted) t.GetAwaiter().GetResult();
-            else t.AsTask().GetAwaiter().GetResult();
+            if (t.IsCompleted)
+                t.GetAwaiter().GetResult();
+            else
+                t.AsTask().GetAwaiter().GetResult();
         }
 
         /// <summary>

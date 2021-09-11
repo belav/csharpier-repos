@@ -27,8 +27,8 @@ namespace Microsoft.Cci
             int startLine,
             ushort startColumn,
             int endLine,
-            ushort endColumn)
-        {
+            ushort endColumn
+        ) {
             RoslynDebug.Assert(document != null);
 
             Offset = offset;
@@ -53,7 +53,9 @@ namespace Microsoft.Cci
 
         private string GetDebuggerDisplay()
         {
-            return IsHidden ? "<hidden>" : $"{Offset}: ({StartLine}, {StartColumn}) - ({EndLine}, {EndColumn})";
+            return IsHidden
+                ? "<hidden>"
+                : $"{Offset}: ({StartLine}, {StartColumn}) - ({EndLine}, {EndColumn})";
         }
     }
 }

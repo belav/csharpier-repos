@@ -11,8 +11,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void ReceiveAllAsync_ArgumentValidation()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IReceivableSourceBlock<int>)null).ReceiveAllAsync());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IReceivableSourceBlock<int>)null).ReceiveAllAsync(new CancellationToken(true)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IReceivableSourceBlock<int>)null).ReceiveAllAsync()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    ((IReceivableSourceBlock<int>)null).ReceiveAllAsync(new CancellationToken(true))
+            );
         }
 
         [Fact]
@@ -57,6 +64,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     Assert.Equal(i, e.Current);
                 }
             }
+
             finally
             {
                 ValueTask vt = e.DisposeAsync();
@@ -83,6 +91,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     Assert.Equal(i, e.Current);
                 }
             }
+
             finally
             {
                 ValueTask vt = e.DisposeAsync();
@@ -99,32 +108,39 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var source = new BufferBlock<int>();
 
-            int producedTotal = 0, consumedTotal = 0;
+            int producedTotal = 0,
+                consumedTotal = 0;
             await Task.WhenAll(
-                Task.Run(async () =>
-                {
-                    for (int i = 0; i < items; i++)
+                Task.Run(
+                    async () =>
                     {
-                        await source.SendAsync(i);
-                        producedTotal += i;
-                    }
-                    source.Complete();
-                }),
-                Task.Run(async () =>
-                {
-                    IAsyncEnumerator<int> e = source.ReceiveAllAsync().GetAsyncEnumerator();
-                    try
-                    {
-                        while (await e.MoveNextAsync())
+                        for (int i = 0; i < items; i++)
                         {
-                            consumedTotal += e.Current;
+                            await source.SendAsync(i);
+                            producedTotal += i;
+                        }
+                        source.Complete();
+                    }
+                ),
+                Task.Run(
+                    async () =>
+                    {
+                        IAsyncEnumerator<int> e = source.ReceiveAllAsync().GetAsyncEnumerator();
+                        try
+                        {
+                            while (await e.MoveNextAsync())
+                            {
+                                consumedTotal += e.Current;
+                            }
+                        }
+
+                        finally
+                        {
+                            await e.DisposeAsync();
                         }
                     }
-                    finally
-                    {
-                        await e.DisposeAsync();
-                    }
-                }));
+                )
+            );
 
             Assert.Equal(producedTotal, consumedTotal);
         }
@@ -159,15 +175,19 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void ReceiveAllAsync_MultipleSingleElementEnumerations_AllItemsEnumerated(bool sameEnumerable, bool dispose)
-        {
+        public void ReceiveAllAsync_MultipleSingleElementEnumerations_AllItemsEnumerated(
+            bool sameEnumerable,
+            bool dispose
+        ) {
             var source = new BufferBlock<int>();
             IAsyncEnumerable<int> enumerable = source.ReceiveAllAsync();
 
             for (int i = 0; i < 10; i++)
             {
                 Assert.True(source.Post(i));
-                IAsyncEnumerator<int> e = (sameEnumerable ? enumerable : source.ReceiveAllAsync()).GetAsyncEnumerator();
+                IAsyncEnumerator<int> e = (
+                    sameEnumerable ? enumerable : source.ReceiveAllAsync()
+                ).GetAsyncEnumerator();
                 ValueTask<bool> vt = e.MoveNextAsync();
                 Assert.True(vt.IsCompletedSuccessfully);
                 Assert.True(vt.Result);
@@ -184,18 +204,23 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task ReceiveAllAsync_DualConcurrentEnumeration_AllItemsEnumerated(bool sameEnumerable)
-        {
+        public async Task ReceiveAllAsync_DualConcurrentEnumeration_AllItemsEnumerated(
+            bool sameEnumerable
+        ) {
             var source = new BufferBlock<int>();
 
             IAsyncEnumerable<int> enumerable = source.ReceiveAllAsync();
 
             IAsyncEnumerator<int> e1 = enumerable.GetAsyncEnumerator();
-            IAsyncEnumerator<int> e2 = (sameEnumerable ? enumerable : source.ReceiveAllAsync()).GetAsyncEnumerator();
+            IAsyncEnumerator<int> e2 = (
+                sameEnumerable ? enumerable : source.ReceiveAllAsync()
+            ).GetAsyncEnumerator();
             Assert.NotSame(e1, e2);
 
-            ValueTask<bool> vt1, vt2;
-            int producerTotal = 0, consumerTotal = 0;
+            ValueTask<bool> vt1,
+                vt2;
+            int producerTotal = 0,
+                consumerTotal = 0;
             for (int i = 0; i < 10; i++)
             {
                 vt1 = e1.MoveNextAsync();
@@ -239,7 +264,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             ValueTask<bool> vt = e.MoveNextAsync();
             Assert.True(vt.IsCompleted);
             Assert.False(vt.IsCompletedSuccessfully);
-            OperationCanceledException oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await vt);
+            OperationCanceledException oce =
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await vt);
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -254,7 +280,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.False(vt.IsCompleted);
 
             cts.Cancel();
-            OperationCanceledException oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await vt);
+            OperationCanceledException oce =
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await vt);
 
             vt = e.MoveNextAsync();
             Assert.True(vt.IsCompletedSuccessfully);

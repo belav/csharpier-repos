@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 {
     internal static class MvcShim
     {
-        public static readonly string AssemblyName = "Microsoft.AspNetCore.Razor.Test.MvcShim.Version1_X";
+        public static readonly string AssemblyName =
+            "Microsoft.AspNetCore.Razor.Test.MvcShim.Version1_X";
 
         private static Assembly _assembly;
         private static CSharpCompilation _baseCompilation;
@@ -21,7 +22,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             {
                 if (_assembly == null)
                 {
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), AssemblyName + ".dll");
+                    var filePath = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        AssemblyName + ".dll"
+                    );
                     _assembly = Assembly.LoadFrom(filePath);
                 }
 

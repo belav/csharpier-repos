@@ -51,8 +51,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return GetOption(analyzerOptions, option, syntaxTree, cancellationToken);
         }
 
-        public static T GetOption<T>(this SemanticModelAnalysisContext context, PerLanguageOption2<T> option, string? language)
-        {
+        public static T GetOption<T>(
+            this SemanticModelAnalysisContext context,
+            PerLanguageOption2<T> option,
+            string? language
+        ) {
             var analyzerOptions = context.Options;
             var syntaxTree = context.SemanticModel.SyntaxTree;
             var cancellationToken = context.CancellationToken;
@@ -60,8 +63,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return GetOption(analyzerOptions, option, language, syntaxTree, cancellationToken);
         }
 
-        public static T GetOption<T>(this SyntaxNodeAnalysisContext context, PerLanguageOption2<T> option, string? language)
-        {
+        public static T GetOption<T>(
+            this SyntaxNodeAnalysisContext context,
+            PerLanguageOption2<T> option,
+            string? language
+        ) {
             var analyzerOptions = context.Options;
             var syntaxTree = context.Node.SyntaxTree;
             var cancellationToken = context.CancellationToken;
@@ -69,8 +75,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return GetOption(analyzerOptions, option, language, syntaxTree, cancellationToken);
         }
 
-        public static T GetOption<T>(this SyntaxTreeAnalysisContext context, PerLanguageOption2<T> option, string? language)
-        {
+        public static T GetOption<T>(
+            this SyntaxTreeAnalysisContext context,
+            PerLanguageOption2<T> option,
+            string? language
+        ) {
             var analyzerOptions = context.Options;
             var syntaxTree = context.Tree;
             var cancellationToken = context.CancellationToken;
@@ -78,8 +87,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return GetOption(analyzerOptions, option, language, syntaxTree, cancellationToken);
         }
 
-        public static T GetOption<T>(this OperationAnalysisContext context, PerLanguageOption2<T> option, string? language)
-        {
+        public static T GetOption<T>(
+            this OperationAnalysisContext context,
+            PerLanguageOption2<T> option,
+            string? language
+        ) {
             var analyzerOptions = context.Options;
             var syntaxTree = context.Operation.Syntax.SyntaxTree;
             var cancellationToken = context.CancellationToken;
@@ -87,9 +99,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return GetOption(analyzerOptions, option, language, syntaxTree, cancellationToken);
         }
 
-        public static bool TryGetEditorConfigOption<T>(this AnalyzerOptions analyzerOptions, TOption option, SyntaxTree syntaxTree, [MaybeNullWhen(false)] out T value)
-        {
-            var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(syntaxTree);
+        public static bool TryGetEditorConfigOption<T>(
+            this AnalyzerOptions analyzerOptions,
+            TOption option,
+            SyntaxTree syntaxTree,
+            [MaybeNullWhen(false)] out T value
+        ) {
+            var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
+                syntaxTree
+            );
             return configOptions.TryGetEditorConfigOption(option, out value);
         }
     }

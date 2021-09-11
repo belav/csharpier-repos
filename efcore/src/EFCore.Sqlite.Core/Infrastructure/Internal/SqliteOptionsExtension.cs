@@ -25,9 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqliteOptionsExtension()
-        {
-        }
+        public SqliteOptionsExtension() { }
 
         // NB: When adding new options, make sure to update the copy ctor below.
 
@@ -37,8 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected SqliteOptionsExtension(SqliteOptionsExtension copyFrom)
-            : base(copyFrom)
+        protected SqliteOptionsExtension(SqliteOptionsExtension copyFrom) : base(copyFrom)
         {
             _loadSpatialite = copyFrom._loadSpatialite;
         }
@@ -49,8 +46,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override DbContextOptionsExtensionInfo Info
-            => _info ??= new ExtensionInfo(this);
+        public override DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,8 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override RelationalOptionsExtension Clone()
-            => new SqliteOptionsExtension(this);
+        protected override RelationalOptionsExtension Clone() => new SqliteOptionsExtension(this);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,8 +62,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool LoadSpatialite
-            => _loadSpatialite;
+        public virtual bool LoadSpatialite => _loadSpatialite;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -91,23 +85,18 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override void ApplyServices(IServiceCollection services)
-            => services.AddEntityFrameworkSqlite();
+        public override void ApplyServices(IServiceCollection services) =>
+            services.AddEntityFrameworkSqlite();
 
         private sealed class ExtensionInfo : RelationalExtensionInfo
         {
             private string? _logFragment;
 
-            public ExtensionInfo(IDbContextOptionsExtension extension)
-                : base(extension)
-            {
-            }
+            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
 
-            private new SqliteOptionsExtension Extension
-                => (SqliteOptionsExtension)base.Extension;
+            private new SqliteOptionsExtension Extension => (SqliteOptionsExtension)base.Extension;
 
-            public override bool IsDatabaseProvider
-                => true;
+            public override bool IsDatabaseProvider => true;
 
             public override string LogFragment
             {
@@ -131,8 +120,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal
                 }
             }
 
-            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
-                => debugInfo["Sqlite"] = "1";
+            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) =>
+                debugInfo["Sqlite"] = "1";
         }
     }
 }

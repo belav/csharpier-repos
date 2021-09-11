@@ -22,24 +22,37 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    [ExportCompletionProvider(nameof(ExplicitInterfaceTypeCompletionProvider), LanguageNames.CSharp)]
+    [ExportCompletionProvider(
+        nameof(ExplicitInterfaceTypeCompletionProvider),
+        LanguageNames.CSharp
+    )]
     [ExtensionOrder(After = nameof(ExplicitInterfaceMemberCompletionProvider))]
     [Shared]
-    internal partial class ExplicitInterfaceTypeCompletionProvider : AbstractSymbolCompletionProvider<CSharpSyntaxContext>
+    internal partial class ExplicitInterfaceTypeCompletionProvider
+        : AbstractSymbolCompletionProvider<CSharpSyntaxContext>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExplicitInterfaceTypeCompletionProvider()
-        {
-        }
+        public ExplicitInterfaceTypeCompletionProvider() { }
 
-        public override bool IsInsertionTrigger(SourceText text, int insertedCharacterPosition, OptionSet options)
-            => CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(text, insertedCharacterPosition, options);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int insertedCharacterPosition,
+            OptionSet options
+        ) =>
+            CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(
+                text,
+                insertedCharacterPosition,
+                options
+            );
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.SpaceTriggerCharacter;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.SpaceTriggerCharacter;
 
-        protected override (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(ISymbol symbol, CSharpSyntaxContext context)
-            => CompletionUtilities.GetDisplayAndSuffixAndInsertionText(symbol, context);
+        protected override (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(
+            ISymbol symbol,
+            CSharpSyntaxContext context
+        ) => CompletionUtilities.GetDisplayAndSuffixAndInsertionText(symbol, context);
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
@@ -50,11 +63,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 if (completionCount < context.Items.Count)
                 {
-                    // If we added any items, then add a suggestion mode item as this is a location 
+                    // If we added any items, then add a suggestion mode item as this is a location
                     // where a member name could be written, and we should not interfere with that.
                     context.SuggestionModeItem = CreateSuggestionModeItem(
                         CSharpFeaturesResources.member_name,
-                        CSharpFeaturesResources.Autoselect_disabled_due_to_member_declaration);
+                        CSharpFeaturesResources.Autoselect_disabled_due_to_member_declaration
+                    );
                 }
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e))
@@ -64,12 +78,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         }
 
         protected override Task<ImmutableArray<(ISymbol symbol, bool preselect)>> GetSymbolsAsync(
-            CompletionContext? completionContext, CSharpSyntaxContext context, int position, OptionSet options, CancellationToken cancellationToken)
-        {
+            CompletionContext? completionContext,
+            CSharpSyntaxContext context,
+            int position,
+            OptionSet options,
+            CancellationToken cancellationToken
+        ) {
             var targetToken = context.TargetToken;
 
             // Don't want to offer this after "async" (even though the compiler may parse that as a type).
-            if (SyntaxFacts.GetContextualKeywordKind(targetToken.ValueText) == SyntaxKind.AsyncKeyword)
+            if (
+                SyntaxFacts.GetContextualKeywordKind(targetToken.ValueText)
+                == SyntaxKind.AsyncKeyword
+            )
                 return SpecializedTasks.EmptyImmutableArray<(ISymbol symbol, bool preselect)>();
 
             var typeNode = targetToken.Parent as TypeSyntax;
@@ -129,20 +150,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 return IsClassOrStructOrInterfaceOrRecord(tokenBeforeType.GetRequiredParent());
             }
 
-            if (tokenBeforeType.Kind() == SyntaxKind.CloseBraceToken ||
-                tokenBeforeType.Kind() == SyntaxKind.SemicolonToken)
-            {
+            if (
+                tokenBeforeType.Kind() == SyntaxKind.CloseBraceToken
+                || tokenBeforeType.Kind() == SyntaxKind.SemicolonToken
+            ) {
                 // Check that we're after a class/struct/interface member.
                 var memberDeclaration = tokenBeforeType.GetAncestor<MemberDeclarationSyntax>();
-                return memberDeclaration?.GetLastToken() == tokenBeforeType &&
-                       IsClassOrStructOrInterfaceOrRecord(memberDeclaration.GetRequiredParent());
+                return memberDeclaration?.GetLastToken() == tokenBeforeType
+                    && IsClassOrStructOrInterfaceOrRecord(memberDeclaration.GetRequiredParent());
             }
 
             return false;
         }
 
-        private static bool IsClassOrStructOrInterfaceOrRecord(SyntaxNode node)
-            => node.Kind() == SyntaxKind.ClassDeclaration || node.Kind() == SyntaxKind.StructDeclaration ||
-            node.Kind() == SyntaxKind.InterfaceDeclaration || node.Kind() == SyntaxKind.RecordDeclaration;
+        private static bool IsClassOrStructOrInterfaceOrRecord(SyntaxNode node) =>
+            node.Kind() == SyntaxKind.ClassDeclaration
+            || node.Kind() == SyntaxKind.StructDeclaration
+            || node.Kind() == SyntaxKind.InterfaceDeclaration
+            || node.Kind() == SyntaxKind.RecordDeclaration;
     }
 }

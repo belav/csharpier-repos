@@ -24,8 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public static ModelExplorer GetModelExplorerForType(
             this IModelMetadataProvider provider,
             Type modelType,
-            object model)
-        {
+            object model
+        ) {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));

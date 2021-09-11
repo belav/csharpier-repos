@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ProjectId? projectId,
             DocumentId? documentId,
             ImmutableArray<DiagnosticData> diagnostics,
-            DiagnosticsUpdatedKind kind)
-            : base(id, workspace, projectId, documentId)
+            DiagnosticsUpdatedKind kind
+        ) : base(id, workspace, projectId, documentId)
         {
             // TODO: This assert fails for EditAndContinueDiagnosticUpdateSource. See https://github.com/dotnet/roslyn/issues/36246.
             // Debug.Assert(diagnostics.All(d => d.ProjectId == projectId && d.DocumentId == documentId));
@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// and then forwarding on later on to other clients that will make this decision.
         /// </summary>
         /// <returns></returns>
-        public ImmutableArray<DiagnosticData> GetAllDiagnosticsRegardlessOfPushPullSetting()
-            => _diagnostics;
+        public ImmutableArray<DiagnosticData> GetAllDiagnosticsRegardlessOfPushPullSetting() =>
+            _diagnostics;
 
         /// <summary>
         /// Gets all the diagnostics for this event, respecting the callers setting on if they're getting it for pull
@@ -51,8 +51,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// diagnostics in their scenario (or an empty array if not in their scenario).
         /// </summary>
         public ImmutableArray<DiagnosticData> GetPullDiagnostics(
-            Workspace workspace, Option2<DiagnosticMode> diagnosticMode)
-        {
+            Workspace workspace,
+            Option2<DiagnosticMode> diagnosticMode
+        ) {
             // If push diagnostics are on, they get nothing since they're asking for pull diagnostics.
             if (workspace.IsPushDiagnostics(diagnosticMode))
                 return ImmutableArray<DiagnosticData>.Empty;
@@ -66,8 +67,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// diagnostics in their scenario (or an empty array if not in their scenario).
         /// </summary>
         public ImmutableArray<DiagnosticData> GetPushDiagnostics(
-            Workspace workspace, Option2<DiagnosticMode> diagnosticMode)
-        {
+            Workspace workspace,
+            Option2<DiagnosticMode> diagnosticMode
+        ) {
             // If pull diagnostics are on, they get nothing since they're asking for push diagnostics.
             if (workspace.IsPullDiagnostics(diagnosticMode))
                 return ImmutableArray<DiagnosticData>.Empty;
@@ -81,9 +83,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Solution? solution,
             ProjectId? projectId,
             DocumentId? documentId,
-            ImmutableArray<DiagnosticData> diagnostics)
-        {
-            return new DiagnosticsUpdatedArgs(id, workspace, solution, projectId, documentId, diagnostics, DiagnosticsUpdatedKind.DiagnosticsCreated);
+            ImmutableArray<DiagnosticData> diagnostics
+        ) {
+            return new DiagnosticsUpdatedArgs(
+                id,
+                workspace,
+                solution,
+                projectId,
+                documentId,
+                diagnostics,
+                DiagnosticsUpdatedKind.DiagnosticsCreated
+            );
         }
 
         public static DiagnosticsUpdatedArgs DiagnosticsRemoved(
@@ -91,9 +101,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Workspace workspace,
             Solution? solution,
             ProjectId? projectId,
-            DocumentId? documentId)
-        {
-            return new DiagnosticsUpdatedArgs(id, workspace, solution, projectId, documentId, ImmutableArray<DiagnosticData>.Empty, DiagnosticsUpdatedKind.DiagnosticsRemoved);
+            DocumentId? documentId
+        ) {
+            return new DiagnosticsUpdatedArgs(
+                id,
+                workspace,
+                solution,
+                projectId,
+                documentId,
+                ImmutableArray<DiagnosticData>.Empty,
+                DiagnosticsUpdatedKind.DiagnosticsRemoved
+            );
         }
     }
 }

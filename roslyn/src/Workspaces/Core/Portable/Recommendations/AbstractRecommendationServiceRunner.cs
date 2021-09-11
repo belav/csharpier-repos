@@ -29,37 +29,55 @@ namespace Microsoft.CodeAnalysis.Recommendations
         public AbstractRecommendationServiceRunner(
             TSyntaxContext context,
             bool filterOutOfScopeLocals,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             _context = context;
-            _stringComparerForLanguage = _context.GetLanguageService<ISyntaxFactsService>().StringComparer;
+            _stringComparerForLanguage =
+                _context.GetLanguageService<ISyntaxFactsService>().StringComparer;
             _filterOutOfScopeLocals = filterOutOfScopeLocals;
             _cancellationToken = cancellationToken;
         }
 
         public abstract RecommendedSymbols GetRecommendedSymbols();
 
-        public abstract bool TryGetExplicitTypeOfLambdaParameter(SyntaxNode lambdaSyntax, int ordinalInLambda, [NotNullWhen(returnValue: true)] out ITypeSymbol explicitLambdaParameterType);
+        public abstract bool TryGetExplicitTypeOfLambdaParameter(
+            SyntaxNode lambdaSyntax,
+            int ordinalInLambda,
+            [NotNullWhen(returnValue: true)] out ITypeSymbol explicitLambdaParameterType
+        );
 
-        // This code is to help give intellisense in the following case: 
+        // This code is to help give intellisense in the following case:
         // query.Include(a => a.SomeProperty).ThenInclude(a => a.
         // where there are more than one overloads of ThenInclude accepting different types of parameters.
-        private ImmutableArray<ISymbol> GetMemberSymbolsForParameter(IParameterSymbol parameter, int position, bool useBaseReferenceAccessibility)
-        {
+        private ImmutableArray<ISymbol> GetMemberSymbolsForParameter(
+            IParameterSymbol parameter,
+            int position,
+            bool useBaseReferenceAccessibility
+        ) {
             var symbols = TryGetMemberSymbolsForLambdaParameter(parameter, position);
             return symbols.IsDefault
-                ? GetMemberSymbols(parameter.Type, position, excludeInstance: false, useBaseReferenceAccessibility)
+                ? GetMemberSymbols(
+                      parameter.Type,
+                      position,
+                      excludeInstance: false,
+                      useBaseReferenceAccessibility
+                  )
                 : symbols;
         }
 
-        private ImmutableArray<ISymbol> TryGetMemberSymbolsForLambdaParameter(IParameterSymbol parameter, int position)
-        {
+        private ImmutableArray<ISymbol> TryGetMemberSymbolsForLambdaParameter(
+            IParameterSymbol parameter,
+            int position
+        ) {
             // Use normal lookup path for this/base parameters.
             if (parameter.IsThis)
                 return default;
 
             // Starting from a. in the example, looking for a => a.
-            if (parameter.ContainingSymbol is not IMethodSymbol { MethodKind: MethodKind.AnonymousFunction } owningMethod)
+            if (
+                parameter.ContainingSymbol
+                is not IMethodSymbol { MethodKind: MethodKind.AnonymousFunction } owningMethod
+            )
                 return default;
 
             // Cannot proceed without DeclaringSyntaxReferences.
@@ -72,56 +90,89 @@ namespace Microsoft.CodeAnalysis.Recommendations
 
             // Check that a => a. belongs to an invocation.
             // Find its' ordinal in the invocation, e.g. ThenInclude(a => a.Something, a=> a.
-            var lambdaSyntax = owningMethod.DeclaringSyntaxReferences.Single().GetSyntax(_cancellationToken);
-            if (!(syntaxFactsService.IsAnonymousFunction(lambdaSyntax) &&
-                  syntaxFactsService.IsArgument(lambdaSyntax.Parent) &&
-                  syntaxFactsService.IsInvocationExpression(lambdaSyntax.Parent.Parent.Parent)))
-            {
+            var lambdaSyntax = owningMethod.DeclaringSyntaxReferences.Single()
+                .GetSyntax(_cancellationToken);
+            if (
+                !(
+                    syntaxFactsService.IsAnonymousFunction(lambdaSyntax)
+                    && syntaxFactsService.IsArgument(lambdaSyntax.Parent)
+                    && syntaxFactsService.IsInvocationExpression(lambdaSyntax.Parent.Parent.Parent)
+                )
+            ) {
                 return default;
             }
 
             var invocationExpression = lambdaSyntax.Parent.Parent.Parent;
-            var arguments = syntaxFactsService.GetArgumentsOfInvocationExpression(invocationExpression);
+            var arguments = syntaxFactsService.GetArgumentsOfInvocationExpression(
+                invocationExpression
+            );
             var argumentName = syntaxFactsService.GetNameForArgument(lambdaSyntax.Parent);
             var ordinalInInvocation = arguments.IndexOf(lambdaSyntax.Parent);
-            var expressionOfInvocationExpression = syntaxFactsService.GetExpressionOfInvocationExpression(invocationExpression);
+            var expressionOfInvocationExpression =
+                syntaxFactsService.GetExpressionOfInvocationExpression(invocationExpression);
 
             var parameterTypeSymbols = ImmutableArray<ITypeSymbol>.Empty;
 
-            if (TryGetExplicitTypeOfLambdaParameter(lambdaSyntax, parameter.Ordinal, out var explicitLambdaParameterType))
-            {
+            if (
+                TryGetExplicitTypeOfLambdaParameter(
+                    lambdaSyntax,
+                    parameter.Ordinal,
+                    out var explicitLambdaParameterType
+                )
+            ) {
                 parameterTypeSymbols = ImmutableArray.Create(explicitLambdaParameterType);
             }
             else
             {
                 // Get all members potentially matching the invocation expression.
                 // We filter them out based on ordinality later.
-                var candidateSymbols = _context.SemanticModel.GetMemberGroup(expressionOfInvocationExpression, _cancellationToken);
+                var candidateSymbols = _context.SemanticModel.GetMemberGroup(
+                    expressionOfInvocationExpression,
+                    _cancellationToken
+                );
 
                 // parameter.Ordinal is the ordinal within (a,b,c) => b.
                 // For candidate symbols of (a,b,c) => b., get types of all possible b.
-                parameterTypeSymbols = GetTypeSymbols(candidateSymbols, argumentName, ordinalInInvocation, ordinalInLambda: parameter.Ordinal);
+                parameterTypeSymbols = GetTypeSymbols(
+                    candidateSymbols,
+                    argumentName,
+                    ordinalInInvocation,
+                    ordinalInLambda: parameter.Ordinal
+                );
 
                 // The parameterTypeSymbols may include type parameters, and we want their substituted types if available.
-                parameterTypeSymbols = SubstituteTypeParameters(parameterTypeSymbols, invocationExpression);
+                parameterTypeSymbols = SubstituteTypeParameters(
+                    parameterTypeSymbols,
+                    invocationExpression
+                );
             }
 
             // For each type of b., return all suitable members. Also, ensure we consider the actual type of the
             // parameter the compiler inferred as it may have made a completely suitable inference for it.
-            return parameterTypeSymbols
-                .Concat(parameter.Type)
-                .SelectMany(parameterTypeSymbol => GetMemberSymbols(parameterTypeSymbol, position, excludeInstance: false, useBaseReferenceAccessibility: false))
+            return parameterTypeSymbols.Concat(parameter.Type)
+                .SelectMany(
+                    parameterTypeSymbol =>
+                        GetMemberSymbols(
+                            parameterTypeSymbol,
+                            position,
+                            excludeInstance: false,
+                            useBaseReferenceAccessibility: false
+                        )
+                )
                 .ToImmutableArray();
         }
 
-        private ImmutableArray<ITypeSymbol> SubstituteTypeParameters(ImmutableArray<ITypeSymbol> parameterTypeSymbols, SyntaxNode invocationExpression)
-        {
+        private ImmutableArray<ITypeSymbol> SubstituteTypeParameters(
+            ImmutableArray<ITypeSymbol> parameterTypeSymbols,
+            SyntaxNode invocationExpression
+        ) {
             if (!parameterTypeSymbols.Any(t => t.IsKind(SymbolKind.TypeParameter)))
             {
                 return parameterTypeSymbols;
             }
 
-            var invocationSymbols = _context.SemanticModel.GetSymbolInfo(invocationExpression).GetAllSymbols();
+            var invocationSymbols = _context.SemanticModel.GetSymbolInfo(invocationExpression)
+                .GetAllSymbols();
             if (invocationSymbols.Length == 0)
             {
                 return parameterTypeSymbols;
@@ -135,8 +186,12 @@ namespace Microsoft.CodeAnalysis.Recommendations
 
                 foreach (var parameterTypeSymbol in parameterTypeSymbols)
                 {
-                    if (parameterTypeSymbol.IsKind<ITypeParameterSymbol>(SymbolKind.TypeParameter, out var typeParameter))
-                    {
+                    if (
+                        parameterTypeSymbol.IsKind<ITypeParameterSymbol>(
+                            SymbolKind.TypeParameter,
+                            out var typeParameter
+                        )
+                    ) {
                         // The typeParameter could be from the containing type, so it may not be
                         // present in this method's list of typeParameters.
                         var index = typeParameters.IndexOf(typeParameter);
@@ -165,9 +220,15 @@ namespace Microsoft.CodeAnalysis.Recommendations
         /// <param name="ordinalInInvocation">ordinal of the arguments of function: (a,b) or (a,b,c) in the example above</param>
         /// <param name="ordinalInLambda">ordinal of the lambda parameters, e.g. a, b or c.</param>
         /// <returns></returns>
-        private ImmutableArray<ITypeSymbol> GetTypeSymbols(ImmutableArray<ISymbol> candidateSymbols, string argumentName, int ordinalInInvocation, int ordinalInLambda)
-        {
-            var expressionSymbol = _context.SemanticModel.Compilation.GetTypeByMetadataName(typeof(Expression<>).FullName);
+        private ImmutableArray<ITypeSymbol> GetTypeSymbols(
+            ImmutableArray<ISymbol> candidateSymbols,
+            string argumentName,
+            int ordinalInInvocation,
+            int ordinalInLambda
+        ) {
+            var expressionSymbol = _context.SemanticModel.Compilation.GetTypeByMetadataName(
+                typeof(Expression<>).FullName
+            );
 
             var builder = ArrayBuilder<ITypeSymbol>.GetInstance();
 
@@ -175,17 +236,26 @@ namespace Microsoft.CodeAnalysis.Recommendations
             {
                 if (candidateSymbol is IMethodSymbol method)
                 {
-                    if (!TryGetMatchingParameterTypeForArgument(method, argumentName, ordinalInInvocation, out var type))
-                    {
+                    if (
+                        !TryGetMatchingParameterTypeForArgument(
+                            method,
+                            argumentName,
+                            ordinalInInvocation,
+                            out var type
+                        )
+                    ) {
                         continue;
                     }
 
                     // If type is <see cref="Expression{TDelegate}"/>, ignore <see cref="Expression"/> and use TDelegate.
                     // Ignore this check if expressionSymbol is null, e.g. semantic model is broken or incomplete or if the framework does not contain <see cref="Expression"/>.
-                    if (expressionSymbol != null &&
-                        type is INamedTypeSymbol expressionSymbolNamedTypeCandidate &&
-                        expressionSymbolNamedTypeCandidate.OriginalDefinition.Equals(expressionSymbol))
-                    {
+                    if (
+                        expressionSymbol != null
+                        && type is INamedTypeSymbol expressionSymbolNamedTypeCandidate
+                        && expressionSymbolNamedTypeCandidate.OriginalDefinition.Equals(
+                            expressionSymbol
+                        )
+                    ) {
                         var allTypeArguments = type.GetAllTypeArguments();
                         if (allTypeArguments.Length != 1)
                         {
@@ -217,11 +287,17 @@ namespace Microsoft.CodeAnalysis.Recommendations
             return builder.ToImmutableAndFree().Distinct();
         }
 
-        private bool TryGetMatchingParameterTypeForArgument(IMethodSymbol method, string argumentName, int ordinalInInvocation, out ITypeSymbol parameterType)
-        {
+        private bool TryGetMatchingParameterTypeForArgument(
+            IMethodSymbol method,
+            string argumentName,
+            int ordinalInInvocation,
+            out ITypeSymbol parameterType
+        ) {
             if (!string.IsNullOrEmpty(argumentName))
             {
-                parameterType = method.Parameters.FirstOrDefault(p => _stringComparerForLanguage.Equals(p.Name, argumentName))?.Type;
+                parameterType = method.Parameters.FirstOrDefault(
+                    p => _stringComparerForLanguage.Equals(p.Name, argumentName)
+                )?.Type;
                 return parameterType != null;
             }
 
@@ -262,16 +338,25 @@ namespace Microsoft.CodeAnalysis.Recommendations
 
             var semanticModel = _context.SemanticModel;
             var containingNamespaceSymbol = semanticModel.Compilation.GetCompilationNamespace(
-                semanticModel.GetEnclosingNamespace(declarationSyntax.SpanStart, _cancellationToken));
+                semanticModel.GetEnclosingNamespace(declarationSyntax.SpanStart, _cancellationToken)
+            );
 
-            var symbols = semanticModel.LookupNamespacesAndTypes(declarationSyntax.SpanStart, containingNamespaceSymbol)
-                                       .WhereAsArray(recommendationSymbol => IsNonIntersectingNamespace(recommendationSymbol, declarationSyntax));
+            var symbols = semanticModel.LookupNamespacesAndTypes(
+                    declarationSyntax.SpanStart,
+                    containingNamespaceSymbol
+                )
+                .WhereAsArray(
+                    recommendationSymbol =>
+                        IsNonIntersectingNamespace(recommendationSymbol, declarationSyntax)
+                );
 
             return symbols;
         }
 
-        protected static bool IsNonIntersectingNamespace(ISymbol recommendationSymbol, SyntaxNode declarationSyntax)
-        {
+        protected static bool IsNonIntersectingNamespace(
+            ISymbol recommendationSymbol,
+            SyntaxNode declarationSyntax
+        ) {
             //
             // Apart from filtering out non-namespace symbols, this also filters out the symbol
             // currently being declared. For example...
@@ -289,22 +374,30 @@ namespace Microsoft.CodeAnalysis.Recommendations
             //
             // ...unless, again, it's also declared elsewhere.
             //
-            return recommendationSymbol.IsNamespace() &&
-                   recommendationSymbol.Locations.Any(
-                       candidateLocation => !(declarationSyntax.SyntaxTree == candidateLocation.SourceTree &&
-                                              declarationSyntax.Span.IntersectsWith(candidateLocation.SourceSpan)));
+            return recommendationSymbol.IsNamespace()
+                && recommendationSymbol.Locations.Any(
+                    candidateLocation =>
+                        !(
+                            declarationSyntax.SyntaxTree == candidateLocation.SourceTree
+                            && declarationSyntax.Span.IntersectsWith(candidateLocation.SourceSpan)
+                        )
+                );
         }
 
         protected ImmutableArray<ISymbol> GetMemberSymbols(
             ISymbol container,
             int position,
             bool excludeInstance,
-            bool useBaseReferenceAccessibility)
-        {
+            bool useBaseReferenceAccessibility
+        ) {
             // For a normal parameter, we have a specialized codepath we use to ensure we properly get lambda parameter
             // information that the compiler may fail to give.
             if (container is IParameterSymbol parameter)
-                return GetMemberSymbolsForParameter(parameter, position, useBaseReferenceAccessibility);
+                return GetMemberSymbolsForParameter(
+                    parameter,
+                    position,
+                    useBaseReferenceAccessibility
+                );
 
             if (container is not INamespaceOrTypeSymbol namespaceOrType)
                 return ImmutableArray<ISymbol>.Empty;
@@ -315,13 +408,20 @@ namespace Microsoft.CodeAnalysis.Recommendations
         }
 
         protected ImmutableArray<ISymbol> LookupSymbolsInContainer(
-            INamespaceOrTypeSymbol container, int position, bool excludeInstance)
-        {
+            INamespaceOrTypeSymbol container,
+            int position,
+            bool excludeInstance
+        ) {
             return excludeInstance
                 ? _context.SemanticModel.LookupStaticMembers(position, container)
                 : SuppressDefaultTupleElements(
-                    container,
-                    _context.SemanticModel.LookupSymbols(position, container, includeReducedExtensionMethods: true));
+                      container,
+                      _context.SemanticModel.LookupSymbols(
+                          position,
+                          container,
+                          includeReducedExtensionMethods: true
+                      )
+                  );
         }
 
         /// <summary>
@@ -330,8 +430,9 @@ namespace Microsoft.CodeAnalysis.Recommendations
         /// In that case, Rest is also removed.
         /// </summary>
         protected static ImmutableArray<ISymbol> SuppressDefaultTupleElements(
-            INamespaceOrTypeSymbol container, ImmutableArray<ISymbol> symbols)
-        {
+            INamespaceOrTypeSymbol container,
+            ImmutableArray<ISymbol> symbols
+        ) {
             var namedType = container as INamedTypeSymbol;
             if (namedType?.IsTupleType != true)
             {
@@ -340,8 +441,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             }
 
             //return tuple elements followed by other members that are not fields
-            return ImmutableArray<ISymbol>.CastUp(namedType.TupleElements).
-                Concat(symbols.WhereAsArray(s => s.Kind != SymbolKind.Field));
+            return ImmutableArray<ISymbol>.CastUp(namedType.TupleElements)
+                .Concat(symbols.WhereAsArray(s => s.Kind != SymbolKind.Field));
         }
     }
 }

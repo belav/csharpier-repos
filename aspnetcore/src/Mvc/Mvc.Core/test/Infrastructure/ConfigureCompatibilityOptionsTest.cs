@@ -18,7 +18,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public void PostConfigure_NoValueForProperty_DoesNothing()
         {
             // Arrange
-            var configure = Create(CompatibilityVersion.Version_3_0, new Dictionary<string, object>());
+            var configure = Create(
+                CompatibilityVersion.Version_3_0,
+                new Dictionary<string, object>()
+            );
 
             var options = new TestOptions();
 
@@ -35,15 +38,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             // Arrange
             var configure = Create(
                 CompatibilityVersion.Version_3_0,
-                new Dictionary<string, object>
-                {
-                    { nameof(TestOptions.TestProperty), true },
-                });
+                new Dictionary<string, object> { { nameof(TestOptions.TestProperty), true }, }
+            );
 
-            var options = new TestOptions()
-            {
-                TestProperty = false,
-            };
+            var options = new TestOptions() { TestProperty = false, };
 
             // Act
             configure.PostConfigure(Options.DefaultName, options);
@@ -58,10 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             // Arrange
             var configure = Create(
                 CompatibilityVersion.Version_3_0,
-                new Dictionary<string, object>
-                {
-                    { nameof(TestOptions.TestProperty), true },
-                });
+                new Dictionary<string, object> { { nameof(TestOptions.TestProperty), true }, }
+            );
 
             var options = new TestOptions();
 
@@ -74,10 +70,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static ConfigureCompatibilityOptions<TestOptions> Create(
             CompatibilityVersion version,
-            IReadOnlyDictionary<string, object> defaultValues)
-        {
-            var compatibilityOptions = Options.Create(new MvcCompatibilityOptions() { CompatibilityVersion = version });
-            return new TestConfigure(NullLoggerFactory.Instance, compatibilityOptions, defaultValues);
+            IReadOnlyDictionary<string, object> defaultValues
+        ) {
+            var compatibilityOptions = Options.Create(
+                new MvcCompatibilityOptions() { CompatibilityVersion = version }
+            );
+            return new TestConfigure(
+                NullLoggerFactory.Instance,
+                compatibilityOptions,
+                defaultValues
+            );
         }
 
         private class TestOptions : IEnumerable<ICompatibilitySwitch>
@@ -111,8 +113,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             public TestConfigure(
                 ILoggerFactory loggerFactory,
                 IOptions<MvcCompatibilityOptions> compatibilityOptions,
-                IReadOnlyDictionary<string, object> defaultValues)
-                : base(loggerFactory, compatibilityOptions)
+                IReadOnlyDictionary<string, object> defaultValues
+            ) : base(loggerFactory, compatibilityOptions)
             {
                 DefaultValues = defaultValues;
             }

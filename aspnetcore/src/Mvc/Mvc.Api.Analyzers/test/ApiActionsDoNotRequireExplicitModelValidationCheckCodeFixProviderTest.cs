@@ -11,21 +11,21 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     public class ApiActionsDoNotRequireExplicitModelValidationCheckCodeFixProviderTest
     {
-        private MvcDiagnosticAnalyzerRunner AnalyzerRunner { get; } = new MvcDiagnosticAnalyzerRunner(new ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer());
+        private MvcDiagnosticAnalyzerRunner AnalyzerRunner { get; } =
+            new MvcDiagnosticAnalyzerRunner(
+                new ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer()
+            );
 
         private CodeFixRunner CodeFixRunner { get; } = new IgnoreCS1701WarningCodeFixRunner();
 
         [Fact]
-        public Task CodeFixRemovesModelStateIsInvalidBlockWithIfNotCheck()
-            => RunTest();
+        public Task CodeFixRemovesModelStateIsInvalidBlockWithIfNotCheck() => RunTest();
 
         [Fact]
-        public Task CodeFixRemovesModelStateIsInvalidBlockWithEqualityCheck()
-            => RunTest();
+        public Task CodeFixRemovesModelStateIsInvalidBlockWithEqualityCheck() => RunTest();
 
         [Fact]
-        public Task CodeFixRemovesIfBlockWithoutBraces()
-            => RunTest();
+        public Task CodeFixRemovesIfBlockWithoutBraces() => RunTest();
 
         private async Task RunTest([CallerMemberName] string testMethod = "")
         {
@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var actualOutput = await CodeFixRunner.ApplyCodeFixAsync(
                 new ApiActionsDoNotRequireExplicitModelValidationCheckCodeFixProvider(),
                 project.GetDocument(controllerDocument),
-                diagnostics[0]);
+                diagnostics[0]
+            );
 
             Assert.Equal(expectedOutput, actualOutput, ignoreLineEndingDifferences: true);
         }
@@ -48,14 +49,16 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private Project GetProject(string testMethod)
         {
             var testSource = Read(testMethod + ".Input");
-            return MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource });
+            return MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+                GetType().Assembly,
+                new[] { testSource }
+            );
         }
 
         private string Read(string fileName)
         {
             return MvcTestSource.Read(GetType().Name, fileName)
-                .Source
-                .Replace("_INPUT_", "_TEST_")
+                .Source.Replace("_INPUT_", "_TEST_")
                 .Replace("_OUTPUT_", "_TEST_");
         }
     }

@@ -35,14 +35,15 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        public static void ReadEmptyString() {
+        public static void ReadEmptyString()
+        {
             StringReader sr = new StringReader(string.Empty);
             Assert.Equal(-1, sr.Read());
-
         }
 
         [Fact]
-        public static void ReadString() {
+        public static void ReadString()
+        {
             string str1 = "Hello\0\t\v   \\ World";
             StringReader sr = new StringReader(str1);
             for (int i = 0; i < str1.Length; i++)
@@ -88,7 +89,6 @@ namespace System.IO.Tests
         {
             StringReader sr = new StringReader(string.Empty);
             Assert.Equal(-1, sr.Peek());
-
         }
 
         [Fact]
@@ -102,7 +102,6 @@ namespace System.IO.Tests
                 sr.Read();
                 Assert.Equal((int)str1[i], test);
             }
-
         }
 
         [Fact]
@@ -132,18 +131,19 @@ namespace System.IO.Tests
 
             sr = new StringReader(string.Empty);
             Assert.Equal(string.Empty, sr.ReadToEnd());
-
         }
 
         [Fact]
-        public static void ReadToEndString() {
+        public static void ReadToEndString()
+        {
             string str1 = "Hello\0\t\v   \\ World";
             StringReader sr = new StringReader(str1);
             Assert.Equal(str1, sr.ReadToEnd());
         }
 
         [Fact]
-        public static void ReadToEndPseudoRandom() {
+        public static void ReadToEndPseudoRandom()
+        {
             // [] Try with large random strings
             //-----------------------------------------------------------
             string str1 = string.Empty;
@@ -267,8 +267,18 @@ namespace System.IO.Tests
 
             Assert.Throws<ObjectDisposedException>(() => reader.Read(Span<char>.Empty));
             Assert.Throws<ObjectDisposedException>(() => reader.ReadBlock(Span<char>.Empty));
-            Assert.Throws<ObjectDisposedException>(() => { reader.ReadAsync(Memory<char>.Empty); });
-            Assert.Throws<ObjectDisposedException>(() => { reader.ReadBlockAsync(Memory<char>.Empty); });
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    reader.ReadAsync(Memory<char>.Empty);
+                }
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    reader.ReadBlockAsync(Memory<char>.Empty);
+                }
+            );
         }
 
         [Fact]
@@ -276,15 +286,35 @@ namespace System.IO.Tests
         {
             var reader = new StringReader("abc");
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => reader.ReadAsync(Memory<char>.Empty, new CancellationToken(true)).AsTask());
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => reader.ReadBlockAsync(Memory<char>.Empty, new CancellationToken(true)).AsTask());
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                () => reader.ReadAsync(Memory<char>.Empty, new CancellationToken(true)).AsTask()
+            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                () =>
+                    reader.ReadBlockAsync(Memory<char>.Empty, new CancellationToken(true)).AsTask()
+            );
         }
 
         private static void ValidateDisposedExceptions(StringReader sr)
         {
-            Assert.Throws<ObjectDisposedException>(() => { sr.Peek(); });
-            Assert.Throws<ObjectDisposedException>(() => { sr.Read(); });
-            Assert.Throws<ObjectDisposedException>(() => { sr.Read(new char[10], 0 , 1); });
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    sr.Peek();
+                }
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    sr.Read();
+                }
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    sr.Read(new char[10], 0, 1);
+                }
+            );
         }
     }
 }

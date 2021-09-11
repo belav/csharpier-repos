@@ -30,10 +30,10 @@ namespace Microsoft.AspNetCore.Routing
         /// <param name="routePattern">The <see cref="RoutePattern"/> to use in URL matching.</param>
         /// <param name="order">The order assigned to the endpoint.</param>
         public RouteEndpointBuilder(
-           RequestDelegate requestDelegate,
-           RoutePattern routePattern,
-           int order)
-        {
+            RequestDelegate requestDelegate,
+            RoutePattern routePattern,
+            int order
+        ) {
             RequestDelegate = requestDelegate;
             RoutePattern = routePattern;
             Order = order;
@@ -44,7 +44,9 @@ namespace Microsoft.AspNetCore.Routing
         {
             if (RequestDelegate is null)
             {
-                throw new InvalidOperationException($"{nameof(RequestDelegate)} must be specified to construct a {nameof(RouteEndpoint)}.");
+                throw new InvalidOperationException(
+                    $"{nameof(RequestDelegate)} must be specified to construct a {nameof(RouteEndpoint)}."
+                );
             }
 
             var routeEndpoint = new RouteEndpoint(
@@ -52,7 +54,8 @@ namespace Microsoft.AspNetCore.Routing
                 RoutePattern,
                 Order,
                 new EndpointMetadataCollection(Metadata),
-                DisplayName);
+                DisplayName
+            );
 
             return routeEndpoint;
         }

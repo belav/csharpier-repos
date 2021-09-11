@@ -17,7 +17,11 @@ internal static partial class Interop
         /// 3) if the child has not yet terminated, 0 is returned
         /// 4) on error, -1 is returned.
         /// </returns>
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_WaitPidExitedNoHang", SetLastError = true)]
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_WaitPidExitedNoHang",
+            SetLastError = true
+        )]
         internal static extern int WaitPidExitedNoHang(int pid, out int exitCode);
     }
 }

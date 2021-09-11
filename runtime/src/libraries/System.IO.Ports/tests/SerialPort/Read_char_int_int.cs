@@ -33,7 +33,12 @@ namespace System.IO.Ports.Tests
         //The maximum buffer size when an exception is not expected
         private const int maxBufferSize = 8;
 
-        public enum ReadDataFromEnum { NonBuffered, Buffered, BufferedAndNonBuffered };
+        public enum ReadDataFromEnum
+        {
+            NonBuffered,
+            Buffered,
+            BufferedAndNonBuffered
+        };
 
         #region Test Cases
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -45,7 +50,12 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_NEG1()
         {
-            VerifyReadException(new char[defaultCharArraySize], -1, defaultCharCount, typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new char[defaultCharArraySize],
+                -1,
+                defaultCharCount,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -53,19 +63,34 @@ namespace System.IO.Ports.Tests
         {
             Random rndGen = new Random(-55);
 
-            VerifyReadException(new char[defaultCharArraySize], rndGen.Next(int.MinValue, 0), defaultCharCount, typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new char[defaultCharArraySize],
+                rndGen.Next(int.MinValue, 0),
+                defaultCharCount,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_MinInt()
         {
-            VerifyReadException(new char[defaultCharArraySize], int.MinValue, defaultCharCount, typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new char[defaultCharArraySize],
+                int.MinValue,
+                defaultCharCount,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_NEG1()
         {
-            VerifyReadException(new char[defaultCharArraySize], defaultCharOffset, -1, typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new char[defaultCharArraySize],
+                defaultCharOffset,
+                -1,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -73,13 +98,23 @@ namespace System.IO.Ports.Tests
         {
             Random rndGen = new Random(-55);
 
-            VerifyReadException(new char[defaultCharArraySize], defaultCharOffset, rndGen.Next(int.MinValue, 0), typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new char[defaultCharArraySize],
+                defaultCharOffset,
+                rndGen.Next(int.MinValue, 0),
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_MinInt()
         {
-            VerifyReadException(new char[defaultCharArraySize], defaultCharOffset, int.MinValue, typeof(ArgumentOutOfRangeException));
+            VerifyReadException(
+                new char[defaultCharArraySize],
+                defaultCharOffset,
+                int.MinValue,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -106,7 +141,6 @@ namespace System.IO.Ports.Tests
             VerifyReadException(new char[bufferLength], offset, count, expectedException);
         }
 
-
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_GT_Length()
         {
@@ -118,7 +152,6 @@ namespace System.IO.Ports.Tests
 
             VerifyReadException(new char[bufferLength], offset, count, expectedException);
         }
-
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_GT_Length()
@@ -168,8 +201,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_EQ_Zero()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
                 Random rndGen = new Random(-55);
                 int bufferLength = rndGen.Next(1, maxBufferSize);
                 int offset = 0;
@@ -286,7 +322,13 @@ namespace System.IO.Ports.Tests
             int offset = 3;
             int count = 64;
 
-            VerifyRead(new char[bufferLength], offset, count, 32, ReadDataFromEnum.BufferedAndNonBuffered);
+            VerifyRead(
+                new char[bufferLength],
+                offset,
+                count,
+                32,
+                ReadDataFromEnum.BufferedAndNonBuffered
+            );
         }
 
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
@@ -296,7 +338,13 @@ namespace System.IO.Ports.Tests
             int offset = 3;
             int count = 3;
 
-            VerifyRead(new char[bufferLength], offset, count, 32, ReadDataFromEnum.BufferedAndNonBuffered);
+            VerifyRead(
+                new char[bufferLength],
+                offset,
+                count,
+                32,
+                ReadDataFromEnum.BufferedAndNonBuffered
+            );
         }
 
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
@@ -306,14 +354,18 @@ namespace System.IO.Ports.Tests
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
                 Random rndGen = new Random(-55);
-                char[] charXmitBuffer = TCSupport.GetRandomChars(512, TCSupport.CharacterOptions.Surrogates);
+                char[] charXmitBuffer = TCSupport.GetRandomChars(
+                    512,
+                    TCSupport.CharacterOptions.Surrogates
+                );
                 byte[] byteXmitBuffer = new byte[1024];
                 char utf32Char = (char)8169;
                 byte[] utf32CharBytes = Encoding.UTF32.GetBytes(new[] { utf32Char });
                 int numCharsRead;
 
                 Debug.WriteLine(
-                    "Verifying that Read(char[], int, int) will read everything from internal buffer and drivers buffer");
+                    "Verifying that Read(char[], int, int) will read everything from internal buffer and drivers buffer"
+                );
 
                 for (int i = 0; i < byteXmitBuffer.Length; i++)
                 {
@@ -359,10 +411,15 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForReadBufferToLoad(com1, 4 + numBytes);
 
-                if (expectedChars.Length != (numCharsRead = com1.Read(charRcvBuffer, 0, charRcvBuffer.Length)))
-                {
-                    Fail("Err_6481sfadw Expected read to read {0} chars actually read {1}", expectedChars.Length,
-                        numCharsRead);
+                if (
+                    expectedChars.Length
+                    != (numCharsRead = com1.Read(charRcvBuffer, 0, charRcvBuffer.Length))
+                ) {
+                    Fail(
+                        "Err_6481sfadw Expected read to read {0} chars actually read {1}",
+                        expectedChars.Length,
+                        numCharsRead
+                    );
                 }
 
                 Assert.Equal(expectedChars, charRcvBuffer.Take(expectedChars.Length).ToArray());
@@ -377,14 +434,17 @@ namespace System.IO.Ports.Tests
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
-                char[] charXmitBuffer = TCSupport.GetRandomChars(512, TCSupport.CharacterOptions.None);
+                char[] charXmitBuffer = TCSupport.GetRandomChars(
+                    512,
+                    TCSupport.CharacterOptions.None
+                );
                 char[] charRcvBuffer = new char[charXmitBuffer.Length];
                 ASyncRead asyncRead = new ASyncRead(com1, charRcvBuffer, 0, charRcvBuffer.Length);
                 var asyncReadTask = new Task(asyncRead.Read);
 
-
                 Debug.WriteLine(
-                    "Verifying that Read(char[], int, int) will read characters that have been received after the call to Read was made");
+                    "Verifying that Read(char[], int, int) will read characters that have been received after the call to Read was made"
+                );
 
                 com1.Encoding = Encoding.UTF8;
                 com2.Encoding = Encoding.UTF8;
@@ -407,14 +467,21 @@ namespace System.IO.Ports.Tests
 
                 if (asyncRead.Result < 1)
                 {
-                    Fail("Err_0158ahei Expected Read to read at least one character {0}", asyncRead.Result);
+                    Fail(
+                        "Err_0158ahei Expected Read to read at least one character {0}",
+                        asyncRead.Result
+                    );
                 }
                 else
                 {
                     int receivedLength = asyncRead.Result;
                     while (receivedLength < charRcvBuffer.Length)
                     {
-                        receivedLength += com1.Read(charRcvBuffer, receivedLength, charRcvBuffer.Length - receivedLength);
+                        receivedLength += com1.Read(
+                            charRcvBuffer,
+                            receivedLength,
+                            charRcvBuffer.Length - receivedLength
+                        );
                     }
                     Assert.Equal(charXmitBuffer.Length, receivedLength);
                     Assert.Equal(charXmitBuffer, charRcvBuffer);
@@ -430,10 +497,15 @@ namespace System.IO.Ports.Tests
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
-                char[] charXmitBuffer = TCSupport.GetRandomChars(1023, TCSupport.CharacterOptions.ASCII);
+                char[] charXmitBuffer = TCSupport.GetRandomChars(
+                    1023,
+                    TCSupport.CharacterOptions.ASCII
+                );
                 int readResult;
 
-                Debug.WriteLine("Verifying that Read(char[], int, int) will compact data in the buffer");
+                Debug.WriteLine(
+                    "Verifying that Read(char[], int, int) will compact data in the buffer"
+                );
 
                 com1.Encoding = Encoding.ASCII;
                 com2.Encoding = Encoding.ASCII;
@@ -443,20 +515,29 @@ namespace System.IO.Ports.Tests
                 if (!com2.IsOpen) //This is necessary since com1 and com2 might be the same port if we are using a loopback
                     com2.Open();
 
-
                 //[] Fill the buffer up then read in all but one of the chars
                 var expectedChars = new char[charXmitBuffer.Length - 1];
                 var charRcvBuffer = new char[charXmitBuffer.Length - 1];
                 Array.Copy(charXmitBuffer, expectedChars, charXmitBuffer.Length - 1);
 
                 com2.Write(charXmitBuffer, 0, charXmitBuffer.Length);
-                TCSupport.WaitForPredicate(() => com1.BytesToRead == charXmitBuffer.Length, 2000,
-                    "Err_29829haie Expected to received {0} bytes actual={1}", charXmitBuffer.Length, com1.BytesToRead);
+                TCSupport.WaitForPredicate(
+                    () => com1.BytesToRead == charXmitBuffer.Length,
+                    2000,
+                    "Err_29829haie Expected to received {0} bytes actual={1}",
+                    charXmitBuffer.Length,
+                    com1.BytesToRead
+                );
 
-                if (charXmitBuffer.Length - 1 != (readResult = com1.Read(charRcvBuffer, 0, charXmitBuffer.Length - 1)))
-                {
-                    Fail("Err_55084aheid Expected to read {0} chars actual {1}", charXmitBuffer.Length - 1,
-                        readResult);
+                if (
+                    charXmitBuffer.Length - 1
+                    != (readResult = com1.Read(charRcvBuffer, 0, charXmitBuffer.Length - 1))
+                ) {
+                    Fail(
+                        "Err_55084aheid Expected to read {0} chars actual {1}",
+                        charXmitBuffer.Length - 1,
+                        readResult
+                    );
                 }
 
                 TCSupport.VerifyArray(expectedChars, charRcvBuffer);
@@ -468,8 +549,13 @@ namespace System.IO.Ports.Tests
                 Array.Copy(charXmitBuffer, 0, expectedChars, 1, 15);
 
                 com2.Write(charXmitBuffer, 0, 16);
-                TCSupport.WaitForPredicate(() => com1.BytesToRead == 17, 2000,
-                    "Err_0516848aied Expected to received {0} bytes actual={1}", 17, com1.BytesToRead);
+                TCSupport.WaitForPredicate(
+                    () => com1.BytesToRead == 17,
+                    2000,
+                    "Err_0516848aied Expected to received {0} bytes actual={1}",
+                    17,
+                    com1.BytesToRead
+                );
 
                 if (16 != (readResult = com1.Read(charRcvBuffer, 0, 16)))
                 {
@@ -485,12 +571,23 @@ namespace System.IO.Ports.Tests
                 Array.Copy(charXmitBuffer, 0, expectedChars, 1, charXmitBuffer.Length);
 
                 com2.Write(charXmitBuffer, 0, charXmitBuffer.Length);
-                TCSupport.WaitForPredicate(() => com1.BytesToRead == charXmitBuffer.Length + 1, 2000,
-                    "Err_41515684 Expected to received {0} bytes actual={1}", charXmitBuffer.Length + 2, com1.BytesToRead);
+                TCSupport.WaitForPredicate(
+                    () => com1.BytesToRead == charXmitBuffer.Length + 1,
+                    2000,
+                    "Err_41515684 Expected to received {0} bytes actual={1}",
+                    charXmitBuffer.Length + 2,
+                    com1.BytesToRead
+                );
 
-                if (charXmitBuffer.Length + 1 != (readResult = com1.Read(charRcvBuffer, 0, charXmitBuffer.Length + 1)))
-                {
-                    Fail("Err_460574ajied Expected to read {0} chars actual {1}", charXmitBuffer.Length + 1, readResult);
+                if (
+                    charXmitBuffer.Length + 1
+                    != (readResult = com1.Read(charRcvBuffer, 0, charXmitBuffer.Length + 1))
+                ) {
+                    Fail(
+                        "Err_460574ajied Expected to read {0} chars actual {1}",
+                        charXmitBuffer.Length + 1,
+                        readResult
+                    );
                 }
                 Assert.Equal(expectedChars, charRcvBuffer);
             }
@@ -502,14 +599,18 @@ namespace System.IO.Ports.Tests
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
-                char[] charXmitBuffer = TCSupport.GetRandomChars(512, TCSupport.CharacterOptions.None);
+                char[] charXmitBuffer = TCSupport.GetRandomChars(
+                    512,
+                    TCSupport.CharacterOptions.None
+                );
                 byte[] byteXmitBuffer = new UTF32Encoding().GetBytes(charXmitBuffer);
                 char[] charRcvBuffer = new char[charXmitBuffer.Length];
 
                 int result;
 
                 Debug.WriteLine(
-                    "Verifying that Read(char[], int, int) works appropriately after TimeoutException has been thrown");
+                    "Verifying that Read(char[], int, int) works appropriately after TimeoutException has been thrown"
+                );
 
                 com1.Encoding = new UTF32Encoding();
                 com2.Encoding = new UTF32Encoding();
@@ -528,9 +629,7 @@ namespace System.IO.Ports.Tests
                     com1.Read(charXmitBuffer, 0, charXmitBuffer.Length);
                     Fail("Err_29299aize Expected ReadTo to throw TimeoutException");
                 }
-                catch (TimeoutException)
-                {
-                } //Expected
+                catch (TimeoutException) { } //Expected
 
                 Assert.Equal(3, com1.BytesToRead);
 
@@ -539,15 +638,26 @@ namespace System.IO.Ports.Tests
                 //        retValue &= TCSupport.WaitForPredicate(delegate() {return com1.BytesToRead == byteXmitBuffer.Length; },
                 //            5000, "Err_91818aheid Expected BytesToRead={0} actual={1}", byteXmitBuffer.Length, com1.BytesToRead);
 
-                TCSupport.WaitForExpected(() => com1.BytesToRead, byteXmitBuffer.Length,
-                    5000, "Err_91818aheid BytesToRead");
+                TCSupport.WaitForExpected(
+                    () => com1.BytesToRead,
+                    byteXmitBuffer.Length,
+                    5000,
+                    "Err_91818aheid BytesToRead"
+                );
                 result = com1.Read(charRcvBuffer, 0, charRcvBuffer.Length);
 
                 Assert.Equal(charXmitBuffer.Length, result);
                 Assert.Equal(charXmitBuffer, charRcvBuffer);
 
-                VerifyBytesReadOnCom1FromCom2(com1, com2, byteXmitBuffer, charXmitBuffer, charRcvBuffer, 0,
-                    charRcvBuffer.Length);
+                VerifyBytesReadOnCom1FromCom2(
+                    com1,
+                    com2,
+                    byteXmitBuffer,
+                    charXmitBuffer,
+                    charRcvBuffer,
+                    0,
+                    charRcvBuffer.Length
+                );
             }
         }
 
@@ -563,7 +673,9 @@ namespace System.IO.Ports.Tests
 
                 int result;
 
-                Debug.WriteLine("Verifying that Read(char[], int, int) works when reading partial characters");
+                Debug.WriteLine(
+                    "Verifying that Read(char[], int, int) works when reading partial characters"
+                );
 
                 com1.Encoding = new UTF32Encoding();
                 com2.Encoding = new UTF32Encoding();
@@ -578,8 +690,12 @@ namespace System.IO.Ports.Tests
                 com2.Write(utf32CharBytes, 0, 4);
                 com2.Write(utf32CharBytes, 0, 3);
 
-                TCSupport.WaitForExpected(() => com1.BytesToRead, 7,
-                    5000, "Err_018158ajid BytesToRead");
+                TCSupport.WaitForExpected(
+                    () => com1.BytesToRead,
+                    7,
+                    5000,
+                    "Err_018158ajid BytesToRead"
+                );
                 result = com1.Read(charRcvBuffer, 0, charRcvBuffer.Length);
 
                 Assert.Equal(1, result);
@@ -591,8 +707,15 @@ namespace System.IO.Ports.Tests
                 Assert.Equal(utf32Char, charRcvBuffer[0]);
                 Assert.Equal(utf32Char, charRcvBuffer[1]);
 
-                VerifyBytesReadOnCom1FromCom2(com1, com2, utf32CharBytes, new[] { utf32Char }, charRcvBuffer, 0,
-                    charRcvBuffer.Length);
+                VerifyBytesReadOnCom1FromCom2(
+                    com1,
+                    com2,
+                    utf32CharBytes,
+                    new[] { utf32Char },
+                    charRcvBuffer,
+                    0,
+                    charRcvBuffer.Length
+                );
             }
         }
 
@@ -606,9 +729,16 @@ namespace System.IO.Ports.Tests
 
                 int result;
 
-                Debug.WriteLine("Verifying that Read(char[], int, int) works with reading surrogate characters");
+                Debug.WriteLine(
+                    "Verifying that Read(char[], int, int) works with reading surrogate characters"
+                );
 
-                TCSupport.GetRandomChars(charXmitBuffer, 0, charXmitBuffer.Length - 2, TCSupport.CharacterOptions.Surrogates);
+                TCSupport.GetRandomChars(
+                    charXmitBuffer,
+                    0,
+                    charXmitBuffer.Length - 2,
+                    TCSupport.CharacterOptions.Surrogates
+                );
                 charXmitBuffer[charXmitBuffer.Length - 2] = TCSupport.GenerateRandomHighSurrogate();
                 charXmitBuffer[charXmitBuffer.Length - 1] = TCSupport.GenerateRandomLowSurrogate();
 
@@ -623,8 +753,12 @@ namespace System.IO.Ports.Tests
 
                 //[] First lets try with buffer size that is larger then what we are asking for
                 com2.Write(charXmitBuffer, 0, charXmitBuffer.Length);
-                TCSupport.WaitForExpected(() => com1.BytesToRead, charXmitBuffer.Length * 2,
-                    5000, "Err_018158ajid BytesToRead");
+                TCSupport.WaitForExpected(
+                    () => com1.BytesToRead,
+                    charXmitBuffer.Length * 2,
+                    5000,
+                    "Err_018158ajid BytesToRead"
+                );
 
                 var charRcvBuffer = new char[charXmitBuffer.Length];
 
@@ -642,8 +776,12 @@ namespace System.IO.Ports.Tests
 
                 //[] Next lets try with buffer size that is the same size as what we are asking for
                 com2.Write(charXmitBuffer, 0, charXmitBuffer.Length);
-                TCSupport.WaitForExpected(() => com1.BytesToRead, charXmitBuffer.Length * 2,
-                    5000, "Err_018158ajid BytesToRead");
+                TCSupport.WaitForExpected(
+                    () => com1.BytesToRead,
+                    charXmitBuffer.Length * 2,
+                    5000,
+                    "Err_018158ajid BytesToRead"
+                );
 
                 charRcvBuffer = new char[charXmitBuffer.Length - 1];
 
@@ -664,13 +802,26 @@ namespace System.IO.Ports.Tests
         #endregion
 
         #region Verification for Test Cases
-        private void VerifyReadException(char[] buffer, int offset, int count, Type expectedException)
-        {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
+        private void VerifyReadException(
+            char[] buffer,
+            int offset,
+            int count,
+            Type expectedException
+        ) {
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
                 int bufferLength = null == buffer ? 0 : buffer.Length;
 
-                Debug.WriteLine("Verifying read method throws {0} buffer.Lenght={1}, offset={2}, count={3}", expectedException, bufferLength, offset, count);
+                Debug.WriteLine(
+                    "Verifying read method throws {0} buffer.Lenght={1}, offset={2}, count={3}",
+                    expectedException,
+                    bufferLength,
+                    offset,
+                    count
+                );
                 com.Open();
 
                 Assert.Throws(expectedException, () => com.Read(buffer, offset, count));
@@ -679,31 +830,65 @@ namespace System.IO.Ports.Tests
 
         private void VerifyRead(char[] buffer, int offset, int count)
         {
-            VerifyRead(buffer, offset, count, new ASCIIEncoding(), numRndBytesToRead, ReadDataFromEnum.NonBuffered);
+            VerifyRead(
+                buffer,
+                offset,
+                count,
+                new ASCIIEncoding(),
+                numRndBytesToRead,
+                ReadDataFromEnum.NonBuffered
+            );
         }
-
 
         private void VerifyRead(char[] buffer, int offset, int count, int numberOfBytesToRead)
         {
-            VerifyRead(buffer, offset, count, new ASCIIEncoding(), numberOfBytesToRead, ReadDataFromEnum.NonBuffered);
+            VerifyRead(
+                buffer,
+                offset,
+                count,
+                new ASCIIEncoding(),
+                numberOfBytesToRead,
+                ReadDataFromEnum.NonBuffered
+            );
         }
 
-
-        private void VerifyRead(char[] buffer, int offset, int count, int numberOfBytesToRead, ReadDataFromEnum readDataFrom)
-        {
-            VerifyRead(buffer, offset, count, new ASCIIEncoding(), numberOfBytesToRead, readDataFrom);
+        private void VerifyRead(
+            char[] buffer,
+            int offset,
+            int count,
+            int numberOfBytesToRead,
+            ReadDataFromEnum readDataFrom
+        ) {
+            VerifyRead(
+                buffer,
+                offset,
+                count,
+                new ASCIIEncoding(),
+                numberOfBytesToRead,
+                readDataFrom
+            );
         }
-
 
         private void VerifyRead(char[] buffer, int offset, int count, Encoding encoding)
         {
-            VerifyRead(buffer, offset, count, encoding, numRndBytesToRead, ReadDataFromEnum.NonBuffered);
+            VerifyRead(
+                buffer,
+                offset,
+                count,
+                encoding,
+                numRndBytesToRead,
+                ReadDataFromEnum.NonBuffered
+            );
         }
 
-
-        private void VerifyRead(char[] buffer, int offset, int count, Encoding encoding, int numberOfBytesToRead,
-            ReadDataFromEnum readDataFrom)
-        {
+        private void VerifyRead(
+            char[] buffer,
+            int offset,
+            int count,
+            Encoding encoding,
+            int numberOfBytesToRead,
+            ReadDataFromEnum readDataFrom
+        ) {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
@@ -714,11 +899,17 @@ namespace System.IO.Ports.Tests
 
                 if (1 < count)
                 {
-                    charsToWrite = TCSupport.GetRandomChars(numberOfBytesToRead, TCSupport.CharacterOptions.Surrogates);
+                    charsToWrite = TCSupport.GetRandomChars(
+                        numberOfBytesToRead,
+                        TCSupport.CharacterOptions.Surrogates
+                    );
                 }
                 else
                 {
-                    charsToWrite = TCSupport.GetRandomChars(numberOfBytesToRead, TCSupport.CharacterOptions.None);
+                    charsToWrite = TCSupport.GetRandomChars(
+                        numberOfBytesToRead,
+                        TCSupport.CharacterOptions.None
+                    );
                 }
 
                 //Genrate some random chars in the buffer
@@ -733,7 +924,12 @@ namespace System.IO.Ports.Tests
 
                 Debug.WriteLine(
                     "Verifying read method buffer.Length={0}, offset={1}, count={2}, endocing={3} with {4} random chars",
-                    buffer.Length, offset, count, encoding.EncodingName, bytesToWrite.Length);
+                    buffer.Length,
+                    offset,
+                    count,
+                    encoding.EncodingName,
+                    bytesToWrite.Length
+                );
                 com1.ReadTimeout = 500;
                 com1.Encoding = encoding;
                 com1.Open();
@@ -753,33 +949,70 @@ namespace System.IO.Ports.Tests
                         VerifyReadBuffered(com1, com2, bytesToWrite, buffer, offset, count);
                         break;
                     case ReadDataFromEnum.BufferedAndNonBuffered:
-                        VerifyReadBufferedAndNonBuffered(com1, com2, bytesToWrite, buffer, offset, count);
+                        VerifyReadBufferedAndNonBuffered(
+                            com1,
+                            com2,
+                            bytesToWrite,
+                            buffer,
+                            offset,
+                            count
+                        );
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(readDataFrom), readDataFrom, null);
+                        throw new ArgumentOutOfRangeException(
+                            nameof(readDataFrom),
+                            readDataFrom,
+                            null
+                        );
                 }
             }
         }
 
-        private void VerifyReadNonBuffered(SerialPort com1, SerialPort com2, byte[] bytesToWrite, char[] rcvBuffer, int offset, int count)
-        {
+        private void VerifyReadNonBuffered(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            char[] rcvBuffer,
+            int offset,
+            int count
+        ) {
             char[] expectedChars = com1.Encoding.GetChars(bytesToWrite, 0, bytesToWrite.Length);
-            VerifyBytesReadOnCom1FromCom2(com1, com2, bytesToWrite, expectedChars, rcvBuffer, offset, count);
+            VerifyBytesReadOnCom1FromCom2(
+                com1,
+                com2,
+                bytesToWrite,
+                expectedChars,
+                rcvBuffer,
+                offset,
+                count
+            );
         }
 
-
-        private void VerifyReadBuffered(SerialPort com1, SerialPort com2, byte[] bytesToWrite, char[] rcvBuffer, int offset, int count)
-        {
+        private void VerifyReadBuffered(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            char[] rcvBuffer,
+            int offset,
+            int count
+        ) {
             char[] expectedChars = com1.Encoding.GetChars(bytesToWrite, 0, bytesToWrite.Length);
 
             BufferData(com1, com2, bytesToWrite);
             PerformReadOnCom1FromCom2(com1, com2, expectedChars, rcvBuffer, offset, count);
         }
 
-
-        private void VerifyReadBufferedAndNonBuffered(SerialPort com1, SerialPort com2, byte[] bytesToWrite, char[] rcvBuffer, int offset, int count)
-        {
-            char[] expectedChars = new char[com1.Encoding.GetCharCount(bytesToWrite, 0, bytesToWrite.Length) * 2];
+        private void VerifyReadBufferedAndNonBuffered(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            char[] rcvBuffer,
+            int offset,
+            int count
+        ) {
+            char[] expectedChars = new char[
+                com1.Encoding.GetCharCount(bytesToWrite, 0, bytesToWrite.Length) * 2
+            ];
             char[] encodedChars = com1.Encoding.GetChars(bytesToWrite, 0, bytesToWrite.Length);
 
             Array.Copy(encodedChars, expectedChars, bytesToWrite.Length);
@@ -787,9 +1020,16 @@ namespace System.IO.Ports.Tests
 
             BufferData(com1, com2, bytesToWrite);
 
-            VerifyBytesReadOnCom1FromCom2(com1, com2, bytesToWrite, expectedChars, rcvBuffer, offset, count);
+            VerifyBytesReadOnCom1FromCom2(
+                com1,
+                com2,
+                bytesToWrite,
+                expectedChars,
+                rcvBuffer,
+                offset,
+                count
+            );
         }
-
 
         private void BufferData(SerialPort com1, SerialPort com2, byte[] bytesToWrite)
         {
@@ -806,8 +1046,15 @@ namespace System.IO.Ports.Tests
             Assert.Equal(bytesToWrite.Length, com1.BytesToRead);
         }
 
-        private void VerifyBytesReadOnCom1FromCom2(SerialPort com1, SerialPort com2, byte[] bytesToWrite, char[] expectedChars, char[] rcvBuffer, int offset, int count)
-        {
+        private void VerifyBytesReadOnCom1FromCom2(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            char[] expectedChars,
+            char[] rcvBuffer,
+            int offset,
+            int count
+        ) {
             com2.Write(bytesToWrite, 0, bytesToWrite.Length);
             com1.ReadTimeout = 500;
 
@@ -818,8 +1065,14 @@ namespace System.IO.Ports.Tests
             PerformReadOnCom1FromCom2(com1, com2, expectedChars, rcvBuffer, offset, count);
         }
 
-        private void PerformReadOnCom1FromCom2(SerialPort com1, SerialPort com2, char[] expectedChars, char[] rcvBuffer, int offset, int count)
-        {
+        private void PerformReadOnCom1FromCom2(
+            SerialPort com1,
+            SerialPort com2,
+            char[] expectedChars,
+            char[] rcvBuffer,
+            int offset,
+            int count
+        ) {
             char[] buffer = new char[expectedChars.Length];
             char[] oldRcvBuffer = (char[])rcvBuffer.Clone();
             int numBytesWritten = com1.Encoding.GetByteCount(expectedChars);
@@ -848,7 +1101,13 @@ namespace System.IO.Ports.Tests
                     //If we have read in more characters than we expect
 
                     //1<DEBUG>
-                    Debug.WriteLine("count={0}, charsRead={1} expectedChars.Length={2}, totalCharsRead={3}", count, charsRead, expectedChars.Length, totalCharsRead);
+                    Debug.WriteLine(
+                        "count={0}, charsRead={1} expectedChars.Length={2}, totalCharsRead={3}",
+                        count,
+                        charsRead,
+                        expectedChars.Length,
+                        totalCharsRead
+                    );
 
                     Debug.WriteLine("rcvBuffer");
                     TCSupport.PrintChars(rcvBuffer);
@@ -860,15 +1119,26 @@ namespace System.IO.Ports.Tests
                     Fail("ERROR!!!: We have received more characters then were sent");
                 }
 
-                if (count != charsRead &&
-                    (count < charsRead ||
-                     ((expectedChars.Length - totalCharsRead) != charsRead &&
-                      !TCSupport.IsSurrogate(expectedChars[totalCharsRead + charsRead]))))
-                {
+                if (
+                    count != charsRead
+                    && (
+                        count < charsRead
+                        || (
+                            (expectedChars.Length - totalCharsRead) != charsRead
+                            && !TCSupport.IsSurrogate(expectedChars[totalCharsRead + charsRead])
+                        )
+                    )
+                ) {
                     //If we have not read all of the characters that we should have
 
                     //1<DEBUG>
-                    Debug.WriteLine("count={0}, charsRead={1} expectedChars.Length={2}, totalCharsRead={3}", count, charsRead, expectedChars.Length, totalCharsRead);
+                    Debug.WriteLine(
+                        "count={0}, charsRead={1} expectedChars.Length={2}, totalCharsRead={3}",
+                        count,
+                        charsRead,
+                        expectedChars.Length,
+                        totalCharsRead
+                    );
 
                     Debug.WriteLine("rcvBuffer");
                     TCSupport.PrintChars(rcvBuffer);
@@ -877,7 +1147,9 @@ namespace System.IO.Ports.Tests
                     TCSupport.PrintChars(expectedChars);
                     //1</DEBUG>
 
-                    Fail("ERROR!!!: Read did not return all of the characters that were in SerialPort buffer");
+                    Fail(
+                        "ERROR!!!: Read did not return all of the characters that were in SerialPort buffer"
+                    );
                 }
 
                 VerifyBuffer(rcvBuffer, oldRcvBuffer, offset, charsRead);
@@ -898,7 +1170,12 @@ namespace System.IO.Ports.Tests
             {
                 if (expectedChars[i] != buffer[i])
                 {
-                    Fail("ERROR!!!: Expected to read {0}  actual read  {1} at {2}", (int)expectedChars[i], (int)buffer[i], i);
+                    Fail(
+                        "ERROR!!!: Expected to read {0}  actual read  {1} at {2}",
+                        (int)expectedChars[i],
+                        (int)buffer[i],
+                        i
+                    );
                 }
             }
 
@@ -910,7 +1187,10 @@ namespace System.IO.Ports.Tests
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
             {
-                char[] xmitCharBuffer = TCSupport.GetRandomChars(numRndBytesToRead, TCSupport.CharacterOptions.Surrogates);
+                char[] xmitCharBuffer = TCSupport.GetRandomChars(
+                    numRndBytesToRead,
+                    TCSupport.CharacterOptions.Surrogates
+                );
                 char[] rcvCharBuffer = new char[xmitCharBuffer.Length];
                 byte[] xmitByteBuffer = new byte[numRndBytesToRead];
                 byte[] rcvByteBuffer = new byte[xmitByteBuffer.Length];
@@ -918,8 +1198,10 @@ namespace System.IO.Ports.Tests
 
                 int numRead;
 
-                Debug.WriteLine("Verifying read method does not alter stream of bytes after chars have been read with {0}",
-                    encoding.GetType());
+                Debug.WriteLine(
+                    "Verifying read method does not alter stream of bytes after chars have been read with {0}",
+                    encoding.GetType()
+                );
 
                 for (int i = 0; i < xmitByteBuffer.Length; i++)
                 {
@@ -939,14 +1221,26 @@ namespace System.IO.Ports.Tests
                 com2.Write(xmitByteBuffer, 0, xmitByteBuffer.Length);
 
                 Thread.Sleep(
-                    (int)
-                    (((xmitByteBuffer.Length + com2.Encoding.GetByteCount(xmitCharBuffer) * 10.0) / com1.BaudRate) * 1000) +
-                    500);
+                    (int)(
+                        (
+                            (
+                                xmitByteBuffer.Length
+                                + com2.Encoding.GetByteCount(xmitCharBuffer) * 10.0
+                            ) / com1.BaudRate
+                        ) * 1000
+                    ) + 500
+                );
                 Thread.Sleep(500);
 
-                if (xmitCharBuffer.Length != (numRead = com1.Read(rcvCharBuffer, 0, rcvCharBuffer.Length)))
-                {
-                    Fail("ERROR!!!: Expected to read {0} chars actually read {1}", xmitCharBuffer.Length, numRead);
+                if (
+                    xmitCharBuffer.Length
+                    != (numRead = com1.Read(rcvCharBuffer, 0, rcvCharBuffer.Length))
+                ) {
+                    Fail(
+                        "ERROR!!!: Expected to read {0} chars actually read {1}",
+                        xmitCharBuffer.Length,
+                        numRead
+                    );
                 }
 
                 if (IsUTF7Encoding(encoding))
@@ -954,21 +1248,31 @@ namespace System.IO.Ports.Tests
                     Fail("UTF-7 encoding not expected to be passed to this test.");
                 }
 
-                if (xmitByteBuffer.Length != (numRead = com1.Read(rcvByteBuffer, 0, rcvByteBuffer.Length)))
-                {
-                    Fail("ERROR!!!: Expected to read {0} bytes actually read {1}", xmitByteBuffer.Length, numRead);
+                if (
+                    xmitByteBuffer.Length
+                    != (numRead = com1.Read(rcvByteBuffer, 0, rcvByteBuffer.Length))
+                ) {
+                    Fail(
+                        "ERROR!!!: Expected to read {0} bytes actually read {1}",
+                        xmitByteBuffer.Length,
+                        numRead
+                    );
                 }
 
                 for (int i = 0; i < xmitByteBuffer.Length; i++)
                 {
                     if (xmitByteBuffer[i] != rcvByteBuffer[i])
                     {
-                        Fail("ERROR!!!: Expected to read {0}  actual read  {1} at {2}", (int)xmitByteBuffer[i], (int)rcvByteBuffer[i], i);
+                        Fail(
+                            "ERROR!!!: Expected to read {0}  actual read  {1} at {2}",
+                            (int)xmitByteBuffer[i],
+                            (int)rcvByteBuffer[i],
+                            i
+                        );
                     }
                 }
 
                 Assert.Equal(0, com1.BytesToRead);
-
                 /*DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG DEBUG
             if (!retValue) {
                 for (int i=0; i<xmitCharBuffer.Length; ++i) {
@@ -989,7 +1293,12 @@ namespace System.IO.Ports.Tests
             {
                 if (actualBuffer[i] != expectedBuffer[i])
                 {
-                    Fail("ERROR!!!: Expected {0} in buffer at {1} actual {2}", (int)expectedBuffer[i], i, (int)actualBuffer[i]);
+                    Fail(
+                        "ERROR!!!: Expected {0} in buffer at {1} actual {2}",
+                        (int)expectedBuffer[i],
+                        i,
+                        (int)actualBuffer[i]
+                    );
                 }
             }
 
@@ -998,7 +1307,12 @@ namespace System.IO.Ports.Tests
             {
                 if (actualBuffer[i] != expectedBuffer[i])
                 {
-                    Fail("ERROR!!!: Expected {0} in buffer at {1} actual {2}", (int)expectedBuffer[i], i, (int)actualBuffer[i]);
+                    Fail(
+                        "ERROR!!!: Expected {0} in buffer at {1} actual {2}",
+                        (int)expectedBuffer[i],
+                        i,
+                        (int)actualBuffer[i]
+                    );
                 }
             }
         }

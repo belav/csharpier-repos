@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
     /// <summary>
     /// Context used when a failure occurs.
     /// </summary>
-    public class CertificateAuthenticationFailedContext : ResultContext<CertificateAuthenticationOptions>
+    public class CertificateAuthenticationFailedContext
+        : ResultContext<CertificateAuthenticationOptions>
     {
         /// <summary>
         /// Constructor.
@@ -20,10 +21,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
         public CertificateAuthenticationFailedContext(
             HttpContext context,
             AuthenticationScheme scheme,
-            CertificateAuthenticationOptions options)
-            : base(context, scheme, options)
-        {
-        }
+            CertificateAuthenticationOptions options
+        ) : base(context, scheme, options) { }
 
         /// <summary>
         /// The exception.

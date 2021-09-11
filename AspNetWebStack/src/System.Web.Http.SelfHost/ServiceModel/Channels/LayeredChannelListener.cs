@@ -15,8 +15,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         private bool _sharedInnerListener;
         private EventHandler _onInnerListenerFaulted;
 
-        protected LayeredChannelListener(bool sharedInnerListener, IDefaultCommunicationTimeouts timeouts, IChannelListener innerChannelListener)
-            : base(timeouts)
+        protected LayeredChannelListener(
+            bool sharedInnerListener,
+            IDefaultCommunicationTimeouts timeouts,
+            IChannelListener innerChannelListener
+        ) : base(timeouts)
         {
             _sharedInnerListener = sharedInnerListener;
             _innerChannelListener = innerChannelListener;
@@ -27,20 +30,18 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             }
         }
 
-        protected LayeredChannelListener(bool sharedInnerListener, IDefaultCommunicationTimeouts timeouts)
-            : this(sharedInnerListener, timeouts, null)
-        {
-        }
+        protected LayeredChannelListener(
+            bool sharedInnerListener,
+            IDefaultCommunicationTimeouts timeouts
+        ) : this(sharedInnerListener, timeouts, null) { }
 
         protected LayeredChannelListener(bool sharedInnerListener)
-            : this(sharedInnerListener, null, null)
-        {
-        }
+            : this(sharedInnerListener, null, null) { }
 
-        protected LayeredChannelListener(IDefaultCommunicationTimeouts timeouts, IChannelListener innerChannelListener)
-            : this(false, timeouts, innerChannelListener)
-        {
-        }
+        protected LayeredChannelListener(
+            IDefaultCommunicationTimeouts timeouts,
+            IChannelListener innerChannelListener
+        ) : this(false, timeouts, innerChannelListener) { }
 
         public override Uri Uri
         {
@@ -50,7 +51,6 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         internal virtual IChannelListener InnerChannelListener
         {
             get { return _innerChannelListener; }
-
             set
             {
                 lock (ThisLock)
@@ -98,7 +98,10 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         {
             if (InnerChannelListener == null)
             {
-                throw Error.InvalidOperation(SRResources.InnerListenerFactoryNotSet, GetType().ToString());
+                throw Error.InvalidOperation(
+                    SRResources.InnerListenerFactoryNotSet,
+                    GetType().ToString()
+                );
             }
         }
 
@@ -108,7 +111,10 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
 
             if (innerListener == null)
             {
-                throw Error.InvalidOperation(SRResources.InnerListenerFactoryNotSet, GetType().ToString());
+                throw Error.InvalidOperation(
+                    SRResources.InnerListenerFactoryNotSet,
+                    GetType().ToString()
+                );
             }
 
             return innerListener;
@@ -133,9 +139,18 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             OpenAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            return new OpenAsyncResult(InnerChannelListener, _sharedInnerListener, timeout, callback, state);
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        ) {
+            return new OpenAsyncResult(
+                InnerChannelListener,
+                _sharedInnerListener,
+                timeout,
+                callback,
+                state
+            );
         }
 
         protected override void OnClose(TimeSpan timeout)
@@ -152,10 +167,19 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             CloseAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
-        {
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        ) {
             OnCloseOrAbort();
-            return new CloseAsyncResult(InnerChannelListener, _sharedInnerListener, timeout, callback, state);
+            return new CloseAsyncResult(
+                InnerChannelListener,
+                _sharedInnerListener,
+                timeout,
+                callback,
+                state
+            );
         }
 
         protected override void OnAbort()
@@ -193,8 +217,13 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
 
             private ICommunicationObject _communicationObject;
 
-            public CloseAsyncResult(ICommunicationObject communicationObject, bool sharedInnerListener, TimeSpan timeout, AsyncCallback callback, object state)
-                : base(callback, state)
+            public CloseAsyncResult(
+                ICommunicationObject communicationObject,
+                bool sharedInnerListener,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            ) : base(callback, state)
             {
                 _communicationObject = communicationObject;
 
@@ -204,7 +233,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
                     return;
                 }
 
-                IAsyncResult result = _communicationObject.BeginClose(timeout, _onCloseComplete, this);
+                IAsyncResult result = _communicationObject.BeginClose(
+                    timeout,
+                    _onCloseComplete,
+                    this
+                );
 
                 if (result.CompletedSynchronously)
                 {
@@ -218,7 +251,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
                 AsyncResult.End<CloseAsyncResult>(result);
             }
 
-            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is propagated.")]
+            [SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "Exception is propagated."
+            )]
             private static void OnCloseComplete(IAsyncResult result)
             {
                 if (result.CompletedSynchronously)
@@ -248,8 +285,13 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
 
             private ICommunicationObject _communicationObject;
 
-            public OpenAsyncResult(ICommunicationObject communicationObject, bool sharedInnerListener, TimeSpan timeout, AsyncCallback callback, object state)
-                : base(callback, state)
+            public OpenAsyncResult(
+                ICommunicationObject communicationObject,
+                bool sharedInnerListener,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            ) : base(callback, state)
             {
                 _communicationObject = communicationObject;
 
@@ -259,7 +301,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
                     return;
                 }
 
-                IAsyncResult result = _communicationObject.BeginOpen(timeout, _onOpenComplete, this);
+                IAsyncResult result = _communicationObject.BeginOpen(
+                    timeout,
+                    _onOpenComplete,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     _communicationObject.EndOpen(result);
@@ -272,7 +318,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
                 AsyncResult.End<OpenAsyncResult>(result);
             }
 
-            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is propagated.")]
+            [SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "Exception is propagated."
+            )]
             private static void OnOpenComplete(IAsyncResult result)
             {
                 if (result.CompletedSynchronously)

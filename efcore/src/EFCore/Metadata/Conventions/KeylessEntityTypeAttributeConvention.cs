@@ -9,16 +9,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that ignores entity types that have the <see cref="KeylessAttribute" />.
     /// </summary>
-    public class KeylessEntityTypeAttributeConvention : EntityTypeAttributeConventionBase<KeylessAttribute>
+    public class KeylessEntityTypeAttributeConvention
+        : EntityTypeAttributeConventionBase<KeylessAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="KeylessEntityTypeAttributeConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public KeylessEntityTypeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public KeylessEntityTypeAttributeConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Called after an entity type is added to the model if it has an attribute.
@@ -29,8 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected override void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             KeylessAttribute attribute,
-            IConventionContext<IConventionEntityTypeBuilder> context)
-        {
+            IConventionContext<IConventionEntityTypeBuilder> context
+        ) {
             entityTypeBuilder.HasNoKey(fromDataAnnotation: true);
         }
     }

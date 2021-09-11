@@ -14,8 +14,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 {
     public class ProtectedPrerenderComponentApplicationStateTest
     {
-        private static readonly IDataProtectionProvider _provider = new EphemeralDataProtectionProvider();
-        private static readonly IDataProtector _protector = _provider.CreateProtector("Microsoft.AspNetCore.Components.Server.State");
+        private static readonly IDataProtectionProvider _provider =
+            new EphemeralDataProtectionProvider();
+        private static readonly IDataProtector _protector = _provider.CreateProtector(
+            "Microsoft.AspNetCore.Components.Server.State"
+        );
 
         [Fact]
         public async Task PersistStateAsync_ProtectsPersistedState()
@@ -45,7 +48,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 ["MyValue"] = new byte[] { 1, 2, 3, 4 }
             };
 
-            var persistedState = Convert.ToBase64String(_protector.Protect(JsonSerializer.SerializeToUtf8Bytes(expectedState)));
+            var persistedState = Convert.ToBase64String(
+                _protector.Protect(JsonSerializer.SerializeToUtf8Bytes(expectedState))
+            );
             var store = new ProtectedPrerenderComponentApplicationStore(persistedState, _provider);
 
             // Act
@@ -64,11 +69,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 ["MyValue"] = new byte[] { 1, 2, 3, 4 }
             };
 
-            var persistedState = Convert.ToBase64String(JsonSerializer.SerializeToUtf8Bytes(expectedState));
+            var persistedState = Convert.ToBase64String(
+                JsonSerializer.SerializeToUtf8Bytes(expectedState)
+            );
 
             // Act & Assert
-            Assert.Throws<CryptographicException>(() =>
-                new ProtectedPrerenderComponentApplicationStore(persistedState, _provider));
+            Assert.Throws<CryptographicException>(
+                () => new ProtectedPrerenderComponentApplicationStore(persistedState, _provider)
+            );
         }
     }
 }

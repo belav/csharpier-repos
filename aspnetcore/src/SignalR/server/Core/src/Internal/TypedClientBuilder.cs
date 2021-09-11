@@ -16,11 +16,18 @@ namespace Microsoft.AspNetCore.SignalR.Internal
         private const string ClientModuleName = "Microsoft.AspNetCore.SignalR.TypedClientBuilder";
 
         // There is one static instance of _builder per T
-        private static readonly Lazy<Func<IClientProxy, T>> _builder = new Lazy<Func<IClientProxy, T>>(() => GenerateClientBuilder());
+        private static readonly Lazy<Func<IClientProxy, T>> _builder = new Lazy<
+            Func<IClientProxy, T>
+        >(() => GenerateClientBuilder());
 
-        private static readonly PropertyInfo CancellationTokenNoneProperty = typeof(CancellationToken).GetProperty("None", BindingFlags.Public | BindingFlags.Static)!;
+        private static readonly PropertyInfo CancellationTokenNoneProperty =
+            typeof(CancellationToken).GetProperty(
+                "None",
+                BindingFlags.Public | BindingFlags.Static
+            )!;
 
-        private static readonly ConstructorInfo ObjectConstructor = typeof(object).GetConstructors().Single();
+        private static readonly ConstructorInfo ObjectConstructor = typeof(object).GetConstructors()
+            .Single();
 
         private static readonly Type[] ParameterTypes = new Type[] { typeof(IClientProxy) };
 
@@ -40,21 +47,38 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             VerifyInterface(typeof(T));
 
             var assemblyName = new AssemblyName(ClientModuleName);
-            var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+            var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                assemblyName,
+                AssemblyBuilderAccess.Run
+            );
             var moduleBuilder = assemblyBuilder.DefineDynamicModule(ClientModuleName);
             var clientType = GenerateInterfaceImplementation(moduleBuilder);
 
-            var factoryMethod = clientType.GetMethod(nameof(Build), BindingFlags.Public | BindingFlags.Static);
-            return (Func<IClientProxy, T>)factoryMethod!.CreateDelegate(typeof(Func<IClientProxy, T>));
+            var factoryMethod = clientType.GetMethod(
+                nameof(Build),
+                BindingFlags.Public | BindingFlags.Static
+            );
+            return (Func<IClientProxy, T>)factoryMethod!.CreateDelegate(
+                typeof(Func<IClientProxy, T>)
+            );
         }
 
         private static Type GenerateInterfaceImplementation(ModuleBuilder moduleBuilder)
         {
             var name = ClientModuleName + "." + typeof(T).Name + "Impl";
 
-            var type = moduleBuilder.DefineType(name, TypeAttributes.Public, typeof(object), new[] { typeof(T) });
+            var type = moduleBuilder.DefineType(
+                name,
+                TypeAttributes.Public,
+                typeof(object),
+                new[] { typeof(T) }
+            );
 
-            var proxyField = type.DefineField("_proxy", typeof(IClientProxy), FieldAttributes.Private | FieldAttributes.InitOnly);
+            var proxyField = type.DefineField(
+                "_proxy",
+                typeof(IClientProxy),
+                FieldAttributes.Private | FieldAttributes.InitOnly
+            );
 
             var ctor = BuildConstructor(type, proxyField);
 
@@ -89,7 +113,11 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 
         private static ConstructorInfo BuildConstructor(TypeBuilder type, FieldInfo proxyField)
         {
-            var ctor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, ParameterTypes);
+            var ctor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                ParameterTypes
+            );
 
             var generator = ctor.GetILGenerator();
 
@@ -106,10 +134,13 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             return ctor;
         }
 
-        private static void BuildMethod(TypeBuilder type, MethodInfo interfaceMethodInfo, FieldInfo proxyField)
-        {
+        private static void BuildMethod(
+            TypeBuilder type,
+            MethodInfo interfaceMethodInfo,
+            FieldInfo proxyField
+        ) {
             var methodAttributes =
-                  MethodAttributes.Public
+                MethodAttributes.Public
                 | MethodAttributes.Virtual
                 | MethodAttributes.Final
                 | MethodAttributes.HideBySig
@@ -121,15 +152,21 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             var methodBuilder = type.DefineMethod(interfaceMethodInfo.Name, methodAttributes);
 
             var invokeMethod = typeof(IClientProxy).GetMethod(
-                nameof(IClientProxy.SendCoreAsync), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null,
-                new[] { typeof(string), typeof(object[]), typeof(CancellationToken) }, null)!;
+                nameof(IClientProxy.SendCoreAsync),
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                null,
+                new[] { typeof(string), typeof(object[]), typeof(CancellationToken) },
+                null
+            )!;
 
             methodBuilder.SetReturnType(interfaceMethodInfo.ReturnType);
             methodBuilder.SetParameters(paramTypes);
 
             // Sets the number of generic type parameters
-            var genericTypeNames =
-                paramTypes.Where(p => p.IsGenericParameter).Select(p => p.Name).Distinct().ToArray();
+            var genericTypeNames = paramTypes.Where(p => p.IsGenericParameter)
+                .Select(p => p.Name)
+                .Distinct()
+                .ToArray();
 
             if (genericTypeNames.Length > 0)
             {
@@ -145,8 +182,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             }
 
             var methodName =
-                    interfaceMethodInfo.GetCustomAttribute<HubMethodNameAttribute>()?.Name ??
-                    interfaceMethodInfo.Name;
+                interfaceMethodInfo.GetCustomAttribute<HubMethodNameAttribute>()?.Name
+                ?? interfaceMethodInfo.Name;
 
             var generator = methodBuilder.GetILGenerator();
 
@@ -197,7 +234,13 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 
         private static void BuildFactoryMethod(TypeBuilder type, ConstructorInfo ctor)
         {
-            var method = type.DefineMethod(nameof(Build), MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, typeof(T), ParameterTypes);
+            var method = type.DefineMethod(
+                nameof(Build),
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                typeof(T),
+                ParameterTypes
+            );
 
             var generator = method.GetILGenerator();
 
@@ -239,7 +282,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             if (interfaceMethod.ReturnType != typeof(Task))
             {
                 throw new InvalidOperationException(
-                    $"Cannot generate proxy implementation for '{typeof(T).FullName}.{interfaceMethod.Name}'. All client proxy methods must return '{typeof(Task).FullName}'.");
+                    $"Cannot generate proxy implementation for '{typeof(T).FullName}.{interfaceMethod.Name}'. All client proxy methods must return '{typeof(Task).FullName}'."
+                );
             }
 
             foreach (var parameter in interfaceMethod.GetParameters())
@@ -247,13 +291,15 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                 if (parameter.IsOut)
                 {
                     throw new InvalidOperationException(
-                        $"Cannot generate proxy implementation for '{typeof(T).FullName}.{interfaceMethod.Name}'. Client proxy methods must not have 'out' parameters.");
+                        $"Cannot generate proxy implementation for '{typeof(T).FullName}.{interfaceMethod.Name}'. Client proxy methods must not have 'out' parameters."
+                    );
                 }
 
                 if (parameter.ParameterType.IsByRef)
                 {
                     throw new InvalidOperationException(
-                        $"Cannot generate proxy implementation for '{typeof(T).FullName}.{interfaceMethod.Name}'. Client proxy methods must not have 'ref' parameters.");
+                        $"Cannot generate proxy implementation for '{typeof(T).FullName}.{interfaceMethod.Name}'. Client proxy methods must not have 'ref' parameters."
+                    );
                 }
             }
         }

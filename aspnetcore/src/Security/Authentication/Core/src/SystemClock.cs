@@ -19,7 +19,10 @@ namespace Microsoft.AspNetCore.Authentication
             {
                 // the clock measures whole seconds only, to have integral expires_in results, and
                 // because milliseconds do not round-trip serialization formats
-                var utcNowPrecisionSeconds = new DateTime((DateTime.UtcNow.Ticks / TimeSpan.TicksPerSecond) * TimeSpan.TicksPerSecond, DateTimeKind.Utc);
+                var utcNowPrecisionSeconds = new DateTime(
+                    (DateTime.UtcNow.Ticks / TimeSpan.TicksPerSecond) * TimeSpan.TicksPerSecond,
+                    DateTimeKind.Utc
+                );
                 return new DateTimeOffset(utcNowPrecisionSeconds);
             }
         }

@@ -16,8 +16,11 @@ namespace System.Net.Http.Handlers
         private readonly ProgressMessageHandler _handler;
         private readonly HttpRequestMessage _request;
 
-        public ProgressContent(HttpContent innerContent, ProgressMessageHandler handler, HttpRequestMessage request)
-        {
+        public ProgressContent(
+            HttpContent innerContent,
+            ProgressMessageHandler handler,
+            HttpRequestMessage request
+        ) {
             Contract.Assert(innerContent != null);
             Contract.Assert(handler != null);
             Contract.Assert(request != null);
@@ -31,7 +34,12 @@ namespace System.Net.Http.Handlers
 
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
-            ProgressStream progressStream = new ProgressStream(stream, _handler, _request, response: null);
+            ProgressStream progressStream = new ProgressStream(
+                stream,
+                _handler,
+                _request,
+                response: null
+            );
             return _innerContent.CopyToAsync(progressStream);
         }
 

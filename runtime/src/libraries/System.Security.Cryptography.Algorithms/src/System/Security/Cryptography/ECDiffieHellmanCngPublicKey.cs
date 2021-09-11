@@ -54,7 +54,11 @@ namespace System.Security.Cryptography
                 }
 
                 ECParameters ecparams = default;
-                ECCng.ExportPrimeCurveParameters(ref ecparams, _keyBlob, includePrivateParameters: false);
+                ECCng.ExportPrimeCurveParameters(
+                    ref ecparams,
+                    _keyBlob,
+                    includePrivateParameters: false
+                );
                 return ecparams;
             }
 
@@ -81,7 +85,11 @@ namespace System.Security.Cryptography
                 else
                 {
                     ECParameters ecparams = default;
-                    ECCng.ExportNamedCurveParameters(ref ecparams, _keyBlob, includePrivateParameters: false);
+                    ECCng.ExportNamedCurveParameters(
+                        ref ecparams,
+                        _keyBlob,
+                        includePrivateParameters: false
+                    );
                     ecparams.Curve = ECCurve.CreateFromFriendlyName(_curveName);
                     return ecparams;
                 }

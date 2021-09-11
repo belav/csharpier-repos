@@ -15,8 +15,14 @@ public class Color
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser.")]
     public static void InvalidColors()
     {
-        AssertExtensions.Throws<ArgumentException>(null, () => Console.BackgroundColor = (ConsoleColor)42);
-        AssertExtensions.Throws<ArgumentException>(null, () => Console.ForegroundColor = (ConsoleColor)42);
+        AssertExtensions.Throws<ArgumentException>(
+            null,
+            () => Console.BackgroundColor = (ConsoleColor)42
+        );
+        AssertExtensions.Throws<ArgumentException>(
+            null,
+            () => Console.ForegroundColor = (ConsoleColor)42
+        );
     }
 
     [Fact]
@@ -25,7 +31,6 @@ public class Color
     {
         Console.BackgroundColor = Console.BackgroundColor;
         Console.ForegroundColor = Console.ForegroundColor;
-
         // Changing color on Windows doesn't have effect in some testing environments
         // when there is no associated console, such as when run under a profiler like
         // our code coverage tools, so we don't assert that the change took place and
@@ -37,7 +42,9 @@ public class Color
     public static void ForegroundColor_Throws_PlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.ForegroundColor);
-        Assert.Throws<PlatformNotSupportedException>(() => Console.ForegroundColor = ConsoleColor.Red);
+        Assert.Throws<PlatformNotSupportedException>(
+            () => Console.ForegroundColor = ConsoleColor.Red
+        );
     }
 
     [Fact]
@@ -45,7 +52,9 @@ public class Color
     public static void BackgroundColor_Throws_PlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.BackgroundColor);
-        Assert.Throws<PlatformNotSupportedException>(() => Console.BackgroundColor = ConsoleColor.Red);
+        Assert.Throws<PlatformNotSupportedException>(
+            () => Console.BackgroundColor = ConsoleColor.Red
+        );
     }
 
     [Fact]
@@ -54,19 +63,24 @@ public class Color
     {
         // Make sure that redirecting to a memory stream causes Console not to write out the ANSI sequences
 
-        Helpers.RunInRedirectedOutput((data) =>
-        {
-            Console.Write('1');
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write('2');
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.Write('3');
-            Console.ResetColor();
-            Console.Write('4');
+        Helpers.RunInRedirectedOutput(
+            (data) =>
+            {
+                Console.Write('1');
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write('2');
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.Write('3');
+                Console.ResetColor();
+                Console.Write('4');
 
-            const char Esc = (char)0x1B;
-            Assert.Equal(0, Encoding.UTF8.GetString(data.ToArray()).ToCharArray().Count(c => c == Esc));
-            Assert.Equal("1234", Encoding.UTF8.GetString(data.ToArray()));
-        });
+                const char Esc = (char)0x1B;
+                Assert.Equal(
+                    0,
+                    Encoding.UTF8.GetString(data.ToArray()).ToCharArray().Count(c => c == Esc)
+                );
+                Assert.Equal("1234", Encoding.UTF8.GetString(data.ToArray()));
+            }
+        );
     }
 }

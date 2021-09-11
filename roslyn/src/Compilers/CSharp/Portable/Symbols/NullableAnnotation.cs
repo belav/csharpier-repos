@@ -21,18 +21,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Type is not annotated - string, int, T (including the case when T is unconstrained).
         /// </summary>
         NotAnnotated,
-
         /// <summary>
         /// The type is not annotated in a context where the nullable feature is not enabled.
         /// Used for interoperation with existing pre-nullable code.
         /// </summary>
         Oblivious,
-
         /// <summary>
         /// Type is annotated with '?' - string?, T?.
         /// </summary>
         Annotated,
-
         /// <summary>
         /// Used for indexed type parameters and used locally in override/implementation checks.
         /// When substituting a type parameter with Ignored annotation into some original type parameter

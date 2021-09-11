@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore
         public static OwnedNavigationBuilder HasCheckConstraint(
             this OwnedNavigationBuilder ownedNavigationBuilder,
             string name,
-            string? sql)
-        {
+            string? sql
+        ) {
             Check.NotNull(ownedNavigationBuilder, nameof(ownedNavigationBuilder));
             Check.NotEmpty(name, nameof(name));
             Check.NullButNotEmpty(sql, nameof(sql));
@@ -37,7 +37,9 @@ namespace Microsoft.EntityFrameworkCore
             {
                 if (constraint.Sql == sql)
                 {
-                    ((CheckConstraint)constraint).UpdateConfigurationSource(ConfigurationSource.Explicit);
+                    ((CheckConstraint)constraint).UpdateConfigurationSource(
+                        ConfigurationSource.Explicit
+                    );
                     return ownedNavigationBuilder;
                 }
 
@@ -61,13 +63,19 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="name"> The name of the check constraint. </param>
         /// <param name="sql"> The logical constraint sql used in the check constraint. </param>
         /// <returns> A builder to further configure the navigation. </returns>
-        public static OwnedNavigationBuilder<TEntity, TDependentEntity> HasCheckConstraint<TEntity, TDependentEntity>(
+        public static OwnedNavigationBuilder<TEntity, TDependentEntity> HasCheckConstraint<
+            TEntity,
+            TDependentEntity
+        >(
             this OwnedNavigationBuilder<TEntity, TDependentEntity> ownedNavigationBuilder,
             string name,
-            string? sql)
-            where TEntity : class
-            where TDependentEntity : class
-            => (OwnedNavigationBuilder<TEntity, TDependentEntity>)
-                HasCheckConstraint((OwnedNavigationBuilder)ownedNavigationBuilder, name, sql);
+            string? sql
+        ) where TEntity : class
+          where TDependentEntity : class =>
+            (OwnedNavigationBuilder<TEntity, TDependentEntity>)HasCheckConstraint(
+                (OwnedNavigationBuilder)ownedNavigationBuilder,
+                name,
+                sql
+            );
     }
 }

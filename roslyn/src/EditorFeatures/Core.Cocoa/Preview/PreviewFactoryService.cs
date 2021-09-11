@@ -17,7 +17,9 @@ using Microsoft.VisualStudio.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {
     [Export(typeof(IPreviewFactoryService)), Shared]
-    internal class PreviewFactoryService : AbstractPreviewFactoryService<ICocoaDifferenceViewer>, IPreviewFactoryService
+    internal class PreviewFactoryService
+        : AbstractPreviewFactoryService<ICocoaDifferenceViewer>,
+          IPreviewFactoryService
     {
         private readonly ICocoaDifferenceViewerFactoryService _differenceViewerService;
 
@@ -32,27 +34,39 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             IEditorOptionsFactoryService editorOptionsFactoryService,
             ITextDifferencingSelectorService differenceSelectorService,
             IDifferenceBufferFactoryService differenceBufferService,
-            ICocoaDifferenceViewerFactoryService differenceViewerService)
-            : base(threadingContext,
-                  textBufferFactoryService,
-                  contentTypeRegistryService,
-                  projectionBufferFactoryService,
-                  editorOptionsFactoryService,
-                  differenceSelectorService,
-                  differenceBufferService,
-                  textEditorFactoryService.CreateTextViewRoleSet(
-                      TextViewRoles.PreviewRole, PredefinedTextViewRoles.Analyzable))
-        {
+            ICocoaDifferenceViewerFactoryService differenceViewerService
+        ) : base(
+            threadingContext,
+            textBufferFactoryService,
+            contentTypeRegistryService,
+            projectionBufferFactoryService,
+            editorOptionsFactoryService,
+            differenceSelectorService,
+            differenceBufferService,
+            textEditorFactoryService.CreateTextViewRoleSet(
+                TextViewRoles.PreviewRole,
+                PredefinedTextViewRoles.Analyzable
+            )
+        ) {
             _differenceViewerService = differenceViewerService;
         }
 
-        protected override async Task<ICocoaDifferenceViewer> CreateDifferenceViewAsync(IDifferenceBuffer diffBuffer, ITextViewRoleSet previewRoleSet, DifferenceViewMode mode, double zoomLevel, CancellationToken cancellationToken)
-        {
-            var diffViewer = _differenceViewerService.CreateDifferenceView(diffBuffer, previewRoleSet);
+        protected override async Task<ICocoaDifferenceViewer> CreateDifferenceViewAsync(
+            IDifferenceBuffer diffBuffer,
+            ITextViewRoleSet previewRoleSet,
+            DifferenceViewMode mode,
+            double zoomLevel,
+            CancellationToken cancellationToken
+        ) {
+            var diffViewer = _differenceViewerService.CreateDifferenceView(
+                diffBuffer,
+                previewRoleSet
+            );
             diffViewer.ViewMode = mode;
 
             // We use ConfigureAwait(true) to stay on the UI thread.
-            await diffViewer.SizeToFitAsync(ThreadingContext, cancellationToken: cancellationToken).ConfigureAwait(true);
+            await diffViewer.SizeToFitAsync(ThreadingContext, cancellationToken: cancellationToken)
+                .ConfigureAwait(true);
 
             return diffViewer;
         }

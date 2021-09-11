@@ -38,7 +38,6 @@ namespace SciMark2
             return (5.0 * Nd - 2) * logN + 2 * (Nd + 1);
         }
 
-
         /// <summary>
         /// Compute Fast Fourier Transform of (complex) data, in place.
         /// </summary>
@@ -177,7 +176,6 @@ namespace SciMark2
             }
         }
 
-
         protected internal static void bitreverse(double[] data)
         {
             /* This is the Goldrader bit-reversal algorithm */
@@ -211,7 +209,7 @@ namespace SciMark2
                     //j = j - k ;
                     j -= k;
 
-                    //k = k / 2 ; 
+                    //k = k / 2 ;
                     k >>= 1;
                 }
                 j += k;

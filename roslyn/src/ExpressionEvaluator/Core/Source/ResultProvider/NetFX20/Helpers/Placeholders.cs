@@ -23,13 +23,33 @@ namespace Microsoft.CodeAnalysis
         // Replaces a missing 4.5 method.
         public static FieldInfo GetDeclaredField(this Type type, string name)
         {
-            return type.GetField(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly);
+            return type.GetField(
+                name,
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.DeclaredOnly
+            );
         }
 
         // Replaces a missing 4.5 method.
-        public static MethodInfo GetDeclaredMethod(this Type type, string name, Type[] parameterTypes)
-        {
-            return type.GetMethod(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly, null, parameterTypes, null);
+        public static MethodInfo GetDeclaredMethod(
+            this Type type,
+            string name,
+            Type[] parameterTypes
+        ) {
+            return type.GetMethod(
+                name,
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.DeclaredOnly,
+                null,
+                parameterTypes,
+                null
+            );
         }
     }
 
@@ -46,7 +66,8 @@ namespace Microsoft.CodeAnalysis
     internal static class Environment
     {
         public static void FailFast(string message) => System.Environment.FailFast(message);
-        public static void FailFast(string message, Exception exception) => System.Environment.FailFast(exception.ToString());
+        public static void FailFast(string message, Exception exception) =>
+            System.Environment.FailFast(exception.ToString());
         public static string NewLine => System.Environment.NewLine;
         public static int ProcessorCount => System.Environment.ProcessorCount;
     }
@@ -54,7 +75,11 @@ namespace Microsoft.CodeAnalysis
 
 namespace System.Runtime.CompilerServices
 {
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     // To allow this dll to use extension methods even though we are targeting CLR v2, re-define ExtensionAttribute
     internal class ExtensionAttribute : Attribute
     {
@@ -63,7 +88,14 @@ namespace System.Runtime.CompilerServices
     /// <summary>
     /// This satisfies a cref on <see cref="Microsoft.CodeAnalysis.ExpressionEvaluator.DynamicFlagsCustomTypeInfo.CopyTo"/>.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue
+    )]
     internal class DynamicAttribute : Attribute
     {
     }
@@ -96,8 +128,7 @@ namespace System.Runtime.Versioning
         public string FrameworkName { get; }
         public string FrameworkDisplayName { get; set; }
 
-        public TargetFrameworkAttribute(string frameworkName)
-            => FrameworkName = frameworkName;
+        public TargetFrameworkAttribute(string frameworkName) => FrameworkName = frameworkName;
     }
 }
 

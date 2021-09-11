@@ -11,16 +11,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that adds service properties to entity types.
     /// </summary>
-    public class ServicePropertyDiscoveryConvention :
-        IEntityTypeAddedConvention,
-        IEntityTypeBaseTypeChangedConvention
+    public class ServicePropertyDiscoveryConvention
+        : IEntityTypeAddedConvention,
+          IEntityTypeBaseTypeChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="ServicePropertyDiscoveryConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public ServicePropertyDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
-        {
+        public ServicePropertyDiscoveryConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) {
             Dependencies = dependencies;
         }
 
@@ -36,8 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
-            => Process(entityTypeBuilder);
+            IConventionContext<IConventionEntityTypeBuilder> context
+        ) => Process(entityTypeBuilder);
 
         /// <summary>
         ///     Called after the base type of an entity type changes.
@@ -50,8 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
-            IConventionContext<IConventionEntityType> context)
-        {
+            IConventionContext<IConventionEntityType> context
+        ) {
             if (entityTypeBuilder.Metadata.BaseType == newBaseType)
             {
                 Process(entityTypeBuilder);
@@ -66,24 +67,35 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             foreach (var propertyInfo in candidates)
             {
                 var name = propertyInfo.GetSimpleMemberName();
-                if (entityTypeBuilder.IsIgnored(name)
+                if (
+                    entityTypeBuilder.IsIgnored(name)
                     || entityType.FindProperty(propertyInfo) != null
                     || entityType.FindNavigation(propertyInfo) != null
                     || !propertyInfo.IsCandidateProperty(publicOnly: false)
-                    || (propertyInfo.IsCandidateProperty()
-                        && Dependencies.TypeMappingSource.FindMapping(propertyInfo) != null))
-                {
+                    || (
+                        propertyInfo.IsCandidateProperty()
+                        && Dependencies.TypeMappingSource.FindMapping(propertyInfo) != null
+                    )
+                ) {
                     continue;
                 }
 
-                var factory = Dependencies.ParameterBindingFactories.FindFactory(propertyInfo.PropertyType, name);
+                var factory = Dependencies.ParameterBindingFactories.FindFactory(
+                    propertyInfo.PropertyType,
+                    name
+                );
                 if (factory == null)
                 {
                     continue;
                 }
 
                 entityTypeBuilder.ServiceProperty(propertyInfo)?.HasParameterBinding(
-                    (ServiceParameterBinding)factory.Bind(entityType, propertyInfo.PropertyType, name));
+                    (ServiceParameterBinding)factory.Bind(
+                        entityType,
+                        propertyInfo.PropertyType,
+                        name
+                    )
+                );
             }
         }
     }

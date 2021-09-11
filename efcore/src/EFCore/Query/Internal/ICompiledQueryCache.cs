@@ -29,6 +29,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         Func<QueryContext, TResult> GetOrAddQuery<TResult>(
             object cacheKey,
-            Func<Func<QueryContext, TResult>> compiler);
+            Func<Func<QueryContext, TResult>> compiler
+        );
     }
 }

@@ -13,35 +13,37 @@ namespace Microsoft.EntityFrameworkCore.Update
 {
     public class SqliteUpdateSqlGeneratorTest : UpdateSqlGeneratorTestBase
     {
-        protected override IUpdateSqlGenerator CreateSqlGenerator()
-            => new SqliteUpdateSqlGenerator(
+        protected override IUpdateSqlGenerator CreateSqlGenerator() =>
+            new SqliteUpdateSqlGenerator(
                 new UpdateSqlGeneratorDependencies(
-                    new SqliteSqlGenerationHelper(
-                        new RelationalSqlGenerationHelperDependencies()),
-                    TestServiceFactory.Instance.Create<SqliteTypeMappingSource>()));
+                    new SqliteSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies()),
+                    TestServiceFactory.Instance.Create<SqliteTypeMappingSource>()
+                )
+            );
 
-        protected override TestHelpers TestHelpers
-            => SqliteTestHelpers.Instance;
+        protected override TestHelpers TestHelpers => SqliteTestHelpers.Instance;
 
-        protected override string RowsAffected
-            => "changes()";
+        protected override string RowsAffected => "changes()";
 
-        protected override string Schema
-            => null;
+        protected override string Schema => null;
 
-        protected override string GetIdentityWhereCondition(string columnName)
-            => OpenDelimiter + "rowid" + CloseDelimiter + " = last_insert_rowid()";
+        protected override string GetIdentityWhereCondition(string columnName) =>
+            OpenDelimiter + "rowid" + CloseDelimiter + " = last_insert_rowid()";
 
         public override void GenerateNextSequenceValueOperation_correctly_handles_schemas()
         {
-            var ex = Assert.Throws<NotSupportedException>(() => base.GenerateNextSequenceValueOperation_correctly_handles_schemas());
+            var ex = Assert.Throws<NotSupportedException>(
+                () => base.GenerateNextSequenceValueOperation_correctly_handles_schemas()
+            );
             Assert.Equal(SqliteStrings.SequencesNotSupported, ex.Message);
         }
 
         public override void GenerateNextSequenceValueOperation_returns_statement_with_sanitized_sequence()
         {
             var ex = Assert.Throws<NotSupportedException>(
-                () => base.GenerateNextSequenceValueOperation_returns_statement_with_sanitized_sequence());
+                () =>
+                    base.GenerateNextSequenceValueOperation_returns_statement_with_sanitized_sequence()
+            );
             Assert.Equal(SqliteStrings.SequencesNotSupported, ex.Message);
         }
     }

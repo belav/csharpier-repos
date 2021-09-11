@@ -34,8 +34,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CompiledQueryCache(IMemoryCache memoryCache)
-            => _memoryCache = memoryCache;
+        public CompiledQueryCache(IMemoryCache memoryCache) => _memoryCache = memoryCache;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,8 +44,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public virtual Func<QueryContext, TResult> GetOrAddQuery<TResult>(
             object cacheKey,
-            Func<Func<QueryContext, TResult>> compiler)
-        {
+            Func<Func<QueryContext, TResult>> compiler
+        ) {
             // ReSharper disable once InconsistentlySynchronizedField
             if (_memoryCache.TryGetValue(cacheKey, out Func<QueryContext, TResult> compiledQuery))
             {
@@ -72,12 +71,17 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         EntityFrameworkEventSource.Log.CompiledQueryCacheMiss();
 
                         compiledQuery = compiler();
-                        _memoryCache.Set(cacheKey, compiledQuery, new MemoryCacheEntryOptions { Size = 10 });
+                        _memoryCache.Set(
+                            cacheKey,
+                            compiledQuery,
+                            new MemoryCacheEntryOptions { Size = 10 }
+                        );
                     }
 
                     return compiledQuery;
                 }
             }
+
             finally
             {
                 _locks.TryRemove(cacheKey, out _);

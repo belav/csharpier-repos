@@ -39,13 +39,19 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         // Flattened so that we can be sure nothing funky is going on in the base type
 
-        private static void AssertHasDeclaredAttributesUnderConvention<TSource>(RegistrationBuilder convention)
-        {
-            AssertHasAttributesUnderConvention<TSource>(convention, typeof(TSource).GetCustomAttributes(true));
+        private static void AssertHasDeclaredAttributesUnderConvention<TSource>(
+            RegistrationBuilder convention
+        ) {
+            AssertHasAttributesUnderConvention<TSource>(
+                convention,
+                typeof(TSource).GetCustomAttributes(true)
+            );
         }
 
-        private static void AssertHasAttributesUnderConvention<TSource>(RegistrationBuilder convention, IEnumerable<object> expected)
-        {
+        private static void AssertHasAttributesUnderConvention<TSource>(
+            RegistrationBuilder convention,
+            IEnumerable<object> expected
+        ) {
             TypeInfo mapped = convention.MapType(typeof(TSource).GetTypeInfo());
             var applied = mapped.GetCustomAttributes(true);
 
@@ -58,14 +64,23 @@ namespace System.ComponentModel.Composition.Registration.Tests
             return (PropertyInfo)((MemberExpression)property.Body).Member;
         }
 
-        private static void AssertHasDeclaredAttributesUnderConvention<TSource>(Expression<Func<TSource, object>> property, RegistrationBuilder convention)
-        {
+        private static void AssertHasDeclaredAttributesUnderConvention<TSource>(
+            Expression<Func<TSource, object>> property,
+            RegistrationBuilder convention
+        ) {
             PropertyInfo pi = GetPropertyFromAccessor(property);
-            AssertHasAttributesUnderConvention<TSource>(property, convention, pi.GetCustomAttributes(true));
+            AssertHasAttributesUnderConvention<TSource>(
+                property,
+                convention,
+                pi.GetCustomAttributes(true)
+            );
         }
 
-        private static void AssertHasAttributesUnderConvention<TSource>(Expression<Func<TSource, object>> property, RegistrationBuilder convention, IEnumerable<object> expected)
-        {
+        private static void AssertHasAttributesUnderConvention<TSource>(
+            Expression<Func<TSource, object>> property,
+            RegistrationBuilder convention,
+            IEnumerable<object> expected
+        ) {
             TypeInfo mapped = convention.MapType(typeof(TSource).GetTypeInfo());
             PropertyInfo pi = GetPropertyFromAccessor(property);
             var applied = mapped.GetProperty(pi.Name).GetCustomAttributes(true);
@@ -74,11 +89,23 @@ namespace System.ComponentModel.Composition.Registration.Tests
             AssertEquivalentAttributes(expected, applied);
         }
 
-        private static void AssertEquivalentAttributes(IEnumerable<object> expected, IEnumerable<object> applied)
-        {
+        private static void AssertEquivalentAttributes(
+            IEnumerable<object> expected,
+            IEnumerable<object> applied
+        ) {
             // Ignore nullable attributes added by the compiler
-            expected = expected.Where(e => e == null || e.GetType().FullName != "System.Runtime.CompilerServices.NullableContextAttribute");
-            applied = applied.Where(e => e == null || e.GetType().FullName != "System.Runtime.CompilerServices.NullableContextAttribute");
+            expected = expected.Where(
+                e =>
+                    e == null
+                    || e.GetType().FullName
+                        != "System.Runtime.CompilerServices.NullableContextAttribute"
+            );
+            applied = applied.Where(
+                e =>
+                    e == null
+                    || e.GetType().FullName
+                        != "System.Runtime.CompilerServices.NullableContextAttribute"
+            );
 
             var expectedRemaining = expected.ToList();
             var unexpected = new List<object>();
@@ -116,13 +143,17 @@ namespace System.ComponentModel.Composition.Registration.Tests
             var convention = new RegistrationBuilder();
 
             convention.ForType<TPart>()
-                 .Export(eb => eb.AsContractType<IContractA>()
-                     .AddMetadata(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN));
+                .Export(
+                    eb =>
+                        eb.AsContractType<IContractA>()
+                            .AddMetadata(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
+                );
 
             return convention;
         }
 
-        private static object[] ExportInterfaceConventionAttributes = new object[] {
+        private static object[] ExportInterfaceConventionAttributes = new object[]
+        {
             new ExportAttribute(typeof(IContractA)),
             new ExportMetadataAttribute(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
         };
@@ -132,9 +163,13 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportInterfaceConvention_NoOverrides_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureExportInterfaceConvention<NoClassDeclarationOverrides>();
+            RegistrationBuilder convention =
+                ConfigureExportInterfaceConvention<NoClassDeclarationOverrides>();
 
-            AssertHasAttributesUnderConvention<NoClassDeclarationOverrides>(convention, ExportInterfaceConventionAttributes);
+            AssertHasAttributesUnderConvention<NoClassDeclarationOverrides>(
+                convention,
+                ExportInterfaceConventionAttributes
+            );
         }
 
         [Export(typeof(IContractB))]
@@ -143,9 +178,12 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportInterfaceConvention_ExportAttribute_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureExportInterfaceConvention<ExportContractBClassDeclarationOverride>();
+            RegistrationBuilder convention =
+                ConfigureExportInterfaceConvention<ExportContractBClassDeclarationOverride>();
 
-            AssertHasDeclaredAttributesUnderConvention<ExportContractBClassDeclarationOverride>(convention);
+            AssertHasDeclaredAttributesUnderConvention<ExportContractBClassDeclarationOverride>(
+                convention
+            );
         }
 
         [ExportMetadata(MetadataKeys.MetadataKeyQ, MetadataValues.MetadataValueO)]
@@ -154,7 +192,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportInterfaceConvention_JustMetadataOverride_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureExportInterfaceConvention<ExportJustMetadataOverride>();
+            RegistrationBuilder convention =
+                ConfigureExportInterfaceConvention<ExportJustMetadataOverride>();
 
             AssertHasDeclaredAttributesUnderConvention<ExportJustMetadataOverride>(convention);
         }
@@ -165,23 +204,34 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportInterfaceConvention_InheritedExportAttribute_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureExportInterfaceConvention<InheritedExportContractAClassDeclarationOverride>();
+            RegistrationBuilder convention =
+                ConfigureExportInterfaceConvention<InheritedExportContractAClassDeclarationOverride>();
 
-            AssertHasDeclaredAttributesUnderConvention<InheritedExportContractAClassDeclarationOverride>(convention);
+            AssertHasDeclaredAttributesUnderConvention<InheritedExportContractAClassDeclarationOverride>(
+                convention
+            );
         }
 
         [InheritedExport(typeof(IContractA))]
         public class BaseWithInheritedExport { }
 
-        public class InheritedExportOnBaseClassDeclaration : BaseWithInheritedExport, IContractA, IContractB { }
+        public class InheritedExportOnBaseClassDeclaration
+            : BaseWithInheritedExport,
+              IContractA,
+              IContractB { }
 
         [Fact]
         public void ExportInterfaceConvention_InheritedExportOnBaseClassDeclaration_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureExportInterfaceConvention<InheritedExportOnBaseClassDeclaration>();
+            RegistrationBuilder convention =
+                ConfigureExportInterfaceConvention<InheritedExportOnBaseClassDeclaration>();
 
-            AssertHasAttributesUnderConvention<InheritedExportOnBaseClassDeclaration>(convention,
-                ExportInterfaceConventionAttributes.Concat(new object[] { new InheritedExportAttribute(typeof(IContractA)) }));
+            AssertHasAttributesUnderConvention<InheritedExportOnBaseClassDeclaration>(
+                convention,
+                ExportInterfaceConventionAttributes.Concat(
+                    new object[] { new InheritedExportAttribute(typeof(IContractA)) }
+                )
+            );
         }
 
         public class CustomExportAttribute : ExportAttribute { }
@@ -192,13 +242,22 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportInterfaceConvention_CustomExportAttribute_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureExportInterfaceConvention<CustomExportClassDeclarationOverride>();
+            RegistrationBuilder convention =
+                ConfigureExportInterfaceConvention<CustomExportClassDeclarationOverride>();
 
-            AssertHasDeclaredAttributesUnderConvention<CustomExportClassDeclarationOverride>(convention);
+            AssertHasDeclaredAttributesUnderConvention<CustomExportClassDeclarationOverride>(
+                convention
+            );
         }
 
         [MetadataAttribute]
-        public class CustomMetadataAttribute : Attribute { public string Z { get { return "Z"; } } }
+        public class CustomMetadataAttribute : Attribute
+        {
+            public string Z
+            {
+                get { return "Z"; }
+            }
+        }
 
         [CustomMetadata]
         public class CustomMetadataClassDeclarationOverride : IContractA, IContractB { }
@@ -206,27 +265,36 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportInterfaceConvention_CustomMetadataAttribute_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureExportInterfaceConvention<CustomMetadataClassDeclarationOverride>();
+            RegistrationBuilder convention =
+                ConfigureExportInterfaceConvention<CustomMetadataClassDeclarationOverride>();
 
-            AssertHasDeclaredAttributesUnderConvention<CustomMetadataClassDeclarationOverride>(convention);
+            AssertHasDeclaredAttributesUnderConvention<CustomMetadataClassDeclarationOverride>(
+                convention
+            );
         }
 
-        [PartCreationPolicy(CreationPolicy.NonShared),
-         PartMetadata(MetadataKeys.MetadataKeyQ, MetadataValues.MetadataValueO),
-         PartNotDiscoverable]
+        [
+            PartCreationPolicy(CreationPolicy.NonShared),
+            PartMetadata(MetadataKeys.MetadataKeyQ, MetadataValues.MetadataValueO),
+            PartNotDiscoverable
+        ]
         public class NonExportClassDeclarationAttributes : IContractA, IContractB { }
 
         [Fact]
         public void ExportInterfaceConvention_NonExportClassDeclarationAttributes_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureExportInterfaceConvention<NonExportClassDeclarationAttributes>();
+            RegistrationBuilder convention =
+                ConfigureExportInterfaceConvention<NonExportClassDeclarationAttributes>();
 
-            var unionOfConventionAndDeclared = typeof(NonExportClassDeclarationAttributes)
-                .GetCustomAttributes(true)
-                .Concat(ExportInterfaceConventionAttributes)
-                .ToArray();
+            var unionOfConventionAndDeclared =
+                typeof(NonExportClassDeclarationAttributes).GetCustomAttributes(true)
+                    .Concat(ExportInterfaceConventionAttributes)
+                    .ToArray();
 
-            AssertHasAttributesUnderConvention<NonExportClassDeclarationAttributes>(convention, unionOfConventionAndDeclared);
+            AssertHasAttributesUnderConvention<NonExportClassDeclarationAttributes>(
+                convention,
+                unionOfConventionAndDeclared
+            );
         }
 
         public class ExportAtProperty
@@ -239,23 +307,32 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ExportInterfacesConvention_UnrelatedExportOnProperty_ConventionApplied()
         {
             RegistrationBuilder convention = ConfigureExportInterfaceConvention<ExportAtProperty>();
-            AssertHasAttributesUnderConvention<ExportAtProperty>(convention, ExportInterfaceConventionAttributes);
+            AssertHasAttributesUnderConvention<ExportAtProperty>(
+                convention,
+                ExportInterfaceConventionAttributes
+            );
         }
 
         // This set of tests is for exports at the property level
 
-        private static RegistrationBuilder ConfigureExportPropertyConvention<TPart>(Expression<Func<TPart, object>> property)
-        {
+        private static RegistrationBuilder ConfigureExportPropertyConvention<TPart>(
+            Expression<Func<TPart, object>> property
+        ) {
             var convention = new RegistrationBuilder();
 
             convention.ForType<TPart>()
-                 .ExportProperty(property, eb => eb.AsContractType<IContractA>()
-                     .AddMetadata(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN));
+                .ExportProperty(
+                    property,
+                    eb =>
+                        eb.AsContractType<IContractA>()
+                            .AddMetadata(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
+                );
 
             return convention;
         }
 
-        private static object[] ExportPropertyConventionAttributes = new object[] {
+        private static object[] ExportPropertyConventionAttributes = new object[]
+        {
             new ExportAttribute(typeof(IContractA)),
             new ExportMetadataAttribute(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
         };
@@ -268,9 +345,14 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportPropertyConvention_NoOverrides_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureExportPropertyConvention<NoPropertyDeclarationOverrides>(t => t.AB);
+            RegistrationBuilder convention =
+                ConfigureExportPropertyConvention<NoPropertyDeclarationOverrides>(t => t.AB);
 
-            AssertHasAttributesUnderConvention<NoPropertyDeclarationOverrides>(t => t.AB, convention, ExportPropertyConventionAttributes);
+            AssertHasAttributesUnderConvention<NoPropertyDeclarationOverrides>(
+                t => t.AB,
+                convention,
+                ExportPropertyConventionAttributes
+            );
         }
 
         public class ExportContractBPropertyDeclarationOverride
@@ -282,9 +364,15 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportPropertyConvention_ExportAttribute_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureExportPropertyConvention<ExportContractBPropertyDeclarationOverride>(t => t.AB);
+            RegistrationBuilder convention =
+                ConfigureExportPropertyConvention<ExportContractBPropertyDeclarationOverride>(
+                    t => t.AB
+                );
 
-            AssertHasDeclaredAttributesUnderConvention<ExportContractBPropertyDeclarationOverride>(t => t.AB, convention);
+            AssertHasDeclaredAttributesUnderConvention<ExportContractBPropertyDeclarationOverride>(
+                t => t.AB,
+                convention
+            );
         }
 
         public class ExportJustMetadataPropertyDeclarationOverride
@@ -296,9 +384,15 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportPropertyConvention_JustMetadataOverride_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureExportPropertyConvention<ExportJustMetadataPropertyDeclarationOverride>(t => t.AB);
+            RegistrationBuilder convention =
+                ConfigureExportPropertyConvention<ExportJustMetadataPropertyDeclarationOverride>(
+                    t => t.AB
+                );
 
-            AssertHasDeclaredAttributesUnderConvention<ExportJustMetadataPropertyDeclarationOverride>(t => t.AB, convention);
+            AssertHasDeclaredAttributesUnderConvention<ExportJustMetadataPropertyDeclarationOverride>(
+                t => t.AB,
+                convention
+            );
         }
 
         public class CustomExportPropertyDeclarationOverride
@@ -310,9 +404,15 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportPropertyConvention_CustomExportAttribute_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureExportPropertyConvention<CustomExportPropertyDeclarationOverride>(t => t.AB);
+            RegistrationBuilder convention =
+                ConfigureExportPropertyConvention<CustomExportPropertyDeclarationOverride>(
+                    t => t.AB
+                );
 
-            AssertHasDeclaredAttributesUnderConvention<CustomExportPropertyDeclarationOverride>(t => t.AB, convention);
+            AssertHasDeclaredAttributesUnderConvention<CustomExportPropertyDeclarationOverride>(
+                t => t.AB,
+                convention
+            );
         }
 
         public class CustomMetadataPropertyDeclarationOverride
@@ -324,9 +424,15 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportPropertyConvention_CustomMetadataAttribute_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureExportPropertyConvention<CustomMetadataPropertyDeclarationOverride>(t => t.AB);
+            RegistrationBuilder convention =
+                ConfigureExportPropertyConvention<CustomMetadataPropertyDeclarationOverride>(
+                    t => t.AB
+                );
 
-            AssertHasDeclaredAttributesUnderConvention<CustomMetadataPropertyDeclarationOverride>(t => t.AB, convention);
+            AssertHasDeclaredAttributesUnderConvention<CustomMetadataPropertyDeclarationOverride>(
+                t => t.AB,
+                convention
+            );
         }
 
         public class NonExportPropertyDeclarationAttributes
@@ -338,36 +444,58 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ExportPropertyConvention_NonExportPropertyDeclarationAttributes_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureExportPropertyConvention<NonExportPropertyDeclarationAttributes>(t => t.AB);
+            RegistrationBuilder convention =
+                ConfigureExportPropertyConvention<NonExportPropertyDeclarationAttributes>(
+                    t => t.AB
+                );
 
-            var unionOfConventionAndDeclared = typeof(NonExportPropertyDeclarationAttributes)
-                .GetProperty("AB")
-                .GetCustomAttributes(true)
-                .Concat(ExportPropertyConventionAttributes)
-                .ToArray();
+            var unionOfConventionAndDeclared =
+                typeof(NonExportPropertyDeclarationAttributes).GetProperty("AB")
+                    .GetCustomAttributes(true)
+                    .Concat(ExportPropertyConventionAttributes)
+                    .ToArray();
 
-            AssertHasAttributesUnderConvention<NonExportPropertyDeclarationAttributes>(t => t.AB, convention, unionOfConventionAndDeclared);
+            AssertHasAttributesUnderConvention<NonExportPropertyDeclarationAttributes>(
+                t => t.AB,
+                convention,
+                unionOfConventionAndDeclared
+            );
         }
 
         // This set of tests is for imports at the property level
-        private static RegistrationBuilder ConfigureImportPropertyConvention<TPart>(Expression<Func<TPart, object>> property)
-        {
+        private static RegistrationBuilder ConfigureImportPropertyConvention<TPart>(
+            Expression<Func<TPart, object>> property
+        ) {
             var convention = new RegistrationBuilder();
 
             convention.ForType<TPart>()
-                 .ImportProperty(property, ib => ib.AsMany(false).AsContractName(ContractNames.ContractX).AsContractType<AB>());
+                .ImportProperty(
+                    property,
+                    ib =>
+                        ib.AsMany(false)
+                            .AsContractName(ContractNames.ContractX)
+                            .AsContractType<AB>()
+                );
 
             return convention;
         }
 
-        private static object[] ImportPropertyConventionAttributes = new object[] { new ImportAttribute(ContractNames.ContractX, typeof(AB)) };
+        private static object[] ImportPropertyConventionAttributes = new object[]
+        {
+            new ImportAttribute(ContractNames.ContractX, typeof(AB))
+        };
 
         [Fact]
         public void ImportPropertyConvention_NoOverrides_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureImportPropertyConvention<NoPropertyDeclarationOverrides>(t => t.AB);
+            RegistrationBuilder convention =
+                ConfigureImportPropertyConvention<NoPropertyDeclarationOverrides>(t => t.AB);
 
-            AssertHasAttributesUnderConvention<NoPropertyDeclarationOverrides>(t => t.AB, convention, ImportPropertyConventionAttributes);
+            AssertHasAttributesUnderConvention<NoPropertyDeclarationOverrides>(
+                t => t.AB,
+                convention,
+                ImportPropertyConventionAttributes
+            );
         }
 
         public class ImportContractYPropertyDeclarationOverride
@@ -379,9 +507,15 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ImportPropertyConvention_ImportAttribute_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureImportPropertyConvention<ImportContractYPropertyDeclarationOverride>(t => t.AB);
+            RegistrationBuilder convention =
+                ConfigureImportPropertyConvention<ImportContractYPropertyDeclarationOverride>(
+                    t => t.AB
+                );
 
-            AssertHasDeclaredAttributesUnderConvention<ImportContractYPropertyDeclarationOverride>(t => t.AB, convention);
+            AssertHasDeclaredAttributesUnderConvention<ImportContractYPropertyDeclarationOverride>(
+                t => t.AB,
+                convention
+            );
         }
 
         public class ImportManyPropertyDeclarationOverride
@@ -393,9 +527,13 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ImportPropertyConvention_ImportManyAttribute_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureImportPropertyConvention<ImportManyPropertyDeclarationOverride>(t => t.AB);
+            RegistrationBuilder convention =
+                ConfigureImportPropertyConvention<ImportManyPropertyDeclarationOverride>(t => t.AB);
 
-            AssertHasDeclaredAttributesUnderConvention<ImportManyPropertyDeclarationOverride>(t => t.AB, convention);
+            AssertHasDeclaredAttributesUnderConvention<ImportManyPropertyDeclarationOverride>(
+                t => t.AB,
+                convention
+            );
         }
 
         public class NonImportPropertyDeclarationAttributes
@@ -407,15 +545,22 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ImportPropertyConvention_NonImportPropertyDeclarationAttributes_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureImportPropertyConvention<NonImportPropertyDeclarationAttributes>(t => t.AB);
+            RegistrationBuilder convention =
+                ConfigureImportPropertyConvention<NonImportPropertyDeclarationAttributes>(
+                    t => t.AB
+                );
 
-            var unionOfConventionAndDeclared = typeof(NonImportPropertyDeclarationAttributes)
-                .GetProperty("AB")
-                .GetCustomAttributes(true)
-                .Concat(ImportPropertyConventionAttributes)
-                .ToArray();
+            var unionOfConventionAndDeclared =
+                typeof(NonImportPropertyDeclarationAttributes).GetProperty("AB")
+                    .GetCustomAttributes(true)
+                    .Concat(ImportPropertyConventionAttributes)
+                    .ToArray();
 
-            AssertHasAttributesUnderConvention<NonImportPropertyDeclarationAttributes>(t => t.AB, convention, unionOfConventionAndDeclared);
+            AssertHasAttributesUnderConvention<NonImportPropertyDeclarationAttributes>(
+                t => t.AB,
+                convention,
+                unionOfConventionAndDeclared
+            );
         }
 
         // The following test is for importing constructors
@@ -433,15 +578,29 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var rb = new RegistrationBuilder();
             rb.ForType<TwoConstructorsWithOverride>()
-                .SelectConstructor(pi => new TwoConstructorsWithOverride(pi.Import<IContractA>(), pi.Import<IContractB>()));
+                .SelectConstructor(
+                    pi =>
+                        new TwoConstructorsWithOverride(
+                            pi.Import<IContractA>(),
+                            pi.Import<IContractB>()
+                        )
+                );
 
             TypeInfo mapped = rb.MapType(typeof(TwoConstructorsWithOverride).GetTypeInfo());
 
-            ConstructorInfo conventional = mapped.GetConstructor(new[] { rb.MapType(typeof(IContractA).GetTypeInfo()), rb.MapType(typeof(IContractB).GetTypeInfo()) });
+            ConstructorInfo conventional = mapped.GetConstructor(
+                new[]
+                {
+                    rb.MapType(typeof(IContractA).GetTypeInfo()),
+                    rb.MapType(typeof(IContractB).GetTypeInfo())
+                }
+            );
             var conventionalAttrs = conventional.GetCustomAttributes(true);
             Assert.False(conventionalAttrs.Any());
 
-            ConstructorInfo overridden = mapped.GetConstructor(new[] { rb.MapType(typeof(IContractA).GetTypeInfo()) });
+            ConstructorInfo overridden = mapped.GetConstructor(
+                new[] { rb.MapType(typeof(IContractA).GetTypeInfo()) }
+            );
             var overriddenAttr = overridden.GetCustomAttributes(true).Single();
             Assert.Equal(new ImportingConstructorAttribute(), overriddenAttr);
         }
@@ -453,12 +612,21 @@ namespace System.ComponentModel.Composition.Registration.Tests
             var convention = new RegistrationBuilder();
 
             convention.ForType<TPart>()
-                 .SelectConstructor(cis => cis.Single(), (ci, ib) => ib.AsMany(false).AsContractName(ContractNames.ContractX).AsContractType<IContractA>());
+                .SelectConstructor(
+                    cis => cis.Single(),
+                    (ci, ib) =>
+                        ib.AsMany(false)
+                            .AsContractName(ContractNames.ContractX)
+                            .AsContractType<IContractA>()
+                );
 
             return convention;
         }
 
-        private static object[] ImportParameterConventionAttributes = new object[] { new ImportAttribute(ContractNames.ContractX, typeof(IContractA)) };
+        private static object[] ImportParameterConventionAttributes = new object[]
+        {
+            new ImportAttribute(ContractNames.ContractX, typeof(IContractA))
+        };
 
         private class NoConstructorParameterOverrides
         {
@@ -468,8 +636,11 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ConstructorParameterConvention_NoOverride_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureImportConstructorParameterConvention<NoConstructorParameterOverrides>();
-            TypeInfo mapped = convention.MapType(typeof(NoConstructorParameterOverrides).GetTypeInfo());
+            RegistrationBuilder convention =
+                ConfigureImportConstructorParameterConvention<NoConstructorParameterOverrides>();
+            TypeInfo mapped = convention.MapType(
+                typeof(NoConstructorParameterOverrides).GetTypeInfo()
+            );
             ParameterInfo pi = mapped.GetConstructors().Single().GetParameters().Single();
             var actual = pi.GetCustomAttributes(true);
             AssertEquivalentAttributes(ImportParameterConventionAttributes, actual);
@@ -477,17 +648,25 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private class ConstructorParameterImportContractX
         {
-            public ConstructorParameterImportContractX([Import(ContractNames.ContractX)] IContractA a) { }
+            public ConstructorParameterImportContractX(
+                [Import(ContractNames.ContractX)] IContractA a
+            ) { }
         }
 
         [Fact]
         public void ConstructorParameterConvention_ImportOnDeclaration_ConventionIgnored()
         {
-            RegistrationBuilder convention = ConfigureImportConstructorParameterConvention<ConstructorParameterImportContractX>();
-            TypeInfo mapped = convention.MapType(typeof(ConstructorParameterImportContractX).GetTypeInfo());
+            RegistrationBuilder convention =
+                ConfigureImportConstructorParameterConvention<ConstructorParameterImportContractX>();
+            TypeInfo mapped = convention.MapType(
+                typeof(ConstructorParameterImportContractX).GetTypeInfo()
+            );
             ParameterInfo pi = mapped.GetConstructors().Single().GetParameters().Single();
             var actual = pi.GetCustomAttributes(true);
-            AssertEquivalentAttributes(new object[] { new ImportAttribute(ContractNames.ContractX) }, actual);
+            AssertEquivalentAttributes(
+                new object[] { new ImportAttribute(ContractNames.ContractX) },
+                actual
+            );
         }
 
         // Tests for creation policy
@@ -499,15 +678,22 @@ namespace System.ComponentModel.Composition.Registration.Tests
             return convention;
         }
 
-        private static readonly IEnumerable<object> CreationPolicyConventionAttributes = new[] { new PartCreationPolicyAttribute(CreationPolicy.NonShared) };
+        private static readonly IEnumerable<object> CreationPolicyConventionAttributes = new[]
+        {
+            new PartCreationPolicyAttribute(CreationPolicy.NonShared)
+        };
 
         private class NoCreationPolicyDeclared { }
 
         [Fact]
         public void CreationPolicyConvention_NoCreationPolicyDeclared_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureCreationPolicyConvention<NoCreationPolicyDeclared>();
-            AssertHasAttributesUnderConvention<NoCreationPolicyDeclared>(convention, CreationPolicyConventionAttributes);
+            RegistrationBuilder convention =
+                ConfigureCreationPolicyConvention<NoCreationPolicyDeclared>();
+            AssertHasAttributesUnderConvention<NoCreationPolicyDeclared>(
+                convention,
+                CreationPolicyConventionAttributes
+            );
         }
 
         [PartCreationPolicy(CreationPolicy.Shared)]
@@ -526,9 +712,14 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void CreationPolicyConvention_UnrelatedAttributesDeclared_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureCreationPolicyConvention<UnrelatedToCreationPolicy>();
-            AssertHasAttributesUnderConvention<UnrelatedToCreationPolicy>(convention,
-                CreationPolicyConventionAttributes.Concat(typeof(UnrelatedToCreationPolicy).GetCustomAttributes(true)));
+            RegistrationBuilder convention =
+                ConfigureCreationPolicyConvention<UnrelatedToCreationPolicy>();
+            AssertHasAttributesUnderConvention<UnrelatedToCreationPolicy>(
+                convention,
+                CreationPolicyConventionAttributes.Concat(
+                    typeof(UnrelatedToCreationPolicy).GetCustomAttributes(true)
+                )
+            );
         }
 
         // Tests for part discoverability
@@ -541,10 +732,10 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var convention = new RegistrationBuilder();
             convention.ForType<NotDiscoverablePart>().Export();
-            AssertHasAttributesUnderConvention<NotDiscoverablePart>(convention, new object[] {
-                new PartNotDiscoverableAttribute(),
-                new ExportAttribute()
-            });
+            AssertHasAttributesUnderConvention<NotDiscoverablePart>(
+                convention,
+                new object[] { new PartNotDiscoverableAttribute(), new ExportAttribute() }
+            );
         }
 
         // Tests for part metadata
@@ -552,7 +743,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         private static RegistrationBuilder ConfigurePartMetadataConvention<T>()
         {
             var convention = new RegistrationBuilder();
-            convention.ForType<T>().AddMetadata(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN);
+            convention.ForType<T>()
+                .AddMetadata(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN);
             return convention;
         }
 
@@ -566,8 +758,12 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void PartMetadataConvention_NoDeclaredMetadata_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigurePartMetadataConvention<NoDeclaredPartMetadata>();
-            AssertHasAttributesUnderConvention<NoDeclaredPartMetadata>(convention, PartMetadataConventionAttributes);
+            RegistrationBuilder convention =
+                ConfigurePartMetadataConvention<NoDeclaredPartMetadata>();
+            AssertHasAttributesUnderConvention<NoDeclaredPartMetadata>(
+                convention,
+                PartMetadataConventionAttributes
+            );
         }
 
         [PartMetadata(MetadataKeys.MetadataKeyQ, MetadataValues.MetadataValueO)]
@@ -586,9 +782,14 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void PartMetadataConvention_UnrelatedDeclaredAttributes_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigurePartMetadataConvention<PartMetadataUnrelatedAttributes>();
-            AssertHasAttributesUnderConvention<PartMetadataUnrelatedAttributes>(convention,
-                PartMetadataConventionAttributes.Concat(typeof(PartMetadataUnrelatedAttributes).GetCustomAttributes(true)));
+            RegistrationBuilder convention =
+                ConfigurePartMetadataConvention<PartMetadataUnrelatedAttributes>();
+            AssertHasAttributesUnderConvention<PartMetadataUnrelatedAttributes>(
+                convention,
+                PartMetadataConventionAttributes.Concat(
+                    typeof(PartMetadataUnrelatedAttributes).GetCustomAttributes(true)
+                )
+            );
         }
 
         private interface IFoo { }
@@ -611,17 +812,23 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void ConfigureExportInterfaces_ExportInterfaces_Overridden()
         {
-            RegistrationBuilder convention = ConfigureExportInterfacesConvention<ExportInterfacesExportOverride>();
-            AssertHasAttributesUnderConvention<ExportInterfacesExportOverride>(convention,
-                typeof(ExportInterfacesExportOverride).GetCustomAttributes(true));
+            RegistrationBuilder convention =
+                ConfigureExportInterfacesConvention<ExportInterfacesExportOverride>();
+            AssertHasAttributesUnderConvention<ExportInterfacesExportOverride>(
+                convention,
+                typeof(ExportInterfacesExportOverride).GetCustomAttributes(true)
+            );
         }
 
         [Fact]
         public void ConfigureExportInterfaces_ExportInterfaces_ConventionApplied()
         {
-            RegistrationBuilder convention = ConfigureExportInterfacesConvention<ExportInterfacesExportConventionApplied>();
-            AssertHasAttributesUnderConvention<ExportInterfacesExportConventionApplied>(convention,
-                typeof(ExportInterfacesExportConvention).GetCustomAttributes(true));
+            RegistrationBuilder convention =
+                ConfigureExportInterfacesConvention<ExportInterfacesExportConventionApplied>();
+            AssertHasAttributesUnderConvention<ExportInterfacesExportConventionApplied>(
+                convention,
+                typeof(ExportInterfacesExportConvention).GetCustomAttributes(true)
+            );
         }
 
         // Tests for chained RCs
@@ -632,14 +839,20 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ConventionsInInnerAndOuterRCs_InnerRCTakesPrecendence()
         {
             var innerConvention = new RegistrationBuilder();
-            innerConvention.ForType<ConventionTarget>().Export(eb => eb.AsContractName(ContractNames.ContractX));
+            innerConvention.ForType<ConventionTarget>()
+                .Export(eb => eb.AsContractName(ContractNames.ContractX));
             TypeInfo innerType = innerConvention.MapType(typeof(ConventionTarget).GetTypeInfo());
 
             var outerConvention = new RegistrationBuilder();
-            outerConvention.ForType<ConventionTarget>().Export(eb => eb.AsContractName(ContractNames.ContractY));
-            TypeInfo outerType = outerConvention.MapType(innerType/*.GetTypeInfo()*/);
+            outerConvention.ForType<ConventionTarget>()
+                .Export(eb => eb.AsContractName(ContractNames.ContractY));
+            TypeInfo outerType = outerConvention.MapType(
+                innerType /*.GetTypeInfo()*/
+            );
 
-            ExportAttribute export = outerType.GetCustomAttributes(false).OfType<ExportAttribute>().Single();
+            ExportAttribute export = outerType.GetCustomAttributes(false)
+                .OfType<ExportAttribute>()
+                .Single();
 
             Assert.Equal(ContractNames.ContractX, export.ContractName);
         }

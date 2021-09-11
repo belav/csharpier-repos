@@ -19,8 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteDateTimeMemberTranslator : IMemberTranslator
     {
-        private static readonly Dictionary<string, string> _datePartMapping
-            = new()
+        private static readonly Dictionary<string, string> _datePartMapping =
+            new()
             {
                 { nameof(DateTime.Year), "%Y" },
                 { nameof(DateTime.Month), "%m" },
@@ -55,8 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
@@ -72,8 +72,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                             _sqlExpressionFactory,
                             typeof(string),
                             datePart,
-                            instance!),
-                        returnType);
+                            instance!
+                        ),
+                        returnType
+                    );
                 }
 
                 if (memberName == nameof(DateTime.Ticks))
@@ -86,10 +88,14 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                     new[] { instance! },
                                     nullable: true,
                                     argumentsPropagateNullability: new[] { true },
-                                    typeof(double)),
-                                _sqlExpressionFactory.Constant(1721425.5)), // NB: Result of julianday('0001-01-01 00:00:00')
-                            _sqlExpressionFactory.Constant(TimeSpan.TicksPerDay)),
-                        typeof(long));
+                                    typeof(double)
+                                ),
+                                _sqlExpressionFactory.Constant(1721425.5)
+                            ), // NB: Result of julianday('0001-01-01 00:00:00')
+                            _sqlExpressionFactory.Constant(TimeSpan.TicksPerDay)
+                        ),
+                        typeof(long)
+                    );
                 }
 
                 if (memberName == nameof(DateTime.Millisecond))
@@ -101,10 +107,14 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                     _sqlExpressionFactory,
                                     typeof(string),
                                     "%f",
-                                    instance!),
-                                typeof(double)),
-                            _sqlExpressionFactory.Constant(1000)),
-                        _sqlExpressionFactory.Constant(1000));
+                                    instance!
+                                ),
+                                typeof(double)
+                            ),
+                            _sqlExpressionFactory.Constant(1000)
+                        ),
+                        _sqlExpressionFactory.Constant(1000)
+                    );
                 }
 
                 var format = "%Y-%m-%d %H:%M:%f";
@@ -157,17 +167,20 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                     returnType,
                                     format,
                                     timestring,
-                                    modifiers),
+                                    modifiers
+                                ),
                                 _sqlExpressionFactory.Constant("0")
                             },
                             nullable: true,
                             argumentsPropagateNullability: new[] { true, false },
-                            returnType),
+                            returnType
+                        ),
                         _sqlExpressionFactory.Constant(".")
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, false },
-                    returnType);
+                    returnType
+                );
             }
 
             return null;

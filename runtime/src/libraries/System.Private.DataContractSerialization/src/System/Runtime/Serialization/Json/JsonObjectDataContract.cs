@@ -12,13 +12,13 @@ namespace System.Runtime.Serialization.Json
     {
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
         public JsonObjectDataContract(DataContract traditionalDataContract)
-            : base(traditionalDataContract)
-        {
-        }
+            : base(traditionalDataContract) { }
 
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
-        public override object? ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson? context)
-        {
+        public override object? ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson? context
+        ) {
             object? obj;
             string? contentMode = jsonReader.GetAttribute(JsonGlobals.typeString);
 
@@ -44,9 +44,15 @@ namespace System.Runtime.Serialization.Json
                     break;
                 case JsonGlobals.arrayString:
                     // Read as object array
-                    return DataContractJsonSerializerImpl.ReadJsonValue(DataContract.GetDataContract(Globals.TypeOfObjectArray), jsonReader, context);
+                    return DataContractJsonSerializerImpl.ReadJsonValue(
+                        DataContract.GetDataContract(Globals.TypeOfObjectArray),
+                        jsonReader,
+                        context
+                    );
                 default:
-                    throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.JsonUnexpectedAttributeValue, contentMode));
+                    throw XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(SR.JsonUnexpectedAttributeValue, contentMode)
+                    );
             }
 
             if (context != null)
@@ -57,38 +63,67 @@ namespace System.Runtime.Serialization.Json
         }
 
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
-        public override void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson? context, RuntimeTypeHandle declaredTypeHandle)
-        {
-            jsonWriter.WriteAttributeString(null, JsonGlobals.typeString, null, JsonGlobals.objectString);
+        public override void WriteJsonValueCore(
+            XmlWriterDelegator jsonWriter,
+            object obj,
+            XmlObjectSerializerWriteContextComplexJson? context,
+            RuntimeTypeHandle declaredTypeHandle
+        ) {
+            jsonWriter.WriteAttributeString(
+                null,
+                JsonGlobals.typeString,
+                null,
+                JsonGlobals.objectString
+            );
         }
 
         internal static object ParseJsonNumber(string value, out TypeCode objectTypeCode)
         {
             if (value == null)
             {
-                throw new XmlException(SR.Format(SR.XmlInvalidConversion, value, Globals.TypeOfInt));
+                throw new XmlException(
+                    SR.Format(SR.XmlInvalidConversion, value, Globals.TypeOfInt)
+                );
             }
 
             if (value.IndexOfAny(JsonGlobals.FloatingPointCharacters) == -1)
             {
                 int intValue;
-                if (int.TryParse(value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out intValue))
-                {
+                if (
+                    int.TryParse(
+                        value,
+                        NumberStyles.Float,
+                        NumberFormatInfo.InvariantInfo,
+                        out intValue
+                    )
+                ) {
                     objectTypeCode = TypeCode.Int32;
                     return intValue;
                 }
 
                 long longValue;
-                if (long.TryParse(value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out longValue))
-                {
+                if (
+                    long.TryParse(
+                        value,
+                        NumberStyles.Float,
+                        NumberFormatInfo.InvariantInfo,
+                        out longValue
+                    )
+                ) {
                     objectTypeCode = TypeCode.Int64;
                     return longValue;
                 }
             }
 
             decimal decimalValue;
-            if (decimal.TryParse(value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimalValue))
-            {
+            if (
+                decimal.TryParse(
+                    value,
+                    NumberStyles.Float,
+                    NumberFormatInfo.InvariantInfo,
+                    out decimalValue
+                )
+            ) {
                 objectTypeCode = TypeCode.Decimal;
 
                 //check for decimal underflow

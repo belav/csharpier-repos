@@ -39,15 +39,17 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("NonEmpty", AsnEncodingRules.CER, "050100")]
         [InlineData("NonEmpty", AsnEncodingRules.DER, "050100")]
         [InlineData("Incomplete length", AsnEncodingRules.BER, "0581")]
-        public static void ReadNull_Throws(string description, AsnEncodingRules ruleSet, string inputHex)
-        {
+        public static void ReadNull_Throws(
+            string description,
+            AsnEncodingRules ruleSet,
+            string inputHex
+        ) {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
             Assert.Throws<AsnContentException>(() => reader.ReadNull());
         }
-
 
         [Theory]
         [InlineData(AsnEncodingRules.BER)]
@@ -60,11 +62,14 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadNull(new Asn1Tag(UniversalTagNumber.Integer)));
+                () => reader.ReadNull(new Asn1Tag(UniversalTagNumber.Integer))
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(() => reader.ReadNull(new Asn1Tag(TagClass.ContextSpecific, 0)));
+            Assert.Throws<AsnContentException>(
+                () => reader.ReadNull(new Asn1Tag(TagClass.ContextSpecific, 0))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -83,7 +88,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadNull(new Asn1Tag(UniversalTagNumber.Integer)));
+                () => reader.ReadNull(new Asn1Tag(UniversalTagNumber.Integer))
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
@@ -91,11 +97,15 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(() => reader.ReadNull(new Asn1Tag(TagClass.Application, 0)));
+            Assert.Throws<AsnContentException>(
+                () => reader.ReadNull(new Asn1Tag(TagClass.Application, 0))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(() => reader.ReadNull(new Asn1Tag(TagClass.ContextSpecific, 1)));
+            Assert.Throws<AsnContentException>(
+                () => reader.ReadNull(new Asn1Tag(TagClass.ContextSpecific, 1))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
@@ -114,8 +124,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             TagClass tagClass,
-            int tagValue)
-        {
+            int tagValue
+        ) {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
             reader.ReadNull(new Asn1Tag(tagClass, tagValue, true));

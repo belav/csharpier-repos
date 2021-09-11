@@ -8,10 +8,7 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles
 {
     internal unsafe sealed class NCryptDescriptorHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        private NCryptDescriptorHandle()
-            : base(ownsHandle: true)
-        {
-        }
+        private NCryptDescriptorHandle() : base(ownsHandle: true) { }
 
         public string GetProtectionDescriptorRuleString()
         {
@@ -23,7 +20,8 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles
                 hDescriptor: this,
                 pMemPara: IntPtr.Zero,
                 dwInfoType: NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING,
-                ppvInfo: out ruleStringHandle);
+                ppvInfo: out ruleStringHandle
+            );
             UnsafeNativeMethods.ThrowExceptionForNCryptStatus(ntstatus);
             CryptoUtil.AssertSafeHandleIsValid(ruleStringHandle);
 

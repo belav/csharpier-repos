@@ -48,7 +48,9 @@ namespace Microsoft.AspNetCore.Cryptography
             uint b = 0x89ABCDEF;
 
             // Act & assert
-            Assert.False(CryptoUtil.TimeConstantBuffersAreEqual((byte*)&a, (byte*)&b, sizeof(uint)));
+            Assert.False(
+                CryptoUtil.TimeConstantBuffersAreEqual((byte*)&a, (byte*)&b, sizeof(uint))
+            );
         }
     }
 }

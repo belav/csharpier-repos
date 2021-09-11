@@ -57,22 +57,30 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             Int32 value = TestLibrary.Generator.GetInt32();
-            object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.CreateScalarUnsafe), new Type[] { typeof(Int32) })
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector64).GetMethod(
+                    nameof(Vector64.CreateScalarUnsafe),
+                    new Type[] { typeof(Int32) }
+                )
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Vector64<Int32>)(result), value);
         }
 
-        private void ValidateResult(Vector64<Int32> result, Int32 expectedValue, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector64<Int32> result,
+            Int32 expectedValue,
+            [CallerMemberName] string method = ""
+        ) {
             Int32[] resultElements = new Int32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
         }
 
-        private void ValidateResult(Int32[] resultElements, Int32 expectedValue, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Int32[] resultElements,
+            Int32 expectedValue,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             if (resultElements[0] != expectedValue)
@@ -83,8 +91,9 @@ namespace JIT.HardwareIntrinsics.General
             {
                 for (var i = 1; i < ElementCount; i++)
                 {
-                    if (false /* value is uninitialized */)
-                    {
+                    if (
+                        false /* value is uninitialized */
+                    ) {
                         succeeded = false;
                         break;
                     }
@@ -93,9 +102,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64.CreateScalarUnsafe(Int32): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64.CreateScalarUnsafe(Int32): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

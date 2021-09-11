@@ -17,23 +17,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A base type for conventions that perform configuration based on an attribute applied to a navigation.
     /// </summary>
     /// <typeparam name="TAttribute"> The attribute type to look for. </typeparam>
-    public abstract class NavigationAttributeConventionBase<TAttribute> :
-        IEntityTypeAddedConvention,
-        IEntityTypeIgnoredConvention,
-        IEntityTypeRemovedConvention,
-        IEntityTypeBaseTypeChangedConvention,
-        IEntityTypeMemberIgnoredConvention,
-        INavigationAddedConvention,
-        ISkipNavigationAddedConvention,
-        IForeignKeyPrincipalEndChangedConvention
-        where TAttribute : Attribute
+    public abstract class NavigationAttributeConventionBase<TAttribute>
+        : IEntityTypeAddedConvention,
+          IEntityTypeIgnoredConvention,
+          IEntityTypeRemovedConvention,
+          IEntityTypeBaseTypeChangedConvention,
+          IEntityTypeMemberIgnoredConvention,
+          INavigationAddedConvention,
+          ISkipNavigationAddedConvention,
+          IForeignKeyPrincipalEndChangedConvention where TAttribute : Attribute
     {
         /// <summary>
         ///     Creates a new instance of <see cref="NavigationAttributeConventionBase{TAttribute}" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        protected NavigationAttributeConventionBase(ProviderConventionSetBuilderDependencies dependencies)
-        {
+        protected NavigationAttributeConventionBase(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) {
             Dependencies = dependencies;
         }
 
@@ -45,8 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
-        {
+            IConventionContext<IConventionEntityTypeBuilder> context
+        ) {
             var navigations = GetNavigationsWithAttribute(entityTypeBuilder.Metadata);
             if (navigations == null)
             {
@@ -56,12 +56,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             foreach (var navigationTuple in navigations)
             {
                 var (navigationPropertyInfo, targetClrType) = navigationTuple;
-                var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(inherit: true);
+                var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(
+                    inherit: true
+                );
                 foreach (var attribute in attributes)
                 {
-                    ProcessEntityTypeAdded(entityTypeBuilder, navigationPropertyInfo, targetClrType, attribute, context);
-                    if (((ConventionContext<IConventionEntityTypeBuilder>)context).ShouldStopProcessing())
-                    {
+                    ProcessEntityTypeAdded(
+                        entityTypeBuilder,
+                        navigationPropertyInfo,
+                        targetClrType,
+                        attribute,
+                        context
+                    );
+                    if (
+                        (
+                            (ConventionContext<IConventionEntityTypeBuilder>)context
+                        ).ShouldStopProcessing()
+                    ) {
                         return;
                     }
                 }
@@ -73,8 +84,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionModelBuilder modelBuilder,
             string name,
             Type? type,
-            IConventionContext<string> context)
-        {
+            IConventionContext<string> context
+        ) {
             if (type == null)
             {
                 return;
@@ -83,7 +94,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var navigations = new List<(PropertyInfo, Type)>();
             foreach (var navigationPropertyInfo in type.GetRuntimeProperties())
             {
-                var targetClrType = FindCandidateNavigationWithAttributePropertyType(navigationPropertyInfo);
+                var targetClrType = FindCandidateNavigationWithAttributePropertyType(
+                    navigationPropertyInfo
+                );
                 if (targetClrType == null)
                 {
                     continue;
@@ -102,10 +115,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             foreach (var navigationTuple in navigations)
             {
                 var (navigationPropertyInfo, targetClrType) = navigationTuple;
-                var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(inherit: true);
+                var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(
+                    inherit: true
+                );
                 foreach (var attribute in attributes)
                 {
-                    ProcessEntityTypeIgnored(modelBuilder, type, navigationPropertyInfo, targetClrType, attribute, context);
+                    ProcessEntityTypeIgnored(
+                        modelBuilder,
+                        type,
+                        navigationPropertyInfo,
+                        targetClrType,
+                        attribute,
+                        context
+                    );
                     if (((ConventionContext<string>)context).ShouldStopProcessing())
                     {
                         return;
@@ -118,8 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeRemoved(
             IConventionModelBuilder modelBuilder,
             IConventionEntityType entityType,
-            IConventionContext<IConventionEntityType> context)
-        {
+            IConventionContext<IConventionEntityType> context
+        ) {
             var type = entityType.ClrType;
 
             var navigations = GetNavigationsWithAttribute(entityType);
@@ -131,10 +153,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             foreach (var navigationTuple in navigations)
             {
                 var (navigationPropertyInfo, targetClrType) = navigationTuple;
-                var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(inherit: true);
+                var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(
+                    inherit: true
+                );
                 foreach (var attribute in attributes)
                 {
-                    ProcessEntityTypeRemoved(modelBuilder, type, navigationPropertyInfo, targetClrType, attribute, context);
+                    ProcessEntityTypeRemoved(
+                        modelBuilder,
+                        type,
+                        navigationPropertyInfo,
+                        targetClrType,
+                        attribute,
+                        context
+                    );
                     if (((ConventionContext<IConventionEntityType>)context).ShouldStopProcessing())
                     {
                         return;
@@ -148,8 +179,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
-            IConventionContext<IConventionEntityType> context)
-        {
+            IConventionContext<IConventionEntityType> context
+        ) {
             var entityType = entityTypeBuilder.Metadata;
             if (entityTypeBuilder.Metadata.BaseType != newBaseType)
             {
@@ -165,11 +196,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             foreach (var navigationTuple in navigations)
             {
                 var (navigationPropertyInfo, targetClrType) = navigationTuple;
-                var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(inherit: true);
+                var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(
+                    inherit: true
+                );
                 foreach (var attribute in attributes)
                 {
                     ProcessEntityTypeBaseTypeChanged(
-                        entityTypeBuilder, newBaseType, oldBaseType, navigationPropertyInfo, targetClrType, attribute, context);
+                        entityTypeBuilder,
+                        newBaseType,
+                        oldBaseType,
+                        navigationPropertyInfo,
+                        targetClrType,
+                        attribute,
+                        context
+                    );
                     if (((ConventionContext<IConventionEntityType>)context).ShouldStopProcessing())
                     {
                         return;
@@ -178,12 +218,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
         }
 
-        private List<(PropertyInfo, Type)>? GetNavigationsWithAttribute(IConventionEntityType entityType)
-        {
+        private List<(PropertyInfo, Type)>? GetNavigationsWithAttribute(
+            IConventionEntityType entityType
+        ) {
             var navigations = new List<(PropertyInfo, Type)>();
             foreach (var navigationPropertyInfo in entityType.GetRuntimeProperties().Values)
             {
-                var targetClrType = FindCandidateNavigationWithAttributePropertyType(navigationPropertyInfo);
+                var targetClrType = FindCandidateNavigationWithAttributePropertyType(
+                    navigationPropertyInfo
+                );
                 if (targetClrType == null)
                 {
                     continue;
@@ -202,14 +245,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             return navigations;
         }
 
-        private static void Sort(List<(PropertyInfo, Type)> navigations)
-            => navigations.Sort((x, y) => StringComparer.Ordinal.Compare(x.Item1.Name, y.Item1.Name));
+        private static void Sort(List<(PropertyInfo, Type)> navigations) =>
+            navigations.Sort((x, y) => StringComparer.Ordinal.Compare(x.Item1.Name, y.Item1.Name));
 
         /// <inheritdoc />
         public virtual void ProcessNavigationAdded(
             IConventionNavigationBuilder navigationBuilder,
-            IConventionContext<IConventionNavigationBuilder> context)
-        {
+            IConventionContext<IConventionNavigationBuilder> context
+        ) {
             var navigation = navigationBuilder.Metadata;
             var attributes = GetAttributes<TAttribute>(navigation.DeclaringEntityType, navigation);
             foreach (var attribute in attributes)
@@ -225,10 +268,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessSkipNavigationAdded(
             IConventionSkipNavigationBuilder skipNavigationBuilder,
-            IConventionContext<IConventionSkipNavigationBuilder> context)
-        {
+            IConventionContext<IConventionSkipNavigationBuilder> context
+        ) {
             var skipNavigation = skipNavigationBuilder.Metadata;
-            var attributes = GetAttributes<TAttribute>(skipNavigation.DeclaringEntityType, skipNavigation);
+            var attributes = GetAttributes<TAttribute>(
+                skipNavigation.DeclaringEntityType,
+                skipNavigation
+            );
             foreach (var attribute in attributes)
             {
                 ProcessSkipNavigationAdded(skipNavigationBuilder, attribute, context);
@@ -242,32 +288,41 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessForeignKeyPrincipalEndChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<IConventionForeignKeyBuilder> context)
-        {
+            IConventionContext<IConventionForeignKeyBuilder> context
+        ) {
             var fk = relationshipBuilder.Metadata;
-            var dependentToPrincipalAttributes = fk.DependentToPrincipal == null
-                ? null
-                : GetAttributes<TAttribute>(fk.DeclaringEntityType, fk.DependentToPrincipal);
-            var principalToDependentAttributes = fk.PrincipalToDependent == null
-                ? null
-                : GetAttributes<TAttribute>(fk.PrincipalEntityType, fk.PrincipalToDependent);
+            var dependentToPrincipalAttributes =
+                fk.DependentToPrincipal == null
+                    ? null
+                    : GetAttributes<TAttribute>(fk.DeclaringEntityType, fk.DependentToPrincipal);
+            var principalToDependentAttributes =
+                fk.PrincipalToDependent == null
+                    ? null
+                    : GetAttributes<TAttribute>(fk.PrincipalEntityType, fk.PrincipalToDependent);
             ProcessForeignKeyPrincipalEndChanged(
-                relationshipBuilder, dependentToPrincipalAttributes, principalToDependentAttributes, context);
+                relationshipBuilder,
+                dependentToPrincipalAttributes,
+                principalToDependentAttributes,
+                context
+            );
         }
 
         /// <inheritdoc />
         public virtual void ProcessEntityTypeMemberIgnored(
             IConventionEntityTypeBuilder entityTypeBuilder,
             string name,
-            IConventionContext<string> context)
-        {
-            var navigationPropertyInfo = entityTypeBuilder.Metadata.GetRuntimeProperties().Find(name);
+            IConventionContext<string> context
+        ) {
+            var navigationPropertyInfo = entityTypeBuilder.Metadata.GetRuntimeProperties()
+                .Find(name);
             if (navigationPropertyInfo == null)
             {
                 return;
             }
 
-            var targetClrType = FindCandidateNavigationWithAttributePropertyType(navigationPropertyInfo);
+            var targetClrType = FindCandidateNavigationWithAttributePropertyType(
+                navigationPropertyInfo
+            );
             if (targetClrType == null)
             {
                 return;
@@ -276,7 +331,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(true);
             foreach (var attribute in attributes)
             {
-                ProcessEntityTypeMemberIgnored(entityTypeBuilder, navigationPropertyInfo, targetClrType, attribute, context);
+                ProcessEntityTypeMemberIgnored(
+                    entityTypeBuilder,
+                    navigationPropertyInfo,
+                    targetClrType,
+                    attribute,
+                    context
+                );
                 if (((ConventionContext<string>)context).ShouldStopProcessing())
                 {
                     return;
@@ -286,11 +347,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private Type? FindCandidateNavigationWithAttributePropertyType(PropertyInfo propertyInfo)
         {
-            var targetClrType = Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(propertyInfo);
+            var targetClrType = Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(
+                propertyInfo
+            );
             return targetClrType == null
-                || !Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)
-                    ? null
-                    : targetClrType;
+            || !Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)
+                ? null
+                : targetClrType;
         }
 
         /// <summary>
@@ -302,9 +365,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <returns> The attributes applied to the given navigation. </returns>
         protected static IEnumerable<TCustomAttribute> GetAttributes<TCustomAttribute>(
             IConventionEntityType entityType,
-            IConventionNavigation navigation)
-            where TCustomAttribute : Attribute
-            => GetAttributes<TCustomAttribute>(entityType, navigation.GetIdentifyingMemberInfo());
+            IConventionNavigation navigation
+        ) where TCustomAttribute : Attribute =>
+            GetAttributes<TCustomAttribute>(entityType, navigation.GetIdentifyingMemberInfo());
 
         /// <summary>
         ///     Returns the attributes applied to the given skip navigation.
@@ -315,14 +378,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <returns> The attributes applied to the given skip navigation. </returns>
         protected static IEnumerable<TCustomAttribute> GetAttributes<TCustomAttribute>(
             IConventionEntityType entityType,
-            IConventionSkipNavigation skipNavigation)
-            where TCustomAttribute : Attribute
-            => GetAttributes<TCustomAttribute>(entityType, skipNavigation.GetIdentifyingMemberInfo());
+            IConventionSkipNavigation skipNavigation
+        ) where TCustomAttribute : Attribute =>
+            GetAttributes<TCustomAttribute>(entityType, skipNavigation.GetIdentifyingMemberInfo());
 
         private static IEnumerable<TCustomAttribute> GetAttributes<TCustomAttribute>(
             IConventionEntityType entityType,
-            MemberInfo? memberInfo)
-            where TCustomAttribute : Attribute
+            MemberInfo? memberInfo
+        ) where TCustomAttribute : Attribute
         {
             if (memberInfo == null)
             {
@@ -347,8 +410,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             MemberInfo navigationMemberInfo,
             Type targetClrType,
             TAttribute attribute,
-            IConventionContext<IConventionEntityTypeBuilder> context)
-            => throw new NotSupportedException();
+            IConventionContext<IConventionEntityTypeBuilder> context
+        ) => throw new NotSupportedException();
 
         /// <summary>
         ///     Called for every navigation property that has an attribute after an entity type is ignored.
@@ -365,8 +428,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             MemberInfo navigationMemberInfo,
             Type targetClrType,
             TAttribute attribute,
-            IConventionContext<string> context)
-            => throw new NotSupportedException();
+            IConventionContext<string> context
+        ) => throw new NotSupportedException();
 
         /// <summary>
         ///     Called for every navigation property that has an attribute after an entity type is removed.
@@ -383,8 +446,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             MemberInfo navigationMemberInfo,
             Type targetClrType,
             TAttribute attribute,
-            IConventionContext<IConventionEntityType> context)
-            => throw new NotSupportedException();
+            IConventionContext<IConventionEntityType> context
+        ) => throw new NotSupportedException();
 
         /// <summary>
         ///     Called for every navigation property that has an attribute after the base type for an entity type is changed.
@@ -403,8 +466,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             MemberInfo navigationMemberInfo,
             Type targetClrType,
             TAttribute attribute,
-            IConventionContext<IConventionEntityType> context)
-            => throw new NotSupportedException();
+            IConventionContext<IConventionEntityType> context
+        ) => throw new NotSupportedException();
 
         /// <summary>
         ///     Called after a navigation property that has an attribute is added to an entity type.
@@ -415,8 +478,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessNavigationAdded(
             IConventionNavigationBuilder navigationBuilder,
             TAttribute attribute,
-            IConventionContext<IConventionNavigationBuilder> context)
-            => throw new NotSupportedException();
+            IConventionContext<IConventionNavigationBuilder> context
+        ) => throw new NotSupportedException();
 
         /// <summary>
         ///     Called after a skip navigation property that has an attribute is added to an entity type.
@@ -427,8 +490,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessSkipNavigationAdded(
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             TAttribute attribute,
-            IConventionContext<IConventionSkipNavigationBuilder> context)
-            => throw new NotSupportedException();
+            IConventionContext<IConventionSkipNavigationBuilder> context
+        ) => throw new NotSupportedException();
 
         /// <summary>
         ///     Called after a navigation property that has an attribute is ignored.
@@ -443,8 +506,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             MemberInfo navigationMemberInfo,
             Type targetClrType,
             TAttribute attribute,
-            IConventionContext<string> context)
-            => throw new NotSupportedException();
+            IConventionContext<string> context
+        ) => throw new NotSupportedException();
 
         /// <summary>
         ///     Called after the principal end of a foreign key is changed.
@@ -457,7 +520,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionForeignKeyBuilder relationshipBuilder,
             IEnumerable<TAttribute>? dependentToPrincipalAttributes,
             IEnumerable<TAttribute>? principalToDependentAttributes,
-            IConventionContext<IConventionForeignKeyBuilder> context)
-            => throw new NotSupportedException();
+            IConventionContext<IConventionForeignKeyBuilder> context
+        ) => throw new NotSupportedException();
     }
 }

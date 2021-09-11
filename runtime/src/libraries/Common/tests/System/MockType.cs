@@ -19,27 +19,61 @@ namespace System
         public override string Namespace => throw Unexpected;
         public override Type UnderlyingSystemType => throw Unexpected;
         public override string Name => throw Unexpected;
-        public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr) => throw Unexpected;
+        public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr) =>
+            throw Unexpected;
         public override object[] GetCustomAttributes(bool inherit) => throw Unexpected;
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw Unexpected;
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+            throw Unexpected;
         public override Type GetElementType() => throw Unexpected;
-        public override EventInfo GetEvent(string name, BindingFlags bindingAttr) => throw Unexpected;
+        public override EventInfo GetEvent(string name, BindingFlags bindingAttr) =>
+            throw Unexpected;
         public override EventInfo[] GetEvents(BindingFlags bindingAttr) => throw Unexpected;
-        public override FieldInfo GetField(string name, BindingFlags bindingAttr) => throw Unexpected;
+        public override FieldInfo GetField(string name, BindingFlags bindingAttr) =>
+            throw Unexpected;
         public override FieldInfo[] GetFields(BindingFlags bindingAttr) => throw Unexpected;
         public override Type GetInterface(string name, bool ignoreCase) => throw Unexpected;
         public override Type[] GetInterfaces() => throw Unexpected;
         public override MemberInfo[] GetMembers(BindingFlags bindingAttr) => throw Unexpected;
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr) => throw Unexpected;
-        public override Type GetNestedType(string name, BindingFlags bindingAttr) => throw Unexpected;
+        public override Type GetNestedType(string name, BindingFlags bindingAttr) =>
+            throw Unexpected;
         public override Type[] GetNestedTypes(BindingFlags bindingAttr) => throw Unexpected;
         public override PropertyInfo[] GetProperties(BindingFlags bindingAttr) => throw Unexpected;
-        public override object InvokeMember(string name, BindingFlags invokeAttr, Binder binder, object target, object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] namedParameters) => throw Unexpected;
+        public override object InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object target,
+            object[] args,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            string[] namedParameters
+        ) => throw Unexpected;
         public override bool IsDefined(Type attributeType, bool inherit) => throw Unexpected;
         protected override TypeAttributes GetAttributeFlagsImpl() => throw Unexpected;
-        protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers) => throw Unexpected;
-        protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers) => throw Unexpected;
-        protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers) => throw Unexpected;
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        ) => throw Unexpected;
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        ) => throw Unexpected;
+        protected override PropertyInfo GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        ) => throw Unexpected;
         protected override bool HasElementTypeImpl() => throw Unexpected;
         protected override bool IsArrayImpl() => throw Unexpected;
         protected override bool IsByRefImpl() => throw Unexpected;
@@ -52,8 +86,14 @@ namespace System
         public override Type DeclaringType => throw Unexpected;
         public override bool Equals(object o) => throw Unexpected;
         public override bool Equals(Type o) => throw Unexpected;
-        public override Type[] FindInterfaces(TypeFilter filter, object filterCriteria) => throw Unexpected;
-        public override MemberInfo[] FindMembers(MemberTypes memberType, BindingFlags bindingAttr, MemberFilter filter, object filterCriteria) => throw Unexpected;
+        public override Type[] FindInterfaces(TypeFilter filter, object filterCriteria) =>
+            throw Unexpected;
+        public override MemberInfo[] FindMembers(
+            MemberTypes memberType,
+            BindingFlags bindingAttr,
+            MemberFilter filter,
+            object filterCriteria
+        ) => throw Unexpected;
         public override GenericParameterAttributes GenericParameterAttributes => throw Unexpected;
         public override int GenericParameterPosition => throw Unexpected;
         public override Type[] GenericTypeArguments => throw Unexpected;
@@ -70,8 +110,13 @@ namespace System
         public override Type GetGenericTypeDefinition() => throw Unexpected;
         public override int GetHashCode() => throw Unexpected;
         public override InterfaceMapping GetInterfaceMap(Type interfaceType) => throw Unexpected;
-        public override MemberInfo[] GetMember(string name, BindingFlags bindingAttr) => throw Unexpected;
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr) => throw Unexpected;
+        public override MemberInfo[] GetMember(string name, BindingFlags bindingAttr) =>
+            throw Unexpected;
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        ) => throw Unexpected;
         protected override TypeCode GetTypeCodeImpl() => throw Unexpected;
         public override bool IsConstructedGenericType => throw Unexpected;
         protected override bool IsContextfulImpl() => throw Unexpected;

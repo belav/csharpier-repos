@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EntityEntry entityEntry,
             IProperty property,
             object? oldValue,
-            object? newValue)
-            : base(eventDefinition, messageGenerator, property)
+            object? newValue
+        ) : base(eventDefinition, messageGenerator, property)
         {
             Check.NotNull(entityEntry, nameof(entityEntry));
 

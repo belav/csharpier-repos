@@ -11,14 +11,16 @@ namespace Microsoft.AspNetCore.Components.Authorization
 {
     public class TestAuthorizationService : IAuthorizationService
     {
-        public AuthorizationResult NextResult { get; set; }
-            = AuthorizationResult.Failed();
+        public AuthorizationResult NextResult { get; set; } = AuthorizationResult.Failed();
 
-        public List<(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)> AuthorizeCalls { get; }
-            = new List<(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)>();
+        public List<(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)> AuthorizeCalls { get; } =
+            new List<(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)>();
 
-        public Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)
-        {
+        public Task<AuthorizationResult> AuthorizeAsync(
+            ClaimsPrincipal user,
+            object resource,
+            IEnumerable<IAuthorizationRequirement> requirements
+        ) {
             AuthorizeCalls.Add((user, resource, requirements));
 
             // The TestAuthorizationService doesn't actually apply any authorization requirements
@@ -28,7 +30,10 @@ namespace Microsoft.AspNetCore.Components.Authorization
             return Task.FromResult(NextResult);
         }
 
-        public Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, string policyName)
-            => throw new NotImplementedException();
+        public Task<AuthorizationResult> AuthorizeAsync(
+            ClaimsPrincipal user,
+            object resource,
+            string policyName
+        ) => throw new NotImplementedException();
     }
 }

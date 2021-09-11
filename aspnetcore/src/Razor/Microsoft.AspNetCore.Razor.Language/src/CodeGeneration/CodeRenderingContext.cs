@@ -40,8 +40,6 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
         public abstract void RenderChildren(IntermediateNode node, IntermediateNodeWriter writer);
 
-        public virtual void AddLinePragma(LinePragma linePragma)
-        {
-        }
+        public virtual void AddLinePragma(LinePragma linePragma) { }
     }
 }

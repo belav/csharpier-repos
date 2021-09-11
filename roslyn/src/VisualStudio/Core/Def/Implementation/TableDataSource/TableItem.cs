@@ -24,8 +24,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         public readonly string[] ProjectNames;
         public readonly Guid[] ProjectGuids;
 
-        public TableItem(Workspace workspace, string projectName, Guid projectGuid, string[] projectNames, Guid[] projectGuids)
-        {
+        public TableItem(
+            Workspace workspace,
+            string projectName,
+            Guid projectGuid,
+            string[] projectNames,
+            Guid[] projectGuids
+        ) {
             Contract.ThrowIfNull(workspace);
             Contract.ThrowIfNull(projectNames);
             Contract.ThrowIfNull(projectGuids);
@@ -37,10 +42,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             ProjectGuids = projectGuids;
         }
 
-        internal static void GetProjectNameAndGuid(Workspace workspace, ProjectId projectId, out string projectName, out Guid projectGuid)
-        {
-            projectName = (projectId == null) ? null : workspace.CurrentSolution.GetProject(projectId)?.Name ?? ServicesVSResources.Unknown2;
-            projectGuid = (projectId != null && workspace is VisualStudioWorkspace vsWorkspace) ? vsWorkspace.GetProjectGuid(projectId) : Guid.Empty;
+        internal static void GetProjectNameAndGuid(
+            Workspace workspace,
+            ProjectId projectId,
+            out string projectName,
+            out Guid projectGuid
+        ) {
+            projectName =
+                (projectId == null)
+                    ? null
+                    : workspace.CurrentSolution.GetProject(projectId)?.Name
+                      ?? ServicesVSResources.Unknown2;
+            projectGuid =
+                (projectId != null && workspace is VisualStudioWorkspace vsWorkspace)
+                    ? vsWorkspace.GetProjectGuid(projectId)
+                    : Guid.Empty;
         }
 
         public abstract TableItem WithAggregatedData(string[] projectNames, Guid[] projectGuids);

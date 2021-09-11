@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.Hosting
     /// Allows consumers to perform cleanup during a graceful shutdown.
     /// </summary>
 #pragma warning disable CS0618 // Type or member is obsolete
-    internal class ApplicationLifetime : IApplicationLifetime, Extensions.Hosting.IApplicationLifetime, IHostApplicationLifetime
+    internal class ApplicationLifetime
+        : IApplicationLifetime,
+          Extensions.Hosting.IApplicationLifetime,
+          IHostApplicationLifetime
 #pragma warning restore CS0618 // Type or member is obsolete
     {
         private readonly CancellationTokenSource _startedSource = new CancellationTokenSource();
@@ -49,8 +52,8 @@ namespace Microsoft.AspNetCore.Hosting
         /// </summary>
         public void StopApplication()
         {
-            // Lock on CTS to synchronize multiple calls to StopApplication. This guarantees that the first call 
-            // to StopApplication and its callbacks run to completion before subsequent calls to StopApplication, 
+            // Lock on CTS to synchronize multiple calls to StopApplication. This guarantees that the first call
+            // to StopApplication and its callbacks run to completion before subsequent calls to StopApplication,
             // which will no-op since the first call already requested cancellation, get a chance to execute.
             lock (_stoppingSource)
             {
@@ -60,9 +63,11 @@ namespace Microsoft.AspNetCore.Hosting
                 }
                 catch (Exception ex)
                 {
-                    _logger.ApplicationError(LoggerEventIds.ApplicationStoppingException,
-                                             "An error occurred stopping the application",
-                                             ex);
+                    _logger.ApplicationError(
+                        LoggerEventIds.ApplicationStoppingException,
+                        "An error occurred stopping the application",
+                        ex
+                    );
                 }
             }
         }
@@ -78,9 +83,11 @@ namespace Microsoft.AspNetCore.Hosting
             }
             catch (Exception ex)
             {
-                _logger.ApplicationError(LoggerEventIds.ApplicationStartupException,
-                                         "An error occurred starting the application",
-                                         ex);
+                _logger.ApplicationError(
+                    LoggerEventIds.ApplicationStartupException,
+                    "An error occurred starting the application",
+                    ex
+                );
             }
         }
 
@@ -95,9 +102,11 @@ namespace Microsoft.AspNetCore.Hosting
             }
             catch (Exception ex)
             {
-                _logger.ApplicationError(LoggerEventIds.ApplicationStoppedException,
-                                         "An error occurred stopping the application",
-                                         ex);
+                _logger.ApplicationError(
+                    LoggerEventIds.ApplicationStoppedException,
+                    "An error occurred stopping the application",
+                    ex
+                );
             }
         }
 

@@ -13,7 +13,10 @@ namespace System.ComponentModel.Design.Tests
         public void Ctor_Default()
         {
             var container = new SubServiceContainer();
-            Assert.Equal(new Type[] { typeof(IServiceContainer), typeof(ServiceContainer) }, container.DefaultServices);
+            Assert.Equal(
+                new Type[] { typeof(IServiceContainer), typeof(ServiceContainer) },
+                container.DefaultServices
+            );
             Assert.Same(container.DefaultServices, container.DefaultServices);
         }
 
@@ -28,7 +31,10 @@ namespace System.ComponentModel.Design.Tests
         public void Ctor_IServiceProvider(IServiceProvider parentProvider)
         {
             var container = new SubServiceContainer(parentProvider);
-            Assert.Equal(new Type[] { typeof(IServiceContainer), typeof(ServiceContainer) }, container.DefaultServices);
+            Assert.Equal(
+                new Type[] { typeof(IServiceContainer), typeof(ServiceContainer) },
+                container.DefaultServices
+            );
             Assert.Same(container.DefaultServices, container.DefaultServices);
         }
 
@@ -47,8 +53,15 @@ namespace System.ComponentModel.Design.Tests
             validServiceProvider.Setup(typeof(int), null);
 
             var o = new object();
-            foreach (IServiceProvider parentProvider in new object[] { null, nullServiceProvider, invalidServiceProvider, validServiceProvider })
-            {
+            foreach (
+                IServiceProvider parentProvider in new object[]
+                {
+                    null,
+                    nullServiceProvider,
+                    invalidServiceProvider,
+                    validServiceProvider
+                }
+            ) {
                 yield return new object[] { parentProvider, typeof(object), o, o };
                 yield return new object[] { parentProvider, typeof(object), "abc", "abc" };
                 yield return new object[] { parentProvider, typeof(string), "abc", "abc" };
@@ -58,8 +71,12 @@ namespace System.ComponentModel.Design.Tests
         [Theory]
         [MemberData(nameof(AddService_TypeObject_TestData))]
         [MemberData(nameof(AddService_TypeServiceCreatorCallback_TestData))]
-        public void AddService_InvokeTypeObject_GetServiceReturnsExpected(IServiceProvider parentProvider, Type serviceType, object serviceInstance, object expected)
-        {
+        public void AddService_InvokeTypeObject_GetServiceReturnsExpected(
+            IServiceProvider parentProvider,
+            Type serviceType,
+            object serviceInstance,
+            object expected
+        ) {
             var container = new ServiceContainer(parentProvider);
             container.AddService(serviceType, serviceInstance);
             Assert.Same(expected, container.GetService(serviceType));
@@ -82,16 +99,37 @@ namespace System.ComponentModel.Design.Tests
             var o = new object();
             foreach (bool promote in new bool[] { true, false })
             {
-                foreach (IServiceProvider parentProvider in new object[] { null, nullServiceProvider, invalidServiceProvider, validServiceProvider })
-                {
+                foreach (
+                    IServiceProvider parentProvider in new object[]
+                    {
+                        null,
+                        nullServiceProvider,
+                        invalidServiceProvider,
+                        validServiceProvider
+                    }
+                ) {
                     if (promote && parentProvider == validServiceProvider)
                     {
                         continue;
                     }
 
                     yield return new object[] { parentProvider, typeof(object), o, promote, o };
-                    yield return new object[] { parentProvider, typeof(object), "abc", promote, "abc" };
-                    yield return new object[] { parentProvider, typeof(string), "abc", promote, "abc" };
+                    yield return new object[]
+                    {
+                        parentProvider,
+                        typeof(object),
+                        "abc",
+                        promote,
+                        "abc"
+                    };
+                    yield return new object[]
+                    {
+                        parentProvider,
+                        typeof(string),
+                        "abc",
+                        promote,
+                        "abc"
+                    };
                 }
             }
         }
@@ -99,8 +137,13 @@ namespace System.ComponentModel.Design.Tests
         [Theory]
         [MemberData(nameof(AddService_TypeObjectBool_TestData))]
         [MemberData(nameof(AddService_TypeServiceCreatorCallbackBool_TestData))]
-        public void AddService_InvokeTypeObjectBool_GetServiceReturnsExpected(IServiceProvider parentProvider, Type serviceType, object serviceInstance, bool promote, object expected)
-        {
+        public void AddService_InvokeTypeObjectBool_GetServiceReturnsExpected(
+            IServiceProvider parentProvider,
+            Type serviceType,
+            object serviceInstance,
+            bool promote,
+            object expected
+        ) {
             var container = new ServiceContainer(parentProvider);
             container.AddService(serviceType, serviceInstance, promote);
             Assert.Same(expected, container.GetService(serviceType));
@@ -155,7 +198,11 @@ namespace System.ComponentModel.Design.Tests
         {
             var parentContainer = new CustomServiceContainer();
             int addServiceCallCount = 0;
-            parentContainer.AddServiceObjectAction = (callbackServiceType, callbackServiceInstance, callbackPromote) =>
+            parentContainer.AddServiceObjectAction = (
+                callbackServiceType,
+                callbackServiceInstance,
+                callbackPromote
+            ) =>
             {
                 Assert.Same(serviceType, callbackServiceType);
                 Assert.Same(serviceInstance, callbackServiceInstance);
@@ -179,11 +226,17 @@ namespace System.ComponentModel.Design.Tests
 
         [Theory]
         [MemberData(nameof(AddService_PromoteCallback_TestData))]
-        public void AddService_PromoteCallback_Success(Type serviceType, ServiceCreatorCallback callback)
-        {
+        public void AddService_PromoteCallback_Success(
+            Type serviceType,
+            ServiceCreatorCallback callback
+        ) {
             var parentContainer = new CustomServiceContainer();
             int addServiceCallCount = 0;
-            parentContainer.AddServiceCallbackAction = (callbackServiceType, callbackCallback, callbackPromote) =>
+            parentContainer.AddServiceCallbackAction = (
+                callbackServiceType,
+                callbackCallback,
+                callbackPromote
+            ) =>
             {
                 Assert.Same(serviceType, callbackServiceType);
                 Assert.Same(callback, callbackCallback);
@@ -203,30 +256,66 @@ namespace System.ComponentModel.Design.Tests
         {
             var container = new ServiceContainer();
             ServiceCreatorCallback callback = (container, serviceType) => "abc";
-            Assert.Throws<ArgumentNullException>("serviceType", () => container.AddService(null, new object()));
-            Assert.Throws<ArgumentNullException>("serviceType", () => container.AddService(null, new object(), true));
-            Assert.Throws<ArgumentNullException>("serviceType", () => container.AddService(null, new object(), false));
-            Assert.Throws<ArgumentNullException>("serviceType", () => container.AddService(null, callback));
-            Assert.Throws<ArgumentNullException>("serviceType", () => container.AddService(null, callback, true));
-            Assert.Throws<ArgumentNullException>("serviceType", () => container.AddService(null, callback, false));
+            Assert.Throws<ArgumentNullException>(
+                "serviceType",
+                () => container.AddService(null, new object())
+            );
+            Assert.Throws<ArgumentNullException>(
+                "serviceType",
+                () => container.AddService(null, new object(), true)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "serviceType",
+                () => container.AddService(null, new object(), false)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "serviceType",
+                () => container.AddService(null, callback)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "serviceType",
+                () => container.AddService(null, callback, true)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "serviceType",
+                () => container.AddService(null, callback, false)
+            );
         }
 
         [Fact]
         public void AddService_NullServiceInstance_ThrowsArgumentNullException()
         {
             var container = new ServiceContainer();
-            Assert.Throws<ArgumentNullException>("serviceInstance", () => container.AddService(typeof(object), (object)null));
-            Assert.Throws<ArgumentNullException>("serviceInstance", () => container.AddService(typeof(object), (object)null, true));
-            Assert.Throws<ArgumentNullException>("serviceInstance", () => container.AddService(typeof(object), (object)null, false));
+            Assert.Throws<ArgumentNullException>(
+                "serviceInstance",
+                () => container.AddService(typeof(object), (object)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "serviceInstance",
+                () => container.AddService(typeof(object), (object)null, true)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "serviceInstance",
+                () => container.AddService(typeof(object), (object)null, false)
+            );
         }
 
         [Fact]
         public void AddService_ServiceInstanceNotInstanceOfType_ThrowsArgumentException()
         {
             var container = new ServiceContainer();
-            Assert.Throws<ArgumentException>(null, () => container.AddService(typeof(int), new object()));
-            Assert.Throws<ArgumentException>(null, () => container.AddService(typeof(int), new object(), true));
-            Assert.Throws<ArgumentException>(null, () => container.AddService(typeof(int), new object(), false));
+            Assert.Throws<ArgumentException>(
+                null,
+                () => container.AddService(typeof(int), new object())
+            );
+            Assert.Throws<ArgumentException>(
+                null,
+                () => container.AddService(typeof(int), new object(), true)
+            );
+            Assert.Throws<ArgumentException>(
+                null,
+                () => container.AddService(typeof(int), new object(), false)
+            );
         }
 
         [Fact]
@@ -236,12 +325,30 @@ namespace System.ComponentModel.Design.Tests
             var serviceInstance = new object();
             ServiceCreatorCallback callback = (container, serviceType) => "abc";
             container.AddService(typeof(object), serviceInstance);
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), new object()));
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), new object(), true));
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), new object(), false));
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), callback));
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), callback, true));
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), callback, false));
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), new object())
+            );
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), new object(), true)
+            );
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), new object(), false)
+            );
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), callback)
+            );
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), callback, true)
+            );
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), callback, false)
+            );
         }
 
         public static IEnumerable<object[]> AddService_TypeServiceCreatorCallback_TestData()
@@ -264,8 +371,15 @@ namespace System.ComponentModel.Design.Tests
             var o = new object();
             ServiceCreatorCallback callback = (container, serviceType) => "abc";
             ServiceCreatorCallback nullCallback = (container, serviceType) => null;
-            foreach (IServiceProvider parentProvider in new object[] { null, nullServiceProvider, invalidServiceProvider, validServiceProvider })
-            {
+            foreach (
+                IServiceProvider parentProvider in new object[]
+                {
+                    null,
+                    nullServiceProvider,
+                    invalidServiceProvider,
+                    validServiceProvider
+                }
+            ) {
                 yield return new object[] { parentProvider, typeof(object), callback, "abc" };
                 yield return new object[] { parentProvider, typeof(string), callback, "abc" };
                 yield return new object[] { parentProvider, typeof(int), callback, null };
@@ -281,8 +395,12 @@ namespace System.ComponentModel.Design.Tests
 
         [Theory]
         [MemberData(nameof(AddService_TypeServiceCreatorCallback_TestData))]
-        public void AddService_TypeServiceCreatorCallback_GetServiceReturnsExpected(IServiceProvider parentProvider, Type serviceType, ServiceCreatorCallback callback, object expected)
-        {
+        public void AddService_TypeServiceCreatorCallback_GetServiceReturnsExpected(
+            IServiceProvider parentProvider,
+            Type serviceType,
+            ServiceCreatorCallback callback,
+            object expected
+        ) {
             var container = new ServiceContainer(parentProvider);
             container.AddService(serviceType, callback);
             Assert.Same(expected, container.GetService(serviceType));
@@ -310,32 +428,86 @@ namespace System.ComponentModel.Design.Tests
             ServiceCreatorCallback nullCallback = (container, serviceType) => null;
             foreach (bool promote in new bool[] { true, false })
             {
-                foreach (IServiceProvider parentProvider in new object[] { null, nullServiceProvider, invalidServiceProvider, validServiceProvider })
-                {
+                foreach (
+                    IServiceProvider parentProvider in new object[]
+                    {
+                        null,
+                        nullServiceProvider,
+                        invalidServiceProvider,
+                        validServiceProvider
+                    }
+                ) {
                     if (promote && parentProvider == validServiceProvider)
                     {
                         continue;
                     }
 
-                    yield return new object[] { parentProvider, typeof(object), callback, promote, "abc" };
-                    yield return new object[] { parentProvider, typeof(string), callback, promote, "abc" };
-                    yield return new object[] { parentProvider, typeof(int), callback, promote, null };
+                    yield return new object[]
+                    {
+                        parentProvider,
+                        typeof(object),
+                        callback,
+                        promote,
+                        "abc"
+                    };
+                    yield return new object[]
+                    {
+                        parentProvider,
+                        typeof(string),
+                        callback,
+                        promote,
+                        "abc"
+                    };
+                    yield return new object[]
+                    {
+                        parentProvider,
+                        typeof(int),
+                        callback,
+                        promote,
+                        null
+                    };
 
-                    yield return new object[] { parentProvider, typeof(object), nullCallback, promote, null };
-                    yield return new object[] { parentProvider, typeof(int), nullCallback, promote, null };
+                    yield return new object[]
+                    {
+                        parentProvider,
+                        typeof(object),
+                        nullCallback,
+                        promote,
+                        null
+                    };
+                    yield return new object[]
+                    {
+                        parentProvider,
+                        typeof(int),
+                        nullCallback,
+                        promote,
+                        null
+                    };
                 }
 
                 var customServiceProvider = new MockServiceProvider();
                 customServiceProvider.Setup(typeof(IServiceContainer), null);
                 customServiceProvider.Setup(typeof(int), o);
-                yield return new object[] { customServiceProvider, typeof(int), callback, promote, o };
+                yield return new object[]
+                {
+                    customServiceProvider,
+                    typeof(int),
+                    callback,
+                    promote,
+                    o
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(AddService_TypeServiceCreatorCallbackBool_TestData))]
-        public void AddService_InvokeTypeServiceCreatorCallbackBool_GetServiceReturnsExpected(IServiceProvider parentProvider, Type serviceType, ServiceCreatorCallback callback, bool promote, object expected)
-        {
+        public void AddService_InvokeTypeServiceCreatorCallbackBool_GetServiceReturnsExpected(
+            IServiceProvider parentProvider,
+            Type serviceType,
+            ServiceCreatorCallback callback,
+            bool promote,
+            object expected
+        ) {
             var container = new ServiceContainer(parentProvider);
             container.AddService(serviceType, callback, promote);
             Assert.Same(expected, container.GetService(serviceType));
@@ -407,9 +579,18 @@ namespace System.ComponentModel.Design.Tests
         public void AddService_NullCallback_ThrowsArgumentNullException()
         {
             var container = new ServiceContainer();
-            Assert.Throws<ArgumentNullException>("callback", () => container.AddService(typeof(object), null));
-            Assert.Throws<ArgumentNullException>("callback", () => container.AddService(typeof(object), null, true));
-            Assert.Throws<ArgumentNullException>("callback", () => container.AddService(typeof(object), null, false));
+            Assert.Throws<ArgumentNullException>(
+                "callback",
+                () => container.AddService(typeof(object), null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "callback",
+                () => container.AddService(typeof(object), null, true)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "callback",
+                () => container.AddService(typeof(object), null, false)
+            );
         }
 
         [Fact]
@@ -419,12 +600,30 @@ namespace System.ComponentModel.Design.Tests
             var serviceInstance = new object();
             ServiceCreatorCallback callback = (container, serviceType) => "abc";
             container.AddService(typeof(object), callback);
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), new object()));
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), new object(), true));
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), new object(), false));
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), callback));
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), callback, true));
-            Assert.Throws<ArgumentException>("serviceType", () => container.AddService(typeof(object), callback, false));
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), new object())
+            );
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), new object(), true)
+            );
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), new object(), false)
+            );
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), callback)
+            );
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), callback, true)
+            );
+            Assert.Throws<ArgumentException>(
+                "serviceType",
+                () => container.AddService(typeof(object), callback, false)
+            );
         }
 
         [Fact]
@@ -575,8 +774,10 @@ namespace System.ComponentModel.Design.Tests
 
         [Theory]
         [MemberData(nameof(RemoveService_TypeBool_TestData))]
-        public void RemoveService_InvokeTypeBool_GetServiceReturnsNull(IServiceProvider parentProvider, bool promote)
-        {
+        public void RemoveService_InvokeTypeBool_GetServiceReturnsNull(
+            IServiceProvider parentProvider,
+            bool promote
+        ) {
             var container = new ServiceContainer(parentProvider);
             container.AddService(typeof(int), 1);
             container.RemoveService(typeof(int), promote);
@@ -659,20 +860,25 @@ namespace System.ComponentModel.Design.Tests
         public void RemoveService_NullServiceType_ThrowsArgumentNullException()
         {
             var container = new ServiceContainer();
-            Assert.Throws<ArgumentNullException>("serviceType", () => container.RemoveService(null));
-            Assert.Throws<ArgumentNullException>("serviceType", () => container.RemoveService(null, true));
-            Assert.Throws<ArgumentNullException>("serviceType", () => container.RemoveService(null, false));
+            Assert.Throws<ArgumentNullException>(
+                "serviceType",
+                () => container.RemoveService(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "serviceType",
+                () => container.RemoveService(null, true)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "serviceType",
+                () => container.RemoveService(null, false)
+            );
         }
 
         private class SubServiceContainer : ServiceContainer
         {
-            public SubServiceContainer() : base()
-            {
-            }
+            public SubServiceContainer() : base() { }
 
-            public SubServiceContainer(IServiceProvider parentProvider) : base(parentProvider)
-            {
-            }
+            public SubServiceContainer(IServiceProvider parentProvider) : base(parentProvider) { }
 
             public new Type[] DefaultServices => base.DefaultServices;
 

@@ -5,9 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
 {
     public class OrderQuery
     {
-        public OrderQuery()
-        {
-        }
+        public OrderQuery() { }
 
         public OrderQuery(string customerID)
         {
@@ -32,15 +30,12 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
 
             return ReferenceEquals(this, obj)
                 ? true
-                : obj.GetType() == GetType()
-                && Equals((OrderQuery)obj);
+                : obj.GetType() == GetType() && Equals((OrderQuery)obj);
         }
 
-        public static bool operator ==(OrderQuery left, OrderQuery right)
-            => Equals(left, right);
+        public static bool operator ==(OrderQuery left, OrderQuery right) => Equals(left, right);
 
-        public static bool operator !=(OrderQuery left, OrderQuery right)
-            => !Equals(left, right);
+        public static bool operator !=(OrderQuery left, OrderQuery right) => !Equals(left, right);
 
         public override int GetHashCode()
         {

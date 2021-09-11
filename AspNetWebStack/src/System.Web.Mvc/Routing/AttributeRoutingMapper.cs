@@ -26,8 +26,10 @@ namespace System.Web.Mvc.Routing
         /// <param name="constraintResolver">
         /// The <see cref="IInlineConstraintResolver"/> to use for resolving inline constraints in route templates.
         /// </param>
-        public static void MapAttributeRoutes(RouteCollection routes, IInlineConstraintResolver constraintResolver)
-        {
+        public static void MapAttributeRoutes(
+            RouteCollection routes,
+            IInlineConstraintResolver constraintResolver
+        ) {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -52,10 +54,10 @@ namespace System.Web.Mvc.Routing
         /// The <see cref="IDirectRouteProvider"/> to use for mapping routes from controller types.
         /// </param>
         public static void MapAttributeRoutes(
-            RouteCollection routes, 
-            IInlineConstraintResolver constraintResolver, 
-            IDirectRouteProvider directRouteProvider)
-        {
+            RouteCollection routes,
+            IInlineConstraintResolver constraintResolver,
+            IDirectRouteProvider directRouteProvider
+        ) {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -72,7 +74,8 @@ namespace System.Web.Mvc.Routing
             }
 
             DefaultControllerFactory typesLocator =
-                DependencyResolver.Current.GetService<IControllerFactory>() as DefaultControllerFactory
+                DependencyResolver.Current.GetService<IControllerFactory>()
+                    as DefaultControllerFactory
                 ?? ControllerBuilder.Current.GetControllerFactory() as DefaultControllerFactory
                 ?? new DefaultControllerFactory();
 
@@ -86,8 +89,10 @@ namespace System.Web.Mvc.Routing
         /// </summary>
         /// <param name="routes">The route collection.</param>
         /// <param name="controllerTypes">The controller types to scan.</param>
-        public static void MapAttributeRoutes(RouteCollection routes, IEnumerable<Type> controllerTypes)
-        {
+        public static void MapAttributeRoutes(
+            RouteCollection routes,
+            IEnumerable<Type> controllerTypes
+        ) {
             MapAttributeRoutes(routes, controllerTypes, new DefaultInlineConstraintResolver());
         }
 
@@ -99,10 +104,17 @@ namespace System.Web.Mvc.Routing
         /// <param name="constraintResolver">
         /// The <see cref="IInlineConstraintResolver"/> to use for resolving inline constraints in route templates.
         /// </param>
-        public static void MapAttributeRoutes(RouteCollection routes, IEnumerable<Type> controllerTypes,
-            IInlineConstraintResolver constraintResolver)
-        {
-            MapAttributeRoutes(routes, controllerTypes, constraintResolver, new DefaultDirectRouteProvider());
+        public static void MapAttributeRoutes(
+            RouteCollection routes,
+            IEnumerable<Type> controllerTypes,
+            IInlineConstraintResolver constraintResolver
+        ) {
+            MapAttributeRoutes(
+                routes,
+                controllerTypes,
+                constraintResolver,
+                new DefaultDirectRouteProvider()
+            );
         }
 
         /// <summary>
@@ -116,9 +128,12 @@ namespace System.Web.Mvc.Routing
         /// <param name="directRouteProvider">
         /// The <see cref="IDirectRouteProvider"/> to use for mapping routes from controller types.
         /// </param>
-        public static void MapAttributeRoutes(RouteCollection routes, IEnumerable<Type> controllerTypes,
-            IInlineConstraintResolver constraintResolver, IDirectRouteProvider directRouteProvider)
-        {
+        public static void MapAttributeRoutes(
+            RouteCollection routes,
+            IEnumerable<Type> controllerTypes,
+            IInlineConstraintResolver constraintResolver,
+            IDirectRouteProvider directRouteProvider
+        ) {
             if (routes == null)
             {
                 throw new ArgumentNullException("routes");
@@ -148,7 +163,7 @@ namespace System.Web.Mvc.Routing
                 RouteCollectionRoute aggregrateRoute = new RouteCollectionRoute(subRoutes);
                 routes.Add(aggregrateRoute);
 
-                // This sort is here to enforce a static ordering for link generation using these routes. 
+                // This sort is here to enforce a static ordering for link generation using these routes.
                 // We don't apply dynamic criteria like ActionSelectors on link generation, but we can use the static
                 // ones.
                 //
@@ -156,8 +171,7 @@ namespace System.Web.Mvc.Routing
                 // will only match for link generation if the action name was supplied, so this is essential for
                 // correctness. Without this a controller-level route could be 'greedy' and generate a link when
                 // the action-level route was intended.
-                RouteEntry[] sorted = entries
-                    .OrderBy(r => r.Route.GetOrder())
+                RouteEntry[] sorted = entries.OrderBy(r => r.Route.GetOrder())
                     .ThenBy(r => r.Route.GetTargetIsAction() ? 0 : 1)
                     .ThenBy(r => r.Route.GetPrecedence())
                     .ToArray();
@@ -171,18 +185,21 @@ namespace System.Web.Mvc.Routing
         {
             SubRouteCollection collector = new SubRouteCollection();
             AddRouteEntries(
-                collector, 
-                new Type[] { controllerType }, 
-                new DefaultInlineConstraintResolver(), 
-                new DefaultDirectRouteProvider());
+                collector,
+                new Type[] { controllerType },
+                new DefaultInlineConstraintResolver(),
+                new DefaultDirectRouteProvider()
+            );
 
             return collector.Entries;
         }
 
-        // Add generation hooks for the Attribute-routing subroutes. 
+        // Add generation hooks for the Attribute-routing subroutes.
         // This lets us generate urls for routes supplied by attr-based routing.
-        private static void AddGenerationHooksForSubRoutes(RouteCollection routeTable, IList<RouteEntry> entries)
-        {
+        private static void AddGenerationHooksForSubRoutes(
+            RouteCollection routeTable,
+            IList<RouteEntry> entries
+        ) {
             Contract.Assert(entries != null);
 
             foreach (RouteEntry entry in entries)
@@ -204,22 +221,32 @@ namespace System.Web.Mvc.Routing
             }
         }
 
-        internal static void AddRouteEntries(SubRouteCollection collector, IEnumerable<Type> controllerTypes,
-            IInlineConstraintResolver constraintResolver, IDirectRouteProvider directRouteProvider)
-        {
-            IEnumerable<ReflectedAsyncControllerDescriptor> controllers = GetControllerDescriptors(controllerTypes);
+        internal static void AddRouteEntries(
+            SubRouteCollection collector,
+            IEnumerable<Type> controllerTypes,
+            IInlineConstraintResolver constraintResolver,
+            IDirectRouteProvider directRouteProvider
+        ) {
+            IEnumerable<ReflectedAsyncControllerDescriptor> controllers = GetControllerDescriptors(
+                controllerTypes
+            );
 
             foreach (ReflectedAsyncControllerDescriptor controller in controllers)
             {
                 List<ActionDescriptor> actions = GetActionDescriptors(controller);
 
-                IReadOnlyCollection<RouteEntry> entries = directRouteProvider.GetDirectRoutes(controller, actions, constraintResolver);
+                IReadOnlyCollection<RouteEntry> entries = directRouteProvider.GetDirectRoutes(
+                    controller,
+                    actions,
+                    constraintResolver
+                );
                 if (entries == null)
                 {
                     throw Error.InvalidOperation(
                         MvcResources.TypeMethodMustNotReturnNull,
-                        typeof(IDirectRouteProvider).Name, 
-                        "GetDirectRoutes");
+                        typeof(IDirectRouteProvider).Name,
+                        "GetDirectRoutes"
+                    );
                 }
 
                 foreach (RouteEntry entry in entries)
@@ -228,8 +255,9 @@ namespace System.Web.Mvc.Routing
                     {
                         throw Error.InvalidOperation(
                             MvcResources.TypeMethodMustNotReturnNull,
-                            typeof(IDirectRouteProvider).Name, 
-                            "GetDirectRoutes");
+                            typeof(IDirectRouteProvider).Name,
+                            "GetDirectRoutes"
+                        );
                     }
 
                     DirectRouteBuilder.ValidateRouteEntry(entry);
@@ -240,8 +268,9 @@ namespace System.Web.Mvc.Routing
                         var actionDescriptors = entry.Route.GetTargetActionDescriptors();
                         Contract.Assert(actionDescriptors != null && actionDescriptors.Any());
 
-                        foreach (var actionDescriptor in actionDescriptors.OfType<IMethodInfoActionDescriptor>())
-                        {
+                        foreach (
+                            var actionDescriptor in actionDescriptors.OfType<IMethodInfoActionDescriptor>()
+                        ) {
                             var methodInfo = actionDescriptor.MethodInfo;
                             if (methodInfo != null)
                             {
@@ -261,21 +290,25 @@ namespace System.Web.Mvc.Routing
             }
         }
 
-        private static IEnumerable<ReflectedAsyncControllerDescriptor> GetControllerDescriptors(IEnumerable<Type> controllerTypes)
-        {
+        private static IEnumerable<ReflectedAsyncControllerDescriptor> GetControllerDescriptors(
+            IEnumerable<Type> controllerTypes
+        ) {
             Contract.Assert(controllerTypes != null);
 
-            Func<Type, ControllerDescriptor> descriptorFactory = ReflectedAsyncControllerDescriptor.DefaultDescriptorFactory;
-            ControllerDescriptorCache descriptorsCache = new AsyncControllerActionInvoker().DescriptorCache;
+            Func<Type, ControllerDescriptor> descriptorFactory =
+                ReflectedAsyncControllerDescriptor.DefaultDescriptorFactory;
+            ControllerDescriptorCache descriptorsCache =
+                new AsyncControllerActionInvoker().DescriptorCache;
 
-            return 
-                controllerTypes
-                .Select(type => descriptorsCache.GetDescriptor(type, descriptorFactory, type))
+            return controllerTypes.Select(
+                    type => descriptorsCache.GetDescriptor(type, descriptorFactory, type)
+                )
                 .Cast<ReflectedAsyncControllerDescriptor>();
         }
 
-        private static List<ActionDescriptor> GetActionDescriptors(ReflectedAsyncControllerDescriptor controller)
-        {
+        private static List<ActionDescriptor> GetActionDescriptors(
+            ReflectedAsyncControllerDescriptor controller
+        ) {
             Contract.Assert(controller != null);
 
             AsyncActionMethodSelector actionSelector = controller.Selector;
@@ -284,7 +317,9 @@ namespace System.Web.Mvc.Routing
             foreach (MethodInfo method in actionSelector.ActionMethods)
             {
                 string actionName = actionSelector.GetActionName(method);
-                ActionDescriptorCreator creator = actionSelector.GetActionDescriptorDelegate(method);
+                ActionDescriptorCreator creator = actionSelector.GetActionDescriptorDelegate(
+                    method
+                );
                 Debug.Assert(creator != null);
 
                 ActionDescriptor action = creator(actionName, controller);

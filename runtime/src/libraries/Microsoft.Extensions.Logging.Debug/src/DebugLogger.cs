@@ -37,8 +37,13 @@ namespace Microsoft.Extensions.Logging.Debug
         }
 
         /// <inheritdoc />
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-        {
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        ) {
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -56,7 +61,7 @@ namespace Microsoft.Extensions.Logging.Debug
                 return;
             }
 
-            message = $"{ logLevel }: {message}";
+            message = $"{logLevel}: {message}";
 
             if (exception != null)
             {

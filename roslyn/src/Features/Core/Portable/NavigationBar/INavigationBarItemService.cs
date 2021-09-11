@@ -11,6 +11,10 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 {
     internal interface INavigationBarItemService : ILanguageService
     {
-        Task<ImmutableArray<RoslynNavigationBarItem>> GetItemsAsync(Document document, bool supportsCodeGeneration, CancellationToken cancellationToken);
+        Task<ImmutableArray<RoslynNavigationBarItem>> GetItemsAsync(
+            Document document,
+            bool supportsCodeGeneration,
+            CancellationToken cancellationToken
+        );
     }
 }

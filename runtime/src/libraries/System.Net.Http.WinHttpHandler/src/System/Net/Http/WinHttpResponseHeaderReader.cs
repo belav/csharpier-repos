@@ -51,8 +51,14 @@ namespace System.Net.Http
                 int nameLength = colonIndex - startIndex;
 
                 // If it's a known header name, use the known name instead of allocating a new string.
-                if (!HttpKnownHeaderNames.TryGetHeaderName(_buffer, startIndex, nameLength, out name))
-                {
+                if (
+                    !HttpKnownHeaderNames.TryGetHeaderName(
+                        _buffer,
+                        startIndex,
+                        nameLength,
+                        out name
+                    )
+                ) {
                     name = new string(_buffer, startIndex, nameLength);
                 }
 
@@ -61,7 +67,12 @@ namespace System.Net.Http
                 int valueLength = startIndex + length - colonIndex - 1;
                 CharArrayHelpers.Trim(_buffer, ref valueStartIndex, ref valueLength);
 
-                value = HttpKnownHeaderNames.GetHeaderValue(name, _buffer, valueStartIndex, valueLength);
+                value = HttpKnownHeaderNames.GetHeaderValue(
+                    name,
+                    _buffer,
+                    valueStartIndex,
+                    valueLength
+                );
 
                 return true;
             }

@@ -17,8 +17,11 @@ namespace System
             return GetConfigBoolValue(switchName, out exist);
         }
 
-        internal static bool GetBoolValueWithFallbacks(string switchName, string environmentName, bool defaultValue)
-        {
+        internal static bool GetBoolValueWithFallbacks(
+            string switchName,
+            string environmentName,
+            bool defaultValue
+        ) {
             bool value = GetBoolValue(switchName, out bool exists);
 
             if (exists)
@@ -28,7 +31,11 @@ namespace System
             // abstractions where reasonably possible.
 
             Span<char> buffer = stackalloc char[32];
-            uint length = Interop.Kernel32.GetEnvironmentVariable(environmentName, ref buffer.GetPinnableReference(), (uint)buffer.Length);
+            uint length = Interop.Kernel32.GetEnvironmentVariable(
+                environmentName,
+                ref buffer.GetPinnableReference(),
+                (uint)buffer.Length
+            );
             switch (length)
             {
                 case 1:

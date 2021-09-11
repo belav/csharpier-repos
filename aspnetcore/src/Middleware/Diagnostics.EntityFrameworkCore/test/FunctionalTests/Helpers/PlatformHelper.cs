@@ -9,10 +9,7 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.FunctionalTests.H
     {
         public static bool IsMono
         {
-            get
-            {
-                return Type.GetType("Mono.Runtime") != null;
-            }
+            get { return Type.GetType("Mono.Runtime") != null; }
         }
     }
 }

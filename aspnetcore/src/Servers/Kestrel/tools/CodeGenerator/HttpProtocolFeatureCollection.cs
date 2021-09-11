@@ -52,8 +52,7 @@ namespace CodeGenerator
                 "IHttpResetFeature"
             };
 
-            var allFeatures = alwaysFeatures
-                .Concat(commonFeatures)
+            var allFeatures = alwaysFeatures.Concat(commonFeatures)
                 .Concat(sometimesFeatures)
                 .Concat(maybeFeatures)
                 .ToArray();
@@ -78,7 +77,8 @@ namespace CodeGenerator
                 "IHttpRequestBodyDetectionFeature",
             };
 
-            var usings = $@"
+            var usings =
+                $@"
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Features.Authentication;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Features;";
@@ -89,7 +89,8 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Features;";
                 allFeatures: allFeatures,
                 implementedFeatures: implementedFeatures,
                 extraUsings: usings,
-                fallbackFeatures: "ConnectionFeatures");
+                fallbackFeatures: "ConnectionFeatures"
+            );
         }
     }
 }

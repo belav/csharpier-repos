@@ -35,8 +35,7 @@ namespace System.Linq.Parallel
         //     child                - the child whose data we will reverse
         //
 
-        internal ReverseQueryOperator(IEnumerable<TSource> child)
-            : base(child)
+        internal ReverseQueryOperator(IEnumerable<TSource> child) : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
 
@@ -51,17 +50,29 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, bool preferStriping, QuerySettings settings)
-        {
-            Debug.Assert(Child.OrdinalIndexState != OrdinalIndexState.Indexable, "Don't take this code path if the child is indexable.");
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        ) {
+            Debug.Assert(
+                Child.OrdinalIndexState != OrdinalIndexState.Indexable,
+                "Don't take this code path if the child is indexable."
+            );
 
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<TSource, TKey> outputStream = new PartitionedStream<TSource, TKey>(
-                partitionCount, new ReverseComparer<TKey>(inputStream.KeyComparer), OrdinalIndexState.Shuffled);
+                partitionCount,
+                new ReverseComparer<TKey>(inputStream.KeyComparer),
+                OrdinalIndexState.Shuffled
+            );
 
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new ReverseQueryOperatorEnumerator<TKey>(inputStream[i], settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = new ReverseQueryOperatorEnumerator<TKey>(
+                    inputStream[i],
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
             recipient.Receive(outputStream);
         }
@@ -74,7 +85,12 @@ namespace System.Linq.Parallel
         internal override QueryResults<TSource> Open(QuerySettings settings, bool preferStriping)
         {
             QueryResults<TSource> childQueryResults = Child.Open(settings, false);
-            return ReverseQueryOperatorResults.NewResults(childQueryResults, this, settings, preferStriping);
+            return ReverseQueryOperatorResults.NewResults(
+                childQueryResults,
+                this,
+                settings,
+                preferStriping
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -83,7 +99,10 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TSource> AsSequentialQuery(CancellationToken token)
         {
-            IEnumerable<TSource> wrappedChild = CancellableEnumerable.Wrap(Child.AsSequentialQuery(token), token);
+            IEnumerable<TSource> wrappedChild = CancellableEnumerable.Wrap(
+                Child.AsSequentialQuery(token),
+                token
+            );
             return wrappedChild.Reverse();
         }
 
@@ -101,7 +120,8 @@ namespace System.Linq.Parallel
         // The enumerator type responsible for executing the reverse operation.
         //
 
-        private sealed class ReverseQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TSource, TKey>
+        private sealed class ReverseQueryOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<TSource, TKey>
         {
             private readonly QueryOperatorEnumerator<TSource, TKey> _source; // The data source to reverse.
             private readonly CancellationToken _cancellationToken;
@@ -112,9 +132,10 @@ namespace System.Linq.Parallel
             // Instantiates a new select enumerator.
             //
 
-            internal ReverseQueryOperatorEnumerator(QueryOperatorEnumerator<TSource, TKey> source,
-                CancellationToken cancellationToken)
-            {
+            internal ReverseQueryOperatorEnumerator(
+                QueryOperatorEnumerator<TSource, TKey> source,
+                CancellationToken cancellationToken
+            ) {
                 Debug.Assert(source != null);
                 _source = source;
                 _cancellationToken = cancellationToken;
@@ -124,8 +145,10 @@ namespace System.Linq.Parallel
             // Straightforward IEnumerator<T> methods.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TSource currentElement, [AllowNull] ref TKey currentKey)
-            {
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TSource currentElement,
+                [AllowNull] ref TKey currentKey
+            ) {
                 // If the buffer has not been created, we will generate it lazily on demand.
                 if (_buffer == null)
                 {
@@ -173,25 +196,37 @@ namespace System.Linq.Parallel
             private readonly int _count; // The number of elements in child results
 
             public static QueryResults<TSource> NewResults(
-                QueryResults<TSource> childQueryResults, ReverseQueryOperator<TSource> op,
-                QuerySettings settings, bool preferStriping)
-            {
+                QueryResults<TSource> childQueryResults,
+                ReverseQueryOperator<TSource> op,
+                QuerySettings settings,
+                bool preferStriping
+            ) {
                 if (childQueryResults.IsIndexible)
                 {
                     return new ReverseQueryOperatorResults(
-                        childQueryResults, op, settings, preferStriping);
+                        childQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
                 else
                 {
                     return new UnaryQueryOperatorResults(
-                        childQueryResults, op, settings, preferStriping);
+                        childQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
             }
 
             private ReverseQueryOperatorResults(
-                QueryResults<TSource> childQueryResults, ReverseQueryOperator<TSource> op,
-                QuerySettings settings, bool preferStriping)
-                : base(childQueryResults, op, settings, preferStriping)
+                QueryResults<TSource> childQueryResults,
+                ReverseQueryOperator<TSource> op,
+                QuerySettings settings,
+                bool preferStriping
+            ) : base(childQueryResults, op, settings, preferStriping)
             {
                 Debug.Assert(_childQueryResults.IsIndexible);
                 _count = _childQueryResults.ElementsCount;

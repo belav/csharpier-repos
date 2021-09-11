@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static class NameSyntaxExtensions
     {
-        public static IList<NameSyntax> GetNameParts(this NameSyntax nameSyntax)
-            => new NameSyntaxIterator(nameSyntax).ToList();
+        public static IList<NameSyntax> GetNameParts(this NameSyntax nameSyntax) =>
+            new NameSyntaxIterator(nameSyntax).ToList();
 
         public static NameSyntax GetLastDottedName(this NameSyntax nameSyntax)
         {
@@ -51,17 +51,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static bool CanBeReplacedWithAnyName(this NameSyntax nameSyntax)
         {
-            if (nameSyntax.IsParentKind(SyntaxKind.AliasQualifiedName) ||
-                nameSyntax.IsParentKind(SyntaxKind.NameColon) ||
-                nameSyntax.IsParentKind(SyntaxKind.NameEquals) ||
-                nameSyntax.IsParentKind(SyntaxKind.TypeParameterConstraintClause))
-            {
+            if (
+                nameSyntax.IsParentKind(SyntaxKind.AliasQualifiedName)
+                || nameSyntax.IsParentKind(SyntaxKind.NameColon)
+                || nameSyntax.IsParentKind(SyntaxKind.NameEquals)
+                || nameSyntax.IsParentKind(SyntaxKind.TypeParameterConstraintClause)
+            ) {
                 return false;
             }
 
-            if (nameSyntax.CheckParent<QualifiedNameSyntax>(q => q.Right == nameSyntax) ||
-                nameSyntax.CheckParent<MemberAccessExpressionSyntax>(m => m.Name == nameSyntax))
-            {
+            if (
+                nameSyntax.CheckParent<QualifiedNameSyntax>(q => q.Right == nameSyntax)
+                || nameSyntax.CheckParent<MemberAccessExpressionSyntax>(m => m.Name == nameSyntax)
+            ) {
                 return false;
             }
 

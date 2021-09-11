@@ -16,7 +16,7 @@ namespace GitHub_23861
 
             if (returnVal == 100)
             {
-                Console.WriteLine("Pass");                
+                Console.WriteLine("Pass");
             }
             else
             {
@@ -25,7 +25,10 @@ namespace GitHub_23861
             return returnVal;
         }
 
-        public static void LessThanAllDouble() { TestVectorLessThanAll<double>(); }
+        public static void LessThanAllDouble()
+        {
+            TestVectorLessThanAll<double>();
+        }
 
         private static void TestVectorLessThanAll<T>() where T : struct
         {

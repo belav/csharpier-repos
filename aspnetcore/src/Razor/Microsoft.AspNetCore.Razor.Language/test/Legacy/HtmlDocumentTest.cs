@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 {
     public class HtmlDocumentTest : ParserTestBase
     {
-        private static readonly TestFile Nested1000 = TestFile.Create("TestFiles/nested-1000.html", typeof(HtmlDocumentTest));
+        private static readonly TestFile Nested1000 = TestFile.Create(
+            "TestFiles/nested-1000.html",
+            typeof(HtmlDocumentTest)
+        );
 
         [Fact]
         public void NestedCodeBlockWithMarkupSetsDotAsMarkup()
@@ -50,10 +53,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void WithinSectionDoesNotCreateDocumentLevelSpan()
         {
-            ParseDocumentTest("@section Foo {" + Environment.NewLine
-                            + "    <html></html>" + Environment.NewLine
-                            + "}",
-                new[] { SectionDirective.Directive, });
+            ParseDocumentTest(
+                "@section Foo {"
+                    + Environment.NewLine
+                    + "    <html></html>"
+                    + Environment.NewLine
+                    + "}",
+                new[] { SectionDirective.Directive, }
+            );
         }
 
         [Fact]
@@ -195,7 +202,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             ParseDocumentTest(
                 @"@section Foo { <script>foo<bar baz='@boz'></script> }",
-                new[] { SectionDirective.Directive, });
+                new[] { SectionDirective.Directive, }
+            );
         }
 
         [Fact]
@@ -238,7 +246,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void WithDoubleTransitionWithExpressionBlock_DoesNotThrow()
         {
-            var input = "{<span foo='@@@(2+3)' bar='@(2+3)@@@DateTime.Now' baz='@DateTime.Now@@' bat='@DateTime.Now @@' zoo='@@@DateTime.Now' />}";
+            var input =
+                "{<span foo='@@@(2+3)' bar='@(2+3)@@@DateTime.Now' baz='@DateTime.Now@@' bat='@DateTime.Now @@' zoo='@@@DateTime.Now' />}";
             ParseDocumentTest(input);
         }
 
@@ -252,7 +261,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void WithDoubleTransitionInRegex_DoesNotThrow()
         {
-            var input = @"{<span foo=""/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@@[a-z0-9]([a-z0-9-]*[a-z0-9])?\.([a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i"" />}";
+            var input =
+                @"{<span foo=""/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@@[a-z0-9]([a-z0-9-]*[a-z0-9])?\.([a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i"" />}";
             ParseDocumentTest(input);
         }
 

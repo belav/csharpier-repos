@@ -48,8 +48,9 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             }
         }
 
-        public Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken)
-        {
+        public Task<X509Certificate2?> GetClientCertificateAsync(
+            CancellationToken cancellationToken
+        ) {
             return Task.FromResult(ClientCertificate);
         }
     }

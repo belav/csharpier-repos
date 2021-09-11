@@ -9,24 +9,26 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class ParenthesizedLambdaExpressionStructureProvider : AbstractSyntaxNodeStructureProvider<ParenthesizedLambdaExpressionSyntax>
+    internal class ParenthesizedLambdaExpressionStructureProvider
+        : AbstractSyntaxNodeStructureProvider<ParenthesizedLambdaExpressionSyntax>
     {
         protected override void CollectBlockSpans(
             ParenthesizedLambdaExpressionSyntax lambdaExpression,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             // fault tolerance
             if (lambdaExpression.Body.IsMissing)
             {
                 return;
             }
 
-            if (!(lambdaExpression.Body is BlockSyntax lambdaBlock) ||
-                lambdaBlock.OpenBraceToken.IsMissing ||
-                lambdaBlock.CloseBraceToken.IsMissing)
-            {
+            if (
+                !(lambdaExpression.Body is BlockSyntax lambdaBlock)
+                || lambdaBlock.OpenBraceToken.IsMissing
+                || lambdaBlock.CloseBraceToken.IsMissing
+            ) {
                 return;
             }
 
@@ -36,14 +38,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 return;
             }
 
-            spans.AddIfNotNull(CSharpStructureHelpers.CreateBlockSpan(
-                lambdaExpression,
-                lambdaExpression.ArrowToken,
-                lastToken,
-                compressEmptyLines: false,
-                autoCollapse: false,
-                type: BlockTypes.Expression,
-                isCollapsible: true));
+            spans.AddIfNotNull(
+                CSharpStructureHelpers.CreateBlockSpan(
+                    lambdaExpression,
+                    lambdaExpression.ArrowToken,
+                    lastToken,
+                    compressEmptyLines: false,
+                    autoCollapse: false,
+                    type: BlockTypes.Expression,
+                    isCollapsible: true
+                )
+            );
         }
     }
 }

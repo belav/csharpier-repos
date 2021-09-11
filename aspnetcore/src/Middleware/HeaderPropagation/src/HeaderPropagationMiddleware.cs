@@ -28,8 +28,11 @@ namespace Microsoft.AspNetCore.HeaderPropagation
         /// <param name="values">
         /// The <see cref="HeaderPropagationValues"/> that stores the request headers to be propagated in an <see cref="System.Threading.AsyncLocal{T}"/>
         /// </param>
-        public HeaderPropagationMiddleware(RequestDelegate next, IOptions<HeaderPropagationOptions> options, HeaderPropagationValues values)
-        {
+        public HeaderPropagationMiddleware(
+            RequestDelegate next,
+            IOptions<HeaderPropagationOptions> options,
+            HeaderPropagationValues values
+        ) {
             _next = next ?? throw new ArgumentNullException(nameof(next));
 
             if (options == null)
@@ -48,7 +51,9 @@ namespace Microsoft.AspNetCore.HeaderPropagation
         public Task Invoke(HttpContext context)
         {
             // We need to intialize the headers because the message handler will use this to detect misconfiguration.
-            var headers = _values.Headers ??= new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
+            var headers = _values.Headers ??= new Dictionary<string, StringValues>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Perf: avoid foreach since we don't define a struct enumerator.
             var entries = _options.Headers;
@@ -76,7 +81,9 @@ namespace Microsoft.AspNetCore.HeaderPropagation
             context.Request.Headers.TryGetValue(entry.InboundHeaderName, out var value);
             if (entry.ValueFilter != null)
             {
-                value = entry.ValueFilter(new HeaderPropagationContext(context, entry.InboundHeaderName, value));
+                value = entry.ValueFilter(
+                    new HeaderPropagationContext(context, entry.InboundHeaderName, value)
+                );
             }
 
             return value;

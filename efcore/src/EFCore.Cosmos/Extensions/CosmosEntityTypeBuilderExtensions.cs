@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static EntityTypeBuilder ToContainer(
             this EntityTypeBuilder entityTypeBuilder,
-            string? name)
-        {
+            string? name
+        ) {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
@@ -44,9 +44,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static EntityTypeBuilder<TEntity> ToContainer<TEntity>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
-            string? name)
-            where TEntity : class
-            => (EntityTypeBuilder<TEntity>)ToContainer((EntityTypeBuilder)entityTypeBuilder, name);
+            string? name
+        ) where TEntity : class =>
+            (EntityTypeBuilder<TEntity>)ToContainer((EntityTypeBuilder)entityTypeBuilder, name);
 
         /// <summary>
         ///     Configures the container that the entity type maps to when targeting Azure Cosmos.
@@ -61,8 +61,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionEntityTypeBuilder? ToContainer(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             if (!entityTypeBuilder.CanSetContainer(name, fromDataAnnotation))
             {
                 return null;
@@ -84,12 +84,16 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetContainer(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
-            return entityTypeBuilder.CanSetAnnotation(CosmosAnnotationNames.ContainerName, name, fromDataAnnotation);
+            return entityTypeBuilder.CanSetAnnotation(
+                CosmosAnnotationNames.ContainerName,
+                name,
+                fromDataAnnotation
+            );
         }
 
         /// <summary>
@@ -100,8 +104,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static OwnedNavigationBuilder ToJsonProperty(
             this OwnedNavigationBuilder entityTypeBuilder,
-            string? name)
-        {
+            string? name
+        ) {
             entityTypeBuilder.OwnedEntityType.SetContainingPropertyName(name);
 
             return entityTypeBuilder;
@@ -113,11 +117,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
         /// <param name="name"> The name of the parent property. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static OwnedNavigationBuilder<TEntity, TDependentEntity> ToJsonProperty<TEntity, TDependentEntity>(
+        public static OwnedNavigationBuilder<TEntity, TDependentEntity> ToJsonProperty<
+            TEntity,
+            TDependentEntity
+        >(
             this OwnedNavigationBuilder<TEntity, TDependentEntity> entityTypeBuilder,
-            string? name)
-            where TEntity : class
-            where TDependentEntity : class
+            string? name
+        ) where TEntity : class
+          where TDependentEntity : class
         {
             entityTypeBuilder.OwnedEntityType.SetContainingPropertyName(name);
 
@@ -137,8 +144,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionEntityTypeBuilder? ToJsonProperty(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             if (!entityTypeBuilder.CanSetJsonProperty(name, fromDataAnnotation))
             {
                 return null;
@@ -160,12 +167,16 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetJsonProperty(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
-            return entityTypeBuilder.CanSetAnnotation(CosmosAnnotationNames.PropertyName, name, fromDataAnnotation);
+            return entityTypeBuilder.CanSetAnnotation(
+                CosmosAnnotationNames.PropertyName,
+                name,
+                fromDataAnnotation
+            );
         }
 
         /// <summary>
@@ -176,8 +187,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static EntityTypeBuilder HasPartitionKey(
             this EntityTypeBuilder entityTypeBuilder,
-            string? name)
-        {
+            string? name
+        ) {
             entityTypeBuilder.Metadata.SetPartitionKeyPropertyName(name);
 
             return entityTypeBuilder;
@@ -191,8 +202,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static EntityTypeBuilder<TEntity> HasPartitionKey<TEntity>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
-            string? name)
-            where TEntity : class
+            string? name
+        ) where TEntity : class
         {
             entityTypeBuilder.Metadata.SetPartitionKeyPropertyName(name);
 
@@ -207,12 +218,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static EntityTypeBuilder<TEntity> HasPartitionKey<TEntity, TProperty>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
-            Expression<Func<TEntity, TProperty>> propertyExpression)
-            where TEntity : class
+            Expression<Func<TEntity, TProperty>> propertyExpression
+        ) where TEntity : class
         {
             Check.NotNull(propertyExpression, nameof(propertyExpression));
 
-            entityTypeBuilder.Metadata.SetPartitionKeyPropertyName(propertyExpression.GetMemberAccess().GetSimpleMemberName());
+            entityTypeBuilder.Metadata.SetPartitionKeyPropertyName(
+                propertyExpression.GetMemberAccess().GetSimpleMemberName()
+            );
 
             return entityTypeBuilder;
         }
@@ -230,8 +243,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionEntityTypeBuilder? HasPartitionKey(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             if (!entityTypeBuilder.CanSetPartitionKey(name, fromDataAnnotation))
             {
                 return null;
@@ -253,12 +266,16 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetPartitionKey(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             string? name,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
-            return entityTypeBuilder.CanSetAnnotation(CosmosAnnotationNames.PartitionKeyName, name, fromDataAnnotation);
+            return entityTypeBuilder.CanSetAnnotation(
+                CosmosAnnotationNames.PartitionKeyName,
+                name,
+                fromDataAnnotation
+            );
         }
 
         /// <summary>
@@ -281,8 +298,9 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="entityTypeBuilder"> The builder for the entity type being configured. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static EntityTypeBuilder<TEntity> UseETagConcurrency<TEntity>(this EntityTypeBuilder<TEntity> entityTypeBuilder)
-            where TEntity : class
+        public static EntityTypeBuilder<TEntity> UseETagConcurrency<TEntity>(
+            this EntityTypeBuilder<TEntity> entityTypeBuilder
+        ) where TEntity : class
         {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             UseETagConcurrency((EntityTypeBuilder)entityTypeBuilder);

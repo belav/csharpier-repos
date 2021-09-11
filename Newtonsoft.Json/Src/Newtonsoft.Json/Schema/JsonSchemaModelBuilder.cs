@@ -36,11 +36,16 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Schema
 {
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     internal class JsonSchemaModelBuilder
     {
         private JsonSchemaNodeCollection _nodes = new JsonSchemaNodeCollection();
-        private Dictionary<JsonSchemaNode, JsonSchemaModel> _nodeModels = new Dictionary<JsonSchemaNode, JsonSchemaModel>();
+        private Dictionary<JsonSchemaNode, JsonSchemaModel> _nodeModels = new Dictionary<
+            JsonSchemaNode,
+            JsonSchemaModel
+        >();
         private JsonSchemaNode _node;
 
         public JsonSchemaModel Build(JsonSchema schema)
@@ -76,9 +81,8 @@ namespace Newtonsoft.Json.Schema
                 return _nodes[newId];
             }
 
-            JsonSchemaNode currentNode = (existingNode != null)
-                ? existingNode.Combine(schema)
-                : new JsonSchemaNode(schema);
+            JsonSchemaNode currentNode =
+                (existingNode != null) ? existingNode.Combine(schema) : new JsonSchemaNode(schema);
 
             _nodes.Add(currentNode);
 
@@ -115,8 +119,10 @@ namespace Newtonsoft.Json.Schema
             return currentNode;
         }
 
-        public void AddProperties(IDictionary<string, JsonSchema> source, IDictionary<string, JsonSchemaNode> target)
-        {
+        public void AddProperties(
+            IDictionary<string, JsonSchema> source,
+            IDictionary<string, JsonSchemaNode> target
+        ) {
             if (source != null)
             {
                 foreach (KeyValuePair<string, JsonSchema> property in source)
@@ -126,8 +132,11 @@ namespace Newtonsoft.Json.Schema
             }
         }
 
-        public void AddProperty(IDictionary<string, JsonSchemaNode> target, string propertyName, JsonSchema schema)
-        {
+        public void AddProperty(
+            IDictionary<string, JsonSchemaNode> target,
+            string propertyName,
+            JsonSchema schema
+        ) {
             target.TryGetValue(propertyName, out JsonSchemaNode propertyNode);
 
             target[propertyName] = AddSchema(propertyNode, schema);
@@ -135,9 +144,8 @@ namespace Newtonsoft.Json.Schema
 
         public void AddItem(JsonSchemaNode parentNode, int index, JsonSchema schema)
         {
-            JsonSchemaNode existingItemNode = (parentNode.Items.Count > index)
-                ? parentNode.Items[index]
-                : null;
+            JsonSchemaNode existingItemNode =
+                (parentNode.Items.Count > index) ? parentNode.Items[index] : null;
 
             JsonSchemaNode newItemNode = AddSchema(existingItemNode, schema);
 

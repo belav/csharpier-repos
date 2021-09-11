@@ -68,14 +68,19 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private ImmutableArray<string> _namespaceSegments;
 
-        public static MetadataTypeName FromFullName(string fullName, bool useCLSCompliantNameArityEncoding = false, int forcedArity = -1)
-        {
+        public static MetadataTypeName FromFullName(
+            string fullName,
+            bool useCLSCompliantNameArityEncoding = false,
+            int forcedArity = -1
+        ) {
             Debug.Assert(fullName != null);
             Debug.Assert(forcedArity >= -1 && forcedArity < short.MaxValue);
-            Debug.Assert(forcedArity == -1 ||
-                         !useCLSCompliantNameArityEncoding ||
-                         forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(fullName),
-                         "Conflicting metadata type name resolution options!");
+            Debug.Assert(
+                forcedArity == -1
+                    || !useCLSCompliantNameArityEncoding
+                    || forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(fullName),
+                "Conflicting metadata type name resolution options!"
+            );
 
             MetadataTypeName name;
 
@@ -92,18 +97,21 @@ namespace Microsoft.CodeAnalysis
         }
 
         public static MetadataTypeName FromNamespaceAndTypeName(
-            string namespaceName, string typeName,
-            bool useCLSCompliantNameArityEncoding = false, int forcedArity = -1
-        )
-        {
+            string namespaceName,
+            string typeName,
+            bool useCLSCompliantNameArityEncoding = false,
+            int forcedArity = -1
+        ) {
             Debug.Assert(namespaceName != null);
             Debug.Assert(typeName != null);
             Debug.Assert(forcedArity >= -1 && forcedArity < short.MaxValue);
             Debug.Assert(!typeName.Contains(MetadataHelpers.DotDelimiterString));
-            Debug.Assert(forcedArity == -1 ||
-                         !useCLSCompliantNameArityEncoding ||
-                         forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(typeName),
-                         "Conflicting metadata type name resolution options!");
+            Debug.Assert(
+                forcedArity == -1
+                    || !useCLSCompliantNameArityEncoding
+                    || forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(typeName),
+                "Conflicting metadata type name resolution options!"
+            );
 
             MetadataTypeName name;
 
@@ -119,15 +127,23 @@ namespace Microsoft.CodeAnalysis
             return name;
         }
 
-        public static MetadataTypeName FromTypeName(string typeName, bool useCLSCompliantNameArityEncoding = false, int forcedArity = -1)
-        {
+        public static MetadataTypeName FromTypeName(
+            string typeName,
+            bool useCLSCompliantNameArityEncoding = false,
+            int forcedArity = -1
+        ) {
             Debug.Assert(typeName != null);
-            Debug.Assert(!typeName.Contains(MetadataHelpers.DotDelimiterString) || typeName.IndexOf(MetadataHelpers.MangledNameRegionStartChar) >= 0);
+            Debug.Assert(
+                !typeName.Contains(MetadataHelpers.DotDelimiterString)
+                    || typeName.IndexOf(MetadataHelpers.MangledNameRegionStartChar) >= 0
+            );
             Debug.Assert(forcedArity >= -1 && forcedArity < short.MaxValue);
-            Debug.Assert(forcedArity == -1 ||
-                         !useCLSCompliantNameArityEncoding ||
-                         forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(typeName),
-                         "Conflicting metadata type name resolution options!");
+            Debug.Assert(
+                forcedArity == -1
+                    || !useCLSCompliantNameArityEncoding
+                    || forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(typeName),
+                "Conflicting metadata type name resolution options!"
+            );
 
             MetadataTypeName name;
 
@@ -205,7 +221,10 @@ namespace Microsoft.CodeAnalysis
                 if (_unmangledTypeName == null)
                 {
                     Debug.Assert(_inferredArity == -1);
-                    _unmangledTypeName = MetadataHelpers.InferTypeArityAndUnmangleMetadataName(TypeName, out _inferredArity);
+                    _unmangledTypeName = MetadataHelpers.InferTypeArityAndUnmangleMetadataName(
+                        TypeName,
+                        out _inferredArity
+                    );
                 }
 
                 return _unmangledTypeName;
@@ -223,7 +242,10 @@ namespace Microsoft.CodeAnalysis
                 if (_inferredArity == -1)
                 {
                     Debug.Assert(_unmangledTypeName == null);
-                    _unmangledTypeName = MetadataHelpers.InferTypeArityAndUnmangleMetadataName(TypeName, out _inferredArity);
+                    _unmangledTypeName = MetadataHelpers.InferTypeArityAndUnmangleMetadataName(
+                        TypeName,
+                        out _inferredArity
+                    );
                 }
 
                 return _inferredArity;
@@ -235,10 +257,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool IsMangled
         {
-            get
-            {
-                return InferredArity > 0;
-            }
+            get { return InferredArity > 0; }
         }
 
         /// <summary>
@@ -249,10 +268,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public readonly bool UseCLSCompliantNameArityEncoding
         {
-            get
-            {
-                return _useCLSCompliantNameArityEncoding;
-            }
+            get { return _useCLSCompliantNameArityEncoding; }
         }
 
         /// <summary>
@@ -263,10 +279,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public readonly int ForcedArity
         {
-            get
-            {
-                return _forcedArity;
-            }
+            get { return _forcedArity; }
         }
 
         /// <summary>
@@ -287,10 +300,7 @@ namespace Microsoft.CodeAnalysis
 
         public readonly bool IsNull
         {
-            get
-            {
-                return _typeName == null && _fullName == null;
-            }
+            get { return _typeName == null && _fullName == null; }
         }
 
         public override string ToString()
@@ -301,7 +311,13 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                return String.Format("{{{0},{1},{2},{3}}}", NamespaceName, TypeName, UseCLSCompliantNameArityEncoding.ToString(), _forcedArity.ToString());
+                return String.Format(
+                    "{{{0},{1},{2},{3}}}",
+                    NamespaceName,
+                    TypeName,
+                    UseCLSCompliantNameArityEncoding.ToString(),
+                    _forcedArity.ToString()
+                );
             }
         }
     }

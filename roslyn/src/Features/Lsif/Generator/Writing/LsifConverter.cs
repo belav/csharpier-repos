@@ -12,12 +12,16 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Writing
     {
         public override bool CanConvert(Type objectType)
         {
-            return typeof(ISerializableId).IsAssignableFrom(objectType) ||
-                   objectType == typeof(Uri);
+            return typeof(ISerializableId).IsAssignableFrom(objectType)
+                || objectType == typeof(Uri);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        ) {
             throw new NotImplementedException();
         }
 

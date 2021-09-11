@@ -18,8 +18,12 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
         }
 
         /// <inheritdoc />
-        public override object? ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
+        public override object? ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        ) {
             var annotatedProblemDetails = serializer.Deserialize<AnnotatedProblemDetails>(reader);
             if (annotatedProblemDetails == null)
             {

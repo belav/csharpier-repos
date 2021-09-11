@@ -19,9 +19,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
     public class Foo
     {
-        public void Method(params int[] x)
-        {
-        }
+        public void Method(params int[] x) { }
     }
 
     public class Test
@@ -43,7 +41,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "Foo.Method(params int[])"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArgTypes,
+                        e.Message,
+                        "Foo.Method(params int[])"
+                    )
+                )
                     return 0;
             }
 
@@ -52,8 +56,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Oneparam.param014.param014
 {
@@ -70,9 +72,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
     public class Foo
     {
-        public void Method(params int[] x)
-        {
-        }
+        public void Method(params int[] x) { }
     }
 
     public class Test
@@ -94,7 +94,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, e.Message, "Foo.Method(params int[])"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadArgTypes,
+                        e.Message,
+                        "Foo.Method(params int[])"
+                    )
+                )
                     return 0;
             }
 
@@ -103,8 +109,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Oneparam.param022.param022
 {
@@ -118,11 +122,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
     public class A
     {
-        public Action Baz
-        {
-            get;
-            set;
-        }
+        public Action Baz { get; set; }
     }
 
     public class C
@@ -151,33 +151,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             Program.Status = 1;
         }
 
-        public Action Bar
-        {
-            get;
-            set;
-        }
+        public Action Bar { get; set; }
 
-        public dynamic Foo
-        {
-            get;
-            set;
-        }
+        public dynamic Foo { get; set; }
     }
 
     public interface I
     {
         void Baz();
-        Action Bar
-        {
-            get;
-            set;
-        }
+        Action Bar { get; set; }
 
-        dynamic Foo
-        {
-            get;
-            set;
-        }
+        dynamic Foo { get; set; }
     }
 
     public class Program
@@ -198,7 +182,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             x.Foo();
         }
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -207,33 +190,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         public static int MainMethod()
         {
             var a = new C();
-            var b = new
-            {
-                Baz = new Action(() => Program.Status = 1)
-            }
-
-            ;
-            var d = new D<Func<int>>()
-            {
-                Baz = new Func<int>(() => Program.Status = 1)
-            }
-
-            ;
-            var e = new E()
-            {
-                Baz = new Action(() => Program.Status = 1)
-            }
-
-            ;
+            var b = new { Baz = new Action(() => Program.Status = 1) };
+            var d = new D<Func<int>>() { Baz = new Func<int>(() => Program.Status = 1) };
+            var e = new E() { Baz = new Action(() => Program.Status = 1) };
             var x = new
             {
                 Baz = (Action)delegate
                 {
                     Program.Status = 1;
                 }
-            }
-
-            ;
+            };
             var f = new F();
             int rez = 0;
             int tests = 0;
@@ -326,8 +292,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Oneparam.nullable001.nullable001
 {
     public class Test
@@ -366,8 +330,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Oneparam.regr001.regr001
 {
@@ -566,7 +528,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         [Test]
         [Priority(Priority.Priority2)]
-        public void DynamicCSharpRunTest() { Assert.AreEqual(0, MainMethod()); }
+        public void DynamicCSharpRunTest()
+        {
+            Assert.AreEqual(0, MainMethod());
+        }
         public static int MainMethod()
         {
             var c = "abc".ToCharArray();
@@ -576,7 +541,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             return 0;
         }
     }
-
     // </Code>
 }
- #endif
+#endif

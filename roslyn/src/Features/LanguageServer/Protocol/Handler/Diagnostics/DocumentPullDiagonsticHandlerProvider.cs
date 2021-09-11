@@ -22,15 +22,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DocumentPullDiagonsticHandlerProvider(
             IDiagnosticService diagnosticService,
-            IDiagnosticAnalyzerService analyzerService)
-        {
+            IDiagnosticAnalyzerService analyzerService
+        ) {
             _diagnosticService = diagnosticService;
             _analyzerService = analyzerService;
         }
 
         public override ImmutableArray<IRequestHandler> CreateRequestHandlers()
         {
-            return ImmutableArray.Create<IRequestHandler>(new DocumentPullDiagnosticHandler(_diagnosticService, _analyzerService));
+            return ImmutableArray.Create<IRequestHandler>(
+                new DocumentPullDiagnosticHandler(_diagnosticService, _analyzerService)
+            );
         }
     }
 }

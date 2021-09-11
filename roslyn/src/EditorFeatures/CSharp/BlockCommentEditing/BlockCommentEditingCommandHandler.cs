@@ -38,8 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public BlockCommentEditingCommandHandler(
             ITextUndoHistoryRegistry undoHistoryRegistry,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
-        {
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        ) {
             Contract.ThrowIfNull(undoHistoryRegistry);
             Contract.ThrowIfNull(editorOperationsFactoryService);
 
@@ -49,15 +49,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
 
         public string DisplayName => EditorFeaturesResources.Block_Comment_Editing;
 
-        public CommandState GetCommandState(ReturnKeyCommandArgs args)
-            => CommandState.Unspecified;
+        public CommandState GetCommandState(ReturnKeyCommandArgs args) => CommandState.Unspecified;
 
-        public bool ExecuteCommand(ReturnKeyCommandArgs args, CommandExecutionContext context)
-            => TryHandleReturnKey(args.SubjectBuffer, args.TextView);
+        public bool ExecuteCommand(ReturnKeyCommandArgs args, CommandExecutionContext context) =>
+            TryHandleReturnKey(args.SubjectBuffer, args.TextView);
 
         private bool TryHandleReturnKey(ITextBuffer subjectBuffer, ITextView textView)
         {
-            if (!subjectBuffer.GetFeatureOnOffOption(FeatureOnOffOptions.AutoInsertBlockCommentStartString))
+            if (
+                !subjectBuffer.GetFeatureOnOffOption(
+                    FeatureOnOffOptions.AutoInsertBlockCommentStartString
+                )
+            )
                 return false;
 
             var caretPosition = textView.GetCaretPoint(subjectBuffer);
@@ -68,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
             if (textToInsert == null)
                 return false;
 
-            using var transaction = _undoHistoryRegistry.GetHistory(textView.TextBuffer).CreateTransaction(EditorFeaturesResources.Insert_new_line);
+            using var transaction = _undoHistoryRegistry.GetHistory(textView.TextBuffer)
+                .CreateTransaction(EditorFeaturesResources.Insert_new_line);
 
             var editorOperations = _editorOperationsFactoryService.GetEditorOperations(textView);
             editorOperations.ReplaceText(GetReplacementSpan(caretPosition.Value), textToInsert);
@@ -84,7 +88,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
             var snapshot = caretPosition.Snapshot;
             var start = caretPosition.Position;
             var end = caretPosition;
-            while (end < snapshot.Length && SyntaxFacts.IsWhitespace(end.GetChar()) && !SyntaxFacts.IsNewLine(end.GetChar()))
+            while (
+                end < snapshot.Length
+                && SyntaxFacts.IsWhitespace(end.GetChar())
+                && !SyntaxFacts.IsNewLine(end.GetChar())
+            )
                 end = end + 1;
 
             return Span.FromBounds(start, end);
@@ -102,31 +110,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
             //
             // The line either has to contain `/*` or it has to start with `*`.  The former looks like we're starting a
             // comment in this line.  The latter looks like the continuation of a block comment.
-            var containsBlockCommentStartString = currentLine.Contains(firstNonWhitespacePosition, "/*", ignoreCase: false);
-            var startsWithBlockCommentMiddleString = currentLine.StartsWith(firstNonWhitespacePosition, "*", ignoreCase: false);
+            var containsBlockCommentStartString = currentLine.Contains(
+                firstNonWhitespacePosition,
+                "/*",
+                ignoreCase: false
+            );
+            var startsWithBlockCommentMiddleString = currentLine.StartsWith(
+                firstNonWhitespacePosition,
+                "*",
+                ignoreCase: false
+            );
 
-            if (!containsBlockCommentStartString &&
-                !startsWithBlockCommentMiddleString)
+            if (!containsBlockCommentStartString && !startsWithBlockCommentMiddleString)
             {
                 return null;
             }
 
             // Now do more expensive syntactic check to see if we're actually in the block comment.
-            if (!IsCaretInsideBlockCommentSyntax(caretPosition, out var blockComment, out var newLine))
+            if (
+                !IsCaretInsideBlockCommentSyntax(
+                    caretPosition,
+                    out var blockComment,
+                    out var newLine
+                )
+            )
                 return null;
 
             var textSnapshot = caretPosition.Snapshot;
 
             // Now that we've found the real start of the comment, ensure that it's accurate with our quick textual check.
-            containsBlockCommentStartString = currentLine.LineNumber == textSnapshot.GetLineFromPosition(blockComment.FullSpan.Start).LineNumber;
+            containsBlockCommentStartString =
+                currentLine.LineNumber
+                == textSnapshot.GetLineFromPosition(blockComment.FullSpan.Start).LineNumber;
 
             // The whitespace indentation on the line where the block-comment starts.
             var commentIndentation = GetCommentIndentation();
 
             // The whitespace indentation on the current line up to the first non-whitespace char.
-            var lineIndentation = textSnapshot.GetText(Span.FromBounds(
-                currentLine.Start,
-                firstNonWhitespacePosition));
+            var lineIndentation = textSnapshot.GetText(
+                Span.FromBounds(currentLine.Start, firstNonWhitespacePosition)
+            );
 
             var exteriorText = GetExteriorText();
             if (exteriorText == null)
@@ -154,7 +177,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                 if (containsBlockCommentStartString)
                     return GetExteriorTextAfterBlockCommentStart();
 
-                var startsWithBlockCommentEndString = currentLine.StartsWith(firstNonWhitespacePosition, "*/", ignoreCase: false);
+                var startsWithBlockCommentEndString = currentLine.StartsWith(
+                    firstNonWhitespacePosition,
+                    "*/",
+                    ignoreCase: false
+                );
                 if (startsWithBlockCommentEndString)
                     return GetExteriorTextBeforeBlockCommentEnd();
 
@@ -247,7 +274,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                     currentChar++;
 
                 var start = currentChar;
-                while (currentChar < caretPosition && SyntaxFacts.IsWhitespace(textSnapshot[currentChar]))
+                while (
+                    currentChar < caretPosition
+                    && SyntaxFacts.IsWhitespace(textSnapshot[currentChar])
+                )
                     currentChar++;
 
                 return textSnapshot.GetText(Span.FromBounds(start, currentChar));
@@ -257,14 +287,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
         private static bool BlockCommentEndsRightAfterCaret(SnapshotPoint caretPosition)
         {
             var snapshot = caretPosition.Snapshot;
-            return (int)caretPosition + 2 <= snapshot.Length && snapshot.GetText(caretPosition, 2) == "*/";
+            return (int)caretPosition + 2 <= snapshot.Length
+                && snapshot.GetText(caretPosition, 2) == "*/";
         }
 
         public static bool IsCaretInsideBlockCommentSyntax(
             SnapshotPoint caretPosition,
             out SyntaxTrivia trivia,
-            [NotNullWhen(true)] out string? newLine)
-        {
+            [NotNullWhen(true)] out string? newLine
+        ) {
             trivia = default;
             newLine = null;
 
@@ -274,9 +305,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                 return false;
 
             var syntaxTree = document.GetRequiredSyntaxTreeSynchronously(CancellationToken.None);
-            trivia = syntaxTree.FindTriviaAndAdjustForEndOfFile(caretPosition, CancellationToken.None);
+            trivia = syntaxTree.FindTriviaAndAdjustForEndOfFile(
+                caretPosition,
+                CancellationToken.None
+            );
 
-            var isBlockComment = trivia.IsKind(SyntaxKind.MultiLineCommentTrivia) || trivia.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia);
+            var isBlockComment =
+                trivia.IsKind(SyntaxKind.MultiLineCommentTrivia)
+                || trivia.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia);
             if (isBlockComment)
             {
                 var options = document.Project.Solution.Options;

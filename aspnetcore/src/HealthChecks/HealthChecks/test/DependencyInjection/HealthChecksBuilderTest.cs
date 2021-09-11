@@ -18,18 +18,27 @@ namespace Microsoft.Extensions.DependencyInjection
         public void AddCheck_Instance()
         {
             // Arrange
-            var instance = new DelegateHealthCheck((_) =>
-            {
-                return Task.FromResult(HealthCheckResult.Healthy());
-            });
+            var instance = new DelegateHealthCheck(
+                (_) =>
+                {
+                    return Task.FromResult(HealthCheckResult.Healthy());
+                }
+            );
 
             var services = CreateServices();
-            services.AddHealthChecks().AddCheck("test", failureStatus: HealthStatus.Degraded,tags: new[] { "tag", }, instance: instance);
+            services.AddHealthChecks()
+                .AddCheck(
+                    "test",
+                    failureStatus: HealthStatus.Degraded,
+                    tags: new[] { "tag", },
+                    instance: instance
+                );
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Act
-            var options = serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+            var options =
+                serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
 
             // Assert
             var registration = Assert.Single(options.Registrations);
@@ -44,12 +53,18 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = CreateServices();
-            services.AddHealthChecks().AddCheck<TestHealthCheck>("test", failureStatus: HealthStatus.Degraded, tags: new[] { "tag", });
+            services.AddHealthChecks()
+                .AddCheck<TestHealthCheck>(
+                    "test",
+                    failureStatus: HealthStatus.Degraded,
+                    tags: new[] { "tag", }
+                );
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Act
-            var options = serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+            var options =
+                serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
 
             // Assert
             var registration = Assert.Single(options.Registrations);
@@ -67,12 +82,18 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var services = CreateServices();
             services.AddSingleton(instance);
-            services.AddHealthChecks().AddCheck<TestHealthCheck>("test", failureStatus: HealthStatus.Degraded, tags: new[] { "tag", });
+            services.AddHealthChecks()
+                .AddCheck<TestHealthCheck>(
+                    "test",
+                    failureStatus: HealthStatus.Degraded,
+                    tags: new[] { "tag", }
+                );
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Act
-            var options = serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+            var options =
+                serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
 
             // Assert
             var registration = Assert.Single(options.Registrations);
@@ -87,14 +108,19 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = CreateServices();
-            services
-                .AddHealthChecks()
-                .AddTypeActivatedCheck<TestHealthCheckWithArgs>("test", failureStatus: HealthStatus.Degraded, tags: new[] { "tag", }, args: new object[] { 5, "hi", });
+            services.AddHealthChecks()
+                .AddTypeActivatedCheck<TestHealthCheckWithArgs>(
+                    "test",
+                    failureStatus: HealthStatus.Degraded,
+                    tags: new[] { "tag", },
+                    args: new object[] { 5, "hi", }
+                );
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Act
-            var options = serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+            var options =
+                serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
 
             // Assert
             var registration = Assert.Single(options.Registrations);
@@ -102,7 +128,9 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Equal(HealthStatus.Degraded, registration.FailureStatus);
             Assert.Equal<string>(new[] { "tag", }, registration.Tags);
 
-            var check = Assert.IsType<TestHealthCheckWithArgs>(registration.Factory(serviceProvider));
+            var check = Assert.IsType<TestHealthCheckWithArgs>(
+                registration.Factory(serviceProvider)
+            );
             Assert.Equal(5, check.I);
             Assert.Equal("hi", check.S);
         }
@@ -112,15 +140,21 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = CreateServices();
-            services.AddHealthChecks().AddCheck("test", tags: new[] { "tag", }, check: () =>
-            {
-                return HealthCheckResult.Healthy();
-            });
+            services.AddHealthChecks()
+                .AddCheck(
+                    "test",
+                    tags: new[] { "tag", },
+                    check: () =>
+                    {
+                        return HealthCheckResult.Healthy();
+                    }
+                );
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Act
-            var options = serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+            var options =
+                serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
 
             // Assert
             var registration = Assert.Single(options.Registrations);
@@ -135,15 +169,21 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = CreateServices();
-            services.AddHealthChecks().AddCheck("test", (_) =>
-            {
-                return HealthCheckResult.Degraded();
-            }, tags: new[] { "tag", });
+            services.AddHealthChecks()
+                .AddCheck(
+                    "test",
+                    (_) =>
+                    {
+                        return HealthCheckResult.Degraded();
+                    },
+                    tags: new[] { "tag", }
+                );
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Act
-            var options = serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+            var options =
+                serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
 
             // Assert
             var registration = Assert.Single(options.Registrations);
@@ -158,15 +198,21 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = CreateServices();
-            services.AddHealthChecks().AddAsyncCheck("test", () =>
-            {
-                return Task.FromResult(HealthCheckResult.Healthy());
-            }, tags: new[] { "tag", });
+            services.AddHealthChecks()
+                .AddAsyncCheck(
+                    "test",
+                    () =>
+                    {
+                        return Task.FromResult(HealthCheckResult.Healthy());
+                    },
+                    tags: new[] { "tag", }
+                );
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Act
-            var options = serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+            var options =
+                serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
 
             // Assert
             var registration = Assert.Single(options.Registrations);
@@ -181,15 +227,21 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var services = CreateServices();
-            services.AddHealthChecks().AddAsyncCheck("test", (_) =>
-            {
-                return Task.FromResult(HealthCheckResult.Unhealthy());
-            }, tags: new[] { "tag", });
+            services.AddHealthChecks()
+                .AddAsyncCheck(
+                    "test",
+                    (_) =>
+                    {
+                        return Task.FromResult(HealthCheckResult.Unhealthy());
+                    },
+                    tags: new[] { "tag", }
+                );
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Act
-            var options = serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
+            var options =
+                serviceProvider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value;
 
             // Assert
             var registration = Assert.Single(options.Registrations);
@@ -203,21 +255,21 @@ namespace Microsoft.Extensions.DependencyInjection
         public void ChecksCanBeRegisteredInMultipleCallsToAddHealthChecks()
         {
             var services = new ServiceCollection();
-            services
-                .AddHealthChecks()
+            services.AddHealthChecks()
                 .AddAsyncCheck("Foo", () => Task.FromResult(HealthCheckResult.Healthy()));
-            services
-                .AddHealthChecks()
+            services.AddHealthChecks()
                 .AddAsyncCheck("Bar", () => Task.FromResult(HealthCheckResult.Healthy()));
 
             // Act
-            var options = services.BuildServiceProvider().GetRequiredService<IOptions<HealthCheckServiceOptions>>();
+            var options = services.BuildServiceProvider()
+                .GetRequiredService<IOptions<HealthCheckServiceOptions>>();
 
             // Assert
             Assert.Collection(
                 options.Value.Registrations,
                 actual => Assert.Equal("Foo", actual.Name),
-                actual => Assert.Equal("Bar", actual.Name));
+                actual => Assert.Equal("Bar", actual.Name)
+            );
         }
 
         private IServiceCollection CreateServices()
@@ -230,8 +282,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private class TestHealthCheck : IHealthCheck
         {
-            public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
-            {
+            public Task<HealthCheckResult> CheckHealthAsync(
+                HealthCheckContext context,
+                CancellationToken cancellationToken = default
+            ) {
                 throw new System.NotImplementedException();
             }
         }
@@ -248,8 +302,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
             public string S { get; set; }
 
-            public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
-            {
+            public Task<HealthCheckResult> CheckHealthAsync(
+                HealthCheckContext context,
+                CancellationToken cancellationToken = default
+            ) {
                 throw new System.NotImplementedException();
             }
         }

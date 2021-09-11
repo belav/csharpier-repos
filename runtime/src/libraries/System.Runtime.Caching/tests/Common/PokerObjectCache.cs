@@ -52,9 +52,14 @@ namespace MonoTests.Common
 
         public string MethodCalled { get; private set; }
 
-        public override object AddOrGetExisting(string key, object value, CacheItemPolicy policy, string regionName = null)
-        {
-            MethodCalled = "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)";
+        public override object AddOrGetExisting(
+            string key,
+            object value,
+            CacheItemPolicy policy,
+            string regionName = null
+        ) {
+            MethodCalled =
+                "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)";
             if (string.IsNullOrEmpty(key) || value == null)
                 return null;
 
@@ -80,9 +85,14 @@ namespace MonoTests.Common
             return null;
         }
 
-        public override object AddOrGetExisting(string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)
-        {
-            MethodCalled = "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)";
+        public override object AddOrGetExisting(
+            string key,
+            object value,
+            DateTimeOffset absoluteExpiration,
+            string regionName = null
+        ) {
+            MethodCalled =
+                "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)";
             if (string.IsNullOrEmpty(key) || value == null)
                 return null;
 
@@ -99,8 +109,10 @@ namespace MonoTests.Common
             throw new NotImplementedException();
         }
 
-        public override CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(IEnumerable<string> keys, string regionName = null)
-        {
+        public override CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(
+            IEnumerable<string> keys,
+            string regionName = null
+        ) {
             throw new NotImplementedException();
         }
 
@@ -129,9 +141,12 @@ namespace MonoTests.Common
             throw new NotImplementedException();
         }
 
-        public override IDictionary<string, object> GetValues(IEnumerable<string> keys, string regionName = null)
-        {
-            MethodCalled = "IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)";
+        public override IDictionary<string, object> GetValues(
+            IEnumerable<string> keys,
+            string regionName = null
+        ) {
+            MethodCalled =
+                "IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)";
             var ret = new Dictionary<string, object>();
             if (keys == null)
                 return ret;
@@ -162,8 +177,12 @@ namespace MonoTests.Common
             throw new NotImplementedException();
         }
 
-        public override void Set(string key, object value, CacheItemPolicy policy, string regionName = null)
-        {
+        public override void Set(
+            string key,
+            object value,
+            CacheItemPolicy policy,
+            string regionName = null
+        ) {
             throw new NotImplementedException();
         }
 
@@ -172,21 +191,19 @@ namespace MonoTests.Common
             throw new NotImplementedException();
         }
 
-        public override void Set(string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)
-        {
+        public override void Set(
+            string key,
+            object value,
+            DateTimeOffset absoluteExpiration,
+            string regionName = null
+        ) {
             throw new NotImplementedException();
         }
 
         public override object this[string key]
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
     }
 }

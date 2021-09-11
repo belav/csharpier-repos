@@ -9,22 +9,36 @@ namespace System.Net.Security
     public abstract partial class AuthenticatedStream : System.IO.Stream
     {
         protected AuthenticatedStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen) { }
-        protected System.IO.Stream InnerStream { get { throw null; } }
+        protected System.IO.Stream InnerStream
+        {
+            get { throw null; }
+        }
         public abstract bool IsAuthenticated { get; }
         public abstract bool IsEncrypted { get; }
         public abstract bool IsMutuallyAuthenticated { get; }
         public abstract bool IsServer { get; }
         public abstract bool IsSigned { get; }
-        public bool LeaveInnerStreamOpen { get { throw null; } }
+        public bool LeaveInnerStreamOpen
+        {
+            get { throw null; }
+        }
         protected override void Dispose(bool disposing) { }
-        public override System.Threading.Tasks.ValueTask DisposeAsync() { throw null; }
+        public override System.Threading.Tasks.ValueTask DisposeAsync()
+        {
+            throw null;
+        }
     }
     public sealed partial class CipherSuitesPolicy
     {
         [System.CLSCompliantAttribute(false)]
-        public CipherSuitesPolicy(System.Collections.Generic.IEnumerable<System.Net.Security.TlsCipherSuite> allowedCipherSuites) { }
+        public CipherSuitesPolicy(
+            System.Collections.Generic.IEnumerable<System.Net.Security.TlsCipherSuite> allowedCipherSuites
+        ) { }
         [System.CLSCompliantAttribute(false)]
-        public System.Collections.Generic.IEnumerable<System.Net.Security.TlsCipherSuite> AllowedCipherSuites { get { throw null; } }
+        public System.Collections.Generic.IEnumerable<System.Net.Security.TlsCipherSuite> AllowedCipherSuites
+        {
+            get { throw null; }
+        }
     }
     public enum EncryptionPolicy
     {
@@ -32,71 +46,328 @@ namespace System.Net.Security
         AllowNoEncryption = 1,
         NoEncryption = 2,
     }
-    public delegate System.Security.Cryptography.X509Certificates.X509Certificate LocalCertificateSelectionCallback(object sender, string targetHost, System.Security.Cryptography.X509Certificates.X509CertificateCollection localCertificates, System.Security.Cryptography.X509Certificates.X509Certificate? remoteCertificate, string[] acceptableIssuers);
+    public delegate System.Security.Cryptography.X509Certificates.X509Certificate LocalCertificateSelectionCallback(
+        object sender,
+        string targetHost,
+        System.Security.Cryptography.X509Certificates.X509CertificateCollection localCertificates,
+        System.Security.Cryptography.X509Certificates.X509Certificate? remoteCertificate,
+        string[] acceptableIssuers
+    );
     public partial class NegotiateStream : System.Net.Security.AuthenticatedStream
     {
-        public NegotiateStream(System.IO.Stream innerStream) : base (default(System.IO.Stream), default(bool)) { }
-        public NegotiateStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen) : base (default(System.IO.Stream), default(bool)) { }
-        public override bool CanRead { get { throw null; } }
-        public override bool CanSeek { get { throw null; } }
-        public override bool CanTimeout { get { throw null; } }
-        public override bool CanWrite { get { throw null; } }
-        public virtual System.Security.Principal.TokenImpersonationLevel ImpersonationLevel { get { throw null; } }
-        public override bool IsAuthenticated { get { throw null; } }
-        public override bool IsEncrypted { get { throw null; } }
-        public override bool IsMutuallyAuthenticated { get { throw null; } }
-        public override bool IsServer { get { throw null; } }
-        public override bool IsSigned { get { throw null; } }
-        public override long Length { get { throw null; } }
-        public override long Position { get { throw null; } set { } }
-        public override int ReadTimeout { get { throw null; } set { } }
-        public virtual System.Security.Principal.IIdentity RemoteIdentity { get { throw null; } }
-        public override int WriteTimeout { get { throw null; } set { } }
+        public NegotiateStream(System.IO.Stream innerStream)
+            : base(default(System.IO.Stream), default(bool)) { }
+        public NegotiateStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen)
+            : base(default(System.IO.Stream), default(bool)) { }
+        public override bool CanRead
+        {
+            get { throw null; }
+        }
+        public override bool CanSeek
+        {
+            get { throw null; }
+        }
+        public override bool CanTimeout
+        {
+            get { throw null; }
+        }
+        public override bool CanWrite
+        {
+            get { throw null; }
+        }
+        public virtual System.Security.Principal.TokenImpersonationLevel ImpersonationLevel
+        {
+            get { throw null; }
+        }
+        public override bool IsAuthenticated
+        {
+            get { throw null; }
+        }
+        public override bool IsEncrypted
+        {
+            get { throw null; }
+        }
+        public override bool IsMutuallyAuthenticated
+        {
+            get { throw null; }
+        }
+        public override bool IsServer
+        {
+            get { throw null; }
+        }
+        public override bool IsSigned
+        {
+            get { throw null; }
+        }
+        public override long Length
+        {
+            get { throw null; }
+        }
+        public override long Position
+        {
+            get { throw null; }
+            set { }
+        }
+        public override int ReadTimeout
+        {
+            get { throw null; }
+            set { }
+        }
+        public virtual System.Security.Principal.IIdentity RemoteIdentity
+        {
+            get { throw null; }
+        }
+        public override int WriteTimeout
+        {
+            get { throw null; }
+            set { }
+        }
         public virtual void AuthenticateAsClient() { }
-        public virtual void AuthenticateAsClient(System.Net.NetworkCredential credential, System.Security.Authentication.ExtendedProtection.ChannelBinding? binding, string targetName) { }
-        public virtual void AuthenticateAsClient(System.Net.NetworkCredential credential, System.Security.Authentication.ExtendedProtection.ChannelBinding? binding, string targetName, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel) { }
-        public virtual void AuthenticateAsClient(System.Net.NetworkCredential credential, string targetName) { }
-        public virtual void AuthenticateAsClient(System.Net.NetworkCredential credential, string targetName, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel) { }
-        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync() { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(System.Net.NetworkCredential credential, System.Security.Authentication.ExtendedProtection.ChannelBinding? binding, string targetName) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(System.Net.NetworkCredential credential, System.Security.Authentication.ExtendedProtection.ChannelBinding? binding, string targetName, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(System.Net.NetworkCredential credential, string targetName) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(System.Net.NetworkCredential credential, string targetName, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel) { throw null; }
+        public virtual void AuthenticateAsClient(
+            System.Net.NetworkCredential credential,
+            System.Security.Authentication.ExtendedProtection.ChannelBinding? binding,
+            string targetName
+        ) { }
+        public virtual void AuthenticateAsClient(
+            System.Net.NetworkCredential credential,
+            System.Security.Authentication.ExtendedProtection.ChannelBinding? binding,
+            string targetName,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel
+        ) { }
+        public virtual void AuthenticateAsClient(
+            System.Net.NetworkCredential credential,
+            string targetName
+        ) { }
+        public virtual void AuthenticateAsClient(
+            System.Net.NetworkCredential credential,
+            string targetName,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel
+        ) { }
+        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync()
+        {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(
+            System.Net.NetworkCredential credential,
+            System.Security.Authentication.ExtendedProtection.ChannelBinding? binding,
+            string targetName
+        ) {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(
+            System.Net.NetworkCredential credential,
+            System.Security.Authentication.ExtendedProtection.ChannelBinding? binding,
+            string targetName,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel
+        ) {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(
+            System.Net.NetworkCredential credential,
+            string targetName
+        ) {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(
+            System.Net.NetworkCredential credential,
+            string targetName,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel
+        ) {
+            throw null;
+        }
         public virtual void AuthenticateAsServer() { }
-        public virtual void AuthenticateAsServer(System.Net.NetworkCredential credential, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel) { }
-        public virtual void AuthenticateAsServer(System.Net.NetworkCredential credential, System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel) { }
-        public virtual void AuthenticateAsServer(System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy) { }
-        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync() { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(System.Net.NetworkCredential credential, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(System.Net.NetworkCredential credential, System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsClient(System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsClient(System.Net.NetworkCredential credential, System.Security.Authentication.ExtendedProtection.ChannelBinding? binding, string targetName, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsClient(System.Net.NetworkCredential credential, System.Security.Authentication.ExtendedProtection.ChannelBinding? binding, string targetName, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsClient(System.Net.NetworkCredential credential, string targetName, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsClient(System.Net.NetworkCredential credential, string targetName, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsServer(System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsServer(System.Net.NetworkCredential credential, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsServer(System.Net.NetworkCredential credential, System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy, System.Net.Security.ProtectionLevel requiredProtectionLevel, System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsServer(System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public override System.IAsyncResult BeginRead(byte[] buffer, int offset, int count, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public override System.IAsyncResult BeginWrite(byte[] buffer, int offset, int count, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
+        public virtual void AuthenticateAsServer(
+            System.Net.NetworkCredential credential,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel
+        ) { }
+        public virtual void AuthenticateAsServer(
+            System.Net.NetworkCredential credential,
+            System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel
+        ) { }
+        public virtual void AuthenticateAsServer(
+            System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy
+        ) { }
+        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync()
+        {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
+            System.Net.NetworkCredential credential,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel
+        ) {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
+            System.Net.NetworkCredential credential,
+            System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel
+        ) {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
+            System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsClient(
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsClient(
+            System.Net.NetworkCredential credential,
+            System.Security.Authentication.ExtendedProtection.ChannelBinding? binding,
+            string targetName,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsClient(
+            System.Net.NetworkCredential credential,
+            System.Security.Authentication.ExtendedProtection.ChannelBinding? binding,
+            string targetName,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsClient(
+            System.Net.NetworkCredential credential,
+            string targetName,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsClient(
+            System.Net.NetworkCredential credential,
+            string targetName,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel allowedImpersonationLevel,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsServer(
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsServer(
+            System.Net.NetworkCredential credential,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsServer(
+            System.Net.NetworkCredential credential,
+            System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy,
+            System.Net.Security.ProtectionLevel requiredProtectionLevel,
+            System.Security.Principal.TokenImpersonationLevel requiredImpersonationLevel,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsServer(
+            System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy? policy,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public override System.IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public override System.IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
         protected override void Dispose(bool disposing) { }
-        public override System.Threading.Tasks.ValueTask DisposeAsync() { throw null; }
+        public override System.Threading.Tasks.ValueTask DisposeAsync()
+        {
+            throw null;
+        }
         public virtual void EndAuthenticateAsClient(System.IAsyncResult asyncResult) { }
         public virtual void EndAuthenticateAsServer(System.IAsyncResult asyncResult) { }
-        public override int EndRead(System.IAsyncResult asyncResult) { throw null; }
+        public override int EndRead(System.IAsyncResult asyncResult)
+        {
+            throw null;
+        }
         public override void EndWrite(System.IAsyncResult asyncResult) { }
         public override void Flush() { }
-        public override System.Threading.Tasks.Task FlushAsync(System.Threading.CancellationToken cancellationToken) { throw null; }
-        public override int Read(byte[] buffer, int offset, int count) { throw null; }
-        public override System.Threading.Tasks.Task<int> ReadAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken) { throw null; }
-        public override System.Threading.Tasks.ValueTask<int> ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default) { throw null; }
-        public override long Seek(long offset, System.IO.SeekOrigin origin) { throw null; }
+        public override System.Threading.Tasks.Task FlushAsync(
+            System.Threading.CancellationToken cancellationToken
+        ) {
+            throw null;
+        }
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            throw null;
+        }
+        public override System.Threading.Tasks.Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            System.Threading.CancellationToken cancellationToken
+        ) {
+            throw null;
+        }
+        public override System.Threading.Tasks.ValueTask<int> ReadAsync(
+            System.Memory<byte> buffer,
+            System.Threading.CancellationToken cancellationToken = default
+        ) {
+            throw null;
+        }
+        public override long Seek(long offset, System.IO.SeekOrigin origin)
+        {
+            throw null;
+        }
         public override void SetLength(long value) { }
         public override void Write(byte[] buffer, int offset, int count) { }
-        public override System.Threading.Tasks.Task WriteAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken) { throw null; }
-        public override System.Threading.Tasks.ValueTask WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default) { throw null; }
+        public override System.Threading.Tasks.Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            System.Threading.CancellationToken cancellationToken
+        ) {
+            throw null;
+        }
+        public override System.Threading.Tasks.ValueTask WriteAsync(
+            System.ReadOnlyMemory<byte> buffer,
+            System.Threading.CancellationToken cancellationToken = default
+        ) {
+            throw null;
+        }
     }
     public enum ProtectionLevel
     {
@@ -108,141 +379,570 @@ namespace System.Net.Security
     {
         public string ServerName { get; }
         public System.Security.Authentication.SslProtocols SslProtocols { get; }
-        internal SslClientHelloInfo(string serverName, System.Security.Authentication.SslProtocols sslProtocol) { throw null; }
+        internal SslClientHelloInfo(
+            string serverName,
+            System.Security.Authentication.SslProtocols sslProtocol
+        ) {
+            throw null;
+        }
     }
-    public delegate bool RemoteCertificateValidationCallback(object sender, System.Security.Cryptography.X509Certificates.X509Certificate? certificate, System.Security.Cryptography.X509Certificates.X509Chain? chain, System.Net.Security.SslPolicyErrors sslPolicyErrors);
-    public delegate System.Security.Cryptography.X509Certificates.X509Certificate ServerCertificateSelectionCallback(object sender, string? hostName);
-    public delegate System.Threading.Tasks.ValueTask<SslServerAuthenticationOptions> ServerOptionsSelectionCallback(SslStream stream, SslClientHelloInfo clientHelloInfo, object? state, System.Threading.CancellationToken cancellationToken);
-    public readonly partial struct SslApplicationProtocol : System.IEquatable<System.Net.Security.SslApplicationProtocol>
+    public delegate bool RemoteCertificateValidationCallback(
+        object sender,
+        System.Security.Cryptography.X509Certificates.X509Certificate? certificate,
+        System.Security.Cryptography.X509Certificates.X509Chain? chain,
+        System.Net.Security.SslPolicyErrors sslPolicyErrors
+    );
+    public delegate System.Security.Cryptography.X509Certificates.X509Certificate ServerCertificateSelectionCallback(
+        object sender,
+        string? hostName
+    );
+    public delegate System.Threading.Tasks.ValueTask<SslServerAuthenticationOptions> ServerOptionsSelectionCallback(
+        SslStream stream,
+        SslClientHelloInfo clientHelloInfo,
+        object? state,
+        System.Threading.CancellationToken cancellationToken
+    );
+    public readonly partial struct SslApplicationProtocol
+        : System.IEquatable<System.Net.Security.SslApplicationProtocol>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
         public static readonly System.Net.Security.SslApplicationProtocol Http11;
         public static readonly System.Net.Security.SslApplicationProtocol Http2;
-        public SslApplicationProtocol(byte[] protocol) { throw null; }
-        public SslApplicationProtocol(string protocol) { throw null; }
-        public System.ReadOnlyMemory<byte> Protocol { get { throw null; } }
-        public bool Equals(System.Net.Security.SslApplicationProtocol other) { throw null; }
-        public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? obj) { throw null; }
-        public override int GetHashCode() { throw null; }
-        public static bool operator ==(System.Net.Security.SslApplicationProtocol left, System.Net.Security.SslApplicationProtocol right) { throw null; }
-        public static bool operator !=(System.Net.Security.SslApplicationProtocol left, System.Net.Security.SslApplicationProtocol right) { throw null; }
-        public override string ToString() { throw null; }
+        public SslApplicationProtocol(byte[] protocol)
+        {
+            throw null;
+        }
+        public SslApplicationProtocol(string protocol)
+        {
+            throw null;
+        }
+        public System.ReadOnlyMemory<byte> Protocol
+        {
+            get { throw null; }
+        }
+        public bool Equals(System.Net.Security.SslApplicationProtocol other)
+        {
+            throw null;
+        }
+        public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? obj)
+        {
+            throw null;
+        }
+        public override int GetHashCode()
+        {
+            throw null;
+        }
+        public static bool operator ==(
+            System.Net.Security.SslApplicationProtocol left,
+            System.Net.Security.SslApplicationProtocol right
+        ) {
+            throw null;
+        }
+        public static bool operator !=(
+            System.Net.Security.SslApplicationProtocol left,
+            System.Net.Security.SslApplicationProtocol right
+        ) {
+            throw null;
+        }
+        public override string ToString()
+        {
+            throw null;
+        }
     }
     public sealed partial class SslStreamCertificateContext
     {
-        internal SslStreamCertificateContext() { throw null; }
-        public static SslStreamCertificateContext Create(System.Security.Cryptography.X509Certificates.X509Certificate2 target, System.Security.Cryptography.X509Certificates.X509Certificate2Collection? additionalCertificates, bool offline = false) { throw null; }
+        internal SslStreamCertificateContext()
+        {
+            throw null;
+        }
+        public static SslStreamCertificateContext Create(
+            System.Security.Cryptography.X509Certificates.X509Certificate2 target,
+            System.Security.Cryptography.X509Certificates.X509Certificate2Collection? additionalCertificates,
+            bool offline = false
+        ) {
+            throw null;
+        }
     }
     public partial class SslClientAuthenticationOptions
     {
         public SslClientAuthenticationOptions() { }
-        public bool AllowRenegotiation { get { throw null; } set { } }
-        public System.Collections.Generic.List<System.Net.Security.SslApplicationProtocol>? ApplicationProtocols { get { throw null; } set { } }
-        public System.Security.Cryptography.X509Certificates.X509RevocationMode CertificateRevocationCheckMode { get { throw null; } set { } }
-        public System.Net.Security.CipherSuitesPolicy? CipherSuitesPolicy { get { throw null; } set { } }
-        public System.Security.Cryptography.X509Certificates.X509CertificateCollection? ClientCertificates { get { throw null; } set { } }
-        public System.Security.Authentication.SslProtocols EnabledSslProtocols { get { throw null; } set { } }
-        public System.Net.Security.EncryptionPolicy EncryptionPolicy { get { throw null; } set { } }
-        public System.Net.Security.LocalCertificateSelectionCallback? LocalCertificateSelectionCallback { get { throw null; } set { } }
-        public System.Net.Security.RemoteCertificateValidationCallback? RemoteCertificateValidationCallback { get { throw null; } set { } }
-        public string? TargetHost { get { throw null; } set { } }
+        public bool AllowRenegotiation
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Collections.Generic.List<System.Net.Security.SslApplicationProtocol>? ApplicationProtocols
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Security.Cryptography.X509Certificates.X509RevocationMode CertificateRevocationCheckMode
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Net.Security.CipherSuitesPolicy? CipherSuitesPolicy
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Security.Cryptography.X509Certificates.X509CertificateCollection? ClientCertificates
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Security.Authentication.SslProtocols EnabledSslProtocols
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Net.Security.EncryptionPolicy EncryptionPolicy
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Net.Security.LocalCertificateSelectionCallback? LocalCertificateSelectionCallback
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Net.Security.RemoteCertificateValidationCallback? RemoteCertificateValidationCallback
+        {
+            get { throw null; }
+            set { }
+        }
+        public string? TargetHost
+        {
+            get { throw null; }
+            set { }
+        }
     }
     public partial class SslServerAuthenticationOptions
     {
         public SslServerAuthenticationOptions() { }
-        public bool AllowRenegotiation { get { throw null; } set { } }
-        public System.Collections.Generic.List<System.Net.Security.SslApplicationProtocol>? ApplicationProtocols { get { throw null; } set { } }
-        public System.Security.Cryptography.X509Certificates.X509RevocationMode CertificateRevocationCheckMode { get { throw null; } set { } }
-        public System.Net.Security.CipherSuitesPolicy? CipherSuitesPolicy { get { throw null; } set { } }
-        public bool ClientCertificateRequired { get { throw null; } set { } }
-        public System.Security.Authentication.SslProtocols EnabledSslProtocols { get { throw null; } set { } }
-        public System.Net.Security.EncryptionPolicy EncryptionPolicy { get { throw null; } set { } }
-        public System.Net.Security.RemoteCertificateValidationCallback? RemoteCertificateValidationCallback { get { throw null; } set { } }
-        public System.Security.Cryptography.X509Certificates.X509Certificate? ServerCertificate { get { throw null; } set { } }
-        public System.Net.Security.SslStreamCertificateContext? ServerCertificateContext { get { throw null; } set { } }
-        public System.Net.Security.ServerCertificateSelectionCallback? ServerCertificateSelectionCallback { get { throw null; } set { } }
+        public bool AllowRenegotiation
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Collections.Generic.List<System.Net.Security.SslApplicationProtocol>? ApplicationProtocols
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Security.Cryptography.X509Certificates.X509RevocationMode CertificateRevocationCheckMode
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Net.Security.CipherSuitesPolicy? CipherSuitesPolicy
+        {
+            get { throw null; }
+            set { }
+        }
+        public bool ClientCertificateRequired
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Security.Authentication.SslProtocols EnabledSslProtocols
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Net.Security.EncryptionPolicy EncryptionPolicy
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Net.Security.RemoteCertificateValidationCallback? RemoteCertificateValidationCallback
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Security.Cryptography.X509Certificates.X509Certificate? ServerCertificate
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Net.Security.SslStreamCertificateContext? ServerCertificateContext
+        {
+            get { throw null; }
+            set { }
+        }
+        public System.Net.Security.ServerCertificateSelectionCallback? ServerCertificateSelectionCallback
+        {
+            get { throw null; }
+            set { }
+        }
     }
     public partial class SslStream : System.Net.Security.AuthenticatedStream
     {
-        public SslStream(System.IO.Stream innerStream) : base (default(System.IO.Stream), default(bool)) { }
-        public SslStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen) : base (default(System.IO.Stream), default(bool)) { }
-        public SslStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen, System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback) : base (default(System.IO.Stream), default(bool)) { }
-        public SslStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen, System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback, System.Net.Security.LocalCertificateSelectionCallback? userCertificateSelectionCallback) : base (default(System.IO.Stream), default(bool)) { }
-        public SslStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen, System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback, System.Net.Security.LocalCertificateSelectionCallback? userCertificateSelectionCallback, System.Net.Security.EncryptionPolicy encryptionPolicy) : base (default(System.IO.Stream), default(bool)) { }
-        public override bool CanRead { get { throw null; } }
-        public override bool CanSeek { get { throw null; } }
-        public override bool CanTimeout { get { throw null; } }
-        public override bool CanWrite { get { throw null; } }
-        public virtual bool CheckCertRevocationStatus { get { throw null; } }
-        public virtual System.Security.Authentication.CipherAlgorithmType CipherAlgorithm { get { throw null; } }
-        public virtual int CipherStrength { get { throw null; } }
-        public virtual System.Security.Authentication.HashAlgorithmType HashAlgorithm { get { throw null; } }
-        public virtual int HashStrength { get { throw null; } }
-        public override bool IsAuthenticated { get { throw null; } }
-        public override bool IsEncrypted { get { throw null; } }
-        public override bool IsMutuallyAuthenticated { get { throw null; } }
-        public override bool IsServer { get { throw null; } }
-        public override bool IsSigned { get { throw null; } }
-        public virtual System.Security.Authentication.ExchangeAlgorithmType KeyExchangeAlgorithm { get { throw null; } }
-        public virtual int KeyExchangeStrength { get { throw null; } }
-        public override long Length { get { throw null; } }
-        public virtual System.Security.Cryptography.X509Certificates.X509Certificate? LocalCertificate { get { throw null; } }
-        public System.Net.Security.SslApplicationProtocol NegotiatedApplicationProtocol { get { throw null; } }
+        public SslStream(System.IO.Stream innerStream)
+            : base(default(System.IO.Stream), default(bool)) { }
+        public SslStream(System.IO.Stream innerStream, bool leaveInnerStreamOpen)
+            : base(default(System.IO.Stream), default(bool)) { }
+        public SslStream(
+            System.IO.Stream innerStream,
+            bool leaveInnerStreamOpen,
+            System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback
+        ) : base(default(System.IO.Stream), default(bool)) { }
+        public SslStream(
+            System.IO.Stream innerStream,
+            bool leaveInnerStreamOpen,
+            System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback,
+            System.Net.Security.LocalCertificateSelectionCallback? userCertificateSelectionCallback
+        ) : base(default(System.IO.Stream), default(bool)) { }
+        public SslStream(
+            System.IO.Stream innerStream,
+            bool leaveInnerStreamOpen,
+            System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback,
+            System.Net.Security.LocalCertificateSelectionCallback? userCertificateSelectionCallback,
+            System.Net.Security.EncryptionPolicy encryptionPolicy
+        ) : base(default(System.IO.Stream), default(bool)) { }
+        public override bool CanRead
+        {
+            get { throw null; }
+        }
+        public override bool CanSeek
+        {
+            get { throw null; }
+        }
+        public override bool CanTimeout
+        {
+            get { throw null; }
+        }
+        public override bool CanWrite
+        {
+            get { throw null; }
+        }
+        public virtual bool CheckCertRevocationStatus
+        {
+            get { throw null; }
+        }
+        public virtual System.Security.Authentication.CipherAlgorithmType CipherAlgorithm
+        {
+            get { throw null; }
+        }
+        public virtual int CipherStrength
+        {
+            get { throw null; }
+        }
+        public virtual System.Security.Authentication.HashAlgorithmType HashAlgorithm
+        {
+            get { throw null; }
+        }
+        public virtual int HashStrength
+        {
+            get { throw null; }
+        }
+        public override bool IsAuthenticated
+        {
+            get { throw null; }
+        }
+        public override bool IsEncrypted
+        {
+            get { throw null; }
+        }
+        public override bool IsMutuallyAuthenticated
+        {
+            get { throw null; }
+        }
+        public override bool IsServer
+        {
+            get { throw null; }
+        }
+        public override bool IsSigned
+        {
+            get { throw null; }
+        }
+        public virtual System.Security.Authentication.ExchangeAlgorithmType KeyExchangeAlgorithm
+        {
+            get { throw null; }
+        }
+        public virtual int KeyExchangeStrength
+        {
+            get { throw null; }
+        }
+        public override long Length
+        {
+            get { throw null; }
+        }
+        public virtual System.Security.Cryptography.X509Certificates.X509Certificate? LocalCertificate
+        {
+            get { throw null; }
+        }
+        public System.Net.Security.SslApplicationProtocol NegotiatedApplicationProtocol
+        {
+            get { throw null; }
+        }
         [System.CLSCompliantAttribute(false)]
-        public virtual System.Net.Security.TlsCipherSuite NegotiatedCipherSuite { get { throw null; } }
-        public override long Position { get { throw null; } set { } }
-        public override int ReadTimeout { get { throw null; } set { } }
-        public virtual System.Security.Cryptography.X509Certificates.X509Certificate? RemoteCertificate { get { throw null; } }
-        public virtual System.Security.Authentication.SslProtocols SslProtocol { get { throw null; } }
-        public string TargetHostName { get { throw null; } }
-        public System.Net.TransportContext TransportContext { get { throw null; } }
-        public override int WriteTimeout { get { throw null; } set { } }
-        public void AuthenticateAsClient(System.Net.Security.SslClientAuthenticationOptions sslClientAuthenticationOptions) { }
+        public virtual System.Net.Security.TlsCipherSuite NegotiatedCipherSuite
+        {
+            get { throw null; }
+        }
+        public override long Position
+        {
+            get { throw null; }
+            set { }
+        }
+        public override int ReadTimeout
+        {
+            get { throw null; }
+            set { }
+        }
+        public virtual System.Security.Cryptography.X509Certificates.X509Certificate? RemoteCertificate
+        {
+            get { throw null; }
+        }
+        public virtual System.Security.Authentication.SslProtocols SslProtocol
+        {
+            get { throw null; }
+        }
+        public string TargetHostName
+        {
+            get { throw null; }
+        }
+        public System.Net.TransportContext TransportContext
+        {
+            get { throw null; }
+        }
+        public override int WriteTimeout
+        {
+            get { throw null; }
+            set { }
+        }
+        public void AuthenticateAsClient(
+            System.Net.Security.SslClientAuthenticationOptions sslClientAuthenticationOptions
+        ) { }
         public virtual void AuthenticateAsClient(string targetHost) { }
-        public virtual void AuthenticateAsClient(string targetHost, System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates, bool checkCertificateRevocation) { }
-        public virtual void AuthenticateAsClient(string targetHost, System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates, System.Security.Authentication.SslProtocols enabledSslProtocols, bool checkCertificateRevocation) { }
-        public System.Threading.Tasks.Task AuthenticateAsClientAsync(System.Net.Security.SslClientAuthenticationOptions sslClientAuthenticationOptions, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(string targetHost) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(string targetHost, System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates, bool checkCertificateRevocation) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(string targetHost, System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates, System.Security.Authentication.SslProtocols enabledSslProtocols, bool checkCertificateRevocation) { throw null; }
-        public void AuthenticateAsServer(System.Net.Security.SslServerAuthenticationOptions sslServerAuthenticationOptions) { }
-        public virtual void AuthenticateAsServer(System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate) { }
-        public virtual void AuthenticateAsServer(System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate, bool clientCertificateRequired, bool checkCertificateRevocation) { }
-        public virtual void AuthenticateAsServer(System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate, bool clientCertificateRequired, System.Security.Authentication.SslProtocols enabledSslProtocols, bool checkCertificateRevocation) { }
-        public System.Threading.Tasks.Task AuthenticateAsServerAsync(System.Net.Security.SslServerAuthenticationOptions sslServerAuthenticationOptions, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate, bool clientCertificateRequired, bool checkCertificateRevocation) { throw null; }
-        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate, bool clientCertificateRequired, System.Security.Authentication.SslProtocols enabledSslProtocols, bool checkCertificateRevocation) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsClient(string targetHost, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsClient(string targetHost, System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates, bool checkCertificateRevocation, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsClient(string targetHost, System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates, System.Security.Authentication.SslProtocols enabledSslProtocols, bool checkCertificateRevocation, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsServer(System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsServer(System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate, bool clientCertificateRequired, bool checkCertificateRevocation, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public virtual System.IAsyncResult BeginAuthenticateAsServer(System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate, bool clientCertificateRequired, System.Security.Authentication.SslProtocols enabledSslProtocols, bool checkCertificateRevocation, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public override System.IAsyncResult BeginRead(byte[] buffer, int offset, int count, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
-        public override System.IAsyncResult BeginWrite(byte[] buffer, int offset, int count, System.AsyncCallback? asyncCallback, object? asyncState) { throw null; }
+        public virtual void AuthenticateAsClient(
+            string targetHost,
+            System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates,
+            bool checkCertificateRevocation
+        ) { }
+        public virtual void AuthenticateAsClient(
+            string targetHost,
+            System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates,
+            System.Security.Authentication.SslProtocols enabledSslProtocols,
+            bool checkCertificateRevocation
+        ) { }
+        public System.Threading.Tasks.Task AuthenticateAsClientAsync(
+            System.Net.Security.SslClientAuthenticationOptions sslClientAuthenticationOptions,
+            System.Threading.CancellationToken cancellationToken =
+                default(System.Threading.CancellationToken)
+        ) {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(string targetHost)
+        {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(
+            string targetHost,
+            System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates,
+            bool checkCertificateRevocation
+        ) {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsClientAsync(
+            string targetHost,
+            System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates,
+            System.Security.Authentication.SslProtocols enabledSslProtocols,
+            bool checkCertificateRevocation
+        ) {
+            throw null;
+        }
+        public void AuthenticateAsServer(
+            System.Net.Security.SslServerAuthenticationOptions sslServerAuthenticationOptions
+        ) { }
+        public virtual void AuthenticateAsServer(
+            System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate
+        ) { }
+        public virtual void AuthenticateAsServer(
+            System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
+            bool clientCertificateRequired,
+            bool checkCertificateRevocation
+        ) { }
+        public virtual void AuthenticateAsServer(
+            System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
+            bool clientCertificateRequired,
+            System.Security.Authentication.SslProtocols enabledSslProtocols,
+            bool checkCertificateRevocation
+        ) { }
+        public System.Threading.Tasks.Task AuthenticateAsServerAsync(
+            System.Net.Security.SslServerAuthenticationOptions sslServerAuthenticationOptions,
+            System.Threading.CancellationToken cancellationToken =
+                default(System.Threading.CancellationToken)
+        ) {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
+            System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate
+        ) {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
+            System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
+            bool clientCertificateRequired,
+            bool checkCertificateRevocation
+        ) {
+            throw null;
+        }
+        public virtual System.Threading.Tasks.Task AuthenticateAsServerAsync(
+            System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
+            bool clientCertificateRequired,
+            System.Security.Authentication.SslProtocols enabledSslProtocols,
+            bool checkCertificateRevocation
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsClient(
+            string targetHost,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsClient(
+            string targetHost,
+            System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates,
+            bool checkCertificateRevocation,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsClient(
+            string targetHost,
+            System.Security.Cryptography.X509Certificates.X509CertificateCollection? clientCertificates,
+            System.Security.Authentication.SslProtocols enabledSslProtocols,
+            bool checkCertificateRevocation,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsServer(
+            System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsServer(
+            System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
+            bool clientCertificateRequired,
+            bool checkCertificateRevocation,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public virtual System.IAsyncResult BeginAuthenticateAsServer(
+            System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate,
+            bool clientCertificateRequired,
+            System.Security.Authentication.SslProtocols enabledSslProtocols,
+            bool checkCertificateRevocation,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public override System.IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
+        public override System.IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            System.AsyncCallback? asyncCallback,
+            object? asyncState
+        ) {
+            throw null;
+        }
         protected override void Dispose(bool disposing) { }
-        public override System.Threading.Tasks.ValueTask DisposeAsync() { throw null; }
+        public override System.Threading.Tasks.ValueTask DisposeAsync()
+        {
+            throw null;
+        }
         public virtual void EndAuthenticateAsClient(System.IAsyncResult asyncResult) { }
         public virtual void EndAuthenticateAsServer(System.IAsyncResult asyncResult) { }
-        public override int EndRead(System.IAsyncResult asyncResult) { throw null; }
+        public override int EndRead(System.IAsyncResult asyncResult)
+        {
+            throw null;
+        }
         public override void EndWrite(System.IAsyncResult asyncResult) { }
         ~SslStream() { }
         public override void Flush() { }
-        public override System.Threading.Tasks.Task FlushAsync(System.Threading.CancellationToken cancellationToken) { throw null; }
-        public override int Read(byte[] buffer, int offset, int count) { throw null; }
-        public override System.Threading.Tasks.Task<int> ReadAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken) { throw null; }
-        public override System.Threading.Tasks.ValueTask<int> ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) { throw null; }
-        public override int ReadByte() { throw null; }
-        public override long Seek(long offset, System.IO.SeekOrigin origin) { throw null; }
+        public override System.Threading.Tasks.Task FlushAsync(
+            System.Threading.CancellationToken cancellationToken
+        ) {
+            throw null;
+        }
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            throw null;
+        }
+        public override System.Threading.Tasks.Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            System.Threading.CancellationToken cancellationToken
+        ) {
+            throw null;
+        }
+        public override System.Threading.Tasks.ValueTask<int> ReadAsync(
+            System.Memory<byte> buffer,
+            System.Threading.CancellationToken cancellationToken =
+                default(System.Threading.CancellationToken)
+        ) {
+            throw null;
+        }
+        public override int ReadByte()
+        {
+            throw null;
+        }
+        public override long Seek(long offset, System.IO.SeekOrigin origin)
+        {
+            throw null;
+        }
         public override void SetLength(long value) { }
-        public virtual System.Threading.Tasks.Task ShutdownAsync() { throw null; }
+        public virtual System.Threading.Tasks.Task ShutdownAsync()
+        {
+            throw null;
+        }
         public void Write(byte[] buffer) { }
         public override void Write(byte[] buffer, int offset, int count) { }
-        public override System.Threading.Tasks.Task WriteAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken) { throw null; }
-        public override System.Threading.Tasks.ValueTask WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) { throw null; }
-        public System.Threading.Tasks.Task AuthenticateAsServerAsync(ServerOptionsSelectionCallback optionsCallback, object? state, System.Threading.CancellationToken cancellationToken = default) { throw null; }
+        public override System.Threading.Tasks.Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            System.Threading.CancellationToken cancellationToken
+        ) {
+            throw null;
+        }
+        public override System.Threading.Tasks.ValueTask WriteAsync(
+            System.ReadOnlyMemory<byte> buffer,
+            System.Threading.CancellationToken cancellationToken =
+                default(System.Threading.CancellationToken)
+        ) {
+            throw null;
+        }
+        public System.Threading.Tasks.Task AuthenticateAsServerAsync(
+            ServerOptionsSelectionCallback optionsCallback,
+            object? state,
+            System.Threading.CancellationToken cancellationToken = default
+        ) {
+            throw null;
+        }
     }
     [System.CLSCompliantAttribute(false)]
     public enum TlsCipherSuite : ushort
@@ -591,14 +1291,21 @@ namespace System.Security.Authentication
     public partial class AuthenticationException : System.SystemException
     {
         public AuthenticationException() { }
-        protected AuthenticationException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext) { }
+        protected AuthenticationException(
+            System.Runtime.Serialization.SerializationInfo serializationInfo,
+            System.Runtime.Serialization.StreamingContext streamingContext
+        ) { }
         public AuthenticationException(string? message) { }
         public AuthenticationException(string? message, System.Exception? innerException) { }
     }
-    public partial class InvalidCredentialException : System.Security.Authentication.AuthenticationException
+    public partial class InvalidCredentialException
+        : System.Security.Authentication.AuthenticationException
     {
         public InvalidCredentialException() { }
-        protected InvalidCredentialException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext) { }
+        protected InvalidCredentialException(
+            System.Runtime.Serialization.SerializationInfo serializationInfo,
+            System.Runtime.Serialization.StreamingContext streamingContext
+        ) { }
         public InvalidCredentialException(string? message) { }
         public InvalidCredentialException(string? message, System.Exception? innerException) { }
     }
@@ -607,18 +1314,55 @@ namespace System.Security.Authentication.ExtendedProtection
 {
     public partial class ExtendedProtectionPolicy : System.Runtime.Serialization.ISerializable
     {
-        protected ExtendedProtectionPolicy(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
-        public ExtendedProtectionPolicy(System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement) { }
-        public ExtendedProtectionPolicy(System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement, System.Security.Authentication.ExtendedProtection.ChannelBinding customChannelBinding) { }
-        public ExtendedProtectionPolicy(System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement, System.Security.Authentication.ExtendedProtection.ProtectionScenario protectionScenario, System.Collections.ICollection? customServiceNames) { }
-        public ExtendedProtectionPolicy(System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement, System.Security.Authentication.ExtendedProtection.ProtectionScenario protectionScenario, System.Security.Authentication.ExtendedProtection.ServiceNameCollection? customServiceNames) { }
-        public System.Security.Authentication.ExtendedProtection.ChannelBinding? CustomChannelBinding { get { throw null; } }
-        public System.Security.Authentication.ExtendedProtection.ServiceNameCollection? CustomServiceNames { get { throw null; } }
-        public static bool OSSupportsExtendedProtection { get { throw null; } }
-        public System.Security.Authentication.ExtendedProtection.PolicyEnforcement PolicyEnforcement { get { throw null; } }
-        public System.Security.Authentication.ExtendedProtection.ProtectionScenario ProtectionScenario { get { throw null; } }
-        void System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo? info, System.Runtime.Serialization.StreamingContext context) { }
-        public override string ToString() { throw null; }
+        protected ExtendedProtectionPolicy(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        ) { }
+        public ExtendedProtectionPolicy(
+            System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement
+        ) { }
+        public ExtendedProtectionPolicy(
+            System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement,
+            System.Security.Authentication.ExtendedProtection.ChannelBinding customChannelBinding
+        ) { }
+        public ExtendedProtectionPolicy(
+            System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement,
+            System.Security.Authentication.ExtendedProtection.ProtectionScenario protectionScenario,
+            System.Collections.ICollection? customServiceNames
+        ) { }
+        public ExtendedProtectionPolicy(
+            System.Security.Authentication.ExtendedProtection.PolicyEnforcement policyEnforcement,
+            System.Security.Authentication.ExtendedProtection.ProtectionScenario protectionScenario,
+            System.Security.Authentication.ExtendedProtection.ServiceNameCollection? customServiceNames
+        ) { }
+        public System.Security.Authentication.ExtendedProtection.ChannelBinding? CustomChannelBinding
+        {
+            get { throw null; }
+        }
+        public System.Security.Authentication.ExtendedProtection.ServiceNameCollection? CustomServiceNames
+        {
+            get { throw null; }
+        }
+        public static bool OSSupportsExtendedProtection
+        {
+            get { throw null; }
+        }
+        public System.Security.Authentication.ExtendedProtection.PolicyEnforcement PolicyEnforcement
+        {
+            get { throw null; }
+        }
+        public System.Security.Authentication.ExtendedProtection.ProtectionScenario ProtectionScenario
+        {
+            get { throw null; }
+        }
+        void System.Runtime.Serialization.ISerializable.GetObjectData(
+            System.Runtime.Serialization.SerializationInfo? info,
+            System.Runtime.Serialization.StreamingContext context
+        ) { }
+        public override string ToString()
+        {
+            throw null;
+        }
     }
     public enum PolicyEnforcement
     {
@@ -634,8 +1378,19 @@ namespace System.Security.Authentication.ExtendedProtection
     public partial class ServiceNameCollection : System.Collections.ReadOnlyCollectionBase
     {
         public ServiceNameCollection(System.Collections.ICollection items) { }
-        public bool Contains(string? searchServiceName) { throw null; }
-        public System.Security.Authentication.ExtendedProtection.ServiceNameCollection Merge(System.Collections.IEnumerable serviceNames) { throw null; }
-        public System.Security.Authentication.ExtendedProtection.ServiceNameCollection Merge(string serviceName) { throw null; }
+        public bool Contains(string? searchServiceName)
+        {
+            throw null;
+        }
+        public System.Security.Authentication.ExtendedProtection.ServiceNameCollection Merge(
+            System.Collections.IEnumerable serviceNames
+        ) {
+            throw null;
+        }
+        public System.Security.Authentication.ExtendedProtection.ServiceNameCollection Merge(
+            string serviceName
+        ) {
+            throw null;
+        }
     }
 }

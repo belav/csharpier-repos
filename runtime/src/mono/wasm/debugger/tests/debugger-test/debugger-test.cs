@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -31,14 +31,19 @@ public partial class Math
     {
         Func<Math, bool> fn_func = (Math m) => m == null;
         Func<Math, bool> fn_func_null = null;
-        Func<Math, bool>[] fn_func_arr = new Func<Math, bool>[] {
-            (Math m) => m == null };
+        Func<Math, bool>[] fn_func_arr = new Func<Math, bool>[] { (Math m) => m == null };
 
         Math.IsMathNull fn_del = Math.IsMathNullDelegateTarget;
         var fn_del_arr = new Math.IsMathNull[] { Math.IsMathNullDelegateTarget };
         var m_obj = new Math();
         Math.IsMathNull fn_del_null = null;
-        bool res = fn_func(m_obj) && fn_del(m_obj) && fn_del_arr[0](m_obj) && fn_del_null == null && fn_func_null == null && fn_func_arr[0] != null;
+        bool res =
+            fn_func(m_obj)
+            && fn_del(m_obj)
+            && fn_del_arr[0](m_obj)
+            && fn_del_null == null
+            && fn_func_null == null
+            && fn_func_arr[0] != null;
 
         // Unused locals
 
@@ -59,7 +64,10 @@ public partial class Math
         var list = new System.Collections.Generic.Dictionary<Math[], IsMathNull>();
         System.Collections.Generic.Dictionary<Math[], IsMathNull> list_null = null;
 
-        var list_arr = new System.Collections.Generic.Dictionary<Math[], IsMathNull>[] { new System.Collections.Generic.Dictionary<Math[], IsMathNull>() };
+        var list_arr = new System.Collections.Generic.Dictionary<Math[], IsMathNull>[]
+        {
+            new System.Collections.Generic.Dictionary<Math[], IsMathNull>()
+        };
         System.Collections.Generic.Dictionary<Math[], IsMathNull>[] list_arr_null = null;
 
         Console.WriteLine($"list_arr.Length: {list_arr.Length}, list.Count: {list.Count}");
@@ -69,7 +77,10 @@ public partial class Math
         var list_unused = new System.Collections.Generic.Dictionary<Math[], IsMathNull>();
         System.Collections.Generic.Dictionary<Math[], IsMathNull> list_null_unused = null;
 
-        var list_arr_unused = new System.Collections.Generic.Dictionary<Math[], IsMathNull>[] { new System.Collections.Generic.Dictionary<Math[], IsMathNull>() };
+        var list_arr_unused = new System.Collections.Generic.Dictionary<Math[], IsMathNull>[]
+        {
+            new System.Collections.Generic.Dictionary<Math[], IsMathNull>()
+        };
         System.Collections.Generic.Dictionary<Math[], IsMathNull>[] list_arr_null_unused = null;
 
         OuterMethod();
@@ -126,7 +137,7 @@ public partial class Math
         public async System.Threading.Tasks.Task AsyncMethodNoReturn()
         {
             var ss = new SimpleStruct() { dt = new DateTime(2020, 1, 2, 3, 4, 5) };
-            var ss_arr = new SimpleStruct[] { };
+            var ss_arr = new SimpleStruct[] {  };
             //ss.gs.StringField = "field in GenericStruct";
 
             //Console.WriteLine ($"Using the struct: {ss.dt}, {ss.gs.StringField}, ss_arr: {ss_arr.Length}");
@@ -158,29 +169,49 @@ public partial class Math
 
     public static int DelegatesSignatureTest()
     {
-        Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>> fn_func = (m, gs) => new GenericStruct<bool[]>();
-        Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>> fn_func_del = GenericStruct<int>.DelegateTargetForSignatureTest;
+        Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>> fn_func = (m, gs) =>
+            new GenericStruct<bool[]>();
+        Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>> fn_func_del =
+            GenericStruct<int>.DelegateTargetForSignatureTest;
         Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>> fn_func_null = null;
-        Func<bool> fn_func_only_ret = () => { Console.WriteLine($"hello"); return true; };
-        var fn_func_arr = new Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>>[] {
-                (m, gs) => new GenericStruct<bool[]> () };
+        Func<bool> fn_func_only_ret = () =>
+        {
+            Console.WriteLine($"hello");
+            return true;
+        };
+        var fn_func_arr = new Func<
+            Math,
+            GenericStruct<GenericStruct<int[]>>,
+            GenericStruct<bool[]>
+        >[]
+        {
+            (m, gs) => new GenericStruct<bool[]>()
+        };
 
         Math.DelegateForSignatureTest fn_del = GenericStruct<int>.DelegateTargetForSignatureTest;
-        Math.DelegateForSignatureTest fn_del_l = (m, gs) => new GenericStruct<bool[]> { StringField = "fn_del_l#lambda" };
-        var fn_del_arr = new Math.DelegateForSignatureTest[] { GenericStruct<int>.DelegateTargetForSignatureTest, (m, gs) => new GenericStruct<bool[]> { StringField = "fn_del_arr#1#lambda" } };
+        Math.DelegateForSignatureTest fn_del_l = (m, gs) =>
+            new GenericStruct<bool[]> { StringField = "fn_del_l#lambda" };
+        var fn_del_arr = new Math.DelegateForSignatureTest[]
+        {
+            GenericStruct<int>.DelegateTargetForSignatureTest,
+            (m, gs) => new GenericStruct<bool[]> { StringField = "fn_del_arr#1#lambda" }
+        };
         var m_obj = new Math();
         Math.DelegateForSignatureTest fn_del_null = null;
         var gs_gs = new GenericStruct<GenericStruct<int[]>>
         {
             List = new System.Collections.Generic.List<GenericStruct<int[]>>
             {
-            new GenericStruct<int[]> { StringField = "gs#List#0#StringField" },
-            new GenericStruct<int[]> { StringField = "gs#List#1#StringField" }
+                new GenericStruct<int[]> { StringField = "gs#List#0#StringField" },
+                new GenericStruct<int[]> { StringField = "gs#List#1#StringField" }
             }
         };
 
         Math.DelegateWithVoidReturn fn_void_del = Math.DelegateTargetWithVoidReturn;
-        var fn_void_del_arr = new Math.DelegateWithVoidReturn[] { Math.DelegateTargetWithVoidReturn };
+        var fn_void_del_arr = new Math.DelegateWithVoidReturn[]
+        {
+            Math.DelegateTargetWithVoidReturn
+        };
         Math.DelegateWithVoidReturn fn_void_del_null = null;
 
         var rets = new GenericStruct<bool[]>[]
@@ -197,7 +228,8 @@ public partial class Math
         fn_void_del(gs);
         fn_void_del_arr[0](gs);
         fn_func_only_ret();
-        foreach (var ret in rets) Console.WriteLine($"ret: {ret}");
+        foreach (var ret in rets)
+            Console.WriteLine($"ret: {ret}");
         OuterMethod();
         Console.WriteLine($"- {gs_gs.List[0].StringField}");
         return 0;
@@ -227,12 +259,23 @@ public partial class Math
 
     public static int NestedDelegatesTest()
     {
-        Func<Func<int, bool>, bool> fn_func = (_) => { return true; };
+        Func<Func<int, bool>, bool> fn_func = (_) =>
+        {
+            return true;
+        };
         Func<Func<int, bool>, bool> fn_func_null = null;
-        var fn_func_arr = new Func<Func<int, bool>, bool>[] {
-                (gs) => { return true; } };
+        var fn_func_arr = new Func<Func<int, bool>, bool>[]
+        {
+            (gs) =>
+            {
+                return true;
+            }
+        };
 
-        var fn_del_arr = new Func<Func<int, bool>, bool>[] { DelegateTargetForNestedFunc<Func<int, bool>> };
+        var fn_del_arr = new Func<Func<int, bool>, bool>[]
+        {
+            DelegateTargetForNestedFunc<Func<int, bool>>
+        };
         var m_obj = new Math();
         Func<Func<int, bool>, bool> fn_del_null = null;
         Func<int, bool> fs = (i) => i == 0;
@@ -256,9 +299,11 @@ public partial class Math
         new Math().MethodWithDelegateArgs(_dst_arr, _fn_func, _fn_action);
     }
 
-    void MethodWithDelegateArgs(Math.DelegateForSignatureTest[] dst_arr, Func<char[], bool> fn_func,
-        Action<GenericStruct<int>[]> fn_action)
-    {
+    void MethodWithDelegateArgs(
+        Math.DelegateForSignatureTest[] dst_arr,
+        Func<char[], bool> fn_func,
+        Action<GenericStruct<int>[]> fn_action
+    ) {
         Console.WriteLine($"Placeholder for breakpoint");
         OuterMethod();
     }
@@ -285,7 +330,10 @@ public partial class Math
     public delegate void DelegateWithVoidReturn(GenericStruct<int[]> gs);
     public static void DelegateTargetWithVoidReturn(GenericStruct<int[]> gs) { }
 
-    public delegate GenericStruct<bool[]> DelegateForSignatureTest(Math m, GenericStruct<GenericStruct<int[]>> gs);
+    public delegate GenericStruct<bool[]> DelegateForSignatureTest(
+        Math m,
+        GenericStruct<GenericStruct<int[]>> gs
+    );
     static bool DelegateTargetForNestedFunc<T>(T arg) => true;
 
     public struct SimpleStruct
@@ -299,7 +347,10 @@ public partial class Math
         public System.Collections.Generic.List<T> List;
         public string StringField;
 
-        public static GenericStruct<bool[]> DelegateTargetForSignatureTest(Math m, GenericStruct<GenericStruct<T[]>> gs) => new GenericStruct<bool[]>();
+        public static GenericStruct<bool[]> DelegateTargetForSignatureTest(
+            Math m,
+            GenericStruct<GenericStruct<T[]>> gs
+        ) => new GenericStruct<bool[]>();
     }
 
     public static void TestSimpleStrings()
@@ -309,16 +360,9 @@ public partial class Math
         string str_spaces = " ";
         string str_esc = "\\";
 
-        var strings = new[]
-        {
-            str_null,
-            str_empty,
-            str_spaces,
-            str_esc
-        };
+        var strings = new[] { str_null, str_empty, str_spaces, str_esc };
         Console.WriteLine($"break here");
     }
-
 }
 
 public class DebuggerTest
@@ -348,7 +392,11 @@ public class DebuggerTest
 
         object o_s = "foobar";
         object o_obj = new Math();
-        DebuggerTests.ValueTypesTest.GenericStruct<int>? n_gs = new DebuggerTests.ValueTypesTest.GenericStruct<int> { StringField = "n_gs#StringField" };
+        DebuggerTests.ValueTypesTest.GenericStruct<int>? n_gs =
+            new DebuggerTests.ValueTypesTest.GenericStruct<int>
+            {
+                StringField = "n_gs#StringField"
+            };
         object o_gs = n_gs.Value;
         object o_n_gs = n_gs;
 
@@ -356,9 +404,9 @@ public class DebuggerTest
         object o_dt = n_dt.Value;
         object o_n_dt = n_dt;
         object o_null = null;
-        object o_ia = new int[] {918, 58971};
+        object o_ia = new int[] { 918, 58971 };
 
-        Console.WriteLine ($"break here");
+        Console.WriteLine($"break here");
     }
 
     public static async Task BoxingTestAsync()
@@ -369,7 +417,11 @@ public class DebuggerTest
 
         object o_s = "foobar";
         object o_obj = new Math();
-        DebuggerTests.ValueTypesTest.GenericStruct<int>? n_gs = new DebuggerTests.ValueTypesTest.GenericStruct<int> { StringField = "n_gs#StringField" };
+        DebuggerTests.ValueTypesTest.GenericStruct<int>? n_gs =
+            new DebuggerTests.ValueTypesTest.GenericStruct<int>
+            {
+                StringField = "n_gs#StringField"
+            };
         object o_gs = n_gs.Value;
         object o_n_gs = n_gs;
 
@@ -377,9 +429,9 @@ public class DebuggerTest
         object o_dt = n_dt.Value;
         object o_n_dt = n_dt;
         object o_null = null;
-        object o_ia = new int[] {918, 58971};
+        object o_ia = new int[] { 918, 58971 };
 
-        Console.WriteLine ($"break here");
+        Console.WriteLine($"break here");
         await Task.CompletedTask;
     }
 
@@ -393,7 +445,7 @@ public class DebuggerTest
 
         object oo = new object();
         object oo0 = oo;
-        Console.WriteLine ($"break here");
+        Console.WriteLine($"break here");
     }
     public static async Task BoxedTypeObjectTestAsync()
     {
@@ -405,7 +457,7 @@ public class DebuggerTest
 
         object oo = new object();
         object oo0 = oo;
-        Console.WriteLine ($"break here");
+        Console.WriteLine($"break here");
         await Task.CompletedTask;
     }
 
@@ -416,7 +468,7 @@ public class DebuggerTest
         Enum e = new System.IO.FileMode();
         Enum ee = System.IO.FileMode.Append;
 
-        Console.WriteLine ($"break here");
+        Console.WriteLine($"break here");
     }
 
     public static async Task BoxedAsClassAsync()
@@ -426,7 +478,7 @@ public class DebuggerTest
         Enum e = new System.IO.FileMode();
         Enum ee = System.IO.FileMode.Append;
 
-        Console.WriteLine ($"break here");
+        Console.WriteLine($"break here");
         await Task.CompletedTask;
     }
 }
@@ -519,7 +571,8 @@ public struct EmptyStruct
     }
 }
 
-public class LoadDebuggerTest {
+public class LoadDebuggerTest
+{
     public static void LoadLazyAssembly(string asm_base64, string pdb_base64)
     {
         byte[] asm_bytes = Convert.FromBase64String(asm_base64);
@@ -527,19 +580,23 @@ public class LoadDebuggerTest {
         if (pdb_base64 != null)
             pdb_bytes = Convert.FromBase64String(pdb_base64);
 
-        var loadedAssembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(new System.IO.MemoryStream(asm_bytes), new System.IO.MemoryStream(pdb_bytes));
+        var loadedAssembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromStream(
+            new System.IO.MemoryStream(asm_bytes),
+            new System.IO.MemoryStream(pdb_bytes)
+        );
         Console.WriteLine($"Loaded - {loadedAssembly}");
     }
 }
 
-public class HiddenSequencePointTest {
+public class HiddenSequencePointTest
+{
     public static void StepOverHiddenSP()
     {
         Console.WriteLine("first line");
-        #line hidden
+#line hidden
         Console.WriteLine("second line");
         StepOverHiddenSP2();
-        #line default
+#line default
         Console.WriteLine("third line");
         MethodWithHiddenLinesAtTheEnd();
     }
@@ -550,9 +607,9 @@ public class HiddenSequencePointTest {
 
     public static void MethodWithHiddenLinesAtTheEnd()
     {
-        Console.WriteLine ($"MethodWithHiddenLinesAtTheEnd");
+        Console.WriteLine($"MethodWithHiddenLinesAtTheEnd");
 #line hidden
-        Console.WriteLine ($"debugger shouldn't be able to step here");
+        Console.WriteLine($"debugger shouldn't be able to step here");
     }
 #line default
 }

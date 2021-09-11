@@ -15,10 +15,16 @@ namespace Microsoft.CodeAnalysis
         public IEnumerable<DocumentId> DocumentIds { get; internal set; }
         public SourceText MergedSourceText { get; internal set; }
         public IEnumerable<TextSpan> MergeConflictResolutionSpans { get; }
-        public bool HasMergeConflicts { get { return MergeConflictResolutionSpans.Any(); } }
-
-        public LinkedFileMergeResult(IEnumerable<DocumentId> documentIds, SourceText mergedSourceText, IEnumerable<TextSpan> mergeConflictResolutionSpans)
+        public bool HasMergeConflicts
         {
+            get { return MergeConflictResolutionSpans.Any(); }
+        }
+
+        public LinkedFileMergeResult(
+            IEnumerable<DocumentId> documentIds,
+            SourceText mergedSourceText,
+            IEnumerable<TextSpan> mergeConflictResolutionSpans
+        ) {
             DocumentIds = documentIds;
             MergedSourceText = mergedSourceText;
             MergeConflictResolutionSpans = mergeConflictResolutionSpans;

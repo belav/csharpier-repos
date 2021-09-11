@@ -35,8 +35,12 @@ namespace Microsoft.Extensions.WebEncoders.Testing
         }
 
         /// <inheritdoc />
-        public override void Encode(TextWriter output, char[] value, int startIndex, int characterCount)
-        {
+        public override void Encode(
+            TextWriter output,
+            char[] value,
+            int startIndex,
+            int characterCount
+        ) {
             if (output == null)
             {
                 throw new ArgumentNullException(nameof(output));
@@ -58,8 +62,12 @@ namespace Microsoft.Extensions.WebEncoders.Testing
         }
 
         /// <inheritdoc />
-        public override void Encode(TextWriter output, string value, int startIndex, int characterCount)
-        {
+        public override void Encode(
+            TextWriter output,
+            string value,
+            int startIndex,
+            int characterCount
+        ) {
             if (output == null)
             {
                 throw new ArgumentNullException(nameof(output));
@@ -97,8 +105,8 @@ namespace Microsoft.Extensions.WebEncoders.Testing
             int unicodeScalar,
             char* buffer,
             int bufferLength,
-            out int numberOfCharactersWritten)
-        {
+            out int numberOfCharactersWritten
+        ) {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));

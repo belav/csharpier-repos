@@ -32,10 +32,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected NavigationEntry(InternalEntityEntry internalEntry, string name, bool collection)
-            : this(internalEntry, GetNavigation(internalEntry, name, collection))
-        {
-        }
+        protected NavigationEntry(
+            InternalEntityEntry internalEntry,
+            string name,
+            bool collection
+        ) : this(internalEntry, GetNavigation(internalEntry, name, collection)) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,14 +45,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected NavigationEntry(InternalEntityEntry internalEntry, INavigationBase navigation)
-            : base(internalEntry, navigation)
-        {
-        }
+        protected NavigationEntry(
+            InternalEntityEntry internalEntry,
+            INavigationBase navigation
+        ) : base(internalEntry, navigation) { }
 
-        private static INavigationBase GetNavigation(InternalEntityEntry internalEntry, string name, bool collection)
-        {
-            var navigation = (INavigationBase?)internalEntry.EntityType.FindNavigation(name)
+        private static INavigationBase GetNavigation(
+            InternalEntityEntry internalEntry,
+            string name,
+            bool collection
+        ) {
+            var navigation =
+                (INavigationBase?)internalEntry.EntityType.FindNavigation(name)
                 ?? internalEntry.EntityType.FindSkipNavigation(name);
 
             if (navigation == null)
@@ -60,30 +65,42 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 {
                     throw new InvalidOperationException(
                         CoreStrings.NavigationIsProperty(
-                            name, internalEntry.EntityType.DisplayName(),
-                            nameof(ChangeTracking.EntityEntry.Reference), nameof(ChangeTracking.EntityEntry.Collection),
-                            nameof(ChangeTracking.EntityEntry.Property)));
+                            name,
+                            internalEntry.EntityType.DisplayName(),
+                            nameof(ChangeTracking.EntityEntry.Reference),
+                            nameof(ChangeTracking.EntityEntry.Collection),
+                            nameof(ChangeTracking.EntityEntry.Property)
+                        )
+                    );
                 }
 
-                throw new InvalidOperationException(CoreStrings.PropertyNotFound(name, internalEntry.EntityType.DisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.PropertyNotFound(name, internalEntry.EntityType.DisplayName())
+                );
             }
 
-            if (collection
-                && !navigation.IsCollection)
+            if (collection && !navigation.IsCollection)
             {
                 throw new InvalidOperationException(
                     CoreStrings.CollectionIsReference(
-                        name, internalEntry.EntityType.DisplayName(),
-                        nameof(ChangeTracking.EntityEntry.Collection), nameof(ChangeTracking.EntityEntry.Reference)));
+                        name,
+                        internalEntry.EntityType.DisplayName(),
+                        nameof(ChangeTracking.EntityEntry.Collection),
+                        nameof(ChangeTracking.EntityEntry.Reference)
+                    )
+                );
             }
 
-            if (!collection
-                && navigation.IsCollection)
+            if (!collection && navigation.IsCollection)
             {
                 throw new InvalidOperationException(
                     CoreStrings.ReferenceIsCollection(
-                        name, internalEntry.EntityType.DisplayName(),
-                        nameof(ChangeTracking.EntityEntry.Reference), nameof(ChangeTracking.EntityEntry.Collection)));
+                        name,
+                        internalEntry.EntityType.DisplayName(),
+                        nameof(ChangeTracking.EntityEntry.Reference),
+                        nameof(ChangeTracking.EntityEntry.Collection)
+                    )
+                );
             }
 
             return navigation;
@@ -163,7 +180,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Gets the metadata that describes the facets of this property and how it maps to the database.
         /// </summary>
-        public new virtual INavigationBase Metadata
-            => (INavigationBase)base.Metadata;
+        public new virtual INavigationBase Metadata => (INavigationBase)base.Metadata;
     }
 }

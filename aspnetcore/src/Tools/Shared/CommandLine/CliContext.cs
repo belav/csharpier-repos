@@ -17,7 +17,10 @@ namespace Microsoft.Extensions.Tools.Internal
         /// <returns></returns>
         public static bool IsGlobalVerbose()
         {
-            bool.TryParse(Environment.GetEnvironmentVariable("DOTNET_CLI_CONTEXT_VERBOSE"), out bool globalVerbose);
+            bool.TryParse(
+                Environment.GetEnvironmentVariable("DOTNET_CLI_CONTEXT_VERBOSE"),
+                out bool globalVerbose
+            );
             return globalVerbose;
         }
     }

@@ -8,15 +8,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
     internal class MetadataAttributeTargetExtension : IMetadataAttributeTargetExtension
     {
-        public string CompiledItemAttributeName { get; set; } = "global::Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute";
+        public string CompiledItemAttributeName { get; set; } =
+            "global::Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute";
 
-        public string SourceChecksumAttributeName { get; set; } = "global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute";
+        public string SourceChecksumAttributeName { get; set; } =
+            "global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute";
 
-        public string CompiledItemMetadataAttributeName { get; set; } = "global::Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemMetadataAttribute";
+        public string CompiledItemMetadataAttributeName { get; set; } =
+            "global::Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemMetadataAttribute";
 
-
-        public void WriteRazorCompiledItemAttribute(CodeRenderingContext context, RazorCompiledItemAttributeIntermediateNode node)
-        {
+        public void WriteRazorCompiledItemAttribute(
+            CodeRenderingContext context,
+            RazorCompiledItemAttributeIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -39,8 +43,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             context.CodeWriter.WriteLine("\")]");
         }
 
-        public void WriteRazorCompiledItemMetadataAttribute(CodeRenderingContext context, RazorCompiledItemMetadataAttributeIntermediateNode node)
-        {
+        public void WriteRazorCompiledItemMetadataAttribute(
+            CodeRenderingContext context,
+            RazorCompiledItemMetadataAttributeIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -61,8 +67,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             context.CodeWriter.WriteLine(")]");
         }
 
-        public void WriteRazorSourceChecksumAttribute(CodeRenderingContext context, RazorSourceChecksumAttributeIntermediateNode node)
-        {
+        public void WriteRazorSourceChecksumAttribute(
+            CodeRenderingContext context,
+            RazorSourceChecksumAttributeIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

@@ -18,8 +18,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
         private readonly Dictionary<int, int?> _originalIndexToUpdatedIndexMap = new();
 
-        public SignatureChange(ParameterConfiguration originalConfiguration, ParameterConfiguration updatedConfiguration)
-        {
+        public SignatureChange(
+            ParameterConfiguration originalConfiguration,
+            ParameterConfiguration updatedConfiguration
+        ) {
             OriginalConfiguration = originalConfiguration;
             UpdatedConfiguration = updatedConfiguration;
 
@@ -33,7 +35,9 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 var parameter = originalParameterList[i];
                 if (parameter is ExistingParameter existingParameter)
                 {
-                    var updatedIndex = updatedParameterList.IndexOf(p => p is ExistingParameter ep && ep.Symbol.Equals(existingParameter.Symbol));
+                    var updatedIndex = updatedParameterList.IndexOf(
+                        p => p is ExistingParameter ep && ep.Symbol.Equals(existingParameter.Symbol)
+                    );
                     if (updatedIndex >= 0)
                     {
                         index = updatedIndex;
@@ -54,8 +58,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             return _originalIndexToUpdatedIndexMap[parameterIndex];
         }
 
-        internal SignatureChange WithoutAddedParameters()
-            => new(OriginalConfiguration, UpdatedConfiguration.WithoutAddedParameters());
+        internal SignatureChange WithoutAddedParameters() =>
+            new(OriginalConfiguration, UpdatedConfiguration.WithoutAddedParameters());
 
         internal void LogTelemetry()
         {
@@ -65,8 +69,14 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             ChangeSignatureLogger.LogTransformationInformation(
                 numOriginalParameters: originalListOfParameters.Length,
                 numParametersAdded: updatedListOfParameters.Count(p => p is AddedParameter),
-                numParametersRemoved: originalListOfParameters.Count(p => !updatedListOfParameters.Contains(p)),
-                anyParametersReordered: AnyParametersReordered(originalListOfParameters, updatedListOfParameters));
+                numParametersRemoved: originalListOfParameters.Count(
+                    p => !updatedListOfParameters.Contains(p)
+                ),
+                anyParametersReordered: AnyParametersReordered(
+                    originalListOfParameters,
+                    updatedListOfParameters
+                )
+            );
 
             foreach (var addedParameter in updatedListOfParameters.OfType<AddedParameter>())
             {
@@ -102,10 +112,18 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             }
         }
 
-        private static bool AnyParametersReordered(ImmutableArray<Parameter> originalListOfParameters, ImmutableArray<Parameter> updatedListOfParameters)
-        {
-            var originalListWithoutRemovedOrAdded = originalListOfParameters.Where(p => updatedListOfParameters.Contains(p)).ToImmutableArray();
-            var updatedListWithoutRemovedOrAdded = updatedListOfParameters.Where(p => originalListOfParameters.Contains(p)).ToImmutableArray();
+        private static bool AnyParametersReordered(
+            ImmutableArray<Parameter> originalListOfParameters,
+            ImmutableArray<Parameter> updatedListOfParameters
+        ) {
+            var originalListWithoutRemovedOrAdded = originalListOfParameters.Where(
+                    p => updatedListOfParameters.Contains(p)
+                )
+                .ToImmutableArray();
+            var updatedListWithoutRemovedOrAdded = updatedListOfParameters.Where(
+                    p => originalListOfParameters.Contains(p)
+                )
+                .ToImmutableArray();
 
             for (var i = 0; i < originalListWithoutRemovedOrAdded.Length; i++)
             {

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Hosting
 
     internal class HostingRequestFinishedLog : IReadOnlyList<KeyValuePair<string, object?>>
     {
-        internal static readonly Func<object, Exception?, string> Callback = (state, exception) => ((HostingRequestFinishedLog)state).ToString();
+        internal static readonly Func<object, Exception?, string> Callback = (state, exception) =>
+            ((HostingRequestFinishedLog)state).ToString();
 
         private readonly HostingApplication.Context _context;
 
@@ -34,17 +35,53 @@ namespace Microsoft.AspNetCore.Hosting
 
                 return index switch
                 {
-                    0 => new KeyValuePair<string, object?>("ElapsedMilliseconds", Elapsed.TotalMilliseconds),
-                    1 => new KeyValuePair<string, object?>(nameof(response.StatusCode), response.StatusCode),
-                    2 => new KeyValuePair<string, object?>(nameof(response.ContentType), response.ContentType),
-                    3 => new KeyValuePair<string, object?>(nameof(response.ContentLength), response.ContentLength),
-                    4 => new KeyValuePair<string, object?>(nameof(request.Protocol), request.Protocol),
+                    0
+                      => new KeyValuePair<string, object?>(
+                          "ElapsedMilliseconds",
+                          Elapsed.TotalMilliseconds
+                      ),
+                    1
+                      => new KeyValuePair<string, object?>(
+                          nameof(response.StatusCode),
+                          response.StatusCode
+                      ),
+                    2
+                      => new KeyValuePair<string, object?>(
+                          nameof(response.ContentType),
+                          response.ContentType
+                      ),
+                    3
+                      => new KeyValuePair<string, object?>(
+                          nameof(response.ContentLength),
+                          response.ContentLength
+                      ),
+                    4
+                      => new KeyValuePair<string, object?>(
+                          nameof(request.Protocol),
+                          request.Protocol
+                      ),
                     5 => new KeyValuePair<string, object?>(nameof(request.Method), request.Method),
                     6 => new KeyValuePair<string, object?>(nameof(request.Scheme), request.Scheme),
-                    7 => new KeyValuePair<string, object?>(nameof(request.Host), request.Host.Value),
-                    8 => new KeyValuePair<string, object?>(nameof(request.PathBase), request.PathBase.Value),
-                    9 => new KeyValuePair<string, object?>(nameof(request.Path), request.Path.Value),
-                    10 => new KeyValuePair<string, object?>(nameof(request.QueryString), request.QueryString.Value),
+                    7
+                      => new KeyValuePair<string, object?>(
+                          nameof(request.Host),
+                          request.Host.Value
+                      ),
+                    8
+                      => new KeyValuePair<string, object?>(
+                          nameof(request.PathBase),
+                          request.PathBase.Value
+                      ),
+                    9
+                      => new KeyValuePair<string, object?>(
+                          nameof(request.Path),
+                          request.Path.Value
+                      ),
+                    10
+                      => new KeyValuePair<string, object?>(
+                          nameof(request.QueryString),
+                          request.QueryString.Value
+                      ),
                     _ => throw new IndexOutOfRangeException(nameof(index)),
                 };
             }
@@ -63,7 +100,8 @@ namespace Microsoft.AspNetCore.Hosting
                 Debug.Assert(_context.HttpContext != null && _context.StartLog != null);
 
                 var response = _context.HttpContext.Response;
-                _cachedToString = $"Request finished {_context.StartLog.ToStringWithoutPreamble()} - {response.StatusCode.ToString(CultureInfo.InvariantCulture)} {ValueOrEmptyMarker(response.ContentLength)} {EscapedValueOrEmptyMarker(response.ContentType)} {Elapsed.TotalMilliseconds.ToString("0.0000", CultureInfo.InvariantCulture)}ms";
+                _cachedToString =
+                    $"Request finished {_context.StartLog.ToStringWithoutPreamble()} - {response.StatusCode.ToString(CultureInfo.InvariantCulture)} {ValueOrEmptyMarker(response.ContentLength)} {EscapedValueOrEmptyMarker(response.ContentType)} {Elapsed.TotalMilliseconds.ToString("0.0000", CultureInfo.InvariantCulture)}ms";
             }
 
             return _cachedToString;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core.IO
 {
-    internal partial class WebSocketsAsyncIOEngine: IAsyncIOEngine
+    internal partial class WebSocketsAsyncIOEngine : IAsyncIOEngine
     {
         private readonly IISHttpContext _context;
 
@@ -92,7 +92,9 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
             var init = _initializationFlush;
             if (init == null)
             {
-                throw new InvalidOperationException("Unexpected completion for WebSocket operation");
+                throw new InvalidOperationException(
+                    "Unexpected completion for WebSocket operation"
+                );
             }
 
             var continuation = init.Complete(hr, bytes);
@@ -123,16 +125,16 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
         }
 
         private WebSocketReadOperation GetReadOperation() =>
-            Interlocked.Exchange(ref _cachedWebSocketReadOperation, null) ??
-            new WebSocketReadOperation(this);
+            Interlocked.Exchange(ref _cachedWebSocketReadOperation, null)
+            ?? new WebSocketReadOperation(this);
 
         private WebSocketWriteOperation GetWriteOperation() =>
-            Interlocked.Exchange(ref _cachedWebSocketWriteOperation, null) ??
-            new WebSocketWriteOperation(this);
+            Interlocked.Exchange(ref _cachedWebSocketWriteOperation, null)
+            ?? new WebSocketWriteOperation(this);
 
         private AsyncInitializeOperation GetInitializeOperation() =>
-            Interlocked.Exchange(ref _cachedAsyncInitializeOperation, null) ??
-            new AsyncInitializeOperation(this);
+            Interlocked.Exchange(ref _cachedAsyncInitializeOperation, null)
+            ?? new AsyncInitializeOperation(this);
 
         private void ReturnOperation(AsyncInitializeOperation operation) =>
             Volatile.Write(ref _cachedAsyncInitializeOperation, operation);

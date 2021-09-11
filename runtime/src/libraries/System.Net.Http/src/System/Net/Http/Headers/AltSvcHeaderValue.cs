@@ -13,10 +13,22 @@ namespace System.Net.Http.Headers
     /// </remarks>
     internal sealed class AltSvcHeaderValue
     {
-        public static AltSvcHeaderValue Clear { get; } = new AltSvcHeaderValue("clear", host: null, port: 0, maxAge: TimeSpan.Zero, persist: false);
+        public static AltSvcHeaderValue Clear { get; } =
+            new AltSvcHeaderValue(
+                "clear",
+                host: null,
+                port: 0,
+                maxAge: TimeSpan.Zero,
+                persist: false
+            );
 
-        public AltSvcHeaderValue(string alpnProtocolName, string? host, int port, TimeSpan maxAge, bool persist)
-        {
+        public AltSvcHeaderValue(
+            string alpnProtocolName,
+            string? host,
+            int port,
+            TimeSpan maxAge,
+            bool persist
+        ) {
             AlpnProtocolName = alpnProtocolName;
             Host = host;
             Port = port;
@@ -50,11 +62,14 @@ namespace System.Net.Http.Headers
 
         public override string ToString()
         {
-            StringBuilder sb = StringBuilderCache.Acquire(capacity: AlpnProtocolName.Length + (Host?.Length ?? 0) + 64);
+            StringBuilder sb = StringBuilderCache.Acquire(
+                capacity: AlpnProtocolName.Length + (Host?.Length ?? 0) + 64
+            );
 
             sb.Append(AlpnProtocolName);
             sb.Append("=\"");
-            if (Host != null) sb.Append(Host);
+            if (Host != null)
+                sb.Append(Host);
             sb.Append(':');
             sb.Append(Port.ToString(CultureInfo.InvariantCulture));
             sb.Append('"');
@@ -62,7 +77,9 @@ namespace System.Net.Http.Headers
             if (MaxAge != TimeSpan.FromTicks(AltSvcHeaderParser.DefaultMaxAgeTicks))
             {
                 sb.Append("; ma=");
-                sb.Append((MaxAge.Ticks / TimeSpan.TicksPerSecond).ToString(CultureInfo.InvariantCulture));
+                sb.Append(
+                    (MaxAge.Ticks / TimeSpan.TicksPerSecond).ToString(CultureInfo.InvariantCulture)
+                );
             }
 
             if (Persist)

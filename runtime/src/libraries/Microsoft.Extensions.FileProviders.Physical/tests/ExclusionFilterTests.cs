@@ -22,24 +22,38 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
 
         [Theory]
         [MemberData(nameof(Combinations))]
-        public void FiltersExcludedFiles(string filename, FileAttributes attributes, ExclusionFilters filters, bool excluded)
-        {
+        public void FiltersExcludedFiles(
+            string filename,
+            FileAttributes attributes,
+            ExclusionFilters filters,
+            bool excluded
+        ) {
             var fileInfo = new FileInfo(Path.Combine(_fileSystem.RootPath, filename));
             _fileSystem.CreateFile(fileInfo);
             fileInfo.Attributes = attributes;
 
-            Assert.Equal(excluded, FileSystemInfoHelper.IsExcluded(_fileSystem.GetFile(filename), filters));
+            Assert.Equal(
+                excluded,
+                FileSystemInfoHelper.IsExcluded(_fileSystem.GetFile(filename), filters)
+            );
         }
 
         [Theory]
         [MemberData(nameof(Combinations))]
-        public void FiltersExcludedDirectories(string dirname, FileAttributes attributes, ExclusionFilters filters, bool excluded)
-        {
+        public void FiltersExcludedDirectories(
+            string dirname,
+            FileAttributes attributes,
+            ExclusionFilters filters,
+            bool excluded
+        ) {
             var dirInfo = new DirectoryInfo(Path.Combine(_fileSystem.RootPath, dirname));
             dirInfo.Create();
             dirInfo.Attributes = attributes;
 
-            Assert.Equal(excluded, FileSystemInfoHelper.IsExcluded(_fileSystem.GetDirectory(dirname), filters));
+            Assert.Equal(
+                excluded,
+                FileSystemInfoHelper.IsExcluded(_fileSystem.GetDirectory(dirname), filters)
+            );
         }
 
         public static TheoryData Combinations
@@ -47,38 +61,64 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             get
             {
                 var names = new[] { ".dot", "hidden" };
-                var attributes = new List<FileAttributes>()
-                {
-                    FileAttributes.Normal
-                };
+                var attributes = new List<FileAttributes>() { FileAttributes.Normal };
 
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    attributes.AddRange(new[]
-                    {
-                        FileAttributes.Hidden,
-                        FileAttributes.System,
-                        FileAttributes.Hidden | FileAttributes.System
-                    });
+                    attributes.AddRange(
+                        new[]
+                        {
+                            FileAttributes.Hidden,
+                            FileAttributes.System,
+                            FileAttributes.Hidden | FileAttributes.System
+                        }
+                    );
                 }
 
-                var combinations = names.Join(attributes, _ => true, _ => true, (name, attr) => new { name, attr }).ToList();
+                var combinations = names.Join(
+                        attributes,
+                        _ => true,
+                        _ => true,
+                        (name, attr) => new { name, attr }
+                    )
+                    .ToList();
                 var data = new TheoryData<string, FileAttributes, ExclusionFilters, bool>();
 
                 foreach (var combo in combinations)
                 {
                     data.Add(combo.name, combo.attr, ExclusionFilters.None, false);
-                    data.Add(combo.name, combo.attr, ExclusionFilters.System, (combo.attr & FileAttributes.System) != 0);
-                    data.Add(combo.name, combo.attr, ExclusionFilters.DotPrefixed, combo.name[0] == '.');
-
-                    data.Add(combo.name, combo.attr, ExclusionFilters.Hidden,
-                        (combo.attr & FileAttributes.Hidden) != 0
-                        || (combo.name[0] == '.' &&!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)));
-
-                    data.Add(combo.name, combo.attr, ExclusionFilters.Sensitive,
+                    data.Add(
+                        combo.name,
+                        combo.attr,
+                        ExclusionFilters.System,
+                        (combo.attr & FileAttributes.System) != 0
+                    );
+                    data.Add(
+                        combo.name,
+                        combo.attr,
+                        ExclusionFilters.DotPrefixed,
                         combo.name[0] == '.'
-                        || (combo.attr & FileAttributes.System) != 0
-                        || (combo.attr & FileAttributes.Hidden) != 0);
+                    );
+
+                    data.Add(
+                        combo.name,
+                        combo.attr,
+                        ExclusionFilters.Hidden,
+                        (combo.attr & FileAttributes.Hidden) != 0
+                            || (
+                                combo.name[0] == '.'
+                                && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                            )
+                    );
+
+                    data.Add(
+                        combo.name,
+                        combo.attr,
+                        ExclusionFilters.Sensitive,
+                        combo.name[0] == '.'
+                            || (combo.attr & FileAttributes.System) != 0
+                            || (combo.attr & FileAttributes.Hidden) != 0
+                    );
                 }
 
                 return data;

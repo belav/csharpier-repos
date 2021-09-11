@@ -12,30 +12,35 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
     {
         public CodeGenerationDestructorSymbol(
             INamedTypeSymbol containingType,
-            ImmutableArray<AttributeData> attributes)
-            : base(containingType,
-                 attributes,
-                 Accessibility.NotApplicable,
-                 default,
-                 returnType: null,
-                 refKind: RefKind.None,
-                 explicitInterfaceImplementations: default,
-                 name: string.Empty,
-                 typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
-                 parameters: ImmutableArray<IParameterSymbol>.Empty,
-                 returnTypeAttributes: ImmutableArray<AttributeData>.Empty)
-        {
-        }
+            ImmutableArray<AttributeData> attributes
+        ) : base(
+            containingType,
+            attributes,
+            Accessibility.NotApplicable,
+            default,
+            returnType: null,
+            refKind: RefKind.None,
+            explicitInterfaceImplementations: default,
+            name: string.Empty,
+            typeParameters: ImmutableArray<ITypeParameterSymbol>.Empty,
+            parameters: ImmutableArray<IParameterSymbol>.Empty,
+            returnTypeAttributes: ImmutableArray<AttributeData>.Empty
+        ) { }
 
         public override MethodKind MethodKind => MethodKind.Destructor;
 
         protected override CodeGenerationSymbol Clone()
         {
-            var result = new CodeGenerationDestructorSymbol(this.ContainingType, this.GetAttributes());
+            var result = new CodeGenerationDestructorSymbol(
+                this.ContainingType,
+                this.GetAttributes()
+            );
 
-            CodeGenerationDestructorInfo.Attach(result,
+            CodeGenerationDestructorInfo.Attach(
+                result,
                 CodeGenerationDestructorInfo.GetTypeName(this),
-                CodeGenerationDestructorInfo.GetStatements(this));
+                CodeGenerationDestructorInfo.GetStatements(this)
+            );
 
             return result;
         }

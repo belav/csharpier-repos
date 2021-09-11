@@ -21,7 +21,9 @@ namespace RoutingWebSite
 
         public IActionResult Param(string param)
         {
-            return _generator.Generate($"/ConventionalTransformerRoute/conventional-transformer/Param/{param}");
+            return _generator.Generate(
+                $"/ConventionalTransformerRoute/conventional-transformer/Param/{param}"
+            );
         }
     }
 }

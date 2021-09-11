@@ -28,8 +28,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded
             Assembly assembly,
             string resourcePath,
             string name,
-            DateTimeOffset lastModified)
-        {
+            DateTimeOffset lastModified
+        ) {
             _assembly = assembly;
             _resourcePath = resourcePath;
             Name = name;

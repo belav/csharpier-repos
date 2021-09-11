@@ -39,23 +39,21 @@ class LPTStrTest
 
     private static void RunByValTStrTests()
     {
-        Assert.IsTrue(MatchFuncNameAnsi(new ByValStringInStructAnsi { str = nameof(MatchFuncNameAnsi)}));
+        Assert.IsTrue(
+            MatchFuncNameAnsi(new ByValStringInStructAnsi { str = nameof(MatchFuncNameAnsi) })
+        );
 
-        var ansiStr = new ByValStringInStructAnsi
-        {
-            str = InitialString
-        };
+        var ansiStr = new ByValStringInStructAnsi { str = InitialString };
 
         ReverseByValStringAnsi(ref ansiStr);
 
         Assert.AreEqual(Helpers.Reverse(InitialString), ansiStr.str);
 
-        Assert.IsTrue(MatchFuncNameUni(new ByValStringInStructUnicode { str = nameof(MatchFuncNameUni)}));
+        Assert.IsTrue(
+            MatchFuncNameUni(new ByValStringInStructUnicode { str = nameof(MatchFuncNameUni) })
+        );
 
-        var uniStr = new ByValStringInStructUnicode
-        {
-            str = InitialString
-        };
+        var uniStr = new ByValStringInStructUnicode { str = InitialString };
 
         ReverseByValStringUni(ref uniStr);
 

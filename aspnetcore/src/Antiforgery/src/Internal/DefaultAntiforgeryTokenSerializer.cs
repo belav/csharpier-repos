@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Antiforgery
 {
     internal class DefaultAntiforgeryTokenSerializer : IAntiforgeryTokenSerializer
     {
-        private static readonly string Purpose = "Microsoft.AspNetCore.Antiforgery.AntiforgeryToken.v1";
+        private static readonly string Purpose =
+            "Microsoft.AspNetCore.Antiforgery.AntiforgeryToken.v1";
         private const byte TokenVersion = 0x01;
 
         private readonly IDataProtector _cryptoSystem;
@@ -19,8 +20,8 @@ namespace Microsoft.AspNetCore.Antiforgery
 
         public DefaultAntiforgeryTokenSerializer(
             IDataProtectionProvider provider,
-            ObjectPool<AntiforgerySerializationContext> pool)
-        {
+            ObjectPool<AntiforgerySerializationContext> pool
+        ) {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Antiforgery
                     offset: 0,
                     buffer: chars,
                     bufferOffset: 0,
-                    count: count);
+                    count: count
+                );
 
                 var unprotectedBytes = _cryptoSystem.Unprotect(tokenBytes);
                 var stream = serializationContext.Stream;
@@ -75,7 +77,10 @@ namespace Microsoft.AspNetCore.Antiforgery
             }
 
             // if we reached this point, something went wrong deserializing
-            throw new AntiforgeryValidationException(Resources.AntiforgeryToken_DeserializationFailed, innerException);
+            throw new AntiforgeryValidationException(
+                Resources.AntiforgeryToken_DeserializationFailed,
+                innerException
+            );
         }
 
         /* The serialized format of the anti-XSRF token is as follows:
@@ -101,8 +106,10 @@ namespace Microsoft.AspNetCore.Antiforgery
 
             var deserializedToken = new AntiforgeryToken();
             var securityTokenBytes = reader.ReadBytes(AntiforgeryToken.SecurityTokenBitLength / 8);
-            deserializedToken.SecurityToken =
-                new BinaryBlob(AntiforgeryToken.SecurityTokenBitLength, securityTokenBytes);
+            deserializedToken.SecurityToken = new BinaryBlob(
+                AntiforgeryToken.SecurityTokenBitLength,
+                securityTokenBytes
+            );
             deserializedToken.IsCookieToken = reader.ReadBoolean();
 
             if (!deserializedToken.IsCookieToken)
@@ -111,7 +118,10 @@ namespace Microsoft.AspNetCore.Antiforgery
                 if (isClaimsBased)
                 {
                     var claimUidBytes = reader.ReadBytes(AntiforgeryToken.ClaimUidBitLength / 8);
-                    deserializedToken.ClaimUid = new BinaryBlob(AntiforgeryToken.ClaimUidBitLength, claimUidBytes);
+                    deserializedToken.ClaimUid = new BinaryBlob(
+                        AntiforgeryToken.ClaimUidBitLength,
+                        claimUidBytes
+                    );
                 }
                 else
                 {
@@ -151,12 +161,16 @@ namespace Microsoft.AspNetCore.Antiforgery
                 {
                     if (token.ClaimUid != null)
                     {
-                        writer.Write(true /* isClaimsBased */);
+                        writer.Write(
+                            true /* isClaimsBased */
+                        );
                         writer.Write(token.ClaimUid.GetData());
                     }
                     else
                     {
-                        writer.Write(false /* isClaimsBased */);
+                        writer.Write(
+                            false /* isClaimsBased */
+                        );
                         writer.Write(token.Username!);
                     }
 
@@ -175,10 +189,12 @@ namespace Microsoft.AspNetCore.Antiforgery
                     offset: 0,
                     output: chars,
                     outputOffset: 0,
-                    count: count);
+                    count: count
+                );
 
                 return new string(chars, startIndex: 0, length: outputLength);
             }
+
             finally
             {
                 _pool.Return(serializationContext);

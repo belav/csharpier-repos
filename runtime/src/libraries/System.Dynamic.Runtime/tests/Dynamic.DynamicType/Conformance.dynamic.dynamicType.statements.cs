@@ -50,8 +50,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.checked002.checked002
 {
     // <Title>Tests checked block</Title>
@@ -64,14 +62,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     {
         public int GetMaxInt
         {
-            get
-            {
-                return int.MaxValue;
-            }
-
-            set
-            {
-            }
+            get { return int.MaxValue; }
+            set { }
         }
     }
 
@@ -111,8 +103,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.checked003.checked003
 {
@@ -154,8 +144,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.checked004.checked004
 {
     public class Test
@@ -196,8 +184,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.checked005.checked005
 {
     public class Test
@@ -210,7 +196,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
 
         public static int MainMethod(string[] args)
         {
-            int rez = 0, tests = 0;
+            int rez = 0,
+                tests = 0;
             bool exception = false; //signals if the exception is thrown
             dynamic d = null;
             dynamic d2 = null;
@@ -473,8 +460,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.checked006.checked006
 {
     public class Test
@@ -487,7 +472,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
 
         public static int MainMethod(string[] args)
         {
-            int rez = 0, tests = 0;
+            int rez = 0,
+                tests = 0;
             bool exception = true; //signals if the exception is thrown
             dynamic d = null;
             dynamic d2 = null;
@@ -749,8 +735,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.checked008.checked008
 {
     // <Title>Tests checked block</Title>
@@ -772,7 +756,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
         internal uint Z = 0;
         protected internal ulong Q = ulong.MaxValue;
         protected long C = long.MinValue;
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -867,8 +850,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.do001.do001
 {
     // <Title>Tests do statements</Title>
@@ -880,7 +861,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -903,15 +884,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
                 x++;
                 if (x > 2)
                     return 0;
-            }
-            while ((bool)d);
+            } while ((bool)d);
             return 1;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.do002.do002
 {
@@ -951,15 +929,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
                 x++;
                 if (x > 2)
                     return 0;
-            }
-            while (d);
+            } while (d);
             return 1;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.do003.do003
 {
@@ -994,15 +969,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
                 x++;
                 if (x > 2)
                     return 0;
-            }
-            while (d.MyMethod());
+            } while (d.MyMethod());
             return 1;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.if001.if001
 {
@@ -1015,7 +987,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1040,8 +1012,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.if002.if002
 {
     // <Title>Tests if statements</Title>
@@ -1054,7 +1024,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
-        public static implicit operator bool (myIf f)
+        public static implicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1078,8 +1048,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.if003.if003
 {
@@ -1121,8 +1089,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.if004.if004
 {
     // <Title>Tests if statements</Title>
@@ -1134,7 +1100,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1159,8 +1125,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.if005.if005
 {
     // <Title>Tests if statements</Title>
@@ -1172,7 +1136,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1207,8 +1171,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.if006.if006
 {
     // <Title>Tests if statements</Title>
@@ -1225,7 +1187,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
             return this.value;
         }
 
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1249,8 +1211,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.if007.if007
 {
@@ -1268,7 +1228,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
             return this.value;
         }
 
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1292,8 +1252,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.if008.if008
 {
@@ -1312,7 +1270,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
             return !this.value;
         }
 
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1342,8 +1300,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.if009.if009
 {
     // <Title>Tests if statements</Title>
@@ -1361,7 +1317,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
             return !this.value;
         }
 
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1391,8 +1347,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.if010.if010
 {
     // <Title>Tests if statements</Title>
@@ -1404,7 +1358,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1433,8 +1387,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.switch001.switch001
 {
     public class Test
@@ -1459,8 +1411,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.switch002.switch002
 {
@@ -1487,8 +1437,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.ternary001.ternary001
 {
     // <Title>Tests ternary operator statements</Title>
@@ -1500,7 +1448,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1522,8 +1470,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.ternary002.ternary002
 {
@@ -1563,8 +1509,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.ternary003.ternary003
 {
     // <Title>Tests if statements</Title>
@@ -1576,7 +1520,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
-        public static implicit operator bool (myIf f)
+        public static implicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1609,8 +1553,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.ternary004.ternary004
 {
     // <Title>Tests if statements</Title>
@@ -1627,7 +1569,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
             return this.value;
         }
 
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1650,8 +1592,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.ternary005.ternary005
 {
     // <Title>Tests if statements</Title>
@@ -1663,7 +1603,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
-        public static explicit operator bool (myIf f)
+        public static explicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1686,8 +1626,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.unchecked001.unchecked001
 {
@@ -1735,8 +1673,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.unchecked002.unchecked002
 {
     // <Title>Tests checked block</Title>
@@ -1783,8 +1719,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.unchecked003.unchecked003
 {
     public class Test
@@ -1807,8 +1741,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.unsfe001.unsfe001
 {
@@ -1850,8 +1782,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.while001.while001
 {
     // <Title>Tests do statements</Title>
@@ -1863,7 +1793,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
-        public static implicit operator bool (myIf f)
+        public static implicit operator bool(myIf f)
         {
             return f.value;
         }
@@ -1893,8 +1823,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.while002.while002
 {
@@ -1942,8 +1870,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.while003.while003
 {
     // <Title>Tests do statements</Title>
@@ -1984,8 +1910,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.yield001.yield001
 {
@@ -2029,8 +1953,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.yield002.yield002
 {
     // <Title>Tests checked block</Title>
@@ -2073,8 +1995,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.yield003.yield003
 {
     // <Title>Tests checked block</Title>
@@ -2116,8 +2036,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.yield004.yield004
 {

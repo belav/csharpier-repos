@@ -11,14 +11,12 @@ namespace AutoMapper.IntegrationTests.Net4
     using QueryableExtensions;
     using UnitTests;
 
-        
     public class NavigationPropertySO : AutoMapperSpecBase
     {
         CustomerDTO _destination;
 
         public class Cust
         {
-
             [Key]
             public int CustomerID { get; set; }
 
@@ -75,29 +73,26 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 var cust = new Cust { CustomerID = 1 };
                 context.Custs.Add(cust);
-                var customer = new Customer
-                {
-                    Id = 1,
-                    Name1 = "Bob",
-                    CustomerId = 1,
-                    Cust = cust,
-                };
+                var customer = new Customer { Id = 1, Name1 = "Bob", CustomerId = 1, Cust = cust, };
                 context.Customers.Add(customer);
                 cust.Customers.Add(customer);
                 base.Seed(context);
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Customer, CustomerDTO>().MaxDepth(1);
-            cfg.CreateProjection<Cust, CustDTO>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Customer, CustomerDTO>().MaxDepth(1);
+                    cfg.CreateProjection<Cust, CustDTO>();
+                }
+            );
 
         [Fact]
         public void Can_map_with_projection()
         {
-            using(var context = new Context())
+            using (var context = new Context())
             {
                 _destination = ProjectTo<CustomerDTO>(context.Customers).Single();
                 _destination.Id.ShouldBe(1);

@@ -1,5 +1,6 @@
-﻿
-[assembly: Microsoft.AspNetCore.Mvc.ApiConventionType(typeof(Microsoft.AspNetCore.Mvc.DefaultApiConventions))]
+﻿[assembly: Microsoft.AspNetCore.Mvc.ApiConventionType(
+    typeof(Microsoft.AspNetCore.Mvc.DefaultApiConventions)
+)]
 
 namespace TestApp._INPUT_
 {
@@ -9,7 +10,6 @@ namespace TestApp._INPUT_
     [Route("[controller]/[action]")]
     public class BaseController : ControllerBase
     {
-
     }
 }
 

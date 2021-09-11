@@ -18,7 +18,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void IsNameMatch_WithAny_AlwaysReturnsTrue(string name, string conventionName)
         {
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Any);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Any
+            );
 
             // Assert
             Assert.True(result);
@@ -32,7 +36,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "name";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Exact);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Exact
+            );
 
             // Assert
             Assert.False(result);
@@ -46,7 +54,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "Different";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Exact);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Exact
+            );
 
             // Assert
             Assert.False(result);
@@ -60,7 +72,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "Regular";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Exact);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Exact
+            );
 
             // Assert
             Assert.False(result);
@@ -74,7 +90,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "RegularName";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Exact);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Exact
+            );
 
             // Assert
             Assert.False(result);
@@ -88,7 +108,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "parameterName";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Exact);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Exact
+            );
 
             // Assert
             Assert.True(result);
@@ -102,7 +126,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "PostPerson";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Prefix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.True(result);
@@ -116,7 +144,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "Post";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Prefix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.True(result);
@@ -130,7 +162,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "Post";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Prefix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.False(result);
@@ -144,7 +180,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "post";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Prefix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.False(result);
@@ -158,7 +198,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "Post";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Prefix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.False(result);
@@ -172,7 +216,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "Post";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Prefix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.False(result);
@@ -186,7 +234,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "diff";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Suffix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.False(result);
@@ -200,7 +252,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "idx";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Suffix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.False(result);
@@ -214,7 +270,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "test";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Suffix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.True(result);
@@ -228,7 +288,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "Test";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Suffix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.False(result);
@@ -242,7 +306,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionName = "id";
 
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Suffix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.True(result);
@@ -251,10 +319,16 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         [Theory]
         [InlineData("candid", "id")]
         [InlineData("canDid", "id")]
-        public void IsNameMatch_WithSuffix_ReturnFalse_IfNameIsNotProperSuffix(string name, string conventionName)
-        {
+        public void IsNameMatch_WithSuffix_ReturnFalse_IfNameIsNotProperSuffix(
+            string name,
+            string conventionName
+        ) {
             // Act
-            var result = ApiConventionMatcher.IsNameMatch(name, conventionName, ApiConventionNameMatchBehavior.Suffix);
+            var result = ApiConventionMatcher.IsNameMatch(
+                name,
+                conventionName,
+                ApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.False(result);
@@ -267,7 +341,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         public void IsTypeMatch_WithAny_ReturnsTrue(Type type, Type conventionType)
         {
             // Act
-            var result = ApiConventionMatcher.IsTypeMatch(type, conventionType, ApiConventionTypeMatchBehavior.Any);
+            var result = ApiConventionMatcher.IsTypeMatch(
+                type,
+                conventionType,
+                ApiConventionTypeMatchBehavior.Any
+            );
 
             // Assert
             Assert.True(result);
@@ -281,7 +359,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionType = typeof(Base);
 
             // Act
-            var result = ApiConventionMatcher.IsTypeMatch(type, conventionType, ApiConventionTypeMatchBehavior.AssignableFrom);
+            var result = ApiConventionMatcher.IsTypeMatch(
+                type,
+                conventionType,
+                ApiConventionTypeMatchBehavior.AssignableFrom
+            );
 
             // Assert
             Assert.True(result);
@@ -295,7 +377,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionType = typeof(Base);
 
             // Act
-            var result = ApiConventionMatcher.IsTypeMatch(type, conventionType, ApiConventionTypeMatchBehavior.AssignableFrom);
+            var result = ApiConventionMatcher.IsTypeMatch(
+                type,
+                conventionType,
+                ApiConventionTypeMatchBehavior.AssignableFrom
+            );
 
             // Assert
             Assert.True(result);
@@ -309,7 +395,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionType = typeof(Derived);
 
             // Act
-            var result = ApiConventionMatcher.IsTypeMatch(type, conventionType, ApiConventionTypeMatchBehavior.AssignableFrom);
+            var result = ApiConventionMatcher.IsTypeMatch(
+                type,
+                conventionType,
+                ApiConventionTypeMatchBehavior.AssignableFrom
+            );
 
             // Assert
             Assert.False(result);
@@ -323,7 +413,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             var conventionType = typeof(Derived);
 
             // Act
-            var result = ApiConventionMatcher.IsTypeMatch(type, conventionType, ApiConventionTypeMatchBehavior.AssignableFrom);
+            var result = ApiConventionMatcher.IsTypeMatch(
+                type,
+                conventionType,
+                ApiConventionTypeMatchBehavior.AssignableFrom
+            );
 
             // Assert
             Assert.False(result);
@@ -348,7 +442,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             // Arrange
             var method = typeof(TestController).GetMethod(nameof(TestController.Get));
-            var conventionMethod = typeof(TestConvention).GetMethod(nameof(TestConvention.GetNoArgs));
+            var conventionMethod = typeof(TestConvention).GetMethod(
+                nameof(TestConvention.GetNoArgs)
+            );
 
             // Act
             var result = ApiConventionMatcher.IsMatch(method, conventionMethod);
@@ -362,7 +458,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             // Arrange
             var method = typeof(TestController).GetMethod(nameof(TestController.Get));
-            var conventionMethod = typeof(TestConvention).GetMethod(nameof(TestConvention.GetTwoArgs));
+            var conventionMethod = typeof(TestConvention).GetMethod(
+                nameof(TestConvention.GetTwoArgs)
+            );
 
             // Act
             var result = ApiConventionMatcher.IsMatch(method, conventionMethod);
@@ -376,7 +474,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             // Arrange
             var method = typeof(TestController).GetMethod(nameof(TestController.Get));
-            var conventionMethod = typeof(TestConvention).GetMethod(nameof(TestConvention.GetParameterNotMatching));
+            var conventionMethod = typeof(TestConvention).GetMethod(
+                nameof(TestConvention.GetParameterNotMatching)
+            );
 
             // Act
             var result = ApiConventionMatcher.IsMatch(method, conventionMethod);
@@ -418,7 +518,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             // Arrange
             var method = typeof(TestController).GetMethod(nameof(TestController.SearchEmpty));
-            var conventionMethod = typeof(TestConvention).GetMethod(nameof(TestConvention.SearchWithParams));
+            var conventionMethod = typeof(TestConvention).GetMethod(
+                nameof(TestConvention.SearchWithParams)
+            );
 
             // Act
             var result = ApiConventionMatcher.IsMatch(method, conventionMethod);
@@ -433,7 +535,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             // Arrange
             var expected = ApiConventionNameMatchBehavior.Exact;
             var attributes = new object[0];
-            var provider = Mock.Of<ICustomAttributeProvider>(p => p.GetCustomAttributes(false) == attributes);
+            var provider = Mock.Of<ICustomAttributeProvider>(
+                p => p.GetCustomAttributes(false) == attributes
+            );
 
             // Act
             var result = ApiConventionMatcher.GetNameMatchBehavior(provider);
@@ -447,8 +551,14 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             // Arrange
             var expected = ApiConventionNameMatchBehavior.Exact;
-            var attributes = new object[] { new CLSCompliantAttribute(false), new ProducesResponseTypeAttribute(200) };
-            var provider = Mock.Of<ICustomAttributeProvider>(p => p.GetCustomAttributes(false) == attributes);
+            var attributes = new object[]
+            {
+                new CLSCompliantAttribute(false),
+                new ProducesResponseTypeAttribute(200)
+            };
+            var provider = Mock.Of<ICustomAttributeProvider>(
+                p => p.GetCustomAttributes(false) == attributes
+            );
 
             // Act
             var result = ApiConventionMatcher.GetNameMatchBehavior(provider);
@@ -466,9 +576,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             {
                 new CLSCompliantAttribute(false),
                 new ApiConventionNameMatchAttribute(expected),
-                new ProducesResponseTypeAttribute(200) }
-            ;
-            var provider = Mock.Of<ICustomAttributeProvider>(p => p.GetCustomAttributes(false) == attributes);
+                new ProducesResponseTypeAttribute(200)
+            };
+            var provider = Mock.Of<ICustomAttributeProvider>(
+                p => p.GetCustomAttributes(false) == attributes
+            );
 
             // Act
             var result = ApiConventionMatcher.GetNameMatchBehavior(provider);
@@ -483,7 +595,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             // Arrange
             var expected = ApiConventionTypeMatchBehavior.AssignableFrom;
             var attributes = new object[0];
-            var provider = Mock.Of<ICustomAttributeProvider>(p => p.GetCustomAttributes(false) == attributes);
+            var provider = Mock.Of<ICustomAttributeProvider>(
+                p => p.GetCustomAttributes(false) == attributes
+            );
 
             // Act
             var result = ApiConventionMatcher.GetTypeMatchBehavior(provider);
@@ -497,8 +611,14 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             // Arrange
             var expected = ApiConventionTypeMatchBehavior.AssignableFrom;
-            var attributes = new object[] { new CLSCompliantAttribute(false), new ProducesResponseTypeAttribute(200) };
-            var provider = Mock.Of<ICustomAttributeProvider>(p => p.GetCustomAttributes(false) == attributes);
+            var attributes = new object[]
+            {
+                new CLSCompliantAttribute(false),
+                new ProducesResponseTypeAttribute(200)
+            };
+            var provider = Mock.Of<ICustomAttributeProvider>(
+                p => p.GetCustomAttributes(false) == attributes
+            );
 
             // Act
             var result = ApiConventionMatcher.GetTypeMatchBehavior(provider);
@@ -516,9 +636,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             {
                 new CLSCompliantAttribute(false),
                 new ApiConventionTypeMatchAttribute(expected),
-                new ProducesResponseTypeAttribute(200) }
-            ;
-            var provider = Mock.Of<ICustomAttributeProvider>(p => p.GetCustomAttributes(false) == attributes);
+                new ProducesResponseTypeAttribute(200)
+            };
+            var provider = Mock.Of<ICustomAttributeProvider>(
+                p => p.GetCustomAttributes(false) == attributes
+            );
 
             // Act
             var result = ApiConventionMatcher.GetTypeMatchBehavior(provider);
@@ -555,14 +677,16 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             public static void Post(Derived model) { }
 
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
-            public static void GetParameterNotMatching([ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.AssignableFrom)] Derived model) { }
+            public static void GetParameterNotMatching(
+                [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.AssignableFrom)]
+                    Derived model
+            ) { }
 
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
             public static void Search(
-                [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Exact)]
-                string searchTerm,
-                params object[] others)
-            { }
+                [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Exact)] string searchTerm,
+                params object[] others
+            ) { }
 
             [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
             public static void SearchWithParams(params object[] others) { }

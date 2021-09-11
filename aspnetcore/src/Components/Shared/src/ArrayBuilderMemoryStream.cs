@@ -46,15 +46,20 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         public ArrayBuilder<byte> ArrayBuilder { get; }
 
         /// <inheritdoc />
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
 
         /// <inheritdoc />
-        public override int Read(byte[] buffer, int offset, int count)
-            => throw new NotSupportedException();
+        public override int Read(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
 
         /// <inheritdoc />
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            => throw new NotSupportedException();
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => throw new NotSupportedException();
 
         /// <inheritdoc />
         public override void Write(byte[] buffer, int offset, int count)
@@ -65,8 +70,12 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         }
 
         /// <inheritdoc />
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             ValidateArguments(buffer, offset, count);
 
             ArrayBuilder.Append(buffer, offset, count);
@@ -120,11 +129,11 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
 
         private static class ThrowHelper
         {
-            public static void ThrowArgumentNullException(string name)
-                => throw new ArgumentNullException(name);
+            public static void ThrowArgumentNullException(string name) =>
+                throw new ArgumentNullException(name);
 
-            public static void ThrowArgumentOutOfRangeException(string name)
-                => throw new ArgumentOutOfRangeException(name);
+            public static void ThrowArgumentOutOfRangeException(string name) =>
+                throw new ArgumentOutOfRangeException(name);
         }
     }
 }

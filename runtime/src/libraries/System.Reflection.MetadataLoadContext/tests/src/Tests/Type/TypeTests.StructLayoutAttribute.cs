@@ -19,7 +19,6 @@ namespace System.Reflection.Tests
             Assert.Equal(0, s.Size);
         }
 
-
         [Fact]
         public static void Test_AutoAnsiEightZero()
         {
@@ -71,7 +70,7 @@ namespace System.Reflection.Tests
             StructLayoutAttribute s = t.StructLayoutAttribute;
             Assert.Equal(LayoutKind.Sequential, s.Value);
             Assert.Equal(CharSet.Auto, s.CharSet);
-            Assert.Equal(8, s.Pack);  // Not an error: Pack=0 is treated as if it were Pack=8.
+            Assert.Equal(8, s.Pack); // Not an error: Pack=0 is treated as if it were Pack=8.
             Assert.Equal(0, s.Size);
         }
 
@@ -179,7 +178,9 @@ namespace System.Reflection.Tests
         public static void Test_GenericParameter()
         {
             // GenericParameter types always return null for this property.
-            Type t = typeof(GenericParameterHolder<>).Project().GetTypeInfo().GenericTypeParameters[0];
+            Type t = typeof(GenericParameterHolder<>).Project().GetTypeInfo().GenericTypeParameters[
+                0
+            ];
             StructLayoutAttribute s = t.StructLayoutAttribute;
             Assert.Null(s);
         }

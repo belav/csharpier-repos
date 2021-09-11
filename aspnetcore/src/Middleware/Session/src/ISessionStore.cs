@@ -28,6 +28,12 @@ namespace Microsoft.AspNetCore.Session
         /// </param>
         /// <param name="isNewSessionKey"><see langword="true"/> if establishing a new session; <see langword="false"/> if resuming a session.</param>
         /// <returns>The <see cref="ISession"/> that was created or resumed.</returns>
-        ISession Create(string sessionKey, TimeSpan idleTimeout, TimeSpan ioTimeout, Func<bool> tryEstablishSession, bool isNewSessionKey);
+        ISession Create(
+            string sessionKey,
+            TimeSpan idleTimeout,
+            TimeSpan ioTimeout,
+            Func<bool> tryEstablishSession,
+            bool isNewSessionKey
+        );
     }
 }

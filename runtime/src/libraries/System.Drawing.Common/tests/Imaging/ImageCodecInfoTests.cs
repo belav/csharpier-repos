@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 // Authors:
-//  Jordi Mas i Hernàndez (jordi@ximian.com)
+//  Jordi Mas i Hernï¿½ndez (jordi@ximian.com)
 //  Sebastien Pouliot  <sebastien@ximian.com>
 //
 // (C) 2004 Ximian, Inc.  http://www.ximian.com
@@ -70,28 +70,80 @@ namespace System.Drawing.Imaging.Tests
             return (ImageCodecInfo)decoders[new Guid(clsid)];
         }
 
-        private void CheckDecoderAndEncoder(string clsid, ImageFormat format, string CodecName, string DllName,
-            string FilenameExtension, ImageCodecFlags Flags, string FormatDescription,
-            string MimeType, int Version, int signatureLength, string mask, string pattern, string pattern2)
-        {
+        private void CheckDecoderAndEncoder(
+            string clsid,
+            ImageFormat format,
+            string CodecName,
+            string DllName,
+            string FilenameExtension,
+            ImageCodecFlags Flags,
+            string FormatDescription,
+            string MimeType,
+            int Version,
+            int signatureLength,
+            string mask,
+            string pattern,
+            string pattern2
+        ) {
             ImageCodecInfo encoder = GetEncoder(clsid);
             ImageCodecInfo decoder = GetDecoder(clsid);
 
             if (encoder != null)
             {
-                CheckImageCodecInfo(format, CodecName, DllName, FilenameExtension, Flags, FormatDescription, MimeType, signatureLength, mask, pattern, pattern2, encoder);
+                CheckImageCodecInfo(
+                    format,
+                    CodecName,
+                    DllName,
+                    FilenameExtension,
+                    Flags,
+                    FormatDescription,
+                    MimeType,
+                    signatureLength,
+                    mask,
+                    pattern,
+                    pattern2,
+                    encoder
+                );
             }
             if (decoder != null)
             {
-                CheckImageCodecInfo(format, CodecName, DllName, FilenameExtension, Flags, FormatDescription, MimeType, signatureLength, mask, pattern, pattern2, decoder);
+                CheckImageCodecInfo(
+                    format,
+                    CodecName,
+                    DllName,
+                    FilenameExtension,
+                    Flags,
+                    FormatDescription,
+                    MimeType,
+                    signatureLength,
+                    mask,
+                    pattern,
+                    pattern2,
+                    decoder
+                );
             }
         }
 
-        private void CheckImageCodecInfo(ImageFormat format, string CodecName, string DllName, string FilenameExtension, ImageCodecFlags Flags, string FormatDescription, string MimeType, int signatureLength, string mask, string pattern, string pattern2, ImageCodecInfo codecInfo)
-        {
-            Regex extRegex = new Regex(@"^(\*\.\w+(;(\*\.\w+))*;)?" +
-                Regex.Escape(FilenameExtension) + @"(;\*\.\w+(;(\*\.\w+))*)?$",
-                RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        private void CheckImageCodecInfo(
+            ImageFormat format,
+            string CodecName,
+            string DllName,
+            string FilenameExtension,
+            ImageCodecFlags Flags,
+            string FormatDescription,
+            string MimeType,
+            int signatureLength,
+            string mask,
+            string pattern,
+            string pattern2,
+            ImageCodecInfo codecInfo
+        ) {
+            Regex extRegex = new Regex(
+                @"^(\*\.\w+(;(\*\.\w+))*;)?"
+                    + Regex.Escape(FilenameExtension)
+                    + @"(;\*\.\w+(;(\*\.\w+))*)?$",
+                RegexOptions.IgnoreCase | RegexOptions.Singleline
+            );
 
             Assert.Equal(format.Guid, codecInfo.FormatID);
             Assert.Contains(CodecName, codecInfo.CodecName);
@@ -117,46 +169,162 @@ namespace System.Drawing.Imaging.Tests
         {
             get
             {
-                yield return new object[] { WMF_CSID, ImageFormat.Wmf,
-                "WMF", null, "*.WMF",
-                ImageCodecFlags.Builtin | ImageCodecFlags.Decoder | ImageCodecFlags.SupportBitmap,
-                "WMF", "image/x-wmf", 1, 1, "FF-FF-FF-FF", "D7-CD-C6-9A", null};
+                yield return new object[]
+                {
+                    WMF_CSID,
+                    ImageFormat.Wmf,
+                    "WMF",
+                    null,
+                    "*.WMF",
+                    ImageCodecFlags.Builtin
+                        | ImageCodecFlags.Decoder
+                        | ImageCodecFlags.SupportBitmap,
+                    "WMF",
+                    "image/x-wmf",
+                    1,
+                    1,
+                    "FF-FF-FF-FF",
+                    "D7-CD-C6-9A",
+                    null
+                };
 
-                yield return new object[] { EMF_CSID, ImageFormat.Emf,
-                "EMF", null, "*.EMF",
-                ImageCodecFlags.Builtin | ImageCodecFlags.Decoder | ImageCodecFlags.SupportBitmap,
-                "EMF", "image/x-emf", 1, 1, "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-FF-FF-FF-FF",
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-20-45-4D-46", null};
+                yield return new object[]
+                {
+                    EMF_CSID,
+                    ImageFormat.Emf,
+                    "EMF",
+                    null,
+                    "*.EMF",
+                    ImageCodecFlags.Builtin
+                        | ImageCodecFlags.Decoder
+                        | ImageCodecFlags.SupportBitmap,
+                    "EMF",
+                    "image/x-emf",
+                    1,
+                    1,
+                    "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-FF-FF-FF-FF",
+                    "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-20-45-4D-46",
+                    null
+                };
 
-                yield return new object[] { ICO_CSID, ImageFormat.Icon,
-                "ICO", null, "*.ICO",
-                ImageCodecFlags.Builtin | ImageCodecFlags.Decoder | ImageCodecFlags.SupportBitmap,
-                "ICO", "image/x-icon", 1, 1, "FF-FF-FF-FF", "00-00-01-00", null};
+                yield return new object[]
+                {
+                    ICO_CSID,
+                    ImageFormat.Icon,
+                    "ICO",
+                    null,
+                    "*.ICO",
+                    ImageCodecFlags.Builtin
+                        | ImageCodecFlags.Decoder
+                        | ImageCodecFlags.SupportBitmap,
+                    "ICO",
+                    "image/x-icon",
+                    1,
+                    1,
+                    "FF-FF-FF-FF",
+                    "00-00-01-00",
+                    null
+                };
 
-                yield return new object[] { TIF_CSID, ImageFormat.Tiff,
-                "TIFF", null, "*.TIF;*.TIFF",
-                ImageCodecFlags.Builtin | ImageCodecFlags.Encoder | ImageCodecFlags.Decoder | ImageCodecFlags.SupportBitmap,
-                "TIFF", "image/tiff", 1, 2, "FF-FF", "49-49", "4D-4D" };
+                yield return new object[]
+                {
+                    TIF_CSID,
+                    ImageFormat.Tiff,
+                    "TIFF",
+                    null,
+                    "*.TIF;*.TIFF",
+                    ImageCodecFlags.Builtin
+                        | ImageCodecFlags.Encoder
+                        | ImageCodecFlags.Decoder
+                        | ImageCodecFlags.SupportBitmap,
+                    "TIFF",
+                    "image/tiff",
+                    1,
+                    2,
+                    "FF-FF",
+                    "49-49",
+                    "4D-4D"
+                };
 
-                yield return new object[] { PNG_CSID, ImageFormat.Png,
-                "PNG", null, "*.PNG",
-                ImageCodecFlags.Builtin | ImageCodecFlags.Encoder | ImageCodecFlags.Decoder | ImageCodecFlags.SupportBitmap,
-                "PNG", "image/png", 1, 1, "FF-FF-FF-FF-FF-FF-FF-FF", "89-50-4E-47-0D-0A-1A-0A", null };
+                yield return new object[]
+                {
+                    PNG_CSID,
+                    ImageFormat.Png,
+                    "PNG",
+                    null,
+                    "*.PNG",
+                    ImageCodecFlags.Builtin
+                        | ImageCodecFlags.Encoder
+                        | ImageCodecFlags.Decoder
+                        | ImageCodecFlags.SupportBitmap,
+                    "PNG",
+                    "image/png",
+                    1,
+                    1,
+                    "FF-FF-FF-FF-FF-FF-FF-FF",
+                    "89-50-4E-47-0D-0A-1A-0A",
+                    null
+                };
 
-                yield return new object[] { JPG_JPEG_JPE_JFIF_CSID, ImageFormat.Jpeg,
-                "JPEG", null, "*.JPG",
-                ImageCodecFlags.Builtin | ImageCodecFlags.Encoder | ImageCodecFlags.Decoder | ImageCodecFlags.SupportBitmap,
-                "JPEG", "image/jpeg", 1, 1, "FF-FF", "FF-D8", null};
+                yield return new object[]
+                {
+                    JPG_JPEG_JPE_JFIF_CSID,
+                    ImageFormat.Jpeg,
+                    "JPEG",
+                    null,
+                    "*.JPG",
+                    ImageCodecFlags.Builtin
+                        | ImageCodecFlags.Encoder
+                        | ImageCodecFlags.Decoder
+                        | ImageCodecFlags.SupportBitmap,
+                    "JPEG",
+                    "image/jpeg",
+                    1,
+                    1,
+                    "FF-FF",
+                    "FF-D8",
+                    null
+                };
 
-                yield return new object[] { GIF_CSID, ImageFormat.Gif,
-                "GIF", null, "*.GIF",
-                ImageCodecFlags.Builtin | ImageCodecFlags.Encoder | ImageCodecFlags.Decoder | ImageCodecFlags.SupportBitmap,
-                "GIF", "image/gif", 1, 2, "FF-FF-FF-FF-FF-FF", "47-49-46-38-39-61", "47-49-46-38-37-61"};
+                yield return new object[]
+                {
+                    GIF_CSID,
+                    ImageFormat.Gif,
+                    "GIF",
+                    null,
+                    "*.GIF",
+                    ImageCodecFlags.Builtin
+                        | ImageCodecFlags.Encoder
+                        | ImageCodecFlags.Decoder
+                        | ImageCodecFlags.SupportBitmap,
+                    "GIF",
+                    "image/gif",
+                    1,
+                    2,
+                    "FF-FF-FF-FF-FF-FF",
+                    "47-49-46-38-39-61",
+                    "47-49-46-38-37-61"
+                };
 
-                yield return new object[] { BMP_DIB_RLE_CSID, ImageFormat.Bmp,
-                "BMP", null, "*.BMP",
-                ImageCodecFlags.Builtin | ImageCodecFlags.Encoder | ImageCodecFlags.Decoder | ImageCodecFlags.SupportBitmap,
-                "BMP", "image/bmp", 1, 1, "FF-FF", "42-4D", null };
+                yield return new object[]
+                {
+                    BMP_DIB_RLE_CSID,
+                    ImageFormat.Bmp,
+                    "BMP",
+                    null,
+                    "*.BMP",
+                    ImageCodecFlags.Builtin
+                        | ImageCodecFlags.Encoder
+                        | ImageCodecFlags.Decoder
+                        | ImageCodecFlags.SupportBitmap,
+                    "BMP",
+                    "image/bmp",
+                    1,
+                    1,
+                    "FF-FF",
+                    "42-4D",
+                    null
+                };
             }
         }
 
@@ -199,11 +367,36 @@ namespace System.Drawing.Imaging.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(CodecInfoTestData))]
-        public void CheckDecoderAndEncoder_ReturnsExpecetd(string clsid, ImageFormat format, string codecName, string dllName,
-            string fileNameExtension, ImageCodecFlags flags, string formatDescription,
-            string mimeType, int version, int signatureLength, string mask, string pattern, string pattern2)
-        {
-            CheckDecoderAndEncoder(clsid, format, codecName, dllName, fileNameExtension, flags, formatDescription, mimeType, version, signatureLength, mask, pattern, pattern2);
+        public void CheckDecoderAndEncoder_ReturnsExpecetd(
+            string clsid,
+            ImageFormat format,
+            string codecName,
+            string dllName,
+            string fileNameExtension,
+            ImageCodecFlags flags,
+            string formatDescription,
+            string mimeType,
+            int version,
+            int signatureLength,
+            string mask,
+            string pattern,
+            string pattern2
+        ) {
+            CheckDecoderAndEncoder(
+                clsid,
+                format,
+                codecName,
+                dllName,
+                fileNameExtension,
+                flags,
+                formatDescription,
+                mimeType,
+                version,
+                signatureLength,
+                mask,
+                pattern,
+                pattern2
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]

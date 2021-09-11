@@ -29,8 +29,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             _module = module;
         }
 
-        private TypeRefTypeSystemType(string nameSpace, string name, TypeRefTypeSystemType containingType, TypeRefTypeSystemModule module)
-        {
+        private TypeRefTypeSystemType(
+            string nameSpace,
+            string name,
+            TypeRefTypeSystemType containingType,
+            TypeRefTypeSystemModule module
+        ) {
             _namespace = nameSpace;
             _name = name;
             _module = module;
@@ -47,7 +51,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             {
                 if (_isValueType.Value != isValueType)
                 {
-                    throw new Exception($"Same type `{ToString()}` used as both ValueType and non-ValueType");
+                    throw new Exception(
+                        $"Same type `{ToString()}` used as both ValueType and non-ValueType"
+                    );
                 }
             }
         }
@@ -74,7 +80,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             {
                 if (_instantiation.Value.Length != parameterCount)
                 {
-                    throw new Exception($"Same type `{ToString()}` expected to have both {_instantiation.Value.Length} and {parameterCount} generic arguments");
+                    throw new Exception(
+                        $"Same type `{ToString()}` expected to have both {_instantiation.Value.Length} and {parameterCount} generic arguments"
+                    );
                 }
             }
         }
@@ -111,7 +119,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
             if (method == null)
             {
-                TypeRefTypeSystemMethod newMethod = new TypeRefTypeSystemMethod(this, name, signature);
+                TypeRefTypeSystemMethod newMethod = new TypeRefTypeSystemMethod(
+                    this,
+                    name,
+                    signature
+                );
                 method = newMethod;
                 _methods.Add(newMethod);
             }
@@ -131,13 +143,16 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             else
             {
                 if (fld.FieldType != fieldType)
-                    throw new Exception($"Field {fld} has two different field types `{fld.FieldType}` and `{fieldType}`");
+                    throw new Exception(
+                        $"Field {fld} has two different field types `{fld.FieldType}` and `{fieldType}`"
+                    );
             }
 
             return fld;
         }
 
-        public override PInvokeStringFormat PInvokeStringFormat => throw new NotImplementedException();
+        public override PInvokeStringFormat PInvokeStringFormat =>
+            throw new NotImplementedException();
 
         public override string Name => _name;
 
@@ -159,7 +174,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                 {
                     _isValueType = false;
                 }
-                return _isValueType.Value ? (MetadataType)Context.GetWellKnownType(WellKnownType.ValueType) : (MetadataType)Context.GetWellKnownType(WellKnownType.Object);
+                return _isValueType.Value
+                    ? (MetadataType)Context.GetWellKnownType(WellKnownType.ValueType)
+                    : (MetadataType)Context.GetWellKnownType(WellKnownType.Object);
             }
         }
 
@@ -179,9 +196,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
         protected override int ClassCode => throw new NotImplementedException();
 
-        public override MethodImplRecord[] FindMethodsImplWithMatchingDeclName(string name) => throw new NotImplementedException();
+        public override MethodImplRecord[] FindMethodsImplWithMatchingDeclName(string name) =>
+            throw new NotImplementedException();
         public override ClassLayoutMetadata GetClassLayout() => throw new NotImplementedException();
-        public override int GetHashCode() => (Namespace != null) ? HashCode.Combine(Namespace, Name, Module) : HashCode.Combine(Name, Module);
+        public override int GetHashCode() =>
+            (Namespace != null)
+                ? HashCode.Combine(Namespace, Name, Module)
+                : HashCode.Combine(Name, Module);
         public override MetadataType GetNestedType(string name)
         {
             TypeRefTypeSystemType type = null;
@@ -204,8 +225,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
         public override IEnumerable<MethodDesc> GetMethods() => _methods;
         public override IEnumerable<FieldDesc> GetFields() => _fields;
-        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) => false;
-        protected override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer) => throw new NotImplementedException();
+        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) =>
+            false;
+        protected override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer) =>
+            throw new NotImplementedException();
         protected override TypeFlags ComputeTypeFlags(TypeFlags mask)
         {
             TypeFlags flags = 0;
@@ -220,9 +243,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                 }
                 else
                 {
-                     flags |= TypeFlags.Class;
+                    flags |= TypeFlags.Class;
                 }
-
                 // All other cases are handled during TypeSystemContext intitialization
             }
 
@@ -247,6 +269,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             return flags;
         }
 
-        protected override MethodImplRecord[] ComputeVirtualMethodImplsForType() => throw new NotImplementedException();
+        protected override MethodImplRecord[] ComputeVirtualMethodImplsForType() =>
+            throw new NotImplementedException();
     }
 }

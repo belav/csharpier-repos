@@ -28,8 +28,10 @@ namespace System.Net
 
         private static HeaderInfoTable? _headerInfo;
 
-        protected WebHeaderCollection(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        protected WebHeaderCollection(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             throw new PlatformNotSupportedException();
         }
 
@@ -62,7 +64,10 @@ namespace System.Net
             get
             {
                 if (_innerCollection == null)
-                    _innerCollection = new NameValueCollection(ApproxHighAvgNumHeaders, CaseInsensitiveAscii.StaticInstance);
+                    _innerCollection = new NameValueCollection(
+                        ApproxHighAvgNumHeaders,
+                        CaseInsensitiveAscii.StaticInstance
+                    );
                 return _innerCollection;
             }
         }
@@ -152,13 +157,17 @@ namespace System.Net
             this.Set(header.GetName(), value);
         }
 
-        public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             throw new PlatformNotSupportedException();
         }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             throw new PlatformNotSupportedException();
         }
 
@@ -193,7 +202,9 @@ namespace System.Net
         public static bool IsRestricted(string headerName, bool response)
         {
             headerName = HttpValidationHelpers.CheckBadHeaderNameChars(headerName);
-            return response ? HeaderInfo[headerName].IsResponseRestricted : HeaderInfo[headerName].IsRequestRestricted;
+            return response
+                ? HeaderInfo[headerName].IsResponseRestricted
+                : HeaderInfo[headerName].IsRequestRestricted;
         }
 
         public override string[]? GetValues(int index)
@@ -350,7 +361,10 @@ namespace System.Net
             }
             if (name.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.net_emptyStringCall, nameof(name)), nameof(name));
+                throw new ArgumentException(
+                    SR.Format(SR.net_emptyStringCall, nameof(name)),
+                    nameof(name)
+                );
             }
 
             name = HttpValidationHelpers.CheckBadHeaderNameChars(name);
@@ -424,10 +438,7 @@ namespace System.Net
             foreach (string? key in InnerCollection)
             {
                 string? val = InnerCollection.Get(key);
-                sb.Append(key)
-                    .Append(": ")
-                    .Append(val)
-                    .Append("\r\n");
+                sb.Append(key).Append(": ").Append(val).Append("\r\n");
             }
 
             sb.Append("\r\n");
@@ -440,32 +451,21 @@ namespace System.Net
             return System.Text.Encoding.ASCII.GetBytes(tempString);
         }
 
-        public WebHeaderCollection()
-        {
-        }
+        public WebHeaderCollection() { }
 
         public override int Count
         {
-            get
-            {
-                return (_innerCollection == null ? 0 : _innerCollection.Count);
-            }
+            get { return (_innerCollection == null ? 0 : _innerCollection.Count); }
         }
 
         public override KeysCollection Keys
         {
-            get
-            {
-                return InnerCollection.Keys;
-            }
+            get { return InnerCollection.Keys; }
         }
 
         public override string[] AllKeys
         {
-            get
-            {
-                return InnerCollection.AllKeys!;
-            }
+            get { return InnerCollection.AllKeys!; }
         }
 
         public override IEnumerator GetEnumerator()

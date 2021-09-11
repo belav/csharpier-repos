@@ -34,12 +34,16 @@ namespace System.Linq.Parallel
         //     child                - the child whose data we will reverse
         //
 
-        internal LastQueryOperator(IEnumerable<TSource> child, Func<TSource, bool>? predicate)
-            : base(child)
+        internal LastQueryOperator(
+            IEnumerable<TSource> child,
+            Func<TSource, bool>? predicate
+        ) : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             _predicate = predicate;
-            _prematureMergeNeeded = Child.OrdinalIndexState.IsWorseThan(OrdinalIndexState.Increasing);
+            _prematureMergeNeeded = Child.OrdinalIndexState.IsWorseThan(
+                OrdinalIndexState.Increasing
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -54,13 +58,22 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, bool preferStriping, QuerySettings settings)
-        {
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        ) {
             // If the index is not at least increasing, we need to reindex.
             if (_prematureMergeNeeded)
             {
-                PartitionedStream<TSource, int> intKeyStream =
-                    ExecuteAndCollectResults(inputStream, inputStream.PartitionCount, Child.OutputOrdered, preferStriping, settings).GetPartitionedStream();
+                PartitionedStream<TSource, int> intKeyStream = ExecuteAndCollectResults(
+                        inputStream,
+                        inputStream.PartitionCount,
+                        Child.OutputOrdered,
+                        preferStriping,
+                        settings
+                    )
+                    .GetPartitionedStream();
                 WrapHelper<int>(intKeyStream, recipient, settings);
             }
             else
@@ -69,21 +82,33 @@ namespace System.Linq.Parallel
             }
         }
 
-        private void WrapHelper<TKey>(PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, QuerySettings settings)
-        {
+        private void WrapHelper<TKey>(
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            QuerySettings settings
+        ) {
             int partitionCount = inputStream.PartitionCount;
 
             // Generate the shared data.
             LastQueryOperatorState<TKey> operatorState = new LastQueryOperatorState<TKey>();
             CountdownEvent sharedBarrier = new CountdownEvent(partitionCount);
 
-            PartitionedStream<TSource, int> outputStream =
-                new PartitionedStream<TSource, int>(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Shuffled);
+            PartitionedStream<TSource, int> outputStream = new PartitionedStream<TSource, int>(
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Shuffled
+            );
             for (int i = 0; i < partitionCount; i++)
             {
                 outputStream[i] = new LastQueryOperatorEnumerator<TKey>(
-                    inputStream[i], _predicate, operatorState, sharedBarrier, settings.CancellationState.MergedCancellationToken,
-                    inputStream.KeyComparer, i);
+                    inputStream[i],
+                    _predicate,
+                    operatorState,
+                    sharedBarrier,
+                    settings.CancellationState.MergedCancellationToken,
+                    inputStream.KeyComparer,
+                    i
+                );
             }
             recipient.Receive(outputStream);
         }
@@ -91,10 +116,14 @@ namespace System.Linq.Parallel
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
         //
-        [ExcludeFromCodeCoverage(Justification = "This method should never be called as fallback to sequential is handled in ParallelEnumerable.First()")]
+        [ExcludeFromCodeCoverage(
+            Justification = "This method should never be called as fallback to sequential is handled in ParallelEnumerable.First()"
+        )]
         internal override IEnumerable<TSource> AsSequentialQuery(CancellationToken token)
         {
-            Debug.Fail("This method should never be called as fallback to sequential is handled in ParallelEnumerable.First().");
+            Debug.Fail(
+                "This method should never be called as fallback to sequential is handled in ParallelEnumerable.First()."
+            );
             throw new NotSupportedException();
         }
 
@@ -112,7 +141,8 @@ namespace System.Linq.Parallel
         // The enumerator type responsible for executing the last operation.
         //
 
-        private sealed class LastQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TSource, int>
+        private sealed class LastQueryOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<TSource, int>
         {
             private readonly QueryOperatorEnumerator<TSource, TKey> _source; // The data source to enumerate.
             private readonly Func<TSource, bool>? _predicate; // The optional predicate used during the search.
@@ -130,10 +160,14 @@ namespace System.Linq.Parallel
             //
 
             internal LastQueryOperatorEnumerator(
-                QueryOperatorEnumerator<TSource, TKey> source, Func<TSource, bool>? predicate,
-                LastQueryOperatorState<TKey> operatorState, CountdownEvent sharedBarrier, CancellationToken cancelToken,
-                IComparer<TKey> keyComparer, int partitionId)
-            {
+                QueryOperatorEnumerator<TSource, TKey> source,
+                Func<TSource, bool>? predicate,
+                LastQueryOperatorState<TKey> operatorState,
+                CountdownEvent sharedBarrier,
+                CancellationToken cancelToken,
+                IComparer<TKey> keyComparer,
+                int partitionId
+            ) {
                 Debug.Assert(source != null);
                 Debug.Assert(operatorState != null);
                 Debug.Assert(sharedBarrier != null);
@@ -152,8 +186,10 @@ namespace System.Linq.Parallel
             // Straightforward IEnumerator<T> methods.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TSource currentElement, ref int currentKey)
-            {
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TSource currentElement,
+                ref int currentKey
+            ) {
                 Debug.Assert(_source != null);
 
                 if (_alreadySearched)
@@ -192,14 +228,17 @@ namespace System.Linq.Parallel
                     {
                         lock (_operatorState)
                         {
-                            if (_operatorState._partitionId == -1 || _keyComparer.Compare(candidateKey, _operatorState._key) > 0)
-                            {
+                            if (
+                                _operatorState._partitionId == -1
+                                || _keyComparer.Compare(candidateKey, _operatorState._key) > 0
+                            ) {
                                 _operatorState._partitionId = _partitionId;
                                 _operatorState._key = candidateKey;
                             }
                         }
                     }
                 }
+
                 finally
                 {
                     // No matter whether we exit due to an exception or normal completion, we must ensure
@@ -232,7 +271,6 @@ namespace System.Linq.Parallel
                 _source.Dispose();
             }
         }
-
 
         private sealed class LastQueryOperatorState<TKey>
         {

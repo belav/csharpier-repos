@@ -328,8 +328,10 @@ namespace System.Linq
             return null;
         }
 
-        public static double Average<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector)
-        {
+        public static double Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -362,8 +364,10 @@ namespace System.Linq
             }
         }
 
-        public static double? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector)
-        {
+        public static double? Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int?> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -404,8 +408,10 @@ namespace System.Linq
             return null;
         }
 
-        public static double Average<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector)
-        {
+        public static double Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -438,8 +444,10 @@ namespace System.Linq
             }
         }
 
-        public static double? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector)
-        {
+        public static double? Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long?> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -480,8 +488,10 @@ namespace System.Linq
             return null;
         }
 
-        public static float Average<TSource>(this IEnumerable<TSource> source, Func<TSource, float> selector)
-        {
+        public static float Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -511,8 +521,10 @@ namespace System.Linq
             }
         }
 
-        public static float? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, float?> selector)
-        {
+        public static float? Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float?> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -553,8 +565,10 @@ namespace System.Linq
             return null;
         }
 
-        public static double Average<TSource>(this IEnumerable<TSource> source, Func<TSource, double> selector)
-        {
+        public static double Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -587,8 +601,10 @@ namespace System.Linq
             }
         }
 
-        public static double? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, double?> selector)
-        {
+        public static double? Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double?> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -629,8 +645,10 @@ namespace System.Linq
             return null;
         }
 
-        public static decimal Average<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector)
-        {
+        public static decimal Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -660,8 +678,10 @@ namespace System.Linq
             }
         }
 
-        public static decimal? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector)
-        {
+        public static decimal? Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal?> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

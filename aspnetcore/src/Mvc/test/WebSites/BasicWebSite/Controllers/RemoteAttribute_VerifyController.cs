@@ -22,13 +22,11 @@ namespace BasicWebSite.Controllers
             }
             else if (userId2 != null)
             {
-
                 name = nameof(RemoteAttributeUser.UserId2);
                 value = userId2;
             }
             else if (userId5 != null)
             {
-
                 name = nameof(RemoteAttributeUser.UserId5);
                 value = userId5;
             }
@@ -38,7 +36,9 @@ namespace BasicWebSite.Controllers
                 value = string.Empty;
             }
 
-            return new JsonResult($"/RemoteAttribute_Verify/IsIdAvailable rejects {name}: '{value}'.");
+            return new JsonResult(
+                $"/RemoteAttribute_Verify/IsIdAvailable rejects {name}: '{value}'."
+            );
         }
     }
 }

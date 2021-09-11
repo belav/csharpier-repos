@@ -14,8 +14,10 @@ namespace System.Linq.Expressions
     [DebuggerTypeProxy(typeof(MemberInitExpressionProxy))]
     public sealed class MemberInitExpression : Expression
     {
-        internal MemberInitExpression(NewExpression newExpression, ReadOnlyCollection<MemberBinding> bindings)
-        {
+        internal MemberInitExpression(
+            NewExpression newExpression,
+            ReadOnlyCollection<MemberBinding> bindings
+        ) {
             NewExpression = newExpression;
             Bindings = bindings;
         }
@@ -67,8 +69,10 @@ namespace System.Linq.Expressions
         }
 
         private static Expression ReduceMemberInit(
-            Expression objExpression, ReadOnlyCollection<MemberBinding> bindings, bool keepOnStack)
-        {
+            Expression objExpression,
+            ReadOnlyCollection<MemberBinding> bindings,
+            bool keepOnStack
+        ) {
             ParameterExpression objVar = Variable(objExpression.Type);
             int count = bindings.Count;
             Expression[] block = new Expression[count + 2];
@@ -83,8 +87,10 @@ namespace System.Linq.Expressions
         }
 
         internal static Expression ReduceListInit(
-            Expression listExpression, ReadOnlyCollection<ElementInit> initializers, bool keepOnStack)
-        {
+            Expression listExpression,
+            ReadOnlyCollection<ElementInit> initializers,
+            bool keepOnStack
+        ) {
             ParameterExpression listVar = Variable(listExpression.Type);
             int count = initializers.Count;
             Expression[] block = new Expression[count + 2];
@@ -99,14 +105,27 @@ namespace System.Linq.Expressions
             return Block(new[] { listVar }, block);
         }
 
-        internal static Expression ReduceMemberBinding(ParameterExpression objVar, MemberBinding binding)
-        {
+        internal static Expression ReduceMemberBinding(
+            ParameterExpression objVar,
+            MemberBinding binding
+        ) {
             MemberExpression member = Expression.MakeMemberAccess(objVar, binding.Member);
             return binding.BindingType switch
             {
-                MemberBindingType.Assignment => Expression.Assign(member, ((MemberAssignment)binding).Expression),
-                MemberBindingType.ListBinding => ReduceListInit(member, ((MemberListBinding)binding).Initializers, keepOnStack: false),
-                MemberBindingType.MemberBinding => ReduceMemberInit(member, ((MemberMemberBinding)binding).Bindings, keepOnStack: false),
+                MemberBindingType.Assignment
+                  => Expression.Assign(member, ((MemberAssignment)binding).Expression),
+                MemberBindingType.ListBinding
+                  => ReduceListInit(
+                      member,
+                      ((MemberListBinding)binding).Initializers,
+                      keepOnStack: false
+                  ),
+                MemberBindingType.MemberBinding
+                  => ReduceMemberInit(
+                      member,
+                      ((MemberMemberBinding)binding).Bindings,
+                      keepOnStack: false
+                  ),
                 _ => throw ContractUtils.Unreachable,
             };
         }
@@ -119,8 +138,10 @@ namespace System.Linq.Expressions
         /// <param name="newExpression">The <see cref="NewExpression"/> property of the result.</param>
         /// <param name="bindings">The <see cref="Bindings"/> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public MemberInitExpression Update(NewExpression newExpression, IEnumerable<MemberBinding> bindings)
-        {
+        public MemberInitExpression Update(
+            NewExpression newExpression,
+            IEnumerable<MemberBinding> bindings
+        ) {
             if (newExpression == NewExpression && bindings != null)
             {
                 if (ExpressionUtils.SameElements(ref bindings!, Bindings))
@@ -142,8 +163,10 @@ namespace System.Linq.Expressions
         /// <exception cref="ArgumentNullException">
         /// <paramref name="newExpression"/> or <paramref name="bindings"/> is null.</exception>
         /// <exception cref="ArgumentException">The <see cref="MemberBinding.Member"/> property of an element of <paramref name="bindings"/> does not represent a member of the type that <paramref name="newExpression"/>.Type represents.</exception>
-        public static MemberInitExpression MemberInit(NewExpression newExpression, params MemberBinding[] bindings)
-        {
+        public static MemberInitExpression MemberInit(
+            NewExpression newExpression,
+            params MemberBinding[] bindings
+        ) {
             return MemberInit(newExpression, (IEnumerable<MemberBinding>)bindings);
         }
 
@@ -154,8 +177,10 @@ namespace System.Linq.Expressions
         /// <exception cref="ArgumentNullException">
         /// <paramref name="newExpression"/> or <paramref name="bindings"/> is null.</exception>
         /// <exception cref="ArgumentException">The <see cref="MemberBinding.Member"/> property of an element of <paramref name="bindings"/> does not represent a member of the type that <paramref name="newExpression"/>.Type represents.</exception>
-        public static MemberInitExpression MemberInit(NewExpression newExpression, IEnumerable<MemberBinding> bindings)
-        {
+        public static MemberInitExpression MemberInit(
+            NewExpression newExpression,
+            IEnumerable<MemberBinding> bindings
+        ) {
             ContractUtils.RequiresNotNull(newExpression, nameof(newExpression));
             ContractUtils.RequiresNotNull(bindings, nameof(bindings));
             ReadOnlyCollection<MemberBinding> roBindings = bindings.ToReadOnly();

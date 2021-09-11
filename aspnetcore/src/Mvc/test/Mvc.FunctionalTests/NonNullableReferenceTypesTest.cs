@@ -17,10 +17,12 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class NonNullableReferenceTypesTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+    public class NonNullableReferenceTypesTest
+        : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
     {
-        public NonNullableReferenceTypesTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
-        {
+        public NonNullableReferenceTypesTest(
+            MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
+        ) {
             Client = fixture.CreateDefaultClient();
         }
 
@@ -49,10 +51,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/NonNullable");
             request.Headers.Add("Cookie", cookieToken.Key + "=" + cookieToken.Value);
-            request.Content = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("__RequestVerificationToken", formToken),
-            });
+            request.Content = new FormUrlEncodedContent(
+                new[] { new KeyValuePair<string, string>("__RequestVerificationToken", formToken), }
+            );
 
             // Act 2
             response = await Client.SendAsync(request);
@@ -91,12 +92,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/NonNullable");
             request.Headers.Add("Cookie", cookieToken.Key + "=" + cookieToken.Value);
-            request.Content = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("__RequestVerificationToken", formToken),
-                new KeyValuePair<string, string>("Name", "Pranav"),
-                new KeyValuePair<string, string>("description", "Meme")
-            });
+            request.Content = new FormUrlEncodedContent(
+                new[]
+                {
+                    new KeyValuePair<string, string>("__RequestVerificationToken", formToken),
+                    new KeyValuePair<string, string>("Name", "Pranav"),
+                    new KeyValuePair<string, string>("description", "Meme")
+                }
+            );
 
             // Act 2
             response = await Client.SendAsync(request);

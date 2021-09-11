@@ -14,33 +14,42 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSource
 {
-    public class RegionDirectiveStructureTests : AbstractCSharpSyntaxNodeStructureTests<RegionDirectiveTriviaSyntax>
+    public class RegionDirectiveStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<RegionDirectiveTriviaSyntax>
     {
         protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new RegionDirectiveStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new RegionDirectiveStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task FileHeader()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:#re$$gion Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
 // C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll
 #endregion|}";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region(
+                    "span",
+                    "Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                    autoCollapse: true
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task EmptyFileHeader()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:#re$$gion
 // C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll
 #endregion|}";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "#region", autoCollapse: true));
+            await VerifyBlockSpansAsync(code, Region("span", "#region", autoCollapse: true));
         }
     }
 }

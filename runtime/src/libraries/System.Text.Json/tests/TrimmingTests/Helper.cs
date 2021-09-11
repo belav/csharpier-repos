@@ -80,7 +80,9 @@ namespace SerializerTrimmingTest
                 case JsonValueKind.Null:
                     return expected.GetRawText() == actual.GetRawText();
                 default:
-                    throw new NotSupportedException($"Unexpected JsonValueKind: JsonValueKind.{valueKind}.");
+                    throw new NotSupportedException(
+                        $"Unexpected JsonValueKind: JsonValueKind.{valueKind}."
+                    );
             }
         }
 

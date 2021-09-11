@@ -17,15 +17,15 @@ namespace Microsoft.CodeAnalysis
     {
         public static readonly TrivialTemporaryStorageService Instance = new();
 
-        private TrivialTemporaryStorageService()
-        {
-        }
+        private TrivialTemporaryStorageService() { }
 
-        public ITemporaryStreamStorage CreateTemporaryStreamStorage(CancellationToken cancellationToken = default)
-            => new StreamStorage();
+        public ITemporaryStreamStorage CreateTemporaryStreamStorage(
+            CancellationToken cancellationToken = default
+        ) => new StreamStorage();
 
-        public ITemporaryTextStorage CreateTemporaryTextStorage(CancellationToken cancellationToken = default)
-            => new TextStorage();
+        public ITemporaryTextStorage CreateTemporaryTextStorage(
+            CancellationToken cancellationToken = default
+        ) => new TextStorage();
 
         private sealed class StreamStorage : ITemporaryStreamStorage
         {
@@ -66,8 +66,10 @@ namespace Microsoft.CodeAnalysis
                 _stream = newStream;
             }
 
-            public async Task WriteStreamAsync(Stream stream, CancellationToken cancellationToken = default)
-            {
+            public async Task WriteStreamAsync(
+                Stream stream,
+                CancellationToken cancellationToken = default
+            ) {
                 var newStream = new MemoryStream();
 #if NETCOREAPP
                 await stream.CopyToAsync(newStream, cancellationToken).ConfigureAwait(false);
@@ -82,14 +84,13 @@ namespace Microsoft.CodeAnalysis
         {
             private SourceText _sourceText;
 
-            public void Dispose()
-                => _sourceText = null;
+            public void Dispose() => _sourceText = null;
 
-            public SourceText ReadText(CancellationToken cancellationToken = default)
-                => _sourceText;
+            public SourceText ReadText(CancellationToken cancellationToken = default) =>
+                _sourceText;
 
-            public Task<SourceText> ReadTextAsync(CancellationToken cancellationToken = default)
-                => Task.FromResult(ReadText(cancellationToken));
+            public Task<SourceText> ReadTextAsync(CancellationToken cancellationToken = default) =>
+                Task.FromResult(ReadText(cancellationToken));
 
             public void WriteText(SourceText text, CancellationToken cancellationToken = default)
             {
@@ -99,8 +100,10 @@ namespace Microsoft.CodeAnalysis
                 _sourceText = text;
             }
 
-            public Task WriteTextAsync(SourceText text, CancellationToken cancellationToken = default)
-            {
+            public Task WriteTextAsync(
+                SourceText text,
+                CancellationToken cancellationToken = default
+            ) {
                 WriteText(text, cancellationToken);
                 return Task.CompletedTask;
             }

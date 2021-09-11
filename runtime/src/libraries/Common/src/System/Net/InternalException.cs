@@ -17,8 +17,7 @@ namespace System.Net
             _unexpectedValue = unexpectedValue;
         }
 
-        public override string Message => _unexpectedValue != null ?
-            base.Message + " " + _unexpectedValue :
-            base.Message;
+        public override string Message =>
+            _unexpectedValue != null ? base.Message + " " + _unexpectedValue : base.Message;
     }
 }

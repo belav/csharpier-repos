@@ -31,7 +31,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var effectivePolicy = context.FindEffectivePolicy<IRequestFormLimitsPolicy>();
             if (effectivePolicy != null && effectivePolicy != this)
             {
-                _logger.NotMostEffectiveFilter(GetType(), effectivePolicy.GetType(), typeof(IRequestFormLimitsPolicy));
+                _logger.NotMostEffectiveFilter(
+                    GetType(),
+                    effectivePolicy.GetType(),
+                    typeof(IRequestFormLimitsPolicy)
+                );
                 return;
             }
 
@@ -41,7 +45,9 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             if (formFeature == null || formFeature.Form == null)
             {
                 // Request form has not been read yet, so set the limits
-                features.Set<IFormFeature>(new FormFeature(context.HttpContext.Request, FormOptions));
+                features.Set<IFormFeature>(
+                    new FormFeature(context.HttpContext.Request, FormOptions)
+                );
                 _logger.AppliedRequestFormLimits();
             }
             else

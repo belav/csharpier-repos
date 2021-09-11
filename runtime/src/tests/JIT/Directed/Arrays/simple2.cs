@@ -12,9 +12,12 @@ internal class Simple2_Array_Test
         int SIZE = 10;
 
         Int32[,,,] foo = new Int32[SIZE, SIZE, SIZE, SIZE];
-        int i, j, k, l, m;
+        int i,
+            j,
+            k,
+            l,
+            m;
         Int64 sum = 0;
-
 
         for (i = 0; i < SIZE; i++)
             for (j = 0; j < SIZE; j++)

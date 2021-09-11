@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// </summary>
         public static bool IsAvailable
             // Since mscorlib may not be loaded from the GAC on Mono, also check if the platform is Mono which supports a GAC.
-            => typeof(object).Assembly.GlobalAssemblyCache || PlatformInformation.IsRunningOnMono;
+            =>
+            typeof(object).Assembly.GlobalAssemblyCache || PlatformInformation.IsRunningOnMono;
 
         /// <summary>
         /// Architecture filter used when resolving assembly references.
@@ -45,8 +46,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// <exception cref="PlatformNotSupportedException">The platform doesn't support GAC.</exception>
         public GacFileResolver(
             ImmutableArray<ProcessorArchitecture> architectures = default,
-            CultureInfo preferredCulture = null)
-        {
+            CultureInfo preferredCulture = null
+        ) {
             if (!IsAvailable)
             {
                 throw new PlatformNotSupportedException();
@@ -64,7 +65,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         public string Resolve(string assemblyName)
         {
             string path;
-            GlobalAssemblyCache.Instance.ResolvePartialName(assemblyName, out path, Architectures, this.PreferredCulture);
+            GlobalAssemblyCache.Instance.ResolvePartialName(
+                assemblyName,
+                out path,
+                Architectures,
+                this.PreferredCulture
+            );
             return File.Exists(path) ? path : null;
         }
 
@@ -75,10 +81,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         public bool Equals(GacFileResolver other)
         {
-            return ReferenceEquals(this, other) ||
-                other != null &&
-                Architectures.SequenceEqual(other.Architectures) &&
-                PreferredCulture == other.PreferredCulture;
+            return ReferenceEquals(this, other)
+                || other != null
+                    && Architectures.SequenceEqual(other.Architectures)
+                    && PreferredCulture == other.PreferredCulture;
         }
 
         public override bool Equals(object obj) => Equals(obj as GacFileResolver);

@@ -33,8 +33,11 @@ namespace System
             //
             // Precondition:
             //  The value encoded by value must be greater than 0.
-            public static DiyFp CreateAndGetBoundaries(double value, out DiyFp mMinus, out DiyFp mPlus)
-            {
+            public static DiyFp CreateAndGetBoundaries(
+                double value,
+                out DiyFp mMinus,
+                out DiyFp mPlus
+            ) {
                 var result = new DiyFp(value);
                 result.GetBoundaries(DoubleImplicitBitIndex, out mMinus, out mPlus);
                 return result;
@@ -47,8 +50,11 @@ namespace System
             //
             // Precondition:
             //  The value encoded by value must be greater than 0.
-            public static DiyFp CreateAndGetBoundaries(float value, out DiyFp mMinus, out DiyFp mPlus)
-            {
+            public static DiyFp CreateAndGetBoundaries(
+                float value,
+                out DiyFp mMinus,
+                out DiyFp mPlus
+            ) {
                 var result = new DiyFp(value);
                 result.GetBoundaries(SingleImplicitBitIndex, out mMinus, out mPlus);
                 return result;
@@ -61,8 +67,11 @@ namespace System
             //
             // Precondition:
             //  The value encoded by value must be greater than 0.
-            public static DiyFp CreateAndGetBoundaries(Half value, out DiyFp mMinus, out DiyFp mPlus)
-            {
+            public static DiyFp CreateAndGetBoundaries(
+                Half value,
+                out DiyFp mMinus,
+                out DiyFp mPlus
+            ) {
                 var result = new DiyFp(value);
                 result.GetBoundaries(HalfImplicitBitIndex, out mMinus, out mPlus);
                 return result;
@@ -121,7 +130,10 @@ namespace System
 
                 tmp += (1U << 31);
 
-                return new DiyFp(ac + (ad >> 32) + (bc >> 32) + (tmp >> 32), e + other.e + SignificandSize);
+                return new DiyFp(
+                    ac + (ad >> 32) + (bc >> 32) + (tmp >> 32),
+                    e + other.e + SignificandSize
+                );
             }
 
             public DiyFp Normalize()

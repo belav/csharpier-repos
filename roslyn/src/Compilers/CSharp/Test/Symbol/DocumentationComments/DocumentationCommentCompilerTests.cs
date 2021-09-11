@@ -28,21 +28,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CSharpTestSource source,
             IEnumerable<MetadataReference> references = null,
             CSharpCompilationOptions options = null,
-            string assemblyName = "Test") =>
+            string assemblyName = "Test"
+        ) =>
             CreateCompilation(
                 source,
                 references,
                 targetFramework: TargetFramework.Mscorlib40,
-                options: (options ?? TestOptions.ReleaseDll).WithXmlReferenceResolver(XmlFileResolver.Default),
+                options: (options ?? TestOptions.ReleaseDll).WithXmlReferenceResolver(
+                    XmlFileResolver.Default
+                ),
                 parseOptions: TestOptions.RegularWithDocumentationComments,
-                assemblyName: assemblyName);
+                assemblyName: assemblyName
+            );
 
         #region Single-line styleWRN_UnqualifiedNestedTypeInCref
 
         [Fact]
         public void SingleLine_OneLine()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>Text</summary>
 public class C { }
 ";
@@ -67,7 +72,8 @@ public class C { }
         [Fact]
         public void SingleLine_MultipleLines()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// Text
 /// </summary>
@@ -96,7 +102,8 @@ public class C { }
         [Fact]
         public void SingleLine_EmptyOneLine()
         {
-            var source = @"
+            var source =
+                @"
 ///
 public class C { }
 ";
@@ -121,7 +128,8 @@ public class C { }
         [Fact]
         public void SingleLine_EmptyMultipleLines()
         {
-            var source = @"
+            var source =
+                @"
 ///
 ///
 ///
@@ -150,7 +158,8 @@ public class C { }
         [Fact]
         public void SingleLine_NoLeadingSpaces()
         {
-            var source = @"
+            var source =
+                @"
 ///<summary>
 ///Text
 ///</summary>
@@ -179,7 +188,8 @@ public class C { }
         [Fact]
         public void SingleLine_SomeLeadingSpaces()
         {
-            var source = @"
+            var source =
+                @"
 ///<summary>
 /// Text
 ///  </summary>
@@ -208,7 +218,8 @@ public class C { }
         [Fact]
         public void SingleLine_LeadingTab()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 ///	Tabbed
 /// </summary>
@@ -237,7 +248,8 @@ public class C { }
         [Fact]
         public void SingleLine_WhitespaceBefore()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
  /// Text
   /// </summary>
@@ -266,7 +278,8 @@ public class C { }
         [Fact]
         public void SingleLine_BlankLines()
         {
-            var source = @"
+            var source =
+                @"
 /// 
 /// <summary>
 /// Text
@@ -303,7 +316,8 @@ public class C { }
         [Fact]
         public void MultiLine_OneLine()
         {
-            var source = @"
+            var source =
+                @"
 /** <summary>Text</summary> */
 public class C { }
 ";
@@ -328,7 +342,8 @@ public class C { }
         [Fact]
         public void MultiLine_EmptyOneLine()
         {
-            var source = @"
+            var source =
+                @"
 /** */
 public class C { }
 ";
@@ -353,7 +368,8 @@ public class C { }
         [Fact]
         public void MultiLine_EmptyTwoLines()
         {
-            var source = @"
+            var source =
+                @"
 /**
  */
 public class C { }
@@ -378,7 +394,8 @@ public class C { }
         [Fact]
         public void MultiLine_EmptyThreeLines()
         {
-            var source = @"
+            var source =
+                @"
 /**
 
  */
@@ -405,7 +422,8 @@ public class C { }
         [Fact]
         public void MultiLine_FirstLineSpace()
         {
-            var source = @"
+            var source =
+                @"
 /** <summary>
  *  Text
  *  </summary>
@@ -435,7 +453,8 @@ public class C { }
         [Fact]
         public void MultiLine_FirstLineNoSpace()
         {
-            var source = @"
+            var source =
+                @"
 /**<summary>
  *  Text
  *  </summary>
@@ -465,7 +484,8 @@ public class C { }
         [Fact]
         public void MultiLine_StarsPattern()
         {
-            var source = @"
+            var source =
+                @"
 /**
  * <summary>
  * Text
@@ -496,7 +516,8 @@ public class C { }
         [Fact]
         public void MultiLine_StarsNoPattern()
         {
-            var source = @"
+            var source =
+                @"
 /**
  * <summary>
   * Text
@@ -527,7 +548,8 @@ public class C { }
         [Fact]
         public void MultiLine_WhitespacePattern()
         {
-            var source = @"
+            var source =
+                @"
 /**
    <summary>
    Text
@@ -558,7 +580,8 @@ public class C { }
         [Fact]
         public void MultiLine_WhitespaceNoPattern()
         {
-            var source = @"
+            var source =
+                @"
 /**
    <summary>
     Text
@@ -589,7 +612,8 @@ public class C { }
         [Fact]
         public void MultiLine_LegacyTests()
         {
-            var source = @"
+            var source =
+                @"
 class A
 {
 	/**
@@ -665,7 +689,8 @@ class A
         [Fact]
         public void MultiLine_PatternShorterOnSubsequentLine()
         {
-            var source = @"
+            var source =
+                @"
 //repro.cs
 public class Point
 {
@@ -685,10 +710,12 @@ public class Point
 }
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (3,14): warning CS1591: Missing XML comment for publicly visible type or member 'Point'
                 // public class Point
-                Diagnostic(ErrorCode.WRN_MissingXMLComment, "Point").WithArguments("Point"));
+                Diagnostic(ErrorCode.WRN_MissingXMLComment, "Point").WithArguments("Point")
+            );
             var expected = @"
 <?xml version=""1.0""?>
 <doc>
@@ -717,7 +744,8 @@ public class Point
         [Fact]
         public void PartialTypes_OneFile()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>Summary 1</summary>
 public partial class C { }
 
@@ -746,18 +774,26 @@ public partial class C { }
         [Fact]
         public void PartialTypes_MultipleFiles()
         {
-            var source1 = @"
+            var source1 =
+                @"
 /// <summary>Summary 1</summary>
 public partial class C { }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 /// <summary>Summary 2</summary>
 public partial class C { }
 ";
 
-            var tree1 = SyntaxFactory.ParseSyntaxTree(source1, options: TestOptions.RegularWithDocumentationComments);
-            var tree2 = SyntaxFactory.ParseSyntaxTree(source2, options: TestOptions.RegularWithDocumentationComments);
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                source1,
+                options: TestOptions.RegularWithDocumentationComments
+            );
+            var tree2 = SyntaxFactory.ParseSyntaxTree(
+                source2,
+                options: TestOptions.RegularWithDocumentationComments
+            );
 
             // Files passed in order.
             var compA = CreateCompilation(new[] { tree1, tree2 }, assemblyName: "Test");
@@ -801,7 +837,8 @@ public partial class C { }
         [Fact]
         public void PartialTypes_MultipleStyles()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>Summary 1</summary>
 public partial class C { }
 
@@ -834,7 +871,8 @@ public partial class C { }
         [Fact]
         public void PartialMethods_OneFile()
         {
-            var source = @"
+            var source =
+                @"
 partial class C
 {
     /// <summary>Summary 1</summary>
@@ -868,7 +906,8 @@ partial class C
         [Fact]
         public void PartialMethods_MultipleFiles()
         {
-            var source1 = @"
+            var source1 =
+                @"
 partial class C
 {
     /** <summary>Summary 1</summary>*/
@@ -876,7 +915,8 @@ partial class C
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 partial class C
 {
     /** <summary>Summary 2</summary>*/
@@ -884,8 +924,14 @@ partial class C
 }
 ";
 
-            var tree1 = SyntaxFactory.ParseSyntaxTree(source1, options: TestOptions.RegularWithDocumentationComments);
-            var tree2 = SyntaxFactory.ParseSyntaxTree(source2, options: TestOptions.RegularWithDocumentationComments);
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                source1,
+                options: TestOptions.RegularWithDocumentationComments
+            );
+            var tree2 = SyntaxFactory.ParseSyntaxTree(
+                source2,
+                options: TestOptions.RegularWithDocumentationComments
+            );
 
             // Files passed in order.
             var compA = CreateCompilation(new[] { tree1, tree2 }, assemblyName: "Test");
@@ -927,7 +973,8 @@ partial class C
         [Fact]
         public void ExtendedPartialMethods_MultipleFiles()
         {
-            var source1 = @"
+            var source1 =
+                @"
 partial class C
 {
     /** <summary>Summary 1</summary>*/
@@ -935,7 +982,8 @@ partial class C
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 partial class C
 {
     /** <summary>Summary 2</summary>*/
@@ -943,8 +991,14 @@ partial class C
 }
 ";
 
-            var tree1 = SyntaxFactory.ParseSyntaxTree(source1, options: TestOptions.RegularWithDocumentationComments);
-            var tree2 = SyntaxFactory.ParseSyntaxTree(source2, options: TestOptions.RegularWithDocumentationComments);
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                source1,
+                options: TestOptions.RegularWithDocumentationComments
+            );
+            var tree2 = SyntaxFactory.ParseSyntaxTree(
+                source2,
+                options: TestOptions.RegularWithDocumentationComments
+            );
 
             // Files passed in order.
             var compA = CreateCompilation(new[] { tree1, tree2 }, assemblyName: "Test");
@@ -990,7 +1044,8 @@ partial class C
         [Fact]
         public void ValidCrefs()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// A <see cref=""C""/> B 
 /// <see cref=""object""/> C.
@@ -1021,7 +1076,8 @@ public class C { }
         [Fact]
         public void InvalidCrefs()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// A <see cref=""Q""/>.
 /// </summary>
@@ -1033,13 +1089,15 @@ public class C { }
 public class D { }
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (3,18): warning CS1574: XML comment has cref attribute 'Q' that could not be resolved
                 // /// A <see cref="Q"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "Q").WithArguments("Q"),
                 // (8,18): warning CS1574: XML comment has cref attribute 'R{S, T}' that could not be resolved
                 // /// A <see cref="R{S, T}"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "R{S, T}").WithArguments("R{S, T}"));
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "R{S, T}").WithArguments("R{S, T}")
+            );
             var expected = @"
 <?xml version=""1.0""?>
 <doc>
@@ -1070,7 +1128,8 @@ public class D { }
         [Fact]
         public void AssemblyNameFromCompilationName()
         {
-            var source = @"
+            var source =
+                @"
 /// A <see cref=""Main""/>.
 public class C
 {
@@ -1098,7 +1157,8 @@ public class C
         [Fact]
         public void AssemblyNameFromOutputName()
         {
-            var source = @"
+            var source =
+                @"
 /// A <see cref=""Main""/>.
 public class C
 {
@@ -1130,7 +1190,8 @@ public class C
         [Fact]
         public void UnprocessedXMLComment_Types()
         {
-            var source = @"
+            var source =
+                @"
 class C<T> : object where T : I
 {
     
@@ -1154,171 +1215,177 @@ enum E : byte
 }
 ";
 
-            var revisedSource = new DocumentationCommentAdder().Visit(Parse(source).GetCompilationUnitRoot()).ToFullString();
+            var revisedSource = new DocumentationCommentAdder().Visit(
+                    Parse(source).GetCompilationUnitRoot()
+                )
+                .ToFullString();
             // Manually verified that positions match dev11.
-            CreateCompilationUtil(revisedSource).VerifyDiagnostics(
-                // (2,15): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (2,24): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (2,33): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (2,42): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (2,52): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (2,62): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (2,77): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (2,91): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (2,101): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (2,111): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 11 */{
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 12 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,17): warning CS1587: XML comment is not placed on a valid language element
-                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,27): warning CS1587: XML comment is not placed on a valid language element
-                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,37): warning CS1587: XML comment is not placed on a valid language element
-                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,47): warning CS1587: XML comment is not placed on a valid language element
-                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,58): warning CS1587: XML comment is not placed on a valid language element
-                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,68): warning CS1587: XML comment is not placed on a valid language element
-                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,79): warning CS1587: XML comment is not placed on a valid language element
-                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,94): warning CS1587: XML comment is not placed on a valid language element
-                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,105): warning CS1587: XML comment is not placed on a valid language element
-                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,116): warning CS1587: XML comment is not placed on a valid language element
-                // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 24 */{
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 25 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,20): warning CS1587: XML comment is not placed on a valid language element
-                // /** 26 */interface /** 27 */I
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (13,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 28 */{
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (15,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 29 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,19): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,33): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,43): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,53): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,63): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,74): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,84): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,94): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,104): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,115): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,125): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,136): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,147): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,157): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,168): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,183): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,194): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,205): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,215): warning CS1587: XML comment is not placed on a valid language element
-                // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (19,15): warning CS1587: XML comment is not placed on a valid language element
-                // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (19,26): warning CS1587: XML comment is not placed on a valid language element
-                // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (19,37): warning CS1587: XML comment is not placed on a valid language element
-                // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (20,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 54 */{
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (22,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 55 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (23,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 56 */
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"));
+            CreateCompilationUtil(revisedSource)
+                .VerifyDiagnostics(
+                    // (2,15): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (2,24): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (2,33): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (2,42): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (2,52): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (2,62): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (2,77): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (2,91): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (2,101): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (2,111): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C/** 2 */</** 3 */T/** 4 */> /** 5 */: /** 6 */object /** 7 */where /** 8 */T /** 9 */: /** 10 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 11 */{
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 12 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,17): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,27): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,37): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,47): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,58): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,68): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,79): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,94): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,105): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,116): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 13 */struct /** 14 */S/** 15 */</** 16 */T/** 17 */, /** 18 */U/** 19 */> /** 20 */where /** 21 */T /** 22 */: /** 23 */U
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 24 */{
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 25 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,20): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 26 */interface /** 27 */I
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (13,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 28 */{
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (15,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 29 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,19): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,33): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,43): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,53): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,63): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,74): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,84): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,94): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,104): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,115): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,125): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,136): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,147): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,157): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,168): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,183): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,194): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,205): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,215): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 30 */delegate /** 31 */void /** 32 */D/** 33 */</** 34 */T/** 35 */, /** 36 */U/** 37 */>/** 38 */(/** 39 */T /** 40 */t/** 41 */, /** 42 */U /** 43 */u/** 44 */) /** 45 */where /** 46 */T /** 47 */: /** 48 */U/** 49 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (19,15): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (19,26): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (19,37): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 50 */enum /** 51 */E /** 52 */: /** 53 */byte
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (20,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 54 */{
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (22,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 55 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (23,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 56 */
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+                );
         }
 
         [Fact]
         public void UnprocessedXMLComment_Members()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     private int field;
@@ -1338,358 +1405,364 @@ enum E
 }
 ";
 
-            var revisedSource = new DocumentationCommentAdder().Visit(Parse(source).GetCompilationUnitRoot()).ToFullString();
+            var revisedSource = new DocumentationCommentAdder().Visit(
+                    Parse(source).GetCompilationUnitRoot()
+                )
+                .ToFullString();
             // Manually verified that positions match dev11.
-            CreateCompilationUtil(revisedSource).VerifyDiagnostics(
-                // (4,41): warning CS0169: The field 'C.field' is never used
-                //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "field").WithArguments("C.field"),
-                // (7,87): warning CS0067: The event 'C.FieldLikeEvent' is never used
-                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "FieldLikeEvent").WithArguments("C.FieldLikeEvent"),
-
-                // (2,15): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 2 */{
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (4,21): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (4,33): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (4,46): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,21): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,33): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,50): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,61): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,73): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,84): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,96): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,107): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,22): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,35): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,48): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,58): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,71): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,81): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,92): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,103): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,116): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,127): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,143): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,153): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,164): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,175): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,188): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,199): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,210): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,22): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,37): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,52): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,62): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,78): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,101): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,22): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,37): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,52): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,62): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,78): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,99): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,110): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,123): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,134): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,145): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,161): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,172): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,183): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,22): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,36): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,51): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,61): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,71): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,82): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,92): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,102): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,112): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,123): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,133): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,144): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,155): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,165): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,176): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,191): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,202): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,213): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,224): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,235): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,21): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,37): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,50): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,68): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,78): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,88): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,99): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,109): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,120): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,131): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,147): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,157): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,168): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,21): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,37): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,55): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,73): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,85): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,95): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,106): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,116): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,127): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,138): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,155): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,166): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,178): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,23): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,34): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,45): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,59): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,70): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,82): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,94): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,108): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,119): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,131): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (12,143): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (13,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 116 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (15,16): warning CS1587: XML comment is not placed on a valid language element
-                // /** 117 */enum /** 118 */E
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (16,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 119 */{
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,16): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 120 */A/** 121 */,
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (18,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 122 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (19,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 123 */
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"));
+            CreateCompilationUtil(revisedSource)
+                .VerifyDiagnostics(
+                    // (4,41): warning CS0169: The field 'C.field' is never used
+                    //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
+                    Diagnostic(ErrorCode.WRN_UnreferencedField, "field").WithArguments("C.field"),
+                    // (7,87): warning CS0067: The event 'C.FieldLikeEvent' is never used
+                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "FieldLikeEvent")
+                        .WithArguments("C.FieldLikeEvent"),
+                    // (2,15): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 2 */{
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (4,21): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (4,33): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (4,46): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 3 */private /** 4 */int /** 5 */field/** 6 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,21): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,33): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,50): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,61): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,73): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,84): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,96): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,107): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 7 */private /** 8 */int /** 9 */Property /** 10 */{ /** 11 */get/** 12 */; /** 13 */set/** 14 */; /** 15 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,22): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,35): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,48): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,58): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,71): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,81): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,92): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,103): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,116): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,127): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,143): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,153): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,164): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,175): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,188): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,199): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,210): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 16 */private /** 17 */int /** 18 */this/** 19 */[/** 20 */int /** 21 */x/** 22 */] /** 23 */{ /** 24 */get /** 25 */{ /** 26 */return /** 27 */0/** 28 */; /** 29 */} /** 30 */set /** 31 */{ /** 32 */} /** 33 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,22): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,37): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,52): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,62): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,78): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,101): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 34 */private /** 35 */event /** 36 */System/** 37 */./** 38 */Action /** 39 */FieldLikeEvent/** 40 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,22): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,37): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,52): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,62): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,78): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,99): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,110): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,123): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,134): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,145): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,161): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,172): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,183): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 41 */private /** 42 */event /** 43 */System/** 44 */./** 45 */Action /** 46 */CustomEvent /** 47 */{ /** 48 */add /** 49 */{ /** 50 */} /** 51 */remove /** 52 */{ /** 53 */} /** 54 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,22): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,36): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,51): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,61): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,71): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,82): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,92): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,102): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,112): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,123): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,133): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,144): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,155): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,165): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,176): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,191): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,202): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,213): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,224): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,235): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 55 */private /** 56 */void /** 57 */Method/** 58 */</** 59 */T/** 60 */, /** 61 */U/** 62 */>/** 63 */(/** 64 */T /** 65 */t/** 66 */, /** 67 */U /** 68 */u/** 69 */) /** 70 */where /** 71 */T /** 72 */: /** 73 */U /** 74 */{ /** 75 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,21): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,37): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,50): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,68): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,78): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,88): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,99): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,109): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,120): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,131): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,147): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,157): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,168): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 76 */public /** 77 */static /** 78 */int /** 79 */operator /** 80 */+/** 81 */(/** 82 */C /** 83 */c/** 84 */) /** 85 */{ /** 86 */return /** 87 */0/** 88 */; /** 89 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,21): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,37): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,55): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,73): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,85): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,95): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,106): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,116): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,127): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,138): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,155): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,166): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,178): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 90 */public /** 91 */static /** 92 */explicit /** 93 */operator /** 94 */int/** 95 */(/** 96 */C /** 97 */c/** 98 */) /** 99 */{ /** 100 */return /** 101 */0/** 102 */; /** 103 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,23): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,34): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,45): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,59): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,70): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,82): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,94): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,108): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,119): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,131): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (12,143): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 104 */private /** 105 */C/** 106 */(/** 107 */int /** 108 */x/** 109 */) /** 110 */: /** 111 */base/** 112 */(/** 113 */) /** 114 */{ /** 115 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (13,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 116 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (15,16): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 117 */enum /** 118 */E
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (16,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 119 */{
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,16): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 120 */A/** 121 */,
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (18,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 122 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (19,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 123 */
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+                );
         }
 
         [Fact]
         public void UnprocessedXMLComment_Expressions()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     private int field = 1;
@@ -1707,236 +1780,245 @@ enum E
 }
 ";
 
-            var revisedSource = new DocumentationCommentAdder().Visit(Parse(source).GetCompilationUnitRoot()).ToFullString();
+            var revisedSource = new DocumentationCommentAdder().Visit(
+                    Parse(source).GetCompilationUnitRoot()
+                )
+                .ToFullString();
             // Manually verified that positions match dev11.
-            CreateCompilationUtil(revisedSource).VerifyDiagnostics(
-                // (4,41): warning CS0414: The field 'C.field' is assigned but its value is never used
-                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "field").WithArguments("C.field"),
-
-                // (2,15): warning CS1587: XML comment is not placed on a valid language element
-                // /** 0 */class /** 1 */C
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 2 */{
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (4,21): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (4,33): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (4,47): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (4,57): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (4,66): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,21): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,36): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,51): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,61): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,77): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,101): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,112): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,122): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,133): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,145): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,156): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,171): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,182): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (5,192): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,22): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,32): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,42): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,55): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,66): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,77): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,87): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,98): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,111): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,122): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,133): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,143): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,154): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (6,165): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,22): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,32): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,42): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,55): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,65): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,76): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,87): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,100): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,110): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,120): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,131): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,142): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,153): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (7,163): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (8,5): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 54 */{
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,9): warning CS1587: XML comment is not placed on a valid language element
-                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,22): warning CS1587: XML comment is not placed on a valid language element
-                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,33): warning CS1587: XML comment is not placed on a valid language element
-                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,44): warning CS1587: XML comment is not placed on a valid language element
-                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,54): warning CS1587: XML comment is not placed on a valid language element
-                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (9,65): warning CS1587: XML comment is not placed on a valid language element
-                //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (10,5): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 61 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (11,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 62 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (13,15): warning CS1587: XML comment is not placed on a valid language element
-                // /** 63 */enum /** 64 */E
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (14,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 65 */{
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (15,16): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (15,27): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (15,38): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (15,49): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (15,59): warning CS1587: XML comment is not placed on a valid language element
-                //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (16,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 72 */}
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
-                // (17,1): warning CS1587: XML comment is not placed on a valid language element
-                // /** 73 */
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"));
+            CreateCompilationUtil(revisedSource)
+                .VerifyDiagnostics(
+                    // (4,41): warning CS0414: The field 'C.field' is assigned but its value is never used
+                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                    Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "field")
+                        .WithArguments("C.field"),
+                    // (2,15): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 0 */class /** 1 */C
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 2 */{
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (4,21): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (4,33): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (4,47): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (4,57): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (4,66): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 3 */private /** 4 */int /** 5 */field /** 6 */= /** 7 */1/** 8 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,21): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,36): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,51): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,61): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,77): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,101): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,112): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,122): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,133): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,145): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,156): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,171): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,182): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (5,192): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 9 */private /** 10 */event /** 11 */System/** 12 */./** 13 */Action /** 14 */FieldLikeEvent /** 15 */= /** 16 */(/** 17 */) /** 18 */=> /** 19 */{ /** 20 */return/** 21 */; /** 22 */}/** 23 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,22): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,32): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,42): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,55): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,66): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,77): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,87): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,98): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,111): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,122): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,133): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,143): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,154): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (6,165): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 24 */private /** 25 */C/** 26 */(/** 27 */int /** 28 */x /** 29 */= /** 30 */1/** 31 */, /** 32 */int /** 33 */y /** 34 */= /** 35 */2/** 36 */) /** 37 */{ /** 38 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,22): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,32): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,42): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,55): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,65): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,76): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,87): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,100): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,110): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,120): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,131): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,142): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,153): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (7,163): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 39 */private /** 40 */C/** 41 */(/** 42 */int /** 43 */x/** 44 */) /** 45 */: /** 46 */this/** 47 */(/** 48 */x/** 49 */, /** 50 */x /** 51 */+ /** 52 */1/** 53 */)
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (8,5): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 54 */{
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,9): warning CS1587: XML comment is not placed on a valid language element
+                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,22): warning CS1587: XML comment is not placed on a valid language element
+                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,33): warning CS1587: XML comment is not placed on a valid language element
+                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,44): warning CS1587: XML comment is not placed on a valid language element
+                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,54): warning CS1587: XML comment is not placed on a valid language element
+                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (9,65): warning CS1587: XML comment is not placed on a valid language element
+                    //         /** 55 */int /** 56 */y /** 57 */= /** 58 */x/** 59 */--/** 60 */;
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (10,5): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 61 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (11,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 62 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (13,15): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 63 */enum /** 64 */E
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (14,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 65 */{
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (15,16): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (15,27): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (15,38): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (15,49): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (15,59): warning CS1587: XML comment is not placed on a valid language element
+                    //     /** 66 */A /** 67 */= /** 68 */1 /** 69 */+ /** 70 */1/** 71 */,
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (16,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 72 */}
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
+                    // (17,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /** 73 */
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+                );
         }
 
         [Fact]
         public void UnprocessedXMLComment_AfterAttribute()
         {
-            var source = @"
+            var source =
+                @"
 [System.Serializable]
 /// Comment
 class C
 {
 }
 ";
-            CreateCompilationUtil(source).VerifyDiagnostics(
-                // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                // /// Comment
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"));
+            CreateCompilationUtil(source)
+                .VerifyDiagnostics(
+                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /// Comment
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+                );
         }
 
         [Fact]
         public void UnprocessedXMLComment_CompiledOut()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
 #if false
@@ -1950,13 +2032,15 @@ class C
         [Fact]
         public void UnprocessedXMLComment_FilterTree()
         {
-            var source1 = @"
+            var source1 =
+                @"
 partial class C
 {
     /// Unprocessed 1
 }
 ";
-            var source2 = @"
+            var source2 =
+                @"
 partial class C
 {
     /// Unprocessed 2
@@ -1966,20 +2050,27 @@ partial class C
             var tree2 = Parse(source2, options: TestOptions.RegularWithDocumentationComments);
 
             var comp = CreateCompilation(new[] { tree1, tree2 });
-            comp.GetSemanticModel(tree1).GetDiagnostics().Verify(
-                // (4,5): warning CS1587: XML comment is not placed on a valid language element
-                //     /// Unprocessed 1
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"));
-            comp.GetSemanticModel(tree2).GetDiagnostics().Verify(
-                // (4,5): warning CS1587: XML comment is not placed on a valid language element
-                //     /// Unprocessed 2
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"));
+            comp.GetSemanticModel(tree1)
+                .GetDiagnostics()
+                .Verify(
+                    // (4,5): warning CS1587: XML comment is not placed on a valid language element
+                    //     /// Unprocessed 1
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+                );
+            comp.GetSemanticModel(tree2)
+                .GetDiagnostics()
+                .Verify(
+                    // (4,5): warning CS1587: XML comment is not placed on a valid language element
+                    //     /// Unprocessed 2
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+                );
         }
 
         [Fact]
         public void UnprocessedXMLComment_Unparsed()
         {
-            var source = @"
+            var source =
+                @"
 partial class C
 {
     /// Unprocessed 1
@@ -1992,7 +2083,8 @@ partial class C
         [Fact]
         public void UnprocessedXMLComment_Accessor()
         {
-            var source = @"
+            var source =
+                @"
 class MyClass
 {
     string MyProperty
@@ -2004,10 +2096,12 @@ class MyClass
     }
 }
 ";
-            CreateCompilationUtil(source).VerifyDiagnostics(
-                // (7,9): warning CS1587: XML comment is not placed on a valid language element
-                //         /// <param name="a" />
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"));
+            CreateCompilationUtil(source)
+                .VerifyDiagnostics(
+                    // (7,9): warning CS1587: XML comment is not placed on a valid language element
+                    //         /// <param name="a" />
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+                );
         }
 
         /// <summary>
@@ -2027,7 +2121,8 @@ class MyClass
                 }
 
                 var existingLeadingTrivia = token.LeadingTrivia;
-                var newLeadingTrivia = SyntaxFactory.ParseToken("/** " + (_count++) + " */1)").LeadingTrivia;
+                var newLeadingTrivia =
+                    SyntaxFactory.ParseToken("/** " + (_count++) + " */1)").LeadingTrivia;
                 return newToken.WithLeadingTrivia(existingLeadingTrivia.Concat(newLeadingTrivia));
             }
         }
@@ -2039,7 +2134,8 @@ class MyClass
         [Fact]
         public void InvalidXml()
         {
-            var source = @"
+            var source =
+                @"
 /// <unterminated_tag
 class C1 { }
 
@@ -2054,7 +2150,8 @@ class C4 { }
 ";
             var comp = CreateCompilationUtil(source);
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2067,14 +2164,16 @@ class C4 { }
         <!-- Badly formed XML comment ignored for member ""T:C4"" -->
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void InvalidXmlOnPartialTypes()
         {
-            var source = @"
+            var source =
+                @"
 /// <invalid
 partial class C
 {
@@ -2087,7 +2186,8 @@ partial class C
 ";
             var comp = CreateCompilationUtil(source);
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2097,14 +2197,16 @@ partial class C
         <!-- Badly formed XML comment ignored for member ""T:C"" -->
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void InvalidXmlOnPartialMethods()
         {
-            var source = @"
+            var source =
+                @"
 partial class C
 {
     /// <invalid1
@@ -2126,7 +2228,8 @@ partial class C
             // NOTE: separate error comment for each part.
             var comp = CreateCompilationUtil(source);
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2140,7 +2243,8 @@ partial class C
         <!-- Badly formed XML comment ignored for member ""M:C.M2"" -->
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -2157,7 +2261,8 @@ partial class C
             var xml = "<see\u1680cref='C'/>";
             Assert.Throws<XmlException>(() => XElement.Parse(xml));
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C {{ }}
 ";
@@ -2165,12 +2270,18 @@ class C {{ }}
 
             // NOTE: separate error comment for each part.
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,4): warning CS1570: XML comment has badly formed XML -- 'The '\u1680' character, hexadecimal value 0x1680, cannot be included in a name.'
                 // /// <see cref='C'/>
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("The '\u1680' character, hexadecimal value 0x1680, cannot be included in a name."));
+                Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                    .WithArguments(
+                        "The '\u1680' character, hexadecimal value 0x1680, cannot be included in a name."
+                    )
+            );
 
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2180,7 +2291,8 @@ class C {{ }}
         <!-- Badly formed XML comment ignored for member ""T:C"" -->
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -2189,7 +2301,8 @@ class C {{ }}
         [WorkItem(18610, "https://github.com/dotnet/roslyn/issues/18610")]
         public void Repro637435()
         {
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 // 1) Both Roslyn and Dev11 report an error.
 
 ///<see
@@ -2219,16 +2332,28 @@ class C4 {{ }}
 ";
             var source = string.Format(sourceTemplate, '\u1680');
 
-            CreateCompilationUtil(source).GetDiagnostics().VerifyWithFallbackToErrorCodeOnlyForNonEnglish(
-                // (4,4): warning CS1570: XML comment has badly formed XML -- 'Name cannot begin with the '\u1680' character, hexadecimal value 0x1680.'
-                // ///<see
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Name cannot begin with the '\u1680' character, hexadecimal value 0x1680."),
-                // (11,4): warning CS1570: XML comment has badly formed XML -- 'Name cannot begin with the '\u1680' character, hexadecimal value 0x1680.'
-                // /// <see
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Name cannot begin with the '\u1680' character, hexadecimal value 0x1680."),
-                // (18,4): warning CS1570: XML comment has badly formed XML -- 'Name cannot begin with the '\u1680' character, hexadecimal value 0x1680.'
-                // ///<see
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Name cannot begin with the '\u1680' character, hexadecimal value 0x1680."));
+            CreateCompilationUtil(source)
+                .GetDiagnostics()
+                .VerifyWithFallbackToErrorCodeOnlyForNonEnglish(
+                    // (4,4): warning CS1570: XML comment has badly formed XML -- 'Name cannot begin with the '\u1680' character, hexadecimal value 0x1680.'
+                    // ///<see
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                        .WithArguments(
+                            "Name cannot begin with the '\u1680' character, hexadecimal value 0x1680."
+                        ),
+                    // (11,4): warning CS1570: XML comment has badly formed XML -- 'Name cannot begin with the '\u1680' character, hexadecimal value 0x1680.'
+                    // /// <see
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                        .WithArguments(
+                            "Name cannot begin with the '\u1680' character, hexadecimal value 0x1680."
+                        ),
+                    // (18,4): warning CS1570: XML comment has badly formed XML -- 'Name cannot begin with the '\u1680' character, hexadecimal value 0x1680.'
+                    // ///<see
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                        .WithArguments(
+                            "Name cannot begin with the '\u1680' character, hexadecimal value 0x1680."
+                        )
+                );
         }
 
         #endregion Invalid XML
@@ -2238,13 +2363,15 @@ class C4 {{ }}
         [Fact]
         public void IncludeNone()
         {
-            var xml = @"
+            var xml =
+                @"
 <root/>
 ";
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
             string xmlFilePath = xmlFile.Path;
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//target'/>
 class C {{ }}
 ";
@@ -2252,7 +2379,8 @@ class C {{ }}
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath));
             var actual = GetDocumentationCommentText(comp);
 
-            var expectedTemplate = (@"
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2264,14 +2392,16 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath), actual);
         }
 
         [Fact]
         public void IncludeOne()
         {
-            var xml = @"
+            var xml =
+                @"
 <root>
     <target stuff=""things"" />
 </root>
@@ -2279,7 +2409,8 @@ class C {{ }}
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
             string xmlFilePath = xmlFile.Path;
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//target'/>
 class C {{ }}
 ";
@@ -2287,7 +2418,8 @@ class C {{ }}
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath));
             var actual = GetDocumentationCommentText(comp);
 
-            var expectedTemplate = (@"
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2299,14 +2431,16 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath), actual);
         }
 
         [Fact]
         public void IncludeMultiple()
         {
-            var xml = @"
+            var xml =
+                @"
 <root>
     <target stuff=""things"" />
     <parent>
@@ -2317,7 +2451,8 @@ class C {{ }}
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
             string xmlFilePath = xmlFile.Path;
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//target'/>
 class C {{ }}
 ";
@@ -2325,7 +2460,8 @@ class C {{ }}
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath));
             var actual = GetDocumentationCommentText(comp);
 
-            var expectedTemplate = (@"
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2337,14 +2473,16 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath), actual);
         }
 
         [Fact]
         public void IncludeWithChildren_Success()
         {
-            var xml = @"
+            var xml =
+                @"
 <root>
     <target stuff=""things"" />
 </root>
@@ -2352,7 +2490,8 @@ class C {{ }}
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
             string xmlFilePath = xmlFile.Path;
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//target'>
 ///   <child />
 /// </include>
@@ -2362,7 +2501,8 @@ class C {{ }}
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath));
             var actual = GetDocumentationCommentText(comp);
 
-            var expectedTemplate = (@"
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2374,21 +2514,24 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath), actual);
         }
 
         [Fact]
         public void IncludeWithChildren_Failure()
         {
-            var xml = @"
+            var xml =
+                @"
 <root>
 </root>
 ";
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
             string xmlFilePath = xmlFile.Path;
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//target'>
 ///   <child />
 /// </include>
@@ -2398,7 +2541,8 @@ class C {{ }}
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath));
             var actual = GetDocumentationCommentText(comp);
 
-            var expectedTemplate = (@"
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2412,7 +2556,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath), actual);
         }
 
@@ -2420,7 +2565,8 @@ class C {{ }}
         [WorkItem(18610, "https://github.com/dotnet/roslyn/issues/18610")]
         public void IncludeFileResolution()
         {
-            var xml1 = @"
+            var xml1 =
+                @"
 <root>
     <include file=""test.xml"" path=""//element""/> <!--relative to d1 -->
     <include file=""d2/test.xml"" path=""//include""/> <!-- relative to root -->
@@ -2428,7 +2574,8 @@ class C {{ }}
 </root>
 ";
 
-            var xml2 = @"
+            var xml2 =
+                @"
 <root>
     <include file=""test.xml"" path=""//element""/> <!--relative to d2 -->
     <include file=""d3/test.xml"" path=""//include""/> <!-- relative to root -->
@@ -2436,7 +2583,8 @@ class C {{ }}
 </root>
 ";
 
-            var xml3 = @"
+            var xml3 =
+                @"
 <root>
     <include file=""test.xml"" path=""//element""/> <!--relative to d3 -->
     <element value=""3""/>
@@ -2454,16 +2602,23 @@ class C {{ }}
             var dir3 = rootDir.CreateDirectory("d3");
             var dir3XmlFile = dir3.CreateFile("test.xml").WriteAllText(xml3);
 
-            var source = @"
+            var source =
+                @"
 /// <include file='d1\test.xml' path='//include' />
 class C { }
 ";
             var tree = Parse(source, options: TestOptions.RegularWithDocumentationComments);
             var resolver = new XmlFileResolver(rootDir.Path);
-            var comp = CSharpCompilation.Create("Test", new[] { tree }, new[] { MscorlibRef }, TestOptions.ReleaseDll.WithXmlReferenceResolver(resolver));
+            var comp = CSharpCompilation.Create(
+                "Test",
+                new[] { tree },
+                new[] { MscorlibRef },
+                TestOptions.ReleaseDll.WithXmlReferenceResolver(resolver)
+            );
             var actual = GetDocumentationCommentText(comp);
 
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2475,14 +2630,16 @@ class C { }
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void WRN_InvalidInclude_Source()
         {
-            var source = @"
+            var source =
+                @"
 /// <include/>
 /// <include other='stuff'/>
 /// <include path='path'/>
@@ -2490,20 +2647,27 @@ class C { }
 class C { }
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,5): warning CS1590: Invalid XML include element -- Missing file attribute
                 // /// <include/>
-                Diagnostic(ErrorCode.WRN_InvalidInclude, "<include/>").WithArguments("Missing file attribute"),
+                Diagnostic(ErrorCode.WRN_InvalidInclude, "<include/>")
+                    .WithArguments("Missing file attribute"),
                 // (3,5): warning CS1590: Invalid XML include element -- Missing file attribute
                 // /// <include other='stuff'/>
-                Diagnostic(ErrorCode.WRN_InvalidInclude, "<include other='stuff'/>").WithArguments("Missing file attribute"),
+                Diagnostic(ErrorCode.WRN_InvalidInclude, "<include other='stuff'/>")
+                    .WithArguments("Missing file attribute"),
                 // (4,5): warning CS1590: Invalid XML include element -- Missing file attribute
                 // /// <include path='path'/>
-                Diagnostic(ErrorCode.WRN_InvalidInclude, "<include path='path'/>").WithArguments("Missing file attribute"),
+                Diagnostic(ErrorCode.WRN_InvalidInclude, "<include path='path'/>")
+                    .WithArguments("Missing file attribute"),
                 // (5,5): warning CS1590: Invalid XML include element -- Missing path attribute
                 // /// <include file='file'/>
-                Diagnostic(ErrorCode.WRN_InvalidInclude, "<include file='file'/>").WithArguments("Missing path attribute"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_InvalidInclude, "<include file='file'/>")
+                    .WithArguments("Missing path attribute")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2518,14 +2682,16 @@ class C { }
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void WRN_InvalidInclude_Xml()
         {
-            var xml = @"
+            var xml =
+                @"
 <root>
     <include/>
     <include other='stuff'/>
@@ -2535,13 +2701,15 @@ class C { }
 ";
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//include'/>
 class C {{ }}
 ";
 
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFile.Path));
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // warning CS1590: Invalid XML include element -- Missing file attribute
                 Diagnostic(ErrorCode.WRN_InvalidInclude).WithArguments("Missing file attribute"),
                 // warning CS1590: Invalid XML include element -- Missing file attribute
@@ -2549,10 +2717,12 @@ class C {{ }}
                 // warning CS1590: Invalid XML include element -- Missing file attribute
                 Diagnostic(ErrorCode.WRN_InvalidInclude).WithArguments("Missing file attribute"),
                 // warning CS1590: Invalid XML include element -- Missing path attribute
-                Diagnostic(ErrorCode.WRN_InvalidInclude).WithArguments("Missing path attribute"));
+                Diagnostic(ErrorCode.WRN_InvalidInclude).WithArguments("Missing path attribute")
+            );
 
             // NOTE: the whitespace is external to the selected nodes, so it's not included.
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2564,23 +2734,29 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void WRN_FailedInclude_NonExistent_Source()
         {
-            var source = @"
+            var source =
+                @"
 /// <include file='file' path='path'/>
 class C { }
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,5): warning CS1589: Unable to include XML fragment 'path' of file 'file' -- File not found.
                 // /// <include file='file' path='path'/>
-                Diagnostic(ErrorCode.WRN_FailedInclude, "<include file='file' path='path'/>").WithArguments("file", "path", "File not found."));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_FailedInclude, "<include file='file' path='path'/>")
+                    .WithArguments("file", "path", "File not found.")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2592,32 +2768,39 @@ class C { }
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void WRN_FailedInclude_NonExistent_Xml()
         {
-            var xml = @"
+            var xml =
+                @"
 <root>
     <include file='file' path='path'/>
 </root>
 ";
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//include'/>
 class C {{ }}
 ";
 
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFile.Path));
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // 56e57d80-44fc-4e2c-b839-0bf3d9c830b7.xml(3,6): warning CS1589: Unable to include XML fragment 'path' of file 'file' -- File not found.
-                Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments("file", "path", "File not found."));
+                Diagnostic(ErrorCode.WRN_FailedInclude)
+                    .WithArguments("file", "path", "File not found.")
+            );
 
             // NOTE: the whitespace is external to the selected nodes, so it's not included.
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2629,7 +2812,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -2642,18 +2826,30 @@ class C {{ }}
             var includeTemplate = "<include file='{0}' path='path'/>";
             var includeElement = string.Format(includeTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C {{ }}
 ";
             using (File.Open(xmlFilePath, FileMode.Open, FileAccess.Write, FileShare.None))
             {
                 var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
-                var actual = GetDocumentationCommentText(comp,
+                var actual = GetDocumentationCommentText(
+                    comp,
                     // (2,5): warning CS1589: Unable to include XML fragment 'path' of file 'c3af0dc5a3cf.xml' -- The process cannot access the file 'c3af0dc5a3cf.xml' because it is being used by another process.
                     // /// <include file='c3af0dc5a3cf.xml' path='path'/>
-                    Diagnostic(ErrorCode.WRN_FailedInclude, includeElement).WithArguments(xmlFilePath, "path", string.Format("The process cannot access the file '{0}' because it is being used by another process.", xmlFilePath)));
-                var expectedTemplate = (@"
+                    Diagnostic(ErrorCode.WRN_FailedInclude, includeElement)
+                        .WithArguments(
+                            xmlFilePath,
+                            "path",
+                            string.Format(
+                                "The process cannot access the file '{0}' because it is being used by another process.",
+                                xmlFilePath
+                            )
+                        )
+                );
+                var expectedTemplate = (
+                    @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2665,7 +2861,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+                ).Trim();
                 Assert.Equal(string.Format(expectedTemplate, xmlFilePath), actual);
             }
         }
@@ -2676,20 +2873,33 @@ class C {{ }}
             var xmlFile1 = Temp.CreateFile(extension: ".xml");
             var xmlFilePath1 = xmlFile1.Path;
 
-            var xmlFile2 = Temp.CreateFile(extension: ".xml").WriteAllText(string.Format("<include file='{0}' path='path'/>", xmlFilePath1));
+            var xmlFile2 = Temp.CreateFile(extension: ".xml")
+                .WriteAllText(string.Format("<include file='{0}' path='path'/>", xmlFilePath1));
             var xmlFilePath2 = xmlFile2.Path;
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//include'/>
 class C {{ }}
 ";
             using (File.Open(xmlFilePath1, FileMode.Open, FileAccess.Write, FileShare.None))
             {
                 var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath2));
-                var actual = GetDocumentationCommentText(comp,
+                var actual = GetDocumentationCommentText(
+                    comp,
                     // 3fba660141b6.xml(1,2): warning CS1589: Unable to include XML fragment 'path' of file 'd4241d125755.xml' -- The process cannot access the file 'd4241d125755.xml' because it is being used by another process.
-                    Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments(xmlFilePath1, "path", string.Format("The process cannot access the file '{0}' because it is being used by another process.", xmlFilePath1)));
-                var expectedTemplate = (@"
+                    Diagnostic(ErrorCode.WRN_FailedInclude)
+                        .WithArguments(
+                            xmlFilePath1,
+                            "path",
+                            string.Format(
+                                "The process cannot access the file '{0}' because it is being used by another process.",
+                                xmlFilePath1
+                            )
+                        )
+                );
+                var expectedTemplate = (
+                    @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2701,7 +2911,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+                ).Trim();
                 Assert.Equal(string.Format(expectedTemplate, xmlFilePath1), actual);
             }
         }
@@ -2715,16 +2926,21 @@ class C {{ }}
             var includeTemplate = "<include file='{0}' path=':'/>";
             var includeElement = string.Format(includeTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,5): warning CS1589: Unable to include XML fragment 'path' of file 'c3af0dc5a3cf.xml' -- The process cannot access the file 'c3af0dc5a3cf.xml' because it is being used by another process.
                 // /// <include file='c3af0dc5a3cf.xml' path='path'/>
-                Diagnostic(ErrorCode.WRN_FailedInclude, includeElement).WithArguments(xmlFilePath, ":", "':' has an invalid token."));
-            var expectedTemplate = (@"
+                Diagnostic(ErrorCode.WRN_FailedInclude, includeElement)
+                    .WithArguments(xmlFilePath, ":", "':' has an invalid token.")
+            );
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2736,7 +2952,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath), actual);
         }
 
@@ -2746,18 +2963,24 @@ class C {{ }}
             var xmlFile1 = Temp.CreateFile(extension: ".xml").WriteAllText("<element/>");
             var xmlFilePath1 = xmlFile1.Path;
 
-            var xmlFile2 = Temp.CreateFile(extension: ".xml").WriteAllText(string.Format("<include file='{0}' path=':'/>", xmlFilePath1));
+            var xmlFile2 = Temp.CreateFile(extension: ".xml")
+                .WriteAllText(string.Format("<include file='{0}' path=':'/>", xmlFilePath1));
             var xmlFilePath2 = xmlFile2.Path;
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//include'/>
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath2));
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // 3fba660141b6.xml(1,2): warning CS1589: Unable to include XML fragment 'path' of file 'd4241d125755.xml' -- The process cannot access the file 'd4241d125755.xml' because it is being used by another process.
-                Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments(xmlFilePath1, ":", "':' has an invalid token."));
-            var expectedTemplate = (@"
+                Diagnostic(ErrorCode.WRN_FailedInclude)
+                    .WithArguments(xmlFilePath1, ":", "':' has an invalid token.")
+            );
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2769,11 +2992,15 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath1), actual);
         }
 
-        [ClrOnlyFact(ClrOnlyReason.DocumentationComment, Skip = "https://github.com/dotnet/roslyn/issues/8807")]
+        [ClrOnlyFact(
+            ClrOnlyReason.DocumentationComment,
+            Skip = "https://github.com/dotnet/roslyn/issues/8807"
+        )]
         public void WRN_XMLParseIncludeError_Source()
         {
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText("<OpenWithoutClose>");
@@ -2782,15 +3009,22 @@ class C {{ }}
             var includeTemplate = "<include file='{0}' path='path'/>";
             var includeElement = string.Format(includeTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // 327697461814.xml(1,19): warning CS1592: Badly formed XML in included comments file -- 'Unexpected end of file has occurred. The following elements are not closed: OpenWithoutClose.'
-                Diagnostic(ErrorCode.WRN_XMLParseIncludeError).WithArguments("Unexpected end of file has occurred. The following elements are not closed: OpenWithoutClose."));
-            var expectedTemplate = (@"
+                Diagnostic(ErrorCode.WRN_XMLParseIncludeError)
+                    .WithArguments(
+                        "Unexpected end of file has occurred. The following elements are not closed: OpenWithoutClose."
+                    )
+            );
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2802,8 +3036,12 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
-            Assert.Equal(string.Format(expectedTemplate, TestHelpers.AsXmlCommentText(xmlFilePath)), actual);
+"
+            ).Trim();
+            Assert.Equal(
+                string.Format(expectedTemplate, TestHelpers.AsXmlCommentText(xmlFilePath)),
+                actual
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), typeof(DesktopOnly))]
@@ -2813,18 +3051,26 @@ class C {{ }}
             var xmlFile1 = Temp.CreateFile(extension: ".xml").WriteAllText("<OpenWithoutClose>");
             var xmlFilePath1 = xmlFile1.Path;
 
-            var xmlFile2 = Temp.CreateFile(extension: ".xml").WriteAllText(string.Format("<include file='{0}' path='path'/>", xmlFilePath1));
+            var xmlFile2 = Temp.CreateFile(extension: ".xml")
+                .WriteAllText(string.Format("<include file='{0}' path='path'/>", xmlFilePath1));
             var xmlFilePath2 = xmlFile2.Path;
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//include'/>
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath2));
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // 408eee49f410.xml(1,19): warning CS1592: Badly formed XML in included comments file -- 'Unexpected end of file has occurred. The following elements are not closed: OpenWithoutClose.'
-                Diagnostic(ErrorCode.WRN_XMLParseIncludeError).WithArguments("Unexpected end of file has occurred. The following elements are not closed: OpenWithoutClose."));
-            var expectedTemplate = (@"
+                Diagnostic(ErrorCode.WRN_XMLParseIncludeError)
+                    .WithArguments(
+                        "Unexpected end of file has occurred. The following elements are not closed: OpenWithoutClose."
+                    )
+            );
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2836,7 +3082,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath2), actual);
         }
 
@@ -2846,17 +3093,24 @@ class C {{ }}
             var xmlFile = Temp.CreateFile(extension: ".xml");
             var xmlFilePath = xmlFile.Path;
 
-            xmlFile.WriteAllText(string.Format(@"<include file=""{0}"" path=""//include""/>", xmlFilePath)); //Includes itself.
+            xmlFile.WriteAllText(
+                string.Format(@"<include file=""{0}"" path=""//include""/>", xmlFilePath)
+            ); //Includes itself.
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//include'/>
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath));
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // 3fba660141b6.xml(1,2): warning CS1589: Unable to include XML fragment 'path' of file 'd4241d125755.xml' -- The process cannot access the file 'd4241d125755.xml' because it is being used by another process.
-                Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."));
-            var expectedTemplate = (@"
+                Diagnostic(ErrorCode.WRN_FailedInclude)
+                    .WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow.")
+            );
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2868,7 +3122,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath), actual);
         }
 
@@ -2878,19 +3133,29 @@ class C {{ }}
             var xmlFile = Temp.CreateFile(extension: ".xml");
             var xmlFilePath = xmlFile.Path;
 
-            xmlFile.WriteAllText(string.Format(@"<parent><include file=""{0}"" path=""//parent""/></parent>", xmlFilePath)); //Includes its parent.
+            xmlFile.WriteAllText(
+                string.Format(
+                    @"<parent><include file=""{0}"" path=""//parent""/></parent>",
+                    xmlFilePath
+                )
+            ); //Includes its parent.
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//include'/>
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath));
 
             // CONSIDER: differs from dev11, but this is a reasonable recovery.
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // 3fba660141b6.xml(1,2): warning CS1589: Unable to include XML fragment 'path' of file 'd4241d125755.xml' -- The process cannot access the file 'd4241d125755.xml' because it is being used by another process.
-                Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments(xmlFilePath, "//parent", "Operation caused a stack overflow."));
-            var expectedTemplate = (@"
+                Diagnostic(ErrorCode.WRN_FailedInclude)
+                    .WithArguments(xmlFilePath, "//parent", "Operation caused a stack overflow.")
+            );
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2902,7 +3167,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath), actual);
         }
 
@@ -2912,32 +3178,47 @@ class C {{ }}
             var xmlFile = Temp.CreateFile(extension: ".xml");
             var xmlFilePath = xmlFile.Path;
 
-            xmlFile.WriteAllText(string.Format(@"
+            xmlFile.WriteAllText(
+                string.Format(
+                    @"
 <include file=""{0}"" path=""//include"">
     <include file=""{0}"" path=""//include"" />
-</include>", xmlFilePath)); //Everything includes everything, includes within includes.
+</include>",
+                    xmlFilePath
+                )
+            ); //Everything includes everything, includes within includes.
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//include'/>
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath));
 
             // CONSIDER: not checked against dev11 - just don't blow up.
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // 1dc0fa5fb526.xml(2,2): warning CS1589: Unable to include XML fragment '//include' of file '1dc0fa5fb526.xml' -- Operation caused a stack overflow.
-                Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."),
+                Diagnostic(ErrorCode.WRN_FailedInclude)
+                    .WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."),
                 // 1dc0fa5fb526.xml(2,2): warning CS1589: Unable to include XML fragment '//include' of file '1dc0fa5fb526.xml' -- Operation caused a stack overflow.
-                Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."),
+                Diagnostic(ErrorCode.WRN_FailedInclude)
+                    .WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."),
                 // 1dc0fa5fb526.xml(2,2): warning CS1589: Unable to include XML fragment '//include' of file '1dc0fa5fb526.xml' -- Operation caused a stack overflow.
-                Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."),
+                Diagnostic(ErrorCode.WRN_FailedInclude)
+                    .WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."),
                 // 1dc0fa5fb526.xml(3,6): warning CS1589: Unable to include XML fragment '//include' of file '1dc0fa5fb526.xml' -- Operation caused a stack overflow.
-                Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."),
+                Diagnostic(ErrorCode.WRN_FailedInclude)
+                    .WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."),
                 // 1dc0fa5fb526.xml(3,6): warning CS1589: Unable to include XML fragment '//include' of file '1dc0fa5fb526.xml' -- Operation caused a stack overflow.
-                Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."),
+                Diagnostic(ErrorCode.WRN_FailedInclude)
+                    .WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."),
                 // 1dc0fa5fb526.xml(3,6): warning CS1589: Unable to include XML fragment '//include' of file '1dc0fa5fb526.xml' -- Operation caused a stack overflow.
-                Diagnostic(ErrorCode.WRN_FailedInclude).WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow."));
-            var expectedTemplate = (@"
+                Diagnostic(ErrorCode.WRN_FailedInclude)
+                    .WithArguments(xmlFilePath, "//include", "Operation caused a stack overflow.")
+            );
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2955,7 +3236,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath), actual);
         }
 
@@ -2966,14 +3248,16 @@ class C {{ }}
             var xmlFile = Temp.CreateFile(extension: ".xml");
             var xmlFilePath = xmlFile.Path;
 
-            string xmlTemplate = @"
+            string xmlTemplate =
+                @"
 <root>
   <include file=""{0}"" path=""//stuff""/>
   <stuff/>
 </root>";
             xmlFile.WriteAllText(string.Format(xmlTemplate, xmlFilePath));
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//include'/>
 /// <include file='{0}' path='//include'/>
 class C {{ }}
@@ -2981,7 +3265,8 @@ class C {{ }}
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath));
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -2994,7 +3279,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -3014,14 +3300,16 @@ class C {{ }}
             xmlFile1.WriteAllText(string.Format(xmlTemplate1, xmlFilePath2));
             xmlFile2.WriteAllText(xml2);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file='{0}' path='//stuff'/>
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath1));
 
             var actual = GetDocumentationCommentText(comp);
-            var expectedTemplate = (@"
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3033,7 +3321,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(string.Format(expectedTemplate, xmlFilePath1), actual);
         }
 
@@ -3044,16 +3333,19 @@ class C {{ }}
             var xmlFile = Temp.CreateFile(extension: ".xml");
             var xmlFilePath = xmlFile.Path;
 
-            xmlFile.WriteAllText(@"<?xml version=""1.0""?>
+            xmlFile.WriteAllText(
+                @"<?xml version=""1.0""?>
 <doc>
     <assembly>
         <name>Roslyn.Utilities</name>
     </assembly>
     <members>
     </members>
-</doc>");
+</doc>"
+            );
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <include file=""{0}"" path=""/""/>
 enum A {{ }}
 
@@ -3068,15 +3360,34 @@ enum D {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFilePath));
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,5): warning CS1589: Unable to include XML fragment '/' of file '012bf028d62c.xml' -- The XPath expression evaluated to unexpected type System.Xml.Linq.XDocument.
                 // /// <include file="012bf028d62c.xml" path="/"/>
-                Diagnostic(ErrorCode.WRN_FailedInclude, string.Format(@"<include file=""{0}"" path=""/""/>", xmlFilePath)).WithArguments(xmlFilePath, "/", "The XPath expression evaluated to unexpected type System.Xml.Linq.XDocument."),
+                Diagnostic(
+                        ErrorCode.WRN_FailedInclude,
+                        string.Format(@"<include file=""{0}"" path=""/""/>", xmlFilePath)
+                    )
+                    .WithArguments(
+                        xmlFilePath,
+                        "/",
+                        "The XPath expression evaluated to unexpected type System.Xml.Linq.XDocument."
+                    ),
                 // (5,5): warning CS1589: Unable to include XML fragment '.' of file '012bf028d62c.xml' -- The XPath expression evaluated to unexpected type System.Xml.Linq.XDocument.
                 // /// <include file="012bf028d62c.xml" path="."/>
-                Diagnostic(ErrorCode.WRN_FailedInclude, string.Format(@"<include file=""{0}"" path="".""/>", xmlFilePath)).WithArguments(xmlFilePath, ".", "The XPath expression evaluated to unexpected type System.Xml.Linq.XDocument."));
+                Diagnostic(
+                        ErrorCode.WRN_FailedInclude,
+                        string.Format(@"<include file=""{0}"" path="".""/>", xmlFilePath)
+                    )
+                    .WithArguments(
+                        xmlFilePath,
+                        ".",
+                        "The XPath expression evaluated to unexpected type System.Xml.Linq.XDocument."
+                    )
+            );
 
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3109,7 +3420,8 @@ enum D {{ }}
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -3124,7 +3436,8 @@ enum D {{ }}
             var includeElementTemplate = @"<include file='{0}' path='//see'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C
 {{
@@ -3134,7 +3447,8 @@ class C
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3146,20 +3460,23 @@ class C
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void IncludedCref_Verbatim()
         {
-            var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(@"<see cref=""M:Verbatim""/>");
+            var xmlFile = Temp.CreateFile(extension: ".xml")
+                .WriteAllText(@"<see cref=""M:Verbatim""/>");
             var xmlFilePath = xmlFile.Path;
 
             var includeElementTemplate = @"<include file='{0}' path='//see'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C
 {{
@@ -3169,7 +3486,8 @@ class C
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3181,7 +3499,8 @@ class C
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -3194,7 +3513,8 @@ class C
             var includeElementTemplate = @"<include file='{0}' path='//see'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 namespace N
 {{
     /// {0}
@@ -3212,10 +3532,13 @@ namespace N
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
             // Error for the first include, but not for the second.
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (4,9): warning CS1574: XML comment has cref attribute 'Int32' that could not be resolved
-                Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement).WithArguments("Int32"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement).WithArguments("Int32")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3228,7 +3551,8 @@ namespace N
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -3241,23 +3565,29 @@ namespace N
             var includeElementTemplate = @"<include file='{0}' path='//see'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,5): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
                 // /// <include file='aa671ee8adcd.xml' path='//see'/>
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement).WithArguments("#"),
                 // (2,5): warning CS1658: Identifier expected. See also error CS1001.
                 // /// <include file='aa671ee8adcd.xml' path='//see'/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement).WithArguments("Identifier expected", "1001"),
+                Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                    .WithArguments("Identifier expected", "1001"),
                 // (2,5): warning CS1658: Unexpected character '#'. See also error CS1056.
                 // /// <include file='aa671ee8adcd.xml' path='//see'/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement).WithArguments("Unexpected character '#'", "1056"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                    .WithArguments("Unexpected character '#'", "1056")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3269,30 +3599,36 @@ class C {{ }}
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void IncludedCref_SemanticError()
         {
-            var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(@"<see cref=""Invalid""/>");
+            var xmlFile = Temp.CreateFile(extension: ".xml")
+                .WriteAllText(@"<see cref=""Invalid""/>");
             var xmlFilePath = xmlFile.Path;
 
             var includeElementTemplate = @"<include file='{0}' path='//see'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,5): warning CS1574: XML comment has cref attribute 'Invalid' that could not be resolved
                 // /// <include file='f76ef125d03d.xml' path='//see'/>
-                Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement).WithArguments("Invalid"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement).WithArguments("Invalid")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3304,7 +3640,8 @@ class C {{ }}
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -3312,7 +3649,8 @@ class C {{ }}
         [Fact]
         public void IncludeMismatchedQuotationMarks()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// <include file='C:\file.xml"" path=""/""/>
 /// </summary>
@@ -3320,7 +3658,10 @@ class C { }
 ";
 
             // This is mode typically used by the IDE.
-            var tree = Parse(source, options: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse));
+            var tree = Parse(
+                source,
+                options: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+            );
             var compilation = CreateCompilation(tree);
             compilation.VerifyDiagnostics();
         }
@@ -3336,7 +3677,8 @@ class C { }
             var includeElementTemplate = @"<include file='{0}' path='//see'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 class X
 {{
     /// {0}
@@ -3350,10 +3692,13 @@ class X
     }}
 }}
 ";
-            var comp = CreateCompilationUtil(string.Format(sourceTemplate, seeElement, includeElement));
+            var comp = CreateCompilationUtil(
+                string.Format(sourceTemplate, seeElement, includeElement)
+            );
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3366,7 +3711,8 @@ class X
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -3381,7 +3727,8 @@ class X
             var includeElementTemplate = @"<include file='{0}' path='//see'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 class A<T>
 {{
     class B : A<B>
@@ -3392,10 +3739,13 @@ class A<T>
     }}
 }}
 ";
-            var comp = CreateCompilationUtil(string.Format(sourceTemplate, seeElement, includeElement));
+            var comp = CreateCompilationUtil(
+                string.Format(sourceTemplate, seeElement, includeElement)
+            );
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3408,7 +3758,8 @@ class A<T>
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -3419,7 +3770,8 @@ class A<T>
         [Fact]
         public void IncludedName_Success()
         {
-            var xml = @"
+            var xml =
+                @"
 <root>
     <member0>
         <summary>
@@ -3456,9 +3808,12 @@ class A<T>
             var xmlFilePath = xmlFile.Path;
 
             var includeElementTemplate = @"<include file='{0}' path='root/member{1}/summary'/>";
-            string[] includeElements = Enumerable.Range(0, 4).Select(i => string.Format(includeElementTemplate, xmlFilePath, i)).ToArray();
+            string[] includeElements = Enumerable.Range(0, 4)
+                .Select(i => string.Format(includeElementTemplate, xmlFilePath, i))
+                .ToArray();
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C<T>
 {{
@@ -3475,7 +3830,8 @@ class C<T>
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElements));
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3512,14 +3868,16 @@ class C<T>
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void IncludedName_OverlappedWithSource()
         {
-            var xml = @"
+            var xml =
+                @"
 <root>
     <param name=""u"">Text</param>
     <param name=""v"">Text</param>
@@ -3538,7 +3896,8 @@ class C<T>
             var includeElementTemplate = @"<include file='{0}' path='root/*'/>";
             string includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <param name=""u"">Text</param>
 /// <param name=""v"">Text</param>
 /// <paramref name=""u"">Text</paramref>
@@ -3552,7 +3911,8 @@ delegate void D<U, V>(U u, V v) {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (10,5): warning CS1571: XML comment has a duplicate param tag for 'u'
                 // /// <include file='f59a2ef50b4d.xml' path='root/*'/>
                 Diagnostic(ErrorCode.WRN_DuplicateParamTag, includeElement).WithArguments("u"),
@@ -3564,8 +3924,10 @@ delegate void D<U, V>(U u, V v) {{ }}
                 Diagnostic(ErrorCode.WRN_DuplicateTypeParamTag, includeElement).WithArguments("U"),
                 // (10,5): warning CS1710: XML comment has a duplicate typeparam tag for 'V'
                 // /// <include file='f59a2ef50b4d.xml' path='root/*'/>
-                Diagnostic(ErrorCode.WRN_DuplicateTypeParamTag, includeElement).WithArguments("V"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_DuplicateTypeParamTag, includeElement).WithArguments("V")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3585,14 +3947,16 @@ delegate void D<U, V>(U u, V v) {{ }}
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void IncludedName_MixedWithSource()
         {
-            var xml = @"
+            var xml =
+                @"
 <root>
     <param name=""v"">Text</param>
     <paramref name=""u"">Text</paramref>
@@ -3609,7 +3973,8 @@ delegate void D<U, V>(U u, V v) {{ }}
             var includeElementTemplate = @"<include file='{0}' path='root/*'/>";
             string includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <param name=""u"">Text</param>
 /// <paramref name=""u"">Text</paramref>
 /// <paramref name=""v"">Text</paramref>
@@ -3622,7 +3987,8 @@ delegate void D<U, V>(U u, V v) {{ }}
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3640,33 +4006,40 @@ delegate void D<U, V>(U u, V v) {{ }}
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void IncludedName_SyntacticError()
         {
-            var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(@"<typeparam name=""#""/>");
+            var xmlFile = Temp.CreateFile(extension: ".xml")
+                .WriteAllText(@"<typeparam name=""#""/>");
             var xmlFilePath = xmlFile.Path;
 
             var includeElementTemplate = @"<include file='{0}' path='//typeparam'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C<T> {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,5): warning CS1658: Unexpected character '#'. See also error CS1056.
                 // /// <include file='3d2052d10358.xml' path='//typeparam'/>
-                Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement).WithArguments("Unexpected character '#'", "1056"),
+                Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                    .WithArguments("Unexpected character '#'", "1056"),
                 // (3,9): warning CS1712: Type parameter 'T' has no matching typeparam tag in the XML comment on 'C<T>' (but other type parameters do)
                 // class C<T> { }
-                Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "T").WithArguments("T", "C<T>"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "T").WithArguments("T", "C<T>")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3678,7 +4051,8 @@ class C<T> {{ }}
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -3691,7 +4065,8 @@ class C<T> {{ }}
             var includeElementTemplate = @"<include file='{0}' path='//param'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 class C
 {{ 
     /// {0}
@@ -3700,14 +4075,17 @@ class C
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (4,9): warning CS1572: XML comment has a param tag for 'Q', but there is no parameter by that name
                 //     /// <include file='4f57d3a0db53.xml' path='//param'/>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, includeElement).WithArguments("Q"),
                 // (5,16): warning CS1573: Parameter 'x' has no matching param tag in the XML comment for 'C.M(int)' (but other parameters do)
                 //     void M(int x) { }
-                Diagnostic(ErrorCode.WRN_MissingParamTag, "x").WithArguments("x", "C.M(int)"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_MissingParamTag, "x").WithArguments("x", "C.M(int)")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3719,7 +4097,8 @@ class C
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -3732,7 +4111,8 @@ class C
             var includeElementTemplate = @"<include file='{0}' path='//param'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 class C
 {{ 
     /// {0}
@@ -3743,7 +4123,8 @@ class C
 
             // NOTE: no *xml* diagnostics, not no diagnostics.
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3755,20 +4136,26 @@ class C
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
-        [ClrOnlyFact(ClrOnlyReason.DocumentationComment, Skip = "https://github.com/dotnet/roslyn/issues/8807")]
+        [ClrOnlyFact(
+            ClrOnlyReason.DocumentationComment,
+            Skip = "https://github.com/dotnet/roslyn/issues/8807"
+        )]
         public void IncludedName_DuplicateNameAttribute()
         {
-            var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(@"<param name=""x"" name=""y""/>");
+            var xmlFile = Temp.CreateFile(extension: ".xml")
+                .WriteAllText(@"<param name=""x"" name=""y""/>");
             var xmlFilePath = xmlFile.Path;
 
             var includeElementTemplate = @"<include file='{0}' path='//param'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 class C
 {{ 
     /// {0}
@@ -3777,10 +4164,14 @@ class C
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // df33b60df5a9.xml(1,17): warning CS1592: Badly formed XML in included comments file -- ''name' is a duplicate attribute name.'
-                Diagnostic(ErrorCode.WRN_XMLParseIncludeError).WithArguments("'name' is a duplicate attribute name."));
-            var expectedTemplate = (@"
+                Diagnostic(ErrorCode.WRN_XMLParseIncludeError)
+                    .WithArguments("'name' is a duplicate attribute name.")
+            );
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3792,14 +4183,19 @@ class C
         </member>
     </members>
 </doc>
-        ").Trim();
-            Assert.Equal(string.Format(expectedTemplate, TestHelpers.AsXmlCommentText(xmlFilePath)), actual);
+        "
+            ).Trim();
+            Assert.Equal(
+                string.Format(expectedTemplate, TestHelpers.AsXmlCommentText(xmlFilePath)),
+                actual
+            );
         }
 
         [Fact]
         public void IncludedName_PartialMethod()
         {
-            string xml = @"
+            string xml =
+                @"
 <root>
     <param name=""x""/>
     <param name=""y""/>
@@ -3810,7 +4206,8 @@ class C
             var includeElementTemplate = @"<include file='{0}' path='//param'/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 partial class C
 {{ 
     /// Part 1.
@@ -3828,7 +4225,8 @@ partial class C
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
             var actual = GetDocumentationCommentText(comp);
-            var expectedTemplate = (@"
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -3841,15 +4239,20 @@ partial class C
         </member>
     </members>
 </doc>
-        ").Trim();
-            Assert.Equal(string.Format(expectedTemplate, TestHelpers.AsXmlCommentText(xmlFilePath)), actual);
+        "
+            ).Trim();
+            Assert.Equal(
+                string.Format(expectedTemplate, TestHelpers.AsXmlCommentText(xmlFilePath)),
+                actual
+            );
         }
 
         [Fact]
         [WorkItem(21348, "https://github.com/dotnet/roslyn/issues/21348")]
         public void IncludedName_TypeParamAndTypeParamRefHandling()
         {
-            var xml = @"
+            var xml =
+                @"
 <root>
     <target>
     Included section
@@ -3880,7 +4283,8 @@ partial class C
             var includeElementTemplate = @"<include file='{0}' path='//target'/>";
             string includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 
 /// {0}
 class OuterClass<X>
@@ -3895,42 +4299,69 @@ class OuterClass<X>
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
 
-            var actual = GetDocumentationCommentText(comp, expectedDiagnostics: new[] {
-                // (3,5): warning CS1711: XML comment has a typeparam tag for 'Y', but there is no type parameter by that name
-                // /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("Y").WithLocation(3, 5),
-                // (3,5): warning CS1711: XML comment has a typeparam tag for 'XY', but there is no type parameter by that name
-                // /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("XY").WithLocation(3, 5),
-                // (3,5): warning CS1735: XML comment on 'OuterClass<X>' has a typeparamref tag for 'Y', but there is no type parameter by that name
-                // /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, includeElement).WithArguments("Y", "OuterClass<X>").WithLocation(3, 5),
-                // (3,5): warning CS1735: XML comment on 'OuterClass<X>' has a typeparamref tag for 'XY', but there is no type parameter by that name
-                // /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, includeElement).WithArguments("XY", "OuterClass<X>").WithLocation(3, 5),
-                // (6,9): warning CS1711: XML comment has a typeparam tag for 'X', but there is no type parameter by that name
-                //     /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("X").WithLocation(6, 9),
-                // (6,9): warning CS1711: XML comment has a typeparam tag for 'XY', but there is no type parameter by that name
-                //     /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("XY").WithLocation(6, 9),
-                // (6,9): warning CS1735: XML comment on 'OuterClass<X>.InnerClass<Y>' has a typeparamref tag for 'XY', but there is no type parameter by that name
-                //     /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, includeElement).WithArguments("XY", "OuterClass<X>.InnerClass<Y>").WithLocation(6, 9),
-                // (9,13): warning CS1711: XML comment has a typeparam tag for 'X', but there is no type parameter by that name
-                //         /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("X").WithLocation(9, 13),
-                // (9,13): warning CS1711: XML comment has a typeparam tag for 'Y', but there is no type parameter by that name
-                //         /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("Y").WithLocation(9, 13),
-                // (9,13): warning CS1711: XML comment has a typeparam tag for 'XY', but there is no type parameter by that name
-                //         /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("XY").WithLocation(9, 13),
-                // (9,13): warning CS1735: XML comment on 'OuterClass<X>.InnerClass<Y>.Foo()' has a typeparamref tag for 'XY', but there is no type parameter by that name
-                //         /// <include file='b16c2dc7f738.xml' path='//target'/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, includeElement).WithArguments("XY", "OuterClass<X>.InnerClass<Y>.Foo()").WithLocation(9, 13)
-            });
-            var expected = (@"
+            var actual = GetDocumentationCommentText(
+                comp,
+                expectedDiagnostics: new[]
+                {
+                    // (3,5): warning CS1711: XML comment has a typeparam tag for 'Y', but there is no type parameter by that name
+                    // /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                        .WithArguments("Y")
+                        .WithLocation(3, 5),
+                    // (3,5): warning CS1711: XML comment has a typeparam tag for 'XY', but there is no type parameter by that name
+                    // /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                        .WithArguments("XY")
+                        .WithLocation(3, 5),
+                    // (3,5): warning CS1735: XML comment on 'OuterClass<X>' has a typeparamref tag for 'Y', but there is no type parameter by that name
+                    // /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, includeElement)
+                        .WithArguments("Y", "OuterClass<X>")
+                        .WithLocation(3, 5),
+                    // (3,5): warning CS1735: XML comment on 'OuterClass<X>' has a typeparamref tag for 'XY', but there is no type parameter by that name
+                    // /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, includeElement)
+                        .WithArguments("XY", "OuterClass<X>")
+                        .WithLocation(3, 5),
+                    // (6,9): warning CS1711: XML comment has a typeparam tag for 'X', but there is no type parameter by that name
+                    //     /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                        .WithArguments("X")
+                        .WithLocation(6, 9),
+                    // (6,9): warning CS1711: XML comment has a typeparam tag for 'XY', but there is no type parameter by that name
+                    //     /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                        .WithArguments("XY")
+                        .WithLocation(6, 9),
+                    // (6,9): warning CS1735: XML comment on 'OuterClass<X>.InnerClass<Y>' has a typeparamref tag for 'XY', but there is no type parameter by that name
+                    //     /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, includeElement)
+                        .WithArguments("XY", "OuterClass<X>.InnerClass<Y>")
+                        .WithLocation(6, 9),
+                    // (9,13): warning CS1711: XML comment has a typeparam tag for 'X', but there is no type parameter by that name
+                    //         /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                        .WithArguments("X")
+                        .WithLocation(9, 13),
+                    // (9,13): warning CS1711: XML comment has a typeparam tag for 'Y', but there is no type parameter by that name
+                    //         /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                        .WithArguments("Y")
+                        .WithLocation(9, 13),
+                    // (9,13): warning CS1711: XML comment has a typeparam tag for 'XY', but there is no type parameter by that name
+                    //         /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                        .WithArguments("XY")
+                        .WithLocation(9, 13),
+                    // (9,13): warning CS1735: XML comment on 'OuterClass<X>.InnerClass<Y>.Foo()' has a typeparamref tag for 'XY', but there is no type parameter by that name
+                    //         /// <include file='b16c2dc7f738.xml' path='//target'/>
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, includeElement)
+                        .WithArguments("XY", "OuterClass<X>.InnerClass<Y>.Foo()")
+                        .WithLocation(9, 13)
+                }
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4002,7 +4433,8 @@ class OuterClass<X>
         </member>
     </members>
 </doc>
-        ").Trim();
+        "
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -4015,7 +4447,8 @@ class OuterClass<X>
         [Fact]
         public void ForSingleType()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 ///  A
 ///   B
@@ -4027,9 +4460,13 @@ class C { }
             var compilation = CreateCompilationUtil(source);
 
             var type = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-            var actualText = DocumentationCommentCompiler.GetDocumentationCommentXml(type, processIncludes: true, cancellationToken: default(CancellationToken));
+            var actualText = DocumentationCommentCompiler.GetDocumentationCommentXml(
+                type,
+                processIncludes: true,
+                cancellationToken: default(CancellationToken)
+            );
             var expectedText =
-@"<member name=""T:C"">
+                @"<member name=""T:C"">
     <summary>
      A
       B
@@ -4046,7 +4483,8 @@ class C { }
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText("<stuff />");
             var xmlFilePath = xmlFile.Path;
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <summary>
 ///  A
 ///   <include file='{0}' path='stuff'/>
@@ -4066,7 +4504,11 @@ class C
 
             // Expand includes.
             {
-                var actualText = DocumentationCommentCompiler.GetDocumentationCommentXml(type, processIncludes: true, cancellationToken: default(CancellationToken));
+                var actualText = DocumentationCommentCompiler.GetDocumentationCommentXml(
+                    type,
+                    processIncludes: true,
+                    cancellationToken: default(CancellationToken)
+                );
                 var expectedText =
                     @"<member name=""T:C"">
     <summary>
@@ -4081,7 +4523,11 @@ class C
 
             // Do not expand includes.
             {
-                var actualText = DocumentationCommentCompiler.GetDocumentationCommentXml(type, processIncludes: false, cancellationToken: default(CancellationToken));
+                var actualText = DocumentationCommentCompiler.GetDocumentationCommentXml(
+                    type,
+                    processIncludes: false,
+                    cancellationToken: default(CancellationToken)
+                );
                 var expectedTextTemplate =
                     @"<member name=""T:C"">
     <summary>
@@ -4102,7 +4548,8 @@ class C
         [Fact]
         public void FilterTree()
         {
-            var source1 = @"
+            var source1 =
+                @"
 partial class C
 {
     /// <see cref=""Bogus1""/>
@@ -4110,7 +4557,8 @@ partial class C
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 partial class C
 {
     /// <see cref=""Bogus2""/>
@@ -4118,16 +4566,29 @@ partial class C
 }
 ";
 
-            var tree1 = SyntaxFactory.ParseSyntaxTree(source1, options: TestOptions.RegularWithDocumentationComments);
-            var tree2 = SyntaxFactory.ParseSyntaxTree(source2, options: TestOptions.RegularWithDocumentationComments);
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                source1,
+                options: TestOptions.RegularWithDocumentationComments
+            );
+            var tree2 = SyntaxFactory.ParseSyntaxTree(
+                source2,
+                options: TestOptions.RegularWithDocumentationComments
+            );
 
             // Files passed in order.
             var comp = CreateCompilation(new[] { tree1, tree2 }, assemblyName: "Test");
 
-            var actual1 = GetDocumentationCommentText(comp, null, filterTree: tree1, expectedDiagnostics: new[] {
-                // (4,20): warning CS1574: XML comment has cref attribute 'Bogus1' that could not be resolved
-                //     /// <see cref="Bogus1"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "Bogus1").WithArguments("Bogus1") });
+            var actual1 = GetDocumentationCommentText(
+                comp,
+                null,
+                filterTree: tree1,
+                expectedDiagnostics: new[]
+                {
+                    // (4,20): warning CS1574: XML comment has cref attribute 'Bogus1' that could not be resolved
+                    //     /// <see cref="Bogus1"/>
+                    Diagnostic(ErrorCode.WRN_BadXMLRef, "Bogus1").WithArguments("Bogus1")
+                }
+            );
             var expected1 = @"
 <?xml version=""1.0""?>
 <doc>
@@ -4143,10 +4604,17 @@ partial class C
 ".Trim();
             Assert.Equal(expected1, actual1);
 
-            var actual2 = GetDocumentationCommentText(comp, null, filterTree: tree2, expectedDiagnostics: new[] {
-                // (4,20): warning CS1574: XML comment has cref attribute 'Bogus2' that could not be resolved
-                //     /// <see cref="Bogus2"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "Bogus2").WithArguments("Bogus2")});
+            var actual2 = GetDocumentationCommentText(
+                comp,
+                null,
+                filterTree: tree2,
+                expectedDiagnostics: new[]
+                {
+                    // (4,20): warning CS1574: XML comment has cref attribute 'Bogus2' that could not be resolved
+                    //     /// <see cref="Bogus2"/>
+                    Diagnostic(ErrorCode.WRN_BadXMLRef, "Bogus2").WithArguments("Bogus2")
+                }
+            );
             var expected2 = @"
 <?xml version=""1.0""?>
 <doc>
@@ -4167,7 +4635,9 @@ partial class C
         public void Utf8()
         {
             // NOTE: This character is interesting because it has a three-byte utf-8 representation.
-            var source = "///\u20ac" + @"
+            var source =
+                "///\u20ac"
+                + @"
 public class C
 {
     static void Main() {}
@@ -4175,7 +4645,8 @@ public class C
 ";
             var comp = CreateCompilationUtil(source);
             var actual = GetDocumentationCommentText(comp, "OutputName");
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4183,11 +4654,14 @@ public class C
     </assembly>
     <members>
         <member name=""T:C"">
-            " + "\u20ac" + @"
+            "
+                + "\u20ac"
+                + @"
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -4195,7 +4669,7 @@ public class C
         public void InaccessibleMembers()
         {
             var source =
-@"/// <summary>
+                @"/// <summary>
 /// See <see cref=""C.M""/>.
 /// </summary>
 class A
@@ -4208,7 +4682,8 @@ class C
 }";
             var comp = CreateCompilationUtil(source);
             var actual = GetDocumentationCommentText(comp, "OutputName");
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4221,7 +4696,8 @@ class C
             </summary>
         </member>
     </members>
-</doc>").Trim();
+</doc>"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -4229,7 +4705,8 @@ class C
         [Fact]
         public void NamespaceCref()
         {
-            var source = @"
+            var source =
+                @"
 /// <see cref=""System""/>
 public class C
 {
@@ -4238,7 +4715,8 @@ public class C
 ";
             var comp = CreateCompilationUtil(source);
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4250,7 +4728,8 @@ public class C
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -4258,7 +4737,8 @@ public class C
         [Fact]
         public void SymbolKinds()
         {
-            var source = @"
+            var source =
+                @"
 using AliasN = System;
 using AliasT = System.String;
 
@@ -4296,7 +4776,6 @@ class Generic<T>
 ";
             var comp = CreateCompilationUtil(source);
             comp.VerifyDiagnostics(
-
                 // Cref parse warnings.
 
                 // (10,31): warning CS1584: XML comment has syntactically incorrect cref attribute 'C[]'
@@ -4305,7 +4784,6 @@ class Generic<T>
                 // (23,33): warning CS1584: XML comment has syntactically incorrect cref attribute 'C*'
                 //     /// Pointer type <see cref="C*"/> -- warning
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "C").WithArguments("C*"),
-
                 // Boring warnings.
 
                 // (31,29): warning CS0067: The event 'Generic<T>.C.E' is never used
@@ -4314,7 +4792,6 @@ class Generic<T>
                 // (30,13): warning CS0169: The field 'Generic<T>.C.f' is never used
                 //         int f;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "f").WithArguments("Generic<T>.C.f"),
-
                 // Cref binding warnings.
 
                 // (12,33): warning CS1574: XML comment has cref attribute 'dynamic' that could not be resolved
@@ -4325,9 +4802,11 @@ class Generic<T>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "C{T}").WithArguments("C{T}"),
                 // (26,35): warning CS1723: XML comment has cref attribute 'T' that refers to a type parameter
                 //     /// Type parameter <see cref="T"/> -- warning
-                Diagnostic(ErrorCode.WRN_BadXMLRefTypeVar, "T").WithArguments("T"));
+                Diagnostic(ErrorCode.WRN_BadXMLRefTypeVar, "T").WithArguments("T")
+            );
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (12,33): warning CS1574: XML comment has cref attribute 'dynamic' that could not be resolved
                 //     /// Dynamic type <see cref="dynamic"/> -- warning
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "dynamic").WithArguments("dynamic"),
@@ -4336,8 +4815,10 @@ class Generic<T>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "C{T}").WithArguments("C{T}"),
                 // (26,35): warning CS1723: XML comment has cref attribute 'T' that refers to a type parameter
                 //     /// Type parameter <see cref="T"/> -- warning
-                Diagnostic(ErrorCode.WRN_BadXMLRefTypeVar, "T").WithArguments("T"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_BadXMLRefTypeVar, "T").WithArguments("T")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4369,7 +4850,8 @@ class Generic<T>
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -4377,7 +4859,8 @@ class Generic<T>
         [Fact]
         public void FieldDocComment()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     /// 1
@@ -4393,7 +4876,8 @@ class C
 ";
             var comp = CreateCompilationUtil(source);
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4420,7 +4904,8 @@ class C
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -4428,7 +4913,8 @@ class C
         [Fact]
         public void FieldDocCommentDiagnostics()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     /// <see cref=""fake1""/>
@@ -4444,7 +4930,8 @@ class C
 ";
             // Duplicate diagnostics, as in dev11.
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (4,20): warning CS1574: XML comment has cref attribute 'fake1' that could not be resolved
                 //     /// <see cref="fake1"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "fake1").WithArguments("fake1"),
@@ -4462,8 +4949,10 @@ class C
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "fake4").WithArguments("fake4"),
                 // (11,20): warning CS1574: XML comment has cref attribute 'fake4' that could not be resolved
                 //     /// <see cref="fake4"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "fake4").WithArguments("fake4"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "fake4").WithArguments("fake4")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4490,7 +4979,8 @@ class C
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -4498,7 +4988,8 @@ class C
         [Fact]
         public void DelegateDocComments()
         {
-            var source = @"
+            var source =
+                @"
 /// <param name=""t""/>
 /// <param name=""q""/>
 /// <paramref name=""t""/>
@@ -4510,7 +5001,8 @@ class C
 delegate void D<T, U>(T t, U u);
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (3,18): warning CS1572: XML comment has a param tag for 'q', but there is no parameter by that name
                 // /// <param name="q"/>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "q").WithArguments("q"),
@@ -4522,14 +5014,17 @@ delegate void D<T, U>(T t, U u);
                 Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "Q").WithArguments("Q"),
                 // (9,25): warning CS1735: XML comment on 'D<T, U>' has a typeparamref tag for 'Q', but there is no type parameter by that name
                 // /// <typeparamref name="Q"/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "Q").WithArguments("Q", "D<T, U>"),
+                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "Q")
+                    .WithArguments("Q", "D<T, U>"),
                 // (10,30): warning CS1573: Parameter 'u' has no matching param tag in the XML comment for 'D<T, U>' (but other parameters do)
                 // delegate void D<T, U>(T t, U u);
                 Diagnostic(ErrorCode.WRN_MissingParamTag, "u").WithArguments("u", "D<T, U>"),
                 // (10,20): warning CS1712: Type parameter 'U' has no matching typeparam tag in the XML comment on 'D<T, U>' (but other type parameters do)
                 // delegate void D<T, U>(T t, U u);
-                Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "U").WithArguments("U", "D<T, U>"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_MissingTypeParamTag, "U").WithArguments("U", "D<T, U>")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4548,26 +5043,43 @@ delegate void D<T, U>(T t, U u);
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void NoWarn1591()
         {
-            var source = @"
+            var source =
+                @"
 public class C { }
 ";
             var tree = Parse(source, options: TestOptions.RegularWithDocumentationComments);
-            var warnDict = new Dictionary<string, ReportDiagnostic> { { MessageProvider.Instance.GetIdForErrorCode((int)ErrorCode.WRN_MissingXMLComment), ReportDiagnostic.Suppress } };
-            var comp = CreateCompilation(tree, options: TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(warnDict), assemblyName: "Test");
+            var warnDict = new Dictionary<string, ReportDiagnostic>
+            {
+                {
+                    MessageProvider.Instance.GetIdForErrorCode(
+                        (int)ErrorCode.WRN_MissingXMLComment
+                    ),
+                    ReportDiagnostic.Suppress
+                }
+            };
+            var comp = CreateCompilation(
+                tree,
+                options: TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(warnDict),
+                assemblyName: "Test"
+            );
             comp.VerifyDiagnostics(); //NOTE: no WRN_MissingXMLComment
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,14): warning CS1591: Missing XML comment for publicly visible type or member 'C'
                 // public class C { }
-                Diagnostic(ErrorCode.WRN_MissingXMLComment, "C").WithArguments("C")); //Filtering happens later.
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_MissingXMLComment, "C").WithArguments("C")
+            ); //Filtering happens later.
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4576,7 +5088,8 @@ public class C { }
     <members>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -4584,7 +5097,8 @@ public class C { }
         [Fact]
         public void CrefAttributeInOtherElement()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     /// <other cref=""C""/>
@@ -4597,7 +5111,8 @@ class C
             comp.VerifyDiagnostics();
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4609,7 +5124,8 @@ class C
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -4617,7 +5133,8 @@ class C
         [Fact]
         public void NameAttributeInOtherElement()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     /// <other name=""X""/>
@@ -4630,7 +5147,8 @@ class C
             comp.VerifyDiagnostics();
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4642,14 +5160,16 @@ class C
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void GetParseDiagnostics()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     /// <summary>
@@ -4669,7 +5189,8 @@ class Program
         [Fact]
         public void GetDeclarationDiagnostics()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     /// <summary>
@@ -4691,7 +5212,8 @@ class Program
         [Fact]
         public void ExplicitInterfaceImplementation()
         {
-            var source = @"
+            var source =
+                @"
 interface I<T>
 {
     void M();
@@ -4707,7 +5229,8 @@ class C<T> : I<T>
             comp.VerifyDiagnostics();
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4719,14 +5242,16 @@ class C<T> : I<T>
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void ArrayRankSpecifierOrder()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     /// <see cref=""M""/>
@@ -4737,7 +5262,8 @@ class C
             comp.VerifyDiagnostics();
 
             var actual = GetDocumentationCommentText(comp);
-            var expected = (@"
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4749,27 +5275,36 @@ class C
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
         // As in dev11, the pragma has no effect.
-        [ClrOnlyFact(ClrOnlyReason.DocumentationComment, Skip = "https://github.com/dotnet/roslyn/issues/8807")]
+        [ClrOnlyFact(
+            ClrOnlyReason.DocumentationComment,
+            Skip = "https://github.com/dotnet/roslyn/issues/8807"
+        )]
         public void PragmaDisableWarningInXmlFile()
         {
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText("&");
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 #pragma warning disable 1592
 /// <include file='{0}' path='element'/>
 class C {{ }}
 ";
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, xmlFile.Path));
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // 054c2dcb7959.xml(1,1): warning CS1592: Badly formed XML in included comments file -- 'Data at the root level is invalid.'
-                Diagnostic(ErrorCode.WRN_XMLParseIncludeError).WithArguments("Data at the root level is invalid."));
-            var expectedTemplate = (@"
+                Diagnostic(ErrorCode.WRN_XMLParseIncludeError)
+                    .WithArguments("Data at the root level is invalid.")
+            );
+            var expectedTemplate = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -4781,8 +5316,12 @@ class C {{ }}
         </member>
     </members>
 </doc>
-").Trim();
-            Assert.Equal(string.Format(expectedTemplate, TestHelpers.AsXmlCommentText(xmlFile.Path)), actual);
+"
+            ).Trim();
+            Assert.Equal(
+                string.Format(expectedTemplate, TestHelpers.AsXmlCommentText(xmlFile.Path)),
+                actual
+            );
         }
 
         [Fact]
@@ -4791,7 +5330,8 @@ class C {{ }}
             // BREAK: Dev11 drops candidates with "dynamic" anywhere in their parameter lists.
             // As a result, it does not match the first two or last two crefs.
 
-            var source = @"
+            var source =
+                @"
 /// <see cref=""M1(dynamic)""/>
 /// <see cref=""M1(C{dynamic})""/>
 /// <see cref=""M2(object)""/>
@@ -4811,7 +5351,10 @@ class C<T>
 ";
 
             SyntaxTree tree = Parse(source, options: TestOptions.RegularWithDocumentationComments);
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(new[] { tree }, assemblyName: "Test");
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                new[] { tree },
+                assemblyName: "Test"
+            );
 
             var actualText = GetDocumentationCommentText(comp);
             var expectedText = @"
@@ -4841,7 +5384,8 @@ class C<T>
         [Fact]
         public void GenericMethodWithoutTypeParameters1()
         {
-            var source = @"
+            var source =
+                @"
 /// <see cref=""M""/>
 /// <see cref=""M(int)""/>
 /// <see cref=""M{T}""/>
@@ -4862,19 +5406,25 @@ class C
 ";
             var comp = CreateCompilationUtil(source);
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,16): warning CS0419: Ambiguous reference in cref attribute: 'M'. Assuming 'C.M(int)', but could have also matched other overloads including 'C.M(string)'.
                 // /// <see cref="M"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M").WithArguments("M", "C.M(int)", "C.M(string)"),
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M")
+                    .WithArguments("M", "C.M(int)", "C.M(string)"),
                 // (4,16): warning CS0419: Ambiguous reference in cref attribute: 'M{T}'. Assuming 'C.M<T>(int)', but could have also matched other overloads including 'C.M<T>(string)'.
                 // /// <see cref="M{T}"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M{T}").WithArguments("M{T}", "C.M<T>(int)", "C.M<T>(string)"),
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M{T}")
+                    .WithArguments("M{T}", "C.M<T>(int)", "C.M<T>(string)"),
                 // (7,16): warning CS0419: Ambiguous reference in cref attribute: 'C.M'. Assuming 'C.M(int)', but could have also matched other overloads including 'C.M(string)'.
                 // /// <see cref="C.M"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C.M").WithArguments("C.M", "C.M(int)", "C.M(string)"),
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C.M")
+                    .WithArguments("C.M", "C.M(int)", "C.M(string)"),
                 // (9,16): warning CS0419: Ambiguous reference in cref attribute: 'C.M{T}'. Assuming 'C.M<T>(int)', but could have also matched other overloads including 'C.M<T>(string)'.
                 // /// <see cref="C.M{T}"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C.M{T}").WithArguments("C.M{T}", "C.M<T>(int)", "C.M<T>(string)"));
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C.M{T}")
+                    .WithArguments("C.M{T}", "C.M<T>(int)", "C.M<T>(string)")
+            );
 
             var expected = @"
 <?xml version=""1.0""?>
@@ -4904,7 +5454,8 @@ class C
         [Fact]
         public void GenericMethodWithoutTypeParameters2()
         {
-            var source = @"
+            var source =
+                @"
 /// <see cref=""M""/>
 /// <see cref=""M(int)""/>
 /// <see cref=""M{T}""/>
@@ -4925,25 +5476,33 @@ class C
 ";
             var comp = CreateCompilationUtil(source);
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,16): warning CS0419: Ambiguous reference in cref attribute: 'M'. Assuming 'C.M<T>(int)', but could have also matched other overloads including 'C.M<T>(string)'.
                 // /// <see cref="M"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M").WithArguments("M", "C.M<T>(int)", "C.M<T>(string)"),
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M")
+                    .WithArguments("M", "C.M<T>(int)", "C.M<T>(string)"),
                 // (3,16): warning CS0419: Ambiguous reference in cref attribute: 'M(int)'. Assuming 'C.M<T>(int)', but could have also matched other overloads including 'C.M<T, U>(int)'.
                 // /// <see cref="M(int)"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M(int)").WithArguments("M(int)", "C.M<T>(int)", "C.M<T, U>(int)"),
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M(int)")
+                    .WithArguments("M(int)", "C.M<T>(int)", "C.M<T, U>(int)"),
                 // (4,16): warning CS0419: Ambiguous reference in cref attribute: 'M{T}'. Assuming 'C.M<T>(int)', but could have also matched other overloads including 'C.M<T>(string)'.
                 // /// <see cref="M{T}"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M{T}").WithArguments("M{T}", "C.M<T>(int)", "C.M<T>(string)"),
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M{T}")
+                    .WithArguments("M{T}", "C.M<T>(int)", "C.M<T>(string)"),
                 // (7,16): warning CS0419: Ambiguous reference in cref attribute: 'C.M'. Assuming 'C.M<T>(int)', but could have also matched other overloads including 'C.M<T>(string)'.
                 // /// <see cref="C.M"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C.M").WithArguments("C.M", "C.M<T>(int)", "C.M<T>(string)"),
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C.M")
+                    .WithArguments("C.M", "C.M<T>(int)", "C.M<T>(string)"),
                 // (8,16): warning CS0419: Ambiguous reference in cref attribute: 'C.M(int)'. Assuming 'C.M<T>(int)', but could have also matched other overloads including 'C.M<T, U>(int)'.
                 // /// <see cref="C.M(int)"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C.M(int)").WithArguments("C.M(int)", "C.M<T>(int)", "C.M<T, U>(int)"),
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C.M(int)")
+                    .WithArguments("C.M(int)", "C.M<T>(int)", "C.M<T, U>(int)"),
                 // (9,16): warning CS0419: Ambiguous reference in cref attribute: 'C.M{T}'. Assuming 'C.M<T>(int)', but could have also matched other overloads including 'C.M<T>(string)'.
                 // /// <see cref="C.M{T}"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C.M{T}").WithArguments("C.M{T}", "C.M<T>(int)", "C.M<T>(string)"));
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "C.M{T}")
+                    .WithArguments("C.M{T}", "C.M<T>(int)", "C.M<T>(string)")
+            );
 
             var expected = @"
 <?xml version=""1.0""?>
@@ -4973,7 +5532,8 @@ class C
         [Fact]
         public void GenericMethodWithoutTypeParameters3()
         {
-            var source = @"
+            var source =
+                @"
 /// <see cref=""M""/>
 /// <see cref=""M(int)""/>
 /// 
@@ -4992,10 +5552,13 @@ class C
 ";
             var comp = CreateCompilationUtil(source);
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (5,16): warning CS0419: Ambiguous reference in cref attribute: 'N'. Assuming 'C.N(int)', but could have also matched other overloads including 'C.N(string)'.
                 // /// <see cref="N"/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "N").WithArguments("N", "C.N(int)", "C.N(string)"));
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "N")
+                    .WithArguments("N", "C.N(int)", "C.N(string)")
+            );
 
             var expected = @"
 <?xml version=""1.0""?>
@@ -5021,7 +5584,8 @@ class C
         [Fact]
         public void NestedGenericTypes()
         {
-            var source = @"
+            var source =
+                @"
 class A<TA1, TA2>
 {
     class B<TB1, TB2>
@@ -5059,7 +5623,8 @@ class A<TA1, TA2>
         [Fact]
         public void WhitespaceAroundCref()
         {
-            var source = @"
+            var source =
+                @"
 /// <see cref=""   A   ""/>
 class A { }
 ";
@@ -5086,7 +5651,8 @@ class A { }
         [Fact]
         public void TypeParamRef_ContainingType()
         {
-            var source = @"
+            var source =
+                @"
 class A<T>
 {
     class B
@@ -5148,8 +5714,11 @@ class A<T>
         [Fact]
         public void IllegalXmlCharacter()
         {
-            var source = @"
-/// <" + "\u037F" + @"/>
+            var source =
+                @"
+/// <"
+                + "\u037F"
+                + @"/>
 class A { }
 ";
             var comp = CreateCompilationUtil(source);
@@ -5175,7 +5744,8 @@ class A { }
         [WorkItem(18610, "https://github.com/dotnet/roslyn/issues/18610")]
         public void UndeclaredXmlNamespace()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// Implement of the bindable radio button
 ///             
@@ -5203,10 +5773,13 @@ class A { }
 ";
             var comp = CreateCompilationUtil(source);
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,4): warning CS1570: XML comment has badly formed XML -- ''WpfUtils' is an undeclared prefix.'
                 // /// <summary>
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("'WpfUtils' is an undeclared prefix."));
+                Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                    .WithArguments("'WpfUtils' is an undeclared prefix.")
+            );
 
             var expected = @"
 <?xml version=""1.0""?>
@@ -5226,7 +5799,8 @@ class A { }
         [Fact]
         public void MultiLine_OneLinePlusEnding()
         {
-            var source = @"
+            var source =
+                @"
 /** Stuff
 */
 class C { }
@@ -5255,7 +5829,8 @@ class C { }
         [Fact]
         public void FormatBeforeFinalParse()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// Get the syntax node(s) where this symbol was declared in source. Some symbols (for
 /// example, partial classes) may be defined in more than one location. This property should
@@ -5279,10 +5854,16 @@ class C { }
 ";
             var comp = CreateCompilationUtil(source);
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (19,11): warning CS1574: XML comment has cref attribute 'SemanticModel.GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)' that could not be resolved
                 // /// cref="SemanticModel.GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "SemanticModel.GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)").WithArguments("GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)"));
+                Diagnostic(
+                        ErrorCode.WRN_BadXMLRef,
+                        "SemanticModel.GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)"
+                    )
+                    .WithArguments("GetDeclaredSymbol(MemberDeclarationSyntax, CancellationToken)")
+            );
 
             var expected = @"
 <?xml version=""1.0""?>
@@ -5322,7 +5903,8 @@ class C { }
         [Fact]
         public void DeclaringGenericTypeInReturnType()
         {
-            var source = @"
+            var source =
+                @"
 /// <see cref='System.Nullable{T}.op_Implicit'/>
 class C { }
 ";
@@ -5350,7 +5932,8 @@ class C { }
         [Fact]
         public void DeclaringGenericTypeInParameterType1()
         {
-            var source = @"
+            var source =
+                @"
 /// <see cref=""C{T}.M""/>
 /// <see cref=""M""/>
 class C<T>
@@ -5383,7 +5966,8 @@ class C<T>
         [Fact]
         public void DeclaringGenericTypeInParameterType2()
         {
-            var source = @"
+            var source =
+                @"
 class B<U>
 {
     /// <see cref=""M1""/>
@@ -5426,7 +6010,8 @@ class B<U>
         [Fact]
         public void MultipleDocComments()
         {
-            var source = @"
+            var source =
+                @"
 /** Multiline 1. */
 /** Multiline 2. */
 public class A { }
@@ -5482,7 +6067,8 @@ public partial class C { }
         [Fact]
         public void MultipleDocComments_Separated()
         {
-            var source = @"
+            var source =
+                @"
 /** Multiline 1. */
 // Normal single-line comment.
 /** Multiline 2. */
@@ -5512,7 +6098,8 @@ public class E { }
 ";
             var comp = CreateCompilationUtil(source);
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,1): warning CS1587: XML comment is not placed on a valid language element
                 // /** Multiline 1. */
                 Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
@@ -5524,7 +6111,8 @@ public class E { }
                 Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"),
                 // (24,1): warning CS1587: XML comment is not placed on a valid language element
                 // /** Multiline 1. */
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/"));
+                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/")
+            );
 
             var expected = @"
 <?xml version=""1.0""?>
@@ -5559,7 +6147,8 @@ public class E { }
         [Fact]
         public void MultipleDocComments_SplitXml()
         {
-            var source = @"
+            var source =
+                @"
 /** <tag> */
 /** </tag> */
 public class A { }
@@ -5588,7 +6177,8 @@ public class A { }
         [Fact]
         public void TriviaBetweenDocCommentAndDeclaration()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary/>
 // Single-line comment.
 /* Multi-line comment. */
@@ -5624,7 +6214,8 @@ public class A { }
         [Fact]
         public void NonGenericBeatsGeneric()
         {
-            var source = @"
+            var source =
+                @"
 /// <see cref='M(string)'/>
 public class C
 {
@@ -5656,7 +6247,8 @@ public class C
         [Fact]
         public void ObjectMemberViaInterface()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 /// Comment
@@ -5670,10 +6262,13 @@ public class C : IEquatable<C>
 ";
             var comp = CreateCompilationUtil(source);
 
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (7,31): warning CS1574: XML comment has cref attribute 'IEquatable{T}.GetHashCode' that could not be resolved
                 //     /// Implements <see cref="IEquatable{T}.GetHashCode"/>.
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "IEquatable{T}.GetHashCode").WithArguments("GetHashCode"));
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "IEquatable{T}.GetHashCode")
+                    .WithArguments("GetHashCode")
+            );
 
             var expected = @"
 <?xml version=""1.0""?>
@@ -5699,7 +6294,8 @@ public class C : IEquatable<C>
         [ClrOnlyFact]
         public void Pia()
         {
-            var source = @"
+            var source =
+                @"
 /// <see cref='FooStruct'/>
 /// <see cref='FooStruct.NET'/>
 public class C { }
@@ -5724,7 +6320,10 @@ public class C { }
                 ((PEModuleSymbol)module).Module.PretendThereArentNoPiaLocalTypes();
 
                 // No reference added.
-                AssertEx.None(module.GetReferencedAssemblies(), id => id.Name.Contains("GeneralPia"));
+                AssertEx.None(
+                    module.GetReferencedAssemblies(),
+                    id => id.Name.Contains("GeneralPia")
+                );
 
                 // No type embedded.
                 Assert.Equal(0, module.GlobalNamespace.GetMembers("FooStruct").Length);
@@ -5732,7 +6331,9 @@ public class C { }
 
             // Don't embed.
             {
-                var reference = TestReferences.SymbolsTests.NoPia.GeneralPia.WithEmbedInteropTypes(false);
+                var reference = TestReferences.SymbolsTests.NoPia.GeneralPia.WithEmbedInteropTypes(
+                    false
+                );
                 var comp = CreateCompilationUtil(source, new[] { reference });
                 var actual = GetDocumentationCommentText(comp);
                 Assert.Equal(expected, actual);
@@ -5742,7 +6343,9 @@ public class C { }
 
             // Do embed.
             {
-                var reference = TestReferences.SymbolsTests.NoPia.GeneralPia.WithEmbedInteropTypes(true);
+                var reference = TestReferences.SymbolsTests.NoPia.GeneralPia.WithEmbedInteropTypes(
+                    true
+                );
                 var comp = CreateCompilationUtil(source, new[] { reference });
                 var actual = GetDocumentationCommentText(comp);
                 Assert.Equal(expected, actual);
@@ -5755,7 +6358,8 @@ public class C { }
         [Fact]
         public void NoAssemblyElementForNetModule()
         {
-            var source = @"
+            var source =
+                @"
 /// <summary>Text</summary>
 public class C { }
 ";
@@ -5778,7 +6382,8 @@ public class C { }
         [Fact]
         public void WRN_UnqualifiedNestedTypeInCref()
         {
-            var source = @"
+            var source =
+                @"
 class C<T>
 {
     class Inner { }
@@ -5794,13 +6399,15 @@ class C<T>
 }
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (12,27): warning CS8018: Within cref attributes, nested types of generic types should be qualified.
                 //     /// <see cref="C{Q}.M(Inner)"/>
                 Diagnostic(ErrorCode.WRN_UnqualifiedNestedTypeInCref, "Inner"),
                 // (12,20): warning CS1574: XML comment has cref attribute 'C{Q}.M(Inner)' that could not be resolved
                 //     /// <see cref="C{Q}.M(Inner)"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "C{Q}.M(Inner)").WithArguments("M(Inner)"));
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "C{Q}.M(Inner)").WithArguments("M(Inner)")
+            );
             var expected = @"
 <?xml version=""1.0""?>
 <doc>
@@ -5825,7 +6432,8 @@ class C<T>
         [Fact]
         public void WRN_UnqualifiedNestedTypeInCref_Buried()
         {
-            var source = @"
+            var source =
+                @"
 class C<T>
 {
     class Inner { }
@@ -5838,13 +6446,16 @@ class C<T>
 }
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (8,27): warning CS8018: Within cref attributes, nested types of generic types should be qualified.
                 //     /// <see cref="C{Q}.M(C{Inner[]})"/>
                 Diagnostic(ErrorCode.WRN_UnqualifiedNestedTypeInCref, "C{Inner[]}"),
                 // (8,20): warning CS1574: XML comment has cref attribute 'C{Q}.M(C{Inner[]})' that could not be resolved
                 //     /// <see cref="C{Q}.M(C{Inner[]})"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "C{Q}.M(C{Inner[]})").WithArguments("M(C{Inner[]})"));
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "C{Q}.M(C{Inner[]})")
+                    .WithArguments("M(C{Inner[]})")
+            );
             var expected = @"
 <?xml version=""1.0""?>
 <doc>
@@ -5866,7 +6477,8 @@ class C<T>
         [Fact]
         public void WRN_UnqualifiedNestedTypeInCref_Generic()
         {
-            var source = @"
+            var source =
+                @"
 class C<T>
 {
     class Inner<U> { }
@@ -5879,13 +6491,16 @@ class C<T>
 }
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (9,27): warning CS8018: Within cref attributes, nested types of generic types should be qualified.
                 //     /// <see cref="C{Q}.M(Inner{int})"/>
                 Diagnostic(ErrorCode.WRN_UnqualifiedNestedTypeInCref, "Inner{int}"),
                 // (9,20): warning CS1574: XML comment has cref attribute 'C{Q}.M(Inner{int})' that could not be resolved
                 //     /// <see cref="C{Q}.M(Inner{int})"/>
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "C{Q}.M(Inner{int})").WithArguments("M(Inner{int})"));
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "C{Q}.M(Inner{int})")
+                    .WithArguments("M(Inner{int})")
+            );
             var expected = @"
 <?xml version=""1.0""?>
 <doc>
@@ -5911,16 +6526,23 @@ class C<T>
         public void Dev11_422418()
         {
             // Warn-as-error
-            var source = @"
+            var source =
+                @"
 public class C {} // CS1587
 ";
 
             var tree = Parse(source, options: TestOptions.RegularWithDocumentationComments);
-            var compOptions = TestOptions.ReleaseDll.WithGeneralDiagnosticOption(ReportDiagnostic.Error);
-            CreateCompilation(tree, options: compOptions).VerifyDiagnostics(
-                // (2,14): error CS1591: Warning as Error: Missing XML comment for publicly visible type or member 'C'
-                // public class C {} // CS1587
-                Diagnostic(ErrorCode.WRN_MissingXMLComment, "C").WithArguments("C").WithWarningAsError(true));
+            var compOptions = TestOptions.ReleaseDll.WithGeneralDiagnosticOption(
+                ReportDiagnostic.Error
+            );
+            CreateCompilation(tree, options: compOptions)
+                .VerifyDiagnostics(
+                    // (2,14): error CS1591: Warning as Error: Missing XML comment for publicly visible type or member 'C'
+                    // public class C {} // CS1587
+                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "C")
+                        .WithArguments("C")
+                        .WithWarningAsError(true)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), typeof(DesktopOnly))]
@@ -5928,17 +6550,23 @@ public class C {} // CS1587
         public void Dev11_303769()
         {
             // XML processing instructions
-            var source = @"
+            var source =
+                @"
 /// <summary>
 /// <?xml:a ?>
 /// </summary>
 class C { }
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,4): warning CS1570: XML comment has badly formed XML -- 'The ':' character, hexadecimal value 0x3A, cannot be included in a name.'
                 // /// <summary>
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("The ':' character, hexadecimal value 0x3A, cannot be included in a name."));
+                Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                    .WithArguments(
+                        "The ':' character, hexadecimal value 0x3A, cannot be included in a name."
+                    )
+            );
 
             var expected = @"
 <?xml version=""1.0""?>
@@ -5958,7 +6586,8 @@ class C { }
         public void Dev11_275507()
         {
             // Array rank specifier order
-            var source = @"
+            var source =
+                @"
 class Program
 {
     /**
@@ -6015,7 +6644,8 @@ class Program
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
             var xmlFilePath = xmlFile.Path;
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// <summary> 
 /// ... 
 /// </summary> 
@@ -6060,9 +6690,10 @@ public class C {{ }}
         public void Dev11_209994()
         {
             // Array rank specifier order
-            // NOTE: the remark on the method is copied directly from the bug - 
+            // NOTE: the remark on the method is copied directly from the bug -
             // it does not correctly indicate the doc comment ID of the method.
-            var source = @"
+            var source =
+                @"
 namespace Demo
 {
     public class Example
@@ -6075,10 +6706,12 @@ namespace Demo
 }
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (4,18): warning CS1591: Missing XML comment for publicly visible type or member 'Demo.Example'
                 //     public class Example
-                Diagnostic(ErrorCode.WRN_MissingXMLComment, "Example").WithArguments("Demo.Example"));
+                Diagnostic(ErrorCode.WRN_MissingXMLComment, "Example").WithArguments("Demo.Example")
+            );
             var expected = @"
 <?xml version=""1.0""?>
 <doc>
@@ -6107,11 +6740,20 @@ namespace Demo
             string fileName = Path.GetFileName(fullPath);
             string dirPath = Path.GetDirectoryName(fullPath);
 
-            var source = @"
-/// <include file='" + fullPath + @"' path='hello'/>
-/// <include file='" + fullPath + @"' path='hello'/>
-/// <include file='" + Path.Combine(dirPath, "a/..", fileName) + @"' path='hello'/>
-/// <include file='" + Path.Combine(dirPath, @"a\b/../..", fileName) + @"' path='hello'/>
+            var source =
+                @"
+/// <include file='"
+                + fullPath
+                + @"' path='hello'/>
+/// <include file='"
+                + fullPath
+                + @"' path='hello'/>
+/// <include file='"
+                + Path.Combine(dirPath, "a/..", fileName)
+                + @"' path='hello'/>
+/// <include file='"
+                + Path.Combine(dirPath, @"a\b/../..", fileName)
+                + @"' path='hello'/>
 class C { }
 ";
 
@@ -6126,16 +6768,24 @@ class C { }
 
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText("<hello/>");
 
-            var source = @"
-/// <include file='file://" + xmlFile.Path + @"' path='hello'/>
+            var source =
+                @"
+/// <include file='file://"
+                + xmlFile.Path
+                + @"' path='hello'/>
 class C { }
 ";
 
-            CreateCompilationUtil(source).VerifyDiagnostics(
-                // (2,5): warning CS1589: Unable to include XML fragment 'hello' of file '' -- Unable to find the specified file.
-                Diagnostic(ErrorCode.WRN_FailedInclude,
-                @"<include file='file://" + xmlFile.Path + @"' path='hello'/>").
-                WithArguments("file://" + xmlFile.Path, "hello", "File not found.").WithLocation(2, 5));
+            CreateCompilationUtil(source)
+                .VerifyDiagnostics(
+                    // (2,5): warning CS1589: Unable to include XML fragment 'hello' of file '' -- Unable to find the specified file.
+                    Diagnostic(
+                            ErrorCode.WRN_FailedInclude,
+                            @"<include file='file://" + xmlFile.Path + @"' path='hello'/>"
+                        )
+                        .WithArguments("file://" + xmlFile.Path, "hello", "File not found.")
+                        .WithLocation(2, 5)
+                );
         }
 
         [Fact]
@@ -6149,21 +6799,32 @@ class C { }
             string dirPath = Path.GetDirectoryName(xmlFile.Path);
             string sourcePath = Path.Combine(dirPath, "test.cs");
 
-            var source = @"
+            var source =
+                @"
 #line 200 ""C:\path\that\doesnt\exist.cs""
-/// <include file='" + xmlFilePath + @"' path='hello'/>
+/// <include file='"
+                + xmlFilePath
+                + @"' path='hello'/>
 class C { }
 ";
 
             var comp = CreateCompilation(
-                Parse(source, options: TestOptions.RegularWithDocumentationComments, filename: sourcePath),
-                options: TestOptions.ReleaseDll.WithSourceReferenceResolver(SourceFileResolver.Default).WithXmlReferenceResolver(XmlFileResolver.Default),
-                assemblyName: "Test");
+                Parse(
+                    source,
+                    options: TestOptions.RegularWithDocumentationComments,
+                    filename: sourcePath
+                ),
+                options: TestOptions.ReleaseDll.WithSourceReferenceResolver(
+                        SourceFileResolver.Default
+                    )
+                    .WithXmlReferenceResolver(XmlFileResolver.Default),
+                assemblyName: "Test"
+            );
 
             var actual = GetDocumentationCommentText(comp);
 
             var expected =
-@"<?xml version=""1.0""?>
+                @"<?xml version=""1.0""?>
 <doc>
     <assembly>
         <name>Test</name>
@@ -6181,8 +6842,9 @@ class C { }
         [WorkItem(18610, "https://github.com/dotnet/roslyn/issues/18610")]
         public void DtdDenialOfService()
         {
-            var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(
-@"<?xml version=""1.0""?>
+            var xmlFile = Temp.CreateFile(extension: ".xml")
+                .WriteAllText(
+                    @"<?xml version=""1.0""?>
 <!DOCTYPE root [
   <!ENTITY expand ""expand"">
   <!ENTITY expand2 ""&expand;&expand;&expand;&expand;&expand;&expand;&expand;&expand;&expand;&expand;"">
@@ -6195,14 +6857,25 @@ class C { }
   <!ENTITY expand9 ""&expand8;&expand8;&expand8;&expand8;&expand8;&expand8;&expand8;&expand8;&expand8;&expand8;"">
 ]>
 <root>&expand9;</root>
-");
-            var source = @"
-/// <include file='" + xmlFile.Path + @"' path='hello'/>
+"
+                );
+            var source =
+                @"
+/// <include file='"
+                + xmlFile.Path
+                + @"' path='hello'/>
 class C { }
 ";
 
-            CreateCompilationUtil(source).GetDiagnostics().VerifyWithFallbackToErrorCodeOnlyForNonEnglish(
-                Diagnostic(ErrorCode.WRN_XMLParseIncludeError).WithArguments("For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.").WithLocation(1, 1));
+            CreateCompilationUtil(source)
+                .GetDiagnostics()
+                .VerifyWithFallbackToErrorCodeOnlyForNonEnglish(
+                    Diagnostic(ErrorCode.WRN_XMLParseIncludeError)
+                        .WithArguments(
+                            "For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method."
+                        )
+                        .WithLocation(1, 1)
+                );
         }
 
         #endregion Dev11 bugs
@@ -6248,10 +6921,12 @@ class C { }
             var xmlFilePath = xmlFile.Path;
             xmlFile.WriteAllText(string.Format(xmlTemplate, xmlFilePath));
 
-            var includeElementTemplate = @"<include file=""{0}"" path=""docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*""/>";
+            var includeElementTemplate =
+                @"<include file=""{0}"" path=""docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*""/>";
             var includeElement = string.Format(includeElementTemplate, xmlFilePath);
 
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /// {0}
 class C
 {{
@@ -6260,20 +6935,24 @@ class C
 ";
 
             var comp = CreateCompilationUtil(string.Format(sourceTemplate, includeElement));
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,5): warning CS1711: XML comment has a typeparam tag for 'T', but there is no type parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
                 Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("T"),
                 // (2,5): warning CS1711: XML comment has a typeparam tag for 'TComparator', but there is no type parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("TComparator"),
+                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                    .WithArguments("TComparator"),
                 // (2,5): warning CS1572: XML comment has a param tag for 'array', but there is no parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, includeElement).WithArguments("array"),
                 // (2,5): warning CS1572: XML comment has a param tag for 'value', but there is no parameter by that name
                 // /// <include file="52f50b557f3d.xml" path="docs/doc[@name=&quot;ArrayExtensions.BinarySearch(ArrayType,T)&quot;]/*"/>
-                Diagnostic(ErrorCode.WRN_UnmatchedParamTag, includeElement).WithArguments("value"));
-            var expected = (@"
+                Diagnostic(ErrorCode.WRN_UnmatchedParamTag, includeElement).WithArguments("value")
+            );
+            var expected = (
+                @"
 <?xml version=""1.0""?>
 <doc>
     <assembly>
@@ -6281,17 +6960,18 @@ class C
     </assembly>
     <members>
         <member name=""T:C"">
-            <overloads>Searches a sorted array for a value using a binary search algorithm.</overloads><typeparam name=""T"">" +
-            @"The type of items in the array.</typeparam><typeparam name=""TComparator"">The type of comparator used to compare " +
-            @"items during the search operation.</typeparam><param name=""array"">The sorted array to search.</param><param name=""value"">" +
-            @"The object to search for.</param><returns>If found, the index of the specified value in the given array. Otherwise, if not " +
-            @"found, and the value is less than one or more items in the array, a negative number which is the bitwise complement of the " +
-            @"index of the first item that is larger than the given value. If the value is not found and it is greater than any of the items " +
-            @"in the array, a negative number which is the bitwise complement of (the index of the last item plus 1).</returns>
+            <overloads>Searches a sorted array for a value using a binary search algorithm.</overloads><typeparam name=""T"">"
+                + @"The type of items in the array.</typeparam><typeparam name=""TComparator"">The type of comparator used to compare "
+                + @"items during the search operation.</typeparam><param name=""array"">The sorted array to search.</param><param name=""value"">"
+                + @"The object to search for.</param><returns>If found, the index of the specified value in the given array. Otherwise, if not "
+                + @"found, and the value is less than one or more items in the array, a negative number which is the bitwise complement of the "
+                + @"index of the first item that is larger than the given value. If the value is not found and it is greater than any of the items "
+                + @"in the array, a negative number which is the bitwise complement of (the index of the last item plus 1).</returns>
         </member>
     </members>
 </doc>
-").Trim();
+"
+            ).Trim();
             Assert.Equal(expected, actual);
         }
 
@@ -6299,7 +6979,8 @@ class C
         public void Dev10_785160()
         {
             // Someone suggested preferring the more public member in case of ambiguity, but it was not implemented.
-            var source = @"
+            var source =
+                @"
 /// <see cref='M'/>
 class C
 {
@@ -6308,10 +6989,13 @@ class C
 }
 ";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // (2,16): warning CS0419: Ambiguous reference in cref attribute: 'M'. Assuming 'C.M(char)', but could have also matched other overloads including 'C.M(int)'.
                 // /// <see cref='M'/>
-                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M").WithArguments("M", "C.M(char)", "C.M(int)"));
+                Diagnostic(ErrorCode.WRN_AmbiguousXMLReference, "M")
+                    .WithArguments("M", "C.M(char)", "C.M(int)")
+            );
             var expected = @"
 <?xml version=""1.0""?>
 <doc>
@@ -6332,7 +7016,8 @@ class C
         public void Dev10_747421()
         {
             // Bad XML.
-            var source = @"
+            var source =
+                @"
 class Module1
 {
     ///<summary>
@@ -6346,7 +7031,8 @@ class Module1
             comp.VerifyDiagnostics(
                 // (7,18): warning CS1570: XML comment has badly formed XML -- 'An identifier was expected.'
                 //     ///<remarks><</remarks>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""));
+                Diagnostic(ErrorCode.WRN_XMLParseError, "")
+            );
             var actual = GetDocumentationCommentText(comp);
             var expected = @"
 <?xml version=""1.0""?>
@@ -6368,7 +7054,8 @@ class Module1
         [WorkItem(1115058, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1115058")]
         public void UnterminatedElement()
         {
-            var source = @"
+            var source =
+                @"
 class Module1
 {
     ///<summary>
@@ -6381,13 +7068,18 @@ class Module1
 }";
             var comp = CreateCompilationUtil(source, options: TestOptions.ReleaseExe);
 
-            CompileAndVerify(comp, expectedOutput: "Here").VerifyDiagnostics(
-    // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
-    //     static void Main()
-    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("summary").WithLocation(7, 1),
-    // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
-    //     static void Main()
-    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("summary").WithLocation(7, 1)
+            CompileAndVerify(comp, expectedOutput: "Here")
+                .VerifyDiagnostics(
+                    // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                    //     static void Main()
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                        .WithArguments("summary")
+                        .WithLocation(7, 1),
+                    // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                    //     static void Main()
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                        .WithArguments("summary")
+                        .WithLocation(7, 1)
                 );
         }
 
@@ -6401,16 +7093,21 @@ class Module1
         {
             var dir = Temp.CreateDirectory();
             var path = dir.Path;
-            var xmlFile = dir.CreateFile("---.xml").WriteAllText(@"<summary attrib="""" attrib=""""/>");
+            var xmlFile = dir.CreateFile("---.xml")
+                .WriteAllText(@"<summary attrib="""" attrib=""""/>");
             var source =
-$@"/// <include file='{Path.Combine(path, "---.xml")}' path='//summary'/>
+                $@"/// <include file='{Path.Combine(path, "---.xml")}' path='//summary'/>
 class C {{ }}";
             var comp = CreateCompilationUtil(source);
-            var actual = GetDocumentationCommentText(comp,
+            var actual = GetDocumentationCommentText(
+                comp,
                 // warning CS1592: Badly formed XML in included comments file -- ''attrib' is a duplicate attribute name.'
-                Diagnostic(ErrorCode.WRN_XMLParseIncludeError).WithArguments("'attrib' is a duplicate attribute name.").WithLocation(1, 1));
+                Diagnostic(ErrorCode.WRN_XMLParseIncludeError)
+                    .WithArguments("'attrib' is a duplicate attribute name.")
+                    .WithLocation(1, 1)
+            );
             var expected =
-$@"<?xml version=""1.0""?>
+                $@"<?xml version=""1.0""?>
 <doc>
     <assembly>
         <name>Test</name>

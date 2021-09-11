@@ -39,7 +39,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void Ctor_InvalidHostName_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>("hostname", () => new UdpClient(null, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "hostname",
+                () => new UdpClient(null, 0)
+            );
         }
 
         [Theory]
@@ -48,9 +51,18 @@ namespace System.Net.Sockets.Tests
         public void Ctor_InvalidPort_Throws(int port)
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => new UdpClient(port));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => new UdpClient(port, AddressFamily.InterNetwork));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => new UdpClient(port, AddressFamily.InterNetworkV6));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => new UdpClient("localhost", port));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "port",
+                () => new UdpClient(port, AddressFamily.InterNetwork)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "port",
+                () => new UdpClient(port, AddressFamily.InterNetworkV6)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "port",
+                () => new UdpClient("localhost", port)
+            );
         }
 
         [Fact]
@@ -65,7 +77,10 @@ namespace System.Net.Sockets.Tests
         {
             using (var udpClient = new DerivedUdpClient())
             {
-                Assert.Equal(1, udpClient.Send(new byte[1], 1, new IPEndPoint(IPAddress.Loopback, UnusedPort)));
+                Assert.Equal(
+                    1,
+                    udpClient.Send(new byte[1], 1, new IPEndPoint(IPAddress.Loopback, UnusedPort))
+                );
                 Assert.False(udpClient.Active);
             }
         }
@@ -78,7 +93,14 @@ namespace System.Net.Sockets.Tests
             {
                 using (var udpClient = new UdpClient(UnusedPort))
                 {
-                    Assert.Equal(1, udpClient.Send(new byte[1], 1, new IPEndPoint(IPAddress.Loopback, UnusedPort)));
+                    Assert.Equal(
+                        1,
+                        udpClient.Send(
+                            new byte[1],
+                            1,
+                            new IPEndPoint(IPAddress.Loopback, UnusedPort)
+                        )
+                    );
                 }
             }
             catch (SocketException e)
@@ -96,7 +118,14 @@ namespace System.Net.Sockets.Tests
             {
                 using (var udpClient = new UdpClient(UnusedPort, AddressFamily.InterNetwork))
                 {
-                    Assert.Equal(1, udpClient.Send(new byte[1], 1, new IPEndPoint(IPAddress.Loopback, UnusedPort)));
+                    Assert.Equal(
+                        1,
+                        udpClient.Send(
+                            new byte[1],
+                            1,
+                            new IPEndPoint(IPAddress.Loopback, UnusedPort)
+                        )
+                    );
                 }
             }
             catch (SocketException e)
@@ -114,7 +143,14 @@ namespace System.Net.Sockets.Tests
             {
                 using (var udpClient = new UdpClient(UnusedPort, AddressFamily.InterNetworkV6))
                 {
-                    Assert.Equal(1, udpClient.Send(new byte[1], 1, new IPEndPoint(IPAddress.IPv6Loopback, UnusedPort)));
+                    Assert.Equal(
+                        1,
+                        udpClient.Send(
+                            new byte[1],
+                            1,
+                            new IPEndPoint(IPAddress.IPv6Loopback, UnusedPort)
+                        )
+                    );
                 }
             }
             catch (SocketException e)
@@ -132,7 +168,14 @@ namespace System.Net.Sockets.Tests
             {
                 using (var udpClient = new UdpClient(new IPEndPoint(IPAddress.IPv6Any, UnusedPort)))
                 {
-                    Assert.Equal(1, udpClient.Send(new byte[1], 1, new IPEndPoint(IPAddress.IPv6Loopback, UnusedPort)));
+                    Assert.Equal(
+                        1,
+                        udpClient.Send(
+                            new byte[1],
+                            1,
+                            new IPEndPoint(IPAddress.IPv6Loopback, UnusedPort)
+                        )
+                    );
                 }
             }
             catch (SocketException e)
@@ -162,25 +205,41 @@ namespace System.Net.Sockets.Tests
 
             for (int i = 0; i < 2; i++) // verify double dispose doesn't throw
             {
-                if (close) udpClient.Close();
-                else udpClient.Dispose();
+                if (close)
+                    udpClient.Close();
+                else
+                    udpClient.Dispose();
             }
 
             IPEndPoint remoteEP = null;
 
-            Assert.Throws<ObjectDisposedException>(() => udpClient.BeginSend(new byte[1], 1, null, null));
+            Assert.Throws<ObjectDisposedException>(
+                () => udpClient.BeginSend(new byte[1], 1, null, null)
+            );
             Assert.Throws<ObjectDisposedException>(() => udpClient.EndSend(null));
 
             Assert.Throws<ObjectDisposedException>(() => udpClient.BeginReceive(null, null));
             Assert.Throws<ObjectDisposedException>(() => udpClient.EndReceive(null, ref remoteEP));
 
-            Assert.Throws<ObjectDisposedException>(() => udpClient.JoinMulticastGroup(IPAddress.Loopback));
-            Assert.Throws<ObjectDisposedException>(() => udpClient.JoinMulticastGroup(IPAddress.Loopback, IPAddress.Loopback));
-            Assert.Throws<ObjectDisposedException>(() => udpClient.JoinMulticastGroup(0, IPAddress.Loopback));
-            Assert.Throws<ObjectDisposedException>(() => udpClient.JoinMulticastGroup(IPAddress.Loopback, 0));
+            Assert.Throws<ObjectDisposedException>(
+                () => udpClient.JoinMulticastGroup(IPAddress.Loopback)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => udpClient.JoinMulticastGroup(IPAddress.Loopback, IPAddress.Loopback)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => udpClient.JoinMulticastGroup(0, IPAddress.Loopback)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => udpClient.JoinMulticastGroup(IPAddress.Loopback, 0)
+            );
 
-            Assert.Throws<ObjectDisposedException>(() => udpClient.DropMulticastGroup(IPAddress.Loopback));
-            Assert.Throws<ObjectDisposedException>(() => udpClient.DropMulticastGroup(IPAddress.Loopback, 0));
+            Assert.Throws<ObjectDisposedException>(
+                () => udpClient.DropMulticastGroup(IPAddress.Loopback)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => udpClient.DropMulticastGroup(IPAddress.Loopback, 0)
+            );
 
             Assert.Throws<ObjectDisposedException>(() => udpClient.Connect(null));
             Assert.Throws<ObjectDisposedException>(() => udpClient.Connect(IPAddress.Loopback, 0));
@@ -207,7 +266,8 @@ namespace System.Net.Sockets.Tests
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static WeakReference<UdpClient> CreateAndDiscardUdpClient() => new WeakReference<UdpClient>(new DerivedUdpClient());
+        private static WeakReference<UdpClient> CreateAndDiscardUdpClient() =>
+            new WeakReference<UdpClient>(new DerivedUdpClient());
 
         [Fact]
         public void Active_Roundtrips()
@@ -255,7 +315,10 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        [SkipOnPlatform(TestPlatforms.OSX | TestPlatforms.FreeBSD, "BSD like doesn't have an equivalent of DontFragment")]
+        [SkipOnPlatform(
+            TestPlatforms.OSX | TestPlatforms.FreeBSD,
+            "BSD like doesn't have an equivalent of DontFragment"
+        )]
         [Fact]
         public void DontFragment_Roundtrips()
         {
@@ -282,7 +345,10 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         public void EnableBroadcast_Roundtrips()
         {
             using (var udpClient = new UdpClient())
@@ -314,9 +380,23 @@ namespace System.Net.Sockets.Tests
         {
             using (var udpClient = new UdpClient("localhost", UnusedPort))
             {
-                AssertExtensions.Throws<ArgumentNullException>("datagram", () => udpClient.BeginSend(null, 0, null, null));
-                Assert.Throws<InvalidOperationException>(() => udpClient.BeginSend(new byte[1], 1, "localhost", 0, null, null));
-                Assert.Throws<InvalidOperationException>(() => udpClient.BeginSend(new byte[1], 1, new IPEndPoint(IPAddress.Loopback, 0), null, null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "datagram",
+                    () => udpClient.BeginSend(null, 0, null, null)
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () => udpClient.BeginSend(new byte[1], 1, "localhost", 0, null, null)
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        udpClient.BeginSend(
+                            new byte[1],
+                            1,
+                            new IPEndPoint(IPAddress.Loopback, 0),
+                            null,
+                            null
+                        )
+                );
             }
         }
 
@@ -329,10 +409,19 @@ namespace System.Net.Sockets.Tests
                 byte[] sendBytes = new byte[1];
                 IPEndPoint remoteServer = new IPEndPoint(IPAddress.Loopback, UnusedPort);
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("bytes", () =>
-                {
-                    udpClient.BeginSend(sendBytes, -1, remoteServer, new AsyncCallback(AsyncCompleted), udpClient);
-                });
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "bytes",
+                    () =>
+                    {
+                        udpClient.BeginSend(
+                            sendBytes,
+                            -1,
+                            remoteServer,
+                            new AsyncCallback(AsyncCompleted),
+                            udpClient
+                        );
+                    }
+                );
             }
         }
 
@@ -345,10 +434,19 @@ namespace System.Net.Sockets.Tests
                 byte[] sendBytes = new byte[1];
                 IPEndPoint remoteServer = new IPEndPoint(IPAddress.Loopback, UnusedPort);
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("bytes", () =>
-                {
-                    udpClient.BeginSend(sendBytes, sendBytes.Length + 1, remoteServer, new AsyncCallback(AsyncCompleted), udpClient);
-                });
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "bytes",
+                    () =>
+                    {
+                        udpClient.BeginSend(
+                            sendBytes,
+                            sendBytes.Length + 1,
+                            remoteServer,
+                            new AsyncCallback(AsyncCompleted),
+                            udpClient
+                        );
+                    }
+                );
             }
         }
 
@@ -361,9 +459,18 @@ namespace System.Net.Sockets.Tests
                 byte[] sendBytes = new byte[1];
                 IPEndPoint remoteServer = new IPEndPoint(IPAddress.Loopback, UnusedPort);
                 _waitHandle.Reset();
-                udpClient.BeginSend(sendBytes, sendBytes.Length, remoteServer, new AsyncCallback(AsyncCompleted), udpClient);
+                udpClient.BeginSend(
+                    sendBytes,
+                    sendBytes.Length,
+                    remoteServer,
+                    new AsyncCallback(AsyncCompleted),
+                    udpClient
+                );
 
-                Assert.True(_waitHandle.WaitOne(TestSettings.PassingTestTimeout), "Timed out while waiting for connection");
+                Assert.True(
+                    _waitHandle.WaitOne(TestSettings.PassingTestTimeout),
+                    "Timed out while waiting for connection"
+                );
             }
         }
 
@@ -372,12 +479,23 @@ namespace System.Net.Sockets.Tests
         {
             using (var udpClient = new DerivedUdpClient())
             {
-                AssertExtensions.Throws<ArgumentNullException>("dgram", () => udpClient.Send(null, 0));
-                AssertExtensions.Throws<ArgumentNullException>("dgram", () => udpClient.Send(null, 0, "localhost", 0));
-                AssertExtensions.Throws<ArgumentNullException>("dgram", () => udpClient.Send(null, 0, new IPEndPoint(IPAddress.Loopback, 0)));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "dgram",
+                    () => udpClient.Send(null, 0)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "dgram",
+                    () => udpClient.Send(null, 0, "localhost", 0)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "dgram",
+                    () => udpClient.Send(null, 0, new IPEndPoint(IPAddress.Loopback, 0))
+                );
                 Assert.Throws<InvalidOperationException>(() => udpClient.Send(new byte[1], 1));
                 udpClient.Active = true;
-                Assert.Throws<InvalidOperationException>(() => udpClient.Send(new byte[1], 1, new IPEndPoint(IPAddress.Loopback, 0)));
+                Assert.Throws<InvalidOperationException>(
+                    () => udpClient.Send(new byte[1], 1, new IPEndPoint(IPAddress.Loopback, 0))
+                );
             }
         }
 
@@ -387,7 +505,9 @@ namespace System.Net.Sockets.Tests
         {
             using (var udpClient = new UdpClient("localhost", 0))
             {
-                Assert.Throws<InvalidOperationException>(() => udpClient.Send(new byte[1], 1, "localhost", 0));
+                Assert.Throws<InvalidOperationException>(
+                    () => udpClient.Send(new byte[1], 1, "localhost", 0)
+                );
             }
         }
 
@@ -408,15 +528,36 @@ namespace System.Net.Sockets.Tests
         {
             using (var udpClient = new UdpClient())
             {
-                AssertExtensions.Throws<ArgumentNullException>("hostname", () => udpClient.Connect((string)null, 0));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => udpClient.Connect("localhost", -1));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => udpClient.Connect("localhost", 66000));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "hostname",
+                    () => udpClient.Connect((string)null, 0)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "port",
+                    () => udpClient.Connect("localhost", -1)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "port",
+                    () => udpClient.Connect("localhost", 66000)
+                );
 
-                AssertExtensions.Throws<ArgumentNullException>("addr", () => udpClient.Connect((IPAddress)null, 0));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => udpClient.Connect(IPAddress.Loopback, -1));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => udpClient.Connect(IPAddress.Loopback, 66000));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "addr",
+                    () => udpClient.Connect((IPAddress)null, 0)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "port",
+                    () => udpClient.Connect(IPAddress.Loopback, -1)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "port",
+                    () => udpClient.Connect(IPAddress.Loopback, 66000)
+                );
 
-                AssertExtensions.Throws<ArgumentNullException>("endPoint", () => udpClient.Connect(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "endPoint",
+                    () => udpClient.Connect(null)
+                );
             }
         }
 
@@ -469,7 +610,7 @@ namespace System.Net.Sockets.Tests
 
         [OuterLoop]
         [Theory]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Udp.AllowNatTraversal only supported on Windows
+        [PlatformSpecific(TestPlatforms.Windows)] // Udp.AllowNatTraversal only supported on Windows
         [InlineData(true, IPProtectionLevel.Unrestricted)]
         [InlineData(false, IPProtectionLevel.EdgeRestricted)]
         public void AllowNatTraversal_Windows(bool allow, IPProtectionLevel resultLevel)
@@ -477,13 +618,19 @@ namespace System.Net.Sockets.Tests
             using (var c = new UdpClient())
             {
                 c.AllowNatTraversal(allow);
-                Assert.Equal((int)resultLevel, (int)c.Client.GetSocketOption(SocketOptionLevel.IP, SocketOptionName.IPProtectionLevel));
+                Assert.Equal(
+                    (int)resultLevel,
+                    (int)c.Client.GetSocketOption(
+                        SocketOptionLevel.IP,
+                        SocketOptionName.IPProtectionLevel
+                    )
+                );
             }
         }
 
         [OuterLoop]
         [Theory]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Udp.AllowNatTraversal throws PNSE on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Udp.AllowNatTraversal throws PNSE on Unix
         [InlineData(true)]
         [InlineData(false)]
         public void AllowNatTraversal_AnyUnix(bool allow)
@@ -505,7 +652,11 @@ namespace System.Net.Sockets.Tests
             using (var receiver = new UdpClient(new IPEndPoint(address, 0)))
             using (var sender = new UdpClient(new IPEndPoint(address, 0)))
             {
-                sender.Send(new byte[1], 1, new IPEndPoint(address, ((IPEndPoint)receiver.Client.LocalEndPoint).Port));
+                sender.Send(
+                    new byte[1],
+                    1,
+                    new IPEndPoint(address, ((IPEndPoint)receiver.Client.LocalEndPoint).Port)
+                );
 
                 IPEndPoint remoteEP = null;
                 byte[] data = receiver.Receive(ref remoteEP);
@@ -520,8 +671,12 @@ namespace System.Net.Sockets.Tests
         public void Send_Receive_Connected_Success()
         {
             using (var receiver = new UdpClient("localhost", 0))
-            using (var sender = new UdpClient("localhost", ((IPEndPoint)receiver.Client.LocalEndPoint).Port))
-            {
+            using (
+                var sender = new UdpClient(
+                    "localhost",
+                    ((IPEndPoint)receiver.Client.LocalEndPoint).Port
+                )
+            ) {
                 sender.Send(new byte[1], 1);
 
                 IPEndPoint remoteEP = null;
@@ -542,9 +697,16 @@ namespace System.Net.Sockets.Tests
             using (var receiver = new UdpClient(new IPEndPoint(address, 0)))
             using (var sender = new UdpClient(new IPEndPoint(address, 0)))
             {
-                sender.Send(new byte[1], 1, new IPEndPoint(address, ((IPEndPoint)receiver.Client.LocalEndPoint).Port));
+                sender.Send(
+                    new byte[1],
+                    1,
+                    new IPEndPoint(address, ((IPEndPoint)receiver.Client.LocalEndPoint).Port)
+                );
 
-                Assert.True(SpinWait.SpinUntil(() => receiver.Available > 0, 30000), "Expected data to be available for receive within time limit");
+                Assert.True(
+                    SpinWait.SpinUntil(() => receiver.Available > 0, 30000),
+                    "Expected data to be available for receive within time limit"
+                );
             }
         }
 
@@ -559,7 +721,15 @@ namespace System.Net.Sockets.Tests
             using (var receiver = new UdpClient(new IPEndPoint(address, 0)))
             using (var sender = new UdpClient(new IPEndPoint(address, 0)))
             {
-                sender.EndSend(sender.BeginSend(new byte[1], 1, new IPEndPoint(address, ((IPEndPoint)receiver.Client.LocalEndPoint).Port), null, null));
+                sender.EndSend(
+                    sender.BeginSend(
+                        new byte[1],
+                        1,
+                        new IPEndPoint(address, ((IPEndPoint)receiver.Client.LocalEndPoint).Port),
+                        null,
+                        null
+                    )
+                );
 
                 IPEndPoint remoteEP = null;
                 byte[] data = receiver.EndReceive(receiver.BeginReceive(null, null), ref remoteEP);
@@ -574,8 +744,12 @@ namespace System.Net.Sockets.Tests
         public void BeginEndSend_BeginEndReceive_Connected_Success()
         {
             using (var receiver = new UdpClient("localhost", 0))
-            using (var sender = new UdpClient("localhost", ((IPEndPoint)receiver.Client.LocalEndPoint).Port))
-            {
+            using (
+                var sender = new UdpClient(
+                    "localhost",
+                    ((IPEndPoint)receiver.Client.LocalEndPoint).Port
+                )
+            ) {
                 sender.EndSend(sender.BeginSend(new byte[1], 1, null, null));
 
                 IPEndPoint remoteEP = null;
@@ -596,7 +770,11 @@ namespace System.Net.Sockets.Tests
             using (var receiver = new UdpClient(new IPEndPoint(address, 0)))
             using (var sender = new UdpClient(new IPEndPoint(address, 0)))
             {
-                await sender.SendAsync(new byte[1], 1, new IPEndPoint(address, ((IPEndPoint)receiver.Client.LocalEndPoint).Port));
+                await sender.SendAsync(
+                    new byte[1],
+                    1,
+                    new IPEndPoint(address, ((IPEndPoint)receiver.Client.LocalEndPoint).Port)
+                );
 
                 UdpReceiveResult result = await receiver.ReceiveAsync();
                 Assert.NotNull(result.RemoteEndPoint);
@@ -611,8 +789,12 @@ namespace System.Net.Sockets.Tests
         public async Task SendAsync_ReceiveAsync_Connected_Success()
         {
             using (var receiver = new UdpClient("localhost", 0))
-            using (var sender = new UdpClient("localhost", ((IPEndPoint)receiver.Client.LocalEndPoint).Port))
-            {
+            using (
+                var sender = new UdpClient(
+                    "localhost",
+                    ((IPEndPoint)receiver.Client.LocalEndPoint).Port
+                )
+            ) {
                 await sender.SendAsync(new byte[1], 1);
 
                 UdpReceiveResult result = await receiver.ReceiveAsync();
@@ -627,42 +809,102 @@ namespace System.Net.Sockets.Tests
         {
             using (var udpClient = new UdpClient(AddressFamily.InterNetwork))
             {
-                AssertExtensions.Throws<ArgumentNullException>("multicastAddr", () => udpClient.JoinMulticastGroup(null));
-                AssertExtensions.Throws<ArgumentNullException>("multicastAddr", () => udpClient.JoinMulticastGroup(0, null));
-                AssertExtensions.Throws<ArgumentNullException>("multicastAddr", () => udpClient.JoinMulticastGroup(null, 0));
-                AssertExtensions.Throws<ArgumentException>("ifindex", () => udpClient.JoinMulticastGroup(-1, IPAddress.Any));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeToLive", () => udpClient.JoinMulticastGroup(IPAddress.Loopback, -1));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "multicastAddr",
+                    () => udpClient.JoinMulticastGroup(null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "multicastAddr",
+                    () => udpClient.JoinMulticastGroup(0, null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "multicastAddr",
+                    () => udpClient.JoinMulticastGroup(null, 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "ifindex",
+                    () => udpClient.JoinMulticastGroup(-1, IPAddress.Any)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "timeToLive",
+                    () => udpClient.JoinMulticastGroup(IPAddress.Loopback, -1)
+                );
 
-                AssertExtensions.Throws<ArgumentNullException>("multicastAddr", () => udpClient.DropMulticastGroup(null));
-                AssertExtensions.Throws<ArgumentNullException>("multicastAddr", () => udpClient.DropMulticastGroup(null, 0));
-                AssertExtensions.Throws<ArgumentException>("multicastAddr", () => udpClient.DropMulticastGroup(IPAddress.IPv6Loopback));
-                AssertExtensions.Throws<ArgumentException>("ifindex", () => udpClient.DropMulticastGroup(IPAddress.Loopback, -1));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "multicastAddr",
+                    () => udpClient.DropMulticastGroup(null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "multicastAddr",
+                    () => udpClient.DropMulticastGroup(null, 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "multicastAddr",
+                    () => udpClient.DropMulticastGroup(IPAddress.IPv6Loopback)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "ifindex",
+                    () => udpClient.DropMulticastGroup(IPAddress.Loopback, -1)
+                );
             }
         }
 
         [Fact]
         public void UdpReceiveResult_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>("buffer", () => new UdpReceiveResult(null, null));
-            AssertExtensions.Throws<ArgumentNullException>("remoteEndPoint", () => new UdpReceiveResult(new byte[1], null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "buffer",
+                () => new UdpReceiveResult(null, null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "remoteEndPoint",
+                () => new UdpReceiveResult(new byte[1], null)
+            );
         }
 
         [Fact]
         public void UdpReceiveResult_Equality()
         {
-            byte[] buffer1 = new byte[1] { 42 }, buffer2 = new byte[1] { 42 };
-            IPEndPoint ep1 = new IPEndPoint(IPAddress.Loopback, 123), ep2 = new IPEndPoint(IPAddress.Loopback, 123), ep3 = new IPEndPoint(IPAddress.Any, 456);
+            byte[] buffer1 = new byte[1] { 42 },
+                buffer2 = new byte[1] { 42 };
+            IPEndPoint ep1 = new IPEndPoint(IPAddress.Loopback, 123),
+                ep2 = new IPEndPoint(IPAddress.Loopback, 123),
+                ep3 = new IPEndPoint(IPAddress.Any, 456);
 
-            Assert.Equal(new UdpReceiveResult().GetHashCode(), new UdpReceiveResult().GetHashCode());
-            Assert.Equal(new UdpReceiveResult(buffer1, ep1).GetHashCode(), new UdpReceiveResult(buffer1, ep2).GetHashCode());
+            Assert.Equal(
+                new UdpReceiveResult().GetHashCode(),
+                new UdpReceiveResult().GetHashCode()
+            );
+            Assert.Equal(
+                new UdpReceiveResult(buffer1, ep1).GetHashCode(),
+                new UdpReceiveResult(buffer1, ep2).GetHashCode()
+            );
 
-            Assert.True(new UdpReceiveResult(buffer1, ep1).Equals(new UdpReceiveResult(buffer1, ep2)));
-            Assert.False(new UdpReceiveResult(buffer1, ep1).Equals(new UdpReceiveResult(buffer2, ep1)));
-            Assert.False(new UdpReceiveResult(buffer1, ep1).Equals(new UdpReceiveResult(buffer1, ep3)));
+            Assert.True(
+                new UdpReceiveResult(buffer1, ep1).Equals(new UdpReceiveResult(buffer1, ep2))
+            );
+            Assert.False(
+                new UdpReceiveResult(buffer1, ep1).Equals(new UdpReceiveResult(buffer2, ep1))
+            );
+            Assert.False(
+                new UdpReceiveResult(buffer1, ep1).Equals(new UdpReceiveResult(buffer1, ep3))
+            );
 
-            Assert.True(new UdpReceiveResult(buffer1, ep1).Equals((object)new UdpReceiveResult(buffer1, ep2)));
-            Assert.False(new UdpReceiveResult(buffer1, ep1).Equals((object)new UdpReceiveResult(buffer2, ep1)));
-            Assert.False(new UdpReceiveResult(buffer1, ep1).Equals((object)new UdpReceiveResult(buffer1, ep3)));
+            Assert.True(
+                new UdpReceiveResult(buffer1, ep1).Equals(
+                    (object)new UdpReceiveResult(buffer1, ep2)
+                )
+            );
+            Assert.False(
+                new UdpReceiveResult(buffer1, ep1).Equals(
+                    (object)new UdpReceiveResult(buffer2, ep1)
+                )
+            );
+            Assert.False(
+                new UdpReceiveResult(buffer1, ep1).Equals(
+                    (object)new UdpReceiveResult(buffer1, ep3)
+                )
+            );
             Assert.False(new UdpReceiveResult(buffer1, ep1).Equals(new object()));
 
             Assert.True(new UdpReceiveResult(buffer1, ep1) == new UdpReceiveResult(buffer1, ep2));
@@ -677,9 +919,16 @@ namespace System.Net.Sockets.Tests
             using (var sender = new UdpClient(AddressFamily.InterNetworkV6))
             {
                 sender.Client.DualMode = true;
-                if (sender.Client.AddressFamily == AddressFamily.InterNetworkV6 && sender.Client.DualMode)
-                {
-                    sender.Send(new byte[1], 1, "127.0.0.1", ((IPEndPoint)receiver.Client.LocalEndPoint).Port);
+                if (
+                    sender.Client.AddressFamily == AddressFamily.InterNetworkV6
+                    && sender.Client.DualMode
+                ) {
+                    sender.Send(
+                        new byte[1],
+                        1,
+                        "127.0.0.1",
+                        ((IPEndPoint)receiver.Client.LocalEndPoint).Port
+                    );
                 }
             }
         }
@@ -688,7 +937,10 @@ namespace System.Net.Sockets.Tests
         {
             public DerivedUdpClient() { }
             public DerivedUdpClient(string hostname, int port) : base(hostname, port) { }
-            ~DerivedUdpClient() { Dispose(false); }
+            ~DerivedUdpClient()
+            {
+                Dispose(false);
+            }
 
             public new bool Active
             {

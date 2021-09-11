@@ -5,6 +5,7 @@ namespace System.Security.Cryptography
 {
     public partial class CryptoConfig
     {
-        internal const string CreateFromNameUnreferencedCodeMessage = "The default algorithm implementations might be removed, use strong type references like 'RSA.Create()' instead.";
+        internal const string CreateFromNameUnreferencedCodeMessage =
+            "The default algorithm implementations might be removed, use strong type references like 'RSA.Create()' instead.";
     }
 }

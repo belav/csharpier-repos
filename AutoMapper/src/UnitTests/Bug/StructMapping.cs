@@ -17,17 +17,17 @@ namespace AutoMapper.UnitTests.Bug
             public int Number { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
-            var source = new Source
-            {
-                Number = 23
-            };
+            var source = new Source { Number = 23 };
             _destination = Mapper.Map<Source, Destination>(source);
         }
 
@@ -47,10 +47,19 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int Number { get; set; }
         }
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>());
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>());
         [Fact]
-        public void Should_work() => Mapper.Map<Source, Destination>(new Source { Number = 23 }).Number.ShouldBe(23);
+        public void Should_work() =>
+            Mapper.Map<Source, Destination>(new Source { Number = 23 }).Number.ShouldBe(23);
         [Fact]
-        public void Should_work_with_object() => ((Destination)Mapper.Map(new Source { Number = 23 }, typeof(Source), typeof(Destination))).Number.ShouldBe(23);
+        public void Should_work_with_object() =>
+            (
+                (Destination)Mapper.Map(
+                    new Source { Number = 23 },
+                    typeof(Source),
+                    typeof(Destination)
+                )
+            ).Number.ShouldBe(23);
     }
 }

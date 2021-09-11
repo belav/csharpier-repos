@@ -28,59 +28,93 @@ public class BFM_LPStrMarshaler
 {
 #pragma warning disable 618
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_String([In][MarshalAs(UnmanagedType.LPStr)]String s);
+    public static extern bool LPStrBuffer_In_String([In] [MarshalAs(UnmanagedType.LPStr)] String s);
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InByRef_String([In][MarshalAs(UnmanagedType.LPStr)]ref String s);
+    public static extern bool LPStrBuffer_InByRef_String(
+        [In] [MarshalAs(UnmanagedType.LPStr)] ref String s
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InOutByRef_String([In, Out][MarshalAs(UnmanagedType.LPStr)]ref String s);
+    public static extern bool LPStrBuffer_InOutByRef_String(
+        [In, Out] [MarshalAs(UnmanagedType.LPStr)] ref String s
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_StringBuilder([In][MarshalAs(UnmanagedType.LPStr)]StringBuilder s);
+    public static extern bool LPStrBuffer_In_StringBuilder(
+        [In] [MarshalAs(UnmanagedType.LPStr)] StringBuilder s
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InByRef_StringBuilder([In][MarshalAs(UnmanagedType.LPStr)]ref StringBuilder s);
+    public static extern bool LPStrBuffer_InByRef_StringBuilder(
+        [In] [MarshalAs(UnmanagedType.LPStr)] ref StringBuilder s
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InOutByRef_StringBuilder([In, Out][MarshalAs(UnmanagedType.LPStr)]ref StringBuilder s);
+    public static extern bool LPStrBuffer_InOutByRef_StringBuilder(
+        [In, Out] [MarshalAs(UnmanagedType.LPStr)] ref StringBuilder s
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_Struct_String([In][MarshalAs(UnmanagedType.Struct)]LPStrTestStruct strStruct);
+    public static extern bool LPStrBuffer_In_Struct_String(
+        [In] [MarshalAs(UnmanagedType.Struct)] LPStrTestStruct strStruct
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InByRef_Struct_String([In][MarshalAs(UnmanagedType.Struct)]ref LPStrTestStruct strStruct);
+    public static extern bool LPStrBuffer_InByRef_Struct_String(
+        [In] [MarshalAs(UnmanagedType.Struct)] ref LPStrTestStruct strStruct
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InOutByRef_Struct_String([In, Out][MarshalAs(UnmanagedType.Struct)]ref LPStrTestStruct strStruct);
+    public static extern bool LPStrBuffer_InOutByRef_Struct_String(
+        [In, Out] [MarshalAs(UnmanagedType.Struct)] ref LPStrTestStruct strStruct
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_Array_String([In][MarshalAs(UnmanagedType.LPArray)]String[] strArray);
+    public static extern bool LPStrBuffer_In_Array_String(
+        [In] [MarshalAs(UnmanagedType.LPArray)] String[] strArray
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InByRef_Array_String([In][MarshalAs(UnmanagedType.LPArray)]ref String[] strArray);
+    public static extern bool LPStrBuffer_InByRef_Array_String(
+        [In] [MarshalAs(UnmanagedType.LPArray)] ref String[] strArray
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InOutByRef_Array_String([In, Out][MarshalAs(UnmanagedType.LPArray)]ref String[] Array);
+    public static extern bool LPStrBuffer_InOutByRef_Array_String(
+        [In, Out] [MarshalAs(UnmanagedType.LPArray)] ref String[] Array
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_Class_String([In][MarshalAs(UnmanagedType.LPStruct)]LPStrTestClass strClass);
+    public static extern bool LPStrBuffer_In_Class_String(
+        [In] [MarshalAs(UnmanagedType.LPStruct)] LPStrTestClass strClass
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InByRef_Class_String([In][MarshalAs(UnmanagedType.LPStruct)]ref LPStrTestClass strClass);
+    public static extern bool LPStrBuffer_InByRef_Class_String(
+        [In] [MarshalAs(UnmanagedType.LPStruct)] ref LPStrTestClass strClass
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InOutByRef_Class_String([In, Out][MarshalAs(UnmanagedType.LPStruct)]ref LPStrTestClass strClass);
+    public static extern bool LPStrBuffer_InOutByRef_Class_String(
+        [In, Out] [MarshalAs(UnmanagedType.LPStruct)] ref LPStrTestClass strClass
+    );
 
     // struct attribute should override PI flags for BFM
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool LPStrBuffer_In_Array_Struct([In][MarshalAs(UnmanagedType.LPArray)]LPStrTestStruct[] structArray);
+    public static extern bool LPStrBuffer_In_Array_Struct(
+        [In] [MarshalAs(UnmanagedType.LPArray)] LPStrTestStruct[] structArray
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool LPStrBuffer_InByRef_Array_Struct([In][MarshalAs(UnmanagedType.LPArray)]ref LPStrTestStruct[] structArray);
+    public static extern bool LPStrBuffer_InByRef_Array_Struct(
+        [In] [MarshalAs(UnmanagedType.LPArray)] ref LPStrTestStruct[] structArray
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = false)]
-    public static extern bool LPStrBuffer_InOutByRef_Array_Struct([In, Out][MarshalAs(UnmanagedType.LPArray)]ref LPStrTestStruct[] structArray);
+    public static extern bool LPStrBuffer_InOutByRef_Array_Struct(
+        [In, Out] [MarshalAs(UnmanagedType.LPArray)] ref LPStrTestStruct[] structArray
+    );
 #pragma warning restore 618
 
     static String GetValidString()
@@ -120,18 +154,27 @@ public class BFM_LPStrMarshaler
 
     static void testLPStrBufferString()
     {
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_In_String(GetInvalidString()), "[Error] Location tlpsbs1");
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_In_String(GetInvalidString()),
+            "[Error] Location tlpsbs1"
+        );
 
         Assert.IsTrue(LPStrBuffer_In_String(GetValidString()), "[Error] Location tlpsbs2");
 
         String cTemp = GetInvalidString();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InByRef_String(ref cTemp), "[Error] Location tlpsbs3");
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InByRef_String(ref cTemp),
+            "[Error] Location tlpsbs3"
+        );
 
         cTemp = GetValidString();
         Assert.IsTrue(LPStrBuffer_InByRef_String(ref cTemp), "[Error] Location tlpsbs4");
 
         cTemp = GetInvalidString();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InOutByRef_String(ref cTemp), "[Error] Location tlpsbs5");
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InOutByRef_String(ref cTemp),
+            "[Error] Location tlpsbs5"
+        );
 
         cTemp = GetValidString();
         String cTempClone = cTemp;
@@ -141,18 +184,30 @@ public class BFM_LPStrMarshaler
 
     static void testLPStrBufferStringBuilder()
     {
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_In_StringBuilder(GetInvalidStringBuilder()), "[Error] Location tlpsbsb1");
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_In_StringBuilder(GetInvalidStringBuilder()),
+            "[Error] Location tlpsbsb1"
+        );
 
-        Assert.IsTrue(LPStrBuffer_In_StringBuilder(GetValidStringBuilder()), "[Error] Location tlpsbsb2");
+        Assert.IsTrue(
+            LPStrBuffer_In_StringBuilder(GetValidStringBuilder()),
+            "[Error] Location tlpsbsb2"
+        );
 
         StringBuilder cTemp = GetInvalidStringBuilder();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InByRef_StringBuilder(ref cTemp), "[Error] Location tlpsbsb3");
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InByRef_StringBuilder(ref cTemp),
+            "[Error] Location tlpsbsb3"
+        );
 
         cTemp = GetValidStringBuilder();
         Assert.IsTrue(LPStrBuffer_InByRef_StringBuilder(ref cTemp), "[Error] Location tlpsbsb4");
 
         cTemp = GetInvalidStringBuilder();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InOutByRef_StringBuilder(ref cTemp), "[Error] Location tlpsbsb5");
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InOutByRef_StringBuilder(ref cTemp),
+            "[Error] Location tlpsbsb5"
+        );
 
         cTemp = GetValidStringBuilder();
         StringBuilder cTempClone = cTemp;
@@ -167,7 +222,7 @@ public class BFM_LPStrMarshaler
 
         return inValidStruct;
     }
-    
+
     static LPStrTestStruct GetValidStruct()
     {
         LPStrTestStruct validStruct = new LPStrTestStruct();
@@ -200,18 +255,27 @@ public class BFM_LPStrMarshaler
 
     static void testLPStrBufferStruct()
     {
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_In_Struct_String(GetInvalidStruct()), "[Error] Location tlpsbst1"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_In_Struct_String(GetInvalidStruct()),
+            "[Error] Location tlpsbst1"
+        );
 
         Assert.IsTrue(LPStrBuffer_In_Struct_String(GetValidStruct()), "[Error] Location tlpsbst2");
 
         LPStrTestStruct cTemp = GetInvalidStruct();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InByRef_Struct_String(ref cTemp), "[Error] Location tlpsbst3"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InByRef_Struct_String(ref cTemp),
+            "[Error] Location tlpsbst3"
+        );
 
         cTemp = GetValidStruct();
         Assert.IsTrue(LPStrBuffer_InByRef_Struct_String(ref cTemp), "[Error] Location tlpsbst4");
 
         cTemp = GetInvalidStruct();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InOutByRef_Struct_String(ref cTemp), "[Error] Location tlpsbst5"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InOutByRef_Struct_String(ref cTemp),
+            "[Error] Location tlpsbst5"
+        );
 
         cTemp = GetValidStruct();
         LPStrTestStruct cTempClone = new LPStrTestStruct();
@@ -224,20 +288,29 @@ public class BFM_LPStrMarshaler
     {
         LPStrTestClass cTest = new LPStrTestClass();
         cTest.str = GetInvalidString();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_In_Class_String(cTest), "[Error] Location tlpsbc1"); 
-        
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_In_Class_String(cTest),
+            "[Error] Location tlpsbc1"
+        );
+
         cTest.str = GetValidString();
         Assert.IsTrue(LPStrBuffer_In_Class_String(cTest), "[Error] Location tlpsbc2");
 
         LPStrTestClass cTemp = new LPStrTestClass();
         cTemp.str = GetInvalidString();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InByRef_Class_String(ref cTemp), "[Error] Location tlpsbc3"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InByRef_Class_String(ref cTemp),
+            "[Error] Location tlpsbc3"
+        );
 
         cTemp.str = GetValidString();
         Assert.IsTrue(LPStrBuffer_InByRef_Class_String(ref cTemp), "[Error] Location tlpsbc4");
 
         cTemp.str = GetInvalidString();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InOutByRef_Class_String(ref cTemp), "[Error] Location tlpsbc5"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InOutByRef_Class_String(ref cTemp),
+            "[Error] Location tlpsbc5"
+        );
 
         LPStrTestClass cTempClone = new LPStrTestClass();
         cTemp.str = GetValidString();
@@ -250,19 +323,28 @@ public class BFM_LPStrMarshaler
     {
         String[] cTest = null;
         cTest = GetInvalidArray();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_In_Array_String(cTest), "[Error] Location tlpsba1"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_In_Array_String(cTest),
+            "[Error] Location tlpsba1"
+        );
 
         cTest = GetValidArray();
         Assert.IsTrue(LPStrBuffer_In_Array_String(cTest), "[Error] Location tlpsba2");
 
         String[] cTemp = GetInvalidArray();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InByRef_Array_String(ref cTemp), "[Error] Location tlpsba3"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InByRef_Array_String(ref cTemp),
+            "[Error] Location tlpsba3"
+        );
 
         cTemp = GetValidArray();
         Assert.IsTrue(LPStrBuffer_InByRef_Array_String(ref cTemp), "[Error] Location tlpsba4");
 
         cTemp = GetInvalidArray();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InOutByRef_Array_String(ref cTemp), "[Error] Location tlpsba5"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InOutByRef_Array_String(ref cTemp),
+            "[Error] Location tlpsba5"
+        );
 
         String[] cTempClone = new String[3];
         cTemp = GetValidArray();
@@ -277,7 +359,10 @@ public class BFM_LPStrMarshaler
         lpss = new LPStrTestStruct[2];
         lpss[0] = GetInvalidStruct();
         lpss[1] = GetInvalidStruct();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_In_Array_Struct(lpss), "[Error] Location tlpsbaos1"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_In_Array_Struct(lpss),
+            "[Error] Location tlpsbaos1"
+        );
 
         lpss = new LPStrTestStruct[2];
         lpss[0] = GetValidStruct();
@@ -287,7 +372,10 @@ public class BFM_LPStrMarshaler
         lpss = new LPStrTestStruct[2];
         lpss[0] = GetInvalidStruct();
         lpss[1] = GetInvalidStruct();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InByRef_Array_Struct(ref lpss), "[Error] Location tlpsbaos3"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InByRef_Array_Struct(ref lpss),
+            "[Error] Location tlpsbaos3"
+        );
 
         lpss = new LPStrTestStruct[2];
         lpss[0] = GetValidStruct();
@@ -297,7 +385,10 @@ public class BFM_LPStrMarshaler
         lpss = new LPStrTestStruct[2];
         lpss[0] = GetInvalidStruct();
         lpss[1] = GetInvalidStruct();
-        Assert.Throws<ArgumentException>(() => LPStrBuffer_InOutByRef_Array_Struct(ref lpss), "[Error] Location tlpsbaos5"); 
+        Assert.Throws<ArgumentException>(
+            () => LPStrBuffer_InOutByRef_Array_Struct(ref lpss),
+            "[Error] Location tlpsbaos5"
+        );
 
         lpss = new LPStrTestStruct[2];
         lpss[0] = GetValidStruct();
@@ -323,12 +414,14 @@ public class BFM_LPStrMarshaler
     {
         if (System.Globalization.CultureInfo.CurrentCulture.Name != "en-US")
         {
-            Console.WriteLine("Non-US English platforms are not supported.\nPassing without running tests");
+            Console.WriteLine(
+                "Non-US English platforms are not supported.\nPassing without running tests"
+            );
 
             Console.WriteLine("--- Success");
             return 100;
         }
-        
+
         try
         {
             runTest();
@@ -336,7 +429,7 @@ public class BFM_LPStrMarshaler
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Test Failure: {e}"); 
+            Console.WriteLine($"Test Failure: {e}");
             return 101;
         }
     }

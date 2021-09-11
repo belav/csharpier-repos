@@ -36,8 +36,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>
         /// <param name="configure">The <see cref="Action{CacheTagHelperOptions}"/>to configure the cache options.</param>
         /// <returns>The <see cref="IMvcBuilder"/>.</returns>
-        public static IMvcBuilder AddCacheTagHelperLimits(this IMvcBuilder builder, Action<CacheTagHelperOptions> configure)
-        {
+        public static IMvcBuilder AddCacheTagHelperLimits(
+            this IMvcBuilder builder,
+            Action<CacheTagHelperOptions> configure
+        ) {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -59,8 +61,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
         /// <param name="configure">The <see cref="Action{CacheTagHelperOptions}"/>to configure the cache options.</param>
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
-        public static IMvcCoreBuilder AddCacheTagHelperLimits(this IMvcCoreBuilder builder, Action<CacheTagHelperOptions> configure)
-        {
+        public static IMvcCoreBuilder AddCacheTagHelperLimits(
+            this IMvcCoreBuilder builder,
+            Action<CacheTagHelperOptions> configure
+        ) {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -78,9 +82,18 @@ namespace Microsoft.Extensions.DependencyInjection
 
         internal static void AddCacheTagHelperServices(IServiceCollection services)
         {
-            services.TryAddSingleton<IDistributedCacheTagHelperStorage, DistributedCacheTagHelperStorage>();
-            services.TryAddSingleton<IDistributedCacheTagHelperFormatter, DistributedCacheTagHelperFormatter>();
-            services.TryAddSingleton<IDistributedCacheTagHelperService, DistributedCacheTagHelperService>();
+            services.TryAddSingleton<
+                IDistributedCacheTagHelperStorage,
+                DistributedCacheTagHelperStorage
+            >();
+            services.TryAddSingleton<
+                IDistributedCacheTagHelperFormatter,
+                DistributedCacheTagHelperFormatter
+            >();
+            services.TryAddSingleton<
+                IDistributedCacheTagHelperService,
+                DistributedCacheTagHelperService
+            >();
 
             // Required default services for cache tag helpers
             services.AddDistributedMemoryCache();

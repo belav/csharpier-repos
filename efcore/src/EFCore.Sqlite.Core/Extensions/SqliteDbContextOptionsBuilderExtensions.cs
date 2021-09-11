@@ -32,11 +32,13 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The options builder so that further configuration can be chained. </returns>
         public static DbContextOptionsBuilder UseSqlite(
             this DbContextOptionsBuilder optionsBuilder,
-            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null)
-        {
+            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
+        ) {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(GetOrCreateExtension(optionsBuilder));
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                GetOrCreateExtension(optionsBuilder)
+            );
 
             ConfigureWarnings(optionsBuilder);
 
@@ -55,13 +57,16 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder UseSqlite(
             this DbContextOptionsBuilder optionsBuilder,
             string connectionString,
-            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null)
-        {
+            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
+        ) {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotEmpty(connectionString, nameof(connectionString));
 
-            var extension = (SqliteOptionsExtension)GetOrCreateExtension(optionsBuilder).WithConnectionString(connectionString);
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
+            var extension = (SqliteOptionsExtension)GetOrCreateExtension(optionsBuilder)
+                .WithConnectionString(connectionString);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                extension
+            );
 
             ConfigureWarnings(optionsBuilder);
 
@@ -84,13 +89,16 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder UseSqlite(
             this DbContextOptionsBuilder optionsBuilder,
             DbConnection connection,
-            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null)
-        {
+            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
+        ) {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotNull(connection, nameof(connection));
 
-            var extension = (SqliteOptionsExtension)GetOrCreateExtension(optionsBuilder).WithConnection(connection);
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
+            var extension = (SqliteOptionsExtension)GetOrCreateExtension(optionsBuilder)
+                .WithConnection(connection);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                extension
+            );
 
             ConfigureWarnings(optionsBuilder);
 
@@ -115,10 +123,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The options builder so that further configuration can be chained. </returns>
         public static DbContextOptionsBuilder<TContext> UseSqlite<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
-            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null)
-            where TContext : DbContext
-            => (DbContextOptionsBuilder<TContext>)UseSqlite(
-                (DbContextOptionsBuilder)optionsBuilder, sqliteOptionsAction);
+            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
+        ) where TContext : DbContext =>
+            (DbContextOptionsBuilder<TContext>)UseSqlite(
+                (DbContextOptionsBuilder)optionsBuilder,
+                sqliteOptionsAction
+            );
 
         /// <summary>
         ///     Configures the context to connect to a SQLite database.
@@ -131,10 +141,13 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder<TContext> UseSqlite<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             string connectionString,
-            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null)
-            where TContext : DbContext
-            => (DbContextOptionsBuilder<TContext>)UseSqlite(
-                (DbContextOptionsBuilder)optionsBuilder, connectionString, sqliteOptionsAction);
+            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
+        ) where TContext : DbContext =>
+            (DbContextOptionsBuilder<TContext>)UseSqlite(
+                (DbContextOptionsBuilder)optionsBuilder,
+                connectionString,
+                sqliteOptionsAction
+            );
 
         /// <summary>
         ///     Configures the context to connect to a SQLite database.
@@ -151,24 +164,32 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder<TContext> UseSqlite<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             DbConnection connection,
-            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null)
-            where TContext : DbContext
-            => (DbContextOptionsBuilder<TContext>)UseSqlite(
-                (DbContextOptionsBuilder)optionsBuilder, connection, sqliteOptionsAction);
+            Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
+        ) where TContext : DbContext =>
+            (DbContextOptionsBuilder<TContext>)UseSqlite(
+                (DbContextOptionsBuilder)optionsBuilder,
+                connection,
+                sqliteOptionsAction
+            );
 
-        private static SqliteOptionsExtension GetOrCreateExtension(DbContextOptionsBuilder options)
-            => options.Options.FindExtension<SqliteOptionsExtension>()
-                ?? new SqliteOptionsExtension();
+        private static SqliteOptionsExtension GetOrCreateExtension(
+            DbContextOptionsBuilder options
+        ) =>
+            options.Options.FindExtension<SqliteOptionsExtension>() ?? new SqliteOptionsExtension();
 
         private static void ConfigureWarnings(DbContextOptionsBuilder optionsBuilder)
         {
-            var coreOptionsExtension
-                = optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
+            var coreOptionsExtension =
+                optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
                 ?? new CoreOptionsExtension();
 
-            coreOptionsExtension = RelationalOptionsExtension.WithDefaultWarningConfiguration(coreOptionsExtension);
+            coreOptionsExtension = RelationalOptionsExtension.WithDefaultWarningConfiguration(
+                coreOptionsExtension
+            );
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(coreOptionsExtension);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                coreOptionsExtension
+            );
         }
     }
 }

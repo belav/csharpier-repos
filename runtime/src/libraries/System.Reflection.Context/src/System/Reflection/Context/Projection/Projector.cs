@@ -51,11 +51,17 @@ namespace System.Reflection.Context.Projection
         public abstract ParameterInfo ProjectParameter(ParameterInfo value);
         public abstract MethodBody ProjectMethodBody(MethodBody value);
         public abstract LocalVariableInfo ProjectLocalVariable(LocalVariableInfo value);
-        public abstract ExceptionHandlingClause ProjectExceptionHandlingClause(ExceptionHandlingClause value);
+        public abstract ExceptionHandlingClause ProjectExceptionHandlingClause(
+            ExceptionHandlingClause value
+        );
         public abstract CustomAttributeData ProjectCustomAttributeData(CustomAttributeData value);
         public abstract ManifestResourceInfo ProjectManifestResource(ManifestResourceInfo value);
-        public abstract CustomAttributeTypedArgument ProjectTypedArgument(CustomAttributeTypedArgument value);
-        public abstract CustomAttributeNamedArgument ProjectNamedArgument(CustomAttributeNamedArgument value);
+        public abstract CustomAttributeTypedArgument ProjectTypedArgument(
+            CustomAttributeTypedArgument value
+        );
+        public abstract CustomAttributeNamedArgument ProjectNamedArgument(
+            CustomAttributeNamedArgument value
+        );
         public abstract InterfaceMapping ProjectInterfaceMapping(InterfaceMapping value);
         public abstract MemberInfo ProjectMember(MemberInfo value);
 
@@ -89,7 +95,7 @@ namespace System.Reflection.Context.Projection
                 return false;
 
             if (value is IProjectable projector && projector == this)
-                return false;   // Already projected
+                return false; // Already projected
 
             // Different context, so we need to project it
             return true;

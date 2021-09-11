@@ -25,9 +25,10 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
             // Validator for tag constraint for Issuer
             {
-                if (!Asn1Tag.TryDecode(Issuer.Span, out Asn1Tag validateTag, out _) ||
-                    !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16)))
-                {
+                if (
+                    !Asn1Tag.TryDecode(Issuer.Span, out Asn1Tag validateTag, out _)
+                    || !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16))
+                ) {
                     throw new CryptographicException();
                 }
             }
@@ -44,13 +45,18 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             writer.PopSequence(tag);
         }
 
-        internal static IssuerAndSerialNumberAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static IssuerAndSerialNumberAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static IssuerAndSerialNumberAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static IssuerAndSerialNumberAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -65,13 +71,20 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out IssuerAndSerialNumberAsn decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out IssuerAndSerialNumberAsn decoded
+        ) {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out IssuerAndSerialNumberAsn decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out IssuerAndSerialNumberAsn decoded
+        ) {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -82,8 +95,12 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out IssuerAndSerialNumberAsn decoded)
-        {
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out IssuerAndSerialNumberAsn decoded
+        ) {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             ReadOnlySpan<byte> rebindSpan = rebind.Span;
@@ -96,9 +113,13 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
 
             tmpSpan = sequenceReader.ReadEncodedValue();
-            decoded.Issuer = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+            decoded.Issuer = rebindSpan.Overlaps(tmpSpan, out offset)
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
             tmpSpan = sequenceReader.ReadIntegerBytes();
-            decoded.SerialNumber = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+            decoded.SerialNumber = rebindSpan.Overlaps(tmpSpan, out offset)
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
 
             sequenceReader.ThrowIfNotEmpty();
         }

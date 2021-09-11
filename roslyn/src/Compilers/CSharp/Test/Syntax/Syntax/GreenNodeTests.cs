@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         private static void AttachAndCheckDiagnostics(InternalSyntax.CSharpSyntaxNode node)
         {
-            var nodeWithDiags = node.SetDiagnostics(new DiagnosticInfo[] { new CSDiagnosticInfo(ErrorCode.ERR_AbstractAndExtern) });
+            var nodeWithDiags = node.SetDiagnostics(
+                new DiagnosticInfo[] { new CSDiagnosticInfo(ErrorCode.ERR_AbstractAndExtern) }
+            );
             var diags = nodeWithDiags.GetDiagnostics();
 
             Assert.NotEqual(node, nodeWithDiags);
@@ -24,16 +26,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private class TokenDeleteRewriter : InternalSyntax.CSharpSyntaxRewriter
         {
-            public override InternalSyntax.CSharpSyntaxNode VisitToken(InternalSyntax.SyntaxToken token)
-            {
+            public override InternalSyntax.CSharpSyntaxNode VisitToken(
+                InternalSyntax.SyntaxToken token
+            ) {
                 return InternalSyntax.SyntaxFactory.MissingToken(token.Kind);
             }
         }
 
         private class IdentityRewriter : InternalSyntax.CSharpSyntaxRewriter
         {
-            protected override InternalSyntax.CSharpSyntaxNode DefaultVisit(InternalSyntax.CSharpSyntaxNode node)
-            {
+            protected override InternalSyntax.CSharpSyntaxNode DefaultVisit(
+                InternalSyntax.CSharpSyntaxNode node
+            ) {
                 return node;
             }
         }

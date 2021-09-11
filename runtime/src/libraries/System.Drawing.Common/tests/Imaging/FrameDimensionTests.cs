@@ -20,10 +20,26 @@ namespace System.Drawing.Imaging.Tests
         {
             get
             {
-                yield return new object[] { new Guid("{6aedbd6d-3fb5-418a-83a6-7f45229dc872}"), FrameDimension.Time };
-                yield return new object[] { new Guid("{84236f7b-3bd3-428f-8dab-4ea1439ca315}"), FrameDimension.Resolution };
-                yield return new object[] { new Guid("{7462dc86-6180-4c7e-8e3f-ee7333a7a483}"), FrameDimension.Page };
-                yield return new object[] { new Guid("48749428-316f-496a-ab30-c819a92b3137"), new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")) };
+                yield return new object[]
+                {
+                    new Guid("{6aedbd6d-3fb5-418a-83a6-7f45229dc872}"),
+                    FrameDimension.Time
+                };
+                yield return new object[]
+                {
+                    new Guid("{84236f7b-3bd3-428f-8dab-4ea1439ca315}"),
+                    FrameDimension.Resolution
+                };
+                yield return new object[]
+                {
+                    new Guid("{7462dc86-6180-4c7e-8e3f-ee7333a7a483}"),
+                    FrameDimension.Page
+                };
+                yield return new object[]
+                {
+                    new Guid("48749428-316f-496a-ab30-c819a92b3137"),
+                    new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137"))
+                };
             }
         }
 
@@ -31,10 +47,30 @@ namespace System.Drawing.Imaging.Tests
         {
             get
             {
-                yield return new object[] { new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")), new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")), true };
-                yield return new object[] { new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")), new FrameDimension(new Guid("b96b3cad-0728-11d3-9d7b-0000f81ef32e")), false };
-                yield return new object[] { new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")), null, false };
-                yield return new object[] { new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")), new object(), false };
+                yield return new object[]
+                {
+                    new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")),
+                    new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")),
+                    true
+                };
+                yield return new object[]
+                {
+                    new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")),
+                    new FrameDimension(new Guid("b96b3cad-0728-11d3-9d7b-0000f81ef32e")),
+                    false
+                };
+                yield return new object[]
+                {
+                    new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")),
+                    null,
+                    false
+                };
+                yield return new object[]
+                {
+                    new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")),
+                    new object(),
+                    false
+                };
             }
         }
 
@@ -45,7 +81,11 @@ namespace System.Drawing.Imaging.Tests
                 yield return new object[] { "Time", FrameDimension.Time };
                 yield return new object[] { "Resolution", FrameDimension.Resolution };
                 yield return new object[] { "Page", FrameDimension.Page };
-                yield return new object[] { "[FrameDimension: 48749428-316f-496a-ab30-c819a92b3137]", new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137")) };
+                yield return new object[]
+                {
+                    "[FrameDimension: 48749428-316f-496a-ab30-c819a92b3137]",
+                    new FrameDimension(new Guid("48749428-316f-496a-ab30-c819a92b3137"))
+                };
             }
         }
 
@@ -58,8 +98,11 @@ namespace System.Drawing.Imaging.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(FrameDimensionEqualsTestData))]
-        public void Equals_Object_ReturnsExpected(FrameDimension frameDimension, object obj, bool result)
-        {
+        public void Equals_Object_ReturnsExpected(
+            FrameDimension frameDimension,
+            object obj,
+            bool result
+        ) {
             Assert.Equal(result, frameDimension.Equals(obj));
         }
 

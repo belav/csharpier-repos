@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         /// <param name="span">The original span of the changed text.</param>
         /// <param name="newText">The new text.</param>
-        public TextChange(TextSpan span, string newText)
-            : this()
+        public TextChange(TextSpan span, string newText) : this()
         {
             if (newText == null)
             {
@@ -61,9 +60,8 @@ namespace Microsoft.CodeAnalysis.Text
 
         public bool Equals(TextChange other)
         {
-            return
-                EqualityComparer<TextSpan>.Default.Equals(this.Span, other.Span) &&
-                EqualityComparer<string>.Default.Equals(this.NewText, other.NewText);
+            return EqualityComparer<TextSpan>.Default.Equals(this.Span, other.Span)
+                && EqualityComparer<string>.Default.Equals(this.NewText, other.NewText);
         }
 
         public override int GetHashCode()
@@ -94,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// <summary>
         /// An empty set of changes.
         /// </summary>
-        public static IReadOnlyList<TextChange> NoChanges => SpecializedCollections.EmptyReadOnlyList<TextChange>();
+        public static IReadOnlyList<TextChange> NoChanges =>
+            SpecializedCollections.EmptyReadOnlyList<TextChange>();
 
         internal string GetDebuggerDisplay()
         {

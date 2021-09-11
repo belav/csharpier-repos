@@ -12,12 +12,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindSelectQueryCosmosTest : NorthwindSelectQueryTestBase<NorthwindQueryCosmosFixture<NoopModelCustomizer>>
+    public class NorthwindSelectQueryCosmosTest
+        : NorthwindSelectQueryTestBase<NorthwindQueryCosmosFixture<NoopModelCustomizer>>
     {
         public NorthwindSelectQueryCosmosTest(
             NorthwindQueryCosmosFixture<NoopModelCustomizer> fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             ClearLog();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -30,12 +31,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             await AssertQuery(
                 async,
                 ss => ss.Set<Order>().Select(o => new { Value = o.OrderID }),
-                e => e.Value);
+                e => e.Value
+            );
 
             AssertSql(
                 @"SELECT VALUE {""Value"" : c[""OrderID""]}
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Projection_when_arithmetic_expression_precedence(bool async)
@@ -45,7 +48,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT VALUE {""A"" : (c[""OrderID""] / (c[""OrderID""] / 2)), ""B"" : ((c[""OrderID""] / c[""OrderID""]) / 2)}
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Projection_when_arithmetic_expressions(bool async)
@@ -55,7 +59,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT VALUE {""OrderID"" : c[""OrderID""], ""Double"" : (c[""OrderID""] * 2), ""Add"" : (c[""OrderID""] + 23), ""Sub"" : (100000 - c[""OrderID""]), ""Divide"" : (c[""OrderID""] / (c[""OrderID""] / 2)), ""Literal"" : 42, ""o"" : c}
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -66,7 +71,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -77,7 +83,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Projection_when_null_value(bool async)
@@ -87,7 +94,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c[""Region""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -98,7 +106,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Project_to_object_array(bool async)
@@ -108,7 +117,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c[""EmployeeID""], c[""ReportsTo""], c[""Title""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""EmployeeID""] = 1))");
+WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""EmployeeID""] = 1))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -120,7 +130,8 @@ WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""EmployeeID""] = 1))");
                 @"SELECT c[""CustomerID""], c[""Address""], c[""City""], c[""CompanyName""], c[""ContactName""], c[""ContactTitle""], c[""Country""], c[""Fax""], c[""Phone""], c[""PostalCode""], c[""Region""]
 FROM root c
 WHERE ((c[""Discriminator""] = ""Employee"") AND c[""CustomerID""] LIKE N'A%'
-ORDER BY c[""CustomerID""]");
+ORDER BY c[""CustomerID""]"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -131,7 +142,8 @@ ORDER BY c[""CustomerID""]");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Projection_of_entity_type_into_object_list(bool async)
@@ -142,7 +154,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
                 @"SELECT c
 FROM root c
 WHERE (c[""Discriminator""] = ""Customer"")
-ORDER BY c[""CustomerID""]");
+ORDER BY c[""CustomerID""]"
+            );
         }
 
         public override async Task Project_to_int_array(bool async)
@@ -152,29 +165,34 @@ ORDER BY c[""CustomerID""]");
             AssertSql(
                 @"SELECT c[""EmployeeID""], c[""ReportsTo""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""EmployeeID""] = 1))");
+WHERE ((c[""Discriminator""] = ""Employee"") AND (c[""EmployeeID""] = 1))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Select_bool_closure_with_order_by_property_with_cast_to_nullable(bool async)
-        {
+        public override async Task Select_bool_closure_with_order_by_property_with_cast_to_nullable(
+            bool async
+        ) {
             await base.Select_bool_closure_with_order_by_property_with_cast_to_nullable(async);
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Select_bool_closure_with_order_parameter_with_cast_to_nullable(bool async)
-        {
+        public override async Task Select_bool_closure_with_order_parameter_with_cast_to_nullable(
+            bool async
+        ) {
             await base.Select_bool_closure_with_order_parameter_with_cast_to_nullable(async);
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_scalar(bool async)
@@ -184,7 +202,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c[""City""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_anonymous_one(bool async)
@@ -194,7 +213,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c[""City""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_anonymous_two(bool async)
@@ -204,7 +224,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c[""City""], c[""Phone""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_anonymous_three(bool async)
@@ -214,7 +235,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c[""City""], c[""Phone""], c[""Country""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_anonymous_bool_constant_true(bool async)
@@ -224,7 +246,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT VALUE {""CustomerID"" : c[""CustomerID""], ""ConstantTrue"" : true}
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_anonymous_constant_in_expression(bool async)
@@ -234,7 +257,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c[""CustomerID""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_anonymous_conditional_expression(bool async)
@@ -244,7 +268,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT VALUE {""ProductID"" : c[""ProductID""], ""IsAvailable"" : (c[""UnitsInStock""] > 0)}
 FROM root c
-WHERE (c[""Discriminator""] = ""Product"")");
+WHERE (c[""Discriminator""] = ""Product"")"
+            );
         }
 
         public override async Task Select_anonymous_with_object(bool async)
@@ -254,7 +279,8 @@ WHERE (c[""Discriminator""] = ""Product"")");
             AssertSql(
                 @"SELECT c[""City""], c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_constant_int(bool async)
@@ -264,7 +290,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT VALUE {""c"" : 0}
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_constant_null_string(bool async)
@@ -274,7 +301,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT VALUE {""c"" : null}
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_local(bool async)
@@ -286,7 +314,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
 
 SELECT VALUE {""c"" : @__x_0}
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_scalar_primitive_after_take(bool async)
@@ -299,7 +328,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
 SELECT c[""EmployeeID""]
 FROM root c
 WHERE (c[""Discriminator""] = ""Employee"")
-OFFSET 0 LIMIT @__p_0");
+OFFSET 0 LIMIT @__p_0"
+            );
         }
 
         public override async Task Select_project_filter(bool async)
@@ -309,7 +339,8 @@ OFFSET 0 LIMIT @__p_0");
             AssertSql(
                 @"SELECT c[""CompanyName""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))"
+            );
         }
 
         public override async Task Select_project_filter2(bool async)
@@ -319,7 +350,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
             AssertSql(
                 @"SELECT c[""City""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
@@ -330,7 +362,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))"
+            );
         }
 
         [ConditionalFact(Skip = "Issue #17246")]
@@ -341,7 +374,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalFact(Skip = "Issue#17246")]
@@ -352,7 +386,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalFact(Skip = "Issue#17246")]
@@ -363,7 +398,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalFact(Skip = "Issue#17246")]
@@ -374,7 +410,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalFact(Skip = "Issue#17246")]
@@ -382,20 +419,21 @@ WHERE (c[""Discriminator""] = ""Customer"")");
         {
             using (var context = CreateContext())
             {
-                var customers = context.Customers
-                    .Where(c => c.CustomerID == "ALFKI")
+                var customers = context.Customers.Where(c => c.CustomerID == "ALFKI")
                     .Select(
-                        c => new
-                        {
-                            Order = (int?)c.Orders
-                                .Where(o => o.OrderID < 10500)
-                                .Select(
-                                    o => o.OrderDetails
-                                        .Where(od => od.OrderID != c.Orders.Count)
-                                        .Select(od => od.ProductID)
-                                        .FirstOrDefault())
-                                .FirstOrDefault()
-                        })
+                        c =>
+                            new
+                            {
+                                Order = (int?)c.Orders.Where(o => o.OrderID < 10500)
+                                    .Select(
+                                        o =>
+                                            o.OrderDetails.Where(od => od.OrderID != c.Orders.Count)
+                                                .Select(od => od.ProductID)
+                                                .FirstOrDefault()
+                                    )
+                                    .FirstOrDefault()
+                            }
+                    )
                     .ToList();
 
                 Assert.Single(customers);
@@ -405,7 +443,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalFact(Skip = "Issue#17246")]
@@ -416,7 +455,8 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI"")
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -427,7 +467,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -438,138 +479,178 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
-        public override async Task Select_non_matching_value_types_int_to_long_introduces_explicit_cast(bool async)
-        {
+        public override async Task Select_non_matching_value_types_int_to_long_introduces_explicit_cast(
+            bool async
+        ) {
             await base.Select_non_matching_value_types_int_to_long_introduces_explicit_cast(async);
 
             AssertSql(
                 @"SELECT c[""OrderID""]
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
-        public override async Task Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(bool async)
-        {
-            await base.Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(async);
+        public override async Task Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
+            bool async
+        ) {
+            await base.Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
+                async
+            );
 
             AssertSql(
                 @"SELECT c[""EmployeeID""]
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
-        public override async Task Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(bool async)
-        {
-            await base.Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(async);
+        public override async Task Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
+            bool async
+        ) {
+            await base.Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
+                async
+            );
 
             AssertSql(
                 @"SELECT c[""EmployeeID""]
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
-        public override async Task Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(bool async)
-        {
-            await base.Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(async);
+        public override async Task Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
+            bool async
+        ) {
+            await base.Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
+                async
+            );
 
             AssertSql(
                 @"SELECT c[""OrderID""]
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
-        public override async Task Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(bool async)
-        {
-            await base.Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(async);
+        public override async Task Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
+            bool async
+        ) {
+            await base.Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
+                async
+            );
 
             AssertSql(
                 @"SELECT VALUE {""c"" : (c[""OrderID""] + c[""OrderID""])}
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
         public override async Task Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
-            bool async)
-        {
-            await base.Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(async);
+            bool async
+        ) {
+            await base.Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
+                async
+            );
 
             AssertSql(
                 @"SELECT c[""OrderID""]
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
-        public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(bool async)
-        {
-            await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(async);
+        public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
+            bool async
+        ) {
+            await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
+                async
+            );
 
             AssertSql(
                 @"SELECT VALUE {""c"" : -(c[""OrderID""])}
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
-        public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(bool async)
-        {
-            await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(async);
+        public override async Task Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
+            bool async
+        ) {
+            await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
+                async
+            );
 
             AssertSql(
                 @"SELECT c[""OrderID""]
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
-        public override async Task Select_non_matching_value_types_from_length_introduces_explicit_cast(bool async)
-        {
+        public override async Task Select_non_matching_value_types_from_length_introduces_explicit_cast(
+            bool async
+        ) {
             await base.Select_non_matching_value_types_from_length_introduces_explicit_cast(async);
 
             AssertSql(
                 @"SELECT c[""CustomerID""]
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
-        public override async Task Select_non_matching_value_types_from_method_call_introduces_explicit_cast(bool async)
-        {
-            await base.Select_non_matching_value_types_from_method_call_introduces_explicit_cast(async);
+        public override async Task Select_non_matching_value_types_from_method_call_introduces_explicit_cast(
+            bool async
+        ) {
+            await base.Select_non_matching_value_types_from_method_call_introduces_explicit_cast(
+                async
+            );
 
             AssertSql(
                 @"SELECT c[""OrderID""]
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
-        public override async Task Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(bool async)
-        {
-            await base.Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(async);
+        public override async Task Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
+            bool async
+        ) {
+            await base.Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
+                async
+            );
 
             AssertSql(
                 @"SELECT c[""OrderID""]
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task
-            Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
-                bool async)
-        {
+        public override async Task Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
+            bool async
+        ) {
             await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
-                async);
+                async
+            );
 
             AssertSql("");
         }
@@ -581,7 +662,8 @@ ORDER BY c[""OrderID""]");
             AssertSql(
                 @"SELECT VALUE {""c"" : ((c[""CustomerID""] = null) ? true : (c[""OrderID""] < 100))}
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -592,7 +674,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))")
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Employee"")");
+WHERE (c[""Discriminator""] = ""Employee"")"
+            );
         }
 
         public override async Task Projection_containing_DateTime_subtraction(bool async)
@@ -602,150 +685,229 @@ WHERE (c[""Discriminator""] = ""Employee"")");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10300))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10300))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(bool async)
-        {
+        public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(
+            bool async
+        ) {
             await AssertQuery(
                 async,
-                ss => ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI").Select(
-                    c => c.Orders.OrderBy(o => o.OrderID).Select(o => o.CustomerID).Take(1).FirstOrDefault()));
+                ss =>
+                    ss.Set<Customer>()
+                        .Where(c => c.CustomerID == "ALFKI")
+                        .Select(
+                            c =>
+                                c.Orders.OrderBy(o => o.OrderID)
+                                    .Select(o => o.CustomerID)
+                                    .Take(1)
+                                    .FirstOrDefault()
+                        )
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(bool async)
-        {
+        public override async Task Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(
+            bool async
+        ) {
             await AssertQuery(
                 async,
-                ss => ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI").Select(
-                    c => c.Orders.OrderBy(o => o.OrderID).Select(o => o.CustomerID).Skip(1).FirstOrDefault()));
+                ss =>
+                    ss.Set<Customer>()
+                        .Where(c => c.CustomerID == "ALFKI")
+                        .Select(
+                            c =>
+                                c.Orders.OrderBy(o => o.OrderID)
+                                    .Select(o => o.CustomerID)
+                                    .Skip(1)
+                                    .FirstOrDefault()
+                        )
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(bool async)
-        {
+        public override async Task Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(
+            bool async
+        ) {
             await AssertQuery(
                 async,
-                ss => ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI").Select(
-                    c => c.Orders.OrderBy(o => o.OrderID).Select(o => o.CustomerID).Distinct().FirstOrDefault()));
+                ss =>
+                    ss.Set<Customer>()
+                        .Where(c => c.CustomerID == "ALFKI")
+                        .Select(
+                            c =>
+                                c.Orders.OrderBy(o => o.OrderID)
+                                    .Select(o => o.CustomerID)
+                                    .Distinct()
+                                    .FirstOrDefault()
+                        )
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(bool async)
-        {
-            await base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(async);
+        public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
+            bool async
+        ) {
+            await base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
+                async
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(bool async)
-        {
+        public override async Task Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(
+            bool async
+        ) {
             await AssertQuery(
                 async,
-                ss => ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI").Select(
-                    c => c.Orders.OrderBy(o => o.OrderID).Select(o => o.CustomerID).Take(1).FirstOrDefault()));
+                ss =>
+                    ss.Set<Customer>()
+                        .Where(c => c.CustomerID == "ALFKI")
+                        .Select(
+                            c =>
+                                c.Orders.OrderBy(o => o.OrderID)
+                                    .Select(o => o.CustomerID)
+                                    .Take(1)
+                                    .FirstOrDefault()
+                        )
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
-        public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(bool async)
-        {
+        public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(
+            bool async
+        ) {
             await AssertQuery(
                 async,
-                ss => ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI").Select(
-                    c => c.Orders.OrderBy(o => o.OrderID)
-                        .ThenByDescending(o => o.OrderDate)
-                        .Select(o => o.CustomerID)
-                        .Take(2)
-                        .FirstOrDefault()));
+                ss =>
+                    ss.Set<Customer>()
+                        .Where(c => c.CustomerID == "ALFKI")
+                        .Select(
+                            c =>
+                                c.Orders.OrderBy(o => o.OrderID)
+                                    .ThenByDescending(o => o.OrderDate)
+                                    .Select(o => o.CustomerID)
+                                    .Take(2)
+                                    .FirstOrDefault()
+                        )
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
-        public override async Task
-            Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
-                bool async)
-        {
-            await base
-                .Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
-                    async);
+        public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
+            bool async
+        ) {
+            await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
+                async
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
-        public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(bool async)
-        {
+        public override async Task Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(
+            bool async
+        ) {
             await AssertQuery(
                 async,
-                ss => ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI").Select(
-                    c => c.Orders.OrderBy(o => o.CustomerID)
-                        .ThenByDescending(o => o.OrderDate)
-                        .Select(o => o.CustomerID)
-                        .Take(2)
-                        .FirstOrDefault()));
+                ss =>
+                    ss.Set<Customer>()
+                        .Where(c => c.CustomerID == "ALFKI")
+                        .Select(
+                            c =>
+                                c.Orders.OrderBy(o => o.CustomerID)
+                                    .ThenByDescending(o => o.OrderDate)
+                                    .Select(o => o.CustomerID)
+                                    .Take(2)
+                                    .FirstOrDefault()
+                        )
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(bool async)
-        {
+        public override async Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(
+            bool async
+        ) {
             await AssertQueryScalar(
                 async,
-                ss => ss.Set<Order>().Where(o => o.OrderID < 10250)
-                    .Select(o => o.OrderDetails.OrderBy(od => od.Product.ProductName).Select(od => od.OrderID).Take(1).FirstOrDefault()));
+                ss =>
+                    ss.Set<Order>()
+                        .Where(o => o.OrderID < 10250)
+                        .Select(
+                            o =>
+                                o.OrderDetails.OrderBy(od => od.Product.ProductName)
+                                    .Select(od => od.OrderID)
+                                    .Take(1)
+                                    .FirstOrDefault()
+                        )
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
         public override async Task Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
-            bool async)
-        {
-            await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(async);
+            bool async
+        ) {
+            await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
+                async
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))"
+            );
         }
 
         public override async Task Select_datetime_year_component(bool async)
@@ -755,7 +917,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Select_datetime_month_component(bool async)
@@ -765,7 +928,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Select_datetime_day_of_year_component(bool async)
@@ -775,7 +939,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Select_datetime_day_component(bool async)
@@ -785,7 +950,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Select_datetime_hour_component(bool async)
@@ -795,7 +961,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Select_datetime_minute_component(bool async)
@@ -805,7 +972,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Select_datetime_second_component(bool async)
@@ -815,7 +983,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Select_datetime_millisecond_component(bool async)
@@ -825,7 +994,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Select_byte_constant(bool async)
@@ -835,7 +1005,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT VALUE {""c"" : ((c[""CustomerID""] = ""ALFKI"") ? 1 : 2)}
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_short_constant(bool async)
@@ -845,7 +1016,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT VALUE {""c"" : ((c[""CustomerID""] = ""ALFKI"") ? 1 : 2)}
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Select_bool_constant(bool async)
@@ -855,7 +1027,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT VALUE {""c"" : ((c[""CustomerID""] = ""ALFKI"") ? true : false)}
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         public override async Task Anonymous_projection_AsNoTracking_Selector(bool async)
@@ -865,29 +1038,34 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
-        public override async Task Anonymous_projection_with_repeated_property_being_ordered(bool async)
-        {
+        public override async Task Anonymous_projection_with_repeated_property_being_ordered(
+            bool async
+        ) {
             await base.Anonymous_projection_with_repeated_property_being_ordered(async);
 
             AssertSql(
                 @"SELECT VALUE {""A"" : c[""CustomerID""]}
 FROM root c
 WHERE (c[""Discriminator""] = ""Customer"")
-ORDER BY c[""CustomerID""]");
+ORDER BY c[""CustomerID""]"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Anonymous_projection_with_repeated_property_being_ordered_2(bool async)
-        {
+        public override async Task Anonymous_projection_with_repeated_property_being_ordered_2(
+            bool async
+        ) {
             await base.Anonymous_projection_with_repeated_property_being_ordered_2(async);
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         public override async Task Select_GetValueOrDefault_on_DateTime(bool async)
@@ -897,7 +1075,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c[""OrderDate""]
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -908,7 +1087,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -930,14 +1110,16 @@ WHERE (c[""Discriminator""] = ""Customer"")");
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override Task SelectMany_without_result_selector_naked_collection_navigation(bool async)
-        {
+        public override Task SelectMany_without_result_selector_naked_collection_navigation(
+            bool async
+        ) {
             return base.SelectMany_without_result_selector_naked_collection_navigation(async);
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override Task SelectMany_without_result_selector_collection_navigation_composed(bool async)
-        {
+        public override Task SelectMany_without_result_selector_collection_navigation_composed(
+            bool async
+        ) {
             return base.SelectMany_without_result_selector_collection_navigation_composed(async);
         }
 
@@ -984,20 +1166,26 @@ WHERE (c[""Discriminator""] = ""Customer"")");
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
-        public override Task FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(bool async)
-        {
-            return base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(async);
+        public override Task FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
+            bool async
+        ) {
+            return base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
-        public override Task Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(bool async)
-        {
+        public override Task Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(
+            bool async
+        ) {
             return base.Project_non_nullable_value_after_FirstOrDefault_on_empty_collection(async);
         }
 
         public override Task Member_binding_after_ctor_arguments_fails_with_client_eval(bool async)
         {
-            return AssertTranslationFailed(() => base.Member_binding_after_ctor_arguments_fails_with_client_eval(async));
+            return AssertTranslationFailed(
+                () => base.Member_binding_after_ctor_arguments_fails_with_client_eval(async)
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -1013,15 +1201,21 @@ WHERE (c[""Discriminator""] = ""Customer"")");
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override Task SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(bool async)
-        {
-            return base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(async);
+        public override Task SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
+            bool async
+        ) {
+            return base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override Task Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(bool async)
-        {
-            return base.Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(async);
+        public override Task Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(
+            bool async
+        ) {
+            return base.Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1037,7 +1231,8 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT VALUE {""OrderID"" : c[""OrderID""], ""c"" : (c[""OrderID""] + 1000)}
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] = 10243))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] = 10243))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -1047,8 +1242,9 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] = 10243))");
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override Task Collection_FirstOrDefault_with_entity_equality_check_in_projection(bool async)
-        {
+        public override Task Collection_FirstOrDefault_with_entity_equality_check_in_projection(
+            bool async
+        ) {
             return base.Collection_FirstOrDefault_with_entity_equality_check_in_projection(async);
         }
 
@@ -1065,8 +1261,9 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] = 10243))");
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
-        public override Task LastOrDefault_member_access_in_projection_translates_to_server(bool async)
-        {
+        public override Task LastOrDefault_member_access_in_projection_translates_to_server(
+            bool async
+        ) {
             return base.LastOrDefault_member_access_in_projection_translates_to_server(async);
         }
 
@@ -1083,7 +1280,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] = 10243))");
             AssertSql(
                 @"SELECT VALUE {""c"" : ((c[""EmployeeID""] != null) ? c[""EmployeeID""] : 0)}
 FROM root c
-WHERE (c[""Discriminator""] = ""Order"")");
+WHERE (c[""Discriminator""] = ""Order"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -1106,7 +1304,8 @@ WHERE (c[""Discriminator""] = ""Order"")");
                 @"SELECT c[""EmployeeID""]
 FROM root c
 WHERE (c[""Discriminator""] = ""Employee"")
-ORDER BY c[""EmployeeID""] DESC");
+ORDER BY c[""EmployeeID""] DESC"
+            );
         }
 
         public override async Task Reverse_changes_desc_order_to_asc(bool async)
@@ -1117,7 +1316,8 @@ ORDER BY c[""EmployeeID""] DESC");
                 @"SELECT c[""EmployeeID""]
 FROM root c
 WHERE (c[""Discriminator""] = ""Employee"")
-ORDER BY c[""EmployeeID""]");
+ORDER BY c[""EmployeeID""]"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -1134,7 +1334,8 @@ ORDER BY c[""EmployeeID""]");
                 @"SELECT VALUE {""c"" : (c[""City""] = ""Seattle"")}
 FROM root c
 WHERE (c[""Discriminator""] = ""Customer"")
-ORDER BY c[""CustomerID""]");
+ORDER BY c[""CustomerID""]"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -1150,38 +1351,53 @@ ORDER BY c[""CustomerID""]");
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
-        public override Task Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(bool async)
-        {
-            return base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(async);
+        public override Task Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
+            bool async
+        ) {
+            return base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
-        public override Task Correlated_collection_after_distinct_not_containing_original_identifier(bool async)
-        {
-            return base.Correlated_collection_after_distinct_not_containing_original_identifier(async);
+        public override Task Correlated_collection_after_distinct_not_containing_original_identifier(
+            bool async
+        ) {
+            return base.Correlated_collection_after_distinct_not_containing_original_identifier(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
-        public override Task Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(bool async)
-        {
-            return base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(async);
+        public override Task Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
+            bool async
+        ) {
+            return base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
-        public override Task Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(bool async)
-        {
-            return base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(async);
+        public override Task Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
+            bool async
+        ) {
+            return base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
+                async
+            );
         }
 
         public override Task Reverse_without_explicit_ordering(bool async)
         {
             return AssertTranslationFailedWithDetails(
-                () => base.Reverse_without_explicit_ordering(async), CosmosStrings.MissingOrderingInSelectExpression);
+                () => base.Reverse_without_explicit_ordering(async),
+                CosmosStrings.MissingOrderingInSelectExpression
+            );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
-        public override Task Custom_projection_reference_navigation_PK_to_FK_optimization(bool async)
-        {
+        public override Task Custom_projection_reference_navigation_PK_to_FK_optimization(
+            bool async
+        ) {
             return base.Custom_projection_reference_navigation_PK_to_FK_optimization(async);
         }
 
@@ -1192,49 +1408,68 @@ ORDER BY c[""CustomerID""]");
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
-        public override Task Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(bool async)
-        {
-            return base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(async);
+        public override Task Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
+            bool async
+        ) {
+            return base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
+                async
+            );
         }
 
         public override async Task Projection_take_predicate_projection(bool async)
         {
             await base.Projection_take_predicate_projection(async);
 
-            AssertSql(@"@__p_0='10'
+            AssertSql(
+                @"@__p_0='10'
 
 SELECT VALUE {""Aggregate"" : ((c[""CustomerID""] || "" "") || c[""City""])}
 FROM root c
 WHERE ((c[""Discriminator""] = ""Customer"") AND ((c[""CustomerID""] != null) AND ((""A"" != null) AND STARTSWITH(c[""CustomerID""], ""A""))))
 ORDER BY c[""CustomerID""]
-OFFSET 0 LIMIT @__p_0");
+OFFSET 0 LIMIT @__p_0"
+            );
         }
 
-        public override async Task Projection_take_projection_doesnt_project_intermittent_column(bool async)
-        {
+        public override async Task Projection_take_projection_doesnt_project_intermittent_column(
+            bool async
+        ) {
             await base.Projection_take_projection_doesnt_project_intermittent_column(async);
 
-            AssertSql(@"@__p_0='10'
+            AssertSql(
+                @"@__p_0='10'
 
 SELECT VALUE {""Aggregate"" : ((c[""CustomerID""] || "" "") || c[""City""])}
 FROM root c
 WHERE (c[""Discriminator""] = ""Customer"")
 ORDER BY c[""CustomerID""]
-OFFSET 0 LIMIT @__p_0");
+OFFSET 0 LIMIT @__p_0"
+            );
         }
 
-        public override async Task Projection_skip_projection_doesnt_project_intermittent_column(bool async)
-        {
-            var message = (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Projection_skip_projection_doesnt_project_intermittent_column(async))).Message;
+        public override async Task Projection_skip_projection_doesnt_project_intermittent_column(
+            bool async
+        ) {
+            var message =
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            base.Projection_skip_projection_doesnt_project_intermittent_column(
+                                async
+                            )
+                    )
+                ).Message;
 
             Assert.Equal(CosmosStrings.OffsetRequiresLimit, message);
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
-        public override Task Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(bool async)
-        {
-            return base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(async);
+        public override Task Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
+            bool async
+        ) {
+            return base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
@@ -1250,8 +1485,9 @@ OFFSET 0 LIMIT @__p_0");
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
-        public override Task Do_not_erase_projection_mapping_when_adding_single_projection(bool async)
-        {
+        public override Task Do_not_erase_projection_mapping_when_adding_single_projection(
+            bool async
+        ) {
             return base.Do_not_erase_projection_mapping_when_adding_single_projection(async);
         }
 
@@ -1262,9 +1498,12 @@ OFFSET 0 LIMIT @__p_0");
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
-        public override Task Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(bool async)
-        {
-            return base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(async);
+        public override Task Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
+            bool async
+        ) {
+            return base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
+                async
+            );
         }
 
         public override async Task Ternary_in_client_eval_assigns_correct_types(bool async)
@@ -1275,7 +1514,8 @@ OFFSET 0 LIMIT @__p_0");
                 @"SELECT VALUE {""CustomerID"" : c[""CustomerID""], ""OrderDate"" : c[""OrderDate""], ""c"" : (c[""OrderID""] - 10000)}
 FROM root c
 WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10300))
-ORDER BY c[""OrderID""]");
+ORDER BY c[""OrderID""]"
+            );
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
@@ -1285,14 +1525,16 @@ ORDER BY c[""OrderID""]");
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
-        public override Task Collection_projection_selecting_outer_element_followed_by_take(bool async)
-        {
+        public override Task Collection_projection_selecting_outer_element_followed_by_take(
+            bool async
+        ) {
             return base.Collection_projection_selecting_outer_element_followed_by_take(async);
         }
 
         [ConditionalTheory(Skip = "Cross collection join Issue#17246")]
-        public override Task Take_on_top_level_and_on_collection_projection_with_outer_apply(bool async)
-        {
+        public override Task Take_on_top_level_and_on_collection_projection_with_outer_apply(
+            bool async
+        ) {
             return base.Take_on_top_level_and_on_collection_projection_with_outer_apply(async);
         }
 
@@ -1302,10 +1544,9 @@ ORDER BY c[""OrderID""]");
             return base.Take_on_correlated_collection_in_first(async);
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-        protected override void ClearLog()
-            => Fixture.TestSqlLoggerFactory.Clear();
+        protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
     }
 }

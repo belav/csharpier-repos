@@ -16,9 +16,7 @@ namespace Microsoft.AspNetCore.Owin
         /// <summary>
         /// Initializes a new instance of <see cref="OwinWebSocketAcceptContext"/>.
         /// </summary>
-        public OwinWebSocketAcceptContext() : this(new Dictionary<string, object>(1))
-        {
-        }
+        public OwinWebSocketAcceptContext() : this(new Dictionary<string, object>(1)) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="OwinWebSocketAcceptContext"/>.
@@ -35,8 +33,10 @@ namespace Microsoft.AspNetCore.Owin
             get
             {
                 object obj;
-                if (_options != null && _options.TryGetValue(OwinConstants.WebSocket.SubProtocol, out obj))
-                {
+                if (
+                    _options != null
+                    && _options.TryGetValue(OwinConstants.WebSocket.SubProtocol, out obj)
+                ) {
                     return (string)obj;
                 }
                 return null;

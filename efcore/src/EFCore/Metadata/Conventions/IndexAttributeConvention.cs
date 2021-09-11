@@ -14,7 +14,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that configures database indexes based on the <see cref="IndexAttribute" />.
     /// </summary>
-    public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeBaseTypeChangedConvention, IModelFinalizingConvention
+    public class IndexAttributeConvention
+        : IEntityTypeAddedConvention,
+          IEntityTypeBaseTypeChangedConvention,
+          IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="IndexAttributeConvention" />.
@@ -33,16 +36,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
-            => CheckIndexAttributesAndEnsureIndex(entityTypeBuilder.Metadata, false);
+            IConventionContext<IConventionEntityTypeBuilder> context
+        ) => CheckIndexAttributesAndEnsureIndex(entityTypeBuilder.Metadata, false);
 
         /// <inheritdoc />
         public virtual void ProcessEntityTypeBaseTypeChanged(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
-            IConventionContext<IConventionEntityType> context)
-        {
+            IConventionContext<IConventionEntityType> context
+        ) {
             if (oldBaseType == null)
             {
                 return;
@@ -54,8 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
-        {
+            IConventionContext<IConventionModelBuilder> context
+        ) {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 CheckIndexAttributesAndEnsureIndex(entityType, true);
@@ -64,11 +67,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private static void CheckIndexAttributesAndEnsureIndex(
             IConventionEntityType entityType,
-            bool shouldThrow)
-        {
-            foreach (var indexAttribute in
-                entityType.ClrType.GetCustomAttributes<IndexAttribute>(true))
-            {
+            bool shouldThrow
+        ) {
+            foreach (
+                var indexAttribute in entityType.ClrType.GetCustomAttributes<IndexAttribute>(true)
+            ) {
                 IConventionIndexBuilder? indexBuilder;
                 if (!shouldThrow)
                 {
@@ -84,11 +87,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         indexProperties.Add(property);
                     }
 
-                    indexBuilder = indexAttribute.Name == null
-                        ? entityType.Builder.HasIndex(
-                            indexProperties, fromDataAnnotation: true)
-                        : entityType.Builder.HasIndex(
-                            indexProperties, indexAttribute.Name, fromDataAnnotation: true);
+                    indexBuilder =
+                        indexAttribute.Name == null
+                            ? entityType.Builder.HasIndex(indexProperties, fromDataAnnotation: true)
+                            : entityType.Builder.HasIndex(
+                                  indexProperties,
+                                  indexAttribute.Name,
+                                  fromDataAnnotation: true
+                              );
                 }
                 else
                 {
@@ -97,11 +103,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         // Using the HasIndex(propertyNames) overload gives us
                         // a chance to create a missing property
                         // e.g. if the CLR property existed but was non-public.
-                        indexBuilder = indexAttribute.Name == null
-                            ? entityType.Builder.HasIndex(
-                                indexAttribute.PropertyNames, fromDataAnnotation: true)
-                            : entityType.Builder.HasIndex(
-                                indexAttribute.PropertyNames, indexAttribute.Name, fromDataAnnotation: true);
+                        indexBuilder =
+                            indexAttribute.Name == null
+                                ? entityType.Builder.HasIndex(
+                                      indexAttribute.PropertyNames,
+                                      fromDataAnnotation: true
+                                  )
+                                : entityType.Builder.HasIndex(
+                                      indexAttribute.PropertyNames,
+                                      indexAttribute.Name,
+                                      fromDataAnnotation: true
+                                  );
                     }
                     catch (InvalidOperationException exception)
                     {
@@ -124,8 +136,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private static void CheckIgnoredProperties(
             IndexAttribute indexAttribute,
-            IConventionEntityType entityType)
-        {
+            IConventionEntityType entityType
+        ) {
             foreach (var propertyName in indexAttribute.PropertyNames)
             {
                 if (entityType.Builder.IsIgnored(propertyName, fromDataAnnotation: true))
@@ -136,7 +148,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             CoreStrings.UnnamedIndexDefinedOnIgnoredProperty(
                                 entityType.DisplayName(),
                                 indexAttribute.PropertyNames.Format(),
-                                propertyName));
+                                propertyName
+                            )
+                        );
                     }
 
                     throw new InvalidOperationException(
@@ -144,7 +158,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             indexAttribute.Name,
                             entityType.DisplayName(),
                             indexAttribute.PropertyNames.Format(),
-                            propertyName));
+                            propertyName
+                        )
+                    );
                 }
             }
         }
@@ -152,8 +168,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private static void CheckMissingProperties(
             IndexAttribute indexAttribute,
             IConventionEntityType entityType,
-            InvalidOperationException innerException)
-        {
+            InvalidOperationException innerException
+        ) {
             foreach (var propertyName in indexAttribute.PropertyNames)
             {
                 var property = entityType.FindProperty(propertyName);
@@ -165,8 +181,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             CoreStrings.UnnamedIndexDefinedOnNonExistentProperty(
                                 entityType.DisplayName(),
                                 indexAttribute.PropertyNames.Format(),
-                                propertyName),
-                            innerException);
+                                propertyName
+                            ),
+                            innerException
+                        );
                     }
 
                     throw new InvalidOperationException(
@@ -174,8 +192,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             indexAttribute.Name,
                             entityType.DisplayName(),
                             indexAttribute.PropertyNames.Format(),
-                            propertyName),
-                        innerException);
+                            propertyName
+                        ),
+                        innerException
+                    );
                 }
             }
         }

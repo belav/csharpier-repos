@@ -70,7 +70,6 @@ namespace System.Linq
                             --_state;
                             return true;
                         }
-
                         break;
                 }
 

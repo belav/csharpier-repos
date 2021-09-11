@@ -19,47 +19,81 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParentheses
 {
-    public partial class RemoveUnnecessaryExpressionParenthesesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class RemoveUnnecessaryExpressionParenthesesTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public RemoveUnnecessaryExpressionParenthesesTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public RemoveUnnecessaryExpressionParenthesesTests(ITestOutputHelper logger) : base(logger)
+        { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpRemoveUnnecessaryExpressionParenthesesDiagnosticAnalyzer(), new CSharpRemoveUnnecessaryParenthesesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpRemoveUnnecessaryExpressionParenthesesDiagnosticAnalyzer(),
+                new CSharpRemoveUnnecessaryParenthesesCodeFixProvider()
+            );
 
-        private async Task TestAsync(string initial, string expected, bool offeredWhenRequireForClarityIsEnabled, int index = 0)
-        {
-            await TestInRegularAndScriptAsync(initial, expected, options: RemoveAllUnnecessaryParentheses, index: index);
+        private async Task TestAsync(
+            string initial,
+            string expected,
+            bool offeredWhenRequireForClarityIsEnabled,
+            int index = 0
+        ) {
+            await TestInRegularAndScriptAsync(
+                initial,
+                expected,
+                options: RemoveAllUnnecessaryParentheses,
+                index: index
+            );
 
             if (offeredWhenRequireForClarityIsEnabled)
             {
-                await TestInRegularAndScriptAsync(initial, expected, options: RequireAllParenthesesForClarity, index: index);
+                await TestInRegularAndScriptAsync(
+                    initial,
+                    expected,
+                    options: RequireAllParenthesesForClarity,
+                    index: index
+                );
             }
             else
             {
-                await TestMissingAsync(initial, parameters: new TestParameters(options: RequireAllParenthesesForClarity));
+                await TestMissingAsync(
+                    initial,
+                    parameters: new TestParameters(options: RequireAllParenthesesForClarity)
+                );
             }
         }
 
-        internal override bool ShouldSkipMessageDescriptionVerification(DiagnosticDescriptor descriptor)
-            => descriptor.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary) && descriptor.DefaultSeverity == DiagnosticSeverity.Hidden;
+        internal override bool ShouldSkipMessageDescriptionVerification(
+            DiagnosticDescriptor descriptor
+        ) =>
+            descriptor.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary)
+            && descriptor.DefaultSeverity == DiagnosticSeverity.Hidden;
 
-        private static DiagnosticDescription GetRemoveUnnecessaryParenthesesDiagnostic(string text, int line, int column)
-            => TestHelpers.Diagnostic(IDEDiagnosticIds.RemoveUnnecessaryParenthesesDiagnosticId, text, startLocation: new LinePosition(line, column));
+        private static DiagnosticDescription GetRemoveUnnecessaryParenthesesDiagnostic(
+            string text,
+            int line,
+            int column
+        ) =>
+            TestHelpers.Diagnostic(
+                IDEDiagnosticIds.RemoveUnnecessaryParenthesesDiagnosticId,
+                text,
+                startLocation: new LinePosition(line, column)
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestVariableInitializer_TestWithAllOptionsSetToIgnore()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(1);
     }
-}", new TestParameters(options: IgnoreAllParentheses));
+}",
+                new TestParameters(options: IgnoreAllParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
@@ -67,26 +101,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         public async Task TestVariableInitializer_TestMissingParenthesis()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArithmeticRequiredForClarity1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 1 + $$(2 * 3);
     }
-}", new TestParameters(options: RequireArithmeticBinaryParenthesesForClarity));
+}",
+                new TestParameters(options: RequireArithmeticBinaryParenthesesForClarity)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
@@ -94,13 +131,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         public async Task TestStackAlloc()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var span = $$(stackalloc byte[8]);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
@@ -108,7 +146,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         public async Task TestDynamic()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -116,394 +154,437 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         dynamic s = ""s"";
         Console.WriteLine(s + $$(1 + i));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArithmeticRequiredForClarity2()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = a || $$(b && c);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = a || b && c;
     }
-}", parameters: new TestParameters(options: RequireArithmeticBinaryParenthesesForClarity));
+}",
+                parameters: new TestParameters(
+                    options: RequireArithmeticBinaryParenthesesForClarity
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestLogicalRequiredForClarity1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = a || $$(b && c);
     }
-}", new TestParameters(options: RequireOtherBinaryParenthesesForClarity));
+}",
+                new TestParameters(options: RequireOtherBinaryParenthesesForClarity)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestLogicalRequiredForClarity2()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = a + $$(b * c);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = a + b * c;
     }
-}", parameters: new TestParameters(options: RequireOtherBinaryParenthesesForClarity));
+}",
+                parameters: new TestParameters(options: RequireOtherBinaryParenthesesForClarity)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArithmeticNotRequiredForClarityWhenPrecedenceStaysTheSame_Integral1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 1 + $$(2 + 3);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 1 + 2 + 3;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArithmeticNotRequiredForClarityWhenPrecedenceStaysTheSame_Integral2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(1 + 2) + 3;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 1 + 2 + 3;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArithmeticRequiredForCorrectnessWhenPrecedenceStaysTheSameIfFloatingPoint()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 1.0 + $$(2.0 + 3.0);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArithmeticNotRequiredForClarityWhenPrecedenceStaysTheSame_Floating2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(1.0 + 2.0) + 3.0;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 1.0 + 2.0 + 3.0;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestLogicalNotRequiredForClarityWhenPrecedenceStaysTheSame1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = a || $$(b || c);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = a || b || c;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestLogicalNotRequiredForClarityWhenPrecedenceStaysTheSame2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(a || b) || c;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = a || b || c;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestVariableInitializer_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestReturnStatement_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         return $$(1 + 2);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         return 1 + 2;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestExpressionBody_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     int M() => $$(1 + 2);
 }",
-@"class C
+                @"class C
 {
     int M() => 1 + 2;
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCheckedExpression_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int i = checked($$(1 + 2));
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int i = checked(1 + 2);
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestAssignment_TestAvailableWithAlwaysRemove_And_TestNotAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         i = $$(1 + 2);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         i = 1 + 2;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCompoundAssignment_TestAvailableWithAlwaysRemove_And_TestNotAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         i *= $$(1 + 2);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         i *= 1 + 2;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestPimaryAssignment_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         i = $$(s.Length);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         i = s.Length;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestNestedParenthesizedExpression_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int i = ( $$(1 + 2) );
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int i = ( 1 + 2 );
     }
-}", offeredWhenRequireForClarityIsEnabled: true, index: 1);
+}",
+                offeredWhenRequireForClarityIsEnabled: true,
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestIncrementExpression_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int i = $$(x++);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int i = x++;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestLambdaBody_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         Func<int> i = () => $$(1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         Func<int> i = () => 1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArrayElement_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int[] i = new int[] { $$(1) };
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int[] i = new int[] { 1 };
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestWhereClause_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -512,7 +593,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                 select c;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -520,40 +601,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
                 where c.Age > 21
                 select c;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCastExpression_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int i = (int)$$(1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int i = (int)1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestMissingForConditionalAccess1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string s)
     {
         var v = $$(s?.Length).ToString();
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(37046, "https://github.com/dotnet/roslyn/issues/37046")]
@@ -561,100 +648,111 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         public async Task TestMissingForConditionalAccess2()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string s)
     {
         var v = $$(s?.Length)?.ToString();
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestForConditionalAccessNotInExpression()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string s)
     {
         var v = $$(s?.Length);
     }
 }",
-
-@"class C
+                @"class C
 {
     void M(string s)
     {
         var v = s?.Length;
     }
-}", options: RemoveAllUnnecessaryParentheses);
+}",
+                options: RemoveAllUnnecessaryParentheses
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestMissingForConditionalIndex()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string s)
     {
         var v = $$(s?[0]).ToString();
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestBinaryInCastExpression()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int i = (int)$$(1 + 2);
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestAroundCastExpression_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int i = $$((int)1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int i = (int)1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestConditionalInInterpolation()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var s = $""{ $$(a ? b : c) }"";
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestConditionalInInterpolation_FixAll_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -662,21 +760,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         var s2 = $""{ ((a ? b : c)) }"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var s1 = $""{ (a ? b : c) }"";
         var s2 = $""{ (a ? b : c) }"";
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestConditionalInInterpolation_FixAll_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -684,220 +784,244 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         var s2 = $""{ ((a ? b : c)) }"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var s1 = $""{ (a ? b : c) }"";
         var s2 = $""{ (a ? b : c) }"";
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestNonConditionalInInterpolation_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var s = $""{ $$(true) }"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var s = $""{ true }"";
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestBinaryExpression_TestAvailableWithAlwaysRemove_And_NotAvailableWhenRequiredForClarity_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = $$(a * b) + c;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var q = a * b + c;
     }
-}", offeredWhenRequireForClarityIsEnabled: false);
+}",
+                offeredWhenRequireForClarityIsEnabled: false
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestBinaryExpression_TestAvailableWithAlwaysRemove_And_NotAvailableWhenRequiredForClarity_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = c + $$(a * b);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var q = c + a * b;
     }
-}", offeredWhenRequireForClarityIsEnabled: false);
+}",
+                offeredWhenRequireForClarityIsEnabled: false
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestConditionalExpression_TestNotAvailableForComplexChildren1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = $$(a * b) ? (1 + 2) : (3 + 4);
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestConditionalExpression_TestNotAvailableForComplexChildren2()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = (a * b) ? $$(1 + 2) : (3 + 4);
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestConditionalExpression_TestNotAvailableForComplexChildren3()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = (a * b) ? (1 + 2) : $$(3 + 4);
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestConditionalExpression_TestAvailableForPrimaryChildren1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = $$(a.X()) ? (1 + 2) : (3 + 4);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var q = a.X() ? (1 + 2) : (3 + 4);
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestConditionalExpression_TestAvailableForPrimaryChildren2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = (a.X()) ? $$(x.Length) : (3 + 4);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var q = (a.X()) ? x.Length : (3 + 4);
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestConditionalExpression_TestAvailableForPrimaryChildren3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = (a.X()) ? (1 + 2) : $$(a[0]);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var q = (a.X()) ? (1 + 2) : a[0];
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestIsPattern_TestAvailableWithAlwaysRemove_And_NotAvailableWhenRequiredForClarity_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         if ( $$(a[0]) is string s) { }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         if ( a[0] is string s) { }
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestIsPattern_TestAvailableWithAlwaysRemove_And_NotAvailableWhenRequiredForClarity_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         if ( $$(a * b) is int i) { }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         if ( a * b is int i) { }
     }
-}", offeredWhenRequireForClarityIsEnabled: false);
+}",
+                offeredWhenRequireForClarityIsEnabled: false
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestForOverloadedOperatorOnLeft()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(C c1, C c2, C c3)
     {
@@ -906,7 +1030,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
 
     public static C operator +(C c1, C c2) => null;
 }",
-@"class C
+                @"class C
 {
     void M(C c1, C c2, C c3)
     {
@@ -914,14 +1038,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
     }
 
     public static C operator +(C c1, C c2) => null;
-}", parameters: new TestParameters(options: RequireAllParenthesesForClarity));
+}",
+                parameters: new TestParameters(options: RequireAllParenthesesForClarity)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestMissingForOverloadedOperatorOnRight()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(C c1, C c2, C c3)
     {
@@ -929,171 +1055,197 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
     }
 
     public static C operator +(C c1, C c2) => null;
-}", parameters: new TestParameters(options: RequireAllParenthesesForClarity));
+}",
+                parameters: new TestParameters(options: RequireAllParenthesesForClarity)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestShiftRequiredForClarity1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x =  $$(1 + 2) << 3;
     }
-}", parameters: new TestParameters(options: RequireArithmeticBinaryParenthesesForClarity));
+}",
+                parameters: new TestParameters(
+                    options: RequireArithmeticBinaryParenthesesForClarity
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestShiftRequiredForClarity2()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(1 + 2) << 3;
     }
-}", parameters: new TestParameters(options: RequireAllParenthesesForClarity));
+}",
+                parameters: new TestParameters(options: RequireAllParenthesesForClarity)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestDoNotRemoveShiftAcrossPrecedence()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(1 + 2) << 3;
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestRemoveShiftIfNotNecessary2()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(1 << 2) << 3;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 1 << 2 << 3;
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestDoNotRemoveShiftAcrossSamePrecedenceIfValueWouldChange()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 1 << $$(2 << 3);
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestDoNotRemoveShiftIfShiftKindDiffers()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(1 >> 2) << 3;
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestRemoveCoalesceIfNotNecessary1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = $$(a ?? b) ?? c;
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestRemoveCoalesceIfNotNecessary2()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = a ?? $$(b ?? c);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = a ?? b ?? c;
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestBitwiseExpression_TestMissingWithDifferencePrecedence1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = $$(a + b) & c;
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestBitwiseExpression_TestMissingWithDifferencePrecedence2()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = $$(a | b) & c;
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestBitwiseExpression_TestAvailableWithSamePrecedenceMissingWithDifferencePrecedence2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         var q = $$(a & b) & c;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var q = a & b & c;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [WorkItem(25554, "https://github.com/dotnet/roslyn/issues/25554")]
@@ -1101,7 +1253,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         public async Task TestSwitchCase_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1111,7 +1263,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1120,7 +1272,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             case default(bool):
         }
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [WorkItem(25554, "https://github.com/dotnet/roslyn/issues/25554")]
@@ -1128,7 +1282,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         public async Task TestSwitchCase_WithWhenClause_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1138,7 +1292,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1147,7 +1301,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             case default(bool) when true:
         }
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [WorkItem(25554, "https://github.com/dotnet/roslyn/issues/25554")]
@@ -1155,7 +1311,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         public async Task TestWhenClause_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1165,7 +1321,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1174,7 +1330,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             case true when default(bool):
         }
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [WorkItem(25554, "https://github.com/dotnet/roslyn/issues/25554")]
@@ -1182,7 +1340,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         public async Task TestConstantPatternExpression_TestAvailableWithAlwaysRemove_And_TestAvailableWhenRequiredForClarity()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1191,7 +1349,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1199,7 +1357,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
         }
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [WorkItem(25554, "https://github.com/dotnet/roslyn/issues/25554")]
@@ -1207,7 +1367,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         public async Task TestConstantPatternExpression_RequiredForPrecedence()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string s)
     {
@@ -1215,753 +1375,821 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         {
         }
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCastAmbiguity1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)$$(-1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCastAmbiguity2()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)$$(+1);
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCastAmbiguity3()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)$$(&1);
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCastAmbiguity4()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)$$(*1);
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestPrimitiveCastNoAmbiguity1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (int)$$(-1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (int)-1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestPrimitiveCastNoAmbiguity2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (int)$$(+1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (int)+1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestPrimitiveCastNoAmbiguity3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (int)$$(&x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (int)&x;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestPrimitiveCastNoAmbiguity4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (int)$$(*x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (int)*x;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArrayCastNoAmbiguity1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T[])$$(-1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T[])-1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArrayCastNoAmbiguity2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T[])$$(+1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T[])+1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArrayCastNoAmbiguity3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T[])$$(&x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T[])&x;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestArrayCastNoAmbiguity4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T[])$$(*x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T[])*x;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestPointerCastNoAmbiguity1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T*)$$(-1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T*)-1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestPointerCastNoAmbiguity2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T*)$$(+1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T*)+1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestPointerCastNoAmbiguity3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T*)$$(&x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T*)&x;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestPointerCastNoAmbiguity4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T*)$$(*x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T*)*x;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestNullableCastNoAmbiguity1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T?)$$(-1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T?)-1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestNullableCastNoAmbiguity2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T?)$$(+1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T?)+1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestNullableCastNoAmbiguity3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T?)$$(&x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T?)&x;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestNullableCastNoAmbiguity4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T?)$$(*x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (T?)*x;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestAliasCastNoAmbiguity1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (e::N.T)$$(-1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (e::N.T)-1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestAliasCastNoAmbiguity2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (e::N.T)$$(+1);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (e::N.T)+1;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestAliasCastNoAmbiguity3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (e::N.T)$$(&x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (e::N.T)&x;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestAliasCastNoAmbiguity4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (e::N.T)$$(*x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (e::N.T)*x;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCastOfPrimary()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)$$(a);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)a;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCastOfMemberAccess()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)$$(a.b);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)a.b;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCastOfNonAmbiguousUnary()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)$$(!a);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)!a;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestCastOfCast()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)$$((Y)a);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = (X)(Y)a;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestIsPatternAndLogical_TestWithAllOptionsSetToIgnore()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object expression)
     {
         if ($$(expression is bool b) && b) { }
     }
 }",
-@"class C
+                @"class C
 {
     void M(object expression)
     {
         if (expression is bool b && b) { }
     }
 }",
-offeredWhenRequireForClarityIsEnabled: false);
+                offeredWhenRequireForClarityIsEnabled: false
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestGuardPatternMissing()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(object expression)
     {
         if (!$$(expression is bool b)) { }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundLValueMemberAccess()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         $$(this.Property) = Property;
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         this.Property = Property;
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundMultiplicationInAddEquals()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         x += $$(y * z)
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         x += y * z
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundAddInMultipleEquals()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         x *= $$(y + z)
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         x *= y + z
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestNecessaryCast()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         $$((short)3).ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundChecked()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 3 * $$(checked(5));
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 3 * checked(5);
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundUnchecked()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 3 * $$(unchecked(5));
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         int x = 3 * unchecked(5);
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundNameof()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         string property = ""My "" + $$(nameof(property));
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         string property = ""My "" + nameof(property);
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensIsCheck()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         bool x = $$("""" is string);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         bool x = """" is string;
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestNecessaryParensAroundIs()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         string x = $$("""" is string).ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundAssignmentInInitialization()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1969,7 +2197,7 @@ offeredWhenRequireForClarityIsEnabled: true);
         string x = $$(y = ""text"");
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1977,137 +2205,145 @@ offeredWhenRequireForClarityIsEnabled: true);
         string x = y = ""text"";
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundLambda1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         Func<string, string> y2 = $$(v => v);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         Func<string, string> y2 = v => v;
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundLambda2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         Func<string, string> y2 = $$((v) => v);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         Func<string, string> y2 = (v) => v;
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundCastedLambda1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         string y = ((Func<string, string>)$$((v) => v))(""text"");
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundCastedLambda2()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         string y = ($$(Func<string, string>)((v) => v))(""text"");
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundCastedLambda3()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         string y = $$((Func<string, string>)((v) => v))(""text"");
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundReturnValue1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         return$$(value);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         return value;
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundReturnValue2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         return $$(value);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         return value;
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestParensAroundPPDirective1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -2115,7 +2351,7 @@ offeredWhenRequireForClarityIsEnabled: true);
 #endif
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -2123,7 +2359,8 @@ offeredWhenRequireForClarityIsEnabled: true);
 #endif
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true);
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
@@ -2131,7 +2368,7 @@ offeredWhenRequireForClarityIsEnabled: true);
         {
             // Currently producing broken code.
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -2139,7 +2376,7 @@ offeredWhenRequireForClarityIsEnabled: true);
 #endif
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -2147,7 +2384,9 @@ offeredWhenRequireForClarityIsEnabled: true);
 #endif
     }
 }",
-offeredWhenRequireForClarityIsEnabled: true, index: 1);
+                offeredWhenRequireForClarityIsEnabled: true,
+                index: 1
+            );
         }
 
         [WorkItem(29454, "https://github.com/dotnet/roslyn/issues/29454")]
@@ -2155,13 +2394,15 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestMissingForPreIncrement()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(int x)
     {
         var v = (byte)$$(++x);
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(29454, "https://github.com/dotnet/roslyn/issues/29454")]
@@ -2169,13 +2410,15 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestMissingForPreDecrement()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(int x)
     {
         var v = (byte)$$(--x);
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(29454, "https://github.com/dotnet/roslyn/issues/29454")]
@@ -2183,21 +2426,22 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestForPostIncrement()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(int x)
     {
         var v = (byte)$$(x++);
     }
 }",
-
-@"class C
+                @"class C
 {
     void M(int x)
     {
         var v = (byte)x++;
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(29454, "https://github.com/dotnet/roslyn/issues/29454")]
@@ -2205,21 +2449,22 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestForPostDecrement()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(int x)
     {
         var v = (byte)$$(x--);
     }
 }",
-
-@"class C
+                @"class C
 {
     void M(int x)
     {
         var v = (byte)x--;
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(29454, "https://github.com/dotnet/roslyn/issues/29454")]
@@ -2227,20 +2472,22 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestForPreIncrementInLocalDeclaration()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(int x)
     {
         var v = $$(++x);
     }
 }",
-@"class C
+                @"class C
 {
     void M(int x)
     {
         var v = ++x;
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(29454, "https://github.com/dotnet/roslyn/issues/29454")]
@@ -2248,20 +2495,22 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestForPreIncrementInSimpleAssignment()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(int x, int v)
     {
         v = $$(++x);
     }
 }",
-@"class C
+                @"class C
 {
     void M(int x, int v)
     {
         v = ++x;
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(29454, "https://github.com/dotnet/roslyn/issues/29454")]
@@ -2269,20 +2518,22 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestForPreIncrementInArgument()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(int x)
     {
         M($$(++x));
     }
 }",
-@"class C
+                @"class C
 {
     void M(int x)
     {
         M(++x);
     }
-}", parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(29454, "https://github.com/dotnet/roslyn/issues/29454")]
@@ -2290,13 +2541,15 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestMissingForPreIncrementAfterAdd()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(int x)
     {
         var v = x+$$(++x);
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(29454, "https://github.com/dotnet/roslyn/issues/29454")]
@@ -2304,13 +2557,15 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestMissingForUnaryPlusAfterAdd()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(int x)
     {
         var v = x+$$(+x);
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(31103, "https://github.com/dotnet/roslyn/issues/31103")]
@@ -2318,13 +2573,15 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestMissingForConditionalRefAsLeftHandSideValue()
         {
             await TestMissingAsync(
-@"class Bar
+                @"class Bar
 {
     void Foo(bool cond, double a, double b)
     {
         [||](cond ? ref a : ref b) = 6.67e-11;
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(31103, "https://github.com/dotnet/roslyn/issues/31103")]
@@ -2332,21 +2589,22 @@ offeredWhenRequireForClarityIsEnabled: true, index: 1);
         public async Task TestConditionalExpressionAsRightHandSideValue()
         {
             await TestInRegularAndScript1Async(
-@"class Bar
+                @"class Bar
 {
     void Foo(bool cond, double a, double b)
     {
         double c = $$(cond ? a : b);
     }
 }",
-@"class Bar
+                @"class Bar
 {
     void Foo(bool cond, double a, double b)
     {
         double c = cond ? a : b;
     }
 }",
-parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
+                parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(32085, "https://github.com/dotnet/roslyn/issues/32085")]
@@ -2354,73 +2612,110 @@ parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
         public async Task TestMissingForNestedConditionalExpressionInLambda()
         {
             await TestMissingAsync(
-@"class Bar
+                @"class Bar
 {
     void Test(bool a)
     {
         Func<int, string> lambda =
             number => number + $""{ ($$a ? ""foo"" : ""bar"") }"";
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [WorkItem(27925, "https://github.com/dotnet/roslyn/issues/27925")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestUnnecessaryParenthesisDiagnosticSingleLineExpression()
         {
-            var parentheticalExpressionDiagnostic = GetRemoveUnnecessaryParenthesesDiagnostic("(1 + 2)", 4, 16);
+            var parentheticalExpressionDiagnostic = GetRemoveUnnecessaryParenthesesDiagnostic(
+                "(1 + 2)",
+                4,
+                16
+            );
             await TestDiagnosticsAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = [|(1 + 2)|];
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses), parentheticalExpressionDiagnostic);
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses),
+                parentheticalExpressionDiagnostic
+            );
         }
 
         [WorkItem(27925, "https://github.com/dotnet/roslyn/issues/27925")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestUnnecessaryParenthesisDiagnosticInMultiLineExpression()
         {
-            var firstLineParentheticalExpressionDiagnostic = GetRemoveUnnecessaryParenthesesDiagnostic("(1 +", 4, 16);
+            var firstLineParentheticalExpressionDiagnostic =
+                GetRemoveUnnecessaryParenthesesDiagnostic("(1 +", 4, 16);
             await TestDiagnosticsAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = [|(1 +
             2)|];
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses), firstLineParentheticalExpressionDiagnostic);
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses),
+                firstLineParentheticalExpressionDiagnostic
+            );
         }
 
         [WorkItem(27925, "https://github.com/dotnet/roslyn/issues/27925")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestUnnecessaryParenthesisDiagnosticInNestedExpression()
         {
-            var outerParentheticalExpressionDiagnostic = GetRemoveUnnecessaryParenthesesDiagnostic("(1 + (2 + 3) + 4)", 4, 16);
-            var innerParentheticalExpressionDiagnostic = GetRemoveUnnecessaryParenthesesDiagnostic("(2 + 3)", 4, 21);
-            var expectedDiagnostics = new DiagnosticDescription[] { outerParentheticalExpressionDiagnostic, innerParentheticalExpressionDiagnostic };
+            var outerParentheticalExpressionDiagnostic = GetRemoveUnnecessaryParenthesesDiagnostic(
+                "(1 + (2 + 3) + 4)",
+                4,
+                16
+            );
+            var innerParentheticalExpressionDiagnostic = GetRemoveUnnecessaryParenthesesDiagnostic(
+                "(2 + 3)",
+                4,
+                21
+            );
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
+                outerParentheticalExpressionDiagnostic,
+                innerParentheticalExpressionDiagnostic
+            };
             await TestDiagnosticsAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int x = [|(1 + (2 + 3) + 4)|];
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses), expectedDiagnostics);
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses),
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(27925, "https://github.com/dotnet/roslyn/issues/27925")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestUnnecessaryParenthesisDiagnosticInNestedMultiLineExpression()
         {
-            var outerFirstLineParentheticalExpressionDiagnostic = GetRemoveUnnecessaryParenthesesDiagnostic("(1 + 2 +", 4, 16);
-            var innerParentheticalExpressionDiagnostic = GetRemoveUnnecessaryParenthesesDiagnostic("(3 + 4)", 5, 12);
-            var expectedDiagnostics = new DiagnosticDescription[] { outerFirstLineParentheticalExpressionDiagnostic, innerParentheticalExpressionDiagnostic };
+            var outerFirstLineParentheticalExpressionDiagnostic =
+                GetRemoveUnnecessaryParenthesesDiagnostic("(1 + 2 +", 4, 16);
+            var innerParentheticalExpressionDiagnostic = GetRemoveUnnecessaryParenthesesDiagnostic(
+                "(3 + 4)",
+                5,
+                12
+            );
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
+                outerFirstLineParentheticalExpressionDiagnostic,
+                innerParentheticalExpressionDiagnostic
+            };
             await TestDiagnosticsAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -2428,14 +2723,18 @@ parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
             (3 + 4) +
             5 + 6)|];
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses), expectedDiagnostics);
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses),
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(39529, "https://github.com/dotnet/roslyn/issues/39529")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestUnnecessaryParenthesisIncludesFadeLocations()
         {
-            var input = @"class C
+            var input =
+                @"class C
 {
     void M()
     {
@@ -2447,11 +2746,15 @@ parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
             using var workspace = CreateWorkspaceFromOptions(input, parameters);
             var expectedSpans = workspace.Documents.First().AnnotatedSpans;
 
-            var diagnostics = await GetDiagnosticsAsync(workspace, parameters).ConfigureAwait(false);
+            var diagnostics = await GetDiagnosticsAsync(workspace, parameters)
+                .ConfigureAwait(false);
             var diagnostic = diagnostics.Single();
 
             Assert.Equal(3, diagnostic.AdditionalLocations.Count);
-            Assert.Equal(expectedSpans["expression"].Single(), diagnostic.AdditionalLocations[0].SourceSpan);
+            Assert.Equal(
+                expectedSpans["expression"].Single(),
+                diagnostic.AdditionalLocations[0].SourceSpan
+            );
             Assert.Equal(expectedSpans["fade"][0], diagnostic.AdditionalLocations[1].SourceSpan);
             Assert.Equal(expectedSpans["fade"][1], diagnostic.AdditionalLocations[2].SourceSpan);
 
@@ -2463,7 +2766,7 @@ parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
         public async Task TestUnnecessaryParenthesesInSwitchExpression()
         {
             await TestAsync(
-    @"class C
+                @"class C
 {
     void M(int x)
     {
@@ -2475,7 +2778,7 @@ parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
             }
     };
 }",
-    @"class C
+                @"class C
 {
     void M(int x)
     {
@@ -2486,7 +2789,9 @@ parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
                 _ => 100,
             }
     };
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [WorkItem(26311, "https://github.com/dotnet/roslyn/issues/26311")]
@@ -2494,7 +2799,7 @@ parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
         public async Task TestUnnecessaryParenthesesAroundDefaultLiteral()
         {
             await TestAsync(
-    @"class C
+                @"class C
 {
     void M()
     {
@@ -2503,7 +2808,7 @@ parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
         string s2 = f ? """" : $$(default);
     }
 }",
-    @"class C
+                @"class C
 {
     void M()
     {
@@ -2511,120 +2816,134 @@ parameters: new TestParameters(options: RemoveAllUnnecessaryParentheses));
 
         string s2 = f ? """" : default;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestRangeWithConstantExpression()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(string s)
     {
         _ = s[$$(1)..];
     }
 }",
-@"class C
+                @"class C
 {
     void M(string s)
     {
         _ = s[1..];
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestRangeWithMemberAccessExpression()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(string s)
     {
         _ = s[$$(s.Length)..];
     }
 }",
-@"class C
+                @"class C
 {
     void M(string s)
     {
         _ = s[s.Length..];
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestRangeWithElementAccessExpression()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(string s, int[] indices)
     {
         _ = s[$$(indices[0])..];
     }
 }",
-@"class C
+                @"class C
 {
     void M(string s, int[] indices)
     {
         _ = s[indices[0]..];
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestRangeWithBinaryExpression()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string s)
     {
         _ = s[$$(s.Length - 5)..];
     }
-}", new TestParameters(options: RemoveAllUnnecessaryParentheses));
+}",
+                new TestParameters(options: RemoveAllUnnecessaryParentheses)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestAlwaysUnnecessaryForPrimaryPattern1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is 1 or $$(2);
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is 1 or 2;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryParentheses)]
         public async Task TestAlwaysUnnecessaryForPrimaryPattern2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is $$(1) or 2;
     }
 }",
-@"class C
+                @"class C
 {
     void M(object o)
     {
         bool x = o is 1 or 2;
     }
-}", offeredWhenRequireForClarityIsEnabled: true);
+}",
+                offeredWhenRequireForClarityIsEnabled: true
+            );
         }
     }
 }

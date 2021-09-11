@@ -17,13 +17,18 @@ namespace ClientSample
             _logger = loggerFactory.CreateLogger<LoggingMessageHandler>();
         }
 
-        public LoggingMessageHandler(ILoggerFactory loggerFactory, HttpMessageHandler innerHandler) : base(innerHandler)
+        public LoggingMessageHandler(
+            ILoggerFactory loggerFactory,
+            HttpMessageHandler innerHandler
+        ) : base(innerHandler)
         {
             _logger = loggerFactory.CreateLogger<LoggingMessageHandler>();
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             _logger.LogDebug("Send: {0} {1}", request.Method, request.RequestUri);
             var result = await base.SendAsync(request, cancellationToken);
             _logger.LogDebug("Recv: {0} {1}", (int)result.StatusCode, request.RequestUri);

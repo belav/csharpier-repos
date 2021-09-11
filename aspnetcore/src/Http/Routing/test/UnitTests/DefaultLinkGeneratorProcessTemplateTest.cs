@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { p1 = "Home", p3 = "bar", }),
                 ambientValues: null,
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -42,12 +43,16 @@ namespace Microsoft.AspNetCore.Routing
         [Theory]
         [InlineData("a/b/c", "/Home/Index/a%2Fb%2Fc")]
         [InlineData("a/b b1/c c1", "/Home/Index/a%2Fb%20b1%2Fc%20c1")]
-        public void TryProcessTemplate_EncodesValue_OfSingleAsteriskCatchAllParameter(string routeValue, string expected)
-        {
+        public void TryProcessTemplate_EncodesValue_OfSingleAsteriskCatchAllParameter(
+            string routeValue,
+            string expected
+        ) {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{*path}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { controller = "Home", action = "Index" });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -56,7 +61,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { path = routeValue, }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -74,12 +80,16 @@ namespace Microsoft.AspNetCore.Routing
         [InlineData("a/b/c/", "/Home/Index/a/b/c/")]
         [InlineData("a/b/c//", "/Home/Index/a/b/c//")]
         [InlineData("a//b//c", "/Home/Index/a//b//c")]
-        public void TryProcessTemplate_DoesNotEncodeSlashes_OfDoubleAsteriskCatchAllParameter(string routeValue, string expected)
-        {
+        public void TryProcessTemplate_DoesNotEncodeSlashes_OfDoubleAsteriskCatchAllParameter(
+            string routeValue,
+            string expected
+        ) {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{**path}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { controller = "Home", action = "Index" });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -88,7 +98,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { path = routeValue, }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -102,7 +113,9 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{**path}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { controller = "Home", action = "Index" });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -111,7 +124,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { path = "a/b b1/c c1" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -125,7 +139,9 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { controller = "Home", action = "Index" });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -134,12 +150,16 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { name = "name with %special #characters" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
             Assert.Equal("/Home/Index", result.path.ToUriComponent());
-            Assert.Equal("?name=name%20with%20%25special%20%23characters", result.query.ToUriComponent());
+            Assert.Equal(
+                "?name=name%20with%20%25special%20%23characters",
+                result.query.ToUriComponent()
+            );
         }
 
         [Fact]
@@ -148,16 +168,21 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { controller = "Home", action = "Index" });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { color = new List<string> { "red", "green", "blue" } }),
+                values: new RouteValueDictionary(
+                    new { color = new List<string> { "red", "green", "blue" } }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -171,7 +196,9 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { controller = "Home", action = "Index" });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -180,7 +207,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { items = new List<int> { 10, 20, 30 } }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -194,16 +222,19 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { controller = "Home", action = "Index" });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { color = new List<string> { } }),
+                values: new RouteValueDictionary(new { color = new List<string> {  } }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -217,21 +248,34 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { controller = "Home", action = "Index" });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { page = 1, color = new List<string> { "red", "green", "blue" }, message = "textfortest" }),
+                values: new RouteValueDictionary(
+                    new
+                    {
+                        page = 1,
+                        color = new List<string> { "red", "green", "blue" },
+                        message = "textfortest"
+                    }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
             Assert.Equal("/Home/Index", result.path.ToUriComponent());
-            Assert.Equal("?page=1&color=red&color=green&color=blue&message=textfortest", result.query.ToUriComponent());
+            Assert.Equal(
+                "?page=1&color=red&color=green&color=blue&message=textfortest",
+                result.query.ToUriComponent()
+            );
         }
 
         [Fact]
@@ -249,7 +293,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Index" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -277,7 +322,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Index" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -306,7 +352,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { id = "18" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -319,7 +366,10 @@ namespace Microsoft.AspNetCore.Routing
         public void TryProcessTemplate_ParameterPolicy_Includes_BufferedValues()
         {
             // Arrange
-            var endpoint = EndpointFactory.CreateRouteEndpoint("Foo/{bar=MyBar}/{id?}", policies: new { bar = new SlugifyParameterTransformer(), });
+            var endpoint = EndpointFactory.CreateRouteEndpoint(
+                "Foo/{bar=MyBar}/{id?}",
+                policies: new { bar = new SlugifyParameterTransformer(), }
+            );
             var linkGenerator = CreateLinkGenerator(endpoints: new[] { endpoint, });
             var httpContext = CreateHttpContext();
 
@@ -330,7 +380,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { id = "18" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -362,7 +413,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "П" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext), // Cryillic uppercase Pe
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -372,7 +424,10 @@ namespace Microsoft.AspNetCore.Routing
             // Convert back to decoded.
             //
             // This is Cyrillic lowercase Pe (not an n).
-            Assert.Equal("/home/п", PathString.FromUriComponent(result.path.ToUriComponent()).Value);
+            Assert.Equal(
+                "/home/п",
+                PathString.FromUriComponent(result.path.ToUriComponent()).Value
+            );
         }
 
         [Fact]
@@ -382,26 +437,29 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
             Action<IServiceCollection> configure = (s) =>
             {
-                s.Configure<RouteOptions>(o =>
-                {
-                    o.LowercaseUrls = true;
-                    o.LowercaseQueryStrings = true;
-                });
+                s.Configure<RouteOptions>(
+                    o =>
+                    {
+                        o.LowercaseUrls = true;
+                        o.LowercaseQueryStrings = true;
+                    }
+                );
             };
 
-            var linkGenerator = CreateLinkGenerator(
-                configure, 
-                endpoints: new[] { endpoint, });
+            var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint, });
             var httpContext = CreateHttpContext(ambientValues: new { controller = "Home" });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -419,9 +477,7 @@ namespace Microsoft.AspNetCore.Routing
                 s.Configure<RouteOptions>(o => o.AppendTrailingSlash = true);
             };
 
-            var linkGenerator = CreateLinkGenerator(
-                configure,
-                endpoints: new[] { endpoint });
+            var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
             var httpContext = CreateHttpContext(ambientValues: new { controller = "Home" });
 
             // Act
@@ -431,7 +487,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Index" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -446,27 +503,30 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
             Action<IServiceCollection> configure = (s) =>
             {
-                s.Configure<RouteOptions>(o =>
-                {
-                    o.LowercaseUrls = true;
-                    o.LowercaseQueryStrings = true;
-                    o.AppendTrailingSlash = true;
-                });
+                s.Configure<RouteOptions>(
+                    o =>
+                    {
+                        o.LowercaseUrls = true;
+                        o.LowercaseQueryStrings = true;
+                        o.AppendTrailingSlash = true;
+                    }
+                );
             };
 
-            var linkGenerator = CreateLinkGenerator(
-                configure,
-                endpoints: new[] { endpoint });
+            var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
             var httpContext = CreateHttpContext(ambientValues: new { controller = "Home" });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -484,9 +544,7 @@ namespace Microsoft.AspNetCore.Routing
                 s.Configure<RouteOptions>(o => o.LowercaseUrls = true);
             };
 
-            var linkGenerator = CreateLinkGenerator(
-                configure,
-                endpoints: new[] { endpoint });
+            var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
             var httpContext = CreateHttpContext(ambientValues: new { controller = "HoMe" });
 
             // Act
@@ -495,12 +553,9 @@ namespace Microsoft.AspNetCore.Routing
                 endpoint: endpoint,
                 values: new RouteValueDictionary(new { action = "InDex" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
-                options: new LinkOptions
-                {
-                    LowercaseUrls = false
-                },
-                result: out var result);
-
+                options: new LinkOptions { LowercaseUrls = false },
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -518,9 +573,7 @@ namespace Microsoft.AspNetCore.Routing
                 s.Configure<RouteOptions>(o => o.LowercaseUrls = false);
             };
 
-            var linkGenerator = CreateLinkGenerator(
-                configure,
-                endpoints: new[] { endpoint });
+            var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
             var httpContext = CreateHttpContext(ambientValues: new { controller = "HoMe" });
 
             // Act
@@ -529,11 +582,9 @@ namespace Microsoft.AspNetCore.Routing
                 endpoint: endpoint,
                 values: new RouteValueDictionary(new { action = "InDex" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
-                options: new LinkOptions()
-                {
-                    LowercaseUrls = true
-                },
-                result: out var result);
+                options: new LinkOptions() { LowercaseUrls = true },
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -548,30 +599,29 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
             Action<IServiceCollection> configure = (s) =>
             {
-                s.Configure<RouteOptions>(o =>
-                {
-                    o.LowercaseUrls = true;
-                    o.LowercaseQueryStrings = true;
-                });
+                s.Configure<RouteOptions>(
+                    o =>
+                    {
+                        o.LowercaseUrls = true;
+                        o.LowercaseQueryStrings = true;
+                    }
+                );
             };
 
-            var linkGenerator = CreateLinkGenerator(
-                configure,
-                endpoints: new[] { endpoint });
+            var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
             var httpContext = CreateHttpContext(ambientValues: new { controller = "Home" });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
-                options: new LinkOptions
-                {
-                    LowercaseUrls = false,
-                    LowercaseQueryStrings = false
-                },
-                result: out var result);
+                options: new LinkOptions { LowercaseUrls = false, LowercaseQueryStrings = false },
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -586,30 +636,29 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
             Action<IServiceCollection> configure = (s) =>
             {
-                s.Configure<RouteOptions>(o =>
-                {
-                    o.LowercaseUrls = false;
-                    o.LowercaseQueryStrings = false;
-                });
+                s.Configure<RouteOptions>(
+                    o =>
+                    {
+                        o.LowercaseUrls = false;
+                        o.LowercaseQueryStrings = false;
+                    }
+                );
             };
 
-            var linkGenerator = CreateLinkGenerator(
-                configure,
-                endpoints: new[] { endpoint });
+            var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
             var httpContext = CreateHttpContext(ambientValues: new { controller = "Home" });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", ShowStatus = "True", INFO = "DETAILED" }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
-                options: new LinkOptions()
-                {
-                    LowercaseUrls = true,
-                    LowercaseQueryStrings = true,
-                },
-                result: out var result);
+                options: new LinkOptions() { LowercaseUrls = true, LowercaseQueryStrings = true, },
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -627,9 +676,7 @@ namespace Microsoft.AspNetCore.Routing
                 s.Configure<RouteOptions>(o => o.AppendTrailingSlash = false);
             };
 
-            var linkGenerator = CreateLinkGenerator(
-                configure,
-                endpoints: new[] { endpoint });
+            var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
             var httpContext = CreateHttpContext(ambientValues: new { controller = "Home" });
 
             // Act
@@ -639,7 +686,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Index" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: new LinkOptions() { AppendTrailingSlash = true, },
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -654,9 +702,10 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 "{p1}/{p2}",
                 defaults: new { p2 = "catchall" },
-                policies: new { p2 = "\\d{4}" });
+                policies: new { p2 = "\\d{4}" }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -665,7 +714,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { p1 = "abcd" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.False(success);
@@ -678,9 +728,10 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 "{p1}/{p2}",
                 defaults: new { p2 = "catchall" },
-                policies: new { p2 = new RegexRouteConstraint("\\d{4}"), });
+                policies: new { p2 = new RegexRouteConstraint("\\d{4}"), }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -689,7 +740,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { p1 = "hello", p2 = "1234" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -704,9 +756,10 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 "{p1}/{*p2}",
                 defaults: new { p2 = "catchall" },
-                policies: new { p2 = new RegexRouteConstraint("\\d{4}") });
+                policies: new { p2 = new RegexRouteConstraint("\\d{4}") }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -715,7 +768,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { p1 = "abcd" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.False(success);
@@ -728,9 +782,10 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 "{p1}/{*p2}",
                 defaults: new { p2 = "catchall" },
-                policies: new { p2 = new RegexRouteConstraint("\\d{4}") });
+                policies: new { p2 = new RegexRouteConstraint("\\d{4}") }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -739,7 +794,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { p1 = "hello", p2 = "1234" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -752,22 +808,25 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var target = new Mock<IRouteConstraint>();
-            target
-                .Setup(
-                    e => e.Match(
-                        It.IsAny<HttpContext>(),
-                        It.IsAny<IRouter>(),
-                        It.IsAny<string>(),
-                        It.IsAny<RouteValueDictionary>(),
-                        It.IsAny<RouteDirection>()))
+            target.Setup(
+                    e =>
+                        e.Match(
+                            It.IsAny<HttpContext>(),
+                            It.IsAny<IRouter>(),
+                            It.IsAny<string>(),
+                            It.IsAny<RouteValueDictionary>(),
+                            It.IsAny<RouteDirection>()
+                        )
+                )
                 .Returns(true)
                 .Verifiable();
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 "{p1}/{p2}",
                 defaults: new { p2 = "catchall" },
-                policies: new { p2 = target.Object });
+                policies: new { p2 = target.Object }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -776,7 +835,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { p1 = "hello", p2 = "1234" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -785,7 +845,6 @@ namespace Microsoft.AspNetCore.Routing
 
             target.VerifyAll();
         }
-
 
         // Any ambient values from the current request should be visible to constraint, even
         // if they have nothing to do with the route generating a link
@@ -797,12 +856,15 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "slug/Home/Store",
                 defaults: new { controller = "Home", action = "Store" },
-                policies: new { c = constraint });
+                policies: new { c = constraint }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
             var httpContext = CreateHttpContext(
-                ambientValues: new { controller = "Home", action = "Blog", extra = "42" });
+                ambientValues: new { controller = "Home", action = "Blog", extra = "42" }
+            );
             var expectedValues = new RouteValueDictionary(
-                new { controller = "Home", action = "Store", extra = "42" });
+                new { controller = "Home", action = "Store", extra = "42" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -811,14 +873,18 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Store" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
             Assert.Equal("/slug/Home/Store", result.path.ToUriComponent());
             Assert.Equal(string.Empty, result.query.ToUriComponent());
 
-            Assert.Equal(expectedValues.OrderBy(kvp => kvp.Key), constraint.Values.OrderBy(kvp => kvp.Key));
+            Assert.Equal(
+                expectedValues.OrderBy(kvp => kvp.Key),
+                constraint.Values.OrderBy(kvp => kvp.Key)
+            );
         }
 
         // Non-parameter default values from the routing generating a link are not in the 'values'
@@ -831,11 +897,15 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "slug/Home/Store",
                 defaults: new { controller = "Home", action = "Store", otherthing = "17" },
-                policies: new { c = constraint });
+                policies: new { c = constraint }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { controller = "Home", action = "Blog" });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { controller = "Home", action = "Blog" }
+            );
             var expectedValues = new RouteValueDictionary(
-                new { controller = "Home", action = "Store" });
+                new { controller = "Home", action = "Store" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -844,14 +914,18 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Store" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
             Assert.Equal("/slug/Home/Store", result.path.ToUriComponent());
             Assert.Equal(string.Empty, result.query.ToUriComponent());
 
-            Assert.Equal(expectedValues.OrderBy(kvp => kvp.Key), constraint.Values.OrderBy(kvp => kvp.Key));
+            Assert.Equal(
+                expectedValues.OrderBy(kvp => kvp.Key),
+                constraint.Values.OrderBy(kvp => kvp.Key)
+            );
         }
 
         // Default values are visible to the constraint when they are used to fill a parameter.
@@ -863,11 +937,15 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "slug/{controller}/{action}",
                 defaults: new { action = "Index" },
-                policies: new { c = constraint, });
+                policies: new { c = constraint, }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { controller = "Home", action = "Blog" });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { controller = "Home", action = "Blog" }
+            );
             var expectedValues = new RouteValueDictionary(
-                new { controller = "Shopping", action = "Index" });
+                new { controller = "Shopping", action = "Index" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -876,7 +954,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { controller = "Shopping" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -894,14 +973,23 @@ namespace Microsoft.AspNetCore.Routing
             var constraint = new CapturingConstraint();
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "slug/Home/Store",
-                defaults: new { controller = "Home", action = "Store", otherthing = "17", thirdthing = "13" },
-                policies: new { c = constraint, });
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "Store",
+                    otherthing = "17",
+                    thirdthing = "13"
+                },
+                policies: new { c = constraint, }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
             var httpContext = CreateHttpContext(
-                ambientValues: new { controller = "Home", action = "Blog", otherthing = "17" });
+                ambientValues: new { controller = "Home", action = "Blog", otherthing = "17" }
+            );
 
             var expectedValues = new RouteValueDictionary(
-                new { controller = "Home", action = "Store", otherthing = "17", thirdthing = "13" });
+                new { controller = "Home", action = "Store", otherthing = "17", thirdthing = "13" }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -910,14 +998,18 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Store", thirdthing = "13" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
             Assert.Equal("/slug/Home/Store", result.path.ToUriComponent());
             Assert.Equal(string.Empty, result.query.ToUriComponent());
 
-            Assert.Equal(expectedValues.OrderBy(kvp => kvp.Key), constraint.Values.OrderBy(kvp => kvp.Key));
+            Assert.Equal(
+                expectedValues.OrderBy(kvp => kvp.Key),
+                constraint.Values.OrderBy(kvp => kvp.Key)
+            );
         }
 
         [Theory]
@@ -929,18 +1021,22 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{id:int}",
                 defaults: new { controller = "Home", action = "Index" },
-                policies: new { });
+                policies: new {  }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = hasHttpContext ? CreateHttpContext(new { }) : null;
+            var httpContext = hasHttpContext ? CreateHttpContext(new {  }) : null;
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", id = 4 }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", controller = "Home", id = 4 }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -955,19 +1051,23 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{id}",
                 defaults: new { controller = "Home", action = "Index" },
-                policies: new { id = "int" });
+                policies: new { id = "int" }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", id = "not-an-integer" }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", controller = "Home", id = "not-an-integer" }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
-            
+                result: out var result
+            );
+
             // Assert
             Assert.False(success);
         }
@@ -975,24 +1075,29 @@ namespace Microsoft.AspNetCore.Routing
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void TryProcessTemplate_InlineConstraints_OptionalParameter_ValuePresent(bool hasHttpContext)
-        {
+        public void TryProcessTemplate_InlineConstraints_OptionalParameter_ValuePresent(
+            bool hasHttpContext
+        ) {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{id:int?}",
                 defaults: new { controller = "Home", action = "Index" },
-                policies: new { });
+                policies: new {  }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = hasHttpContext ? CreateHttpContext(new { }) : null;
+            var httpContext = hasHttpContext ? CreateHttpContext(new {  }) : null;
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", id = 98 }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", controller = "Home", id = 98 }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1007,9 +1112,10 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{id?}",
                 defaults: new { controller = "Home", action = "Index" },
-                policies: new { id = "int" });
+                policies: new { id = "int" }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -1018,7 +1124,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Index", controller = "Home" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1033,18 +1140,22 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{id?}",
                 defaults: new { controller = "Home", action = "Index" },
-                policies: new { id = "int" });
+                policies: new { id = "int" }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", id = "not-an-integer" }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", controller = "Home", id = "not-an-integer" }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.False(success);
@@ -1053,24 +1164,29 @@ namespace Microsoft.AspNetCore.Routing
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void TryProcessTemplate_InlineConstraints_MultipleInlineConstraints(bool hasHttpContext)
-        {
+        public void TryProcessTemplate_InlineConstraints_MultipleInlineConstraints(
+            bool hasHttpContext
+        ) {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{id:int:range(1,20)}",
                 defaults: new { controller = "Home", action = "Index" },
-                policies: new { });
+                policies: new {  }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = hasHttpContext ? CreateHttpContext(new { }) : null;
+            var httpContext = hasHttpContext ? CreateHttpContext(new {  }) : null;
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", id = 14 }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", controller = "Home", id = 14 }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1081,24 +1197,29 @@ namespace Microsoft.AspNetCore.Routing
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void TryProcessTemplate_InlineConstraints_CompositeInlineConstraint_Fails(bool hasHttpContext)
-        {
+        public void TryProcessTemplate_InlineConstraints_CompositeInlineConstraint_Fails(
+            bool hasHttpContext
+        ) {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{id:int:range(1,20)}",
                 defaults: new { controller = "Home", action = "Index" },
-                policies: new { });
+                policies: new {  }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = hasHttpContext ? CreateHttpContext(new { }) : null;
+            var httpContext = hasHttpContext ? CreateHttpContext(new {  }) : null;
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", id = 50 }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", controller = "Home", id = 50 }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.False(success);
@@ -1112,18 +1233,22 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "Home/Index/{name}",
                 defaults: new { controller = "Home", action = "Index" },
-                policies: new { name = constraint });
+                policies: new { name = constraint }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", name = "products" }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", controller = "Home", name = "products" }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1137,16 +1262,19 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{name?}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", name = "products" }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", controller = "Home", name = "products" }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1160,7 +1288,7 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{name?}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -1169,7 +1297,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Index", controller = "Home" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1183,18 +1312,22 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "{controller}/{action}/{name}",
-                defaults: new { name = "default-products" });
+                defaults: new { name = "default-products" }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", name = "products" }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", controller = "Home", name = "products" }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1208,9 +1341,10 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 template: "{controller}/{action}/{name}",
-                defaults: new { name = "products" });
+                defaults: new { name = "products" }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -1219,7 +1353,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Index", controller = "Home" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1233,16 +1368,25 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{name}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", name = "products", format = "json" }),
+                values: new RouteValueDictionary(
+                    new
+                    {
+                        action = "Index",
+                        controller = "Home",
+                        name = "products",
+                        format = "json"
+                    }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1255,18 +1399,22 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
-                template: "{controller}/{action}/.{name?}");
+                template: "{controller}/{action}/.{name?}"
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { action = "Index", controller = "Home", name = "products" }),
+                values: new RouteValueDictionary(
+                    new { action = "Index", controller = "Home", name = "products" }
+                ),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1280,7 +1428,7 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/.{name?}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -1289,8 +1437,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Index", controller = "Home" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
-
+                result: out var result
+            );
 
             Assert.True(success);
             Assert.Equal("/Home/Index/", result.path.ToUriComponent());
@@ -1303,7 +1451,7 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{name?}");
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { });
+            var httpContext = CreateHttpContext(ambientValues: new {  });
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -1312,7 +1460,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { action = "Index", controller = "Home" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1332,10 +1481,11 @@ namespace Microsoft.AspNetCore.Routing
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { }),
+                values: new RouteValueDictionary(new {  }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1355,10 +1505,11 @@ namespace Microsoft.AspNetCore.Routing
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { }),
+                values: new RouteValueDictionary(new {  }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1378,10 +1529,11 @@ namespace Microsoft.AspNetCore.Routing
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { }),
+                values: new RouteValueDictionary(new {  }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1403,46 +1555,114 @@ namespace Microsoft.AspNetCore.Routing
                     {
                         new { controller = "Products", action = "Edit", id = 10 },
                         new { controller = "Products", action = "Edit" },
-                        new { area = (string)null, controller = "Products", action = "Edit", page = (string)null },
-                        new { area = (string)null, controller = "Products", action = "Edit", page = (string)null }
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        }
                     },
-
                     // link to same action on same controller - ignoring case
                     {
                         new { controller = "ProDUcts", action = "EDit", id = 10 },
                         new { controller = "ProDUcts", action = "EDit" },
-                        new { area = (string)null, controller = "Products", action = "Edit", page = (string)null },
-                        new { area = (string)null, controller = "Products", action = "Edit", page = (string)null }
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        }
                     },
-
                     // link to same action and same controller on same area
                     {
                         new { area = "Admin", controller = "Products", action = "Edit", id = 10 },
                         new { area = "Admin", controller = "Products", action = "Edit" },
-                        new { area = "Admin", controller = "Products", action = "Edit", page = (string)null },
-                        new { area = "Admin", controller = "Products", action = "Edit", page = (string)null }
+                        new
+                        {
+                            area = "Admin",
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = "Admin",
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        }
                     },
-
                     // link to same action and same controller on same area
                     {
                         new { area = "Admin", controller = "Products", action = "Edit", id = 10 },
                         new { controller = "Products", action = "Edit" },
-                        new { area = "Admin", controller = "Products", action = "Edit", page = (string)null },
-                        new { area = "Admin", controller = "Products", action = "Edit", page = (string)null }
+                        new
+                        {
+                            area = "Admin",
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = "Admin",
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        }
                     },
-
                     // link to same action and same controller
                     {
                         new { controller = "Products", action = "Edit", id = 10 },
                         new { controller = "Products", action = "Edit" },
-                        new { area = (string)null, controller = "Products", action = "Edit", page = (string)null },
-                        new { area = (string)null, controller = "Products", action = "Edit", page = (string)null }
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        }
                     },
                     {
                         new { controller = "Products", action = "Edit", id = 10 },
                         new { controller = "Products", action = "Edit" },
-                        new { area = (string)null, controller = "Products", action = "Edit", page = (string)null },
-                        new { area = (string)null, controller = "Products", action = "Edit", page = (string)null }
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        }
                     },
                     {
                         new { controller = "Products", action = "Edit", id = 10 },
@@ -1450,13 +1670,24 @@ namespace Microsoft.AspNetCore.Routing
                         new { area = "", controller = "Products", action = "Edit", page = "" },
                         new { area = "", controller = "Products", action = "Edit", page = "" }
                     },
-
                     // link to same page
                     {
                         new { page = "Products/Edit", id = 10 },
                         new { page = "Products/Edit" },
-                        new { area = (string)null, controller = (string)null, action = (string)null, page = "Products/Edit" },
-                        new { area = (string)null, controller = (string)null, action = (string)null, page = "Products/Edit" }
+                        new
+                        {
+                            area = (string)null,
+                            controller = (string)null,
+                            action = (string)null,
+                            page = "Products/Edit"
+                        },
+                        new
+                        {
+                            area = (string)null,
+                            controller = (string)null,
+                            action = (string)null,
+                            page = "Products/Edit"
+                        }
                     },
                 };
             }
@@ -1468,13 +1699,14 @@ namespace Microsoft.AspNetCore.Routing
             object ambientValues,
             object explicitValues,
             object requiredValues,
-            object defaults)
-        {
+            object defaults
+        ) {
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 "Products/Edit/{id}",
                 requiredValues: requiredValues,
-                defaults: defaults);
+                defaults: defaults
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
             var httpContext = CreateHttpContext(ambientValues);
 
@@ -1485,7 +1717,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(explicitValues),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1502,9 +1735,12 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 "Products/Edit/{id}",
                 requiredValues: new { c = "Products", a = "Edit" },
-                defaults: new { c = "Products", a = "Edit" });
+                defaults: new { c = "Products", a = "Edit" }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { c = "Products", a = "Edit", id = 10 });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { c = "Products", a = "Edit", id = 10 }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -1513,7 +1749,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { c = "Products", a = "Edit" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.True(success);
@@ -1530,9 +1767,12 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 "Products/Edit/{id}",
                 requiredValues: new { c = "Products", a = "Edit" },
-                defaults: new { c = "Products", a = "Edit" });
+                defaults: new { c = "Products", a = "Edit" }
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
-            var httpContext = CreateHttpContext(ambientValues: new { c = "Products", a = "Edit", id = 10 });
+            var httpContext = CreateHttpContext(
+                ambientValues: new { c = "Products", a = "Edit", id = 10 }
+            );
 
             // Act
             var success = linkGenerator.TryProcessTemplate(
@@ -1541,7 +1781,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { c = "Products", a = "List" }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.False(success);
@@ -1561,64 +1802,159 @@ namespace Microsoft.AspNetCore.Routing
                     {
                         new { controller = "Products", action = "Edit", id = 10 },
                         new { controller = "Products", action = "List" },
-                        new { area = (string)null, controller = "Products", action = "List", page = (string)null },
-                        new { area = (string)null, controller = "Products", action = "List", page = (string)null }
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "List",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "List",
+                            page = (string)null
+                        }
                     },
-
                     // link to different action on same controller and same area
                     {
-                        new { area = "Customer", controller = "Products", action = "Edit", id = 10 },
+                        new
+                        {
+                            area = "Customer",
+                            controller = "Products",
+                            action = "Edit",
+                            id = 10
+                        },
                         new { area = "Customer", controller = "Products", action = "List" },
-                        new { area = "Customer", controller = "Products", action = "List", page = (string)null },
-                        new { area = "Customer", controller = "Products", action = "List", page = (string)null }
+                        new
+                        {
+                            area = "Customer",
+                            controller = "Products",
+                            action = "List",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = "Customer",
+                            controller = "Products",
+                            action = "List",
+                            page = (string)null
+                        }
                     },
-
                     // link from one area to a different one
                     {
                         new { area = "Admin", controller = "Products", action = "Edit", id = 10 },
                         new { area = "Consumer", controller = "Products", action = "Edit" },
-                        new { area = "Consumer", controller = "Products", action = "Edit", page = (string)null },
-                        new { area = "Consumer", controller = "Products", action = "Edit", page = (string)null }
+                        new
+                        {
+                            area = "Consumer",
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = "Consumer",
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        }
                     },
-
                     // link from non-area to a area one
                     {
                         new { controller = "Products", action = "Edit", id = 10 },
                         new { area = "Consumer", controller = "Products", action = "Edit" },
-                        new { area = "Consumer", controller = "Products", action = "Edit", page = (string)null },
-                        new { area = "Consumer", controller = "Products", action = "Edit", page = (string)null }
+                        new
+                        {
+                            area = "Consumer",
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = "Consumer",
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        }
                     },
-
                     // link from area to a non-area based action
                     {
                         new { area = "Admin", controller = "Products", action = "Edit", id = 10 },
                         new { area = "", controller = "Products", action = "Edit" },
-                        new { area = "", controller = "Products", action = "Edit", page = (string)null },
-                        new { area = "", controller = "Products", action = "Edit", page = (string)null }
+                        new
+                        {
+                            area = "",
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = "",
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        }
                     },
-
                     // link from controller-action to a page
                     {
                         new { controller = "Products", action = "Edit", id = 10 },
                         new { page = "Products/Edit" },
-                        new { area = (string)null, controller = (string)null, action = (string)null, page = "Products/Edit"},
-                        new { area = (string)null, controller = (string)null, action = (string)null, page = "Products/Edit"}
+                        new
+                        {
+                            area = (string)null,
+                            controller = (string)null,
+                            action = (string)null,
+                            page = "Products/Edit"
+                        },
+                        new
+                        {
+                            area = (string)null,
+                            controller = (string)null,
+                            action = (string)null,
+                            page = "Products/Edit"
+                        }
                     },
-
                     // link from a page to controller-action
                     {
                         new { page = "Products/Edit", id = 10 },
                         new { controller = "Products", action = "Edit" },
-                        new { area = (string)null, controller = "Products", action = "Edit", page = (string)null },
-                        new { area = (string)null, controller = "Products", action = "Edit", page = (string)null }
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        },
+                        new
+                        {
+                            area = (string)null,
+                            controller = "Products",
+                            action = "Edit",
+                            page = (string)null
+                        }
                     },
-
                     // link from one page to a different page
                     {
                         new { page = "Products/Details", id = 10 },
                         new { page = "Products/Edit" },
-                        new { area = (string)null, controller = (string)null, action = (string)null, page = "Products/Edit" },
-                        new { area = (string)null, controller = (string)null, action = (string)null, page = "Products/Edit" }
+                        new
+                        {
+                            area = (string)null,
+                            controller = (string)null,
+                            action = (string)null,
+                            page = "Products/Edit"
+                        },
+                        new
+                        {
+                            area = (string)null,
+                            controller = (string)null,
+                            action = (string)null,
+                            page = "Products/Edit"
+                        }
                     },
                 };
             }
@@ -1630,15 +1966,16 @@ namespace Microsoft.AspNetCore.Routing
             object ambientValues,
             object explicitValues,
             object requiredValues,
-            object defaults)
-        {
+            object defaults
+        ) {
             // Linking to a different action on the same controller
 
             // Arrange
             var endpoint = EndpointFactory.CreateRouteEndpoint(
                 "Products/Edit/{id}",
                 requiredValues: requiredValues,
-                defaults: defaults);
+                defaults: defaults
+            );
             var linkGenerator = CreateLinkGenerator(endpoint);
             var httpContext = CreateHttpContext(ambientValues);
 
@@ -1649,7 +1986,8 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(explicitValues),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
-                result: out var result);
+                result: out var result
+            );
 
             // Assert
             Assert.False(success);

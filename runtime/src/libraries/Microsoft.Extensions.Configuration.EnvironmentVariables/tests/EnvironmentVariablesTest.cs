@@ -17,19 +17,25 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
         public void LoadKeyValuePairsFromEnvironmentDictionary()
         {
             var dict = new Hashtable()
-                {
-                    {"DefaultConnection:ConnectionString", "TestConnectionString"},
-                    {"DefaultConnection:Provider", "SqlClient"},
-                    {"Inventory:ConnectionString", "AnotherTestConnectionString"},
-                    {"Inventory:Provider", "MySql"}
-                };
+            {
+                { "DefaultConnection:ConnectionString", "TestConnectionString" },
+                { "DefaultConnection:Provider", "SqlClient" },
+                { "Inventory:ConnectionString", "AnotherTestConnectionString" },
+                { "Inventory:Provider", "MySql" }
+            };
             var envConfigSrc = new EnvironmentVariablesConfigurationProvider(null);
 
             envConfigSrc.Load(dict);
 
-            Assert.Equal("TestConnectionString", envConfigSrc.Get("defaultconnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                envConfigSrc.Get("defaultconnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", envConfigSrc.Get("DEFAULTCONNECTION:PROVIDER"));
-            Assert.Equal("AnotherTestConnectionString", envConfigSrc.Get("Inventory:CONNECTIONSTRING"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                envConfigSrc.Get("Inventory:CONNECTIONSTRING")
+            );
             Assert.Equal("MySql", envConfigSrc.Get("Inventory:Provider"));
         }
 
@@ -37,12 +43,12 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
         public void LoadKeyValuePairsFromEnvironmentDictionaryWithPrefix()
         {
             var dict = new Hashtable()
-                {
-                    {"DefaultConnection:ConnectionString", "TestConnectionString"},
-                    {"DefaultConnection:Provider", "SqlClient"},
-                    {"Inventory:ConnectionString", "AnotherTestConnectionString"},
-                    {"Inventory:Provider", "MySql"}
-                };
+            {
+                { "DefaultConnection:ConnectionString", "TestConnectionString" },
+                { "DefaultConnection:Provider", "SqlClient" },
+                { "Inventory:ConnectionString", "AnotherTestConnectionString" },
+                { "Inventory:Provider", "MySql" }
+            };
             var envConfigSrc = new EnvironmentVariablesConfigurationProvider("DefaultConnection:");
 
             envConfigSrc.Load(dict);
@@ -55,14 +61,14 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
         public void LoadKeyValuePairsFromAzureEnvironment()
         {
             var dict = new Hashtable()
-                {
-                    {"APPSETTING_AppName", "TestAppName"},
-                    {"CUSTOMCONNSTR_db1", "CustomConnStr"},
-                    {"SQLCONNSTR_db2", "SQLConnStr"},
-                    {"MYSQLCONNSTR_db3", "MySQLConnStr"},
-                    {"SQLAZURECONNSTR_db4", "SQLAzureConnStr"},
-                    {"CommonEnv", "CommonEnvValue"},
-                };
+            {
+                { "APPSETTING_AppName", "TestAppName" },
+                { "CUSTOMCONNSTR_db1", "CustomConnStr" },
+                { "SQLCONNSTR_db2", "SQLConnStr" },
+                { "MYSQLCONNSTR_db3", "MySQLConnStr" },
+                { "SQLAZURECONNSTR_db4", "SQLAzureConnStr" },
+                { "CommonEnv", "CommonEnvValue" },
+            };
             var envConfigSrc = new EnvironmentVariablesConfigurationProvider();
 
             envConfigSrc.Load(dict);
@@ -72,11 +78,20 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
             Assert.False(envConfigSrc.TryGet("AppName", out value));
             Assert.Equal("CustomConnStr", envConfigSrc.Get("ConnectionStrings:db1"));
             Assert.Equal("SQLConnStr", envConfigSrc.Get("ConnectionStrings:db2"));
-            Assert.Equal("System.Data.SqlClient", envConfigSrc.Get("ConnectionStrings:db2_ProviderName"));
+            Assert.Equal(
+                "System.Data.SqlClient",
+                envConfigSrc.Get("ConnectionStrings:db2_ProviderName")
+            );
             Assert.Equal("MySQLConnStr", envConfigSrc.Get("ConnectionStrings:db3"));
-            Assert.Equal("MySql.Data.MySqlClient", envConfigSrc.Get("ConnectionStrings:db3_ProviderName"));
+            Assert.Equal(
+                "MySql.Data.MySqlClient",
+                envConfigSrc.Get("ConnectionStrings:db3_ProviderName")
+            );
             Assert.Equal("SQLAzureConnStr", envConfigSrc.Get("ConnectionStrings:db4"));
-            Assert.Equal("System.Data.SqlClient", envConfigSrc.Get("ConnectionStrings:db4_ProviderName"));
+            Assert.Equal(
+                "System.Data.SqlClient",
+                envConfigSrc.Get("ConnectionStrings:db4_ProviderName")
+            );
             Assert.Equal("CommonEnvValue", envConfigSrc.Get("CommonEnv"));
         }
 
@@ -85,11 +100,11 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
         {
             var dict = new Hashtable()
             {
-                {"CUSTOMCONNSTR_db1", "CustomConnStr"},
-                {"SQLCONNSTR_db2", "SQLConnStr"},
-                {"MYSQLCONNSTR_db3", "MySQLConnStr"},
-                {"SQLAZURECONNSTR_db4", "SQLAzureConnStr"},
-                {"CommonEnv", "CommonEnvValue"},
+                { "CUSTOMCONNSTR_db1", "CustomConnStr" },
+                { "SQLCONNSTR_db2", "SQLConnStr" },
+                { "MYSQLCONNSTR_db3", "MySQLConnStr" },
+                { "SQLAZURECONNSTR_db4", "SQLAzureConnStr" },
+                { "CommonEnv", "CommonEnvValue" },
             };
             var envConfigSrc = new EnvironmentVariablesConfigurationProvider("ConnectionStrings:");
 
@@ -108,27 +123,30 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
         public void LastVariableAddedWhenKeyIsDuplicatedInAzureEnvironment()
         {
             var dict = new Hashtable()
-                {
-                    {"ConnectionStrings:db2", "CommonEnvValue"},
-                    {"SQLCONNSTR_db2", "SQLConnStr"},
-                };
+            {
+                { "ConnectionStrings:db2", "CommonEnvValue" },
+                { "SQLCONNSTR_db2", "SQLConnStr" },
+            };
             var envConfigSrc = new EnvironmentVariablesConfigurationProvider();
 
             envConfigSrc.Load(dict);
 
             Assert.True(!string.IsNullOrEmpty(envConfigSrc.Get("ConnectionStrings:db2")));
-            Assert.Equal("System.Data.SqlClient", envConfigSrc.Get("ConnectionStrings:db2_ProviderName"));
+            Assert.Equal(
+                "System.Data.SqlClient",
+                envConfigSrc.Get("ConnectionStrings:db2_ProviderName")
+            );
         }
 
         [Fact]
         public void LastVariableAddedWhenMultipleEnvironmentVariablesWithSameNameButDifferentCaseExist()
         {
             var dict = new Hashtable()
-                {
-                    {"CommonEnv", "CommonEnvValue1"},
-                    {"commonenv", "commonenvValue2"},
-                    {"cOMMonEnv", "commonenvValue3"},
-                };
+            {
+                { "CommonEnv", "CommonEnvValue1" },
+                { "commonenv", "commonenvValue2" },
+                { "cOMMonEnv", "commonenvValue3" },
+            };
             var envConfigSrc = new EnvironmentVariablesConfigurationProvider();
 
             envConfigSrc.Load(dict);
@@ -141,26 +159,31 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
         public void ReplaceDoubleUnderscoreInEnvironmentVariables()
         {
             var dict = new Hashtable()
-                {
-                    {"data__ConnectionString", "connection"},
-                    {"SQLCONNSTR_db1", "connStr"}
-                };
+            {
+                { "data__ConnectionString", "connection" },
+                { "SQLCONNSTR_db1", "connStr" }
+            };
             var envConfigSrc = new EnvironmentVariablesConfigurationProvider();
 
             envConfigSrc.Load(dict);
 
             Assert.Equal("connection", envConfigSrc.Get("data:ConnectionString"));
-            Assert.Equal("System.Data.SqlClient", envConfigSrc.Get("ConnectionStrings:db1_ProviderName"));
+            Assert.Equal(
+                "System.Data.SqlClient",
+                envConfigSrc.Get("ConnectionStrings:db1_ProviderName")
+            );
         }
 
         [Fact]
         public void ReplaceDoubleUnderscoreInEnvironmentVariablesButNotPrefix()
         {
             var dict = new Hashtable()
-                {
-                    {"test__prefix__with__double__underscores__data__ConnectionString", "connection"}
-                };
-            var envConfigSrc = new EnvironmentVariablesConfigurationProvider("test__prefix__with__double__underscores__");
+            {
+                { "test__prefix__with__double__underscores__data__ConnectionString", "connection" }
+            };
+            var envConfigSrc = new EnvironmentVariablesConfigurationProvider(
+                "test__prefix__with__double__underscores__"
+            );
 
             envConfigSrc.Load(dict);
 
@@ -171,9 +194,9 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
         public void ReplaceDoubleUnderscoreInEnvironmentVariablesButNotInAnomalousPrefix()
         {
             var dict = new Hashtable()
-                {
-                    {"_____EXPERIMENTAL__data__ConnectionString", "connection"}
-                };
+            {
+                { "_____EXPERIMENTAL__data__ConnectionString", "connection" }
+            };
             var envConfigSrc = new EnvironmentVariablesConfigurationProvider("_____EXPERIMENTAL__");
 
             envConfigSrc.Load(dict);
@@ -184,10 +207,7 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
         [Fact]
         public void ReplaceDoubleUnderscoreInEnvironmentVariablesWithDuplicatedPrefix()
         {
-            var dict = new Hashtable()
-                {
-                    {"test__test__ConnectionString", "connection"}
-                };
+            var dict = new Hashtable() { { "test__test__ConnectionString", "connection" } };
             var envConfigSrc = new EnvironmentVariablesConfigurationProvider("test__");
 
             envConfigSrc.Load(dict);
@@ -199,26 +219,24 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
         public void PrefixPreventsLoadingSqlConnectionStrings()
         {
             var dict = new Hashtable()
-                {
-                    {"test__test__ConnectionString", "connection"},
-                    {"SQLCONNSTR_db1", "connStr"}
-                };
+            {
+                { "test__test__ConnectionString", "connection" },
+                { "SQLCONNSTR_db1", "connStr" }
+            };
             var envConfigSrc = new EnvironmentVariablesConfigurationProvider("test__");
 
             envConfigSrc.Load(dict);
 
             Assert.Equal("connection", envConfigSrc.Get("test:ConnectionString"));
-            Assert.Throws<InvalidOperationException>(() => envConfigSrc.Get("ConnectionStrings:db1_ProviderName"));
+            Assert.Throws<InvalidOperationException>(
+                () => envConfigSrc.Get("ConnectionStrings:db1_ProviderName")
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void BindingDoesNotThrowIfReloadedDuringBinding()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Number", "-2"},
-                {"Text", "Foo"}
-            };
+            var dic = new Dictionary<string, string> { { "Number", "-2" }, { "Text", "Foo" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             configurationBuilder.AddEnvironmentVariables();

@@ -17,9 +17,13 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
         /// Creates a <see cref="TokenValidatedContext"/>
         /// </summary>
         /// <inheritdoc />
-        public TokenValidatedContext(HttpContext context, AuthenticationScheme scheme, OpenIdConnectOptions options, ClaimsPrincipal principal, AuthenticationProperties properties)
-            : base(context, scheme, options, properties)
-            => Principal = principal;
+        public TokenValidatedContext(
+            HttpContext context,
+            AuthenticationScheme scheme,
+            OpenIdConnectOptions options,
+            ClaimsPrincipal principal,
+            AuthenticationProperties properties
+        ) : base(context, scheme, options, properties) => Principal = principal;
 
         /// <summary>
         /// Gets or sets the <see cref="OpenIdConnectMessage"/>.

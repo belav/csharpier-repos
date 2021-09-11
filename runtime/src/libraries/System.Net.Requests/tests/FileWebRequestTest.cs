@@ -54,14 +54,19 @@ namespace System.Net.Tests
             AssertExtensions.Throws<ArgumentException>("value", () => request.ContentLength = -1);
             AssertExtensions.Throws<ArgumentException>("value", () => request.Method = null);
             AssertExtensions.Throws<ArgumentException>("value", () => request.Method = "");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => request.Timeout = -2);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => request.Timeout = -2
+            );
         }
 
         [Fact]
         public void GetRequestStream_MethodGet_ThrowsProtocolViolation()
         {
             WebRequest request = WebRequest.Create("file://anything");
-            Assert.Throws<ProtocolViolationException>(() => request.BeginGetRequestStream(null, null));
+            Assert.Throws<ProtocolViolationException>(
+                () => request.BeginGetRequestStream(null, null)
+            );
         }
 
         [Fact]
@@ -118,6 +123,7 @@ namespace System.Net.Tests
                     }
                 }
             }
+
             finally
             {
                 File.Delete(path);
@@ -144,6 +150,7 @@ namespace System.Net.Tests
 
                 Assert.Equal(data, File.ReadAllBytes(path));
             }
+
             finally
             {
                 File.Delete(path);
@@ -174,6 +181,7 @@ namespace System.Net.Tests
                     Assert.Equal(0, s.Length);
                 }
             }
+
             finally
             {
                 File.Delete(path);
@@ -192,9 +200,12 @@ namespace System.Net.Tests
                 request.Method = WebRequestMethods.File.UploadFile;
                 using (WebResponse response = await GetResponseAsync(request))
                 {
-                    await Assert.ThrowsAsync<InvalidOperationException>(() => GetRequestStreamAsync(request));
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => GetRequestStreamAsync(request)
+                    );
                 }
             }
+
             finally
             {
                 File.Delete(path);
@@ -205,9 +216,12 @@ namespace System.Net.Tests
         [InlineData(null)]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task BeginGetResponse_OnNonexistentFile_ShouldNotCrashApplication(bool? abortWithDelay)
-        {
-            FileWebRequest request = (FileWebRequest)WebRequest.Create("file://" + Path.GetRandomFileName());
+        public async Task BeginGetResponse_OnNonexistentFile_ShouldNotCrashApplication(
+            bool? abortWithDelay
+        ) {
+            FileWebRequest request = (FileWebRequest)WebRequest.Create(
+                "file://" + Path.GetRandomFileName()
+            );
             Task<WebResponse> responseTask = GetResponseAsync(request);
             if (abortWithDelay.HasValue)
             {
@@ -250,6 +264,7 @@ namespace System.Net.Tests
                     Assert.Equal(0, s.Length);
                 }
             }
+
             finally
             {
                 File.Delete(path);
@@ -259,8 +274,10 @@ namespace System.Net.Tests
 
     public sealed class SyncFileWebRequestTestBase : FileWebRequestTestBase
     {
-        public override Task<WebResponse> GetResponseAsync(WebRequest request) => Task.Run(() => request.GetResponse());
-        public override Task<Stream> GetRequestStreamAsync(WebRequest request) => Task.Run(() => request.GetRequestStream());
+        public override Task<WebResponse> GetResponseAsync(WebRequest request) =>
+            Task.Run(() => request.GetResponse());
+        public override Task<Stream> GetRequestStreamAsync(WebRequest request) =>
+            Task.Run(() => request.GetRequestStream());
     }
 
     public sealed class BeginEndFileWebRequestTestBase : AsyncFileWebRequestTestBase
@@ -269,13 +286,19 @@ namespace System.Net.Tests
             Task.Factory.FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
 
         public override Task<Stream> GetRequestStreamAsync(WebRequest request) =>
-            Task.Factory.FromAsync(request.BeginGetRequestStream, request.EndGetRequestStream, null);
+            Task.Factory.FromAsync(
+                request.BeginGetRequestStream,
+                request.EndGetRequestStream,
+                null
+            );
     }
 
     public sealed class TaskFileWebRequestTestBase : AsyncFileWebRequestTestBase
     {
-        public override Task<WebResponse> GetResponseAsync(WebRequest request) => request.GetResponseAsync();
+        public override Task<WebResponse> GetResponseAsync(WebRequest request) =>
+            request.GetResponseAsync();
 
-        public override Task<Stream> GetRequestStreamAsync(WebRequest request) => request.GetRequestStreamAsync();
+        public override Task<Stream> GetRequestStreamAsync(WebRequest request) =>
+            request.GetRequestStreamAsync();
     }
 }

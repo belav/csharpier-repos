@@ -8,20 +8,26 @@ using System.Reflection;
 using System.Xml;
 using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
-using DataContractDictionary = System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName, System.Runtime.Serialization.DataContract>;
+using DataContractDictionary = System.Collections.Generic.Dictionary<
+    System.Xml.XmlQualifiedName,
+    System.Runtime.Serialization.DataContract
+>;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace System.Runtime.Serialization.Json
 {
-    internal sealed class XmlObjectSerializerReadContextComplexJson : XmlObjectSerializerReadContextComplex
+    internal sealed class XmlObjectSerializerReadContextComplexJson
+        : XmlObjectSerializerReadContextComplex
     {
         private string? _extensionDataValueType;
         private readonly DateTimeFormat? _dateTimeFormat;
         private readonly bool _useSimpleDictionaryFormat;
 
-        internal XmlObjectSerializerReadContextComplexJson(DataContractJsonSerializerImpl serializer, DataContract rootTypeDataContract)
-            : base(serializer, serializer.MaxItemsInObjectGraph, default(StreamingContext), false)
+        internal XmlObjectSerializerReadContextComplexJson(
+            DataContractJsonSerializerImpl serializer,
+            DataContract rootTypeDataContract
+        ) : base(serializer, serializer.MaxItemsInObjectGraph, default(StreamingContext), false)
         {
             this.rootTypeDataContract = rootTypeDataContract;
             this.serializerKnownTypeList = serializer.knownTypeList;
@@ -29,24 +35,35 @@ namespace System.Runtime.Serialization.Json
             _useSimpleDictionaryFormat = serializer.UseSimpleDictionaryFormat;
         }
 
-        internal static XmlObjectSerializerReadContextComplexJson CreateContext(DataContractJsonSerializerImpl serializer, DataContract rootTypeDataContract)
-        {
+        internal static XmlObjectSerializerReadContextComplexJson CreateContext(
+            DataContractJsonSerializerImpl serializer,
+            DataContract rootTypeDataContract
+        ) {
             return new XmlObjectSerializerReadContextComplexJson(serializer, rootTypeDataContract);
         }
 
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
-        protected override object? ReadDataContractValue(DataContract dataContract, XmlReaderDelegator reader)
-        {
+        protected override object? ReadDataContractValue(
+            DataContract dataContract,
+            XmlReaderDelegator reader
+        ) {
             return DataContractJsonSerializerImpl.ReadJsonValue(dataContract, reader, this);
         }
 
-        public int GetJsonMemberIndex(XmlReaderDelegator xmlReader, XmlDictionaryString[] memberNames, int memberIndex, ExtensionDataObject? extensionData)
-        {
+        public int GetJsonMemberIndex(
+            XmlReaderDelegator xmlReader,
+            XmlDictionaryString[] memberNames,
+            int memberIndex,
+            ExtensionDataObject? extensionData
+        ) {
             int length = memberNames.Length;
             if (length != 0)
             {
-                for (int i = 0, index = (memberIndex + 1) % length; i < length; i++, index = (index + 1) % length)
-                {
+                for (
+                    int i = 0, index = (memberIndex + 1) % length;
+                    i < length;
+                    i++, index = (index + 1) % length
+                ) {
                     if (xmlReader.IsStartElement(memberNames[index], XmlDictionaryString.Empty))
                     {
                         return index;
@@ -55,8 +72,11 @@ namespace System.Runtime.Serialization.Json
                 string? name;
                 if (TryGetJsonLocalName(xmlReader, out name))
                 {
-                    for (int i = 0, index = (memberIndex + 1) % length; i < length; i++, index = (index + 1) % length)
-                    {
+                    for (
+                        int i = 0, index = (memberIndex + 1) % length;
+                        i < length;
+                        i++, index = (index + 1) % length
+                    ) {
                         if (memberNames[index].Value == name)
                         {
                             return index;
@@ -70,18 +90,12 @@ namespace System.Runtime.Serialization.Json
 
         internal IList<Type>? SerializerKnownTypeList
         {
-            get
-            {
-                return this.serializerKnownTypeList;
-            }
+            get { return this.serializerKnownTypeList; }
         }
 
         public bool UseSimpleDictionaryFormat
         {
-            get
-            {
-                return _useSimpleDictionaryFormat;
-            }
+            get { return _useSimpleDictionaryFormat; }
         }
 
         protected override void StartReadExtensionDataValue(XmlReaderDelegator xmlReader)
@@ -89,8 +103,11 @@ namespace System.Runtime.Serialization.Json
             _extensionDataValueType = xmlReader.GetAttribute(JsonGlobals.typeString);
         }
 
-        protected override IDataNode ReadPrimitiveExtensionDataValue(XmlReaderDelegator xmlReader, string? dataContractName, string? dataContractNamespace)
-        {
+        protected override IDataNode ReadPrimitiveExtensionDataValue(
+            XmlReaderDelegator xmlReader,
+            string? dataContractName,
+            string? dataContractNamespace
+        ) {
             IDataNode dataNode;
 
             switch (_extensionDataValueType)
@@ -107,7 +124,10 @@ namespace System.Runtime.Serialization.Json
                     break;
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(SR.Format(SR.JsonUnexpectedAttributeValue, _extensionDataValueType)));
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(SR.JsonUnexpectedAttributeValue, _extensionDataValueType)
+                        )
+                    );
             }
 
             xmlReader.ReadEndElement();
@@ -117,7 +137,10 @@ namespace System.Runtime.Serialization.Json
         private IDataNode ReadNumericalPrimitiveExtensionDataValue(XmlReaderDelegator xmlReader)
         {
             TypeCode type;
-            object numericalValue = JsonObjectDataContract.ParseJsonNumber(xmlReader.ReadContentAsString(), out type);
+            object numericalValue = JsonObjectDataContract.ParseJsonNumber(
+                xmlReader.ReadContentAsString(),
+                out type
+            );
             return type switch
             {
                 TypeCode.Byte => new DataNode<byte>((byte)numericalValue),
@@ -141,13 +164,17 @@ namespace System.Runtime.Serialization.Json
                 attributes = new Attributes();
             attributes.Reset();
 
-            if (xmlReader.MoveToAttribute(JsonGlobals.typeString) && xmlReader.Value == JsonGlobals.nullString)
-            {
+            if (
+                xmlReader.MoveToAttribute(JsonGlobals.typeString)
+                && xmlReader.Value == JsonGlobals.nullString
+            ) {
                 attributes.XsiNil = true;
             }
             else if (xmlReader.MoveToAttribute(JsonGlobals.serverTypeString))
             {
-                XmlQualifiedName qualifiedTypeName = JsonReaderDelegator.ParseQualifiedName(xmlReader.Value);
+                XmlQualifiedName qualifiedTypeName = JsonReaderDelegator.ParseQualifiedName(
+                    xmlReader.Value
+                );
                 attributes.XsiTypeName = qualifiedTypeName.Name;
 
                 string serverTypeNamespace = qualifiedTypeName.Namespace;
@@ -157,7 +184,10 @@ namespace System.Runtime.Serialization.Json
                     switch (serverTypeNamespace[0])
                     {
                         case '#':
-                            serverTypeNamespace = string.Concat(Globals.DataContractXsdBaseNamespace, serverTypeNamespace.AsSpan(1));
+                            serverTypeNamespace = string.Concat(
+                                Globals.DataContractXsdBaseNamespace,
+                                serverTypeNamespace.AsSpan(1)
+                            );
                             break;
                         case '\\':
                             if (serverTypeNamespace.Length >= 2)
@@ -190,7 +220,10 @@ namespace System.Runtime.Serialization.Json
                 switch (serverTypeNamespace[0])
                 {
                     case '#':
-                        serverTypeNamespace = string.Concat(Globals.DataContractXsdBaseNamespace, serverTypeNamespace.AsSpan(1));
+                        serverTypeNamespace = string.Concat(
+                            Globals.DataContractXsdBaseNamespace,
+                            serverTypeNamespace.AsSpan(1)
+                        );
                         break;
                     case '\\':
                         if (serverTypeNamespace.Length >= 2)
@@ -215,7 +248,8 @@ namespace System.Runtime.Serialization.Json
 
         internal static XmlQualifiedName ParseQualifiedName(string qname)
         {
-            string name, ns;
+            string name,
+                ns;
             if (string.IsNullOrEmpty(qname))
             {
                 name = ns = string.Empty;
@@ -244,9 +278,16 @@ namespace System.Runtime.Serialization.Json
             return dataContract;
         }
 
-        internal override DataContract GetDataContractSkipValidation(int typeId, RuntimeTypeHandle typeHandle, Type? type)
-        {
-            DataContract dataContract = base.GetDataContractSkipValidation(typeId, typeHandle, type);
+        internal override DataContract GetDataContractSkipValidation(
+            int typeId,
+            RuntimeTypeHandle typeHandle,
+            Type? type
+        ) {
+            DataContract dataContract = base.GetDataContractSkipValidation(
+                typeId,
+                typeHandle,
+                type
+            );
             DataContractJsonSerializer.CheckIfTypeIsReference(dataContract);
             return dataContract;
         }
@@ -258,10 +299,16 @@ namespace System.Runtime.Serialization.Json
             return dataContract;
         }
 
-        internal static bool TryGetJsonLocalName(XmlReaderDelegator xmlReader, [NotNullWhen(true)] out string? name)
-        {
-            if (xmlReader.IsStartElement(JsonGlobals.itemDictionaryString, JsonGlobals.itemDictionaryString))
-            {
+        internal static bool TryGetJsonLocalName(
+            XmlReaderDelegator xmlReader,
+            [NotNullWhen(true)] out string? name
+        ) {
+            if (
+                xmlReader.IsStartElement(
+                    JsonGlobals.itemDictionaryString,
+                    JsonGlobals.itemDictionaryString
+                )
+            ) {
                 if (xmlReader.MoveToAttribute(JsonGlobals.itemString))
                 {
                     name = xmlReader.Value;
@@ -282,14 +329,28 @@ namespace System.Runtime.Serialization.Json
             return name;
         }
 
-        public static void ThrowDuplicateMemberException(object obj, XmlDictionaryString[] memberNames, int memberIndex)
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(
-                SR.Format(SR.JsonDuplicateMemberInInput, DataContract.GetClrTypeFullName(obj.GetType()), memberNames[memberIndex])));
+        public static void ThrowDuplicateMemberException(
+            object obj,
+            XmlDictionaryString[] memberNames,
+            int memberIndex
+        ) {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new SerializationException(
+                    SR.Format(
+                        SR.JsonDuplicateMemberInInput,
+                        DataContract.GetClrTypeFullName(obj.GetType()),
+                        memberNames[memberIndex]
+                    )
+                )
+            );
         }
 
-        public static void ThrowMissingRequiredMembers(object obj, XmlDictionaryString[] memberNames, byte[] expectedElements, byte[] requiredElements)
-        {
+        public static void ThrowMissingRequiredMembers(
+            object obj,
+            XmlDictionaryString[] memberNames,
+            byte[] expectedElements,
+            byte[] requiredElements
+        ) {
             StringBuilder stringBuilder = new StringBuilder();
             int missingMembersCount = 0;
             for (int i = 0; i < memberNames.Length; i++)
@@ -305,13 +366,27 @@ namespace System.Runtime.Serialization.Json
 
             if (missingMembersCount == 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(SR.Format(
-                 SR.JsonOneRequiredMemberNotFound, DataContract.GetClrTypeFullName(obj.GetType()), stringBuilder.ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SerializationException(
+                        SR.Format(
+                            SR.JsonOneRequiredMemberNotFound,
+                            DataContract.GetClrTypeFullName(obj.GetType()),
+                            stringBuilder.ToString()
+                        )
+                    )
+                );
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(SR.Format(
-                    SR.JsonRequiredMembersNotFound, DataContract.GetClrTypeFullName(obj.GetType()), stringBuilder.ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SerializationException(
+                        SR.Format(
+                            SR.JsonRequiredMembersNotFound,
+                            DataContract.GetClrTypeFullName(obj.GetType()),
+                            stringBuilder.ToString()
+                        )
+                    )
+                );
             }
         }
 

@@ -32,15 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         public T Value
         {
-            get
-            {
-                return _optionStore.GetOption(_key);
-            }
-
-            set
-            {
-                _optionStore.SetOption(_key, value);
-            }
+            get { return _optionStore.GetOption(_key); }
+            set { _optionStore.SetOption(_key, value); }
         }
     }
 }

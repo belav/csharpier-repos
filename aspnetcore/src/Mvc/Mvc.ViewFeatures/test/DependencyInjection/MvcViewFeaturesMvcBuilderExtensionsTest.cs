@@ -22,17 +22,22 @@ namespace Microsoft.Extensions.DependencyInjection
             var builder = CreateBuilder();
 
             MvcViewFeaturesMvcCoreBuilderExtensions.AddViewServices(builder.Services);
-            builder.ConfigureApplicationPartManager(manager =>
-            {
-                manager.ApplicationParts.Add(new TestApplicationPart());
-                manager.FeatureProviders.Add(new ViewComponentFeatureProvider());
-            });
+            builder.ConfigureApplicationPartManager(
+                manager =>
+                {
+                    manager.ApplicationParts.Add(new TestApplicationPart());
+                    manager.FeatureProviders.Add(new ViewComponentFeatureProvider());
+                }
+            );
 
             // Act
             builder.AddViewComponentsAsServices();
 
             // Assert
-            var descriptor = Assert.Single(builder.Services.ToList(), d => d.ServiceType == typeof(IViewComponentActivator));
+            var descriptor = Assert.Single(
+                builder.Services.ToList(),
+                d => d.ServiceType == typeof(IViewComponentActivator)
+            );
             Assert.Equal(typeof(ServiceBasedViewComponentActivator), descriptor.ImplementationType);
         }
 
@@ -46,7 +51,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddCookieTempDataProvider();
 
             // Assert
-            var descriptor = Assert.Single(builder.Services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                builder.Services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -62,7 +70,8 @@ namespace Microsoft.Extensions.DependencyInjection
             // Assert
             Assert.DoesNotContain(
                 builder.Services,
-                item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>));
+                item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
+            );
         }
 
         [Fact]
@@ -75,7 +84,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddCookieTempDataProvider(options => { });
 
             // Assert
-            var descriptor = Assert.Single(builder.Services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                builder.Services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -91,7 +103,8 @@ namespace Microsoft.Extensions.DependencyInjection
             // Assert
             Assert.Single(
                 builder.Services,
-                item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>));
+                item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
+            );
         }
 
         [Fact]
@@ -105,7 +118,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddCookieTempDataProvider();
 
             // Assert
-            var descriptor = Assert.Single(builder.Services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                builder.Services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -120,7 +136,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddCookieTempDataProvider(options => { });
 
             // Assert
-            var descriptor = Assert.Single(builder.Services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                builder.Services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -131,9 +150,12 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = new ServiceCollection();
 
             var manager = new ApplicationPartManager();
-            manager.ApplicationParts.Add(new TestApplicationPart(
-                typeof(ConventionsViewComponent),
-                typeof(AttributeViewComponent)));
+            manager.ApplicationParts.Add(
+                new TestApplicationPart(
+                    typeof(ConventionsViewComponent),
+                    typeof(AttributeViewComponent)
+                )
+            );
 
             manager.FeatureProviders.Add(new TestProvider());
 
@@ -155,7 +177,10 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Equal(ServiceLifetime.Transient, collection[1].Lifetime);
 
             Assert.Equal(typeof(IViewComponentActivator), collection[2].ServiceType);
-            Assert.Equal(typeof(ServiceBasedViewComponentActivator), collection[2].ImplementationType);
+            Assert.Equal(
+                typeof(ServiceBasedViewComponentActivator),
+                collection[2].ImplementationType
+            );
             Assert.Equal(ServiceLifetime.Singleton, collection[2].Lifetime);
         }
 
@@ -180,10 +205,14 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private class TestProvider : IApplicationFeatureProvider<ViewComponentFeature>
         {
-            public void PopulateFeature(IEnumerable<ApplicationPart> parts, ViewComponentFeature feature)
-            {
-                foreach (var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types))
-                {
+            public void PopulateFeature(
+                IEnumerable<ApplicationPart> parts,
+                ViewComponentFeature feature
+            ) {
+                foreach (
+                    var type in parts.OfType<IApplicationPartTypeProvider>()
+                        .SelectMany(p => p.Types)
+                ) {
                     feature.ViewComponents.Add(type);
                 }
             }

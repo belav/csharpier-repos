@@ -16,8 +16,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
 
         protected override IHost CreateWebHost()
         {
-            ContentRoot = FindSampleOrTestSitePath(
-                typeof(TProgram).Assembly.FullName);
+            ContentRoot = FindSampleOrTestSitePath(typeof(TProgram).Assembly.FullName);
 
             var host = "127.0.0.1";
             if (E2ETestOptions.Instance.SauceTest)
@@ -27,10 +26,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
 
             var args = new List<string>
             {
-                "--urls", $"http://{host}:0",
-                "--contentroot", ContentRoot,
-                "--pathbase", PathBase,
-                "--applicationpath", typeof(TProgram).Assembly.Location,
+                "--urls",
+                $"http://{host}:0",
+                "--contentroot",
+                ContentRoot,
+                "--pathbase",
+                PathBase,
+                "--applicationpath",
+                typeof(TProgram).Assembly.Location,
             };
 
             if (!string.IsNullOrEmpty(Environment))

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact]
         public void InstanceCustomEvent()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     public event System.Action E
@@ -33,16 +34,28 @@ class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text,
-                symbolValidator: module => ValidateEvent(module, isFromSource: false, isStatic: false, isFieldLike: false),
+            var compVerifier = CompileAndVerify(
+                text,
+                symbolValidator: module =>
+                    ValidateEvent(module, isFromSource: false, isStatic: false, isFieldLike: false),
                 expectedSignatures: new[]
                 {
                     Signature("C", "E", ".event System.Action E"),
-                    Signature("C", "add_E", ".method public hidebysig specialname instance System.Void add_E(System.Action value) cil managed"),
-                    Signature("C", "remove_E", ".method public hidebysig specialname instance System.Void remove_E(System.Action value) cil managed"),
-                });
+                    Signature(
+                        "C",
+                        "add_E",
+                        ".method public hidebysig specialname instance System.Void add_E(System.Action value) cil managed"
+                    ),
+                    Signature(
+                        "C",
+                        "remove_E",
+                        ".method public hidebysig specialname instance System.Void remove_E(System.Action value) cil managed"
+                    ),
+                }
+            );
 
-            var accessorBody = @"
+            var accessorBody =
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -57,7 +70,8 @@ class C
         [Fact]
         public void StaticCustomEvent()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     public static event System.Action E
@@ -67,16 +81,28 @@ class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text,
-                symbolValidator: module => ValidateEvent(module, isFromSource: false, isStatic: true, isFieldLike: false),
+            var compVerifier = CompileAndVerify(
+                text,
+                symbolValidator: module =>
+                    ValidateEvent(module, isFromSource: false, isStatic: true, isFieldLike: false),
                 expectedSignatures: new[]
                 {
                     Signature("C", "E", ".event System.Action E"),
-                    Signature("C", "add_E", ".method public hidebysig specialname static System.Void add_E(System.Action value) cil managed"),
-                    Signature("C", "remove_E", ".method public hidebysig specialname static System.Void remove_E(System.Action value) cil managed")
-                });
+                    Signature(
+                        "C",
+                        "add_E",
+                        ".method public hidebysig specialname static System.Void add_E(System.Action value) cil managed"
+                    ),
+                    Signature(
+                        "C",
+                        "remove_E",
+                        ".method public hidebysig specialname static System.Void remove_E(System.Action value) cil managed"
+                    )
+                }
+            );
 
-            var accessorBody = @"
+            var accessorBody =
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -91,22 +117,35 @@ class C
         [Fact]
         public void InstanceFieldLikeEvent()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     public event System.Action E;
 }
 ";
-            var compVerifier = CompileAndVerify(text,
-                symbolValidator: module => ValidateEvent(module, isFromSource: false, isStatic: false, isFieldLike: true),
+            var compVerifier = CompileAndVerify(
+                text,
+                symbolValidator: module =>
+                    ValidateEvent(module, isFromSource: false, isStatic: false, isFieldLike: true),
                 expectedSignatures: new[]
                 {
                     Signature("C", "E", ".event System.Action E"),
-                    Signature("C", "add_E", ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig specialname instance System.Void add_E(System.Action value) cil managed"),
-                    Signature("C", "remove_E", ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig specialname instance System.Void remove_E(System.Action value) cil managed")
-                });
+                    Signature(
+                        "C",
+                        "add_E",
+                        ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig specialname instance System.Void add_E(System.Action value) cil managed"
+                    ),
+                    Signature(
+                        "C",
+                        "remove_E",
+                        ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig specialname instance System.Void remove_E(System.Action value) cil managed"
+                    )
+                }
+            );
 
-            var accessorBodyFormat = @"
+            var accessorBodyFormat =
+                @"
 {{
   // Code size       41 (0x29)
   .maxstack  3
@@ -154,22 +193,35 @@ class C
         [Fact]
         public void StaticFieldLikeEvent()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     public static event System.Action E;
 }
 ";
-            var compVerifier = CompileAndVerify(text,
-                symbolValidator: module => ValidateEvent(module, isFromSource: false, isStatic: true, isFieldLike: true),
+            var compVerifier = CompileAndVerify(
+                text,
+                symbolValidator: module =>
+                    ValidateEvent(module, isFromSource: false, isStatic: true, isFieldLike: true),
                 expectedSignatures: new[]
                 {
                     Signature("C", "E", ".event System.Action E"),
-                    Signature("C", "add_E", ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig specialname static System.Void add_E(System.Action value) cil managed"),
-                    Signature("C", "remove_E", ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig specialname static System.Void remove_E(System.Action value) cil managed")
-                });
+                    Signature(
+                        "C",
+                        "add_E",
+                        ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig specialname static System.Void add_E(System.Action value) cil managed"
+                    ),
+                    Signature(
+                        "C",
+                        "remove_E",
+                        ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig specialname static System.Void remove_E(System.Action value) cil managed"
+                    )
+                }
+            );
 
-            var accessorBodyFormat = @"
+            var accessorBodyFormat =
+                @"
 {{
   // Code size       39 (0x27)
   .maxstack  3
@@ -195,15 +247,19 @@ class C
   IL_0024:  bne.un.s   IL_0006
   IL_0026:  ret
 }}";
-            // NOTE: Dev10 used slightly different loop condition code (as in InstanceFieldLikeEvent) 
+            // NOTE: Dev10 used slightly different loop condition code (as in InstanceFieldLikeEvent)
 
             compVerifier.VerifyIL("C.E.add", string.Format(accessorBodyFormat, "Combine"));
             compVerifier.VerifyIL("C.E.remove", string.Format(accessorBodyFormat, "Remove"));
         }
 
         // NOTE: assumes there's an event E in a type C.
-        private static void ValidateEvent(ModuleSymbol module, bool isFromSource, bool isStatic, bool isFieldLike)
-        {
+        private static void ValidateEvent(
+            ModuleSymbol module,
+            bool isFromSource,
+            bool isStatic,
+            bool isFieldLike
+        ) {
             var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             var @event = @class.GetMember<EventSymbol>("E");
 
@@ -215,13 +271,23 @@ class C
             var addMethod = @event.AddMethod;
             Assert.Equal(MethodKind.EventAdd, addMethod.MethodKind);
             Assert.Equal("void C.E.add", addMethod.ToTestDisplayString());
-            Assert.True((addMethod.ImplementationAttributes & System.Reflection.MethodImplAttributes.Synchronized) == 0);
+            Assert.True(
+                (
+                    addMethod.ImplementationAttributes
+                    & System.Reflection.MethodImplAttributes.Synchronized
+                ) == 0
+            );
             addMethod.CheckAccessorShape(@event);
 
             var removeMethod = @event.RemoveMethod;
             Assert.Equal(MethodKind.EventRemove, removeMethod.MethodKind);
             Assert.Equal("void C.E.remove", removeMethod.ToTestDisplayString());
-            Assert.True((removeMethod.ImplementationAttributes & System.Reflection.MethodImplAttributes.Synchronized) == 0);
+            Assert.True(
+                (
+                    removeMethod.ImplementationAttributes
+                    & System.Reflection.MethodImplAttributes.Synchronized
+                ) == 0
+            );
             removeMethod.CheckAccessorShape(@event);
 
             // Whether or not the event was field-like in source, it will look custom when loaded from metadata.
@@ -244,7 +310,8 @@ class C
         [Fact]
         public void EventOperations()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     public event System.Action E;
@@ -265,7 +332,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(text).VerifyIL("C.M", @"
+            CompileAndVerify(text)
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       85 (0x55)
   .maxstack  2
@@ -306,13 +376,15 @@ class C
   IL_004a:  ldfld      ""System.Action C.E""
   IL_004f:  call       ""void C.F.remove""
   IL_0054:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void StaticEventOperations()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     public static event System.Action E;
@@ -333,7 +405,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(text).VerifyIL("C.M", @"
+            CompileAndVerify(text)
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       74 (0x4a)
   .maxstack  2
@@ -363,13 +438,15 @@ class C
   IL_003f:  ldsfld     ""System.Action C.E""
   IL_0044:  call       ""void C.F.remove""
   IL_0049:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void EventAccess()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     public event System.Action E;
@@ -393,7 +470,10 @@ class D
     }
 }
 ";
-            CompileAndVerify(text).VerifyIL("D.M", @"
+            CompileAndVerify(text)
+                .VerifyIL(
+                    "D.M",
+                    @"
 {
   // Code size       53 (0x35)
   .maxstack  2
@@ -418,27 +498,40 @@ class D
   IL_002e:  ldarg.2
   IL_002f:  call       ""void C.H.remove""
   IL_0034:  ret
-}");
+}"
+                );
         }
 
         // Regresses IsMetadataVirtual issue (no associated bug).
         [Fact]
         public void InterfaceEvent()
         {
-            var text = @"
+            var text =
+                @"
 interface C
 {
     event System.Action E;
 }
 ";
-            var compVerifier = CompileAndVerify(text,
-                symbolValidator: module => ValidateEvent(module, isFromSource: false, isStatic: false, isFieldLike: true),
+            var compVerifier = CompileAndVerify(
+                text,
+                symbolValidator: module =>
+                    ValidateEvent(module, isFromSource: false, isStatic: false, isFieldLike: true),
                 expectedSignatures: new[]
                 {
                     Signature("C", "E", ".event System.Action E"),
-                    Signature("C", "add_E", ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig newslot specialname abstract virtual instance System.Void add_E(System.Action value) cil managed"),
-                    Signature("C", "remove_E", ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig newslot specialname abstract virtual instance System.Void remove_E(System.Action value) cil managed")
-                });
+                    Signature(
+                        "C",
+                        "add_E",
+                        ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig newslot specialname abstract virtual instance System.Void add_E(System.Action value) cil managed"
+                    ),
+                    Signature(
+                        "C",
+                        "remove_E",
+                        ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig newslot specialname abstract virtual instance System.Void remove_E(System.Action value) cil managed"
+                    )
+                }
+            );
         }
 
         #endregion
@@ -448,7 +541,8 @@ interface C
         [Fact]
         public void CustomEventExecution()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class C
@@ -512,7 +606,9 @@ class C
     }
 }";
 
-            CompileAndVerify(text, expectedOutput: @"
+            CompileAndVerify(
+                text,
+                expectedOutput: @"
 No handlers
 Adding Handler1 
 Invoking Handler1 
@@ -522,13 +618,15 @@ Removing Handler1
 Invoking Handler2 
 Removing Handler2 
 No handlers
-");
+"
+            );
         }
 
         [Fact]
         public void FieldLikeEventExecution()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class C
@@ -575,19 +673,23 @@ class C
     }
 }";
 
-            CompileAndVerify(text, expectedOutput: @"
+            CompileAndVerify(
+                text,
+                expectedOutput: @"
 No handlers
 Invoking Handler1 
 Invoking Handler1 Handler2 
 Invoking Handler2 
 No handlers
-");
+"
+            );
         }
 
         [Fact]
         public void VirtualRaiseAccessor()
         {
-            var csharpSource = @"
+            var csharpSource =
+                @"
 using System;
 
 static class Program
@@ -617,11 +719,18 @@ class D : C
 ";
 
             var ilAssemblyReference = TestReferences.SymbolsTests.Events;
-            var compilation = CreateCompilation(csharpSource, new MetadataReference[] { ilAssemblyReference }, TestOptions.ReleaseExe);
-            CompileAndVerify(compilation, expectedOutput: @"
+            var compilation = CreateCompilation(
+                csharpSource,
+                new MetadataReference[] { ilAssemblyReference },
+                TestOptions.ReleaseExe
+            );
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"
 VirtualEventWithRaise Raise
 D Raise
-");
+"
+            );
         }
 
         #endregion Execution
@@ -630,7 +739,7 @@ D Raise
         public void MissingCompareExchange_01()
         {
             var source1 =
-@"namespace System
+                @"namespace System
 {
     public class Object { }
     public struct Void { }
@@ -645,7 +754,7 @@ D Raise
             var compilation1 = CreateEmptyCompilation(source1, assemblyName: GetUniqueName());
             var reference1 = MetadataReference.CreateFromStream(compilation1.EmitToStream());
             var source2 =
-@"
+                @"
 
 public delegate void E1();
 
@@ -667,24 +776,35 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e").WithArguments("C.e")
             );
 
-            compilation2.Emit(new System.IO.MemoryStream()).Diagnostics.Verify(
-    // (7,21): error CS0656: Missing compiler required member 'System.Delegate.Combine'
-    //     public event E1 e;
-    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "e").WithArguments("System.Delegate", "Combine").WithLocation(7, 21),
-    // (7,21): error CS0656: Missing compiler required member 'System.Delegate.Remove'
-    //     public event E1 e;
-    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "e").WithArguments("System.Delegate", "Remove").WithLocation(7, 21),
-    // (7,21): warning CS0067: The event 'C.e' is never used
-    //     public event E1 e;
-    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e").WithArguments("C.e").WithLocation(7, 21)
+            compilation2.Emit(new System.IO.MemoryStream())
+                .Diagnostics.Verify(
+                    // (7,21): error CS0656: Missing compiler required member 'System.Delegate.Combine'
+                    //     public event E1 e;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "e")
+                        .WithArguments("System.Delegate", "Combine")
+                        .WithLocation(7, 21),
+                    // (7,21): error CS0656: Missing compiler required member 'System.Delegate.Remove'
+                    //     public event E1 e;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "e")
+                        .WithArguments("System.Delegate", "Remove")
+                        .WithLocation(7, 21),
+                    // (7,21): warning CS0067: The event 'C.e' is never used
+                    //     public event E1 e;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e")
+                        .WithArguments("C.e")
+                        .WithLocation(7, 21)
                 );
         }
 
-        [Fact, WorkItem(1027568, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1027568"), WorkItem(528573, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528573")]
+        [
+            Fact,
+            WorkItem(1027568, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1027568"),
+            WorkItem(528573, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528573")
+        ]
         public void MissingCompareExchange_02()
         {
             var source =
-@"
+                @"
 
 public delegate void E1();
 
@@ -705,23 +825,40 @@ class C
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
 
-            compilation.MakeMemberMissing(WellKnownMember.System_Threading_Interlocked__CompareExchange_T);
+            compilation.MakeMemberMissing(
+                WellKnownMember.System_Threading_Interlocked__CompareExchange_T
+            );
 
-            var verifier = CompileAndVerify(compilation,
-                                            expectedOutput: "TrueFalseTrue",
-                                            symbolValidator: module =>
-                                                                {
-                                                                    var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                                                                    var @event = @class.GetMember<EventSymbol>("e");
+            var verifier = CompileAndVerify(
+                    compilation,
+                    expectedOutput: "TrueFalseTrue",
+                    symbolValidator: module =>
+                    {
+                        var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+                        var @event = @class.GetMember<EventSymbol>("e");
 
-                                                                    var addMethod = @event.AddMethod;
-                                                                    Assert.False((addMethod.ImplementationAttributes & System.Reflection.MethodImplAttributes.Synchronized) == 0);
+                        var addMethod = @event.AddMethod;
+                        Assert.False(
+                            (
+                                addMethod.ImplementationAttributes
+                                & System.Reflection.MethodImplAttributes.Synchronized
+                            ) == 0
+                        );
 
-                                                                    var removeMethod = @event.RemoveMethod;
-                                                                    Assert.False((removeMethod.ImplementationAttributes & System.Reflection.MethodImplAttributes.Synchronized) == 0);
-                                                                }).VerifyDiagnostics();
+                        var removeMethod = @event.RemoveMethod;
+                        Assert.False(
+                            (
+                                removeMethod.ImplementationAttributes
+                                & System.Reflection.MethodImplAttributes.Synchronized
+                            ) == 0
+                        );
+                    }
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("C.e.add", @"
+            verifier.VerifyIL(
+                "C.e.add",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  3
@@ -734,9 +871,12 @@ class C
   IL_0012:  stfld      ""E1 C.e""
   IL_0017:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.e.remove", @"
+            verifier.VerifyIL(
+                "C.e.remove",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  3
@@ -749,14 +889,19 @@ class C
   IL_0012:  stfld      ""E1 C.e""
   IL_0017:  ret
 }
-");
+"
+            );
         }
 
-        [Fact, WorkItem(1027568, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1027568"), WorkItem(528573, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528573")]
+        [
+            Fact,
+            WorkItem(1027568, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1027568"),
+            WorkItem(528573, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528573")
+        ]
         public void MissingCompareExchange_03()
         {
             var source =
-@"
+                @"
 
 public delegate void E1();
 
@@ -777,23 +922,40 @@ struct C
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
 
-            compilation.MakeMemberMissing(WellKnownMember.System_Threading_Interlocked__CompareExchange_T);
+            compilation.MakeMemberMissing(
+                WellKnownMember.System_Threading_Interlocked__CompareExchange_T
+            );
 
-            var verifier = CompileAndVerify(compilation,
-                                            expectedOutput: "TrueFalseTrue",
-                                            symbolValidator: module =>
-                                            {
-                                                var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                                                var @event = @class.GetMember<EventSymbol>("e");
+            var verifier = CompileAndVerify(
+                    compilation,
+                    expectedOutput: "TrueFalseTrue",
+                    symbolValidator: module =>
+                    {
+                        var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+                        var @event = @class.GetMember<EventSymbol>("e");
 
-                                                var addMethod = @event.AddMethod;
-                                                Assert.True((addMethod.ImplementationAttributes & System.Reflection.MethodImplAttributes.Synchronized) == 0);
+                        var addMethod = @event.AddMethod;
+                        Assert.True(
+                            (
+                                addMethod.ImplementationAttributes
+                                & System.Reflection.MethodImplAttributes.Synchronized
+                            ) == 0
+                        );
 
-                                                var removeMethod = @event.RemoveMethod;
-                                                Assert.True((removeMethod.ImplementationAttributes & System.Reflection.MethodImplAttributes.Synchronized) == 0);
-                                            }).VerifyDiagnostics();
+                        var removeMethod = @event.RemoveMethod;
+                        Assert.True(
+                            (
+                                removeMethod.ImplementationAttributes
+                                & System.Reflection.MethodImplAttributes.Synchronized
+                            ) == 0
+                        );
+                    }
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("C.e.add", @"
+            verifier.VerifyIL(
+                "C.e.add",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  3
@@ -806,9 +968,12 @@ struct C
   IL_0012:  stfld      ""E1 C.e""
   IL_0017:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("C.e.remove", @"
+            verifier.VerifyIL(
+                "C.e.remove",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  3
@@ -821,14 +986,16 @@ struct C
   IL_0012:  stfld      ""E1 C.e""
   IL_0017:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         [CompilerTrait(CompilerFeature.ExpressionBody)]
         public void ExpressionBodedEvent()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public int x;
@@ -840,7 +1007,9 @@ class C
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             var verifier = CompileAndVerify(compilation);
-            verifier.VerifyIL("C.E.add", @"
+            verifier.VerifyIL(
+                "C.E.add",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -849,8 +1018,11 @@ class C
   IL_0002:  stfld      ""int C.x""
   IL_0007:  ret
 }
-");
-            verifier.VerifyIL("C.E.remove", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.E.remove",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -859,7 +1031,8 @@ class C
   IL_0002:  stfld      ""int C.x""
   IL_0007:  ret
 }
-");
+"
+            );
         }
     }
 }

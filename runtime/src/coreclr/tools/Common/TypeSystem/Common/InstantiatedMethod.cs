@@ -27,31 +27,33 @@ namespace Internal.TypeSystem
         // This constructor is a performance optimization - it allows supplying the hash code if it has already
         // been computed prior to the allocation of this type. The supplied hash code still has to match the
         // hash code this type would compute on it's own (and we assert to enforce that).
-        internal InstantiatedMethod(MethodDesc methodDef, Instantiation instantiation, int hashcode)
-            : this(methodDef, instantiation)
+        internal InstantiatedMethod(
+            MethodDesc methodDef,
+            Instantiation instantiation,
+            int hashcode
+        ) : this(methodDef, instantiation)
         {
             SetHashCode(hashcode);
         }
 
         protected override int ComputeHashCode()
         {
-            return TypeHashingAlgorithms.ComputeMethodHashCode(OwningType.GetHashCode(), Instantiation.ComputeGenericInstanceHashCode(TypeHashingAlgorithms.ComputeNameHashCode(Name)));
+            return TypeHashingAlgorithms.ComputeMethodHashCode(
+                OwningType.GetHashCode(),
+                Instantiation.ComputeGenericInstanceHashCode(
+                    TypeHashingAlgorithms.ComputeNameHashCode(Name)
+                )
+            );
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _methodDef.Context;
-            }
+            get { return _methodDef.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _methodDef.OwningType;
-            }
+            get { return _methodDef.OwningType; }
         }
 
         private TypeDesc Instantiate(TypeDesc type)
@@ -81,42 +83,27 @@ namespace Internal.TypeSystem
 
         public override Instantiation Instantiation
         {
-            get
-            {
-                return _instantiation;
-            }
+            get { return _instantiation; }
         }
 
         public override bool IsVirtual
         {
-            get
-            {
-                return _methodDef.IsVirtual;
-            }
+            get { return _methodDef.IsVirtual; }
         }
 
         public override bool IsNewSlot
         {
-            get
-            {
-                return _methodDef.IsNewSlot;
-            }
+            get { return _methodDef.IsNewSlot; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return _methodDef.IsAbstract;
-            }
+            get { return _methodDef.IsAbstract; }
         }
 
         public override bool IsFinal
         {
-            get
-            {
-                return _methodDef.IsFinal;
-            }
+            get { return _methodDef.IsFinal; }
         }
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)
@@ -126,10 +113,7 @@ namespace Internal.TypeSystem
 
         public override bool IsDefaultConstructor
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override MethodDesc GetMethodDefinition()
@@ -144,10 +128,7 @@ namespace Internal.TypeSystem
 
         public override string Name
         {
-            get
-            {
-                return _methodDef.Name;
-            }
+            get { return _methodDef.Name; }
         }
     }
 }

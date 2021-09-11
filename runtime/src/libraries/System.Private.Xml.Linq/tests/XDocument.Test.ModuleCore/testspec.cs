@@ -271,8 +271,12 @@ namespace Microsoft.Test.ModuleCore
                 this.AddProperty(element, property.Name, property.Value, property.Flags);
         }
 
-        protected void AddProperty(XElement element, string name, object value, TestPropertyFlags flags)
-        {
+        protected void AddProperty(
+            XElement element,
+            string name,
+            object value,
+            TestPropertyFlags flags
+        ) {
             //Ignore all the properties that have no name or value (as to not bloat the xml)
             if (name == null || value == null)
                 return;
@@ -291,8 +295,11 @@ namespace Microsoft.Test.ModuleCore
         protected void AddValue(XElement element, string name, object value)
         {
             //Recurise through the value(s)
-            if (value != null && value.GetType().HasElementType && value is System.Collections.IEnumerable)
-            {
+            if (
+                value != null
+                && value.GetType().HasElementType
+                && value is System.Collections.IEnumerable
+            ) {
                 //Recurse through the values
                 foreach (object item in (System.Collections.IEnumerable)value)
                     AddValue(element, name, item);
@@ -324,9 +331,11 @@ namespace Microsoft.Test.ModuleCore
     {
         public object UserData = null;
 
-        public CXmlElement(string prefix, string name, string namespaceURI, CXmlDocument xmldoc)
-            : base(prefix, name, namespaceURI, xmldoc)
-        {
-        }
+        public CXmlElement(
+            string prefix,
+            string name,
+            string namespaceURI,
+            CXmlDocument xmldoc
+        ) : base(prefix, name, namespaceURI, xmldoc) { }
     }
 }

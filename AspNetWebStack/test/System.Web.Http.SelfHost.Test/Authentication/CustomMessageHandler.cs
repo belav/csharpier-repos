@@ -12,8 +12,10 @@ namespace System.Web.Http
 {
     public class CustomMessageHandler : DelegatingHandler
     {
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             IPrincipal originalPrincipal = Thread.CurrentPrincipal;
 
             // here you can see the requestor's identity via the request message
@@ -26,7 +28,10 @@ namespace System.Web.Http
 
                 if (context.PrimaryIdentity.Name == "username")
                 {
-                    Thread.CurrentPrincipal = new GenericPrincipal(context.PrimaryIdentity, new string[] { "Administrators" });
+                    Thread.CurrentPrincipal = new GenericPrincipal(
+                        context.PrimaryIdentity,
+                        new string[] { "Administrators" }
+                    );
                 }
             }
 
@@ -34,6 +39,7 @@ namespace System.Web.Http
             {
                 return await base.SendAsync(request, cancellationToken);
             }
+
             finally
             {
                 Thread.CurrentPrincipal = originalPrincipal;

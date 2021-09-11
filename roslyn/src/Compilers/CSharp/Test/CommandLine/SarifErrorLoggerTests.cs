@@ -19,14 +19,26 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
     {
         protected abstract string ErrorLogQualifier { get; }
         internal abstract string GetExpectedOutputForNoDiagnostics(CommonCompiler cmd);
-        internal abstract string GetExpectedOutputForSimpleCompilerDiagnostics(CommonCompiler cmd, string sourceFile);
-        internal abstract string GetExpectedOutputForSimpleCompilerDiagnosticsSuppressed(CommonCompiler cmd, string sourceFile);
-        internal abstract string GetExpectedOutputForAnalyzerDiagnosticsWithAndWithoutLocation(MockCSharpCompiler cmd);
-        internal abstract string GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(MockCSharpCompiler cmd, string justification);
+        internal abstract string GetExpectedOutputForSimpleCompilerDiagnostics(
+            CommonCompiler cmd,
+            string sourceFile
+        );
+        internal abstract string GetExpectedOutputForSimpleCompilerDiagnosticsSuppressed(
+            CommonCompiler cmd,
+            string sourceFile
+        );
+        internal abstract string GetExpectedOutputForAnalyzerDiagnosticsWithAndWithoutLocation(
+            MockCSharpCompiler cmd
+        );
+        internal abstract string GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(
+            MockCSharpCompiler cmd,
+            string justification
+        );
 
         protected void NoDiagnosticsImpl()
         {
-            var helloWorldCS = @"using System;
+            var helloWorldCS =
+                @"using System;
 
 class C
 {
@@ -39,7 +51,12 @@ class C
             var errorLogDir = Temp.CreateDirectory();
             var errorLogFile = Path.Combine(errorLogDir.Path, "ErrorLog.txt");
 
-            string[] arguments = new[] { "/nologo", hello, $"/errorlog:{errorLogFile}{ErrorLogQualifier}" };
+            string[] arguments = new[]
+            {
+                "/nologo",
+                hello,
+                $"/errorlog:{errorLogFile}{ErrorLogQualifier}"
+            };
 
             var cmd = CreateCSharpCompiler(arguments);
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -61,7 +78,8 @@ class C
 
         protected void SimpleCompilerDiagnosticsImpl()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     private int x;
@@ -70,7 +88,13 @@ public class C
             var errorLogDir = Temp.CreateDirectory();
             var errorLogFile = Path.Combine(errorLogDir.Path, "ErrorLog.txt");
 
-            string[] arguments = new[] { "/nologo", sourceFile, "/preferreduilang:en", $"/errorlog:{errorLogFile}{ErrorLogQualifier}" };
+            string[] arguments = new[]
+            {
+                "/nologo",
+                sourceFile,
+                "/preferreduilang:en",
+                $"/errorlog:{errorLogFile}{ErrorLogQualifier}"
+            };
 
             var cmd = CreateCSharpCompiler(null, WorkingDirectory, arguments);
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -93,7 +117,8 @@ public class C
 
         protected void SimpleCompilerDiagnosticsSuppressedImpl()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
 #pragma warning disable CS0169
@@ -104,7 +129,13 @@ public class C
             var errorLogDir = Temp.CreateDirectory();
             var errorLogFile = Path.Combine(errorLogDir.Path, "ErrorLog.txt");
 
-            string[] arguments = new[] { "/nologo", sourceFile, "/preferreduilang:en", $"/errorlog:{errorLogFile}{ErrorLogQualifier}" };
+            string[] arguments = new[]
+            {
+                "/nologo",
+                sourceFile,
+                "/preferreduilang:en",
+                $"/errorlog:{errorLogFile}{ErrorLogQualifier}"
+            };
 
             var cmd = CreateCSharpCompiler(null, WorkingDirectory, arguments);
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -118,7 +149,10 @@ public class C
             Assert.NotEqual(0, exitCode);
 
             var actualOutput = File.ReadAllText(errorLogFile).Trim();
-            string expectedOutput = GetExpectedOutputForSimpleCompilerDiagnosticsSuppressed(cmd, sourceFile);
+            string expectedOutput = GetExpectedOutputForSimpleCompilerDiagnosticsSuppressed(
+                cmd,
+                sourceFile
+            );
 
             Assert.Equal(expectedOutput, actualOutput);
 
@@ -128,7 +162,8 @@ public class C
 
         protected void AnalyzerDiagnosticsWithAndWithoutLocationImpl()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
 }";
@@ -137,10 +172,22 @@ public class C
             var errorLogFile = Path.Combine(outputDir.Path, "ErrorLog.txt");
             var outputFilePath = Path.Combine(outputDir.Path, "test.dll");
 
-            string[] arguments = new[] { "/nologo", "/t:library", $"/out:{outputFilePath}", sourceFile, "/preferreduilang:en", $"/errorlog:{errorLogFile}{ErrorLogQualifier}" };
+            string[] arguments = new[]
+            {
+                "/nologo",
+                "/t:library",
+                $"/out:{outputFilePath}",
+                sourceFile,
+                "/preferreduilang:en",
+                $"/errorlog:{errorLogFile}{ErrorLogQualifier}"
+            };
 
-            var cmd = CreateCSharpCompiler(null, WorkingDirectory, arguments,
-               analyzers: ImmutableArray.Create<DiagnosticAnalyzer>(new AnalyzerForErrorLogTest()));
+            var cmd = CreateCSharpCompiler(
+                null,
+                WorkingDirectory,
+                arguments,
+                analyzers: ImmutableArray.Create<DiagnosticAnalyzer>(new AnalyzerForErrorLogTest())
+            );
 
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
 
@@ -163,7 +210,8 @@ public class C
 
         protected void AnalyzerDiagnosticsSuppressedWithJustificationImpl()
         {
-            var source = @"
+            var source =
+                @"
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category1"", ""ID1"", Justification = ""Justification1"")]
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category2"", ""ID2"", Justification = ""Justification2"")]
 class C
@@ -173,10 +221,21 @@ class C
             var errorLogDir = Temp.CreateDirectory();
             var errorLogFile = Path.Combine(errorLogDir.Path, "ErrorLog.txt");
 
-            string[] arguments = new[] { "/nologo", "/t:library", sourceFile, "/preferreduilang:en", $"/errorlog:{errorLogFile}{ErrorLogQualifier}" };
+            string[] arguments = new[]
+            {
+                "/nologo",
+                "/t:library",
+                sourceFile,
+                "/preferreduilang:en",
+                $"/errorlog:{errorLogFile}{ErrorLogQualifier}"
+            };
 
-            var cmd = CreateCSharpCompiler(null, WorkingDirectory, arguments,
-               analyzers: ImmutableArray.Create<DiagnosticAnalyzer>(new AnalyzerForErrorLogTest()));
+            var cmd = CreateCSharpCompiler(
+                null,
+                WorkingDirectory,
+                arguments,
+                analyzers: ImmutableArray.Create<DiagnosticAnalyzer>(new AnalyzerForErrorLogTest())
+            );
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
 
             var exitCode = cmd.Run(outWriter);
@@ -188,7 +247,10 @@ class C
             Assert.NotEqual(0, exitCode);
 
             var actualOutput = File.ReadAllText(errorLogFile).Trim();
-            string expectedOutput = GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(cmd, "Justification1");
+            string expectedOutput = GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(
+                cmd,
+                "Justification1"
+            );
 
             Assert.Equal(expectedOutput, actualOutput);
 
@@ -198,7 +260,8 @@ class C
 
         protected void AnalyzerDiagnosticsSuppressedWithMissingJustificationImpl()
         {
-            var source = @"
+            var source =
+                @"
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category1"", ""ID1"")]
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category2"", ""ID2"")]
 class C
@@ -208,10 +271,21 @@ class C
             var errorLogDir = Temp.CreateDirectory();
             var errorLogFile = Path.Combine(errorLogDir.Path, "ErrorLog.txt");
 
-            string[] arguments = new[] { "/nologo", "/t:library", sourceFile, "/preferreduilang:en", $"/errorlog:{errorLogFile}{ErrorLogQualifier}" };
+            string[] arguments = new[]
+            {
+                "/nologo",
+                "/t:library",
+                sourceFile,
+                "/preferreduilang:en",
+                $"/errorlog:{errorLogFile}{ErrorLogQualifier}"
+            };
 
-            var cmd = CreateCSharpCompiler(null, WorkingDirectory, arguments,
-               analyzers: ImmutableArray.Create<DiagnosticAnalyzer>(new AnalyzerForErrorLogTest()));
+            var cmd = CreateCSharpCompiler(
+                null,
+                WorkingDirectory,
+                arguments,
+                analyzers: ImmutableArray.Create<DiagnosticAnalyzer>(new AnalyzerForErrorLogTest())
+            );
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
 
             var exitCode = cmd.Run(outWriter);
@@ -223,7 +297,10 @@ class C
             Assert.NotEqual(0, exitCode);
 
             var actualOutput = File.ReadAllText(errorLogFile).Trim();
-            string expectedOutput = GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(cmd, null);
+            string expectedOutput = GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(
+                cmd,
+                null
+            );
 
             Assert.Equal(expectedOutput, actualOutput);
 
@@ -233,7 +310,8 @@ class C
 
         protected void AnalyzerDiagnosticsSuppressedWithEmptyJustificationImpl()
         {
-            var source = @"
+            var source =
+                @"
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category1"", ""ID1"", Justification = """")]
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category2"", ""ID2"", Justification = """")]
 class C
@@ -243,10 +321,21 @@ class C
             var errorLogDir = Temp.CreateDirectory();
             var errorLogFile = Path.Combine(errorLogDir.Path, "ErrorLog.txt");
 
-            string[] arguments = new[] { "/nologo", "/t:library", sourceFile, "/preferreduilang:en", $"/errorlog:{errorLogFile}{ErrorLogQualifier}" };
+            string[] arguments = new[]
+            {
+                "/nologo",
+                "/t:library",
+                sourceFile,
+                "/preferreduilang:en",
+                $"/errorlog:{errorLogFile}{ErrorLogQualifier}"
+            };
 
-            var cmd = CreateCSharpCompiler(null, WorkingDirectory, arguments,
-               analyzers: ImmutableArray.Create<DiagnosticAnalyzer>(new AnalyzerForErrorLogTest()));
+            var cmd = CreateCSharpCompiler(
+                null,
+                WorkingDirectory,
+                arguments,
+                analyzers: ImmutableArray.Create<DiagnosticAnalyzer>(new AnalyzerForErrorLogTest())
+            );
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
 
             var exitCode = cmd.Run(outWriter);
@@ -268,7 +357,8 @@ class C
 
         protected void AnalyzerDiagnosticsSuppressedWithNullJustificationImpl()
         {
-            var source = @"
+            var source =
+                @"
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category1"", ""ID1"", Justification = null)]
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category2"", ""ID2"", Justification = null)]
 class C
@@ -278,10 +368,21 @@ class C
             var errorLogDir = Temp.CreateDirectory();
             var errorLogFile = Path.Combine(errorLogDir.Path, "ErrorLog.txt");
 
-            string[] arguments = new[] { "/nologo", "/t:library", sourceFile, "/preferreduilang:en", $"/errorlog:{errorLogFile}{ErrorLogQualifier}" };
+            string[] arguments = new[]
+            {
+                "/nologo",
+                "/t:library",
+                sourceFile,
+                "/preferreduilang:en",
+                $"/errorlog:{errorLogFile}{ErrorLogQualifier}"
+            };
 
-            var cmd = CreateCSharpCompiler(null, WorkingDirectory, arguments,
-               analyzers: ImmutableArray.Create<DiagnosticAnalyzer>(new AnalyzerForErrorLogTest()));
+            var cmd = CreateCSharpCompiler(
+                null,
+                WorkingDirectory,
+                arguments,
+                analyzers: ImmutableArray.Create<DiagnosticAnalyzer>(new AnalyzerForErrorLogTest())
+            );
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
 
             var exitCode = cmd.Run(outWriter);
@@ -293,7 +394,10 @@ class C
             Assert.NotEqual(0, exitCode);
 
             var actualOutput = File.ReadAllText(errorLogFile).Trim();
-            string expectedOutput = GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(cmd, null);
+            string expectedOutput = GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(
+                cmd,
+                null
+            );
 
             Assert.Equal(expectedOutput, actualOutput);
 

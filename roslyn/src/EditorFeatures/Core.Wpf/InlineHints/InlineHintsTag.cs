@@ -47,10 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             ITextView textView,
             SnapshotSpan span,
             InlineHint hint,
-            InlineHintsTaggerProvider taggerProvider)
-            : base(adornment,
-                   removalCallback: null,
-                   PositionAffinity.Predecessor)
+            InlineHintsTaggerProvider taggerProvider
+        ) : base(adornment, removalCallback: null, PositionAffinity.Predecessor)
         {
             _textView = textView;
             _span = span;
@@ -79,23 +77,40 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             SnapshotSpan span,
             InlineHintsTaggerProvider taggerProvider,
             IClassificationFormatMap formatMap,
-            bool classify)
-        {
+            bool classify
+        ) {
             return new InlineHintsTag(
-                CreateElement(hint.DisplayParts, textView, format, formatMap, taggerProvider.TypeMap, classify),
-                textView, span, hint, taggerProvider);
+                CreateElement(
+                    hint.DisplayParts,
+                    textView,
+                    format,
+                    formatMap,
+                    taggerProvider.TypeMap,
+                    classify
+                ),
+                textView,
+                span,
+                hint,
+                taggerProvider
+            );
         }
 
-        public async Task<IReadOnlyCollection<object>> CreateDescriptionAsync(CancellationToken cancellationToken)
-        {
+        public async Task<IReadOnlyCollection<object>> CreateDescriptionAsync(
+            CancellationToken cancellationToken
+        ) {
             var document = _span.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document != null)
             {
-                var taggedText = await _hint.GetDescriptionAsync(document, cancellationToken).ConfigureAwait(false);
+                var taggedText = await _hint.GetDescriptionAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
                 if (!taggedText.IsDefaultOrEmpty)
                 {
                     return Implementation.IntelliSense.Helpers.BuildInteractiveTextElements(
-                        taggedText, document, _threadingContext, _streamingPresenter);
+                        taggedText,
+                        document,
+                        _threadingContext,
+                        _streamingPresenter
+                    );
                 }
             }
 
@@ -108,8 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             TextFormattingRunProperties format,
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap,
-            bool classify)
-        {
+            bool classify
+        ) {
             // Constructs the hint block which gets assigned parameter name and fontstyles according to the options
             // page. Calculates a inline tag that will be 3/4s the size of a normal line. This shrink size tends to work
             // well with VS at any zoom level or font size.
@@ -120,7 +135,6 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 FontSize = 0.75 * format.FontRenderingEmSize,
                 FontStyle = FontStyles.Normal,
                 Foreground = format.ForegroundBrush,
-
                 // Adds a little bit of padding to the left of the text relative to the border to make the text seem
                 // more balanced in the border
                 Padding = new Thickness(left: 2, top: 0, right: 2, bottom: 0),
@@ -131,11 +145,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
             foreach (var taggedText in trimmedTexts)
             {
-                var run = new Run(taggedText.ToVisibleDisplayString(includeLeftToRightMarker: true));
+                var run = new Run(
+                    taggedText.ToVisibleDisplayString(includeLeftToRightMarker: true)
+                );
 
                 if (classify && taggedText.Tag != TextTags.Text)
                 {
-                    var properties = formatMap.GetTextProperties(typeMap.GetClassificationType(taggedText.Tag.ToClassificationTypeName()));
+                    var properties = formatMap.GetTextProperties(
+                        typeMap.GetClassificationType(taggedText.Tag.ToClassificationTypeName())
+                    );
                     var brush = properties.ForegroundBrush.Clone();
                     run.Foreground = brush;
                 }
@@ -155,23 +173,32 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 Background = format.BackgroundBrush,
                 Child = block,
                 CornerRadius = new CornerRadius(2),
-
                 // Highlighting lines are 2px buffer.  So shift us up by one from the bottom so we feel centered between them.
                 Margin = new Thickness(left, top: 0, right, bottom: 1),
             };
 
             // Need to set these properties to avoid unnecessary reformatting because some dependancy properties
             // affect layout
-            TextOptions.SetTextFormattingMode(border, TextOptions.GetTextFormattingMode(textView.VisualElement));
-            TextOptions.SetTextHintingMode(border, TextOptions.GetTextHintingMode(textView.VisualElement));
-            TextOptions.SetTextRenderingMode(border, TextOptions.GetTextRenderingMode(textView.VisualElement));
+            TextOptions.SetTextFormattingMode(
+                border,
+                TextOptions.GetTextFormattingMode(textView.VisualElement)
+            );
+            TextOptions.SetTextHintingMode(
+                border,
+                TextOptions.GetTextHintingMode(textView.VisualElement)
+            );
+            TextOptions.SetTextRenderingMode(
+                border,
+                TextOptions.GetTextRenderingMode(textView.VisualElement)
+            );
 
             border.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             return border;
         }
 
-        private static (ImmutableArray<TaggedText> texts, int leftPadding, int rightPadding) Trim(ImmutableArray<TaggedText> taggedTexts)
-        {
+        private static (ImmutableArray<TaggedText> texts, int leftPadding, int rightPadding) Trim(
+            ImmutableArray<TaggedText> taggedTexts
+        ) {
             using var _ = ArrayBuilder<TaggedText>.GetInstance(out var result);
             var leftPadding = 0;
             var rightPadding = 0;
@@ -216,10 +243,18 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             bool KeepOpen()
             {
                 var mousePoint = Mouse.GetPosition(border);
-                return !(mousePoint.X > border.ActualWidth || mousePoint.X < 0 || mousePoint.Y > border.ActualHeight || mousePoint.Y < 0);
+                return !(
+                    mousePoint.X > border.ActualWidth
+                    || mousePoint.X < 0
+                    || mousePoint.Y > border.ActualHeight
+                    || mousePoint.Y < 0
+                );
             }
 
-            var toolTipPresenter = _toolTipService.CreatePresenter(_textView, new ToolTipParameters(trackMouse: true, ignoreBufferChange: false, KeepOpen));
+            var toolTipPresenter = _toolTipService.CreatePresenter(
+                _textView,
+                new ToolTipParameters(trackMouse: true, ignoreBufferChange: false, KeepOpen)
+            );
             _ = StartToolTipServiceAsync(toolTipPresenter);
         }
 
@@ -228,10 +263,22 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         /// </summary>
         private async Task StartToolTipServiceAsync(IToolTipPresenter toolTipPresenter)
         {
-            var uiList = await Task.Run(() => CreateDescriptionAsync(_threadingContext.DisposalToken)).ConfigureAwait(false);
-            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(_threadingContext.DisposalToken);
+            var uiList = await Task.Run(
+                    () => CreateDescriptionAsync(_threadingContext.DisposalToken)
+                )
+                .ConfigureAwait(false);
+            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                _threadingContext.DisposalToken
+            );
 
-            toolTipPresenter.StartOrUpdate(_textView.TextSnapshot.CreateTrackingSpan(_span.Start, _span.Length, SpanTrackingMode.EdgeInclusive), uiList);
+            toolTipPresenter.StartOrUpdate(
+                _textView.TextSnapshot.CreateTrackingSpan(
+                    _span.Start,
+                    _span.Length,
+                    SpanTrackingMode.EdgeInclusive
+                ),
+                uiList
+            );
         }
     }
 }

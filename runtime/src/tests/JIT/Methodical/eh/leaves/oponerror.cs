@@ -51,14 +51,17 @@ namespace hello
             {
                 try
                 {
-                    if (i == 3) goto intry; // catch ret
-                    if (i >= 0) goto incatch;
-                    if (i < 0) goto begin; // catch ret
-
+                    if (i == 3)
+                        goto intry; // catch ret
+                    if (i >= 0)
+                        goto incatch;
+                    if (i < 0)
+                        goto begin; // catch ret
                 }
                 catch
                 {
-                    if (i != 0) goto incatch;
+                    if (i != 0)
+                        goto incatch;
                     Console.WriteLine("end inner catch");
                 }
                 Console.WriteLine("unreached");

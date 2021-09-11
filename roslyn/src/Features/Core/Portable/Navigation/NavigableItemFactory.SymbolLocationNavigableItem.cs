@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.Navigation
                 Solution solution,
                 ISymbol symbol,
                 Location location,
-                ImmutableArray<TaggedText>? displayTaggedParts)
-            {
+                ImmutableArray<TaggedText>? displayTaggedParts
+            ) {
                 _solution = solution;
                 _symbol = symbol;
                 _location = location;
@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Navigation
 
             public bool IsStale => false;
 
-            public ImmutableArray<INavigableItem> ChildItems => ImmutableArray<INavigableItem>.Empty;
+            public ImmutableArray<INavigableItem> ChildItems =>
+                ImmutableArray<INavigableItem>.Empty;
         }
     }
 }

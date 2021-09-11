@@ -43,25 +43,57 @@ namespace System.Reflection.Internal
             }
         }
 
-        private static bool TryLoadType(string typeName, string modernAssembly, string classicAssembly, out Type type)
-        {
+        private static bool TryLoadType(
+            string typeName,
+            string modernAssembly,
+            string classicAssembly,
+            out Type type
+        ) {
             type = LightUpHelper.GetType(typeName, modernAssembly, classicAssembly);
             return type != null;
         }
 
         private static bool TryLoadTypes()
         {
-            const string systemIOMemoryMappedFiles = "System.IO.MemoryMappedFiles, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
-            const string systemRuntimeHandles = "System.Runtime.Handles, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
-            const string systemCore = "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+            const string systemIOMemoryMappedFiles =
+                "System.IO.MemoryMappedFiles, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
+            const string systemRuntimeHandles =
+                "System.Runtime.Handles, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
+            const string systemCore =
+                "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
 
-            TryLoadType("System.IO.MemoryMappedFiles.MemoryMappedFileSecurity", systemIOMemoryMappedFiles, systemCore, out s_lazyMemoryMappedFileSecurityType);
+            TryLoadType(
+                "System.IO.MemoryMappedFiles.MemoryMappedFileSecurity",
+                systemIOMemoryMappedFiles,
+                systemCore,
+                out s_lazyMemoryMappedFileSecurityType
+            );
 
             return FileStreamReadLightUp.FileStreamType.Value != null
-                && TryLoadType("System.IO.MemoryMappedFiles.MemoryMappedFile", systemIOMemoryMappedFiles, systemCore, out s_lazyMemoryMappedFileType)
-                && TryLoadType("System.IO.MemoryMappedFiles.MemoryMappedViewAccessor", systemIOMemoryMappedFiles, systemCore, out s_lazyMemoryMappedViewAccessorType)
-                && TryLoadType("System.IO.MemoryMappedFiles.MemoryMappedFileAccess", systemIOMemoryMappedFiles, systemCore, out s_lazyMemoryMappedFileAccessType)
-                && TryLoadType("System.IO.HandleInheritability", systemRuntimeHandles, systemCore, out s_lazyHandleInheritabilityType)
+                && TryLoadType(
+                    "System.IO.MemoryMappedFiles.MemoryMappedFile",
+                    systemIOMemoryMappedFiles,
+                    systemCore,
+                    out s_lazyMemoryMappedFileType
+                )
+                && TryLoadType(
+                    "System.IO.MemoryMappedFiles.MemoryMappedViewAccessor",
+                    systemIOMemoryMappedFiles,
+                    systemCore,
+                    out s_lazyMemoryMappedViewAccessorType
+                )
+                && TryLoadType(
+                    "System.IO.MemoryMappedFiles.MemoryMappedFileAccess",
+                    systemIOMemoryMappedFiles,
+                    systemCore,
+                    out s_lazyMemoryMappedFileAccessType
+                )
+                && TryLoadType(
+                    "System.IO.HandleInheritability",
+                    systemRuntimeHandles,
+                    systemCore,
+                    out s_lazyHandleInheritabilityType
+                )
                 && TryLoadMembers();
         }
 
@@ -77,7 +109,7 @@ namespace System.Reflection.Internal
                 s_lazyMemoryMappedFileAccessType,
                 s_lazyHandleInheritabilityType,
                 typeof(bool)
-                );
+            );
 
             // .NET < 4.6
             if (s_lazyCreateFromFile == null)
@@ -93,7 +125,8 @@ namespace System.Reflection.Internal
                         s_lazyMemoryMappedFileAccessType,
                         s_lazyMemoryMappedFileSecurityType,
                         s_lazyHandleInheritabilityType,
-                        typeof(bool));
+                        typeof(bool)
+                    );
                 }
 
                 if (s_lazyCreateFromFileClassic == null)
@@ -107,32 +140,37 @@ namespace System.Reflection.Internal
                 "CreateViewAccessor",
                 typeof(long),
                 typeof(long),
-                s_lazyMemoryMappedFileAccessType);
+                s_lazyMemoryMappedFileAccessType
+            );
 
             if (s_lazyCreateViewAccessor == null)
             {
                 return false;
             }
 
-            s_lazySafeMemoryMappedViewHandle = s_lazyMemoryMappedViewAccessorType.GetTypeInfo().GetDeclaredProperty("SafeMemoryMappedViewHandle");
+            s_lazySafeMemoryMappedViewHandle = s_lazyMemoryMappedViewAccessorType.GetTypeInfo()
+                .GetDeclaredProperty("SafeMemoryMappedViewHandle");
             if (s_lazySafeMemoryMappedViewHandle == null)
             {
                 return false;
             }
 
             // .NET Core, .NET 4.5.1+
-            s_lazyPointerOffset = s_lazyMemoryMappedViewAccessorType.GetTypeInfo().GetDeclaredProperty("PointerOffset");
+            s_lazyPointerOffset = s_lazyMemoryMappedViewAccessorType.GetTypeInfo()
+                .GetDeclaredProperty("PointerOffset");
 
             // .NET < 4.5.1
             if (s_lazyPointerOffset == null)
             {
-                s_lazyInternalViewField = s_lazyMemoryMappedViewAccessorType.GetTypeInfo().GetDeclaredField("m_view");
+                s_lazyInternalViewField = s_lazyMemoryMappedViewAccessorType.GetTypeInfo()
+                    .GetDeclaredField("m_view");
                 if (s_lazyInternalViewField == null)
                 {
                     return false;
                 }
 
-                s_lazyInternalPointerOffset = s_lazyInternalViewField.FieldType.GetTypeInfo().GetDeclaredProperty("PointerOffset");
+                s_lazyInternalPointerOffset = s_lazyInternalViewField.FieldType.GetTypeInfo()
+                    .GetDeclaredProperty("PointerOffset");
                 if (s_lazyInternalPointerOffset == null)
                 {
                     return false;
@@ -150,29 +188,35 @@ namespace System.Reflection.Internal
             {
                 if (s_lazyCreateFromFile != null)
                 {
-                    return (IDisposable)s_lazyCreateFromFile.Invoke(null, new object[6]
-                    {
-                        stream,                        // fileStream
-                        null,                          // mapName
-                        s_LongZero,                    // capacity
-                        s_MemoryMappedFileAccess_Read, // access
-                        s_HandleInheritability_None,   // inheritability
-                        s_True,                        // leaveOpen
-                    });
+                    return (IDisposable)s_lazyCreateFromFile.Invoke(
+                        null,
+                        new object[6]
+                        {
+                            stream, // fileStream
+                            null, // mapName
+                            s_LongZero, // capacity
+                            s_MemoryMappedFileAccess_Read, // access
+                            s_HandleInheritability_None, // inheritability
+                            s_True, // leaveOpen
+                        }
+                    );
                 }
                 else
                 {
                     Debug.Assert(s_lazyCreateFromFileClassic != null);
-                    return (IDisposable)s_lazyCreateFromFileClassic.Invoke(null, new object[7]
-                    {
-                        stream,                        // fileStream
-                        null,                          // mapName
-                        s_LongZero,                    // capacity
-                        s_MemoryMappedFileAccess_Read, // access
-                        null,                          // memoryMappedFileSecurity
-                        s_HandleInheritability_None,   // inheritability
-                        s_True,                        // leaveOpen
-                    });
+                    return (IDisposable)s_lazyCreateFromFileClassic.Invoke(
+                        null,
+                        new object[7]
+                        {
+                            stream, // fileStream
+                            null, // mapName
+                            s_LongZero, // capacity
+                            s_MemoryMappedFileAccess_Read, // access
+                            null, // memoryMappedFileSecurity
+                            s_HandleInheritability_None, // inheritability
+                            s_True, // leaveOpen
+                        }
+                    );
                 }
             }
             catch (MemberAccessException)
@@ -198,12 +242,15 @@ namespace System.Reflection.Internal
             Debug.Assert(s_lazyIsAvailable.GetValueOrDefault());
             try
             {
-                return (IDisposable)s_lazyCreateViewAccessor.Invoke(memoryMap, new object[3]
-                {
-                    start,                       // start
-                    (long)size,                  // size
-                    s_MemoryMappedFileAccess_Read, // access
-                });
+                return (IDisposable)s_lazyCreateViewAccessor.Invoke(
+                    memoryMap,
+                    new object[3]
+                    {
+                        start, // start
+                        (long)size, // size
+                        s_MemoryMappedFileAccess_Read, // access
+                    }
+                );
             }
             catch (MemberAccessException)
             {
@@ -215,7 +262,8 @@ namespace System.Reflection.Internal
                 s_lazyIsAvailable = false;
                 return null;
             }
-            catch (TargetInvocationException ex) when (ex.InnerException is UnauthorizedAccessException)
+            catch (TargetInvocationException ex)
+                when (ex.InnerException is UnauthorizedAccessException)
             {
                 throw new IOException(ex.InnerException.Message, ex.InnerException);
             }
@@ -226,8 +274,11 @@ namespace System.Reflection.Internal
             }
         }
 
-        internal static bool TryGetSafeBufferAndPointerOffset(object accessor, out SafeBuffer safeBuffer, out long offset)
-        {
+        internal static bool TryGetSafeBufferAndPointerOffset(
+            object accessor,
+            out SafeBuffer safeBuffer,
+            out long offset
+        ) {
             Debug.Assert(s_lazyIsAvailable.GetValueOrDefault());
 
             safeBuffer = (SafeBuffer)s_lazySafeMemoryMappedViewHandle.GetValue(accessor);

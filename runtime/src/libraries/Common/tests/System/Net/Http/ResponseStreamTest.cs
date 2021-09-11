@@ -21,19 +21,21 @@ namespace System.Net.Http.Functional.Tests
 
         public static IEnumerable<object[]> RemoteServersAndReadModes()
         {
-            foreach (Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers)
-            {
+            foreach (
+                Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers
+            ) {
                 for (int i = 0; i < 8; i++)
                 {
                     yield return new object[] { remoteServer, i };
                 }
             }
-
         }
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersAndReadModes))]
-        public async Task GetStreamAsync_ReadToEnd_Success(Configuration.Http.RemoteServer remoteServer, int readMode)
-        {
+        public async Task GetStreamAsync_ReadToEnd_Success(
+            Configuration.Http.RemoteServer remoteServer,
+            int readMode
+        ) {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             {
                 string customHeaderValue = Guid.NewGuid().ToString("N");
@@ -70,8 +72,9 @@ namespace System.Net.Http.Functional.Tests
 
                         case 3:
                             // Individual calls to ReadAsync(Array)
-                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
-                            {
+                            while (
+                                (bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0
+                            ) {
                                 ms.Write(buffer, 0, bytesRead);
                             }
                             responseBody = Encoding.UTF8.GetString(ms.ToArray());
@@ -127,11 +130,16 @@ namespace System.Net.Http.Functional.Tests
 
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersMemberData))]
-        public async Task GetAsync_UseResponseHeadersReadAndCallLoadIntoBuffer_Success(Configuration.Http.RemoteServer remoteServer)
-        {
+        public async Task GetAsync_UseResponseHeadersReadAndCallLoadIntoBuffer_Success(
+            Configuration.Http.RemoteServer remoteServer
+        ) {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
-            using (HttpResponseMessage response = await client.GetAsync(remoteServer.EchoUri, HttpCompletionOption.ResponseHeadersRead))
-            {
+            using (
+                HttpResponseMessage response = await client.GetAsync(
+                    remoteServer.EchoUri,
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+            ) {
                 await response.Content.LoadIntoBufferAsync();
 
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -140,17 +148,23 @@ namespace System.Net.Http.Functional.Tests
                     responseBody,
                     response.Content.Headers.ContentMD5,
                     false,
-                    null);
+                    null
+                );
             }
         }
 
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersMemberData))]
-        public async Task GetAsync_UseResponseHeadersReadAndCopyToMemoryStream_Success(Configuration.Http.RemoteServer remoteServer)
-        {
+        public async Task GetAsync_UseResponseHeadersReadAndCopyToMemoryStream_Success(
+            Configuration.Http.RemoteServer remoteServer
+        ) {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
-            using (HttpResponseMessage response = await client.GetAsync(remoteServer.EchoUri, HttpCompletionOption.ResponseHeadersRead))
-            {
+            using (
+                HttpResponseMessage response = await client.GetAsync(
+                    remoteServer.EchoUri,
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+            ) {
                 var memoryStream = new MemoryStream();
                 await response.Content.CopyToAsync(memoryStream);
                 memoryStream.Position = 0;
@@ -163,15 +177,17 @@ namespace System.Net.Http.Functional.Tests
                         responseBody,
                         response.Content.Headers.ContentMD5,
                         false,
-                        null);
+                        null
+                    );
                 }
             }
         }
 
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersMemberData))]
-        public async Task GetStreamAsync_ReadZeroBytes_Success(Configuration.Http.RemoteServer remoteServer)
-        {
+        public async Task GetStreamAsync_ReadZeroBytes_Success(
+            Configuration.Http.RemoteServer remoteServer
+        ) {
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
             using (Stream stream = await client.GetStreamAsync(remoteServer.EchoUri))
             {
@@ -185,13 +201,18 @@ namespace System.Net.Http.Functional.Tests
 
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersMemberData))]
-        public async Task ReadAsStreamAsync_Cancel_TaskIsCanceled(Configuration.Http.RemoteServer remoteServer)
-        {
+        public async Task ReadAsStreamAsync_Cancel_TaskIsCanceled(
+            Configuration.Http.RemoteServer remoteServer
+        ) {
             var cts = new CancellationTokenSource();
 
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
-            using (HttpResponseMessage response =
-                    await client.GetAsync(remoteServer.EchoUri, HttpCompletionOption.ResponseHeadersRead))
+            using (
+                HttpResponseMessage response = await client.GetAsync(
+                    remoteServer.EchoUri,
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+            )
             using (Stream stream = await response.Content.ReadAsStreamAsync(TestAsync))
             {
                 var buffer = new byte[2048];
@@ -208,9 +229,10 @@ namespace System.Net.Http.Functional.Tests
                     // With WinHttpHandler, we may fault because canceling the task destroys the request handle
                     // which may randomly cause an ObjectDisposedException (or other exception).
                     Assert.True(
-                        task.Status == TaskStatus.RanToCompletion ||
-                        task.Status == TaskStatus.Canceled ||
-                        task.Status == TaskStatus.Faulted);
+                        task.Status == TaskStatus.RanToCompletion
+                            || task.Status == TaskStatus.Canceled
+                            || task.Status == TaskStatus.Faulted
+                    );
                 }
                 else
                 {
@@ -221,8 +243,9 @@ namespace System.Net.Http.Functional.Tests
                     }
 
                     Assert.True(
-                        task.Status == TaskStatus.RanToCompletion ||
-                        task.Status == TaskStatus.Canceled);
+                        task.Status == TaskStatus.RanToCompletion
+                            || task.Status == TaskStatus.Canceled
+                    );
                 }
             }
         }
@@ -233,12 +256,16 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(TransferType.Chunked, TransferError.ChunkSizeTooLarge)]
         public async Task ReadAsStreamAsync_InvalidServerResponse_ThrowsIOException(
             TransferType transferType,
-            TransferError transferError)
-        {
-            await StartTransferTypeAndErrorServer(transferType, transferError, async uri =>
-            {
-                await Assert.ThrowsAsync<IOException>(() => ReadAsStreamHelper(uri));
-            });
+            TransferError transferError
+        ) {
+            await StartTransferTypeAndErrorServer(
+                transferType,
+                transferError,
+                async uri =>
+                {
+                    await Assert.ThrowsAsync<IOException>(() => ReadAsStreamHelper(uri));
+                }
+            );
         }
 
         [Theory]
@@ -247,12 +274,16 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(TransferType.Chunked, TransferError.None)]
         public async Task ReadAsStreamAsync_ValidServerResponse_Success(
             TransferType transferType,
-            TransferError transferError)
-        {
-            await StartTransferTypeAndErrorServer(transferType, transferError, async uri =>
-            {
-                await ReadAsStreamHelper(uri);
-            });
+            TransferError transferError
+        ) {
+            await StartTransferTypeAndErrorServer(
+                transferType,
+                transferError,
+                async uri =>
+                {
+                    await ReadAsStreamHelper(uri);
+                }
+            );
         }
 
         [Theory]
@@ -261,21 +292,29 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(TransferType.Chunked, TransferError.None)]
         public async Task ReadAsStreamAsync_StreamCanReadIsFalseAfterDispose(
             TransferType transferType,
-            TransferError transferError)
-        {
-            await StartTransferTypeAndErrorServer(transferType, transferError, async uri =>
-            {
-                using (HttpClient client = CreateHttpClient())
-                using (HttpResponseMessage response = await client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead))
+            TransferError transferError
+        ) {
+            await StartTransferTypeAndErrorServer(
+                transferType,
+                transferError,
+                async uri =>
                 {
-                    Stream stream = await response.Content.ReadAsStreamAsync();
-                    Assert.True(stream.CanRead);
+                    using (HttpClient client = CreateHttpClient())
+                    using (
+                        HttpResponseMessage response = await client.GetAsync(
+                            uri,
+                            HttpCompletionOption.ResponseHeadersRead
+                        )
+                    ) {
+                        Stream stream = await response.Content.ReadAsStreamAsync();
+                        Assert.True(stream.CanRead);
 
-                    stream.Dispose();
+                        stream.Dispose();
 
-                    Assert.False(stream.CanRead);
+                        Assert.False(stream.CanRead);
+                    }
                 }
-            });
+            );
         }
 #endif
 
@@ -297,70 +336,95 @@ namespace System.Net.Http.Functional.Tests
         public static Task StartTransferTypeAndErrorServer(
             TransferType transferType,
             TransferError transferError,
-            Func<Uri, Task> clientFunc)
-        {
+            Func<Uri, Task> clientFunc
+        ) {
             return LoopbackServer.CreateClientAndServerAsync(
                 clientFunc,
-                server => server.AcceptConnectionAsync(async connection =>
-                {
-                    // Read past request headers.
-                    await connection.ReadRequestHeaderAsync();
-
-                    // Determine response transfer headers.
-                    string transferHeader = null;
-                    string content = "This is some response content.";
-                    if (transferType == TransferType.ContentLength)
-                    {
-                        transferHeader = transferError == TransferError.ContentLengthTooLarge ?
-                            $"Content-Length: {content.Length + 42}\r\n" :
-                            $"Content-Length: {content.Length}\r\n";
-                    }
-                    else if (transferType == TransferType.Chunked)
-                    {
-                        transferHeader = "Transfer-Encoding: chunked\r\n";
-                    }
-
-                    // Write response header
-                    await connection.WriteStringAsync("HTTP/1.1 200 OK\r\n").ConfigureAwait(false);
-                    await connection.WriteStringAsync($"Date: {DateTimeOffset.UtcNow:R}\r\n").ConfigureAwait(false);
-                    await connection.WriteStringAsync("Content-Type: text/plain\r\n").ConfigureAwait(false);
-                    if (!string.IsNullOrEmpty(transferHeader))
-                    {
-                        await connection.WriteStringAsync(transferHeader).ConfigureAwait(false);
-                    }
-                    await connection.WriteStringAsync("\r\n").ConfigureAwait(false);
-
-                    // Write response body
-                    if (transferType == TransferType.Chunked)
-                    {
-                        string chunkSizeInHex = string.Format(
-                            "{0:x}\r\n",
-                            content.Length + (transferError == TransferError.ChunkSizeTooLarge ? 42 : 0));
-                        await connection.WriteStringAsync(chunkSizeInHex).ConfigureAwait(false);
-                        await connection.WriteStringAsync($"{content}\r\n").ConfigureAwait(false);
-                        if (transferError != TransferError.MissingChunkTerminator)
+                server =>
+                    server.AcceptConnectionAsync(
+                        async connection =>
                         {
-                            await connection.WriteStringAsync("0\r\n\r\n").ConfigureAwait(false);
+                            // Read past request headers.
+                            await connection.ReadRequestHeaderAsync();
+
+                            // Determine response transfer headers.
+                            string transferHeader = null;
+                            string content = "This is some response content.";
+                            if (transferType == TransferType.ContentLength)
+                            {
+                                transferHeader =
+                                    transferError == TransferError.ContentLengthTooLarge
+                                        ? $"Content-Length: {content.Length + 42}\r\n"
+                                        : $"Content-Length: {content.Length}\r\n";
+                            }
+                            else if (transferType == TransferType.Chunked)
+                            {
+                                transferHeader = "Transfer-Encoding: chunked\r\n";
+                            }
+
+                            // Write response header
+                            await connection.WriteStringAsync("HTTP/1.1 200 OK\r\n")
+                                .ConfigureAwait(false);
+                            await connection.WriteStringAsync(
+                                    $"Date: {DateTimeOffset.UtcNow:R}\r\n"
+                                )
+                                .ConfigureAwait(false);
+                            await connection.WriteStringAsync("Content-Type: text/plain\r\n")
+                                .ConfigureAwait(false);
+                            if (!string.IsNullOrEmpty(transferHeader))
+                            {
+                                await connection.WriteStringAsync(transferHeader)
+                                    .ConfigureAwait(false);
+                            }
+                            await connection.WriteStringAsync("\r\n").ConfigureAwait(false);
+
+                            // Write response body
+                            if (transferType == TransferType.Chunked)
+                            {
+                                string chunkSizeInHex = string.Format(
+                                    "{0:x}\r\n",
+                                    content.Length
+                                        + (
+                                            transferError == TransferError.ChunkSizeTooLarge
+                                                ? 42
+                                                : 0
+                                        )
+                                );
+                                await connection.WriteStringAsync(chunkSizeInHex)
+                                    .ConfigureAwait(false);
+                                await connection.WriteStringAsync($"{content}\r\n")
+                                    .ConfigureAwait(false);
+                                if (transferError != TransferError.MissingChunkTerminator)
+                                {
+                                    await connection.WriteStringAsync("0\r\n\r\n")
+                                        .ConfigureAwait(false);
+                                }
+                            }
+                            else
+                            {
+                                await connection.WriteStringAsync($"{content}")
+                                    .ConfigureAwait(false);
+                            }
                         }
-                    }
-                    else
-                    {
-                        await connection.WriteStringAsync($"{content}").ConfigureAwait(false);
-                    }
-                }));
+                    )
+            );
         }
 
         private async Task ReadAsStreamHelper(Uri serverUri)
         {
             using (HttpClient client = CreateHttpClient())
             {
-                using (var response = await client.GetAsync(
-                    serverUri,
-                    HttpCompletionOption.ResponseHeadersRead))
+                using (
+                    var response = await client.GetAsync(
+                        serverUri,
+                        HttpCompletionOption.ResponseHeadersRead
+                    )
+                )
                 using (var stream = await response.Content.ReadAsStreamAsync(TestAsync))
                 {
                     var buffer = new byte[1];
-                    while (await stream.ReadAsync(buffer, 0, 1) > 0) ;
+                    while (await stream.ReadAsync(buffer, 0, 1) > 0)
+                        ;
                 }
             }
         }

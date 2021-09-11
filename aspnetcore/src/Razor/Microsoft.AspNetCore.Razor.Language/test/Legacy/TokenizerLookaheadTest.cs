@@ -24,7 +24,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             // Assert
             Assert.False(result);
-            Assert.Equal("pre-existing values", tokenizer.Buffer.ToString(), StringComparer.Ordinal);
+            Assert.Equal(
+                "pre-existing values",
+                tokenizer.Buffer.ToString(),
+                StringComparer.Ordinal
+            );
         }
 
         [Fact]
@@ -39,7 +43,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             // Assert
             Assert.True(result);
-            Assert.Equal("pre-existing values0x", tokenizer.Buffer.ToString(), StringComparer.Ordinal);
+            Assert.Equal(
+                "pre-existing values0x",
+                tokenizer.Buffer.ToString(),
+                StringComparer.Ordinal
+            );
         }
 
         [Fact]
@@ -54,7 +62,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             // Assert
             Assert.True(result);
-            Assert.Equal("pre-existing values", tokenizer.Buffer.ToString(), StringComparer.Ordinal);
+            Assert.Equal(
+                "pre-existing values",
+                tokenizer.Buffer.ToString(),
+                StringComparer.Ordinal
+            );
         }
 
         [Fact]
@@ -66,11 +78,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Act
             var i = 3;
             IEnumerable<SyntaxToken> previousTokens = null;
-            var tokenFound = tokenizer.LookaheadUntil((s, p) =>
-            {
-                previousTokens = p;
-                return --i == 0;
-            });
+            var tokenFound = tokenizer.LookaheadUntil(
+                (s, p) =>
+                {
+                    previousTokens = p;
+                    return --i == 0;
+                }
+            );
 
             // Assert
             Assert.Equal(4, previousTokens.Count());
@@ -78,9 +92,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // For the very first element, there will be no previous items, so null is expected
             var orderIndex = 0;
             Assert.Null(previousTokens.ElementAt(orderIndex++));
-            AssertTokenEqual(SyntaxFactory.Token(SyntaxKind.Text, "asdf"), previousTokens.ElementAt(orderIndex++));
-            AssertTokenEqual(SyntaxFactory.Token(SyntaxKind.DoubleHyphen, "--"), previousTokens.ElementAt(orderIndex++));
-            AssertTokenEqual(SyntaxFactory.Token(SyntaxKind.Text, "fvd"), previousTokens.ElementAt(orderIndex++));
+            AssertTokenEqual(
+                SyntaxFactory.Token(SyntaxKind.Text, "asdf"),
+                previousTokens.ElementAt(orderIndex++)
+            );
+            AssertTokenEqual(
+                SyntaxFactory.Token(SyntaxKind.DoubleHyphen, "--"),
+                previousTokens.ElementAt(orderIndex++)
+            );
+            AssertTokenEqual(
+                SyntaxFactory.Token(SyntaxKind.Text, "fvd"),
+                previousTokens.ElementAt(orderIndex++)
+            );
         }
 
         [Fact]
@@ -91,11 +114,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             // Act
             var tokens = new Stack<SyntaxToken>();
-            var tokenFound = tokenizer.LookaheadUntil((s, p) =>
-            {
-                tokens.Push(s);
-                return false;
-            });
+            var tokenFound = tokenizer.LookaheadUntil(
+                (s, p) =>
+                {
+                    tokens.Push(s);
+                    return false;
+                }
+            );
 
             // Assert
             Assert.False(tokenFound);
@@ -113,11 +138,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             // Act
             var tokens = new Stack<SyntaxToken>();
-            var tokenFound = tokenizer.LookaheadUntil((s, p) =>
-            {
-                tokens.Push(s);
-                return s.Kind == SyntaxKind.DoubleHyphen;
-            });
+            var tokenFound = tokenizer.LookaheadUntil(
+                (s, p) =>
+                {
+                    tokens.Push(s);
+                    return s.Kind == SyntaxKind.DoubleHyphen;
+                }
+            );
 
             // Assert
             Assert.True(tokenFound);
@@ -132,7 +159,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             var options = RazorParserOptions.CreateDefault();
             var context = new ParserContext(source, options);
 
-            var tokenizer = new TestTokenizerBackedParser(HtmlLanguageCharacteristics.Instance, context);
+            var tokenizer = new TestTokenizerBackedParser(
+                HtmlLanguageCharacteristics.Instance,
+                context
+            );
             return tokenizer;
         }
 
@@ -144,55 +174,38 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private class ExposedTokenizer : Tokenizer
         {
             public ExposedTokenizer(string input)
-                : base(new SeekableTextReader(input, filePath: null))
-            {
-            }
+                : base(new SeekableTextReader(input, filePath: null)) { }
 
             public new StringBuilder Buffer
             {
-                get
-                {
-                    return base.Buffer;
-                }
+                get { return base.Buffer; }
             }
 
             public override SyntaxKind RazorCommentStarKind
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public override SyntaxKind RazorCommentTransitionKind
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public override SyntaxKind RazorCommentKind
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             protected override int StartState
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             protected override SyntaxToken CreateToken(
                 string content,
                 SyntaxKind type,
-                RazorDiagnostic[] errors)
-            {
+                RazorDiagnostic[] errors
+            ) {
                 throw new NotImplementedException();
             }
 
@@ -204,12 +217,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         private class TestTokenizerBackedParser : TokenizerBackedParser<HtmlTokenizer>
         {
-            internal TestTokenizerBackedParser(LanguageCharacteristics<HtmlTokenizer> language, ParserContext context) : base(language, context)
-            {
-            }
+            internal TestTokenizerBackedParser(
+                LanguageCharacteristics<HtmlTokenizer> language,
+                ParserContext context
+            ) : base(language, context) { }
 
-            internal new bool LookaheadUntil(Func<SyntaxToken, IEnumerable<SyntaxToken>, bool> condition)
-            {
+            internal new bool LookaheadUntil(
+                Func<SyntaxToken, IEnumerable<SyntaxToken>, bool> condition
+            ) {
                 return base.LookaheadUntil(condition);
             }
         }

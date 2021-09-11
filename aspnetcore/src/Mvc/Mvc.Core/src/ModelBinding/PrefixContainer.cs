@@ -142,8 +142,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             }
         }
 
-        private static void GetKeyFromNonEmptyPrefix(string prefix, string entry, IDictionary<string, string> results)
-        {
+        private static void GetKeyFromNonEmptyPrefix(
+            string prefix,
+            string entry,
+            IDictionary<string, string> results
+        ) {
             string key;
             string fullName;
             var keyPosition = prefix.Length + 1;
@@ -206,7 +209,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     candidate,
                     0,
                     prefix.Length,
-                    StringComparison.OrdinalIgnoreCase);
+                    StringComparison.OrdinalIgnoreCase
+                );
                 if (compare == 0)
                 {
                     Debug.Assert(candidate.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
@@ -263,7 +267,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     candidate,
                     0,
                     prefix.Length,
-                    StringComparison.OrdinalIgnoreCase);
+                    StringComparison.OrdinalIgnoreCase
+                );
                 if (compare == 0)
                 {
                     Debug.Assert(candidate.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
@@ -282,7 +287,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                         // Match, followed by delimiter
                         return start;
                     }
-
                     // Keep checking until we've passed all StartsWith() matches.
                 }
 

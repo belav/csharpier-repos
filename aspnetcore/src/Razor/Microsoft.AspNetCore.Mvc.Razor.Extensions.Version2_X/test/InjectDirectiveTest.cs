@@ -14,15 +14,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         public void InjectDirectivePass_Execute_DefinesProperty()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @inject PropertyType PropertyName
-");
+"
+            );
 
             var engine = CreateEngine();
-            var pass = new InjectDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new InjectDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -43,16 +42,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         public void InjectDirectivePass_Execute_DedupesPropertiesByName()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @inject PropertyType PropertyName
 @inject PropertyType2 PropertyName
-");
+"
+            );
 
             var engine = CreateEngine();
-            var pass = new InjectDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new InjectDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -73,15 +71,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         public void InjectDirectivePass_Execute_ExpandsTModel_WithDynamic()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @inject PropertyType<TModel> PropertyName
-");
+"
+            );
 
             var engine = CreateEngine();
-            var pass = new InjectDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new InjectDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -102,16 +99,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         public void InjectDirectivePass_Execute_ExpandsTModel_WithModelTypeFirst()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @model ModelType
 @inject PropertyType<TModel> PropertyName
-");
+"
+            );
 
             var engine = CreateEngine();
-            var pass = new InjectDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new InjectDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -132,16 +128,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         public void InjectDirectivePass_Execute_ExpandsTModel_WithModelType()
         {
             // Arrange
-            var codeDocument = CreateDocument(@"
+            var codeDocument = CreateDocument(
+                @"
 @inject PropertyType<TModel> PropertyName
 @model ModelType
-");
+"
+            );
 
             var engine = CreateEngine();
-            var pass = new InjectDirective.Pass()
-            {
-                Engine = engine,
-            };
+            var pass = new InjectDirective.Pass() { Engine = engine, };
 
             var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -173,16 +168,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
         private RazorEngine CreateEngine()
         {
-            return RazorProjectEngine.Create(b =>
-            {
-                // Notice we're not registering the InjectDirective.Pass here so we can run it on demand.
-                b.AddDirective(InjectDirective.Directive);
-                b.AddDirective(ModelDirective.Directive);
-            }).Engine;
+            return RazorProjectEngine.Create(
+                b =>
+                {
+                    // Notice we're not registering the InjectDirective.Pass here so we can run it on demand.
+                    b.AddDirective(InjectDirective.Directive);
+                    b.AddDirective(ModelDirective.Directive);
+                }
+            ).Engine;
         }
 
-        private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
-        {
+        private DocumentIntermediateNode CreateIRDocument(
+            RazorEngine engine,
+            RazorCodeDocument codeDocument
+        ) {
             for (var i = 0; i < engine.Phases.Count; i++)
             {
                 var phase = engine.Phases[i];

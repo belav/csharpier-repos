@@ -22,21 +22,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InteractiveGlobalUndoServiceFactory(ITextUndoHistoryRegistry undoHistoryRegistry)
-            => _singleton = new GlobalUndoService(undoHistoryRegistry);
+        public InteractiveGlobalUndoServiceFactory(ITextUndoHistoryRegistry undoHistoryRegistry) =>
+            _singleton = new GlobalUndoService(undoHistoryRegistry);
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => _singleton;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            _singleton;
 
         private class GlobalUndoService : IGlobalUndoService
         {
             private readonly ITextUndoHistoryRegistry _undoHistoryRegistry;
 
-            public bool IsGlobalTransactionOpen(Workspace workspace)
-                => GetHistory(workspace).CurrentTransaction != null;
+            public bool IsGlobalTransactionOpen(Workspace workspace) =>
+                GetHistory(workspace).CurrentTransaction != null;
 
-            public GlobalUndoService(ITextUndoHistoryRegistry undoHistoryRegistry)
-                => _undoHistoryRegistry = undoHistoryRegistry;
+            public GlobalUndoService(ITextUndoHistoryRegistry undoHistoryRegistry) =>
+                _undoHistoryRegistry = undoHistoryRegistry;
 
             public bool CanUndo(Workspace workspace)
             {
@@ -44,11 +44,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
                 return workspace is InteractiveWindowWorkspace;
             }
 
-            public IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(Workspace workspace, string description)
-            {
+            public IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(
+                Workspace workspace,
+                string description
+            ) {
                 if (!CanUndo(workspace))
                 {
-                    throw new ArgumentException(EditorFeaturesResources.Given_Workspace_doesn_t_support_Undo);
+                    throw new ArgumentException(
+                        EditorFeaturesResources.Given_Workspace_doesn_t_support_Undo
+                    );
                 }
 
                 var textUndoHistory = GetHistory(workspace);
@@ -63,7 +67,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
                 var interactiveWorkspace = (InteractiveWindowWorkspace)workspace;
                 var textBuffer = interactiveWorkspace.Window.TextView.TextBuffer;
 
-                Contract.ThrowIfFalse(_undoHistoryRegistry.TryGetHistory(textBuffer, out var textUndoHistory));
+                Contract.ThrowIfFalse(
+                    _undoHistoryRegistry.TryGetHistory(textBuffer, out var textUndoHistory)
+                );
 
                 return textUndoHistory;
             }
@@ -72,19 +78,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
             {
                 private readonly ITextUndoTransaction _transaction;
 
-                public InteractiveGlobalUndoTransaction(ITextUndoTransaction transaction)
-                    => _transaction = transaction;
+                public InteractiveGlobalUndoTransaction(ITextUndoTransaction transaction) =>
+                    _transaction = transaction;
 
                 public void AddDocument(DocumentId id)
                 {
                     // Nothing to do.
                 }
 
-                public void Commit()
-                    => _transaction.Complete();
+                public void Commit() => _transaction.Complete();
 
-                public void Dispose()
-                    => _transaction.Dispose();
+                public void Dispose() => _transaction.Dispose();
             }
         }
     }

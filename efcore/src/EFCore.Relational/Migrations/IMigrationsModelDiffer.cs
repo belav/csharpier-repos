@@ -42,6 +42,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     A list of the operations that need to applied to the database to migrate it
         ///     from mapping to the source model so that is now mapping to the target model.
         /// </returns>
-        IReadOnlyList<MigrationOperation> GetDifferences(IRelationalModel? source, IRelationalModel? target);
+        IReadOnlyList<MigrationOperation> GetDifferences(
+            IRelationalModel? source,
+            IRelationalModel? target
+        );
     }
 }

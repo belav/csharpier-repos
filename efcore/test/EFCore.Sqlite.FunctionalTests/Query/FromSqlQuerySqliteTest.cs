@@ -10,10 +10,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class FromSqlQuerySqliteTest : FromSqlQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+    public class FromSqlQuerySqliteTest
+        : FromSqlQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
     {
-        public FromSqlQuerySqliteTest(NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public FromSqlQuerySqliteTest(
+            NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
@@ -34,8 +37,9 @@ WHERE ('z' = '') OR (instr(""c"".""ContactName"", 'z') > 0)";
             return queryString;
         }
 
-        public override async Task<string> FromSqlRaw_queryable_with_parameters_and_closure(bool async)
-        {
+        public override async Task<string> FromSqlRaw_queryable_with_parameters_and_closure(
+            bool async
+        ) {
             var queryString = await base.FromSqlRaw_queryable_with_parameters_and_closure(async);
 
             Assert.Equal(
@@ -46,7 +50,10 @@ SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyN
 FROM (
     SELECT * FROM ""Customers"" WHERE ""City"" = @p0
 ) AS ""c""
-WHERE ""c"".""ContactTitle"" = @__contactTitle_1", queryString, ignoreLineEndingDifferences: true);
+WHERE ""c"".""ContactTitle"" = @__contactTitle_1",
+                queryString,
+                ignoreLineEndingDifferences: true
+            );
 
             return queryString;
         }
@@ -75,7 +82,7 @@ WHERE ""c"".""ContactTitle"" = @__contactTitle_1", queryString, ignoreLineEnding
             return Task.CompletedTask;
         }
 
-        protected override DbParameter CreateDbParameter(string name, object value)
-            => new SqliteParameter { ParameterName = name, Value = value };
+        protected override DbParameter CreateDbParameter(string name, object value) =>
+            new SqliteParameter { ParameterName = name, Value = value };
     }
 }

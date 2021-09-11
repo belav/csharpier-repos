@@ -7,8 +7,13 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetTerminalInvalidationHandler")]
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SetTerminalInvalidationHandler"
+        )]
         [SuppressGCTransition]
-        internal static extern unsafe void SetTerminalInvalidationHandler(delegate* unmanaged<void> handler);
+        internal static extern unsafe void SetTerminalInvalidationHandler(
+            delegate* unmanaged<void> handler
+        );
     }
 }

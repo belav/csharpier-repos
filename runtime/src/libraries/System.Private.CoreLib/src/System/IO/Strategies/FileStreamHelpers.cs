@@ -7,16 +7,44 @@ namespace System.IO.Strategies
 {
     internal static partial class FileStreamHelpers
     {
-        internal static bool UseNet5CompatStrategy { get; } = AppContextConfigHelper.GetBooleanConfig("System.IO.UseNet5CompatFileStream", "DOTNET_SYSTEM_IO_USENET5COMPATFILESTREAM");
+        internal static bool UseNet5CompatStrategy { get; } =
+            AppContextConfigHelper.GetBooleanConfig(
+                "System.IO.UseNet5CompatFileStream",
+                "DOTNET_SYSTEM_IO_USENET5COMPATFILESTREAM"
+            );
 
-        internal static FileStreamStrategy ChooseStrategy(FileStream fileStream, SafeFileHandle handle, FileAccess access, FileShare share, int bufferSize, bool isAsync)
-            => WrapIfDerivedType(fileStream, ChooseStrategyCore(handle, access, share, bufferSize, isAsync));
+        internal static FileStreamStrategy ChooseStrategy(
+            FileStream fileStream,
+            SafeFileHandle handle,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            bool isAsync
+        ) =>
+            WrapIfDerivedType(
+                fileStream,
+                ChooseStrategyCore(handle, access, share, bufferSize, isAsync)
+            );
 
-        internal static FileStreamStrategy ChooseStrategy(FileStream fileStream, string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options)
-            => WrapIfDerivedType(fileStream, ChooseStrategyCore(path, mode, access, share, bufferSize, options));
+        internal static FileStreamStrategy ChooseStrategy(
+            FileStream fileStream,
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options
+        ) =>
+            WrapIfDerivedType(
+                fileStream,
+                ChooseStrategyCore(path, mode, access, share, bufferSize, options)
+            );
 
-        private static FileStreamStrategy WrapIfDerivedType(FileStream fileStream, FileStreamStrategy strategy)
-            => fileStream.GetType() == typeof(FileStream)
+        private static FileStreamStrategy WrapIfDerivedType(
+            FileStream fileStream,
+            FileStreamStrategy strategy
+        ) =>
+            fileStream.GetType() == typeof(FileStream)
                 ? strategy
                 : new DerivedFileStreamStrategy(fileStream, strategy);
 
@@ -29,11 +57,12 @@ namespace System.IO.Strategies
             //     FileNotFoundException
             //     PathTooLongException
             //     PipeException
-            e is IOException ||
+            e is IOException
+            ||
             // Note that SecurityException is only thrown on runtimes that support CAS
             // e is SecurityException ||
-            e is UnauthorizedAccessException ||
-            e is NotSupportedException ||
-            (e is ArgumentException && !(e is ArgumentNullException));
+            e is UnauthorizedAccessException
+            || e is NotSupportedException
+            || (e is ArgumentException && !(e is ArgumentNullException));
     }
 }

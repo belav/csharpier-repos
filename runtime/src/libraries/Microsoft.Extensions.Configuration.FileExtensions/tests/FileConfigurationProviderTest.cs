@@ -21,11 +21,13 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
             var fileProviderMock = new Mock<IFileProvider>();
             fileProviderMock.Setup(fp => fp.Watch(It.IsAny<string>())).Returns(changeToken);
 
-            var provider = new FileConfigurationProviderImpl(new FileConfigurationSourceImpl
-            {
-                FileProvider = fileProviderMock.Object,
-                ReloadOnChange = true,
-            });
+            var provider = new FileConfigurationProviderImpl(
+                new FileConfigurationSourceImpl
+                {
+                    FileProvider = fileProviderMock.Object,
+                    ReloadOnChange = true,
+                }
+            );
 
             Assert.NotEmpty(changeToken.Callbacks);
 
@@ -36,12 +38,9 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
 
         public class FileConfigurationProviderImpl : FileConfigurationProvider
         {
-            public FileConfigurationProviderImpl(FileConfigurationSource source)
-                : base(source)
-            { }
+            public FileConfigurationProviderImpl(FileConfigurationSource source) : base(source) { }
 
-            public override void Load(Stream stream)
-            { }
+            public override void Load(Stream stream) { }
         }
 
         public class FileConfigurationSourceImpl : FileConfigurationSource

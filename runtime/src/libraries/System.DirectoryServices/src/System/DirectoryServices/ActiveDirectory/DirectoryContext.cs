@@ -44,8 +44,12 @@ namespace System.DirectoryServices.ActiveDirectory
 
         // Internal Constructors
         [MemberNotNull(nameof(_credential))]
-        internal void InitializeDirectoryContext(DirectoryContextType contextType, string? name, string? username, string? password)
-        {
+        internal void InitializeDirectoryContext(
+            DirectoryContextType contextType,
+            string? name,
+            string? username,
+            string? password
+        ) {
             _name = name;
             _contextType = contextType;
             _credential = new NetworkCredential(username, password);
@@ -59,8 +63,11 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        internal DirectoryContext(DirectoryContextType contextType, string? name, DirectoryContext? context)
-        {
+        internal DirectoryContext(
+            DirectoryContextType contextType,
+            string? name,
+            DirectoryContext? context
+        ) {
             _name = name;
             _contextType = contextType;
 
@@ -105,8 +112,10 @@ namespace System.DirectoryServices.ActiveDirectory
             // this constructor can only be called for DirectoryContextType.Forest or DirectoryContextType.Domain
             // since all other types require the name to be specified
             //
-            if (contextType != DirectoryContextType.Domain && contextType != DirectoryContextType.Forest)
-            {
+            if (
+                contextType != DirectoryContextType.Domain
+                && contextType != DirectoryContextType.Forest
+            ) {
                 throw new ArgumentException(SR.OnlyDomainOrForest, nameof(contextType));
             }
 
@@ -115,9 +124,15 @@ namespace System.DirectoryServices.ActiveDirectory
 
         public DirectoryContext(DirectoryContextType contextType, string name)
         {
-            if (contextType < DirectoryContextType.Domain || contextType > DirectoryContextType.ApplicationPartition)
-            {
-                throw new InvalidEnumArgumentException(nameof(contextType), (int)contextType, typeof(DirectoryContextType));
+            if (
+                contextType < DirectoryContextType.Domain
+                || contextType > DirectoryContextType.ApplicationPartition
+            ) {
+                throw new InvalidEnumArgumentException(
+                    nameof(contextType),
+                    (int)contextType,
+                    typeof(DirectoryContextType)
+                );
             }
 
             if (name == null)
@@ -133,25 +148,40 @@ namespace System.DirectoryServices.ActiveDirectory
             InitializeDirectoryContext(contextType, name, null, null);
         }
 
-        public DirectoryContext(DirectoryContextType contextType, string? username, string? password)
-        {
+        public DirectoryContext(
+            DirectoryContextType contextType,
+            string? username,
+            string? password
+        ) {
             //
             // this constructor can only be called for DirectoryContextType.Forest or DirectoryContextType.Domain
             // since all other types require the name to be specified
             //
-            if (contextType != DirectoryContextType.Domain && contextType != DirectoryContextType.Forest)
-            {
+            if (
+                contextType != DirectoryContextType.Domain
+                && contextType != DirectoryContextType.Forest
+            ) {
                 throw new ArgumentException(SR.OnlyDomainOrForest, nameof(contextType));
             }
 
             InitializeDirectoryContext(contextType, null, username, password);
         }
 
-        public DirectoryContext(DirectoryContextType contextType, string name, string? username, string? password)
-        {
-            if (contextType < DirectoryContextType.Domain || contextType > DirectoryContextType.ApplicationPartition)
-            {
-                throw new InvalidEnumArgumentException(nameof(contextType), (int)contextType, typeof(DirectoryContextType));
+        public DirectoryContext(
+            DirectoryContextType contextType,
+            string name,
+            string? username,
+            string? password
+        ) {
+            if (
+                contextType < DirectoryContextType.Domain
+                || contextType > DirectoryContextType.ApplicationPartition
+            ) {
+                throw new InvalidEnumArgumentException(
+                    nameof(contextType),
+                    (int)contextType,
+                    typeof(DirectoryContextType)
+                );
             }
 
             if (name == null)
@@ -187,12 +217,16 @@ namespace System.DirectoryServices.ActiveDirectory
         #endregion public properties
 
         #region private methods
-        internal static bool IsContextValid(DirectoryContext context, DirectoryContextType contextType)
-        {
+        internal static bool IsContextValid(
+            DirectoryContext context,
+            DirectoryContextType contextType
+        ) {
             bool contextIsValid = false;
 
-            if ((contextType == DirectoryContextType.Domain) || ((contextType == DirectoryContextType.Forest) && (context.Name == null)))
-            {
+            if (
+                (contextType == DirectoryContextType.Domain)
+                || ((contextType == DirectoryContextType.Forest) && (context.Name == null))
+            ) {
                 string? tmpTarget = context.Name;
 
                 if (tmpTarget == null)
@@ -206,13 +240,26 @@ namespace System.DirectoryServices.ActiveDirectory
                     // check for domain
                     int errorCode = 0;
                     DomainControllerInfo domainControllerInfo;
-                    errorCode = Locator.DsGetDcNameWrapper(null, tmpTarget, null, (long)PrivateLocatorFlags.DirectoryServicesRequired, out domainControllerInfo);
+                    errorCode = Locator.DsGetDcNameWrapper(
+                        null,
+                        tmpTarget,
+                        null,
+                        (long)PrivateLocatorFlags.DirectoryServicesRequired,
+                        out domainControllerInfo
+                    );
 
                     if (errorCode == NativeMethods.ERROR_NO_SUCH_DOMAIN)
                     {
                         // try with force rediscovery
 
-                        errorCode = Locator.DsGetDcNameWrapper(null, tmpTarget, null, (long)PrivateLocatorFlags.DirectoryServicesRequired | (long)LocatorOptions.ForceRediscovery, out domainControllerInfo);
+                        errorCode = Locator.DsGetDcNameWrapper(
+                            null,
+                            tmpTarget,
+                            null,
+                            (long)PrivateLocatorFlags.DirectoryServicesRequired
+                                | (long)LocatorOptions.ForceRediscovery,
+                            out domainControllerInfo
+                        );
 
                         if (errorCode == NativeMethods.ERROR_NO_SUCH_DOMAIN)
                         {
@@ -255,13 +302,33 @@ namespace System.DirectoryServices.ActiveDirectory
                 // check for forest
                 int errorCode = 0;
                 DomainControllerInfo domainControllerInfo;
-                errorCode = Locator.DsGetDcNameWrapper(null, context.Name, null, (long)(PrivateLocatorFlags.GCRequired | PrivateLocatorFlags.DirectoryServicesRequired), out domainControllerInfo);
+                errorCode = Locator.DsGetDcNameWrapper(
+                    null,
+                    context.Name,
+                    null,
+                    (long)(
+                        PrivateLocatorFlags.GCRequired
+                        | PrivateLocatorFlags.DirectoryServicesRequired
+                    ),
+                    out domainControllerInfo
+                );
 
                 if (errorCode == NativeMethods.ERROR_NO_SUCH_DOMAIN)
                 {
                     // try with force rediscovery
 
-                    errorCode = Locator.DsGetDcNameWrapper(null, context.Name, null, (long)((PrivateLocatorFlags.GCRequired | PrivateLocatorFlags.DirectoryServicesRequired)) | (long)LocatorOptions.ForceRediscovery, out domainControllerInfo);
+                    errorCode = Locator.DsGetDcNameWrapper(
+                        null,
+                        context.Name,
+                        null,
+                        (long)(
+                            (
+                                PrivateLocatorFlags.GCRequired
+                                | PrivateLocatorFlags.DirectoryServicesRequired
+                            )
+                        ) | (long)LocatorOptions.ForceRediscovery,
+                        out domainControllerInfo
+                    );
 
                     if (errorCode == NativeMethods.ERROR_NO_SUCH_DOMAIN)
                     {
@@ -303,13 +370,26 @@ namespace System.DirectoryServices.ActiveDirectory
                 // check for application partition
                 int errorCode = 0;
                 DomainControllerInfo domainControllerInfo;
-                errorCode = Locator.DsGetDcNameWrapper(null, context.Name, null, (long)PrivateLocatorFlags.OnlyLDAPNeeded, out domainControllerInfo);
+                errorCode = Locator.DsGetDcNameWrapper(
+                    null,
+                    context.Name,
+                    null,
+                    (long)PrivateLocatorFlags.OnlyLDAPNeeded,
+                    out domainControllerInfo
+                );
 
                 if (errorCode == NativeMethods.ERROR_NO_SUCH_DOMAIN)
                 {
                     // try with force rediscovery
 
-                    errorCode = Locator.DsGetDcNameWrapper(null, context.Name, null, (long)PrivateLocatorFlags.OnlyLDAPNeeded | (long)LocatorOptions.ForceRediscovery, out domainControllerInfo);
+                    errorCode = Locator.DsGetDcNameWrapper(
+                        null,
+                        context.Name,
+                        null,
+                        (long)PrivateLocatorFlags.OnlyLDAPNeeded
+                            | (long)LocatorOptions.ForceRediscovery,
+                        out domainControllerInfo
+                    );
 
                     if (errorCode == NativeMethods.ERROR_NO_SUCH_DOMAIN)
                     {
@@ -350,7 +430,12 @@ namespace System.DirectoryServices.ActiveDirectory
                 //
                 // this will validate that the name specified in the context is truely the name of a machine (and not of a domain)
                 //
-                DirectoryEntry de = new DirectoryEntry("WinNT://" + tempServerName + ",computer", context.UserName, context.Password, Utils.DefaultAuthType);
+                DirectoryEntry de = new DirectoryEntry(
+                    "WinNT://" + tempServerName + ",computer",
+                    context.UserName,
+                    context.Password,
+                    Utils.DefaultAuthType
+                );
                 try
                 {
                     de.Bind(true);
@@ -358,8 +443,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 catch (COMException e)
                 {
-                    if ((e.ErrorCode == unchecked((int)0x80070035)) || (e.ErrorCode == unchecked((int)0x80070033)) || (e.ErrorCode == unchecked((int)0x80005000)))
-                    {
+                    if (
+                        (e.ErrorCode == unchecked((int)0x80070035))
+                        || (e.ErrorCode == unchecked((int)0x80070033))
+                        || (e.ErrorCode == unchecked((int)0x80005000))
+                    ) {
                         // if this returns bad network path
                         contextIsValid = false;
                     }
@@ -456,19 +544,41 @@ namespace System.DirectoryServices.ActiveDirectory
             bool result = false;
 
             Debug.Assert(_name != null);
-            DomainControllerInfo domainControllerInfo = Locator.GetDomainControllerInfo(null, _name, null, (long)(PrivateLocatorFlags.DirectoryServicesRequired | PrivateLocatorFlags.ReturnDNSName));
+            DomainControllerInfo domainControllerInfo = Locator.GetDomainControllerInfo(
+                null,
+                _name,
+                null,
+                (long)(
+                    PrivateLocatorFlags.DirectoryServicesRequired
+                    | PrivateLocatorFlags.ReturnDNSName
+                )
+            );
 
             DomainControllerInfo currentDomainControllerInfo;
             string loggedOnDomain = GetLoggedOnDomain();
 
-            int errorCode = Locator.DsGetDcNameWrapper(null, loggedOnDomain, null, (long)(PrivateLocatorFlags.DirectoryServicesRequired | PrivateLocatorFlags.ReturnDNSName), out currentDomainControllerInfo);
+            int errorCode = Locator.DsGetDcNameWrapper(
+                null,
+                loggedOnDomain,
+                null,
+                (long)(
+                    PrivateLocatorFlags.DirectoryServicesRequired
+                    | PrivateLocatorFlags.ReturnDNSName
+                ),
+                out currentDomainControllerInfo
+            );
 
             if (errorCode == 0)
             {
                 Debug.Assert(domainControllerInfo.DnsForestName != null);
                 Debug.Assert(currentDomainControllerInfo.DnsForestName != null);
 
-                result = (Utils.Compare(domainControllerInfo.DnsForestName, currentDomainControllerInfo.DnsForestName) == 0);
+                result = (
+                    Utils.Compare(
+                        domainControllerInfo.DnsForestName,
+                        currentDomainControllerInfo.DnsForestName
+                    ) == 0
+                );
             }
             //
             // if there is no forest associated with the logged on domain, then we return false
@@ -483,7 +593,10 @@ namespace System.DirectoryServices.ActiveDirectory
 
         internal bool useServerBind()
         {
-            return ((ContextType == DirectoryContextType.DirectoryServer) || (ContextType == DirectoryContextType.ConfigurationSet));
+            return (
+                (ContextType == DirectoryContextType.DirectoryServer)
+                || (ContextType == DirectoryContextType.ConfigurationSet)
+            );
         }
 
         internal string? GetServerName()
@@ -493,56 +606,61 @@ namespace System.DirectoryServices.ActiveDirectory
                 switch (_contextType)
                 {
                     case DirectoryContextType.ConfigurationSet:
+                    {
+                        AdamInstance adamInst = ConfigurationSet.FindAnyAdamInstance(this);
+                        try
                         {
-                            AdamInstance adamInst = ConfigurationSet.FindAnyAdamInstance(this);
-                            try
-                            {
-                                serverName = adamInst.Name;
-                            }
-                            finally
-                            {
-                                adamInst.Dispose();
-                            }
-                            break;
+                            serverName = adamInst.Name;
                         }
+
+                        finally
+                        {
+                            adamInst.Dispose();
+                        }
+                        break;
+                    }
                     case DirectoryContextType.Domain:
                     case DirectoryContextType.Forest:
-                        {
-                            //
-                            // if the target is not specified OR
-                            // if the forest name was explicitly specified and the forest is the same as the current forest
-                            // we want to find a DC in the current domain
-                            //
-                            if ((_name == null) || ((_contextType == DirectoryContextType.Forest) && (isCurrentForest())))
-                            {
-                                serverName = GetLoggedOnDomain();
-                            }
-                            else
-                            {
-                                serverName = GetDnsDomainName(_name);
-                            }
-                            break;
+                    {
+                        //
+                        // if the target is not specified OR
+                        // if the forest name was explicitly specified and the forest is the same as the current forest
+                        // we want to find a DC in the current domain
+                        //
+                        if (
+                            (_name == null)
+                            || (
+                                (_contextType == DirectoryContextType.Forest) && (isCurrentForest())
+                            )
+                        ) {
+                            serverName = GetLoggedOnDomain();
                         }
+                        else
+                        {
+                            serverName = GetDnsDomainName(_name);
+                        }
+                        break;
+                    }
                     case DirectoryContextType.ApplicationPartition:
-                        {
-                            // if this is an appNC the target should not be null
-                            Debug.Assert(_name != null);
+                    {
+                        // if this is an appNC the target should not be null
+                        Debug.Assert(_name != null);
 
-                            serverName = _name;
-                            break;
-                        }
+                        serverName = _name;
+                        break;
+                    }
                     case DirectoryContextType.DirectoryServer:
-                        {
-                            // this should not happen (We should have checks for this earlier itself)
-                            Debug.Assert(_name != null);
-                            serverName = _name;
-                            break;
-                        }
+                    {
+                        // this should not happen (We should have checks for this earlier itself)
+                        Debug.Assert(_name != null);
+                        serverName = _name;
+                        break;
+                    }
                     default:
-                        {
-                            Debug.Fail("DirectoryContext::GetServerName - Unknown contextType");
-                            break;
-                        }
+                    {
+                        Debug.Fail("DirectoryContext::GetServerName - Unknown contextType");
+                        break;
+                    }
                 }
             }
 
@@ -576,7 +694,15 @@ namespace System.DirectoryServices.ActiveDirectory
                 //
                 requestBuffer.messageType = NativeMethods.NegGetCallerName;
 
-                result = NativeMethods.LsaCallAuthenticationPackage(lsaHandle, 0, requestBuffer, requestBufferLength, out pResponseBuffer, out responseBufferLength, out protocolStatus);
+                result = NativeMethods.LsaCallAuthenticationPackage(
+                    lsaHandle,
+                    0,
+                    requestBuffer,
+                    requestBufferLength,
+                    out pResponseBuffer,
+                    out responseBufferLength,
+                    out protocolStatus
+                );
 
                 try
                 {
@@ -587,9 +713,15 @@ namespace System.DirectoryServices.ActiveDirectory
                         //
                         // callerName is of the form domain\username
                         //
-                        Debug.Assert((responseBuffer.callerName != null), "NativeMethods.LsaCallAuthenticationPackage returned null callerName.");
+                        Debug.Assert(
+                            (responseBuffer.callerName != null),
+                            "NativeMethods.LsaCallAuthenticationPackage returned null callerName."
+                        );
                         int index = responseBuffer.callerName.IndexOf('\\');
-                        Debug.Assert((index != -1), "NativeMethods.LsaCallAuthenticationPackage returned callerName not in domain\\username format.");
+                        Debug.Assert(
+                            (index != -1),
+                            "NativeMethods.LsaCallAuthenticationPackage returned callerName not in domain\\username format."
+                        );
                         domainName = responseBuffer.callerName.Substring(0, index);
                     }
                     else
@@ -598,8 +730,13 @@ namespace System.DirectoryServices.ActiveDirectory
                         {
                             throw new OutOfMemoryException();
                         }
-                        else if ((result == 0) && (UnsafeNativeMethods.LsaNtStatusToWinError(protocolStatus) == NativeMethods.ERROR_NO_SUCH_LOGON_SESSION))
-                        {
+                        else if (
+                            (result == 0)
+                            && (
+                                UnsafeNativeMethods.LsaNtStatusToWinError(protocolStatus)
+                                == NativeMethods.ERROR_NO_SUCH_LOGON_SESSION
+                            )
+                        ) {
                             // If this is a directory user, extract domain info from username
                             if (!Utils.IsSamUser())
                             {
@@ -612,10 +749,15 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                         else
                         {
-                            throw ExceptionHelper.GetExceptionFromErrorCode(UnsafeNativeMethods.LsaNtStatusToWinError((result != 0) ? result : protocolStatus));
+                            throw ExceptionHelper.GetExceptionFromErrorCode(
+                                UnsafeNativeMethods.LsaNtStatusToWinError(
+                                    (result != 0) ? result : protocolStatus
+                                )
+                            );
                         }
                     }
                 }
+
                 finally
                 {
                     if (pResponseBuffer != IntPtr.Zero)
@@ -630,7 +772,9 @@ namespace System.DirectoryServices.ActiveDirectory
             }
             else
             {
-                throw ExceptionHelper.GetExceptionFromErrorCode(UnsafeNativeMethods.LsaNtStatusToWinError(result));
+                throw ExceptionHelper.GetExceptionFromErrorCode(
+                    UnsafeNativeMethods.LsaNtStatusToWinError(result)
+                );
             }
 
             // If we're running as a local user (i.e. NT AUTHORITY\LOCAL SYSTEM, IIS APPPOOL\APPPoolIdentity, etc.),
@@ -657,11 +801,26 @@ namespace System.DirectoryServices.ActiveDirectory
             //
             // Locator.DsGetDcNameWrapper internally passes the ReturnDNSName flag when calling DsGetDcName
             //
-            errorCode = Locator.DsGetDcNameWrapper(null, domainName, null, (long)PrivateLocatorFlags.DirectoryServicesRequired, out domainControllerInfo);
+            errorCode = Locator.DsGetDcNameWrapper(
+                null,
+                domainName,
+                null,
+                (long)PrivateLocatorFlags.DirectoryServicesRequired,
+                out domainControllerInfo
+            );
             if (errorCode == NativeMethods.ERROR_NO_SUCH_DOMAIN)
             {
                 // try again with force rediscovery
-                errorCode = Locator.DsGetDcNameWrapper(null, domainName, null, (long)((long)PrivateLocatorFlags.DirectoryServicesRequired | (long)LocatorOptions.ForceRediscovery), out domainControllerInfo);
+                errorCode = Locator.DsGetDcNameWrapper(
+                    null,
+                    domainName,
+                    null,
+                    (long)(
+                        (long)PrivateLocatorFlags.DirectoryServicesRequired
+                        | (long)LocatorOptions.ForceRediscovery
+                    ),
+                    out domainControllerInfo
+                );
                 if (errorCode == NativeMethods.ERROR_NO_SUCH_DOMAIN)
                 {
                     return null;
@@ -701,7 +860,9 @@ namespace System.DirectoryServices.ActiveDirectory
             // not get the ADAM handle
             // got to the windows\adam directory
             DirectoryInfo windowsDirectory = Directory.GetParent(systemPath)!;
-            tempHandle = UnsafeNativeMethods.LoadLibrary(windowsDirectory.FullName + "\\ADAM\\ntdsapi.dll");
+            tempHandle = UnsafeNativeMethods.LoadLibrary(
+                windowsDirectory.FullName + "\\ADAM\\ntdsapi.dll"
+            );
             if (tempHandle == (IntPtr)0)
             {
                 ADAMHandle = ADHandle;
@@ -711,7 +872,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 ADAMHandle = new LoadLibrarySafeHandle(tempHandle);
             }
         }
-
         #endregion private methods
     }
 }

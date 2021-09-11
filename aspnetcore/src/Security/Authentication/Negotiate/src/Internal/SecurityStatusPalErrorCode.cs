@@ -13,7 +13,6 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         ContextExpired,
         CredentialsNeeded,
         Renegotiate,
-
         // Errors
         OutOfMemory,
         InvalidHandle,

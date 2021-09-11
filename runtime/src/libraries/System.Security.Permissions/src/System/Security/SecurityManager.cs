@@ -7,7 +7,11 @@ using System.Collections;
 namespace System.Security
 {
 #if NET50_OBSOLETIONS
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public static partial class SecurityManager
     {
@@ -15,27 +19,72 @@ namespace System.Security
         public static bool CheckExecutionRights { get; set; }
         [Obsolete]
         public static bool SecurityEnabled { get; set; }
-        public static bool CurrentThreadRequiresSecurityContextCapture() { return false; }
-        public static PermissionSet GetStandardSandbox(Evidence evidence) { return default(PermissionSet); }
-        public static void GetZoneAndOrigin(out System.Collections.ArrayList zone, out System.Collections.ArrayList origin) { zone = default(System.Collections.ArrayList); origin = default(System.Collections.ArrayList); }
+        public static bool CurrentThreadRequiresSecurityContextCapture()
+        {
+            return false;
+        }
+        public static PermissionSet GetStandardSandbox(Evidence evidence)
+        {
+            return default(PermissionSet);
+        }
+        public static void GetZoneAndOrigin(
+            out System.Collections.ArrayList zone,
+            out System.Collections.ArrayList origin
+        ) {
+            zone = default(System.Collections.ArrayList);
+            origin = default(System.Collections.ArrayList);
+        }
         [Obsolete]
-        public static bool IsGranted(IPermission perm) { return false; }
+        public static bool IsGranted(IPermission perm)
+        {
+            return false;
+        }
         [Obsolete]
-        public static PolicyLevel LoadPolicyLevelFromFile(string path, PolicyLevelType type) { return default(PolicyLevel); }
+        public static PolicyLevel LoadPolicyLevelFromFile(string path, PolicyLevelType type)
+        {
+            return default(PolicyLevel);
+        }
         [Obsolete]
-        public static PolicyLevel LoadPolicyLevelFromString(string str, PolicyLevelType type) { return default(PolicyLevel); }
+        public static PolicyLevel LoadPolicyLevelFromString(string str, PolicyLevelType type)
+        {
+            return default(PolicyLevel);
+        }
         [Obsolete]
-        public static IEnumerator PolicyHierarchy() { return default(IEnumerator); }
+        public static IEnumerator PolicyHierarchy()
+        {
+            return default(IEnumerator);
+        }
         [Obsolete]
-        public static PermissionSet ResolvePolicy(Evidence evidence) { return default(PermissionSet); }
+        public static PermissionSet ResolvePolicy(Evidence evidence)
+        {
+            return default(PermissionSet);
+        }
         [Obsolete]
-        public static PermissionSet ResolvePolicy(System.Security.Policy.Evidence evidence, PermissionSet reqdPset, PermissionSet optPset, PermissionSet denyPset, out PermissionSet denied) { denied = default(System.Security.PermissionSet); return default(PermissionSet); }
+        public static PermissionSet ResolvePolicy(
+            System.Security.Policy.Evidence evidence,
+            PermissionSet reqdPset,
+            PermissionSet optPset,
+            PermissionSet denyPset,
+            out PermissionSet denied
+        ) {
+            denied = default(System.Security.PermissionSet);
+            return default(PermissionSet);
+        }
         [Obsolete]
-        public static PermissionSet ResolvePolicy(System.Security.Policy.Evidence[] evidences) { return default(PermissionSet); }
+        public static PermissionSet ResolvePolicy(System.Security.Policy.Evidence[] evidences)
+        {
+            return default(PermissionSet);
+        }
         [Obsolete]
-        public static IEnumerator ResolvePolicyGroups(System.Security.Policy.Evidence evidence) { return default(IEnumerator); }
+        public static IEnumerator ResolvePolicyGroups(System.Security.Policy.Evidence evidence)
+        {
+            return default(IEnumerator);
+        }
         [Obsolete]
-        public static PermissionSet ResolveSystemPolicy(System.Security.Policy.Evidence evidence) { return default(PermissionSet); }
+        public static PermissionSet ResolveSystemPolicy(System.Security.Policy.Evidence evidence)
+        {
+            return default(PermissionSet);
+        }
         [Obsolete]
         public static void SavePolicy() { }
         [Obsolete]

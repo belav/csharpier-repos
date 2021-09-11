@@ -31,9 +31,9 @@ namespace System.Runtime.InteropServices.Tests
                     }
 
                     add++;
-                }
-                while (p2 == p1); // stop once we've validated moved case
+                } while (p2 == p1); // stop once we've validated moved case
             }
+
             finally
             {
                 Marshal.FreeHGlobal(p2);
@@ -62,7 +62,9 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void ReAllocHGlobal_NegativeSize_ThrowsOutOfMemoryException()
         {
-            Assert.Throws<OutOfMemoryException>(() => Marshal.ReAllocHGlobal(IntPtr.Zero, (IntPtr)(-1)));
+            Assert.Throws<OutOfMemoryException>(
+                () => Marshal.ReAllocHGlobal(IntPtr.Zero, (IntPtr)(-1))
+            );
 
             IntPtr p = Marshal.AllocHGlobal((IntPtr)1);
             Assert.Throws<OutOfMemoryException>(() => Marshal.ReAllocHGlobal(p, (IntPtr)(-1)));

@@ -22,12 +22,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioPickMembersService(IGlyphService glyphService)
-            => _glyphService = glyphService;
+        public VisualStudioPickMembersService(IGlyphService glyphService) =>
+            _glyphService = glyphService;
 
         public PickMembersResult PickMembers(
-            string title, ImmutableArray<ISymbol> members, ImmutableArray<PickMembersOption> options)
-        {
+            string title,
+            ImmutableArray<ISymbol> members,
+            ImmutableArray<PickMembersOption> options
+        ) {
             options = options.NullToEmpty();
 
             var viewModel = new PickMembersDialogViewModel(_glyphService, members, options);
@@ -38,9 +40,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
             {
                 return new PickMembersResult(
                     viewModel.MemberContainers.Where(c => c.IsChecked)
-                                              .Select(c => c.Symbol)
-                                              .ToImmutableArray(),
-                    options);
+                        .Select(c => c.Symbol)
+                        .ToImmutableArray(),
+                    options
+                );
             }
             else
             {

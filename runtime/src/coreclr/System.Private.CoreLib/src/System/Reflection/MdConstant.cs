@@ -5,9 +5,18 @@ namespace System.Reflection
 {
     internal static class MdConstant
     {
-        public static unsafe object? GetValue(MetadataImport scope, int token, RuntimeTypeHandle fieldTypeHandle, bool raw)
-        {
-            string? stringVal = scope.GetDefaultValue(token, out long buffer, out int length, out CorElementType corElementType);
+        public static unsafe object? GetValue(
+            MetadataImport scope,
+            int token,
+            RuntimeTypeHandle fieldTypeHandle,
+            bool raw
+        ) {
+            string? stringVal = scope.GetDefaultValue(
+                token,
+                out long buffer,
+                out int length,
+                out CorElementType corElementType
+            );
 
             RuntimeType fieldType = fieldTypeHandle.GetRuntimeType();
 

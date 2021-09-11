@@ -26,8 +26,13 @@ namespace Microsoft.CodeAnalysis
         private readonly string _toolFileVersion;
         private readonly Version _toolAssemblyVersion;
 
-        public SarifV2ErrorLogger(Stream stream, string toolName, string toolFileVersion, Version toolAssemblyVersion, CultureInfo culture)
-            : base(stream, culture)
+        public SarifV2ErrorLogger(
+            Stream stream,
+            string toolName,
+            string toolFileVersion,
+            Version toolAssemblyVersion,
+            CultureInfo culture
+        ) : base(stream, culture)
         {
             _descriptors = new DiagnosticDescriptorSet();
 
@@ -68,7 +73,10 @@ namespace Microsoft.CodeAnalysis
                 _writer.WriteArrayStart("suppressions");
                 _writer.WriteObjectStart(); // suppression
                 _writer.Write("kind", "inSource");
-                string? justification = suppressionInfo?.Attribute?.DecodeNamedArgument<string>("Justification", SpecialType.System_String);
+                string? justification = suppressionInfo?.Attribute?.DecodeNamedArgument<string>(
+                    "Justification",
+                    SpecialType.System_String
+                );
                 if (justification != null)
                 {
                     _writer.Write("justification", justification);
@@ -102,10 +110,11 @@ namespace Microsoft.CodeAnalysis
             // See https://github.com/dotnet/roslyn/issues/11228 for discussion around
             // whether this is the correct treatment of Diagnostic.AdditionalLocations
             // as SARIF relatedLocations.
-            if (additionalLocations != null &&
-                additionalLocations.Count > 0 &&
-                additionalLocations.Any(l => HasPath(l)))
-            {
+            if (
+                additionalLocations != null
+                && additionalLocations.Count > 0
+                && additionalLocations.Any(l => HasPath(l))
+            ) {
                 _writer.WriteArrayStart("relatedLocations");
 
                 foreach (var additionalLocation in additionalLocations)
@@ -151,7 +160,7 @@ namespace Microsoft.CodeAnalysis
             _writer.Write("columnKind", "utf16CodeUnits");
 
             _writer.WriteObjectEnd(); // run
-            _writer.WriteArrayEnd();  // runs
+            _writer.WriteArrayEnd(); // runs
             _writer.WriteObjectEnd(); // root
             base.Dispose();
         }
@@ -274,7 +283,8 @@ namespace Microsoft.CodeAnalysis
         private sealed class DiagnosticDescriptorSet
         {
             // DiagnosticDescriptor -> integer index
-            private readonly Dictionary<DiagnosticDescriptor, int> _distinctDescriptors = new Dictionary<DiagnosticDescriptor, int>(SarifDiagnosticComparer.Instance);
+            private readonly Dictionary<DiagnosticDescriptor, int> _distinctDescriptors =
+                new Dictionary<DiagnosticDescriptor, int>(SarifDiagnosticComparer.Instance);
 
             /// <summary>
             /// The total number of descriptors in the set.

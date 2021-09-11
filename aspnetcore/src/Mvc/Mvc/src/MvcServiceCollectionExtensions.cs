@@ -41,8 +41,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
         /// <param name="setupAction">An <see cref="Action{MvcOptions}"/> to configure the provided <see cref="MvcOptions"/>.</param>
         /// <returns>An <see cref="IMvcBuilder"/> that can be used to further configure the MVC services.</returns>
-        public static IMvcBuilder AddMvc(this IServiceCollection services, Action<MvcOptions> setupAction)
-        {
+        public static IMvcBuilder AddMvc(
+            this IServiceCollection services,
+            Action<MvcOptions> setupAction
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -121,8 +123,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// on the resulting builder.
         /// </para>
         /// </remarks>
-        public static IMvcBuilder AddControllers(this IServiceCollection services, Action<MvcOptions> configure)
-        {
+        public static IMvcBuilder AddControllers(
+            this IServiceCollection services,
+            Action<MvcOptions> configure
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -141,8 +145,7 @@ namespace Microsoft.Extensions.DependencyInjection
         private static IMvcCoreBuilder AddControllersCore(IServiceCollection services)
         {
             // This method excludes all of the view-related services by default.
-            return services
-                .AddMvcCore()
+            return services.AddMvcCore()
                 .AddApiExplorer()
                 .AddAuthorization()
                 .AddCors()
@@ -208,8 +211,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// To add services for pages call <see cref="AddRazorPages(IServiceCollection)"/>.
         /// </para>
         /// </remarks>
-        public static IMvcBuilder AddControllersWithViews(this IServiceCollection services, Action<MvcOptions> configure)
-        {
+        public static IMvcBuilder AddControllersWithViews(
+            this IServiceCollection services,
+            Action<MvcOptions> configure
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -291,8 +296,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// To add services for controllers with views call <see cref="AddControllersWithViews(IServiceCollection)"/>.
         /// </para>
         /// </remarks>
-        public static IMvcBuilder AddRazorPages(this IServiceCollection services, Action<RazorPagesOptions> configure)
-        {
+        public static IMvcBuilder AddRazorPages(
+            this IServiceCollection services,
+            Action<RazorPagesOptions> configure
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -305,15 +312,13 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             return new MvcBuilder(builder.Services, builder.PartManager);
-
         }
 
         private static IMvcCoreBuilder AddRazorPagesCore(IServiceCollection services)
         {
             // This method includes the minimal things controllers need. It's not really feasible to exclude the services
             // for controllers.
-            var builder = services
-                .AddMvcCore()
+            var builder = services.AddMvcCore()
                 .AddAuthorization()
                 .AddDataAnnotations()
                 .AddRazorPages()
@@ -327,14 +332,18 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static void AddTagHelpersFrameworkParts(ApplicationPartManager partManager)
         {
             var mvcTagHelpersAssembly = typeof(InputTagHelper).Assembly;
-            if (!partManager.ApplicationParts.OfType<AssemblyPart>().Any(p => p.Assembly == mvcTagHelpersAssembly))
-            {
+            if (
+                !partManager.ApplicationParts.OfType<AssemblyPart>()
+                    .Any(p => p.Assembly == mvcTagHelpersAssembly)
+            ) {
                 partManager.ApplicationParts.Add(new FrameworkAssemblyPart(mvcTagHelpersAssembly));
             }
 
             var mvcRazorAssembly = typeof(UrlResolutionTagHelper).Assembly;
-            if (!partManager.ApplicationParts.OfType<AssemblyPart>().Any(p => p.Assembly == mvcRazorAssembly))
-            {
+            if (
+                !partManager.ApplicationParts.OfType<AssemblyPart>()
+                    .Any(p => p.Assembly == mvcRazorAssembly)
+            ) {
                 partManager.ApplicationParts.Add(new FrameworkAssemblyPart(mvcRazorAssembly));
             }
         }
@@ -342,12 +351,10 @@ namespace Microsoft.Extensions.DependencyInjection
         [DebuggerDisplay("{Name}")]
         private class FrameworkAssemblyPart : AssemblyPart, ICompilationReferencesProvider
         {
-            public FrameworkAssemblyPart(Assembly assembly)
-                : base(assembly)
-            {
-            }
+            public FrameworkAssemblyPart(Assembly assembly) : base(assembly) { }
 
-            IEnumerable<string> ICompilationReferencesProvider.GetReferencePaths() => Enumerable.Empty<string>();
+            IEnumerable<string> ICompilationReferencesProvider.GetReferencePaths() =>
+                Enumerable.Empty<string>();
         }
     }
 }

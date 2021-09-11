@@ -29,8 +29,10 @@ namespace System.Drawing
 
         public static Pen Desktop => FromSystemColor(SystemColors.Desktop);
 
-        public static Pen GradientActiveCaption => FromSystemColor(SystemColors.GradientActiveCaption);
-        public static Pen GradientInactiveCaption => FromSystemColor(SystemColors.GradientInactiveCaption);
+        public static Pen GradientActiveCaption =>
+            FromSystemColor(SystemColors.GradientActiveCaption);
+        public static Pen GradientInactiveCaption =>
+            FromSystemColor(SystemColors.GradientInactiveCaption);
         public static Pen GrayText => FromSystemColor(SystemColors.GrayText);
 
         public static Pen Highlight => FromSystemColor(SystemColors.Highlight);
@@ -64,7 +66,10 @@ namespace System.Drawing
             Pen[]? systemPens = (Pen[]?)Gdip.ThreadData[s_systemPensKey];
             if (systemPens == null)
             {
-                systemPens = new Pen[(int)KnownColor.WindowText + (int)KnownColor.MenuHighlight - (int)KnownColor.YellowGreen];
+                systemPens = new Pen[
+                    (int)KnownColor.WindowText + (int)KnownColor.MenuHighlight
+                        - (int)KnownColor.YellowGreen
+                ];
                 Gdip.ThreadData[s_systemPensKey] = systemPens;
             }
 
@@ -74,7 +79,10 @@ namespace System.Drawing
                 idx -= (int)KnownColor.YellowGreen - (int)KnownColor.WindowText;
             }
             idx--;
-            Debug.Assert(idx >= 0 && idx < systemPens.Length, "System colors have been added but our system color array has not been expanded.");
+            Debug.Assert(
+                idx >= 0 && idx < systemPens.Length,
+                "System colors have been added but our system color array has not been expanded."
+            );
 
             if (systemPens[idx] == null)
             {

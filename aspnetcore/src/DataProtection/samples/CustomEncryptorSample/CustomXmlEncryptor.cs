@@ -15,7 +15,8 @@ namespace CustomEncryptorSample
 
         public CustomXmlEncryptor(IServiceProvider services)
         {
-            _logger = services.GetRequiredService<ILoggerFactory>().CreateLogger<CustomXmlEncryptor>();
+            _logger = services.GetRequiredService<ILoggerFactory>()
+                .CreateLogger<CustomXmlEncryptor>();
         }
 
         public EncryptedXmlInfo Encrypt(XElement plaintextElement)
@@ -27,9 +28,11 @@ namespace CustomEncryptorSample
 
             _logger.LogInformation("Not encrypting key");
 
-            var newElement = new XElement("unencryptedKey",
+            var newElement = new XElement(
+                "unencryptedKey",
                 new XComment(" This key is not encrypted. "),
-                new XElement(plaintextElement));
+                new XElement(plaintextElement)
+            );
             var encryptedTextElement = new EncryptedXmlInfo(newElement, typeof(CustomXmlDecryptor));
 
             return encryptedTextElement;

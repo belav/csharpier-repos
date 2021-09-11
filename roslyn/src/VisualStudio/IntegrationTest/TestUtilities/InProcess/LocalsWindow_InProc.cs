@@ -39,8 +39,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             EnvDTE.Expression entry = null;
 
             var i = 0;
-            while (i < entryNames.Length && TryGetEntryInternal(entryNames[i], expressions, out entry))
-            {
+            while (
+                i < entryNames.Length && TryGetEntryInternal(entryNames[i], expressions, out entry)
+            ) {
                 i++;
                 expressions = entry.DataMembers;
             }
@@ -51,13 +52,22 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
 
             var localHierarchicalName = string.Join("->", entryNames);
-            var allLocalsString = string.Join("\n", GetAllLocals(dte.Debugger.CurrentStackFrame.Locals));
-            throw new Exception($"\nCould not find the local named {localHierarchicalName}.\nAll available locals are: \n{allLocalsString}");
+            var allLocalsString = string.Join(
+                "\n",
+                GetAllLocals(dte.Debugger.CurrentStackFrame.Locals)
+            );
+            throw new Exception(
+                $"\nCould not find the local named {localHierarchicalName}.\nAll available locals are: \n{allLocalsString}"
+            );
         }
 
-        private bool TryGetEntryInternal(string entryName, EnvDTE.Expressions expressions, out EnvDTE.Expression expression)
-        {
-            expression = expressions.Cast<EnvDTE.Expression>().FirstOrDefault(e => e.Name == entryName);
+        private bool TryGetEntryInternal(
+            string entryName,
+            EnvDTE.Expressions expressions,
+            out EnvDTE.Expression expression
+        ) {
+            expression = expressions.Cast<EnvDTE.Expression>()
+                .FirstOrDefault(e => e.Name == entryName);
             if (expression != null)
             {
                 return true;

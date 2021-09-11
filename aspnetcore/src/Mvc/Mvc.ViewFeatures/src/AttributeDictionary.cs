@@ -13,7 +13,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
     /// <summary>
     /// A dictionary for HTML attributes.
     /// </summary>
-    public class AttributeDictionary : IDictionary<string, string?>, IReadOnlyDictionary<string, string?>
+    public class AttributeDictionary
+        : IDictionary<string, string?>,
+          IReadOnlyDictionary<string, string?>
     {
         private List<KeyValuePair<string, string?>>? _items;
 
@@ -37,7 +39,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     return Get(index).Value;
                 }
             }
-
             set
             {
                 if (key == null)
@@ -74,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         IEnumerable<string> IReadOnlyDictionary<string, string?>.Keys => new KeyCollection(this);
 
         /// <inheritdoc />
-        IEnumerable<string?> IReadOnlyDictionary<string, string?>.Values => new ValueCollection(this);
+        IEnumerable<string?> IReadOnlyDictionary<string, string?>.Values =>
+            new ValueCollection(this);
 
         private KeyValuePair<string, string?> Get(int index)
         {
@@ -170,8 +172,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 throw new ArgumentException(
                     Resources.FormatPropertyOfTypeCannotBeNull(
                         nameof(KeyValuePair<string, string?>.Key),
-                        nameof(KeyValuePair<string, string?>)),
-                    nameof(item));
+                        nameof(KeyValuePair<string, string?>)
+                    ),
+                    nameof(item)
+                );
             }
 
             var index = Find(item.Key);
@@ -181,7 +185,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
             else
             {
-                throw new InvalidOperationException(Resources.FormatDictionary_DuplicateKey(item.Key));
+                throw new InvalidOperationException(
+                    Resources.FormatDictionary_DuplicateKey(item.Key)
+                );
             }
         }
 
@@ -204,8 +210,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 throw new ArgumentException(
                     Resources.FormatPropertyOfTypeCannotBeNull(
                         nameof(KeyValuePair<string, string?>.Key),
-                        nameof(KeyValuePair<string, string?>)),
-                    nameof(item));
+                        nameof(KeyValuePair<string, string?>)
+                    ),
+                    nameof(item)
+                );
             }
 
             var index = Find(item.Key);
@@ -215,7 +223,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
             else
             {
-                return string.Equals(item.Value, Get(index).Value, StringComparison.OrdinalIgnoreCase);
+                return string.Equals(
+                    item.Value,
+                    Get(index).Value,
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
         }
 
@@ -268,8 +280,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 throw new ArgumentException(
                     Resources.FormatPropertyOfTypeCannotBeNull(
                         nameof(KeyValuePair<string, string?>.Key),
-                        nameof(KeyValuePair<string, string?>)),
-                    nameof(item));
+                        nameof(KeyValuePair<string, string?>)
+                    ),
+                    nameof(item)
+                );
             }
 
             var index = Find(item.Key);
@@ -277,8 +291,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             {
                 return false;
             }
-            else if (string.Equals(item.Value, Get(index).Value, StringComparison.OrdinalIgnoreCase))
-            {
+            else if (
+                string.Equals(item.Value, Get(index).Value, StringComparison.OrdinalIgnoreCase)
+            ) {
                 Remove(index);
                 return true;
             }
@@ -336,7 +351,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         }
 
         /// <inheritdoc />
-        IEnumerator<KeyValuePair<string, string?>> IEnumerable<KeyValuePair<string, string?>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, string?>> IEnumerable<
+            KeyValuePair<string, string?>
+        >.GetEnumerator()
         {
             return GetEnumerator();
         }
@@ -368,9 +385,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object IEnumerator.Current => Current;
 
             /// <inheritdoc />
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -418,8 +433,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                 for (var i = 0; i < _attributes.Count; i++)
                 {
-                    if (string.Equals(item, _attributes.Get(i).Key, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        string.Equals(
+                            item,
+                            _attributes.Get(i).Key,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         return true;
                     }
                 }
@@ -482,9 +502,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                 object IEnumerator.Current => Current;
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
 
                 public bool MoveNext()
                 {
@@ -526,8 +544,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             {
                 for (var i = 0; i < _attributes.Count; i++)
                 {
-                    if (string.Equals(item, _attributes.Get(i).Value, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        string.Equals(
+                            item,
+                            _attributes.Get(i).Value,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         return true;
                     }
                 }
@@ -590,9 +613,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                 object? IEnumerator.Current => Current;
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
 
                 public bool MoveNext()
                 {

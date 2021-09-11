@@ -45,8 +45,14 @@ namespace Microsoft.AspNetCore.StaticFiles
 
         private RequestType _requestType;
 
-        public StaticFileContext(HttpContext context, StaticFileOptions options, ILogger logger, IFileProvider fileProvider, string? contentType, PathString subPath)
-        {
+        public StaticFileContext(
+            HttpContext context,
+            StaticFileOptions options,
+            ILogger logger,
+            IFileProvider fileProvider,
+            string? contentType,
+            PathString subPath
+        ) {
             _context = context;
             _options = options;
             _request = context.Request;
@@ -120,7 +126,15 @@ namespace Microsoft.AspNetCore.StaticFiles
 
                 DateTimeOffset last = _fileInfo.LastModified;
                 // Truncate to the second.
-                _lastModified = new DateTimeOffset(last.Year, last.Month, last.Day, last.Hour, last.Minute, last.Second, last.Offset).ToUniversalTime();
+                _lastModified = new DateTimeOffset(
+                    last.Year,
+                    last.Month,
+                    last.Day,
+                    last.Hour,
+                    last.Minute,
+                    last.Second,
+                    last.Offset
+                ).ToUniversalTime();
 
                 long etagHash = _lastModified.ToFileTime() ^ _length;
                 _etag = new EntityTagHeaderValue('\"' + Convert.ToString(etagHash, 16) + '\"');
@@ -150,8 +164,10 @@ namespace Microsoft.AspNetCore.StaticFiles
                 _ifMatchState = PreconditionState.PreconditionFailed;
                 foreach (var etag in ifMatch)
                 {
-                    if (etag.Equals(EntityTagHeaderValue.Any) || etag.Compare(_etag, useStrongComparison: true))
-                    {
+                    if (
+                        etag.Equals(EntityTagHeaderValue.Any)
+                        || etag.Compare(_etag, useStrongComparison: true)
+                    ) {
                         _ifMatchState = PreconditionState.ShouldProcess;
                         break;
                     }
@@ -165,8 +181,10 @@ namespace Microsoft.AspNetCore.StaticFiles
                 _ifNoneMatchState = PreconditionState.ShouldProcess;
                 foreach (var etag in ifNoneMatch)
                 {
-                    if (etag.Equals(EntityTagHeaderValue.Any) || etag.Compare(_etag, useStrongComparison: true))
-                    {
+                    if (
+                        etag.Equals(EntityTagHeaderValue.Any)
+                        || etag.Compare(_etag, useStrongComparison: true)
+                    ) {
                         _ifNoneMatchState = PreconditionState.NotModified;
                         break;
                     }
@@ -184,7 +202,9 @@ namespace Microsoft.AspNetCore.StaticFiles
             if (ifModifiedSince.HasValue && ifModifiedSince <= now)
             {
                 bool modified = ifModifiedSince < _lastModified;
-                _ifModifiedSinceState = modified ? PreconditionState.ShouldProcess : PreconditionState.NotModified;
+                _ifModifiedSinceState = modified
+                    ? PreconditionState.ShouldProcess
+                    : PreconditionState.NotModified;
             }
 
             // 14.28 If-Unmodified-Since
@@ -192,7 +212,9 @@ namespace Microsoft.AspNetCore.StaticFiles
             if (ifUnmodifiedSince.HasValue && ifUnmodifiedSince <= now)
             {
                 bool unmodified = ifUnmodifiedSince >= _lastModified;
-                _ifUnmodifiedSinceState = unmodified ? PreconditionState.ShouldProcess : PreconditionState.PreconditionFailed;
+                _ifUnmodifiedSinceState = unmodified
+                    ? PreconditionState.ShouldProcess
+                    : PreconditionState.PreconditionFailed;
             }
         }
 
@@ -214,8 +236,11 @@ namespace Microsoft.AspNetCore.StaticFiles
                         IsRangeRequest = false;
                     }
                 }
-                else if (_etag != null && ifRangeHeader.EntityTag != null && !ifRangeHeader.EntityTag.Compare(_etag, useStrongComparison: true))
-                {
+                else if (
+                    _etag != null
+                    && ifRangeHeader.EntityTag != null
+                    && !ifRangeHeader.EntityTag.Compare(_etag, useStrongComparison: true)
+                ) {
                     IsRangeRequest = false;
                 }
             }
@@ -233,7 +258,12 @@ namespace Microsoft.AspNetCore.StaticFiles
                 return;
             }
 
-            (var isRangeRequest, var range) = RangeHelper.ParseRange(_context, RequestHeaders, _length, _logger);
+            (var isRangeRequest, var range) = RangeHelper.ParseRange(
+                _context,
+                RequestHeaders,
+                _length,
+                _logger
+            );
 
             _range = range;
             IsRangeRequest = isRangeRequest;
@@ -267,8 +297,13 @@ namespace Microsoft.AspNetCore.StaticFiles
             _options.OnPrepareResponse(new StaticFileResponseContext(_context, _fileInfo!));
         }
 
-        public PreconditionState GetPreconditionState()
-            => GetMaxPreconditionState(_ifMatchState, _ifNoneMatchState, _ifModifiedSinceState, _ifUnmodifiedSinceState);
+        public PreconditionState GetPreconditionState() =>
+            GetMaxPreconditionState(
+                _ifMatchState,
+                _ifNoneMatchState,
+                _ifModifiedSinceState,
+                _ifUnmodifiedSinceState
+            );
 
         private static PreconditionState GetMaxPreconditionState(params PreconditionState[] states)
         {
@@ -343,7 +378,12 @@ namespace Microsoft.AspNetCore.StaticFiles
             ApplyResponseHeaders(StatusCodes.Status200OK);
             try
             {
-                await _context.Response.SendFileAsync(_fileInfo, 0, _length, _context.RequestAborted);
+                await _context.Response.SendFileAsync(
+                    _fileInfo,
+                    0,
+                    _length,
+                    _context.RequestAborted
+                );
             }
             catch (OperationCanceledException ex)
             {
@@ -367,16 +407,27 @@ namespace Microsoft.AspNetCore.StaticFiles
                 return;
             }
 
-            ResponseHeaders.ContentRange = ComputeContentRange(_range, out var start, out var length);
+            ResponseHeaders.ContentRange = ComputeContentRange(
+                _range,
+                out var start,
+                out var length
+            );
             _response.ContentLength = length;
             SetCompressionMode();
             ApplyResponseHeaders(StatusCodes.Status206PartialContent);
 
             try
             {
-                var logPath = !string.IsNullOrEmpty(_fileInfo.PhysicalPath) ? _fileInfo.PhysicalPath : SubPath;
+                var logPath = !string.IsNullOrEmpty(_fileInfo.PhysicalPath)
+                    ? _fileInfo.PhysicalPath
+                    : SubPath;
                 _logger.SendingFileRange(_response.Headers[HeaderNames.ContentRange], logPath);
-                await _context.Response.SendFileAsync(_fileInfo, start, length, _context.RequestAborted);
+                await _context.Response.SendFileAsync(
+                    _fileInfo,
+                    start,
+                    length,
+                    _context.RequestAborted
+                );
             }
             catch (OperationCanceledException ex)
             {
@@ -386,8 +437,11 @@ namespace Microsoft.AspNetCore.StaticFiles
         }
 
         // Note: This assumes ranges have been normalized to absolute byte offsets.
-        private ContentRangeHeaderValue ComputeContentRange(RangeItemHeaderValue range, out long start, out long length)
-        {
+        private ContentRangeHeaderValue ComputeContentRange(
+            RangeItemHeaderValue range,
+            out long start,
+            out long length
+        ) {
             start = range.From!.Value;
             var end = range.To!.Value;
             length = end - start + 1;

@@ -18,13 +18,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         #region Helper
 
-        internal static void ParseAndRoundTripping(string text, int errorCount = 0, int memberCount = 0)
-        {
-            ParseAndRoundTripping(text, TestOptions.RegularWithDocumentationComments.WithLanguageVersion(LanguageVersion.Preview), errorCount, memberCount);
+        internal static void ParseAndRoundTripping(
+            string text,
+            int errorCount = 0,
+            int memberCount = 0
+        ) {
+            ParseAndRoundTripping(
+                text,
+                TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
+                    LanguageVersion.Preview
+                ),
+                errorCount,
+                memberCount
+            );
         }
 
-        internal static void ParseAndRoundTripping(string text, CSharpParseOptions options, int errorCount = 0, int memberCount = 0)
-        {
+        internal static void ParseAndRoundTripping(
+            string text,
+            CSharpParseOptions options,
+            int errorCount = 0,
+            int memberCount = 0
+        ) {
             var tree = SyntaxFactory.ParseSyntaxTree(SourceText.From(text), options);
             var toText = tree.GetCompilationUnitRoot().ToFullString();
 
@@ -56,7 +70,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var toText = tree.GetCompilationUnitRoot().ToFullString();
             Assert.Equal(text, toText);
 
-            var nodes = tree.GetCompilationUnitRoot().DescendantTokens(tk => tk.FullWidth > 0).ToList();
+            var nodes = tree.GetCompilationUnitRoot()
+                .DescendantTokens(tk => tk.FullWidth > 0)
+                .ToList();
             if (nodes.Count > 0)
             {
                 var prevSpan = nodes[0].FullSpan;
@@ -75,14 +91,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void AutoPropInitializers()
         {
             var parseOptions = TestOptions.Regular;
-            ParseAndRoundTripping("class C { int GetInt { get; } = 0; }", parseOptions, memberCount: 1);
+            ParseAndRoundTripping(
+                "class C { int GetInt { get; } = 0; }",
+                parseOptions,
+                memberCount: 1
+            );
             ParseAndRoundTripping("class C { int GetInt { get; } = 0 }", parseOptions, 1, 1);
-            ParseAndRoundTripping("class C { public int GetInt { get; } = 0; }", parseOptions, memberCount: 1);
+            ParseAndRoundTripping(
+                "class C { public int GetInt { get; } = 0; }",
+                parseOptions,
+                memberCount: 1
+            );
             ParseAndRoundTripping("class C { int GetInt { get; } = 0;; }", parseOptions, 1, 1);
             ParseAndRoundTripping("class C { int GetInt { get;; } = 0;; }", parseOptions, 2, 1);
-            ParseAndRoundTripping("interface I { int GetInt { get; } = 0; }", parseOptions, memberCount: 1);
+            ParseAndRoundTripping(
+                "interface I { int GetInt { get; } = 0; }",
+                parseOptions,
+                memberCount: 1
+            );
             ParseAndRoundTripping("interface I { int GetInt { get; } = 0 }", parseOptions, 1, 1);
-            ParseAndRoundTripping("interface I { public int GetInt { get; } = 0; }", parseOptions, memberCount: 1);
+            ParseAndRoundTripping(
+                "interface I { public int GetInt { get; } = 0; }",
+                parseOptions,
+                memberCount: 1
+            );
         }
 
         [Fact()]
@@ -170,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestNegBug862116()
         {
-            var text = @"
+            var text =
+                @"
 namespace x
 {
     public class a
@@ -193,7 +226,8 @@ namespace x
         [Fact]
         public void TestNegBug862635()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     static void Main() 
@@ -208,7 +242,8 @@ class Test
         [Fact]
         public void Bug862637()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public class Test
 {
@@ -224,7 +259,8 @@ public class Test
         [Fact]
         public void Bug862640()
         {
-            var text = @"
+            var text =
+                @"
 public class Production
 {
     public Production()
@@ -245,7 +281,8 @@ public class Production
         [Fact]
         public void TestNegBug862642()
         {
-            var text = @"
+            var text =
+                @"
 alias myAlias;
 class myClass
 {
@@ -258,7 +295,8 @@ class myClass
         [Fact]
         public void TestNegBug862643()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 [AttributeUsage(AttributeTargets.All)]
 public class Goo : Attribute
@@ -277,7 +315,8 @@ public class Class1 {
         [Fact]
         public void Bug862644()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public class Test
 {
@@ -293,7 +332,8 @@ public class Test
         [Fact]
         public void Bug862646()
         {
-            var text = @"
+            var text =
+                @"
 // C# compiler emits Void& type
 ";
             ParseAndRoundTripping(text);
@@ -302,7 +342,8 @@ public class Test
         [Fact]
         public void Bug862648()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     static void Main()
@@ -317,7 +358,8 @@ class TestClass
         [Fact]
         public void Bug870754()
         {
-            var text = @"class C{
+            var text =
+                @"class C{
 C(){
 int y = 3;
 (y).ToString();
@@ -330,7 +372,8 @@ int y = 3;
         [Fact]
         public void TestNegBug875711()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public class A
 {
@@ -345,7 +388,8 @@ public class A
         [Fact]
         public void TestNegBug876359()
         {
-            var text = @"
+            var text =
+                @"
 class C {
   fixed x;
 }
@@ -356,7 +400,8 @@ class C {
         [Fact]
         public void TestNegBug876363()
         {
-            var text = @"
+            var text =
+                @"
 class X { void f() {
 int a = 1; \u000a int b = (int)2.3;
 }
@@ -368,7 +413,8 @@ int a = 1; \u000a int b = (int)2.3;
         [Fact]
         public void Bug876565()
         {
-            var text = @"
+            var text =
+                @"
 public class C
 {
     public static int Main()
@@ -384,7 +430,8 @@ public class C
         [Fact]
         public void Bug876573()
         {
-            var text = @"
+            var text =
+                @"
 [partial]
 partial class partial { }
 partial class partial
@@ -408,7 +455,8 @@ partial class partial
         [Fact]
         public void Bug877232()
         {
-            var text = @"
+            var text =
+                @"
 class MyClass : MyBase {
  MyClass() : base() {
  }
@@ -420,7 +468,8 @@ class MyClass : MyBase {
         [Fact]
         public void TestNegBug877242()
         {
-            var text = @"
+            var text =
+                @"
 private namespace test
 {
 }
@@ -431,7 +480,8 @@ private namespace test
         [Fact]
         public void Bug877246()
         {
-            var text = @"
+            var text =
+                @"
 public struct Test
 {
     static int Main()
@@ -446,7 +496,8 @@ public struct Test
         [Fact]
         public void Bug877251()
         {
-            var text = @"
+            var text =
+                @"
 static class Test
 {
     static void Main()
@@ -461,7 +512,8 @@ static class Test
         [Fact]
         public void TestNegBug877256()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public static class Extensions
 {
@@ -475,7 +527,8 @@ public static class Extensions
         [Fact]
         public void Bug877313()
         {
-            var text = @"
+            var text =
+                @"
 partial class ConstraintsDef
 {
     partial void PM<T1, T2>(T1 v1, ref T2 v2, params T2[] v3)
@@ -493,7 +546,8 @@ partial class ConstraintsDef
         [Fact]
         public void TestNegBug877318()
         {
-            var text = @"
+            var text =
+                @"
 partial class PartialPartial
 {
     int i = 1;
@@ -516,7 +570,8 @@ partial class PartialPartial
         [Fact]
         public void TestNegBug879395()
         {
-            var text = @"
+            var text =
+                @"
 module m1
 end module
 ";
@@ -526,7 +581,8 @@ end module
         [Fact]
         public void Bug880479()
         {
-            var text = @"
+            var text =
+                @"
 class c1
 {
 void goo(int a, int b, int c)
@@ -540,7 +596,8 @@ void goo(int a, int b, int c)
         [Fact]
         public void TestNegBug881436()
         {
-            var text = @"
+            var text =
+                @"
 public class Test
 {
     public static void Main()
@@ -555,7 +612,8 @@ public class Test
         [Fact]
         public void Bug881480()
         {
-            var text = @"
+            var text =
+                @"
 // <Code> 
  
 public static class SubGenericClass<T> : GenericClass<T>
@@ -569,7 +627,8 @@ public static class SubGenericClass<T> : GenericClass<T>
         [Fact]
         public void Bug881485()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     public static int Test2()
@@ -584,7 +643,8 @@ class Test
         [Fact]
         public void TestNegBug881488()
         {
-            var text = @"partial class A
+            var text =
+                @"partial class A
 {
        partial void C<T>(T )=>{ t) { }
 }
@@ -595,7 +655,8 @@ class Test
         [Fact]
         public void TestNegBug882388()
         {
-            var text = @"
+            var text =
+                @"
 public class Class1
 {
     public int Meth2(int i) {
@@ -610,7 +671,8 @@ public class Class1
         [Fact]
         public void Bug882417()
         {
-            var text = @"
+            var text =
+                @"
 [AttributeUsage(AttributeTargets.Class)]
 public class HelpAttribute : Attribute
 {
@@ -627,7 +689,8 @@ public class HelpAttribute : Attribute
         [Fact]
         public void TestNegBug882424()
         {
-            var text = @"
+            var text =
+                @"
 public class MyClass {
  //invalid simple name
  int -goo(){
@@ -641,7 +704,8 @@ public class MyClass {
         [Fact]
         public void TestNegBug882432()
         {
-            var text = @"
+            var text =
+                @"
 public class Base1 {
     public static E1 {a, b, c, };
 }
@@ -652,7 +716,8 @@ public class Base1 {
         [Fact]
         public void TestNegBug882444()
         {
-            var text = @"
+            var text =
+                @"
 namespace nms {
 public class MyException : ApplicationException {
     public MyException(String str) : base ApplicationException (str)
@@ -665,7 +730,8 @@ public class MyException : ApplicationException {
         [Fact]
         public void Bug882459()
         {
-            var text = @"
+            var text =
+                @"
 public partial class Base
 {
     ViolateClassConstraint Fld01 = new Base().Meth<ViolateClassConstraint>(new ViolateClassConstraint()); //E:CS0315
@@ -677,7 +743,8 @@ public partial class Base
         [Fact]
         public void TestNegBug882463()
         {
-            var text = @"
+            var text =
+                @"
 public class Test
 {
  yield break;
@@ -693,7 +760,8 @@ public class Test
         [Fact]
         public void TestNegBug882465()
         {
-            var text = @"
+            var text =
+                @"
 public class Comments
 {
  // /* This is a comment 
@@ -707,7 +775,8 @@ public class Comments
         [Fact]
         public void Bug882471()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     static int Main()
@@ -722,7 +791,8 @@ class Test
         [Fact]
         public void Bug882481()
         {
-            var text = @"
+            var text =
+                @"
 #define \u0066oxbar
 #if foxbar
 class Goo { }
@@ -734,7 +804,8 @@ class Goo { }
         [Fact]
         public void TestNegBug882482()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 class main
 {
@@ -751,7 +822,8 @@ class main
         [Fact]
         public void Bug882957()
         {
-            var text = @"
+            var text =
+                @"
 partial class CNExp
 {
     public static long? operator &(CNExp v1, long? v2)
@@ -766,7 +838,8 @@ partial class CNExp
         [Fact]
         public void Bug882984()
         {
-            var text = @"
+            var text =
+                @"
 unsafe partial class C 
 {
     byte* buf;
@@ -782,7 +855,8 @@ unsafe partial class C
         [Fact]
         public void Bug883177()
         {
-            var text = @"
+            var text =
+                @"
 unsafe
 struct Test
 {
@@ -809,7 +883,8 @@ struct Test
         [Trait("Regression", "Spans")]
         public void Bug884246()
         {
-            var text = @"
+            var text =
+                @"
 using System.Reflection;
 #if VER1
 [assembly:AssemblyVersionAttribute(""1.0.0.0"")]
@@ -824,7 +899,8 @@ public class otherClass{}";
         [Fact]
         public void Bug890389()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
 void Goo()
@@ -839,7 +915,8 @@ Func<string> i = 3.ToString;
         [Fact]
         public void TestNegBug892249()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class AAttribute : Attribute {
   public AAttribute(object o) { }
 }
@@ -853,7 +930,8 @@ class C {
         [Fact]
         public void TestNegBug892255()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 public class Test
 {
     public static int Main(string [] args)
@@ -877,7 +955,8 @@ public class Test
         [Fact]
         public void TestRegressNegExtraPublicKeyword()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -901,7 +980,8 @@ public class Class_1_L0
         [Fact]
         public void TestNegBug894884()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
 public static int Main()
@@ -918,7 +998,8 @@ List<in
         [Fact]
         public void TestRegressInfiniteLoopXmlDoc()
         {
-            var text = @"
+            var text =
+                @"
 public struct MemberClass<T>
 {
 /// <summary>
@@ -932,7 +1013,8 @@ public struct MemberClass<T>
         [Fact]
         public void Bug909041()
         {
-            var text = @"
+            var text =
+                @"
 interface A
 {
 void M<T>(T t) where T : class;
@@ -944,7 +1026,8 @@ void M<T>(T t) where T : class;
         [Fact]
         public void Bug909041b()
         {
-            var text = @"
+            var text =
+                @"
 public delegate void Del<T>(T t) where T : IEnumerable;
 public class A {}
 ";
@@ -954,7 +1037,8 @@ public class A {}
         [Fact]
         public void Bug909041c()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
 static extern bool Bar<U>() where U : class;
@@ -966,7 +1050,8 @@ static extern bool Bar<U>() where U : class;
         [Fact]
         public void Bug909045()
         {
-            var text = @"
+            var text =
+                @"
 public class A
 {
 public void M<T, V>(T t, V v)
@@ -982,7 +1067,8 @@ where V : class { }
         [Fact]
         public void RegressError4AttributeWithTarget()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 using System.Runtime.InteropServices;
 
 interface IGoo
@@ -1022,7 +1108,8 @@ public class Goo
         [Fact]
         public void Bug909063()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
 public int i, j;
@@ -1039,7 +1126,8 @@ var vv = new[] { 1, 2, };
         [Fact]
         public void Bug909333()
         {
-            var text = @"
+            var text =
+                @"
 extern alias libAlias;
 class myClass
 {
@@ -1056,7 +1144,8 @@ return 0;
         [Fact]
         public void Bug909334()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
 unsafe static int Main()
@@ -1072,7 +1161,8 @@ return 0;
         [Fact]
         public void Bug909337()
         {
-            var text = @"
+            var text =
+                @"
 using System.Collections;
 public class Test<I> 
 {
@@ -1090,7 +1180,8 @@ public Test(I i)
         [Fact]
         public void Bug909338()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
 static void Main()
@@ -1105,7 +1196,8 @@ var v = typeof(void);
         [Fact]
         public void Bug909350()
         {
-            var text = @"
+            var text =
+                @"
 [Author(""Brian Kernighan""), Author(""Dennis Ritchie""),] 
 class Class1
 {
@@ -1121,7 +1213,8 @@ enum E
         [Fact]
         public void Bug909371()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
 byte M(byte b) 
@@ -1136,7 +1229,8 @@ return b;
         [Fact]
         public void Bug909371b()
         {
-            var text = @"
+            var text =
+                @"
 [AttributeUsage(AttributeTargets.Class)]
 public class HelpAttribute : Attribute
 {
@@ -1153,7 +1247,8 @@ b = b1;
         [Fact]
         public void RegressError4ValidOperatorOverloading()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 public class A
 {
@@ -1202,7 +1297,8 @@ public class A
         [Fact]
         public void Bug909419()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
 static int Main()
@@ -1219,7 +1315,8 @@ static int Main()
         [Fact]
         public void Bug909425()
         {
-            var text = @"
+            var text =
+                @"
 public class MyClass
 {
 public static int Main() 
@@ -1238,7 +1335,8 @@ static int M(double d) { return 0; }
         [Fact]
         public void RegressOverAggressiveWarningForUlongSuffix()
         {
-            var text = @"class Program
+            var text =
+                @"class Program
 {
 static void Main()
 {
@@ -1254,7 +1352,8 @@ ulong x6 = 7ul; // should NOT warn
         [Fact]
         public void Bug909451()
         {
-            var text = @"
+            var text =
+                @"
 public class AnonymousTypeTest : ParentClass
 {
 public void Run()
@@ -1270,7 +1369,8 @@ var p1 = new { base.Number };
         [Fact]
         public void RegressError4ValidUlongLiteral()
         {
-            var text = @"public class Test
+            var text =
+                @"public class Test
 {
 public static int Main()
 {
@@ -1289,7 +1389,8 @@ return 0;
         [Fact]
         public void RegressError4ValidNumericLiteral()
         {
-            var text = @"public class Test
+            var text =
+                @"public class Test
 {
 public static void Main()
 {
@@ -1311,7 +1412,8 @@ ulong max8 = 18446744073709551615;
         [Fact]
         public void RegressError4IdentifierStartWithAt1()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 [AttributeUsage(AttributeTargets.All)]
 public class X : Attribute { }
@@ -1344,7 +1446,8 @@ namespace N2
         [Fact]
         public void RegressError4IdentifierStartWithAt2()
         {
-            var text = @"public class A
+            var text =
+                @"public class A
         {
             public int @__namespace = 0;
 
@@ -1364,7 +1467,8 @@ namespace N2
         [Fact]
         public void RegressNegNoError4InvalidAttributeTarget()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 using System.Reflection;
 
 public class goo 
@@ -1379,7 +1483,6 @@ public class A : Attribute
 {
 }";
             ParseAndRoundTripping(text, -1);
-
             // Assert.Equal((int)ErrorCode.ERR_SyntaxError, tree.Errors()[0].Code); // CS1003
             // Assert.Equal((int)ErrorCode.ERR_InvalidMemberDecl, tree.Errors()[1].Code); // CS1519
         }
@@ -1388,7 +1491,8 @@ public class A : Attribute
         [Fact]
         public void RegressWrongError4WarningExternOnCtor()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 public class C
 {
     extern C();
@@ -1400,7 +1504,6 @@ public class C
 
             // The warning WRN_ExternCtorNoImplementation is given in semantic analysis.
             ParseAndRoundTripping(text); // , 1);
-
             // Assert.Equal((int)ErrorCode.WRN_ExternCtorNoImplementation, tree.Errors()[0].Code); // W CS0824
         }
 
@@ -1408,7 +1511,8 @@ public class C
         [Fact]
         public void RegressError4MemberOnSimpleTypeAsKeyword()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 public class Test
 {
     public void M()
@@ -1427,7 +1531,8 @@ public class Test
         [Fact]
         public void RegressWarning4EscapeCharInXmlDocAsText()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 /// <summary>
 /// << A '&' B >>
 /// </summary>
@@ -1445,7 +1550,8 @@ public class Test
         [Fact]
         public void RegressError4AnonymousTypeWithTrailingComma()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 public class Test
 {
     public static void Main()
@@ -1461,7 +1567,8 @@ public class Test
         [Fact]
         public void RegressError4QueryWithVarInLet()
         {
-            var text = @"class Q
+            var text =
+                @"class Q
 {
     static void Main()
     {
@@ -1483,7 +1590,8 @@ public class Test
         [Fact]
         public void RegressError4AttributeWithNamedParam()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 public class TestAttribute : Attribute
 {
   public TestAttribute(int i = 0, int j = 1) { }
@@ -1515,7 +1623,8 @@ public class A
         [Fact]
         public void RegressNotCheckNullRef()
         {
-            var text = @"public struct MyStruct
+            var text =
+                @"public struct MyStruct
 {
 public delegate void TypeName<T>(ref T t, dynamic d);
 public delegate Y @dynamic<X, Y>(X u, params dynamic[] ary);
@@ -1529,7 +1638,8 @@ public enum EM { };
         [Fact]
         public void RegressNegNotCheckNullRef()
         {
-            var text = @"class A
+            var text =
+                @"class A
 {
 A a { 0, 1 };
 }
@@ -1541,7 +1651,8 @@ A a { 0, 1 };
         [Fact]
         public void RegressError4ExternOperator()
         {
-            var text = @"public class A
+            var text =
+                @"public class A
 {
     public static extern int operator !(A a);
     public static extern int operator +(A a, int n);
@@ -1553,7 +1664,8 @@ A a { 0, 1 };
         [Fact, WorkItem(536922, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/536922")]
         public void RegressError4QueryWithNullable()
         {
-            var text = @"using System.Linq;
+            var text =
+                @"using System.Linq;
 class A
 {
     static void Main()
@@ -1570,12 +1682,15 @@ class A
         [Fact, WorkItem(537265, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537265")]
         public void PartialMethodWithLanguageVersion2()
         {
-            var text = @"partial class P
+            var text =
+                @"partial class P
 {
     partial void M();
 }
 ";
-            CSharpParseOptions options = new CSharpParseOptions(languageVersion: LanguageVersion.CSharp2);
+            CSharpParseOptions options = new CSharpParseOptions(
+                languageVersion: LanguageVersion.CSharp2
+            );
 
             var itext = SourceText.From(text);
             var tree = SyntaxFactory.ParseSyntaxTree(itext, options, "");
@@ -1601,7 +1716,8 @@ class A
         [Fact]
         public void IncompleteGlobalAlias()
         {
-            var text = @"namespace N2
+            var text =
+                @"namespace N2
 {
     [global:";
 
@@ -1612,7 +1728,8 @@ class A
         [Fact]
         public void MethodCallWithQueryArgInsideQueryExpr()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1638,7 +1755,8 @@ class Program
         [Fact]
         public void MethodCallWithFromArgInsideQueryExpr()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1664,7 +1782,8 @@ class Program
         [Fact]
         public void ArrayCreationWithQueryArgInsideQueryExpr()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;

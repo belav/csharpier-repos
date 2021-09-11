@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The created key. </returns>
         object Create(DbContext context, bool designTime)
 #pragma warning disable CS0618 // Type or member is obsolete
-            => Create(context);
+            =>
+            Create(context);
 #pragma warning restore CS0618 // Type or member is obsolete
     }
 }

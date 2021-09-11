@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
     /// </summary>
-    public class RelationalSqlTranslatingExpressionVisitorFactory : IRelationalSqlTranslatingExpressionVisitorFactory
+    public class RelationalSqlTranslatingExpressionVisitorFactory
+        : IRelationalSqlTranslatingExpressionVisitorFactory
     {
         private readonly RelationalSqlTranslatingExpressionVisitorDependencies _dependencies;
 
@@ -30,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public RelationalSqlTranslatingExpressionVisitorFactory(
-            RelationalSqlTranslatingExpressionVisitorDependencies dependencies)
-        {
+            RelationalSqlTranslatingExpressionVisitorDependencies dependencies
+        ) {
             _dependencies = dependencies;
         }
 
@@ -43,15 +44,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         public virtual RelationalSqlTranslatingExpressionVisitor Create(
             QueryCompilationContext queryCompilationContext,
-            QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor)
-        {
+            QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor
+        ) {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
-            Check.NotNull(queryableMethodTranslatingExpressionVisitor, nameof(queryableMethodTranslatingExpressionVisitor));
+            Check.NotNull(
+                queryableMethodTranslatingExpressionVisitor,
+                nameof(queryableMethodTranslatingExpressionVisitor)
+            );
 
             return new RelationalSqlTranslatingExpressionVisitor(
                 _dependencies,
                 queryCompilationContext,
-                queryableMethodTranslatingExpressionVisitor);
+                queryableMethodTranslatingExpressionVisitor
+            );
         }
     }
 }

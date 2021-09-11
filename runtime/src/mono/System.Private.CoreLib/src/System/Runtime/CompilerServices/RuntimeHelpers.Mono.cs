@@ -70,9 +70,7 @@ namespace System.Runtime.CompilerServices
             return SufficientExecutionStack();
         }
 
-        public static void PrepareDelegate(Delegate d)
-        {
-        }
+        public static void PrepareDelegate(Delegate d) { }
 
         public static void PrepareMethod(RuntimeMethodHandle method)
         {
@@ -84,13 +82,18 @@ namespace System.Runtime.CompilerServices
             }
         }
 
-        public static void PrepareMethod(RuntimeMethodHandle method, RuntimeTypeHandle[]? instantiation)
-        {
+        public static void PrepareMethod(
+            RuntimeMethodHandle method,
+            RuntimeTypeHandle[]? instantiation
+        ) {
             if (method.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
             unsafe
             {
-                IntPtr[]? instantiations = RuntimeTypeHandle.CopyRuntimeTypeHandles(instantiation, out int length);
+                IntPtr[]? instantiations = RuntimeTypeHandle.CopyRuntimeTypeHandles(
+                    instantiation,
+                    out int length
+                );
                 fixed (IntPtr* pinst = instantiations)
                 {
                     PrepareMethod(method.Value, pinst, length);
@@ -116,7 +119,8 @@ namespace System.Runtime.CompilerServices
         internal static ref byte GetRawData(this object obj) => ref obj.GetRawData();
 
         [Intrinsic]
-        public static bool IsReferenceOrContainsReferences<T>() => IsReferenceOrContainsReferences<T>();
+        public static bool IsReferenceOrContainsReferences<T>() =>
+            IsReferenceOrContainsReferences<T>();
 
         [Intrinsic]
         internal static bool IsBitwiseEquatable<T>() => IsBitwiseEquatable<T>();
@@ -137,9 +141,12 @@ namespace System.Runtime.CompilerServices
             // This obviously won't cover a type with no constructor. Reference types with no
             // constructor are an academic problem. Valuetypes with no constructors are a problem,
             // but IL Linker currently treats them as always implicitly boxed.
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type
+        ) {
             if (type is not RuntimeType rt)
             {
                 if (type is null)
@@ -154,7 +161,11 @@ namespace System.Runtime.CompilerServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern unsafe void PrepareMethod(IntPtr method, IntPtr* instantiations, int ninst);
+        private static extern unsafe void PrepareMethod(
+            IntPtr method,
+            IntPtr* instantiations,
+            int ninst
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern object GetUninitializedObjectInternal(IntPtr type);

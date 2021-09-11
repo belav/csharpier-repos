@@ -17,13 +17,16 @@ namespace Microsoft.AspNetCore.TestHost
         internal abstract void DisposeContext(object context, Exception? exception);
     }
 
-    internal class ApplicationWrapper<TContext> : ApplicationWrapper, IHttpApplication<TContext> where TContext : notnull
+    internal class ApplicationWrapper<TContext> : ApplicationWrapper, IHttpApplication<TContext>
+        where TContext : notnull
     {
         private readonly IHttpApplication<TContext> _application;
         private readonly Action _preProcessRequestAsync;
 
-        public ApplicationWrapper(IHttpApplication<TContext> application, Action preProcessRequestAsync)
-        {
+        public ApplicationWrapper(
+            IHttpApplication<TContext> application,
+            Action preProcessRequestAsync
+        ) {
             _application = application;
             _preProcessRequestAsync = preProcessRequestAsync;
         }

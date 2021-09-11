@@ -24,17 +24,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
     {
         private readonly SVsServiceProvider _serviceProvider;
 
-        private static readonly Func<string, string, string> s_messageGetter = (t, m) => string.Format("{0} : {1}", t, m);
+        private static readonly Func<string, string, string> s_messageGetter = (t, m) =>
+            string.Format("{0} : {1}", t, m);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioWaitIndicator(SVsServiceProvider serviceProvider)
-            => _serviceProvider = serviceProvider;
+        public VisualStudioWaitIndicator(SVsServiceProvider serviceProvider) =>
+            _serviceProvider = serviceProvider;
 
         public WaitIndicatorResult Wait(
-            string title, string message, bool allowCancel, bool showProgress, Action<IWaitContext> action)
-        {
-            using (Logger.LogBlock(FunctionId.Misc_VisualStudioWaitIndicator_Wait, s_messageGetter, title, message, CancellationToken.None))
+            string title,
+            string message,
+            bool allowCancel,
+            bool showProgress,
+            Action<IWaitContext> action
+        ) {
+            using (
+                Logger.LogBlock(
+                    FunctionId.Misc_VisualStudioWaitIndicator_Wait,
+                    s_messageGetter,
+                    title,
+                    message,
+                    CancellationToken.None
+                )
+            )
             using (var waitContext = StartWait(title, message, allowCancel, showProgress))
             {
                 try
@@ -47,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 {
                     return WaitIndicatorResult.Canceled;
                 }
-                catch (AggregateException aggregate) when (aggregate.InnerExceptions.All(e => e is OperationCanceledException))
+                catch (AggregateException aggregate)
+                    when (aggregate.InnerExceptions.All(e => e is OperationCanceledException))
                 {
                     return WaitIndicatorResult.Canceled;
                 }
@@ -55,25 +69,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
         }
 
         private VisualStudioWaitContext StartWait(
-            string title, string message, bool allowCancel, bool showProgress)
-        {
-            var componentModel = (IComponentModel)_serviceProvider.GetService(typeof(SComponentModel));
+            string title,
+            string message,
+            bool allowCancel,
+            bool showProgress
+        ) {
+            var componentModel = (IComponentModel)_serviceProvider.GetService(
+                typeof(SComponentModel)
+            );
             var workspace = componentModel.GetService<VisualStudioWorkspace>();
             Contract.ThrowIfNull(workspace);
 
-            var notificationService = workspace.Services.GetService<IGlobalOperationNotificationService>();
+            var notificationService =
+                workspace.Services.GetService<IGlobalOperationNotificationService>();
             Contract.ThrowIfNull(notificationService);
 
-            var dialogFactory = (IVsThreadedWaitDialogFactory)_serviceProvider.GetService(typeof(SVsThreadedWaitDialogFactory));
+            var dialogFactory = (IVsThreadedWaitDialogFactory)_serviceProvider.GetService(
+                typeof(SVsThreadedWaitDialogFactory)
+            );
             Contract.ThrowIfNull(dialogFactory);
 
             return new VisualStudioWaitContext(
-                notificationService, dialogFactory, title, message, allowCancel, showProgress);
+                notificationService,
+                dialogFactory,
+                title,
+                message,
+                allowCancel,
+                showProgress
+            );
         }
 
         IWaitContext IWaitIndicator.StartWait(
-            string title, string message, bool allowCancel, bool showProgress)
-        {
+            string title,
+            string message,
+            bool allowCancel,
+            bool showProgress
+        ) {
             return StartWait(title, message, allowCancel, showProgress);
         }
     }

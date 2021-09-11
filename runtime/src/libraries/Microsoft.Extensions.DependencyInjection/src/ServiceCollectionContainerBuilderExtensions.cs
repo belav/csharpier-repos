@@ -32,9 +32,13 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <c>true</c> to perform check verifying that scoped services never gets resolved from root provider; otherwise <c>false</c>.
         /// </param>
         /// <returns>The <see cref="ServiceProvider"/>.</returns>
-        public static ServiceProvider BuildServiceProvider(this IServiceCollection services, bool validateScopes)
-        {
-            return services.BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = validateScopes });
+        public static ServiceProvider BuildServiceProvider(
+            this IServiceCollection services,
+            bool validateScopes
+        ) {
+            return services.BuildServiceProvider(
+                new ServiceProviderOptions { ValidateScopes = validateScopes }
+            );
         }
 
         /// <summary>
@@ -46,8 +50,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// Configures various service provider behaviors.
         /// </param>
         /// <returns>The <see cref="ServiceProvider"/>.</returns>
-        public static ServiceProvider BuildServiceProvider(this IServiceCollection services, ServiceProviderOptions options)
-        {
+        public static ServiceProvider BuildServiceProvider(
+            this IServiceCollection services,
+            ServiceProviderOptions options
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

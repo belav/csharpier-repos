@@ -43,7 +43,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.False(modelState.IsValid);
             var modelStateErrors = GetModelStateErrors(modelState);
             Assert.Single(modelStateErrors);
-            Assert.Equal("Product must be made in the USA if it is not named.", modelStateErrors["software"]);
+            Assert.Equal(
+                "Product must be made in the USA if it is not named.",
+                modelStateErrors["software"]
+            );
         }
 
         [Fact]
@@ -84,36 +87,47 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var testContext = ModelBindingTestHelper.GetTestContext();
             var modelState = testContext.ModelState;
             var model = new List<ProductViewModel>();
-            model.Add(new ProductViewModel()
-            {
-                Price = 2,
-                Contact = "acvrdzersaererererfdsfdsfdsfsdf",
-                ProductDetails = new ProductDetails()
+            model.Add(
+                new ProductViewModel()
                 {
-                    Detail1 = "d1",
-                    Detail2 = "d2",
-                    Detail3 = "d3"
+                    Price = 2,
+                    Contact = "acvrdzersaererererfdsfdsfdsfsdf",
+                    ProductDetails = new ProductDetails()
+                    {
+                        Detail1 = "d1",
+                        Detail2 = "d2",
+                        Detail3 = "d3"
+                    }
                 }
-            });
-            model.Add(new ProductViewModel()
-            {
-                Price = 2,
-                Contact = "acvrdzersaererererfdsfdsfdsfsdf",
-                ProductDetails = new ProductDetails()
+            );
+            model.Add(
+                new ProductViewModel()
                 {
-                    Detail1 = "d1",
-                    Detail2 = "d2",
-                    Detail3 = "d3"
+                    Price = 2,
+                    Contact = "acvrdzersaererererfdsfdsfdsfsdf",
+                    ProductDetails = new ProductDetails()
+                    {
+                        Detail1 = "d1",
+                        Detail2 = "d2",
+                        Detail3 = "d3"
+                    }
                 }
-            });
+            );
 
             var controller = CreateController(testContext, testContext.MetadataProvider);
 
             // We define the "CompanyName null" message locally, so we should manually check its value.
             var categoryRequired = ValidationAttributeUtil.GetRequiredErrorMessage("Category");
             var priceRange = ValidationAttributeUtil.GetRangeErrorMessage(20, 100, "Price");
-            var contactUsMax = ValidationAttributeUtil.GetStringLengthErrorMessage(null, 20, "Contact Us");
-            var contactUsRegEx = ValidationAttributeUtil.GetRegExErrorMessage("^[0-9]*$", "Contact Us");
+            var contactUsMax = ValidationAttributeUtil.GetStringLengthErrorMessage(
+                null,
+                20,
+                "Contact Us"
+            );
+            var contactUsRegEx = ValidationAttributeUtil.GetRegExErrorMessage(
+                "^[0-9]*$",
+                "Contact Us"
+            );
 
             // Act
             var result = controller.TryValidateModel(model);
@@ -123,11 +137,17 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.False(modelState.IsValid);
             var modelStateErrors = GetModelStateErrors(modelState);
 
-            Assert.Equal("CompanyName cannot be null or empty.", modelStateErrors["[0].CompanyName"]);
+            Assert.Equal(
+                "CompanyName cannot be null or empty.",
+                modelStateErrors["[0].CompanyName"]
+            );
             Assert.Equal(priceRange, modelStateErrors["[0].Price"]);
             Assert.Equal(categoryRequired, modelStateErrors["[0].Category"]);
             AssertErrorEquals(contactUsMax + contactUsRegEx, modelStateErrors["[0].Contact"]);
-            Assert.Equal("CompanyName cannot be null or empty.", modelStateErrors["[1].CompanyName"]);
+            Assert.Equal(
+                "CompanyName cannot be null or empty.",
+                modelStateErrors["[1].CompanyName"]
+            );
             Assert.Equal(priceRange, modelStateErrors["[1].Price"]);
             Assert.Equal(categoryRequired, modelStateErrors["[1].Category"]);
             AssertErrorEquals(contactUsMax + contactUsRegEx, modelStateErrors["[1].Contact"]);
@@ -140,7 +160,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var testContext = ModelBindingTestHelper.GetTestContext();
             var modelState = testContext.ModelState;
             var model = new ModelLevelErrorTest();
-            var controller = CreateController(testContext, testContext.MetadataProvider, o => o.ValidateComplexTypesIfChildValidationFails = true);
+            var controller = CreateController(
+                testContext,
+                testContext.MetadataProvider,
+                o => o.ValidateComplexTypesIfChildValidationFails = true
+            );
 
             // Act
             var result = controller.TryValidateModel(model);
@@ -161,7 +185,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var testContext = ModelBindingTestHelper.GetTestContext();
             var modelState = testContext.ModelState;
             var model = new ModelLevelErrorTest();
-            var controller = CreateController(testContext, testContext.MetadataProvider, o => o.ValidateComplexTypesIfChildValidationFails = false);
+            var controller = CreateController(
+                testContext,
+                testContext.MetadataProvider,
+                o => o.ValidateComplexTypesIfChildValidationFails = false
+            );
 
             // Act
             var result = controller.TryValidateModel(model);
@@ -198,13 +226,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // OrderBy is used because the order of the results may very depending on the platform / client.
             Assert.Equal(
                 expected.Split('.').OrderBy(item => item, StringComparer.Ordinal),
-                actual.Split('.').OrderBy(item => item, StringComparer.Ordinal));
+                actual.Split('.').OrderBy(item => item, StringComparer.Ordinal)
+            );
         }
 
         private TestController CreateController(
             ActionContext actionContext,
-            IModelMetadataProvider metadataProvider)
-        {
+            IModelMetadataProvider metadataProvider
+        ) {
             return CreateController(actionContext, metadataProvider, _ => { });
         }
 
@@ -212,14 +241,18 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             ActionContext actionContext,
             IModelMetadataProvider metadataProvider,
             Action<MvcOptions> optionsConfigurator
-        )
-        {
-            var options = actionContext.HttpContext.RequestServices.GetRequiredService<IOptions<MvcOptions>>();
+        ) {
+            var options = actionContext.HttpContext.RequestServices.GetRequiredService<
+                IOptions<MvcOptions>
+            >();
             optionsConfigurator.Invoke(options.Value);
 
             var controller = new TestController();
             controller.ControllerContext = new ControllerContext(actionContext);
-            controller.ObjectValidator = ModelBindingTestHelper.GetObjectValidator(metadataProvider, options);
+            controller.ObjectValidator = ModelBindingTestHelper.GetObjectValidator(
+                metadataProvider,
+                options
+            );
             controller.MetadataProvider = metadataProvider;
 
             return controller;

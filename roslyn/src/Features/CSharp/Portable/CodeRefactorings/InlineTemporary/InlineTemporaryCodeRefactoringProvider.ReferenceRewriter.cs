@@ -26,10 +26,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 SemanticModel semanticModel,
                 VariableDeclaratorSyntax variableDeclarator,
                 ExpressionSyntax expressionToInline,
-                CancellationToken cancellationToken)
-            {
+                CancellationToken cancellationToken
+            ) {
                 _semanticModel = semanticModel;
-                _localSymbol = (ILocalSymbol)semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken);
+                _localSymbol = (ILocalSymbol)semanticModel.GetDeclaredSymbol(
+                    variableDeclarator,
+                    cancellationToken
+                );
                 _variableDeclarator = variableDeclarator;
                 _expressionToInline = expressionToInline;
                 _cancellationToken = cancellationToken;
@@ -43,8 +46,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 }
 
                 var symbol = _semanticModel.GetSymbolInfo(name).Symbol;
-                return symbol != null
-                    && symbol.Equals(_localSymbol);
+                return symbol != null && symbol.Equals(_localSymbol);
             }
 
             public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
@@ -55,25 +57,31 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 {
                     if (HasConflict(node, _variableDeclarator))
                     {
-                        return node.Update(node.Identifier.WithAdditionalAnnotations(CreateConflictAnnotation()));
+                        return node.Update(
+                            node.Identifier.WithAdditionalAnnotations(CreateConflictAnnotation())
+                        );
                     }
 
-                    return _expressionToInline
-                        .Parenthesize()
+                    return _expressionToInline.Parenthesize()
                         .WithAdditionalAnnotations(Formatter.Annotation, Simplifier.Annotation);
                 }
 
                 return base.VisitIdentifierName(node);
             }
 
-            public override SyntaxNode VisitAnonymousObjectMemberDeclarator(AnonymousObjectMemberDeclaratorSyntax node)
-            {
+            public override SyntaxNode VisitAnonymousObjectMemberDeclarator(
+                AnonymousObjectMemberDeclaratorSyntax node
+            ) {
                 var nameEquals = node.NameEquals;
                 var expression = node.Expression;
                 var identifier = expression as IdentifierNameSyntax;
 
-                if (nameEquals != null || identifier == null || !IsReference(identifier) || HasConflict(identifier, _variableDeclarator))
-                {
+                if (
+                    nameEquals != null
+                    || identifier == null
+                    || !IsReference(identifier)
+                    || HasConflict(identifier, _variableDeclarator)
+                ) {
                     return base.VisitAnonymousObjectMemberDeclarator(node);
                 }
 
@@ -87,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 //     var a = new { x = 42; };
                 nameEquals = SyntaxFactory.NameEquals(identifier);
                 expression = (ExpressionSyntax)Visit(expression);
-                return node.Update(nameEquals, expression).WithAdditionalAnnotations(Simplifier.Annotation, Formatter.Annotation);
+                return node.Update(nameEquals, expression)
+                    .WithAdditionalAnnotations(Simplifier.Annotation, Formatter.Annotation);
             }
 
             public static SyntaxNode Visit(
@@ -95,9 +104,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 SyntaxNode scope,
                 VariableDeclaratorSyntax variableDeclarator,
                 ExpressionSyntax expressionToInline,
-                CancellationToken cancellationToken)
-            {
-                var rewriter = new ReferenceRewriter(semanticModel, variableDeclarator, expressionToInline, cancellationToken);
+                CancellationToken cancellationToken
+            ) {
+                var rewriter = new ReferenceRewriter(
+                    semanticModel,
+                    variableDeclarator,
+                    expressionToInline,
+                    cancellationToken
+                );
                 return rewriter.Visit(scope);
             }
         }

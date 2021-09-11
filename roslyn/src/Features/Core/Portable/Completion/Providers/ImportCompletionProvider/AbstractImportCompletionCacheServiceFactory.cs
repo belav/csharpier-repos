@@ -10,13 +10,15 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
 {
-    internal abstract class AbstractImportCompletionCacheServiceFactory<TProjectCacheEntry, TMetadataCacheEntry> : IWorkspaceServiceFactory
+    internal abstract class AbstractImportCompletionCacheServiceFactory<
+        TProjectCacheEntry,
+        TMetadataCacheEntry
+    > : IWorkspaceServiceFactory
     {
-        private readonly ConcurrentDictionary<string, TMetadataCacheEntry> _peItemsCache
-            = new();
+        private readonly ConcurrentDictionary<string, TMetadataCacheEntry> _peItemsCache = new();
 
-        private readonly ConcurrentDictionary<ProjectId, TProjectCacheEntry> _projectItemsCache
-            = new();
+        private readonly ConcurrentDictionary<ProjectId, TProjectCacheEntry> _projectItemsCache =
+            new();
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
@@ -39,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
             _projectItemsCache.Clear();
         }
 
-        private class ImportCompletionCacheService : IImportCompletionCacheService<TProjectCacheEntry, TMetadataCacheEntry>
+        private class ImportCompletionCacheService
+            : IImportCompletionCacheService<TProjectCacheEntry, TMetadataCacheEntry>
         {
             public IDictionary<string, TMetadataCacheEntry> PEItemsCache { get; }
 
@@ -47,8 +50,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
 
             public ImportCompletionCacheService(
                 ConcurrentDictionary<string, TMetadataCacheEntry> peCache,
-                ConcurrentDictionary<ProjectId, TProjectCacheEntry> projectCache)
-            {
+                ConcurrentDictionary<ProjectId, TProjectCacheEntry> projectCache
+            ) {
                 PEItemsCache = peCache;
                 ProjectItemsCache = projectCache;
             }

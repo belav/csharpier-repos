@@ -11,8 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language
     {
         public DefaultRazorCodeDocument(
             RazorSourceDocument source,
-            IEnumerable<RazorSourceDocument> imports)
-        {
+            IEnumerable<RazorSourceDocument> imports
+        ) {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));

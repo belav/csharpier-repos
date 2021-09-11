@@ -59,21 +59,59 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         public bool IsPartialAnalysis { get; }
 
-        public AnalysisScope(Compilation compilation, AnalyzerOptions? analyzerOptions, ImmutableArray<DiagnosticAnalyzer> analyzers, bool hasAllAnalyzers, bool concurrentAnalysis, bool categorizeDiagnostics)
-            : this(compilation.SyntaxTrees, analyzerOptions?.AdditionalFiles ?? ImmutableArray<AdditionalText>.Empty,
-                   analyzers, isPartialAnalysis: !hasAllAnalyzers, filterFile: null, filterSpanOpt: null, isSyntacticSingleFileAnalysis: false, concurrentAnalysis: concurrentAnalysis, categorizeDiagnostics: categorizeDiagnostics)
-        {
-        }
+        public AnalysisScope(
+            Compilation compilation,
+            AnalyzerOptions? analyzerOptions,
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            bool hasAllAnalyzers,
+            bool concurrentAnalysis,
+            bool categorizeDiagnostics
+        ) : this(
+            compilation.SyntaxTrees,
+            analyzerOptions?.AdditionalFiles ?? ImmutableArray<AdditionalText>.Empty,
+            analyzers,
+            isPartialAnalysis: !hasAllAnalyzers,
+            filterFile: null,
+            filterSpanOpt: null,
+            isSyntacticSingleFileAnalysis: false,
+            concurrentAnalysis: concurrentAnalysis,
+            categorizeDiagnostics: categorizeDiagnostics
+        ) { }
 
-        public AnalysisScope(ImmutableArray<DiagnosticAnalyzer> analyzers, SourceOrAdditionalFile filterFile, TextSpan? filterSpan, bool isSyntacticSingleFileAnalysis, bool concurrentAnalysis, bool categorizeDiagnostics)
-            : this(filterFile.SourceTree != null ? SpecializedCollections.SingletonEnumerable(filterFile.SourceTree) : SpecializedCollections.EmptyEnumerable<SyntaxTree>(),
-                   filterFile.AdditionalFile != null ? SpecializedCollections.SingletonEnumerable(filterFile.AdditionalFile) : SpecializedCollections.EmptyEnumerable<AdditionalText>(),
-                   analyzers, isPartialAnalysis: true, filterFile, filterSpan, isSyntacticSingleFileAnalysis, concurrentAnalysis, categorizeDiagnostics)
-        {
-        }
+        public AnalysisScope(
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            SourceOrAdditionalFile filterFile,
+            TextSpan? filterSpan,
+            bool isSyntacticSingleFileAnalysis,
+            bool concurrentAnalysis,
+            bool categorizeDiagnostics
+        ) : this(
+            filterFile.SourceTree != null
+              ? SpecializedCollections.SingletonEnumerable(filterFile.SourceTree)
+              : SpecializedCollections.EmptyEnumerable<SyntaxTree>(),
+            filterFile.AdditionalFile != null
+              ? SpecializedCollections.SingletonEnumerable(filterFile.AdditionalFile)
+              : SpecializedCollections.EmptyEnumerable<AdditionalText>(),
+            analyzers,
+            isPartialAnalysis: true,
+            filterFile,
+            filterSpan,
+            isSyntacticSingleFileAnalysis,
+            concurrentAnalysis,
+            categorizeDiagnostics
+        ) { }
 
-        private AnalysisScope(IEnumerable<SyntaxTree> trees, IEnumerable<AdditionalText> additionalFiles, ImmutableArray<DiagnosticAnalyzer> analyzers, bool isPartialAnalysis, SourceOrAdditionalFile? filterFile, TextSpan? filterSpanOpt, bool isSyntacticSingleFileAnalysis, bool concurrentAnalysis, bool categorizeDiagnostics)
-        {
+        private AnalysisScope(
+            IEnumerable<SyntaxTree> trees,
+            IEnumerable<AdditionalText> additionalFiles,
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            bool isPartialAnalysis,
+            SourceOrAdditionalFile? filterFile,
+            TextSpan? filterSpanOpt,
+            bool isSyntacticSingleFileAnalysis,
+            bool concurrentAnalysis,
+            bool categorizeDiagnostics
+        ) {
             Debug.Assert(isPartialAnalysis || FilterFileOpt == null);
             Debug.Assert(isPartialAnalysis || FilterSpanOpt == null);
             Debug.Assert(isPartialAnalysis || !isSyntacticSingleFileAnalysis);
@@ -91,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _lazyAnalyzersSet = new Lazy<ImmutableHashSet<DiagnosticAnalyzer>>(CreateAnalyzersSet);
         }
 
-        private ImmutableHashSet<DiagnosticAnalyzer> CreateAnalyzersSet() => Analyzers.ToImmutableHashSet();
+        private ImmutableHashSet<DiagnosticAnalyzer> CreateAnalyzersSet() =>
+            Analyzers.ToImmutableHashSet();
 
         public bool Contains(DiagnosticAnalyzer analyzer)
         {
@@ -104,23 +143,41 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return _lazyAnalyzersSet.Value.Contains(analyzer);
         }
 
-        public AnalysisScope WithAnalyzers(ImmutableArray<DiagnosticAnalyzer> analyzers, bool hasAllAnalyzers)
-        {
+        public AnalysisScope WithAnalyzers(
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            bool hasAllAnalyzers
+        ) {
             var isPartialAnalysis = IsSingleFileAnalysis || !hasAllAnalyzers;
-            return new AnalysisScope(SyntaxTrees, AdditionalFiles, analyzers, isPartialAnalysis, FilterFileOpt, FilterSpanOpt, IsSyntacticSingleFileAnalysis, ConcurrentAnalysis, CategorizeDiagnostics);
+            return new AnalysisScope(
+                SyntaxTrees,
+                AdditionalFiles,
+                analyzers,
+                isPartialAnalysis,
+                FilterFileOpt,
+                FilterSpanOpt,
+                IsSyntacticSingleFileAnalysis,
+                ConcurrentAnalysis,
+                CategorizeDiagnostics
+            );
         }
 
         public static bool ShouldSkipSymbolAnalysis(SymbolDeclaredCompilationEvent symbolEvent)
         {
             // Skip symbol actions for implicitly declared symbols and non-source symbols.
-            return symbolEvent.Symbol.IsImplicitlyDeclared || symbolEvent.DeclaringSyntaxReferences.All(s => s.SyntaxTree == null);
+            return symbolEvent.Symbol.IsImplicitlyDeclared
+                || symbolEvent.DeclaringSyntaxReferences.All(s => s.SyntaxTree == null);
         }
 
         public static bool ShouldSkipDeclarationAnalysis(ISymbol symbol)
         {
             // Skip syntax actions for implicitly declared symbols, except for implicitly declared global namespace symbols.
-            return symbol.IsImplicitlyDeclared &&
-                !((symbol.Kind == SymbolKind.Namespace && ((INamespaceSymbol)symbol).IsGlobalNamespace));
+            return symbol.IsImplicitlyDeclared
+                && !(
+                    (
+                        symbol.Kind == SymbolKind.Namespace
+                        && ((INamespaceSymbol)symbol).IsGlobalNamespace
+                    )
+                );
         }
 
         public bool ShouldAnalyze(SyntaxTree tree)
@@ -147,8 +204,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             foreach (var location in symbol.Locations)
             {
-                if (FilterFileOpt.Value.SourceTree == location.SourceTree && ShouldInclude(location.SourceSpan))
-                {
+                if (
+                    FilterFileOpt.Value.SourceTree == location.SourceTree
+                    && ShouldInclude(location.SourceSpan)
+                ) {
                     return true;
                 }
             }
@@ -197,9 +256,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
             else if (diagnostic.Location is ExternalFileLocation externalFileLocation)
             {
-                if (FilterFileOpt.Value.AdditionalFile == null ||
-                    !PathUtilities.Comparer.Equals(externalFileLocation.FilePath, FilterFileOpt.Value.AdditionalFile.Path))
-                {
+                if (
+                    FilterFileOpt.Value.AdditionalFile == null
+                    || !PathUtilities.Comparer.Equals(
+                        externalFileLocation.FilePath,
+                        FilterFileOpt.Value.AdditionalFile.Path
+                    )
+                ) {
                     return false;
                 }
             }

@@ -8,10 +8,10 @@ namespace System.Data.Common
 {
     internal partial class DbConnectionOptions
     {
-        protected DbConnectionOptions(string connectionString, Dictionary<string, string> synonyms)
-            : this (connectionString, new Hashtable(synonyms), false)
-        {
-        }
+        protected DbConnectionOptions(
+            string connectionString,
+            Dictionary<string, string> synonyms
+        ) : this(connectionString, new Hashtable(synonyms), false) { }
 
         internal bool TryGetParsetableValue(string key, out string value)
         {

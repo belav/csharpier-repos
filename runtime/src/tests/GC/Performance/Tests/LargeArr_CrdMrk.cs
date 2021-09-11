@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 //Try to allocate in such a way that card marking path is hit often
 //That happens when Gen2 objects reference objects in Gen0 or Gen1
-//This test exercises gc_heap::mark_through_cards_for_segments 
+//This test exercises gc_heap::mark_through_cards_for_segments
 namespace LargeArr_CrdMrk
 {
     class MyObj
     {
-        public object oRef=null;
+        public object oRef = null;
     }
     class LargeArr_CrdMrk
     {
@@ -41,7 +41,6 @@ namespace LargeArr_CrdMrk
                 byte[] bArr = new byte[3];
                 bArr[1] = 5;
                 MyList[pos].oRef = bArr;
-
             }
 
             //iterate deleting the old refs and allocating new ones
@@ -55,7 +54,6 @@ namespace LargeArr_CrdMrk
                         {
                             MyList[j].oRef = null;
                         }
-
                     }
                     int pos = Rand.Next(i, i + STEP);
                     byte[] bArr = new byte[3];
@@ -70,11 +68,16 @@ namespace LargeArr_CrdMrk
         }
         static void ParseArgs(string[] args)
         {
-            if(args.Length>0)
+            if (args.Length > 0)
             {
                 if (args[0].CompareTo("/?") == 0)
                 {
-                    Console.WriteLine("Usage: [ArraySize(default {0})] [Iterations(default {1})] [Step(default {2})] [RandomSeed]", LISTSIZE, ITERATIONS, STEP);
+                    Console.WriteLine(
+                        "Usage: [ArraySize(default {0})] [Iterations(default {1})] [Step(default {2})] [RandomSeed]",
+                        LISTSIZE,
+                        ITERATIONS,
+                        STEP
+                    );
                     System.Environment.Exit(0);
                 }
                 else

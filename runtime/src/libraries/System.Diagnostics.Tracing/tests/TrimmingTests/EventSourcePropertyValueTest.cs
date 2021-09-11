@@ -72,17 +72,16 @@ internal class Program
             var testData = new TestData()
             {
                 TestInt = 5,
-                SubData = new TestSubData()
-                {
-                    SubInt = 6
-                }
+                SubData = new TestSubData() { SubInt = 6 }
             };
             TestEventSource.Log.LogData(testData);
 
-            if (listener.LogDataPayload?.Count == 2 &&
-                (int)listener.LogDataPayload[0] == testData.TestInt &&
-                (int)((IDictionary<string, object>)listener.LogDataPayload[1])["SubInt"] == testData.SubData.SubInt)
-            {
+            if (
+                listener.LogDataPayload?.Count == 2
+                && (int)listener.LogDataPayload[0] == testData.TestInt
+                && (int)((IDictionary<string, object>)listener.LogDataPayload[1])["SubInt"]
+                    == testData.SubData.SubInt
+            ) {
                 return 100;
             }
 

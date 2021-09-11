@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that configures the table name and schema for entity types based on the applied <see cref="TableAttribute" />.
     /// </summary>
-    public class RelationalTableAttributeConvention : EntityTypeAttributeConventionBase<TableAttribute>
+    public class RelationalTableAttributeConvention
+        : EntityTypeAttributeConventionBase<TableAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RelationalTableAttributeConvention" />.
@@ -19,10 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
         public RelationalTableAttributeConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies)
-        {
-        }
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Called after an entity type is added to the model if it has an attribute.
@@ -33,11 +32,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected override void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             TableAttribute attribute,
-            IConventionContext<IConventionEntityTypeBuilder> context)
-        {
+            IConventionContext<IConventionEntityTypeBuilder> context
+        ) {
             if (!string.IsNullOrWhiteSpace(attribute.Schema))
             {
-                entityTypeBuilder.ToTable(attribute.Name, attribute.Schema, fromDataAnnotation: true);
+                entityTypeBuilder.ToTable(
+                    attribute.Name,
+                    attribute.Schema,
+                    fromDataAnnotation: true
+                );
             }
             else if (!string.IsNullOrWhiteSpace(attribute.Name))
             {

@@ -140,7 +140,11 @@ class Runtime_40440
                 return false;
             }
             LargeStruct s2 = (LargeStruct)obj;
-            return (f1 == s2.f1) && (f2 == s2.f2) && (f3 == s2.f3) && (f4 == s2.f4) && (f5 == s2.f5);
+            return (f1 == s2.f1)
+                && (f2 == s2.f2)
+                && (f3 == s2.f3)
+                && (f4 == s2.f4)
+                && (f5 == s2.f5);
         }
     }
 

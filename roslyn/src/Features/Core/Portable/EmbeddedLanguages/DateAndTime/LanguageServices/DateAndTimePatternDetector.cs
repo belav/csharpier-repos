@@ -26,8 +26,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
         /// semantic model.  This saves the time from having to recreate this for every string literal that features
         /// examine for a particular semantic model.
         /// </summary>
-        private static readonly ConditionalWeakTable<SemanticModel, DateAndTimePatternDetector?> _modelToDetector =
-            new();
+        private static readonly ConditionalWeakTable<
+            SemanticModel,
+            DateAndTimePatternDetector?
+        > _modelToDetector = new();
 
         private readonly EmbeddedLanguageInfo _info;
         private readonly SemanticModel _semanticModel;
@@ -38,8 +40,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             SemanticModel semanticModel,
             EmbeddedLanguageInfo info,
             INamedTypeSymbol dateTimeType,
-            INamedTypeSymbol dateTimeOffsetType)
-        {
+            INamedTypeSymbol dateTimeOffsetType
+        ) {
             _info = info;
             _semanticModel = semanticModel;
             _dateTimeType = dateTimeType;
@@ -47,27 +49,37 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
         }
 
         public static DateAndTimePatternDetector? TryGetOrCreate(
-            SemanticModel semanticModel, EmbeddedLanguageInfo info)
-        {
+            SemanticModel semanticModel,
+            EmbeddedLanguageInfo info
+        ) {
             // Do a quick non-allocating check first.
             if (_modelToDetector.TryGetValue(semanticModel, out var detector))
             {
                 return detector;
             }
 
-            return _modelToDetector.GetValue(
-                semanticModel, _ => TryCreate(semanticModel, info));
+            return _modelToDetector.GetValue(semanticModel, _ => TryCreate(semanticModel, info));
         }
 
         private static DateAndTimePatternDetector? TryCreate(
-            SemanticModel semanticModel, EmbeddedLanguageInfo info)
-        {
-            var dateTimeType = semanticModel.Compilation.GetTypeByMetadataName(typeof(System.DateTime).FullName!);
-            var dateTimeOffsetType = semanticModel.Compilation.GetTypeByMetadataName(typeof(System.DateTimeOffset).FullName!);
+            SemanticModel semanticModel,
+            EmbeddedLanguageInfo info
+        ) {
+            var dateTimeType = semanticModel.Compilation.GetTypeByMetadataName(
+                typeof(System.DateTime).FullName!
+            );
+            var dateTimeOffsetType = semanticModel.Compilation.GetTypeByMetadataName(
+                typeof(System.DateTimeOffset).FullName!
+            );
             if (dateTimeType == null || dateTimeOffsetType == null)
                 return null;
 
-            return new DateAndTimePatternDetector(semanticModel, info, dateTimeType, dateTimeOffsetType);
+            return new DateAndTimePatternDetector(
+                semanticModel,
+                info,
+                dateTimeType,
+                dateTimeOffsetType
+            );
         }
 
         /// <summary>
@@ -76,10 +88,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
         /// name="invocationExpression"/> will be the argument and invocatoin the string literal was passed as.
         /// </summary>
         public static bool IsPossiblyDateAndTimeArgumentToken(
-            SyntaxToken token, ISyntaxFacts syntaxFacts,
+            SyntaxToken token,
+            ISyntaxFacts syntaxFacts,
             [NotNullWhen(true)] out SyntaxNode? argumentNode,
-            [NotNullWhen(true)] out SyntaxNode? invocationExpression)
-        {
+            [NotNullWhen(true)] out SyntaxNode? invocationExpression
+        ) {
             // Has to be a string literal passed to a method.
             argumentNode = null;
             invocationExpression = null;
@@ -101,9 +114,15 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             if (!syntaxFacts.IsInvocationExpression(invocationOrCreation))
                 return false;
 
-            var invokedExpression = syntaxFacts.GetExpressionOfInvocationExpression(invocationOrCreation);
+            var invokedExpression = syntaxFacts.GetExpressionOfInvocationExpression(
+                invocationOrCreation
+            );
             var name = GetNameOfInvokedExpression(syntaxFacts, invokedExpression);
-            if (name != nameof(ToString) && name != nameof(System.DateTime.ParseExact) && name != nameof(System.DateTime.TryParseExact))
+            if (
+                name != nameof(ToString)
+                && name != nameof(System.DateTime.ParseExact)
+                && name != nameof(System.DateTime.TryParseExact)
+            )
                 return false;
 
             // We have a string literal passed to a method called ToString/ParseExact/TryParseExact.
@@ -114,10 +133,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             return true;
         }
 
-        private static string? GetNameOfInvokedExpression(ISyntaxFacts syntaxFacts, SyntaxNode invokedExpression)
-        {
+        private static string? GetNameOfInvokedExpression(
+            ISyntaxFacts syntaxFacts,
+            SyntaxNode invokedExpression
+        ) {
             if (syntaxFacts.IsSimpleMemberAccessExpression(invokedExpression))
-                return syntaxFacts.GetIdentifierOfSimpleName(syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)).ValueText;
+                return syntaxFacts.GetIdentifierOfSimpleName(
+                    syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)
+                ).ValueText;
 
             if (syntaxFacts.IsMemberBindingExpression(invokedExpression))
                 invokedExpression = syntaxFacts.GetNameOfMemberBindingExpression(invokedExpression);
@@ -128,16 +151,23 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             return null;
         }
 
-        private static bool IsMethodArgument(SyntaxToken token, ISyntaxFacts syntaxFacts)
-            => syntaxFacts.IsLiteralExpression(token.Parent) &&
-               syntaxFacts.IsArgument(token.Parent!.Parent);
+        private static bool IsMethodArgument(SyntaxToken token, ISyntaxFacts syntaxFacts) =>
+            syntaxFacts.IsLiteralExpression(token.Parent)
+            && syntaxFacts.IsArgument(token.Parent!.Parent);
 
-        public bool IsDateAndTimeToken(SyntaxToken token, ISyntaxFacts syntaxFacts, CancellationToken cancellationToken)
-        {
-            if (IsPossiblyDateAndTimeArgumentToken(
-                    token, _info.SyntaxFacts,
-                    out var argumentNode, out var invocationOrCreation))
-            {
+        public bool IsDateAndTimeToken(
+            SyntaxToken token,
+            ISyntaxFacts syntaxFacts,
+            CancellationToken cancellationToken
+        ) {
+            if (
+                IsPossiblyDateAndTimeArgumentToken(
+                    token,
+                    _info.SyntaxFacts,
+                    out var argumentNode,
+                    out var invocationOrCreation
+                )
+            ) {
                 // if we couldn't determine the arg name or arg index, can't proceed.
                 var (argName, argIndex) = GetArgumentNameOrIndex(argumentNode);
                 if (argName == null && argIndex == null)
@@ -148,7 +178,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
                 if (argName != null && argName != FormatName)
                     return false;
 
-                var symbolInfo = _semanticModel.GetSymbolInfo(invocationOrCreation, cancellationToken);
+                var symbolInfo = _semanticModel.GetSymbolInfo(
+                    invocationOrCreation,
+                    cancellationToken
+                );
                 var method = symbolInfo.Symbol;
                 if (TryAnalyzeInvocation(method, argName, argIndex))
                     return true;
@@ -190,18 +223,21 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             return default;
         }
 
-        private bool TryAnalyzeInvocation(ISymbol? symbol, string? argName, int? argIndex)
-            => symbol is IMethodSymbol method &&
-               method.DeclaredAccessibility == Accessibility.Public &&
-               method.MethodKind == MethodKind.Ordinary &&
-               IsDateTimeType(method.ContainingType) &&
-               AnalyzeStringLiteral(method, argName, argIndex);
+        private bool TryAnalyzeInvocation(ISymbol? symbol, string? argName, int? argIndex) =>
+            symbol is IMethodSymbol method
+            && method.DeclaredAccessibility == Accessibility.Public
+            && method.MethodKind == MethodKind.Ordinary
+            && IsDateTimeType(method.ContainingType)
+            && AnalyzeStringLiteral(method, argName, argIndex);
 
-        private bool IsDateTimeType(ITypeSymbol? type)
-            => _dateTimeType.Equals(type) || _dateTimeOffsetType.Equals(type);
+        private bool IsDateTimeType(ITypeSymbol? type) =>
+            _dateTimeType.Equals(type) || _dateTimeOffsetType.Equals(type);
 
-        private static bool AnalyzeStringLiteral(IMethodSymbol method, string? argName, int? argIndex)
-        {
+        private static bool AnalyzeStringLiteral(
+            IMethodSymbol method,
+            string? argName,
+            int? argIndex
+        ) {
             Debug.Assert(argName != null || argIndex != null);
 
             var parameters = method.Parameters;

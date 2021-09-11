@@ -11,16 +11,32 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         private static class Log
         {
             private static readonly Action<ILogger, uint, Exception?> _closeUrlGroupError =
-                LoggerMessage.Define<uint>(LogLevel.Error, LoggerEventIds.CloseUrlGroupError, "HttpCloseUrlGroup; Result: {StatusCode}");
+                LoggerMessage.Define<uint>(
+                    LogLevel.Error,
+                    LoggerEventIds.CloseUrlGroupError,
+                    "HttpCloseUrlGroup; Result: {StatusCode}"
+                );
 
             private static readonly Action<ILogger, string, Exception?> _registeringPrefix =
-                LoggerMessage.Define<string>(LogLevel.Debug, LoggerEventIds.RegisteringPrefix, "Listening on prefix: {UriPrefix}");
+                LoggerMessage.Define<string>(
+                    LogLevel.Debug,
+                    LoggerEventIds.RegisteringPrefix,
+                    "Listening on prefix: {UriPrefix}"
+                );
 
             private static readonly Action<ILogger, Exception?> _setUrlPropertyError =
-                LoggerMessage.Define(LogLevel.Error, LoggerEventIds.SetUrlPropertyError, "SetUrlGroupProperty");
+                LoggerMessage.Define(
+                    LogLevel.Error,
+                    LoggerEventIds.SetUrlPropertyError,
+                    "SetUrlGroupProperty"
+                );
 
             private static readonly Action<ILogger, string, Exception?> _unregisteringPrefix =
-                LoggerMessage.Define<string>(LogLevel.Information, LoggerEventIds.UnregisteringPrefix, "Stop listening on prefix: {UriPrefix}");
+                LoggerMessage.Define<string>(
+                    LogLevel.Information,
+                    LoggerEventIds.UnregisteringPrefix,
+                    "Stop listening on prefix: {UriPrefix}"
+                );
 
             public static void CloseUrlGroupError(ILogger logger, uint statusCode)
             {

@@ -15,12 +15,11 @@ internal static partial class Interop
             ReadOnlySpan<byte> password,
             ReadOnlySpan<byte> salt,
             int iterations,
-            Span<byte> destination)
-        {
-            fixed (byte* pPassword = password)
-            fixed (byte* pSalt = salt)
-            fixed (byte* pDestination = destination)
-            {
+            Span<byte> destination
+        ) {
+            fixed (byte* pPassword = password)fixed (byte* pSalt = salt)fixed (
+                byte* pDestination = destination
+            ) {
                 int ret = AppleCryptoNative_Pbkdf2(
                     prfAlgorithm,
                     pPassword,
@@ -30,13 +29,15 @@ internal static partial class Interop
                     iterations,
                     pDestination,
                     destination.Length,
-                    out int ccStatus);
+                    out int ccStatus
+                );
 
                 if (ret == 0)
                 {
                     throw Interop.AppleCrypto.CreateExceptionForCCError(
                         ccStatus,
-                        Interop.AppleCrypto.CCCryptorStatus);
+                        Interop.AppleCrypto.CCCryptorStatus
+                    );
                 }
 
                 if (ret != 1)
@@ -57,6 +58,7 @@ internal static partial class Interop
             int iterations,
             byte* derivedKey,
             int derivedKeyLen,
-            out int errorCode);
+            out int errorCode
+        );
     }
 }

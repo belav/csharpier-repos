@@ -14,7 +14,7 @@ namespace GitHub_19397
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static long getValue()
         {
-            return(0x0101010101010101L);
+            return (0x0101010101010101L);
         }
         static int Main()
         {
@@ -31,6 +31,5 @@ namespace GitHub_19397
                 return -1;
             }
         }
-
     }
 }

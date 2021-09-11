@@ -23,8 +23,10 @@ namespace Internal.Cryptography.Pal
         private static readonly TimeSpan s_lastWriteRecheckInterval = TimeSpan.FromSeconds(5);
         private static readonly TimeSpan s_assumeInvalidInterval = TimeSpan.FromMinutes(5);
         private static readonly Stopwatch s_recheckStopwatch = new Stopwatch();
-        private static readonly DirectoryInfo? s_rootStoreDirectoryInfo = SafeOpenRootDirectoryInfo();
-        private static readonly DirectoryInfo? s_rootLinkedStoreDirectoryInfo = SafeOpenLinkedRootDirectoryInfo();
+        private static readonly DirectoryInfo? s_rootStoreDirectoryInfo =
+            SafeOpenRootDirectoryInfo();
+        private static readonly DirectoryInfo? s_rootLinkedStoreDirectoryInfo =
+            SafeOpenLinkedRootDirectoryInfo();
         private static readonly FileInfo? s_rootStoreFileInfo = SafeOpenRootFileInfo();
 
         // Use non-Value-Tuple so that it's an atomic update.
@@ -46,7 +48,6 @@ namespace Internal.Cryptography.Pal
         internal static CachedSystemStoreProvider MachineIntermediate { get; } =
             new CachedSystemStoreProvider(false);
 
-
         public void Dispose()
         {
             // No-op
@@ -61,13 +62,17 @@ namespace Internal.Cryptography.Pal
 
             for (int i = 0; i < count; i++)
             {
-                X509Certificate2 clone = new X509Certificate2(Interop.Crypto.GetX509StackField(nativeColl, i));
+                X509Certificate2 clone = new X509Certificate2(
+                    Interop.Crypto.GetX509StackField(nativeColl, i)
+                );
                 collection.Add(clone);
             }
         }
 
-        internal static void GetNativeCollections(out SafeX509StackHandle root, out SafeX509StackHandle intermediate)
-        {
+        internal static void GetNativeCollections(
+            out SafeX509StackHandle root,
+            out SafeX509StackHandle intermediate
+        ) {
             Tuple<SafeX509StackHandle, SafeX509StackHandle> nativeColls = GetCollections();
             root = nativeColls.Item1;
             intermediate = nativeColls.Item2;
@@ -104,12 +109,25 @@ namespace Internal.Cryptography.Pal
                     dirInfo?.Refresh();
                     linkInfo?.Refresh();
 
-                    if (ret == null ||
-                        elapsed > s_assumeInvalidInterval ||
-                        (fileInfo != null && fileInfo.Exists && fileInfo.LastWriteTimeUtc != s_fileCertsLastWrite) ||
-                        (dirInfo != null && dirInfo.Exists && dirInfo.LastWriteTimeUtc != s_directoryCertsLastWrite) ||
-                        (linkInfo != null && linkInfo.Exists && linkInfo.LastWriteTimeUtc != s_linkCertsLastWrite))
-                    {
+                    if (
+                        ret == null
+                        || elapsed > s_assumeInvalidInterval
+                        || (
+                            fileInfo != null
+                            && fileInfo.Exists
+                            && fileInfo.LastWriteTimeUtc != s_fileCertsLastWrite
+                        )
+                        || (
+                            dirInfo != null
+                            && dirInfo.Exists
+                            && dirInfo.LastWriteTimeUtc != s_directoryCertsLastWrite
+                        )
+                        || (
+                            linkInfo != null
+                            && linkInfo.Exists
+                            && linkInfo.LastWriteTimeUtc != s_linkCertsLastWrite
+                        )
+                    ) {
                         ret = LoadMachineStores(dirInfo, fileInfo, linkInfo);
                     }
                 }
@@ -122,11 +140,12 @@ namespace Internal.Cryptography.Pal
         private static Tuple<SafeX509StackHandle, SafeX509StackHandle> LoadMachineStores(
             DirectoryInfo? rootStorePath,
             FileInfo? rootStoreFile,
-            DirectoryInfo? linkedRootPath)
-        {
+            DirectoryInfo? linkedRootPath
+        ) {
             Debug.Assert(
                 Monitor.IsEntered(s_recheckStopwatch),
-                "LoadMachineStores assumes a lock(s_recheckStopwatch)");
+                "LoadMachineStores assumes a lock(s_recheckStopwatch)"
+            );
 
             SafeX509StackHandle rootStore = Interop.Crypto.NewX509Stack();
             Interop.Crypto.CheckValidOpenSslHandle(rootStore);
@@ -178,9 +197,10 @@ namespace Internal.Cryptography.Pal
                     // Because we don't validate for a specific usage, derived certificates are rejected.
                     // For now, we skip the certificates with AUX data and use the regular certificates.
                     ICertificatePal? pal;
-                    while (OpenSslX509CertificateReader.TryReadX509PemNoAux(fileBio, out pal) ||
-                        OpenSslX509CertificateReader.TryReadX509Der(fileBio, out pal))
-                    {
+                    while (
+                        OpenSslX509CertificateReader.TryReadX509PemNoAux(fileBio, out pal)
+                        || OpenSslX509CertificateReader.TryReadX509Der(fileBio, out pal)
+                    ) {
                         X509Certificate2 cert = new X509Certificate2(pal);
 
                         // The HashSets are just used for uniqueness filters, they do not survive this method.
@@ -198,7 +218,6 @@ namespace Internal.Cryptography.Pal
                                     // The ownership has been transferred to the stack
                                     tmp.SetHandleAsInvalid();
                                 }
-
                                 continue;
                             }
                         }
@@ -216,7 +235,6 @@ namespace Internal.Cryptography.Pal
                                     // The ownership has been transferred to the stack
                                     tmp.SetHandleAsInvalid();
                                 }
-
                                 continue;
                             }
                         }
@@ -238,12 +256,15 @@ namespace Internal.Cryptography.Pal
                 cert.Dispose();
             }
 
-            Tuple<SafeX509StackHandle, SafeX509StackHandle> newCollections =
-                Tuple.Create(rootStore, intermedStore);
+            Tuple<SafeX509StackHandle, SafeX509StackHandle> newCollections = Tuple.Create(
+                rootStore,
+                intermedStore
+            );
 
             Debug.Assert(
                 Monitor.IsEntered(s_recheckStopwatch),
-                "LoadMachineStores assumes a lock(s_recheckStopwatch)");
+                "LoadMachineStores assumes a lock(s_recheckStopwatch)"
+            );
 
             // The existing collections are not Disposed here, intentionally.
             // They could be in the gap between when they are returned from this method and not yet used
@@ -320,7 +341,7 @@ namespace Internal.Cryptography.Pal
                 {
                     // relative link
                     var root = new DirectoryInfo(rootDirectory);
-                    root  = new DirectoryInfo(Path.Join(root.Parent?.FullName, linkedDirectory));
+                    root = new DirectoryInfo(Path.Join(root.Parent?.FullName, linkedDirectory));
                     rootDirectory = root.FullName;
                 }
 

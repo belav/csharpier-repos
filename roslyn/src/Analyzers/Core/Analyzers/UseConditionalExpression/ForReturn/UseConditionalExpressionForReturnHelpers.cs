@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             [NotNullWhen(true)] out IOperation? trueStatement,
             [NotNullWhen(true)] out IOperation? falseStatement,
             out IReturnOperation? trueReturn,
-            out IReturnOperation? falseReturn)
-        {
+            out IReturnOperation? falseReturn
+        ) {
             trueReturn = null;
             falseReturn = null;
 
@@ -58,12 +58,15 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     return false;
             }
 
-            trueStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(trueStatement);
-            falseStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(falseStatement);
+            trueStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(
+                trueStatement
+            );
+            falseStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(
+                falseStatement
+            );
 
             // Both return-statements must be of the form "return value"
-            if (!IsReturnExprOrThrow(trueStatement) ||
-                !IsReturnExprOrThrow(falseStatement))
+            if (!IsReturnExprOrThrow(trueStatement) || !IsReturnExprOrThrow(falseStatement))
             {
                 return false;
             }
@@ -74,16 +77,18 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             var falseThrow = falseStatement as IThrowOperation;
 
             var anyReturn = trueReturn ?? falseReturn;
-            if (UseConditionalExpressionHelpers.HasInconvertibleThrowStatement(
-                    syntaxFacts, anyReturn.GetRefKind(containingSymbol) != RefKind.None,
-                    trueThrow, falseThrow))
-            {
+            if (
+                UseConditionalExpressionHelpers.HasInconvertibleThrowStatement(
+                    syntaxFacts,
+                    anyReturn.GetRefKind(containingSymbol) != RefKind.None,
+                    trueThrow,
+                    falseThrow
+                )
+            ) {
                 return false;
             }
 
-            if (trueReturn != null &&
-                falseReturn != null &&
-                trueReturn.Kind != falseReturn.Kind)
+            if (trueReturn != null && falseReturn != null && trueReturn.Kind != falseReturn.Kind)
             {
                 // Not allowed if these are different types of returns.  i.e.
                 // "yield return ..." and "return ...".
@@ -97,8 +102,7 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 return false;
             }
 
-            if (trueReturn?.Kind == OperationKind.YieldReturn &&
-                ifOperation.WhenFalse == null)
+            if (trueReturn?.Kind == OperationKind.YieldReturn && ifOperation.WhenFalse == null)
             {
                 // we have the following:
                 //
@@ -117,7 +121,11 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             }
 
             return UseConditionalExpressionHelpers.CanConvert(
-                syntaxFacts, ifOperation, trueStatement, falseStatement);
+                syntaxFacts,
+                ifOperation,
+                trueStatement,
+                falseStatement
+            );
         }
 
         private static bool IsReturnExprOrThrow(IOperation? statement)

@@ -24,6 +24,7 @@ public class ReadAndWrite
                 }
             }
         }
+
         finally
         {
             Console.SetOut(savedStandardOutput);
@@ -34,7 +35,7 @@ public class ReadAndWrite
     public static void WriteToOutputStream_EmptyArray()
     {
         Stream outStream = Console.OpenStandardOutput();
-        outStream.Write(new byte[] { }, 0, 0);
+        outStream.Write(new byte[] {  }, 0, 0);
     }
 
     [Fact]
@@ -59,6 +60,7 @@ public class ReadAndWrite
                 }
             }
         }
+
         finally
         {
             Console.SetOut(savedStandardOutput);
@@ -188,6 +190,7 @@ public class ReadAndWrite
                 await writer.FlushAsync();
             }
         }
+
         finally
         {
             Console.SetOut(savedStandardOutput);
@@ -248,10 +251,16 @@ public class ReadAndWrite
             Assert.Equal(strAsBytes.Length, encoding.GetByteCount(charsPtr, strAsChars.Length));
 
             byte[] outputArr = new byte[encoding.GetMaxByteCount(strAsChars.Length)];
-            Assert.Equal(strAsBytes.Length, encoding.GetBytes(strAsChars, 0, strAsChars.Length, outputArr, 0));
+            Assert.Equal(
+                strAsBytes.Length,
+                encoding.GetBytes(strAsChars, 0, strAsChars.Length, outputArr, 0)
+            );
             fixed (byte* bytesPtr = outputArr)
             {
-                Assert.Equal(strAsBytes.Length, encoding.GetBytes(charsPtr, strAsChars.Length, bytesPtr, outputArr.Length));
+                Assert.Equal(
+                    strAsBytes.Length,
+                    encoding.GetBytes(charsPtr, strAsChars.Length, bytesPtr, outputArr.Length)
+                );
             }
             Assert.Equal(strAsBytes.Length, encoding.GetBytes(str, 0, str.Length, outputArr, 0));
         }
@@ -274,6 +283,7 @@ public class ReadAndWrite
             // The primary purpose of ConsoleEncoding is to return an empty preamble.
             Assert.Equal(Array.Empty<byte>(), Console.Out.Encoding.GetPreamble());
         }
+
         finally
         {
             Console.OutputEncoding = curEncoding;
@@ -300,6 +310,7 @@ public class ReadAndWrite
             Assert.Equal(Console.OutputEncoding.CodePage, Encoding.Unicode.CodePage);
             ValidateConsoleEncoding(Console.Out.Encoding);
         }
+
         finally
         {
             Console.OutputEncoding = curEncoding;
@@ -321,7 +332,8 @@ public class ReadAndWrite
         Assert.Throws<PlatformNotSupportedException>(() => Console.InputEncoding);
     }
 
-    static readonly string[] s_testLines = new string[] {
+    static readonly string[] s_testLines = new string[]
+    {
         "3232 Hello32 Hello 5032 Hello 50 532 Hello 50 5 aTrueaabcdbc1.23123.4561.23439505050System.ObjectHello World",
         "32",
         "",
@@ -388,8 +400,8 @@ public class ReadAndWrite
                     }
                 }
             }
-
         }
+
         finally
         {
             Console.SetOut(savedStandardOutput);
@@ -400,18 +412,27 @@ public class ReadAndWrite
     [Fact]
     public static void OpenStandardInput_NegativeBufferSize_ThrowsArgumentOutOfRangeException()
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () => Console.OpenStandardInput(-1));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "bufferSize",
+            () => Console.OpenStandardInput(-1)
+        );
     }
 
     [Fact]
     public static void OpenStandardOutput_NegativeBufferSize_ThrowsArgumentOutOfRangeException()
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () => Console.OpenStandardOutput(-1));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "bufferSize",
+            () => Console.OpenStandardOutput(-1)
+        );
     }
 
     [Fact]
     public static void OpenStandardError_NegativeBufferSize_ThrowsArgumentOutOfRangeException()
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () => Console.OpenStandardError(-1));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "bufferSize",
+            () => Console.OpenStandardError(-1)
+        );
     }
 }

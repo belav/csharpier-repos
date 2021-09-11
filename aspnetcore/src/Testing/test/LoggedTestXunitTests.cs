@@ -112,7 +112,10 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
             LoggerFactory = loggerFactory;
             AddTestLogging(serviceCollection);
 
-            Assert.Same(loggerFactory, serviceCollection.BuildServiceProvider().GetRequiredService<ILoggerFactory>());
+            Assert.Same(
+                loggerFactory,
+                serviceCollection.BuildServiceProvider().GetRequiredService<ILoggerFactory>()
+            );
         }
 
         [ConditionalTheory]
@@ -121,7 +124,10 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         public void LoggedTheoryNullArgumentsAreEscaped(string argument)
         {
             Assert.NotNull(LoggerFactory);
-            Assert.Equal($"{nameof(LoggedTheoryNullArgumentsAreEscaped)}_null", ResolvedTestMethodName);
+            Assert.Equal(
+                $"{nameof(LoggedTheoryNullArgumentsAreEscaped)}_null",
+                ResolvedTestMethodName
+            );
             // Use the test argument
             Assert.Null(argument);
         }
@@ -146,7 +152,7 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         {
             BeginScopeContext context = null;
             TestSink.ScopeStarted += ctx => context = ctx;
-            using (Logger.BeginScope("Scope")) {}
+            using (Logger.BeginScope("Scope")) { }
             Assert.Equal(TestSink.Scopes.Single(), context);
         }
     }
@@ -178,15 +184,20 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         public bool SetupInvoked { get; private set; } = false;
         public bool ITestOutputHelperIsInitialized { get; private set; } = false;
 
-        public override void Initialize(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
-        {
+        public override void Initialize(
+            TestContext context,
+            MethodInfo methodInfo,
+            object[] testMethodArguments,
+            ITestOutputHelper testOutputHelper
+        ) {
             base.Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
 
             try
             {
                 TestOutputHelper.WriteLine("Test");
                 ITestOutputHelperIsInitialized = true;
-            } catch { }
+            }
+            catch { }
             SetupInvoked = true;
         }
     }

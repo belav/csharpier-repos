@@ -33,10 +33,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression item,
             bool negated,
             SelectExpression subquery,
-            RelationalTypeMapping? typeMapping)
-            : this(Check.NotNull(item, nameof(item)), null, Check.NotNull(subquery, nameof(subquery)), negated, typeMapping)
-        {
-        }
+            RelationalTypeMapping? typeMapping
+        ) : this(
+            Check.NotNull(item, nameof(item)),
+            null,
+            Check.NotNull(subquery, nameof(subquery)),
+            negated,
+            typeMapping
+        ) { }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN values expression.
@@ -50,10 +54,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression item,
             bool negated,
             SqlExpression values,
-            RelationalTypeMapping? typeMapping)
-            : this(Check.NotNull(item, nameof(item)), Check.NotNull(values, nameof(values)), null, negated, typeMapping)
-        {
-        }
+            RelationalTypeMapping? typeMapping
+        ) : this(
+            Check.NotNull(item, nameof(item)),
+            Check.NotNull(values, nameof(values)),
+            null,
+            negated,
+            typeMapping
+        ) { }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN subquery expression.
@@ -66,10 +74,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression item,
             SelectExpression subquery,
             bool negated,
-            RelationalTypeMapping? typeMapping)
-            : this(Check.NotNull(item, nameof(item)), null, Check.NotNull(subquery, nameof(subquery)), negated, typeMapping)
-        {
-        }
+            RelationalTypeMapping? typeMapping
+        ) : this(
+            Check.NotNull(item, nameof(item)),
+            null,
+            Check.NotNull(subquery, nameof(subquery)),
+            negated,
+            typeMapping
+        ) { }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="InExpression" /> class which represents a <paramref name="item" /> IN values expression.
@@ -82,18 +94,22 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression item,
             SqlExpression values,
             bool negated,
-            RelationalTypeMapping? typeMapping)
-            : this(Check.NotNull(item, nameof(item)), Check.NotNull(values, nameof(values)), null, negated, typeMapping)
-        {
-        }
+            RelationalTypeMapping? typeMapping
+        ) : this(
+            Check.NotNull(item, nameof(item)),
+            Check.NotNull(values, nameof(values)),
+            null,
+            negated,
+            typeMapping
+        ) { }
 
         private InExpression(
             SqlExpression item,
             SqlExpression? values,
             SelectExpression? subquery,
             bool negated,
-            RelationalTypeMapping? typeMapping)
-            : base(typeof(bool), typeMapping)
+            RelationalTypeMapping? typeMapping
+        ) : base(typeof(bool), typeMapping)
         {
             Item = item;
             Subquery = subquery;
@@ -137,8 +153,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Negates this expression by changing presence/absence state indicated by <see cref="IsNegated" />.
         /// </summary>
         /// <returns> An expression which is negated form of this expression. </returns>
-        public virtual InExpression Negate()
-            => new(Item, Values, Subquery, !IsNegated, TypeMapping);
+        public virtual InExpression Negate() =>
+            new(Item, Values, Subquery, !IsNegated, TypeMapping);
 
         /// <summary>
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -151,14 +167,15 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual InExpression Update(
             SqlExpression item,
             SqlExpression? values,
-            SelectExpression? subquery)
-        {
+            SelectExpression? subquery
+        ) {
             Check.NotNull(item, nameof(item));
 
-            if (values != null
-                && subquery != null)
+            if (values != null && subquery != null)
             {
-                throw new ArgumentException(RelationalStrings.EitherOfTwoValuesMustBeNull(nameof(values), nameof(subquery)));
+                throw new ArgumentException(
+                    RelationalStrings.EitherOfTwoValuesMustBeNull(nameof(values), nameof(subquery))
+                );
             }
 
             return item != Item || subquery != Subquery || values != Values
@@ -182,9 +199,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     expressionPrinter.Visit(Subquery);
                 }
             }
-            else if (Values is SqlConstantExpression constantValuesExpression
-                && constantValuesExpression.Value is IEnumerable constantValues)
-            {
+            else if (
+                Values is SqlConstantExpression constantValuesExpression
+                && constantValuesExpression.Value is IEnumerable constantValues
+            ) {
                 var first = true;
                 foreach (var item in constantValues)
                 {
@@ -194,7 +212,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     }
 
                     first = false;
-                    expressionPrinter.Append(constantValuesExpression.TypeMapping?.GenerateSqlLiteral(item) ?? item?.ToString() ?? "NULL");
+                    expressionPrinter.Append(
+                        constantValuesExpression.TypeMapping?.GenerateSqlLiteral(item)
+                            ?? item?.ToString()
+                            ?? "NULL"
+                    );
                 }
             }
             else
@@ -206,21 +228,26 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is InExpression inExpression
-                    && Equals(inExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is InExpression inExpression && Equals(inExpression)
+            );
 
-        private bool Equals(InExpression inExpression)
-            => base.Equals(inExpression)
-                && Item.Equals(inExpression.Item)
-                && IsNegated.Equals(inExpression.IsNegated)
-                && (Values == null ? inExpression.Values == null : Values.Equals(inExpression.Values))
-                && (Subquery == null ? inExpression.Subquery == null : Subquery.Equals(inExpression.Subquery));
+        private bool Equals(InExpression inExpression) =>
+            base.Equals(inExpression)
+            && Item.Equals(inExpression.Item)
+            && IsNegated.Equals(inExpression.IsNegated)
+            && (Values == null ? inExpression.Values == null : Values.Equals(inExpression.Values))
+            && (
+                Subquery == null
+                    ? inExpression.Subquery == null
+                    : Subquery.Equals(inExpression.Subquery)
+            );
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Item, IsNegated, Values, Subquery);
+        public override int GetHashCode() =>
+            HashCode.Combine(base.GetHashCode(), Item, IsNegated, Values, Subquery);
     }
 }

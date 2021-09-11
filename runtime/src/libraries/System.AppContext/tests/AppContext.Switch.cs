@@ -5,7 +5,6 @@ using Xunit;
 
 namespace System.Tests
 {
-
     public partial class AppContextTests
     {
         [Fact]
@@ -16,7 +15,6 @@ namespace System.Tests
             Assert.False(AppContext.TryGetSwitch(switchName, out isEnabled));
             Assert.False(isEnabled);
         }
-
 
         [Fact]
         public void EnableSwitch()
@@ -118,7 +116,8 @@ namespace System.Tests
         [Fact]
         public void TryGetSwitch_SwitchDefined()
         {
-            bool isEnabled, exists;
+            bool isEnabled,
+                exists;
             string randomSwitchName = GetSwitchName();
 
             // Enable switch
@@ -143,8 +142,9 @@ namespace System.Tests
             Assert.False(isEnabled);
         }
 
-        private static string GetSwitchName([Runtime.CompilerServices.CallerLineNumber] int sourceLine = -1)
-        {
+        private static string GetSwitchName(
+            [Runtime.CompilerServices.CallerLineNumber] int sourceLine = -1
+        ) {
             Assert.True(sourceLine != -1, "The 'sourceLine' should have retrieved from its caller");
             return "Switch.Line" + sourceLine;
         }

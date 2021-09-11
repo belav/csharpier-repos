@@ -10,8 +10,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace JIT.HardwareIntrinsics.X86
 {
-    public unsafe struct SimdScalarUnaryOpTest__DataTable<TOp1> : IDisposable
-        where TOp1 : struct
+    public unsafe struct SimdScalarUnaryOpTest__DataTable<TOp1> : IDisposable where TOp1 : struct
     {
         public byte[] inArray;
 
@@ -32,10 +31,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             this.alignment = (ulong)alignment;
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArrayPtr), ref Unsafe.As<TOp1, byte>(ref inArray[0]), (uint)sizeOfinArray);
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.AsRef<byte>(inArrayPtr),
+                ref Unsafe.As<TOp1, byte>(ref inArray[0]),
+                (uint)sizeOfinArray
+            );
         }
 
-        public void* inArrayPtr => Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), alignment);
+        public void* inArrayPtr =>
+            Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
         public void Dispose()
         {

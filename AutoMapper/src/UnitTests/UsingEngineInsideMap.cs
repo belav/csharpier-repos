@@ -23,20 +23,31 @@
             public int Foo { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Dest>()
-                .ForMember(dest => dest.Child,
-                    opt =>
-                        opt.MapFrom(
-                            (src, dest, destMember, context) =>
-                                context.Mapper.Map(src, destMember, typeof (Source), typeof (ChildDest))));
-            cfg.CreateMap<Source, ChildDest>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            dest => dest.Child,
+                            opt =>
+                                opt.MapFrom(
+                                    (src, dest, destMember, context) =>
+                                        context.Mapper.Map(
+                                            src,
+                                            destMember,
+                                            typeof(Source),
+                                            typeof(ChildDest)
+                                        )
+                                )
+                        );
+                    cfg.CreateMap<Source, ChildDest>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _dest = Mapper.Map<Source, Dest>(new Source {Foo = 5});
+            _dest = Mapper.Map<Source, Dest>(new Source { Foo = 5 });
         }
 
         [Fact]
@@ -58,10 +69,18 @@
             public string Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
-            cfg.CreateMap<Source, Destination>().ForMember(d=>d.Value, o=>o.MapFrom((s,d,dm, context)=>context.Mapper.Map<string>(null))));
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                    cfg.CreateMap<Source, Destination>()
+                        .ForMember(
+                            d => d.Value,
+                            o => o.MapFrom((s, d, dm, context) => context.Mapper.Map<string>(null))
+                        )
+            );
 
         [Fact]
-        public void Should_return_null() => Mapper.Map<Destination>(new Source()).Value.ShouldBeNull();
+        public void Should_return_null() =>
+            Mapper.Map<Destination>(new Source()).Value.ShouldBeNull();
     }
 }

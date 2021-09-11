@@ -10,6 +10,9 @@ internal static partial class Interop
     {
         [DllImport(Libraries.Advapi32, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool NotifyChangeEventLog(SafeEventLogReadHandle hEventLog, SafeWaitHandle hEvent);
+        public static extern bool NotifyChangeEventLog(
+            SafeEventLogReadHandle hEventLog,
+            SafeWaitHandle hEvent
+        );
     }
 }

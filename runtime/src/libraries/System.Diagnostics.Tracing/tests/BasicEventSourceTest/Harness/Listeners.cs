@@ -22,15 +22,21 @@ namespace BasicEventSourceTests
     /// </summary>
     public abstract class Listener : IDisposable
     {
-        public Action<Event> OnEvent;           // Called when you get events.
+        public Action<Event> OnEvent; // Called when you get events.
         public abstract void Dispose();
         /// <summary>
         /// Send a command to an eventSource.   Be careful this is async.  You may wish to do a WaitForEnable
         /// </summary>
-        public abstract void EventSourceCommand(string eventSourceName, EventCommand command, FilteringOptions options = null);
+        public abstract void EventSourceCommand(
+            string eventSourceName,
+            EventCommand command,
+            FilteringOptions options = null
+        );
 
-        public void EventSourceSynchronousEnable(EventSource eventSource, FilteringOptions options = null)
-        {
+        public void EventSourceSynchronousEnable(
+            EventSource eventSource,
+            FilteringOptions options = null
+        ) {
             EventSourceCommand(eventSource.Name, EventCommand.Enable, options);
             WaitForEnable(eventSource);
         }
@@ -57,15 +63,23 @@ namespace BasicEventSourceTests
     /// </summary>
     public class FilteringOptions
     {
-        public FilteringOptions() { Keywords = EventKeywords.All; Level = EventLevel.Verbose; }
+        public FilteringOptions()
+        {
+            Keywords = EventKeywords.All;
+            Level = EventLevel.Verbose;
+        }
         public EventKeywords Keywords;
         public EventLevel Level;
         public IDictionary<string, string> Args;
 
         public override string ToString()
         {
-            return string.Format("<Options Keywords='{0}' Level'{1}' ArgsCount='{2}'",
-                ((ulong)Keywords).ToString("x"), Level, Args.Count);
+            return string.Format(
+                "<Options Keywords='{0}' Level'{1}' ArgsCount='{2}'",
+                ((ulong)Keywords).ToString("x"),
+                Level,
+                Args.Count
+            );
         }
     }
 
@@ -76,8 +90,14 @@ namespace BasicEventSourceTests
     /// </summary>
     public abstract class Event
     {
-        public virtual bool IsEtw { get { return false; } }
-        public virtual bool IsEventListener { get { return false; } }
+        public virtual bool IsEtw
+        {
+            get { return false; }
+        }
+        public virtual bool IsEventListener
+        {
+            get { return false; }
+        }
         public abstract string ProviderName { get; }
         public abstract string EventName { get; }
         public abstract object PayloadValue(int propertyIndex, string propertyName);
@@ -175,8 +195,8 @@ namespace BasicEventSourceTests
             if (useEventsToListen)
             {
                 _listener = new HelperEventListener(null);
-                _listener.EventSourceCreated += (sender, eventSourceCreatedEventArgs)
-                    => _onEventSourceCreated?.Invoke(eventSourceCreatedEventArgs.EventSource);
+                _listener.EventSourceCreated += (sender, eventSourceCreatedEventArgs) =>
+                    _onEventSourceCreated?.Invoke(eventSourceCreatedEventArgs.EventSource);
                 _listener.EventWritten += mListenerEventWritten;
             }
             else
@@ -207,9 +227,17 @@ namespace BasicEventSourceTests
                 throw new NotImplementedException();
         }
 
-        public override void EventSourceCommand(string eventSourceName, EventCommand command, FilteringOptions options = null)
-        {
-            EventTestHarness.LogWriteLine("Sending command {0} to EventSource {1} Options {2}", eventSourceName, command, options);
+        public override void EventSourceCommand(
+            string eventSourceName,
+            EventCommand command,
+            FilteringOptions options = null
+        ) {
+            EventTestHarness.LogWriteLine(
+                "Sending command {0} to EventSource {1} Options {2}",
+                eventSourceName,
+                command,
+                options
+            );
 
             if (options == null)
                 options = new FilteringOptions();
@@ -223,12 +251,12 @@ namespace BasicEventSourceTests
                 }
             }
 
-            _onEventSourceCreated += delegate (EventSource sourceBeingCreated)
+            _onEventSourceCreated += delegate(EventSource sourceBeingCreated)
             {
                 if (eventSourceName != null && eventSourceName == sourceBeingCreated.Name)
                 {
                     DoCommand(sourceBeingCreated, command, options);
-                    eventSourceName = null;         // so we only do it once.
+                    eventSourceName = null; // so we only do it once.
                 }
             };
         }
@@ -271,13 +299,25 @@ namespace BasicEventSourceTests
 
             internal EventListenerEvent(EventWrittenEventArgs data) => Data = data;
 
-            public override bool IsEventListener { get { return true; } }
+            public override bool IsEventListener
+            {
+                get { return true; }
+            }
 
-            public override string ProviderName { get { return Data.EventSource.Name; } }
+            public override string ProviderName
+            {
+                get { return Data.EventSource.Name; }
+            }
 
-            public override string EventName { get { return Data.EventName; } }
+            public override string EventName
+            {
+                get { return Data.EventName; }
+            }
 
-            public override IList<string> PayloadNames { get { return Data.PayloadNames; } }
+            public override IList<string> PayloadNames
+            {
+                get { return Data.PayloadNames; }
+            }
 
             public override int PayloadCount
             {

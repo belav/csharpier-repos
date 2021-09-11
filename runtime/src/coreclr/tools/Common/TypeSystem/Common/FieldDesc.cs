@@ -23,52 +23,30 @@ namespace Internal.TypeSystem
         public override bool Equals(object o)
         {
             // Its only valid to compare two FieldDescs in the same context
-            Debug.Assert(o is not FieldDesc || object.ReferenceEquals(((FieldDesc)o).Context, this.Context));
+            Debug.Assert(
+                o is not FieldDesc || object.ReferenceEquals(((FieldDesc)o).Context, this.Context)
+            );
             return object.ReferenceEquals(this, o);
         }
 
         public virtual string Name
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
-        public abstract DefType OwningType
-        {
-            get;
-        }
+        public abstract DefType OwningType { get; }
 
-        public abstract TypeDesc FieldType
-        {
-            get;
-        }
+        public abstract TypeDesc FieldType { get; }
 
-        public abstract bool IsStatic
-        {
-            get;
-        }
+        public abstract bool IsStatic { get; }
 
-        public abstract bool IsInitOnly
-        {
-            get;
-        }
+        public abstract bool IsInitOnly { get; }
 
-        public abstract bool IsThreadStatic
-        {
-            get;
-        }
+        public abstract bool IsThreadStatic { get; }
 
-        public abstract bool HasRva
-        {
-            get;
-        }
+        public abstract bool HasRva { get; }
 
-        public abstract bool IsLiteral
-        {
-            get;
-        }
+        public abstract bool IsLiteral { get; }
 
         public abstract bool HasCustomAttribute(string attributeNamespace, string attributeName);
 
@@ -79,20 +57,25 @@ namespace Internal.TypeSystem
 
         public bool IsTypicalFieldDefinition
         {
-            get
-            {
-                return GetTypicalFieldDefinition() == this;
-            }
+            get { return GetTypicalFieldDefinition() == this; }
         }
 
-        public virtual FieldDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
-        {
+        public virtual FieldDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        ) {
             FieldDesc field = this;
 
             TypeDesc owningType = field.OwningType;
-            TypeDesc instantiatedOwningType = owningType.InstantiateSignature(typeInstantiation, methodInstantiation);
+            TypeDesc instantiatedOwningType = owningType.InstantiateSignature(
+                typeInstantiation,
+                methodInstantiation
+            );
             if (owningType != instantiatedOwningType)
-                field = instantiatedOwningType.Context.GetFieldForInstantiatedType(field.GetTypicalFieldDefinition(), (InstantiatedType)instantiatedOwningType);
+                field = instantiatedOwningType.Context.GetFieldForInstantiatedType(
+                    field.GetTypicalFieldDefinition(),
+                    (InstantiatedType)instantiatedOwningType
+                );
 
             return field;
         }

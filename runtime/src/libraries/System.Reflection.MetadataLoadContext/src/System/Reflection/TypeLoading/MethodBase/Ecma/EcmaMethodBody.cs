@@ -12,8 +12,10 @@ namespace System.Reflection.TypeLoading.Ecma
     {
         private readonly IRoMethodBase _roMethodBase;
 
-        internal EcmaMethodBody(IRoMethodBase roMethodBase, MethodBodyBlock methodBodyBlock)
-            : base()
+        internal EcmaMethodBody(
+            IRoMethodBase roMethodBase,
+            MethodBodyBlock methodBodyBlock
+        ) : base()
         {
             _roMethodBase = roMethodBase;
             _neverAccessThisExceptThroughBlockProperty = methodBodyBlock;
@@ -35,7 +37,8 @@ namespace System.Reflection.TypeLoading.Ecma
                 if (sigHandle.IsNil)
                     return Array.Empty<LocalVariableInfo>();
 
-                ImmutableArray<RoType> sig = sigHandle.GetStandaloneSignature(reader).DecodeLocalSignature(typeProvider, TypeContext);
+                ImmutableArray<RoType> sig = sigHandle.GetStandaloneSignature(reader)
+                    .DecodeLocalSignature(typeProvider, TypeContext);
                 int count = sig.Length;
                 LocalVariableInfo[] lvis = new LocalVariableInfo[count];
                 for (int i = 0; i < count; i++)
@@ -48,7 +51,11 @@ namespace System.Reflection.TypeLoading.Ecma
                         localType = localType.SkipTypeWrappers();
                     }
 
-                    lvis[i] = new RoLocalVariableInfo(localIndex: i, isPinned: isPinned, localType: localType);
+                    lvis[i] = new RoLocalVariableInfo(
+                        localIndex: i,
+                        isPinned: isPinned,
+                        localType: localType
+                    );
                 }
                 return lvis.ToReadOnlyCollection();
             }
@@ -64,7 +71,9 @@ namespace System.Reflection.TypeLoading.Ecma
                 for (int i = 0; i < count; i++)
                 {
                     EntityHandle catchTypeHandle = regions[i].CatchType;
-                    RoType? catchType = catchTypeHandle.IsNil ? null : catchTypeHandle.ResolveTypeDefRefOrSpec(GetEcmaModule(), TypeContext);
+                    RoType? catchType = catchTypeHandle.IsNil
+                        ? null
+                        : catchTypeHandle.ResolveTypeDefRefOrSpec(GetEcmaModule(), TypeContext);
                     clauses[i] = new RoExceptionHandlingClause(
                         catchType: catchType,
                         flags: regions[i].Kind.ToExceptionHandlingClauseOptions(),
@@ -85,7 +94,14 @@ namespace System.Reflection.TypeLoading.Ecma
         private MetadataReader Reader => GetEcmaModule().Reader;
         private MetadataLoadContext Loader => GetEcmaModule().Loader;
 
-        private ref readonly MethodBodyBlock Block { get { Loader.DisposeCheck(); return ref _neverAccessThisExceptThroughBlockProperty; } }
+        private ref readonly MethodBodyBlock Block
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return ref _neverAccessThisExceptThroughBlockProperty;
+            }
+        }
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly MethodBodyBlock _neverAccessThisExceptThroughBlockProperty;
     }

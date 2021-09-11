@@ -42,7 +42,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void Trailing_Letter_Is_Not_Part_Of_Integer_Literal_If_Not_Type_Sufix()
         {
-            TestTokenizer("42a", SyntaxFactory.Token(SyntaxKind.IntegerLiteral, "42"), IgnoreRemaining);
+            TestTokenizer(
+                "42a",
+                SyntaxFactory.Token(SyntaxKind.IntegerLiteral, "42"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -76,13 +80,21 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void Trailing_Letter_Is_Not_Part_Of_Hex_Literal_If_Not_Type_Sufix()
         {
-            TestTokenizer("0xDEADBEEFz", SyntaxFactory.Token(SyntaxKind.IntegerLiteral, "0xDEADBEEF"), IgnoreRemaining);
+            TestTokenizer(
+                "0xDEADBEEFz",
+                SyntaxFactory.Token(SyntaxKind.IntegerLiteral, "0xDEADBEEF"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void Dot_Followed_By_Non_Digit_Is_Not_Part_Of_Real_Literal()
         {
-            TestTokenizer("3.a", SyntaxFactory.Token(SyntaxKind.IntegerLiteral, "3"), IgnoreRemaining);
+            TestTokenizer(
+                "3.a",
+                SyntaxFactory.Token(SyntaxKind.IntegerLiteral, "3"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -174,37 +186,61 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void Character_Literal_Is_Terminated_By_EOL_If_Unterminated()
         {
-            TestTokenizer("'foo\n", SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo"), IgnoreRemaining);
+            TestTokenizer(
+                "'foo\n",
+                SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void Character_Literal_Terminated_By_EOL_Even_When_Last_Char_Is_Slash()
         {
-            TestTokenizer("'foo\\\n", SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo\\"), IgnoreRemaining);
+            TestTokenizer(
+                "'foo\\\n",
+                SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo\\"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void Character_Literal_Terminated_By_EOL_Even_When_Last_Char_Is_Slash_And_Followed_By_Stuff()
         {
-            TestTokenizer("'foo\\\nflarg", SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo\\"), IgnoreRemaining);
+            TestTokenizer(
+                "'foo\\\nflarg",
+                SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo\\"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void Character_Literal_Terminated_By_CRLF_Even_When_Last_Char_Is_Slash()
         {
-            TestTokenizer("'foo\\" + Environment.NewLine, SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo\\"), IgnoreRemaining);
+            TestTokenizer(
+                "'foo\\" + Environment.NewLine,
+                SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo\\"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void Character_Literal_Terminated_By_CRLF_Even_When_Last_Char_Is_Slash_And_Followed_By_Stuff()
         {
-            TestTokenizer($"'foo\\{Environment.NewLine}flarg", SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo\\"), IgnoreRemaining);
+            TestTokenizer(
+                $"'foo\\{Environment.NewLine}flarg",
+                SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo\\"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void Character_Literal_Allows_Escaped_Escape()
         {
-            TestTokenizer("'foo\\\\'blah", SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo\\\\'"), IgnoreRemaining);
+            TestTokenizer(
+                "'foo\\\\'blah",
+                SyntaxFactory.Token(SyntaxKind.CharacterLiteral, "'foo\\\\'"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -228,37 +264,61 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void String_Literal_Is_Terminated_By_EOL_If_Unterminated()
         {
-            TestTokenizer("\"foo\n", SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo"), IgnoreRemaining);
+            TestTokenizer(
+                "\"foo\n",
+                SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void String_Literal_Terminated_By_EOL_Even_When_Last_Char_Is_Slash()
         {
-            TestTokenizer("\"foo\\\n", SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo\\"), IgnoreRemaining);
+            TestTokenizer(
+                "\"foo\\\n",
+                SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo\\"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void String_Literal_Terminated_By_EOL_Even_When_Last_Char_Is_Slash_And_Followed_By_Stuff()
         {
-            TestTokenizer("\"foo\\\nflarg", SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo\\"), IgnoreRemaining);
+            TestTokenizer(
+                "\"foo\\\nflarg",
+                SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo\\"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void String_Literal_Terminated_By_CRLF_Even_When_Last_Char_Is_Slash()
         {
-            TestTokenizer("\"foo\\" + Environment.NewLine, SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo\\"), IgnoreRemaining);
+            TestTokenizer(
+                "\"foo\\" + Environment.NewLine,
+                SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo\\"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void String_Literal_Terminated_By_CRLF_Even_When_Last_Char_Is_Slash_And_Followed_By_Stuff()
         {
-            TestTokenizer($"\"foo\\{Environment.NewLine}flarg", SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo\\"), IgnoreRemaining);
+            TestTokenizer(
+                $"\"foo\\{Environment.NewLine}flarg",
+                SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo\\"),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void String_Literal_Allows_Escaped_Escape()
         {
-            TestTokenizer("\"foo\\\\\"blah", SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo\\\\\""), IgnoreRemaining);
+            TestTokenizer(
+                "\"foo\\\\\"blah",
+                SyntaxFactory.Token(SyntaxKind.StringLiteral, "\"foo\\\\\""),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -276,7 +336,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void Verbatim_String_Literal_Is_Terminated_By_Slash_Double_Quote()
         {
-            TestTokenizer("@\"foo\\\"bar\"", SyntaxFactory.Token(SyntaxKind.StringLiteral, "@\"foo\\\""), IgnoreRemaining);
+            TestTokenizer(
+                "@\"foo\\\"bar\"",
+                SyntaxFactory.Token(SyntaxKind.StringLiteral, "@\"foo\\\""),
+                IgnoreRemaining
+            );
         }
 
         [Fact]

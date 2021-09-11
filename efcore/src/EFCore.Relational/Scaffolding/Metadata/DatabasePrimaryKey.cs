@@ -27,7 +27,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Metadata
         public virtual IList<DatabaseColumn> Columns { get; } = new List<DatabaseColumn>();
 
         /// <inheritdoc />
-        public override string ToString()
-            => Name ?? "<UNKNOWN>";
+        public override string ToString() => Name ?? "<UNKNOWN>";
     }
 }

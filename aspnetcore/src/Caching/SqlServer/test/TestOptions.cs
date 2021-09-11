@@ -16,10 +16,7 @@ namespace Microsoft.Extensions.Caching.SqlServer
 
         public SqlServerCacheOptions Value
         {
-            get
-            {
-                return _innerOptions;
-            }
+            get { return _innerOptions; }
         }
     }
 }

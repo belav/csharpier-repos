@@ -19,14 +19,19 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 {
     [ExportLanguageService(typeof(IIntroduceVariableService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpIntroduceVariableService :
-        AbstractIntroduceVariableService<CSharpIntroduceVariableService, ExpressionSyntax, TypeSyntax, TypeDeclarationSyntax, QueryExpressionSyntax, NameSyntax>
+    internal partial class CSharpIntroduceVariableService
+        : AbstractIntroduceVariableService<
+              CSharpIntroduceVariableService,
+              ExpressionSyntax,
+              TypeSyntax,
+              TypeDeclarationSyntax,
+              QueryExpressionSyntax,
+              NameSyntax
+          >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpIntroduceVariableService()
-        {
-        }
+        public CSharpIntroduceVariableService() { }
 
         protected override bool IsInNonFirstQueryClause(ExpressionSyntax expression)
         {
@@ -47,17 +52,19 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         protected override bool IsInFieldInitializer(ExpressionSyntax expression)
         {
             return expression.GetAncestorOrThis<VariableDeclaratorSyntax>()
-                             .GetAncestorOrThis<FieldDeclarationSyntax>() != null;
+                    .GetAncestorOrThis<FieldDeclarationSyntax>() != null;
         }
 
-        protected override bool IsInParameterInitializer(ExpressionSyntax expression)
-            => expression.GetAncestorOrThis<EqualsValueClauseSyntax>().IsParentKind(SyntaxKind.Parameter);
+        protected override bool IsInParameterInitializer(ExpressionSyntax expression) =>
+            expression.GetAncestorOrThis<EqualsValueClauseSyntax>()
+                .IsParentKind(SyntaxKind.Parameter);
 
-        protected override bool IsInConstructorInitializer(ExpressionSyntax expression)
-            => expression.GetAncestorOrThis<ConstructorInitializerSyntax>() != null;
+        protected override bool IsInConstructorInitializer(ExpressionSyntax expression) =>
+            expression.GetAncestorOrThis<ConstructorInitializerSyntax>() != null;
 
-        protected override bool IsInAutoPropertyInitializer(ExpressionSyntax expression)
-            => expression.GetAncestorOrThis<EqualsValueClauseSyntax>().IsParentKind(SyntaxKind.PropertyDeclaration);
+        protected override bool IsInAutoPropertyInitializer(ExpressionSyntax expression) =>
+            expression.GetAncestorOrThis<EqualsValueClauseSyntax>()
+                .IsParentKind(SyntaxKind.PropertyDeclaration);
 
         protected override bool IsInExpressionBodiedMember(ExpressionSyntax expression)
         {
@@ -88,9 +95,12 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             {
                 // Can't extract an attribute initializer if it contains an array initializer of any
                 // sort.  Also, we can't extract if there's any typeof expression within it.
-                if (!expression.DepthFirstTraversal().Any(n => n.RawKind == (int)SyntaxKind.ArrayCreationExpression) &&
-                    !expression.DepthFirstTraversal().Any(n => n.RawKind == (int)SyntaxKind.TypeOfExpression))
-                {
+                if (
+                    !expression.DepthFirstTraversal()
+                        .Any(n => n.RawKind == (int)SyntaxKind.ArrayCreationExpression)
+                    && !expression.DepthFirstTraversal()
+                        .Any(n => n.RawKind == (int)SyntaxKind.TypeOfExpression)
+                ) {
                     var attributeDecl = attributeArgument.GetAncestorOrThis<AttributeListSyntax>();
 
                     // Also can't extract an attribute initializer if the attribute is a global one.
@@ -131,14 +141,16 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             return true;
         }
 
-        protected override IEnumerable<SyntaxNode> GetContainingExecutableBlocks(ExpressionSyntax expression)
-            => expression.GetAncestorsOrThis<BlockSyntax>();
+        protected override IEnumerable<SyntaxNode> GetContainingExecutableBlocks(
+            ExpressionSyntax expression
+        ) => expression.GetAncestorsOrThis<BlockSyntax>();
 
-        protected override IList<bool> GetInsertionIndices(TypeDeclarationSyntax destination, CancellationToken cancellationToken)
-            => destination.GetInsertionIndices(cancellationToken);
+        protected override IList<bool> GetInsertionIndices(
+            TypeDeclarationSyntax destination,
+            CancellationToken cancellationToken
+        ) => destination.GetInsertionIndices(cancellationToken);
 
-        protected override bool CanReplace(ExpressionSyntax expression)
-            => true;
+        protected override bool CanReplace(ExpressionSyntax expression) => true;
 
         protected override bool IsExpressionInStaticLocalFunction(ExpressionSyntax expression)
         {
@@ -149,8 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
         protected override TNode RewriteCore<TNode>(
             TNode node,
             SyntaxNode replacementNode,
-            ISet<ExpressionSyntax> matches)
-        {
+            ISet<ExpressionSyntax> matches
+        ) {
             return (TNode)Rewriter.Visit(node, replacementNode, matches);
         }
     }

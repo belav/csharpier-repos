@@ -23,7 +23,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
     /// This service is created on the UI thread during package initialization, but it must not
     /// block the initialization process.
     /// </summary>
-    internal abstract class AbstractSnippetInfoService : ForegroundThreadAffinitizedObject, ISnippetInfoService, IVsExpansionEvents
+    internal abstract class AbstractSnippetInfoService
+        : ForegroundThreadAffinitizedObject,
+          ISnippetInfoService,
+          IVsExpansionEvents
     {
         private readonly Guid _languageGuidForSnippets;
         private IVsExpansionManager? _expansionManager;
@@ -47,20 +50,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             IThreadingContext threadingContext,
             Shell.IAsyncServiceProvider serviceProvider,
             Guid languageGuidForSnippets,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext)
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) : base(threadingContext)
         {
             _waiter = listenerProvider.GetListener(FeatureAttribute.Snippets);
             _languageGuidForSnippets = languageGuidForSnippets;
             _threadingContext = threadingContext;
 
-            _threadingContext.RunWithShutdownBlockAsync((_) => InitializeAndPopulateSnippetsCacheAsync(serviceProvider));
+            _threadingContext.RunWithShutdownBlockAsync(
+                (_) => InitializeAndPopulateSnippetsCacheAsync(serviceProvider)
+            );
         }
 
-        private async Task InitializeAndPopulateSnippetsCacheAsync(Shell.IAsyncServiceProvider asyncServiceProvider)
-        {
+        private async Task InitializeAndPopulateSnippetsCacheAsync(
+            Shell.IAsyncServiceProvider asyncServiceProvider
+        ) {
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-            var textManager = (IVsTextManager2?)await asyncServiceProvider.GetServiceAsync(typeof(SVsTextManager)).ConfigureAwait(true);
+            var textManager = (IVsTextManager2?)await asyncServiceProvider.GetServiceAsync(
+                    typeof(SVsTextManager)
+                )
+                .ConfigureAwait(true);
             Assumes.Present(textManager);
 
             if (textManager.GetExpansionManager(out _expansionManager) == VSConstants.S_OK)
@@ -82,8 +91,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             return VSConstants.S_OK;
         }
 
-        public int OnAfterSnippetsKeyBindingChange([ComAliasName("Microsoft.VisualStudio.OLE.Interop.DWORD")] uint dwCmdGuid, [ComAliasName("Microsoft.VisualStudio.OLE.Interop.DWORD")] uint dwCmdId, [ComAliasName("Microsoft.VisualStudio.OLE.Interop.BOOL")] int fBound)
-            => VSConstants.S_OK;
+        public int OnAfterSnippetsKeyBindingChange(
+            [ComAliasName("Microsoft.VisualStudio.OLE.Interop.DWORD")] uint dwCmdGuid,
+            [ComAliasName("Microsoft.VisualStudio.OLE.Interop.DWORD")] uint dwCmdId,
+            [ComAliasName("Microsoft.VisualStudio.OLE.Interop.BOOL")] int fBound
+        ) => VSConstants.S_OK;
 
         public IEnumerable<SnippetInfo> GetSnippetsIfAvailable()
         {
@@ -110,8 +122,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             }
         }
 
-        public virtual bool ShouldFormatSnippet(SnippetInfo snippetInfo)
-            => false;
+        public virtual bool ShouldFormatSnippet(SnippetInfo snippetInfo) => false;
 
         private async Task PopulateSnippetCacheAsync()
         {
@@ -123,13 +134,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             // Call the asynchronous IExpansionManager API from a background thread
             await TaskScheduler.Default;
             var expansionEnumerator = await expansionManager.EnumerateExpansionsAsync(
-                _languageGuidForSnippets,
-                0, // shortCutOnly
-                Array.Empty<string>(), // types
-                0, // countTypes
-                1, // includeNULLTypes
-                1 // includeDulicates: Allows snippets with the same title but different shortcuts
-                ).ConfigureAwait(false);
+                    _languageGuidForSnippets,
+                    0, // shortCutOnly
+                    Array.Empty<string>(), // types
+                    0, // countTypes
+                    1, // includeNULLTypes
+                    1 // includeDulicates: Allows snippets with the same title but different shortcuts
+                )
+                .ConfigureAwait(false);
 
             // The rest of the process requires being on the UI thread, see the explanation on
             // PopulateSnippetCacheFromExpansionEnumeration for details
@@ -160,8 +172,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         /// pointer we passed and substituting the null reference. This then causes a null
         /// reference exception in the shim. Calling from the UI thread avoids this marshaller.
         /// </remarks>
-        private void PopulateSnippetCacheFromExpansionEnumeration(IVsExpansionEnumeration expansionEnumerator)
-        {
+        private void PopulateSnippetCacheFromExpansionEnumeration(
+            IVsExpansionEnumeration expansionEnumerator
+        ) {
             AssertIsForeground();
 
             var updatedSnippets = ExtractSnippetInfo(expansionEnumerator);
@@ -174,8 +187,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             }
         }
 
-        private ImmutableArray<SnippetInfo> ExtractSnippetInfo(IVsExpansionEnumeration expansionEnumerator)
-        {
+        private ImmutableArray<SnippetInfo> ExtractSnippetInfo(
+            IVsExpansionEnumeration expansionEnumerator
+        ) {
             AssertIsForeground();
 
             var snippetListBuilder = ImmutableArray.CreateBuilder<SnippetInfo>();
@@ -199,11 +213,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
                         if (!string.IsNullOrEmpty(snippetInfo.shortcut))
                         {
-                            snippetListBuilder.Add(new SnippetInfo(snippetInfo.shortcut, snippetInfo.title, snippetInfo.description, snippetInfo.path));
+                            snippetListBuilder.Add(
+                                new SnippetInfo(
+                                    snippetInfo.shortcut,
+                                    snippetInfo.title,
+                                    snippetInfo.description,
+                                    snippetInfo.path
+                                )
+                            );
                         }
                     }
                 }
             }
+
             finally
             {
                 Marshal.FreeCoTaskMem(pSnippetInfo[0]);
@@ -212,15 +234,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             return snippetListBuilder.ToImmutable();
         }
 
-        protected static IImmutableSet<string> GetShortcutsHashFromSnippets(ImmutableArray<SnippetInfo> updatedSnippets)
-        {
-            return new HashSet<string>(updatedSnippets.Select(s => s.Shortcut), StringComparer.OrdinalIgnoreCase)
-                .ToImmutableHashSet(StringComparer.OrdinalIgnoreCase);
+        protected static IImmutableSet<string> GetShortcutsHashFromSnippets(
+            ImmutableArray<SnippetInfo> updatedSnippets
+        ) {
+            return new HashSet<string>(
+                updatedSnippets.Select(s => s.Shortcut),
+                StringComparer.OrdinalIgnoreCase
+            ).ToImmutableHashSet(StringComparer.OrdinalIgnoreCase);
         }
 
         private static VsExpansion ConvertToVsExpansionAndFree(IntPtr expansionPtr)
         {
-            var buffer = (VsExpansionWithIntPtrs)Marshal.PtrToStructure(expansionPtr, typeof(VsExpansionWithIntPtrs));
+            var buffer = (VsExpansionWithIntPtrs)Marshal.PtrToStructure(
+                expansionPtr,
+                typeof(VsExpansionWithIntPtrs)
+            );
             var expansion = new VsExpansion();
 
             ConvertToStringAndFree(ref buffer.DescriptionPtr, ref expansion.description);

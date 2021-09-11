@@ -12,9 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
     internal class SyntaxToken : RazorSyntaxNode
     {
         internal SyntaxToken(GreenNode green, SyntaxNode parent, int position)
-            : base(green, parent, position)
-        {
-        }
+            : base(green, parent, position) { }
 
         internal new InternalSyntax.SyntaxToken Green => (InternalSyntax.SyntaxToken)base.Green;
 
@@ -94,7 +92,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             int trailingPosition = Position + FullWidth;
             trailingPosition -= trailing.FullWidth;
 
-            return new SyntaxTriviaList(trailing.CreateRed(this, trailingPosition), trailingPosition, index);
+            return new SyntaxTriviaList(
+                trailing.CreateRed(this, trailingPosition),
+                trailingPosition,
+                index
+            );
         }
 
         public override string ToString()

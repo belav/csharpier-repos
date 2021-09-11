@@ -21,14 +21,16 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ClassificationTypeMap(
-            IClassificationTypeRegistryService registryService)
+        public ClassificationTypeMap(IClassificationTypeRegistryService registryService)
         {
             _registryService = registryService;
 
             // Prepopulate the identity map with the constant string values from ClassificationTypeNames
             var fields = typeof(ClassificationTypeNames).GetFields();
-            _identityMap = new Dictionary<string, IClassificationType>(fields.Length, ReferenceEqualityComparer.Instance);
+            _identityMap = new Dictionary<string, IClassificationType>(
+                fields.Length,
+                ReferenceEqualityComparer.Instance
+            );
 
             foreach (var field in fields)
             {
@@ -47,7 +49,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             var type = GetClassificationTypeWorker(name);
             if (type == null)
             {
-                FatalError.ReportAndCatch(new Exception($"classification type doesn't exist for {name}"));
+                FatalError.ReportAndCatch(
+                    new Exception($"classification type doesn't exist for {name}")
+                );
             }
 
             return type ?? GetClassificationTypeWorker(ClassificationTypeNames.Text);

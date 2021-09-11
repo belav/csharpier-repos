@@ -14,8 +14,10 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
             _connectionString = SqlServerBenchmarkEnvironment.CreateConnectionString(databaseName);
         }
 
-        public override OrdersContextBase CreateContext(IServiceProvider serviceProvider = null, bool disableBatching = false)
-        {
+        public override OrdersContextBase CreateContext(
+            IServiceProvider serviceProvider = null,
+            bool disableBatching = false
+        ) {
             return new OrdersSqlServerContext(_connectionString, serviceProvider, disableBatching);
         }
     }

@@ -53,8 +53,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
             DefaultVisit(trivia);
         }
 
-        protected virtual void DefaultVisit(GreenNode node)
-        {
-        }
+        protected virtual void DefaultVisit(GreenNode node) { }
     }
 }

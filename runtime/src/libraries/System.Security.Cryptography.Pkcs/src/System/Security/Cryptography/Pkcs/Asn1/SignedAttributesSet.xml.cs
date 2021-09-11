@@ -22,7 +22,9 @@ namespace System.Security.Cryptography.Pkcs
             {
                 if (usedTags.TryGetValue(tag, out string? existing))
                 {
-                    throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
+                    throw new InvalidOperationException(
+                        $"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'"
+                    );
                 }
 
                 usedTags.Add(tag, fieldName);
@@ -41,7 +43,6 @@ namespace System.Security.Cryptography.Pkcs
                 if (wroteValue)
                     throw new CryptographicException();
 
-
                 writer.PushSetOf(new Asn1Tag(TagClass.ContextSpecific, 0));
                 for (int i = 0; i < SignedAttributes.Length; i++)
                 {
@@ -58,8 +59,10 @@ namespace System.Security.Cryptography.Pkcs
             }
         }
 
-        internal static SignedAttributesSet Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static SignedAttributesSet Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -74,8 +77,11 @@ namespace System.Security.Cryptography.Pkcs
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out SignedAttributesSet decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out SignedAttributesSet decoded
+        ) {
             try
             {
                 DecodeCore(ref reader, rebind, out decoded);
@@ -86,15 +92,17 @@ namespace System.Security.Cryptography.Pkcs
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out SignedAttributesSet decoded)
-        {
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out SignedAttributesSet decoded
+        ) {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
             AsnValueReader collectionReader;
 
             if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
             {
-
                 // Decode SEQUENCE OF for SignedAttributes
                 {
                     collectionReader = reader.ReadSetOf(new Asn1Tag(TagClass.ContextSpecific, 0));
@@ -103,13 +111,16 @@ namespace System.Security.Cryptography.Pkcs
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Asn1.AttributeAsn.Decode(ref collectionReader, rebind, out tmpItem);
+                        System.Security.Cryptography.Asn1.AttributeAsn.Decode(
+                            ref collectionReader,
+                            rebind,
+                            out tmpItem
+                        );
                         tmpList.Add(tmpItem);
                     }
 
                     decoded.SignedAttributes = tmpList.ToArray();
                 }
-
             }
             else
             {

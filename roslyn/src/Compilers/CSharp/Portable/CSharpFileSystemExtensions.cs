@@ -35,9 +35,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             string? xmlDocumentationPath = null,
             string? win32ResourcesPath = null,
             IEnumerable<ResourceDescription>? manifestResources = null,
-            CancellationToken cancellationToken = default)
-        {
-            return FileSystemExtensions.Emit(compilation, outputPath, pdbPath, xmlDocumentationPath, win32ResourcesPath, manifestResources, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) {
+            return FileSystemExtensions.Emit(
+                compilation,
+                outputPath,
+                pdbPath,
+                xmlDocumentationPath,
+                win32ResourcesPath,
+                manifestResources,
+                cancellationToken
+            );
         }
     }
 }

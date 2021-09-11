@@ -20,7 +20,10 @@ namespace System.Data.ProviderBase
             _defaultLocaleID = defaultLocaleID;
         }
 
-        public FieldNameLookup(System.Collections.ObjectModel.ReadOnlyCollection<string> columnNames, int defaultLocaleID) : base(columnNames)
+        public FieldNameLookup(
+            System.Collections.ObjectModel.ReadOnlyCollection<string> columnNames,
+            int defaultLocaleID
+        ) : base(columnNames)
         {
             _defaultLocaleID = defaultLocaleID;
         }

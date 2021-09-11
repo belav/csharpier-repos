@@ -30,25 +30,31 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             // Arrange
             var imports = new List<RazorProjectItem>();
             var projectItem = new TestRazorProjectItem("/Contact/Index.cshtml");
-            var testFileSystem = new TestRazorProjectFileSystem(new[]
-            {
-                new TestRazorProjectItem("/Index.cshtml"),
-                new TestRazorProjectItem("/_ViewImports.cshtml"),
-                new TestRazorProjectItem("/Contact/_ViewImports.cshtml"),
-                projectItem,
-            });
+            var testFileSystem = new TestRazorProjectFileSystem(
+                new[]
+                {
+                    new TestRazorProjectItem("/Index.cshtml"),
+                    new TestRazorProjectItem("/_ViewImports.cshtml"),
+                    new TestRazorProjectItem("/Contact/_ViewImports.cshtml"),
+                    projectItem,
+                }
+            );
             var mvcImportFeature = new MvcImportProjectFeature()
             {
-                ProjectEngine = Mock.Of<RazorProjectEngine>(projectEngine => projectEngine.FileSystem == testFileSystem)
+                ProjectEngine = Mock.Of<RazorProjectEngine>(
+                    projectEngine => projectEngine.FileSystem == testFileSystem
+                )
             };
 
             // Act
             mvcImportFeature.AddHierarchicalImports(projectItem, imports);
 
             // Assert
-            Assert.Collection(imports,
+            Assert.Collection(
+                imports,
                 import => Assert.Equal("/_ViewImports.cshtml", import.FilePath),
-                import => Assert.Equal("/Contact/_ViewImports.cshtml", import.FilePath));
+                import => Assert.Equal("/Contact/_ViewImports.cshtml", import.FilePath)
+            );
         }
 
         [Fact]
@@ -60,17 +66,21 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             var testFileSystem = new TestRazorProjectFileSystem(new[] { projectItem });
             var mvcImportFeature = new MvcImportProjectFeature()
             {
-                ProjectEngine = Mock.Of<RazorProjectEngine>(projectEngine => projectEngine.FileSystem == testFileSystem)
+                ProjectEngine = Mock.Of<RazorProjectEngine>(
+                    projectEngine => projectEngine.FileSystem == testFileSystem
+                )
             };
 
             // Act
             mvcImportFeature.AddHierarchicalImports(projectItem, imports);
 
             // Assert
-            Assert.Collection(imports,
+            Assert.Collection(
+                imports,
                 import => Assert.Equal("/_ViewImports.cshtml", import.FilePath),
                 import => Assert.Equal("/Pages/_ViewImports.cshtml", import.FilePath),
-                import => Assert.Equal("/Pages/Contact/_ViewImports.cshtml", import.FilePath));
+                import => Assert.Equal("/Pages/Contact/_ViewImports.cshtml", import.FilePath)
+            );
         }
     }
 }

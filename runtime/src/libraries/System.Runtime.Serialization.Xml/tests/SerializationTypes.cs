@@ -64,18 +64,12 @@ namespace SerializationTypes
         private int[] _p2 = new int[2];
         public SimpleType[] P1
         {
-            get
-            {
-                return _p1;
-            }
+            get { return _p1; }
         }
 
         public int[] P2
         {
-            get
-            {
-                return _p2;
-            }
+            get { return _p2; }
         }
     }
 
@@ -93,9 +87,7 @@ namespace SerializationTypes
     {
         private List<T> _items = new List<T>();
 
-        public MyCollection()
-        {
-        }
+        public MyCollection() { }
 
         public MyCollection(params T[] values)
         {
@@ -158,10 +150,7 @@ namespace SerializationTypes
         private MyCollection<string> _ro = new MyCollection<string>();
         public MyCollection<string> Collection
         {
-            get
-            {
-                return _ro;
-            }
+            get { return _ro; }
         }
     }
 
@@ -169,9 +158,7 @@ namespace SerializationTypes
     {
         private List<object> _items = new List<object>();
 
-        public MyList()
-        {
-        }
+        public MyList() { }
 
         public MyList(params object[] values)
         {
@@ -225,14 +212,8 @@ namespace SerializationTypes
 
         public object this[int index]
         {
-            get
-            {
-                return _items[index];
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return _items[index]; }
+            set { throw new NotImplementedException(); }
         }
 
         public void CopyTo(Array array, int index)
@@ -460,7 +441,6 @@ namespace SerializationTypes
         public bool IsLoaded { get; set; }
     }
 
-
     #region XmlSerializer specific
     public class WithStruct
     {
@@ -491,40 +471,58 @@ namespace SerializationTypes
 
     public enum ByteEnum : byte
     {
-        Option0, Option1, Option2
+        Option0,
+        Option1,
+        Option2
     }
 
     public enum SByteEnum : sbyte
     {
-        Option0, Option1, Option2
+        Option0,
+        Option1,
+        Option2
     }
 
     public enum ShortEnum : short
     {
-        Option0, Option1, Option2
+        Option0,
+        Option1,
+        Option2
     }
 
     public enum IntEnum
     {
-        Option0, Option1, Option2
+        Option0,
+        Option1,
+        Option2
     }
 
     public enum UIntEnum : uint
     {
-        Option0, Option1, Option2
+        Option0,
+        Option1,
+        Option2
     }
 
     public enum LongEnum : long
     {
-        Option0, Option1, Option2
+        Option0,
+        Option1,
+        Option2
     }
 
     public enum ULongEnum : ulong
     {
-        Option0, Option1, Option2
+        Option0,
+        Option1,
+        Option2
     }
 
-    [XmlRoot(DataType = "XmlSerializerAttributes", ElementName = "AttributeTesting", IsNullable = false)]
+    [XmlRoot(
+        DataType = "XmlSerializerAttributes",
+        ElementName = "AttributeTesting",
+        IsNullable = false
+    )]
     [XmlInclude(typeof(ItemChoiceType))]
     public class XmlSerializerAttributes
     {
@@ -536,12 +534,23 @@ namespace SerializationTypes
             EnumType = ItemChoiceType.Word;
             MyChoice = "String choice value";
             XmlIncludeProperty = ItemChoiceType.DecimalNumber;
-            XmlEnumProperty = new ItemChoiceType[] { ItemChoiceType.DecimalNumber, ItemChoiceType.Number, ItemChoiceType.Word, ItemChoiceType.None };
+            XmlEnumProperty = new ItemChoiceType[]
+            {
+                ItemChoiceType.DecimalNumber,
+                ItemChoiceType.Number,
+                ItemChoiceType.Word,
+                ItemChoiceType.None
+            };
             XmlTextProperty = "<xml>Hello XML</xml>";
             XmlNamespaceDeclarationsProperty = "XmlNamespaceDeclarationsPropertyValue";
         }
 
-        [XmlElement(DataType = "int", ElementName = "XmlElementPropertyNode", Namespace = "http://element", Type = typeof(int))]
+        [XmlElement(
+            DataType = "int",
+            ElementName = "XmlElementPropertyNode",
+            Namespace = "http://element",
+            Type = typeof(int)
+        )]
         public int XmlElementProperty { get; set; }
 
         [XmlAttribute(AttributeName = "XmlAttributeName")]
@@ -663,10 +672,16 @@ namespace SerializationTypes
         [XmlArray(Form = XmlSchemaForm.Unqualified)]
         public List<int> UnqualifiedSchemaFormListProperty { get; set; }
 
-        [XmlArray(Form = XmlSchemaForm.None), XmlArrayItem("NoneParameter", Form = XmlSchemaForm.None, IsNullable = false)]
+        [
+            XmlArray(Form = XmlSchemaForm.None),
+            XmlArrayItem("NoneParameter", Form = XmlSchemaForm.None, IsNullable = false)
+        ]
         public List<string> NoneSchemaFormListProperty { get; set; }
 
-        [XmlArray(Form = XmlSchemaForm.Qualified), XmlArrayItem("QualifiedParameter", Form = XmlSchemaForm.Qualified, IsNullable = false)]
+        [
+            XmlArray(Form = XmlSchemaForm.Qualified),
+            XmlArrayItem("QualifiedParameter", Form = XmlSchemaForm.Qualified, IsNullable = false)
+        ]
         public List<bool> QualifiedSchemaFormListProperty { get; set; }
     }
 
@@ -683,7 +698,6 @@ namespace SerializationTypes
         [XmlAttribute(Form = XmlSchemaForm.Qualified, Namespace = "http://test.com")]
         public string TestProperty;
     }
-
 
     #endregion
 
@@ -718,7 +732,11 @@ namespace SerializationTypes
 
     public class TypeWith2DArrayProperty2
     {
-        [System.Xml.Serialization.XmlArrayItemAttribute("SimpleType", typeof(SimpleType[]), IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(
+            "SimpleType",
+            typeof(SimpleType[]),
+            IsNullable = false
+        )]
         public SimpleType[][] TwoDArrayOfSimpleType;
     }
 
@@ -848,7 +866,6 @@ namespace SerializationTypes
 
         [DataMember]
         public object Value2 = new SimpleType[1];
-
     }
 }
 
@@ -894,8 +911,8 @@ public class TypeWithDefaultTimeSpanProperty
     {
         var property = this.GetType().GetProperty(propertyName);
 
-        var attribute = property.GetCustomAttribute(typeof(DefaultValueAttribute))
-                as DefaultValueAttribute;
+        var attribute =
+            property.GetCustomAttribute(typeof(DefaultValueAttribute)) as DefaultValueAttribute;
 
         if (attribute != null)
         {
@@ -913,14 +930,12 @@ public class TypeWithByteProperty
     public byte ByteProperty;
 }
 
-
 [XmlRoot()]
 public class TypeWithXmlNodeArrayProperty
 {
     [XmlText]
     public XmlNode[] CDATA { get; set; }
 }
-
 
 public class Animal
 {
@@ -1166,15 +1181,20 @@ public class DefaultValuesSetToNaN
     public override bool Equals(object obj)
     {
         var other = obj as DefaultValuesSetToNaN;
-        return other == null ? false :
-            other.DoubleProp == this.DoubleProp && other.FloatProp == this.FloatProp &&
-            other.DoubleField == this.DoubleField && other.SingleField == this.SingleField;
+        return other == null
+            ? false
+            : other.DoubleProp == this.DoubleProp
+              && other.FloatProp == this.FloatProp
+              && other.DoubleField == this.DoubleField
+              && other.SingleField == this.SingleField;
     }
 
     public override int GetHashCode()
     {
-        return this.DoubleProp.GetHashCode() ^ this.FloatProp.GetHashCode() ^
-            this.DoubleField.GetHashCode() ^ this.SingleField.GetHashCode();
+        return this.DoubleProp.GetHashCode()
+            ^ this.FloatProp.GetHashCode()
+            ^ this.DoubleField.GetHashCode()
+            ^ this.SingleField.GetHashCode();
     }
 }
 
@@ -1195,15 +1215,20 @@ public class DefaultValuesSetToPositiveInfinity
     public override bool Equals(object obj)
     {
         var other = obj as DefaultValuesSetToPositiveInfinity;
-        return other == null ? false :
-            other.DoubleProp == this.DoubleProp && other.FloatProp == this.FloatProp &&
-            other.DoubleField == this.DoubleField && other.SingleField == this.SingleField;
+        return other == null
+            ? false
+            : other.DoubleProp == this.DoubleProp
+              && other.FloatProp == this.FloatProp
+              && other.DoubleField == this.DoubleField
+              && other.SingleField == this.SingleField;
     }
 
     public override int GetHashCode()
     {
-        return this.DoubleProp.GetHashCode() ^ this.FloatProp.GetHashCode() ^
-            this.DoubleField.GetHashCode() ^ this.SingleField.GetHashCode();
+        return this.DoubleProp.GetHashCode()
+            ^ this.FloatProp.GetHashCode()
+            ^ this.DoubleField.GetHashCode()
+            ^ this.SingleField.GetHashCode();
     }
 }
 
@@ -1224,15 +1249,20 @@ public class DefaultValuesSetToNegativeInfinity
     public override bool Equals(object obj)
     {
         var other = obj as DefaultValuesSetToNegativeInfinity;
-        return other == null ? false :
-            other.DoubleProp == this.DoubleProp && other.FloatProp == this.FloatProp &&
-            other.DoubleField == this.DoubleField && other.SingleField == this.SingleField;
+        return other == null
+            ? false
+            : other.DoubleProp == this.DoubleProp
+              && other.FloatProp == this.FloatProp
+              && other.DoubleField == this.DoubleField
+              && other.SingleField == this.SingleField;
     }
 
     public override int GetHashCode()
     {
-        return this.DoubleProp.GetHashCode() ^ this.FloatProp.GetHashCode() ^
-            this.DoubleField.GetHashCode() ^ this.SingleField.GetHashCode();
+        return this.DoubleProp.GetHashCode()
+            ^ this.FloatProp.GetHashCode()
+            ^ this.DoubleField.GetHashCode()
+            ^ this.SingleField.GetHashCode();
     }
 }
 
@@ -1244,14 +1274,8 @@ public class TypeWithMismatchBetweenAttributeAndPropertyType
     [DefaultValue(true), XmlAttribute("IntValue")]
     public int IntValue
     {
-        get
-        {
-            return _intValue;
-        }
-        set
-        {
-            _intValue = value;
-        }
+        get { return _intValue; }
+        set { _intValue = value; }
     }
 }
 

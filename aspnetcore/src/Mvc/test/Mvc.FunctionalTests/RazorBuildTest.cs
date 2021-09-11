@@ -20,13 +20,24 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
     {
         public RazorBuildTest(MvcTestFixture<RazorBuildWebSite.Startup> fixture)
         {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(b => b.UseStartup<RazorBuildWebSite.Startup>());
-            factory = factory.WithWebHostBuilder(b => b.ConfigureTestServices(serviceCollection => serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(ConfigureRuntimeCompilationOptions)));
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(b => b.UseStartup<RazorBuildWebSite.Startup>());
+            factory = factory.WithWebHostBuilder(
+                b =>
+                    b.ConfigureTestServices(
+                        serviceCollection =>
+                            serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(
+                                ConfigureRuntimeCompilationOptions
+                            )
+                    )
+            );
 
             Client = factory.CreateDefaultClient();
 
-            static void ConfigureRuntimeCompilationOptions(MvcRazorRuntimeCompilationOptions options)
-            {
+            static void ConfigureRuntimeCompilationOptions(
+                MvcRazorRuntimeCompilationOptions options
+            ) {
                 // Workaround for incorrectly generated deps file. The build output has all of the binaries required to compile. We'll grab these and
                 // add it to the list of assemblies runtime compilation uses.
                 foreach (var path in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.dll"))
@@ -126,7 +137,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Act - 2
             await UpdateRazorPages();
-            await UpdateFile("/Pages/UpdateablePage.cshtml", "@page" + Environment.NewLine + "@GetType().Assembly");
+            await UpdateFile(
+                "/Pages/UpdateablePage.cshtml",
+                "@page" + Environment.NewLine + "@GetType().Assembly"
+            );
             body = await Client.GetStringAsync("/UpdateablePage");
 
             // Assert - 2
@@ -143,11 +157,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         private async Task UpdateFile(string path, string content)
         {
-            var updateContent = new FormUrlEncodedContent(new Dictionary<string, string>
-            {
-                { "path", path },
-                { "content", content },
-            });
+            var updateContent = new FormUrlEncodedContent(
+                new Dictionary<string, string> { { "path", path }, { "content", content }, }
+            );
 
             var response = await Client.PostAsync($"/UpdateableViews/Update", updateContent);
             response.EnsureSuccessStatusCode();
@@ -155,7 +167,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         private async Task UpdateRazorPages()
         {
-            var response = await Client.PostAsync($"/UpdateableViews/UpdateRazorPages", new StringContent(string.Empty));
+            var response = await Client.PostAsync(
+                $"/UpdateableViews/UpdateRazorPages",
+                new StringContent(string.Empty)
+            );
             response.EnsureSuccessStatusCode();
         }
     }

@@ -10,10 +10,8 @@ namespace System.Net.Http.Formatting.DataSets.Types
     {
         [EnumMember]
         First,
-
         [EnumMember]
         Second,
-
         Third
     }
 }

@@ -31,8 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     HashSet<SyntaxAnnotation> variableToRemoveMap,
                     SyntaxNode firstStatementOrFieldToReplace,
                     SyntaxNode lastStatementOrFieldToReplace,
-                    IEnumerable<SyntaxNode> statementsOrFieldToInsert)
-                {
+                    IEnumerable<SyntaxNode> statementsOrFieldToInsert
+                ) {
                     Contract.ThrowIfNull(outmostCallSiteContainer);
                     Contract.ThrowIfNull(variableToRemoveMap);
                     Contract.ThrowIfNull(firstStatementOrFieldToReplace);
@@ -48,17 +48,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     _firstStatementOrFieldToReplace = firstStatementOrFieldToReplace;
                     _lastStatementOrFieldToReplace = lastStatementOrFieldToReplace;
 
-                    Contract.ThrowIfFalse(_firstStatementOrFieldToReplace.Parent == _lastStatementOrFieldToReplace.Parent);
+                    Contract.ThrowIfFalse(
+                        _firstStatementOrFieldToReplace.Parent
+                            == _lastStatementOrFieldToReplace.Parent
+                    );
                 }
 
-                public SyntaxNode Generate()
-                    => Visit(_outmostCallSiteContainer);
+                public SyntaxNode Generate() => Visit(_outmostCallSiteContainer);
 
-                private SyntaxNode ContainerOfStatementsOrFieldToReplace => _firstStatementOrFieldToReplace.Parent;
+                private SyntaxNode ContainerOfStatementsOrFieldToReplace =>
+                    _firstStatementOrFieldToReplace.Parent;
 
-                public override SyntaxNode VisitLocalDeclarationStatement(LocalDeclarationStatementSyntax node)
-                {
-                    node = (LocalDeclarationStatementSyntax)base.VisitLocalDeclarationStatement(node);
+                public override SyntaxNode VisitLocalDeclarationStatement(
+                    LocalDeclarationStatementSyntax node
+                ) {
+                    node = (LocalDeclarationStatementSyntax)base.VisitLocalDeclarationStatement(
+                        node
+                    );
                     var list = new List<VariableDeclaratorSyntax>();
                     var triviaList = new List<SyntaxTrivia>();
                     // go through each var decls in decl statement
@@ -100,7 +106,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         // trivia to the statement
 
                         // TODO : think about a way to move the trivia to next token.
-                        return SyntaxFactory.EmptyStatement(SyntaxFactory.Token(SyntaxFactory.TriviaList(triviaList), SyntaxKind.SemicolonToken, SyntaxTriviaList.Create(SyntaxFactory.ElasticMarker)));
+                        return SyntaxFactory.EmptyStatement(
+                            SyntaxFactory.Token(
+                                SyntaxFactory.TriviaList(triviaList),
+                                SyntaxKind.SemicolonToken,
+                                SyntaxTriviaList.Create(SyntaxFactory.ElasticMarker)
+                            )
+                        );
                     }
 
                     if (list.Count == node.Declaration.Variables.Count)
@@ -113,13 +125,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                     // if there is left over syntax trivia, it will be attached to leading trivia
                     // of semicolon
-                    return
-                        SyntaxFactory.LocalDeclarationStatement(
-                            node.Modifiers,
-                                SyntaxFactory.VariableDeclaration(
-                                    node.Declaration.Type,
-                                    SyntaxFactory.SeparatedList(list)),
-                                    node.SemicolonToken.WithPrependedLeadingTrivia(triviaList));
+                    return SyntaxFactory.LocalDeclarationStatement(
+                        node.Modifiers,
+                        SyntaxFactory.VariableDeclaration(
+                            node.Declaration.Type,
+                            SyntaxFactory.SeparatedList(list)
+                        ),
+                        node.SemicolonToken.WithPrependedLeadingTrivia(triviaList)
+                    );
                 }
 
                 // for every kind of extract methods
@@ -131,7 +144,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         return base.VisitBlock(node);
                     }
 
-                    return node.WithStatements(VisitList(ReplaceStatements(node.Statements)).ToSyntaxList());
+                    return node.WithStatements(
+                        VisitList(ReplaceStatements(node.Statements)).ToSyntaxList()
+                    );
                 }
 
                 public override SyntaxNode VisitSwitchSection(SwitchSectionSyntax node)
@@ -142,7 +157,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         return base.VisitSwitchSection(node);
                     }
 
-                    return node.WithStatements(VisitList(ReplaceStatements(node.Statements)).ToSyntaxList());
+                    return node.WithStatements(
+                        VisitList(ReplaceStatements(node.Statements)).ToSyntaxList()
+                    );
                 }
 
                 // only for single statement or expression
@@ -174,8 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
 
                     return node.WithCondition(VisitNode(node.Condition))
-                               .WithStatement(ReplaceStatementIfNeeded(node.Statement))
-                               .WithElse(VisitNode(node.Else));
+                        .WithStatement(ReplaceStatementIfNeeded(node.Statement))
+                        .WithElse(VisitNode(node.Else));
                 }
 
                 public override SyntaxNode VisitLockStatement(LockStatementSyntax node)
@@ -186,7 +203,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
 
                     return node.WithExpression(VisitNode(node.Expression))
-                               .WithStatement(ReplaceStatementIfNeeded(node.Statement));
+                        .WithStatement(ReplaceStatementIfNeeded(node.Statement));
                 }
 
                 public override SyntaxNode VisitFixedStatement(FixedStatementSyntax node)
@@ -197,7 +214,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
 
                     return node.WithDeclaration(VisitNode(node.Declaration))
-                               .WithStatement(ReplaceStatementIfNeeded(node.Statement));
+                        .WithStatement(ReplaceStatementIfNeeded(node.Statement));
                 }
 
                 public override SyntaxNode VisitUsingStatement(UsingStatementSyntax node)
@@ -208,8 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
 
                     return node.WithDeclaration(VisitNode(node.Declaration))
-                               .WithExpression(VisitNode(node.Expression))
-                               .WithStatement(ReplaceStatementIfNeeded(node.Statement));
+                        .WithExpression(VisitNode(node.Expression))
+                        .WithStatement(ReplaceStatementIfNeeded(node.Statement));
                 }
 
                 public override SyntaxNode VisitForEachStatement(ForEachStatementSyntax node)
@@ -220,18 +237,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
 
                     return node.WithExpression(VisitNode(node.Expression))
-                               .WithStatement(ReplaceStatementIfNeeded(node.Statement));
+                        .WithStatement(ReplaceStatementIfNeeded(node.Statement));
                 }
 
-                public override SyntaxNode VisitForEachVariableStatement(ForEachVariableStatementSyntax node)
-                {
+                public override SyntaxNode VisitForEachVariableStatement(
+                    ForEachVariableStatementSyntax node
+                ) {
                     if (node != ContainerOfStatementsOrFieldToReplace)
                     {
                         return base.VisitForEachVariableStatement(node);
                     }
 
                     return node.WithExpression(VisitNode(node.Expression))
-                               .WithStatement(ReplaceStatementIfNeeded(node.Statement));
+                        .WithStatement(ReplaceStatementIfNeeded(node.Statement));
                 }
 
                 public override SyntaxNode VisitForStatement(ForStatementSyntax node)
@@ -242,10 +260,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
 
                     return node.WithDeclaration(VisitNode(node.Declaration))
-                               .WithInitializers(VisitList(node.Initializers))
-                               .WithCondition(VisitNode(node.Condition))
-                               .WithIncrementors(VisitList(node.Incrementors))
-                               .WithStatement(ReplaceStatementIfNeeded(node.Statement));
+                        .WithInitializers(VisitList(node.Initializers))
+                        .WithCondition(VisitNode(node.Condition))
+                        .WithIncrementors(VisitList(node.Incrementors))
+                        .WithStatement(ReplaceStatementIfNeeded(node.Statement));
                 }
 
                 public override SyntaxNode VisitDoStatement(DoStatementSyntax node)
@@ -256,7 +274,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
 
                     return node.WithStatement(ReplaceStatementIfNeeded(node.Statement))
-                               .WithCondition(VisitNode(node.Condition));
+                        .WithCondition(VisitNode(node.Condition));
                 }
 
                 public override SyntaxNode VisitWhileStatement(WhileStatementSyntax node)
@@ -267,30 +285,37 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
 
                     return node.WithCondition(VisitNode(node.Condition))
-                               .WithStatement(ReplaceStatementIfNeeded(node.Statement));
+                        .WithStatement(ReplaceStatementIfNeeded(node.Statement));
                 }
 
-                private TNode VisitNode<TNode>(TNode node) where TNode : SyntaxNode
-                    => (TNode)Visit(node);
+                private TNode VisitNode<TNode>(TNode node) where TNode : SyntaxNode =>
+                    (TNode)Visit(node);
 
                 private StatementSyntax ReplaceStatementIfNeeded(StatementSyntax statement)
                 {
                     Contract.ThrowIfNull(statement);
 
                     // if all three same
-                    if ((statement != _firstStatementOrFieldToReplace) || (_firstStatementOrFieldToReplace != _lastStatementOrFieldToReplace))
-                    {
+                    if (
+                        (statement != _firstStatementOrFieldToReplace)
+                        || (_firstStatementOrFieldToReplace != _lastStatementOrFieldToReplace)
+                    ) {
                         return statement;
                     }
 
                     // replace one statement with another
                     if (_statementsOrMemberOrAccessorToInsert.Count() == 1)
                     {
-                        return _statementsOrMemberOrAccessorToInsert.Cast<StatementSyntax>().Single();
+                        return _statementsOrMemberOrAccessorToInsert.Cast<StatementSyntax>()
+                            .Single();
                     }
 
                     // replace one statement with multiple statements (see bug # 6310)
-                    return SyntaxFactory.Block(SyntaxFactory.List(_statementsOrMemberOrAccessorToInsert.Cast<StatementSyntax>()));
+                    return SyntaxFactory.Block(
+                        SyntaxFactory.List(
+                            _statementsOrMemberOrAccessorToInsert.Cast<StatementSyntax>()
+                        )
+                    );
                 }
 
                 private SyntaxList<TSyntax> ReplaceList<TSyntax>(SyntaxList<TSyntax> list)
@@ -311,36 +336,69 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     newList.RemoveRange(firstIndex, lastIndex - firstIndex + 1);
 
                     // add new statements to replace
-                    newList.InsertRange(firstIndex, _statementsOrMemberOrAccessorToInsert.Cast<TSyntax>());
+                    newList.InsertRange(
+                        firstIndex,
+                        _statementsOrMemberOrAccessorToInsert.Cast<TSyntax>()
+                    );
 
                     return newList.ToSyntaxList();
                 }
 
-                private SyntaxList<StatementSyntax> ReplaceStatements(SyntaxList<StatementSyntax> statements)
-                    => ReplaceList(statements);
+                private SyntaxList<StatementSyntax> ReplaceStatements(
+                    SyntaxList<StatementSyntax> statements
+                ) => ReplaceList(statements);
 
-                private SyntaxList<AccessorDeclarationSyntax> ReplaceAccessors(SyntaxList<AccessorDeclarationSyntax> accessors)
-                    => ReplaceList(accessors);
+                private SyntaxList<AccessorDeclarationSyntax> ReplaceAccessors(
+                    SyntaxList<AccessorDeclarationSyntax> accessors
+                ) => ReplaceList(accessors);
 
-                private SyntaxList<MemberDeclarationSyntax> ReplaceMembers(SyntaxList<MemberDeclarationSyntax> members, bool global)
-                {
+                private SyntaxList<MemberDeclarationSyntax> ReplaceMembers(
+                    SyntaxList<MemberDeclarationSyntax> members,
+                    bool global
+                ) {
                     // okay, this visit contains the statement
                     var newMembers = new List<MemberDeclarationSyntax>(members);
 
-                    var firstMemberIndex = newMembers.FindIndex(s => s == (global ? _firstStatementOrFieldToReplace.Parent : _firstStatementOrFieldToReplace));
+                    var firstMemberIndex = newMembers.FindIndex(
+                        s =>
+                            s
+                            == (
+                                global
+                                    ? _firstStatementOrFieldToReplace.Parent
+                                    : _firstStatementOrFieldToReplace
+                            )
+                    );
                     Contract.ThrowIfFalse(firstMemberIndex >= 0);
 
-                    var lastMemberIndex = newMembers.FindIndex(s => s == (global ? _lastStatementOrFieldToReplace.Parent : _lastStatementOrFieldToReplace));
+                    var lastMemberIndex = newMembers.FindIndex(
+                        s =>
+                            s
+                            == (
+                                global
+                                    ? _lastStatementOrFieldToReplace.Parent
+                                    : _lastStatementOrFieldToReplace
+                            )
+                    );
                     Contract.ThrowIfFalse(lastMemberIndex >= 0);
 
                     Contract.ThrowIfFalse(firstMemberIndex <= lastMemberIndex);
 
                     // remove statement that must be removed
-                    newMembers.RemoveRange(firstMemberIndex, lastMemberIndex - firstMemberIndex + 1);
+                    newMembers.RemoveRange(
+                        firstMemberIndex,
+                        lastMemberIndex - firstMemberIndex + 1
+                    );
 
                     // add new statements to replace
-                    newMembers.InsertRange(firstMemberIndex,
-                        _statementsOrMemberOrAccessorToInsert.Select(s => global ? SyntaxFactory.GlobalStatement((StatementSyntax)s) : (MemberDeclarationSyntax)s));
+                    newMembers.InsertRange(
+                        firstMemberIndex,
+                        _statementsOrMemberOrAccessorToInsert.Select(
+                            s =>
+                                global
+                                    ? SyntaxFactory.GlobalStatement((StatementSyntax)s)
+                                    : (MemberDeclarationSyntax)s
+                        )
+                    );
 
                     return newMembers.ToSyntaxList();
                 }
@@ -355,15 +413,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return node.WithStatement(ReplaceStatementIfNeeded(node.Statement));
                 }
 
-                public override SyntaxNode VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
-                {
+                public override SyntaxNode VisitConstructorDeclaration(
+                    ConstructorDeclarationSyntax node
+                ) {
                     if (node != ContainerOfStatementsOrFieldToReplace)
                     {
                         return base.VisitConstructorDeclaration(node);
                     }
 
-                    Contract.ThrowIfFalse(_firstStatementOrFieldToReplace == _lastStatementOrFieldToReplace);
-                    return node.WithInitializer((ConstructorInitializerSyntax)_statementsOrMemberOrAccessorToInsert.Single());
+                    Contract.ThrowIfFalse(
+                        _firstStatementOrFieldToReplace == _lastStatementOrFieldToReplace
+                    );
+                    return node.WithInitializer(
+                        (ConstructorInitializerSyntax)_statementsOrMemberOrAccessorToInsert.Single()
+                    );
                 }
 
                 public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node)

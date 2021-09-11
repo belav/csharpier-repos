@@ -31,8 +31,8 @@ namespace System.Net.Connections
         public SocketsConnectionFactory(
             AddressFamily addressFamily,
             SocketType socketType,
-            ProtocolType protocolType)
-        {
+            ProtocolType protocolType
+        ) {
             _addressFamily = addressFamily;
             _socketType = socketType;
             _protocolType = protocolType;
@@ -46,21 +46,26 @@ namespace System.Net.Connections
         /// <param name="protocolType">The <see cref="ProtocolType"/> to forward to the socket.</param>
         /// <remarks>The created socket will be an IPv6 socket with <see cref="Socket.DualMode"/> enabled.</remarks>
         public SocketsConnectionFactory(SocketType socketType, ProtocolType protocolType)
-            : this(AddressFamily.InterNetworkV6, socketType, protocolType)
-        {
-        }
+            : this(AddressFamily.InterNetworkV6, socketType, protocolType) { }
 
         /// <inheritdoc />
         /// <exception cref="ArgumentNullException">When <paramref name="endPoint"/> is <see langword="null"/>.</exception>
         public override async ValueTask<Connection> ConnectAsync(
             EndPoint? endPoint,
             IConnectionProperties? options = null,
-            CancellationToken cancellationToken = default)
-        {
-            if (endPoint == null) throw new ArgumentNullException(nameof(endPoint));
+            CancellationToken cancellationToken = default
+        ) {
+            if (endPoint == null)
+                throw new ArgumentNullException(nameof(endPoint));
             cancellationToken.ThrowIfCancellationRequested();
 
-            Socket socket = CreateSocket(_addressFamily, _socketType, _protocolType, endPoint, options);
+            Socket socket = CreateSocket(
+                _addressFamily,
+                _socketType,
+                _protocolType,
+                endPoint,
+                options
+            );
 
             try
             {
@@ -97,8 +102,8 @@ namespace System.Net.Connections
             SocketType socketType,
             ProtocolType protocolType,
             EndPoint? endPoint,
-            IConnectionProperties? options)
-        {
+            IConnectionProperties? options
+        ) {
             Socket socket = new Socket(addressFamily, socketType, protocolType);
 
             if (protocolType == ProtocolType.Tcp)

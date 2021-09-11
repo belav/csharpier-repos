@@ -11,50 +11,79 @@ namespace System
         public static bool EnableUnsafeUTF7Encoding
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("System.Text.Encoding.EnableUnsafeUTF7Encoding", ref s_enableUnsafeUTF7Encoding);
+            get =>
+                GetCachedSwitchValue(
+                    "System.Text.Encoding.EnableUnsafeUTF7Encoding",
+                    ref s_enableUnsafeUTF7Encoding
+                );
         }
 
         private static int s_enforceJapaneseEraYearRanges;
         public static bool EnforceJapaneseEraYearRanges
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Globalization.EnforceJapaneseEraYearRanges", ref s_enforceJapaneseEraYearRanges);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Globalization.EnforceJapaneseEraYearRanges",
+                    ref s_enforceJapaneseEraYearRanges
+                );
         }
 
         private static int s_formatJapaneseFirstYearAsANumber;
         public static bool FormatJapaneseFirstYearAsANumber
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Globalization.FormatJapaneseFirstYearAsANumber", ref s_formatJapaneseFirstYearAsANumber);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Globalization.FormatJapaneseFirstYearAsANumber",
+                    ref s_formatJapaneseFirstYearAsANumber
+                );
         }
         private static int s_enforceLegacyJapaneseDateParsing;
         public static bool EnforceLegacyJapaneseDateParsing
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Globalization.EnforceLegacyJapaneseDateParsing", ref s_enforceLegacyJapaneseDateParsing);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Globalization.EnforceLegacyJapaneseDateParsing",
+                    ref s_enforceLegacyJapaneseDateParsing
+                );
         }
 
         private static int s_preserveEventListnerObjectIdentity;
         public static bool PreserveEventListnerObjectIdentity
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Diagnostics.EventSource.PreserveEventListnerObjectIdentity", ref s_preserveEventListnerObjectIdentity);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Diagnostics.EventSource.PreserveEventListnerObjectIdentity",
+                    ref s_preserveEventListnerObjectIdentity
+                );
         }
 
         private static int s_serializationGuard;
         public static bool SerializationGuard
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Runtime.Serialization.SerializationGuard", ref s_serializationGuard);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Runtime.Serialization.SerializationGuard",
+                    ref s_serializationGuard
+                );
         }
 
         private static int s_showILOffset;
         private static bool GetDefaultShowILOffsetSetting()
         {
-            if (s_showILOffset < 0) return false;
-            if (s_showILOffset > 0) return true;
+            if (s_showILOffset < 0)
+                return false;
+            if (s_showILOffset > 0)
+                return true;
 
-            bool isSwitchEnabled = AppContextConfigHelper.GetBooleanConfig("Switch.System.Diagnostics.StackTrace.ShowILOffsets", true);
+            bool isSwitchEnabled = AppContextConfigHelper.GetBooleanConfig(
+                "Switch.System.Diagnostics.StackTrace.ShowILOffsets",
+                true
+            );
             s_showILOffset = isSwitchEnabled ? 1 : -1;
 
             return isSwitchEnabled;

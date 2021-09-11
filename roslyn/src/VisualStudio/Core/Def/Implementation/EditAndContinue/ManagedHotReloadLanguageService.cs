@@ -33,17 +33,28 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                 _hotReloadService = hotReloadService;
             }
 
-            public Task<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(CancellationToken cancellationToken)
-                => Task.FromResult(ImmutableArray<ManagedActiveStatementDebugInfo>.Empty);
+            public Task<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(
+                CancellationToken cancellationToken
+            ) => Task.FromResult(ImmutableArray<ManagedActiveStatementDebugInfo>.Empty);
 
-            public Task<ManagedEditAndContinueAvailability> GetAvailabilityAsync(Guid module, CancellationToken cancellationToken)
-                => Task.FromResult(new ManagedEditAndContinueAvailability(ManagedEditAndContinueAvailabilityStatus.Available));
+            public Task<ManagedEditAndContinueAvailability> GetAvailabilityAsync(
+                Guid module,
+                CancellationToken cancellationToken
+            ) =>
+                Task.FromResult(
+                    new ManagedEditAndContinueAvailability(
+                        ManagedEditAndContinueAvailabilityStatus.Available
+                    )
+                );
 
-            public Task<ImmutableArray<string>> GetCapabilitiesAsync(CancellationToken cancellationToken)
-                => _hotReloadService.GetCapabilitiesAsync(cancellationToken).AsTask();
+            public Task<ImmutableArray<string>> GetCapabilitiesAsync(
+                CancellationToken cancellationToken
+            ) => _hotReloadService.GetCapabilitiesAsync(cancellationToken).AsTask();
 
-            public Task PrepareModuleForUpdateAsync(Guid module, CancellationToken cancellationToken)
-                => Task.CompletedTask;
+            public Task PrepareModuleForUpdateAsync(
+                Guid module,
+                CancellationToken cancellationToken
+            ) => Task.CompletedTask;
         }
 
         private static readonly SolutionActiveStatementSpanProvider s_solutionActiveStatementSpanProvider =
@@ -62,8 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             VisualStudioWorkspace workspace,
             IManagedHotReloadService hotReloadService,
             IDiagnosticAnalyzerService diagnosticService,
-            EditAndContinueDiagnosticUpdateSource diagnosticUpdateSource)
-        {
+            EditAndContinueDiagnosticUpdateSource diagnosticUpdateSource
+        ) {
             _proxy = new RemoteEditAndContinueServiceProxy(workspace);
             _debuggerService = new DebuggerService(hotReloadService);
             _diagnosticService = diagnosticService;
@@ -75,30 +86,58 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             try
             {
                 var solution = _proxy.Workspace.CurrentSolution;
-                _debuggingSessionConnection = await _proxy.StartDebuggingSessionAsync(solution, _debuggerService, captureMatchingDocuments: false, cancellationToken).ConfigureAwait(false);
+                _debuggingSessionConnection = await _proxy.StartDebuggingSessionAsync(
+                        solution,
+                        _debuggerService,
+                        captureMatchingDocuments: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-            {
-            }
+            { }
         }
 
-        public async ValueTask<ManagedHotReloadUpdates> GetUpdatesAsync(CancellationToken cancellationToken)
-        {
+        public async ValueTask<ManagedHotReloadUpdates> GetUpdatesAsync(
+            CancellationToken cancellationToken
+        ) {
             try
             {
                 var solution = _proxy.Workspace.CurrentSolution;
-                var (moduleUpdates, diagnosticData, rudeEdits) = await _proxy.EmitSolutionUpdateAsync(solution, s_solutionActiveStatementSpanProvider, _diagnosticService, _diagnosticUpdateSource, cancellationToken).ConfigureAwait(false);
+                var (moduleUpdates, diagnosticData, rudeEdits) =
+                    await _proxy.EmitSolutionUpdateAsync(
+                            solution,
+                            s_solutionActiveStatementSpanProvider,
+                            _diagnosticService,
+                            _diagnosticUpdateSource,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 var updates = moduleUpdates.Updates.SelectAsArray(
-                    update => new ManagedHotReloadUpdate(update.Module, update.ILDelta, update.MetadataDelta));
+                    update =>
+                        new ManagedHotReloadUpdate(
+                            update.Module,
+                            update.ILDelta,
+                            update.MetadataDelta
+                        )
+                );
 
-                var diagnostics = await EmitSolutionUpdateResults.GetHotReloadDiagnosticsAsync(solution, diagnosticData, rudeEdits, cancellationToken).ConfigureAwait(false);
+                var diagnostics = await EmitSolutionUpdateResults.GetHotReloadDiagnosticsAsync(
+                        solution,
+                        diagnosticData,
+                        rudeEdits,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return new ManagedHotReloadUpdates(updates, diagnostics);
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
             {
-                var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(RudeEditKind.InternalError);
+                var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
+                    RudeEditKind.InternalError
+                );
 
                 // TODO: better error
                 var diagnostic = new ManagedHotReloadDiagnostic(
@@ -106,9 +145,13 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                     string.Format(descriptor.MessageFormat.ToString(), "", e.Message),
                     ManagedHotReloadDiagnosticSeverity.Error,
                     filePath: "",
-                    span: default);
+                    span: default
+                );
 
-                return new ManagedHotReloadUpdates(ImmutableArray<ManagedHotReloadUpdate>.Empty, ImmutableArray.Create(diagnostic));
+                return new ManagedHotReloadUpdates(
+                    ImmutableArray<ManagedHotReloadUpdate>.Empty,
+                    ImmutableArray.Create(diagnostic)
+                );
             }
         }
 
@@ -116,11 +159,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
         {
             try
             {
-                await _proxy.CommitSolutionUpdateAsync(_diagnosticService, cancellationToken).ConfigureAwait(false);
+                await _proxy.CommitSolutionUpdateAsync(_diagnosticService, cancellationToken)
+                    .ConfigureAwait(false);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e))
-            {
-            }
+            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
         }
 
         public async ValueTask DiscardUpdatesAsync(CancellationToken cancellationToken)
@@ -129,24 +171,26 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
             {
                 await _proxy.DiscardSolutionUpdateAsync(cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e))
-            {
-            }
+            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
         }
 
         public async ValueTask EndSessionAsync(CancellationToken cancellationToken)
         {
             try
             {
-                await _proxy.EndDebuggingSessionAsync(_diagnosticUpdateSource, _diagnosticService, cancellationToken).ConfigureAwait(false);
+                await _proxy.EndDebuggingSessionAsync(
+                        _diagnosticUpdateSource,
+                        _diagnosticService,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 Contract.ThrowIfNull(_debuggingSessionConnection);
                 _debuggingSessionConnection.Dispose();
                 _debuggingSessionConnection = null;
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-            {
-            }
+            { }
         }
     }
 }

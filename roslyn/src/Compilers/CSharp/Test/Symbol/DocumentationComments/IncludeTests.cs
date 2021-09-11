@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             using var _ = new EnsureEnglishUICulture();
 
-            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(@"namespace Acme
+            var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
+                @"namespace Acme
 {
     class Widget
     {
@@ -48,33 +49,43 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         class NamedType { }
     }
 }
-");
+"
+            );
 
-            var acmeNamespace = (NamespaceSymbol)compilation.GlobalNamespace.GetMembers("Acme").Single();
+            var acmeNamespace = (NamespaceSymbol)compilation.GlobalNamespace.GetMembers("Acme")
+                .Single();
             var widgetClass = acmeNamespace.GetTypeMembers("Widget").Single();
 
             var symbol = widgetClass.GetMembers(symbolName).Single();
             Assert.Equal(documentationId, symbol.GetDocumentationCommentId());
             Assert.Equal(
-$@"<member name=""{documentationId}"">
+                $@"<member name=""{documentationId}"">
     <!-- Include tag is invalid --><include file=""NonExistent.xml"" />
 </member>
-", symbol.GetDocumentationCommentXml(expandIncludes: true));
+",
+                symbol.GetDocumentationCommentXml(expandIncludes: true)
+            );
             Assert.Equal(
-$@"<member name=""{documentationId}"">
+                $@"<member name=""{documentationId}"">
     <include file=""NonExistent.xml"" />
 </member>
-", symbol.GetDocumentationCommentXml(expandIncludes: false));
+",
+                symbol.GetDocumentationCommentXml(expandIncludes: false)
+            );
             Assert.Equal(
-$@"<member name=""{documentationId}"">
+                $@"<member name=""{documentationId}"">
     <!-- Include tag is invalid --><include file=""NonExistent.xml"" />
 </member>
-", symbol.GetDocumentationCommentXml(expandIncludes: true));
+",
+                symbol.GetDocumentationCommentXml(expandIncludes: true)
+            );
             Assert.Equal(
-$@"<member name=""{documentationId}"">
+                $@"<member name=""{documentationId}"">
     <include file=""NonExistent.xml"" />
 </member>
-", symbol.GetDocumentationCommentXml(expandIncludes: false));
+",
+                symbol.GetDocumentationCommentXml(expandIncludes: false)
+            );
         }
     }
 }

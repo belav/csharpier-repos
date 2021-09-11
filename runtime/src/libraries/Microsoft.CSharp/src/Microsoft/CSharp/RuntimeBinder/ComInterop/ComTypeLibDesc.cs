@@ -25,7 +25,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private readonly Dictionary<string, ComTypeEnumDesc> _enums;
         private ComTypes.TYPELIBATTR _typeLibAttributes;
 
-        private static readonly Dictionary<Guid, ComTypeLibDesc> s_cachedTypeLibDesc = new Dictionary<Guid, ComTypeLibDesc>();
+        private static readonly Dictionary<Guid, ComTypeLibDesc> s_cachedTypeLibDesc =
+            new Dictionary<Guid, ComTypeLibDesc>();
 
         private ComTypeLibDesc()
         {
@@ -92,14 +93,21 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     {
                         ComRuntimeHelpers.GetInfoFromType(typeInfo, out string aliasName, out _);
 
-                        typeInfo.GetRefTypeInfo(typeAttr.tdescAlias.lpValue.ToInt32(), out ComTypes.ITypeInfo referencedTypeInfo);
+                        typeInfo.GetRefTypeInfo(
+                            typeAttr.tdescAlias.lpValue.ToInt32(),
+                            out ComTypes.ITypeInfo referencedTypeInfo
+                        );
 
-                        ComTypes.TYPEATTR referencedTypeAttr = ComRuntimeHelpers.GetTypeAttrForTypeInfo(referencedTypeInfo);
+                        ComTypes.TYPEATTR referencedTypeAttr =
+                            ComRuntimeHelpers.GetTypeAttrForTypeInfo(referencedTypeInfo);
                         ComTypes.TYPEKIND referencedTypeKind = referencedTypeAttr.typekind;
 
                         if (referencedTypeKind == ComTypes.TYPEKIND.TKIND_ENUM)
                         {
-                            ComTypeEnumDesc enumDesc = new ComTypeEnumDesc(referencedTypeInfo, typeLibDesc);
+                            ComTypeEnumDesc enumDesc = new ComTypeEnumDesc(
+                                referencedTypeInfo,
+                                typeLibDesc
+                            );
                             typeLibDesc._enums.Add(aliasName, enumDesc);
                         }
                     }

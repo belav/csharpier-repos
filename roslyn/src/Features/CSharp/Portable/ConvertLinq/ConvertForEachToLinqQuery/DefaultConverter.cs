@@ -19,35 +19,50 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
     {
         private static readonly TypeSyntax VarNameIdentifier = SyntaxFactory.IdentifierName("var");
 
-        public DefaultConverter(ForEachInfo<ForEachStatementSyntax, StatementSyntax> forEachInfo)
-            : base(forEachInfo)
-        {
-        }
+        public DefaultConverter(
+            ForEachInfo<ForEachStatementSyntax, StatementSyntax> forEachInfo
+        ) : base(forEachInfo) { }
 
-        public override void Convert(SyntaxEditor editor, bool convertToQuery, CancellationToken cancellationToken)
-        {
+        public override void Convert(
+            SyntaxEditor editor,
+            bool convertToQuery,
+            CancellationToken cancellationToken
+        ) {
             // Filter out identifiers which are not used in statements.
-            var variableNamesReadInside = new HashSet<string>(ForEachInfo.Statements
-                .SelectMany(statement => ForEachInfo.SemanticModel.AnalyzeDataFlow(statement).ReadInside).Select(symbol => symbol.Name));
-            var identifiersUsedInStatements = ForEachInfo.Identifiers
-                .Where(identifier => variableNamesReadInside.Contains(identifier.ValueText));
+            var variableNamesReadInside = new HashSet<string>(
+                ForEachInfo.Statements.SelectMany(
+                        statement => ForEachInfo.SemanticModel.AnalyzeDataFlow(statement).ReadInside
+                    )
+                    .Select(symbol => symbol.Name)
+            );
+            var identifiersUsedInStatements = ForEachInfo.Identifiers.Where(
+                identifier => variableNamesReadInside.Contains(identifier.ValueText)
+            );
 
             // If there is a single statement and it is a block, leave it as is.
             // Otherwise, wrap with a block.
             var block = WrapWithBlockIfNecessary(
-                ForEachInfo.Statements.Select(statement => statement.KeepCommentsAndAddElasticMarkers()));
+                ForEachInfo.Statements.Select(
+                    statement => statement.KeepCommentsAndAddElasticMarkers()
+                )
+            );
 
             editor.ReplaceNode(
                 ForEachInfo.ForEachStatement,
-                CreateDefaultReplacementStatement(identifiersUsedInStatements, block, convertToQuery)
-                    .WithAdditionalAnnotations(Formatter.Annotation));
+                CreateDefaultReplacementStatement(
+                        identifiersUsedInStatements,
+                        block,
+                        convertToQuery
+                    )
+                    .WithAdditionalAnnotations(Formatter.Annotation)
+            );
         }
 
         private StatementSyntax CreateDefaultReplacementStatement(
             IEnumerable<SyntaxToken> identifiers,
             BlockSyntax block,
-            bool convertToQuery)
-        {
+            bool convertToQuery
+        ) {
             var identifiersCount = identifiers.Count();
             if (identifiersCount == 0)
             {
@@ -59,8 +74,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         SyntaxFactory.AnonymousObjectCreationExpression(),
                         Enumerable.Empty<SyntaxToken>(),
                         Enumerable.Empty<SyntaxToken>(),
-                        convertToQuery),
-                    block);
+                        convertToQuery
+                    ),
+                    block
+                );
             }
             else if (identifiersCount == 1)
             {
@@ -72,19 +89,31 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         SyntaxFactory.IdentifierName(identifiers.Single()),
                         Enumerable.Empty<SyntaxToken>(),
                         Enumerable.Empty<SyntaxToken>(),
-                        convertToQuery),
-                    block);
+                        convertToQuery
+                    ),
+                    block
+                );
             }
             else
             {
                 var tupleForSelectExpression = SyntaxFactory.TupleExpression(
-                    SyntaxFactory.SeparatedList(identifiers.Select(
-                        identifier => SyntaxFactory.Argument(SyntaxFactory.IdentifierName(identifier)))));
+                    SyntaxFactory.SeparatedList(
+                        identifiers.Select(
+                            identifier =>
+                                SyntaxFactory.Argument(SyntaxFactory.IdentifierName(identifier))
+                        )
+                    )
+                );
                 var declaration = SyntaxFactory.DeclarationExpression(
                     VarNameIdentifier,
                     SyntaxFactory.ParenthesizedVariableDesignation(
-                        SyntaxFactory.SeparatedList<VariableDesignationSyntax>(identifiers.Select(
-                            identifier => SyntaxFactory.SingleVariableDesignation(identifier)))));
+                        SyntaxFactory.SeparatedList<VariableDesignationSyntax>(
+                            identifiers.Select(
+                                identifier => SyntaxFactory.SingleVariableDesignation(identifier)
+                            )
+                        )
+                    )
+                );
 
                 // Generate foreach(var (a,b) ... select (a, b))
                 return SyntaxFactory.ForEachVariableStatement(
@@ -93,12 +122,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         tupleForSelectExpression,
                         Enumerable.Empty<SyntaxToken>(),
                         Enumerable.Empty<SyntaxToken>(),
-                        convertToQuery),
-                    block);
+                        convertToQuery
+                    ),
+                    block
+                );
             }
         }
 
-        private static BlockSyntax WrapWithBlockIfNecessary(IEnumerable<StatementSyntax> statements)
-            => (statements.Count() == 1 && statements.Single() is BlockSyntax block) ? block : SyntaxFactory.Block(statements);
+        private static BlockSyntax WrapWithBlockIfNecessary(
+            IEnumerable<StatementSyntax> statements
+        ) =>
+            (statements.Count() == 1 && statements.Single() is BlockSyntax block)
+                ? block
+                : SyntaxFactory.Block(statements);
     }
 }

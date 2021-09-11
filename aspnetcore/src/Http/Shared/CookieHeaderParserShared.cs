@@ -11,8 +11,12 @@ namespace Microsoft.Net.Http.Headers
 {
     internal static class CookieHeaderParserShared
     {
-        public static bool TryParseValues(StringValues values, IDictionary<string, string> store, bool enableCookieNameEncoding, bool supportsMultipleValues)
-        {
+        public static bool TryParseValues(
+            StringValues values,
+            IDictionary<string, string> store,
+            bool enableCookieNameEncoding,
+            bool supportsMultipleValues
+        ) {
             // If a parser returns an empty list, it means there was no value, but that's valid (e.g. "Accept: "). The caller
             // can ignore the value.
             if (values.Count == 0)
@@ -28,12 +32,21 @@ namespace Microsoft.Net.Http.Headers
 
                 while (!string.IsNullOrEmpty(value) && index < value.Length)
                 {
-                    if (TryParseValue(value, ref index, supportsMultipleValues, out var parsedName, out var parsedValue))
-                    {
+                    if (
+                        TryParseValue(
+                            value,
+                            ref index,
+                            supportsMultipleValues,
+                            out var parsedName,
+                            out var parsedValue
+                        )
+                    ) {
                         // The entry may not contain an actual value, like " , "
                         if (parsedName != null && parsedValue != null)
                         {
-                            var name = enableCookieNameEncoding ? Uri.UnescapeDataString(parsedName.Value.Value) : parsedName.Value.Value;
+                            var name = enableCookieNameEncoding
+                                ? Uri.UnescapeDataString(parsedName.Value.Value)
+                                : parsedName.Value.Value;
                             store[name] = Uri.UnescapeDataString(parsedValue.Value.Value);
                             hasFoundValue = true;
                         }
@@ -49,8 +62,13 @@ namespace Microsoft.Net.Http.Headers
             return hasFoundValue;
         }
 
-        public static bool TryParseValue(StringSegment value, ref int index, bool supportsMultipleValues, [NotNullWhen(true)] out StringSegment? parsedName, [NotNullWhen(true)] out StringSegment? parsedValue)
-        {
+        public static bool TryParseValue(
+            StringSegment value,
+            ref int index,
+            bool supportsMultipleValues,
+            [NotNullWhen(true)] out StringSegment? parsedName,
+            [NotNullWhen(true)] out StringSegment? parsedValue
+        ) {
             parsedName = null;
             parsedValue = null;
 
@@ -64,7 +82,12 @@ namespace Microsoft.Net.Http.Headers
                 return supportsMultipleValues;
             }
 
-            var current = GetNextNonEmptyOrWhitespaceIndex(value, index, supportsMultipleValues, out bool separatorFound);
+            var current = GetNextNonEmptyOrWhitespaceIndex(
+                value,
+                index,
+                supportsMultipleValues,
+                out bool separatorFound
+            );
 
             if (separatorFound && !supportsMultipleValues)
             {
@@ -85,11 +108,18 @@ namespace Microsoft.Net.Http.Headers
                 return false;
             }
 
-            current = GetNextNonEmptyOrWhitespaceIndex(value, current, supportsMultipleValues, out separatorFound);
+            current = GetNextNonEmptyOrWhitespaceIndex(
+                value,
+                current,
+                supportsMultipleValues,
+                out separatorFound
+            );
 
             // If we support multiple values and we've not reached the end of the string, then we must have a separator.
-            if ((separatorFound && !supportsMultipleValues) || (!separatorFound && (current < value.Length)))
-            {
+            if (
+                (separatorFound && !supportsMultipleValues)
+                || (!separatorFound && (current < value.Length))
+            ) {
                 return false;
             }
 
@@ -98,8 +128,12 @@ namespace Microsoft.Net.Http.Headers
             return true;
         }
 
-        private static int GetNextNonEmptyOrWhitespaceIndex(StringSegment input, int startIndex, bool skipEmptyValues, out bool separatorFound)
-        {
+        private static int GetNextNonEmptyOrWhitespaceIndex(
+            StringSegment input,
+            int startIndex,
+            bool skipEmptyValues,
+            out bool separatorFound
+        ) {
             Contract.Requires(startIndex <= input.Length); // it's OK if index == value.Length.
 
             separatorFound = false;
@@ -119,8 +153,9 @@ namespace Microsoft.Net.Http.Headers
             if (skipEmptyValues)
             {
                 // Most headers only split on ',', but cookies primarily split on ';'
-                while ((current < input.Length) && ((input[current] == ',') || (input[current] == ';')))
-                {
+                while (
+                    (current < input.Length) && ((input[current] == ',') || (input[current] == ';'))
+                ) {
                     current++; // skip delimiter.
                     current = current + HttpRuleParser.GetWhitespaceLength(input, current);
                 }
@@ -130,8 +165,12 @@ namespace Microsoft.Net.Http.Headers
         }
 
         // name=value; name="value"
-        internal static bool TryGetCookieLength(StringSegment input, ref int offset, [NotNullWhen(true)] out StringSegment? parsedName, [NotNullWhen(true)] out StringSegment? parsedValue)
-        {
+        internal static bool TryGetCookieLength(
+            StringSegment input,
+            ref int offset,
+            [NotNullWhen(true)] out StringSegment? parsedName,
+            [NotNullWhen(true)] out StringSegment? parsedValue
+        ) {
             Contract.Requires(offset >= 0);
 
             parsedName = null;
@@ -175,7 +214,9 @@ namespace Microsoft.Net.Http.Headers
         internal static StringSegment GetCookieValue(StringSegment input, ref int offset)
         {
             Contract.Requires(offset >= 0);
-            Contract.Ensures((Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - offset)));
+            Contract.Ensures(
+                (Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - offset))
+            );
 
             var startIndex = offset;
 

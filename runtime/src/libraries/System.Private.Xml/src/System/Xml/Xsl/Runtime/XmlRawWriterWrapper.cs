@@ -22,7 +22,6 @@ namespace System.Xml.Xsl.Runtime
             _wrapped = writer;
         }
 
-
         //-----------------------------------------------
         // XmlWriter interface
         //-----------------------------------------------
@@ -171,12 +170,12 @@ namespace System.Xml.Xsl.Runtime
                     ((IDisposable)_wrapped).Dispose();
                 }
             }
+
             finally
             {
                 base.Dispose(disposing);
             }
         }
-
 
         //-----------------------------------------------
         // XmlRawWriter interface
@@ -185,23 +184,17 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// No-op.
         /// </summary>
-        internal override void WriteXmlDeclaration(XmlStandalone standalone)
-        {
-        }
+        internal override void WriteXmlDeclaration(XmlStandalone standalone) { }
 
         /// <summary>
         /// No-op.
         /// </summary>
-        internal override void WriteXmlDeclaration(string xmldecl)
-        {
-        }
+        internal override void WriteXmlDeclaration(string xmldecl) { }
 
         /// <summary>
         /// No-op.
         /// </summary>
-        internal override void StartElementContent()
-        {
-        }
+        internal override void StartElementContent() { }
 
         /// <summary>
         /// Forward to WriteEndElement().

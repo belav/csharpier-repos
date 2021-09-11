@@ -33,15 +33,19 @@ namespace Microsoft.AspNetCore.Razor.Language
             var project = new TestRazorProject();
 
             // Act and Assert
-            ExceptionAssert.ThrowsArgumentNullOrEmptyString(() => project.NormalizeAndEnsureValidPath(path), "path");
+            ExceptionAssert.ThrowsArgumentNullOrEmptyString(
+                () => project.NormalizeAndEnsureValidPath(path),
+                "path"
+            );
         }
 
         [Theory]
         [InlineData("foo")]
         [InlineData("~/foo")]
         [InlineData("\\foo")]
-        public void NormalizeAndEnsureValidPath_ThrowsIfPathDoesNotStartWithForwardSlash(string path)
-        {
+        public void NormalizeAndEnsureValidPath_ThrowsIfPathDoesNotStartWithForwardSlash(
+            string path
+        ) {
             // Arrange
             var project = new TestRazorProject();
 
@@ -49,7 +53,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             ExceptionAssert.ThrowsArgument(
                 () => project.NormalizeAndEnsureValidPath(path),
                 "path",
-                "Path must begin with a forward slash '/'.");
+                "Path must begin with a forward slash '/'."
+            );
         }
 
         [Fact]
@@ -88,7 +93,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 result,
                 item => Assert.Equal($"/Views/Home/{fileName}", item.FilePath),
                 item => Assert.Equal($"/Views/{fileName}", item.FilePath),
-                item => Assert.Equal($"/{fileName}", item.FilePath));
+                item => Assert.Equal($"/{fileName}", item.FilePath)
+            );
         }
 
         [Fact]
@@ -96,19 +102,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var path = "/Index.cshtml";
-            var items = new List<RazorProjectItem>
-            {
-                CreateProjectItem("/File.cshtml")
-            };
+            var items = new List<RazorProjectItem> { CreateProjectItem("/File.cshtml") };
             var project = new TestRazorProject(items);
 
             // Act
             var result = project.FindHierarchicalItems(path, "File.cshtml");
 
             // Assert
-            Assert.Collection(
-                result,
-                item => Assert.Equal("/File.cshtml", item.FilePath));
+            Assert.Collection(result, item => Assert.Equal("/File.cshtml", item.FilePath));
         }
 
         [Fact]
@@ -135,7 +136,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 item => Assert.Equal("/Areas/MyArea/Views/File.cshtml", item.FilePath),
                 item => Assert.Equal("/Areas/MyArea/File.cshtml", item.FilePath),
                 item => Assert.Equal("/Areas/File.cshtml", item.FilePath),
-                item => Assert.Equal("/File.cshtml", item.FilePath));
+                item => Assert.Equal("/File.cshtml", item.FilePath)
+            );
         }
 
         [Fact]
@@ -143,10 +145,7 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var path = "/File.cshtml";
-            var items = new List<RazorProjectItem>
-            {
-                 CreateProjectItem("/File.cshtml")
-            };
+            var items = new List<RazorProjectItem> { CreateProjectItem("/File.cshtml") };
             var project = new TestRazorProject(items);
 
             // Act
@@ -198,7 +197,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     Assert.Equal("/File.cshtml", item.FilePath);
                     Assert.True(item.Exists);
-                });
+                }
+            );
         }
 
         [Theory]
@@ -240,7 +240,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     Assert.Equal("/Areas/File.cshtml", item.FilePath);
                     Assert.False(item.Exists);
-                });
+                }
+            );
         }
 
         [Theory]
@@ -272,7 +273,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     Assert.Equal("/Areas/MyArea/Views/File.cshtml", item.FilePath);
                     Assert.False(item.Exists);
-                });
+                }
+            );
         }
 
         [Theory]
@@ -299,7 +301,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     Assert.Equal("/Areas/MyArea/Views/Home/File.cshtml", item.FilePath);
                     Assert.False(item.Exists);
-                });
+                }
+            );
         }
 
         [Fact]

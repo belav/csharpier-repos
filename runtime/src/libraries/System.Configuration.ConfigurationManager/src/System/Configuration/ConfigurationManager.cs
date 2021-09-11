@@ -17,8 +17,8 @@ namespace System.Configuration
         private static volatile Exception s_initError;
 
         // to be used by System.Diagnostics to avoid false config results during config init
-        internal static bool SetConfigurationSystemInProgress
-            => (InitState.NotStarted < s_initState) && (s_initState < InitState.Completed);
+        internal static bool SetConfigurationSystemInProgress =>
+            (InitState.NotStarted < s_initState) && (s_initState < InitState.Completed);
 
         internal static bool SupportsUserConfig
         {
@@ -39,7 +39,9 @@ namespace System.Configuration
                 {
                     // If config is null or not the type we expect, the declaration was changed.
                     // Treat it as a configuration error.
-                    throw new ConfigurationErrorsException(SR.Config_appsettings_declaration_invalid);
+                    throw new ConfigurationErrorsException(
+                        SR.Config_appsettings_declaration_invalid
+                    );
                 }
 
                 return (NameValueCollection)section;
@@ -57,17 +59,22 @@ namespace System.Configuration
                 {
                     // If config is null or not the type we expect, the declaration was changed.
                     // Treat it as a configuration error.
-                    throw new ConfigurationErrorsException(SR.Config_connectionstrings_declaration_invalid);
+                    throw new ConfigurationErrorsException(
+                        SR.Config_connectionstrings_declaration_invalid
+                    );
                 }
 
-                ConnectionStringsSection connectionStringsSection = (ConnectionStringsSection)section;
+                ConnectionStringsSection connectionStringsSection =
+                    (ConnectionStringsSection)section;
                 return connectionStringsSection.ConnectionStrings;
             }
         }
 
         // Called by ASP.NET to allow hierarchical configuration settings and ASP.NET specific extenstions.
-        internal static void SetConfigurationSystem(IInternalConfigSystem configSystem, bool initComplete)
-        {
+        internal static void SetConfigurationSystem(
+            IInternalConfigSystem configSystem,
+            bool initComplete
+        ) {
             lock (s_initLock)
             {
                 // It is an error if the configuration system has already been set.
@@ -85,7 +92,8 @@ namespace System.Configuration
             // create the DefaultConfigurationSystem for exe's.
             lock (s_initLock)
             {
-                if (s_initState >= InitState.Usable) return;
+                if (s_initState >= InitState.Usable)
+                    return;
 
                 s_initState = InitState.Started;
                 try
@@ -105,8 +113,10 @@ namespace System.Configuration
                     }
                     catch (Exception e)
                     {
-                        s_initError =
-                            new ConfigurationErrorsException(SR.Config_client_config_init_error, e);
+                        s_initError = new ConfigurationErrorsException(
+                            SR.Config_client_config_init_error,
+                            e
+                        );
                         throw s_initError;
                     }
                 }
@@ -133,21 +143,23 @@ namespace System.Configuration
             }
         }
 
-
         private static void PrepareConfigSystem()
         {
             // Ensure the configuration system is usable.
-            if (s_initState < InitState.Usable) EnsureConfigurationSystem();
+            if (s_initState < InitState.Usable)
+                EnsureConfigurationSystem();
 
             // If there was an initialization error, throw it.
-            if (s_initError != null) throw s_initError;
+            if (s_initError != null)
+                throw s_initError;
         }
 
         public static object GetSection(string sectionName)
         {
             // Avoid unintended AV's by ensuring sectionName is not empty.
             // For compatibility, we cannot throw an InvalidArgumentException.
-            if (string.IsNullOrEmpty(sectionName)) return null;
+            if (string.IsNullOrEmpty(sectionName))
+                return null;
 
             PrepareConfigSystem();
 
@@ -159,7 +171,8 @@ namespace System.Configuration
         {
             // Avoid unintended AV's by ensuring sectionName is not empty.
             // For consistency with GetSection, we should not throw an InvalidArgumentException.
-            if (string.IsNullOrEmpty(sectionName)) return;
+            if (string.IsNullOrEmpty(sectionName))
+                return;
 
             PrepareConfigSystem();
 
@@ -186,33 +199,54 @@ namespace System.Configuration
             return OpenExeConfigurationImpl(null, false, ConfigurationUserLevel.None, exePath);
         }
 
-        public static Configuration OpenMappedExeConfiguration(ExeConfigurationFileMap fileMap,
-            ConfigurationUserLevel userLevel)
-        {
+        public static Configuration OpenMappedExeConfiguration(
+            ExeConfigurationFileMap fileMap,
+            ConfigurationUserLevel userLevel
+        ) {
             return OpenExeConfigurationImpl(fileMap, false, userLevel, null);
         }
 
-        public static Configuration OpenMappedExeConfiguration(ExeConfigurationFileMap fileMap,
-            ConfigurationUserLevel userLevel, bool preLoad)
-        {
+        public static Configuration OpenMappedExeConfiguration(
+            ExeConfigurationFileMap fileMap,
+            ConfigurationUserLevel userLevel,
+            bool preLoad
+        ) {
             return OpenExeConfigurationImpl(fileMap, false, userLevel, null, preLoad);
         }
 
-        private static Configuration OpenExeConfigurationImpl(ConfigurationFileMap fileMap, bool isMachine,
-            ConfigurationUserLevel userLevel, string exePath, bool preLoad = false)
-        {
+        private static Configuration OpenExeConfigurationImpl(
+            ConfigurationFileMap fileMap,
+            bool isMachine,
+            ConfigurationUserLevel userLevel,
+            string exePath,
+            bool preLoad = false
+        ) {
             // exePath must be specified if not running inside ClientConfigurationSystem
-            if (!isMachine &&
-                (((fileMap == null) && (exePath == null)) ||
-                ((fileMap != null) && (((ExeConfigurationFileMap)fileMap).ExeConfigFilename == null))))
-            {
-                if ((s_configSystem != null) &&
-                    (s_configSystem.GetType() != typeof(ClientConfigurationSystem)))
+            if (
+                !isMachine
+                && (
+                    ((fileMap == null) && (exePath == null))
+                    || (
+                        (fileMap != null)
+                        && (((ExeConfigurationFileMap)fileMap).ExeConfigFilename == null)
+                    )
+                )
+            ) {
+                if (
+                    (s_configSystem != null)
+                    && (s_configSystem.GetType() != typeof(ClientConfigurationSystem))
+                )
                     throw new ArgumentException(SR.Config_configmanager_open_noexe);
             }
 
-            Configuration config = ClientConfigurationHost.OpenExeConfiguration(fileMap, isMachine, userLevel, exePath);
-            if (preLoad) PreloadConfiguration(config);
+            Configuration config = ClientConfigurationHost.OpenExeConfiguration(
+                fileMap,
+                isMachine,
+                userLevel,
+                exePath
+            );
+            if (preLoad)
+                PreloadConfiguration(config);
             return config;
         }
 
@@ -221,7 +255,8 @@ namespace System.Configuration
         /// </summary>
         private static void PreloadConfiguration(Configuration configuration)
         {
-            if (null == configuration) return;
+            if (null == configuration)
+                return;
 
             // Preload root-level sections.
             foreach (ConfigurationSection section in configuration.Sections) { }
@@ -233,7 +268,8 @@ namespace System.Configuration
 
         private static void PreloadConfigurationSectionGroup(ConfigurationSectionGroup sectionGroup)
         {
-            if (null == sectionGroup) return;
+            if (null == sectionGroup)
+                return;
 
             // Preload sections just by iterating.
             foreach (ConfigurationSection section in sectionGroup.Sections) { }
@@ -247,13 +283,10 @@ namespace System.Configuration
         {
             // Initialization has not yet started.
             NotStarted = 0,
-
             // Initialization has started.
             Started,
-
             // The config system can be used, but initialization is not yet complete.
             Usable,
-
             // The config system has been completely initialized.
             Completed
         };

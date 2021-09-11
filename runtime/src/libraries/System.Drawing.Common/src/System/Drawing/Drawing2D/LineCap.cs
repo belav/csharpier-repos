@@ -14,8 +14,7 @@ namespace System.Drawing.Drawing2D
         RoundAnchor = 0x12, // corresponds to round cap
         DiamondAnchor = 0x13, // corresponds to triangle cap
         ArrowAnchor = 0x14, // no correspondence
-
         Custom = 0xff, // custom cap
-        AnchorMask = 0xf0  // mask to check for anchor or not.
+        AnchorMask = 0xf0 // mask to check for anchor or not.
     }
 }

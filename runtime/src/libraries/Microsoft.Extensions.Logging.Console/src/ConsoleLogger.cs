@@ -33,8 +33,13 @@ namespace Microsoft.Extensions.Logging.Console
         [ThreadStatic]
         private static StringWriter t_stringWriter;
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-        {
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        ) {
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -44,7 +49,14 @@ namespace Microsoft.Extensions.Logging.Console
                 throw new ArgumentNullException(nameof(formatter));
             }
             t_stringWriter ??= new StringWriter();
-            LogEntry<TState> logEntry = new LogEntry<TState>(logLevel, _name, eventId, state, exception, formatter);
+            LogEntry<TState> logEntry = new LogEntry<TState>(
+                logLevel,
+                _name,
+                eventId,
+                state,
+                exception,
+                formatter
+            );
             Formatter.Write(in logEntry, ScopeProvider, t_stringWriter);
 
             var sb = t_stringWriter.GetStringBuilder();
@@ -58,7 +70,12 @@ namespace Microsoft.Extensions.Logging.Console
             {
                 sb.Capacity = 1024;
             }
-            _queueProcessor.EnqueueMessage(new LogMessageEntry(computedAnsiString, logAsError: logLevel >= Options.LogToStandardErrorThreshold));
+            _queueProcessor.EnqueueMessage(
+                new LogMessageEntry(
+                    computedAnsiString,
+                    logAsError: logLevel >= Options.LogToStandardErrorThreshold
+                )
+            );
         }
 
         public bool IsEnabled(LogLevel logLevel)
@@ -66,6 +83,7 @@ namespace Microsoft.Extensions.Logging.Console
             return logLevel != LogLevel.None;
         }
 
-        public IDisposable BeginScope<TState>(TState state) => ScopeProvider?.Push(state) ?? NullScope.Instance;
+        public IDisposable BeginScope<TState>(TState state) =>
+            ScopeProvider?.Push(state) ?? NullScope.Instance;
     }
 }

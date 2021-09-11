@@ -24,10 +24,19 @@ namespace Microsoft.Extensions.Primitives
             var thirdCancellationToken = thirdCancellationTokenSource.Token;
 
             var firstCancellationChangeToken = new CancellationChangeToken(firstCancellationToken);
-            var secondCancellationChangeToken = new CancellationChangeToken(secondCancellationToken);
+            var secondCancellationChangeToken = new CancellationChangeToken(
+                secondCancellationToken
+            );
             var thirdCancellationChangeToken = new CancellationChangeToken(thirdCancellationToken);
 
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { firstCancellationChangeToken, secondCancellationChangeToken, thirdCancellationChangeToken });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken>
+                {
+                    firstCancellationChangeToken,
+                    secondCancellationChangeToken,
+                    thirdCancellationChangeToken
+                }
+            );
             var count1 = 0;
             var count2 = 0;
             compositeChangeToken.RegisterChangeCallback(_ => count1++, null);
@@ -53,7 +62,14 @@ namespace Microsoft.Extensions.Primitives
             secondChangeToken.Setup(t => t.HasChanged).Returns(true);
 
             // Act
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object, thirdChangeToken.Object });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken>
+                {
+                    firstChangeToken.Object,
+                    secondChangeToken.Object,
+                    thirdChangeToken.Object
+                }
+            );
 
             // Assert
             Assert.True(compositeChangeToken.HasChanged);
@@ -67,7 +83,9 @@ namespace Microsoft.Extensions.Primitives
             var secondChangeToken = new Mock<IChangeToken>();
 
             // Act
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object });            
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object }
+            );
 
             // Assert
             Assert.False(compositeChangeToken.HasChanged);
@@ -83,7 +101,14 @@ namespace Microsoft.Extensions.Primitives
 
             secondChangeToken.Setup(t => t.ActiveChangeCallbacks).Returns(true);
 
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object, thirdChangeToken.Object });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken>
+                {
+                    firstChangeToken.Object,
+                    secondChangeToken.Object,
+                    thirdChangeToken.Object
+                }
+            );
 
             // Act & Assert
             Assert.True(compositeChangeToken.ActiveChangeCallbacks);
@@ -96,14 +121,20 @@ namespace Microsoft.Extensions.Primitives
             var firstChangeToken = new Mock<IChangeToken>();
             var secondChangeToken = new Mock<IChangeToken>();
 
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken> { firstChangeToken.Object, secondChangeToken.Object }
+            );
 
             // Act & Assert
             Assert.False(compositeChangeToken.ActiveChangeCallbacks);
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/49568",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMacOsAppleSilicon)
+        )]
         public async Task RegisteredCallbackGetsInvokedExactlyOnce_WhenMultipleConcurrentChangeEventsOccur()
         {
             // Arrange
@@ -122,21 +153,27 @@ namespace Microsoft.Extensions.Primitives
                 event1.WaitOne(5000);
             };
 
-            var compositeChangeToken = new CompositeChangeToken(new List<IChangeToken> { cancellationChangeToken });
+            var compositeChangeToken = new CompositeChangeToken(
+                new List<IChangeToken> { cancellationChangeToken }
+            );
             compositeChangeToken.RegisterChangeCallback(callback, null);
 
             // Act
-            var firstChange = Task.Run(() =>
-            {
-                event2.WaitOne(5000);
-                cancellationTokenSource.Cancel();
-            });
-            var secondChange = Task.Run(() =>
-            {
-                event3.WaitOne(5000);
-                cancellationTokenSource.Cancel();
-                event1.Set();
-            });
+            var firstChange = Task.Run(
+                () =>
+                {
+                    event2.WaitOne(5000);
+                    cancellationTokenSource.Cancel();
+                }
+            );
+            var secondChange = Task.Run(
+                () =>
+                {
+                    event3.WaitOne(5000);
+                    cancellationTokenSource.Cancel();
+                    event1.Set();
+                }
+            );
 
             event2.Set();
 

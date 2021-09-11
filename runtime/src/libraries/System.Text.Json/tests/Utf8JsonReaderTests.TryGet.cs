@@ -110,11 +110,20 @@ namespace System.Text.Json.Tests
                         if (count >= floats.Count)
                             count = 0;
 
-                        string roundTripActual = numberFloat.ToString(JsonTestHelper.SingleFormatString, CultureInfo.InvariantCulture);
+                        string roundTripActual = numberFloat.ToString(
+                            JsonTestHelper.SingleFormatString,
+                            CultureInfo.InvariantCulture
+                        );
                         float actual = float.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = floats[count].ToString(JsonTestHelper.SingleFormatString, CultureInfo.InvariantCulture);
-                        float expected = float.Parse(roundTripExpected, CultureInfo.InvariantCulture);
+                        string roundTripExpected = floats[count].ToString(
+                            JsonTestHelper.SingleFormatString,
+                            CultureInfo.InvariantCulture
+                        );
+                        float expected = float.Parse(
+                            roundTripExpected,
+                            CultureInfo.InvariantCulture
+                        );
 
                         Assert.Equal(expected, actual);
                         count++;
@@ -125,11 +134,20 @@ namespace System.Text.Json.Tests
                         if (count >= doubles.Count)
                             count = 0;
 
-                        string roundTripActual = numberDouble.ToString(JsonTestHelper.DoubleFormatString, CultureInfo.InvariantCulture);
+                        string roundTripActual = numberDouble.ToString(
+                            JsonTestHelper.DoubleFormatString,
+                            CultureInfo.InvariantCulture
+                        );
                         double actual = double.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = doubles[count].ToString(JsonTestHelper.DoubleFormatString, CultureInfo.InvariantCulture);
-                        double expected = double.Parse(roundTripExpected, CultureInfo.InvariantCulture);
+                        string roundTripExpected = doubles[count].ToString(
+                            JsonTestHelper.DoubleFormatString,
+                            CultureInfo.InvariantCulture
+                        );
+                        double expected = double.Parse(
+                            roundTripExpected,
+                            CultureInfo.InvariantCulture
+                        );
 
                         Assert.Equal(expected, actual);
                         count++;
@@ -140,7 +158,11 @@ namespace System.Text.Json.Tests
                         if (count >= decimals.Count)
                             count = 0;
 
-                        var str = string.Format(CultureInfo.InvariantCulture, "{0}", decimals[count]);
+                        var str = string.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}",
+                            decimals[count]
+                        );
                         decimal expected = decimal.Parse(str, CultureInfo.InvariantCulture);
                         Assert.Equal(expected, numberDecimal);
                         count++;
@@ -239,11 +261,21 @@ namespace System.Text.Json.Tests
                         if (count >= floats.Count)
                             count = 0;
 
-                        string roundTripActual = json.GetSingle().ToString(JsonTestHelper.SingleFormatString, CultureInfo.InvariantCulture);
+                        string roundTripActual = json.GetSingle()
+                            .ToString(
+                                JsonTestHelper.SingleFormatString,
+                                CultureInfo.InvariantCulture
+                            );
                         float actual = float.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = floats[count].ToString(JsonTestHelper.SingleFormatString, CultureInfo.InvariantCulture);
-                        float expected = float.Parse(roundTripExpected, CultureInfo.InvariantCulture);
+                        string roundTripExpected = floats[count].ToString(
+                            JsonTestHelper.SingleFormatString,
+                            CultureInfo.InvariantCulture
+                        );
+                        float expected = float.Parse(
+                            roundTripExpected,
+                            CultureInfo.InvariantCulture
+                        );
 
                         Assert.Equal(expected, actual);
                         count++;
@@ -253,11 +285,21 @@ namespace System.Text.Json.Tests
                         if (count >= doubles.Count)
                             count = 0;
 
-                        string roundTripActual = json.GetDouble().ToString(JsonTestHelper.DoubleFormatString, CultureInfo.InvariantCulture);
+                        string roundTripActual = json.GetDouble()
+                            .ToString(
+                                JsonTestHelper.DoubleFormatString,
+                                CultureInfo.InvariantCulture
+                            );
                         double actual = double.Parse(roundTripActual, CultureInfo.InvariantCulture);
 
-                        string roundTripExpected = doubles[count].ToString(JsonTestHelper.DoubleFormatString, CultureInfo.InvariantCulture);
-                        double expected = double.Parse(roundTripExpected, CultureInfo.InvariantCulture);
+                        string roundTripExpected = doubles[count].ToString(
+                            JsonTestHelper.DoubleFormatString,
+                            CultureInfo.InvariantCulture
+                        );
+                        double expected = double.Parse(
+                            roundTripExpected,
+                            CultureInfo.InvariantCulture
+                        );
 
                         Assert.Equal(expected, actual);
                         count++;
@@ -269,16 +311,26 @@ namespace System.Text.Json.Tests
                             if (count >= decimals.Count)
                                 count = 0;
 
-                            var str = string.Format(CultureInfo.InvariantCulture, "{0}", decimals[count]);
+                            var str = string.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}",
+                                decimals[count]
+                            );
                             decimal expected = decimal.Parse(str, CultureInfo.InvariantCulture);
                             Assert.Equal(expected, json.GetDecimal());
                             count++;
                         }
                         catch (Exception except)
                         {
-                            Assert.True(false, string.Format("Unexpected exception: {0}. Message: {1}", except.Source, except.Message));
+                            Assert.True(
+                                false,
+                                string.Format(
+                                    "Unexpected exception: {0}. Message: {1}",
+                                    except.Source,
+                                    except.Message
+                                )
+                            );
                         }
-
                     }
                 }
             }
@@ -333,8 +385,10 @@ namespace System.Text.Json.Tests
         [InlineData("12345678901", 12345678901)]
         [InlineData("123456789012345678901", 123456789012345678901d)]
         [InlineData("-129", -129)] // sbyte.MinValue - 1
-        public static void TestingNumbersInvalidConversionToSByte(string jsonString, double expected)
-        {
+        public static void TestingNumbersInvalidConversionToSByte(
+            string jsonString,
+            double expected
+        ) {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -372,8 +426,10 @@ namespace System.Text.Json.Tests
         [InlineData("12345678901", 12345678901)]
         [InlineData("123456789012345678901", 123456789012345678901d)]
         [InlineData("-32769", -32769)] // short.MinValue - 1
-        public static void TestingNumbersInvalidConversionToInt16(string jsonString, double expected)
-        {
+        public static void TestingNumbersInvalidConversionToInt16(
+            string jsonString,
+            double expected
+        ) {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -411,8 +467,10 @@ namespace System.Text.Json.Tests
         [InlineData("12345678901", 12345678901)]
         [InlineData("123456789012345678901", 123456789012345678901d)]
         [InlineData("-2147483649", -2147483649)] // int.MinValue - 1
-        public static void TestingNumbersInvalidConversionToInt32(string jsonString, double expected)
-        {
+        public static void TestingNumbersInvalidConversionToInt32(
+            string jsonString,
+            double expected
+        ) {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -449,8 +507,10 @@ namespace System.Text.Json.Tests
         [InlineData("12345.1", 12345.1)]
         [InlineData("123456789012345678901", 123456789012345678901d)]
         [InlineData("-9223372036854775809", -9223372036854775809d)] // long.MinValue - 1
-        public static void TestingNumbersInvalidConversionToInt64(string jsonString, double expected)
-        {
+        public static void TestingNumbersInvalidConversionToInt64(
+            string jsonString,
+            double expected
+        ) {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -488,8 +548,10 @@ namespace System.Text.Json.Tests
         [InlineData("12345678901", 12345678901)]
         [InlineData("123456789012345678901", 123456789012345678901d)]
         [InlineData("-1", -1)] // ushort.MinValue - 1
-        public static void TestingNumbersInvalidConversionToUInt16(string jsonString, double expected)
-        {
+        public static void TestingNumbersInvalidConversionToUInt16(
+            string jsonString,
+            double expected
+        ) {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -527,8 +589,10 @@ namespace System.Text.Json.Tests
         [InlineData("12345678901", 12345678901)]
         [InlineData("123456789012345678901", 123456789012345678901d)]
         [InlineData("-1", -1)] // uint.MinValue - 1
-        public static void TestingNumbersInvalidConversionToUInt32(string jsonString, double expected)
-        {
+        public static void TestingNumbersInvalidConversionToUInt32(
+            string jsonString,
+            double expected
+        ) {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -565,8 +629,10 @@ namespace System.Text.Json.Tests
         [InlineData("12345.1", 12345.1)]
         [InlineData("123456789012345678901", 123456789012345678901d)]
         [InlineData("-1", -1)] // ulong.MinValue - 1
-        public static void TestingNumbersInvalidConversionToUInt64(string jsonString, double expected)
-        {
+        public static void TestingNumbersInvalidConversionToUInt64(
+            string jsonString,
+            double expected
+        ) {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -598,9 +664,12 @@ namespace System.Text.Json.Tests
 
         [Theory]
         [InlineData("-4.402823E+38", float.NegativeInfinity, -4.402823E+38)] // float.MinValue - 1
-        [InlineData("4.402823E+38", float.PositiveInfinity, 4.402823E+38)]  // float.MaxValue + 1
-        public static void TestingTooLargeSingleConversionToInfinity(string jsonString, float expectedFloat, double expectedDouble)
-        {
+        [InlineData("4.402823E+38", float.PositiveInfinity, 4.402823E+38)] // float.MaxValue + 1
+        public static void TestingTooLargeSingleConversionToInfinity(
+            string jsonString,
+            float expectedFloat,
+            double expectedDouble
+        ) {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -644,9 +713,11 @@ namespace System.Text.Json.Tests
 
         [Theory]
         [InlineData("-2.79769313486232E+308", double.NegativeInfinity)] // double.MinValue - 1
-        [InlineData("2.79769313486232E+308", double.PositiveInfinity)]  // double.MaxValue + 1
-        public static void TestingTooLargeDoubleConversionToInfinity(string jsonString, double expected)
-        {
+        [InlineData("2.79769313486232E+308", double.PositiveInfinity)] // double.MaxValue + 1
+        public static void TestingTooLargeDoubleConversionToInfinity(
+            string jsonString,
+            double expected
+        ) {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -686,9 +757,11 @@ namespace System.Text.Json.Tests
 
         [Theory]
         [InlineData("-79228162514264337593543950336", -79228162514264337593543950336d)] // decimal.MinValue - 1
-        [InlineData("79228162514264337593543950336", 79228162514264337593543950336d)]  // decimal.MaxValue + 1
-        public static void TestingNumbersInvalidConversionToDecimal(string jsonString, double expected)
-        {
+        [InlineData("79228162514264337593543950336", 79228162514264337593543950336d)] // decimal.MaxValue + 1
+        public static void TestingNumbersInvalidConversionToDecimal(
+            string jsonString,
+            double expected
+        ) {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
@@ -721,10 +794,13 @@ namespace System.Text.Json.Tests
         [Fact]
         public static void InvalidConversion()
         {
-            string jsonString = "[\"stringValue\", true, /* Comment within */ 1234, null] // Comment outside";
+            string jsonString =
+                "[\"stringValue\", true, /* Comment within */ 1234, null] // Comment outside";
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
-            var state = new JsonReaderState(options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow });
+            var state = new JsonReaderState(
+                options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow }
+            );
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
             while (json.Read())
             {
@@ -736,60 +812,81 @@ namespace System.Text.Json.Tests
                     }
                     else
                     {
-                        JsonTestHelper.AssertThrows<InvalidOperationException>(json, (jsonReader) => jsonReader.GetString());
+                        JsonTestHelper.AssertThrows<InvalidOperationException>(
+                            json,
+                            (jsonReader) => jsonReader.GetString()
+                        );
                     }
 
                     try
                     {
                         byte[] value = json.GetBytesFromBase64();
-                        Assert.True(false, "Expected GetBytesFromBase64 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetBytesFromBase64 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetBytesFromBase64(out byte[] value);
-                        Assert.True(false, "Expected TryGetBytesFromBase64 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetBytesFromBase64 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         DateTime value = json.GetDateTime();
-                        Assert.True(false, "Expected GetDateTime to throw InvalidOperationException due to mismatched token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetDateTime to throw InvalidOperationException due to mismatched token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetDateTime(out DateTime value);
-                        Assert.True(false, "Expected TryGetDateTime to throw InvalidOperationException due to mismatched token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetDateTime to throw InvalidOperationException due to mismatched token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         DateTimeOffset value = json.GetDateTimeOffset();
-                        Assert.True(false, "Expected GetDateTimeOffset to throw InvalidOperationException due to mismatched token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetDateTimeOffset to throw InvalidOperationException due to mismatched token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetDateTimeOffset(out DateTimeOffset value);
-                        Assert.True(false, "Expected TryGetDateTimeOffset to throw InvalidOperationException due to mismatched token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetDateTimeOffset to throw InvalidOperationException due to mismatched token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
-                    JsonTestHelper.AssertThrows<InvalidOperationException>(json, (jsonReader) => jsonReader.GetGuid());
+                    JsonTestHelper.AssertThrows<InvalidOperationException>(
+                        json,
+                        (jsonReader) => jsonReader.GetGuid()
+                    );
 
-                    JsonTestHelper.AssertThrows<InvalidOperationException>(json, (jsonReader) => jsonReader.TryGetGuid(out _));
+                    JsonTestHelper.AssertThrows<InvalidOperationException>(
+                        json,
+                        (jsonReader) => jsonReader.TryGetGuid(out _)
+                    );
                 }
 
                 if (json.TokenType != JsonTokenType.Comment)
@@ -797,10 +894,12 @@ namespace System.Text.Json.Tests
                     try
                     {
                         string value = json.GetComment();
-                        Assert.True(false, "Expected GetComment to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetComment to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
                 }
 
                 if (json.TokenType != JsonTokenType.True && json.TokenType != JsonTokenType.False)
@@ -808,10 +907,12 @@ namespace System.Text.Json.Tests
                     try
                     {
                         bool value = json.GetBoolean();
-                        Assert.True(false, "Expected GetBoolean to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetBoolean to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
                 }
 
                 if (json.TokenType != JsonTokenType.Number)
@@ -819,178 +920,222 @@ namespace System.Text.Json.Tests
                     try
                     {
                         json.TryGetByte(out byte value);
-                        Assert.True(false, "Expected TryGetByte to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetByte to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetByte();
-                        Assert.True(false, "Expected GetByte to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetByte to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetSByte(out sbyte value);
-                        Assert.True(false, "Expected TryGetSByte to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetSByte to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetSByte();
-                        Assert.True(false, "Expected GetSByte to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetSByte to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetInt16(out short value);
-                        Assert.True(false, "Expected TryGetInt16 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetInt16 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetInt16();
-                        Assert.True(false, "Expected GetInt16 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetInt16 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetInt32(out int value);
-                        Assert.True(false, "Expected TryGetInt32 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetInt32 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetInt32();
-                        Assert.True(false, "Expected GetInt32 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetInt32 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetInt64(out long value);
-                        Assert.True(false, "Expected TryGetInt64 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetInt64 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetInt64();
-                        Assert.True(false, "Expected GetInt64 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetInt64 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetUInt16(out ushort value);
-                        Assert.True(false, "Expected TryGetUInt16 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetUInt16 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetUInt16();
-                        Assert.True(false, "Expected GetUInt16 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetUInt16 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetUInt32(out uint value);
-                        Assert.True(false, "Expected TryGetUInt32 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetUInt32 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetUInt32();
-                        Assert.True(false, "Expected GetUInt32 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetUInt32 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetUInt64(out ulong value);
-                        Assert.True(false, "Expected TryGetUInt64 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetUInt64 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetUInt64();
-                        Assert.True(false, "Expected GetUInt64 to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetUInt64 to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetSingle(out float value);
-                        Assert.True(false, "Expected TryGetSingle to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetSingle to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetSingle();
-                        Assert.True(false, "Expected GetSingle to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetSingle to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetDouble(out double value);
-                        Assert.True(false, "Expected TryGetDouble to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetDouble to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetDouble();
-                        Assert.True(false, "Expected GetDouble to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetDouble to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.TryGetDecimal(out decimal value);
-                        Assert.True(false, "Expected TryGetDecimal to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected TryGetDecimal to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
 
                     try
                     {
                         json.GetDecimal();
-                        Assert.True(false, "Expected GetDecimal to throw InvalidOperationException due to mismatch token type.");
+                        Assert.True(
+                            false,
+                            "Expected GetDecimal to throw InvalidOperationException due to mismatch token type."
+                        );
                     }
-                    catch (InvalidOperationException)
-                    { }
+                    catch (InvalidOperationException) { }
                 }
             }
 
@@ -1000,10 +1145,14 @@ namespace System.Text.Json.Tests
         [Theory]
         [InlineData("{\"message\":\"Hello, I am \\\"Ahson!\\\"\"}")]
         [InlineData("{\"nam\\\"e\":\"ah\\\"son\"}")]
-        [InlineData("{\"Here is a string: \\\"\\\"\":\"Here is a\",\"Here is a back slash\\\\\":[\"Multiline\\r\\n String\\r\\n\",\"\\tMul\\r\\ntiline String\",\"\\\"somequote\\\"\\tMu\\\"\\\"l\\r\\ntiline\\\"another\\\" String\\\\\"],\"str\":\"\\\"\\\"\"}")]
-        [InlineData("[\"\\u0030\\u0031\\u0032\\u0033\\u0034\\u0035\", \"\\u0000\\u002B\", \"a\\u005C\\u0072b\", \"a\\\\u005C\\u0072b\", \"a\\u008E\\u008Fb\", \"a\\uD803\\uDE6Db\", \"a\\uD834\\uDD1Eb\", \"a\\\\uD834\\\\uDD1Eb\"]")]
+        [InlineData(
+            "{\"Here is a string: \\\"\\\"\":\"Here is a\",\"Here is a back slash\\\\\":[\"Multiline\\r\\n String\\r\\n\",\"\\tMul\\r\\ntiline String\",\"\\\"somequote\\\"\\tMu\\\"\\\"l\\r\\ntiline\\\"another\\\" String\\\\\"],\"str\":\"\\\"\\\"\"}"
+        )]
+        [InlineData(
+            "[\"\\u0030\\u0031\\u0032\\u0033\\u0034\\u0035\", \"\\u0000\\u002B\", \"a\\u005C\\u0072b\", \"a\\\\u005C\\u0072b\", \"a\\u008E\\u008Fb\", \"a\\uD803\\uDE6Db\", \"a\\uD834\\uDD1Eb\", \"a\\\\uD834\\\\uDD1Eb\"]"
+        )]
         [InlineData("{\"message\":\"Hello /a/b/c \\/ \\r\\b\\n\\f\\t\\/\"}")]
-        [InlineData(null)]  // Large randomly generated string
+        [InlineData(null)] // Large randomly generated string
         public static void TestingGetString(string jsonString)
         {
             if (jsonString == null)
@@ -1085,9 +1234,12 @@ namespace System.Text.Json.Tests
         {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
-            foreach (JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling)))
-            {
-                var state = new JsonReaderState(options: new JsonReaderOptions { CommentHandling = commentHandling });
+            foreach (
+                JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
+            ) {
+                var state = new JsonReaderState(
+                    options: new JsonReaderOptions { CommentHandling = commentHandling }
+                );
                 var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
 
                 Assert.True(json.Read());
@@ -1095,7 +1247,10 @@ namespace System.Text.Json.Tests
                 try
                 {
                     string val = json.GetString();
-                    Assert.True(false, "Expected InvalidOperationException when trying to get string value for invalid UTF-16 JSON text.");
+                    Assert.True(
+                        false,
+                        "Expected InvalidOperationException when trying to get string value for invalid UTF-16 JSON text."
+                    );
                 }
                 catch (InvalidOperationException) { }
             }
@@ -1105,9 +1260,12 @@ namespace System.Text.Json.Tests
         [MemberData(nameof(InvalidUTF8Strings))]
         public static void TestingGetStringInvalidUTF8(byte[] dataUtf8)
         {
-            foreach (JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling)))
-            {
-                var state = new JsonReaderState(options: new JsonReaderOptions { CommentHandling = commentHandling });
+            foreach (
+                JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
+            ) {
+                var state = new JsonReaderState(
+                    options: new JsonReaderOptions { CommentHandling = commentHandling }
+                );
                 var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
 
                 // It is expected that the Utf8JsonReader won't throw an exception here
@@ -1126,11 +1284,17 @@ namespace System.Text.Json.Tests
                         try
                         {
                             string val = json.GetString();
-                            Assert.True(false, "Expected InvalidOperationException when trying to get string value for invalid UTF-8 JSON text.");
+                            Assert.True(
+                                false,
+                                "Expected InvalidOperationException when trying to get string value for invalid UTF-8 JSON text."
+                            );
                         }
                         catch (InvalidOperationException ex)
                         {
-                            Assert.Equal(typeof(DecoderFallbackException), ex.InnerException.GetType());
+                            Assert.Equal(
+                                typeof(DecoderFallbackException),
+                                ex.InnerException.GetType()
+                            );
                         }
                     }
                 }
@@ -1156,7 +1320,10 @@ namespace System.Text.Json.Tests
         }
 
         [Theory]
-        [MemberData(nameof(JsonBase64TestData.ValidBase64Tests), MemberType = typeof(JsonBase64TestData))]
+        [MemberData(
+            nameof(JsonBase64TestData.ValidBase64Tests),
+            MemberType = typeof(JsonBase64TestData)
+        )]
         public static void ValidBase64(string jsonString)
         {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
@@ -1164,7 +1331,9 @@ namespace System.Text.Json.Tests
             var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state: default);
             Assert.True(json.Read());
 
-            byte[] expected = Convert.FromBase64String(jsonString.AsSpan(1, jsonString.Length - 2).ToString());
+            byte[] expected = Convert.FromBase64String(
+                jsonString.AsSpan(1, jsonString.Length - 2).ToString()
+            );
 
             byte[] value = json.GetBytesFromBase64();
             Assert.Equal(expected, value);
@@ -1173,7 +1342,10 @@ namespace System.Text.Json.Tests
         }
 
         [Theory]
-        [MemberData(nameof(JsonBase64TestData.InvalidBase64Tests), MemberType = typeof(JsonBase64TestData))]
+        [MemberData(
+            nameof(JsonBase64TestData.InvalidBase64Tests),
+            MemberType = typeof(JsonBase64TestData)
+        )]
         public static void InvalidBase64(string jsonString)
         {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
@@ -1186,7 +1358,10 @@ namespace System.Text.Json.Tests
             try
             {
                 byte[] val = json.GetBytesFromBase64();
-                Assert.True(false, "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-16 JSON text.");
+                Assert.True(
+                    false,
+                    "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-16 JSON text."
+                );
             }
             catch (FormatException) { }
         }
@@ -1205,9 +1380,12 @@ namespace System.Text.Json.Tests
         {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonString);
 
-            foreach (JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling)))
-            {
-                var state = new JsonReaderState(options: new JsonReaderOptions { CommentHandling = commentHandling });
+            foreach (
+                JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
+            ) {
+                var state = new JsonReaderState(
+                    options: new JsonReaderOptions { CommentHandling = commentHandling }
+                );
                 var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
 
                 Assert.True(json.Read());
@@ -1215,14 +1393,20 @@ namespace System.Text.Json.Tests
                 try
                 {
                     byte[] val = json.GetBytesFromBase64();
-                    Assert.True(false, "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-16 JSON text.");
+                    Assert.True(
+                        false,
+                        "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-16 JSON text."
+                    );
                 }
                 catch (InvalidOperationException) { }
 
                 try
                 {
                     json.TryGetBytesFromBase64(out byte[] val);
-                    Assert.True(false, "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-16 JSON text.");
+                    Assert.True(
+                        false,
+                        "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-16 JSON text."
+                    );
                 }
                 catch (InvalidOperationException) { }
             }
@@ -1232,9 +1416,12 @@ namespace System.Text.Json.Tests
         [MemberData(nameof(InvalidUTF8Strings))]
         public static void TestingGetBase64InvalidUTF8(byte[] dataUtf8)
         {
-            foreach (JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling)))
-            {
-                var state = new JsonReaderState(options: new JsonReaderOptions { CommentHandling = commentHandling });
+            foreach (
+                JsonCommentHandling commentHandling in Enum.GetValues(typeof(JsonCommentHandling))
+            ) {
+                var state = new JsonReaderState(
+                    options: new JsonReaderOptions { CommentHandling = commentHandling }
+                );
                 var json = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
 
                 // It is expected that the Utf8JsonReader won't throw an exception here
@@ -1253,7 +1440,10 @@ namespace System.Text.Json.Tests
                         try
                         {
                             byte[] val = json.GetBytesFromBase64();
-                            Assert.True(false, "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-8 JSON text.");
+                            Assert.True(
+                                false,
+                                "Expected InvalidOperationException when trying to decode base 64 string for invalid UTF-8 JSON text."
+                            );
                         }
                         catch (FormatException) { }
 
@@ -1269,7 +1459,9 @@ namespace System.Text.Json.Tests
         public static void TestingGetComment(string jsonData, string expected)
         {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonData);
-            var state = new JsonReaderState(options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow });
+            var state = new JsonReaderState(
+                options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow }
+            );
             var reader = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
 
             Assert.True(reader.Read());
@@ -1290,7 +1482,9 @@ namespace System.Text.Json.Tests
         public static void TestGetCommentUnescape(string jsonData, string expected)
         {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes(jsonData);
-            var state = new JsonReaderState(options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow });
+            var state = new JsonReaderState(
+                options: new JsonReaderOptions { CommentHandling = JsonCommentHandling.Allow }
+            );
             var reader = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
             bool commentFound = false;
             while (reader.Read())
@@ -1313,7 +1507,10 @@ namespace System.Text.Json.Tests
 
         [Theory]
         [MemberData(nameof(JsonGuidTestData.ValidGuidTests), MemberType = typeof(JsonGuidTestData))]
-        [MemberData(nameof(JsonGuidTestData.ValidHexGuidTests), MemberType = typeof(JsonGuidTestData))]
+        [MemberData(
+            nameof(JsonGuidTestData.ValidHexGuidTests),
+            MemberType = typeof(JsonGuidTestData)
+        )]
         public static void TestingStringsConversionToGuid(string testString, string expectedString)
         {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes($"\"{testString}\"");
@@ -1333,8 +1530,10 @@ namespace System.Text.Json.Tests
 
         [Theory]
         [MemberData(nameof(JsonGuidTestData.ValidGuidTests), MemberType = typeof(JsonGuidTestData))]
-        public static void TryGetGuid_HasValueSequence_RetrievesGuid(string testString, string expectedString)
-        {
+        public static void TryGetGuid_HasValueSequence_RetrievesGuid(
+            string testString,
+            string expectedString
+        ) {
             static void test(string testString, string expectedString, bool isFinalBlock)
             {
                 byte[] dataUtf8 = Encoding.UTF8.GetBytes($"\"{testString}\"");
@@ -1359,7 +1558,10 @@ namespace System.Text.Json.Tests
         }
 
         [Theory]
-        [MemberData(nameof(JsonGuidTestData.InvalidGuidTests), MemberType = typeof(JsonGuidTestData))]
+        [MemberData(
+            nameof(JsonGuidTestData.InvalidGuidTests),
+            MemberType = typeof(JsonGuidTestData)
+        )]
         public static void TestingStringsInvalidConversionToGuid(string testString)
         {
             byte[] dataUtf8 = Encoding.UTF8.GetBytes($"\"{testString}\"");
@@ -1371,11 +1573,17 @@ namespace System.Text.Json.Tests
             Assert.False(json.TryGetGuid(out Guid actual));
             Assert.Equal(default, actual);
 
-            JsonTestHelper.AssertThrows<FormatException>(json, (jsonReader) => jsonReader.GetGuid());
+            JsonTestHelper.AssertThrows<FormatException>(
+                json,
+                (jsonReader) => jsonReader.GetGuid()
+            );
         }
 
         [Theory]
-        [MemberData(nameof(JsonGuidTestData.InvalidGuidTests), MemberType = typeof(JsonGuidTestData))]
+        [MemberData(
+            nameof(JsonGuidTestData.InvalidGuidTests),
+            MemberType = typeof(JsonGuidTestData)
+        )]
         public static void TryGetGuid_HasValueSequence_False(string testString)
         {
             static void test(string testString, bool isFinalBlock)
@@ -1392,7 +1600,10 @@ namespace System.Text.Json.Tests
                 Assert.False(json.TryGetGuid(out Guid actual), "json.TryGetGuid(out Guid actual)");
                 Assert.Equal(Guid.Empty, actual);
 
-                JsonTestHelper.AssertThrows<FormatException>(json, (jsonReader) => jsonReader.GetGuid());
+                JsonTestHelper.AssertThrows<FormatException>(
+                    json,
+                    (jsonReader) => jsonReader.GetGuid()
+                );
             }
 
             test(testString, isFinalBlock: true);

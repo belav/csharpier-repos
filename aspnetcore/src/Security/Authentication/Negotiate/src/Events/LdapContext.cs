@@ -18,8 +18,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             HttpContext context,
             AuthenticationScheme scheme,
             NegotiateOptions options,
-            LdapSettings settings)
-            : base(context, scheme, options)
+            LdapSettings settings
+        ) : base(context, scheme, options)
         {
             LdapSettings = settings;
         }

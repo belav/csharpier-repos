@@ -17,8 +17,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
     /// </summary>
     public class LazyLoadingInterceptor : IInterceptor
     {
-        private static readonly PropertyInfo _lazyLoaderProperty
-            = typeof(IProxyLazyLoader).GetProperty(nameof(IProxyLazyLoader.LazyLoader))!;
+        private static readonly PropertyInfo _lazyLoaderProperty =
+            typeof(IProxyLazyLoader).GetProperty(nameof(IProxyLazyLoader.LazyLoader))!;
 
         private static readonly MethodInfo _lazyLoaderGetter = _lazyLoaderProperty.GetMethod!;
         private static readonly MethodInfo _lazyLoaderSetter = _lazyLoaderProperty.SetMethod!;
@@ -32,9 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public LazyLoadingInterceptor(
-            IEntityType entityType,
-            ILazyLoader loader)
+        public LazyLoadingInterceptor(IEntityType entityType, ILazyLoader loader)
         {
             _entityType = entityType;
             _loader = loader;
@@ -60,17 +58,22 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             }
             else
             {
-                if (_loader != null
-                    && methodName.StartsWith("get_", StringComparison.Ordinal))
+                if (_loader != null && methodName.StartsWith("get_", StringComparison.Ordinal))
                 {
                     var navigationName = methodName.Substring(4);
-                    var navigationBase = _entityType.FindNavigation(navigationName)
+                    var navigationBase =
+                        _entityType.FindNavigation(navigationName)
                         ?? (INavigationBase?)_entityType.FindSkipNavigation(navigationName);
 
-                    if (navigationBase != null
-                        && (!(navigationBase is INavigation navigation
-                            && navigation.ForeignKey.IsOwnership)))
-                    {
+                    if (
+                        navigationBase != null
+                        && (
+                            !(
+                                navigationBase is INavigation navigation
+                                && navigation.ForeignKey.IsOwnership
+                            )
+                        )
+                    ) {
                         _loader.Load(invocation.Proxy, navigationName);
                     }
                 }

@@ -21,7 +21,8 @@ namespace System.CodeDom.Compiler
 
         public IndentedTextWriter(TextWriter writer) : this(writer, DefaultTabString) { }
 
-        public IndentedTextWriter(TextWriter writer, string tabString) : base(CultureInfo.InvariantCulture)
+        public IndentedTextWriter(TextWriter writer, string tabString)
+            : base(CultureInfo.InvariantCulture)
         {
             if (writer == null)
             {
@@ -211,8 +212,10 @@ namespace System.CodeDom.Compiler
         /// <param name="buffer">The buffer to write.</param>
         /// <param name="cancellationToken">Token for canceling the operation.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public override async Task WriteAsync(ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default)
-        {
+        public override async Task WriteAsync(
+            ReadOnlyMemory<char> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteAsync(buffer, cancellationToken).ConfigureAwait(false);
         }
@@ -224,8 +227,10 @@ namespace System.CodeDom.Compiler
         /// <param name="value">The value to write.</param>
         /// <param name="cancellationToken">Token for canceling the operation.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public override async Task WriteAsync(StringBuilder? value, CancellationToken cancellationToken = default)
-        {
+        public override async Task WriteAsync(
+            StringBuilder? value,
+            CancellationToken cancellationToken = default
+        ) {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteAsync(value, cancellationToken).ConfigureAwait(false);
         }
@@ -407,8 +412,10 @@ namespace System.CodeDom.Compiler
         /// <param name="buffer">The buffer to write from.</param>
         /// <param name="cancellationToken">Token for canceling the operation.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public override async Task WriteLineAsync(ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default)
-        {
+        public override async Task WriteLineAsync(
+            ReadOnlyMemory<char> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteLineAsync(buffer, cancellationToken).ConfigureAwait(false);
             _tabsPending = true;
@@ -421,8 +428,10 @@ namespace System.CodeDom.Compiler
         /// <param name="value">The text to write.</param>
         /// <param name="cancellationToken">Token for canceling the operation.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public override async Task WriteLineAsync(StringBuilder? value, CancellationToken cancellationToken = default)
-        {
+        public override async Task WriteLineAsync(
+            StringBuilder? value,
+            CancellationToken cancellationToken = default
+        ) {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteLineAsync(value, cancellationToken).ConfigureAwait(false);
             _tabsPending = true;

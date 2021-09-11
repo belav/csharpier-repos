@@ -83,13 +83,18 @@ class Program
             return -1;
         }
 
-        if (!RunTest(targetType: typeof(DateTime), expectedConverterType: typeof(DateTimeConverter)))
-        {
+        if (
+            !RunTest(targetType: typeof(DateTime), expectedConverterType: typeof(DateTimeConverter))
+        ) {
             return -1;
         }
 
-        if (!RunTest(targetType: typeof(DateTimeOffset), expectedConverterType: typeof(DateTimeOffsetConverter)))
-        {
+        if (
+            !RunTest(
+                targetType: typeof(DateTimeOffset),
+                expectedConverterType: typeof(DateTimeOffsetConverter)
+            )
+        ) {
             return -1;
         }
 
@@ -98,8 +103,9 @@ class Program
             return -1;
         }
 
-        if (!RunTest(targetType: typeof(TimeSpan), expectedConverterType: typeof(TimeSpanConverter)))
-        {
+        if (
+            !RunTest(targetType: typeof(TimeSpan), expectedConverterType: typeof(TimeSpanConverter))
+        ) {
             return -1;
         }
 
@@ -113,8 +119,12 @@ class Program
             return -1;
         }
 
-        if (!RunTest(targetType: typeof(ICollection), expectedConverterType: typeof(CollectionConverter)))
-        {
+        if (
+            !RunTest(
+                targetType: typeof(ICollection),
+                expectedConverterType: typeof(CollectionConverter)
+            )
+        ) {
             return -1;
         }
 
@@ -128,13 +138,21 @@ class Program
             return -1;
         }
 
-        if (!RunTest(targetType: typeof(SomeValueType?), expectedConverterType: typeof(NullableConverter)))
-        {
+        if (
+            !RunTest(
+                targetType: typeof(SomeValueType?),
+                expectedConverterType: typeof(NullableConverter)
+            )
+        ) {
             return -1;
         }
 
-        if (!RunTest(targetType: typeof(ClassWithNoConverter), expectedConverterType: typeof(TypeConverter)))
-        {
+        if (
+            !RunTest(
+                targetType: typeof(ClassWithNoConverter),
+                expectedConverterType: typeof(TypeConverter)
+            )
+        ) {
             return -1;
         }
 
@@ -143,8 +161,12 @@ class Program
             return -1;
         }
 
-        if (!RunTest(targetType: typeof(CultureInfo), expectedConverterType: typeof(CultureInfoConverter)))
-        {
+        if (
+            !RunTest(
+                targetType: typeof(CultureInfo),
+                expectedConverterType: typeof(CultureInfoConverter)
+            )
+        ) {
             return -1;
         }
 
@@ -153,8 +175,12 @@ class Program
             return -1;
         }
 
-        if (!RunTest(targetType: typeof(IFooComponent), expectedConverterType: typeof(ReferenceConverter)))
-        {
+        if (
+            !RunTest(
+                targetType: typeof(IFooComponent),
+                expectedConverterType: typeof(ReferenceConverter)
+            )
+        ) {
             return -1;
         }
 
@@ -164,7 +190,8 @@ class Program
     private static bool RunTest(Type targetType, Type expectedConverterType)
     {
         TypeConverter retrievedConverter = TypeDescriptor.GetConverter(targetType);
-        return retrievedConverter.GetType() == expectedConverterType && retrievedConverter.CanConvertTo(typeof(string));
+        return retrievedConverter.GetType() == expectedConverterType
+            && retrievedConverter.CanConvertTo(typeof(string));
     }
 
     private struct SomeValueType

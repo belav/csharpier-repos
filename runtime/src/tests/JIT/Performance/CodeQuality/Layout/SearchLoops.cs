@@ -63,7 +63,7 @@ namespace Layout
         {
             int length = strA.Length;
 
-            fixed (char* ap = strA) fixed (char* bp = strB)
+            fixed (char* ap = strA)fixed (char* bp = strB)
             {
                 char* a = ap;
                 char* b = bp;
@@ -74,7 +74,7 @@ namespace Layout
                     int charB = *b;
 
                     if (charA != charB)
-                        return false;  // placement of prolog for this return is the issue
+                        return false; // placement of prolog for this return is the issue
 
                     a++;
                     b++;
@@ -91,7 +91,7 @@ namespace Layout
         {
             int length = strA.Length;
 
-            fixed (char* ap = strA) fixed (char* bp = strB)
+            fixed (char* ap = strA)fixed (char* bp = strB)
             {
                 char* a = ap;
                 char* b = bp;
@@ -102,7 +102,7 @@ namespace Layout
                     int charB = *b;
 
                     if (charA != charB)
-                        goto ReturnFalse;  // placement of prolog for this return is the issue
+                        goto ReturnFalse; // placement of prolog for this return is the issue
 
                     a++;
                     b++;

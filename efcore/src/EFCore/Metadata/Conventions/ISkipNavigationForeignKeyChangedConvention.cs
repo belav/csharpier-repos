@@ -21,6 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             IConventionForeignKey? foreignKey,
             IConventionForeignKey? oldForeignKey,
-            IConventionContext<IConventionForeignKey> context);
+            IConventionContext<IConventionForeignKey> context
+        );
     }
 }

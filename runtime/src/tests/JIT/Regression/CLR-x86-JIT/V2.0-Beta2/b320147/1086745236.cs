@@ -11,7 +11,7 @@ public struct AA
     public void Method1()
     {
         bool local1 = true;
-        for (; local1; )
+        for (; local1;)
         {
             if (local1)
                 break;
@@ -20,11 +20,9 @@ public struct AA
         {
             if (local1)
                 break;
-        }
-        while (local1);
+        } while (local1);
         return;
     }
-
 }
 
 [StructLayout(LayoutKind.Sequential)]

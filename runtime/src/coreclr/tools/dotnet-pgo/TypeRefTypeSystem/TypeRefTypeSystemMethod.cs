@@ -17,8 +17,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
         MethodSignature _signature;
         Instantiation _instantiation;
 
-        public TypeRefTypeSystemMethod(TypeRefTypeSystemType type, string name, MethodSignature signature)
-        {
+        public TypeRefTypeSystemMethod(
+            TypeRefTypeSystemType type,
+            string name,
+            MethodSignature signature
+        ) {
             _type = type;
             _name = name;
             _signature = signature;
@@ -51,7 +54,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
         protected override int ClassCode => throw new NotImplementedException();
 
-        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) => throw new NotImplementedException();
-        protected override int CompareToImpl(MethodDesc other, TypeSystemComparer comparer) => throw new NotImplementedException();
+        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) =>
+            throw new NotImplementedException();
+        protected override int CompareToImpl(MethodDesc other, TypeSystemComparer comparer) =>
+            throw new NotImplementedException();
     }
 }

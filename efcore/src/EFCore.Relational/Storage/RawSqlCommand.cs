@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="parameterValues"> The values to be assigned to parameters. </param>
         public RawSqlCommand(
             IRelationalCommand relationalCommand,
-            IReadOnlyDictionary<string, object?> parameterValues)
-        {
+            IReadOnlyDictionary<string, object?> parameterValues
+        ) {
             Check.NotNull(relationalCommand, nameof(relationalCommand));
             Check.NotNull(parameterValues, nameof(parameterValues));
 

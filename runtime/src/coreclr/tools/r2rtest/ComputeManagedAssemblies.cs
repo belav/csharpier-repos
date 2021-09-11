@@ -10,10 +10,13 @@ using System.Reflection.PortableExecutable;
 
 class ComputeManagedAssemblies
 {
-    public static IEnumerable<string> GetManagedAssembliesInFolder(string folder, string fileNamePattern = "*.*")
-    {
-        foreach (var file in Directory.GetFiles(folder, fileNamePattern, SearchOption.TopDirectoryOnly))
-        {
+    public static IEnumerable<string> GetManagedAssembliesInFolder(
+        string folder,
+        string fileNamePattern = "*.*"
+    ) {
+        foreach (
+            var file in Directory.GetFiles(folder, fileNamePattern, SearchOption.TopDirectoryOnly)
+        ) {
             if (IsManaged(file))
             {
                 yield return file;
@@ -21,12 +24,18 @@ class ComputeManagedAssemblies
         }
     }
 
-    static ConcurrentDictionary<string, bool> _isManagedCache = new ConcurrentDictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+    static ConcurrentDictionary<string, bool> _isManagedCache = new ConcurrentDictionary<
+        string,
+        bool
+    >(StringComparer.OrdinalIgnoreCase);
 
     public static bool IsManaged(string file)
     {
         // Only files named *.dll and *.exe are considered as possible assemblies
-        if (!Path.HasExtension(file) || (Path.GetExtension(file) != ".dll" && Path.GetExtension(file) != ".exe"))
+        if (
+            !Path.HasExtension(file)
+            || (Path.GetExtension(file) != ".dll" && Path.GetExtension(file) != ".exe")
+        )
             return false;
 
         bool isManaged;
@@ -48,10 +57,14 @@ class ComputeManagedAssemblies
                     MetadataReader moduleMetadataReader = module.GetMetadataReader();
                     if (moduleMetadataReader.IsAssembly)
                     {
-                        string culture = moduleMetadataReader.GetString(moduleMetadataReader.GetAssemblyDefinition().Culture);
+                        string culture = moduleMetadataReader.GetString(
+                            moduleMetadataReader.GetAssemblyDefinition().Culture
+                        );
 
-                        if (culture == "" || culture.Equals("neutral", StringComparison.OrdinalIgnoreCase))
-                        {
+                        if (
+                            culture == ""
+                            || culture.Equals("neutral", StringComparison.OrdinalIgnoreCase)
+                        ) {
                             isManaged = true;
                         }
                     }

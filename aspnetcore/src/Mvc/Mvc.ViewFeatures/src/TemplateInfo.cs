@@ -117,7 +117,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// <returns>Whether the model has been visited.</returns>
         public bool Visited(ModelExplorer modelExplorer)
         {
-            return _visitedObjects.Contains(modelExplorer.Model ?? modelExplorer.Metadata.ModelType);
+            return _visitedObjects.Contains(
+                modelExplorer.Model ?? modelExplorer.Metadata.ModelType
+            );
         }
     }
 }

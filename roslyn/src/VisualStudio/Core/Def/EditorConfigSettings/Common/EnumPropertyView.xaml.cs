@@ -7,7 +7,6 @@ using System.Windows.Controls;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 {
-
     /// <summary>
     /// Interaction logic for EnumPropertyView.xaml
     /// </summary>
@@ -23,10 +22,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
             _model = model;
 
             _descriptions = _model.GetValueDescriptions();
-            _comboBox = new ComboBox()
-            {
-                ItemsSource = _descriptions
-            };
+            _comboBox = new ComboBox() { ItemsSource = _descriptions };
 
             _comboBox.SelectedIndex = model.GetValueIndex();
             _comboBox.SetValue(AutomationProperties.NameProperty, ServicesVSResources.Value);

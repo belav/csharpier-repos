@@ -22,8 +22,10 @@ namespace System.Net.Http.HPack
         private bool _pendingTableSizeUpdate;
         private EncoderHeaderEntry? _removed;
 
-        public DynamicHPackEncoder(bool allowDynamicCompression = true, uint maxHeaderTableSize = DefaultHeaderTableSize)
-        {
+        public DynamicHPackEncoder(
+            bool allowDynamicCompression = true,
+            uint maxHeaderTableSize = DefaultHeaderTableSize
+        ) {
             _allowDynamicCompression = allowDynamicCompression;
             _maxHeaderTableSize = maxHeaderTableSize;
             Head = new EncoderHeaderEntry();
@@ -54,7 +56,11 @@ namespace System.Net.Http.HPack
             // Check if there is a table size update that should be encoded
             if (_pendingTableSizeUpdate)
             {
-                bool success = HPackEncoder.EncodeDynamicTableSizeUpdate((int)_maxHeaderTableSize, buffer, out length);
+                bool success = HPackEncoder.EncodeDynamicTableSizeUpdate(
+                    (int)_maxHeaderTableSize,
+                    buffer,
+                    out length
+                );
                 _pendingTableSizeUpdate = false;
                 return success;
             }
@@ -63,9 +69,18 @@ namespace System.Net.Http.HPack
             return true;
         }
 
-        public bool EncodeHeader(Span<byte> buffer, int staticTableIndex, HeaderEncodingHint encodingHint, string name, string value, out int bytesWritten)
-        {
-            Debug.Assert(!_pendingTableSizeUpdate, "Dynamic table size update should be encoded before headers.");
+        public bool EncodeHeader(
+            Span<byte> buffer,
+            int staticTableIndex,
+            HeaderEncodingHint encodingHint,
+            string name,
+            string value,
+            out int bytesWritten
+        ) {
+            Debug.Assert(
+                !_pendingTableSizeUpdate,
+                "Dynamic table size update should be encoded before headers."
+            );
 
             // Never index sensitive value.
             if (encodingHint == HeaderEncodingHint.NeverIndex)
@@ -73,16 +88,39 @@ namespace System.Net.Http.HPack
                 int index = ResolveDynamicTableIndex(staticTableIndex, name);
 
                 return index == -1
-                    ? HPackEncoder.EncodeLiteralHeaderFieldNeverIndexingNewName(name, value, buffer, out bytesWritten)
-                    : HPackEncoder.EncodeLiteralHeaderFieldNeverIndexing(index, value, buffer, out bytesWritten);
+                    ? HPackEncoder.EncodeLiteralHeaderFieldNeverIndexingNewName(
+                          name,
+                          value,
+                          buffer,
+                          out bytesWritten
+                      )
+                    : HPackEncoder.EncodeLiteralHeaderFieldNeverIndexing(
+                          index,
+                          value,
+                          buffer,
+                          out bytesWritten
+                      );
             }
 
             // No dynamic table. Only use the static table.
-            if (!_allowDynamicCompression || _maxHeaderTableSize == 0 || encodingHint == HeaderEncodingHint.IgnoreIndex)
-            {
+            if (
+                !_allowDynamicCompression
+                || _maxHeaderTableSize == 0
+                || encodingHint == HeaderEncodingHint.IgnoreIndex
+            ) {
                 return staticTableIndex == -1
-                    ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(name, value, buffer, out bytesWritten)
-                    : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(staticTableIndex, value, buffer, out bytesWritten);
+                    ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
+                          name,
+                          value,
+                          buffer,
+                          out bytesWritten
+                      )
+                    : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
+                          staticTableIndex,
+                          value,
+                          buffer,
+                          out bytesWritten
+                      );
             }
 
             // Header is greater than the maximum table size.
@@ -92,8 +130,18 @@ namespace System.Net.Http.HPack
                 int index = ResolveDynamicTableIndex(staticTableIndex, name);
 
                 return index == -1
-                    ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(name, value, buffer, out bytesWritten)
-                    : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(index, value, buffer, out bytesWritten);
+                    ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
+                          name,
+                          value,
+                          buffer,
+                          out bytesWritten
+                      )
+                    : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
+                          index,
+                          value,
+                          buffer,
+                          out bytesWritten
+                      );
             }
 
             return EncodeDynamicHeader(buffer, staticTableIndex, name, value, out bytesWritten);
@@ -110,8 +158,13 @@ namespace System.Net.Http.HPack
             return CalculateDynamicTableIndex(name);
         }
 
-        private bool EncodeDynamicHeader(Span<byte> buffer, int staticTableIndex, string name, string value, out int bytesWritten)
-        {
+        private bool EncodeDynamicHeader(
+            Span<byte> buffer,
+            int staticTableIndex,
+            string name,
+            string value,
+            out int bytesWritten
+        ) {
             EncoderHeaderEntry? headerField = GetEntry(name, value);
             if (headerField != null)
             {
@@ -125,9 +178,20 @@ namespace System.Net.Http.HPack
                 uint headerSize = (uint)HeaderField.GetLength(name.Length, value.Length);
 
                 int index = ResolveDynamicTableIndex(staticTableIndex, name);
-                bool success = index == -1
-                    ? HPackEncoder.EncodeLiteralHeaderFieldIndexingNewName(name, value, buffer, out bytesWritten)
-                    : HPackEncoder.EncodeLiteralHeaderFieldIndexing(index, value, buffer, out bytesWritten);
+                bool success =
+                    index == -1
+                        ? HPackEncoder.EncodeLiteralHeaderFieldIndexingNewName(
+                              name,
+                              value,
+                              buffer,
+                              out bytesWritten
+                          )
+                        : HPackEncoder.EncodeLiteralHeaderFieldIndexing(
+                              index,
+                              value,
+                              buffer,
+                              out bytesWritten
+                          );
 
                 if (success)
                 {
@@ -145,7 +209,10 @@ namespace System.Net.Http.HPack
         /// </summary>
         private void EnsureCapacity(uint headerSize)
         {
-            Debug.Assert(headerSize <= _maxHeaderTableSize, "Header is bigger than dynamic table size.");
+            Debug.Assert(
+                headerSize <= _maxHeaderTableSize,
+                "Header is bigger than dynamic table size."
+            );
 
             while (_maxHeaderTableSize - _headerTableSize < headerSize)
             {
@@ -169,10 +236,11 @@ namespace System.Net.Http.HPack
             {
                 // We've already looked up entries based on a hash of the name.
                 // Compare value before name as it is more likely to be different.
-                if (e.Hash == hash &&
-                    string.Equals(value, e.Value, StringComparison.Ordinal) &&
-                    string.Equals(name, e.Name, StringComparison.Ordinal))
-                {
+                if (
+                    e.Hash == hash
+                    && string.Equals(value, e.Value, StringComparison.Ordinal)
+                    && string.Equals(name, e.Name, StringComparison.Ordinal)
+                ) {
                     return e;
                 }
             }
@@ -204,8 +272,14 @@ namespace System.Net.Http.HPack
 
         private void AddHeaderEntry(string name, string value, uint headerSize)
         {
-            Debug.Assert(headerSize <= _maxHeaderTableSize, "Header is bigger than dynamic table size.");
-            Debug.Assert(headerSize <= _maxHeaderTableSize - _headerTableSize, "Not enough room in dynamic table.");
+            Debug.Assert(
+                headerSize <= _maxHeaderTableSize,
+                "Header is bigger than dynamic table size."
+            );
+            Debug.Assert(
+                headerSize <= _maxHeaderTableSize - _headerTableSize,
+                "Not enough room in dynamic table."
+            );
 
             int hash = name.GetHashCode();
             int bucketIndex = CalculateBucketIndex(hash);

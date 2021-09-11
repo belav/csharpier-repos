@@ -10,8 +10,9 @@ namespace System.Net
 {
     internal static partial class UnmanagedCertificateContext
     {
-        internal static unsafe X509Certificate2Collection GetRemoteCertificatesFromStoreContext(IntPtr certContext)
-        {
+        internal static unsafe X509Certificate2Collection GetRemoteCertificatesFromStoreContext(
+            IntPtr certContext
+        ) {
             X509Certificate2Collection result = new X509Certificate2Collection();
 
             if (certContext == IntPtr.Zero)
@@ -36,7 +37,8 @@ namespace System.Net
                     }
 
                     var cert = new X509Certificate2(new IntPtr(next));
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(certContext, $"Adding remote certificate:{cert}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(certContext, $"Adding remote certificate:{cert}");
 
                     result.Add(cert);
                     last = next;

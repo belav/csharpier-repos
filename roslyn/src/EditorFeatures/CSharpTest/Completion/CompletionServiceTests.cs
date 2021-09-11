@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         {
             var workspace = new AdhocWorkspace();
 
-            var document = workspace
-                .AddProject("TestProject", LanguageNames.CSharp)
+            var document = workspace.AddProject("TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument.cs", "");
 
             var service = CompletionService.GetService(document);

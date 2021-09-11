@@ -10,19 +10,21 @@ using Xunit;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore
 {
-    public abstract class ConcurrencyDetectorDisabledRelationalTestBase<TFixture> : ConcurrencyDetectorDisabledTestBase<TFixture>
+    public abstract class ConcurrencyDetectorDisabledRelationalTestBase<TFixture>
+        : ConcurrencyDetectorDisabledTestBase<TFixture>
         where TFixture : ConcurrencyDetectorTestBase<TFixture>.ConcurrencyDetectorFixtureBase, new()
     {
-        protected ConcurrencyDetectorDisabledRelationalTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected ConcurrencyDetectorDisabledRelationalTestBase(TFixture fixture) : base(fixture)
+        { }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task FromSql(bool async)
-            => ConcurrencyDetectorTest(async c => async
-                ? await c.Products.FromSqlRaw("select * from products").ToListAsync()
-                : c.Products.FromSqlRaw("select * from products").ToList());
+        public virtual Task FromSql(bool async) =>
+            ConcurrencyDetectorTest(
+                async c =>
+                    async
+                        ? await c.Products.FromSqlRaw("select * from products").ToListAsync()
+                        : c.Products.FromSqlRaw("select * from products").ToList()
+            );
     }
 }

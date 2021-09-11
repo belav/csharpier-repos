@@ -8,23 +8,39 @@ namespace AutoMapper.Internal
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class ReflectionHelper
     {
-        public static Type GetElementType(Type type) => type.IsArray ? type.GetElementType() : GetEnumerableElementType(type);
-        public static Type GetEnumerableElementType(Type type) => type.GetIEnumerableType()?.GenericTypeArguments[0] ?? typeof(object);
-        public static TypeMap[] GetIncludedTypeMaps(this IGlobalConfiguration configuration, TypeMap typeMap) => 
-            configuration.GetIncludedTypeMaps(typeMap.IncludedDerivedTypes);
-        public static bool IsPublic(this PropertyInfo propertyInfo) => (propertyInfo.GetGetMethod() ?? propertyInfo.GetSetMethod()) != null;
-        public static bool Has<TAttribute>(this MemberInfo member) where TAttribute : Attribute => member.IsDefined(typeof(TAttribute));
-        public static bool CanBeSet(this MemberInfo member) => member is PropertyInfo property ? property.CanWrite : !((FieldInfo)member).IsInitOnly;
+        public static Type GetElementType(Type type) =>
+            type.IsArray ? type.GetElementType() : GetEnumerableElementType(type);
+        public static Type GetEnumerableElementType(Type type) =>
+            type.GetIEnumerableType()?.GenericTypeArguments[0] ?? typeof(object);
+        public static TypeMap[] GetIncludedTypeMaps(
+            this IGlobalConfiguration configuration,
+            TypeMap typeMap
+        ) => configuration.GetIncludedTypeMaps(typeMap.IncludedDerivedTypes);
+        public static bool IsPublic(this PropertyInfo propertyInfo) =>
+            (propertyInfo.GetGetMethod() ?? propertyInfo.GetSetMethod()) != null;
+        public static bool Has<TAttribute>(this MemberInfo member) where TAttribute : Attribute =>
+            member.IsDefined(typeof(TAttribute));
+        public static bool CanBeSet(this MemberInfo member) =>
+            member is PropertyInfo property ? property.CanWrite : !((FieldInfo)member).IsInitOnly;
         public static Expression GetDefaultValue(this ParameterInfo parameter) =>
-            parameter is { DefaultValue: null, ParameterType: { IsValueType: true } type } ? Default(type) : Constant(parameter.DefaultValue);
-        public static object MapMember(this ResolutionContext context, MemberInfo member, object source, object destination = null)
-        {
+            parameter is { DefaultValue: null, ParameterType: { IsValueType: true } type }
+                ? Default(type)
+                : Constant(parameter.DefaultValue);
+        public static object MapMember(
+            this ResolutionContext context,
+            MemberInfo member,
+            object source,
+            object destination = null
+        ) {
             var memberType = GetMemberType(member);
             var destValue = destination == null ? null : GetMemberValue(member, destination);
             return context.Map(source, destValue, null, memberType, MemberMap.Instance);
         }
-        public static void SetMemberValue(this MemberInfo propertyOrField, object target, object value)
-        {
+        public static void SetMemberValue(
+            this MemberInfo propertyOrField,
+            object target,
+            object value
+        ) {
             if (propertyOrField is PropertyInfo property)
             {
                 property.SetValue(target, value, null);
@@ -37,19 +53,24 @@ namespace AutoMapper.Internal
             }
             throw Expected(propertyOrField);
         }
-        private static ArgumentOutOfRangeException Expected(MemberInfo propertyOrField) => new ArgumentOutOfRangeException(nameof(propertyOrField), "Expected a property or field, not " + propertyOrField);
-        public static object GetMemberValue(this MemberInfo propertyOrField, object target) => propertyOrField switch
-        {
-            PropertyInfo property => property.GetValue(target, null),
-            FieldInfo field => field.GetValue(target),
-            _ => throw Expected(propertyOrField)
-        };
+        private static ArgumentOutOfRangeException Expected(MemberInfo propertyOrField) =>
+            new ArgumentOutOfRangeException(
+                nameof(propertyOrField),
+                "Expected a property or field, not " + propertyOrField
+            );
+        public static object GetMemberValue(this MemberInfo propertyOrField, object target) =>
+            propertyOrField switch
+            {
+                PropertyInfo property => property.GetValue(target, null),
+                FieldInfo field => field.GetValue(target),
+                _ => throw Expected(propertyOrField)
+            };
         public static MemberInfo[] GetMemberPath(Type type, string fullMemberName)
         {
             var memberNames = fullMemberName.Split('.');
             var members = new MemberInfo[memberNames.Length];
             Type previousType = type;
-            for(int index = 0; index < memberNames.Length; index++)
+            for (int index = 0; index < memberNames.Length; index++)
             {
                 var currentType = GetCurrentType(previousType);
                 var memberName = memberNames[index];
@@ -72,7 +93,8 @@ namespace AutoMapper.Internal
                 }
             }
             return members;
-            static Type GetCurrentType(Type type) => type.IsGenericType && type.IsCollection() ? type.GenericTypeArguments[0] : type;
+            static Type GetCurrentType(Type type) =>
+                type.IsGenericType && type.IsCollection() ? type.GenericTypeArguments[0] : type;
         }
         public static MemberInfo FindProperty(LambdaExpression lambdaExpression)
         {
@@ -81,7 +103,11 @@ namespace AutoMapper.Internal
             {
                 switch (expressionToCheck)
                 {
-                    case MemberExpression { Member: var member, Expression: { NodeType: ExpressionType.Parameter or ExpressionType.Convert } }:
+                    case MemberExpression
+                    {
+                        Member: var member,
+                        Expression: { NodeType: ExpressionType.Parameter or ExpressionType.Convert }
+                    }:
                         return member;
                     case UnaryExpression { Operand: var operand }:
                         expressionToCheck = operand;
@@ -89,17 +115,19 @@ namespace AutoMapper.Internal
                     default:
                         throw new ArgumentException(
                             $"Expression '{lambdaExpression}' must resolve to top-level member and not any child object's properties. You can use ForPath, a custom resolver on the child type or the AfterMap option instead.",
-                            nameof(lambdaExpression));
+                            nameof(lambdaExpression)
+                        );
                 }
             }
         }
-        public static Type GetMemberType(this MemberInfo member) => member switch
-        {
-            PropertyInfo property => property.PropertyType,
-            MethodInfo method => method.ReturnType,
-            FieldInfo field => field.FieldType,
-            null => throw new ArgumentNullException(nameof(member)),
-            _ => throw new ArgumentOutOfRangeException(nameof(member))
-        };
+        public static Type GetMemberType(this MemberInfo member) =>
+            member switch
+            {
+                PropertyInfo property => property.PropertyType,
+                MethodInfo method => method.ReturnType,
+                FieldInfo field => field.FieldType,
+                null => throw new ArgumentNullException(nameof(member)),
+                _ => throw new ArgumentOutOfRangeException(nameof(member))
+            };
     }
 }

@@ -28,8 +28,12 @@ namespace Microsoft.CodeAnalysis.Common
         /// </summary>
         public DocumentId? DocumentId { get; }
 
-        public UpdatedEventArgs(object id, Workspace workspace, ProjectId? projectId, DocumentId? documentId)
-        {
+        public UpdatedEventArgs(
+            object id,
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId
+        ) {
             Id = id;
             Workspace = workspace;
             ProjectId = projectId;

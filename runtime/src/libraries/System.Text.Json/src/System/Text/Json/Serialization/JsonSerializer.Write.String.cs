@@ -21,8 +21,10 @@ namespace System.Text.Json
         /// encoding since the implementation internally uses UTF-8. See also <see cref="SerializeToUtf8Bytes"/>
         /// and <see cref="SerializeAsync"/>.
         /// </remarks>
-        public static string Serialize<[DynamicallyAccessedMembers(MembersAccessedOnWrite)] TValue>(TValue value, JsonSerializerOptions? options = null)
-        {
+        public static string Serialize<[DynamicallyAccessedMembers(MembersAccessedOnWrite)] TValue>(
+            TValue value,
+            JsonSerializerOptions? options = null
+        ) {
             return Serialize<TValue>(value, typeof(TValue), options);
         }
 
@@ -47,8 +49,8 @@ namespace System.Text.Json
         public static string Serialize(
             object? value,
             [DynamicallyAccessedMembers(MembersAccessedOnWrite)] Type inputType,
-            JsonSerializerOptions? options = null)
-        {
+            JsonSerializerOptions? options = null
+        ) {
             if (inputType == null)
             {
                 throw new ArgumentNullException(nameof(inputType));
@@ -62,8 +64,11 @@ namespace System.Text.Json
             return Serialize<object?>(value, inputType, options);
         }
 
-        private static string Serialize<TValue>(in TValue value, Type inputType, JsonSerializerOptions? options)
-        {
+        private static string Serialize<TValue>(
+            in TValue value,
+            Type inputType,
+            JsonSerializerOptions? options
+        ) {
             if (options == null)
             {
                 options = JsonSerializerOptions.s_defaultOptions;

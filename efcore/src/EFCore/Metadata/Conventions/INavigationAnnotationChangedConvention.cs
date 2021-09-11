@@ -25,6 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
-            IConventionContext<IConventionAnnotation> context);
+            IConventionContext<IConventionAnnotation> context
+        );
     }
 }

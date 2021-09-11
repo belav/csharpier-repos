@@ -30,8 +30,8 @@ namespace Internal.Cryptography
             byte[]? iv,
             bool encrypting,
             int feedbackSizeInBytes,
-            int paddingSizeInBytes)
-            : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
+            int paddingSizeInBytes
+        ) : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
         {
             _encrypting = encrypting;
 
@@ -98,7 +98,8 @@ namespace Internal.Cryptography
                     outputCurrent,
                     output.Length - outputBytes,
                     out bytesWritten,
-                    out errorCode);
+                    out errorCode
+                );
 
                 outputBytes += bytesWritten;
             }
@@ -119,8 +120,7 @@ namespace Internal.Cryptography
                 return 0;
             }
 
-            fixed (byte* pInput = input)
-            fixed (byte* pOutput = output)
+            fixed (byte* pInput = input)fixed (byte* pOutput = output)
             {
                 ret = Interop.AppleCrypto.CryptorUpdate(
                     _cryptor,
@@ -129,7 +129,8 @@ namespace Internal.Cryptography
                     pOutput,
                     output.Length,
                     out bytesWritten,
-                    out ccStatus);
+                    out ccStatus
+                );
             }
 
             ProcessInteropError(ret, ccStatus);
@@ -145,13 +146,12 @@ namespace Internal.Cryptography
 
             byte[]? iv = IV;
 
-            fixed (byte* pbKey = _key)
-            fixed (byte* pbIv = iv)
+            fixed (byte* pbKey = _key)fixed (byte* pbIv = iv)
             {
                 ret = Interop.AppleCrypto.CryptorCreate(
                     _encrypting
-                        ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
-                        : Interop.AppleCrypto.PAL_SymmetricOperation.Decrypt,
+                      ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
+                      : Interop.AppleCrypto.PAL_SymmetricOperation.Decrypt,
                     _algorithm,
                     GetPalChainMode(_algorithm, _cipherMode, _feedbackSizeInBytes),
                     Interop.AppleCrypto.PAL_PaddingMode.None,
@@ -160,14 +160,18 @@ namespace Internal.Cryptography
                     pbIv,
                     Interop.AppleCrypto.PAL_SymmetricOptions.None,
                     out _cryptor,
-                    out ccStatus);
+                    out ccStatus
+                );
             }
 
             ProcessInteropError(ret, ccStatus);
         }
 
-        private Interop.AppleCrypto.PAL_ChainingMode GetPalChainMode(Interop.AppleCrypto.PAL_SymmetricAlgorithm algorithm, CipherMode cipherMode, int feedbackSizeInBytes)
-        {
+        private Interop.AppleCrypto.PAL_ChainingMode GetPalChainMode(
+            Interop.AppleCrypto.PAL_SymmetricAlgorithm algorithm,
+            CipherMode cipherMode,
+            int feedbackSizeInBytes
+        ) {
             switch (cipherMode)
             {
                 case CipherMode.CBC:
@@ -181,12 +185,21 @@ namespace Internal.Cryptography
                     }
 
                     Debug.Assert(
-                        (algorithm == Interop.AppleCrypto.PAL_SymmetricAlgorithm.AES && feedbackSizeInBytes == 16) ||
-                        (algorithm == Interop.AppleCrypto.PAL_SymmetricAlgorithm.TripleDES && feedbackSizeInBytes == 8));
+                        (
+                            algorithm == Interop.AppleCrypto.PAL_SymmetricAlgorithm.AES
+                            && feedbackSizeInBytes == 16
+                        )
+                            || (
+                                algorithm == Interop.AppleCrypto.PAL_SymmetricAlgorithm.TripleDES
+                                && feedbackSizeInBytes == 8
+                            )
+                    );
 
                     return Interop.AppleCrypto.PAL_ChainingMode.CFB;
                 default:
-                    throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CipherModeNotSupported, cipherMode));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_CipherModeNotSupported, cipherMode)
+                    );
             }
         }
 
@@ -226,10 +239,14 @@ namespace Internal.Cryptography
             // Platform error
             if (functionReturnCode == 0)
             {
-                Debug.Assert(ccStatus != 0, "Interop function returned 0 but a system code of success");
+                Debug.Assert(
+                    ccStatus != 0,
+                    "Interop function returned 0 but a system code of success"
+                );
                 throw Interop.AppleCrypto.CreateExceptionForCCError(
                     ccStatus,
-                    Interop.AppleCrypto.CCCryptorStatus);
+                    Interop.AppleCrypto.CCCryptorStatus
+                );
             }
 
             // Usually this will be -1, a general indication of bad inputs.

@@ -18,36 +18,52 @@ namespace System.Net.Sockets.Tests
 
             // Use more than IOV_MAX (1024 on Linux & macOS) segments.
             const int SegmentCount = 2400;
-            using (var server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var server = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
 
                 var sendBuffer = new byte[SegmentCount];
-                Task serverProcessingTask = Task.Run(() =>
-                {
-                    using (Socket acceptSocket = server.Accept())
+                Task serverProcessingTask = Task.Run(
+                    () =>
                     {
-                        // send data as SegmentCount (> IOV_MAX) 1-byte segments.
-                        var sendSegments = new List<ArraySegment<byte>>();
-                        for (int i = 0; i < SegmentCount; i++)
+                        using (Socket acceptSocket = server.Accept())
                         {
-                            sendBuffer[i] = (byte)i;
-                            sendSegments.Add(new ArraySegment<byte>(sendBuffer, i, 1));
+                            // send data as SegmentCount (> IOV_MAX) 1-byte segments.
+                            var sendSegments = new List<ArraySegment<byte>>();
+                            for (int i = 0; i < SegmentCount; i++)
+                            {
+                                sendBuffer[i] = (byte)i;
+                                sendSegments.Add(new ArraySegment<byte>(sendBuffer, i, 1));
+                            }
+                            SocketError error;
+                            // Send blocks until all segments are sent.
+                            int bytesSent = acceptSocket.Send(
+                                sendSegments,
+                                SocketFlags.None,
+                                out error
+                            );
+
+                            Assert.Equal(SegmentCount, bytesSent);
+                            Assert.Equal(SocketError.Success, error);
+
+                            acceptSocket.Shutdown(SocketShutdown.Send);
                         }
-                        SocketError error;
-                        // Send blocks until all segments are sent.
-                        int bytesSent = acceptSocket.Send(sendSegments, SocketFlags.None, out error);
-
-                        Assert.Equal(SegmentCount, bytesSent);
-                        Assert.Equal(SocketError.Success, error);
-
-                        acceptSocket.Shutdown(SocketShutdown.Send);
                     }
-                });
+                );
 
-                using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-                {
+                using (
+                    var client = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                ) {
                     client.Connect(server.LocalEndPoint);
 
                     // receive data as 1-byte segments.
@@ -62,7 +78,11 @@ namespace System.Net.Sockets.Tests
                     {
                         SocketError error;
                         // Receive can return up to IOV_MAX segments.
-                        int bytesReceived = client.Receive(receiveSegments, SocketFlags.None, out error);
+                        int bytesReceived = client.Receive(
+                            receiveSegments,
+                            SocketFlags.None,
+                            out error
+                        );
                         bytesReceivedTotal += bytesReceived;
                         // Offset receiveSegments for next Receive.
                         receiveSegments.RemoveRange(0, bytesReceived);
@@ -76,7 +96,10 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         public void SendIovMaxUdp_SuccessOrMessageSize()
         {
             // sending more than IOV_MAX segments causes EMSGSIZE on some platforms.
@@ -86,8 +109,13 @@ namespace System.Net.Sockets.Tests
             // Use more than IOV_MAX (1024 on Linux & macOS) segments
             // and less than Ethernet MTU.
             const int SegmentCount = 1200;
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 socket.BindToAnonymousPort(IPAddress.Loopback);
                 // Use our own address as destination.
                 socket.Connect(socket.LocalEndPoint);
@@ -117,7 +145,10 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         public async Task ReceiveIovMaxUdp_SuccessOrMessageSize()
         {
             // receiving more than IOV_MAX segments causes EMSGSIZE on some platforms.
@@ -129,41 +160,51 @@ namespace System.Net.Sockets.Tests
             const int SegmentCount = 1200;
             var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             sender.BindToAnonymousPort(IPAddress.Loopback);
-            var receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            var receiver = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
             receiver.Connect(sender.LocalEndPoint); // only receive from sender
             EndPoint receiverEndPoint = receiver.LocalEndPoint;
 
             Barrier b = new Barrier(2);
 
-            Task receiveTask = Task.Run(() =>
-            {
-                using (receiver)
+            Task receiveTask = Task.Run(
+                () =>
                 {
-                    var receiveBuffer = new byte[SegmentCount];
-                    var receiveSegments = new List<ArraySegment<byte>>();
-                    for (int i = 0; i < SegmentCount; i++)
+                    using (receiver)
                     {
-                        receiveSegments.Add(new ArraySegment<byte>(receiveBuffer, i, 1));
-                    }
-                    // receive data as SegmentCount (> IOV_MAX) 1-byte segments.
-                    SocketError error;
-                    // Signal we are ready to receive.
-                    b.SignalAndWait();
-                    int bytesReceived = receiver.Receive(receiveSegments, SocketFlags.None, out error);
+                        var receiveBuffer = new byte[SegmentCount];
+                        var receiveSegments = new List<ArraySegment<byte>>();
+                        for (int i = 0; i < SegmentCount; i++)
+                        {
+                            receiveSegments.Add(new ArraySegment<byte>(receiveBuffer, i, 1));
+                        }
+                        // receive data as SegmentCount (> IOV_MAX) 1-byte segments.
+                        SocketError error;
+                        // Signal we are ready to receive.
+                        b.SignalAndWait();
+                        int bytesReceived = receiver.Receive(
+                            receiveSegments,
+                            SocketFlags.None,
+                            out error
+                        );
 
-                    if (error == SocketError.Success)
-                    {
-                        // platform received message in > IOV_MAX segments
-                        Assert.Equal(SegmentCount, bytesReceived);
-                    }
-                    else
-                    {
-                        // platform returns EMSGSIZE
-                        Assert.Equal(SocketError.MessageSize, error);
-                        Assert.Equal(0, bytesReceived);
+                        if (error == SocketError.Success)
+                        {
+                            // platform received message in > IOV_MAX segments
+                            Assert.Equal(SegmentCount, bytesReceived);
+                        }
+                        else
+                        {
+                            // platform returns EMSGSIZE
+                            Assert.Equal(SocketError.MessageSize, error);
+                            Assert.Equal(0, bytesReceived);
+                        }
                     }
                 }
-            });
+            );
 
             using (sender)
             {
@@ -190,13 +231,27 @@ namespace System.Net.Sockets.Tests
             await receiveTask;
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         [SkipOnPlatform(TestPlatforms.Windows, "All data is sent, even when very large (100M).")]
         public void SocketSendWouldBlock_ReturnsBytesSent()
         {
-            using (var server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var server = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 // listen
                 server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
@@ -219,13 +274,27 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public async Task Socket_ReceiveFlags_Success()
         {
-            using (var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            using (var receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var sender = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
+            using (
+                var receiver = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            ) {
                 receiver.BindToAnonymousPort(IPAddress.Loopback);
                 sender.Connect(receiver.LocalEndPoint);
                 sender.SendBufferSize = 1500;
@@ -244,13 +313,18 @@ namespace System.Net.Sockets.Tests
                 receiveBufer[0] = data[499] = 0;
 
                 args.SetBuffer(receiveBufer, 0, receiveBufer.Length);
-                args.Completed += delegate { tcs.SetResult(); };
+                args.Completed += delegate
+                {
+                    tcs.SetResult();
+                };
 
                 // First peek at the message.
                 args.SocketFlags = SocketFlags.Peek;
                 if (receiver.ReceiveAsync(args))
                 {
-                    await tcs.Task.WaitAsync(TimeSpan.FromMilliseconds(TestSettings.PassingTestTimeout));
+                    await tcs.Task.WaitAsync(
+                        TimeSpan.FromMilliseconds(TestSettings.PassingTestTimeout)
+                    );
                 }
                 Assert.Equal(SocketFlags.None, args.SocketFlags);
                 Assert.Equal(1, receiveBufer[0]);
@@ -262,7 +336,9 @@ namespace System.Net.Sockets.Tests
                 args.SocketFlags = SocketFlags.None;
                 if (receiver.ReceiveAsync(args))
                 {
-                    await tcs.Task.WaitAsync(TimeSpan.FromMilliseconds(TestSettings.PassingTestTimeout));
+                    await tcs.Task.WaitAsync(
+                        TimeSpan.FromMilliseconds(TestSettings.PassingTestTimeout)
+                    );
                 }
                 Assert.Equal(SocketFlags.None, args.SocketFlags);
                 Assert.Equal(1, receiveBufer[0]);
@@ -274,7 +350,9 @@ namespace System.Net.Sockets.Tests
                 args.SetBuffer(receiveBufer, 0, 100);
                 if (receiver.ReceiveAsync(args))
                 {
-                    await tcs.Task.WaitAsync(TimeSpan.FromMilliseconds(TestSettings.PassingTestTimeout));
+                    await tcs.Task.WaitAsync(
+                        TimeSpan.FromMilliseconds(TestSettings.PassingTestTimeout)
+                    );
                 }
                 Assert.Equal(SocketFlags.Truncated, args.SocketFlags);
                 Assert.Equal(2, receiveBufer[0]);

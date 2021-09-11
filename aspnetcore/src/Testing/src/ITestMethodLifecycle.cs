@@ -18,6 +18,10 @@ namespace Microsoft.AspNetCore.Testing
     {
         Task OnTestStartAsync(TestContext context, CancellationToken cancellationToken);
 
-        Task OnTestEndAsync(TestContext context, Exception exception, CancellationToken cancellationToken);
+        Task OnTestEndAsync(
+            TestContext context,
+            Exception exception,
+            CancellationToken cancellationToken
+        );
     }
 }

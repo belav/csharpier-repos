@@ -17,9 +17,14 @@ namespace Microsoft.DotNet.OpenApi.Commands
 
         private const string SourceArgName = "source";
 
-        public RemoveCommand(Application parent, IHttpClientWrapper httpClient) : base(parent, CommandName, httpClient)
+        public RemoveCommand(Application parent, IHttpClientWrapper httpClient)
+            : base(parent, CommandName, httpClient)
         {
-            _sourceProjectArg = Argument(SourceArgName, $"The OpenAPI reference to remove. Must represent a reference which is already in this project", multipleValues: true);
+            _sourceProjectArg = Argument(
+                SourceArgName,
+                $"The OpenAPI reference to remove. Must represent a reference which is already in this project",
+                multipleValues: true
+            );
         }
 
         internal readonly CommandArgument _sourceProjectArg;
@@ -47,18 +52,24 @@ namespace Microsoft.DotNet.OpenApi.Commands
             return Task.FromResult(0);
         }
 
-        private string RemoveServiceReference(string tagName, FileInfo projectFile, string sourceFile)
-        {
+        private string RemoveServiceReference(
+            string tagName,
+            FileInfo projectFile,
+            string sourceFile
+        ) {
             var project = LoadProject(projectFile);
             var openApiReferenceItems = project.GetItems(tagName);
 
             foreach (ProjectItem item in openApiReferenceItems)
             {
                 var include = item.EvaluatedInclude;
-                var sourceUrl = item.HasMetadata(SourceUrlAttrName) ? item.GetMetadataValue(SourceUrlAttrName) : null;
-                if (string.Equals(include, sourceFile, StringComparison.OrdinalIgnoreCase)
-                    || string.Equals(sourceUrl, sourceFile, StringComparison.OrdinalIgnoreCase))
-                {
+                var sourceUrl = item.HasMetadata(SourceUrlAttrName)
+                    ? item.GetMetadataValue(SourceUrlAttrName)
+                    : null;
+                if (
+                    string.Equals(include, sourceFile, StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(sourceUrl, sourceFile, StringComparison.OrdinalIgnoreCase)
+                ) {
                     project.RemoveItem(item);
                     project.Save();
                     return include;

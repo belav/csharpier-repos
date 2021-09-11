@@ -10,8 +10,14 @@ interface IncrDecr
 struct MyInt : IncrDecr
 {
     int x;
-    public int Val() { return x + 1; }
-    public override int GetHashCode() { return Val(); }
+    public int Val()
+    {
+        return x + 1;
+    }
+    public override int GetHashCode()
+    {
+        return Val();
+    }
 }
 class MyCounter<T> where T : IncrDecr
 {

@@ -67,22 +67,32 @@ namespace JIT.HardwareIntrinsics.General
             Byte upperValue = TestLibrary.Generator.GetByte();
             Vector64<Byte> upper = Vector64.Create(upperValue);
 
-            object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.Create), new Type[] { typeof(Vector64<Byte>), typeof(Vector64<Byte>) })
-                                .Invoke(null, new object[] { lower, upper });
+            object result = typeof(Vector128).GetMethod(
+                    nameof(Vector128.Create),
+                    new Type[] { typeof(Vector64<Byte>), typeof(Vector64<Byte>) }
+                )
+                .Invoke(null, new object[] { lower, upper });
 
             ValidateResult((Vector128<Byte>)(result), lowerValue, upperValue);
         }
 
-        private void ValidateResult(Vector128<Byte> result, Byte expectedLowerValue, Byte expectedUpperValue, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<Byte> result,
+            Byte expectedLowerValue,
+            Byte expectedUpperValue,
+            [CallerMemberName] string method = ""
+        ) {
             Byte[] resultElements = new Byte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedLowerValue, expectedUpperValue, method);
         }
 
-        private void ValidateResult(Byte[] resultElements, Byte expectedLowerValue, Byte expectedUpperValue, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Byte[] resultElements,
+            Byte expectedLowerValue,
+            Byte expectedUpperValue,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount / 2; i++)
@@ -105,10 +115,14 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.Create(Byte): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.Create(Byte): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   lower: {expectedLowerValue}");
                 TestLibrary.TestFramework.LogInformation($"   upper: {expectedUpperValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

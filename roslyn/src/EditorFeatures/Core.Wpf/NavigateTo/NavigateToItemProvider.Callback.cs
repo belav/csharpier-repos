@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             private readonly INavigateToItemDisplayFactory _displayFactory;
             private readonly INavigateToCallback _callback;
 
-            public NavigateToItemProviderCallback(INavigateToItemDisplayFactory displayFactory, INavigateToCallback callback)
-            {
+            public NavigateToItemProviderCallback(
+                INavigateToItemDisplayFactory displayFactory,
+                INavigateToCallback callback
+            ) {
                 _displayFactory = displayFactory;
                 _callback = callback;
             }
@@ -37,8 +39,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 }
             }
 
-            public Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken)
-            {
+            public Task AddItemAsync(
+                Project project,
+                INavigateToSearchResult result,
+                CancellationToken cancellationToken
+            ) {
                 ReportMatchResult(project, result);
                 return Task.CompletedTask;
             }
@@ -52,8 +57,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             {
                 var matchedSpans = result.NameMatchSpans.SelectAsArray(t => t.ToSpan());
 
-                var patternMatch = new PatternMatch(GetPatternMatchKind(result.MatchKind),
-                    punctuationStripped: true, result.IsCaseSensitive, matchedSpans);
+                var patternMatch = new PatternMatch(
+                    GetPatternMatchKind(result.MatchKind),
+                    punctuationStripped: true,
+                    result.IsCaseSensitive,
+                    matchedSpans
+                );
 
                 var navigateToItem = new NavigateToItem(
                     result.Name,
@@ -62,12 +71,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                     result.SecondarySort,
                     result,
                     patternMatch,
-                    _displayFactory);
+                    _displayFactory
+                );
                 _callback.AddItem(navigateToItem);
             }
 
-            private static PatternMatchKind GetPatternMatchKind(NavigateToMatchKind matchKind)
-                => matchKind switch
+            private static PatternMatchKind GetPatternMatchKind(NavigateToMatchKind matchKind) =>
+                matchKind switch
                 {
                     NavigateToMatchKind.Exact => PatternMatchKind.Exact,
                     NavigateToMatchKind.Prefix => PatternMatchKind.Prefix,
@@ -76,9 +86,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                     NavigateToMatchKind.None => PatternMatchKind.Fuzzy,
                     NavigateToMatchKind.CamelCaseExact => PatternMatchKind.CamelCaseExact,
                     NavigateToMatchKind.CamelCasePrefix => PatternMatchKind.CamelCasePrefix,
-                    NavigateToMatchKind.CamelCaseNonContiguousPrefix => PatternMatchKind.CamelCaseNonContiguousPrefix,
+                    NavigateToMatchKind.CamelCaseNonContiguousPrefix
+                      => PatternMatchKind.CamelCaseNonContiguousPrefix,
                     NavigateToMatchKind.CamelCaseSubstring => PatternMatchKind.CamelCaseSubstring,
-                    NavigateToMatchKind.CamelCaseNonContiguousSubstring => PatternMatchKind.CamelCaseNonContiguousSubstring,
+                    NavigateToMatchKind.CamelCaseNonContiguousSubstring
+                      => PatternMatchKind.CamelCaseNonContiguousSubstring,
                     NavigateToMatchKind.Fuzzy => PatternMatchKind.Fuzzy,
                     _ => throw ExceptionUtilities.UnexpectedValue(matchKind),
                 };
@@ -88,8 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             /// </summary>
             /// <remarks> It turns out this string is used for sorting and for some SQM data, so it's best
             /// to keep it unchanged.</remarks>
-            private static string GetNavigateToLanguage(string languageName)
-                => languageName switch
+            private static string GetNavigateToLanguage(string languageName) =>
+                languageName switch
                 {
                     LanguageNames.CSharp => "csharp",
                     LanguageNames.VisualBasic => "vb",

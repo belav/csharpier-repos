@@ -3,18 +3,20 @@
 
 using System;
 
-
 public unsafe class T
 {
     public static int Main()
     {
-        if (Bug() == "0") return 100;
+        if (Bug() == "0")
+            return 100;
 
         return 1;
     }
     public static string Bug()
     {
-        int maxSize, sizeInt, sizeFract;
+        int maxSize,
+            sizeInt,
+            sizeFract;
 
         sizeInt = return_int(false, 0);
         sizeFract = return_int(false, 1) - return_int(false, -2);
@@ -35,6 +37,7 @@ public unsafe class T
         {
             ans = input;
         }
+
         finally
         {
             if (verbose)

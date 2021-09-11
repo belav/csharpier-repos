@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                 string name,
                 object? tag = null,
                 [CallerFilePath] string filePath = "",
-                [CallerLineNumber] int lineNumber = 0) => EmptyAsyncToken.Instance;
+                [CallerLineNumber] int lineNumber = 0
+            ) => EmptyAsyncToken.Instance;
 
             public async Task<bool> Delay(TimeSpan delay, CancellationToken cancellationToken)
             {

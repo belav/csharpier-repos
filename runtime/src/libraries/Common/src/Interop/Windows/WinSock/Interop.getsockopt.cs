@@ -14,7 +14,8 @@ internal static partial class Interop
             [In] SocketOptionLevel optionLevel,
             [In] SocketOptionName optionName,
             [Out] byte* optionValue,
-            [In, Out] ref int optionLength);
+            [In, Out] ref int optionLength
+        );
 
         [DllImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static extern SocketError getsockopt(
@@ -22,7 +23,8 @@ internal static partial class Interop
             [In] SocketOptionLevel optionLevel,
             [In] SocketOptionName optionName,
             [Out] out Linger optionValue,
-            [In, Out] ref int optionLength);
+            [In, Out] ref int optionLength
+        );
 
         [DllImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static extern SocketError getsockopt(
@@ -30,7 +32,8 @@ internal static partial class Interop
             [In] SocketOptionLevel optionLevel,
             [In] SocketOptionName optionName,
             [Out] out IPMulticastRequest optionValue,
-            [In, Out] ref int optionLength);
+            [In, Out] ref int optionLength
+        );
 
         [DllImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static extern SocketError getsockopt(
@@ -38,6 +41,7 @@ internal static partial class Interop
             [In] SocketOptionLevel optionLevel,
             [In] SocketOptionName optionName,
             [Out] out IPv6MulticastRequest optionValue,
-            [In, Out] ref int optionLength);
+            [In, Out] ref int optionLength
+        );
     }
 }

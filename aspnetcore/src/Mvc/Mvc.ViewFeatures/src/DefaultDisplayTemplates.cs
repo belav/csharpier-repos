@@ -25,9 +25,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 value = Convert.ToBoolean(htmlHelper.ViewData.Model, CultureInfo.InvariantCulture);
             }
 
-            return htmlHelper.ViewData.ModelMetadata.IsNullableValueType ?
-                BooleanTemplateDropDownList(value) :
-                BooleanTemplateCheckbox(value ?? false);
+            return htmlHelper.ViewData.ModelMetadata.IsNullableValueType
+                ? BooleanTemplateDropDownList(value)
+                : BooleanTemplateCheckbox(value ?? false);
         }
 
         private static IHtmlContent BooleanTemplateCheckbox(bool value)
@@ -54,7 +54,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             foreach (var item in TriStateValues(value))
             {
-                selectTag.InnerHtml.AppendHtml(DefaultHtmlGenerator.GenerateOption(item, item.Text));
+                selectTag.InnerHtml.AppendHtml(
+                    DefaultHtmlGenerator.GenerateOption(item, item.Text)
+                );
             }
 
             return selectTag;
@@ -83,8 +85,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (enumerable == null)
             {
                 // Only way we could reach here is if user passed templateName: "Collection" to a Display() overload.
-                throw new InvalidOperationException(Resources.FormatTemplates_TypeMustImplementIEnumerable(
-                    "Collection", model.GetType().FullName, typeof(IEnumerable).FullName));
+                throw new InvalidOperationException(
+                    Resources.FormatTemplates_TypeMustImplementIEnumerable(
+                        "Collection",
+                        model.GetType().FullName,
+                        typeof(IEnumerable).FullName
+                    )
+                );
             }
 
             var elementMetadata = htmlHelper.ViewData.ModelMetadata.ElementMetadata;
@@ -106,7 +113,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
 
                 var collection = model as ICollection;
-                var result = collection == null ? new HtmlContentBuilder() : new HtmlContentBuilder(collection.Count);
+                var result =
+                    collection == null
+                        ? new HtmlContentBuilder()
+                        : new HtmlContentBuilder(collection.Count);
                 var viewEngine = serviceProvider.GetRequiredService<ICompositeViewEngine>();
                 var viewBufferScope = serviceProvider.GetRequiredService<IViewBufferScope>();
 
@@ -123,8 +133,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         metadataProvider,
                         container: htmlHelper.ViewData.ModelExplorer,
                         metadata: itemMetadata,
-                        model: item);
-                    var fieldName = string.Format(CultureInfo.InvariantCulture, "{0}[{1}]", oldPrefix, index++);
+                        model: item
+                    );
+                    var fieldName = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}[{1}]",
+                        oldPrefix,
+                        index++
+                    );
 
                     var templateBuilder = new TemplateBuilder(
                         viewEngine,
@@ -135,12 +151,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         htmlFieldName: fieldName,
                         templateName: null,
                         readOnly: true,
-                        additionalViewData: null);
+                        additionalViewData: null
+                    );
                     result.AppendHtml(templateBuilder.Build());
                 }
 
                 return result;
             }
+
             finally
             {
                 htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix = oldPrefix;
@@ -151,8 +169,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             if (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == htmlHelper.ViewData.Model)
             {
-                htmlHelper.ViewData.TemplateInfo.FormattedModelValue =
-                    string.Format(CultureInfo.CurrentCulture, "{0:0.00}", htmlHelper.ViewData.Model);
+                htmlHelper.ViewData.TemplateInfo.FormattedModelValue = string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0:0.00}",
+                    htmlHelper.ViewData.Model
+                );
             }
 
             return StringTemplate(htmlHelper);
@@ -160,12 +181,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         public static IHtmlContent EmailAddressTemplate(IHtmlHelper htmlHelper)
         {
-            var uriString = "mailto:" + ((htmlHelper.ViewData.Model == null) ?
-                string.Empty :
-                htmlHelper.ViewData.Model.ToString());
-            var linkedText = (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == null) ?
-                string.Empty :
-                htmlHelper.ViewData.TemplateInfo.FormattedModelValue.ToString();
+            var uriString =
+                "mailto:"
+                + (
+                    (htmlHelper.ViewData.Model == null)
+                        ? string.Empty
+                        : htmlHelper.ViewData.Model.ToString()
+                );
+            var linkedText =
+                (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == null)
+                    ? string.Empty
+                    : htmlHelper.ViewData.TemplateInfo.FormattedModelValue.ToString();
 
             return HyperlinkTemplate(uriString, linkedText);
         }
@@ -229,7 +255,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     htmlFieldName: propertyMetadata.PropertyName,
                     templateName: null,
                     readOnly: true,
-                    additionalViewData: null);
+                    additionalViewData: null
+                );
 
                 var templateBuilderResult = templateBuilder.Build();
                 if (!propertyMetadata.HideSurroundingHtml)
@@ -259,10 +286,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private static bool ShouldShow(ModelExplorer modelExplorer, TemplateInfo templateInfo)
         {
-            return
-                modelExplorer.Metadata.ShowForDisplay &&
-                !modelExplorer.Metadata.IsComplexType &&
-                !templateInfo.Visited(modelExplorer);
+            return modelExplorer.Metadata.ShowForDisplay
+                && !modelExplorer.Metadata.IsComplexType
+                && !templateInfo.Visited(modelExplorer);
         }
 
         public static IHtmlContent StringTemplate(IHtmlHelper htmlHelper)
@@ -278,10 +304,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         public static IHtmlContent UrlTemplate(IHtmlHelper htmlHelper)
         {
-            var uriString = (htmlHelper.ViewData.Model == null) ? string.Empty : htmlHelper.ViewData.Model.ToString();
-            var linkedText = (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == null) ?
-                string.Empty :
-                htmlHelper.ViewData.TemplateInfo.FormattedModelValue.ToString();
+            var uriString =
+                (htmlHelper.ViewData.Model == null)
+                    ? string.Empty
+                    : htmlHelper.ViewData.Model.ToString();
+            var linkedText =
+                (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == null)
+                    ? string.Empty
+                    : htmlHelper.ViewData.TemplateInfo.FormattedModelValue.ToString();
 
             return HyperlinkTemplate(uriString, linkedText);
         }

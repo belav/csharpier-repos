@@ -29,7 +29,6 @@ namespace System.Reflection
         // field
         INVOCATION_FLAGS_SPECIAL_FIELD = 0x00000010,
         INVOCATION_FLAGS_FIELD_SPECIAL_CAST = 0x00000020,
-
         // temporary flag used for flagging invocation of method vs ctor
         // this flag never appears on the instance m_invocationFlag and is simply
         // passed down from within ConstructorInfo.Invoke()

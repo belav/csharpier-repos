@@ -10,8 +10,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
 {
     internal partial class AbstractLegacyProject : ICompilerOptionsHostObject
     {
-        int ICompilerOptionsHostObject.SetCompilerOptions(string compilerOptions, out bool supported)
-        {
+        int ICompilerOptionsHostObject.SetCompilerOptions(
+            string compilerOptions,
+            out bool supported
+        ) {
 #pragma warning disable CS0618 // Type or member is obsolete (Legacy API that cannot be changed)
             VisualStudioProjectOptionsProcessor.SetCommandLine(compilerOptions);
 #pragma warning restore CS0618

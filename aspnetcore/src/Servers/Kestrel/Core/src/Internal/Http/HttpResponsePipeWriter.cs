@@ -46,8 +46,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return new ValueTask(_completeTask);
         }
 
-        public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default)
-        {
+        public override ValueTask<FlushResult> FlushAsync(
+            CancellationToken cancellationToken = default
+        ) {
             ValidateState(cancellationToken);
             return _pipeControl.FlushPipeAsync(cancellationToken);
         }
@@ -64,8 +65,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return _pipeControl.GetSpan(sizeHint);
         }
 
-        public override ValueTask<FlushResult> WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask<FlushResult> WriteAsync(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken = default
+        ) {
             ValidateState(cancellationToken);
             return _pipeControl.WritePipeAsync(source, cancellationToken);
         }
@@ -112,7 +115,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             static void ThrowObjectDisposedException()
             {
-                throw new ObjectDisposedException(nameof(HttpResponseStream), CoreStrings.WritingToResponseBodyAfterResponseCompleted);
+                throw new ObjectDisposedException(
+                    nameof(HttpResponseStream),
+                    CoreStrings.WritingToResponseBodyAfterResponseCompleted
+                );
             }
         }
     }

@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor
     {
         public string Language { get; }
 
-        public ExportHighlighterAttribute(string language)
-            : base(typeof(IHighlighter))
+        public ExportHighlighterAttribute(string language) : base(typeof(IHighlighter))
         {
             this.Language = language ?? throw new ArgumentNullException(nameof(language));
         }

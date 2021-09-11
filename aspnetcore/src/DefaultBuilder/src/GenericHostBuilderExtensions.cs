@@ -28,19 +28,23 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="builder">The <see cref="IHostBuilder" /> instance to configure.</param>
         /// <param name="configure">The configure callback</param>
         /// <returns>A reference to the <paramref name="builder"/> after the operation has completed.</returns>
-        public static IHostBuilder ConfigureWebHostDefaults(this IHostBuilder builder, Action<IWebHostBuilder> configure)
-        {
+        public static IHostBuilder ConfigureWebHostDefaults(
+            this IHostBuilder builder,
+            Action<IWebHostBuilder> configure
+        ) {
             if (configure is null)
             {
                 throw new ArgumentNullException(nameof(configure));
             }
 
-            return builder.ConfigureWebHost(webHostBuilder =>
-            {
-                WebHost.ConfigureWebDefaults(webHostBuilder);
+            return builder.ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    WebHost.ConfigureWebDefaults(webHostBuilder);
 
-                configure(webHostBuilder);
-            });
+                    configure(webHostBuilder);
+                }
+            );
         }
     }
 }

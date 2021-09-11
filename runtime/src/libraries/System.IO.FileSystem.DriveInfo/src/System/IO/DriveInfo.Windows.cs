@@ -34,8 +34,18 @@ namespace System.IO
 
                 using (DisableMediaInsertionPrompt.Create())
                 {
-                    if (!Interop.Kernel32.GetVolumeInformation(Name, null, 0, null, null, out int fileSystemFlags, fileSystemName, Interop.Kernel32.MAX_PATH + 1))
-                    {
+                    if (
+                        !Interop.Kernel32.GetVolumeInformation(
+                            Name,
+                            null,
+                            0,
+                            null,
+                            null,
+                            out int fileSystemFlags,
+                            fileSystemName,
+                            Interop.Kernel32.MAX_PATH + 1
+                        )
+                    ) {
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                     }
                 }
@@ -47,15 +57,26 @@ namespace System.IO
         {
             get
             {
-                long userBytes, totalBytes, freeBytes;
+                long userBytes,
+                    totalBytes,
+                    freeBytes;
                 uint oldMode;
-                bool success = Interop.Kernel32.SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
+                bool success = Interop.Kernel32.SetThreadErrorMode(
+                    Interop.Kernel32.SEM_FAILCRITICALERRORS,
+                    out oldMode
+                );
                 try
                 {
-                    bool r = Interop.Kernel32.GetDiskFreeSpaceEx(Name, out userBytes, out totalBytes, out freeBytes);
+                    bool r = Interop.Kernel32.GetDiskFreeSpaceEx(
+                        Name,
+                        out userBytes,
+                        out totalBytes,
+                        out freeBytes
+                    );
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                 }
+
                 finally
                 {
                     if (success)
@@ -69,15 +90,26 @@ namespace System.IO
         {
             get
             {
-                long userBytes, totalBytes, freeBytes;
+                long userBytes,
+                    totalBytes,
+                    freeBytes;
                 uint oldMode;
-                bool success = Interop.Kernel32.SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
+                bool success = Interop.Kernel32.SetThreadErrorMode(
+                    Interop.Kernel32.SEM_FAILCRITICALERRORS,
+                    out oldMode
+                );
                 try
                 {
-                    bool r = Interop.Kernel32.GetDiskFreeSpaceEx(Name, out userBytes, out totalBytes, out freeBytes);
+                    bool r = Interop.Kernel32.GetDiskFreeSpaceEx(
+                        Name,
+                        out userBytes,
+                        out totalBytes,
+                        out freeBytes
+                    );
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                 }
+
                 finally
                 {
                     if (success)
@@ -93,15 +125,26 @@ namespace System.IO
             {
                 // Don't cache this, to handle variable sized floppy drives
                 // or other various removable media drives.
-                long userBytes, totalBytes, freeBytes;
+                long userBytes,
+                    totalBytes,
+                    freeBytes;
                 uint oldMode;
-                Interop.Kernel32.SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
+                Interop.Kernel32.SetThreadErrorMode(
+                    Interop.Kernel32.SEM_FAILCRITICALERRORS,
+                    out oldMode
+                );
                 try
                 {
-                    bool r = Interop.Kernel32.GetDiskFreeSpaceEx(Name, out userBytes, out totalBytes, out freeBytes);
+                    bool r = Interop.Kernel32.GetDiskFreeSpaceEx(
+                        Name,
+                        out userBytes,
+                        out totalBytes,
+                        out freeBytes
+                    );
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                 }
+
                 finally
                 {
                     Interop.Kernel32.SetThreadErrorMode(oldMode, out _);
@@ -131,8 +174,18 @@ namespace System.IO
 
                 using (DisableMediaInsertionPrompt.Create())
                 {
-                    if (!Interop.Kernel32.GetVolumeInformation(Name, volumeName, Interop.Kernel32.MAX_PATH + 1, null, null, out int fileSystemFlags, null, 0))
-                    {
+                    if (
+                        !Interop.Kernel32.GetVolumeInformation(
+                            Name,
+                            volumeName,
+                            Interop.Kernel32.MAX_PATH + 1,
+                            null,
+                            null,
+                            out int fileSystemFlags,
+                            null,
+                            0
+                        )
+                    ) {
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                     }
                 }
@@ -143,7 +196,10 @@ namespace System.IO
             set
             {
                 uint oldMode;
-                bool success = Interop.Kernel32.SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
+                bool success = Interop.Kernel32.SetThreadErrorMode(
+                    Interop.Kernel32.SEM_FAILCRITICALERRORS,
+                    out oldMode
+                );
                 try
                 {
                     bool r = Interop.Kernel32.SetVolumeLabel(Name, value);
@@ -152,10 +208,13 @@ namespace System.IO
                         int errorCode = Marshal.GetLastWin32Error();
                         // Provide better message
                         if (errorCode == Interop.Errors.ERROR_ACCESS_DENIED)
-                            throw new UnauthorizedAccessException(SR.InvalidOperation_SetVolumeLabelFailed);
+                            throw new UnauthorizedAccessException(
+                                SR.InvalidOperation_SetVolumeLabelFailed
+                            );
                         throw Error.GetExceptionForWin32DriveError(errorCode, Name);
                     }
                 }
+
                 finally
                 {
                     if (success)

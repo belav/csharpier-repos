@@ -38,8 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public ActionSelector(
             IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
             ActionConstraintCache actionConstraintCache,
-            ILoggerFactory loggerFactory)
-        {
+            ILoggerFactory loggerFactory
+        ) {
             _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
             _logger = loggerFactory.CreateLogger<ActionSelector>();
             _actionConstraintCache = actionConstraintCache;
@@ -82,8 +82,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             return matches;
         }
 
-        public ActionDescriptor? SelectBestCandidate(RouteContext context, IReadOnlyList<ActionDescriptor> candidates)
-        {
+        public ActionDescriptor? SelectBestCandidate(
+            RouteContext context,
+            IReadOnlyList<ActionDescriptor> candidates
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -110,13 +112,15 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 var actionNames = string.Join(
                     Environment.NewLine,
-                    finalMatches.Select(a => a.DisplayName));
+                    finalMatches.Select(a => a.DisplayName)
+                );
 
                 _logger.AmbiguousActions(actionNames);
 
                 var message = Resources.FormatDefaultActionSelector_AmbiguousActions(
                     Environment.NewLine,
-                    actionNames);
+                    actionNames
+                );
 
                 throw new AmbiguousActionException(message);
             }
@@ -124,8 +128,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private IReadOnlyList<ActionDescriptor>? EvaluateActionConstraints(
             RouteContext context,
-            IReadOnlyList<ActionDescriptor> actions)
-        {
+            IReadOnlyList<ActionDescriptor> actions
+        ) {
             var actionsCount = actions.Count;
             var candidates = new List<ActionSelectorCandidate>(actionsCount);
 
@@ -133,7 +137,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             for (var i = 0; i < actionsCount; i++)
             {
                 var action = actions[i];
-                var constraints = _actionConstraintCache.GetActionConstraints(context.HttpContext, action);
+                var constraints = _actionConstraintCache.GetActionConstraints(
+                    context.HttpContext,
+                    action
+                );
                 candidates.Add(new ActionSelectorCandidate(action, constraints));
             }
 
@@ -158,8 +165,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private IReadOnlyList<ActionSelectorCandidate>? EvaluateActionConstraintsCore(
             RouteContext context,
             IReadOnlyList<ActionSelectorCandidate> candidates,
-            int? startingOrder)
-        {
+            int? startingOrder
+        ) {
             // Find the next group of constraints to process. This will be the lowest value of
             // order that is higher than startingOrder.
             int? order = null;
@@ -173,9 +180,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     for (var j = 0; j < candidate.Constraints.Count; j++)
                     {
                         var constraint = candidate.Constraints[j];
-                        if ((startingOrder == null || constraint.Order > startingOrder) &&
-                            (order == null || constraint.Order < order))
-                        {
+                        if (
+                            (startingOrder == null || constraint.Order > startingOrder)
+                            && (order == null || constraint.Order < order)
+                        ) {
                             order = constraint.Order;
                         }
                     }
@@ -222,7 +230,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                                 _logger.ConstraintMismatch(
                                     candidate.Action.DisplayName,
                                     candidate.Action.Id,
-                                    constraint);
+                                    constraint
+                                );
                                 break;
                             }
                         }

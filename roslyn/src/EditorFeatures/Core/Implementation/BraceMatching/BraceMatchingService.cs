@@ -23,24 +23,34 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public BraceMatchingService(
-            [ImportMany] IEnumerable<Lazy<IBraceMatcher, LanguageMetadata>> braceMatchers)
-        {
+            [ImportMany] IEnumerable<Lazy<IBraceMatcher, LanguageMetadata>> braceMatchers
+        ) {
             _braceMatchers = braceMatchers.ToImmutableArray();
         }
 
-        public async Task<BraceMatchingResult?> GetMatchingBracesAsync(Document document, int position, CancellationToken cancellationToken)
-        {
+        public async Task<BraceMatchingResult?> GetMatchingBracesAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             if (position < 0 || position > text.Length)
             {
                 throw new ArgumentException(nameof(position));
             }
 
-            var matchers = _braceMatchers.Where(b => b.Metadata.Language == document.Project.Language);
+            var matchers = _braceMatchers.Where(
+                b => b.Metadata.Language == document.Project.Language
+            );
             foreach (var matcher in matchers)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                var braces = await matcher.Value.FindBracesAsync(document, position, cancellationToken).ConfigureAwait(false);
+                var braces = await matcher.Value.FindBracesAsync(
+                        document,
+                        position,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (braces.HasValue)
                 {
                     return braces;

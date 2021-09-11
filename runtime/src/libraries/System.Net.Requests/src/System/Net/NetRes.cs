@@ -7,9 +7,12 @@ namespace System.Net
 {
     internal static class NetRes
     {
-        public static string GetWebStatusCodeString(FtpStatusCode statusCode, string? statusDescription)
-        {
-            string webStatusCode = "(" + ((int)statusCode).ToString(NumberFormatInfo.InvariantInfo) + ")";
+        public static string GetWebStatusCodeString(
+            FtpStatusCode statusCode,
+            string? statusDescription
+        ) {
+            string webStatusCode =
+                "(" + ((int)statusCode).ToString(NumberFormatInfo.InvariantInfo) + ")";
             string? statusMessage = null;
 
             switch (statusCode)

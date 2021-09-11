@@ -37,11 +37,15 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
         public string DisplayName => EditorFeaturesResources.Find_References;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public FindReferencesCommandHandler(
             IStreamingFindUsagesPresenter streamingPresenter,
-            IAsynchronousOperationListenerProvider listenerProvider)
-        {
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) {
             Contract.ThrowIfNull(listenerProvider);
 
             _streamingPresenter = streamingPresenter;
@@ -51,9 +55,7 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
         public CommandState GetCommandState(FindReferencesCommandArgs args)
         {
             var (_, service) = GetDocumentAndService(args.SubjectBuffer.CurrentSnapshot);
-            return service != null
-                ? CommandState.Available
-                : CommandState.Unspecified;
+            return service != null ? CommandState.Available : CommandState.Unspecified;
         }
 
         public bool ExecuteCommand(FindReferencesCommandArgs args, CommandExecutionContext context)
@@ -61,8 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
             var subjectBuffer = args.SubjectBuffer;
 
             // Get the selection that user has in our buffer (this also works if there
-            // is no selection and the caret is just at a single position).  If we 
-            // can't get the selection, or there are multiple spans for it (i.e. a 
+            // is no selection and the caret is just at a single position).  If we
+            // can't get the selection, or there are multiple spans for it (i.e. a
             // box selection), then don't do anything.
             var snapshotSpans = args.TextView.Selection.GetSnapshotSpansOnBuffer(subjectBuffer);
             if (snapshotSpans.Count == 1)
@@ -91,14 +93,22 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
             return (document, document?.GetLanguageService<IFindUsagesService>());
         }
 
-        private bool TryExecuteCommand(int caretPosition, Document document, IFindUsagesService findUsagesService)
-        {
+        private bool TryExecuteCommand(
+            int caretPosition,
+            Document document,
+            IFindUsagesService findUsagesService
+        ) {
             // See if we're running on a host that can provide streaming results.
-            // We'll both need a FAR service that can stream results to us, and 
+            // We'll both need a FAR service that can stream results to us, and
             // a presenter that can accept streamed results.
             if (findUsagesService != null && _streamingPresenter != null)
             {
-                _ = StreamingFindReferencesAsync(document, caretPosition, findUsagesService, _streamingPresenter);
+                _ = StreamingFindReferencesAsync(
+                    document,
+                    caretPosition,
+                    findUsagesService,
+                    _streamingPresenter
+                );
                 return true;
             }
 
@@ -106,13 +116,16 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
         }
 
         private async Task StreamingFindReferencesAsync(
-            Document document, int caretPosition,
+            Document document,
+            int caretPosition,
             IFindUsagesService findUsagesService,
-            IStreamingFindUsagesPresenter presenter)
-        {
+            IStreamingFindUsagesPresenter presenter
+        ) {
             try
             {
-                using var token = _asyncListener.BeginAsyncOperation(nameof(StreamingFindReferencesAsync));
+                using var token = _asyncListener.BeginAsyncOperation(
+                    nameof(StreamingFindReferencesAsync)
+                );
 
                 // Let the presented know we're starting a search.  It will give us back the context object that the FAR
                 // service will push results into. This operation is not externally cancellable.  Instead, the find refs
@@ -122,29 +135,34 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
                     supportsReferences: true,
                     includeContainingTypeAndMemberColumns: document.Project.SupportsCompilation,
                     includeKindColumn: document.Project.Language != LanguageNames.FSharp,
-                    CancellationToken.None);
+                    CancellationToken.None
+                );
 
-                using (Logger.LogBlock(
-                    FunctionId.CommandHandler_FindAllReference,
-                    KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
-                    context.CancellationToken))
-                {
+                using (
+                    Logger.LogBlock(
+                        FunctionId.CommandHandler_FindAllReference,
+                        KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
+                        context.CancellationToken
+                    )
+                ) {
                     try
                     {
-                        await findUsagesService.FindReferencesAsync(document, caretPosition, context).ConfigureAwait(false);
+                        await findUsagesService.FindReferencesAsync(
+                                document,
+                                caretPosition,
+                                context
+                            )
+                            .ConfigureAwait(false);
                     }
+
                     finally
                     {
                         await context.OnCompletedAsync().ConfigureAwait(false);
                     }
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception e) when (FatalError.ReportAndCatch(e))
-            {
-            }
+            catch (OperationCanceledException) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
         }
     }
 }

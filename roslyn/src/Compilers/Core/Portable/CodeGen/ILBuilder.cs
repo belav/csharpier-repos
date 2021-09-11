@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         internal ImmutableArray<Cci.ExceptionHandlerRegion> RealizedExceptionHandlers;
         internal SequencePointList RealizedSequencePoints;
 
-        // debug sequence points from all blocks, note that each 
+        // debug sequence points from all blocks, note that each
         // sequence point references absolute IL offset via IL marker
         public ArrayBuilder<RawSequencePoint> SeqPointsOpt;
 
@@ -67,8 +67,12 @@ namespace Microsoft.CodeAnalysis.CodeGen
         // created, in particular for leader blocks in exception handlers.
         private bool _pendingBlockCreate;
 
-        internal ILBuilder(ITokenDeferral module, LocalSlotManager localSlotManager, OptimizationLevel optimizations, bool areLocalsZeroed)
-        {
+        internal ILBuilder(
+            ITokenDeferral module,
+            LocalSlotManager localSlotManager,
+            OptimizationLevel optimizations,
+            bool areLocalsZeroed
+        ) {
             Debug.Assert(BitConverter.IsLittleEndian);
 
             this.module = module;
@@ -78,7 +82,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             leaderBlock = _currentBlock = _scopeManager.CreateBlock(this);
 
-            _labelInfos = new SmallDictionary<object, LabelInfo>(ReferenceEqualityComparer.Instance);
+            _labelInfos = new SmallDictionary<object, LabelInfo>(
+                ReferenceEqualityComparer.Instance
+            );
             _optimizations = optimizations;
             _areLocalsZeroed = areLocalsZeroed;
         }
@@ -151,20 +157,26 @@ namespace Microsoft.CodeAnalysis.CodeGen
         {
             //  there is a chance that 'lastCompleteBlock' may have an IL marker
             //  placed at the end of it such that block offset of the marker points
-            //  to the next byte *after* the block is closed. In this case the marker 
+            //  to the next byte *after* the block is closed. In this case the marker
             //  should be moved to the next block
-            if (_lastCompleteBlock != null &&
-                _lastCompleteBlock.BranchCode == ILOpCode.Nop &&
-                _lastCompleteBlock.LastILMarker >= 0 &&
-                _allocatedILMarkers[_lastCompleteBlock.LastILMarker].BlockOffset == _lastCompleteBlock.RegularInstructionsLength)
-            {
+            if (
+                _lastCompleteBlock != null
+                && _lastCompleteBlock.BranchCode == ILOpCode.Nop
+                && _lastCompleteBlock.LastILMarker >= 0
+                && _allocatedILMarkers[_lastCompleteBlock.LastILMarker].BlockOffset
+                    == _lastCompleteBlock.RegularInstructionsLength
+            ) {
                 int startMarker = -1;
                 int endMarker = -1;
 
-                while (_lastCompleteBlock.LastILMarker >= 0 &&
-                      _allocatedILMarkers[_lastCompleteBlock.LastILMarker].BlockOffset == _lastCompleteBlock.RegularInstructionsLength)
-                {
-                    Debug.Assert((startMarker < 0) || (startMarker == (_lastCompleteBlock.LastILMarker + 1)));
+                while (
+                    _lastCompleteBlock.LastILMarker >= 0
+                    && _allocatedILMarkers[_lastCompleteBlock.LastILMarker].BlockOffset
+                        == _lastCompleteBlock.RegularInstructionsLength
+                ) {
+                    Debug.Assert(
+                        (startMarker < 0) || (startMarker == (_lastCompleteBlock.LastILMarker + 1))
+                    );
                     startMarker = _lastCompleteBlock.LastILMarker;
                     if (endMarker < 0)
                     {
@@ -177,12 +189,17 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 for (int marker = startMarker; marker <= endMarker; marker++)
                 {
                     current.AddILMarker(marker);
-                    _allocatedILMarkers[marker] = new ILMarker() { BlockOffset = (int)current.RegularInstructionsLength, AbsoluteOffset = -1 };
+                    _allocatedILMarkers[marker] = new ILMarker()
+                    {
+                        BlockOffset = (int)current.RegularInstructionsLength,
+                        AbsoluteOffset = -1
+                    };
                 }
             }
         }
 
-        private ExceptionHandlerScope EnclosingExceptionHandler => _scopeManager.EnclosingExceptionHandler;
+        private ExceptionHandlerScope EnclosingExceptionHandler =>
+            _scopeManager.EnclosingExceptionHandler;
 
         internal bool InExceptionHandler => this.EnclosingExceptionHandler != null;
 
@@ -205,7 +222,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// <summary>
         /// Gets all scopes that contain variables.
         /// </summary>
-        internal ImmutableArray<Cci.LocalScope> GetAllScopes() => _scopeManager.GetAllScopesWithLocals();
+        internal ImmutableArray<Cci.LocalScope> GetAllScopes() =>
+            _scopeManager.GetAllScopesWithLocals();
 
         /// <summary>
         /// Gets all scopes that contain variables.
@@ -268,8 +286,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             reachableBlocks.Free();
         }
 
-        private static void PushReachableBlockToProcess(ArrayBuilder<BasicBlock> reachableBlocks, BasicBlock block)
-        {
+        private static void PushReachableBlockToProcess(
+            ArrayBuilder<BasicBlock> reachableBlocks,
+            BasicBlock block
+        ) {
             if (block.Reachability == Reachability.NotReachable)
             {
                 reachableBlocks.Push(block);
@@ -279,9 +299,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// <summary>
         /// Marks blocks that are recursively reachable from the given block.
         /// </summary>
-        private static void MarkReachableFrom(ArrayBuilder<BasicBlock> reachableBlocks, BasicBlock block)
-        {
-tryAgain:
+        private static void MarkReachableFrom(
+            ArrayBuilder<BasicBlock> reachableBlocks,
+            BasicBlock block
+        ) {
+            tryAgain:
 
             if (block != null && block.Reachability == Reachability.NotReachable)
             {
@@ -326,13 +348,15 @@ tryAgain:
             }
         }
 
-        private static void MarkReachableFromBranch(ArrayBuilder<BasicBlock> reachableBlocks, BasicBlock block)
-        {
+        private static void MarkReachableFromBranch(
+            ArrayBuilder<BasicBlock> reachableBlocks,
+            BasicBlock block
+        ) {
             var branchBlock = block.BranchBlock;
 
             if (branchBlock != null)
             {
-                // if branch is blocked by a finally, then should branch to corresponding 
+                // if branch is blocked by a finally, then should branch to corresponding
                 // BlockedBranchDestination instead. Original label may not be reachable.
                 // if there are no blocking finally blocks, then BlockedBranchDestination returns null
                 // and we just visit the target.
@@ -380,8 +404,10 @@ tryAgain:
             return BlockedBranchDestinationSlow(dest.EnclosingHandler, srcHandler);
         }
 
-        private static object BlockedBranchDestinationSlow(ExceptionHandlerScope destHandler, ExceptionHandlerScope srcHandler)
-        {
+        private static object BlockedBranchDestinationSlow(
+            ExceptionHandlerScope destHandler,
+            ExceptionHandlerScope srcHandler
+        ) {
             ScopeInfo destHandlerScope = null;
             if (destHandler != null)
             {
@@ -420,8 +446,10 @@ tryAgain:
             return null;
         }
 
-        private static void MarkReachableFromTry(ArrayBuilder<BasicBlock> reachableBlocks, BasicBlock block)
-        {
+        private static void MarkReachableFromTry(
+            ArrayBuilder<BasicBlock> reachableBlocks,
+            BasicBlock block
+        ) {
             // Since the try block is reachable, associated
             // catch and finally blocks are also reachable.
             var handlerBlock = ((ExceptionHandlerLeaderBlock)block).NextExceptionHandler;
@@ -453,7 +481,11 @@ tryAgain:
                 // Here, we push the handler blocks, then the try block.
                 while (handlerBlock != null)
                 {
-                    Debug.Assert(handlerBlock.Type == BlockType.Catch || handlerBlock.Type == BlockType.Fault || handlerBlock.Type == BlockType.Filter);
+                    Debug.Assert(
+                        handlerBlock.Type == BlockType.Catch
+                            || handlerBlock.Type == BlockType.Fault
+                            || handlerBlock.Type == BlockType.Filter
+                    );
                     PushReachableBlockToProcess(reachableBlocks, handlerBlock);
                     handlerBlock = handlerBlock.NextExceptionHandler;
                 }
@@ -462,8 +494,10 @@ tryAgain:
             MarkReachableFromBranch(reachableBlocks, block);
         }
 
-        private static void MarkReachableFromSwitch(ArrayBuilder<BasicBlock> reachableBlocks, BasicBlock block)
-        {
+        private static void MarkReachableFromSwitch(
+            ArrayBuilder<BasicBlock> reachableBlocks,
+            BasicBlock block
+        ) {
             var switchBlock = (SwitchBlock)block;
             var blockBuilder = ArrayBuilder<BasicBlock>.GetInstance();
             switchBlock.GetBranchBlocks(blockBuilder);
@@ -480,7 +514,7 @@ tryAgain:
         /// If a label points to a block that does nothing other than passing to block X,
         /// replaces target label's block with block X.
         /// </summary>
-        /// 
+        ///
         private bool OptimizeLabels()
         {
             // since unconditional labels can move outside try blocks, but conditional cannot,
@@ -603,26 +637,27 @@ tryAgain:
             return madeChanges;
         }
 
-        private static bool CanMoveLabelToAnotherHandler(ExceptionHandlerScope currentHandler,
-                                                 ExceptionHandlerScope newHandler)
-        {
-            // Generally, assuming already valid code that contains "LABEL1: goto LABEL2" 
-            // we can substitute LABEL1 for LABEL2 so that the branches go directly to 
+        private static bool CanMoveLabelToAnotherHandler(
+            ExceptionHandlerScope currentHandler,
+            ExceptionHandlerScope newHandler
+        ) {
+            // Generally, assuming already valid code that contains "LABEL1: goto LABEL2"
+            // we can substitute LABEL1 for LABEL2 so that the branches go directly to
             // the final destination.
             // Technically we can allow "moving" a label to any scope that contains the current one
-            // However we should be careful with the cases when current label is protected by a 
+            // However we should be careful with the cases when current label is protected by a
             // catch clause.
-            // 
+            //
             // [COMPAT]
-            // If we move a label out of catch-protected try clause, we could be forcing JIT to inject 
-            // it back since, in the case of Thread.Abort, the re-throwing of the exception needs 
+            // If we move a label out of catch-protected try clause, we could be forcing JIT to inject
+            // it back since, in the case of Thread.Abort, the re-throwing of the exception needs
             // to happen around this leave instruction which we would be removing.
             // In addition to just extra work on the JIT side, handling of this case appears to be
-            // very delicate and there are known cases where JITs did not handle this particular 
+            // very delicate and there are known cases where JITs did not handle this particular
             // scenario correctly resulting in various violations of Thread.Abort behavior.
             // We cannot rely on these JIT issues being fixed in the end user environment.
             //
-            // Considering that we are only winning a single LEAVE here, it seems reasonable to 
+            // Considering that we are only winning a single LEAVE here, it seems reasonable to
             // just disallow labels to move outside of a catch-protected regions.
 
             // no handler means outermost scope (method level)
@@ -677,7 +712,13 @@ tryAgain:
             }
 
             // All blocks should be reachable or, if not reachable, then blocked by finally.
-            Debug.Assert(AllBlocks(block => (block.Reachability == Reachability.Reachable) || (block.Reachability == Reachability.BlockedByFinally)));
+            Debug.Assert(
+                AllBlocks(
+                    block =>
+                        (block.Reachability == Reachability.Reachable)
+                        || (block.Reachability == Reachability.BlockedByFinally)
+                )
+            );
 
             return dropped;
         }
@@ -721,8 +762,10 @@ tryAgain:
             {
                 // The only blocks that should be marked as BlockedByFinally
                 // are the special blocks inserted at the end of exception handlers.
-                Debug.Assert(current.Reachability != Reachability.BlockedByFinally ||
-                    IsSpecialEndHandlerBlock(current));
+                Debug.Assert(
+                    current.Reachability != Reachability.BlockedByFinally
+                        || IsSpecialEndHandlerBlock(current)
+                );
 
                 if (IsSpecialEndHandlerBlock(current))
                 {
@@ -841,7 +884,7 @@ tryAgain:
             // drop dead code.
             // We do not want to deal with unreachable code even when not optimizing.
             // sometimes dead code may have subtle verification violations
-            // for example illegal fall-through in unreachable code is still illegal, 
+            // for example illegal fall-through in unreachable code is still illegal,
             // but compiler will not enforce returning from dead code.
             // it is easier to just remove dead code than make sure it is all valid
             MarkReachableBlocks();
@@ -851,7 +894,7 @@ tryAgain:
             if (_optimizations == OptimizationLevel.Release && OptimizeLabels())
             {
                 // redo unreachable code elimination if some labels were optimized
-                // as that could result in more dead code. 
+                // as that could result in more dead code.
                 MarkAllBlocksUnreachable();
                 MarkReachableBlocks();
                 DropUnreachableBlocks();
@@ -889,7 +932,11 @@ tryAgain:
                     {
                         int blockOffset = _allocatedILMarkers[i].BlockOffset;
                         int absoluteOffset = writer.Count + blockOffset;
-                        _allocatedILMarkers[i] = new ILMarker() { BlockOffset = blockOffset, AbsoluteOffset = absoluteOffset };
+                        _allocatedILMarkers[i] = new ILMarker()
+                        {
+                            BlockOffset = blockOffset,
+                            AbsoluteOffset = absoluteOffset
+                        };
                     }
                 }
 
@@ -920,7 +967,6 @@ tryAgain:
                         }
 
                         blockBuilder.Free();
-
                         break;
 
                     default:
@@ -943,7 +989,6 @@ tryAgain:
                                 writer.WriteInt32(offset);
                             }
                         }
-
                         break;
                 }
             }
@@ -960,11 +1005,12 @@ tryAgain:
         {
             if (this.SeqPointsOpt != null)
             {
-                // we keep track of the latest sequence point location to make sure 
+                // we keep track of the latest sequence point location to make sure
                 // we don't emit multiple sequence points for the same location
                 int lastOffset = -1;
 
-                ArrayBuilder<RawSequencePoint> seqPoints = ArrayBuilder<RawSequencePoint>.GetInstance();
+                ArrayBuilder<RawSequencePoint> seqPoints =
+                    ArrayBuilder<RawSequencePoint>.GetInstance();
                 foreach (var seqPoint in this.SeqPointsOpt)
                 {
                     int offset = this.GetILOffsetFromMarker(seqPoint.ILMarker);
@@ -1015,7 +1061,13 @@ tryAgain:
             if (_initialHiddenSequencePointMarker >= 0)
             {
                 Debug.Assert(this.SeqPointsOpt.Count == 0);
-                this.SeqPointsOpt.Add(new RawSequencePoint(syntaxTree, _initialHiddenSequencePointMarker, RawSequencePoint.HiddenSequencePointSpan));
+                this.SeqPointsOpt.Add(
+                    new RawSequencePoint(
+                        syntaxTree,
+                        _initialHiddenSequencePointMarker,
+                        RawSequencePoint.HiddenSequencePointSpan
+                    )
+                );
                 _initialHiddenSequencePointMarker = -1;
             }
 
@@ -1047,7 +1099,10 @@ tryAgain:
             // CCI will not emit it anyways.
             if (lastDebugDocument != null)
             {
-                this.DefineSequencePoint(lastDebugDocument, RawSequencePoint.HiddenSequencePointSpan);
+                this.DefineSequencePoint(
+                    lastDebugDocument,
+                    RawSequencePoint.HiddenSequencePointSpan
+                );
             }
         }
 
@@ -1088,8 +1143,10 @@ tryAgain:
             return _emitState.InstructionsEmitted == _instructionCountAtLastLabel;
         }
 
-        internal void OpenLocalScope(ScopeType scopeType = ScopeType.Variable, Cci.ITypeReference exceptionType = null)
-        {
+        internal void OpenLocalScope(
+            ScopeType scopeType = ScopeType.Variable,
+            Cci.ITypeReference exceptionType = null
+        ) {
             if (scopeType == ScopeType.TryCatchFinally && IsJustPastLabel())
             {
                 DefineHiddenSequencePoint();
@@ -1105,7 +1162,7 @@ tryAgain:
                 _instructionCountAtLastLabel = _emitState.InstructionsEmitted;
             }
 
-            EndBlock();  //blocks should not cross scope boundaries.
+            EndBlock(); //blocks should not cross scope boundaries.
             var scope = _scopeManager.OpenScope(scopeType, exceptionType);
 
             // Exception handler scopes must have a leader block, even
@@ -1126,11 +1183,10 @@ tryAgain:
                     _pendingBlockCreate = true;
 
                     // this is the actual start of the handler.
-                    // since it is reachable by an implicit jump (via exception handling) 
+                    // since it is reachable by an implicit jump (via exception handling)
                     // we need to put a hidden point to ensure that debugger does not associate
                     // this location with some previous sequence point
                     DefineHiddenSequencePoint();
-
                     break;
                 case ScopeType.Variable:
                 case ScopeType.TryCatchFinally:
@@ -1141,8 +1197,8 @@ tryAgain:
             }
         }
 
-        internal bool PossiblyDefinedOutsideOfTry(LocalDefinition local)
-            => _scopeManager.PossiblyDefinedOutsideOfTry(local);
+        internal bool PossiblyDefinedOutsideOfTry(LocalDefinition local) =>
+            _scopeManager.PossiblyDefinedOutsideOfTry(local);
 
         /// <summary>
         /// Marks the end of filter condition and start of the actual filter handler.
@@ -1152,16 +1208,16 @@ tryAgain:
             _scopeManager.FinishFilterCondition(this);
 
             // this is the actual start of the handler.
-            // since it is reachable by an implicit jump (via exception handling) 
+            // since it is reachable by an implicit jump (via exception handling)
             // we need to put a hidden point to ensure that debugger does not associate
-            // this location with some previous sequence point 
+            // this location with some previous sequence point
             DefineHiddenSequencePoint();
         }
 
         internal void CloseLocalScope()
         {
             _scopeManager.ClosingScope(this);
-            EndBlock();  //blocks should not cross scope boundaries.
+            EndBlock(); //blocks should not cross scope boundaries.
             _scopeManager.CloseScope(this);
         }
 
@@ -1194,7 +1250,7 @@ tryAgain:
 
         // We have no mechanism for tracking the remapping of tokens when metadata is written.
         // In order to visualize the realized IL for testing, we need to be able to capture
-        // a snapshot of the builder with the original (fake) token values.  
+        // a snapshot of the builder with the original (fake) token values.
         internal ILBuilder GetSnapshot()
         {
             var snapshot = (ILBuilder)this.MemberwiseClone();
@@ -1243,7 +1299,10 @@ tryAgain:
 
         public int GetILOffsetFromMarker(int ilMarker)
         {
-            Debug.Assert(!RealizedIL.IsDefault, "Builder must be realized to perform this operation");
+            Debug.Assert(
+                !RealizedIL.IsDefault,
+                "Builder must be realized to perform this operation"
+            );
             Debug.Assert(_allocatedILMarkers != null, "There are not markers in this builder");
             Debug.Assert(ilMarker >= 0 && ilMarker < _allocatedILMarkers.Count, "Wrong builder?");
             return _allocatedILMarkers[ilMarker].AbsoluteOffset;
@@ -1252,7 +1311,10 @@ tryAgain:
         private string GetDebuggerDisplay()
         {
 #if DEBUG
-            var visType = Type.GetType("Roslyn.Test.Utilities.ILBuilderVisualizer, Roslyn.Test.Utilities", false);
+            var visType = Type.GetType(
+                "Roslyn.Test.Utilities.ILBuilderVisualizer, Roslyn.Test.Utilities",
+                false
+            );
             if (visType != null)
             {
                 var method = visType.GetTypeInfo().GetDeclaredMethod("ILBuilderToString");

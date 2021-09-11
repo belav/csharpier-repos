@@ -9,7 +9,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor
 {
-    internal sealed class NavigationBarProjectItem : NavigationBarItem, IEquatable<NavigationBarProjectItem>
+    internal sealed class NavigationBarProjectItem
+        : NavigationBarItem,
+          IEquatable<NavigationBarProjectItem>
     {
         public Workspace Workspace { get; }
         public DocumentId DocumentId { get; }
@@ -20,12 +22,16 @@ namespace Microsoft.CodeAnalysis.Editor
             Glyph glyph,
             Workspace workspace,
             DocumentId documentId,
-            string language)
-                : base(text, glyph,
-                       spans: ImmutableArray<TextSpan>.Empty,
-                       childItems: ImmutableArray<NavigationBarItem>.Empty,
-                       indent: 0, bolded: false, grayed: false)
-        {
+            string language
+        ) : base(
+            text,
+            glyph,
+            spans: ImmutableArray<TextSpan>.Empty,
+            childItems: ImmutableArray<NavigationBarItem>.Empty,
+            indent: 0,
+            bolded: false,
+            grayed: false
+        ) {
             this.Workspace = workspace;
             this.DocumentId = documentId;
             this.Language = language;
@@ -40,22 +46,23 @@ namespace Microsoft.CodeAnalysis.Editor
             }
         }
 
-        public override bool Equals(object? obj)
-            => Equals(obj as NavigationBarProjectItem);
+        public override bool Equals(object? obj) => Equals(obj as NavigationBarProjectItem);
 
-        public bool Equals(NavigationBarProjectItem? item)
-            => item is not null &&
-               Text == item.Text &&
-               Glyph == item.Glyph &&
-               Workspace == item.Workspace &&
-               DocumentId == item.DocumentId &&
-               Language == item.Language;
+        public bool Equals(NavigationBarProjectItem? item) =>
+            item is not null
+            && Text == item.Text
+            && Glyph == item.Glyph
+            && Workspace == item.Workspace
+            && DocumentId == item.DocumentId
+            && Language == item.Language;
 
-        public override int GetHashCode()
-            => Hash.Combine(Text,
-               Hash.Combine((int)Glyph,
-               Hash.Combine(Workspace,
-               Hash.Combine(DocumentId,
-                            Language.GetHashCode()))));
+        public override int GetHashCode() =>
+            Hash.Combine(
+                Text,
+                Hash.Combine(
+                    (int)Glyph,
+                    Hash.Combine(Workspace, Hash.Combine(DocumentId, Language.GetHashCode()))
+                )
+            );
     }
 }

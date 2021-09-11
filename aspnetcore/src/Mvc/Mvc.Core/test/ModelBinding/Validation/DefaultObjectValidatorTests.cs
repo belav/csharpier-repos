@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
     {
         private readonly MvcOptions _options = new MvcOptions();
 
-        private ModelMetadataProvider MetadataProvider { get; } = TestModelMetadataProvider.CreateDefaultProvider();
+        private ModelMetadataProvider MetadataProvider { get; } =
+            TestModelMetadataProvider.CreateDefaultProvider();
 
         [Fact]
         public void Validate_SimpleValueType_Valid_WithPrefix()
@@ -118,7 +119,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var model = (object)"test";
 
             modelState.SetModelValue("parameter", "test", "test");
-            validationState.Add(model, new ValidationStateEntry() { Key = "parameter", SuppressValidation = true });
+            validationState.Add(
+                model,
+                new ValidationStateEntry() { Key = "parameter", SuppressValidation = true }
+            );
 
             // Act
             validator.Validate(actionContext, validationState, "parameter", model);
@@ -242,12 +246,18 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var entry = modelState["Name"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             var error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Name"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Name"),
+                error.ErrorMessage
+            );
 
             entry = modelState["Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+                error.ErrorMessage
+            );
         }
 
         [Fact]
@@ -267,13 +277,16 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             };
 
             modelState.SetModelValue("person.Name", "Billy", "Billy");
-            modelState.SetModelValue("person.Address.Street", "GreaterThan5Characters", "GreaterThan5Characters");
+            modelState.SetModelValue(
+                "person.Address.Street",
+                "GreaterThan5Characters",
+                "GreaterThan5Characters"
+            );
             validationState.Add(model, new ValidationStateEntry() { Key = "person" });
-            validationState.Add(model.Address, new ValidationStateEntry()
-            {
-                Key = "person.Address",
-                SuppressValidation = true
-            });
+            validationState.Add(
+                model.Address,
+                new ValidationStateEntry() { Key = "person.Address", SuppressValidation = true }
+            );
 
             // Act
             validator.Validate(actionContext, validationState, "person", model);
@@ -319,8 +332,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             Assert.Equal(2, entry.Errors.Count);
             var errorMessages = entry.Errors.Select(e => e.ErrorMessage);
-            Assert.Contains(ValidationAttributeUtil.GetStringLengthErrorMessage(null, 5, "Street"), errorMessages);
-            Assert.Contains(ValidationAttributeUtil.GetRegExErrorMessage("hehehe", "Street"), errorMessages);
+            Assert.Contains(
+                ValidationAttributeUtil.GetStringLengthErrorMessage(null, 5, "Street"),
+                errorMessages
+            );
+            Assert.Contains(
+                ValidationAttributeUtil.GetRegExErrorMessage("hehehe", "Street"),
+                errorMessages
+            );
         }
 
         [Fact]
@@ -351,8 +370,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             Assert.Equal(2, entry.Errors.Count);
             var errorMessages = entry.Errors.Select(e => e.ErrorMessage);
-            Assert.Contains(ValidationAttributeUtil.GetStringLengthErrorMessage(null, 5, "Street"), errorMessages);
-            Assert.Contains(ValidationAttributeUtil.GetRegExErrorMessage("hehehe", "Street"), errorMessages);
+            Assert.Contains(
+                ValidationAttributeUtil.GetStringLengthErrorMessage(null, 5, "Street"),
+                errorMessages
+            );
+            Assert.Contains(
+                ValidationAttributeUtil.GetRegExErrorMessage("hehehe", "Street"),
+                errorMessages
+            );
         }
 
         [Fact]
@@ -384,17 +409,26 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             entry = modelState["Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             var error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+                error.ErrorMessage
+            );
 
             entry = modelState["Friend.Name"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Name"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Name"),
+                error.ErrorMessage
+            );
 
             entry = modelState["Friend.Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+                error.ErrorMessage
+            );
         }
 
         [Fact]
@@ -428,7 +462,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     Assert.Equal("Address.City", state.Key);
                     var error = Assert.Single(state.Value.Errors);
                     Assert.Equal("User object lacks some data.", error.ErrorMessage);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -446,7 +481,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var validator = CreateValidator();
 
             // Act
-            validator.Validate(actionContext, validationState, prefix: "invalidProperties", model: model);
+            validator.Validate(
+                actionContext,
+                validationState,
+                prefix: "invalidProperties",
+                model: model
+            );
 
             // Assert
             Assert.Collection(
@@ -462,7 +502,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     Assert.Equal("invalidProperties.Address.City", state.Key);
                     var error = Assert.Single(state.Value.Errors);
                     Assert.Equal("User object lacks some data.", error.ErrorMessage);
-                });
+                }
+            );
         }
 
         // IValidatableObject is significant because the validators are on the object
@@ -489,7 +530,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             // Assert
             Assert.False(modelState.IsValid);
-            AssertKeysEqual(modelState, "parameter", "parameter.Property1", "parameter.Property2", "parameter.Property3");
+            AssertKeysEqual(
+                modelState,
+                "parameter",
+                "parameter.Property1",
+                "parameter.Property2",
+                "parameter.Property3"
+            );
 
             var entry = modelState["parameter"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
@@ -551,7 +598,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     var error = Assert.Single(entry.Value.Errors);
                     Assert.Equal(
                         "Error1 about 'ValidatableModelProperty' (display: 'Never valid').",
-                        error.ErrorMessage);
+                        error.ErrorMessage
+                    );
                 },
                 entry =>
                 {
@@ -573,7 +621,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     Assert.Equal(ModelValidationState.Invalid, entry.Value.ValidationState);
                     var error = Assert.Single(entry.Value.Errors);
                     Assert.Equal("Error3", error.ErrorMessage);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -584,7 +633,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var service = new Mock<IExampleService>();
             service.Setup(x => x.DoSomething()).Verifiable();
 
-            var provider = new ServiceCollection().AddSingleton(service.Object).BuildServiceProvider();
+            var provider = new ServiceCollection().AddSingleton(service.Object)
+                .BuildServiceProvider();
 
             var httpContext = new Mock<HttpContext>();
             httpContext.SetupGet(x => x.RequestServices).Returns(provider);
@@ -597,14 +647,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var validator = CreateValidator();
 
             var model = new Mock<IValidatableObject>();
-            model
-                .Setup(x => x.Validate(It.IsAny<ValidationContext>()))
-                .Callback((ValidationContext context) =>
-                {
-                    var receivedService = context.GetService<IExampleService>();
-                    Assert.Equal(service.Object, receivedService);
-                    receivedService.DoSomething();
-                })
+            model.Setup(x => x.Validate(It.IsAny<ValidationContext>()))
+                .Callback(
+                    (ValidationContext context) =>
+                    {
+                        var receivedService = context.GetService<IExampleService>();
+                        Assert.Equal(service.Object, receivedService);
+                        receivedService.DoSomething();
+                    }
+                )
                 .Returns(new List<ValidationResult>());
 
             // Act
@@ -675,7 +726,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             entry = modelState["parameter.Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             var error = Assert.Single(entry.Errors);
-            Assert.Equal(error.ErrorMessage, ValidationAttributeUtil.GetRequiredErrorMessage("Profession"));
+            Assert.Equal(
+                error.ErrorMessage,
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession")
+            );
         }
 
         [Fact]
@@ -711,7 +765,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             entry = modelState["parameter.Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             var error = Assert.Single(entry.Errors);
-            Assert.Equal(error.ErrorMessage, ValidationAttributeUtil.GetRequiredErrorMessage("Profession"));
+            Assert.Equal(
+                error.ErrorMessage,
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession")
+            );
         }
 
         [Fact]
@@ -733,7 +790,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             modelState.MaxAllowedErrors = 2;
             modelState.AddModelError("key1", "error1");
             modelState.SetModelValue("user.Password", "password-val", "password-val");
-            modelState.SetModelValue("user.ConfirmPassword", "not-password-val", "not-password-val");
+            modelState.SetModelValue(
+                "user.ConfirmPassword",
+                "not-password-val",
+                "not-password-val"
+            );
 
             validationState.Add(model, new ValidationStateEntry() { Key = "user", });
 
@@ -742,7 +803,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             // Assert
             Assert.False(modelState.IsValid);
-            AssertKeysEqual(modelState, string.Empty, "key1", "user.ConfirmPassword", "user.Password");
+            AssertKeysEqual(
+                modelState,
+                string.Empty,
+                "key1",
+                "user.ConfirmPassword",
+                "user.Password"
+            );
 
             var entry = modelState[string.Empty];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
@@ -808,22 +875,34 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var entry = modelState["[0].Name"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             var error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Name"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Name"),
+                error.ErrorMessage
+            );
 
             entry = modelState["[0].Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+                error.ErrorMessage
+            );
 
             entry = modelState["[1].Name"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Name"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Name"),
+                error.ErrorMessage
+            );
 
             entry = modelState["[1].Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+                error.ErrorMessage
+            );
         }
 
         [Fact]
@@ -851,22 +930,34 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var entry = modelState["[0].Name"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             var error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Name"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Name"),
+                error.ErrorMessage
+            );
 
             entry = modelState["[0].Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+                error.ErrorMessage
+            );
 
             entry = modelState["[1].Name"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Name"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Name"),
+                error.ErrorMessage
+            );
 
             entry = modelState["[1].Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+                error.ErrorMessage
+            );
         }
 
         public static TheoryData<object, Type> ValidCollectionData
@@ -877,7 +968,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 {
                     { new int[] { 1, 2, 3 }, typeof(int[]) },
                     { new string[] { "Foo", "Bar", "Baz" }, typeof(string[]) },
-                    { new List<string> { "Foo", "Bar", "Baz" }, typeof(IList<string>)},
+                    { new List<string> { "Foo", "Bar", "Baz" }, typeof(IList<string>) },
                     { new HashSet<string> { "Foo", "Bar", "Baz" }, typeof(string[]) },
                     {
                         new List<DateTime>
@@ -915,13 +1006,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             modelState.SetModelValue("items[0]", "value1", "value1");
             modelState.SetModelValue("items[1]", "value2", "value2");
             modelState.SetModelValue("items[2]", "value3", "value3");
-            validationState.Add(model, new ValidationStateEntry()
-            {
-                Key = "items",
-
-                // Force the validator to treat it as the specified type.
-                Metadata = MetadataProvider.GetMetadataForType(type),
-            });
+            validationState.Add(
+                model,
+                new ValidationStateEntry()
+                {
+                    Key = "items",
+                    // Force the validator to treat it as the specified type.
+                    Metadata = MetadataProvider.GetMetadataForType(type),
+                }
+            );
 
             // Act
             validator.Validate(actionContext, validationState, "items", model);
@@ -974,7 +1067,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     Assert.Equal("Items[2]", state.Key);
                     var error = Assert.Single(state.Value.Errors);
                     Assert.Equal("Collection contains duplicate value 'Joe'.", error.ErrorMessage);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -1004,7 +1098,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             // Assert
             Assert.True(modelState.IsValid);
-            AssertKeysEqual(modelState, "items[0].Key", "items[0].Value", "items[1].Key", "items[1].Value");
+            AssertKeysEqual(
+                modelState,
+                "items[0].Key",
+                "items[0].Value",
+                "items[1].Key",
+                "items[1].Value"
+            );
 
             var entry = modelState["items[0].Key"];
             Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
@@ -1034,7 +1134,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             var validator = CreateValidator();
 
-            var model = (object)new Dictionary<string, Person> { { "Joe", new Person() }, { "Mark", new Person() } };
+            var model = (object)new Dictionary<string, Person>
+            {
+                { "Joe", new Person() },
+                { "Mark", new Person() }
+            };
 
             modelState.SetModelValue("[0].Key", "Joe", "Joe");
             modelState.SetModelValue("[1].Key", "Mark", "Mark");
@@ -1052,7 +1156,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 "[0].Value.Profession",
                 "[1].Key",
                 "[1].Value.Name",
-                "[1].Value.Profession");
+                "[1].Value.Profession"
+            );
 
             var entry = modelState["[0].Key"];
             Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
@@ -1065,22 +1170,34 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             entry = modelState["[0].Value.Name"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             var error = Assert.Single(entry.Errors);
-            Assert.Equal(error.ErrorMessage, ValidationAttributeUtil.GetRequiredErrorMessage("Name"));
+            Assert.Equal(
+                error.ErrorMessage,
+                ValidationAttributeUtil.GetRequiredErrorMessage("Name")
+            );
 
             entry = modelState["[0].Value.Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(error.ErrorMessage, ValidationAttributeUtil.GetRequiredErrorMessage("Profession"));
+            Assert.Equal(
+                error.ErrorMessage,
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession")
+            );
 
             entry = modelState["[1].Value.Name"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(error.ErrorMessage, ValidationAttributeUtil.GetRequiredErrorMessage("Name"));
+            Assert.Equal(
+                error.ErrorMessage,
+                ValidationAttributeUtil.GetRequiredErrorMessage("Name")
+            );
 
             entry = modelState["[1].Value.Profession"];
             Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
             error = Assert.Single(entry.Errors);
-            Assert.Equal(error.ErrorMessage, ValidationAttributeUtil.GetRequiredErrorMessage("Profession"));
+            Assert.Equal(
+                error.ErrorMessage,
+                ValidationAttributeUtil.GetRequiredErrorMessage("Profession")
+            );
         }
 
         [Fact]
@@ -1101,7 +1218,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 () =>
                 {
                     validator.Validate(actionContext, validationState, string.Empty, model);
-                });
+                }
+            );
         }
 
         // We use the reference equality comparer for breaking cycles
@@ -1168,10 +1286,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 
             var validator = CreateValidator(typeof(List<ValidatedModel>));
 
-            var model = new List<ValidatedModel>()
-            {
-                new ValidatedModel { Value = "15" },
-            };
+            var model = new List<ValidatedModel>() { new ValidatedModel { Value = "15" }, };
 
             modelState.SetModelValue("userIds[0]", "15", "15");
             validationState.Add(model, new ValidationStateEntry() { Key = "userIds", });
@@ -1199,9 +1314,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         {
             // Arrange
             var options = new MvcOptions();
-            var optionsSetup = new MvcCoreMvcOptionsSetup(Mock.Of<IHttpRequestStreamReaderFactory>());
+            var optionsSetup = new MvcCoreMvcOptionsSetup(
+                Mock.Of<IHttpRequestStreamReaderFactory>()
+            );
             optionsSetup.Configure(options);
-            var validator = CreateValidator(providers: options.ModelMetadataDetailsProviders.ToArray());
+            var validator = CreateValidator(
+                providers: options.ModelMetadataDetailsProviders.ToArray()
+            );
             var model = new MemoryStream(Encoding.UTF8.GetBytes("Hello!"));
             var actionContext = new ActionContext();
             var modelState = actionContext.ModelState;
@@ -1260,7 +1379,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
                     var error = Assert.Single(kvp.Value.Errors);
                     Assert.Equal("1", error.ErrorMessage);
-                });
+                }
+            );
         }
 
         [Theory]
@@ -1269,8 +1389,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public void Validate_Throws_IfValidationDepthExceedsMaxDepth(int maxDepth)
         {
             // Arrange
-            var expected = $"ValidationVisitor exceeded the maximum configured validation depth '{maxDepth}' when validating property '{nameof(DepthObject.Depth)}' on type '{typeof(DepthObject)}'. " +
-                "This may indicate a very deep or infinitely recursive object graph. Consider modifying 'MvcOptions.MaxValidationDepth' or suppressing validation on the model type.";
+            var expected =
+                $"ValidationVisitor exceeded the maximum configured validation depth '{maxDepth}' when validating property '{nameof(DepthObject.Depth)}' on type '{typeof(DepthObject)}'. "
+                + "This may indicate a very deep or infinitely recursive object graph. Consider modifying 'MvcOptions.MaxValidationDepth' or suppressing validation on the model type.";
             _options.MaxValidationDepth = maxDepth;
             var actionContext = new ActionContext();
             var validator = CreateValidator();
@@ -1281,7 +1402,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             };
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => validator.Validate(actionContext, validationState, prefix: string.Empty, model));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    validator.Validate(actionContext, validationState, prefix: string.Empty, model)
+            );
             Assert.Equal(expected, ex.Message);
             Assert.Equal("https://aka.ms/AA21ue1", ex.HelpLink);
         }
@@ -1316,12 +1440,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             var validator = CreateValidator();
             var model = new List<ModelWithRequiredProperty>
             {
-                new ModelWithRequiredProperty(), new ModelWithRequiredProperty(),
+                new ModelWithRequiredProperty(),
+                new ModelWithRequiredProperty(),
                 // After the first 2 items we will reach MaxAllowedErrors
                 // If we add items without popping after having reached max validation,
                 // with 4 more items (on top of the list) we would go over max depth of 4
-                new ModelWithRequiredProperty(), new ModelWithRequiredProperty(),
-                new ModelWithRequiredProperty(), new ModelWithRequiredProperty(),
+                new ModelWithRequiredProperty(),
+                new ModelWithRequiredProperty(),
+                new ModelWithRequiredProperty(),
+                new ModelWithRequiredProperty(),
             };
 
             var validationState = new ValidationStateDictionary
@@ -1337,8 +1464,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         [Theory]
         [InlineData(false, ModelValidationState.Unvalidated)]
         [InlineData(true, ModelValidationState.Invalid)]
-        public void Validate_RespectsMvcOptionsConfiguration_WhenChildValidationFails(bool optionValue, ModelValidationState expectedParentValidationState)
-        {
+        public void Validate_RespectsMvcOptionsConfiguration_WhenChildValidationFails(
+            bool optionValue,
+            ModelValidationState expectedParentValidationState
+        ) {
             // Arrange
             _options.ValidateComplexTypesIfChildValidationFails = optionValue;
 
@@ -1471,21 +1600,32 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 excludeFilters.Add(new SuppressChildValidationMetadataProvider(excludedType));
             }
 
-            var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider(excludeFilters.ToArray());
-            var validatorProviders = TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders;
-            return new DefaultObjectValidator(metadataProvider, validatorProviders, new MvcOptions());
+            var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider(
+                excludeFilters.ToArray()
+            );
+            var validatorProviders =
+                TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders;
+            return new DefaultObjectValidator(
+                metadataProvider,
+                validatorProviders,
+                new MvcOptions()
+            );
         }
 
         private DefaultObjectValidator CreateValidator(params IMetadataDetailsProvider[] providers)
         {
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider(providers);
-            var validatorProviders = TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders;
+            var validatorProviders =
+                TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders;
             return new DefaultObjectValidator(metadataProvider, validatorProviders, _options);
         }
 
         private static void AssertKeysEqual(ModelStateDictionary modelState, params string[] keys)
         {
-            Assert.Equal<string>(keys.OrderBy(k => k).ToArray(), modelState.Keys.OrderBy(k => k).ToArray());
+            Assert.Equal<string>(
+                keys.OrderBy(k => k).ToArray(),
+                modelState.Keys.OrderBy(k => k).ToArray()
+            );
         }
 
         private class ThrowingProperty
@@ -1493,10 +1633,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             [Required]
             public string WatchOut
             {
-                get
-                {
-                    throw new InvalidTimeZoneException();
-                }
+                get { throw new InvalidTimeZoneException(); }
             }
         }
 
@@ -1549,7 +1686,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             {
                 yield return new ValidationResult(
                     $"Error1 about '{validationContext.MemberName}' (display: '{validationContext.DisplayName}').",
-                    new string[] { });
+                    new string[] {  }
+                );
                 yield return new ValidationResult("Error2", new[] { "Property1" });
                 yield return new ValidationResult("Error3", new[] { "Property2", "Property3" });
             }
@@ -1610,7 +1748,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             {
                 if (Password == "password")
                 {
-                    yield return new ValidationResult("Password does not meet complexity requirements.");
+                    yield return new ValidationResult(
+                        "Password does not meet complexity requirements."
+                    );
                 }
             }
         }
@@ -1626,29 +1766,36 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         // names are indexers. An example scenario is an attribute that confirms all entries in a list are unique.
         private class InvalidItemsAttribute : ValidationAttribute
         {
-            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-            {
+            protected override ValidationResult IsValid(
+                object value,
+                ValidationContext validationContext
+            ) {
                 return new ValidationResult(
                     "Collection contains duplicate value 'Joe'.",
-                    new[] { "[0]", "[2]" });
+                    new[] { "[0]", "[2]" }
+                );
             }
         }
 
         private class InvalidItemsContainer
         {
             [InvalidItems]
-            public List<string> Items { get; set; } = new List<string> { "Joe", "Fred", "Joe", "Herman" };
+            public List<string> Items { get; set; } =
+                new List<string> { "Joe", "Fred", "Joe", "Herman" };
         }
 
         // Custom validation attribute that returns multiple entries in ValidationResult.MemberNames. An example
         // scenario is an attribute that confirms all properties in a complex type are non-empty.
         private class InvalidPropertiesAttribute : ValidationAttribute
         {
-            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-            {
+            protected override ValidationResult IsValid(
+                object value,
+                ValidationContext validationContext
+            ) {
                 return new ValidationResult(
                     "User object lacks some data.",
-                    new[] { "FirstName", "Address.City" });
+                    new[] { "FirstName", "Address.City" }
+                );
             }
         }
 

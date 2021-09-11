@@ -22,14 +22,18 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 RedirectUris = { expectedRelativeUri },
                 Properties = new Dictionary<string, string>
                 {
-                    [ApplicationProfilesPropertyNames.Profile] = ApplicationProfiles.IdentityServerSPA,
+                    [ApplicationProfilesPropertyNames.Profile] =
+                        ApplicationProfiles.IdentityServerSPA,
                 }
             };
             var factory = new TestUrlFactory(expectedRelativeUri, providedFullUrl);
             var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
             // Act
-            var validator = await redirectUriValidator.IsRedirectUriValidAsync(providedFullUrl, expectedClient);
+            var validator = await redirectUriValidator.IsRedirectUriValidAsync(
+                providedFullUrl,
+                expectedClient
+            );
 
             // Assert
             Assert.True(validator);
@@ -46,14 +50,18 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 RedirectUris = { expectedRelativeUri },
                 Properties = new Dictionary<string, string>
                 {
-                    [ApplicationProfilesPropertyNames.Profile] = ApplicationProfiles.IdentityServerSPA,
+                    [ApplicationProfilesPropertyNames.Profile] =
+                        ApplicationProfiles.IdentityServerSPA,
                 }
             };
             var factory = new TestUrlFactory();
             var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
             // Act
-            var validator = await redirectUriValidator.IsRedirectUriValidAsync(providedFullUrl, expectedClient);
+            var validator = await redirectUriValidator.IsRedirectUriValidAsync(
+                providedFullUrl,
+                expectedClient
+            );
 
             // Assert
             Assert.False(validator);
@@ -73,7 +81,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
             // Act
-            var validator = await redirectUriValidator.IsRedirectUriValidAsync(providedFullUrl, expectedClient);
+            var validator = await redirectUriValidator.IsRedirectUriValidAsync(
+                providedFullUrl,
+                expectedClient
+            );
 
             // Assert
             Assert.True(validator);
@@ -93,7 +104,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
             // Act
-            var validator = await redirectUriValidator.IsRedirectUriValidAsync(providedFullUrl, expectedClient);
+            var validator = await redirectUriValidator.IsRedirectUriValidAsync(
+                providedFullUrl,
+                expectedClient
+            );
 
             // Assert
             Assert.False(validator);
@@ -110,14 +124,18 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 PostLogoutRedirectUris = { expectedRelativeUri },
                 Properties = new Dictionary<string, string>
                 {
-                    [ApplicationProfilesPropertyNames.Profile] = ApplicationProfiles.IdentityServerSPA,
+                    [ApplicationProfilesPropertyNames.Profile] =
+                        ApplicationProfiles.IdentityServerSPA,
                 }
             };
-            var factory = new TestUrlFactory(expectedRelativeUri,providedFullUrl);
+            var factory = new TestUrlFactory(expectedRelativeUri, providedFullUrl);
             var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
             // Act
-            var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(providedFullUrl, expectedClient);
+            var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(
+                providedFullUrl,
+                expectedClient
+            );
 
             // Assert
             Assert.True(validator);
@@ -134,14 +152,18 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 PostLogoutRedirectUris = { expectedRelativeUri },
                 Properties = new Dictionary<string, string>
                 {
-                    [ApplicationProfilesPropertyNames.Profile] = ApplicationProfiles.IdentityServerSPA,
+                    [ApplicationProfilesPropertyNames.Profile] =
+                        ApplicationProfiles.IdentityServerSPA,
                 }
             };
             var factory = new TestUrlFactory();
             var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
             // Act
-            var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(providedFullUrl, expectedClient);
+            var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(
+                providedFullUrl,
+                expectedClient
+            );
 
             // Assert
             Assert.False(validator);
@@ -161,7 +183,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
             // Act
-            var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(providedFullUrl, expectedClient);
+            var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(
+                providedFullUrl,
+                expectedClient
+            );
 
             // Assert
             Assert.True(validator);
@@ -181,7 +206,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
             // Act
-            var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(providedFullUrl, expectedClient);
+            var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(
+                providedFullUrl,
+                expectedClient
+            );
 
             // Assert
             Assert.False(validator);
@@ -192,9 +220,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             private readonly string _path;
             private readonly string _result;
 
-            public TestUrlFactory()
-            {
-            }
+            public TestUrlFactory() { }
 
             public TestUrlFactory(string path, string result)
             {

@@ -5,10 +5,11 @@ namespace System.Reflection
 {
     public class ManifestResourceInfo
     {
-        public ManifestResourceInfo(Assembly? containingAssembly,
-                                      string? containingFileName,
-                                      ResourceLocation resourceLocation)
-        {
+        public ManifestResourceInfo(
+            Assembly? containingAssembly,
+            string? containingFileName,
+            ResourceLocation resourceLocation
+        ) {
             ReferencedAssembly = containingAssembly;
             FileName = containingFileName;
             ResourceLocation = resourceLocation;

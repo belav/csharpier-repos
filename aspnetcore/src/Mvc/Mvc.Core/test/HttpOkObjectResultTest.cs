@@ -25,11 +25,7 @@ namespace Microsoft.AspNetCore.Mvc
                 {
                     null,
                     "Test string",
-                    new Person
-                    {
-                        Id = 274,
-                        Name = "George",
-                    }
+                    new Person { Id = 274, Name = "George", }
                 };
             }
         }
@@ -53,11 +49,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var result = new OkObjectResult(value);
 
-            var httpContext = new DefaultHttpContext
-            {
-                RequestServices = CreateServices(),
-            };
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var httpContext = new DefaultHttpContext { RequestServices = CreateServices(), };
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -70,14 +67,19 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var options = Options.Create(new MvcOptions());
             options.Value.OutputFormatters.Add(new StringOutputFormatter());
-            options.Value.OutputFormatters.Add(SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions()));
+            options.Value.OutputFormatters.Add(
+                SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions())
+            );
 
             var services = new ServiceCollection();
-            services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-                new TestHttpResponseStreamWriterFactory(),
-                NullLoggerFactory.Instance,
-                options));
+            services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+                new ObjectResultExecutor(
+                    new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                    new TestHttpResponseStreamWriterFactory(),
+                    NullLoggerFactory.Instance,
+                    options
+                )
+            );
 
             return services.BuildServiceProvider();
         }

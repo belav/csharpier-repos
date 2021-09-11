@@ -8,8 +8,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
     {
         public int? Index { get; set; }
 
-        public override IEnumerable<JToken> ExecuteFilter(JToken root, IEnumerable<JToken> current, JsonSelectSettings? settings)
-        {
+        public override IEnumerable<JToken> ExecuteFilter(
+            JToken root,
+            IEnumerable<JToken> current,
+            JsonSelectSettings? settings
+        ) {
             foreach (JToken t in current)
             {
                 if (Index != null)
@@ -34,7 +37,12 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     {
                         if (settings?.ErrorWhenNoMatch ?? false)
                         {
-                            throw new JsonException("Index * not valid on {0}.".FormatWith(CultureInfo.InvariantCulture, t.GetType().Name));
+                            throw new JsonException(
+                                "Index * not valid on {0}.".FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    t.GetType().Name
+                                )
+                            );
                         }
                     }
                 }

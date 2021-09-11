@@ -31,45 +31,78 @@ namespace Internal.Cryptography.Pal
             X509ChainTrustMode trustMode,
             DateTime verificationTime,
             TimeSpan timeout,
-            bool disableAia)
-        {
+            bool disableAia
+        ) {
             CertificatePal certificatePal = (CertificatePal)cert;
-
             unsafe
             {
-                using (SafeChainEngineHandle storeHandle = GetChainEngine(trustMode, customTrustStore, useMachineContext))
+                using (
+                    SafeChainEngineHandle storeHandle = GetChainEngine(
+                        trustMode,
+                        customTrustStore,
+                        useMachineContext
+                    )
+                )
                 using (SafeCertStoreHandle extraStoreHandle = ConvertStoreToSafeHandle(extraStore))
                 {
                     CERT_CHAIN_PARA chainPara = default;
                     chainPara.cbSize = Marshal.SizeOf<CERT_CHAIN_PARA>();
 
                     int applicationPolicyCount;
-                    using (SafeHandle applicationPolicyOids = applicationPolicy!.ToLpstrArray(out applicationPolicyCount))
-                    {
+                    using (
+                        SafeHandle applicationPolicyOids = applicationPolicy!.ToLpstrArray(
+                            out applicationPolicyCount
+                        )
+                    ) {
                         if (!applicationPolicyOids.IsInvalid)
                         {
-                            chainPara.RequestedUsage.dwType = CertUsageMatchType.USAGE_MATCH_TYPE_AND;
-                            chainPara.RequestedUsage.Usage.cUsageIdentifier = applicationPolicyCount;
-                            chainPara.RequestedUsage.Usage.rgpszUsageIdentifier = applicationPolicyOids.DangerousGetHandle();
+                            chainPara.RequestedUsage.dwType =
+                                CertUsageMatchType.USAGE_MATCH_TYPE_AND;
+                            chainPara.RequestedUsage.Usage.cUsageIdentifier =
+                                applicationPolicyCount;
+                            chainPara.RequestedUsage.Usage.rgpszUsageIdentifier =
+                                applicationPolicyOids.DangerousGetHandle();
                         }
 
                         int certificatePolicyCount;
-                        using (SafeHandle certificatePolicyOids = certificatePolicy!.ToLpstrArray(out certificatePolicyCount))
-                        {
+                        using (
+                            SafeHandle certificatePolicyOids = certificatePolicy!.ToLpstrArray(
+                                out certificatePolicyCount
+                            )
+                        ) {
                             if (!certificatePolicyOids.IsInvalid)
                             {
-                                chainPara.RequestedIssuancePolicy.dwType = CertUsageMatchType.USAGE_MATCH_TYPE_AND;
-                                chainPara.RequestedIssuancePolicy.Usage.cUsageIdentifier = certificatePolicyCount;
-                                chainPara.RequestedIssuancePolicy.Usage.rgpszUsageIdentifier = certificatePolicyOids.DangerousGetHandle();
+                                chainPara.RequestedIssuancePolicy.dwType =
+                                    CertUsageMatchType.USAGE_MATCH_TYPE_AND;
+                                chainPara.RequestedIssuancePolicy.Usage.cUsageIdentifier =
+                                    certificatePolicyCount;
+                                chainPara.RequestedIssuancePolicy.Usage.rgpszUsageIdentifier =
+                                    certificatePolicyOids.DangerousGetHandle();
                             }
 
-                            chainPara.dwUrlRetrievalTimeout = (int)Math.Floor(timeout.TotalMilliseconds);
+                            chainPara.dwUrlRetrievalTimeout = (int)Math.Floor(
+                                timeout.TotalMilliseconds
+                            );
 
                             FILETIME ft = FILETIME.FromDateTime(verificationTime);
-                            CertChainFlags flags = MapRevocationFlags(revocationMode, revocationFlag, disableAia);
+                            CertChainFlags flags = MapRevocationFlags(
+                                revocationMode,
+                                revocationFlag,
+                                disableAia
+                            );
                             SafeX509ChainHandle chain;
-                            if (!Interop.crypt32.CertGetCertificateChain(storeHandle.DangerousGetHandle(), certificatePal.CertContext, &ft, extraStoreHandle, ref chainPara, flags, IntPtr.Zero, out chain))
-                            {
+                            if (
+                                !Interop.crypt32.CertGetCertificateChain(
+                                    storeHandle.DangerousGetHandle(),
+                                    certificatePal.CertContext,
+                                    &ft,
+                                    extraStoreHandle,
+                                    ref chainPara,
+                                    flags,
+                                    IntPtr.Zero,
+                                    out chain
+                                )
+                            ) {
                                 return null;
                             }
 
@@ -83,43 +116,56 @@ namespace Internal.Cryptography.Pal
         private static SafeChainEngineHandle GetChainEngine(
             X509ChainTrustMode trustMode,
             X509Certificate2Collection? customTrustStore,
-            bool useMachineContext)
-        {
+            bool useMachineContext
+        ) {
             SafeChainEngineHandle chainEngineHandle;
             if (trustMode == X509ChainTrustMode.CustomRootTrust)
             {
                 // Need to get a valid SafeCertStoreHandle otherwise the default stores will be trusted
-                using (SafeCertStoreHandle customTrustStoreHandle = ConvertStoreToSafeHandle(customTrustStore, true))
-                {
+                using (
+                    SafeCertStoreHandle customTrustStoreHandle = ConvertStoreToSafeHandle(
+                        customTrustStore,
+                        true
+                    )
+                ) {
                     CERT_CHAIN_ENGINE_CONFIG customChainEngine = default;
                     customChainEngine.cbSize = Marshal.SizeOf<CERT_CHAIN_ENGINE_CONFIG>();
                     customChainEngine.hExclusiveRoot = customTrustStoreHandle.DangerousGetHandle();
-                    chainEngineHandle = Interop.crypt32.CertCreateCertificateChainEngine(ref customChainEngine);
+                    chainEngineHandle = Interop.crypt32.CertCreateCertificateChainEngine(
+                        ref customChainEngine
+                    );
                 }
             }
             else
             {
-                chainEngineHandle = useMachineContext ? SafeChainEngineHandle.MachineChainEngine : SafeChainEngineHandle.UserChainEngine;
+                chainEngineHandle = useMachineContext
+                    ? SafeChainEngineHandle.MachineChainEngine
+                    : SafeChainEngineHandle.UserChainEngine;
             }
 
             return chainEngineHandle;
         }
 
-        private static SafeCertStoreHandle ConvertStoreToSafeHandle(X509Certificate2Collection? extraStore, bool returnEmptyHandle = false)
-        {
+        private static SafeCertStoreHandle ConvertStoreToSafeHandle(
+            X509Certificate2Collection? extraStore,
+            bool returnEmptyHandle = false
+        ) {
             if ((extraStore == null || extraStore.Count == 0) && !returnEmptyHandle)
                 return SafeCertStoreHandle.InvalidHandle;
 
-            return ((StorePal)StorePal.LinkFromCertificateCollection(extraStore!)).SafeCertStoreHandle;
+            return (
+                (StorePal)StorePal.LinkFromCertificateCollection(extraStore!)
+            ).SafeCertStoreHandle;
         }
 
         private static CertChainFlags MapRevocationFlags(
             X509RevocationMode revocationMode,
             X509RevocationFlag revocationFlag,
-            bool disableAia)
-        {
+            bool disableAia
+        ) {
             const CertChainFlags AiaDisabledFlags =
-                CertChainFlags.CERT_CHAIN_DISABLE_AIA | CertChainFlags.CERT_CHAIN_DISABLE_AUTH_ROOT_AUTO_UPDATE;
+                CertChainFlags.CERT_CHAIN_DISABLE_AIA
+                | CertChainFlags.CERT_CHAIN_DISABLE_AUTH_ROOT_AUTO_UPDATE;
 
             CertChainFlags dwFlags = disableAia ? AiaDisabledFlags : CertChainFlags.None;
 

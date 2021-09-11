@@ -28,71 +28,74 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         public ValueConverter(
             Expression<Func<TModel, TProvider>> convertToProviderExpression,
             Expression<Func<TProvider, TModel>> convertFromProviderExpression,
-            ConverterMappingHints? mappingHints = null)
-            : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
-        {
-        }
+            ConverterMappingHints? mappingHints = null
+        ) : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
-        private static Func<object?, object?> SanitizeConverter<TIn, TOut>(Expression<Func<TIn, TOut>> convertExpression)
-        {
+        private static Func<object?, object?> SanitizeConverter<TIn, TOut>(
+            Expression<Func<TIn, TOut>> convertExpression
+        ) {
             var compiled = convertExpression.Compile();
 
-            return v => v == null
-                ? (object?)null
-                : compiled(Sanitize<TIn>(v));
+            return v => v == null ? (object?)null : compiled(Sanitize<TIn>(v));
         }
 
         private static T Sanitize<T>(object value)
         {
             var unwrappedType = typeof(T).UnwrapNullableType();
 
-            return (T)(!unwrappedType.IsInstanceOfType(value)
-                ? Convert.ChangeType(value, unwrappedType)
-                : value);
+            return (T)(
+                !unwrappedType.IsInstanceOfType(value)
+                    ? Convert.ChangeType(value, unwrappedType)
+                    : value
+            );
         }
 
         /// <summary>
         ///     Gets the function to convert objects when writing data to the store,
         ///     setup to handle nulls, boxing, and non-exact matches of simple types.
         /// </summary>
-        public override Func<object?, object?> ConvertToProvider
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _convertToProvider, this, static c => SanitizeConverter(c.ConvertToProviderExpression));
+        public override Func<object?, object?> ConvertToProvider =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _convertToProvider,
+                this,
+                static c => SanitizeConverter(c.ConvertToProviderExpression)
+            );
 
         /// <summary>
         ///     Gets the function to convert objects when reading data from the store,
         ///     setup to handle nulls, boxing, and non-exact matches of simple types.
         /// </summary>
-        public override Func<object?, object?> ConvertFromProvider
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _convertFromProvider, this, static c => SanitizeConverter(c.ConvertFromProviderExpression));
+        public override Func<object?, object?> ConvertFromProvider =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _convertFromProvider,
+                this,
+                static c => SanitizeConverter(c.ConvertFromProviderExpression)
+            );
 
         /// <summary>
         ///     Gets the expression to convert objects when writing data to the store,
         ///     exactly as supplied and may not handle
         ///     nulls, boxing, and non-exact matches of simple types.
         /// </summary>
-        public new virtual Expression<Func<TModel, TProvider>> ConvertToProviderExpression
-            => (Expression<Func<TModel, TProvider>>)base.ConvertToProviderExpression;
+        public new virtual Expression<Func<TModel, TProvider>> ConvertToProviderExpression =>
+            (Expression<Func<TModel, TProvider>>)base.ConvertToProviderExpression;
 
         /// <summary>
         ///     Gets the expression to convert objects when reading data from the store,
         ///     exactly as supplied and may not handle
         ///     nulls, boxing, and non-exact matches of simple types.
         /// </summary>
-        public new virtual Expression<Func<TProvider, TModel>> ConvertFromProviderExpression
-            => (Expression<Func<TProvider, TModel>>)base.ConvertFromProviderExpression;
+        public new virtual Expression<Func<TProvider, TModel>> ConvertFromProviderExpression =>
+            (Expression<Func<TProvider, TModel>>)base.ConvertFromProviderExpression;
 
         /// <summary>
         ///     The CLR type used in the EF model.
         /// </summary>
-        public override Type ModelClrType
-            => typeof(TModel);
+        public override Type ModelClrType => typeof(TModel);
 
         /// <summary>
         ///     The CLR type used when reading and writing from the store.
         /// </summary>
-        public override Type ProviderClrType
-            => typeof(TProvider);
+        public override Type ProviderClrType => typeof(TProvider);
     }
 }

@@ -12,7 +12,8 @@ namespace System.Linq
         {
             public override int GetCount(bool onlyIfCheap)
             {
-                int firstCount, secondCount;
+                int firstCount,
+                    secondCount;
                 if (!_first.TryGetNonEnumeratedCount(out firstCount))
                 {
                     if (onlyIfCheap)
@@ -72,7 +73,8 @@ namespace System.Linq
                 }
 
                 int count = 0;
-                ConcatNIterator<TSource>? node, previousN = this;
+                ConcatNIterator<TSource>? node,
+                    previousN = this;
 
                 do
                 {
@@ -84,19 +86,18 @@ namespace System.Linq
                     var collection = source as ICollection<TSource>;
                     Debug.Assert(!_hasOnlyCollections || collection != null);
                     int sourceCount = collection?.Count ?? source.Count();
-
                     checked
                     {
                         count += sourceCount;
                     }
-                }
-                while ((previousN = node.PreviousN) != null);
+                } while ((previousN = node.PreviousN) != null);
 
                 Debug.Assert(node._tail is Concat2Iterator<TSource>);
                 return checked(count + node._tail.GetCount(onlyIfCheap));
             }
 
-            public override TSource[] ToArray() => _hasOnlyCollections ? PreallocatingToArray() : LazyToArray();
+            public override TSource[] ToArray() =>
+                _hasOnlyCollections ? PreallocatingToArray() : LazyToArray();
 
             private TSource[] LazyToArray()
             {
@@ -105,7 +106,7 @@ namespace System.Linq
                 var builder = new SparseArrayBuilder<TSource>(initialize: true);
                 ArrayBuilder<int> deferredCopies = default;
 
-                for (int i = 0; ; i++)
+                for (int i = 0;; i++)
                 {
                     // Unfortunately, we can't escape re-walking the linked list for each source, which has
                     // quadratic behavior, because we need to add the sources in order.
@@ -156,7 +157,8 @@ namespace System.Linq
                 var array = new TSource[count];
                 int arrayIndex = array.Length; // We start copying in collection-sized chunks from the end of the array.
 
-                ConcatNIterator<TSource>? node, previousN = this;
+                ConcatNIterator<TSource>? node,
+                    previousN = this;
                 do
                 {
                     node = previousN;
@@ -170,8 +172,7 @@ namespace System.Linq
                         }
                         source.CopyTo(array, arrayIndex);
                     }
-                }
-                while ((previousN = node.PreviousN) != null);
+                } while ((previousN = node.PreviousN) != null);
 
                 var previous2 = (Concat2Iterator<TSource>)node._tail;
                 var second = (ICollection<TSource>)previous2._second;
@@ -203,7 +204,7 @@ namespace System.Linq
                 int count = GetCount(onlyIfCheap: true);
                 var list = count != -1 ? new List<TSource>(count) : new List<TSource>();
 
-                for (int i = 0; ; i++)
+                for (int i = 0;; i++)
                 {
                     IEnumerable<TSource>? source = GetEnumerable(i);
                     if (source == null)

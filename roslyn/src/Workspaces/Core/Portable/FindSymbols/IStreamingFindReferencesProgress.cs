@@ -34,17 +34,20 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             // We should only get an actual group of symbols if these were from source.
             // Metadata symbols never form a group.
-            Contract.ThrowIfTrue(symbols.Length >= 2 && symbols.Any(s => s.Locations.Any(loc => loc.IsInMetadata)));
+            Contract.ThrowIfTrue(
+                symbols.Length >= 2 && symbols.Any(s => s.Locations.Any(loc => loc.IsInMetadata))
+            );
 
             Symbols = ImmutableHashSet.CreateRange(
-                MetadataUnifyingEquivalenceComparer.Instance, symbols);
+                MetadataUnifyingEquivalenceComparer.Instance,
+                symbols
+            );
         }
 
-        public override bool Equals(object? obj)
-            => obj is SymbolGroup group && Equals(group);
+        public override bool Equals(object? obj) => obj is SymbolGroup group && Equals(group);
 
-        public bool Equals(SymbolGroup? group)
-            => this == group || (group != null && Symbols.SetEquals(group.Symbols));
+        public bool Equals(SymbolGroup? group) =>
+            this == group || (group != null && Symbols.SetEquals(group.Symbols));
 
         public override int GetHashCode()
         {
@@ -75,7 +78,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         ValueTask OnFindInDocumentCompletedAsync(Document document);
 
         ValueTask OnDefinitionFoundAsync(SymbolGroup group);
-        ValueTask OnReferenceFoundAsync(SymbolGroup group, ISymbol symbol, ReferenceLocation location);
+        ValueTask OnReferenceFoundAsync(
+            SymbolGroup group,
+            ISymbol symbol,
+            ReferenceLocation location
+        );
     }
 
     internal interface IStreamingFindLiteralReferencesProgress

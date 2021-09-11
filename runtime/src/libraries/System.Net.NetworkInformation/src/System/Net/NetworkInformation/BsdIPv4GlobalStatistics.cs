@@ -57,7 +57,8 @@ namespace System.Net.NetworkInformation
                     numIPAddresses++;
                 },
                 null,
-                null);
+                null
+            );
 
             _numInterfaces = interfaceSet.Count;
             _numIPAddresses = numIPAddresses;
@@ -69,48 +70,129 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        public override int DefaultTtl { get { return _defaultTtl; } }
+        public override int DefaultTtl
+        {
+            get { return _defaultTtl; }
+        }
 
-        public override bool ForwardingEnabled { get { return _forwarding; } }
+        public override bool ForwardingEnabled
+        {
+            get { return _forwarding; }
+        }
 
-        public override int NumberOfInterfaces { get { return _numInterfaces; } }
+        public override int NumberOfInterfaces
+        {
+            get { return _numInterfaces; }
+        }
 
-        public override int NumberOfIPAddresses { get { return _numIPAddresses; } }
+        public override int NumberOfIPAddresses
+        {
+            get { return _numIPAddresses; }
+        }
 
-        public override long OutputPacketRequests { get { return _outboundPackets; } }
+        public override long OutputPacketRequests
+        {
+            get { return _outboundPackets; }
+        }
 
-        public override long OutputPacketRoutingDiscards { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long OutputPacketRoutingDiscards
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long OutputPacketsDiscarded { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long OutputPacketsDiscarded
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long OutputPacketsWithNoRoute { get { return _outputPacketsNoRoute; } }
+        public override long OutputPacketsWithNoRoute
+        {
+            get { return _outputPacketsNoRoute; }
+        }
 
-        public override long PacketFragmentFailures { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long PacketFragmentFailures
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long PacketReassembliesRequired { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long PacketReassembliesRequired
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long PacketReassemblyFailures { get { return _cantFrags; } }
+        public override long PacketReassemblyFailures
+        {
+            get { return _cantFrags; }
+        }
 
-        public override long PacketReassemblyTimeout { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long PacketReassemblyTimeout
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long PacketsFragmented { get { return _datagramsFragmented; } }
+        public override long PacketsFragmented
+        {
+            get { return _datagramsFragmented; }
+        }
 
-        public override long PacketsReassembled { get { return _packetsReassembled; } }
+        public override long PacketsReassembled
+        {
+            get { return _packetsReassembled; }
+        }
 
-        public override long ReceivedPackets { get { return _totalPacketsReceived; } }
+        public override long ReceivedPackets
+        {
+            get { return _totalPacketsReceived; }
+        }
 
-        public override long ReceivedPacketsDelivered { get { return _packetsDelivered; } }
+        public override long ReceivedPacketsDelivered
+        {
+            get { return _packetsDelivered; }
+        }
 
-        public override long ReceivedPacketsDiscarded { get { return _packetsDiscarded; } }
+        public override long ReceivedPacketsDiscarded
+        {
+            get { return _packetsDiscarded; }
+        }
 
-        public override long ReceivedPacketsForwarded { get { return _packetsForwarded; } }
+        public override long ReceivedPacketsForwarded
+        {
+            get { return _packetsForwarded; }
+        }
 
-        public override long ReceivedPacketsWithAddressErrors { get { return _badAddress; } }
+        public override long ReceivedPacketsWithAddressErrors
+        {
+            get { return _badAddress; }
+        }
 
-        public override long ReceivedPacketsWithHeadersErrors { get { return _badHeader; } }
+        public override long ReceivedPacketsWithHeadersErrors
+        {
+            get { return _badHeader; }
+        }
 
-        public override long ReceivedPacketsWithUnknownProtocol { get { return _unknownProtos; } }
+        public override long ReceivedPacketsWithUnknownProtocol
+        {
+            get { return _unknownProtos; }
+        }
 
-        public override int NumberOfRoutes { get { return _numRoutes; } }
+        public override int NumberOfRoutes
+        {
+            get { return _numRoutes; }
+        }
     }
 }

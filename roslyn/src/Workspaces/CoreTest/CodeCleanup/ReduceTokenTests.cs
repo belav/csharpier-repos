@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceSingleLiterals_LessThan8Digits()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 8 significant digits
@@ -70,7 +71,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 8 significant digits
@@ -116,7 +118,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceSingleLiterals_LessThan8Digits_WithTypeCharacterSingle()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 8 significant digits
@@ -155,7 +158,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 8 significant digits
@@ -201,7 +205,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceSingleLiterals_8Digits()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 8 significant digits
@@ -233,7 +238,8 @@ Module Program
 End Module
 |]";
 
-            var expected = $@"
+            var expected =
+                $@"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 8 significant digits
@@ -272,7 +278,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceSingleLiterals_8Digits_WithTypeCharacterSingle()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 8 significant digits
@@ -304,7 +311,8 @@ Module Program
 End Module
 |]";
 
-            var expected = $@"
+            var expected =
+                $@"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 8 significant digits
@@ -343,7 +351,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceSingleLiterals_GreaterThan8Digits()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 3: > 8 significant digits
@@ -387,7 +396,8 @@ Module Program
 End Module
 |]";
 
-            var expected = $@"
+            var expected =
+                $@"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 3: > 8 significant digits
@@ -438,7 +448,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceSingleLiterals_GreaterThan8Digits_WithTypeCharacterSingle()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 3: > 8 significant digits
@@ -482,7 +493,8 @@ Module Program
 End Module
 |]";
 
-            var expected = $@"
+            var expected =
+                $@"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 3: > 8 significant digits
@@ -533,7 +545,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDoubleLiterals_LessThan16Digits()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 16 significant digits precision,
@@ -572,7 +585,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 16 significant digits precision,
@@ -618,7 +632,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDoubleLiterals_LessThan16Digits_WithTypeCharacter()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 16 significant digits precision,
@@ -657,7 +672,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 16 significant digits precision,
@@ -703,7 +719,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDoubleLiterals_16Digits()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 16 significant digits
@@ -739,7 +756,8 @@ Module Program
 End Module
 |]";
 
-            var expected = $@"
+            var expected =
+                $@"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 16 significant digits
@@ -782,7 +800,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDoubleLiterals_16Digits_WithTypeCharacter()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 16 significant digits
@@ -818,7 +837,8 @@ Module Program
 End Module
 |]";
 
-            var expected = $@"
+            var expected =
+                $@"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 16 significant digits
@@ -861,7 +881,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDoubleLiterals_GreaterThan16Digits()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 3: > 16 significant digits
@@ -923,7 +944,8 @@ Module Program
 End Module
 |]";
 
-            var expected = $@"
+            var expected =
+                $@"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 3: > 16 significant digits
@@ -992,7 +1014,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDoubleLiterals_GreaterThan16Digits_WithTypeCharacter()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 3: > 16 significant digits
@@ -1054,7 +1077,8 @@ Module Program
 End Module
 |]";
 
-            var expected = $@"
+            var expected =
+                $@"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 3: > 16 significant digits
@@ -1123,7 +1147,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDecimalLiterals_LessThan30Digits()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 30 significant digits
@@ -1162,7 +1187,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 30 significant digits
@@ -1208,7 +1234,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDecimalLiterals_LessThan30Digits_WithTypeCharacterDecimal()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 30 significant digits
@@ -1247,7 +1274,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 1: Less than 30 significant digits
@@ -1293,7 +1321,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDecimalLiterals_30Digits()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 30 significant digits
@@ -1318,7 +1347,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 30 significant digits
@@ -1350,7 +1380,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDecimalLiterals_30Digits_WithTypeCharacterDecimal()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 30 significant digits
@@ -1375,7 +1406,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 2: 30 significant digits
@@ -1407,7 +1439,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDecimalLiterals_GreaterThan30Digits()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         ' CATEGORY 3: > 30 significant digits
@@ -1432,7 +1465,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         ' CATEGORY 3: > 30 significant digits
@@ -1464,7 +1498,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceFloatLiteralsWithNegativeExponents()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
 
@@ -1510,7 +1545,8 @@ Module Program
 End Module
 |]";
 
-            var expected = $@"
+            var expected =
+                $@"
 Module Program
     Sub Main(args As String())
 
@@ -1563,7 +1599,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceSingleLiteralsWithTrailingZeros()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         Const f1 As Single = 3.011000F                      ' Dev11 & Roslyn: 3.011F
@@ -1593,7 +1630,8 @@ Module Program
 End Module
 |]";
 
-            var expected = $@"
+            var expected =
+                $@"
 Module Program
     Sub Main(args As String())
         Const f1 As Single = 3.011F                      ' Dev11 & Roslyn: 3.011F
@@ -1630,7 +1668,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDoubleLiteralsWithTrailingZeros()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         Const d1 As Double = 3.011000                       ' Dev11 & Roslyn: 3.011
@@ -1660,7 +1699,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         Const d1 As Double = 3.011                       ' Dev11 & Roslyn: 3.011
@@ -1697,7 +1737,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceDecimalLiteralsWithTrailingZeros()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         Const d1 As Decimal = 3.011000D                     ' Dev11 & Roslyn: 3.011D
@@ -1727,7 +1768,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         Const d1 As Decimal = 3.011D                     ' Dev11 & Roslyn: 3.011D
@@ -1771,7 +1813,8 @@ End Module
                 System.Threading.Thread.CurrentThread.CurrentCulture =
                     System.Globalization.CultureInfo.CreateSpecificCulture("de-DE");
 
-                var code = @"[|
+                var code =
+                    @"[|
 Module Program
     Sub Main(args As String())
         Dim d = 1.0D
@@ -1780,7 +1823,8 @@ Module Program
     End Sub
 End Module|]";
 
-                var expected = @"
+                var expected =
+                    @"
 Module Program
     Sub Main(args As String())
         Dim d = 1D
@@ -1790,6 +1834,7 @@ Module Program
 End Module";
                 await VerifyAsync(code, expected);
             }
+
             finally
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = savedCulture;
@@ -1806,7 +1851,8 @@ End Module";
                 Thread.CurrentThread.CurrentCulture = (CultureInfo)oldCulture.Clone();
                 Thread.CurrentThread.CurrentCulture.NumberFormat.NegativeSign = "~";
 
-                var code = @"[|
+                var code =
+                    @"[|
 Module Program
     Sub Main(args As String())
         Dim d = -1.0E-11D
@@ -1815,7 +1861,8 @@ Module Program
     End Sub
 End Module|]";
 
-                var expected = @"
+                var expected =
+                    @"
 Module Program
     Sub Main(args As String())
         Dim d = -0.00000000001D
@@ -1825,6 +1872,7 @@ Module Program
 End Module";
                 await VerifyAsync(code, expected);
             }
+
             finally
             {
                 Thread.CurrentThread.CurrentCulture = oldCulture;
@@ -1835,7 +1883,8 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceIntegerLiteralWithLeadingZeros()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         Const i0 As Integer = 0060
@@ -1859,7 +1908,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         Const i0 As Integer = 60
@@ -1889,7 +1939,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceIntegerLiteralWithNegativeHexOrOctalValue()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main(args As String())
         Const s0 As Short = &HFFFFS
@@ -1908,7 +1959,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main(args As String())
         Const s0 As Short = &HFFFFS
@@ -1933,7 +1985,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceIntegerLiteralWithOverflow()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Module1
     Sub Main()
         Dim sMax As Short = 0032768S
@@ -1948,7 +2001,8 @@ Module Module1
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Module1
     Sub Main()
         Dim sMax As Short = 0032768S
@@ -1969,7 +2023,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task ReduceBinaryIntegerLiteral()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Module1
     Sub Main()
         ' signed
@@ -1999,7 +2054,8 @@ Module Module1
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Module1
     Sub Main()
         ' signed
@@ -2037,7 +2093,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.ReduceTokens)]
         public async Task DoNotReduceDigitSeparators()
         {
-            var source = @"
+            var source =
+                @"
 Module Module1
     Sub Main()
         Dim x = 100_000
@@ -2052,25 +2109,42 @@ End Module
 
         private static async Task VerifyAsync(string codeWithMarker, string expectedResult)
         {
-            MarkupTestFile.GetSpans(codeWithMarker,
-                out var codeWithoutMarker, out ImmutableArray<TextSpan> textSpans);
+            MarkupTestFile.GetSpans(
+                codeWithMarker,
+                out var codeWithoutMarker,
+                out ImmutableArray<TextSpan> textSpans
+            );
 
             var document = CreateDocument(codeWithoutMarker, LanguageNames.VisualBasic);
-            var codeCleanups = CodeCleaner.GetDefaultProviders(document).WhereAsArray(p => p.Name == PredefinedCodeCleanupProviderNames.ReduceTokens || p.Name == PredefinedCodeCleanupProviderNames.CaseCorrection || p.Name == PredefinedCodeCleanupProviderNames.Format);
+            var codeCleanups = CodeCleaner.GetDefaultProviders(document)
+                .WhereAsArray(
+                    p =>
+                        p.Name == PredefinedCodeCleanupProviderNames.ReduceTokens
+                        || p.Name == PredefinedCodeCleanupProviderNames.CaseCorrection
+                        || p.Name == PredefinedCodeCleanupProviderNames.Format
+                );
 
-            var cleanDocument = await CodeCleaner.CleanupAsync(document, textSpans[0], codeCleanups);
+            var cleanDocument = await CodeCleaner.CleanupAsync(
+                document,
+                textSpans[0],
+                codeCleanups
+            );
 
-            AssertEx.EqualOrDiff(expectedResult, (await cleanDocument.GetSyntaxRootAsync()).ToFullString());
+            AssertEx.EqualOrDiff(
+                expectedResult,
+                (await cleanDocument.GetSyntaxRootAsync()).ToFullString()
+            );
         }
 
         private static Document CreateDocument(string code, string language)
         {
             var solution = new AdhocWorkspace().CurrentSolution;
             var projectId = ProjectId.CreateNewId();
-            var project = solution.AddProject(projectId, "Project", "Project.dll", language).GetProject(projectId);
+            var project = solution.AddProject(projectId, "Project", "Project.dll", language)
+                .GetProject(projectId);
 
             return project.AddMetadataReference(TestMetadata.Net451.mscorlib)
-                          .AddDocument("Document", SourceText.From(code));
+                .AddDocument("Document", SourceText.From(code));
         }
     }
 }

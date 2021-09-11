@@ -16,8 +16,11 @@ namespace Microsoft.CSharp
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
             sourceType == typeof(string) ? true : base.CanConvertFrom(context, sourceType);
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        ) {
             string name = value as string;
             if (name != null)
             {
@@ -34,8 +37,12 @@ namespace Microsoft.CSharp
             return DefaultValue;
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        ) {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -62,6 +69,8 @@ namespace Microsoft.CSharp
 
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context) => true;
 
-        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) => new StandardValuesCollection(Values);
+        public override StandardValuesCollection GetStandardValues(
+            ITypeDescriptorContext context
+        ) => new StandardValuesCollection(Values);
     }
 }

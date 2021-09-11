@@ -33,7 +33,9 @@ namespace System.Text.Json.Node.Tests
         public static void FromElement_WrongNodeTypeThrows(string json)
         {
             using (JsonDocument document = JsonDocument.Parse(json))
-            Assert.Throws<InvalidOperationException>(() => JsonArray.Create(document.RootElement));
+                Assert.Throws<InvalidOperationException>(
+                    () => JsonArray.Create(document.RootElement)
+                );
         }
 
         [Fact]
@@ -243,8 +245,9 @@ namespace System.Text.Json.Node.Tests
             };
 
             var strangeWordsJsonArray = new JsonArray();
-            strangeWords.Where(word => word.Length < 10).
-                ToList().ForEach(str => strangeWordsJsonArray.Add(JsonValue.Create(str)));
+            strangeWords.Where(word => word.Length < 10)
+                .ToList()
+                .ForEach(str => strangeWordsJsonArray.Add(JsonValue.Create(str)));
 
             Assert.Equal(2, strangeWordsJsonArray.Count);
 
@@ -263,29 +266,13 @@ namespace System.Text.Json.Node.Tests
             {
                 new JsonArray
                 {
-                    new JsonArray
-                    {
-                        new JsonArray { 0, 0, 0 },
-                        new JsonArray { 0, 0, 1 }
-                    },
-                    new JsonArray
-                    {
-                        new JsonArray { 0, 1, 0 },
-                        new JsonArray { 0, 1, 1 }
-                    }
+                    new JsonArray { new JsonArray { 0, 0, 0 }, new JsonArray { 0, 0, 1 } },
+                    new JsonArray { new JsonArray { 0, 1, 0 }, new JsonArray { 0, 1, 1 } }
                 },
                 new JsonArray
                 {
-                    new JsonArray
-                    {
-                        new JsonArray { 1, 0, 0 },
-                        new JsonArray { 1, 0, 1 }
-                    },
-                    new JsonArray
-                    {
-                        new JsonArray { 1, 1, 0 },
-                        new JsonArray { 1, 1, 1 }
-                    }
+                    new JsonArray { new JsonArray { 1, 0, 0 }, new JsonArray { 1, 0, 1 } },
+                    new JsonArray { new JsonArray { 1, 1, 0 }, new JsonArray { 1, 1, 1 } }
                 },
             };
 
@@ -407,16 +394,20 @@ namespace System.Text.Json.Node.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new JsonArray()[-1]);
             Assert.Throws<ArgumentOutOfRangeException>(() => new JsonArray()[0]);
             Assert.Throws<ArgumentOutOfRangeException>(() => new JsonArray()[1]);
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                var jArray = new JsonArray { 1, 2, 3 };
-                jArray.Insert(4, 17);
-            });
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                var jArray = new JsonArray { 1, 2, 3 };
-                jArray.Insert(-1, 17);
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    var jArray = new JsonArray { 1, 2, 3 };
+                    jArray.Insert(4, 17);
+                }
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    var jArray = new JsonArray { 1, 2, 3 };
+                    jArray.Insert(-1, 17);
+                }
+            );
         }
 
         [Fact]

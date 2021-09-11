@@ -35,11 +35,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel
             IHostEnvironment hostEnvironment,
             bool reloadOnChange,
             ILogger<KestrelServer> logger,
-            ILogger<HttpsConnectionMiddleware> httpsLogger)
-        {
+            ILogger<HttpsConnectionMiddleware> httpsLogger
+        ) {
             Options = options ?? throw new ArgumentNullException(nameof(options));
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            HostEnvironment = hostEnvironment ?? throw new ArgumentNullException(nameof(hostEnvironment));
+            HostEnvironment =
+                hostEnvironment ?? throw new ArgumentNullException(nameof(hostEnvironment));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
             HttpsLogger = httpsLogger ?? throw new ArgumentNullException(nameof(logger));
 
@@ -73,8 +74,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel
 
         private ICertificateConfigLoader CertificateConfigLoader { get; }
 
-        private IDictionary<string, Action<EndpointConfiguration>> EndpointConfigurations { get; }
-            = new Dictionary<string, Action<EndpointConfiguration>>(0, StringComparer.OrdinalIgnoreCase);
+        private IDictionary<string, Action<EndpointConfiguration>> EndpointConfigurations { get; } =
+            new Dictionary<string, Action<EndpointConfiguration>>(
+                0,
+                StringComparer.OrdinalIgnoreCase
+            );
 
         // Actions that will be delayed until Load so that they aren't applied if the configuration loader is replaced.
         private IList<Action> EndpointsToAdd { get; } = new List<Action>();
@@ -84,27 +88,34 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         /// <summary>
         /// Specifies a configuration Action to run when an endpoint with the given name is loaded from configuration.
         /// </summary>
-        public KestrelConfigurationLoader Endpoint(string name, Action<EndpointConfiguration> configureOptions)
-        {
+        public KestrelConfigurationLoader Endpoint(
+            string name,
+            Action<EndpointConfiguration> configureOptions
+        ) {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            EndpointConfigurations[name] = configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
+            EndpointConfigurations[name] =
+                configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
             return this;
         }
 
         /// <summary>
         /// Bind to given IP address and port.
         /// </summary>
-        public KestrelConfigurationLoader Endpoint(IPAddress address, int port) => Endpoint(address, port, _ => { });
+        public KestrelConfigurationLoader Endpoint(IPAddress address, int port) =>
+            Endpoint(address, port, _ => { });
 
         /// <summary>
         /// Bind to given IP address and port.
         /// </summary>
-        public KestrelConfigurationLoader Endpoint(IPAddress address, int port, Action<ListenOptions> configure)
-        {
+        public KestrelConfigurationLoader Endpoint(
+            IPAddress address,
+            int port,
+            Action<ListenOptions> configure
+        ) {
             if (address == null)
             {
                 throw new ArgumentNullException(nameof(address));
@@ -116,13 +127,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         /// <summary>
         /// Bind to given IP endpoint.
         /// </summary>
-        public KestrelConfigurationLoader Endpoint(IPEndPoint endPoint) => Endpoint(endPoint, _ => { });
+        public KestrelConfigurationLoader Endpoint(IPEndPoint endPoint) =>
+            Endpoint(endPoint, _ => { });
 
         /// <summary>
         /// Bind to given IP address and port.
         /// </summary>
-        public KestrelConfigurationLoader Endpoint(IPEndPoint endPoint, Action<ListenOptions> configure)
-        {
+        public KestrelConfigurationLoader Endpoint(
+            IPEndPoint endPoint,
+            Action<ListenOptions> configure
+        ) {
             if (endPoint == null)
             {
                 throw new ArgumentNullException(nameof(endPoint));
@@ -132,10 +146,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel
                 throw new ArgumentNullException(nameof(configure));
             }
 
-            EndpointsToAdd.Add(() =>
-            {
-                Options.Listen(endPoint, configure);
-            });
+            EndpointsToAdd.Add(
+                () =>
+                {
+                    Options.Listen(endPoint, configure);
+                }
+            );
 
             return this;
         }
@@ -144,23 +160,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is not supported
         /// for this type of endpoint.
         /// </summary>
-        public KestrelConfigurationLoader LocalhostEndpoint(int port) => LocalhostEndpoint(port, options => { });
+        public KestrelConfigurationLoader LocalhostEndpoint(int port) =>
+            LocalhostEndpoint(port, options => { });
 
         /// <summary>
         /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is not supported
         /// for this type of endpoint.
         /// </summary>
-        public KestrelConfigurationLoader LocalhostEndpoint(int port, Action<ListenOptions> configure)
-        {
+        public KestrelConfigurationLoader LocalhostEndpoint(
+            int port,
+            Action<ListenOptions> configure
+        ) {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
             }
 
-            EndpointsToAdd.Add(() =>
-            {
-                Options.ListenLocalhost(port, configure);
-            });
+            EndpointsToAdd.Add(
+                () =>
+                {
+                    Options.ListenLocalhost(port, configure);
+                }
+            );
 
             return this;
         }
@@ -168,7 +189,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         /// <summary>
         /// Listens on all IPs using IPv6 [::], or IPv4 0.0.0.0 if IPv6 is not supported.
         /// </summary>
-        public KestrelConfigurationLoader AnyIPEndpoint(int port) => AnyIPEndpoint(port, options => { });
+        public KestrelConfigurationLoader AnyIPEndpoint(int port) =>
+            AnyIPEndpoint(port, options => { });
 
         /// <summary>
         /// Listens on all IPs using IPv6 [::], or IPv4 0.0.0.0 if IPv6 is not supported.
@@ -180,10 +202,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel
                 throw new ArgumentNullException(nameof(configure));
             }
 
-            EndpointsToAdd.Add(() =>
-            {
-                Options.ListenAnyIP(port, configure);
-            });
+            EndpointsToAdd.Add(
+                () =>
+                {
+                    Options.ListenAnyIP(port, configure);
+                }
+            );
 
             return this;
         }
@@ -191,30 +215,38 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         /// <summary>
         /// Bind to given Unix domain socket path.
         /// </summary>
-        public KestrelConfigurationLoader UnixSocketEndpoint(string socketPath) => UnixSocketEndpoint(socketPath, _ => { });
+        public KestrelConfigurationLoader UnixSocketEndpoint(string socketPath) =>
+            UnixSocketEndpoint(socketPath, _ => { });
 
         /// <summary>
         /// Bind to given Unix domain socket path.
         /// </summary>
-        public KestrelConfigurationLoader UnixSocketEndpoint(string socketPath, Action<ListenOptions> configure)
-        {
+        public KestrelConfigurationLoader UnixSocketEndpoint(
+            string socketPath,
+            Action<ListenOptions> configure
+        ) {
             if (socketPath == null)
             {
                 throw new ArgumentNullException(nameof(socketPath));
             }
             if (socketPath.Length == 0 || socketPath[0] != '/')
             {
-                throw new ArgumentException(CoreStrings.UnixSocketPathMustBeAbsolute, nameof(socketPath));
+                throw new ArgumentException(
+                    CoreStrings.UnixSocketPathMustBeAbsolute,
+                    nameof(socketPath)
+                );
             }
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
             }
 
-            EndpointsToAdd.Add(() =>
-            {
-                Options.ListenUnixSocket(socketPath, configure);
-            });
+            EndpointsToAdd.Add(
+                () =>
+                {
+                    Options.ListenUnixSocket(socketPath, configure);
+                }
+            );
 
             return this;
         }
@@ -222,22 +254,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         /// <summary>
         /// Open a socket file descriptor.
         /// </summary>
-        public KestrelConfigurationLoader HandleEndpoint(ulong handle) => HandleEndpoint(handle, _ => { });
+        public KestrelConfigurationLoader HandleEndpoint(ulong handle) =>
+            HandleEndpoint(handle, _ => { });
 
         /// <summary>
         /// Open a socket file descriptor.
         /// </summary>
-        public KestrelConfigurationLoader HandleEndpoint(ulong handle, Action<ListenOptions> configure)
-        {
+        public KestrelConfigurationLoader HandleEndpoint(
+            ulong handle,
+            Action<ListenOptions> configure
+        ) {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
             }
 
-            EndpointsToAdd.Add(() =>
-            {
-                Options.ListenHandle(handle, configure);
-            });
+            EndpointsToAdd.Add(
+                () =>
+                {
+                    Options.ListenHandle(handle, configure);
+                }
+            );
 
             return this;
         }
@@ -352,15 +389,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel
                     else
                     {
                         // Ensure endpoint is reloaded if it used the default mode and the ClientCertificateMode changed.
-                        endpoint.ClientCertificateMode = ConfigurationReader.EndpointDefaults.ClientCertificateMode;
+                        endpoint.ClientCertificateMode =
+                            ConfigurationReader.EndpointDefaults.ClientCertificateMode;
                     }
 
                     // A cert specified directly on the endpoint overrides any defaults.
-                    httpsOptions.ServerCertificate = CertificateConfigLoader.LoadCertificate(endpoint.Certificate, endpoint.Name)
+                    httpsOptions.ServerCertificate =
+                        CertificateConfigLoader.LoadCertificate(endpoint.Certificate, endpoint.Name)
                         ?? httpsOptions.ServerCertificate;
 
-                    if (httpsOptions.ServerCertificate == null && httpsOptions.ServerCertificateSelector == null)
-                    {
+                    if (
+                        httpsOptions.ServerCertificate == null
+                        && httpsOptions.ServerCertificateSelector == null
+                    ) {
                         // Fallback
                         Options.ApplyDefaultCert(httpsOptions);
 
@@ -371,7 +412,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel
 
                 // Now that defaults have been loaded, we can compare to the currently bound endpoints to see if the config changed.
                 // There's no reason to rerun an EndpointConfigurations callback if nothing changed.
-                var matchingBoundEndpoints = endpointsToStop.Where(o => o.EndpointConfig == endpoint).ToList();
+                var matchingBoundEndpoints = endpointsToStop.Where(
+                        o => o.EndpointConfig == endpoint
+                    )
+                    .ToList();
 
                 if (matchingBoundEndpoints.Count > 0)
                 {
@@ -382,7 +426,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel
 
                 if (EndpointConfigurations.TryGetValue(endpoint.Name, out var configureEndpoint))
                 {
-                    var endpointConfig = new EndpointConfiguration(https, listenOptions, httpsOptions, endpoint.ConfigSection);
+                    var endpointConfig = new EndpointConfiguration(
+                        https,
+                        listenOptions,
+                        httpsOptions,
+                        endpoint.ConfigSection
+                    );
                     configureEndpoint(endpointConfig);
                 }
 
@@ -391,17 +440,32 @@ namespace Microsoft.AspNetCore.Server.Kestrel
                 {
                     if (endpoint.Sni.Count == 0)
                     {
-                        if (httpsOptions.ServerCertificate == null && httpsOptions.ServerCertificateSelector == null)
-                        {
-                            throw new InvalidOperationException(CoreStrings.NoCertSpecifiedNoDevelopmentCertificateFound);
+                        if (
+                            httpsOptions.ServerCertificate == null
+                            && httpsOptions.ServerCertificateSelector == null
+                        ) {
+                            throw new InvalidOperationException(
+                                CoreStrings.NoCertSpecifiedNoDevelopmentCertificateFound
+                            );
                         }
 
                         listenOptions.UseHttps(httpsOptions);
                     }
                     else
                     {
-                        var sniOptionsSelector = new SniOptionsSelector(endpoint.Name, endpoint.Sni, CertificateConfigLoader, httpsOptions, listenOptions.Protocols, HttpsLogger);
-                        listenOptions.UseHttps(SniOptionsSelector.OptionsCallback, sniOptionsSelector, httpsOptions.HandshakeTimeout);
+                        var sniOptionsSelector = new SniOptionsSelector(
+                            endpoint.Name,
+                            endpoint.Sni,
+                            CertificateConfigLoader,
+                            httpsOptions,
+                            listenOptions.Protocols,
+                            HttpsLogger
+                        );
+                        listenOptions.UseHttps(
+                            SniOptionsSelector.OptionsCallback,
+                            sniOptionsSelector,
+                            httpsOptions.HandshakeTimeout
+                        );
                     }
                 }
 
@@ -418,7 +482,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         {
             if (ConfigurationReader.Certificates.TryGetValue("Default", out var defaultCertConfig))
             {
-                var defaultCert = CertificateConfigLoader.LoadCertificate(defaultCertConfig, "Default");
+                var defaultCert = CertificateConfigLoader.LoadCertificate(
+                    defaultCertConfig,
+                    "Default"
+                );
                 if (defaultCert != null)
                 {
                     DefaultCertificateConfig = defaultCertConfig;
@@ -440,15 +507,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel
         private (X509Certificate2?, CertificateConfig?) FindDeveloperCertificateFile()
         {
             string? certificatePath = null;
-            if (ConfigurationReader.Certificates.TryGetValue("Development", out var certificateConfig) &&
-                certificateConfig.Path == null &&
-                certificateConfig.Password != null &&
-                TryGetCertificatePath(out certificatePath) &&
-                File.Exists(certificatePath))
-            {
+            if (
+                ConfigurationReader.Certificates.TryGetValue(
+                    "Development",
+                    out var certificateConfig
+                )
+                && certificateConfig.Path == null
+                && certificateConfig.Password != null
+                && TryGetCertificatePath(out certificatePath)
+                && File.Exists(certificatePath)
+            ) {
                 try
                 {
-                    var certificate = new X509Certificate2(certificatePath, certificateConfig.Password);
+                    var certificate = new X509Certificate2(
+                        certificatePath,
+                        certificateConfig.Password
+                    );
 
                     if (IsDevelopmentCertificate(certificate))
                     {
@@ -477,8 +551,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel
 
             foreach (var ext in certificate.Extensions)
             {
-                if (string.Equals(ext.Oid?.Value, CertificateManager.AspNetHttpsOid, StringComparison.Ordinal))
-                {
+                if (
+                    string.Equals(
+                        ext.Oid?.Value,
+                        CertificateManager.AspNetHttpsOid,
+                        StringComparison.Ordinal
+                    )
+                ) {
                     return true;
                 }
             }
@@ -494,7 +573,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel
             var home = Environment.GetEnvironmentVariable("HOME");
             var basePath = appData != null ? Path.Combine(appData, "ASP.NET", "https") : null;
             basePath = basePath ?? (home != null ? Path.Combine(home, ".aspnet", "https") : null);
-            path = basePath != null ? Path.Combine(basePath, $"{HostEnvironment.ApplicationName}.pfx") : null;
+            path =
+                basePath != null
+                    ? Path.Combine(basePath, $"{HostEnvironment.ApplicationName}.pfx")
+                    : null;
             return path != null;
         }
     }

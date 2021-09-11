@@ -273,7 +273,8 @@ internal class TestApp
     }
     private static unsafe long test_396(B* pb1, B* pb2)
     {
-        if (pb1 >= pb2) return 100;
+        if (pb1 >= pb2)
+            return 100;
         throw new Exception();
     }
     private static unsafe int Main()
@@ -288,8 +289,13 @@ internal class TestApp
         }
         AA.init_all(0);
         loc_x = new AA(0, 100);
-        if (test_11(new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } }, 1, 1) != 100)
-        {
+        if (
+            test_11(
+                new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } },
+                1,
+                1
+            ) != 100
+        ) {
             Console.WriteLine("test_11() failed.");
             return 111;
         }
@@ -561,8 +567,13 @@ internal class TestApp
         }
         AA.init_all(0);
         loc_x = new AA(0, 100);
-        if (test_284(new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } }, 1, 1) != 100)
-        {
+        if (
+            test_284(
+                new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } },
+                1,
+                1
+            ) != 100
+        ) {
             Console.WriteLine("test_284() failed.");
             return 384;
         }

@@ -9,7 +9,9 @@ namespace System.Linq
 {
     public abstract class EnumerableExecutor
     {
-        [RequiresUnreferencedCode(Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode)]
+        [RequiresUnreferencedCode(
+            Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode
+        )]
         internal abstract object? ExecuteBoxed();
 
         internal EnumerableExecutor() { }
@@ -30,15 +32,22 @@ namespace System.Linq
             _expression = expression;
         }
 
-        [RequiresUnreferencedCode(Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode)]
+        [RequiresUnreferencedCode(
+            Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode
+        )]
         internal override object? ExecuteBoxed() => Execute();
 
-        [RequiresUnreferencedCode(Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode)]
+        [RequiresUnreferencedCode(
+            Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode
+        )]
         internal T Execute()
         {
             EnumerableRewriter rewriter = new EnumerableRewriter();
             Expression body = rewriter.Visit(_expression);
-            Expression<Func<T>> f = Expression.Lambda<Func<T>>(body, (IEnumerable<ParameterExpression>?)null);
+            Expression<Func<T>> f = Expression.Lambda<Func<T>>(
+                body,
+                (IEnumerable<ParameterExpression>?)null
+            );
             Func<T> func = f.Compile();
             return func();
         }

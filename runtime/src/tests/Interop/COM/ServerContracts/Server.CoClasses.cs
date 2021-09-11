@@ -161,7 +161,7 @@ namespace Server.Contract.Servers
     {
     }
 
-/** Implement when main line C# compiler supports default interfaces.
+    /** Implement when main line C# compiler supports default interfaces.
 
     /// <summary>
     /// Managed definition of CoClass

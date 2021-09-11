@@ -55,6 +55,7 @@ namespace System.Reflection.Internal.Tests
 
                 Assert.Throws<IOException>(() => s.CopyTo(buffer, 6));
             }
+
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)buffer);
@@ -86,6 +87,7 @@ namespace System.Reflection.Internal.Tests
 
                 Assert.Equal(a, ReadBuffer(buffer, bufferSize));
             }
+
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)buffer);
@@ -102,15 +104,43 @@ namespace System.Reflection.Internal.Tests
                 _buffer = buffer;
             }
 
-            public override bool CanRead { get { throw new NotImplementedException(); } }
-            public override bool CanSeek { get { throw new NotImplementedException(); } }
-            public override bool CanWrite { get { throw new NotImplementedException(); } }
-            public override long Length { get { throw new NotImplementedException(); } }
-            public override long Position { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
-            public override void Flush() { throw new NotImplementedException(); }
-            public override long Seek(long offset, SeekOrigin origin) { throw new NotImplementedException(); }
-            public override void SetLength(long value) { throw new NotImplementedException(); }
-            public override void Write(byte[] buffer, int offset, int count) { throw new NotImplementedException(); }
+            public override bool CanRead
+            {
+                get { throw new NotImplementedException(); }
+            }
+            public override bool CanSeek
+            {
+                get { throw new NotImplementedException(); }
+            }
+            public override bool CanWrite
+            {
+                get { throw new NotImplementedException(); }
+            }
+            public override long Length
+            {
+                get { throw new NotImplementedException(); }
+            }
+            public override long Position
+            {
+                get { throw new NotImplementedException(); }
+                set { throw new NotImplementedException(); }
+            }
+            public override void Flush()
+            {
+                throw new NotImplementedException();
+            }
+            public override long Seek(long offset, SeekOrigin origin)
+            {
+                throw new NotImplementedException();
+            }
+            public override void SetLength(long value)
+            {
+                throw new NotImplementedException();
+            }
+            public override void Write(byte[] buffer, int offset, int count)
+            {
+                throw new NotImplementedException();
+            }
 
             public override int Read(byte[] buffer, int offset, int count)
             {
@@ -140,6 +170,7 @@ namespace System.Reflection.Internal.Tests
 
                 Assert.Equal(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }, ReadBuffer(buffer, bufferSize));
             }
+
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)buffer);

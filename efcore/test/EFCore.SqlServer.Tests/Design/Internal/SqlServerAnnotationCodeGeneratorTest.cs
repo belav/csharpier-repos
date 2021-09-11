@@ -28,10 +28,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 {
                     x.Property<int>("Id");
                     x.HasKey("Id").IsClustered();
-                });
+                }
+            );
             var key = (IKey)modelBuilder.Model.FindEntityType("Post").GetKeys().Single();
 
-            var result = generator.GenerateFluentApiCalls(key, key.GetAnnotations().ToDictionary(a => a.Name, a => a))
+            var result = generator.GenerateFluentApiCalls(
+                    key,
+                    key.GetAnnotations().ToDictionary(a => a.Name, a => a)
+                )
                 .Single();
 
             Assert.Equal("IsClustered", result.Method);
@@ -50,10 +54,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 {
                     x.Property<int>("Id");
                     x.HasKey("Id").IsClustered(false);
-                });
+                }
+            );
             var key = (IKey)modelBuilder.Model.FindEntityType("Post").GetKeys().Single();
 
-            var result = generator.GenerateFluentApiCalls(key, key.GetAnnotations().ToDictionary(a => a.Name, a => a))
+            var result = generator.GenerateFluentApiCalls(
+                    key,
+                    key.GetAnnotations().ToDictionary(a => a.Name, a => a)
+                )
                 .Single();
 
             Assert.Equal("IsClustered", result.Method);
@@ -74,10 +82,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     x.Property<int>("Id");
                     x.Property<string>("Name");
                     x.HasIndex("Name").IsClustered();
-                });
+                }
+            );
             var index = (IIndex)modelBuilder.Model.FindEntityType("Post").GetIndexes().Single();
 
-            var result = generator.GenerateFluentApiCalls(index, index.GetAnnotations().ToDictionary(a => a.Name, a => a))
+            var result = generator.GenerateFluentApiCalls(
+                    index,
+                    index.GetAnnotations().ToDictionary(a => a.Name, a => a)
+                )
                 .Single();
 
             Assert.Equal("IsClustered", result.Method);
@@ -97,10 +109,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     x.Property<int>("Id");
                     x.Property<string>("Name");
                     x.HasIndex("Name").IsClustered(false);
-                });
+                }
+            );
             var index = (IIndex)modelBuilder.Model.FindEntityType("Post").GetIndexes().Single();
 
-            var result = generator.GenerateFluentApiCalls(index, index.GetAnnotations().ToDictionary(a => a.Name, a => a))
+            var result = generator.GenerateFluentApiCalls(
+                    index,
+                    index.GetAnnotations().ToDictionary(a => a.Name, a => a)
+                )
                 .Single();
 
             Assert.Equal("IsClustered", result.Method);
@@ -121,10 +137,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     x.Property<int>("Id");
                     x.Property<string>("Name");
                     x.HasIndex("Name").HasFillFactor(90);
-                });
+                }
+            );
 
             var index = (IIndex)modelBuilder.Model.FindEntityType("Post").GetIndexes().Single();
-            var result = generator.GenerateFluentApiCalls(index, index.GetAnnotations().ToDictionary(a => a.Name, a => a))
+            var result = generator.GenerateFluentApiCalls(
+                    index,
+                    index.GetAnnotations().ToDictionary(a => a.Name, a => a)
+                )
                 .Single();
 
             Assert.Equal("HasFillFactor", result.Method);
@@ -145,10 +165,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     x.Property<string>("FirstName");
                     x.Property<string>("LastName");
                     x.HasIndex("LastName").IncludeProperties("FirstName");
-                });
+                }
+            );
 
             var index = (IIndex)modelBuilder.Model.FindEntityType("Post").GetIndexes().Single();
-            var result = generator.GenerateFluentApiCalls(index, index.GetAnnotations().ToDictionary(a => a.Name, a => a))
+            var result = generator.GenerateFluentApiCalls(
+                    index,
+                    index.GetAnnotations().ToDictionary(a => a.Name, a => a)
+                )
                 .Single();
 
             Assert.Equal("IncludeProperties", result.Method);
@@ -166,14 +190,16 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             modelBuilder.UseIdentityColumns(seed: 5, increment: 10);
 
             var annotations = modelBuilder.Model.GetAnnotations().ToDictionary(a => a.Name, a => a);
-            var result = generator.GenerateFluentApiCalls((IModel)modelBuilder.Model, annotations).Single();
+            var result = generator.GenerateFluentApiCalls((IModel)modelBuilder.Model, annotations)
+                .Single();
 
             Assert.Equal("UseIdentityColumns", result.Method);
 
             Assert.Collection(
                 result.Arguments,
                 seed => Assert.Equal(5, seed),
-                increment => Assert.Equal(10, increment));
+                increment => Assert.Equal(10, increment)
+            );
         }
 
         [ConditionalFact]
@@ -185,14 +211,16 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var property = modelBuilder.Model.FindEntityType("Post").FindProperty("Id");
 
             var annotations = property.GetAnnotations().ToDictionary(a => a.Name, a => a);
-            var result = generator.GenerateFluentApiCalls((IProperty)property, annotations).Single();
+            var result = generator.GenerateFluentApiCalls((IProperty)property, annotations)
+                .Single();
 
             Assert.Equal("UseIdentityColumn", result.Method);
 
             Assert.Collection(
                 result.Arguments,
                 seed => Assert.Equal(5, seed),
-                increment => Assert.Equal(10, increment));
+                increment => Assert.Equal(10, increment)
+            );
         }
 
         [ConditionalFact]
@@ -203,14 +231,16 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             modelBuilder.UseHiLo("HiLoIndexName", "HiLoIndexSchema");
 
             var annotations = modelBuilder.Model.GetAnnotations().ToDictionary(a => a.Name, a => a);
-            var result = generator.GenerateFluentApiCalls((IModel)modelBuilder.Model, annotations).Single();
+            var result = generator.GenerateFluentApiCalls((IModel)modelBuilder.Model, annotations)
+                .Single();
 
             Assert.Equal("UseHiLo", result.Method);
 
             Assert.Collection(
                 result.Arguments,
                 name => Assert.Equal("HiLoIndexName", name),
-                schema => Assert.Equal("HiLoIndexSchema", schema));
+                schema => Assert.Equal("HiLoIndexSchema", schema)
+            );
         }
 
         [ConditionalFact]
@@ -218,18 +248,23 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             var generator = CreateGenerator();
             var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-            modelBuilder.Entity("Post", x => x.Property<int>("Id").UseHiLo("HiLoIndexName", "HiLoIndexSchema"));
+            modelBuilder.Entity(
+                "Post",
+                x => x.Property<int>("Id").UseHiLo("HiLoIndexName", "HiLoIndexSchema")
+            );
             var property = modelBuilder.Model.FindEntityType("Post").FindProperty("Id");
 
             var annotations = property.GetAnnotations().ToDictionary(a => a.Name, a => a);
-            var result = generator.GenerateFluentApiCalls((IProperty)property, annotations).Single();
+            var result = generator.GenerateFluentApiCalls((IProperty)property, annotations)
+                .Single();
 
             Assert.Equal("UseHiLo", result.Method);
 
             Assert.Collection(
                 result.Arguments,
                 name => Assert.Equal("HiLoIndexName", name),
-                schema => Assert.Equal("HiLoIndexSchema", schema));
+                schema => Assert.Equal("HiLoIndexSchema", schema)
+            );
         }
 
         [ConditionalFact]
@@ -237,12 +272,15 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             var generator = CreateGenerator();
             var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-            modelBuilder.Entity("SomeEntity", x =>
-            {
-                x.Property<string>("Default");
-                x.Property<string>("Sparse").IsSparse();
-                x.Property<string>("NonSparse").IsSparse(false);
-            });
+            modelBuilder.Entity(
+                "SomeEntity",
+                x =>
+                {
+                    x.Property<string>("Default");
+                    x.Property<string>("Sparse").IsSparse();
+                    x.Property<string>("NonSparse").IsSparse(false);
+                }
+            );
 
             Assert.Null(GenerateFluentApiCall("SomeEntity", "Default"));
 
@@ -256,21 +294,27 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             MethodCallCodeFragment GenerateFluentApiCall(string entityTypeName, string propertyName)
             {
-                var property = modelBuilder.Model.FindEntityType(entityTypeName).FindProperty(propertyName);
+                var property = modelBuilder.Model.FindEntityType(entityTypeName)
+                    .FindProperty(propertyName);
                 var annotations = property.GetAnnotations().ToDictionary(a => a.Name, a => a);
-                return generator.GenerateFluentApiCalls((IProperty)property, annotations).SingleOrDefault();
+                return generator.GenerateFluentApiCalls((IProperty)property, annotations)
+                    .SingleOrDefault();
             }
         }
 
-        private SqlServerAnnotationCodeGenerator CreateGenerator()
-            => new(
+        private SqlServerAnnotationCodeGenerator CreateGenerator() =>
+            new(
                 new AnnotationCodeGeneratorDependencies(
                     new SqlServerTypeMappingSource(
                         new TypeMappingSourceDependencies(
-                            new ValueConverterSelector(
-                                new ValueConverterSelectorDependencies()),
-                            Array.Empty<ITypeMappingSourcePlugin>()),
+                            new ValueConverterSelector(new ValueConverterSelectorDependencies()),
+                            Array.Empty<ITypeMappingSourcePlugin>()
+                        ),
                         new RelationalTypeMappingSourceDependencies(
-                            Array.Empty<IRelationalTypeMappingSourcePlugin>()))));
+                            Array.Empty<IRelationalTypeMappingSourcePlugin>()
+                        )
+                    )
+                )
+            );
     }
 }

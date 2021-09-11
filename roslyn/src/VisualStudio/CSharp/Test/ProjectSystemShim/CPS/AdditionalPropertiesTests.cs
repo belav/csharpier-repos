@@ -26,8 +26,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         public async Task SetProperty_RootNamespace_CPS()
         {
             using (var environment = new TestEnvironment())
-            using (var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test"))
-            {
+            using (
+                var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test")
+            ) {
                 Assert.Null(DefaultNamespaceOfSingleProject(environment));
 
                 var rootNamespace = "Foo.Bar";
@@ -35,8 +36,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
                 Assert.Equal(rootNamespace, DefaultNamespaceOfSingleProject(environment));
             }
 
-            static string DefaultNamespaceOfSingleProject(TestEnvironment environment)
-                => environment.Workspace.CurrentSolution.Projects.Single().DefaultNamespace;
+            static string DefaultNamespaceOfSingleProject(TestEnvironment environment) =>
+                environment.Workspace.CurrentSolution.Projects.Single().DefaultNamespace;
         }
 
         [WpfTheory]
@@ -48,22 +49,31 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         [InlineData(LanguageVersion.LatestMajor)]
         [InlineData(LanguageVersion.Preview)]
         [InlineData(null)]
-        public async Task SetProperty_MaxSupportedLangVersion_CPS(LanguageVersion? maxSupportedLangVersion)
-        {
+        public async Task SetProperty_MaxSupportedLangVersion_CPS(
+            LanguageVersion? maxSupportedLangVersion
+        ) {
             const LanguageVersion attemptedVersion = LanguageVersion.CSharp8;
 
             using (var environment = new TestEnvironment(typeof(CSharpParseOptionsChangingService)))
-            using (var cpsProject = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test"))
-            {
+            using (
+                var cpsProject = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                    environment,
+                    "Test"
+                )
+            ) {
                 var project = environment.Workspace.CurrentSolution.Projects.Single();
                 var oldParseOptions = (CSharpParseOptions)project.ParseOptions;
 
-                cpsProject.SetProperty(AdditionalPropertyNames.MaxSupportedLangVersion, maxSupportedLangVersion?.ToDisplayString());
+                cpsProject.SetProperty(
+                    AdditionalPropertyNames.MaxSupportedLangVersion,
+                    maxSupportedLangVersion?.ToDisplayString()
+                );
 
                 var canApply = environment.Workspace.CanApplyParseOptionChange(
                     oldParseOptions,
                     oldParseOptions.WithLanguageVersion(attemptedVersion),
-                    project);
+                    project
+                );
 
                 if (maxSupportedLangVersion.HasValue)
                 {
@@ -82,15 +92,20 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             const LanguageVersion attemptedVersion = LanguageVersion.CSharp8;
 
             using (var environment = new TestEnvironment(typeof(CSharpParseOptionsChangingService)))
-            using (var cpsProject = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test"))
-            {
+            using (
+                var cpsProject = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                    environment,
+                    "Test"
+                )
+            ) {
                 var project = environment.Workspace.CurrentSolution.Projects.Single();
                 var oldParseOptions = (CSharpParseOptions)project.ParseOptions;
 
                 var canApply = environment.Workspace.CanApplyParseOptionChange(
                     oldParseOptions,
                     oldParseOptions.WithLanguageVersion(attemptedVersion),
-                    project);
+                    project
+                );
 
                 Assert.True(canApply);
             }
@@ -120,8 +135,11 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         [InlineData("FALSE", "", false)]
         // Invalid values ignored
         [InlineData("Invalid", "INVALID", true)]
-        public async Task SetProperty_RunAnalyzersAndRunAnalyzersDuringLiveAnalysis(string runAnalyzers, string runAnalyzersDuringLiveAnalysis, bool expectedRunAnalyzers)
-        {
+        public async Task SetProperty_RunAnalyzersAndRunAnalyzersDuringLiveAnalysis(
+            string runAnalyzers,
+            string runAnalyzersDuringLiveAnalysis,
+            bool expectedRunAnalyzers
+        ) {
             await TestCPSProject();
             TestLegacyProject();
             return;
@@ -129,32 +147,63 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             async Task TestCPSProject()
             {
                 using var environment = new TestEnvironment();
-                using var cpsProject = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test");
+                using var cpsProject = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                    environment,
+                    "Test"
+                );
 
                 cpsProject.SetProperty(AdditionalPropertyNames.RunAnalyzers, runAnalyzers);
-                cpsProject.SetProperty(AdditionalPropertyNames.RunAnalyzersDuringLiveAnalysis, runAnalyzersDuringLiveAnalysis);
+                cpsProject.SetProperty(
+                    AdditionalPropertyNames.RunAnalyzersDuringLiveAnalysis,
+                    runAnalyzersDuringLiveAnalysis
+                );
 
-                Assert.Equal(expectedRunAnalyzers, environment.Workspace.CurrentSolution.Projects.Single().State.RunAnalyzers);
+                Assert.Equal(
+                    expectedRunAnalyzers,
+                    environment.Workspace.CurrentSolution.Projects.Single().State.RunAnalyzers
+                );
             }
 
             void TestLegacyProject()
             {
                 using var environment = new TestEnvironment();
 
-                var hierarchy = environment.CreateHierarchy("CSharpProject", "Bin", projectRefPath: null, projectCapabilities: "CSharp");
+                var hierarchy = environment.CreateHierarchy(
+                    "CSharpProject",
+                    "Bin",
+                    projectRefPath: null,
+                    projectCapabilities: "CSharp"
+                );
                 var storage = Assert.IsAssignableFrom<IVsBuildPropertyStorage>(hierarchy);
 
-                Assert.True(ErrorHandler.Succeeded(
-                    storage.SetPropertyValue(
-                        AdditionalPropertyNames.RunAnalyzers, null, (uint)_PersistStorageType.PST_PROJECT_FILE, runAnalyzers)));
+                Assert.True(
+                    ErrorHandler.Succeeded(
+                        storage.SetPropertyValue(
+                            AdditionalPropertyNames.RunAnalyzers,
+                            null,
+                            (uint)_PersistStorageType.PST_PROJECT_FILE,
+                            runAnalyzers
+                        )
+                    )
+                );
 
-                Assert.True(ErrorHandler.Succeeded(
-                    storage.SetPropertyValue(
-                        AdditionalPropertyNames.RunAnalyzersDuringLiveAnalysis, null, (uint)_PersistStorageType.PST_PROJECT_FILE, runAnalyzersDuringLiveAnalysis)));
+                Assert.True(
+                    ErrorHandler.Succeeded(
+                        storage.SetPropertyValue(
+                            AdditionalPropertyNames.RunAnalyzersDuringLiveAnalysis,
+                            null,
+                            (uint)_PersistStorageType.PST_PROJECT_FILE,
+                            runAnalyzersDuringLiveAnalysis
+                        )
+                    )
+                );
 
                 _ = CSharpHelpers.CreateCSharpProject(environment, "Test", hierarchy);
 
-                Assert.Equal(expectedRunAnalyzers, environment.Workspace.CurrentSolution.Projects.Single().State.RunAnalyzers);
+                Assert.Equal(
+                    expectedRunAnalyzers,
+                    environment.Workspace.CurrentSolution.Projects.Single().State.RunAnalyzers
+                );
             }
         }
     }

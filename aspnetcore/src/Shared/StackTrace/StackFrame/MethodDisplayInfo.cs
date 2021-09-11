@@ -11,8 +11,13 @@ namespace Microsoft.Extensions.StackTrace.Sources
 {
     internal class MethodDisplayInfo
     {
-        public MethodDisplayInfo(string? declaringTypeName, string name, string? genericArguments, string? subMethod, IEnumerable<ParameterDisplayInfo> parameters)
-        {
+        public MethodDisplayInfo(
+            string? declaringTypeName,
+            string name,
+            string? genericArguments,
+            string? subMethod,
+            IEnumerable<ParameterDisplayInfo> parameters
+        ) {
             DeclaringTypeName = declaringTypeName;
             Name = name;
             GenericArguments = genericArguments;
@@ -35,9 +40,7 @@ namespace Microsoft.Extensions.StackTrace.Sources
             var builder = new StringBuilder();
             if (!string.IsNullOrEmpty(DeclaringTypeName))
             {
-                builder
-                    .Append(DeclaringTypeName)
-                    .Append(".");
+                builder.Append(DeclaringTypeName).Append(".");
             }
 
             builder.Append(Name);

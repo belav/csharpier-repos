@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             ExecutingReadItem
         }
 
-        private static readonly string _commandPrefix = DbLoggerCategory.Database.Command.Name + ".";
+        private static readonly string _commandPrefix =
+            DbLoggerCategory.Database.Command.Name + ".";
 
         /// <summary>
         ///     <para>
@@ -42,8 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
         ///     </para>
         /// </summary>
-        public static readonly EventId ExecutingSqlQuery
-            = new((int)Id.ExecutingSqlQuery, _commandPrefix + Id.ExecutingSqlQuery);
+        public static readonly EventId ExecutingSqlQuery =
+            new((int)Id.ExecutingSqlQuery, _commandPrefix + Id.ExecutingSqlQuery);
 
         /// <summary>
         ///     <para>
@@ -53,7 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
         ///     </para>
         /// </summary>
-        public static readonly EventId ExecutingReadItem
-                = new((int)Id.ExecutingReadItem, _commandPrefix + Id.ExecutingReadItem);
+        public static readonly EventId ExecutingReadItem =
+            new((int)Id.ExecutingReadItem, _commandPrefix + Id.ExecutingReadItem);
     }
 }

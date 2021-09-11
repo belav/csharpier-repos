@@ -6,9 +6,7 @@ namespace BasicTestApp.ServerReliability
 {
     public class ThrowingSetParametersAsyncComponent : IComponent
     {
-        public void Attach(RenderHandle renderHandle)
-        {
-        }
+        public void Attach(RenderHandle renderHandle) { }
 
         public async Task SetParametersAsync(ParameterView parameters)
         {

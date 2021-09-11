@@ -40,8 +40,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             DiagnosticListener diagnosticListener,
             ILoggerFactory loggerFactory,
             IActionResultTypeMapper mapper,
-            IActionContextAccessor actionContextAccessor = null)
-        {
+            IActionContextAccessor actionContextAccessor = null
+        ) {
             _pageLoader = pageLoader;
             _pageActionInvokerCache = pageActionInvokerCache;
             _valueProviderFactories = mvcOptions.Value.ValueProviderFactories.ToArray();
@@ -78,7 +78,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             {
                 // With legacy routing, we're forced to perform a blocking call. The exceptation is that
                 // in the most common case - build time views or successsively cached runtime views - this should finish synchronously.
-                page.CompiledPageDescriptor = _pageLoader.LoadAsync(page, EndpointMetadataCollection.Empty).GetAwaiter().GetResult();
+                page.CompiledPageDescriptor = _pageLoader.LoadAsync(
+                        page,
+                        EndpointMetadataCollection.Empty
+                    )
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             var (cacheEntry, filters) = _pageActionInvokerCache.GetCachedResult(actionContext);
@@ -86,8 +91,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var pageContext = new PageContext(actionContext)
             {
                 ActionDescriptor = cacheEntry.ActionDescriptor,
-                ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(_valueProviderFactories),
-                ViewData = cacheEntry.ViewDataFactory(_modelMetadataProvider, actionContext.ModelState),
+                ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(
+                    _valueProviderFactories
+                ),
+                ViewData = cacheEntry.ViewDataFactory(
+                    _modelMetadataProvider,
+                    actionContext.ModelState
+                ),
                 ViewStartFactories = cacheEntry.ViewStartFactories.ToList(),
             };
 
@@ -101,12 +111,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 filters,
                 cacheEntry,
                 _tempDataFactory,
-                _mvcViewOptions.HtmlHelperOptions);
+                _mvcViewOptions.HtmlHelperOptions
+            );
         }
 
-        public void OnProvidersExecuted(ActionInvokerProviderContext context)
-        {
-
-        }
+        public void OnProvidersExecuted(ActionInvokerProviderContext context) { }
     }
 }

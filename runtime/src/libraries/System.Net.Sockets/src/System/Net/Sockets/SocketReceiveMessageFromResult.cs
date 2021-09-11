@@ -14,7 +14,6 @@ namespace System.Net.Sockets
         public EndPoint RemoteEndPoint;
         public IPPacketInformation PacketInformation;
     }
-
     // Alternative:
     //    public struct SocketReceiveMessageFromResult
     //    {

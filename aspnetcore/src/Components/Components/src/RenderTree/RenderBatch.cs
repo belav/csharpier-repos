@@ -41,8 +41,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             ArrayRange<RenderTreeDiff> updatedComponents,
             ArrayRange<RenderTreeFrame> referenceFrames,
             ArrayRange<int> disposedComponentIDs,
-            ArrayRange<ulong> disposedEventHandlerIDs)
-        {
+            ArrayRange<ulong> disposedEventHandlerIDs
+        ) {
             UpdatedComponents = updatedComponents;
             ReferenceFrames = referenceFrames;
             DisposedComponentIDs = disposedComponentIDs;

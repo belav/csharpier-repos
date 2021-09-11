@@ -23,14 +23,20 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         {
             // Arrange
             var antiforgery = new Mock<IAntiforgery>(MockBehavior.Strict);
-            antiforgery
-                .Setup(a => a.ValidateRequestAsync(It.IsAny<HttpContext>()))
+            antiforgery.Setup(a => a.ValidateRequestAsync(It.IsAny<HttpContext>()))
                 .Returns(Task.FromResult(0))
                 .Verifiable();
 
-            var filter = new AutoValidateAntiforgeryTokenAuthorizationFilter(antiforgery.Object, NullLoggerFactory.Instance);
+            var filter = new AutoValidateAntiforgeryTokenAuthorizationFilter(
+                antiforgery.Object,
+                NullLoggerFactory.Instance
+            );
 
-            var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
             actionContext.HttpContext.Request.Method = httpMethod;
 
             var context = new AuthorizationFilterContext(actionContext, new[] { filter });
@@ -51,14 +57,20 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         {
             // Arrange
             var antiforgery = new Mock<IAntiforgery>(MockBehavior.Strict);
-            antiforgery
-                .Setup(a => a.ValidateRequestAsync(It.IsAny<HttpContext>()))
+            antiforgery.Setup(a => a.ValidateRequestAsync(It.IsAny<HttpContext>()))
                 .Returns(Task.FromResult(0))
                 .Verifiable();
 
-            var filter = new AutoValidateAntiforgeryTokenAuthorizationFilter(antiforgery.Object, NullLoggerFactory.Instance);
+            var filter = new AutoValidateAntiforgeryTokenAuthorizationFilter(
+                antiforgery.Object,
+                NullLoggerFactory.Instance
+            );
 
-            var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
             actionContext.HttpContext.Request.Method = httpMethod;
 
             var context = new AuthorizationFilterContext(actionContext, new[] { filter });
@@ -75,21 +87,26 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         {
             // Arrange
             var antiforgery = new Mock<IAntiforgery>(MockBehavior.Strict);
-            antiforgery
-                .Setup(a => a.ValidateRequestAsync(It.IsAny<HttpContext>()))
+            antiforgery.Setup(a => a.ValidateRequestAsync(It.IsAny<HttpContext>()))
                 .Returns(Task.FromResult(0))
                 .Verifiable();
 
-            var filter = new AutoValidateAntiforgeryTokenAuthorizationFilter(antiforgery.Object, NullLoggerFactory.Instance);
+            var filter = new AutoValidateAntiforgeryTokenAuthorizationFilter(
+                antiforgery.Object,
+                NullLoggerFactory.Instance
+            );
 
-            var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
             actionContext.HttpContext.Request.Method = "POST";
 
-            var context = new AuthorizationFilterContext(actionContext, new IFilterMetadata[]
-            {
-                filter,
-                new IgnoreAntiforgeryTokenAttribute(),
-            });
+            var context = new AuthorizationFilterContext(
+                actionContext,
+                new IFilterMetadata[] { filter, new IgnoreAntiforgeryTokenAttribute(), }
+            );
 
             // Act
             await filter.OnAuthorizationAsync(context);

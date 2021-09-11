@@ -15,12 +15,15 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
     internal class DefaultPageActivatorProvider : IPageActivatorProvider
     {
         private readonly Action<PageContext, ViewContext, object> _disposer = Dispose;
-        private readonly Func<PageContext, ViewContext, object, ValueTask> _asyncDisposer = AsyncDispose;
-        private readonly Func<PageContext, ViewContext, object, ValueTask> _syncAsyncDisposer = SyncAsyncDispose;
+        private readonly Func<PageContext, ViewContext, object, ValueTask> _asyncDisposer =
+            AsyncDispose;
+        private readonly Func<PageContext, ViewContext, object, ValueTask> _syncAsyncDisposer =
+            SyncAsyncDispose;
 
         /// <inheritdoc />
-        public Func<PageContext, ViewContext, object> CreateActivator(CompiledPageActionDescriptor actionDescriptor)
-        {
+        public Func<PageContext, ViewContext, object> CreateActivator(
+            CompiledPageActionDescriptor actionDescriptor
+        ) {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -29,17 +32,21 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var pageTypeInfo = actionDescriptor.PageTypeInfo?.AsType();
             if (pageTypeInfo == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(actionDescriptor.PageTypeInfo),
-                    nameof(actionDescriptor)),
-                    nameof(actionDescriptor));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(actionDescriptor.PageTypeInfo),
+                        nameof(actionDescriptor)
+                    ),
+                    nameof(actionDescriptor)
+                );
             }
 
             return CreatePageFactory(pageTypeInfo);
         }
 
-        public Action<PageContext, ViewContext, object> CreateReleaser(CompiledPageActionDescriptor actionDescriptor)
-        {
+        public Action<PageContext, ViewContext, object> CreateReleaser(
+            CompiledPageActionDescriptor actionDescriptor
+        ) {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -53,15 +60,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             return null;
         }
 
-        public Func<PageContext, ViewContext, object, ValueTask> CreateAsyncReleaser(CompiledPageActionDescriptor actionDescriptor)
-        {
+        public Func<PageContext, ViewContext, object, ValueTask> CreateAsyncReleaser(
+            CompiledPageActionDescriptor actionDescriptor
+        ) {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
             }
 
-            if (typeof(IAsyncDisposable).GetTypeInfo().IsAssignableFrom(actionDescriptor.PageTypeInfo))
-            {
+            if (
+                typeof(IAsyncDisposable).GetTypeInfo()
+                    .IsAssignableFrom(actionDescriptor.PageTypeInfo)
+            ) {
                 return _asyncDisposer;
             }
 
@@ -82,8 +92,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var newExpression = Expression.New(pageTypeInfo);
 
             // () => new Page();
-            var pageFactory = Expression
-                .Lambda<Func<PageContext, ViewContext, object>>(newExpression, parameter1, parameter2)
+            var pageFactory = Expression.Lambda<Func<PageContext, ViewContext, object>>(
+                    newExpression,
+                    parameter1,
+                    parameter2
+                )
                 .Compile();
             return pageFactory;
         }
@@ -108,14 +121,20 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             ((IDisposable)page).Dispose();
         }
 
-        private static ValueTask SyncAsyncDispose(PageContext context, ViewContext viewContext, object page)
-        {
+        private static ValueTask SyncAsyncDispose(
+            PageContext context,
+            ViewContext viewContext,
+            object page
+        ) {
             Dispose(context, viewContext, page);
             return default;
         }
 
-        private static ValueTask AsyncDispose(PageContext context, ViewContext viewContext, object page)
-        {
+        private static ValueTask AsyncDispose(
+            PageContext context,
+            ViewContext viewContext,
+            object page
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));

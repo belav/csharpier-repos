@@ -26,10 +26,10 @@ namespace Microsoft.AspNetCore.Components.Rendering
             NewSiblingIndex = newSiblingIndex;
         }
 
-        public KeyedItemInfo WithOldSiblingIndex(int oldSiblingIndex)
-            => new KeyedItemInfo(this, oldSiblingIndex, NewSiblingIndex);
+        public KeyedItemInfo WithOldSiblingIndex(int oldSiblingIndex) =>
+            new KeyedItemInfo(this, oldSiblingIndex, NewSiblingIndex);
 
-        public KeyedItemInfo WithNewSiblingIndex(int newSiblingIndex)
-            => new KeyedItemInfo(this, OldSiblingIndex, newSiblingIndex);
+        public KeyedItemInfo WithNewSiblingIndex(int newSiblingIndex) =>
+            new KeyedItemInfo(this, OldSiblingIndex, newSiblingIndex);
     }
 }

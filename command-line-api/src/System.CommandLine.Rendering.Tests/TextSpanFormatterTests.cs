@@ -22,25 +22,19 @@ namespace System.CommandLine.Rendering.Tests
         {
             var span = new TextSpanFormatter().ParseToSpan($"some text");
 
-            span.Should()
-                .BeOfType<ContentSpan>()
-                .Which
-                .Content
-                .Should()
-                .Be("some text");
+            span.Should().BeOfType<ContentSpan>().Which.Content.Should().Be("some text");
         }
 
         [Fact]
         public void A_formattable_string_containing_ansi_codes_can_be_converted_to_a_ContainerSpan()
         {
-            var span = new TextSpanFormatter().ParseToSpan($"some {StyleSpan.BlinkOn()}blinking{StyleSpan.BlinkOff()} text");
+            var span = new TextSpanFormatter().ParseToSpan(
+                $"some {StyleSpan.BlinkOn()}blinking{StyleSpan.BlinkOff()} text"
+            );
 
-            var containerSpan = span.Should()
-                                    .BeOfType<ContainerSpan>()
-                                    .Subject;
+            var containerSpan = span.Should().BeOfType<ContainerSpan>().Subject;
 
-            containerSpan
-                .Should()
+            containerSpan.Should()
                 .BeEquivalentTo(
                     new ContainerSpan(
                         new ContentSpan("some "),
@@ -49,9 +43,8 @@ namespace System.CommandLine.Rendering.Tests
                         StyleSpan.BlinkOff(),
                         new ContentSpan(" text")
                     ),
-                    options => options.WithStrictOrdering()
-                                      .Excluding(s => s.Parent)
-                                      .Excluding(s => s.Root)
+                    options =>
+                        options.WithStrictOrdering().Excluding(s => s.Parent).Excluding(s => s.Root)
                 );
         }
 
@@ -60,24 +53,21 @@ namespace System.CommandLine.Rendering.Tests
         {
             var formatter = new TextSpanFormatter();
 
-            var span = formatter
-                .ParseToSpan($"{Ansi.Color.Foreground.Red}normal{Ansi.Color.Foreground.Default:a}");
+            var span = formatter.ParseToSpan(
+                $"{Ansi.Color.Foreground.Red}normal{Ansi.Color.Foreground.Default:a}"
+            );
 
-            var containerSpan = span.Should()
-                                    .BeOfType<ContainerSpan>()
-                                    .Subject;
+            var containerSpan = span.Should().BeOfType<ContainerSpan>().Subject;
 
-            containerSpan
-                .Should()
+            containerSpan.Should()
                 .BeEquivalentTo(
                     new ContainerSpan(
                         TextSpan.Empty(),
                         new ContentSpan("normal"),
                         TextSpan.Empty()
                     ),
-                    options => options.WithStrictOrdering()
-                                      .Excluding(s => s.Parent)
-                                      .Excluding(s => s.Root)
+                    options =>
+                        options.WithStrictOrdering().Excluding(s => s.Parent).Excluding(s => s.Root)
                 );
         }
 
@@ -85,17 +75,15 @@ namespace System.CommandLine.Rendering.Tests
         [MemberData(nameof(FormattableStringsWithEscapes))]
         public void FormattableString_parsing_handles_escapes(
             FormattableString fs,
-            int expectedCount)
-        {
+            int expectedCount
+        ) {
             var formatter = new TextSpanFormatter();
 
             var span = formatter.ParseToSpan(fs);
 
             if (expectedCount > 1)
             {
-                var containerSpan = span.Should()
-                                        .BeOfType<ContainerSpan>()
-                                        .Subject;
+                var containerSpan = span.Should().BeOfType<ContainerSpan>().Subject;
 
                 output.WriteLine(containerSpan.ToString());
 
@@ -115,27 +103,22 @@ namespace System.CommandLine.Rendering.Tests
             yield return Create($"{{{Ansi.Cursor.SavePosition}}}", 3);
 
             object[] Create(FormattableString fs, int expectedCount) =>
-                new object[] {
-                    fs,
-                    expectedCount
-                };
+                new object[] { fs, expectedCount };
         }
 
         [Theory]
         [MemberData(nameof(FormattableStringsWithFormatStrings))]
         public void FormattableString_parsing_handles_format_strings(
             FormattableString fs,
-            int expectedCount)
-        {
+            int expectedCount
+        ) {
             var formatter = new TextSpanFormatter();
 
             var span = formatter.ParseToSpan(fs);
 
             if (expectedCount > 1)
             {
-                var containerSpan = span.Should()
-                                        .BeOfType<ContainerSpan>()
-                                        .Subject;
+                var containerSpan = span.Should().BeOfType<ContainerSpan>().Subject;
 
                 output.WriteLine(containerSpan.ToString());
 
@@ -148,7 +131,7 @@ namespace System.CommandLine.Rendering.Tests
         }
 
         [Fact]
-        public void  When_formatting_null_values_then_empty_span_is_returned()
+        public void When_formatting_null_values_then_empty_span_is_returned()
         {
             var formatter = new TextSpanFormatter();
 
@@ -165,10 +148,7 @@ namespace System.CommandLine.Rendering.Tests
             yield return Create($"some text and a {date:s}", 2);
 
             object[] Create(FormattableString fs, int expectedCount) =>
-                new object[] {
-                    fs,
-                    expectedCount
-                };
+                new object[] { fs, expectedCount };
         }
     }
 }

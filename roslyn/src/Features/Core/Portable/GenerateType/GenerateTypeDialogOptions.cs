@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
         public GenerateTypeDialogOptions(
             bool isPublicOnlyAccessibility = false,
             TypeKindOptions typeKindOptions = TypeKindOptions.AllOptions,
-            bool isAttribute = false)
-        {
+            bool isAttribute = false
+        ) {
             IsPublicOnlyAccessibility = isPublicOnlyAccessibility;
             TypeKindOptions = typeKindOptions;
             IsAttribute = isAttribute;

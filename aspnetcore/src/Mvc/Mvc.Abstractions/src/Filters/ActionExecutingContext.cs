@@ -27,8 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             ActionContext actionContext,
             IList<IFilterMetadata> filters,
             IDictionary<string, object?> actionArguments,
-            object controller)
-            : base(actionContext, filters)
+            object controller
+        ) : base(actionContext, filters)
         {
             if (actionArguments == null)
             {

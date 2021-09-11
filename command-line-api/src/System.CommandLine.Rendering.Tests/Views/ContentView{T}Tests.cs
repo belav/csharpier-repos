@@ -37,11 +37,11 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             view.Render(_renderer, new Region(0, 0, 3, 1));
 
-            _terminal.Events
-                    .Should()
-                    .BeEquivalentSequenceTo(
-                        new TestTerminal.CursorPositionChanged(new Point(0, 0)),
-                        new TestTerminal.ContentWritten("421"));
+            _terminal.Events.Should()
+                .BeEquivalentSequenceTo(
+                    new TestTerminal.CursorPositionChanged(new Point(0, 0)),
+                    new TestTerminal.ContentWritten("421")
+                );
         }
 
         [Fact]
@@ -94,10 +94,7 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             public TextSpan GetSpan() => Span;
 
-            public TestableContentView(T value)
-                : base(value)
-            {
-            }
+            public TestableContentView(T value) : base(value) { }
         }
     }
 }

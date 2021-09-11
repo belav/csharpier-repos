@@ -10,8 +10,7 @@ namespace System.Web.Mvc
         // default buffer size as defined in BufferedStream type
         private const int BufferSize = 0x1000;
 
-        public FileStreamResult(Stream fileStream, string contentType)
-            : base(contentType)
+        public FileStreamResult(Stream fileStream, string contentType) : base(contentType)
         {
             if (fileStream == null)
             {

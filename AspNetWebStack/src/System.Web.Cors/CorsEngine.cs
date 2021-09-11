@@ -25,8 +25,10 @@ namespace System.Web.Cors
         /// or
         /// policy
         /// </exception>
-        public virtual CorsResult EvaluatePolicy(CorsRequestContext requestContext, CorsPolicy policy)
-        {
+        public virtual CorsResult EvaluatePolicy(
+            CorsRequestContext requestContext,
+            CorsPolicy policy
+        ) {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -81,8 +83,11 @@ namespace System.Web.Cors
         /// or
         /// result
         /// </exception>
-        public virtual bool TryValidateMethod(CorsRequestContext requestContext, CorsPolicy policy, CorsResult result)
-        {
+        public virtual bool TryValidateMethod(
+            CorsRequestContext requestContext,
+            CorsPolicy policy,
+            CorsResult result
+        ) {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -96,17 +101,21 @@ namespace System.Web.Cors
                 throw new ArgumentNullException("result");
             }
 
-            if (policy.AllowAnyMethod ||
-                policy.Methods.Contains(requestContext.AccessControlRequestMethod))
-            {
+            if (
+                policy.AllowAnyMethod
+                || policy.Methods.Contains(requestContext.AccessControlRequestMethod)
+            ) {
                 result.AllowedMethods.Add(requestContext.AccessControlRequestMethod);
             }
             else
             {
-                result.ErrorMessages.Add(String.Format(
-                    CultureInfo.CurrentCulture,
-                    SRResources.MethodNotAllowed,
-                    requestContext.AccessControlRequestMethod));
+                result.ErrorMessages.Add(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        SRResources.MethodNotAllowed,
+                        requestContext.AccessControlRequestMethod
+                    )
+                );
             }
 
             return result.IsValid;
@@ -126,8 +135,11 @@ namespace System.Web.Cors
         /// or
         /// result
         /// </exception>
-        public virtual bool TryValidateHeaders(CorsRequestContext requestContext, CorsPolicy policy, CorsResult result)
-        {
+        public virtual bool TryValidateHeaders(
+            CorsRequestContext requestContext,
+            CorsPolicy policy,
+            CorsResult result
+        ) {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -141,17 +153,21 @@ namespace System.Web.Cors
                 throw new ArgumentNullException("result");
             }
 
-            if (policy.AllowAnyHeader ||
-                requestContext.AccessControlRequestHeaders.IsSubsetOf(policy.Headers))
-            {
+            if (
+                policy.AllowAnyHeader
+                || requestContext.AccessControlRequestHeaders.IsSubsetOf(policy.Headers)
+            ) {
                 AddHeaderValues(result.AllowedHeaders, requestContext.AccessControlRequestHeaders);
             }
             else
             {
-                result.ErrorMessages.Add(String.Format(
-                    CultureInfo.CurrentCulture,
-                    SRResources.HeadersNotAllowed,
-                    String.Join(",", requestContext.AccessControlRequestHeaders)));
+                result.ErrorMessages.Add(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        SRResources.HeadersNotAllowed,
+                        String.Join(",", requestContext.AccessControlRequestHeaders)
+                    )
+                );
             }
 
             return result.IsValid;
@@ -171,8 +187,11 @@ namespace System.Web.Cors
         /// or
         /// result
         /// </exception>
-        public virtual bool TryValidateOrigin(CorsRequestContext requestContext, CorsPolicy policy, CorsResult result)
-        {
+        public virtual bool TryValidateOrigin(
+            CorsRequestContext requestContext,
+            CorsPolicy policy,
+            CorsResult result
+        ) {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -205,10 +224,13 @@ namespace System.Web.Cors
                 }
                 else
                 {
-                    result.ErrorMessages.Add(String.Format(
-                        CultureInfo.CurrentCulture,
-                        SRResources.OriginNotAllowed,
-                        requestContext.Origin));
+                    result.ErrorMessages.Add(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            SRResources.OriginNotAllowed,
+                            requestContext.Origin
+                        )
+                    );
                 }
             }
             else

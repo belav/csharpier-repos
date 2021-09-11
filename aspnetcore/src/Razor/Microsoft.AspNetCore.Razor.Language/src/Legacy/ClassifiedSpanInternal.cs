@@ -5,8 +5,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 {
     internal struct ClassifiedSpanInternal
     {
-        public ClassifiedSpanInternal(SourceSpan span, SourceSpan blockSpan, SpanKindInternal spanKind, BlockKindInternal blockKind, AcceptedCharactersInternal acceptedCharacters)
-        {
+        public ClassifiedSpanInternal(
+            SourceSpan span,
+            SourceSpan blockSpan,
+            SpanKindInternal spanKind,
+            BlockKindInternal blockKind,
+            AcceptedCharactersInternal acceptedCharacters
+        ) {
             Span = span;
             BlockSpan = blockSpan;
             SpanKind = spanKind;

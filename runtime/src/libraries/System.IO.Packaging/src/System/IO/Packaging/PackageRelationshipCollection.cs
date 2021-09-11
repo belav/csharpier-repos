@@ -27,14 +27,14 @@ namespace System.IO.Packaging
             return GetEnumerator();
         }
 
-
         /// <summary>
         /// Returns an enumerator over all the relationships for a PackagePart
         /// </summary>
         /// <returns></returns>
         public IEnumerator<PackageRelationship> GetEnumerator()
         {
-            IEnumerator<PackageRelationship> relationshipsEnumerator = _relationships.GetEnumerator();
+            IEnumerator<PackageRelationship> relationshipsEnumerator =
+                _relationships.GetEnumerator();
 
             if (_filter == null)
                 return relationshipsEnumerator;
@@ -48,8 +48,10 @@ namespace System.IO.Packaging
         /// Constructor
         /// </summary>
         /// <remarks>For use by PackagePart</remarks>
-        internal PackageRelationshipCollection(InternalRelationshipCollection relationships, string? filter)
-        {
+        internal PackageRelationshipCollection(
+            InternalRelationshipCollection relationships,
+            string? filter
+        ) {
             Debug.Assert(relationships != null, "relationships parameter cannot be null");
 
             _relationships = relationships;
@@ -87,8 +89,10 @@ namespace System.IO.Packaging
                 Debug.Assert(filter != null, "PackageRelationship filter string cannot be null");
 
                 // Look for empty string or string with just spaces
-                Debug.Assert(filter.Trim() != string.Empty,
-                    "RelationshipType filter cannot be empty string or a string with just spaces");
+                Debug.Assert(
+                    filter.Trim() != string.Empty,
+                    "RelationshipType filter cannot be empty string or a string with just spaces"
+                );
 
                 _enumerator = enumerator;
                 _filter = filter;
@@ -120,10 +124,7 @@ namespace System.IO.Packaging
             /// <value></value>
             object IEnumerator.Current
             {
-                get
-                {
-                    return _enumerator.Current;
-                }
+                get { return _enumerator.Current; }
             }
 
             /// <summary>
@@ -145,10 +146,7 @@ namespace System.IO.Packaging
             /// <value></value>
             public PackageRelationship Current
             {
-                get
-                {
-                    return _enumerator.Current;
-                }
+                get { return _enumerator.Current; }
             }
 
             #endregion IEnumerator<PackageRelationship> Members
@@ -182,10 +180,8 @@ namespace System.IO.Packaging
 
             private readonly IEnumerator<PackageRelationship> _enumerator;
             private readonly string _filter;
-
             #endregion Private Members
         }
-
         #endregion FilteredEnumerator Class
 
         #endregion Private Class

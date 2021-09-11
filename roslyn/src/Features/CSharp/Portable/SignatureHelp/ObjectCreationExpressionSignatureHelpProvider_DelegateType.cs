@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             BaseObjectCreationExpressionSyntax objectCreationExpression,
             SemanticModel semanticModel,
             IAnonymousTypeDisplayService anonymousTypeDisplayService,
-            INamedTypeSymbol delegateType)
-        {
+            INamedTypeSymbol delegateType
+        ) {
             var invokeMethod = delegateType.DelegateInvokeMethod;
             if (invokeMethod == null)
             {
@@ -26,30 +26,41 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             var position = objectCreationExpression.SpanStart;
             var item = CreateItem(
-                invokeMethod, semanticModel, position,
+                invokeMethod,
+                semanticModel,
+                position,
                 anonymousTypeDisplayService,
                 isVariadic: false,
                 documentationFactory: null,
                 prefixParts: GetDelegateTypePreambleParts(invokeMethod, semanticModel, position),
                 separatorParts: GetSeparatorParts(),
                 suffixParts: GetDelegateTypePostambleParts(),
-                parameters: GetDelegateTypeParameters(invokeMethod, semanticModel, position));
+                parameters: GetDelegateTypeParameters(invokeMethod, semanticModel, position)
+            );
 
             return (SpecializedCollections.SingletonList(item), 0);
         }
 
-        private static IList<SymbolDisplayPart> GetDelegateTypePreambleParts(IMethodSymbol invokeMethod, SemanticModel semanticModel, int position)
-        {
+        private static IList<SymbolDisplayPart> GetDelegateTypePreambleParts(
+            IMethodSymbol invokeMethod,
+            SemanticModel semanticModel,
+            int position
+        ) {
             var result = new List<SymbolDisplayPart>();
 
-            result.AddRange(invokeMethod.ContainingType.ToMinimalDisplayParts(semanticModel, position));
+            result.AddRange(
+                invokeMethod.ContainingType.ToMinimalDisplayParts(semanticModel, position)
+            );
             result.Add(Punctuation(SyntaxKind.OpenParenToken));
 
             return result;
         }
 
-        private static IList<SignatureHelpSymbolParameter> GetDelegateTypeParameters(IMethodSymbol invokeMethod, SemanticModel semanticModel, int position)
-        {
+        private static IList<SignatureHelpSymbolParameter> GetDelegateTypeParameters(
+            IMethodSymbol invokeMethod,
+            SemanticModel semanticModel,
+            int position
+        ) {
             const string TargetName = "target";
 
             var parts = new List<SymbolDisplayPart>();
@@ -79,13 +90,14 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     TargetName,
                     isOptional: false,
                     documentationFactory: null,
-                    displayParts: parts));
+                    displayParts: parts
+                )
+            );
         }
 
         private static IList<SymbolDisplayPart> GetDelegateTypePostambleParts()
         {
-            return SpecializedCollections.SingletonList(
-                Punctuation(SyntaxKind.CloseParenToken));
+            return SpecializedCollections.SingletonList(Punctuation(SyntaxKind.CloseParenToken));
         }
     }
 }

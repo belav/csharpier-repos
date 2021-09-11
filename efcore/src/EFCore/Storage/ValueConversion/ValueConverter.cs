@@ -37,8 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         protected ValueConverter(
             LambdaExpression convertToProviderExpression,
             LambdaExpression convertFromProviderExpression,
-            ConverterMappingHints? mappingHints = null)
-        {
+            ConverterMappingHints? mappingHints = null
+        ) {
             Check.NotNull(convertToProviderExpression, nameof(convertToProviderExpression));
             Check.NotNull(convertFromProviderExpression, nameof(convertFromProviderExpression));
 
@@ -99,8 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         protected static Type CheckTypeSupported(
             Type type,
             Type converterType,
-            params Type[] supportedTypes)
-        {
+            params Type[] supportedTypes
+        ) {
             Check.NotNull(type, nameof(type));
             Check.NotNull(converterType, nameof(converterType));
             Check.NotEmpty(supportedTypes, nameof(supportedTypes));
@@ -111,7 +111,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     CoreStrings.ConverterBadType(
                         converterType.ShortDisplayName(),
                         type.ShortDisplayName(),
-                        string.Join(", ", supportedTypes.Select(t => $"'{t.ShortDisplayName()}'"))));
+                        string.Join(", ", supportedTypes.Select(t => $"'{t.ShortDisplayName()}'"))
+                    )
+                );
             }
 
             return type;
@@ -123,45 +125,52 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// </summary>
         /// <param name="secondConverter"> The second converter. </param>
         /// <returns> The composed converter. </returns>
-        public virtual ValueConverter ComposeWith(
-            ValueConverter? secondConverter)
+        public virtual ValueConverter ComposeWith(ValueConverter? secondConverter)
         {
             if (secondConverter == null)
             {
                 return this;
             }
 
-            if (ProviderClrType.UnwrapNullableType() != secondConverter.ModelClrType.UnwrapNullableType())
-            {
+            if (
+                ProviderClrType.UnwrapNullableType()
+                != secondConverter.ModelClrType.UnwrapNullableType()
+            ) {
                 throw new ArgumentException(
                     CoreStrings.ConvertersCannotBeComposed(
                         ModelClrType.ShortDisplayName(),
                         ProviderClrType.ShortDisplayName(),
                         secondConverter.ModelClrType.ShortDisplayName(),
-                        secondConverter.ProviderClrType.ShortDisplayName()));
+                        secondConverter.ProviderClrType.ShortDisplayName()
+                    )
+                );
             }
 
-            var firstConverter
-                = ProviderClrType.IsNullableType()
-                && !secondConverter.ModelClrType.IsNullableType()
+            var firstConverter =
+                ProviderClrType.IsNullableType() && !secondConverter.ModelClrType.IsNullableType()
                     ? ComposeWith(
-                        (ValueConverter)Activator.CreateInstance(
-                            typeof(CastingConverter<,>).MakeGenericType(
-                                ProviderClrType,
-                                secondConverter.ModelClrType),
-                            MappingHints)!)
+                          (ValueConverter)Activator.CreateInstance(
+                              typeof(CastingConverter<, >).MakeGenericType(
+                                  ProviderClrType,
+                                  secondConverter.ModelClrType
+                              ),
+                              MappingHints
+                          )!
+                      )
                     : this;
 
             return (ValueConverter)Activator.CreateInstance(
-                typeof(CompositeValueConverter<,,>).MakeGenericType(
+                typeof(CompositeValueConverter<, , >).MakeGenericType(
                     firstConverter.ModelClrType,
                     firstConverter.ProviderClrType,
-                    secondConverter.ProviderClrType),
+                    secondConverter.ProviderClrType
+                ),
                 firstConverter,
                 secondConverter,
                 secondConverter.MappingHints == null
-                    ? firstConverter.MappingHints
-                    : secondConverter.MappingHints.With(firstConverter.MappingHints))!;
+                  ? firstConverter.MappingHints
+                  : secondConverter.MappingHints.With(firstConverter.MappingHints)
+            )!;
         }
     }
 }

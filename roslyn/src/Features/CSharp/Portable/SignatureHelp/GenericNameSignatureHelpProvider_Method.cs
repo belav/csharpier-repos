@@ -12,11 +12,12 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         private static IList<SymbolDisplayPart> GetPreambleParts(
             IMethodSymbol method,
             SemanticModel semanticModel,
-            int position)
-        {
+            int position
+        ) {
             var result = new List<SymbolDisplayPart>();
 
-            var awaitable = method.GetOriginalUnreducedDefinition().IsAwaitableNonDynamic(semanticModel, position);
+            var awaitable = method.GetOriginalUnreducedDefinition()
+                .IsAwaitableNonDynamic(semanticModel, position);
             var extension = method.GetOriginalUnreducedDefinition().IsExtensionMethod();
 
             if (awaitable && extension)
@@ -52,7 +53,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 result.Add(Punctuation(SyntaxKind.DotToken));
             }
 
-            result.Add(new SymbolDisplayPart(SymbolDisplayPartKind.MethodName, method, method.Name));
+            result.Add(
+                new SymbolDisplayPart(SymbolDisplayPartKind.MethodName, method, method.Name)
+            );
             result.Add(Punctuation(SyntaxKind.LessThanToken));
 
             return result;
@@ -71,8 +74,11 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             }
         }
 
-        private static IList<SymbolDisplayPart> GetPostambleParts(IMethodSymbol method, SemanticModel semanticModel, int position)
-        {
+        private static IList<SymbolDisplayPart> GetPostambleParts(
+            IMethodSymbol method,
+            SemanticModel semanticModel,
+            int position
+        ) {
             var result = new List<SymbolDisplayPart>
             {
                 Punctuation(SyntaxKind.GreaterThanToken),

@@ -23,13 +23,22 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CommandLine
 {
-    internal delegate int CompileFunc(string[] arguments, BuildPaths buildPaths, TextWriter textWriter, IAnalyzerAssemblyLoader analyzerAssemblyLoader);
+    internal delegate int CompileFunc(
+        string[] arguments,
+        BuildPaths buildPaths,
+        TextWriter textWriter,
+        IAnalyzerAssemblyLoader analyzerAssemblyLoader
+    );
 
     internal readonly struct RunCompilationResult
     {
-        internal static readonly RunCompilationResult Succeeded = new RunCompilationResult(CommonCompiler.Succeeded);
+        internal static readonly RunCompilationResult Succeeded = new RunCompilationResult(
+            CommonCompiler.Succeeded
+        );
 
-        internal static readonly RunCompilationResult Failed = new RunCompilationResult(CommonCompiler.Failed);
+        internal static readonly RunCompilationResult Failed = new RunCompilationResult(
+            CommonCompiler.Failed
+        );
 
         internal int ExitCode { get; }
 
@@ -58,8 +67,13 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// <summary>
         /// When set it overrides all timeout values in milliseconds when communicating with the server.
         /// </summary>
-        internal BuildClient(RequestLanguage language, CompileFunc compileFunc, ICompilerServerLogger logger, CreateServerFunc createServerFunc = null, int? timeoutOverride = null)
-        {
+        internal BuildClient(
+            RequestLanguage language,
+            CompileFunc compileFunc,
+            ICompilerServerLogger logger,
+            CreateServerFunc createServerFunc = null,
+            int? timeoutOverride = null
+        ) {
             _language = language;
             _compileFunc = compileFunc;
             _logger = logger;
@@ -77,33 +91,53 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 : RuntimeEnvironment.GetRuntimeDirectory();
         }
 
-        internal static int Run(IEnumerable<string> arguments, RequestLanguage language, CompileFunc compileFunc, ICompilerServerLogger logger, Guid? requestId = null)
-        {
+        internal static int Run(
+            IEnumerable<string> arguments,
+            RequestLanguage language,
+            CompileFunc compileFunc,
+            ICompilerServerLogger logger,
+            Guid? requestId = null
+        ) {
             var sdkDir = GetSystemSdkDirectory();
             if (RuntimeHostInfo.IsCoreClrRuntime)
             {
                 // Register encodings for console
                 // https://github.com/dotnet/roslyn/issues/10785
-                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+                System.Text.Encoding.RegisterProvider(
+                    System.Text.CodePagesEncodingProvider.Instance
+                );
             }
 
             var client = new BuildClient(language, compileFunc, logger);
             var clientDir = AppContext.BaseDirectory;
             var workingDir = Directory.GetCurrentDirectory();
             var tempDir = BuildServerConnection.GetTempPath(workingDir);
-            var buildPaths = new BuildPaths(clientDir: clientDir, workingDir: workingDir, sdkDir: sdkDir, tempDir: tempDir);
+            var buildPaths = new BuildPaths(
+                clientDir: clientDir,
+                workingDir: workingDir,
+                sdkDir: sdkDir,
+                tempDir: tempDir
+            );
             var originalArguments = GetCommandLineArgs(arguments);
-            return client.RunCompilation(originalArguments, buildPaths, requestId: requestId).ExitCode;
+            return client.RunCompilation(
+                originalArguments,
+                buildPaths,
+                requestId: requestId
+            ).ExitCode;
         }
-
 
         /// <summary>
         /// Run a compilation through the compiler server and print the output
         /// to the console. If the compiler server fails, run the fallback
         /// compiler.
         /// </summary>
-        internal RunCompilationResult RunCompilation(IEnumerable<string> originalArguments, BuildPaths buildPaths, TextWriter textWriter = null, string pipeName = null, Guid? requestId = null)
-        {
+        internal RunCompilationResult RunCompilation(
+            IEnumerable<string> originalArguments,
+            BuildPaths buildPaths,
+            TextWriter textWriter = null,
+            string pipeName = null,
+            Guid? requestId = null
+        ) {
             textWriter = textWriter ?? Console.Out;
 
             var args = originalArguments.Select(arg => arg.Trim()).ToArray();
@@ -112,14 +146,16 @@ namespace Microsoft.CodeAnalysis.CommandLine
             bool hasShared;
             string keepAliveOpt;
             string errorMessageOpt;
-            if (CommandLineParser.TryParseClientArgs(
+            if (
+                CommandLineParser.TryParseClientArgs(
                     args,
                     out parsedArgs,
                     out hasShared,
                     out keepAliveOpt,
                     out string commandLinePipeName,
-                    out errorMessageOpt))
-            {
+                    out errorMessageOpt
+                )
+            ) {
                 pipeName ??= commandLinePipeName;
             }
             else
@@ -132,7 +168,15 @@ namespace Microsoft.CodeAnalysis.CommandLine
             {
                 pipeName = pipeName ?? GetPipeName(buildPaths);
                 var libDirectory = Environment.GetEnvironmentVariable("LIB");
-                var serverResult = RunServerCompilation(textWriter, parsedArgs, buildPaths, libDirectory, pipeName, keepAliveOpt, requestId);
+                var serverResult = RunServerCompilation(
+                    textWriter,
+                    parsedArgs,
+                    buildPaths,
+                    libDirectory,
+                    pipeName,
+                    keepAliveOpt,
+                    requestId
+                );
                 if (serverResult.HasValue)
                 {
                     Debug.Assert(serverResult.Value.RanOnServer);
@@ -140,8 +184,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 }
             }
 
-            // It's okay, and expected, for the server compilation to fail.  In that case just fall 
-            // back to normal compilation. 
+            // It's okay, and expected, for the server compilation to fail.  In that case just fall
+            // back to normal compilation.
             var exitCode = RunLocalCompilation(parsedArgs.ToArray(), buildPaths, textWriter);
             return new RunCompilationResult(exitCode);
         }
@@ -156,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 var profileRoot = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                     "RoslynCompiler",
-                    "ProfileOptimization");
+                    "ProfileOptimization"
+                );
                 var assemblyName = Assembly.GetExecutingAssembly().GetName();
                 var profileName = assemblyName.Name + assemblyName.Version + ".profile";
                 Directory.CreateDirectory(profileRoot);
@@ -170,15 +215,21 @@ namespace Microsoft.CodeAnalysis.CommandLine
             }
             catch (Exception e)
             {
-                errorMessage = string.Format(CodeAnalysisResources.ExceptionEnablingMulticoreJit, e.Message);
+                errorMessage = string.Format(
+                    CodeAnalysisResources.ExceptionEnablingMulticoreJit,
+                    e.Message
+                );
                 return false;
             }
 
             return true;
         }
 
-        public Task<RunCompilationResult> RunCompilationAsync(IEnumerable<string> originalArguments, BuildPaths buildPaths, TextWriter textWriter = null)
-        {
+        public Task<RunCompilationResult> RunCompilationAsync(
+            IEnumerable<string> originalArguments,
+            BuildPaths buildPaths,
+            TextWriter textWriter = null
+        ) {
             var tcs = new TaskCompletionSource<RunCompilationResult>();
             ThreadStart action = () =>
             {
@@ -199,8 +250,11 @@ namespace Microsoft.CodeAnalysis.CommandLine
             return tcs.Task;
         }
 
-        private int RunLocalCompilation(string[] arguments, BuildPaths buildPaths, TextWriter textWriter)
-        {
+        private int RunLocalCompilation(
+            string[] arguments,
+            BuildPaths buildPaths,
+            TextWriter textWriter
+        ) {
             var loader = new DefaultAnalyzerAssemblyLoader();
             return _compileFunc(arguments, buildPaths, textWriter, loader);
         }
@@ -209,8 +263,15 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// Runs the provided compilation on the server.  If the compilation cannot be completed on the server then null
         /// will be returned.
         /// </summary>
-        private RunCompilationResult? RunServerCompilation(TextWriter textWriter, List<string> arguments, BuildPaths buildPaths, string libDirectory, string pipeName, string keepAlive, Guid? requestId)
-        {
+        private RunCompilationResult? RunServerCompilation(
+            TextWriter textWriter,
+            List<string> arguments,
+            BuildPaths buildPaths,
+            string libDirectory,
+            string pipeName,
+            string keepAlive,
+            Guid? requestId
+        ) {
             BuildResponse buildResponse;
 
             if (!AreNamedPipesSupported())
@@ -224,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     buildPaths.ClientDirectory,
                     buildPaths.WorkingDirectory,
                     buildPaths.SdkDirectory,
-                    buildPaths.TempDirectory);
+                    buildPaths.TempDirectory
+                );
 
                 var buildResponseTask = BuildServerConnection.RunServerCompilationCoreAsync(
                     requestId ?? Guid.NewGuid(),
@@ -237,7 +299,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     _timeoutOverride,
                     _createServerFunc,
                     _logger,
-                    CancellationToken.None);
+                    CancellationToken.None
+                );
 
                 buildResponse = buildResponseTask.Result;
 
@@ -255,14 +318,21 @@ namespace Microsoft.CodeAnalysis.CommandLine
             switch (buildResponse.Type)
             {
                 case BuildResponse.ResponseType.Completed:
-                    {
-                        var completedResponse = (CompletedBuildResponse)buildResponse;
-                        return ConsoleUtil.RunWithUtf8Output(completedResponse.Utf8Output, textWriter, tw =>
+                {
+                    var completedResponse = (CompletedBuildResponse)buildResponse;
+                    return ConsoleUtil.RunWithUtf8Output(
+                        completedResponse.Utf8Output,
+                        textWriter,
+                        tw =>
                         {
                             tw.Write(completedResponse.Output);
-                            return new RunCompilationResult(completedResponse.ReturnCode, ranOnServer: true);
-                        });
-                    }
+                            return new RunCompilationResult(
+                                completedResponse.ReturnCode,
+                                ranOnServer: true
+                            );
+                        }
+                    );
+                }
 
                 case BuildResponse.ResponseType.MismatchedVersion:
                 case BuildResponse.ResponseType.IncorrectHash:
@@ -370,11 +440,15 @@ namespace Microsoft.CodeAnalysis.CommandLine
             }
 
             // This memory is owned by the operating system hence we shouldn't (and can't)
-            // free the memory.  
+            // free the memory.
             var commandLine = Marshal.PtrToStringUni(ptr);
 
-            // The first argument will be the executable name hence we skip it. 
-            return CommandLineParser.SplitCommandLineIntoArguments(commandLine, removeHashComments: false).Skip(1);
+            // The first argument will be the executable name hence we skip it.
+            return CommandLineParser.SplitCommandLineIntoArguments(
+                    commandLine,
+                    removeHashComments: false
+                )
+                .Skip(1);
         }
     }
 }

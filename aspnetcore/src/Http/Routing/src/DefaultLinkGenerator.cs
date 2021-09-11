@@ -30,7 +30,9 @@ namespace Microsoft.AspNetCore.Routing
         private readonly LinkOptions _globalLinkOptions;
 
         // Caches TemplateBinder instances
-        private readonly DataSourceDependentCache<ConcurrentDictionary<RouteEndpoint, TemplateBinder>> _cache;
+        private readonly DataSourceDependentCache<
+            ConcurrentDictionary<RouteEndpoint, TemplateBinder>
+        > _cache;
 
         // Used to initialize TemplateBinder instances
         private readonly Func<RouteEndpoint, TemplateBinder> _createTemplateBinder;
@@ -41,8 +43,8 @@ namespace Microsoft.AspNetCore.Routing
             EndpointDataSource dataSource,
             IOptions<RouteOptions> routeOptions,
             ILogger<DefaultLinkGenerator> logger,
-            IServiceProvider serviceProvider)
-        {
+            IServiceProvider serviceProvider
+        ) {
             _parameterPolicyFactory = parameterPolicyFactory;
             _binderFactory = binderFactory;
             _logger = logger;
@@ -50,12 +52,17 @@ namespace Microsoft.AspNetCore.Routing
 
             // We cache TemplateBinder instances per-Endpoint for performance, but we want to wipe out
             // that cache is the endpoints change so that we don't allow unbounded memory growth.
-            _cache = new DataSourceDependentCache<ConcurrentDictionary<RouteEndpoint, TemplateBinder>>(dataSource, (_) =>
-            {
-                // We don't eagerly fill this cache because there's no real reason to. Unlike URL matching, we don't
-                // need to build a big data structure up front to be correct.
-                return new ConcurrentDictionary<RouteEndpoint, TemplateBinder>();
-            });
+            _cache = new DataSourceDependentCache<
+                ConcurrentDictionary<RouteEndpoint, TemplateBinder>
+            >(
+                dataSource,
+                (_) =>
+                {
+                    // We don't eagerly fill this cache because there's no real reason to. Unlike URL matching, we don't
+                    // need to build a big data structure up front to be correct.
+                    return new ConcurrentDictionary<RouteEndpoint, TemplateBinder>();
+                }
+            );
 
             // Cached to avoid per-call allocation of a delegate on lookup.
             _createTemplateBinder = CreateTemplateBinder;
@@ -75,8 +82,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary? ambientValues = default,
             PathString? pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = null)
-        {
+            LinkOptions? options = null
+        ) {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));
@@ -95,7 +102,8 @@ namespace Microsoft.AspNetCore.Routing
                 ambientValues,
                 pathBase ?? httpContext.Request.PathBase,
                 fragment,
-                options);
+                options
+            );
         }
 
         public override string? GetPathByAddress<TAddress>(
@@ -103,8 +111,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary values,
             PathString pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = null)
-        {
+            LinkOptions? options = null
+        ) {
             var endpoints = GetEndpoints(address);
             if (endpoints.Count == 0)
             {
@@ -118,7 +126,8 @@ namespace Microsoft.AspNetCore.Routing
                 ambientValues: null,
                 pathBase: pathBase,
                 fragment: fragment,
-                options: options);
+                options: options
+            );
         }
 
         public override string? GetUriByAddress<TAddress>(
@@ -130,8 +139,8 @@ namespace Microsoft.AspNetCore.Routing
             HostString? host = default,
             PathString? pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = null)
-        {
+            LinkOptions? options = null
+        ) {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));
@@ -151,7 +160,8 @@ namespace Microsoft.AspNetCore.Routing
                 host ?? httpContext.Request.Host,
                 pathBase ?? httpContext.Request.PathBase,
                 fragment,
-                options);
+                options
+            );
         }
 
         public override string? GetUriByAddress<TAddress>(
@@ -161,8 +171,8 @@ namespace Microsoft.AspNetCore.Routing
             HostString host,
             PathString pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = null)
-        {
+            LinkOptions? options = null
+        ) {
             if (string.IsNullOrEmpty(scheme))
             {
                 throw new ArgumentException("A scheme must be provided.", nameof(scheme));
@@ -187,13 +197,18 @@ namespace Microsoft.AspNetCore.Routing
                 host: host,
                 pathBase: pathBase,
                 fragment: fragment,
-                options: options);
+                options: options
+            );
         }
 
         private List<RouteEndpoint> GetEndpoints<TAddress>(TAddress address)
         {
-            var addressingScheme = _serviceProvider.GetRequiredService<IEndpointAddressScheme<TAddress>>();
-            var endpoints = addressingScheme.FindEndpoints(address).OfType<RouteEndpoint>().ToList();
+            var addressingScheme = _serviceProvider.GetRequiredService<
+                IEndpointAddressScheme<TAddress>
+            >();
+            var endpoints = addressingScheme.FindEndpoints(address)
+                .OfType<RouteEndpoint>()
+                .ToList();
 
             if (endpoints.Count == 0)
             {
@@ -214,24 +229,27 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary? ambientValues,
             PathString pathBase,
             FragmentString fragment,
-            LinkOptions? options)
-        {
+            LinkOptions? options
+        ) {
             for (var i = 0; i < endpoints.Count; i++)
             {
                 var endpoint = endpoints[i];
-                if (TryProcessTemplate(
-                    httpContext: httpContext,
-                    endpoint: endpoint,
-                    values: values,
-                    ambientValues: ambientValues,
-                    options: options,
-                    result: out var result))
-                {
+                if (
+                    TryProcessTemplate(
+                        httpContext: httpContext,
+                        endpoint: endpoint,
+                        values: values,
+                        ambientValues: ambientValues,
+                        options: options,
+                        result: out var result
+                    )
+                ) {
                     var uri = UriHelper.BuildRelative(
                         pathBase,
                         result.path,
                         result.query,
-                        fragment);
+                        fragment
+                    );
                     Log.LinkGenerationSucceeded(_logger, endpoints, uri);
                     return uri;
                 }
@@ -250,26 +268,29 @@ namespace Microsoft.AspNetCore.Routing
             HostString host,
             PathString pathBase,
             FragmentString fragment,
-            LinkOptions? options)
-        {
+            LinkOptions? options
+        ) {
             for (var i = 0; i < endpoints.Count; i++)
             {
                 var endpoint = endpoints[i];
-                if (TryProcessTemplate(
-                    httpContext: null,
-                    endpoint: endpoint,
-                    values: values,
-                    ambientValues: ambientValues,
-                    options: options,
-                    result: out var result))
-                {
+                if (
+                    TryProcessTemplate(
+                        httpContext: null,
+                        endpoint: endpoint,
+                        values: values,
+                        ambientValues: ambientValues,
+                        options: options,
+                        result: out var result
+                    )
+                ) {
                     var uri = UriHelper.BuildAbsolute(
                         scheme,
                         host,
                         pathBase,
                         result.path,
                         result.query,
-                        fragment);
+                        fragment
+                    );
                     Log.LinkGenerationSucceeded(_logger, endpoints, uri);
                     return uri;
                 }
@@ -285,7 +306,8 @@ namespace Microsoft.AspNetCore.Routing
         }
 
         // Internal for testing
-        internal TemplateBinder GetTemplateBinder(RouteEndpoint endpoint) => _cache.EnsureInitialized().GetOrAdd(endpoint, _createTemplateBinder);
+        internal TemplateBinder GetTemplateBinder(RouteEndpoint endpoint) =>
+            _cache.EnsureInitialized().GetOrAdd(endpoint, _createTemplateBinder);
 
         // Internal for testing
         internal bool TryProcessTemplate(
@@ -294,8 +316,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary values,
             RouteValueDictionary? ambientValues,
             LinkOptions? options,
-            out (PathString path, QueryString query) result)
-        {
+            out (PathString path, QueryString query) result
+        ) {
             var templateBinder = GetTemplateBinder(endpoint);
 
             var templateValuesResult = templateBinder.GetValues(ambientValues, values);
@@ -307,15 +329,33 @@ namespace Microsoft.AspNetCore.Routing
                 return false;
             }
 
-            if (!templateBinder.TryProcessConstraints(httpContext, templateValuesResult.CombinedValues, out var parameterName, out var constraint))
-            {
+            if (
+                !templateBinder.TryProcessConstraints(
+                    httpContext,
+                    templateValuesResult.CombinedValues,
+                    out var parameterName,
+                    out var constraint
+                )
+            ) {
                 result = default;
-                Log.TemplateFailedConstraint(_logger, endpoint, parameterName, constraint, templateValuesResult.CombinedValues);
+                Log.TemplateFailedConstraint(
+                    _logger,
+                    endpoint,
+                    parameterName,
+                    constraint,
+                    templateValuesResult.CombinedValues
+                );
                 return false;
             }
 
-            if (!templateBinder.TryBindValues(templateValuesResult.AcceptedValues, options, _globalLinkOptions, out result))
-            {
+            if (
+                !templateBinder.TryBindValues(
+                    templateValuesResult.AcceptedValues,
+                    options,
+                    _globalLinkOptions,
+                    out result
+                )
+            ) {
                 Log.TemplateFailedExpansion(_logger, endpoint, templateValuesResult.AcceptedValues);
                 return false;
             }
@@ -341,70 +381,158 @@ namespace Microsoft.AspNetCore.Routing
             public static class EventIds
             {
                 public static readonly EventId EndpointsFound = new EventId(100, "EndpointsFound");
-                public static readonly EventId EndpointsNotFound = new EventId(101, "EndpointsNotFound");
+                public static readonly EventId EndpointsNotFound = new EventId(
+                    101,
+                    "EndpointsNotFound"
+                );
 
-                public static readonly EventId TemplateSucceeded = new EventId(102, "TemplateSucceeded");
-                public static readonly EventId TemplateFailedRequiredValues = new EventId(103, "TemplateFailedRequiredValues");
-                public static readonly EventId TemplateFailedConstraint = new EventId(103, "TemplateFailedConstraint");
-                public static readonly EventId TemplateFailedExpansion = new EventId(104, "TemplateFailedExpansion");
+                public static readonly EventId TemplateSucceeded = new EventId(
+                    102,
+                    "TemplateSucceeded"
+                );
+                public static readonly EventId TemplateFailedRequiredValues = new EventId(
+                    103,
+                    "TemplateFailedRequiredValues"
+                );
+                public static readonly EventId TemplateFailedConstraint = new EventId(
+                    103,
+                    "TemplateFailedConstraint"
+                );
+                public static readonly EventId TemplateFailedExpansion = new EventId(
+                    104,
+                    "TemplateFailedExpansion"
+                );
 
-                public static readonly EventId LinkGenerationSucceeded = new EventId(105, "LinkGenerationSucceeded");
-                public static readonly EventId LinkGenerationFailed = new EventId(106, "LinkGenerationFailed");
+                public static readonly EventId LinkGenerationSucceeded = new EventId(
+                    105,
+                    "LinkGenerationSucceeded"
+                );
+                public static readonly EventId LinkGenerationFailed = new EventId(
+                    106,
+                    "LinkGenerationFailed"
+                );
             }
 
-            private static readonly Action<ILogger, IEnumerable<string>, object, Exception> _endpointsFound = LoggerMessage.Define<IEnumerable<string>, object>(
+            private static readonly Action<
+                ILogger,
+                IEnumerable<string>,
+                object,
+                Exception
+            > _endpointsFound = LoggerMessage.Define<IEnumerable<string>, object>(
                 LogLevel.Debug,
                 EventIds.EndpointsFound,
                 "Found the endpoints {Endpoints} for address {Address}",
-                skipEnabledCheck: true);
+                skipEnabledCheck: true
+            );
 
-            private static readonly Action<ILogger, object, Exception> _endpointsNotFound = LoggerMessage.Define<object>(
-                LogLevel.Debug,
-                EventIds.EndpointsNotFound,
-                "No endpoints found for address {Address}");
+            private static readonly Action<ILogger, object, Exception> _endpointsNotFound =
+                LoggerMessage.Define<object>(
+                    LogLevel.Debug,
+                    EventIds.EndpointsNotFound,
+                    "No endpoints found for address {Address}"
+                );
 
-            private static readonly Action<ILogger, string, string, string, string, Exception> _templateSucceeded = LoggerMessage.Define<string, string, string, string>(
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                string,
+                string,
+                Exception
+            > _templateSucceeded = LoggerMessage.Define<string, string, string, string>(
                 LogLevel.Debug,
                 EventIds.TemplateSucceeded,
-                "Successfully processed template {Template} for {Endpoint} resulting in {Path} and {Query}");
+                "Successfully processed template {Template} for {Endpoint} resulting in {Path} and {Query}"
+            );
 
-            private static readonly Action<ILogger, string, string, string, string, string, Exception> _templateFailedRequiredValues = LoggerMessage.Define<string, string, string, string, string>(
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                string,
+                string,
+                string,
+                Exception
+            > _templateFailedRequiredValues = LoggerMessage.Define<
+                string,
+                string,
+                string,
+                string,
+                string
+            >(
                 LogLevel.Debug,
                 EventIds.TemplateFailedRequiredValues,
-                "Failed to process the template {Template} for {Endpoint}. " +
-                "A required route value is missing, or has a different value from the required default values. " +
-                "Supplied ambient values {AmbientValues} and {Values} with default values {Defaults}",
-                skipEnabledCheck: true);
+                "Failed to process the template {Template} for {Endpoint}. "
+                    + "A required route value is missing, or has a different value from the required default values. "
+                    + "Supplied ambient values {AmbientValues} and {Values} with default values {Defaults}",
+                skipEnabledCheck: true
+            );
 
-            private static readonly Action<ILogger, string, string, IRouteConstraint, string, string, Exception> _templateFailedConstraint = LoggerMessage.Define<string, string, IRouteConstraint, string, string>(
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                IRouteConstraint,
+                string,
+                string,
+                Exception
+            > _templateFailedConstraint = LoggerMessage.Define<
+                string,
+                string,
+                IRouteConstraint,
+                string,
+                string
+            >(
                 LogLevel.Debug,
                 EventIds.TemplateFailedConstraint,
-                "Failed to process the template {Template} for {Endpoint}. " +
-                "The constraint {Constraint} for parameter {ParameterName} failed with values {Values}",
-                skipEnabledCheck: true);
+                "Failed to process the template {Template} for {Endpoint}. "
+                    + "The constraint {Constraint} for parameter {ParameterName} failed with values {Values}",
+                skipEnabledCheck: true
+            );
 
-            private static readonly Action<ILogger, string, string, string, Exception> _templateFailedExpansion = LoggerMessage.Define<string, string, string>(
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                string,
+                Exception
+            > _templateFailedExpansion = LoggerMessage.Define<string, string, string>(
                 LogLevel.Debug,
                 EventIds.TemplateFailedExpansion,
-                "Failed to process the template {Template} for {Endpoint}. " +
-                "The failure occurred while expanding the template with values {Values} " +
-                "This is usually due to a missing or empty value in a complex segment",
-                skipEnabledCheck: true);
+                "Failed to process the template {Template} for {Endpoint}. "
+                    + "The failure occurred while expanding the template with values {Values} "
+                    + "This is usually due to a missing or empty value in a complex segment",
+                skipEnabledCheck: true
+            );
 
-            private static readonly Action<ILogger, IEnumerable<string>, string, Exception> _linkGenerationSucceeded = LoggerMessage.Define<IEnumerable<string>, string>(
+            private static readonly Action<
+                ILogger,
+                IEnumerable<string>,
+                string,
+                Exception
+            > _linkGenerationSucceeded = LoggerMessage.Define<IEnumerable<string>, string>(
                 LogLevel.Debug,
                 EventIds.LinkGenerationSucceeded,
                 "Link generation succeeded for endpoints {Endpoints} with result {URI}",
-                skipEnabledCheck: true);
+                skipEnabledCheck: true
+            );
 
-            private static readonly Action<ILogger, IEnumerable<string>, Exception> _linkGenerationFailed = LoggerMessage.Define<IEnumerable<string>>(
+            private static readonly Action<
+                ILogger,
+                IEnumerable<string>,
+                Exception
+            > _linkGenerationFailed = LoggerMessage.Define<IEnumerable<string>>(
                 LogLevel.Debug,
                 EventIds.LinkGenerationFailed,
                 "Link generation failed for endpoints {Endpoints}",
-                skipEnabledCheck: true);
+                skipEnabledCheck: true
+            );
 
-            public static void EndpointsFound(ILogger logger, object address, IEnumerable<Endpoint> endpoints)
-            {
+            public static void EndpointsFound(
+                ILogger logger,
+                object address,
+                IEnumerable<Endpoint> endpoints
+            ) {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
@@ -417,44 +545,97 @@ namespace Microsoft.AspNetCore.Routing
                 _endpointsNotFound(logger, address, null);
             }
 
-            public static void TemplateSucceeded(ILogger logger, RouteEndpoint endpoint, PathString path, QueryString query)
-            {
-                _templateSucceeded(logger, endpoint.RoutePattern.RawText, endpoint.DisplayName, path.Value, query.Value, null);
+            public static void TemplateSucceeded(
+                ILogger logger,
+                RouteEndpoint endpoint,
+                PathString path,
+                QueryString query
+            ) {
+                _templateSucceeded(
+                    logger,
+                    endpoint.RoutePattern.RawText,
+                    endpoint.DisplayName,
+                    path.Value,
+                    query.Value,
+                    null
+                );
             }
 
-            public static void TemplateFailedRequiredValues(ILogger logger, RouteEndpoint endpoint, RouteValueDictionary ambientValues, RouteValueDictionary values)
-            {
+            public static void TemplateFailedRequiredValues(
+                ILogger logger,
+                RouteEndpoint endpoint,
+                RouteValueDictionary ambientValues,
+                RouteValueDictionary values
+            ) {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
-                    _templateFailedRequiredValues(logger, endpoint.RoutePattern.RawText, endpoint.DisplayName, FormatRouteValues(ambientValues), FormatRouteValues(values), FormatRouteValues(endpoint.RoutePattern.Defaults), null);
+                    _templateFailedRequiredValues(
+                        logger,
+                        endpoint.RoutePattern.RawText,
+                        endpoint.DisplayName,
+                        FormatRouteValues(ambientValues),
+                        FormatRouteValues(values),
+                        FormatRouteValues(endpoint.RoutePattern.Defaults),
+                        null
+                    );
                 }
             }
 
-            public static void TemplateFailedConstraint(ILogger logger, RouteEndpoint endpoint, string parameterName, IRouteConstraint constraint, RouteValueDictionary values)
-            {
+            public static void TemplateFailedConstraint(
+                ILogger logger,
+                RouteEndpoint endpoint,
+                string parameterName,
+                IRouteConstraint constraint,
+                RouteValueDictionary values
+            ) {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
-                    _templateFailedConstraint(logger, endpoint.RoutePattern.RawText, endpoint.DisplayName, constraint, parameterName, FormatRouteValues(values), null);
+                    _templateFailedConstraint(
+                        logger,
+                        endpoint.RoutePattern.RawText,
+                        endpoint.DisplayName,
+                        constraint,
+                        parameterName,
+                        FormatRouteValues(values),
+                        null
+                    );
                 }
             }
 
-            public static void TemplateFailedExpansion(ILogger logger, RouteEndpoint endpoint, RouteValueDictionary values)
-            {
+            public static void TemplateFailedExpansion(
+                ILogger logger,
+                RouteEndpoint endpoint,
+                RouteValueDictionary values
+            ) {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
-                    _templateFailedExpansion(logger, endpoint.RoutePattern.RawText, endpoint.DisplayName, FormatRouteValues(values), null);
+                    _templateFailedExpansion(
+                        logger,
+                        endpoint.RoutePattern.RawText,
+                        endpoint.DisplayName,
+                        FormatRouteValues(values),
+                        null
+                    );
                 }
             }
 
-            public static void LinkGenerationSucceeded(ILogger logger, IEnumerable<Endpoint> endpoints, string uri)
-            {
+            public static void LinkGenerationSucceeded(
+                ILogger logger,
+                IEnumerable<Endpoint> endpoints,
+                string uri
+            ) {
                 // Checking level again to avoid allocation on the common path
                 if (logger.IsEnabled(LogLevel.Debug))
                 {
-                    _linkGenerationSucceeded(logger, endpoints.Select(e => e.DisplayName), uri, null);
+                    _linkGenerationSucceeded(
+                        logger,
+                        endpoints.Select(e => e.DisplayName),
+                        uri,
+                        null
+                    );
                 }
             }
 

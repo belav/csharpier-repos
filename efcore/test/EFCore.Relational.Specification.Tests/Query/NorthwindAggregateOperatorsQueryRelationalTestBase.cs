@@ -10,43 +10,52 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class NorthwindAggregateOperatorsQueryRelationalTestBase<TFixture> : NorthwindAggregateOperatorsQueryTestBase<TFixture>
+    public abstract class NorthwindAggregateOperatorsQueryRelationalTestBase<TFixture>
+        : NorthwindAggregateOperatorsQueryTestBase<TFixture>
         where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
     {
         protected NorthwindAggregateOperatorsQueryRelationalTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public override async Task Last_when_no_order_by(bool async)
         {
             Assert.Equal(
                 RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.Last)),
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Last_when_no_order_by(async))).Message);
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Last_when_no_order_by(async)
+                    )
+                ).Message
+            );
         }
 
         public override async Task LastOrDefault_when_no_order_by(bool async)
         {
             Assert.Equal(
                 RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.LastOrDefault)),
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.LastOrDefault_when_no_order_by(async))).Message);
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.LastOrDefault_when_no_order_by(async)
+                    )
+                ).Message
+            );
         }
 
         public override Task Contains_with_local_tuple_array_closure(bool async)
         {
-            return AssertTranslationFailed(() => base.Contains_with_local_tuple_array_closure(async));
+            return AssertTranslationFailed(
+                () => base.Contains_with_local_tuple_array_closure(async)
+            );
         }
 
-        protected virtual bool CanExecuteQueryString
-            => false;
+        protected virtual bool CanExecuteQueryString => false;
 
-        protected override QueryAsserter CreateQueryAsserter(TFixture fixture)
-            => new RelationalQueryAsserter(
+        protected override QueryAsserter CreateQueryAsserter(TFixture fixture) =>
+            new RelationalQueryAsserter(
                 fixture,
                 RewriteExpectedQueryExpression,
                 RewriteServerQueryExpression,
-                canExecuteQueryString: CanExecuteQueryString);
+                canExecuteQueryString: CanExecuteQueryString
+            );
     }
 }

@@ -62,7 +62,10 @@ namespace System.Data.Tests.SqlTypes
             ValidateProperties(value, CultureInfo.CurrentCulture, new SqlString(value));
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         [InlineData(1033, "en-US")]
         [InlineData(1036, "fr-FR")]
         public void Constructor_ValueLcid_Success(int lcid, string name)
@@ -71,11 +74,19 @@ namespace System.Data.Tests.SqlTypes
             ValidateProperties(value, new CultureInfo(name), new SqlString(value, lcid));
         }
 
-        private static void ValidateProperties(string value, CultureInfo culture, SqlString sqlString)
-        {
+        private static void ValidateProperties(
+            string value,
+            CultureInfo culture,
+            SqlString sqlString
+        ) {
             Assert.Same(value, sqlString.Value);
             Assert.False(sqlString.IsNull);
-            Assert.Equal(SqlCompareOptions.IgnoreCase | SqlCompareOptions.IgnoreKanaType | SqlCompareOptions.IgnoreWidth, sqlString.SqlCompareOptions);
+            Assert.Equal(
+                SqlCompareOptions.IgnoreCase
+                    | SqlCompareOptions.IgnoreKanaType
+                    | SqlCompareOptions.IgnoreWidth,
+                sqlString.SqlCompareOptions
+            );
             Assert.Equal(culture, sqlString.CultureInfo);
             Assert.Equal(culture.CompareInfo, sqlString.CompareInfo);
         }
@@ -84,9 +95,13 @@ namespace System.Data.Tests.SqlTypes
         public void CultureInfo_InvalidLcid_Throws()
         {
             const string value = "foo";
-            Assert.Throws<ArgumentOutOfRangeException>(() => new SqlString(value, int.MinValue).CultureInfo);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new SqlString(value, int.MinValue).CultureInfo
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => new SqlString(value, -1).CultureInfo);
-            Assert.Throws<CultureNotFoundException>(() => new SqlString(value, int.MaxValue).CultureInfo);
+            Assert.Throws<CultureNotFoundException>(
+                () => new SqlString(value, int.MaxValue).CultureInfo
+            );
         }
 
         // Test constructor
@@ -104,9 +119,11 @@ namespace System.Data.Tests.SqlTypes
                 Assert.Equal(2057, testString.LCID);
 
                 // SqlString (int, SqlCompareOptions, byte[])
-                testString = new SqlString(2057,
+                testString = new SqlString(
+                    2057,
                     SqlCompareOptions.BinarySort | SqlCompareOptions.IgnoreCase,
-                    new byte[2] { 123, 221 });
+                    new byte[2] { 123, 221 }
+                );
                 Assert.Equal(2057, testString.CompareInfo.LCID);
 
                 // SqlString(string, int, SqlCompareOptions)
@@ -114,19 +131,49 @@ namespace System.Data.Tests.SqlTypes
                 Assert.False(testString.IsNull);
 
                 // SqlString (int, SqlCompareOptions, byte[], bool)
-                testString = new SqlString(2057, SqlCompareOptions.BinarySort, new byte[4] { 100, 100, 200, 45 }, true);
+                testString = new SqlString(
+                    2057,
+                    SqlCompareOptions.BinarySort,
+                    new byte[4] { 100, 100, 200, 45 },
+                    true
+                );
                 Assert.Equal((byte)63, testString.GetNonUnicodeBytes()[0]);
-                testString = new SqlString(2057, SqlCompareOptions.BinarySort, new byte[2] { 113, 100 }, false);
+                testString = new SqlString(
+                    2057,
+                    SqlCompareOptions.BinarySort,
+                    new byte[2] { 113, 100 },
+                    false
+                );
                 Assert.Equal("qd", testString.Value);
 
                 // SqlString (int, SqlCompareOptions, byte[], int, int)
-                testString = new SqlString(2057, SqlCompareOptions.BinarySort, new byte[2] { 113, 100 }, 0, 2);
+                testString = new SqlString(
+                    2057,
+                    SqlCompareOptions.BinarySort,
+                    new byte[2] { 113, 100 },
+                    0,
+                    2
+                );
                 Assert.False(testString.IsNull);
 
                 // SqlString (int, SqlCompareOptions, byte[], int, int, bool)
-                testString = new SqlString(2057, SqlCompareOptions.IgnoreCase, new byte[3] { 100, 111, 50 }, 1, 2, false);
+                testString = new SqlString(
+                    2057,
+                    SqlCompareOptions.IgnoreCase,
+                    new byte[3] { 100, 111, 50 },
+                    1,
+                    2,
+                    false
+                );
                 Assert.Equal("o2", testString.Value);
-                testString = new SqlString(2057, SqlCompareOptions.IgnoreCase, new byte[3] { 123, 111, 222 }, 1, 2, true);
+                testString = new SqlString(
+                    2057,
+                    SqlCompareOptions.IgnoreCase,
+                    new byte[3] { 123, 111, 222 },
+                    1,
+                    2,
+                    true
+                );
                 Assert.False(testString.IsNull);
             }
         }
@@ -134,19 +181,35 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void CtorArgumentOutOfRangeException1()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                SqlString TestString = new SqlString(2057, SqlCompareOptions.BinarySort, new byte[2] { 113, 100 }, 2, 1);
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    SqlString TestString = new SqlString(
+                        2057,
+                        SqlCompareOptions.BinarySort,
+                        new byte[2] { 113, 100 },
+                        2,
+                        1
+                    );
+                }
+            );
         }
 
         [Fact]
         public void CtorArgumentOutOfRangeException2()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                SqlString TestString = new SqlString(2057, SqlCompareOptions.BinarySort, new byte[2] { 113, 100 }, 0, 4);
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    SqlString TestString = new SqlString(
+                        2057,
+                        SqlCompareOptions.BinarySort,
+                        new byte[2] { 113, 100 },
+                        0,
+                        4
+                    );
+                }
+            );
         }
 
         // Test public fields
@@ -173,7 +236,10 @@ namespace System.Data.Tests.SqlTypes
         }
 
         // Test properties
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void Properties()
         {
             using (new ThreadCultureChange("en-AU"))
@@ -194,7 +260,10 @@ namespace System.Data.Tests.SqlTypes
                 Assert.True(SqlString.Null.IsNull);
 
                 // SqlCompareOptions
-                Assert.Equal("IgnoreCase, IgnoreKanaType, IgnoreWidth", one.SqlCompareOptions.ToString());
+                Assert.Equal(
+                    "IgnoreCase, IgnoreKanaType, IgnoreWidth",
+                    one.SqlCompareOptions.ToString()
+                );
 
                 // Value
                 Assert.Equal("First TestString", one.Value);
@@ -210,7 +279,10 @@ namespace System.Data.Tests.SqlTypes
             AssertExtensions.Throws<ArgumentException>(null, () => _test1.CompareTo(test));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void CompareToSqlTypeException()
         {
             SqlString t1 = new SqlString("test", 2057, SqlCompareOptions.IgnoreCase);
@@ -218,7 +290,10 @@ namespace System.Data.Tests.SqlTypes
             Assert.Throws<SqlTypeException>(() => t1.CompareTo(t2));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void CompareTo()
         {
             Assert.True(_test1.CompareTo(_test3) < 0);
@@ -317,7 +392,10 @@ namespace System.Data.Tests.SqlTypes
             _test2 = new SqlString("This is just a test SqlString");
             _test3 = new SqlString("This is just a test SqlString");
 
-            Assert.Equal("First TestStringThis is just a test SqlString", SqlString.Concat(_test1, _test2));
+            Assert.Equal(
+                "First TestStringThis is just a test SqlString",
+                SqlString.Concat(_test1, _test2)
+            );
             Assert.Equal(SqlString.Null, SqlString.Concat(_test1, SqlString.Null));
         }
 
@@ -331,13 +409,17 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void CompareOptionsFromSqlCompareOptions()
         {
-            Assert.Equal(CompareOptions.IgnoreCase,
-                SqlString.CompareOptionsFromSqlCompareOptions(
-                SqlCompareOptions.IgnoreCase));
-            Assert.Equal(CompareOptions.IgnoreCase,
-                SqlString.CompareOptionsFromSqlCompareOptions(
-                SqlCompareOptions.IgnoreCase));
-            Assert.Throws<ArgumentOutOfRangeException>(() => SqlString.CompareOptionsFromSqlCompareOptions(SqlCompareOptions.BinarySort));
+            Assert.Equal(
+                CompareOptions.IgnoreCase,
+                SqlString.CompareOptionsFromSqlCompareOptions(SqlCompareOptions.IgnoreCase)
+            );
+            Assert.Equal(
+                CompareOptions.IgnoreCase,
+                SqlString.CompareOptionsFromSqlCompareOptions(SqlCompareOptions.IgnoreCase)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => SqlString.CompareOptionsFromSqlCompareOptions(SqlCompareOptions.BinarySort)
+            );
         }
 
         [Fact]
@@ -365,125 +447,151 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void ConversionBoolFormatException1()
         {
-            Assert.Throws<FormatException>(() =>
-            {
-                bool test = _test1.ToSqlBoolean().Value;
-            });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    bool test = _test1.ToSqlBoolean().Value;
+                }
+            );
         }
 
         [Fact]
         public void ConversionByteFormatException()
         {
-            Assert.Throws<FormatException>(() =>
-            {
-                byte test = _test1.ToSqlByte().Value;
-            });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    byte test = _test1.ToSqlByte().Value;
+                }
+            );
         }
 
         [Fact]
         public void ConversionDecimalFormatException1()
         {
-            Assert.Throws<FormatException>(() =>
-            {
-                decimal d = _test1.ToSqlDecimal().Value;
-            });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    decimal d = _test1.ToSqlDecimal().Value;
+                }
+            );
         }
 
         [Fact]
         public void ConversionDecimalFormatException2()
         {
             SqlString String9E300 = new SqlString("9E+300");
-            Assert.Throws<FormatException>(() =>
-            {
-                SqlDecimal test = String9E300.ToSqlDecimal();
-            });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    SqlDecimal test = String9E300.ToSqlDecimal();
+                }
+            );
         }
 
         [Fact]
         public void ConversionGuidFormatException()
         {
             SqlString String9E300 = new SqlString("9E+300");
-            Assert.Throws<FormatException>(() =>
-            {
-                SqlGuid test = String9E300.ToSqlGuid();
-            });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    SqlGuid test = String9E300.ToSqlGuid();
+                }
+            );
         }
 
         [Fact]
         public void ConversionInt16FormatException()
         {
-            Assert.Throws<FormatException>(() =>
-            {
-                SqlString String9E300 = new SqlString("9E+300");
-                SqlInt16 test = String9E300.ToSqlInt16().Value;
-            });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    SqlString String9E300 = new SqlString("9E+300");
+                    SqlInt16 test = String9E300.ToSqlInt16().Value;
+                }
+            );
         }
 
         [Fact]
         public void ConversionInt32FormatException1()
         {
-            Assert.Throws<FormatException>(() =>
-            {
-                SqlString String9E300 = new SqlString("9E+300");
-                SqlInt32 test = String9E300.ToSqlInt32().Value;
-            });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    SqlString String9E300 = new SqlString("9E+300");
+                    SqlInt32 test = String9E300.ToSqlInt32().Value;
+                }
+            );
         }
 
         [Fact]
         public void ConversionInt32FormatException2()
         {
-            Assert.Throws<FormatException>(() =>
-            {
-                SqlInt32 test = _test1.ToSqlInt32().Value;
-            });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    SqlInt32 test = _test1.ToSqlInt32().Value;
+                }
+            );
         }
 
         [Fact]
         public void ConversionInt64FormatException()
         {
-            Assert.Throws<FormatException>(() =>
-            {
-                SqlString String9E300 = new SqlString("9E+300");
-                SqlInt64 test = String9E300.ToSqlInt64().Value;
-            });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    SqlString String9E300 = new SqlString("9E+300");
+                    SqlInt64 test = String9E300.ToSqlInt64().Value;
+                }
+            );
         }
 
         [Fact]
         public void ConversionIntMoneyFormatException2()
         {
-            Assert.Throws<FormatException>(() =>
-            {
-                SqlString String9E300 = new SqlString("9E+300");
-                SqlMoney test = String9E300.ToSqlMoney().Value;
-            });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    SqlString String9E300 = new SqlString("9E+300");
+                    SqlMoney test = String9E300.ToSqlMoney().Value;
+                }
+            );
         }
 
         [Fact]
         public void ConversionByteOverflowException()
         {
-            Assert.Throws<OverflowException>(() =>
-            {
-                SqlByte b = (new SqlString("2500")).ToSqlByte();
-            });
+            Assert.Throws<OverflowException>(
+                () =>
+                {
+                    SqlByte b = (new SqlString("2500")).ToSqlByte();
+                }
+            );
         }
 
         [Fact]
         public void ConversionDoubleOverflowException()
         {
-            Assert.Throws<OverflowException>(() =>
-            {
-                SqlDouble test = (new SqlString("4e400")).ToSqlDouble();
-            });
+            Assert.Throws<OverflowException>(
+                () =>
+                {
+                    SqlDouble test = (new SqlString("4e400")).ToSqlDouble();
+                }
+            );
         }
 
         [Fact]
         public void ConversionSingleOverflowException()
         {
-            Assert.Throws<OverflowException>(() =>
-            {
-                SqlString String9E300 = new SqlString("9E+300");
-                SqlSingle test = String9E300.ToSqlSingle().Value;
-            });
+            Assert.Throws<OverflowException>(
+                () =>
+                {
+                    SqlString String9E300 = new SqlString("9E+300");
+                    SqlSingle test = String9E300.ToSqlSingle().Value;
+                }
+            );
         }
 
         [Fact]
@@ -613,7 +721,10 @@ namespace System.Data.Tests.SqlTypes
         public void SqlDateTimeToSqlString()
         {
             SqlDateTime testTime = new SqlDateTime(2002, 10, 22, 9, 52, 30);
-            Assert.Equal(testTime.Value.ToString((IFormatProvider)null), ((SqlString)testTime).Value);
+            Assert.Equal(
+                testTime.Value.ToString((IFormatProvider)null),
+                ((SqlString)testTime).Value
+            );
         }
 
         [Fact]
@@ -698,8 +809,14 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void AddSqlString()
         {
-            Assert.Equal("First TestStringThis is just a test SqlString", (string)(SqlString.Add(_test1, _test2)));
-            Assert.Equal("First TestStringPlainString", (string)(SqlString.Add(_test1, "PlainString")));
+            Assert.Equal(
+                "First TestStringThis is just a test SqlString",
+                (string)(SqlString.Add(_test1, _test2))
+            );
+            Assert.Equal(
+                "First TestStringPlainString",
+                (string)(SqlString.Add(_test1, "PlainString"))
+            );
             Assert.True(SqlString.Add(_test1, null).IsNull);
         }
 
@@ -710,9 +827,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal("string", qualifiedName.Name);
         }
 
-        internal void ReadWriteXmlTestInternal(string xml,
-                               string testval,
-                               string unit_test_id)
+        internal void ReadWriteXmlTestInternal(string xml, string testval, string unit_test_id)
         {
             SqlString test;
             SqlString test1;
@@ -741,7 +856,8 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void ReadWriteXmlTest()
         {
-            string xml1 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><string>This is a test string</string>";
+            string xml1 =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><string>This is a test string</string>";
             string xml2 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><string>a</string>";
             string strtest1 = "This is a test string";
             char strtest2 = 'a';

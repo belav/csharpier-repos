@@ -21,8 +21,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             IOptions<LibuvTransportOptions> options,
 #pragma warning restore CS0618
             IHostApplicationLifetime applicationLifetime,
-            ILoggerFactory loggerFactory)
-        {
+            ILoggerFactory loggerFactory
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -36,7 +36,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 throw new ArgumentNullException(nameof(loggerFactory));
             }
 
-            var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv");
+            var logger = loggerFactory.CreateLogger(
+                "Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
+            );
             var trace = new LibuvTrace(logger);
 
 #pragma warning disable CS0618
@@ -45,9 +47,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
             if (threadCount <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(threadCount),
+                throw new ArgumentOutOfRangeException(
+                    nameof(threadCount),
                     threadCount,
-                    "ThreadCount must be positive.");
+                    "ThreadCount must be positive."
+                );
             }
 
             if (!LibuvConstants.ECONNRESET.HasValue)
@@ -68,8 +72,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             };
         }
 
-        public async ValueTask<IConnectionListener> BindAsync(EndPoint endpoint, CancellationToken cancellationToken = default)
-        {
+        public async ValueTask<IConnectionListener> BindAsync(
+            EndPoint endpoint,
+            CancellationToken cancellationToken = default
+        ) {
             var transportContext = new LibuvTransportContext
             {
                 Options = _baseTransportContext.Options,

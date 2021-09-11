@@ -53,8 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///         with regard to this migration.
         ///     </para>
         /// </summary>
-        public virtual IReadOnlyList<MigrationOperation> UpOperations
-            => _upOperations ??= BuildOperations(Up);
+        public virtual IReadOnlyList<MigrationOperation> UpOperations =>
+            _upOperations ??= BuildOperations(Up);
 
         /// <summary>
         ///     <para>
@@ -66,8 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///         state that it was in before this migration was applied.
         ///     </para>
         /// </summary>
-        public virtual IReadOnlyList<MigrationOperation> DownOperations
-            => _downOperations ??= BuildOperations(Down);
+        public virtual IReadOnlyList<MigrationOperation> DownOperations =>
+            _downOperations ??= BuildOperations(Down);
 
         /// <summary>
         ///     <para>
@@ -85,9 +85,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     Implemented to build the <see cref="TargetModel" />.
         /// </summary>
         /// <param name="modelBuilder"> The <see cref="ModelBuilder" /> to use to build the model. </param>
-        protected virtual void BuildTargetModel(ModelBuilder modelBuilder)
-        {
-        }
+        protected virtual void BuildTargetModel(ModelBuilder modelBuilder) { }
 
         /// <summary>
         ///     <para>
@@ -119,8 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     </para>
         /// </summary>
         /// <param name="migrationBuilder"> The <see cref="MigrationBuilder" /> that will build the operations. </param>
-        protected virtual void Down(MigrationBuilder migrationBuilder)
-            => throw new NotSupportedException(RelationalStrings.MigrationDownMissing);
+        protected virtual void Down(MigrationBuilder migrationBuilder) =>
+            throw new NotSupportedException(RelationalStrings.MigrationDownMissing);
 
         private List<MigrationOperation> BuildOperations(Action<MigrationBuilder> buildAction)
         {

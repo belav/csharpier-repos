@@ -167,7 +167,10 @@ namespace System.Xml.Tests
     {
     }
 
-    [TestCase(Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)", Desc = "CharCheckingReader")]
+    [TestCase(
+        Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)",
+        Desc = "CharCheckingReader"
+    )]
     public class TCMoveToAttributeReader : TCMoveToAttribute
     {
     }
@@ -177,7 +180,10 @@ namespace System.Xml.Tests
     {
     }
 
-    [TestCase(Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)", Desc = "CharCheckingReader")]
+    [TestCase(
+        Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)",
+        Desc = "CharCheckingReader"
+    )]
     public class TCGetAttributeNameReader : TCGetAttributeName
     {
     }

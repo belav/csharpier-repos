@@ -18,7 +18,12 @@ namespace System.Net.Http.Functional.Tests
             private readonly TaskCompletionSource<bool> _sendingDone;
             private int _iteration;
 
-            internal SlowTestStream(byte[] content, TaskCompletionSource<bool> tsc, int count=10, int trigger=1) : base(content, false)
+            internal SlowTestStream(
+                byte[] content,
+                TaskCompletionSource<bool> tsc,
+                int count = 10,
+                int trigger = 1
+            ) : base(content, false)
             {
                 _sendingDone = tsc;
                 _trigger = trigger;
@@ -26,8 +31,11 @@ namespace System.Net.Http.Functional.Tests
                 _content = content;
             }
 
-            public override async Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
-            {
+            public override async Task CopyToAsync(
+                Stream destination,
+                int bufferSize,
+                CancellationToken cancellationToken
+            ) {
                 var buffer = new byte[bufferSize];
                 int bytesRead;
                 while ((bytesRead = await ReadAsync(buffer, cancellationToken)) != 0)
@@ -37,8 +45,10 @@ namespace System.Net.Http.Functional.Tests
                 }
             }
 
-            public async override ValueTask<int> ReadAsync(Memory<byte> destination, CancellationToken cancellationToken)
-            {
+            public async override ValueTask<int> ReadAsync(
+                Memory<byte> destination,
+                CancellationToken cancellationToken
+            ) {
                 if (_failException != null)
                 {
                     throw _failException;

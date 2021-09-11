@@ -52,9 +52,7 @@ namespace XmlCoreTest.Common
     {
         public class ReaderUtilException : XmlException
         {
-            public ReaderUtilException(string msg) : base(msg)
-            {
-            }
+            public ReaderUtilException(string msg) : base(msg) { }
         }
     }
 
@@ -86,7 +84,6 @@ namespace XmlCoreTest.Common
         public string iterContent = null;
         public StringBuilder nodeValue = new StringBuilder();
 
-
         //Overloaded Constructor.
         public BufferBoundary(string sTag, string eTag, string cntt, int buffLen)
         {
@@ -107,7 +104,8 @@ namespace XmlCoreTest.Common
             memoryStream.WriteString(xmlDecl);
             memoryStream.WriteString(rootStart);
             memoryStream.WriteString(
-                GetSpaces(bufferBoundaryLength - (xmlDecl.Length + rootStart.Length) * 2));
+                GetSpaces(bufferBoundaryLength - (xmlDecl.Length + rootStart.Length) * 2)
+            );
             _prepared = true;
         }
 
@@ -119,7 +117,11 @@ namespace XmlCoreTest.Common
             memoryStream.WriteString(xmlDecl);
             memoryStream.WriteString(rootStart);
             memoryStream.WriteString(xml);
-            memoryStream.WriteString(GetSpaces(bufferBoundaryLength - (xmlDecl.Length + rootStart.Length + xml.Length) * 2));
+            memoryStream.WriteString(
+                GetSpaces(
+                    bufferBoundaryLength - (xmlDecl.Length + rootStart.Length + xml.Length) * 2
+                )
+            );
             _prepared = true;
         }
 
@@ -171,28 +173,49 @@ namespace XmlCoreTest.Common
                 }
 
                 if (s_debug)
-                    CError.Write((bufferBoundaryLength - nodeValue.Length * 2 - startText.Length * 2 - endText.Length * 2 - iterContent.Length * 2) + "|");
+                    CError.Write(
+                        (
+                            bufferBoundaryLength
+                            - nodeValue.Length * 2
+                            - startText.Length * 2
+                            - endText.Length * 2
+                            - iterContent.Length * 2
+                        ) + "|"
+                    );
 
-                if (bufferBoundaryLength - nodeValue.Length * 2 - startText.Length * 2 - endText.Length * 2 - iterContent.Length * 2 < 0)
-                {
+                if (
+                    bufferBoundaryLength
+                        - nodeValue.Length * 2
+                        - startText.Length * 2
+                        - endText.Length * 2
+                        - iterContent.Length * 2
+                    < 0
+                ) {
                     break;
                 }
                 nodeValue.Append(iterContent);
                 memoryStream.WriteString(iterContent);
             }
 
-            if (s_debug) CError.WriteLine("\nCount = " + (count - 1));
-            if (s_debug) CError.WriteLine("Stream Length = " + nodeValue.Length);
-            if (s_debug) CError.WriteLine("Stream Length after tagContent tag = " + memoryStream.Length);
-            if (s_debug) CError.WriteLine("Node Value = " + nodeValue);
+            if (s_debug)
+                CError.WriteLine("\nCount = " + (count - 1));
+            if (s_debug)
+                CError.WriteLine("Stream Length = " + nodeValue.Length);
+            if (s_debug)
+                CError.WriteLine("Stream Length after tagContent tag = " + memoryStream.Length);
+            if (s_debug)
+                CError.WriteLine("Node Value = " + nodeValue);
 
-            long spaces = bufferBoundaryLength - (nodeValue.Length + endText.Length + startText.Length) * 2;
-            if (s_debug) CError.WriteLine("Spaces Requested = " + spaces / 2);
+            long spaces =
+                bufferBoundaryLength - (nodeValue.Length + endText.Length + startText.Length) * 2;
+            if (s_debug)
+                CError.WriteLine("Spaces Requested = " + spaces / 2);
             nodeValue.Append(GetSpaces(spaces));
             memoryStream.WriteString(GetSpaces(spaces));
             memoryStream.WriteString(endText);
 
-            if (s_debug) CError.WriteLine("Stream Length before FinishStream = " + memoryStream.Length);
+            if (s_debug)
+                CError.WriteLine("Stream Length before FinishStream = " + memoryStream.Length);
 
             return memoryStream;
         }
@@ -216,5 +239,5 @@ namespace XmlCoreTest.Common
             FinishStream();
             return memoryStream;
         }
-    }//End BufferBoundary
+    } //End BufferBoundary
 }

@@ -47,7 +47,8 @@ namespace Internal.Cryptography.Pal
 
             throw new CryptographicException(
                 SR.Cryptography_Unix_X509_NoDisallowedStore,
-                new PlatformNotSupportedException(SR.Cryptography_Unix_X509_NoDisallowedStore));
+                new PlatformNotSupportedException(SR.Cryptography_Unix_X509_NoDisallowedStore)
+            );
         }
 
         public void Remove(ICertificatePal cert)

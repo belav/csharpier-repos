@@ -19,22 +19,32 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         public EmbeddedLanguagesClassifier(IEmbeddedLanguagesProvider languagesProvider)
         {
             _languagesProvider = languagesProvider;
-            SyntaxTokenKinds =
-                languagesProvider.Languages.Where(p => p.Classifier != null)
-                                           .SelectMany(p => p.Classifier.SyntaxTokenKinds)
-                                           .Distinct()
-                                           .ToImmutableArray();
+            SyntaxTokenKinds = languagesProvider.Languages.Where(p => p.Classifier != null)
+                .SelectMany(p => p.Classifier.SyntaxTokenKinds)
+                .Distinct()
+                .ToImmutableArray();
         }
 
-        public override void AddClassifications(Workspace workspace, SyntaxToken token, SemanticModel semanticModel, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
-        {
+        public override void AddClassifications(
+            Workspace workspace,
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        ) {
             foreach (var language in _languagesProvider.Languages)
             {
                 var classifier = language.Classifier;
                 if (classifier != null)
                 {
                     var count = result.Count;
-                    classifier.AddClassifications(workspace, token, semanticModel, result, cancellationToken);
+                    classifier.AddClassifications(
+                        workspace,
+                        token,
+                        semanticModel,
+                        result,
+                        cancellationToken
+                    );
                     if (result.Count != count)
                     {
                         // This classifier added values.  No need to check the other ones.

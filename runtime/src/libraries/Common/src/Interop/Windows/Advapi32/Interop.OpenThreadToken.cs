@@ -11,21 +11,43 @@ internal static partial class Interop
     internal static partial class Advapi32
     {
         [DllImport(Interop.Libraries.Advapi32, SetLastError = true)]
-        private static extern bool OpenThreadToken(IntPtr ThreadHandle, TokenAccessLevels dwDesiredAccess, bool bOpenAsSelf, out SafeAccessTokenHandle phThreadToken);
+        private static extern bool OpenThreadToken(
+            IntPtr ThreadHandle,
+            TokenAccessLevels dwDesiredAccess,
+            bool bOpenAsSelf,
+            out SafeAccessTokenHandle phThreadToken
+        );
 
-        internal static bool OpenThreadToken(TokenAccessLevels desiredAccess, WinSecurityContext openAs, out SafeAccessTokenHandle tokenHandle)
-        {
+        internal static bool OpenThreadToken(
+            TokenAccessLevels desiredAccess,
+            WinSecurityContext openAs,
+            out SafeAccessTokenHandle tokenHandle
+        ) {
             bool openAsSelf = true;
             if (openAs == WinSecurityContext.Thread)
                 openAsSelf = false;
 
-            if (OpenThreadToken(Kernel32.GetCurrentThread(), desiredAccess, openAsSelf, out tokenHandle))
+            if (
+                OpenThreadToken(
+                    Kernel32.GetCurrentThread(),
+                    desiredAccess,
+                    openAsSelf,
+                    out tokenHandle
+                )
+            )
                 return true;
 
             if (openAs == WinSecurityContext.Both)
             {
                 openAsSelf = false;
-                if (OpenThreadToken(Kernel32.GetCurrentThread(), desiredAccess, openAsSelf, out tokenHandle))
+                if (
+                    OpenThreadToken(
+                        Kernel32.GetCurrentThread(),
+                        desiredAccess,
+                        openAsSelf,
+                        out tokenHandle
+                    )
+                )
                     return true;
             }
 

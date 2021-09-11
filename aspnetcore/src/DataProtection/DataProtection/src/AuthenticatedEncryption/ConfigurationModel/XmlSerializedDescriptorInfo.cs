@@ -20,8 +20,10 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         /// <param name="serializedDescriptorElement">The XML-serialized form of the <see cref="IAuthenticatedEncryptorDescriptor"/>.</param>
         /// <param name="deserializerType">The class whose <see cref="IAuthenticatedEncryptorDescriptorDeserializer.ImportFromXml(XElement)"/>
         /// method can be used to deserialize <paramref name="serializedDescriptorElement"/>.</param>
-        public XmlSerializedDescriptorInfo(XElement serializedDescriptorElement, Type deserializerType)
-        {
+        public XmlSerializedDescriptorInfo(
+            XElement serializedDescriptorElement,
+            Type deserializerType
+        ) {
             if (serializedDescriptorElement == null)
             {
                 throw new ArgumentNullException(nameof(serializedDescriptorElement));
@@ -32,11 +34,18 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                 throw new ArgumentNullException(nameof(deserializerType));
             }
 
-            if (!typeof(IAuthenticatedEncryptorDescriptorDeserializer).IsAssignableFrom(deserializerType))
-            {
+            if (
+                !typeof(IAuthenticatedEncryptorDescriptorDeserializer).IsAssignableFrom(
+                    deserializerType
+                )
+            ) {
                 throw new ArgumentException(
-                    Resources.FormatTypeExtensions_BadCast(deserializerType.FullName, typeof(IAuthenticatedEncryptorDescriptorDeserializer).FullName),
-                    nameof(deserializerType));
+                    Resources.FormatTypeExtensions_BadCast(
+                        deserializerType.FullName,
+                        typeof(IAuthenticatedEncryptorDescriptorDeserializer).FullName
+                    ),
+                    nameof(deserializerType)
+                );
             }
 
             SerializedDescriptorElement = serializedDescriptorElement;

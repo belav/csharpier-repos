@@ -12,7 +12,6 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// Get form method.
         /// </summary>
         Get,
-
         /// <summary>
         /// Post form method.
         /// </summary>

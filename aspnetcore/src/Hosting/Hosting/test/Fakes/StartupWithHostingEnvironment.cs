@@ -10,9 +10,6 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
             env.EnvironmentName = "Changed";
         }
 
-        public void Configure(IApplicationBuilder app)
-        {
-
-        }
+        public void Configure(IApplicationBuilder app) { }
     }
 }

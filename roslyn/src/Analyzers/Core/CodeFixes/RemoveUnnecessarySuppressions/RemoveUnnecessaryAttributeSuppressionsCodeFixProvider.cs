@@ -16,24 +16,30 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryAttributeSuppressions), Shared]
-    internal sealed class RemoveUnnecessaryAttributeSuppressionsCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryAttributeSuppressions
+        ),
+        Shared
+    ]
+    internal sealed class RemoveUnnecessaryAttributeSuppressionsCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoveUnnecessaryAttributeSuppressionsCodeFixProvider()
-        {
-        }
+        public RemoveUnnecessaryAttributeSuppressionsCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.InvalidSuppressMessageAttributeDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.InvalidSuppressMessageAttributeDiagnosticId);
 
-        internal override CodeFixCategory CodeFixCategory
-            => CodeFixCategory.CodeQuality;
+        internal override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeQuality;
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetRequiredSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await context.Document.GetRequiredSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             foreach (var diagnostic in context.Diagnostics)
             {
                 // Register code fix with a defensive check
@@ -41,13 +47,18 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 {
                     context.RegisterCodeFix(
                         new MyCodeAction(c => FixAsync(context.Document, diagnostic, c)),
-                        diagnostic);
+                        diagnostic
+                    );
                 }
             }
         }
 
-        protected override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CancellationToken cancellationToken)
-        {
+        protected override Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
             foreach (var diagnostic in diagnostics)
             {
                 var node = editor.OriginalRoot.FindNode(diagnostic.Location.SourceSpan);
@@ -59,10 +70,13 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Remove_unnecessary_suppression, createChangedDocument, nameof(RemoveUnnecessaryAttributeSuppressionsCodeFixProvider))
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(
+                AnalyzersResources.Remove_unnecessary_suppression,
+                createChangedDocument,
+                nameof(RemoveUnnecessaryAttributeSuppressionsCodeFixProvider)
+            ) { }
         }
     }
 }

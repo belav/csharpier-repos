@@ -18,14 +18,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
     {
         internal XamlOleCommandTarget(
             IWpfTextView wpfTextView,
-            IComponentModel componentModel)
-            : base(wpfTextView, componentModel)
-        {
-        }
+            IComponentModel componentModel
+        ) : base(wpfTextView, componentModel) { }
 
         protected override ITextBuffer? GetSubjectBufferContainingCaret()
         {
-            return this.WpfTextView.GetBufferContainingCaret(contentType: ContentTypeNames.XamlContentType);
+            return this.WpfTextView.GetBufferContainingCaret(
+                contentType: ContentTypeNames.XamlContentType
+            );
         }
     }
 }

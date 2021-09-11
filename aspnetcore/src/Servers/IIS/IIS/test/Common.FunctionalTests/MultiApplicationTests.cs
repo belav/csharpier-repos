@@ -20,9 +20,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         private PublishedApplication _publishedApplication;
         private PublishedApplication _rootApplication;
 
-        public MultiApplicationTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public MultiApplicationTests(PublishedSitesFixture fixture) : base(fixture) { }
 
         [ConditionalFact]
         public async Task RunsTwoOutOfProcessApps()
@@ -36,7 +34,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         public async Task FailsAndLogsWhenRunningTwoInProcessApps()
         {
             var parameters = Fixture.GetBaseDeploymentParameters(HostingModel.InProcess);
@@ -54,11 +56,19 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 Assert.Contains("500.35", await result2.Content.ReadAsStringAsync());
             }
 
-            EventLogHelpers.VerifyEventLogEvent(result, EventLogHelpers.OnlyOneAppPerAppPool(), Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                result,
+                EventLogHelpers.OnlyOneAppPerAppPool(),
+                Logger
+            );
         }
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [InlineData(HostingModel.OutOfProcess)]
         [InlineData(HostingModel.InProcess)]
         public async Task FailsAndLogsEventLogForMixedHostingModel(HostingModel firstApp)
@@ -68,7 +78,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             var result = await DeployAsync(parameters);
 
             // Modify hosting model of other app to be the opposite
-            var otherApp = firstApp == HostingModel.InProcess ? HostingModel.OutOfProcess : HostingModel.InProcess;
+            var otherApp =
+                firstApp == HostingModel.InProcess
+                    ? HostingModel.OutOfProcess
+                    : HostingModel.InProcess;
             SetHostingModel(_publishedApplication.Path, otherApp);
 
             var result1 = await result.HttpClient.GetAsync("/app1/HelloWorld");
@@ -82,15 +95,18 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 Assert.Contains("500.34", await result2.Content.ReadAsStringAsync());
             }
 
-            EventLogHelpers.VerifyEventLogEvent(result, "Mixed hosting model is not supported.", Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                result,
+                "Mixed hosting model is not supported.",
+                Logger
+            );
         }
 
         private void SetHostingModel(string directory, HostingModel model)
         {
             var webConfigLocation = GetWebConfigLocation(directory);
             XDocument webConfig = XDocument.Load(webConfigLocation);
-            webConfig.Root
-                .Descendants("system.webServer")
+            webConfig.Root.Descendants("system.webServer")
                 .Single()
                 .GetOrAdd("aspNetCore")
                 .SetAttributeValue("hostingModel", model.ToString());
@@ -99,13 +115,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         private void DuplicateApplication(XElement config, string contentRoot)
         {
-            var siteElement = config
-                .RequiredElement("system.applicationHost")
+            var siteElement = config.RequiredElement("system.applicationHost")
                 .RequiredElement("sites")
                 .RequiredElement("site");
 
-            var application = siteElement
-                .RequiredElement("application");
+            var application = siteElement.RequiredElement("application");
 
             application.SetAttributeValue("path", "/app1");
 
@@ -126,7 +140,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             // IIS Express requires root application to exist
 
-            _rootApplication = new PublishedApplication(Helpers.CreateEmptyApplication(config, contentRoot), Logger);
+            _rootApplication = new PublishedApplication(
+                Helpers.CreateEmptyApplication(config, contentRoot),
+                Logger
+            );
         }
 
         private static string GetWebConfigLocation(string siteRoot)

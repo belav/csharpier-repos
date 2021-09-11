@@ -30,14 +30,17 @@ namespace Microsoft.AspNetCore.Mvc
             var expectedPermanentFlag = false;
 
             var httpContext = new Mock<HttpContext>();
-            httpContext.SetupGet(o => o.RequestServices).Returns(CreateServices().BuildServiceProvider());
+            httpContext.SetupGet(o => o.RequestServices)
+                .Returns(CreateServices().BuildServiceProvider());
 
             var httpResponse = new Mock<HttpResponse>();
             httpContext.Setup(o => o.Response).Returns(httpResponse.Object);
 
-            var actionContext = new ActionContext(httpContext.Object,
-                                                  new RouteData(),
-                                                  new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext.Object,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var urlHelper = GetMockUrlHelper(expectedUrl);
             var result = new RedirectToRouteResult(null, PropertyHelper.ObjectToDictionary(values))
@@ -52,7 +55,10 @@ namespace Microsoft.AspNetCore.Mvc
             // Verifying if Redirect was called with the specific Url and parameter flag.
             // Thus we verify that the Url returned by UrlHelper is passed properly to
             // Redirect method and that the method is called exactly once.
-            httpResponse.Verify(r => r.Redirect(expectedUrl, expectedPermanentFlag), Times.Exactly(1));
+            httpResponse.Verify(
+                r => r.Redirect(expectedUrl, expectedPermanentFlag),
+                Times.Exactly(1)
+            );
         }
 
         [Fact]
@@ -60,14 +66,15 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var httpContext = new Mock<HttpContext>();
-            httpContext
-                .Setup(o => o.Response)
-                .Returns(new Mock<HttpResponse>().Object);
-            httpContext
-                .SetupGet(o => o.RequestServices)
+            httpContext.Setup(o => o.Response).Returns(new Mock<HttpResponse>().Object);
+            httpContext.SetupGet(o => o.RequestServices)
                 .Returns(CreateServices().BuildServiceProvider());
 
-            var actionContext = new ActionContext(httpContext.Object, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext.Object,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var urlHelper = GetMockUrlHelper(returnValue: null);
             var result = new RedirectToRouteResult(null, new Dictionary<string, object>())
@@ -81,7 +88,8 @@ namespace Microsoft.AspNetCore.Mvc
                 {
                     await result.ExecuteResultAsync(actionContext);
                 },
-                "No route matches the supplied values.");
+                "No route matches the supplied values."
+            );
         }
 
         [Fact]
@@ -92,27 +100,37 @@ namespace Microsoft.AspNetCore.Mvc
             var locationUrl = "/api/orders/10";
 
             var urlHelper = new Mock<IUrlHelper>();
-            urlHelper
-                .Setup(uh => uh.RouteUrl(It.IsAny<UrlRouteContext>()))
+            urlHelper.Setup(uh => uh.RouteUrl(It.IsAny<UrlRouteContext>()))
                 .Returns(locationUrl)
                 .Verifiable();
             var factory = new Mock<IUrlHelperFactory>();
-            factory
-                .Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>()))
-                .Returns(urlHelper.Object);
+            factory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>())).Returns(urlHelper.Object);
 
             var httpContext = GetHttpContext(factory.Object);
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var result = new RedirectToRouteResult(routeName, new { id = 10 });
 
             // Act
             await result.ExecuteResultAsync(actionContext);
 
             // Assert
-            urlHelper.Verify(uh => uh.RouteUrl(
-                It.Is<UrlRouteContext>(routeContext => string.Equals(routeName, routeContext.RouteName))));
-            Assert.True(httpContext.Response.Headers.ContainsKey("Location"), "Location header not found");
+            urlHelper.Verify(
+                uh =>
+                    uh.RouteUrl(
+                        It.Is<UrlRouteContext>(
+                            routeContext => string.Equals(routeName, routeContext.RouteName)
+                        )
+                    )
+            );
+            Assert.True(
+                httpContext.Response.Headers.ContainsKey("Location"),
+                "Location header not found"
+            );
             Assert.Equal(locationUrl, httpContext.Response.Headers["Location"]);
         }
 
@@ -125,7 +143,11 @@ namespace Microsoft.AspNetCore.Mvc
 
             var httpContext = GetHttpContext();
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var urlHelper = GetMockUrlHelper(expectedUrl);
             var result = new RedirectToRouteResult("Sample", null, true, "test")
@@ -150,7 +172,11 @@ namespace Microsoft.AspNetCore.Mvc
 
             var httpContext = GetHttpContext();
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var urlHelper = GetMockUrlHelper(expectedUrl);
             var result = new RedirectToRouteResult("Sample", null, true, true, "test")
@@ -179,7 +205,10 @@ namespace Microsoft.AspNetCore.Mvc
         private static IServiceCollection CreateServices(IUrlHelperFactory factory = null)
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IActionResultExecutor<RedirectToRouteResult>, RedirectToRouteResultExecutor>();
+            services.AddSingleton<
+                IActionResultExecutor<RedirectToRouteResult>,
+                RedirectToRouteResultExecutor
+            >();
 
             if (factory != null)
             {
@@ -199,15 +228,20 @@ namespace Microsoft.AspNetCore.Mvc
             get
             {
                 yield return new object[] { null };
-                yield return
-                    new object[] {
-                        new Dictionary<string, string>() { { "hello", "world" } }
-                    };
-                yield return
-                    new object[] {
-                        new RouteValueDictionary(new Dictionary<string, string>() {
-                                                        { "test", "case" }, { "sample", "route" } })
-                    };
+                yield return new object[]
+                {
+                    new Dictionary<string, string>() { { "hello", "world" } }
+                };
+                yield return new object[]
+                {
+                    new RouteValueDictionary(
+                        new Dictionary<string, string>()
+                        {
+                            { "test", "case" },
+                            { "sample", "route" }
+                        }
+                    )
+                };
             }
         }
 

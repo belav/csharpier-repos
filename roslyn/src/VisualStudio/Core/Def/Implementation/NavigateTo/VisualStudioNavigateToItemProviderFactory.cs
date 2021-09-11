@@ -24,18 +24,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigateTo
         public VisualStudioNavigateToItemProviderFactory(
             VisualStudioWorkspace workspace,
             IAsynchronousOperationListenerProvider listenerProvider,
-            IThreadingContext threadingContext)
-        {
+            IThreadingContext threadingContext
+        ) {
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.NavigateTo);
             _workspace = workspace;
             _threadingContext = threadingContext;
         }
 
-        public bool TryCreateNavigateToItemProvider(IServiceProvider serviceProvider, out INavigateToItemProvider? provider)
-        {
+        public bool TryCreateNavigateToItemProvider(
+            IServiceProvider serviceProvider,
+            out INavigateToItemProvider? provider
+        ) {
             // Let LSP handle goto when running under the LSP editor.
-            if (_workspace.Services.GetRequiredService<IWorkspaceContextService>().IsInLspEditorContext())
-            {
+            if (
+                _workspace.Services.GetRequiredService<IWorkspaceContextService>()
+                    .IsInLspEditorContext()
+            ) {
                 provider = null;
                 return false;
             }

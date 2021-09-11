@@ -24,10 +24,7 @@ namespace Microsoft.Extensions.Logging.Testing
 
         public string Message
         {
-            get
-            {
-                return Formatter(State, Exception);
-            }
+            get { return Formatter(State, Exception); }
         }
 
         public override string ToString()

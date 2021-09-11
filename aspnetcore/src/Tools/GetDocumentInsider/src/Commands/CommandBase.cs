@@ -42,7 +42,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                     Validate();
 
                     return Execute();
-                });
+                }
+            );
         }
 
         protected virtual void Validate()

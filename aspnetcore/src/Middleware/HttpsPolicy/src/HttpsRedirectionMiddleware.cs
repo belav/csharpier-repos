@@ -35,9 +35,12 @@ namespace Microsoft.AspNetCore.HttpsPolicy
         /// <param name="options"></param>
         /// <param name="config"></param>
         /// <param name="loggerFactory"></param>
-        public HttpsRedirectionMiddleware(RequestDelegate next, IOptions<HttpsRedirectionOptions> options, IConfiguration config, ILoggerFactory loggerFactory)
-
-        {
+        public HttpsRedirectionMiddleware(
+            RequestDelegate next,
+            IOptions<HttpsRedirectionOptions> options,
+            IConfiguration config,
+            ILoggerFactory loggerFactory
+        ) {
             _next = next ?? throw new ArgumentNullException(nameof(next));
             _config = config ?? throw new ArgumentNullException(nameof(config));
 
@@ -66,11 +69,17 @@ namespace Microsoft.AspNetCore.HttpsPolicy
         /// <param name="config"></param>
         /// <param name="loggerFactory"></param>
         /// <param name="serverAddressesFeature"></param>
-        public HttpsRedirectionMiddleware(RequestDelegate next, IOptions<HttpsRedirectionOptions> options, IConfiguration config, ILoggerFactory loggerFactory,
-            IServerAddressesFeature serverAddressesFeature)
-            : this(next, options, config, loggerFactory)
+        public HttpsRedirectionMiddleware(
+            RequestDelegate next,
+            IOptions<HttpsRedirectionOptions> options,
+            IConfiguration config,
+            ILoggerFactory loggerFactory,
+            IServerAddressesFeature serverAddressesFeature
+        ) : this(next, options, config, loggerFactory)
         {
-            _serverAddressesFeature = serverAddressesFeature ?? throw new ArgumentNullException(nameof(serverAddressesFeature));
+            _serverAddressesFeature =
+                serverAddressesFeature
+                ?? throw new ArgumentNullException(nameof(serverAddressesFeature));
         }
 
         /// <summary>
@@ -103,11 +112,12 @@ namespace Microsoft.AspNetCore.HttpsPolicy
 
             var request = context.Request;
             var redirectUrl = UriHelper.BuildAbsolute(
-                "https", 
+                "https",
                 host,
                 request.PathBase,
                 request.Path,
-                request.QueryString);
+                request.QueryString
+            );
 
             context.Response.StatusCode = _statusCode;
             context.Response.Headers[HeaderNames.Location] = redirectUrl;
@@ -127,7 +137,8 @@ namespace Microsoft.AspNetCore.HttpsPolicy
             // 3. IServerAddressesFeature
             // 4. Fail if not sets
 
-            var nullablePort = _config.GetValue<int?>("HTTPS_PORT") ?? _config.GetValue<int?>("ANCM_HTTPS_PORT");
+            var nullablePort =
+                _config.GetValue<int?>("HTTPS_PORT") ?? _config.GetValue<int?>("ANCM_HTTPS_PORT");
             if (nullablePort.HasValue)
             {
                 var port = nullablePort.Value;
@@ -150,8 +161,9 @@ namespace Microsoft.AspNetCore.HttpsPolicy
                     if (nullablePort.HasValue && nullablePort != bindingAddress.Port)
                     {
                         throw new InvalidOperationException(
-                            "Cannot determine the https port from IServerAddressesFeature, multiple values were found. " +
-                            "Set the desired port explicitly on HttpsRedirectionOptions.HttpsPort.");
+                            "Cannot determine the https port from IServerAddressesFeature, multiple values were found. "
+                                + "Set the desired port explicitly on HttpsRedirectionOptions.HttpsPort."
+                        );
                     }
                     else
                     {

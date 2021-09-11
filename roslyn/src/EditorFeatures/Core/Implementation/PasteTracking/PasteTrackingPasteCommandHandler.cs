@@ -32,14 +32,19 @@ namespace Microsoft.CodeAnalysis.PasteTracking
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PasteTrackingPasteCommandHandler(PasteTrackingService pasteTrackingService)
-            => _pasteTrackingService = pasteTrackingService;
+        public PasteTrackingPasteCommandHandler(PasteTrackingService pasteTrackingService) =>
+            _pasteTrackingService = pasteTrackingService;
 
-        public CommandState GetCommandState(PasteCommandArgs args, Func<CommandState> nextCommandHandler)
-            => nextCommandHandler();
+        public CommandState GetCommandState(
+            PasteCommandArgs args,
+            Func<CommandState> nextCommandHandler
+        ) => nextCommandHandler();
 
-        public void ExecuteCommand(PasteCommandArgs args, Action nextCommandHandler, CommandExecutionContext executionContext)
-        {
+        public void ExecuteCommand(
+            PasteCommandArgs args,
+            Action nextCommandHandler,
+            CommandExecutionContext executionContext
+        ) {
             // Capture the pre-paste caret position
             var caretPosition = args.TextView.GetCaretPoint(args.SubjectBuffer);
             if (!caretPosition.HasValue)
@@ -56,7 +61,11 @@ namespace Microsoft.CodeAnalysis.PasteTracking
             }
 
             // Create a tracking span from the pre-paste caret position that will grow as text is inserted.
-            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(caretPosition.Value.Position, 0, SpanTrackingMode.EdgeInclusive);
+            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(
+                caretPosition.Value.Position,
+                0,
+                SpanTrackingMode.EdgeInclusive
+            );
 
             // Applying the post-paste snapshot to the tracking span gives us the span of pasted text.
             var snapshotSpan = trackingSpan.GetSpan(args.SubjectBuffer.CurrentSnapshot);

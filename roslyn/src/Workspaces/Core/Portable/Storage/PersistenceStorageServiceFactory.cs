@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Storage
 #if !DOTNET_BUILD_FROM_SOURCE
             SQLiteConnectionPoolService connectionPoolService
 #endif
-            )
+        )
         {
 #if !DOTNET_BUILD_FROM_SOURCE
             _connectionPoolService = connectionPoolService;
@@ -43,10 +43,13 @@ namespace Microsoft.CodeAnalysis.Storage
             switch (database)
             {
                 case StorageDatabase.SQLite:
-                    var locationService = workspaceServices.GetService<IPersistentStorageLocationService>();
+                    var locationService =
+                        workspaceServices.GetService<IPersistentStorageLocationService>();
                     if (locationService != null)
-                        return new SQLite.v2.SQLitePersistentStorageService(_connectionPoolService, locationService);
-
+                        return new SQLite.v2.SQLitePersistentStorageService(
+                            _connectionPoolService,
+                            locationService
+                        );
                     break;
             }
 #endif

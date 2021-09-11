@@ -37,10 +37,19 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             var mockKeyEscrowSink = new Mock<IKeyEscrowSink>();
             mockKeyEscrowSink.Setup(o => o.Store(It.IsAny<Guid>(), It.IsAny<XElement>()))
-                .Callback<Guid, XElement>((keyId, element) =>
-                {
-                    output.Add(string.Format(CultureInfo.InvariantCulture, "{0:D}: {1}", keyId, element.Name.LocalName));
-                });
+                .Callback<Guid, XElement>(
+                    (keyId, element) =>
+                    {
+                        output.Add(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0:D}: {1}",
+                                keyId,
+                                element.Name.LocalName
+                            )
+                        );
+                    }
+                );
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<IKeyEscrowSink>(mockKeyEscrowSink.Object);
@@ -48,7 +57,10 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             // Act
             var sink = services.GetKeyEscrowSink();
-            sink.Store(new Guid("39974d8e-3e53-4d78-b7e9-4ff64a2a5d7b"), XElement.Parse("<theElement />"));
+            sink.Store(
+                new Guid("39974d8e-3e53-4d78-b7e9-4ff64a2a5d7b"),
+                XElement.Parse("<theElement />")
+            );
 
             // Assert
             Assert.Equal(new[] { "39974d8e-3e53-4d78-b7e9-4ff64a2a5d7b: theElement" }, output);
@@ -62,17 +74,35 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             var mockKeyEscrowSink1 = new Mock<IKeyEscrowSink>();
             mockKeyEscrowSink1.Setup(o => o.Store(It.IsAny<Guid>(), It.IsAny<XElement>()))
-                .Callback<Guid, XElement>((keyId, element) =>
-                {
-                    output.Add(string.Format(CultureInfo.InvariantCulture, "[sink1] {0:D}: {1}", keyId, element.Name.LocalName));
-                });
+                .Callback<Guid, XElement>(
+                    (keyId, element) =>
+                    {
+                        output.Add(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "[sink1] {0:D}: {1}",
+                                keyId,
+                                element.Name.LocalName
+                            )
+                        );
+                    }
+                );
 
             var mockKeyEscrowSink2 = new Mock<IKeyEscrowSink>();
             mockKeyEscrowSink2.Setup(o => o.Store(It.IsAny<Guid>(), It.IsAny<XElement>()))
-                .Callback<Guid, XElement>((keyId, element) =>
-                {
-                    output.Add(string.Format(CultureInfo.InvariantCulture, "[sink2] {0:D}: {1}", keyId, element.Name.LocalName));
-                });
+                .Callback<Guid, XElement>(
+                    (keyId, element) =>
+                    {
+                        output.Add(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "[sink2] {0:D}: {1}",
+                                keyId,
+                                element.Name.LocalName
+                            )
+                        );
+                    }
+                );
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<IKeyEscrowSink>(mockKeyEscrowSink1.Object);
@@ -81,10 +111,20 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             // Act
             var sink = services.GetKeyEscrowSink();
-            sink.Store(new Guid("39974d8e-3e53-4d78-b7e9-4ff64a2a5d7b"), XElement.Parse("<theElement />"));
+            sink.Store(
+                new Guid("39974d8e-3e53-4d78-b7e9-4ff64a2a5d7b"),
+                XElement.Parse("<theElement />")
+            );
 
             // Assert
-            Assert.Equal(new[] { "[sink1] 39974d8e-3e53-4d78-b7e9-4ff64a2a5d7b: theElement", "[sink2] 39974d8e-3e53-4d78-b7e9-4ff64a2a5d7b: theElement" }, output);
+            Assert.Equal(
+                new[]
+                {
+                    "[sink1] 39974d8e-3e53-4d78-b7e9-4ff64a2a5d7b: theElement",
+                    "[sink2] 39974d8e-3e53-4d78-b7e9-4ff64a2a5d7b: theElement"
+                },
+                output
+            );
         }
     }
 }

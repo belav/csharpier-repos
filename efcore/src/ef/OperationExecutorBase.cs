@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
     internal abstract class OperationExecutorBase : IOperationExecutor
     {
         public const string DesignAssemblyName = "Microsoft.EntityFrameworkCore.Design";
-        protected const string ExecutorTypeName = "Microsoft.EntityFrameworkCore.Design.OperationExecutor";
+        protected const string ExecutorTypeName =
+            "Microsoft.EntityFrameworkCore.Design.OperationExecutor";
 
         private static readonly IDictionary _emptyArguments = new Dictionary<string, object>(0);
         public string AppBasePath { get; }
@@ -31,15 +32,20 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string? projectDir,
             string? rootNamespace,
             string? language,
-            string[] remainingArguments)
-        {
+            string[] remainingArguments
+        ) {
             AssemblyFileName = Path.GetFileNameWithoutExtension(assembly);
-            StartupAssemblyFileName = startupAssembly == null
-                ? AssemblyFileName
-                : Path.GetFileNameWithoutExtension(startupAssembly);
+            StartupAssemblyFileName =
+                startupAssembly == null
+                    ? AssemblyFileName
+                    : Path.GetFileNameWithoutExtension(startupAssembly);
 
             AppBasePath = Path.GetFullPath(
-                Path.Combine(Directory.GetCurrentDirectory(), Path.GetDirectoryName(startupAssembly ?? assembly)!));
+                Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    Path.GetDirectoryName(startupAssembly ?? assembly)!
+                )
+            );
 
             RootNamespace = rootNamespace ?? AssemblyFileName;
             ProjectDirectory = projectDir ?? Directory.GetCurrentDirectory();
@@ -52,24 +58,30 @@ namespace Microsoft.EntityFrameworkCore.Tools
             Reporter.WriteVerbose(Resources.UsingWorkingDirectory(Directory.GetCurrentDirectory()));
             Reporter.WriteVerbose(Resources.UsingRootNamespace(RootNamespace));
             Reporter.WriteVerbose(Resources.UsingProjectDir(ProjectDirectory));
-            Reporter.WriteVerbose(Resources.RemainingArguments(string.Join(",", RemainingArguments.Select(s => "'" + s + "'"))));
+            Reporter.WriteVerbose(
+                Resources.RemainingArguments(
+                    string.Join(",", RemainingArguments.Select(s => "'" + s + "'"))
+                )
+            );
         }
 
-        public virtual void Dispose()
-        {
-        }
+        public virtual void Dispose() { }
 
         protected abstract dynamic CreateResultHandler();
-        protected abstract void Execute(string operationName, object resultHandler, IDictionary arguments);
+        protected abstract void Execute(
+            string operationName,
+            object resultHandler,
+            IDictionary arguments
+        );
 
-        private TResult InvokeOperation<TResult>(string operation)
-            => InvokeOperation<TResult>(operation, _emptyArguments);
+        private TResult InvokeOperation<TResult>(string operation) =>
+            InvokeOperation<TResult>(operation, _emptyArguments);
 
-        private TResult InvokeOperation<TResult>(string operation, IDictionary arguments)
-            => (TResult)InvokeOperationImpl(operation, arguments);
+        private TResult InvokeOperation<TResult>(string operation, IDictionary arguments) =>
+            (TResult)InvokeOperationImpl(operation, arguments);
 
-        private void InvokeOperation(string operation, IDictionary arguments)
-            => InvokeOperationImpl(operation, arguments);
+        private void InvokeOperation(string operation, IDictionary arguments) =>
+            InvokeOperationImpl(operation, arguments);
 
         private object InvokeOperationImpl(string operationName, IDictionary arguments)
         {
@@ -82,14 +94,20 @@ namespace Microsoft.EntityFrameworkCore.Tools
                 throw new WrappedException(
                     resultHandler.ErrorType,
                     resultHandler.ErrorMessage,
-                    resultHandler.ErrorStackTrace);
+                    resultHandler.ErrorStackTrace
+                );
             }
 
             return resultHandler.Result;
         }
 
-        public IDictionary AddMigration(string name, string? outputDir, string? contextType, string? @namespace)
-            => InvokeOperation<IDictionary>(
+        public IDictionary AddMigration(
+            string name,
+            string? outputDir,
+            string? contextType,
+            string? @namespace
+        ) =>
+            InvokeOperation<IDictionary>(
                 "AddMigration",
                 new Dictionary<string, object?>
                 {
@@ -97,45 +115,59 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     ["outputDir"] = outputDir,
                     ["contextType"] = contextType,
                     ["namespace"] = @namespace
-                });
+                }
+            );
 
-        public IDictionary RemoveMigration(string? contextType, bool force)
-            => InvokeOperation<IDictionary>(
+        public IDictionary RemoveMigration(string? contextType, bool force) =>
+            InvokeOperation<IDictionary>(
                 "RemoveMigration",
-                new Dictionary<string, object?> { ["contextType"] = contextType, ["force"] = force });
+                new Dictionary<string, object?> { ["contextType"] = contextType, ["force"] = force }
+            );
 
-        public IEnumerable<IDictionary> GetMigrations(string? contextType, string? connectionString, bool noConnect)
-            => InvokeOperation<IEnumerable<IDictionary>>(
+        public IEnumerable<IDictionary> GetMigrations(
+            string? contextType,
+            string? connectionString,
+            bool noConnect
+        ) =>
+            InvokeOperation<IEnumerable<IDictionary>>(
                 "GetMigrations",
                 new Dictionary<string, object?>
                 {
                     ["contextType"] = contextType,
                     ["connectionString"] = connectionString,
                     ["noConnect"] = noConnect
-                });
+                }
+            );
 
-        public void DropDatabase(string? contextType)
-            => InvokeOperation(
+        public void DropDatabase(string? contextType) =>
+            InvokeOperation(
                 "DropDatabase",
-                new Dictionary<string, object?> { ["contextType"] = contextType });
+                new Dictionary<string, object?> { ["contextType"] = contextType }
+            );
 
-        public IDictionary GetContextInfo(string? name)
-            => InvokeOperation<IDictionary>(
+        public IDictionary GetContextInfo(string? name) =>
+            InvokeOperation<IDictionary>(
                 "GetContextInfo",
-                new Dictionary<string, object?> { ["contextType"] = name });
+                new Dictionary<string, object?> { ["contextType"] = name }
+            );
 
-        public void UpdateDatabase(string? migration, string? connectionString, string? contextType)
-            => InvokeOperation(
+        public void UpdateDatabase(
+            string? migration,
+            string? connectionString,
+            string? contextType
+        ) =>
+            InvokeOperation(
                 "UpdateDatabase",
                 new Dictionary<string, object?>
                 {
                     ["targetMigration"] = migration,
                     ["connectionString"] = connectionString,
                     ["contextType"] = contextType
-                });
+                }
+            );
 
-        public IEnumerable<IDictionary> GetContextTypes()
-            => InvokeOperation<IEnumerable<IDictionary>>("GetContextTypes");
+        public IEnumerable<IDictionary> GetContextTypes() =>
+            InvokeOperation<IEnumerable<IDictionary>>("GetContextTypes");
 
         public IDictionary ScaffoldContext(
             string provider,
@@ -151,8 +183,9 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string? modelNamespace,
             string? contextNamespace,
             bool suppressOnConfiguring,
-            bool noPluralize)
-            => InvokeOperation<IDictionary>(
+            bool noPluralize
+        ) =>
+            InvokeOperation<IDictionary>(
                 "ScaffoldContext",
                 new Dictionary<string, object?>
                 {
@@ -170,15 +203,17 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     ["contextNamespace"] = contextNamespace,
                     ["suppressOnConfiguring"] = suppressOnConfiguring,
                     ["noPluralize"] = noPluralize
-                });
+                }
+            );
 
         public string ScriptMigration(
             string? fromMigration,
             string? toMigration,
             bool idempotent,
             bool noTransactions,
-            string? contextType)
-            => InvokeOperation<string>(
+            string? contextType
+        ) =>
+            InvokeOperation<string>(
                 "ScriptMigration",
                 new Dictionary<string, object?>
                 {
@@ -187,11 +222,13 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     ["idempotent"] = idempotent,
                     ["noTransactions"] = noTransactions,
                     ["contextType"] = contextType
-                });
+                }
+            );
 
-        public string ScriptDbContext(string? contextType)
-            => InvokeOperation<string>(
+        public string ScriptDbContext(string? contextType) =>
+            InvokeOperation<string>(
                 "ScriptDbContext",
-                new Dictionary<string, object?> { ["contextType"] = contextType });
+                new Dictionary<string, object?> { ["contextType"] = contextType }
+            );
     }
 }

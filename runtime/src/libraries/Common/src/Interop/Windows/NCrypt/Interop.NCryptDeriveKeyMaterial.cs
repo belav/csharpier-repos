@@ -23,7 +23,8 @@ internal static partial class Interop
             [Out, MarshalAs(UnmanagedType.LPArray)] byte[]? pbDerivedKey,
             int cbDerivedKey,
             [Out] out int pcbResult,
-            SecretAgreementFlags dwFlags);
+            SecretAgreementFlags dwFlags
+        );
 
         /// <summary>
         ///     Derive key material from a hash or HMAC KDF
@@ -36,8 +37,8 @@ internal static partial class Interop
             byte[]? hmacKey,
             byte[]? secretPrepend,
             byte[]? secretAppend,
-            SecretAgreementFlags flags)
-        {
+            SecretAgreementFlags flags
+        ) {
             // First marshal the hash algoritm
             IntPtr hashAlgorithmString = IntPtr.Zero;
 
@@ -55,11 +56,13 @@ internal static partial class Interop
 
                 parameters[parameterCount] = hashAlgorithmBuffer;
                 parameterCount++;
-
                 unsafe
                 {
-                    fixed (byte* pHmacKey = hmacKey, pSecretPrepend = secretPrepend, pSecretAppend = secretAppend)
-                    {
+                    fixed (
+                        byte* pHmacKey = hmacKey,
+                            pSecretPrepend = secretPrepend,
+                            pSecretAppend = secretAppend
+                    ) {
                         //
                         // Now marshal the other parameters
                         //
@@ -101,10 +104,12 @@ internal static partial class Interop
                             secretAgreement,
                             kdf,
                             parameters.Slice(0, parameterCount),
-                            flags);
+                            flags
+                        );
                     }
                 }
             }
+
             finally
             {
                 if (hashAlgorithmString != IntPtr.Zero)
@@ -121,8 +126,8 @@ internal static partial class Interop
             SafeNCryptSecretHandle secretAgreement,
             string kdf,
             ReadOnlySpan<NCryptBuffer> parameters,
-            SecretAgreementFlags flags)
-        {
+            SecretAgreementFlags flags
+        ) {
             fixed (NCryptBuffer* pParameters = &MemoryMarshal.GetReference(parameters))
             {
                 NCryptBufferDesc parameterDesc = default;
@@ -138,7 +143,8 @@ internal static partial class Interop
                     null,
                     0,
                     out int keySize,
-                    flags);
+                    flags
+                );
 
                 if (error != ErrorCode.ERROR_SUCCESS && error != ErrorCode.NTE_BUFFER_TOO_SMALL)
                 {
@@ -155,7 +161,8 @@ internal static partial class Interop
                     keyMaterial,
                     keyMaterial.Length,
                     out keySize,
-                    flags);
+                    flags
+                );
 
                 if (error != ErrorCode.ERROR_SUCCESS)
                 {
@@ -176,8 +183,8 @@ internal static partial class Interop
             string hashAlgorithm,
             byte[]? secretPrepend,
             byte[]? secretAppend,
-            SecretAgreementFlags flags)
-        {
+            SecretAgreementFlags flags
+        ) {
             return DeriveKeyMaterial(
                 secretAgreement,
                 BCryptNative.KeyDerivationFunction.Hash,
@@ -185,7 +192,8 @@ internal static partial class Interop
                 null,
                 secretPrepend,
                 secretAppend,
-                flags);
+                flags
+            );
         }
 
         /// <summary>
@@ -197,8 +205,8 @@ internal static partial class Interop
             byte[]? hmacKey,
             byte[]? secretPrepend,
             byte[]? secretAppend,
-            SecretAgreementFlags flags)
-        {
+            SecretAgreementFlags flags
+        ) {
             return DeriveKeyMaterial(
                 secretAgreement,
                 BCryptNative.KeyDerivationFunction.Hmac,
@@ -206,7 +214,8 @@ internal static partial class Interop
                 hmacKey,
                 secretPrepend,
                 secretAppend,
-                flags);
+                flags
+            );
         }
 
         /// <summary>
@@ -216,12 +225,14 @@ internal static partial class Interop
             SafeNCryptSecretHandle secretAgreement,
             byte[] label,
             byte[] seed,
-            SecretAgreementFlags flags)
-        {
+            SecretAgreementFlags flags
+        ) {
             Span<NCryptBuffer> buffers = stackalloc NCryptBuffer[2];
 
-            fixed (byte* pLabel = label, pSeed = seed)
-            {
+            fixed (
+                byte* pLabel = label,
+                    pSeed = seed
+            ) {
                 NCryptBuffer labelBuffer = default;
                 labelBuffer.cbBuffer = label.Length;
                 labelBuffer.BufferType = BufferType.KdfTlsLabel;
@@ -238,7 +249,8 @@ internal static partial class Interop
                     secretAgreement,
                     BCryptNative.KeyDerivationFunction.Tls,
                     buffers,
-                    flags);
+                    flags
+                );
             }
         }
     }

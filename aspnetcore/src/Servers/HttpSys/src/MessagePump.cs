@@ -27,13 +27,18 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         private volatile int _stopping;
         private int _outstandingRequests;
-        private readonly TaskCompletionSource _shutdownSignal = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _shutdownSignal = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         private int _shutdownSignalCompleted;
 
         private readonly ServerAddressesFeature _serverAddresses;
 
-        public MessagePump(IOptions<HttpSysOptions> options, ILoggerFactory loggerFactory, IAuthenticationSchemeProvider authentication)
-        {
+        public MessagePump(
+            IOptions<HttpSysOptions> options,
+            ILoggerFactory loggerFactory,
+            IAuthenticationSchemeProvider authentication
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -48,7 +53,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
             if (_options.Authentication.Schemes != AuthenticationSchemes.None)
             {
-                authentication.AddScheme(new AuthenticationScheme(HttpSysDefaults.AuthenticationScheme, displayName: _options.Authentication.AuthenticationDisplayName, handlerType: typeof(AuthenticationHandler)));
+                authentication.AddScheme(
+                    new AuthenticationScheme(
+                        HttpSysDefaults.AuthenticationScheme,
+                        displayName: _options.Authentication.AuthenticationDisplayName,
+                        handlerType: typeof(AuthenticationHandler)
+                    )
+                );
             }
 
             Features = new FeatureCollection();
@@ -57,7 +68,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
             if (HttpApi.IsFeatureSupported(HttpApiTypes.HTTP_FEATURE_ID.HttpFeatureDelegateEx))
             {
-                var delegationProperty = new ServerDelegationPropertyFeature(Listener.RequestQueue, _logger);
+                var delegationProperty = new ServerDelegationPropertyFeature(
+                    Listener.RequestQueue,
+                    _logger
+                );
                 Features.Set<IServerDelegationFeature>(delegationProperty);
             }
 
@@ -72,7 +86,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         internal bool Stopping => _stopping == 1;
 
-        public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken) where TContext : notnull
+        public Task StartAsync<TContext>(
+            IHttpApplication<TContext> application,
+            CancellationToken cancellationToken
+        ) where TContext : notnull
         {
             if (application == null)
             {
@@ -120,7 +137,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
             Debug.Assert(application != null);
 
-            RequestContextFactory = new ApplicationRequestContextFactory<TContext>(application, this);
+            RequestContextFactory = new ApplicationRequestContextFactory<TContext>(
+                application,
+                this
+            );
 
             Listener.Start();
 
@@ -132,7 +152,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
 
             // Dispatch to get off the SynchronizationContext and use UnsafeQueueUserWorkItem to avoid capturing the ExecutionContext
-            ThreadPool.UnsafeQueueUserWorkItem(state => state.ActivateRequestProcessingLimits(), this, preferLocal: false);
+            ThreadPool.UnsafeQueueUserWorkItem(
+                state => state.ActivateRequestProcessingLimits(),
+                this,
+                preferLocal: false
+            );
 
             return Task.CompletedTask;
         }
@@ -194,7 +218,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         // Dispose the request
                         requestContext.ReleasePins();
                         requestContext.Dispose();
-
                         // If either of these is false then a response has already been sent to the client, so we can accept the next request
                         continue;
                     }
@@ -230,14 +253,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         {
             void RegisterCancelation()
             {
-                cancellationToken.Register(() =>
-                {
-                    if (Interlocked.Exchange(ref _shutdownSignalCompleted, 1) == 0)
+                cancellationToken.Register(
+                    () =>
                     {
-                        Log.StopCancelled(_logger, _outstandingRequests);
-                        _shutdownSignal.TrySetResult();
+                        if (Interlocked.Exchange(ref _shutdownSignalCompleted, 1) == 0)
+                        {
+                            Log.StopCancelled(_logger, _outstandingRequests);
+                            _shutdownSignal.TrySetResult();
+                        }
                     }
-                });
+                );
             }
 
             if (Interlocked.Exchange(ref _stopping, 1) == 1)

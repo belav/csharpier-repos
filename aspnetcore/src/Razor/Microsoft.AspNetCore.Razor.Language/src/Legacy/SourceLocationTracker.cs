@@ -12,10 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         private int _lineIndex = 0;
         private SourceLocation _currentLocation;
 
-        public SourceLocationTracker()
-            : this(SourceLocation.Zero)
-        {
-        }
+        public SourceLocationTracker() : this(SourceLocation.Zero) { }
 
         public SourceLocationTracker(SourceLocation currentLocation)
         {
@@ -26,10 +23,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         public SourceLocation CurrentLocation
         {
-            get
-            {
-                return _currentLocation;
-            }
+            get { return _currentLocation; }
             set
             {
                 if (!_currentLocation.Equals(value))
@@ -77,9 +71,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             _absoluteIndex++;
 
-            if (Environment.NewLine.Length == 1 && characterRead == Environment.NewLine[0] ||
-                ParserHelpers.IsNewLine(characterRead) && (characterRead != '\r' || nextCharacter != '\n'))
-            {
+            if (
+                Environment.NewLine.Length == 1 && characterRead == Environment.NewLine[0]
+                || ParserHelpers.IsNewLine(characterRead)
+                    && (characterRead != '\r' || nextCharacter != '\n')
+            ) {
                 _lineIndex++;
                 _characterIndex = 0;
             }
@@ -102,12 +98,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 _currentLocation.FilePath,
                 _absoluteIndex,
                 _lineIndex,
-                _characterIndex);
+                _characterIndex
+            );
         }
 
-        public static SourceLocation CalculateNewLocation(SourceLocation lastPosition, string newContent)
-        {
-            return new SourceLocationTracker(lastPosition).UpdateLocation(newContent).CurrentLocation;
+        public static SourceLocation CalculateNewLocation(
+            SourceLocation lastPosition,
+            string newContent
+        ) {
+            return new SourceLocationTracker(lastPosition).UpdateLocation(
+                newContent
+            ).CurrentLocation;
         }
     }
 }

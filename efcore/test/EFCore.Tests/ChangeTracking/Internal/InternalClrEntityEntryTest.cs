@@ -9,68 +9,70 @@ using Xunit;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 {
-    public class InternalClrEntityEntryTest : InternalEntityEntryTestBase<
-        InternalClrEntityEntryTest.SomeEntity,
-        InternalClrEntityEntryTest.SomeSimpleEntityBase,
-        InternalClrEntityEntryTest.SomeDependentEntity,
-        InternalClrEntityEntryTest.SomeMoreDependentEntity,
-        InternalClrEntityEntryTest.Root,
-        InternalClrEntityEntryTest.FirstDependent,
-        InternalClrEntityEntryTest.SecondDependent,
-        InternalClrEntityEntryTest.CompositeRoot,
-        InternalClrEntityEntryTest.CompositeFirstDependent,
-        InternalClrEntityEntryTest.SomeCompositeEntityBase,
-        InternalClrEntityEntryTest.CompositeSecondDependent,
-        InternalClrEntityEntryTest.KClrContext,
-        InternalClrEntityEntryTest.KClrSnapContext>
+    public class InternalClrEntityEntryTest
+        : InternalEntityEntryTestBase<
+              InternalClrEntityEntryTest.SomeEntity,
+              InternalClrEntityEntryTest.SomeSimpleEntityBase,
+              InternalClrEntityEntryTest.SomeDependentEntity,
+              InternalClrEntityEntryTest.SomeMoreDependentEntity,
+              InternalClrEntityEntryTest.Root,
+              InternalClrEntityEntryTest.FirstDependent,
+              InternalClrEntityEntryTest.SecondDependent,
+              InternalClrEntityEntryTest.CompositeRoot,
+              InternalClrEntityEntryTest.CompositeFirstDependent,
+              InternalClrEntityEntryTest.SomeCompositeEntityBase,
+              InternalClrEntityEntryTest.CompositeSecondDependent,
+              InternalClrEntityEntryTest.KClrContext,
+              InternalClrEntityEntryTest.KClrSnapContext
+          >
     {
         [ConditionalFact]
-        public virtual void All_original_values_can_be_accessed_for_entity_that_does_full_change_tracking_if_eager_values_on()
-            => AllOriginalValuesTest(new FullNotificationEntity());
+        public virtual void All_original_values_can_be_accessed_for_entity_that_does_full_change_tracking_if_eager_values_on() =>
+            AllOriginalValuesTest(new FullNotificationEntity());
 
         [ConditionalFact]
-        public virtual void Required_original_values_can_be_accessed_for_entity_that_does_full_change_tracking()
-            => OriginalValuesTest(new FullNotificationEntity());
+        public virtual void Required_original_values_can_be_accessed_for_entity_that_does_full_change_tracking() =>
+            OriginalValuesTest(new FullNotificationEntity());
 
         [ConditionalFact]
-        public virtual void Required_original_values_can_be_accessed_for_entity_that_does_changed_only_notification()
-            => OriginalValuesTest(new ChangedOnlyEntity());
+        public virtual void Required_original_values_can_be_accessed_for_entity_that_does_changed_only_notification() =>
+            OriginalValuesTest(new ChangedOnlyEntity());
 
         [ConditionalFact]
-        public virtual void Required_original_values_can_be_accessed_generically_for_entity_that_does_full_change_tracking()
-            => GenericOriginalValuesTest(new FullNotificationEntity());
+        public virtual void Required_original_values_can_be_accessed_generically_for_entity_that_does_full_change_tracking() =>
+            GenericOriginalValuesTest(new FullNotificationEntity());
 
         [ConditionalFact]
-        public virtual void Required_original_values_can_be_accessed_generically_for_entity_that_does_changed_only_notification()
-            => GenericOriginalValuesTest(new ChangedOnlyEntity());
+        public virtual void Required_original_values_can_be_accessed_generically_for_entity_that_does_changed_only_notification() =>
+            GenericOriginalValuesTest(new ChangedOnlyEntity());
 
         [ConditionalFact]
-        public virtual void Null_original_values_are_handled_for_entity_that_does_full_change_tracking()
-            => NullOriginalValuesTest(new FullNotificationEntity());
+        public virtual void Null_original_values_are_handled_for_entity_that_does_full_change_tracking() =>
+            NullOriginalValuesTest(new FullNotificationEntity());
 
         [ConditionalFact]
-        public virtual void Null_original_values_are_handled_for_entity_that_does_changed_only_notification()
-            => NullOriginalValuesTest(new ChangedOnlyEntity());
+        public virtual void Null_original_values_are_handled_for_entity_that_does_changed_only_notification() =>
+            NullOriginalValuesTest(new ChangedOnlyEntity());
 
         [ConditionalFact]
-        public virtual void Null_original_values_are_handled_generically_for_entity_that_does_full_change_tracking()
-            => GenericNullOriginalValuesTest(new FullNotificationEntity());
+        public virtual void Null_original_values_are_handled_generically_for_entity_that_does_full_change_tracking() =>
+            GenericNullOriginalValuesTest(new FullNotificationEntity());
 
         [ConditionalFact]
-        public virtual void Null_original_values_are_handled_generically_for_entity_that_does_changed_only_notification()
-            => GenericNullOriginalValuesTest(new ChangedOnlyEntity());
+        public virtual void Null_original_values_are_handled_generically_for_entity_that_does_changed_only_notification() =>
+            GenericNullOriginalValuesTest(new ChangedOnlyEntity());
 
         [ConditionalFact]
-        public virtual void Setting_property_using_state_entry_always_marks_as_modified_full_notifications()
-            => SetPropertyInternalEntityEntryTest(new FullNotificationEntity());
+        public virtual void Setting_property_using_state_entry_always_marks_as_modified_full_notifications() =>
+            SetPropertyInternalEntityEntryTest(new FullNotificationEntity());
 
         [ConditionalFact]
-        public virtual void Setting_property_using_state_entry_always_marks_as_modified_changed_notifications()
-            => SetPropertyInternalEntityEntryTest(new ChangedOnlyEntity());
+        public virtual void Setting_property_using_state_entry_always_marks_as_modified_changed_notifications() =>
+            SetPropertyInternalEntityEntryTest(new ChangedOnlyEntity());
 
         [ConditionalFact]
-        public void All_original_values_can_be_accessed_for_entity_that_does_changed_only_notifications()
-            => AllOriginalValuesTest(new ChangedOnlyEntity());
+        public void All_original_values_can_be_accessed_for_entity_that_does_changed_only_notifications() =>
+            AllOriginalValuesTest(new ChangedOnlyEntity());
 
         [ConditionalFact]
         public virtual void Temporary_values_are_not_reset_when_entity_is_detached()
@@ -104,11 +106,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Added)]
         [InlineData(EntityState.Deleted)]
-        public void AcceptChanges_handles_different_entity_states_for_owned_types(EntityState entityState)
-        {
+        public void AcceptChanges_handles_different_entity_states_for_owned_types(
+            EntityState entityState
+        ) {
             using var context = new KClrContext();
             var ownerEntry = context.Entry(
-                new OwnerClass { Id = 1, Owned = new OwnedClass { Value = "Kool" } }).GetInfrastructure();
+                    new OwnerClass { Id = 1, Owned = new OwnedClass { Value = "Kool" } }
+                )
+                .GetInfrastructure();
 
             var entry = context.Entry(((OwnerClass)ownerEntry.Entity).Owned).GetInfrastructure();
             var valueProperty = entry.EntityType.FindProperty(nameof(OwnedClass.Value));
@@ -126,9 +131,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             Assert.Equal(
                 entityState == EntityState.Deleted || entityState == EntityState.Detached
-                    ? EntityState.Detached
-                    : EntityState.Unchanged,
-                entry.EntityState);
+                  ? EntityState.Detached
+                  : EntityState.Unchanged,
+                entry.EntityState
+            );
             if (entityState == EntityState.Unchanged)
             {
                 Assert.Equal("Kool", entry[valueProperty]);
@@ -138,8 +144,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal("Pickle", entry[valueProperty]);
                 Assert.Equal(
-                    entityState == EntityState.Detached || entityState == EntityState.Deleted ? "Cheese" : "Pickle",
-                    entry.GetOriginalValue(valueProperty));
+                    entityState == EntityState.Detached || entityState == EntityState.Deleted
+                      ? "Cheese"
+                      : "Pickle",
+                    entry.GetOriginalValue(valueProperty)
+                );
             }
         }
 
@@ -174,19 +183,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         }
 
         [ConditionalFact]
-        public void Setting_CLR_property_with_snapshot_change_tracking_requires_DetectChanges()
-            => SetPropertyClrTest(
-                new SomeEntity { Id = 1, Name = "Kool" }, needsDetectChanges: true);
+        public void Setting_CLR_property_with_snapshot_change_tracking_requires_DetectChanges() =>
+            SetPropertyClrTest(new SomeEntity { Id = 1, Name = "Kool" }, needsDetectChanges: true);
 
         [ConditionalFact]
-        public void Setting_CLR_property_with_changed_only_notifications_does_not_require_DetectChanges()
-            => SetPropertyClrTest(
-                new ChangedOnlyEntity { Id = 1, Name = "Kool" }, needsDetectChanges: false);
+        public void Setting_CLR_property_with_changed_only_notifications_does_not_require_DetectChanges() =>
+            SetPropertyClrTest(
+                new ChangedOnlyEntity { Id = 1, Name = "Kool" },
+                needsDetectChanges: false
+            );
 
         [ConditionalFact]
-        public void Setting_CLR_property_with_full_notifications_does_not_require_DetectChanges()
-            => SetPropertyClrTest(
-                new FullNotificationEntity { Id = 1, Name = "Kool" }, needsDetectChanges: false);
+        public void Setting_CLR_property_with_full_notifications_does_not_require_DetectChanges() =>
+            SetPropertyClrTest(
+                new FullNotificationEntity { Id = 1, Name = "Kool" },
+                needsDetectChanges: false
+            );
 
         private void SetPropertyClrTest<TEntity>(TEntity entity, bool needsDetectChanges)
             where TEntity : class, ISomeEntity
@@ -235,7 +247,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             public string Fk2 { get; set; }
         }
 
-        public class FullNotificationEntity : INotifyPropertyChanging, INotifyPropertyChanged, ISomeEntity
+        public class FullNotificationEntity
+            : INotifyPropertyChanging,
+              INotifyPropertyChanged,
+              ISomeEntity
         {
             private int _id;
             private string _name;
@@ -271,11 +286,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             public event PropertyChangingEventHandler PropertyChanging;
             public event PropertyChangedEventHandler PropertyChanged;
 
-            private void NotifyChanged([CallerMemberName] string propertyName = "")
-                => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            private void NotifyChanged([CallerMemberName] string propertyName = "") =>
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-            private void NotifyChanging([CallerMemberName] string propertyName = "")
-                => PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
+            private void NotifyChanging([CallerMemberName] string propertyName = "") =>
+                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
         }
 
         public class ChangedOnlyEntity : INotifyPropertyChanged, ISomeEntity
@@ -311,8 +326,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             public event PropertyChangedEventHandler PropertyChanged;
 
-            private void NotifyChanged([CallerMemberName] string propertyName = "")
-                => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            private void NotifyChanged([CallerMemberName] string propertyName = "") =>
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public class Root : IRoot
@@ -449,15 +464,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     b =>
                     {
                         b.Property(e => e.Name).IsConcurrencyToken();
-                        b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotifications);
-                    });
+                        b.HasChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotifications
+                        );
+                    }
+                );
 
                 modelBuilder.Entity<ChangedOnlyEntity>(
                     b =>
                     {
                         b.Property(e => e.Name).IsConcurrencyToken();
                         b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<OwnerClass>(
                     eb =>
@@ -467,7 +486,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         owned.WithOwner().HasForeignKey("Id");
                         owned.HasKey("Id");
                         owned.Property(e => e.Value);
-                    });
+                    }
+                );
             }
         }
 
@@ -481,15 +501,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     b =>
                     {
                         b.Property(e => e.Name).IsConcurrencyToken();
-                        b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues);
-                    });
+                        b.HasChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                        );
+                    }
+                );
 
                 modelBuilder.Entity<ChangedOnlyEntity>(
                     b =>
                     {
                         b.Property(e => e.Name).IsConcurrencyToken();
                         b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
-                    });
+                    }
+                );
             }
         }
     }

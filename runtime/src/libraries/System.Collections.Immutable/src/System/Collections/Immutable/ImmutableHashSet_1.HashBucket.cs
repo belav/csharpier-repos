@@ -20,7 +20,6 @@ namespace System.Collections.Immutable
             /// The change required element(s) to be added or removed from the collection.
             /// </summary>
             SizeChanged,
-
             /// <summary>
             /// No change was required (the operation ended in a no-op).
             /// </summary>
@@ -126,16 +125,21 @@ namespace System.Collections.Immutable
             /// <param name="valueComparer">The value comparer.</param>
             /// <param name="result">A description of the effect was on adding an element to this <see cref="HashBucket"/>.</param>
             /// <returns>A new <see cref="HashBucket"/> that contains the added value and any values already held by this <see cref="HashBucket"/>.</returns>
-            internal HashBucket Add(T value, IEqualityComparer<T> valueComparer, out OperationResult result)
-            {
+            internal HashBucket Add(
+                T value,
+                IEqualityComparer<T> valueComparer,
+                out OperationResult result
+            ) {
                 if (this.IsEmpty)
                 {
                     result = OperationResult.SizeChanged;
                     return new HashBucket(value);
                 }
 
-                if (valueComparer.Equals(value, _firstValue) || _additionalElements.IndexOf(value, valueComparer) >= 0)
-                {
+                if (
+                    valueComparer.Equals(value, _firstValue)
+                    || _additionalElements.IndexOf(value, valueComparer) >= 0
+                ) {
                     result = OperationResult.NoChangeRequired;
                     return this;
                 }
@@ -156,7 +160,8 @@ namespace System.Collections.Immutable
                     return false;
                 }
 
-                return valueComparer.Equals(value, _firstValue) || _additionalElements.IndexOf(value, valueComparer) >= 0;
+                return valueComparer.Equals(value, _firstValue)
+                    || _additionalElements.IndexOf(value, valueComparer) >= 0;
             }
 
             /// <summary>
@@ -168,8 +173,11 @@ namespace System.Collections.Immutable
             /// <returns>
             /// A value indicating whether the search was successful.
             /// </returns>
-            internal bool TryExchange(T value, IEqualityComparer<T> valueComparer, out T existingValue)
-            {
+            internal bool TryExchange(
+                T value,
+                IEqualityComparer<T> valueComparer,
+                out T existingValue
+            ) {
                 if (!this.IsEmpty)
                 {
                     if (valueComparer.Equals(value, _firstValue))
@@ -201,8 +209,11 @@ namespace System.Collections.Immutable
             /// <param name="equalityComparer">The equality comparer.</param>
             /// <param name="result">A description of the effect was on adding an element to this <see cref="HashBucket"/>.</param>
             /// <returns>A new <see cref="HashBucket"/> that does not contain the removed value and any values already held by this <see cref="HashBucket"/>.</returns>
-            internal HashBucket Remove(T value, IEqualityComparer<T> equalityComparer, out OperationResult result)
-            {
+            internal HashBucket Remove(
+                T value,
+                IEqualityComparer<T> equalityComparer,
+                out OperationResult result
+            ) {
                 if (this.IsEmpty)
                 {
                     result = OperationResult.NoChangeRequired;
@@ -222,7 +233,10 @@ namespace System.Collections.Immutable
                         // to remove the root node in the binary tree that implements the list.
                         int indexOfRootNode = _additionalElements.Left!.Count;
                         result = OperationResult.SizeChanged;
-                        return new HashBucket(_additionalElements.Key, _additionalElements.RemoveAt(indexOfRootNode));
+                        return new HashBucket(
+                            _additionalElements.Key,
+                            _additionalElements.RemoveAt(indexOfRootNode)
+                        );
                     }
                 }
 
@@ -296,17 +310,14 @@ namespace System.Collections.Immutable
                     /// The first element has not yet been moved to.
                     /// </summary>
                     BeforeFirst,
-
                     /// <summary>
                     /// We're at the <see cref="_firstValue"/> of the containing bucket.
                     /// </summary>
                     First,
-
                     /// <summary>
                     /// We're enumerating the <see cref="_additionalElements"/> in the bucket.
                     /// </summary>
                     Additional,
-
                     /// <summary>
                     /// The end of enumeration has been reached.
                     /// </summary>
@@ -367,7 +378,9 @@ namespace System.Collections.Immutable
                             }
 
                             _currentPosition = Position.Additional;
-                            _additionalEnumerator = new ImmutableList<T>.Enumerator(_bucket._additionalElements);
+                            _additionalEnumerator = new ImmutableList<T>.Enumerator(
+                                _bucket._additionalElements
+                            );
                             return _additionalEnumerator.MoveNext();
                         case Position.Additional:
                             return _additionalEnumerator.MoveNext();

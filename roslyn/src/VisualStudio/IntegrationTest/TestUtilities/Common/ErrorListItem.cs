@@ -19,8 +19,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Common
         public int Line { get; set; }
         public int Column { get; set; }
 
-        public ErrorListItem(string severity, string description, string project, string fileName, int line, int column)
-        {
+        public ErrorListItem(
+            string severity,
+            string description,
+            string project,
+            string fileName,
+            int line,
+            int column
+        ) {
             Severity = severity;
             Description = description;
             Project = project;
@@ -29,8 +35,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Common
             Column = column;
         }
 
-        public bool Equals(ErrorListItem other)
-            => other != null
+        public bool Equals(ErrorListItem other) =>
+            other != null
             && Comparison.AreStringValuesEqual(Severity, other.Severity)
             && Comparison.AreStringValuesEqual(Description, other.Description)
             && Comparison.AreStringValuesEqual(Project, other.Project)
@@ -38,13 +44,21 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Common
             && Line == other.Line
             && Column == other.Column;
 
-        public override bool Equals(object obj)
-            => Equals(obj as ErrorListItem);
+        public override bool Equals(object obj) => Equals(obj as ErrorListItem);
 
-        public override int GetHashCode()
-            => Hash.Combine(Severity, Hash.Combine(Description, Hash.Combine(Project, Hash.Combine(FileName, Hash.Combine(Line, Hash.Combine(Column, 0))))));
+        public override int GetHashCode() =>
+            Hash.Combine(
+                Severity,
+                Hash.Combine(
+                    Description,
+                    Hash.Combine(
+                        Project,
+                        Hash.Combine(FileName, Hash.Combine(Line, Hash.Combine(Column, 0)))
+                    )
+                )
+            );
 
-        public override string ToString()
-            => $"Severity:{Severity} Description:{Description} Project:{Project} File:{FileName} Line:{Line} Column:{Column}";
+        public override string ToString() =>
+            $"Severity:{Severity} Description:{Description} Project:{Project} File:{FileName} Line:{Line} Column:{Column}";
     }
 }

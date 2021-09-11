@@ -11,7 +11,10 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
     {
         public TemporaryFileProvider()
         {
-            Root = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), "tmpfiles", Guid.NewGuid().ToString())).FullName;
+            Root =
+                Directory.CreateDirectory(
+                    Path.Combine(Path.GetTempPath(), "tmpfiles", Guid.NewGuid().ToString())
+                ).FullName;
         }
 
         public string Root { get; }

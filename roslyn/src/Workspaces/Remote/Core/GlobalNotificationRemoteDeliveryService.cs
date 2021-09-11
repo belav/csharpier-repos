@@ -30,13 +30,17 @@ namespace Microsoft.CodeAnalysis.Remote
         /// stop prior to hearing about the relevant start).
         /// </summary>
         private readonly object _globalNotificationsGate = new object();
-        private Task<GlobalNotificationState> _globalNotificationsTask = Task.FromResult(GlobalNotificationState.NotStarted);
+        private Task<GlobalNotificationState> _globalNotificationsTask = Task.FromResult(
+            GlobalNotificationState.NotStarted
+        );
 
         private readonly HostWorkspaceServices _services;
         private readonly CancellationToken _cancellationToken;
 
-        public GlobalNotificationRemoteDeliveryService(HostWorkspaceServices services, CancellationToken cancellationToken)
-        {
+        public GlobalNotificationRemoteDeliveryService(
+            HostWorkspaceServices services,
+            CancellationToken cancellationToken
+        ) {
             _services = services;
             _cancellationToken = cancellationToken;
 
@@ -50,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private void RegisterGlobalOperationNotifications()
         {
-            var globalOperationService = _services.GetService<IGlobalOperationNotificationService>();
+            var globalOperationService =
+                _services.GetService<IGlobalOperationNotificationService>();
             if (globalOperationService != null)
             {
                 globalOperationService.Started += OnGlobalOperationStarted;
@@ -60,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private void UnregisterGlobalOperationNotifications()
         {
-            var globalOperationService = _services.GetService<IGlobalOperationNotificationService>();
+            var globalOperationService =
+                _services.GetService<IGlobalOperationNotificationService>();
             if (globalOperationService != null)
             {
                 globalOperationService.Started -= OnGlobalOperationStarted;
@@ -73,16 +79,21 @@ namespace Microsoft.CodeAnalysis.Remote
             lock (_globalNotificationsGate)
             {
                 // Pass TaskContinuationOptions.OnlyOnRanToCompletion to avoid delivering further notifications once the task gets canceled or fails.
-                // The cancellation happens only when VS is shutting down. The task might fail if communication with OOP fails. 
+                // The cancellation happens only when VS is shutting down. The task might fail if communication with OOP fails.
                 // Once that happens there is not point in sending more notifications to the remote service.
 
                 _globalNotificationsTask = _globalNotificationsTask.SafeContinueWithFromAsync(
-                    SendStartNotificationAsync, _cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.Default);
+                    SendStartNotificationAsync,
+                    _cancellationToken,
+                    TaskContinuationOptions.OnlyOnRanToCompletion,
+                    TaskScheduler.Default
+                );
             }
         }
 
-        private async Task<GlobalNotificationState> SendStartNotificationAsync(Task<GlobalNotificationState> previousTask)
-        {
+        private async Task<GlobalNotificationState> SendStartNotificationAsync(
+            Task<GlobalNotificationState> previousTask
+        ) {
             // Can only transition from NotStarted->Started.  If we hear about
             // anything else, do nothing.
             if (previousTask.Result != GlobalNotificationState.NotStarted)
@@ -90,15 +101,19 @@ namespace Microsoft.CodeAnalysis.Remote
                 return previousTask.Result;
             }
 
-            var client = await RemoteHostClient.TryGetClientAsync(_services, _cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient.TryGetClientAsync(_services, _cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
                 return previousTask.Result;
             }
 
             _ = await client.TryInvokeAsync<IRemoteGlobalNotificationDeliveryService>(
-                (service, cancellationToken) => service.OnGlobalOperationStartedAsync(cancellationToken),
-                _cancellationToken).ConfigureAwait(false);
+                    (service, cancellationToken) =>
+                        service.OnGlobalOperationStartedAsync(cancellationToken),
+                    _cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return GlobalNotificationState.Started;
         }
@@ -108,16 +123,22 @@ namespace Microsoft.CodeAnalysis.Remote
             lock (_globalNotificationsGate)
             {
                 // Pass TaskContinuationOptions.OnlyOnRanToCompletion to avoid delivering further notifications once the task gets canceled or fails.
-                // The cancellation happens only when VS is shutting down. The task might fail if communication with OOP fails. 
+                // The cancellation happens only when VS is shutting down. The task might fail if communication with OOP fails.
                 // Once that happens there is not point in sending more notifications to the remote service.
 
                 _globalNotificationsTask = _globalNotificationsTask.SafeContinueWithFromAsync(
-                    previous => SendStoppedNotificationAsync(previous, e), _cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.Default);
+                    previous => SendStoppedNotificationAsync(previous, e),
+                    _cancellationToken,
+                    TaskContinuationOptions.OnlyOnRanToCompletion,
+                    TaskScheduler.Default
+                );
             }
         }
 
-        private async Task<GlobalNotificationState> SendStoppedNotificationAsync(Task<GlobalNotificationState> previousTask, GlobalOperationEventArgs e)
-        {
+        private async Task<GlobalNotificationState> SendStoppedNotificationAsync(
+            Task<GlobalNotificationState> previousTask,
+            GlobalOperationEventArgs e
+        ) {
             // Can only transition from Started->NotStarted.  If we hear about
             // anything else, do nothing.
             if (previousTask.Result != GlobalNotificationState.Started)
@@ -125,15 +146,19 @@ namespace Microsoft.CodeAnalysis.Remote
                 return previousTask.Result;
             }
 
-            var client = await RemoteHostClient.TryGetClientAsync(_services, _cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient.TryGetClientAsync(_services, _cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
                 return previousTask.Result;
             }
 
             _ = await client.TryInvokeAsync<IRemoteGlobalNotificationDeliveryService>(
-                (service, cancellationToken) => service.OnGlobalOperationStoppedAsync(e.Operations, cancellationToken),
-                _cancellationToken).ConfigureAwait(false);
+                    (service, cancellationToken) =>
+                        service.OnGlobalOperationStoppedAsync(e.Operations, cancellationToken),
+                    _cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Mark that we're stopped now.
             return GlobalNotificationState.NotStarted;

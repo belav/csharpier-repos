@@ -86,11 +86,17 @@ namespace System.IO
             }
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (buffer.Length - index < count)
             {
@@ -228,7 +234,10 @@ namespace System.IO
             }
             if (index < 0 || count < 0)
             {
-                throw new ArgumentOutOfRangeException(index < 0 ? nameof(index) : nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    index < 0 ? nameof(index) : nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (buffer.Length - index < count)
             {
@@ -238,9 +247,13 @@ namespace System.IO
             return Task.FromResult(ReadBlock(buffer, index, count));
         }
 
-        public override ValueTask<int> ReadBlockAsync(Memory<char> buffer, CancellationToken cancellationToken = default) =>
-            cancellationToken.IsCancellationRequested ? ValueTask.FromCanceled<int>(cancellationToken) :
-            new ValueTask<int>(ReadBlock(buffer.Span));
+        public override ValueTask<int> ReadBlockAsync(
+            Memory<char> buffer,
+            CancellationToken cancellationToken = default
+        ) =>
+            cancellationToken.IsCancellationRequested
+                ? ValueTask.FromCanceled<int>(cancellationToken)
+                : new ValueTask<int>(ReadBlock(buffer.Span));
 
         public override Task<int> ReadAsync(char[] buffer, int index, int count)
         {
@@ -250,7 +263,10 @@ namespace System.IO
             }
             if (index < 0 || count < 0)
             {
-                throw new ArgumentOutOfRangeException(index < 0 ? nameof(index) : nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    index < 0 ? nameof(index) : nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (buffer.Length - index < count)
             {
@@ -260,9 +276,13 @@ namespace System.IO
             return Task.FromResult(Read(buffer, index, count));
         }
 
-        public override ValueTask<int> ReadAsync(Memory<char> buffer, CancellationToken cancellationToken = default) =>
-            cancellationToken.IsCancellationRequested ? ValueTask.FromCanceled<int>(cancellationToken) :
-            new ValueTask<int>(Read(buffer.Span));
+        public override ValueTask<int> ReadAsync(
+            Memory<char> buffer,
+            CancellationToken cancellationToken = default
+        ) =>
+            cancellationToken.IsCancellationRequested
+                ? ValueTask.FromCanceled<int>(cancellationToken)
+                : new ValueTask<int>(Read(buffer.Span));
         #endregion
     }
 }

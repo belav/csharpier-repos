@@ -36,13 +36,15 @@ namespace System.Web.Mvc.Async
             Interlocked.Increment(ref _outstandingTriggers);
 
             SingleEntryGate triggerFiredGate = new SingleEntryGate();
-            return new Trigger(() =>
-            {
-                if (triggerFiredGate.TryEnter())
+            return new Trigger(
+                () =>
                 {
-                    HandleTriggerFired();
+                    if (triggerFiredGate.TryEnter())
+                    {
+                        HandleTriggerFired();
+                    }
                 }
-            });
+            );
         }
 
         private void HandleTriggerFired()

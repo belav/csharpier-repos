@@ -14,22 +14,23 @@ namespace System
     /// want to recover from these errors.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class InsufficientMemoryException : OutOfMemoryException
     {
-        public InsufficientMemoryException() : base(
+        public InsufficientMemoryException()
+            : base(
 #if CORECLR
-            GetMessageFromNativeResources(ExceptionMessageKind.OutOfMemory)
+                GetMessageFromNativeResources(ExceptionMessageKind.OutOfMemory)
 #else
-            SR.Arg_OutOfMemoryException
+                SR.Arg_OutOfMemoryException
 #endif
-            )
-        {
+            ) {
             HResult = HResults.COR_E_INSUFFICIENTMEMORY;
         }
 
-        public InsufficientMemoryException(string? message)
-            : base(message)
+        public InsufficientMemoryException(string? message) : base(message)
         {
             HResult = HResults.COR_E_INSUFFICIENTMEMORY;
         }
@@ -40,8 +41,9 @@ namespace System
             HResult = HResults.COR_E_INSUFFICIENTMEMORY;
         }
 
-        private InsufficientMemoryException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private InsufficientMemoryException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
     }
 }

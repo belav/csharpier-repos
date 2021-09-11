@@ -14,8 +14,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Authentication
         [InlineData("/Identity/Error")]
         [InlineData("/identity/Account/Manage")]
         [InlineData("/Identity/ACCOUNT/TwoFactor")]
-        public void SelectScheme_ReturnsTheIdentityApplicationScheme_ForIdentityRelatedPaths(string path)
-        {
+        public void SelectScheme_ReturnsTheIdentityApplicationScheme_ForIdentityRelatedPaths(
+            string path
+        ) {
             // Arrange
             var selector = new IdentityServerJwtPolicySchemeForwardSelector("/Identity", "Local");
             var ctx = new DefaultHttpContext();

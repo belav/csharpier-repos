@@ -14,15 +14,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private readonly MvcOptions _mvcOptions;
         private readonly ILoggerFactory _loggerFactory;
 
-        public ResponseCacheFilterApplicationModelProvider(IOptions<MvcOptions> mvcOptionsAccessor, ILoggerFactory loggerFactory)
-        {
+        public ResponseCacheFilterApplicationModelProvider(
+            IOptions<MvcOptions> mvcOptionsAccessor,
+            ILoggerFactory loggerFactory
+        ) {
             if (mvcOptionsAccessor == null)
             {
                 throw new ArgumentNullException(nameof(mvcOptionsAccessor));
             }
 
             _mvcOptions = mvcOptionsAccessor.Value;
-            _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _loggerFactory =
+                loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
         }
 
         // The order is set to execute after the DefaultPageApplicationModelProvider.
@@ -36,16 +39,17 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             }
 
             var pageModel = context.PageApplicationModel;
-            var responseCacheAttributes = pageModel.HandlerTypeAttributes.OfType<ResponseCacheAttribute>();
+            var responseCacheAttributes =
+                pageModel.HandlerTypeAttributes.OfType<ResponseCacheAttribute>();
             foreach (var attribute in responseCacheAttributes)
             {
                 var cacheProfile = attribute.GetCacheProfile(_mvcOptions);
-                context.PageApplicationModel.Filters.Add(new PageResponseCacheFilter(cacheProfile, _loggerFactory));
+                context.PageApplicationModel.Filters.Add(
+                    new PageResponseCacheFilter(cacheProfile, _loggerFactory)
+                );
             }
         }
 
-        public void OnProvidersExecuted(PageApplicationModelProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
     }
 }

@@ -20,11 +20,7 @@ namespace Microsoft.Extensions.Internal
             var pid = process.Id;
             if (OperatingSystem.IsWindows())
             {
-                RunProcessAndWaitForExit(
-                    "taskkill",
-                    $"/T /F /PID {pid}",
-                    timeout,
-                    out var _);
+                RunProcessAndWaitForExit("taskkill", $"/T /F /PID {pid}", timeout, out var _);
             }
             else
             {
@@ -42,11 +38,7 @@ namespace Microsoft.Extensions.Internal
         {
             try
             {
-                RunProcessAndWaitForExit(
-                    "pgrep",
-                    $"-P {parentId}",
-                    timeout,
-                    out var stdout);
+                RunProcessAndWaitForExit("pgrep", $"-P {parentId}", timeout, out var stdout);
 
                 if (!string.IsNullOrEmpty(stdout))
                 {
@@ -80,11 +72,7 @@ namespace Microsoft.Extensions.Internal
         {
             try
             {
-                RunProcessAndWaitForExit(
-                    "kill",
-                    $"-TERM {processId}",
-                    timeout,
-                    out var stdout);
+                RunProcessAndWaitForExit("kill", $"-TERM {processId}", timeout, out var stdout);
             }
             catch (Win32Exception ex) when (ex.Message.Contains("No such file or directory"))
             {
@@ -92,8 +80,12 @@ namespace Microsoft.Extensions.Internal
             }
         }
 
-        private static void RunProcessAndWaitForExit(string fileName, string arguments, TimeSpan timeout, out string stdout)
-        {
+        private static void RunProcessAndWaitForExit(
+            string fileName,
+            string arguments,
+            TimeSpan timeout,
+            out string stdout
+        ) {
             var startInfo = new ProcessStartInfo
             {
                 FileName = fileName,

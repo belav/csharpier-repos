@@ -23,7 +23,8 @@ namespace XPathTests.FunctionalTests
         {
             var xml = "books.xml";
             var testExpression = @"/bookstore/book | /bookstore/magazine";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -138,7 +139,8 @@ namespace XPathTests.FunctionalTests
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
                 },
                 new XPathResultToken
                 {
@@ -160,7 +162,8 @@ namespace XPathTests.FunctionalTests
                     HasNameTable = true,
                     Value =
                         "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);

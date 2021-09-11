@@ -18,13 +18,36 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
     /// </summary>
     internal class SimpleCodeCleanupProvider : ICodeCleanupProvider
     {
-        private readonly Func<Document, ImmutableArray<TextSpan>, CancellationToken, Task<Document>>? _documentDelegatee;
-        private readonly Func<SyntaxNode, ImmutableArray<TextSpan>, Workspace, CancellationToken, SyntaxNode>? _syntaxDelegatee;
+        private readonly Func<
+            Document,
+            ImmutableArray<TextSpan>,
+            CancellationToken,
+            Task<Document>
+        >? _documentDelegatee;
+        private readonly Func<
+            SyntaxNode,
+            ImmutableArray<TextSpan>,
+            Workspace,
+            CancellationToken,
+            SyntaxNode
+        >? _syntaxDelegatee;
 
-        public SimpleCodeCleanupProvider(string name,
-            Func<Document, ImmutableArray<TextSpan>, CancellationToken, Task<Document>>? documentDelegatee = null,
-            Func<SyntaxNode, ImmutableArray<TextSpan>, Workspace, CancellationToken, SyntaxNode>? syntaxDelegatee = null)
-        {
+        public SimpleCodeCleanupProvider(
+            string name,
+            Func<
+                Document,
+                ImmutableArray<TextSpan>,
+                CancellationToken,
+                Task<Document>
+            >? documentDelegatee = null,
+            Func<
+                SyntaxNode,
+                ImmutableArray<TextSpan>,
+                Workspace,
+                CancellationToken,
+                SyntaxNode
+            >? syntaxDelegatee = null
+        ) {
             Debug.Assert(documentDelegatee != null || syntaxDelegatee != null);
 
             this.Name = name;
@@ -34,8 +57,11 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
 
         public string Name { get; }
 
-        public Task<Document> CleanupAsync(Document document, ImmutableArray<TextSpan> spans, CancellationToken cancellationToken)
-        {
+        public Task<Document> CleanupAsync(
+            Document document,
+            ImmutableArray<TextSpan> spans,
+            CancellationToken cancellationToken
+        ) {
             if (_documentDelegatee != null)
             {
                 return _documentDelegatee(document, spans, cancellationToken);
@@ -44,12 +70,21 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
             return CleanupCoreAsync(document, spans, cancellationToken);
         }
 
-        private async Task<Document> CleanupCoreAsync(Document document, ImmutableArray<TextSpan> spans, CancellationToken cancellationToken)
-        {
+        private async Task<Document> CleanupCoreAsync(
+            Document document,
+            ImmutableArray<TextSpan> spans,
+            CancellationToken cancellationToken
+        ) {
             RoslynDebug.AssertNotNull(_syntaxDelegatee);
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var newRoot = _syntaxDelegatee(root, spans, document.Project.Solution.Workspace, cancellationToken);
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var newRoot = _syntaxDelegatee(
+                root,
+                spans,
+                document.Project.Solution.Workspace,
+                cancellationToken
+            );
 
             if (root != newRoot)
             {
@@ -59,8 +94,12 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
             return document;
         }
 
-        public Task<SyntaxNode> CleanupAsync(SyntaxNode root, ImmutableArray<TextSpan> spans, Workspace workspace, CancellationToken cancellationToken)
-        {
+        public Task<SyntaxNode> CleanupAsync(
+            SyntaxNode root,
+            ImmutableArray<TextSpan> spans,
+            Workspace workspace,
+            CancellationToken cancellationToken
+        ) {
             if (_syntaxDelegatee != null)
             {
                 return Task.FromResult(_syntaxDelegatee(root, spans, workspace, cancellationToken));

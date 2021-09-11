@@ -11,30 +11,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class OutKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public OutKeywordRecommender()
-            : base(SyntaxKind.OutKeyword)
-        {
-        }
+        public OutKeywordRecommender() : base(SyntaxKind.OutKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
             var syntaxTree = context.SyntaxTree;
 
             // TODO(cyrusn): lambda/anon methods can have out/ref parameters
-            return
-                context.TargetToken.IsTypeParameterVarianceContext() ||
-                IsOutParameterModifierContext(position, context) ||
-                syntaxTree.IsAnonymousMethodParameterModifierContext(position, context.LeftToken) ||
-                syntaxTree.IsPossibleLambdaParameterModifierContext(position, context.LeftToken) ||
-                context.TargetToken.IsConstructorOrMethodParameterArgumentContext() ||
-                context.TargetToken.IsXmlCrefParameterModifierContext();
+            return context.TargetToken.IsTypeParameterVarianceContext()
+                || IsOutParameterModifierContext(position, context)
+                || syntaxTree.IsAnonymousMethodParameterModifierContext(position, context.LeftToken)
+                || syntaxTree.IsPossibleLambdaParameterModifierContext(position, context.LeftToken)
+                || context.TargetToken.IsConstructorOrMethodParameterArgumentContext()
+                || context.TargetToken.IsXmlCrefParameterModifierContext();
         }
 
         private static bool IsOutParameterModifierContext(int position, CSharpSyntaxContext context)
         {
             return context.SyntaxTree.IsParameterModifierContext(
-                       position, context.LeftToken, includeOperators: false, out _, out var previousModifier) &&
-                   previousModifier == SyntaxKind.None;
+                    position,
+                    context.LeftToken,
+                    includeOperators: false,
+                    out _,
+                    out var previousModifier
+                )
+                && previousModifier == SyntaxKind.None;
         }
     }
 }

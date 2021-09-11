@@ -14,8 +14,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
     {
         private readonly AbstractStructureTaggerProvider _tagProvider;
 
-        public StructureTag(AbstractStructureTaggerProvider tagProvider, BlockSpan blockSpan, ITextSnapshot snapshot)
-        {
+        public StructureTag(
+            AbstractStructureTaggerProvider tagProvider,
+            BlockSpan blockSpan,
+            ITextSnapshot snapshot
+        ) {
             Snapshot = snapshot;
             OutliningSpan = blockSpan.TextSpan.ToSpan();
             Type = ConvertType(blockSpan.Type);

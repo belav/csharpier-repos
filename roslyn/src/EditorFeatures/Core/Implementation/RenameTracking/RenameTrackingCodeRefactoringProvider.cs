@@ -11,19 +11,29 @@ using Microsoft.VisualStudio.Text.Operations;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, LanguageNames.VisualBasic,
-        Name = PredefinedCodeRefactoringProviderNames.RenameTracking), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeRefactoringProviderNames.RenameTracking
+        ),
+        Shared
+    ]
     internal class RenameTrackingCodeRefactoringProvider : CodeRefactoringProvider
     {
         private readonly ITextUndoHistoryRegistry _undoHistoryRegistry;
         private readonly IEnumerable<IRefactorNotifyService> _refactorNotifyServices;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public RenameTrackingCodeRefactoringProvider(
             ITextUndoHistoryRegistry undoHistoryRegistry,
-            [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices)
-        {
+            [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices
+        ) {
             _undoHistoryRegistry = undoHistoryRegistry;
             _refactorNotifyServices = refactorNotifyServices;
         }
@@ -33,7 +43,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             var (document, span, cancellationToken) = context;
 
             var (action, renameSpan) = RenameTrackingTaggerProvider.TryGetCodeAction(
-                document, span, _refactorNotifyServices, _undoHistoryRegistry, cancellationToken);
+                document,
+                span,
+                _refactorNotifyServices,
+                _undoHistoryRegistry,
+                cancellationToken
+            );
 
             if (action != null)
                 context.RegisterRefactoring(action, renameSpan);

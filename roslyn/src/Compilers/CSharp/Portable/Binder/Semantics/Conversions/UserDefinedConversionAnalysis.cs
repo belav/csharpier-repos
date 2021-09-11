@@ -31,15 +31,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion sourceConversion,
             Conversion targetConversion,
             TypeSymbol fromType,
-            TypeSymbol toType)
-        {
+            TypeSymbol toType
+        ) {
             return new UserDefinedConversionAnalysis(
                 UserDefinedConversionAnalysisKind.ApplicableInNormalForm,
                 op,
                 sourceConversion,
                 targetConversion,
                 fromType,
-                toType);
+                toType
+            );
         }
 
         public static UserDefinedConversionAnalysis Lifted(
@@ -47,15 +48,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion sourceConversion,
             Conversion targetConversion,
             TypeSymbol fromType,
-            TypeSymbol toType)
-        {
+            TypeSymbol toType
+        ) {
             return new UserDefinedConversionAnalysis(
                 UserDefinedConversionAnalysisKind.ApplicableInLiftedForm,
                 op,
                 sourceConversion,
                 targetConversion,
                 fromType,
-                toType);
+                toType
+            );
         }
 
         private UserDefinedConversionAnalysis(
@@ -64,8 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion sourceConversion,
             Conversion targetConversion,
             TypeSymbol fromType,
-            TypeSymbol toType)
-        {
+            TypeSymbol toType
+        ) {
             this.Kind = kind;
             this.Operator = op;
             this.SourceConversion = sourceConversion;

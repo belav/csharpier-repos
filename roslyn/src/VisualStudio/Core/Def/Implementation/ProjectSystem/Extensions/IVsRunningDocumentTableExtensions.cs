@@ -11,8 +11,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
     internal static class IVsRunningDocumentTableExtensions
     {
-        public static bool IsDocumentInitialized(this IVsRunningDocumentTable4 runningDocTable, uint docCookie)
-        {
+        public static bool IsDocumentInitialized(
+            this IVsRunningDocumentTable4 runningDocTable,
+            uint docCookie
+        ) {
             var flags = runningDocTable.GetDocumentFlags(docCookie);
 
             return (flags & (uint)_VSRDTFLAGS4.RDT_PendingInitialization) == 0;

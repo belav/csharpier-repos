@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class TPTRelationshipsQueryRelationalFixture : InheritanceRelationshipsQueryRelationalFixture
+    public abstract class TPTRelationshipsQueryRelationalFixture
+        : InheritanceRelationshipsQueryRelationalFixture
     {
         protected override string StoreName { get; } = "TPTRelationships";
 
@@ -18,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             modelBuilder.Entity<DerivedReferenceOnBase>().ToTable("DerivedReferencesOnBase");
             modelBuilder.Entity<DerivedCollectionOnBase>().ToTable("DerivedCollectionsOnBase");
             modelBuilder.Entity<DerivedReferenceOnDerived>().ToTable("DerivedReferencesOnDerived");
-            modelBuilder.Entity<DerivedCollectionOnDerived>().ToTable("DerivedCollectionsOnDerived");
+            modelBuilder.Entity<DerivedCollectionOnDerived>()
+                .ToTable("DerivedCollectionsOnDerived");
 
             modelBuilder.Entity<NestedReferenceDerived>().ToTable("NestedReferencesDerived");
             modelBuilder.Entity<NestedCollectionDerived>().ToTable("NestedCollectionsDerived");

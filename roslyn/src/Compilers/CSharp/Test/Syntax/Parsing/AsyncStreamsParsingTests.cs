@@ -19,18 +19,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
-            return SyntaxFactory.ParseSyntaxTree(text, options: (options ?? TestOptions.Regular).WithLanguageVersion(LanguageVersion.CSharp8));
+            return SyntaxFactory.ParseSyntaxTree(
+                text,
+                options: (options ?? TestOptions.Regular).WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
-        protected override CSharpSyntaxNode ParseNode(string text, CSharpParseOptions options = null)
-        {
-            return SyntaxFactory.ParseExpression(text, options: (options ?? TestOptions.Regular).WithLanguageVersion(LanguageVersion.CSharp8));
+        protected override CSharpSyntaxNode ParseNode(
+            string text,
+            CSharpParseOptions options = null
+        ) {
+            return SyntaxFactory.ParseExpression(
+                text,
+                options: (options ?? TestOptions.Regular).WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
         [Fact, WorkItem(32318, "https://github.com/dotnet/roslyn/issues/32318")]
         public void AwaitUsingDeclaration_WithCSharp73()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     async void M()
@@ -41,11 +54,17 @@ class C
     }
 }
 ";
-            var tree = SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3));
-            tree.GetDiagnostics().Verify(
-                // (6,9): error CS8652: The feature 'asynchronous using' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         await using (var x = this)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await").WithArguments("asynchronous using", "8.0").WithLocation(6, 9)
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                source,
+                options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
+            );
+            tree.GetDiagnostics()
+                .Verify(
+                    // (6,9): error CS8652: The feature 'asynchronous using' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         await using (var x = this)
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await")
+                        .WithArguments("asynchronous using", "8.0")
+                        .WithLocation(6, 9)
                 );
 
             UsingTree(source);
@@ -116,7 +135,8 @@ class C
         [Fact]
         public void AwaitUsingDeclaration()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -126,7 +146,8 @@ class C
         }
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -194,7 +215,8 @@ class C
         [Fact]
         public void AwaitUsingWithExpression()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -204,7 +226,8 @@ class C
         }
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -257,7 +280,8 @@ class C
         [Fact, WorkItem(30565, "https://github.com/dotnet/roslyn/issues/30565")]
         public void AwaitUsingWithExpression_Reversed()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -267,7 +291,8 @@ class C
         }
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -337,7 +362,8 @@ class C
         [Fact]
         public void AwaitForeach_WithCSharp73()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     async void M()
@@ -348,11 +374,17 @@ class C
     }
 }
 ";
-            var tree = SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3));
-            tree.GetDiagnostics().Verify(
-                // (6,9): error CS8652: The feature 'async streams' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         await foreach (var i in collection)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await").WithArguments("async streams", "8.0").WithLocation(6, 9)
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                source,
+                options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
+            );
+            tree.GetDiagnostics()
+                .Verify(
+                    // (6,9): error CS8652: The feature 'async streams' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         await foreach (var i in collection)
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await")
+                        .WithArguments("async streams", "8.0")
+                        .WithLocation(6, 9)
                 );
 
             UsingTree(source);
@@ -414,7 +446,8 @@ class C
         [Fact]
         public void AwaitForeach()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -424,7 +457,8 @@ class C
         }
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -483,7 +517,8 @@ class C
         [Fact, WorkItem(30565, "https://github.com/dotnet/roslyn/issues/30565")]
         public void AwaitForeach_Reversed()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -493,7 +528,8 @@ class C
         }
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -575,7 +611,8 @@ class C
         [Fact]
         public void DeconstructionAwaitForeach_WithCSharp73()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     async void M()
@@ -586,11 +623,17 @@ class C
     }
 }
 ";
-            var tree = SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3));
-            tree.GetDiagnostics().Verify(
-                // (6,9): error CS8652: The feature 'async streams' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         await foreach (var (i, j) in collection)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await").WithArguments("async streams", "8.0").WithLocation(6, 9)
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                source,
+                options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
+            );
+            tree.GetDiagnostics()
+                .Verify(
+                    // (6,9): error CS8652: The feature 'async streams' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         await foreach (var (i, j) in collection)
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "await")
+                        .WithArguments("async streams", "8.0")
+                        .WithLocation(6, 9)
                 );
 
             UsingTree(source);
@@ -668,7 +711,8 @@ class C
         [Fact]
         public void DeconstructionAwaitForeach()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -678,7 +722,8 @@ class C
         }
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);

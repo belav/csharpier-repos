@@ -46,8 +46,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     is not known.
         /// </summary>
         /// <returns> The name of the backing field, or <see langword="null" />. </returns>
-        string? GetFieldName()
-            => FieldInfo?.GetSimpleMemberName();
+        string? GetFieldName() => FieldInfo?.GetSimpleMemberName();
 
         /// <summary>
         ///     Gets a value indicating whether this is a shadow property. A shadow property is one that does not have a
@@ -66,9 +65,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     <see langword="true" /> if the property is an indexer property, otherwise <see langword="false" />.
         /// </returns>
-        bool IsIndexerProperty()
-            => this.GetIdentifyingMemberInfo() is PropertyInfo propertyInfo
-                && propertyInfo == DeclaringType.FindIndexerPropertyInfo();
+        bool IsIndexerProperty() =>
+            this.GetIdentifyingMemberInfo() is PropertyInfo propertyInfo
+            && propertyInfo == DeclaringType.FindIndexerPropertyInfo();
 
         /// <summary>
         ///     Gets the <see cref="PropertyAccessMode" /> being used for this property-like object.

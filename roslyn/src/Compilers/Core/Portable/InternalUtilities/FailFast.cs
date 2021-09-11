@@ -62,8 +62,11 @@ namespace Microsoft.CodeAnalysis
             if (exception is object)
             {
                 Console.WriteLine("Exception info");
-                for (Exception? current = exception; current is object; current = current.InnerException)
-                {
+                for (
+                    Exception? current = exception;
+                    current is object;
+                    current = current.InnerException
+                ) {
                     Console.WriteLine(current.Message);
                     Console.WriteLine(current.StackTrace);
                 }

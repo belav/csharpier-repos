@@ -38,8 +38,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         /// </summary>
         /// <param name="source">The <see cref="IEnumerable{T}"/> instance to get the enumerator from.</param>
         /// <param name="elementWrapperProvider">The wrapper provider for wrapping individual elements.</param>
-        public DelegatingEnumerable(IEnumerable<TDeclared> source, IWrapperProvider elementWrapperProvider)
-        {
+        public DelegatingEnumerable(
+            IEnumerable<TDeclared> source,
+            IWrapperProvider elementWrapperProvider
+        ) {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
@@ -56,7 +58,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         /// <returns>The delegating enumerator of the original <see cref="IEnumerable{T}"/> source.</returns>
         public IEnumerator<TWrapped> GetEnumerator()
         {
-            return new DelegatingEnumerator<TWrapped, TDeclared>(_source.GetEnumerator(), _wrapperProvider);
+            return new DelegatingEnumerator<TWrapped, TDeclared>(
+                _source.GetEnumerator(),
+                _wrapperProvider
+            );
         }
 
         /// <summary>

@@ -13,9 +13,8 @@ namespace System.Data.Common
 
         private char[] _values = default!; // Late-initialized
 
-        internal CharStorage(DataColumn column) : base(column, typeof(char), defaultValue, StorageType.Char)
-        {
-        }
+        internal CharStorage(DataColumn column)
+            : base(column, typeof(char), defaultValue, StorageType.Char) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -153,8 +152,10 @@ namespace System.Data.Common
             else
             {
                 char ch = ((IConvertible)value).ToChar(FormatProvider);
-                if ((ch >= (char)0xd800 && ch <= (char)0xdfff) || (ch < (char)0x21 && (ch == (char)0x9 || ch == (char)0xa || ch == (char)0xd)))
-                {
+                if (
+                    (ch >= (char)0xd800 && ch <= (char)0xdfff)
+                    || (ch < (char)0x21 && (ch == (char)0x9 || ch == (char)0xa || ch == (char)0xd))
+                ) {
                     throw ExceptionBuilder.ProblematicChars(ch);
                 }
                 _values[record] = ch;
@@ -188,8 +189,12 @@ namespace System.Data.Common
             return new char[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
-        {
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        ) {
             char[] typedStore = (char[])store;
             typedStore[storeIndex] = _values[record];
             nullbits.Set(storeIndex, IsNull(record));

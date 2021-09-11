@@ -15,12 +15,12 @@ namespace Microsoft.AspNetCore.Http.Abstractions.Tests
         [InlineData(CookieSecurePolicy.SameAsRequest, false, false)]
         [InlineData(CookieSecurePolicy.None, true, false)]
         [InlineData(CookieSecurePolicy.None, false, false)]
-        public void ConfiguresSecurePolicy(CookieSecurePolicy policy, bool requestIsHttps, bool secure)
-        {
-            var builder = new CookieBuilder
-            {
-                SecurePolicy = policy
-            };
+        public void ConfiguresSecurePolicy(
+            CookieSecurePolicy policy,
+            bool requestIsHttps,
+            bool secure
+        ) {
+            var builder = new CookieBuilder { SecurePolicy = policy };
             var context = new DefaultHttpContext();
             context.Request.IsHttps = requestIsHttps;
             var options = builder.Build(context);
@@ -34,7 +34,10 @@ namespace Microsoft.AspNetCore.Http.Abstractions.Tests
             Assert.Null(new CookieBuilder().Build(new DefaultHttpContext()).Expires);
 
             var now = DateTimeOffset.Now;
-            var options = new CookieBuilder { Expiration = TimeSpan.FromHours(1) }.Build(new DefaultHttpContext(), now);
+            var options = new CookieBuilder { Expiration = TimeSpan.FromHours(1) }.Build(
+                new DefaultHttpContext(),
+                now
+            );
             Assert.Equal(now.AddHours(1), options.Expires);
         }
 
@@ -51,7 +54,10 @@ namespace Microsoft.AspNetCore.Http.Abstractions.Tests
         [Fact]
         public void CookieBuilderPreservesDefaultPath()
         {
-            Assert.Equal(new CookieOptions().Path, new CookieBuilder().Build(new DefaultHttpContext()).Path);
+            Assert.Equal(
+                new CookieOptions().Path,
+                new CookieBuilder().Build(new DefaultHttpContext()).Path
+            );
         }
     }
 }

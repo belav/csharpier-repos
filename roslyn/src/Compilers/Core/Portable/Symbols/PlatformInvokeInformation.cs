@@ -14,11 +14,14 @@ namespace Microsoft.CodeAnalysis
     public sealed class DllImportData : Cci.IPlatformInvokeInformation
     {
         private readonly string? _moduleName;
-        private readonly string? _entryPointName;            // null if unspecified, the name of the target method should be used
+        private readonly string? _entryPointName; // null if unspecified, the name of the target method should be used
         private readonly MethodImportAttributes _flags;
 
-        internal DllImportData(string? moduleName, string? entryPointName, MethodImportAttributes flags)
-        {
+        internal DllImportData(
+            string? moduleName,
+            string? entryPointName,
+            MethodImportAttributes flags
+        ) {
             _moduleName = moduleName;
             _entryPointName = entryPointName;
             _flags = flags;
@@ -51,10 +54,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool ExactSpelling
         {
-            get
-            {
-                return (_flags & MethodImportAttributes.ExactSpelling) != 0;
-            }
+            get { return (_flags & MethodImportAttributes.ExactSpelling) != 0; }
         }
 
         /// <summary>
@@ -88,10 +88,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool SetLastError
         {
-            get
-            {
-                return (_flags & MethodImportAttributes.SetLastError) != 0;
-            }
+            get { return (_flags & MethodImportAttributes.SetLastError) != 0; }
         }
 
         /// <summary>
@@ -165,8 +162,14 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal static MethodImportAttributes MakeFlags(bool exactSpelling, CharSet charSet, bool setLastError, CallingConvention callingConvention, bool? useBestFit, bool? throwOnUnmappable)
-        {
+        internal static MethodImportAttributes MakeFlags(
+            bool exactSpelling,
+            CharSet charSet,
+            bool setLastError,
+            CallingConvention callingConvention,
+            bool? useBestFit,
+            bool? throwOnUnmappable
+        ) {
             MethodImportAttributes result = 0;
             if (exactSpelling)
             {
@@ -186,8 +189,7 @@ namespace Microsoft.CodeAnalysis
                 case Cci.Constants.CharSet_Auto:
                     result |= MethodImportAttributes.CharSetAuto;
                     break;
-
-                    // Dev10: use default without reporting an error
+                // Dev10: use default without reporting an error
             }
 
             if (setLastError)

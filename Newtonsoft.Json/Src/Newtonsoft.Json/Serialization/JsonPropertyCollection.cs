@@ -47,8 +47,7 @@ namespace Newtonsoft.Json.Serialization
         /// Initializes a new instance of the <see cref="JsonPropertyCollection"/> class.
         /// </summary>
         /// <param name="type">The type.</param>
-        public JsonPropertyCollection(Type type)
-            : base(StringComparer.Ordinal)
+        public JsonPropertyCollection(Type type) : base(StringComparer.Ordinal)
         {
             ValidationUtils.ArgumentNotNull(type, "type");
             _type = type;
@@ -96,22 +95,36 @@ namespace Newtonsoft.Json.Serialization
                 {
                     if (property.DeclaringType != null && existingProperty.DeclaringType != null)
                     {
-                        if (property.DeclaringType.IsSubclassOf(existingProperty.DeclaringType)
-                            || (existingProperty.DeclaringType.IsInterface() && property.DeclaringType.ImplementInterface(existingProperty.DeclaringType)))
-                        {
+                        if (
+                            property.DeclaringType.IsSubclassOf(existingProperty.DeclaringType)
+                            || (
+                                existingProperty.DeclaringType.IsInterface()
+                                && property.DeclaringType.ImplementInterface(
+                                    existingProperty.DeclaringType
+                                )
+                            )
+                        ) {
                             // current property is on a derived class and hides the existing
                             Remove(existingProperty);
                             duplicateProperty = false;
                         }
-                        if (existingProperty.DeclaringType.IsSubclassOf(property.DeclaringType)
-                            || (property.DeclaringType.IsInterface() && existingProperty.DeclaringType.ImplementInterface(property.DeclaringType)))
-                        {
+                        if (
+                            existingProperty.DeclaringType.IsSubclassOf(property.DeclaringType)
+                            || (
+                                property.DeclaringType.IsInterface()
+                                && existingProperty.DeclaringType.ImplementInterface(
+                                    property.DeclaringType
+                                )
+                            )
+                        ) {
                             // current property is hidden by the existing so don't add it
                             return;
                         }
-                        
-                        if (_type.ImplementInterface(existingProperty.DeclaringType) && _type.ImplementInterface(property.DeclaringType))
-                        {
+
+                        if (
+                            _type.ImplementInterface(existingProperty.DeclaringType)
+                            && _type.ImplementInterface(property.DeclaringType)
+                        ) {
                             // current property was already defined on another interface
                             return;
                         }
@@ -120,7 +133,13 @@ namespace Newtonsoft.Json.Serialization
 
                 if (duplicateProperty)
                 {
-                    throw new JsonSerializationException("A member with the name '{0}' already exists on '{1}'. Use the JsonPropertyAttribute to specify another name.".FormatWith(CultureInfo.InvariantCulture, property.PropertyName, _type));
+                    throw new JsonSerializationException(
+                        "A member with the name '{0}' already exists on '{1}'. Use the JsonPropertyAttribute to specify another name.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            property.PropertyName,
+                            _type
+                        )
+                    );
                 }
             }
 
@@ -145,7 +164,7 @@ namespace Newtonsoft.Json.Serialization
             return property;
         }
 
-        private bool TryGetValue(string key, [NotNullWhen(true)]out JsonProperty? item)
+        private bool TryGetValue(string key, [NotNullWhen(true)] out JsonProperty? item)
         {
             if (Dictionary == null)
             {

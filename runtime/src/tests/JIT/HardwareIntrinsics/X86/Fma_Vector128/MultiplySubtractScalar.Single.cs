@@ -134,14 +134,24 @@ namespace JIT.HardwareIntrinsics.X86
 
             private ulong alignment;
 
-            public DataTable(Single[] inArray1, Single[] inArray2, Single[] inArray3, Single[] outArray, int alignment)
-            {
+            public DataTable(
+                Single[] inArray1,
+                Single[] inArray2,
+                Single[] inArray3,
+                Single[] outArray,
+                int alignment
+            ) {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<Single>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<Single>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<Single>();
                 int sizeOfoutArray = outArray.Length * Unsafe.SizeOf<Single>();
-                if ((alignment != 32 && alignment != 16) || (alignment * 2) < sizeOfinArray1 || (alignment * 2) < sizeOfinArray2 || (alignment * 2) < sizeOfinArray3 || (alignment * 2) < sizeOfoutArray)
-                {
+                if (
+                    (alignment != 32 && alignment != 16)
+                    || (alignment * 2) < sizeOfinArray1
+                    || (alignment * 2) < sizeOfinArray2
+                    || (alignment * 2) < sizeOfinArray3
+                    || (alignment * 2) < sizeOfoutArray
+                ) {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -157,15 +167,31 @@ namespace JIT.HardwareIntrinsics.X86
 
                 this.alignment = (ulong)alignment;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray1Ptr), ref Unsafe.As<Single, byte>(ref inArray1[0]), (uint)sizeOfinArray1);
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray2Ptr), ref Unsafe.As<Single, byte>(ref inArray2[0]), (uint)sizeOfinArray2);
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray3Ptr), ref Unsafe.As<Single, byte>(ref inArray3[0]), (uint)sizeOfinArray3);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray1Ptr),
+                    ref Unsafe.As<Single, byte>(ref inArray1[0]),
+                    (uint)sizeOfinArray1
+                );
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray2Ptr),
+                    ref Unsafe.As<Single, byte>(ref inArray2[0]),
+                    (uint)sizeOfinArray2
+                );
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray3Ptr),
+                    ref Unsafe.As<Single, byte>(ref inArray3[0]),
+                    (uint)sizeOfinArray3
+                );
             }
 
-            public void* inArray1Ptr => Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* inArray2Ptr => Align((byte*)(inHandle2.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* inArray3Ptr => Align((byte*)(inHandle3.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray1Ptr =>
+                Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray2Ptr =>
+                Align((byte*)(inHandle2.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray3Ptr =>
+                Align((byte*)(inHandle3.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outArrayPtr =>
+                Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -191,29 +217,52 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref testStruct._fld1), ref Unsafe.As<Single, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
-                for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSingle(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref testStruct._fld2), ref Unsafe.As<Single, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
-                for (var i = 0; i < Op3ElementCount; i++) { _data3[i] = TestLibrary.Generator.GetSingle(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref testStruct._fld3), ref Unsafe.As<Single, byte>(ref _data3[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetSingle();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Single>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<Single, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Single>>()
+                );
+                for (var i = 0; i < Op2ElementCount; i++)
+                {
+                    _data2[i] = TestLibrary.Generator.GetSingle();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Single>, byte>(ref testStruct._fld2),
+                    ref Unsafe.As<Single, byte>(ref _data2[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Single>>()
+                );
+                for (var i = 0; i < Op3ElementCount; i++)
+                {
+                    _data3[i] = TestLibrary.Generator.GetSingle();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Single>, byte>(ref testStruct._fld3),
+                    ref Unsafe.As<Single, byte>(ref _data3[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Single>>()
+                );
 
                 return testStruct;
             }
 
-            public void RunStructFldScenario(SimpleTernaryOpTest__MultiplySubtractScalarSingle testClass)
-            {
+            public void RunStructFldScenario(
+                SimpleTernaryOpTest__MultiplySubtractScalarSingle testClass
+            ) {
                 var result = Fma.MultiplySubtractScalar(_fld1, _fld2, _fld3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                 testClass.ValidateResult(_fld1, _fld2, _fld3, testClass._dataTable.outArrayPtr);
             }
 
-            public void RunStructFldScenario_Load(SimpleTernaryOpTest__MultiplySubtractScalarSingle testClass)
-            {
-                fixed (Vector128<Single>* pFld1 = &_fld1)
-                fixed (Vector128<Single>* pFld2 = &_fld2)
-                fixed (Vector128<Single>* pFld3 = &_fld3)
+            public void RunStructFldScenario_Load(
+                SimpleTernaryOpTest__MultiplySubtractScalarSingle testClass
+            ) {
+                fixed (Vector128<Single>* pFld1 = &_fld1)fixed (
+                    Vector128<Single>* pFld2 = &_fld2
+                )fixed (Vector128<Single>* pFld3 = &_fld3)
                 {
                     var result = Fma.MultiplySubtractScalar(
                         Sse.LoadVector128((Single*)(pFld1)),
@@ -229,10 +278,14 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
-        private static readonly int Op2ElementCount = Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
-        private static readonly int Op3ElementCount = Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
+        private static readonly int Op2ElementCount =
+            Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
+        private static readonly int Op3ElementCount =
+            Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
 
         private static Single[] _data1 = new Single[Op1ElementCount];
         private static Single[] _data2 = new Single[Op2ElementCount];
@@ -250,29 +303,86 @@ namespace JIT.HardwareIntrinsics.X86
 
         static SimpleTernaryOpTest__MultiplySubtractScalarSingle()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref _clsVar1), ref Unsafe.As<Single, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref _clsVar2), ref Unsafe.As<Single, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
-            for (var i = 0; i < Op3ElementCount; i++) { _data3[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref _clsVar3), ref Unsafe.As<Single, byte>(ref _data3[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Single>, byte>(ref _clsVar1),
+                ref Unsafe.As<Single, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Single>, byte>(ref _clsVar2),
+                ref Unsafe.As<Single, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
+            for (var i = 0; i < Op3ElementCount; i++)
+            {
+                _data3[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Single>, byte>(ref _clsVar3),
+                ref Unsafe.As<Single, byte>(ref _data3[0]),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
         }
 
         public SimpleTernaryOpTest__MultiplySubtractScalarSingle()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref _fld1), ref Unsafe.As<Single, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref _fld2), ref Unsafe.As<Single, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
-            for (var i = 0; i < Op3ElementCount; i++) { _data3[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref _fld3), ref Unsafe.As<Single, byte>(ref _data3[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Single>, byte>(ref _fld1),
+                ref Unsafe.As<Single, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Single>, byte>(ref _fld2),
+                ref Unsafe.As<Single, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
+            for (var i = 0; i < Op3ElementCount; i++)
+            {
+                _data3[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Single>, byte>(ref _fld3),
+                ref Unsafe.As<Single, byte>(ref _data3[0]),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSingle(); }
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSingle(); }
-            for (var i = 0; i < Op3ElementCount; i++) { _data3[i] = TestLibrary.Generator.GetSingle(); }
-            _dataTable = new DataTable(_data1, _data2, _data3, new Single[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSingle();
+            }
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetSingle();
+            }
+            for (var i = 0; i < Op3ElementCount; i++)
+            {
+                _data3[i] = TestLibrary.Generator.GetSingle();
+            }
+            _dataTable = new DataTable(
+                _data1,
+                _data2,
+                _data3,
+                new Single[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Fma.IsSupported;
@@ -290,7 +400,12 @@ namespace JIT.HardwareIntrinsics.X86
             );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.inArray3Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunBasicScenario_Load()
@@ -304,7 +419,12 @@ namespace JIT.HardwareIntrinsics.X86
             );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.inArray3Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunBasicScenario_LoadAligned()
@@ -318,63 +438,115 @@ namespace JIT.HardwareIntrinsics.X86
             );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.inArray3Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_UnsafeRead()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Fma).GetMethod(nameof(Fma.MultiplySubtractScalar), new Type[] { typeof(Vector128<Single>), typeof(Vector128<Single>), typeof(Vector128<Single>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr),
-                                        Unsafe.Read<Vector128<Single>>(_dataTable.inArray2Ptr),
-                                        Unsafe.Read<Vector128<Single>>(_dataTable.inArray3Ptr)
-                                     });
+            var result = typeof(Fma).GetMethod(
+                    nameof(Fma.MultiplySubtractScalar),
+                    new Type[]
+                    {
+                        typeof(Vector128<Single>),
+                        typeof(Vector128<Single>),
+                        typeof(Vector128<Single>)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr),
+                        Unsafe.Read<Vector128<Single>>(_dataTable.inArray2Ptr),
+                        Unsafe.Read<Vector128<Single>>(_dataTable.inArray3Ptr)
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Single>)(result));
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.inArray3Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_Load()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Fma).GetMethod(nameof(Fma.MultiplySubtractScalar), new Type[] { typeof(Vector128<Single>), typeof(Vector128<Single>), typeof(Vector128<Single>) })
-                                     .Invoke(null, new object[] {
-                                        Sse.LoadVector128((Single*)(_dataTable.inArray1Ptr)),
-                                        Sse.LoadVector128((Single*)(_dataTable.inArray2Ptr)),
-                                        Sse.LoadVector128((Single*)(_dataTable.inArray3Ptr))
-                                     });
+            var result = typeof(Fma).GetMethod(
+                    nameof(Fma.MultiplySubtractScalar),
+                    new Type[]
+                    {
+                        typeof(Vector128<Single>),
+                        typeof(Vector128<Single>),
+                        typeof(Vector128<Single>)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Sse.LoadVector128((Single*)(_dataTable.inArray1Ptr)),
+                        Sse.LoadVector128((Single*)(_dataTable.inArray2Ptr)),
+                        Sse.LoadVector128((Single*)(_dataTable.inArray3Ptr))
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Single>)(result));
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.inArray3Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_LoadAligned()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Fma).GetMethod(nameof(Fma.MultiplySubtractScalar), new Type[] { typeof(Vector128<Single>), typeof(Vector128<Single>), typeof(Vector128<Single>) })
-                                     .Invoke(null, new object[] {
-                                        Sse.LoadAlignedVector128((Single*)(_dataTable.inArray1Ptr)),
-                                        Sse.LoadAlignedVector128((Single*)(_dataTable.inArray2Ptr)),
-                                        Sse.LoadAlignedVector128((Single*)(_dataTable.inArray3Ptr))
-                                     });
+            var result = typeof(Fma).GetMethod(
+                    nameof(Fma.MultiplySubtractScalar),
+                    new Type[]
+                    {
+                        typeof(Vector128<Single>),
+                        typeof(Vector128<Single>),
+                        typeof(Vector128<Single>)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Sse.LoadAlignedVector128((Single*)(_dataTable.inArray1Ptr)),
+                        Sse.LoadAlignedVector128((Single*)(_dataTable.inArray2Ptr)),
+                        Sse.LoadAlignedVector128((Single*)(_dataTable.inArray3Ptr))
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Single>)(result));
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.inArray3Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunClsVarScenario()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Fma.MultiplySubtractScalar(
-                _clsVar1,
-                _clsVar2,
-                _clsVar3
-            );
+            var result = Fma.MultiplySubtractScalar(_clsVar1, _clsVar2, _clsVar3);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar1, _clsVar2, _clsVar3, _dataTable.outArrayPtr);
@@ -384,9 +556,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Single>* pClsVar1 = &_clsVar1)
-            fixed (Vector128<Single>* pClsVar2 = &_clsVar2)
-            fixed (Vector128<Single>* pClsVar3 = &_clsVar3)
+            fixed (Vector128<Single>* pClsVar1 = &_clsVar1)fixed (
+                Vector128<Single>* pClsVar2 = &_clsVar2
+            )fixed (Vector128<Single>* pClsVar3 = &_clsVar3)
             {
                 var result = Fma.MultiplySubtractScalar(
                     Sse.LoadVector128((Single*)(pClsVar1)),
@@ -455,9 +627,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             var test = new SimpleTernaryOpTest__MultiplySubtractScalarSingle();
 
-            fixed (Vector128<Single>* pFld1 = &test._fld1)
-            fixed (Vector128<Single>* pFld2 = &test._fld2)
-            fixed (Vector128<Single>* pFld3 = &test._fld3)
+            fixed (Vector128<Single>* pFld1 = &test._fld1)fixed (
+                Vector128<Single>* pFld2 = &test._fld2
+            )fixed (Vector128<Single>* pFld3 = &test._fld3)
             {
                 var result = Fma.MultiplySubtractScalar(
                     Sse.LoadVector128((Single*)(pFld1)),
@@ -484,9 +656,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Single>* pFld1 = &_fld1)
-            fixed (Vector128<Single>* pFld2 = &_fld2)
-            fixed (Vector128<Single>* pFld3 = &_fld3)
+            fixed (Vector128<Single>* pFld1 = &_fld1)fixed (
+                Vector128<Single>* pFld2 = &_fld2
+            )fixed (Vector128<Single>* pFld3 = &_fld3)
             {
                 var result = Fma.MultiplySubtractScalar(
                     Sse.LoadVector128((Single*)(pFld1)),
@@ -524,7 +696,7 @@ namespace JIT.HardwareIntrinsics.X86
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, test._fld2, test._fld3, _dataTable.outArrayPtr);
         }
-        
+
         public void RunStructFldScenario()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructFldScenario));
@@ -562,8 +734,13 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector128<Single> op1, Vector128<Single> op2, Vector128<Single> op3, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<Single> op1,
+            Vector128<Single> op2,
+            Vector128<Single> op3,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] inArray3 = new Single[Op3ElementCount];
@@ -572,40 +749,75 @@ namespace JIT.HardwareIntrinsics.X86
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray1[0]), op1);
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray2[0]), op2);
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray3[0]), op3);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Single>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
 
             ValidateResult(inArray1, inArray2, inArray3, outArray, method);
         }
 
-        private void ValidateResult(void* op1, void* op2, void* op3, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            void* op1,
+            void* op2,
+            void* op3,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             Single[] inArray1 = new Single[Op1ElementCount];
             Single[] inArray2 = new Single[Op2ElementCount];
             Single[] inArray3 = new Single[Op3ElementCount];
             Single[] outArray = new Single[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(op1), (uint)Unsafe.SizeOf<Vector128<Single>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref inArray2[0]), ref Unsafe.AsRef<byte>(op2), (uint)Unsafe.SizeOf<Vector128<Single>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref inArray3[0]), ref Unsafe.AsRef<byte>(op3), (uint)Unsafe.SizeOf<Vector128<Single>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Single>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(op1),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref inArray2[0]),
+                ref Unsafe.AsRef<byte>(op2),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref inArray3[0]),
+                ref Unsafe.AsRef<byte>(op3),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
 
             ValidateResult(inArray1, inArray2, inArray3, outArray, method);
         }
 
-        private void ValidateResult(Single[] firstOp, Single[] secondOp, Single[] thirdOp, Single[] result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Single[] firstOp,
+            Single[] secondOp,
+            Single[] thirdOp,
+            Single[] result,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
-            if (BitConverter.SingleToInt32Bits(MathF.Round((firstOp[0] * secondOp[0]) - thirdOp[0], 3)) != BitConverter.SingleToInt32Bits(MathF.Round(result[0], 3)))
-            {
+            if (
+                BitConverter.SingleToInt32Bits(
+                    MathF.Round((firstOp[0] * secondOp[0]) - thirdOp[0], 3)
+                ) != BitConverter.SingleToInt32Bits(MathF.Round(result[0], 3))
+            ) {
                 succeeded = false;
             }
             else
             {
                 for (var i = 1; i < RetElementCount; i++)
                 {
-                    if (BitConverter.SingleToInt32Bits(firstOp[i]) != BitConverter.SingleToInt32Bits(result[i]))
-                    {
+                    if (
+                        BitConverter.SingleToInt32Bits(firstOp[i])
+                        != BitConverter.SingleToInt32Bits(result[i])
+                    ) {
                         succeeded = false;
                         break;
                     }
@@ -614,11 +826,21 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Fma)}.{nameof(Fma.MultiplySubtractScalar)}<Single>(Vector128<Single>, Vector128<Single>, Vector128<Single>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary.TestFramework.LogInformation($"secondOp: ({string.Join(", ", secondOp)})");
-                TestLibrary.TestFramework.LogInformation($" thirdOp: ({string.Join(", ", thirdOp)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Fma)}.{nameof(Fma.MultiplySubtractScalar)}<Single>(Vector128<Single>, Vector128<Single>, Vector128<Single>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $" firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"secondOp: ({string.Join(", ", secondOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $" thirdOp: ({string.Join(", ", thirdOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

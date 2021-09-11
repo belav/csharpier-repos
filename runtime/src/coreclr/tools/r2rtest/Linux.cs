@@ -17,9 +17,7 @@ namespace R2RTest
             Read = 1,
             Write = 2,
             Execute = 4,
-
             ReadExecute = Read | Execute,
-
             ReadWriteExecute = Read | Write | Execute,
         }
 
@@ -35,10 +33,12 @@ namespace R2RTest
 
         public static void MakeExecutable(string path)
         {
-            int errno = chmod(path,
-                ((byte)Permissions.ReadWriteExecute << (int)PermissionGroupShift.Owner) |
-                ((byte)Permissions.ReadExecute << (int)PermissionGroupShift.Group) |
-                ((byte)Permissions.ReadExecute << (int)PermissionGroupShift.Other));
+            int errno = chmod(
+                path,
+                ((byte)Permissions.ReadWriteExecute << (int)PermissionGroupShift.Owner)
+                    | ((byte)Permissions.ReadExecute << (int)PermissionGroupShift.Group)
+                    | ((byte)Permissions.ReadExecute << (int)PermissionGroupShift.Other)
+            );
 
             if (errno != 0)
             {
@@ -46,5 +46,4 @@ namespace R2RTest
             }
         }
     }
-
 }

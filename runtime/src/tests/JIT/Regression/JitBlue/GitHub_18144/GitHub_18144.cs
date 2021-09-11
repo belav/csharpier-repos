@@ -9,10 +9,16 @@ using System.Runtime.Intrinsics.X86;
 public class GitHub_18144
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void dummy(Vector256<byte> v1, Vector256<byte> v2, Vector256<byte> v3, Vector256<byte> v4,
-                      Vector256<byte> v5, Vector256<byte> v6, Vector256<byte> v7, Vector256<byte> v8)
-    {
-    }
+    static void dummy(
+        Vector256<byte> v1,
+        Vector256<byte> v2,
+        Vector256<byte> v3,
+        Vector256<byte> v4,
+        Vector256<byte> v5,
+        Vector256<byte> v6,
+        Vector256<byte> v7,
+        Vector256<byte> v8
+    ) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void DoThis()
@@ -32,10 +38,16 @@ public class GitHub_18144
     static void DoThat() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void dummy128(Vector128<byte> v1, Vector128<byte> v2, Vector128<byte> v3, Vector128<byte> v4,
-                         Vector128<byte> v5, Vector128<byte> v6, Vector128<byte> v7, Vector128<byte> v8)
-    {
-    }
+    static void dummy128(
+        Vector128<byte> v1,
+        Vector128<byte> v2,
+        Vector128<byte> v3,
+        Vector128<byte> v4,
+        Vector128<byte> v5,
+        Vector128<byte> v6,
+        Vector128<byte> v7,
+        Vector128<byte> v8
+    ) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void DoThis128()
@@ -68,9 +80,16 @@ public class GitHub_18144
         DoThat();
 
         Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7}", xA, xB, xC, xD, xE, xF, xG, xH);
-        if (!xA.Equals(Vector256<byte>.Zero) || !xB.Equals(Vector256<byte>.Zero) || !xC.Equals(Vector256<byte>.Zero) || !xD.Equals(Vector256<byte>.Zero) ||
-            !xE.Equals(Vector256<byte>.Zero) || !xF.Equals(Vector256<byte>.Zero) || !xG.Equals(Vector256<byte>.Zero) || !xH.Equals(Vector256<byte>.Zero))
-        {
+        if (
+            !xA.Equals(Vector256<byte>.Zero)
+            || !xB.Equals(Vector256<byte>.Zero)
+            || !xC.Equals(Vector256<byte>.Zero)
+            || !xD.Equals(Vector256<byte>.Zero)
+            || !xE.Equals(Vector256<byte>.Zero)
+            || !xF.Equals(Vector256<byte>.Zero)
+            || !xG.Equals(Vector256<byte>.Zero)
+            || !xH.Equals(Vector256<byte>.Zero)
+        ) {
             returnVal = -1;
         }
 
@@ -87,9 +106,16 @@ public class GitHub_18144
         DoThat();
 
         Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7}", vA, vB, vC, vD, vE, vF, vG, vH);
-        if (!vA.Equals(Vector128<byte>.Zero) || !vB.Equals(Vector128<byte>.Zero) || !vC.Equals(Vector128<byte>.Zero) || !vD.Equals(Vector128<byte>.Zero) ||
-            !vE.Equals(Vector128<byte>.Zero) || !vF.Equals(Vector128<byte>.Zero) || !vG.Equals(Vector128<byte>.Zero) || !vH.Equals(Vector128<byte>.Zero))
-        {
+        if (
+            !vA.Equals(Vector128<byte>.Zero)
+            || !vB.Equals(Vector128<byte>.Zero)
+            || !vC.Equals(Vector128<byte>.Zero)
+            || !vD.Equals(Vector128<byte>.Zero)
+            || !vE.Equals(Vector128<byte>.Zero)
+            || !vF.Equals(Vector128<byte>.Zero)
+            || !vG.Equals(Vector128<byte>.Zero)
+            || !vH.Equals(Vector128<byte>.Zero)
+        ) {
             returnVal = -1;
         }
 

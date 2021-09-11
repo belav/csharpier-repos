@@ -17,9 +17,14 @@ namespace System.Reflection.Emit
         #endregion
 
         #region Constructor
-        internal FieldBuilder(TypeBuilder typeBuilder, string fieldName, Type type,
-            Type[]? requiredCustomModifiers, Type[]? optionalCustomModifiers, FieldAttributes attributes)
-        {
+        internal FieldBuilder(
+            TypeBuilder typeBuilder,
+            string fieldName,
+            Type type,
+            Type[]? requiredCustomModifiers,
+            Type[]? optionalCustomModifiers,
+            FieldAttributes attributes
+        ) {
             if (fieldName == null)
                 throw new ArgumentNullException(nameof(fieldName));
 
@@ -46,8 +51,14 @@ namespace System.Reflection.Emit
             byte[] signature = sigHelp.InternalGetSignature(out int sigLength);
 
             ModuleBuilder module = m_typeBuilder.GetModuleBuilder();
-            m_fieldTok = TypeBuilder.DefineField(new QCallModule(ref module),
-                typeBuilder.TypeToken, fieldName, signature, sigLength, m_Attributes);
+            m_fieldTok = TypeBuilder.DefineField(
+                new QCallModule(ref module),
+                typeBuilder.TypeToken,
+                fieldName,
+                signature,
+                sigLength,
+                m_Attributes
+            );
         }
 
         #endregion
@@ -103,8 +114,13 @@ namespace System.Reflection.Emit
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
-        public override void SetValue(object? obj, object? val, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
-        {
+        public override void SetValue(
+            object? obj,
+            object? val,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        ) {
             // NOTE!!  If this is implemented, make sure that this throws
             // a NotSupportedException for Save-only dynamic assemblies.
             // Otherwise, it could cause the .cctor to be executed.
@@ -112,7 +128,8 @@ namespace System.Reflection.Emit
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
-        public override RuntimeFieldHandle FieldHandle => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+        public override RuntimeFieldHandle FieldHandle =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
 
         public override FieldAttributes Attributes => m_Attributes;
 
@@ -152,11 +169,21 @@ namespace System.Reflection.Emit
             if (defaultValue == null && m_fieldType.IsValueType)
             {
                 // nullable types can hold null value.
-                if (!(m_fieldType.IsGenericType && m_fieldType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+                if (
+                    !(
+                        m_fieldType.IsGenericType
+                        && m_fieldType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                    )
+                )
                     throw new ArgumentException(SR.Argument_ConstantNull);
             }
 
-            TypeBuilder.SetConstantValue(m_typeBuilder.GetModuleBuilder(), m_fieldTok, m_fieldType, defaultValue);
+            TypeBuilder.SetConstantValue(
+                m_typeBuilder.GetModuleBuilder(),
+                m_fieldTok,
+                m_fieldType,
+                defaultValue
+            );
         }
 
         public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
@@ -171,8 +198,12 @@ namespace System.Reflection.Emit
 
             m_typeBuilder.ThrowIfCreated();
 
-            TypeBuilder.DefineCustomAttribute(module,
-                m_fieldTok, module.GetConstructorToken(con), binaryAttribute);
+            TypeBuilder.DefineCustomAttribute(
+                module,
+                m_fieldTok,
+                module.GetConstructorToken(con),
+                binaryAttribute
+            );
         }
 
         public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
@@ -186,7 +217,6 @@ namespace System.Reflection.Emit
 
             customBuilder.CreateCustomAttribute(module!, m_fieldTok);
         }
-
         #endregion
     }
 }

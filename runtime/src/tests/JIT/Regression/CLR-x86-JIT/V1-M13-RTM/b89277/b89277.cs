@@ -20,7 +20,7 @@ class A
             do
             {
                 continue;
-            } while (new object[] { }[0] != null);
+            } while (new object[] {  }[0] != null);
         }
         catch (Exception) { }
     }

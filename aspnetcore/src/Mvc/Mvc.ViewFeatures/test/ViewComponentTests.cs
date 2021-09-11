@@ -57,7 +57,9 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var viewComponent = new TestViewComponent();
             var expectedContent = "TestContent&";
-            var expectedEncodedContent = new HtmlString(HtmlEncoder.Default.Encode(expectedContent));
+            var expectedEncodedContent = new HtmlString(
+                HtmlEncoder.Default.Encode(expectedContent)
+            );
 
             // Act
             var actualResult = viewComponent.Content(expectedContent);
@@ -79,7 +81,10 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.IsType<ViewViewComponentResult>(actualResult);
             Assert.NotSame(viewComponent.ViewData, actualResult.ViewData);
-            Assert.Equal(new ViewDataDictionary<object>(viewComponent.ViewData), actualResult.ViewData);
+            Assert.Equal(
+                new ViewDataDictionary<object>(viewComponent.ViewData),
+                actualResult.ViewData
+            );
             Assert.Null(actualResult.ViewData.Model);
             Assert.Null(actualResult.ViewName);
         }
@@ -98,7 +103,10 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.IsType<ViewViewComponentResult>(actualResult);
             Assert.NotSame(viewComponent.ViewData, actualResult.ViewData);
-            Assert.Equal(new ViewDataDictionary<object>(viewComponent.ViewData), actualResult.ViewData);
+            Assert.Equal(
+                new ViewDataDictionary<object>(viewComponent.ViewData),
+                actualResult.ViewData
+            );
             Assert.Same(model, actualResult.ViewData.Model);
             Assert.Null(actualResult.ViewName);
         }
@@ -116,7 +124,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.IsType<ViewViewComponentResult>(actualResult);
             Assert.IsType<ViewDataDictionary<object>>(actualResult.ViewData);
             Assert.NotSame(viewComponent.ViewData, actualResult.ViewData);
-            Assert.Equal(new ViewDataDictionary<object>(viewComponent.ViewData), actualResult.ViewData);
+            Assert.Equal(
+                new ViewDataDictionary<object>(viewComponent.ViewData),
+                actualResult.ViewData
+            );
             Assert.Null(actualResult.ViewData.Model);
             Assert.Equal("CustomViewName", actualResult.ViewName);
         }
@@ -136,7 +147,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.IsType<ViewViewComponentResult>(actualResult);
             Assert.IsType<ViewDataDictionary<object>>(actualResult.ViewData);
             Assert.NotSame(viewComponent.ViewData, actualResult.ViewData);
-            Assert.Equal(new ViewDataDictionary<object>(viewComponent.ViewData), actualResult.ViewData);
+            Assert.Equal(
+                new ViewDataDictionary<object>(viewComponent.ViewData),
+                actualResult.ViewData
+            );
             Assert.Same(model, actualResult.ViewData.Model);
             Assert.Null(actualResult.ViewName);
         }
@@ -156,7 +170,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.IsType<ViewViewComponentResult>(actualResult);
             Assert.IsType<ViewDataDictionary<object>>(actualResult.ViewData);
             Assert.NotSame(viewComponent.ViewData, actualResult.ViewData);
-            Assert.Equal(new ViewDataDictionary<object>(viewComponent.ViewData), actualResult.ViewData);
+            Assert.Equal(
+                new ViewDataDictionary<object>(viewComponent.ViewData),
+                actualResult.ViewData
+            );
             Assert.Null(actualResult.ViewData.Model);
             Assert.Null(actualResult.ViewName);
         }
@@ -175,7 +192,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.IsType<ViewViewComponentResult>(actualResult);
             Assert.IsType<ViewDataDictionary<object>>(actualResult.ViewData);
             Assert.NotSame(viewComponent.ViewData, actualResult.ViewData);
-            Assert.Equal(new ViewDataDictionary<object>(viewComponent.ViewData), actualResult.ViewData);
+            Assert.Equal(
+                new ViewDataDictionary<object>(viewComponent.ViewData),
+                actualResult.ViewData
+            );
             Assert.Null(actualResult.ViewData.Model);
             Assert.Equal("CustomViewName", actualResult.ViewName);
         }
@@ -194,7 +214,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.IsType<ViewViewComponentResult>(actualResult);
             Assert.IsType<ViewDataDictionary<string>>(actualResult.ViewData);
             Assert.NotSame(viewComponent.ViewData, actualResult.ViewData);
-            Assert.Equal(new ViewDataDictionary<string>(viewComponent.ViewData), actualResult.ViewData);
+            Assert.Equal(
+                new ViewDataDictionary<string>(viewComponent.ViewData),
+                actualResult.ViewData
+            );
             Assert.Null(actualResult.ViewData.Model);
             Assert.Equal("CustomViewName", actualResult.ViewName);
         }
@@ -214,7 +237,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.IsType<ViewViewComponentResult>(actualResult);
             Assert.IsType<ViewDataDictionary<object>>(actualResult.ViewData);
             Assert.NotSame(viewComponent.ViewData, actualResult.ViewData);
-            Assert.Equal(new ViewDataDictionary<object>(viewComponent.ViewData), actualResult.ViewData);
+            Assert.Equal(
+                new ViewDataDictionary<object>(viewComponent.ViewData),
+                actualResult.ViewData
+            );
             Assert.Same(model, actualResult.ViewData.Model);
             Assert.Equal("CustomViewName", actualResult.ViewName);
         }
@@ -243,9 +269,14 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var httpContext = new DefaultHttpContext();
-            httpContext.Features.Set<ISessionFeature>(new SessionFeature() { Session = new TestSession() });
+            httpContext.Features.Set<ISessionFeature>(
+                new SessionFeature() { Session = new TestSession() }
+            );
             var viewContext = new ViewContext();
-            viewContext.TempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+            viewContext.TempData = new TempDataDictionary(
+                httpContext,
+                Mock.Of<ITempDataProvider>()
+            );
             var viewComponentContext = new ViewComponentContext();
             viewComponentContext.ViewContext = viewContext;
 
@@ -272,7 +303,10 @@ namespace Microsoft.AspNetCore.Mvc
         {
             private Dictionary<string, byte[]> _innerDictionary = new Dictionary<string, byte[]>();
 
-            public IEnumerable<string> Keys { get { return _innerDictionary.Keys; } }
+            public IEnumerable<string> Keys
+            {
+                get { return _innerDictionary.Keys; }
+            }
 
             public string Id => "TestId";
 
@@ -283,8 +317,9 @@ namespace Microsoft.AspNetCore.Mvc
                 return Task.FromResult(0);
             }
 
-            public Task CommitAsync(CancellationToken cancellationToken = default(CancellationToken))
-            {
+            public Task CommitAsync(
+                CancellationToken cancellationToken = default(CancellationToken)
+            ) {
                 return Task.FromResult(0);
             }
 

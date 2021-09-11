@@ -42,18 +42,32 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             PageEndpoints = new[]
             {
-                new Endpoint(_ => Task.CompletedTask, new EndpointMetadataCollection(actions[0]), "Test1"),
-                new Endpoint(_ => Task.CompletedTask, new EndpointMetadataCollection(actions[1]), "Test2"),
+                new Endpoint(
+                    _ => Task.CompletedTask,
+                    new EndpointMetadataCollection(actions[0]),
+                    "Test1"
+                ),
+                new Endpoint(
+                    _ => Task.CompletedTask,
+                    new EndpointMetadataCollection(actions[1]),
+                    "Test2"
+                ),
             };
 
             DynamicEndpoint = new Endpoint(
                 _ => Task.CompletedTask,
-                new EndpointMetadataCollection(new object[]
-                {
-                    new DynamicPageRouteValueTransformerMetadata(typeof(CustomTransformer), State),
-                    new PageEndpointDataSourceIdMetadata(1),
-                }),
-                "dynamic");
+                new EndpointMetadataCollection(
+                    new object[]
+                    {
+                        new DynamicPageRouteValueTransformerMetadata(
+                            typeof(CustomTransformer),
+                            State
+                        ),
+                        new PageEndpointDataSourceIdMetadata(1),
+                    }
+                ),
+                "dynamic"
+            );
 
             DataSource = new DefaultEndpointDataSource(PageEndpoints);
 
@@ -61,13 +75,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var services = new ServiceCollection();
             services.AddRouting();
-            services.AddTransient<CustomTransformer>(s =>
-            {
-                var transformer = new CustomTransformer();
-                transformer.Transform = (c, values, state) => Transform(c, values, state);
-                transformer.Filter = (c, values, state, endpoints) => Filter(c, values, state, endpoints);
-                return transformer;
-            });
+            services.AddTransient<CustomTransformer>(
+                s =>
+                {
+                    var transformer = new CustomTransformer();
+                    transformer.Transform = (c, values, state) => Transform(c, values, state);
+                    transformer.Filter = (c, values, state, endpoints) =>
+                        Filter(c, values, state, endpoints);
+                    return transformer;
+                }
+            );
             Services = services.BuildServiceProvider();
 
             Comparer = Services.GetRequiredService<EndpointMetadataComparer>();
@@ -76,22 +93,39 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             {
                 new Endpoint(_ => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test1"),
                 new Endpoint(_ => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test2"),
-                new Endpoint(_ => Task.CompletedTask, EndpointMetadataCollection.Empty, "ReplacedLoaded")
+                new Endpoint(
+                    _ => Task.CompletedTask,
+                    EndpointMetadataCollection.Empty,
+                    "ReplacedLoaded"
+                )
             };
 
             var loader = new Mock<PageLoader>();
-            loader
-                .Setup(l => l.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()))
-                .Returns((PageActionDescriptor descriptor, EndpointMetadataCollection endpoint) => Task.FromResult(new CompiledPageActionDescriptor
-                {
-                    Endpoint = descriptor.DisplayName switch
-                    {
-                        "/Index" => LoadedEndpoints[0],
-                        "/About" => LoadedEndpoints[1],
-                        "/ReplacedEndpoint" => LoadedEndpoints[2],
-                        _ => throw new InvalidOperationException($"Invalid endpoint '{descriptor.DisplayName}'.")
-                    }
-                }));
+            loader.Setup(
+                    l =>
+                        l.LoadAsync(
+                            It.IsAny<PageActionDescriptor>(),
+                            It.IsAny<EndpointMetadataCollection>()
+                        )
+                )
+                .Returns(
+                    (PageActionDescriptor descriptor, EndpointMetadataCollection endpoint) =>
+                        Task.FromResult(
+                            new CompiledPageActionDescriptor
+                            {
+                                Endpoint = descriptor.DisplayName switch
+                                {
+                                    "/Index" => LoadedEndpoints[0],
+                                    "/About" => LoadedEndpoints[1],
+                                    "/ReplacedEndpoint" => LoadedEndpoints[2],
+                                    _
+                                      => throw new InvalidOperationException(
+                                          $"Invalid endpoint '{descriptor.DisplayName}'."
+                                      )
+                                }
+                            }
+                        )
+                );
             Loader = loader.Object;
         }
 
@@ -103,7 +137,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private Endpoint DynamicEndpoint { get; }
 
-        private Endpoint [] LoadedEndpoints { get; }
+        private Endpoint[] LoadedEndpoints { get; }
 
         private PageLoader Loader { get; }
 
@@ -113,9 +147,20 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private IServiceProvider Services { get; }
 
-        private Func<HttpContext, RouteValueDictionary, object, ValueTask<RouteValueDictionary>> Transform { get; set; }
+        private Func<
+            HttpContext,
+            RouteValueDictionary,
+            object,
+            ValueTask<RouteValueDictionary>
+        > Transform { get; set; }
 
-        private Func<HttpContext, RouteValueDictionary, object, IReadOnlyList<Endpoint>, ValueTask<IReadOnlyList<Endpoint>>> Filter { get; set; } = (_, __, ___, e) => new ValueTask<IReadOnlyList<Endpoint>>(e);
+        private Func<
+            HttpContext,
+            RouteValueDictionary,
+            object,
+            IReadOnlyList<Endpoint>,
+            ValueTask<IReadOnlyList<Endpoint>>
+        > Filter { get; set; } = (_, __, ___, e) => new ValueTask<IReadOnlyList<Endpoint>>(e);
 
         [Fact]
         public async Task ApplyAsync_NoMatch()
@@ -135,10 +180,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 throw new InvalidOperationException();
             };
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -164,10 +206,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 return new ValueTask<RouteValueDictionary>(new RouteValueDictionary());
             };
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -192,16 +231,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    page = "/Index",
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { page = "/Index", })
+                );
             };
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -214,7 +249,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 {
                     Assert.Equal("page", kvp.Key);
                     Assert.Equal("/Index", kvp.Value);
-                });
+                }
+            );
             Assert.True(candidates.IsValidCandidate(0));
         }
 
@@ -225,24 +261,22 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
             var endpoints = new[] { DynamicEndpoint, };
-            var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+            var values = new RouteValueDictionary[]
+            {
+                new RouteValueDictionary(new { slug = "test", }),
+            };
             var scores = new[] { 0, };
 
             var candidates = new CandidateSet(endpoints, values, scores);
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    page = "/Index",
-                    state
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { page = "/Index", state })
+                );
             };
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -265,7 +299,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 {
                     Assert.Equal("state", kvp.Key);
                     Assert.Same(State, kvp.Value);
-                });
+                }
+            );
             Assert.True(candidates.IsValidCandidate(0));
         }
 
@@ -276,27 +311,33 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
             var endpoints = new[] { DynamicEndpoint, };
-            var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+            var values = new RouteValueDictionary[]
+            {
+                new RouteValueDictionary(new { slug = "test", }),
+            };
             var scores = new[] { 0, };
 
             var candidates = new CandidateSet(endpoints, values, scores);
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    page = "/Index",
-                    state
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { page = "/Index", state })
+                );
             };
 
             var httpContext = new DefaultHttpContext()
             {
-                RequestServices = new ServiceCollection().AddScoped(sp => new CustomTransformer() { State = "Invalid" }).BuildServiceProvider()
+                RequestServices = new ServiceCollection().AddScoped(
+                        sp => new CustomTransformer() { State = "Invalid" }
+                    )
+                    .BuildServiceProvider()
             };
 
             // Act & Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(() => policy.ApplyAsync(httpContext, candidates));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => policy.ApplyAsync(httpContext, candidates)
+            );
         }
 
         [Fact]
@@ -306,18 +347,19 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
             var endpoints = new[] { DynamicEndpoint, };
-            var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+            var values = new RouteValueDictionary[]
+            {
+                new RouteValueDictionary(new { slug = "test", }),
+            };
             var scores = new[] { 0, };
 
             var candidates = new CandidateSet(endpoints, values, scores);
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    page = "/Index",
-                    state
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { page = "/Index", state })
+                );
             };
 
             Filter = (c, values, state, endpoints) =>
@@ -325,10 +367,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 return new ValueTask<IReadOnlyList<Endpoint>>(Array.Empty<Endpoint>());
             };
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -344,32 +383,36 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
             var endpoints = new[] { DynamicEndpoint, };
-            var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+            var values = new RouteValueDictionary[]
+            {
+                new RouteValueDictionary(new { slug = "test", }),
+            };
             var scores = new[] { 0, };
 
             var candidates = new CandidateSet(endpoints, values, scores);
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    page = "/Index",
-                    state
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { page = "/Index", state })
+                );
             };
 
-            Filter = (c, values, state, endpoints) => new ValueTask<IReadOnlyList<Endpoint>>(new[]
-            {
-                new Endpoint((ctx) => Task.CompletedTask, new EndpointMetadataCollection(new PageActionDescriptor()
-                {
-                    DisplayName = "/ReplacedEndpoint",
-                }), "ReplacedEndpoint")
-            });
+            Filter = (c, values, state, endpoints) =>
+                new ValueTask<IReadOnlyList<Endpoint>>(
+                    new[]
+                    {
+                        new Endpoint(
+                            (ctx) => Task.CompletedTask,
+                            new EndpointMetadataCollection(
+                                new PageActionDescriptor() { DisplayName = "/ReplacedEndpoint", }
+                            ),
+                            "ReplacedEndpoint"
+                        )
+                    }
+                );
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -392,7 +435,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 {
                     Assert.Equal("state", kvp.Key);
                     Assert.Same(State, kvp.Value);
-                });
+                }
+            );
             Assert.Equal("ReplacedLoaded", candidates[0].Endpoint.DisplayName);
             Assert.True(candidates.IsValidCandidate(0));
         }
@@ -404,29 +448,27 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
             var endpoints = new[] { DynamicEndpoint, };
-            var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test", }), };
+            var values = new RouteValueDictionary[]
+            {
+                new RouteValueDictionary(new { slug = "test", }),
+            };
             var scores = new[] { 0, };
 
             var candidates = new CandidateSet(endpoints, values, scores);
 
             Transform = (c, values, state) =>
             {
-                return new ValueTask<RouteValueDictionary>(new RouteValueDictionary(new
-                {
-                    page = "/Index",
-                    state
-                }));
+                return new ValueTask<RouteValueDictionary>(
+                    new RouteValueDictionary(new { page = "/Index", state })
+                );
             };
 
-            Filter = (c, values, state, endpoints) => new ValueTask<IReadOnlyList<Endpoint>>(new[]
-            {
-                PageEndpoints[0], PageEndpoints[1]
-            });
+            Filter = (c, values, state, endpoints) =>
+                new ValueTask<IReadOnlyList<Endpoint>>(
+                    new[] { PageEndpoints[0], PageEndpoints[1] }
+                );
 
-            var httpContext = new DefaultHttpContext()
-            {
-                RequestServices = Services,
-            };
+            var httpContext = new DefaultHttpContext() { RequestServices = Services, };
 
             // Act
             await policy.ApplyAsync(httpContext, candidates);
@@ -449,17 +491,33 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private class CustomTransformer : DynamicRouteValueTransformer
         {
-            public Func<HttpContext, RouteValueDictionary, object, ValueTask<RouteValueDictionary>> Transform { get; set; }
+            public Func<
+                HttpContext,
+                RouteValueDictionary,
+                object,
+                ValueTask<RouteValueDictionary>
+            > Transform { get; set; }
 
-            public Func<HttpContext, RouteValueDictionary, object, IReadOnlyList<Endpoint>, ValueTask<IReadOnlyList<Endpoint>>> Filter { get; set; }
+            public Func<
+                HttpContext,
+                RouteValueDictionary,
+                object,
+                IReadOnlyList<Endpoint>,
+                ValueTask<IReadOnlyList<Endpoint>>
+            > Filter { get; set; }
 
-            public override ValueTask<IReadOnlyList<Endpoint>> FilterAsync(HttpContext httpContext, RouteValueDictionary values, IReadOnlyList<Endpoint> endpoints)
-            {
+            public override ValueTask<IReadOnlyList<Endpoint>> FilterAsync(
+                HttpContext httpContext,
+                RouteValueDictionary values,
+                IReadOnlyList<Endpoint> endpoints
+            ) {
                 return Filter(httpContext, values, State, endpoints);
             }
 
-            public override ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
-            {
+            public override ValueTask<RouteValueDictionary> TransformAsync(
+                HttpContext httpContext,
+                RouteValueDictionary values
+            ) {
                 return Transform(httpContext, values, State);
             }
         }

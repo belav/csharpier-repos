@@ -26,12 +26,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             _braceMatcher = braceMatcher;
         }
 
-        public async Task<Microsoft.CodeAnalysis.Editor.BraceMatchingResult?> FindBracesAsync(Document document, int position, CancellationToken cancellationToken = default)
-        {
-            var result = await _braceMatcher.FindBracesAsync(document, position, cancellationToken).ConfigureAwait(false);
+        public async Task<Microsoft.CodeAnalysis.Editor.BraceMatchingResult?> FindBracesAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken = default
+        ) {
+            var result = await _braceMatcher.FindBracesAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             if (result.HasValue)
             {
-                return new Microsoft.CodeAnalysis.Editor.BraceMatchingResult(result.Value.LeftSpan, result.Value.RightSpan);
+                return new Microsoft.CodeAnalysis.Editor.BraceMatchingResult(
+                    result.Value.LeftSpan,
+                    result.Value.RightSpan
+                );
             }
             else
             {

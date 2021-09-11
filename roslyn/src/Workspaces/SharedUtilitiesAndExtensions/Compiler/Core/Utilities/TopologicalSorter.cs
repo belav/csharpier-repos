@@ -10,8 +10,10 @@ namespace Roslyn.Utilities
 {
     internal static class TopologicalSorter
     {
-        public static IEnumerable<T> TopologicalSort<T>(this IEnumerable<T> items, Func<T, IEnumerable<T>> itemsBefore)
-        {
+        public static IEnumerable<T> TopologicalSort<T>(
+            this IEnumerable<T> items,
+            Func<T, IEnumerable<T>> itemsBefore
+        ) {
             var result = new List<T>();
             var visited = new HashSet<T>();
 
@@ -23,8 +25,11 @@ namespace Roslyn.Utilities
             return result;
         }
 
-        public static IEnumerable<T> TopologicalSort<T>(this IEnumerable<T> items, Func<T, IEnumerable<T>> itemsBefore, Func<T, IEnumerable<T>> itemsAfter)
-            where T : notnull
+        public static IEnumerable<T> TopologicalSort<T>(
+            this IEnumerable<T> items,
+            Func<T, IEnumerable<T>> itemsBefore,
+            Func<T, IEnumerable<T>> itemsAfter
+        ) where T : notnull
         {
             var combinedItemsBefore = CreateCombinedItemsBefore(items, itemsBefore, itemsAfter);
             return TopologicalSort(items, combinedItemsBefore);
@@ -34,8 +39,8 @@ namespace Roslyn.Utilities
             T item,
             Func<T, IEnumerable<T>> itemsBefore,
             List<T> result,
-            HashSet<T> visited)
-        {
+            HashSet<T> visited
+        ) {
             if (visited.Add(item))
             {
                 foreach (var before in itemsBefore(item))
@@ -47,22 +52,28 @@ namespace Roslyn.Utilities
             }
         }
 
-        private static Func<T, IEnumerable<T>> CreateCombinedItemsBefore<T>(IEnumerable<T> items, Func<T, IEnumerable<T>> itemsBefore, Func<T, IEnumerable<T>> itemsAfter)
-            where T : notnull
+        private static Func<T, IEnumerable<T>> CreateCombinedItemsBefore<T>(
+            IEnumerable<T> items,
+            Func<T, IEnumerable<T>> itemsBefore,
+            Func<T, IEnumerable<T>> itemsAfter
+        ) where T : notnull
         {
             // create initial list
-            var itemToItemsBefore = items.ToDictionary(item => item, item =>
-            {
-                var naturalItemsBefore = itemsBefore != null ? itemsBefore(item) : null;
-                if (naturalItemsBefore != null)
+            var itemToItemsBefore = items.ToDictionary(
+                item => item,
+                item =>
                 {
-                    return naturalItemsBefore.ToList();
+                    var naturalItemsBefore = itemsBefore != null ? itemsBefore(item) : null;
+                    if (naturalItemsBefore != null)
+                    {
+                        return naturalItemsBefore.ToList();
+                    }
+                    else
+                    {
+                        return new List<T>();
+                    }
                 }
-                else
-                {
-                    return new List<T>();
-                }
-            });
+            );
 
             // add items after by making the after items explicitly list the item as before it
             if (itemsAfter != null)

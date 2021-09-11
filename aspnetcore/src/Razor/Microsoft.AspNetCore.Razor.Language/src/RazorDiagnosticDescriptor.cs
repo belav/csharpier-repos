@@ -14,8 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public RazorDiagnosticDescriptor(
             string id,
             Func<string> messageFormat,
-            RazorDiagnosticSeverity severity)
-        {
+            RazorDiagnosticSeverity severity
+        ) {
             if (string.IsNullOrEmpty(id))
             {
                 throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(id));

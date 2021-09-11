@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -106,15 +106,24 @@ namespace Microsoft.Net.Http.Headers
             Assert.False(EntityTagHeaderValue.Any.Compare(null, useStrongComparison: false));
         }
 
-        public static TheoryData<EntityTagHeaderValue, EntityTagHeaderValue> NotEquivalentUnderStrongComparison
+        public static TheoryData<
+            EntityTagHeaderValue,
+            EntityTagHeaderValue
+        > NotEquivalentUnderStrongComparison
         {
             get
             {
                 return new TheoryData<EntityTagHeaderValue, EntityTagHeaderValue>
                 {
                     { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"TAG\"") },
-                    { new EntityTagHeaderValue("\"tag\"", true), new EntityTagHeaderValue("\"tag\"", true) },
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"", true) },
+                    {
+                        new EntityTagHeaderValue("\"tag\"", true),
+                        new EntityTagHeaderValue("\"tag\"", true)
+                    },
+                    {
+                        new EntityTagHeaderValue("\"tag\""),
+                        new EntityTagHeaderValue("\"tag\"", true)
+                    },
                     { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag1\"") },
                     { new EntityTagHeaderValue("\"tag\""), EntityTagHeaderValue.Any },
                 };
@@ -123,13 +132,18 @@ namespace Microsoft.Net.Http.Headers
 
         [Theory]
         [MemberData(nameof(NotEquivalentUnderStrongComparison))]
-        public void CompareUsingStrongComparison_NonEquivalentPairs_ReturnFalse(EntityTagHeaderValue left, EntityTagHeaderValue right)
-        {
+        public void CompareUsingStrongComparison_NonEquivalentPairs_ReturnFalse(
+            EntityTagHeaderValue left,
+            EntityTagHeaderValue right
+        ) {
             Assert.False(left.Compare(right, useStrongComparison: true));
             Assert.False(right.Compare(left, useStrongComparison: true));
         }
 
-        public static TheoryData<EntityTagHeaderValue, EntityTagHeaderValue> EquivalentUnderStrongComparison
+        public static TheoryData<
+            EntityTagHeaderValue,
+            EntityTagHeaderValue
+        > EquivalentUnderStrongComparison
         {
             get
             {
@@ -142,13 +156,18 @@ namespace Microsoft.Net.Http.Headers
 
         [Theory]
         [MemberData(nameof(EquivalentUnderStrongComparison))]
-        public void CompareUsingStrongComparison_EquivalentPairs_ReturnTrue(EntityTagHeaderValue left, EntityTagHeaderValue right)
-        {
+        public void CompareUsingStrongComparison_EquivalentPairs_ReturnTrue(
+            EntityTagHeaderValue left,
+            EntityTagHeaderValue right
+        ) {
             Assert.True(left.Compare(right, useStrongComparison: true));
             Assert.True(right.Compare(left, useStrongComparison: true));
         }
 
-        public static TheoryData<EntityTagHeaderValue, EntityTagHeaderValue> NotEquivalentUnderWeakComparison
+        public static TheoryData<
+            EntityTagHeaderValue,
+            EntityTagHeaderValue
+        > NotEquivalentUnderWeakComparison
         {
             get
             {
@@ -163,29 +182,42 @@ namespace Microsoft.Net.Http.Headers
 
         [Theory]
         [MemberData(nameof(NotEquivalentUnderWeakComparison))]
-        public void CompareUsingWeakComparison_NonEquivalentPairs_ReturnFalse(EntityTagHeaderValue left, EntityTagHeaderValue right)
-        {
+        public void CompareUsingWeakComparison_NonEquivalentPairs_ReturnFalse(
+            EntityTagHeaderValue left,
+            EntityTagHeaderValue right
+        ) {
             Assert.False(left.Compare(right, useStrongComparison: false));
             Assert.False(right.Compare(left, useStrongComparison: false));
         }
 
-        public static TheoryData<EntityTagHeaderValue, EntityTagHeaderValue> EquivalentUnderWeakComparison
+        public static TheoryData<
+            EntityTagHeaderValue,
+            EntityTagHeaderValue
+        > EquivalentUnderWeakComparison
         {
             get
             {
                 return new TheoryData<EntityTagHeaderValue, EntityTagHeaderValue>
                 {
                     { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"") },
-                    { new EntityTagHeaderValue("\"tag\"", true), new EntityTagHeaderValue("\"tag\"", true) },
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"", true) },
+                    {
+                        new EntityTagHeaderValue("\"tag\"", true),
+                        new EntityTagHeaderValue("\"tag\"", true)
+                    },
+                    {
+                        new EntityTagHeaderValue("\"tag\""),
+                        new EntityTagHeaderValue("\"tag\"", true)
+                    },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(EquivalentUnderWeakComparison))]
-        public void CompareUsingWeakComparison_EquivalentPairs_ReturnTrue(EntityTagHeaderValue left, EntityTagHeaderValue right)
-        {
+        public void CompareUsingWeakComparison_EquivalentPairs_ReturnTrue(
+            EntityTagHeaderValue left,
+            EntityTagHeaderValue right
+        ) {
             Assert.True(left.Compare(right, useStrongComparison: false));
             Assert.True(right.Compare(left, useStrongComparison: false));
         }

@@ -27,20 +27,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         public DefaultActionDescriptorCollectionProvider(
             IEnumerable<IActionDescriptorProvider> actionDescriptorProviders,
-            IEnumerable<IActionDescriptorChangeProvider> actionDescriptorChangeProviders)
-        {
-            _actionDescriptorProviders = actionDescriptorProviders
-                .OrderBy(p => p.Order)
-                .ToArray();
+            IEnumerable<IActionDescriptorChangeProvider> actionDescriptorChangeProviders
+        ) {
+            _actionDescriptorProviders = actionDescriptorProviders.OrderBy(p => p.Order).ToArray();
 
             _actionDescriptorChangeProviders = actionDescriptorChangeProviders.ToArray();
 
             _lock = new object();
 
             // IMPORTANT: this needs to be the last thing we do in the constructor. Change notifications can happen immediately!
-            ChangeToken.OnChange(
-                GetCompositeChangeToken,
-                UpdateCollection);
+            ChangeToken.OnChange(GetCompositeChangeToken, UpdateCollection);
         }
 
         /// <summary>
@@ -148,7 +144,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 // Step 2.
                 _collection = new ActionDescriptorCollection(
                     new ReadOnlyCollection<ActionDescriptor>(context.Results),
-                    _version++);
+                    _version++
+                );
 
                 // Step 3.
                 _cancellationTokenSource = new CancellationTokenSource();

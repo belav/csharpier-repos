@@ -12,8 +12,10 @@ namespace System.Web.Http.ExceptionHandling
     public abstract class ExceptionHandler : IExceptionHandler
     {
         /// <inheritdoc />
-        Task IExceptionHandler.HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
-        {
+        Task IExceptionHandler.HandleAsync(
+            ExceptionHandlerContext context,
+            CancellationToken cancellationToken
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
@@ -34,17 +36,17 @@ namespace System.Web.Http.ExceptionHandling
         /// <param name="context">The exception handler context.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task representing the asynchronous exception handling operation.</returns>
-        public virtual Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
-        {
+        public virtual Task HandleAsync(
+            ExceptionHandlerContext context,
+            CancellationToken cancellationToken
+        ) {
             Handle(context);
             return TaskHelpers.Completed();
         }
 
         /// <summary>When overridden in a derived class, handles the exception synchronously.</summary>
         /// <param name="context">The exception handler context.</param>
-        public virtual void Handle(ExceptionHandlerContext context)
-        {
-        }
+        public virtual void Handle(ExceptionHandlerContext context) { }
 
         /// <summary>Determines whether the exception should be handled.</summary>
         /// <param name="context">The exception handler context.</param>

@@ -29,8 +29,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <param name="configure">A callback to configure <see cref="CircuitOptions"/>.</param>
         /// <returns>An <see cref="IServerSideBlazorBuilder"/> that can be used to further customize the configuration.</returns>
-        public static IServerSideBlazorBuilder AddServerSideBlazor(this IServiceCollection services, Action<CircuitOptions>? configure = null)
-        {
+        public static IServerSideBlazorBuilder AddServerSideBlazor(
+            this IServiceCollection services,
+            Action<CircuitOptions>? configure = null
+        ) {
             var builder = new DefaultServerSideBlazorBuilder(services);
 
             services.AddDataProtection();
@@ -47,19 +49,29 @@ namespace Microsoft.Extensions.DependencyInjection
             //
             // Other than the options, the things exposed by the SignalR builder aren't very meaningful in
             // the Server-Side Blazor context and thus aren't exposed.
-            services.AddSignalR().AddHubOptions<ComponentHub>(options =>
-            {
-                options.SupportedProtocols.Clear();
-                options.SupportedProtocols.Add(BlazorPackHubProtocol.ProtocolName);
-            });
+            services.AddSignalR()
+                .AddHubOptions<ComponentHub>(
+                    options =>
+                    {
+                        options.SupportedProtocols.Clear();
+                        options.SupportedProtocols.Add(BlazorPackHubProtocol.ProtocolName);
+                    }
+                );
 
             // Register the Blazor specific hub protocol
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IHubProtocol, BlazorPackHubProtocol>());
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHubProtocol, BlazorPackHubProtocol>()
+            );
 
             // Here we add a bunch of services that don't vary in any way based on the
             // user's configuration. So even if the user has multiple independent server-side
             // Components entrypoints, this lot is the same and repeated registrations are a no-op.
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPostConfigureOptions<StaticFileOptions>, ConfigureStaticFilesOptions>());
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IPostConfigureOptions<StaticFileOptions>,
+                    ConfigureStaticFilesOptions
+                >()
+            );
             services.TryAddSingleton<CircuitFactory>();
             services.TryAddSingleton<ServerComponentDeserializer>();
             services.TryAddSingleton<RootComponentTypeCache>();
@@ -81,7 +93,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<INavigationInterception, RemoteNavigationInterception>();
             services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
 
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<CircuitOptions>, CircuitOptionsJSInteropDetailedErrorsConfiguration>());
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<CircuitOptions>,
+                    CircuitOptionsJSInteropDetailedErrorsConfiguration
+                >()
+            );
 
             if (configure != null)
             {

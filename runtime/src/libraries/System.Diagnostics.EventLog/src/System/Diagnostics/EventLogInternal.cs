@@ -56,8 +56,8 @@ namespace System.Diagnostics
         private const string eventLogMutexName = "netfxeventlog.1.0";
         private const int SecondsPerDay = 60 * 60 * 24;
 
-        private const int Flag_notifying = 0x1;           // keeps track of whether we're notifying our listeners - to prevent double notifications
-        private const int Flag_forwards = 0x2;     // whether the cache contains entries in forwards order (true) or backwards (false)
+        private const int Flag_notifying = 0x1; // keeps track of whether we're notifying our listeners - to prevent double notifications
+        private const int Flag_forwards = 0x2; // whether the cache contains entries in forwards order (true) or backwards (false)
         private const int Flag_initializing = 0x4;
         internal const int Flag_monitoring = 0x8;
         private const int Flag_registeredAsListener = 0x10;
@@ -68,7 +68,9 @@ namespace System.Diagnostics
         private BitVector32 boolFlags;
 
         private Hashtable messageLibraries;
-        private static readonly Hashtable listenerInfos = new Hashtable(StringComparer.OrdinalIgnoreCase);
+        private static readonly Hashtable listenerInfos = new Hashtable(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         private object m_InstanceLockObject;
         private object InstanceLockObject
@@ -100,13 +102,11 @@ namespace System.Diagnostics
             }
         }
 
-        public EventLogInternal(string logName, string machineName) : this(logName, machineName, "", null)
-        {
-        }
+        public EventLogInternal(string logName, string machineName)
+            : this(logName, machineName, "", null) { }
 
-        public EventLogInternal(string logName, string machineName, string source) : this(logName, machineName, source, null)
-        {
-        }
+        public EventLogInternal(string logName, string machineName, string source)
+            : this(logName, machineName, source, null) { }
 
         public EventLogInternal(string logName, string machineName, string source, EventLog parent)
         {
@@ -117,7 +117,9 @@ namespace System.Diagnostics
                 throw new ArgumentException(SR.BadLogName);
 
             if (!SyntaxCheck.CheckMachineName(machineName))
-                throw new ArgumentException(SR.Format(SR.InvalidParameter, nameof(machineName), machineName));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidParameter, nameof(machineName), machineName)
+                );
 
             this.machineName = machineName;
             this.logName = logName;
@@ -154,26 +156,17 @@ namespace System.Diagnostics
 
         private bool IsOpen
         {
-            get
-            {
-                return readHandle != null || writeHandle != null;
-            }
+            get { return readHandle != null || writeHandle != null; }
         }
 
         private bool IsOpenForRead
         {
-            get
-            {
-                return readHandle != null;
-            }
+            get { return readHandle != null; }
         }
 
         private bool IsOpenForWrite
         {
-            get
-            {
-                return writeHandle != null;
-            }
+            get { return writeHandle != null; }
         }
 
         public string LogDisplayName
@@ -193,7 +186,13 @@ namespace System.Diagnostics
                         // we figure out what logs are on the machine by looking in the registry.
                         logkey = GetLogRegKey(currentMachineName, false);
                         if (logkey == null)
-                            throw new InvalidOperationException(SR.Format(SR.MissingLog, GetLogName(currentMachineName), currentMachineName));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.MissingLog,
+                                    GetLogName(currentMachineName),
+                                    currentMachineName
+                                )
+                            );
 
                         string resourceDll = (string)logkey.GetValue("DisplayNameFile");
                         if (resourceDll == null)
@@ -201,11 +200,16 @@ namespace System.Diagnostics
                         else
                         {
                             int resourceId = (int)logkey.GetValue("DisplayNameID");
-                            logDisplayName = FormatMessageWrapper(resourceDll, (uint)resourceId, null);
+                            logDisplayName = FormatMessageWrapper(
+                                resourceDll,
+                                (uint)resourceId,
+                                null
+                            );
                             if (logDisplayName == null)
                                 logDisplayName = GetLogName(currentMachineName);
                         }
                     }
+
                     finally
                     {
                         logkey?.Close();
@@ -227,8 +231,11 @@ namespace System.Diagnostics
 
         private string GetLogName(string currentMachineName)
         {
-            if ((logName == null || logName.Length == 0) && sourceName != null && sourceName.Length != 0)
-            {
+            if (
+                (logName == null || logName.Length == 0)
+                && sourceName != null
+                && sourceName.Length != 0
+            ) {
                 logName = EventLog._InternalLogNameFromSourceName(sourceName, currentMachineName);
             }
 
@@ -237,10 +244,7 @@ namespace System.Diagnostics
 
         public string MachineName
         {
-            get
-            {
-                return this.machineName;
-            }
+            get { return this.machineName; }
         }
 
         public long MaximumKilobytes
@@ -252,19 +256,21 @@ namespace System.Diagnostics
                 object val = GetLogRegValue(currentMachineName, "MaxSize");
                 if (val != null)
                 {
-                    int intval = (int)val;         // cast to an int first to unbox
-                    return ((uint)intval) / 1024;   // then convert to kilobytes
+                    int intval = (int)val; // cast to an int first to unbox
+                    return ((uint)intval) / 1024; // then convert to kilobytes
                 }
                 // 512k is the default value
                 return 0x200;
             }
-
             set
             {
                 string currentMachineName = this.machineName;
                 // valid range is 64 KB to 4 GB
                 if (value < 64 || value > 0x3FFFC0 || value % 64 != 0)
-                    throw new ArgumentOutOfRangeException("MaximumKilobytes", SR.MaximumKilobytesOutOfRange);
+                    throw new ArgumentOutOfRangeException(
+                        "MaximumKilobytes",
+                        SR.MaximumKilobytesOutOfRange
+                    );
 
                 long regvalue = value * 1024; // convert to bytes
                 int i = unchecked((int)regvalue);
@@ -329,10 +335,7 @@ namespace System.Diagnostics
 
         public bool EnableRaisingEvents
         {
-            get
-            {
-                return boolFlags[Flag_monitoring];
-            }
+            get { return boolFlags[Flag_monitoring]; }
             set
             {
                 string currentMachineName = this.machineName;
@@ -344,7 +347,9 @@ namespace System.Diagnostics
                     if (value)
                         StartRaisingEvents(currentMachineName, GetLogName(currentMachineName));
                     else
-                        StopRaisingEvents(/*currentMachineName,*/ GetLogName(currentMachineName));
+                        StopRaisingEvents( /*currentMachineName,*/
+                            GetLogName(currentMachineName)
+                        );
                 }
             }
         }
@@ -383,7 +388,9 @@ namespace System.Diagnostics
             {
                 if (this.synchronizingObject == null && parent.ComponentDesignMode)
                 {
-                    IDesignerHost host = (IDesignerHost)parent.ComponentGetService(typeof(IDesignerHost));
+                    IDesignerHost host = (IDesignerHost)parent.ComponentGetService(
+                        typeof(IDesignerHost)
+                    );
                     if (host != null)
                     {
                         object baseComponent = host.RootComponent;
@@ -394,23 +401,19 @@ namespace System.Diagnostics
 
                 return this.synchronizingObject;
             }
-
-            set
-            {
-                this.synchronizingObject = value;
-            }
+            set { this.synchronizingObject = value; }
         }
 
         public string Source
         {
-            get
-            {
-                return sourceName;
-            }
+            get { return sourceName; }
         }
 
-        private static void AddListenerComponent(EventLogInternal component, string compMachineName, string compLogName)
-        {
+        private static void AddListenerComponent(
+            EventLogInternal component,
+            string compMachineName,
+            string compLogName
+        ) {
             lock (InternalSyncObject)
             {
                 LogListeningInfo info = (LogListeningInfo)listenerInfos[compLogName];
@@ -426,25 +429,31 @@ namespace System.Diagnostics
                 info.handleOwner = new EventLogInternal(compLogName, compMachineName);
                 // tell the event log system about it
                 info.waitHandle = new AutoResetEvent(false);
-                bool success = Interop.Advapi32.NotifyChangeEventLog(info.handleOwner.ReadHandle, info.waitHandle.SafeWaitHandle);
+                bool success = Interop.Advapi32.NotifyChangeEventLog(
+                    info.handleOwner.ReadHandle,
+                    info.waitHandle.SafeWaitHandle
+                );
                 if (!success)
-                    throw new InvalidOperationException(SR.CantMonitorEventLog, new Win32Exception());
+                    throw new InvalidOperationException(
+                        SR.CantMonitorEventLog,
+                        new Win32Exception()
+                    );
 
-                info.registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(info.waitHandle, new WaitOrTimerCallback(StaticCompletionCallback), info, -1, false);
+                info.registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                    info.waitHandle,
+                    new WaitOrTimerCallback(StaticCompletionCallback),
+                    info,
+                    -1,
+                    false
+                );
                 listenerInfos[compLogName] = info;
             }
         }
 
         public event EntryWrittenEventHandler EntryWritten
         {
-            add
-            {
-                onEntryWrittenHandler += value;
-            }
-            remove
-            {
-                onEntryWrittenHandler -= value;
-            }
+            add { onEntryWrittenHandler += value; }
+            remove { onEntryWrittenHandler -= value; }
         }
 
         public void BeginInit()
@@ -512,7 +521,9 @@ namespace System.Diagnostics
             }
 
             if (boolFlags[Flag_monitoring])
-                StopRaisingEvents(/*currentMachineName,*/ GetLogName(currentMachineName));
+                StopRaisingEvents( /*currentMachineName,*/
+                    GetLogName(currentMachineName)
+                );
 
             if (messageLibraries != null)
             {
@@ -562,8 +573,14 @@ namespace System.Diagnostics
                     while (i < count)
                     {
                         EventLogEntry entry = GetEntryWithOldest(i);
-                        if (this.SynchronizingObject != null && this.SynchronizingObject.InvokeRequired)
-                            this.SynchronizingObject.BeginInvoke(this.onEntryWrittenHandler, new object[] { this, new EntryWrittenEventArgs(entry) });
+                        if (
+                            this.SynchronizingObject != null
+                            && this.SynchronizingObject.InvokeRequired
+                        )
+                            this.SynchronizingObject.BeginInvoke(
+                                this.onEntryWrittenHandler,
+                                new object[] { this, new EntryWrittenEventArgs(entry) }
+                            );
                         else
                             onEntryWrittenHandler(this, new EntryWrittenEventArgs(entry));
 
@@ -573,9 +590,7 @@ namespace System.Diagnostics
                     count = EntryCount + oldest;
                 }
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
 
             try
             {
@@ -587,9 +602,7 @@ namespace System.Diagnostics
                 else
                     lastSeenCount = i;
             }
-            catch (Win32Exception)
-            {
-            }
+            catch (Win32Exception) { }
 
             lock (InstanceLockObject)
             {
@@ -628,6 +641,7 @@ namespace System.Diagnostics
                     }
                 }
             }
+
             finally
             {
                 messageLibraries = null;
@@ -644,8 +658,11 @@ namespace System.Diagnostics
                 StartListening(currentMachineName, GetLogName(currentMachineName));
         }
 
-        internal string FormatMessageWrapper(string dllNameList, uint messageNum, string[] insertionStrings)
-        {
+        internal string FormatMessageWrapper(
+            string dllNameList,
+            uint messageNum,
+            string[] insertionStrings
+        ) {
             if (dllNameList == null)
                 return null;
 
@@ -668,13 +685,21 @@ namespace System.Diagnostics
 
                     if (hModule == null || hModule.IsInvalid)
                     {
-                        hModule = Interop.Kernel32.LoadLibraryExW(dllName, IntPtr.Zero, Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE);
+                        hModule = Interop.Kernel32.LoadLibraryExW(
+                            dllName,
+                            IntPtr.Zero,
+                            Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
+                        );
                         MessageLibraries[dllName] = hModule;
                     }
                 }
                 else
                 {
-                    hModule = Interop.Kernel32.LoadLibraryExW(dllName, IntPtr.Zero, Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE);
+                    hModule = Interop.Kernel32.LoadLibraryExW(
+                        dllName,
+                        IntPtr.Zero,
+                        Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
+                    );
                 }
 
                 if (hModule.IsInvalid)
@@ -685,6 +710,7 @@ namespace System.Diagnostics
                 {
                     msg = EventLog.TryFormatMessage(hModule, messageNum, insertionStrings);
                 }
+
                 finally
                 {
                     if (!IsOpen)
@@ -721,14 +747,23 @@ namespace System.Diagnostics
             while (idx < entries.Length)
             {
                 byte[] buf = new byte[BUF_SIZE];
-                bool success = Interop.Advapi32.ReadEventLog(readHandle, Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
-                                                      oldestEntry + idx, buf, buf.Length, out bytesRead, out minBytesNeeded);
+                bool success = Interop.Advapi32.ReadEventLog(
+                    readHandle,
+                    Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
+                    oldestEntry + idx,
+                    buf,
+                    buf.Length,
+                    out bytesRead,
+                    out minBytesNeeded
+                );
                 if (!success)
                 {
                     error = Marshal.GetLastWin32Error();
 
-                    if (error == Interop.Errors.ERROR_INSUFFICIENT_BUFFER || error == Interop.Errors.ERROR_EVENTLOG_FILE_CHANGED)
-                    {
+                    if (
+                        error == Interop.Errors.ERROR_INSUFFICIENT_BUFFER
+                        || error == Interop.Errors.ERROR_EVENTLOG_FILE_CHANGED
+                    ) {
                         if (error == Interop.Errors.ERROR_EVENTLOG_FILE_CHANGED)
                         {
                             Reset(currentMachineName);
@@ -738,8 +773,15 @@ namespace System.Diagnostics
                         {
                             buf = new byte[minBytesNeeded];
                         }
-                        success = Interop.Advapi32.ReadEventLog(readHandle, Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
-                                                         oldestEntry + idx, buf, buf.Length, out bytesRead, out minBytesNeeded);
+                        success = Interop.Advapi32.ReadEventLog(
+                            readHandle,
+                            Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
+                            oldestEntry + idx,
+                            buf,
+                            buf.Length,
+                            out bytesRead,
+                            out minBytesNeeded
+                        );
                         if (!success)
                             break;
                     }
@@ -763,7 +805,10 @@ namespace System.Diagnostics
             if (idx != entries.Length)
             {
                 if (error != 0)
-                    throw new InvalidOperationException(SR.CantRetrieveEntries, new Win32Exception(error));
+                    throw new InvalidOperationException(
+                        SR.CantRetrieveEntries,
+                        new Win32Exception(error)
+                    );
                 else
                     throw new InvalidOperationException(SR.CantRetrieveEntries);
             }
@@ -772,9 +817,12 @@ namespace System.Diagnostics
 
         private int GetCachedEntryPos(int entryIndex)
         {
-            if (cache == null || (boolFlags[Flag_forwards] && entryIndex < firstCachedEntry) ||
-                (!boolFlags[Flag_forwards] && entryIndex > firstCachedEntry) || firstCachedEntry == -1)
-            {
+            if (
+                cache == null
+                || (boolFlags[Flag_forwards] && entryIndex < firstCachedEntry)
+                || (!boolFlags[Flag_forwards] && entryIndex > firstCachedEntry)
+                || firstCachedEntry == -1
+            ) {
                 // the index falls before anything we have in the cache, or the cache
                 // is not yet valid
                 return -1;
@@ -863,9 +911,7 @@ namespace System.Diagnostics
             {
                 entry = GetEntryWithOldest(index);
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
 
             return entry;
         }
@@ -896,13 +942,22 @@ namespace System.Diagnostics
             cache = new byte[BUF_SIZE];
             int bytesRead;
             int minBytesNeeded;
-            bool success = Interop.Advapi32.ReadEventLog(readHandle, flags, index,
-                                                  cache, cache.Length, out bytesRead, out minBytesNeeded);
+            bool success = Interop.Advapi32.ReadEventLog(
+                readHandle,
+                flags,
+                index,
+                cache,
+                cache.Length,
+                out bytesRead,
+                out minBytesNeeded
+            );
             if (!success)
             {
                 int error = Marshal.GetLastWin32Error();
-                if (error == Interop.Errors.ERROR_INSUFFICIENT_BUFFER || error == Interop.Errors.ERROR_EVENTLOG_FILE_CHANGED)
-                {
+                if (
+                    error == Interop.Errors.ERROR_INSUFFICIENT_BUFFER
+                    || error == Interop.Errors.ERROR_EVENTLOG_FILE_CHANGED
+                ) {
                     if (error == Interop.Errors.ERROR_EVENTLOG_FILE_CHANGED)
                     {
                         byte[] tempcache = cache;
@@ -917,13 +972,23 @@ namespace System.Diagnostics
                             cache = new byte[minBytesNeeded];
                         }
                     }
-                    success = Interop.Advapi32.ReadEventLog(readHandle, Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ, index,
-                                                     cache, cache.Length, out bytesRead, out minBytesNeeded);
+                    success = Interop.Advapi32.ReadEventLog(
+                        readHandle,
+                        Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
+                        index,
+                        cache,
+                        cache.Length,
+                        out bytesRead,
+                        out minBytesNeeded
+                    );
                 }
 
                 if (!success)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.CantReadLogEntryAt, index.ToString()), new Win32Exception());
+                    throw new InvalidOperationException(
+                        SR.Format(SR.CantReadLogEntryAt, index.ToString()),
+                        new Win32Exception()
+                    );
                 }
             }
 
@@ -951,6 +1016,7 @@ namespace System.Diagnostics
                 if (lmkey != null)
                     return lmkey.OpenSubKey(EventLogKey, writable);
             }
+
             finally
             {
                 lmkey?.Close();
@@ -972,12 +1038,17 @@ namespace System.Diagnostics
             {
                 eventkey = GetEventLogRegKey(currentMachineName, false);
                 if (eventkey == null)
-                    throw new InvalidOperationException(SR.Format(SR.RegKeyMissingShort, EventLogKey, currentMachineName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.RegKeyMissingShort, EventLogKey, currentMachineName)
+                    );
 
                 logkey = eventkey.OpenSubKey(logname, writable);
                 if (logkey == null)
-                    throw new InvalidOperationException(SR.Format(SR.MissingLog, logname, currentMachineName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.MissingLog, logname, currentMachineName)
+                    );
             }
+
             finally
             {
                 eventkey?.Close();
@@ -994,11 +1065,14 @@ namespace System.Diagnostics
             {
                 logkey = GetLogRegKey(currentMachineName, false);
                 if (logkey == null)
-                    throw new InvalidOperationException(SR.Format(SR.MissingLog, GetLogName(currentMachineName), currentMachineName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.MissingLog, GetLogName(currentMachineName), currentMachineName)
+                    );
 
                 object val = logkey.GetValue(valuename);
                 return val;
             }
+
             finally
             {
                 logkey?.Close();
@@ -1018,8 +1092,10 @@ namespace System.Diagnostics
         private static int IntFrom(byte[] buf, int offset)
         {
             // assumes Little Endian byte order.
-            return (unchecked((int)0xFF000000) & (buf[offset + 3] << 24)) | (0xFF0000 & (buf[offset + 2] << 16)) |
-            (0xFF00 & (buf[offset + 1] << 8)) | (0xFF & (buf[offset]));
+            return (unchecked((int)0xFF000000) & (buf[offset + 3] << 24))
+                | (0xFF0000 & (buf[offset + 2] << 16))
+                | (0xFF00 & (buf[offset + 1] << 8))
+                | (0xFF & (buf[offset]));
         }
 
         public void ModifyOverflowPolicy(OverflowAction action, int retentionDays)
@@ -1027,7 +1103,11 @@ namespace System.Diagnostics
             string currentMachineName = this.machineName;
 
             if (action < OverflowAction.DoNotOverwrite || action > OverflowAction.OverwriteOlder)
-                throw new InvalidEnumArgumentException(nameof(action), (int)action, typeof(OverflowAction));
+                throw new InvalidEnumArgumentException(
+                    nameof(action),
+                    (int)action,
+                    typeof(OverflowAction)
+                );
             // this is a long because in the if statement we may need to store values as
             // large as UInt32.MaxValue - 1.  This would overflow an int.
             long retentionvalue = (long)action;
@@ -1053,8 +1133,10 @@ namespace System.Diagnostics
             if (logname == null || logname.Length == 0)
                 throw new ArgumentException(SR.MissingLogProperty);
 
-            if (!EventLog.Exists(logname, currentMachineName))        // do not open non-existing Log [alexvec]
-                throw new InvalidOperationException(SR.Format(SR.LogDoesNotExists, logname, currentMachineName));
+            if (!EventLog.Exists(logname, currentMachineName)) // do not open non-existing Log [alexvec]
+                throw new InvalidOperationException(
+                    SR.Format(SR.LogDoesNotExists, logname, currentMachineName)
+                );
 
             // Clean up cache variables.
             // The initilizing code is put here to guarantee, that first read of events
@@ -1064,7 +1146,10 @@ namespace System.Diagnostics
             bytesCached = 0;
             firstCachedEntry = -1;
 
-            SafeEventLogReadHandle handle = Interop.Advapi32.OpenEventLog(currentMachineName, logname);
+            SafeEventLogReadHandle handle = Interop.Advapi32.OpenEventLog(
+                currentMachineName,
+                logname
+            );
             if (handle.IsInvalid)
             {
                 Win32Exception e = null;
@@ -1072,7 +1157,9 @@ namespace System.Diagnostics
                 {
                     e = new Win32Exception();
                 }
-                throw new InvalidOperationException(SR.Format(SR.CantOpenLog, logname, currentMachineName, e?.Message ?? ""));
+                throw new InvalidOperationException(
+                    SR.Format(SR.CantOpenLog, logname, currentMachineName, e?.Message ?? "")
+                );
             }
 
             readHandle = handle;
@@ -1087,7 +1174,10 @@ namespace System.Diagnostics
             if (sourceName == null || sourceName.Length == 0)
                 throw new ArgumentException(SR.NeedSourceToOpen);
 
-            SafeEventLogWriteHandle handle = Interop.Advapi32.RegisterEventSource(currentMachineName, sourceName);
+            SafeEventLogWriteHandle handle = Interop.Advapi32.RegisterEventSource(
+                currentMachineName,
+                sourceName
+            );
             if (handle.IsInvalid)
             {
                 Win32Exception e = null;
@@ -1155,7 +1245,10 @@ namespace System.Diagnostics
         private void StartListening(string currentMachineName, string currentLogName)
         {
             // make sure we don't fire events for entries that are already there
-            Debug.Assert(!boolFlags[Flag_registeredAsListener], "StartListening called with boolFlags[Flag_registeredAsListener] true.");
+            Debug.Assert(
+                !boolFlags[Flag_registeredAsListener],
+                "StartListening called with boolFlags[Flag_registeredAsListener] true."
+            );
             lastSeenCount = EntryCount + OldestEntryNumber;
             AddListenerComponent(this, currentMachineName, currentLogName);
             boolFlags[Flag_registeredAsListener] = true;
@@ -1163,8 +1256,11 @@ namespace System.Diagnostics
 
         private void StartRaisingEvents(string currentMachineName, string currentLogName)
         {
-            if (!boolFlags[Flag_initializing] && !boolFlags[Flag_monitoring] && !parent.ComponentDesignMode)
-            {
+            if (
+                !boolFlags[Flag_initializing]
+                && !boolFlags[Flag_monitoring]
+                && !parent.ComponentDesignMode
+            ) {
                 StartListening(currentMachineName, currentLogName);
             }
             boolFlags[Flag_monitoring] = true;
@@ -1179,7 +1275,9 @@ namespace System.Diagnostics
             EventLogInternal[] interestedComponents;
             lock (InternalSyncObject)
             {
-                interestedComponents = (EventLogInternal[])info.listeningComponents.ToArray(typeof(EventLogInternal));
+                interestedComponents = (EventLogInternal[])info.listeningComponents.ToArray(
+                    typeof(EventLogInternal)
+                );
             }
 
             for (int i = 0; i < interestedComponents.Length; i++)
@@ -1200,17 +1298,25 @@ namespace System.Diagnostics
             }
         }
 
-        private void StopListening(/*string currentMachineName,*/ string currentLogName)
-        {
-            Debug.Assert(boolFlags[Flag_registeredAsListener], "StopListening called without StartListening.");
+        private void StopListening( /*string currentMachineName,*/
+            string currentLogName
+        ) {
+            Debug.Assert(
+                boolFlags[Flag_registeredAsListener],
+                "StopListening called without StartListening."
+            );
             RemoveListenerComponent(this, currentLogName);
             boolFlags[Flag_registeredAsListener] = false;
         }
 
-        private void StopRaisingEvents(/*string currentMachineName,*/ string currentLogName)
-        {
-            if (!boolFlags[Flag_initializing] && boolFlags[Flag_monitoring] && !parent.ComponentDesignMode)
-            {
+        private void StopRaisingEvents( /*string currentMachineName,*/
+            string currentLogName
+        ) {
+            if (
+                !boolFlags[Flag_initializing]
+                && boolFlags[Flag_monitoring]
+                && !parent.ComponentDesignMode
+            ) {
                 StopListening(currentLogName);
             }
             boolFlags[Flag_monitoring] = false;
@@ -1219,9 +1325,13 @@ namespace System.Diagnostics
         private static bool CharIsPrintable(char c)
         {
             UnicodeCategory uc = char.GetUnicodeCategory(c);
-            return (!(uc == UnicodeCategory.Control) || (uc == UnicodeCategory.Format) ||
-                    (uc == UnicodeCategory.LineSeparator) || (uc == UnicodeCategory.ParagraphSeparator) ||
-            (uc == UnicodeCategory.OtherNotAssigned));
+            return (
+                !(uc == UnicodeCategory.Control)
+                || (uc == UnicodeCategory.Format)
+                || (uc == UnicodeCategory.LineSeparator)
+                || (uc == UnicodeCategory.ParagraphSeparator)
+                || (uc == UnicodeCategory.OtherNotAssigned)
+            );
         }
 
         internal static bool ValidLogName(string logName, bool ignoreEmpty)
@@ -1254,7 +1364,13 @@ namespace System.Diagnostics
                             this.logName = "Application";
                         // we automatically add an entry in the registry if there's not already
                         // one there for this source
-                        EventLog.CreateEventSource(new EventSourceCreationData(sourceName, GetLogName(currentMachineName), currentMachineName));
+                        EventLog.CreateEventSource(
+                            new EventSourceCreationData(
+                                sourceName,
+                                GetLogName(currentMachineName),
+                                currentMachineName
+                            )
+                        );
                         // The user may have set a custom log and tried to read it before trying to
                         // write. Due to a quirk in the event log API, we would have opened the Application
                         // log to read (because the custom log wasn't there). Now that we've created
@@ -1264,12 +1380,31 @@ namespace System.Diagnostics
                     }
                     else
                     {
-                        string rightLogName = EventLog.LogNameFromSourceName(sourceName, currentMachineName);
+                        string rightLogName = EventLog.LogNameFromSourceName(
+                            sourceName,
+                            currentMachineName
+                        );
                         string currentLogName = GetLogName(currentMachineName);
-                        if (rightLogName != null && currentLogName != null && !string.Equals(rightLogName, currentLogName, StringComparison.OrdinalIgnoreCase))
-                            throw new ArgumentException(SR.Format(SR.LogSourceMismatch, Source, currentLogName, rightLogName));
+                        if (
+                            rightLogName != null
+                            && currentLogName != null
+                            && !string.Equals(
+                                rightLogName,
+                                currentLogName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.LogSourceMismatch,
+                                    Source,
+                                    currentLogName,
+                                    rightLogName
+                                )
+                            );
                     }
                 }
+
                 finally
                 {
                     if (mutex != null)
@@ -1281,26 +1416,49 @@ namespace System.Diagnostics
             }
             else
             {
-                string rightLogName = EventLog._InternalLogNameFromSourceName(sourceName, currentMachineName);
+                string rightLogName = EventLog._InternalLogNameFromSourceName(
+                    sourceName,
+                    currentMachineName
+                );
                 string currentLogName = GetLogName(currentMachineName);
-                if (rightLogName != null && currentLogName != null && !string.Equals(rightLogName, currentLogName, StringComparison.OrdinalIgnoreCase))
-                    throw new ArgumentException(SR.Format(SR.LogSourceMismatch, Source, currentLogName, rightLogName));
+                if (
+                    rightLogName != null
+                    && currentLogName != null
+                    && !string.Equals(
+                        rightLogName,
+                        currentLogName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+                    throw new ArgumentException(
+                        SR.Format(SR.LogSourceMismatch, Source, currentLogName, rightLogName)
+                    );
             }
             boolFlags[Flag_sourceVerified] = true;
         }
 
-        public void WriteEntry(string message, EventLogEntryType type, int eventID, short category,
-                               byte[] rawData)
-        {
+        public void WriteEntry(
+            string message,
+            EventLogEntryType type,
+            int eventID,
+            short category,
+            byte[] rawData
+        ) {
             if (eventID < 0 || eventID > ushort.MaxValue)
 
-                throw new ArgumentException(SR.Format(SR.EventID, eventID.ToString(), 0, ushort.MaxValue));
+                throw new ArgumentException(
+                    SR.Format(SR.EventID, eventID.ToString(), 0, ushort.MaxValue)
+                );
 
             if (Source.Length == 0)
                 throw new ArgumentException(SR.NeedSourceToWrite);
 
             if (!Enum.IsDefined(typeof(EventLogEntryType), type))
-                throw new InvalidEnumArgumentException(nameof(type), (int)type, typeof(EventLogEntryType));
+                throw new InvalidEnumArgumentException(
+                    nameof(type),
+                    (int)type,
+                    typeof(EventLogEntryType)
+                );
 
             string currentMachineName = machineName;
             if (!boolFlags[Flag_writeGranted])
@@ -1312,7 +1470,14 @@ namespace System.Diagnostics
             // (message-file driven) logging techniques.
             // Our DLL has 64K different entries; all of them just display the first
             // insertion string.
-            InternalWriteEvent((uint)eventID, (ushort)category, type, new string[] { message }, rawData, currentMachineName);
+            InternalWriteEvent(
+                (uint)eventID,
+                (ushort)category,
+                type,
+                new string[] { message },
+                rawData,
+                currentMachineName
+            );
         }
 
         public void WriteEvent(EventInstance instance, byte[] data, params object[] values)
@@ -1344,12 +1509,24 @@ namespace System.Diagnostics
                 }
             }
 
-            InternalWriteEvent((uint)instance.InstanceId, (ushort)instance.CategoryId, instance.EntryType, strings, data, currentMachineName);
+            InternalWriteEvent(
+                (uint)instance.InstanceId,
+                (ushort)instance.CategoryId,
+                instance.EntryType,
+                strings,
+                data,
+                currentMachineName
+            );
         }
 
-        private void InternalWriteEvent(uint eventID, ushort category, EventLogEntryType type, string[] strings,
-                                byte[] rawData, string currentMachineName)
-        {
+        private void InternalWriteEvent(
+            uint eventID,
+            ushort category,
+            EventLogEntryType type,
+            string[] strings,
+            byte[] rawData,
+            string currentMachineName
+        ) {
             // check arguments
             if (strings == null)
                 strings = Array.Empty<string>();
@@ -1383,19 +1560,32 @@ namespace System.Diagnostics
             {
                 for (int strIndex = 0; strIndex < strings.Length; strIndex++)
                 {
-                    stringHandles[strIndex] = GCHandle.Alloc(strings[strIndex], GCHandleType.Pinned);
+                    stringHandles[strIndex] = GCHandle.Alloc(
+                        strings[strIndex],
+                        GCHandleType.Pinned
+                    );
                     stringRoots[strIndex] = stringHandles[strIndex].AddrOfPinnedObject();
                 }
 
                 byte[] sid = null;
                 // actually report the event
-                bool success = Interop.Advapi32.ReportEvent(writeHandle, (short)type, category, eventID,
-                                                     sid, (short)strings.Length, rawData.Length, stringsRootHandle.AddrOfPinnedObject(), rawData);
+                bool success = Interop.Advapi32.ReportEvent(
+                    writeHandle,
+                    (short)type,
+                    category,
+                    eventID,
+                    sid,
+                    (short)strings.Length,
+                    rawData.Length,
+                    stringsRootHandle.AddrOfPinnedObject(),
+                    rawData
+                );
                 if (!success)
                 {
                     throw new Win32Exception();
                 }
             }
+
             finally
             {
                 // now free the pinned strings

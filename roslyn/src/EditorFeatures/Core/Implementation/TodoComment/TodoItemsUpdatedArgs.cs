@@ -23,8 +23,13 @@ namespace Microsoft.CodeAnalysis.Editor
         public ImmutableArray<TodoCommentData> TodoItems { get; }
 
         public TodoItemsUpdatedArgs(
-            object id, Workspace workspace, Solution solution, ProjectId projectId, DocumentId documentId, ImmutableArray<TodoCommentData> todoItems)
-            : base(id, workspace, projectId, documentId)
+            object id,
+            Workspace workspace,
+            Solution solution,
+            ProjectId projectId,
+            DocumentId documentId,
+            ImmutableArray<TodoCommentData> todoItems
+        ) : base(id, workspace, projectId, documentId)
         {
             Solution = solution;
             TodoItems = todoItems;

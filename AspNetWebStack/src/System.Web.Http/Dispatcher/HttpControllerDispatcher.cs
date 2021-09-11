@@ -60,10 +60,7 @@ namespace System.Web.Http.Dispatcher
 
                 return _exceptionLogger;
             }
-            set
-            {
-                _exceptionLogger = value;
-            }
+            set { _exceptionLogger = value; }
         }
 
         /// <remarks>This property is internal and settable only for unit testing purposes.</remarks>
@@ -78,10 +75,7 @@ namespace System.Web.Http.Dispatcher
 
                 return _exceptionHandler;
             }
-            set
-            {
-                _exceptionHandler = value;
-            }
+            set { _exceptionHandler = value; }
         }
 
         private IHttpControllerSelector ControllerSelector
@@ -103,9 +97,15 @@ namespace System.Web.Http.Dispatcher
         /// <param name="request">The request to dispatch</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A <see cref="Task{HttpResponseMessage}"/> representing the ongoing operation.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We report the error in the HTTP response.")]
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We report the error in the HTTP response."
+        )]
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
@@ -116,13 +116,16 @@ namespace System.Web.Http.Dispatcher
 
             try
             {
-                HttpControllerDescriptor controllerDescriptor = ControllerSelector.SelectController(request);
+                HttpControllerDescriptor controllerDescriptor = ControllerSelector.SelectController(
+                    request
+                );
                 if (controllerDescriptor == null)
                 {
                     return request.CreateErrorResponse(
                         HttpStatusCode.NotFound,
                         Error.Format(SRResources.ResourceNotFound, request.RequestUri),
-                        SRResources.NoControllerSelected);
+                        SRResources.NoControllerSelected
+                    );
                 }
 
                 IHttpController controller = controllerDescriptor.CreateController(request);
@@ -131,10 +134,15 @@ namespace System.Web.Http.Dispatcher
                     return request.CreateErrorResponse(
                         HttpStatusCode.NotFound,
                         Error.Format(SRResources.ResourceNotFound, request.RequestUri),
-                        SRResources.NoControllerCreated);
+                        SRResources.NoControllerCreated
+                    );
                 }
 
-                controllerContext = CreateControllerContext(request, controllerDescriptor, controller);
+                controllerContext = CreateControllerContext(
+                    request,
+                    controllerDescriptor,
+                    controller
+                );
                 return await controller.ExecuteAsync(controllerContext, cancellationToken);
             }
             catch (OperationCanceledException)
@@ -156,13 +164,16 @@ namespace System.Web.Http.Dispatcher
             ExceptionContext exceptionContext = new ExceptionContext(
                 exceptionInfo.SourceException,
                 ExceptionCatchBlocks.HttpControllerDispatcher,
-                request)
-                {
-                    ControllerContext = controllerContext,
-                };
+                request
+            ) {
+                ControllerContext = controllerContext,
+            };
 
             await ExceptionLogger.LogAsync(exceptionContext, cancellationToken);
-            HttpResponseMessage response = await ExceptionHandler.HandleAsync(exceptionContext, cancellationToken);
+            HttpResponseMessage response = await ExceptionHandler.HandleAsync(
+                exceptionContext,
+                cancellationToken
+            );
 
             if (response == null)
             {
@@ -173,10 +184,10 @@ namespace System.Web.Http.Dispatcher
         }
 
         private static HttpControllerContext CreateControllerContext(
-            HttpRequestMessage request, 
+            HttpRequestMessage request,
             HttpControllerDescriptor controllerDescriptor,
-            IHttpController controller)
-        {
+            IHttpController controller
+        ) {
             Contract.Assert(request != null);
             Contract.Assert(controllerDescriptor != null);
             Contract.Assert(controller != null);
@@ -212,7 +223,12 @@ namespace System.Web.Http.Dispatcher
                 request.SetRequestContext(requestContext);
             }
 
-            return new HttpControllerContext(requestContext, request, controllerDescriptor, controller);
+            return new HttpControllerContext(
+                requestContext,
+                request,
+                controllerDescriptor,
+                controller
+            );
         }
 
         private static HttpConfiguration EnsureNonNull(HttpConfiguration configuration)

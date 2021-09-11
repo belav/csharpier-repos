@@ -6,8 +6,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     public class DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedType : ControllerBase
     {
         [ProducesResponseType(404)]
-        public ActionResult<DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeBaseModel> Method(int id)
-        {
+        public ActionResult<DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeBaseModel> Method(
+            int id
+        ) {
             if (id == 0)
             {
                 return NotFound();
@@ -19,5 +20,6 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
     public class DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeBaseModel { }
 
-    public class DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeDerived : DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeBaseModel { }
+    public class DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeDerived
+        : DiagnosticsAreReturned_IfMethodWithAttribute_ReturnsDerivedTypeBaseModel { }
 }

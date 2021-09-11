@@ -16,7 +16,9 @@ using System.Threading;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class OperationCanceledException : SystemException
     {
         [NonSerialized]
@@ -28,14 +30,12 @@ namespace System
             private set => _cancellationToken = value;
         }
 
-        public OperationCanceledException()
-            : base(SR.OperationCanceled)
+        public OperationCanceledException() : base(SR.OperationCanceled)
         {
             HResult = HResults.COR_E_OPERATIONCANCELED;
         }
 
-        public OperationCanceledException(string? message)
-            : base(message)
+        public OperationCanceledException(string? message) : base(message)
         {
             HResult = HResults.COR_E_OPERATIONCANCELED;
         }
@@ -46,27 +46,28 @@ namespace System
             HResult = HResults.COR_E_OPERATIONCANCELED;
         }
 
-
-        public OperationCanceledException(CancellationToken token)
-            : this()
+        public OperationCanceledException(CancellationToken token) : this()
         {
             CancellationToken = token;
         }
 
-        public OperationCanceledException(string? message, CancellationToken token)
-            : this(message)
+        public OperationCanceledException(string? message, CancellationToken token) : this(message)
         {
             CancellationToken = token;
         }
 
-        public OperationCanceledException(string? message, Exception? innerException, CancellationToken token)
-            : this(message, innerException)
+        public OperationCanceledException(
+            string? message,
+            Exception? innerException,
+            CancellationToken token
+        ) : this(message, innerException)
         {
             CancellationToken = token;
         }
 
-        protected OperationCanceledException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected OperationCanceledException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
     }
 }

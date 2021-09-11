@@ -21,7 +21,6 @@ namespace System.IO.Packaging
         /// PackageRelationship target uri must be relative.
         /// </summary>
         Internal = 0,
-
         /// <summary>
         /// TargetMode is "External".
         /// PackageRelationship target points to an external resource.

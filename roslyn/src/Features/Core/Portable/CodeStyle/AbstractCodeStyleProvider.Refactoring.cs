@@ -34,7 +34,12 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     // If the severity is 'suppress', that means the user doesn't want the actual
                     // analyzer to run here.  However, we can still check to see if we could offer
                     // the feature here as a refactoring.
-                    await ComputeRefactoringsAsync(context, optionValue.Value, analyzerActive: false).ConfigureAwait(false);
+                    await ComputeRefactoringsAsync(
+                            context,
+                            optionValue.Value,
+                            analyzerActive: false
+                        )
+                        .ConfigureAwait(false);
                     return;
 
                 case ReportDiagnostic.Error:
@@ -56,19 +61,31 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     // that we shouldn't even offer to refactor in the reverse direction if it will
                     // just cause an error.  That said, maybe this is just an intermediary step, and
                     // we shouldn't really be blocking the user from making it.
-                    await ComputeRefactoringsAsync(context, optionValue.Value, analyzerActive: true).ConfigureAwait(false);
+                    await ComputeRefactoringsAsync(context, optionValue.Value, analyzerActive: true)
+                        .ConfigureAwait(false);
                     return;
             }
         }
 
         private async Task ComputeRefactoringsAsync(
-            CodeRefactoringContext context, TOptionKind option, bool analyzerActive)
-        {
+            CodeRefactoringContext context,
+            TOptionKind option,
+            bool analyzerActive
+        ) {
             var (document, span, cancellationToken) = context;
 
             var computationTask = analyzerActive
-                ? ComputeOpposingRefactoringsWhenAnalyzerActiveAsync(document, span, option, cancellationToken)
-                : ComputeAllRefactoringsWhenAnalyzerInactiveAsync(document, span, cancellationToken);
+                ? ComputeOpposingRefactoringsWhenAnalyzerActiveAsync(
+                      document,
+                      span,
+                      option,
+                      cancellationToken
+                  )
+                : ComputeAllRefactoringsWhenAnalyzerInactiveAsync(
+                      document,
+                      span,
+                      cancellationToken
+                  );
 
             var codeActions = await computationTask.ConfigureAwait(false);
             context.RegisterRefactorings(codeActions);
@@ -78,11 +95,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         {
             public readonly TCodeStyleProvider _codeStyleProvider;
 
-            protected CodeRefactoringProvider()
-                => _codeStyleProvider = new TCodeStyleProvider();
+            protected CodeRefactoringProvider() => _codeStyleProvider = new TCodeStyleProvider();
 
-            public sealed override Task ComputeRefactoringsAsync(CodeRefactoringContext context)
-                => _codeStyleProvider.ComputeRefactoringsAsync(context);
+            public sealed override Task ComputeRefactoringsAsync(CodeRefactoringContext context) =>
+                _codeStyleProvider.ComputeRefactoringsAsync(context);
         }
     }
 }

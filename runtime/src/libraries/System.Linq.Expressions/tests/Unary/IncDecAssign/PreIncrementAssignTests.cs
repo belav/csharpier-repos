@@ -27,15 +27,24 @@ namespace System.Linq.Expressions.Tests
         [PerCompilationType(nameof(NullableSinglesAndIncrements))]
         [PerCompilationType(nameof(DoublesAndIncrements))]
         [PerCompilationType(nameof(NullableDoublesAndIncrements))]
-        public void ReturnsCorrectValues(Type type, object value, object result, bool useInterpreter)
-        {
+        public void ReturnsCorrectValues(
+            Type type,
+            object value,
+            object result,
+            bool useInterpreter
+        ) {
             ParameterExpression variable = Expression.Variable(type);
             BlockExpression block = Expression.Block(
                 new[] { variable },
                 Expression.Assign(variable, Expression.Constant(value, type)),
                 Expression.PreIncrementAssign(variable)
-                );
-            Assert.True(Expression.Lambda<Func<bool>>(Expression.Equal(Expression.Constant(result, type), block)).Compile(useInterpreter)());
+            );
+            Assert.True(
+                Expression.Lambda<Func<bool>>(
+                        Expression.Equal(Expression.Constant(result, type), block)
+                    )
+                    .Compile(useInterpreter)()
+            );
         }
 
         [Theory]
@@ -57,8 +66,12 @@ namespace System.Linq.Expressions.Tests
         [PerCompilationType(nameof(NullableSinglesAndIncrements))]
         [PerCompilationType(nameof(DoublesAndIncrements))]
         [PerCompilationType(nameof(NullableDoublesAndIncrements))]
-        public void AssignsCorrectValues(Type type, object value, object result, bool useInterpreter)
-        {
+        public void AssignsCorrectValues(
+            Type type,
+            object value,
+            object result,
+            bool useInterpreter
+        ) {
             ParameterExpression variable = Expression.Variable(type);
             LabelTarget target = Expression.Label(type);
             BlockExpression block = Expression.Block(
@@ -67,8 +80,13 @@ namespace System.Linq.Expressions.Tests
                 Expression.PreIncrementAssign(variable),
                 Expression.Return(target, variable),
                 Expression.Label(target, Expression.Default(type))
-                );
-            Assert.True(Expression.Lambda<Func<bool>>(Expression.Equal(Expression.Constant(result, type), block)).Compile(useInterpreter)());
+            );
+            Assert.True(
+                Expression.Lambda<Func<bool>>(
+                        Expression.Equal(Expression.Constant(result, type), block)
+                    )
+                    .Compile(useInterpreter)()
+            );
         }
 
         [Theory]
@@ -77,17 +95,20 @@ namespace System.Linq.Expressions.Tests
         {
             TestPropertyClass<float> instance = new TestPropertyClass<float>();
             instance.TestInstance = float.NaN;
-            Assert.True(float.IsNaN(
-                Expression.Lambda<Func<float>>(
-                    Expression.PreIncrementAssign(
-                        Expression.Property(
-                            Expression.Constant(instance),
-                            typeof(TestPropertyClass<float>),
-                            "TestInstance"
+            Assert.True(
+                float.IsNaN(
+                    Expression.Lambda<Func<float>>(
+                            Expression.PreIncrementAssign(
+                                Expression.Property(
+                                    Expression.Constant(instance),
+                                    typeof(TestPropertyClass<float>),
+                                    "TestInstance"
+                                )
                             )
                         )
-                    ).Compile(useInterpreter)()
-                ));
+                        .Compile(useInterpreter)()
+                )
+            );
             Assert.True(float.IsNaN(instance.TestInstance));
         }
 
@@ -97,17 +118,20 @@ namespace System.Linq.Expressions.Tests
         {
             TestPropertyClass<double> instance = new TestPropertyClass<double>();
             instance.TestInstance = double.NaN;
-            Assert.True(double.IsNaN(
-                Expression.Lambda<Func<double>>(
-                    Expression.PreIncrementAssign(
-                        Expression.Property(
-                            Expression.Constant(instance),
-                            typeof(TestPropertyClass<double>),
-                            "TestInstance"
+            Assert.True(
+                double.IsNaN(
+                    Expression.Lambda<Func<double>>(
+                            Expression.PreIncrementAssign(
+                                Expression.Property(
+                                    Expression.Constant(instance),
+                                    typeof(TestPropertyClass<double>),
+                                    "TestInstance"
+                                )
                             )
                         )
-                    ).Compile(useInterpreter)()
-                ));
+                        .Compile(useInterpreter)()
+                )
+            );
             Assert.True(double.IsNaN(instance.TestInstance));
         }
 
@@ -117,13 +141,14 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression variable = Expression.Variable(value.GetType());
             Action overflow = Expression.Lambda<Action>(
-                Expression.Block(
-                    typeof(void),
-                    new[] { variable },
-                    Expression.Assign(variable, Expression.Constant(value)),
-                    Expression.PreIncrementAssign(variable)
+                    Expression.Block(
+                        typeof(void),
+                        new[] { variable },
+                        Expression.Assign(variable, Expression.Constant(value)),
+                        Expression.PreIncrementAssign(variable)
                     )
-                ).Compile(useInterpreter);
+                )
+                .Compile(useInterpreter);
             Assert.Throws<OverflowException>(overflow);
         }
 
@@ -143,9 +168,15 @@ namespace System.Linq.Expressions.Tests
             BlockExpression block = Expression.Block(
                 new[] { variable },
                 Expression.Assign(variable, Expression.Constant("hello")),
-                Expression.PreIncrementAssign(variable, typeof(IncDecAssignTests).GetTypeInfo().GetDeclaredMethod("SillyMethod"))
-                );
-            Assert.Equal("Eggplant", Expression.Lambda<Func<string>>(block).Compile(useInterpreter)());
+                Expression.PreIncrementAssign(
+                    variable,
+                    typeof(IncDecAssignTests).GetTypeInfo().GetDeclaredMethod("SillyMethod")
+                )
+            );
+            Assert.Equal(
+                "Eggplant",
+                Expression.Lambda<Func<string>>(block).Compile(useInterpreter)()
+            );
         }
 
         [Theory]
@@ -157,19 +188,28 @@ namespace System.Linq.Expressions.Tests
             BlockExpression block = Expression.Block(
                 new[] { variable },
                 Expression.Assign(variable, Expression.Constant("hello")),
-                Expression.PreIncrementAssign(variable, typeof(IncDecAssignTests).GetTypeInfo().GetDeclaredMethod("SillyMethod")),
+                Expression.PreIncrementAssign(
+                    variable,
+                    typeof(IncDecAssignTests).GetTypeInfo().GetDeclaredMethod("SillyMethod")
+                ),
                 Expression.Return(target, variable),
                 Expression.Label(target, Expression.Default(typeof(string)))
-                );
-            Assert.Equal("Eggplant", Expression.Lambda<Func<string>>(block).Compile(useInterpreter)());
+            );
+            Assert.Equal(
+                "Eggplant",
+                Expression.Lambda<Func<string>>(block).Compile(useInterpreter)()
+            );
         }
 
         [Fact]
         public void IncorrectMethodType()
         {
             Expression variable = Expression.Variable(typeof(int));
-            MethodInfo method = typeof(IncDecAssignTests).GetTypeInfo().GetDeclaredMethod("SillyMethod");
-            Assert.Throws<InvalidOperationException>(() => Expression.PreIncrementAssign(variable, method));
+            MethodInfo method = typeof(IncDecAssignTests).GetTypeInfo()
+                .GetDeclaredMethod("SillyMethod");
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.PreIncrementAssign(variable, method)
+            );
         }
 
         [Fact]
@@ -177,15 +217,22 @@ namespace System.Linq.Expressions.Tests
         {
             Expression variable = Expression.Variable(typeof(string));
             MethodInfo method = typeof(object).GetTypeInfo().GetDeclaredMethod("ReferenceEquals");
-            AssertExtensions.Throws<ArgumentException>("method", () => Expression.PreIncrementAssign(variable, method));
+            AssertExtensions.Throws<ArgumentException>(
+                "method",
+                () => Expression.PreIncrementAssign(variable, method)
+            );
         }
 
         [Fact]
         public void IncorrectMethodReturnType()
         {
             Expression variable = Expression.Variable(typeof(int));
-            MethodInfo method = typeof(IncDecAssignTests).GetTypeInfo().GetDeclaredMethod("GetString");
-            AssertExtensions.Throws<ArgumentException>(null, () => Expression.PreIncrementAssign(variable, method));
+            MethodInfo method = typeof(IncDecAssignTests).GetTypeInfo()
+                .GetDeclaredMethod("GetString");
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Expression.PreIncrementAssign(variable, method)
+            );
         }
 
         [Theory]
@@ -196,11 +243,12 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(
                 3U,
                 Expression.Lambda<Func<uint>>(
-                    Expression.PreIncrementAssign(
-                        Expression.Property(null, typeof(TestPropertyClass<uint>), "TestStatic")
+                        Expression.PreIncrementAssign(
+                            Expression.Property(null, typeof(TestPropertyClass<uint>), "TestStatic")
                         )
-                    ).Compile(useInterpreter)()
-                );
+                    )
+                    .Compile(useInterpreter)()
+            );
             Assert.Equal(3U, TestPropertyClass<uint>.TestStatic);
         }
 
@@ -213,15 +261,16 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(
                 3,
                 Expression.Lambda<Func<int>>(
-                    Expression.PreIncrementAssign(
-                        Expression.Property(
-                            Expression.Constant(instance),
-                            typeof(TestPropertyClass<int>),
-                            "TestInstance"
+                        Expression.PreIncrementAssign(
+                            Expression.Property(
+                                Expression.Constant(instance),
+                                typeof(TestPropertyClass<int>),
+                                "TestInstance"
                             )
                         )
-                    ).Compile(useInterpreter)()
-                );
+                    )
+                    .Compile(useInterpreter)()
+            );
             Assert.Equal(3, instance.TestInstance);
         }
 
@@ -234,11 +283,15 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(
                 3,
                 Expression.Lambda<Func<int>>(
-                    Expression.PreIncrementAssign(
-                        Expression.ArrayAccess(Expression.Constant(array), Expression.Constant(0))
+                        Expression.PreIncrementAssign(
+                            Expression.ArrayAccess(
+                                Expression.Constant(array),
+                                Expression.Constant(0)
+                            )
                         )
-                    ).Compile(useInterpreter)()
-                );
+                    )
+                    .Compile(useInterpreter)()
+            );
             Assert.Equal(3, array[0]);
         }
 
@@ -254,20 +307,29 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullOperand()
         {
-            AssertExtensions.Throws<ArgumentNullException>("expression", () => Expression.PreIncrementAssign(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "expression",
+                () => Expression.PreIncrementAssign(null)
+            );
         }
 
         [Fact]
         public void UnwritableOperand()
         {
-            AssertExtensions.Throws<ArgumentException>("expression", () => Expression.PreIncrementAssign(Expression.Constant(1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "expression",
+                () => Expression.PreIncrementAssign(Expression.Constant(1))
+            );
         }
 
         [Fact]
         public void UnreadableOperand()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("expression", () => Expression.PreIncrementAssign(value));
+            AssertExtensions.Throws<ArgumentException>(
+                "expression",
+                () => Expression.PreIncrementAssign(value)
+            );
         }
 
         [Fact]
@@ -288,7 +350,9 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void ToStringTest()
         {
-            UnaryExpression e = Expression.PreIncrementAssign(Expression.Parameter(typeof(int), "x"));
+            UnaryExpression e = Expression.PreIncrementAssign(
+                Expression.Parameter(typeof(int), "x")
+            );
             Assert.Equal("++x", e.ToString());
         }
     }

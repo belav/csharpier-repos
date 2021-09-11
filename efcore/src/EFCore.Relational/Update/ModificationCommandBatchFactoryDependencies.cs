@@ -60,8 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             IUpdateSqlGenerator updateSqlGenerator,
             IRelationalValueBufferFactoryFactory valueBufferFactoryFactory,
             ICurrentDbContext currentContext,
-            IRelationalCommandDiagnosticsLogger logger)
-        {
+            IRelationalCommandDiagnosticsLogger logger
+        ) {
             Check.NotNull(commandBuilderFactory, nameof(commandBuilderFactory));
             Check.NotNull(sqlGenerationHelper, nameof(sqlGenerationHelper));
             Check.NotNull(updateSqlGenerator, nameof(updateSqlGenerator));

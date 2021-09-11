@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     partial class BoundDagTest
     {
-        public override bool Equals([NotNullWhen(true)] object? obj) => this.Equals(obj as BoundDagTest);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            this.Equals(obj as BoundDagTest);
 
         private bool Equals(BoundDagTest? other)
         {

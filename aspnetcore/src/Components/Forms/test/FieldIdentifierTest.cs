@@ -13,14 +13,18 @@ namespace Microsoft.AspNetCore.Components.Forms
         [Fact]
         public void CannotUseNullModel()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => new FieldIdentifier(null, "somefield"));
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => new FieldIdentifier(null, "somefield")
+            );
             Assert.Equal("model", ex.ParamName);
         }
 
         [Fact]
         public void CannotUseValueTypeModel()
         {
-            var ex = Assert.Throws<ArgumentException>(() => new FieldIdentifier(DateTime.Now, "somefield"));
+            var ex = Assert.Throws<ArgumentException>(
+                () => new FieldIdentifier(DateTime.Now, "somefield")
+            );
             Assert.Equal("model", ex.ParamName);
             Assert.StartsWith("The model must be a reference-typed object.", ex.Message);
         }
@@ -28,7 +32,9 @@ namespace Microsoft.AspNetCore.Components.Forms
         [Fact]
         public void CannotUseNullFieldName()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => new FieldIdentifier(new object(), null));
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => new FieldIdentifier(new object(), null)
+            );
             Assert.Equal("fieldName", ex.ParamName);
         }
 
@@ -127,7 +133,10 @@ namespace Microsoft.AspNetCore.Components.Forms
             // Act/Assert
             Assert.Equal("field", fieldIdentifierLower.FieldName);
             Assert.Equal("Field", fieldIdentifierPascal.FieldName);
-            Assert.NotEqual(fieldIdentifierLower.GetHashCode(), fieldIdentifierPascal.GetHashCode());
+            Assert.NotEqual(
+                fieldIdentifierLower.GetHashCode(),
+                fieldIdentifierPascal.GetHashCode()
+            );
             Assert.False(fieldIdentifierLower.Equals(fieldIdentifierPascal));
         }
 
@@ -143,9 +152,13 @@ namespace Microsoft.AspNetCore.Components.Forms
         [Fact]
         public void CannotCreateFromExpression_NonMember()
         {
-            var ex = Assert.Throws<ArgumentException>(() =>
-                FieldIdentifier.Create(() => new TestModel()));
-            Assert.Equal($"The provided expression contains a NewExpression which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object.", ex.Message);
+            var ex = Assert.Throws<ArgumentException>(
+                () => FieldIdentifier.Create(() => new TestModel())
+            );
+            Assert.Equal(
+                $"The provided expression contains a NewExpression which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -199,7 +212,9 @@ namespace Microsoft.AspNetCore.Components.Forms
         public void CanCreateFromExpression_MemberOfObjectWithCast()
         {
             var model = new TestModel();
-            var fieldIdentifier = FieldIdentifier.Create(() => ((TestModel)(object)model).StringField);
+            var fieldIdentifier = FieldIdentifier.Create(
+                () => ((TestModel)(object)model).StringField
+            );
             Assert.Same(model, fieldIdentifier.Model);
             Assert.Equal(nameof(TestModel.StringField), fieldIdentifier.FieldName);
         }

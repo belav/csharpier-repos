@@ -19,13 +19,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void Can_construct()
         {
-            Assert.Same(
-                new HashSet<int>().Comparer,
-                new ObservableHashSet<int>().Comparer);
+            Assert.Same(new HashSet<int>().Comparer, new ObservableHashSet<int>().Comparer);
 
             Assert.Same(
                 LegacyReferenceEqualityComparer.Instance,
-                new ObservableHashSet<object>(LegacyReferenceEqualityComparer.Instance).Comparer);
+                new ObservableHashSet<object>(LegacyReferenceEqualityComparer.Instance).Comparer
+            );
 
             var testData1 = CreateTestData();
 
@@ -37,7 +36,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var testData2 = CreateTestData().Cast<object>();
 
             var rh2 = new HashSet<object>(testData2, LegacyReferenceEqualityComparer.Instance);
-            var ohs2 = new ObservableHashSet<object>(testData2, LegacyReferenceEqualityComparer.Instance);
+            var ohs2 = new ObservableHashSet<object>(
+                testData2,
+                LegacyReferenceEqualityComparer.Instance
+            );
             Assert.Equal(rh2.OrderBy(i => i), ohs2.OrderBy(i => i));
             Assert.Same(rh2.Comparer, ohs2.Comparer);
         }
@@ -53,8 +55,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var countChange = 1;
             var adding = Array.Empty<string>();
 
-            hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-            hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+            hashSet.PropertyChanging += (s, a) =>
+                AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+            hashSet.PropertyChanged += (s, a) =>
+                AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
             hashSet.CollectionChanged += (s, a) =>
             {
                 Assert.Equal(NotifyCollectionChangedAction.Add, a.Action);
@@ -99,8 +103,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var currentCount = testData.Count;
             var countChange = -testData.Count;
 
-            hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-            hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+            hashSet.PropertyChanging += (s, a) =>
+                AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+            hashSet.PropertyChanged += (s, a) =>
+                AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
             hashSet.CollectionChanged += (s, a) =>
             {
                 Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -182,8 +188,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var countChange = -1;
             var removing = Array.Empty<string>();
 
-            hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-            hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+            hashSet.PropertyChanging += (s, a) =>
+                AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+            hashSet.PropertyChanged += (s, a) =>
+                AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
             hashSet.CollectionChanged += (s, a) =>
             {
                 Assert.Equal(NotifyCollectionChangedAction.Remove, a.Action);
@@ -233,8 +241,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var countChange = 2;
             var adding = new[] { "Brendan", "Nate" };
 
-            hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-            hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+            hashSet.PropertyChanging += (s, a) =>
+                AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+            hashSet.PropertyChanged += (s, a) =>
+                AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
             hashSet.CollectionChanged += (s, a) =>
             {
                 Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -261,13 +271,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void Can_intersect_with()
         {
-            var hashSet = new ObservableHashSet<string>
-            {
-                "Brendan",
-                "Carmack",
-                "Nate",
-                "Palmer"
-            };
+            var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
             var countChanging = 0;
             var countChanged = 0;
             var collectionChanged = 0;
@@ -275,8 +279,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var countChange = -2;
             var removing = new[] { "Brendan", "Nate" };
 
-            hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-            hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+            hashSet.PropertyChanging += (s, a) =>
+                AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+            hashSet.PropertyChanged += (s, a) =>
+                AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
             hashSet.CollectionChanged += (s, a) =>
             {
                 Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -303,13 +309,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void Can_except_with()
         {
-            var hashSet = new ObservableHashSet<string>
-            {
-                "Brendan",
-                "Carmack",
-                "Nate",
-                "Palmer"
-            };
+            var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
             var countChanging = 0;
             var countChanged = 0;
             var collectionChanged = 0;
@@ -317,8 +317,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var countChange = -2;
             var removing = new[] { "Carmack", "Palmer" };
 
-            hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-            hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+            hashSet.PropertyChanging += (s, a) =>
+                AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+            hashSet.PropertyChanged += (s, a) =>
+                AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
             hashSet.CollectionChanged += (s, a) =>
             {
                 Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -345,13 +347,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void Can_symmetrical_except_with()
         {
-            var hashSet = new ObservableHashSet<string>
-            {
-                "Brendan",
-                "Carmack",
-                "Nate",
-                "Palmer"
-            };
+            var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
             var countChanging = 0;
             var countChanged = 0;
             var collectionChanged = 0;
@@ -360,8 +356,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var removing = new[] { "Carmack", "Palmer" };
             var adding = new[] { "Abrash" };
 
-            hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-            hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+            hashSet.PropertyChanging += (s, a) =>
+                AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+            hashSet.PropertyChanged += (s, a) =>
+                AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
             hashSet.CollectionChanged += (s, a) =>
             {
                 Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -393,7 +391,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 new HashSet<int>(smallData).IsSubsetOf(bigData),
-                new ObservableHashSet<int>(smallData).IsSubsetOf(bigData));
+                new ObservableHashSet<int>(smallData).IsSubsetOf(bigData)
+            );
         }
 
         [ConditionalFact]
@@ -404,7 +403,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 new HashSet<int>(smallData).IsProperSubsetOf(bigData),
-                new ObservableHashSet<int>(smallData).IsProperSubsetOf(bigData));
+                new ObservableHashSet<int>(smallData).IsProperSubsetOf(bigData)
+            );
         }
 
         [ConditionalFact]
@@ -415,7 +415,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 new HashSet<int>(bigData).IsSupersetOf(smallData),
-                new ObservableHashSet<int>(bigData).IsSupersetOf(smallData));
+                new ObservableHashSet<int>(bigData).IsSupersetOf(smallData)
+            );
         }
 
         [ConditionalFact]
@@ -426,7 +427,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 new HashSet<int>(bigData).IsProperSupersetOf(smallData),
-                new ObservableHashSet<int>(bigData).IsProperSupersetOf(smallData));
+                new ObservableHashSet<int>(bigData).IsProperSupersetOf(smallData)
+            );
         }
 
         [ConditionalFact]
@@ -437,7 +439,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 new HashSet<int>(bigData).Overlaps(smallData),
-                new ObservableHashSet<int>(bigData).Overlaps(smallData));
+                new ObservableHashSet<int>(bigData).Overlaps(smallData)
+            );
         }
 
         [ConditionalFact]
@@ -448,7 +451,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 new HashSet<int>(data1).SetEquals(data2),
-                new ObservableHashSet<int>(data1).SetEquals(data2));
+                new ObservableHashSet<int>(data1).SetEquals(data2)
+            );
         }
 
         [ConditionalFact]
@@ -469,13 +473,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void Can_remove_with_predicate()
         {
-            var hashSet = new ObservableHashSet<string>
-            {
-                "Brendan",
-                "Carmack",
-                "Nate",
-                "Palmer"
-            };
+            var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
             var countChanging = 0;
             var countChanged = 0;
             var collectionChanged = 0;
@@ -483,8 +481,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var countChange = -2;
             var removing = new[] { "Carmack", "Palmer" };
 
-            hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-            hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+            hashSet.PropertyChanging += (s, a) =>
+                AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+            hashSet.PropertyChanged += (s, a) =>
+                AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
             hashSet.CollectionChanged += (s, a) =>
             {
                 Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -526,8 +526,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             object sender,
             PropertyChangingEventArgs eventArgs,
             int expectedCount,
-            ref int changingCount)
-        {
+            ref int changingCount
+        ) {
             Assert.Same(hashSet, sender);
             Assert.Equal("Count", eventArgs.PropertyName);
             Assert.Equal(expectedCount, hashSet.Count);
@@ -540,8 +540,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             PropertyChangedEventArgs eventArgs,
             ref int expectedCount,
             int countDelta,
-            ref int changedCount)
-        {
+            ref int changedCount
+        ) {
             Assert.Same(hashSet, sender);
             Assert.Equal("Count", eventArgs.PropertyName);
             Assert.Equal(expectedCount + countDelta, hashSet.Count);

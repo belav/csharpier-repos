@@ -24,13 +24,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             set => Flags = (byte)value;
         }
 
-        public bool HeadersEndHeaders => (HeadersFlags & Http2HeadersFrameFlags.END_HEADERS) == Http2HeadersFrameFlags.END_HEADERS;
+        public bool HeadersEndHeaders =>
+            (HeadersFlags & Http2HeadersFrameFlags.END_HEADERS)
+            == Http2HeadersFrameFlags.END_HEADERS;
 
-        public bool HeadersEndStream => (HeadersFlags & Http2HeadersFrameFlags.END_STREAM) == Http2HeadersFrameFlags.END_STREAM;
+        public bool HeadersEndStream =>
+            (HeadersFlags & Http2HeadersFrameFlags.END_STREAM) == Http2HeadersFrameFlags.END_STREAM;
 
-        public bool HeadersHasPadding => (HeadersFlags & Http2HeadersFrameFlags.PADDED) == Http2HeadersFrameFlags.PADDED;
+        public bool HeadersHasPadding =>
+            (HeadersFlags & Http2HeadersFrameFlags.PADDED) == Http2HeadersFrameFlags.PADDED;
 
-        public bool HeadersHasPriority => (HeadersFlags & Http2HeadersFrameFlags.PRIORITY) == Http2HeadersFrameFlags.PRIORITY;
+        public bool HeadersHasPriority =>
+            (HeadersFlags & Http2HeadersFrameFlags.PRIORITY) == Http2HeadersFrameFlags.PRIORITY;
 
         public byte HeadersPadLength { get; set; }
 
@@ -38,7 +43,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
 
         public byte HeadersPriorityWeight { get; set; }
 
-        private int HeadersPayloadOffset => (HeadersHasPadding ? 1 : 0) + (HeadersHasPriority ? 5 : 0);
+        private int HeadersPayloadOffset =>
+            (HeadersHasPadding ? 1 : 0) + (HeadersHasPriority ? 5 : 0);
 
         public int HeadersPayloadLength => PayloadLength - HeadersPayloadOffset - HeadersPadLength;
 

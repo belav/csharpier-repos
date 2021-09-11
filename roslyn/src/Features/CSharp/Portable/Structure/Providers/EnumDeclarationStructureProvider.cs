@@ -9,35 +9,45 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class EnumDeclarationStructureProvider : AbstractSyntaxNodeStructureProvider<EnumDeclarationSyntax>
+    internal class EnumDeclarationStructureProvider
+        : AbstractSyntaxNodeStructureProvider<EnumDeclarationSyntax>
     {
         protected override void CollectBlockSpans(
             EnumDeclarationSyntax enumDeclaration,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
-        {
-            CSharpStructureHelpers.CollectCommentBlockSpans(enumDeclaration, ref spans, optionProvider);
+            CancellationToken cancellationToken
+        ) {
+            CSharpStructureHelpers.CollectCommentBlockSpans(
+                enumDeclaration,
+                ref spans,
+                optionProvider
+            );
 
-            if (!enumDeclaration.OpenBraceToken.IsMissing &&
-                !enumDeclaration.CloseBraceToken.IsMissing)
-            {
+            if (
+                !enumDeclaration.OpenBraceToken.IsMissing
+                && !enumDeclaration.CloseBraceToken.IsMissing
+            ) {
                 SyntaxNodeOrToken current = enumDeclaration;
                 var nextSibling = current.GetNextSibling();
 
                 // Check IsNode to compress blank lines after this node if it is the last child of the parent.
                 //
                 // Whitespace between type declarations is collapsed in Metadata as Source.
-                var compressEmptyLines = optionProvider.IsMetadataAsSource
+                var compressEmptyLines =
+                    optionProvider.IsMetadataAsSource
                     && (!nextSibling.IsNode || nextSibling.AsNode() is BaseTypeDeclarationSyntax);
 
-                spans.AddIfNotNull(CSharpStructureHelpers.CreateBlockSpan(
-                    enumDeclaration,
-                    enumDeclaration.Identifier,
-                    compressEmptyLines: compressEmptyLines,
-                    autoCollapse: false,
-                    type: BlockTypes.Member,
-                    isCollapsible: true));
+                spans.AddIfNotNull(
+                    CSharpStructureHelpers.CreateBlockSpan(
+                        enumDeclaration,
+                        enumDeclaration.Identifier,
+                        compressEmptyLines: compressEmptyLines,
+                        autoCollapse: false,
+                        type: BlockTypes.Member,
+                        isCollapsible: true
+                    )
+                );
             }
 
             // add any leading comments before the end of the type block

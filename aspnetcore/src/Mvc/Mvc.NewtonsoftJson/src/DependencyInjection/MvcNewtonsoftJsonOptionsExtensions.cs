@@ -24,8 +24,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="options"><see cref="MvcNewtonsoftJsonOptions"/></param>
         /// <param name="processDictionaryKeys">If true will camel case dictionary keys and properties of dynamic objects.</param>
         /// <returns><see cref="MvcNewtonsoftJsonOptions"/> with camel case settings.</returns>
-        public static MvcNewtonsoftJsonOptions UseCamelCasing(this MvcNewtonsoftJsonOptions options, bool processDictionaryKeys)
-        {
+        public static MvcNewtonsoftJsonOptions UseCamelCasing(
+            this MvcNewtonsoftJsonOptions options,
+            bool processDictionaryKeys
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -42,12 +44,21 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 if (options.SerializerSettings.ContractResolver == null)
                 {
-                    throw new InvalidOperationException(Resources.FormatContractResolverCannotBeNull(nameof(JsonSerializerSettings.ContractResolver)));
+                    throw new InvalidOperationException(
+                        Resources.FormatContractResolverCannotBeNull(
+                            nameof(JsonSerializerSettings.ContractResolver)
+                        )
+                    );
                 }
 
-                var contractResolverName = options.SerializerSettings.ContractResolver.GetType().Name;
+                var contractResolverName =
+                    options.SerializerSettings.ContractResolver.GetType().Name;
                 throw new InvalidOperationException(
-                    Resources.FormatInvalidContractResolverForJsonCasingConfiguration(contractResolverName, nameof(DefaultContractResolver)));
+                    Resources.FormatInvalidContractResolverForJsonCasingConfiguration(
+                        contractResolverName,
+                        nameof(DefaultContractResolver)
+                    )
+                );
             }
 
             return options;
@@ -62,8 +73,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         /// <param name="options"><see cref="MvcNewtonsoftJsonOptions"/></param>
         /// <returns><see cref="MvcNewtonsoftJsonOptions"/> with member casing settings.</returns>
-        public static MvcNewtonsoftJsonOptions UseMemberCasing(this MvcNewtonsoftJsonOptions options)
-        {
+        public static MvcNewtonsoftJsonOptions UseMemberCasing(
+            this MvcNewtonsoftJsonOptions options
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -77,12 +89,21 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 if (options.SerializerSettings.ContractResolver == null)
                 {
-                    throw new InvalidOperationException(Resources.FormatContractResolverCannotBeNull(nameof(JsonSerializerSettings.ContractResolver)));
+                    throw new InvalidOperationException(
+                        Resources.FormatContractResolverCannotBeNull(
+                            nameof(JsonSerializerSettings.ContractResolver)
+                        )
+                    );
                 }
 
-                var contractResolverName = options.SerializerSettings.ContractResolver.GetType().Name;
+                var contractResolverName =
+                    options.SerializerSettings.ContractResolver.GetType().Name;
                 throw new InvalidOperationException(
-                    Resources.FormatInvalidContractResolverForJsonCasingConfiguration(contractResolverName, nameof(DefaultContractResolver)));
+                    Resources.FormatInvalidContractResolverForJsonCasingConfiguration(
+                        contractResolverName,
+                        nameof(DefaultContractResolver)
+                    )
+                );
             }
 
             return options;

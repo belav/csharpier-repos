@@ -19,6 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         void ProcessEntityTypeMemberIgnored(
             IConventionEntityTypeBuilder entityTypeBuilder,
             string name,
-            IConventionContext<string> context);
+            IConventionContext<string> context
+        );
     }
 }

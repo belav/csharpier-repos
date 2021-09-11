@@ -26,8 +26,10 @@ namespace Microsoft.AspNetCore.DataProtection.EntityFrameworkCore
         /// </summary>
         /// <param name="services"></param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-        public EntityFrameworkCoreXmlRepository(IServiceProvider services, ILoggerFactory loggerFactory)
-        {
+        public EntityFrameworkCoreXmlRepository(
+            IServiceProvider services,
+            ILoggerFactory loggerFactory
+        ) {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));

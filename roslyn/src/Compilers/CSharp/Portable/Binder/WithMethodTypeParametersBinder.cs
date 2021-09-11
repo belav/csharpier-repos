@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly MethodSymbol _methodSymbol;
         private MultiDictionary<string, TypeParameterSymbol> _lazyTypeParameterMap;
 
-        internal WithMethodTypeParametersBinder(MethodSymbol methodSymbol, Binder next)
-            : base(next)
+        internal WithMethodTypeParametersBinder(MethodSymbol methodSymbol, Binder next) : base(next)
         {
             _methodSymbol = methodSymbol;
         }
@@ -28,10 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override Symbol ContainingMemberOrLambda
         {
-            get
-            {
-                return _methodSymbol;
-            }
+            get { return _methodSymbol; }
         }
 
         protected override MultiDictionary<string, TypeParameterSymbol> TypeParameterMap
@@ -57,12 +53,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return LookupOptions.NamespaceAliasesOnly | LookupOptions.MustNotBeMethodTypeParameter;
+                return LookupOptions.NamespaceAliasesOnly
+                    | LookupOptions.MustNotBeMethodTypeParameter;
             }
         }
 
-        protected override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
-        {
+        protected override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        ) {
             if (CanConsiderTypeParameters(options))
             {
                 foreach (var parameter in _methodSymbol.TypeParameters)

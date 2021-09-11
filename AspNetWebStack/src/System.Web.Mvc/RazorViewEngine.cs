@@ -7,13 +7,9 @@ namespace System.Web.Mvc
     {
         internal static readonly string ViewStartFileName = "_ViewStart";
 
-        public RazorViewEngine()
-            : this(null)
-        {
-        }
+        public RazorViewEngine() : this(null) { }
 
-        public RazorViewEngine(IViewPageActivator viewPageActivator)
-            : base(viewPageActivator)
+        public RazorViewEngine(IViewPageActivator viewPageActivator) : base(viewPageActivator)
         {
             AreaViewLocationFormats = new[]
             {
@@ -59,27 +55,38 @@ namespace System.Web.Mvc
                 "~/Views/Shared/{0}.vbhtml"
             };
 
-            FileExtensions = new[]
-            {
-                "cshtml",
-                "vbhtml",
-            };
+            FileExtensions = new[] { "cshtml", "vbhtml", };
         }
 
-        protected override IView CreatePartialView(ControllerContext controllerContext, string partialPath)
-        {
-            return new RazorView(controllerContext, partialPath,
-                                 layoutPath: null, runViewStartPages: false, viewStartFileExtensions: FileExtensions, viewPageActivator: ViewPageActivator)
-            {
+        protected override IView CreatePartialView(
+            ControllerContext controllerContext,
+            string partialPath
+        ) {
+            return new RazorView(
+                controllerContext,
+                partialPath,
+                layoutPath: null,
+                runViewStartPages: false,
+                viewStartFileExtensions: FileExtensions,
+                viewPageActivator: ViewPageActivator
+            ) {
                 DisplayModeProvider = DisplayModeProvider
             };
         }
 
-        protected override IView CreateView(ControllerContext controllerContext, string viewPath, string masterPath)
-        {
-            var view = new RazorView(controllerContext, viewPath,
-                                     layoutPath: masterPath, runViewStartPages: true, viewStartFileExtensions: FileExtensions, viewPageActivator: ViewPageActivator)
-            {
+        protected override IView CreateView(
+            ControllerContext controllerContext,
+            string viewPath,
+            string masterPath
+        ) {
+            var view = new RazorView(
+                controllerContext,
+                viewPath,
+                layoutPath: masterPath,
+                runViewStartPages: true,
+                viewStartFileExtensions: FileExtensions,
+                viewPageActivator: ViewPageActivator
+            ) {
                 DisplayModeProvider = DisplayModeProvider
             };
             return view;

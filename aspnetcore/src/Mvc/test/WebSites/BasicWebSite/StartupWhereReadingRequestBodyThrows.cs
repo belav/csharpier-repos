@@ -28,17 +28,21 @@ namespace BasicWebSite
             app.UseDeveloperExceptionPage();
 
             // Initializes the RequestId service for each request
-            app.Use((context, next) =>
-            {
-                context.Request.Body = new ThrowingStream();
-                return next();
-            });
+            app.Use(
+                (context, next) =>
+                {
+                    context.Request.Body = new ThrowingStream();
+                    return next();
+                }
+            );
 
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                }
+            );
         }
 
         private class ThrowingStream : Stream
@@ -59,13 +63,19 @@ namespace BasicWebSite
                 throw new NotSupportedException();
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            {
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            ) {
                 throw new ConnectionResetException("Some error");
             }
 
-            public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-            {
+            public override ValueTask<int> ReadAsync(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken = default
+            ) {
                 throw new ConnectionResetException("Some error");
             }
 

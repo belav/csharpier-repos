@@ -23,45 +23,76 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SynthesizedRecordConstructor ctor,
             ImmutableArray<PropertySymbol> properties,
             int memberOffset,
-            BindingDiagnosticBag diagnostics)
-            : base(containingType, WellKnownMemberNames.DeconstructMethodName, hasBody: true, memberOffset, diagnostics)
-        {
+            BindingDiagnosticBag diagnostics
+        ) : base(
+            containingType,
+            WellKnownMemberNames.DeconstructMethodName,
+            hasBody: true,
+            memberOffset,
+            diagnostics
+        ) {
             Debug.Assert(properties.All(prop => prop.GetMethod is object));
             _ctor = ctor;
             _properties = properties;
         }
 
-        protected override DeclarationModifiers MakeDeclarationModifiers(DeclarationModifiers allowedModifiers, BindingDiagnosticBag diagnostics)
-        {
+        protected override DeclarationModifiers MakeDeclarationModifiers(
+            DeclarationModifiers allowedModifiers,
+            BindingDiagnosticBag diagnostics
+        ) {
             const DeclarationModifiers result = DeclarationModifiers.Public;
             Debug.Assert((result & ~allowedModifiers) == 0);
             return result;
         }
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
-        {
+        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
+            BindingDiagnosticBag diagnostics
+        ) {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
-            return (ReturnType: TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_Void, location, diagnostics)),
-                    Parameters: _ctor.Parameters.SelectAsArray<ParameterSymbol, ImmutableArray<Location>, ParameterSymbol>(
-                                        (param, locations) =>
-                                            new SourceSimpleParameterSymbol(owner: this,
-                                                param.TypeWithAnnotations,
-                                                param.Ordinal,
-                                                RefKind.Out,
-                                                param.Name,
-                                                isDiscard: false,
-                                                locations),
-                                        arg: Locations),
-                    IsVararg: false,
-                    DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty);
+            return (
+                ReturnType: TypeWithAnnotations.Create(
+                    Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Void,
+                        location,
+                        diagnostics
+                    )
+                ),
+                Parameters: _ctor.Parameters.SelectAsArray<
+                    ParameterSymbol,
+                    ImmutableArray<Location>,
+                    ParameterSymbol
+                >(
+                    (param, locations) =>
+                        new SourceSimpleParameterSymbol(
+                            owner: this,
+                            param.TypeWithAnnotations,
+                            param.Ordinal,
+                            RefKind.Out,
+                            param.Name,
+                            isDiscard: false,
+                            locations
+                        ),
+                    arg: Locations
+                ),
+                IsVararg: false,
+                DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => _ctor.ParameterCount;
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
-        {
-            var F = new SyntheticBoundNodeFactory(this, ContainingType.GetNonNullSyntaxNode(), compilationState, diagnostics);
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        ) {
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                ContainingType.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
 
             if (ParameterCount != _properties.Length)
             {
@@ -70,7 +101,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            var statementsBuilder = ArrayBuilder<BoundStatement>.GetInstance(_properties.Length + 1);
+            var statementsBuilder = ArrayBuilder<BoundStatement>.GetInstance(
+                _properties.Length + 1
+            );
             for (int i = 0; i < _properties.Length; i++)
             {
                 var parameter = Parameters[i];
@@ -85,7 +118,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 // parameter_i = property_i;
-                statementsBuilder.Add(F.Assignment(F.Parameter(parameter), F.Property(F.This(), property)));
+                statementsBuilder.Add(
+                    F.Assignment(F.Parameter(parameter), F.Property(F.This(), property))
+                );
             }
 
             statementsBuilder.Add(F.Return());

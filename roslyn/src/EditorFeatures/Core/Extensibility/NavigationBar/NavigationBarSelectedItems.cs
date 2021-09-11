@@ -13,8 +13,10 @@ namespace Microsoft.CodeAnalysis.Editor
         public NavigationBarItem MemberItem { get; }
         public bool ShowMemberItemGrayed { get; }
 
-        public NavigationBarSelectedTypeAndMember(NavigationBarItem typeItem, NavigationBarItem memberItem)
-        {
+        public NavigationBarSelectedTypeAndMember(
+            NavigationBarItem typeItem,
+            NavigationBarItem memberItem
+        ) {
             TypeItem = typeItem;
             MemberItem = memberItem;
         }
@@ -23,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor
             NavigationBarItem typeItem,
             bool showTypeItemGrayed,
             NavigationBarItem memberItem,
-            bool showMemberItemGrayed)
-            : this(typeItem, memberItem)
+            bool showMemberItemGrayed
+        ) : this(typeItem, memberItem)
         {
             ShowTypeItemGrayed = showTypeItemGrayed;
             ShowMemberItemGrayed = showMemberItemGrayed;

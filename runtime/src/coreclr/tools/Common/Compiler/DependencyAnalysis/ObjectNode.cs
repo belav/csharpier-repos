@@ -13,8 +13,12 @@ namespace ILCompiler.DependencyAnalysis
     {
         public class ObjectData
         {
-            public ObjectData(byte[] data, Relocation[] relocs, int alignment, ISymbolDefinitionNode[] definedSymbols)
-            {
+            public ObjectData(
+                byte[] data,
+                Relocation[] relocs,
+                int alignment,
+                ISymbolDefinitionNode[] definedSymbols
+            ) {
                 Data = data;
                 Relocs = relocs;
                 Alignment = alignment;
@@ -54,8 +58,9 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool InterestingForDynamicDependencyAnalysis => false;
 
-        public sealed override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
-        {
+        public sealed override IEnumerable<DependencyListEntry> GetStaticDependencies(
+            NodeFactory factory
+        ) {
             DependencyList dependencies = ComputeNonRelocationBasedDependencies(factory);
             Relocation[] relocs = GetData(factory, true).Relocs;
 
@@ -81,7 +86,13 @@ namespace ILCompiler.DependencyAnalysis
             return null;
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

@@ -38,9 +38,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 #else
         protected bool GenerateBaselines { get; } = false;
 #endif
-        
+
         protected string TestProjectRoot { get; }
-        
+
         // For consistent line endings because the character counts are going to be recorded in files.
         internal override string LineEnding => "\r\n";
 
@@ -54,7 +54,10 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         [Fact]
         public void GenerateBaselinesMustBeFalse()
         {
-            Assert.False(GenerateBaselines, "GenerateBaselines should be set back to false before you check in!");
+            Assert.False(
+                GenerateBaselines,
+                "GenerateBaselines should be set back to false before you check in!"
+            );
         }
 
         protected void AssertDocumentNodeMatchesBaseline(RazorCodeDocument codeDocument)
@@ -78,7 +81,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             }
 
             // Normalize newlines by splitting into an array.
-            var baseline = irFile.ReadAllText().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var baseline = irFile.ReadAllText()
+                .Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             IntermediateNodeVerifier.Verify(document, baseline);
         }
 
@@ -93,7 +97,10 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             var baselineDiagnosticsFilePath = GetBaselineFilePath(codeDocument, ".diagnostics.txt");
             var baselineMappingsFilePath = GetBaselineFilePath(codeDocument, ".mappings.txt");
 
-            var serializedMappings = SourceMappingsSerializer.Serialize(document, codeDocument.Source);
+            var serializedMappings = SourceMappingsSerializer.Serialize(
+                document,
+                codeDocument.Source
+            );
 
             if (GenerateBaselines)
             {
@@ -101,8 +108,12 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 Directory.CreateDirectory(Path.GetDirectoryName(baselineFullPath));
                 WriteBaseline(actualCode, baselineFullPath);
 
-                var baselineDiagnosticsFullPath = Path.Combine(TestProjectRoot, baselineDiagnosticsFilePath);
-                var lines = document.Diagnostics.Select(RazorDiagnosticSerializer.Serialize).ToArray();
+                var baselineDiagnosticsFullPath = Path.Combine(
+                    TestProjectRoot,
+                    baselineDiagnosticsFilePath
+                );
+                var lines = document.Diagnostics.Select(RazorDiagnosticSerializer.Serialize)
+                    .ToArray();
                 if (lines.Any())
                 {
                     WriteBaseline(lines, baselineDiagnosticsFullPath);
@@ -112,7 +123,10 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     File.Delete(baselineDiagnosticsFullPath);
                 }
 
-                var baselineMappingsFullPath = Path.Combine(TestProjectRoot, baselineMappingsFilePath);
+                var baselineMappingsFullPath = Path.Combine(
+                    TestProjectRoot,
+                    baselineMappingsFilePath
+                );
                 var text = SourceMappingsSerializer.Serialize(document, codeDocument.Source);
                 if (!string.IsNullOrEmpty(text))
                 {
@@ -142,7 +156,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 baselineDiagnostics = diagnosticsFile.ReadAllText();
             }
 
-            var actualDiagnostics = string.Concat(document.Diagnostics.Select(d => RazorDiagnosticSerializer.Serialize(d) + "\r\n"));
+            var actualDiagnostics = string.Concat(
+                document.Diagnostics.Select(d => RazorDiagnosticSerializer.Serialize(d) + "\r\n")
+            );
             Assert.Equal(baselineDiagnostics, actualDiagnostics);
 
             var baselineMappings = string.Empty;
@@ -172,21 +188,24 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     var foundMatchingPragma = false;
                     foreach (var linePragma in linePragmas)
                     {
-                        if (sourceMapping.OriginalSpan.LineIndex >= linePragma.StartLineIndex &&
-                            sourceMapping.OriginalSpan.LineIndex <= linePragma.EndLineIndex)
-                        {
+                        if (
+                            sourceMapping.OriginalSpan.LineIndex >= linePragma.StartLineIndex
+                            && sourceMapping.OriginalSpan.LineIndex <= linePragma.EndLineIndex
+                        ) {
                             // Found a match.
                             foundMatchingPragma = true;
                             break;
                         }
                     }
 
-                    Assert.True(foundMatchingPragma, $"No line pragma found for code at line {sourceMapping.OriginalSpan.LineIndex + 1}.");
+                    Assert.True(
+                        foundMatchingPragma,
+                        $"No line pragma found for code at line {sourceMapping.OriginalSpan.LineIndex + 1}."
+                    );
                 }
             }
             else
             {
-
                 var syntaxTree = codeDocument.GetSyntaxTree();
                 var sourceBuffer = new char[syntaxTree.Source.Length];
                 syntaxTree.Source.CopyTo(0, sourceBuffer, 0, syntaxTree.Source.Length);
@@ -194,24 +213,32 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 var classifiedSpans = syntaxTree.GetClassifiedSpans();
                 foreach (var classifiedSpan in classifiedSpans)
                 {
-                    var content = sourceContent.Substring(classifiedSpan.Span.AbsoluteIndex, classifiedSpan.Span.Length);
-                    if (!string.IsNullOrWhiteSpace(content) &&
-                        classifiedSpan.BlockKind != BlockKindInternal.Directive &&
-                        classifiedSpan.SpanKind == SpanKindInternal.Code)
-                    {
+                    var content = sourceContent.Substring(
+                        classifiedSpan.Span.AbsoluteIndex,
+                        classifiedSpan.Span.Length
+                    );
+                    if (
+                        !string.IsNullOrWhiteSpace(content)
+                        && classifiedSpan.BlockKind != BlockKindInternal.Directive
+                        && classifiedSpan.SpanKind == SpanKindInternal.Code
+                    ) {
                         var foundMatchingPragma = false;
                         foreach (var linePragma in linePragmas)
                         {
-                            if (classifiedSpan.Span.LineIndex >= linePragma.StartLineIndex &&
-                                classifiedSpan.Span.LineIndex <= linePragma.EndLineIndex)
-                            {
+                            if (
+                                classifiedSpan.Span.LineIndex >= linePragma.StartLineIndex
+                                && classifiedSpan.Span.LineIndex <= linePragma.EndLineIndex
+                            ) {
                                 // Found a match.
                                 foundMatchingPragma = true;
                                 break;
                             }
                         }
 
-                        Assert.True(foundMatchingPragma, $"No line pragma found for code '{content}' at line {classifiedSpan.Span.LineIndex + 1}.");
+                        Assert.True(
+                            foundMatchingPragma,
+                            $"No line pragma found for code '{content}' at line {classifiedSpan.Span.LineIndex + 1}."
+                        );
                     }
                 }
             }
@@ -229,8 +256,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 throw new ArgumentNullException(nameof(extension));
             }
 
-            var lastSlash = codeDocument.Source.FilePath.LastIndexOfAny(new []{ '/', '\\' });
-            var fileName = lastSlash == -1 ? null : codeDocument.Source.FilePath.Substring(lastSlash + 1);
+            var lastSlash = codeDocument.Source.FilePath.LastIndexOfAny(new[] { '/', '\\' });
+            var fileName =
+                lastSlash == -1 ? null : codeDocument.Source.FilePath.Substring(lastSlash + 1);
             if (string.IsNullOrEmpty(fileName))
             {
                 var message = "Integration tests require a filename";
@@ -239,7 +267,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 
             if (DirectoryPath == null)
             {
-                var message = $"{nameof(AssertDocumentNodeMatchesBaseline)} should only be called from an integration test..";
+                var message =
+                    $"{nameof(AssertDocumentNodeMatchesBaseline)} should only be called from an integration test..";
                 throw new InvalidOperationException(message);
             }
 

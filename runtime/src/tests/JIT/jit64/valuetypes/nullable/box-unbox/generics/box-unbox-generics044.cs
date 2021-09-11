@@ -3,12 +3,12 @@
 
 // <Area> Nullable - Box-Unbox </Area>
 // <Title> Nullable type with unbox box expr  </Title>
-// <Description>  
+// <Description>
 // checking type of WithOnlyFXTypeStruct using is operator
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
 using System.Runtime.InteropServices;
@@ -18,12 +18,18 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ<T>(T o)
     {
-        return Helper.Compare((WithOnlyFXTypeStruct)(object)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+        return Helper.Compare(
+            (WithOnlyFXTypeStruct)(object)o,
+            Helper.Create(default(WithOnlyFXTypeStruct))
+        );
     }
 
     private static bool BoxUnboxToQ<T>(T o)
     {
-        return Helper.Compare((WithOnlyFXTypeStruct?)(object)o, Helper.Create(default(WithOnlyFXTypeStruct)));
+        return Helper.Compare(
+            (WithOnlyFXTypeStruct?)(object)o,
+            Helper.Create(default(WithOnlyFXTypeStruct))
+        );
     }
 
     private static int Main()

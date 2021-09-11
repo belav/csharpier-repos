@@ -28,11 +28,18 @@ namespace Roslyn.Hosting.Diagnostics.Waiters
 
         public void WaitForAsyncOperations(string featureName, bool waitForWorkspaceFirst = true)
         {
-            WaitForAsyncOperations(TimeSpan.FromMilliseconds(-1), featureName, waitForWorkspaceFirst);
+            WaitForAsyncOperations(
+                TimeSpan.FromMilliseconds(-1),
+                featureName,
+                waitForWorkspaceFirst
+            );
         }
 
-        public void WaitForAsyncOperations(TimeSpan timeout, string featureName, bool waitForWorkspaceFirst = true)
-        {
+        public void WaitForAsyncOperations(
+            TimeSpan timeout,
+            string featureName,
+            bool waitForWorkspaceFirst = true
+        ) {
             var workspaceWaiter = _provider.GetWaiter(FeatureAttribute.Workspace);
             var featureWaiter = _provider.GetWaiter(featureName);
             Contract.ThrowIfNull(featureWaiter);
@@ -57,8 +64,11 @@ namespace Roslyn.Hosting.Diagnostics.Waiters
             GC.KeepAlive(featureWaiter);
         }
 
-        public void WaitForAllAsyncOperations(Workspace? workspace, TimeSpan timeout, params string[] featureNames)
-        {
+        public void WaitForAllAsyncOperations(
+            Workspace? workspace,
+            TimeSpan timeout,
+            params string[] featureNames
+        ) {
             var task = _provider.WaitAllAsync(workspace, featureNames, timeout: timeout);
 
             if (timeout == TimeSpan.FromMilliseconds(-1))
@@ -95,7 +105,11 @@ namespace Roslyn.Hosting.Diagnostics.Waiters
 
                 // make sure pending task that require UI threads to finish as well.
 #pragma warning disable VSTHRD001 // Avoid legacy thread switching APIs
-                Dispatcher.CurrentDispatcher.Invoke(() => { }, DispatcherPriority.ApplicationIdle, cancellationToken);
+                Dispatcher.CurrentDispatcher.Invoke(
+                    () => { },
+                    DispatcherPriority.ApplicationIdle,
+                    cancellationToken
+                );
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
             }
         }

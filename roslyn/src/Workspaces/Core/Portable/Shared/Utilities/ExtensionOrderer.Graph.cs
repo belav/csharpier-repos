@@ -11,11 +11,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     internal partial class ExtensionOrderer
     {
-        private class Graph<TExtension, TMetadata>
-            where TMetadata : OrderableMetadata
+        private class Graph<TExtension, TMetadata> where TMetadata : OrderableMetadata
         {
-            public readonly Dictionary<Lazy<TExtension, TMetadata>, Node<TExtension, TMetadata>> Nodes =
-                new();
+            public readonly Dictionary<
+                Lazy<TExtension, TMetadata>,
+                Node<TExtension, TMetadata>
+            > Nodes = new();
 
             public IEnumerable<Lazy<TExtension, TMetadata>> FindExtensions(string name)
             {
@@ -47,8 +48,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             private static void Visit(
                 Node<TExtension, TMetadata> node,
                 List<Lazy<TExtension, TMetadata>> result,
-                HashSet<Node<TExtension, TMetadata>> seenNodes)
-            {
+                HashSet<Node<TExtension, TMetadata>> seenNodes
+            ) {
                 if (seenNodes.Add(node))
                 {
                     foreach (var before in node.ExtensionsBeforeMeSet)

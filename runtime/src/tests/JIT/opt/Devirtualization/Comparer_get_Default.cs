@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -90,21 +90,43 @@ class Program
 
     public static int Main(string[] args)
     {
-        long[] values = 
-            {
-                -2, -1, 0, 1, 2,
-                sbyte.MinValue - 1, sbyte.MinValue, sbyte.MinValue + 1, 
-                sbyte.MaxValue - 1, sbyte.MaxValue, sbyte.MaxValue + 1,
-                byte.MaxValue - 1, byte.MaxValue, byte.MaxValue + 1,
-                short.MinValue, short.MinValue + 1, 
-                short.MaxValue - 1, short.MaxValue, short.MaxValue + 1,
-                ushort.MaxValue - 1, ushort.MaxValue, ushort.MaxValue + 1,
-                int.MinValue, int.MinValue + 1, 
-                int.MaxValue - 1, int.MaxValue, int.MaxValue + 1L,
-                uint.MaxValue - 1, uint.MaxValue, uint.MaxValue + 1L,
-                long.MinValue, long.MinValue + 1, 
-                long.MaxValue - 1, long.MaxValue
-            };
+        long[] values =
+        {
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            sbyte.MinValue - 1,
+            sbyte.MinValue,
+            sbyte.MinValue + 1,
+            sbyte.MaxValue - 1,
+            sbyte.MaxValue,
+            sbyte.MaxValue + 1,
+            byte.MaxValue - 1,
+            byte.MaxValue,
+            byte.MaxValue + 1,
+            short.MinValue,
+            short.MinValue + 1,
+            short.MaxValue - 1,
+            short.MaxValue,
+            short.MaxValue + 1,
+            ushort.MaxValue - 1,
+            ushort.MaxValue,
+            ushort.MaxValue + 1,
+            int.MinValue,
+            int.MinValue + 1,
+            int.MaxValue - 1,
+            int.MaxValue,
+            int.MaxValue + 1L,
+            uint.MaxValue - 1,
+            uint.MaxValue,
+            uint.MaxValue + 1L,
+            long.MinValue,
+            long.MinValue + 1,
+            long.MaxValue - 1,
+            long.MaxValue
+        };
 
         for (var i = 0; i < values.Length; i++)
         {
@@ -177,13 +199,14 @@ class Program
                 var enumByteB = Unsafe.As<long, Enum_byte>(ref b);
                 Compare_Enum_Byte(enumByteA, enumByteB);
 
-                var structA = new Struct1 {a = a, b = b};
-                var structB = new Struct1 {a = b, b = a};
+                var structA = new Struct1 { a = a, b = b };
+                var structB = new Struct1 { a = b, b = a };
                 Compare_Struct1(structA, structB);
 
                 Compare_DateTime(
                     new DateTime(Math.Clamp(a, DateTime.MinValue.Ticks, DateTime.MaxValue.Ticks)),
-                    new DateTime(Math.Clamp(b, DateTime.MinValue.Ticks, DateTime.MaxValue.Ticks)));
+                    new DateTime(Math.Clamp(b, DateTime.MinValue.Ticks, DateTime.MaxValue.Ticks))
+                );
 
                 Compare_Int32_Nullable(a, b);
             }
@@ -215,28 +238,50 @@ class Program
 
     private static void GetTypeTests()
     {
-        AssertEquals("System.Collections.Generic.GenericComparer`1[System.Int32]", Comparer<int>.Default.GetType().ToString());
-        AssertEquals("System.Collections.Generic.GenericComparer`1[System.String]", Comparer<string>.Default.GetType().ToString());
-        AssertEquals("System.Collections.Generic.GenericComparer`1[System.Guid]", Comparer<Guid>.Default.GetType().ToString());
-        AssertEquals("System.Collections.Generic.EnumComparer`1[System.Runtime.CompilerServices.MethodImplOptions]", Comparer<MethodImplOptions>.Default.GetType().ToString());
-        AssertEquals("System.Collections.Generic.NullableComparer`1[System.Byte]", Comparer<byte?>.Default.GetType().ToString());
-        AssertEquals("System.Collections.Generic.ObjectComparer`1[Struct1]", Comparer<Struct1>.Default.GetType().ToString());
+        AssertEquals(
+            "System.Collections.Generic.GenericComparer`1[System.Int32]",
+            Comparer<int>.Default.GetType().ToString()
+        );
+        AssertEquals(
+            "System.Collections.Generic.GenericComparer`1[System.String]",
+            Comparer<string>.Default.GetType().ToString()
+        );
+        AssertEquals(
+            "System.Collections.Generic.GenericComparer`1[System.Guid]",
+            Comparer<Guid>.Default.GetType().ToString()
+        );
+        AssertEquals(
+            "System.Collections.Generic.EnumComparer`1[System.Runtime.CompilerServices.MethodImplOptions]",
+            Comparer<MethodImplOptions>.Default.GetType().ToString()
+        );
+        AssertEquals(
+            "System.Collections.Generic.NullableComparer`1[System.Byte]",
+            Comparer<byte?>.Default.GetType().ToString()
+        );
+        AssertEquals(
+            "System.Collections.Generic.ObjectComparer`1[Struct1]",
+            Comparer<Struct1>.Default.GetType().ToString()
+        );
     }
     private static int GetHashCodeTests()
     {
         // Just to make sure it doesn't crash
-        return Comparer<int>.Default.GetHashCode() +
-               Comparer<string>.Default.GetHashCode() +
-               Comparer<MethodImplOptions>.Default.GetHashCode() +
-               Comparer<byte?>.Default.GetHashCode() +
-               Comparer<Guid>.Default.GetHashCode() +
-               Comparer<Struct1>.Default.GetHashCode();
+        return Comparer<int>.Default.GetHashCode()
+            + Comparer<string>.Default.GetHashCode()
+            + Comparer<MethodImplOptions>.Default.GetHashCode()
+            + Comparer<byte?>.Default.GetHashCode()
+            + Comparer<Guid>.Default.GetHashCode()
+            + Comparer<Struct1>.Default.GetHashCode();
     }
 }
 
 public enum Enum_byte : byte
 {
-    A,B,C,D,E
+    A,
+    B,
+    C,
+    D,
+    E
 }
 
 public struct Struct1 : IComparable
@@ -245,6 +290,6 @@ public struct Struct1 : IComparable
     public long b;
     public int CompareTo(object obj)
     {
-        return b.CompareTo(((Struct1) obj).b);
+        return b.CompareTo(((Struct1)obj).b);
     }
 }

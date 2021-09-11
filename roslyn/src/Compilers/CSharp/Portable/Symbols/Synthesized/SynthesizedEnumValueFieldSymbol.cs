@@ -16,9 +16,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal sealed class SynthesizedEnumValueFieldSymbol : SynthesizedFieldSymbolBase
     {
         public SynthesizedEnumValueFieldSymbol(SourceNamedTypeSymbol containingEnum)
-            : base(containingEnum, WellKnownMemberNames.EnumBackingFieldName, isPublic: true, isReadOnly: false, isStatic: false)
-        {
-        }
+            : base(
+                containingEnum,
+                WellKnownMemberNames.EnumBackingFieldName,
+                isPublic: true,
+                isReadOnly: false,
+                isStatic: false
+            ) { }
 
         internal override bool SuppressDynamicAttribute
         {
@@ -27,11 +31,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
         {
-            return TypeWithAnnotations.Create(((SourceNamedTypeSymbol)ContainingType).EnumUnderlyingType);
+            return TypeWithAnnotations.Create(
+                ((SourceNamedTypeSymbol)ContainingType).EnumUnderlyingType
+            );
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
-        {
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        ) {
             // no attributes should be emitted
         }
     }

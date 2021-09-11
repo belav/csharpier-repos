@@ -24,8 +24,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The entity types found. </returns>
         [DebuggerStepThrough]
         [Obsolete("Use IConventionEntityType.FindEntityTypes")]
-        public static IEnumerable<IConventionEntityType> GetEntityTypes(this IConventionModel model, Type type)
-            => model.FindEntityTypes(type);
+        public static IEnumerable<IConventionEntityType> GetEntityTypes(
+            this IConventionModel model,
+            Type type
+        ) => model.FindEntityTypes(type);
 
         /// <summary>
         ///     Gets the entity types matching the given name.
@@ -37,7 +39,7 @@ namespace Microsoft.EntityFrameworkCore
         [Obsolete("Use FindEntityTypes(Type) or FindEntityType(string)")]
         public static IReadOnlyCollection<IConventionEntityType> GetEntityTypes(
             this IConventionModel model,
-            string name)
-            => ((Model)model).GetEntityTypes(name);
+            string name
+        ) => ((Model)model).GetEntityTypes(name);
     }
 }

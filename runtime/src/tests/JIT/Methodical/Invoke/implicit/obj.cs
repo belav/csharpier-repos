@@ -7,12 +7,18 @@ namespace JitTest
 {
     internal class Base
     {
-        public override String ToString() { return "Base class"; }
+        public override String ToString()
+        {
+            return "Base class";
+        }
     }
 
     internal class Test : Base
     {
-        public override String ToString() { return "Test class"; }
+        public override String ToString()
+        {
+            return "Test class";
+        }
 
         private static void TestFunc(Base obj)
         {

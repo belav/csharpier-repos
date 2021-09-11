@@ -8,12 +8,12 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class ConsumesAttributeEndpointRoutingTests : ConsumesAttributeTestsBase<BasicWebSite.Startup>
+    public class ConsumesAttributeEndpointRoutingTests
+        : ConsumesAttributeTestsBase<BasicWebSite.Startup>
     {
-        public ConsumesAttributeEndpointRoutingTests(MvcTestFixture<BasicWebSite.Startup> fixture)
-            : base(fixture)
-        {
-        }
+        public ConsumesAttributeEndpointRoutingTests(
+            MvcTestFixture<BasicWebSite.Startup> fixture
+        ) : base(fixture) { }
 
         [Fact]
         public async override Task HasEndpointMatch()

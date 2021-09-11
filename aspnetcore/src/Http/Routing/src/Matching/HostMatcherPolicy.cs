@@ -14,7 +14,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
     /// A <see cref="MatcherPolicy"/> that implements filtering and selection by
     /// the host header of a request.
     /// </summary>
-    public sealed class HostMatcherPolicy : MatcherPolicy, IEndpointComparerPolicy, INodeBuilderPolicy, IEndpointSelectorPolicy
+    public sealed class HostMatcherPolicy
+        : MatcherPolicy,
+          IEndpointComparerPolicy,
+          INodeBuilderPolicy,
+          IEndpointSelectorPolicy
     {
         private const string WildcardHost = "*";
         private const string WildcardPrefix = "*.";
@@ -51,26 +55,28 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         private bool AppliesToEndpointsCore(IReadOnlyList<Endpoint> endpoints)
         {
-            return endpoints.Any(e =>
-            {
-                var hosts = e.Metadata.GetMetadata<IHostMetadata>()?.Hosts;
-                if (hosts == null || hosts.Count == 0)
+            return endpoints.Any(
+                e =>
                 {
+                    var hosts = e.Metadata.GetMetadata<IHostMetadata>()?.Hosts;
+                    if (hosts == null || hosts.Count == 0)
+                    {
+                        return false;
+                    }
+
+                    foreach (var host in hosts)
+                    {
+                        // Don't run policy on endpoints that match everything
+                        var key = CreateEdgeKey(host);
+                        if (!key.MatchesAll)
+                        {
+                            return true;
+                        }
+                    }
+
                     return false;
                 }
-
-                foreach (var host in hosts)
-                {
-                    // Don't run policy on endpoints that match everything
-                    var key = CreateEdgeKey(host);
-                    if (!key.MatchesAll)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            });
+            );
         }
 
         /// <inheritdoc />
@@ -115,20 +121,35 @@ namespace Microsoft.AspNetCore.Routing.Matching
                         host = host.Slice(0, pivot);
                     }
 
-                    if (host == null || MemoryExtensions.Equals(host, WildcardHost, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        host == null
+                        || MemoryExtensions.Equals(
+                            host,
+                            WildcardHost,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         // Can match any host
                     }
                     else if (
-                        host.StartsWith(WildcardPrefix) &&
-
+                        host.StartsWith(WildcardPrefix)
+                        &&
                         // Note that we only slice off the `*`. We want to match the leading `.` also.
-                        MemoryExtensions.EndsWith(requestHost, host.Slice(WildcardHost.Length), StringComparison.OrdinalIgnoreCase))
-                    {
+                        MemoryExtensions.EndsWith(
+                            requestHost,
+                            host.Slice(WildcardHost.Length),
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         // Matches a suffix wildcard.
                     }
-                    else if (MemoryExtensions.Equals(requestHost, host, StringComparison.OrdinalIgnoreCase))
-                    {
+                    else if (
+                        MemoryExtensions.Equals(
+                            requestHost,
+                            host,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         // Matches exactly
                     }
                     else
@@ -137,12 +158,19 @@ namespace Microsoft.AspNetCore.Routing.Matching
                         continue;
                     }
 
-                    if (MemoryExtensions.Equals(port, WildcardHost, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        MemoryExtensions.Equals(
+                            port,
+                            WildcardHost,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         // Port is a wildcard, we allow any port.
                     }
-                    else if (port.Length > 0 && (!int.TryParse(port, out var parsed) || parsed != requestPort))
-                    {
+                    else if (
+                        port.Length > 0
+                        && (!int.TryParse(port, out var parsed) || parsed != requestPort)
+                    ) {
                         // If we get here then the port doesn't match.
                         continue;
                     }
@@ -213,7 +241,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
             for (var i = 0; i < endpoints.Count; i++)
             {
                 var endpoint = endpoints[i];
-                var hosts = endpoint.Metadata.GetMetadata<IHostMetadata>()?.Hosts.Select(h => CreateEdgeKey(h)).ToArray();
+                var hosts = endpoint.Metadata.GetMetadata<IHostMetadata>()?.Hosts.Select(
+                        h => CreateEdgeKey(h)
+                    )
+                    .ToArray();
                 if (hosts == null || hosts.Length == 0)
                 {
                     hosts = new[] { EdgeKey.WildcardEdgeKey };
@@ -235,7 +266,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             {
                 var endpoint = endpoints[i];
 
-                var endpointKeys = endpoint.Metadata.GetMetadata<IHostMetadata>()?.Hosts.Select(h => CreateEdgeKey(h)).ToArray() ?? Array.Empty<EdgeKey>();
+                var endpointKeys =
+                    endpoint.Metadata.GetMetadata<IHostMetadata>()?.Hosts.Select(
+                            h => CreateEdgeKey(h)
+                        )
+                        .ToArray() ?? Array.Empty<EdgeKey>();
                 if (endpointKeys.Length == 0)
                 {
                     // OK this means that this endpoint matches *all* hosts.
@@ -262,9 +297,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
                                 kvp.Value.Add(endpoint);
                                 break;
                             }
-                            else if (edgeKey.HasHostWildcard && endpointKey.HasHostWildcard &&
-                                edgeKey.Port == endpointKey.Port && edgeKey.MatchHost(endpointKey.Host))
-                            {
+                            else if (
+                                edgeKey.HasHostWildcard
+                                && endpointKey.HasHostWildcard
+                                && edgeKey.Port == endpointKey.Port
+                                && edgeKey.MatchHost(endpointKey.Host)
+                            ) {
                                 kvp.Value.Add(endpoint);
                                 break;
                             }
@@ -273,14 +311,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 }
             }
 
-            return edges
-                .Select(kvp => new PolicyNodeEdge(kvp.Key, kvp.Value))
-                .ToArray();
+            return edges.Select(kvp => new PolicyNodeEdge(kvp.Key, kvp.Value)).ToArray();
         }
 
         /// <inheritdoc />
-        public PolicyJumpTable BuildJumpTable(int exitDestination, IReadOnlyList<PolicyJumpTableEdge> edges)
-        {
+        public PolicyJumpTable BuildJumpTable(
+            int exitDestination,
+            IReadOnlyList<PolicyJumpTableEdge> edges
+        ) {
             if (edges == null)
             {
                 throw new ArgumentNullException(nameof(edges));
@@ -288,8 +326,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             // Since our 'edges' can have wildcards, we do a sort based on how wildcard-ey they
             // are then then execute them in linear order.
-            var ordered = edges
-                .Select(e => (host: (EdgeKey)e.State, destination: e.Destination))
+            var ordered = edges.Select(e => (host: (EdgeKey)e.State, destination: e.Destination))
                 .OrderBy(e => GetScore(e.host))
                 .ToArray();
 
@@ -332,12 +369,22 @@ namespace Microsoft.AspNetCore.Routing.Matching
             {
                 return (hostString.Host, hostString.Port);
             }
-            else if (string.Equals("https", httpContext.Request.Scheme, StringComparison.OrdinalIgnoreCase))
-            {
+            else if (
+                string.Equals(
+                    "https",
+                    httpContext.Request.Scheme,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 return (hostString.Host, 443);
             }
-            else if (string.Equals("http", httpContext.Request.Scheme, StringComparison.OrdinalIgnoreCase))
-            {
+            else if (
+                string.Equals(
+                    "http",
+                    httpContext.Request.Scheme,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 return (hostString.Host, 80);
             }
             else
@@ -353,7 +400,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 // Ignore the metadata if it has an empty list of hosts.
                 return base.CompareMetadata(
                     x?.Hosts.Count > 0 ? x : null,
-                    y?.Hosts.Count > 0 ? y : null);
+                    y?.Hosts.Count > 0 ? y : null
+                );
             }
         }
 
@@ -362,8 +410,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
             private (EdgeKey host, int destination)[] _destinations;
             private int _exitDestination;
 
-            public HostPolicyJumpTable(int exitDestination, (EdgeKey host, int destination)[] destinations)
-            {
+            public HostPolicyJumpTable(
+                int exitDestination,
+                (EdgeKey host, int destination)[] destinations
+            ) {
                 _exitDestination = exitDestination;
                 _destinations = destinations;
             }
@@ -379,9 +429,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 {
                     var destination = destinations[i];
 
-                    if ((!destination.host.MatchesPort || destination.host.Port == port) &&
-                        destination.host.MatchHost(host))
-                    {
+                    if (
+                        (!destination.host.MatchesPort || destination.host.Port == port)
+                        && destination.host.MatchHost(host)
+                    ) {
                         return destination.destination;
                     }
                 }
@@ -434,7 +485,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             public bool Equals(EdgeKey other)
             {
-                return string.Equals(Host, other.Host, StringComparison.Ordinal) && Port == other.Port;
+                return string.Equals(Host, other.Host, StringComparison.Ordinal)
+                    && Port == other.Port;
             }
 
             public bool MatchHost(string host)
@@ -443,7 +495,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 {
                     if (HasHostWildcard)
                     {
-                        return host.EndsWith(_wildcardEndsWith!, StringComparison.OrdinalIgnoreCase);
+                        return host.EndsWith(
+                            _wildcardEndsWith!,
+                            StringComparison.OrdinalIgnoreCase
+                        );
                     }
                     else
                     {
@@ -453,7 +508,6 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
                 return true;
             }
-
 
             public override int GetHashCode()
             {

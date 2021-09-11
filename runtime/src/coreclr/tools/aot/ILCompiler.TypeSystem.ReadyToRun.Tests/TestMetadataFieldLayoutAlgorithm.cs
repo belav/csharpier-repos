@@ -10,15 +10,19 @@ namespace TypeSystemTests
 {
     class TestMetadataFieldLayoutAlgorithm : MetadataFieldLayoutAlgorithm
     {
-        protected override void PrepareRuntimeSpecificStaticFieldLayout(TypeSystemContext context, ref ComputedStaticFieldLayout layout)
-        {
+        protected override void PrepareRuntimeSpecificStaticFieldLayout(
+            TypeSystemContext context,
+            ref ComputedStaticFieldLayout layout
+        ) {
             // GC statics start with a pointer to the "EEType" that signals the size and GCDesc to the GC
             layout.GcStatics.Size = context.Target.LayoutPointerSize;
             layout.ThreadGcStatics.Size = context.Target.LayoutPointerSize;
         }
 
-        protected override void FinalizeRuntimeSpecificStaticFieldLayout(TypeSystemContext context, ref ComputedStaticFieldLayout layout)
-        {
+        protected override void FinalizeRuntimeSpecificStaticFieldLayout(
+            TypeSystemContext context,
+            ref ComputedStaticFieldLayout layout
+        ) {
             // If the size of GCStatics is equal to the size set in PrepareRuntimeSpecificStaticFieldLayout, we
             // don't have any GC statics
             if (layout.GcStatics.Size == context.Target.LayoutPointerSize)

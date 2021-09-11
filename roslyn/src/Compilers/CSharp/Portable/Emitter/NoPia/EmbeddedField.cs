@@ -18,21 +18,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 {
     internal sealed class EmbeddedField : EmbeddedTypesManager.CommonEmbeddedField
     {
-        public EmbeddedField(EmbeddedType containingType, FieldSymbolAdapter underlyingField) :
-            base(containingType, underlyingField)
-        {
-        }
+        public EmbeddedField(
+            EmbeddedType containingType,
+            FieldSymbolAdapter underlyingField
+        ) : base(containingType, underlyingField) { }
 
         internal override EmbeddedTypesManager TypeManager
         {
-            get
-            {
-                return ContainingType.TypeManager;
-            }
+            get { return ContainingType.TypeManager; }
         }
 
-        protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
-        {
+        protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        ) {
             return UnderlyingField.AdaptedFieldSymbol.GetCustomAttributesToEmit(moduleBuilder);
         }
 
@@ -43,98 +41,62 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override bool IsCompileTimeConstant
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.IsMetadataConstant;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.IsMetadataConstant; }
         }
 
         protected override bool IsNotSerialized
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.IsNotSerialized;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.IsNotSerialized; }
         }
 
         protected override bool IsReadOnly
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.IsReadOnly;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.IsReadOnly; }
         }
 
         protected override bool IsRuntimeSpecial
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.HasRuntimeSpecialName;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.HasRuntimeSpecialName; }
         }
 
         protected override bool IsSpecialName
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.HasSpecialName;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.HasSpecialName; }
         }
 
         protected override bool IsStatic
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.IsStatic;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.IsStatic; }
         }
 
         protected override bool IsMarshalledExplicitly
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.IsMarshalledExplicitly;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.IsMarshalledExplicitly; }
         }
 
         protected override Cci.IMarshallingInformation MarshallingInformation
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.MarshallingInformation;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.MarshallingInformation; }
         }
 
         protected override ImmutableArray<byte> MarshallingDescriptor
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.MarshallingDescriptor;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.MarshallingDescriptor; }
         }
 
         protected override int? TypeLayoutOffset
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.TypeLayoutOffset;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.TypeLayoutOffset; }
         }
 
         protected override Cci.TypeMemberVisibility Visibility
         {
-            get
-            {
-                return PEModuleBuilder.MemberVisibility(UnderlyingField.AdaptedFieldSymbol);
-            }
+            get { return PEModuleBuilder.MemberVisibility(UnderlyingField.AdaptedFieldSymbol); }
         }
 
         protected override string Name
         {
-            get
-            {
-                return UnderlyingField.AdaptedFieldSymbol.MetadataName;
-            }
+            get { return UnderlyingField.AdaptedFieldSymbol.MetadataName; }
         }
     }
 }

@@ -87,8 +87,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<ImmutableArray<LinePositionSpan>> exceptionRegionsOpt,
             ImmutableArray<SourceLineUpdate> lineEditsOpt,
             bool hasChanges,
-            bool hasSyntaxErrors)
-        {
+            bool hasSyntaxErrors
+        ) {
             Debug.Assert(!rudeEdits.IsDefault);
 
             if (hasSyntaxErrors)
@@ -137,20 +137,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             HasChanges = hasChanges;
         }
 
-        public bool HasChangesAndErrors
-            => HasChanges && (HasSyntaxErrors || !RudeEditErrors.IsEmpty);
+        public bool HasChangesAndErrors =>
+            HasChanges && (HasSyntaxErrors || !RudeEditErrors.IsEmpty);
 
-        public bool HasChangesAndSyntaxErrors
-            => HasChanges && HasSyntaxErrors;
+        public bool HasChangesAndSyntaxErrors => HasChanges && HasSyntaxErrors;
 
-        public bool HasSignificantValidChanges
-            => HasChanges && (!SemanticEdits.IsDefaultOrEmpty || !LineEdits.IsDefaultOrEmpty);
+        public bool HasSignificantValidChanges =>
+            HasChanges && (!SemanticEdits.IsDefaultOrEmpty || !LineEdits.IsDefaultOrEmpty);
 
         /// <summary>
         /// Report errors blocking the document analysis.
         /// </summary>
-        public static DocumentAnalysisResults SyntaxErrors(DocumentId documentId, ImmutableArray<RudeEditDiagnostic> rudeEdits, bool hasChanges)
-            => new(
+        public static DocumentAnalysisResults SyntaxErrors(
+            DocumentId documentId,
+            ImmutableArray<RudeEditDiagnostic> rudeEdits,
+            bool hasChanges
+        ) =>
+            new(
                 documentId,
                 activeStatementsOpt: default,
                 rudeEdits: rudeEdits,
@@ -158,13 +161,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 exceptionRegionsOpt: default,
                 lineEditsOpt: default,
                 hasChanges,
-                hasSyntaxErrors: true);
+                hasSyntaxErrors: true
+            );
 
         /// <summary>
         /// Report unchanged document results.
         /// </summary>
-        public static DocumentAnalysisResults Unchanged(DocumentId documentId, ImmutableArray<ActiveStatement> activeStatements, ImmutableArray<ImmutableArray<LinePositionSpan>> exceptionRegions)
-            => new(
+        public static DocumentAnalysisResults Unchanged(
+            DocumentId documentId,
+            ImmutableArray<ActiveStatement> activeStatements,
+            ImmutableArray<ImmutableArray<LinePositionSpan>> exceptionRegions
+        ) =>
+            new(
                 documentId,
                 activeStatements,
                 rudeEdits: ImmutableArray<RudeEditDiagnostic>.Empty,
@@ -172,6 +180,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 exceptionRegions,
                 lineEditsOpt: ImmutableArray<SourceLineUpdate>.Empty,
                 hasChanges: false,
-                hasSyntaxErrors: false);
+                hasSyntaxErrors: false
+            );
     }
 }

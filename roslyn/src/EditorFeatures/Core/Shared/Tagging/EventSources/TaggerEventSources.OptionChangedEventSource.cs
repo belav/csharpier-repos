@@ -15,8 +15,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             private readonly IOption _option;
             private IOptionService? _optionService;
 
-            public OptionChangedEventSource(ITextBuffer subjectBuffer, IOption option, TaggerDelay delay) : base(subjectBuffer, delay)
-                => _option = option;
+            public OptionChangedEventSource(
+                ITextBuffer subjectBuffer,
+                IOption option,
+                TaggerDelay delay
+            ) : base(subjectBuffer, delay) => _option = option;
 
             protected override void ConnectToWorkspace(Workspace workspace)
             {

@@ -12,12 +12,14 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
         public ConfirmEmail(
             HttpClient client,
             IHtmlDocument document,
-            DefaultUIContext context) : base(client, document, context)
-        {
-        }
+            DefaultUIContext context
+        ) : base(client, document, context) { }
 
-        public static async Task<ConfirmEmail> Create(IHtmlAnchorElement link, HttpClient client, DefaultUIContext context)
-        {
+        public static async Task<ConfirmEmail> Create(
+            IHtmlAnchorElement link,
+            HttpClient client,
+            DefaultUIContext context
+        ) {
             var response = await client.GetAsync(link.Href);
             var confirmEmail = await ResponseAssert.IsHtmlDocumentAsync(response);
 

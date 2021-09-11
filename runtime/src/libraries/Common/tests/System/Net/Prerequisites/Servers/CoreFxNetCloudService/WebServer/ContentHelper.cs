@@ -16,8 +16,9 @@ namespace WebServer
             byte[] bytes = Encoding.UTF8.GetBytes(data);
             var compressedStream = new MemoryStream();
 
-            using (var compressor = new DeflateStream(compressedStream, CompressionMode.Compress, true))
-            {
+            using (
+                var compressor = new DeflateStream(compressedStream, CompressionMode.Compress, true)
+            ) {
                 compressor.Write(bytes, 0, bytes.Length);
             }
 
@@ -29,8 +30,9 @@ namespace WebServer
             byte[] bytes = Encoding.UTF8.GetBytes(data);
             var compressedStream = new MemoryStream();
 
-            using (var compressor = new GZipStream(compressedStream, CompressionMode.Compress, true))
-            {
+            using (
+                var compressor = new GZipStream(compressedStream, CompressionMode.Compress, true)
+            ) {
                 compressor.Write(bytes, 0, bytes.Length);
             }
 

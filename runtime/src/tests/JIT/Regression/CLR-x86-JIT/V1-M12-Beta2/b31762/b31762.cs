@@ -9,7 +9,10 @@ namespace Test
     class BB
     {
         public static uint[] m_auForward5;
-        public static uint[] Method2() { return null; }
+        public static uint[] Method2()
+        {
+            return null;
+        }
 
         static int Main()
         {
@@ -20,9 +23,7 @@ namespace Test
                     if (local3)
                         m_auForward5 = Method2();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             return 100;
         }
     }

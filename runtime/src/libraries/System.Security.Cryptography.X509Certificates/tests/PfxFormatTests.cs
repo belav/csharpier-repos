@@ -20,8 +20,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         // The PBE parameters used by Windows 7 for private keys.
         // Needs to stay 3DES/SHA1 for Windows 7 to read it.
-        private static readonly PbeParameters s_windowsPbe =
-            new PbeParameters(PbeEncryptionAlgorithm.TripleDes3KeyPkcs12, HashAlgorithmName.SHA1, 2000);
+        private static readonly PbeParameters s_windowsPbe = new PbeParameters(
+            PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+            HashAlgorithmName.SHA1,
+            2000
+        );
 
         protected static readonly X509KeyStorageFlags s_importFlags =
             Cert.EphemeralIfPossible | X509KeyStorageFlags.UserKeySet;
@@ -38,21 +41,22 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         //
         // Our Unix loader matches the current Windows 10 behavior.
         private static readonly bool s_loaderFailsKeysEarly =
-            OperatingSystem.IsWindows() &&
-            !PlatformDetection.IsWindows10Version1607OrGreater;
+            OperatingSystem.IsWindows() && !PlatformDetection.IsWindows10Version1607OrGreater;
 
         protected abstract void ReadPfx(
             byte[] pfxBytes,
             string correctPassword,
             X509Certificate2 expectedCert,
-            Action<X509Certificate2> otherWork = null);
+            Action<X509Certificate2> otherWork = null
+        );
 
         protected abstract void ReadMultiPfx(
             byte[] pfxBytes,
             string correctPassword,
             X509Certificate2 expectedSingleCert,
             X509Certificate2[] expectedOrder,
-            Action<X509Certificate2> perCertOtherWork = null);
+            Action<X509Certificate2> perCertOtherWork = null
+        );
 
         protected abstract void ReadEmptyPfx(byte[] pfxBytes, string correctPassword);
         protected abstract void ReadWrongPassword(byte[] pfxBytes, string wrongPassword);
@@ -62,7 +66,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string bestPassword,
             // NTE_FAIL
             int win32Error = -2146893792,
-            int altWin32Error = 0);
+            int altWin32Error = 0
+        );
 
         [Fact]
         public void EmptyPfx_NoMac()
@@ -154,11 +159,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void OneCert_EncryptedEmptyPassword_OneKey_EncryptedNullPassword_NoMac(bool encryptKeySafe, bool associateKey)
-        {
+        public void OneCert_EncryptedEmptyPassword_OneKey_EncryptedNullPassword_NoMac(
+            bool encryptKeySafe,
+            bool associateKey
+        ) {
             // This test shows that while a null or empty password will result in both
             // types being tested, the PFX contents have to be the same throughout.
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, s_exportableImportFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    s_exportableImportFlags
+                )
+            )
             using (AsymmetricAlgorithm key = cert.GetRSAPrivateKey())
             {
                 Pkcs12Builder builder = new Pkcs12Builder();
@@ -200,7 +213,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string pw = nameof(OneCert_MismatchedKey);
 
             // Build the PFX in the normal Windows style, except the private key doesn't match.
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, s_exportableImportFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    s_exportableImportFlags
+                )
+            )
             using (RSA realKey = cert.GetRSAPrivateKey())
             using (RSA key = RSA.Create(realKey.KeySize))
             {
@@ -223,20 +242,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 {
                     using (var publicCert = new X509Certificate2(cert.RawData))
                     {
-                        ReadPfx(
-                            pfxBytes,
-                            pw,
-                            publicCert);
+                        ReadPfx(pfxBytes, pw, publicCert);
                     }
 
                     return;
                 }
 
-                ReadPfx(
-                    pfxBytes,
-                    pw,
-                    cert,
-                    CheckKeyConsistencyFails);
+                ReadPfx(pfxBytes, pw, cert, CheckKeyConsistencyFails);
             }
         }
 
@@ -248,7 +260,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string pw = nameof(OneCert_TwoKeys_FirstWins);
 
             // Build the PFX in the normal Windows style, except the private key doesn't match.
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, s_exportableImportFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    s_exportableImportFlags
+                )
+            )
             using (RSA key = cert.GetRSAPrivateKey())
             using (RSA unrelated = RSA.Create(key.KeySize))
             {
@@ -285,10 +303,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 {
                     using (var publicCert = new X509Certificate2(cert.RawData))
                     {
-                        ReadPfx(
-                            pfxBytes,
-                            pw,
-                            publicCert);
+                        ReadPfx(pfxBytes, pw, publicCert);
                     }
 
                     return;
@@ -303,11 +318,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     followup = CheckKeyConsistencyFails;
                 }
 
-                ReadPfx(
-                    pfxBytes,
-                    pw,
-                    cert,
-                    followup);
+                ReadPfx(pfxBytes, pw, cert, followup);
             }
         }
 
@@ -319,7 +330,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string pw = nameof(TwoCerts_OneKey);
 
             // Build the PFX in the normal Windows style, except the private key doesn't match.
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, s_exportableImportFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    s_exportableImportFlags
+                )
+            )
             using (var cert2 = new X509Certificate2(TestData.MsCertificate))
             using (RSA key = cert.GetRSAPrivateKey())
             {
@@ -372,7 +389,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     // The Microsoft organization OID, not an algorithm.
                     new Oid("1.3.6.1.4.1.311", null),
                     null,
-                    new byte[] { 0x05, 0x00 });
+                    new byte[] { 0x05, 0x00 }
+                );
 
                 // Note that neither the cert nor the key have a LocalKeyId attribute.
                 // The existence of this unknown key is enough to abort the load on older Windows.
@@ -391,7 +409,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         pfxBytes,
                         pw,
                         //NTE_BAD_ALGID,
-                        win32Error: -2146893816);
+                        win32Error: -2146893816
+                    );
                 }
                 else
                 {
@@ -430,7 +449,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     new Oid("1.2.840.113549.1.1.1", null),
                     null,
                     badKeyBytes,
-                    skipCopies: true);
+                    skipCopies: true
+                );
 
                 // Note that neither the cert nor the key have a LocalKeyId attribute.
                 // The existence of this unreadable key is enough to abort the load on older Windows
@@ -448,10 +468,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     // CRYPT_E_ASN1_BADTAG or CRYPT_E_ASN1_EOD
                     int expectedWin32Error = badTag ? -2146881269 : -2146881278;
 
-                    ReadUnreadablePfx(
-                        pfxBytes,
-                        pw,
-                        expectedWin32Error);
+                    ReadUnreadablePfx(pfxBytes, pw, expectedWin32Error);
                 }
                 else
                 {
@@ -524,7 +541,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             string pw = nameof(OneCert_NoKey_WithLocalKeyId);
 
-            using (var certWithKey = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword))
+            using (
+                var certWithKey = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword)
+            )
             using (var cert = new X509Certificate2(certWithKey.RawData))
             using (var cert2 = new X509Certificate2(TestData.MsCertificate))
             using (RSA rsa = RSA.Create(TestData.RsaBigExponentParams))
@@ -570,7 +589,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     pfxBytes,
                     pw,
                     msCertFirst ? cert : cert2,
-                    msCertFirst ? new[] { cert, cert2 } : new[] { cert2, cert });
+                    msCertFirst ? new[] { cert, cert2 } : new[] { cert2, cert }
+                );
             }
         }
 
@@ -580,7 +600,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string pw = nameof(OneCorruptCert);
             Pkcs12Builder builder = new Pkcs12Builder();
             Pkcs12SafeContents contents = new Pkcs12SafeContents();
-            contents.AddSafeBag(new Pkcs12CertBag(new Oid("1.2.840.113549.1.9.22.1"), new byte[] { 0x05, 0x00 }));
+            contents.AddSafeBag(
+                new Pkcs12CertBag(new Oid("1.2.840.113549.1.9.22.1"), new byte[] { 0x05, 0x00 })
+            );
             AddContents(contents, builder, pw, encrypt: true);
             builder.SealWithMac(pw, s_digestAlgorithm, MacCount);
             byte[] pfxBytes = builder.Encode();
@@ -589,7 +611,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 pfxBytes,
                 pw,
                 // CRYPT_E_BAD_ENCODE
-                -2146885630);
+                -2146885630
+            );
         }
 
         [Fact]
@@ -597,7 +620,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             string pw = nameof(CertAndKey_NoLocalKeyId);
 
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, s_exportableImportFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    s_exportableImportFlags
+                )
+            )
             using (RSA key = cert.GetRSAPrivateKey())
             {
                 Pkcs12Builder builder = new Pkcs12Builder();
@@ -641,11 +670,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 builder.SealWithMac(pw, s_digestAlgorithm, MacCount);
                 byte[] pfxBytes = builder.Encode();
 
-                ReadMultiPfx(
-                    pfxBytes,
-                    pw,
-                    cert,
-                    new[] { cert, cert });
+                ReadMultiPfx(pfxBytes, pw, cert, new[] { cert, cert });
             }
         }
 
@@ -654,7 +679,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             string pw = nameof(SameCertTwice_NoKeys);
 
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, s_exportableImportFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    s_exportableImportFlags
+                )
+            )
             using (var cert2 = new X509Certificate2(TestData.MsCertificate))
             using (RSA key = cert.GetRSAPrivateKey())
             {
@@ -680,7 +711,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     pfxBytes,
                     pw,
                     // NTE_BAD_DATA
-                    -2146893819);
+                    -2146893819
+                );
             }
         }
 
@@ -692,7 +724,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             string pw = nameof(CertAndKeyTwice);
 
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, s_exportableImportFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    s_exportableImportFlags
+                )
+            )
             using (RSA key = cert.GetRSAPrivateKey())
             {
                 Pkcs12Builder builder = new Pkcs12Builder();
@@ -721,12 +759,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 if (addLocalKeyId)
                 {
-                    ReadMultiPfx(
-                        pfxBytes,
-                        pw,
-                        cert,
-                        new[] { cert, cert },
-                        CheckKeyConsistency);
+                    ReadMultiPfx(pfxBytes, pw, cert, new[] { cert, cert }, CheckKeyConsistency);
                 }
                 else
                 {
@@ -734,7 +767,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         pfxBytes,
                         pw,
                         // NTE_BAD_DATA
-                        -2146893819);
+                        -2146893819
+                    );
                 }
             }
         }
@@ -744,7 +778,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             string pw = nameof(CertAndKeyTwice);
 
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, s_exportableImportFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    s_exportableImportFlags
+                )
+            )
             using (RSA key = cert.GetRSAPrivateKey())
             {
                 Pkcs12Builder builder = new Pkcs12Builder();
@@ -773,7 +813,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     pfxBytes,
                     pw,
                     // NTE_BAD_DATA
-                    -2146893819);
+                    -2146893819
+                );
             }
         }
 
@@ -784,7 +825,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             string pw = nameof(CertTwice_KeyOnce);
 
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, s_exportableImportFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    s_exportableImportFlags
+                )
+            )
             using (RSA key = cert.GetRSAPrivateKey())
             {
                 Pkcs12Builder builder = new Pkcs12Builder();
@@ -811,7 +858,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     pfxBytes,
                     pw,
                     // NTE_BAD_DATA
-                    -2146893819);
+                    -2146893819
+                );
             }
         }
 
@@ -820,12 +868,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void TwoCerts_TwoKeys_ManySafeContentsValues(bool invertCertOrder, bool invertKeyOrder)
-        {
+        public void TwoCerts_TwoKeys_ManySafeContentsValues(
+            bool invertCertOrder,
+            bool invertKeyOrder
+        ) {
             string pw = nameof(TwoCerts_TwoKeys_ManySafeContentsValues);
 
-            using (ImportedCollection ic = Cert.Import(TestData.MultiPrivateKeyPfx, null, s_exportableImportFlags))
-            {
+            using (
+                ImportedCollection ic = Cert.Import(
+                    TestData.MultiPrivateKeyPfx,
+                    null,
+                    s_exportableImportFlags
+                )
+            ) {
                 X509Certificate2Collection certs = ic.Collection;
                 X509Certificate2 first = certs[0];
                 X509Certificate2 second = certs[1];
@@ -859,8 +914,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Pkcs12SafeContents irrelevant = new Pkcs12SafeContents();
                     irrelevant.AddSecret(new Oid("0.0"), new byte[] { 0x05, 0x00 });
 
-                    Pkcs12SafeBag firstAddedKeyBag = firstKeyContents.AddShroudedKey(firstAdd, pw, s_windowsPbe);
-                    Pkcs12SafeBag secondAddedKeyBag = secondKeyContents.AddShroudedKey(secondAdd, pw, s_windowsPbe);
+                    Pkcs12SafeBag firstAddedKeyBag = firstKeyContents.AddShroudedKey(
+                        firstAdd,
+                        pw,
+                        s_windowsPbe
+                    );
+                    Pkcs12SafeBag secondAddedKeyBag = secondKeyContents.AddShroudedKey(
+                        secondAdd,
+                        pw,
+                        s_windowsPbe
+                    );
                     Pkcs12SafeBag firstCertBag = firstCertContents.AddCertificate(first);
                     Pkcs12SafeBag secondCertBag = secondCertContents.AddCertificate(second);
                     Pkcs12SafeBag firstKeyBag = firstAddedKeyBag;
@@ -905,18 +968,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     // Obviously this hit some sort of weird corner case in the Win7
                     // loader, but it's not important to the test.
 
-                    if (OperatingSystem.IsWindows() &&
-                        !PlatformDetection.IsWindows8xOrLater)
+                    if (OperatingSystem.IsWindows() && !PlatformDetection.IsWindows8xOrLater)
                     {
                         followup = null;
                     }
 
-                    ReadMultiPfx(
-                        pfxBytes,
-                        pw,
-                        first,
-                        expectedOrder,
-                        followup);
+                    ReadMultiPfx(pfxBytes, pw, first, expectedOrder, followup);
                 }
             }
         }
@@ -927,11 +984,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (RSA pub = cert.GetRSAPublicKey())
             {
                 byte[] data = { 2, 7, 4 };
-                byte[] signature = priv.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                byte[] signature = priv.SignData(
+                    data,
+                    HashAlgorithmName.SHA256,
+                    RSASignaturePadding.Pkcs1
+                );
 
                 Assert.True(
-                    pub.VerifyData(data, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1),
-                    "Cert public key verifies signature from cert private key");
+                    pub.VerifyData(
+                        data,
+                        signature,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    ),
+                    "Cert public key verifies signature from cert private key"
+                );
             }
         }
 
@@ -941,11 +1008,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (RSA pub = cert.GetRSAPublicKey())
             {
                 byte[] data = { 2, 7, 4 };
-                byte[] signature = priv.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                byte[] signature = priv.SignData(
+                    data,
+                    HashAlgorithmName.SHA256,
+                    RSASignaturePadding.Pkcs1
+                );
 
                 Assert.False(
-                    pub.VerifyData(data, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1),
-                    "Cert public key verifies signature from cert private key");
+                    pub.VerifyData(
+                        data,
+                        signature,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    ),
+                    "Cert public key verifies signature from cert private key"
+                );
             }
         }
 
@@ -953,8 +1030,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             Pkcs12SafeContents contents,
             Pkcs12Builder builder,
             string password,
-            bool encrypt)
-        {
+            bool encrypt
+        ) {
             if (encrypt)
             {
                 builder.AddSafeContentsEncrypted(contents, password, s_windowsPbe);
@@ -965,8 +1042,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             }
         }
 
-        protected static void AssertCertEquals(X509Certificate2 expectedCert, X509Certificate2 actual)
-        {
+        protected static void AssertCertEquals(
+            X509Certificate2 expectedCert,
+            X509Certificate2 actual
+        ) {
             if (expectedCert.HasPrivateKey)
             {
                 Assert.True(actual.HasPrivateKey, "actual.HasPrivateKey");

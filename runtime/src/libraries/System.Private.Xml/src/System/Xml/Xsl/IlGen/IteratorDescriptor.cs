@@ -22,20 +22,24 @@ namespace System.Xml.Xsl.IlGen
     internal enum ItemLocation
     {
         None = 0,
-        Stack,                              // Each value is stored as the top value on the IL stack
-        Parameter,                          // Each value is stored as a parameter to the current method
-        Local,                              // Each value is stored as a local variable in the current method
-        Current,                            // Each value is stored as an iterator's Current property
-        Global,                             // Each value is stored as a global variable
+        Stack, // Each value is stored as the top value on the IL stack
+        Parameter, // Each value is stored as a parameter to the current method
+        Local, // Each value is stored as a local variable in the current method
+        Current, // Each value is stored as an iterator's Current property
+        Global, // Each value is stored as a global variable
     };
-
 
     /// <summary>
     /// None--Not in a branching context
     /// True--Branch if boolean expression evaluates to true
     /// False--Branch if boolean expression evaluates to false
     /// </summary>
-    internal enum BranchingContext { None, OnTrue, OnFalse };
+    internal enum BranchingContext
+    {
+        None,
+        OnTrue,
+        OnFalse
+    };
 
     /// <summary>
     /// Describes the Clr type and location of items returned by an iterator.
@@ -47,7 +51,6 @@ namespace System.Xml.Xsl.IlGen
         private object _locationObject;
         private Type _itemStorageType;
         private bool _isCached;
-
 
         //-----------------------------------------------
         // Create Methods
@@ -76,8 +79,11 @@ namespace System.Xml.Xsl.IlGen
         /// <summary>
         /// Create a StorageDescriptor for an item which is a parameter to the current method.
         /// </summary>
-        public static StorageDescriptor Parameter(int paramIndex, Type itemStorageType, bool isCached)
-        {
+        public static StorageDescriptor Parameter(
+            int paramIndex,
+            Type itemStorageType,
+            bool isCached
+        ) {
             StorageDescriptor storage = default;
             storage._location = ItemLocation.Parameter;
             storage._locationObject = paramIndex;
@@ -91,9 +97,12 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         public static StorageDescriptor Local(LocalBuilder loc, Type itemStorageType, bool isCached)
         {
-            Debug.Assert(loc.LocalType == itemStorageType ||
-                         typeof(IList<>).MakeGenericType(itemStorageType).IsAssignableFrom(loc.LocalType),
-                         "Type " + itemStorageType + " does not match the local variable's type");
+            Debug.Assert(
+                loc.LocalType == itemStorageType
+                    || typeof(IList<>).MakeGenericType(itemStorageType)
+                        .IsAssignableFrom(loc.LocalType),
+                "Type " + itemStorageType + " does not match the local variable's type"
+            );
 
             StorageDescriptor storage = default;
             storage._location = ItemLocation.Local;
@@ -106,10 +115,15 @@ namespace System.Xml.Xsl.IlGen
         /// <summary>
         /// Create a StorageDescriptor for an item which is the Current item in an iterator.
         /// </summary>
-        public static StorageDescriptor Current(LocalBuilder locIter, MethodInfo currentMethod, Type itemStorageType)
-        {
-            Debug.Assert(currentMethod.ReturnType == itemStorageType,
-                         "Type " + itemStorageType + " does not match type of Current property.");
+        public static StorageDescriptor Current(
+            LocalBuilder locIter,
+            MethodInfo currentMethod,
+            Type itemStorageType
+        ) {
+            Debug.Assert(
+                currentMethod.ReturnType == itemStorageType,
+                "Type " + itemStorageType + " does not match type of Current property."
+            );
 
             StorageDescriptor storage = default;
             storage._location = ItemLocation.Current;
@@ -121,11 +135,17 @@ namespace System.Xml.Xsl.IlGen
         /// <summary>
         /// Create a StorageDescriptor for an item located in a global variable.
         /// </summary>
-        public static StorageDescriptor Global(MethodInfo methGlobal, Type itemStorageType, bool isCached)
-        {
-            Debug.Assert(methGlobal.ReturnType == itemStorageType ||
-                         typeof(IList<>).MakeGenericType(itemStorageType).IsAssignableFrom(methGlobal.ReturnType),
-                         "Type " + itemStorageType + " does not match the global method's return type");
+        public static StorageDescriptor Global(
+            MethodInfo methGlobal,
+            Type itemStorageType,
+            bool isCached
+        ) {
+            Debug.Assert(
+                methGlobal.ReturnType == itemStorageType
+                    || typeof(IList<>).MakeGenericType(itemStorageType)
+                        .IsAssignableFrom(methGlobal.ReturnType),
+                "Type " + itemStorageType + " does not match the global method's return type"
+            );
 
             StorageDescriptor storage = default;
             storage._location = ItemLocation.Global;
@@ -134,7 +154,6 @@ namespace System.Xml.Xsl.IlGen
             storage._isCached = isCached;
             return storage;
         }
-
 
         //-----------------------------------------------
         // Accessor Methods
@@ -262,7 +281,6 @@ namespace System.Xml.Xsl.IlGen
         // Storage
         private StorageDescriptor _storage;
 
-
         //-----------------------------------------------
         // Initialize
         //-----------------------------------------------
@@ -293,7 +311,6 @@ namespace System.Xml.Xsl.IlGen
             _iterParent = iterParent;
         }
 
-
         //-----------------------------------------------
         // Related Iterators
         //-----------------------------------------------
@@ -305,7 +322,6 @@ namespace System.Xml.Xsl.IlGen
         {
             get { return _iterParent; }
         }
-
 
         //-----------------------------------------------
         // Iteration
@@ -384,7 +400,6 @@ namespace System.Xml.Xsl.IlGen
             set { _locPos = value; }
         }
 
-
         //-----------------------------------------------
         // Caching
         //-----------------------------------------------
@@ -453,7 +468,6 @@ namespace System.Xml.Xsl.IlGen
             }
         }
 
-
         //-----------------------------------------------
         // If-then-else branching
         //-----------------------------------------------
@@ -495,7 +509,6 @@ namespace System.Xml.Xsl.IlGen
         {
             get { return _brctxt; }
         }
-
 
         //-----------------------------------------------
         // Storage
@@ -589,7 +602,12 @@ namespace System.Xml.Xsl.IlGen
             if (_storage.Location != ItemLocation.Local)
             {
                 if (_storage.IsCached)
-                    EnsureLocal(_helper.DeclareLocal(locName, typeof(IList<>).MakeGenericType(_storage.ItemStorageType)));
+                    EnsureLocal(
+                        _helper.DeclareLocal(
+                            locName,
+                            typeof(IList<>).MakeGenericType(_storage.ItemStorageType)
+                        )
+                    );
                 else
                     EnsureLocal(_helper.DeclareLocal(locName, _storage.ItemStorageType));
             }
@@ -669,8 +687,11 @@ namespace System.Xml.Xsl.IlGen
             if (_storage.ItemStorageType == storageTypeDest)
                 goto SetStorageType;
 
-            Debug.Assert(_storage.ItemStorageType == typeof(XPathItem) || storageTypeDest == typeof(XPathItem),
-                         "EnsureItemStorageType must convert to or from Item");
+            Debug.Assert(
+                _storage.ItemStorageType == typeof(XPathItem)
+                    || storageTypeDest == typeof(XPathItem),
+                "EnsureItemStorageType must convert to or from Item"
+            );
 
             // If items are cached,
             if (_storage.IsCached)
@@ -713,7 +734,10 @@ namespace System.Xml.Xsl.IlGen
             else if (_storage.ItemStorageType == typeof(XPathNavigator))
             {
                 // No-op if converting from XPathNavigator to XPathItem
-                Debug.Assert(storageTypeDest == typeof(XPathItem), "Must be converting from XPathNavigator to XPathItem");
+                Debug.Assert(
+                    storageTypeDest == typeof(XPathItem),
+                    "Must be converting from XPathNavigator to XPathItem"
+                );
                 goto SetStorageType;
             }
 
@@ -722,7 +746,7 @@ namespace System.Xml.Xsl.IlGen
             _helper.LoadQueryRuntime();
             _helper.Call(XmlILMethods.StorageMethods[_storage.ItemStorageType].ToAtomicValue!);
 
-        SetStorageType:
+            SetStorageType:
             _storage = _storage.ToStorageType(storageTypeDest);
         }
     }

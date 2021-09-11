@@ -18,18 +18,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEditorClassificationService()
-        {
-        }
+        public CSharpEditorClassificationService() { }
 
-        public override void AddLexicalClassifications(SourceText text, TextSpan textSpan, List<ClassifiedSpan> result, CancellationToken cancellationToken)
-        {
+        public override void AddLexicalClassifications(
+            SourceText text,
+            TextSpan textSpan,
+            List<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        ) {
             using var _ = ArrayBuilder<ClassifiedSpan>.GetInstance(out var temp);
-            ClassificationHelpers.AddLexicalClassifications(text, textSpan, temp, cancellationToken);
+            ClassificationHelpers.AddLexicalClassifications(
+                text,
+                textSpan,
+                temp,
+                cancellationToken
+            );
             AddRange(temp, result);
         }
 
-        public override ClassifiedSpan AdjustStaleClassification(SourceText text, ClassifiedSpan classifiedSpan)
-            => ClassificationHelpers.AdjustStaleClassification(text, classifiedSpan);
+        public override ClassifiedSpan AdjustStaleClassification(
+            SourceText text,
+            ClassifiedSpan classifiedSpan
+        ) => ClassificationHelpers.AdjustStaleClassification(text, classifiedSpan);
     }
 }

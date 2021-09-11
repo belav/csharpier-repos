@@ -9,7 +9,6 @@ namespace Microsoft.Extensions.DependencyInjection
 namespace Microsoft.Extensions.Internal
 #endif
 {
-
     /// <summary>
     /// The result of <see cref="ActivatorUtilities.CreateFactory(Type, Type[])"/>.
     /// </summary>

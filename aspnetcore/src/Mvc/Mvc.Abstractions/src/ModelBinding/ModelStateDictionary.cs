@@ -34,10 +34,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class.
         /// </summary>
-        public ModelStateDictionary()
-            : this(DefaultMaxAllowedErrors)
-        {
-        }
+        public ModelStateDictionary() : this(DefaultMaxAllowedErrors) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class.
@@ -46,10 +43,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         {
             MaxAllowedErrors = maxAllowedErrors;
             var emptySegment = new StringSegment(buffer: string.Empty);
-            _root = new ModelStateNode(subKey: emptySegment)
-            {
-                Key = string.Empty
-            };
+            _root = new ModelStateNode(subKey: emptySegment) { Key = string.Empty };
         }
 
         /// <summary>
@@ -91,10 +85,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </remarks>
         public int MaxAllowedErrors
         {
-            get
-            {
-                return _maxAllowedErrors;
-            }
+            get { return _maxAllowedErrors; }
             set
             {
                 if (value < 0)
@@ -154,7 +145,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         }
 
         /// <inheritdoc />
-        public ModelValidationState ValidationState => GetValidity(_root) ?? ModelValidationState.Valid;
+        public ModelValidationState ValidationState =>
+            GetValidity(_root) ?? ModelValidationState.Valid;
 
         /// <inheritdoc />
         public ModelStateEntry? this[string key]
@@ -204,9 +196,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 throw new ArgumentNullException(nameof(exception));
             }
 
-            if ((exception is InputFormatterException || exception is ValueProviderException)
-               && !string.IsNullOrEmpty(exception.Message))
-            {
+            if (
+                (exception is InputFormatterException || exception is ValueProviderException)
+                && !string.IsNullOrEmpty(exception.Message)
+            ) {
                 // InputFormatterException, ValueProviderException is a signal that the message is safe to expose to clients
                 return TryAddModelError(key, exception.Message);
             }
@@ -311,18 +304,24 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 }
                 else if (name == null)
                 {
-                    errorMessage = messageProvider.NonPropertyAttemptedValueIsInvalidAccessor(entry.AttemptedValue!);
+                    errorMessage = messageProvider.NonPropertyAttemptedValueIsInvalidAccessor(
+                        entry.AttemptedValue!
+                    );
                 }
                 else
                 {
-                    errorMessage = messageProvider.AttemptedValueIsInvalidAccessor(entry.AttemptedValue!, name);
+                    errorMessage = messageProvider.AttemptedValueIsInvalidAccessor(
+                        entry.AttemptedValue!,
+                        name
+                    );
                 }
 
                 return TryAddModelError(key, errorMessage);
             }
-            else if ((exception is InputFormatterException || exception is ValueProviderException)
-                && !string.IsNullOrEmpty(exception.Message))
-            {
+            else if (
+                (exception is InputFormatterException || exception is ValueProviderException)
+                && !string.IsNullOrEmpty(exception.Message)
+            ) {
                 // InputFormatterException, ValueProviderException is a signal that the message is safe to expose to clients
                 return TryAddModelError(key, exception.Message);
             }
@@ -474,7 +473,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var modelState = GetOrAddNode(key);
             if (modelState.ValidationState == ModelValidationState.Invalid)
             {
-                throw new InvalidOperationException(Resources.Validation_InvalidFieldCannotBeReset_ToSkipped);
+                throw new InvalidOperationException(
+                    Resources.Validation_InvalidFieldCannotBeReset_ToSkipped
+                );
             }
 
             Count += !modelState.IsContainerNode ? 0 : 1;
@@ -591,7 +592,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     {
                         break;
                     }
-
                 } while (match.Type != Delimiter.None);
             }
 
@@ -616,7 +616,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 {
                     var subKey = FindNext(key, ref match);
                     current = current.GetOrAddNode(subKey);
-
                 } while (match.Type != Delimiter.None);
 
                 if (current.Key == null)
@@ -651,9 +650,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 }
             }
 
-            var keyStart = currentMatch.Type == Delimiter.OpenBracket
-                ? currentMatch.Index - 1
-                : currentMatch.Index;
+            var keyStart =
+                currentMatch.Type == Delimiter.OpenBracket
+                    ? currentMatch.Index - 1
+                    : currentMatch.Index;
 
             currentMatch.Type = matchType;
             currentMatch.Index = index + 1;
@@ -709,7 +709,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         {
             if (!HasRecordedMaxModelError)
             {
-                var exception = new TooManyModelErrorsException(Resources.ModelStateDictionary_MaxModelStateErrors);
+                var exception = new TooManyModelErrorsException(
+                    Resources.ModelStateDictionary_MaxModelStateErrors
+                );
                 AddModelErrorCore(string.Empty, exception);
                 HasRecordedMaxModelError = true;
                 ErrorCount++;
@@ -799,8 +801,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public Enumerator GetEnumerator() => new Enumerator(this, prefix: string.Empty);
 
         /// <inheritdoc />
-        IEnumerator<KeyValuePair<string, ModelStateEntry?>>
-            IEnumerable<KeyValuePair<string, ModelStateEntry?>>.GetEnumerator() => GetEnumerator();
+        IEnumerator<KeyValuePair<string, ModelStateEntry?>> IEnumerable<
+            KeyValuePair<string, ModelStateEntry?>
+        >.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -981,8 +984,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 return modelStateNode;
             }
 
-            public override ModelStateEntry? GetModelStateForProperty(string propertyName)
-                => GetNode(new StringSegment(propertyName));
+            public override ModelStateEntry? GetModelStateForProperty(string propertyName) =>
+                GetNode(new StringSegment(propertyName));
 
             private int BinarySearch(StringSegment searchKey)
             {
@@ -1003,7 +1006,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                             searchKey.Buffer,
                             searchKey.Offset,
                             searchKey.Length,
-                            StringComparison.OrdinalIgnoreCase);
+                            StringComparison.OrdinalIgnoreCase
+                        );
                     }
 
                     if (result == 0)
@@ -1057,8 +1061,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             /// <inheritdoc />
             public Enumerator GetEnumerator() => new Enumerator(_dictionary, _prefix);
 
-            IEnumerator<KeyValuePair<string, ModelStateEntry>>
-                IEnumerable<KeyValuePair<string, ModelStateEntry>>.GetEnumerator() => GetEnumerator();
+            IEnumerator<KeyValuePair<string, ModelStateEntry>> IEnumerable<
+                KeyValuePair<string, ModelStateEntry>
+            >.GetEnumerator() => GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
@@ -1105,9 +1110,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             object IEnumerator.Current => Current;
 
             /// <inheritdoc />
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -1196,7 +1199,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             }
 
             /// <inheritdoc />
-            public KeyEnumerator GetEnumerator() => new KeyEnumerator(_dictionary, prefix: string.Empty);
+            public KeyEnumerator GetEnumerator() =>
+                new KeyEnumerator(_dictionary, prefix: string.Empty);
 
             IEnumerator<string> IEnumerable<string>.GetEnumerator() => GetEnumerator();
 
@@ -1271,9 +1275,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             }
 
             /// <inheritdoc />
-            public ValueEnumerator GetEnumerator() => new ValueEnumerator(_dictionary, prefix: string.Empty);
+            public ValueEnumerator GetEnumerator() =>
+                new ValueEnumerator(_dictionary, prefix: string.Empty);
 
-            IEnumerator<ModelStateEntry> IEnumerable<ModelStateEntry>.GetEnumerator() => GetEnumerator();
+            IEnumerator<ModelStateEntry> IEnumerable<ModelStateEntry>.GetEnumerator() =>
+                GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }

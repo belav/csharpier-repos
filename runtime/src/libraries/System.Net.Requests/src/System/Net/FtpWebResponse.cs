@@ -21,8 +21,17 @@ namespace System.Net
         private readonly string? _welcomeMessage;
         private string? _exitMessage;
 
-        internal FtpWebResponse(Stream? responseStream, long contentLength, Uri responseUri, FtpStatusCode statusCode, string? statusLine, DateTime lastModified, string? bannerMessage, string? welcomeMessage, string? exitMessage)
-        {
+        internal FtpWebResponse(
+            Stream? responseStream,
+            long contentLength,
+            Uri responseUri,
+            FtpStatusCode statusCode,
+            string? statusLine,
+            DateTime lastModified,
+            string? bannerMessage,
+            string? welcomeMessage,
+            string? exitMessage
+        ) {
             _responseStream = responseStream;
             if (responseStream == null && contentLength < 0)
             {
@@ -38,8 +47,11 @@ namespace System.Net
             _exitMessage = exitMessage;
         }
 
-        internal void UpdateStatus(FtpStatusCode statusCode, string? statusLine, string? exitMessage)
-        {
+        internal void UpdateStatus(
+            FtpStatusCode statusCode,
+            string? statusLine,
+            string? exitMessage
+        ) {
             _statusCode = statusCode;
             _statusLine = statusLine;
             _exitMessage = exitMessage;
@@ -62,9 +74,7 @@ namespace System.Net
 
         internal sealed class EmptyStream : MemoryStream
         {
-            internal EmptyStream() : base(Array.Empty<byte>(), false)
-            {
-            }
+            internal EmptyStream() : base(Array.Empty<byte>(), false) { }
         }
 
         internal void SetResponseStream(Stream? stream)
@@ -87,10 +97,7 @@ namespace System.Net
         /// </summary>
         public override long ContentLength
         {
-            get
-            {
-                return _contentLength;
-            }
+            get { return _contentLength; }
         }
 
         public override WebHeaderCollection Headers
@@ -113,10 +120,7 @@ namespace System.Net
 
         public override bool SupportsHeaders
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -124,10 +128,7 @@ namespace System.Net
         /// </summary>
         public override Uri ResponseUri
         {
-            get
-            {
-                return _responseUri;
-            }
+            get { return _responseUri; }
         }
 
         /// <summary>
@@ -135,10 +136,7 @@ namespace System.Net
         /// </summary>
         public FtpStatusCode StatusCode
         {
-            get
-            {
-                return _statusCode;
-            }
+            get { return _statusCode; }
         }
 
         /// <summary>
@@ -146,10 +144,7 @@ namespace System.Net
         /// </summary>
         public string? StatusDescription
         {
-            get
-            {
-                return _statusLine;
-            }
+            get { return _statusLine; }
         }
 
         /// <summary>
@@ -157,10 +152,7 @@ namespace System.Net
         /// </summary>
         public DateTime LastModified
         {
-            get
-            {
-                return _lastModified;
-            }
+            get { return _lastModified; }
         }
 
         /// <summary>
@@ -168,10 +160,7 @@ namespace System.Net
         /// </summary>
         public string? BannerMessage
         {
-            get
-            {
-                return _bannerMessage;
-            }
+            get { return _bannerMessage; }
         }
 
         /// <summary>
@@ -179,10 +168,7 @@ namespace System.Net
         /// </summary>
         public string? WelcomeMessage
         {
-            get
-            {
-                return _welcomeMessage;
-            }
+            get { return _welcomeMessage; }
         }
 
         /// <summary>
@@ -190,10 +176,7 @@ namespace System.Net
         /// </summary>
         public string? ExitMessage
         {
-            get
-            {
-                return _exitMessage;
-            }
+            get { return _exitMessage; }
         }
     }
 }

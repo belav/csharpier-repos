@@ -13,11 +13,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// <summary>
         /// Breaks an identifier string into constituent parts.
         /// </summary>
-        public static ArrayBuilder<TextSpan> GetWordParts(string identifier)
-            => GetParts(identifier, word: true);
+        public static ArrayBuilder<TextSpan> GetWordParts(string identifier) =>
+            GetParts(identifier, word: true);
 
-        public static ArrayBuilder<TextSpan> GetCharacterParts(string identifier)
-            => GetParts(identifier, word: false);
+        public static ArrayBuilder<TextSpan> GetCharacterParts(string identifier) =>
+            GetParts(identifier, word: false);
 
         public static ArrayBuilder<TextSpan> GetParts(string text, bool word)
         {
@@ -91,7 +91,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             if (IsLower(c))
             {
                 // "Do"
-                // 
+                //
                 // scan the lowercase letters from here on to scna out 'Document'.
                 return ScanLowerCaseRun(identifier, length, wordStart);
             }
@@ -140,7 +140,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             else if (IsLower(c))
             {
                 // "Do"
-                // 
+                //
                 // scan the lowercase letters from here on to scan out 'Document'.
                 return ScanLowerCaseRun(identifier, length, wordStart);
             }
@@ -182,7 +182,6 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     wordStart++;
                     continue;
                 }
-
                 break;
             }
 
@@ -199,7 +198,6 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return char.IsLower(c);
         }
 
-        private static bool IsAscii(char v)
-            => v < 0x80;
+        private static bool IsAscii(char v) => v < 0x80;
     }
 }

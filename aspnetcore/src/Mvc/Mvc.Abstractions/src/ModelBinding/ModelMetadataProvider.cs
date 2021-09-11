@@ -39,8 +39,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <param name="parameter">The <see cref="ParameterInfo"/></param>
         /// <param name="modelType">The actual model type.</param>
         /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref name="parameter"/>.</returns>
-        public virtual ModelMetadata GetMetadataForParameter(ParameterInfo parameter, Type modelType)
-        {
+        public virtual ModelMetadata GetMetadataForParameter(
+            ParameterInfo parameter,
+            Type modelType
+        ) {
             throw new NotSupportedException();
         }
 
@@ -50,8 +52,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <param name="propertyInfo">The <see cref="PropertyInfo"/>.</param>
         /// <param name="modelType">The actual model type.</param>
         /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref name="propertyInfo"/>.</returns>
-        public virtual ModelMetadata GetMetadataForProperty(PropertyInfo propertyInfo, Type modelType)
-        {
+        public virtual ModelMetadata GetMetadataForProperty(
+            PropertyInfo propertyInfo,
+            Type modelType
+        ) {
             throw new NotSupportedException();
         }
 
@@ -61,8 +65,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <param name="constructor">The <see cref="ConstructorInfo"/>.</param>
         /// <param name="modelType">The type declaring the constructor.</param>
         /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref name="constructor"/>.</returns>
-        public virtual ModelMetadata GetMetadataForConstructor(ConstructorInfo constructor, Type modelType)
-        {
+        public virtual ModelMetadata GetMetadataForConstructor(
+            ConstructorInfo constructor,
+            Type modelType
+        ) {
             throw new NotSupportedException();
         }
     }

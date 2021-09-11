@@ -21,9 +21,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void PinChangedEvent_CtsChanged()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 PinChangedEventHandler eventHandler = new PinChangedEventHandler(com1);
 
                 Debug.WriteLine("Verifying CtsChanged event");
@@ -34,10 +41,16 @@ namespace System.IO.Ports.Tests
 
                 for (int i = 0; i < NUM_TRYS; i++)
                 {
-                    Debug.WriteLine("Verifying when RtsEnable set to true on remote port try: {0}", i);
+                    Debug.WriteLine(
+                        "Verifying when RtsEnable set to true on remote port try: {0}",
+                        i
+                    );
 
                     com2.RtsEnable = true;
-                    Assert.True(eventHandler.WaitForEvent(MAX_TIME_WAIT, 1), "Initial event missing");
+                    Assert.True(
+                        eventHandler.WaitForEvent(MAX_TIME_WAIT, 1),
+                        "Initial event missing"
+                    );
 
                     eventHandler.Validate(SerialPinChange.CtsChanged, 0);
 
@@ -56,9 +69,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void PinChangedEvent_DsrChanged()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 PinChangedEventHandler eventHandler = new PinChangedEventHandler(com1);
 
                 // Some null-modem cables have a connection between CD and CSR/CTR, so we need to discard CDChanged events
@@ -74,7 +94,10 @@ namespace System.IO.Ports.Tests
                     Debug.WriteLine("Verifying when DtrEnable set to true on remote port {0}", i);
 
                     com2.DtrEnable = true;
-                    Assert.True(eventHandler.WaitForEvent(MAX_TIME_WAIT, 1), "Initial event missing");
+                    Assert.True(
+                        eventHandler.WaitForEvent(MAX_TIME_WAIT, 1),
+                        "Initial event missing"
+                    );
 
                     eventHandler.Validate(SerialPinChange.DsrChanged, 0);
 
@@ -93,9 +116,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void PinChangedEvent_Break()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 PinChangedEventHandler eventHandler = new PinChangedEventHandler(com1);
 
                 Debug.WriteLine("Verifying Break event");
@@ -109,7 +139,10 @@ namespace System.IO.Ports.Tests
                     Debug.WriteLine("Verifying when Break set to true on remote port try: {0}", i);
 
                     com2.BreakState = true;
-                    Assert.True(eventHandler.WaitForEvent(MAX_TIME_WAIT, 1), "Initial event missing");
+                    Assert.True(
+                        eventHandler.WaitForEvent(MAX_TIME_WAIT, 1),
+                        "Initial event missing"
+                    );
 
                     eventHandler.Validate(SerialPinChange.Break, 0);
 
@@ -127,9 +160,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void PinChangedEvent_Multiple()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 PinChangedEventHandler eventHandler = new PinChangedEventHandler(com1);
 
                 // Some null-modem cables have a connection between CD and CSR/CTR, so we need to discard CDChanged events
@@ -168,9 +208,7 @@ namespace System.IO.Ports.Tests
 
         private class PinChangedEventHandler : TestEventHandler<SerialPinChange>
         {
-            public PinChangedEventHandler(SerialPort com) : base(com, false, false)
-            {
-            }
+            public PinChangedEventHandler(SerialPort com) : base(com, false, false) { }
 
             public void HandleEvent(object source, SerialPinChangedEventArgs e)
             {

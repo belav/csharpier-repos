@@ -31,18 +31,19 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
             public NavigableSymbolSource(
                 IThreadingContext threadingContext,
                 IStreamingFindUsagesPresenter streamingPresenter,
-                IWaitIndicator waitIndicator)
-            {
+                IWaitIndicator waitIndicator
+            ) {
                 _threadingContext = threadingContext;
                 _presenter = streamingPresenter;
                 _waitIndicator = waitIndicator;
             }
 
-            public void Dispose()
-                => _disposed = true;
+            public void Dispose() => _disposed = true;
 
-            public async Task<INavigableSymbol> GetNavigableSymbolAsync(SnapshotSpan triggerSpan, CancellationToken cancellationToken)
-            {
+            public async Task<INavigableSymbol> GetNavigableSymbolAsync(
+                SnapshotSpan triggerSpan,
+                CancellationToken cancellationToken
+            ) {
                 if (_disposed)
                 {
                     return null;
@@ -72,7 +73,14 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                 }
 
                 var snapshotSpan = new SnapshotSpan(snapshot, context.Span.ToSpan());
-                return new NavigableSymbol(definitions.ToImmutableArray(), snapshotSpan, document, _threadingContext, _presenter, _waitIndicator);
+                return new NavigableSymbol(
+                    definitions.ToImmutableArray(),
+                    snapshotSpan,
+                    document,
+                    _threadingContext,
+                    _presenter,
+                    _waitIndicator
+                );
             }
         }
     }

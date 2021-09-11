@@ -20,11 +20,11 @@ namespace System.Xml
 
     internal sealed class DataSetMapper
     {
-        private Hashtable _tableSchemaMap;   // maps an string (currently this is localName:nsURI) to a DataTable. Used to quickly find if a bound-elem matches any data-table metadata..
-        private Hashtable _columnSchemaMap;  // maps a string (table localName:nsURI) to a Hashtable. The 2nd hastable (the one that is stored as data in columnSchemaMap, maps a string to a DataColumn.
+        private Hashtable _tableSchemaMap; // maps an string (currently this is localName:nsURI) to a DataTable. Used to quickly find if a bound-elem matches any data-table metadata..
+        private Hashtable _columnSchemaMap; // maps a string (table localName:nsURI) to a Hashtable. The 2nd hastable (the one that is stored as data in columnSchemaMap, maps a string to a DataColumn.
 
-        private XmlDataDocument? _doc;        // The document this mapper is related to
-        private DataSet? _dataSet;          // The dataset this mapper is related to
+        private XmlDataDocument? _doc; // The document this mapper is related to
+        private DataSet? _dataSet; // The dataset this mapper is related to
         internal const string strReservedXmlns = "http://www.w3.org/2000/xmlns/";
 
         internal DataSetMapper()
@@ -84,8 +84,10 @@ namespace System.Xml
         //                  a column from the parent region table, then the node is NOT associated w/ a DataTable (it is a potential DataColumn in the parent region)
         //              3.3.2 Else the node is a row-element (and associated w/ a DataTable / DataRow )
         //
-        internal DataTable? SearchMatchingTableSchema(XmlBoundElement? rowElem, XmlBoundElement elem)
-        {
+        internal DataTable? SearchMatchingTableSchema(
+            XmlBoundElement? rowElem,
+            XmlBoundElement elem
+        ) {
             Debug.Assert(elem != null);
 
             DataTable t = SearchMatchingTableSchema(elem.LocalName, elem.NamespaceURI);

@@ -8,8 +8,7 @@ namespace System.Numerics
 {
     internal static partial class BigIntegerCalculator
     {
-        public static uint[] Divide(uint[] left, uint right,
-                                    out uint remainder)
+        public static uint[] Divide(uint[] left, uint right, out uint remainder)
         {
             Debug.Assert(left != null);
             Debug.Assert(left.Length >= 1);
@@ -71,8 +70,7 @@ namespace System.Numerics
             return (uint)carry;
         }
 
-        public static unsafe uint[] Divide(uint[] left, uint[] right,
-                                           out uint[] remainder)
+        public static unsafe uint[] Divide(uint[] left, uint[] right, out uint[] remainder)
         {
             Debug.Assert(left != null);
             Debug.Assert(right != null);
@@ -86,11 +84,12 @@ namespace System.Numerics
             uint[] localLeft = left.AsSpan().ToArray(); // left will get overwritten, we need a local copy
             uint[] bits = new uint[left.Length - right.Length + 1];
 
-            fixed (uint* l = &localLeft[0], r = &right[0], b = &bits[0])
-            {
-                Divide(l, localLeft.Length,
-                       r, right.Length,
-                       b, bits.Length);
+            fixed (
+                uint* l = &localLeft[0],
+                    r = &right[0],
+                    b = &bits[0]
+            ) {
+                Divide(l, localLeft.Length, r, right.Length, b, bits.Length);
             }
 
             remainder = localLeft;
@@ -122,11 +121,12 @@ namespace System.Numerics
 
             uint[] bits = new uint[left.Length - right.Length + 1];
 
-            fixed (uint* l = &localLeft[0], r = &right[0], b = &bits[0])
-            {
-                Divide(l, localLeft.Length,
-                       r, right.Length,
-                       b, bits.Length);
+            fixed (
+                uint* l = &localLeft[0],
+                    r = &right[0],
+                    b = &bits[0]
+            ) {
+                Divide(l, localLeft.Length, r, right.Length, b, bits.Length);
             }
 
             return bits;
@@ -144,25 +144,28 @@ namespace System.Numerics
 
             uint[] localLeft = left.AsSpan().ToArray(); // left will get overwritten, we need a local copy
 
-            fixed (uint* l = &localLeft[0], r = &right[0])
-            {
-                Divide(l, localLeft.Length,
-                       r, right.Length,
-                       null, 0);
+            fixed (
+                uint* l = &localLeft[0],
+                    r = &right[0]
+            ) {
+                Divide(l, localLeft.Length, r, right.Length, null, 0);
             }
 
             return localLeft;
         }
 
-        private static unsafe void Divide(uint* left, int leftLength,
-                                          uint* right, int rightLength,
-                                          uint* bits, int bitsLength)
-        {
+        private static unsafe void Divide(
+            uint* left,
+            int leftLength,
+            uint* right,
+            int rightLength,
+            uint* bits,
+            int bitsLength
+        ) {
             Debug.Assert(leftLength >= 1);
             Debug.Assert(rightLength >= 1);
             Debug.Assert(leftLength >= rightLength);
-            Debug.Assert(bitsLength == leftLength - rightLength + 1
-                || bitsLength == 0);
+            Debug.Assert(bitsLength == leftLength - rightLength + 1 || bitsLength == 0);
 
             // Executes the "grammar-school" algorithm for computing q = a / b.
             // Before calculating q_i, we get more bits into the highest bit
@@ -217,15 +220,19 @@ namespace System.Numerics
                 if (digit > 0)
                 {
                     // Now it's time to subtract our current quotient
-                    uint carry = SubtractDivisor(left + n, leftLength - n,
-                                                 right, rightLength, digit);
+                    uint carry = SubtractDivisor(
+                        left + n,
+                        leftLength - n,
+                        right,
+                        rightLength,
+                        digit
+                    );
                     if (carry != t)
                     {
                         Debug.Assert(carry == t + 1);
 
                         // Our guess was still exactly one too high
-                        carry = AddDivisor(left + n, leftLength - n,
-                                           right, rightLength);
+                        carry = AddDivisor(left + n, leftLength - n, right, rightLength);
                         --digit;
 
                         Debug.Assert(carry == 1);
@@ -240,9 +247,12 @@ namespace System.Numerics
             }
         }
 
-        private static unsafe uint AddDivisor(uint* left, int leftLength,
-                                              uint* right, int rightLength)
-        {
+        private static unsafe uint AddDivisor(
+            uint* left,
+            int leftLength,
+            uint* right,
+            int rightLength
+        ) {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -261,10 +271,13 @@ namespace System.Numerics
             return (uint)carry;
         }
 
-        private static unsafe uint SubtractDivisor(uint* left, int leftLength,
-                                                   uint* right, int rightLength,
-                                                   ulong q)
-        {
+        private static unsafe uint SubtractDivisor(
+            uint* left,
+            int leftLength,
+            uint* right,
+            int rightLength,
+            ulong q
+        ) {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -288,9 +301,13 @@ namespace System.Numerics
             return (uint)carry;
         }
 
-        private static bool DivideGuessTooBig(ulong q, ulong valHi, uint valLo,
-                                              uint divHi, uint divLo)
-        {
+        private static bool DivideGuessTooBig(
+            ulong q,
+            ulong valHi,
+            uint valLo,
+            uint divHi,
+            uint divLo
+        ) {
             Debug.Assert(q <= 0xFFFFFFFF);
 
             // We multiply the two most significant limbs of the divisor

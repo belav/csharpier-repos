@@ -18,12 +18,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
     /// </summary>
     internal class ComponentRuntimeNodeWriter : ComponentNodeWriter
     {
-        private readonly List<IntermediateToken> _currentAttributeValues = new List<IntermediateToken>();
+        private readonly List<IntermediateToken> _currentAttributeValues =
+            new List<IntermediateToken>();
         private readonly ScopeStack _scopeStack = new ScopeStack();
         private int _sourceSequence = 0;
 
-        public override void WriteCSharpCode(CodeRenderingContext context, CSharpCodeIntermediateNode node)
-        {
+        public override void WriteCSharpCode(
+            CodeRenderingContext context,
+            CSharpCodeIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -84,8 +87,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
         }
 
-        public override void WriteCSharpExpression(CodeRenderingContext context, CSharpExpressionIntermediateNode node)
-        {
+        public override void WriteCSharpExpression(
+            CodeRenderingContext context,
+            CSharpExpressionIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -98,8 +103,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             // Since we're not in the middle of writing an element, this must evaluate as some
             // text to display
-            context.CodeWriter
-                .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddContent}")
+            context.CodeWriter.WriteStartMethodInvocation(
+                    $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddContent}"
+                )
                 .Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture))
                 .WriteParameterSeparator();
 
@@ -119,8 +125,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             context.CodeWriter.WriteEndMethodInvocation();
         }
 
-        public override void WriteCSharpExpressionAttributeValue(CodeRenderingContext context, CSharpExpressionAttributeValueIntermediateNode node)
-        {
+        public override void WriteCSharpExpressionAttributeValue(
+            CodeRenderingContext context,
+            CSharpExpressionAttributeValueIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -137,7 +145,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             // ... so to avoid losing whitespace, convert the prefix to a further token in the list
             if (!string.IsNullOrEmpty(node.Prefix))
             {
-                _currentAttributeValues.Add(new IntermediateToken() { Kind = TokenKind.Html, Content = node.Prefix });
+                _currentAttributeValues.Add(
+                    new IntermediateToken() { Kind = TokenKind.Html, Content = node.Prefix }
+                );
             }
 
             for (var i = 0; i < node.Children.Count; i++)
@@ -146,8 +156,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
         }
 
-        public override void WriteMarkupBlock(CodeRenderingContext context, MarkupBlockIntermediateNode node)
-        {
+        public override void WriteMarkupBlock(
+            CodeRenderingContext context,
+            MarkupBlockIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -158,16 +170,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(node));
             }
 
-            context.CodeWriter
-                .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMarkupContent}")
+            context.CodeWriter.WriteStartMethodInvocation(
+                    $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMarkupContent}"
+                )
                 .Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture))
                 .WriteParameterSeparator()
                 .WriteStringLiteral(node.Content)
                 .WriteEndMethodInvocation();
         }
 
-        public override void WriteMarkupElement(CodeRenderingContext context, MarkupElementIntermediateNode node)
-        {
+        public override void WriteMarkupElement(
+            CodeRenderingContext context,
+            MarkupElementIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -178,8 +193,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(node));
             }
 
-            context.CodeWriter
-                .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.OpenElement}")
+            context.CodeWriter.WriteStartMethodInvocation(
+                    $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.OpenElement}"
+                )
                 .Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture))
                 .WriteParameterSeparator()
                 .WriteStringLiteral(node.TagName)
@@ -218,13 +234,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 context.RenderNode(child);
             }
 
-            context.CodeWriter
-                .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.CloseElement}")
+            context.CodeWriter.WriteStartMethodInvocation(
+                    $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.CloseElement}"
+                )
                 .WriteEndMethodInvocation();
         }
 
-        public override void WriteHtmlAttribute(CodeRenderingContext context, HtmlAttributeIntermediateNode node)
-        {
+        public override void WriteHtmlAttribute(
+            CodeRenderingContext context,
+            HtmlAttributeIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -250,15 +269,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             if (!string.IsNullOrEmpty(node.EventUpdatesAttributeName))
             {
-                context.CodeWriter
-                    .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.SetUpdatesAttributeName}")
+                context.CodeWriter.WriteStartMethodInvocation(
+                        $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.SetUpdatesAttributeName}"
+                    )
                     .WriteStringLiteral(node.EventUpdatesAttributeName)
                     .WriteEndMethodInvocation();
             }
         }
 
-        public override void WriteHtmlAttributeValue(CodeRenderingContext context, HtmlAttributeValueIntermediateNode node)
-        {
+        public override void WriteHtmlAttributeValue(
+            CodeRenderingContext context,
+            HtmlAttributeValueIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -270,11 +292,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             var stringContent = ((IntermediateToken)node.Children.Single()).Content;
-            _currentAttributeValues.Add(new IntermediateToken() { Kind = TokenKind.Html, Content = node.Prefix + stringContent, });
+            _currentAttributeValues.Add(
+                new IntermediateToken()
+                {
+                    Kind = TokenKind.Html,
+                    Content = node.Prefix + stringContent,
+                }
+            );
         }
 
-        public override void WriteHtmlContent(CodeRenderingContext context, HtmlContentIntermediateNode node)
-        {
+        public override void WriteHtmlContent(
+            CodeRenderingContext context,
+            HtmlContentIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -294,16 +324,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 renderApi = ComponentsApi.RenderTreeBuilder.AddMarkupContent;
             }
 
-            context.CodeWriter
-                .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{renderApi}")
+            context.CodeWriter.WriteStartMethodInvocation(
+                    $"{_scopeStack.BuilderVarName}.{renderApi}"
+                )
                 .Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture))
                 .WriteParameterSeparator()
                 .WriteStringLiteral(content)
                 .WriteEndMethodInvocation();
         }
 
-        public override void WriteUsingDirective(CodeRenderingContext context, UsingDirectiveIntermediateNode node)
-        {
+        public override void WriteUsingDirective(
+            CodeRenderingContext context,
+            UsingDirectiveIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -327,8 +360,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
         }
 
-        public override void WriteComponent(CodeRenderingContext context, ComponentIntermediateNode node)
-        {
+        public override void WriteComponent(
+            CodeRenderingContext context,
+            ComponentIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -360,7 +395,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 context.CodeWriter.Write("<");
                 context.CodeWriter.Write(node.TypeName);
                 context.CodeWriter.Write(">(");
-                context.CodeWriter.Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture));
+                context.CodeWriter.Write(
+                    (_sourceSequence++).ToString(CultureInfo.InvariantCulture)
+                );
                 context.CodeWriter.Write(");");
                 context.CodeWriter.WriteLine();
 
@@ -433,7 +470,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         WriteTypeInferenceMethodParameterInnards(context, parameter);
                         context.CodeWriter.Write(", out var ");
 
-                        var variableName = $"__typeInferenceArg_{_scopeStack.Depth}_{parameter.ParameterName}";
+                        var variableName =
+                            $"__typeInferenceArg_{_scopeStack.Depth}_{parameter.ParameterName}";
                         context.CodeWriter.Write(variableName);
 
                         UseCapturedCascadingGenericParameterVariable(node, parameter, variableName);
@@ -455,7 +493,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 context.CodeWriter.Write(_scopeStack.BuilderVarName);
                 context.CodeWriter.Write(", ");
 
-                context.CodeWriter.Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture));
+                context.CodeWriter.Write(
+                    (_sourceSequence++).ToString(CultureInfo.InvariantCulture)
+                );
 
                 foreach (var parameter in parameters)
                 {
@@ -463,7 +503,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
                     if (!string.IsNullOrEmpty(parameter.SeqName))
                     {
-                        context.CodeWriter.Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture));
+                        context.CodeWriter.Write(
+                            (_sourceSequence++).ToString(CultureInfo.InvariantCulture)
+                        );
                         context.CodeWriter.Write(", ");
                     }
 
@@ -475,8 +517,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
                 if (typeInferenceCaptureScope.HasValue)
                 {
-                    foreach (var localToClear in parameters.Select(p => p.Source).OfType<TypeInferenceCapturedVariable>())
-                    {
+                    foreach (
+                        var localToClear in parameters.Select(p => p.Source)
+                            .OfType<TypeInferenceCapturedVariable>()
+                    ) {
                         // Ensure we're not interfering with the GC lifetime of these captured values
                         // We don't need the values any longer (code in closures only uses its types for compile-time inference)
                         context.CodeWriter.Write(localToClear.VariableName);
@@ -487,8 +531,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
         }
 
-        private void WriteTypeInferenceMethodParameterInnards(CodeRenderingContext context, TypeInferenceMethodParameter parameter)
-        {
+        private void WriteTypeInferenceMethodParameterInnards(
+            CodeRenderingContext context,
+            TypeInferenceMethodParameter parameter
+        ) {
             switch (parameter.Source)
             {
                 case ComponentAttributeIntermediateNode attribute:
@@ -519,12 +565,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     context.CodeWriter.Write(capturedVariable.VariableName);
                     break;
                 default:
-                    throw new InvalidOperationException($"Not implemented: type inference method parameter from source {parameter.Source}");
+                    throw new InvalidOperationException(
+                        $"Not implemented: type inference method parameter from source {parameter.Source}"
+                    );
             }
         }
 
-        public override void WriteComponentAttribute(CodeRenderingContext context, ComponentAttributeIntermediateNode node)
-        {
+        public override void WriteComponentAttribute(
+            CodeRenderingContext context,
+            ComponentAttributeIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -535,7 +585,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 throw new ArgumentNullException(nameof(node));
             }
 
-            var addAttributeMethod = node.Annotations[ComponentMetadata.Common.AddAttributeMethodName] as string ?? ComponentsApi.RenderTreeBuilder.AddAttribute;
+            var addAttributeMethod =
+                node.Annotations[ComponentMetadata.Common.AddAttributeMethodName] as string
+                ?? ComponentsApi.RenderTreeBuilder.AddAttribute;
 
             // _builder.AddAttribute(1, "Foo", 42);
             context.CodeWriter.Write(_scopeStack.BuilderVarName);
@@ -553,8 +605,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             context.CodeWriter.WriteLine();
         }
 
-        private void WriteComponentAttributeInnards(CodeRenderingContext context, ComponentAttributeIntermediateNode node, bool canTypeCheck)
-        {
+        private void WriteComponentAttributeInnards(
+            CodeRenderingContext context,
+            ComponentAttributeIntermediateNode node,
+            bool canTypeCheck
+        ) {
             if (node.AttributeStructure == AttributeStructure.Minimized)
             {
                 // Minimized attributes always map to 'true'
@@ -563,21 +618,29 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             else if (node.Children.Count > 1)
             {
                 // We don't expect this to happen, we just want to know if it can.
-                throw new InvalidOperationException("Attribute nodes should either be minimized or a single type of content." + string.Join(", ", node.Children));
+                throw new InvalidOperationException(
+                    "Attribute nodes should either be minimized or a single type of content."
+                        + string.Join(", ", node.Children)
+                );
             }
-            else if (node.Children.Count == 1 && node.Children[0] is HtmlContentIntermediateNode htmlNode)
-            {
+            else if (
+                node.Children.Count == 1 && node.Children[0] is HtmlContentIntermediateNode htmlNode
+            ) {
                 // This is how string attributes are lowered by default, a single HTML node with a single HTML token.
-                var content = string.Join(string.Empty, GetHtmlTokens(htmlNode).Select(t => t.Content));
+                var content = string.Join(
+                    string.Empty,
+                    GetHtmlTokens(htmlNode).Select(t => t.Content)
+                );
                 context.CodeWriter.WriteStringLiteral(content);
             }
             else
             {
                 // See comments in ComponentDesignTimeNodeWriter for a description of the cases that are possible.
                 var tokens = GetCSharpTokens(node);
-                if ((node.BoundAttribute?.IsDelegateProperty() ?? false) ||
-                    (node.BoundAttribute?.IsChildContentProperty() ?? false))
-                {
+                if (
+                    (node.BoundAttribute?.IsDelegateProperty() ?? false)
+                    || (node.BoundAttribute?.IsChildContentProperty() ?? false)
+                ) {
                     if (canTypeCheck)
                     {
                         context.CodeWriter.Write("new ");
@@ -677,8 +740,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             return node.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp).ToArray();
         }
 
-        public override void WriteComponentChildContent(CodeRenderingContext context, ComponentChildContentIntermediateNode node)
-        {
+        public override void WriteComponentChildContent(
+            CodeRenderingContext context,
+            ComponentChildContentIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -704,8 +769,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             context.CodeWriter.WriteEndMethodInvocation();
         }
 
-        private void WriteComponentChildContentInnards(CodeRenderingContext context, ComponentChildContentIntermediateNode node)
-        {
+        private void WriteComponentChildContentInnards(
+            CodeRenderingContext context,
+            ComponentChildContentIntermediateNode node
+        ) {
             // Writes something like:
             //
             // ((__builder73) => { ... })
@@ -714,7 +781,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             _scopeStack.OpenComponentScope(
                 context,
                 node.AttributeName,
-                node.IsParameterized ? node.ParameterName : null);
+                node.IsParameterized ? node.ParameterName : null
+            );
             for (var i = 0; i < node.Children.Count; i++)
             {
                 context.RenderNode(node.Children[i]);
@@ -722,14 +790,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             _scopeStack.CloseScope(context);
         }
 
-        public override void WriteComponentTypeArgument(CodeRenderingContext context, ComponentTypeArgumentIntermediateNode node)
-        {
+        public override void WriteComponentTypeArgument(
+            CodeRenderingContext context,
+            ComponentTypeArgumentIntermediateNode node
+        ) {
             // We can skip type arguments during runtime codegen, they are handled in the
             // type/parameter declarations.
         }
 
-        public override void WriteTemplate(CodeRenderingContext context, TemplateIntermediateNode node)
-        {
+        public override void WriteTemplate(
+            CodeRenderingContext context,
+            TemplateIntermediateNode node
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -756,22 +828,23 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             var codeWriter = context.CodeWriter;
 
-            codeWriter
-                .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.SetKey}");
+            codeWriter.WriteStartMethodInvocation(
+                $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.SetKey}"
+            );
             WriteSetKeyInnards(context, node);
             codeWriter.WriteEndMethodInvocation();
         }
 
         private void WriteSetKeyInnards(CodeRenderingContext context, SetKeyIntermediateNode node)
         {
-            WriteCSharpCode(context, new CSharpCodeIntermediateNode
-            {
-                Source = node.Source,
-                Children =
-                    {
-                        node.KeyValueToken
-                    }
-            });
+            WriteCSharpCode(
+                context,
+                new CSharpCodeIntermediateNode
+                {
+                    Source = node.Source,
+                    Children = { node.KeyValueToken }
+                }
+            );
         }
 
         public override void WriteSplat(CodeRenderingContext context, SplatIntermediateNode node)
@@ -789,7 +862,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             // Looks like:
             //
             // _builder.AddMultipleAttributes(2, ...);
-            context.CodeWriter.WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMultipleAttributes}");
+            context.CodeWriter.WriteStartMethodInvocation(
+                $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMultipleAttributes}"
+            );
             context.CodeWriter.Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture));
             context.CodeWriter.WriteParameterSeparator();
 
@@ -798,8 +873,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             context.CodeWriter.WriteEndMethodInvocation();
         }
 
-        private void WriteSplatInnards(CodeRenderingContext context, SplatIntermediateNode node, bool canTypeCheck)
-        {
+        private void WriteSplatInnards(
+            CodeRenderingContext context,
+            SplatIntermediateNode node,
+            bool canTypeCheck
+        ) {
             var tokens = GetCSharpTokens(node);
 
             if (canTypeCheck)
@@ -822,8 +900,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
         }
 
-        public override void WriteReferenceCapture(CodeRenderingContext context, ReferenceCaptureIntermediateNode node)
-        {
+        public override void WriteReferenceCapture(
+            CodeRenderingContext context,
+            ReferenceCaptureIntermediateNode node
+        ) {
             // Looks like:
             //
             // _builder.AddComponentReferenceCapture(2, (__value) = { _field = (MyComponent)__value; });
@@ -834,8 +914,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             var methodName = node.IsComponentCapture
                 ? ComponentsApi.RenderTreeBuilder.AddComponentReferenceCapture
                 : ComponentsApi.RenderTreeBuilder.AddElementReferenceCapture;
-            codeWriter
-                .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{methodName}")
+            codeWriter.WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{methodName}")
                 .Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture))
                 .WriteParameterSeparator();
 
@@ -844,8 +923,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             codeWriter.WriteEndMethodInvocation();
         }
 
-        protected override void WriteReferenceCaptureInnards(CodeRenderingContext context, ReferenceCaptureIntermediateNode node, bool shouldTypeCheck)
-        {
+        protected override void WriteReferenceCaptureInnards(
+            CodeRenderingContext context,
+            ReferenceCaptureIntermediateNode node,
+            bool shouldTypeCheck
+        ) {
             // Looks like:
             //
             // (__value) = { _field = (MyComponent)__value; }
@@ -854,25 +936,34 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             const string refCaptureParamName = "__value";
             using (var lambdaScope = context.CodeWriter.BuildLambda(refCaptureParamName))
             {
-                var typecastIfNeeded = shouldTypeCheck && node.IsComponentCapture ? $"({node.ComponentCaptureTypeName})" : string.Empty;
-                WriteCSharpCode(context, new CSharpCodeIntermediateNode
-                {
-                    Source = node.Source,
-                    Children =
+                var typecastIfNeeded =
+                    shouldTypeCheck && node.IsComponentCapture
+                        ? $"({node.ComponentCaptureTypeName})"
+                        : string.Empty;
+                WriteCSharpCode(
+                    context,
+                    new CSharpCodeIntermediateNode
                     {
-                        node.IdentifierToken,
-                        new IntermediateToken
+                        Source = node.Source,
+                        Children =
                         {
-                            Kind = TokenKind.CSharp,
-                            Content = $" = {typecastIfNeeded}{refCaptureParamName};"
+                            node.IdentifierToken,
+                            new IntermediateToken
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = $" = {typecastIfNeeded}{refCaptureParamName};"
+                            }
                         }
                     }
-                });
+                );
             }
         }
 
-        private void WriteAttribute(CodeRenderingContext context, string key, IList<IntermediateToken> value)
-        {
+        private void WriteAttribute(
+            CodeRenderingContext context,
+            string key,
+            IList<IntermediateToken> value
+        ) {
             BeginWriteAttribute(context, key);
 
             if (value.Count > 0)
@@ -891,8 +982,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             context.CodeWriter.WriteEndMethodInvocation();
         }
 
-        private void WriteAttribute(CodeRenderingContext context, IntermediateNode nameExpression, IList<IntermediateToken> value)
-        {
+        private void WriteAttribute(
+            CodeRenderingContext context,
+            IntermediateNode nameExpression,
+            IList<IntermediateToken> value
+        ) {
             BeginWriteAttribute(context, nameExpression);
             if (value.Count > 0)
             {
@@ -904,16 +998,21 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         protected override void BeginWriteAttribute(CodeRenderingContext context, string key)
         {
-            context.CodeWriter
-                .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}")
+            context.CodeWriter.WriteStartMethodInvocation(
+                    $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
+                )
                 .Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture))
                 .WriteParameterSeparator()
                 .WriteStringLiteral(key);
         }
 
-        protected override void BeginWriteAttribute(CodeRenderingContext context, IntermediateNode nameExpression)
-        {
-            context.CodeWriter.WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}");
+        protected override void BeginWriteAttribute(
+            CodeRenderingContext context,
+            IntermediateNode nameExpression
+        ) {
+            context.CodeWriter.WriteStartMethodInvocation(
+                $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
+            );
             context.CodeWriter.Write((_sourceSequence++).ToString(CultureInfo.InvariantCulture));
             context.CodeWriter.WriteParameterSeparator();
 
@@ -943,8 +1042,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         // Only the mixed case is complicated, we want to turn it into code that will concatenate
         // the values into a string at runtime.
 
-        private static void WriteAttributeValue(CodeRenderingContext context, IList<IntermediateToken> tokens)
-        {
+        private static void WriteAttributeValue(
+            CodeRenderingContext context,
+            IList<IntermediateToken> tokens
+        ) {
             if (tokens == null)
             {
                 throw new ArgumentNullException(nameof(tokens));
@@ -967,7 +1068,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             if (hasHtml && hasCSharp)
             {
-                // If it's a C# expression, we have to wrap it in parens, otherwise things like ternary 
+                // If it's a C# expression, we have to wrap it in parens, otherwise things like ternary
                 // expressions don't compose with concatenation. However, this is a little complicated
                 // because C# tokens themselves aren't guaranteed to be distinct expressions. We want
                 // to treat all contiguous C# tokens as a single expression.
@@ -1025,7 +1126,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
             else
             {
-                throw new InvalidOperationException("Found attribute whose value is neither HTML nor CSharp");
+                throw new InvalidOperationException(
+                    "Found attribute whose value is neither HTML nor CSharp"
+                );
             }
         }
 
