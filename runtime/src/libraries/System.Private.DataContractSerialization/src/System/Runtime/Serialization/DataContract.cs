@@ -1970,8 +1970,10 @@ namespace System.Runtime.Serialization
 
         internal static string GetDataContractNamespaceFromUri(string uriString)
         {
-            return
-                uriString.StartsWith(Globals.DataContractXsdBaseNamespace, StringComparison.Ordinal)
+            return uriString.StartsWith(
+                Globals.DataContractXsdBaseNamespace,
+                StringComparison.Ordinal
+            )
               ? uriString.Substring(Globals.DataContractXsdBaseNamespace.Length)
               : uriString;
         }

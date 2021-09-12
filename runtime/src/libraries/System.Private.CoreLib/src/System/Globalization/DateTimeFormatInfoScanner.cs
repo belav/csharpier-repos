@@ -547,11 +547,10 @@ namespace System.Globalization
             string[] genetiveAbbrevMonthNames
         ) {
             // If we have different names in regular and genitive month names, use genitive month flag.
-            return
-                (
-                    !EqualStringArrays(monthNames, genitveMonthNames)
-                    || !EqualStringArrays(abbrevMonthNames, genetiveAbbrevMonthNames)
-                )
+            return (
+                !EqualStringArrays(monthNames, genitveMonthNames)
+                || !EqualStringArrays(abbrevMonthNames, genetiveAbbrevMonthNames)
+            )
               ? FORMATFLAGS.UseGenitiveMonth
               : 0;
         }

@@ -880,43 +880,39 @@ namespace System.Net.Http
             switch (encoding.CodePage)
             {
                 case UTF8CodePage:
-                    return
-                        (
-                            dataLength >= UTF8PreambleLength
-                            && data[offset + 0] == UTF8PreambleByte0
-                            && data[offset + 1] == UTF8PreambleByte1
-                            && data[offset + 2] == UTF8PreambleByte2
-                        )
+                    return (
+                        dataLength >= UTF8PreambleLength
+                        && data[offset + 0] == UTF8PreambleByte0
+                        && data[offset + 1] == UTF8PreambleByte1
+                        && data[offset + 2] == UTF8PreambleByte2
+                    )
                       ? UTF8PreambleLength
                       : 0;
                 case UTF32CodePage:
-                    return
-                        (
-                            dataLength >= UTF32PreambleLength
-                            && data[offset + 0] == UTF32PreambleByte0
-                            && data[offset + 1] == UTF32PreambleByte1
-                            && data[offset + 2] == UTF32PreambleByte2
-                            && data[offset + 3] == UTF32PreambleByte3
-                        )
+                    return (
+                        dataLength >= UTF32PreambleLength
+                        && data[offset + 0] == UTF32PreambleByte0
+                        && data[offset + 1] == UTF32PreambleByte1
+                        && data[offset + 2] == UTF32PreambleByte2
+                        && data[offset + 3] == UTF32PreambleByte3
+                    )
                       ? UTF32PreambleLength
                       : 0;
                 case UnicodeCodePage:
-                    return
-                        (
-                            dataLength >= UnicodePreambleLength
-                            && data[offset + 0] == UnicodePreambleByte0
-                            && data[offset + 1] == UnicodePreambleByte1
-                        )
+                    return (
+                        dataLength >= UnicodePreambleLength
+                        && data[offset + 0] == UnicodePreambleByte0
+                        && data[offset + 1] == UnicodePreambleByte1
+                    )
                       ? UnicodePreambleLength
                       : 0;
 
                 case BigEndianUnicodeCodePage:
-                    return
-                        (
-                            dataLength >= BigEndianUnicodePreambleLength
-                            && data[offset + 0] == BigEndianUnicodePreambleByte0
-                            && data[offset + 1] == BigEndianUnicodePreambleByte1
-                        )
+                    return (
+                        dataLength >= BigEndianUnicodePreambleLength
+                        && data[offset + 0] == BigEndianUnicodePreambleByte0
+                        && data[offset + 1] == BigEndianUnicodePreambleByte1
+                    )
                       ? BigEndianUnicodePreambleLength
                       : 0;
 

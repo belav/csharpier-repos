@@ -3149,12 +3149,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 numericOperand,
                 sizeOfExpression
             );
-            return
-                TypeSymbol.Equals(
-                    convertedMultiplicationResultType,
-                    multiplicationResultType,
-                    TypeCompareKind.ConsiderEverything2
-                )
+            return TypeSymbol.Equals(
+                convertedMultiplicationResultType,
+                multiplicationResultType,
+                TypeCompareKind.ConsiderEverything2
+            )
               ? multiplication
               : _factory.Convert(
                     convertedMultiplicationResultType,

@@ -347,8 +347,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // Type constraint must be at least as accessible as the declaring member (class, interface, delegate, method)
             if (type.IsParentKind(SyntaxKind.TypeConstraint))
             {
-                return
-                    AllContainingTypesArePublicOrProtected(semanticModel, type, cancellationToken)
+                return AllContainingTypesArePublicOrProtected(
+                    semanticModel,
+                    type,
+                    cancellationToken
+                )
                   ? Accessibility.Public
                   : Accessibility.Internal;
             }

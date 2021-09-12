@@ -91,11 +91,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var maxAccessibility =
                 (accessibility1 > accessibility2) ? accessibility1 : accessibility2;
 
-            return
-                (
-                    (minAccessibility == Accessibility.Protected)
-                    && (maxAccessibility == Accessibility.Internal)
-                )
+            return (
+                (minAccessibility == Accessibility.Protected)
+                && (maxAccessibility == Accessibility.Internal)
+            )
               ? Accessibility.ProtectedOrInternal
               : maxAccessibility;
         }

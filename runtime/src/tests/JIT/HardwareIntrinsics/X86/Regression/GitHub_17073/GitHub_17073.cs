@@ -7051,8 +7051,10 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarOrderedLessThanOrEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
+        return Sse2.CompareScalarOrderedLessThanOrEqual(
+            x,
+            Sse2.Or(y.AsSingle(), default).AsDouble()
+        )
           ? True()
           : False();
     }
@@ -7181,8 +7183,10 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarOrderedGreaterThanOrEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarOrderedGreaterThanOrEqual(
+            x,
+            Sse.Or(y.AsSingle(), default).AsSingle()
+        )
           ? True()
           : False();
     }
@@ -7227,11 +7231,10 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarOrderedGreaterThanOrEqual(
-                x,
-                Sse2.Or(y.AsSingle(), default).AsDouble()
-            )
+        return Sse2.CompareScalarOrderedGreaterThanOrEqual(
+            x,
+            Sse2.Or(y.AsSingle(), default).AsDouble()
+        )
           ? True()
           : False();
     }
@@ -7528,8 +7531,10 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarUnorderedLessThanOrEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarUnorderedLessThanOrEqual(
+            x,
+            Sse.Or(y.AsSingle(), default).AsSingle()
+        )
           ? True()
           : False();
     }
@@ -7574,8 +7579,10 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarUnorderedLessThanOrEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
+        return Sse2.CompareScalarUnorderedLessThanOrEqual(
+            x,
+            Sse2.Or(y.AsSingle(), default).AsDouble()
+        )
           ? True()
           : False();
     }
@@ -7704,11 +7711,10 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarUnorderedGreaterThanOrEqual(
-                x,
-                Sse.Or(y.AsSingle(), default).AsSingle()
-            )
+        return Sse.CompareScalarUnorderedGreaterThanOrEqual(
+            x,
+            Sse.Or(y.AsSingle(), default).AsSingle()
+        )
           ? True()
           : False();
     }
@@ -7753,11 +7759,10 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarUnorderedGreaterThanOrEqual(
-                x,
-                Sse2.Or(y.AsSingle(), default).AsDouble()
-            )
+        return Sse2.CompareScalarUnorderedGreaterThanOrEqual(
+            x,
+            Sse2.Or(y.AsSingle(), default).AsDouble()
+        )
           ? True()
           : False();
     }

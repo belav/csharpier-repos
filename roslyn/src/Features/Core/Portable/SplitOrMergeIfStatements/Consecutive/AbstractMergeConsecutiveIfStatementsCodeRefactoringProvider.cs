@@ -188,13 +188,12 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             CancellationToken cancellationToken,
             out SyntaxNode previousStatement
         ) {
-            return
-                TryGetSiblingStatement(
-                    syntaxFacts,
-                    ifOrElseIf,
-                    relativeIndex: -1,
-                    out previousStatement
-                )
+            return TryGetSiblingStatement(
+                syntaxFacts,
+                ifOrElseIf,
+                relativeIndex: -1,
+                out previousStatement
+            )
               ? CanStatementsBeMergedAsync(
                     document,
                     syntaxFacts,
@@ -214,8 +213,12 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             CancellationToken cancellationToken,
             out SyntaxNode nextStatement
         ) {
-            return
-                TryGetSiblingStatement(syntaxFacts, ifOrElseIf, relativeIndex: 1, out nextStatement)
+            return TryGetSiblingStatement(
+                syntaxFacts,
+                ifOrElseIf,
+                relativeIndex: 1,
+                out nextStatement
+            )
               ? CanStatementsBeMergedAsync(
                     document,
                     syntaxFacts,

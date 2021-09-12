@@ -98,11 +98,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal Binder WithUnsafeRegionIfNecessary(SyntaxTokenList modifiers)
         {
-            return
-                (
-                    this.Flags.Includes(BinderFlags.UnsafeRegion)
-                    || !modifiers.Any(SyntaxKind.UnsafeKeyword)
-                )
+            return (
+                this.Flags.Includes(BinderFlags.UnsafeRegion)
+                || !modifiers.Any(SyntaxKind.UnsafeKeyword)
+            )
               ? this
               : new Binder(this, this.Flags | BinderFlags.UnsafeRegion);
         }

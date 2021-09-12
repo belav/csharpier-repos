@@ -113,9 +113,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 )
                 .ConfigureAwait(false);
 
-            return
-                context
-                    is ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext
+            return context
+                is ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext
               ? ImmutableArray.Create(
                     new ChangeSignatureCodeAction(this, changeSignatureAnalyzedSucceedContext)
                 )

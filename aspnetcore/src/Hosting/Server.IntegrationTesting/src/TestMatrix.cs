@@ -268,11 +268,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             if (arch == RuntimeArchitecture.x64)
             {
                 // Can't run x64 on a x86 OS.
-                return
-                    (
-                        RuntimeInformation.OSArchitecture == Architecture.Arm
-                        || RuntimeInformation.OSArchitecture == Architecture.X86
-                    )
+                return (
+                    RuntimeInformation.OSArchitecture == Architecture.Arm
+                    || RuntimeInformation.OSArchitecture == Architecture.X86
+                )
                   ? $"Cannot run {arch} on your current system."
                   : null;
             }

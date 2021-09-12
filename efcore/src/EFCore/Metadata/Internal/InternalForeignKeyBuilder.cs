@@ -593,15 +593,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             bool shouldThrow
         ) {
             var navigationProperty = sourceType.GetNavigationMemberInfo(navigationName);
-            return
-                !Navigation.IsCompatible(
-                    navigationName,
-                    navigationProperty,
-                    sourceType,
-                    targetType,
-                    null,
-                    shouldThrow
-                )
+            return !Navigation.IsCompatible(
+                navigationName,
+                navigationProperty,
+                sourceType,
+                targetType,
+                null,
+                shouldThrow
+            )
               ? null
               : navigationProperty;
         }

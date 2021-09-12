@@ -4102,11 +4102,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             catchBinder = enclosingBinder.GetBinder(catchClause);
             LocalSymbol local = catchBinder.GetDeclaredLocalsForScope(catchClause).FirstOrDefault();
-            return
-                (
-                    (object)local != null
-                    && local.DeclarationKind == LocalDeclarationKind.CatchVariable
-                )
+            return (
+                (object)local != null && local.DeclarationKind == LocalDeclarationKind.CatchVariable
+            )
               ? local.GetPublicSymbol()
               : null;
         }

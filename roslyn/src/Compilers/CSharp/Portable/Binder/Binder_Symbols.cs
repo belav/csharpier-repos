@@ -2059,14 +2059,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax
         ) {
             Symbol memberSymbol;
-            return
-                TryGetSpecialTypeMember(
-                    this.Compilation,
-                    member,
-                    syntax,
-                    diagnostics,
-                    out memberSymbol
-                )
+            return TryGetSpecialTypeMember(
+                this.Compilation,
+                member,
+                syntax,
+                diagnostics,
+                out memberSymbol
+            )
               ? memberSymbol
               : null;
         }

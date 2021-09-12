@@ -1117,11 +1117,10 @@ namespace System.Xml.XmlDiff
         {
             get
             {
-                return
-                    (
-                        _currentNode is XmlDiffElement
-                        && ((XmlDiffElement)_currentNode).FirstAttribute != null
-                    )
+                return (
+                    _currentNode is XmlDiffElement
+                    && ((XmlDiffElement)_currentNode).FirstAttribute != null
+                )
                   ? true
                   : false;
             }

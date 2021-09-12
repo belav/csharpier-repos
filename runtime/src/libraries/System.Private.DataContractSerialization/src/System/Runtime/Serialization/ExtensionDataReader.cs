@@ -554,8 +554,9 @@ namespace System.Runtime.Serialization
         private ElementData? GetNextElement()
         {
             int nextDepth = _depth + 1;
-            return
-                (_elements == null || _elements.Length <= nextDepth || _elements[nextDepth] == null)
+            return (
+                _elements == null || _elements.Length <= nextDepth || _elements[nextDepth] == null
+            )
               ? new ElementData()
               : _elements[nextDepth];
         }

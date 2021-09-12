@@ -391,13 +391,12 @@ namespace System
                 else
                 {
                     // major.minor.build
-                    return
-                        TryParseComponent(
-                            input.Slice(minorEnd + 1),
-                            nameof(build),
-                            throwOnFailure,
-                            out build
-                        )
+                    return TryParseComponent(
+                        input.Slice(minorEnd + 1),
+                        nameof(build),
+                        throwOnFailure,
+                        out build
+                    )
                       ? new Version(major, minor, build)
                       : null;
                 }
@@ -405,13 +404,12 @@ namespace System
             else
             {
                 // major.minor
-                return
-                    TryParseComponent(
-                        input.Slice(majorEnd + 1),
-                        nameof(input),
-                        throwOnFailure,
-                        out minor
-                    )
+                return TryParseComponent(
+                    input.Slice(majorEnd + 1),
+                    nameof(input),
+                    throwOnFailure,
+                    out minor
+                )
                   ? new Version(major, minor)
                   : null;
             }

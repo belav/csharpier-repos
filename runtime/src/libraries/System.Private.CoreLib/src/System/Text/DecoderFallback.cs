@@ -221,13 +221,12 @@ namespace System.Text
             ReadOnlySpan<byte> remainingBytes,
             int fallbackLength
         ) {
-            return
-                (
-                    Fallback(
-                        remainingBytes.Slice(0, fallbackLength).ToArray(),
-                        index: _originalByteCount - remainingBytes.Length
-                    )
+            return (
+                Fallback(
+                    remainingBytes.Slice(0, fallbackLength).ToArray(),
+                    index: _originalByteCount - remainingBytes.Length
                 )
+            )
               ? DrainRemainingDataForGetCharCount()
               : 0;
         }

@@ -361,8 +361,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             GeneratedNameKind kind;
             int openBracketOffset;
             int closeBracketOffset;
-            return
-                TryParseGeneratedName(name, out kind, out openBracketOffset, out closeBracketOffset)
+            return TryParseGeneratedName(
+                name,
+                out kind,
+                out openBracketOffset,
+                out closeBracketOffset
+            )
               ? kind
               : GeneratedNameKind.None;
         }

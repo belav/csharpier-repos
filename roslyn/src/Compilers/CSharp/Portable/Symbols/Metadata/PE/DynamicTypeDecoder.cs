@@ -368,12 +368,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 return null;
             }
 
-            return
-                TypeSymbol.Equals(
-                    transformedElementType,
-                    arrayType.ElementType,
-                    TypeCompareKind.ConsiderEverything2
-                )
+            return TypeSymbol.Equals(
+                transformedElementType,
+                arrayType.ElementType,
+                TypeCompareKind.ConsiderEverything2
+            )
               ? arrayType
               : arrayType.IsSZArray
                   ? ArrayTypeSymbol.CreateSZArray(
@@ -414,12 +413,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 return null;
             }
 
-            return
-                TypeSymbol.Equals(
-                    transformedPointedAtType,
-                    pointerType.PointedAtType,
-                    TypeCompareKind.ConsiderEverything2
-                )
+            return TypeSymbol.Equals(
+                transformedPointedAtType,
+                pointerType.PointedAtType,
+                TypeCompareKind.ConsiderEverything2
+            )
               ? pointerType
               : new PointerTypeSymbol(
                     pointerType.PointedAtTypeWithAnnotations.WithTypeAndModifiers(

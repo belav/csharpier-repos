@@ -151,8 +151,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             public override IEntryBucket? CreateBucketForEntry(ITableEntryHandle entry)
             {
-                return
-                    entry.TryGetValue(UnusedReferencesTableKeyNames.SolutionName, out string name)
+                return entry.TryGetValue(
+                    UnusedReferencesTableKeyNames.SolutionName,
+                    out string name
+                )
                   ? new ImageEntryBucket(KnownMonikers.Solution, name)
                   : null;
             }
@@ -262,11 +264,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             public override IEntryBucket? CreateBucketForEntry(ITableEntryHandle entry)
             {
-                return
-                    entry.TryGetValue<ReferenceType>(
-                        UnusedReferencesTableKeyNames.ReferenceType,
-                        out var referenceType
-                    )
+                return entry.TryGetValue<ReferenceType>(
+                    UnusedReferencesTableKeyNames.ReferenceType,
+                    out var referenceType
+                )
                   ? new ImageEntryBucket(
                         GetReferenceTypeImageMoniker(referenceType),
                         GetText(referenceType)
@@ -319,19 +320,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             private static ImageMoniker GetImageMoniker(ITableEntryHandle entry)
             {
-                return
-                    entry.TryGetValue(
-                        UnusedReferencesTableKeyNames.ReferenceType,
-                        out ReferenceType referenceType
-                    )
+                return entry.TryGetValue(
+                    UnusedReferencesTableKeyNames.ReferenceType,
+                    out ReferenceType referenceType
+                )
                   ? GetReferenceTypeImageMoniker(referenceType)
                   : default;
             }
 
             private static string GetText(ITableEntryHandle entry)
             {
-                return
-                    entry.TryGetValue(UnusedReferencesTableKeyNames.ReferenceName, out string text)
+                return entry.TryGetValue(
+                    UnusedReferencesTableKeyNames.ReferenceName,
+                    out string text
+                )
                   ? text
                   : string.Empty;
             }

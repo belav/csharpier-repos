@@ -2516,8 +2516,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             case SpecialType.System_Double:
                                 return (double)doubleValue;
                             case SpecialType.System_Decimal:
-                                return
-                                    (value.Discriminator == ConstantValueTypeDiscriminator.Single)
+                                return (
+                                    value.Discriminator == ConstantValueTypeDiscriminator.Single
+                                )
                                   ? (decimal)(float)doubleValue
                                   : (decimal)doubleValue;
                             default:

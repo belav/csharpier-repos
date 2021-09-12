@@ -344,14 +344,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     return LineBreaksAfterCloseBrace(currentToken);
 
                 case SyntaxKind.CloseParenToken:
-                    return
+                    return (
                         (
-                            (
-                                (previousToken.Parent is StatementSyntax)
-                                && currentToken.Parent != previousToken.Parent
-                            )
-                            || currentToken.Kind() == SyntaxKind.OpenBraceToken
+                            (previousToken.Parent is StatementSyntax)
+                            && currentToken.Parent != previousToken.Parent
                         )
+                        || currentToken.Kind() == SyntaxKind.OpenBraceToken
+                    )
                       ? 1
                       : 0;
 

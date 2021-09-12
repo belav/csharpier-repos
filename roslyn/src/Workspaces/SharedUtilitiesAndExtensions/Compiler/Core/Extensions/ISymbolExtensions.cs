@@ -592,13 +592,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 default:
                     return symbol.DeclaredAccessibility;
                 case Accessibility.ProtectedAndInternal:
-                    return
-                        symbol.ContainingAssembly.GivesAccessTo(finalDestination.ContainingAssembly)
+                    return symbol.ContainingAssembly.GivesAccessTo(
+                        finalDestination.ContainingAssembly
+                    )
                       ? Accessibility.ProtectedAndInternal
                       : Accessibility.Internal;
                 case Accessibility.ProtectedOrInternal:
-                    return
-                        symbol.ContainingAssembly.GivesAccessTo(finalDestination.ContainingAssembly)
+                    return symbol.ContainingAssembly.GivesAccessTo(
+                        finalDestination.ContainingAssembly
+                    )
                       ? Accessibility.ProtectedOrInternal
                       : Accessibility.Protected;
             }

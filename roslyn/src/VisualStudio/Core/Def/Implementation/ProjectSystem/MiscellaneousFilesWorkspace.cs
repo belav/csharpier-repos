@@ -463,12 +463,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return parseOptionsOpt.Kind;
             }
 
-            return
-                string.Equals(
-                    fileExtension,
-                    languageInformation.ScriptExtension,
-                    StringComparison.OrdinalIgnoreCase
-                )
+            return string.Equals(
+                fileExtension,
+                languageInformation.ScriptExtension,
+                StringComparison.OrdinalIgnoreCase
+            )
               ? SourceCodeKind.Script
               : SourceCodeKind.Regular;
         }

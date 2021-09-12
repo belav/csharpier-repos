@@ -656,11 +656,10 @@ namespace System.Reflection.Metadata
 
         private int GetReferenceSize(int[] rowCounts, TableIndex index)
         {
-            return
-                (
-                    rowCounts[(int)index] < MetadataStreamConstants.LargeTableRowCount
-                    && !IsMinimalDelta
-                )
+            return (
+                rowCounts[(int)index] < MetadataStreamConstants.LargeTableRowCount
+                && !IsMinimalDelta
+            )
               ? SmallIndexSize
               : LargeIndexSize;
         }

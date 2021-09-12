@@ -239,12 +239,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         ) {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            return
-                TryGetNameWithoutAttributeSuffix(
-                    symbol.ContainingType.Name,
-                    syntaxFacts,
-                    out var simpleName
-                )
+            return TryGetNameWithoutAttributeSuffix(
+                symbol.ContainingType.Name,
+                syntaxFacts,
+                out var simpleName
+            )
               ? FindReferencesInDocumentUsingIdentifierAsync(
                     symbol,
                     simpleName,

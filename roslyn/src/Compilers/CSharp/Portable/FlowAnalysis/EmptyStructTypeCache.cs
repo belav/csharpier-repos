@@ -228,11 +228,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SymbolKind.Event:
                     var eventSymbol = (EventSymbol)member;
-                    return
-                        (
-                            !eventSymbol.HasAssociatedField
-                            || ShouldIgnoreStructField(eventSymbol, eventSymbol.Type)
-                        )
+                    return (
+                        !eventSymbol.HasAssociatedField
+                        || ShouldIgnoreStructField(eventSymbol, eventSymbol.Type)
+                    )
                       ? null
                       : eventSymbol.AssociatedField.AsMember(type);
             }

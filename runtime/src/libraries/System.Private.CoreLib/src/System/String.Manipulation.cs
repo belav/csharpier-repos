@@ -1520,11 +1520,10 @@ namespace System
                 {
                     candidate = candidate.Trim();
                 }
-                return
-                    (
-                        (candidate.Length == 0)
-                        && ((options & StringSplitOptions.RemoveEmptyEntries) != 0)
-                    )
+                return (
+                    (candidate.Length == 0)
+                    && ((options & StringSplitOptions.RemoveEmptyEntries) != 0)
+                )
                   ? Array.Empty<string>()
                   : new string[] { candidate };
             }

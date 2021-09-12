@@ -953,8 +953,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return
-                    extensionExpression is ProjectionBindingExpression projectionBindingExpression
+                return extensionExpression
+                    is ProjectionBindingExpression projectionBindingExpression
                   ? new ProjectionBindingExpression(
                         _queryExpression,
                         // ProjectionMember would be non-null here as we are shifting members

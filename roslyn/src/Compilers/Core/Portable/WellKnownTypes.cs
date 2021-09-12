@@ -659,11 +659,9 @@ namespace Microsoft.CodeAnalysis
         internal static WellKnownType GetWellKnownFunctionDelegate(int invokeArgumentCount)
         {
             Debug.Assert(invokeArgumentCount >= 0);
-            return
-                (
-                    invokeArgumentCount
-                    <= WellKnownType.System_Func_TMax - WellKnownType.System_Func_T
-                )
+            return (
+                invokeArgumentCount <= WellKnownType.System_Func_TMax - WellKnownType.System_Func_T
+            )
               ? (WellKnownType)((int)WellKnownType.System_Func_T + invokeArgumentCount)
               : WellKnownType.Unknown;
         }
@@ -673,11 +671,10 @@ namespace Microsoft.CodeAnalysis
         {
             Debug.Assert(invokeArgumentCount >= 0);
 
-            return
-                (
-                    invokeArgumentCount
-                    <= WellKnownType.System_Action_TMax - WellKnownType.System_Action
-                )
+            return (
+                invokeArgumentCount
+                <= WellKnownType.System_Action_TMax - WellKnownType.System_Action
+            )
               ? (WellKnownType)((int)WellKnownType.System_Action + invokeArgumentCount)
               : WellKnownType.Unknown;
         }

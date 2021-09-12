@@ -145,12 +145,11 @@ namespace System.CommandLine.Binding
                 ValueDescriptor,
                 EnforceExplicitBinding
             );
-            return
-                bindingContext.TryBindToScalarValue(
-                    ValueDescriptor,
-                    valueSource,
-                    out var boundValue
-                )
+            return bindingContext.TryBindToScalarValue(
+                ValueDescriptor,
+                valueSource,
+                out var boundValue
+            )
               ? (true, boundValue?.Value, true)
               : (false, (object?)null, false);
         }

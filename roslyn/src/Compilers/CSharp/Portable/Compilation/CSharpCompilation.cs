@@ -1222,11 +1222,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             RoslynDebug.Assert(directive.SyntaxTree.FilePath is object);
 
             MetadataReference? reference;
-            return
-                ReferenceDirectiveMap.TryGetValue(
-                    (directive.SyntaxTree.FilePath, directive.File.ValueText),
-                    out reference
-                )
+            return ReferenceDirectiveMap.TryGetValue(
+                (directive.SyntaxTree.FilePath, directive.File.ValueText),
+                out reference
+            )
               ? reference
               : null;
         }

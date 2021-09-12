@@ -905,11 +905,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isChecked,
             bool isExplicit
         ) {
-            return
-                (
-                    TypeSymbol.Equals(oldType, newType, TypeCompareKind.ConsiderEverything2)
-                    && !isExplicit
-                )
+            return (
+                TypeSymbol.Equals(oldType, newType, TypeCompareKind.ConsiderEverything2)
+                && !isExplicit
+            )
               ? operand
               : Convert(operand, newType, isChecked);
         }

@@ -174,13 +174,12 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 ),
                 (x, y) =>
                 {
-                    return
-                        (
-                            x.ScopeId == y.ScopeId
-                            && x.FromPrimaryBranch == y.FromPrimaryBranch
-                            && x.WorkspaceVersion == y.WorkspaceVersion
-                            && x.SolutionChecksum == y.SolutionChecksum
-                        )
+                    return (
+                        x.ScopeId == y.ScopeId
+                        && x.FromPrimaryBranch == y.FromPrimaryBranch
+                        && x.WorkspaceVersion == y.WorkspaceVersion
+                        && x.SolutionChecksum == y.SolutionChecksum
+                    )
                       ? 0
                       : 1;
                 }

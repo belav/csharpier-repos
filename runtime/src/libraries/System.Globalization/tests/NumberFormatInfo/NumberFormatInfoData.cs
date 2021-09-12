@@ -77,11 +77,10 @@ namespace System.Globalization.Tests
                       : new int[] { 9 };
 
                 case "es-BO":
-                    return
-                        (
-                            PlatformDetection.IsNlsGlobalization
-                            && PlatformDetection.WindowsVersion < 10
-                        )
+                    return (
+                        PlatformDetection.IsNlsGlobalization
+                        && PlatformDetection.WindowsVersion < 10
+                    )
                       ? new int[] { 14 }
                       : new int[] { 1 };
 

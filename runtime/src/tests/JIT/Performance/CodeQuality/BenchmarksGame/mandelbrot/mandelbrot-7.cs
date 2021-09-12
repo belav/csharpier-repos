@@ -97,8 +97,11 @@ namespace BenchmarksGame
             Console.Out.Write("P4\n{0} {0}\n", size);
             Console.OpenStandardOutput().Write(data, 0, dataLength);
 
-            return
-                MatchesChecksum(data, dataLength, "3B-EF-65-05-1D-39-7F-9B-96-8D-EF-98-BF-06-CE-74")
+            return MatchesChecksum(
+                data,
+                dataLength,
+                "3B-EF-65-05-1D-39-7F-9B-96-8D-EF-98-BF-06-CE-74"
+            )
               ? 100
               : -1;
         }

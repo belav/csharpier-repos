@@ -156,13 +156,12 @@ namespace Internal.JitInterface
             var _this = GetThis(thisHandle);
             try
             {
-                return
-                    _this.canTailCall(
-                        callerHnd,
-                        declaredCalleeHnd,
-                        exactCalleeHnd,
-                        fIsTailPrefix != 0
-                    )
+                return _this.canTailCall(
+                    callerHnd,
+                    declaredCalleeHnd,
+                    exactCalleeHnd,
+                    fIsTailPrefix != 0
+                )
                   ? (byte)1
                   : (byte)0;
             }
@@ -479,14 +478,13 @@ namespace Internal.JitInterface
             var _this = GetThis(thisHandle);
             try
             {
-                return
-                    _this.isCompatibleDelegate(
-                        objCls,
-                        methodParentCls,
-                        method,
-                        delegateCls,
-                        ref *pfIsOpenDelegate
-                    )
+                return _this.isCompatibleDelegate(
+                    objCls,
+                    methodParentCls,
+                    method,
+                    delegateCls,
+                    ref *pfIsOpenDelegate
+                )
                   ? (byte)1
                   : (byte)0;
             }
@@ -1305,13 +1303,12 @@ namespace Internal.JitInterface
             var _this = GetThis(thisHandle);
             try
             {
-                return
-                    _this.getReadyToRunHelper(
-                        ref *pResolvedToken,
-                        ref *pGenericLookupKind,
-                        id,
-                        ref *pLookup
-                    )
+                return _this.getReadyToRunHelper(
+                    ref *pResolvedToken,
+                    ref *pGenericLookupKind,
+                    id,
+                    ref *pLookup
+                )
                   ? (byte)1
                   : (byte)0;
             }
@@ -2256,11 +2253,10 @@ namespace Internal.JitInterface
             var _this = GetThis(thisHandle);
             try
             {
-                return
-                    _this.getSystemVAmd64PassStructInRegisterDescriptor(
-                        structHnd,
-                        structPassInRegDescPtr
-                    )
+                return _this.getSystemVAmd64PassStructInRegisterDescriptor(
+                    structHnd,
+                    structPassInRegDescPtr
+                )
                   ? (byte)1
                   : (byte)0;
             }

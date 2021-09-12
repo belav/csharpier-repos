@@ -378,11 +378,10 @@ namespace System.Net.Http
 
             string knownReasonPhrase = HttpStatusDescription.Get(statusCode);
 
-            return
-                (
-                    knownReasonPhrase != null
-                    && knownReasonPhrase.AsSpan().SequenceEqual(buffer.AsSpan(0, bufferLength))
-                )
+            return (
+                knownReasonPhrase != null
+                && knownReasonPhrase.AsSpan().SequenceEqual(buffer.AsSpan(0, bufferLength))
+            )
               ? knownReasonPhrase
               : new string(buffer, 0, bufferLength);
         }

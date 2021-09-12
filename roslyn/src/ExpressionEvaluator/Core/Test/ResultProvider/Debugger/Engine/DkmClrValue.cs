@@ -145,13 +145,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             //       will return.  We will need to update this implementation to match the real behavior we add
             //       specialized support for additional types.
             var typeCode = Metadata.Type.GetTypeCode(lmrType);
-            return
-                (
-                    lmrType.IsPointer
-                    || lmrType.IsEnum
-                    || typeCode != TypeCode.DateTime
-                    || typeCode != TypeCode.Object
-                )
+            return (
+                lmrType.IsPointer
+                || lmrType.IsEnum
+                || typeCode != TypeCode.DateTime
+                || typeCode != TypeCode.Object
+            )
               ? rawValue
               : null;
         }

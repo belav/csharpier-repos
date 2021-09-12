@@ -1201,11 +1201,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var methodDecl = (BaseMethodDeclarationSyntax)memberDecl;
                         var expressionBody = methodDecl.GetExpressionBodySyntax();
-                        return
-                            (
-                                expressionBody?.FullSpan.Contains(span) == true
-                                || methodDecl.Body?.FullSpan.Contains(span) == true
-                            )
+                        return (
+                            expressionBody?.FullSpan.Contains(span) == true
+                            || methodDecl.Body?.FullSpan.Contains(span) == true
+                        )
                           ? GetOrAddModel(methodDecl)
                           : null;
                     }
@@ -1215,12 +1214,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ConstructorDeclarationSyntax constructorDecl =
                             (ConstructorDeclarationSyntax)memberDecl;
                         var expressionBody = constructorDecl.GetExpressionBodySyntax();
-                        return
-                            (
-                                constructorDecl.Initializer?.FullSpan.Contains(span) == true
-                                || expressionBody?.FullSpan.Contains(span) == true
-                                || constructorDecl.Body?.FullSpan.Contains(span) == true
-                            )
+                        return (
+                            constructorDecl.Initializer?.FullSpan.Contains(span) == true
+                            || expressionBody?.FullSpan.Contains(span) == true
+                            || constructorDecl.Body?.FullSpan.Contains(span) == true
+                        )
                           ? GetOrAddModel(constructorDecl)
                           : null;
                     }
@@ -1245,11 +1243,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         DestructorDeclarationSyntax destructorDecl =
                             (DestructorDeclarationSyntax)memberDecl;
                         var expressionBody = destructorDecl.GetExpressionBodySyntax();
-                        return
-                            (
-                                expressionBody?.FullSpan.Contains(span) == true
-                                || destructorDecl.Body?.FullSpan.Contains(span) == true
-                            )
+                        return (
+                            expressionBody?.FullSpan.Contains(span) == true
+                            || destructorDecl.Body?.FullSpan.Contains(span) == true
+                        )
                           ? GetOrAddModel(destructorDecl)
                           : null;
                     }
@@ -1262,11 +1259,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // NOTE: not UnknownAccessorDeclaration since there's no corresponding method symbol from which to build a member model.
                     {
                         var accessorDecl = (AccessorDeclarationSyntax)memberDecl;
-                        return
-                            (
-                                accessorDecl.ExpressionBody?.FullSpan.Contains(span) == true
-                                || accessorDecl.Body?.FullSpan.Contains(span) == true
-                            )
+                        return (
+                            accessorDecl.ExpressionBody?.FullSpan.Contains(span) == true
+                            || accessorDecl.Body?.FullSpan.Contains(span) == true
+                        )
                           ? GetOrAddModel(accessorDecl)
                           : null;
                     }

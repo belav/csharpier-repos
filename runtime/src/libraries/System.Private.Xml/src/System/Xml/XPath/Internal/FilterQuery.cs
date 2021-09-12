@@ -154,15 +154,14 @@ namespace MS.Internal.Xml.XPath
                     case XPathResultType.Boolean:
                         if (_noPosition)
                         {
-                            return
-                                (
-                                    (bool)_cond.Evaluate(
-                                        new XPathSingletonIterator(
-                                            current, /*moved:*/
-                                            true
-                                        )
+                            return (
+                                (bool)_cond.Evaluate(
+                                    new XPathSingletonIterator(
+                                        current, /*moved:*/
+                                        true
                                     )
                                 )
+                            )
                               ? context
                               : null;
                         }
@@ -170,17 +169,16 @@ namespace MS.Internal.Xml.XPath
                     case XPathResultType.String:
                         if (_noPosition)
                         {
-                            return
+                            return (
                                 (
-                                    (
-                                        (string)_cond.Evaluate(
-                                            new XPathSingletonIterator(
-                                                current, /*moved:*/
-                                                true
-                                            )
+                                    (string)_cond.Evaluate(
+                                        new XPathSingletonIterator(
+                                            current, /*moved:*/
+                                            true
                                         )
-                                    ).Length != 0
-                                )
+                                    )
+                                ).Length != 0
+                            )
                               ? context
                               : null;
                         }

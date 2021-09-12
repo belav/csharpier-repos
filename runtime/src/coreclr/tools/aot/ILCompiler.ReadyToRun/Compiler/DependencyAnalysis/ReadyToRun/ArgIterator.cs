@@ -481,12 +481,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public TypeHandle GetByRefArgumentType(int argNum)
         {
-            return
-                (
-                    argNum < _parameterTypes.Length
-                    && _parameterTypes[argNum].GetCorElementType()
-                        == CorElementType.ELEMENT_TYPE_BYREF
-                )
+            return (
+                argNum < _parameterTypes.Length
+                && _parameterTypes[argNum].GetCorElementType() == CorElementType.ELEMENT_TYPE_BYREF
+            )
               ? _parameterTypes[argNum]
               : default(TypeHandle);
         }

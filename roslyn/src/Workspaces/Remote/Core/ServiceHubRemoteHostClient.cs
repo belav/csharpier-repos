@@ -367,9 +367,8 @@ namespace Microsoft.CodeAnalysis.Remote
         ) {
             try
             {
-                return
-                    _services.GetRequiredService<IExperimentationService>()
-                        .IsExperimentEnabled(experimentName)
+                return _services.GetRequiredService<IExperimentationService>()
+                    .IsExperimentEnabled(experimentName)
                   ? SpecializedTasks.True
                   : SpecializedTasks.False;
             }

@@ -662,12 +662,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             SemanticModel semanticModel,
             ExpressionSyntax originalExpression
         ) {
-            return
-                ShouldBeTreatedAsTypeInsteadOfExpression(
-                    originalExpression,
-                    out _,
-                    out var container
-                )
+            return ShouldBeTreatedAsTypeInsteadOfExpression(
+                originalExpression,
+                out _,
+                out var container
+            )
               ? container
               : semanticModel.GetTypeInfo(originalExpression, _cancellationToken).Type;
         }

@@ -103,12 +103,11 @@ namespace Microsoft.Web.Mvc.ModelBinding
             string resourceName,
             string resourceClassKey
         ) {
-            return
-                (
-                    !String.IsNullOrEmpty(resourceClassKey)
-                    && (controllerContext != null)
-                    && (controllerContext.HttpContext != null)
-                )
+            return (
+                !String.IsNullOrEmpty(resourceClassKey)
+                && (controllerContext != null)
+                && (controllerContext.HttpContext != null)
+            )
               ? controllerContext.HttpContext.GetGlobalResourceObject(
                     resourceClassKey,
                     resourceName,

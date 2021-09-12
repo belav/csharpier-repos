@@ -99,11 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                         var unqualifiedNameIdentifierValueText =
                             unqualifiedName.Identifier.ValueText;
-                        return
-                            (
-                                unqualifiedNameIdentifierValueText != null
-                                && unqualifiedNameIdentifierValueText.Length > 0
-                            )
+                        return (
+                            unqualifiedNameIdentifierValueText != null
+                            && unqualifiedNameIdentifierValueText.Length > 0
+                        )
                           ? MakeMethodName(
                                 "Get",
                                 unqualifiedNameIdentifierValueText,

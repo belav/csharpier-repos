@@ -553,12 +553,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CancellationToken cancellationToken
         ) {
             var syntaxFacts = syntaxContext.GetLanguageService<ISyntaxFactsService>();
-            return
-                syntaxFacts.IsInInactiveRegion(
-                    syntaxContext.SyntaxTree,
-                    syntaxContext.Position,
-                    cancellationToken
-                )
+            return syntaxFacts.IsInInactiveRegion(
+                syntaxContext.SyntaxTree,
+                syntaxContext.Position,
+                cancellationToken
+            )
               ? default
               : await GetSymbolsAsync(
                         completionContext,

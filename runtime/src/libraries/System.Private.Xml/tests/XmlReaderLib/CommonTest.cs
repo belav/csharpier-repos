@@ -2258,16 +2258,15 @@ namespace System.Xml.Tests
                 CError.WriteLine(e);
                 return TEST_PASS;
             }
-            return
-                (
-                    IsSubtreeReader()
-                    || IsXmlTextReader()
-                    || IsXmlNodeReader()
-                    || IsXmlNodeReaderDataDoc()
-                    || IsXmlValidatingReader()
-                    || IsXPathNavigatorReader()
-                    || IsXsltReader()
-                )
+            return (
+                IsSubtreeReader()
+                || IsXmlTextReader()
+                || IsXmlNodeReader()
+                || IsXmlNodeReaderDataDoc()
+                || IsXmlValidatingReader()
+                || IsXPathNavigatorReader()
+                || IsXsltReader()
+            )
               ? TEST_PASS
               : TEST_FAIL;
         }
