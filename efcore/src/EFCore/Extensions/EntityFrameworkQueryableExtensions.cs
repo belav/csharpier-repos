@@ -39,8 +39,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return source.Provider.Execute<IEnumerable>(source.Expression)
-                is IQueryingEnumerable queryingEnumerable
+            return
+                source.Provider.Execute<IEnumerable>(source.Expression)
+                    is IQueryingEnumerable queryingEnumerable
               ? queryingEnumerable.ToQueryString()
               : CoreStrings.NotQueryingEnumerable;
         }

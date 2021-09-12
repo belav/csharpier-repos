@@ -337,12 +337,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 );
             }
 
-            return relationshipBuilder.HasNavigation(
-                (string?)null,
-                pointsToPrincipal: false,
-                fromDataAnnotation: true
-            )
-                is null
+            return
+                relationshipBuilder.HasNavigation(
+                    (string?)null,
+                    pointsToPrincipal: false,
+                    fromDataAnnotation: true
+                )
+                    is null
               ? null
               : foreignKey.PrincipalEntityType.Builder.HasRelationship(
                     foreignKey.DeclaringEntityType,
