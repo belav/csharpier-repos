@@ -214,8 +214,7 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return
-                    _staticBlockInfo == null
+                return _staticBlockInfo == null
                   ? LayoutInt.Zero
                   : _staticBlockInfo.NonGcStatics.Size;
             }
@@ -232,8 +231,7 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return
-                    _staticBlockInfo == null
+                return _staticBlockInfo == null
                   ? LayoutInt.Zero
                   : _staticBlockInfo.NonGcStatics.LargestAlignment;
             }
@@ -265,8 +263,7 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return
-                    _staticBlockInfo == null
+                return _staticBlockInfo == null
                   ? LayoutInt.Zero
                   : _staticBlockInfo.GcStatics.LargestAlignment;
             }
@@ -284,8 +281,7 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return
-                    _staticBlockInfo == null
+                return _staticBlockInfo == null
                   ? LayoutInt.Zero
                   : _staticBlockInfo.ThreadNonGcStatics.Size;
             }
@@ -303,8 +299,7 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return
-                    _staticBlockInfo == null
+                return _staticBlockInfo == null
                   ? LayoutInt.Zero
                   : _staticBlockInfo.ThreadNonGcStatics.LargestAlignment;
             }
@@ -322,8 +317,7 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return
-                    _staticBlockInfo == null
+                return _staticBlockInfo == null
                   ? LayoutInt.Zero
                   : _staticBlockInfo.ThreadGcStatics.Size;
             }
@@ -341,8 +335,7 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return
-                    _staticBlockInfo == null
+                return _staticBlockInfo == null
                   ? LayoutInt.Zero
                   : _staticBlockInfo.ThreadGcStatics.LargestAlignment;
             }

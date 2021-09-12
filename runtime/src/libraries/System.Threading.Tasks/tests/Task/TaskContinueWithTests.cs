@@ -2214,8 +2214,7 @@ namespace System.Threading.Tasks.Tests
             func = iterationsRemaining =>
             {
                 --iterationsRemaining;
-                return
-                    iterationsRemaining > 0
+                return iterationsRemaining > 0
                   ? Task.Factory.StartNew(() => func(iterationsRemaining)).Unwrap()
                   : Task.FromResult(iterationsRemaining);
             };
@@ -2230,8 +2229,7 @@ namespace System.Threading.Tasks.Tests
             Func<int, Task<int>> func = null;
             func = async count =>
             {
-                return
-                    ++count < DiveDepth
+                return ++count < DiveDepth
                   ? await await Task.Factory.StartNew(
                         () => func(count),
                         CancellationToken.None,

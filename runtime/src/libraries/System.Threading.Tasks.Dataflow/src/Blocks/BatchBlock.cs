@@ -716,8 +716,7 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     Common.ContractAssertMonitorStatus(IncomingLock, held: true);
 
-                    return
-                        _boundingState != null
+                    return _boundingState != null
                       ? _dataflowBlockOptions.BoundedCapacity - _boundingState.CurrentCount
                       : _batchSize;
                 }
@@ -1673,8 +1672,7 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     get
                     {
-                        return
-                            _target._nonGreedyState != null
+                        return _target._nonGreedyState != null
                           ? _target._nonGreedyState.TaskForInputProcessing
                           : null;
                     }
@@ -1684,8 +1682,7 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     get
                     {
-                        return
-                            _target._nonGreedyState != null
+                        return _target._nonGreedyState != null
                           ? _target._nonGreedyState.PostponedMessages
                           : null;
                     }

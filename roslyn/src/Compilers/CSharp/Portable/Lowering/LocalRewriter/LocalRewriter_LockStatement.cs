@@ -244,8 +244,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundLockStatement original,
             BoundStatement lockTargetCapture
         ) {
-            return
-                this.Instrument
+            return this.Instrument
               ? _instrumenter.InstrumentLockTargetCapture(original, lockTargetCapture)
               : lockTargetCapture;
         }

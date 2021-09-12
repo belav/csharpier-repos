@@ -70,8 +70,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
 
         public ValueTaskSourceStatus GetStatus(short token)
         {
-            return
-                !ReferenceEquals(_continuation, _continuationCompleted)
+            return !ReferenceEquals(_continuation, _continuationCompleted)
               ? ValueTaskSourceStatus.Pending
               : SocketError == SocketError.Success
                   ? ValueTaskSourceStatus.Succeeded

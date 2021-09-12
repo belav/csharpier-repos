@@ -193,8 +193,7 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 // doesn't mean we were able to map the view to an active doc inside Roslyn.  In this case, we just
                 // don't search anything.
                 var project = _currentDocument?.Project;
-                return
-                    project == null
+                return project == null
                   ? ImmutableArray<ImmutableArray<Project>>.Empty
                   : ImmutableArray.Create(ImmutableArray.Create(project));
             }

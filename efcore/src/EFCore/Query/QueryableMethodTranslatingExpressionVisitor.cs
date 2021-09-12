@@ -821,8 +821,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
             }
 
-            return
-                _subquery
+            return _subquery
               ? QueryCompilationContext.NotTranslatedExpression
               : throw new InvalidOperationException(
                     CoreStrings.TranslationFailed(methodCallExpression.Print())
@@ -835,8 +834,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return
-                    extensionExpression is EntityShaperExpression entityShaper
+                return extensionExpression is EntityShaperExpression entityShaper
                   ? entityShaper.MakeNullable()
                   : base.VisitExtension(extensionExpression);
             }

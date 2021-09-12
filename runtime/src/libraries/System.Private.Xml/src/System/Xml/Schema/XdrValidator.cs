@@ -478,8 +478,7 @@ namespace System.Xml.Schema
         {
             get
             {
-                return
-                    context!.ElementDecl != null
+                return context!.ElementDecl != null
                   ? context.ElementDecl.ContentValidator!.PreserveWhitespace
                   : false;
             }

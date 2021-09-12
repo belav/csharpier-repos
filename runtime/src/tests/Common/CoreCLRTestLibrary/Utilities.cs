@@ -313,8 +313,7 @@ namespace TestLibrary
                 const string Version = "Microsoft Windows";
                 if (RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi) == 0)
                 {
-                    return
-                        osvi.szCSDVersion[0] != '\0'
+                    return osvi.szCSDVersion[0] != '\0'
                       ? string.Format(
                             "{0} {1}.{2}.{3} {4}",
                             Version,
@@ -445,8 +444,7 @@ namespace TestLibrary
 
             alc.Unload();
 
-            return
-                (a.EntryPoint.ReturnType == typeof(void))
+            return (a.EntryPoint.ReturnType == typeof(void))
               ? Environment.ExitCode
               : Convert.ToInt32(res);
         }

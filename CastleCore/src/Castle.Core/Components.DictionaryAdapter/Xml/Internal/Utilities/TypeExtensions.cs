@@ -23,8 +23,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
     {
         public static Type NonNullable(this Type type)
         {
-            return
-                type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
               ? type.GetGenericArguments()[0]
               : type;
         }

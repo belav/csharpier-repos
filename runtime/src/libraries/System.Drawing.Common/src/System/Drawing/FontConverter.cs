@@ -432,8 +432,7 @@ namespace System.Drawing
 
             public override bool CanConvertFrom(ITypeDescriptorContext? context, Type? sourceType)
             {
-                return
-                    sourceType == typeof(string)
+                return sourceType == typeof(string)
                   ? true
                   : base.CanConvertFrom(context, sourceType);
             }
@@ -443,8 +442,7 @@ namespace System.Drawing
                 CultureInfo? culture,
                 object value
             ) {
-                return
-                    value is string strValue
+                return value is string strValue
                   ? MatchFontName(strValue, context)
                   : base.ConvertFrom(context, culture, value);
             }

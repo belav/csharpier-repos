@@ -460,8 +460,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundKind.TypeExpression => false,
                 _ => true
             };
-            return
-                wasExpression
+            return wasExpression
               ? BindExpressionForPatternContinued(
                     expression,
                     inputType,
@@ -828,8 +827,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 operandConstantValue,
                 operandCouldBeNull
             );
-            return
-                (result == null)
+            return (result == null)
               ? (bool?)null
               : (result == ConstantValue.True)
                   ? true

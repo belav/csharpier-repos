@@ -313,8 +313,7 @@ namespace System.Speech.Internal
                 }
             }
 
-            return
-                waveEx != null
+            return waveEx != null
               ? new SpeechAudioFormatInfo(
                     (EncodingFormat)waveEx.wFormatTag,
                     (int)waveEx.nSamplesPerSec,

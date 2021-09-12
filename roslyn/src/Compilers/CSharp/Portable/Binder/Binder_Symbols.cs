@@ -64,8 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             var symbol = BindTypeOrAliasOrConstraintKeyword(syntax, diagnostics, out keyword);
             Debug.Assert((keyword != ConstraintContextualKeyword.None) == symbol.IsDefault);
-            return
-                (keyword != ConstraintContextualKeyword.None)
+            return (keyword != ConstraintContextualKeyword.None)
               ? default
               : UnwrapAlias(symbol, diagnostics, syntax).TypeWithAnnotations;
         }
@@ -1389,8 +1388,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //  SPEC:   such that its right-most identifier is a verbatim identifier (§2.4.2), then only
                 //  SPEC:   an attribute without a suffix is matched, thus enabling such an ambiguity to be resolved.
 
-                return
-                    isVerbatimIdentifier
+                return isVerbatimIdentifier
                   ? LookupOptions.VerbatimNameAttributeTypeOnly
                   : LookupOptions.AttributeTypeOnly;
             }
@@ -3145,15 +3143,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             var containingAssembly = symbol.ContainingAssembly;
             if (containingAssembly == compilation.SourceAssembly)
             {
-                return
-                    (symbol.ContainingModule == compilation.SourceModule)
+                return (symbol.ContainingModule == compilation.SourceModule)
                   ? BestSymbolLocation.FromSourceModule
                   : BestSymbolLocation.FromAddedModule;
             }
             else
             {
-                return
-                    (containingAssembly == containingAssembly.CorLibrary)
+                return (containingAssembly == containingAssembly.CorLibrary)
                   ? BestSymbolLocation.FromCorLibrary
                   : BestSymbolLocation.FromReferencedAssembly;
             }
@@ -3230,8 +3226,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             aliasOpt == null
                                 || aliasOpt == SyntaxFacts.GetText(SyntaxKind.GlobalKeyword)
                         );
-                        return
-                            (object)forwardedToAssembly == null
+                        return (object)forwardedToAssembly == null
                           ? diagnostics.Add(
                                 ErrorCode.ERR_GlobalSingleTypeNameNotFound,
                                 location,
@@ -3259,8 +3254,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             container = aliasOpt;
                         }
 
-                        return
-                            (object)forwardedToAssembly == null
+                        return (object)forwardedToAssembly == null
                           ? diagnostics.Add(
                                 ErrorCode.ERR_DottedTypeNameNotFoundInNS,
                                 location,
@@ -3304,8 +3298,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if ((object)forwardedToAssembly != null)
             {
-                return
-                    qualifierOpt == null
+                return qualifierOpt == null
                   ? diagnostics.Add(
                         ErrorCode.ERR_SingleTypeNameNotFoundFwd,
                         location,

@@ -155,8 +155,7 @@ namespace Roslyn.Utilities
 
         internal static string? GetWithoutAttributeSuffix(this string name, bool isCaseSensitive)
         {
-            return
-                TryGetWithoutAttributeSuffix(name, isCaseSensitive, out var result)
+            return TryGetWithoutAttributeSuffix(name, isCaseSensitive, out var result)
               ? result
               : null;
         }

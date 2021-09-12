@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public ImmutableArray<LocalSymbol> GetLocals()
             {
-                return
-                    (_locals == null)
+                return (_locals == null)
                   ? ImmutableArray<LocalSymbol>.Empty
                   : _locals.ToImmutable();
             }

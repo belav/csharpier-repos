@@ -193,8 +193,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
                 if (contentLength == 0)
                 {
-                    return
-                        keepAlive
+                    return keepAlive
                       ? MessageBody.ZeroContentLengthKeepAlive
                       : MessageBody.ZeroContentLengthClose;
                 }
@@ -214,8 +213,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }
 
             context.OnTrailersComplete(); // No trailers for these.
-            return
-                keepAlive
+            return keepAlive
               ? MessageBody.ZeroContentLengthKeepAlive
               : MessageBody.ZeroContentLengthClose;
         }

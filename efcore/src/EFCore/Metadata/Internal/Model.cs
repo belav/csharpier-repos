@@ -500,8 +500,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual IEnumerable<EntityType> FindEntityTypes(Type type)
         {
             var result = GetEntityTypes(GetDisplayName(type));
-            return
-                _sharedTypes.TryGetValue(type, out var existingTypes)
+            return _sharedTypes.TryGetValue(type, out var existingTypes)
               ? result.Concat(existingTypes.Types)
               : result;
         }

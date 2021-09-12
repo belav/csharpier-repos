@@ -73,8 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
 
         protected static CommandState GetCommandState(ITextBuffer buffer)
         {
-            return
-                buffer.CanApplyChangeDocumentToWorkspace()
+            return buffer.CanApplyChangeDocumentToWorkspace()
               ? CommandState.Available
               : CommandState.Unspecified;
         }

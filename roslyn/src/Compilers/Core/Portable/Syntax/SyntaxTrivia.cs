@@ -91,8 +91,7 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return
-                    UnderlyingNode != null
+                return UnderlyingNode != null
                   ? new TextSpan(
                         Position + UnderlyingNode.GetLeadingTriviaWidth(),
                         UnderlyingNode.Width
@@ -111,8 +110,7 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return
-                    UnderlyingNode != null
+                return UnderlyingNode != null
                   ? Position + UnderlyingNode.GetLeadingTriviaWidth()
                   : 0; // default(TextSpan).Start
             }
@@ -126,8 +124,7 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return
-                    UnderlyingNode != null
+                return UnderlyingNode != null
                   ? new TextSpan(Position, UnderlyingNode.FullWidth)
                   : default(TextSpan);
             }
@@ -187,8 +184,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IEnumerable<SyntaxAnnotation> GetAnnotations(string annotationKind)
         {
-            return
-                UnderlyingNode != null
+            return UnderlyingNode != null
               ? UnderlyingNode.GetAnnotations(annotationKind)
               : SpecializedCollections.EmptyEnumerable<SyntaxAnnotation>();
         }
@@ -198,8 +194,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IEnumerable<SyntaxAnnotation> GetAnnotations(params string[] annotationKinds)
         {
-            return
-                UnderlyingNode != null
+            return UnderlyingNode != null
               ? UnderlyingNode.GetAnnotations(annotationKinds)
               : SpecializedCollections.EmptyEnumerable<SyntaxAnnotation>();
         }

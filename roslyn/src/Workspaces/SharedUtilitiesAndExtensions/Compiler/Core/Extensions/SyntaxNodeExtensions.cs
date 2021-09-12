@@ -806,8 +806,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             bool includeDirectives = false,
             bool includeDocumentationComments = false
         ) {
-            return
-                (position < root.FullSpan.End || !(root is ICompilationUnitSyntax))
+            return (position < root.FullSpan.End || !(root is ICompilationUnitSyntax))
               ? root.FindToken(
                     position,
                     includeSkipped || includeDirectives || includeDocumentationComments

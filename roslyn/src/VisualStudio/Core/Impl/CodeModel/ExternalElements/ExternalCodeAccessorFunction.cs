@@ -64,8 +64,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
         protected override bool GetCanOverride()
         {
-            return
-                IsPropertyAccessor()
+            return IsPropertyAccessor()
               ? ((ExternalCodeProperty)_parentHandle.Value).CanOverride
               : ((ExternalCodeEvent)_parentHandle.Value).CanOverride;
         }

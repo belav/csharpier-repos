@@ -269,8 +269,7 @@ namespace RazorSyntaxGenerator
 
         protected string StripNode(string name)
         {
-            return
-                (_tree.Root.EndsWith("Node", StringComparison.Ordinal))
+            return (_tree.Root.EndsWith("Node", StringComparison.Ordinal))
               ? _tree.Root.Substring(0, _tree.Root.Length - 4)
               : _tree.Root;
         }
@@ -287,8 +286,7 @@ namespace RazorSyntaxGenerator
 
         protected static string StripPost(string name, string post)
         {
-            return
-                name.EndsWith(post, StringComparison.Ordinal)
+            return name.EndsWith(post, StringComparison.Ordinal)
               ? name.Substring(0, name.Length - post.Length)
               : name;
         }

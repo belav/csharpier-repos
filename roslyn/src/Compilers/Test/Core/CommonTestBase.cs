@@ -522,8 +522,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Compilation comp,
             bool useCompilationReference
         ) {
-            return
-                useCompilationReference
+            return useCompilationReference
               ? comp.ToMetadataReference()
               : comp.EmitToImageReference();
         }

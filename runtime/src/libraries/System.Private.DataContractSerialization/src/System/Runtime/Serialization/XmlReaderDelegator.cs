@@ -1195,8 +1195,7 @@ namespace System.Runtime.Serialization
 
         internal IDictionary<string, string>? GetNamespacesInScope(XmlNamespaceScope scope)
         {
-            return
-                (reader is IXmlNamespaceResolver)
+            return (reader is IXmlNamespaceResolver)
               ? ((IXmlNamespaceResolver)reader).GetNamespacesInScope(scope)
               : null;
         }
@@ -1262,8 +1261,7 @@ namespace System.Runtime.Serialization
                 if (xmlTextReader == null)
                 {
                     IXmlTextParser? xmlTextParser = reader as IXmlTextParser;
-                    return
-                        (xmlTextParser == null)
+                    return (xmlTextParser == null)
                       ? WhitespaceHandling.None
                       : xmlTextParser.WhitespaceHandling;
                 }

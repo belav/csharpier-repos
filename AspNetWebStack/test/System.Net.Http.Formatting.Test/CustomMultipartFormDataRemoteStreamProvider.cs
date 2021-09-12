@@ -28,8 +28,7 @@ namespace System.Net.Http
             HttpContentHeaders headers
         ) {
             string fileName = headers.ContentDisposition.FileName;
-            return
-                _isResultNull
+            return _isResultNull
               ? null
               : new RemoteStreamInfo(CreateMockStream(), UrlBase + fileName, fileName);
         }

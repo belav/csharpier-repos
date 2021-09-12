@@ -18,8 +18,7 @@ namespace System.Runtime.Serialization.Json
         ) {
             if (context == null)
             {
-                return
-                    TryReadNullAtTopLevel(jsonReader)
+                return TryReadNullAtTopLevel(jsonReader)
                   ? null
                   : jsonReader.ReadElementContentAsUri();
             }

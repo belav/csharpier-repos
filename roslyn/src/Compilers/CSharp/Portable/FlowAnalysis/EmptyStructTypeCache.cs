@@ -222,8 +222,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return null;
                     }
 
-                    return
-                        (field.IsFixedSizeBuffer || ShouldIgnoreStructField(field, field.Type))
+                    return (field.IsFixedSizeBuffer || ShouldIgnoreStructField(field, field.Type))
                       ? null
                       : field.AsMember(type);
 

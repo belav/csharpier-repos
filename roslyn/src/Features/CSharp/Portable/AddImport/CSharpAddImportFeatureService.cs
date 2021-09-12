@@ -384,8 +384,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                 return (usingDirectiveString, false);
             }
 
-            return
-                externAlias != null
+            return externAlias != null
               ? (externAliasString, hasExistingExtern)
               : (usingDirectiveString, hasExistingUsing);
         }
@@ -393,8 +392,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
         private static string GetUsingDirectiveString(INamespaceOrTypeSymbol namespaceOrTypeSymbol)
         {
             var displayString = namespaceOrTypeSymbol.ToDisplayString();
-            return
-                namespaceOrTypeSymbol.IsKind(SymbolKind.Namespace)
+            return namespaceOrTypeSymbol.IsKind(SymbolKind.Namespace)
               ? $"using {displayString};"
               : $"using static {displayString};";
         }
@@ -520,8 +518,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             }
 
             var namePiece = SyntaxFactory.IdentifierName(part);
-            return
-                index == 0
+            return index == 0
               ? (NameSyntax)namePiece
               : SyntaxFactory.QualifiedName(CreateNameSyntax(namespaceParts, index - 1), namePiece);
         }

@@ -189,8 +189,7 @@ namespace Microsoft.CodeAnalysis.Emit
                     if (adapter is IDefinition definition)
                     {
                         // If the definition did not exist in the previous generation, it was added.
-                        return
-                            _definitionMap.DefinitionExists(definition)
+                        return _definitionMap.DefinitionExists(definition)
                           ? SymbolChange.None
                           : SymbolChange.Added;
                     }
@@ -199,8 +198,7 @@ namespace Microsoft.CodeAnalysis.Emit
                     {
                         // If the namespace did not exist in the previous generation, it was added.
                         // Otherwise the namespace may contain changes.
-                        return
-                            _definitionMap.NamespaceExists(@namespace)
+                        return _definitionMap.NamespaceExists(@namespace)
                           ? SymbolChange.ContainsChanges
                           : SymbolChange.Added;
                     }

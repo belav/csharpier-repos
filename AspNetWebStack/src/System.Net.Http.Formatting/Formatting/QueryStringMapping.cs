@@ -71,8 +71,7 @@ namespace System.Net.Http.Formatting
             }
 
             NameValueCollection queryString = GetQueryString(request.RequestUri);
-            return
-                DoesQueryStringMatch(queryString)
+            return DoesQueryStringMatch(queryString)
               ? FormattingUtilities.Match
               : FormattingUtilities.NoMatch;
         }

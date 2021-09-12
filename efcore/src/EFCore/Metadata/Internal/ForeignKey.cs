@@ -658,8 +658,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ? null
                     : (ConfigurationSource?)configurationSource.Max(_isUniqueConfigurationSource);
 
-            return
-                IsUnique != oldUnique
+            return IsUnique != oldUnique
               ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(
                     Builder
                 )
@@ -708,8 +707,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ? null
                     : (ConfigurationSource?)configurationSource.Max(_isRequiredConfigurationSource);
 
-            return
-                IsRequired != oldRequired
+            return IsRequired != oldRequired
               ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(
                     Builder
                 )
@@ -780,8 +778,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ? null
                     : (ConfigurationSource?)configurationSource.Max(_isRequiredConfigurationSource);
 
-            return
-                IsRequiredDependent != oldRequired
+            return IsRequiredDependent != oldRequired
               ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(
                     Builder
                 )
@@ -915,8 +912,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 UpdateIsOwnershipConfigurationSource(configurationSource);
             }
 
-            return
-                IsOwnership != oldIsOwnership
+            return IsOwnership != oldIsOwnership
               ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyOwnershipChanged(Builder)
               : oldIsOwnership;
         }

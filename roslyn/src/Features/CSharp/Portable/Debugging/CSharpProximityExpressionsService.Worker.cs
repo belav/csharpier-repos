@@ -100,8 +100,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
             private BlockSyntax GetImmediatelyContainingBlock()
             {
-                return
-                    IsFirstBlockStatement()
+                return IsFirstBlockStatement()
                   ? (BlockSyntax)_parentStatement.Parent
                   : _parentStatement is BlockSyntax
                     && ((BlockSyntax)_parentStatement).OpenBraceToken == _token

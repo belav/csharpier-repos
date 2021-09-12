@@ -169,8 +169,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 ? originalToken.ToString().Substring(1)
                 : originalToken.ToString();
 
-            return
-                escape
+            return escape
               ? originalToken.CopyAnnotationsTo(
                     SyntaxFactory.VerbatimIdentifier(
                         originalToken.LeadingTrivia,

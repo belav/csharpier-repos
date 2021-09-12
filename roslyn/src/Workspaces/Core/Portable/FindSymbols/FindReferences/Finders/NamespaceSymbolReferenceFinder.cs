@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
         private static string GetNamespaceIdentifierName(INamespaceSymbol symbol)
         {
-            return
-                symbol.IsGlobalNamespace
+            return symbol.IsGlobalNamespace
               ? symbol.ToDisplayString(s_globalNamespaceFormat)
               : symbol.Name;
         }

@@ -359,8 +359,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this.ContainingSymbol.OriginalDefinition
                 )
             );
-            return
-                newOwner.IsDefinition
+            return newOwner.IsDefinition
               ? this
               : new SubstitutedPropertySymbol(newOwner as SubstitutedNamedTypeSymbol, this);
         }

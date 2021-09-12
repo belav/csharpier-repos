@@ -126,8 +126,7 @@ namespace System
                 // in this example.  Only when the user passes in TimeZoneInfo.Local or
                 // TimeZoneInfo.Utc to the ConvertTime(...) methods will this check succeed.
                 //
-                return
-                    ReferenceEquals(timeZone, s_utcTimeZone)
+                return ReferenceEquals(timeZone, s_utcTimeZone)
                   ? DateTimeKind.Utc
                   : ReferenceEquals(timeZone, _localTimeZone)
                       ? DateTimeKind.Local
@@ -702,8 +701,7 @@ namespace System
             // check for overflow
             long ticks = utcDateTime.Ticks + destinationOffset.Ticks;
 
-            return
-                ticks > DateTimeOffset.MaxValue.Ticks
+            return ticks > DateTimeOffset.MaxValue.Ticks
               ? DateTimeOffset.MaxValue
               : ticks < DateTimeOffset.MinValue.Ticks
                   ? DateTimeOffset.MinValue
@@ -995,8 +993,7 @@ namespace System
                         {
                             // sort by BaseUtcOffset first and by DisplayName second - this is similar to the Windows Date/Time control panel
                             int comparison = x.BaseUtcOffset.CompareTo(y.BaseUtcOffset);
-                            return
-                                comparison == 0
+                            return comparison == 0
                               ? string.CompareOrdinal(x.DisplayName, y.DisplayName)
                               : comparison;
                         }
@@ -1448,8 +1445,7 @@ namespace System
 
             long ticks = dateTime.Ticks + offset.Ticks;
 
-            return
-                ticks > DateTime.MaxValue.Ticks
+            return ticks > DateTime.MaxValue.Ticks
               ? DateTime.MaxValue
               : ticks < DateTime.MinValue.Ticks ? DateTime.MinValue : new DateTime(ticks);
         }
@@ -1478,8 +1474,7 @@ namespace System
             );
             ticks += offset.Ticks;
 
-            return
-                ticks > DateTime.MaxValue.Ticks
+            return ticks > DateTime.MaxValue.Ticks
               ? DateTime.MaxValue
               : ticks < DateTime.MinValue.Ticks ? DateTime.MinValue : new DateTime(ticks);
         }

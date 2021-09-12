@@ -22,8 +22,7 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.second);
             }
 
-            return
-                first is ConcatIterator<TSource> firstConcat
+            return first is ConcatIterator<TSource> firstConcat
               ? firstConcat.Concat(second)
               : new Concat2Iterator<TSource>(first, second);
         }

@@ -2976,8 +2976,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         }
 
                         followedByDirective = false;
-                        return
-                            TextWindow.Width > 0
+                        return TextWindow.Width > 0
                           ? SyntaxFactory.DisabledText(TextWindow.GetText(false))
                           : null;
                     case '#':
@@ -2990,8 +2989,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         }
 
                         TextWindow.Reset(lastLineStart); // reset so directive parser can consume the starting whitespace on this line
-                        return
-                            TextWindow.Width > 0
+                        return TextWindow.Width > 0
                           ? SyntaxFactory.DisabledText(TextWindow.GetText(false))
                           : null;
                     case '\r':

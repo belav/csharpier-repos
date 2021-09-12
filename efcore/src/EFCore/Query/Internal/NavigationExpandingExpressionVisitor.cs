@@ -2410,8 +2410,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         allDefault &= arguments[i].NodeType == ExpressionType.Default;
                     }
 
-                    return
-                        allDefault
+                    return allDefault
                       ? Expression.Default(newExpression.Type)
                       : (Expression)newExpression.Update(arguments);
                 }

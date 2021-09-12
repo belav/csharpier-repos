@@ -1500,8 +1500,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override TypeSymbol? GetPointedToType(TypeSymbol type)
             {
-                return
-                    type.Kind == SymbolKind.PointerType
+                return type.Kind == SymbolKind.PointerType
                   ? ((PointerTypeSymbol)type).PointedAtType
                   : null;
             }

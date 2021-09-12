@@ -162,8 +162,7 @@ namespace System.Text
                 Stream innerStream = _innerStream;
                 _innerStream = null!;
 
-                return
-                    (_leaveOpen)
+                return (_leaveOpen)
                   ? default /* no work to do */
                   : innerStream.DisposeAsync();
             }
@@ -513,8 +512,7 @@ namespace System.Text
         {
             Span<byte> buffer = stackalloc byte[1];
             int bytesRead = Read(buffer);
-            return
-                (bytesRead == 0)
+            return (bytesRead == 0)
               ? -1 /* EOF */
               : buffer[0];
         }

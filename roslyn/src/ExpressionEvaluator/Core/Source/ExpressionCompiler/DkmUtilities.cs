@@ -127,8 +127,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 }
                 builder.Add(block);
             }
-            return
-                builder == null
+            return builder == null
               ? ImmutableArray<MetadataBlock>.Empty
               : builder.ToImmutableAndFree();
         }

@@ -194,8 +194,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             get
             {
                 Debug.Assert(this.IsStatic);
-                return
-                    this.IsGenericMethod
+                return this.IsGenericMethod
                   ? Cci.CallingConvention.Generic
                   : Cci.CallingConvention.Default;
             }

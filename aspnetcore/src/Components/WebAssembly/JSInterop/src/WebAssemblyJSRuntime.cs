@@ -142,8 +142,7 @@ namespace Microsoft.JSInterop.WebAssembly
                         arg1,
                         arg2
                     );
-                    return
-                        exception != null
+                    return exception != null
                       ? throw new JSException(exception)
                       : (TResult)(object)new WebAssemblyJSObjectReference(this, id);
                 default:

@@ -118,8 +118,7 @@ namespace AutoMapper.QueryableExtensions.Impl
                 letPropertyMaps,
                 out var typeMap
             );
-            return
-                letPropertyMaps.Count > 0
+            return letPropertyMaps.Count > 0
               ? letPropertyMaps.GetSubQueryExpression(
                     this,
                     projection,
@@ -238,8 +237,7 @@ namespace AutoMapper.QueryableExtensions.Impl
                         resolvedSource,
                         letPropertyMaps
                     );
-                    return
-                        mappedExpression == null
+                    return mappedExpression == null
                       ? null
                       : memberMap.ApplyTransformers(mappedExpression);
                     Expression ResolveSource()
@@ -289,8 +287,7 @@ namespace AutoMapper.QueryableExtensions.Impl
                             {
                                 return instanceParameter;
                             }
-                            return
-                                customSource.IsMemberPath(out _)
+                            return customSource.IsMemberPath(out _)
                               ? customSource.ReplaceParameters(instanceParameter)
                               : letPropertyMaps.GetSubQueryMarker(customSource);
                         }
@@ -638,8 +635,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             protected override Expression GetValue(string name)
             {
                 var matchingMember = _parameters.GetType().GetProperty(name);
-                return
-                    matchingMember != null
+                return matchingMember != null
                   ? Property(Constant(_parameters), matchingMember)
                   : null;
             }

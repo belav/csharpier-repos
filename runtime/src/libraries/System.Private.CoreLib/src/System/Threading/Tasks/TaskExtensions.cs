@@ -19,8 +19,7 @@ namespace System.Threading.Tasks
             // If the task hasn't completed or was faulted/canceled, wrap it in an unwrap promise. Otherwise,
             // it completed successfully.  Return its inner task to avoid unnecessary wrapping, or if the inner
             // task is null, return a canceled task to match the same semantics as CreateUnwrapPromise.
-            return
-                !task.IsCompletedSuccessfully
+            return !task.IsCompletedSuccessfully
               ? Task.CreateUnwrapPromise<VoidTaskResult>(task, lookForOce: false)
               : task.Result ?? Task.FromCanceled(new CancellationToken(true));
         }
@@ -38,8 +37,7 @@ namespace System.Threading.Tasks
             // If the task hasn't completed or was faulted/canceled, wrap it in an unwrap promise. Otherwise,
             // it completed successfully.  Return its inner task to avoid unnecessary wrapping, or if the inner
             // task is null, return a canceled task to match the same semantics as CreateUnwrapPromise.
-            return
-                !task.IsCompletedSuccessfully
+            return !task.IsCompletedSuccessfully
               ? Task.CreateUnwrapPromise<TResult>(task, lookForOce: false)
               : task.Result ?? Task.FromCanceled<TResult>(new CancellationToken(true));
         }

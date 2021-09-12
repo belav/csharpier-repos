@@ -61,8 +61,7 @@ namespace Microsoft.Cci
         {
             get
             {
-                return
-                    _inheritingType.IsInterface || _inheritingType.IsDelegate
+                return _inheritingType.IsInterface || _inheritingType.IsDelegate
                   ? _parentParameter.Variance
                   : TypeParameterVariance.NonVariant;
             }

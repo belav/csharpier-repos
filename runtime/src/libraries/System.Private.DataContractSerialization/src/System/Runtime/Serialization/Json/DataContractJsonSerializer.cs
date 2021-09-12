@@ -474,8 +474,7 @@ namespace System.Runtime.Serialization.Json
 
         internal static XmlDictionaryString? ConvertXmlNameToJsonName(XmlDictionaryString? xmlName)
         {
-            return
-                (xmlName == null)
+            return (xmlName == null)
               ? null
               : new XmlDictionary().Add(ConvertXmlNameToJsonName(xmlName.Value));
         }
@@ -859,8 +858,7 @@ namespace System.Runtime.Serialization.Json
 
         internal static bool CheckIfXmlNameRequiresMapping(string xmlName)
         {
-            return
-                (xmlName == null)
+            return (xmlName == null)
               ? false
               : CheckIfJsonNameRequiresMapping(ConvertXmlNameToJsonName(xmlName));
         }
@@ -878,8 +876,7 @@ namespace System.Runtime.Serialization.Json
         [return: NotNullIfNotNull("xmlName")]
         internal static XmlDictionaryString? ConvertXmlNameToJsonName(XmlDictionaryString? xmlName)
         {
-            return
-                (xmlName == null)
+            return (xmlName == null)
               ? null
               : new XmlDictionary().Add(ConvertXmlNameToJsonName(xmlName.Value));
         }

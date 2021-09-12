@@ -94,8 +94,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public int CompareTo(VersionOld value)
         {
-            return
-                object.ReferenceEquals(value, this)
+            return object.ReferenceEquals(value, this)
               ? 0
               : value is null
                   ? 1

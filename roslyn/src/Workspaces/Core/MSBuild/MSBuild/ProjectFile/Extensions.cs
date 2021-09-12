@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
         {
             var aliasesText = item.GetMetadata(MetadataNames.Aliases);
 
-            return
-                !RoslynString.IsNullOrWhiteSpace(aliasesText)
+            return !RoslynString.IsNullOrWhiteSpace(aliasesText)
               ? ImmutableArray.CreateRange(
                     aliasesText.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(a => a.Trim())

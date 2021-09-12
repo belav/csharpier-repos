@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var lhsRead = MakeRValue(transformedLHS);
             BoundExpression loweredRight = VisitExpression(node.RightOperand);
 
-            return
-                node.IsNullableValueTypeAssignment
+            return node.IsNullableValueTypeAssignment
               ? rewriteNullCoalescingAssignmentForValueType()
               : rewriteNullCoalscingAssignmentStandard();
 
@@ -66,8 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 Debug.Assert(conditionalExpression.Type is { });
 
-                return
-                    (temps.Count == 0 && stores.Count == 0)
+                return (temps.Count == 0 && stores.Count == 0)
                   ? conditionalExpression
                   : new BoundSequence(
                         syntax,

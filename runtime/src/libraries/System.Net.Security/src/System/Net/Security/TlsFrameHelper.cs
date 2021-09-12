@@ -891,8 +891,7 @@ namespace System.Net.Security
             ReadOnlySpan<byte> bytes,
             int numberOfBytesToSkip
         ) {
-            return
-                (numberOfBytesToSkip < bytes.Length)
+            return (numberOfBytesToSkip < bytes.Length)
               ? bytes.Slice(numberOfBytesToSkip)
               : ReadOnlySpan<byte>.Empty;
         }

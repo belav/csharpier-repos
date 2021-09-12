@@ -839,8 +839,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case UserDefinedConversionResultKind.NoApplicableOperators:
                         if (conversionResult.Results.IsDefaultOrEmpty)
                         {
-                            return
-                                this.Kind == ConversionKind.NoConversion
+                            return this.Kind == ConversionKind.NoConversion
                               ? LookupResultKind.Empty
                               : LookupResultKind.Viable;
                         }

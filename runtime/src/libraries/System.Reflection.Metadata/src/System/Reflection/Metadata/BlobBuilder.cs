@@ -1194,8 +1194,7 @@ namespace System.Reflection.Metadata
 
         internal string GetDebuggerDisplay()
         {
-            return
-                IsHead
+            return IsHead
               ? string.Join(
                     "->",
                     GetChunks().Select(chunk => $"[{Display(chunk._buffer, chunk.Length)}]")
@@ -1207,8 +1206,7 @@ namespace System.Reflection.Metadata
         {
             const int MaxDisplaySize = 64;
 
-            return
-                (length <= MaxDisplaySize)
+            return (length <= MaxDisplaySize)
               ? BitConverter.ToString(bytes, 0, length)
               : BitConverter.ToString(bytes, 0, MaxDisplaySize / 2)
                 + "-...-"

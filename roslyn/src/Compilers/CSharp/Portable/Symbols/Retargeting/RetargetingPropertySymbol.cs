@@ -136,8 +136,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return
-                    (object)_underlyingProperty.GetMethod == null
+                return (object)_underlyingProperty.GetMethod == null
                   ? null
                   : this.RetargetingTranslator.Retarget(_underlyingProperty.GetMethod);
             }
@@ -147,8 +146,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return
-                    (object)_underlyingProperty.SetMethod == null
+                return (object)_underlyingProperty.SetMethod == null
                   ? null
                   : this.RetargetingTranslator.Retarget(_underlyingProperty.SetMethod);
             }

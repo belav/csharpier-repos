@@ -15,8 +15,7 @@ namespace System.Globalization
         {
             Debug.Assert(GlobalizationMode.UseNls);
 
-            return
-                GlobalizationMode.Invariant
+            return GlobalizationMode.Invariant
               ? Invariant.iTwoDigitYearMax
               : CallGetCalendarInfoEx(
                     null,

@@ -140,8 +140,7 @@ namespace Microsoft.Cci
                 right.TypeName
             );
 
-            return
-                (result == 0)
+            return (result == 0)
               ? CompareResourceIdentifiers(left.Id, left.Name, right.Id, right.Name)
               : result;
         }

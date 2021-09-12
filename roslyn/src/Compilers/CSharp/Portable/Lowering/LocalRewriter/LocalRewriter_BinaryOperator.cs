@@ -754,8 +754,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            return
-                (oldNode != null)
+            return (oldNode != null)
               ? oldNode.Update(
                     operatorKind,
                     oldNode.ConstantValueOpt,
@@ -2890,8 +2889,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            return
-                oldNode == null
+            return oldNode == null
               ? new BoundBinaryOperator(
                     syntax,
                     operatorKind,
@@ -3044,8 +3042,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         throw ExceptionUtilities.UnexpectedValue(numericSpecialType);
                 }
 
-                return
-                    destinationType == numericSpecialType
+                return destinationType == numericSpecialType
                   ? numericOperand
                   : _factory.Convert(
                         _factory.SpecialType(destinationType),

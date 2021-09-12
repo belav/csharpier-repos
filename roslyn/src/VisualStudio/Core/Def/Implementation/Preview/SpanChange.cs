@@ -87,8 +87,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         internal string GetApplicableText()
         {
-            return
-                CheckState == __PREVIEWCHANGESITEMCHECKSTATE.PCCS_Unchecked
+            return CheckState == __PREVIEWCHANGESITEMCHECKSTATE.PCCS_Unchecked
               ? _leftText
               : _rightText;
         }

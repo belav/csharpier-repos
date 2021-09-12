@@ -134,8 +134,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var limit = (SqlExpression?)Visit(selectExpression.Limit);
             changed |= limit != selectExpression.Limit;
 
-            return
-                changed
+            return changed
               ? selectExpression.Update(
                     projections,
                     tables,

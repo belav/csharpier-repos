@@ -141,8 +141,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ) {
                 var typeSyntax = GetTypeSyntaxFromDeclaration(declarationStatement);
 
-                return
-                    typeSyntax != null
+                return typeSyntax != null
                   ? IsMadeOfSpecialTypes(
                         semanticModel.GetTypeInfo(typeSyntax.StripRefIfNeeded()).Type
                     )

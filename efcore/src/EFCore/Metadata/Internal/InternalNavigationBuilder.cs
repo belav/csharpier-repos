@@ -126,8 +126,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             ConfigurationSource configurationSource
         ) {
             var foreignKey = Metadata.ForeignKey;
-            return
-                foreignKey.IsUnique
+            return foreignKey.IsUnique
               ? foreignKey.GetPrincipalEndConfigurationSource() == null
                   ? false
                   : Metadata.IsOnDependent
@@ -166,8 +165,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         );
                     }
 
-                    return
-                        Metadata.IsOnDependent
+                    return Metadata.IsOnDependent
                       ? foreignKey.Builder.IsRequired(
                             required,
                             configurationSource

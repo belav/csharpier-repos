@@ -940,8 +940,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (type is null)
                 {
-                    return
-                        annotation.IsAnnotated()
+                    return annotation.IsAnnotated()
                       ? NullableFlowState.MaybeDefault
                       : NullableFlowState.NotNull;
                 }

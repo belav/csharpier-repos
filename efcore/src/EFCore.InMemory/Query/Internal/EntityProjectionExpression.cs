@@ -168,8 +168,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 );
             }
 
-            return
-                _navigationExpressionsCache.TryGetValue(navigation, out var expression)
+            return _navigationExpressionsCache.TryGetValue(navigation, out var expression)
               ? expression
               : null;
         }

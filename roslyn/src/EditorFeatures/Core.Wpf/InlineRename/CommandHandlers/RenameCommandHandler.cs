@@ -76,8 +76,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             try
             {
                 var adornment = ((IWpfTextView)textView).GetAdornmentLayer("RoslynRenameDashboard");
-                return
-                    adornment.Elements.Any()
+                return adornment.Elements.Any()
                   ? adornment.Elements[0].Adornment as Dashboard
                   : null;
             }

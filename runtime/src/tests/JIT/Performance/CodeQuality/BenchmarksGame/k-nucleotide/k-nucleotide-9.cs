@@ -44,8 +44,7 @@ namespace BenchmarksGame
         static int read(Stream stream, byte[] buffer, int offset, int count)
         {
             var bytesRead = stream.Read(buffer, offset, count);
-            return
-                bytesRead == count
+            return bytesRead == count
               ? offset + count
               : bytesRead == 0
                   ? offset

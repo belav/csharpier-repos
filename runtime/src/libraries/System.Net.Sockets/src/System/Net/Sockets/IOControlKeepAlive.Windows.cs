@@ -51,14 +51,12 @@ namespace System.Net.Sockets
                     out IOControlKeepAlive? ioControlKeepAlive
                 )
             ) {
-                return
-                    optionName == SocketOptionName.TcpKeepAliveTime
+                return optionName == SocketOptionName.TcpKeepAliveTime
                   ? MillisecondsToSeconds(ioControlKeepAlive._timeMs)
                   : MillisecondsToSeconds(ioControlKeepAlive._intervalMs);
             }
 
-            return
-                optionName == SocketOptionName.TcpKeepAliveTime
+            return optionName == SocketOptionName.TcpKeepAliveTime
               ? MillisecondsToSeconds(WindowsDefaultTimeMs)
               : MillisecondsToSeconds(WindowsDefaultIntervalMs);
         }

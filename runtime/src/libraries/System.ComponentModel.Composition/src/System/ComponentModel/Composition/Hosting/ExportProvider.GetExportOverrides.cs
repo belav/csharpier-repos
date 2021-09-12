@@ -793,8 +793,7 @@ namespace System.ComponentModel.Composition.Hosting
                 )
                 .SingleOrDefault();
 
-            return
-                (export != null)
+            return (export != null)
               ? ExportServices.CreateStronglyTypedLazyOfTM<T, TMetadataView>(export)
               : null;
         }

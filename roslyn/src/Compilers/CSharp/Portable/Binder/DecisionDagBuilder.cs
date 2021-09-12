@@ -1150,8 +1150,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         BoundDecisionDagNode final = uniqifyDagNode(
                             new BoundLeafDecisionDagNode(syntax, label)
                         );
-                        return
-                            bindings.IsDefaultOrEmpty
+                        return bindings.IsDefaultOrEmpty
                           ? final
                           : uniqifyDagNode(
                                 new BoundWhenDecisionDagNode(syntax, bindings, null, final, null)
@@ -1218,8 +1217,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             StateForCase makeNext(Tests remainingTests)
             {
-                return
-                    remainingTests.Equals(stateForCase.RemainingTests)
+                return remainingTests.Equals(stateForCase.RemainingTests)
                   ? stateForCase
                   : new StateForCase(
                         stateForCase.Index,
@@ -1621,8 +1619,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ref useSiteInfo,
                 out Conversion conversion
             );
-            return
-                (!conversion.Exists && isRuntimeSimilar(expressionType, patternType))
+            return (!conversion.Exists && isRuntimeSimilar(expressionType, patternType))
               ? null // runtime and compile-time test behavior differ. Pretend we don't know what happens.
               : result;
 
@@ -1769,8 +1766,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 >.GetInstance();
                 int tempIdentifier(BoundDagEvaluation? e)
                 {
-                    return
-                        (e == null)
+                    return (e == null)
                       ? 0
                       : tempIdentifierMap.TryGetValue(e, out int value)
                           ? value

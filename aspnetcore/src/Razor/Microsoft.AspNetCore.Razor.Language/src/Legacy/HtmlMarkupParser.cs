@@ -53,8 +53,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             get
             {
-                return
-                    CaseSensitive
+                return CaseSensitive
                   ? StringComparison.Ordinal
                   : StringComparison.OrdinalIgnoreCase;
             }

@@ -137,8 +137,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         ) {
             using var _ = progressTracker.ItemCompletedScope();
 
-            return
-                fixAllContext.Document != null
+            return fixAllContext.Document != null
               ? await fixAllContext.GetDocumentDiagnosticsAsync(fixAllContext.Document)
                     .ConfigureAwait(false)
               : await fixAllContext.GetAllDiagnosticsAsync(fixAllContext.Project)

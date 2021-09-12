@@ -1923,8 +1923,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     nullable
                 );
 
-                return
-                    propertyExpressions == null
+                return propertyExpressions == null
                   ? null
                   : new EntityProjectionExpression(entityType, propertyExpressions);
             }

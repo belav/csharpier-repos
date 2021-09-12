@@ -142,8 +142,7 @@ namespace System.Threading
         ) {
             // If the value isn't null or a null value may not be treated as nonexistent, then create a new one-element map
             // to store the key/value pair.  Otherwise, use the empty map.
-            return
-                value != null || !treatNullValueAsNonexistent
+            return value != null || !treatNullValueAsNonexistent
               ? new OneElementAsyncLocalValueMap(key, value)
               : Empty;
         }
@@ -158,8 +157,7 @@ namespace System.Threading
             ) {
                 // If the value isn't null or a null value may not be treated as nonexistent, then create a new one-element map
                 // to store the key/value pair.  Otherwise, use the empty map.
-                return
-                    value != null || !treatNullValueAsNonexistent
+                return value != null || !treatNullValueAsNonexistent
                   ? new OneElementAsyncLocalValueMap(key, value)
                   : (IAsyncLocalValueMap)this;
             }
@@ -192,8 +190,7 @@ namespace System.Threading
                 {
                     // If the key matches one already contained in this map, then create a new one-element map with the updated
                     // value, otherwise create a two-element map with the additional key/value.
-                    return
-                        ReferenceEquals(key, _key1)
+                    return ReferenceEquals(key, _key1)
                       ? new OneElementAsyncLocalValueMap(key, value)
                       : (IAsyncLocalValueMap)new TwoElementAsyncLocalValueMap(
                             _key1,
@@ -254,8 +251,7 @@ namespace System.Threading
                 {
                     // If the key matches one already contained in this map, then create a new two-element map with the updated
                     // value, otherwise create a three-element map with the additional key/value.
-                    return
-                        ReferenceEquals(key, _key1)
+                    return ReferenceEquals(key, _key1)
                       ? new TwoElementAsyncLocalValueMap(key, value, _key2, _value2)
                       : ReferenceEquals(key, _key2)
                           ? new TwoElementAsyncLocalValueMap(_key1, _value1, key, value)
@@ -272,8 +268,7 @@ namespace System.Threading
                 {
                     // If the key exists in this map, remove it by downgrading to a one-element map without the key.  Otherwise,
                     // there's nothing to add or remove, so just return this map.
-                    return
-                        ReferenceEquals(key, _key1)
+                    return ReferenceEquals(key, _key1)
                       ? new OneElementAsyncLocalValueMap(_key2, _value2)
                       : ReferenceEquals(key, _key2)
                           ? new OneElementAsyncLocalValueMap(_key1, _value1)
@@ -377,8 +372,7 @@ namespace System.Threading
                 {
                     // If the key exists in this map, remove it by downgrading to a two-element map without the key.  Otherwise,
                     // there's nothing to add or remove, so just return this map.
-                    return
-                        ReferenceEquals(key, _key1)
+                    return ReferenceEquals(key, _key1)
                       ? new TwoElementAsyncLocalValueMap(_key2, _value2, _key3, _value3)
                       : ReferenceEquals(key, _key2)
                           ? new TwoElementAsyncLocalValueMap(_key1, _value1, _key3, _value3)
@@ -458,8 +452,7 @@ namespace System.Threading
                         {
                             // We only have four elements, one of which we're removing, so downgrade to a three-element map,
                             // without the matching element.
-                            return
-                                i == 0
+                            return i == 0
                               ? new ThreeElementAsyncLocalValueMap(
                                     _keyValues[1].Key,
                                     _keyValues[1].Value,

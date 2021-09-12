@@ -352,8 +352,7 @@ namespace System.Web.Mvc
             }
             else
             {
-                return
-                    nameRepresentsPath
+                return nameRepresentsPath
                   ? GetPathFromSpecificName(
                         controllerContext,
                         name,

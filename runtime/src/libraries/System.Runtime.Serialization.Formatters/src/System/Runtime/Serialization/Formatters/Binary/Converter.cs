@@ -352,8 +352,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 (code != InternalPrimitiveTypeE.Invalid),
                 "[Converter.FromString]!InternalPrimitiveTypeE.Invalid "
             );
-            return
-                code != InternalPrimitiveTypeE.Invalid
+            return code != InternalPrimitiveTypeE.Invalid
               ? Convert.ChangeType(value, ToTypeCode(code), CultureInfo.InvariantCulture)
               : value;
         }

@@ -369,8 +369,7 @@ namespace System.Text
         public static EncodingInfo[] GetEncodings()
         {
             Dictionary<int, EncodingInfo>? result = EncodingProvider.GetEncodingListFromProviders();
-            return
-                result == null
+            return result == null
               ? EncodingTable.GetEncodings()
               : EncodingTable.GetEncodings(result);
         }

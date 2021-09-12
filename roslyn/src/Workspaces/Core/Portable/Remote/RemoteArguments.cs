@@ -54,8 +54,7 @@ namespace Microsoft.CodeAnalysis.Remote
             Document document,
             CancellationToken cancellationToken
         ) {
-            return
-                alias == null
+            return alias == null
               ? null
               : Dehydrate(document.Project.Solution, alias, cancellationToken);
         }

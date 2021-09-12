@@ -69,8 +69,7 @@ namespace System.ComponentModel
             Enum enumVal,
             CultureInfo culture
         ) {
-            return
-                isUnderlyingTypeUInt64
+            return isUnderlyingTypeUInt64
               ? unchecked((long)Convert.ToUInt64(enumVal, culture))
               : Convert.ToInt64(enumVal, culture);
         }

@@ -492,8 +492,7 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 );
             }
 
-            return
-                typeParameters.IsEmpty
+            return typeParameters.IsEmpty
               ? (TNameSyntax)generator.IdentifierName(structNameToken)
               : (TNameSyntax)generator.GenericName(
                     structNameToken,

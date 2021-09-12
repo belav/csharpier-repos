@@ -112,8 +112,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
             }
 
-            return
-                useTriviaAsItIs
+            return useTriviaAsItIs
               ? new Whitespace(
                     this.Options,
                     lineBreaks,

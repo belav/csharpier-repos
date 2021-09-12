@@ -20,8 +20,7 @@ namespace System.Web.Http
 
         public int GetServicesCount_ControllerConfig()
         {
-            return
-                Configuration.Services.GetService(typeof(IDocumentationProvider)) == null
+            return Configuration.Services.GetService(typeof(IDocumentationProvider)) == null
               ? 0
               : 1;
         }

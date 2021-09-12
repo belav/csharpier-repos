@@ -235,8 +235,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     derivedTypeConversion
                 );
 
-                return
-                    navigation.IsCollection
+                return navigation.IsCollection
                   ? new MaterializeCollectionNavigationExpression(expansion, navigation)
                   : expansion;
             }
@@ -412,8 +411,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     }
                 }
 
-                return
-                    navigation.IsCollection
+                return navigation.IsCollection
                   ? new MaterializeCollectionNavigationExpression(secondaryExpansion, navigation)
                   : secondaryExpansion;
             }

@@ -88,8 +88,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Assert.Equal(projectId, GetProjectId(workspace));
             Assert.Equal(documentId, GetDocumentId(workspace));
 
-            return
-                _diagnostic == null
+            return _diagnostic == null
               ? ImmutableArray<DiagnosticData>.Empty
               : ImmutableArray.Create(_diagnostic);
         }
@@ -122,8 +121,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Assert.Equal(projectId, GetProjectId(workspace));
             Assert.Equal(documentId, GetDocumentId(workspace));
 
-            return
-                _diagnostic == null
+            return _diagnostic == null
               ? ImmutableArray<DiagnosticBucket>.Empty
               : ImmutableArray.Create(
                     new DiagnosticBucket(

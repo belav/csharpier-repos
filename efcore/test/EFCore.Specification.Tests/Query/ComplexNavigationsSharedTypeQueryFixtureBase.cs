@@ -345,8 +345,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     return (IQueryable<TEntity>)GetLevelThree(_context);
                 }
 
-                return
-                    typeof(TEntity) == typeof(Level4)
+                return typeof(TEntity) == typeof(Level4)
                   ? (IQueryable<TEntity>)GetLevelFour(_context)
                   : _context.Set<TEntity>();
             }

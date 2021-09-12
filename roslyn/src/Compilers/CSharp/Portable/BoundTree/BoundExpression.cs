@@ -239,8 +239,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return
-                    !this.OriginalIndexersOpt.IsDefault
+                return !this.OriginalIndexersOpt.IsDefault
                   ? LookupResultKind.OverloadResolutionFailure
                   : base.ResultKind;
             }

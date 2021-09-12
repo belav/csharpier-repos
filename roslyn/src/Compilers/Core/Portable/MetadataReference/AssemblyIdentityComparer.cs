@@ -119,8 +119,7 @@ namespace Microsoft.CodeAnalysis
                 bool? eq = TriviallyEquivalent(reference, definition);
                 if (eq.HasValue)
                 {
-                    return
-                        eq.GetValueOrDefault()
+                    return eq.GetValueOrDefault()
                       ? ComparisonResult.Equivalent
                       : ComparisonResult.NotEquivalent;
                 }

@@ -1967,8 +1967,7 @@ namespace Microsoft.CodeAnalysis
             CommandLineArguments arguments,
             DiagnosticBag diagnostics
         ) {
-            return
-                outputKind.IsNetModule()
+            return outputKind.IsNetModule()
               ? null
               : OpenStream(
                     fileSystem,

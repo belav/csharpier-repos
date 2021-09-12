@@ -337,8 +337,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         internal RuntimeMetadataReferenceResolver WithRelativePathResolver(
             RelativePathResolver resolver
         ) {
-            return
-                Equals(resolver, PathResolver)
+            return Equals(resolver, PathResolver)
               ? this
               : new RuntimeMetadataReferenceResolver(
                     resolver,

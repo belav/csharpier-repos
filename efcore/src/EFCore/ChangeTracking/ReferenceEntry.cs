@@ -147,8 +147,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             {
                 var navigation = (INavigation)Metadata;
 
-                return
-                    navigation.IsOnDependent
+                return navigation.IsOnDependent
                   ? navigation.ForeignKey.Properties.Any(InternalEntry.IsModified)
                   : AnyFkPropertiesModified(navigation, CurrentValue);
             }

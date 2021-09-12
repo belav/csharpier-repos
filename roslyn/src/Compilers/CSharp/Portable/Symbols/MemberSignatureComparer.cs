@@ -650,8 +650,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static TypeMap GetTypeMap(Symbol member)
         {
             var typeParameters = member.GetMemberTypeParameters();
-            return
-                typeParameters.IsEmpty
+            return typeParameters.IsEmpty
               ? null
               : new TypeMap(
                     typeParameters,
@@ -927,8 +926,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeMap typeMap,
             ImmutableArray<CustomModifier> customModifiers
         ) {
-            return
-                typeMap == null
+            return typeMap == null
               ? customModifiers
               : typeMap.SubstituteCustomModifiers(customModifiers);
         }

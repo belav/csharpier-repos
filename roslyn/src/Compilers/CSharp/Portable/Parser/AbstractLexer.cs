@@ -145,8 +145,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         private int GetLexemeOffsetFromPosition(int position)
         {
-            return
-                position >= TextWindow.LexemeStartPosition
+            return position >= TextWindow.LexemeStartPosition
               ? position - TextWindow.LexemeStartPosition
               : position;
         }

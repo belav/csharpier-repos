@@ -841,8 +841,7 @@ namespace System
             // something changed concurrently to mutate the input array: fall back to
             // doing the concatenation again, but this time with a defensive copy. This
             // fall back should be extremely rare.
-            return
-                copiedLength == totalLength
+            return copiedLength == totalLength
               ? result
               : JoinCore(separator, values.ToArray().AsSpan());
         }

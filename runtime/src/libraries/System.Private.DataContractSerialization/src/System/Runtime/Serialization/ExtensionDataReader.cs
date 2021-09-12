@@ -157,8 +157,7 @@ namespace System.Runtime.Serialization
         {
             get
             {
-                return
-                    IsXmlDataNode
+                return IsXmlDataNode
                   ? _xmlNodeReader[name, namespaceURI]
                   : GetAttribute(name, namespaceURI);
             }

@@ -20,8 +20,7 @@ namespace Microsoft.CodeAnalysis
             bool descendIntoTrivia,
             bool includeSelf
         ) {
-            return
-                descendIntoTrivia
+            return descendIntoTrivia
               ? DescendantNodesAndTokensImpl(span, descendIntoChildren, true, includeSelf)
                     .Where(e => e.IsNode)
                     .Select(e => e.AsNode()!)
@@ -34,8 +33,7 @@ namespace Microsoft.CodeAnalysis
             bool descendIntoTrivia,
             bool includeSelf
         ) {
-            return
-                descendIntoTrivia
+            return descendIntoTrivia
               ? DescendantNodesAndTokensIntoTrivia(span, descendIntoChildren, includeSelf)
               : DescendantNodesAndTokensOnly(span, descendIntoChildren, includeSelf);
         }
@@ -45,8 +43,7 @@ namespace Microsoft.CodeAnalysis
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
         ) {
-            return
-                descendIntoTrivia
+            return descendIntoTrivia
               ? DescendantTriviaIntoTrivia(span, descendIntoChildren)
               : DescendantTriviaOnly(span, descendIntoChildren);
         }

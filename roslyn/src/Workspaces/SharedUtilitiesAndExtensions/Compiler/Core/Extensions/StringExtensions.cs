@@ -56,8 +56,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var lastOffset = lineText.GetLastNonWhitespaceOffset();
 
-            return
-                lastOffset.HasValue && lastOffset.Value < lineText.Length
+            return lastOffset.HasValue && lastOffset.Value < lineText.Length
               ? lineText.Substring(lastOffset.Value + 1)
               : string.Empty;
         }

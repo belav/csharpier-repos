@@ -23,8 +23,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public static Symbol LookupSym(Name name, ParentSymbol parent, symbmask_t kindmask)
         {
             RuntimeBinder.EnsureLockIsTaken();
-            return
-                s_dictionary.TryGetValue(new Key(name, parent), out Symbol sym)
+            return s_dictionary.TryGetValue(new Key(name, parent), out Symbol sym)
               ? FindCorrectKind(sym, kindmask)
               : null;
         }

@@ -694,8 +694,7 @@ namespace System.ComponentModel.Composition.Hosting
 
             try
             {
-                return
-                    (_reflectionContext != null)
+                return (_reflectionContext != null)
                   ? new AssemblyCatalog(assemblyFilePath, _reflectionContext, this)
                   : new AssemblyCatalog(assemblyFilePath, this);
             }

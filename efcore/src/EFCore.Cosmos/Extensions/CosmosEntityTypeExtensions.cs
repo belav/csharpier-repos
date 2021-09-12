@@ -229,8 +229,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(entityType, nameof(entityType));
             var etagPropertyName = entityType.GetETagPropertyName();
-            return
-                !string.IsNullOrEmpty(etagPropertyName)
+            return !string.IsNullOrEmpty(etagPropertyName)
               ? entityType.FindProperty(etagPropertyName)
               : null;
         }

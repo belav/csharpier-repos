@@ -1331,8 +1331,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     declaredTypeAndInfo.Info?.PayloadTypeId != CustomTypeInfo.PayloadTypeId
                 );
                 var elementType = declaredType.GetElementType();
-                return
-                    value.IsNull || elementType.IsVoid()
+                return value.IsNull || elementType.IsVoid()
                   ? null
                   : new PointerDereferenceExpansion(
                         new TypeAndCustomInfo(
@@ -1409,8 +1408,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     typeDeclaringMember.Info,
                     Formatter.NoFormatSpecifiers
                 );
-            return
-                typeDeclaringMember.Type.IsInterface
+            return typeDeclaringMember.Type.IsInterface
               ? $"{typeName}.{memberName}"
               : $"{memberName} ({typeName})";
         }

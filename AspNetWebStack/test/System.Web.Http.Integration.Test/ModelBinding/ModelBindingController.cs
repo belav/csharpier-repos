@@ -304,8 +304,7 @@ namespace System.Web.Http.ModelBinding
         {
             string result = _actionContext.ControllerContext.Request.Headers.GetValues(key)
                 .FirstOrDefault();
-            return
-                result == null
+            return result == null
               ? null
               : new ValueProviderResult(result, result, CultureInfo.CurrentCulture);
         }

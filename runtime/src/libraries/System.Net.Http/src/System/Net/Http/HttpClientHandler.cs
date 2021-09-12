@@ -334,8 +334,7 @@ namespace System.Net.Http
             HttpRequestMessage request,
             CancellationToken cancellationToken
         ) {
-            return
-                DiagnosticsHandler.IsEnabled() && _diagnosticsHandler != null
+            return DiagnosticsHandler.IsEnabled() && _diagnosticsHandler != null
               ? _diagnosticsHandler.Send(request, cancellationToken)
               : _underlyingHandler.Send(request, cancellationToken);
         }
@@ -344,8 +343,7 @@ namespace System.Net.Http
             HttpRequestMessage request,
             CancellationToken cancellationToken
         ) {
-            return
-                DiagnosticsHandler.IsEnabled() && _diagnosticsHandler != null
+            return DiagnosticsHandler.IsEnabled() && _diagnosticsHandler != null
               ? _diagnosticsHandler.SendAsync(request, cancellationToken)
               : _underlyingHandler.SendAsync(request, cancellationToken);
         }

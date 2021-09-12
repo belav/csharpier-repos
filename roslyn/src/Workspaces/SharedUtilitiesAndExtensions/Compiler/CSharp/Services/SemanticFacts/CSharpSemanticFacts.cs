@@ -408,8 +408,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // In some cases a single clause binds to more than one method. In those cases
                         // the tokens in the clause determine which of the two SymbolInfos are returned.
                         // See also the proposal at https://github.com/dotnet/roslyn/issues/23394
-                        return
-                            token.IsKind(SyntaxKind.InKeyword)
+                        return token.IsKind(SyntaxKind.InKeyword)
                           ? queryInfo.CastInfo
                           : queryInfo.OperationInfo;
                     }

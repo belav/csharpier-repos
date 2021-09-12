@@ -75,8 +75,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(keySelector, nameof(keySelector));
             Check.NotNull(elementSelector, nameof(elementSelector));
 
-            return
-                keySelector != KeySelector || elementSelector != ElementSelector
+            return keySelector != KeySelector || elementSelector != ElementSelector
               ? new GroupByShaperExpression(keySelector, elementSelector)
               : this;
         }

@@ -298,8 +298,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     }
 
                     var translation = _sqlTranslator.Translate(expression);
-                    return
-                        translation == null
+                    return translation == null
                       ? base.Visit(expression)
                       : new ProjectionBindingExpression(
                             _selectExpression,
@@ -452,14 +451,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 }
 
                 case IncludeExpression _:
-                    return
-                        _clientEval
+                    return _clientEval
                       ? base.VisitExtension(extensionExpression)
                       : QueryCompilationContext.NotTranslatedExpression;
 
                 case CollectionShaperExpression _:
-                    return
-                        _clientEval
+                    return _clientEval
                       ? extensionExpression
                       : QueryCompilationContext.NotTranslatedExpression;
 

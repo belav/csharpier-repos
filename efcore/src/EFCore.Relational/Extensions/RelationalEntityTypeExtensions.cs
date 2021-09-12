@@ -95,8 +95,7 @@ namespace Microsoft.EntityFrameworkCore
                         : $"{ownership.PrincipalToDependent.Name}_{name}";
             }
 
-            return
-                truncate
+            return truncate
               ? Uniquifier.Truncate(name, entityType.Model.GetMaxIdentifierLength())
               : name;
         }
@@ -158,8 +157,7 @@ namespace Microsoft.EntityFrameworkCore
                 return (string?)schemaAnnotation.Value ?? GetDefaultSchema(entityType);
             }
 
-            return
-                entityType.BaseType != null
+            return entityType.BaseType != null
               ? entityType.GetRootType().GetSchema()
               : GetDefaultSchema(entityType);
         }
@@ -332,8 +330,7 @@ namespace Microsoft.EntityFrameworkCore
         public static string? GetDefaultViewName(this IReadOnlyEntityType entityType)
         {
             var ownership = entityType.FindOwnership();
-            return
-                ownership != null && ownership.IsUnique
+            return ownership != null && ownership.IsUnique
               ? ownership.PrincipalEntityType.GetViewName()
               : null;
         }
@@ -393,8 +390,7 @@ namespace Microsoft.EntityFrameworkCore
                 return (string?)schemaAnnotation.Value ?? GetDefaultViewSchema(entityType);
             }
 
-            return
-                entityType.BaseType != null
+            return entityType.BaseType != null
               ? entityType.GetRootType().GetViewSchema()
               : GetDefaultViewSchema(entityType);
         }

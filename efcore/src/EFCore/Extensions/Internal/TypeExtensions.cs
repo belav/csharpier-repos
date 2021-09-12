@@ -46,8 +46,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
             var sb = new StringBuilder();
             var removeLowerCase = sb.Append(type.Name.Where(char.IsUpper).ToArray()).ToString();
 
-            return
-                removeLowerCase.Length > 0
+            return removeLowerCase.Length > 0
               ? removeLowerCase.ToLowerInvariant()
               : type.Name.ToLowerInvariant().Substring(0, 1);
         }
@@ -63,8 +62,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
             var defaultPropertyAttribute = type.GetCustomAttributes<DefaultMemberAttribute>()
                 .FirstOrDefault();
 
-            return
-                defaultPropertyAttribute == null
+            return defaultPropertyAttribute == null
               ? null
               : type.GetRuntimeProperties()
                     .FirstOrDefault(

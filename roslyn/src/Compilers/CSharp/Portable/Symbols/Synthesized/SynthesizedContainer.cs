@@ -172,8 +172,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public override ImmutableArray<Symbol> GetMembers()
         {
             Symbol constructor = this.Constructor;
-            return
-                (object)constructor == null
+            return (object)constructor == null
               ? ImmutableArray<Symbol>.Empty
               : ImmutableArray.Create(constructor);
         }
@@ -181,8 +180,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public override ImmutableArray<Symbol> GetMembers(string name)
         {
             var ctor = Constructor;
-            return
-                ((object)ctor != null && name == ctor.Name)
+            return ((object)ctor != null && name == ctor.Name)
               ? ImmutableArray.Create<Symbol>(ctor)
               : ImmutableArray<Symbol>.Empty;
         }

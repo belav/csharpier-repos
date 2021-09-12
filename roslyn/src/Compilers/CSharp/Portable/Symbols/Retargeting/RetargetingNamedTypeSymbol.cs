@@ -110,8 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get
             {
                 var underlying = _underlyingType.EnumUnderlyingType;
-                return
-                    (object)underlying == null
+                return (object)underlying == null
                   ? null
                   : this.RetargetingTranslator.Retarget(
                         underlying,
@@ -429,8 +428,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get
             {
                 NamedTypeSymbol coClass = _underlyingType.ComImportCoClass;
-                return
-                    (object)coClass == null
+                return (object)coClass == null
                   ? null
                   : this.RetargetingTranslator.Retarget(
                         coClass,

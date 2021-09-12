@@ -127,8 +127,7 @@ namespace Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal
                 ?? System.IO.Path.GetFileNameWithoutExtension(
                     viewContext.ActionDescriptor.DisplayName
                 );
-            return
-                string.Equals(activePage, page, StringComparison.OrdinalIgnoreCase)
+            return string.Equals(activePage, page, StringComparison.OrdinalIgnoreCase)
               ? "active"
               : null;
         }

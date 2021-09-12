@@ -195,8 +195,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
+            return source.Provider is EntityQueryProvider
               ? source.Provider.CreateQuery<TEntity>(
                     Expression.Call(
                         AsSingleQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -232,8 +231,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
+            return source.Provider is EntityQueryProvider
               ? source.Provider.CreateQuery<TEntity>(
                     Expression.Call(
                         AsSplitQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),

@@ -63,8 +63,7 @@ namespace Microsoft.CodeAnalysis.Remote
             protected override SolutionId ReadValue(JsonReader reader, JsonSerializer serializer)
             {
                 (Guid id, string debugName)? tuple = ReadFromJsonObject(reader);
-                return
-                    tuple == null
+                return tuple == null
                   ? null
                   : SolutionId.CreateFromSerialized(tuple.Value.id, tuple.Value.debugName);
             }
@@ -81,8 +80,7 @@ namespace Microsoft.CodeAnalysis.Remote
             protected override ProjectId ReadValue(JsonReader reader, JsonSerializer serializer)
             {
                 (Guid id, string debugName)? tuple = ReadFromJsonObject(reader);
-                return
-                    tuple == null
+                return tuple == null
                   ? null
                   : ProjectId.CreateFromSerialized(tuple.Value.id, tuple.Value.debugName);
             }

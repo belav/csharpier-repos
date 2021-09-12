@@ -202,8 +202,7 @@ namespace Microsoft.CodeAnalysis
             T? defaultValue = default
         ) {
             int index = IndexOfNamedArgument(namedArguments, name);
-            return
-                index >= 0
+            return index >= 0
               ? namedArguments[index].Value.DecodeValue<T>(specialType)
               : defaultValue;
         }

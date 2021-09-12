@@ -2308,8 +2308,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return ErrorCode.ERR_InvalidAddrOp;
 
                 case BindValueKind.IncrementDecrement:
-                    return
-                        isValueType
+                    return isValueType
                       ? ErrorCode.ERR_AssgReadonlyLocal
                       : ErrorCode.ERR_IncrementLvalueExpected;
 
@@ -2598,8 +2597,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // byval parameters can escape to method's top level. Others can escape further.
                     // NOTE: "method" here means nearest containing method, lambda or local function.
-                    return
-                        parameter.RefKind == RefKind.None
+                    return parameter.RefKind == RefKind.None
                       ? Binder.TopLevelScope
                       : Binder.ExternalScope;
 

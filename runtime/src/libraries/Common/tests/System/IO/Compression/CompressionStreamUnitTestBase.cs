@@ -655,8 +655,7 @@ namespace System.IO.Compression
             int count,
             CancellationToken cancellationToken
         ) {
-            return
-                _mode == Mode.ReturnNullTasks
+            return _mode == Mode.ReturnNullTasks
               ? null
               : base.WriteAsync(buffer, offset, count, cancellationToken);
         }

@@ -1687,8 +1687,7 @@ namespace Newtonsoft.Json
         public override Task<bool?> ReadAsBooleanAsync(
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoReadAsBooleanAsync(cancellationToken)
               : base.ReadAsBooleanAsync(cancellationToken);
         }
@@ -1849,8 +1848,7 @@ namespace Newtonsoft.Json
         public override Task<byte[]?> ReadAsBytesAsync(
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoReadAsBytesAsync(cancellationToken)
               : base.ReadAsBytesAsync(cancellationToken);
         }
@@ -2028,8 +2026,7 @@ namespace Newtonsoft.Json
         public override Task<DateTime?> ReadAsDateTimeAsync(
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoReadAsDateTimeAsync(cancellationToken)
               : base.ReadAsDateTimeAsync(cancellationToken);
         }
@@ -2051,8 +2048,7 @@ namespace Newtonsoft.Json
         public override Task<DateTimeOffset?> ReadAsDateTimeOffsetAsync(
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoReadAsDateTimeOffsetAsync(cancellationToken)
               : base.ReadAsDateTimeOffsetAsync(cancellationToken);
         }
@@ -2078,8 +2074,7 @@ namespace Newtonsoft.Json
         public override Task<decimal?> ReadAsDecimalAsync(
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoReadAsDecimalAsync(cancellationToken)
               : base.ReadAsDecimalAsync(cancellationToken);
         }
@@ -2101,8 +2096,7 @@ namespace Newtonsoft.Json
         public override Task<double?> ReadAsDoubleAsync(
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoReadAsDoubleAsync(cancellationToken)
               : base.ReadAsDoubleAsync(cancellationToken);
         }
@@ -2123,8 +2117,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task<int?> ReadAsInt32Async(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoReadAsInt32Async(cancellationToken)
               : base.ReadAsInt32Async(cancellationToken);
         }
@@ -2146,8 +2139,7 @@ namespace Newtonsoft.Json
         public override Task<string?> ReadAsStringAsync(
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoReadAsStringAsync(cancellationToken)
               : base.ReadAsStringAsync(cancellationToken);
         }

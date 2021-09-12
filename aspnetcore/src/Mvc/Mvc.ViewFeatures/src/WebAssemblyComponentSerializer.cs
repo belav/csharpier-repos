@@ -35,8 +35,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 )
             );
 
-            return
-                prerendered
+            return prerendered
               ? WebAssemblyComponentMarker.Prerendered(
                     assembly,
                     typeFullName,

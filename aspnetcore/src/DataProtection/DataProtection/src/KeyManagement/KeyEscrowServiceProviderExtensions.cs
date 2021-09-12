@@ -18,8 +18,7 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         public static IKeyEscrowSink? GetKeyEscrowSink(this IServiceProvider services)
         {
             var escrowSinks = services?.GetService<IEnumerable<IKeyEscrowSink>>()?.ToList();
-            return
-                (escrowSinks != null && escrowSinks.Count > 0)
+            return (escrowSinks != null && escrowSinks.Count > 0)
               ? new AggregateKeyEscrowSink(escrowSinks)
               : null;
         }

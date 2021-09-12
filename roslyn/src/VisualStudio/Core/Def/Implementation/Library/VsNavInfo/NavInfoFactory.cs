@@ -275,24 +275,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
                 return string.Empty;
             }
 
-            return
-                !namespaceSymbol.IsGlobalNamespace
+            return !namespaceSymbol.IsGlobalNamespace
               ? namespaceSymbol.ToDisplayString()
               : string.Empty;
         }
 
         private string GetClassName(ITypeSymbol typeSymbol)
         {
-            return
-                typeSymbol != null
+            return typeSymbol != null
               ? typeSymbol.ToDisplayString(LibraryService.TypeDisplayFormat)
               : string.Empty;
         }
 
         private string GetMemberName(ISymbol memberSymbol)
         {
-            return
-                memberSymbol != null
+            return memberSymbol != null
               ? memberSymbol.ToDisplayString(LibraryService.MemberDisplayFormat)
               : string.Empty;
         }

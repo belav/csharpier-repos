@@ -202,8 +202,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         !_haveCustomModifierFlags,
                         "This shouldn't happen during decoding."
                     );
-                    return
-                        ConsumeFlag()
+                    return ConsumeFlag()
                       ? type
                       : _containingAssembly.GetSpecialType(SpecialType.System_Object);
 

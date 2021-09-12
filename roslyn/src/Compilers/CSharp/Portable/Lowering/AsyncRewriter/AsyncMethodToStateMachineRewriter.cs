@@ -480,8 +480,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // non-dynamic:
                 Debug.Assert(receiver != null);
 
-                return
-                    methodSymbol.IsStatic
+                return methodSymbol.IsStatic
                   ? F.StaticCall(methodSymbol.ContainingType, methodSymbol, receiver)
                   : F.Call(receiver, methodSymbol);
             }
@@ -782,8 +781,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             LocalSymbol first,
             LocalSymbol secondOpt
         ) {
-            return
-                (secondOpt == null)
+            return (secondOpt == null)
               ? ImmutableArray.Create(first)
               : ImmutableArray.Create(first, secondOpt);
         }

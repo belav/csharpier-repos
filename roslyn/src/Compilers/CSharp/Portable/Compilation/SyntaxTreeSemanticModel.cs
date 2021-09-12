@@ -536,8 +536,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             node = SyntaxFactory.GetStandaloneNode(node);
 
             var model = this.GetMemberModel(node);
-            return
-                model == null
+            return model == null
               ? ImmutableArray<Symbol>.Empty
               : model.GetMemberGroupWorker(node, options, cancellationToken);
         }
@@ -551,8 +550,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             node = SyntaxFactory.GetStandaloneNode(node);
 
             var model = this.GetMemberModel(node);
-            return
-                model == null
+            return model == null
               ? ImmutableArray<IPropertySymbol>.Empty
               : model.GetIndexerGroupWorker(node, options, cancellationToken);
         }
@@ -565,8 +563,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             node = SyntaxFactory.GetStandaloneNode(node);
 
             var model = this.GetMemberModel(node);
-            return
-                model == null
+            return model == null
               ? default(Optional<object>)
               : model.GetConstantValueWorker(node, cancellationToken);
         }
@@ -577,8 +574,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             CheckSyntaxNode(node);
             var model = this.GetMemberModel(node);
-            return
-                (model == null)
+            return (model == null)
               ? default(QueryClauseInfo)
               : model.GetQueryClauseInfo(node, cancellationToken);
         }
@@ -598,8 +594,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             CheckSyntaxNode(node);
             var model = this.GetMemberModel(node);
-            return
-                (model == null)
+            return (model == null)
               ? CSharpTypeInfo.None
               : model.GetTypeInfo(node, cancellationToken);
         }
@@ -610,8 +605,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             CheckSyntaxNode(declaratorSyntax);
             var model = this.GetMemberModel(declaratorSyntax);
-            return
-                (model == null)
+            return (model == null)
               ? null
               : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
@@ -622,8 +616,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             CheckSyntaxNode(declaratorSyntax);
             var model = this.GetMemberModel(declaratorSyntax);
-            return
-                (model == null)
+            return (model == null)
               ? null
               : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
@@ -634,8 +627,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             CheckSyntaxNode(declaratorSyntax);
             var model = this.GetMemberModel(declaratorSyntax);
-            return
-                (model == null)
+            return (model == null)
               ? null
               : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
@@ -646,8 +638,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             CheckSyntaxNode(declaratorSyntax);
             var model = this.GetMemberModel(declaratorSyntax);
-            return
-                (model == null)
+            return (model == null)
               ? null
               : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
@@ -1308,8 +1299,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SyntaxKind.EnumMemberDeclaration:
                     {
                         var enumDecl = (EnumMemberDeclarationSyntax)memberDecl;
-                        return
-                            (enumDecl.EqualsValue != null)
+                        return (enumDecl.EqualsValue != null)
                           ? GetOrAddModelIfContains(enumDecl.EqualsValue, span)
                           : null;
                     }
@@ -2517,8 +2507,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(declarationSyntax);
 
             var memberModel = this.GetMemberModel(declarationSyntax);
-            return
-                memberModel == null
+            return memberModel == null
               ? null
               : memberModel.GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
@@ -2536,8 +2525,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(declarationSyntax);
 
             var memberModel = this.GetMemberModel(declarationSyntax);
-            return
-                memberModel == null
+            return memberModel == null
               ? null
               : memberModel.GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
@@ -3000,8 +2988,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override AwaitExpressionInfo GetAwaitExpressionInfo(AwaitExpressionSyntax node)
         {
             MemberSemanticModel memberModel = GetMemberModel(node);
-            return
-                memberModel == null
+            return memberModel == null
               ? default(AwaitExpressionInfo)
               : memberModel.GetAwaitExpressionInfo(node);
         }
@@ -3009,8 +2996,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override ForEachStatementInfo GetForEachStatementInfo(ForEachStatementSyntax node)
         {
             MemberSemanticModel memberModel = GetMemberModel(node);
-            return
-                memberModel == null
+            return memberModel == null
               ? default(ForEachStatementInfo)
               : memberModel.GetForEachStatementInfo(node);
         }
@@ -3019,8 +3005,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             CommonForEachStatementSyntax node
         ) {
             MemberSemanticModel memberModel = GetMemberModel(node);
-            return
-                memberModel == null
+            return memberModel == null
               ? default(ForEachStatementInfo)
               : memberModel.GetForEachStatementInfo(node);
         }

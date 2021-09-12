@@ -35,8 +35,7 @@ namespace System.Net.Security
         internal static string QueryContextAuthenticationPackage(SafeDeleteContext securityContext)
         {
             SafeDeleteNegoContext negoContext = (SafeDeleteNegoContext)securityContext;
-            return
-                negoContext.IsNtlmUsed
+            return negoContext.IsNtlmUsed
               ? NegotiationInfoClass.NTLM
               : NegotiationInfoClass.Kerberos;
         }
@@ -628,8 +627,7 @@ namespace System.Net.Security
 
             try
             {
-                return
-                    isEmptyCredential
+                return isEmptyCredential
                   ? new SafeFreeNegoCredentials(false, string.Empty, string.Empty, string.Empty)
                   : new SafeFreeNegoCredentials(
                         ntlmOnly,

@@ -48,8 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             }
             else if (IsStringToken(token))
             {
-                return
-                    IsVerbatimStringToken(token)
+                return IsVerbatimStringToken(token)
                   ? ClassificationTypeNames.VerbatimStringLiteral
                   : ClassificationTypeNames.StringLiteral;
             }
@@ -221,8 +220,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 token.Parent is MethodDeclarationSyntax methodDeclaration
                 && methodDeclaration.Identifier == token
             ) {
-                return
-                    IsExtensionMethod(methodDeclaration)
+                return IsExtensionMethod(methodDeclaration)
                   ? ClassificationTypeNames.ExtensionMethodName
                   : ClassificationTypeNames.MethodName;
             }

@@ -513,8 +513,7 @@ namespace Microsoft.CodeAnalysis
             this SyntaxNode? node,
             SyntaxTree oldTree
         ) {
-            return
-                node != null
+            return node != null
               ? oldTree.WithRootAndOptions(node, oldTree.Options).GetRoot()
               : null;
         }

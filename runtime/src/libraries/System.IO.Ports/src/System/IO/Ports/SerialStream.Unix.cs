@@ -1101,8 +1101,7 @@ namespace System.IO.Ports
 
         private static CancellationTokenSource GetCancellationTokenSourceFromTimeout(int timeoutMs)
         {
-            return
-                timeoutMs == SerialPort.InfiniteTimeout
+            return timeoutMs == SerialPort.InfiniteTimeout
               ? null
               : new CancellationTokenSource(Math.Max(timeoutMs, TimeoutResolution));
         }

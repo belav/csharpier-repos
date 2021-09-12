@@ -81,8 +81,7 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
                 // Since it's a frequent scenario (that is not caused by incorrect configuration),
                 // denied errors are handled differently using HandleAccessDeniedErrorAsync().
                 var result = await HandleAccessDeniedErrorAsync(properties);
-                return
-                    !result.None
+                return !result.None
                   ? result
                   : HandleRequestResult.Fail(
                         "Access was denied by the resource owner or by the remote server.",

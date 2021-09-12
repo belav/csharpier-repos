@@ -231,8 +231,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsNullableAnalysisEnabled()
         {
-            return
-                _hasThisInitializer
+            return _hasThisInitializer
               ? flags.IsNullableAnalysisEnabled
               : (
                     (SourceMemberContainerTypeSymbol)ContainingType

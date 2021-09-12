@@ -161,8 +161,7 @@ namespace System.Diagnostics.Tracing
                     () =>
                     {
                         var gcInfo = GC.GetGCMemoryInfo();
-                        return
-                            gcInfo.HeapSizeBytes != 0
+                        return gcInfo.HeapSizeBytes != 0
                           ? gcInfo.FragmentedBytes * 100d / gcInfo.HeapSizeBytes
                           : 0;
                     }

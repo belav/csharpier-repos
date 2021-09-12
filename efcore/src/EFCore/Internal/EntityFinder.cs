@@ -89,8 +89,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
             }
 
             var tracked = FindTracked(keyValues!, out var keyProperties);
-            return
-                tracked != null
+            return tracked != null
               ? new ValueTask<TEntity?>(tracked)
               : new ValueTask<TEntity?>(
                     _queryRoot.FirstOrDefaultAsync(
@@ -116,8 +115,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
             }
 
             var tracked = FindTracked(keyValues!, out var keyProperties);
-            return
-                tracked != null
+            return tracked != null
               ? new ValueTask<object?>(tracked)
               : new ValueTask<object?>(
                     _queryRoot.FirstOrDefaultAsync(

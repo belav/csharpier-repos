@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             var result = ParenthesizeWorker(expression, includeElasticTrivia);
-            return
-                addSimplifierAnnotation
+            return addSimplifierAnnotation
               ? result.WithAdditionalAnnotations(Simplifier.Annotation)
               : result;
         }
@@ -100,8 +99,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                   );
 
             var result = parenthesized.WithTriviaFrom(pattern);
-            return
-                addSimplifierAnnotation
+            return addSimplifierAnnotation
               ? result.WithAdditionalAnnotations(Simplifier.Annotation)
               : result;
         }

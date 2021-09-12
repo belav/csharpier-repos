@@ -150,8 +150,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     && semanticModel.GetNullableContext(_typeDeclaration.SpanStart)
                         .AnnotationsEnabled();
 
-                return
-                    useNullableTypeArgument
+                return useNullableTypeArgument
                   ? equatableType.Construct(
                         _containingType.WithNullableAnnotation(NullableAnnotation.Annotated)
                     )
@@ -278,8 +277,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             {
                 var service =
                     _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
-                return
-                    _implementIEquatable
+                return _implementIEquatable
                   ? service.GenerateEqualsMethodThroughIEquatableEqualsAsync(
                         _document,
                         _containingType,

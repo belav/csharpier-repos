@@ -224,8 +224,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected string Dump()
         {
-            return
-                IsConditionalState
+            return IsConditionalState
               ? $"true: {Dump(this.StateWhenTrue)} false: {Dump(this.StateWhenFalse)}"
               : Dump(this.State);
         }
@@ -471,8 +470,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             get
             {
                 var method = _symbol as MethodSymbol;
-                return
-                    (object)method == null
+                return (object)method == null
                   ? ImmutableArray<ParameterSymbol>.Empty
                   : method.Parameters;
             }
@@ -1428,8 +1426,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected static RefKind GetRefKind(ImmutableArray<RefKind> refKindsOpt, int index)
         {
-            return
-                refKindsOpt.IsDefault || refKindsOpt.Length <= index
+            return refKindsOpt.IsDefault || refKindsOpt.Length <= index
               ? RefKind.None
               : refKindsOpt[index];
         }

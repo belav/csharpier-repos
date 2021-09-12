@@ -48,8 +48,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 ImmutableArray<IFormatterResolver>.Empty,
                 Array.Empty<(Type, Type?)>()
             );
-            return
-                client == null
+            return client == null
               ? null
               : new RazorRemoteHostClient(
                     (ServiceHubRemoteHostClient)client,

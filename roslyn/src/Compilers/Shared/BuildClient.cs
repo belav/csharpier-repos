@@ -86,8 +86,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// </summary>
         public static string GetSystemSdkDirectory()
         {
-            return
-                RuntimeHostInfo.IsCoreClrRuntime
+            return RuntimeHostInfo.IsCoreClrRuntime
               ? null
               : RuntimeEnvironment.GetRuntimeDirectory();
         }

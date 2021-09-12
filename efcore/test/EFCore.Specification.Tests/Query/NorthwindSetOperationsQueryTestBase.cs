@@ -392,8 +392,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     return false;
                 }
 
-                return
-                    ReferenceEquals(this, obj)
+                return ReferenceEquals(this, obj)
                   ? true
                   : obj.GetType() == GetType() && string.Equals(Id, ((CustomerDeets)obj).Id);
             }

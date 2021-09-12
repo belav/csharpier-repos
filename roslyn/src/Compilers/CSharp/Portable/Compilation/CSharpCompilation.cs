@@ -1739,8 +1739,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal SynthesizedInteractiveInitializerMethod? GetSubmissionInitializer()
         {
-            return
-                (IsSubmission && ScriptClass is object)
+            return (IsSubmission && ScriptClass is object)
               ? ScriptClass.GetScriptInitializer()
               : null;
         }
@@ -2482,8 +2481,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol? within0 = within.EnsureCSharpSymbolOrNull(nameof(within));
             TypeSymbol? throughType0 = throughType.EnsureCSharpSymbolOrNull(nameof(throughType));
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            return
-                within0.Kind == SymbolKind.Assembly
+            return within0.Kind == SymbolKind.Assembly
               ? AccessCheck.IsSymbolAccessible(
                     symbol0,
                     (AssemblySymbol)within0,

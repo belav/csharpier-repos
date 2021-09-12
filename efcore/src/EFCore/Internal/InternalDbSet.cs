@@ -590,8 +590,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
             EntityState entityState,
             CancellationToken cancellationToken
         ) {
-            return
-                entry.EntityState == EntityState.Detached
+            return entry.EntityState == EntityState.Detached
               ? _context.GetDependencies()
                     .EntityGraphAttacher.AttachGraphAsync(
                         entry,

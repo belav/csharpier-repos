@@ -542,8 +542,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
             }
 
-            return
-                oldNodeOpt != null
+            return oldNodeOpt != null
               ? oldNodeOpt.Update(
                     rewrittenOperand,
                     conversion,

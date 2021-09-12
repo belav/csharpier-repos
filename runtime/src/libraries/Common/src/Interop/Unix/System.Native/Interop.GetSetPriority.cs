@@ -47,8 +47,7 @@ internal static partial class Interop
             int nice
         ) {
             Debug.Assert((nice >= -20) && (nice <= 20));
-            return
-                (nice < -15)
+            return (nice < -15)
               ? ThreadPriorityLevel.TimeCritical
               : (nice < -10)
                   ? ThreadPriorityLevel.Highest

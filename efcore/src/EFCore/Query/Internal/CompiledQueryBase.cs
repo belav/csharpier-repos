@@ -121,8 +121,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     return Expression.Constant(_context);
                 }
 
-                return
-                    _parameters.Contains(parameterExpression)
+                return _parameters.Contains(parameterExpression)
                   ? Expression.Parameter(
                         parameterExpression.Type,
                         QueryCompilationContext.QueryParameterPrefix + parameterExpression.Name

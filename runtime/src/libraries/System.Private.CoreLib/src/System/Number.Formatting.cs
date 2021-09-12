@@ -434,8 +434,7 @@ namespace System
         ) {
             var sb = new ValueStringBuilder(stackalloc char[CharStackBufferSize]);
             string? s = FormatDouble(ref sb, value, format, info);
-            return
-                s != null
+            return s != null
               ? TryCopyTo(s, destination, out charsWritten)
               : sb.TryCopyTo(destination, out charsWritten);
         }
@@ -576,8 +575,7 @@ namespace System
                     return info.NaNSymbol;
                 }
 
-                return
-                    double.IsNegative(value)
+                return double.IsNegative(value)
                   ? info.NegativeInfinitySymbol
                   : info.PositiveInfinitySymbol;
             }
@@ -668,8 +666,7 @@ namespace System
         ) {
             var sb = new ValueStringBuilder(stackalloc char[CharStackBufferSize]);
             string? s = FormatSingle(ref sb, value, format, info);
-            return
-                s != null
+            return s != null
               ? TryCopyTo(s, destination, out charsWritten)
               : sb.TryCopyTo(destination, out charsWritten);
         }
@@ -692,8 +689,7 @@ namespace System
                     return info.NaNSymbol;
                 }
 
-                return
-                    float.IsNegative(value)
+                return float.IsNegative(value)
                   ? info.NegativeInfinitySymbol
                   : info.PositiveInfinitySymbol;
             }
@@ -793,8 +789,7 @@ namespace System
                     return info.NaNSymbol;
                 }
 
-                return
-                    Half.IsNegative(value)
+                return Half.IsNegative(value)
                   ? info.NegativeInfinitySymbol
                   : info.PositiveInfinitySymbol;
             }
@@ -877,8 +872,7 @@ namespace System
         ) {
             var sb = new ValueStringBuilder(stackalloc char[CharStackBufferSize]);
             string? s = FormatHalf(ref sb, value, format, info);
-            return
-                s != null
+            return s != null
               ? TryCopyTo(s, destination, out charsWritten)
               : sb.TryCopyTo(destination, out charsWritten);
         }
@@ -913,8 +907,7 @@ namespace System
             // Fast path for default format
             if (string.IsNullOrEmpty(format))
             {
-                return
-                    value >= 0
+                return value >= 0
                   ? UInt32ToDecStr((uint)value)
                   : NegativeInt32ToDecStr(
                         value,
@@ -936,8 +929,7 @@ namespace System
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
                 {
-                    return
-                        value >= 0
+                    return value >= 0
                       ? UInt32ToDecStr((uint)value, digits)
                       : NegativeInt32ToDecStr(
                             value,
@@ -991,8 +983,7 @@ namespace System
             // Fast path for default format
             if (format.Length == 0)
             {
-                return
-                    value >= 0
+                return value >= 0
                   ? TryUInt32ToDecStr((uint)value, digits: -1, destination, out charsWritten)
                   : TryNegativeInt32ToDecStr(
                         value,
@@ -1024,8 +1015,7 @@ namespace System
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
                 {
-                    return
-                        value >= 0
+                    return value >= 0
                       ? TryUInt32ToDecStr((uint)value, digits, destination, out charsWritten)
                       : TryNegativeInt32ToDecStr(
                             value,
@@ -1207,8 +1197,7 @@ namespace System
             // Fast path for default format
             if (string.IsNullOrEmpty(format))
             {
-                return
-                    value >= 0
+                return value >= 0
                   ? UInt64ToDecStr((ulong)value, digits: -1)
                   : NegativeInt64ToDecStr(
                         value,
@@ -1229,8 +1218,7 @@ namespace System
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
                 {
-                    return
-                        value >= 0
+                    return value >= 0
                       ? UInt64ToDecStr((ulong)value, digits)
                       : NegativeInt64ToDecStr(
                             value,
@@ -1283,8 +1271,7 @@ namespace System
             // Fast path for default format
             if (format.Length == 0)
             {
-                return
-                    value >= 0
+                return value >= 0
                   ? TryUInt64ToDecStr((ulong)value, digits: -1, destination, out charsWritten)
                   : TryNegativeInt64ToDecStr(
                         value,
@@ -1308,8 +1295,7 @@ namespace System
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D')
                 {
-                    return
-                        value >= 0
+                    return value >= 0
                       ? TryUInt64ToDecStr((ulong)value, digits, destination, out charsWritten)
                       : TryNegativeInt64ToDecStr(
                             value,
@@ -1519,8 +1505,7 @@ namespace System
 
         public static string Int32ToDecStr(int value)
         {
-            return
-                value >= 0
+            return value >= 0
               ? UInt32ToDecStr((uint)value)
               : NegativeInt32ToDecStr(value, -1, NumberFormatInfo.CurrentInfo.NegativeSign);
         }
@@ -1792,8 +1777,7 @@ namespace System
 
         public static string Int64ToDecStr(long value)
         {
-            return
-                value >= 0
+            return value >= 0
               ? UInt64ToDecStr((ulong)value, -1)
               : NegativeInt64ToDecStr(value, -1, NumberFormatInfo.CurrentInfo.NegativeSign);
         }
@@ -2080,8 +2064,7 @@ namespace System
 
             // Default empty format to be "G"; custom format is signified with '\0'.
             digits = -1;
-            return
-                format.Length == 0 || c == '\0'
+            return format.Length == 0 || c == '\0'
               ? // For compat, treat '\0' as the end of the specifier, even if the specifier extends beyond it.
                 'G'
               : '\0';

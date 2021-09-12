@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return
-                    _previousSubmissionFieldMap == null
+                return _previousSubmissionFieldMap == null
                   ? Array.Empty<FieldSymbol>()
                   : (IEnumerable<FieldSymbol>)_previousSubmissionFieldMap.Values;
             }

@@ -64,8 +64,7 @@ namespace System.DirectoryServices.Tests
 
         internal string GetLdapPath(string prefix) // like "ou=something"
         {
-            return
-                string.IsNullOrEmpty(Port)
+            return string.IsNullOrEmpty(Port)
               ? $"LDAP://{ServerName}/{prefix},{SearchDn}"
               : $"LDAP://{ServerName}:{Port}/{prefix},{SearchDn}";
         }

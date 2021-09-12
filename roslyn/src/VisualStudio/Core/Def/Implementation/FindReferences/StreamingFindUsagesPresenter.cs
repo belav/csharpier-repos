@@ -226,8 +226,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 StoreCurrentGroupingPriority(window);
             }
 
-            return
-                supportsReferences
+            return supportsReferences
               ? StartSearchWithReferences(
                     window,
                     desiredGroupingPriority,

@@ -17,8 +17,7 @@ namespace System.Net.Http
                 async: false,
                 cancellationToken
             );
-            return
-                sendTask.IsCompleted
+            return sendTask.IsCompleted
               ? sendTask.Result
               : sendTask.AsTask().GetAwaiter().GetResult();
         }

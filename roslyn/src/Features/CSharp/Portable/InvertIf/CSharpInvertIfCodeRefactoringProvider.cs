@@ -151,8 +151,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
                 statementArray[0] = statementArray[0].GetNodeWithoutLeadingBlankLines();
             }
 
-            return
-                original is BlockSyntax block
+            return original is BlockSyntax block
               ? block.WithStatements(SyntaxFactory.List(statementArray))
               : statementArray.Length == 1
                   ? statementArray[0]
@@ -204,8 +203,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
             // of all the different types of rewriting, we may need indentation fixed up and
             // whatnot.  Don't do this with single-line because we want to ensure as closely
             // as possible that we've kept things on that single line.
-            return
-                isSingleLine
+            return isSingleLine
               ? updatedIf
               : updatedIf.WithAdditionalAnnotations(Formatter.Annotation);
         }
@@ -227,8 +225,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
 
         protected override IEnumerable<StatementSyntax> UnwrapBlock(StatementSyntax ifBody)
         {
-            return
-                ifBody is BlockSyntax block
+            return ifBody is BlockSyntax block
               ? block.Statements
               : SyntaxFactory.SingletonList(ifBody);
         }

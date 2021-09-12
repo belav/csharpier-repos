@@ -54,8 +54,7 @@ namespace System.Diagnostics
         /// <returns>An array of process infos, one per found process.</returns>
         public static ProcessInfo[] GetProcessInfos(string machineName)
         {
-            return
-                IsRemoteMachine(machineName)
+            return IsRemoteMachine(machineName)
               ? NtProcessManager.GetProcessInfos(machineName, isRemoteMachine: true)
               : NtProcessInfoHelper.GetProcessInfos();
         }
@@ -103,8 +102,7 @@ namespace System.Diagnostics
             // on PerformanceCounters to get the ProcessIds for both remote desktop
             // and the local machine, unlike Desktop on which we rely on PCs only for
             // remote machines.
-            return
-                IsRemoteMachine(machineName)
+            return IsRemoteMachine(machineName)
               ? NtProcessManager.GetProcessIds(machineName, true)
               : GetProcessIds();
         }

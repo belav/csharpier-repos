@@ -106,8 +106,7 @@ namespace System.Xml.Linq
             if (cancellationToken.IsCancellationRequested)
                 return Task.FromCanceled(cancellationToken);
 
-            return
-                parent is XDocument
+            return parent is XDocument
               ? writer.WriteWhitespaceAsync(text)
               : writer.WriteStringAsync(text);
         }

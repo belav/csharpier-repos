@@ -109,8 +109,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ISymbol ITypeSymbol.FindImplementationForInterfaceMember(ISymbol interfaceMember)
         {
-            return
-                interfaceMember is Symbol symbol
+            return interfaceMember is Symbol symbol
               ? UnderlyingTypeSymbol.FindImplementationForInterfaceMember(symbol.UnderlyingSymbol)
                     .GetPublicSymbol()
               : null;

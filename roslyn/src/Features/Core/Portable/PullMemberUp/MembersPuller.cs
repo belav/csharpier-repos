@@ -90,8 +90,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             // the other getter/setter is not.
             // In this scenario, only the public getter/setter
             // will be add to the destination interface.
-            return
-                getterOrSetter?.DeclaredAccessibility == Accessibility.Public
+            return getterOrSetter?.DeclaredAccessibility == Accessibility.Public
               ? getterOrSetter
               : null;
         }
@@ -100,8 +99,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         {
             // Create a public getter/setter since user is trying to pull a non-public property to an interface.
             // If getterOrSetter is null, it means this property doesn't have a getter/setter, so just don't generate it.
-            return
-                getterOrSetter == null
+            return getterOrSetter == null
               ? getterOrSetter
               : CodeGenerationSymbolFactory.CreateMethodSymbol(
                     getterOrSetter,

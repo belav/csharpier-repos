@@ -50,8 +50,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Check.NotNull(table, nameof(table));
             Check.NotNull(joinPredicate, nameof(joinPredicate));
 
-            return
-                table != Table || joinPredicate != JoinPredicate
+            return table != Table || joinPredicate != JoinPredicate
               ? new LeftJoinExpression(table, joinPredicate)
               : this;
         }

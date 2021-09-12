@@ -42,8 +42,7 @@ namespace System.Net
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
             // Nothing to do.
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
               : Task.CompletedTask;
         }

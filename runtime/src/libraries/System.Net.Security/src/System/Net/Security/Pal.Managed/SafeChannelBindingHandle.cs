@@ -35,8 +35,7 @@ namespace System.Net.Security
         private byte[] GetPrefixBytes(ChannelBindingKind kind)
         {
             Debug.Assert(kind == ChannelBindingKind.Endpoint || kind == ChannelBindingKind.Unique);
-            return
-                kind == ChannelBindingKind.Endpoint
+            return kind == ChannelBindingKind.Endpoint
               ? s_tlsServerEndPointByteArray
               : s_tlsUniqueByteArray;
         }

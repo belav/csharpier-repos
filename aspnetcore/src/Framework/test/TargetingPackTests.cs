@@ -316,8 +316,7 @@ namespace Microsoft.AspNetCore
                     i =>
                     {
                         var fileName = Path.GetFileName(i);
-                        return
-                            fileName.EndsWith(".dll", StringComparison.Ordinal)
+                        return fileName.EndsWith(".dll", StringComparison.Ordinal)
                           ? fileName.Substring(0, fileName.Length - 4)
                           : fileName;
                     }
@@ -338,8 +337,7 @@ namespace Microsoft.AspNetCore
                     i =>
                     {
                         var fileName = i.Split('|')[0];
-                        return
-                            fileName.EndsWith(".dll", StringComparison.Ordinal)
+                        return fileName.EndsWith(".dll", StringComparison.Ordinal)
                           ? fileName.Substring(0, fileName.Length - 4)
                           : fileName;
                     }
@@ -419,8 +417,7 @@ namespace Microsoft.AspNetCore
                     i =>
                     {
                         var fileName = i.Attribute("AssemblyName").Value;
-                        return
-                            fileName.EndsWith(".dll", StringComparison.Ordinal)
+                        return fileName.EndsWith(".dll", StringComparison.Ordinal)
                           ? fileName.Substring(0, fileName.Length - 4)
                           : fileName;
                     }

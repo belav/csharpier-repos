@@ -242,8 +242,7 @@ namespace System.Linq
         private static Expression GetSourceExpression<TSource>(IEnumerable<TSource> source)
         {
             IQueryable<TSource>? q = source as IQueryable<TSource>;
-            return
-                q != null
+            return q != null
               ? q.Expression
               : Expression.Constant(source, typeof(IEnumerable<TSource>));
         }

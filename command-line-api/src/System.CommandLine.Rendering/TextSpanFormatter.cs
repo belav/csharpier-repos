@@ -86,8 +86,7 @@ namespace System.CommandLine.Rendering
                 {
                     var formattableString = format((T)t);
 
-                    return
-                        formattableString == null
+                    return formattableString == null
                       ? TextSpan.Empty()
                       : ParseToSpan(formattableString);
                 }

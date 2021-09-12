@@ -520,8 +520,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethodSymbol meth1 = swt.Prop().GetterMethod;
             MethodSymbol meth2 = swt.Prop().SetterMethod;
             Debug.Assert((meth1 ?? meth2) != null);
-            return
-                meth1 == null | meth2 == null
+            return meth1 == null | meth2 == null
               ? ErrorHandling.Error(
                     ErrorCode.ERR_BindToBogusProp1,
                     swt.Sym.name,
@@ -694,8 +693,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if ((_flags & MemLookFlags.Ctor) != 0)
             {
                 Debug.Assert(_typeSrc is AggregateType);
-                return
-                    _arity > 0
+                return _arity > 0
                   ? ErrorHandling.Error(
                         ErrorCode.ERR_BadCtorArgCount,
                         ((AggregateType)_typeSrc).OwningAggregate,

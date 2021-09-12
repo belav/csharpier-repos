@@ -171,8 +171,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         private static bool IsConstant(IOperation operation)
         {
             // By-design, constants will not propagate to conversions.
-            return
-                operation is IConversionOperation op
+            return operation is IConversionOperation op
               ? IsConstant(op.Operand)
               : operation.ConstantValue.HasValue;
         }

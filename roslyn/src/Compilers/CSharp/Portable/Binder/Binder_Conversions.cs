@@ -2588,8 +2588,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // error. We know that the constant will fit into either a double or a decimal, so
             // convert it to one of those and then check the bounds on that.
             var canonicalValue = CanonicalizeConstant(value);
-            return
-                canonicalValue is decimal
+            return canonicalValue is decimal
               ? CheckConstantBounds(
                     destinationType,
                     (decimal)canonicalValue,

@@ -1190,8 +1190,7 @@ namespace System.Globalization
                 return true;
             }
 
-            return
-                overflow
+            return overflow
               ? result.SetOverflowFailure()
               : // we found at least one literal pattern match but the numbers just didn't fit
                 result.SetBadTimeSpanFailure(); // we couldn't find a thing
@@ -1423,8 +1422,7 @@ namespace System.Globalization
                 return true;
             }
 
-            return
-                overflow
+            return overflow
               ? result.SetOverflowFailure()
               : // we found at least one literal pattern match but the numbers just didn't fit
                 result.SetBadTimeSpanFailure(); // we couldn't find a thing

@@ -624,8 +624,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
         public static int MainMethod()
         {
             Test t = new Test();
-            return
-                t.TestGetMethod(new MemberClass()) + t.TestSetMethod(new MemberClass()) == 0
+            return t.TestGetMethod(new MemberClass()) + t.TestSetMethod(new MemberClass()) == 0
               ? 0
               : 1;
         }

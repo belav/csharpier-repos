@@ -44,8 +44,7 @@ namespace System.CommandLine.DragonFruit
 
             string MainMethodFullName()
             {
-                return
-                    string.IsNullOrWhiteSpace(entryPointFullTypeName)
+                return string.IsNullOrWhiteSpace(entryPointFullTypeName)
                   ? "Main"
                   : $"{entryPointFullTypeName}.Main";
             }

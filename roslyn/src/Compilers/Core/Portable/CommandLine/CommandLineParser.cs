@@ -1041,8 +1041,7 @@ namespace Microsoft.CodeAnalysis
                 )
             );
 
-            return
-                (options == StringSplitOptions.RemoveEmptyEntries)
+            return (options == StringSplitOptions.RemoveEmptyEntries)
               ? result.Where(s => s.Length > 0)
               : result;
         }

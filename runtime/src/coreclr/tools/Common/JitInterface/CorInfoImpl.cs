@@ -1094,8 +1094,7 @@ namespace Internal.JitInterface
         {
             if (contextStruct == contextFromMethodBeingCompiled())
             {
-                return
-                    MethodBeingCompiled.HasInstantiation
+                return MethodBeingCompiled.HasInstantiation
                   ? (TypeSystemEntity)MethodBeingCompiled
                   : (TypeSystemEntity)MethodBeingCompiled.OwningType;
             }
@@ -1416,8 +1415,7 @@ namespace Internal.JitInterface
 
         private MethodSignatureFlags PlatformDefaultUnmanagedCallingConvention()
         {
-            return
-                _compilation.TypeSystemContext.Target.IsWindows
+            return _compilation.TypeSystemContext.Target.IsWindows
               ? MethodSignatureFlags.UnmanagedCallingConventionStdCall
               : MethodSignatureFlags.UnmanagedCallingConventionCdecl;
         }
@@ -2458,8 +2456,7 @@ namespace Internal.JitInterface
                     MethodBeingCompiled
                 );
 
-            return
-                type.IsNullable
+            return type.IsNullable
               ? CorInfoHelpFunc.CORINFO_HELP_BOX_NULLABLE
               : CorInfoHelpFunc.CORINFO_HELP_BOX;
         }
@@ -2468,8 +2465,7 @@ namespace Internal.JitInterface
         {
             var type = HandleToObject(cls);
 
-            return
-                type.IsNullable
+            return type.IsNullable
               ? CorInfoHelpFunc.CORINFO_HELP_UNBOX_NULLABLE
               : CorInfoHelpFunc.CORINFO_HELP_UNBOX;
         }
@@ -4264,8 +4260,7 @@ namespace Internal.JitInterface
 #else
         private bool notifyInstructionSetUsage(InstructionSet instructionSet, bool supportEnabled)
         {
-            return
-                supportEnabled
+            return supportEnabled
               ? _compilation.InstructionSetSupport.IsInstructionSetSupported(instructionSet)
               : false;
         }

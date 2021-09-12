@@ -359,8 +359,7 @@ namespace Microsoft.Cci
 
                 string typeName = GetOrCreateSerializedTypeName(import.TargetTypeOpt);
 
-                return
-                    (import.AliasOpt != null)
+                return (import.AliasOpt != null)
                   ? "A" + import.AliasOpt + " T" + typeName
                   : "T" + typeName;
             }
@@ -373,8 +372,7 @@ namespace Microsoft.Cci
 
                 if (import.AliasOpt != null)
                 {
-                    return
-                        (import.TargetAssemblyOpt != null)
+                    return (import.TargetAssemblyOpt != null)
                       ? "A"
                         + import.AliasOpt
                         + " E"
@@ -388,8 +386,7 @@ namespace Microsoft.Cci
                 }
                 else
                 {
-                    return
-                        (import.TargetAssemblyOpt != null)
+                    return (import.TargetAssemblyOpt != null)
                       ? "E"
                         + namespaceName
                         + " "

@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            return
-                result.HasValue
+            return result.HasValue
               ? new VSTypeScriptIndentationResultWrapper(result.Value)
               : (VSTypeScriptIndentationResultWrapper?)null;
         }

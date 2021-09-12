@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         public static IEnumerable<Location> GetDefinitionLocationsToShow(this ISymbol definition)
         {
-            return
-                definition.IsKind(SymbolKind.Namespace)
+            return definition.IsKind(SymbolKind.Namespace)
               ? SpecializedCollections.SingletonEnumerable(definition.Locations.First())
               : definition.Locations;
         }
@@ -121,8 +120,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Solution solution,
             ISymbol symbol
         ) {
-            return
-                symbol.IsOrdinaryMethod()
+            return symbol.IsOrdinaryMethod()
               ? FilterNonMatchingMethodNamesWorker(result, solution, symbol)
               : result;
         }

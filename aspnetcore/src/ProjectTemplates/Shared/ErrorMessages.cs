@@ -21,8 +21,7 @@ namespace Templates.Test.Helpers
             Project project,
             ProcessEx process
         ) {
-            return
-                process.HasExited
+            return process.HasExited
               ? $@"Project {project.ProjectArguments} failed to {step}.
 {process.GetFormattedOutput()}"
               : "";

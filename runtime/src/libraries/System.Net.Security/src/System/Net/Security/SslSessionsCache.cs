@@ -159,8 +159,7 @@ namespace System.Net.Security
 
         private static SafeFreeCredentials? GetCachedCredential(SslCredKey key)
         {
-            return
-                s_cachedCreds.TryGetValue(key, out SafeCredentialReference? cached)
+            return s_cachedCreds.TryGetValue(key, out SafeCredentialReference? cached)
               ? cached.Target
               : null;
         }

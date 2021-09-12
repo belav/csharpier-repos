@@ -17,8 +17,7 @@ namespace System.Configuration
         ) {
             ValidateType(value, typeof(int));
 
-            return
-                (int)value == int.MaxValue
+            return (int)value == int.MaxValue
               ? "Infinite"
               : ((int)value).ToString(CultureInfo.InvariantCulture);
         }

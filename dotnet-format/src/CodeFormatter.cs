@@ -353,8 +353,7 @@ namespace Microsoft.CodeAnalysis.Tools
 
             // If no files are covered by an editorconfig, then return them all. Otherwise only return
             // files that are covered by an editorconfig.
-            return
-                documentsCoveredByEditorConfig.Count == 0
+            return documentsCoveredByEditorConfig.Count == 0
               ? (projectFileCount, documentsNotCoveredByEditorConfig.ToImmutable())
               : (projectFileCount, documentsCoveredByEditorConfig.ToImmutable());
         }

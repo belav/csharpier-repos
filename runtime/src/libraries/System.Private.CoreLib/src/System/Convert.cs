@@ -240,8 +240,7 @@ namespace System
         {
             if (value == System.DBNull.Value)
                 return true;
-            return
-                value is IConvertible convertible
+            return value is IConvertible convertible
               ? convertible.GetTypeCode() == TypeCode.DBNull
               : false;
         }
@@ -2398,8 +2397,7 @@ namespace System
             {
                 throw new ArgumentException(SR.Arg_InvalidBase);
             }
-            return
-                value != null
+            return value != null
               ? ParseNumbers.StringToInt(value.AsSpan(), fromBase, ParseNumbers.IsTight)
               : 0;
         }
@@ -2415,8 +2413,7 @@ namespace System
             {
                 throw new ArgumentException(SR.Arg_InvalidBase);
             }
-            return
-                value != null
+            return value != null
               ? (uint)ParseNumbers.StringToInt(
                     value.AsSpan(),
                     fromBase,
@@ -2435,8 +2432,7 @@ namespace System
             {
                 throw new ArgumentException(SR.Arg_InvalidBase);
             }
-            return
-                value != null
+            return value != null
               ? ParseNumbers.StringToLong(value.AsSpan(), fromBase, ParseNumbers.IsTight)
               : 0;
         }
@@ -2452,8 +2448,7 @@ namespace System
             {
                 throw new ArgumentException(SR.Arg_InvalidBase);
             }
-            return
-                value != null
+            return value != null
               ? (ulong)ParseNumbers.StringToLong(
                     value.AsSpan(),
                     fromBase,

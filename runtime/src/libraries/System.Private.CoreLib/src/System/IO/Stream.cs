@@ -1244,8 +1244,7 @@ namespace System.IO
                     // than a synchronous wait.  A synchronous wait will result in a deadlock condition, because
                     // the EndXx method for the outstanding async operation won't be able to acquire the lock on
                     // _stream due to this call blocked while holding the lock.
-                    return
-                        overridesBeginRead
+                    return overridesBeginRead
                       ? _stream.BeginRead(buffer, offset, count, callback, state)
                       : _stream.BeginReadInternal(
                             buffer,
@@ -1333,8 +1332,7 @@ namespace System.IO
                     // than a synchronous wait.  A synchronous wait will result in a deadlock condition, because
                     // the EndXx method for the outstanding async operation won't be able to acquire the lock on
                     // _stream due to this call blocked while holding the lock.
-                    return
-                        overridesBeginWrite
+                    return overridesBeginWrite
                       ? _stream.BeginWrite(buffer, offset, count, callback, state)
                       : _stream.BeginWriteInternal(
                             buffer,

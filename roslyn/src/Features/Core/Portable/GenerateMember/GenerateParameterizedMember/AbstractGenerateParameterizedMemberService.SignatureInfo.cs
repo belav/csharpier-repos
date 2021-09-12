@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             public ImmutableArray<ITypeParameterSymbol> DetermineTypeParameters(
                 CancellationToken cancellationToken
             ) {
-                return
-                    _typeParameters.IsDefault
+                return _typeParameters.IsDefault
                   ? (_typeParameters = DetermineTypeParametersWorker(cancellationToken))
                   : _typeParameters;
             }

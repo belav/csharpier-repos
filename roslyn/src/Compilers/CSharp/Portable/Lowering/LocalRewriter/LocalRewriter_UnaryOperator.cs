@@ -198,8 +198,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            return
-                (oldNode != null)
+            return (oldNode != null)
               ? oldNode.Update(
                     kind,
                     loweredOperand,

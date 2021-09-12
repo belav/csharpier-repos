@@ -181,8 +181,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
                 return VSConstants.E_NOTIMPL;
             }
 
-            return
-                TryFillDescription(index, (_VSOBJDESCOPTIONS)grfOptions, pobDesc)
+            return TryFillDescription(index, (_VSOBJDESCOPTIONS)grfOptions, pobDesc)
               ? VSConstants.S_OK
               : VSConstants.E_FAIL;
         }
@@ -196,16 +195,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
 
         int IVsSimpleObjectList2.GetCapabilities2(out uint pgrfCapabilities)
         {
-            return
-                TryGetCapabilities(out pgrfCapabilities)
+            return TryGetCapabilities(out pgrfCapabilities)
               ? VSConstants.S_OK
               : VSConstants.E_NOTIMPL;
         }
 
         int IVsSimpleObjectList2.GetCategoryField2(uint index, int category, out uint pfCatField)
         {
-            return
-                TryGetCategoryField(index, category, out pfCatField)
+            return TryGetCategoryField(index, category, out pfCatField)
               ? VSConstants.S_OK
               : VSConstants.E_NOTIMPL;
         }
@@ -389,8 +386,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
                 return VSConstants.E_NOTIMPL;
             }
 
-            return
-                TryLocateNavInfoNode(pNavInfoNode, out pulIndex)
+            return TryLocateNavInfoNode(pNavInfoNode, out pulIndex)
               ? VSConstants.S_OK
               : VSConstants.E_FAIL;
         }
@@ -432,8 +428,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             pData[0] = new VSCOMPONENTSELECTORDATA();
             pData[0].dwSize = (uint)Marshal.SizeOf(typeof(VSCOMPONENTSELECTORDATA));
 
-            return
-                TryGetBrowseContainerData(ulIndex, ref pData[0])
+            return TryGetBrowseContainerData(ulIndex, ref pData[0])
               ? VSConstants.S_OK
               : VSConstants.E_FAIL;
         }
@@ -454,8 +449,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
                 return VSConstants.E_INVALIDARG;
             }
 
-            return
-                TryFindBrowseContainer(pData[0], out pulIndex)
+            return TryFindBrowseContainer(pData[0], out pulIndex)
               ? VSConstants.S_OK
               : VSConstants.E_FAIL;
         }

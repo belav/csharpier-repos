@@ -76,8 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // This is a property set access. We return a BoundPropertyAccess node here.
                 // This node will be rewritten with MakePropertyAssignment when rewriting the enclosing BoundAssignmentOperator.
 
-                return
-                    oldNodeOpt != null
+                return oldNodeOpt != null
                   ? oldNodeOpt.Update(rewrittenReceiverOpt, propertySymbol, resultKind, type)
                   : new BoundPropertyAccess(
                         syntax,
@@ -125,8 +124,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             if (_inExpressionLambda && rewrittenArguments.IsEmpty)
             {
-                return
-                    oldNodeOpt != null
+                return oldNodeOpt != null
                   ? oldNodeOpt.Update(
                         rewrittenReceiver,
                         property,

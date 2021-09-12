@@ -35,8 +35,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
             var bytesTransferred = BytesTransferred;
             var error = SocketError;
 
-            return
-                error == SocketError.Success
+            return error == SocketError.Success
               ? new ValueTask<int>(bytesTransferred)
               : ValueTask.FromException<int>(CreateException(error));
         }
@@ -70,8 +69,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
             var bytesTransferred = BytesTransferred;
             var error = SocketError;
 
-            return
-                error == SocketError.Success
+            return error == SocketError.Success
               ? new ValueTask<int>(bytesTransferred)
               : ValueTask.FromException<int>(CreateException(error));
         }

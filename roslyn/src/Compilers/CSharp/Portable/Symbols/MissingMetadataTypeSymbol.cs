@@ -367,8 +367,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get
                 {
                     int typeId = TypeId;
-                    return
-                        (typeId >= (int)WellKnownType.First)
+                    return (typeId >= (int)WellKnownType.First)
                       ? SpecialType.None
                       : (SpecialType)_lazyTypeId;
                 }

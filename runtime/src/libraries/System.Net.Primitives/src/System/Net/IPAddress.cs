@@ -392,8 +392,7 @@ namespace System.Net
 
         public bool TryFormat(Span<char> destination, out int charsWritten)
         {
-            return
-                IsIPv4
+            return IsIPv4
               ? IPAddressParser.IPv4AddressToString(PrivateAddress, destination, out charsWritten)
               : IPAddressParser.IPv6AddressToString(
                     _numbers!,

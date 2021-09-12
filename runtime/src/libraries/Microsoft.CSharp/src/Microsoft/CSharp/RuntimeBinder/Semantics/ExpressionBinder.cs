@@ -329,8 +329,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 x =>
                 {
                     Expr pTemp = binder.MustConvertWithSuppressedMessage(x, pDestType);
-                    return
-                        pDestType == pIntType
+                    return pDestType == pIntType
                       ? pTemp
                       : ExprFactoryCreateCastWithSuppressedMessage(
                             EXPRFLAG.EXF_INDEXEXPR,
@@ -955,8 +954,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private static ErrorCode GetStandardLvalueError(CheckLvalueKind kind)
         {
             Debug.Assert(kind >= CheckLvalueKind.Assignment && kind <= CheckLvalueKind.Increment);
-            return
-                kind == CheckLvalueKind.Increment
+            return kind == CheckLvalueKind.Increment
               ? ErrorCode.ERR_IncrementLvalueExpected
               : ErrorCode.ERR_AssgLvalueExpected;
         }

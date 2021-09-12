@@ -148,8 +148,7 @@ namespace System
 
         public int CompareTo(Version? value)
         {
-            return
-                object.ReferenceEquals(value, this)
+            return object.ReferenceEquals(value, this)
               ? 0
               : value is null
                   ? 1

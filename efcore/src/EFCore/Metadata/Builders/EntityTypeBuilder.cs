@@ -888,8 +888,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         {
             Check.NotEmpty(navigationName, nameof(navigationName));
 
-            return
-                Metadata.ClrType == Model.DefaultPropertyBagType
+            return Metadata.ClrType == Model.DefaultPropertyBagType
               ? HasOne(navigationName, null) // Path only used by pre 3.0 snapshots
               : HasOne(
                     Metadata.GetNavigationMemberInfo(navigationName).GetMemberType(),

@@ -278,8 +278,7 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             }
 
             // No x86 runtimes available on MacOS or Linux.
-            return
-                OperatingSystem.IsWindows()
+            return OperatingSystem.IsWindows()
               ? null
               : $"No {arch} available for non-Windows systems.";
         }

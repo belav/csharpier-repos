@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         /// </summary>
         public static ISymbolSearchUpdateEngine CreateEngineInProcess()
         {
-            return
-                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
               ? new SymbolSearchUpdateEngine()
               : (ISymbolSearchUpdateEngine)new NoOpUpdateEngine();
         }
@@ -136,8 +135,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                     )
                     .ConfigureAwait(false);
 
-                return
-                    result.HasValue
+                return result.HasValue
                   ? result.Value
                   : ImmutableArray<PackageWithAssemblyResult>.Empty;
             }
@@ -162,8 +160,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                     )
                     .ConfigureAwait(false);
 
-                return
-                    result.HasValue
+                return result.HasValue
                   ? result.Value
                   : ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty;
             }

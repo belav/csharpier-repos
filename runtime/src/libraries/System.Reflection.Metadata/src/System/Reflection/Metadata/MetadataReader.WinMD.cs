@@ -1096,8 +1096,7 @@ namespace System.Reflection.Metadata
                 "Windows.Foundation.Metadata",
                 "AllowMultipleAttribute"
             );
-            return
-                allowMultiple
+            return allowMultiple
               ? CustomAttributeValueTreatment.AttributeUsageAllowMultiple
               : CustomAttributeValueTreatment.AttributeUsageAllowSingle;
         }

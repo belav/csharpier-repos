@@ -176,8 +176,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 }
 
                 batch.Dispose();
-                return
-                    foreignKeyReference.Object is null || !foreignKeyReference.Object.IsInModel
+                return foreignKeyReference.Object is null || !foreignKeyReference.Object.IsInModel
                   ? null
                   : foreignKeyReference.Object.Builder;
             }
@@ -397,8 +396,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 .Count();
             if (foreignKey.Properties.SequenceEqual(foreignKeyProperties))
             {
-                return
-                    conflictingFKCount > 1
+                return conflictingFKCount > 1
                   ? ((ForeignKey)foreignKey).Builder.ReuniquifyImplicitProperties(true)
                   : relationshipBuilder;
             }

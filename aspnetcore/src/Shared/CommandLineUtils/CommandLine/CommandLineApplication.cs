@@ -684,8 +684,7 @@ namespace Microsoft.Extensions.CommandLineUtils
 
         public string GetFullNameAndVersion()
         {
-            return
-                ShortVersionGetter == null
+            return ShortVersionGetter == null
               ? FullName
               : string.Format(
                     CultureInfo.InvariantCulture,

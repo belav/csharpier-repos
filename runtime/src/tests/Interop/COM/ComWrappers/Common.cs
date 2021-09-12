@@ -267,8 +267,7 @@ namespace ComWrappersTests.Common
                 return CustomQueryInterfaceResult.Handled;
             }
 
-            return
-                hr == E_NOINTERFACE
+            return hr == E_NOINTERFACE
               ? CustomQueryInterfaceResult.NotHandled
               : CustomQueryInterfaceResult.Failed;
         }

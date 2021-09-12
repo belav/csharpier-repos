@@ -126,8 +126,7 @@ namespace System.Net.Mail
         internal static MailHeaderID GetID(string name)
         {
             int id;
-            return
-                s_headerDictionary.TryGetValue(name, out id)
+            return s_headerDictionary.TryGetValue(name, out id)
               ? (MailHeaderID)id
               : MailHeaderID.Unknown;
         }
@@ -150,8 +149,7 @@ namespace System.Net.Mail
         internal static string NormalizeCase(string name)
         {
             int index;
-            return
-                s_headerDictionary.TryGetValue(name, out index)
+            return s_headerDictionary.TryGetValue(name, out index)
               ? s_headerInfo[index].NormalizedName
               : name;
         }

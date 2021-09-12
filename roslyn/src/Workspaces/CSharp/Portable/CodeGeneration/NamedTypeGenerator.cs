@@ -218,8 +218,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         ) {
             var reusableDeclarationSyntax =
                 GetReuseableSyntaxNodeForSymbol<MemberDeclarationSyntax>(namedType, options);
-            return
-                reusableDeclarationSyntax == null
+            return reusableDeclarationSyntax == null
               ? GetDeclarationSyntaxWithoutMembersWorker(namedType, destination, options)
               : RemoveAllMembers(reusableDeclarationSyntax);
         }

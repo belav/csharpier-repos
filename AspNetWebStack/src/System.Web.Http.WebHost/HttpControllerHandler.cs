@@ -471,8 +471,7 @@ namespace System.Web.Http.WebHost
             // PrepareHeadersAsync already evaluated the buffer policy.
             bool isBuffered = httpResponseBase.BufferOutput;
 
-            return
-                isBuffered
+            return isBuffered
               ? WriteBufferedResponseContentAsync(
                     httpContextBase,
                     request,

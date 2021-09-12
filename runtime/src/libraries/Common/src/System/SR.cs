@@ -54,8 +54,7 @@ namespace System
         {
             string resourceString = GetResourceString(resourceKey);
 
-            return
-                resourceKey == resourceString || resourceString == null
+            return resourceKey == resourceString || resourceString == null
               ? defaultString
               : resourceString;
         }

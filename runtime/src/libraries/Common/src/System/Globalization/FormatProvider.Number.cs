@@ -877,8 +877,7 @@ namespace System.Globalization
 
                 // Default empty format to be "G"; custom format is signified with '\0'.
                 digits = -1;
-                return
-                    format.Length == 0 || c == '\0'
+                return format.Length == 0 || c == '\0'
                   ? // For compat, treat '\0' as the end of the specifier, even if the specifier extends beyond it.
                     'G'
                   : '\0';

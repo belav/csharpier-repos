@@ -60,8 +60,7 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         ) {
             var selectedSpans = GetSelectedLine(args.TextView);
             var candidateSubmission = GetSubmissionFromSelectedSpans(editorOptions, selectedSpans);
-            return
-                CanParseSubmission(candidateSubmission)
+            return CanParseSubmission(candidateSubmission)
               ? Task.FromResult(selectedSpans)
               : ExpandSelectionAsync(selectedSpans, args, cancellationToken);
         }
@@ -108,8 +107,7 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                 )
                 .ConfigureAwait(false);
 
-            return
-                newSpans.Any()
+            return newSpans.Any()
               ? newSpans.Select(n => new SnapshotSpan(snapshot, n.Span.Start, n.Span.Length))
               : selectedSpans;
         }

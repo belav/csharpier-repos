@@ -37,8 +37,7 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return
-                sharedTableRootProperty != null
+            return sharedTableRootProperty != null
               ? sharedTableRootProperty.GetSrid(storeObject)
               : null;
         }

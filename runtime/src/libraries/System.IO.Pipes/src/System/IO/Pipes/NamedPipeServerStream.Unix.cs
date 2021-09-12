@@ -95,8 +95,7 @@ namespace System.IO.Pipes
                 throw new InvalidOperationException(SR.InvalidOperation_PipeAlreadyConnected);
             }
 
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
               : WaitForConnectionAsyncCore();
 

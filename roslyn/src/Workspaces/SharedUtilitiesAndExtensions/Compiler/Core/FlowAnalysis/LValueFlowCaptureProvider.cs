@@ -94,8 +94,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 }
 #endif
 
-                return
-                    lvalueFlowCaptureIdBuilder != null
+                return lvalueFlowCaptureIdBuilder != null
                   ? lvalueFlowCaptureIdBuilder.ToImmutable()
                   : ImmutableDictionary<CaptureId, FlowCaptureKind>.Empty;
             }

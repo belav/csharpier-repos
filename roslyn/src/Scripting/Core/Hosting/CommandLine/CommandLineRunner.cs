@@ -486,8 +486,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 (d1, d2) =>
                 {
                     int delta = (int)d2.Severity - (int)d1.Severity;
-                    return
-                        (delta != 0)
+                    return (delta != 0)
                       ? delta
                       : d1.Location.SourceSpan.Start - d2.Location.SourceSpan.Start;
                 }

@@ -296,8 +296,7 @@ namespace System
 
         internal override object? GetTarget()
         {
-            return
-                delegates?.Length > 0
+            return delegates?.Length > 0
               ? delegates[delegates.Length - 1].GetTarget()
               : base.GetTarget();
         }

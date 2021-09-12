@@ -1223,8 +1223,7 @@ namespace System.Reflection
             Debug.Assert(caType != null);
 
             if (type.GetElementType() != null)
-                return
-                    (caType.IsValueType)
+                return (caType.IsValueType)
                   ? Array.Empty<object>()
                   : CreateAttributeArrayHelper(caType, 0);
 

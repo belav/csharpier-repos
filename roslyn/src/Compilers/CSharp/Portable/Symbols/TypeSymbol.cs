@@ -255,8 +255,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return
-                    this.IsTypeParameter()
+                return this.IsTypeParameter()
                   ? ((TypeParameterSymbol)this).EffectiveBaseClassNoUseSiteDiagnostics
                   : this;
             }
@@ -264,8 +263,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal TypeSymbol EffectiveType(ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
         {
-            return
-                this.IsTypeParameter()
+            return this.IsTypeParameter()
               ? ((TypeParameterSymbol)this).EffectiveBaseClass(ref useSiteInfo)
               : this;
         }

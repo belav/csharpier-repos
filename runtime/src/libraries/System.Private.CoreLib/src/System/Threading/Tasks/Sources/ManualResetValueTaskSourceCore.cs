@@ -79,8 +79,7 @@ namespace System.Threading.Tasks.Sources
         public ValueTaskSourceStatus GetStatus(short token)
         {
             ValidateToken(token);
-            return
-                _continuation == null || !_completed
+            return _continuation == null || !_completed
               ? ValueTaskSourceStatus.Pending
               : _error == null
                   ? ValueTaskSourceStatus.Succeeded

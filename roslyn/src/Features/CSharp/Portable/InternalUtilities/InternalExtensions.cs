@@ -29,8 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (expression is DeclarationExpressionSyntax decl)
             {
                 var typeInfo = semanticModel.GetTypeInfo(decl.Type, cancellationToken);
-                return
-                    typeInfo.Type?.IsErrorType() == false
+                return typeInfo.Type?.IsErrorType() == false
                   ? typeInfo.Type
                   : semanticModel.Compilation.ObjectType;
             }

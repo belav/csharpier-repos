@@ -786,8 +786,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             protected override TimeSpan? GetNextDelay(Exception lastException)
             {
                 var baseDelay = base.GetNextDelay(lastException);
-                return
-                    baseDelay != null && _getNextDelay != null
+                return baseDelay != null && _getNextDelay != null
                   ? _getNextDelay.Invoke(lastException)
                   : baseDelay;
             }

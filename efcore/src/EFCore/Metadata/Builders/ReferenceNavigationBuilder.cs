@@ -218,8 +218,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 );
             }
 
-            return
-                collection.MemberInfo == null || ReferenceMember == null
+            return collection.MemberInfo == null || ReferenceMember == null
               ? builder.HasNavigations(
                     ReferenceName,
                     collection.Name,

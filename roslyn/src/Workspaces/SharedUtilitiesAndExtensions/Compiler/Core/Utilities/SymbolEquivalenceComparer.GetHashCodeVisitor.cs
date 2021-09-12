@@ -152,8 +152,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
                 currentHash = CombineHashCodes(x.Parameters, currentHash, _parameterAggregator);
 
-                return
-                    IsConstructedFromSelf(x)
+                return IsConstructedFromSelf(x)
                   ? currentHash
                   : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
             }
@@ -216,8 +215,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     return CombineAnonymousTypeHashCode(x, currentHash);
                 }
 
-                return
-                    IsConstructedFromSelf(x) || x.IsUnboundGenericType
+                return IsConstructedFromSelf(x) || x.IsUnboundGenericType
                   ? currentHash
                   : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
             }

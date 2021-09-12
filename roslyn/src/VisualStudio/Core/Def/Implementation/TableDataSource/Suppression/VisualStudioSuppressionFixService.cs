@@ -645,8 +645,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                 }
             }
 
-            return
-                builder != null
+            return builder != null
               ? builder.ToImmutable()
               : ImmutableDictionary<Document, ImmutableArray<Diagnostic>>.Empty;
         }
@@ -677,8 +676,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                 }
             }
 
-            return
-                projectDiagsBuilder != null
+            return projectDiagsBuilder != null
               ? projectDiagsBuilder.ToImmutable()
               : ImmutableDictionary<Project, ImmutableArray<Diagnostic>>.Empty;
         }

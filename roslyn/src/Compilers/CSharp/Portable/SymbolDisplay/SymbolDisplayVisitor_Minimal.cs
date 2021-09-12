@@ -318,8 +318,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static IEnumerable<T> GetAncestorsOrThis<T>(SyntaxNode node) where T : SyntaxNode
         {
-            return
-                node == null
+            return node == null
               ? SpecializedCollections.EmptyEnumerable<T>()
               : node.AncestorsAndSelf().OfType<T>();
         }

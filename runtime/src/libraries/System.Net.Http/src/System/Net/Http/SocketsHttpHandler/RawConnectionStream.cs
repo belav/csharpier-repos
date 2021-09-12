@@ -218,8 +218,7 @@ namespace System.Net.Http
                 }
 
                 ValueTask writeTask = connection.WriteWithoutBufferingAsync(buffer, async: true);
-                return
-                    writeTask.IsCompleted
+                return writeTask.IsCompleted
                   ? writeTask
                   : new ValueTask(
                         WaitWithConnectionCancellationAsync(
@@ -246,8 +245,7 @@ namespace System.Net.Http
                 }
 
                 ValueTask flushTask = connection.FlushAsync(async: true);
-                return
-                    flushTask.IsCompleted
+                return flushTask.IsCompleted
                   ? flushTask.AsTask()
                   : WaitWithConnectionCancellationAsync(flushTask, connection, cancellationToken);
             }

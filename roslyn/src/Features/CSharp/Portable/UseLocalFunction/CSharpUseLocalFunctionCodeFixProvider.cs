@@ -335,8 +335,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             var parameterList = TryGetOrCreateParameterList(anonymousFunction);
             var i = 0;
 
-            return
-                parameterList != null
+            return parameterList != null
               ? parameterList.ReplaceNodes(
                     parameterList.Parameters,
                     (parameterNode, _) =>

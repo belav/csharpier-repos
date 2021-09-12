@@ -196,8 +196,7 @@ namespace IdentitySamples.Controllers
                 phoneNumber
             );
             // Send an SMS to verify the phone number
-            return
-                phoneNumber == null
+            return phoneNumber == null
               ? View("Error")
               : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }

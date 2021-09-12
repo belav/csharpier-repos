@@ -282,8 +282,7 @@ namespace System.Reflection.TypeLoading
         public sealed override MemberInfo[] GetDefaultMembers()
         {
             string? defaultMemberName = GetDefaultMemberName();
-            return
-                defaultMemberName != null
+            return defaultMemberName != null
               ? GetMember(defaultMemberName)
               : Array.Empty<MemberInfo>();
         }

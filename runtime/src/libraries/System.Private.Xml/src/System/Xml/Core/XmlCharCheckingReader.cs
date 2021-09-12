@@ -377,8 +377,7 @@ namespace System.Xml
                 switch (_state)
                 {
                     case State.Initial:
-                        return
-                            base.reader.ReadState == ReadState.Closed
+                        return base.reader.ReadState == ReadState.Closed
                           ? ReadState.Closed
                           : ReadState.Initial;
                     case State.Error:

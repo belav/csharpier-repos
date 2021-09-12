@@ -131,8 +131,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             out string prefix
         ) {
             var definedPrefix = node.LookupPrefix(namespaceUri);
-            return
-                string.IsNullOrEmpty(definedPrefix)
+            return string.IsNullOrEmpty(definedPrefix)
               ? Try.Failure(out prefix)
               : Try.Success(out prefix, definedPrefix);
         }
@@ -144,8 +143,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 return Try.Failure(out prefix); // No preferred prefix
 
             namespaceUri = node.LookupNamespaceUri(prefix);
-            return
-                string.IsNullOrEmpty(namespaceUri)
+            return string.IsNullOrEmpty(namespaceUri)
               ? true // Can use preferred prefix
               : Try.Failure(out prefix); // Preferred prefix already in use
         }
@@ -163,8 +161,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private bool ShouldDefineOnRoot(string prefix, string uri)
         {
-            return
-                rootNamespaces != null
+            return rootNamespaces != null
               ? ShouldDefineOnRootCore(prefix, uri)
               : parent.ShouldDefineOnRoot(prefix, uri);
         }
@@ -255,8 +252,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public override IXsltContextVariable ResolveVariable(string prefix, string name)
         {
-            return
-                variables != null
+            return variables != null
               ? ResolveVariableCore(prefix, name)
               : parent != null ? parent.ResolveVariable(prefix, name) : null;
         }
@@ -266,8 +262,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             string name,
             XPathResultType[] argTypes
         ) {
-            return
-                functions != null
+            return functions != null
               ? ResolveFunctionCore(prefix, name, argTypes)
               : parent != null ? parent.ResolveFunction(prefix, name, argTypes) : null;
         }

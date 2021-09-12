@@ -327,8 +327,7 @@ namespace System.Text.Json
 
             JsonTokenType type = TokenType;
 
-            return
-                type == JsonTokenType.True
+            return type == JsonTokenType.True
               ? true
               : type == JsonTokenType.False
                   ? false

@@ -59,8 +59,7 @@ namespace System.Xml.Serialization
             get
             {
                 object? obj;
-                return
-                    _table.TryGetValue(new NameKey(qname.Name, qname.Namespace), out obj)
+                return _table.TryGetValue(new NameKey(qname.Name, qname.Namespace), out obj)
                   ? obj
                   : null;
             }

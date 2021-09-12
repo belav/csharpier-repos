@@ -445,8 +445,7 @@ namespace System.Threading
             // wait, and whether we successfully acquired the semaphore is
             // stored in waitSuccessful.
 
-            return
-                (asyncWaitTask != null)
+            return (asyncWaitTask != null)
               ? asyncWaitTask.GetAwaiter().GetResult()
               : waitSuccessful;
         }

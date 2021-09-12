@@ -34,8 +34,7 @@ namespace Microsoft.AspNetCore.Authentication
         public virtual Task SignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties)
         {
             var target = ResolveTarget(Options.ForwardSignIn);
-            return
-                (target != null)
+            return (target != null)
               ? Context.SignInAsync(target, user, properties)
               : HandleSignInAsync(user, properties ?? new AuthenticationProperties());
         }

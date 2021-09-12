@@ -55,8 +55,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 moduleBuilder.Add(module);
             }
 
-            return
-                (moduleBuilder != null)
+            return (moduleBuilder != null)
               ? moduleBuilder.ToImmutableAndFree()
               : ImmutableArray.Create(manifestModule);
         }

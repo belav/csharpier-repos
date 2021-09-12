@@ -136,8 +136,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // This is an indexer set access. We return a BoundIndexerAccess node here.
                 // This node will be rewritten with MakePropertyAssignment when rewriting the enclosing BoundAssignmentOperator.
 
-                return
-                    oldNodeOpt != null
+                return oldNodeOpt != null
                   ? oldNodeOpt.Update(
                         rewrittenReceiver,
                         indexer,

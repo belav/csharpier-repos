@@ -44,8 +44,7 @@ public interface I1
         {
             get
             {
-                return
-                    ExecutionConditionUtil.IsMonoOrCoreClr
+                return ExecutionConditionUtil.IsMonoOrCoreClr
                   ? Verification.Passes
                   : Verification.Skipped;
             }

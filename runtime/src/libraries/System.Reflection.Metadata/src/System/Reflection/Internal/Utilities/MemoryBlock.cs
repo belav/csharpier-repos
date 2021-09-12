@@ -519,8 +519,7 @@ namespace System.Reflection.Internal
                     firstDifferenceIndex = currentIndex;
 
                     // uncommon non-ascii case --> fall back to slow allocating comparison.
-                    return
-                        (currentChar > 0x7F)
+                    return (currentChar > 0x7F)
                       ? FastComparisonResult.Inconclusive
                       : FastComparisonResult.Unequal;
                 }
@@ -539,8 +538,7 @@ namespace System.Reflection.Internal
                 return FastComparisonResult.Equal;
             }
 
-            return
-                textTerminated
+            return textTerminated
               ? FastComparisonResult.BytesStartWithText
               : FastComparisonResult.TextStartsWithBytes;
         }

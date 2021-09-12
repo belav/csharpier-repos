@@ -30,8 +30,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public virtual Func<ISnapshot> CreateEmpty(IEntityType entityType)
         {
-            return
-                GetPropertyCount(entityType) == 0
+            return GetPropertyCount(entityType) == 0
               ? (() => Snapshot.Empty)
               : Expression.Lambda<Func<ISnapshot>>(
                         // TODO-Nullable: This whole code path is null unsafe. We are passing null parameter but later using parameter
@@ -186,8 +185,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 typeof(ISnapshot)
             );
 
-            return
-                UseEntityVariable && entityVariable != null
+            return UseEntityVariable && entityVariable != null
               ? (Expression)Expression.Block(
                     new List<ParameterExpression> { entityVariable },
                     new List<Expression>

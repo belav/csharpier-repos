@@ -663,8 +663,7 @@ namespace Microsoft.CodeAnalysis
                 return newTextVersion;
             }
 
-            return
-                oldRoot.IsEquivalentTo(newRoot, topLevel: true)
+            return oldRoot.IsEquivalentTo(newRoot, topLevel: true)
               ? oldTreeAndVersion.Version
               : newTextVersion;
         }

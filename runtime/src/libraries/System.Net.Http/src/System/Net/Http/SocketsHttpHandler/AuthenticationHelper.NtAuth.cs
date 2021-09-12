@@ -21,8 +21,7 @@ namespace System.Net.Http
             HttpConnection connection,
             CancellationToken cancellationToken
         ) {
-            return
-                isProxyAuth
+            return isProxyAuth
               ? connection.SendAsyncCore(request, async, cancellationToken)
               : pool.SendWithNtProxyAuthAsync(connection, request, async, cancellationToken);
         }

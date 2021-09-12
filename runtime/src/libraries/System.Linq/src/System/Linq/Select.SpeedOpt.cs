@@ -137,8 +137,7 @@ namespace System.Linq
             public IPartition<TResult> Take(int count)
             {
                 Debug.Assert(count > 0);
-                return
-                    count >= _source.Length
+                return count >= _source.Length
                   ? (IPartition<TResult>)this
                   : new SelectListPartitionIterator<TSource, TResult>(
                         _source,
@@ -801,8 +800,7 @@ namespace System.Linq
             {
                 Debug.Assert(count > 0);
                 int minIndex = _minIndexInclusive + count;
-                return
-                    (uint)minIndex > (uint)_maxIndexInclusive
+                return (uint)minIndex > (uint)_maxIndexInclusive
                   ? EmptyPartition<TResult>.Instance
                   : new SelectListPartitionIterator<TSource, TResult>(
                         _source,
@@ -816,8 +814,7 @@ namespace System.Linq
             {
                 Debug.Assert(count > 0);
                 int maxIndex = _minIndexInclusive + count - 1;
-                return
-                    (uint)maxIndex >= (uint)_maxIndexInclusive
+                return (uint)maxIndex >= (uint)_maxIndexInclusive
                   ? this
                   : new SelectListPartitionIterator<TSource, TResult>(
                         _source,

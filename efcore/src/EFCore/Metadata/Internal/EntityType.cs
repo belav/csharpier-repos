@@ -1154,8 +1154,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.HasNoNulls(properties, nameof(properties));
             Check.NotEmpty(properties, nameof(properties));
 
-            return
-                _baseType != null
+            return _baseType != null
               ? _foreignKeys.Count == 0
                   ? _baseType.FindForeignKeys(properties)
                   : _baseType.FindForeignKeys(properties)
@@ -1276,8 +1275,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) {
             Check.NotEmpty(properties, nameof(properties));
 
-            return
-                _foreignKeys.Count == 0
+            return _foreignKeys.Count == 0
               ? Enumerable.Empty<ForeignKey>()
               : _foreignKeys.Where(
                     fk => PropertyListComparer.Instance.Equals(fk.Properties, properties)
@@ -1706,8 +1704,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Check.NotNull(name, nameof(name));
 
-            return
-                _directlyDerivedTypes.Count == 0
+            return _directlyDerivedTypes.Count == 0
               ? Enumerable.Empty<Navigation>()
               : (IEnumerable<Navigation>)GetDerivedTypes()
                     .Select(et => et.FindDeclaredNavigation(name))
@@ -1941,8 +1938,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Check.NotNull(name, nameof(name));
 
-            return
-                _directlyDerivedTypes.Count == 0
+            return _directlyDerivedTypes.Count == 0
               ? Enumerable.Empty<SkipNavigation>()
               : (IEnumerable<SkipNavigation>)GetDerivedTypes()
                     .Select(et => et.FindDeclaredSkipNavigation(name))
@@ -2670,8 +2666,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             Check.NotNull(propertyName, nameof(propertyName));
 
-            return
-                _directlyDerivedTypes.Count == 0
+            return _directlyDerivedTypes.Count == 0
               ? Enumerable.Empty<Property>()
               : (IEnumerable<Property>)GetDerivedTypes()
                     .Select(et => et.FindDeclaredProperty(propertyName))
@@ -3107,8 +3102,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) {
             Check.NotNull(propertyName, nameof(propertyName));
 
-            return
-                _directlyDerivedTypes.Count == 0
+            return _directlyDerivedTypes.Count == 0
               ? Enumerable.Empty<ServiceProperty>()
               : (IEnumerable<ServiceProperty>)GetDerivedTypes()
                     .Select(et => et.FindDeclaredServiceProperty(propertyName))
@@ -3233,8 +3227,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var ignoredSource = FindDeclaredIgnoredConfigurationSource(name);
 
-            return
-                BaseType == null
+            return BaseType == null
               ? ignoredSource
               : BaseType.FindIgnoredConfigurationSource(name).Max(ignoredSource);
         }

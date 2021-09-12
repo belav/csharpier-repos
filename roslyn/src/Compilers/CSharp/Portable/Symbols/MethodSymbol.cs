@@ -751,8 +751,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public MethodSymbol ReduceExtensionMethod()
         {
-            return
-                (this.IsExtensionMethod && this.MethodKind != MethodKind.ReducedExtension)
+            return (this.IsExtensionMethod && this.MethodKind != MethodKind.ReducedExtension)
               ? ReducedExtensionMethodSymbol.Create(this)
               : null;
         }

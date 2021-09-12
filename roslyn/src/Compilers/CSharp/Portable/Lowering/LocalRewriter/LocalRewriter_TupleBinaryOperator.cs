@@ -929,8 +929,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private BoundExpression LowerConversions(BoundExpression expr)
         {
-            return
-                (expr is BoundConversion conv)
+            return (expr is BoundConversion conv)
               ? MakeConversionNode(
                     oldNodeOpt: conv,
                     syntax: conv.Syntax,

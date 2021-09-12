@@ -261,8 +261,7 @@ namespace System.Web.Mvc
 
         internal IList<SelectListItem> GetListItems()
         {
-            return
-                (!String.IsNullOrEmpty(DataValueField))
+            return (!String.IsNullOrEmpty(DataValueField))
               ? GetListItemsWithValueField()
               : GetListItemsWithoutValueField();
         }

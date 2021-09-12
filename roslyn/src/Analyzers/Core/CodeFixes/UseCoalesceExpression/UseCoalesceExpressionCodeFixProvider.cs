@@ -161,8 +161,7 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             SyntaxNode currentWhenTrue,
             SyntaxNode currentWhenFalse
         ) {
-            return
-                whenPart == whenTrue
+            return whenPart == whenTrue
               ? generator.CoalesceExpression(
                     conditionalPartLow,
                     syntaxFacts.WalkDownParentheses(currentWhenTrue)

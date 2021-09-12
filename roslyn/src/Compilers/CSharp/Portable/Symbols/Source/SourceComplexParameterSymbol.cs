@@ -107,8 +107,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 ParameterEarlyWellKnownAttributeData data = GetEarlyDecodedWellKnownAttributeData();
-                return
-                    (data != null && data.DefaultParameterValue != ConstantValue.Unset)
+                return (data != null && data.DefaultParameterValue != ConstantValue.Unset)
                   ? data.DefaultParameterValue
                   : ConstantValue.NotAvailable;
             }
@@ -522,8 +521,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 var syntax = this.CSharpSyntaxNode;
-                return
-                    (syntax != null)
+                return (syntax != null)
                   ? syntax.AttributeLists
                   : default(SyntaxList<AttributeListSyntax>);
             }

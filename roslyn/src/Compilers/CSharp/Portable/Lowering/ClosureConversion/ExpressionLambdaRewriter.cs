@@ -632,8 +632,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredLeft,
             BoundExpression loweredRight
         ) {
-            return
-                ((object)methodOpt == null)
+            return ((object)methodOpt == null)
               ? ExprFactory(opName, loweredLeft, loweredRight)
               : requiresLifted
                   ? ExprFactory(
@@ -1434,8 +1433,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return Demote(result, node.Type, isChecked);
             }
 
-            return
-                ((object)node.MethodOpt == null)
+            return ((object)node.MethodOpt == null)
               ? ExprFactory(opname, loweredArg)
               : ExprFactory(opname, loweredArg, _bound.MethodInfo(node.MethodOpt));
         }

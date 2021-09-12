@@ -2115,8 +2115,7 @@ namespace Microsoft.CodeAnalysis.Editing
         public SyntaxNode TypeExpression(ITypeSymbol typeSymbol, bool addImport)
         {
             var expression = TypeExpression(typeSymbol);
-            return
-                addImport
+            return addImport
               ? expression
               : expression.WithAdditionalAnnotations(DoNotAddImportsAnnotation.Annotation);
         }

@@ -102,8 +102,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return
-                    this.ContainingSymbol.Kind == SymbolKind.Method
+                return this.ContainingSymbol.Kind == SymbolKind.Method
                   ? TypeParameterKind.Method
                   : TypeParameterKind.Type;
             }
@@ -702,8 +701,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ConsList<TypeParameterSymbol> inProgress
         ) {
             var bounds = this.GetBounds(inProgress);
-            return
-                (bounds != null)
+            return (bounds != null)
               ? bounds.ConstraintTypes
               : ImmutableArray<TypeWithAnnotations>.Empty;
         }

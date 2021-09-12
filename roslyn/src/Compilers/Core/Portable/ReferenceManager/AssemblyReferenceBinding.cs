@@ -101,8 +101,7 @@ namespace Microsoft.CodeAnalysis
             private string GetDebuggerDisplay()
             {
                 var displayName = ReferenceIdentity?.GetDisplayName() ?? "";
-                return
-                    IsBound
+                return IsBound
                   ? displayName
                     + " -> #"
                     + DefinitionIndex

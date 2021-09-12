@@ -12,8 +12,7 @@ namespace RoutingWebSite
         public string TransformOutbound(object value)
         {
             // Slugify value
-            return
-                value == null
+            return value == null
               ? null
               : Regex.Replace(
                         value.ToString(),

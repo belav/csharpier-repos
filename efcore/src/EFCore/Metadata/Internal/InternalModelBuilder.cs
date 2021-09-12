@@ -111,8 +111,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 entityType.GetConfigurationSource()
                             ) && !entityType.IsOwned()
                         ) {
-                            return
-                                configurationSource == ConfigurationSource.Explicit
+                            return configurationSource == ConfigurationSource.Explicit
                               ? throw new InvalidOperationException(
                                     CoreStrings.ClashingNonSharedType(
                                         type.Name,
@@ -135,8 +134,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 clrType = type.Type!;
                 if (Metadata.IsShared(clrType))
                 {
-                    return
-                        configurationSource == ConfigurationSource.Explicit
+                    return configurationSource == ConfigurationSource.Explicit
                       ? throw new InvalidOperationException(
                             CoreStrings.ClashingSharedType(clrType.ShortDisplayName())
                         )
@@ -201,8 +199,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
                 else
                 {
-                    return
-                        configurationSource == ConfigurationSource.Explicit
+                    return configurationSource == ConfigurationSource.Explicit
                       ? throw new InvalidOperationException(
                             CoreStrings.ClashingMismatchedSharedType(
                                 type.Name,

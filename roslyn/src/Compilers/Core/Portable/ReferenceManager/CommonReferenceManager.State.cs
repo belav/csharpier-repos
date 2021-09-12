@@ -775,8 +775,7 @@ namespace Microsoft.CodeAnalysis
         internal TAssemblySymbol? GetReferencedAssemblySymbol(MetadataReference reference)
         {
             int index;
-            return
-                ReferencedAssembliesMap.TryGetValue(reference, out index)
+            return ReferencedAssembliesMap.TryGetValue(reference, out index)
               ? ReferencedAssemblies[index]
               : null;
         }

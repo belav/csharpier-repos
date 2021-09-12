@@ -63,8 +63,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var xValue = x.GetCurrentValue<TModel?>(_property);
             var yValue = y.GetCurrentValue<TModel?>(_property);
 
-            return
-                !xValue.HasValue && !yValue.HasValue
+            return !xValue.HasValue && !yValue.HasValue
               ? 0
               : !xValue.HasValue
                   ? -1

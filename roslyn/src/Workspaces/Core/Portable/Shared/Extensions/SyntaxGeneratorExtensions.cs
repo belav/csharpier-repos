@@ -749,8 +749,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var arguments = generator.CreateArguments(method.Parameters.As<IParameterSymbol>());
             var invocationExpression = generator.InvocationExpression(through, arguments);
 
-            return
-                method.ReturnsVoid
+            return method.ReturnsVoid
               ? generator.ExpressionStatement(invocationExpression)
               : generator.ReturnStatement(invocationExpression);
         }
@@ -835,8 +834,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             static SyntaxNode GenerateContainerName(SyntaxGenerator factory, ISymbol throughMember)
             {
                 var classOrStructType = throughMember.ContainingType;
-                return
-                    classOrStructType.IsGenericType
+                return classOrStructType.IsGenericType
                   ? factory.GenericName(classOrStructType.Name, classOrStructType.TypeArguments)
                   : factory.IdentifierName(classOrStructType.Name);
             }
@@ -874,8 +872,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return ImmutableArray.Create(generator.ReturnStatement(expression));
             }
 
-            return
-                preferAutoProperties
+            return preferAutoProperties
               ? default
               : generator.CreateThrowNotImplementedStatementBlock(compilation);
         }
@@ -917,8 +914,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return ImmutableArray.Create(generator.ExpressionStatement(expression));
             }
 
-            return
-                preferAutoProperties
+            return preferAutoProperties
               ? default
               : generator.CreateThrowNotImplementedStatementBlock(compilation);
         }

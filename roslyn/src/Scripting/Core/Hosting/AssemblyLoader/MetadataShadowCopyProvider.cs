@@ -643,8 +643,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
             var xmlStream = CopyFile(xmlOriginalPath, xmlCopyPath, fileMayNotExist: true);
 
-            return
-                (xmlStream != null)
+            return (xmlStream != null)
               ? new FileShadowCopy(xmlStream, xmlOriginalPath, xmlCopyPath)
               : null;
         }

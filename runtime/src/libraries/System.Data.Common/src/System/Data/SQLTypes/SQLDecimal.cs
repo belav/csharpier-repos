@@ -2944,8 +2944,7 @@ namespace System.Data.SqlTypes
         // Overloading comparison operators
         public static SqlBoolean operator ==(SqlDecimal x, SqlDecimal y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.CompareNm(y) == EComparison.EQ);
         }
@@ -2957,16 +2956,14 @@ namespace System.Data.SqlTypes
 
         public static SqlBoolean operator <(SqlDecimal x, SqlDecimal y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.CompareNm(y) == EComparison.LT);
         }
 
         public static SqlBoolean operator >(SqlDecimal x, SqlDecimal y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.CompareNm(y) == EComparison.GT);
         }
@@ -3240,8 +3237,7 @@ namespace System.Data.SqlTypes
             if (n == new SqlDecimal(0))
                 return SqlInt32.Zero;
             else
-                return
-                    n.IsNull
+                return n.IsNull
                   ? SqlInt32.Null
                   : (n.IsPositive ? new SqlInt32(1) : new SqlInt32(-1));
         }

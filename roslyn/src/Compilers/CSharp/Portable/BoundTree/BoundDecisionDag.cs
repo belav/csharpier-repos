@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundLeafDecisionDagNode d:
                     return ImmutableArray<BoundDecisionDagNode>.Empty;
                 case BoundWhenDecisionDagNode w:
-                    return
-                        (w.WhenFalse != null)
+                    return (w.WhenFalse != null)
                       ? ImmutableArray.Create(w.WhenTrue, w.WhenFalse)
                       : ImmutableArray.Create(w.WhenTrue);
                 default:
@@ -244,8 +243,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var tempIdentifierMap = PooledDictionary<BoundDagEvaluation, int>.GetInstance();
             int tempIdentifier(BoundDagEvaluation e)
             {
-                return
-                    (e == null)
+                return (e == null)
                   ? 0
                   : tempIdentifierMap.TryGetValue(e, out int value)
                       ? value

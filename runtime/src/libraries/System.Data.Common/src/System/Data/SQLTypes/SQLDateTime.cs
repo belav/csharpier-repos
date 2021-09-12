@@ -566,8 +566,7 @@ namespace System.Data.SqlTypes
         // Overloading comparison operators
         public static SqlBoolean operator ==(SqlDateTime x, SqlDateTime y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.m_day == y.m_day && x.m_time == y.m_time);
         }
@@ -579,32 +578,28 @@ namespace System.Data.SqlTypes
 
         public static SqlBoolean operator <(SqlDateTime x, SqlDateTime y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.m_day < y.m_day || (x.m_day == y.m_day && x.m_time < y.m_time));
         }
 
         public static SqlBoolean operator >(SqlDateTime x, SqlDateTime y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.m_day > y.m_day || (x.m_day == y.m_day && x.m_time > y.m_time));
         }
 
         public static SqlBoolean operator <=(SqlDateTime x, SqlDateTime y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.m_day < y.m_day || (x.m_day == y.m_day && x.m_time <= y.m_time));
         }
 
         public static SqlBoolean operator >=(SqlDateTime x, SqlDateTime y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.m_day > y.m_day || (x.m_day == y.m_day && x.m_time >= y.m_time));
         }

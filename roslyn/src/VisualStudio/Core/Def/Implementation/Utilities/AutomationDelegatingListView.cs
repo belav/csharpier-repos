@@ -167,8 +167,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
         public override object GetPattern(PatternInterface patternInterface)
         {
             var automationPeer = GetAutomationPeer();
-            return
-                automationPeer != null
+            return automationPeer != null
               ? automationPeer.GetPattern(patternInterface)
               : base.GetPattern(patternInterface);
         }

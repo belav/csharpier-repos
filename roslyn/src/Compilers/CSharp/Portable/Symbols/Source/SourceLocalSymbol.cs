@@ -153,8 +153,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(nodeBinder != null);
 
             Debug.Assert(closestTypeSyntax.Kind() != SyntaxKind.RefType);
-            return
-                closestTypeSyntax.IsVar
+            return closestTypeSyntax.IsVar
               ? new DeconstructionLocalSymbol(
                     containingSymbol,
                     scopeBinder,
@@ -265,8 +264,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder initializerBinderOpt = null
         ) {
             Debug.Assert(declarationKind != LocalDeclarationKind.ForEachIterationVariable);
-            return
-                (initializer != null)
+            return (initializer != null)
               ? new LocalWithInitializer(
                     containingSymbol,
                     scopeBinder,
@@ -716,8 +714,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ) {
                 Debug.Assert(boundInitValue != null);
                 MakeConstantTuple(inProgress: null, boundInitValue: boundInitValue);
-                return
-                    _constantTuple == null
+                return _constantTuple == null
                   ? ImmutableBindingDiagnostic<AssemblySymbol>.Empty
                   : _constantTuple.Diagnostics;
             }

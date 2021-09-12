@@ -98,8 +98,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
             Check.NotNull(property, nameof(property));
             Check.NotNull(entityType, nameof(entityType));
 
-            return
-                property.ClrType.UnwrapNullableType() == typeof(Guid)
+            return property.ClrType.UnwrapNullableType() == typeof(Guid)
               ? property.ValueGenerated == ValueGenerated.Never
                 || property.GetDefaultValueSql() != null
                   ? (ValueGenerator)new TemporaryGuidValueGenerator()

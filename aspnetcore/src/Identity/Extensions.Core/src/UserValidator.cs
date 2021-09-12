@@ -54,8 +54,7 @@ namespace Microsoft.AspNetCore.Identity
             {
                 await ValidateEmail(manager, user, errors);
             }
-            return
-                errors.Count > 0
+            return errors.Count > 0
               ? IdentityResult.Failed(errors.ToArray())
               : IdentityResult.Success;
         }

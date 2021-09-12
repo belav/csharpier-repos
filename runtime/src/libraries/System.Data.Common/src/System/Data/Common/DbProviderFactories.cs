@@ -200,8 +200,7 @@ namespace System.Data.Common
             );
             if (!wasRegistered)
             {
-                return
-                    throwOnError
+                return throwOnError
                   ? throw ADP.Argument(
                         SR.Format(
                             SR.ADP_DbProviderFactories_InvariantNameNotFound,

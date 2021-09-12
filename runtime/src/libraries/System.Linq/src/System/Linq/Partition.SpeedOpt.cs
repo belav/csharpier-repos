@@ -105,8 +105,7 @@ namespace System.Linq
         public IPartition<TElement> Skip(int count)
         {
             int minIndex = unchecked(_minIndexInclusive + count);
-            return
-                unchecked((uint)minIndex > (uint)_maxIndexInclusive)
+            return unchecked((uint)minIndex > (uint)_maxIndexInclusive)
               ? EmptyPartition<TElement>.Instance
               : new OrderedPartition<TElement>(_source, minIndex, _maxIndexInclusive);
         }
@@ -208,8 +207,7 @@ namespace System.Linq
             public IPartition<TSource> Skip(int count)
             {
                 int minIndex = _minIndexInclusive + count;
-                return
-                    (uint)minIndex > (uint)_maxIndexInclusive
+                return (uint)minIndex > (uint)_maxIndexInclusive
                   ? EmptyPartition<TSource>.Instance
                   : new ListPartition<TSource>(_source, minIndex, _maxIndexInclusive);
             }
@@ -217,8 +215,7 @@ namespace System.Linq
             public IPartition<TSource> Take(int count)
             {
                 int maxIndex = unchecked(_minIndexInclusive + count - 1);
-                return
-                    unchecked((uint)maxIndex >= (uint)_maxIndexInclusive)
+                return unchecked((uint)maxIndex >= (uint)_maxIndexInclusive)
                   ? this
                   : new ListPartition<TSource>(_source, _minIndexInclusive, maxIndex);
             }

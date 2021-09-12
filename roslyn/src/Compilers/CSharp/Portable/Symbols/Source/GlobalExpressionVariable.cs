@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
             var syntaxReference = syntax.GetReference();
-            return
-                (typeSyntax == null || typeSyntax.IsVar)
+            return (typeSyntax == null || typeSyntax.IsVar)
               ? new InferrableGlobalExpressionVariable(
                     containingType,
                     modifiers,

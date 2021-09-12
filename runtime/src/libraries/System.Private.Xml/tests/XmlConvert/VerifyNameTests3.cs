@@ -492,8 +492,7 @@ namespace System.Xml.Tests
             }
             catch (ArgumentException e)
             {
-                return
-                    (exceptionType != null && e.GetType().Name == exceptionType.Name)
+                return (exceptionType != null && e.GetType().Name == exceptionType.Name)
                   ? TEST_PASS
                   : TEST_FAIL;
             }
@@ -501,8 +500,7 @@ namespace System.Xml.Tests
             {
                 CError.WriteLine(e.LineNumber);
                 CError.WriteLine(e.LinePosition);
-                return
-                    (exceptionType != null && e.GetType().Name == exceptionType.Name)
+                return (exceptionType != null && e.GetType().Name == exceptionType.Name)
                   ? TEST_PASS
                   : TEST_FAIL;
             }

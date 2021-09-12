@@ -189,8 +189,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 newTestExpression is ConstantExpression constantTestExpression
                 && constantTestExpression.Value is bool constantTestValue
             ) {
-                return
-                    constantTestValue
+                return constantTestValue
                   ? Visit(conditionalExpression.IfTrue)
                   : Visit(conditionalExpression.IfFalse);
             }
@@ -218,8 +217,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         TryGetConstantValue(binaryExpression.Left) ?? Visit(binaryExpression.Left);
                     if (newLeftExpression is ConstantExpression constantLeftExpression)
                     {
-                        return
-                            constantLeftExpression.Value == null
+                        return constantLeftExpression.Value == null
                           ? Visit(binaryExpression.Right)
                           : newLeftExpression;
                     }
@@ -319,8 +317,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         {
             var constantExpression = Expression.Constant(value, value?.GetType() ?? returnType);
 
-            return
-                constantExpression.Type != returnType
+            return constantExpression.Type != returnType
               ? Expression.Convert(constantExpression, returnType)
               : (Expression)constantExpression;
         }

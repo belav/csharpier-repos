@@ -595,8 +595,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return
-                        _bufferBlock._boundingState != null
+                    return _bufferBlock._boundingState != null
                       ? _bufferBlock._boundingState.PostponedMessages
                       : null;
                 }
@@ -612,8 +611,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return
-                        _bufferBlock._boundingState != null
+                    return _bufferBlock._boundingState != null
                       ? _bufferBlock._boundingState.TaskForInputProcessing
                       : null;
                 }

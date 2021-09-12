@@ -1237,8 +1237,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // need to synthesize setter
                 MethodSymbol overriddenAccessor = this.GetOwnOrInheritedSetMethod();
-                return
-                    (object)overriddenAccessor == null
+                return (object)overriddenAccessor == null
                   ? null
                   : new SynthesizedSealedPropertyAccessor(this, overriddenAccessor);
             }
@@ -1246,8 +1245,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // need to synthesize getter
                 MethodSymbol overriddenAccessor = this.GetOwnOrInheritedGetMethod();
-                return
-                    (object)overriddenAccessor == null
+                return (object)overriddenAccessor == null
                   ? null
                   : new SynthesizedSealedPropertyAccessor(this, overriddenAccessor);
             }

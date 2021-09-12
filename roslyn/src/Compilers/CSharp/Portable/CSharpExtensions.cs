@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis
 
         internal static SyntaxKind ContextualKind(this SyntaxToken token)
         {
-            return
-                (object)token.Language == (object)LanguageNames.CSharp
+            return (object)token.Language == (object)LanguageNames.CSharp
               ? (SyntaxKind)token.RawContextualKind
               : SyntaxKind.None;
         }
@@ -1036,8 +1035,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             this SemanticModel? semanticModel,
             AssignmentExpressionSyntax assignment
         ) {
-            return
-                semanticModel is CSharpSemanticModel csmodel
+            return semanticModel is CSharpSemanticModel csmodel
               ? csmodel.GetDeconstructionInfo(assignment)
               : default;
         }
@@ -1046,8 +1044,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             this SemanticModel? semanticModel,
             ForEachVariableStatementSyntax @foreach
         ) {
-            return
-                semanticModel is CSharpSemanticModel csmodel
+            return semanticModel is CSharpSemanticModel csmodel
               ? csmodel.GetDeconstructionInfo(@foreach)
               : default;
         }

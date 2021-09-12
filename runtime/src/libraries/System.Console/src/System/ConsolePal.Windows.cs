@@ -521,8 +521,7 @@ namespace System
                     false,
                     out succeeded
                 );
-                return
-                    succeeded
+                return succeeded
                   ? ColorAttributeToConsoleColor(
                         (Interop.Kernel32.Color)csbi.wAttributes
                             & Interop.Kernel32.Color.BackgroundMask
@@ -568,8 +567,7 @@ namespace System
                 );
 
                 // For code that may be used from Windows app w/ no console
-                return
-                    succeeded
+                return succeeded
                   ? ColorAttributeToConsoleColor(
                         (Interop.Kernel32.Color)csbi.wAttributes
                             & Interop.Kernel32.Color.ForegroundMask

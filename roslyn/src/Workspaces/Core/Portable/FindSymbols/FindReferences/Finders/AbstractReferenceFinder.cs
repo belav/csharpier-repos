@@ -585,8 +585,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 nonAliasReferences,
                 cancellationToken
             );
-            return
-                aliasSymbols.IsDefaultOrEmpty
+            return aliasSymbols.IsDefaultOrEmpty
               ? ImmutableArray<FinderLocation>.Empty
               : await FindReferencesThroughAliasSymbolsAsync(
                         symbol,
@@ -616,8 +615,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 nonAliasReferences,
                 cancellationToken
             );
-            return
-                aliasSymbols.IsDefaultOrEmpty
+            return aliasSymbols.IsDefaultOrEmpty
               ? ImmutableArray<FinderLocation>.Empty
               : await FindReferencesThroughAliasSymbolsAsync(
                         document,
@@ -1444,8 +1442,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             IImmutableSet<Project>? projects,
             CancellationToken cancellationToken
         ) {
-            return
-                symbol is TSymbol typedSymbol && CanFind(typedSymbol)
+            return symbol is TSymbol typedSymbol && CanFind(typedSymbol)
               ? DetermineProjectsToSearchAsync(typedSymbol, solution, projects, cancellationToken)
               : SpecializedTasks.EmptyImmutableArray<Project>();
         }
@@ -1457,8 +1454,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
         ) {
-            return
-                symbol is TSymbol typedSymbol && CanFind(typedSymbol)
+            return symbol is TSymbol typedSymbol && CanFind(typedSymbol)
               ? DetermineDocumentsToSearchAsync(
                     typedSymbol,
                     project,
@@ -1476,8 +1472,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesSearchOptions options,
             CancellationToken cancellationToken
         ) {
-            return
-                symbol is TSymbol typedSymbol && CanFind(typedSymbol)
+            return symbol is TSymbol typedSymbol && CanFind(typedSymbol)
               ? FindReferencesInDocumentAsync(
                     typedSymbol,
                     document,

@@ -179,8 +179,7 @@ namespace System.Resources.Extensions.Tests
         // Copied from  FormatterServices.cs
         internal static string GetClrTypeFullName(Type type)
         {
-            return
-                type.IsArray
+            return type.IsArray
               ? GetClrTypeFullNameForArray(type)
               : GetClrTypeFullNameForNonArrayTypes(type);
         }

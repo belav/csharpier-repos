@@ -970,8 +970,7 @@ namespace System.Linq.Expressions
             // nullable but not null, then this is treated as a call to x.HasValue
             // and is legal even if there is no equality operator defined on the
             // type of x.
-            return
-                IsNullConstant(left)
+            return IsNullConstant(left)
               ? !IsNullConstant(right) && right.Type.IsNullableType()
               : IsNullConstant(right) && left.Type.IsNullableType();
         }

@@ -52,8 +52,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return
-                _methodInfo.Equals(method)
+            return _methodInfo.Equals(method)
               ? _sqlExpressionFactory.Function(
                     "RAND",
                     Array.Empty<SqlExpression>(),

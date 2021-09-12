@@ -70,8 +70,7 @@ namespace Microsoft.AspNetCore.Http.Features
                     throw new ArgumentNullException(nameof(key));
                 }
 
-                return
-                    _features != null && _features.TryGetValue(key, out var result)
+                return _features != null && _features.TryGetValue(key, out var result)
                   ? result
                   : _defaults?[key];
             }

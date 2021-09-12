@@ -733,8 +733,7 @@ namespace System
                         && this.AsSpan(offset).SequenceEqual(value);
 
                 case StringComparison.OrdinalIgnoreCase:
-                    return
-                        this.Length < value.Length
+                    return this.Length < value.Length
                       ? false
                       : (
                             Ordinal.CompareStringIgnoreCase(
@@ -1237,8 +1236,7 @@ namespace System
                     {
                         return false;
                     }
-                    return
-                        (value.Length == 1)
+                    return (value.Length == 1)
                       ? true
                       : // First char is the same and thats all there is to compare
                         SpanHelpers.SequenceEqual(

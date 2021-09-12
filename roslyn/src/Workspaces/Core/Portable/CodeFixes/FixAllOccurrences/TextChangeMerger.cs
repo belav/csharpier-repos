@@ -163,8 +163,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             // one insertion then the other, or vice versa.  Because of this ambiguity
             // we conservatively disallow cases like this.
 
-            return
-                IsPureInsertion(change)
+            return IsPureInsertion(change)
               ? PureInsertionChangeCanBeApplied(change, in overlappingSpans, in intersectingSpans)
               : OverwriteChangeCanBeApplied(change, in overlappingSpans, in intersectingSpans);
         }

@@ -504,8 +504,7 @@ namespace Microsoft.CodeAnalysis
         internal static string GetAritySuffix(int arity)
         {
             Debug.Assert(arity > 0);
-            return
-                (arity <= 9)
+            return (arity <= 9)
               ? s_aritySuffixesOneToNine[arity - 1]
               : string.Concat(
                     GenericTypeNameManglingString,
@@ -638,8 +637,7 @@ namespace Microsoft.CodeAnalysis
 
             if (dots == 0)
             {
-                return
-                    name == SystemString
+                return name == SystemString
                   ? s_splitQualifiedNameSystem
                   : ImmutableArray.Create(name);
             }

@@ -83,8 +83,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ReadOnlyCollection<string> tupleElementNames,
             int index
         ) {
-            return
-                tupleElementNames != null && index < tupleElementNames.Count
+            return tupleElementNames != null && index < tupleElementNames.Count
               ? tupleElementNames[index]
               : null;
         }

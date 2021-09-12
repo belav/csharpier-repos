@@ -246,8 +246,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     cancellationToken
                 );
 
-                return
-                    isOriginatingProject
+                return isOriginatingProject
                   ? GetExtensionMethodsForSymbolsFromSameCompilation(
                         matchingMethodSymbols,
                         cancellationToken

@@ -127,8 +127,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     var newTable = Visit(innerJoinExpression.Table);
                     var newJoinPredicate = ProcessJoinPredicate(innerJoinExpression.JoinPredicate);
 
-                    return
-                        TryGetBoolConstantValue(newJoinPredicate) == true
+                    return TryGetBoolConstantValue(newJoinPredicate) == true
                       ? (TableExpressionBase)new CrossJoinExpression(newTable)
                       : innerJoinExpression.Update(newTable, newJoinPredicate);
                 }
@@ -310,8 +309,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             var limit = Visit(selectExpression.Limit, out _);
             changed |= limit != selectExpression.Limit;
 
-            return
-                changed
+            return changed
               ? selectExpression.Update(
                     projections,
                     tables,
@@ -599,8 +597,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             // if subquery has predicate which evaluates to false, we can simply return false
             // if the exisits is negated we need to return true instead
-            return
-                TryGetBoolConstantValue(subquery.Predicate) == false
+            return TryGetBoolConstantValue(subquery.Predicate) == false
               ? _sqlExpressionFactory.Constant(
                     existsExpression.IsNegated,
                     existsExpression.TypeMapping
@@ -663,8 +660,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
                 nullable = false;
 
-                return
-                    valuesList.Count == 0
+                return valuesList.Count == 0
                   ? _sqlExpressionFactory.Constant(false, inExpression.TypeMapping)
                   : SimplifyInExpression(
                         inExpression.Update(item, valuesExpression, subquery: null),
@@ -690,8 +686,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 // non_nullable NOT IN (NULL) -> true
                 // nullable IN (NULL) -> nullable IS NULL
                 // nullable NOT IN (NULL) -> nullable IS NOT NULL
-                return
-                    !hasNullValue || !itemNullable
+                return !hasNullValue || !itemNullable
                   ? (SqlExpression)_sqlExpressionFactory.Constant(
                         inExpression.IsNegated,
                         inExpression.TypeMapping
@@ -727,8 +722,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             // nullable IN (1, 2, NULL) -> nullable IN (1, 2) OR nullable IS NULL (full)
             // nullable NOT IN (1, 2) -> nullable NOT IN (1, 2) OR nullable IS NULL (full)
             // nullable NOT IN (1, 2, NULL) -> nullable NOT IN (1, 2) AND nullable IS NOT NULL (full)
-            return
-                inExpression.IsNegated == hasNullValue
+            return inExpression.IsNegated == hasNullValue
               ? _sqlExpressionFactory.AndAlso(
                     simplifiedInExpression,
                     _sqlExpressionFactory.IsNotNull(item)
@@ -787,8 +781,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 SqlConstantExpression inValuesExpression,
                 List<object?> inValuesList
             ) {
-                return
-                    inValuesList.Count == 1
+                return inValuesList.Count == 1
                   ? inExpression.IsNegated
                       ? (SqlExpression)_sqlExpressionFactory.NotEqual(
                             inExpression.Item,
@@ -864,8 +857,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             nullable = false;
 
-            return
-                changed
+            return changed
               ? rowNumberExpression.Update(partitions, orderings)
               : rowNumberExpression;
         }
@@ -1164,8 +1156,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             nullable = ParameterValues[sqlParameterExpression.Name] == null;
 
-            return
-                nullable
+            return nullable
               ? _sqlExpressionFactory.Constant(null, sqlParameterExpression.TypeMapping)
               : (SqlExpression)sqlParameterExpression;
         }
@@ -1209,8 +1200,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             nullable = operandNullable;
 
-            return
-                !operandNullable && sqlUnaryExpression.OperatorType == ExpressionType.Not
+            return !operandNullable && sqlUnaryExpression.OperatorType == ExpressionType.Not
               ? OptimizeNonNullableNotExpression(updated)
               : updated;
         }
@@ -1333,8 +1323,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 // a == false -> !a
                 // a != true -> !a
                 // a != false -> a
-                return
-                    sqlBinaryExpression.OperatorType == ExpressionType.Equal ^ rightBoolValue
+                return sqlBinaryExpression.OperatorType == ExpressionType.Equal ^ rightBoolValue
                   ? OptimizeNonNullableNotExpression(_sqlExpressionFactory.Not(left))
                   : left;
             }
@@ -1351,8 +1340,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 // false == a -> !a
                 // true != a -> !a
                 // false != a -> a
-                return
-                    sqlBinaryExpression.OperatorType == ExpressionType.Equal ^ leftBoolValue
+                return sqlBinaryExpression.OperatorType == ExpressionType.Equal ^ leftBoolValue
                   ? OptimizeNonNullableNotExpression(_sqlExpressionFactory.Not(right))
                   : right;
             }
@@ -1490,8 +1478,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     // ?a == ?b <=> !(?a) == !(?b) -> [(a == b) && (a != null && b != null)] || (a == null && b == null))
                     // !(?a) == ?b <=> ?a == !(?b) -> [(a != b) && (a != null && b != null)] || (a == null && b == null)
-                    return
-                        leftNegated == rightNegated
+                    return leftNegated == rightNegated
                       ? ExpandNullableEqualNullable(
                             left,
                             right,
@@ -1514,8 +1501,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     // ?a == b <=> !(?a) == !b -> (a == b) && (a != null)
                     // !(?a) == b <=> ?a == !b -> (a != b) && (a != null)
-                    return
-                        leftNegated == rightNegated
+                    return leftNegated == rightNegated
                       ? ExpandNullableEqualNonNullable(left, right, leftIsNotNull)
                       : ExpandNegatedNullableEqualNonNullable(left, right, leftIsNotNull);
                 }
@@ -1524,8 +1510,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     // a == ?b <=> !a == !(?b) -> (a == b) && (b != null)
                     // !a == ?b <=> a == !(?b) -> (a != b) && (b != null)
-                    return
-                        leftNegated == rightNegated
+                    return leftNegated == rightNegated
                       ? ExpandNullableEqualNonNullable(left, right, rightIsNotNull)
                       : ExpandNegatedNullableEqualNonNullable(left, right, rightIsNotNull);
                 }
@@ -1537,8 +1522,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     // ?a != ?b <=> !(?a) != !(?b) -> [(a != b) || (a == null || b == null)] && (a != null || b != null)
                     // !(?a) != ?b <=> ?a != !(?b) -> [(a == b) || (a == null || b == null)] && (a != null || b != null)
-                    return
-                        leftNegated == rightNegated
+                    return leftNegated == rightNegated
                       ? ExpandNullableNotEqualNullable(
                             left,
                             right,
@@ -1561,8 +1545,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     // ?a != b <=> !(?a) != !b -> (a != b) || (a == null)
                     // !(?a) != b <=> ?a != !b -> (a == b) || (a == null)
-                    return
-                        leftNegated == rightNegated
+                    return leftNegated == rightNegated
                       ? ExpandNullableNotEqualNonNullable(left, right, leftIsNull)
                       : ExpandNegatedNullableNotEqualNonNullable(left, right, leftIsNull);
                 }
@@ -1571,8 +1554,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     // a != ?b <=> !a != !(?b) -> (a != b) || (b == null)
                     // !a != ?b <=> a != !(?b) -> (a == b) || (b == null)
-                    return
-                        leftNegated == rightNegated
+                    return leftNegated == rightNegated
                       ? ExpandNullableNotEqualNonNullable(left, right, rightIsNull)
                       : ExpandNegatedNullableNotEqualNonNullable(left, right, rightIsNull);
                 }
@@ -1603,8 +1585,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 // a is not null && a is not null -> a is not null
                 // a is null || a is not null -> true
                 // a is null && a is not null -> false
-                return
-                    leftUnary.OperatorType == rightUnary.OperatorType
+                return leftUnary.OperatorType == rightUnary.OperatorType
                   ? (SqlExpression)leftUnary
                   : _sqlExpressionFactory.Constant(
                         sqlBinaryExpression.OperatorType == ExpressionType.OrElse,
@@ -1620,8 +1601,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 sqlBinaryExpression.Left is SqlConstantExpression newLeftConstant
                 && newLeftConstant.Value is bool leftBoolValue
             ) {
-                return
-                    sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
+                return sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
                   ? leftBoolValue ? sqlBinaryExpression.Right : newLeftConstant
                   : leftBoolValue ? newLeftConstant : sqlBinaryExpression.Right;
             }
@@ -1634,8 +1614,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 // a || true -> true
                 // a && false -> false
                 // a || false -> a
-                return
-                    sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
+                return sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
                   ? rightBoolValue ? sqlBinaryExpression.Left : newRightConstant
                   : rightBoolValue ? newRightConstant : sqlBinaryExpression.Left;
             }

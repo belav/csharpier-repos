@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     )
                     .ConfigureAwait(false);
 
-                return
-                    state != null
+                return state != null
                   ? await GetActionsAsync(document, state, cancellationToken).ConfigureAwait(false)
                   : ImmutableArray<CodeAction>.Empty;
             }

@@ -69,8 +69,7 @@ namespace System.Diagnostics.Tracing
         public override string ToString()
         {
             int count = Volatile.Read(ref _count);
-            return
-                count == 0
+            return count == 0
               ? $"EventCounter '{Name}' Count 0"
               : $"EventCounter '{Name}' Count {count} Mean {(_sum / count).ToString("n3")}";
         }

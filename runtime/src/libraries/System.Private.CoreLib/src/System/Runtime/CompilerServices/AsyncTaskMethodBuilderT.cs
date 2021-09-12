@@ -435,8 +435,7 @@ namespace System.Runtime.CompilerServices
             // generating this extra code until a better solution is implemented.
             return new AsyncStateMachineBox<IAsyncStateMachine>();
 #else
-            return
-                AsyncMethodBuilderCore.TrackAsyncMethodCompletion
+            return AsyncMethodBuilderCore.TrackAsyncMethodCompletion
               ? CreateDebugFinalizableAsyncStateMachineBox<IAsyncStateMachine>()
               : new AsyncStateMachineBox<IAsyncStateMachine>();
 #endif

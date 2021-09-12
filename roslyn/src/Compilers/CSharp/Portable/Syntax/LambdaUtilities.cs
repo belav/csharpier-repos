@@ -99,8 +99,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // Select clause is not considered to be lambda if it's reduced,
                     // however to avoid complexity we allow it to be passed in and just return null.
-                    return
-                        IsReducedSelectOrGroupByClause(selectClause, selectClause.Expression)
+                    return IsReducedSelectOrGroupByClause(selectClause, selectClause.Expression)
                       ? null
                       : selectClause.Expression;
 
@@ -110,8 +109,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(
                         oldJoin.LeftExpression == oldBody || oldJoin.RightExpression == oldBody
                     );
-                    return
-                        (oldJoin.LeftExpression == oldBody)
+                    return (oldJoin.LeftExpression == oldBody)
                       ? newJoin.LeftExpression
                       : newJoin.RightExpression;
 
@@ -121,8 +119,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(
                         oldGroup.GroupExpression == oldBody || oldGroup.ByExpression == oldBody
                     );
-                    return
-                        (oldGroup.GroupExpression == oldBody)
+                    return (oldGroup.GroupExpression == oldBody)
                       ? (
                             IsReducedSelectOrGroupByClause(newGroup, newGroup.GroupExpression)
                                 ? null
@@ -527,8 +524,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static int GetDeclaratorPosition(SyntaxNode node)
         {
             // To differentiate between nested switch expressions that start at the same offset, use the offset of the `switch` keyword.
-            return
-                (node is SwitchExpressionSyntax switchExpression)
+            return (node is SwitchExpressionSyntax switchExpression)
               ? switchExpression.SwitchKeyword.SpanStart
               : node.SpanStart;
         }

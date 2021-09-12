@@ -3780,8 +3780,7 @@ namespace System.Xml
                 while (true)
                 {
                     if (!BinaryPrimitives.TryReadUInt16LittleEndian(data, out ushort value))
-                        return
-                            _xmlspacePreserve
+                        return _xmlspacePreserve
                           ? XmlNodeType.SignificantWhitespace
                           : XmlNodeType.Whitespace;
                     if (value > byte.MaxValue || !XmlCharType.IsWhiteSpace((char)value))

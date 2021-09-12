@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 finallyBlockOpt = null;
             }
 
-            return
-                (catchBlocks.IsDefaultOrEmpty && finallyBlockOpt == null)
+            return (catchBlocks.IsDefaultOrEmpty && finallyBlockOpt == null)
               ? (BoundNode)tryBlock
               : (BoundNode)node.Update(
                     tryBlock,

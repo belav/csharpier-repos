@@ -121,8 +121,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             get
             {
                 // TODO: C# checks whether the field Type is generic. What does VB do?
-                return
-                    GetSymbolType() is INamedTypeSymbol namedType
+                return GetSymbolType() is INamedTypeSymbol namedType
                   ? namedType.IsGenericType
                   : false;
             }

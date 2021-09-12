@@ -184,8 +184,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                             return f1.HasConstantValue ? 1 : -1;
                         }
 
-                        return
-                            f1.HasConstantValue
+                        return f1.HasConstantValue
                           ? Comparer<object>.Default.Compare(f1.ConstantValue, f2.ConstantValue)
                           : f1.Name.CompareTo(f2.Name);
                     }

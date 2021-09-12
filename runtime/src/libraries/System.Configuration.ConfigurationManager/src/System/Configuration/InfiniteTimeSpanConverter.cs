@@ -20,16 +20,14 @@ namespace System.Configuration
         ) {
             ValidateType(value, typeof(TimeSpan));
 
-            return
-                (TimeSpan)value == TimeSpan.MaxValue
+            return (TimeSpan)value == TimeSpan.MaxValue
               ? "Infinite"
               : s_timeSpanConverter.ConvertToInvariantString(value);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
         {
-            return
-                (string)data == "Infinite"
+            return (string)data == "Infinite"
               ? TimeSpan.MaxValue
               : s_timeSpanConverter.ConvertFromInvariantString((string)data);
         }

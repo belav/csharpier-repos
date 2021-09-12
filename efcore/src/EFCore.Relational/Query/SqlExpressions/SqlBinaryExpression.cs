@@ -121,8 +121,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
 
-            return
-                left != Left || right != Right
+            return left != Left || right != Right
               ? new SqlBinaryExpression(OperatorType, left, right, Type, TypeMapping)
               : this;
         }

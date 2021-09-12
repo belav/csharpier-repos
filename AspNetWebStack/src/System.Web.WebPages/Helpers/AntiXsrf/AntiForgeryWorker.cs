@@ -38,8 +38,7 @@ namespace System.Web.Helpers.AntiXsrf
 
         private AntiForgeryToken DeserializeToken(string serializedToken)
         {
-            return
-                (!String.IsNullOrEmpty(serializedToken))
+            return (!String.IsNullOrEmpty(serializedToken))
               ? _serializer.Deserialize(serializedToken)
               : null;
         }

@@ -77,8 +77,7 @@ namespace Microsoft.NET.HostModel.Bundle
 
         public bool IsNativeBinary(string filePath)
         {
-            return
-                IsLinux
+            return IsLinux
               ? ElfUtils.IsElfImage(filePath)
               : IsOSX ? MachOUtils.IsMachOImage(filePath) : PEUtils.IsPEImage(filePath);
         }

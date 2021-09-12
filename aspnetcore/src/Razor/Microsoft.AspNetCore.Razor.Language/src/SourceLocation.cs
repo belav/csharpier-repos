@@ -89,8 +89,7 @@ namespace Microsoft.AspNetCore.Razor.Language
         /// <remarks>A <see cref="SourceLocation"/> that corresponds to the beginning of the span.</remarks>
         public static SourceLocation FromSpan(SourceSpan? span)
         {
-            return
-                span == null
+            return span == null
               ? SourceLocation.Undefined
               : new SourceLocation(
                     span.Value.FilePath,

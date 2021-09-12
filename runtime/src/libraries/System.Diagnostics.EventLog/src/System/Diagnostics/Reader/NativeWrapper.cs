@@ -1611,8 +1611,7 @@ namespace System.Diagnostics.Eventing.Reader
                 case (int)UnsafeNativeMethods.EvtVariantType.EvtVarTypeSid:
                     return (val.SidVal == IntPtr.Zero) ? null : new SecurityIdentifier(val.SidVal);
                 case (int)UnsafeNativeMethods.EvtVariantType.EvtVarTypeGuid:
-                    return
-                        (val.GuidReference == IntPtr.Zero)
+                    return (val.GuidReference == IntPtr.Zero)
                       ? Guid.Empty
                       : Marshal.PtrToStructure<Guid>(val.GuidReference);
                 case (int)UnsafeNativeMethods.EvtVariantType.EvtVarTypeEvtHandle:

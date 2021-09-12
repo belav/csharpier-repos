@@ -81,8 +81,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 type = TypeManager.SubstType(type, atsCheck);
             }
 
-            return
-                CheckTypeAccess(type, symWhere)
+            return CheckTypeAccess(type, symWhere)
               ? ACCESSERROR.ACCESSERROR_NOERROR
               : ACCESSERROR.ACCESSERROR_NOACCESS;
         }

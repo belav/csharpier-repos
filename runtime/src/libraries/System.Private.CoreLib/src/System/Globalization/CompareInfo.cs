@@ -319,8 +319,7 @@ namespace System.Globalization
 
         internal int CompareOptionIgnoreCase(ReadOnlySpan<char> string1, ReadOnlySpan<char> string2)
         {
-            return
-                GlobalizationMode.Invariant
+            return GlobalizationMode.Invariant
               ? Ordinal.CompareIgnoreCaseInvariantMode(
                     ref MemoryMarshal.GetReference(string1),
                     string1.Length,

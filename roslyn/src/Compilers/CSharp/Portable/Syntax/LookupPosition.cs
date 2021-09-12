@@ -235,15 +235,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     predicate: null,
                     stepInto: null
                 );
-                return
-                    initializerOpt == null
+                return initializerOpt == null
                   ? position >= constructorDecl.ParameterList.CloseParenToken.Span.End
                     && IsBeforeToken(position, nextToken)
                   : IsBetweenTokens(position, initializerOpt.ColonToken, nextToken);
             }
 
-            return
-                initializerOpt == null
+            return initializerOpt == null
               ? IsInBody(position, constructorDecl)
               : IsBetweenTokens(
                     position,

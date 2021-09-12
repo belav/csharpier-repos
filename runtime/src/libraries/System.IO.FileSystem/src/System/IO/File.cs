@@ -792,8 +792,7 @@ namespace System.IO
             if (path.Length == 0)
                 throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
 
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled<string>(cancellationToken)
               : InternalReadAllTextAsync(path, encoding, cancellationToken);
         }
@@ -911,8 +910,7 @@ namespace System.IO
                 }
 
                 returningInternalTask = true;
-                return
-                    fileLength > 0
+                return fileLength > 0
                   ? InternalReadAllBytesAsync(fs, (int)fileLength, cancellationToken)
                   : InternalReadAllBytesUnknownLengthAsync(fs, cancellationToken);
             }
@@ -1023,8 +1021,7 @@ namespace System.IO
             if (bytes == null)
                 throw new ArgumentNullException(nameof(bytes));
 
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
               : InternalWriteAllBytesAsync(path, bytes, cancellationToken);
         }
@@ -1075,8 +1072,7 @@ namespace System.IO
             if (path.Length == 0)
                 throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
 
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled<string[]>(cancellationToken)
               : InternalReadAllLinesAsync(path, encoding, cancellationToken);
         }
@@ -1125,8 +1121,7 @@ namespace System.IO
             if (path.Length == 0)
                 throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
 
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
               : InternalWriteAllLinesAsync(
                     AsyncStreamWriter(path, encoding, append: false),
@@ -1256,8 +1251,7 @@ namespace System.IO
             if (path.Length == 0)
                 throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
 
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
               : InternalWriteAllLinesAsync(
                     AsyncStreamWriter(path, encoding, append: true),

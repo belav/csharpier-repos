@@ -245,8 +245,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ?? GetNetModuleDecodedWellKnownAttributeData();
 
                 // By default WrapNonExceptionThrows is considered to be true.
-                return
-                    (data != null)
+                return (data != null)
                   ? data.RuntimeCompatibilityWrapNonExceptionThrows
                   : CommonAssemblyWellKnownAttributeData.WrapNonExceptionThrowsDefault;
             }
@@ -2419,8 +2418,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             _lazyInternalsVisibleToMap.TryGetValue(simpleName, out result);
 
-            return
-                (result != null)
+            return (result != null)
               ? result.Keys
               : SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
         }
@@ -2490,8 +2488,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static Location GetAssemblyAttributeLocationForDiagnostic(
             AttributeSyntax attributeSyntaxOpt
         ) {
-            return
-                (object)attributeSyntaxOpt != null
+            return (object)attributeSyntaxOpt != null
               ? attributeSyntaxOpt.Location
               : NoLocation.Singleton;
         }
@@ -2706,8 +2703,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return
-                    IsInteractive
+                return IsInteractive
                   ? AttributeLocation.None
                   : AttributeLocation.Assembly | AttributeLocation.Module;
             }

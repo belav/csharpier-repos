@@ -2136,8 +2136,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var leastOverridden = (EventSymbol)eventSymbol.GetLeastOverriddenMember(
                 this.ContainingType
             );
-            return
-                leastOverridden.HasAssociatedField
+            return leastOverridden.HasAssociatedField
               ? new CSDiagnosticInfo(
                     ErrorCode.ERR_BadEventUsage,
                     leastOverridden,
@@ -3475,8 +3474,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             declarations = declarationArray.AsImmutableOrNull();
 
-            return
-                (count == 1)
+            return (count == 1)
               ? (BoundStatement)declarations[0]
               : new BoundMultipleLocalDeclarations(nodeOpt, declarations);
         }

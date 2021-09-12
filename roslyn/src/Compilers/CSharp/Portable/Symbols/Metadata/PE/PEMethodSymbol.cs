@@ -703,8 +703,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     _packedFlags.InitializeDoesNotReturn(doesNotReturn);
                 }
 
-                return
-                    _packedFlags.DoesNotReturn
+                return _packedFlags.DoesNotReturn
                   ? FlowAnalysisAnnotations.DoesNotReturn
                   : FlowAnalysisAnnotations.None;
             }
@@ -1138,8 +1137,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             else
             {
                 var attributeData = uncommonFields._lazyCustomAttributes;
-                return
-                    attributeData.IsDefault
+                return attributeData.IsDefault
                   ? InterlockedOperations.Initialize(
                         ref uncommonFields._lazyCustomAttributes,
                         ImmutableArray<CSharpAttributeData>.Empty
@@ -1314,8 +1312,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         case WellKnownMemberNames.MultiplyOperatorName:
                         case WellKnownMemberNames.RightShiftOperatorName:
                         case WellKnownMemberNames.SubtractionOperatorName:
-                            return
-                                IsValidUserDefinedOperatorSignature(2)
+                            return IsValidUserDefinedOperatorSignature(2)
                               ? MethodKind.UserDefinedOperator
                               : MethodKind.Ordinary;
                         case WellKnownMemberNames.DecrementOperatorName:
@@ -1326,14 +1323,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         case WellKnownMemberNames.TrueOperatorName:
                         case WellKnownMemberNames.UnaryNegationOperatorName:
                         case WellKnownMemberNames.UnaryPlusOperatorName:
-                            return
-                                IsValidUserDefinedOperatorSignature(1)
+                            return IsValidUserDefinedOperatorSignature(1)
                               ? MethodKind.UserDefinedOperator
                               : MethodKind.Ordinary;
                         case WellKnownMemberNames.ImplicitConversionName:
                         case WellKnownMemberNames.ExplicitConversionName:
-                            return
-                                IsValidUserDefinedOperatorSignature(1)
+                            return IsValidUserDefinedOperatorSignature(1)
                               ? MethodKind.Conversion
                               : MethodKind.Ordinary;
                         //case WellKnownMemberNames.ConcatenateOperatorName:
@@ -1501,8 +1496,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return
-                    IsExplicitClassOverride
+                return IsExplicitClassOverride
                   ? AccessUncommonFields()._lazyExplicitClassOverride
                   : null;
             }
@@ -1653,8 +1647,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             else
             {
                 var result = uncommonFields._lazyConditionalAttributeSymbols;
-                return
-                    result.IsDefault
+                return result.IsDefault
                   ? InterlockedOperations.Initialize(
                         ref uncommonFields._lazyConditionalAttributeSymbols,
                         ImmutableArray<string>.Empty
@@ -1700,8 +1693,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 else
                 {
                     var result = uncommonFields._lazyObsoleteAttributeData;
-                    return
-                        ReferenceEquals(result, ObsoleteAttributeData.Uninitialized)
+                    return ReferenceEquals(result, ObsoleteAttributeData.Uninitialized)
                       ? InterlockedOperations.Initialize(
                             ref uncommonFields._lazyObsoleteAttributeData,
                             null,

@@ -245,8 +245,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 )
                 .ConfigureAwait(false);
 
-            return
-                location == null
+            return location == null
               ? null
               : new LSP.LocationWithText
                 {

@@ -131,8 +131,7 @@ namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
         ) {
             var protectedJson = await GetProtectedJsonAsync(key);
 
-            return
-                protectedJson == null
+            return protectedJson == null
               ? new ProtectedBrowserStorageResult<TValue>(false, default)
               : new ProtectedBrowserStorageResult<TValue>(
                     true,

@@ -123,8 +123,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 var propertyInfo = navigation.PropertyInfo!;
                 var fieldInfo = navigation.FieldInfo!;
 
-                return
-                    fieldInfo == null
+                return fieldInfo == null
                   ? propertyInfo
                   : propertyInfo == null
                       ? fieldInfo

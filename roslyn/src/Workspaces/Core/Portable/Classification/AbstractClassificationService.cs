@@ -199,8 +199,7 @@ namespace Microsoft.CodeAnalysis.Classification
         ) {
             var classificationService =
                 oldDocument.GetLanguageService<ISyntaxClassificationService>();
-            return
-                classificationService == null
+            return classificationService == null
               ? new((TextChangeRange?)null)
               : classificationService.ComputeSyntacticChangeRangeAsync(
                     oldDocument,

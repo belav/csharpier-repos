@@ -69,8 +69,7 @@ namespace CSharpSyntaxGenerator
                 }
             }
 
-            return
-                writeGrammar
+            return writeGrammar
               ? WriteGrammarFile(inputFile, outputFile)
               : WriteCSharpSourceFiles(
                     inputFile,

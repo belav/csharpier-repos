@@ -641,8 +641,7 @@ namespace System.Xml
                 return value;
             }
 
-            return
-                (returnType == typeof(string))
+            return (returnType == typeof(string))
               ? string.Empty
               : XmlUntypedStringConverter.Instance.FromString(
                     string.Empty,

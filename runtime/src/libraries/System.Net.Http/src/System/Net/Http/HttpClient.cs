@@ -325,8 +325,7 @@ namespace System.Net.Http
                     throw HttpContent.WrapStreamCopyException(e);
                 }
 
-                return
-                    buffer.Length == 0
+                return buffer.Length == 0
                   ? Array.Empty<byte>()
                   : buffer is HttpContent.LimitMemoryStream lms
                       ? lms.GetSizedBuffer()

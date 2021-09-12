@@ -38,8 +38,7 @@ namespace System.Xml.Schema
         {
             get
             {
-                return
-                    _processContents == XmlSchemaContentProcessing.None
+                return _processContents == XmlSchemaContentProcessing.None
                   ? XmlSchemaContentProcessing.Strict
                   : _processContents;
             }

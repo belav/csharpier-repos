@@ -65,8 +65,7 @@ namespace System.Drawing.Imaging
         {
             get
             {
-                return
-                    IsWmf()
+                return IsWmf()
                   ? new Rectangle(wmf!.X, wmf.Y, wmf.Width, wmf.Height)
                   : new Rectangle(emf!.X, emf.Y, emf.Width, emf.Height);
             }

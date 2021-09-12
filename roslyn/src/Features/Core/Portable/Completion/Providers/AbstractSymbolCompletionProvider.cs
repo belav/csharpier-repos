@@ -665,8 +665,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         private string GetInsertionText(CompletionItem item, char? ch)
         {
-            return
-                ch == null
+            return ch == null
               ? SymbolCompletionItem.GetInsertionText(item)
               : GetInsertionText(item, ch.Value);
         }

@@ -775,8 +775,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             }
             else if (destinationMember is LocalFunctionStatementSyntax localFunctionDeclaration)
             {
-                return
-                    (localFunctionDeclaration.Body == null)
+                return (localFunctionDeclaration.Body == null)
                   ? destinationMember
                   : Cast<TDeclarationNode>(
                         localFunctionDeclaration.AddBodyStatements(
@@ -786,8 +785,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             }
             else if (destinationMember is AccessorDeclarationSyntax accessorDeclaration)
             {
-                return
-                    (accessorDeclaration.Body == null)
+                return (accessorDeclaration.Body == null)
                   ? destinationMember
                   : Cast<TDeclarationNode>(
                         accessorDeclaration.AddBodyStatements(
@@ -926,8 +924,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationDestination destination,
             CodeGenerationOptions options
         ) {
-            return
-                destination == CodeGenerationDestination.EnumType
+            return destination == CodeGenerationDestination.EnumType
               ? EnumMemberGenerator.GenerateEnumMemberDeclaration(field, null, options)
               : (SyntaxNode)FieldGenerator.GenerateFieldDeclaration(field, options);
         }

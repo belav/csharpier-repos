@@ -69,8 +69,7 @@ namespace System.Web.Http.ValueProviders.Providers
             string prefix
         ) {
             IEnumerableValueProvider enumeratedProvider = provider as IEnumerableValueProvider;
-            return
-                (enumeratedProvider != null)
+            return (enumeratedProvider != null)
               ? enumeratedProvider.GetKeysFromPrefix(prefix)
               : null;
         }

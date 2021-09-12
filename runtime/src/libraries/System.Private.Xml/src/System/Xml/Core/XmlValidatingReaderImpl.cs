@@ -395,8 +395,7 @@ namespace System.Xml
         {
             get
             {
-                return
-                    (_parsingFunction == ParsingFunction.Init)
+                return (_parsingFunction == ParsingFunction.Init)
                   ? ReadState.Initial
                   : _coreReader.ReadState;
             }

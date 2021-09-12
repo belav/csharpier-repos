@@ -90,8 +90,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(queryExpression, nameof(queryExpression));
             Check.NotNull(shaperExpression, nameof(shaperExpression));
 
-            return
-                queryExpression != QueryExpression || shaperExpression != ShaperExpression
+            return queryExpression != QueryExpression || shaperExpression != ShaperExpression
               ? new ShapedQueryExpression(queryExpression, shaperExpression, ResultCardinality)
               : this;
         }
@@ -106,8 +105,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(shaperExpression, nameof(shaperExpression));
 
-            return
-                shaperExpression != ShaperExpression
+            return shaperExpression != ShaperExpression
               ? new ShapedQueryExpression(QueryExpression, shaperExpression, ResultCardinality)
               : this;
         }

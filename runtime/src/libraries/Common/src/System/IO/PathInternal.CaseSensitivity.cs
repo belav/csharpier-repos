@@ -19,8 +19,7 @@ namespace System.IO
         {
             get
             {
-                return
-                    s_isCaseSensitive
+                return s_isCaseSensitive
                   ? StringComparison.Ordinal
                   : StringComparison.OrdinalIgnoreCase;
             }

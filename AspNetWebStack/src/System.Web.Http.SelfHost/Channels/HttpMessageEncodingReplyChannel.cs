@@ -114,8 +114,7 @@ namespace System.Web.Http.SelfHost.Channels
         )]
         private static RequestContext WrapRequestContext(RequestContext innerContext)
         {
-            return
-                (innerContext != null)
+            return (innerContext != null)
               ? new HttpMessageEncodingRequestContext(innerContext)
               : (RequestContext)null;
         }

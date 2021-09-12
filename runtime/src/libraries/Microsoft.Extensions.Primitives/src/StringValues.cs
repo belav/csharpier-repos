@@ -341,8 +341,7 @@ namespace Microsoft.Extensions.Primitives
             if (value != null)
             {
                 // value not array, can only be string
-                return
-                    string.Equals(Unsafe.As<string>(value), item, StringComparison.Ordinal)
+                return string.Equals(Unsafe.As<string>(value), item, StringComparison.Ordinal)
                   ? 0
                   : -1;
             }

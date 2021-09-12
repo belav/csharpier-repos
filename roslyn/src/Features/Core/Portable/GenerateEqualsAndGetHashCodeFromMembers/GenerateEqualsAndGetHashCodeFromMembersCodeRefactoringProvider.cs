@@ -360,8 +360,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             bool withDialog,
             CancellationToken cancellationToken
         ) {
-            return
-                withDialog
+            return withDialog
               ? CreateCodeActionWithDialogAsync(
                     document,
                     typeDeclaration,

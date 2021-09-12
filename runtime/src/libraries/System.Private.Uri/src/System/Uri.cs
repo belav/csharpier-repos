@@ -3362,8 +3362,7 @@ namespace System
                         while (_string[--idx] != ':')
                             ;
                     }
-                    return
-                        (idx - _info.Offset.Host == 0)
+                    return (idx - _info.Offset.Host == 0)
                       ? string.Empty
                       : _string.Substring(_info.Offset.Host, idx - _info.Offset.Host);
 
@@ -3419,8 +3418,7 @@ namespace System
                     );
 
                 case UriComponents.UserInfo | UriComponents.Host | UriComponents.Port:
-                    return
-                        (_info.Offset.Path - _info.Offset.User == 0)
+                    return (_info.Offset.Path - _info.Offset.User == 0)
                       ? string.Empty
                       : _string.Substring(_info.Offset.User, _info.Offset.Path - _info.Offset.User);
 
@@ -5705,8 +5703,7 @@ namespace System
                     );
                 }
 
-                return
-                    convBackSlashes && c1 == '\\'
+                return convBackSlashes && c1 == '\\'
                   ? string.Concat(left, "/", relativePart.AsSpan(1))
                   : left + relativePart;
             }

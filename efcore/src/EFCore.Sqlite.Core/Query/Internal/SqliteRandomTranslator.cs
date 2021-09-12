@@ -55,8 +55,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             Check.NotNull(logger, nameof(logger));
 
             // Issue #15586: Query: TypeCompatibility chart for inference.
-            return
-                _methodInfo.Equals(method)
+            return _methodInfo.Equals(method)
               ? _sqlExpressionFactory.Function(
                     "abs",
                     new SqlExpression[]

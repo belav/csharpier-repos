@@ -1592,8 +1592,7 @@ namespace Microsoft.Extensions.Primitives
 
         private static StringSegment MakePaddedStringSegment(string input)
         {
-            return
-                (input is null)
+            return (input is null)
               ? new StringSegment()
               : new StringSegment("xx" + input + "zzz", 2, input.Length);
         }

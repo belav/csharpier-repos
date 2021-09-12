@@ -1119,8 +1119,7 @@ namespace System.Threading.Tasks.Tests
             switch (partitionerName)
             {
                 case PartitionerType.RangePartitioner:
-                    return
-                        (chunkSize == -1)
+                    return (chunkSize == -1)
                       ? Partitioner.Create(from, to)
                       : Partitioner.Create(from, to, chunkSize);
                 default:

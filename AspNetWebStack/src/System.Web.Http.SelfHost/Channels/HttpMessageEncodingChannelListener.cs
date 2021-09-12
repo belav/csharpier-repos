@@ -61,8 +61,7 @@ namespace System.Web.Http.SelfHost.Channels
 
         private IReplyChannel WrapInnerChannel(IReplyChannel innerChannel)
         {
-            return
-                (innerChannel != null)
+            return (innerChannel != null)
               ? new HttpMessageEncodingReplyChannel(this, innerChannel)
               : (IReplyChannel)null;
         }

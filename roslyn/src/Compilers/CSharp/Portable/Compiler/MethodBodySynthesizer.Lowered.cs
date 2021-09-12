@@ -478,8 +478,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 argBuilder.ToImmutableAndFree()
             );
 
-            return
-                F.CurrentFunction.ReturnsVoid
+            return F.CurrentFunction.ReturnsVoid
               ? F.Block(F.ExpressionStatement(invocation), F.Return())
               : F.Block(F.Return(invocation));
         }

@@ -60,8 +60,7 @@ namespace Microsoft.AspNetCore.Identity
         /// </remarks>
         public override string ToString()
         {
-            return
-                Succeeded
+            return Succeeded
               ? "Succeeded"
               : string.Format(
                     CultureInfo.InvariantCulture,

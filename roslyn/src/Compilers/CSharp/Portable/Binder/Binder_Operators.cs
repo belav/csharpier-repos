@@ -2648,13 +2648,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // MinValue % -1 always overflows at runtime but never at compile time
                 case BinaryOperatorKind.IntRemainder:
-                    return
-                        (valueRight.Int32Value != -1)
+                    return (valueRight.Int32Value != -1)
                       ? valueLeft.Int32Value % valueRight.Int32Value
                       : 0;
                 case BinaryOperatorKind.LongRemainder:
-                    return
-                        (valueRight.Int64Value != -1)
+                    return (valueRight.Int64Value != -1)
                       ? valueLeft.Int64Value % valueRight.Int64Value
                       : 0;
                 case BinaryOperatorKind.UIntRemainder:
@@ -2684,8 +2682,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Rope rightValue = valueRight.RopeValue ?? Rope.Empty;
 
                 long newLength = (long)leftValue.Length + (long)rightValue.Length;
-                return
-                    (newLength > int.MaxValue)
+                return (newLength > int.MaxValue)
                   ? ConstantValue.Bad
                   : ConstantValue.CreateFromRope(Rope.Concat(leftValue, rightValue));
             }
@@ -5289,8 +5286,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CheckFeatureAvailability(node, MessageID.IDS_FeatureRefConditional, diagnostics);
             }
 
-            return
-                isRef
+            return isRef
               ? BindRefConditionalOperator(node, whenTrue, whenFalse, diagnostics)
               : BindValueConditionalOperator(node, whenTrue, whenFalse, diagnostics);
         }

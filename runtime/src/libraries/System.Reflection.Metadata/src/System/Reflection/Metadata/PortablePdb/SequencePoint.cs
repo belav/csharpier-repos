@@ -77,8 +77,7 @@ namespace System.Reflection.Metadata
 
         private string GetDebuggerDisplay()
         {
-            return
-                IsHidden
+            return IsHidden
               ? "<hidden>"
               : $"{Offset}: ({StartLine}, {StartColumn}) - ({EndLine}, {EndColumn})";
         }

@@ -27,8 +27,7 @@ namespace System.Web.Helpers.Claims
             where TClaimsIdentity : class, IIdentity
         {
             TClaimsIdentity castClaimsIdentity = identity as TClaimsIdentity;
-            return
-                (castClaimsIdentity != null)
+            return (castClaimsIdentity != null)
               ? new ClaimsIdentityImpl<TClaimsIdentity, TClaim>(castClaimsIdentity)
               : null;
         }

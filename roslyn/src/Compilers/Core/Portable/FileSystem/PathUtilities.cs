@@ -252,8 +252,7 @@ namespace Roslyn.Utilities
             else if (length >= 2 && path[1] == VolumeSeparatorChar)
             {
                 // handles c: and c:\
-                return
-                    length >= 3 && IsDirectorySeparator(path[2])
+                return length >= 3 && IsDirectorySeparator(path[2])
                   ? path.Substring(0, 3)
                   : path.Substring(0, 2);
             }
@@ -680,8 +679,7 @@ namespace Roslyn.Utilities
                 return true;
             }
 
-            return
-                IsUnixLikePlatform
+            return IsUnixLikePlatform
               ? x == y
               : char.ToUpperInvariant(x) == char.ToUpperInvariant(y);
         }
@@ -733,8 +731,7 @@ namespace Roslyn.Utilities
                     // Normalize the path separators if used uniformly in the replacement
                     bool hasSlash = replacementPrefix.IndexOf('/') >= 0;
                     bool hasBackslash = replacementPrefix.IndexOf('\\') >= 0;
-                    return
-                        (hasSlash && !hasBackslash)
+                    return (hasSlash && !hasBackslash)
                       ? replacement.Replace('\\', '/')
                       : (hasBackslash && !hasSlash) ? replacement.Replace('/', '\\') : replacement;
                 }

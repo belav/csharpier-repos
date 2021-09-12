@@ -89,8 +89,7 @@ namespace Microsoft.EntityFrameworkCore
             propertyBuilder.Metadata.SetHiLoSequenceName(name, fromDataAnnotation);
             propertyBuilder.Metadata.SetHiLoSequenceSchema(schema, fromDataAnnotation);
 
-            return
-                name == null
+            return name == null
               ? null
               : propertyBuilder.Metadata.DeclaringEntityType.Model.Builder.HasSequence(
                     name,

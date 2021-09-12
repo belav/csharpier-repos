@@ -106,8 +106,7 @@ namespace System.Net.Sockets
         {
             get
             {
-                return
-                    _serverSocket != null
+                return _serverSocket != null
                   ? _serverSocket.ExclusiveAddressUse
                   : _exclusiveAddressUse;
             }

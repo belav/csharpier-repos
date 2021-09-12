@@ -672,8 +672,7 @@ namespace System
             // ! Warning: "this" is an array, not an SZArrayHelper. See comments above
             // ! or you may introduce a security hole!
             T[] _this = Unsafe.As<T[]>(this);
-            return
-                _this.Length == 0
+            return _this.Length == 0
               ? SZGenericArrayEnumerator<T>.Empty
               : new SZGenericArrayEnumerator<T>(_this);
         }

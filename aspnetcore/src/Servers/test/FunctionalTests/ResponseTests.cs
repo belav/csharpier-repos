@@ -289,8 +289,7 @@ namespace ServerComparison.FunctionalTests
         {
             // Don't use response.Content.Headers.ContentLength, it will dynamically calculate the value if it can.
             IEnumerable<string> values;
-            return
-                response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out values)
+            return response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out values)
               ? values.FirstOrDefault()
               : null;
         }

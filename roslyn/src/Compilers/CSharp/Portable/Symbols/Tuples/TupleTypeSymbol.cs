@@ -774,8 +774,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TMember? underlyingMemberOpt
         ) where TMember : Symbol
         {
-            return
-                IsTupleType
+            return IsTupleType
               ? TupleData!.GetTupleMemberSymbolForUnderlyingMember(underlyingMemberOpt)
               : null;
         }
@@ -1154,8 +1153,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 var elementLocation = elementLocations[tupleFieldIndex];
-                return
-                    elementLocation == null
+                return elementLocation == null
                   ? ImmutableArray<Location>.Empty
                   : ImmutableArray.Create(elementLocation);
             }
@@ -1188,8 +1186,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool namesUnchanged = mergedNames.IsDefault
                 ? TupleElementNames.IsDefault
                 : mergedNames.SequenceEqual(TupleElementNames);
-            return
-                (namesUnchanged && this.Equals(mergedType, TypeCompareKind.ConsiderEverything))
+            return (namesUnchanged && this.Equals(mergedType, TypeCompareKind.ConsiderEverything))
               ? this
               : CreateTuple(
                     mergedType,

@@ -6558,8 +6558,7 @@ namespace System.Xml
                 {
                     PushExternalEntity(entity);
                     _curNode.entityId = _ps.entityId;
-                    return
-                        (isInAttributeValue && _validatingReaderCompatFlag)
+                    return (isInAttributeValue && _validatingReaderCompatFlag)
                       ? EntityType.ExpandedInAttribute
                       : EntityType.Expanded;
                 }
@@ -6574,8 +6573,7 @@ namespace System.Xml
                 PushInternalEntity(entity);
 
                 _curNode.entityId = _ps.entityId;
-                return
-                    (isInAttributeValue && _validatingReaderCompatFlag)
+                return (isInAttributeValue && _validatingReaderCompatFlag)
                   ? EntityType.ExpandedInAttribute
                   : EntityType.Expanded;
             }
@@ -9877,8 +9875,7 @@ namespace System.Xml
         {
             get
             {
-                return
-                    _fragmentType == XmlNodeType.Element
+                return _fragmentType == XmlNodeType.Element
                   ? ConformanceLevel.Fragment
                   : ConformanceLevel.Document;
             }

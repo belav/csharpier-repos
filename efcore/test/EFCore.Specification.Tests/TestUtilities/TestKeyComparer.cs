@@ -27,8 +27,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return y == null;
             }
 
-            return
-                y == null
+            return y == null
               ? false
               : PropertyListComparer.Instance.Equals(x.Properties, y.Properties)
                 && (

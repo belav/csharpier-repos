@@ -76,8 +76,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
 
             if (_memberToFunctionName.TryGetValue(member, out var functionName) && instance != null)
             {
-                return
-                    returnType == typeof(bool)
+                return returnType == typeof(bool)
                   ? _sqlExpressionFactory.Case(
                         new[]
                         {

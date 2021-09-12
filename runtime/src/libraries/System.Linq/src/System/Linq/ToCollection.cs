@@ -14,8 +14,7 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return
-                source is IIListProvider<TSource> arrayProvider
+            return source is IIListProvider<TSource> arrayProvider
               ? arrayProvider.ToArray()
               : EnumerableHelpers.ToArray(source);
         }
@@ -27,8 +26,7 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return
-                source is IIListProvider<TSource> listProvider
+            return source is IIListProvider<TSource> listProvider
               ? listProvider.ToList()
               : new List<TSource>(source);
         }

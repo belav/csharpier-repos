@@ -254,8 +254,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 return null;
             }
 
-            return
-                node.AncestorsAndSelf().Any(n => n == nodeContainingOriginal)
+            return node.AncestorsAndSelf().Any(n => n == nodeContainingOriginal)
               ? matchingNode
               : null;
         }

@@ -2263,8 +2263,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) {
             if (properties == null)
             {
-                return
-                    !configurationSource.Overrides(Metadata.GetPropertiesConfigurationSource())
+                return !configurationSource.Overrides(Metadata.GetPropertiesConfigurationSource())
                   ? null
                   : ReplaceForeignKey(
                         configurationSource,
@@ -2533,8 +2532,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) {
             if (properties == null)
             {
-                return
-                    !configurationSource.Overrides(Metadata.GetPrincipalKeyConfigurationSource())
+                return !configurationSource.Overrides(Metadata.GetPrincipalKeyConfigurationSource())
                   ? null
                   : ReplaceForeignKey(
                         configurationSource,

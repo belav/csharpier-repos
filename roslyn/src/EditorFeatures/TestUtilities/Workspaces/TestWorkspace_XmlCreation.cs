@@ -214,8 +214,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         private static XElement CreateParseOptionsElement(ParseOptions parseOptions)
         {
-            return
-                parseOptions == null
+            return parseOptions == null
               ? null
               : new XElement(
                     ParseOptionsElementName,

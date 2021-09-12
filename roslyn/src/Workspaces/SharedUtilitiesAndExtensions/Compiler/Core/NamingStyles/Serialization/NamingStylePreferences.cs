@@ -424,8 +424,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 "After increasing the serialization version, add an upgrade path here."
             );
 
-            return
-                serializationVersion == s_serializationVersion
+            return serializationVersion == s_serializationVersion
               ? rootElement
               : XElement.Parse(DefaultNamingPreferencesString);
         }

@@ -55,8 +55,7 @@ namespace System.Linq
             }
             else if (!isEndIndexFromEnd)
             {
-                return
-                    startIndex >= endIndex
+                return startIndex >= endIndex
                   ? Empty<TSource>()
                   : TakeRangeIterator(source, startIndex, endIndex);
             }
@@ -277,8 +276,7 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return
-                count <= 0
+            return count <= 0
               ? Empty<TSource>()
               : TakeRangeFromEndIterator(
                     source,

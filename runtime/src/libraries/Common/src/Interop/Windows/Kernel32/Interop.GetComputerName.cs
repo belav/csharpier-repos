@@ -25,8 +25,7 @@ internal static partial class Interop
             Span<char> buffer = stackalloc char[MAX_COMPUTERNAME_LENGTH + 1];
             uint length = (uint)buffer.Length;
 
-            return
-                GetComputerName(ref MemoryMarshal.GetReference(buffer), ref length) != 0
+            return GetComputerName(ref MemoryMarshal.GetReference(buffer), ref length) != 0
               ? buffer.Slice(0, (int)length).ToString()
               : null;
         }

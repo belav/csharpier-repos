@@ -131,8 +131,7 @@ namespace System.Reflection
                 return Array.Empty<FieldInfo>();
 
             Type globalType = GetGlobalType(_impl);
-            return
-                (globalType != null)
+            return (globalType != null)
               ? globalType.GetFields(bindingFlags)
               : Array.Empty<FieldInfo>();
         }
@@ -176,8 +175,7 @@ namespace System.Reflection
                 return Array.Empty<MethodInfo>();
 
             Type globalType = GetGlobalType(_impl);
-            return
-                (globalType != null)
+            return (globalType != null)
               ? globalType.GetMethods(bindingFlags)
               : Array.Empty<MethodInfo>();
         }

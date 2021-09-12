@@ -95,8 +95,7 @@ namespace System.Text
             // pmovmskb which we know are optimized, and (b) we can avoid downclocking the processor while
             // this method is running.
 
-            return
-                (Sse2.IsSupported || AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian)
+            return (Sse2.IsSupported || AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian)
               ? GetIndexOfFirstNonAsciiByte_Intrinsified(pBuffer, bufferLength)
               : GetIndexOfFirstNonAsciiByte_Default(pBuffer, bufferLength);
         }
@@ -708,8 +707,7 @@ namespace System.Text
             // pmovmskb which we know are optimized, and (b) we can avoid downclocking the processor while
             // this method is running.
 
-            return
-                (Sse2.IsSupported)
+            return (Sse2.IsSupported)
               ? GetIndexOfFirstNonAsciiChar_Sse2(pBuffer, bufferLength)
               : GetIndexOfFirstNonAsciiChar_Default(pBuffer, bufferLength);
         }

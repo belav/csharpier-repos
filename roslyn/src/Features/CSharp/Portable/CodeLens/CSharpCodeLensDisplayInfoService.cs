@@ -175,8 +175,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeLens
                 {
                     // We want to see usings formatted as simply "Using", prefaced by the namespace they are in
                     var enclosingScopeString = GetEnclosingScopeString(node, semanticModel, Format);
-                    return
-                        string.IsNullOrEmpty(enclosingScopeString)
+                    return string.IsNullOrEmpty(enclosingScopeString)
                       ? "Using"
                       : enclosingScopeString + " Using";
                 }
@@ -185,8 +184,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeLens
                 {
                     // We want to see aliases formatted as "Alias", prefaced by their enclosing scope, if any
                     var enclosingScopeString = GetEnclosingScopeString(node, semanticModel, Format);
-                    return
-                        string.IsNullOrEmpty(enclosingScopeString)
+                    return string.IsNullOrEmpty(enclosingScopeString)
                       ? "Alias"
                       : enclosingScopeString + " Alias";
                 }
@@ -194,8 +192,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeLens
                 default:
                 {
                     var symbol = semanticModel.GetDeclaredSymbol(node);
-                    return
-                        symbol != null
+                    return symbol != null
                       ? symbol.ToDisplayString(Format)
                       : FeaturesResources.paren_Unknown_paren;
                 }

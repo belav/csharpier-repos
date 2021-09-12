@@ -91,8 +91,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var limit = (SqlExpression)Visit(selectExpression.Limit);
             var offset = (SqlExpression)Visit(selectExpression.Offset);
 
-            return
-                changed
+            return changed
               ? selectExpression.Update(
                     projections,
                     fromExpression,

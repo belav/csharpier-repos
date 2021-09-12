@@ -229,8 +229,7 @@ namespace Microsoft.TestCommon
 
             IEnumerable<TestData> testDataCollection = propertyValue as IEnumerable<TestData>;
 
-            return
-                testDataCollection == null
+            return testDataCollection == null
               ? null
               : GetDataSetFromTestDataCollection(testDataCollection, variations);
         }

@@ -376,8 +376,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             return _sqlExpressionFactory.Constant(true);
                         }
 
-                        return
-                            patternValue.Any(IsLikeWildChar)
+                        return patternValue.Any(IsLikeWildChar)
                           ? _sqlExpressionFactory.Like(
                                 instance,
                                 _sqlExpressionFactory.Constant(
@@ -511,8 +510,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     );
                 }
 
-                return
-                    patternValue.Any(IsLikeWildChar)
+                return patternValue.Any(IsLikeWildChar)
                   ? _sqlExpressionFactory.Like(
                         instance,
                         _sqlExpressionFactory.Constant(

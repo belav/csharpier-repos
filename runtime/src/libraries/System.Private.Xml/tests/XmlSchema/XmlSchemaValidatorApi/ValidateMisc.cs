@@ -1177,8 +1177,7 @@ namespace System.Xml.Tests
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentException();
 
-            return
-                path[path.Length - 1] == Path.DirectorySeparatorChar
+            return path[path.Length - 1] == Path.DirectorySeparatorChar
               ? path
               : path + Path.DirectorySeparatorChar;
         }

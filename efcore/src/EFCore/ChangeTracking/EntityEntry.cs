@@ -153,8 +153,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 ?? InternalEntry.EntityType.FindSkipNavigation(propertyName);
             if (navigation != null)
             {
-                return
-                    navigation.IsCollection
+                return navigation.IsCollection
                   ? (MemberEntry)new CollectionEntry(InternalEntry, propertyName)
                   : new ReferenceEntry(InternalEntry, propertyName);
             }
@@ -187,8 +186,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             if (navigation != null)
             {
-                return
-                    navigation.IsCollection
+                return navigation.IsCollection
                   ? (NavigationEntry)new CollectionEntry(InternalEntry, propertyName)
                   : new ReferenceEntry(InternalEntry, propertyName);
             }

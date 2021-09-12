@@ -1225,8 +1225,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 context
             );
 
-            return
-                context.ShouldStopProcessing()
+            return context.ShouldStopProcessing()
               ? (InternalForeignKeyBuilder)context.Result
               : relationshipBuilder;
         }
@@ -1245,8 +1244,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 context
             );
 
-            return
-                context.ShouldStopProcessing()
+            return context.ShouldStopProcessing()
               ? (InternalForeignKeyBuilder)context.Result?.Metadata.ForeignKey.Builder
               : relationshipBuilder;
         }

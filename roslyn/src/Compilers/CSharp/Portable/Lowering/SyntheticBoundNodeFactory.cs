@@ -1372,8 +1372,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression result
         ) {
             Debug.Assert(result.Type is { });
-            return
-                locals.IsDefaultOrEmpty && sideEffects.IsDefaultOrEmpty
+            return locals.IsDefaultOrEmpty && sideEffects.IsDefaultOrEmpty
               ? result
               : new BoundSequence(Syntax, locals, sideEffects, result, result.Type)
                 {
@@ -1636,8 +1635,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 WasCompilerGenerated = true
             };
-            return
-                type.IsPointerOrFunctionPointer()
+            return type.IsPointerOrFunctionPointer()
               ? BoundConversion.SynthesizedNonUserDefined(
                     syntax,
                     nullLiteral,
@@ -2052,8 +2050,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static BoundExpression NullOrDefault(TypeSymbol typeSymbol, SyntaxNode syntax)
         {
-            return
-                typeSymbol.IsReferenceType
+            return typeSymbol.IsReferenceType
               ? Null(typeSymbol, syntax)
               : Default(typeSymbol, syntax);
         }

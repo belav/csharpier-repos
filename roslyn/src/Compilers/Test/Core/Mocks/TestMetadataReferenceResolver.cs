@@ -53,8 +53,7 @@ namespace Roslyn.Test.Utilities
                 map = _assemblyNames;
             }
 
-            return
-                map.TryGetValue(reference, out var result)
+            return map.TryGetValue(reference, out var result)
               ? ImmutableArray.Create(result)
               : ImmutableArray<PortableExecutableReference>.Empty;
         }

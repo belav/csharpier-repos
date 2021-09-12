@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         internal MakeAssemblyReferencesKind GetMakeAssemblyReferencesKind()
         {
-            return
-                _useReferencedAssembliesOnly
+            return _useReferencedAssembliesOnly
               ? MakeAssemblyReferencesKind.AllReferences
               : MakeAssemblyReferencesKind.AllAssemblies;
         }

@@ -61,8 +61,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
             INamedTypeSymbol typeSymbol,
             CompilationOptions compilationOptions
         ) {
-            return
-                typeSymbol.ContainingNamespace.IsGlobalNamespace
+            return typeSymbol.ContainingNamespace.IsGlobalNamespace
               ? string.Empty
               : typeSymbol.ContainingNamespace.ToDisplayString();
         }

@@ -90,8 +90,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         {
             var argument = visitor.Visit(Argument);
 
-            return
-                argument != Argument
+            return argument != Argument
               ? new FromSqlQueryRootExpression(EntityType, Sql, argument)
               : this;
         }

@@ -1024,8 +1024,7 @@ namespace Microsoft.EntityFrameworkCore
             EntityState entityState,
             CancellationToken cancellationToken
         ) {
-            return
-                entry.EntityState == EntityState.Detached
+            return entry.EntityState == EntityState.Detached
               ? DbContextDependencies.EntityGraphAttacher.AttachGraphAsync(
                     entry,
                     entityState,

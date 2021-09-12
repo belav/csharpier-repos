@@ -39,14 +39,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             {
                 case StoreObjectType.Table:
                     var tableName = entityType.GetTableName();
-                    return
-                        tableName == null
+                    return tableName == null
                       ? (StoreObjectIdentifier?)null
                       : Table(tableName, entityType.GetSchema());
                 case StoreObjectType.View:
                     var viewName = entityType.GetViewName();
-                    return
-                        viewName == null
+                    return viewName == null
                       ? (StoreObjectIdentifier?)null
                       : View(viewName, entityType.GetViewSchema());
                 case StoreObjectType.SqlQuery:
@@ -54,8 +52,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     return query == null ? (StoreObjectIdentifier?)null : SqlQuery(entityType);
                 case StoreObjectType.Function:
                     var functionName = entityType.GetFunctionName();
-                    return
-                        functionName == null
+                    return functionName == null
                       ? (StoreObjectIdentifier?)null
                       : DbFunction(functionName);
                 default:

@@ -61,8 +61,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return
-                    (object?)_underlyingEvent.AddMethod == null
+                return (object?)_underlyingEvent.AddMethod == null
                   ? null
                   : this.RetargetingTranslator.Retarget(_underlyingEvent.AddMethod);
             }
@@ -72,8 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return
-                    (object?)_underlyingEvent.RemoveMethod == null
+                return (object?)_underlyingEvent.RemoveMethod == null
                   ? null
                   : this.RetargetingTranslator.Retarget(_underlyingEvent.RemoveMethod);
             }
@@ -83,8 +81,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return
-                    (object?)_underlyingEvent.AssociatedField == null
+                return (object?)_underlyingEvent.AssociatedField == null
                   ? null
                   : this.RetargetingTranslator.Retarget(_underlyingEvent.AssociatedField);
             }

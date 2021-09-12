@@ -72,8 +72,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             {
                 var hostStateSets = GetAllHostStateSets();
 
-                return
-                    _projectAnalyzerStateMap.TryGetValue(projectId, out var entry)
+                return _projectAnalyzerStateMap.TryGetValue(projectId, out var entry)
                   ? hostStateSets.Concat(entry.StateSetMap.Values)
                   : hostStateSets;
             }

@@ -767,8 +767,7 @@ namespace Microsoft.CodeAnalysis.Operations
                         boundPropertyAccess.PropertySymbol
                     );
                 case BoundObjectInitializerMember boundObjectInitializerMember:
-                    return
-                        boundObjectInitializerMember.MemberSymbol?.IsStatic == true
+                    return boundObjectInitializerMember.MemberSymbol?.IsStatic == true
                       ? null
                       : CreateImplicitReceiver(
                             boundObjectInitializerMember.Syntax,
@@ -1902,8 +1901,7 @@ namespace Microsoft.CodeAnalysis.Operations
         private IOperation CreateBoundAssignmentOperatorOrMemberInitializerOperation(
             BoundAssignmentOperator boundAssignmentOperator
         ) {
-            return
-                IsMemberInitializer(boundAssignmentOperator)
+            return IsMemberInitializer(boundAssignmentOperator)
               ? (IOperation)CreateBoundMemberInitializerOperation(boundAssignmentOperator)
               : CreateBoundAssignmentOperatorOperation(boundAssignmentOperator);
         }

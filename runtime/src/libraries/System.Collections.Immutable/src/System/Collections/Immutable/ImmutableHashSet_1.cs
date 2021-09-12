@@ -1082,8 +1082,7 @@ namespace System.Collections.Immutable
             SortedInt32KeyNode<HashBucket> root,
             int adjustedCountIfDifferentRoot
         ) {
-            return
-                (root != _root)
+            return (root != _root)
               ? new ImmutableHashSet<T>(root, _equalityComparer, adjustedCountIfDifferentRoot)
               : this;
         }

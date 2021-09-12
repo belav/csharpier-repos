@@ -105,8 +105,7 @@ namespace System.Net.Security
             );
             using (sspiHandle)
             {
-                return
-                    success
+                return success
                   ? NegotiationInfoClass.GetAuthenticationPackageName(
                         sspiHandle!,
                         (int)ctx.NegotiationState

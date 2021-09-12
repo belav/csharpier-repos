@@ -59,8 +59,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 // pseudo-custom attributes are not suppressed:
-                return
-                    _suppressOptional
+                return _suppressOptional
                   ? _originalParam.HasOptionalAttribute
                   : _originalParam.IsMetadataOptional;
             }
@@ -71,8 +70,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 // pseudo-custom attributes are not suppressed:
-                return
-                    _suppressOptional
+                return _suppressOptional
                   ? _originalParam.DefaultValueFromAttributes
                   : _originalParam.ExplicitDefaultConstantValue;
             }

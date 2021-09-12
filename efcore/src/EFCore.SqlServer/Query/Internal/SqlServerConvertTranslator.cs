@@ -89,8 +89,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return
-                _supportedMethods.Contains(method)
+            return _supportedMethods.Contains(method)
               ? _sqlExpressionFactory.Function(
                     "CONVERT",
                     new[]

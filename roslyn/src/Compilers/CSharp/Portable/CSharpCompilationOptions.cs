@@ -333,8 +333,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal CSharpCompilationOptions WithTopLevelBinderFlags(BinderFlags flags)
         {
-            return
-                (flags == TopLevelBinderFlags)
+            return (flags == TopLevelBinderFlags)
               ? this
               : new CSharpCompilationOptions(this) { TopLevelBinderFlags = flags };
         }

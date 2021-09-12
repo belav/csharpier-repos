@@ -56,8 +56,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ) {
             Check.DebugAssert(entity != null, "entity is null");
 
-            return
-                entityType.ShadowPropertyCount() > 0
+            return entityType.ShadowPropertyCount() > 0
               ? (InternalEntityEntry)new InternalMixedEntityEntry(stateManager, entityType, entity)
               : new InternalClrEntityEntry(stateManager, entityType, entity);
         }

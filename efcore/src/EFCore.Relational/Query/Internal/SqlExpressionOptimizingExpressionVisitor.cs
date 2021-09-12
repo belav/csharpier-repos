@@ -119,8 +119,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     changed = true;
                 }
 
-                return
-                    changed
+                return changed
                   ? newSelectExpression.Update(
                         newSelectExpression.Projection.ToList(),
                         newSelectExpression.Tables.ToList(),
@@ -423,8 +422,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         // a is not null && a is not null -> a is not null
                         // a is null || a is not null -> true
                         // a is null && a is not null -> false
-                        return
-                            leftUnary.OperatorType == rightUnary.OperatorType
+                        return leftUnary.OperatorType == rightUnary.OperatorType
                           ? (SqlExpression)leftUnary
                           : _sqlExpressionFactory.Constant(
                                 operatorType == ExpressionType.OrElse,
@@ -548,8 +546,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ) {
             if (leftBoolValue != null && rightBoolValue != null)
             {
-                return
-                    operatorType == ExpressionType.Equal
+                return operatorType == ExpressionType.Equal
                   ? _sqlExpressionFactory.Constant(
                         leftBoolValue.Value == rightBoolValue.Value,
                         typeMapping
@@ -567,8 +564,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 // a != true -> !a
                 // a != false -> a
                 // only correct when f(x) can't be null
-                return
-                    operatorType == ExpressionType.Equal
+                return operatorType == ExpressionType.Equal
                   ? rightBoolValue.Value
                       ? left
                       : SimplifyUnaryExpression(ExpressionType.Not, left, typeof(bool), typeMapping)
@@ -584,8 +580,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 // true != a -> !a
                 // false != a -> a
                 // only correct when a can't be null
-                return
-                    operatorType == ExpressionType.Equal
+                return operatorType == ExpressionType.Equal
                   ? leftBoolValue.Value
                       ? right
                       : SimplifyUnaryExpression(
@@ -632,8 +627,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 left is SqlConstantExpression newLeftConstant
                 && newLeftConstant.Value is bool leftBoolValue
             ) {
-                return
-                    operatorType == ExpressionType.AndAlso
+                return operatorType == ExpressionType.AndAlso
                   ? leftBoolValue ? right : newLeftConstant
                   : leftBoolValue ? newLeftConstant : right;
             }
@@ -646,8 +640,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 // a || true -> true
                 // a && false -> false
                 // a || false -> a
-                return
-                    operatorType == ExpressionType.AndAlso
+                return operatorType == ExpressionType.AndAlso
                   ? rightBoolValue ? left : newRightConstant
                   : rightBoolValue ? newRightConstant : left;
             }

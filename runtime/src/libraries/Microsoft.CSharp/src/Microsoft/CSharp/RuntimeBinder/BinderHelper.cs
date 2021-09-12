@@ -267,8 +267,7 @@ namespace Microsoft.CSharp.RuntimeBinder
                 || IsTypeOfStaticCall(parameterIndex, callPayload)
                 || IsDynamicallyTypedRuntimeProxy(argument, info);
 
-            return
-                useValueRestriction
+            return useValueRestriction
               ? BindingRestrictions.GetInstanceRestriction(argument.Expression, argument.Value)
               : BindingRestrictions.GetTypeRestriction(argument.Expression, argument.RuntimeType);
         }

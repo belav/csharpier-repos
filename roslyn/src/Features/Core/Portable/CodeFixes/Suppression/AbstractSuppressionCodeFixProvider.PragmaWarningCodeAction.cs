@@ -89,8 +89,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         _suppressionTargetInfo,
                         (startToken, currentDiagnosticSpan) =>
                         {
-                            return
-                                includeStartTokenChange
+                            return includeStartTokenChange
                               ? PragmaHelpers.GetNewStartTokenWithAddedPragma(
                                     startToken,
                                     currentDiagnosticSpan,
@@ -102,8 +101,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         },
                         (endToken, currentDiagnosticSpan) =>
                         {
-                            return
-                                includeEndTokenChange
+                            return includeEndTokenChange
                               ? PragmaHelpers.GetNewEndTokenWithAddedPragma(
                                     endToken,
                                     currentDiagnosticSpan,

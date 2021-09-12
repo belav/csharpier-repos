@@ -61,8 +61,7 @@ namespace Microsoft.AspNetCore.Mvc
 
             string GetErrorMessage(ModelError error)
             {
-                return
-                    string.IsNullOrEmpty(error.ErrorMessage)
+                return string.IsNullOrEmpty(error.ErrorMessage)
                   ? Resources.SerializableError_DefaultError
                   : error.ErrorMessage;
             }

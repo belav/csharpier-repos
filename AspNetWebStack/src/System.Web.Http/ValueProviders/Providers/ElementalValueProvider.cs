@@ -28,8 +28,7 @@ namespace System.Web.Http.ValueProviders.Providers
 
         public ValueProviderResult GetValue(string key)
         {
-            return
-                String.Equals(key, Name, StringComparison.OrdinalIgnoreCase)
+            return String.Equals(key, Name, StringComparison.OrdinalIgnoreCase)
               ? new ValueProviderResult(RawValue, Convert.ToString(RawValue, Culture), Culture)
               : null;
         }

@@ -185,8 +185,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     AnonymousTypeTemplateSymbol template =
                         _containingType as AnonymousTypeTemplateSymbol;
-                    return
-                        ((object)template != null)
+                    return ((object)template != null)
                       ? template.Manager
                       : ((AnonymousTypePublicSymbol)_containingType).Manager;
                 }

@@ -48,8 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
                     (o, c) =>
                     {
                         var symbol = model.GetSymbolInfo(o).Symbol;
-                        return
-                            symbol != null
+                        return symbol != null
                           ? c.WithAdditionalAnnotations(
                                 SymbolAnnotation.Create(symbol),
                                 Simplifier.Annotation

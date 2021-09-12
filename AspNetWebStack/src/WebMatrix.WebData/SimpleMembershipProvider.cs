@@ -91,8 +91,7 @@ namespace WebMatrix.WebData
         {
             get
             {
-                return
-                    InitializeCalled
+                return InitializeCalled
                   ? MembershipPasswordFormat.Hashed
                   : PreviousProvider.PasswordFormat;
             }
@@ -103,8 +102,7 @@ namespace WebMatrix.WebData
         {
             get
             {
-                return
-                    InitializeCalled
+                return InitializeCalled
                   ? Int32.MaxValue
                   : PreviousProvider.MaxInvalidPasswordAttempts;
             }
@@ -139,8 +137,7 @@ namespace WebMatrix.WebData
         {
             get
             {
-                return
-                    InitializeCalled
+                return InitializeCalled
                   ? String.Empty
                   : PreviousProvider.PasswordStrengthRegularExpression;
             }

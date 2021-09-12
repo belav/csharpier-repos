@@ -116,8 +116,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
             Check.NotNull(entity, nameof(entity));
             Check.NotEmpty(navigationName, nameof(navigationName));
 
-            return
-                ShouldLoad(entity, navigationName, out var entry)
+            return ShouldLoad(entity, navigationName, out var entry)
               ? entry.LoadAsync(cancellationToken)
               : Task.CompletedTask;
         }

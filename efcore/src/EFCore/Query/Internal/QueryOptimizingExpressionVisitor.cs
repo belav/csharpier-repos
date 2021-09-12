@@ -102,8 +102,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     )
                 );
 
-                return
-                    newArgument is ConstantExpression
+                return newArgument is ConstantExpression
                   ? result
                   : Expression.OrElse(
                         Expression.Equal(newArgument, Expression.Constant(string.Empty)),
@@ -215,8 +214,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && _stringCompareWithComparisonMethod != null
                 && _stringCompareWithoutComparisonMethod != null
             ) {
-                return
-                    textCompareConstantExpression.Value is bool boolValue && boolValue
+                return textCompareConstantExpression.Value is bool boolValue && boolValue
                   ? Expression.Call(
                         _stringCompareWithComparisonMethod,
                         visited.Arguments[0],
@@ -276,8 +274,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     )
                 );
 
-                return
-                    newArgument is ConstantExpression
+                return newArgument is ConstantExpression
                   ? result
                   : Expression.AndAlso(
                         Expression.NotEqual(newArgument, Expression.Constant(string.Empty)),
@@ -360,8 +357,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             var body = Visit(lambdaExpression.Body);
 
-            return
-                body.Type != lambdaExpression.Body.Type
+            return body.Type != lambdaExpression.Body.Type
               ? Expression.Lambda(
                     Expression.Convert(body, lambdaExpression.Body.Type),
                     lambdaExpression.Parameters

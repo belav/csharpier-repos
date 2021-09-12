@@ -46,8 +46,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             IEnumerable<SyntaxToken> trailingTokensForSelect,
             bool convertToQuery
         ) {
-            return
-                convertToQuery
+            return convertToQuery
               ? CreateQueryExpression(
                     selectExpression,
                     leadingTokensForSelect,

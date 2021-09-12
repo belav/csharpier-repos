@@ -422,8 +422,7 @@ namespace System.Runtime.Serialization
         public bool GetBoolean(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(bool))
+            return ReferenceEquals(foundType, typeof(bool))
               ? (bool)value!
               : _converter.ToBoolean(value!); // if value is null To* method will either deal with it or throw
         }
@@ -431,8 +430,7 @@ namespace System.Runtime.Serialization
         public char GetChar(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(char))
+            return ReferenceEquals(foundType, typeof(char))
               ? (char)value!
               : _converter.ToChar(value!);
         }
@@ -441,8 +439,7 @@ namespace System.Runtime.Serialization
         public sbyte GetSByte(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(sbyte))
+            return ReferenceEquals(foundType, typeof(sbyte))
               ? (sbyte)value!
               : _converter.ToSByte(value!);
         }
@@ -450,8 +447,7 @@ namespace System.Runtime.Serialization
         public byte GetByte(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(byte))
+            return ReferenceEquals(foundType, typeof(byte))
               ? (byte)value!
               : _converter.ToByte(value!);
         }
@@ -459,8 +455,7 @@ namespace System.Runtime.Serialization
         public short GetInt16(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(short))
+            return ReferenceEquals(foundType, typeof(short))
               ? (short)value!
               : _converter.ToInt16(value!);
         }
@@ -469,8 +464,7 @@ namespace System.Runtime.Serialization
         public ushort GetUInt16(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(ushort))
+            return ReferenceEquals(foundType, typeof(ushort))
               ? (ushort)value!
               : _converter.ToUInt16(value!);
         }
@@ -478,8 +472,7 @@ namespace System.Runtime.Serialization
         public int GetInt32(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(int))
+            return ReferenceEquals(foundType, typeof(int))
               ? (int)value!
               : _converter.ToInt32(value!);
         }
@@ -488,8 +481,7 @@ namespace System.Runtime.Serialization
         public uint GetUInt32(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(uint))
+            return ReferenceEquals(foundType, typeof(uint))
               ? (uint)value!
               : _converter.ToUInt32(value!);
         }
@@ -497,8 +489,7 @@ namespace System.Runtime.Serialization
         public long GetInt64(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(long))
+            return ReferenceEquals(foundType, typeof(long))
               ? (long)value!
               : _converter.ToInt64(value!);
         }
@@ -507,8 +498,7 @@ namespace System.Runtime.Serialization
         public ulong GetUInt64(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(ulong))
+            return ReferenceEquals(foundType, typeof(ulong))
               ? (ulong)value!
               : _converter.ToUInt64(value!);
         }
@@ -516,8 +506,7 @@ namespace System.Runtime.Serialization
         public float GetSingle(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(float))
+            return ReferenceEquals(foundType, typeof(float))
               ? (float)value!
               : _converter.ToSingle(value!);
         }
@@ -525,8 +514,7 @@ namespace System.Runtime.Serialization
         public double GetDouble(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(double))
+            return ReferenceEquals(foundType, typeof(double))
               ? (double)value!
               : _converter.ToDouble(value!);
         }
@@ -534,8 +522,7 @@ namespace System.Runtime.Serialization
         public decimal GetDecimal(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(decimal))
+            return ReferenceEquals(foundType, typeof(decimal))
               ? (decimal)value!
               : _converter.ToDecimal(value!);
         }
@@ -543,8 +530,7 @@ namespace System.Runtime.Serialization
         public DateTime GetDateTime(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(DateTime))
+            return ReferenceEquals(foundType, typeof(DateTime))
               ? (DateTime)value!
               : _converter.ToDateTime(value!);
         }
@@ -552,8 +538,7 @@ namespace System.Runtime.Serialization
         public string? GetString(string name)
         {
             object? value = GetElement(name, out Type foundType);
-            return
-                ReferenceEquals(foundType, typeof(string)) || value == null
+            return ReferenceEquals(foundType, typeof(string)) || value == null
               ? (string?)value
               : _converter.ToString(value);
         }

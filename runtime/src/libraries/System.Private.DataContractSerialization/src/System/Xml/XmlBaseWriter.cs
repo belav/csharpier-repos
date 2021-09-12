@@ -947,8 +947,7 @@ namespace System.Xml
 
         private Task FlushElementAsync()
         {
-            return
-                _writeState == WriteState.Element
+            return _writeState == WriteState.Element
               ? AutoCompleteAsync(WriteState.Content)
               : Task.CompletedTask;
         }

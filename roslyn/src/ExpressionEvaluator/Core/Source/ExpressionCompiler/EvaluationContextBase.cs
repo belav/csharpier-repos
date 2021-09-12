@@ -96,8 +96,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DiagnosticFormatter formatter,
             CultureInfo? preferredUICulture
         ) {
-            return
-                (error is SimpleMessageDiagnostic simpleMessage)
+            return (error is SimpleMessageDiagnostic simpleMessage)
               ? simpleMessage.GetMessage()
               : formatter.Format(error, preferredUICulture ?? CultureInfo.CurrentUICulture);
         }

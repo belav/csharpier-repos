@@ -1714,8 +1714,7 @@ namespace System.Net.Http
                 ) {
                     ValidateCopyToArguments(destination, bufferSize);
                     Http2Stream? http2Stream = _http2Stream;
-                    return
-                        http2Stream is null
+                    return http2Stream is null
                       ? Task.FromException<int>(
                             ExceptionDispatchInfo.SetCurrentStackTrace(
                                 new ObjectDisposedException(nameof(Http2ReadStream))

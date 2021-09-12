@@ -131,8 +131,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         private string? GetNamespaceFromOutputPath(string directoryPath)
         {
             var subNamespace = SubnamespaceFromOutputPath(_projectDir, directoryPath);
-            return
-                string.IsNullOrEmpty(subNamespace)
+            return string.IsNullOrEmpty(subNamespace)
               ? _rootNamespace
               : string.IsNullOrEmpty(_rootNamespace)
                   ? subNamespace
@@ -151,8 +150,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             var subPath = outputDir.Substring(projectDir.Length);
 
-            return
-                !string.IsNullOrWhiteSpace(subPath)
+            return !string.IsNullOrWhiteSpace(subPath)
               ? string.Join(
                     ".",
                     subPath.Split(
@@ -181,8 +179,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             }
 
             var last = path[path.Length - 1];
-            return
-                last == Path.DirectorySeparatorChar || last == Path.AltDirectorySeparatorChar
+            return last == Path.DirectorySeparatorChar || last == Path.AltDirectorySeparatorChar
               ? path
               : path + Path.DirectorySeparatorChar;
         }

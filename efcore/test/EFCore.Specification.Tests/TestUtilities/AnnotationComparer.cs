@@ -25,8 +25,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return y == null;
             }
 
-            return
-                y == null
+            return y == null
               ? false
               : x.Name == y.Name
                 && (

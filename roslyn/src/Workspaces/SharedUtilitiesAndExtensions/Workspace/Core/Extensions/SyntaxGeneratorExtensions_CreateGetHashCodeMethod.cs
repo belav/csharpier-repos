@@ -235,8 +235,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             string name,
             SyntaxNode initializer
         ) {
-            return
-                generatorInternal.RequiresLocalDeclarationType()
+            return generatorInternal.RequiresLocalDeclarationType()
               ? generator.LocalDeclarationStatement(namedTypeSymbol, name, initializer)
               : generator.LocalDeclarationStatement(name, initializer);
         }

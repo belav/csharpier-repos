@@ -35,8 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public int Compare(IReadOnlyKey? x, IReadOnlyKey? y)
         {
             var result = PropertyListComparer.Instance.Compare(x?.Properties, y?.Properties);
-            return
-                result != 0
+            return result != 0
               ? result
               : EntityTypeFullNameComparer.Instance.Compare(
                     x?.DeclaringEntityType,

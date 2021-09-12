@@ -36,8 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     runtimeInstance: null
                 );
             }
-            return
-                escapeKeywordIdentifiers
+            return escapeKeywordIdentifiers
               ? ((IDkmClrFullNameProvider)formatter).GetClrTypeName(
                     inspectionContext,
                     clrType,

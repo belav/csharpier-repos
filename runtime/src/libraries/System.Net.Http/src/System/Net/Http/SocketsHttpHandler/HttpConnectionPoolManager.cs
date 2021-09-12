@@ -651,8 +651,7 @@ namespace System.Net.Http
 
         private static string GetIdentityIfDefaultCredentialsUsed(bool defaultCredentialsUsed)
         {
-            return
-                defaultCredentialsUsed
+            return defaultCredentialsUsed
               ? CurrentUserIdentityProvider.GetIdentity()
               : string.Empty;
         }

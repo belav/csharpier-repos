@@ -16,8 +16,7 @@ namespace System.Formats.Cbor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half ReadHalfBigEndian(ReadOnlySpan<byte> source)
         {
-            return
-                BitConverter.IsLittleEndian
+            return BitConverter.IsLittleEndian
               ? Int16BitsToHalf(
                     BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<short>(source))
                 )

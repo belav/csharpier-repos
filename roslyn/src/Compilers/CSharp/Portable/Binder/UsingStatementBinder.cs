@@ -395,8 +395,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TypeSymbol targetInterface,
                 ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
             ) {
-                return
-                    fromExpression
+                return fromExpression
                   ? originalBinder.Conversions.ClassifyImplicitConversionFromExpression(
                         expressionOpt,
                         targetInterface,
@@ -411,8 +410,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             TypeSymbol getDisposableInterface(bool isAsync)
             {
-                return
-                    isAsync
+                return isAsync
                   ? originalBinder.Compilation.GetWellKnownType(
                         WellKnownType.System_IAsyncDisposable
                     )

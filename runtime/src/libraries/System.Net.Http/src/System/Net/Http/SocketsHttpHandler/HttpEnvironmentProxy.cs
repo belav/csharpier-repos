@@ -265,8 +265,7 @@ namespace System.Net.Http
         /// </summary>
         public Uri? GetProxy(Uri uri)
         {
-            return
-                HttpUtilities.IsSupportedNonSecureScheme(uri.Scheme)
+            return HttpUtilities.IsSupportedNonSecureScheme(uri.Scheme)
               ? _httpProxyUri
               : _httpsProxyUri;
         }

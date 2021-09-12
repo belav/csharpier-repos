@@ -90,8 +90,7 @@ namespace System.Threading.Tasks.Dataflow
         /// <returns>An instance of the options that may be cached by the block.</returns>
         internal DataflowBlockOptions DefaultOrClone()
         {
-            return
-                (this == Default)
+            return (this == Default)
               ? this
               : new DataflowBlockOptions
                 {
@@ -269,8 +268,7 @@ namespace System.Threading.Tasks.Dataflow
         /// <returns>An instance of the options that may be cached by the block.</returns>
         internal new ExecutionDataflowBlockOptions DefaultOrClone()
         {
-            return
-                (this == Default)
+            return (this == Default)
               ? this
               : new ExecutionDataflowBlockOptions
                 {
@@ -335,8 +333,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             get
             {
-                return
-                    (_maxDegreeOfParallelism == Unbounded)
+                return (_maxDegreeOfParallelism == Unbounded)
                   ? int.MaxValue
                   : _maxDegreeOfParallelism;
             }
@@ -415,8 +412,7 @@ namespace System.Threading.Tasks.Dataflow
         /// <returns>An instance of the options that may be cached by the block.</returns>
         internal new GroupingDataflowBlockOptions DefaultOrClone()
         {
-            return
-                (this == Default)
+            return (this == Default)
               ? this
               : new GroupingDataflowBlockOptions
                 {

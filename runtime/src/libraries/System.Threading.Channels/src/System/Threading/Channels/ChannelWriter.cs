@@ -42,8 +42,7 @@ namespace System.Threading.Channels
         {
             try
             {
-                return
-                    cancellationToken.IsCancellationRequested
+                return cancellationToken.IsCancellationRequested
                   ? new ValueTask(Task.FromCanceled<T>(cancellationToken))
                   : TryWrite(item) ? default : WriteAsyncCore(item, cancellationToken);
             }

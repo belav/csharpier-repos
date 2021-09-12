@@ -36,8 +36,7 @@ namespace Microsoft.JSInterop.Infrastructure
                 taskInstanceType =>
                 {
                     var resultType = GetTaskResultType(taskInstanceType);
-                    return
-                        resultType == null
+                    return resultType == null
                       ? new VoidTaskResultGetter()
                       : (ITaskResultGetter)Activator.CreateInstance(
                             typeof(TaskResultGetter<>).MakeGenericType(resultType)

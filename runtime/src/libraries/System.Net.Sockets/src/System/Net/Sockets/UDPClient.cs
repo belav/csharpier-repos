@@ -302,8 +302,7 @@ namespace System.Net.Sockets
         {
             ThrowIfDisposed();
 
-            return
-                _active
+            return _active
               ? _clientSocket.EndSend(asyncResult)
               : _clientSocket.EndSendTo(asyncResult);
         }

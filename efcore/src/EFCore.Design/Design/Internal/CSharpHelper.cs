@@ -334,8 +334,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 }
             }
 
-            return
-                @namespace.Length > 0
+            return @namespace.Length > 0
               ? @namespace.Remove(@namespace.Length - 1, 1).ToString()
               : "_";
         }
@@ -455,8 +454,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 return $"double.{nameof(double.PositiveInfinity)}";
             }
 
-            return
-                !literal.Contains("E") && !literal.Contains("e") && !literal.Contains(".")
+            return !literal.Contains("E") && !literal.Contains("e") && !literal.Contains(".")
               ? literal + ".0"
               : literal;
         }
@@ -720,8 +718,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var type = value.GetType();
             var name = Enum.GetName(type, value);
 
-            return
-                name == null
+            return name == null
               ? GetCompositeEnumValue(type, value)
               : GetSimpleEnumValue(type, name);
         }

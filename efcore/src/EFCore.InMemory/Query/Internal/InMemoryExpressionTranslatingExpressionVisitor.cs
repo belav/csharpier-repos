@@ -817,8 +817,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                         if (selector == null)
                         {
-                            return
-                                groupingElement.Selector is EntityShaperExpression
+                            return groupingElement.Selector is EntityShaperExpression
                               ? groupingElement.Source
                               : null;
                         }
@@ -1855,8 +1854,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                           mb => mb.Member.Name == property.Name
                       )
                           is MemberAssignment memberAssignment:
-                    return
-                        memberAssignment.Expression.Type.IsNullableType()
+                    return memberAssignment.Expression.Type.IsNullableType()
                       ? memberAssignment.Expression
                       : Expression.Convert(
                             memberAssignment.Expression,
@@ -1881,8 +1879,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             IProperty property
         ) {
             var baseParameter = context.ParameterValues[baseParameterName];
-            return
-                baseParameter == null
+            return baseParameter == null
               ? (T?)(object?)null
               : (T?)property.GetGetter().GetClrValue(baseParameter);
         }
@@ -2146,8 +2143,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 var derivedEntityType = EntityType.GetDerivedTypes()
                     .FirstOrDefault(et => et.ClrType == type);
 
-                return
-                    derivedEntityType == null
+                return derivedEntityType == null
                   ? QueryCompilationContext.NotTranslatedExpression
                   : new EntityReferenceExpression(this, derivedEntityType);
             }

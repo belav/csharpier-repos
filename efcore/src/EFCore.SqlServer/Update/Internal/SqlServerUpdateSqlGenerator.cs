@@ -93,8 +93,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                         AppendInsertOperation(commandStringBuilder, modification, commandPosition);
                     }
 
-                    return
-                        readOperations.Count == 0
+                    return readOperations.Count == 0
                       ? ResultSetMapping.NoResultSet
                       : ResultSetMapping.LastInResultSet;
                 }

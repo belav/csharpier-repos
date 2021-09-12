@@ -42,14 +42,12 @@ namespace Microsoft.CodeAnalysis
                     return Glyph.Assembly;
 
                 case WellKnownTags.File:
-                    return
-                        allTags.Contains(LanguageNames.VisualBasic)
+                    return allTags.Contains(LanguageNames.VisualBasic)
                       ? Glyph.BasicFile
                       : Glyph.CSharpFile;
 
                 case WellKnownTags.Project:
-                    return
-                        allTags.Contains(LanguageNames.VisualBasic)
+                    return allTags.Contains(LanguageNames.VisualBasic)
                       ? Glyph.BasicProject
                       : Glyph.CSharpProject;
 

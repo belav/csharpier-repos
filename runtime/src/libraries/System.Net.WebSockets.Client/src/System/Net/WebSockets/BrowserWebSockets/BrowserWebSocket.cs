@@ -692,8 +692,7 @@ namespace System.Net.WebSockets
             {
                 return Task.FromException(exc);
             }
-            return
-                State == WebSocketState.CloseSent
+            return State == WebSocketState.CloseSent
               ? Task.CompletedTask
               : CloseAsyncCore(closeStatus, statusDescription, cancellationToken);
         }

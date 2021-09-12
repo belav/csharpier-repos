@@ -76,8 +76,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticAnalyzer analyzer
         ) {
             var descriptorInfo = GetOrCreateDescriptorsInfo(analyzer);
-            return
-                !descriptorInfo.HasCompilationEndDescriptor
+            return !descriptorInfo.HasCompilationEndDescriptor
               ? descriptorInfo.SupportedDescriptors
               : descriptorInfo.SupportedDescriptors.WhereAsArray(d => !d.IsCompilationEnd());
         }

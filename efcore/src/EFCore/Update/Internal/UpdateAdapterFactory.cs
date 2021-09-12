@@ -48,8 +48,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         {
             var stateManager = _currentContext.Context.GetDependencies().StateManager;
 
-            return
-                model == null
+            return model == null
               ? new UpdateAdapter(new StateManager(stateManager.Dependencies))
               : new UpdateAdapter(
                     new StateManager(stateManager.Dependencies with { Model = model })

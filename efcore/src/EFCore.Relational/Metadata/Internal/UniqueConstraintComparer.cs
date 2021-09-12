@@ -58,8 +58,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             result = ColumnListComparer.Instance.Compare(x.Columns, y.Columns);
 
-            return
-                result != 0
+            return result != 0
               ? result
               : StringComparer.Ordinal.Compare(x.Table.Name, y.Table.Name);
         }

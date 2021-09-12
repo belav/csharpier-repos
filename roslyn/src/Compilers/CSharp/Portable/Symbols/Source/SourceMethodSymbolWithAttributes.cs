@@ -79,8 +79,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return
-                    (this.syntaxReferenceOpt == null)
+                return (this.syntaxReferenceOpt == null)
                   ? null
                   : (CSharpSyntaxNode)this.syntaxReferenceOpt.GetSyntax();
             }
@@ -98,8 +97,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return
-                    (this.syntaxReferenceOpt == null)
+                return (this.syntaxReferenceOpt == null)
                   ? ImmutableArray<SyntaxReference>.Empty
                   : ImmutableArray.Create(this.syntaxReferenceOpt);
             }
@@ -499,8 +497,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var earlyData =
                 (MethodEarlyWellKnownAttributeData?)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
             Debug.Assert(!forceComplete);
-            return
-                earlyData?.UnmanagedCallersOnlyAttributePresent == true
+            return earlyData?.UnmanagedCallersOnlyAttributePresent == true
               ? UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound
               : null;
 #if DEBUG // Can remove ifdefs and replace with Conditional after https://github.com/dotnet/roslyn/issues/47463 is fixed

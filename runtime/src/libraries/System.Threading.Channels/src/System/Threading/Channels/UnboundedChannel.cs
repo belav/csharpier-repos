@@ -174,8 +174,7 @@ namespace System.Threading.Channels
                     // There are no items, so if we're done writing, there's never going to be data available.
                     if (parent._doneWriting != null)
                     {
-                        return
-                            parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
+                        return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
                           ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
                           : default;
                     }
@@ -322,8 +321,7 @@ namespace System.Threading.Channels
             public override ValueTask<bool> WaitToWriteAsync(CancellationToken cancellationToken)
             {
                 Exception? doneWriting = _parent._doneWriting;
-                return
-                    cancellationToken.IsCancellationRequested
+                return cancellationToken.IsCancellationRequested
                   ? new ValueTask<bool>(Task.FromCanceled<bool>(cancellationToken))
                   : doneWriting == null
                       ? new ValueTask<bool>(true)

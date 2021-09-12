@@ -128,8 +128,7 @@ namespace System.Web.Mvc
             }
             else
             {
-                return
-                    (skipValidation)
+                return (skipValidation)
                   ? placeholder.UnvalidatedResult
                   : placeholder.ValidatedResult;
             }

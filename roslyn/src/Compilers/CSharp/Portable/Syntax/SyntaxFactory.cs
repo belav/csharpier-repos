@@ -2086,8 +2086,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             XmlEmptyElementSyntax elementSyntax = (XmlEmptyElementSyntax)structure.Content[1];
             Debug.Assert(elementSyntax.Attributes.Count == 1);
             XmlAttributeSyntax attributeSyntax = (XmlAttributeSyntax)elementSyntax.Attributes[0];
-            return
-                attributeSyntax.Kind() == SyntaxKind.XmlCrefAttribute
+            return attributeSyntax.Kind() == SyntaxKind.XmlCrefAttribute
               ? ((XmlCrefAttributeSyntax)attributeSyntax).Cref
               : null;
         }
@@ -2738,8 +2737,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (((NameMemberCrefSyntax)parent).Name == node)
                     {
                         CSharpSyntaxNode? grandparent = parent.Parent;
-                        return
-                            grandparent != null && grandparent.Kind() == SyntaxKind.QualifiedCref
+                        return grandparent != null && grandparent.Kind() == SyntaxKind.QualifiedCref
                           ? grandparent
                           : parent;
                     }

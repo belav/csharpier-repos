@@ -331,8 +331,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 
                     if (size == null && storeTypeName == null)
                     {
-                        return
-                            isAnsi
+                        return isAnsi
                           ? isFixedLength ? _fixedLengthAnsiString : _variableLengthMaxAnsiString
                           : isFixedLength
                               ? _fixedLengthUnicodeString
@@ -364,8 +363,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                         size = isFixedLength ? 8000 : (int?)null;
                     }
 
-                    return
-                        size == null
+                    return size == null
                       ? _variableLengthMaxBinary
                       : new SqlServerByteArrayTypeMapping(
                             size: size,

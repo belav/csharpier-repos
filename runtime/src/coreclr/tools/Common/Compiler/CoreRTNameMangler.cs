@@ -92,8 +92,7 @@ namespace ILCompiler
             // The character sequences denoting generic instantiations, arrays, byrefs, or pointers must be
             // restricted to that use only. Replace them if they happened to be used in any identifiers in
             // the compilation input.
-            return
-                _mangleForCplusPlus
+            return _mangleForCplusPlus
               ? sanitizedName.Replace(EnterNameScopeSequence, "_AA_")
                     .Replace(ExitNameScopeSequence, "_VV_")
               : sanitizedName;

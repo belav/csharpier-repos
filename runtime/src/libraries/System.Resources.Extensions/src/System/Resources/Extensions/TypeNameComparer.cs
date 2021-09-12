@@ -28,8 +28,7 @@ namespace System.Resources.Extensions
             // the runtime doesn't tolerate anything between type name and comma
             int comma = assemblyQualifiedTypeName.IndexOf(',');
 
-            return
-                comma == -1
+            return comma == -1
               ? assemblyQualifiedTypeName
               : assemblyQualifiedTypeName.Slice(0, comma);
         }
@@ -39,8 +38,7 @@ namespace System.Resources.Extensions
         {
             int comma = assemblyName.IndexOf(',');
 
-            return
-                comma == -1
+            return comma == -1
               ? assemblyName
               : assemblyName.Slice(0, comma).TrimEnd(s_whiteSpaceChars);
         }

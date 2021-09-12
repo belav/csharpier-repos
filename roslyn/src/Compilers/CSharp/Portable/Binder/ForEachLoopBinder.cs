@@ -38,8 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return
-                    (_syntax.Kind() == SyntaxKind.ForEachStatement)
+                return (_syntax.Kind() == SyntaxKind.ForEachStatement)
                   ? (SourceLocalSymbol)this.Locals[0]
                   : null;
             }
@@ -2376,8 +2375,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) {
             var resolvedMember = (MethodSymbol)GetSpecialTypeMember(member, diagnostics, syntax);
             Debug.Assert(resolvedMember is null or { ParameterCount: 0 });
-            return
-                resolvedMember is not null
+            return resolvedMember is not null
               ? MethodArgumentInfo.CreateParameterlessMethod(resolvedMember)
               : null;
         }

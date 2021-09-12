@@ -80,8 +80,7 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             Feature feature
         ) {
             var statements = AsSwitchSectionStatements(section.Body);
-            return
-                section.Labels.IsDefault
+            return section.Labels.IsDefault
               ? generator.DefaultSwitchSection(statements)
               : generator.SwitchSectionFromLabels(
                     section.Labels.Select(label => AsSwitchLabelSyntax(label, feature)),

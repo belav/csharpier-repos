@@ -97,8 +97,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return collectionJoin!;
             }
 
-            return
-                extensionExpression is ShapedQueryExpression shapedQueryExpression
+            return extensionExpression is ShapedQueryExpression shapedQueryExpression
               ? shapedQueryExpression.UpdateShaperExpression(
                     Visit(shapedQueryExpression.ShaperExpression)
                 )

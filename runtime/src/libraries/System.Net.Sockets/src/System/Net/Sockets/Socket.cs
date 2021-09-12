@@ -677,8 +677,7 @@ namespace System.Net.Sockets
         {
             get
             {
-                return
-                    (int)GetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay)! != 0
+                return (int)GetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay)! != 0
                   ? true
                   : false;
             }
@@ -1396,8 +1395,7 @@ namespace System.Net.Sockets
         public int Send(ReadOnlySpan<byte> buffer, SocketFlags socketFlags)
         {
             int bytesTransferred = Send(buffer, socketFlags, out SocketError errorCode);
-            return
-                errorCode == SocketError.Success
+            return errorCode == SocketError.Success
               ? bytesTransferred
               : throw new SocketException((int)errorCode);
         }
@@ -1677,8 +1675,7 @@ namespace System.Net.Sockets
         public int Receive(Span<byte> buffer, SocketFlags socketFlags)
         {
             int bytesTransferred = Receive(buffer, socketFlags, out SocketError errorCode);
-            return
-                errorCode == SocketError.Success
+            return errorCode == SocketError.Success
               ? bytesTransferred
               : throw new SocketException((int)errorCode);
         }
@@ -3924,8 +3921,7 @@ namespace System.Net.Sockets
         internal static int GetAddressSize(EndPoint endPoint)
         {
             AddressFamily fam = endPoint.AddressFamily;
-            return
-                fam == AddressFamily.InterNetwork
+            return fam == AddressFamily.InterNetwork
               ? SocketAddressPal.IPv4AddressSize
               : fam == AddressFamily.InterNetworkV6
                   ? SocketAddressPal.IPv6AddressSize

@@ -2448,8 +2448,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             var uncommon = GetUncommonProperties();
             if (uncommon == s_noUncommonProperties)
             {
-                return
-                    ((object)this.BaseTypeNoUseSiteDiagnostics != null)
+                return ((object)this.BaseTypeNoUseSiteDiagnostics != null)
                   ? this.BaseTypeNoUseSiteDiagnostics.GetAttributeUsageInfo()
                   : AttributeUsageInfo.Default;
             }
@@ -2481,8 +2480,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 }
             }
 
-            return
-                ((object)this.BaseTypeNoUseSiteDiagnostics != null)
+            return ((object)this.BaseTypeNoUseSiteDiagnostics != null)
               ? this.BaseTypeNoUseSiteDiagnostics.GetAttributeUsageInfo()
               : AttributeUsageInfo.Default;
         }
@@ -2587,8 +2585,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             internal override bool Equals(TypeSymbol t2, TypeCompareKind comparison)
             {
-                return
-                    t2 is NativeIntegerTypeSymbol nativeInteger
+                return t2 is NativeIntegerTypeSymbol nativeInteger
                   ? nativeInteger.Equals(this, comparison)
                   : base.Equals(t2, comparison);
             }

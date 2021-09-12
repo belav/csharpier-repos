@@ -1365,8 +1365,7 @@ namespace System.Net.Sockets
             int* nameLen
         ) {
             Interop.Error err = Interop.Sys.GetSockName(handle, buffer, nameLen);
-            return
-                err == Interop.Error.SUCCESS
+            return err == Interop.Error.SUCCESS
               ? SocketError.Success
               : GetSocketErrorForErrorCode(err);
         }
@@ -1377,8 +1376,7 @@ namespace System.Net.Sockets
             Interop.Error err = Interop.Sys.GetBytesAvailable(handle, &value);
             available = value;
 
-            return
-                err == Interop.Error.SUCCESS
+            return err == Interop.Error.SUCCESS
               ? SocketError.Success
               : GetSocketErrorForErrorCode(err);
         }
@@ -1391,8 +1389,7 @@ namespace System.Net.Sockets
             Interop.Error err = Interop.Sys.GetAtOutOfBandMark(handle, &value);
             atOutOfBandMark = value;
 
-            return
-                err == Interop.Error.SUCCESS
+            return err == Interop.Error.SUCCESS
               ? SocketError.Success
               : GetSocketErrorForErrorCode(err);
         }
@@ -1410,8 +1407,7 @@ namespace System.Net.Sockets
             }
 
             nameLen = addrLen;
-            return
-                err == Interop.Error.SUCCESS
+            return err == Interop.Error.SUCCESS
               ? SocketError.Success
               : GetSocketErrorForErrorCode(err);
         }
@@ -1428,8 +1424,7 @@ namespace System.Net.Sockets
                 err = Interop.Sys.Bind(handle, socketProtocolType, rawBuffer, nameLen);
             }
 
-            return
-                err == Interop.Error.SUCCESS
+            return err == Interop.Error.SUCCESS
               ? SocketError.Success
               : GetSocketErrorForErrorCode(err);
         }
@@ -1437,8 +1432,7 @@ namespace System.Net.Sockets
         public static SocketError Listen(SafeSocketHandle handle, int backlog)
         {
             Interop.Error err = Interop.Sys.Listen(handle, backlog);
-            return
-                err == Interop.Error.SUCCESS
+            return err == Interop.Error.SUCCESS
               ? SocketError.Success
               : GetSocketErrorForErrorCode(err);
         }
@@ -2254,8 +2248,7 @@ namespace System.Net.Sockets
                     &socketError
                 );
                 optionValue = (int)GetSocketErrorForErrorCode(socketError);
-                return
-                    getErrorError == Interop.Error.SUCCESS
+                return getErrorError == Interop.Error.SUCCESS
                   ? SocketError.Success
                   : GetSocketErrorForErrorCode(getErrorError);
             }
@@ -2271,8 +2264,7 @@ namespace System.Net.Sockets
             );
 
             optionValue = value;
-            return
-                err == Interop.Error.SUCCESS
+            return err == Interop.Error.SUCCESS
               ? SocketError.Success
               : GetSocketErrorForErrorCode(err);
         }

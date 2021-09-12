@@ -334,8 +334,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var diagnosticIds = ImmutableHashSet.Create(diagnostic.Id);
             var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(testDriver, diagnosticIds);
 
-            return
-                diagnostic.Location.IsInSource
+            return diagnostic.Location.IsInSource
               ? new FixAllState(
                     fixAllProvider,
                     document,

@@ -319,8 +319,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             private string GetLocation(string text, int start)
             {
                 var delimiter = text.IndexOf(" - ", start, StringComparison.Ordinal);
-                return
-                    delimiter == -1
+                return delimiter == -1
                   ? text.Substring(start)
                   : text.Substring(start, delimiter - start);
             }

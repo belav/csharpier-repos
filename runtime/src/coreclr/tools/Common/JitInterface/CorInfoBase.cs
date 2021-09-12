@@ -1153,8 +1153,7 @@ namespace Internal.JitInterface
             var _this = GetThis(thisHandle);
             try
             {
-                return
-                    _this.checkMethodModifier(hMethod, modifier, fOptional != 0)
+                return _this.checkMethodModifier(hMethod, modifier, fOptional != 0)
                   ? (byte)1
                   : (byte)0;
             }
@@ -2927,8 +2926,7 @@ namespace Internal.JitInterface
             var _this = GetThis(thisHandle);
             try
             {
-                return
-                    _this.getTailCallHelpers(ref *callToken, sig, flags, ref *pResult)
+                return _this.getTailCallHelpers(ref *callToken, sig, flags, ref *pResult)
                   ? (byte)1
                   : (byte)0;
             }
@@ -2949,8 +2947,7 @@ namespace Internal.JitInterface
             var _this = GetThis(thisHandle);
             try
             {
-                return
-                    _this.convertPInvokeCalliToCall(ref *pResolvedToken, mustConvert != 0)
+                return _this.convertPInvokeCalliToCall(ref *pResolvedToken, mustConvert != 0)
                   ? (byte)1
                   : (byte)0;
             }
@@ -2971,8 +2968,7 @@ namespace Internal.JitInterface
             var _this = GetThis(thisHandle);
             try
             {
-                return
-                    _this.notifyInstructionSetUsage(instructionSet, supportEnabled != 0)
+                return _this.notifyInstructionSetUsage(instructionSet, supportEnabled != 0)
                   ? (byte)1
                   : (byte)0;
             }

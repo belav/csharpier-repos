@@ -54,8 +54,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task FlushAsync(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoFlushAsync(cancellationToken)
               : base.FlushAsync(cancellationToken);
         }
@@ -74,8 +73,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         protected override Task WriteValueDelimiterAsync(CancellationToken cancellationToken)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueDelimiterAsync(cancellationToken)
               : base.WriteValueDelimiterAsync(cancellationToken);
         }
@@ -95,8 +93,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         protected override Task WriteEndAsync(JsonToken token, CancellationToken cancellationToken)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteEndAsync(token, cancellationToken)
               : base.WriteEndAsync(token, cancellationToken);
         }
@@ -126,8 +123,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task CloseAsync(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoCloseAsync(cancellationToken)
               : base.CloseAsync(cancellationToken);
         }
@@ -156,8 +152,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task WriteEndAsync(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteEndInternalAsync(cancellationToken)
               : base.WriteEndAsync(cancellationToken);
         }
@@ -171,8 +166,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         protected override Task WriteIndentAsync(CancellationToken cancellationToken)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteIndentAsync(cancellationToken)
               : base.WriteIndentAsync(cancellationToken);
         }
@@ -257,8 +251,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         protected override Task WriteIndentSpaceAsync(CancellationToken cancellationToken)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteIndentSpaceAsync(cancellationToken)
               : base.WriteIndentSpaceAsync(cancellationToken);
         }
@@ -280,8 +273,7 @@ namespace Newtonsoft.Json
             string? json,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteRawAsync(json, cancellationToken)
               : base.WriteRawAsync(json, cancellationToken);
         }
@@ -300,8 +292,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task WriteNullAsync(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteNullAsync(cancellationToken)
               : base.WriteNullAsync(cancellationToken);
         }
@@ -395,8 +386,7 @@ namespace Newtonsoft.Json
             string name,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWritePropertyNameAsync(name, cancellationToken)
               : base.WritePropertyNameAsync(name, cancellationToken);
         }
@@ -445,8 +435,7 @@ namespace Newtonsoft.Json
             bool escape,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWritePropertyNameAsync(name, escape, cancellationToken)
               : base.WritePropertyNameAsync(name, escape, cancellationToken);
         }
@@ -490,8 +479,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task WriteStartArrayAsync(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteStartArrayAsync(cancellationToken)
               : base.WriteStartArrayAsync(cancellationToken);
         }
@@ -527,8 +515,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task WriteStartObjectAsync(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteStartObjectAsync(cancellationToken)
               : base.WriteStartObjectAsync(cancellationToken);
         }
@@ -567,8 +554,7 @@ namespace Newtonsoft.Json
             string name,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteStartConstructorAsync(name, cancellationToken)
               : base.WriteStartConstructorAsync(name, cancellationToken);
         }
@@ -598,8 +584,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task WriteUndefinedAsync(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteUndefinedAsync(cancellationToken)
               : base.WriteUndefinedAsync(cancellationToken);
         }
@@ -634,8 +619,7 @@ namespace Newtonsoft.Json
             string ws,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteWhitespaceAsync(ws, cancellationToken)
               : base.WriteWhitespaceAsync(ws, cancellationToken);
         }
@@ -658,8 +642,7 @@ namespace Newtonsoft.Json
             bool value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -685,16 +668,14 @@ namespace Newtonsoft.Json
             bool? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(bool? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : DoWriteValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -711,8 +692,7 @@ namespace Newtonsoft.Json
             byte value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteIntegerValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -729,16 +709,14 @@ namespace Newtonsoft.Json
             byte? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(byte? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : WriteIntegerValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -755,8 +733,7 @@ namespace Newtonsoft.Json
             byte[]? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? (
                     value == null
                         ? WriteNullAsync(cancellationToken)
@@ -789,8 +766,7 @@ namespace Newtonsoft.Json
             char value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -816,16 +792,14 @@ namespace Newtonsoft.Json
             char? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(char? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : DoWriteValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -842,8 +816,7 @@ namespace Newtonsoft.Json
             DateTime value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -884,16 +857,14 @@ namespace Newtonsoft.Json
             DateTime? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(DateTime? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : DoWriteValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -910,8 +881,7 @@ namespace Newtonsoft.Json
             DateTimeOffset value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -953,16 +923,14 @@ namespace Newtonsoft.Json
             DateTimeOffset? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(DateTimeOffset? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : DoWriteValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -979,8 +947,7 @@ namespace Newtonsoft.Json
             decimal value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1006,16 +973,14 @@ namespace Newtonsoft.Json
             decimal? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(decimal? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : DoWriteValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -1032,8 +997,7 @@ namespace Newtonsoft.Json
             double value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteValueAsync(value, false, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1062,8 +1026,7 @@ namespace Newtonsoft.Json
             double? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? (
                     value.HasValue
                         ? WriteValueAsync(value.GetValueOrDefault(), true, cancellationToken)
@@ -1084,8 +1047,7 @@ namespace Newtonsoft.Json
             float value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteValueAsync(value, false, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1114,8 +1076,7 @@ namespace Newtonsoft.Json
             float? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? (
                     value.HasValue
                         ? WriteValueAsync(value.GetValueOrDefault(), true, cancellationToken)
@@ -1136,8 +1097,7 @@ namespace Newtonsoft.Json
             Guid value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1168,16 +1128,14 @@ namespace Newtonsoft.Json
             Guid? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(Guid? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : DoWriteValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -1194,8 +1152,7 @@ namespace Newtonsoft.Json
             int value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteIntegerValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1212,16 +1169,14 @@ namespace Newtonsoft.Json
             int? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(int? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : WriteIntegerValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -1238,8 +1193,7 @@ namespace Newtonsoft.Json
             long value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteIntegerValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1256,16 +1210,14 @@ namespace Newtonsoft.Json
             long? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(long? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : WriteIntegerValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -1326,8 +1278,7 @@ namespace Newtonsoft.Json
             sbyte value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteIntegerValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1345,16 +1296,14 @@ namespace Newtonsoft.Json
             sbyte? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(sbyte? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : WriteIntegerValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -1371,8 +1320,7 @@ namespace Newtonsoft.Json
             short value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteIntegerValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1389,16 +1337,14 @@ namespace Newtonsoft.Json
             short? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(short? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : WriteIntegerValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -1415,8 +1361,7 @@ namespace Newtonsoft.Json
             string? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1426,8 +1371,7 @@ namespace Newtonsoft.Json
             Task task = InternalWriteValueAsync(JsonToken.String, cancellationToken);
             if (task.IsCompletedSucessfully())
             {
-                return
-                    value == null
+                return value == null
                   ? _writer.WriteAsync(JsonConvert.Null, cancellationToken)
                   : WriteEscapedStringAsync(value, true, cancellationToken);
             }
@@ -1460,8 +1404,7 @@ namespace Newtonsoft.Json
             TimeSpan value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1491,16 +1434,14 @@ namespace Newtonsoft.Json
             TimeSpan? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(TimeSpan? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : DoWriteValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -1518,8 +1459,7 @@ namespace Newtonsoft.Json
             uint value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteIntegerValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1537,16 +1477,14 @@ namespace Newtonsoft.Json
             uint? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(uint? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : WriteIntegerValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -1564,8 +1502,7 @@ namespace Newtonsoft.Json
             ulong value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteIntegerValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1583,16 +1520,14 @@ namespace Newtonsoft.Json
             ulong? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(ulong? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : WriteIntegerValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -1609,8 +1544,7 @@ namespace Newtonsoft.Json
             Uri? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? (
                     value == null
                         ? WriteNullAsync(cancellationToken)
@@ -1653,8 +1587,7 @@ namespace Newtonsoft.Json
             ushort value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? WriteIntegerValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
@@ -1672,16 +1605,14 @@ namespace Newtonsoft.Json
             ushort? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteValueAsync(value, cancellationToken)
               : base.WriteValueAsync(value, cancellationToken);
         }
 
         internal Task DoWriteValueAsync(ushort? value, CancellationToken cancellationToken)
         {
-            return
-                value == null
+            return value == null
               ? DoWriteNullAsync(cancellationToken)
               : WriteIntegerValueAsync(value.GetValueOrDefault(), cancellationToken);
         }
@@ -1698,8 +1629,7 @@ namespace Newtonsoft.Json
             string? text,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteCommentAsync(text, cancellationToken)
               : base.WriteCommentAsync(text, cancellationToken);
         }
@@ -1721,8 +1651,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task WriteEndArrayAsync(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? InternalWriteEndAsync(JsonContainerType.Array, cancellationToken)
               : base.WriteEndArrayAsync(cancellationToken);
         }
@@ -1736,8 +1665,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task WriteEndConstructorAsync(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? InternalWriteEndAsync(JsonContainerType.Constructor, cancellationToken)
               : base.WriteEndConstructorAsync(cancellationToken);
         }
@@ -1751,8 +1679,7 @@ namespace Newtonsoft.Json
         /// execute synchronously, returning an already-completed task.</remarks>
         public override Task WriteEndObjectAsync(CancellationToken cancellationToken = default)
         {
-            return
-                _safeAsync
+            return _safeAsync
               ? InternalWriteEndAsync(JsonContainerType.Object, cancellationToken)
               : base.WriteEndObjectAsync(cancellationToken);
         }
@@ -1769,8 +1696,7 @@ namespace Newtonsoft.Json
             string? json,
             CancellationToken cancellationToken = default
         ) {
-            return
-                _safeAsync
+            return _safeAsync
               ? DoWriteRawValueAsync(json, cancellationToken)
               : base.WriteRawValueAsync(json, cancellationToken);
         }

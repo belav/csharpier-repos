@@ -228,8 +228,7 @@ namespace System.Diagnostics
 
         public bool IsLastFrameFromForeignExceptionStackTrace(int i)
         {
-            return
-                (rgiLastFrameFromForeignExceptionStackTrace == null)
+            return (rgiLastFrameFromForeignExceptionStackTrace == null)
               ? false
               : rgiLastFrameFromForeignExceptionStackTrace[i];
         }

@@ -172,8 +172,7 @@ namespace Microsoft.CodeAnalysis.ConvertNumericLiteral
                 ? literalNode
                 : null;
 
-            return
-                numericLiteralExpressionNode != null
+            return numericLiteralExpressionNode != null
               ? numericLiteralExpressionNode.GetFirstToken() // We know that TNumericLiteralExpression has always only one token: NumericLiteralToken
               : default;
         }

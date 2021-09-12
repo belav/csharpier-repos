@@ -80,8 +80,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                     var type = local?.Type;
                     if (IsValidType(type))
                     {
-                        return
-                            node.Parent is VarPatternSyntax varPattern
+                        return node.Parent is VarPatternSyntax varPattern
                           ? CreateTypeHint(
                                 type,
                                 displayAllOverride,

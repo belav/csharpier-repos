@@ -907,8 +907,7 @@ namespace Microsoft.EntityFrameworkCore
                     return this;
                 }
 
-                return
-                    serviceType == typeof(IServiceScopeFactory)
+                return serviceType == typeof(IServiceScopeFactory)
                   ? new FakeServiceScopeFactory()
                   : _realProvider.GetService(serviceType);
             }

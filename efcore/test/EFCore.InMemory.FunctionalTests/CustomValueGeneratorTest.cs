@@ -258,8 +258,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 if (property.ClrType == typeof(Guid))
                 {
-                    return
-                        property["SpecialGuid"] != null
+                    return property["SpecialGuid"] != null
                       ? (ValueGenerator)new CustomGuidValueGenerator()
                       : new SequentialGuidValueGenerator();
                 }

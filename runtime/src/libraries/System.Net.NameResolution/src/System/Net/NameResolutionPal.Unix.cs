@@ -203,8 +203,7 @@ namespace System.Net
 
             socketError = GetSocketErrorForNativeError(error);
             nativeErrorCode = error;
-            return
-                socketError == SocketError.Success
+            return socketError == SocketError.Success
               ? Marshal.PtrToStringAnsi((IntPtr)buffer)
               : null;
         }

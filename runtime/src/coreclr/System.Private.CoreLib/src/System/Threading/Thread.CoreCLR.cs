@@ -347,8 +347,7 @@ namespace System.Threading
             get
             {
                 int optimalMaxSpinWaitsPerSpinIteration = s_optimalMaxSpinWaitsPerSpinIteration;
-                return
-                    optimalMaxSpinWaitsPerSpinIteration != 0
+                return optimalMaxSpinWaitsPerSpinIteration != 0
                   ? optimalMaxSpinWaitsPerSpinIteration
                   : CalculateOptimalMaxSpinWaitsPerSpinIteration();
             }

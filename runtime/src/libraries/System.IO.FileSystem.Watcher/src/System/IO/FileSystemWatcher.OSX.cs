@@ -770,8 +770,7 @@ namespace System.IO
                 if (!isFile)
                     return FileSystem.DirectoryExists(path);
 
-                return
-                    PathInternal.IsDirectorySeparator(path[path.Length - 1])
+                return PathInternal.IsDirectorySeparator(path[path.Length - 1])
                   ? false
                   : FileSystem.FileExists(path);
             }

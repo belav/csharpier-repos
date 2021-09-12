@@ -17,8 +17,7 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return
-                source is AppendPrependIterator<TSource> appendable
+            return source is AppendPrependIterator<TSource> appendable
               ? appendable.Append(element)
               : new AppendPrepend1Iterator<TSource>(source, element, appending: true);
         }
@@ -32,8 +31,7 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return
-                source is AppendPrependIterator<TSource> appendable
+            return source is AppendPrependIterator<TSource> appendable
               ? appendable.Prepend(element)
               : new AppendPrepend1Iterator<TSource>(source, element, appending: false);
         }

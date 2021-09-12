@@ -824,8 +824,7 @@ namespace Microsoft.Cci
                 methodDef = methodReference.GetResolvedMethod(Context);
             }
 
-            return
-                methodDef != null
+            return methodDef != null
               ? (EntityHandle)GetMethodDefinitionHandle(methodDef)
               : GetMemberReferenceHandle(methodReference);
         }
@@ -932,8 +931,7 @@ namespace Microsoft.Cci
                 fieldDef = fieldReference.GetResolvedField(Context);
             }
 
-            return
-                fieldDef != null
+            return fieldDef != null
               ? (EntityHandle)GetFieldDefinitionHandle(fieldDef)
               : GetMemberReferenceHandle(fieldReference);
         }
@@ -999,8 +997,7 @@ namespace Microsoft.Cci
 
             var mref = (IModuleReference)uref;
             aref = mref.GetContainingAssembly(Context);
-            return
-                aref == null || ReferenceEquals(aref, this.module.GetContainingAssembly(Context))
+            return aref == null || ReferenceEquals(aref, this.module.GetContainingAssembly(Context))
               ? (EntityHandle)GetAssemblyFileHandle(mref)
               : GetAssemblyReferenceHandle(aref);
         }
@@ -1034,8 +1031,7 @@ namespace Microsoft.Cci
         {
             string unmangledName = namedType.Name;
 
-            return
-                namedType.MangleName
+            return namedType.MangleName
               ? MetadataHelpers.ComposeAritySuffixedMetadataName(
                     unmangledName,
                     namedType.GenericParameterCount
@@ -1087,8 +1083,7 @@ namespace Microsoft.Cci
 
             // TODO: special treatment for global fields and methods. Object model support would be nice.
             var containingType = memberRef.GetContainingType(Context);
-            return
-                containingType.IsTypeSpecification()
+            return containingType.IsTypeSpecification()
               ? (EntityHandle)GetTypeSpecificationHandle(containingType)
               : GetTypeReferenceHandle(containingType);
         }
@@ -1105,8 +1100,7 @@ namespace Microsoft.Cci
                 methodDef = methodReference.GetResolvedMethod(Context);
             }
 
-            return
-                methodDef != null
+            return methodDef != null
               ? (EntityHandle)GetMethodDefinitionHandle(methodDef)
               : GetMemberReferenceHandle(methodReference);
         }
@@ -1334,8 +1328,7 @@ namespace Microsoft.Cci
 
             IGenericMethodInstanceReference methodSpec =
                 methodReference.AsGenericMethodInstanceReference;
-            return
-                methodSpec != null
+            return methodSpec != null
               ? (EntityHandle)GetMethodSpecificationHandle(methodSpec)
               : GetMemberReferenceHandle(methodReference);
         }
@@ -1663,8 +1656,7 @@ namespace Microsoft.Cci
 
         protected static Location GetSymbolLocation(ISymbolInternal symbolOpt)
         {
-            return
-                symbolOpt != null && !symbolOpt.Locations.IsDefaultOrEmpty
+            return symbolOpt != null && !symbolOpt.Locations.IsDefaultOrEmpty
               ? symbolOpt.Locations[0]
               : Location.None;
         }
@@ -1885,8 +1877,7 @@ namespace Microsoft.Cci
                 return handle;
             }
 
-            return
-                treatRefAsPotentialTypeSpec && typeReference.IsTypeSpecification()
+            return treatRefAsPotentialTypeSpec && typeReference.IsTypeSpecification()
               ? (EntityHandle)GetTypeSpecificationHandle(typeReference)
               : GetTypeReferenceHandle(typeReference);
         }

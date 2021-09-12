@@ -79,8 +79,7 @@ namespace System.Configuration
             {
                 if (_flags[NamespacePresentCurrent] == _flags[NamespacePresentInFile])
                     return NamespaceChange.None;
-                return
-                    _flags[NamespacePresentCurrent]
+                return _flags[NamespacePresentCurrent]
                   ? NamespaceChange.Add
                   : NamespaceChange.Remove;
             }

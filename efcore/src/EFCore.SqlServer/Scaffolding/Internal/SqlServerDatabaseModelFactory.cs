@@ -245,8 +245,7 @@ WHERE name = '{connection.Database}';";
 
         private static Func<string, string>? GenerateSchemaFilter(IReadOnlyList<string> schemas)
         {
-            return
-                schemas.Count > 0
+            return schemas.Count > 0
               ? (
                     s =>
                     {

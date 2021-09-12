@@ -61,8 +61,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             {
                 var containingNamespaceOrType = GetNamespaceOrTypeNode();
 
-                return
-                    containingNamespaceOrType != null
+                return containingNamespaceOrType != null
                   ? (object)FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(
                         containingNamespaceOrType
                     )
@@ -148,8 +147,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             {
                 var namespaceNode = GetNamespaceNode();
 
-                return
-                    namespaceNode != null
+                return namespaceNode != null
                   ? FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeNamespace>(namespaceNode)
                   : null;
             }

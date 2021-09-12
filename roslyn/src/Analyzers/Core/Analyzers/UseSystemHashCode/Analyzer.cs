@@ -256,8 +256,7 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
         private static bool IsLiteralNumber(IOperation value)
         {
             value = Unwrap(value);
-            return
-                value is IUnaryOperation unary
+            return value is IUnaryOperation unary
               ? unary.OperatorKind == UnaryOperatorKind.Minus && IsLiteralNumber(unary.Operand)
               : value.IsNumericLiteral();
         }

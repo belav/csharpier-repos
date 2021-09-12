@@ -181,8 +181,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 rules,
                 cancellationToken
             );
-            return
-                formattingResult == null
+            return formattingResult == null
               ? node
               : formattingResult.GetFormattedRoot(cancellationToken);
         }
@@ -203,8 +202,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 rules,
                 cancellationToken
             );
-            return
-                formattingResult == null
+            return formattingResult == null
               ? SpecializedCollections.EmptyList<TextChange>()
               : formattingResult.GetTextChanges(cancellationToken);
         }

@@ -128,8 +128,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var leftValue = _prop.GetValue(left);
                 var rightValue = _prop.GetValue(right);
 
-                return
-                    _direction == ListSortDirection.Ascending
+                return _direction == ListSortDirection.Ascending
                   ? _comparer.Compare(leftValue, rightValue)
                   : _comparer.Compare(rightValue, leftValue);
             }

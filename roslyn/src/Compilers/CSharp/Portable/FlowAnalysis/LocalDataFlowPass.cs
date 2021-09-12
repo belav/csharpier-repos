@@ -92,8 +92,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             int slot;
-            return
-                TryGetVariable(new VariableIdentifier(symbol, containingSlot), out slot)
+            return TryGetVariable(new VariableIdentifier(symbol, containingSlot), out slot)
               ? slot
               : -1;
         }
@@ -245,8 +244,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case BoundKind.ThisReference:
                 case BoundKind.BaseReference:
-                    return
-                        (object)MethodThisParameter != null
+                    return (object)MethodThisParameter != null
                       ? GetOrCreateSlot(MethodThisParameter)
                       : -1;
                 case BoundKind.Local:

@@ -549,8 +549,7 @@ namespace System.Web.Razor.Test.Parser.VB
 
         private AcceptedCharacters GetAcceptedCharacters(bool acceptToEndOfLine)
         {
-            return
-                acceptToEndOfLine
+            return acceptToEndOfLine
               ? AcceptedCharacters.WhiteSpace | AcceptedCharacters.NonWhiteSpace
               : AcceptedCharacters.None;
         }

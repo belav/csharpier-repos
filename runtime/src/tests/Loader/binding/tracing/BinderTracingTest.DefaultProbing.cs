@@ -232,8 +232,7 @@ namespace BinderTracingTests
             Assembly OnAppDomainAssemblyResolve(object sender, ResolveEventArgs args)
             {
                 AssemblyName requested = new AssemblyName(args.Name);
-                return
-                    requested.Name == SubdirectoryAssemblyName
+                return requested.Name == SubdirectoryAssemblyName
                   ? Assembly.LoadFile(
                         Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName)
                     )

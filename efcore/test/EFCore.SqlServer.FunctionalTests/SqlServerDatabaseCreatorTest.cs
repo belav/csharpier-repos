@@ -306,8 +306,7 @@ namespace Microsoft.EntityFrameworkCore
             bool ambientTransaction,
             bool file
         ) {
-            return
-                TestEnvironment.IsSqlAzure
+            return TestEnvironment.IsSqlAzure
               ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
                     (true, async, ambientTransaction, file),
                     Creates_physical_database_and_schema_test
@@ -348,8 +347,7 @@ namespace Microsoft.EntityFrameworkCore
             bool ambientTransaction,
             bool file
         ) {
-            return
-                TestEnvironment.IsSqlAzure
+            return TestEnvironment.IsSqlAzure
               ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
                     (false, async, ambientTransaction, file),
                     Creates_physical_database_and_schema_test

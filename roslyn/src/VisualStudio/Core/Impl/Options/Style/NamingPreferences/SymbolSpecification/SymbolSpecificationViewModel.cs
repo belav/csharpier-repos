@@ -378,8 +378,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
 
             internal SymbolKindOrTypeKind CreateSymbolOrTypeOrMethodKind()
             {
-                return
-                    _symbolKind.HasValue
+                return _symbolKind.HasValue
                   ? new SymbolKindOrTypeKind(_symbolKind.Value)
                   : _typeKind.HasValue
                       ? new SymbolKindOrTypeKind(_typeKind.Value)

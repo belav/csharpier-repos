@@ -115,8 +115,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 Debug.Assert(pGroup != null);
 
-                return
-                    (pGroup.Flags & EXPRFLAG.EXF_CTOR) != 0
+                return (pGroup.Flags & EXPRFLAG.EXF_CTOR) != 0
                   ? pGroup.ParentType
                   : pGroup.OptionalObject?.Type;
             }

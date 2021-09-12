@@ -136,8 +136,7 @@ namespace System.Diagnostics.Tracing
         {
             unchecked
             {
-                return
-                    (byte)settingValue1 == settingValue1
+                return (byte)settingValue1 == settingValue1
                   ? (byte)settingValue1
                   : (byte)settingValue2 == settingValue2 ? (byte)settingValue2 : defaultValue;
             }

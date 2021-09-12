@@ -572,16 +572,14 @@ namespace System.Reflection
 
         public override Type[] GetRequiredCustomModifiers()
         {
-            return
-                m_signature is null
+            return m_signature is null
               ? Type.EmptyTypes
               : m_signature.GetCustomModifiers(PositionImpl + 1, true);
         }
 
         public override Type[] GetOptionalCustomModifiers()
         {
-            return
-                m_signature is null
+            return m_signature is null
               ? Type.EmptyTypes
               : m_signature.GetCustomModifiers(PositionImpl + 1, false);
         }

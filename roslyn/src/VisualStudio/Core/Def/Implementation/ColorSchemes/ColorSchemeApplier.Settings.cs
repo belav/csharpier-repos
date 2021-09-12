@@ -101,8 +101,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                     writable: false
                 );
                 using var itemKey = registryRoot.OpenSubKey(ColorSchemeApplierKey);
-                return
-                    itemKey is object
+                return itemKey is object
                   ? (SchemeName)itemKey.GetValue(AppliedColorSchemeName)
                   : default;
             }
@@ -125,8 +124,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             public SchemeName GetConfiguredColorScheme()
             {
                 var schemeName = _workspace.Options.GetOption(ColorSchemeOptions.ColorScheme);
-                return
-                    schemeName != SchemeName.None
+                return schemeName != SchemeName.None
                   ? schemeName
                   : ColorSchemeOptions.ColorScheme.DefaultValue;
             }

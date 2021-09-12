@@ -391,8 +391,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             protected override string GetText(IFormatProvider formatProvider)
             {
                 var messageFormat = _messageFormat.ToString(formatProvider);
-                return
-                    messageFormat != null
+                return messageFormat != null
                   ? (
                         _formatArguments.Length > 0
                             ? string.Format(formatProvider, messageFormat, _formatArguments)

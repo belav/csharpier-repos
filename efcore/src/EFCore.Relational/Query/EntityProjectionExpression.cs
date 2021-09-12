@@ -98,8 +98,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             var discriminatorExpression = (SqlExpression?)visitor.Visit(DiscriminatorExpression);
             changed |= discriminatorExpression != DiscriminatorExpression;
 
-            return
-                changed
+            return changed
               ? new EntityProjectionExpression(
                     EntityType,
                     propertyExpressionMap,
@@ -261,8 +260,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
             }
 
-            return
-                _ownedNavigationMap.TryGetValue(navigation, out var expression)
+            return _ownedNavigationMap.TryGetValue(navigation, out var expression)
               ? expression
               : null;
         }

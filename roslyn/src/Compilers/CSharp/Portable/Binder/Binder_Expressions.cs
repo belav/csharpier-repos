@@ -4482,8 +4482,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             ImmutableArray<BoundExpression> arraySizes = sizes.ToImmutableAndFree();
 
-            return
-                node.Initializer == null
+            return node.Initializer == null
               ? new BoundArrayCreation(node, arraySizes, null, type, hasErrors)
               : BindArrayCreationWithInitializer(
                     diagnostics,
@@ -5123,8 +5122,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasErrors = true;
             }
 
-            return
-                node.Initializer == null
+            return node.Initializer == null
               ? new BoundStackAllocArrayCreation(
                     node,
                     elementType.Type,
@@ -7288,8 +7286,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // virtual method might be. Nevertheless, that's what we do.
                 //
                 // A constructor is accessed through an instance of the type being constructed:
-                return
-                    allowProtectedConstructorsOfBaseType
+                return allowProtectedConstructorsOfBaseType
                   ? this.IsAccessible(constructor, ref useSiteInfo, null)
                   : this.IsSymbolAccessibleConditional(
                         constructor,
@@ -10398,8 +10395,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ? arrayType
                     : arrayType.ElementType;
 
-            return
-                hasErrors
+            return hasErrors
               ? new BoundArrayAccess(
                     node,
                     BindToTypeForErrorRecovery(expr),

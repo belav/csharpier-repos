@@ -267,8 +267,7 @@ namespace System.Drawing
             }
             catch (Exception ex) when (!IsCriticalFontException(ex)) { }
 
-            return
-                font == null
+            return font == null
               ? DefaultFont
               : font.Unit != GraphicsUnit.Point ? FontInPoints(font) : font;
         }

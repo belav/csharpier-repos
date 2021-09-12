@@ -259,8 +259,7 @@ internal static partial class Interop
                     out SafeCFDataHandle outputHandle,
                     out SafeCFErrorHandle errorHandle
                 ) {
-                    return
-                        padding.Mode == RSAEncryptionPaddingMode.Pkcs1
+                    return padding.Mode == RSAEncryptionPaddingMode.Pkcs1
                       ? RsaEncryptPkcs(
                             publicKey,
                             innerSource,
@@ -338,8 +337,7 @@ internal static partial class Interop
                     out SafeCFDataHandle outputHandle,
                     out SafeCFErrorHandle errorHandle
                 ) {
-                    return
-                        padding.Mode == RSAEncryptionPaddingMode.Pkcs1
+                    return padding.Mode == RSAEncryptionPaddingMode.Pkcs1
                       ? RsaDecryptPkcs(
                             privateKey,
                             innerSource,

@@ -123,8 +123,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     .ToArray();
             }
 
-            return
-                (SkipInteractiveExecution)
+            return (SkipInteractiveExecution)
               ? 0
               : base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
         }

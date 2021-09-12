@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             this DiagnosticDescriptor descriptor,
             CompilationOptions options
         ) {
-            return
-                options == null
+            return options == null
               ? descriptor.DefaultSeverity.ToReportDiagnostic()
               : descriptor.GetEffectiveSeverity(options);
         }

@@ -135,8 +135,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal ExtendedErrorTypeSymbol AsUnreported()
         {
-            return
-                this.Unreported
+            return this.Unreported
               ? this
               : new ExtendedErrorTypeSymbol(
                     _containingSymbol,
@@ -156,8 +155,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var candidate = candidateSymbols.IsEmpty
                 ? null
                 : candidateSymbols[0] as ErrorTypeSymbol;
-            return
-                ((object?)candidate != null && !candidate.CandidateSymbols.IsEmpty)
+            return ((object?)candidate != null && !candidate.CandidateSymbols.IsEmpty)
               ? candidate.CandidateSymbols
               : candidateSymbols;
         }

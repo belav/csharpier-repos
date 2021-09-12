@@ -38,8 +38,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             get
             {
                 var connection = new SqliteConnection("Data Source=:memory:;");
-                return
-                    connection.ServerVersion != null
+                return connection.ServerVersion != null
                   ? new Version(connection.ServerVersion)
                   : null;
             }

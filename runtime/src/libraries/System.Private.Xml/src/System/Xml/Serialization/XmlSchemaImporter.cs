@@ -2827,8 +2827,7 @@ namespace System.Xml.Serialization
                 {
                     if (ns == null || ns.Length == 0)
                     {
-                        return
-                            schema.ElementFormDefault == XmlSchemaForm.None
+                        return schema.ElementFormDefault == XmlSchemaForm.None
                           ? XmlSchemaForm.Unqualified
                           : schema.ElementFormDefault;
                     }
@@ -2861,8 +2860,7 @@ namespace System.Xml.Serialization
                 {
                     if (ns == null || ns.Length == 0)
                     {
-                        return
-                            schema.AttributeFormDefault == XmlSchemaForm.None
+                        return schema.AttributeFormDefault == XmlSchemaForm.None
                           ? XmlSchemaForm.Unqualified
                           : schema.AttributeFormDefault;
                     }

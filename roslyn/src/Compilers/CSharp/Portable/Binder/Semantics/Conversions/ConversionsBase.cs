@@ -891,8 +891,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (HasExplicitReferenceConversion(source, destination, ref useSiteInfo))
             {
-                return
-                    (source.Kind == SymbolKind.DynamicType)
+                return (source.Kind == SymbolKind.DynamicType)
                   ? Conversion.ExplicitDynamic
                   : Conversion.ExplicitReference;
             }
@@ -2076,8 +2075,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 parameterType,
                 ref useSiteInfo
             );
-            return
-                IsValidExtensionMethodThisArgConversion(conversion)
+            return IsValidExtensionMethodThisArgConversion(conversion)
               ? conversion
               : Conversion.NoConversion;
         }

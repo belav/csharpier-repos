@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
             ) {
                 if (bool.TryParse(value, out var boolValue))
                 {
-                    return
-                        boolValue
+                    return boolValue
                       ? new CodeStyleOption2<ExpressionBodyPreference>(
                             ExpressionBodyPreference.WhenPossible,
                             notification
@@ -129,8 +128,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
             ) {
                 if (bool.TryParse(value, out var boolValue))
                 {
-                    return
-                        boolValue
+                    return boolValue
                       ? new CodeStyleOption2<PreferBracesPreference>(
                             PreferBracesPreference.Always,
                             notificationOption

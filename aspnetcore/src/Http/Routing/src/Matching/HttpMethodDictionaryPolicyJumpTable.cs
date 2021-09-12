@@ -52,8 +52,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
                   : _corsPreflightExitDestination;
             }
 
-            return
-                _destinations != null && _destinations.TryGetValue(httpMethod, out destination)
+            return _destinations != null && _destinations.TryGetValue(httpMethod, out destination)
               ? destination
               : _exitDestination;
         }

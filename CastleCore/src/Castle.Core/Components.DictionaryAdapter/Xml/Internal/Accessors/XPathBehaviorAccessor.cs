@@ -125,8 +125,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             XmlReferenceManager references,
             bool orStub
         ) {
-            return
-                SelectsNodes
+            return SelectsNodes
               ? base.GetPropertyValue(parentNode, parentObject, references, orStub)
               : Evaluate(parentNode);
         }
@@ -137,8 +136,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             XmlReferenceManager references,
             bool orStub
         ) {
-            return
-                defaultAccessor != null
+            return defaultAccessor != null
               ? defaultAccessor.GetPropertyValue(parentNode, parentObject, references, orStub)
               : null;
         }
@@ -200,8 +198,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public bool TryGet(Type clrType, out IXmlIncludedType includedType)
         {
-            return
-                clrType == this.ClrType
+            return clrType == this.ClrType
               ? Try.Success(out includedType, this)
               : includedTypes.TryGet(clrType, out includedType);
         }

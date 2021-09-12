@@ -298,8 +298,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 }
             }
 
-            return
-                resultBuilder == null
+            return resultBuilder == null
               ? ImmutableHashSet<string>.Empty
               : resultBuilder.ToImmutable();
         }

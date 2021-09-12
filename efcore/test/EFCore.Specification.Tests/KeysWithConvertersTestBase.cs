@@ -3183,8 +3183,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var result = Id.Length - ((ComparableBytesStructKey)other).Id.Length;
 
-                return
-                    result != 0
+                return result != 0
                   ? result
                   : StructuralComparisons.StructuralComparer.Compare(
                         Id,
@@ -3233,8 +3232,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var result = Id.Length - other.Id.Length;
 
-                return
-                    result != 0
+                return result != 0
                   ? result
                   : StructuralComparisons.StructuralComparer.Compare(Id, other.Id);
             }

@@ -107,8 +107,7 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         {
             var dotIndex = pattern.LastIndexOf('.');
             var containsDots = dotIndex >= 0;
-            return
-                containsDots
+            return containsDots
               ? (
                     name: pattern.Substring(dotIndex + 1),
                     containerOpt: pattern.Substring(0, dotIndex)
@@ -141,8 +140,7 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             bool punctuationStripped,
             bool fuzzyMatch
         ) {
-            return
-                fuzzyMatch
+            return fuzzyMatch
               ? FuzzyMatchPatternChunk(candidate, patternChunk, punctuationStripped)
               : NonFuzzyMatchPatternChunk(candidate, patternChunk, punctuationStripped);
         }

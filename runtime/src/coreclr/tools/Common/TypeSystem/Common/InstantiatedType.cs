@@ -244,8 +244,7 @@ namespace Internal.TypeSystem
                 }
             }
 
-            return
-                (clone == null)
+            return (clone == null)
               ? this
               : _typeDef.Context.GetInstantiatedType(_typeDef, new Instantiation(clone));
         }

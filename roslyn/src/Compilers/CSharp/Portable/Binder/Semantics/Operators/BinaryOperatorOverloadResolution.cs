@@ -1434,13 +1434,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BinaryOperatorKind.GreaterThanOrEqual:
                 case BinaryOperatorKind.LessThan:
                 case BinaryOperatorKind.LessThanOrEqual:
-                    return
-                        result.SpecialType == SpecialType.System_Boolean
+                    return result.SpecialType == SpecialType.System_Boolean
                       ? LiftingResult.LiftOperandsButNotResult
                       : LiftingResult.NotLifted;
                 default:
-                    return
-                        result.IsValueType && !result.IsNullableType()
+                    return result.IsValueType && !result.IsNullableType()
                       ? LiftingResult.LiftOperandsAndResult
                       : LiftingResult.NotLifted;
             }
@@ -1600,8 +1598,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 op1.Priority.HasValue
                 && op1.Priority.GetValueOrDefault() != op2.Priority.GetValueOrDefault()
             ) {
-                return
-                    (op1.Priority.GetValueOrDefault() < op2.Priority.GetValueOrDefault())
+                return (op1.Priority.GetValueOrDefault() < op2.Priority.GetValueOrDefault())
                   ? BetterResult.Left
                   : BetterResult.Right;
             }

@@ -118,8 +118,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ? BinderFlags.UncheckedRegion
                 : BinderFlags.CheckedRegion;
 
-            return
-                this.Flags.Includes(added)
+            return this.Flags.Includes(added)
               ? this
               : new Binder(this, (this.Flags & ~removed) | added);
         }

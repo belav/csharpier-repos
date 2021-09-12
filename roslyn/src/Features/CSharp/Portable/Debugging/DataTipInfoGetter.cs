@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
                 if (!(token.Parent is ExpressionSyntax expression))
                 {
-                    return
-                        token.IsKind(SyntaxKind.IdentifierToken)
+                    return token.IsKind(SyntaxKind.IdentifierToken)
                       ? new DebugDataTipInfo(token.Span, text: null)
                       : default;
                 }
@@ -54,8 +53,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                         )
                         .ConfigureAwait(false);
                     var type = semanticModel.GetTypeInfo(expression, cancellationToken).Type;
-                    return
-                        type == null
+                    return type == null
                       ? default
                       : new DebugDataTipInfo(expression.Span, type.ToNameDisplayString());
                 }

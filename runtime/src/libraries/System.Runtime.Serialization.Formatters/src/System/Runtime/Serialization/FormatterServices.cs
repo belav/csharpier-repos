@@ -408,8 +408,7 @@ namespace System.Runtime.Serialization
 
         internal static string GetClrTypeFullName(Type type)
         {
-            return
-                type.IsArray
+            return type.IsArray
               ? GetClrTypeFullNameForArray(type)
               : GetClrTypeFullNameForNonArrayTypes(type);
         }

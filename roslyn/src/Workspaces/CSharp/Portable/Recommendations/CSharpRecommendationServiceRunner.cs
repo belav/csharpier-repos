@@ -111,8 +111,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                     _context.ContainingTypeOrEnumDeclaration!,
                     _cancellationToken
                 );
-                return
-                    symbol == null
+                return symbol == null
                   ? ImmutableArray<ISymbol>.Empty
                   : ImmutableArray.Create<ISymbol>(symbol);
             }

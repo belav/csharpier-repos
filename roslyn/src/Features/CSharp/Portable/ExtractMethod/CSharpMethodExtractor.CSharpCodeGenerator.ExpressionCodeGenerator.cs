@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             (
                                 (VariableDeclaratorSyntax)expression.Parent.Parent
                             ).Identifier.ValueText;
-                        return
-                            (name != null && name.Length > 0)
+                        return (name != null && name.Length > 0)
                           ? MakeMethodName("Get", name, methodName.Equals(NewMethodCamelCaseStr))
                           : methodName;
                     }

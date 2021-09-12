@@ -72,8 +72,7 @@ namespace Microsoft.CodeAnalysis.Editor
                 .ThenBy(
                     (i1, i2) =>
                     {
-                        return
-                            i1.Text == null && i2.Text != null
+                        return i1.Text == null && i2.Text != null
                           ? -1
                           : i1.Text != null && i2.Text == null
                               ? 1

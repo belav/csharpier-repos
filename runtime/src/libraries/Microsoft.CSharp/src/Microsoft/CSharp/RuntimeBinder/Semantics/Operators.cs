@@ -3027,8 +3027,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             string strOp = op1.ErrorString;
 
             // Bad arg types - report error to user.
-            return
-                op2 != null
+            return op2 != null
               ? ErrorHandling.Error(ErrorCode.ERR_AmbigBinaryOps, strOp, op1.Type, op2.Type)
               : ErrorHandling.Error(ErrorCode.ERR_AmbigUnaryOp, strOp, op1.Type);
         }

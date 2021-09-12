@@ -56,8 +56,7 @@ namespace Microsoft.CodeAnalysis
             ) {
                 var isError = reader.ReadBoolean();
 
-                return
-                    isError
+                return isError
                   ? ResolveErrorTuple(reader, out failureReason)
                   : ResolveNormalTuple(reader, out failureReason);
             }

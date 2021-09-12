@@ -87,8 +87,7 @@ namespace System.Configuration
                 string file = Filename;
                 if (!string.IsNullOrEmpty(file))
                 {
-                    return
-                        Line != 0
+                    return Line != 0
                       ? BareMessage
                         + " ("
                         + file
@@ -98,8 +97,7 @@ namespace System.Configuration
                       : BareMessage + " (" + file + ")";
                 }
 
-                return
-                    Line != 0
+                return Line != 0
                   ? BareMessage + " (line " + Line.ToString("G", CultureInfo.InvariantCulture) + ")"
                   : BareMessage;
             }

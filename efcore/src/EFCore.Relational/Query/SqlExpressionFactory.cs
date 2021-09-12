@@ -38,8 +38,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         [return: NotNullIfNotNull("sqlExpression")]
         public virtual SqlExpression? ApplyDefaultTypeMapping(SqlExpression? sqlExpression)
         {
-            return
-                sqlExpression == null || sqlExpression.TypeMapping != null
+            return sqlExpression == null || sqlExpression.TypeMapping != null
               ? sqlExpression
               : sqlExpression is SqlUnaryExpression sqlUnaryExpression
                 && sqlUnaryExpression.OperatorType == ExpressionType.Convert
@@ -498,8 +497,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(operand, nameof(operand));
             Check.NotNull(type, nameof(type));
 
-            return
-                !SqlUnaryExpression.IsValidOperator(operatorType)
+            return !SqlUnaryExpression.IsValidOperator(operatorType)
               ? null
               : (SqlUnaryExpression)ApplyTypeMapping(
                     new SqlUnaryExpression(operatorType, operand, type, null),

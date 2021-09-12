@@ -146,15 +146,13 @@ internal static partial class Interop
             case Error.ENOENT:
                 if (isDirectory)
                 {
-                    return
-                        !string.IsNullOrEmpty(path)
+                    return !string.IsNullOrEmpty(path)
                       ? new DirectoryNotFoundException(SR.Format(SR.IO_PathNotFound_Path, path))
                       : new DirectoryNotFoundException(SR.IO_PathNotFound_NoPathName);
                 }
                 else
                 {
-                    return
-                        !string.IsNullOrEmpty(path)
+                    return !string.IsNullOrEmpty(path)
                       ? new FileNotFoundException(
                             SR.Format(SR.IO_FileNotFound_FileName, path),
                             path
@@ -166,8 +164,7 @@ internal static partial class Interop
             case Error.EBADF:
             case Error.EPERM:
                 Exception inner = GetIOException(errorInfo);
-                return
-                    !string.IsNullOrEmpty(path)
+                return !string.IsNullOrEmpty(path)
                   ? new UnauthorizedAccessException(
                         SR.Format(SR.UnauthorizedAccess_IODenied_Path, path),
                         inner
@@ -178,14 +175,12 @@ internal static partial class Interop
                     );
 
             case Error.ENAMETOOLONG:
-                return
-                    !string.IsNullOrEmpty(path)
+                return !string.IsNullOrEmpty(path)
                   ? new PathTooLongException(SR.Format(SR.IO_PathTooLong_Path, path))
                   : new PathTooLongException(SR.IO_PathTooLong);
 
             case Error.EWOULDBLOCK:
-                return
-                    !string.IsNullOrEmpty(path)
+                return !string.IsNullOrEmpty(path)
                   ? new IOException(
                         SR.Format(SR.IO_SharingViolation_File, path),
                         errorInfo.RawErrno

@@ -98,8 +98,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             memberExpression.Member
                         );
 
-                        return
-                            nullable && !memberAccessExpression.Type.IsNullableType()
+                        return nullable && !memberAccessExpression.Type.IsNullableType()
                           ? Expression.Convert(
                                 memberAccessExpression,
                                 memberAccessExpression.Type.MakeNullable()
@@ -182,8 +181,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 methodCallExpression.Arguments[0]
                             );
 
-                            return
-                                nullable && !indexerExpression.Type.IsNullableType()
+                            return nullable && !indexerExpression.Type.IsNullableType()
                               ? Expression.Convert(
                                     indexerExpression,
                                     indexerExpression.Type.MakeNullable()

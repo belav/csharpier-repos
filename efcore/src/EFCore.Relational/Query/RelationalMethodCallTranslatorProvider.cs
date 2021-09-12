@@ -91,8 +91,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     p => p.PropagatesNullability
                 );
 
-                return
-                    dbFunction.IsBuiltIn
+                return dbFunction.IsBuiltIn
                   ? _sqlExpressionFactory.Function(
                         dbFunction.Name,
                         arguments,

@@ -333,8 +333,7 @@ namespace System.Threading.Tasks.Dataflow
             // which for very high-throughput scenarios shows up as noticeable overhead on certain architectures.
             // We can eliminate that call for direct ActionBlock usage by providing the same method as an instance method.
 
-            return
-                _defaultTarget != null
+            return _defaultTarget != null
               ? _defaultTarget.OfferMessage(Common.SingleMessageHeader, item, null, false)
                 == DataflowMessageStatus.Accepted
               : _spscTarget!.Post(item);
@@ -347,8 +346,7 @@ namespace System.Threading.Tasks.Dataflow
             ISourceBlock<TInput>? source,
             bool consumeToAccept
         ) {
-            return
-                _defaultTarget != null
+            return _defaultTarget != null
               ? _defaultTarget.OfferMessage(messageHeader, messageValue, source, consumeToAccept)
               : _spscTarget!.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
         }
@@ -367,8 +365,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             get
             {
-                return
-                    _defaultTarget != null
+                return _defaultTarget != null
                   ? _defaultTarget.GetDebuggingInformation().InputCount
                   : _spscTarget!.InputCount;
             }
@@ -429,8 +426,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return
-                        _defaultDebugInfo != null
+                    return _defaultDebugInfo != null
                       ? _defaultDebugInfo.InputQueue
                       : _spscDebugInfo!.InputQueue;
                 }
@@ -449,8 +445,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return
-                        _defaultDebugInfo != null
+                    return _defaultDebugInfo != null
                       ? _defaultDebugInfo.CurrentDegreeOfParallelism
                       : _spscDebugInfo!.CurrentDegreeOfParallelism;
                 }
@@ -461,8 +456,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return
-                        _defaultDebugInfo != null
+                    return _defaultDebugInfo != null
                       ? _defaultDebugInfo.DataflowBlockOptions
                       : _spscDebugInfo!.DataflowBlockOptions;
                 }
@@ -472,8 +466,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return
-                        _defaultDebugInfo != null
+                    return _defaultDebugInfo != null
                       ? _defaultDebugInfo.IsDecliningPermanently
                       : _spscDebugInfo!.IsDecliningPermanently;
                 }
@@ -483,8 +476,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return
-                        _defaultDebugInfo != null
+                    return _defaultDebugInfo != null
                       ? _defaultDebugInfo.IsCompleted
                       : _spscDebugInfo!.IsCompleted;
                 }

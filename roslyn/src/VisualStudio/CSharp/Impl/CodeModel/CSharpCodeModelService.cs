@@ -994,8 +994,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     return ((AttributeSyntax)node).Name.ToString();
                 case SyntaxKind.AttributeArgument:
                     var attributeArgument = (AttributeArgumentSyntax)node;
-                    return
-                        attributeArgument.NameEquals != null
+                    return attributeArgument.NameEquals != null
                       ? attributeArgument.NameEquals.Name.ToString()
                       : string.Empty;
                 case SyntaxKind.UsingDirective:
@@ -1264,16 +1263,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
         public override SyntaxNode GetNodeWithModifiers(SyntaxNode node)
         {
-            return
-                node is VariableDeclaratorSyntax
+            return node is VariableDeclaratorSyntax
               ? node.GetAncestor<MemberDeclarationSyntax>()
               : node;
         }
 
         public override SyntaxNode GetNodeWithType(SyntaxNode node)
         {
-            return
-                node is VariableDeclaratorSyntax
+            return node is VariableDeclaratorSyntax
               ? node.GetAncestor<MemberDeclarationSyntax>()
               : node;
         }
@@ -1988,8 +1985,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
         public override SyntaxNode GetNodeWithAttributes(SyntaxNode node)
         {
-            return
-                node is VariableDeclaratorSyntax
+            return node is VariableDeclaratorSyntax
               ? node.GetAncestor<MemberDeclarationSyntax>()
               : node;
         }
@@ -2085,8 +2081,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         {
             if (importNode is UsingDirectiveSyntax usingDirective)
             {
-                return
-                    usingDirective.Alias != null
+                return usingDirective.Alias != null
                   ? usingDirective.Alias.Name.ToString()
                   : string.Empty;
             }
@@ -2352,8 +2347,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             var type = (ClassDeclarationSyntax)typeNode;
             var flags = type.GetModifierFlags();
 
-            return
-                (flags & ModifierFlags.Partial) != 0
+            return (flags & ModifierFlags.Partial) != 0
               ? EnvDTE80.vsCMClassKind.vsCMClassKindPartialClass
               : EnvDTE80.vsCMClassKind.vsCMClassKindMainClass;
         }
@@ -2456,8 +2450,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             var type = (BaseTypeDeclarationSyntax)typeNode;
             var flags = type.GetModifierFlags();
 
-            return
-                (flags & ModifierFlags.Partial) != 0
+            return (flags & ModifierFlags.Partial) != 0
               ? EnvDTE80.vsCMDataTypeKind.vsCMDataTypeKindPartial
               : EnvDTE80.vsCMDataTypeKind.vsCMDataTypeKindMain;
         }
@@ -3619,8 +3612,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
         protected override SyntaxNode GetFieldFromVariableNode(SyntaxNode node)
         {
-            return
-                node.Kind() == SyntaxKind.VariableDeclarator
+            return node.Kind() == SyntaxKind.VariableDeclarator
               ? node.FirstAncestorOrSelf<BaseFieldDeclarationSyntax>()
               : node;
         }
@@ -3628,16 +3620,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         protected override SyntaxNode GetVariableFromFieldNode(SyntaxNode finalNode)
         {
             // Work around the fact that code model really deals in terms of variable declarators
-            return
-                finalNode is BaseFieldDeclarationSyntax
+            return finalNode is BaseFieldDeclarationSyntax
               ? ((BaseFieldDeclarationSyntax)finalNode).Declaration.Variables.Single()
               : finalNode;
         }
 
         protected override SyntaxNode GetAttributeFromAttributeDeclarationNode(SyntaxNode node)
         {
-            return
-                node is AttributeListSyntax
+            return node is AttributeListSyntax
               ? ((AttributeListSyntax)node).Attributes.First()
               : node;
         }

@@ -1075,8 +1075,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         ) {
             // Don't attach any diagnostics to syntax nodes within a documentation comment if the DocumentationMode
             // is not at least Diagnose.
-            return
-                Options.DocumentationMode >= DocumentationMode.Diagnose
+            return Options.DocumentationMode >= DocumentationMode.Diagnose
               ? base.WithAdditionalDiagnostics<TNode>(node, diagnostics)
               : node;
         }
@@ -1423,8 +1422,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 SyntaxToken close = EatToken(closeKind);
 
-                return
-                    useSquareBrackets
+                return useSquareBrackets
                   ? (BaseCrefParameterListSyntax)SyntaxFactory.CrefBracketedParameterList(
                         open,
                         list,
@@ -1572,8 +1570,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 typeArgumentsMustBeIdentifiers,
                 checkForMember
             );
-            return
-                typeArgumentsMustBeIdentifiers
+            return typeArgumentsMustBeIdentifiers
               ? typeWithoutSuffix
               : ParseCrefTypeSuffix(typeWithoutSuffix);
         }

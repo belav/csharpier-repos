@@ -1339,8 +1339,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             var methodCallExpression = (MethodCallExpression)expression;
 
-            return
-                methodCallExpression.Type.IsNullableType()
+            return methodCallExpression.Type.IsNullableType()
               ? methodCallExpression
               : Call(
                     ExpressionExtensions.ValueBufferTryReadValueMethod.MakeGenericMethod(
@@ -1373,8 +1372,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                                 projectionBindingExpression.ProjectionMember
                             ]
                         ).Value;
-                    return
-                        mappingValue is IReadOnlyDictionary<IProperty, int> indexMap
+                    return mappingValue is IReadOnlyDictionary<IProperty, int> indexMap
                       ? new ProjectionBindingExpression(
                             projectionBindingExpression.QueryExpression,
                             indexMap

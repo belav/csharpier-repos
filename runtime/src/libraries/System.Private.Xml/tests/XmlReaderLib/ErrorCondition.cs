@@ -611,8 +611,7 @@ namespace System.Xml.Tests
             {
                 DataReader.Close();
             }
-            return
-                (IsCharCheckingReader() && (param == 7 || param == 8) || IsSubtreeReader())
+            return (IsCharCheckingReader() && (param == 7 || param == 8) || IsSubtreeReader())
               ? TEST_PASS
               : TEST_FAIL;
         }
@@ -1509,8 +1508,7 @@ namespace System.Xml.Tests
             {
                 DataReader.Close();
             }
-            return
-                ((IsCharCheckingReader() && param >= 1 && param <= 6) || IsSubtreeReader())
+            return ((IsCharCheckingReader() && param >= 1 && param <= 6) || IsSubtreeReader())
               ? TEST_PASS
               : TEST_FAIL;
         }

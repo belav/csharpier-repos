@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeWithAnnotations> typeArguments
         ) {
             Debug.Assert(type.TypeParameters.IsEmpty == (typeArguments.Length == 0));
-            return
-                type.TypeParameters.IsEmpty
+            return type.TypeParameters.IsEmpty
               ? type
               : type.Construct(typeArguments, unbound: false);
         }

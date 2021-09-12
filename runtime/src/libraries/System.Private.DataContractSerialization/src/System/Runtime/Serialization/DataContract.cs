@@ -1942,8 +1942,7 @@ namespace System.Runtime.Serialization
 
         internal static string GetClrTypeFullName(Type type)
         {
-            return
-                !type.IsGenericTypeDefinition && type.ContainsGenericParameters
+            return !type.IsGenericTypeDefinition && type.ContainsGenericParameters
               ? type.Namespace + "." + type.Name
               : type.FullName!;
         }

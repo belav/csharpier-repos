@@ -331,8 +331,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         ) {
             Debug.Assert(eventSymbol.HasAssociatedField);
-            return
-                eventSymbol.IsWindowsRuntimeEvent
+            return eventSymbol.IsWindowsRuntimeEvent
               ? ConstructFieldLikeEventAccessorBody_WinRT(
                     eventSymbol,
                     isAddMethod,

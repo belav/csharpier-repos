@@ -67,8 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ) {
             if ((object)accessor1 == null)
             {
-                return
-                    ((object)accessor2 == null)
+                return ((object)accessor2 == null)
                   ? Accessibility.NotApplicable
                   : accessor2.DeclaredAccessibility;
             }

@@ -8798,8 +8798,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         {
             Debug.Assert(this.CurrentToken.ContextualKind == SyntaxKind.AwaitKeyword);
             SyntaxToken awaitToken = this.EatContextualToken(SyntaxKind.AwaitKeyword);
-            return
-                feature != MessageID.None
+            return feature != MessageID.None
               ? CheckFeatureAvailability(awaitToken, feature)
               : awaitToken;
         }
@@ -10296,8 +10295,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             MessageID feature,
             bool permitTupleDesignation
         ) {
-            return
-                IsPossibleDeclarationExpression(mode, permitTupleDesignation)
+            return IsPossibleDeclarationExpression(mode, permitTupleDesignation)
               ? this.ParseDeclarationExpression(mode, feature)
               : this.ParseSubExpression(Precedence.Expression);
         }
@@ -11915,8 +11913,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 var result = ParseThrowExpression();
                 // we parse a throw expression even at the wrong precedence for better recovery
-                return
-                    (precedence <= Precedence.Coalescing)
+                return (precedence <= Precedence.Coalescing)
                   ? result
                   : this.AddError(result, ErrorCode.ERR_InvalidExprTerm, SyntaxFacts.GetText(tk));
             }
@@ -13942,8 +13939,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 );
             }
 
-            return
-                type is null
+            return type is null
               ? (ExpressionSyntax)_syntaxFactory.ImplicitObjectCreationExpression(
                     @new,
                     argumentList,

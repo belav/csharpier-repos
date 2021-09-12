@@ -1056,8 +1056,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 useSiteInfo: ref useSiteInfo
             );
 
-            return
-                result.IsValid
+            return result.IsValid
               ? MemberAnalysisResult.ExpandedForm(
                     result.ArgsToParamsOpt,
                     result.ConversionsOpt,
@@ -2864,15 +2863,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (refKind1 == RefKind.None)
                     {
-                        return
-                            conv1.Kind == ConversionKind.Identity
+                        return conv1.Kind == ConversionKind.Identity
                           ? BetterResult.Left
                           : BetterResult.Neither;
                     }
                     else
                     {
-                        return
-                            conv2.Kind == ConversionKind.Identity
+                        return conv2.Kind == ConversionKind.Identity
                           ? BetterResult.Right
                           : BetterResult.Neither;
                     }
@@ -4097,8 +4094,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 useSiteInfo: ref useSiteInfo
             );
 
-            return
-                result.Result.IsValid
+            return result.Result.IsValid
               ? new MemberResolutionResult<TMember>(
                     result.Member,
                     result.LeastOverriddenMember,

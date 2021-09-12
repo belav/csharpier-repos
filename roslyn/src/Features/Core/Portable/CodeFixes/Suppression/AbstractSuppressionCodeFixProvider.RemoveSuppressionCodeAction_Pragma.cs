@@ -170,8 +170,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     bool isStartToken,
                     AbstractSuppressionCodeFixProvider fixer
                 ) {
-                    return
-                        isStartToken || fixer.IsEndOfFileToken(token)
+                    return isStartToken || fixer.IsEndOfFileToken(token)
                       ? token.LeadingTrivia
                       : token.TrailingTrivia;
                 }
@@ -182,8 +181,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     SyntaxTriviaList triviaList,
                     AbstractSuppressionCodeFixProvider fixer
                 ) {
-                    return
-                        isStartToken || fixer.IsEndOfFileToken(token)
+                    return isStartToken || fixer.IsEndOfFileToken(token)
                       ? token.WithLeadingTrivia(triviaList)
                       : token.WithTrailingTrivia(triviaList);
                 }
@@ -251,8 +249,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     int indexOfTriviaToRemoveOrToggle,
                     bool isStartToken
                 ) {
-                    return
-                        add
+                    return add
                       ? GetNewTokenWithAddedPragma(token, currentDiagnosticSpan, isStartToken)
                       : GetNewTokenWithRemovedOrToggledPragma(
                             token,

@@ -631,8 +631,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 )[baseActiveStatement.Ordinal];
 
                 // If the document is out-of-sync the exception regions can't be determined.
-                return
-                    baseExceptionRegions.Spans.IsDefault
+                return baseExceptionRegions.Spans.IsDefault
                   ? (bool?)null
                   : baseExceptionRegions.IsActiveStatementCovered;
             }

@@ -128,8 +128,7 @@ namespace Microsoft.CodeAnalysis
                 operation.Parent is IAssignmentOperation assignmentOperation
                 && assignmentOperation.Target == operation
             ) {
-                return
-                    operation.Parent.IsAnyCompoundAssignment()
+                return operation.Parent.IsAnyCompoundAssignment()
                   ? ValueUsageInfo.ReadWrite
                   : ValueUsageInfo.Write;
             }
@@ -195,8 +194,7 @@ namespace Microsoft.CodeAnalysis
                 operation.Parent is IReDimClauseOperation reDimClauseOperation
                 && reDimClauseOperation.Operand == operation
             ) {
-                return
-                    (reDimClauseOperation.Parent as IReDimOperation)?.Preserve == true
+                return (reDimClauseOperation.Parent as IReDimOperation)?.Preserve == true
                   ? ValueUsageInfo.ReadWrite
                   : ValueUsageInfo.Write;
             }

@@ -41,8 +41,7 @@ namespace System.Runtime.Serialization.Json
             // with the restructuring for multi-file, this is no longer true - instead
             // this has become a normal method
             JsonReadWriteDelegates? result;
-            return
-                JsonReadWriteDelegates.GetJsonDelegates().TryGetValue(c, out result)
+            return JsonReadWriteDelegates.GetJsonDelegates().TryGetValue(c, out result)
               ? result
               : null;
         }

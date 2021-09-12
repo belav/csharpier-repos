@@ -97,8 +97,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
                     return false;
             }
 
-            return
-                node == null
+            return node == null
               ? source.Token != Token.PredicateStart
               : ParsePredicateList(source, node);
         }
@@ -147,8 +146,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 || source.Token == Token.AttributeStart
                 || source.Token == Token.SelfReference;
 
-            return
-                (isLeftToRight)
+            return (isLeftToRight)
               ? ParseLeftToRightExpression(source, parent)
               : ParseRightToLeftExpression(source, parent);
         }

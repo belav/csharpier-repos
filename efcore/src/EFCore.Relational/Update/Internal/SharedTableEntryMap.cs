@@ -149,8 +149,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                     return 1;
                 }
 
-                return
-                    !_table.GetRowInternalForeignKeys(x.EntityType).Any()
+                return !_table.GetRowInternalForeignKeys(x.EntityType).Any()
                   ? -1
                   : !_table.GetRowInternalForeignKeys(y.EntityType).Any()
                       ? 1

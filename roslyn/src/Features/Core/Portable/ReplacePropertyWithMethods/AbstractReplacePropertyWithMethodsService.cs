@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             var memberName = generator.IdentifierName(propertyBackingField.Name);
             if (propertyBackingField.IsStatic)
             {
-                return
-                    propertyBackingField.ContainingType == null
+                return propertyBackingField.ContainingType == null
                   ? memberName
                   : generator.MemberAccessExpression(
                         generator.TypeExpression(propertyBackingField.ContainingType),

@@ -860,8 +860,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 detachedProperties?.Attach(this);
             }
 
-            return
-                builder.Metadata.IsInModel
+            return builder.Metadata.IsInModel
               ? builder
               : Metadata.FindProperty(propertyName)?.Builder;
         }
@@ -1178,8 +1177,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            return
-                builder.Metadata.IsInModel
+            return builder.Metadata.IsInModel
               ? builder
               : Metadata.FindServiceProperty(propertyName)?.Builder;
         }
@@ -1195,8 +1193,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             ConfigurationSource? configurationSource
         ) {
             var existingProperty = Metadata.FindServiceProperty(memberInfo);
-            return
-                existingProperty != null
+            return existingProperty != null
               ? existingProperty.DeclaringEntityType == Metadata
                 || (
                     configurationSource.HasValue
@@ -3041,8 +3038,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 configurationSource
             );
             var principalKey = principalTypeBuilder?.Metadata.FindPrimaryKey();
-            return
-                principalTypeBuilder == null
+            return principalTypeBuilder == null
               ? null
               : HasForeignKey(
                     principalTypeBuilder.Metadata,
@@ -3076,8 +3072,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 principalEntityTypeName,
                 configurationSource
             );
-            return
-                principalTypeBuilder == null
+            return principalTypeBuilder == null
               ? null
               : HasForeignKey(
                     principalTypeBuilder.Metadata,
@@ -3106,8 +3101,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(clrMembers, nameof(clrMembers));
 
             var principalTypeBuilder = ModelBuilder.Entity(principalClrType, configurationSource);
-            return
-                principalTypeBuilder == null
+            return principalTypeBuilder == null
               ? null
               : HasForeignKey(
                     principalTypeBuilder.Metadata,
@@ -3133,8 +3127,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(clrMembers, nameof(clrMembers));
 
             var principalTypeBuilder = ModelBuilder.Entity(principalClrType, configurationSource);
-            return
-                principalTypeBuilder == null
+            return principalTypeBuilder == null
               ? null
               : HasForeignKey(
                     principalTypeBuilder.Metadata,
@@ -4092,8 +4085,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             + "Owned types should only have ownership navigations point at it"
                     );
 
-                    return
-                        existingTargetType.HasSharedClrType
+                    return existingTargetType.HasSharedClrType
                       ? ModelBuilder.SharedTypeEntity(
                             existingTargetType.Name,
                             existingTargetType.ClrType,
@@ -4795,8 +4787,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            return
-                builder.Metadata.IsInModel
+            return builder.Metadata.IsInModel
               ? builder
               : Metadata.FindSkipNavigation(navigationName)?.Builder;
         }
@@ -5364,8 +5355,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 $"Either {nameof(name)} or {nameof(type)} should be non-null"
             );
 
-            return
-                CanSetDiscriminator(name, type, configurationSource)
+            return CanSetDiscriminator(name, type, configurationSource)
               ? DiscriminatorBuilder(
                     GetOrCreateDiscriminatorProperty(type, name, configurationSource),
                     configurationSource
@@ -5901,8 +5891,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(properties, nameof(properties));
 
             var key = Metadata.FindDeclaredKey(properties);
-            return
-                key != null
+            return key != null
               ? HasNoKey(
                     key,
                     fromDataAnnotation
@@ -6051,8 +6040,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(properties, nameof(properties));
 
             var index = Metadata.FindDeclaredIndex(properties);
-            return
-                index != null
+            return index != null
               ? HasNoIndex(
                     index,
                     fromDataAnnotation
@@ -6399,8 +6387,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 principalKey,
                 principalEntityType
             );
-            return
-                foreignKey != null
+            return foreignKey != null
               ? HasNoRelationship(
                     foreignKey,
                     fromDataAnnotation

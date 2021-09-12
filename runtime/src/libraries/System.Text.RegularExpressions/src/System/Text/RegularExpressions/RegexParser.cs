@@ -1368,8 +1368,7 @@ namespace System.Text.RegularExpressions
 
                 case 'w':
                     MoveRight();
-                    return
-                        scanOnly
+                    return scanOnly
                       ? null
                       : new RegexNode(
                             RegexNode.Set,
@@ -1379,8 +1378,7 @@ namespace System.Text.RegularExpressions
 
                 case 'W':
                     MoveRight();
-                    return
-                        scanOnly
+                    return scanOnly
                       ? null
                       : new RegexNode(
                             RegexNode.Set,
@@ -1392,8 +1390,7 @@ namespace System.Text.RegularExpressions
 
                 case 's':
                     MoveRight();
-                    return
-                        scanOnly
+                    return scanOnly
                       ? null
                       : new RegexNode(
                             RegexNode.Set,
@@ -1403,8 +1400,7 @@ namespace System.Text.RegularExpressions
 
                 case 'S':
                     MoveRight();
-                    return
-                        scanOnly
+                    return scanOnly
                       ? null
                       : new RegexNode(
                             RegexNode.Set,
@@ -1416,8 +1412,7 @@ namespace System.Text.RegularExpressions
 
                 case 'd':
                     MoveRight();
-                    return
-                        scanOnly
+                    return scanOnly
                       ? null
                       : new RegexNode(
                             RegexNode.Set,
@@ -1427,8 +1422,7 @@ namespace System.Text.RegularExpressions
 
                 case 'D':
                     MoveRight();
-                    return
-                        scanOnly
+                    return scanOnly
                       ? null
                       : new RegexNode(
                             RegexNode.Set,
@@ -1525,8 +1519,7 @@ namespace System.Text.RegularExpressions
 
                 if (CharsRight() > 0 && RightCharMoveRight() == close)
                 {
-                    return
-                        scanOnly
+                    return scanOnly
                       ? null
                       : IsCaptureSlot(capnum)
                           ? new RegexNode(RegexNode.Ref, _options, capnum)
@@ -1599,8 +1592,7 @@ namespace System.Text.RegularExpressions
 
                 if (CharsRight() > 0 && RightCharMoveRight() == close)
                 {
-                    return
-                        scanOnly
+                    return scanOnly
                       ? null
                       : IsCaptureName(capname)
                           ? new RegexNode(RegexNode.Ref, _options, CaptureSlotFromName(capname))

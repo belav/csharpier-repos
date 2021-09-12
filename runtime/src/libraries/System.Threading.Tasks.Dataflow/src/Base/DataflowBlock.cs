@@ -2911,8 +2911,7 @@ namespace System.Threading.Tasks.Dataflow
                 Task? sourceCompletionTask = Common.GetPotentiallyNotSupportedCompletionTask(
                     _source
                 );
-                return
-                    sourceCompletionTask != null && sourceCompletionTask.IsFaulted
+                return sourceCompletionTask != null && sourceCompletionTask.IsFaulted
                   ? sourceCompletionTask.Exception
                   : null;
             }

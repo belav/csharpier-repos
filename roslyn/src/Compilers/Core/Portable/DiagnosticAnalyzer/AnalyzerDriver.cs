@@ -1632,8 +1632,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     }
 
                     declarationInfoBuilder.Free();
-                    return
-                        generatedSymbolsBuilder != null
+                    return generatedSymbolsBuilder != null
                       ? generatedSymbolsBuilder.ToImmutable()
                       : ImmutableHashSet<ISymbol>.Empty;
                 }
@@ -1724,8 +1723,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
             }
 
-            return
-                suppressedAnalyzersBuilder != null
+            return suppressedAnalyzersBuilder != null
               ? suppressedAnalyzersBuilder.ToImmutable()
               : ImmutableHashSet<DiagnosticAnalyzer>.Empty;
         }
@@ -3108,8 +3106,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            return
-                IsGeneratedCodeSymbolMap.TryGetValue(symbol, out bool isGeneratedCodeSymbol)
+            return IsGeneratedCodeSymbolMap.TryGetValue(symbol, out bool isGeneratedCodeSymbol)
               ? isGeneratedCodeSymbol
               : IsGeneratedCodeSymbolMap.GetOrAdd(symbol, computeIsGeneratedCodeSymbol());
 

@@ -857,8 +857,7 @@ namespace System.Net.Http
             // don't want to hide such "usage error" exceptions in HttpRequestException.
             // ObjectDisposedException is also wrapped, since aborting HWR after a request is complete will result in
             // the response stream being closed.
-            return
-                StreamCopyExceptionNeedsWrapping(originalException)
+            return StreamCopyExceptionNeedsWrapping(originalException)
               ? WrapStreamCopyException(originalException)
               : originalException;
         }

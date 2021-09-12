@@ -30,8 +30,7 @@ namespace System.Linq.Expressions.Interpreter
             Func<int, int> labelIndexer,
             IReadOnlyList<object>? objects
         ) {
-            return
-                cookie == null
+            return cookie == null
               ? InstructionName + "(" + _index + ")"
               : InstructionName + "(" + cookie + ": " + _index + ")";
         }

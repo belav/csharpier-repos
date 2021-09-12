@@ -192,8 +192,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(entityType, nameof(entityType));
 
-            return
-                entityType != EntityType
+            return entityType != EntityType
               ? new RelationalEntityShaperExpression(entityType, ValueBufferExpression, IsNullable)
               : this;
         }
@@ -205,8 +204,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         public override EntityShaperExpression MakeNullable(bool nullable = true)
         {
-            return
-                IsNullable != nullable
+            return IsNullable != nullable
               // Marking nullable requires recomputation of Discriminator condition
               ? new RelationalEntityShaperExpression(EntityType, ValueBufferExpression, true)
               : this;
@@ -217,8 +215,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(valueBufferExpression, nameof(valueBufferExpression));
 
-            return
-                valueBufferExpression != ValueBufferExpression
+            return valueBufferExpression != ValueBufferExpression
               ? new RelationalEntityShaperExpression(
                     EntityType,
                     valueBufferExpression,

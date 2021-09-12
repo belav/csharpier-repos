@@ -30,8 +30,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IDictionaryAdapter parent,
             IXmlAccessor accessor
         ) {
-            return
-                node.ClrType == typeof(object)
+            return node.ClrType == typeof(object)
               ? new object()
               : XmlTypeSerializer.For(node.ClrType).GetValue(node, parent, accessor);
         }

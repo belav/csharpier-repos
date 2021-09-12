@@ -222,8 +222,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsChar()
               : HandleReadValue(reader.ReadElementContentAsChar(), context);
         }
@@ -275,8 +274,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsBoolean()
               : HandleReadValue(reader.ReadElementContentAsBoolean(), context);
         }
@@ -322,8 +320,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsSignedByte()
               : HandleReadValue(reader.ReadElementContentAsSignedByte(), context);
         }
@@ -369,8 +366,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsUnsignedByte()
               : HandleReadValue(reader.ReadElementContentAsUnsignedByte(), context);
         }
@@ -416,8 +412,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsShort()
               : HandleReadValue(reader.ReadElementContentAsShort(), context);
         }
@@ -463,8 +458,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsUnsignedShort()
               : HandleReadValue(reader.ReadElementContentAsUnsignedShort(), context);
         }
@@ -552,8 +546,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsInt()
               : HandleReadValue(reader.ReadElementContentAsInt(), context);
         }
@@ -599,8 +592,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsUnsignedInt()
               : HandleReadValue(reader.ReadElementContentAsUnsignedInt(), context);
         }
@@ -645,8 +637,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsLong()
               : HandleReadValue(reader.ReadElementContentAsLong(), context);
         }
@@ -726,8 +717,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsUnsignedLong()
               : HandleReadValue(reader.ReadElementContentAsUnsignedLong(), context);
         }
@@ -773,8 +763,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsFloat()
               : HandleReadValue(reader.ReadElementContentAsFloat(), context);
         }
@@ -820,8 +809,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsDouble()
               : HandleReadValue(reader.ReadElementContentAsDouble(), context);
         }
@@ -867,8 +855,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsDecimal()
               : HandleReadValue(reader.ReadElementContentAsDecimal(), context);
         }
@@ -914,8 +901,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsDateTime()
               : HandleReadValue(reader.ReadElementContentAsDateTime(), context);
         }
@@ -1255,8 +1241,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsTimeSpan()
               : HandleReadValue(reader.ReadElementContentAsTimeSpan(), context);
         }
@@ -1307,8 +1292,7 @@ namespace System.Runtime.Serialization
             XmlReaderDelegator reader,
             XmlObjectSerializerReadContext? context
         ) {
-            return
-                (context == null)
+            return (context == null)
               ? reader.ReadElementContentAsGuid()
               : HandleReadValue(reader.ReadElementContentAsGuid(), context);
         }

@@ -38,8 +38,7 @@ namespace System.Buffers.Text
                         value <= (long)Utf8Constants.BillionMaxUIntValue
                         && value >= -(long)Utf8Constants.BillionMaxUIntValue
                     ) {
-                        return
-                            value < 0
+                        return value < 0
                           ? TryFormatInt64MoreThanNegativeBillionMaxUInt(
                                 -value,
                                 destination,
@@ -53,8 +52,7 @@ namespace System.Buffers.Text
                     }
                     else
                     {
-                        return
-                            value < 0
+                        return value < 0
                           ? TryFormatInt64LessThanNegativeBillionMaxUInt(
                                 -value,
                                 destination,

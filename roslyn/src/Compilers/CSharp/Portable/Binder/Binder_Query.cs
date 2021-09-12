@@ -124,8 +124,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // If the query is a degenerate one the form "from x in e select x", but in source,
             // then we go ahead and generate the select anyway.  We do this by skipping BindQueryInternal2,
             // whose job it is to (reduce away the whole query and) optimize away degenerate queries.
-            return
-                IsDegenerateQuery(state)
+            return IsDegenerateQuery(state)
               ? FinalTranslation(state, diagnostics)
               : BindQueryInternal2(state, diagnostics);
         }

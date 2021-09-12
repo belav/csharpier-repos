@@ -266,8 +266,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         ) {
             Debug.Assert(arg1 != null);
             Debug.Assert(exprKind.IsUnaryOperator() == (arg2 == null));
-            return
-                exprKind.IsUnaryOperator()
+            return exprKind.IsUnaryOperator()
               ? (ExprOperator)CreateUnaryOp(exprKind, type, arg1)
               : CreateBinop(exprKind, type, arg1, arg2);
         }

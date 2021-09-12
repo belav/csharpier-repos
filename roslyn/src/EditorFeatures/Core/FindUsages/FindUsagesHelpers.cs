@@ -60,8 +60,7 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
 
         private static SymbolDisplayFormat GetFormat(ISymbol definition)
         {
-            return
-                definition.Kind == SymbolKind.Parameter
+            return definition.Kind == SymbolKind.Parameter
               ? s_parameterDefinitionFormat
               : s_definitionFormat;
         }

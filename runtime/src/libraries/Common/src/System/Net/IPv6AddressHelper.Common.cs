@@ -36,8 +36,7 @@ namespace System
                 }
             }
 
-            return
-                longestSequenceLength > 1
+            return longestSequenceLength > 1
               ? (longestSequenceStart, longestSequenceStart + longestSequenceLength)
               : (-1, -1);
         }

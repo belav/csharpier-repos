@@ -15,8 +15,7 @@ namespace System.Linq
             Debug.Assert(source != null);
             Debug.Assert(count > 0);
 
-            return
-                source is IPartition<TSource> partition
+            return source is IPartition<TSource> partition
               ? partition.Take(count)
               : source is IList<TSource> sourceList
                   ? new ListPartition<TSource>(sourceList, 0, count - 1)
@@ -31,8 +30,7 @@ namespace System.Linq
             Debug.Assert(source != null);
             Debug.Assert(startIndex >= 0 && startIndex < endIndex);
 
-            return
-                source is IPartition<TSource> partition
+            return source is IPartition<TSource> partition
               ? TakePartitionRange(partition, startIndex, endIndex)
               : source is IList<TSource> sourceList
                   ? new ListPartition<TSource>(sourceList, startIndex, endIndex - 1)

@@ -21,8 +21,7 @@ namespace System.Net
             }
             SetBuffer(newSize);
 
-            return
-                RequestBuffer == IntPtr.Zero
+            return RequestBuffer == IntPtr.Zero
               ? null
               : (Interop.HttpApi.HTTP_REQUEST*)RequestBuffer.ToPointer();
         }

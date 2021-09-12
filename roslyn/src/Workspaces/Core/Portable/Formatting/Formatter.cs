@@ -132,8 +132,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             CancellationToken cancellationToken = default
         ) {
             var formattingService = document.GetLanguageService<IFormattingService>();
-            return
-                formattingService == null
+            return formattingService == null
               ? SpecializedTasks.FromResult(document)
               : formattingService.FormatAsync(document, spans, options, cancellationToken);
         }
@@ -366,8 +365,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 rules,
                 cancellationToken
             );
-            return
-                formattingResult == null
+            return formattingResult == null
               ? node
               : formattingResult.GetFormattedRoot(cancellationToken);
         }
@@ -504,8 +502,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 rules,
                 cancellationToken
             );
-            return
-                formattingResult == null
+            return formattingResult == null
               ? SpecializedCollections.EmptyList<TextChange>()
               : formattingResult.GetTextChanges(cancellationToken);
         }

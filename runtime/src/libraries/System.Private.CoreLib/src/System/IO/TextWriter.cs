@@ -572,8 +572,7 @@ namespace System.IO
             StringBuilder? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
               : value == null ? Task.CompletedTask : WriteAsyncCore(value, cancellationToken);
 
@@ -665,8 +664,7 @@ namespace System.IO
             StringBuilder? value,
             CancellationToken cancellationToken = default
         ) {
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
               : value == null
                   ? WriteAsync(CoreNewLine, cancellationToken)

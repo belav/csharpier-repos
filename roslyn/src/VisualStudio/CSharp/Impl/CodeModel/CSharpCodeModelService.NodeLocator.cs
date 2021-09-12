@@ -153,8 +153,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     TextSpan.FromBounds(openBrace.Span.End, openBraceLine.End)
                 );
 
-                return
-                    string.IsNullOrWhiteSpace(textAfterBrace)
+                return string.IsNullOrWhiteSpace(textAfterBrace)
                   ? new VirtualTreePoint(
                         openBrace.SyntaxTree,
                         text,
@@ -255,8 +254,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     TextSpan.FromBounds(closeBraceLine.Start, closeBrace.SpanStart)
                 );
 
-                return
-                    string.IsNullOrWhiteSpace(textBeforeBrace)
+                return string.IsNullOrWhiteSpace(textBeforeBrace)
                   ? new VirtualTreePoint(closeBrace.SyntaxTree, text, closeBraceLine.Start)
                   : new VirtualTreePoint(closeBrace.SyntaxTree, text, closeBrace.SpanStart);
             }

@@ -1030,8 +1030,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             _factory.AddField(containerDefinition, field);
             Debug.Assert(_currentDynamicCallSiteContainer is { });
-            return
-                _currentDynamicCallSiteContainer.IsGenericType
+            return _currentDynamicCallSiteContainer.IsGenericType
               ? field.AsMember(_currentDynamicCallSiteContainer)
               : field;
         }

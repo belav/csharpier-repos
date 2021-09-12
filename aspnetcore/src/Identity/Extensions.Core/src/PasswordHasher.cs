@@ -217,8 +217,7 @@ namespace Microsoft.AspNetCore.Identity
                     if (VerifyHashedPasswordV2(decodedHashedPassword, providedPassword))
                     {
                         // This is an old password hash format - the caller needs to rehash if we're not running in an older compat mode.
-                        return
-                            (_compatibilityMode == PasswordHasherCompatibilityMode.IdentityV3)
+                        return (_compatibilityMode == PasswordHasherCompatibilityMode.IdentityV3)
                           ? PasswordVerificationResult.SuccessRehashNeeded
                           : PasswordVerificationResult.Success;
                     }
@@ -237,8 +236,7 @@ namespace Microsoft.AspNetCore.Identity
                         )
                     ) {
                         // If this hasher was configured with a higher iteration count, change the entry now.
-                        return
-                            (embeddedIterCount < _iterCount)
+                        return (embeddedIterCount < _iterCount)
                           ? PasswordVerificationResult.SuccessRehashNeeded
                           : PasswordVerificationResult.Success;
                     }

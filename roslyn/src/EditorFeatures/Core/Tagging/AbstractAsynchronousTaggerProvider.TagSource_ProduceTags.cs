@@ -252,8 +252,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 ITextSnapshot snapshot,
                 ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> tagTrees
             ) {
-                return
-                    tagTrees.TryGetValue(snapshot.TextBuffer, out var tagTree)
+                return tagTrees.TryGetValue(snapshot.TextBuffer, out var tagTree)
                   ? tagTree
                   : new TagSpanIntervalTree<TTag>(
                         snapshot.TextBuffer,

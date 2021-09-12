@@ -210,8 +210,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeSymbol type
         ) {
             var namedType = type as NamedTypeSymbol;
-            return
-                ((object)namedType != null && namedType.IsGenericType)
+            return ((object)namedType != null && namedType.IsGenericType)
               ? namedType.AsUnboundGenericType()
               : type;
         }

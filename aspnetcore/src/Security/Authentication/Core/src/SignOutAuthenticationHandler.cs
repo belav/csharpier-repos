@@ -33,8 +33,7 @@ namespace Microsoft.AspNetCore.Authentication
         public virtual Task SignOutAsync(AuthenticationProperties? properties)
         {
             var target = ResolveTarget(Options.ForwardSignOut);
-            return
-                (target != null)
+            return (target != null)
               ? Context.SignOutAsync(target, properties)
               : HandleSignOutAsync(properties ?? new AuthenticationProperties());
         }

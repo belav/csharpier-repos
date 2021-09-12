@@ -411,8 +411,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             // is null, and in this case the event receiver just receives null. This won't happen
             // under normal circumstances, but to avoid creating a new failure scenario, allow for
             // that edge case here too.
-            return
-                methodInfo == null
+            return methodInfo == null
               ? typeof(EventArgs)
               : EventArgsTypeCache.GetEventArgsType(methodInfo);
         }

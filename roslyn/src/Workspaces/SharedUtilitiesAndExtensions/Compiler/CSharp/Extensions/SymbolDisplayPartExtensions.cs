@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 var text = part.ToString();
                 if (text == string.Empty)
                 {
-                    return
-                        replacement == null
+                    return replacement == null
                       ? new SymbolDisplayPart(SymbolDisplayPartKind.Keyword, null, "object")
                       : new SymbolDisplayPart(SymbolDisplayPartKind.Text, null, replacement);
                 }

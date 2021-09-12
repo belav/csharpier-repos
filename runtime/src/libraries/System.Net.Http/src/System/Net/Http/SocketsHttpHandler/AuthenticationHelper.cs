@@ -227,8 +227,7 @@ namespace System.Net.Http
             HttpResponseMessage response,
             bool isProxyAuth
         ) {
-            return
-                isProxyAuth
+            return isProxyAuth
               ? response.StatusCode == HttpStatusCode.ProxyAuthenticationRequired
               : response.StatusCode == HttpStatusCode.Unauthorized;
         }
@@ -237,8 +236,7 @@ namespace System.Net.Http
             HttpResponseMessage response,
             bool isProxyAuth
         ) {
-            return
-                isProxyAuth
+            return isProxyAuth
               ? response.Headers.ProxyAuthenticate
               : response.Headers.WwwAuthenticate;
         }
@@ -315,8 +313,7 @@ namespace System.Net.Http
             HttpConnectionPool pool,
             CancellationToken cancellationToken
         ) {
-            return
-                isProxyAuth
+            return isProxyAuth
               ? pool.SendWithRetryAsync(request, async, doRequestAuth, cancellationToken)
               : pool.SendWithProxyAuthAsync(request, async, doRequestAuth, cancellationToken);
         }

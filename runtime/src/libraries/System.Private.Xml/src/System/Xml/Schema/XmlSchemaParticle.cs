@@ -46,8 +46,7 @@ namespace System.Xml.Schema
         {
             get
             {
-                return
-                    (_flags & Occurs.Max) == 0
+                return (_flags & Occurs.Max) == 0
                   ? null
                   : (_maxOccurs == decimal.MaxValue)
                       ? "unbounded"

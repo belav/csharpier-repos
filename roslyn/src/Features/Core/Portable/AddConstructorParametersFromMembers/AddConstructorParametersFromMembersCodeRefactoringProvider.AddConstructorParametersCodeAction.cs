@@ -116,8 +116,7 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                     }
                     else
                     {
-                        return
-                            _missingParameters[0].IsOptional
+                        return _missingParameters[0].IsOptional
                           ? string.Format(FeaturesResources.Add_optional_parameters_to_0, signature)
                           : string.Format(FeaturesResources.Add_parameters_to_0, signature);
                     }

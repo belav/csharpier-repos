@@ -82,8 +82,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             Debug.Assert(namespacesToMerge.Length != 0);
 
-            return
-                (namespacesToMerge.Length == 1 && nameOpt == null)
+            return (namespacesToMerge.Length == 1 && nameOpt == null)
               ? namespacesToMerge[0]
               : new MergedNamespaceSymbol(extent, containingNamespace, namespacesToMerge, nameOpt);
         }

@@ -526,8 +526,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
 
             if (index == 0)
             {
-                return
-                    aliasQualifier == null
+                return aliasQualifier == null
                   ? (NameSyntax)namePiece
                   : SyntaxFactory.AliasQualifiedName(aliasQualifier, namePiece);
             }
@@ -550,8 +549,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
 
             if (index == 0)
             {
-                return
-                    aliasQualifier == null
+                return aliasQualifier == null
                   ? (NameSyntax)namePiece
                   : SyntaxFactory.AliasQualifiedName(aliasQualifier, namePiece);
             }

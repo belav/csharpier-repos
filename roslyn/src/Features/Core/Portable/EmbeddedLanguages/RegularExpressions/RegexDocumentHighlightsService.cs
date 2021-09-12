@@ -46,8 +46,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            return
-                tree == null
+            return tree == null
               ? default
               : ImmutableArray.Create(
                     new DocumentHighlights(document, GetHighlights(tree, position))

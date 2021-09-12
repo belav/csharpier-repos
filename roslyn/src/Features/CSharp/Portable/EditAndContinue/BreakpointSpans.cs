@@ -159,8 +159,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.ConversionOperatorDeclaration:
                 case SyntaxKind.DestructorDeclaration:
                     var methodDeclaration = (BaseMethodDeclarationSyntax)node;
-                    return
-                        (methodDeclaration.Body != null)
+                    return (methodDeclaration.Body != null)
                       ? CreateSpanForBlock(methodDeclaration.Body, position)
                       : methodDeclaration.ExpressionBody?.Expression.Span;
 
@@ -202,8 +201,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.CasePatternSwitchLabel:
                     var caseClause = (CasePatternSwitchLabelSyntax)node;
-                    return
-                        caseClause.WhenClause == null
+                    return caseClause.WhenClause == null
                       ? TryCreateSpanForSwitchLabel((SwitchLabelSyntax)node, position)
                       : CreateSpan(caseClause.WhenClause);
 
@@ -290,8 +288,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     // event Action P { add [|{|] ... } remove { ... } }
                     // event Action P { [|add;|] [|remove;|] }
                     var @event = (EventDeclarationSyntax)node;
-                    return
-                        @event.AccessorList != null
+                    return @event.AccessorList != null
                       ? CreateSpanForAccessors(@event.AccessorList.Accessors, position)
                       : null;
 
@@ -323,8 +320,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.OrderByClause:
                     var orderByClause = (OrderByClauseSyntax)node;
-                    return
-                        orderByClause.Orderings.Count > 0
+                    return orderByClause.Orderings.Count > 0
                       ? TryCreateSpanForNode(orderByClause.Orderings.First().Expression, position)
                       : null;
 
@@ -338,16 +334,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.LocalFunctionStatement:
                     var localFunction = (LocalFunctionStatementSyntax)node;
-                    return
-                        (localFunction.Body != null)
+                    return (localFunction.Body != null)
                       ? TryCreateSpanForNode(localFunction.Body, position)
                       : TryCreateSpanForNode(localFunction.ExpressionBody.Expression, position);
 
                 default:
                     if (node is ExpressionSyntax expression)
                     {
-                        return
-                            IsBreakableExpression(expression)
+                        return IsBreakableExpression(expression)
                           ? CreateSpan(expression)
                           : (TextSpan?)null;
                     }

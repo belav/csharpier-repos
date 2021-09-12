@@ -330,8 +330,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             (IReadOnlyList<string> httpMethods, bool acceptCorsPreflight) GetHttpMethods(Endpoint e)
             {
                 var metadata = e.Metadata.GetMetadata<IHttpMethodMetadata>();
-                return
-                    metadata == null
+                return metadata == null
                   ? (Array.Empty<string>(), false)
                   : (metadata.HttpMethods, metadata.AcceptCorsPreflight);
             }

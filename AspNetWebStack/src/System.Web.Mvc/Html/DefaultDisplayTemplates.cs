@@ -25,8 +25,7 @@ namespace System.Web.Mvc.Html
                 );
             }
 
-            return
-                html.ViewContext.ViewData.ModelMetadata.IsNullableValueType
+            return html.ViewContext.ViewData.ModelMetadata.IsNullableValueType
               ? BooleanTemplateDropDownList(value)
               : BooleanTemplateCheckbox(value ?? false);
         }

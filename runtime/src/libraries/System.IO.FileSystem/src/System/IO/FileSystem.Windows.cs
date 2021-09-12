@@ -113,8 +113,7 @@ namespace System.IO
 
         public static FileSystemInfo GetFileSystemInfo(string fullPath, bool asDirectory)
         {
-            return
-                asDirectory
+            return asDirectory
               ? (FileSystemInfo)new DirectoryInfo(fullPath, null)
               : (FileSystemInfo)new FileInfo(fullPath, null);
         }

@@ -142,8 +142,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             {
                 var converter = property.GetTypeMapping().Converter;
 
-                return
-                    converter is null
+                return converter is null
                   ? (string)value
                   : (string)converter.ConvertToProvider(value);
             }

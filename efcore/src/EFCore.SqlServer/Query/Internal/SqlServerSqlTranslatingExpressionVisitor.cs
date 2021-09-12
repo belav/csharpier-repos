@@ -86,8 +86,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 }
             }
 
-            return
-                !(base.VisitBinary(binaryExpression) is SqlExpression visitedExpression)
+            return !(base.VisitBinary(binaryExpression) is SqlExpression visitedExpression)
               ? QueryCompilationContext.NotTranslatedExpression
               : visitedExpression is SqlBinaryExpression sqlBinary
                 && _arithmeticOperatorTypes.Contains(sqlBinary.OperatorType)
@@ -127,8 +126,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     isBinaryMaxDataType ? typeof(long) : typeof(int)
                 );
 
-                return
-                    isBinaryMaxDataType
+                return isBinaryMaxDataType
                   ? (Expression)Dependencies.SqlExpressionFactory.Convert(
                         dataLengthSqlFunction,
                         typeof(int)

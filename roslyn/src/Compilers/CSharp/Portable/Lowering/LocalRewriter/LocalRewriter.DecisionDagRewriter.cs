@@ -846,8 +846,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(y.Discriminator == x.Discriminator);
                     // Sort NaN values into the "highest" position so they fall naturally into the last bucket
                     // when partitioned using less-than.
-                    return
-                        isNaN(x)
+                    return isNaN(x)
                       ? 1
                       : isNaN(y)
                           ? -1

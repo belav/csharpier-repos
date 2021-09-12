@@ -228,8 +228,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         {
             rootNamespace ??= string.Empty;
 
-            return
-                @namespace == rootNamespace
+            return @namespace == rootNamespace
               ? string.Empty
               : @namespace.StartsWith(rootNamespace + '.', StringComparison.Ordinal)
                   ? @namespace.Substring(rootNamespace.Length + 1)

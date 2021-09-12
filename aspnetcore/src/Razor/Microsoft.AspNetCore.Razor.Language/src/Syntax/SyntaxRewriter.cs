@@ -81,16 +81,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                         token = token.WithLeadingTrivia(leading);
                     }
 
-                    return
-                        trailing.Node.Green != trailingTrivia
+                    return trailing.Node.Green != trailingTrivia
                       ? token.WithTrailingTrivia(trailing)
                       : token;
                 }
                 else
                 {
                     // Leading trivia only
-                    return
-                        leading.Node.Green != leadingTrivia
+                    return leading.Node.Green != leadingTrivia
                       ? token.WithLeadingTrivia(leading)
                       : token;
                 }
@@ -108,8 +106,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                         index: 0
                     )
                 );
-                return
-                    trailing.Node.Green != trailingTrivia
+                return trailing.Node.Green != trailingTrivia
                   ? token.WithTrailingTrivia(trailing)
                   : token;
             }

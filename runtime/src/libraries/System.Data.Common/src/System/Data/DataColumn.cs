@@ -1648,8 +1648,7 @@ namespace System.Data
                 // if strings, then do exact character by character check
                 if (leftType == typeof(string) && rightType == typeof(string))
                 {
-                    return
-                        string.CompareOrdinal((string)_storage.Get(record1), (string)value) == 0
+                    return string.CompareOrdinal((string)_storage.Get(record1), (string)value) == 0
                       ? true
                       : false;
                 }

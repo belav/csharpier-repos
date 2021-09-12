@@ -3637,8 +3637,7 @@ namespace Microsoft.CodeAnalysis
                 var constantHandle = MetadataReader.GetParameter(param).GetDefaultValue();
 
                 // TODO: Error checking: Throw an error if the table entry cannot be found
-                return
-                    constantHandle.IsNil
+                return constantHandle.IsNil
                   ? ConstantValue.Bad
                   : GetConstantValueOrThrow(constantHandle);
             }
@@ -3657,8 +3656,7 @@ namespace Microsoft.CodeAnalysis
                 var constantHandle = MetadataReader.GetFieldDefinition(fieldDef).GetDefaultValue();
 
                 // TODO: Error checking: Throw an error if the table entry cannot be found
-                return
-                    constantHandle.IsNil
+                return constantHandle.IsNil
                   ? ConstantValue.Bad
                   : GetConstantValueOrThrow(constantHandle);
             }
@@ -3689,8 +3687,7 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
         private BlobHandle GetMarshallingDescriptorHandleOrThrow(EntityHandle fieldOrParameterToken)
         {
-            return
-                fieldOrParameterToken.Kind == HandleKind.FieldDefinition
+            return fieldOrParameterToken.Kind == HandleKind.FieldDefinition
               ? MetadataReader.GetFieldDefinition((FieldDefinitionHandle)fieldOrParameterToken)
                     .GetMarshallingDescriptor()
               : MetadataReader.GetParameter((ParameterHandle)fieldOrParameterToken)

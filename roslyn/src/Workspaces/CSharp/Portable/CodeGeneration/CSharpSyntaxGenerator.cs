@@ -64,8 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             const string InterpolatedVerbatimText = "$@\"";
 
-            return
-                isVerbatim
+            return isVerbatim
               ? SyntaxFactory.Token(
                     default,
                     SyntaxKind.InterpolatedVerbatimStringStartToken,
@@ -141,8 +140,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private SyntaxList<UsingDirectiveSyntax> AsUsingDirectives(
             IEnumerable<SyntaxNode> declarations
         ) {
-            return
-                declarations != null
+            return declarations != null
               ? SyntaxFactory.List(
                     declarations.Select(this.AsUsingDirective).OfType<UsingDirectiveSyntax>()
                 )
@@ -162,8 +160,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static SyntaxList<MemberDeclarationSyntax> AsNamespaceMembers(
             IEnumerable<SyntaxNode> declarations
         ) {
-            return
-                declarations != null
+            return declarations != null
               ? SyntaxFactory.List(
                     declarations.Select(AsNamespaceMember).OfType<MemberDeclarationSyntax>()
                 )
@@ -382,8 +379,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         private static ParameterListSyntax AsParameterList(IEnumerable<SyntaxNode> parameters)
         {
-            return
-                parameters != null
+            return parameters != null
               ? SyntaxFactory.ParameterList(
                     SyntaxFactory.SeparatedList(parameters.Cast<ParameterSyntax>())
                 )
@@ -516,8 +512,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<SyntaxNode> accessorDeclarations
         ) {
             var list = SyntaxFactory.List(accessorDeclarations.Cast<AccessorDeclarationSyntax>());
-            return
-                accessorListOpt == null
+            return accessorListOpt == null
               ? SyntaxFactory.AccessorList(list)
               : accessorListOpt.WithAccessors(list);
         }
@@ -582,8 +577,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static BracketedParameterListSyntax AsBracketedParameterList(
             IEnumerable<SyntaxNode> parameters
         ) {
-            return
-                parameters != null
+            return parameters != null
               ? SyntaxFactory.BracketedParameterList(
                     SyntaxFactory.SeparatedList(parameters.Cast<ParameterSyntax>())
                 )
@@ -772,20 +766,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 case SyntaxKind.MethodDeclaration:
                     var method = (MethodDeclarationSyntax)declaration;
-                    return
-                        method.Body == null
+                    return method.Body == null
                       ? method.WithSemicolonToken(default).WithBody(CreateBlock(null))
                       : method;
                 case SyntaxKind.OperatorDeclaration:
                     var op = (OperatorDeclarationSyntax)declaration;
-                    return
-                        op.Body == null
+                    return op.Body == null
                       ? op.WithSemicolonToken(default).WithBody(CreateBlock(null))
                       : op;
                 case SyntaxKind.ConversionOperatorDeclaration:
                     var cop = (ConversionOperatorDeclarationSyntax)declaration;
-                    return
-                        cop.Body == null
+                    return cop.Body == null
                       ? cop.WithSemicolonToken(default).WithBody(CreateBlock(null))
                       : cop;
                 case SyntaxKind.PropertyDeclaration:
@@ -879,8 +870,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             string className,
             IEnumerable<SyntaxNode> members
         ) {
-            return
-                members != null
+            return members != null
               ? SyntaxFactory.List(
                     members.Select(m => this.AsClassMember(m, className)).Where(m => m != null)
                 )
@@ -964,8 +954,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private SyntaxList<MemberDeclarationSyntax> AsInterfaceMembers(
             IEnumerable<SyntaxNode> members
         ) {
-            return
-                members != null
+            return members != null
               ? SyntaxFactory.List(
                     members.Select(this.AsInterfaceMember).OfType<MemberDeclarationSyntax>()
                 )
@@ -1149,8 +1138,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         public override SyntaxNode AttributeArgument(string name, SyntaxNode expression)
         {
-            return
-                name != null
+            return name != null
               ? SyntaxFactory.AttributeArgument(
                     SyntaxFactory.NameEquals(name.ToIdentifierName()),
                     null,
@@ -2584,8 +2572,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public override IReadOnlyList<SyntaxNode> GetParameters(SyntaxNode declaration)
         {
             var list = declaration.GetParameterList();
-            return
-                list != null
+            return list != null
               ? list.Parameters
               : declaration is SimpleLambdaExpressionSyntax simpleLambda
                   ? new[] { simpleLambda.Parameter }

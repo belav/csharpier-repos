@@ -1771,8 +1771,7 @@ namespace System.Text.Json
                 {
                     if (marker == JsonConstants.Slash)
                     {
-                        return
-                            SkipOrConsumeCommentMultiSegmentWithRollback()
+                        return SkipOrConsumeCommentMultiSegmentWithRollback()
                           ? ConsumeTokenResult.Success
                           : ConsumeTokenResult.NotEnoughDataRollBackState;
                     }
@@ -1851,8 +1850,7 @@ namespace System.Text.Json
                     && first == JsonConstants.Slash
                 ) {
                     _trailingCommaBeforeComment = true;
-                    return
-                        SkipOrConsumeCommentMultiSegmentWithRollback()
+                    return SkipOrConsumeCommentMultiSegmentWithRollback()
                       ? ConsumeTokenResult.Success
                       : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
@@ -1879,8 +1877,7 @@ namespace System.Text.Json
                             first
                         );
                     }
-                    return
-                        ConsumePropertyNameMultiSegment()
+                    return ConsumePropertyNameMultiSegment()
                       ? ConsumeTokenResult.Success
                       : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
@@ -1898,8 +1895,7 @@ namespace System.Text.Json
                             ExceptionResource.TrailingCommaNotAllowedBeforeArrayEnd
                         );
                     }
-                    return
-                        ConsumeValueMultiSegment(first)
+                    return ConsumeValueMultiSegment(first)
                       ? ConsumeTokenResult.Success
                       : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
@@ -2444,8 +2440,7 @@ namespace System.Text.Json
                             marker
                         );
                     }
-                    return
-                        ConsumePropertyNameMultiSegment()
+                    return ConsumePropertyNameMultiSegment()
                       ? ConsumeTokenResult.Success
                       : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
@@ -2463,8 +2458,7 @@ namespace System.Text.Json
                             ExceptionResource.TrailingCommaNotAllowedBeforeArrayEnd
                         );
                     }
-                    return
-                        ConsumeValueMultiSegment(marker)
+                    return ConsumeValueMultiSegment(marker)
                       ? ConsumeTokenResult.Success
                       : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }

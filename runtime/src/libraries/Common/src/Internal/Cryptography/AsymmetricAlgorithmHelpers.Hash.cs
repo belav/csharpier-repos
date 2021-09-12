@@ -38,8 +38,7 @@ namespace Internal.Cryptography
 #if NET5_0_OR_GREATER
             ReadOnlySpan<byte> source = data.AsSpan(offset, count);
 
-            return
-                hashAlgorithm == HashAlgorithmName.SHA256
+            return hashAlgorithm == HashAlgorithmName.SHA256
               ? SHA256.HashData(source)
               : hashAlgorithm == HashAlgorithmName.SHA1
                   ? SHA1.HashData(source)
@@ -93,8 +92,7 @@ namespace Internal.Cryptography
             Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
 
 #if NET5_0_OR_GREATER
-            return
-                hashAlgorithm == HashAlgorithmName.SHA256
+            return hashAlgorithm == HashAlgorithmName.SHA256
               ? SHA256.TryHashData(source, destination, out bytesWritten)
               : hashAlgorithm == HashAlgorithmName.SHA1
                   ? SHA1.TryHashData(source, destination, out bytesWritten)

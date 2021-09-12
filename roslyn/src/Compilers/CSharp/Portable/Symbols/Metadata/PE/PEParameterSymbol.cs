@@ -1074,8 +1074,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         public sealed override bool Equals(Symbol other, TypeCompareKind compareKind)
         {
-            return
-                other is NativeIntegerParameterSymbol nps
+            return other is NativeIntegerParameterSymbol nps
               ? nps.Equals(this, compareKind)
               : base.Equals(other, compareKind);
         }

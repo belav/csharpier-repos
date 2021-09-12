@@ -2460,8 +2460,7 @@ namespace System.Globalization
             if (GlobalizationMode.Invariant)
                 return null!;
 
-            return
-                GlobalizationMode.UseNls
+            return GlobalizationMode.UseNls
               ? NlsGetLocaleInfo(localeName, type)
               : IcuGetLocaleInfo(localeName, type);
         }

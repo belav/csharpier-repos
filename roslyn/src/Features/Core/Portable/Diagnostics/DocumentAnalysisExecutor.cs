@@ -88,8 +88,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             if (analyzer == FileContentLoadAnalyzer.Instance)
             {
-                return
-                    loadDiagnostic != null
+                return loadDiagnostic != null
                   ? SpecializedCollections.SingletonEnumerable(
                         DiagnosticData.Create(loadDiagnostic, textDocument)
                     )
@@ -308,8 +307,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Interlocked.CompareExchange(ref _lazySyntaxDiagnostics, syntaxDiagnostics, null);
             }
 
-            return
-                _lazySyntaxDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
+            return _lazySyntaxDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
               ? diagnosticAnalysisResult.GetDocumentDiagnostics(
                     AnalysisScope.TextDocument.Id,
                     AnalysisScope.Kind
@@ -365,8 +363,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
             }
 
-            return
-                _lazySemanticDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
+            return _lazySemanticDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
               ? diagnosticAnalysisResult.GetDocumentDiagnostics(
                     AnalysisScope.TextDocument.Id,
                     AnalysisScope.Kind

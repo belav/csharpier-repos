@@ -46,8 +46,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             ISourceBlock<TInput> source,
             bool consumeToAccept
         ) {
-            return
-                OfferMessageDelegate != null
+            return OfferMessageDelegate != null
               ? OfferMessageDelegate(messageHeader, messageValue, source, consumeToAccept)
               : DataflowMessageStatus.Accepted;
         }
@@ -71,8 +70,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
         public IDisposable LinkTo(ITargetBlock<TOutput> target, DataflowLinkOptions linkOptions)
         {
-            return
-                LinkToDelegate != null
+            return LinkToDelegate != null
               ? LinkToDelegate(target, linkOptions)
               : new DelegateDisposable();
         }
@@ -83,8 +81,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             out bool messageConsumed
         ) {
             messageConsumed = false;
-            return
-                ConsumeMessageDelegate != null
+            return ConsumeMessageDelegate != null
               ? ConsumeMessageDelegate(messageHeader, target, out messageConsumed)
               : default(TOutput);
         }
@@ -93,8 +90,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
         ) {
-            return
-                ReserveMessageDelegate != null
+            return ReserveMessageDelegate != null
               ? ReserveMessageDelegate(messageHeader, target)
               : true;
         }
@@ -187,8 +183,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
         protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
         {
-            return
-                TryExecuteTaskInlineDelegate != null
+            return TryExecuteTaskInlineDelegate != null
               ? TryExecuteTaskInlineDelegate(task, taskWasPreviouslyQueued)
               : false;
         }

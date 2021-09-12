@@ -6754,8 +6754,7 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarOrderedEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarOrderedEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
           ? True()
           : False();
     }
@@ -6797,8 +6796,7 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarOrderedEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
+        return Sse2.CompareScalarOrderedEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
           ? True()
           : False();
     }
@@ -6840,8 +6838,7 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarOrderedNotEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarOrderedNotEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
           ? True()
           : False();
     }
@@ -6883,8 +6880,7 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarOrderedNotEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
+        return Sse2.CompareScalarOrderedNotEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
           ? True()
           : False();
     }
@@ -6926,8 +6922,7 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarOrderedLessThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarOrderedLessThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
           ? True()
           : False();
     }
@@ -6969,8 +6964,7 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarOrderedLessThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
+        return Sse2.CompareScalarOrderedLessThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
           ? True()
           : False();
     }
@@ -7012,8 +7006,7 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarOrderedLessThanOrEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarOrderedLessThanOrEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
           ? True()
           : False();
     }
@@ -7101,8 +7094,7 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarOrderedGreaterThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarOrderedGreaterThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
           ? True()
           : False();
     }
@@ -7144,8 +7136,7 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarOrderedGreaterThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
+        return Sse2.CompareScalarOrderedGreaterThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
           ? True()
           : False();
     }
@@ -7282,8 +7273,7 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarUnorderedEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarUnorderedEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
           ? True()
           : False();
     }
@@ -7325,8 +7315,7 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarUnorderedEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
+        return Sse2.CompareScalarUnorderedEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
           ? True()
           : False();
     }
@@ -7368,8 +7357,7 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarUnorderedNotEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarUnorderedNotEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
           ? True()
           : False();
     }
@@ -7411,8 +7399,7 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarUnorderedNotEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
+        return Sse2.CompareScalarUnorderedNotEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
           ? True()
           : False();
     }
@@ -7454,8 +7441,7 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarUnorderedLessThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarUnorderedLessThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
           ? True()
           : False();
     }
@@ -7497,8 +7483,7 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarUnorderedLessThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
+        return Sse2.CompareScalarUnorderedLessThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
           ? True()
           : False();
     }
@@ -7632,8 +7617,7 @@ class Program
         in Vector128<Single> x,
         in Vector128<Single> y
     ) {
-        return
-            Sse.CompareScalarUnorderedGreaterThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
+        return Sse.CompareScalarUnorderedGreaterThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
           ? True()
           : False();
     }
@@ -7675,8 +7659,7 @@ class Program
         in Vector128<Double> x,
         in Vector128<Double> y
     ) {
-        return
-            Sse2.CompareScalarUnorderedGreaterThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
+        return Sse2.CompareScalarUnorderedGreaterThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
           ? True()
           : False();
     }

@@ -401,8 +401,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 outputFilePath = @"Z:\";
             }
 
-            return
-                this.CompilationOptions == null
+            return this.CompilationOptions == null
               ? ""
               : Path.Combine(
                     outputFilePath,

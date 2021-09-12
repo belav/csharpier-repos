@@ -290,8 +290,7 @@ namespace System.Resources
 
                     // When data type cannot be cached
                     dataPos = resEntry.DataPosition;
-                    return
-                        isString
+                    return isString
                       ? reader.LoadString(dataPos)
                       : reader.LoadObject(dataPos, out _);
                 }

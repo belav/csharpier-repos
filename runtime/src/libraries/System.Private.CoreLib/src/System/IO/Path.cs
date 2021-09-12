@@ -79,13 +79,11 @@ namespace System.IO
 
             ReadOnlySpan<char> subpath = path.AsSpan(0, subLength);
 #if MS_IO_REDIST
-            return
-                extension.Length != 0 && extension[0] == '.'
+            return extension.Length != 0 && extension[0] == '.'
               ? StringExtensions.Concat(subpath, extension.AsSpan())
               : StringExtensions.Concat(subpath, ".".AsSpan(), extension.AsSpan());
 #else
-            return
-                extension.StartsWith('.')
+            return extension.StartsWith('.')
               ? string.Concat(subpath, extension)
               : string.Concat(subpath, ".", extension);
 #endif
@@ -108,8 +106,7 @@ namespace System.IO
                 return null;
 
             int end = GetDirectoryNameOffset(path.AsSpan());
-            return
-                end >= 0
+            return end >= 0
               ? PathInternal.NormalizeDirectorySeparators(path.Substring(0, end))
               : null;
         }
@@ -246,8 +243,7 @@ namespace System.IO
         {
             ReadOnlySpan<char> fileName = GetFileName(path);
             int lastPeriod = fileName.LastIndexOf('.');
-            return
-                lastPeriod == -1
+            return lastPeriod == -1
               ? fileName
               : // No extension was found
                 fileName.Slice(0, lastPeriod);
@@ -703,8 +699,7 @@ namespace System.IO
                 || PathInternal.IsDirectorySeparator(second[0]);
 
 #if !MS_IO_REDIST
-            return
-                hasSeparator
+            return hasSeparator
               ? string.Concat(first, second)
               : string.Concat(first, PathInternal.DirectorySeparatorCharAsString, second);
 #else

@@ -158,8 +158,7 @@ namespace System.Dynamic.Utils
                     uninstantiatedMethod = s_ActionThunks[parameters.Length];
                 }
 
-                return
-                    (thunkTypeArgs.Length > 0)
+                return (thunkTypeArgs.Length > 0)
                   ? uninstantiatedMethod.MakeGenericMethod(thunkTypeArgs)
                   : uninstantiatedMethod;
             }

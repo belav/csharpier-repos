@@ -799,8 +799,7 @@ namespace System.Net.Sockets
             Exception e = ExceptionDispatchInfo.SetCurrentStackTrace(
                 new SocketException((int)error)
             );
-            return
-                wrapExceptionsInIOExceptions
+            return wrapExceptionsInIOExceptions
               ? new IOException(SR.Format(SR.net_io_readwritefailure, e.Message), e)
               : e;
         }
@@ -1049,8 +1048,7 @@ namespace System.Net.Sockets
 
                 Release();
 
-                return
-                    error == SocketError.Success
+                return error == SocketError.Success
                   ? new ValueTask<int>(bytesTransferred)
                   : ValueTask.FromException<int>(CreateException(error));
             }
@@ -1076,8 +1074,7 @@ namespace System.Net.Sockets
 
                 Release();
 
-                return
-                    error == SocketError.Success
+                return error == SocketError.Success
                   ? new ValueTask<SocketReceiveFromResult>(
                         new SocketReceiveFromResult()
                         {
@@ -1111,8 +1108,7 @@ namespace System.Net.Sockets
 
                 Release();
 
-                return
-                    error == SocketError.Success
+                return error == SocketError.Success
                   ? new ValueTask<SocketReceiveMessageFromResult>(
                         new SocketReceiveMessageFromResult()
                         {
@@ -1145,8 +1141,7 @@ namespace System.Net.Sockets
 
                 Release();
 
-                return
-                    error == SocketError.Success
+                return error == SocketError.Success
                   ? new ValueTask<int>(bytesTransferred)
                   : ValueTask.FromException<int>(CreateException(error));
             }
@@ -1170,8 +1165,7 @@ namespace System.Net.Sockets
 
                 Release();
 
-                return
-                    error == SocketError.Success
+                return error == SocketError.Success
                   ? default
                   : ValueTask.FromException(CreateException(error));
             }
@@ -1194,8 +1188,7 @@ namespace System.Net.Sockets
 
                 Release();
 
-                return
-                    error == SocketError.Success
+                return error == SocketError.Success
                   ? new ValueTask<int>(bytesTransferred)
                   : ValueTask.FromException<int>(CreateException(error));
             }
@@ -1224,8 +1217,7 @@ namespace System.Net.Sockets
 
                 Release();
 
-                return
-                    error == SocketError.Success
+                return error == SocketError.Success
                   ? default
                   : ValueTask.FromException(CreateException(error));
             }
@@ -1238,8 +1230,7 @@ namespace System.Net.Sockets
                     ThrowIncorrectTokenException();
                 }
 
-                return
-                    !ReferenceEquals(_continuation, s_completedSentinel)
+                return !ReferenceEquals(_continuation, s_completedSentinel)
                   ? ValueTaskSourceStatus.Pending
                   : SocketError == SocketError.Success
                       ? ValueTaskSourceStatus.Succeeded
@@ -1491,8 +1482,7 @@ namespace System.Net.Sockets
                     e = ExceptionDispatchInfo.SetCurrentStackTrace(e);
                 }
 
-                return
-                    WrapExceptionsForNetworkStream
+                return WrapExceptionsForNetworkStream
                   ? new IOException(
                         SR.Format(
                             _isReadForCaching ? SR.net_io_readfailure : SR.net_io_writefailure,

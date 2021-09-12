@@ -110,8 +110,7 @@ namespace Microsoft.CodeAnalysis
                     // If we don't have any intermediate projects to process, just initialize our
                     // DeclarationState now. We'll pass false for generatedDocumentsAreFinal because this is being called
                     // if our referenced projects are changing, so we'll have to rerun to consume changes.
-                    return
-                        intermediateProjects.Length == 0
+                    return intermediateProjects.Length == 0
                       ? new FullDeclarationState(
                             compilation,
                             generatedDocuments,
@@ -128,8 +127,7 @@ namespace Microsoft.CodeAnalysis
                     Compilation compilation,
                     SolutionServices services
                 ) {
-                    return
-                        services.SupportsCachingRecoverableObjects
+                    return services.SupportsCachingRecoverableObjects
                       ? new WeakValueSource<Compilation>(compilation)
                       : (ValueSource<Optional<Compilation>>)new ConstantValueSource<
                             Optional<Compilation>

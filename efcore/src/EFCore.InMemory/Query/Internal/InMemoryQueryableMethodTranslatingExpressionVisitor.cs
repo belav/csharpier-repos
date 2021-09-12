@@ -292,8 +292,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             Check.NotNull(source, nameof(source));
             Check.NotNull(resultType, nameof(resultType));
 
-            return
-                source.ShaperExpression.Type != resultType
+            return source.ShaperExpression.Type != resultType
               ? source.UpdateShaperExpression(
                     Expression.Convert(source.ShaperExpression, resultType)
                 )
@@ -629,8 +628,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         return null;
                     }
 
-                    return
-                        translation.Type == expression.Type
+                    return translation.Type == expression.Type
                       ? translation
                       : Expression.Convert(translation, expression.Type);
             }
@@ -763,8 +761,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             var leftExpressions = new List<Expression>();
             var rightExpressions = new List<Expression>();
 
-            return
-                ProcessJoinCondition(joinCondition, leftExpressions, rightExpressions)
+            return ProcessJoinCondition(joinCondition, leftExpressions, rightExpressions)
               ? leftExpressions.Count == 1
                   ? (leftExpressions[0], rightExpressions[0])
                   : (
@@ -1561,8 +1558,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 preserveType
             );
 
-            return
-                lambdaBody != null
+            return lambdaBody != null
               ? Expression.Lambda(
                     lambdaBody,
                     (
@@ -1946,8 +1942,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             inMemoryQueryExpression.ConvertToEnumerable();
 
-            return
-                source.ShaperExpression.Type != returnType
+            return source.ShaperExpression.Type != returnType
               ? source.UpdateShaperExpression(
                     Expression.Convert(source.ShaperExpression, returnType)
                 )
@@ -1992,8 +1987,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             {
                 case EntityShaperExpression entityShaperExpression1
                       when shaper2 is EntityShaperExpression entityShaperExpression2:
-                    return
-                        entityShaperExpression1.IsNullable != entityShaperExpression2.IsNullable
+                    return entityShaperExpression1.IsNullable != entityShaperExpression2.IsNullable
                       ? entityShaperExpression1.MakeNullable(makeNullable)
                       : entityShaperExpression1;
 

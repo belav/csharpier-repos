@@ -12,8 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         internal static InternalSyntax.SyntaxList<T> ToGreenList<T>(this SyntaxNode node)
             where T : GreenNode
         {
-            return
-                node != null
+            return node != null
               ? ToGreenList<T>(node.Green)
               : default(InternalSyntax.SyntaxList<T>);
         }

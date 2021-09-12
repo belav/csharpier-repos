@@ -429,8 +429,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public GeneratedCodeAnalysisFlags GetGeneratedCodeAnalysisFlags(DiagnosticAnalyzer analyzer)
         {
             GeneratedCodeAnalysisFlags mode;
-            return
-                _generatedCodeConfigurationMap.TryGetValue(analyzer, out mode)
+            return _generatedCodeConfigurationMap.TryGetValue(analyzer, out mode)
               ? mode
               : AnalyzerDriver.DefaultGeneratedCodeAnalysisFlags;
         }

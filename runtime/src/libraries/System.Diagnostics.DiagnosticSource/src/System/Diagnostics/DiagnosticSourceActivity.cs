@@ -142,8 +142,7 @@ namespace System.Diagnostics
             Action<Activity, object?>? onActivityImport = null,
             Action<Activity, object?>? onActivityExport = null
         ) {
-            return
-                isEnabled == null
+            return isEnabled == null
               ? SubscribeInternal(observer, null, null, onActivityImport, onActivityExport)
               : SubscribeInternal(
                     observer,

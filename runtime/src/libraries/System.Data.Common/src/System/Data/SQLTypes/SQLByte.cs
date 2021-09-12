@@ -262,8 +262,7 @@ namespace System.Data.SqlTypes
         // Overloading comparison operators
         public static SqlBoolean operator ==(SqlByte x, SqlByte y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.m_value == y.m_value);
         }
@@ -285,16 +284,14 @@ namespace System.Data.SqlTypes
 
         public static SqlBoolean operator <=(SqlByte x, SqlByte y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.m_value <= y.m_value);
         }
 
         public static SqlBoolean operator >=(SqlByte x, SqlByte y)
         {
-            return
-                (x.IsNull || y.IsNull)
+            return (x.IsNull || y.IsNull)
               ? SqlBoolean.Null
               : new SqlBoolean(x.m_value >= y.m_value);
         }

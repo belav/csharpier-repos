@@ -42,16 +42,14 @@ namespace Newtonsoft.Json.Utilities
 
         public static Task? CancelIfRequestedAsync(this CancellationToken cancellationToken)
         {
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? FromCanceled(cancellationToken)
               : null;
         }
 
         public static Task<T>? CancelIfRequestedAsync<T>(this CancellationToken cancellationToken)
         {
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? FromCanceled<T>(cancellationToken)
               : null;
         }
@@ -83,8 +81,7 @@ namespace Newtonsoft.Json.Utilities
             CancellationToken cancellationToken
         ) {
             MiscellaneousUtils.Assert(writer != null);
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? FromCanceled(cancellationToken)
               : writer.WriteAsync(value);
         }
@@ -95,8 +92,7 @@ namespace Newtonsoft.Json.Utilities
             CancellationToken cancellationToken
         ) {
             MiscellaneousUtils.Assert(writer != null);
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? FromCanceled(cancellationToken)
               : writer.WriteAsync(value);
         }
@@ -109,8 +105,7 @@ namespace Newtonsoft.Json.Utilities
             CancellationToken cancellationToken
         ) {
             MiscellaneousUtils.Assert(writer != null);
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? FromCanceled(cancellationToken)
               : writer.WriteAsync(value, start, count);
         }
@@ -123,8 +118,7 @@ namespace Newtonsoft.Json.Utilities
             CancellationToken cancellationToken
         ) {
             MiscellaneousUtils.Assert(reader != null);
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? FromCanceled<int>(cancellationToken)
               : reader.ReadAsync(buffer, index, count);
         }

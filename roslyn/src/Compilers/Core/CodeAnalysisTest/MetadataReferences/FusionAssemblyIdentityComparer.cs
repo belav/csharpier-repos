@@ -78,8 +78,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                 default:
                     // Partial name was specified:
-                    return
-                        equivalent
+                    return equivalent
                       ? AssemblyIdentityComparer.ComparisonResult.Equivalent
                       : AssemblyIdentityComparer.ComparisonResult.NotEquivalent;
             }

@@ -156,8 +156,7 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return
-                startLine <= endLine
+            return startLine <= endLine
               ? text.GetSubText(
                         TextSpan.FromBounds(text.Lines[startLine].Start, text.Lines[endLine].End)
                     )

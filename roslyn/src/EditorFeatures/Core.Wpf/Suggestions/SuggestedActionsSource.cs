@@ -825,8 +825,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     ?? await refactoringTask.ConfigureAwait(false);
                 linkedTokenSource.Cancel();
 
-                return
-                    result == null
+                return result == null
                   ? null
                   : _suggestedActionCategoryRegistry.CreateSuggestedActionCategorySet(result);
             }

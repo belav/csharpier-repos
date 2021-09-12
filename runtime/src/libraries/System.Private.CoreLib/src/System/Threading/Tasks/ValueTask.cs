@@ -172,8 +172,7 @@ namespace System.Threading.Tasks
         {
             object? obj = _obj;
             Debug.Assert(obj == null || obj is Task || obj is IValueTaskSource);
-            return
-                obj == null
+            return obj == null
               ? Task.CompletedTask
               : obj as Task ?? GetTaskForValueTaskSource(Unsafe.As<IValueTaskSource>(obj));
         }

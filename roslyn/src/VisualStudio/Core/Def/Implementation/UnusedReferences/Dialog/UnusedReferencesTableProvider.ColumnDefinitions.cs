@@ -194,8 +194,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             public override IEntryBucket? CreateBucketForEntry(ITableEntryHandle entry)
             {
-                return
-                    entry.TryGetValue(UnusedReferencesTableKeyNames.ProjectName, out string name)
+                return entry.TryGetValue(UnusedReferencesTableKeyNames.ProjectName, out string name)
                   ? new ImageEntryBucket(GetImageMoniker(entry), name)
                   : null;
             }

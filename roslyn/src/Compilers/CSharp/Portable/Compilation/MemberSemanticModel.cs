@@ -1412,8 +1412,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             IOperation? guardedGetIOperation()
             {
                 _nodeMapLock.AssertCanRead();
-                return
-                    _guardedIOperationNodeMap.TryGetValue(node, out var operation)
+                return _guardedIOperationNodeMap.TryGetValue(node, out var operation)
                   ? operation
                   : null;
             }
@@ -1611,8 +1610,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return default(Optional<object>);
 
             ConstantValue constantValue = boundExpr.ConstantValue;
-            return
-                constantValue == null || constantValue.IsBad
+            return constantValue == null || constantValue.IsBad
               ? default(Optional<object>)
               : new Optional<object>(constantValue.Value);
         }
@@ -1822,8 +1820,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(_nodeMapLock.IsWriteLockHeld || _nodeMapLock.IsReadLockHeld);
             ImmutableArray<BoundNode> result;
-            return
-                _guardedBoundNodeMap.TryGetValue(node, out result)
+            return _guardedBoundNodeMap.TryGetValue(node, out result)
               ? result
               : default(ImmutableArray<BoundNode>);
         }
@@ -1834,8 +1831,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal ImmutableArray<BoundNode> TestOnlyTryGetBoundNodesFromMap(CSharpSyntaxNode node)
         {
             ImmutableArray<BoundNode> result;
-            return
-                _guardedBoundNodeMap.TryGetValue(node, out result)
+            return _guardedBoundNodeMap.TryGetValue(node, out result)
               ? result
               : default(ImmutableArray<BoundNode>);
         }
@@ -1864,8 +1860,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             ImmutableArray<BoundNode> result;
-            return
-                _guardedBoundNodeMap.TryGetValue(syntax, out result)
+            return _guardedBoundNodeMap.TryGetValue(syntax, out result)
               ? result
               : default(ImmutableArray<BoundNode>);
         }

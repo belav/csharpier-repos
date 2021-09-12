@@ -1155,8 +1155,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     return false;
                 }
 
-                return
-                    (item1.DocumentId != null)
+                return (item1.DocumentId != null)
                   ? item1.DocumentId == item2.DocumentId
                   : item1.DataLocation?.OriginalFilePath == item2.DataLocation?.OriginalFilePath;
             }
@@ -1186,8 +1185,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     )
                 );
 
-                return
-                    obj.DocumentId != null
+                return obj.DocumentId != null
                   ? Hash.Combine(obj.DocumentId, result)
                   : Hash.Combine(obj.DataLocation?.OriginalFilePath?.GetHashCode() ?? 0, result);
             }

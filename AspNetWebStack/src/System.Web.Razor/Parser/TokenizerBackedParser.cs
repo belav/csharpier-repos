@@ -46,8 +46,7 @@ namespace System.Web.Razor.Parser
         {
             get
             {
-                return
-                    (EndOfFile || CurrentSymbol == null)
+                return (EndOfFile || CurrentSymbol == null)
                   ? Context.Source.Location
                   : CurrentSymbol.Start;
             }

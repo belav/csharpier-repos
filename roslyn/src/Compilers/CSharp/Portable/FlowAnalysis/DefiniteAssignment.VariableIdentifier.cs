@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // MemberIndexOpt, if available, is a fast approach to comparing relative members,
                 // and is necessary in cases such as anonymous types where OriginalDefinition will be distinct.
                 int? thisIndex = Symbol.MemberIndexOpt;
-                return
-                    thisIndex.HasValue
+                return thisIndex.HasValue
                   ? Hash.Combine(thisIndex.GetValueOrDefault(), currentKey)
                   : Hash.Combine(Symbol.OriginalDefinition, currentKey);
             }

@@ -45,8 +45,7 @@ namespace System.Linq.Expressions
         internal static MemberExpression Make(Expression? expression, MemberInfo member)
         {
             FieldInfo? fi = member as FieldInfo;
-            return
-                fi == null
+            return fi == null
               ? (MemberExpression)Make(expression, (PropertyInfo)member)
               : Make(expression, fi);
         }

@@ -70,8 +70,7 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private string GetDisplayName()
         {
-            return
-                NameComparisonMode == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+            return NameComparisonMode == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
               ? string.Concat(Name, "...")
               : Name;
         }

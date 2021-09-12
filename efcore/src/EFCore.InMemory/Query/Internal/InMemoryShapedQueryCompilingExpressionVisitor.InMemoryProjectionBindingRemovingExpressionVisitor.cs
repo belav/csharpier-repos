@@ -159,8 +159,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 InMemoryQueryExpression queryExpression,
                 ProjectionBindingExpression projectionBindingExpression
             ) {
-                return
-                    projectionBindingExpression.ProjectionMember != null
+                return projectionBindingExpression.ProjectionMember != null
                   ? queryExpression.GetMappedProjection(
                             projectionBindingExpression.ProjectionMember
                         )

@@ -331,8 +331,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     )
                     .ConfigureAwait(false);
 
-                return
-                    IncludeSuppressedDiagnostics
+                return IncludeSuppressedDiagnostics
                   ? diagnostics
                   : diagnostics.WhereAsArray(d => !d.IsSuppressed);
             }

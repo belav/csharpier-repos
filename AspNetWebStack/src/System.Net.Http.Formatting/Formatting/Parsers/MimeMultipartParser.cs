@@ -657,8 +657,7 @@ namespace System.Net.Http.Formatting.Parsers
             {
                 get
                 {
-                    return
-                        (_boundaryLength - _boundaryOffset > 0)
+                    return (_boundaryLength - _boundaryOffset > 0)
                       ? _boundaryLength - _boundaryOffset
                       : _boundaryLength;
                 }

@@ -186,8 +186,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                     // this location.  Note that only the data for a row in our system can change, the ID will
                     // always stay the same, and the data will always be valid for our ID.  So there is no
                     // safety issue here.
-                    return
-                        TryGetRowId(connection, database, dataId, out var writeCacheRowId)
+                    return TryGetRowId(connection, database, dataId, out var writeCacheRowId)
                       ? readColumn(data, connection, database, writeCacheRowId)
                       : default;
                 }

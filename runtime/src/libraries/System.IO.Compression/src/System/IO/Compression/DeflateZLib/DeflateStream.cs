@@ -827,8 +827,7 @@ namespace System.IO.Compression
             EnsureNoActiveAsyncOperation();
             EnsureNotDisposed();
 
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? ValueTask.FromCanceled(cancellationToken)
               : Core(buffer, cancellationToken);
 

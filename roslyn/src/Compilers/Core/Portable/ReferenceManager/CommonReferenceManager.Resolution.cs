@@ -172,8 +172,7 @@ namespace Microsoft.CodeAnalysis
 
             private string GetDebuggerDisplay()
             {
-                return
-                    IsSkipped
+                return IsSkipped
                   ? "<skipped>"
                   : $"{(_kind == MetadataImageKind.Assembly ? "A" : "M")}[{Index}]:{DisplayAliases(_aliasesOpt, "aliases")}{DisplayAliases(_recursiveAliasesOpt, "recursive-aliases")}";
             }

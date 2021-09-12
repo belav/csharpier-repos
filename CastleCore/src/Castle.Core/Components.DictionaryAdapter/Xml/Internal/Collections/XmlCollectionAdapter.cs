@@ -133,8 +133,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             var node = cursor.Save();
             SetValue(cursor, default(T), ref value);
 
-            return
-                advisor.OnInserting(value)
+            return advisor.OnInserting(value)
               ? CommitInsert(index, node, value, append)
               : RollbackInsert();
         }

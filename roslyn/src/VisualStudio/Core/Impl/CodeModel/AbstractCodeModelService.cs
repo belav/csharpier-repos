@@ -307,8 +307,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
                 case SymbolKind.Property:
                     var propertySymbol = (IPropertySymbol)symbol;
-                    return
-                        propertySymbol.IsWithEvents
+                    return propertySymbol.IsWithEvents
                       ? (EnvDTE.CodeElement)ExternalCodeVariable.Create(
                             state,
                             projectId,

@@ -648,8 +648,7 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 if (checkStatement != null)
                 {
                     var statementIndex = blockStatementOpt.Operations.IndexOf(checkStatement);
-                    return
-                        statementIndex > 0
+                    return statementIndex > 0
                       ? blockStatementOpt.Operations[statementIndex - 1].Syntax
                       : null;
                 }

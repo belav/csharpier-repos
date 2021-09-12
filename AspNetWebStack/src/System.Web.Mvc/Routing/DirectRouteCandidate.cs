@@ -208,8 +208,7 @@ namespace System.Web.Mvc.Routing
                 }
             }
 
-            return
-                matchesWithActionSelectors.Any()
+            return matchesWithActionSelectors.Any()
               ? matchesWithActionSelectors
               : matchesWithoutActionSelectors;
         }

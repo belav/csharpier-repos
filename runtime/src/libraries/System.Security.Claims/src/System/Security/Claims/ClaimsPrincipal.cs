@@ -283,8 +283,7 @@ namespace System.Security.Claims
             // just accesses the current selected principal selector, doesn't set
             get
             {
-                return
-                    s_principalSelector is not null
+                return s_principalSelector is not null
                   ? s_principalSelector()
                   : SelectClaimsPrincipal();
             }

@@ -747,8 +747,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             SingleVariableDesignationSyntax designation,
             SyntaxNode nodeToBind
         ) {
-            return
-                designation == null
+            return designation == null
               ? null
               : GlobalExpressionVariable.Create(
                     _containingType,

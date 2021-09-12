@@ -762,8 +762,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 var type = (NamedTypeSymbol?)Visit(((CSharpCustomModifier)modifier).ModifierSymbol);
                 RoslynDebug.AssertNotNull(type);
 
-                return
-                    modifier.IsOptional
+                return modifier.IsOptional
                   ? CSharpCustomModifier.CreateOptional(type)
                   : CSharpCustomModifier.CreateRequired(type);
             }
@@ -1319,8 +1318,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     ((CSharpCustomModifier)modifier).ModifierSymbol
                 );
                 Debug.Assert((object)translatedType != null);
-                return
-                    modifier.IsOptional
+                return modifier.IsOptional
                   ? CSharpCustomModifier.CreateOptional(translatedType)
                   : CSharpCustomModifier.CreateRequired(translatedType);
             }

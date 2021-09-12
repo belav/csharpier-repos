@@ -488,8 +488,7 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 Debug.Assert(memberInfo is PropertyInfo || memberInfo is FieldInfo);
 
-                return
-                    memberInfo is PropertyInfo propertyInfo
+                return memberInfo is PropertyInfo propertyInfo
                   ? propertyInfo.PropertyType
                   : Unsafe.As<FieldInfo>(memberInfo).FieldType;
             }

@@ -263,8 +263,7 @@ namespace Microsoft.AspNetCore.Components
             // the synchronous part of OnParametersSetAsync has run.
             StateHasChanged();
 
-            return
-                shouldAwaitTask
+            return shouldAwaitTask
               ? CallStateHasChangedOnAsyncCompletion(task)
               : Task.CompletedTask;
         }
@@ -300,8 +299,7 @@ namespace Microsoft.AspNetCore.Components
             // at the end of every event callback.
             StateHasChanged();
 
-            return
-                shouldAwaitTask
+            return shouldAwaitTask
               ? CallStateHasChangedOnAsyncCompletion(task)
               : Task.CompletedTask;
         }

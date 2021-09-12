@@ -124,8 +124,7 @@ namespace System.Web.Mvc.Async
         protected override string GetCanonicalMethodName(MethodInfo methodInfo)
         {
             string methodName = methodInfo.Name;
-            return
-                (IsAsyncSuffixedMethod(methodInfo))
+            return (IsAsyncSuffixedMethod(methodInfo))
               ? methodName.Substring(0, methodName.Length - "Async".Length)
               : methodName;
         }

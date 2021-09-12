@@ -44,8 +44,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             Debug.Assert(!token.ContainsDiagnostics);
             if (token.Kind() == SyntaxKind.StringLiteralToken)
             {
-                return
-                    token.IsVerbatimStringLiteral()
+                return token.IsVerbatimStringLiteral()
                   ? TryConvertVerbatimStringToVirtualChars(token, "@\"", "\"", escapeBraces: false)
                   : TryConvertStringToVirtualChars(token, "\"", "\"", escapeBraces: false);
             }

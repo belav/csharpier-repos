@@ -28,22 +28,19 @@ namespace System.Globalization.Tests
             switch (localeName)
             {
                 case "en-US":
-                    return
-                        PlatformDetection.IsNlsGlobalization
+                    return PlatformDetection.IsNlsGlobalization
                       ? new int[] { 0 }
                       : new int[] { 1, 0 };
 
                 case "en-CA":
-                    return
-                        PlatformDetection.IsNlsGlobalization
+                    return PlatformDetection.IsNlsGlobalization
                       ? new int[] { 1 }
                       : new int[] { 1, 0 };
 
                 case "fa-IR":
                     if (PlatformDetection.IsNlsGlobalization)
                     {
-                        return
-                            (PlatformDetection.WindowsVersion < 10)
+                        return (PlatformDetection.WindowsVersion < 10)
                           ? new int[] { 3 }
                           : new int[] { 6, 3 };
                     }
@@ -65,8 +62,7 @@ namespace System.Globalization.Tests
                 case "fr-CD":
                     if (PlatformDetection.IsNlsGlobalization)
                     {
-                        return
-                            (PlatformDetection.WindowsVersion < 10)
+                        return (PlatformDetection.WindowsVersion < 10)
                           ? new int[] { 4 }
                           : new int[] { 8 };
                     }
@@ -76,8 +72,7 @@ namespace System.Globalization.Tests
                     }
 
                 case "as":
-                    return
-                        PlatformDetection.IsNlsGlobalization
+                    return PlatformDetection.IsNlsGlobalization
                       ? new int[] { 12 }
                       : new int[] { 9 };
 
@@ -91,8 +86,7 @@ namespace System.Globalization.Tests
                       : new int[] { 1 };
 
                 case "fr-CA":
-                    return
-                        PlatformDetection.IsNlsGlobalization
+                    return PlatformDetection.IsNlsGlobalization
                       ? new int[] { 15 }
                       : new int[] { 8, 15 };
             }

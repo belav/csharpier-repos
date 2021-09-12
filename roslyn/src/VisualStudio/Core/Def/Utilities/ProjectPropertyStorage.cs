@@ -35,8 +35,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
             var solution = (IVsSolution)serviceProvider.GetService(typeof(SVsSolution));
             solution.GetProjectOfUniqueName(project.UniqueName, out var hierarchy);
 
-            return
-                hierarchy.IsCapabilityMatch("CPS")
+            return hierarchy.IsCapabilityMatch("CPS")
               ? new BuildPropertyStorage((IVsBuildPropertyStorage)hierarchy)
               : new PerConfigurationPropertyStorage(project.ConfigurationManager)
                 as ProjectPropertyStorage;

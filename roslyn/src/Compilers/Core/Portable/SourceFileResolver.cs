@@ -113,8 +113,7 @@ namespace Microsoft.CodeAnalysis
                 baseFilePath,
                 _baseDirectory
             );
-            return
-                (normalizedPath == null || _pathMap.IsDefaultOrEmpty)
+            return (normalizedPath == null || _pathMap.IsDefaultOrEmpty)
               ? normalizedPath
               : PathUtilities.NormalizePathPrefix(normalizedPath, _pathMap);
         }

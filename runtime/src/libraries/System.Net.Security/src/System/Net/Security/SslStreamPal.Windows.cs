@@ -165,8 +165,7 @@ namespace System.Net.Security
             bool isServer
         ) {
             // New crypto API supports TLS1.3 but it does not allow to force NULL encryption.
-            return
-                !UseNewCryptoApi || policy == EncryptionPolicy.NoEncryption
+            return !UseNewCryptoApi || policy == EncryptionPolicy.NoEncryption
               ? AcquireCredentialsHandleSchannelCred(
                     certificateContext?.Certificate,
                     protocols,

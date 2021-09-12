@@ -161,8 +161,7 @@ namespace Newtonsoft.Json.Converters
 #if HAVE_DATE_TIME_OFFSET
                 if (t == typeof(DateTimeOffset))
                 {
-                    return
-                        (reader.Value is DateTimeOffset)
+                    return (reader.Value is DateTimeOffset)
                       ? reader.Value
                       : new DateTimeOffset((DateTime)reader.Value!);
                 }

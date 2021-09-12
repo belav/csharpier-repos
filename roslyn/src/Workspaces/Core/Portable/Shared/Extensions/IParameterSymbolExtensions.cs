@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this IParameterSymbol parameter,
             string parameterName
         ) {
-            return
-                parameter.Name == parameterName
+            return parameter.Name == parameterName
               ? parameter
               : CodeGenerationSymbolFactory.CreateParameterSymbol(
                     parameter.GetAttributes(),
@@ -34,8 +33,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this IParameterSymbol parameter,
             ImmutableArray<AttributeData> attributes
         ) {
-            return
-                parameter.GetAttributes() == attributes
+            return parameter.GetAttributes() == attributes
               ? parameter
               : CodeGenerationSymbolFactory.CreateParameterSymbol(
                     attributes,

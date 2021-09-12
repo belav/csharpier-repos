@@ -138,8 +138,7 @@ namespace System.Xml
                 await FinishReadElementContentAsXxxAsync().ConfigureAwait(false);
                 return value;
             }
-            return
-                (returnType == typeof(string))
+            return (returnType == typeof(string))
               ? string.Empty
               : XmlUntypedConverter.Untyped.ChangeType(string.Empty, returnType, namespaceResolver);
         }

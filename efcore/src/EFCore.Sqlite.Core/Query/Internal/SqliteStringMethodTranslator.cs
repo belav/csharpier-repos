@@ -395,8 +395,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     return _sqlExpressionFactory.Constant(true);
                 }
 
-                return
-                    constantString.Any(c => IsLikeWildChar(c))
+                return constantString.Any(c => IsLikeWildChar(c))
                   ? _sqlExpressionFactory.Like(
                         instance,
                         _sqlExpressionFactory.Constant(

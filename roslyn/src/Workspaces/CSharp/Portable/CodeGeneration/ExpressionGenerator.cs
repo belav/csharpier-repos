@@ -35,16 +35,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     );
 
                 case TypedConstantKind.Type:
-                    return
-                        typedConstant.Value is ITypeSymbol
+                    return typedConstant.Value is ITypeSymbol
                       ? SyntaxFactory.TypeOfExpression(
                             ((ITypeSymbol)typedConstant.Value).GenerateTypeSyntax()
                         )
                       : GenerateNullLiteral();
 
                 case TypedConstantKind.Array:
-                    return
-                        typedConstant.IsNull
+                    return typedConstant.IsNull
                       ? GenerateNullLiteral()
                       : SyntaxFactory.ImplicitArrayCreationExpression(
                             SyntaxFactory.InitializerExpression(
@@ -453,8 +451,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 tokenFactory(stringValue, nonNegativeValue)
             );
 
-            return
-                negative
+            return negative
               ? SyntaxFactory.PrefixUnaryExpression(SyntaxKind.UnaryMinusExpression, literal)
               : (ExpressionSyntax)literal;
         }

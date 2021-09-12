@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
         {
             get
             {
-                return
-                    _argument.IsKind(SyntaxKind.Argument, out ArgumentSyntax argument)
+                return _argument.IsKind(SyntaxKind.Argument, out ArgumentSyntax argument)
                   ? argument.NameColon
                   : ((AttributeArgumentSyntax)_argument).NameColon;
             }
@@ -45,8 +44,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
         {
             Debug.Assert(nameColonSyntax is NameColonSyntax);
 
-            return
-                _argument.IsKind(SyntaxKind.Argument, out ArgumentSyntax argument)
+            return _argument.IsKind(SyntaxKind.Argument, out ArgumentSyntax argument)
               ? Create(argument.WithNameColon((NameColonSyntax)nameColonSyntax))
               : Create(
                     ((AttributeArgumentSyntax)_argument).WithNameColon(
@@ -62,8 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
 
         public IUnifiedArgumentSyntax WithName(string name)
         {
-            return
-                _argument.IsKind(SyntaxKind.Argument, out ArgumentSyntax argument)
+            return _argument.IsKind(SyntaxKind.Argument, out ArgumentSyntax argument)
               ? Create(
                     argument.WithNameColon(
                         SyntaxFactory.NameColon(SyntaxFactory.IdentifierName(name))
@@ -83,8 +80,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
         {
             get
             {
-                return
-                    _argument.IsKind(SyntaxKind.Argument, out ArgumentSyntax argument)
+                return _argument.IsKind(SyntaxKind.Argument, out ArgumentSyntax argument)
                   ? argument.Expression
                   : ((AttributeArgumentSyntax)_argument).Expression;
             }

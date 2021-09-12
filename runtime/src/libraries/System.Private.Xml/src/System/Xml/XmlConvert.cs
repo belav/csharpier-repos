@@ -2103,8 +2103,7 @@ namespace System.Xml
             string? name,
             string? argumentName
         ) {
-            return
-                (name == null)
+            return (name == null)
               ? new ArgumentNullException(argumentName)
               : new ArgumentException(SR.Xml_EmptyName, argumentName);
         }

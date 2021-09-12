@@ -365,8 +365,7 @@ namespace System.Reflection.Context.Delegation
             ParameterModifier[] modifiers
         ) {
             // Unfortunately we cannot directly call the protected GetMethodImpl on _typeInfo.
-            return
-                (types == null)
+            return (types == null)
               ? _typeInfo.GetMethod(name, bindingAttr)
               : _typeInfo.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
         }

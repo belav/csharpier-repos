@@ -17,8 +17,7 @@ namespace System.Globalization
                 return true;
             }
 
-            return
-                GlobalizationMode.UseNls
+            return GlobalizationMode.UseNls
               ? NlsIsNormalized(strInput, normalizationForm)
               : IcuIsNormalized(strInput, normalizationForm);
         }
@@ -32,8 +31,7 @@ namespace System.Globalization
                 return strInput;
             }
 
-            return
-                GlobalizationMode.UseNls
+            return GlobalizationMode.UseNls
               ? NlsNormalize(strInput, normalizationForm)
               : IcuNormalize(strInput, normalizationForm);
         }

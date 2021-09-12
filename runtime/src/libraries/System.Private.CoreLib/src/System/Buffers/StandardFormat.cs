@@ -114,8 +114,7 @@ namespace System.Buffers
                     uint digit = format[srcIndex] - 48u; // '0'
                     if (digit > 9)
                     {
-                        return
-                            throws
+                        return throws
                           ? throw new FormatException(
                                 SR.Format(SR.Argument_CannotParsePrecision, MaxPrecision)
                             )
@@ -124,8 +123,7 @@ namespace System.Buffers
                     parsedPrecision = parsedPrecision * 10 + digit;
                     if (parsedPrecision > MaxPrecision)
                     {
-                        return
-                            throws
+                        return throws
                           ? throw new FormatException(
                                 SR.Format(SR.Argument_PrecisionTooLarge, MaxPrecision)
                             )

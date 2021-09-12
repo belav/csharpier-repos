@@ -694,8 +694,7 @@ namespace Microsoft.AspNetCore.Components.Rendering
         private RenderTreeFrameType? GetCurrentParentFrameType()
         {
             var parentIndex = GetCurrentParentFrameIndex();
-            return
-                parentIndex.HasValue
+            return parentIndex.HasValue
               ? _entries.Buffer[parentIndex.Value].FrameTypeField
               : (RenderTreeFrameType?)null;
         }

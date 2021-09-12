@@ -272,8 +272,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(entityType, nameof(entityType));
 
-            return
-                entityType != EntityType
+            return entityType != EntityType
               ? new EntityShaperExpression(entityType, ValueBufferExpression, IsNullable)
               : this;
         }
@@ -306,8 +305,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(valueBufferExpression, nameof(valueBufferExpression));
 
-            return
-                valueBufferExpression != ValueBufferExpression
+            return valueBufferExpression != ValueBufferExpression
               ? new EntityShaperExpression(
                     EntityType,
                     valueBufferExpression,

@@ -326,8 +326,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     return null;
 
                 case ProjectionBindingExpression projectionBindingExpression:
-                    return
-                        projectionBindingExpression.ProjectionMember != null
+                    return projectionBindingExpression.ProjectionMember != null
                       ? (
                             (SelectExpression)projectionBindingExpression.QueryExpression
                         ).GetMappedProjection(projectionBindingExpression.ProjectionMember)
@@ -724,8 +723,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     var concreteEntityTypes = derivedType.GetConcreteDerivedTypesInclusive()
                         .ToList();
 
-                    return
-                        concreteEntityTypes.Count == 1
+                    return concreteEntityTypes.Count == 1
                       ? _sqlExpressionFactory.Equal(
                             discriminatorColumn,
                             _sqlExpressionFactory.Constant(
@@ -1081,8 +1079,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             IProperty property
         ) {
             var baseParameter = context.ParameterValues[baseParameterName];
-            return
-                baseParameter == null
+            return baseParameter == null
               ? (T)(object)null
               : (T)property.GetGetter().GetClrValue(baseParameter);
         }

@@ -268,8 +268,7 @@ namespace System.Globalization
 
             Debug.Assert(!string.IsNullOrEmpty(userOverride));
 
-            return
-                userOverride != icuFormatString
+            return userOverride != icuFormatString
               ? new string[] { userOverride, icuFormatString }
               : new string[] { userOverride };
         }

@@ -122,8 +122,7 @@ namespace Microsoft.CodeAnalysis
         {
             var culture = formatProvider as CultureInfo ?? CultureInfo.CurrentUICulture;
             var resourceString = _resourceManager.GetString(_nameOfLocalizableResource, culture);
-            return
-                resourceString != null
+            return resourceString != null
               ? (
                     _formatArguments.Length > 0
                         ? string.Format(resourceString, _formatArguments)

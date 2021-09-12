@@ -1632,8 +1632,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityBuilder.Metadata.Model.ConventionDispatcher
             );
             CreateRelationshipDiscoveryConvention().ProcessEntityTypeAdded(entityBuilder, context);
-            return
-                context.ShouldStopProcessing()
+            return context.ShouldStopProcessing()
               ? (InternalEntityTypeBuilder)context.Result
               : entityBuilder;
         }

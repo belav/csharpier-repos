@@ -1821,8 +1821,7 @@ namespace System.Xml
                         return prefix;
                     }
                 }
-                return
-                    (_predefinedNamespaces != null)
+                return (_predefinedNamespaces != null)
                   ? _predefinedNamespaces.LookupPrefix(ns)
                   : null;
             }
@@ -2623,8 +2622,7 @@ namespace System.Xml
                     return _nsStack[i].namespaceUri;
                 }
             }
-            return
-                (_predefinedNamespaces != null)
+            return (_predefinedNamespaces != null)
               ? _predefinedNamespaces.LookupNamespace(prefix)
               : null;
         }

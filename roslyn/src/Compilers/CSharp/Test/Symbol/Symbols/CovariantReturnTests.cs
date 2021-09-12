@@ -573,8 +573,7 @@ namespace System.Runtime.CompilerServices
             CSharpCompilationOptions options = null,
             CSharpParseOptions parseOptions = null
         ) {
-            return
-                withCovariantReturns
+            return withCovariantReturns
               ? CreateCompilationWithCovariantReturns(
                     source,
                     references,

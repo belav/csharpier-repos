@@ -307,8 +307,7 @@ namespace System.Threading
                 throw new ArgumentNullException(nameof(callback));
 
             CancellationTokenSource? source = _source;
-            return
-                source != null
+            return source != null
               ? source.Register(
                     callback,
                     state,

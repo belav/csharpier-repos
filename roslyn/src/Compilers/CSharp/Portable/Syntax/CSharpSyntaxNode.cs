@@ -449,8 +449,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     curr.Kind() == SyntaxKind.XmlCrefAttribute
                     || curr.Kind() == SyntaxKind.XmlNameAttribute
                 ) {
-                    return
-                        LookupPosition.IsInXmlAttributeValue(position, (XmlAttributeSyntax)curr)
+                    return LookupPosition.IsInXmlAttributeValue(position, (XmlAttributeSyntax)curr)
                       ? triviaToken
                       : nonTriviaToken;
                 }

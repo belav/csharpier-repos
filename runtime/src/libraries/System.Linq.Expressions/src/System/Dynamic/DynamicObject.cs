@@ -538,13 +538,11 @@ namespace System.Dynamic
             ) where TBinder : DynamicMetaObjectBinder
             {
                 if (!object.ReferenceEquals(parameters, s_noArgs))
-                    return
-                        arg1 != null
+                    return arg1 != null
                       ? new Expression[] { Constant(binder), arg0, arg1 }
                       : new Expression[] { Constant(binder), arg0 };
                 else
-                    return
-                        arg1 != null
+                    return arg1 != null
                       ? new Expression[] { Constant(binder), arg1 }
                       : new Expression[] { Constant(binder) };
             }

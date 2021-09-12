@@ -231,8 +231,7 @@ namespace Microsoft.Extensions.Configuration.Xml
         private static string GetLineInfo(XmlReader reader)
         {
             var lineInfo = reader as IXmlLineInfo;
-            return
-                lineInfo == null
+            return lineInfo == null
               ? string.Empty
               : SR.Format(SR.Msg_LineInfo, lineInfo.LineNumber, lineInfo.LinePosition);
         }

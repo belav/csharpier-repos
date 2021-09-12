@@ -52,8 +52,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 closedModelType,
                 openModelType
             );
-            return
-                (typeArguments != null)
+            return (typeArguments != null)
               ? (IExtensibleModelBinder)Activator.CreateInstance(
                     openBinderType.MakeGenericType(typeArguments)
                 )

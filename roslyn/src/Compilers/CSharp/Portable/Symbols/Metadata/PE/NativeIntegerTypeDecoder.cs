@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             EntityHandle handle,
             PEModuleSymbol containingModule
         ) {
-            return
-                containingModule.Module.HasNativeIntegerAttribute(handle, out var transformFlags)
+            return containingModule.Module.HasNativeIntegerAttribute(handle, out var transformFlags)
               ? TransformType(type, transformFlags)
               : type;
         }

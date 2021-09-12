@@ -16,8 +16,7 @@ namespace System.Configuration
         ) {
             ValidateType(value, typeof(TimeSpan));
 
-            return
-                (TimeSpan)value == TimeSpan.MaxValue
+            return (TimeSpan)value == TimeSpan.MaxValue
               ? "Infinite"
               : base.ConvertTo(ctx, ci, value, type);
         }

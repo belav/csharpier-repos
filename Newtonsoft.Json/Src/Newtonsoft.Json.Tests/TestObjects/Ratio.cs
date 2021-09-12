@@ -136,8 +136,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public string ToString(IFormatProvider provider)
         {
-            return
-                _denominator == 1
+            return _denominator == 1
               ? _numerator.ToString(provider)
               : _numerator.ToString(provider) + "/" + _denominator.ToString(provider);
         }

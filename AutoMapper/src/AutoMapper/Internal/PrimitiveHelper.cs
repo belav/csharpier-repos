@@ -19,8 +19,7 @@ namespace AutoMapper.Internal
             {
                 return otherCollection;
             }
-            return
-                otherCollection.Count == 0
+            return otherCollection.Count == 0
               ? collection
               : Enumerable.Concat(collection, otherCollection);
         }

@@ -804,8 +804,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     newApplicableDiagnostics.Add(diagnostic);
                 }
 
-                return
-                    newApplicableDiagnostics.Count == applicableDiagnostics.Length
+                return newApplicableDiagnostics.Count == applicableDiagnostics.Length
                   ? applicableDiagnostics
                   : newApplicableDiagnostics.ToImmutable();
             }
@@ -1401,8 +1400,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Project project
         ) {
             // TODO (https://github.com/dotnet/roslyn/issues/4932): Don't restrict CodeFixes in Interactive
-            return
-                project.Solution.Workspace.Kind == WorkspaceKind.Interactive
+            return project.Solution.Workspace.Kind == WorkspaceKind.Interactive
               ? ImmutableDictionary<DiagnosticId, List<CodeFixProvider>>.Empty
               : _projectFixersMap.GetValue(
                     project.AnalyzerReferences,

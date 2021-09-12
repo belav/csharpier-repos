@@ -27,8 +27,7 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
                 .ConfigureAwait(false);
 
             // Try to compute source definitions from symbol.
-            return
-                symbol != null
+            return symbol != null
               ? NavigableItemFactory.GetItemsFromPreferredSourceLocations(
                     document.Project.Solution,
                     symbol,

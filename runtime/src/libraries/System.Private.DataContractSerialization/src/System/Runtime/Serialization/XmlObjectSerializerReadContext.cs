@@ -795,8 +795,7 @@ namespace System.Runtime.Serialization
         {
             Debug.Assert(attributes != null);
 
-            return
-                (attributes.XsiTypeName == null)
+            return (attributes.XsiTypeName == null)
               ? null
               : ResolveDataContractFromKnownTypes(
                     attributes.XsiTypeName,

@@ -119,8 +119,7 @@ namespace Microsoft.CodeAnalysis.Text
             int overlapStart = Math.Max(Start, span.Start);
             int overlapEnd = Math.Min(this.End, span.End);
 
-            return
-                overlapStart < overlapEnd
+            return overlapStart < overlapEnd
               ? TextSpan.FromBounds(overlapStart, overlapEnd)
               : (TextSpan?)null;
         }
@@ -171,8 +170,7 @@ namespace Microsoft.CodeAnalysis.Text
             int intersectStart = Math.Max(Start, span.Start);
             int intersectEnd = Math.Min(this.End, span.End);
 
-            return
-                intersectStart <= intersectEnd
+            return intersectStart <= intersectEnd
               ? TextSpan.FromBounds(intersectStart, intersectEnd)
               : (TextSpan?)null;
         }

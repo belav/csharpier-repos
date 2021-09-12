@@ -829,28 +829,23 @@ namespace System.Xml.Xsl.XPath
                                 T.DoubleX
                             );
                         case FuncId.LocalName:
-                            return
-                                args.Count == 0
+                            return args.Count == 0
                               ? _f.LocalNameOf(GetCurrentNode())
                               : LocalNameOfFirstNode(args[0]);
                         case FuncId.NamespaceUri:
-                            return
-                                args.Count == 0
+                            return args.Count == 0
                               ? _f.NamespaceUriOf(GetCurrentNode())
                               : NamespaceOfFirstNode(args[0]);
                         case FuncId.Name:
-                            return
-                                args.Count == 0
+                            return args.Count == 0
                               ? NameOf(GetCurrentNode())
                               : NameOfFirstNode(args[0]);
                         case FuncId.String:
-                            return
-                                args.Count == 0
+                            return args.Count == 0
                               ? _f.XPathNodeValue(GetCurrentNode())
                               : _f.ConvertToString(args[0]);
                         case FuncId.Number:
-                            return
-                                args.Count == 0
+                            return args.Count == 0
                               ? _f.XsltConvert(_f.XPathNodeValue(GetCurrentNode()), T.DoubleX)
                               : _f.ConvertToNumber(args[0]);
                         case FuncId.Boolean:
@@ -872,8 +867,7 @@ namespace System.Xml.Xsl.XPath
                         case FuncId.SubstringAfter:
                             return _f.InvokeSubstringAfter(args[0], args[1]);
                         case FuncId.Substring:
-                            return
-                                args.Count == 2
+                            return args.Count == 2
                               ? _f.InvokeSubstring(args[0], args[1])
                               : _f.InvokeSubstring(args[0], args[1], args[2]);
                         case FuncId.StringLength:

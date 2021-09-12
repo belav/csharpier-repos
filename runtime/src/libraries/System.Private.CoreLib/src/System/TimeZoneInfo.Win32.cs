@@ -45,8 +45,7 @@ namespace System
                 uint result = Interop.Kernel32.GetTimeZoneInformation(
                     out TIME_ZONE_INFORMATION timeZoneInformation
                 );
-                return
-                    result == Interop.Kernel32.TIME_ZONE_ID_INVALID
+                return result == Interop.Kernel32.TIME_ZONE_ID_INVALID
                   ? CreateCustomTimeZone(LocalId, TimeSpan.Zero, LocalId, LocalId)
                   : GetLocalTimeZoneFromWin32Data(timeZoneInformation, dstDisabled: false);
             }
@@ -965,8 +964,7 @@ namespace System
                         ref fileMuiPathLength,
                         ref enumerator
                     );
-                    return
-                        succeeded
+                    return succeeded
                       ? TryGetLocalizedNameByNativeResource(
                             new string(fileMuiPath, 0, fileMuiPathLength),
                             resourceId

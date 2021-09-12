@@ -356,8 +356,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             {
                 var span = trivia.FullSpan;
 
-                return
-                    trivia.IsCompleteMultiLineComment()
+                return trivia.IsCompleteMultiLineComment()
                   ? position > span.Start && position < span.End
                   : position > span.Start && position <= span.End;
             }

@@ -1043,8 +1043,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                return
-                    matchingRefParameters.Count > 0
+                return matchingRefParameters.Count > 0
                   ? matchingRefParameters.ToImmutable()
                   : allParameters.ToImmutable();
             }
@@ -2283,8 +2282,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             private ITypeSymbol InferTypeForFirstParameterOfParenthesizedLambda(
                 ParenthesizedLambdaExpressionSyntax lambdaExpression
             ) {
-                return
-                    lambdaExpression.ParameterList.Parameters.Count == 0
+                return lambdaExpression.ParameterList.Parameters.Count == 0
                   ? null
                   : InferTypeForFirstParameterOfLambda(
                         lambdaExpression,
@@ -2543,8 +2541,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     n => n.IsReturnableConstruct()
                 );
 
-                return
-                    ancestor is AnonymousFunctionExpressionSyntax anonymousFunction
+                return ancestor is AnonymousFunctionExpressionSyntax anonymousFunction
                   ? InferTypeInAnonymousFunctionExpression(anonymousFunction)
                   : InferTypeInMethodLikeDeclaration(ancestor);
             }
@@ -2562,8 +2559,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var type = symbol.GetMemberType();
                 var isAsync = symbol is IMethodSymbol methodSymbol && methodSymbol.IsAsync;
 
-                return
-                    type != null
+                return type != null
                   ? SpecializedCollections.SingletonEnumerable(
                         new TypeInferenceInfo(UnwrapTaskLike(type, isAsync))
                     )
@@ -2588,8 +2584,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return originalSemanticModel.GetDeclaredSymbol(declaration, CancellationToken);
                 }
 
-                return
-                    declarationInCurrentTree != null
+                return declarationInCurrentTree != null
                   ? currentSemanticModel.GetDeclaredSymbol(
                         declarationInCurrentTree,
                         CancellationToken

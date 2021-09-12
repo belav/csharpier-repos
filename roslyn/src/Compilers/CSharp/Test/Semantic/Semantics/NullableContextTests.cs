@@ -960,8 +960,7 @@ static class B
             NullableContextState.State currentState,
             NullableContextState.State previousState
         ) {
-            return
-                currentState == NullableContextState.State.Unknown
+            return currentState == NullableContextState.State.Unknown
               ? previousState
               : currentState;
         }

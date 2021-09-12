@@ -1445,8 +1445,7 @@ namespace System.Threading.Tasks
         /// <returns>The current task if there is one and if AttachToParent is in the options; otherwise, null.</returns>
         internal static Task? InternalCurrentIfAttached(TaskCreationOptions creationOptions)
         {
-            return
-                (creationOptions & TaskCreationOptions.AttachedToParent) != 0
+            return (creationOptions & TaskCreationOptions.AttachedToParent) != 0
               ? InternalCurrent
               : null;
         }
@@ -6653,8 +6652,7 @@ namespace System.Threading.Tasks
         private static Task InternalWhenAll(Task[] tasks)
         {
             Debug.Assert(tasks != null, "Expected a non-null tasks array");
-            return
-                (tasks.Length == 0)
+            return (tasks.Length == 0)
               ? // take shortcut if there are no tasks upon which to wait
                 Task.CompletedTask
               : new WhenAllPromise(tasks);
@@ -6926,8 +6924,7 @@ namespace System.Threading.Tasks
         private static Task<TResult[]> InternalWhenAll<TResult>(Task<TResult>[] tasks)
         {
             Debug.Assert(tasks != null, "Expected a non-null tasks array");
-            return
-                (tasks.Length == 0)
+            return (tasks.Length == 0)
               ? // take shortcut if there are no tasks upon which to wait
                 new Task<TResult[]>(false, Array.Empty<TResult>(), TaskCreationOptions.None, default)
               : new WhenAllPromise<TResult>(tasks);

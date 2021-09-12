@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         internal CodeGenerationSymbol WithAdditionalAnnotations(
             params SyntaxAnnotation[] annotations
         ) {
-            return
-                annotations.IsNullOrEmpty()
+            return annotations.IsNullOrEmpty()
               ? this
               : AddAnnotationsTo(this, this.Clone(), annotations);
         }

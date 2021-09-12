@@ -131,8 +131,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
         private string GetShortName(IntermediateNode node)
         {
             var typeName = node.GetType().Name;
-            return
-                typeName.EndsWith(nameof(IntermediateNode), StringComparison.Ordinal)
+            return typeName.EndsWith(nameof(IntermediateNode), StringComparison.Ordinal)
               ? typeName.Substring(0, typeName.Length - nameof(IntermediateNode).Length)
               : typeName;
         }

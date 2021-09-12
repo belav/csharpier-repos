@@ -1865,8 +1865,7 @@ namespace System.Text.Json
                 {
                     if (marker == JsonConstants.Slash)
                     {
-                        return
-                            ConsumeComment()
+                        return ConsumeComment()
                           ? ConsumeTokenResult.Success
                           : ConsumeTokenResult.NotEnoughDataRollBackState;
                     }
@@ -1930,8 +1929,7 @@ namespace System.Text.Json
                     && first == JsonConstants.Slash
                 ) {
                     _trailingCommaBeforeComment = true;
-                    return
-                        ConsumeComment()
+                    return ConsumeComment()
                       ? ConsumeTokenResult.Success
                       : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
@@ -1958,8 +1956,7 @@ namespace System.Text.Json
                             first
                         );
                     }
-                    return
-                        ConsumePropertyName()
+                    return ConsumePropertyName()
                       ? ConsumeTokenResult.Success
                       : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
@@ -1977,8 +1974,7 @@ namespace System.Text.Json
                             ExceptionResource.TrailingCommaNotAllowedBeforeArrayEnd
                         );
                     }
-                    return
-                        ConsumeValue(first)
+                    return ConsumeValue(first)
                       ? ConsumeTokenResult.Success
                       : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
@@ -2486,8 +2482,7 @@ namespace System.Text.Json
                             marker
                         );
                     }
-                    return
-                        ConsumePropertyName()
+                    return ConsumePropertyName()
                       ? ConsumeTokenResult.Success
                       : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
@@ -2506,8 +2501,7 @@ namespace System.Text.Json
                         );
                     }
 
-                    return
-                        ConsumeValue(marker)
+                    return ConsumeValue(marker)
                       ? ConsumeTokenResult.Success
                       : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }

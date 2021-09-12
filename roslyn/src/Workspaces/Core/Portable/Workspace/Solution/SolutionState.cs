@@ -1836,8 +1836,7 @@ namespace Microsoft.CodeAnalysis
                 return ImmutableArray<DocumentId>.Empty;
             }
 
-            return
-                _filePathToDocumentIdsMap.TryGetValue(filePath!, out var documentIds)
+            return _filePathToDocumentIdsMap.TryGetValue(filePath!, out var documentIds)
               ? documentIds
               : ImmutableArray<DocumentId>.Empty;
         }
@@ -2144,8 +2143,7 @@ namespace Microsoft.CodeAnalysis
             ProjectState project,
             CancellationToken cancellationToken
         ) {
-            return
-                project.SupportsCompilation
+            return project.SupportsCompilation
               ? GetCompilationTracker(project.Id)
                     .GetCompilationAsync(this, cancellationToken)
                     .AsNullable()
@@ -2161,8 +2159,7 @@ namespace Microsoft.CodeAnalysis
         ) {
             // return HasAllInformation when compilation is not supported.
             // regardless whether project support compilation or not, if projectInfo is not complete, we can't guarantee its reference completeness
-            return
-                project.SupportsCompilation
+            return project.SupportsCompilation
               ? this.GetCompilationTracker(project.Id)
                     .HasSuccessfullyLoadedAsync(this, cancellationToken)
               : project.HasAllInformation ? SpecializedTasks.True : SpecializedTasks.False;
@@ -2177,8 +2174,7 @@ namespace Microsoft.CodeAnalysis
             ProjectState project,
             CancellationToken cancellationToken
         ) {
-            return
-                project.SupportsCompilation
+            return project.SupportsCompilation
               ? GetCompilationTracker(project.Id)
                     .GetSourceGeneratedDocumentStatesAsync(this, cancellationToken)
               : new(TextDocumentStates<SourceGeneratedDocumentState>.Empty);

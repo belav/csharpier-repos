@@ -56,8 +56,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 )!;
             }
 
-            return
-                principalType.IsNullableType()
+            return principalType.IsNullableType()
               ? (IDependentKeyValueFactory<TKey>)Activator.CreateInstance(
                     typeof(SimpleNullablePrincipalDependentKeyValueFactory<, >).MakeGenericType(
                         typeof(TKey),

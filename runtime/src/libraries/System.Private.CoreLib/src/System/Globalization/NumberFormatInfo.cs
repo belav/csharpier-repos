@@ -229,8 +229,7 @@ namespace System.Globalization
 
         public static NumberFormatInfo GetInstance(IFormatProvider? formatProvider)
         {
-            return
-                formatProvider == null
+            return formatProvider == null
               ? CurrentInfo
               : // Fast path for a null provider
                 GetProviderNonNull(formatProvider);

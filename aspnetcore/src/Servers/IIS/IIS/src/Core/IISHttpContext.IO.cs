@@ -83,8 +83,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 await _bodyOutput.WriteAsync(memory, cancellationToken);
             }
 
-            return
-                !HasResponseStarted
+            return !HasResponseStarted
               ? WriteFirstAsync()
               : _bodyOutput.WriteAsync(memory, cancellationToken);
         }
@@ -102,8 +101,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 await _bodyOutput.FlushAsync(cancellationToken);
             }
 
-            return
-                !HasResponseStarted
+            return !HasResponseStarted
               ? FlushFirstAsync()
               : _bodyOutput.FlushAsync(cancellationToken);
         }

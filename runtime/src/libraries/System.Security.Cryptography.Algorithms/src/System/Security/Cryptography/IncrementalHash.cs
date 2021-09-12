@@ -188,8 +188,7 @@ namespace System.Security.Cryptography
             Debug.Assert(destination.Length >= HashLengthInBytes);
 
             Debug.Assert((_hash != null) ^ (_hmac != null));
-            return
-                _hash != null
+            return _hash != null
               ? _hash.FinalizeHashAndReset(destination)
               : _hmac!.FinalizeHashAndReset(destination);
         }
@@ -282,8 +281,7 @@ namespace System.Security.Cryptography
             Debug.Assert(destination.Length >= HashLengthInBytes);
 
             Debug.Assert((_hash != null) ^ (_hmac != null));
-            return
-                _hash != null
+            return _hash != null
               ? _hash.GetCurrentHash(destination)
               : _hmac!.GetCurrentHash(destination);
         }

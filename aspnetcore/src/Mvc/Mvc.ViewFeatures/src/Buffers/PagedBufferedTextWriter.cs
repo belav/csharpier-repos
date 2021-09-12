@@ -109,8 +109,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
         {
             var flushTask = FlushAsyncCore();
 
-            return
-                flushTask.IsCompletedSuccessfully
+            return flushTask.IsCompletedSuccessfully
               ? _inner.WriteAsync(value)
               : WriteAsyncAwaited(flushTask, value);
         }
@@ -125,8 +124,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
         {
             var flushTask = FlushAsyncCore();
 
-            return
-                flushTask.IsCompletedSuccessfully
+            return flushTask.IsCompletedSuccessfully
               ? _inner.WriteAsync(buffer, index, count)
               : WriteAsyncAwaited(flushTask, buffer, index, count);
         }
@@ -141,8 +139,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
         {
             var flushTask = FlushAsyncCore();
 
-            return
-                flushTask.IsCompletedSuccessfully
+            return flushTask.IsCompletedSuccessfully
               ? _inner.WriteAsync(value)
               : WriteAsyncAwaited(flushTask, value);
         }

@@ -61,8 +61,7 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         CommandState ICommandHandler<ExecuteInInteractiveCommandArgs>.GetCommandState(
             ExecuteInInteractiveCommandArgs args
         ) {
-            return
-                GetCommandHandler(args.SubjectBuffer) == null
+            return GetCommandHandler(args.SubjectBuffer) == null
               ? CommandState.Unavailable
               : CommandState.Available;
         }

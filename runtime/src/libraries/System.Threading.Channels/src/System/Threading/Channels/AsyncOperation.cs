@@ -127,8 +127,7 @@ namespace System.Threading.Channels
                 ThrowIncorrectCurrentIdException();
             }
 
-            return
-                !IsCompleted
+            return !IsCompleted
               ? ValueTaskSourceStatus.Pending
               : _error == null
                   ? ValueTaskSourceStatus.Succeeded

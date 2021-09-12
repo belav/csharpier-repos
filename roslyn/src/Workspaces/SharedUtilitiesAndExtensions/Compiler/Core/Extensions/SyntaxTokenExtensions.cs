@@ -22,8 +22,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static IEnumerable<T> GetAncestors<T>(this SyntaxToken token) where T : SyntaxNode
         {
-            return
-                token.Parent != null
+            return token.Parent != null
               ? token.Parent.AncestorsAndSelf().OfType<T>()
               : SpecializedCollections.EmptyEnumerable<T>();
         }
@@ -32,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SyntaxToken token,
             Func<SyntaxNode, bool> predicate
         ) {
-            return
-                token.Parent != null
+            return token.Parent != null
               ? token.Parent.AncestorsAndSelf().Where(predicate)
               : SpecializedCollections.EmptyEnumerable<SyntaxNode>();
         }
@@ -106,8 +104,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 includeDocumentationComments
             );
 
-            return
-                nextToken.RawKind == 0
+            return nextToken.RawKind == 0
               ? (
                     (ICompilationUnitSyntax)token.Parent!.SyntaxTree!.GetRoot(
                         CancellationToken.None

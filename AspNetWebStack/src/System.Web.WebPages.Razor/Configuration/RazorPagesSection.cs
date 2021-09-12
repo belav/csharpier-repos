@@ -54,8 +54,7 @@ namespace System.Web.WebPages.Razor.Configuration
         {
             get
             {
-                return
-                    _namespacesSet
+                return _namespacesSet
                   ? _namespaces
                   : (NamespaceCollection)this[_namespacesProperty];
             }

@@ -48,8 +48,7 @@ namespace System.Collections
             }
 
             string? s = obj as string;
-            return
-                s != null
+            return s != null
               ? _compareInfo.GetHashCode(s, CompareOptions.IgnoreCase)
               : obj.GetHashCode();
         }

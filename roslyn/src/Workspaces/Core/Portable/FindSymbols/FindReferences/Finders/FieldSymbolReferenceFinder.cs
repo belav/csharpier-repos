@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             FindReferencesCascadeDirection cascadeDirection,
             CancellationToken cancellationToken
         ) {
-            return
-                symbol.AssociatedSymbol != null
+            return symbol.AssociatedSymbol != null
               ? Task.FromResult(ImmutableArray.Create((symbol.AssociatedSymbol, cascadeDirection)))
               : SpecializedTasks.EmptyImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>();
         }

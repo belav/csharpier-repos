@@ -87,8 +87,7 @@ namespace Microsoft.CodeAnalysis.Emit
                     )
                 );
 
-            return
-                (pdbStream != null)
+            return (pdbStream != null)
               ? DebugInformationReaderProvider.CreateFromStream(pdbStream)
               : null;
         }

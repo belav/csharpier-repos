@@ -157,8 +157,7 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             if (key is TripleDES)
             {
-                return
-                    keyWrap
+                return keyWrap
                   ? EncryptedXml.XmlEncTripleDESKeyWrapUrl
                   : EncryptedXml.XmlEncTripleDESUrl;
             }
@@ -171,18 +170,15 @@ namespace System.Security.Cryptography.Xml.Tests
                 switch (key.KeySize)
                 {
                     case 128:
-                        return
-                            keyWrap
+                        return keyWrap
                           ? EncryptedXml.XmlEncAES128KeyWrapUrl
                           : EncryptedXml.XmlEncAES128Url;
                     case 192:
-                        return
-                            keyWrap
+                        return keyWrap
                           ? EncryptedXml.XmlEncAES192KeyWrapUrl
                           : EncryptedXml.XmlEncAES192Url;
                     case 256:
-                        return
-                            keyWrap
+                        return keyWrap
                           ? EncryptedXml.XmlEncAES256KeyWrapUrl
                           : EncryptedXml.XmlEncAES256Url;
                 }

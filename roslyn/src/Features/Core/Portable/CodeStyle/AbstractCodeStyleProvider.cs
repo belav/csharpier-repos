@@ -64,8 +64,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             CodeStyleOption2<TOptionKind> optionValue
         ) {
             var severity = optionValue.Notification.Severity;
-            return
-                severity == ReportDiagnostic.Default
+            return severity == ReportDiagnostic.Default
               ? severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
               : severity;
         }

@@ -53,8 +53,7 @@ namespace System.Linq
                 return listProv.GetCount(onlyIfCheap);
             }
 
-            return
-                !onlyIfCheap || _source is ICollection<TElement> || _source is ICollection
+            return !onlyIfCheap || _source is ICollection<TElement> || _source is ICollection
               ? _source.Count()
               : -1;
         }
@@ -236,8 +235,7 @@ namespace System.Linq
             }
 
             found = true;
-            return
-                (maxIdx < count - 1)
+            return (maxIdx < count - 1)
               ? GetEnumerableSorter().ElementAt(buffer._items, count, maxIdx)
               : Last(buffer);
         }

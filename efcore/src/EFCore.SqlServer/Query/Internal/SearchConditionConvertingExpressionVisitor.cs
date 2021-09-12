@@ -47,8 +47,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
         private SqlExpression ConvertToValue(SqlExpression sqlExpression, bool condition)
         {
-            return
-                condition
+            return condition
               ? _sqlExpressionFactory.Case(
                     new[]
                     {
@@ -361,8 +360,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
             _isSearchCondition = parentSearchCondition;
 
-            return
-                changed
+            return changed
               ? selectExpression.Update(
                     projections,
                     tables,

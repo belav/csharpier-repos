@@ -234,8 +234,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public bool TryGet(IXmlIdentity xmlIdentity, out IXmlKnownType knownType)
         {
-            return
-                IsMatch(xmlIdentity)
+            return IsMatch(xmlIdentity)
               ? Try.Success(out knownType, this)
               : Try.Failure(out knownType);
         }
@@ -247,16 +246,14 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public bool TryGet(XmlName xsiType, out IXmlIncludedType includedType)
         {
-            return
-                xsiType == XmlName.Empty || xsiType == this.XsiType
+            return xsiType == XmlName.Empty || xsiType == this.XsiType
               ? Try.Success(out includedType, this)
               : Try.Failure(out includedType);
         }
 
         public bool TryGet(Type clrType, out IXmlIncludedType includedType)
         {
-            return
-                clrType == this.clrType
+            return clrType == this.clrType
               ? Try.Success(out includedType, this)
               : Try.Failure(out includedType);
         }
@@ -351,8 +348,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var kind = XmlTypeSerializer.For(clrType).Kind;
 
-            return
-                kind == XmlTypeKind.Complex && clrType.IsInterface
+            return kind == XmlTypeKind.Complex && clrType.IsInterface
               ? Try.Success(out metadata, GetXmlMetadata(clrType))
               : Try.Failure(out metadata);
         }

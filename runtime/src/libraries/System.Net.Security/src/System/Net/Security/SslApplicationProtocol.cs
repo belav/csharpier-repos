@@ -93,8 +93,7 @@ namespace System.Net.Security
             byte[] arr = _readOnlyProtocol;
             try
             {
-                return
-                    arr is null
+                return arr is null
                   ? string.Empty
                   : ReferenceEquals(arr, s_http2Utf8)
                       ? "h2"

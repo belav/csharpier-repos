@@ -112,8 +112,7 @@ namespace System.Linq.Expressions
         {
             get
             {
-                return
-                    (Expression.NodeType == ExpressionType.Quote)
+                return (Expression.NodeType == ExpressionType.Quote)
                   ? (LambdaExpression)((UnaryExpression)Expression).Operand
                   : (Expression as LambdaExpression);
             }

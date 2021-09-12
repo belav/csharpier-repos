@@ -141,8 +141,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private bool IsMatch()
         {
             IXmlKnownType knownType;
-            return
-                knownTypes.TryGet(this, out knownType)
+            return knownTypes.TryGet(this, out knownType)
               ? Try.Success(out type, knownType.ClrType)
               : Try.Failure(out type);
         }
@@ -500,8 +499,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var name = knownType.Name;
 
-            return
-                name.NamespaceUri != null
+            return name.NamespaceUri != null
               ? name
               : name.WithNamespaceUri(parent != null ? parent.NamespaceURI : string.Empty);
         }

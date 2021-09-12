@@ -87,8 +87,7 @@ namespace System.DirectoryServices.AccountManagement
 
         public override int GetHashCode()
         {
-            return
-                (_wellKnownSid == false)
+            return (_wellKnownSid == false)
               ? _objectGuid.GetHashCode()
               : (_domainName.GetHashCode() ^ _sid.GetHashCode());
         }

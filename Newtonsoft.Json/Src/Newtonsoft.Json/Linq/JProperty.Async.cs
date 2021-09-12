@@ -72,8 +72,7 @@ namespace Newtonsoft.Json.Linq
             JsonConverter[] converters
         ) {
             JToken value = Value;
-            return
-                value != null
+            return value != null
               ? value.WriteToAsync(writer, cancellationToken, converters)
               : writer.WriteNullAsync(cancellationToken);
         }

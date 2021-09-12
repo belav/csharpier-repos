@@ -30,8 +30,7 @@ namespace System.Linq
 
             if (source is TSource[] array)
             {
-                return
-                    array.Length == 0
+                return array.Length == 0
                   ? Empty<TSource>()
                   : new WhereArrayIterator<TSource>(array, predicate);
             }

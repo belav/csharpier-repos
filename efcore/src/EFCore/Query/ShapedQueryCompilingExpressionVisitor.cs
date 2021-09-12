@@ -106,8 +106,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         return serverEnumerable;
 
                     case ResultCardinality.Single:
-                        return
-                            QueryCompilationContext.IsAsync
+                        return QueryCompilationContext.IsAsync
                           ? Expression.Call(
                                 _singleAsyncMethodInfo.MakeGenericMethod(
                                     serverEnumerable.Type.GetSequenceType()
@@ -123,8 +122,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             );
 
                     case ResultCardinality.SingleOrDefault:
-                        return
-                            QueryCompilationContext.IsAsync
+                        return QueryCompilationContext.IsAsync
                           ? Expression.Call(
                                 _singleOrDefaultAsyncMethodInfo.MakeGenericMethod(
                                     serverEnumerable.Type.GetSequenceType()
@@ -402,8 +400,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 Check.NotNull(extensionExpression, nameof(extensionExpression));
 
-                return
-                    extensionExpression is EntityShaperExpression entityShaperExpression
+                return extensionExpression is EntityShaperExpression entityShaperExpression
                   ? ProcessEntityShaper(entityShaperExpression)
                   : base.VisitExtension(extensionExpression);
             }

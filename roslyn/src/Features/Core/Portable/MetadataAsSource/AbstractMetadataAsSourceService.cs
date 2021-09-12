@@ -147,8 +147,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 docCommentFormattingService
             );
 
-            return
-                topLevelNamespaceSymbol.IsGlobalNamespace
+            return topLevelNamespaceSymbol.IsGlobalNamespace
               ? wrappedType
               : CodeGenerationSymbolFactory.CreateNamespaceSymbol(
                     topLevelNamespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat),

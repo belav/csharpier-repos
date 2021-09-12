@@ -82,8 +82,7 @@ namespace System.IO.Compression
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
             EnsureNotDisposed();
-            return
-                cancellationToken.IsCancellationRequested
+            return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
               : Task.CompletedTask;
         }

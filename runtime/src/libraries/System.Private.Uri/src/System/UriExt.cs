@@ -397,8 +397,7 @@ namespace System
 
             // a relative uri is always less than an absolute one
             if (!uri1.IsAbsoluteUri || !uri2.IsAbsoluteUri)
-                return
-                    uri1.IsAbsoluteUri
+                return uri1.IsAbsoluteUri
                   ? 1
                   : uri2.IsAbsoluteUri
                       ? -1

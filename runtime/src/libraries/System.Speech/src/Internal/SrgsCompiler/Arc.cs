@@ -860,8 +860,7 @@ namespace System.Speech.Internal.SrgsCompiler
             }
 #pragma warning restore 0618
 
-            return
-                tag._nameOffset > 0
+            return tag._nameOffset > 0
               ? symbols.FromOffset(tag._nameOffset)
               : tag._nameOffset.ToString(CultureInfo.InvariantCulture);
         }

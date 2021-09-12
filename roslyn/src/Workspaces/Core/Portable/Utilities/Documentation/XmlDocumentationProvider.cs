@@ -97,8 +97,7 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return
-                _docComments.TryGetValue(documentationMemberID, out var docComment)
+            return _docComments.TryGetValue(documentationMemberID, out var docComment)
               ? docComment
               : "";
         }

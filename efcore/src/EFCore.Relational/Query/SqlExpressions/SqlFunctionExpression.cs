@@ -335,8 +335,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 }
             }
 
-            return
-                changed
+            return changed
               ? new SqlFunctionExpression(
                     instance,
                     Schema,

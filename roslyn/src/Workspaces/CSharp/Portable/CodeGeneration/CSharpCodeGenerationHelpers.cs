@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxList<MemberDeclarationSyntax> members
         ) where TDeclarationSyntax : MemberDeclarationSyntax
         {
-            return
-                members.Count == 1
+            return members.Count == 1
               ? result.WithAdditionalAnnotations(Formatter.Annotation)
               : result;
         }

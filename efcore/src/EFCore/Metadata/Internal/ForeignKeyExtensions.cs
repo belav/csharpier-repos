@@ -68,8 +68,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            return
-                foreignKey.IsSelfReferencing()
+            return foreignKey.IsSelfReferencing()
               ? foreignKey.GetNavigations()
               : foreignKey.FindNavigations(foreignKey.DeclaringEntityType == entityType);
         }
@@ -129,8 +128,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            return
-                foreignKey.IsSelfReferencing()
+            return foreignKey.IsSelfReferencing()
               ? foreignKey.GetNavigations()
               : foreignKey.FindNavigations(foreignKey.PrincipalEntityType == entityType);
         }
@@ -225,8 +223,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            return
-                foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
+            return foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
               ? foreignKey.PrincipalEntityType
               : foreignKey.DeclaringEntityType;
         }
@@ -269,8 +266,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 );
             }
 
-            return
-                foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
+            return foreignKey.DeclaringEntityType.IsAssignableFrom(entityType)
               ? foreignKey.DeclaringEntityType
               : foreignKey.PrincipalEntityType;
         }

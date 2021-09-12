@@ -21,8 +21,7 @@ namespace ILCompiler.Reflection.ReadyToRun
                     return X86TransitionBlock.Instance;
 
                 case Architecture.X64:
-                    return
-                        reader.OperatingSystem == OperatingSystem.Windows
+                    return reader.OperatingSystem == OperatingSystem.Windows
                       ? X64WindowsTransitionBlock.Instance
                       : X64UnixTransitionBlock.Instance;
 

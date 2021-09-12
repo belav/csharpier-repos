@@ -49,8 +49,7 @@ namespace Microsoft.AspNetCore.Testing
             IAttributeInfo theoryAttribute
         ) {
             var skipReason = testMethod.EvaluateSkipConditions();
-            return
-                skipReason != null
+            return skipReason != null
               ? new[]
                 {
                     new SkippedTestCase(
@@ -85,8 +84,7 @@ namespace Microsoft.AspNetCore.Testing
                 }
             }
 
-            return
-                skipReason != null
+            return skipReason != null
               ? base.CreateTestCasesForSkippedDataRow(
                     discoveryOptions,
                     testMethod,

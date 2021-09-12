@@ -986,8 +986,7 @@ namespace System.Web.Mvc.Html
         private static RouteValueDictionary ToRouteValueDictionary(
             IDictionary<string, object> dictionary
         ) {
-            return
-                dictionary == null
+            return dictionary == null
               ? new RouteValueDictionary()
               : new RouteValueDictionary(dictionary);
         }

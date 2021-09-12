@@ -85,8 +85,7 @@ namespace System.IO
             // If it's not set, just return the default path.
             // If it is, return it, ensuring it ends with a slash.
             string? path = Environment.GetEnvironmentVariable(TempEnvVar);
-            return
-                string.IsNullOrEmpty(path)
+            return string.IsNullOrEmpty(path)
               ? DefaultTempPath
               : PathInternal.IsDirectorySeparator(path[path.Length - 1])
                   ? path
@@ -137,8 +136,7 @@ namespace System.IO
 
         public static ReadOnlySpan<char> GetPathRoot(ReadOnlySpan<char> path)
         {
-            return
-                IsPathRooted(path)
+            return IsPathRooted(path)
               ? PathInternal.DirectorySeparatorCharAsString.AsSpan()
               : ReadOnlySpan<char>.Empty;
         }

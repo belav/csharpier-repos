@@ -972,8 +972,7 @@ namespace System.Text
             // All well-formed Rune instances can be encoded as 1..4 UTF-8 code units.
             // If there's an error, it's because the destination was too small.
 
-            return
-                value.TryEncodeToUtf8(bytes, out bytesWritten)
+            return value.TryEncodeToUtf8(bytes, out bytesWritten)
               ? OperationStatus.Done
               : OperationStatus.DestinationTooSmall;
         }

@@ -101,8 +101,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         ) {
             // Check if we are in the situation where scoped service was promoted to singleton
             // and we need to lock the root
-            return
-                context.Scope == context.Scope.Engine.Root
+            return context.Scope == context.Scope.Engine.Root
               ? VisitRootCache(callSite, context)
               : VisitCache(callSite, context, context.Scope, RuntimeResolverLock.Scope);
         }

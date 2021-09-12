@@ -198,8 +198,7 @@ namespace AutoMapper.Execution
                     (isCollection && profileMap.AllowsNullCollectionsFor(memberMap))
                     || (!isCollection && profileMap.AllowsNullDestinationValuesFor(memberMap))
                 ) {
-                    return
-                        destinationParameter.NodeType == ExpressionType.Default
+                    return destinationParameter.NodeType == ExpressionType.Default
                       ? destinationParameter
                       : Default(destinationType);
                 }
@@ -207,8 +206,7 @@ namespace AutoMapper.Execution
                 {
                     var destinationElementType = destinationType.GetElementType();
                     var rank = destinationType.GetArrayRank();
-                    return
-                        rank == 1
+                    return rank == 1
                       ? Expression.Call(ArrayEmptyMethod.MakeGenericMethod(destinationElementType))
                       : NewArrayBounds(destinationElementType, Enumerable.Repeat(Zero, rank));
                 }
@@ -540,8 +538,7 @@ namespace AutoMapper.Execution
             var name = parameter.Name;
             int index = 0;
             var nullCheckedExpression = NullCheck(parameter);
-            return
-                variables == null
+            return variables == null
               ? nullCheckedExpression
               : Block(variables, nullCheckedExpression);
             Expression NullCheck(ParameterExpression variable)

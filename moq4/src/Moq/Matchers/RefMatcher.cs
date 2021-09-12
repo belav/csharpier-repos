@@ -19,8 +19,7 @@ namespace Moq.Matchers
 
         public bool Matches(object argument, Type parameterType)
         {
-            return
-                this.referenceIsValueType
+            return this.referenceIsValueType
               ? object.Equals(this.reference, argument)
               : object.ReferenceEquals(this.reference, argument);
         }

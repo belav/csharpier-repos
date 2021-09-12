@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             if (symbol.Kind == SymbolKind.Namespace)
             {
                 // namespaces are visible in all projects.
-                return
-                    projects != null
+                return projects != null
                   ? projects.ToImmutableArray()
                   : solution.Projects.ToImmutableArray();
             }
@@ -43,8 +42,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         cancellationToken
                     )
                     .ConfigureAwait(false);
-                return
-                    projects != null
+                return projects != null
                   ? dependentProjects.WhereAsArray(projects.Contains)
                   : dependentProjects;
             }
@@ -105,8 +103,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         ) {
             var assembly = symbol.OriginalDefinition.ContainingAssembly;
-            return
-                assembly == null
+            return assembly == null
               ? default
               : (assembly, solution.GetProject(assembly, cancellationToken));
         }

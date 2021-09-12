@@ -4529,8 +4529,7 @@ namespace System.Xml
                 {
                     await PushExternalEntityAsync(entity).ConfigureAwait(false);
                     _curNode.entityId = _ps.entityId;
-                    return
-                        (isInAttributeValue && _validatingReaderCompatFlag)
+                    return (isInAttributeValue && _validatingReaderCompatFlag)
                       ? EntityType.ExpandedInAttribute
                       : EntityType.Expanded;
                 }
@@ -4545,8 +4544,7 @@ namespace System.Xml
                 PushInternalEntity(entity);
 
                 _curNode.entityId = _ps.entityId;
-                return
-                    (isInAttributeValue && _validatingReaderCompatFlag)
+                return (isInAttributeValue && _validatingReaderCompatFlag)
                   ? EntityType.ExpandedInAttribute
                   : EntityType.Expanded;
             }

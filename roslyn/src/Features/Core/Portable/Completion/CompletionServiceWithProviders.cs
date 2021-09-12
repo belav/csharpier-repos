@@ -701,8 +701,7 @@ namespace Microsoft.CodeAnalysis.Completion
             CancellationToken cancellationToken = default
         ) {
             var provider = GetProvider(item);
-            return
-                provider != null
+            return provider != null
               ? provider.GetDescriptionAsync(document, item, cancellationToken)
               : Task.FromResult(CompletionDescription.Empty);
         }
@@ -791,8 +790,7 @@ namespace Microsoft.CodeAnalysis.Completion
             CancellationToken cancellationToken
         ) {
             var provider = GetProvider(item);
-            return
-                provider != null
+            return provider != null
               ? await provider.GetChangeAsync(
                         document,
                         item,

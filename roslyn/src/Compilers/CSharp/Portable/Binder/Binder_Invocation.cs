@@ -2154,8 +2154,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var q = (BoundQueryClause)receiver;
                     var value = q.Value;
                     var replaced = ReplaceTypeOrValueReceiver(value, useType, diagnostics);
-                    return
-                        (value == replaced)
+                    return (value == replaced)
                       ? q
                       : q.Update(
                             replaced,

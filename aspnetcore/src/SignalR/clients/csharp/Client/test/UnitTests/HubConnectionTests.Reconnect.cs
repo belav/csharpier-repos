@@ -255,8 +255,7 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             context =>
                             {
                                 retryContexts.Add(context);
-                                return
-                                    context.PreviousRetryCount == 0
+                                return context.PreviousRetryCount == 0
                                   ? TimeSpan.Zero
                                   : (TimeSpan?)null;
                             }

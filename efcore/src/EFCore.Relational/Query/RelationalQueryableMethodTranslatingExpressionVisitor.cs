@@ -335,8 +335,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             var projection = _sqlTranslator.TranslateAverage(translatedSelector);
-            return
-                projection != null
+            return projection != null
               ? AggregateResultShaper(source, projection, throwWhenEmpty: true, resultType)
               : null;
         }
@@ -349,8 +348,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(source, nameof(source));
             Check.NotNull(resultType, nameof(resultType));
 
-            return
-                source.ShaperExpression.Type != resultType
+            return source.ShaperExpression.Type != resultType
               ? source.UpdateShaperExpression(
                     Expression.Convert(source.ShaperExpression, resultType)
                 )
@@ -556,8 +554,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             selectExpression.ApplyLimit(TranslateExpression(Expression.Constant(1))!);
 
-            return
-                source.ShaperExpression.Type != returnType
+            return source.ShaperExpression.Type != returnType
               ? source.UpdateShaperExpression(
                     Expression.Convert(source.ShaperExpression, returnType)
                 )
@@ -684,8 +681,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         return null;
                     }
 
-                    return
-                        translation.Type == expression.Type
+                    return translation.Type == expression.Type
                       ? (Expression)translation
                       : Expression.Convert(translation, expression.Type);
             }
@@ -879,8 +875,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             selectExpression.ReverseOrderings();
             selectExpression.ApplyLimit(TranslateExpression(Expression.Constant(1))!);
 
-            return
-                source.ShaperExpression.Type != returnType
+            return source.ShaperExpression.Type != returnType
               ? source.UpdateShaperExpression(
                     Expression.Convert(source.ShaperExpression, returnType)
                 )
@@ -1306,8 +1301,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 TranslateExpression(Expression.Constant(_subquery ? 1 : 2))!
             );
 
-            return
-                source.ShaperExpression.Type != returnType
+            return source.ShaperExpression.Type != returnType
               ? source.UpdateShaperExpression(
                     Expression.Convert(source.ShaperExpression, returnType)
                 )
@@ -1382,8 +1376,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             var projection = _sqlTranslator.TranslateSum(translatedSelector);
-            return
-                projection != null
+            return projection != null
               ? AggregateResultShaper(source, projection, throwWhenEmpty: false, resultType)
               : null;
         }
@@ -1919,8 +1912,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 case EntityShaperExpression entityShaperExpression1
                       when shaper2 is EntityShaperExpression entityShaperExpression2:
-                    return
-                        entityShaperExpression1.IsNullable != entityShaperExpression2.IsNullable
+                    return entityShaperExpression1.IsNullable != entityShaperExpression2.IsNullable
                       ? entityShaperExpression1.MakeNullable(makeNullable)
                       : entityShaperExpression1;
 

@@ -82,8 +82,7 @@ namespace Microsoft.DiaSymReader
 
         public override int GetNestedClassProps(int nestedClass, out int enclosingClass)
         {
-            return
-                _metadataProvider.TryGetEnclosingType(nestedClass, out enclosingClass)
+            return _metadataProvider.TryGetEnclosingType(nestedClass, out enclosingClass)
               ? HResult.S_OK
               : HResult.E_FAIL;
         }

@@ -90,8 +90,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         {
             get
             {
-                return
-                    this.DeclaringMethod != null
+                return this.DeclaringMethod != null
                   ? TypeParameterKind.Method
                   : TypeParameterKind.Type;
             }

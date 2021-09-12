@@ -21,8 +21,7 @@ namespace System.Diagnostics
 
         private bool StartCore(ProcessStartInfo startInfo)
         {
-            return
-                startInfo.UseShellExecute
+            return startInfo.UseShellExecute
               ? StartWithShellExecuteEx(startInfo)
               : StartWithCreateProcess(startInfo);
         }

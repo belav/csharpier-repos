@@ -2276,8 +2276,7 @@ namespace System.Runtime.CompilerServices
             where TSyntaxNode : SyntaxNode
         {
             var (operation, syntax) = GetOperationAndSyntaxForTest<TSyntaxNode>(compilation);
-            return
-                operation != null
+            return operation != null
               ? OperationTreeVerifier.GetOperationTree(compilation, operation)
               : null;
         }
@@ -2286,8 +2285,7 @@ namespace System.Runtime.CompilerServices
             CSharpCompilation compilation,
             IOperation operation
         ) {
-            return
-                operation != null
+            return operation != null
               ? OperationTreeVerifier.GetOperationTree(compilation, operation)
               : null;
         }

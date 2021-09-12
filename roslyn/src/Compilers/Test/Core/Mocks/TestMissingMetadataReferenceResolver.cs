@@ -53,8 +53,7 @@ namespace Roslyn.Test.Utilities
                         ? $", {referenceIdentity.Version}"
                         : ""
                 );
-            return
-                _map.TryGetValue(nameAndVersion, out var reference)
+            return _map.TryGetValue(nameAndVersion, out var reference)
               ? (PortableExecutableReference)reference
               : null;
         }

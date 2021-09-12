@@ -182,8 +182,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             Check.NotEmpty(name, nameof(name));
 
-            return
-                _annotations == null
+            return _annotations == null
               ? null
               : _annotations.TryGetValue(name, out var annotation) ? annotation : null;
         }
@@ -409,8 +408,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             Check.NotEmpty(name, nameof(name));
 
-            return
-                _runtimeAnnotations == null
+            return _runtimeAnnotations == null
               ? null
               : _runtimeAnnotations.TryGetValue(name, out var annotation) ? annotation : null;
         }

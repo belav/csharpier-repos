@@ -235,8 +235,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private SimpleNameSyntax CreateMethodNameForInvocation()
             {
-                return
-                    AnalyzerResult.MethodTypeParametersInDeclaration.Count == 0
+                return AnalyzerResult.MethodTypeParametersInDeclaration.Count == 0
                   ? (SimpleNameSyntax)SyntaxFactory.IdentifierName(_methodName)
                   : SyntaxFactory.GenericName(
                         _methodName,
@@ -309,8 +308,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private static SyntaxKind GetParameterRefSyntaxKind(ParameterBehavior parameterBehavior)
             {
-                return
-                    parameterBehavior == ParameterBehavior.Ref
+                return parameterBehavior == ParameterBehavior.Ref
                   ? SyntaxKind.RefKeyword
                   : parameterBehavior == ParameterBehavior.Out
                       ? SyntaxKind.OutKeyword
@@ -727,8 +725,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             protected override StatementSyntax CreateReturnStatement(string identifierName = null)
             {
-                return
-                    string.IsNullOrEmpty(identifierName)
+                return string.IsNullOrEmpty(identifierName)
                   ? SyntaxFactory.ReturnStatement()
                   : SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName(identifierName));
             }

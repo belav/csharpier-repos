@@ -84,8 +84,7 @@ namespace System.Net.Http.Formatting
             }
 
             string extension = GetUriPathExtensionOrNull(request);
-            return
-                String.Equals(extension, UriPathExtension, StringComparison.OrdinalIgnoreCase)
+            return String.Equals(extension, UriPathExtension, StringComparison.OrdinalIgnoreCase)
               ? 1.0
               : 0.0;
         }

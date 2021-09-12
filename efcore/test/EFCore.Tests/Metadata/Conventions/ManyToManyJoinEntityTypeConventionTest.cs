@@ -422,8 +422,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 skipNavBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
             );
             CreateManyToManyConvention().ProcessSkipNavigationAdded(skipNavBuilder, context);
-            return
-                context.ShouldStopProcessing()
+            return context.ShouldStopProcessing()
               ? (InternalSkipNavigationBuilder)context.Result
               : skipNavBuilder;
         }

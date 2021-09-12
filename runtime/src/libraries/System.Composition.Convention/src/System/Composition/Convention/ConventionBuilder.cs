@@ -281,8 +281,7 @@ namespace System.Composition.Convention
             else
                 appliedAttributes = member.GetCustomAttributes<Attribute>(false);
 
-            return
-                cachedAttributes == null
+            return cachedAttributes == null
               ? appliedAttributes
               : appliedAttributes.Concat(cachedAttributes);
         }

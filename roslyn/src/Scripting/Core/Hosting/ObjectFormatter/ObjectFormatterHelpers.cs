@@ -268,8 +268,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
                 if ((method = member as MethodInfo) != null)
                 {
-                    return
-                        (method.ReturnType == typeof(void))
+                    return (method.ReturnType == typeof(void))
                       ? VoidValue
                       : method.Invoke(obj, Array.Empty<object>());
                 }

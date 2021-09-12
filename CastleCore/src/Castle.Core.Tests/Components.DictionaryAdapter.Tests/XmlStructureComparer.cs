@@ -210,8 +210,7 @@ namespace Castle.Components.DictionaryAdapter.Tests
 
         private static IEnumerable<XmlNode> GetChildElementsAndAttributes(XmlNode node)
         {
-            return
-                (null == node)
+            return (null == node)
               ? Enumerable.Empty<XmlNode>()
               : (node.NodeType == XmlNodeType.Element)
                   ? GetElementChildNodes(node)

@@ -367,8 +367,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     {
                         // in case type argument on EF property overrides actual type of the member that is accessed, e.g.
                         // EF.Property<bool>(e, "MyNullableBool")
-                        return
-                            result.Type != expression.Type
+                        return result.Type != expression.Type
                           ? Expression.Convert(result, expression.Type)
                           : result;
                     }

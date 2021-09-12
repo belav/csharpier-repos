@@ -63,8 +63,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ResultProvider resultProvider
         ) {
             var expansion = CreateExpansion(inspectionContext, value, resultProvider);
-            return
-                (expansion != null)
+            return (expansion != null)
               ? expansion.CreateDynamicViewRow(
                     inspectionContext,
                     name,

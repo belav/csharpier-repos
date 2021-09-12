@@ -3721,8 +3721,7 @@ namespace Microsoft.CodeAnalysis
 
                     nativePdbWriter?.WriteTo(pdbStream);
 
-                    return
-                        diagnostics.HasAnyErrors()
+                    return diagnostics.HasAnyErrors()
                       ? null
                       : writer.GetDelta(baseline, this, encId, metadataSizes);
                 }

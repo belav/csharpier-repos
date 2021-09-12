@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis
             if (r2 == null)
                 throw new ArgumentNullException(nameof(r2));
 
-            return
-                r1.Length == 0
+            return r1.Length == 0
               ? r2
               : r2.Length == 0
                   ? r1

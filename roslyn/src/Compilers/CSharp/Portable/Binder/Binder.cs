@@ -112,8 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     !this.Flags.Includes(BinderFlags.UncheckedRegion | BinderFlags.CheckedRegion)
                 );
 
-                return
-                    this.Flags.Includes(BinderFlags.CheckedRegion)
+                return this.Flags.Includes(BinderFlags.CheckedRegion)
                   ? OverflowChecks.Enabled
                   : this.Flags.Includes(BinderFlags.UncheckedRegion)
                       ? OverflowChecks.Disabled
@@ -986,8 +985,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression
         ) {
             var locals = this.GetDeclaredLocalsForScope(scopeDesignator);
-            return
-                (locals.IsEmpty)
+            return (locals.IsEmpty)
               ? expression
               : new BoundSequence(
                     scopeDesignator,

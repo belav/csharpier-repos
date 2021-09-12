@@ -1610,8 +1610,7 @@ namespace Microsoft.EntityFrameworkCore
 
             public override bool Equals(object obj)
             {
-                return
-                    !(obj is TransactionCustomer otherCustomer)
+                return !(obj is TransactionCustomer otherCustomer)
                   ? false
                   : Id == otherCustomer.Id && Name == otherCustomer.Name;
             }

@@ -89,8 +89,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
 
         private static SyntaxToken WithoutTrailingWhitespace(SyntaxToken newKeyword)
         {
-            return
-                newKeyword.TrailingTrivia.All(t => t.IsWhitespace())
+            return newKeyword.TrailingTrivia.All(t => t.IsWhitespace())
               ? newKeyword.WithoutTrailingTrivia()
               : newKeyword;
         }

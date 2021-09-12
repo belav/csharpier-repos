@@ -230,8 +230,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             ControlFlowBranch? getFallThroughSuccessor(BasicBlockBuilder blockBuilder)
             {
-                return
-                    blockBuilder.Kind != BasicBlockKind.Exit
+                return blockBuilder.Kind != BasicBlockKind.Exit
                   ? getBranch(
                         in blockBuilder.FallThrough,
                         blockBuilder,
@@ -242,8 +241,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             ControlFlowBranch? getConditionalSuccessor(BasicBlockBuilder blockBuilder)
             {
-                return
-                    blockBuilder.HasCondition
+                return blockBuilder.HasCondition
                   ? getBranch(
                         in blockBuilder.Conditional,
                         blockBuilder,
@@ -3187,8 +3185,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             condition = VisitRequired(condition);
             if (!sense)
             {
-                return
-                    lastUnary != null
+                return lastUnary != null
                   ? new UnaryOperation(
                         lastUnary.OperatorKind,
                         condition,
@@ -8310,8 +8307,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         out IOperation? captured
                     )
                 ) {
-                    return
-                        captured is IFlowCaptureReferenceOperation reference
+                    return captured is IFlowCaptureReferenceOperation reference
                       ? GetCaptureReference(reference.Id.Value, operation)
                       : OperationCloner.CloneOperation(captured);
                 }

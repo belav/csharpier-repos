@@ -202,8 +202,7 @@ namespace System.Web.Mvc.Html
         internal static Dictionary<string, Func<HtmlHelper, string>> GetDefaultActions(
             DataBoundControlMode mode
         ) {
-            return
-                mode == DataBoundControlMode.ReadOnly
+            return mode == DataBoundControlMode.ReadOnly
               ? _defaultDisplayActions
               : _defaultEditorActions;
         }

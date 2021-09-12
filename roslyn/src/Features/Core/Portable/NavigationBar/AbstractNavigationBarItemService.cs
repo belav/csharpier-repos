@@ -49,8 +49,7 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                     )
                     .ConfigureAwait(false);
 
-                return
-                    result.HasValue
+                return result.HasValue
                   ? result.Value.SelectAsArray(v => v.Rehydrate())
                   : ImmutableArray<RoslynNavigationBarItem>.Empty;
             }

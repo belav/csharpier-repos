@@ -123,8 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     errorLocation: null,
                     diagnostics: null
                 );
-                return
-                    !elementType.IsDefault
+                return !elementType.IsDefault
                   ? elementType
                   : TypeWithAnnotations.Create(CreateErrorType());
             }

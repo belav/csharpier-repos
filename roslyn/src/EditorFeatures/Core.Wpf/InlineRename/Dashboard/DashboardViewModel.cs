@@ -249,8 +249,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         {
             get
             {
-                return
-                    _resolvableConflictCount >= 1
+                return _resolvableConflictCount >= 1
                   ? string.Format(
                         EditorFeaturesResources._0_conflict_s_will_be_resolved,
                         _resolvableConflictCount
@@ -268,8 +267,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         {
             get
             {
-                return
-                    _unresolvableConflictCount >= 1
+                return _unresolvableConflictCount >= 1
                   ? string.Format(
                         EditorFeaturesResources._0_unresolvable_conflict_s,
                         _unresolvableConflictCount

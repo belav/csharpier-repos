@@ -70,8 +70,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return
-                    this.NamespaceKind == NamespaceKind.Compilation
+                return this.NamespaceKind == NamespaceKind.Compilation
                   ? this.Extent.Compilation
                   : null;
             }

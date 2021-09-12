@@ -317,8 +317,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
         {
             if (fieldSymbol.IsConst)
             {
-                return
-                    fieldSymbol.ContainingType.IsEnumType()
+                return fieldSymbol.ContainingType.IsEnumType()
                   ? ClassificationTypeNames.EnumMemberName
                   : ClassificationTypeNames.ConstantName;
             }
@@ -328,8 +327,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
 
         private static string GetClassificationForLocal(ILocalSymbol localSymbol)
         {
-            return
-                localSymbol.IsConst
+            return localSymbol.IsConst
               ? ClassificationTypeNames.ConstantName
               : ClassificationTypeNames.LocalName;
         }
@@ -348,8 +346,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
             // Note: We only classify an extension method if it is in reduced form.
             // If an extension method is called as a static method invocation (e.g. Enumerable.Select(...)),
             // it is classified as an ordinary method.
-            return
-                methodSymbol.MethodKind == MethodKind.ReducedExtension
+            return methodSymbol.MethodKind == MethodKind.ReducedExtension
               ? ClassificationTypeNames.ExtensionMethodName
               : ClassificationTypeNames.MethodName;
         }

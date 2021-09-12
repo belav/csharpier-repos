@@ -404,8 +404,7 @@ namespace Microsoft.CodeAnalysis.Scripting
 
         public new Script<T> WithOptions(ScriptOptions options)
         {
-            return
-                (options == Options)
+            return (options == Options)
               ? this
               : new Script<T>(Compiler, Builder, SourceText, options, GlobalsType, Previous);
         }

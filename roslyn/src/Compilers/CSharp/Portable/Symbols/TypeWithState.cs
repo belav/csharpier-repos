@@ -106,8 +106,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (Type?.IsTypeParameterDisallowingAnnotationInCSharp8() == true)
             {
                 var type = TypeWithAnnotations.Create(Type, NullableAnnotation.NotAnnotated);
-                return
-                    State == NullableFlowState.MaybeDefault
+                return State == NullableFlowState.MaybeDefault
                   ? type.SetIsAnnotated(compilation)
                   : type;
             }

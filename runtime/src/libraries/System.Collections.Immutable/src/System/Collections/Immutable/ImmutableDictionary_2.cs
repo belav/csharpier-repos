@@ -836,8 +836,7 @@ namespace System.Collections.Immutable
             KeyValuePair<TKey, TValue>
         >.GetEnumerator()
         {
-            return
-                this.IsEmpty
+            return this.IsEmpty
               ? Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
               : this.GetEnumerator();
         }
@@ -868,8 +867,7 @@ namespace System.Collections.Immutable
         {
             Requires.NotNull(comparers, nameof(comparers));
 
-            return
-                Empty._comparers == comparers
+            return Empty._comparers == comparers
               ? Empty
               : new ImmutableDictionary<TKey, TValue>(comparers);
         }
@@ -1124,8 +1122,7 @@ namespace System.Collections.Immutable
 
             if (_root != root)
             {
-                return
-                    root.IsEmpty
+                return root.IsEmpty
                   ? this.Clear()
                   : new ImmutableDictionary<TKey, TValue>(
                         root,

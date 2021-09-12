@@ -546,8 +546,7 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             bool filterOutsideSelection
         ) {
             var actions = refactoring.CodeActions.WhereAsArray(IsActionAndSpanApplicable);
-            return
-                actions.Length == 0
+            return actions.Length == 0
               ? null
               : actions.Length == refactoring.CodeActions.Length
                   ? refactoring
@@ -840,8 +839,7 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
                 }
             }
 
-            return
-                actions.Count == 0
+            return actions.Count == 0
               ? null
               : new UnifiedSuggestedActionSet(
                     set.CategoryName,

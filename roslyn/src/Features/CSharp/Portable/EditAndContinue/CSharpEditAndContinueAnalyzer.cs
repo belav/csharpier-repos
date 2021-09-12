@@ -2309,8 +2309,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.FieldDeclaration:
                     var declaration = (FieldDeclarationSyntax)node;
-                    return
-                        declaration.Modifiers.Any(SyntaxKind.ConstKeyword)
+                    return declaration.Modifiers.Any(SyntaxKind.ConstKeyword)
                       ? FeaturesResources.const_field
                       : FeaturesResources.field;
 
@@ -2332,8 +2331,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.ConstructorDeclaration:
                     var ctor = (ConstructorDeclarationSyntax)node;
-                    return
-                        ctor.Modifiers.Any(SyntaxKind.StaticKeyword)
+                    return ctor.Modifiers.Any(SyntaxKind.StaticKeyword)
                       ? FeaturesResources.static_constructor
                       : FeaturesResources.constructor;
 
@@ -2341,8 +2339,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return CSharpFeaturesResources.destructor;
 
                 case SyntaxKind.PropertyDeclaration:
-                    return
-                        SyntaxUtilities.HasBackingField((PropertyDeclarationSyntax)node)
+                    return SyntaxUtilities.HasBackingField((PropertyDeclarationSyntax)node)
                       ? FeaturesResources.auto_property
                       : FeaturesResources.property_;
 
@@ -3667,8 +3664,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     newModifiers = newModifiers.RemoveAt(newIgnoredModifierIndex);
                 }
 
-                return
-                    ignore2 is null
+                return ignore2 is null
                   ? SyntaxFactory.AreEquivalent(oldModifiers, newModifiers)
                   : AreModifiersEquivalent(oldModifiers, newModifiers, ignore2.Value);
             }

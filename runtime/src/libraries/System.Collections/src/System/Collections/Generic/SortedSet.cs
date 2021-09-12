@@ -1814,8 +1814,7 @@ namespace System.Collections.Generic
 #endif
 
                 bool currentIsLeftChild = Left == current;
-                return
-                    IsNonNullRed(sibling.Left)
+                return IsNonNullRed(sibling.Left)
                   ? (currentIsLeftChild ? TreeRotation.RightLeft : TreeRotation.Right)
                   : (currentIsLeftChild ? TreeRotation.Left : TreeRotation.LeftRight);
             }

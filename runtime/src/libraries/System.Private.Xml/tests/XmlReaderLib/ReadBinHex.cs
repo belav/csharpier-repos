@@ -513,8 +513,7 @@ namespace System.Xml.Tests
 
             CError.WriteLine();
             CError.WriteLine("Length of the output : " + output.ToString().Length);
-            return
-                (CError.Compare(output.ToString().Length, 1735, "Expected Length : 1735"))
+            return (CError.Compare(output.ToString().Length, 1735, "Expected Length : 1735"))
               ? TEST_PASS
               : TEST_FAIL;
         }
@@ -980,8 +979,7 @@ namespace System.Xml.Tests
 
             CError.WriteLine();
             CError.WriteLine("Length of the output : " + output.ToString().Length);
-            return
-                (CError.Compare(output.ToString().Length, 1735, "Expected Length : 1735"))
+            return (CError.Compare(output.ToString().Length, 1735, "Expected Length : 1735"))
               ? TEST_PASS
               : TEST_FAIL;
         }

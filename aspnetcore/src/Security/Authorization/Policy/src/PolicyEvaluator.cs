@@ -69,8 +69,7 @@ namespace Microsoft.AspNetCore.Authorization.Policy
                 }
             }
 
-            return
-                (context.User?.Identity?.IsAuthenticated ?? false)
+            return (context.User?.Identity?.IsAuthenticated ?? false)
               ? AuthenticateResult.Success(new AuthenticationTicket(context.User, "context.User"))
               : AuthenticateResult.NoResult();
         }
@@ -106,8 +105,7 @@ namespace Microsoft.AspNetCore.Authorization.Policy
             }
 
             // If authentication was successful, return forbidden, otherwise challenge
-            return
-                (authenticationResult.Succeeded)
+            return (authenticationResult.Succeeded)
               ? PolicyAuthorizationResult.Forbid(result.Failure)
               : PolicyAuthorizationResult.Challenge();
         }

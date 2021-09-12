@@ -782,8 +782,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         private static NativeMethods.REQUEST_NOTIFICATION_STATUS ConvertRequestCompletionResults(
             bool success
         ) {
-            return
-                success
+            return success
               ? NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_CONTINUE
               : NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;
         }

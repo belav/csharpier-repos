@@ -80,8 +80,7 @@ namespace System.Reflection.Metadata
         {
             get
             {
-                return
-                    (Kind == ExceptionRegionKind.Catch)
+                return (Kind == ExceptionRegionKind.Catch)
                   ? new EntityHandle((uint)_classTokenOrFilterOffset)
                   : default(EntityHandle);
             }

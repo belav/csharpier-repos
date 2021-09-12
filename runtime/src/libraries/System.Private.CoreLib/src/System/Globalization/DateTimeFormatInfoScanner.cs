@@ -597,8 +597,7 @@ namespace System.Globalization
             string[] dayNames,
             string[] abbrevDayNames
         ) {
-            return
-                (ArrayElementsHaveSpace(dayNames) || ArrayElementsHaveSpace(abbrevDayNames))
+            return (ArrayElementsHaveSpace(dayNames) || ArrayElementsHaveSpace(abbrevDayNames))
               ? FORMATFLAGS.UseSpacesInDayNames
               : 0;
         }
@@ -610,8 +609,7 @@ namespace System.Globalization
         ////////////////////////////////////////////////////////////////////////////
         internal static FORMATFLAGS GetFormatFlagUseHebrewCalendar(int calID)
         {
-            return
-                calID == (int)CalendarId.HEBREW
+            return calID == (int)CalendarId.HEBREW
               ? FORMATFLAGS.UseHebrewParsing | FORMATFLAGS.UseLeapYearMonth
               : 0;
         }

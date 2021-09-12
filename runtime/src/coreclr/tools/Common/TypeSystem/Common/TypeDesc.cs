@@ -232,8 +232,7 @@ namespace Internal.TypeSystem
             get
             {
                 var baseType = this.BaseType;
-                return
-                    (baseType != null)
+                return (baseType != null)
                   ? baseType.IsWellKnownType(WellKnownType.MulticastDelegate)
                   : false;
             }

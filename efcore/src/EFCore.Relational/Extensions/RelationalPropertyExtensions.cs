@@ -116,8 +116,7 @@ namespace Microsoft.EntityFrameworkCore
                 property.DeclaringEntityType,
                 StoreObjectType.Table
             );
-            return
-                table == null
+            return table == null
               ? property.GetDefaultColumnBaseName()
               : property.GetDefaultColumnName(table.Value);
         }
@@ -387,8 +386,7 @@ namespace Microsoft.EntityFrameworkCore
             in StoreObjectIdentifier storeObject
         ) {
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return
-                sharedTableRootProperty != null
+            return sharedTableRootProperty != null
               ? sharedTableRootProperty.GetColumnType(storeObject)
               : property.FindRelationalTypeMapping(storeObject)?.StoreType;
         }
@@ -915,8 +913,7 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return
-                sharedTableRootProperty != null
+            return sharedTableRootProperty != null
               ? GetMaxLength(sharedTableRootProperty, storeObject)
               : null;
         }
@@ -941,8 +938,7 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return
-                sharedTableRootProperty != null
+            return sharedTableRootProperty != null
               ? GetPrecision(sharedTableRootProperty, storeObject)
               : null;
         }
@@ -967,8 +963,7 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return
-                sharedTableRootProperty != null
+            return sharedTableRootProperty != null
               ? GetScale(sharedTableRootProperty, storeObject)
               : null;
         }
@@ -992,8 +987,7 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return
-                sharedTableRootProperty != null
+            return sharedTableRootProperty != null
               ? IsUnicode(sharedTableRootProperty, storeObject)
               : null;
         }

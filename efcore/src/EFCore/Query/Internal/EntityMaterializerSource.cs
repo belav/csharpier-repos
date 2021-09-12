@@ -139,8 +139,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 IPropertyBase property,
                 Expression value
             ) {
-                return
-                    property.IsIndexerProperty()
+                return property.IsIndexerProperty()
                   ? Expression.Assign(
                         Expression.MakeIndex(
                             parameter,

@@ -146,8 +146,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             //
             //      not >= 0   ->    < 0
 
-            return
-                syntaxFacts.IsAnyPattern(expressionOrPattern)
+            return syntaxFacts.IsAnyPattern(expressionOrPattern)
               ? generatorInternal.NotPattern(expressionOrPattern)
               : generator.LogicalNotExpression(expressionOrPattern);
         }
@@ -421,13 +420,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                       ? generator.ValueNotEqualsExpression(leftOperand, rightOperand)
                       : generator.ReferenceNotEqualsExpression(leftOperand, rightOperand);
                 case BinaryOperatorKind.LessThanOrEqual:
-                    return
-                        IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
+                    return IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
                       ? generator.ValueEqualsExpression(leftOperand, rightOperand)
                       : generator.LessThanOrEqualExpression(leftOperand, rightOperand);
                 case BinaryOperatorKind.GreaterThanOrEqual:
-                    return
-                        IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
+                    return IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
                       ? generator.ValueEqualsExpression(leftOperand, rightOperand)
                       : generator.GreaterThanOrEqualExpression(leftOperand, rightOperand);
                 case BinaryOperatorKind.LessThan:
@@ -483,8 +480,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         private static IOperation RemoveImplicitConversion(IOperation operation)
         {
-            return
-                operation is IConversionOperation conversion && conversion.IsImplicit
+            return operation is IConversionOperation conversion && conversion.IsImplicit
               ? RemoveImplicitConversion(conversion.Operand)
               : operation;
         }

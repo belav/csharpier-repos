@@ -1935,8 +1935,7 @@ namespace Microsoft.CodeAnalysis
 
         private static TypedConstantKind GetPrimitiveOrEnumTypedConstantKind(TypeSymbol type)
         {
-            return
-                (type.TypeKind == TypeKind.Enum)
+            return (type.TypeKind == TypeKind.Enum)
               ? TypedConstantKind.Enum
               : TypedConstantKind.Primitive;
         }
@@ -2885,8 +2884,7 @@ namespace Microsoft.CodeAnalysis
             HandleKind type = memberToken.Kind;
             Debug.Assert(type == HandleKind.MethodDefinition || type == HandleKind.MemberReference);
 
-            return
-                type == HandleKind.MethodDefinition
+            return type == HandleKind.MethodDefinition
               ? FindMethodSymbolInType(container, (MethodDefinitionHandle)memberToken)
               : GetMethodSymbolForMemberRef((MemberReferenceHandle)memberToken, container);
         }
@@ -2898,8 +2896,7 @@ namespace Microsoft.CodeAnalysis
             HandleKind type = memberToken.Kind;
             Debug.Assert(type == HandleKind.FieldDefinition || type == HandleKind.MemberReference);
 
-            return
-                type == HandleKind.FieldDefinition
+            return type == HandleKind.FieldDefinition
               ? FindFieldSymbolInType(container, (FieldDefinitionHandle)memberToken)
               : GetFieldSymbolForMemberRef((MemberReferenceHandle)memberToken, container);
         }

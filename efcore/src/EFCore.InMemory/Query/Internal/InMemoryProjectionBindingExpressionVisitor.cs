@@ -204,8 +204,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     }
 
                     var translation = _expressionTranslatingExpressionVisitor.Translate(expression);
-                    return
-                        translation == null
+                    return translation == null
                       ? base.Visit(expression)
                       : new ProjectionBindingExpression(
                             _queryExpression,
@@ -337,8 +336,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             if (extensionExpression is IncludeExpression includeExpression)
             {
-                return
-                    _clientEval
+                return _clientEval
                   ? base.VisitExtension(includeExpression)
                   : QueryCompilationContext.NotTranslatedExpression;
             }

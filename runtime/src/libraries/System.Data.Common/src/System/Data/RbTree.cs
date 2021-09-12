@@ -589,8 +589,7 @@ namespace System.Data
         {
             Debug.Assert(NIL != x_id, "nil left");
             Debug.Assert(NIL != z_id, "nil right");
-            return
-                (root_id == NIL)
+            return (root_id == NIL)
               ? CompareNode(Key(x_id), Key(z_id))
               : CompareSateliteTreeNode(Key(x_id), Key(z_id));
         }

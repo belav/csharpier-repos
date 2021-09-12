@@ -242,8 +242,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                         type.NativeIntegerUnderlyingType,
                         options
                     );
-                    return
-                        result.SpecialType == SpecialType.None
+                    return result.SpecialType == SpecialType.None
                       ? result
                       : result.AsNativeInteger();
                 }
@@ -1121,8 +1120,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 );
 
                 // NB: may return null if the method cannot be found in the retargeted type (e.g. removed in a subsequent version)
-                return
-                    ReferenceEquals(retargetedType, containingType)
+                return ReferenceEquals(retargetedType, containingType)
                   ? method
                   : FindMethodInRetargetedType(method, retargetedType, retargetedMethodComparer);
             }
@@ -1164,8 +1162,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 );
 
                 // NB: may return null if the property cannot be found in the retargeted type (e.g. removed in a subsequent version)
-                return
-                    ReferenceEquals(retargetedType, containingType)
+                return ReferenceEquals(retargetedType, containingType)
                   ? property
                   : FindPropertyInRetargetedType(
                         property,
@@ -1193,8 +1190,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 );
 
                 // NB: may return null if the event cannot be found in the retargeted type (e.g. removed in a subsequent version)
-                return
-                    ReferenceEquals(retargetedType, containingType)
+                return ReferenceEquals(retargetedType, containingType)
                   ? @event
                   : FindEventInRetargetedType(@event, retargetedType);
             }

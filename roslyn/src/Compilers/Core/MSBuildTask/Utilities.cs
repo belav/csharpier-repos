@@ -189,8 +189,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             var assemblyPath = buildTask.Location;
             var assemblyDirectory = Path.GetDirectoryName(assemblyPath);
 
-            return
-                RuntimeHostInfo.IsDesktopRuntime
+            return RuntimeHostInfo.IsDesktopRuntime
               ? Path.Combine(assemblyDirectory!, toolName)
               : Path.Combine(assemblyDirectory!, "bincore", toolName);
         }

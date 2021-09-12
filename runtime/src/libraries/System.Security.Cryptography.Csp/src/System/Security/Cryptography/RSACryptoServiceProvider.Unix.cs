@@ -69,8 +69,7 @@ namespace System.Security.Cryptography
             if (padding == null)
                 throw new ArgumentNullException(nameof(padding));
 
-            return
-                padding == RSAEncryptionPadding.Pkcs1
+            return padding == RSAEncryptionPadding.Pkcs1
               ? Decrypt(data, fOAEP: false)
               : padding == RSAEncryptionPadding.OaepSHA1
                   ? Decrypt(data, fOAEP: true)
@@ -121,8 +120,7 @@ namespace System.Security.Cryptography
             if (padding == null)
                 throw new ArgumentNullException(nameof(padding));
 
-            return
-                padding == RSAEncryptionPadding.Pkcs1
+            return padding == RSAEncryptionPadding.Pkcs1
               ? Encrypt(data, fOAEP: false)
               : padding == RSAEncryptionPadding.OaepSHA1
                   ? Encrypt(data, fOAEP: true)

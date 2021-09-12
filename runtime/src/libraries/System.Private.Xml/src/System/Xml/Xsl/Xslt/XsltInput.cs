@@ -61,8 +61,7 @@ namespace System.Xml.Xsl.Xslt
         {
             get
             {
-                return
-                    _nodeType == XmlNodeType.Element && 0 < _currentRecord
+                return _nodeType == XmlNodeType.Element && 0 < _currentRecord
                   ? XmlNodeType.Attribute
                   : _nodeType;
             }
@@ -798,8 +797,7 @@ namespace System.Xml.Xsl.Xslt
         {
             get
             {
-                return
-                    _scopeManager.ForwardCompatibility
+                return _scopeManager.ForwardCompatibility
                   ? XslVersion.ForwardsCompatible
                   : XslVersion.Current;
             }

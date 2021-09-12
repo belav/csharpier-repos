@@ -235,8 +235,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 cancellationToken
             );
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            return
-                TryGetNameWithoutAttributeSuffix(namedType.Name, syntaxFacts, out var simpleName)
+            return TryGetNameWithoutAttributeSuffix(namedType.Name, syntaxFacts, out var simpleName)
               ? FindReferencesInDocumentUsingIdentifierAsync(
                     simpleName,
                     document,

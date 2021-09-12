@@ -54,8 +54,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             private SyntaxNode CreateStatement(Compilation compilation, IMethodSymbol method)
             {
                 var factory = Document.GetLanguageService<SyntaxGenerator>();
-                return
-                    ThroughMember == null
+                return ThroughMember == null
                   ? factory.CreateThrowNotImplementedStatement(compilation)
                   : factory.GenerateDelegateThroughMemberStatement(method, ThroughMember);
             }

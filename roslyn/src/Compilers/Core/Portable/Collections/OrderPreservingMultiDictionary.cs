@@ -127,8 +127,7 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public Dictionary<K, ValueSet>.Enumerator GetEnumerator()
         {
-            return
-                _dictionary is null
+            return _dictionary is null
               ? s_emptyDictionary.GetEnumerator()
               : _dictionary.GetEnumerator();
         }
@@ -263,8 +262,7 @@ namespace Microsoft.CodeAnalysis.Collections
             {
                 Debug.Assert(this.Count >= 1);
                 var arrayBuilder = _value as ArrayBuilder<V>;
-                return
-                    arrayBuilder == null
+                return arrayBuilder == null
                   ? EqualityComparer<V>.Default.Equals(item, (V)_value)
                   : arrayBuilder.Contains(item);
             }

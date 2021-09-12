@@ -368,8 +368,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 Position++;
             }
 
-            return
-                start == Position
+            return start == Position
               ? (RegexToken?)null
               : CreateToken(
                     RegexKind.OptionsToken,

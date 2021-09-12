@@ -28,8 +28,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var comparer = GetKeyValueComparer()!;
 
-            return
-                comparer is IEqualityComparer<TProperty> nullableComparer
+            return comparer is IEqualityComparer<TProperty> nullableComparer
               ? nullableComparer
               : new NullableComparer<TProperty>(comparer);
         }

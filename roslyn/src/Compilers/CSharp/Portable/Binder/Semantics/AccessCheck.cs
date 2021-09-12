@@ -343,8 +343,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var containingType = type.ContainingType;
-            return
-                (object)containingType == null
+            return (object)containingType == null
               ? IsNonNestedTypeAccessible(
                     type.ContainingAssembly,
                     type.DeclaredAccessibility,
@@ -876,8 +875,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static ErrorCode GetProtectedMemberInSealedTypeError(
             NamedTypeSymbol containingType
         ) {
-            return
-                containingType.TypeKind == TypeKind.Struct
+            return containingType.TypeKind == TypeKind.Struct
               ? ErrorCode.ERR_ProtectedInStruct
               : ErrorCode.WRN_ProtectedInSealed;
         }

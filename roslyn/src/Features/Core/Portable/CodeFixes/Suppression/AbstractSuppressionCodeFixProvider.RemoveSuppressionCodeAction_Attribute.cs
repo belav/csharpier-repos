@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                             cancellationToken
                         )
                         .ConfigureAwait(false);
-                    return
-                        Fixer.IsSingleAttributeInAttributeList(attributeNode)
+                    return Fixer.IsSingleAttributeInAttributeList(attributeNode)
                       ? attributeNode.Parent
                       : attributeNode;
                 }

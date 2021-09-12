@@ -261,8 +261,7 @@ namespace System.Configuration.Internal
         internal static FileVersion StaticGetStreamVersion(string streamName)
         {
             FileInfo info = new FileInfo(streamName);
-            return
-                info.Exists
+            return info.Exists
               ? new FileVersion(true, info.Length, info.CreationTimeUtc, info.LastWriteTimeUtc)
               : new FileVersion(false, 0, DateTime.MinValue, DateTime.MinValue);
         }
@@ -274,8 +273,7 @@ namespace System.Configuration.Internal
             if (string.IsNullOrEmpty(streamName))
                 throw ExceptionUtil.UnexpectedError("InternalConfigHost::StaticOpenStreamForRead");
 
-            return
-                !File.Exists(streamName)
+            return !File.Exists(streamName)
               ? null
               : new FileStream(streamName, FileMode.Open, FileAccess.Read, FileShare.Read);
         }

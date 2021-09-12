@@ -225,8 +225,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // We're good; this one might be applicable in the given form.
 
-            return
-                expanded
+            return expanded
               ? ArgumentAnalysisResult.ExpandedForm(argsToParameters.ToImmutableArray())
               : ArgumentAnalysisResult.NormalForm(argsToParameters.ToImmutableArray());
         }

@@ -130,8 +130,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 // and the two forms are not allowed to mix/match.  Parenthesize the assignment to
                 // avoid the ambiguity.
                 var expression = arguments[0].Expression;
-                return
-                    SyntaxFacts.IsAssignmentExpression(expression.Kind())
+                return SyntaxFacts.IsAssignmentExpression(expression.Kind())
                   ? SyntaxFactory.ParenthesizedExpression(expression)
                   : expression;
             }

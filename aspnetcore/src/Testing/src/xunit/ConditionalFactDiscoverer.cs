@@ -23,8 +23,7 @@ namespace Microsoft.AspNetCore.Testing
             IAttributeInfo factAttribute
         ) {
             var skipReason = testMethod.EvaluateSkipConditions();
-            return
-                skipReason != null
+            return skipReason != null
               ? new SkippedTestCase(
                     skipReason,
                     _diagnosticMessageSink,

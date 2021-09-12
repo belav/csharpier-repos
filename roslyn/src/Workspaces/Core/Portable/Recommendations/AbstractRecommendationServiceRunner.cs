@@ -55,8 +55,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
             bool useBaseReferenceAccessibility
         ) {
             var symbols = TryGetMemberSymbolsForLambdaParameter(parameter, position);
-            return
-                symbols.IsDefault
+            return symbols.IsDefault
               ? GetMemberSymbols(
                     parameter.Type,
                     position,
@@ -403,8 +402,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
             if (container is not INamespaceOrTypeSymbol namespaceOrType)
                 return ImmutableArray<ISymbol>.Empty;
 
-            return
-                useBaseReferenceAccessibility
+            return useBaseReferenceAccessibility
               ? _context.SemanticModel.LookupBaseMembers(position)
               : LookupSymbolsInContainer(namespaceOrType, position, excludeInstance);
         }
@@ -414,8 +412,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
             int position,
             bool excludeInstance
         ) {
-            return
-                excludeInstance
+            return excludeInstance
               ? _context.SemanticModel.LookupStaticMembers(position, container)
               : SuppressDefaultTupleElements(
                     container,

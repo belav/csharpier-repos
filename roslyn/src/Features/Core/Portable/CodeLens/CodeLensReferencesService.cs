@@ -372,8 +372,7 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 cancellationToken
             )?.ToDisplayString(MethodDisplayFormat);
 
-            return
-                !string.IsNullOrEmpty(fullName)
+            return !string.IsNullOrEmpty(fullName)
               ? new ReferenceMethodDescriptor(
                     fullName,
                     document.FilePath,

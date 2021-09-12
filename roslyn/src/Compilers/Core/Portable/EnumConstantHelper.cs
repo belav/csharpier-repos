@@ -144,8 +144,7 @@ namespace Microsoft.CodeAnalysis
 
         private static EnumOverflowKind CheckOverflow(ulong maxOffset, uint offset)
         {
-            return
-                (offset <= maxOffset)
+            return (offset <= maxOffset)
               ? EnumOverflowKind.NoOverflow
               : (
                     ((offset - 1) == maxOffset)

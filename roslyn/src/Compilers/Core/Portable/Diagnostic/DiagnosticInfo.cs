@@ -310,8 +310,7 @@ namespace Microsoft.CodeAnalysis
 
         private static ImmutableArray<string> GetCustomTags(DiagnosticSeverity defaultSeverity)
         {
-            return
-                defaultSeverity == DiagnosticSeverity.Error
+            return defaultSeverity == DiagnosticSeverity.Error
               ? s_compilerErrorCustomTags
               : s_compilerNonErrorCustomTags;
         }

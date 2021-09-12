@@ -38,8 +38,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static IEnumerable<IPropertySymbol> GetIndexers(this INamespaceOrTypeSymbol? symbol)
         {
-            return
-                symbol == null
+            return symbol == null
               ? SpecializedCollections.EmptyEnumerable<IPropertySymbol>()
               : symbol.GetMembers(WellKnownMemberNames.Indexer)
                     .OfType<IPropertySymbol>()

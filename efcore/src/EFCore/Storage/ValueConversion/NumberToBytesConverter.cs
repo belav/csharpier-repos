@@ -219,8 +219,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         {
             var type = typeof(TNumber).UnwrapNullableType();
 
-            return
-                type == typeof(decimal)
+            return type == typeof(decimal)
               ? 16
               : (
                     type == typeof(long) || type == typeof(ulong) || type == typeof(double)

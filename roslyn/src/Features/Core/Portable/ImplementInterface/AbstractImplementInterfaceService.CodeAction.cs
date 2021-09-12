@@ -671,8 +671,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
 
             private bool IdentifiersMatch(string identifier1, string identifier2)
             {
-                return
-                    IsCaseSensitive
+                return IsCaseSensitive
                   ? identifier1 == identifier2
                   : StringComparer.OrdinalIgnoreCase.Equals(identifier1, identifier2);
             }

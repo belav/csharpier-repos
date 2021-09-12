@@ -246,8 +246,7 @@ namespace ServerComparison.FunctionalTests
         private static string GetContentLength(HttpResponseMessage response)
         {
             // Don't use response.Content.Headers.ContentLength, it will dynamically calculate the value if it can.
-            return
-                response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out var values)
+            return response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out var values)
               ? values.FirstOrDefault()
               : null;
         }

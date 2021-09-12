@@ -78,8 +78,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            return
-                fallbackToMainEntryPoint
+            return fallbackToMainEntryPoint
               ? (SynthesizedSimpleProgramEntryPointSymbol)entryPoints[0]
               : null;
         }

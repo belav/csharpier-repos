@@ -510,8 +510,7 @@ namespace Microsoft.DotNet.OpenApi.Commands
 
         internal string GetFullPath(string path)
         {
-            return
-                Path.IsPathFullyQualified(path)
+            return Path.IsPathFullyQualified(path)
               ? path
               : Path.GetFullPath(path, WorkingDirectory);
         }

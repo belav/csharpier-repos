@@ -172,8 +172,7 @@ namespace System.ComponentModel.Composition.Hosting
             }
             else
             {
-                return
-                    (member.MemberType != MemberTypes.Method)
+                return (member.MemberType != MemberTypes.Method)
                   ? member.GetDefaultTypeFromMember()
                   : null;
             }

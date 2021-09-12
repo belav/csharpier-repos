@@ -207,8 +207,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             get
             {
                 var merged = _container as MergedNamespaceSymbol;
-                return
-                    ((object)merged != null)
+                return ((object)merged != null)
                   ? merged.GetConstituentForCompilation(this.Compilation)
                   : _container;
             }

@@ -1214,8 +1214,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             string referenceLanguage,
             bool isProjectReference
         ) {
-            return
-                isProjectReference
+            return isProjectReference
               ? CreateMarkupForProjectWithProjectReference(
                     currentFile,
                     referencedFile,
@@ -2121,8 +2120,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                 trigger
             );
 
-            return
-                completionList == null
+            return completionList == null
               ? ImmutableArray<RoslynCompletion.CompletionItem>.Empty
               : completionList.Items;
         }

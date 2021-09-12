@@ -2096,8 +2096,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                             //   struct B { }
                                             //   if (a?.B != null) _ = ((A)a).B.Value; // no warning
                                             int containingSlot = MakeSlot(operand);
-                                            return
-                                                containingSlot < 0
+                                            return containingSlot < 0
                                               ? -1
                                               : GetNullableOfTValueSlot(
                                                     operandType,
@@ -2246,8 +2245,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static object GetParameterAsDiagnosticArgument(ParameterSymbol? parameterOpt)
         {
-            return
-                parameterOpt is null
+            return parameterOpt is null
               ? (object)""
               : new FormattedSymbol(parameterOpt, SymbolDisplayFormat.ShortFormat);
         }
@@ -2255,8 +2253,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static object GetContainingSymbolAsDiagnosticArgument(ParameterSymbol? parameterOpt)
         {
             var containingSymbol = parameterOpt?.ContainingSymbol;
-            return
-                containingSymbol is null
+            return containingSymbol is null
               ? (object)""
               : new FormattedSymbol(containingSymbol, SymbolDisplayFormat.MinimallyQualifiedFormat);
         }
@@ -5777,8 +5774,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr,
             TypeWithAnnotations type
         ) {
-            return
-                !type.HasType
+            return !type.HasType
               ? expr
               : new BoundExpressionWithNullability(
                     expr.Syntax,
@@ -6234,8 +6230,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // Annotations are ignored when binding an attribute to avoid cycles. (Members used
             // in attributes are error scenarios, so missing warnings should not be important.)
-            return
-                IsAnalyzingAttribute
+            return IsAnalyzingAttribute
               ? FlowAnalysisAnnotations.None
               : parameter.FlowAnalysisAnnotations;
         }
@@ -7592,8 +7587,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundKind.DefaultLiteral:
                     case BoundKind.DefaultExpression:
                     case BoundKind.Literal:
-                        return
-                            (expr.ConstantValue?.IsNull != false)
+                        return (expr.ConstantValue?.IsNull != false)
                           ? NullableAnnotation.NotAnnotated
                           : NullableAnnotation.Annotated;
                     case BoundKind.ExpressionWithNullability:
@@ -7831,8 +7825,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ref discardedUseSiteInfo
                 );
             }
-            return
-                useExpression
+            return useExpression
               ? (
                     fromExplicitCast
                         ? conversions.ClassifyConversionFromExpression(
@@ -8578,8 +8571,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations destination,
             bool requireIdentity
         ) {
-            return
-                requireIdentity
+            return requireIdentity
               ? _conversions.HasTopLevelNullabilityIdentityConversion(source, destination)
               : _conversions.HasTopLevelNullabilityImplicitConversion(source, destination);
         }
@@ -9113,8 +9105,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     out var annotation
                                 )
                             ) {
-                                return
-                                    (annotation == NullableAnnotation.Annotated)
+                                return (annotation == NullableAnnotation.Annotated)
                                   ? NullableFlowState.MaybeDefault
                                   : NullableFlowState.MaybeNull;
                             }
@@ -9161,8 +9152,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Debug.Assert(dependsOn); // If this case fails, add a corresponding test.
                         if (dependsOn)
                         {
-                            return
-                                (annotation == NullableAnnotation.Annotated)
+                            return (annotation == NullableAnnotation.Annotated)
                               ? NullableFlowState.MaybeDefault
                               : NullableFlowState.MaybeNull;
                         }
@@ -9586,8 +9576,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations returnType,
             NullableFlowState operandState
         ) {
-            return
-                isLifted
+            return isLifted
               ? GetLiftedReturnType(returnType, operandState)
               : returnType.ToTypeWithState();
         }
@@ -10125,8 +10114,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             static FlowAnalysisAnnotations getFieldAnnotations(FieldSymbol field)
             {
-                return
-                    field.AssociatedSymbol is PropertySymbol property
+                return field.AssociatedSymbol is PropertySymbol property
                   ? property.GetFlowAnalysisAnnotations()
                   : field.FlowAnalysisAnnotations;
             }
@@ -10942,16 +10930,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private TypeWithAnnotations GetDeclaredLocalResult(LocalSymbol local)
         {
-            return
-                _variables.TryGetType(local, out TypeWithAnnotations type)
+            return _variables.TryGetType(local, out TypeWithAnnotations type)
               ? type
               : local.TypeWithAnnotations;
         }
 
         private TypeWithAnnotations GetDeclaredParameterResult(ParameterSymbol parameter)
         {
-            return
-                _variables.TryGetType(parameter, out TypeWithAnnotations type)
+            return _variables.TryGetType(parameter, out TypeWithAnnotations type)
               ? type
               : parameter.TypeWithAnnotations;
         }
@@ -11179,8 +11165,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SpecialMember.System_Nullable_T_get_Value
             );
             valueProperty = getValue?.AsMember((NamedTypeSymbol)containingType)?.AssociatedSymbol;
-            return
-                (valueProperty is null)
+            return (valueProperty is null)
               ? -1
               : GetOrCreateSlot(
                     valueProperty,

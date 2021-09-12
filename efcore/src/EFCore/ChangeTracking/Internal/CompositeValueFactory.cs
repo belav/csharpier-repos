@@ -160,8 +160,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ) {
             var comparers = properties.Select(p => p.GetKeyValueComparer()).ToList();
 
-            return
-                comparers.All(c => c != null)
+            return comparers.All(c => c != null)
               ? new CompositeCustomComparer(comparers!)
               : properties.Any(p => typeof(IStructuralEquatable).IsAssignableFrom(p.ClrType))
                   ? (IEqualityComparer<object[]>)new StructuralCompositeComparer()

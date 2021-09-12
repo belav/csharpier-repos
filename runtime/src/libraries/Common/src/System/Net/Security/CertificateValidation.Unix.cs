@@ -70,8 +70,7 @@ namespace System.Net.Security
                 hostNameMatch == 0 || hostNameMatch == 1,
                 $"Expected 0 or 1 from CheckX509Hostname, got {hostNameMatch}"
             );
-            return
-                hostNameMatch == 1
+            return hostNameMatch == 1
               ? errors
               : errors | SslPolicyErrors.RemoteCertificateNameMismatch;
         }

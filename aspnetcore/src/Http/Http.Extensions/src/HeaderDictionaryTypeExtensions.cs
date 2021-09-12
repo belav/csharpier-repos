@@ -184,8 +184,7 @@ namespace Microsoft.AspNetCore.Http
                 new Func<string, CacheControlHeaderValue?>(
                     value =>
                     {
-                        return
-                            CacheControlHeaderValue.TryParse(value, out var result)
+                        return CacheControlHeaderValue.TryParse(value, out var result)
                           ? result
                           : null;
                     }
@@ -196,8 +195,7 @@ namespace Microsoft.AspNetCore.Http
                 new Func<string, ContentDispositionHeaderValue?>(
                     value =>
                     {
-                        return
-                            ContentDispositionHeaderValue.TryParse(value, out var result)
+                        return ContentDispositionHeaderValue.TryParse(value, out var result)
                           ? result
                           : null;
                     }
@@ -208,8 +206,7 @@ namespace Microsoft.AspNetCore.Http
                 new Func<string, ContentRangeHeaderValue?>(
                     value =>
                     {
-                        return
-                            ContentRangeHeaderValue.TryParse(value, out var result)
+                        return ContentRangeHeaderValue.TryParse(value, out var result)
                           ? result
                           : null;
                     }
@@ -229,8 +226,7 @@ namespace Microsoft.AspNetCore.Http
                 new Func<string, RangeConditionHeaderValue?>(
                     value =>
                     {
-                        return
-                            RangeConditionHeaderValue.TryParse(value, out var result)
+                        return RangeConditionHeaderValue.TryParse(value, out var result)
                           ? result
                           : null;
                     }
@@ -268,8 +264,7 @@ namespace Microsoft.AspNetCore.Http
                 new Func<string, long?>(
                     value =>
                     {
-                        return
-                            HeaderUtilities.TryParseNonNegativeInt64(value, out var result)
+                        return HeaderUtilities.TryParseNonNegativeInt64(value, out var result)
                           ? result
                           : null;
                     }
@@ -284,8 +279,7 @@ namespace Microsoft.AspNetCore.Http
                 new Func<IList<string>, IList<MediaTypeHeaderValue>>(
                     value =>
                     {
-                        return
-                            MediaTypeHeaderValue.TryParseList(value, out var result)
+                        return MediaTypeHeaderValue.TryParseList(value, out var result)
                           ? result
                           : Array.Empty<MediaTypeHeaderValue>();
                     }
@@ -296,8 +290,7 @@ namespace Microsoft.AspNetCore.Http
                 new Func<IList<string>, IList<StringWithQualityHeaderValue>>(
                     value =>
                     {
-                        return
-                            StringWithQualityHeaderValue.TryParseList(value, out var result)
+                        return StringWithQualityHeaderValue.TryParseList(value, out var result)
                           ? result
                           : Array.Empty<StringWithQualityHeaderValue>();
                     }
@@ -308,8 +301,7 @@ namespace Microsoft.AspNetCore.Http
                 new Func<IList<string>, IList<CookieHeaderValue>>(
                     value =>
                     {
-                        return
-                            CookieHeaderValue.TryParseList(value, out var result)
+                        return CookieHeaderValue.TryParseList(value, out var result)
                           ? result
                           : Array.Empty<CookieHeaderValue>();
                     }
@@ -320,8 +312,7 @@ namespace Microsoft.AspNetCore.Http
                 new Func<IList<string>, IList<EntityTagHeaderValue>>(
                     value =>
                     {
-                        return
-                            EntityTagHeaderValue.TryParseList(value, out var result)
+                        return EntityTagHeaderValue.TryParseList(value, out var result)
                           ? result
                           : Array.Empty<EntityTagHeaderValue>();
                     }
@@ -332,8 +323,7 @@ namespace Microsoft.AspNetCore.Http
                 new Func<IList<string>, IList<SetCookieHeaderValue>>(
                     value =>
                     {
-                        return
-                            SetCookieHeaderValue.TryParseList(value, out var result)
+                        return SetCookieHeaderValue.TryParseList(value, out var result)
                           ? result
                           : Array.Empty<SetCookieHeaderValue>();
                     }

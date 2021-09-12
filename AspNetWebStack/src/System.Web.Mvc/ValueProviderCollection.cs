@@ -73,8 +73,7 @@ namespace System.Web.Mvc
             // normal IValueProvider members.
 
             IUnvalidatedValueProvider unvalidatedProvider = provider as IUnvalidatedValueProvider;
-            return
-                (unvalidatedProvider != null)
+            return (unvalidatedProvider != null)
               ? unvalidatedProvider.GetValue(key, skipValidation)
               : provider.GetValue(key);
         }
@@ -84,8 +83,7 @@ namespace System.Web.Mvc
             string prefix
         ) {
             IEnumerableValueProvider enumeratedProvider = provider as IEnumerableValueProvider;
-            return
-                (enumeratedProvider != null)
+            return (enumeratedProvider != null)
               ? enumeratedProvider.GetKeysFromPrefix(prefix)
               : null;
         }

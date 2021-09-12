@@ -150,8 +150,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         private static TNode WithAnnotations<TNode>(TNode node, CodeGenerationOptions? options)
             where TNode : SyntaxNode
         {
-            return
-                options?.AddImports ?? true
+            return options?.AddImports ?? true
               ? node.WithAdditionalAnnotations(Simplifier.AddImportsAnnotation)
               : node;
         }
@@ -486,8 +485,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 m => !m.IsImplicitlyDeclared || m.IsTupleField()
             );
 
-            return
-                options.AutoInsertionLocation
+            return options.AutoInsertionLocation
               ? AddMembersToAppropiateLocationInDestination(
                     destination,
                     filteredMembers,

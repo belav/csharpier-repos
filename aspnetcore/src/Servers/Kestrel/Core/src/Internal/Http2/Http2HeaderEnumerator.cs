@@ -61,8 +61,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
 
             if (_headersType == HeadersType.Headers)
             {
-                return
-                    _headersEnumerator.MoveNext()
+                return _headersEnumerator.MoveNext()
                   ? SetCurrent(
                         _headersEnumerator.Current.Key,
                         _headersEnumerator.Current.Value,
@@ -72,8 +71,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             }
             else if (_headersType == HeadersType.Trailers)
             {
-                return
-                    _trailersEnumerator.MoveNext()
+                return _trailersEnumerator.MoveNext()
                   ? SetCurrent(
                         _trailersEnumerator.Current.Key,
                         _trailersEnumerator.Current.Value,
@@ -83,8 +81,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             }
             else
             {
-                return
-                    _genericEnumerator!.MoveNext()
+                return _genericEnumerator!.MoveNext()
                   ? SetCurrent(
                         _genericEnumerator.Current.Key,
                         _genericEnumerator.Current.Value,

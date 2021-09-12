@@ -343,8 +343,7 @@ namespace System.Net
             get
             {
                 Uri hostUri = _hostUri ?? Address;
-                return
-                    (_hostUri == null || !_hostHasPort) && Address.IsDefaultPort
+                return (_hostUri == null || !_hostHasPort) && Address.IsDefaultPort
                   ? hostUri.Host
                   : hostUri.Host + ":" + hostUri.Port;
             }

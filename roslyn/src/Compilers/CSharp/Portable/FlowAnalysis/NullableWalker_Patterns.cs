@@ -319,8 +319,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public static PossiblyConditionalState Create(NullableWalker nullableWalker)
             {
-                return
-                    nullableWalker.IsConditionalState
+                return nullableWalker.IsConditionalState
                   ? new PossiblyConditionalState(
                         nullableWalker.StateWhenTrue,
                         nullableWalker.StateWhenFalse
@@ -330,8 +329,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public PossiblyConditionalState Clone()
             {
-                return
-                    IsConditionalState
+                return IsConditionalState
                   ? new PossiblyConditionalState(StateWhenTrue, StateWhenFalse)
                   : new PossiblyConditionalState(State);
             }

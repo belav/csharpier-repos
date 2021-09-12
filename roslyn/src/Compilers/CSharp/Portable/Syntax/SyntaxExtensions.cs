@@ -226,8 +226,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             this SimpleNameSyntax simpleName,
             SyntaxToken identifier
         ) {
-            return
-                simpleName.Kind() == SyntaxKind.IdentifierName
+            return simpleName.Kind() == SyntaxKind.IdentifierName
               ? (SimpleNameSyntax)((IdentifierNameSyntax)simpleName).WithIdentifier(identifier)
               : (SimpleNameSyntax)((GenericNameSyntax)simpleName).WithIdentifier(identifier);
         }

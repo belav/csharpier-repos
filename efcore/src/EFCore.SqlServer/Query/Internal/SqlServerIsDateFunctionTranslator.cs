@@ -52,8 +52,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return
-                _methodInfo.Equals(method)
+            return _methodInfo.Equals(method)
               ? _sqlExpressionFactory.Convert(
                     _sqlExpressionFactory.Function(
                         "ISDATE",

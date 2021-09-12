@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         {
             get
             {
-                return
-                    this is GenericNameSyntax
+                return this is GenericNameSyntax
                   ? ((GenericNameSyntax)this).TypeArgumentList.Arguments.Count
                   : 0;
             }

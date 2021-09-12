@@ -96,8 +96,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 MethodSymbol originalGetMethod = OriginalDefinition.GetMethod;
-                return
-                    (object)originalGetMethod == null
+                return (object)originalGetMethod == null
                   ? null
                   : originalGetMethod.AsMember(_containingType);
             }
@@ -108,8 +107,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 MethodSymbol originalSetMethod = OriginalDefinition.SetMethod;
-                return
-                    (object)originalSetMethod == null
+                return (object)originalSetMethod == null
                   ? null
                   : originalSetMethod.AsMember(_containingType);
             }

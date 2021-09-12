@@ -104,8 +104,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         private Task FlushNowAsync(PipeWriter pipeWriter, CancellationToken cancellationToken)
         {
             var awaitable = pipeWriter.FlushAsync(cancellationToken);
-            return
-                awaitable.IsCompleted
+            return awaitable.IsCompleted
               ? Task.CompletedTask
               : FlushNowAsyncAwaited(awaitable, cancellationToken);
         }

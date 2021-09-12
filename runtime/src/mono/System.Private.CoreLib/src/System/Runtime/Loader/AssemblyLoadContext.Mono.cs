@@ -212,8 +212,7 @@ namespace System.Runtime.Loader
 
         private static RuntimeAssembly? GetRuntimeAssembly(Assembly? asm)
         {
-            return
-                asm == null
+            return asm == null
               ? null
               : asm is RuntimeAssembly rtAssembly
                   ? rtAssembly

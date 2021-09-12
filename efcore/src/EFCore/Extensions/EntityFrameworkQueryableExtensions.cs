@@ -2656,8 +2656,7 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
             Check.NotEmpty(navigationPropertyPath, nameof(navigationPropertyPath));
 
-            return
-                source.Provider is EntityQueryProvider
+            return source.Provider is EntityQueryProvider
               ? source.Provider.CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -2690,8 +2689,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
+            return source.Provider is EntityQueryProvider
               ? source.Provider.CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -2724,8 +2722,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
+            return source.Provider is EntityQueryProvider
               ? source.Provider.CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -2774,8 +2771,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
+            return source.Provider is EntityQueryProvider
               ? source.Provider.CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -2821,8 +2817,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
+            return source.Provider is EntityQueryProvider
               ? source.Provider.CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -2859,8 +2854,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
+            return source.Provider is EntityQueryProvider
               ? source.Provider.CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -2927,8 +2921,7 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
             Check.NotEmpty(tag, nameof(tag));
 
-            return
-                source.Provider is EntityQueryProvider
+            return source.Provider is EntityQueryProvider
               ? source.Provider.CreateQuery<T>(
                     Expression.Call(
                         instance: null,

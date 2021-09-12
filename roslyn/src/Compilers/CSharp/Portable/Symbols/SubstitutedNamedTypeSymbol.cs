@@ -146,8 +146,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override NamedTypeSymbol GetDeclaredBaseType(
             ConsList<TypeSymbol> basesBeingResolved
         ) {
-            return
-                _unbound
+            return _unbound
               ? null
               : Map.SubstituteNamedType(OriginalDefinition.GetDeclaredBaseType(basesBeingResolved));
         }
@@ -155,8 +154,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
             ConsList<TypeSymbol> basesBeingResolved
         ) {
-            return
-                _unbound
+            return _unbound
               ? ImmutableArray<NamedTypeSymbol>.Empty
               : Map.SubstituteNamedTypes(
                     OriginalDefinition.GetDeclaredInterfaces(basesBeingResolved)
@@ -171,8 +169,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol> basesBeingResolved
         ) {
-            return
-                _unbound
+            return _unbound
               ? ImmutableArray<NamedTypeSymbol>.Empty
               : Map.SubstituteNamedTypes(
                     OriginalDefinition.InterfacesNoUseSiteDiagnostics(basesBeingResolved)
@@ -363,8 +360,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers()
         {
-            return
-                _unbound
+            return _unbound
               ? GetMembers()
               : OriginalDefinition.GetEarlyAttributeDecodingMembers()
                     .SelectAsArray(s_symbolAsMemberFunc, this);

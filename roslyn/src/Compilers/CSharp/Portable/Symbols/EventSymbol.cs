@@ -106,8 +106,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </remarks>
         public ImmutableArray<CSharpAttributeData> GetFieldAttributes()
         {
-            return
-                (object?)this.AssociatedField == null
+            return (object?)this.AssociatedField == null
               ? ImmutableArray<CSharpAttributeData>.Empty
               : this.AssociatedField.GetAttributes();
         }
@@ -261,8 +260,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             );
             Debug.Assert(newOwner.IsDefinition || newOwner is SubstitutedNamedTypeSymbol);
-            return
-                newOwner.IsDefinition
+            return newOwner.IsDefinition
               ? this
               : new SubstitutedEventSymbol((newOwner as SubstitutedNamedTypeSymbol)!, this);
         }

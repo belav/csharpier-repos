@@ -40,8 +40,7 @@ namespace System.IO
                     c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
             }
 
-            return
-                hasSeparator
+            return hasSeparator
               ? directoryPath + name
               : directoryPath + Path.DirectorySeparatorChar + name;
         }

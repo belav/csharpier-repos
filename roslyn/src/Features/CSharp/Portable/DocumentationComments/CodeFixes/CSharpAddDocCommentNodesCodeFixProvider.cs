@@ -91,8 +91,7 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
                 )
                 .FirstOrDefault(f => f is ParameterListSyntax);
 
-            return
-                parameterList != null
+            return parameterList != null
               ? parameterList.Parameters.Select(s => s.Identifier.ValueText).ToList()
               : new List<string>();
         }

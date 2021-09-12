@@ -218,8 +218,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             var glyphGroup = glyph.GetStandardGlyphGroup();
             var glyphItem = glyph.GetStandardGlyphItem();
 
-            return
-                glyphGroup < StandardGlyphGroup.GlyphGroupError
+            return glyphGroup < StandardGlyphGroup.GlyphGroupError
               ? (ushort)((int)glyphGroup + (int)glyphItem)
               : (ushort)glyphGroup;
         }

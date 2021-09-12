@@ -1266,8 +1266,7 @@ namespace System.Speech.Recognition
                     lock (SapiRecognizer) // Lock to protect _audioStatus.
                     {
                         SpeechAudioFormatInfo audioFormat = AudioFormat;
-                        return
-                            audioFormat.AverageBytesPerSecond > 0
+                        return audioFormat.AverageBytesPerSecond > 0
                           ? new TimeSpan(
                                 (long)(
                                     (recoStatus.AudioStatus.CurDevicePos * TimeSpan.TicksPerSecond)

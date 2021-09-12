@@ -49,8 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 bool badRegion = false;
                 walker.Analyze(ref badRegion, diagnostics: null);
-                return
-                    badRegion
+                return badRegion
                   ? (new HashSet<Symbol>(), new HashSet<Symbol>())
                   : (walker._definitelyAssignedOnEntry, walker._definitelyAssignedOnExit);
             }

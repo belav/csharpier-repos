@@ -413,16 +413,14 @@ namespace Microsoft.CodeAnalysis.Formatting
             // special cases (beginning of a file, end of a file)
             if (_treeData.IsFirstToken(token2.Token))
             {
-                return
-                    this.FormatBeginningOfTree
+                return this.FormatBeginningOfTree
                   ? GetTriviaDataAtBeginningOfTree()
                   : GetOriginalTriviaData(token1, token2);
             }
 
             if (_treeData.IsLastToken(token1.Token))
             {
-                return
-                    this.FormatEndOfTree
+                return this.FormatEndOfTree
                   ? GetTriviaDataAtEndOfTree()
                   : GetOriginalTriviaData(token1, token2);
             }

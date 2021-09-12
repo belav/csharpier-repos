@@ -1274,8 +1274,7 @@ namespace System.Net
         /// </summary>
         private string FormatFtpCommand(string command, string? parameter)
         {
-            return
-                string.IsNullOrEmpty(parameter)
+            return string.IsNullOrEmpty(parameter)
               ? command + "\r\n"
               : command + " " + parameter + "\r\n";
         }

@@ -186,8 +186,7 @@ namespace Microsoft.AspNetCore.Identity.Test
                     .Single(
                         a => a.Key == "Microsoft.AspNetCore.Testing.DefaultUIProjectPath"
                     ).Value;
-            return
-                Directory.Exists(projectPath)
+            return Directory.Exists(projectPath)
               ? projectPath
               : Path.Combine(FindHelixSlnFileDirectory(), "UI");
         }

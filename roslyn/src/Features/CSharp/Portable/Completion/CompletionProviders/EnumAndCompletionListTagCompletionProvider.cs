@@ -416,8 +416,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                           .FirstOrDefault()
                     : null;
 
-            return
-                completionListType != null && completionListType.IsAccessibleWithin(within)
+            return completionListType != null && completionListType.IsAccessibleWithin(within)
               ? completionListType
               : null;
         }

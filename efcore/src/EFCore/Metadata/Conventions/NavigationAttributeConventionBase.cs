@@ -393,8 +393,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 return Enumerable.Empty<TCustomAttribute>();
             }
 
-            return
-                Attribute.IsDefined(memberInfo, typeof(TCustomAttribute), inherit: true)
+            return Attribute.IsDefined(memberInfo, typeof(TCustomAttribute), inherit: true)
               ? memberInfo.GetCustomAttributes<TCustomAttribute>(true)
               : Enumerable.Empty<TCustomAttribute>();
         }

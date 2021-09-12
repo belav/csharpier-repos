@@ -247,8 +247,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
             Debug.Assert(addParameterViewModel.IsCallsiteRegularValue);
 
-            return
-                addParameterViewModel.UseNamedArguments
+            return addParameterViewModel.UseNamedArguments
               ? CallSiteKind.ValueWithName
               : CallSiteKind.Value;
         }

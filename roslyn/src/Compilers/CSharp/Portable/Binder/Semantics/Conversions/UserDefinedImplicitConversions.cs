@@ -675,8 +675,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // dev10 bug, we allow it. See the comment regarding bug 17021 above for more details.
 
             var result = ClassifyStandardImplicitConversion(aExpr, a, b, ref useSiteInfo);
-            return
-                IsEncompassingImplicitConversionKind(result.Kind)
+            return IsEncompassingImplicitConversionKind(result.Kind)
               ? result
               : Conversion.NoConversion;
         }

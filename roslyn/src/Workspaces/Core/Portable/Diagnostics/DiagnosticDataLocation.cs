@@ -115,8 +115,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return default;
             }
 
-            return
-                IsMapped
+            return IsMapped
               ? new(
                     filePath,
                     new(MappedStartLine, MappedStartColumn),

@@ -31,8 +31,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 type,
                 parameters
             );
-            return
-                prerendered
+            return prerendered
               ? ServerComponentMarker.Prerendered(sequence, serverComponent)
               : ServerComponentMarker.NonPrerendered(sequence, serverComponent);
         }

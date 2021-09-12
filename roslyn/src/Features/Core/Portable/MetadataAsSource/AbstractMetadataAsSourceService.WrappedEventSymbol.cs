@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             {
                 get
                 {
-                    return
-                        CanImplementImplicitly
+                    return CanImplementImplicitly
                       ? ImmutableArray.Create<IEventSymbol>()
                       : _symbol.ExplicitInterfaceImplementations;
                 }

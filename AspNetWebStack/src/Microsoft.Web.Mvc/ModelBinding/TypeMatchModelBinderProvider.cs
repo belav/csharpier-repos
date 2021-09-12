@@ -13,8 +13,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
         ) {
-            return
-                (TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext) != null)
+            return (TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext) != null)
               ? new TypeMatchModelBinder()
               : null /* no match */
             ;

@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         private static readonly Func<Document, ISymbol, string> s_logDocument = (d, s) =>
         {
-            return
-                (d.Name != null && s.Name != null)
+            return (d.Name != null && s.Name != null)
               ? string.Format("{0} - {1}", d.Name, s.Name)
               : string.Empty;
         };

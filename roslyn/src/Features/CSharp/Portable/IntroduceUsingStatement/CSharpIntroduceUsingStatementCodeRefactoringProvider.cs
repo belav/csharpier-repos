@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
         protected override SyntaxList<StatementSyntax> GetStatements(
             SyntaxNode parentOfStatementsToSurround
         ) {
-            return
-                parentOfStatementsToSurround is BlockSyntax block
+            return parentOfStatementsToSurround is BlockSyntax block
               ? block.Statements
               : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
                   ? switchSection.Statements
@@ -59,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
             SyntaxNode parentOfStatementsToSurround,
             SyntaxList<StatementSyntax> statements
         ) {
-            return
-                parentOfStatementsToSurround is BlockSyntax block
+            return parentOfStatementsToSurround is BlockSyntax block
               ? block.WithStatements(statements) as SyntaxNode
               : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
                   ? switchSection.WithStatements(statements)

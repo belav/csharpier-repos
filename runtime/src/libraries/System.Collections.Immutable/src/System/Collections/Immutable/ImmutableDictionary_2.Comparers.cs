@@ -165,8 +165,7 @@ namespace System.Collections.Immutable
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));
 
-                return
-                    keyComparer == Default.KeyComparer && valueComparer == Default.ValueComparer
+                return keyComparer == Default.KeyComparer && valueComparer == Default.ValueComparer
                   ? Default
                   : new Comparers(keyComparer, valueComparer);
             }
@@ -181,8 +180,7 @@ namespace System.Collections.Immutable
             {
                 Requires.NotNull(valueComparer, nameof(valueComparer));
 
-                return
-                    _valueComparer == valueComparer
+                return _valueComparer == valueComparer
                   ? this
                   : Get(this.KeyComparer, valueComparer);
             }

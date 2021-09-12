@@ -176,8 +176,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     node = GetEnclosingNode(node.Value);
                 }
 
-                return
-                    node == null
+                return node == null
                   ? activeSpan
                   : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
@@ -224,8 +223,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     }
                 }
 
-                return
-                    node == null
+                return node == null
                   ? activeSpan
                   : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
@@ -287,8 +285,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     }
                 }
 
-                return
-                    node == null
+                return node == null
                   ? activeSpan
                   : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
@@ -351,8 +348,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     }
                 }
 
-                return
-                    node == null
+                return node == null
                   ? activeSpan
                   : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }

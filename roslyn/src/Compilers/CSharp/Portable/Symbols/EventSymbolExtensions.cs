@@ -16,8 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this EventSymbol @event,
             bool isAdder
         ) {
-            return
-                isAdder
+            return isAdder
               ? @event.GetOwnOrInheritedAddMethod()
               : @event.GetOwnOrInheritedRemoveMethod();
         }

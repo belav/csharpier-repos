@@ -237,8 +237,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
 
         public SyntaxToken GetIdentifierOfGenericName(SyntaxNode? genericName)
         {
-            return
-                genericName is GenericNameSyntax csharpGenericName
+            return genericName is GenericNameSyntax csharpGenericName
               ? csharpGenericName.Identifier
               : default;
         }
@@ -1311,8 +1310,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                         var structure = triviaTok.GetStructure();
                         if (structure is BranchingDirectiveTriviaSyntax branch)
                         {
-                            return
-                                !branch.IsActive || !branch.BranchTaken
+                            return !branch.IsActive || !branch.BranchTaken
                               ? TextSpan.FromBounds(branch.FullSpan.Start, position)
                               : default;
                         }

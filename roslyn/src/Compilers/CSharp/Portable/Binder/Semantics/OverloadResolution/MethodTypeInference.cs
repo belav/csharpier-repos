@@ -432,8 +432,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private RefKind GetRefKind(int index)
         {
             Debug.Assert(0 <= index && index < _formalParameterTypes.Length);
-            return
-                _formalParameterRefKinds.IsDefault
+            return _formalParameterRefKinds.IsDefault
               ? RefKind.None
               : _formalParameterRefKinds[index];
         }

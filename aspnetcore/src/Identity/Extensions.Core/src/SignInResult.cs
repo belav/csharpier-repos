@@ -83,8 +83,7 @@ namespace Microsoft.AspNetCore.Identity
         /// <returns>A string representation of value of the current <see cref="SignInResult"/> object.</returns>
         public override string ToString()
         {
-            return
-                IsLockedOut
+            return IsLockedOut
               ? "Lockedout"
               : IsNotAllowed
                   ? "NotAllowed"

@@ -313,8 +313,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             LanguageVersion requiredVersion = feature.RequiredVersion();
-            return
-                requiredVersion == LanguageVersion.Preview.MapSpecifiedToEffectiveVersion()
+            return requiredVersion == LanguageVersion.Preview.MapSpecifiedToEffectiveVersion()
               ? new CSDiagnosticInfo(ErrorCode.ERR_FeatureInPreview, feature.Localize())
               : new CSDiagnosticInfo(
                     availableVersion.GetErrorCode(),

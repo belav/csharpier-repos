@@ -1181,8 +1181,7 @@ public class DefaultValuesSetToNaN
     public override bool Equals(object obj)
     {
         var other = obj as DefaultValuesSetToNaN;
-        return
-            other == null
+        return other == null
           ? false
           : other.DoubleProp == this.DoubleProp
             && other.FloatProp == this.FloatProp
@@ -1216,8 +1215,7 @@ public class DefaultValuesSetToPositiveInfinity
     public override bool Equals(object obj)
     {
         var other = obj as DefaultValuesSetToPositiveInfinity;
-        return
-            other == null
+        return other == null
           ? false
           : other.DoubleProp == this.DoubleProp
             && other.FloatProp == this.FloatProp
@@ -1251,8 +1249,7 @@ public class DefaultValuesSetToNegativeInfinity
     public override bool Equals(object obj)
     {
         var other = obj as DefaultValuesSetToNegativeInfinity;
-        return
-            other == null
+        return other == null
           ? false
           : other.DoubleProp == this.DoubleProp
             && other.FloatProp == this.FloatProp

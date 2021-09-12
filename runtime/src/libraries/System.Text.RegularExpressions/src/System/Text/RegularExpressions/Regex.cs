@@ -375,8 +375,7 @@ namespace System.Text.RegularExpressions
             }
             else
             {
-                return
-                    caps != null && !caps.TryGetValue(i, out i)
+                return caps != null && !caps.TryGetValue(i, out i)
                   ? string.Empty
                   : (uint)i < (uint)capslist.Length ? capslist[i] : string.Empty;
             }

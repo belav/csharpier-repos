@@ -1043,8 +1043,7 @@ namespace System.Linq.Expressions.Interpreter
 #if DEBUG
         private static bool IsNullComparison(Expression left, Expression right)
         {
-            return
-                IsNullConstant(left)
+            return IsNullConstant(left)
               ? !IsNullConstant(right) && right.Type.IsNullableType()
               : IsNullConstant(right) && left.Type.IsNullableType();
         }
