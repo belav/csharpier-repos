@@ -60,8 +60,11 @@ namespace System.Diagnostics.Eventing.Reader
             public ProviderMetadata ProviderMetadata { get; }
         }
 
-        public ProviderMetadataCachedInformation(EventLogSession session, string logfile, int maximumCacheSize)
-        {
+        public ProviderMetadataCachedInformation(
+            EventLogSession session,
+            string logfile,
+            int maximumCacheSize
+        ) {
             Debug.Assert(session != null);
             _session = session;
             _logfile = logfile;
@@ -136,7 +139,12 @@ namespace System.Diagnostics.Eventing.Reader
                 ProviderMetadata pm;
                 try
                 {
-                    pm = new ProviderMetadata(key.ProviderName, _session, key.TheCultureInfo, _logfile);
+                    pm = new ProviderMetadata(
+                        key.ProviderName,
+                        _session,
+                        key.TheCultureInfo,
+                        _logfile
+                    );
                 }
                 catch (EventLogNotFoundException)
                 {
@@ -162,7 +170,12 @@ namespace System.Diagnostics.Eventing.Reader
                     DeleteCacheEntry(key);
                     try
                     {
-                        pm = new ProviderMetadata(key.ProviderName, _session, key.TheCultureInfo, _logfile);
+                        pm = new ProviderMetadata(
+                            key.ProviderName,
+                            _session,
+                            key.TheCultureInfo,
+                            _logfile
+                        );
                     }
                     catch (EventLogNotFoundException)
                     {
@@ -179,12 +192,19 @@ namespace System.Diagnostics.Eventing.Reader
         {
             lock (this)
             {
-                ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
+                ProviderMetadataId key = new ProviderMetadataId(
+                    ProviderName,
+                    CultureInfo.CurrentCulture
+                );
 
                 try
                 {
                     ProviderMetadata pm = GetProviderMetadata(key);
-                    return NativeWrapper.EvtFormatMessageRenderName(pm.Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageEvent);
+                    return NativeWrapper.EvtFormatMessageRenderName(
+                        pm.Handle,
+                        eventHandle,
+                        UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageEvent
+                    );
                 }
                 catch (EventLogNotFoundException)
                 {
@@ -193,15 +213,25 @@ namespace System.Diagnostics.Eventing.Reader
             }
         }
 
-        public string GetFormatDescription(string ProviderName, EventLogHandle eventHandle, string[] values)
-        {
+        public string GetFormatDescription(
+            string ProviderName,
+            EventLogHandle eventHandle,
+            string[] values
+        ) {
             lock (this)
             {
-                ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
+                ProviderMetadataId key = new ProviderMetadataId(
+                    ProviderName,
+                    CultureInfo.CurrentCulture
+                );
                 ProviderMetadata pm = GetProviderMetadata(key);
                 try
                 {
-                    return NativeWrapper.EvtFormatMessageFormatDescription(pm.Handle, eventHandle, values);
+                    return NativeWrapper.EvtFormatMessageFormatDescription(
+                        pm.Handle,
+                        eventHandle,
+                        values
+                    );
                 }
                 catch (EventLogNotFoundException)
                 {
@@ -214,9 +244,16 @@ namespace System.Diagnostics.Eventing.Reader
         {
             lock (this)
             {
-                ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
+                ProviderMetadataId key = new ProviderMetadataId(
+                    ProviderName,
+                    CultureInfo.CurrentCulture
+                );
                 ProviderMetadata pm = GetProviderMetadata(key);
-                return NativeWrapper.EvtFormatMessageRenderName(pm.Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageLevel);
+                return NativeWrapper.EvtFormatMessageRenderName(
+                    pm.Handle,
+                    eventHandle,
+                    UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageLevel
+                );
             }
         }
 
@@ -224,9 +261,16 @@ namespace System.Diagnostics.Eventing.Reader
         {
             lock (this)
             {
-                ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
+                ProviderMetadataId key = new ProviderMetadataId(
+                    ProviderName,
+                    CultureInfo.CurrentCulture
+                );
                 ProviderMetadata pm = GetProviderMetadata(key);
-                return NativeWrapper.EvtFormatMessageRenderName(pm.Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageOpcode);
+                return NativeWrapper.EvtFormatMessageRenderName(
+                    pm.Handle,
+                    eventHandle,
+                    UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageOpcode
+                );
             }
         }
 
@@ -234,19 +278,35 @@ namespace System.Diagnostics.Eventing.Reader
         {
             lock (this)
             {
-                ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
+                ProviderMetadataId key = new ProviderMetadataId(
+                    ProviderName,
+                    CultureInfo.CurrentCulture
+                );
                 ProviderMetadata pm = GetProviderMetadata(key);
-                return NativeWrapper.EvtFormatMessageRenderName(pm.Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageTask);
+                return NativeWrapper.EvtFormatMessageRenderName(
+                    pm.Handle,
+                    eventHandle,
+                    UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageTask
+                );
             }
         }
 
-        public IEnumerable<string> GetKeywordDisplayNames(string ProviderName, EventLogHandle eventHandle)
-        {
+        public IEnumerable<string> GetKeywordDisplayNames(
+            string ProviderName,
+            EventLogHandle eventHandle
+        ) {
             lock (this)
             {
-                ProviderMetadataId key = new ProviderMetadataId(ProviderName, CultureInfo.CurrentCulture);
+                ProviderMetadataId key = new ProviderMetadataId(
+                    ProviderName,
+                    CultureInfo.CurrentCulture
+                );
                 ProviderMetadata pm = GetProviderMetadata(key);
-                return NativeWrapper.EvtFormatMessageRenderKeywords(pm.Handle, eventHandle, UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageKeyword);
+                return NativeWrapper.EvtFormatMessageRenderKeywords(
+                    pm.Handle,
+                    eventHandle,
+                    UnsafeNativeMethods.EvtFormatMessageFlags.EvtFormatMessageKeyword
+                );
             }
         }
     }

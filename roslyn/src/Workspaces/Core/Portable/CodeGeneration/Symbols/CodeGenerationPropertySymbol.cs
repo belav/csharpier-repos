@@ -34,9 +34,15 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool isIndexer,
             ImmutableArray<IParameterSymbol> parametersOpt,
             IMethodSymbol getMethod,
-            IMethodSymbol setMethod)
-            : base(containingType?.ContainingAssembly, containingType, attributes, declaredAccessibility, modifiers, name)
-        {
+            IMethodSymbol setMethod
+        ) : base(
+            containingType?.ContainingAssembly,
+            containingType,
+            attributes,
+            declaredAccessibility,
+            modifiers,
+            name
+        ) {
             this.Type = type;
             this._refKind = refKind;
             this.IsIndexer = isIndexer;
@@ -49,25 +55,35 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         protected override CodeGenerationSymbol Clone()
         {
             var result = new CodeGenerationPropertySymbol(
-                this.ContainingType, this.GetAttributes(), this.DeclaredAccessibility,
-                this.Modifiers, this.Type, this.RefKind, this.ExplicitInterfaceImplementations,
-                this.Name, this.IsIndexer, this.Parameters,
-                this.GetMethod, this.SetMethod);
-            CodeGenerationPropertyInfo.Attach(result,
+                this.ContainingType,
+                this.GetAttributes(),
+                this.DeclaredAccessibility,
+                this.Modifiers,
+                this.Type,
+                this.RefKind,
+                this.ExplicitInterfaceImplementations,
+                this.Name,
+                this.IsIndexer,
+                this.Parameters,
+                this.GetMethod,
+                this.SetMethod
+            );
+            CodeGenerationPropertyInfo.Attach(
+                result,
                 CodeGenerationPropertyInfo.GetIsNew(this),
                 CodeGenerationPropertyInfo.GetIsUnsafe(this),
-                CodeGenerationPropertyInfo.GetInitializer(this));
+                CodeGenerationPropertyInfo.GetInitializer(this)
+            );
 
             return result;
         }
 
         public override SymbolKind Kind => SymbolKind.Property;
 
-        public override void Accept(SymbolVisitor visitor)
-            => visitor.VisitProperty(this);
+        public override void Accept(SymbolVisitor visitor) => visitor.VisitProperty(this);
 
-        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor)
-            => visitor.VisitProperty(this);
+        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor) =>
+            visitor.VisitProperty(this);
 
         public bool IsReadOnly => this.GetMethod != null && this.SetMethod == null;
 
@@ -85,8 +101,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public bool IsWithEvents => false;
 
-        public ImmutableArray<CustomModifier> RefCustomModifiers => ImmutableArray<CustomModifier>.Empty;
+        public ImmutableArray<CustomModifier> RefCustomModifiers =>
+            ImmutableArray<CustomModifier>.Empty;
 
-        public ImmutableArray<CustomModifier> TypeCustomModifiers => ImmutableArray<CustomModifier>.Empty;
+        public ImmutableArray<CustomModifier> TypeCustomModifiers =>
+            ImmutableArray<CustomModifier>.Empty;
     }
 }

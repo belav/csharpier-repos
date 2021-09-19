@@ -16,12 +16,12 @@ namespace System.Drawing
         public static bool IsCriticalException(Exception ex)
         {
             return ex is NullReferenceException
-                    || ex is StackOverflowException
-                    || ex is OutOfMemoryException
-                    || ex is System.Threading.ThreadAbortException
-                    || ex is ExecutionEngineException
-                    || ex is IndexOutOfRangeException
-                    || ex is AccessViolationException;
+                || ex is StackOverflowException
+                || ex is OutOfMemoryException
+                || ex is System.Threading.ThreadAbortException
+                || ex is ExecutionEngineException
+                || ex is IndexOutOfRangeException
+                || ex is AccessViolationException;
         }
 #pragma warning restore 618
 
@@ -136,8 +136,13 @@ namespace System.Drawing
                 return new WeakRefObject(value);
             }
 
-            private static void Copy(WeakRefCollection sourceList, int sourceIndex, WeakRefCollection destinationList, int destinationIndex, int length)
-            {
+            private static void Copy(
+                WeakRefCollection sourceList,
+                int sourceIndex,
+                WeakRefCollection destinationList,
+                int destinationIndex,
+                int length
+            ) {
                 if (sourceIndex < destinationIndex)
                 {
                     // We need to copy from the back forward to prevent overwrite if source and
@@ -147,14 +152,18 @@ namespace System.Drawing
                     destinationIndex = destinationIndex + length;
                     for (; length > 0; length--)
                     {
-                        destinationList.InnerList[--destinationIndex] = sourceList.InnerList[--sourceIndex];
+                        destinationList.InnerList[--destinationIndex] = sourceList.InnerList[
+                            --sourceIndex
+                        ];
                     }
                 }
                 else
                 {
                     for (; length > 0; length--)
                     {
-                        destinationList.InnerList[destinationIndex++] = sourceList.InnerList[sourceIndex++];
+                        destinationList.InnerList[destinationIndex++] = sourceList.InnerList[
+                            sourceIndex++
+                        ];
                     }
                 }
             }
@@ -196,7 +205,8 @@ namespace System.Drawing
 
             public int IndexOf(object? value) => InnerList.IndexOf(CreateWeakRefObject(value));
 
-            public void Insert(int index, object? value) => InnerList.Insert(index, CreateWeakRefObject(value));
+            public void Insert(int index, object? value) =>
+                InnerList.Insert(index, CreateWeakRefObject(value));
 
             public int Add(object? value)
             {

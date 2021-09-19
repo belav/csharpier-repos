@@ -16,8 +16,6 @@ namespace Microsoft.AspNetCore.Authentication
         /// </summary>
         /// <param name="protector">The <see cref="IDataProtector"/>.</param>
         public TicketDataFormat(IDataProtector protector)
-            : base(TicketSerializer.Default, protector)
-        {
-        }
+            : base(TicketSerializer.Default, protector) { }
     }
 }

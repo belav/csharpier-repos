@@ -11,7 +11,10 @@ using Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 {
     [Shared]
-    [ExportLanguageService(typeof(VSTypeScriptDiagnosticAnalyzerLanguageService), InternalLanguageNames.TypeScript)]
+    [ExportLanguageService(
+        typeof(VSTypeScriptDiagnosticAnalyzerLanguageService),
+        InternalLanguageNames.TypeScript
+    )]
     internal sealed class VSTypeScriptDiagnosticAnalyzerLanguageService : ILanguageService
     {
         internal readonly IVSTypeScriptDiagnosticAnalyzerImplementation? Implementation;
@@ -19,8 +22,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VSTypeScriptDiagnosticAnalyzerLanguageService(
-            [Import(AllowDefault = true)] IVSTypeScriptDiagnosticAnalyzerImplementation? implementation = null)
-        {
+            [Import(AllowDefault = true)]
+                IVSTypeScriptDiagnosticAnalyzerImplementation? implementation = null
+        ) {
             Implementation = implementation;
         }
     }

@@ -73,7 +73,9 @@ namespace ILCompiler.Reflection.ReadyToRun
                 case Machine.Arm64:
                     return ((Arm64.Registers)regnum).ToString();
                 default:
-                    throw new NotImplementedException($"No implementation for machine type {machine}.");
+                    throw new NotImplementedException(
+                        $"No implementation for machine type {machine}."
+                    );
             }
         }
 
@@ -160,15 +162,19 @@ namespace ILCompiler.Reflection.ReadyToRun
                 entry.Variable = new Variable();
                 // TODO: This is probably incomplete
                 // This does not handle any implicit arguments or var args
-                if (entry.VariableNumber < this._runtimeFunction.Method.Signature.ParameterTypes.Length)
-                {
+                if (
+                    entry.VariableNumber
+                    < this._runtimeFunction.Method.Signature.ParameterTypes.Length
+                ) {
                     entry.Variable.Type = VariableType.Parameter;
                     entry.Variable.Index = (int)entry.VariableNumber;
                 }
                 else
                 {
                     entry.Variable.Type = VariableType.Local;
-                    entry.Variable.Index = (int)entry.VariableNumber - this._runtimeFunction.Method.Signature.ParameterTypes.Length;
+                    entry.Variable.Index =
+                        (int)entry.VariableNumber
+                        - this._runtimeFunction.Method.Signature.ParameterTypes.Length;
                 }
 
                 var varLoc = new VarLoc();

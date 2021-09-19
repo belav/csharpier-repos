@@ -32,8 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid transactionId,
             Guid connectionId,
             bool async,
-            DateTimeOffset startTime)
-            : base(eventDefinition, messageGenerator, context)
+            DateTimeOffset startTime
+        ) : base(eventDefinition, messageGenerator, context)
         {
             Transaction = transaction;
             TransactionId = transactionId;

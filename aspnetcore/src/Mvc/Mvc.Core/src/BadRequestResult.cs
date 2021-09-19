@@ -18,9 +18,6 @@ namespace Microsoft.AspNetCore.Mvc
         /// <summary>
         /// Creates a new <see cref="BadRequestResult"/> instance.
         /// </summary>
-        public BadRequestResult()
-            : base(DefaultStatusCode)
-        {
-        }
+        public BadRequestResult() : base(DefaultStatusCode) { }
     }
 }

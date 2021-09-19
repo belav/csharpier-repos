@@ -24,16 +24,20 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             // Arrange
             var filter = new TestFilter();
-            var controllerContext = CreateControllerContext(new[]
-                {
-                    new FilterDescriptor(filter, FilterScope.Action)
-                });
+            var controllerContext = CreateControllerContext(
+                new[] { new FilterDescriptor(filter, FilterScope.Action) }
+            );
             var controllerActionInvokerCache = CreateControllerActionInvokerCache(
-                new[] { new DefaultFilterProvider() });
+                new[] { new DefaultFilterProvider() }
+            );
 
             // Act
-            var (cacheEntry, filters) = controllerActionInvokerCache.GetCachedResult(controllerContext);
-            var (cacheEntry2, filters2) = controllerActionInvokerCache.GetCachedResult(controllerContext);
+            var (cacheEntry, filters) = controllerActionInvokerCache.GetCachedResult(
+                controllerContext
+            );
+            var (cacheEntry2, filters2) = controllerActionInvokerCache.GetCachedResult(
+                controllerContext
+            );
 
             // Assert
             Assert.Equal(filters, filters2);
@@ -44,16 +48,20 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         {
             // Arrange
             var filter = new TestFilter();
-            var controllerContext = CreateControllerContext(new[]
-                {
-                    new FilterDescriptor(filter, FilterScope.Action)
-                });
+            var controllerContext = CreateControllerContext(
+                new[] { new FilterDescriptor(filter, FilterScope.Action) }
+            );
             var controllerActionInvokerCache = CreateControllerActionInvokerCache(
-                new[] { new DefaultFilterProvider() });
+                new[] { new DefaultFilterProvider() }
+            );
 
             // Act
-            var (cacheEntry, filters) = controllerActionInvokerCache.GetCachedResult(controllerContext);
-            var (cacheEntry2, filters2) = controllerActionInvokerCache.GetCachedResult(controllerContext);
+            var (cacheEntry, filters) = controllerActionInvokerCache.GetCachedResult(
+                controllerContext
+            );
+            var (cacheEntry2, filters2) = controllerActionInvokerCache.GetCachedResult(
+                controllerContext
+            );
 
             // Assert
             Assert.Same(cacheEntry, cacheEntry2);
@@ -61,9 +69,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private class TestFilter : IFilterMetadata
         {
-            public TestFilter()
-            {
-            }
+            public TestFilter() { }
 
             public TestFilter(string data)
             {
@@ -75,15 +81,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private class TestController
         {
-            public void Index()
-            {
-            }
+            public void Index() { }
         }
 
         private class CustomActionDescriptorCollectionProvider : IActionDescriptorCollectionProvider
         {
-            public CustomActionDescriptorCollectionProvider(ControllerActionDescriptor[] actionDescriptors)
-            {
+            public CustomActionDescriptorCollectionProvider(
+                ControllerActionDescriptor[] actionDescriptors
+            ) {
                 ActionDescriptors = new ActionDescriptorCollection(actionDescriptors, version: 1);
             }
 
@@ -91,8 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         }
 
         private static ControllerActionInvokerCache CreateControllerActionInvokerCache(
-            IFilterProvider[] filterProviders)
-        {
+            IFilterProvider[] filterProviders
+        ) {
             var modelMetadataProvider = new EmptyModelMetadataProvider();
             var modelBinderFactory = TestModelBinderFactory.CreateDefault();
             var mvcOptions = Options.Create(new MvcOptions());
@@ -103,16 +108,19 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     modelBinderFactory,
                     Mock.Of<IObjectModelValidator>(),
                     mvcOptions,
-                    NullLoggerFactory.Instance),
+                    NullLoggerFactory.Instance
+                ),
                 modelBinderFactory,
                 modelMetadataProvider,
                 filterProviders,
                 Mock.Of<IControllerFactoryProvider>(),
-                mvcOptions);
+                mvcOptions
+            );
         }
 
-        private static ControllerContext CreateControllerContext(FilterDescriptor[] filterDescriptors)
-        {
+        private static ControllerContext CreateControllerContext(
+            FilterDescriptor[] filterDescriptors
+        ) {
             var actionDescriptor = new ControllerActionDescriptor()
             {
                 FilterDescriptors = filterDescriptors,
@@ -122,7 +130,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 BoundProperties = new List<ParameterDescriptor>(),
             };
 
-            var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), actionDescriptor);
+            var actionContext = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                actionDescriptor
+            );
             return new ControllerContext(actionContext);
         }
     }

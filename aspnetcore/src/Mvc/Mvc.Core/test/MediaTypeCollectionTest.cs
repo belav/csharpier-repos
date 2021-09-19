@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void Add_MediaTypeHeaderValue_AddsTheStringSegmentRepresentationOfTheMediaType()
         {
             // Arrange
-            var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse("application/json;charset=utf-16");
+            var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(
+                "application/json;charset=utf-16"
+            );
             var collection = new MediaTypeCollection();
 
             // Act
@@ -26,7 +28,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void Insert_MediaTypeHeaderValue_AddsTheStringSegmentRepresentationOfTheMediaTypeOnTheGivenIndex()
         {
             // Arrange
-            var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse("application/json;charset=utf-16");
+            var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(
+                "application/json;charset=utf-16"
+            );
             var collection = new MediaTypeCollection
             {
                 MediaTypeHeaderValue.Parse("text/plain"),

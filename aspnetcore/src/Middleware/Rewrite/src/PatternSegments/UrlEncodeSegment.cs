@@ -15,10 +15,13 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments
             _pattern = pattern;
         }
 
-        public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
-        {
+        public override string? Evaluate(
+            RewriteContext context,
+            BackReferenceCollection? ruleBackReferences,
+            BackReferenceCollection? conditionBackReferences
+        ) {
             var oldBuilder = context.Builder;
-            // PERF 
+            // PERF
             // Because we need to be able to evaluate multiple nested patterns,
             // we provided a new string builder and evaluate the new pattern,
             // and restore it after evaluation.

@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Cryptography.Cng
                     hAlgorithm: IntPtr.Zero,
                     pbBuffer: pbBuffer,
                     cbBuffer: cbBuffer,
-                    dwFlags: BCryptGenRandomFlags.BCRYPT_USE_SYSTEM_PREFERRED_RNG);
+                    dwFlags: BCryptGenRandomFlags.BCRYPT_USE_SYSTEM_PREFERRED_RNG
+                );
                 UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
             }
         }

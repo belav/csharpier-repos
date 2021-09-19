@@ -20,15 +20,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicFormatting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicFormatting))
-        {
-        }
+            : base(instanceFactory, nameof(BasicFormatting)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public void VerifyFormattingIndent()
         {
-            var testCode = new StringBuilder()
-                .AppendLine("$$Module A")
+            var testCode = new StringBuilder().AppendLine("$$Module A")
                 .AppendLine("    Sub Main(args As String())")
                 .AppendLine("    ")
                 .AppendLine("        End Sub")
@@ -39,44 +36,62 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 
             VisualStudio.Editor.FormatDocument();
             VisualStudio.Editor.Verify.TextContains(
-@"Module A
+                @"Module A
     Sub Main(args As String())
 
     End Sub
-End Module");
+End Module"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public void VerifyCaseCorrection()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 $$module A
-end module");
+end module"
+            );
             VisualStudio.Editor.FormatDocument();
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module A
-End Module");
+End Module"
+            );
         }
 
-        [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/18065"),
-         Trait(Traits.Feature, Traits.Features.Formatting)]
+        [
+            WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/18065"),
+            Trait(Traits.Feature, Traits.Features.Formatting)
+        ]
         public void ShiftEnterWithIntelliSenseAndBraceMatching()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Module Program
     Function Main(ooo As Object) As Object
         Return Main$$
     End Function
-End Module");
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
-            VisualStudio.Editor.SendKeys("(o", new KeyPress(VirtualKey.Enter, ShiftState.Shift), "'comment");
-            VisualStudio.Editor.Verify.TextContains(@"
+End Module"
+            );
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
+            VisualStudio.Editor.SendKeys(
+                "(o",
+                new KeyPress(VirtualKey.Enter, ShiftState.Shift),
+                "'comment"
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Program
     Function Main(ooo As Object) As Object
         Return Main(ooo)
         'comment
     End Function
-End Module");
+End Module"
+            );
         }
     }
 }

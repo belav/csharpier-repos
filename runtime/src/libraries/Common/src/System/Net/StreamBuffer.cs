@@ -22,8 +22,10 @@ namespace System.IO
         public const int DefaultInitialBufferSize = 4 * 1024;
         public const int DefaultMaxBufferSize = 32 * 1024;
 
-        public StreamBuffer(int initialBufferSize = DefaultInitialBufferSize, int maxBufferSize = DefaultMaxBufferSize)
-        {
+        public StreamBuffer(
+            int initialBufferSize = DefaultInitialBufferSize,
+            int maxBufferSize = DefaultMaxBufferSize
+        ) {
             _buffer = new MultiArrayBuffer(initialBufferSize);
             _maxBufferSize = maxBufferSize;
             _readTaskSource = new ResettableValueTaskSource();
@@ -151,8 +153,10 @@ namespace System.IO
             }
         }
 
-        public async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (buffer.Length == 0)
@@ -242,8 +246,10 @@ namespace System.IO
             return bytesRead;
         }
 
-        public async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (buffer.Length == 0)
@@ -306,9 +312,15 @@ namespace System.IO
             private CancellationTokenRegistration _waitSourceCancellation;
             private int _hasWaiter;
 
-            ValueTaskSourceStatus IValueTaskSource.GetStatus(short token) => _waitSource.GetStatus(token);
+            ValueTaskSourceStatus IValueTaskSource.GetStatus(short token) =>
+                _waitSource.GetStatus(token);
 
-            void IValueTaskSource.OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags) => _waitSource.OnCompleted(continuation, state, token, flags);
+            void IValueTaskSource.OnCompleted(
+                Action<object?> continuation,
+                object? state,
+                short token,
+                ValueTaskSourceOnCompletedFlags flags
+            ) => _waitSource.OnCompleted(continuation, state, token, flags);
 
             void IValueTaskSource.GetResult(short token)
             {
@@ -336,7 +348,11 @@ namespace System.IO
 
                 if (Interlocked.Exchange(ref _hasWaiter, 0) == 1)
                 {
-                    _waitSource.SetException(ExceptionDispatchInfo.SetCurrentStackTrace(new OperationCanceledException(cancellationToken)));
+                    _waitSource.SetException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            new OperationCanceledException(cancellationToken)
+                        )
+                    );
                 }
             }
 
@@ -361,7 +377,10 @@ namespace System.IO
             {
                 _waitSource.RunContinuationsAsynchronously = true;
 
-                _waitSourceCancellation = cancellationToken.UnsafeRegister(static (s, token) => ((ResettableValueTaskSource)s!).CancelWaiter(token), this);
+                _waitSourceCancellation = cancellationToken.UnsafeRegister(
+                    static (s, token) => ((ResettableValueTaskSource)s!).CancelWaiter(token),
+                    this
+                );
 
                 return new ValueTask(this, _waitSource.Version);
             }

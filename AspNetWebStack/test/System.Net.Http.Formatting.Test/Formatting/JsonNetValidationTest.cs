@@ -19,15 +19,13 @@ namespace System.Net.Http.Formatting
                 {
                     // Type coercion
 
-                    {"null", typeof(int), 1},
-                    {"45", typeof(string), 0},
-                    {"random text", typeof(DateTimeOffset), 1},
-                    {"[1,2,3]", typeof(string[]), 0},
-
-                    {"\"foo\"", typeof(int), 1},
-                    {"\"foo\"", typeof(DateTime), 1},
-
-                    {"[\"a\",\"b\",\"45\",34]", typeof(int[]), 2},
+                    { "null", typeof(int), 1 },
+                    { "45", typeof(string), 0 },
+                    { "random text", typeof(DateTimeOffset), 1 },
+                    { "[1,2,3]", typeof(string[]), 0 },
+                    { "\"foo\"", typeof(int), 1 },
+                    { "\"foo\"", typeof(DateTime), 1 },
+                    { "[\"a\",\"b\",\"45\",34]", typeof(int[]), 2 },
                     {
                         "[\"a\",\"b\",\"45\",34]",
                         typeof(DateTime[]),
@@ -37,16 +35,18 @@ namespace System.Net.Http.Formatting
                         4
 #endif
                     },
-
                     // Required members
 
-                    {"{}", typeof(DataContractWithRequiredMembers), 2},
-                    {"[{},{},{}]", typeof(DataContractWithRequiredMembers[]), 6},
-
+                    { "{}", typeof(DataContractWithRequiredMembers), 2 },
+                    { "[{},{},{}]", typeof(DataContractWithRequiredMembers[]), 6 },
                     // Throwing setters
 
-                    {"{\"Throws\":\"foo\"}", typeof(TypeWithThrowingSetter), 1},
-                    {"[{\"Throws\":\"foo\"},{\"Throws\":\"foo\"}]", typeof(TypeWithThrowingSetter[]), 2},
+                    { "{\"Throws\":\"foo\"}", typeof(TypeWithThrowingSetter), 1 },
+                    {
+                        "[{\"Throws\":\"foo\"},{\"Throws\":\"foo\"}]",
+                        typeof(TypeWithThrowingSetter[]),
+                        2
+                    },
                 };
             }
         }
@@ -54,15 +54,26 @@ namespace System.Net.Http.Formatting
 #if !NETFX_CORE // IRequiredMemeberSelector is not in portable libraries because there is no model state on the client.
         [Theory]
         [PropertyData("Theories")]
-        public async Task ModelErrorsPopulatedWithValidationErrors(string json, Type type, int expectedErrors)
-        {
+        public async Task ModelErrorsPopulatedWithValidationErrors(
+            string json,
+            Type type,
+            int expectedErrors
+        ) {
             JsonMediaTypeFormatter formatter = new JsonMediaTypeFormatter();
             formatter.RequiredMemberSelector = new SimpleRequiredMemberSelector();
-            Mock<IFormatterLogger> mockLogger = new Mock<IFormatterLogger>() { };
+            Mock<IFormatterLogger> mockLogger = new Mock<IFormatterLogger>() {  };
 
-            await JsonNetSerializationTest.DeserializeAsync(json, type, formatter, mockLogger.Object);
+            await JsonNetSerializationTest.DeserializeAsync(
+                json,
+                type,
+                formatter,
+                mockLogger.Object
+            );
 
-            mockLogger.Verify(mock => mock.LogError(It.IsAny<string>(), It.IsAny<Exception>()), Times.Exactly(expectedErrors));
+            mockLogger.Verify(
+                mock => mock.LogError(It.IsAny<string>(), It.IsAny<Exception>()),
+                Times.Exactly(expectedErrors)
+            );
         }
 #endif
 
@@ -82,10 +93,18 @@ namespace System.Net.Http.Formatting
             string json = sb.ToString();
 
             // Act
-            await JsonNetSerializationTest.DeserializeAsync(json, typeof(Nest), formatter, mockLogger.Object);
+            await JsonNetSerializationTest.DeserializeAsync(
+                json,
+                typeof(Nest),
+                formatter,
+                mockLogger.Object
+            );
 
             // Assert
-            mockLogger.Verify(mock => mock.LogError(It.IsAny<string>(), It.IsAny<Exception>()), Times.Once());
+            mockLogger.Verify(
+                mock => mock.LogError(It.IsAny<string>(), It.IsAny<Exception>()),
+                Times.Once()
+            );
         }
     }
 
@@ -111,14 +130,8 @@ namespace System.Net.Http.Formatting
     {
         public string Throws
         {
-            get
-            {
-                return "foo";
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return "foo"; }
+            set { throw new NotImplementedException(); }
         }
     }
 

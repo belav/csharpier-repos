@@ -86,8 +86,10 @@ namespace System.Data.SqlTypes
 
             bool fPositive = snum.IsPositive;
             ulong ulValue = snum._data1 + (((ulong)snum._data2) << 32);
-            if (fPositive && ulValue > long.MaxValue ||
-                !fPositive && ulValue > unchecked((ulong)(long.MinValue)))
+            if (
+                fPositive && ulValue > long.MaxValue
+                || !fPositive && ulValue > unchecked((ulong)(long.MinValue))
+            )
                 throw new OverflowException(SQLResource.ArithOverflowMessage);
 
             _value = fPositive ? (long)ulValue : unchecked(-(long)ulValue);
@@ -97,10 +99,7 @@ namespace System.Data.SqlTypes
         /// <summary>
         /// Initializes a new instance of the <see cref='SqlMoney'/> class with the value given.
         /// </summary>
-        public SqlMoney(double value) : this(new decimal(value))
-        {
-        }
-
+        public SqlMoney(double value) : this(new decimal(value)) { }
 
         /// <summary>
         /// Gets a value indicating whether the <see cref='Value'/>
@@ -138,7 +137,13 @@ namespace System.Data.SqlTypes
                 value = unchecked(-_value);
             }
 
-            return new decimal(unchecked((int)value), unchecked((int)(value >> 32)), 0, fNegative, (byte)s_iMoneyScale);
+            return new decimal(
+                unchecked((int)value),
+                unchecked((int)(value >> 32)),
+                0,
+                fNegative,
+                (byte)s_iMoneyScale
+            );
         }
 
         public long ToInt64()
@@ -224,13 +229,13 @@ namespace System.Data.SqlTypes
             SqlMoney money;
 
             const NumberStyles SqlNumberStyle =
-                     NumberStyles.AllowCurrencySymbol |
-                     NumberStyles.AllowDecimalPoint |
-                     NumberStyles.AllowParentheses |
-                     NumberStyles.AllowTrailingSign |
-                     NumberStyles.AllowLeadingSign |
-                     NumberStyles.AllowTrailingWhite |
-                     NumberStyles.AllowLeadingWhite;
+                NumberStyles.AllowCurrencySymbol
+                | NumberStyles.AllowDecimalPoint
+                | NumberStyles.AllowParentheses
+                | NumberStyles.AllowTrailingSign
+                | NumberStyles.AllowLeadingSign
+                | NumberStyles.AllowTrailingWhite
+                | NumberStyles.AllowLeadingWhite;
 
             if (s == SQLResource.NullString)
             {
@@ -242,7 +247,9 @@ namespace System.Data.SqlTypes
             }
             else
             {
-                money = new SqlMoney(decimal.Parse(s, NumberStyles.Currency, NumberFormatInfo.CurrentInfo));
+                money = new SqlMoney(
+                    decimal.Parse(s, NumberStyles.Currency, NumberFormatInfo.CurrentInfo)
+                );
             }
 
             return money;
@@ -258,7 +265,6 @@ namespace System.Data.SqlTypes
             return new SqlMoney(-x._value, 0);
         }
 
-
         // Binary operators
 
         // Arithmetic operators
@@ -266,7 +272,9 @@ namespace System.Data.SqlTypes
         {
             try
             {
-                return (x.IsNull || y.IsNull) ? Null : new SqlMoney(checked(x._value + y._value), 0);
+                return (x.IsNull || y.IsNull)
+                    ? Null
+                    : new SqlMoney(checked(x._value + y._value), 0);
             }
             catch (OverflowException)
             {
@@ -278,7 +286,9 @@ namespace System.Data.SqlTypes
         {
             try
             {
-                return (x.IsNull || y.IsNull) ? Null : new SqlMoney(checked(x._value - y._value), 0);
+                return (x.IsNull || y.IsNull)
+                    ? Null
+                    : new SqlMoney(checked(x._value - y._value), 0);
             }
             catch (OverflowException)
             {
@@ -288,16 +298,17 @@ namespace System.Data.SqlTypes
 
         public static SqlMoney operator *(SqlMoney x, SqlMoney y)
         {
-            return (x.IsNull || y.IsNull) ? Null :
-        new SqlMoney(decimal.Multiply(x.ToDecimal(), y.ToDecimal()));
+            return (x.IsNull || y.IsNull)
+                ? Null
+                : new SqlMoney(decimal.Multiply(x.ToDecimal(), y.ToDecimal()));
         }
 
         public static SqlMoney operator /(SqlMoney x, SqlMoney y)
         {
-            return (x.IsNull || y.IsNull) ? Null :
-        new SqlMoney(decimal.Divide(x.ToDecimal(), y.ToDecimal()));
+            return (x.IsNull || y.IsNull)
+                ? Null
+                : new SqlMoney(decimal.Divide(x.ToDecimal(), y.ToDecimal()));
         }
-
 
         // Implicit conversions
 
@@ -331,7 +342,6 @@ namespace System.Data.SqlTypes
             return x.IsNull ? Null : new SqlMoney(x.Value);
         }
 
-
         // Explicit conversions
 
         // Explicit conversion from SqlSingle to SqlMoney
@@ -356,9 +366,10 @@ namespace System.Data.SqlTypes
         // Throws FormatException or OverflowException if necessary.
         public static explicit operator SqlMoney(SqlString x)
         {
-            return x.IsNull ? Null : new SqlMoney(decimal.Parse(x.Value, NumberStyles.Currency, null));
+            return x.IsNull
+                ? Null
+                : new SqlMoney(decimal.Parse(x.Value, NumberStyles.Currency, null));
         }
-
 
         // Builtin functions
 
@@ -392,7 +403,6 @@ namespace System.Data.SqlTypes
         {
             return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x._value >= y._value);
         }
-
 
         //--------------------------------------------------
         // Alternative methods for overloaded operators
@@ -504,7 +514,6 @@ namespace System.Data.SqlTypes
             return (SqlString)this;
         }
 
-
         // IComparable
         // Compares this object to another object, returning an integer that
         // indicates the relationship.
@@ -532,8 +541,10 @@ namespace System.Data.SqlTypes
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -560,7 +571,10 @@ namespace System.Data.SqlTypes
             return IsNull ? 0 : _value.GetHashCode();
         }
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
@@ -615,7 +629,10 @@ namespace System.Data.SqlTypes
         /// the <see cref='SqlMoney'/>
         /// class.
         /// </summary>
-        public static readonly SqlMoney MinValue = new SqlMoney(unchecked((long)0x8000000000000000L), 0);
+        public static readonly SqlMoney MinValue = new SqlMoney(
+            unchecked((long)0x8000000000000000L),
+            0
+        );
 
         /// <summary>
         /// Represents the maximum value that can be assigned to

@@ -15,28 +15,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public SynthesizedRecordCopyCtor(
             SourceMemberContainerTypeSymbol containingType,
-            int memberOffset)
-            : base(containingType)
+            int memberOffset
+        ) : base(containingType)
         {
             _memberOffset = memberOffset;
-            Parameters = ImmutableArray.Create(SynthesizedParameterSymbol.Create(
-                this,
-                TypeWithAnnotations.Create(
-                    isNullableEnabled: true,
-                    ContainingType),
-                ordinal: 0,
-                RefKind.None,
-                "original"));
+            Parameters = ImmutableArray.Create(
+                SynthesizedParameterSymbol.Create(
+                    this,
+                    TypeWithAnnotations.Create(isNullableEnabled: true, ContainingType),
+                    ordinal: 0,
+                    RefKind.None,
+                    "original"
+                )
+            );
         }
 
         public override ImmutableArray<ParameterSymbol> Parameters { get; }
 
-        public override Accessibility DeclaredAccessibility => ContainingType.IsSealed ? Accessibility.Private : Accessibility.Protected;
+        public override Accessibility DeclaredAccessibility =>
+            ContainingType.IsSealed ? Accessibility.Private : Accessibility.Protected;
 
-        internal override LexicalSortKey GetLexicalSortKey() => LexicalSortKey.GetSynthesizedMemberKey(_memberOffset);
+        internal override LexicalSortKey GetLexicalSortKey() =>
+            LexicalSortKey.GetSynthesizedMemberKey(_memberOffset);
 
-        internal override void GenerateMethodBodyStatements(SyntheticBoundNodeFactory F, ArrayBuilder<BoundStatement> statements, BindingDiagnosticBag diagnostics)
-        {
+        internal override void GenerateMethodBodyStatements(
+            SyntheticBoundNodeFactory F,
+            ArrayBuilder<BoundStatement> statements,
+            BindingDiagnosticBag diagnostics
+        ) {
             // Tracking issue for copy constructor in inheritance scenario: https://github.com/dotnet/roslyn/issues/44902
             // Write assignments to fields
             // .ctor(DerivedRecordType original) : base((BaseRecordType)original)
@@ -55,16 +61,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal static MethodSymbol? FindCopyConstructor(NamedTypeSymbol containingType, NamedTypeSymbol within, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
-        {
+        internal static MethodSymbol? FindCopyConstructor(
+            NamedTypeSymbol containingType,
+            NamedTypeSymbol within,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        ) {
             MethodSymbol? bestCandidate = null;
             int bestModifierCountSoFar = -1; // stays as -1 unless we hit an ambiguity
             foreach (var member in containingType.InstanceConstructors)
             {
-                if (HasCopyConstructorSignature(member) &&
-                    !member.HasUnsupportedMetadata &&
-                    AccessCheck.IsSymbolAccessible(member, within, ref useSiteInfo))
-                {
+                if (
+                    HasCopyConstructorSignature(member)
+                    && !member.HasUnsupportedMetadata
+                    && AccessCheck.IsSymbolAccessible(member, within, ref useSiteInfo)
+                ) {
                     // If one has fewer custom modifiers, that is better
                     // (see OverloadResolution.BetterFunctionMember)
 
@@ -112,9 +122,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal static bool HasCopyConstructorSignature(MethodSymbol member)
         {
             NamedTypeSymbol containingType = member.ContainingType;
-            return member is MethodSymbol { IsStatic: false, ParameterCount: 1, Arity: 0 } method &&
-                method.Parameters[0].Type.Equals(containingType, TypeCompareKind.AllIgnoreOptions) &&
-                method.Parameters[0].RefKind == RefKind.None;
+            return member is MethodSymbol { IsStatic: false, ParameterCount: 1, Arity: 0 } method
+                && method.Parameters[0].Type.Equals(
+                    containingType,
+                    TypeCompareKind.AllIgnoreOptions
+                )
+                && method.Parameters[0].RefKind == RefKind.None;
         }
     }
 }

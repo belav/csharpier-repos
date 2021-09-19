@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             /// </summary>
             public HashSet<AnalyzerAction> ProcessedActions { get; }
 
-            public static readonly AnalyzerStateData FullyProcessedInstance = CreateFullyProcessedInstance();
+            public static readonly AnalyzerStateData FullyProcessedInstance =
+                CreateFullyProcessedInstance();
 
             public AnalyzerStateData()
             {

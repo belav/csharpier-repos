@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             Solution originalSolution,
             Solution updatedSolution,
             DocumentId updatedDocumentId,
-            ImmutableDictionary<string, ISymbol> newNameOriginalSymbolMapping)
-        {
+            ImmutableDictionary<string, ISymbol> newNameOriginalSymbolMapping
+        ) {
             OriginalSolution = originalSolution;
             UpdatedSolution = updatedSolution;
             UpdatedDocumentId = updatedDocumentId;
@@ -32,7 +32,6 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             Succeeded = true;
         }
 
-        private MoveToNamespaceResult()
-            => Succeeded = false;
+        private MoveToNamespaceResult() => Succeeded = false;
     }
 }

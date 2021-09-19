@@ -21,8 +21,8 @@ namespace Microsoft.AspNetCore.Components
 
         internal ComponentApplicationState(
             IDictionary<string, byte[]> currentState,
-            List<OnPersistingCallback> pauseCallbacks)
-        {
+            List<OnPersistingCallback> pauseCallbacks
+        ) {
             _currentState = currentState;
             _registeredCallbacks = pauseCallbacks;
         }
@@ -31,9 +31,12 @@ namespace Microsoft.AspNetCore.Components
         {
             if (_existingState != null)
             {
-                throw new InvalidOperationException("ComponentApplicationState already initialized.");
+                throw new InvalidOperationException(
+                    "ComponentApplicationState already initialized."
+                );
             }
-            _existingState = existingState ?? throw new ArgumentNullException(nameof(existingState));
+            _existingState =
+                existingState ?? throw new ArgumentNullException(nameof(existingState));
         }
 
         /// <summary>
@@ -123,7 +126,9 @@ namespace Microsoft.AspNetCore.Components
 
             if (_currentState.ContainsKey(key))
             {
-                throw new ArgumentException($"There is already a persisted object under the same key '{key}'");
+                throw new ArgumentException(
+                    $"There is already a persisted object under the same key '{key}'"
+                );
             }
             _currentState.Add(key, value);
         }
@@ -134,14 +139,19 @@ namespace Microsoft.AspNetCore.Components
         /// <typeparam name="TValue">The <paramref name="instance"/> type.</typeparam>
         /// <param name="key">The key to use to persist the state.</param>
         /// <param name="instance">The instance to persist.</param>
-        public void PersistAsJson<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string key, TValue instance)
-        {
+        public void PersistAsJson<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+            string key,
+            TValue instance
+        ) {
             if (key is null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            PersistState(key, JsonSerializer.SerializeToUtf8Bytes(instance, JsonSerializerOptionsProvider.Options));
+            PersistState(
+                key,
+                JsonSerializer.SerializeToUtf8Bytes(instance, JsonSerializerOptionsProvider.Options)
+            );
         }
 
         /// <summary>
@@ -153,8 +163,10 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="key">The key used to persist the instance.</param>
         /// <param name="instance">The persisted instance.</param>
         /// <returns><c>true</c> if the state was found; <c>false</c> otherwise.</returns>
-        public bool TryTakeAsJson<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string key, [MaybeNullWhen(false)] out TValue? instance)
-        {
+        public bool TryTakeAsJson<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+            string key,
+            [MaybeNullWhen(false)] out TValue? instance
+        ) {
             if (key is null)
             {
                 throw new ArgumentNullException(nameof(key));
@@ -162,7 +174,10 @@ namespace Microsoft.AspNetCore.Components
 
             if (TryTakePersistedState(key, out var data))
             {
-                instance = JsonSerializer.Deserialize<TValue>(data, JsonSerializerOptionsProvider.Options)!;
+                instance = JsonSerializer.Deserialize<TValue>(
+                    data,
+                    JsonSerializerOptionsProvider.Options
+                )!;
                 return true;
             }
             else

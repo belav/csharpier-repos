@@ -39,7 +39,10 @@ namespace System.Web.WebPages.Administration.PackageManager
         /// </summary>
         /// <param name="searchTerms">One or more terms separated by a whitespace used to filter packages.</param>
         /// <param name="filterPreferredPackages"></param>
-        IEnumerable<IPackage> GetPackagesWithUpdates(string searchTerms, bool filterPreferredPackages);
+        IEnumerable<IPackage> GetPackagesWithUpdates(
+            string searchTerms,
+            bool filterPreferredPackages
+        );
 
         /// <summary>
         /// Installs the package to the LocalRepository.

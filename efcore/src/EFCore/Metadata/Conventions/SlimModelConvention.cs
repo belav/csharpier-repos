@@ -25,8 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="SlimModelConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public SlimModelConvention(
-            ProviderConventionSetBuilderDependencies dependencies)
+        public SlimModelConvention(ProviderConventionSetBuilderDependencies dependencies)
         {
             Dependencies = dependencies;
         }
@@ -40,8 +39,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Called after a model is finalized and can no longer be mutated.
         /// </summary>
         /// <param name="model"> The model. </param>
-        public virtual IModel ProcessModelFinalized(IModel model)
-            => Create(model);
+        public virtual IModel ProcessModelFinalized(IModel model) => Create(model);
 
         /// <summary>
         ///     Creates an optimized model base on the supplied one.
@@ -50,10 +48,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <returns> An optimized model. </returns>
         protected virtual SlimModel Create(IModel model)
         {
-            var slimModel = new SlimModel(model.ModelDependencies!, ((IRuntimeModel)model).SkipDetectChanges);
+            var slimModel = new SlimModel(
+                model.ModelDependencies!,
+                ((IRuntimeModel)model).SkipDetectChanges
+            );
 
             var entityTypes = Sort(model.GetEntityTypes());
-            var entityTypePairs = new List<(IEntityType Source, SlimEntityType Target)>(entityTypes.Count);
+            var entityTypePairs = new List<(IEntityType Source, SlimEntityType Target)>(
+                entityTypes.Count
+            );
 
             foreach (var entityType in entityTypes)
             {
@@ -63,17 +66,37 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 foreach (var property in entityType.GetDeclaredProperties())
                 {
                     var slimProperty = Create(property, slimEntityType);
-                    CreateAnnotations(property, slimProperty, static (convention, annotations, source, target, runtime) =>
-                        convention.ProcessPropertyAnnotations(annotations, source, target, runtime));
+                    CreateAnnotations(
+                        property,
+                        slimProperty,
+                        static (convention, annotations, source, target, runtime) =>
+                            convention.ProcessPropertyAnnotations(
+                                annotations,
+                                source,
+                                target,
+                                runtime
+                            )
+                    );
                 }
 
                 foreach (var serviceProperty in entityType.GetDeclaredServiceProperties())
                 {
                     var slimServiceProperty = Create(serviceProperty, slimEntityType);
-                    CreateAnnotations(serviceProperty, slimServiceProperty, static (convention, annotations, source, target, runtime) =>
-                        convention.ProcessServicePropertyAnnotations(annotations, source, target, runtime));
-                    slimServiceProperty.ParameterBinding =
-                        (ServiceParameterBinding)Create(serviceProperty.ParameterBinding, slimEntityType);
+                    CreateAnnotations(
+                        serviceProperty,
+                        slimServiceProperty,
+                        static (convention, annotations, source, target, runtime) =>
+                            convention.ProcessServicePropertyAnnotations(
+                                annotations,
+                                source,
+                                target,
+                                runtime
+                            )
+                    );
+                    slimServiceProperty.ParameterBinding = (ServiceParameterBinding)Create(
+                        serviceProperty.ParameterBinding,
+                        slimEntityType
+                    );
                 }
 
                 foreach (var key in entityType.GetDeclaredKeys())
@@ -84,20 +107,33 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         slimEntityType.SetPrimaryKey(slimKey);
                     }
 
-                    CreateAnnotations(key, slimKey, static (convention, annotations, source, target, runtime) =>
-                        convention.ProcessKeyAnnotations(annotations, source, target, runtime));
+                    CreateAnnotations(
+                        key,
+                        slimKey,
+                        static (convention, annotations, source, target, runtime) =>
+                            convention.ProcessKeyAnnotations(annotations, source, target, runtime)
+                    );
                 }
 
                 foreach (var index in entityType.GetDeclaredIndexes())
                 {
                     var slimIndex = Create(index, slimEntityType);
-                    CreateAnnotations(index, slimIndex, static (convention, annotations, source, target, runtime) =>
-                        convention.ProcessIndexAnnotations(annotations, source, target, runtime));
+                    CreateAnnotations(
+                        index,
+                        slimIndex,
+                        static (convention, annotations, source, target, runtime) =>
+                            convention.ProcessIndexAnnotations(annotations, source, target, runtime)
+                    );
                 }
 
-                slimEntityType.ConstructorBinding = Create(entityType.ConstructorBinding, slimEntityType);
-                slimEntityType.ServiceOnlyConstructorBinding =
-                    Create(((IRuntimeEntityType)entityType).ServiceOnlyConstructorBinding, slimEntityType);
+                slimEntityType.ConstructorBinding = Create(
+                    entityType.ConstructorBinding,
+                    slimEntityType
+                );
+                slimEntityType.ServiceOnlyConstructorBinding = Create(
+                    ((IRuntimeEntityType)entityType).ServiceOnlyConstructorBinding,
+                    slimEntityType
+                );
             }
 
             foreach (var (entityType, slimEntityType) in entityTypePairs)
@@ -110,20 +146,47 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     if (navigation != null)
                     {
                         var slimNavigation = Create(navigation, slimForeignKey);
-                        CreateAnnotations(navigation, slimNavigation, static (convention, annotations, source, target, runtime) =>
-                            convention.ProcessNavigationAnnotations(annotations, source, target, runtime));
+                        CreateAnnotations(
+                            navigation,
+                            slimNavigation,
+                            static (convention, annotations, source, target, runtime) =>
+                                convention.ProcessNavigationAnnotations(
+                                    annotations,
+                                    source,
+                                    target,
+                                    runtime
+                                )
+                        );
                     }
 
                     navigation = foreignKey.PrincipalToDependent;
                     if (navigation != null)
                     {
                         var slimNavigation = Create(navigation, slimForeignKey);
-                        CreateAnnotations(navigation, slimNavigation, static (convention, annotations, source, target, runtime) =>
-                            convention.ProcessNavigationAnnotations(annotations, source, target, runtime));
+                        CreateAnnotations(
+                            navigation,
+                            slimNavigation,
+                            static (convention, annotations, source, target, runtime) =>
+                                convention.ProcessNavigationAnnotations(
+                                    annotations,
+                                    source,
+                                    target,
+                                    runtime
+                                )
+                        );
                     }
 
-                    CreateAnnotations(foreignKey, slimForeignKey, static (convention, annotations, source, target, runtime) =>
-                        convention.ProcessForeignKeyAnnotations(annotations, source, target, runtime));
+                    CreateAnnotations(
+                        foreignKey,
+                        slimForeignKey,
+                        static (convention, annotations, source, target, runtime) =>
+                            convention.ProcessForeignKeyAnnotations(
+                                annotations,
+                                source,
+                                target,
+                                runtime
+                            )
+                    );
                 }
             }
 
@@ -133,23 +196,47 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 {
                     var slimNavigation = Create(navigation, slimEntityType);
 
-                    var inverse = slimNavigation.TargetEntityType.FindSkipNavigation(navigation.Inverse.Name);
+                    var inverse = slimNavigation.TargetEntityType.FindSkipNavigation(
+                        navigation.Inverse.Name
+                    );
                     if (inverse != null)
                     {
                         slimNavigation.Inverse = inverse;
                         inverse.Inverse = slimNavigation;
                     }
 
-                    CreateAnnotations(navigation, slimNavigation, static (convention, annotations, source, target, runtime) =>
-                        convention.ProcessSkipNavigationAnnotations(annotations, source, target, runtime));
+                    CreateAnnotations(
+                        navigation,
+                        slimNavigation,
+                        static (convention, annotations, source, target, runtime) =>
+                            convention.ProcessSkipNavigationAnnotations(
+                                annotations,
+                                source,
+                                target,
+                                runtime
+                            )
+                    );
                 }
 
-                CreateAnnotations(entityType, slimEntityType, static (convention, annotations, source, target, runtime) =>
-                    convention.ProcessEntityTypeAnnotations(annotations, source, target, runtime));
+                CreateAnnotations(
+                    entityType,
+                    slimEntityType,
+                    static (convention, annotations, source, target, runtime) =>
+                        convention.ProcessEntityTypeAnnotations(
+                            annotations,
+                            source,
+                            target,
+                            runtime
+                        )
+                );
             }
 
-            CreateAnnotations(model, slimModel, static (convention, annotations, source, target, runtime) =>
-                convention.ProcessModelAnnotations(annotations, source, target, runtime));
+            CreateAnnotations(
+                model,
+                slimModel,
+                static (convention, annotations, source, target, runtime) =>
+                    convention.ProcessModelAnnotations(annotations, source, target, runtime)
+            );
 
             return slimModel;
         }
@@ -157,9 +244,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void CreateAnnotations<TSource, TTarget>(
             TSource source,
             TTarget target,
-            Action<SlimModelConvention, Dictionary<string, object?>, TSource, TTarget, bool> process)
-            where TSource : IAnnotatable
-            where TTarget : AnnotatableBase
+            Action<SlimModelConvention, Dictionary<string, object?>, TSource, TTarget, bool> process
+        ) where TSource : IAnnotatable
+          where TTarget : AnnotatableBase
         {
             var annotations = source.GetAnnotations().ToDictionary(a => a.Name, a => a.Value);
             process(this, annotations, source, target, false);
@@ -181,8 +268,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IModel model,
             SlimModel slimModel,
-            bool runtime)
-        {
+            bool runtime
+        ) {
             if (runtime)
             {
                 annotations.Remove(CoreAnnotationNames.ModelDependencies);
@@ -207,25 +294,47 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             return entityTypeGraph.TopologicalSort();
         }
 
-        private SlimEntityType Create(IEntityType entityType, SlimModel model)
-            => model.AddEntityType(entityType.Name,
+        private SlimEntityType Create(IEntityType entityType, SlimModel model) =>
+            model.AddEntityType(
+                entityType.Name,
                 entityType.ClrType,
                 entityType.HasSharedClrType,
-                entityType.BaseType == null ? null : model.FindEntityType(entityType.BaseType.Name)!,
+                entityType.BaseType == null
+                  ? null
+                  : model.FindEntityType(entityType.BaseType.Name)!,
                 entityType.GetDiscriminatorPropertyName(),
                 entityType.GetChangeTrackingStrategy(),
                 entityType.FindIndexerPropertyInfo(),
-                entityType.IsPropertyBag);
+                entityType.IsPropertyBag
+            );
 
-        private ParameterBinding Create(ParameterBinding parameterBinding, SlimEntityType entityType)
-            => parameterBinding.With(parameterBinding.ConsumedProperties.Select(property =>
-            (entityType.FindProperty(property.Name)
-                ?? entityType.FindServiceProperty(property.Name)
-                ?? entityType.FindNavigation(property.Name)
-                ?? (IPropertyBase?)entityType.FindSkipNavigation(property.Name))!).ToArray());
+        private ParameterBinding Create(
+            ParameterBinding parameterBinding,
+            SlimEntityType entityType
+        ) =>
+            parameterBinding.With(
+                parameterBinding.ConsumedProperties.Select(
+                        property =>
+                            (
+                                entityType.FindProperty(property.Name)
+                                ?? entityType.FindServiceProperty(property.Name)
+                                ?? entityType.FindNavigation(property.Name)
+                                ?? (IPropertyBase?)entityType.FindSkipNavigation(property.Name)
+                            )!
+                    )
+                    .ToArray()
+            );
 
-        private InstantiationBinding? Create(InstantiationBinding? instantiationBinding, SlimEntityType entityType)
-            => instantiationBinding?.With(instantiationBinding.ParameterBindings.Select(binding => Create(binding, entityType)).ToList());
+        private InstantiationBinding? Create(
+            InstantiationBinding? instantiationBinding,
+            SlimEntityType entityType
+        ) =>
+            instantiationBinding?.With(
+                instantiationBinding.ParameterBindings.Select(
+                        binding => Create(binding, entityType)
+                    )
+                    .ToList()
+            );
 
         /// <summary>
         ///     Updates the entity type annotations that will be set on the read-only object.
@@ -238,8 +347,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IDictionary<string, object?> annotations,
             IEntityType entityType,
             SlimEntityType slimEntityType,
-            bool runtime)
-        {
+            bool runtime
+        ) {
             if (!runtime)
             {
                 annotations.Remove(CoreAnnotationNames.PropertyAccessMode);
@@ -249,21 +358,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (annotations.TryGetValue(CoreAnnotationNames.QueryFilter, out var queryFilter))
                 {
                     annotations[CoreAnnotationNames.QueryFilter] =
-                        new QueryRootRewritingExpressionVisitor(slimEntityType.Model).Rewrite((Expression)queryFilter!);
+                        new QueryRootRewritingExpressionVisitor(slimEntityType.Model).Rewrite(
+                            (Expression)queryFilter!
+                        );
                 }
 
 #pragma warning disable CS0612 // Type or member is obsolete
-                if (annotations.TryGetValue(CoreAnnotationNames.DefiningQuery, out var definingQuery))
-                {
+                if (
+                    annotations.TryGetValue(
+                        CoreAnnotationNames.DefiningQuery,
+                        out var definingQuery
+                    )
+                ) {
                     annotations[CoreAnnotationNames.DefiningQuery] =
-                        new QueryRootRewritingExpressionVisitor(slimEntityType.Model).Rewrite((Expression)definingQuery!);
+                        new QueryRootRewritingExpressionVisitor(slimEntityType.Model).Rewrite(
+                            (Expression)definingQuery!
+                        );
                 }
 #pragma warning restore CS0612 // Type or member is obsolete
             }
         }
 
-        private SlimProperty Create(IProperty property, SlimEntityType slimEntityType)
-            => slimEntityType.AddProperty(
+        private SlimProperty Create(IProperty property, SlimEntityType slimEntityType) =>
+            slimEntityType.AddProperty(
                 property.Name,
                 property.ClrType,
                 property.PropertyInfo,
@@ -283,7 +400,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 property.GetValueConverter(),
                 property.GetValueComparer(),
                 property.GetKeyValueComparer(),
-                property.GetTypeMapping());
+                property.GetTypeMapping()
+            );
 
         /// <summary>
         ///     Updates the property annotations that will be set on the read-only object.
@@ -296,8 +414,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IProperty property,
             SlimProperty slimProperty,
-            bool runtime)
-        {
+            bool runtime
+        ) {
             if (!runtime)
             {
                 annotations.Remove(CoreAnnotationNames.PropertyAccessMode);
@@ -313,12 +431,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
         }
 
-        private SlimServiceProperty Create(IServiceProperty property, SlimEntityType slimEntityType)
-            => slimEntityType.AddServiceProperty(
+        private SlimServiceProperty Create(
+            IServiceProperty property,
+            SlimEntityType slimEntityType
+        ) =>
+            slimEntityType.AddServiceProperty(
                 property.Name,
                 property.PropertyInfo,
                 property.FieldInfo,
-                property.GetPropertyAccessMode());
+                property.GetPropertyAccessMode()
+            );
 
         /// <summary>
         ///     Updates the service property annotations that will be set on the read-only object.
@@ -331,16 +453,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IServiceProperty property,
             SlimServiceProperty slimProperty,
-            bool runtime)
-        {
+            bool runtime
+        ) {
             if (!runtime)
             {
                 annotations.Remove(CoreAnnotationNames.PropertyAccessMode);
             }
         }
 
-        private SlimKey Create(IKey key, SlimEntityType slimEntityType)
-            => slimEntityType.AddKey(slimEntityType.FindProperties(key.Properties.Select(p => p.Name))!);
+        private SlimKey Create(IKey key, SlimEntityType slimEntityType) =>
+            slimEntityType.AddKey(
+                slimEntityType.FindProperties(key.Properties.Select(p => p.Name))!
+            );
 
         /// <summary>
         ///     Updates the key annotations that will be set on the read-only object.
@@ -353,15 +477,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IDictionary<string, object?> annotations,
             IKey key,
             SlimKey slimKey,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
-        private SlimIndex Create(IIndex index, SlimEntityType slimEntityType)
-            => slimEntityType.AddIndex(
+        private SlimIndex Create(IIndex index, SlimEntityType slimEntityType) =>
+            slimEntityType.AddIndex(
                 slimEntityType.FindProperties(index.Properties.Select(p => p.Name))!,
                 index.Name,
-                index.IsUnique);
+                index.IsUnique
+            );
 
         /// <summary>
         ///     Updates the index annotations that will be set on the read-only object.
@@ -374,13 +498,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IIndex index,
             SlimIndex slimIndex,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
         private SlimForeignKey Create(IForeignKey foreignKey, SlimEntityType slimEntityType)
         {
-            var principalEntityType = slimEntityType.Model.FindEntityType(foreignKey.PrincipalEntityType.Name)!;
+            var principalEntityType = slimEntityType.Model.FindEntityType(
+                foreignKey.PrincipalEntityType.Name
+            )!;
             return slimEntityType.AddForeignKey(
                 slimEntityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!,
                 GetKey(foreignKey.PrincipalKey, principalEntityType),
@@ -389,7 +514,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 foreignKey.IsUnique,
                 foreignKey.IsRequired,
                 foreignKey.IsRequiredDependent,
-                foreignKey.IsOwnership);
+                foreignKey.IsOwnership
+            );
         }
 
         /// <summary>
@@ -403,21 +529,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IForeignKey foreignKey,
             SlimForeignKey slimForeignKey,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
-        private SlimNavigation Create(INavigation navigation, SlimForeignKey slimForeigKey)
-            => (navigation.IsOnDependent ? slimForeigKey.DeclaringEntityType : slimForeigKey.PrincipalEntityType)
-                .AddNavigation(
-                    navigation.Name,
-                    navigation.ClrType,
-                    navigation.PropertyInfo,
-                    navigation.FieldInfo,
-                    slimForeigKey,
-                    navigation.IsOnDependent,
-                    navigation.GetPropertyAccessMode(),
-                    navigation.IsEagerLoaded);
+        private SlimNavigation Create(INavigation navigation, SlimForeignKey slimForeigKey) =>
+            (
+                navigation.IsOnDependent
+                    ? slimForeigKey.DeclaringEntityType
+                    : slimForeigKey.PrincipalEntityType
+            ).AddNavigation(
+                navigation.Name,
+                navigation.ClrType,
+                navigation.PropertyInfo,
+                navigation.FieldInfo,
+                slimForeigKey,
+                navigation.IsOnDependent,
+                navigation.GetPropertyAccessMode(),
+                navigation.IsEagerLoaded
+            );
 
         /// <summary>
         ///     Updates the navigation annotations that will be set on the read-only object.
@@ -430,8 +559,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             INavigation navigation,
             SlimNavigation slimNavigation,
-            bool runtime)
-        {
+            bool runtime
+        ) {
             if (!runtime)
             {
                 annotations.Remove(CoreAnnotationNames.PropertyAccessMode);
@@ -439,18 +568,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
         }
 
-        private SlimSkipNavigation Create(ISkipNavigation navigation, SlimEntityType slimEntityType)
-            => slimEntityType.AddSkipNavigation(
+        private SlimSkipNavigation Create(
+            ISkipNavigation navigation,
+            SlimEntityType slimEntityType
+        ) =>
+            slimEntityType.AddSkipNavigation(
                 navigation.Name,
                 navigation.ClrType,
                 navigation.PropertyInfo,
                 navigation.FieldInfo,
                 slimEntityType.Model.FindEntityType(navigation.TargetEntityType.Name)!,
-                GetForeignKey(navigation.ForeignKey, slimEntityType.Model.FindEntityType(navigation.ForeignKey.DeclaringEntityType.Name)!),
+                GetForeignKey(
+                    navigation.ForeignKey,
+                    slimEntityType.Model.FindEntityType(
+                        navigation.ForeignKey.DeclaringEntityType.Name
+                    )!
+                ),
                 navigation.IsCollection,
                 navigation.IsOnDependent,
                 navigation.GetPropertyAccessMode(),
-                navigation.IsEagerLoaded);
+                navigation.IsEagerLoaded
+            );
 
         /// <summary>
         ///     Gets the corresponding foreign key in the read-optimized model.
@@ -458,12 +596,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="foreignKey"> The original foreign key. </param>
         /// <param name="entityType"> The declaring entity type. </param>
         /// <returns> The corresponding read-optimized foreign key. </returns>
-        protected virtual SlimForeignKey GetForeignKey(IForeignKey foreignKey, SlimEntityType entityType)
-            => entityType.FindDeclaredForeignKeys(
-                entityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!)
-                .Single(fk => fk.PrincipalEntityType.Name == foreignKey.PrincipalEntityType.Name
-                && fk.PrincipalKey.Properties.Select(p => p.Name).SequenceEqual(
-                    foreignKey.PrincipalKey.Properties.Select(p => p.Name)));
+        protected virtual SlimForeignKey GetForeignKey(
+            IForeignKey foreignKey,
+            SlimEntityType entityType
+        ) =>
+            entityType.FindDeclaredForeignKeys(
+                    entityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!
+                )
+                .Single(
+                    fk =>
+                        fk.PrincipalEntityType.Name == foreignKey.PrincipalEntityType.Name
+                        && fk.PrincipalKey.Properties.Select(p => p.Name)
+                            .SequenceEqual(foreignKey.PrincipalKey.Properties.Select(p => p.Name))
+                );
 
         /// <summary>
         ///     Gets the corresponding key in the read-optimized model.
@@ -471,8 +616,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="key"> The original key. </param>
         /// <param name="entityType"> The declaring entity type. </param>
         /// <returns> The corresponding read-optimized key. </returns>
-        protected virtual SlimKey GetKey(IKey key, SlimEntityType entityType)
-            => entityType.FindKey(entityType.FindProperties(key.Properties.Select(p => p.Name))!)!;
+        protected virtual SlimKey GetKey(IKey key, SlimEntityType entityType) =>
+            entityType.FindKey(entityType.FindProperties(key.Properties.Select(p => p.Name))!)!;
 
         /// <summary>
         ///     Gets the corresponding index in the read-optimized model.
@@ -480,10 +625,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="index"> The original index. </param>
         /// <param name="entityType"> The declaring entity type. </param>
         /// <returns> The corresponding read-optimized index. </returns>
-        protected virtual SlimIndex GetIndex(IIndex index, SlimEntityType entityType)
-            => index.Name == null
-            ? entityType.FindIndex(entityType.FindProperties(index.Properties.Select(p => p.Name))!)!
-            : entityType.FindIndex(index.Name)!;
+        protected virtual SlimIndex GetIndex(IIndex index, SlimEntityType entityType) =>
+            index.Name == null
+                ? entityType.FindIndex(
+                      entityType.FindProperties(index.Properties.Select(p => p.Name))!
+                  )!
+                : entityType.FindIndex(index.Name)!;
 
         /// <summary>
         ///     Updates the skip navigation annotations that will be set on the read-only object.
@@ -496,8 +643,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             ISkipNavigation skipNavigation,
             SlimSkipNavigation slimSkipNavigation,
-            bool runtime)
-        {
+            bool runtime
+        ) {
             if (!runtime)
             {
                 annotations.Remove(CoreAnnotationNames.PropertyAccessMode);
@@ -525,13 +672,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             ///     Rewrites <see cref="QueryRootExpression" /> encountered in an expression to use a different entity type.
             /// </summary>
             /// <param name="expression"> The query expression to rewrite. </param>
-            public Expression Rewrite(Expression expression)
-                => Visit(expression);
+            public Expression Rewrite(Expression expression) => Visit(expression);
 
             /// <inheritdoc />
-            protected override Expression VisitExtension(Expression extensionExpression)
-                => extensionExpression is QueryRootExpression queryRootExpression
-                    ? new QueryRootExpression(_model.FindEntityType(queryRootExpression.EntityType.Name)!)
+            protected override Expression VisitExtension(Expression extensionExpression) =>
+                extensionExpression is QueryRootExpression queryRootExpression
+                    ? new QueryRootExpression(
+                          _model.FindEntityType(queryRootExpression.EntityType.Name)!
+                      )
                     : base.VisitExtension(extensionExpression);
         }
     }

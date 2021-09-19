@@ -16,14 +16,17 @@ namespace Microsoft.AspNetCore.Authorization.Test
         [Fact]
         public void RequireRoleThrowsIfEmpty()
         {
-            Assert.Throws<InvalidOperationException>(() => new AuthorizationPolicyBuilder().RequireRole());
+            Assert.Throws<InvalidOperationException>(
+                () => new AuthorizationPolicyBuilder().RequireRole()
+            );
         }
 
         [Fact]
         public async Task CanCombineAuthorizeAttributes()
         {
             // Arrange
-            var attributes = new AuthorizeAttribute[] {
+            var attributes = new AuthorizeAttribute[]
+            {
                 new AuthorizeAttribute(),
                 new AuthorizeAttribute("1") { AuthenticationSchemes = "dupe" },
                 new AuthorizeAttribute("2") { AuthenticationSchemes = "dupe" },
@@ -52,12 +55,16 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task CanReplaceDefaultPolicy()
         {
             // Arrange
-            var attributes = new AuthorizeAttribute[] {
+            var attributes = new AuthorizeAttribute[]
+            {
                 new AuthorizeAttribute(),
                 new AuthorizeAttribute("2") { AuthenticationSchemes = "dupe" }
             };
             var options = new AuthorizationOptions();
-            options.DefaultPolicy = new AuthorizationPolicyBuilder("default").RequireClaim("default").Build();
+            options.DefaultPolicy = new AuthorizationPolicyBuilder("default").RequireClaim(
+                    "default"
+                )
+                .Build();
             options.AddPolicy("2", policy => policy.RequireClaim("2"));
 
             var provider = new DefaultAuthorizationPolicyProvider(Options.Create(options));
@@ -70,7 +77,10 @@ namespace Microsoft.AspNetCore.Authorization.Test
             Assert.Contains("dupe", combined.AuthenticationSchemes);
             Assert.Contains("default", combined.AuthenticationSchemes);
             Assert.Equal(2, combined.Requirements.Count());
-            Assert.DoesNotContain(combined.Requirements, r => r is DenyAnonymousAuthorizationRequirement);
+            Assert.DoesNotContain(
+                combined.Requirements,
+                r => r is DenyAnonymousAuthorizationRequirement
+            );
             Assert.Equal(2, combined.Requirements.OfType<ClaimsAuthorizationRequirement>().Count());
         }
 
@@ -78,7 +88,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task CombineMustTrimRoles()
         {
             // Arrange
-            var attributes = new AuthorizeAttribute[] {
+            var attributes = new AuthorizeAttribute[]
+            {
                 new AuthorizeAttribute() { Roles = "r1 , r2" }
             };
             var options = new AuthorizationOptions();
@@ -89,7 +100,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
 
             // Assert
             Assert.Contains(combined.Requirements, r => r is RolesAuthorizationRequirement);
-            var rolesAuthorizationRequirement = combined.Requirements.OfType<RolesAuthorizationRequirement>().First();
+            var rolesAuthorizationRequirement =
+                combined.Requirements.OfType<RolesAuthorizationRequirement>().First();
             Assert.Equal(2, rolesAuthorizationRequirement.AllowedRoles.Count());
             Assert.Contains(rolesAuthorizationRequirement.AllowedRoles, r => r.Equals("r1"));
             Assert.Contains(rolesAuthorizationRequirement.AllowedRoles, r => r.Equals("r2"));
@@ -99,7 +111,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
         public async Task CombineMustTrimAuthenticationScheme()
         {
             // Arrange
-            var attributes = new AuthorizeAttribute[] {
+            var attributes = new AuthorizeAttribute[]
+            {
                 new AuthorizeAttribute() { AuthenticationSchemes = "a1 , a2" }
             };
             var options = new AuthorizationOptions();
@@ -114,12 +127,13 @@ namespace Microsoft.AspNetCore.Authorization.Test
             Assert.Contains(combined.AuthenticationSchemes, a => a.Equals("a1"));
             Assert.Contains(combined.AuthenticationSchemes, a => a.Equals("a2"));
         }
-        
+
         [Fact]
         public async Task CombineMustIgnoreEmptyAuthenticationScheme()
         {
             // Arrange
-            var attributes = new AuthorizeAttribute[] {
+            var attributes = new AuthorizeAttribute[]
+            {
                 new AuthorizeAttribute() { AuthenticationSchemes = "a1 , , ,,, a2" }
             };
             var options = new AuthorizationOptions();
@@ -134,12 +148,13 @@ namespace Microsoft.AspNetCore.Authorization.Test
             Assert.Contains(combined.AuthenticationSchemes, a => a.Equals("a1"));
             Assert.Contains(combined.AuthenticationSchemes, a => a.Equals("a2"));
         }
-        
+
         [Fact]
         public async Task CombineMustIgnoreEmptyRoles()
         {
             // Arrange
-            var attributes = new AuthorizeAttribute[] {
+            var attributes = new AuthorizeAttribute[]
+            {
                 new AuthorizeAttribute() { Roles = "r1 , ,, , r2" }
             };
             var options = new AuthorizationOptions();
@@ -150,7 +165,8 @@ namespace Microsoft.AspNetCore.Authorization.Test
 
             // Assert
             Assert.Contains(combined.Requirements, r => r is RolesAuthorizationRequirement);
-            var rolesAuthorizationRequirement = combined.Requirements.OfType<RolesAuthorizationRequirement>().First();
+            var rolesAuthorizationRequirement =
+                combined.Requirements.OfType<RolesAuthorizationRequirement>().First();
             Assert.Equal(2, rolesAuthorizationRequirement.AllowedRoles.Count());
             Assert.Contains(rolesAuthorizationRequirement.AllowedRoles, r => r.Equals("r1"));
             Assert.Contains(rolesAuthorizationRequirement.AllowedRoles, r => r.Equals("r2"));

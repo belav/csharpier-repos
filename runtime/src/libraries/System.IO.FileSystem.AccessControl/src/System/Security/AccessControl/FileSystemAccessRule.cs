@@ -14,30 +14,28 @@ namespace System.Security.AccessControl
         public FileSystemAccessRule(
             IdentityReference identity,
             FileSystemRights fileSystemRights,
-            AccessControlType type)
-            : this(
-                identity,
-                AccessMaskFromRights(fileSystemRights, type),
-                false,
-                InheritanceFlags.None,
-                PropagationFlags.None,
-                type)
-        {
-        }
+            AccessControlType type
+        ) : this(
+            identity,
+            AccessMaskFromRights(fileSystemRights, type),
+            false,
+            InheritanceFlags.None,
+            PropagationFlags.None,
+            type
+        ) { }
 
         public FileSystemAccessRule(
             string identity,
             FileSystemRights fileSystemRights,
-            AccessControlType type)
-            : this(
-                new NTAccount(identity),
-                AccessMaskFromRights(fileSystemRights, type),
-                false,
-                InheritanceFlags.None,
-                PropagationFlags.None,
-                type)
-        {
-        }
+            AccessControlType type
+        ) : this(
+            new NTAccount(identity),
+            AccessMaskFromRights(fileSystemRights, type),
+            false,
+            InheritanceFlags.None,
+            PropagationFlags.None,
+            type
+        ) { }
 
         //
         // Constructor for creating access rules for folder objects
@@ -48,32 +46,30 @@ namespace System.Security.AccessControl
             FileSystemRights fileSystemRights,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type)
-            : this(
-                identity,
-                AccessMaskFromRights(fileSystemRights, type),
-                false,
-                inheritanceFlags,
-                propagationFlags,
-                type)
-        {
-        }
+            AccessControlType type
+        ) : this(
+            identity,
+            AccessMaskFromRights(fileSystemRights, type),
+            false,
+            inheritanceFlags,
+            propagationFlags,
+            type
+        ) { }
 
         public FileSystemAccessRule(
             string identity,
             FileSystemRights fileSystemRights,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type)
-            : this(
-                new NTAccount(identity),
-                AccessMaskFromRights(fileSystemRights, type),
-                false,
-                inheritanceFlags,
-                propagationFlags,
-                type)
-        {
-        }
+            AccessControlType type
+        ) : this(
+            new NTAccount(identity),
+            AccessMaskFromRights(fileSystemRights, type),
+            false,
+            inheritanceFlags,
+            propagationFlags,
+            type
+        ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -86,16 +82,8 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type)
-            : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                type)
-        {
-        }
+            AccessControlType type
+        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
 
         public FileSystemRights FileSystemRights
         {
@@ -107,10 +95,19 @@ namespace System.Security.AccessControl
         // and for denies, let's never include this bit unless we're denying
         // full control.  This is the right thing for users, even if it does
         // make the model look asymmetrical from a purist point of view.
-        internal static int AccessMaskFromRights(FileSystemRights fileSystemRights, AccessControlType controlType)
-        {
+        internal static int AccessMaskFromRights(
+            FileSystemRights fileSystemRights,
+            AccessControlType controlType
+        ) {
             if (fileSystemRights < 0 || fileSystemRights > FileSystemRights.FullControl)
-                throw new ArgumentOutOfRangeException(nameof(fileSystemRights), SR.Format(SR.Argument_InvalidEnumValue, fileSystemRights, nameof(AccessControl.FileSystemRights)));
+                throw new ArgumentOutOfRangeException(
+                    nameof(fileSystemRights),
+                    SR.Format(
+                        SR.Argument_InvalidEnumValue,
+                        fileSystemRights,
+                        nameof(AccessControl.FileSystemRights)
+                    )
+                );
 
             if (controlType == AccessControlType.Allow)
             {
@@ -118,8 +115,14 @@ namespace System.Security.AccessControl
             }
             else if (controlType == AccessControlType.Deny)
             {
-                if (fileSystemRights != FileSystemRights.FullControl &&
-                    fileSystemRights != (FileSystemRights.FullControl & ~FileSystemRights.DeleteSubdirectoriesAndFiles))
+                if (
+                    fileSystemRights != FileSystemRights.FullControl
+                    && fileSystemRights
+                        != (
+                            FileSystemRights.FullControl
+                            & ~FileSystemRights.DeleteSubdirectoriesAndFiles
+                        )
+                )
                     fileSystemRights &= ~FileSystemRights.Synchronize;
             }
 

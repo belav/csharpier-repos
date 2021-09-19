@@ -20,25 +20,30 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.MakeStructFieldsWritable), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.MakeStructFieldsWritable
+        ),
+        Shared
+    ]
     internal class CSharpMakeStructFieldsWritableCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMakeStructFieldsWritableCodeFixProvider()
-        {
-        }
+        public CSharpMakeStructFieldsWritableCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.MakeStructFieldsWritable);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.MakeStructFieldsWritable);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeQuality;
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics[0], c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
@@ -46,8 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             foreach (var diagnostic in diagnostics)
             {
                 var diagnosticNode = diagnostic.Location.FindNode(cancellationToken);
@@ -57,18 +62,21 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
                     continue;
                 }
 
-                var fieldDeclarations = structDeclaration.Members
-                    .OfType<FieldDeclarationSyntax>();
+                var fieldDeclarations = structDeclaration.Members.OfType<FieldDeclarationSyntax>();
 
                 foreach (var fieldDeclaration in fieldDeclarations)
                 {
                     var fieldDeclarationModifiers = editor.Generator.GetModifiers(fieldDeclaration);
                     var containsReadonlyModifier =
-                        (fieldDeclarationModifiers & DeclarationModifiers.ReadOnly) == DeclarationModifiers.ReadOnly;
+                        (fieldDeclarationModifiers & DeclarationModifiers.ReadOnly)
+                        == DeclarationModifiers.ReadOnly;
 
                     if (containsReadonlyModifier)
                     {
-                        editor.SetModifiers(fieldDeclaration, fieldDeclarationModifiers.WithIsReadOnly(false));
+                        editor.SetModifiers(
+                            fieldDeclaration,
+                            fieldDeclarationModifiers.WithIsReadOnly(false)
+                        );
                     }
                 }
             }
@@ -78,10 +86,10 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Make_readonly_fields_writable, createChangedDocument)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(CSharpAnalyzersResources.Make_readonly_fields_writable, createChangedDocument)
+            { }
         }
     }
 }

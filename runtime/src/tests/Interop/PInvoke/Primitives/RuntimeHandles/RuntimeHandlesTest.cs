@@ -10,9 +10,7 @@ class TestClass
 {
     public int field;
 
-    public void Method()
-    {
-    }
+    public void Method() { }
 }
 
 class RuntimeHandlesTest
@@ -26,7 +24,8 @@ class RuntimeHandlesTest
 
     private static void TestRuntimeMethodHandle()
     {
-        RuntimeMethodHandle handle = typeof(TestClass).GetMethod(nameof(TestClass.Method)).MethodHandle;
+        RuntimeMethodHandle handle =
+            typeof(TestClass).GetMethod(nameof(TestClass.Method)).MethodHandle;
         Assert.IsTrue(Marshal_In(handle, handle.Value));
     }
 

@@ -41,7 +41,10 @@ namespace Microsoft.EntityFrameworkCore
                 SerializeAndDeserialize(
                     new OperationException(
                         "But somehow the vital connection is made",
-                        new Exception("Bang!"))));
+                        new Exception("Bang!")
+                    )
+                )
+            );
 
             Assert.Equal("But somehow the vital connection is made", transportedException.Message);
             Assert.Equal("Bang!", transportedException.InnerException.Message);

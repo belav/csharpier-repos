@@ -18,17 +18,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
         }
 
-        public new TypeDeclarationSyntax AddAttributeLists(params AttributeListSyntax[] items)
-            => (TypeDeclarationSyntax)AddAttributeListsCore(items);
+        public new TypeDeclarationSyntax AddAttributeLists(params AttributeListSyntax[] items) =>
+            (TypeDeclarationSyntax)AddAttributeListsCore(items);
 
-        public new TypeDeclarationSyntax AddModifiers(params SyntaxToken[] items)
-            => (TypeDeclarationSyntax)AddModifiersCore(items);
+        public new TypeDeclarationSyntax AddModifiers(params SyntaxToken[] items) =>
+            (TypeDeclarationSyntax)AddModifiersCore(items);
 
-        public new TypeDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists)
-            => (TypeDeclarationSyntax)WithAttributeListsCore(attributeLists);
+        public new TypeDeclarationSyntax WithAttributeLists(
+            SyntaxList<AttributeListSyntax> attributeLists
+        ) => (TypeDeclarationSyntax)WithAttributeListsCore(attributeLists);
 
-        public new TypeDeclarationSyntax WithModifiers(SyntaxTokenList modifiers)
-            => (TypeDeclarationSyntax)WithModifiersCore(modifiers);
+        public new TypeDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) =>
+            (TypeDeclarationSyntax)WithModifiersCore(modifiers);
     }
 }
 
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxFactory.Token(SyntaxKind.OpenBraceToken),
                 default(SyntaxList<MemberDeclarationSyntax>),
                 SyntaxFactory.Token(SyntaxKind.CloseBraceToken),
-                default(SyntaxToken));
+                default(SyntaxToken)
+            );
         }
 
         public static TypeDeclarationSyntax TypeDeclaration(SyntaxKind kind, string identifier)
@@ -102,18 +104,67 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxToken openBraceToken,
             SyntaxList<MemberDeclarationSyntax> members,
             SyntaxToken closeBraceToken,
-            SyntaxToken semicolonToken)
-        {
+            SyntaxToken semicolonToken
+        ) {
             switch (kind)
             {
                 case SyntaxKind.ClassDeclaration:
-                    return SyntaxFactory.ClassDeclaration(attributes, modifiers, keyword, identifier, typeParameterList, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);
+                    return SyntaxFactory.ClassDeclaration(
+                        attributes,
+                        modifiers,
+                        keyword,
+                        identifier,
+                        typeParameterList,
+                        baseList,
+                        constraintClauses,
+                        openBraceToken,
+                        members,
+                        closeBraceToken,
+                        semicolonToken
+                    );
                 case SyntaxKind.StructDeclaration:
-                    return SyntaxFactory.StructDeclaration(attributes, modifiers, keyword, identifier, typeParameterList, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);
+                    return SyntaxFactory.StructDeclaration(
+                        attributes,
+                        modifiers,
+                        keyword,
+                        identifier,
+                        typeParameterList,
+                        baseList,
+                        constraintClauses,
+                        openBraceToken,
+                        members,
+                        closeBraceToken,
+                        semicolonToken
+                    );
                 case SyntaxKind.InterfaceDeclaration:
-                    return SyntaxFactory.InterfaceDeclaration(attributes, modifiers, keyword, identifier, typeParameterList, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);
+                    return SyntaxFactory.InterfaceDeclaration(
+                        attributes,
+                        modifiers,
+                        keyword,
+                        identifier,
+                        typeParameterList,
+                        baseList,
+                        constraintClauses,
+                        openBraceToken,
+                        members,
+                        closeBraceToken,
+                        semicolonToken
+                    );
                 case SyntaxKind.RecordDeclaration:
-                    return SyntaxFactory.RecordDeclaration(attributes, modifiers, keyword, identifier, typeParameterList, parameterList: null, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);
+                    return SyntaxFactory.RecordDeclaration(
+                        attributes,
+                        modifiers,
+                        keyword,
+                        identifier,
+                        typeParameterList,
+                        parameterList: null,
+                        baseList,
+                        constraintClauses,
+                        openBraceToken,
+                        members,
+                        closeBraceToken,
+                        semicolonToken
+                    );
                 default:
                     throw new ArgumentException("kind");
             }

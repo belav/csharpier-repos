@@ -24,14 +24,21 @@ namespace System.Security.AccessControl
             byte[] binaryForm,
             int requestedRevision,
             SecurityInfos si,
-            out string? resultSddl)
-        {
+            out string? resultSddl
+        ) {
             int errorCode;
             IntPtr ByteArray;
             uint ByteArraySize = 0;
 
-            if (!Interop.Advapi32.ConvertSdToStringSd(binaryForm, (uint)requestedRevision, (uint)si, out ByteArray, ref ByteArraySize))
-            {
+            if (
+                !Interop.Advapi32.ConvertSdToStringSd(
+                    binaryForm,
+                    (uint)requestedRevision,
+                    (uint)si,
+                    out ByteArray,
+                    ref ByteArraySize
+                )
+            ) {
                 errorCode = Marshal.GetLastWin32Error();
                 goto Error;
             }
@@ -50,7 +57,7 @@ namespace System.Security.AccessControl
 
             return 0;
 
-        Error:
+            Error:
 
             resultSddl = null;
 
@@ -72,12 +79,15 @@ namespace System.Security.AccessControl
             SafeHandle? handle,
             AccessControlSections accessControlSections,
             out RawSecurityDescriptor? resultSd
-            )
-        {
+        ) {
             resultSd = null;
 
             int errorCode;
-            IntPtr SidOwner, SidGroup, Dacl, Sacl, ByteArray;
+            IntPtr SidOwner,
+                SidGroup,
+                Dacl,
+                Sacl,
+                ByteArray;
             SecurityInfos SecurityInfos = 0;
             Privilege? privilege = null;
 
@@ -118,19 +128,35 @@ namespace System.Security.AccessControl
 
                 if (name != null)
                 {
-                    errorCode = (int)Interop.Advapi32.GetSecurityInfoByName(name, (uint)resourceType, (uint)SecurityInfos, out SidOwner, out SidGroup, out Dacl, out Sacl, out ByteArray);
+                    errorCode = (int)Interop.Advapi32.GetSecurityInfoByName(
+                        name,
+                        (uint)resourceType,
+                        (uint)SecurityInfos,
+                        out SidOwner,
+                        out SidGroup,
+                        out Dacl,
+                        out Sacl,
+                        out ByteArray
+                    );
                 }
                 else if (handle != null)
                 {
                     if (handle.IsInvalid)
                     {
-                        throw new ArgumentException(
-                            SR.Argument_InvalidSafeHandle,
-                            nameof(handle));
+                        throw new ArgumentException(SR.Argument_InvalidSafeHandle, nameof(handle));
                     }
                     else
                     {
-                        errorCode = (int)Interop.Advapi32.GetSecurityInfoByHandle(handle, (uint)resourceType, (uint)SecurityInfos, out SidOwner, out SidGroup, out Dacl, out Sacl, out ByteArray);
+                        errorCode = (int)Interop.Advapi32.GetSecurityInfoByHandle(
+                            handle,
+                            (uint)resourceType,
+                            (uint)SecurityInfos,
+                            out SidOwner,
+                            out SidGroup,
+                            out Dacl,
+                            out Sacl,
+                            out ByteArray
+                        );
                     }
                 }
                 else
@@ -149,14 +175,16 @@ namespace System.Security.AccessControl
                     //
                     throw new InvalidOperationException(SR.InvalidOperation_NoSecurityDescriptor);
                 }
-                else if (errorCode == Interop.Errors.ERROR_NOT_ALL_ASSIGNED ||
-                         errorCode == Interop.Errors.ERROR_PRIVILEGE_NOT_HELD)
-                {
+                else if (
+                    errorCode == Interop.Errors.ERROR_NOT_ALL_ASSIGNED
+                    || errorCode == Interop.Errors.ERROR_PRIVILEGE_NOT_HELD
+                ) {
                     throw new PrivilegeNotHeldException(Privilege.Security);
                 }
-                else if (errorCode == Interop.Errors.ERROR_ACCESS_DENIED ||
-                    errorCode == Interop.Errors.ERROR_CANT_OPEN_ANONYMOUS)
-                {
+                else if (
+                    errorCode == Interop.Errors.ERROR_ACCESS_DENIED
+                    || errorCode == Interop.Errors.ERROR_CANT_OPEN_ANONYMOUS
+                ) {
                     throw new UnauthorizedAccessException();
                 }
 
@@ -198,7 +226,7 @@ namespace System.Security.AccessControl
 
             return Interop.Errors.ERROR_SUCCESS;
 
-        Error:
+            Error:
 
             if (errorCode == Interop.Errors.ERROR_NOT_ENOUGH_MEMORY)
             {
@@ -220,11 +248,14 @@ namespace System.Security.AccessControl
             SecurityIdentifier? owner,
             SecurityIdentifier? group,
             GenericAcl? sacl,
-            GenericAcl? dacl)
-        {
+            GenericAcl? dacl
+        ) {
             int errorCode;
             int Length;
-            byte[]? OwnerBinary = null, GroupBinary = null, SaclBinary = null, DaclBinary = null;
+            byte[]? OwnerBinary = null,
+                GroupBinary = null,
+                SaclBinary = null,
+                DaclBinary = null;
             Privilege? securityPrivilege = null;
 
             if (owner != null)
@@ -281,19 +312,33 @@ namespace System.Security.AccessControl
 
                 if (name != null)
                 {
-                    errorCode = (int)Interop.Advapi32.SetSecurityInfoByName(name, (uint)type, unchecked((uint)securityInformation), OwnerBinary, GroupBinary, DaclBinary, SaclBinary);
+                    errorCode = (int)Interop.Advapi32.SetSecurityInfoByName(
+                        name,
+                        (uint)type,
+                        unchecked((uint)securityInformation),
+                        OwnerBinary,
+                        GroupBinary,
+                        DaclBinary,
+                        SaclBinary
+                    );
                 }
                 else if (handle != null)
                 {
                     if (handle.IsInvalid)
                     {
-                        throw new ArgumentException(
-                            SR.Argument_InvalidSafeHandle,
-                            nameof(handle));
+                        throw new ArgumentException(SR.Argument_InvalidSafeHandle, nameof(handle));
                     }
                     else
                     {
-                        errorCode = (int)Interop.Advapi32.SetSecurityInfoByHandle(handle, (uint)type, (uint)securityInformation, OwnerBinary, GroupBinary, DaclBinary, SaclBinary);
+                        errorCode = (int)Interop.Advapi32.SetSecurityInfoByHandle(
+                            handle,
+                            (uint)type,
+                            (uint)securityInformation,
+                            OwnerBinary,
+                            GroupBinary,
+                            DaclBinary,
+                            SaclBinary
+                        );
                     }
                 }
                 else
@@ -303,14 +348,16 @@ namespace System.Security.AccessControl
                     throw new ArgumentException();
                 }
 
-                if (errorCode == Interop.Errors.ERROR_NOT_ALL_ASSIGNED ||
-                    errorCode == Interop.Errors.ERROR_PRIVILEGE_NOT_HELD)
-                {
+                if (
+                    errorCode == Interop.Errors.ERROR_NOT_ALL_ASSIGNED
+                    || errorCode == Interop.Errors.ERROR_PRIVILEGE_NOT_HELD
+                ) {
                     throw new PrivilegeNotHeldException(Privilege.Security);
                 }
-                else if (errorCode == Interop.Errors.ERROR_ACCESS_DENIED ||
-                    errorCode == Interop.Errors.ERROR_CANT_OPEN_ANONYMOUS)
-                {
+                else if (
+                    errorCode == Interop.Errors.ERROR_ACCESS_DENIED
+                    || errorCode == Interop.Errors.ERROR_CANT_OPEN_ANONYMOUS
+                ) {
                     throw new UnauthorizedAccessException();
                 }
                 else if (errorCode != Interop.Errors.ERROR_SUCCESS)
@@ -337,7 +384,7 @@ namespace System.Security.AccessControl
 
             return 0;
 
-        Error:
+            Error:
 
             if (errorCode == Interop.Errors.ERROR_NOT_ENOUGH_MEMORY)
             {

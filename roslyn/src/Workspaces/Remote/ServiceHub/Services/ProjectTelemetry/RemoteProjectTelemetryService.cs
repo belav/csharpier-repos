@@ -9,39 +9,57 @@ using Microsoft.CodeAnalysis.SolutionCrawler;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal partial class RemoteProjectTelemetryService : BrokeredServiceBase, IRemoteProjectTelemetryService
+    internal partial class RemoteProjectTelemetryService
+        : BrokeredServiceBase,
+          IRemoteProjectTelemetryService
     {
-        internal sealed class Factory : FactoryBase<IRemoteProjectTelemetryService, IRemoteProjectTelemetryService.ICallback>
+        internal sealed class Factory
+            : FactoryBase<IRemoteProjectTelemetryService, IRemoteProjectTelemetryService.ICallback>
         {
-            protected override IRemoteProjectTelemetryService CreateService(in ServiceConstructionArguments arguments, RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback)
-                => new RemoteProjectTelemetryService(arguments, callback);
+            protected override IRemoteProjectTelemetryService CreateService(
+                in ServiceConstructionArguments arguments,
+                RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback
+            ) => new RemoteProjectTelemetryService(arguments, callback);
         }
 
         private readonly RemoteCallback<IRemoteProjectTelemetryService.ICallback> _callback;
 
-        public RemoteProjectTelemetryService(in ServiceConstructionArguments arguments, RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback)
-            : base(arguments)
+        public RemoteProjectTelemetryService(
+            in ServiceConstructionArguments arguments,
+            RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback
+        ) : base(arguments)
         {
             _callback = callback;
         }
 
-        public ValueTask ComputeProjectTelemetryAsync(RemoteServiceCallbackId callbackId, CancellationToken cancellationToken)
-        {
-            return RunServiceAsync(cancellationToken =>
-            {
-                var workspace = GetWorkspace();
-                var registrationService = workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
-                var analyzerProvider = new RemoteProjectTelemetryIncrementalAnalyzerProvider(_callback, callbackId);
+        public ValueTask ComputeProjectTelemetryAsync(
+            RemoteServiceCallbackId callbackId,
+            CancellationToken cancellationToken
+        ) {
+            return RunServiceAsync(
+                cancellationToken =>
+                {
+                    var workspace = GetWorkspace();
+                    var registrationService =
+                        workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+                    var analyzerProvider = new RemoteProjectTelemetryIncrementalAnalyzerProvider(
+                        _callback,
+                        callbackId
+                    );
 
-                registrationService.AddAnalyzerProvider(
-                    analyzerProvider,
-                    new IncrementalAnalyzerProviderMetadata(
-                        nameof(RemoteProjectTelemetryIncrementalAnalyzerProvider),
-                        highPriorityForActiveFile: false,
-                        workspaceKinds: WorkspaceKind.RemoteWorkspace));
+                    registrationService.AddAnalyzerProvider(
+                        analyzerProvider,
+                        new IncrementalAnalyzerProviderMetadata(
+                            nameof(RemoteProjectTelemetryIncrementalAnalyzerProvider),
+                            highPriorityForActiveFile: false,
+                            workspaceKinds: WorkspaceKind.RemoteWorkspace
+                        )
+                    );
 
-                return default;
-            }, cancellationToken);
+                    return default;
+                },
+                cancellationToken
+            );
         }
     }
 }

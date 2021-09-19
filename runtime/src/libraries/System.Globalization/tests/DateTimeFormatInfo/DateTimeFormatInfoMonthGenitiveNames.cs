@@ -10,7 +10,26 @@ namespace System.Globalization.Tests
     {
         public static IEnumerable<object[]> MonthGenitiveNames_Get_TestData()
         {
-            yield return new object[] { DateTimeFormatInfo.InvariantInfo, new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "" } };
+            yield return new object[]
+            {
+                DateTimeFormatInfo.InvariantInfo,
+                new string[]
+                {
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December",
+                    ""
+                }
+            };
             yield return new object[]
             {
                 new CultureInfo("ru-RU").DateTimeFormat,
@@ -35,8 +54,10 @@ namespace System.Globalization.Tests
 
         [Theory]
         [MemberData(nameof(MonthGenitiveNames_Get_TestData))]
-        public void MonthGenitiveNames_Get_ReturnsExpected(DateTimeFormatInfo format, string[] expected)
-        {
+        public void MonthGenitiveNames_Get_ReturnsExpected(
+            DateTimeFormatInfo format,
+            string[] expected
+        ) {
             Assert.Equal(expected, format.MonthGenitiveNames);
         }
 
@@ -50,8 +71,14 @@ namespace System.Globalization.Tests
 
         public static IEnumerable<object[]> MonthGenitiveNames_Set_TestData()
         {
-            yield return new object[] { new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "" } };
-            yield return new object[] { new string[] { "", "", "", "", "", "", "", "", "", "", "", "", "" } };
+            yield return new object[]
+            {
+                new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "" }
+            };
+            yield return new object[]
+            {
+                new string[] { "", "", "", "", "", "", "", "", "", "", "", "", "" }
+            };
         }
 
         [Theory]
@@ -72,20 +99,61 @@ namespace System.Globalization.Tests
         public void MonthGenitiveNames_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.MonthGenitiveNames = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.MonthGenitiveNames = null
+            );
         }
 
         [Fact]
         public void MonthGenitiveNames_SetNullValueInValues_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.MonthGenitiveNames = new string[] { "1", "2", "3", null, "5", "6", "7", "8", "9", "10", "11", "12", "" });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                    format.MonthGenitiveNames = new string[]
+                    {
+                        "1",
+                        "2",
+                        "3",
+                        null,
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        ""
+                    }
+            );
         }
 
         public static IEnumerable<object[]> MonthGenitiveNames_SetInvalidLength_TestData()
         {
             yield return new object[] { new string[] { "Jan" } };
-            yield return new object[] { new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "", "Additional" } };
+            yield return new object[]
+            {
+                new string[]
+                {
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                    "",
+                    "Additional"
+                }
+            };
         }
 
         [Theory]
@@ -93,31 +161,79 @@ namespace System.Globalization.Tests
         public void MonthGenitiveNames_SetNullValueInValues_ThrowsArgumentException(string[] value)
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentException>("value", () => format.MonthGenitiveNames = value);
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => format.MonthGenitiveNames = value
+            );
         }
 
         [Fact]
         public void MonthGenitiveNames_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.MonthGenitiveNames = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "" });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    DateTimeFormatInfo.InvariantInfo.MonthGenitiveNames = new string[]
+                    {
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        ""
+                    }
+            );
         }
 
         [Fact]
         public void MonthGenitiveNames_Format_ReturnsExpected()
         {
             var format = new DateTimeFormatInfo();
-            format.MonthGenitiveNames = new string[] { "Jan.", "Feb.", "Mar.", "Apr.", "May.", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec.", "." };
+            format.MonthGenitiveNames = new string[]
+            {
+                "Jan.",
+                "Feb.",
+                "Mar.",
+                "Apr.",
+                "May.",
+                "Jun.",
+                "Jul.",
+                "Aug.",
+                "Sep.",
+                "Oct.",
+                "Nov.",
+                "Dec.",
+                "."
+            };
             Assert.Equal("19 Jun. 76", new DateTime(1976, 6, 19).ToString("dd MMMM yy", format));
         }
 
         [Fact]
         public void MonthGenitiveNames_FormatWithNull_ThrowsNullReferenceException()
         {
-            var value = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" };
-            var format = new DateTimeFormatInfo
+            var value = new string[]
             {
-                MonthGenitiveNames = value
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13"
             };
+            var format = new DateTimeFormatInfo { MonthGenitiveNames = value };
             value[0] = null;
 
             var dateTime = new DateTime(2014, 1, 28);

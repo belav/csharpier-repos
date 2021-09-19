@@ -53,7 +53,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 MethodDesc method = processedMethodData.Method;
 
-                // Format is 
+                // Format is
                 // ldtoken method
                 // variable amount of extra metadata about the method, Extension data is encoded via ldstr "id"
                 // pop
@@ -80,13 +80,18 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (processedMethodData.ExclusiveWeight != 0)
                     {
                         _il.LoadString(_emitter.GetUserStringHandle("ExclusiveWeight"));
-                        if (((double)(int)processedMethodData.ExclusiveWeight) == processedMethodData.ExclusiveWeight)
+                        if (
+                            ((double)(int)processedMethodData.ExclusiveWeight)
+                            == processedMethodData.ExclusiveWeight
+                        )
                             _il.LoadConstantI4((int)processedMethodData.ExclusiveWeight);
                         else
                             _il.LoadConstantR8(processedMethodData.ExclusiveWeight);
                     }
-                    if ((processedMethodData.CallWeights != null) && processedMethodData.CallWeights.Count > 0)
-                    {
+                    if (
+                        (processedMethodData.CallWeights != null)
+                        && processedMethodData.CallWeights.Count > 0
+                    ) {
                         _il.LoadString(_emitter.GetUserStringHandle("WeightedCallData"));
                         _il.LoadConstantI4(processedMethodData.CallWeights.Count);
                         foreach (var entry in processedMethodData.CallWeights)
@@ -100,13 +105,19 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (processedMethodData.SchemaData != null)
                     {
                         _il.LoadString(_emitter.GetUserStringHandle("InstrumentationDataStart"));
-                        PgoProcessor.EncodePgoData<TypeSystemEntityOrUnknown>(processedMethodData.SchemaData, this, true);
+                        PgoProcessor.EncodePgoData<TypeSystemEntityOrUnknown>(
+                            processedMethodData.SchemaData,
+                            this,
+                            true
+                        );
                     }
                     _il.OpCode(ILOpCode.Pop);
                 }
                 catch (Exception ex)
                 {
-                    Program.PrintWarning($"Exception {ex} while attempting to generate method lists");
+                    Program.PrintWarning(
+                        $"Exception {ex} while attempting to generate method lists"
+                    );
                 }
             }
 
@@ -117,7 +128,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 if (_name.Length > 200)
                     basicName = basicName.Substring(0, 200); // Cap length of name at 200, which is reasonably small.
 
-                string methodName = basicName + "_" + s_emitCount.ToString(CultureInfo.InvariantCulture);
+                string methodName =
+                    basicName + "_" + s_emitCount.ToString(CultureInfo.InvariantCulture);
                 return _emitter.AddGlobalMethod(methodName, _il, 8);
             }
 
@@ -127,8 +139,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 return true;
             }
 
-            void IPgoEncodedValueEmitter<TypeSystemEntityOrUnknown>.EmitLong(long value, long previousValue)
-            {
+            void IPgoEncodedValueEmitter<TypeSystemEntityOrUnknown>.EmitLong(
+                long value,
+                long previousValue
+            ) {
                 if ((value <= int.MaxValue) && (value >= int.MinValue))
                 {
                     _il.LoadConstantI4(checked((int)value));
@@ -139,8 +153,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 }
             }
 
-            void IPgoEncodedValueEmitter<TypeSystemEntityOrUnknown>.EmitType(TypeSystemEntityOrUnknown type, TypeSystemEntityOrUnknown previousValue)
-            {
+            void IPgoEncodedValueEmitter<TypeSystemEntityOrUnknown>.EmitType(
+                TypeSystemEntityOrUnknown type,
+                TypeSystemEntityOrUnknown previousValue
+            ) {
                 if (type.AsType != null)
                 {
                     _il.OpCode(ILOpCode.Ldtoken);
@@ -148,11 +164,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 }
                 else
                 {
-
                     _il.LoadConstantI4(type.AsUnknown & 0x00FFFFFF);
                 }
             }
-
         }
 
         private static string GetTypeDefiningAssembly(TypeDesc type)
@@ -160,15 +174,20 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             return ((MetadataType)type).Module.Assembly.GetName().Name;
         }
 
-        private static void AddAssembliesAssociatedWithType(TypeDesc type, HashSet<string> assemblies, out string definingAssembly)
-        {
+        private static void AddAssembliesAssociatedWithType(
+            TypeDesc type,
+            HashSet<string> assemblies,
+            out string definingAssembly
+        ) {
             definingAssembly = GetTypeDefiningAssembly(type);
             assemblies.Add(definingAssembly);
             AddAssembliesAssociatedWithType(type, assemblies);
         }
 
-        private static void AddAssembliesAssociatedWithType(TypeDesc type, HashSet<string> assemblies)
-        {
+        private static void AddAssembliesAssociatedWithType(
+            TypeDesc type,
+            HashSet<string> assemblies
+        ) {
             if (type.IsPrimitive)
                 return;
 
@@ -189,8 +208,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
         }
 
-        private static void AddAssembliesAssociatedWithMethod(MethodDesc method, HashSet<string> assemblies, out string definingAssembly)
-        {
+        private static void AddAssembliesAssociatedWithMethod(
+            MethodDesc method,
+            HashSet<string> assemblies,
+            out string definingAssembly
+        ) {
             AddAssembliesAssociatedWithType(method.OwningType, assemblies, out definingAssembly);
             foreach (var instantiationType in method.Instantiation)
             {
@@ -198,9 +220,17 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
         }
 
-        public static int GenerateMibcFile(TypeSystemContext tsc, FileInfo outputFileName, IEnumerable<MethodProfileData> methodsToAttemptToPlaceIntoProfileData, bool validate, bool uncompressed)
-        {
-            TypeSystemMetadataEmitter emitter = new TypeSystemMetadataEmitter(new AssemblyName(outputFileName.Name), tsc);
+        public static int GenerateMibcFile(
+            TypeSystemContext tsc,
+            FileInfo outputFileName,
+            IEnumerable<MethodProfileData> methodsToAttemptToPlaceIntoProfileData,
+            bool validate,
+            bool uncompressed
+        ) {
+            TypeSystemMetadataEmitter emitter = new TypeSystemMetadataEmitter(
+                new AssemblyName(outputFileName.Name),
+                tsc
+            );
 
             SortedDictionary<string, MIbcGroup> groups = new SortedDictionary<string, MIbcGroup>();
             StringBuilder mibcGroupNameBuilder = new StringBuilder();
@@ -210,7 +240,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 MethodDesc method = entry.Method;
                 assembliesAssociatedWithMethod.Clear();
-                AddAssembliesAssociatedWithMethod(method, assembliesAssociatedWithMethod, out string definingAssembly);
+                AddAssembliesAssociatedWithMethod(
+                    method,
+                    assembliesAssociatedWithMethod,
+                    out string definingAssembly
+                );
 
                 string[] assemblyNames = new string[assembliesAssociatedWithMethod.Count];
                 int i = 1;
@@ -271,9 +305,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
             else
             {
-                using (ZipArchive file = ZipFile.Open(outputFileName.FullName, ZipArchiveMode.Create))
-                {
-                    var entry = file.CreateEntry(outputFileName.Name + ".dll", CompressionLevel.Optimal);
+                using (
+                    ZipArchive file = ZipFile.Open(outputFileName.FullName, ZipArchiveMode.Create)
+                ) {
+                    var entry = file.CreateEntry(
+                        outputFileName.Name + ".dll",
+                        CompressionLevel.Optimal
+                    );
                     using (Stream archiveStream = entry.Open())
                     {
                         peFile.CopyTo(archiveStream);
@@ -284,16 +322,30 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             Program.PrintMessage($"Generated {outputFileName.FullName}");
 
             if (validate)
-                return ValidateMIbcData(tsc, outputFileName, peFile.ToArray(), methodsToAttemptToPlaceIntoProfileData);
+                return ValidateMIbcData(
+                    tsc,
+                    outputFileName,
+                    peFile.ToArray(),
+                    methodsToAttemptToPlaceIntoProfileData
+                );
             else
                 return 0;
         }
 
-        static int ValidateMIbcData(TypeSystemContext tsc, FileInfo outputFileName, byte[] moduleBytes, IEnumerable<MethodProfileData> methodsToAttemptToPrepare)
-        {
-            var peReader = new System.Reflection.PortableExecutable.PEReader(System.Collections.Immutable.ImmutableArray.Create<byte>(moduleBytes));
+        static int ValidateMIbcData(
+            TypeSystemContext tsc,
+            FileInfo outputFileName,
+            byte[] moduleBytes,
+            IEnumerable<MethodProfileData> methodsToAttemptToPrepare
+        ) {
+            var peReader = new System.Reflection.PortableExecutable.PEReader(
+                System.Collections.Immutable.ImmutableArray.Create<byte>(moduleBytes)
+            );
             var profileData = MIbcProfileParser.ParseMIbcFile(tsc, peReader, null, null);
-            Dictionary<MethodDesc, MethodProfileData> mibcDict = new Dictionary<MethodDesc, MethodProfileData>();
+            Dictionary<MethodDesc, MethodProfileData> mibcDict = new Dictionary<
+                MethodDesc,
+                MethodProfileData
+            >();
 
             foreach (var mibcData in profileData.GetAllMethodProfileData())
             {
@@ -303,7 +355,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             bool failure = false;
             if (methodsToAttemptToPrepare.Count() != mibcDict.Count)
             {
-                Program.PrintError($"Not same count of methods {methodsToAttemptToPrepare.Count()} != {mibcDict.Count}");
+                Program.PrintError(
+                    $"Not same count of methods {methodsToAttemptToPrepare.Count()} != {mibcDict.Count}"
+                );
                 failure = true;
             }
 
@@ -328,6 +382,5 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 return 0;
             }
         }
-
     }
 }

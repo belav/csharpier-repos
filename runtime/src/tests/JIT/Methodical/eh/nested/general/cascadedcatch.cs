@@ -64,7 +64,8 @@ namespace hello
 
             i = 0;
             L1:
-            if (i > 0) goto L3;
+            if (i > 0)
+                goto L3;
             try
             {
                 inTry();
@@ -82,7 +83,8 @@ namespace hello
                         L5:
                         Console.WriteLine("L5");
                         inCatch();
-                        if (i == 5) goto L1;
+                        if (i == 5)
+                            goto L1;
                         try
                         { // catch System
                             inTry();
@@ -90,11 +92,14 @@ namespace hello
                         catch (Exception e1)
                         {
                             inCatch();
-                            if (i == 0) goto L1;
-                            if (i == 1) goto L2;
+                            if (i == 0)
+                                goto L1;
+                            if (i == 1)
+                                goto L2;
                             L4:
                             Console.WriteLine("L4");
-                            if (i == 5) goto L5;
+                            if (i == 5)
+                                goto L5;
                             try
                             {
                                 inTry();
@@ -102,9 +107,12 @@ namespace hello
                             catch (Exception e2)
                             {
                                 inCatch();
-                                if (i == 0) goto L3;
-                                if (i == 1) goto L2;
-                                if (i > 1) goto L4;
+                                if (i == 0)
+                                    goto L3;
+                                if (i == 1)
+                                    goto L2;
+                                if (i > 1)
+                                    goto L4;
                                 Console.WriteLine("Unreached\n");
                                 try
                                 {
@@ -114,6 +122,7 @@ namespace hello
                                         {
                                             Console.WriteLine(args[ii]);
                                         }
+
                                         finally
                                         {
                                             Console.WriteLine("Unreached finally\n");
@@ -125,10 +134,14 @@ namespace hello
                                     Console.WriteLine("Unreached catch\n");
                                     switch (i)
                                     {
-                                        case 0: goto L1;
-                                        case 3: goto L2;
-                                        case 4: goto L4;
-                                        default: break;
+                                        case 0:
+                                            goto L1;
+                                        case 3:
+                                            goto L2;
+                                        case 4:
+                                            goto L4;
+                                        default:
+                                            break;
                                     }
                                     goto L5;
                                 }
@@ -136,11 +149,13 @@ namespace hello
                         }
                     }
                 }
+
                 finally
                 {
                     inFinally();
                 }
             }
+
             finally
             {
                 inFinally();
@@ -154,4 +169,3 @@ namespace hello
         } // Main
     } // class
 } // namespace
-

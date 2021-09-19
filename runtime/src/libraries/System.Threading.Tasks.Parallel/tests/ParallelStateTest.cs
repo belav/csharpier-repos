@@ -22,17 +22,19 @@ namespace System.Threading.Tasks.Test
 
         private readonly object _lock = new object();
 
-        private readonly IEnumerable<int> _collection = null;  // the collection used in Foreach
+        private readonly IEnumerable<int> _collection = null; // the collection used in Foreach
         private readonly Barrier _barrier;
 
         // Holds list of available actions
-        private readonly Dictionary<string, Action<long, ParallelLoopState>> _availableActions = new Dictionary<string, Action<long, ParallelLoopState>>();
-        private readonly Dictionary<string, Action<ParallelLoopResult?>> _availableVerifications = new Dictionary<string, Action<ParallelLoopResult?>>();
+        private readonly Dictionary<string, Action<long, ParallelLoopState>> _availableActions =
+            new Dictionary<string, Action<long, ParallelLoopState>>();
+        private readonly Dictionary<string, Action<ParallelLoopResult?>> _availableVerifications =
+            new Dictionary<string, Action<ParallelLoopResult?>>();
 
         private readonly TestParameters _parameters;
         private readonly ManualResetEventSlim _mreSlim;
 
-        private readonly double[] _results;  // global place to store the workload result for verification
+        private readonly double[] _results; // global place to store the workload result for verification
 
         // data structure used with ParallelLoopState<TLocal>
         // each row is the sequence of loop "index" finished in the same thread
@@ -41,20 +43,23 @@ namespace System.Threading.Tasks.Test
         private readonly List<int>[] _sequences;
         private readonly List<long>[] _sequences64;
 
-        private long _startIndex = 0;  // start index for the loop
+        private long _startIndex = 0; // start index for the loop
 
         // Hold list of actions to be performed
-        private List<Action<long, ParallelLoopState>> _actions = new List<Action<long, ParallelLoopState>>();
+        private List<Action<long, ParallelLoopState>> _actions = new List<
+            Action<long, ParallelLoopState>
+        >();
 
         // Hold list of verification
-        private Queue<Action<ParallelLoopResult?>> _verifications = new Queue<Action<ParallelLoopResult?>>();
+        private Queue<Action<ParallelLoopResult?>> _verifications = new Queue<
+            Action<ParallelLoopResult?>
+        >();
 
-        private volatile bool _isStopped = false;     // Flag to indicate that we called Stop() on the Parallel state
-        private long? _lowestBreakIter = null;        // LowestBreakIteration value holder, null indicates that Break hasn't been called
+        private volatile bool _isStopped = false; // Flag to indicate that we called Stop() on the Parallel state
+        private long? _lowestBreakIter = null; // LowestBreakIteration value holder, null indicates that Break hasn't been called
         private volatile bool _isExceptional = false; // Flag to indicate exception thrown in the test
 
-        private int _iterCount = 0;  // test own counter for certain scenario, so the test can change behaviour after certain number of loop iteration
-
+        private int _iterCount = 0; // test own counter for certain scenario, so the test can change behaviour after certain number of loop iteration
         #endregion
 
         #region Constructor
@@ -162,11 +167,21 @@ namespace System.Threading.Tasks.Test
                         if (_parameters.WithLocalState)
                         {
                             // call Parallel.For with step and ParallelLoopState<TLocal>, plus threadLocalFinally
-                            loopResult = Parallel.For<List<int>>((int)_startIndex, (int)_startIndex + _parameters.Count, ThreadLocalInit, WorkWithLocalState, ThreadLocalFinally);
+                            loopResult = Parallel.For<List<int>>(
+                                (int)_startIndex,
+                                (int)_startIndex + _parameters.Count,
+                                ThreadLocalInit,
+                                WorkWithLocalState,
+                                ThreadLocalFinally
+                            );
                         }
                         else
                         {
-                            loopResult = Parallel.For((int)_startIndex, (int)_startIndex + _parameters.Count, WorkWithNoLocalState);
+                            loopResult = Parallel.For(
+                                (int)_startIndex,
+                                (int)_startIndex + _parameters.Count,
+                                WorkWithNoLocalState
+                            );
                         }
                     }
                     else
@@ -174,7 +189,12 @@ namespace System.Threading.Tasks.Test
                         if (_parameters.WithLocalState)
                         {
                             // call Parallel.Foreach and ParallelLoopState<TLocal>, plus threadLocalFinally
-                            loopResult = Parallel.ForEach<int, List<int>>(_collection, ThreadLocalInit, WorkWithLocalState, ThreadLocalFinally);
+                            loopResult = Parallel.ForEach<int, List<int>>(
+                                _collection,
+                                ThreadLocalInit,
+                                WorkWithLocalState,
+                                ThreadLocalFinally
+                            );
                         }
                         else
                         {
@@ -191,16 +211,29 @@ namespace System.Threading.Tasks.Test
                         if (_parameters.WithLocalState)
                         {
                             // call Parallel.For with step and ParallelLoopState<TLocal>, plus threadLocalFinally
-                            loopResult = Parallel.For<List<long>>(_startIndex, _startIndex + _parameters.Count, ThreadLocalInit64, WorkWithLocalState, ThreadLocalFinally64);
+                            loopResult = Parallel.For<List<long>>(
+                                _startIndex,
+                                _startIndex + _parameters.Count,
+                                ThreadLocalInit64,
+                                WorkWithLocalState,
+                                ThreadLocalFinally64
+                            );
                         }
                         else
                         {
-                            loopResult = Parallel.For(_startIndex, _startIndex + _parameters.Count, WorkWithNoLocalState);
+                            loopResult = Parallel.For(
+                                _startIndex,
+                                _startIndex + _parameters.Count,
+                                WorkWithNoLocalState
+                            );
                         }
                     }
                 }
 
-                Assert.False(_parameters.ExpectingException, "SystemInvalidOperation Exception was not thrown when expecting one");
+                Assert.False(
+                    _parameters.ExpectingException,
+                    "SystemInvalidOperation Exception was not thrown when expecting one"
+                );
             }
             catch (AggregateException exp)
             {
@@ -228,22 +261,35 @@ namespace System.Threading.Tasks.Test
             if (_results[i - _startIndex] == 0)
                 _results[i - _startIndex] = ZetaSequence((int)(i - _startIndex) + 1000);
             else
-                _results[i - _startIndex] = double.MinValue;  //same index should not be processed twice
+                _results[i - _startIndex] = double.MinValue; //same index should not be processed twice
         }
 
         // Workload for Parallel.For / Foreach with parallelloopstate but no thread local state
         private void WorkWithNoLocalState(int i, ParallelLoopState state)
         {
-            Debug.WriteLine("WorkWithNoLocalState(int) on index {0}, StartIndex: {1}, real index {2}", i, _startIndex, i - _startIndex);
+            Debug.WriteLine(
+                "WorkWithNoLocalState(int) on index {0}, StartIndex: {1}, real index {2}",
+                i,
+                _startIndex,
+                i - _startIndex
+            );
             Work(i);
 
             _actions[i].Invoke(i, state);
         }
 
         // Workload for Parallel.For / Foreach with parallel loopstate and thread local state
-        private List<int> WorkWithLocalState(int i, ParallelLoopState state, List<int> threadLocalValue)
-        {
-            Debug.WriteLine("WorkWithLocalState(int) on index {0}, StartIndex: {1}, real index {2}", i, _startIndex, i - _startIndex);
+        private List<int> WorkWithLocalState(
+            int i,
+            ParallelLoopState state,
+            List<int> threadLocalValue
+        ) {
+            Debug.WriteLine(
+                "WorkWithLocalState(int) on index {0}, StartIndex: {1}, real index {2}",
+                i,
+                _startIndex,
+                i - _startIndex
+            );
             Work(i);
 
             threadLocalValue.Add(i + (int)_startIndex);
@@ -254,9 +300,18 @@ namespace System.Threading.Tasks.Test
         }
 
         // Workload for Parallel.For / Foreach with index, parallel loop state and thread local state
-        private List<int> WorkWithLocalState(int i, int index, ParallelLoopState state, List<int> threadLocalValue)
-        {
-            Debug.WriteLine("WorkWithLocalState(int, index) on index {0}, StartIndex: {1}, real index {2}", i, _startIndex, i - _startIndex);
+        private List<int> WorkWithLocalState(
+            int i,
+            int index,
+            ParallelLoopState state,
+            List<int> threadLocalValue
+        ) {
+            Debug.WriteLine(
+                "WorkWithLocalState(int, index) on index {0}, StartIndex: {1}, real index {2}",
+                i,
+                _startIndex,
+                i - _startIndex
+            );
             Work(i);
             threadLocalValue.Add(index + (int)_startIndex);
 
@@ -268,16 +323,29 @@ namespace System.Threading.Tasks.Test
         // Workload for Parallel.For with long range
         private void WorkWithNoLocalState(long i, ParallelLoopState state)
         {
-            Debug.WriteLine("WorkWithNoLocalState(long) on index {0}, StartIndex: {1}, real index {2}", i, _startIndex, i - _startIndex);
+            Debug.WriteLine(
+                "WorkWithNoLocalState(long) on index {0}, StartIndex: {1}, real index {2}",
+                i,
+                _startIndex,
+                i - _startIndex
+            );
             Work(i);
 
             _actions[(int)(i - _startIndex)].Invoke(i, state);
         }
 
         // Workload for Parallel.For with long range
-        private List<long> WorkWithLocalState(long i, ParallelLoopState state, List<long> threadLocalValue)
-        {
-            Debug.WriteLine("WorkWithLocalState(long) on index {0}, StartIndex: {1}, real index {2}", i, _startIndex, i - _startIndex);
+        private List<long> WorkWithLocalState(
+            long i,
+            ParallelLoopState state,
+            List<long> threadLocalValue
+        ) {
+            Debug.WriteLine(
+                "WorkWithLocalState(long) on index {0}, StartIndex: {1}, real index {2}",
+                i,
+                _startIndex,
+                i - _startIndex
+            );
             Work(i);
             threadLocalValue.Add(i + _startIndex);
 
@@ -402,9 +470,7 @@ namespace System.Threading.Tasks.Test
         /// </summary>
         /// <param name="i"></param>
         /// <param name="state"></param>
-        private void DummyAction(long i, ParallelLoopState state)
-        {
-        }
+        private void DummyAction(long i, ParallelLoopState state) { }
 
         /// <summary>
         /// This actions calls Stop on the current iteration. Note that this is called by only one iteration in the loop
@@ -439,14 +505,28 @@ namespace System.Threading.Tasks.Test
         /// <param name="catchException"></param>
         private void StopActionHelper(long i, ParallelLoopState state, bool catchException)
         {
-            Debug.WriteLine("Calling StopAction on index: {0}, StartIndex: {1}, real index {2}", i, _startIndex, i - _startIndex);
+            Debug.WriteLine(
+                "Calling StopAction on index: {0}, StartIndex: {1}, real index {2}",
+                i,
+                _startIndex,
+                i - _startIndex
+            );
 
             // We already called Stop() on the Parallel state
-            Assert.False(_isStopped && _isStopped != state.IsStopped, string.Format("Expecting IsStopped to be true for iteration {0}", i));
+            Assert.False(
+                _isStopped && _isStopped != state.IsStopped,
+                string.Format("Expecting IsStopped to be true for iteration {0}", i)
+            );
 
             // If we previously called Stop() on the parallel state,
             // we expect all iterations see the state's ShouldExitCurrentIteration to be true
-            Assert.False(_isStopped && !state.ShouldExitCurrentIteration, string.Format("Expecting ShouldExitCurrentIteration to be true for iteration {0}", i));
+            Assert.False(
+                _isStopped && !state.ShouldExitCurrentIteration,
+                string.Format(
+                    "Expecting ShouldExitCurrentIteration to be true for iteration {0}",
+                    i
+                )
+            );
 
             try
             {
@@ -454,12 +534,13 @@ namespace System.Threading.Tasks.Test
                 _isStopped = true;
 
                 // If Stop is called after a Break was called then an InvalidOperationException is expected
-                Assert.False(catchException, "Not getting InvalidOperationException from Stop() when expecting one");
+                Assert.False(
+                    catchException,
+                    "Not getting InvalidOperationException from Stop() when expecting one"
+                );
             }
             // If Stop is called after a Break was called then an InvalidOperationException is expected
-            catch (InvalidOperationException) when (catchException)
-            {
-            }
+            catch (InvalidOperationException) when (catchException) { }
         }
 
         /// <summary>
@@ -483,11 +564,20 @@ namespace System.Threading.Tasks.Test
             else
             {
                 // We already called Stop() on the Parallel state
-                Assert.False(_isStopped && !state.IsStopped, string.Format("Expecting IsStopped to be true for iteration {0}", i));
+                Assert.False(
+                    _isStopped && !state.IsStopped,
+                    string.Format("Expecting IsStopped to be true for iteration {0}", i)
+                );
 
                 // If we previously called Stop() on the parallel state,
                 // we expect all iterations see the state's ShouldExitCurrentIteration to be true
-                Assert.False(_isStopped && !state.ShouldExitCurrentIteration, string.Format("Expecting ShouldExitCurrentIteration to be true for iteration {0}", i));
+                Assert.False(
+                    _isStopped && !state.ShouldExitCurrentIteration,
+                    string.Format(
+                        "Expecting ShouldExitCurrentIteration to be true for iteration {0}",
+                        i
+                    )
+                );
             }
         }
 
@@ -508,23 +598,44 @@ namespace System.Threading.Tasks.Test
         /// <param name="catchException">whether calling Break will throw an InvalidOperationException</param>
         private void BreakActionHelper(long i, ParallelLoopState state, bool catchException)
         {
-            Debug.WriteLine("Calling BreakAction on index {0}, StartIndex: {1}, real index {2}", i, _startIndex, i - _startIndex);
+            Debug.WriteLine(
+                "Calling BreakAction on index {0}, StartIndex: {1}, real index {2}",
+                i,
+                _startIndex,
+                i - _startIndex
+            );
 
             // If we previously called Break() on the parallel state,
             // we expect all iterations to have the same LowestBreakIteration value
             if (_lowestBreakIter.HasValue)
             {
-                Assert.False(state.LowestBreakIteration.Value != _lowestBreakIter.Value,
-                    string.Format("Expecting LowestBreakIteration value to be {0} for iteration {1}, while getting {2}", _lowestBreakIter, i, state.LowestBreakIteration.Value));
+                Assert.False(
+                    state.LowestBreakIteration.Value != _lowestBreakIter.Value,
+                    string.Format(
+                        "Expecting LowestBreakIteration value to be {0} for iteration {1}, while getting {2}",
+                        _lowestBreakIter,
+                        i,
+                        state.LowestBreakIteration.Value
+                    )
+                );
 
                 // If we previously called Break() on the parallel state,
                 // we expect all higher iterations see the state's ShouldExitCurrentIteration to be true
-                Assert.False(i > _lowestBreakIter.Value && !state.ShouldExitCurrentIteration,
-                    string.Format("Expecting ShouldExitCurrentIteration to be true for iteration {0}, LowestBreakIteration is {1}", i, _lowestBreakIter));
+                Assert.False(
+                    i > _lowestBreakIter.Value && !state.ShouldExitCurrentIteration,
+                    string.Format(
+                        "Expecting ShouldExitCurrentIteration to be true for iteration {0}, LowestBreakIteration is {1}",
+                        i,
+                        _lowestBreakIter
+                    )
+                );
             }
 
-            if (_lowestBreakIter.HasValue && i < _lowestBreakIter.Value && state.ShouldExitCurrentIteration)
-            {
+            if (
+                _lowestBreakIter.HasValue
+                && i < _lowestBreakIter.Value
+                && state.ShouldExitCurrentIteration
+            ) {
                 long lbi = _lowestBreakIter.Value;
                 // If we previously called Break() on the parallel state,
                 // we expect all lower iterations see the state's ShouldExitCurrentIteration to be false.
@@ -532,11 +643,20 @@ namespace System.Threading.Tasks.Test
                 // in between retrieving LowestBreakIteration value and ShouldExitCurrentIteration
                 // which changes the value of ShouldExitCurrentIteration.
                 // We do another sample instead of LowestBreakIteration before failing the test
-                Assert.False(i < lbi, string.Format("Expecting ShouldExitCurrentIteration to be false for iteration {0}, LowestBreakIteration is {1}", i, lbi));
+                Assert.False(
+                    i < lbi,
+                    string.Format(
+                        "Expecting ShouldExitCurrentIteration to be false for iteration {0}, LowestBreakIteration is {1}",
+                        i,
+                        lbi
+                    )
+                );
             }
 
-            if (!_lowestBreakIter.HasValue || (_lowestBreakIter.HasValue && i < _lowestBreakIter.Value))
-            {
+            if (
+                !_lowestBreakIter.HasValue
+                || (_lowestBreakIter.HasValue && i < _lowestBreakIter.Value)
+            ) {
                 // If calls Break for the first time or if current iteration less than LowestBreakIteration,
                 // call Break() again, and make sure LowestBreakIteration value gets updated
                 try
@@ -545,13 +665,14 @@ namespace System.Threading.Tasks.Test
                     _lowestBreakIter = state.LowestBreakIteration; // Save the lowest beak iteration
                     // If the test is checking the scenario where break is called after stop then
                     // we expect an InvalidOperationException
-                    Assert.False(catchException, "Not getting InvalidOperationException from Break() when expecting one");
+                    Assert.False(
+                        catchException,
+                        "Not getting InvalidOperationException from Break() when expecting one"
+                    );
                 }
                 // If the test is checking the scenario where break is called after stop then
                 // we expect an InvalidOperationException
-                catch (InvalidOperationException) when (catchException)
-                {
-                }
+                catch (InvalidOperationException) when (catchException) { }
             }
         }
 
@@ -589,12 +710,21 @@ namespace System.Threading.Tasks.Test
                 // we expect all higher iterations see the state's ShouldExitCurrentIteration to be true
                 if (state.LowestBreakIteration.HasValue)
                 {
-                    Assert.False(i > state.LowestBreakIteration.Value && !state.ShouldExitCurrentIteration,
-                        string.Format("Expecting ShouldExitCurrentIteration to be true for iteration {0}, LowestBreakIteration is {1}", i, state.LowestBreakIteration.Value));
+                    Assert.False(
+                        i > state.LowestBreakIteration.Value && !state.ShouldExitCurrentIteration,
+                        string.Format(
+                            "Expecting ShouldExitCurrentIteration to be true for iteration {0}, LowestBreakIteration is {1}",
+                            i,
+                            state.LowestBreakIteration.Value
+                        )
+                    );
                 }
 
-                if (state.LowestBreakIteration.HasValue && i < state.LowestBreakIteration.Value && state.ShouldExitCurrentIteration)
-                {
+                if (
+                    state.LowestBreakIteration.HasValue
+                    && i < state.LowestBreakIteration.Value
+                    && state.ShouldExitCurrentIteration
+                ) {
                     long lbi = state.LowestBreakIteration.Value;
 
                     // If we previously called Break() on the parallel state,
@@ -603,7 +733,14 @@ namespace System.Threading.Tasks.Test
                     // in between retrieving LowestBreakIteration value and ShouldExitCurrentIteration
                     // which changes the value of ShouldExitCurrentIteration.
                     // We do another sample instead of LowestBreakIteration before failing the test
-                    Assert.False(i < lbi, string.Format("Expecting ShouldExitCurrentIteration to be false for iteration {0}, LowestBreakIteration is {1}", i, lbi));
+                    Assert.False(
+                        i < lbi,
+                        string.Format(
+                            "Expecting ShouldExitCurrentIteration to be false for iteration {0}, LowestBreakIteration is {1}",
+                            i,
+                            lbi
+                        )
+                    );
                 }
             }
         }
@@ -623,17 +760,37 @@ namespace System.Threading.Tasks.Test
         /// <param name="state"></param>
         private void ExceptionalAction(long i, ParallelLoopState state)
         {
-            Debug.WriteLine("Calling ExceptionalAction on index {0}, StartIndex: {1}, real index {2}", i, _startIndex, i - _startIndex);
+            Debug.WriteLine(
+                "Calling ExceptionalAction on index {0}, StartIndex: {1}, real index {2}",
+                i,
+                _startIndex,
+                i - _startIndex
+            );
 
-            Assert.False(_isExceptional != state.IsExceptional, string.Format("IsExceptional is expected to be {0} while getting {1}", _isExceptional, state.IsExceptional));
+            Assert.False(
+                _isExceptional != state.IsExceptional,
+                string.Format(
+                    "IsExceptional is expected to be {0} while getting {1}",
+                    _isExceptional,
+                    state.IsExceptional
+                )
+            );
 
             // Previous iteration throws exception, the Parallel should stop it's work
-            Assert.False(_isExceptional && !state.ShouldExitCurrentIteration, string.Format("Expecting ShouldExitCurrentIteration to be true, since Exception was thrown on previous iterations"));
+            Assert.False(
+                _isExceptional && !state.ShouldExitCurrentIteration,
+                string.Format(
+                    "Expecting ShouldExitCurrentIteration to be true, since Exception was thrown on previous iterations"
+                )
+            );
 
             try
             {
-                throw new InvalidOperationException("Throws test exception to verify it got handled properly");
+                throw new InvalidOperationException(
+                    "Throws test exception to verify it got handled properly"
+                );
             }
+
             finally
             {
                 _isExceptional = true;
@@ -653,14 +810,22 @@ namespace System.Threading.Tasks.Test
         /// <param name="state"></param>
         private void MultipleExceptionAction(long i, ParallelLoopState state)
         {
-            Debug.WriteLine("Calling ExceptionalAction2 on index {0}, StartIndex: {1}, real index {2}", i, _startIndex, i - _startIndex);
+            Debug.WriteLine(
+                "Calling ExceptionalAction2 on index {0}, StartIndex: {1}, real index {2}",
+                i,
+                _startIndex,
+                i - _startIndex
+            );
 
             if (Interlocked.Increment(ref _iterCount) < _parameters.Count / 2)
             {
                 try
                 {
-                    throw new System.InvalidOperationException("Throws test exception to verify it got handled properly");
+                    throw new System.InvalidOperationException(
+                        "Throws test exception to verify it got handled properly"
+                    );
                 }
+
                 finally
                 {
                     _isExceptional = true;
@@ -668,11 +833,22 @@ namespace System.Threading.Tasks.Test
             }
             else
             {
-                Assert.False(state.IsExceptional && !_isExceptional, string.Format("IsExceptional is expected to be {0} while getting {1}", _isExceptional, state.IsExceptional));
+                Assert.False(
+                    state.IsExceptional && !_isExceptional,
+                    string.Format(
+                        "IsExceptional is expected to be {0} while getting {1}",
+                        _isExceptional,
+                        state.IsExceptional
+                    )
+                );
 
                 // Previous iteration throws exception, the Parallel should stop it's work
-                Assert.False(state.IsExceptional && !state.ShouldExitCurrentIteration,
-                    string.Format("Expecting ShouldExitCurrentIteration to be true, since Exception was thrown on previous iterations"));
+                Assert.False(
+                    state.IsExceptional && !state.ShouldExitCurrentIteration,
+                    string.Format(
+                        "Expecting ShouldExitCurrentIteration to be true, since Exception was thrown on previous iterations"
+                    )
+                );
             }
         }
         #endregion
@@ -753,13 +929,24 @@ namespace System.Threading.Tasks.Test
 
             if (_results[i] < minLimit || _results[i] > maxLimit)
             {
-                Assert.False(double.MinValue == _results[i], string.Format("results[{0}] has been revisited", i));
+                Assert.False(
+                    double.MinValue == _results[i],
+                    string.Format("results[{0}] has been revisited", i)
+                );
 
                 if (_isStopped && 0 == _results[i])
                     Debug.WriteLine("Stopped calculation at index = {0}", i);
 
-                Assert.True(_isStopped && 0 == _results[i],
-                    string.Format("Incorrect results[{0}]. Expected to lie between {1} and {2}, but got {3})", i, minLimit, maxLimit, _results[i]));
+                Assert.True(
+                    _isStopped && 0 == _results[i],
+                    string.Format(
+                        "Incorrect results[{0}]. Expected to lie between {1} and {2}, but got {3})",
+                        i,
+                        minLimit,
+                        maxLimit,
+                        _results[i]
+                    )
+                );
             }
         }
 
@@ -776,8 +963,15 @@ namespace System.Threading.Tasks.Test
         {
             Assert.False(loopResult == null, "No ParallelLoopResult returned");
 
-            Assert.False(loopResult.Value.IsCompleted == true || loopResult.Value.LowestBreakIteration != null,
-                    string.Format("ParallelLoopResult invalid, expecting Completed=false,LowestBreakIteration=null, actual: {0}, {1}", loopResult.Value.IsCompleted, loopResult.Value.LowestBreakIteration));
+            Assert.False(
+                loopResult.Value.IsCompleted == true
+                    || loopResult.Value.LowestBreakIteration != null,
+                string.Format(
+                    "ParallelLoopResult invalid, expecting Completed=false,LowestBreakIteration=null, actual: {0}, {1}",
+                    loopResult.Value.IsCompleted,
+                    loopResult.Value.LowestBreakIteration
+                )
+            );
 
             for (int i = 0; i < _parameters.Count; i++)
                 Verify(i);
@@ -797,8 +991,17 @@ namespace System.Threading.Tasks.Test
         {
             Assert.False(loopResult == null, "No ParallelLoopResult returned");
 
-            Assert.False(loopResult.Value.IsCompleted == true || loopResult.Value.LowestBreakIteration == null || loopResult.Value.LowestBreakIteration != _lowestBreakIter,
-                string.Format("ParallelLoopResult invalid, expecting Completed=false,LowestBreakIteration={0}, actual: {1}, {2}", _lowestBreakIter, loopResult.Value.IsCompleted, loopResult.Value.LowestBreakIteration));
+            Assert.False(
+                loopResult.Value.IsCompleted == true
+                    || loopResult.Value.LowestBreakIteration == null
+                    || loopResult.Value.LowestBreakIteration != _lowestBreakIter,
+                string.Format(
+                    "ParallelLoopResult invalid, expecting Completed=false,LowestBreakIteration={0}, actual: {1}, {2}",
+                    _lowestBreakIter,
+                    loopResult.Value.IsCompleted,
+                    loopResult.Value.LowestBreakIteration
+                )
+            );
 
             for (int i = 0; i < _lowestBreakIter.Value - _startIndex; i++)
                 Verify(i);
@@ -815,7 +1018,6 @@ namespace System.Threading.Tasks.Test
         {
             Assert.Null(loopResult);
         }
-
         #endregion
     }
 
@@ -968,7 +1170,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState6()
         {
-            string[] actions = new string[] { "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", };
+            string[] actions = new string[]
+            {
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+            };
             string[] verifications = new string[] { "BreakVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -988,7 +1202,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState7()
         {
-            string[] actions = new string[] { "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", };
+            string[] actions = new string[]
+            {
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+            };
             string[] verifications = new string[] { "BreakVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1008,7 +1234,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState8()
         {
-            string[] actions = new string[] { "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", };
+            string[] actions = new string[]
+            {
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+            };
             string[] verifications = new string[] { "BreakVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1028,7 +1266,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState9()
         {
-            string[] actions = new string[] { "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", };
+            string[] actions = new string[]
+            {
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+            };
             string[] verifications = new string[] { "ExceptionalVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1048,7 +1298,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState10()
         {
-            string[] actions = new string[] { "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", };
+            string[] actions = new string[]
+            {
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+            };
             string[] verifications = new string[] { "ExceptionalVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1068,7 +1330,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState11()
         {
-            string[] actions = new string[] { "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", };
+            string[] actions = new string[]
+            {
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+            };
             string[] verifications = new string[] { "ExceptionalVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1088,7 +1362,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState12()
         {
-            string[] actions = new string[] { "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", };
+            string[] actions = new string[]
+            {
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+            };
             string[] verifications = new string[] { "StopVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1108,7 +1394,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState13()
         {
-            string[] actions = new string[] { "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", };
+            string[] actions = new string[]
+            {
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+            };
             string[] verifications = new string[] { "StopVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1128,7 +1426,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState14()
         {
-            string[] actions = new string[] { "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", };
+            string[] actions = new string[]
+            {
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+            };
             string[] verifications = new string[] { "StopVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1588,7 +1898,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState37()
         {
-            string[] actions = new string[] { "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", };
+            string[] actions = new string[]
+            {
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+            };
             string[] verifications = new string[] { "BreakVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1608,7 +1930,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState38()
         {
-            string[] actions = new string[] { "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", };
+            string[] actions = new string[]
+            {
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+            };
             string[] verifications = new string[] { "BreakVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1628,7 +1962,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState39()
         {
-            string[] actions = new string[] { "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", };
+            string[] actions = new string[]
+            {
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+            };
             string[] verifications = new string[] { "ExceptionalVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1648,7 +1994,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState40()
         {
-            string[] actions = new string[] { "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", };
+            string[] actions = new string[]
+            {
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+            };
             string[] verifications = new string[] { "ExceptionalVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1668,7 +2026,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState41()
         {
-            string[] actions = new string[] { "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", };
+            string[] actions = new string[]
+            {
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+            };
             string[] verifications = new string[] { "StopVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -1688,7 +2058,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState42()
         {
-            string[] actions = new string[] { "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", };
+            string[] actions = new string[]
+            {
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+            };
             string[] verifications = new string[] { "StopVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -2024,7 +2406,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState59()
         {
-            string[] actions = new string[] { "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", };
+            string[] actions = new string[]
+            {
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+            };
             string[] verifications = new string[] { "BreakVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -2044,7 +2438,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState60()
         {
-            string[] actions = new string[] { "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", "MultipleBreak", };
+            string[] actions = new string[]
+            {
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+                "MultipleBreak",
+            };
             string[] verifications = new string[] { "BreakVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -2064,7 +2470,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState61()
         {
-            string[] actions = new string[] { "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", };
+            string[] actions = new string[]
+            {
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+            };
             string[] verifications = new string[] { "ExceptionalVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -2084,7 +2502,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState62()
         {
-            string[] actions = new string[] { "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", "MultipleException", };
+            string[] actions = new string[]
+            {
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+                "MultipleException",
+            };
             string[] verifications = new string[] { "ExceptionalVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -2104,7 +2534,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState63()
         {
-            string[] actions = new string[] { "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", };
+            string[] actions = new string[]
+            {
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+            };
             string[] verifications = new string[] { "StopVerification", };
             TestParameters parameters = new TestParameters
             {
@@ -2124,7 +2566,19 @@ namespace System.Threading.Tasks.Test
         [OuterLoop]
         public static void ParallelState64()
         {
-            string[] actions = new string[] { "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", "MultipleStop", };
+            string[] actions = new string[]
+            {
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+                "MultipleStop",
+            };
             string[] verifications = new string[] { "StopVerification", };
             TestParameters parameters = new TestParameters
             {

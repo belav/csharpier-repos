@@ -13,7 +13,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue("Switch.System.Xml.DontThrowOnInvalidSurrogatePairs", ref s_dontThrowOnInvalidSurrogatePairs);
+                return GetCachedSwitchValue(
+                    "Switch.System.Xml.DontThrowOnInvalidSurrogatePairs",
+                    ref s_dontThrowOnInvalidSurrogatePairs
+                );
             }
         }
 
@@ -23,7 +26,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue("Switch.System.Xml.IgnoreEmptyKeySequencess", ref s_ignoreEmptyKeySequences);
+                return GetCachedSwitchValue(
+                    "Switch.System.Xml.IgnoreEmptyKeySequencess",
+                    ref s_ignoreEmptyKeySequences
+                );
             }
         }
 
@@ -33,7 +39,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue("Switch.System.Xml.IgnoreKindInUtcTimeSerialization", ref s_ignoreKindInUtcTimeSerialization);
+                return GetCachedSwitchValue(
+                    "Switch.System.Xml.IgnoreKindInUtcTimeSerialization",
+                    ref s_ignoreKindInUtcTimeSerialization
+                );
             }
         }
 
@@ -43,7 +52,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue("Switch.System.Xml.LimitXPathComplexity", ref s_limitXPathComplexity);
+                return GetCachedSwitchValue(
+                    "Switch.System.Xml.LimitXPathComplexity",
+                    ref s_limitXPathComplexity
+                );
             }
         }
 
@@ -53,7 +65,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue("Switch.System.Xml.AllowDefaultResolver", ref s_allowDefaultResolver);
+                return GetCachedSwitchValue(
+                    "Switch.System.Xml.AllowDefaultResolver",
+                    ref s_allowDefaultResolver
+                );
             }
         }
     }

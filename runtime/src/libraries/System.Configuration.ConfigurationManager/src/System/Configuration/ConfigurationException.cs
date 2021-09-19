@@ -16,7 +16,9 @@ namespace System.Configuration
     ///     number information where possible.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ConfigurationException : SystemException
     {
         private string _filename;
@@ -29,30 +31,49 @@ namespace System.Configuration
             Init(info.GetString("filename"), info.GetInt32("line"));
         }
 
-        [Obsolete("This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException")]
+        [Obsolete(
+            "This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException"
+        )]
         public ConfigurationException() : this(null, null, null, 0) { }
 
-        [Obsolete("This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException")]
+        [Obsolete(
+            "This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException"
+        )]
         public ConfigurationException(string message) : this(message, null, null, 0) { }
 
-        [Obsolete("This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException")]
-        public ConfigurationException(string message, Exception inner) : this(message, inner, null, 0) { }
+        [Obsolete(
+            "This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException"
+        )]
+        public ConfigurationException(string message, Exception inner)
+            : this(message, inner, null, 0) { }
 
-        [Obsolete("This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException")]
+        [Obsolete(
+            "This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException"
+        )]
         public ConfigurationException(string message, XmlNode node)
-            : this(message, null, GetXmlNodeFilename(node), GetXmlNodeLineNumber(node))
-        { }
+            : this(message, null, GetXmlNodeFilename(node), GetXmlNodeLineNumber(node)) { }
 
-        [Obsolete("This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException")]
+        [Obsolete(
+            "This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException"
+        )]
         public ConfigurationException(string message, Exception inner, XmlNode node)
-            : this(message, inner, GetXmlNodeFilename(node), GetXmlNodeLineNumber(node))
-        { }
+            : this(message, inner, GetXmlNodeFilename(node), GetXmlNodeLineNumber(node)) { }
 
-        [Obsolete("This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException")]
-        public ConfigurationException(string message, string filename, int line) : this(message, null, filename, line) { }
+        [Obsolete(
+            "This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException"
+        )]
+        public ConfigurationException(string message, string filename, int line)
+            : this(message, null, filename, line) { }
 
-        [Obsolete("This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException")]
-        public ConfigurationException(string message, Exception inner, string filename, int line) : base(message, inner)
+        [Obsolete(
+            "This class is obsolete, to create a new exception create a System.Configuration.ConfigurationErrorsException"
+        )]
+        public ConfigurationException(
+            string message,
+            Exception inner,
+            string filename,
+            int line
+        ) : base(message, inner)
         {
             Init(filename, line);
         }
@@ -67,12 +88,20 @@ namespace System.Configuration
                 if (!string.IsNullOrEmpty(file))
                 {
                     return Line != 0
-                        ? BareMessage + " (" + file + " line " + Line.ToString(CultureInfo.InvariantCulture) + ")"
+                        ? BareMessage
+                          + " ("
+                          + file
+                          + " line "
+                          + Line.ToString(CultureInfo.InvariantCulture)
+                          + ")"
                         : BareMessage + " (" + file + ")";
                 }
 
                 return Line != 0
-                    ? BareMessage + " (line " + Line.ToString("G", CultureInfo.InvariantCulture) + ")"
+                    ? BareMessage
+                      + " (line "
+                      + Line.ToString("G", CultureInfo.InvariantCulture)
+                      + ")"
                     : BareMessage;
             }
         }
@@ -97,10 +126,16 @@ namespace System.Configuration
             info.AddValue("line", _line);
         }
 
-        [Obsolete("This class is obsolete, use System.Configuration.ConfigurationErrorsException.GetFilename instead")]
-        public static string GetXmlNodeFilename(XmlNode node) => (node as IConfigErrorInfo)?.Filename ?? string.Empty;
+        [Obsolete(
+            "This class is obsolete, use System.Configuration.ConfigurationErrorsException.GetFilename instead"
+        )]
+        public static string GetXmlNodeFilename(XmlNode node) =>
+            (node as IConfigErrorInfo)?.Filename ?? string.Empty;
 
-        [Obsolete("This class is obsolete, use System.Configuration.ConfigurationErrorsException.GetFilename instead")]
-        public static int GetXmlNodeLineNumber(XmlNode node) => (node as IConfigErrorInfo)?.LineNumber ?? 0;
+        [Obsolete(
+            "This class is obsolete, use System.Configuration.ConfigurationErrorsException.GetFilename instead"
+        )]
+        public static int GetXmlNodeLineNumber(XmlNode node) =>
+            (node as IConfigErrorInfo)?.LineNumber ?? 0;
     }
 }

@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .Ignore(b => b.Details)
                     .Ignore(b => b.Orders)
                     .HasPartitionKey(b => b.AlternateKey)
-                    .Property(b => b.AlternateKey).HasConversion<string>();
+                    .Property(b => b.AlternateKey)
+                    .HasConversion<string>();
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -46,10 +47,18 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Equal(
                     new[] { nameof(Customer.Id), nameof(Customer.AlternateKey) },
-                    entity.FindPrimaryKey().Properties.Select(p => p.Name));
+                    entity.FindPrimaryKey().Properties.Select(p => p.Name)
+                );
                 Assert.Equal(
-                    new[] { StoreKeyConvention.DefaultIdPropertyName, nameof(Customer.AlternateKey) },
-                    entity.GetKeys().First(k => k != entity.FindPrimaryKey()).Properties.Select(p => p.Name));
+                    new[]
+                    {
+                        StoreKeyConvention.DefaultIdPropertyName,
+                        nameof(Customer.AlternateKey)
+                    },
+                    entity.GetKeys()
+                        .First(k => k != entity.FindPrimaryKey())
+                        .Properties.Select(p => p.Name)
+                );
 
                 var idProperty = entity.FindProperty(StoreKeyConvention.DefaultIdPropertyName);
                 Assert.Single(idProperty.GetContainingKeys());
@@ -66,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .Ignore(b => b.Details)
                     .Ignore(b => b.Orders)
                     .HasPartitionKey(b => b.AlternateKey)
-                    .Property(b => b.AlternateKey).HasConversion<string>();
+                    .Property(b => b.AlternateKey)
+                    .HasConversion<string>();
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -74,10 +84,18 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Equal(
                     new[] { StoreKeyConvention.DefaultIdPropertyName },
-                    entity.FindPrimaryKey().Properties.Select(p => p.Name));
+                    entity.FindPrimaryKey().Properties.Select(p => p.Name)
+                );
                 Assert.Equal(
-                    new[] { StoreKeyConvention.DefaultIdPropertyName, nameof(Customer.AlternateKey) },
-                    entity.GetKeys().First(k => k != entity.FindPrimaryKey()).Properties.Select(p => p.Name));
+                    new[]
+                    {
+                        StoreKeyConvention.DefaultIdPropertyName,
+                        nameof(Customer.AlternateKey)
+                    },
+                    entity.GetKeys()
+                        .First(k => k != entity.FindPrimaryKey())
+                        .Properties.Select(p => p.Name)
+                );
             }
 
             [ConditionalFact]
@@ -88,9 +106,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Entity<Customer>()
                     .Property(c => c.Name)
                     .ToJsonProperty(StoreKeyConvention.IdPropertyJsonName);
-                modelBuilder.Entity<Customer>()
-                    .Ignore(b => b.Details)
-                    .Ignore(b => b.Orders);
+                modelBuilder.Entity<Customer>().Ignore(b => b.Details).Ignore(b => b.Orders);
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -137,9 +153,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
 
                 modelBuilder.Entity<Customer>().HasKey(StoreKeyConvention.DefaultIdPropertyName);
-                modelBuilder.Entity<Customer>()
-                    .Ignore(b => b.Details)
-                    .Ignore(b => b.Orders);
+                modelBuilder.Entity<Customer>().Ignore(b => b.Details).Ignore(b => b.Orders);
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -147,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Equal(
                     new[] { StoreKeyConvention.DefaultIdPropertyName },
-                    entity.FindPrimaryKey().Properties.Select(p => p.Name));
+                    entity.FindPrimaryKey().Properties.Select(p => p.Name)
+                );
                 Assert.Empty(entity.GetKeys().Where(k => k != entity.FindPrimaryKey()));
 
                 var idProperty = entity.FindProperty(StoreKeyConvention.DefaultIdPropertyName);
@@ -160,25 +175,35 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Customer>().HasKey(nameof(Customer.AlternateKey), StoreKeyConvention.DefaultIdPropertyName);
+                modelBuilder.Entity<Customer>()
+                    .HasKey(
+                        nameof(Customer.AlternateKey),
+                        StoreKeyConvention.DefaultIdPropertyName
+                    );
                 modelBuilder.Entity<Customer>()
                     .Ignore(b => b.Details)
                     .Ignore(b => b.Orders)
                     .HasPartitionKey(b => b.AlternateKey)
-                    .Property(b => b.AlternateKey).HasConversion<string>();
+                    .Property(b => b.AlternateKey)
+                    .HasConversion<string>();
 
                 var model = modelBuilder.FinalizeModel();
 
                 var entity = model.FindEntityType(typeof(Customer));
 
                 Assert.Equal(
-                    new[] { nameof(Customer.AlternateKey), StoreKeyConvention.DefaultIdPropertyName },
-                    entity.FindPrimaryKey().Properties.Select(p => p.Name));
+                    new[]
+                    {
+                        nameof(Customer.AlternateKey),
+                        StoreKeyConvention.DefaultIdPropertyName
+                    },
+                    entity.FindPrimaryKey().Properties.Select(p => p.Name)
+                );
                 Assert.Empty(entity.GetKeys().Where(k => k != entity.FindPrimaryKey()));
             }
 
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(CosmosTestHelpers.Instance);
         }
 
         public class CosmosGenericInheritance : GenericInheritance
@@ -188,26 +213,26 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 // Fails due to presence of __jObject
             }
 
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(CosmosTestHelpers.Instance);
         }
 
         public class CosmosGenericOneToMany : GenericOneToMany
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(CosmosTestHelpers.Instance);
         }
 
         public class CosmosGenericManyToOne : GenericManyToOne
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(CosmosTestHelpers.Instance);
         }
 
         public class CosmosGenericOneToOne : GenericOneToOne
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(CosmosTestHelpers.Instance);
         }
 
         public class CosmosGenericManyToMany : GenericManyToMany
@@ -220,29 +245,40 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Ignore<OneToManyNavPrincipal>();
                 modelBuilder.Ignore<OneToOneNavPrincipal>();
 
-                modelBuilder.Entity<ManyToManyNavPrincipal>(mb =>
-                {
-                    mb.Property<string>("PartitionId");
-                    mb.HasPartitionKey("PartitionId");
-                });
+                modelBuilder.Entity<ManyToManyNavPrincipal>(
+                    mb =>
+                    {
+                        mb.Property<string>("PartitionId");
+                        mb.HasPartitionKey("PartitionId");
+                    }
+                );
 
-                modelBuilder.Entity<NavDependent>(mb =>
-                {
-                    mb.Property<string>("PartitionId");
-                    mb.HasPartitionKey("PartitionId");
-                });
+                modelBuilder.Entity<NavDependent>(
+                    mb =>
+                    {
+                        mb.Property<string>("PartitionId");
+                        mb.HasPartitionKey("PartitionId");
+                    }
+                );
 
                 modelBuilder.Entity<ManyToManyNavPrincipal>()
                     .HasMany(e => e.Dependents)
                     .WithMany(e => e.ManyToManyPrincipals)
                     .UsingEntity<Dictionary<string, object>>(
                         "JoinType",
-                        e => e.HasOne<NavDependent>().WithMany().HasForeignKey("DependentId", "PartitionId"),
-                        e => e.HasOne<ManyToManyNavPrincipal>().WithMany().HasForeignKey("PrincipalId", "PartitionId"),
+                        e =>
+                            e.HasOne<NavDependent>()
+                                .WithMany()
+                                .HasForeignKey("DependentId", "PartitionId"),
+                        e =>
+                            e.HasOne<ManyToManyNavPrincipal>()
+                                .WithMany()
+                                .HasForeignKey("PrincipalId", "PartitionId"),
                         e =>
                         {
                             e.HasPartitionKey("PartitionId");
-                        });
+                        }
+                    );
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -255,14 +291,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal("PartitionId", joinType.FindPrimaryKey().Properties.Last().Name);
             }
 
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(CosmosTestHelpers.Instance);
         }
 
         public class CosmosGenericOwnedTypes : GenericOwnedTypes
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(CosmosTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(CosmosTestHelpers.Instance);
         }
     }
 }

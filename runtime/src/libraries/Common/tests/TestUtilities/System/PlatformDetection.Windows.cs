@@ -18,50 +18,91 @@ namespace System
         //
 
         public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-        public static bool IsNetFramework => RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase);
-        public static bool HasWindowsShell => IsWindows && IsNotWindowsServerCore && IsNotWindowsNanoServer && IsNotWindowsIoTCore;
-        public static bool IsWindows7 => IsWindows && GetWindowsVersion() == 6 && GetWindowsMinorVersion() == 1;
-        public static bool IsWindows8x => IsWindows && GetWindowsVersion() == 6 && (GetWindowsMinorVersion() == 2 || GetWindowsMinorVersion() == 3);
-        public static bool IsWindows8xOrLater => IsWindows && new Version((int)GetWindowsVersion(), (int)GetWindowsMinorVersion()) >= new Version(6, 2);
-        public static bool IsWindowsNanoServer => IsWindows && (IsNotWindowsIoTCore && GetWindowsInstallationType().Equals("Nano Server", StringComparison.OrdinalIgnoreCase));
-        public static bool IsWindowsServerCore => IsWindows && GetWindowsInstallationType().Equals("Server Core", StringComparison.OrdinalIgnoreCase);
+        public static bool IsNetFramework =>
+            RuntimeInformation.FrameworkDescription.StartsWith(
+                ".NET Framework",
+                StringComparison.OrdinalIgnoreCase
+            );
+        public static bool HasWindowsShell =>
+            IsWindows && IsNotWindowsServerCore && IsNotWindowsNanoServer && IsNotWindowsIoTCore;
+        public static bool IsWindows7 =>
+            IsWindows && GetWindowsVersion() == 6 && GetWindowsMinorVersion() == 1;
+        public static bool IsWindows8x =>
+            IsWindows
+            && GetWindowsVersion() == 6
+            && (GetWindowsMinorVersion() == 2 || GetWindowsMinorVersion() == 3);
+        public static bool IsWindows8xOrLater =>
+            IsWindows
+            && new Version((int)GetWindowsVersion(), (int)GetWindowsMinorVersion())
+                >= new Version(6, 2);
+        public static bool IsWindowsNanoServer =>
+            IsWindows
+            && (
+                IsNotWindowsIoTCore
+                && GetWindowsInstallationType()
+                    .Equals("Nano Server", StringComparison.OrdinalIgnoreCase)
+            );
+        public static bool IsWindowsServerCore =>
+            IsWindows
+            && GetWindowsInstallationType()
+                .Equals("Server Core", StringComparison.OrdinalIgnoreCase);
         public static int WindowsVersion => IsWindows ? (int)GetWindowsVersion() : -1;
         public static bool IsNotWindows7 => !IsWindows7;
         public static bool IsNotWindows8x => !IsWindows8x;
         public static bool IsNotWindowsNanoServer => !IsWindowsNanoServer;
         public static bool IsNotWindowsServerCore => !IsWindowsServerCore;
-        public static bool IsNotWindowsNanoNorServerCore => IsNotWindowsNanoServer && IsNotWindowsServerCore;
+        public static bool IsNotWindowsNanoNorServerCore =>
+            IsNotWindowsNanoServer && IsNotWindowsServerCore;
         public static bool IsNotWindowsIoTCore => !IsWindowsIoTCore;
         public static bool IsNotWindowsHomeEdition => !IsWindowsHomeEdition;
         public static bool IsNotInAppContainer => !IsInAppContainer;
         public static bool IsSoundPlaySupported => IsWindows && IsNotWindowsNanoServer;
 
         // >= Windows 10 Anniversary Update
-        public static bool IsWindows10Version1607OrGreater => IsWindows &&
-            GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildNumber() >= 14393;
+        public static bool IsWindows10Version1607OrGreater =>
+            IsWindows
+            && GetWindowsVersion() == 10
+            && GetWindowsMinorVersion() == 0
+            && GetWindowsBuildNumber() >= 14393;
 
-         // >= Windows 10 Creators Update
-        public static bool IsWindows10Version1703OrGreater => IsWindows &&
-            GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildNumber() >= 15063;
+        // >= Windows 10 Creators Update
+        public static bool IsWindows10Version1703OrGreater =>
+            IsWindows
+            && GetWindowsVersion() == 10
+            && GetWindowsMinorVersion() == 0
+            && GetWindowsBuildNumber() >= 15063;
 
         // >= Windows 10 Fall Creators Update
-        public static bool IsWindows10Version1709OrGreater => IsWindows &&
-            GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildNumber() >= 16299;
+        public static bool IsWindows10Version1709OrGreater =>
+            IsWindows
+            && GetWindowsVersion() == 10
+            && GetWindowsMinorVersion() == 0
+            && GetWindowsBuildNumber() >= 16299;
 
         // >= Windows 10 April 2018 Update
-        public static bool IsWindows10Version1803OrGreater => IsWindows &&
-            GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildNumber() >= 17134;
+        public static bool IsWindows10Version1803OrGreater =>
+            IsWindows
+            && GetWindowsVersion() == 10
+            && GetWindowsMinorVersion() == 0
+            && GetWindowsBuildNumber() >= 17134;
 
         // >= Windows 10 May 2019 Update (19H1)
-        public static bool IsWindows10Version1903OrGreater => IsWindows &&
-            GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildNumber() >= 18362;
+        public static bool IsWindows10Version1903OrGreater =>
+            IsWindows
+            && GetWindowsVersion() == 10
+            && GetWindowsMinorVersion() == 0
+            && GetWindowsBuildNumber() >= 18362;
 
         // >= Windows 10 20H1 Update (As of Jan. 2020 yet to be released)
         // Per https://docs.microsoft.com/en-us/windows-insider/flight-hub/ the first 20H1 build is 18836.
-        public static bool IsWindows10Version2004OrGreater => IsWindows &&
-            GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildNumber() >= 18836;
+        public static bool IsWindows10Version2004OrGreater =>
+            IsWindows
+            && GetWindowsVersion() == 10
+            && GetWindowsMinorVersion() == 0
+            && GetWindowsBuildNumber() >= 18836;
 
-        public static bool IsWindows10Version2004Build19573OrGreater => IsWindows10Version2004OrGreater && GetWindowsBuildNumber() >= 19573;
+        public static bool IsWindows10Version2004Build19573OrGreater =>
+            IsWindows10Version2004OrGreater && GetWindowsBuildNumber() >= 19573;
 
         public static bool IsWindowsIoTCore
         {
@@ -73,8 +114,7 @@ namespace System
                 }
 
                 int productType = GetWindowsProductType();
-                if ((productType == PRODUCT_IOTUAPCOMMERCIAL) ||
-                    (productType == PRODUCT_IOTUAP))
+                if ((productType == PRODUCT_IOTUAPCOMMERCIAL) || (productType == PRODUCT_IOTUAP))
                 {
                     return true;
                 }
@@ -112,7 +152,9 @@ namespace System
         public static bool IsWindowsSubsystemForLinux => m_isWindowsSubsystemForLinux.Value;
         public static bool IsNotWindowsSubsystemForLinux => !IsWindowsSubsystemForLinux;
 
-        private static Lazy<bool> m_isWindowsSubsystemForLinux = new Lazy<bool>(GetIsWindowsSubsystemForLinux);
+        private static Lazy<bool> m_isWindowsSubsystemForLinux = new Lazy<bool>(
+            GetIsWindowsSubsystemForLinux
+        );
         private static bool GetIsWindowsSubsystemForLinux()
         {
             // https://github.com/Microsoft/BashOnWindows/issues/423#issuecomment-221627364
@@ -142,16 +184,22 @@ namespace System
             {
                 value = (string)Registry.GetValue(key, "InstallationType", defaultValue: "");
             }
-            catch (Exception e) when (e is SecurityException || e is InvalidCastException)
-            {
-            }
+            catch (Exception e) when (e is SecurityException || e is InvalidCastException) { }
 
             return value;
         }
 
         private static int GetWindowsProductType()
         {
-            Assert.True(GetProductInfo(Environment.OSVersion.Version.Major, Environment.OSVersion.Version.Minor, 0, 0, out int productType));
+            Assert.True(
+                GetProductInfo(
+                    Environment.OSVersion.Version.Major,
+                    Environment.OSVersion.Version.Minor,
+                    0,
+                    0,
+                    out int productType
+                )
+            );
             return productType;
         }
 
@@ -176,21 +224,33 @@ namespace System
         );
 
         [DllImport("kernel32.dll", ExactSpelling = true)]
-        private static extern int GetCurrentApplicationUserModelId(ref uint applicationUserModelIdLength, byte[] applicationUserModelId);
+        private static extern int GetCurrentApplicationUserModelId(
+            ref uint applicationUserModelIdLength,
+            byte[] applicationUserModelId
+        );
 
         internal static uint GetWindowsVersion()
         {
-            Assert.Equal(0, Interop.NtDll.RtlGetVersionEx(out Interop.NtDll.RTL_OSVERSIONINFOEX osvi));
+            Assert.Equal(
+                0,
+                Interop.NtDll.RtlGetVersionEx(out Interop.NtDll.RTL_OSVERSIONINFOEX osvi)
+            );
             return osvi.dwMajorVersion;
         }
         internal static uint GetWindowsMinorVersion()
         {
-            Assert.Equal(0, Interop.NtDll.RtlGetVersionEx(out Interop.NtDll.RTL_OSVERSIONINFOEX osvi));
+            Assert.Equal(
+                0,
+                Interop.NtDll.RtlGetVersionEx(out Interop.NtDll.RTL_OSVERSIONINFOEX osvi)
+            );
             return osvi.dwMinorVersion;
         }
         internal static uint GetWindowsBuildNumber()
         {
-            Assert.Equal(0, Interop.NtDll.RtlGetVersionEx(out Interop.NtDll.RTL_OSVERSIONINFOEX osvi));
+            Assert.Equal(
+                0,
+                Interop.NtDll.RtlGetVersionEx(out Interop.NtDll.RTL_OSVERSIONINFOEX osvi)
+            );
             return osvi.dwBuildNumber;
         }
 
@@ -220,29 +280,36 @@ namespace System
                     switch (result)
                     {
                         case 15703: // APPMODEL_ERROR_NO_APPLICATION
-                        case 120:   // ERROR_CALL_NOT_IMPLEMENTED
-                                    // This function is not supported on this system.
-                                    // In example on Windows Nano Server
+                        case 120: // ERROR_CALL_NOT_IMPLEMENTED
+                            // This function is not supported on this system.
+                            // In example on Windows Nano Server
                             s_isInAppContainer = 0;
                             break;
-                        case 0:     // ERROR_SUCCESS
-                        case 122:   // ERROR_INSUFFICIENT_BUFFER
-                                    // Success is actually insufficent buffer as we're really only looking for
-                                    // not NO_APPLICATION and we're not actually giving a buffer here. The
-                                    // API will always return NO_APPLICATION if we're not running under a
-                                    // WinRT process, no matter what size the buffer is.
+                        case 0: // ERROR_SUCCESS
+                        case 122: // ERROR_INSUFFICIENT_BUFFER
+                            // Success is actually insufficent buffer as we're really only looking for
+                            // not NO_APPLICATION and we're not actually giving a buffer here. The
+                            // API will always return NO_APPLICATION if we're not running under a
+                            // WinRT process, no matter what size the buffer is.
                             s_isInAppContainer = 1;
                             break;
                         default:
-                            throw new InvalidOperationException($"Failed to get AppId, result was {result}.");
+                            throw new InvalidOperationException(
+                                $"Failed to get AppId, result was {result}."
+                            );
                     }
                 }
                 catch (Exception e)
                 {
                     // We could catch this here, being friendly with older portable surface area should we
                     // desire to use this method elsewhere.
-                    if (e.GetType().FullName.Equals("System.EntryPointNotFoundException", StringComparison.Ordinal))
-                    {
+                    if (
+                        e.GetType()
+                            .FullName.Equals(
+                                "System.EntryPointNotFoundException",
+                                StringComparison.Ordinal
+                            )
+                    ) {
                         // API doesn't exist, likely pre Win8
                         s_isInAppContainer = 0;
                     }

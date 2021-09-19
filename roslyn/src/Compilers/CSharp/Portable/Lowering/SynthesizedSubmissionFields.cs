@@ -28,8 +28,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private FieldSymbol _hostObjectField;
         private Dictionary<ImplicitNamedTypeSymbol, FieldSymbol> _previousSubmissionFieldMap;
 
-        public SynthesizedSubmissionFields(CSharpCompilation compilation, NamedTypeSymbol submissionClass)
-        {
+        public SynthesizedSubmissionFields(
+            CSharpCompilation compilation,
+            NamedTypeSymbol submissionClass
+        ) {
             Debug.Assert(compilation != null);
             Debug.Assert(submissionClass.IsSubmissionClass);
 
@@ -49,7 +51,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return _previousSubmissionFieldMap == null ? Array.Empty<FieldSymbol>() : (IEnumerable<FieldSymbol>)_previousSubmissionFieldMap.Values;
+                return _previousSubmissionFieldMap == null
+                    ? Array.Empty<FieldSymbol>()
+                    : (IEnumerable<FieldSymbol>)_previousSubmissionFieldMap.Values;
             }
         }
 
@@ -61,10 +65,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var hostObjectTypeSymbol = _compilation.GetHostObjectTypeSymbol();
-            if ((object)hostObjectTypeSymbol != null && hostObjectTypeSymbol.Kind != SymbolKind.ErrorType)
-            {
+            if (
+                (object)hostObjectTypeSymbol != null
+                && hostObjectTypeSymbol.Kind != SymbolKind.ErrorType
+            ) {
                 return _hostObjectField = new SynthesizedFieldSymbol(
-                    _declaringSubmissionClass, hostObjectTypeSymbol, "<host-object>", isPublic: false, isReadOnly: true, isStatic: false);
+                    _declaringSubmissionClass,
+                    hostObjectTypeSymbol,
+                    "<host-object>",
+                    isPublic: false,
+                    isReadOnly: true,
+                    isStatic: false
+                );
             }
 
             return null;
@@ -74,18 +86,26 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (_previousSubmissionFieldMap == null)
             {
-                _previousSubmissionFieldMap = new Dictionary<ImplicitNamedTypeSymbol, FieldSymbol>();
+                _previousSubmissionFieldMap = new Dictionary<
+                    ImplicitNamedTypeSymbol,
+                    FieldSymbol
+                >();
             }
 
             FieldSymbol previousSubmissionField;
-            if (!_previousSubmissionFieldMap.TryGetValue(previousSubmissionType, out previousSubmissionField))
-            {
+            if (
+                !_previousSubmissionFieldMap.TryGetValue(
+                    previousSubmissionType,
+                    out previousSubmissionField
+                )
+            ) {
                 // TODO: generate better name?
                 previousSubmissionField = new SynthesizedFieldSymbol(
                     _declaringSubmissionClass,
                     previousSubmissionType,
                     "<" + previousSubmissionType.Name + ">",
-                    isReadOnly: true);
+                    isReadOnly: true
+                );
                 _previousSubmissionFieldMap.Add(previousSubmissionType, previousSubmissionField);
             }
             return previousSubmissionField;
@@ -101,7 +121,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             FieldSymbol hostObjectField = GetHostObjectField();
             if ((object)hostObjectField != null)
             {
-                moduleBeingBuilt.AddSynthesizedDefinition(containingType, hostObjectField.GetCciAdapter());
+                moduleBeingBuilt.AddSynthesizedDefinition(
+                    containingType,
+                    hostObjectField.GetCciAdapter()
+                );
             }
         }
     }

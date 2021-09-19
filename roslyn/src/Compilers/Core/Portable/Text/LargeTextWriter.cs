@@ -19,8 +19,11 @@ namespace Microsoft.CodeAnalysis.Text
         private char[]? _buffer;
         private int _currentUsed;
 
-        public LargeTextWriter(Encoding? encoding, SourceHashAlgorithm checksumAlgorithm, int length)
-        {
+        public LargeTextWriter(
+            Encoding? encoding,
+            SourceHashAlgorithm checksumAlgorithm,
+            int length
+        ) {
             _encoding = encoding;
             _checksumAlgorithm = checksumAlgorithm;
             _chunks = ArrayBuilder<char[]>.GetInstance(1 + length / LargeText.ChunkSize);
@@ -30,7 +33,13 @@ namespace Microsoft.CodeAnalysis.Text
         public override SourceText ToSourceText()
         {
             this.Flush();
-            return new LargeText(_chunks.ToImmutableAndFree(), _encoding, default(ImmutableArray<byte>), _checksumAlgorithm, default(ImmutableArray<byte>));
+            return new LargeText(
+                _chunks.ToImmutableAndFree(),
+                _encoding,
+                default(ImmutableArray<byte>),
+                _checksumAlgorithm,
+                default(ImmutableArray<byte>)
+            );
         }
 
         // https://github.com/dotnet/roslyn/issues/40830

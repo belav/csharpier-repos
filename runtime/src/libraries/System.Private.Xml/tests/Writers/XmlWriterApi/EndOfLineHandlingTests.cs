@@ -9,10 +9,19 @@ using Xunit;
 
 namespace System.Xml.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49365", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49365",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public partial class TCEOFHandling
     {
-        private static NewLineHandling[] s_nlHandlingMembers = { NewLineHandling.Entitize, NewLineHandling.Replace, NewLineHandling.None };
+        private static NewLineHandling[] s_nlHandlingMembers =
+        {
+            NewLineHandling.Entitize,
+            NewLineHandling.Replace,
+            NewLineHandling.None
+        };
         private StringWriter _strWriter = null;
 
         private XmlWriter CreateMemWriter(XmlWriterUtils utils, XmlWriterSettings settings)
@@ -27,26 +36,50 @@ namespace System.Xml.Tests
             {
                 case WriterType.UTF8Writer:
                     wSettings.Encoding = Encoding.UTF8;
-                    if (_strWriter != null) _strWriter.Dispose();
+                    if (_strWriter != null)
+                        _strWriter.Dispose();
                     _strWriter = new StringWriter();
-                    w = WriterHelper.Create(_strWriter, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        _strWriter,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case WriterType.UnicodeWriter:
                     wSettings.Encoding = Encoding.Unicode;
-                    if (_strWriter != null) _strWriter.Dispose();
+                    if (_strWriter != null)
+                        _strWriter.Dispose();
                     _strWriter = new StringWriter();
-                    w = WriterHelper.Create(_strWriter, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        _strWriter,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case WriterType.WrappedWriter:
-                    if (_strWriter != null) _strWriter.Dispose();
+                    if (_strWriter != null)
+                        _strWriter.Dispose();
                     _strWriter = new StringWriter();
-                    XmlWriter ww = WriterHelper.Create(_strWriter, wSettings, overrideAsync: true, async: utils.Async);
+                    XmlWriter ww = WriterHelper.Create(
+                        _strWriter,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     w = WriterHelper.Create(ww, wSettings, overrideAsync: true, async: utils.Async);
                     break;
                 case WriterType.CharCheckingWriter:
-                    if (_strWriter != null) _strWriter.Dispose();
+                    if (_strWriter != null)
+                        _strWriter.Dispose();
                     _strWriter = new StringWriter();
-                    XmlWriter cw = WriterHelper.Create(_strWriter, wSettings, overrideAsync: true, async: utils.Async);
+                    XmlWriter cw = WriterHelper.Create(
+                        _strWriter,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     XmlWriterSettings cws = settings.Clone();
                     cws.CheckCharacters = true;
                     w = WriterHelper.Create(cw, cws, overrideAsync: true, async: utils.Async);
@@ -54,16 +87,28 @@ namespace System.Xml.Tests
                 case WriterType.UTF8WriterIndent:
                     wSettings.Encoding = Encoding.UTF8;
                     wSettings.Indent = true;
-                    if (_strWriter != null) _strWriter.Dispose();
+                    if (_strWriter != null)
+                        _strWriter.Dispose();
                     _strWriter = new StringWriter();
-                    w = WriterHelper.Create(_strWriter, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        _strWriter,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 case WriterType.UnicodeWriterIndent:
                     wSettings.Encoding = Encoding.Unicode;
                     wSettings.Indent = true;
-                    if (_strWriter != null) _strWriter.Dispose();
+                    if (_strWriter != null)
+                        _strWriter.Dispose();
                     _strWriter = new StringWriter();
-                    w = WriterHelper.Create(_strWriter, wSettings, overrideAsync: true, async: utils.Async);
+                    w = WriterHelper.Create(
+                        _strWriter,
+                        wSettings,
+                        overrideAsync: true,
+                        async: utils.Async
+                    );
                     break;
                 default:
                     throw new Exception("Unknown writer type");
@@ -116,7 +161,6 @@ namespace System.Xml.Tests
             }
         }
 
-
         /*================== Constructors ==================*/
 
         [Theory]
@@ -124,11 +168,19 @@ namespace System.Xml.Tests
         public void EOF_Handling_01(XmlWriterUtils utils)
         {
             XmlWriterSettings wSettings = new XmlWriterSettings();
-            CError.Compare(wSettings.NewLineHandling, NewLineHandling.Replace, "Incorrect default value for XmlWriterSettings.NewLineHandling");
+            CError.Compare(
+                wSettings.NewLineHandling,
+                NewLineHandling.Replace,
+                "Incorrect default value for XmlWriterSettings.NewLineHandling"
+            );
 
             XmlWriter w = utils.CreateWriter();
             w.Dispose();
-            CError.Compare(w.Settings.NewLineHandling, NewLineHandling.Replace, "Incorrect default value for XmlWriter.Settings.NewLineHandling");
+            CError.Compare(
+                w.Settings.NewLineHandling,
+                NewLineHandling.Replace,
+                "Incorrect default value for XmlWriter.Settings.NewLineHandling"
+            );
         }
 
         [Theory]
@@ -142,7 +194,11 @@ namespace System.Xml.Tests
             wSettings.NewLineHandling = nlHandling;
             XmlWriter w = CreateMemWriter(utils, wSettings);
             CError.Compare(w != null, "XmlWriter creation failed");
-            CError.Compare(w.Settings.NewLineHandling, nlHandling, "Invalid NewLineHandling assignment");
+            CError.Compare(
+                w.Settings.NewLineHandling,
+                nlHandling,
+                "Invalid NewLineHandling assignment"
+            );
             w.Dispose();
 
             return;
@@ -164,7 +220,9 @@ namespace System.Xml.Tests
             XmlWriter w = CreateMemWriter(utils, wSettings);
             w.WriteElementString("root", NewLineCombinations);
             w.Dispose();
-            VerifyOutput("<root>" + ExpectedOutput(NewLineCombinations, nlHandling, false) + "</root>");
+            VerifyOutput(
+                "<root>" + ExpectedOutput(NewLineCombinations, nlHandling, false) + "</root>"
+            );
 
             return;
         }
@@ -177,7 +235,8 @@ namespace System.Xml.Tests
         {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             string NewLineCombinations = "\r \n \r\n \n\r \r\r \n\n \r\n\r \n\r\n";
-            string NewLineEntities = "&#xD; &#xA; &#xD;&#xA; &#xA;&#xD; &#xD;&#xD; &#xA;&#xA; &#xD;&#xA;&#xD; &#xA;&#xD;&#xA;";
+            string NewLineEntities =
+                "&#xD; &#xA; &#xD;&#xA; &#xA;&#xD; &#xD;&#xD; &#xA;&#xA; &#xD;&#xA;&#xD; &#xA;&#xD;&#xA;";
 
             wSettings.NewLineHandling = nlHandling;
 
@@ -186,8 +245,10 @@ namespace System.Xml.Tests
 
             for (int i = 0; i < NewLineCombinations.Length; i++)
             {
-                if (NewLineCombinations[i] == ' ') w.WriteString(" ");
-                else w.WriteCharEntity(NewLineCombinations[i]);
+                if (NewLineCombinations[i] == ' ')
+                    w.WriteString(" ");
+                else
+                    w.WriteCharEntity(NewLineCombinations[i]);
             }
 
             w.WriteEndElement();
@@ -269,7 +330,6 @@ namespace System.Xml.Tests
             return;
         }
 
-
         /*================== Verification in Attributes ==================*/
 
         [Theory]
@@ -288,7 +348,9 @@ namespace System.Xml.Tests
             w.WriteAttributeString("foo", NewLineCombinations);
             w.WriteEndElement();
             w.Dispose();
-            VerifyOutput("<root foo=\"" + ExpectedOutput(NewLineCombinations, nlHandling, true) + "\" />");
+            VerifyOutput(
+                "<root foo=\"" + ExpectedOutput(NewLineCombinations, nlHandling, true) + "\" />"
+            );
 
             return;
         }
@@ -301,7 +363,8 @@ namespace System.Xml.Tests
         {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             string NewLineCombinations = "\r \n \r\n \n\r \r\r \n\n \r\n\r \n\r\n";
-            string NewLineEntities = "&#xD; &#xA; &#xD;&#xA; &#xA;&#xD; &#xD;&#xD; &#xA;&#xA; &#xD;&#xA;&#xD; &#xA;&#xD;&#xA;";
+            string NewLineEntities =
+                "&#xD; &#xA; &#xD;&#xA; &#xA;&#xD; &#xD;&#xD; &#xA;&#xA; &#xD;&#xA;&#xD; &#xA;&#xD;&#xA;";
 
             wSettings.NewLineHandling = nlHandling;
 
@@ -311,14 +374,18 @@ namespace System.Xml.Tests
 
             for (int i = 0; i < NewLineCombinations.Length; i++)
             {
-                if (NewLineCombinations[i] == ' ') w.WriteString(" ");
-                else w.WriteCharEntity(NewLineCombinations[i]);
+                if (NewLineCombinations[i] == ' ')
+                    w.WriteString(" ");
+                else
+                    w.WriteCharEntity(NewLineCombinations[i]);
             }
 
             w.WriteEndAttribute();
             w.WriteEndElement();
             w.Dispose();
-            VerifyOutput("<root foo=\"" + ExpectedOutput(NewLineEntities, nlHandling, true) + "\" />");
+            VerifyOutput(
+                "<root foo=\"" + ExpectedOutput(NewLineEntities, nlHandling, true) + "\" />"
+            );
 
             return;
         }
@@ -399,7 +466,6 @@ namespace System.Xml.Tests
             return;
         }
 
-
         /*================== NewLineChars, IndentChars ==================*/
 
         [Theory]
@@ -414,8 +480,16 @@ namespace System.Xml.Tests
             wSettings.Indent = true;
 
             XmlWriter w = CreateMemWriter(utils, wSettings);
-            CError.Compare(w.Settings.NewLineChars, Environment.NewLine, "Incorrect default value for XmlWriter.Settings.NewLineChars");
-            CError.Compare(w.Settings.IndentChars, "  ", "Incorrect default value for XmlWriter.Settings.IndentChars");
+            CError.Compare(
+                w.Settings.NewLineChars,
+                Environment.NewLine,
+                "Incorrect default value for XmlWriter.Settings.NewLineChars"
+            );
+            CError.Compare(
+                w.Settings.IndentChars,
+                "  ",
+                "Incorrect default value for XmlWriter.Settings.IndentChars"
+            );
 
             w.WriteStartElement("root");
             w.WriteStartElement("foo");
@@ -424,23 +498,78 @@ namespace System.Xml.Tests
             w.WriteEndElement();
             w.Dispose();
 
-            VerifyOutput(string.Format("<root>{0}  <foo>{0}    <bar />{0}  </foo>{0}</root>", Environment.NewLine));
+            VerifyOutput(
+                string.Format(
+                    "<root>{0}  <foo>{0}    <bar />{0}  </foo>{0}</root>",
+                    Environment.NewLine
+                )
+            );
         }
 
         [Theory]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\r", "  " )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\r", "  " )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\r", "  " )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "&#xA;", "  " )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "&#xA;", "  " )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "&#xA;", "  " )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\r", "\n" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\r", "\n" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\r", "\n" )]
-        public void EOF_Handling_13(XmlWriterUtils utils, NewLineHandling nlHandling, string newLineChars, string indentChars)
-        {
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\r",
+            "  "
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\r",
+            "  "
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\r",
+            "  "
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "&#xA;",
+            "  "
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "&#xA;",
+            "  "
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "&#xA;",
+            "  "
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\r",
+            "\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\r",
+            "\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\r",
+            "\n"
+        )]
+        public void EOF_Handling_13(
+            XmlWriterUtils utils,
+            NewLineHandling nlHandling,
+            string newLineChars,
+            string indentChars
+        ) {
             XmlWriterSettings wSettings = new XmlWriterSettings();
-            string PrototypeOutput = "<root>&NewLine&Indent<foo>&NewLine&Indent&Indent<bar />&NewLine&Indent</foo>&NewLine</root>";
+            string PrototypeOutput =
+                "<root>&NewLine&Indent<foo>&NewLine&Indent&Indent<bar />&NewLine&Indent</foo>&NewLine</root>";
 
             wSettings.NewLineHandling = nlHandling;
             wSettings.Indent = true;
@@ -455,23 +584,64 @@ namespace System.Xml.Tests
             w.WriteEndElement();
             w.Dispose();
 
-            VerifyOutput(PrototypeOutput.Replace("&NewLine", newLineChars).Replace("&Indent", indentChars));
+            VerifyOutput(
+                PrototypeOutput.Replace("&NewLine", newLineChars).Replace("&Indent", indentChars)
+            );
 
             return;
         }
 
         [Theory]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\r\n" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\r\n" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\r\n" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\r" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\r" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\r" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "---" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "---" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "---" )]
-        public void EOF_Handling_14(XmlWriterUtils utils, NewLineHandling nlHandling, string newLineChars)
-        {
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "---"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "---"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "---"
+        )]
+        public void EOF_Handling_14(
+            XmlWriterUtils utils,
+            NewLineHandling nlHandling,
+            string newLineChars
+        ) {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             string PrototypeOutput = "<root>foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo</root>";
 
@@ -486,21 +656,64 @@ namespace System.Xml.Tests
             if (nlHandling == NewLineHandling.Replace)
                 VerifyOutput(PrototypeOutput.Replace("&NewLine", newLineChars));
             else
-                VerifyOutput("<root>" + ExpectedOutput("foo\r\nfoo\nfoo\rfoo\tfoo", nlHandling, false) + "</root>");
+                VerifyOutput(
+                    "<root>"
+                        + ExpectedOutput("foo\r\nfoo\nfoo\rfoo\tfoo", nlHandling, false)
+                        + "</root>"
+                );
         }
 
         [Theory]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\r\n" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\r\n" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\r\n" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\r" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\r" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\r" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "---" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "---" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "---" )]
-        public void EOF_Handling_15(XmlWriterUtils utils, NewLineHandling nlHandling, string newLineChars)
-        {
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "---"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "---"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "---"
+        )]
+        public void EOF_Handling_15(
+            XmlWriterUtils utils,
+            NewLineHandling nlHandling,
+            string newLineChars
+        ) {
             XmlWriterSettings wSettings = new XmlWriterSettings();
 
             wSettings.NewLineHandling = nlHandling;
@@ -513,21 +726,64 @@ namespace System.Xml.Tests
             w.WriteEndElement();
             w.Dispose();
 
-            VerifyOutput("<root foo=\"" + ExpectedOutput("foo\r\nfoo\nfoo\rfoo\tfoo", nlHandling, true) + "\" />");
+            VerifyOutput(
+                "<root foo=\""
+                    + ExpectedOutput("foo\r\nfoo\nfoo\rfoo\tfoo", nlHandling, true)
+                    + "\" />"
+            );
         }
 
         [Theory]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\r\n")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\r\n")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\r\n")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\r")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\r")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\r")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "---")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "---")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "---")]
-        public void EOF_Handling_16(XmlWriterUtils utils, NewLineHandling nlHandling, string newLineChars)
-        {
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "---"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "---"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "---"
+        )]
+        public void EOF_Handling_16(
+            XmlWriterUtils utils,
+            NewLineHandling nlHandling,
+            string newLineChars
+        ) {
             XmlWriterSettings wSettings = new XmlWriterSettings();
             string PrototypeOutput = "<root&NewLine  foo=\"fooval\"&NewLine  bar=\"barval\" />";
 
@@ -546,13 +802,21 @@ namespace System.Xml.Tests
             VerifyOutput(PrototypeOutput.Replace("&NewLine", newLineChars));
         }
 
-
         /*================== Other types of nodes ==================*/
 
         [Theory]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting, NewLineHandling.Entitize)]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting, NewLineHandling.Replace)]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting, NewLineHandling.None)]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting,
+            NewLineHandling.Entitize
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting,
+            NewLineHandling.Replace
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting,
+            NewLineHandling.None
+        )]
         public void EOF_Handling_17(XmlWriterUtils utils, NewLineHandling nlHandling)
         {
             XmlWriterSettings wSettings = new XmlWriterSettings();
@@ -573,27 +837,93 @@ namespace System.Xml.Tests
             // Inside Comments and CDATA blocks NewLines are never entitized (needs spec BUG)
             string expOut;
             if (nlHandling == NewLineHandling.Entitize)
-                expOut = "<root><![CDATA[" + NewLines + "]]>" + ExpectedOutput(NewLines, NewLineHandling.Entitize, false) + "</root>" + "<?pi " + NewLines + "?>" + ExpectedOutput(NewLines, NewLineHandling.Entitize, false) + "<!--" + NewLines + "-->";
+                expOut =
+                    "<root><![CDATA["
+                    + NewLines
+                    + "]]>"
+                    + ExpectedOutput(NewLines, NewLineHandling.Entitize, false)
+                    + "</root>"
+                    + "<?pi "
+                    + NewLines
+                    + "?>"
+                    + ExpectedOutput(NewLines, NewLineHandling.Entitize, false)
+                    + "<!--"
+                    + NewLines
+                    + "-->";
             else
-                expOut = ExpectedOutput("<root><![CDATA[" + NewLines + "]]>" + NewLines + "</root><?pi " + NewLines + "?>" + NewLines + "<!--" + NewLines + "-->", nlHandling, false);
+                expOut = ExpectedOutput(
+                    "<root><![CDATA["
+                        + NewLines
+                        + "]]>"
+                        + NewLines
+                        + "</root><?pi "
+                        + NewLines
+                        + "?>"
+                        + NewLines
+                        + "<!--"
+                        + NewLines
+                        + "-->",
+                    nlHandling,
+                    false
+                );
 
             VerifyOutput(expOut);
         }
 
         [Theory]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\r\n")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\r\n")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\r\n")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\r")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\r")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\r")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "---")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "---")]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "---")]
-        public void EOF_Handling_18(XmlWriterUtils utils, NewLineHandling nlHandling, string newLineChars)
-        {
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\r\n"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\r"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "---"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "---"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "---"
+        )]
+        public void EOF_Handling_18(
+            XmlWriterUtils utils,
+            NewLineHandling nlHandling,
+            string newLineChars
+        ) {
             XmlWriterSettings wSettings = new XmlWriterSettings();
-            string PrototypeOutput = "<root><![CDATA[foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo]]></root>&NewLine<?pi foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo?>&NewLine<!--foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo-->";
+            string PrototypeOutput =
+                "<root><![CDATA[foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo]]></root>&NewLine<?pi foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo?>&NewLine<!--foo&NewLinefoo&NewLinefoo&NewLinefoo\tfoo-->";
 
             wSettings.NewLineHandling = nlHandling;
             wSettings.Indent = true;
@@ -610,15 +940,29 @@ namespace System.Xml.Tests
             if (nlHandling == NewLineHandling.Replace)
                 VerifyOutput(PrototypeOutput.Replace("&NewLine", newLineChars));
             else
-                VerifyOutput("<root><![CDATA[foo\r\nfoo\nfoo\rfoo\tfoo]]></root>&NewLine<?pi foo\r\nfoo\nfoo\rfoo\tfoo?>&NewLine<!--foo\r\nfoo\nfoo\rfoo\tfoo-->".Replace("&NewLine", newLineChars));
+                VerifyOutput(
+                    "<root><![CDATA[foo\r\nfoo\nfoo\rfoo\tfoo]]></root>&NewLine<?pi foo\r\nfoo\nfoo\rfoo\tfoo?>&NewLine<!--foo\r\nfoo\nfoo\rfoo\tfoo-->".Replace(
+                        "&NewLine",
+                        newLineChars
+                    )
+                );
 
             return;
         }
 
         [Theory]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting, NewLineHandling.Entitize)]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting, NewLineHandling.Replace)]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting, NewLineHandling.None)]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting,
+            NewLineHandling.Entitize
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting,
+            NewLineHandling.Replace
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom & WriterType.AllButIndenting,
+            NewLineHandling.None
+        )]
         public void EOF_Handling_19(XmlWriterUtils utils, NewLineHandling nlHandling)
         {
             XmlWriterSettings wSettings = new XmlWriterSettings();
@@ -643,9 +987,35 @@ namespace System.Xml.Tests
 
             string expOut;
             if (nlHandling == NewLineHandling.Entitize)
-                expOut = "<root><![CDATA[" + NewLines + "]]>" + ExpectedOutput(NewLines, NewLineHandling.Entitize, false) + "</root>" + "<?pi " + NewLines + "?>" + ExpectedOutput(NewLines, NewLineHandling.Entitize, false) + "<!--" + NewLines + "-->";
+                expOut =
+                    "<root><![CDATA["
+                    + NewLines
+                    + "]]>"
+                    + ExpectedOutput(NewLines, NewLineHandling.Entitize, false)
+                    + "</root>"
+                    + "<?pi "
+                    + NewLines
+                    + "?>"
+                    + ExpectedOutput(NewLines, NewLineHandling.Entitize, false)
+                    + "<!--"
+                    + NewLines
+                    + "-->";
             else
-                expOut = ExpectedOutput("<root><![CDATA[" + NewLines + "]]>" + NewLines + "</root><?pi " + NewLines + "?>" + NewLines + "<!--" + NewLines + "-->", NewLineHandling.Replace, false);
+                expOut = ExpectedOutput(
+                    "<root><![CDATA["
+                        + NewLines
+                        + "]]>"
+                        + NewLines
+                        + "</root><?pi "
+                        + NewLines
+                        + "?>"
+                        + NewLines
+                        + "<!--"
+                        + NewLines
+                        + "-->",
+                    NewLineHandling.Replace,
+                    false
+                );
 
             VerifyOutput(expOut);
             return;
@@ -669,33 +1039,92 @@ namespace System.Xml.Tests
             XmlWriterSettings ws = new XmlWriterSettings();
             switch (param)
             {
-                case 1: ws.IndentChars = ""; break;
-                case 2: ws.NewLineChars = ""; break;
-                case 3: ws.IndentChars = "    "; break;
-                case 4: ws.NewLineChars = "   "; break;
-                case 5: ws.IndentChars = "  @  "; break;
-                case 6: ws.NewLineChars = "  @  "; break;
-                case 7: ws.IndentChars = "2"; break;
-                case 8: ws.NewLineChars = "2"; break;
-                case 9: ws.IndentChars = " a "; break;
-                case 10: ws.NewLineChars = " a "; break;
-                case 11: ws.Indent = true; break;
-                case 12: ws.Indent = false; break;
+                case 1:
+                    ws.IndentChars = "";
+                    break;
+                case 2:
+                    ws.NewLineChars = "";
+                    break;
+                case 3:
+                    ws.IndentChars = "    ";
+                    break;
+                case 4:
+                    ws.NewLineChars = "   ";
+                    break;
+                case 5:
+                    ws.IndentChars = "  @  ";
+                    break;
+                case 6:
+                    ws.NewLineChars = "  @  ";
+                    break;
+                case 7:
+                    ws.IndentChars = "2";
+                    break;
+                case 8:
+                    ws.NewLineChars = "2";
+                    break;
+                case 9:
+                    ws.IndentChars = " a ";
+                    break;
+                case 10:
+                    ws.NewLineChars = " a ";
+                    break;
+                case 11:
+                    ws.Indent = true;
+                    break;
+                case 12:
+                    ws.Indent = false;
+                    break;
             }
             return;
         }
 
         [Theory]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "\uD800\uDC00", "\uD800\uDC00" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "\uD800\uDC00", "\uD800\uDC00" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "\uD800\uDC00", "\uD800\uDC00" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Entitize, "&lt;&gt;", "&lt;&gt;" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.Replace, "&lt;&gt;", "&lt;&gt;" )]
-        [XmlWriterInlineData(~WriterType.Async & WriterType.AllButCustom, NewLineHandling.None, "&lt;&gt;", "&lt;&gt;" )]
-        public void EOF_Handling_21(XmlWriterUtils utils, NewLineHandling nlHandling, string newLineChars, string indentChars)
-        {
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "\uD800\uDC00",
+            "\uD800\uDC00"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "\uD800\uDC00",
+            "\uD800\uDC00"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "\uD800\uDC00",
+            "\uD800\uDC00"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Entitize,
+            "&lt;&gt;",
+            "&lt;&gt;"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.Replace,
+            "&lt;&gt;",
+            "&lt;&gt;"
+        )]
+        [XmlWriterInlineData(
+            ~WriterType.Async & WriterType.AllButCustom,
+            NewLineHandling.None,
+            "&lt;&gt;",
+            "&lt;&gt;"
+        )]
+        public void EOF_Handling_21(
+            XmlWriterUtils utils,
+            NewLineHandling nlHandling,
+            string newLineChars,
+            string indentChars
+        ) {
             XmlWriterSettings wSettings = new XmlWriterSettings();
-            string PrototypeOutput = "<root>&NewLine&Indent<foo>&NewLine&Indent&Indent<bar />&NewLine&Indent</foo>&NewLine</root>";
+            string PrototypeOutput =
+                "<root>&NewLine&Indent<foo>&NewLine&Indent&Indent<bar />&NewLine&Indent</foo>&NewLine</root>";
 
             wSettings.NewLineHandling = nlHandling;
             wSettings.Indent = true;
@@ -710,7 +1139,9 @@ namespace System.Xml.Tests
             w.WriteEndElement();
             w.Dispose();
 
-            VerifyOutput(PrototypeOutput.Replace("&NewLine", newLineChars).Replace("&Indent", indentChars));
+            VerifyOutput(
+                PrototypeOutput.Replace("&NewLine", newLineChars).Replace("&Indent", indentChars)
+            );
             return;
         }
 
@@ -733,7 +1164,11 @@ namespace System.Xml.Tests
                 w.WriteStartElement("foo");
                 w.Dispose();
             }
-            catch (ArgumentException e) { CError.WriteLine(e.Message); return; }
+            catch (ArgumentException e)
+            {
+                CError.WriteLine(e.Message);
+                return;
+            }
             Assert.True(false);
         }
     }

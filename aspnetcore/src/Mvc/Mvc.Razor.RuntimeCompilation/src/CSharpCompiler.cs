@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         public CSharpCompiler(RazorReferenceManager manager, IWebHostEnvironment hostingEnvironment)
         {
             _referenceManager = manager ?? throw new ArgumentNullException(nameof(manager));
-            _hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+            _hostingEnvironment =
+                hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
         }
 
         public virtual CSharpParseOptions ParseOptions
@@ -71,9 +72,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
         public SyntaxTree CreateSyntaxTree(SourceText sourceText)
         {
-            return CSharpSyntaxTree.ParseText(
-                sourceText,
-                options: ParseOptions);
+            return CSharpSyntaxTree.ParseText(sourceText, options: ParseOptions);
         }
 
         public CSharpCompilation CreateCompilation(string assemblyName)
@@ -81,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             return CSharpCompilation.Create(
                 assemblyName,
                 options: CSharpCompilationOptions,
-                references: _referenceManager.CompilationReferences);
+                references: _referenceManager.CompilationReferences
+            );
         }
 
         // Internal for unit testing.
@@ -89,7 +89,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         {
             if (!string.IsNullOrEmpty(_hostingEnvironment.ApplicationName))
             {
-                var applicationAssembly = Assembly.Load(new AssemblyName(_hostingEnvironment.ApplicationName));
+                var applicationAssembly = Assembly.Load(
+                    new AssemblyName(_hostingEnvironment.ApplicationName)
+                );
                 var dependencyContext = DependencyContext.Load(applicationAssembly);
                 if (dependencyContext?.CompilationOptions != null)
                 {
@@ -106,15 +108,19 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             {
                 var dependencyContextOptions = GetDependencyContextCompilationOptions();
                 _parseOptions = GetParseOptions(_hostingEnvironment, dependencyContextOptions);
-                _compilationOptions = GetCompilationOptions(_hostingEnvironment, dependencyContextOptions);
+                _compilationOptions = GetCompilationOptions(
+                    _hostingEnvironment,
+                    dependencyContextOptions
+                );
                 _emitOptions = GetEmitOptions(dependencyContextOptions);
 
                 _optionsInitialized = true;
             }
         }
 
-        private EmitOptions GetEmitOptions(DependencyContextCompilationOptions dependencyContextOptions)
-        {
+        private EmitOptions GetEmitOptions(
+            DependencyContextCompilationOptions dependencyContextOptions
+        ) {
             // Assume we're always producing pdbs unless DebugType = none
             _emitPdb = true;
             DebugInformationFormat debugInformationFormat;
@@ -145,7 +151,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                         debugInformationFormat = DebugInformationFormat.PortablePdb;
                         break;
                     default:
-                        throw new InvalidOperationException(Resources.FormatUnsupportedDebugInformationFormat(dependencyContextOptions.DebugType));
+                        throw new InvalidOperationException(
+                            Resources.FormatUnsupportedDebugInformationFormat(
+                                dependencyContextOptions.DebugType
+                            )
+                        );
                 }
             }
 
@@ -155,46 +165,54 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
         private static CSharpCompilationOptions GetCompilationOptions(
             IWebHostEnvironment hostingEnvironment,
-            DependencyContextCompilationOptions dependencyContextOptions)
-        {
-            var csharpCompilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
+            DependencyContextCompilationOptions dependencyContextOptions
+        ) {
+            var csharpCompilationOptions = new CSharpCompilationOptions(
+                OutputKind.DynamicallyLinkedLibrary
+            );
 
             // Disable 1702 until roslyn turns this off by default
             csharpCompilationOptions = csharpCompilationOptions.WithSpecificDiagnosticOptions(
                 new Dictionary<string, ReportDiagnostic>
                 {
-                    {"CS1701", ReportDiagnostic.Suppress}, // Binding redirects
-                    {"CS1702", ReportDiagnostic.Suppress},
-                    {"CS1705", ReportDiagnostic.Suppress}
-                });
+                    { "CS1701", ReportDiagnostic.Suppress }, // Binding redirects
+                    { "CS1702", ReportDiagnostic.Suppress },
+                    { "CS1705", ReportDiagnostic.Suppress }
+                }
+            );
 
             if (dependencyContextOptions.AllowUnsafe.HasValue)
             {
                 csharpCompilationOptions = csharpCompilationOptions.WithAllowUnsafe(
-                    dependencyContextOptions.AllowUnsafe.Value);
+                    dependencyContextOptions.AllowUnsafe.Value
+                );
             }
 
             OptimizationLevel optimizationLevel;
             if (dependencyContextOptions.Optimize.HasValue)
             {
-                optimizationLevel = dependencyContextOptions.Optimize.Value ?
-                    OptimizationLevel.Release :
-                    OptimizationLevel.Debug;
+                optimizationLevel = dependencyContextOptions.Optimize.Value
+                    ? OptimizationLevel.Release
+                    : OptimizationLevel.Debug;
             }
             else
             {
-                optimizationLevel = hostingEnvironment.IsDevelopment() ?
-                    OptimizationLevel.Debug :
-                    OptimizationLevel.Release;
+                optimizationLevel = hostingEnvironment.IsDevelopment()
+                    ? OptimizationLevel.Debug
+                    : OptimizationLevel.Release;
             }
-            csharpCompilationOptions = csharpCompilationOptions.WithOptimizationLevel(optimizationLevel);
+            csharpCompilationOptions = csharpCompilationOptions.WithOptimizationLevel(
+                optimizationLevel
+            );
 
             if (dependencyContextOptions.WarningsAsErrors.HasValue)
             {
-                var reportDiagnostic = dependencyContextOptions.WarningsAsErrors.Value ?
-                    ReportDiagnostic.Error :
-                    ReportDiagnostic.Default;
-                csharpCompilationOptions = csharpCompilationOptions.WithGeneralDiagnosticOption(reportDiagnostic);
+                var reportDiagnostic = dependencyContextOptions.WarningsAsErrors.Value
+                    ? ReportDiagnostic.Error
+                    : ReportDiagnostic.Default;
+                csharpCompilationOptions = csharpCompilationOptions.WithGeneralDiagnosticOption(
+                    reportDiagnostic
+                );
             }
 
             return csharpCompilationOptions;
@@ -202,8 +220,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
         private static CSharpParseOptions GetParseOptions(
             IWebHostEnvironment hostingEnvironment,
-            DependencyContextCompilationOptions dependencyContextOptions)
-        {
+            DependencyContextCompilationOptions dependencyContextOptions
+        ) {
             var configurationSymbol = hostingEnvironment.IsDevelopment() ? "DEBUG" : "RELEASE";
             var defines = dependencyContextOptions.Defines.Concat(new[] { configurationSymbol });
 
@@ -214,13 +232,19 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 // If the user does not specify a LanguageVersion, assume CSharp 8.0. This matches the language version Razor 3.0 targets by default.
                 parseOptions = parseOptions.WithLanguageVersion(LanguageVersion.CSharp8);
             }
-            else if (LanguageVersionFacts.TryParse(dependencyContextOptions.LanguageVersion, out var languageVersion))
-            {
+            else if (
+                LanguageVersionFacts.TryParse(
+                    dependencyContextOptions.LanguageVersion,
+                    out var languageVersion
+                )
+            ) {
                 parseOptions = parseOptions.WithLanguageVersion(languageVersion);
             }
             else
             {
-                Debug.Fail($"LanguageVersion {languageVersion} specified in the deps file could not be parsed.");
+                Debug.Fail(
+                    $"LanguageVersion {languageVersion} specified in the deps file could not be parsed."
+                );
             }
 
             return parseOptions;

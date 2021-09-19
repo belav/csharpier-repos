@@ -14,15 +14,19 @@ namespace Internal.IL
     {
         private MethodIL TryGetIntrinsicMethodILForActivator(MethodDesc method)
         {
-            if (method.Instantiation.Length == 1
+            if (
+                method.Instantiation.Length == 1
                 && method.Signature.Length == 0
-                && method.Name == "CreateInstance")
-            {
+                && method.Name == "CreateInstance"
+            ) {
                 TypeDesc type = method.Instantiation[0];
                 if (type.IsValueType && type.GetParameterlessConstructor() == null)
                 {
                     // Replace the body with implementation that just returns "default"
-                    MethodDesc createDefaultInstance = method.OwningType.GetKnownMethod("CreateDefaultInstance", method.GetTypicalMethodDefinition().Signature);
+                    MethodDesc createDefaultInstance = method.OwningType.GetKnownMethod(
+                        "CreateDefaultInstance",
+                        method.GetTypicalMethodDefinition().Signature
+                    );
                     return GetMethodIL(createDefaultInstance.MakeInstantiatedMethod(type));
                 }
             }
@@ -41,8 +45,10 @@ namespace Internal.IL
             if (mdType == null)
                 return null;
 
-            if (mdType.Name == "RuntimeHelpers" && mdType.Namespace == "System.Runtime.CompilerServices")
-            {
+            if (
+                mdType.Name == "RuntimeHelpers"
+                && mdType.Namespace == "System.Runtime.CompilerServices"
+            ) {
                 return RuntimeHelpersIntrinsics.EmitIL(method);
             }
 
@@ -51,8 +57,10 @@ namespace Internal.IL
                 return UnsafeIntrinsics.EmitIL(method);
             }
 
-            if (mdType.Name == "MemoryMarshal" && mdType.Namespace == "System.Runtime.InteropServices")
-            {
+            if (
+                mdType.Name == "MemoryMarshal"
+                && mdType.Namespace == "System.Runtime.InteropServices"
+            ) {
                 return MemoryMarshalIntrinsics.EmitIL(method);
             }
 
@@ -80,8 +88,10 @@ namespace Internal.IL
             if (mdType == null)
                 return null;
 
-            if (mdType.Name == "RuntimeHelpers" && mdType.Namespace == "System.Runtime.CompilerServices")
-            {
+            if (
+                mdType.Name == "RuntimeHelpers"
+                && mdType.Namespace == "System.Runtime.CompilerServices"
+            ) {
                 return RuntimeHelpersIntrinsics.EmitIL(method);
             }
 

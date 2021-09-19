@@ -24,8 +24,11 @@ namespace System
             return ret;
         }
 
-        internal static int GetInt32Config(string configName, int defaultValue, bool allowNegative = true)
-        {
+        internal static int GetInt32Config(
+            string configName,
+            int defaultValue,
+            bool allowNegative = true
+        ) {
             try
             {
                 object? config = AppContext.GetData(configName);
@@ -49,7 +52,11 @@ namespace System
                         }
                         else
                         {
-                            result = int.Parse(str, NumberStyles.AllowLeadingSign, NumberFormatInfo.InvariantInfo);
+                            result = int.Parse(
+                                str,
+                                NumberStyles.AllowLeadingSign,
+                                NumberFormatInfo.InvariantInfo
+                            );
                         }
                         break;
                     case IConvertible convertible:
@@ -68,9 +75,11 @@ namespace System
             }
         }
 
-
-        internal static short GetInt16Config(string configName, short defaultValue, bool allowNegative = true)
-        {
+        internal static short GetInt16Config(
+            string configName,
+            short defaultValue,
+            bool allowNegative = true
+        ) {
             try
             {
                 object? config = AppContext.GetData(configName);
@@ -78,14 +87,14 @@ namespace System
                 switch (config)
                 {
                     case uint value:
+                    {
+                        result = (short)value;
+                        if ((uint)result != value)
                         {
-                            result = (short)value;
-                            if ((uint)result != value)
-                            {
-                                return defaultValue; // overflow
-                            }
-                            break;
+                            return defaultValue; // overflow
                         }
+                        break;
+                    }
                     case string str:
                         if (str.StartsWith("0x"))
                         {
@@ -97,7 +106,11 @@ namespace System
                         }
                         else
                         {
-                            result = short.Parse(str, NumberStyles.AllowLeadingSign, NumberFormatInfo.InvariantInfo);
+                            result = short.Parse(
+                                str,
+                                NumberStyles.AllowLeadingSign,
+                                NumberFormatInfo.InvariantInfo
+                            );
                         }
                         break;
                     case IConvertible convertible:

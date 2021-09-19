@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
     {
         private static class ColorSchemeReader
         {
-            private static readonly XmlReaderSettings s_xmlSettings = new() { DtdProcessing = DtdProcessing.Prohibit };
+            private static readonly XmlReaderSettings s_xmlSettings =
+                new() { DtdProcessing = DtdProcessing.Prohibit };
             private const string RawColorType = nameof(__VSCOLORTYPE.CT_RAW);
             private const string SystemColorType = nameof(__VSCOLORTYPE.CT_SYSCOLOR);
 
@@ -27,9 +28,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 using var xmlReader = XmlReader.Create(schemeStream, s_xmlSettings);
                 var schemeDocument = XDocument.Load(xmlReader);
 
-                var themes = schemeDocument
-                    .Descendants("Theme")
-                    .Select(ReadColorTheme);
+                var themes = schemeDocument.Descendants("Theme").Select(ReadColorTheme);
 
                 return new ColorScheme(themes.ToImmutableArray());
             }
@@ -50,8 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 var categoryName = (string)categoryElement.Attribute("Name");
                 var categoryGuid = Guid.Parse((string)categoryElement.Attribute("GUID"));
 
-                var colorItems = categoryElement
-                    .Descendants("Color")
+                var colorItems = categoryElement.Descendants("Color")
                     .Select(ReadColorItem)
                     .WhereNotNull();
 
@@ -63,21 +61,29 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 var name = (string)colorElement.Attribute("Name");
 
                 var backgroundElement = colorElement.Descendants("Background").SingleOrDefault();
-                (var backgroundType, var backgroundColor) = backgroundElement is object
-                    ? ReadColor(backgroundElement)
-                    : (__VSCOLORTYPE.CT_INVALID, (uint?)null);
+                (var backgroundType, var backgroundColor) =
+                    backgroundElement is object
+                        ? ReadColor(backgroundElement)
+                        : (__VSCOLORTYPE.CT_INVALID, (uint?)null);
 
                 var foregroundElement = colorElement.Descendants("Foreground").SingleOrDefault();
-                (var foregroundType, var foregroundColor) = foregroundElement is object
-                    ? ReadColor(foregroundElement)
-                    : (__VSCOLORTYPE.CT_INVALID, (uint?)null);
+                (var foregroundType, var foregroundColor) =
+                    foregroundElement is object
+                        ? ReadColor(foregroundElement)
+                        : (__VSCOLORTYPE.CT_INVALID, (uint?)null);
 
                 if (backgroundElement is null && foregroundElement is null)
                 {
                     return null;
                 }
 
-                return new ColorItem(name, backgroundType, backgroundColor, foregroundType, foregroundColor);
+                return new ColorItem(
+                    name,
+                    backgroundType,
+                    backgroundColor,
+                    foregroundType,
+                    foregroundColor
+                );
             }
 
             private static (__VSCOLORTYPE Type, uint Color) ReadColor(XElement colorElement)

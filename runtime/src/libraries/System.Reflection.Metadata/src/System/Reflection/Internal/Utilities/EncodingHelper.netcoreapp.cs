@@ -16,8 +16,12 @@ namespace System.Reflection.Internal
     /// </summary>
     internal static unsafe class EncodingHelper
     {
-        public static string DecodeUtf8(byte* bytes, int byteCount, byte[]? prefix, MetadataStringDecoder utf8Decoder)
-        {
+        public static string DecodeUtf8(
+            byte* bytes,
+            int byteCount,
+            byte[]? prefix,
+            MetadataStringDecoder utf8Decoder
+        ) {
             Debug.Assert(utf8Decoder != null);
 
             if (prefix != null)
@@ -33,8 +37,12 @@ namespace System.Reflection.Internal
             return utf8Decoder.GetString(bytes, byteCount);
         }
 
-        private static string DecodeUtf8Prefixed(byte* bytes, int byteCount, byte[] prefix, MetadataStringDecoder utf8Decoder)
-        {
+        private static string DecodeUtf8Prefixed(
+            byte* bytes,
+            int byteCount,
+            byte[] prefix,
+            MetadataStringDecoder utf8Decoder
+        ) {
             Debug.Assert(utf8Decoder != null);
 
             int prefixedByteCount = byteCount + prefix.Length;

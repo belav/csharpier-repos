@@ -18,12 +18,19 @@ namespace Microsoft.CodeAnalysis.Formatting
     /// this object is supposed to be live very short but created a lot of time. that is why it is struct. 
     /// (same reason why SyntaxToken is struct - to reduce heap allocation)
     /// </summary>
-    internal readonly struct TokenData : IEqualityComparer<TokenData>, IEquatable<TokenData>, IComparable<TokenData>, IComparer<TokenData>
+    internal readonly struct TokenData
+        : IEqualityComparer<TokenData>,
+          IEquatable<TokenData>,
+          IComparable<TokenData>,
+          IComparer<TokenData>
     {
         public TokenData(TokenStream tokenStream, int indexInStream, SyntaxToken token)
         {
             Contract.ThrowIfNull(tokenStream);
-            Contract.ThrowIfFalse((indexInStream == -1) || (0 <= indexInStream && indexInStream < tokenStream.TokenCount));
+            Contract.ThrowIfFalse(
+                (indexInStream == -1)
+                    || (0 <= indexInStream && indexInStream < tokenStream.TokenCount)
+            );
 
             this.TokenStream = tokenStream;
             this.IndexInStream = indexInStream;
@@ -34,25 +41,19 @@ namespace Microsoft.CodeAnalysis.Formatting
         public int IndexInStream { get; }
         public SyntaxToken Token { get; }
 
-        public TokenData GetPreviousTokenData()
-            => this.TokenStream.GetPreviousTokenData(this);
+        public TokenData GetPreviousTokenData() => this.TokenStream.GetPreviousTokenData(this);
 
-        public TokenData GetNextTokenData()
-            => this.TokenStream.GetNextTokenData(this);
+        public TokenData GetNextTokenData() => this.TokenStream.GetNextTokenData(this);
 
-        public bool Equals(TokenData x, TokenData y)
-            => x.Equals(y);
+        public bool Equals(TokenData x, TokenData y) => x.Equals(y);
 
-        public int GetHashCode(TokenData obj)
-            => obj.GetHashCode();
+        public int GetHashCode(TokenData obj) => obj.GetHashCode();
 
-        public override int GetHashCode()
-            => this.Token.GetHashCode();
+        public override int GetHashCode() => this.Token.GetHashCode();
 
         public override bool Equals(object? obj)
         {
-            return obj is TokenData data &&
-                   this.Equals(data);
+            return obj is TokenData data && this.Equals(data);
         }
 
         public bool Equals(TokenData other)
@@ -70,8 +71,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             return this.Token.Equals(other.Token);
         }
 
-        public int Compare(TokenData x, TokenData y)
-            => x.CompareTo(y);
+        public int Compare(TokenData x, TokenData y) => x.CompareTo(y);
 
         public int CompareTo(TokenData other)
         {
@@ -124,16 +124,12 @@ namespace Microsoft.CodeAnalysis.Formatting
             return -1;
         }
 
-        public static bool operator <(TokenData left, TokenData right)
-            => left.CompareTo(right) < 0;
+        public static bool operator <(TokenData left, TokenData right) => left.CompareTo(right) < 0;
 
-        public static bool operator >(TokenData left, TokenData right)
-            => left.CompareTo(right) > 0;
+        public static bool operator >(TokenData left, TokenData right) => left.CompareTo(right) > 0;
 
-        public static bool operator ==(TokenData left, TokenData right)
-            => left.Equals(right);
+        public static bool operator ==(TokenData left, TokenData right) => left.Equals(right);
 
-        public static bool operator !=(TokenData left, TokenData right)
-            => left.Equals(right);
+        public static bool operator !=(TokenData left, TokenData right) => left.Equals(right);
     }
 }

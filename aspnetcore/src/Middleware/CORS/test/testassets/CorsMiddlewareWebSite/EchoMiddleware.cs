@@ -14,9 +14,7 @@ namespace CorsMiddlewareWebSite
         /// Instantiates a new <see cref="EchoMiddleware"/>.
         /// </summary>
         /// <param name="next">The next middleware in the pipeline.</param>
-        public EchoMiddleware(RequestDelegate next)
-        {
-        }
+        public EchoMiddleware(RequestDelegate next) { }
 
         /// <summary>
         /// Echo the request's path in the response. Does not invoke later middleware in the pipeline.
@@ -31,7 +29,8 @@ namespace CorsMiddlewareWebSite
             }
 
             context.Response.ContentType = "text/plain; charset=utf-8";
-            var path = context.Request.PathBase + context.Request.Path + context.Request.QueryString;
+            var path =
+                context.Request.PathBase + context.Request.Path + context.Request.QueryString;
             return context.Response.WriteAsync(path, Encoding.UTF8);
         }
     }

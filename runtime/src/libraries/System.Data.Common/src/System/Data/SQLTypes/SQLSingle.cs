@@ -41,9 +41,7 @@ namespace System.Data.SqlTypes
             }
         }
 
-        public SqlSingle(double value) : this(checked((float)value))
-        {
-        }
+        public SqlSingle(double value) : this(checked((float)value)) { }
 
         // INullable
         public bool IsNull
@@ -88,13 +86,11 @@ namespace System.Data.SqlTypes
                 return new SqlSingle(float.Parse(s, CultureInfo.InvariantCulture));
         }
 
-
         // Unary operators
         public static SqlSingle operator -(SqlSingle x)
         {
             return x.IsNull ? Null : new SqlSingle(-x._value);
         }
-
 
         // Binary operators
 
@@ -154,8 +150,6 @@ namespace System.Data.SqlTypes
             return new SqlSingle(value);
         }
 
-
-
         // Implicit conversions
 
         // Implicit conversion from SqlBoolean to SqlSingle
@@ -204,7 +198,6 @@ namespace System.Data.SqlTypes
             // Will not overflow
             return x.IsNull ? Null : new SqlSingle(x.ToDouble());
         }
-
 
         // Explicit conversions
 
@@ -365,7 +358,6 @@ namespace System.Data.SqlTypes
             return (SqlString)this;
         }
 
-
         // IComparable
         // Compares this object to another object, returning an integer that
         // indicates the relationship.
@@ -393,8 +385,10 @@ namespace System.Data.SqlTypes
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -420,7 +414,10 @@ namespace System.Data.SqlTypes
             return IsNull ? 0 : Value.GetHashCode();
         }
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {

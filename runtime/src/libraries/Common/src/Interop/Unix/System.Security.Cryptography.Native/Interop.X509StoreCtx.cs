@@ -19,10 +19,14 @@ internal static partial class Interop
         internal static extern SafeX509StackHandle X509StoreCtxGetChain(SafeX509StoreCtxHandle ctx);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxGetCurrentCert")]
-        internal static extern SafeX509Handle X509StoreCtxGetCurrentCert(SafeX509StoreCtxHandle ctx);
+        internal static extern SafeX509Handle X509StoreCtxGetCurrentCert(
+            SafeX509StoreCtxHandle ctx
+        );
 
         [DllImport(Libraries.CryptoNative)]
-        private static extern int CryptoNative_X509StoreCtxCommitToChain(SafeX509StoreCtxHandle ctx);
+        private static extern int CryptoNative_X509StoreCtxCommitToChain(
+            SafeX509StoreCtxHandle ctx
+        );
 
         internal static void X509StoreCtxCommitToChain(SafeX509StoreCtxHandle ctx)
         {
@@ -35,12 +39,13 @@ internal static partial class Interop
         [DllImport(Libraries.CryptoNative)]
         private static extern int CryptoNative_X509StoreCtxResetForSignatureError(
             SafeX509StoreCtxHandle ctx,
-            out SafeX509StoreHandle newStore);
+            out SafeX509StoreHandle newStore
+        );
 
         internal static void X509StoreCtxResetForSignatureError(
             SafeX509StoreCtxHandle ctx,
-            out SafeX509StoreHandle? newStore)
-        {
+            out SafeX509StoreHandle? newStore
+        ) {
             if (CryptoNative_X509StoreCtxResetForSignatureError(ctx, out newStore) != 1)
             {
                 newStore.Dispose();
@@ -55,17 +60,24 @@ internal static partial class Interop
             }
         }
 
-        [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxGetSharedUntrusted")]
-        private static extern SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted_private(SafeX509StoreCtxHandle ctx);
+        [DllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_X509StoreCtxGetSharedUntrusted"
+        )]
+        private static extern SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted_private(
+            SafeX509StoreCtxHandle ctx
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_X509StoreCtxGetTargetCert")]
         internal static extern IntPtr X509StoreCtxGetTargetCert(SafeX509StoreCtxHandle ctx);
 
-        internal static SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted(SafeX509StoreCtxHandle ctx)
-        {
+        internal static SafeSharedX509StackHandle X509StoreCtxGetSharedUntrusted(
+            SafeX509StoreCtxHandle ctx
+        ) {
             return SafeInteriorHandle.OpenInteriorHandle(
                 x => X509StoreCtxGetSharedUntrusted_private(x),
-                ctx);
+                ctx
+            );
         }
     }
 }
@@ -74,15 +86,10 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeX509StoreCtxHandle : SafeHandle
     {
-        public SafeX509StoreCtxHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeX509StoreCtxHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
-        internal SafeX509StoreCtxHandle(IntPtr handle, bool ownsHandle) :
-            base(handle, ownsHandle)
-        {
-        }
+        internal SafeX509StoreCtxHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
+        { }
 
         protected override bool ReleaseHandle()
         {

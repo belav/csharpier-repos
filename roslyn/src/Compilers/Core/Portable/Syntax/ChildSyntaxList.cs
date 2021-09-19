@@ -11,7 +11,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public readonly partial struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnlyList<SyntaxNodeOrToken>
+    public readonly partial struct ChildSyntaxList
+        : IEquatable<ChildSyntaxList>,
+          IReadOnlyList<SyntaxNodeOrToken>
     {
         private readonly SyntaxNode? _node;
         private readonly int _count;
@@ -27,10 +29,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
 
         internal static int CountNodes(GreenNode green)
@@ -169,8 +168,10 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Assumes that <paramref name="targetPosition"/> is within the span of <paramref name="node"/>.
         /// </remarks>
-        internal static SyntaxNodeOrToken ChildThatContainsPosition(SyntaxNode node, int targetPosition)
-        {
+        internal static SyntaxNodeOrToken ChildThatContainsPosition(
+            SyntaxNode node,
+            int targetPosition
+        ) {
             // The targetPosition must already be within this node
             Debug.Assert(node.FullSpan.Contains(targetPosition));
 
@@ -185,7 +186,7 @@ namespace Microsoft.CodeAnalysis
             // The max possible number of slots is 11 (TypeDeclarationSyntax)
             // and typically much less than that
             int slot;
-            for (slot = 0; ; slot++)
+            for (slot = 0;; slot++)
             {
                 GreenNode? greenChild = green.GetSlot(slot);
                 if (greenChild != null)
@@ -213,7 +214,6 @@ namespace Microsoft.CodeAnalysis
                 {
                     return red;
                 }
-
                 // Otherwise will have to make a token with current green and position
             }
             else
@@ -229,7 +229,6 @@ namespace Microsoft.CodeAnalysis
                     {
                         return red;
                     }
-
                     // Must be a separator
                 }
 
@@ -297,10 +296,7 @@ namespace Microsoft.CodeAnalysis
         // for debugging
         private SyntaxNodeOrToken[] Nodes
         {
-            get
-            {
-                return this.ToArray();
-            }
+            get { return this.ToArray(); }
         }
 
         public bool Any()
@@ -312,7 +308,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns the first child in the list.
         /// </summary>
         /// <returns>The first child in the list.</returns>
-        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>    
+        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>
         public SyntaxNodeOrToken First()
         {
             if (Any())
@@ -327,7 +323,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns the last child in the list.
         /// </summary>
         /// <returns>The last child in the list.</returns>
-        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>    
+        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>
         public SyntaxNodeOrToken Last()
         {
             if (Any())

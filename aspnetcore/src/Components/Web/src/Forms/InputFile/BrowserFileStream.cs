@@ -33,26 +33,30 @@ namespace Microsoft.AspNetCore.Components.Forms
             set => throw new NotSupportedException();
         }
 
-        public override void Flush()
-            => throw new NotSupportedException();
+        public override void Flush() => throw new NotSupportedException();
 
-        public override int Read(byte[] buffer, int offset, int count)
-            => throw new NotSupportedException("Synchronous reads are not supported.");
+        public override int Read(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException("Synchronous reads are not supported.");
 
-        public override long Seek(long offset, SeekOrigin origin)
-            => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
 
-        public override void SetLength(long value)
-            => throw new NotSupportedException();
+        public override void SetLength(long value) => throw new NotSupportedException();
 
-        public override void Write(byte[] buffer, int offset, int count)
-            => throw new NotSupportedException();
+        public override void Write(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            => ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
 
-        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             int maxBytesToRead = (int)(Length - Position);
 
             if (maxBytesToRead > buffer.Length)
@@ -65,13 +69,21 @@ namespace Microsoft.AspNetCore.Components.Forms
                 return 0;
             }
 
-            var bytesRead = await CopyFileDataIntoBuffer(_position, buffer.Slice(0, maxBytesToRead), cancellationToken);
+            var bytesRead = await CopyFileDataIntoBuffer(
+                _position,
+                buffer.Slice(0, maxBytesToRead),
+                cancellationToken
+            );
 
             _position += bytesRead;
 
             return bytesRead;
         }
 
-        protected abstract ValueTask<int> CopyFileDataIntoBuffer(long sourceOffset, Memory<byte> destination, CancellationToken cancellationToken);
+        protected abstract ValueTask<int> CopyFileDataIntoBuffer(
+            long sourceOffset,
+            Memory<byte> destination,
+            CancellationToken cancellationToken
+        );
     }
 }

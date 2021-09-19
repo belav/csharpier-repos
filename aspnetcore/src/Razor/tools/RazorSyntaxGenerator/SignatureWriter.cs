@@ -58,14 +58,23 @@ namespace RazorSyntaxGenerator
         {
             if (node is AbstractNode abstractNode)
             {
-                _writer.WriteLine("  public abstract partial class {0} : {1}", node.Name, node.Base);
+                _writer.WriteLine(
+                    "  public abstract partial class {0} : {1}",
+                    node.Name,
+                    node.Base
+                );
                 _writer.WriteLine("  {");
                 for (int i = 0, n = abstractNode.Fields.Count; i < n; i++)
                 {
                     var field = abstractNode.Fields[i];
                     if (IsNodeOrNodeList(field.Type))
                     {
-                        _writer.WriteLine("    public abstract {0}{1} {2} {{ get; }}", "", field.Type, field.Name);
+                        _writer.WriteLine(
+                            "    public abstract {0}{1} {2} {{ get; }}",
+                            "",
+                            field.Type,
+                            field.Name
+                        );
                     }
                 }
                 _writer.WriteLine("  }");
@@ -83,13 +92,25 @@ namespace RazorSyntaxGenerator
                 for (int i = 0, n = nodeFields.Count; i < n; i++)
                 {
                     var field = nodeFields[i];
-                    _writer.WriteLine("    public {0}{1}{2} {3} {{ get; }}", "", "", field.Type, field.Name);
+                    _writer.WriteLine(
+                        "    public {0}{1}{2} {3} {{ get; }}",
+                        "",
+                        "",
+                        field.Type,
+                        field.Name
+                    );
                 }
 
                 for (int i = 0, n = valueFields.Count; i < n; i++)
                 {
                     var field = valueFields[i];
-                    _writer.WriteLine("    public {0}{1}{2} {3} {{ get; }}", "", "", field.Type, field.Name);
+                    _writer.WriteLine(
+                        "    public {0}{1}{2} {3} {{ get; }}",
+                        "",
+                        "",
+                        field.Type,
+                        field.Name
+                    );
                 }
 
                 _writer.WriteLine("  }");

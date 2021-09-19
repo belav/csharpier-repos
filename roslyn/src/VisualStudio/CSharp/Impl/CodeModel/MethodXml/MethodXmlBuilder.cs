@@ -15,9 +15,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
     internal class MethodXmlBuilder : AbstractMethodXmlBuilder
     {
         private MethodXmlBuilder(IMethodSymbol symbol, SemanticModel semanticModel)
-            : base(symbol, semanticModel)
-        {
-        }
+            : base(symbol, semanticModel) { }
 
         private void GenerateBlock(BlockSyntax block)
         {
@@ -388,8 +386,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
 
         private bool TryGenerateNewClass(ObjectCreationExpressionSyntax objectCreationExpression)
         {
-            if (!(SemanticModel.GetSymbolInfo(objectCreationExpression.Type).Symbol is ITypeSymbol type))
-            {
+            if (
+                !(
+                    SemanticModel.GetSymbolInfo(objectCreationExpression.Type).Symbol
+                    is ITypeSymbol type
+                )
+            ) {
                 return false;
             }
 
@@ -428,7 +430,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
                     using (LiteralTag())
                     using (NumberTag())
                     {
-                        EncodedText(arrayCreationExpression.Initializer.Expressions.Count.ToString());
+                        EncodedText(
+                            arrayCreationExpression.Initializer.Expressions.Count.ToString()
+                        );
                     }
 
                     if (!TryGenerateExpression(arrayCreationExpression.Initializer))
@@ -483,7 +487,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
 
             using (NameRefTag(GetVariableKind(symbol)))
             {
-                var leftHandSymbol = SemanticModel.GetSymbolInfo(memberAccessExpression.Expression).Symbol;
+                var leftHandSymbol =
+                    SemanticModel.GetSymbolInfo(memberAccessExpression.Expression).Symbol;
                 if (leftHandSymbol != null)
                 {
                     if (leftHandSymbol.Kind == SymbolKind.Alias)
@@ -577,8 +582,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
             return true;
         }
 
-        private bool TryGenerateArrayElementAccess(ElementAccessExpressionSyntax elementAccessExpression)
-        {
+        private bool TryGenerateArrayElementAccess(
+            ElementAccessExpressionSyntax elementAccessExpression
+        ) {
             using (ArrayElementAccessTag())
             {
                 if (!TryGenerateExpression(elementAccessExpression.Expression))
@@ -606,8 +612,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
             }
         }
 
-        public static string Generate(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel)
-        {
+        public static string Generate(
+            MethodDeclarationSyntax methodDeclaration,
+            SemanticModel semanticModel
+        ) {
             var symbol = semanticModel.GetDeclaredSymbol(methodDeclaration);
             var builder = new MethodXmlBuilder(symbol, semanticModel);
 

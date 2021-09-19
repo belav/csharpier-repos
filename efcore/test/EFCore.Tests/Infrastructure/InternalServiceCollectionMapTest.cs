@@ -19,7 +19,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddTransient<IFakeService, FakeService>();
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeService>();
 
             Can_patch_transient_service(serviceMap);
         }
@@ -30,7 +32,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddTransient<IFakeService, FakeService>(p => new FakeService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeService>();
 
             Can_patch_transient_service(serviceMap);
         }
@@ -41,7 +45,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddTransient<IFakeService>(p => new FakeService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeService>();
 
             Can_patch_transient_service(serviceMap);
         }
@@ -52,7 +58,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddTransient(typeof(IFakeService), p => new FakeService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeService>();
 
             Can_patch_transient_service(serviceMap);
         }
@@ -64,7 +72,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             serviceMap.TryAddTransient<FakeService, DerivedFakeService>();
             serviceMap.TryAddTransient<IFakeService, FakeService>();
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeService>();
 
             Assert.IsType<DerivedFakeService>(Can_patch_transient_service(serviceMap));
         }
@@ -97,7 +107,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddScoped<IFakeService, FakeService>();
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeService>();
 
             Can_patch_scoped_service(serviceMap);
         }
@@ -108,7 +120,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddScoped<IFakeService, FakeService>(p => new FakeService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeService>();
 
             Can_patch_scoped_service(serviceMap);
         }
@@ -119,7 +133,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddScoped<IFakeService>(p => new FakeService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeService>();
 
             Can_patch_scoped_service(serviceMap);
         }
@@ -130,7 +146,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddScoped(typeof(IFakeService), p => new FakeService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeService>();
 
             Can_patch_scoped_service(serviceMap);
         }
@@ -142,7 +160,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             serviceMap.TryAddScoped<FakeService, DerivedFakeService>();
             serviceMap.TryAddScoped<IFakeService, FakeService>();
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeService>();
 
             Assert.IsType<DerivedFakeService>(Can_patch_scoped_service(serviceMap));
         }
@@ -175,7 +195,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddSingleton<IFakeSingletonService, FakeSingletonService>();
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeSingletonService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeSingletonService>();
 
             Can_patch_singleton_service(serviceMap);
         }
@@ -185,8 +207,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var serviceMap = CreateServiceMap();
 
-            serviceMap.TryAddSingleton<IFakeSingletonService, FakeSingletonService>(p => new FakeSingletonService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeSingletonService>();
+            serviceMap.TryAddSingleton<IFakeSingletonService, FakeSingletonService>(
+                p => new FakeSingletonService()
+            );
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeSingletonService>();
 
             Can_patch_singleton_service(serviceMap);
         }
@@ -197,7 +223,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddSingleton<IFakeSingletonService>(p => new FakeSingletonService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeSingletonService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeSingletonService>();
 
             Can_patch_singleton_service(serviceMap);
         }
@@ -207,8 +235,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var serviceMap = CreateServiceMap();
 
-            serviceMap.TryAddSingleton(typeof(IFakeSingletonService), p => new FakeSingletonService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeSingletonService>();
+            serviceMap.TryAddSingleton(
+                typeof(IFakeSingletonService),
+                p => new FakeSingletonService()
+            );
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeSingletonService>();
 
             Can_patch_singleton_service(serviceMap);
         }
@@ -220,7 +253,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             serviceMap.TryAddSingleton<FakeSingletonService, DerivedFakeSingletonService>();
             serviceMap.TryAddSingleton<IFakeSingletonService, FakeSingletonService>();
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeSingletonService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeSingletonService>();
 
             Assert.IsType<DerivedFakeSingletonService>(Can_patch_singleton_service(serviceMap));
         }
@@ -231,7 +266,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var serviceMap = CreateServiceMap();
 
             serviceMap.TryAddSingleton<IFakeSingletonService>(new DerivedFakeSingletonService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeSingletonService>();
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeSingletonService>();
 
             Assert.IsType<DerivedFakeSingletonService>(Can_patch_singleton_service(serviceMap));
         }
@@ -241,21 +278,28 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var serviceMap = CreateServiceMap();
 
-            serviceMap.TryAddSingleton(typeof(IFakeSingletonService), new DerivedFakeSingletonService());
-            ((InternalServiceCollectionMap)serviceMap.GetInfrastructure()).DoPatchInjection<IFakeSingletonService>();
+            serviceMap.TryAddSingleton(
+                typeof(IFakeSingletonService),
+                new DerivedFakeSingletonService()
+            );
+            (
+                (InternalServiceCollectionMap)serviceMap.GetInfrastructure()
+            ).DoPatchInjection<IFakeSingletonService>();
 
             Assert.IsType<DerivedFakeSingletonService>(Can_patch_singleton_service(serviceMap));
         }
 
-        private static FakeSingletonService Can_patch_singleton_service(ServiceCollectionMap serviceMap)
-        {
+        private static FakeSingletonService Can_patch_singleton_service(
+            ServiceCollectionMap serviceMap
+        ) {
             var serviceProvider = serviceMap.ServiceCollection.BuildServiceProvider();
 
             FakeSingletonService singletonService;
 
             using (var context = CreateContext(serviceProvider))
             {
-                singletonService = (FakeSingletonService)context.GetService<IFakeSingletonService>();
+                singletonService =
+                    (FakeSingletonService)context.GetService<IFakeSingletonService>();
                 Assert.Same(context.GetService<IModelSource>(), singletonService.ModelSource);
                 Assert.Same(singletonService, context.GetService<IFakeSingletonService>());
             }
@@ -278,9 +322,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.BadDependencyRegistration(nameof(DatabaseProviderDependencies)),
-                Assert.Throws<InvalidOperationException>(
-                        () => builder.TryAddCoreServices())
-                    .Message);
+                Assert.Throws<InvalidOperationException>(() => builder.TryAddCoreServices()).Message
+            );
         }
 
         [ConditionalFact]
@@ -293,20 +336,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.BadDependencyRegistration(nameof(DatabaseProviderDependencies)),
-                Assert.Throws<InvalidOperationException>(
-                        () => builder.TryAddCoreServices())
-                    .Message);
+                Assert.Throws<InvalidOperationException>(() => builder.TryAddCoreServices()).Message
+            );
         }
 
-        private static ServiceCollectionMap CreateServiceMap()
-            => new(new ServiceCollection().AddEntityFrameworkInMemoryDatabase());
+        private static ServiceCollectionMap CreateServiceMap() =>
+            new(new ServiceCollection().AddEntityFrameworkInMemoryDatabase());
 
-        private static DbContext CreateContext(IServiceProvider serviceProvider)
-            => new(
-                new DbContextOptionsBuilder()
-                    .UseInternalServiceProvider(serviceProvider)
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                    .Options);
+        private static DbContext CreateContext(IServiceProvider serviceProvider) =>
+            new(
+                new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider)
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options
+            );
 
         private interface IFakeService
         {
@@ -316,8 +357,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             public DbContext Context { get; private set; }
 
-            void IPatchServiceInjectionSite.InjectServices(IServiceProvider serviceProvider)
-                => Context = serviceProvider.GetService<ICurrentDbContext>().Context;
+            void IPatchServiceInjectionSite.InjectServices(IServiceProvider serviceProvider) =>
+                Context = serviceProvider.GetService<ICurrentDbContext>().Context;
         }
 
         private class DerivedFakeService : FakeService
@@ -332,8 +373,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             public IModelSource ModelSource { get; private set; }
 
-            void IPatchServiceInjectionSite.InjectServices(IServiceProvider serviceProvider)
-                => ModelSource = serviceProvider.GetService<IModelSource>();
+            void IPatchServiceInjectionSite.InjectServices(IServiceProvider serviceProvider) =>
+                ModelSource = serviceProvider.GetService<IModelSource>();
         }
 
         private class DerivedFakeSingletonService : FakeSingletonService

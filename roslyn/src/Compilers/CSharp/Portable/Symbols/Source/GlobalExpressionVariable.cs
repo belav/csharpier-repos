@@ -30,39 +30,59 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSyntax typeSyntax,
             string name,
             SyntaxReference syntax,
-            Location location)
-            : base(containingType, modifiers, name, syntax, location)
+            Location location
+        ) : base(containingType, modifiers, name, syntax, location)
         {
             Debug.Assert(DeclaredAccessibility == Accessibility.Private);
             _typeSyntaxOpt = typeSyntax?.GetReference();
         }
 
         internal static GlobalExpressionVariable Create(
-                SourceMemberContainerTypeSymbol containingType,
-                DeclarationModifiers modifiers,
-                TypeSyntax typeSyntax,
-                string name,
-                SyntaxNode syntax,
-                Location location,
-                FieldSymbol containingFieldOpt,
-                SyntaxNode nodeToBind)
-        {
-            Debug.Assert(nodeToBind.Kind() == SyntaxKind.VariableDeclarator || nodeToBind is ExpressionSyntax);
+            SourceMemberContainerTypeSymbol containingType,
+            DeclarationModifiers modifiers,
+            TypeSyntax typeSyntax,
+            string name,
+            SyntaxNode syntax,
+            Location location,
+            FieldSymbol containingFieldOpt,
+            SyntaxNode nodeToBind
+        ) {
+            Debug.Assert(
+                nodeToBind.Kind() == SyntaxKind.VariableDeclarator || nodeToBind is ExpressionSyntax
+            );
 
             var syntaxReference = syntax.GetReference();
             return (typeSyntax == null || typeSyntax.IsVar)
-                ? new InferrableGlobalExpressionVariable(containingType, modifiers, typeSyntax, name, syntaxReference, location, containingFieldOpt, nodeToBind)
-                : new GlobalExpressionVariable(containingType, modifiers, typeSyntax, name, syntaxReference, location);
+                ? new InferrableGlobalExpressionVariable(
+                      containingType,
+                      modifiers,
+                      typeSyntax,
+                      name,
+                      syntaxReference,
+                      location,
+                      containingFieldOpt,
+                      nodeToBind
+                  )
+                : new GlobalExpressionVariable(
+                      containingType,
+                      modifiers,
+                      typeSyntax,
+                      name,
+                      syntaxReference,
+                      location
+                  );
         }
 
-        protected override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList => default(SyntaxList<AttributeListSyntax>);
+        protected override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList =>
+            default(SyntaxList<AttributeListSyntax>);
         protected override TypeSyntax TypeSyntax => (TypeSyntax)_typeSyntaxOpt?.GetSyntax();
         protected override SyntaxTokenList ModifiersTokenList => default(SyntaxTokenList);
         public override bool HasInitializer => false;
         protected override ConstantValue MakeConstantValue(
             HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
             bool earlyDecodingWellKnownAttributes,
-            BindingDiagnosticBag diagnostics) => null;
+            BindingDiagnosticBag diagnostics
+        ) => null;
 
         internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
         {
@@ -106,7 +126,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (isVar)
                 {
-                    diagnostics.Add(ErrorCode.ERR_RecursivelyTypedVariable, this.ErrorLocation, this);
+                    diagnostics.Add(
+                        ErrorCode.ERR_RecursivelyTypedVariable,
+                        this.ErrorLocation,
+                        this
+                    );
                     type = TypeWithAnnotations.Create(binder.CreateErrorType("var"));
                 }
 
@@ -121,19 +145,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Can add some diagnostics into <paramref name="diagnostics"/>. 
         /// Returns the type that it actually locks onto (it's possible that it had already locked onto ErrorType).
         /// </summary>
-        private TypeWithAnnotations SetType(CSharpCompilation compilation, BindingDiagnosticBag diagnostics, TypeWithAnnotations type)
-        {
+        private TypeWithAnnotations SetType(
+            CSharpCompilation compilation,
+            BindingDiagnosticBag diagnostics,
+            TypeWithAnnotations type
+        ) {
             var originalType = _lazyType?.Value.DefaultType;
 
             // In the event that we race to set the type of a field, we should
             // always deduce the same type, unless the cached type is an error.
 
-            Debug.Assert((object)originalType == null ||
-                originalType.IsErrorType() ||
-                TypeSymbol.Equals(originalType, type.Type, TypeCompareKind.ConsiderEverything2));
+            Debug.Assert(
+                (object)originalType == null
+                    || originalType.IsErrorType()
+                    || TypeSymbol.Equals(
+                        originalType,
+                        type.Type,
+                        TypeCompareKind.ConsiderEverything2
+                    )
+            );
 
-            if (Interlocked.CompareExchange(ref _lazyType, new TypeWithAnnotations.Boxed(type), null) == null)
-            {
+            if (
+                Interlocked.CompareExchange(
+                    ref _lazyType,
+                    new TypeWithAnnotations.Boxed(type),
+                    null
+                ) == null
+            ) {
                 TypeChecks(type.Type, diagnostics);
 
                 AddDeclarationDiagnostics(diagnostics);
@@ -146,8 +184,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Can add some diagnostics into <paramref name="diagnostics"/>.
         /// Returns the type that it actually locks onto (it's possible that it had already locked onto ErrorType).
         /// </summary>
-        internal TypeWithAnnotations SetTypeWithAnnotations(TypeWithAnnotations type, BindingDiagnosticBag diagnostics)
-        {
+        internal TypeWithAnnotations SetTypeWithAnnotations(
+            TypeWithAnnotations type,
+            BindingDiagnosticBag diagnostics
+        ) {
             return SetType(DeclaringCompilation, diagnostics, type);
         }
 
@@ -169,22 +209,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SyntaxReference syntax,
                 Location location,
                 FieldSymbol containingFieldOpt,
-                SyntaxNode nodeToBind)
-                : base(containingType, modifiers, typeSyntax, name, syntax, location)
+                SyntaxNode nodeToBind
+            ) : base(containingType, modifiers, typeSyntax, name, syntax, location)
             {
-                Debug.Assert(nodeToBind.Kind() == SyntaxKind.VariableDeclarator || nodeToBind is ExpressionSyntax);
+                Debug.Assert(
+                    nodeToBind.Kind() == SyntaxKind.VariableDeclarator
+                        || nodeToBind is ExpressionSyntax
+                );
 
                 _containingFieldOpt = containingFieldOpt;
                 _nodeToBind = nodeToBind.GetReference();
             }
 
-            protected override void InferFieldType(ConsList<FieldSymbol> fieldsBeingBound, Binder binder)
-            {
+            protected override void InferFieldType(
+                ConsList<FieldSymbol> fieldsBeingBound,
+                Binder binder
+            ) {
                 var nodeToBind = _nodeToBind.GetSyntax();
 
-                if ((object)_containingFieldOpt != null && nodeToBind.Kind() != SyntaxKind.VariableDeclarator)
-                {
-                    binder = binder.WithContainingMemberOrLambda(_containingFieldOpt).WithAdditionalFlags(BinderFlags.FieldInitializer);
+                if (
+                    (object)_containingFieldOpt != null
+                    && nodeToBind.Kind() != SyntaxKind.VariableDeclarator
+                ) {
+                    binder = binder.WithContainingMemberOrLambda(_containingFieldOpt)
+                        .WithAdditionalFlags(BinderFlags.FieldInitializer);
                 }
 
                 fieldsBeingBound = new ConsList<FieldSymbol>(this, fieldsBeingBound);
@@ -197,11 +245,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // This occurs, for example, in
                         // int x, y[out var Z, 1 is int I];
                         // for (int x, y[out var Z, 1 is int I]; ;) {}
-                        binder.BindDeclaratorArguments((VariableDeclaratorSyntax)nodeToBind, BindingDiagnosticBag.Discarded);
+                        binder.BindDeclaratorArguments(
+                            (VariableDeclaratorSyntax)nodeToBind,
+                            BindingDiagnosticBag.Discarded
+                        );
                         break;
 
                     default:
-                        binder.BindExpression((ExpressionSyntax)nodeToBind, BindingDiagnosticBag.Discarded);
+                        binder.BindExpression(
+                            (ExpressionSyntax)nodeToBind,
+                            BindingDiagnosticBag.Discarded
+                        );
                         break;
                 }
             }

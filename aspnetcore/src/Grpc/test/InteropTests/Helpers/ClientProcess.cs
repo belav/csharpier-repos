@@ -19,8 +19,12 @@ namespace InteropTests.Helpers
         private readonly StringBuilder _output;
         private readonly object _outputLock = new object();
 
-        public ClientProcess(ITestOutputHelper output, string path, string serverPort, string testCase)
-        {
+        public ClientProcess(
+            ITestOutputHelper output,
+            string path,
+            string serverPort,
+            string testCase
+        ) {
             _output = new StringBuilder();
 
             _process = new Process();
@@ -29,7 +33,8 @@ namespace InteropTests.Helpers
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 FileName = "dotnet",
-                Arguments = @$"{path} --use_tls false --server_port {serverPort} --client_type httpclient --test_case {testCase}"
+                Arguments =
+                    @$"{path} --use_tls false --server_port {serverPort} --client_type httpclient --test_case {testCase}"
             };
             _process.EnableRaisingEvents = true;
             _process.OutputDataReceived += Process_OutputDataReceived;
@@ -38,7 +43,9 @@ namespace InteropTests.Helpers
 
             _processEx = new ProcessEx(output, _process, timeout: Timeout.InfiniteTimeSpan);
 
-            _startTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+            _startTcs = new TaskCompletionSource<object>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
         }
 
         public Task WaitForReadyAsync() => _startTcs.Task;

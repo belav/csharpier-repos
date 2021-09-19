@@ -19,8 +19,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private readonly Thread _timerThread;
         private volatile bool _stopped;
 
-        public Heartbeat(IHeartbeatHandler[] callbacks, ISystemClock systemClock, IDebugger debugger, IKestrelTrace trace)
-        {
+        public Heartbeat(
+            IHeartbeatHandler[] callbacks,
+            ISystemClock systemClock,
+            IDebugger debugger,
+            IKestrelTrace trace
+        ) {
             _callbacks = callbacks;
             _systemClock = systemClock;
             _debugger = debugger;

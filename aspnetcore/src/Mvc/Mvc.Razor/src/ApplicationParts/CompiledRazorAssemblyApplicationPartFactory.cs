@@ -31,6 +31,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
         }
 
         /// <inheritdoc />
-        public override IEnumerable<ApplicationPart> GetApplicationParts(Assembly assembly) => GetDefaultApplicationParts(assembly);
+        public override IEnumerable<ApplicationPart> GetApplicationParts(Assembly assembly) =>
+            GetDefaultApplicationParts(assembly);
     }
 }

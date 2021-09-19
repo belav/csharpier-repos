@@ -17,19 +17,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         private readonly IForegroundNotificationService _foregroundNotificationService;
         private readonly IAsynchronousOperationListener _listener;
 
-        private readonly ReferenceCountedDisposableCache<string, RuleSetFile> _ruleSetFileMap = new();
+        private readonly ReferenceCountedDisposableCache<string, RuleSetFile> _ruleSetFileMap =
+            new();
 
         public VisualStudioRuleSetManager(
-            FileChangeWatcher fileChangeWatcher, IForegroundNotificationService foregroundNotificationService, IAsynchronousOperationListener listener)
-        {
+            FileChangeWatcher fileChangeWatcher,
+            IForegroundNotificationService foregroundNotificationService,
+            IAsynchronousOperationListener listener
+        ) {
             _fileChangeWatcher = fileChangeWatcher;
             _foregroundNotificationService = foregroundNotificationService;
             _listener = listener;
         }
 
-        public IReferenceCountedDisposable<ICacheEntry<string, IRuleSetFile>> GetOrCreateRuleSet(string ruleSetFileFullPath)
-        {
-            var cacheEntry = _ruleSetFileMap.GetOrCreate(ruleSetFileFullPath, static (ruleSetFileFullPath, self) => new RuleSetFile(ruleSetFileFullPath, self), this);
+        public IReferenceCountedDisposable<ICacheEntry<string, IRuleSetFile>> GetOrCreateRuleSet(
+            string ruleSetFileFullPath
+        ) {
+            var cacheEntry = _ruleSetFileMap.GetOrCreate(
+                ruleSetFileFullPath,
+                static (ruleSetFileFullPath, self) => new RuleSetFile(ruleSetFileFullPath, self),
+                this
+            );
 
             // Call InitializeFileTracking outside the lock inside ReferenceCountedDisposableCache, so we don't have requests
             // for other files blocking behind the initialization of this one. RuleSetFile itself will ensure InitializeFileTracking is locked as appropriate.
@@ -41,7 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         private void StopTrackingRuleSetFile(RuleSetFile ruleSetFile)
         {
             // We can arrive here in one of two situations:
-            // 
+            //
             // 1. The underlying RuleSetFile was disposed by all consumers, and we can try cleaning up our weak reference. This is purely an optimization
             //    to avoid the key/value pair being unnecessarily held.
             // 2. The RuleSetFile was modified, and we want to get rid of our cache now. Anybody still holding onto the values will dispose at their leaisure,

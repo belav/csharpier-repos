@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             AnalyzerConfigOptions analyzerConfigOptions,
             FormatOptions formatOptions,
             ILogger logger,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             // If we are fixing CodeStyle and the 'IDE0005' diagnostic is configured, then
             // see if we can remove unused imports.
 
@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             }
 
             // If diagnostics are being filtered and IDE0005 isn't specified, then make no changes.
-            if (!formatOptions.Diagnostics.IsEmpty &&
-                !formatOptions.Diagnostics.Contains(IDE0005))
+            if (!formatOptions.Diagnostics.IsEmpty && !formatOptions.Diagnostics.Contains(IDE0005))
             {
                 return sourceText;
             }
@@ -55,25 +54,41 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                 return sourceText;
             }
 
-            var severity = analyzerConfigOptions.GetDiagnosticSeverity(document.Project, tree, IDE0005, Style);
+            var severity = analyzerConfigOptions.GetDiagnosticSeverity(
+                document.Project,
+                tree,
+                IDE0005,
+                Style
+            );
             if (severity < formatOptions.CodeStyleSeverity)
             {
                 return sourceText;
             }
 
-            var formattedDocument = await RemoveUnnecessaryImportsHelper.RemoveUnnecessaryImportsAsync(document, cancellationToken).ConfigureAwait(false);
+            var formattedDocument =
+                await RemoveUnnecessaryImportsHelper.RemoveUnnecessaryImportsAsync(
+                        document,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             if (formattedDocument is null)
             {
                 return sourceText;
             }
 
-            var isSameVersion = await IsSameDocumentAndVersionAsync(document, formattedDocument, cancellationToken).ConfigureAwait(false);
+            var isSameVersion = await IsSameDocumentAndVersionAsync(
+                    document,
+                    formattedDocument,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (isSameVersion)
             {
                 return sourceText;
             }
 
-            var formattedText = await formattedDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
+            var formattedText = await formattedDocument.GetTextAsync(cancellationToken)
+                .ConfigureAwait(false);
             return formattedText;
         }
     }

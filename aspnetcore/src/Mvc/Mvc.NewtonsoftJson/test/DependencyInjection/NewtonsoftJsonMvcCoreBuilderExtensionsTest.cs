@@ -22,21 +22,29 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Act
             services.AddMvcCore()
-                .AddNewtonsoftJson((options) =>
-                {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                });
+                .AddNewtonsoftJson(
+                    (options) =>
+                    {
+                        options.SerializerSettings.ContractResolver =
+                            new CamelCasePropertyNamesContractResolver();
+                    }
+                );
 
             // Assert
-            Assert.Single(services, d => d.ServiceType == typeof(IConfigureOptions<MvcNewtonsoftJsonOptions>));
+            Assert.Single(
+                services,
+                d => d.ServiceType == typeof(IConfigureOptions<MvcNewtonsoftJsonOptions>)
+            );
         }
 
         [Fact]
         public void AddServicesCore_ReplacesDefaultJsonHelper()
         {
             // Arrange
-            var services = new ServiceCollection()
-                .AddSingleton<IJsonHelper, SystemTextJsonHelper>();
+            var services = new ServiceCollection().AddSingleton<
+                IJsonHelper,
+                SystemTextJsonHelper
+            >();
 
             // Act
             NewtonsoftJsonMvcCoreBuilderExtensions.AddServicesCore(services);
@@ -50,14 +58,19 @@ namespace Microsoft.Extensions.DependencyInjection
         public void AddServicesCore_ReplacesDefaultTempDataSerializer()
         {
             // Arrange
-            var services = new ServiceCollection()
-                .AddSingleton<TempDataSerializer, DefaultTempDataSerializer>();
+            var services = new ServiceCollection().AddSingleton<
+                TempDataSerializer,
+                DefaultTempDataSerializer
+            >();
 
             // Act
             NewtonsoftJsonMvcCoreBuilderExtensions.AddServicesCore(services);
 
             // Assert
-            var tempDataSerializer = Assert.Single(services, d => d.ServiceType == typeof(TempDataSerializer));
+            var tempDataSerializer = Assert.Single(
+                services,
+                d => d.ServiceType == typeof(TempDataSerializer)
+            );
             Assert.Same(typeof(BsonTempDataSerializer), tempDataSerializer.ImplementationType);
         }
 
@@ -65,15 +78,23 @@ namespace Microsoft.Extensions.DependencyInjection
         public void AddServicesCore_ReplacesDefaultJsonResultExecutor()
         {
             // Arrange
-            var services = new ServiceCollection()
-                .AddSingleton<IActionResultExecutor<JsonResult>, SystemTextJsonResultExecutor>();
+            var services = new ServiceCollection().AddSingleton<
+                IActionResultExecutor<JsonResult>,
+                SystemTextJsonResultExecutor
+            >();
 
             // Act
             NewtonsoftJsonMvcCoreBuilderExtensions.AddServicesCore(services);
 
             // Assert
-            var jsonResultExecutor = Assert.Single(services, d => d.ServiceType == typeof(IActionResultExecutor<JsonResult>));
-            Assert.Same(typeof(NewtonsoftJsonResultExecutor), jsonResultExecutor.ImplementationType);
+            var jsonResultExecutor = Assert.Single(
+                services,
+                d => d.ServiceType == typeof(IActionResultExecutor<JsonResult>)
+            );
+            Assert.Same(
+                typeof(NewtonsoftJsonResultExecutor),
+                jsonResultExecutor.ImplementationType
+            );
         }
     }
 }

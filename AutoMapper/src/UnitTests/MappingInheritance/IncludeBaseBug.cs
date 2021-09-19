@@ -11,7 +11,6 @@
             public int ChildValue { get; set; }
         }
 
-
         public class Concrete
         {
             public int ConcreteValue { get; set; }
@@ -27,19 +26,24 @@
             public int DerivedValue { get; set; }
         }
 
-
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<From, Concrete>()
-                .ForMember(d => d.ConcreteValue, o => o.MapFrom(s => s == null ? default(int) : s.ChildValue))
-                .Include<From, AbstractChild>();
-            cfg.CreateMap<From, AbstractChild>()
-                .ForMember(d => d.AbstractValue, o => o.Ignore())
-                .Include<From, Derivation>();
-            cfg.CreateMap<From, Derivation>()
-                .ForMember(d => d.DerivedValue, o => o.Ignore());
-            cfg.AllowNullDestinationValues = false;
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<From, Concrete>()
+                        .ForMember(
+                            d => d.ConcreteValue,
+                            o => o.MapFrom(s => s == null ? default(int) : s.ChildValue)
+                        )
+                        .Include<From, AbstractChild>();
+                    cfg.CreateMap<From, AbstractChild>()
+                        .ForMember(d => d.AbstractValue, o => o.Ignore())
+                        .Include<From, Derivation>();
+                    cfg.CreateMap<From, Derivation>()
+                        .ForMember(d => d.DerivedValue, o => o.Ignore());
+                    cfg.AllowNullDestinationValues = false;
+                }
+            );
         [Fact]
         public void Should_map_ok()
         {
@@ -71,16 +75,22 @@
         {
             public int DerivedValue { get; set; }
         }
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<From, Concrete>()
-                .ForMember(d => d.ConcreteValue, o => o.MapFrom(s => s == null ? default(int) : s.ChildValue))
-                .Include<From, AbstractChild>();
-            cfg.CreateMap<From, AbstractChild>(MemberList.None)
-                .Include<FromDerived, Derivation>();
-            cfg.CreateMap<FromDerived, Derivation>()
-                .ForMember(d => d.DerivedValue, o => o.Ignore());
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<From, Concrete>()
+                        .ForMember(
+                            d => d.ConcreteValue,
+                            o => o.MapFrom(s => s == null ? default(int) : s.ChildValue)
+                        )
+                        .Include<From, AbstractChild>();
+                    cfg.CreateMap<From, AbstractChild>(MemberList.None)
+                        .Include<FromDerived, Derivation>();
+                    cfg.CreateMap<FromDerived, Derivation>()
+                        .ForMember(d => d.DerivedValue, o => o.Ignore());
+                }
+            );
         [Fact]
         public void Derived_matches()
         {
@@ -112,16 +122,22 @@
         {
             public int DerivedValue { get; set; }
         }
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<From, Concrete>()
-                .ForMember(d => d.ConcreteValue, o => o.MapFrom(s => s == null ? default(int) : s.ChildValue))
-                .Include<From, AbstractChild>();
-            cfg.CreateMap<From, AbstractChild>(MemberList.None)
-                .Include<FromDerived, Derivation>();
-            cfg.CreateMap<FromDerived, Derivation>()
-                .ForMember(d => d.DerivedValue, o => o.Ignore());
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<From, Concrete>()
+                        .ForMember(
+                            d => d.ConcreteValue,
+                            o => o.MapFrom(s => s == null ? default(int) : s.ChildValue)
+                        )
+                        .Include<From, AbstractChild>();
+                    cfg.CreateMap<From, AbstractChild>(MemberList.None)
+                        .Include<FromDerived, Derivation>();
+                    cfg.CreateMap<FromDerived, Derivation>()
+                        .ForMember(d => d.DerivedValue, o => o.Ignore());
+                }
+            );
         [Fact]
         public void Derived_matches()
         {
@@ -152,17 +168,23 @@
         {
             public int DerivedValue { get; set; }
         }
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<From, Concrete>()
-                .ForMember(d => d.ConcreteValue, o => o.MapFrom(s => s == null ? default(int) : s.ChildValue))
-                .Include<From, AbstractChild>();
-            cfg.CreateMap<From, AbstractChild>(MemberList.None)
-                .Include<FromDerived, Derivation>();
-            cfg.CreateMap<FromDerived, Derivation>()
-                .ForMember(d => d.AbstractValue, o => o.Ignore())
-                .ForMember(d => d.DerivedValue, o => o.Ignore());
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<From, Concrete>()
+                        .ForMember(
+                            d => d.ConcreteValue,
+                            o => o.MapFrom(s => s == null ? default(int) : s.ChildValue)
+                        )
+                        .Include<From, AbstractChild>();
+                    cfg.CreateMap<From, AbstractChild>(MemberList.None)
+                        .Include<FromDerived, Derivation>();
+                    cfg.CreateMap<FromDerived, Derivation>()
+                        .ForMember(d => d.AbstractValue, o => o.Ignore())
+                        .ForMember(d => d.DerivedValue, o => o.Ignore());
+                }
+            );
         [Fact]
         public void Derived_ignores()
         {

@@ -87,11 +87,13 @@ namespace System.Threading.Tasks.Sources
         public ValueTaskSourceStatus GetStatus(short token)
         {
             ValidateToken(token);
-            return
-                _continuation == null || !_completed ? ValueTaskSourceStatus.Pending :
-                _error == null ? ValueTaskSourceStatus.Succeeded :
-                _error.SourceException is OperationCanceledException ? ValueTaskSourceStatus.Canceled :
-                ValueTaskSourceStatus.Faulted;
+            return _continuation == null || !_completed
+                ? ValueTaskSourceStatus.Pending
+                : _error == null
+                    ? ValueTaskSourceStatus.Succeeded
+                    : _error.SourceException is OperationCanceledException
+                        ? ValueTaskSourceStatus.Canceled
+                        : ValueTaskSourceStatus.Faulted;
         }
 
         /// <summary>Gets the result of the operation.</summary>
@@ -113,8 +115,12 @@ namespace System.Threading.Tasks.Sources
         /// <param name="state">The state object to pass to <paramref name="continuation"/> when it's invoked.</param>
         /// <param name="token">Opaque value that was provided to the <see cref="ValueTask"/>'s constructor.</param>
         /// <param name="flags">The flags describing the behavior of the continuation.</param>
-        public void OnCompleted(Action<object> continuation, object state, short token, ValueTaskSourceOnCompletedFlags flags)
-        {
+        public void OnCompleted(
+            Action<object> continuation,
+            object state,
+            short token,
+            ValueTaskSourceOnCompletedFlags flags
+        ) {
             if (continuation == null)
             {
                 throw new ArgumentNullException(nameof(continuation));
@@ -155,33 +161,56 @@ namespace System.Threading.Tasks.Sources
             if (oldContinuation == null)
             {
                 _continuationState = state;
-                oldContinuation = Interlocked.CompareExchange(ref _continuation, continuation, null);
+                oldContinuation = Interlocked.CompareExchange(
+                    ref _continuation,
+                    continuation,
+                    null
+                );
             }
 
             if (oldContinuation != null)
             {
                 // Operation already completed, so we need to queue the supplied callback.
-                if (!ReferenceEquals(oldContinuation, ManualResetValueTaskSourceCoreShared.s_sentinel))
-                {
+                if (
+                    !ReferenceEquals(
+                        oldContinuation,
+                        ManualResetValueTaskSourceCoreShared.s_sentinel
+                    )
+                ) {
                     throw new InvalidOperationException();
                 }
 
                 switch (_capturedContext)
                 {
                     case null:
-                        Task.Factory.StartNew(continuation, state, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                        Task.Factory.StartNew(
+                            continuation,
+                            state,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            TaskScheduler.Default
+                        );
                         break;
 
                     case SynchronizationContext sc:
-                        sc.Post(s =>
-                        {
-                            var tuple = (Tuple<Action<object>, object>)s;
-                            tuple.Item1(tuple.Item2);
-                        }, Tuple.Create(continuation, state));
+                        sc.Post(
+                            s =>
+                            {
+                                var tuple = (Tuple<Action<object>, object>)s;
+                                tuple.Item1(tuple.Item2);
+                            },
+                            Tuple.Create(continuation, state)
+                        );
                         break;
 
                     case TaskScheduler ts:
-                        Task.Factory.StartNew(continuation, state, CancellationToken.None, TaskCreationOptions.DenyChildAttach, ts);
+                        Task.Factory.StartNew(
+                            continuation,
+                            state,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            ts
+                        );
                         break;
                 }
             }
@@ -206,14 +235,21 @@ namespace System.Threading.Tasks.Sources
             }
             _completed = true;
 
-            if (_continuation != null || Interlocked.CompareExchange(ref _continuation, ManualResetValueTaskSourceCoreShared.s_sentinel, null) != null)
-            {
+            if (
+                _continuation != null
+                || Interlocked.CompareExchange(
+                    ref _continuation,
+                    ManualResetValueTaskSourceCoreShared.s_sentinel,
+                    null
+                ) != null
+            ) {
                 if (_executionContext != null)
                 {
                     ExecutionContext.Run(
                         _executionContext,
                         s => ((ManualResetValueTaskSourceCore<TResult>)s).InvokeContinuation(),
-                        this);
+                        this
+                    );
                 }
                 else
                 {
@@ -236,7 +272,13 @@ namespace System.Threading.Tasks.Sources
                 case null:
                     if (RunContinuationsAsynchronously)
                     {
-                        Task.Factory.StartNew(_continuation, _continuationState, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                        Task.Factory.StartNew(
+                            _continuation,
+                            _continuationState,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            TaskScheduler.Default
+                        );
                     }
                     else
                     {
@@ -245,15 +287,24 @@ namespace System.Threading.Tasks.Sources
                     break;
 
                 case SynchronizationContext sc:
-                    sc.Post(s =>
-                    {
-                        var state = (Tuple<Action<object>, object>)s;
-                        state.Item1(state.Item2);
-                    }, Tuple.Create(_continuation, _continuationState));
+                    sc.Post(
+                        s =>
+                        {
+                            var state = (Tuple<Action<object>, object>)s;
+                            state.Item1(state.Item2);
+                        },
+                        Tuple.Create(_continuation, _continuationState)
+                    );
                     break;
 
                 case TaskScheduler ts:
-                    Task.Factory.StartNew(_continuation, _continuationState, CancellationToken.None, TaskCreationOptions.DenyChildAttach, ts);
+                    Task.Factory.StartNew(
+                        _continuation,
+                        _continuationState,
+                        CancellationToken.None,
+                        TaskCreationOptions.DenyChildAttach,
+                        ts
+                    );
                     break;
             }
         }

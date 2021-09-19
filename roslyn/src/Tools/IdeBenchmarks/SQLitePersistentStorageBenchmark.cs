@@ -22,7 +22,8 @@ namespace IdeBenchmarks
 {
     public class SQLitePersistentStorageBenchmarks
     {
-        private readonly UseExportProviderAttribute _useExportProviderAttribute = new UseExportProviderAttribute();
+        private readonly UseExportProviderAttribute _useExportProviderAttribute =
+            new UseExportProviderAttribute();
 
         // Run the test with different ratios of reads/writes.
         [Params(0, 25, 50, 75, 100)]
@@ -54,26 +55,47 @@ namespace IdeBenchmarks
             }
 
             _workspace = TestWorkspace.Create(
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""NoCompilation"" CommonReferences=""false"">
         <Document>
             // a no-compilation document
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
 
             // Explicitly choose the sqlite db to test.
-            _workspace.TryApplyChanges(_workspace.CurrentSolution.WithOptions(_workspace.Options
-                .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)));
+            _workspace.TryApplyChanges(
+                _workspace.CurrentSolution.WithOptions(
+                    _workspace.Options.WithChangedOption(
+                        StorageOptions.Database,
+                        StorageDatabase.SQLite
+                    )
+                )
+            );
 
-            var connectionPoolService = _workspace.ExportProvider.GetExportedValue<SQLiteConnectionPoolService>();
-            _storageService = new SQLitePersistentStorageService(connectionPoolService, new LocationService());
+            var connectionPoolService =
+                _workspace.ExportProvider.GetExportedValue<SQLiteConnectionPoolService>();
+            _storageService = new SQLitePersistentStorageService(
+                connectionPoolService,
+                new LocationService()
+            );
 
             var solution = _workspace.CurrentSolution;
-            _storage = _storageService.GetStorageWorkerAsync(_workspace, SolutionKey.ToSolutionKey(solution), solution, CancellationToken.None).AsTask().GetAwaiter().GetResult();
+            _storage = _storageService.GetStorageWorkerAsync(
+                    _workspace,
+                    SolutionKey.ToSolutionKey(solution),
+                    solution,
+                    CancellationToken.None
+                )
+                .AsTask()
+                .GetAwaiter()
+                .GetResult();
             if (_storage == NoOpPersistentStorage.Instance)
             {
-                throw new InvalidOperationException("We didn't properly get the sqlite storage instance.");
+                throw new InvalidOperationException(
+                    "We didn't properly get the sqlite storage instance."
+                );
             }
 
             Console.WriteLine("Storage type: " + _storage.GetType());
@@ -115,18 +137,26 @@ namespace IdeBenchmarks
                 var name = _random.Next(0, 4).ToString();
                 if (_random.Next(0, 100) < ReadPercentage)
                 {
-                    tasks.Add(Task.Run(async () =>
-                    {
-                        using var stream = await _storage.ReadStreamAsync(_document, name);
-                    }));
+                    tasks.Add(
+                        Task.Run(
+                            async () =>
+                            {
+                                using var stream = await _storage.ReadStreamAsync(_document, name);
+                            }
+                        )
+                    );
                 }
                 else
                 {
-                    tasks.Add(Task.Run(async () =>
-                    {
-                        using var stream = new MemoryStream(s_bytes);
-                        await _storage.WriteStreamAsync(_document, name, stream);
-                    }));
+                    tasks.Add(
+                        Task.Run(
+                            async () =>
+                            {
+                                using var stream = new MemoryStream(s_bytes);
+                                await _storage.WriteStreamAsync(_document, name, stream);
+                            }
+                        )
+                    );
                 }
             }
 

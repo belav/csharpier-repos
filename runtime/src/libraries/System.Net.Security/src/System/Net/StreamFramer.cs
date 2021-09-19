@@ -20,7 +20,8 @@ namespace System.Net
         public FrameHeader ReadHeader => _curReadHeader;
         public FrameHeader WriteHeader => _writeHeader;
 
-        public async ValueTask<byte[]?> ReadMessageAsync<TAdapter>(TAdapter adapter) where TAdapter : IReadWriteAdapter
+        public async ValueTask<byte[]?> ReadMessageAsync<TAdapter>(TAdapter adapter)
+            where TAdapter : IReadWriteAdapter
         {
             if (_eof)
             {
@@ -43,7 +44,9 @@ namespace System.Net
                         return null;
                     }
 
-                    throw new IOException(SR.Format(SR.net_io_readfailure, SR.net_io_connectionclosed));
+                    throw new IOException(
+                        SR.Format(SR.net_io_readfailure, SR.net_io_connectionclosed)
+                    );
                 }
 
                 offset += bytesRead;
@@ -52,9 +55,13 @@ namespace System.Net
             _curReadHeader.CopyFrom(buffer, 0);
             if (_curReadHeader.PayloadSize > FrameHeader.MaxMessageSize)
             {
-                throw new InvalidOperationException(SR.Format(SR.net_frame_size,
-                                                               FrameHeader.MaxMessageSize,
-                                                               _curReadHeader.PayloadSize.ToString(NumberFormatInfo.InvariantInfo)));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.net_frame_size,
+                        FrameHeader.MaxMessageSize,
+                        _curReadHeader.PayloadSize.ToString(NumberFormatInfo.InvariantInfo)
+                    )
+                );
             }
 
             buffer = new byte[_curReadHeader.PayloadSize];
@@ -65,7 +72,9 @@ namespace System.Net
                 bytesRead = await adapter.ReadAsync(buffer.AsMemory(offset)).ConfigureAwait(false);
                 if (bytesRead == 0)
                 {
-                    throw new IOException(SR.Format(SR.net_io_readfailure, SR.net_io_connectionclosed));
+                    throw new IOException(
+                        SR.Format(SR.net_io_readfailure, SR.net_io_connectionclosed)
+                    );
                 }
 
                 offset += bytesRead;
@@ -73,7 +82,8 @@ namespace System.Net
             return buffer;
         }
 
-        public async Task WriteMessageAsync<TAdapter>(TAdapter adapter, byte[] message) where TAdapter : IReadWriteAdapter
+        public async Task WriteMessageAsync<TAdapter>(TAdapter adapter, byte[] message)
+            where TAdapter : IReadWriteAdapter
         {
             if (message == null)
             {
@@ -83,7 +93,8 @@ namespace System.Net
             _writeHeader.PayloadSize = message.Length;
             _writeHeader.CopyTo(_writeHeaderBuffer, 0);
 
-            await adapter.WriteAsync(_writeHeaderBuffer, 0, _writeHeaderBuffer.Length).ConfigureAwait(false);
+            await adapter.WriteAsync(_writeHeaderBuffer, 0, _writeHeaderBuffer.Length)
+                .ConfigureAwait(false);
             if (message.Length != 0)
             {
                 await adapter.WriteAsync(message, 0, message.Length).ConfigureAwait(false);
@@ -116,7 +127,10 @@ namespace System.Net
             {
                 if (value > MaxMessageSize)
                 {
-                    throw new ArgumentException(SR.Format(SR.net_frame_max_size, MaxMessageSize, value), nameof(PayloadSize));
+                    throw new ArgumentException(
+                        SR.Format(SR.net_frame_max_size, MaxMessageSize, value),
+                        nameof(PayloadSize)
+                    );
                 }
 
                 _payloadSize = value;

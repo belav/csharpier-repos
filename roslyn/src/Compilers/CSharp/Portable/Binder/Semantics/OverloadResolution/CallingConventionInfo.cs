@@ -12,9 +12,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal readonly Cci.CallingConvention CallKind;
         internal readonly ImmutableHashSet<CustomModifier>? UnmanagedCallingConventionTypes;
 
-        public CallingConventionInfo(Cci.CallingConvention callKind, ImmutableHashSet<CustomModifier> unmanagedCallingConventionTypes)
-        {
-            Debug.Assert(unmanagedCallingConventionTypes.IsEmpty || callKind == Cci.CallingConvention.Unmanaged);
+        public CallingConventionInfo(
+            Cci.CallingConvention callKind,
+            ImmutableHashSet<CustomModifier> unmanagedCallingConventionTypes
+        ) {
+            Debug.Assert(
+                unmanagedCallingConventionTypes.IsEmpty
+                    || callKind == Cci.CallingConvention.Unmanaged
+            );
             CallKind = callKind;
             UnmanagedCallingConventionTypes = unmanagedCallingConventionTypes;
         }

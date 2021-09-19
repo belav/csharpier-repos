@@ -11,7 +11,6 @@ using System.Runtime.CompilerServices;
 
 namespace BigFrames
 {
-
     [StructLayout(LayoutKind.Explicit)]
     public struct LargeStructWithRef
     {

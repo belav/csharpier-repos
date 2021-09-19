@@ -60,9 +60,7 @@ namespace Roslyn.Test.Utilities
         public bool Exists { get; private set; }
         public List<byte> Contents { get; } = new List<byte>();
 
-        public TestableFile()
-        {
-        }
+        public TestableFile() { }
 
         public TestableFile(string contents)
         {

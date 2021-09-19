@@ -5,7 +5,6 @@ using System;
 
 class Program
 {
-
     private static TestUtil.TestLog testLog;
 
     static Program()
@@ -44,15 +43,19 @@ class Program
                         try
                         {
                             Console.WriteLine("   in try");
-                            if (count-- == 0) goto G1;
-                            if (count < 0) throw new Exception();
+                            if (count-- == 0)
+                                goto G1;
+                            if (count < 0)
+                                throw new Exception();
                         }
+
                         finally
                         {
                             Console.WriteLine("   in finally");
                         }
                         goto L2;
                     }
+
                     finally
                     {
                         Console.WriteLine("  in finally");
@@ -65,6 +68,7 @@ class Program
                 G1:
                 goto L1;
             }
+
             finally
             {
                 Console.WriteLine(" in finally");

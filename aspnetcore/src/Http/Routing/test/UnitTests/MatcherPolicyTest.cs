@@ -50,7 +50,7 @@ namespace Microsoft.AspNetCore.Routing
         public void ContainsDynamicEndpoint_DoesNotFindDynamicEndpoint_Empty()
         {
             // Arrange
-            var endpoints = new Endpoint[]{ };
+            var endpoints = new Endpoint[] {  };
 
             // Act
             var result = TestMatcherPolicy.ContainsDynamicEndpoints(endpoints);
@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Routing
                 RoutePatternFactory.Parse(template),
                 0,
                 new EndpointMetadataCollection(metadata),
-                "test");
+                "test"
+            );
         }
 
         private class DynamicEndpointMetadata : IDynamicEndpointMetadata

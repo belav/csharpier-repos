@@ -12,9 +12,7 @@ namespace System.Net.Http
     {
         private WinHttpChannelBinding _channelBinding;
 
-        internal WinHttpTransportContext()
-        {
-        }
+        internal WinHttpTransportContext() { }
 
         public override ChannelBinding GetChannelBinding(ChannelBindingKind kind)
         {

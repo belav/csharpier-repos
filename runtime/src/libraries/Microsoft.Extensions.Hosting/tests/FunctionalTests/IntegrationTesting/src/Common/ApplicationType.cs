@@ -9,7 +9,6 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
         /// Does not target a specific platform. Requires the matching runtime to be installed.
         /// </summary>
         Portable,
-
         /// <summary>
         /// All dlls are published with the app for x-copy deploy. Net461 requires this because ASP.NET Core is not in the GAC.
         /// </summary>

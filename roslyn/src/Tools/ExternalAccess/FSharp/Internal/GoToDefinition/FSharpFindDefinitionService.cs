@@ -27,9 +27,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.GoToDefinition
             _service = service;
         }
 
-        public async Task<ImmutableArray<INavigableItem>> FindDefinitionsAsync(Document document, int position, CancellationToken cancellationToken)
-        {
-            var items = await _service.FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+        public async Task<ImmutableArray<INavigableItem>> FindDefinitionsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) {
+            var items = await _service.FindDefinitionsAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             return items.SelectAsArray(x => (INavigableItem)new InternalFSharpNavigableItem(x));
         }
     }

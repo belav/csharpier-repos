@@ -12,7 +12,7 @@ namespace System.Linq
             private HashSet<TSource> FillSet()
             {
                 var set = new HashSet<TSource>(_comparer);
-                for (int index = 0; ; ++index)
+                for (int index = 0;; ++index)
                 {
                     IEnumerable<TSource>? enumerable = GetEnumerable(index);
                     if (enumerable == null)

@@ -17,8 +17,12 @@ internal partial class VectorTest
             Vector<T> A = new Vector<T>(square);
             Vector<T> B = Vector.SquareRoot(A);
 
-            if (Vector.LessThanOrEqualAll<T>((Vector.Abs(B) - new Vector<T>(root)), new Vector<T>(allowableError)))
-            {
+            if (
+                Vector.LessThanOrEqualAll<T>(
+                    (Vector.Abs(B) - new Vector<T>(root)),
+                    new Vector<T>(allowableError)
+                )
+            ) {
                 return Pass;
             }
             else
@@ -30,7 +34,6 @@ internal partial class VectorTest
             }
         }
     }
-
 
     private static int Main()
     {

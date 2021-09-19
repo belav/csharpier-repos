@@ -12,8 +12,9 @@ namespace AutoMapper.UnitTests.Mappers
             }
             public string Value { get; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(_=> { });
+        protected override MapperConfiguration Configuration => new MapperConfiguration(_ => { });
         [Fact]
-        public void Should_use_constructor() => Mapper.Map<Destination>("value").Value.ShouldBe("value");
+        public void Should_use_constructor() =>
+            Mapper.Map<Destination>("value").Value.ShouldBe("value");
     }
 }

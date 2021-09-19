@@ -11,8 +11,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     internal static partial class SourceTextExtensions
     {
         public static bool OverlapsHiddenPosition(
-            this SourceText text, TextSpan span, Func<int, CancellationToken, bool> isPositionHidden, CancellationToken cancellationToken)
-        {
+            this SourceText text,
+            TextSpan span,
+            Func<int, CancellationToken, bool> isPositionHidden,
+            CancellationToken cancellationToken
+        ) {
             var result = TryOverlapsHiddenPosition(text, span, isPositionHidden, cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();
             return result;
@@ -23,9 +26,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// in that case.
         /// </summary>
         public static bool TryOverlapsHiddenPosition(
-            this SourceText text, TextSpan span, Func<int, CancellationToken, bool> isPositionHidden,
-            CancellationToken cancellationToken)
-        {
+            this SourceText text,
+            TextSpan span,
+            Func<int, CancellationToken, bool> isPositionHidden,
+            CancellationToken cancellationToken
+        ) {
             var startLineNumber = text.Lines.IndexOf(span.Start);
             var endLineNumber = text.Lines.IndexOf(span.End);
 
@@ -61,12 +66,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static bool AreOnSameLine(this SourceText text, SyntaxToken token1, SyntaxToken token2)
-            => token1.RawKind != 0 &&
-               token2.RawKind != 0 &&
-               text.AreOnSameLine(token1.Span.End, token2.SpanStart);
+        public static bool AreOnSameLine(
+            this SourceText text,
+            SyntaxToken token1,
+            SyntaxToken token2
+        ) =>
+            token1.RawKind != 0
+            && token2.RawKind != 0
+            && text.AreOnSameLine(token1.Span.End, token2.SpanStart);
 
-        public static bool AreOnSameLine(this SourceText text, int pos1, int pos2)
-            => text.Lines.IndexOf(pos1) == text.Lines.IndexOf(pos2);
+        public static bool AreOnSameLine(this SourceText text, int pos1, int pos2) =>
+            text.Lines.IndexOf(pos1) == text.Lines.IndexOf(pos2);
     }
 }

@@ -20,20 +20,20 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 _values = ((IRuntimeEntityType)entry.EntityType).RelationshipSnapshotFactory(entry);
             }
 
-            public object? GetValue(InternalEntityEntry entry, IPropertyBase propertyBase)
-                => IsEmpty ? entry[propertyBase] : _values[propertyBase.GetRelationshipIndex()];
+            public object? GetValue(InternalEntityEntry entry, IPropertyBase propertyBase) =>
+                IsEmpty ? entry[propertyBase] : _values[propertyBase.GetRelationshipIndex()];
 
-            public T GetValue<T>(InternalEntityEntry entry, IPropertyBase propertyBase, int index)
-                => IsEmpty
-                    ? entry.GetCurrentValue<T>(propertyBase)
-                    : _values.GetValue<T>(index);
+            public T GetValue<T>(
+                InternalEntityEntry entry,
+                IPropertyBase propertyBase,
+                int index
+            ) => IsEmpty ? entry.GetCurrentValue<T>(propertyBase) : _values.GetValue<T>(index);
 
             public void SetValue(IPropertyBase propertyBase, object? value)
             {
                 if (value == null)
                 {
-                    if (propertyBase is IProperty property
-                        && !property.IsNullable)
+                    if (propertyBase is IProperty property && !property.IsNullable)
                     {
                         return;
                     }
@@ -41,8 +41,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 Check.DebugAssert(!IsEmpty, "relationship snapshot is empty");
                 Check.DebugAssert(
-                    propertyBase is not INavigation { IsCollection : true },
-                    $"property {propertyBase} is is not reference navigation");
+                    propertyBase is not INavigation { IsCollection: true },
+                    $"property {propertyBase} is is not reference navigation"
+                );
 
                 _values[propertyBase.GetRelationshipIndex()] = SnapshotValue(propertyBase, value);
             }
@@ -82,8 +83,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 }
             }
 
-            public void AddRangeToCollection(IPropertyBase propertyBase, IEnumerable<object> addedEntities)
-            {
+            public void AddRangeToCollection(
+                IPropertyBase propertyBase,
+                IEnumerable<object> addedEntities
+            ) {
                 var index = propertyBase.GetRelationshipIndex();
                 if (index != -1)
                 {
@@ -108,8 +111,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 return snapshot;
             }
 
-            public bool IsEmpty
-                => _values == null;
+            public bool IsEmpty => _values == null;
         }
     }
 }

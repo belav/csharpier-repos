@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.WebUtilities
     {
         private MemoryStream _stream;
 
-        [Params(200, 1000, 1025, 1600)]  // Default buffer length is 1024
+        [Params(200, 1000, 1025, 1600)] // Default buffer length is 1024
         public int Length { get; set; }
 
         [GlobalSetup]

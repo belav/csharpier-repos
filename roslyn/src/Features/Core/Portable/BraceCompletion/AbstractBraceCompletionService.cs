@@ -29,10 +29,15 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         /// </summary>
         protected abstract bool IsValidClosingBraceToken(SyntaxToken token);
 
-        public abstract Task<bool> AllowOverTypeAsync(BraceCompletionContext braceCompletionContext, CancellationToken cancellationToken);
+        public abstract Task<bool> AllowOverTypeAsync(
+            BraceCompletionContext braceCompletionContext,
+            CancellationToken cancellationToken
+        );
 
-        public async Task<BraceCompletionResult?> GetBraceCompletionAsync(BraceCompletionContext braceCompletionContext, CancellationToken cancellationToken)
-        {
+        public async Task<BraceCompletionResult?> GetBraceCompletionAsync(
+            BraceCompletionContext braceCompletionContext,
+            CancellationToken cancellationToken
+        ) {
             var closingPoint = braceCompletionContext.ClosingPoint;
             if (closingPoint < 1)
             {
@@ -48,50 +53,82 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
                 return null;
             }
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var token = root.FindToken(openingPoint, findInsideTrivia: true);
-            var validOpeningPoint = await IsValidOpenBraceTokenAtPositionAsync(token, openingPoint, document, cancellationToken).ConfigureAwait(false);
+            var validOpeningPoint = await IsValidOpenBraceTokenAtPositionAsync(
+                    token,
+                    openingPoint,
+                    document,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (!validOpeningPoint)
             {
                 return null;
             }
 
-            var braceTextEdit = new TextChange(TextSpan.FromBounds(closingPoint, closingPoint), ClosingBrace.ToString());
+            var braceTextEdit = new TextChange(
+                TextSpan.FromBounds(closingPoint, closingPoint),
+                ClosingBrace.ToString()
+            );
             // The caret location should be in between the braces.
             var originalOpeningLinePosition = sourceText.Lines.GetLinePosition(openingPoint);
-            var caretLocation = new LinePosition(originalOpeningLinePosition.Line, originalOpeningLinePosition.Character + 1);
+            var caretLocation = new LinePosition(
+                originalOpeningLinePosition.Line,
+                originalOpeningLinePosition.Character + 1
+            );
             return new BraceCompletionResult(ImmutableArray.Create(braceTextEdit), caretLocation);
         }
 
-        public virtual Task<BraceCompletionResult?> GetTextChangesAfterCompletionAsync(BraceCompletionContext braceCompletionContext, CancellationToken cancellationToken)
-            => SpecializedTasks.Default<BraceCompletionResult?>();
+        public virtual Task<BraceCompletionResult?> GetTextChangesAfterCompletionAsync(
+            BraceCompletionContext braceCompletionContext,
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.Default<BraceCompletionResult?>();
 
-        public virtual Task<BraceCompletionResult?> GetTextChangeAfterReturnAsync(BraceCompletionContext braceCompletionContext, DocumentOptionSet documentOptions, CancellationToken cancellationToken)
-            => SpecializedTasks.Default<BraceCompletionResult?>();
+        public virtual Task<BraceCompletionResult?> GetTextChangeAfterReturnAsync(
+            BraceCompletionContext braceCompletionContext,
+            DocumentOptionSet documentOptions,
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.Default<BraceCompletionResult?>();
 
-        public virtual async Task<bool> CanProvideBraceCompletionAsync(char brace, int openingPosition, Document document, CancellationToken cancellationToken)
-        {
+        public virtual async Task<bool> CanProvideBraceCompletionAsync(
+            char brace,
+            int openingPosition,
+            Document document,
+            CancellationToken cancellationToken
+        ) {
             if (OpeningBrace != brace)
             {
                 return false;
             }
 
             // check that the user is not typing in a string literal or comment
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             return !syntaxFactsService.IsInNonUserCode(tree, openingPosition, cancellationToken);
         }
 
-        public async Task<BraceCompletionContext?> GetCompletedBraceContextAsync(Document document, int caretLocation, CancellationToken cancellationToken)
-        {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        public async Task<BraceCompletionContext?> GetCompletedBraceContextAsync(
+            Document document,
+            int caretLocation,
+            CancellationToken cancellationToken
+        ) {
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var leftToken = root.FindTokenOnLeftOfPosition(caretLocation);
             var rightToken = root.FindTokenOnRightOfPosition(caretLocation);
 
             if (IsValidOpeningBraceToken(leftToken) && IsValidClosingBraceToken(rightToken))
             {
-                return new BraceCompletionContext(document, leftToken.GetLocation().SourceSpan.Start, rightToken.GetLocation().SourceSpan.End, caretLocation);
+                return new BraceCompletionContext(
+                    document,
+                    leftToken.GetLocation().SourceSpan.Start,
+                    rightToken.GetLocation().SourceSpan.End,
+                    caretLocation
+                );
             }
 
             return null;
@@ -101,15 +138,22 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         /// Checks if the already inserted token is a valid opening token at the position in the document.
         /// By default checks that the opening token is a valid token at the position and not in skipped token trivia.
         /// </summary>
-        protected virtual Task<bool> IsValidOpenBraceTokenAtPositionAsync(SyntaxToken token, int position, Document document, CancellationToken cancellationToken)
-        {
+        protected virtual Task<bool> IsValidOpenBraceTokenAtPositionAsync(
+            SyntaxToken token,
+            int position,
+            Document document,
+            CancellationToken cancellationToken
+        ) {
             if (token.SpanStart != position)
             {
                 return SpecializedTasks.False;
             }
 
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            return Task.FromResult(IsValidOpeningBraceToken(token) && !ParentIsSkippedTokensTriviaOrNull(syntaxFactsService, token));
+            return Task.FromResult(
+                IsValidOpeningBraceToken(token)
+                    && !ParentIsSkippedTokensTriviaOrNull(syntaxFactsService, token)
+            );
         }
 
         /// <summary>
@@ -117,13 +161,26 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         /// matches the expected closing token for this brace completion service.
         /// Helper method used by <see cref="AllowOverTypeAsync(BraceCompletionContext, CancellationToken)"/> implementations.
         /// </summary>
-        protected async Task<bool> AllowOverTypeInUserCodeWithValidClosingTokenAsync(BraceCompletionContext context, CancellationToken cancellationToken)
-        {
-            var tree = await context.Document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var syntaxFactsService = context.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+        protected async Task<bool> AllowOverTypeInUserCodeWithValidClosingTokenAsync(
+            BraceCompletionContext context,
+            CancellationToken cancellationToken
+        ) {
+            var tree = await context.Document.GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var syntaxFactsService =
+                context.Document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            return !syntaxFactsService.IsInNonUserCode(tree, context.CaretLocation, cancellationToken)
-                && await CheckClosingTokenKindAsync(context.Document, context.ClosingPoint, cancellationToken).ConfigureAwait(false);
+            return !syntaxFactsService.IsInNonUserCode(
+                    tree,
+                    context.CaretLocation,
+                    cancellationToken
+                )
+                && await CheckClosingTokenKindAsync(
+                        context.Document,
+                        context.ClosingPoint,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -131,21 +188,37 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         /// Used by <see cref="AllowOverTypeAsync(BraceCompletionContext, CancellationToken)"/> implementations
         /// when the over type could be triggered from outside of user code (e.g. overtyping end quotes in a string).
         /// </summary>
-        protected Task<bool> AllowOverTypeWithValidClosingTokenAsync(BraceCompletionContext context, CancellationToken cancellationToken)
-        {
-            return CheckClosingTokenKindAsync(context.Document, context.ClosingPoint, cancellationToken);
+        protected Task<bool> AllowOverTypeWithValidClosingTokenAsync(
+            BraceCompletionContext context,
+            CancellationToken cancellationToken
+        ) {
+            return CheckClosingTokenKindAsync(
+                context.Document,
+                context.ClosingPoint,
+                cancellationToken
+            );
         }
 
-        protected static bool ParentIsSkippedTokensTriviaOrNull(ISyntaxFactsService syntaxFactsService, SyntaxToken token)
-            => token.Parent == null || syntaxFactsService.IsSkippedTokensTrivia(token.Parent);
+        protected static bool ParentIsSkippedTokensTriviaOrNull(
+            ISyntaxFactsService syntaxFactsService,
+            SyntaxToken token
+        ) => token.Parent == null || syntaxFactsService.IsSkippedTokensTrivia(token.Parent);
 
         /// <summary>
         /// Checks that the token at the closing position is a valid closing token.
         /// </summary>
-        private async Task<bool> CheckClosingTokenKindAsync(Document document, int closingPosition, CancellationToken cancellationToken)
-        {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var closingToken = root.FindTokenFromEnd(closingPosition, includeZeroWidth: false, findInsideTrivia: true);
+        private async Task<bool> CheckClosingTokenKindAsync(
+            Document document,
+            int closingPosition,
+            CancellationToken cancellationToken
+        ) {
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var closingToken = root.FindTokenFromEnd(
+                closingPosition,
+                includeZeroWidth: false,
+                findInsideTrivia: true
+            );
             return IsValidClosingBraceToken(closingToken);
         }
 
@@ -190,8 +263,12 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         /// escape a previously inserted opening brace.
         /// E.g. they are trying to type $"{{"
         /// </summary>
-        protected static async Task<bool> CouldEscapePreviousOpenBraceAsync(char openingBrace, int position, Document document, CancellationToken cancellationToken)
-        {
+        protected static async Task<bool> CouldEscapePreviousOpenBraceAsync(
+            char openingBrace,
+            int position,
+            Document document,
+            CancellationToken cancellationToken
+        ) {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var index = position - 1;
             var openBraceCount = 0;

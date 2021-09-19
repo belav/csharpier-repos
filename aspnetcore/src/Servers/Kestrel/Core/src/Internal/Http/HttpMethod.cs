@@ -3,7 +3,7 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 {
-    public enum HttpMethod: byte
+    public enum HttpMethod : byte
     {
         Get,
         Put,
@@ -14,9 +14,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         Patch,
         Connect,
         Options,
-
         Custom,
-
         None = byte.MaxValue,
     }
 }

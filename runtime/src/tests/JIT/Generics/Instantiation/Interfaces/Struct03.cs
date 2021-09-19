@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public interface IGen<T>
 {
     bool InstVerify(System.Type t1);
@@ -64,12 +63,10 @@ public class Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-
         IGen<int> IGenInt = new Gen<int>(new int());
         Eval(IGenInt.InstVerify(typeof(int)));
 
@@ -111,5 +108,4 @@ public class Test
             return 1;
         }
     }
-
 }

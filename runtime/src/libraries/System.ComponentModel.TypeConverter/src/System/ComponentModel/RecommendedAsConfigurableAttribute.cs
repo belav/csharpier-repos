@@ -7,7 +7,9 @@ namespace System.ComponentModel
     /// Specifies that the property can be used as an application setting.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    [Obsolete("Use System.ComponentModel.SettingsBindableAttribute instead to work with the new settings model.")]
+    [Obsolete(
+        "Use System.ComponentModel.SettingsBindableAttribute instead to work with the new settings model."
+    )]
     public class RecommendedAsConfigurableAttribute : Attribute
     {
         /// <summary>
@@ -29,13 +31,15 @@ namespace System.ComponentModel
         /// Specifies that a property cannot be used as an application setting. This
         /// <see langword='static '/>field is read-only.
         /// </summary>
-        public static readonly RecommendedAsConfigurableAttribute No = new RecommendedAsConfigurableAttribute(false);
+        public static readonly RecommendedAsConfigurableAttribute No =
+            new RecommendedAsConfigurableAttribute(false);
 
         /// <summary>
         /// Specifies
         /// that a property can be used as an application setting. This <see langword='static '/>field is read-only.
         /// </summary>
-        public static readonly RecommendedAsConfigurableAttribute Yes = new RecommendedAsConfigurableAttribute(true);
+        public static readonly RecommendedAsConfigurableAttribute Yes =
+            new RecommendedAsConfigurableAttribute(true);
 
         /// <summary>
         /// Specifies the default value for the <see cref='System.ComponentModel.RecommendedAsConfigurableAttribute'/>, which is <see cref='System.ComponentModel.RecommendedAsConfigurableAttribute.No'/>. This <see langword='static '/>field is
@@ -50,7 +54,8 @@ namespace System.ComponentModel
                 return true;
             }
 
-            return obj is RecommendedAsConfigurableAttribute other && other.RecommendedAsConfigurable == RecommendedAsConfigurable;
+            return obj is RecommendedAsConfigurableAttribute other
+                && other.RecommendedAsConfigurable == RecommendedAsConfigurable;
         }
 
         /// <summary>

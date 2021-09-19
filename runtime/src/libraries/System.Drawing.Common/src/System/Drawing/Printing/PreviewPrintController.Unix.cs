@@ -37,9 +37,7 @@ namespace System.Drawing.Printing
 {
     public partial class PreviewPrintController : PrintController
     {
-        public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
-        {
-        }
+        public override void OnEndPage(PrintDocument document, PrintPageEventArgs e) { }
 
         public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
         {
@@ -56,21 +54,27 @@ namespace System.Drawing.Printing
             _list.Clear();
         }
 
-        public override void OnEndPrint(PrintDocument document, PrintEventArgs e)
-        {
-        }
+        public override void OnEndPrint(PrintDocument document, PrintEventArgs e) { }
 
         public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
         {
-            Image image = new Bitmap(e.PageSettings.PaperSize.Width, e.PageSettings.PaperSize.Height);
+            Image image = new Bitmap(
+                e.PageSettings.PaperSize.Width,
+                e.PageSettings.PaperSize.Height
+            );
 
-            PreviewPageInfo info = new PreviewPageInfo(image, new Size(e.PageSettings.PaperSize.Width,
-                                             e.PageSettings.PaperSize.Height));
+            PreviewPageInfo info = new PreviewPageInfo(
+                image,
+                new Size(e.PageSettings.PaperSize.Width, e.PageSettings.PaperSize.Height)
+            );
 
             _list.Add(info);
 
             Graphics g = Graphics.FromImage(info.Image);
-            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(new Point(0, 0), new Size(image.Width, image.Height)));
+            g.FillRectangle(
+                new SolidBrush(Color.White),
+                new Rectangle(new Point(0, 0), new Size(image.Width, image.Height))
+            );
 
             return g;
         }

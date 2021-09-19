@@ -8,8 +8,10 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, IEnumerable<TResult>> selector)
-        {
+        public static IEnumerable<TResult> SelectMany<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, IEnumerable<TResult>> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -23,8 +25,10 @@ namespace System.Linq
             return new SelectManySingleSelectorIterator<TSource, TResult>(source, selector);
         }
 
-        public static IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, int, IEnumerable<TResult>> selector)
-        {
+        public static IEnumerable<TResult> SelectMany<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int, IEnumerable<TResult>> selector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -38,8 +42,10 @@ namespace System.Linq
             return SelectManyIterator(source, selector);
         }
 
-        private static IEnumerable<TResult> SelectManyIterator<TSource, TResult>(IEnumerable<TSource> source, Func<TSource, int, IEnumerable<TResult>> selector)
-        {
+        private static IEnumerable<TResult> SelectManyIterator<TSource, TResult>(
+            IEnumerable<TSource> source,
+            Func<TSource, int, IEnumerable<TResult>> selector
+        ) {
             int index = -1;
             foreach (TSource element in source)
             {
@@ -55,8 +61,11 @@ namespace System.Linq
             }
         }
 
-        public static IEnumerable<TResult> SelectMany<TSource, TCollection, TResult>(this IEnumerable<TSource> source, Func<TSource, int, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector)
-        {
+        public static IEnumerable<TResult> SelectMany<TSource, TCollection, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -75,8 +84,11 @@ namespace System.Linq
             return SelectManyIterator(source, collectionSelector, resultSelector);
         }
 
-        private static IEnumerable<TResult> SelectManyIterator<TSource, TCollection, TResult>(IEnumerable<TSource> source, Func<TSource, int, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector)
-        {
+        private static IEnumerable<TResult> SelectManyIterator<TSource, TCollection, TResult>(
+            IEnumerable<TSource> source,
+            Func<TSource, int, IEnumerable<TCollection>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector
+        ) {
             int index = -1;
             foreach (TSource element in source)
             {
@@ -92,8 +104,11 @@ namespace System.Linq
             }
         }
 
-        public static IEnumerable<TResult> SelectMany<TSource, TCollection, TResult>(this IEnumerable<TSource> source, Func<TSource, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector)
-        {
+        public static IEnumerable<TResult> SelectMany<TSource, TCollection, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, IEnumerable<TCollection>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -112,8 +127,11 @@ namespace System.Linq
             return SelectManyIterator(source, collectionSelector, resultSelector);
         }
 
-        private static IEnumerable<TResult> SelectManyIterator<TSource, TCollection, TResult>(IEnumerable<TSource> source, Func<TSource, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector)
-        {
+        private static IEnumerable<TResult> SelectManyIterator<TSource, TCollection, TResult>(
+            IEnumerable<TSource> source,
+            Func<TSource, IEnumerable<TCollection>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector
+        ) {
             foreach (TSource element in source)
             {
                 foreach (TCollection subElement in collectionSelector(element))
@@ -123,15 +141,18 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class SelectManySingleSelectorIterator<TSource, TResult> : Iterator<TResult>
+        private sealed partial class SelectManySingleSelectorIterator<TSource, TResult>
+            : Iterator<TResult>
         {
             private readonly IEnumerable<TSource> _source;
             private readonly Func<TSource, IEnumerable<TResult>> _selector;
             private IEnumerator<TSource>? _sourceEnumerator;
             private IEnumerator<TResult>? _subEnumerator;
 
-            internal SelectManySingleSelectorIterator(IEnumerable<TSource> source, Func<TSource, IEnumerable<TResult>> selector)
-            {
+            internal SelectManySingleSelectorIterator(
+                IEnumerable<TSource> source,
+                Func<TSource, IEnumerable<TResult>> selector
+            ) {
                 Debug.Assert(source != null);
                 Debug.Assert(selector != null);
 

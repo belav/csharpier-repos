@@ -7,7 +7,10 @@ using System.Diagnostics.Tracing;
 
 namespace System.Net
 {
-    [EventSource(Name = "Private.InternalDiagnostics.System.Net.Http", LocalizationResources = "FxResources.System.Net.Http.SR")]
+    [EventSource(
+        Name = "Private.InternalDiagnostics.System.Net.Http",
+        LocalizationResources = "FxResources.System.Net.Http.SR"
+    )]
     internal sealed partial class NetEventSource : EventSource
     {
         private const int UriBaseAddressId = NextAvailableEventId;
@@ -45,12 +48,22 @@ namespace System.Net
             WriteEvent(HeadersInvalidValueId, name, rawValue);
 
         [Event(HandlerMessageId, Keywords = Keywords.Debug, Level = EventLevel.Verbose)]
-        public void HandlerMessage(int poolId, int workerId, int requestId, string? memberName, string? message) =>
-            WriteEvent(HandlerMessageId, poolId, workerId, requestId, memberName, message);
+        public void HandlerMessage(
+            int poolId,
+            int workerId,
+            int requestId,
+            string? memberName,
+            string? message
+        ) => WriteEvent(HandlerMessageId, poolId, workerId, requestId, memberName, message);
 
         [Event(HandlerErrorId, Keywords = Keywords.Debug, Level = EventLevel.Error)]
-        public void HandlerMessageError(int poolId, int workerId, int requestId, string? memberName, string message) =>
-            WriteEvent(HandlerErrorId, poolId, workerId, requestId, memberName, message);
+        public void HandlerMessageError(
+            int poolId,
+            int workerId,
+            int requestId,
+            string? memberName,
+            string message
+        ) => WriteEvent(HandlerErrorId, poolId, workerId, requestId, memberName, message);
 
         [NonEvent]
         public static void AuthenticationInfo(Uri uri, string message)
@@ -75,38 +88,36 @@ namespace System.Net
             WriteEvent(AuthenticationErrorId, uri, message);
 
 #if !ES_BUILD_STANDALONE
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = "Parameters to this method are primitive and are trimmer safe")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = "Parameters to this method are primitive and are trimmer safe"
+        )]
 #endif
         [NonEvent]
-        private unsafe void WriteEvent(int eventId, int arg1, int arg2, int arg3, string? arg4, string? arg5)
-        {
+        private unsafe void WriteEvent(
+            int eventId,
+            int arg1,
+            int arg2,
+            int arg3,
+            string? arg4,
+            string? arg5
+        ) {
             if (IsEnabled())
             {
-                if (arg4 == null) arg4 = "";
-                if (arg5 == null) arg5 = "";
+                if (arg4 == null)
+                    arg4 = "";
+                if (arg5 == null)
+                    arg5 = "";
 
-                fixed (char* string4Bytes = arg4)
-                fixed (char* string5Bytes = arg5)
+                fixed (char* string4Bytes = arg4)fixed (char* string5Bytes = arg5)
                 {
                     const int NumEventDatas = 5;
                     var descrs = stackalloc EventData[NumEventDatas];
 
-                    descrs[0] = new EventData
-                    {
-                        DataPointer = (IntPtr)(&arg1),
-                        Size = sizeof(int)
-                    };
-                    descrs[1] = new EventData
-                    {
-                        DataPointer = (IntPtr)(&arg2),
-                        Size = sizeof(int)
-                    };
-                    descrs[2] = new EventData
-                    {
-                        DataPointer = (IntPtr)(&arg3),
-                        Size = sizeof(int)
-                    };
+                    descrs[0] = new EventData { DataPointer = (IntPtr)(&arg1), Size = sizeof(int) };
+                    descrs[1] = new EventData { DataPointer = (IntPtr)(&arg2), Size = sizeof(int) };
+                    descrs[2] = new EventData { DataPointer = (IntPtr)(&arg3), Size = sizeof(int) };
                     descrs[3] = new EventData
                     {
                         DataPointer = (IntPtr)string4Bytes,

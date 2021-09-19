@@ -91,7 +91,7 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Uses P/Invokes
         public void TrueForNonRegularFile()
         {
             string fileName = GetTestFilePath();
@@ -135,13 +135,23 @@ namespace System.IO.Tests
         public void UnsharedFileExists()
         {
             string path = GetTestFilePath();
-            using (FileStream stream = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
-            {
-                RemoteExecutor.Invoke((p) =>
-                {
-                    FileInfo info = new FileInfo(p);
-                    Assert.True(info.Exists);
-                }, path).Dispose();
+            using (
+                FileStream stream = new FileStream(
+                    path,
+                    FileMode.CreateNew,
+                    FileAccess.ReadWrite,
+                    FileShare.None
+                )
+            ) {
+                RemoteExecutor.Invoke(
+                        (p) =>
+                        {
+                            FileInfo info = new FileInfo(p);
+                            Assert.True(info.Exists);
+                        },
+                        path
+                    )
+                    .Dispose();
             }
         }
 
@@ -152,15 +162,25 @@ namespace System.IO.Tests
             string path = GetTestFilePath();
             File.WriteAllBytes(path, new byte[10]);
 
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
-            {
+            using (
+                FileStream stream = new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.None
+                )
+            ) {
                 stream.Lock(0, 10);
 
-                RemoteExecutor.Invoke((p) =>
-                {
-                    FileInfo info = new FileInfo(p);
-                    Assert.True(info.Exists);
-                }, path).Dispose();
+                RemoteExecutor.Invoke(
+                        (p) =>
+                        {
+                            FileInfo info = new FileInfo(p);
+                            Assert.True(info.Exists);
+                        },
+                        path
+                    )
+                    .Dispose();
 
                 stream.Unlock(0, 10);
             }

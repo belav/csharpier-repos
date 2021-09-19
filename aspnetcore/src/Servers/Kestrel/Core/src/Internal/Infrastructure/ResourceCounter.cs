@@ -18,9 +18,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private class UnlimitedCounter : ResourceCounter
         {
             public override bool TryLockOne() => true;
-            public override void ReleaseOne()
-            {
-            }
+            public override void ReleaseOne() { }
         }
 
         internal class FiniteCounter : ResourceCounter
@@ -63,7 +61,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             {
                 Interlocked.Decrement(ref _count);
 
-                Debug.Assert(_count >= 0, "Resource count is negative. More resources were released than were locked.");
+                Debug.Assert(
+                    _count >= 0,
+                    "Resource count is negative. More resources were released than were locked."
+                );
             }
 
             // for testing

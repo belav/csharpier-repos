@@ -16,8 +16,7 @@ namespace KeyManagementSample
         {
             var keysFolder = Path.Combine(Directory.GetCurrentDirectory(), "temp-keys");
             var serviceCollection = new ServiceCollection();
-            var builder = serviceCollection
-                .AddDataProtection()
+            var builder = serviceCollection.AddDataProtection()
                 // point at a specific folder and use DPAPI to encrypt keys
                 .PersistKeysToFileSystem(new DirectoryInfo(keysFolder));
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -40,7 +39,9 @@ namespace KeyManagementSample
                 Console.WriteLine($"The key ring contains {allKeys.Count} key(s).");
                 foreach (var key in allKeys)
                 {
-                    Console.WriteLine($"Key {key.KeyId:B}: Created = {key.CreationDate:u}, IsRevoked = {key.IsRevoked}");
+                    Console.WriteLine(
+                        $"Key {key.KeyId:B}: Created = {key.CreationDate:u}, IsRevoked = {key.IsRevoked}"
+                    );
                 }
 
                 // revoke all keys in the key ring
@@ -50,7 +51,8 @@ namespace KeyManagementSample
                 // add a new key to the key ring with immediate activation and a 1-month expiration
                 keyManager.CreateNewKey(
                     activationDate: DateTimeOffset.Now,
-                    expirationDate: DateTimeOffset.Now.AddMonths(1));
+                    expirationDate: DateTimeOffset.Now.AddMonths(1)
+                );
                 Console.WriteLine("Added a new key.");
 
                 // list all keys in the key ring
@@ -58,7 +60,9 @@ namespace KeyManagementSample
                 Console.WriteLine($"The key ring contains {allKeys.Count} key(s).");
                 foreach (var key in allKeys)
                 {
-                    Console.WriteLine($"Key {key.KeyId:B}: Created = {key.CreationDate:u}, IsRevoked = {key.IsRevoked}");
+                    Console.WriteLine(
+                        $"Key {key.KeyId:B}: Created = {key.CreationDate:u}, IsRevoked = {key.IsRevoked}"
+                    );
                 }
             }
         }

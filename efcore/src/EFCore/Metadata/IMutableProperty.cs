@@ -55,16 +55,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     if the given property is part of a foreign key.
         /// </summary>
         /// <returns> The first associated principal property, or <see langword="null" /> if none exists. </returns>
-        new IMutableProperty? FindFirstPrincipal()
-            => (IMutableProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
+        new IMutableProperty? FindFirstPrincipal() =>
+            (IMutableProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
 
         /// <summary>
         ///     Finds the list of principal properties including the given property that the given property is constrained by
         ///     if the given property is part of a foreign key.
         /// </summary>
         /// <returns> The list of all associated principal properties including the given property. </returns>
-        new IReadOnlyList<IMutableProperty> GetPrincipals()
-            => ((IReadOnlyProperty)this).GetPrincipals().Cast<IMutableProperty>().ToList();
+        new IReadOnlyList<IMutableProperty> GetPrincipals() =>
+            ((IReadOnlyProperty)this).GetPrincipals().Cast<IMutableProperty>().ToList();
 
         /// <summary>
         ///     Gets all foreign keys that use this property (including composite foreign keys in which this property
@@ -91,8 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     The primary that use this property, or <see langword="null" /> if it is not part of the primary key.
         /// </returns>
-        new IMutableKey? FindContainingPrimaryKey()
-            => (IMutableKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
+        new IMutableKey? FindContainingPrimaryKey() =>
+            (IMutableKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
 
         /// <summary>
         ///     Gets all primary or alternate keys that use this property (including composite keys in which this property
@@ -187,7 +187,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     A factory that will be used to create the value generator, or <see langword="null" /> to
         ///     clear any previously set factory.
         /// </param>
-        void SetValueGeneratorFactory(Func<IProperty, IEntityType, ValueGenerator> valueGeneratorFactory);
+        void SetValueGeneratorFactory(
+            Func<IProperty, IEntityType, ValueGenerator> valueGeneratorFactory
+        );
 
         /// <summary>
         ///     Sets the custom <see cref="ValueConverter" /> for this property.

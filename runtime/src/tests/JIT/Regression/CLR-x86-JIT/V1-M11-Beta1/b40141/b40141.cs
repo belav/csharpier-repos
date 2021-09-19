@@ -8,7 +8,10 @@ namespace Test
 
     class BB
     {
-        static int[] Static2() { return new int[100]; }
+        static int[] Static2()
+        {
+            return new int[100];
+        }
 
         static void Method4()
         {
@@ -16,12 +19,14 @@ namespace Test
             if (local2[10])
             { //generate exception
                 try { }
+
                 finally
                 {
                     int n = Static2()[0];
                     while (Static2()[0] != 0)
                     {
                         try { }
+
                         finally { }
                     }
                 }
@@ -33,7 +38,10 @@ namespace Test
             {
                 Method4();
             }
-            catch (Exception) { return 100; }
+            catch (Exception)
+            {
+                return 100;
+            }
             return -1;
         }
     }

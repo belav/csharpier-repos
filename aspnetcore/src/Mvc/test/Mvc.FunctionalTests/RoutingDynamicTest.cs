@@ -12,15 +12,19 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class RoutingDynamicTest : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForDynamic>>
+    public class RoutingDynamicTest
+        : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForDynamic>>
     {
         public RoutingDynamicTest(MvcTestFixture<RoutingWebSite.StartupForDynamic> fixture)
         {
-            Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            Factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = Factory.CreateDefaultClient();
         }
 
-        private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<RoutingWebSite.StartupForDynamic>();
+        private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+            builder.UseStartup<RoutingWebSite.StartupForDynamic>();
 
         public WebApplicationFactory<StartupForDynamic> Factory { get; }
         public HttpClient Client { get; }
@@ -59,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task DynamicController_CanSelectControllerInArea()
         {
             // Arrange
-            var url = "http://localhost/v1/dynamic/area%3Dadmin,controller%3Ddynamic,action%3Dindex";
+            var url =
+                "http://localhost/v1/dynamic/area%3Dadmin,controller%3Ddynamic,action%3Dindex";
             var request = new HttpRequestMessage(HttpMethod.Get, url);
 
             // Act
@@ -75,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task DynamicController_CanFilterResultsBasedOnState()
         {
             // Arrange
-            var url = "http://localhost/v2/dynamic/area%3Dadmin,controller%3Ddynamic,action%3Dindex";
+            var url =
+                "http://localhost/v2/dynamic/area%3Dadmin,controller%3Ddynamic,action%3Dindex";
             var request = new HttpRequestMessage(HttpMethod.Get, url);
 
             // Act
@@ -89,7 +95,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task DynamicController_CanSelectControllerInArea_WithActionConstraints()
         {
             // Arrange
-            var url = "http://localhost/v1/dynamic/area%3Dadmin,controller%3Ddynamic,action%3Dindex";
+            var url =
+                "http://localhost/v1/dynamic/area%3Dadmin,controller%3Ddynamic,action%3Dindex";
             var request = new HttpRequestMessage(HttpMethod.Post, url);
 
             // Act
@@ -98,7 +105,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal("Hello from dynamic controller POST: /link_generation/dynamic/index", content);
+            Assert.Equal(
+                "Hello from dynamic controller POST: /link_generation/dynamic/index",
+                content
+            );
         }
 
         [Fact]
@@ -137,7 +147,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Regression test for https://github.com/dotnet/aspnetcore/issues/13996
             // Arrange
-            var client = Factory.WithWebHostBuilder(b => b.UseStartup<StartupForDynamicAndRazorPages>()).CreateDefaultClient();
+            var client = Factory.WithWebHostBuilder(
+                    b => b.UseStartup<StartupForDynamicAndRazorPages>()
+                )
+                .CreateDefaultClient();
             var url = "/PageWithLinks";
 
             // Act
@@ -154,7 +167,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Regression test for https://github.com/dotnet/aspnetcore/issues/13996
             // Arrange
-            var client = Factory.WithWebHostBuilder(b => b.UseStartup<StartupForDynamicAndRazorPages>()).CreateDefaultClient();
+            var client = Factory.WithWebHostBuilder(
+                    b => b.UseStartup<StartupForDynamicAndRazorPages>()
+                )
+                .CreateDefaultClient();
             var url = "/de/area%3Dadmin,controller%3Ddynamic,action%3Dindex";
 
             // Act

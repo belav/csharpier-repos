@@ -33,11 +33,27 @@ namespace System.Threading.Tasks.Tests
             for (int i = 0; i < taskCount; i++)
             {
                 int iCopy = 2 * i;
-                Task t1 = Task.Factory.StartNew(() => { tmIDs[iCopy] = TaskScheduler.Current.Id; }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
+                Task t1 = Task.Factory.StartNew(
+                    () =>
+                    {
+                        tmIDs[iCopy] = TaskScheduler.Current.Id;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
                 taskIDs[iCopy] = t1.Id;
                 t1.Wait();
 
-                Task t2 = Task.Factory.StartNew(() => { tmIDs[iCopy + 1] = TaskScheduler.Current.Id; }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
+                Task t2 = Task.Factory.StartNew(
+                    () =>
+                    {
+                        tmIDs[iCopy + 1] = TaskScheduler.Current.Id;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
                 taskIDs[iCopy + 1] = t2.Id;
                 t2.Wait();
             }
@@ -50,7 +66,17 @@ namespace System.Threading.Tasks.Tests
                 {
                     var testID = taskIDs[j];
                     if (id.Equals(testID) && i != j)
-                        Assert.True(false, string.Format("Found matching Task.ID for different tasks at index i [" + i + "] and j [" + j + "].  ID: " + id));
+                        Assert.True(
+                            false,
+                            string.Format(
+                                "Found matching Task.ID for different tasks at index i ["
+                                    + i
+                                    + "] and j ["
+                                    + j
+                                    + "].  ID: "
+                                    + id
+                            )
+                        );
                 }
             }
         }
@@ -105,7 +131,10 @@ namespace System.Threading.Tasks.Tests
             {
                 if ((int)(tasks[i].CreationOptions) != i)
                 {
-                    Assert.True(false, string.Format("Task.CreationOptions failed at Option = {0}", i));
+                    Assert.True(
+                        false,
+                        string.Format("Task.CreationOptions failed at Option = {0}", i)
+                    );
                 }
             }
         }

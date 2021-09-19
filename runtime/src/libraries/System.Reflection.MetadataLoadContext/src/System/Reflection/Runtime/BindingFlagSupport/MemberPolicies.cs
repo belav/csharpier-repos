@@ -26,14 +26,24 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         // Returns all of the directly declared members on the given TypeInfo whose name matches filter. If filter is null,
         // returns all directly declared members.
         //
-        public abstract IEnumerable<M> CoreGetDeclaredMembers(RuntimeTypeInfo type, NameFilter? filter, RuntimeTypeInfo reflectedType);
+        public abstract IEnumerable<M> CoreGetDeclaredMembers(
+            RuntimeTypeInfo type,
+            NameFilter? filter,
+            RuntimeTypeInfo reflectedType
+        );
 
         //
         // Policy to decide whether a member is considered "virtual", "virtual new" and what its member visibility is.
         // (For "visibility", we reuse the MethodAttributes enum since Reflection lacks an element-agnostic enum for this.
         //  Only the MemberAccessMask bits are set.)
         //
-        public abstract void GetMemberAttributes(M member, out MethodAttributes visibility, out bool isStatic, out bool isVirtual, out bool isNewSlot);
+        public abstract void GetMemberAttributes(
+            M member,
+            out MethodAttributes visibility,
+            out bool isStatic,
+            out bool isVirtual,
+            out bool isNewSlot
+        );
 
         //
         // Policy to decide whether "derivedMember" is a virtual override of "baseMember." Used to implement MethodInfo.GetBaseDefinition(),
@@ -62,7 +72,12 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         // Policy to decide how or if members in more derived types hide same-named members in base types.
         // Due to .NET Framework compat concerns, the definitions are a bit more arbitrary than we'd like.
         //
-        public abstract bool IsSuppressedByMoreDerivedMember(M member, M[] priorMembers, int startIndex, int endIndex);
+        public abstract bool IsSuppressedByMoreDerivedMember(
+            M member,
+            M[] priorMembers,
+            int startIndex,
+            int endIndex
+        );
 
         //
         // Policy to decide whether to throw an AmbiguousMatchException on an ambiguous Type.Get*() call.
@@ -138,15 +153,21 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             if (!(t1.ContainsGenericParameters && t2.ContainsGenericParameters))
                 return false;
 
-            if ((t1.IsArray && t2.IsArray) || (t1.IsByRef && t2.IsByRef) || (t1.IsPointer && t2.IsPointer))
-            {
+            if (
+                (t1.IsArray && t2.IsArray)
+                || (t1.IsByRef && t2.IsByRef)
+                || (t1.IsPointer && t2.IsPointer)
+            ) {
                 if (t1.IsSZArray() != t2.IsSZArray())
                     return false;
 
                 if (t1.IsArray && (t1.GetArrayRank() != t2.GetArrayRank()))
                     return false;
 
-                return GenericMethodAwareAreParameterTypesEqual(t1.GetElementType()!, t2.GetElementType()!);
+                return GenericMethodAwareAreParameterTypesEqual(
+                    t1.GetElementType()!,
+                    t2.GetElementType()!
+                );
             }
 
             if (t1.IsConstructedGenericType)

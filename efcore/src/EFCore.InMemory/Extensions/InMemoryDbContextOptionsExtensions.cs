@@ -35,10 +35,13 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder<TContext> UseInMemoryDatabase<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             string databaseName,
-            Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null)
-            where TContext : DbContext
-            => (DbContextOptionsBuilder<TContext>)UseInMemoryDatabase(
-                (DbContextOptionsBuilder)optionsBuilder, databaseName, inMemoryOptionsAction);
+            Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null
+        ) where TContext : DbContext =>
+            (DbContextOptionsBuilder<TContext>)UseInMemoryDatabase(
+                (DbContextOptionsBuilder)optionsBuilder,
+                databaseName,
+                inMemoryOptionsAction
+            );
 
         /// <summary>
         ///     Configures the context to connect to a named in-memory database.
@@ -57,8 +60,8 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder UseInMemoryDatabase(
             this DbContextOptionsBuilder optionsBuilder,
             string databaseName,
-            Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null)
-            => UseInMemoryDatabase(optionsBuilder, databaseName, null, inMemoryOptionsAction);
+            Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null
+        ) => UseInMemoryDatabase(optionsBuilder, databaseName, null, inMemoryOptionsAction);
 
         /// <summary>
         ///     Configures the context to connect to an in-memory database.
@@ -82,10 +85,14 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             string databaseName,
             InMemoryDatabaseRoot? databaseRoot,
-            Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null)
-            where TContext : DbContext
-            => (DbContextOptionsBuilder<TContext>)UseInMemoryDatabase(
-                (DbContextOptionsBuilder)optionsBuilder, databaseName, databaseRoot, inMemoryOptionsAction);
+            Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null
+        ) where TContext : DbContext =>
+            (DbContextOptionsBuilder<TContext>)UseInMemoryDatabase(
+                (DbContextOptionsBuilder)optionsBuilder,
+                databaseName,
+                databaseRoot,
+                inMemoryOptionsAction
+            );
 
         /// <summary>
         ///     Configures the context to connect to a named in-memory database.
@@ -108,12 +115,13 @@ namespace Microsoft.EntityFrameworkCore
             this DbContextOptionsBuilder optionsBuilder,
             string databaseName,
             InMemoryDatabaseRoot? databaseRoot,
-            Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null)
-        {
+            Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null
+        ) {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
             Check.NotEmpty(databaseName, nameof(databaseName));
 
-            var extension = optionsBuilder.Options.FindExtension<InMemoryOptionsExtension>()
+            var extension =
+                optionsBuilder.Options.FindExtension<InMemoryOptionsExtension>()
                 ?? new InMemoryOptionsExtension();
 
             extension = extension.WithStoreName(databaseName);
@@ -127,7 +135,9 @@ namespace Microsoft.EntityFrameworkCore
 
             ConfigureWarnings(optionsBuilder);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                extension
+            );
 
             inMemoryOptionsAction?.Invoke(new InMemoryDbContextOptionsBuilder(optionsBuilder));
 
@@ -137,15 +147,20 @@ namespace Microsoft.EntityFrameworkCore
         private static void ConfigureWarnings(DbContextOptionsBuilder optionsBuilder)
         {
             // Set warnings defaults
-            var coreOptionsExtension
-                = optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
+            var coreOptionsExtension =
+                optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
                 ?? new CoreOptionsExtension();
 
             coreOptionsExtension = coreOptionsExtension.WithWarningsConfiguration(
                 coreOptionsExtension.WarningsConfiguration.TryWithExplicit(
-                    InMemoryEventId.TransactionIgnoredWarning, WarningBehavior.Throw));
+                    InMemoryEventId.TransactionIgnoredWarning,
+                    WarningBehavior.Throw
+                )
+            );
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(coreOptionsExtension);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                coreOptionsExtension
+            );
         }
     }
 }

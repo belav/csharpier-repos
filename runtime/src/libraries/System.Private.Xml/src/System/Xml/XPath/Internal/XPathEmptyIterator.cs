@@ -8,7 +8,10 @@ namespace MS.Internal.Xml.XPath
     internal sealed class XPathEmptyIterator : ResetableIterator
     {
         private XPathEmptyIterator() { }
-        public override XPathNodeIterator Clone() { return this; }
+        public override XPathNodeIterator Clone()
+        {
+            return this;
+        }
 
         public override XPathNavigator? Current
         {

@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 {
     internal partial class DisconnectListener
     {
-        private readonly ConcurrentDictionary<ulong, ConnectionCancellation> _connectionCancellationTokens = new();
+        private readonly ConcurrentDictionary<
+            ulong,
+            ConnectionCancellation
+        > _connectionCancellationTokens = new();
 
         private readonly RequestQueue _requestQueue;
         private readonly ILogger _logger;
@@ -39,7 +42,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         private CancellationToken GetOrCreateDisconnectToken(ulong connectionId)
         {
-            // Read case is performance sensitive 
+            // Read case is performance sensitive
             if (!_connectionCancellationTokens.TryGetValue(connectionId, out var cancellation))
             {
                 cancellation = GetCreatedConnectionCancellation(connectionId);
@@ -49,7 +52,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
         private ConnectionCancellation GetCreatedConnectionCancellation(ulong connectionId)
         {
-            // Race condition on creation has no side effects 
+            // Race condition on creation has no side effects
             var cancellation = new ConnectionCancellation(this);
             return _connectionCancellationTokens.GetOrAdd(connectionId, cancellation);
         }
@@ -62,39 +65,41 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             var cts = new CancellationTokenSource();
             var returnToken = cts.Token;
 
-            var overlapped = new Overlapped
-            {
-                OffsetHigh = 0,
-                OffsetLow = 0
-            };
+            var overlapped = new Overlapped { OffsetHigh = 0, OffsetLow = 0 };
 
             // We're not using boundHandle.AllocateNativeOverlapped here because we want to avoid capturing the ExecutionContext (see https://github.com/dotnet/runtime/issues/42549)
             // Instead, we're going to use lower level APIs to get access to UnsafePack (which avoids the capture)
-            var nativeOverlapped = overlapped.UnsafePack((errorCode, numBytes, pOverlapped) =>
-            {
-                Log.DisconnectTriggered(_logger, connectionId);
-
-                // Free the overlapped
-                Overlapped.Free(pOverlapped);
-
-                // Pull the token out of the list and Cancel it.
-                _connectionCancellationTokens.TryRemove(connectionId, out _);
-                try
+            var nativeOverlapped = overlapped.UnsafePack(
+                (errorCode, numBytes, pOverlapped) =>
                 {
-                    cts.Cancel();
-                }
-                catch (AggregateException exception)
-                {
-                    Log.DisconnectHandlerError(_logger, exception);
-                }
-            },
-            null);
+                    Log.DisconnectTriggered(_logger, connectionId);
+
+                    // Free the overlapped
+                    Overlapped.Free(pOverlapped);
+
+                    // Pull the token out of the list and Cancel it.
+                    _connectionCancellationTokens.TryRemove(connectionId, out _);
+                    try
+                    {
+                        cts.Cancel();
+                    }
+                    catch (AggregateException exception)
+                    {
+                        Log.DisconnectHandlerError(_logger, exception);
+                    }
+                },
+                null
+            );
 
             uint statusCode;
             try
             {
-                statusCode = HttpApi.HttpWaitForDisconnectEx(requestQueueHandle: _requestQueue.Handle,
-                    connectionId: connectionId, reserved: 0, overlapped: nativeOverlapped);
+                statusCode = HttpApi.HttpWaitForDisconnectEx(
+                    requestQueueHandle: _requestQueue.Handle,
+                    connectionId: connectionId,
+                    reserved: 0,
+                    overlapped: nativeOverlapped
+                );
             }
             catch (Win32Exception exception)
             {
@@ -102,9 +107,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 Log.CreateDisconnectTokenError(_logger, exception);
             }
 
-            if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING &&
-                statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
-            {
+            if (
+                statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_IO_PENDING
+                && statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+            ) {
                 // We got an unknown result, assume the connection has been closed.
                 Overlapped.Free(nativeOverlapped);
                 _connectionCancellationTokens.TryRemove(connectionId, out _);
@@ -112,8 +118,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 cts.Cancel();
             }
 
-            if (statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS && HttpSysListener.SkipIOCPCallbackOnSuccess)
-            {
+            if (
+                statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+                && HttpSysListener.SkipIOCPCallbackOnSuccess
+            ) {
                 // IO operation completed synchronously - callback won't be called to signal completion
                 Overlapped.Free(nativeOverlapped);
                 _connectionCancellationTokens.TryRemove(connectionId, out _);
@@ -148,7 +156,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             {
                 object syncObject = this;
 #pragma warning disable 420 // Disable warning about volatile by reference since EnsureInitialized does volatile operations
-                return LazyInitializer.EnsureInitialized(ref _cancellationToken, ref _initialized, ref syncObject, () => _parent.CreateDisconnectToken(connectionId));
+                return LazyInitializer.EnsureInitialized(
+                    ref _cancellationToken,
+                    ref _initialized,
+                    ref syncObject,
+                    () => _parent.CreateDisconnectToken(connectionId)
+                );
 #pragma warning restore 420
             }
         }

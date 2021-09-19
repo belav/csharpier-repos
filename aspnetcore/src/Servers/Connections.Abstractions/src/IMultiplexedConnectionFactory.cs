@@ -22,6 +22,10 @@ namespace Microsoft.AspNetCore.Connections.Experimental
         /// <returns>
         /// A <see cref="ValueTask{TResult}" /> that represents the asynchronous connect, yielding the <see cref="MultiplexedConnectionContext" /> for the new connection when completed.
         /// </returns>
-        ValueTask<MultiplexedConnectionContext> ConnectAsync(EndPoint endpoint, IFeatureCollection? features = null, CancellationToken cancellationToken = default);
+        ValueTask<MultiplexedConnectionContext> ConnectAsync(
+            EndPoint endpoint,
+            IFeatureCollection? features = null,
+            CancellationToken cancellationToken = default
+        );
     }
 }

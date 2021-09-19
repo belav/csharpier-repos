@@ -24,25 +24,31 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary> Bound node, not null </summary>
         public readonly BoundNode BoundNode;
         /// <summary> Region to be used </summary>
-        public readonly BoundNode FirstInRegion, LastInRegion;
+        public readonly BoundNode FirstInRegion,
+            LastInRegion;
         /// <summary> True if the input was bad, such as no first and last nodes </summary>
         public readonly bool Failed;
 
         /// <summary>
         /// Construct context
         /// </summary>
-        public RegionAnalysisContext(CSharpCompilation compilation, Symbol member, BoundNode boundNode, BoundNode firstInRegion, BoundNode lastInRegion)
-        {
+        public RegionAnalysisContext(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode boundNode,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion
+        ) {
             this.Compilation = compilation;
             this.Member = member;
             this.BoundNode = boundNode;
             this.FirstInRegion = firstInRegion;
             this.LastInRegion = lastInRegion;
             this.Failed =
-                boundNode == null ||
-                firstInRegion == null ||
-                lastInRegion == null ||
-                firstInRegion.Syntax.SpanStart > lastInRegion.Syntax.Span.End;
+                boundNode == null
+                || firstInRegion == null
+                || lastInRegion == null
+                || firstInRegion.Syntax.SpanStart > lastInRegion.Syntax.Span.End;
 
             if (!this.Failed && ReferenceEquals(firstInRegion, lastInRegion))
             {

@@ -21,7 +21,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             {
                 if (_assembly == null)
                 {
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), AssemblyName + ".dll");
+                    var filePath = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        AssemblyName + ".dll"
+                    );
                     _assembly = Assembly.LoadFrom(filePath);
                 }
 

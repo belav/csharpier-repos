@@ -6,9 +6,9 @@ class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     public String Test(int val)
     {
-        return ((Object) val).ToString();
+        return ((Object)val).ToString();
     }
-    
+
     static int Main(string[] args)
     {
         int exitStatus = -1;
@@ -16,7 +16,7 @@ class Program
         Program p = new Program();
 
         String result = p.Test(42);
-	if (result == "42")
+        if (result == "42")
         {
             Console.WriteLine("=== PASSED ===");
             exitStatus = 100;

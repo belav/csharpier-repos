@@ -63,10 +63,13 @@ namespace System.IO
             EnsureNotClosed();
 
             long pos =
-                origin == SeekOrigin.Begin ? offset :
-                origin == SeekOrigin.Current ? _position + offset :
-                origin == SeekOrigin.End ? _content.Length + offset :
-                throw new ArgumentOutOfRangeException(nameof(origin));
+                origin == SeekOrigin.Begin
+                    ? offset
+                    : origin == SeekOrigin.Current
+                        ? _position + offset
+                        : origin == SeekOrigin.End
+                            ? _content.Length + offset
+                            : throw new ArgumentOutOfRangeException(nameof(origin));
 
             if (pos > int.MaxValue)
             {
@@ -123,27 +126,38 @@ namespace System.IO
             }
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             ValidateBufferArguments(buffer, offset, count);
             EnsureNotClosed();
-            return cancellationToken.IsCancellationRequested ?
-                Task.FromCanceled<int>(cancellationToken) :
-                Task.FromResult(ReadBuffer(new Span<byte>(buffer, offset, count)));
+            return cancellationToken.IsCancellationRequested
+                ? Task.FromCanceled<int>(cancellationToken)
+                : Task.FromResult(ReadBuffer(new Span<byte>(buffer, offset, count)));
         }
 
 #if !NETFRAMEWORK && !NETSTANDARD2_0
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             EnsureNotClosed();
-            return cancellationToken.IsCancellationRequested ?
-                ValueTask.FromCanceled<int>(cancellationToken) :
-                new ValueTask<int>(ReadBuffer(buffer.Span));
+            return cancellationToken.IsCancellationRequested
+                ? ValueTask.FromCanceled<int>(cancellationToken)
+                : new ValueTask<int>(ReadBuffer(buffer.Span));
         }
 #endif
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
 
         public override int EndRead(IAsyncResult asyncResult)
         {
@@ -162,13 +176,16 @@ namespace System.IO
             }
         }
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
-        {
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        ) {
             ValidateCopyToArguments(destination, bufferSize);
             EnsureNotClosed();
-            return _content.Length > _position ?
-                destination.WriteAsync(_content.Slice(_position), cancellationToken).AsTask() :
-                Task.CompletedTask;
+            return _content.Length > _position
+                ? destination.WriteAsync(_content.Slice(_position), cancellationToken).AsTask()
+                : Task.CompletedTask;
         }
 #endif
 
@@ -178,7 +195,8 @@ namespace System.IO
 
         public override void SetLength(long value) => throw new NotSupportedException();
 
-        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+        public override void Write(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
 
         protected override void Dispose(bool disposing)
         {
@@ -197,7 +215,10 @@ namespace System.IO
 
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if ((uint)count > buffer.Length - offset)

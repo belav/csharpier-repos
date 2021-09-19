@@ -15,18 +15,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
     {
         private class SomeDbContext : DbContext
         {
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) => optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 
-            protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Foo>().Property(e => e.Bar).HasConversion<string>(new FakeValueComparer());
+            protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Foo>()
+                    .Property(e => e.Bar)
+                    .HasConversion<string>(new FakeValueComparer());
         }
 
         protected class FakeValueComparer : ValueComparer<double>
         {
-            public FakeValueComparer() : base(false)
-            {
-            }
+            public FakeValueComparer() : base(false) { }
         }
 
         private class Foo
@@ -42,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 CoreStrings.ComparerPropertyMismatch("double", nameof(Foo), nameof(Foo.Bar), "int"),
-                Assert.Throws<InvalidOperationException>(() => context.Model).Message);
+                Assert.Throws<InvalidOperationException>(() => context.Model).Message
+            );
         }
 
         [ConditionalTheory]
@@ -61,17 +63,33 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [InlineData(typeof(float), (float)1, (float)2, null)]
         [InlineData(typeof(double), (double)1, (double)2, null)]
         [InlineData(typeof(JustAnEnum), JustAnEnum.A, JustAnEnum.B, null)]
-        public ValueComparer Default_comparer_works_for_normal_types(Type type, object value1, object value2, int? hashCode)
-        {
+        public ValueComparer Default_comparer_works_for_normal_types(
+            Type type,
+            object value1,
+            object value2,
+            int? hashCode
+        ) {
             return CompareTest(type, value1, value2, hashCode);
         }
 
-        private static ValueComparer CompareTest(Type type, object value1, object value2, int? hashCode = null)
-            => CompareTest(type, value1, value2, hashCode, false);
+        private static ValueComparer CompareTest(
+            Type type,
+            object value1,
+            object value2,
+            int? hashCode = null
+        ) => CompareTest(type, value1, value2, hashCode, false);
 
-        private static ValueComparer CompareTest(Type type, object value1, object value2, int? hashCode, bool toNullable)
-        {
-            var comparer = (ValueComparer)Activator.CreateInstance(typeof(ValueComparer<>).MakeGenericType(type), new object[] { false });
+        private static ValueComparer CompareTest(
+            Type type,
+            object value1,
+            object value2,
+            int? hashCode,
+            bool toNullable
+        ) {
+            var comparer = (ValueComparer)Activator.CreateInstance(
+                typeof(ValueComparer<>).MakeGenericType(type),
+                new object[] { false }
+            );
             if (toNullable)
             {
                 comparer = comparer.ToNonNullNullableComparer();
@@ -88,7 +106,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(0, comparer.GetHashCode(null));
             Assert.Equal(hashCode ?? value1.GetHashCode(), comparer.GetHashCode(value1));
 
-            var keyComparer = (ValueComparer)Activator.CreateInstance(typeof(ValueComparer<>).MakeGenericType(type), new object[] { true });
+            var keyComparer = (ValueComparer)Activator.CreateInstance(
+                typeof(ValueComparer<>).MakeGenericType(type),
+                new object[] { true }
+            );
             if (toNullable)
             {
                 keyComparer = keyComparer.ToNonNullNullableComparer();
@@ -126,12 +147,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             CompareTest(
                 typeof(JustAStruct),
                 new JustAStruct { A = 1, B = "B1" },
-                new JustAStruct { A = 1, B = "B2" });
+                new JustAStruct { A = 1, B = "B2" }
+            );
 
             CompareTest(
                 typeof(JustAStruct),
                 new JustAStruct { A = 1, B = "B" },
-                new JustAStruct { A = 2, B = "B" });
+                new JustAStruct { A = 2, B = "B" }
+            );
         }
 
         private struct JustAStruct
@@ -146,7 +169,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             CompareTest(
                 typeof(JustAStructWithEquality),
                 new JustAStructWithEquality { A = 1, B = "B" },
-                new JustAStructWithEquality { A = 2, B = "B" });
+                new JustAStructWithEquality { A = 2, B = "B" }
+            );
         }
 
         private struct JustAStructWithEquality
@@ -154,14 +178,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
             public int A { get; set; }
             public string B { get; set; }
 
-            private bool Equals(JustAStructWithEquality other)
-                => A == other.A;
+            private bool Equals(JustAStructWithEquality other) => A == other.A;
 
-            public override bool Equals(object obj)
-                => obj is JustAStructWithEquality o && Equals(o);
+            public override bool Equals(object obj) =>
+                obj is JustAStructWithEquality o && Equals(o);
 
-            public override int GetHashCode()
-                => A;
+            public override int GetHashCode() => A;
         }
 
         [ConditionalFact]
@@ -170,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             CompareTest(
                 typeof(JustAStructWithEqualityOperators),
                 new JustAStructWithEqualityOperators { A = 1, B = "B" },
-                new JustAStructWithEqualityOperators { A = 2, B = "B" });
+                new JustAStructWithEqualityOperators { A = 2, B = "B" }
+            );
         }
 
 #pragma warning disable 660,661
@@ -180,12 +203,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             public int A { get; set; }
             public string B { get; set; }
 
-            public static bool operator ==(JustAStructWithEqualityOperators left, JustAStructWithEqualityOperators right)
-                => left.A == right.A
-                    && left.B == right.B;
+            public static bool operator ==(
+                JustAStructWithEqualityOperators left,
+                JustAStructWithEqualityOperators right
+            ) => left.A == right.A && left.B == right.B;
 
-            public static bool operator !=(JustAStructWithEqualityOperators left, JustAStructWithEqualityOperators right)
-                => !(left == right);
+            public static bool operator !=(
+                JustAStructWithEqualityOperators left,
+                JustAStructWithEqualityOperators right
+            ) => !(left == right);
         }
 
         [ConditionalFact]
@@ -194,7 +220,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             CompareTest(
                 typeof(JustAClass), // Reference equality
                 new JustAClass { A = 1 },
-                new JustAClass { A = 1 });
+                new JustAClass { A = 1 }
+            );
         }
 
         private class JustAClass
@@ -208,29 +235,28 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var comparer = CompareTest(
                 typeof(JustAClassWithEquality),
                 new JustAClassWithEquality { A = 1 },
-                new JustAClassWithEquality { A = 2 });
+                new JustAClassWithEquality { A = 2 }
+            );
 
             Assert.True(
                 comparer.Equals(
                     new JustAClassWithEquality { A = 1 },
-                    new JustAClassWithEquality { A = 1 }));
+                    new JustAClassWithEquality { A = 1 }
+                )
+            );
         }
 
         private sealed class JustAClassWithEquality
         {
             public int A { get; set; }
 
-            private bool Equals(JustAClassWithEquality other)
-                => A == other.A;
+            private bool Equals(JustAClassWithEquality other) => A == other.A;
 
-            public override bool Equals(object obj)
-                => !(obj is null)
-                    && (ReferenceEquals(this, obj)
-                        || obj is JustAClassWithEquality o
-                        && Equals(o));
+            public override bool Equals(object obj) =>
+                !(obj is null)
+                && (ReferenceEquals(this, obj) || obj is JustAClassWithEquality o && Equals(o));
 
-            public override int GetHashCode()
-                => A;
+            public override int GetHashCode() => A;
         }
 
         [ConditionalFact]
@@ -239,12 +265,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var comparer = CompareTest(
                 typeof(JustAClassWithEqualityOperators),
                 new JustAClassWithEqualityOperators { A = 1 },
-                new JustAClassWithEqualityOperators { A = 2 });
+                new JustAClassWithEqualityOperators { A = 2 }
+            );
 
             Assert.True(
                 comparer.Equals(
                     new JustAClassWithEqualityOperators { A = 1 },
-                    new JustAClassWithEqualityOperators { A = 1 }));
+                    new JustAClassWithEqualityOperators { A = 1 }
+                )
+            );
         }
 
 #pragma warning disable 660,661
@@ -253,17 +282,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             public int A { get; set; }
 
-            private static bool InternalEquals(JustAClassWithEqualityOperators left, JustAClassWithEqualityOperators right)
-                => left is null
-                    || right is null
-                        ? left is null && right is null
-                        : left.A == right.A;
+            private static bool InternalEquals(
+                JustAClassWithEqualityOperators left,
+                JustAClassWithEqualityOperators right
+            ) => left is null || right is null ? left is null && right is null : left.A == right.A;
 
-            public static bool operator ==(JustAClassWithEqualityOperators left, JustAClassWithEqualityOperators right)
-                => InternalEquals(left, right);
+            public static bool operator ==(
+                JustAClassWithEqualityOperators left,
+                JustAClassWithEqualityOperators right
+            ) => InternalEquals(left, right);
 
-            public static bool operator !=(JustAClassWithEqualityOperators left, JustAClassWithEqualityOperators right)
-                => !InternalEquals(left, right);
+            public static bool operator !=(
+                JustAClassWithEqualityOperators left,
+                JustAClassWithEqualityOperators right
+            ) => !InternalEquals(left, right);
         }
 
         private void GenericCompareTest<T>(T value1, T value2, int? hashCode = null)
@@ -309,18 +341,24 @@ namespace Microsoft.EntityFrameworkCore.Storage
             GenericCompareTest("A", "B");
             GenericCompareTest<object>(1, "A");
             GenericCompareTest(JustAnEnum.A, JustAnEnum.B);
+            GenericCompareTest(new JustAClass { A = 1 }, new JustAClass { A = 2 });
             GenericCompareTest(
-                new JustAClass { A = 1 }, new JustAClass { A = 2 });
+                new JustAClassWithEquality { A = 1 },
+                new JustAClassWithEquality { A = 2 }
+            );
             GenericCompareTest(
-                new JustAClassWithEquality { A = 1 }, new JustAClassWithEquality { A = 2 });
+                new JustAClassWithEqualityOperators { A = 1 },
+                new JustAClassWithEqualityOperators { A = 2 }
+            );
+            GenericCompareTest(new JustAStruct { A = 1 }, new JustAStruct { A = 2 });
             GenericCompareTest(
-                new JustAClassWithEqualityOperators { A = 1 }, new JustAClassWithEqualityOperators { A = 2 });
+                new JustAStructWithEquality { A = 1 },
+                new JustAStructWithEquality { A = 2 }
+            );
             GenericCompareTest(
-                new JustAStruct { A = 1 }, new JustAStruct { A = 2 });
-            GenericCompareTest(
-                new JustAStructWithEquality { A = 1 }, new JustAStructWithEquality { A = 2 });
-            GenericCompareTest(
-                new JustAStructWithEqualityOperators { A = 1 }, new JustAStructWithEqualityOperators { A = 2 });
+                new JustAStructWithEqualityOperators { A = 1 },
+                new JustAStructWithEqualityOperators { A = 2 }
+            );
         }
 
         [ConditionalFact]
@@ -343,17 +381,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
             CompareTest(
                 typeof(JustAStruct),
                 (JustAStruct?)new JustAStruct { A = 1 },
-                new JustAStruct { A = 2 });
+                new JustAStruct { A = 2 }
+            );
 
             CompareTest(
                 typeof(JustAStructWithEquality),
                 (JustAStructWithEquality?)new JustAStructWithEquality { A = 1 },
-                new JustAStructWithEquality { A = 2 });
+                new JustAStructWithEquality { A = 2 }
+            );
 
             CompareTest(
                 typeof(JustAStructWithEqualityOperators),
                 (JustAStructWithEqualityOperators?)new JustAStructWithEqualityOperators { A = 1 },
-                new JustAStructWithEqualityOperators { A = 2 });
+                new JustAStructWithEqualityOperators { A = 2 }
+            );
         }
 
         [ConditionalFact]
@@ -376,17 +417,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
             CompareTest(
                 typeof(JustAStruct?),
                 (JustAStruct?)new JustAStruct { A = 1 },
-                new JustAStruct { A = 2 });
+                new JustAStruct { A = 2 }
+            );
 
             CompareTest(
                 typeof(JustAStructWithEquality?),
                 (JustAStructWithEquality?)new JustAStructWithEquality { A = 1 },
-                new JustAStructWithEquality { A = 2 });
+                new JustAStructWithEquality { A = 2 }
+            );
 
             CompareTest(
                 typeof(JustAStructWithEqualityOperators?),
                 (JustAStructWithEqualityOperators?)new JustAStructWithEqualityOperators { A = 1 },
-                new JustAStructWithEqualityOperators { A = 2 });
+                new JustAStructWithEqualityOperators { A = 2 }
+            );
         }
 
         [ConditionalFact]
@@ -411,21 +455,24 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 (JustAStruct?)new JustAStruct { A = 1 },
                 new JustAStruct { A = 2 },
                 null,
-                true);
+                true
+            );
 
             CompareTest(
                 typeof(JustAStructWithEquality),
                 (JustAStructWithEquality?)new JustAStructWithEquality { A = 1 },
                 new JustAStructWithEquality { A = 2 },
                 null,
-                true);
+                true
+            );
 
             CompareTest(
                 typeof(JustAStructWithEqualityOperators),
                 (JustAStructWithEqualityOperators?)new JustAStructWithEqualityOperators { A = 1 },
                 new JustAStructWithEqualityOperators { A = 2 },
                 null,
-                true);
+                true
+            );
         }
 
         [ConditionalFact]
@@ -482,11 +529,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var comparer = new ValueComparer<Binary>(
                 (v1, v2) => v1.Equals(v2),
-                v => v.GetHashCode());
+                v => v.GetHashCode()
+            );
 
             var keyComparer = new ValueComparer<Binary>(
                 (v1, v2) => v1.Value0 == v2.Value0 && v1.Value1 == v2.Value1,
-                v => v.Value0 << 8 | v.Value1);
+                v => v.Value0 << 8 | v.Value1
+            );
 
             var equals = comparer.EqualsExpression.Compile();
             var keyEquals = keyComparer.EqualsExpression.Compile();
@@ -521,11 +570,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
             public byte[] Value1 { get; }
         }
 
-        private static readonly MethodInfo _getValue0Method
-            = typeof(DeepBinary).GetProperty(nameof(DeepBinary.Value0)).GetMethod;
+        private static readonly MethodInfo _getValue0Method =
+            typeof(DeepBinary).GetProperty(nameof(DeepBinary.Value0)).GetMethod;
 
-        private static readonly MethodInfo _getValue1Method
-            = typeof(DeepBinary).GetProperty(nameof(DeepBinary.Value1)).GetMethod;
+        private static readonly MethodInfo _getValue1Method =
+            typeof(DeepBinary).GetProperty(nameof(DeepBinary.Value1)).GetMethod;
 
         [ConditionalFact]
         public void Can_create_new_comparer_composing_existing_comparers()
@@ -535,11 +584,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var comparer = new ValueComparer<DeepBinary>(
                 (Expression<Func<DeepBinary, DeepBinary, bool>>)CreateAndExpression(bytesComparer),
-                (Expression<Func<DeepBinary, int>>)CreateHashCodeExpression(bytesComparer));
+                (Expression<Func<DeepBinary, int>>)CreateHashCodeExpression(bytesComparer)
+            );
 
             var keyComparer = new ValueComparer<DeepBinary>(
-                (Expression<Func<DeepBinary, DeepBinary, bool>>)CreateAndExpression(bytesKeyComparer),
-                (Expression<Func<DeepBinary, int>>)CreateHashCodeExpression(bytesKeyComparer));
+                (Expression<Func<DeepBinary, DeepBinary, bool>>)CreateAndExpression(
+                    bytesKeyComparer
+                ),
+                (Expression<Func<DeepBinary, int>>)CreateHashCodeExpression(bytesKeyComparer)
+            );
 
             var equals = comparer.EqualsExpression.Compile();
             var keyEquals = keyComparer.EqualsExpression.Compile();
@@ -582,31 +635,35 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var firstEquals = comparer.ExtractEqualsBody(
                 Expression.Call(param1, _getValue0Method),
-                Expression.Call(param2, _getValue0Method));
+                Expression.Call(param2, _getValue0Method)
+            );
 
             var secondEquals = comparer.ExtractEqualsBody(
                 Expression.Call(param1, _getValue1Method),
-                Expression.Call(param2, _getValue1Method));
+                Expression.Call(param2, _getValue1Method)
+            );
 
-            return Expression.Lambda(
-                Expression.AndAlso(firstEquals, secondEquals),
-                param1, param2);
+            return Expression.Lambda(Expression.AndAlso(firstEquals, secondEquals), param1, param2);
         }
 
         private static LambdaExpression CreateHashCodeExpression(ValueComparer comparer)
         {
             var param = Expression.Parameter(typeof(DeepBinary), "v");
 
-            var firstHashCode = comparer.ExtractHashCodeBody(Expression.Call(param, _getValue0Method));
-            var secondHashCode = comparer.ExtractHashCodeBody(Expression.Call(param, _getValue1Method));
+            var firstHashCode = comparer.ExtractHashCodeBody(
+                Expression.Call(param, _getValue0Method)
+            );
+            var secondHashCode = comparer.ExtractHashCodeBody(
+                Expression.Call(param, _getValue1Method)
+            );
 
             return Expression.Lambda(
                 Expression.ExclusiveOr(
-                    Expression.Multiply(
-                        firstHashCode,
-                        Expression.Constant(397, typeof(int))),
-                    secondHashCode),
-                param);
+                    Expression.Multiply(firstHashCode, Expression.Constant(397, typeof(int))),
+                    secondHashCode
+                ),
+                param
+            );
         }
     }
 }

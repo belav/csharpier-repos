@@ -14,34 +14,60 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 {
     internal static class DeclarationConflictHelpers
     {
-        public static ImmutableArray<Location> GetMembersWithConflictingSignatures(IMethodSymbol renamedMethod, bool trimOptionalParameters)
-        {
-            var potentiallyConfictingMethods =
-                renamedMethod.ContainingType.GetMembers(renamedMethod.Name)
-                                            .OfType<IMethodSymbol>()
-                                            .Where(m => !m.Equals(renamedMethod) && m.Arity == renamedMethod.Arity);
+        public static ImmutableArray<Location> GetMembersWithConflictingSignatures(
+            IMethodSymbol renamedMethod,
+            bool trimOptionalParameters
+        ) {
+            var potentiallyConfictingMethods = renamedMethod.ContainingType.GetMembers(
+                    renamedMethod.Name
+                )
+                .OfType<IMethodSymbol>()
+                .Where(m => !m.Equals(renamedMethod) && m.Arity == renamedMethod.Arity);
 
-            return GetConflictLocations(renamedMethod, potentiallyConfictingMethods, isMethod: true,
-                (method) => GetAllSignatures((method as IMethodSymbol).Parameters, trimOptionalParameters));
+            return GetConflictLocations(
+                renamedMethod,
+                potentiallyConfictingMethods,
+                isMethod: true,
+                (method) =>
+                    GetAllSignatures((method as IMethodSymbol).Parameters, trimOptionalParameters)
+            );
         }
 
-        public static ImmutableArray<Location> GetMembersWithConflictingSignatures(IPropertySymbol renamedProperty, bool trimOptionalParameters)
-        {
-            var potentiallyConfictingProperties =
-                renamedProperty.ContainingType.GetMembers(renamedProperty.Name)
-                                            .OfType<IPropertySymbol>()
-                                            .Where(m => !m.Equals(renamedProperty) && m.Parameters.Length == renamedProperty.Parameters.Length);
+        public static ImmutableArray<Location> GetMembersWithConflictingSignatures(
+            IPropertySymbol renamedProperty,
+            bool trimOptionalParameters
+        ) {
+            var potentiallyConfictingProperties = renamedProperty.ContainingType.GetMembers(
+                    renamedProperty.Name
+                )
+                .OfType<IPropertySymbol>()
+                .Where(
+                    m =>
+                        !m.Equals(renamedProperty)
+                        && m.Parameters.Length == renamedProperty.Parameters.Length
+                );
 
-            return GetConflictLocations(renamedProperty, potentiallyConfictingProperties, isMethod: false,
-                (property) => GetAllSignatures((property as IPropertySymbol).Parameters, trimOptionalParameters));
+            return GetConflictLocations(
+                renamedProperty,
+                potentiallyConfictingProperties,
+                isMethod: false,
+                (property) =>
+                    GetAllSignatures(
+                        (property as IPropertySymbol).Parameters,
+                        trimOptionalParameters
+                    )
+            );
         }
 
-        private static ImmutableArray<Location> GetConflictLocations(ISymbol renamedMember,
+        private static ImmutableArray<Location> GetConflictLocations(
+            ISymbol renamedMember,
             IEnumerable<ISymbol> potentiallyConfictingMembers,
             bool isMethod,
-            Func<ISymbol, ImmutableArray<ImmutableArray<ITypeSymbol>>> getAllSignatures)
-        {
-            var signatureToConflictingMember = new Dictionary<ImmutableArray<ITypeSymbol>, ISymbol>(ConflictingSignatureComparer.Instance);
+            Func<ISymbol, ImmutableArray<ImmutableArray<ITypeSymbol>>> getAllSignatures
+        ) {
+            var signatureToConflictingMember = new Dictionary<ImmutableArray<ITypeSymbol>, ISymbol>(
+                ConflictingSignatureComparer.Instance
+            );
 
             foreach (var member in potentiallyConfictingMembers)
             {
@@ -61,9 +87,19 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     {
                         var conflictingMethod = conflictingSymbol as IMethodSymbol;
                         var renamedMethod = renamedMember as IMethodSymbol;
-                        if (!(conflictingMethod.PartialDefinitionPart != null && Equals(conflictingMethod.PartialDefinitionPart, renamedMethod)) &&
-                            !(conflictingMethod.PartialImplementationPart != null && Equals(conflictingMethod.PartialImplementationPart, renamedMethod)))
-                        {
+                        if (
+                            !(
+                                conflictingMethod.PartialDefinitionPart != null
+                                && Equals(conflictingMethod.PartialDefinitionPart, renamedMethod)
+                            )
+                            && !(
+                                conflictingMethod.PartialImplementationPart != null
+                                && Equals(
+                                    conflictingMethod.PartialImplementationPart,
+                                    renamedMethod
+                                )
+                            )
+                        ) {
                             builder.AddRange(conflictingSymbol.Locations);
                         }
                     }
@@ -77,14 +113,15 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             return builder.ToImmutableAndFree();
         }
 
-        private sealed class ConflictingSignatureComparer : IEqualityComparer<ImmutableArray<ITypeSymbol>>
+        private sealed class ConflictingSignatureComparer
+            : IEqualityComparer<ImmutableArray<ITypeSymbol>>
         {
             public static readonly ConflictingSignatureComparer Instance = new();
 
             private ConflictingSignatureComparer() { }
 
-            public bool Equals(ImmutableArray<ITypeSymbol> x, ImmutableArray<ITypeSymbol> y)
-                => x.SequenceEqual(y);
+            public bool Equals(ImmutableArray<ITypeSymbol> x, ImmutableArray<ITypeSymbol> y) =>
+                x.SequenceEqual(y);
 
             public int GetHashCode(ImmutableArray<ITypeSymbol> obj)
             {
@@ -95,8 +132,10 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             }
         }
 
-        private static ImmutableArray<ImmutableArray<ITypeSymbol>> GetAllSignatures(ImmutableArray<IParameterSymbol> parameters, bool trimOptionalParameters)
-        {
+        private static ImmutableArray<ImmutableArray<ITypeSymbol>> GetAllSignatures(
+            ImmutableArray<IParameterSymbol> parameters,
+            bool trimOptionalParameters
+        ) {
             var resultBuilder = ArrayBuilder<ImmutableArray<ITypeSymbol>>.GetInstance();
 
             var signatureBuilder = ArrayBuilder<ITypeSymbol>.GetInstance();

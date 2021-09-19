@@ -29,8 +29,13 @@ namespace Microsoft.AspNetCore.Routing.Constraints
         }
 
         /// <inheritdoc />
-        public bool Match(HttpContext? httpContext, IRouter? route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
-        {
+        public bool Match(
+            HttpContext? httpContext,
+            IRouter? route,
+            string routeKey,
+            RouteValueDictionary values,
+            RouteDirection routeDirection
+        ) {
             if (routeKey == null)
             {
                 throw new ArgumentNullException(nameof(routeKey));
@@ -41,10 +46,12 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                 throw new ArgumentNullException(nameof(values));
             }
 
-            if (values.TryGetValue(routeKey, out var routeValue)
-                && routeValue != null)
+            if (values.TryGetValue(routeKey, out var routeValue) && routeValue != null)
             {
-                var parameterValueString = Convert.ToString(routeValue, CultureInfo.InvariantCulture)!;
+                var parameterValueString = Convert.ToString(
+                    routeValue,
+                    CultureInfo.InvariantCulture
+                )!;
 
                 return parameterValueString.Equals(_value, StringComparison.OrdinalIgnoreCase);
             }

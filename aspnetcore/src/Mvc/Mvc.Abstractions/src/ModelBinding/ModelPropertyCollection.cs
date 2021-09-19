@@ -18,9 +18,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </summary>
         /// <param name="properties">The properties.</param>
         public ModelPropertyCollection(IEnumerable<ModelMetadata> properties)
-            : base(properties.ToList())
-        {
-        }
+            : base(properties.ToList()) { }
 
         /// <summary>
         /// Gets a <see cref="ModelMetadata"/> instance for the property corresponding to <paramref name="propertyName"/>.
@@ -44,8 +42,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 for (var i = 0; i < Items.Count; i++)
                 {
                     var property = Items[i];
-                    if (string.Equals(property.PropertyName, propertyName, StringComparison.Ordinal))
-                    {
+                    if (
+                        string.Equals(property.PropertyName, propertyName, StringComparison.Ordinal)
+                    ) {
                         return property;
                     }
                 }

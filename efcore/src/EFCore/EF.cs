@@ -15,8 +15,9 @@ namespace Microsoft.EntityFrameworkCore
     // ReSharper disable once InconsistentNaming
     public static partial class EF
     {
-        internal static readonly MethodInfo PropertyMethod
-            = typeof(EF).GetRequiredDeclaredMethod(nameof(Property));
+        internal static readonly MethodInfo PropertyMethod = typeof(EF).GetRequiredDeclaredMethod(
+            nameof(Property)
+        );
 
         /// <summary>
         ///     <para>
@@ -43,8 +44,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The value assigned to the property. </returns>
         public static TProperty Property<TProperty>(
             object entity,
-            [NotParameterized] string propertyName)
-            => throw new InvalidOperationException(CoreStrings.PropertyMethodInvoked);
+            [NotParameterized] string propertyName
+        ) => throw new InvalidOperationException(CoreStrings.PropertyMethodInvoked);
 
         /// <summary>
         ///     <para>
@@ -55,7 +56,6 @@ namespace Microsoft.EntityFrameworkCore
         ///         Note that this is a static property accessed through the top-level <see cref="EF" /> static type.
         ///     </para>
         /// </summary>
-        public static DbFunctions Functions
-            => DbFunctions.Instance;
+        public static DbFunctions Functions => DbFunctions.Instance;
     }
 }

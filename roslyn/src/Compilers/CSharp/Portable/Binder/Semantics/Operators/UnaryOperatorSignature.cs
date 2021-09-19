@@ -19,8 +19,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly TypeSymbol ReturnType;
         public readonly UnaryOperatorKind Kind;
 
-        public UnaryOperatorSignature(UnaryOperatorKind kind, TypeSymbol operandType, TypeSymbol returnType, MethodSymbol method = null)
-        {
+        public UnaryOperatorSignature(
+            UnaryOperatorKind kind,
+            TypeSymbol operandType,
+            TypeSymbol returnType,
+            MethodSymbol method = null
+        ) {
             this.Kind = kind;
             this.OperandType = operandType;
             this.ReturnType = returnType;

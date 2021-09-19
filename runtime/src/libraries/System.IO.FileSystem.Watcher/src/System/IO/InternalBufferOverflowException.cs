@@ -9,7 +9,9 @@ namespace System.IO
     ///    The exception that is thrown when the internal buffer overflows.
     /// </devdoc>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class InternalBufferOverflowException : SystemException
     {
         /// <devdoc>
@@ -32,14 +34,15 @@ namespace System.IO
         ///    Initializes a new instance of the <see cref='System.IO.InternalBufferOverflowException'/>
         ///    class with the message to be displayed and the generated inner exception specified.
         /// </devdoc>
-        public InternalBufferOverflowException(string? message, Exception? inner) : base(message, inner)
+        public InternalBufferOverflowException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.InternalBufferOverflow;
         }
 
-        protected InternalBufferOverflowException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        protected InternalBufferOverflowException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
     }
 }

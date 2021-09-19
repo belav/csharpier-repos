@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         public AuthorizationPageApplicationModelProvider(
             IAuthorizationPolicyProvider policyProvider,
-            IOptions<MvcOptions> mvcOptions)
-        {
+            IOptions<MvcOptions> mvcOptions
+        ) {
             _policyProvider = policyProvider;
             _mvcOptions = mvcOptions.Value;
         }
@@ -43,7 +43,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var authorizeData = pageModel.HandlerTypeAttributes.OfType<IAuthorizeData>().ToArray();
             if (authorizeData.Length > 0)
             {
-                pageModel.Filters.Add(AuthorizationApplicationModelProvider.GetFilter(_policyProvider, authorizeData));
+                pageModel.Filters.Add(
+                    AuthorizationApplicationModelProvider.GetFilter(_policyProvider, authorizeData)
+                );
             }
             foreach (var attribute in pageModel.HandlerTypeAttributes.OfType<IAllowAnonymous>())
             {
@@ -51,8 +53,6 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             }
         }
 
-        public void OnProvidersExecuted(PageApplicationModelProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
     }
 }

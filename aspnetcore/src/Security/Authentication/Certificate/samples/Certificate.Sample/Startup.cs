@@ -17,26 +17,41 @@ namespace Certificate.Sample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
-                .AddCertificate(options =>
-                {
-                    options.Events = new CertificateAuthenticationEvents
+                .AddCertificate(
+                    options =>
                     {
-                        OnCertificateValidated = context =>
+                        options.Events = new CertificateAuthenticationEvents
                         {
-                            var claims = new[]
+                            OnCertificateValidated = context =>
                             {
-                                new Claim(ClaimTypes.NameIdentifier, context.ClientCertificate.Subject, ClaimValueTypes.String, context.Options.ClaimsIssuer),
-                                new Claim(ClaimTypes.Name, context.ClientCertificate.Subject, ClaimValueTypes.String, context.Options.ClaimsIssuer)
-                            };
+                                var claims = new[]
+                                {
+                                    new Claim(
+                                        ClaimTypes.NameIdentifier,
+                                        context.ClientCertificate.Subject,
+                                        ClaimValueTypes.String,
+                                        context.Options.ClaimsIssuer
+                                    ),
+                                    new Claim(
+                                        ClaimTypes.Name,
+                                        context.ClientCertificate.Subject,
+                                        ClaimValueTypes.String,
+                                        context.Options.ClaimsIssuer
+                                    )
+                                };
 
-                            context.Principal = new ClaimsPrincipal(new ClaimsIdentity(claims, context.Scheme.Name));
-                            context.Success();
+                                context.Principal = new ClaimsPrincipal(
+                                    new ClaimsIdentity(claims, context.Scheme.Name)
+                                );
+                                context.Success();
 
-                            return Task.CompletedTask;
-                        }
-                    };
-                // Adding a ICertificateValidationCache will result in certificate auth caching the results, the default implementation uses a memory cache
-                }).AddCertificateCache();
+                                return Task.CompletedTask;
+                            }
+                        };
+                        // Adding a ICertificateValidationCache will result in certificate auth caching the results, the default implementation uses a memory cache
+                    }
+                )
+                .AddCertificateCache();
 
             services.AddAuthorization();
         }
@@ -51,13 +66,20 @@ namespace Certificate.Sample
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.Map("{*url}", context =>
+            app.UseEndpoints(
+                endpoints =>
                 {
-                    return context.Response.WriteAsync($"Hello {context.User.Identity.Name}");
-                });
-            });
+                    endpoints.Map(
+                        "{*url}",
+                        context =>
+                        {
+                            return context.Response.WriteAsync(
+                                $"Hello {context.User.Identity.Name}"
+                            );
+                        }
+                    );
+                }
+            );
         }
     }
 }

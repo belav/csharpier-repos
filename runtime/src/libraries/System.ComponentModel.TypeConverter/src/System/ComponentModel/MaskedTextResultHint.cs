@@ -10,7 +10,6 @@ namespace System.ComponentModel
     {
         // Unknown/Uninitialized
         Unknown = 0,
-
         ////////// Success (positive values, excluded). /////////
         /// WARNING: Do NOT modify the order of the success enum values, they are ordered the way TestString give precedence
         /// to the result hint when multiple chars tested giving different success hints.
@@ -23,8 +22,6 @@ namespace System.ComponentModel
         SideEffect = 3,
         // The primary operation succeeded.
         Success = 4,
-
-
         ///////// Failure values (negative values). /////////
 
         // Failure due to mask violation. (values in the range of [-1, -49]
@@ -39,7 +36,6 @@ namespace System.ComponentModel
         LetterExpected = -4,
         // Input character not a signed digit.
         SignedDigitExpected = -5,
-
         // Other failures. (values < -50)
 
         // Invalid input

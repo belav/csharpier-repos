@@ -58,8 +58,10 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         /// </summary>
         public IList<SymbolDisplayPart> SelectedDisplayParts { get; }
 
-        private static readonly Func<CancellationToken, IEnumerable<TaggedText>> s_emptyDocumentationFactory =
-            _ => SpecializedCollections.EmptyEnumerable<TaggedText>();
+        private static readonly Func<
+            CancellationToken,
+            IEnumerable<TaggedText>
+        > s_emptyDocumentationFactory = _ => SpecializedCollections.EmptyEnumerable<TaggedText>();
 
         public SignatureHelpSymbolParameter(
             string name,
@@ -68,8 +70,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IEnumerable<SymbolDisplayPart> displayParts,
             IEnumerable<SymbolDisplayPart>? prefixDisplayParts = null,
             IEnumerable<SymbolDisplayPart>? suffixDisplayParts = null,
-            IEnumerable<SymbolDisplayPart>? selectedDisplayParts = null)
-        {
+            IEnumerable<SymbolDisplayPart>? selectedDisplayParts = null
+        ) {
             Name = name ?? string.Empty;
             IsOptional = isOptional;
             DocumentationFactory = documentationFactory ?? s_emptyDocumentationFactory;
@@ -82,18 +84,22 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         internal IEnumerable<SymbolDisplayPart> GetAllParts()
         {
             return PrefixDisplayParts.Concat(DisplayParts)
-                                          .Concat(SuffixDisplayParts)
-                                          .Concat(SelectedDisplayParts);
+                .Concat(SuffixDisplayParts)
+                .Concat(SelectedDisplayParts);
         }
 
-        public static explicit operator SignatureHelpParameter(SignatureHelpSymbolParameter parameter)
-        {
+        public static explicit operator SignatureHelpParameter(
+            SignatureHelpSymbolParameter parameter
+        ) {
             return new SignatureHelpParameter(
-                parameter.Name, parameter.IsOptional, parameter.DocumentationFactory,
+                parameter.Name,
+                parameter.IsOptional,
+                parameter.DocumentationFactory,
                 parameter.DisplayParts.ToTaggedText(),
                 parameter.PrefixDisplayParts.ToTaggedText(),
                 parameter.SuffixDisplayParts.ToTaggedText(),
-                parameter.SelectedDisplayParts.ToTaggedText());
+                parameter.SelectedDisplayParts.ToTaggedText()
+            );
         }
     }
 
@@ -138,8 +144,10 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         /// </summary>
         public IList<TaggedText> SelectedDisplayParts { get; }
 
-        private static readonly Func<CancellationToken, IEnumerable<TaggedText>> s_emptyDocumentationFactory =
-            _ => SpecializedCollections.EmptyEnumerable<TaggedText>();
+        private static readonly Func<
+            CancellationToken,
+            IEnumerable<TaggedText>
+        > s_emptyDocumentationFactory = _ => SpecializedCollections.EmptyEnumerable<TaggedText>();
 
         // Constructor kept for binary compat with TS.  Remove when they move to the new API.
         public SignatureHelpParameter(
@@ -149,15 +157,16 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IEnumerable<SymbolDisplayPart> displayParts,
             IEnumerable<SymbolDisplayPart>? prefixDisplayParts = null,
             IEnumerable<SymbolDisplayPart>? suffixDisplayParts = null,
-            IEnumerable<SymbolDisplayPart>? selectedDisplayParts = null)
-            : this(name, isOptional,
-                  documentationFactory is null ? null : c => documentationFactory(c).ToTaggedText(),
-                  displayParts.ToTaggedText(),
-                  prefixDisplayParts.ToTaggedText(),
-                  suffixDisplayParts.ToTaggedText(),
-                  selectedDisplayParts.ToTaggedText())
-        {
-        }
+            IEnumerable<SymbolDisplayPart>? selectedDisplayParts = null
+        ) : this(
+            name,
+            isOptional,
+            documentationFactory is null ? null : c => documentationFactory(c).ToTaggedText(),
+            displayParts.ToTaggedText(),
+            prefixDisplayParts.ToTaggedText(),
+            suffixDisplayParts.ToTaggedText(),
+            selectedDisplayParts.ToTaggedText()
+        ) { }
 
         public SignatureHelpParameter(
             string name,
@@ -166,8 +175,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             IEnumerable<TaggedText> displayParts,
             IEnumerable<TaggedText>? prefixDisplayParts = null,
             IEnumerable<TaggedText>? suffixDisplayParts = null,
-            IEnumerable<TaggedText>? selectedDisplayParts = null)
-        {
+            IEnumerable<TaggedText>? selectedDisplayParts = null
+        ) {
             Name = name ?? string.Empty;
             IsOptional = isOptional;
             DocumentationFactory = documentationFactory ?? s_emptyDocumentationFactory;
@@ -180,8 +189,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         internal IEnumerable<TaggedText> GetAllParts()
         {
             return PrefixDisplayParts.Concat(DisplayParts)
-                                          .Concat(SuffixDisplayParts)
-                                          .Concat(SelectedDisplayParts);
+                .Concat(SuffixDisplayParts)
+                .Concat(SelectedDisplayParts);
         }
 
         public override string ToString()

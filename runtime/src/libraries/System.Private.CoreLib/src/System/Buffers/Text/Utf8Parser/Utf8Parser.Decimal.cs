@@ -25,8 +25,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static unsafe bool TryParse(ReadOnlySpan<byte> source, out decimal value, out int bytesConsumed, char standardFormat = default)
-        {
+        public static unsafe bool TryParse(
+            ReadOnlySpan<byte> source,
+            out decimal value,
+            out int bytesConsumed,
+            char standardFormat = default
+        ) {
             ParseNumberOptions options;
             switch (standardFormat)
             {
@@ -48,10 +52,21 @@ namespace System.Buffers.Text
             }
 
             byte* pDigits = stackalloc byte[Number.DecimalNumberBufferLength];
-            Number.NumberBuffer number = new Number.NumberBuffer(Number.NumberBufferKind.Decimal, pDigits, Number.DecimalNumberBufferLength);
+            Number.NumberBuffer number = new Number.NumberBuffer(
+                Number.NumberBufferKind.Decimal,
+                pDigits,
+                Number.DecimalNumberBufferLength
+            );
 
-            if (!TryParseNumber(source, ref number, out bytesConsumed, options, out bool textUsedExponentNotation))
-            {
+            if (
+                !TryParseNumber(
+                    source,
+                    ref number,
+                    out bytesConsumed,
+                    options,
+                    out bool textUsedExponentNotation
+                )
+            ) {
                 value = default;
                 return false;
             }

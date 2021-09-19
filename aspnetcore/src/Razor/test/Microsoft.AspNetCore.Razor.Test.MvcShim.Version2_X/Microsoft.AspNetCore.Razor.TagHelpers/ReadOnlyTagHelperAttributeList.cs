@@ -12,16 +12,14 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
     /// </summary>
     public abstract class ReadOnlyTagHelperAttributeList : ReadOnlyCollection<TagHelperAttribute>
     {
-        private static readonly IReadOnlyList<TagHelperAttribute> EmptyList = new TagHelperAttribute[0];
+        private static readonly IReadOnlyList<TagHelperAttribute> EmptyList =
+            new TagHelperAttribute[0];
 
         /// <summary>
         /// Instantiates a new instance of <see cref="ReadOnlyTagHelperAttributeList"/> with an empty
         /// collection.
         /// </summary>
-        protected ReadOnlyTagHelperAttributeList()
-            : base(new List<TagHelperAttribute>())
-        {
-        }
+        protected ReadOnlyTagHelperAttributeList() : base(new List<TagHelperAttribute>()) { }
 
         /// <summary>
         /// Instantiates a new instance of <see cref="ReadOnlyTagHelperAttributeList"/> with the specified
@@ -29,9 +27,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// </summary>
         /// <param name="attributes">The collection to wrap.</param>
         public ReadOnlyTagHelperAttributeList(IList<TagHelperAttribute> attributes)
-            : base(attributes)
-        {
-        }
+            : base(attributes) { }
 
         /// <summary>
         /// Gets the first <see cref="TagHelperAttribute"/> with <see cref="TagHelperAttribute.Name"/>

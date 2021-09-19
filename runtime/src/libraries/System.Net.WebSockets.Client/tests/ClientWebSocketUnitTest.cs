@@ -15,7 +15,10 @@ namespace System.Net.WebSockets.Client.Tests
     /// </summary>
     public class ClientWebSocketUnitTest
     {
-        private static bool WebSocketsSupported { get { return WebSocketHelper.WebSocketsSupported; } }
+        private static bool WebSocketsSupported
+        {
+            get { return WebSocketHelper.WebSocketsSupported; }
+        }
 
         [ConditionalFact(nameof(WebSocketsSupported))]
         public void Ctor_Success()
@@ -40,8 +43,16 @@ namespace System.Net.WebSockets.Client.Tests
         {
             using (var cws = new ClientWebSocket())
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    { Task t = cws.CloseAsync(WebSocketCloseStatus.Empty, "", new CancellationToken()); });
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        Task t = cws.CloseAsync(
+                            WebSocketCloseStatus.Empty,
+                            "",
+                            new CancellationToken()
+                        );
+                    }
+                );
 
                 Assert.Equal(WebSocketState.None, cws.State);
             }
@@ -53,13 +64,25 @@ namespace System.Net.WebSockets.Client.Tests
             using (var cws = new ClientWebSocket())
             {
                 InvalidOperationException exception;
-                using (var tcc = new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture))
-                {
+                using (
+                    var tcc = new ThreadCultureChange(
+                        CultureInfo.InvariantCulture,
+                        CultureInfo.InvariantCulture
+                    )
+                ) {
                     exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => cws.CloseOutputAsync(WebSocketCloseStatus.Empty, "", new CancellationToken()));
+                        () =>
+                            cws.CloseOutputAsync(
+                                WebSocketCloseStatus.Empty,
+                                "",
+                                new CancellationToken()
+                            )
+                    );
                 }
 
-                string expectedMessage = ResourceHelper.GetExceptionMessage("net_WebSockets_NotConnected");
+                string expectedMessage = ResourceHelper.GetExceptionMessage(
+                    "net_WebSockets_NotConnected"
+                );
                 Assert.Equal(expectedMessage, exception.Message);
                 Assert.Equal(WebSocketState.None, cws.State);
             }
@@ -74,8 +97,12 @@ namespace System.Net.WebSockets.Client.Tests
                 var segment = new ArraySegment<byte>(buffer);
                 var ct = new CancellationToken();
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    { Task t = cws.ReceiveAsync(segment, ct); });
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        Task t = cws.ReceiveAsync(segment, ct);
+                    }
+                );
 
                 Assert.Equal(WebSocketState.None, cws.State);
             }
@@ -92,13 +119,20 @@ namespace System.Net.WebSockets.Client.Tests
 
                 InvalidOperationException exception;
 
-                using (var tcc = new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture))
-                {
+                using (
+                    var tcc = new ThreadCultureChange(
+                        CultureInfo.InvariantCulture,
+                        CultureInfo.InvariantCulture
+                    )
+                ) {
                     exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => cws.ReceiveAsync(segment, ct));
+                        () => cws.ReceiveAsync(segment, ct)
+                    );
                 }
 
-                string expectedMessage = ResourceHelper.GetExceptionMessage("net_WebSockets_NotConnected");
+                string expectedMessage = ResourceHelper.GetExceptionMessage(
+                    "net_WebSockets_NotConnected"
+                );
                 Assert.Equal(expectedMessage, exception.Message);
                 Assert.Equal(WebSocketState.None, cws.State);
             }
@@ -113,8 +147,12 @@ namespace System.Net.WebSockets.Client.Tests
                 var segment = new ArraySegment<byte>(buffer);
                 var ct = new CancellationToken();
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    { Task t = cws.SendAsync(segment, WebSocketMessageType.Text, false, ct); });
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        Task t = cws.SendAsync(segment, WebSocketMessageType.Text, false, ct);
+                    }
+                );
 
                 Assert.Equal(WebSocketState.None, cws.State);
             }
@@ -130,13 +168,20 @@ namespace System.Net.WebSockets.Client.Tests
                 var ct = new CancellationToken();
 
                 InvalidOperationException exception;
-                using (var tcc = new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture))
-                {
+                using (
+                    var tcc = new ThreadCultureChange(
+                        CultureInfo.InvariantCulture,
+                        CultureInfo.InvariantCulture
+                    )
+                ) {
                     exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => cws.SendAsync(segment, WebSocketMessageType.Text, false, ct));
+                        () => cws.SendAsync(segment, WebSocketMessageType.Text, false, ct)
+                    );
                 }
 
-                string expectedMessage = ResourceHelper.GetExceptionMessage("net_WebSockets_NotConnected");
+                string expectedMessage = ResourceHelper.GetExceptionMessage(
+                    "net_WebSockets_NotConnected"
+                );
                 Assert.Equal(expectedMessage, exception.Message);
                 Assert.Equal(WebSocketState.None, cws.State);
             }
@@ -172,8 +217,16 @@ namespace System.Net.WebSockets.Client.Tests
             var cws = new ClientWebSocket();
             cws.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() =>
-                { Task t = cws.CloseAsync(WebSocketCloseStatus.Empty, "", new CancellationToken()); });
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    Task t = cws.CloseAsync(
+                        WebSocketCloseStatus.Empty,
+                        "",
+                        new CancellationToken()
+                    );
+                }
+            );
 
             Assert.Equal(WebSocketState.Closed, cws.State);
         }
@@ -188,8 +241,11 @@ namespace System.Net.WebSockets.Client.Tests
 
             AssertExtensions.Throws<ObjectDisposedException>(
                 () =>
-                cws.CloseOutputAsync(WebSocketCloseStatus.Empty, "", new CancellationToken()).GetAwaiter().GetResult(),
-                expectedException.Message);
+                    cws.CloseOutputAsync(WebSocketCloseStatus.Empty, "", new CancellationToken())
+                        .GetAwaiter()
+                        .GetResult(),
+                expectedException.Message
+            );
 
             Assert.Equal(WebSocketState.Closed, cws.State);
         }
@@ -208,7 +264,8 @@ namespace System.Net.WebSockets.Client.Tests
 
             AssertExtensions.Throws<ObjectDisposedException>(
                 () => cws.ReceiveAsync(segment, ct).GetAwaiter().GetResult(),
-                expectedException.Message);
+                expectedException.Message
+            );
 
             Assert.Equal(WebSocketState.Closed, cws.State);
         }
@@ -226,8 +283,12 @@ namespace System.Net.WebSockets.Client.Tests
             var expectedException = new ObjectDisposedException(cws.GetType().FullName);
 
             AssertExtensions.Throws<ObjectDisposedException>(
-                () => cws.SendAsync(segment, WebSocketMessageType.Text, false, ct).GetAwaiter().GetResult(),
-                expectedException.Message);
+                () =>
+                    cws.SendAsync(segment, WebSocketMessageType.Text, false, ct)
+                        .GetAwaiter()
+                        .GetResult(),
+                expectedException.Message
+            );
 
             Assert.Equal(WebSocketState.Closed, cws.State);
         }

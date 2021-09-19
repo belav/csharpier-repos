@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///     </para>
     /// </summary>
     [DebuggerDisplay("Builder {" + nameof(Metadata) + ",nq}")]
-    public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConventionAnnotatableBuilder
+    public abstract class AnnotatableBuilder<TMetadata, TModelBuilder>
+        : IConventionAnnotatableBuilder
         where TMetadata : ConventionAnnotatable
         where TModelBuilder : IConventionModelBuilder
     {
@@ -52,15 +53,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual AnnotatableBuilder<TMetadata, TModelBuilder>? HasAnnotation(
             string name,
             object? value,
-            ConfigurationSource configurationSource)
-            => HasAnnotation(name, value, configurationSource, canOverrideSameSource: true);
+            ConfigurationSource configurationSource
+        ) => HasAnnotation(name, value, configurationSource, canOverrideSameSource: true);
 
         private AnnotatableBuilder<TMetadata, TModelBuilder>? HasAnnotation(
             string name,
             object? value,
             ConfigurationSource configurationSource,
-            bool canOverrideSameSource)
-        {
+            bool canOverrideSameSource
+        ) {
             var existingAnnotation = Metadata.FindAnnotation(name);
             if (existingAnnotation != null)
             {
@@ -70,8 +71,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     return this;
                 }
 
-                if (!CanSetAnnotationValue(existingAnnotation, value, configurationSource, canOverrideSameSource))
-                {
+                if (
+                    !CanSetAnnotationValue(
+                        existingAnnotation,
+                        value,
+                        configurationSource,
+                        canOverrideSameSource
+                    )
+                ) {
                     return null;
                 }
 
@@ -97,8 +104,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual AnnotatableBuilder<TMetadata, TModelBuilder>? HasNonNullAnnotation(
             string name,
             object? value,
-            ConfigurationSource configurationSource)
-            => value == null
+            ConfigurationSource configurationSource
+        ) =>
+            value == null
                 ? RemoveAnnotation(name, configurationSource)
                 : HasAnnotation(name, value, configurationSource, canOverrideSameSource: true);
 
@@ -109,19 +117,27 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <param name="value"> The value to be stored in the annotation. </param>
         /// <param name="configurationSource"> The configuration source of the annotation to be set. </param>
         /// <returns> <see langword="true" /> if the annotation can be set, <see langword="false" /> otherwise. </returns>
-        public virtual bool CanSetAnnotation(string name, object? value, ConfigurationSource configurationSource)
-        {
+        public virtual bool CanSetAnnotation(
+            string name,
+            object? value,
+            ConfigurationSource configurationSource
+        ) {
             var existingAnnotation = Metadata.FindAnnotation(name);
             return existingAnnotation == null
-                || CanSetAnnotationValue(existingAnnotation, value, configurationSource, canOverrideSameSource: true);
+                || CanSetAnnotationValue(
+                    existingAnnotation,
+                    value,
+                    configurationSource,
+                    canOverrideSameSource: true
+                );
         }
 
         private static bool CanSetAnnotationValue(
             ConventionAnnotation annotation,
             object? value,
             ConfigurationSource configurationSource,
-            bool canOverrideSameSource)
-        {
+            bool canOverrideSameSource
+        ) {
             if (Equals(annotation.Value, value))
             {
                 return true;
@@ -129,8 +145,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             var existingConfigurationSource = annotation.GetConfigurationSource();
             return configurationSource.Overrides(existingConfigurationSource)
-                && (configurationSource != existingConfigurationSource
-                    || canOverrideSameSource);
+                && (configurationSource != existingConfigurationSource || canOverrideSameSource);
         }
 
         /// <summary>
@@ -141,8 +156,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns> The same builder so that multiple calls can be chained. </returns>
         public virtual AnnotatableBuilder<TMetadata, TModelBuilder>? RemoveAnnotation(
             string name,
-            ConfigurationSource configurationSource)
-        {
+            ConfigurationSource configurationSource
+        ) {
             if (!CanRemoveAnnotation(name, configurationSource))
             {
                 return null;
@@ -158,8 +173,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <param name="name"> The name of the annotation to remove. </param>
         /// <param name="configurationSource"> The configuration source of the annotation to be set. </param>
         /// <returns> <see langword="true" /> if the annotation can be removed, <see langword="false" /> otherwise. </returns>
-        public virtual bool CanRemoveAnnotation(string name, ConfigurationSource configurationSource)
-        {
+        public virtual bool CanRemoveAnnotation(
+            string name,
+            ConfigurationSource configurationSource
+        ) {
             var existingAnnotation = Metadata.FindAnnotation(name);
             return existingAnnotation == null
                 || configurationSource.Overrides(existingAnnotation.GetConfigurationSource());
@@ -169,16 +186,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Copies all the explicitly configured annotations from the given object ovewriting any existing ones.
         /// </summary>
         /// <param name="annotatable"> The object to copy annotations from. </param>
-        public virtual void MergeAnnotationsFrom(TMetadata annotatable)
-            => MergeAnnotationsFrom(annotatable, ConfigurationSource.Explicit);
+        public virtual void MergeAnnotationsFrom(TMetadata annotatable) =>
+            MergeAnnotationsFrom(annotatable, ConfigurationSource.Explicit);
 
         /// <summary>
         ///     Copies all the configured annotations from the given object ovewriting any existing ones.
         /// </summary>
         /// <param name="annotatable"> The object to copy annotations from. </param>
         /// <param name="minimalConfigurationSource"> The minimum configuration source for an annoptation to be copied. </param>
-        public virtual void MergeAnnotationsFrom(TMetadata annotatable, ConfigurationSource minimalConfigurationSource)
-        {
+        public virtual void MergeAnnotationsFrom(
+            TMetadata annotatable,
+            ConfigurationSource minimalConfigurationSource
+        ) {
             foreach (var annotation in annotatable.GetAnnotations())
             {
                 var configurationSource = annotation.GetConfigurationSource();
@@ -188,7 +207,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         annotation.Name,
                         annotation.Value,
                         configurationSource,
-                        canOverrideSameSource: false);
+                        canOverrideSameSource: false
+                    );
                 }
             }
         }
@@ -196,41 +216,86 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <inheritdoc />
         IConventionModelBuilder IConventionAnnotatableBuilder.ModelBuilder
         {
-            [DebuggerStepThrough] get => ModelBuilder;
+            [DebuggerStepThrough]
+            get => ModelBuilder;
         }
 
         /// <inheritdoc />
         IConventionAnnotatable IConventionAnnotatableBuilder.Metadata
         {
-            [DebuggerStepThrough] get => Metadata;
+            [DebuggerStepThrough]
+            get => Metadata;
         }
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IConventionAnnotatableBuilder? IConventionAnnotatableBuilder.HasAnnotation(string name, object? value, bool fromDataAnnotation)
-            => HasAnnotation(name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        IConventionAnnotatableBuilder? IConventionAnnotatableBuilder.HasAnnotation(
+            string name,
+            object? value,
+            bool fromDataAnnotation
+        ) =>
+            HasAnnotation(
+                name,
+                value,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
         IConventionAnnotatableBuilder? IConventionAnnotatableBuilder.HasNonNullAnnotation(
             string name,
             object? value,
-            bool fromDataAnnotation)
-            => HasNonNullAnnotation(name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            bool fromDataAnnotation
+        ) =>
+            HasNonNullAnnotation(
+                name,
+                value,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        bool IConventionAnnotatableBuilder.CanSetAnnotation(string name, object? value, bool fromDataAnnotation)
-            => CanSetAnnotation(name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool IConventionAnnotatableBuilder.CanSetAnnotation(
+            string name,
+            object? value,
+            bool fromDataAnnotation
+        ) =>
+            CanSetAnnotation(
+                name,
+                value,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IConventionAnnotatableBuilder? IConventionAnnotatableBuilder.HasNoAnnotation(string name, bool fromDataAnnotation)
-            => RemoveAnnotation(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        IConventionAnnotatableBuilder? IConventionAnnotatableBuilder.HasNoAnnotation(
+            string name,
+            bool fromDataAnnotation
+        ) =>
+            RemoveAnnotation(
+                name,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        bool IConventionAnnotatableBuilder.CanRemoveAnnotation(string name, bool fromDataAnnotation)
-            => CanRemoveAnnotation(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool IConventionAnnotatableBuilder.CanRemoveAnnotation(
+            string name,
+            bool fromDataAnnotation
+        ) =>
+            CanRemoveAnnotation(
+                name,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
     }
 }

@@ -56,26 +56,17 @@ namespace System.Reflection.Emit
 
         public override Type DeclaringType
         {
-            get
-            {
-                return instantiation;
-            }
+            get { return instantiation; }
         }
 
         public override string Name
         {
-            get
-            {
-                return fb.Name;
-            }
+            get { return fb.Name; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return instantiation;
-            }
+            get { return instantiation; }
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -103,34 +94,22 @@ namespace System.Reflection.Emit
 
         public override FieldAttributes Attributes
         {
-            get
-            {
-                return fb.Attributes;
-            }
+            get { return fb.Attributes; }
         }
 
         public override RuntimeFieldHandle FieldHandle
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
 
         public override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException();
-            }
+            get { throw new InvalidOperationException(); }
         }
 
         public override Type FieldType
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
 
         public override object? GetValue(object? obj)
@@ -138,8 +117,13 @@ namespace System.Reflection.Emit
             throw new NotSupportedException();
         }
 
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
-        {
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        ) {
             throw new NotSupportedException();
         }
 

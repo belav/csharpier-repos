@@ -25,8 +25,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// </summary>
         /// <param name="loggerFactory">The factory used to create loggers.</param>
         /// <param name="urlHelperFactory">The factory used to create url helpers.</param>
-        public RedirectToActionResultExecutor(ILoggerFactory loggerFactory, IUrlHelperFactory urlHelperFactory)
-        {
+        public RedirectToActionResultExecutor(
+            ILoggerFactory loggerFactory,
+            IUrlHelperFactory urlHelperFactory
+        ) {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));
@@ -62,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 result.RouteValues,
                 protocol: null,
                 host: null,
-                fragment: result.Fragment);
+                fragment: result.Fragment
+            );
             if (string.IsNullOrEmpty(destinationUrl))
             {
                 throw new InvalidOperationException(Resources.NoRoutesMatched);
@@ -72,8 +75,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             if (result.PreserveMethod)
             {
-                context.HttpContext.Response.StatusCode = result.Permanent ?
-                    StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+                context.HttpContext.Response.StatusCode = result.Permanent
+                    ? StatusCodes.Status308PermanentRedirect
+                    : StatusCodes.Status307TemporaryRedirect;
                 context.HttpContext.Response.Headers[HeaderNames.Location] = destinationUrl;
             }
             else

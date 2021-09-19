@@ -21,7 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             _assemblyNamesToIgnore = assemblyNamesToIgnore;
         }
 
-        public bool Includes(AssemblyIdentity assemblyIdentity)
-            => _assemblyNamesToIgnore.Contains(assemblyIdentity.Name);
+        public bool Includes(AssemblyIdentity assemblyIdentity) =>
+            _assemblyNamesToIgnore.Contains(assemblyIdentity.Name);
     }
 }

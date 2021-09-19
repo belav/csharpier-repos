@@ -9,13 +9,14 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments
 {
     public class ConditionMatchSegmentTests
     {
-
         [Theory]
         [InlineData(1, "foo")]
         [InlineData(2, "bar")]
         [InlineData(3, "baz")]
-        public void ConditionMatch_AssertBackreferencesObtainsCorrectValue(int index, string expected)
-        {
+        public void ConditionMatch_AssertBackreferencesObtainsCorrectValue(
+            int index,
+            string expected
+        ) {
             // Arrange
             var condMatch = CreateTestMatch();
             var segment = new ConditionMatchSegment(index);

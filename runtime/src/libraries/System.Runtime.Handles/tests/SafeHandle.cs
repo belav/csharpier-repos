@@ -9,13 +9,9 @@ public partial class SafeHandleTests
 {
     private class MySafeHandle : SafeHandle
     {
-        public MySafeHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
+        public MySafeHandle() : base(IntPtr.Zero, true) { }
 
-        public MySafeHandle(IntPtr handle)
-            : this()
+        public MySafeHandle(IntPtr handle) : this()
         {
             SetHandle(handle);
         }
@@ -86,10 +82,7 @@ public partial class SafeHandleTests
 
     private class LastErrorSafeHandle : SafeHandle
     {
-        internal LastErrorSafeHandle(IntPtr h)
-            : base(h, true)
-        {
-        }
+        internal LastErrorSafeHandle(IntPtr h) : base(h, true) { }
 
         public override bool IsInvalid => handle == IntPtr.Zero;
 

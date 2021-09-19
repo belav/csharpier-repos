@@ -19,41 +19,60 @@ namespace System.Web.Http.Validation
             ValidatorProviders = validatorProviders;
         }
 
-        protected internal IEnumerable<ModelValidatorProvider> ValidatorProviders { get; private set; }
+        protected internal IEnumerable<ModelValidatorProvider> ValidatorProviders
+        {
+            get;
+            private set;
+        }
 
         public virtual bool IsRequired
         {
             get { return false; }
         }
 
-        public static ModelValidator GetModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders)
-        {
+        public static ModelValidator GetModelValidator(
+            IEnumerable<ModelValidatorProvider> validatorProviders
+        ) {
             return new CompositeModelValidator(validatorProviders);
         }
 
-        public abstract IEnumerable<ModelValidationResult> Validate(ModelMetadata metadata, object container);
+        public abstract IEnumerable<ModelValidationResult> Validate(
+            ModelMetadata metadata,
+            object container
+        );
 
         private class CompositeModelValidator : ModelValidator
         {
-            public CompositeModelValidator(IEnumerable<ModelValidatorProvider> validatorProviders)
-                : base(validatorProviders)
-            {
-            }
+            public CompositeModelValidator(
+                IEnumerable<ModelValidatorProvider> validatorProviders
+            ) : base(validatorProviders) { }
 
-            public override IEnumerable<ModelValidationResult> Validate(ModelMetadata metadata, object container)
-            {
+            public override IEnumerable<ModelValidationResult> Validate(
+                ModelMetadata metadata,
+                object container
+            ) {
                 bool propertiesValid = true;
 
                 foreach (ModelMetadata propertyMetadata in metadata.Properties)
                 {
-                    foreach (ModelValidator propertyValidator in propertyMetadata.GetValidators(ValidatorProviders))
-                    {
-                        foreach (ModelValidationResult propertyResult in propertyValidator.Validate(metadata, container))
-                        {
+                    foreach (
+                        ModelValidator propertyValidator in propertyMetadata.GetValidators(
+                            ValidatorProviders
+                        )
+                    ) {
+                        foreach (
+                            ModelValidationResult propertyResult in propertyValidator.Validate(
+                                metadata,
+                                container
+                            )
+                        ) {
                             propertiesValid = false;
                             yield return new ModelValidationResult
                             {
-                                MemberName = ModelBindingHelper.CreatePropertyModelName(propertyMetadata.PropertyName, propertyResult.MemberName),
+                                MemberName = ModelBindingHelper.CreatePropertyModelName(
+                                    propertyMetadata.PropertyName,
+                                    propertyResult.MemberName
+                                ),
                                 Message = propertyResult.Message
                             };
                         }
@@ -62,10 +81,15 @@ namespace System.Web.Http.Validation
 
                 if (propertiesValid)
                 {
-                    foreach (ModelValidator typeValidator in metadata.GetValidators(ValidatorProviders))
-                    {
-                        foreach (ModelValidationResult typeResult in typeValidator.Validate(metadata, container))
-                        {
+                    foreach (
+                        ModelValidator typeValidator in metadata.GetValidators(ValidatorProviders)
+                    ) {
+                        foreach (
+                            ModelValidationResult typeResult in typeValidator.Validate(
+                                metadata,
+                                container
+                            )
+                        ) {
                             yield return typeResult;
                         }
                     }

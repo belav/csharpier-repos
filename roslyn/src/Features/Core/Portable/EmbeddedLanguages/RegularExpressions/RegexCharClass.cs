@@ -4,7 +4,7 @@
 
 #nullable disable
 
-// LICENSING NOTE: The license for this file is from the originating 
+// LICENSING NOTE: The license for this file is from the originating
 // source and not the general https://github.com/dotnet/roslyn license.
 // See https://github.com/dotnet/corefx/blob/68b76c30eafb3647c11e3f766a2645b130ca1448/src/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexCharClass.cs
 
@@ -34,176 +34,180 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         private const char ZeroWidthJoiner = '\u200D';
         private const char ZeroWidthNonJoiner = '\u200C';
 
-        private const string WordClass = "\u0000\u0000\u000A\u0000\u0002\u0004\u0005\u0003\u0001\u0006\u0009\u0013\u0000";
+        private const string WordClass =
+            "\u0000\u0000\u000A\u0000\u0002\u0004\u0005\u0003\u0001\u0006\u0009\u0013\u0000";
 
-        public static readonly Dictionary<string, (string shortDescription, string longDescription)> EscapeCategories =
-            new Dictionary<string, (string, string)>
+        public static readonly Dictionary<
+            string,
+            (string shortDescription, string longDescription)
+        > EscapeCategories = new Dictionary<string, (string, string)>
+        {
+            // Others
+            { "Cc", (Regex_other_control, "") },
+            { "Cf", (Regex_other_format, "") },
+            { "Cn", (Regex_other_not_assigned, "") },
+            { "Co", (Regex_other_private_use, "") },
+            { "Cs", (Regex_other_surrogate, "") },
+            { "C", (Regex_all_control_characters_short, Regex_all_control_characters_long) },
+            // Letters
+            { "Ll", (Regex_letter_lowercase, "") },
+            { "Lm", (Regex_letter_modifier, "") },
+            { "Lo", (Regex_letter_other, "") },
+            { "Lt", (Regex_letter_titlecase, "") },
+            { "Lu", (Regex_letter_uppercase, "") },
+            { "L", (Regex_all_letter_characters_short, Regex_all_letter_characters_long) },
+            // Marks
+            { "Mc", (Regex_mark_spacing_combining, "") },
+            { "Me", (Regex_mark_enclosing, "") },
+            { "Mn", (Regex_mark_nonspacing, "") },
+            { "M", (Regex_all_diacritic_marks_short, Regex_all_diacritic_marks_long) },
+            // Numbers
+            { "Nd", (Regex_number_decimal_digit, "") },
+            { "Nl", (Regex_number_letter, "") },
+            { "No", (Regex_number_other, "") },
+            { "N", (Regex_all_numbers_short, Regex_all_numbers_long) },
+            // Punctuation
+            { "Pc", (Regex_punctuation_connector, "") },
+            { "Pd", (Regex_punctuation_dash, "") },
+            { "Pe", (Regex_punctuation_close, "") },
+            { "Po", (Regex_punctuation_other, "") },
+            { "Ps", (Regex_punctuation_open, "") },
+            { "Pf", (Regex_punctuation_final_quote, "") },
+            { "Pi", (Regex_punctuation_initial_quote, "") },
             {
-                // Others
-                { "Cc", (Regex_other_control, "") },
-                { "Cf", (Regex_other_format, "") },
-                { "Cn", (Regex_other_not_assigned, "") },
-                { "Co", (Regex_other_private_use, "") },
-                { "Cs", (Regex_other_surrogate, "") },
-                { "C", (Regex_all_control_characters_short, Regex_all_control_characters_long) },
-                // Letters
-                { "Ll", (Regex_letter_lowercase, "") },
-                { "Lm", (Regex_letter_modifier, "") },
-                { "Lo", (Regex_letter_other, "") },
-                { "Lt", (Regex_letter_titlecase, "") },
-                { "Lu", (Regex_letter_uppercase, "") },
-                { "L", (Regex_all_letter_characters_short, Regex_all_letter_characters_long) },
-                // Marks
-                { "Mc", (Regex_mark_spacing_combining, "") },
-                { "Me", (Regex_mark_enclosing, "") },
-                { "Mn", (Regex_mark_nonspacing, "") },
-                { "M", (Regex_all_diacritic_marks_short, Regex_all_diacritic_marks_long) },
-                // Numbers
-                { "Nd", (Regex_number_decimal_digit, "") },
-                { "Nl", (Regex_number_letter, "") },
-                { "No", (Regex_number_other, "") },
-                { "N", (Regex_all_numbers_short, Regex_all_numbers_long) },
-                // Punctuation
-                { "Pc", (Regex_punctuation_connector, "") },
-                { "Pd", (Regex_punctuation_dash, "") },
-                { "Pe", (Regex_punctuation_close, "") },
-                { "Po", (Regex_punctuation_other, "") },
-                { "Ps", (Regex_punctuation_open, "") },
-                { "Pf", (Regex_punctuation_final_quote, "") },
-                { "Pi", (Regex_punctuation_initial_quote, "") },
-                { "P", (Regex_all_punctuation_characters_short, Regex_all_punctuation_characters_long) },
-                // Symbols
-                { "Sc", (Regex_symbol_currency, "") },
-                { "Sk", (Regex_symbol_modifier, "") },
-                { "Sm", (Regex_symbol_math, "") },
-                { "So", (Regex_symbol_other, "") },
-                { "S", (Regex_all_symbols_short, Regex_all_symbols_long) },
-                // Separators
-                { "Zl", (Regex_separator_line, "") },
-                { "Zp", (Regex_separator_paragraph, "") },
-                { "Zs", (Regex_separator_space, "") },
-                { "Z", (Regex_all_separator_characters_short, Regex_all_separator_characters_long) },
+                "P",
+                (Regex_all_punctuation_characters_short, Regex_all_punctuation_characters_long)
+            },
+            // Symbols
+            { "Sc", (Regex_symbol_currency, "") },
+            { "Sk", (Regex_symbol_modifier, "") },
+            { "Sm", (Regex_symbol_math, "") },
+            { "So", (Regex_symbol_other, "") },
+            { "S", (Regex_all_symbols_short, Regex_all_symbols_long) },
+            // Separators
+            { "Zl", (Regex_separator_line, "") },
+            { "Zp", (Regex_separator_paragraph, "") },
+            { "Zs", (Regex_separator_space, "") },
+            { "Z", (Regex_all_separator_characters_short, Regex_all_separator_characters_long) },
+            { "IsAlphabeticPresentationForms", ("", "") },
+            { "IsArabic", ("", "") },
+            { "IsArabicPresentationForms-A", ("", "") },
+            { "IsArabicPresentationForms-B", ("", "") },
+            { "IsArmenian", ("", "") },
+            { "IsArrows", ("", "") },
+            { "IsBasicLatin", ("", "") },
+            { "IsBengali", ("", "") },
+            { "IsBlockElements", ("", "") },
+            { "IsBopomofo", ("", "") },
+            { "IsBopomofoExtended", ("", "") },
+            { "IsBoxDrawing", ("", "") },
+            { "IsBraillePatterns", ("", "") },
+            { "IsBuhid", ("", "") },
+            { "IsCJKCompatibility", ("", "") },
+            { "IsCJKCompatibilityForms", ("", "") },
+            { "IsCJKCompatibilityIdeographs", ("", "") },
+            { "IsCJKRadicalsSupplement", ("", "") },
+            { "IsCJKSymbolsandPunctuation", ("", "") },
+            { "IsCJKUnifiedIdeographs", ("", "") },
+            { "IsCJKUnifiedIdeographsExtensionA", ("", "") },
+            { "IsCherokee", ("", "") },
+            { "IsCombiningDiacriticalMarks", ("", "") },
+            { "IsCombiningDiacriticalMarksforSymbols", ("", "") },
+            { "IsCombiningHalfMarks", ("", "") },
+            { "IsCombiningMarksforSymbols", ("", "") },
+            { "IsControlPictures", ("", "") },
+            { "IsCurrencySymbols", ("", "") },
+            { "IsCyrillic", ("", "") },
+            { "IsCyrillicSupplement", ("", "") },
+            { "IsDevanagari", ("", "") },
+            { "IsDingbats", ("", "") },
+            { "IsEnclosedAlphanumerics", ("", "") },
+            { "IsEnclosedCJKLettersandMonths", ("", "") },
+            { "IsEthiopic", ("", "") },
+            { "IsGeneralPunctuation", ("", "") },
+            { "IsGeometricShapes", ("", "") },
+            { "IsGeorgian", ("", "") },
+            { "IsGreek", ("", "") },
+            { "IsGreekExtended", ("", "") },
+            { "IsGreekandCoptic", ("", "") },
+            { "IsGujarati", ("", "") },
+            { "IsGurmukhi", ("", "") },
+            { "IsHalfwidthandFullwidthForms", ("", "") },
+            { "IsHangulCompatibilityJamo", ("", "") },
+            { "IsHangulJamo", ("", "") },
+            { "IsHangulSyllables", ("", "") },
+            { "IsHanunoo", ("", "") },
+            { "IsHebrew", ("", "") },
+            { "IsHighPrivateUseSurrogates", ("", "") },
+            { "IsHighSurrogates", ("", "") },
+            { "IsHiragana", ("", "") },
+            { "IsIPAExtensions", ("", "") },
+            { "IsIdeographicDescriptionCharacters", ("", "") },
+            { "IsKanbun", ("", "") },
+            { "IsKangxiRadicals", ("", "") },
+            { "IsKannada", ("", "") },
+            { "IsKatakana", ("", "") },
+            { "IsKatakanaPhoneticExtensions", ("", "") },
+            { "IsKhmer", ("", "") },
+            { "IsKhmerSymbols", ("", "") },
+            { "IsLao", ("", "") },
+            { "IsLatin-1Supplement", ("", "") },
+            { "IsLatinExtended-A", ("", "") },
+            { "IsLatinExtended-B", ("", "") },
+            { "IsLatinExtendedAdditional", ("", "") },
+            { "IsLetterlikeSymbols", ("", "") },
+            { "IsLimbu", ("", "") },
+            { "IsLowSurrogates", ("", "") },
+            { "IsMalayalam", ("", "") },
+            { "IsMathematicalOperators", ("", "") },
+            { "IsMiscellaneousMathematicalSymbols-A", ("", "") },
+            { "IsMiscellaneousMathematicalSymbols-B", ("", "") },
+            { "IsMiscellaneousSymbols", ("", "") },
+            { "IsMiscellaneousSymbolsandArrows", ("", "") },
+            { "IsMiscellaneousTechnical", ("", "") },
+            { "IsMongolian", ("", "") },
+            { "IsMyanmar", ("", "") },
+            { "IsNumberForms", ("", "") },
+            { "IsOgham", ("", "") },
+            { "IsOpticalCharacterRecognition", ("", "") },
+            { "IsOriya", ("", "") },
+            { "IsPhoneticExtensions", ("", "") },
+            { "IsPrivateUse", ("", "") },
+            { "IsPrivateUseArea", ("", "") },
+            { "IsRunic", ("", "") },
+            { "IsSinhala", ("", "") },
+            { "IsSmallFormVariants", ("", "") },
+            { "IsSpacingModifierLetters", ("", "") },
+            { "IsSpecials", ("", "") },
+            { "IsSuperscriptsandSubscripts", ("", "") },
+            { "IsSupplementalArrows-A", ("", "") },
+            { "IsSupplementalArrows-B", ("", "") },
+            { "IsSupplementalMathematicalOperators", ("", "") },
+            { "IsSyriac", ("", "") },
+            { "IsTagalog", ("", "") },
+            { "IsTagbanwa", ("", "") },
+            { "IsTaiLe", ("", "") },
+            { "IsTamil", ("", "") },
+            { "IsTelugu", ("", "") },
+            { "IsThaana", ("", "") },
+            { "IsThai", ("", "") },
+            { "IsTibetan", ("", "") },
+            { "IsUnifiedCanadianAboriginalSyllabics", ("", "") },
+            { "IsVariationSelectors", ("", "") },
+            { "IsYiRadicals", ("", "") },
+            { "IsYiSyllables", ("", "") },
+            { "IsYijingHexagramSymbols", ("", "") },
+            { "_xmlC", ("", "") },
+            { "_xmlD", ("", "") },
+            { "_xmlI", ("", "") },
+            { "_xmlW", ("", "") },
+        };
 
-                { "IsAlphabeticPresentationForms", ("", "") },
-                { "IsArabic", ("", "") },
-                { "IsArabicPresentationForms-A", ("", "") },
-                { "IsArabicPresentationForms-B", ("", "") },
-                { "IsArmenian", ("", "") },
-                { "IsArrows", ("", "") },
-                { "IsBasicLatin", ("", "") },
-                { "IsBengali", ("", "") },
-                { "IsBlockElements", ("", "") },
-                { "IsBopomofo", ("", "") },
-                { "IsBopomofoExtended", ("", "") },
-                { "IsBoxDrawing", ("", "") },
-                { "IsBraillePatterns", ("", "") },
-                { "IsBuhid", ("", "") },
-                { "IsCJKCompatibility", ("", "") },
-                { "IsCJKCompatibilityForms", ("", "") },
-                { "IsCJKCompatibilityIdeographs", ("", "") },
-                { "IsCJKRadicalsSupplement", ("", "") },
-                { "IsCJKSymbolsandPunctuation", ("", "") },
-                { "IsCJKUnifiedIdeographs", ("", "") },
-                { "IsCJKUnifiedIdeographsExtensionA", ("", "") },
-                { "IsCherokee", ("", "") },
-                { "IsCombiningDiacriticalMarks", ("", "") },
-                { "IsCombiningDiacriticalMarksforSymbols", ("", "") },
-                { "IsCombiningHalfMarks", ("", "") },
-                { "IsCombiningMarksforSymbols", ("", "") },
-                { "IsControlPictures", ("", "") },
-                { "IsCurrencySymbols", ("", "") },
-                { "IsCyrillic", ("", "") },
-                { "IsCyrillicSupplement", ("", "") },
-                { "IsDevanagari", ("", "") },
-                { "IsDingbats", ("", "") },
-                { "IsEnclosedAlphanumerics", ("", "") },
-                { "IsEnclosedCJKLettersandMonths", ("", "") },
-                { "IsEthiopic", ("", "") },
-                { "IsGeneralPunctuation", ("", "") },
-                { "IsGeometricShapes", ("", "") },
-                { "IsGeorgian", ("", "") },
-                { "IsGreek", ("", "") },
-                { "IsGreekExtended", ("", "") },
-                { "IsGreekandCoptic", ("", "") },
-                { "IsGujarati", ("", "") },
-                { "IsGurmukhi", ("", "") },
-                { "IsHalfwidthandFullwidthForms", ("", "") },
-                { "IsHangulCompatibilityJamo", ("", "") },
-                { "IsHangulJamo", ("", "") },
-                { "IsHangulSyllables", ("", "") },
-                { "IsHanunoo", ("", "") },
-                { "IsHebrew", ("", "") },
-                { "IsHighPrivateUseSurrogates", ("", "") },
-                { "IsHighSurrogates", ("", "") },
-                { "IsHiragana", ("", "") },
-                { "IsIPAExtensions", ("", "") },
-                { "IsIdeographicDescriptionCharacters", ("", "") },
-                { "IsKanbun", ("", "") },
-                { "IsKangxiRadicals", ("", "") },
-                { "IsKannada", ("", "") },
-                { "IsKatakana", ("", "") },
-                { "IsKatakanaPhoneticExtensions", ("", "") },
-                { "IsKhmer", ("", "") },
-                { "IsKhmerSymbols", ("", "") },
-                { "IsLao", ("", "") },
-                { "IsLatin-1Supplement", ("", "") },
-                { "IsLatinExtended-A", ("", "") },
-                { "IsLatinExtended-B", ("", "") },
-                { "IsLatinExtendedAdditional", ("", "") },
-                { "IsLetterlikeSymbols", ("", "") },
-                { "IsLimbu", ("", "") },
-                { "IsLowSurrogates", ("", "") },
-                { "IsMalayalam", ("", "") },
-                { "IsMathematicalOperators", ("", "") },
-                { "IsMiscellaneousMathematicalSymbols-A", ("", "") },
-                { "IsMiscellaneousMathematicalSymbols-B", ("", "") },
-                { "IsMiscellaneousSymbols", ("", "") },
-                { "IsMiscellaneousSymbolsandArrows", ("", "") },
-                { "IsMiscellaneousTechnical", ("", "") },
-                { "IsMongolian", ("", "") },
-                { "IsMyanmar", ("", "") },
-                { "IsNumberForms", ("", "") },
-                { "IsOgham", ("", "") },
-                { "IsOpticalCharacterRecognition", ("", "") },
-                { "IsOriya", ("", "") },
-                { "IsPhoneticExtensions", ("", "") },
-                { "IsPrivateUse", ("", "") },
-                { "IsPrivateUseArea", ("", "") },
-                { "IsRunic", ("", "") },
-                { "IsSinhala", ("", "") },
-                { "IsSmallFormVariants", ("", "") },
-                { "IsSpacingModifierLetters", ("", "") },
-                { "IsSpecials", ("", "") },
-                { "IsSuperscriptsandSubscripts", ("", "") },
-                { "IsSupplementalArrows-A", ("", "") },
-                { "IsSupplementalArrows-B", ("", "") },
-                { "IsSupplementalMathematicalOperators", ("", "") },
-                { "IsSyriac", ("", "") },
-                { "IsTagalog", ("", "") },
-                { "IsTagbanwa", ("", "") },
-                { "IsTaiLe", ("", "") },
-                { "IsTamil", ("", "") },
-                { "IsTelugu", ("", "") },
-                { "IsThaana", ("", "") },
-                { "IsThai", ("", "") },
-                { "IsTibetan", ("", "") },
-                { "IsUnifiedCanadianAboriginalSyllabics", ("", "") },
-                { "IsVariationSelectors", ("", "") },
-                { "IsYiRadicals", ("", "") },
-                { "IsYiSyllables", ("", "") },
-                { "IsYijingHexagramSymbols", ("", "") },
-                { "_xmlC", ("", "") },
-                { "_xmlD", ("", "") },
-                { "_xmlI", ("", "") },
-                { "_xmlW", ("", "") },
-            };
-
-        public static bool IsEscapeCategory(string value)
-            => EscapeCategories.ContainsKey(value);
+        public static bool IsEscapeCategory(string value) => EscapeCategories.ContainsKey(value);
 
         public static bool IsWordChar(VirtualChar r)
         {
-            // unicode characters that do not fit in 16bits are not supported by 
+            // unicode characters that do not fit in 16bits are not supported by
             // .net regex system.
             if (r.Value > char.MaxValue)
                 return false;
@@ -216,8 +220,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             return CharInClass(ch, WordClass) || ch == ZeroWidthJoiner || ch == ZeroWidthNonJoiner;
         }
 
-        internal static bool CharInClass(char ch, string set)
-            => CharInClassRecursive(ch, set, 0);
+        internal static bool CharInClass(char ch, string set) => CharInClassRecursive(ch, set, 0);
 
         internal static bool CharInClassRecursive(char ch, string set, int start)
         {
@@ -246,8 +249,13 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         /// Determines a character's membership in a character class (via the
         /// string representation of the class).
         /// </summary>
-        private static bool CharInClassInternal(char ch, string set, int start, int mySetLength, int myCategoryLength)
-        {
+        private static bool CharInClassInternal(
+            char ch,
+            string set,
+            int start,
+            int mySetLength,
+            int myCategoryLength
+        ) {
             int min;
             int max;
             int mid;
@@ -269,7 +277,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             // subtractions in the mix, the starting position = start+SETSTART.  Since we know that
             // SETSTART is odd, we can simplify it out of the equation.  But if it changes we need to
             // reverse this check.
-            Debug.Assert((SETSTART & 0x1) == 1, "If SETSTART is not odd, the calculation below this will be reversed");
+            Debug.Assert(
+                (SETSTART & 0x1) == 1,
+                "If SETSTART is not odd, the calculation below this will be reversed"
+            );
             if ((min & 0x1) == (start & 0x1))
             {
                 return true;
@@ -283,8 +294,13 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             }
         }
 
-        private static bool CharInCategory(char ch, string set, int start, int mySetLength, int myCategoryLength)
-        {
+        private static bool CharInCategory(
+            char ch,
+            string set,
+            int start,
+            int mySetLength,
+            int myCategoryLength
+        ) {
             var chcategory = CharUnicodeInfo.GetUnicodeCategory(ch);
 
             var i = start + SETSTART + mySetLength;
@@ -355,8 +371,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         /// This is used for categories which are composed of other categories - L, N, Z, W...
         /// These groups need special treatment when they are negated
         /// </summary>
-        private static bool CharInCategoryGroup(UnicodeCategory chcategory, string category, ref int i)
-        {
+        private static bool CharInCategoryGroup(
+            UnicodeCategory chcategory,
+            string category,
+            ref int i
+        ) {
             i++;
 
             int curcat = unchecked((short)category[i]);

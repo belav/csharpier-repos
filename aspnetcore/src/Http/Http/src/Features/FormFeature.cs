@@ -43,10 +43,7 @@ namespace Microsoft.AspNetCore.Http.Features
         /// Initializes a new instance of <see cref="FormFeature"/>.
         /// </summary>
         /// <param name="request">The <see cref="HttpRequest"/>.</param>
-        public FormFeature(HttpRequest request)
-            : this(request, FormOptions.Default)
-        {
-        }
+        public FormFeature(HttpRequest request) : this(request, FormOptions.Default) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="FormFeature"/>.
@@ -89,7 +86,8 @@ namespace Microsoft.AspNetCore.Http.Features
                 }
 
                 var contentType = ContentType;
-                return HasApplicationFormContentType(contentType) || HasMultipartFormContentType(contentType);
+                return HasApplicationFormContentType(contentType)
+                    || HasMultipartFormContentType(contentType);
             }
         }
 
@@ -114,7 +112,9 @@ namespace Microsoft.AspNetCore.Http.Features
 
             if (!HasFormContentType)
             {
-                throw new InvalidOperationException("Incorrect Content-Type: " + _request.ContentType);
+                throw new InvalidOperationException(
+                    "Incorrect Content-Type: " + _request.ContentType
+                );
             }
 
             // TODO: Issue #456 Avoid Sync-over-Async http://blogs.msdn.com/b/pfxteam/archive/2012/04/13/10293638.aspx
@@ -147,7 +147,9 @@ namespace Microsoft.AspNetCore.Http.Features
         {
             if (!HasFormContentType)
             {
-                throw new InvalidOperationException("Incorrect Content-Type: " + _request.ContentType);
+                throw new InvalidOperationException(
+                    "Incorrect Content-Type: " + _request.ContentType
+                );
             }
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -159,15 +161,22 @@ namespace Microsoft.AspNetCore.Http.Features
 
             if (_options.BufferBody)
             {
-                _request.EnableRewind(_options.MemoryBufferThreshold, _options.BufferBodyLengthLimit);
+                _request.EnableRewind(
+                    _options.MemoryBufferThreshold,
+                    _options.BufferBodyLengthLimit
+                );
             }
 
             FormCollection? formFields = null;
             FormFileCollection? files = null;
 
             // Some of these code paths use StreamReader which does not support cancellation tokens.
-            using (cancellationToken.Register((state) => ((HttpContext)state!).Abort(), _request.HttpContext))
-            {
+            using (
+                cancellationToken.Register(
+                    (state) => ((HttpContext)state!).Abort(),
+                    _request.HttpContext
+                )
+            ) {
                 var contentType = ContentType;
                 // Check the content-type
                 if (HasApplicationFormContentType(contentType))
@@ -179,7 +188,9 @@ namespace Microsoft.AspNetCore.Http.Features
                         KeyLengthLimit = _options.KeyLengthLimit,
                         ValueLengthLimit = _options.ValueLengthLimit,
                     };
-                    formFields = new FormCollection(await formReader.ReadFormAsync(cancellationToken));
+                    formFields = new FormCollection(
+                        await formReader.ReadFormAsync(cancellationToken)
+                    );
                 }
                 else if (HasMultipartFormContentType(contentType))
                 {
@@ -196,9 +207,16 @@ namespace Microsoft.AspNetCore.Http.Features
                     while (section != null)
                     {
                         // Parse the content disposition here and pass it further to avoid reparsings
-                        if (!ContentDispositionHeaderValue.TryParse(section.ContentDisposition, out var contentDisposition))
-                        {
-                            throw new InvalidDataException("Form section has invalid Content-Disposition value: " + section.ContentDisposition);
+                        if (
+                            !ContentDispositionHeaderValue.TryParse(
+                                section.ContentDisposition,
+                                out var contentDisposition
+                            )
+                        ) {
+                            throw new InvalidDataException(
+                                "Form section has invalid Content-Disposition value: "
+                                    + section.ContentDisposition
+                            );
                         }
 
                         if (contentDisposition.IsFileDisposition())
@@ -208,7 +226,9 @@ namespace Microsoft.AspNetCore.Http.Features
                             // Enable buffering for the file if not already done for the full body
                             section.EnableRewind(
                                 _request.HttpContext.Response.RegisterForDispose,
-                                _options.MemoryBufferThreshold, _options.MultipartBodyLengthLimit);
+                                _options.MemoryBufferThreshold,
+                                _options.MultipartBodyLengthLimit
+                            );
 
                             // Find the end
                             await section.Body.DrainAsync(cancellationToken);
@@ -220,12 +240,24 @@ namespace Microsoft.AspNetCore.Http.Features
                             if (section.BaseStreamOffset.HasValue)
                             {
                                 // Relative reference to buffered request body
-                                file = new FormFile(_request.Body, section.BaseStreamOffset.GetValueOrDefault(), section.Body.Length, name, fileName);
+                                file = new FormFile(
+                                    _request.Body,
+                                    section.BaseStreamOffset.GetValueOrDefault(),
+                                    section.Body.Length,
+                                    name,
+                                    fileName
+                                );
                             }
                             else
                             {
                                 // Individually buffered file body
-                                file = new FormFile(section.Body, 0, section.Body.Length, name, fileName);
+                                file = new FormFile(
+                                    section.Body,
+                                    0,
+                                    section.Body.Length,
+                                    name,
+                                    fileName
+                                );
                             }
                             file.Headers = new HeaderDictionary(section.Headers);
 
@@ -235,13 +267,18 @@ namespace Microsoft.AspNetCore.Http.Features
                             }
                             if (files.Count >= _options.ValueCountLimit)
                             {
-                                throw new InvalidDataException($"Form value count limit {_options.ValueCountLimit} exceeded.");
+                                throw new InvalidDataException(
+                                    $"Form value count limit {_options.ValueCountLimit} exceeded."
+                                );
                             }
                             files.Add(file);
                         }
                         else if (contentDisposition.IsFormDisposition())
                         {
-                            var formDataSection = new FormMultipartSection(section, contentDisposition);
+                            var formDataSection = new FormMultipartSection(
+                                section,
+                                contentDisposition
+                            );
 
                             // Content-Disposition: form-data; name="key"
                             //
@@ -254,12 +291,18 @@ namespace Microsoft.AspNetCore.Http.Features
                             formAccumulator.Append(key, value);
                             if (formAccumulator.ValueCount > _options.ValueCountLimit)
                             {
-                                throw new InvalidDataException($"Form value count limit {_options.ValueCountLimit} exceeded.");
+                                throw new InvalidDataException(
+                                    $"Form value count limit {_options.ValueCountLimit} exceeded."
+                                );
                             }
                         }
                         else
                         {
-                            System.Diagnostics.Debug.Assert(false, "Unrecognized content-disposition for this section: " + section.ContentDisposition);
+                            System.Diagnostics.Debug.Assert(
+                                false,
+                                "Unrecognized content-disposition for this section: "
+                                    + section.ContentDisposition
+                            );
                         }
 
                         section = await multipartReader.ReadNextSectionAsync(cancellationToken);
@@ -305,30 +348,46 @@ namespace Microsoft.AspNetCore.Http.Features
             return encoding;
         }
 
-        private bool HasApplicationFormContentType([NotNullWhen(true)] MediaTypeHeaderValue? contentType)
-        {
+        private bool HasApplicationFormContentType(
+            [NotNullWhen(true)] MediaTypeHeaderValue? contentType
+        ) {
             // Content-Type: application/x-www-form-urlencoded; charset=utf-8
-            return contentType != null && contentType.MediaType.Equals("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase);
+            return contentType != null
+                && contentType.MediaType.Equals(
+                    "application/x-www-form-urlencoded",
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
-        private bool HasMultipartFormContentType([NotNullWhen(true)] MediaTypeHeaderValue? contentType)
-        {
+        private bool HasMultipartFormContentType(
+            [NotNullWhen(true)] MediaTypeHeaderValue? contentType
+        ) {
             // Content-Type: multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq
-            return contentType != null && contentType.MediaType.Equals("multipart/form-data", StringComparison.OrdinalIgnoreCase);
+            return contentType != null
+                && contentType.MediaType.Equals(
+                    "multipart/form-data",
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
         private bool HasFormDataContentDisposition(ContentDispositionHeaderValue contentDisposition)
         {
             // Content-Disposition: form-data; name="key";
-            return contentDisposition != null && contentDisposition.DispositionType.Equals("form-data")
-                && StringSegment.IsNullOrEmpty(contentDisposition.FileName) && StringSegment.IsNullOrEmpty(contentDisposition.FileNameStar);
+            return contentDisposition != null
+                && contentDisposition.DispositionType.Equals("form-data")
+                && StringSegment.IsNullOrEmpty(contentDisposition.FileName)
+                && StringSegment.IsNullOrEmpty(contentDisposition.FileNameStar);
         }
 
         private bool HasFileContentDisposition(ContentDispositionHeaderValue contentDisposition)
         {
             // Content-Disposition: form-data; name="myfile1"; filename="Misc 002.jpg"
-            return contentDisposition != null && contentDisposition.DispositionType.Equals("form-data")
-                && (!StringSegment.IsNullOrEmpty(contentDisposition.FileName) || !StringSegment.IsNullOrEmpty(contentDisposition.FileNameStar));
+            return contentDisposition != null
+                && contentDisposition.DispositionType.Equals("form-data")
+                && (
+                    !StringSegment.IsNullOrEmpty(contentDisposition.FileName)
+                    || !StringSegment.IsNullOrEmpty(contentDisposition.FileNameStar)
+                );
         }
 
         // Content-Type: multipart/form-data; boundary="----WebKitFormBoundarymx2fSWqWSd0OxQqq"
@@ -342,7 +401,9 @@ namespace Microsoft.AspNetCore.Http.Features
             }
             if (boundary.Length > lengthLimit)
             {
-                throw new InvalidDataException($"Multipart boundary length limit {lengthLimit} exceeded.");
+                throw new InvalidDataException(
+                    $"Multipart boundary length limit {lengthLimit} exceeded."
+                );
             }
             return boundary.ToString();
         }

@@ -34,9 +34,8 @@ namespace Microsoft.AspNetCore.Mvc
                 actionContext.HttpContext,
                 actionContext.RouteData,
                 actionContext.ActionDescriptor,
-                actionContext.ModelState)
-        {
-        }
+                actionContext.ModelState
+            ) { }
 
         /// <summary>
         /// Creates a new <see cref="ActionContext"/>.
@@ -47,10 +46,8 @@ namespace Microsoft.AspNetCore.Mvc
         public ActionContext(
             HttpContext httpContext,
             RouteData routeData,
-            ActionDescriptor actionDescriptor)
-            : this(httpContext, routeData, actionDescriptor, new ModelStateDictionary())
-        {
-        }
+            ActionDescriptor actionDescriptor
+        ) : this(httpContext, routeData, actionDescriptor, new ModelStateDictionary()) { }
 
         /// <summary>
         /// Creates a new <see cref="ActionContext"/>.
@@ -63,8 +60,8 @@ namespace Microsoft.AspNetCore.Mvc
             HttpContext httpContext,
             RouteData routeData,
             ActionDescriptor actionDescriptor,
-            ModelStateDictionary modelState)
-        {
+            ModelStateDictionary modelState
+        ) {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));

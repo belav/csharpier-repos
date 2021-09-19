@@ -12,15 +12,24 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 {
-    [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host, WorkspaceKind.MiscellaneousFiles, WorkspaceKind.MetadataAsSource), Shared]
+    [
+        ExportEventListener(
+            WellKnownEventListeners.Workspace,
+            WorkspaceKind.Host,
+            WorkspaceKind.MiscellaneousFiles,
+            WorkspaceKind.MetadataAsSource
+        ),
+        Shared
+    ]
     internal class VisualStudioLspWorkspaceRegistrationEventListener : IEventListener<object>
     {
         private readonly ILspWorkspaceRegistrationService _lspWorkspaceRegistrationService;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioLspWorkspaceRegistrationEventListener(ILspWorkspaceRegistrationService lspWorkspaceRegistrationService)
-        {
+        public VisualStudioLspWorkspaceRegistrationEventListener(
+            ILspWorkspaceRegistrationService lspWorkspaceRegistrationService
+        ) {
             _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
         }
 

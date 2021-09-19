@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.Wrapping
     {
         private readonly ImmutableArray<ISyntaxWrapper> _wrappers;
 
-        protected AbstractWrappingCodeRefactoringProvider(
-            ImmutableArray<ISyntaxWrapper> wrappers)
+        protected AbstractWrappingCodeRefactoringProvider(ImmutableArray<ISyntaxWrapper> wrappers)
         {
             _wrappers = wrappers;
         }
@@ -58,14 +57,20 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     cancellationToken.ThrowIfCancellationRequested();
 
                     var computer = await wrapper.TryCreateComputerAsync(
-                        document, position, node, cancellationToken).ConfigureAwait(false);
+                            document,
+                            position,
+                            node,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                     if (computer == null)
                     {
                         continue;
                     }
 
-                    var actions = await computer.GetTopLevelCodeActionsAsync().ConfigureAwait(false);
+                    var actions = await computer.GetTopLevelCodeActionsAsync()
+                        .ConfigureAwait(false);
                     if (actions.IsDefaultOrEmpty)
                     {
                         continue;

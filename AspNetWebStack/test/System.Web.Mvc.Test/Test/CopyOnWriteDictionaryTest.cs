@@ -16,28 +16,22 @@ namespace System.Web.Mvc.Test
             var values = new List<object>();
             var enumerator = Mock.Of<IEnumerator<KeyValuePair<string, object>>>();
             var sourceDictionary = new Mock<IDictionary<string, object>>(MockBehavior.Strict);
-            sourceDictionary.SetupGet(d => d.Count)
-                            .Returns(100)
-                            .Verifiable();
-            sourceDictionary.SetupGet(d => d.Values)
-                            .Returns(values)
-                            .Verifiable();
+            sourceDictionary.SetupGet(d => d.Count).Returns(100).Verifiable();
+            sourceDictionary.SetupGet(d => d.Values).Returns(values).Verifiable();
             sourceDictionary.Setup(d => d.ContainsKey("test-key"))
-                            .Returns(value: true)
-                            .Verifiable();
-            sourceDictionary.Setup(d => d.GetEnumerator())
-                            .Returns(enumerator)
-                            .Verifiable();
-            sourceDictionary.Setup(d => d["key2"])
-                            .Returns("key2-value")
-                            .Verifiable();
+                .Returns(value: true)
+                .Verifiable();
+            sourceDictionary.Setup(d => d.GetEnumerator()).Returns(enumerator).Verifiable();
+            sourceDictionary.Setup(d => d["key2"]).Returns("key2-value").Verifiable();
             object value;
             sourceDictionary.Setup(d => d.TryGetValue("different-key", out value))
-                            .Returns(false)
-                            .Verifiable();
+                .Returns(false)
+                .Verifiable();
 
-            var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(sourceDictionary.Object,
-                                                                                  StringComparer.OrdinalIgnoreCase);
+            var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(
+                sourceDictionary.Object,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Act and Assert
             Assert.Equal("key2-value", copyOnWriteDictionary["key2"]);
@@ -59,8 +53,10 @@ namespace System.Web.Mvc.Test
                 { "key1", "value1" },
                 { "key2", "value2" }
             };
-            var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(sourceDictionary,
-                                                                                  StringComparer.OrdinalIgnoreCase);
+            var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(
+                sourceDictionary,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Act
             copyOnWriteDictionary["key2"] = "value3";
@@ -82,8 +78,10 @@ namespace System.Web.Mvc.Test
                 { "key1", "value1" },
                 { "key2", "value2" }
             };
-            var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(sourceDictionary,
-                                                                                  StringComparer.OrdinalIgnoreCase);
+            var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(
+                sourceDictionary,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Act
             copyOnWriteDictionary.Add("key3", "value3");

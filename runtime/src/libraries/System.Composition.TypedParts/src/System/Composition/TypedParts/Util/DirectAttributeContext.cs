@@ -9,10 +9,14 @@ namespace System.Composition.TypedParts.Util
 {
     internal sealed class DirectAttributeContext : AttributedModelProvider
     {
-        public override IEnumerable<Attribute> GetCustomAttributes(Type reflectedType, Reflection.MemberInfo member)
-        {
-            if (reflectedType == null) throw new ArgumentNullException(nameof(reflectedType));
-            if (member == null) throw new ArgumentNullException(nameof(member));
+        public override IEnumerable<Attribute> GetCustomAttributes(
+            Type reflectedType,
+            Reflection.MemberInfo member
+        ) {
+            if (reflectedType == null)
+                throw new ArgumentNullException(nameof(reflectedType));
+            if (member == null)
+                throw new ArgumentNullException(nameof(member));
 
             if (!(member is TypeInfo) && member.DeclaringType != reflectedType)
                 return Array.Empty<Attribute>();
@@ -20,10 +24,14 @@ namespace System.Composition.TypedParts.Util
             return Attribute.GetCustomAttributes(member, false);
         }
 
-        public override IEnumerable<Attribute> GetCustomAttributes(Type reflectedType, Reflection.ParameterInfo parameter)
-        {
-            if (reflectedType == null) throw new ArgumentNullException(nameof(reflectedType));
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+        public override IEnumerable<Attribute> GetCustomAttributes(
+            Type reflectedType,
+            Reflection.ParameterInfo parameter
+        ) {
+            if (reflectedType == null)
+                throw new ArgumentNullException(nameof(reflectedType));
+            if (parameter == null)
+                throw new ArgumentNullException(nameof(parameter));
 
             return Attribute.GetCustomAttributes(parameter, false);
         }

@@ -35,7 +35,7 @@ namespace LargeObjectTest
         public LargeObject()
         {
             _array = new int[1250000]; // 5 MB
-            _olargeobj = new OtherLargeObject[1000];     //20 MB
+            _olargeobj = new OtherLargeObject[1000]; //20 MB
             for (int i = 0; i < 1000; i++)
             {
                 _olargeobj[i] = new OtherLargeObject();

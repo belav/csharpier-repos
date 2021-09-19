@@ -13,22 +13,42 @@ namespace System.Security.AccessControl
         private const ResourceType s_ResourceType = ResourceType.FileObject;
 
         internal FileSystemSecurity(bool isContainer)
-            : base(isContainer, s_ResourceType, _HandleErrorCode, isContainer)
-        {
-        }
+            : base(isContainer, s_ResourceType, _HandleErrorCode, isContainer) { }
 
-        internal FileSystemSecurity(bool isContainer, string name, AccessControlSections includeSections, bool isDirectory)
-            : base(isContainer, s_ResourceType, PathInternal.EnsureExtendedPrefixIfNeeded(Path.GetFullPath(name)), includeSections, _HandleErrorCode, isDirectory)
-        {
-        }
+        internal FileSystemSecurity(
+            bool isContainer,
+            string name,
+            AccessControlSections includeSections,
+            bool isDirectory
+        ) : base(
+            isContainer,
+            s_ResourceType,
+            PathInternal.EnsureExtendedPrefixIfNeeded(Path.GetFullPath(name)),
+            includeSections,
+            _HandleErrorCode,
+            isDirectory
+        ) { }
 
-        internal FileSystemSecurity(bool isContainer, SafeFileHandle? handle, AccessControlSections includeSections, bool isDirectory)
-            : base(isContainer, s_ResourceType, handle, includeSections, _HandleErrorCode, isDirectory)
-        {
-        }
+        internal FileSystemSecurity(
+            bool isContainer,
+            SafeFileHandle? handle,
+            AccessControlSections includeSections,
+            bool isDirectory
+        ) : base(
+            isContainer,
+            s_ResourceType,
+            handle,
+            includeSections,
+            _HandleErrorCode,
+            isDirectory
+        ) { }
 
-        private static Exception? _HandleErrorCode(int errorCode, string? name, SafeHandle? handle, object? context)
-        {
+        private static Exception? _HandleErrorCode(
+            int errorCode,
+            string? name,
+            SafeHandle? handle,
+            object? context
+        ) {
             Exception? exception = null;
 
             switch (errorCode)
@@ -72,15 +92,16 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type)
-        {
+            AccessControlType type
+        ) {
             return new FileSystemAccessRule(
                 identityReference,
                 accessMask,
                 isInherited,
                 inheritanceFlags,
                 propagationFlags,
-                type);
+                type
+            );
         }
 
         public sealed override AuditRule AuditRuleFactory(
@@ -89,15 +110,16 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags flags)
-        {
+            AuditFlags flags
+        ) {
             return new FileSystemAuditRule(
                 identityReference,
                 accessMask,
                 isInherited,
                 inheritanceFlags,
                 propagationFlags,
-                flags);
+                flags
+            );
         }
 
         internal AccessControlSections GetAccessControlSectionsFromChanges()
@@ -124,6 +146,7 @@ namespace System.Security.AccessControl
                 base.Persist(fullPath, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
+
             finally
             {
                 WriteUnlock();
@@ -140,6 +163,7 @@ namespace System.Security.AccessControl
                 Persist(handle, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
+
             finally
             {
                 WriteUnlock();
@@ -171,14 +195,20 @@ namespace System.Security.AccessControl
             // remove it unaltered. That is, don't mask off the Synchronize bit.
             // This is to avoid dangling synchronize bit
 
-            AuthorizationRuleCollection rules = GetAccessRules(true, true, rule.IdentityReference.GetType());
+            AuthorizationRuleCollection rules = GetAccessRules(
+                true,
+                true,
+                rule.IdentityReference.GetType()
+            );
 
             for (int i = 0; i < rules.Count; i++)
             {
-                if ((rules[i] is FileSystemAccessRule fsrule) && (fsrule.FileSystemRights == rule.FileSystemRights)
+                if (
+                    (rules[i] is FileSystemAccessRule fsrule)
+                    && (fsrule.FileSystemRights == rule.FileSystemRights)
                     && (fsrule.IdentityReference == rule.IdentityReference)
-                    && (fsrule.AccessControlType == rule.AccessControlType))
-                {
+                    && (fsrule.AccessControlType == rule.AccessControlType)
+                ) {
                     return base.RemoveAccessRule(rule);
                 }
             }
@@ -188,12 +218,16 @@ namespace System.Security.AccessControl
             // fake a call to AccessMaskFromRights as though the ACL is for Deny
 
             FileSystemAccessRule ruleNew = new FileSystemAccessRule(
-                                                    rule.IdentityReference,
-                                                    FileSystemAccessRule.AccessMaskFromRights(rule.FileSystemRights, AccessControlType.Deny),
-                                                    rule.IsInherited,
-                                                    rule.InheritanceFlags,
-                                                    rule.PropagationFlags,
-                                                    rule.AccessControlType);
+                rule.IdentityReference,
+                FileSystemAccessRule.AccessMaskFromRights(
+                    rule.FileSystemRights,
+                    AccessControlType.Deny
+                ),
+                rule.IsInherited,
+                rule.InheritanceFlags,
+                rule.PropagationFlags,
+                rule.AccessControlType
+            );
 
             return base.RemoveAccessRule(ruleNew);
         }
@@ -215,14 +249,20 @@ namespace System.Security.AccessControl
             // remove it unaltered. That is, don't mask off the Synchronize bit
             // This is to avoid dangling synchronize bit
 
-            AuthorizationRuleCollection rules = GetAccessRules(true, true, rule.IdentityReference.GetType());
+            AuthorizationRuleCollection rules = GetAccessRules(
+                true,
+                true,
+                rule.IdentityReference.GetType()
+            );
 
             for (int i = 0; i < rules.Count; i++)
             {
-                if ((rules[i] is FileSystemAccessRule fsrule) && (fsrule.FileSystemRights == rule.FileSystemRights)
+                if (
+                    (rules[i] is FileSystemAccessRule fsrule)
+                    && (fsrule.FileSystemRights == rule.FileSystemRights)
                     && (fsrule.IdentityReference == rule.IdentityReference)
-                    && (fsrule.AccessControlType == rule.AccessControlType))
-                {
+                    && (fsrule.AccessControlType == rule.AccessControlType)
+                ) {
                     base.RemoveAccessRuleSpecific(rule);
                     return;
                 }
@@ -233,12 +273,16 @@ namespace System.Security.AccessControl
             // fake a call to AccessMaskFromRights as though the ACL is for Deny
 
             FileSystemAccessRule ruleNew = new FileSystemAccessRule(
-                                                    rule.IdentityReference,
-                                                    FileSystemAccessRule.AccessMaskFromRights(rule.FileSystemRights, AccessControlType.Deny),
-                                                    rule.IsInherited,
-                                                    rule.InheritanceFlags,
-                                                    rule.PropagationFlags,
-                                                    rule.AccessControlType);
+                rule.IdentityReference,
+                FileSystemAccessRule.AccessMaskFromRights(
+                    rule.FileSystemRights,
+                    AccessControlType.Deny
+                ),
+                rule.IsInherited,
+                rule.InheritanceFlags,
+                rule.PropagationFlags,
+                rule.AccessControlType
+            );
 
             base.RemoveAccessRuleSpecific(ruleNew);
         }

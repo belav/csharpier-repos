@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
         {
             return Enumerable.Concat(
                 DefaultApplicationPartFactory.GetDefaultApplicationParts(assembly),
-                CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(assembly));
+                CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(assembly)
+            );
         }
     }
 }

@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
     /// <summary>
     /// The default authentication handler with IIS In-Process
     /// </summary>
-    [Obsolete("The IISServerAuthenticationHandler is obsolete and will be removed in a future release.")] // Remove after .NET 6.
+    [Obsolete(
+        "The IISServerAuthenticationHandler is obsolete and will be removed in a future release."
+    )] // Remove after .NET 6.
     public class IISServerAuthenticationHandler : IAuthenticationHandler
     {
         private HttpContext? _context;
@@ -29,7 +31,9 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             var user = _iisHttpContext.WindowsUser;
             if (user != null && user.Identity != null && user.Identity.IsAuthenticated)
             {
-                return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(user, Scheme.Name)));
+                return Task.FromResult(
+                    AuthenticateResult.Success(new AuthenticationTicket(user, Scheme.Name))
+                );
             }
             else
             {

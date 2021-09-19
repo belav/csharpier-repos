@@ -36,8 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public MethodCallCodeFragment(
             string method,
             object?[] arguments,
-            MethodCallCodeFragment chainedCall)
-            : this(method, arguments)
+            MethodCallCodeFragment chainedCall
+        ) : this(method, arguments)
         {
             Check.NotNull(chainedCall, nameof(chainedCall));
 
@@ -54,8 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Design
         ///     Gets the method call's arguments.
         /// </summary>
         /// <value> The method call's arguments. </value>
-        public virtual IReadOnlyList<object?> Arguments
-            => _arguments;
+        public virtual IReadOnlyList<object?> Arguments => _arguments;
 
         /// <summary>
         ///     Gets the next method call to chain after this.
@@ -69,15 +68,15 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="method"> The next method's name. </param>
         /// <param name="arguments"> The next method call's arguments. </param>
         /// <returns> A new fragment representing the method chain. </returns>
-        public virtual MethodCallCodeFragment Chain(string method, params object[] arguments)
-            => Chain(new MethodCallCodeFragment(method, arguments));
+        public virtual MethodCallCodeFragment Chain(string method, params object[] arguments) =>
+            Chain(new MethodCallCodeFragment(method, arguments));
 
         /// <summary>
         ///     Creates a method chain from this method to another.
         /// </summary>
         /// <param name="call"> The next method. </param>
         /// <returns> A new fragment representing the method chain. </returns>
-        public virtual MethodCallCodeFragment Chain(MethodCallCodeFragment call)
-            => new(Method, _arguments.ToArray(), ChainedCall?.Chain(call) ?? call);
+        public virtual MethodCallCodeFragment Chain(MethodCallCodeFragment call) =>
+            new(Method, _arguments.ToArray(), ChainedCall?.Chain(call) ?? call);
     }
 }

@@ -24,6 +24,7 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 hubProtocol.WriteMessage(message, writer);
                 return writer.ToArray();
             }
+
             finally
             {
                 MemoryBufferWriter.Return(writer);

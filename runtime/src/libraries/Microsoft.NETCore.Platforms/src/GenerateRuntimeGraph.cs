@@ -15,7 +15,6 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
 {
     public class GenerateRuntimeGraph : BuildTask
     {
-
         /// <summary>
         /// A set of RuntimeGroups that can be used to generate a runtime graph
         ///   Identity: the base string for the RID, without version architecture, or qualifiers.
@@ -47,92 +46,57 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         ///   OmitRIDReferences: A list of strings delimited by semi-colons that represent RIDs calculated from this RuntimeGroup
         ///     that should be omitted from the RuntimeGraph.  These RIDs will be defined but not referenced by this RuntimeGroup.
         /// </summary>
-        public ITaskItem[] RuntimeGroups
-        {
-            get;
-            set;
-        }
+        public ITaskItem[] RuntimeGroups { get; set; }
 
         /// <summary>
         /// Additional runtime identifiers to add to the graph.
         /// </summary>
-        public string[] AdditionalRuntimeIdentifiers
-        {
-            get;
-            set;
-        }
+        public string[] AdditionalRuntimeIdentifiers { get; set; }
 
         /// <summary>
         /// Parent RID to use for any unknown AdditionalRuntimeIdentifer.
         /// </summary>
-        public string AdditionalRuntimeIdentifierParent
-        {
-            get;
-            set;
-        }
+        public string AdditionalRuntimeIdentifierParent { get; set; }
 
         /// <summary>
         /// Optional source Runtime.json to use as a starting point when merging additional RuntimeGroups
         /// </summary>
-        public string SourceRuntimeJson
-        {
-            get;
-            set;
-        }
+        public string SourceRuntimeJson { get; set; }
 
         /// <summary>
         /// Where to write the final runtime.json
         /// </summary>
-        public string RuntimeJson
-        {
-            get;
-            set;
-        }
+        public string RuntimeJson { get; set; }
 
         /// <summary>
         /// Optionally, other runtime.jsons which may contain imported RIDs
         /// </summary>
-        public string[] ExternalRuntimeJsons
-        {
-            get;
-            set;
-        }
+        public string[] ExternalRuntimeJsons { get; set; }
 
         /// <summary>
         /// When defined, specifies the file to write compatibility precedence for each RID in the graph.
         /// </summary>
-        public string CompatibilityMap
-        {
-            get;
-            set;
-        }
-
+        public string CompatibilityMap { get; set; }
 
         /// <summary>
         /// True to write the generated runtime.json to RuntimeJson and compatibility map to CompatibilityMap, otherwise files are read and diffed
         /// with generated versions and an error is emitted if they differ.
         /// Setting UpdateRuntimeFiles will overwrite files even when the file is marked ReadOnly.
         /// </summary>
-        public bool UpdateRuntimeFiles
-        {
-            get;
-            set;
-        }
+        public bool UpdateRuntimeFiles { get; set; }
 
         /// <summary>
         /// When defined, specifies the file to write a DGML representation of the runtime graph.
         /// </summary>
-        public string RuntimeDirectedGraph
-        {
-            get;
-            set;
-        }
+        public string RuntimeDirectedGraph { get; set; }
 
         public override bool Execute()
         {
             if (RuntimeGroups != null && RuntimeGroups.Any() && RuntimeJson == null)
             {
-                Log.LogError($"{nameof(RuntimeJson)} argument must be specified when {nameof(RuntimeGroups)} is specified.");
+                Log.LogError(
+                    $"{nameof(RuntimeJson)} argument must be specified when {nameof(RuntimeGroups)} is specified."
+                );
                 return false;
             }
 
@@ -141,7 +105,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             {
                 if (!File.Exists(SourceRuntimeJson))
                 {
-                    Log.LogError($"{nameof(SourceRuntimeJson)} did not exist at {SourceRuntimeJson}.");
+                    Log.LogError(
+                        $"{nameof(SourceRuntimeJson)} did not exist at {SourceRuntimeJson}."
+                    );
                     return false;
                 }
 
@@ -152,7 +118,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                 runtimeGraph = new RuntimeGraph();
             }
 
-            List<RuntimeGroup> runtimeGroups = RuntimeGroups.NullAsEmpty().Select(i => new RuntimeGroup(i)).ToList();
+            List<RuntimeGroup> runtimeGroups = RuntimeGroups.NullAsEmpty()
+                .Select(i => new RuntimeGroup(i))
+                .ToList();
 
             AddRuntimeIdentifiers(runtimeGroups);
 
@@ -166,7 +134,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             {
                 foreach (var externalRuntimeJson in ExternalRuntimeJsons)
                 {
-                    RuntimeGraph externalRuntimeGraph = JsonRuntimeFormat.ReadRuntimeGraph(externalRuntimeJson);
+                    RuntimeGraph externalRuntimeGraph = JsonRuntimeFormat.ReadRuntimeGraph(
+                        externalRuntimeJson
+                    );
 
                     foreach (var runtime in externalRuntimeGraph.Runtimes.Keys)
                     {
@@ -184,14 +154,15 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                 {
                     EnsureWritable(RuntimeJson);
                     WriteRuntimeGraph(RuntimeJson, runtimeGraph);
-
                 }
                 else
                 {
                     // validate that existing file matches generated file
                     if (!File.Exists(RuntimeJson))
                     {
-                        Log.LogError($"{nameof(RuntimeJson)} did not exist at {RuntimeJson} and {nameof(UpdateRuntimeFiles)} was not specified.");
+                        Log.LogError(
+                            $"{nameof(RuntimeJson)} did not exist at {RuntimeJson} and {nameof(UpdateRuntimeFiles)} was not specified."
+                        );
                     }
                     else
                     {
@@ -199,7 +170,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
 
                         if (!existingRuntimeGraph.Equals(runtimeGraph))
                         {
-                            Log.LogError($"The generated {nameof(RuntimeJson)} differs from {RuntimeJson} and {nameof(UpdateRuntimeFiles)} was not specified.  Please specify {nameof(UpdateRuntimeFiles)}=true to commit the changes.");
+                            Log.LogError(
+                                $"The generated {nameof(RuntimeJson)} differs from {RuntimeJson} and {nameof(UpdateRuntimeFiles)} was not specified.  Please specify {nameof(UpdateRuntimeFiles)}=true to commit the changes."
+                            );
                         }
                     }
                 }
@@ -218,7 +191,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                     // validate that existing file matches generated file
                     if (!File.Exists(CompatibilityMap))
                     {
-                        Log.LogError($"{nameof(CompatibilityMap)} did not exist at {CompatibilityMap} and {nameof(UpdateRuntimeFiles)} was not specified.");
+                        Log.LogError(
+                            $"{nameof(CompatibilityMap)} did not exist at {CompatibilityMap} and {nameof(UpdateRuntimeFiles)} was not specified."
+                        );
                     }
                     else
                     {
@@ -226,7 +201,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
 
                         if (!CompatibilityMapEquals(existingCompatibilityMap, compatibilityMap))
                         {
-                            Log.LogError($"The generated {nameof(CompatibilityMap)} differs from {CompatibilityMap} and {nameof(UpdateRuntimeFiles)} was not specified.  Please specify {nameof(UpdateRuntimeFiles)}=true to commit the changes.");
+                            Log.LogError(
+                                $"The generated {nameof(CompatibilityMap)} differs from {CompatibilityMap} and {nameof(UpdateRuntimeFiles)} was not specified.  Please specify {nameof(UpdateRuntimeFiles)}=true to commit the changes."
+                            );
                         }
                     }
                 }
@@ -279,12 +256,21 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             {
                 RuntimeDescription newRuntimeDescription;
 
-                if (runtimeGraph.Runtimes.TryGetValue(existingRuntimeDescription.RuntimeIdentifier, out newRuntimeDescription))
-                {
+                if (
+                    runtimeGraph.Runtimes.TryGetValue(
+                        existingRuntimeDescription.RuntimeIdentifier,
+                        out newRuntimeDescription
+                    )
+                ) {
                     // overlapping RID, ensure that the imports match (same ordering and content)
-                    if (!existingRuntimeDescription.InheritedRuntimes.SequenceEqual(newRuntimeDescription.InheritedRuntimes))
-                    {
-                        Log.LogError($"RuntimeGroup {runtimeGroup.BaseRID} defines RID {newRuntimeDescription.RuntimeIdentifier} with imports {string.Join(";", newRuntimeDescription.InheritedRuntimes)} which differ from existing imports {string.Join(";", existingRuntimeDescription.InheritedRuntimes)}.  You may avoid this by specifying {nameof(RuntimeGroup.OmitRIDDefinitions)} metadata with {newRuntimeDescription.RuntimeIdentifier}.");
+                    if (
+                        !existingRuntimeDescription.InheritedRuntimes.SequenceEqual(
+                            newRuntimeDescription.InheritedRuntimes
+                        )
+                    ) {
+                        Log.LogError(
+                            $"RuntimeGroup {runtimeGroup.BaseRID} defines RID {newRuntimeDescription.RuntimeIdentifier} with imports {string.Join(";", newRuntimeDescription.InheritedRuntimes)} which differ from existing imports {string.Join(";", existingRuntimeDescription.InheritedRuntimes)}.  You may avoid this by specifying {nameof(RuntimeGroup.OmitRIDDefinitions)} metadata with {newRuntimeDescription.RuntimeIdentifier}."
+                        );
                     }
                 }
             }
@@ -292,22 +278,34 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             return RuntimeGraph.Merge(existingGraph, runtimeGraph);
         }
 
-        private void ValidateImports(RuntimeGraph runtimeGraph, IDictionary<string, string> externalRIDs)
-        {
+        private void ValidateImports(
+            RuntimeGraph runtimeGraph,
+            IDictionary<string, string> externalRIDs
+        ) {
             foreach (var runtimeDescription in runtimeGraph.Runtimes.Values)
             {
                 string externalRuntimeJson;
 
-                if (externalRIDs.TryGetValue(runtimeDescription.RuntimeIdentifier, out externalRuntimeJson))
-                {
-                    Log.LogError($"Runtime {runtimeDescription.RuntimeIdentifier} is defined in both this RuntimeGraph and {externalRuntimeJson}.");
+                if (
+                    externalRIDs.TryGetValue(
+                        runtimeDescription.RuntimeIdentifier,
+                        out externalRuntimeJson
+                    )
+                ) {
+                    Log.LogError(
+                        $"Runtime {runtimeDescription.RuntimeIdentifier} is defined in both this RuntimeGraph and {externalRuntimeJson}."
+                    );
                 }
 
                 foreach (var import in runtimeDescription.InheritedRuntimes)
                 {
-                    if (!runtimeGraph.Runtimes.ContainsKey(import) && !externalRIDs.ContainsKey(import))
-                    {
-                        Log.LogError($"Runtime {runtimeDescription.RuntimeIdentifier} imports {import} which is not defined.");
+                    if (
+                        !runtimeGraph.Runtimes.ContainsKey(import)
+                        && !externalRIDs.ContainsKey(import)
+                    ) {
+                        Log.LogError(
+                            $"Runtime {runtimeDescription.RuntimeIdentifier} imports {import} which is not defined."
+                        );
                     }
                 }
             }
@@ -320,17 +318,26 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                 return;
             }
 
-            RuntimeGroupCollection runtimeGroupCollection = new RuntimeGroupCollection(runtimeGroups);
+            RuntimeGroupCollection runtimeGroupCollection = new RuntimeGroupCollection(
+                runtimeGroups
+            );
 
             foreach (string additionalRuntimeIdentifier in AdditionalRuntimeIdentifiers)
             {
-                runtimeGroupCollection.AddRuntimeIdentifier(additionalRuntimeIdentifier, AdditionalRuntimeIdentifierParent);
+                runtimeGroupCollection.AddRuntimeIdentifier(
+                    additionalRuntimeIdentifier,
+                    AdditionalRuntimeIdentifierParent
+                );
             }
         }
 
-        private static IDictionary<string, IEnumerable<string>> GetCompatibilityMap(RuntimeGraph graph)
-        {
-            Dictionary<string, IEnumerable<string>> compatibilityMap = new Dictionary<string, IEnumerable<string>>();
+        private static IDictionary<string, IEnumerable<string>> GetCompatibilityMap(
+            RuntimeGraph graph
+        ) {
+            Dictionary<string, IEnumerable<string>> compatibilityMap = new Dictionary<
+                string,
+                IEnumerable<string>
+            >();
 
             foreach (var rid in graph.Runtimes.Keys.OrderBy(rid => rid, StringComparer.Ordinal))
             {
@@ -346,12 +353,16 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             using (var file = File.OpenText(mapFile))
             using (var jsonTextReader = new JsonTextReader(file))
             {
-                return serializer.Deserialize<IDictionary<string, IEnumerable<string>>>(jsonTextReader);
+                return serializer.Deserialize<IDictionary<string, IEnumerable<string>>>(
+                    jsonTextReader
+                );
             }
         }
 
-        private static void WriteCompatibilityMap(IDictionary<string, IEnumerable<string>> compatibilityMap, string mapFile)
-        {
+        private static void WriteCompatibilityMap(
+            IDictionary<string, IEnumerable<string>> compatibilityMap,
+            string mapFile
+        ) {
             var serializer = new JsonSerializer()
             {
                 Formatting = Formatting.Indented,
@@ -370,8 +381,10 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             }
         }
 
-        private static bool CompatibilityMapEquals(IDictionary<string, IEnumerable<string>> left, IDictionary<string, IEnumerable<string>> right)
-        {
+        private static bool CompatibilityMapEquals(
+            IDictionary<string, IEnumerable<string>> left,
+            IDictionary<string, IEnumerable<string>> right
+        ) {
             if (left.Count != right.Count)
             {
                 return false;
@@ -398,7 +411,6 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         private static XNamespace s_dgmlns = @"http://schemas.microsoft.com/vs/2009/dgml";
         private static void WriteRuntimeGraph(RuntimeGraph graph, string dependencyGraphFilePath)
         {
-
             var doc = new XDocument(new XElement(s_dgmlns + "DirectedGraph"));
             var nodesElement = new XElement(s_dgmlns + "Nodes");
             var linksElement = new XElement(s_dgmlns + "Links");
@@ -409,14 +421,22 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
 
             foreach (var runtimeDescription in graph.Runtimes.Values)
             {
-                nodesElement.Add(new XElement(s_dgmlns + "Node",
-                    new XAttribute("Id", runtimeDescription.RuntimeIdentifier)));
+                nodesElement.Add(
+                    new XElement(
+                        s_dgmlns + "Node",
+                        new XAttribute("Id", runtimeDescription.RuntimeIdentifier)
+                    )
+                );
 
                 foreach (var import in runtimeDescription.InheritedRuntimes)
                 {
-                    linksElement.Add(new XElement(s_dgmlns + "Link",
-                        new XAttribute("Source", runtimeDescription.RuntimeIdentifier),
-                        new XAttribute("Target", import)));
+                    linksElement.Add(
+                        new XElement(
+                            s_dgmlns + "Link",
+                            new XAttribute("Source", runtimeDescription.RuntimeIdentifier),
+                            new XAttribute("Target", import)
+                        )
+                    );
                 }
             }
 

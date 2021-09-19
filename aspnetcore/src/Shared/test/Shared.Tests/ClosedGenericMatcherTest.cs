@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.Internal
                     },
                     {
                         typeof(KeyValuePair<string, object>),
-                        typeof(KeyValuePair<,>),
+                        typeof(KeyValuePair<, >),
                         typeof(KeyValuePair<string, object>)
                     },
                     // Closed generic interfaces that implement sub-interface of given open generic type.
@@ -40,11 +40,7 @@ namespace Microsoft.Extensions.Internal
                         typeof(IEnumerable<>),
                         typeof(IEnumerable<BaseClass>)
                     },
-                    {
-                        typeof(IReadOnlyList<int>),
-                        typeof(IEnumerable<>),
-                        typeof(IEnumerable<int>)
-                    },
+                    { typeof(IReadOnlyList<int>), typeof(IEnumerable<>), typeof(IEnumerable<int>) },
                     {
                         typeof(IDictionary<string, object>),
                         typeof(IEnumerable<>),
@@ -53,14 +49,10 @@ namespace Microsoft.Extensions.Internal
                     // Class that implements closed generic based on given open generic interface.
                     {
                         typeof(BaseClass),
-                        typeof(IDictionary<,>),
+                        typeof(IDictionary<, >),
                         typeof(IDictionary<string, object>)
                     },
-                    {
-                        typeof(BaseClass),
-                        typeof(IEquatable<>),
-                        typeof(IEquatable<BaseClass>)
-                    },
+                    { typeof(BaseClass), typeof(IEquatable<>), typeof(IEquatable<BaseClass>) },
                     {
                         typeof(BaseClass),
                         typeof(ICollection<>),
@@ -69,14 +61,10 @@ namespace Microsoft.Extensions.Internal
                     // Derived class that implements closed generic based on given open generic interface.
                     {
                         typeof(DerivedClass),
-                        typeof(IDictionary<,>),
+                        typeof(IDictionary<, >),
                         typeof(IDictionary<string, object>)
                     },
-                    {
-                        typeof(DerivedClass),
-                        typeof(IEquatable<>),
-                        typeof(IEquatable<BaseClass>)
-                    },
+                    { typeof(DerivedClass), typeof(IEquatable<>), typeof(IEquatable<BaseClass>) },
                     {
                         typeof(DerivedClass),
                         typeof(ICollection<>),
@@ -85,7 +73,7 @@ namespace Microsoft.Extensions.Internal
                     // Derived class that also implements another interface.
                     {
                         typeof(DerivedClassWithComparable),
-                        typeof(IDictionary<,>),
+                        typeof(IDictionary<, >),
                         typeof(IDictionary<string, object>)
                     },
                     {
@@ -120,42 +108,14 @@ namespace Microsoft.Extensions.Internal
                         typeof(IEnumerable<BaseClass>)
                     },
                     // Not given an open generic type.
-                    {
-                        typeof(IEnumerable<BaseClass>),
-                        typeof(IEnumerable<BaseClass>),
-                        null
-                    },
-                    {
-                        typeof(IEnumerable<BaseClass>),
-                        typeof(IEnumerable),
-                        null
-                    },
-                    {
-                        typeof(IReadOnlyList<int>),
-                        typeof(BaseClass),
-                        null
-                    },
-                    {
-                        typeof(KeyValuePair<,>),
-                        typeof(KeyValuePair<string, object>),
-                        null
-                    },
+                    { typeof(IEnumerable<BaseClass>), typeof(IEnumerable<BaseClass>), null },
+                    { typeof(IEnumerable<BaseClass>), typeof(IEnumerable), null },
+                    { typeof(IReadOnlyList<int>), typeof(BaseClass), null },
+                    { typeof(KeyValuePair<, >), typeof(KeyValuePair<string, object>), null },
                     // Not a match.
-                    {
-                        typeof(IEnumerable<BaseClass>),
-                        typeof(IReadOnlyList<>),
-                        null
-                    },
-                    {
-                        typeof(IList<int>),
-                        typeof(IReadOnlyList<>),
-                        null
-                    },
-                    {
-                        typeof(IDictionary<string, object>),
-                        typeof(KeyValuePair<,>),
-                        null
-                    },
+                    { typeof(IEnumerable<BaseClass>), typeof(IReadOnlyList<>), null },
+                    { typeof(IList<int>), typeof(IReadOnlyList<>), null },
+                    { typeof(IDictionary<string, object>), typeof(KeyValuePair<, >), null },
                 };
             }
         }
@@ -165,8 +125,8 @@ namespace Microsoft.Extensions.Internal
         public void ExtractGenericInterface_ReturnsExpectedType(
             Type queryType,
             Type interfaceType,
-            Type expectedResult)
-        {
+            Type expectedResult
+        ) {
             // Arrange & Act
             var result = ClosedGenericMatcher.ExtractGenericInterface(queryType, interfaceType);
 
@@ -199,10 +159,12 @@ namespace Microsoft.Extensions.Internal
             var result = ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IEnumerable<>));
 
             // Sort
-            Assert.Equal(typeof(IEnumerable<int>), result); 
+            Assert.Equal(typeof(IEnumerable<int>), result);
         }
 
-        private class TwoIEnumerableImplementationsOnSameClass : IEnumerable<string>, IEnumerable<int>
+        private class TwoIEnumerableImplementationsOnSameClass
+            : IEnumerable<string>,
+              IEnumerable<int>
         {
             IEnumerator<int> IEnumerable<int>.GetEnumerator()
             {
@@ -237,47 +199,28 @@ namespace Microsoft.Extensions.Internal
         {
             object IDictionary<string, object>.this[string key]
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-
-                set
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
+                set { throw new NotImplementedException(); }
             }
 
             int ICollection<KeyValuePair<string, object>>.Count
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             bool ICollection<KeyValuePair<string, object>>.IsReadOnly
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             ICollection<string> IDictionary<string, object>.Keys
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             ICollection<object> IDictionary<string, object>.Values
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public bool Equals(BaseClass other)
@@ -300,8 +243,9 @@ namespace Microsoft.Extensions.Internal
                 throw new NotImplementedException();
             }
 
-            bool ICollection<KeyValuePair<string, object>>.Contains(KeyValuePair<string, object> item)
-            {
+            bool ICollection<KeyValuePair<string, object>>.Contains(
+                KeyValuePair<string, object> item
+            ) {
                 throw new NotImplementedException();
             }
 
@@ -310,8 +254,10 @@ namespace Microsoft.Extensions.Internal
                 throw new NotImplementedException();
             }
 
-            void ICollection<KeyValuePair<string, object>>.CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
-            {
+            void ICollection<KeyValuePair<string, object>>.CopyTo(
+                KeyValuePair<string, object>[] array,
+                int arrayIndex
+            ) {
                 throw new NotImplementedException();
             }
 
@@ -320,7 +266,9 @@ namespace Microsoft.Extensions.Internal
                 throw new NotImplementedException();
             }
 
-            IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
+            IEnumerator<KeyValuePair<string, object>> IEnumerable<
+                KeyValuePair<string, object>
+            >.GetEnumerator()
             {
                 throw new NotImplementedException();
             }
@@ -345,7 +293,9 @@ namespace Microsoft.Extensions.Internal
         {
         }
 
-        private class DerivedClassWithComparable : DerivedClass, IComparable<DerivedClassWithComparable>
+        private class DerivedClassWithComparable
+            : DerivedClass,
+              IComparable<DerivedClassWithComparable>
         {
             public int CompareTo(DerivedClassWithComparable other)
             {

@@ -17,30 +17,59 @@ namespace Microsoft.CodeAnalysis.AddImports
         /// <paramref name="import"/> in scope at <paramref name="contextLocation"/>.  This includes
         /// global imports for VB.
         /// </summary>
-        bool HasExistingImport(Compilation compilation, SyntaxNode root, SyntaxNode? contextLocation, SyntaxNode import, SyntaxGenerator generator);
+        bool HasExistingImport(
+            Compilation compilation,
+            SyntaxNode root,
+            SyntaxNode? contextLocation,
+            SyntaxNode import,
+            SyntaxGenerator generator
+        );
 
         /// <summary>
         /// Given a context location in a provided syntax tree, returns the appropriate container
         /// that <paramref name="import"/> should be added to.
         /// </summary>
-        SyntaxNode GetImportContainer(SyntaxNode root, SyntaxNode? contextLocation, SyntaxNode import);
+        SyntaxNode GetImportContainer(
+            SyntaxNode root,
+            SyntaxNode? contextLocation,
+            SyntaxNode import
+        );
 
         SyntaxNode AddImports(
-            Compilation compilation, SyntaxNode root, SyntaxNode? contextLocation,
-            IEnumerable<SyntaxNode> newImports, SyntaxGenerator generator,
-            bool placeSystemNamespaceFirst, bool allowInHiddenRegions, CancellationToken cancellationToken);
+            Compilation compilation,
+            SyntaxNode root,
+            SyntaxNode? contextLocation,
+            IEnumerable<SyntaxNode> newImports,
+            SyntaxGenerator generator,
+            bool placeSystemNamespaceFirst,
+            bool allowInHiddenRegions,
+            CancellationToken cancellationToken
+        );
     }
 
     internal static class IAddImportServiceExtensions
     {
         public static SyntaxNode AddImport(
-            this IAddImportsService service, Compilation compilation, SyntaxNode root,
-            SyntaxNode contextLocation, SyntaxNode newImport, SyntaxGenerator generator,
-            bool placeSystemNamespaceFirst, bool allowInHiddenRegions, CancellationToken cancellationToken)
-        {
-            return service.AddImports(compilation, root, contextLocation,
-                SpecializedCollections.SingletonEnumerable(newImport), generator,
-                placeSystemNamespaceFirst, allowInHiddenRegions, cancellationToken);
+            this IAddImportsService service,
+            Compilation compilation,
+            SyntaxNode root,
+            SyntaxNode contextLocation,
+            SyntaxNode newImport,
+            SyntaxGenerator generator,
+            bool placeSystemNamespaceFirst,
+            bool allowInHiddenRegions,
+            CancellationToken cancellationToken
+        ) {
+            return service.AddImports(
+                compilation,
+                root,
+                contextLocation,
+                SpecializedCollections.SingletonEnumerable(newImport),
+                generator,
+                placeSystemNamespaceFirst,
+                allowInHiddenRegions,
+                cancellationToken
+            );
         }
     }
 }

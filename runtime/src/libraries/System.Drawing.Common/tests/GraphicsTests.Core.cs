@@ -9,8 +9,10 @@ namespace System.Drawing.Tests
 {
     public partial class GraphicsTests
     {
-        private static Matrix3x2 s_testMatrix = Matrix3x2.CreateRotation(45) * Matrix3x2.CreateScale(2) * Matrix3x2.CreateTranslation(new Vector2(10, 20));
-
+        private static Matrix3x2 s_testMatrix =
+            Matrix3x2.CreateRotation(45)
+            * Matrix3x2.CreateScale(2)
+            * Matrix3x2.CreateTranslation(new Vector2(10, 20));
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void TransformElements_SetNonInvertibleMatrix_ThrowsArgumentException()
@@ -19,7 +21,10 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             {
                 Matrix3x2 matrix = new Matrix3x2(123, 24, 82, 16, 47, 30);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformElements = matrix);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.TransformElements = matrix
+                );
             }
         }
 
@@ -34,8 +39,11 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.TransformElements);
-                    Assert.Throws<InvalidOperationException>(() => graphics.TransformElements = Matrix3x2.Identity);
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.TransformElements = Matrix3x2.Identity
+                    );
                 }
+
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -52,7 +60,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformElements);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformElements = Matrix3x2.Identity);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.TransformElements = Matrix3x2.Identity
+                );
             }
         }
 

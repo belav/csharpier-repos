@@ -26,10 +26,7 @@ namespace System.Speech.Recognition
             _value = value;
         }
 #pragma warning restore 6504, 56507
-        public SemanticValue(object value)
-            : this(string.Empty, value, -1f)
-        {
-        }
+        public SemanticValue(object value) : this(string.Empty, value, -1f) { }
 
         #endregion
 
@@ -37,8 +34,12 @@ namespace System.Speech.Recognition
         public override bool Equals(object obj)
         {
             SemanticValue refObj = obj as SemanticValue;
-            if (refObj == null || refObj.Count != Count || refObj.Value == null && Value != null || (refObj.Value != null && !refObj.Value.Equals(Value)))
-            {
+            if (
+                refObj == null
+                || refObj.Count != Count
+                || refObj.Value == null && Value != null
+                || (refObj.Value != null && !refObj.Value.Equals(Value))
+            ) {
                 return false;
             }
 
@@ -64,23 +65,14 @@ namespace System.Speech.Recognition
         // This can be cast to a more useful type {currently it will be string or int until we have .NET grammars}.
         public object Value
         {
-            get
-            {
-                return _value;
-            }
-            internal set
-            {
-                _value = value;
-            }
+            get { return _value; }
+            internal set { _value = value; }
         }
 
         // Confidence score associated with the semantic item.
         public float Confidence
         {
-            get
-            {
-                return _confidence;
-            }
+            get { return _confidence; }
         }
 
         #endregion
@@ -108,8 +100,9 @@ namespace System.Speech.Recognition
         // Other less common methods on IDictionary are also hidden from intellisense.
 
         // Read-only collection so throw on these methods. Also make then hidden through explicit interface declaration.
-        void ICollection<KeyValuePair<string, SemanticValue>>.Add(KeyValuePair<string, SemanticValue> key)
-        {
+        void ICollection<KeyValuePair<string, SemanticValue>>.Add(
+            KeyValuePair<string, SemanticValue> key
+        ) {
             throw new NotSupportedException(SR.Get(SRID.CollectionReadOnly));
         }
 
@@ -123,8 +116,9 @@ namespace System.Speech.Recognition
             throw new NotSupportedException(SR.Get(SRID.CollectionReadOnly));
         }
 
-        bool ICollection<KeyValuePair<string, SemanticValue>>.Remove(KeyValuePair<string, SemanticValue> key)
-        {
+        bool ICollection<KeyValuePair<string, SemanticValue>>.Remove(
+            KeyValuePair<string, SemanticValue> key
+        ) {
             throw new NotSupportedException(SR.Get(SRID.CollectionReadOnly));
         }
 
@@ -132,11 +126,15 @@ namespace System.Speech.Recognition
         {
             throw new NotSupportedException(SR.Get(SRID.CollectionReadOnly));
         }
-        void ICollection<KeyValuePair<string, SemanticValue>>.CopyTo(KeyValuePair<string, SemanticValue>[] array, int index)
-        {
+        void ICollection<KeyValuePair<string, SemanticValue>>.CopyTo(
+            KeyValuePair<string, SemanticValue>[] array,
+            int index
+        ) {
             ((ICollection<KeyValuePair<string, SemanticValue>>)_dictionary).CopyTo(array, index);
         }
-        IEnumerator<KeyValuePair<string, SemanticValue>> IEnumerable<KeyValuePair<string, SemanticValue>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, SemanticValue>> IEnumerable<
+            KeyValuePair<string, SemanticValue>
+        >.GetEnumerator()
         {
             return _dictionary.GetEnumerator();
         }
@@ -171,10 +169,7 @@ namespace System.Speech.Recognition
 
         internal string KeyName
         {
-            get
-            {
-                return _keyName;
-            }
+            get { return _keyName; }
         }
 
         #endregion
@@ -210,34 +205,22 @@ namespace System.Speech.Recognition
 
             public object Value
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public object Count
             {
-                get
-                {
-                    return _dictionary.Count;
-                }
+                get { return _dictionary.Count; }
             }
 
             public object KeyName
             {
-                get
-                {
-                    return _name;
-                }
+                get { return _name; }
             }
 
             public object Confidence
             {
-                get
-                {
-                    return _confidence;
-                }
+                get { return _confidence; }
             }
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SemanticValue[] AKeys
@@ -259,7 +242,6 @@ namespace System.Speech.Recognition
             private float _confidence;
             private IDictionary<string, SemanticValue> _dictionary;
         }
-
         #endregion
     }
 }

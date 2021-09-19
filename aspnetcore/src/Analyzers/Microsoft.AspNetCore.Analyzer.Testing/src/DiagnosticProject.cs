@@ -25,8 +25,12 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
         /// </summary>
         public static string TestProjectName = "TestProject";
 
-        private static readonly ICompilationAssemblyResolver _assemblyResolver = new AppBaseCompilationAssemblyResolver();
-        private static readonly Dictionary<Assembly, Solution> _solutionCache = new Dictionary<Assembly, Solution>();
+        private static readonly ICompilationAssemblyResolver _assemblyResolver =
+            new AppBaseCompilationAssemblyResolver();
+        private static readonly Dictionary<Assembly, Solution> _solutionCache = new Dictionary<
+            Assembly,
+            Solution
+        >();
 
         public static Project Create(Assembly testAssembly, string[] sources)
         {
@@ -36,15 +40,27 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                 if (!_solutionCache.TryGetValue(testAssembly, out solution))
                 {
                     var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
-                    solution = new AdhocWorkspace()
-                        .CurrentSolution
-                        .AddProject(projectId, TestProjectName, TestProjectName, LanguageNames.CSharp);
+                    solution = new AdhocWorkspace().CurrentSolution.AddProject(
+                        projectId,
+                        TestProjectName,
+                        TestProjectName,
+                        LanguageNames.CSharp
+                    );
 
-                    foreach (var defaultCompileLibrary in DependencyContext.Load(testAssembly).CompileLibraries)
-                    {
-                        foreach (var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(_assemblyResolver))
-                        {
-                            solution = solution.AddMetadataReference(projectId, MetadataReference.CreateFromFile(resolveReferencePath));
+                    foreach (
+                        var defaultCompileLibrary in DependencyContext.Load(
+                            testAssembly
+                        ).CompileLibraries
+                    ) {
+                        foreach (
+                            var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(
+                                _assemblyResolver
+                            )
+                        ) {
+                            solution = solution.AddMetadataReference(
+                                projectId,
+                                MetadataReference.CreateFromFile(resolveReferencePath)
+                            );
                         }
                     }
 
@@ -65,7 +81,11 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                 newFileName += ".cs";
 
                 var documentId = DocumentId.CreateNewId(testProject, debugName: newFileName);
-                solution = solution.AddDocument(documentId, newFileName, SourceText.From(sources[i]));
+                solution = solution.AddDocument(
+                    documentId,
+                    newFileName,
+                    SourceText.From(sources[i])
+                );
             }
 
             return solution.GetProject(testProject);

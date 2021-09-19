@@ -4,7 +4,7 @@
 
 // define TRACE_LEAKS to get additional diagnostics that can lead to the leak sources. note: it will
 // make everything about 2-3x slower
-// 
+//
 // #define TRACE_LEAKS
 
 // define DETECT_LEAKS to detect possible leaks
@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         private readonly Factory _factory;
 
 #if DETECT_LEAKS
-        private static readonly ConditionalWeakTable<T, LeakTracker> leakTrackers = new ConditionalWeakTable<T, LeakTracker>();
+        private static readonly ConditionalWeakTable<T, LeakTracker> leakTrackers =
+            new ConditionalWeakTable<T, LeakTracker>();
 
         private class LeakTracker : IDisposable
         {
@@ -99,18 +100,18 @@ namespace Microsoft.CodeAnalysis.PooledObjects
                 {
                     var trace = GetTrace();
 
-                    // If you are seeing this message it means that object has been allocated from the pool 
-                    // and has not been returned back. This is not critical, but turns pool into rather 
+                    // If you are seeing this message it means that object has been allocated from the pool
+                    // and has not been returned back. This is not critical, but turns pool into rather
                     // inefficient kind of "new".
-                    Debug.WriteLine($"TRACEOBJECTPOOLLEAKS_BEGIN\nPool detected potential leaking of {typeof(T)}. \n Location of the leak: \n {GetTrace()} TRACEOBJECTPOOLLEAKS_END");
+                    Debug.WriteLine(
+                        $"TRACEOBJECTPOOLLEAKS_BEGIN\nPool detected potential leaking of {typeof(T)}. \n Location of the leak: \n {GetTrace()} TRACEOBJECTPOOLLEAKS_END"
+                    );
                 }
             }
         }
-#endif      
+#endif
 
-        internal ObjectPool(Factory factory)
-            : this(factory, Environment.ProcessorCount * 2)
-        { }
+        internal ObjectPool(Factory factory) : this(factory, Environment.ProcessorCount * 2) { }
 
         internal ObjectPool(Factory factory, int size)
         {
@@ -143,7 +144,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         internal T Allocate()
         {
             // PERF: Examine the first element. If that fails, AllocateSlow will look at the remaining elements.
-            // Note that the initial read is optimistically not synchronized. That is intentional. 
+            // Note that the initial read is optimistically not synchronized. That is intentional.
             // We will interlock only when we have a candidate. in a worst case we may miss some
             // recently returned objects. Not a big deal.
             var inst = _firstItem;
@@ -170,7 +171,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 
             for (var i = 0; i < items.Length; i++)
             {
-                // Note that the initial read is optimistically not synchronized. That is intentional. 
+                // Note that the initial read is optimistically not synchronized. That is intentional.
                 // We will interlock only when we have a candidate. in a worst case we may miss some
                 // recently returned objects. Not a big deal.
                 var inst = items[i].Value;
@@ -201,7 +202,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 
             if (_firstItem == null)
             {
-                // Intentionally not using interlocked here. 
+                // Intentionally not using interlocked here.
                 // In a worst case scenario two objects may be stored into same slot.
                 // It is very unlikely to happen and will only mean that one of the objects will get collected.
                 _firstItem = obj;
@@ -219,7 +220,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             {
                 if (items[i].Value == null)
                 {
-                    // Intentionally not using interlocked here. 
+                    // Intentionally not using interlocked here.
                     // In a worst case scenario two objects may be stored into same slot.
                     // It is very unlikely to happen and will only mean that one of the objects will get collected.
                     items[i].Value = obj;
@@ -249,7 +250,9 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             else
             {
                 var trace = CaptureStackTrace();
-                Debug.WriteLine($"TRACEOBJECTPOOLLEAKS_BEGIN\nObject of type {typeof(T)} was freed, but was not from pool. \n Callstack: \n {trace} TRACEOBJECTPOOLLEAKS_END");
+                Debug.WriteLine(
+                    $"TRACEOBJECTPOOLLEAKS_BEGIN\nObject of type {typeof(T)} was freed, but was not from pool. \n Callstack: \n {trace} TRACEOBJECTPOOLLEAKS_END"
+                );
             }
 
             if (replacement != null)
@@ -261,7 +264,9 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         }
 
 #if DETECT_LEAKS
-        private static Lazy<Type> _stackTraceType = new Lazy<Type>(() => Type.GetType("System.Diagnostics.StackTrace"));
+        private static Lazy<Type> _stackTraceType = new Lazy<Type>(
+            () => Type.GetType("System.Diagnostics.StackTrace")
+        );
 
         private static object CaptureStackTrace()
         {

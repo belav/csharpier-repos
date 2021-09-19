@@ -19,9 +19,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
         public Action<RuntimeConfig> RuntimeConfigCustomizer { get; set; }
 
-        public List<RuntimeLibraryBuilder> RuntimeLibraries { get; } = new List<RuntimeLibraryBuilder>();
+        public List<RuntimeLibraryBuilder> RuntimeLibraries { get; } =
+            new List<RuntimeLibraryBuilder>();
 
-        public List<RuntimeFallbacksBuilder> RuntimeFallbacks { get; } = new List<RuntimeFallbacksBuilder>();
+        public List<RuntimeFallbacksBuilder> RuntimeFallbacks { get; } =
+            new List<RuntimeFallbacksBuilder>();
 
         internal class BuildContext
         {
@@ -61,13 +63,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             }
         }
 
-        public abstract class FileBuilder<T> : FileBuilder
-            where T : FileBuilder
+        public abstract class FileBuilder<T> : FileBuilder where T : FileBuilder
         {
-            public FileBuilder(string path)
-                : base(path)
-            {
-            }
+            public FileBuilder(string path) : base(path) { }
 
             public T CopyFromFile(string sourcePath)
             {
@@ -93,10 +91,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             public string AssemblyVersion { get; set; }
             public string FileVersion { get; set; }
 
-            public RuntimeFileBuilder(string path)
-                : base(path)
-            {
-            }
+            public RuntimeFileBuilder(string path) : base(path) { }
 
             public RuntimeFileBuilder WithVersion(string assemblyVersion, string fileVersion)
             {
@@ -116,8 +111,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             public string Locale { get; set; }
 
-            public ResourceAssemblyBuilder(string path)
-                : base(path)
+            public ResourceAssemblyBuilder(string path) : base(path)
             {
                 int i = path.IndexOf('/');
                 if (i > 0)
@@ -164,8 +158,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 return this;
             }
 
-            public RuntimeAssetGroupBuilder WithAsset(string path, Action<RuntimeFileBuilder> customizer = null)
-            {
+            public RuntimeAssetGroupBuilder WithAsset(
+                string path,
+                Action<RuntimeFileBuilder> customizer = null
+            ) {
                 RuntimeFileBuilder runtimeFile = new RuntimeFileBuilder(path);
                 customizer?.Invoke(runtimeFile);
                 return WithAsset(runtimeFile);
@@ -176,12 +172,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 IEnumerable<RuntimeFileBuilder> assets = Assets;
                 if (IncludeMainAssembly)
                 {
-                    assets = assets.Append(new RuntimeFileBuilder(Path.GetFileName(context.App.AppDll)));
+                    assets = assets.Append(
+                        new RuntimeFileBuilder(Path.GetFileName(context.App.AppDll))
+                    );
                 }
 
-                return new RuntimeAssetGroup(
-                    Runtime,
-                    assets.Select(a => a.Build(context)));
+                return new RuntimeAssetGroup(Runtime, assets.Select(a => a.Build(context)));
             }
         }
 
@@ -197,9 +193,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             public string Name { get; set; }
             public string Version { get; set; }
 
-            public List<RuntimeAssetGroupBuilder> AssemblyGroups { get; } = new List<RuntimeAssetGroupBuilder>();
-            public List<RuntimeAssetGroupBuilder> NativeLibraryGroups { get; } = new List<RuntimeAssetGroupBuilder>();
-            public List<ResourceAssemblyBuilder> ResourceAssemblies { get; } = new List<ResourceAssemblyBuilder>();
+            public List<RuntimeAssetGroupBuilder> AssemblyGroups { get; } =
+                new List<RuntimeAssetGroupBuilder>();
+            public List<RuntimeAssetGroupBuilder> NativeLibraryGroups { get; } =
+                new List<RuntimeAssetGroupBuilder>();
+            public List<ResourceAssemblyBuilder> ResourceAssemblies { get; } =
+                new List<ResourceAssemblyBuilder>();
 
             public RuntimeLibraryBuilder(RuntimeLibraryType type, string name, string version)
             {
@@ -208,21 +207,25 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 Version = version;
             }
 
-            public RuntimeLibraryBuilder WithAssemblyGroup(string runtime, Action<RuntimeAssetGroupBuilder> customizer = null)
-            {
+            public RuntimeLibraryBuilder WithAssemblyGroup(
+                string runtime,
+                Action<RuntimeAssetGroupBuilder> customizer = null
+            ) {
                 return WithRuntimeAssetGroup(runtime, AssemblyGroups, customizer);
             }
 
-            public RuntimeLibraryBuilder WithNativeLibraryGroup(string runtime, Action<RuntimeAssetGroupBuilder> customizer = null)
-            {
+            public RuntimeLibraryBuilder WithNativeLibraryGroup(
+                string runtime,
+                Action<RuntimeAssetGroupBuilder> customizer = null
+            ) {
                 return WithRuntimeAssetGroup(runtime, NativeLibraryGroups, customizer);
             }
 
             private RuntimeLibraryBuilder WithRuntimeAssetGroup(
                 string runtime,
                 IList<RuntimeAssetGroupBuilder> list,
-                Action<RuntimeAssetGroupBuilder> customizer)
-            {
+                Action<RuntimeAssetGroupBuilder> customizer
+            ) {
                 RuntimeAssetGroupBuilder runtimeAssetGroup = new RuntimeAssetGroupBuilder(runtime);
                 customizer?.Invoke(runtimeAssetGroup);
 
@@ -230,8 +233,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 return this;
             }
 
-            public RuntimeLibraryBuilder WithResourceAssembly(string path, Action<ResourceAssemblyBuilder> customizer = null)
-            {
+            public RuntimeLibraryBuilder WithResourceAssembly(
+                string path,
+                Action<ResourceAssemblyBuilder> customizer = null
+            ) {
                 ResourceAssemblyBuilder resourceAssembly = new ResourceAssemblyBuilder(path);
                 customizer?.Invoke(resourceAssembly);
                 ResourceAssemblies.Add(resourceAssembly);
@@ -249,7 +254,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     NativeLibraryGroups.Select(g => g.Build(context)).ToList(),
                     ResourceAssemblies.Select(ra => ra.Build(context)).ToList(),
                     Enumerable.Empty<Dependency>(),
-                    false);
+                    false
+                );
             }
         }
 
@@ -308,8 +314,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RuntimeLibraryType type,
             string name,
             string version,
-            Action<RuntimeLibraryBuilder> customizer = null)
-        {
+            Action<RuntimeLibraryBuilder> customizer = null
+        ) {
             RuntimeLibraryBuilder runtimeLibrary = new RuntimeLibraryBuilder(type, name, version);
             customizer?.Invoke(runtimeLibrary);
 
@@ -317,8 +323,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             return this;
         }
 
-        public NetCoreAppBuilder WithProject(string name, string version, Action<RuntimeLibraryBuilder> customizer = null)
-        {
+        public NetCoreAppBuilder WithProject(
+            string name,
+            string version,
+            Action<RuntimeLibraryBuilder> customizer = null
+        ) {
             return WithRuntimeLibrary(RuntimeLibraryType.project, name, version, customizer);
         }
 
@@ -327,8 +336,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             return WithRuntimeLibrary(RuntimeLibraryType.project, Name, "1.0.0", customizer);
         }
 
-        public NetCoreAppBuilder WithPackage(string name, string version, Action<RuntimeLibraryBuilder> customizer = null)
-        {
+        public NetCoreAppBuilder WithPackage(
+            string name,
+            string version,
+            Action<RuntimeLibraryBuilder> customizer = null
+        ) {
             return WithRuntimeLibrary(RuntimeLibraryType.package, name, version, customizer);
         }
 
@@ -340,8 +352,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
         public NetCoreAppBuilder WithStandardRuntimeFallbacks()
         {
-            return
-                WithRuntimeFallbacks("win10-x64", "win10", "win-x64", "win", "any")
+            return WithRuntimeFallbacks("win10-x64", "win10", "win-x64", "win", "any")
                 .WithRuntimeFallbacks("win10-x86", "win10", "win-x86", "win", "any")
                 .WithRuntimeFallbacks("win10", "win", "any")
                 .WithRuntimeFallbacks("win-x64", "win", "any")
@@ -364,7 +375,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 CompilationOptions.Default,
                 Enumerable.Empty<CompilationLibrary>(),
                 RuntimeLibraries.Select(rl => rl.Build(context)),
-                RuntimeFallbacks.Select(rf => rf.Build()));
+                RuntimeFallbacks.Select(rf => rf.Build())
+            );
         }
 
         public TestApp Build()
@@ -390,10 +402,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 runtimeConfig.Save();
             }
 
-            BuildContext buildContext = new BuildContext()
-            {
-                App = testApp
-            };
+            BuildContext buildContext = new BuildContext() { App = testApp };
             DependencyContext dependencyContext = BuildDependencyContext(buildContext);
 
             DependencyContextWriter writer = new DependencyContextWriter();

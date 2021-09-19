@@ -31,14 +31,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public static void Post(Derived model) { }
 
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
-        public static void GetParameterNotMatching([ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.AssignableFrom)] Derived model) { }
+        public static void GetParameterNotMatching(
+            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.AssignableFrom)] Derived model
+        ) { }
 
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
         public static void Search(
-            [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Exact)]
-                string searchTerm,
-            params object[] others)
-        { }
+            [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Exact)] string searchTerm,
+            params object[] others
+        ) { }
 
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
         public static void SearchWithParams(params object[] others) { }
@@ -50,6 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         public static void MethodParameterWithRandomAttributes([FromRoute] int value) { }
 
-        public static void MethodWithAnyTypeMatchBehaviorParameter([ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)] int value) { }
+        public static void MethodWithAnyTypeMatchBehaviorParameter(
+            [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)] int value
+        ) { }
     }
 }

@@ -46,13 +46,17 @@ namespace System.Timers
         {
             if (interval <= 0)
             {
-                throw new ArgumentException(SR.Format(SR.InvalidParameter, nameof(interval), interval));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidParameter, nameof(interval), interval)
+                );
             }
 
             double roundedInterval = Math.Ceiling(interval);
             if (roundedInterval > int.MaxValue || roundedInterval <= 0)
             {
-                throw new ArgumentException(SR.Format(SR.InvalidParameter, nameof(interval), interval));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidParameter, nameof(interval), interval)
+                );
             }
 
             _interval = (int)roundedInterval;
@@ -127,7 +131,12 @@ namespace System.Timers
 
                             int i = (int)Math.Ceiling(_interval);
                             _cookie = new object();
-                            _timer = new Threading.Timer(_callback, _cookie, Timeout.Infinite, Timeout.Infinite);
+                            _timer = new Threading.Timer(
+                                _callback,
+                                _cookie,
+                                Timeout.Infinite,
+                                Timeout.Infinite
+                            );
                             _timer.Change(i, _autoReset ? i : Timeout.Infinite);
                         }
                         else
@@ -167,7 +176,6 @@ namespace System.Timers
             }
         }
 
-
         /// <summary>
         /// Occurs when the <see cref='System.Timers.Timer.Interval'/> has
         /// elapsed.
@@ -195,7 +203,6 @@ namespace System.Timers
             }
         }
 
-
         /// <summary>
         /// Gets or sets the object used to marshal event-handler calls that are issued when
         /// an interval has elapsed.
@@ -217,7 +224,6 @@ namespace System.Timers
 
                 return _synchronizingObject;
             }
-
             set => _synchronizingObject = value;
         }
 
@@ -298,14 +304,15 @@ namespace System.Timers
                 if (intervalElapsed != null)
                 {
                     if (SynchronizingObject != null && SynchronizingObject.InvokeRequired)
-                        SynchronizingObject.BeginInvoke(intervalElapsed, new object[] { this, elapsedEventArgs });
+                        SynchronizingObject.BeginInvoke(
+                            intervalElapsed,
+                            new object[] { this, elapsedEventArgs }
+                        );
                     else
                         intervalElapsed(this, elapsedEventArgs);
                 }
             }
-            catch
-            {
-            }
+            catch { }
         }
     }
 }

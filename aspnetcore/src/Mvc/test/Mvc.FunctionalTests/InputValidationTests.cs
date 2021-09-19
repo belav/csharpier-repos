@@ -25,18 +25,20 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ValidRequest_IsAccepted()
         {
             // Arrange
-            var content = new FormUrlEncodedContent(new Dictionary<string, string>
-            {
-                { "RequiredProp", "1" },
-                { "BindRequiredProp", "2" },
-                { "RequiredAndBindRequiredProp", "3" },
-                { "requiredParam", "4" },
-                { "bindRequiredParam", "5" },
-                { "requiredAndBindRequiredParam", "6" },
-                { "UnboundRequiredProp", "100" }, // Value should not be used
-                { "UnboundBindRequiredProp", "101" }, // Value should not be used
-                { "BindNeverRequiredProp", "ignoredValue" }, // Value should not be used
-            });
+            var content = new FormUrlEncodedContent(
+                new Dictionary<string, string>
+                {
+                    { "RequiredProp", "1" },
+                    { "BindRequiredProp", "2" },
+                    { "RequiredAndBindRequiredProp", "3" },
+                    { "requiredParam", "4" },
+                    { "bindRequiredParam", "5" },
+                    { "requiredAndBindRequiredParam", "6" },
+                    { "UnboundRequiredProp", "100" }, // Value should not be used
+                    { "UnboundBindRequiredProp", "101" }, // Value should not be used
+                    { "BindNeverRequiredProp", "ignoredValue" }, // Value should not be used
+                }
+            );
 
             // Act
             var response = await Client.PostAsync("http://localhost/TopLevelValidation", content);
@@ -65,13 +67,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task InvalidRequest_IsRejected()
         {
             // Arrange
-            var content = new FormUrlEncodedContent(new Dictionary<string, string>
-            {
-                { "OptionalStringLengthProp", "ThisStringIsTooLongForTheProperty" },
-                { "OptionalRangeDisplayNameProp", "123" },
-                { "optionalStringLengthParam", "ThisStringIsTooLongForTheParameter" },
-                { "optionalRangeDisplayNameParam", "456" },
-            });
+            var content = new FormUrlEncodedContent(
+                new Dictionary<string, string>
+                {
+                    { "OptionalStringLengthProp", "ThisStringIsTooLongForTheProperty" },
+                    { "OptionalRangeDisplayNameProp", "123" },
+                    { "optionalStringLengthParam", "ThisStringIsTooLongForTheParameter" },
+                    { "optionalRangeDisplayNameParam", "456" },
+                }
+            );
 
             // Act
             var response = await Client.PostAsync("http://localhost/TopLevelValidation", content);
@@ -80,41 +84,46 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 .Properties()
                 .ToDictionary(
                     prop => prop.Name,
-                    prop => ((JArray)prop.Value).Single().Value<string>());
+                    prop => ((JArray)prop.Value).Single().Value<string>()
+                );
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             Assert.Equal(10, errors.Count);
-            Assert.Equal(
-                "The RequiredProp field is required.",
-                errors["RequiredProp"]);
+            Assert.Equal("The RequiredProp field is required.", errors["RequiredProp"]);
             Assert.Equal(
                 "A value for the 'BindRequiredProp' parameter or property was not provided.",
-                errors["BindRequiredProp"]);
+                errors["BindRequiredProp"]
+            );
             Assert.Equal(
                 "A value for the 'RequiredAndBindRequiredProp' parameter or property was not provided.",
-                errors["RequiredAndBindRequiredProp"]);
+                errors["RequiredAndBindRequiredProp"]
+            );
             Assert.Equal(
                 "The field OptionalStringLengthProp must be a string with a maximum length of 5.",
-                errors["OptionalStringLengthProp"]);
+                errors["OptionalStringLengthProp"]
+            );
             Assert.Equal(
                 "The field Some Display Name For Prop must be between 1 and 100.",
-                errors["OptionalRangeDisplayNameProp"]);
-            Assert.Equal(
-                "The requiredParam field is required.",
-                errors["requiredParam"]);
+                errors["OptionalRangeDisplayNameProp"]
+            );
+            Assert.Equal("The requiredParam field is required.", errors["requiredParam"]);
             Assert.Equal(
                 "A value for the 'bindRequiredParam' parameter or property was not provided.",
-                errors["bindRequiredParam"]);
+                errors["bindRequiredParam"]
+            );
             Assert.Equal(
                 "A value for the 'requiredAndBindRequiredParam' parameter or property was not provided.",
-                errors["requiredAndBindRequiredParam"]);
+                errors["requiredAndBindRequiredParam"]
+            );
             Assert.Equal(
                 "The field optionalStringLengthParam must be a string with a maximum length of 5.",
-                errors["optionalStringLengthParam"]);
+                errors["optionalStringLengthParam"]
+            );
             Assert.Equal(
                 "The field Some Display Name For Param must be between 1 and 100.",
-                errors["optionalRangeDisplayNameParam"]);
+                errors["optionalRangeDisplayNameParam"]
+            );
         }
     }
 }

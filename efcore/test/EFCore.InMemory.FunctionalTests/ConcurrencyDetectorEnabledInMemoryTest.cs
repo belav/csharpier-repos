@@ -6,18 +6,17 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class ConcurrencyDetectorEnabledInMemoryTest : ConcurrencyDetectorEnabledTestBase<
-        ConcurrencyDetectorEnabledInMemoryTest.ConcurrencyDetectorInMemoryFixture>
+    public class ConcurrencyDetectorEnabledInMemoryTest
+        : ConcurrencyDetectorEnabledTestBase<ConcurrencyDetectorEnabledInMemoryTest.ConcurrencyDetectorInMemoryFixture>
     {
-        public ConcurrencyDetectorEnabledInMemoryTest(ConcurrencyDetectorInMemoryFixture fixture)
-            : base(fixture)
-        {
-        }
+        public ConcurrencyDetectorEnabledInMemoryTest(
+            ConcurrencyDetectorInMemoryFixture fixture
+        ) : base(fixture) { }
 
         public class ConcurrencyDetectorInMemoryFixture : ConcurrencyDetectorFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => InMemoryTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                InMemoryTestStoreFactory.Instance;
         }
     }
 }

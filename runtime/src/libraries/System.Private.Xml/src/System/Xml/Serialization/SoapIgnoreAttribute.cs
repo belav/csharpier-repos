@@ -5,11 +5,14 @@ namespace System.Xml.Serialization
 {
     using System;
 
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue
+    )]
     public class SoapIgnoreAttribute : System.Attribute
     {
-        public SoapIgnoreAttribute()
-        {
-        }
+        public SoapIgnoreAttribute() { }
     }
 }

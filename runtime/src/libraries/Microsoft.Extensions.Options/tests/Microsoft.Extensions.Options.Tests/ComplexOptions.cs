@@ -37,14 +37,8 @@ namespace Microsoft.Extensions.Options.Tests
     {
         public override string Virtual
         {
-            get
-            {
-                return base.Virtual;
-            }
-            set
-            {
-                base.Virtual = "Derived:" + value;
-            }
+            get { return base.Virtual; }
+            set { base.Virtual = "Derived:" + value; }
         }
     }
 

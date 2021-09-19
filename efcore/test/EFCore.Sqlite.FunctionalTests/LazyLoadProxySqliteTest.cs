@@ -5,17 +5,15 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class LazyLoadProxySqliteTest : LazyLoadProxyTestBase<LazyLoadProxySqliteTest.LoadSqliteFixture>
+    public class LazyLoadProxySqliteTest
+        : LazyLoadProxyTestBase<LazyLoadProxySqliteTest.LoadSqliteFixture>
     {
-        public LazyLoadProxySqliteTest(LoadSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public LazyLoadProxySqliteTest(LoadSqliteFixture fixture) : base(fixture) { }
 
         public class LoadSqliteFixture : LoadFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
         }
     }
 }

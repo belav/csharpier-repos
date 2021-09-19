@@ -7,12 +7,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel
     {
         public string LicenseType { get; set; }
 
-        public override bool Equals(object obj)
-            => obj is LicensedOperator other
-                && base.Equals(other)
-                && LicenseType == other.LicenseType;
+        public override bool Equals(object obj) =>
+            obj is LicensedOperator other && base.Equals(other) && LicenseType == other.LicenseType;
 
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

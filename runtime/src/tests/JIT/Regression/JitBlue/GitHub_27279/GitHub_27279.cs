@@ -7,12 +7,15 @@ class GitHub_27279
 {
     unsafe static int Main()
     {
-        bool res = Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>((void*)(-1)), ref Unsafe.AsRef<byte>((void*)(1)));
+        bool res = Unsafe.IsAddressLessThan(
+            ref Unsafe.AsRef<byte>((void*)(-1)),
+            ref Unsafe.AsRef<byte>((void*)(1))
+        );
         Console.WriteLine(res.ToString());
         if (res)
         {
             return 101;
-        }        
+        }
         return 100;
     }
 }

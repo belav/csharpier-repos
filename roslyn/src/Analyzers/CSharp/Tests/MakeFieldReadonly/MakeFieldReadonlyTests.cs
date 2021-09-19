@@ -19,13 +19,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
 {
     public class MakeFieldReadonlyTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public MakeFieldReadonlyTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public MakeFieldReadonlyTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new MakeFieldReadonlyDiagnosticAnalyzer(), new CSharpMakeFieldReadonlyCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new MakeFieldReadonlyDiagnosticAnalyzer(),
+                new CSharpMakeFieldReadonlyCodeFixProvider()
+            );
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         [InlineData("public")]
@@ -36,120 +38,129 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
         public async Task NonPrivateField(string accessibility)
         {
             await TestMissingInRegularAndScriptAsync(
-$@"class MyClass
+                $@"class MyClass
 {{
     {accessibility} int[| _goo |];
-}}");
+}}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldIsEvent()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private event System.EventHandler [|Goo|];
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldIsReadonly()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private readonly int [|_goo|];
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldIsConst()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private const int [|_goo|];
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldNotAssigned()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldNotAssigned_Struct()
         {
             await TestInRegularAndScript1Async(
-@"struct MyStruct
+                @"struct MyStruct
 {
     private int [|_goo|];
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     private readonly int _goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInline()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|] = 0;
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo = 0;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task MultipleFieldsAssignedInline_AllCanBeReadonly()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|] = 0, _bar = 0;
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo = 0;
     private int _bar = 0;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task ThreeFieldsAssignedInline_AllCanBeReadonly_SeparatesAllAndKeepsThemInOrder()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int _goo = 0, [|_bar|] = 0, _fizz = 0;
 }",
-@"class MyClass
+                @"class MyClass
 {
     private int _goo = 0;
     private readonly int _bar = 0;
     private int _fizz = 0;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task MultipleFieldsAssignedInline_OneIsAssignedInMethod()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int _goo = 0, [|_bar|] = 0;
     Goo()
@@ -157,7 +168,7 @@ $@"class MyClass
         _goo = 0;
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private int _goo = 0;
     private readonly int _bar = 0;
@@ -166,49 +177,53 @@ $@"class MyClass
     {
         _goo = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task MultipleFieldsAssignedInline_NoInitializer()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|], _bar = 0;
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     private int _bar = 0;
-}");
+}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         [InlineData("")]
         [InlineData("\r\n")]
         [InlineData("\r\n\r\n")]
-        public async Task MultipleFieldsAssignedInline_LeadingCommentAndWhitespace(string leadingTrvia)
-        {
+        public async Task MultipleFieldsAssignedInline_LeadingCommentAndWhitespace(
+            string leadingTrvia
+        ) {
             await TestInRegularAndScript1Async(
-$@"class MyClass
+                $@"class MyClass
 {{
     //Comment{leadingTrvia}
     private int _goo = 0, [|_bar|] = 0;
 }}",
-$@"class MyClass
+                $@"class MyClass
 {{
     //Comment{leadingTrvia}
     private int _goo = 0;
     private readonly int _bar = 0;
-}}");
+}}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInCtor()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     MyClass()
@@ -216,21 +231,22 @@ $@"class MyClass
         _goo = 0;
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     MyClass()
     {
         _goo = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInSimpleLambdaInCtor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"public class MyClass
+                @"public class MyClass
 {
     private int [|_goo|];
     public MyClass()
@@ -239,14 +255,15 @@ $@"class MyClass
     }
 
     public Action<int> E;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInLambdaInCtor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"public class MyClass
+                @"public class MyClass
 {
     private int [|_goo|];
     public MyClass()
@@ -255,14 +272,15 @@ $@"class MyClass
     }
 
     public event EventHandler E;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInLambdaWithBlockInCtor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"public class MyClass
+                @"public class MyClass
 {
     private int [|_goo|];
     public MyClass()
@@ -271,14 +289,15 @@ $@"class MyClass
     }
 
     public event EventHandler E;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInAnonymousFunctionInCtor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"public class MyClass
+                @"public class MyClass
 {
     private int [|_goo|];
     public MyClass()
@@ -287,42 +306,45 @@ $@"class MyClass
     }
 
     public Action<int> E;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInLocalFunctionExpressionBodyInCtor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"public class MyClass
+                @"public class MyClass
 {
     private int [|_goo|];
     public MyClass()
     {
         void LocalFunction() => this._goo = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInLocalFunctionBlockBodyInCtor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"public class MyClass
+                @"public class MyClass
 {
     private int [|_goo|];
     public MyClass()
     {
         void LocalFunction() { this._goo = 0; }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInCtor_DifferentInstance()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     MyClass()
@@ -330,28 +352,30 @@ $@"class MyClass
         var goo = new MyClass();
         goo._goo = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInCtor_DifferentInstance_ObjectInitializer()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     MyClass()
     {
         var goo = new MyClass { _goo = 0 };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInCtor_QualifiedWithThis()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     MyClass()
@@ -359,21 +383,22 @@ $@"class MyClass
         this._goo = 0;
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     MyClass()
     {
         this._goo = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldReturnedInProperty()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     int Goo
@@ -381,14 +406,15 @@ $@"class MyClass
         get { return _goo; }
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     int Goo
     {
         get { return _goo; }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -396,7 +422,7 @@ $@"class MyClass
         public async Task FieldReturnedInMethod()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private string [|_s|];
     public MyClass(string s) => _s = s;
@@ -405,7 +431,7 @@ $@"class MyClass
         return _s;
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly string [|_s|];
     public MyClass(string s) => _s = s;
@@ -413,7 +439,8 @@ $@"class MyClass
     {
         return _s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -421,7 +448,7 @@ $@"class MyClass
         public async Task FieldReadInMethod()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private string [|_s|];
     public MyClass(string s) => _s = s;
@@ -430,7 +457,7 @@ $@"class MyClass
         return _s.ToUpper();
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly string [|_s|];
     public MyClass(string s) => _s = s;
@@ -438,14 +465,15 @@ $@"class MyClass
     {
         return _s.ToUpper();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInProperty()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     int Goo
@@ -453,28 +481,30 @@ $@"class MyClass
         get { return _goo; }
         set { _goo = value; }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInMethod()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     int Goo()
     {
         _goo = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInNestedTypeConstructor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
 
@@ -485,14 +515,15 @@ $@"class MyClass
             _goo = 1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInNestedTypeMethod()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
 
@@ -503,14 +534,15 @@ $@"class MyClass
             _goo = 1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldInNestedTypeAssignedInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     class NestedType
     {
@@ -522,7 +554,7 @@ $@"class MyClass
         }
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     class NestedType
     {
@@ -533,14 +565,15 @@ $@"class MyClass
             _goo = 0;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task VariableAssignedToFieldInMethod()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     int Goo()
@@ -548,97 +581,103 @@ $@"class MyClass
         var i = _goo;
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     int Goo()
     {
         var i = _goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedInMethodWithCompoundOperator()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|] = 0;
     int Goo(int value)
     {
         _goo += value;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldUsedWithPostfixIncrement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|] = 0;
     int Goo(int value)
     {
         _goo++;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldUsedWithPrefixDecrement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|] = 0;
     int Goo(int value)
     {
         --_goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task NotAssignedInPartialClass1()
         {
             await TestInRegularAndScript1Async(
-@"partial class MyClass
+                @"partial class MyClass
 {
     private int [|_goo|];
 }",
-@"partial class MyClass
+                @"partial class MyClass
 {
     private readonly int _goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task NotAssignedInPartialClass2()
         {
             await TestInRegularAndScript1Async(
-@"partial class MyClass
+                @"partial class MyClass
 {
     private int [|_goo|];
 }
 partial class MyClass
 {
 }",
-@"partial class MyClass
+                @"partial class MyClass
 {
     private readonly int _goo;
 }
 partial class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task NotAssignedInPartialClass3()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>partial class MyClass
@@ -655,7 +694,7 @@ partial class MyClass
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>partial class MyClass
@@ -671,14 +710,15 @@ partial class MyClass
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task AssignedInPartialClass1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"partial class MyClass
+                @"partial class MyClass
 {
     private int [|_goo|];
 
@@ -686,14 +726,15 @@ partial class MyClass
     {
         _goo = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task AssignedInPartialClass2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"partial class MyClass
+                @"partial class MyClass
 {
     private int [|_goo|];
 }
@@ -703,14 +744,15 @@ partial class MyClass
     {
         _goo = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task AssignedInPartialClass3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>partial class MyClass
@@ -727,14 +769,15 @@ partial class MyClass
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task PassedAsParameter()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     void Goo()
@@ -745,7 +788,7 @@ partial class MyClass
     {
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     void Goo()
@@ -755,28 +798,30 @@ partial class MyClass
     void Bar(int goo)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task PassedAsOutParameter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     void Goo()
     {
         int.TryParse(""123"", out _goo);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task PassedAsRefParameter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     void Goo()
@@ -786,7 +831,8 @@ partial class MyClass
     void Bar(ref int goo)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -794,14 +840,15 @@ partial class MyClass
         public async Task ReturnedByRef1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     internal ref int Goo()
     {
         return ref _goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -809,12 +856,13 @@ partial class MyClass
         public async Task ReturnedByRef2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     internal ref int Goo()
         => ref _goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -822,7 +870,7 @@ partial class MyClass
         public async Task ReturnedByRef3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     internal struct Accessor
@@ -830,7 +878,8 @@ partial class MyClass
         private MyClass _instance;
         internal ref int Goo => ref _instance._goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -838,7 +887,7 @@ partial class MyClass
         public async Task ReturnedByRef4()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_a|];
     private int _b;
@@ -846,10 +895,11 @@ partial class MyClass
     {
         return ref (first ? ref _a : ref _b);
     }
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int _a;
     private int [|_b|];
@@ -857,7 +907,8 @@ partial class MyClass
     {
         return ref (first ? ref _a : ref _b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -865,22 +916,24 @@ partial class MyClass
         public async Task ReturnedByRef5()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_a|];
     private int _b;
     internal ref int Goo(bool first)
         => ref (first ? ref _a : ref _b);
-}");
+}"
+            );
 
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int _a;
     private int [|_b|];
     internal ref int Goo(bool first)
         => ref (first ? ref _a : ref _b);
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -888,7 +941,7 @@ partial class MyClass
         public async Task ReturnedByRef6()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     internal int Goo()
@@ -900,7 +953,8 @@ partial class MyClass
             return ref _goo;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -908,7 +962,7 @@ partial class MyClass
         public async Task ReturnedByRef7()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     delegate ref int D();
 
@@ -919,7 +973,8 @@ partial class MyClass
 
         return d();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -927,7 +982,7 @@ partial class MyClass
         public async Task ReturnedByRef8()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     delegate ref int D();
 
@@ -938,7 +993,8 @@ partial class MyClass
 
         return d();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -946,7 +1002,7 @@ partial class MyClass
         public async Task ReturnedByRefReadonly1()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     internal ref readonly int Goo()
@@ -954,14 +1010,15 @@ partial class MyClass
         return ref _goo;
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     internal ref readonly int Goo()
     {
         return ref _goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -969,18 +1026,19 @@ partial class MyClass
         public async Task ReturnedByRefReadonly2()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     internal ref readonly int Goo()
         => ref _goo;
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     internal ref readonly int Goo()
         => ref _goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -988,7 +1046,7 @@ partial class MyClass
         public async Task ReturnedByRefReadonly3()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     internal struct Accessor
@@ -997,7 +1055,7 @@ partial class MyClass
         internal ref readonly int Goo => ref _instance._goo;
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     internal struct Accessor
@@ -1005,7 +1063,8 @@ partial class MyClass
         private MyClass _instance;
         internal ref readonly int Goo => ref _instance._goo;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -1013,7 +1072,7 @@ partial class MyClass
         public async Task ReturnedByRefReadonly4()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_a|];
     private int _b;
@@ -1022,7 +1081,7 @@ partial class MyClass
         return ref (first ? ref _a : ref _b);
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _a;
     private int _b;
@@ -1030,10 +1089,11 @@ partial class MyClass
     {
         return ref (first ? ref _a : ref _b);
     }
-}");
+}"
+            );
 
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int _a;
     private int [|_b|];
@@ -1042,7 +1102,7 @@ partial class MyClass
         return ref (first ? ref _a : ref _b);
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private int _a;
     private readonly int _b;
@@ -1050,7 +1110,8 @@ partial class MyClass
     {
         return ref (first ? ref _a : ref _b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -1058,36 +1119,38 @@ partial class MyClass
         public async Task ReturnedByRefReadonly5()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_a|];
     private int _b;
     internal ref readonly int Goo(bool first)
         => ref (first ? ref _a : ref _b);
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _a;
     private int _b;
     internal ref readonly int Goo(bool first)
         => ref (first ? ref _a : ref _b);
-}");
+}"
+            );
 
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int _a;
     private int [|_b|];
     internal ref readonly int Goo(bool first)
         => ref (first ? ref _a : ref _b);
 }",
-@"class MyClass
+                @"class MyClass
 {
     private int _a;
     private readonly int _b;
     internal ref readonly int Goo(bool first)
         => ref (first ? ref _a : ref _b);
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -1095,7 +1158,7 @@ partial class MyClass
         public async Task ReturnedByRefReadonly6()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     internal int Goo()
@@ -1108,7 +1171,7 @@ partial class MyClass
         }
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     internal int Goo()
@@ -1120,7 +1183,8 @@ partial class MyClass
             return ref _goo;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -1128,7 +1192,7 @@ partial class MyClass
         public async Task ReturnedByRefReadonly7()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     delegate ref readonly int D();
 
@@ -1140,7 +1204,7 @@ partial class MyClass
         return d();
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     delegate ref readonly int D();
 
@@ -1151,7 +1215,8 @@ partial class MyClass
 
         return d();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -1159,7 +1224,7 @@ partial class MyClass
         public async Task ReturnedByRefReadonly8()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     delegate ref readonly int D();
 
@@ -1171,7 +1236,7 @@ partial class MyClass
         return d();
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     delegate ref readonly int D();
 
@@ -1182,7 +1247,8 @@ partial class MyClass
 
         return d();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -1190,7 +1256,7 @@ partial class MyClass
         public async Task ConditionOfRefConditional1()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private bool [|_a|];
     private int _b;
@@ -1199,7 +1265,7 @@ partial class MyClass
         return ref (_a ? ref _b : ref _b);
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly bool _a;
     private int _b;
@@ -1207,7 +1273,8 @@ partial class MyClass
     {
         return ref (_a ? ref _b : ref _b);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
@@ -1215,27 +1282,28 @@ partial class MyClass
         public async Task ConditionOfRefConditional2()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private bool [|_a|];
     private int _b;
     internal ref int Goo()
         => ref (_a ? ref _b : ref _b);
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly bool _a;
     private int _b;
     internal ref int Goo()
         => ref (_a ? ref _b : ref _b);
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task PassedAsOutParameterInCtor()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     MyClass()
@@ -1243,21 +1311,22 @@ partial class MyClass
         int.TryParse(""123"", out _goo);
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     MyClass()
     {
         int.TryParse(""123"", out _goo);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task PassedAsRefParameterInCtor()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     MyClass()
@@ -1268,7 +1337,7 @@ partial class MyClass
     {
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     MyClass()
@@ -1278,14 +1347,15 @@ partial class MyClass
     void Bar(ref int goo)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task StaticFieldAssignedInStaticCtor()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private static int [|_goo|];
     static MyClass()
@@ -1293,49 +1363,52 @@ partial class MyClass
         _goo = 0;
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private static readonly int _goo;
     static MyClass()
     {
         _goo = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task StaticFieldAssignedInNonStaticCtor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class MyClass
+                @"class MyClass
 {
     private static int [|_goo|];
     MyClass()
     {
         _goo = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldTypeIsMutableStruct()
         {
             await TestMissingInRegularAndScriptAsync(
-@"struct MyStruct
+                @"struct MyStruct
 {
     private int _goo;
 }
 class MyClass
 {
     private MyStruct [|_goo|];
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldTypeIsCustomImmutableStruct()
         {
             await TestInRegularAndScript1Async(
-@"struct MyStruct
+                @"struct MyStruct
 {
     private readonly int _goo;
     private const int _bar = 0;
@@ -1345,7 +1418,7 @@ class MyClass
 {
     private MyStruct [|_goo|];
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     private readonly int _goo;
     private const int _bar = 0;
@@ -1354,14 +1427,15 @@ class MyClass
 class MyClass
 {
     private readonly MyStruct _goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FixAll()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int {|FixAllInDocument:_goo|} = 0, _bar = 0;
     private int _x = 0, _y = 0, _z = 0;
@@ -1369,7 +1443,7 @@ class MyClass
 
     void Method() { _z = 1; }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo = 0, _bar = 0;
     private readonly int _x = 0;
@@ -1378,7 +1452,8 @@ class MyClass
     private readonly int _fizz = 0;
 
     void Method() { _z = 1; }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -1386,7 +1461,7 @@ class MyClass
         public async Task FixAll2()
         {
             await TestInRegularAndScript1Async(
-@"  using System;
+                @"  using System;
 
     partial struct MyClass
     {
@@ -1405,7 +1480,7 @@ class MyClass
     }
 
     partial struct MyClass { }",
-@"  using System;
+                @"  using System;
 
     partial struct MyClass
     {
@@ -1423,7 +1498,8 @@ class MyClass
         };
     }
 
-    partial struct MyClass { }");
+    partial struct MyClass { }"
+            );
         }
 
         [WorkItem(26262, "https://github.com/dotnet/roslyn/issues/26262")]
@@ -1431,7 +1507,7 @@ class MyClass
         public async Task FieldAssignedInCtor_InParens()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     MyClass()
@@ -1439,14 +1515,15 @@ class MyClass
         (_goo) = 0;
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     MyClass()
     {
         (_goo) = 0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26262, "https://github.com/dotnet/roslyn/issues/26262")]
@@ -1454,7 +1531,7 @@ class MyClass
         public async Task FieldAssignedInCtor_QualifiedWithThis_InParens()
         {
             await TestInRegularAndScript1Async(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
     MyClass()
@@ -1462,14 +1539,15 @@ class MyClass
         (this._goo) = 0;
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private readonly int _goo;
     MyClass()
     {
         (this._goo) = 0;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26264, "https://github.com/dotnet/roslyn/issues/26264")]
@@ -1477,7 +1555,7 @@ class MyClass
         public async Task FieldAssignedInMethod_InDeconstruction()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     [|int i;|]
     int j;
@@ -1486,7 +1564,8 @@ class MyClass
     {
         (i, j) = (1, 2);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26264, "https://github.com/dotnet/roslyn/issues/26264")]
@@ -1494,7 +1573,7 @@ class MyClass
         public async Task FieldAssignedInMethod_InDeconstruction_InParens()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     [|int i;|]
     int j;
@@ -1503,7 +1582,8 @@ class MyClass
     {
         ((i, j), j) = ((1, 2), 3);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26264, "https://github.com/dotnet/roslyn/issues/26264")]
@@ -1511,7 +1591,7 @@ class MyClass
         public async Task FieldAssignedInMethod_InDeconstruction_WithThis_InParens()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     [|int i;|]
     int j;
@@ -1520,7 +1600,8 @@ class MyClass
     {
         ((this.i, j), j) = (1, 2);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26264, "https://github.com/dotnet/roslyn/issues/26264")]
@@ -1528,7 +1609,7 @@ class MyClass
         public async Task FieldUsedInTupleExpressionOnRight()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     [|int i;|]
     int j;
@@ -1538,7 +1619,7 @@ class MyClass
         (j, j) = (i, i);
     }
 }",
-@"class C
+                @"class C
 {
     readonly int i;
     int j;
@@ -1547,7 +1628,8 @@ class MyClass
     {
         (j, j) = (i, i);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26264, "https://github.com/dotnet/roslyn/issues/26264")]
@@ -1555,7 +1637,7 @@ class MyClass
         public async Task FieldInTypeWithGeneratedCode()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     [|private int i;|]
 
@@ -1566,7 +1648,7 @@ class MyClass
     {
     }
 }",
-@"class C
+                @"class C
 {
     private readonly int i;
 
@@ -1576,7 +1658,8 @@ class MyClass
     void M()
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26364, "https://github.com/dotnet/roslyn/issues/26364")]
@@ -1584,10 +1667,11 @@ class MyClass
         public async Task FieldIsFixed()
         {
             await TestMissingInRegularAndScriptAsync(
-@"unsafe struct S
+                @"unsafe struct S
 {
     [|private fixed byte b[8];|]
-}");
+}"
+            );
         }
 
         [WorkItem(38995, "https://github.com/dotnet/roslyn/issues/38995")]
@@ -1595,7 +1679,7 @@ class MyClass
         public async Task FieldAssignedToLocalRef()
         {
             await TestMissingAsync(
-@"
+                @"
 class Program
 {
     [|int i;|]
@@ -1605,14 +1689,15 @@ class Program
         ref var value = ref i;
         value += 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
         public async Task FieldAssignedToLocalReadOnlyRef()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class Program
 {
     [|int i;|]
@@ -1622,7 +1707,7 @@ class Program
         ref readonly var value = ref i;
     }
 }",
-@"
+                @"
 class Program
 {
     [|readonly int i;|]
@@ -1631,7 +1716,8 @@ class Program
     {
         ref readonly var value = ref i;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26213, "https://github.com/dotnet/roslyn/issues/26213")]
@@ -1639,7 +1725,7 @@ class Program
         public async Task TestFieldAccessesOnLeftOfDot()
         {
             await TestInRegularAndScript1Async(
-@"interface IFaceServiceClient
+                @"interface IFaceServiceClient
 {
     void DetectAsync();
 }
@@ -1653,7 +1739,7 @@ public class Repro
         faceServiceClient.DetectAsync();
     }
 }",
-@"interface IFaceServiceClient
+                @"interface IFaceServiceClient
 {
     void DetectAsync();
 }
@@ -1666,7 +1752,8 @@ public class Repro
     {
         faceServiceClient.DetectAsync();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(42759, "https://github.com/dotnet/roslyn/issues/42759")]
@@ -1674,14 +1761,15 @@ public class Repro
         public async Task TestVolatileField1()
         {
             await TestInRegularAndScript1Async(
-@"class TestClass
+                @"class TestClass
 {
     private volatile object [|first|]; 
 }",
-@"class TestClass
+                @"class TestClass
 {
     private readonly object first; 
-}");
+}"
+            );
         }
 
         [WorkItem(42759, "https://github.com/dotnet/roslyn/issues/42759")]
@@ -1689,15 +1777,16 @@ public class Repro
         public async Task TestVolatileField2()
         {
             await TestInRegularAndScript1Async(
-@"class TestClass
+                @"class TestClass
 {
     private volatile object [|first|], second; 
 }",
-@"class TestClass
+                @"class TestClass
 {
     private readonly object first;
     private volatile object second;
-}");
+}"
+            );
         }
 
         [WorkItem(42759, "https://github.com/dotnet/roslyn/issues/42759")]
@@ -1705,23 +1794,27 @@ public class Repro
         public async Task TestVolatileField3()
         {
             await TestInRegularAndScript1Async(
-@"class TestClass
+                @"class TestClass
 {
     private volatile object first, [|second|]; 
 }",
-@"class TestClass
+                @"class TestClass
 {
     private volatile object first;
     private readonly object second;
-}");
+}"
+            );
         }
 
         [WorkItem(46785, "https://github.com/dotnet/roslyn/issues/46785")]
-        [Fact(Skip = "https://github.com/dotnet/roslyn/issues/46785"), Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
+        [
+            Fact(Skip = "https://github.com/dotnet/roslyn/issues/46785"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)
+        ]
         public async Task UsedAsRef_NoDiagnostic()
         {
             await TestMissingInRegularAndScriptAsync(
-@"public class C
+                @"public class C
 {
     private string [|_x|] = string.Empty;
 
@@ -1730,7 +1823,8 @@ public class Repro
         ref var myVar = ref x;
         return myVar is null;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(42760, "https://github.com/dotnet/roslyn/issues/42760")]
@@ -1738,13 +1832,14 @@ public class Repro
         public async Task WithThreadStaticAttribute_NoDiagnostic()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
     [ThreadStatic]
     private static object [|t_obj|];
-}");
+}"
+            );
         }
     }
 }

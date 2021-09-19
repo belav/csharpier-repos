@@ -13,8 +13,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         private readonly Action<ModelBuilder, DbContext> _onModelCreating;
 
-        private TestModelSource(Action<ModelBuilder, DbContext> onModelCreating, ModelSourceDependencies dependencies)
-            : base(dependencies)
+        private TestModelSource(
+            Action<ModelBuilder, DbContext> onModelCreating,
+            ModelSourceDependencies dependencies
+        ) : base(dependencies)
         {
             _onModelCreating = onModelCreating;
         }
@@ -22,9 +24,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         protected override IModel CreateModel(
             DbContext context,
             IConventionSetBuilder conventionSetBuilder,
-            ModelDependencies modelDependencies)
-        {
-            var modelBuilder = new ModelBuilder(conventionSetBuilder.CreateConventionSet(), modelDependencies);
+            ModelDependencies modelDependencies
+        ) {
+            var modelBuilder = new ModelBuilder(
+                conventionSetBuilder.CreateConventionSet(),
+                modelDependencies
+            );
 
             Dependencies.ModelCustomizer.Customize(modelBuilder, context);
 
@@ -33,14 +38,22 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             return modelBuilder.FinalizeModel();
         }
 
-        public static Func<IServiceProvider, IModelSource> GetFactory(Action<ModelBuilder> onModelCreating)
-            => p => new TestModelSource(
-                (mb, c) => onModelCreating(mb),
-                p.GetRequiredService<ModelSourceDependencies>());
+        public static Func<IServiceProvider, IModelSource> GetFactory(
+            Action<ModelBuilder> onModelCreating
+        ) =>
+            p =>
+                new TestModelSource(
+                    (mb, c) => onModelCreating(mb),
+                    p.GetRequiredService<ModelSourceDependencies>()
+                );
 
-        public static Func<IServiceProvider, IModelSource> GetFactory(Action<ModelBuilder, DbContext> onModelCreating)
-            => p => new TestModelSource(
-                onModelCreating,
-                p.GetRequiredService<ModelSourceDependencies>());
+        public static Func<IServiceProvider, IModelSource> GetFactory(
+            Action<ModelBuilder, DbContext> onModelCreating
+        ) =>
+            p =>
+                new TestModelSource(
+                    onModelCreating,
+                    p.GetRequiredService<ModelSourceDependencies>()
+                );
     }
 }

@@ -11,10 +11,12 @@ namespace System.CommandLine.Suggest
     {
         private readonly ISuggestionRegistration[] _suggestionRegistrations;
 
-        public CombineSuggestionRegistration(params ISuggestionRegistration[] suggestionRegistration)
-        {
+        public CombineSuggestionRegistration(
+            params ISuggestionRegistration[] suggestionRegistration
+        ) {
             _suggestionRegistrations =
-                suggestionRegistration ?? throw new ArgumentNullException(nameof(suggestionRegistration));
+                suggestionRegistration
+                ?? throw new ArgumentNullException(nameof(suggestionRegistration));
         }
 
         public void AddSuggestionRegistration(Registration registration)
@@ -27,15 +29,13 @@ namespace System.CommandLine.Suggest
 
         public Registration FindRegistration(FileInfo soughtExecutable)
         {
-            return _suggestionRegistrations
-                   .Select(s => s.FindRegistration(soughtExecutable))
-                   .FirstOrDefault(s => s != null);
+            return _suggestionRegistrations.Select(s => s.FindRegistration(soughtExecutable))
+                .FirstOrDefault(s => s != null);
         }
 
         public IEnumerable<Registration> FindAllRegistrations()
         {
-            return _suggestionRegistrations
-                .SelectMany(s => s.FindAllRegistrations());
+            return _suggestionRegistrations.SelectMany(s => s.FindAllRegistrations());
         }
     }
 }

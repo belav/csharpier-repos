@@ -23,28 +23,37 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
         {
             writer.PushSequence(tag);
 
-
             if (RequireExplicitPolicyDepth.HasValue)
             {
-                writer.WriteInteger(RequireExplicitPolicyDepth.Value, new Asn1Tag(TagClass.ContextSpecific, 0));
+                writer.WriteInteger(
+                    RequireExplicitPolicyDepth.Value,
+                    new Asn1Tag(TagClass.ContextSpecific, 0)
+                );
             }
-
 
             if (InhibitMappingDepth.HasValue)
             {
-                writer.WriteInteger(InhibitMappingDepth.Value, new Asn1Tag(TagClass.ContextSpecific, 1));
+                writer.WriteInteger(
+                    InhibitMappingDepth.Value,
+                    new Asn1Tag(TagClass.ContextSpecific, 1)
+                );
             }
 
             writer.PopSequence(tag);
         }
 
-        internal static PolicyConstraintsAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static PolicyConstraintsAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static PolicyConstraintsAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static PolicyConstraintsAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -59,13 +68,20 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out PolicyConstraintsAsn decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out PolicyConstraintsAsn decoded
+        ) {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out PolicyConstraintsAsn decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out PolicyConstraintsAsn decoded
+        ) {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -76,41 +92,52 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out PolicyConstraintsAsn decoded)
-        {
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out PolicyConstraintsAsn decoded
+        ) {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
-            {
-
-                if (sequenceReader.TryReadInt32(out int tmpRequireExplicitPolicyDepth, new Asn1Tag(TagClass.ContextSpecific, 0)))
-                {
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0))
+            ) {
+                if (
+                    sequenceReader.TryReadInt32(
+                        out int tmpRequireExplicitPolicyDepth,
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    )
+                ) {
                     decoded.RequireExplicitPolicyDepth = tmpRequireExplicitPolicyDepth;
                 }
                 else
                 {
                     sequenceReader.ThrowIfNotEmpty();
                 }
-
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
-            {
-
-                if (sequenceReader.TryReadInt32(out int tmpInhibitMappingDepth, new Asn1Tag(TagClass.ContextSpecific, 1)))
-                {
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1))
+            ) {
+                if (
+                    sequenceReader.TryReadInt32(
+                        out int tmpInhibitMappingDepth,
+                        new Asn1Tag(TagClass.ContextSpecific, 1)
+                    )
+                ) {
                     decoded.InhibitMappingDepth = tmpInhibitMappingDepth;
                 }
                 else
                 {
                     sequenceReader.ThrowIfNotEmpty();
                 }
-
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

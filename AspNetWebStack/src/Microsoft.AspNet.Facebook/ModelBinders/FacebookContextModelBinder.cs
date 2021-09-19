@@ -37,15 +37,18 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
         /// <returns>
         /// The bound value.
         /// </returns>
-        public virtual object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
-        {
+        public virtual object BindModel(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext
+        ) {
             FacebookClient client = _config.ClientProvider.CreateClient();
             dynamic signedRequest = FacebookRequestHelpers.GetSignedRequest(
                 controllerContext.HttpContext,
                 rawSignedRequest =>
                 {
                     return client.ParseSignedRequest(rawSignedRequest);
-                });
+                }
+            );
             if (signedRequest != null)
             {
                 string accessToken = signedRequest.oauth_token;
@@ -62,7 +65,10 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
             }
             else
             {
-                bindingContext.ModelState.AddModelError(bindingContext.ModelName, Resources.MissingSignedRequest);
+                bindingContext.ModelState.AddModelError(
+                    bindingContext.ModelName,
+                    Resources.MissingSignedRequest
+                );
             }
 
             return null;

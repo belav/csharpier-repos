@@ -20,8 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         public ControllerFactoryProvider(
             IControllerActivatorProvider activatorProvider,
             IControllerFactory controllerFactory,
-            IEnumerable<IControllerPropertyActivator> propertyActivators)
-        {
+            IEnumerable<IControllerPropertyActivator> propertyActivators
+        ) {
             if (activatorProvider == null)
             {
                 throw new ArgumentNullException(nameof(activatorProvider));
@@ -45,8 +45,9 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             _propertyActivators = propertyActivators.ToArray();
         }
 
-        public Func<ControllerContext, object> CreateControllerFactory(ControllerActionDescriptor descriptor)
-        {
+        public Func<ControllerContext, object> CreateControllerFactory(
+            ControllerActionDescriptor descriptor
+        ) {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -55,10 +56,13 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var controllerType = descriptor.ControllerTypeInfo?.AsType();
             if (controllerType == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(descriptor.ControllerTypeInfo),
-                    nameof(descriptor)),
-                    nameof(descriptor));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(descriptor.ControllerTypeInfo),
+                        nameof(descriptor)
+                    ),
+                    nameof(descriptor)
+                );
             }
 
             if (_factoryCreateController != null)
@@ -83,8 +87,9 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             return CreateController;
         }
 
-        public Action<ControllerContext, object>? CreateControllerReleaser(ControllerActionDescriptor descriptor)
-        {
+        public Action<ControllerContext, object>? CreateControllerReleaser(
+            ControllerActionDescriptor descriptor
+        ) {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -93,10 +98,13 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var controllerType = descriptor.ControllerTypeInfo?.AsType();
             if (controllerType == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(descriptor.ControllerTypeInfo),
-                    nameof(descriptor)),
-                    nameof(descriptor));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(descriptor.ControllerTypeInfo),
+                        nameof(descriptor)
+                    ),
+                    nameof(descriptor)
+                );
             }
 
             if (_factoryReleaseController != null)
@@ -107,8 +115,9 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             return _activatorProvider.CreateReleaser(descriptor);
         }
 
-        public Func<ControllerContext, object, ValueTask>? CreateAsyncControllerReleaser(ControllerActionDescriptor descriptor)
-        {
+        public Func<ControllerContext, object, ValueTask>? CreateAsyncControllerReleaser(
+            ControllerActionDescriptor descriptor
+        ) {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -117,10 +126,13 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var controllerType = descriptor.ControllerTypeInfo?.AsType();
             if (controllerType == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(descriptor.ControllerTypeInfo),
-                    nameof(descriptor)),
-                    nameof(descriptor));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(descriptor.ControllerTypeInfo),
+                        nameof(descriptor)
+                    ),
+                    nameof(descriptor)
+                );
             }
 
             if (_factoryReleaseControllerAsync != null)
@@ -131,9 +143,12 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             return _activatorProvider.CreateAsyncReleaser(descriptor);
         }
 
-        private Action<ControllerContext, object>[] GetPropertiesToActivate(ControllerActionDescriptor actionDescriptor)
-        {
-            var propertyActivators = new Action<ControllerContext, object>[_propertyActivators.Length];
+        private Action<ControllerContext, object>[] GetPropertiesToActivate(
+            ControllerActionDescriptor actionDescriptor
+        ) {
+            var propertyActivators = new Action<ControllerContext, object>[
+                _propertyActivators.Length
+            ];
             for (var i = 0; i < _propertyActivators.Length; i++)
             {
                 var activatorProvider = _propertyActivators[i];

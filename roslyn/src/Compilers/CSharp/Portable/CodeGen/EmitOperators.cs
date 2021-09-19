@@ -147,8 +147,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 }
 
                 EmitConversionToEnumUnderlyingType(binary, @checked: isChecked);
-            }
-            while (stack.Count > 0);
+            } while (stack.Count > 0);
 
             Debug.Assert((object)binary == expression);
             stack.Free();
@@ -242,8 +241,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
         }
 
-        private void EmitShortCircuitingOperator(BoundBinaryOperator condition, bool sense, bool stopSense, bool stopValue)
-        {
+        private void EmitShortCircuitingOperator(
+            BoundBinaryOperator condition,
+            bool sense,
+            bool stopSense,
+            bool stopValue
+        ) {
             // we generate:
             //
             // gotoif (a == stopSense) fallThrough
@@ -284,9 +287,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private static readonly ILOpCode[] s_compOpCodes = new ILOpCode[]
         {
             //  <            <=               >                >=
-            ILOpCode.Clt,    ILOpCode.Cgt,    ILOpCode.Cgt,    ILOpCode.Clt,     // Signed
-            ILOpCode.Clt_un, ILOpCode.Cgt_un, ILOpCode.Cgt_un, ILOpCode.Clt_un,  // Unsigned
-            ILOpCode.Clt,    ILOpCode.Cgt_un, ILOpCode.Cgt,    ILOpCode.Clt_un,  // Float
+            ILOpCode.Clt,
+            ILOpCode.Cgt,
+            ILOpCode.Cgt,
+            ILOpCode.Clt, // Signed
+            ILOpCode.Clt_un,
+            ILOpCode.Cgt_un,
+            ILOpCode.Cgt_un,
+            ILOpCode.Clt_un, // Unsigned
+            ILOpCode.Clt,
+            ILOpCode.Cgt_un,
+            ILOpCode.Cgt,
+            ILOpCode.Clt_un, // Float
         };
 
         //NOTE: The result of this should be a boolean on the stack.
@@ -398,7 +410,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 case BinaryOperatorKind.LessThanOrEqual:
                     opIdx = 1;
-                    sense = !sense; // lte is emitted as !gt 
+                    sense = !sense; // lte is emitted as !gt
                     break;
 
                 case BinaryOperatorKind.GreaterThan:
@@ -407,11 +419,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 case BinaryOperatorKind.GreaterThanOrEqual:
                     opIdx = 3;
-                    sense = !sense; // gte is emitted as !lt 
+                    sense = !sense; // gte is emitted as !lt
                     break;
 
                 default:
-                    throw ExceptionUtilities.UnexpectedValue(binOp.OperatorKind.OperatorWithLogical());
+                    throw ExceptionUtilities.UnexpectedValue(
+                        binOp.OperatorKind.OperatorWithLogical()
+                    );
             }
 
             if (IsUnsignedBinaryOperator(binOp))
@@ -455,8 +469,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             _builder.EmitOpCode(ILOpCode.Ceq);
         }
 
-        private void EmitBinaryCondOperatorHelper(ILOpCode opCode, BoundExpression left, BoundExpression right, bool sense)
-        {
+        private void EmitBinaryCondOperatorHelper(
+            ILOpCode opCode,
+            BoundExpression left,
+            BoundExpression right,
+            bool sense
+        ) {
             EmitExpression(left, true);
             EmitExpression(right, true);
             _builder.EmitOpCode(opCode);
@@ -511,11 +529,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // Implementation of unary minus has two overloads:
             //   int operator –(int x)
             //   long operator –(long x)
-            // 
-            // The result is computed by subtracting x from zero. 
+            //
+            // The result is computed by subtracting x from zero.
             // If the value of x is the smallest representable value of the operand type (−2^31 for int or −2^63 for long),
-            // then the mathematical negation of x is not representable within the operand type. If this occurs within a checked context, 
-            // a System.OverflowException is thrown; if it occurs within an unchecked context, 
+            // then the mathematical negation of x is not representable within the operand type. If this occurs within a checked context,
+            // a System.OverflowException is thrown; if it occurs within an unchecked context,
             // the result is the value of the operand and the overflow is not reported.
             Debug.Assert(type == UnaryOperatorKind.Int || type == UnaryOperatorKind.Long);
 
@@ -537,13 +555,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             EmitPopIfUnused(used);
         }
 
-        private void EmitConversionToEnumUnderlyingType(BoundBinaryOperator expression, bool @checked)
-        {
-            // If we are doing an enum addition or subtraction and the 
-            // underlying type is 8 or 16 bits then we will have done the operation in 32 
+        private void EmitConversionToEnumUnderlyingType(
+            BoundBinaryOperator expression,
+            bool @checked
+        ) {
+            // If we are doing an enum addition or subtraction and the
+            // underlying type is 8 or 16 bits then we will have done the operation in 32
             // bits and we need to convert back down to the smaller bit size
             // to [one|zero]extend the value
-            // NOTE: we do not need to do this for bitwise operations since they will always 
+            // NOTE: we do not need to do this for bitwise operations since they will always
             //       result in a properly sign-extended result, assuming operands were sign extended
             //
             // If e is a value of enum type E and u is a value of underlying type u then:
@@ -576,7 +596,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 case BinaryOperatorKind.EnumAnd:
                 case BinaryOperatorKind.EnumOr:
                 case BinaryOperatorKind.EnumXor:
-                    Debug.Assert(TypeSymbol.Equals(expression.Left.Type, expression.Right.Type, TypeCompareKind.ConsiderEverything2));
+                    Debug.Assert(
+                        TypeSymbol.Equals(
+                            expression.Left.Type,
+                            expression.Right.Type,
+                            TypeCompareKind.ConsiderEverything2
+                        )
+                    );
                     enumType = null;
                     break;
                 case BinaryOperatorKind.UnderlyingAndEnumSubtraction:
@@ -599,16 +625,32 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             switch (type)
             {
                 case SpecialType.System_Byte:
-                    _builder.EmitNumericConversion(Microsoft.Cci.PrimitiveTypeCode.Int32, Microsoft.Cci.PrimitiveTypeCode.UInt8, @checked);
+                    _builder.EmitNumericConversion(
+                        Microsoft.Cci.PrimitiveTypeCode.Int32,
+                        Microsoft.Cci.PrimitiveTypeCode.UInt8,
+                        @checked
+                    );
                     break;
                 case SpecialType.System_SByte:
-                    _builder.EmitNumericConversion(Microsoft.Cci.PrimitiveTypeCode.Int32, Microsoft.Cci.PrimitiveTypeCode.Int8, @checked);
+                    _builder.EmitNumericConversion(
+                        Microsoft.Cci.PrimitiveTypeCode.Int32,
+                        Microsoft.Cci.PrimitiveTypeCode.Int8,
+                        @checked
+                    );
                     break;
                 case SpecialType.System_Int16:
-                    _builder.EmitNumericConversion(Microsoft.Cci.PrimitiveTypeCode.Int32, Microsoft.Cci.PrimitiveTypeCode.Int16, @checked);
+                    _builder.EmitNumericConversion(
+                        Microsoft.Cci.PrimitiveTypeCode.Int32,
+                        Microsoft.Cci.PrimitiveTypeCode.Int16,
+                        @checked
+                    );
                     break;
                 case SpecialType.System_UInt16:
-                    _builder.EmitNumericConversion(Microsoft.Cci.PrimitiveTypeCode.Int32, Microsoft.Cci.PrimitiveTypeCode.UInt16, @checked);
+                    _builder.EmitNumericConversion(
+                        Microsoft.Cci.PrimitiveTypeCode.Int32,
+                        Microsoft.Cci.PrimitiveTypeCode.UInt16,
+                        @checked
+                    );
                     break;
             }
         }
@@ -701,10 +743,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 case BinaryOperatorKind.Enum:
                 case BinaryOperatorKind.EnumAndUnderlying:
-                    return IsUnsigned(Binder.GetEnumPromotedType(op.Left.Type.GetEnumUnderlyingType().SpecialType));
+                    return IsUnsigned(
+                        Binder.GetEnumPromotedType(op.Left.Type.GetEnumUnderlyingType().SpecialType)
+                    );
 
                 case BinaryOperatorKind.UnderlyingAndEnum:
-                    return IsUnsigned(Binder.GetEnumPromotedType(op.Right.Type.GetEnumUnderlyingType().SpecialType));
+                    return IsUnsigned(
+                        Binder.GetEnumPromotedType(
+                            op.Right.Type.GetEnumUnderlyingType().SpecialType
+                        )
+                    );
 
                 case BinaryOperatorKind.UInt:
                 case BinaryOperatorKind.NUInt:

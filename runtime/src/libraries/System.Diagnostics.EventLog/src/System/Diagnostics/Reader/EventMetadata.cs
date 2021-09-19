@@ -18,10 +18,18 @@ namespace System.Diagnostics.Eventing.Reader
         private readonly long _keywords;
         private readonly ProviderMetadata _pmReference;
 
-        internal EventMetadata(uint id, byte version, byte channelId,
-                 byte level, byte opcode, short task, long keywords,
-                 string template, string description, ProviderMetadata pmReference)
-        {
+        internal EventMetadata(
+            uint id,
+            byte version,
+            byte channelId,
+            byte level,
+            byte opcode,
+            short task,
+            long keywords,
+            string template,
+            string description,
+            ProviderMetadata pmReference
+        ) {
             Id = id;
             Version = version;
             _channelId = channelId;
@@ -49,34 +57,22 @@ namespace System.Diagnostics.Eventing.Reader
 
         public EventLogLink LogLink
         {
-            get
-            {
-                return new EventLogLink((uint)_channelId, _pmReference);
-            }
+            get { return new EventLogLink((uint)_channelId, _pmReference); }
         }
 
         public EventLevel Level
         {
-            get
-            {
-                return new EventLevel(_level, _pmReference);
-            }
+            get { return new EventLevel(_level, _pmReference); }
         }
 
         public EventOpcode Opcode
         {
-            get
-            {
-                return new EventOpcode(_opcode, _pmReference);
-            }
+            get { return new EventOpcode(_opcode, _pmReference); }
         }
 
         public EventTask Task
         {
-            get
-            {
-                return new EventTask(_task, _pmReference);
-            }
+            get { return new EventTask(_task, _pmReference); }
         }
 
         public IEnumerable<EventKeyword> Keywords

@@ -22,7 +22,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
         {
             if (string.IsNullOrEmpty(SampleSiteName))
             {
-                throw new InvalidOperationException($"No value was provided for {nameof(SampleSiteName)}");
+                throw new InvalidOperationException(
+                    $"No value was provided for {nameof(SampleSiteName)}"
+                );
             }
 
             var sampleSitePath = FindSampleOrTestSitePath(SampleSiteName);
@@ -33,13 +35,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
                 host = E2ETestOptions.Instance.Sauce.HostName;
             }
 
-            return new HostBuilder()
-                .ConfigureWebHost(webHostBuilder => webHostBuilder
-                    .UseKestrel()
-                    .UseContentRoot(sampleSitePath)
-                    .UseWebRoot(string.Empty)
-                    .UseStartup<StaticSiteStartup>()
-                    .UseUrls($"http://{host}:0"))
+            return new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
+                        webHostBuilder.UseKestrel()
+                            .UseContentRoot(sampleSitePath)
+                            .UseWebRoot(string.Empty)
+                            .UseStartup<StaticSiteStartup>()
+                            .UseUrls($"http://{host}:0")
+                )
                 .Build();
         }
 

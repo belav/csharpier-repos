@@ -27,7 +27,10 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new AutoDualComObjectEmpty() };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         [MemberData(nameof(GetIDispatchForObject_ComObject_TestData))]
         public void GetIDispatchForObject_DispatchObject_Success(object obj)
         {
@@ -36,16 +39,22 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.NotEqual(IntPtr.Zero, ptr);
             }
+
             finally
             {
                 Marshal.Release(ptr);
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof (PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         public void GetIDispatchForObject_ManagedIInspectableObject_Fail()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetIDispatchForObject(new IInspectableManagedObject()));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetIDispatchForObject(new IInspectableManagedObject())
+            );
         }
     }
 }

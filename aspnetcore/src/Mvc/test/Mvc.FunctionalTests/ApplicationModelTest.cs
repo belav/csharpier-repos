@@ -9,7 +9,8 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class ApplicationModelTest : IClassFixture<MvcTestFixture<ApplicationModelWebSite.Startup>>
+    public class ApplicationModelTest
+        : IClassFixture<MvcTestFixture<ApplicationModelWebSite.Startup>>
     {
         public ApplicationModelTest(MvcTestFixture<ApplicationModelWebSite.Startup> fixture)
         {
@@ -22,7 +23,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ControllerModel_CustomizedWithAttribute()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/CoolController/GetControllerName");
+            var response = await Client.GetAsync(
+                "http://localhost/CoolController/GetControllerName"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -48,7 +51,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ParameterModel_CustomizedWithAttribute()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/ParameterModel/GetParameterMetadata");
+            var response = await Client.GetAsync(
+                "http://localhost/ParameterModel/GetParameterMetadata"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -74,7 +79,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ApplicationModel_AddPropertyToActionDescriptor_ControllerModelOverwritesCommonApplicationProperty()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/ApplicationModel/GetControllerDescription");
+            var response = await Client.GetAsync(
+                "http://localhost/ApplicationModel/GetControllerDescription"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -87,14 +94,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ApplicationModel_ProvidesMetadataToActionDescriptor_ActionModelOverwritesControllerModelProperty()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/ApplicationModel/GetActionSpecificDescription");
+            var response = await Client.GetAsync(
+                "http://localhost/ApplicationModel/GetActionSpecificDescription"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var body = await response.Content.ReadAsStringAsync();
             Assert.Equal("Specific Action Description", body);
-       }
+        }
 
         [Fact]
         public async Task ApplicationModelExtensions_AddsConventionToAllControllers()
@@ -106,16 +115,22 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var body = await response.Content.ReadAsStringAsync();
-            Assert.Equal("Copyright (c) .NET Foundation. All rights reserved." +
-                " Licensed under the Apache License, Version 2.0. See License.txt " +
-                "in the project root for license information.", body);
+            Assert.Equal(
+                "Copyright (c) .NET Foundation. All rights reserved."
+                    + " Licensed under the Apache License, Version 2.0. See License.txt "
+                    + "in the project root for license information.",
+                body
+            );
         }
 
         [Fact]
         public async Task ApplicationModelExtensions_AddsConventionToAllActions()
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/Home/GetHelloWorld");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/Home/GetHelloWorld"
+            );
             request.Headers.Add("helloWorld", "HelloWorld");
 
             // Act
@@ -153,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Act & Assert
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Client.GetStringAsync("Home/RouteToSuppressLinkGeneration"));
+                () => Client.GetStringAsync("Home/RouteToSuppressLinkGeneration")
+            );
             Assert.Equal("No route matches the supplied values.", ex.Message);
         }
 
@@ -171,8 +187,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("Products", "Products View")]
         [InlineData("Services", "Services View")]
         [InlineData("Manage", "Manage View")]
-        public async Task ApplicationModel_CanDuplicateController_InMultipleAreas(string areaName, string expectedContent)
-        {
+        public async Task ApplicationModel_CanDuplicateController_InMultipleAreas(
+            string areaName,
+            string expectedContent
+        ) {
             // Arrange & Act
             var response = await Client.GetAsync(areaName + "/MultipleAreas/Index");
             var content = await response.Content.ReadAsStringAsync();
@@ -183,10 +201,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         }
 
         [Theory]
-        [InlineData("Help", "This is the help page")]        
-        [InlineData("MoreHelp", "This is the more help page")]        
-        public async Task ControllerModel_CanDuplicateActions_RoutesToDifferentNames(string actionName, string expectedContent)
-        {
+        [InlineData("Help", "This is the help page")]
+        [InlineData("MoreHelp", "This is the more help page")]
+        public async Task ControllerModel_CanDuplicateActions_RoutesToDifferentNames(
+            string actionName,
+            string expectedContent
+        ) {
             // Arrange & Act
             var response = await Client.GetAsync("ActionModel/" + actionName);
 

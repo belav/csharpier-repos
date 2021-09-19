@@ -17,15 +17,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> associatedData,
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
-            Span<byte> tag)
-        {
-            fixed (byte* plaintextBytes = plaintext)
-            fixed (byte* nonceBytes = nonce)
-            fixed (byte* ciphertextBytes = ciphertext)
-            fixed (byte* tagBytes = tag)
-            fixed (byte* associatedDataBytes = associatedData)
+            Span<byte> tag
+        ) {
+            fixed (byte* plaintextBytes = plaintext)fixed (byte* nonceBytes = nonce)fixed (
+                byte* ciphertextBytes = ciphertext
+            )fixed (byte* tagBytes = tag)fixed (byte* associatedDataBytes = associatedData)
             {
-                BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authInfo = BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Create();
+                BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authInfo =
+                    BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Create();
                 authInfo.pbNonce = nonceBytes;
                 authInfo.cbNonce = nonce.Length;
                 authInfo.pbTag = tagBytes;
@@ -43,7 +42,8 @@ namespace System.Security.Cryptography
                     ciphertextBytes,
                     ciphertext.Length,
                     out int ciphertextBytesWritten,
-                    0);
+                    0
+                );
 
                 Debug.Assert(plaintext.Length == ciphertextBytesWritten);
 
@@ -62,15 +62,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            bool clearPlaintextOnFailure)
-        {
-            fixed (byte* plaintextBytes = plaintext)
-            fixed (byte* nonceBytes = nonce)
-            fixed (byte* ciphertextBytes = ciphertext)
-            fixed (byte* tagBytes = tag)
-            fixed (byte* associatedDataBytes = associatedData)
+            bool clearPlaintextOnFailure
+        ) {
+            fixed (byte* plaintextBytes = plaintext)fixed (byte* nonceBytes = nonce)fixed (
+                byte* ciphertextBytes = ciphertext
+            )fixed (byte* tagBytes = tag)fixed (byte* associatedDataBytes = associatedData)
             {
-                BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authInfo = BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Create();
+                BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authInfo =
+                    BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Create();
                 authInfo.pbNonce = nonceBytes;
                 authInfo.cbNonce = nonce.Length;
                 authInfo.pbTag = tagBytes;
@@ -88,7 +87,8 @@ namespace System.Security.Cryptography
                     plaintextBytes,
                     plaintext.Length,
                     out int plaintextBytesWritten,
-                    0);
+                    0
+                );
 
                 Debug.Assert(ciphertext.Length == plaintextBytesWritten);
 

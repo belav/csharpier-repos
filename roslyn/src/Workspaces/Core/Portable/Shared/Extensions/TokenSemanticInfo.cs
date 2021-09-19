@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal struct TokenSemanticInfo
     {
-        public static readonly TokenSemanticInfo Empty = new(
-            null, null, ImmutableArray<ISymbol>.Empty, null, null, default);
+        public static readonly TokenSemanticInfo Empty =
+            new(null, null, ImmutableArray<ISymbol>.Empty, null, null, default);
 
         public readonly ISymbol DeclaredSymbol;
         public readonly IAliasSymbol AliasSymbol;
@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<ISymbol> referencedSymbols,
             ITypeSymbol type,
             ITypeSymbol convertedType,
-            TextSpan span)
-        {
+            TextSpan span
+        ) {
             DeclaredSymbol = declaredSymbol;
             AliasSymbol = aliasSymbol;
             ReferencedSymbols = referencedSymbols;
@@ -54,7 +54,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return result.ToImmutableAndFree();
         }
 
-        public ISymbol GetAnySymbol(bool includeType)
-            => GetSymbols(includeType).FirstOrDefault();
+        public ISymbol GetAnySymbol(bool includeType) => GetSymbols(includeType).FirstOrDefault();
     }
 }

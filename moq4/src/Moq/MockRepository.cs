@@ -3,7 +3,7 @@
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	/// Utility repository class to use to construct multiple 
 	/// mocks when consistent verification is 
 	/// desired for all of them.
@@ -89,19 +89,16 @@ namespace Moq
 	/// </example>
 	/// <seealso cref="MockBehavior"/>
 #pragma warning disable 618
-	public partial class MockRepository : MockFactory
-	{
-		/// <summary>
+    public partial class MockRepository : MockFactory
+    {
+        /// <summary>
 		/// Initializes the repository with the given <paramref name="defaultBehavior"/> 
 		/// for newly created mocks from the repository.
 		/// </summary>
 		/// <param name="defaultBehavior">The behavior to use for mocks created 
 		/// using the <see cref="MockFactory.Create{T}()"/> repository method if not overridden
 		/// by using the <see cref="MockFactory.Create{T}(MockBehavior)"/> overload.</param>
-		public MockRepository(MockBehavior defaultBehavior)
-			: base(defaultBehavior)
-		{
-		}
+        public MockRepository(MockBehavior defaultBehavior) : base(defaultBehavior) { }
 #pragma warning restore 618
-	}
+    }
 }

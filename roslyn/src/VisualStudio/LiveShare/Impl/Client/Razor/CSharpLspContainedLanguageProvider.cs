@@ -24,21 +24,29 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Razor
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpLspContainedLanguageProvider(IContentTypeRegistryService contentTypeRegistry,
+        public CSharpLspContainedLanguageProvider(
+            IContentTypeRegistryService contentTypeRegistry,
             SVsServiceProvider serviceProvider,
-            CSharpLspRazorProjectFactory razorProjectFactory)
-        {
-            _contentTypeRegistry = contentTypeRegistry ?? throw new ArgumentNullException(nameof(contentTypeRegistry));
-            _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-            _razorProjectFactory = razorProjectFactory ?? throw new ArgumentNullException(nameof(razorProjectFactory));
+            CSharpLspRazorProjectFactory razorProjectFactory
+        ) {
+            _contentTypeRegistry =
+                contentTypeRegistry ?? throw new ArgumentNullException(nameof(contentTypeRegistry));
+            _serviceProvider =
+                serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            _razorProjectFactory =
+                razorProjectFactory ?? throw new ArgumentNullException(nameof(razorProjectFactory));
         }
 
-        public IContentType GetContentType(string filePath)
-            => _contentTypeRegistry.GetContentType(ContentTypeNames.CSharpContentType);
+        public IContentType GetContentType(string filePath) =>
+            _contentTypeRegistry.GetContentType(ContentTypeNames.CSharpContentType);
 
-        public IVsContainedLanguage GetLanguage(string filePath, IVsTextBufferCoordinator bufferCoordinator)
-        {
-            var componentModel = (IComponentModel)_serviceProvider.GetService(typeof(SComponentModel));
+        public IVsContainedLanguage GetLanguage(
+            string filePath,
+            IVsTextBufferCoordinator bufferCoordinator
+        ) {
+            var componentModel = (IComponentModel)_serviceProvider.GetService(
+                typeof(SComponentModel)
+            );
             var projectId = _razorProjectFactory.GetProject(filePath);
 
             return new ContainedLanguage(
@@ -48,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Razor
                 projectId,
                 project: null,
                 filePath,
-                Guids.CSharpLanguageServiceId);
+                Guids.CSharpLanguageServiceId
+            );
         }
     }
 }

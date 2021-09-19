@@ -13,7 +13,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal sealed class DocumentationCommentIncludeCache : CachingFactory<string, KeyValuePair<string, XDocument>>
+    internal sealed class DocumentationCommentIncludeCache
+        : CachingFactory<string, KeyValuePair<string, XDocument>>
     {
         // TODO: tune
         private const int Size = 5;
@@ -24,10 +25,7 @@ namespace Microsoft.CodeAnalysis
         internal static int CacheMissCount { get; private set; }
 
         public DocumentationCommentIncludeCache(XmlReferenceResolver resolver)
-            : base(Size,
-                   key => MakeValue(resolver, key),
-                   KeyHashCode,
-                   KeyValueEquality)
+            : base(Size, key => MakeValue(resolver, key), KeyHashCode, KeyValueEquality)
         {
             CacheMissCount = 0;
         }
@@ -46,15 +44,20 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="IOException"></exception>
         /// <exception cref="XmlException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
-        private static KeyValuePair<string, XDocument> MakeValue(XmlReferenceResolver resolver, string resolvedPath)
-        {
+        private static KeyValuePair<string, XDocument> MakeValue(
+            XmlReferenceResolver resolver,
+            string resolvedPath
+        ) {
             CacheMissCount++;
 
             using (Stream stream = resolver.OpenReadChecked(resolvedPath))
             {
                 using (XmlReader reader = XmlReader.Create(stream, s_xmlSettings))
                 {
-                    var document = XDocument.Load(reader, LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo);
+                    var document = XDocument.Load(
+                        reader,
+                        LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo
+                    );
                     return KeyValuePairUtil.Create(resolvedPath, document);
                 }
             }
@@ -65,8 +68,10 @@ namespace Microsoft.CodeAnalysis
             return resolvedPath.GetHashCode();
         }
 
-        private static bool KeyValueEquality(string resolvedPath, KeyValuePair<string, XDocument> pathAndDocument)
-        {
+        private static bool KeyValueEquality(
+            string resolvedPath,
+            KeyValuePair<string, XDocument> pathAndDocument
+        ) {
             return resolvedPath == pathAndDocument.Key;
         }
     }

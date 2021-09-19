@@ -23,8 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     Creates a new instance of the builder.
         /// </summary>
         /// <param name="dependencies"> Dependencies needed for SQL generations. </param>
-        public MigrationCommandListBuilder(
-            MigrationsSqlGeneratorDependencies dependencies)
+        public MigrationCommandListBuilder(MigrationsSqlGeneratorDependencies dependencies)
         {
             Check.NotNull(dependencies, nameof(dependencies));
 
@@ -36,8 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     Gets the list of built commands.
         /// </summary>
         /// <returns> The <see cref="MigrationCommand" />s that have been built. </returns>
-        public virtual IReadOnlyList<MigrationCommand> GetCommandList()
-            => _commands;
+        public virtual IReadOnlyList<MigrationCommand> GetCommandList() => _commands;
 
         /// <summary>
         ///     Ends the building of the current command and adds it to the list of built commands.
@@ -56,7 +54,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         _commandBuilder.Build(),
                         _dependencies.CurrentContext.Context,
                         _dependencies.Logger,
-                        suppressTransaction));
+                        suppressTransaction
+                    )
+                );
 
                 _commandBuilder = _dependencies.CommandBuilderFactory.Create();
             }
@@ -124,8 +124,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     block is disposed will be indented one level more than the current level.
         /// </summary>
         /// <returns> The object to dispose to indicate that the indentation should go back up a level. </returns>
-        public virtual IDisposable Indent()
-            => _commandBuilder.Indent();
+        public virtual IDisposable Indent() => _commandBuilder.Indent();
 
         /// <summary>
         ///     Increases the current indentation by one level.

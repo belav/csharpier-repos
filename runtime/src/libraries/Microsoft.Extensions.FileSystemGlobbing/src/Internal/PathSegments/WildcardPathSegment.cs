@@ -11,19 +11,30 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
         // It doesn't matter which StringComparison type is used in this MatchAll segment because
         // all comparing are skipped since there is no content in the segment.
         public static readonly WildcardPathSegment MatchAll = new WildcardPathSegment(
-            string.Empty, new List<string>(), string.Empty, StringComparison.OrdinalIgnoreCase);
+            string.Empty,
+            new List<string>(),
+            string.Empty,
+            StringComparison.OrdinalIgnoreCase
+        );
 
         private readonly StringComparison _comparisonType;
 
-        public WildcardPathSegment(string beginsWith, List<string> contains, string endsWith, StringComparison comparisonType)
-        {
+        public WildcardPathSegment(
+            string beginsWith,
+            List<string> contains,
+            string endsWith,
+            StringComparison comparisonType
+        ) {
             BeginsWith = beginsWith;
             Contains = contains;
             EndsWith = endsWith;
             _comparisonType = comparisonType;
         }
 
-        public bool CanProduceStem { get { return true; } }
+        public bool CanProduceStem
+        {
+            get { return true; }
+        }
 
         public string BeginsWith { get; }
 
@@ -59,7 +70,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
                     value: containsValue,
                     startIndex: beginRemaining,
                     count: endRemaining - beginRemaining,
-                    comparisonType: _comparisonType);
+                    comparisonType: _comparisonType
+                );
                 if (indexOf == -1)
                 {
                     return false;

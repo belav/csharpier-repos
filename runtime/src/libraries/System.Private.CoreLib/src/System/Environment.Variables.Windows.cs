@@ -15,8 +15,15 @@ namespace System
             var builder = new ValueStringBuilder(stackalloc char[128]);
 
             uint length;
-            while ((length = Interop.Kernel32.GetEnvironmentVariable(variable, ref builder.GetPinnableReference(), (uint)builder.Capacity)) > builder.Capacity)
-            {
+            while (
+                (
+                    length = Interop.Kernel32.GetEnvironmentVariable(
+                        variable,
+                        ref builder.GetPinnableReference(),
+                        (uint)builder.Capacity
+                    )
+                ) > builder.Capacity
+            ) {
                 builder.EnsureCapacity((int)length);
             }
 
@@ -84,7 +91,8 @@ namespace System
                 char* currentPtr = stringPtr;
                 while (true)
                 {
-                    ReadOnlySpan<char> variable = MemoryMarshal.CreateReadOnlySpanFromNullTerminated(currentPtr);
+                    ReadOnlySpan<char> variable =
+                        MemoryMarshal.CreateReadOnlySpanFromNullTerminated(currentPtr);
                     if (variable.IsEmpty)
                     {
                         break;
@@ -114,6 +122,7 @@ namespace System
 
                 return results;
             }
+
             finally
             {
                 Interop.BOOL success = Interop.Kernel32.FreeEnvironmentStringsW(stringPtr);

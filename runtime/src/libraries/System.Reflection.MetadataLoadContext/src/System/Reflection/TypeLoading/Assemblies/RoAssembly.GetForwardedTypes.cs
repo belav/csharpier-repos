@@ -17,8 +17,11 @@ namespace System.Reflection.TypeLoading
             List<Exception>? exceptions = null;
 
             IterateTypeForwards(
-                delegate (RoAssembly redirectedAssembly, ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name)
-                {
+                delegate(
+                    RoAssembly redirectedAssembly,
+                    ReadOnlySpan<byte> ns,
+                    ReadOnlySpan<byte> name
+                ) {
                     Type? type = null;
                     Exception? exception = null;
                     if (redirectedAssembly is RoExceptionAssembly exceptionAssembly)
@@ -28,7 +31,12 @@ namespace System.Reflection.TypeLoading
                     else
                     {
                         // GetTypeCore() will follow any further type-forwards if needed.
-                        type = redirectedAssembly.GetTypeCore(ns, name, ignoreCase: false, out Exception? e);
+                        type = redirectedAssembly.GetTypeCore(
+                            ns,
+                            name,
+                            ignoreCase: false,
+                            out Exception? e
+                        );
                         if (type == null)
                         {
                             exception = e;
@@ -77,7 +85,11 @@ namespace System.Reflection.TypeLoading
         /// <summary>
         /// Intentionally excludes forwards to nested types.
         /// </summary>
-        protected delegate void TypeForwardHandler(RoAssembly redirectedAssembly, ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name);
+        protected delegate void TypeForwardHandler(
+            RoAssembly redirectedAssembly,
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name
+        );
         protected abstract void IterateTypeForwards(TypeForwardHandler handler);
     }
 }

@@ -30,12 +30,11 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             ByteUtils.RepeatByte(0xcd, 50),
             ByteUtils.AsciiBytes("Test With Truncation"),
             ByteUtils.AsciiBytes("Test Using Larger Than Block-Size Key - Hash Key First"),
-            ByteUtils.AsciiBytes("This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."),
+            ByteUtils.AsciiBytes(
+                "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
+            ),
         };
 
-        protected Rfc4231HmacTests() :
-            base(s_testKeys4231, s_testData4231)
-        {
-        }
+        protected Rfc4231HmacTests() : base(s_testKeys4231, s_testData4231) { }
     }
 }

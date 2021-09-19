@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Host
         private readonly SimpleMRUCache? _implicitCache;
         private readonly ImplicitCacheMonitor? _implicitCacheMonitor;
 
-        public ProjectCacheService(Workspace workspace)
-            => _workspace = workspace;
+        public ProjectCacheService(Workspace workspace) => _workspace = workspace;
 
         public ProjectCacheService(Workspace workspace, int implicitCacheTimeout)
         {
@@ -85,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Host
         }
 
         [return: NotNullIfNotNull("instance")]
-        public T? CacheObjectIfCachingEnabledForKey<T>(ProjectId key, object owner, T? instance) where T : class
+        public T? CacheObjectIfCachingEnabledForKey<T>(ProjectId key, object owner, T? instance)
+            where T : class
         {
             lock (_gate)
             {
@@ -117,7 +117,10 @@ namespace Microsoft.CodeAnalysis.Host
             foreach (var projectId in _activeCaches.Keys)
             {
                 // this should be cheap. graph is cached every time project reference is updated.
-                var p2pReferences = (ImmutableHashSet<ProjectId>)graph.GetProjectsThatThisProjectTransitivelyDependsOn(projectId);
+                var p2pReferences =
+                    (ImmutableHashSet<ProjectId>)graph.GetProjectsThatThisProjectTransitivelyDependsOn(
+                        projectId
+                    );
                 if (p2pReferences.Contains(key))
                 {
                     return true;
@@ -128,7 +131,11 @@ namespace Microsoft.CodeAnalysis.Host
         }
 
         [return: NotNullIfNotNull("instance")]
-        public T? CacheObjectIfCachingEnabledForKey<T>(ProjectId key, ICachedObjectOwner owner, T? instance) where T : class
+        public T? CacheObjectIfCachingEnabledForKey<T>(
+            ProjectId key,
+            ICachedObjectOwner owner,
+            T? instance
+        ) where T : class
         {
             lock (_gate)
             {
@@ -169,8 +176,7 @@ namespace Microsoft.CodeAnalysis.Host
                 _key = key;
             }
 
-            public void Dispose()
-                => _cacheService.DisableCaching(_key, this);
+            public void Dispose() => _cacheService.DisableCaching(_key, this);
 
             internal void CreateStrongReference(object key, object? instance)
             {
@@ -185,8 +191,8 @@ namespace Microsoft.CodeAnalysis.Host
                 }
             }
 
-            internal void CreateOwnerEntry(ICachedObjectOwner owner)
-                => _ownerObjects.Add(new WeakReference<ICachedObjectOwner>(owner));
+            internal void CreateOwnerEntry(ICachedObjectOwner owner) =>
+                _ownerObjects.Add(new WeakReference<ICachedObjectOwner>(owner));
 
             internal void FreeOwnerEntries()
             {

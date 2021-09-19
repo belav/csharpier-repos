@@ -50,16 +50,19 @@ namespace Company.WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
 #if (IndividualLocalAuth)
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(
+                options =>
 #if (UseLocalDB)
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 #else
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+            );
 #endif
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(
+                    options => options.SignIn.RequireConfirmedAccount = true
+                )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
@@ -97,17 +100,16 @@ namespace Company.WebApplication1
 #endif
 #if (OrganizationalAuth)
 
-            services.AddAuthorization(options =>
-            {
-                // By default, all incoming requests will be authorized according to the default policy
-                options.FallbackPolicy = options.DefaultPolicy;
-            });
-            services.AddRazorPages()
-                .AddMvcOptions(options => {})
-                .AddMicrosoftIdentityUI();
+            services.AddAuthorization(
+                options =>
+                {
+                    // By default, all incoming requests will be authorized according to the default policy
+                    options.FallbackPolicy = options.DefaultPolicy;
+                }
+            );
+            services.AddRazorPages().AddMvcOptions(options => { }).AddMicrosoftIdentityUI();
 #elif (IndividualB2CAuth)
-            services.AddRazorPages()
-                .AddMicrosoftIdentityUI();
+            services.AddRazorPages().AddMicrosoftIdentityUI();
 #else
             services.AddRazorPages();
 #endif
@@ -145,13 +147,15 @@ namespace Company.WebApplication1
 #endif
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapRazorPages();
 #if (IndividualB2CAuth || OrganizationalAuth)
-                endpoints.MapControllers();
+                    endpoints.MapControllers();
 #endif
-            });
+                }
+            );
         }
     }
 }

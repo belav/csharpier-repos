@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
 
         public bool Succeeded { get; set; } = true;
 
@@ -67,22 +68,32 @@ namespace JIT.HardwareIntrinsics.General
             Double upperValue = TestLibrary.Generator.GetDouble();
             Vector64<Double> upper = Vector64.Create(upperValue);
 
-            object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.Create), new Type[] { typeof(Vector64<Double>), typeof(Vector64<Double>) })
-                                .Invoke(null, new object[] { lower, upper });
+            object result = typeof(Vector128).GetMethod(
+                    nameof(Vector128.Create),
+                    new Type[] { typeof(Vector64<Double>), typeof(Vector64<Double>) }
+                )
+                .Invoke(null, new object[] { lower, upper });
 
             ValidateResult((Vector128<Double>)(result), lowerValue, upperValue);
         }
 
-        private void ValidateResult(Vector128<Double> result, Double expectedLowerValue, Double expectedUpperValue, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<Double> result,
+            Double expectedLowerValue,
+            Double expectedUpperValue,
+            [CallerMemberName] string method = ""
+        ) {
             Double[] resultElements = new Double[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Double, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedLowerValue, expectedUpperValue, method);
         }
 
-        private void ValidateResult(Double[] resultElements, Double expectedLowerValue, Double expectedUpperValue, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Double[] resultElements,
+            Double expectedLowerValue,
+            Double expectedUpperValue,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount / 2; i++)
@@ -105,10 +116,14 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.Create(Double): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.Create(Double): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   lower: {expectedLowerValue}");
                 TestLibrary.TestFramework.LogInformation($"   upper: {expectedUpperValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

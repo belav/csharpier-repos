@@ -64,12 +64,14 @@ namespace System.SpanTests
                 Span<TInt> firstSpan = new Span<TInt>(first);
                 ReadOnlySpan<TInt> secondSpan = new ReadOnlySpan<TInt>(second);
 
-                Assert.True(mode switch
-                {
-                    0 => firstSpan.SequenceEqual(secondSpan),
-                    1 => firstSpan.SequenceEqual(secondSpan, null),
-                    _ => firstSpan.SequenceEqual(secondSpan, EqualityComparer<TInt>.Default)
-                });
+                Assert.True(
+                    mode switch
+                    {
+                        0 => firstSpan.SequenceEqual(secondSpan),
+                        1 => firstSpan.SequenceEqual(secondSpan, null),
+                        _ => firstSpan.SequenceEqual(secondSpan, EqualityComparer<TInt>.Default)
+                    }
+                );
 
                 // Make sure each element of the array was compared once. (Strictly speaking, it would not be illegal for
                 // SequenceEqual to compare an element more than once but that would be a non-optimal implementation and
@@ -78,7 +80,10 @@ namespace System.SpanTests
                 foreach (TInt elem in first)
                 {
                     int numCompares = log.CountCompares(elem.Value, elem.Value);
-                    Assert.True(numCompares == 1, $"Expected {numCompares} == 1 for element {elem.Value}.");
+                    Assert.True(
+                        numCompares == 1,
+                        $"Expected {numCompares} == 1 for element {elem.Value}."
+                    );
                 }
             }
         }
@@ -107,14 +112,19 @@ namespace System.SpanTests
                     Span<TInt> firstSpan = new Span<TInt>(first);
                     ReadOnlySpan<TInt> secondSpan = new ReadOnlySpan<TInt>(second);
 
-                    Assert.False(mode switch
-                    {
-                        0 => firstSpan.SequenceEqual(secondSpan),
-                        1 => firstSpan.SequenceEqual(secondSpan, null),
-                        _ => firstSpan.SequenceEqual(secondSpan, EqualityComparer<TInt>.Default)
-                    });
+                    Assert.False(
+                        mode switch
+                        {
+                            0 => firstSpan.SequenceEqual(secondSpan),
+                            1 => firstSpan.SequenceEqual(secondSpan, null),
+                            _ => firstSpan.SequenceEqual(secondSpan, EqualityComparer<TInt>.Default)
+                        }
+                    );
 
-                    Assert.Equal(1, log.CountCompares(first[mismatchIndex].Value, second[mismatchIndex].Value));
+                    Assert.Equal(
+                        1,
+                        log.CountCompares(first[mismatchIndex].Value, second[mismatchIndex].Value)
+                    );
                 }
             }
         }
@@ -125,12 +135,11 @@ namespace System.SpanTests
             const int GuardValue = 77777;
             const int GuardLength = 50;
 
-            Action<int, int> checkForOutOfRangeAccess =
-                delegate (int x, int y)
-                {
-                    if (x == GuardValue || y == GuardValue)
-                        throw new Exception("Detected out of range access in IndexOf()");
-                };
+            Action<int, int> checkForOutOfRangeAccess = delegate(int x, int y)
+            {
+                if (x == GuardValue || y == GuardValue)
+                    throw new Exception("Detected out of range access in IndexOf()");
+            };
 
             for (int length = 0; length < 100; length++)
             {
@@ -143,7 +152,10 @@ namespace System.SpanTests
 
                 for (int i = 0; i < length; i++)
                 {
-                    first[GuardLength + i] = second[GuardLength + i] = new TInt(10 * (i + 1), checkForOutOfRangeAccess);
+                    first[GuardLength + i] = second[GuardLength + i] = new TInt(
+                        10 * (i + 1),
+                        checkForOutOfRangeAccess
+                    );
                 }
 
                 Span<TInt> firstSpan = new Span<TInt>(first, GuardLength, length);
@@ -157,18 +169,33 @@ namespace System.SpanTests
 
         [Theory]
         [MemberData(nameof(TestHelpers.SequenceEqualsNullData), MemberType = typeof(TestHelpers))]
-        public static void SequenceEqualsNullData_String(string[] firstInput, string[] secondInput, bool expected)
-        {
+        public static void SequenceEqualsNullData_String(
+            string[] firstInput,
+            string[] secondInput,
+            bool expected
+        ) {
             Span<string> theStrings = firstInput;
 
             Assert.Equal(expected, theStrings.SequenceEqual(secondInput));
             Assert.Equal(expected, theStrings.SequenceEqual((ReadOnlySpan<string>)secondInput));
 
             Assert.Equal(expected, theStrings.SequenceEqual(secondInput, null));
-            Assert.Equal(expected, theStrings.SequenceEqual((ReadOnlySpan<string>)secondInput, null));
+            Assert.Equal(
+                expected,
+                theStrings.SequenceEqual((ReadOnlySpan<string>)secondInput, null)
+            );
 
-            Assert.Equal(expected, theStrings.SequenceEqual(secondInput, EqualityComparer<string>.Default));
-            Assert.Equal(expected, theStrings.SequenceEqual((ReadOnlySpan<string>)secondInput, EqualityComparer<string>.Default));
+            Assert.Equal(
+                expected,
+                theStrings.SequenceEqual(secondInput, EqualityComparer<string>.Default)
+            );
+            Assert.Equal(
+                expected,
+                theStrings.SequenceEqual(
+                    (ReadOnlySpan<string>)secondInput,
+                    EqualityComparer<string>.Default
+                )
+            );
         }
     }
 }

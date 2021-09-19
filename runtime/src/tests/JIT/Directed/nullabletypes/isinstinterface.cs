@@ -11,7 +11,10 @@ internal class Program
 {
     private static void Eval(int testCase, bool b1, bool b2)
     {
-        if (b1 != b2) throw new Exception(string.Format("case {0:000} failed: v1 {1} v2 {2}", testCase, b1, b2));
+        if (b1 != b2)
+            throw new Exception(
+                string.Format("case {0:000} failed: v1 {1} v2 {2}", testCase, b1, b2)
+            );
     }
 
     private static void TestCase0001()
@@ -400,7 +403,7 @@ internal class Program
             Eval(0371, o is SealedClass, false);
             Eval(0372, o is SealedClass[], false);
         }
-    }  // end of test case 0001
+    } // end of test case 0001
     private static void TestCase0002()
     {
         {
@@ -787,11 +790,13 @@ internal class Program
             Eval(0743, o is SealedClass, false);
             Eval(0744, o is SealedClass[], false);
         }
-    }  // end of test case 0002
+    } // end of test case 0002
     private static void TestCase0003()
     {
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>> v = default(ImplementOneInterfaceGen<EmptyStructGen<int>>);
+            ImplementOneInterfaceGen<EmptyStructGen<int>> v = default(ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >);
             IEmptyGen<EmptyStructGen<int>> o = v;
             Eval(0745, o is ImplementOneInterface, false);
             Eval(0746, o is ImplementOneInterface[], false);
@@ -919,7 +924,9 @@ internal class Program
             Eval(0868, o is SealedClass[], false);
         }
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<EmptyStructGen<int>>);
+            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >);
             IEmptyGen<EmptyStructGen<int>> o = v;
             Eval(0869, o is ImplementOneInterface, false);
             Eval(0870, o is ImplementOneInterface[], false);
@@ -1047,7 +1054,9 @@ internal class Program
             Eval(0992, o is SealedClass[], false);
         }
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<EmptyStructGen<int>>?);
+            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >?);
             IEmptyGen<EmptyStructGen<int>> o = v;
             Eval(0993, o is ImplementOneInterface, false);
             Eval(0994, o is ImplementOneInterface[], false);
@@ -1174,7 +1183,7 @@ internal class Program
             Eval(1115, o is SealedClass, false);
             Eval(1116, o is SealedClass[], false);
         }
-    }  // end of test case 0003
+    } // end of test case 0003
     private static void TestCase0004()
     {
         {
@@ -1561,7 +1570,7 @@ internal class Program
             Eval(1487, o is SealedClass, false);
             Eval(1488, o is SealedClass[], false);
         }
-    }  // end of test case 0004
+    } // end of test case 0004
     private static void TestCase0005()
     {
         {
@@ -1948,7 +1957,7 @@ internal class Program
             Eval(1859, o is SealedClass, false);
             Eval(1860, o is SealedClass[], false);
         }
-    }  // end of test case 0005
+    } // end of test case 0005
     private static void TestCase0006()
     {
         {
@@ -2335,7 +2344,7 @@ internal class Program
             Eval(2231, o is SealedClass, false);
             Eval(2232, o is SealedClass[], false);
         }
-    }  // end of test case 0006
+    } // end of test case 0006
     private static void TestCase0007()
     {
         {
@@ -2722,7 +2731,7 @@ internal class Program
             Eval(2603, o is SealedClass, false);
             Eval(2604, o is SealedClass[], false);
         }
-    }  // end of test case 0007
+    } // end of test case 0007
     private static void TestCase0008()
     {
         {
@@ -3109,7 +3118,7 @@ internal class Program
             Eval(2975, o is SealedClass, false);
             Eval(2976, o is SealedClass[], false);
         }
-    }  // end of test case 0008
+    } // end of test case 0008
     private static void TestCase0009()
     {
         {
@@ -3496,7 +3505,7 @@ internal class Program
             Eval(3347, o is SealedClass, false);
             Eval(3348, o is SealedClass[], false);
         }
-    }  // end of test case 0009
+    } // end of test case 0009
     private static void TestCase0010()
     {
         {
@@ -3883,7 +3892,7 @@ internal class Program
             Eval(3719, o is SealedClass, false);
             Eval(3720, o is SealedClass[], false);
         }
-    }  // end of test case 0010
+    } // end of test case 0010
     private static void TestCase0011()
     {
         {
@@ -4270,7 +4279,7 @@ internal class Program
             Eval(4091, o is SealedClass, false);
             Eval(4092, o is SealedClass[], false);
         }
-    }  // end of test case 0011
+    } // end of test case 0011
     private static void TestCase0012()
     {
         {
@@ -4657,7 +4666,7 @@ internal class Program
             Eval(4463, o is SealedClass, false);
             Eval(4464, o is SealedClass[], false);
         }
-    }  // end of test case 0012
+    } // end of test case 0012
     private static void TestCase0013()
     {
         {
@@ -5044,7 +5053,7 @@ internal class Program
             Eval(4835, o is SealedClass, false);
             Eval(4836, o is SealedClass[], false);
         }
-    }  // end of test case 0013
+    } // end of test case 0013
     private static void TestCase0014()
     {
         {
@@ -5431,7 +5440,7 @@ internal class Program
             Eval(5207, o is SealedClass, false);
             Eval(5208, o is SealedClass[], false);
         }
-    }  // end of test case 0014
+    } // end of test case 0014
     private static void TestCase0015()
     {
         {
@@ -5818,7 +5827,7 @@ internal class Program
             Eval(5579, o is SealedClass, false);
             Eval(5580, o is SealedClass[], false);
         }
-    }  // end of test case 0015
+    } // end of test case 0015
     private static void TestCase0016()
     {
         {
@@ -6205,7 +6214,7 @@ internal class Program
             Eval(5951, o is SealedClass, false);
             Eval(5952, o is SealedClass[], false);
         }
-    }  // end of test case 0016
+    } // end of test case 0016
     private static void TestCase0017()
     {
         {
@@ -6592,7 +6601,7 @@ internal class Program
             Eval(6323, o is SealedClass, false);
             Eval(6324, o is SealedClass[], false);
         }
-    }  // end of test case 0017
+    } // end of test case 0017
     private static void TestCase0018()
     {
         {
@@ -6979,7 +6988,7 @@ internal class Program
             Eval(6695, o is SealedClass, false);
             Eval(6696, o is SealedClass[], false);
         }
-    }  // end of test case 0018
+    } // end of test case 0018
 
     private static int Main()
     {

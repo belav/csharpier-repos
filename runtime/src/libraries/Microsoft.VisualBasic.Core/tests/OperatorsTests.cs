@@ -113,7 +113,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (ulong)12, "2", (double)14 };
             yield return new object[] { (ulong)13, true, (decimal)12 };
             yield return new object[] { (ulong)14, null, (ulong)14 };
-            yield return new object[] { (ulong)15, ulong.MaxValue, decimal.Parse("18446744073709551630", CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                (ulong)15,
+                ulong.MaxValue,
+                decimal.Parse("18446744073709551630", CultureInfo.InvariantCulture)
+            };
 
             // long + primitives.
             yield return new object[] { (long)8, (long)2, (long)10 };
@@ -123,7 +128,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (long)12, "2", (double)14 };
             yield return new object[] { (long)13, true, (long)12 };
             yield return new object[] { (long)14, null, (long)14 };
-            yield return new object[] { (long)15, long.MaxValue, decimal.Parse("9223372036854775822", CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                (long)15,
+                long.MaxValue,
+                decimal.Parse("9223372036854775822", CultureInfo.InvariantCulture)
+            };
 
             // float + primitives
             yield return new object[] { (float)9, (float)2, (float)11 };
@@ -142,8 +152,18 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (double)12, "2", (double)14 };
             yield return new object[] { (double)13, true, (double)12 };
             yield return new object[] { (double)14, null, (double)14 };
-            yield return new object[] { (double)15, double.PositiveInfinity, double.PositiveInfinity };
-            yield return new object[] { (double)15, double.NegativeInfinity, double.NegativeInfinity };
+            yield return new object[]
+            {
+                (double)15,
+                double.PositiveInfinity,
+                double.PositiveInfinity
+            };
+            yield return new object[]
+            {
+                (double)15,
+                double.NegativeInfinity,
+                double.NegativeInfinity
+            };
             yield return new object[] { (double)15, double.NaN, double.NaN };
 
             // decimal + primitives
@@ -188,8 +208,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(AddObject_Idempotent_TestData))]
-        public void AddObject_Convertible_ReturnsExpected(object left, object right, object expected)
-        {
+        public void AddObject_Convertible_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        ) {
             Assert.Equal(expected, Operators.AddObject(left, right));
 
             if (expected is string expectedString)
@@ -206,7 +229,9 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [Fact]
         public void AddObject_DateString_ReturnsExpected()
         {
-            string expected = Assert.IsType<string>(Operators.AddObject("String", new DateTime(2017, 10, 10)));
+            string expected = Assert.IsType<string>(
+                Operators.AddObject("String", new DateTime(2017, 10, 10))
+            );
             Assert.StartsWith("String", expected);
             Assert.Contains("17", expected);
         }
@@ -214,7 +239,9 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [Fact]
         public void AddObject_DateDate_ReturnsExpected()
         {
-            string expected = Assert.IsType<string>(Operators.AddObject(new DateTime(2018, 10, 10), new DateTime(2017, 10, 10)));
+            string expected = Assert.IsType<string>(
+                Operators.AddObject(new DateTime(2018, 10, 10), new DateTime(2017, 10, 10))
+            );
             Assert.Contains("17", expected);
             Assert.Contains("18", expected);
         }
@@ -222,21 +249,27 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [Fact]
         public void AddObject_DateNull_ReturnsExpected()
         {
-            string expected = Assert.IsType<string>(Operators.AddObject(new DateTime(2018, 10, 10), null));
+            string expected = Assert.IsType<string>(
+                Operators.AddObject(new DateTime(2018, 10, 10), null)
+            );
             Assert.Contains("18", expected);
         }
 
         [Fact]
         public void AddObject_NullDate_ReturnsExpected()
         {
-            string expected = Assert.IsType<string>(Operators.AddObject(null, new DateTime(2018, 10, 10)));
+            string expected = Assert.IsType<string>(
+                Operators.AddObject(null, new DateTime(2018, 10, 10))
+            );
             Assert.Contains("18", expected);
         }
 
         [Fact]
         public void AddObject_StringDate_ReturnsExpected()
         {
-            string expected = Assert.IsType<string>(Operators.AddObject(new DateTime(2017, 10, 10), "String"));
+            string expected = Assert.IsType<string>(
+                Operators.AddObject(new DateTime(2017, 10, 10), "String")
+            );
             Assert.EndsWith("String", expected);
             Assert.Contains("17", expected);
         }
@@ -288,8 +321,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(AddObject_MismatchingObjects_TestData))]
-        public void AddObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void AddObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.AddObject(left, right));
         }
 
@@ -863,8 +898,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(AndObject_MismatchingObjects_TestData))]
-        public void AndObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void AndObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.AndObject(left, right));
         }
 
@@ -1170,14 +1207,27 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             // object.
             yield return new object[] { new ConcatenateObject(), 2, "custom" };
             yield return new object[] { 2, new ConcatenateObject(), "motsuc" };
-            yield return new object[] { new ConcatenateObject(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new ConcatenateObject(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new ConcatenateObject(),
+                new OperatorsTests(),
+                "customobject"
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new ConcatenateObject(),
+                "tcejbomotsuc"
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConcatenateObject_TestData))]
-        public void ConcatenateObject_Invoke_ReturnsExpected(object left, object right, object expected)
-        {
+        public void ConcatenateObject_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        ) {
             Assert.Equal(expected, Operators.ConcatenateObject(left, right));
         }
 
@@ -1191,8 +1241,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(ConcatenateObject_InvalidObjects_TestData))]
-        public void ConcatenateObject_InvalidObjects_ThrowsInvalidCastException(object left, object right)
-        {
+        public void ConcatenateObject_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        ) {
             Assert.Throws<InvalidCastException>(() => Operators.ConcatenateObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.ConcatenateObject(right, left));
         }
@@ -1207,8 +1259,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(ConcatenateObject_MismatchingObjects_TestData))]
-        public void ConcatenateObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void ConcatenateObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.ConcatenateObject(left, right));
         }
 
@@ -1221,10 +1275,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             public static string op_Concatenate(int left, ConcatenateObject right) => "motsuc";
 
             [SpecialName]
-            public static string op_Concatenate(ConcatenateObject left, OperatorsTests right) => "customobject";
+            public static string op_Concatenate(ConcatenateObject left, OperatorsTests right) =>
+                "customobject";
 
             [SpecialName]
-            public static string op_Concatenate(OperatorsTests left, ConcatenateObject right) => "tcejbomotsuc";
+            public static string op_Concatenate(OperatorsTests left, ConcatenateObject right) =>
+                "tcejbomotsuc";
         }
 
         public static IEnumerable<object[]> DivideObject_TestData()
@@ -1397,8 +1453,18 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (double)58, double.PositiveInfinity, (double)0 };
             yield return new object[] { (double)58, double.NegativeInfinity, (double)(-0.0) };
             yield return new object[] { (double)58, double.NaN, double.NaN };
-            yield return new object[] { double.PositiveInfinity, (double)2, double.PositiveInfinity };
-            yield return new object[] { double.NegativeInfinity, (double)2, double.NegativeInfinity };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                (double)2,
+                double.PositiveInfinity
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                (double)2,
+                double.NegativeInfinity
+            };
             yield return new object[] { double.NaN, (double)2, double.NaN };
 
             // decimal.
@@ -1415,7 +1481,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (decimal)44, (decimal)2, (decimal)22 };
             yield return new object[] { (decimal)48, "2", (double)24 };
             yield return new object[] { (decimal)52, true, (decimal)(-52) };
-            yield return new object[] { decimal.MaxValue, (decimal)0.5, float.Parse("1.58456325028529E+29", NumberStyles.Any, CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                decimal.MaxValue,
+                (decimal)0.5,
+                float.Parse("1.58456325028529E+29", NumberStyles.Any, CultureInfo.InvariantCulture)
+            };
 
             // string + primitives
             yield return new object[] { "4", (byte)2, (double)2 };
@@ -1494,8 +1565,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(DivideObject_InvalidObjects_TestData))]
-        public void DivideObject_InvalidObjects_ThrowsInvalidCastException(object left, object right)
-        {
+        public void DivideObject_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        ) {
             Assert.Throws<InvalidCastException>(() => Operators.DivideObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.DivideObject(right, left));
         }
@@ -1510,8 +1583,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(DivideObject_MismatchingObjects_TestData))]
-        public void DivideObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void DivideObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.DivideObject(left, right));
         }
 
@@ -1520,8 +1595,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             public static string operator /(DivideObject left, int right) => "custom";
             public static string operator /(int left, DivideObject right) => "motsuc";
 
-            public static string operator /(DivideObject left, OperatorsTests right) => "customobject";
-            public static string operator /(OperatorsTests left, DivideObject right) => "tcejbomotsuc";
+            public static string operator /(DivideObject left, OperatorsTests right) =>
+                "customobject";
+            public static string operator /(OperatorsTests left, DivideObject right) =>
+                "tcejbomotsuc";
         }
 
         public static IEnumerable<object[]> ExponentObject_TestData()
@@ -1721,14 +1798,27 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             // object.
             yield return new object[] { new ExponentObject(), 2, "custom" };
             yield return new object[] { 2, new ExponentObject(), "motsuc" };
-            yield return new object[] { new ExponentObject(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new ExponentObject(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new ExponentObject(),
+                new OperatorsTests(),
+                "customobject"
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new ExponentObject(),
+                "tcejbomotsuc"
+            };
         }
 
         [Theory]
         [MemberData(nameof(ExponentObject_TestData))]
-        public void ExponentObject_Invoke_ReturnsExpected(object left, object right, object expected)
-        {
+        public void ExponentObject_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        ) {
             Assert.Equal(expected, Operators.ExponentObject(left, right));
         }
 
@@ -1741,8 +1831,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(ExponentObject_InvalidObjects_TestData))]
-        public void ExponentObject_InvalidObjects_ThrowsInvalidCastException(object left, object right)
-        {
+        public void ExponentObject_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        ) {
             Assert.Throws<InvalidCastException>(() => Operators.ExponentObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.ExponentObject(right, left));
         }
@@ -1757,8 +1849,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(ExponentObject_MismatchingObjects_TestData))]
-        public void ExponentObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void ExponentObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.ExponentObject(left, right));
         }
 
@@ -1771,10 +1865,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             public static string op_Exponent(int left, ExponentObject right) => "motsuc";
 
             [SpecialName]
-            public static string op_Exponent(ExponentObject left, OperatorsTests right) => "customobject";
+            public static string op_Exponent(ExponentObject left, OperatorsTests right) =>
+                "customobject";
 
             [SpecialName]
-            public static string op_Exponent(OperatorsTests left, ExponentObject right) => "tcejbomotsuc";
+            public static string op_Exponent(OperatorsTests left, ExponentObject right) =>
+                "tcejbomotsuc";
         }
 
         public static IEnumerable<object[]> IntDivideObject_TestData()
@@ -1994,14 +2090,27 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             // object.
             yield return new object[] { new IntDivideObject(), 2, "custom" };
             yield return new object[] { 2, new IntDivideObject(), "motsuc" };
-            yield return new object[] { new IntDivideObject(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new IntDivideObject(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new IntDivideObject(),
+                new OperatorsTests(),
+                "customobject"
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new IntDivideObject(),
+                "tcejbomotsuc"
+            };
         }
 
         [Theory]
         [MemberData(nameof(IntDivideObject_TestData))]
-        public void IntDivideObject_Invoke_ReturnsExpected(object left, object right, object expected)
-        {
+        public void IntDivideObject_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        ) {
             Assert.Equal(expected, Operators.IntDivideObject(left, right));
         }
 
@@ -2053,8 +2162,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(IntDivideObject_Overflow_TestData))]
-        public void IntDivideObject_ResultOverflows_ThrowsOverflowException(object left, object right)
-        {
+        public void IntDivideObject_ResultOverflows_ThrowsOverflowException(
+            object left,
+            object right
+        ) {
             Assert.Throws<OverflowException>(() => Operators.IntDivideObject(left, right));
         }
 
@@ -2067,8 +2178,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(IntDivideObject_InvalidObjects_TestData))]
-        public void IntDivideObject_InvalidObjects_ThrowsInvalidCastException(object left, object right)
-        {
+        public void IntDivideObject_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        ) {
             Assert.Throws<InvalidCastException>(() => Operators.IntDivideObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.IntDivideObject(right, left));
         }
@@ -2083,8 +2196,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(IntDivideObject_MismatchingObjects_TestData))]
-        public void IntDivideObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void IntDivideObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.IntDivideObject(left, right));
         }
 
@@ -2097,10 +2212,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             public static string op_IntegerDivision(int left, IntDivideObject right) => "motsuc";
 
             [SpecialName]
-            public static string op_IntegerDivision(IntDivideObject left, OperatorsTests right) => "customobject";
+            public static string op_IntegerDivision(IntDivideObject left, OperatorsTests right) =>
+                "customobject";
 
             [SpecialName]
-            public static string op_IntegerDivision(OperatorsTests left, IntDivideObject right) => "tcejbomotsuc";
+            public static string op_IntegerDivision(OperatorsTests left, IntDivideObject right) =>
+                "tcejbomotsuc";
         }
 
         public static IEnumerable<object[]> LeftShiftObject_TestData()
@@ -2332,14 +2449,27 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             // object.
             yield return new object[] { new LeftShiftObject(), 2, "custom" };
             yield return new object[] { 2, new LeftShiftObject(), "motsuc" };
-            yield return new object[] { new LeftShiftObject(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new LeftShiftObject(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new LeftShiftObject(),
+                new OperatorsTests(),
+                "customobject"
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new LeftShiftObject(),
+                "tcejbomotsuc"
+            };
         }
 
         [Theory]
         [MemberData(nameof(LeftShiftObject_TestData))]
-        public void LeftShiftObject_Invoke_ReturnsExpected(object left, object right, object expected)
-        {
+        public void LeftShiftObject_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        ) {
             Assert.Equal(expected, Operators.LeftShiftObject(left, right));
         }
 
@@ -2352,8 +2482,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(LeftShiftObject_InvalidObjects_TestData))]
-        public void LeftShiftObject_InvalidObjects_ThrowsInvalidCastException(object left, object right)
-        {
+        public void LeftShiftObject_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        ) {
             Assert.Throws<InvalidCastException>(() => Operators.LeftShiftObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.LeftShiftObject(right, left));
         }
@@ -2368,8 +2500,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(LeftShiftObject_MismatchingObjects_TestData))]
-        public void LeftShiftObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void LeftShiftObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.LeftShiftObject(left, right));
         }
 
@@ -2382,10 +2516,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             public static string op_LeftShift(int left, LeftShiftObject right) => "motsuc";
 
             [SpecialName]
-            public static string op_LeftShift(LeftShiftObject left, OperatorsTests right) => "customobject";
+            public static string op_LeftShift(LeftShiftObject left, OperatorsTests right) =>
+                "customobject";
 
             [SpecialName]
-            public static string op_LeftShift(OperatorsTests left, LeftShiftObject right) => "tcejbomotsuc";
+            public static string op_LeftShift(OperatorsTests left, LeftShiftObject right) =>
+                "tcejbomotsuc";
         }
 
         public static IEnumerable<object[]> MultiplyObject_Idempotent_TestData()
@@ -2478,7 +2614,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (uint)13, true, (long)(-13) };
             yield return new object[] { (uint)14, null, (uint)0 };
             yield return new object[] { (uint)15, uint.MaxValue, 64424509425 };
-            yield return new object[] { uint.MaxValue, uint.MaxValue, (decimal)18446744065119617025 };
+            yield return new object[]
+            {
+                uint.MaxValue,
+                uint.MaxValue,
+                (decimal)18446744065119617025
+            };
 
             // int.
             yield return new object[] { 1, (byte)2, 2 };
@@ -2513,8 +2654,22 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (ulong)12, "2", (double)24 };
             yield return new object[] { (ulong)13, true, (decimal)(-13) };
             yield return new object[] { (ulong)14, null, (ulong)0 };
-            yield return new object[] { (ulong)15, ulong.MaxValue, decimal.Parse("276701161105643274225", CultureInfo.InvariantCulture) };
-            yield return new object[] { ulong.MaxValue, ulong.MaxValue, double.Parse("3.4028236692093846E+38", NumberStyles.Any, CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                (ulong)15,
+                ulong.MaxValue,
+                decimal.Parse("276701161105643274225", CultureInfo.InvariantCulture)
+            };
+            yield return new object[]
+            {
+                ulong.MaxValue,
+                ulong.MaxValue,
+                double.Parse(
+                    "3.4028236692093846E+38",
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture
+                )
+            };
 
             // long + primitives.
             yield return new object[] { (long)1, (byte)2, (long)2 };
@@ -2531,8 +2686,22 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (long)12, "2", (double)24 };
             yield return new object[] { (long)13, true, (long)(-13) };
             yield return new object[] { (long)14, null, (long)0 };
-            yield return new object[] { (long)15, long.MaxValue, decimal.Parse("138350580552821637105", CultureInfo.InvariantCulture) };
-            yield return new object[] { long.MaxValue, long.MaxValue, double.Parse("8.5070591730234616E+37", NumberStyles.Any, CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                (long)15,
+                long.MaxValue,
+                decimal.Parse("138350580552821637105", CultureInfo.InvariantCulture)
+            };
+            yield return new object[]
+            {
+                long.MaxValue,
+                long.MaxValue,
+                double.Parse(
+                    "8.5070591730234616E+37",
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture
+                )
+            };
 
             // float + primitives
             yield return new object[] { (float)1, (byte)2, (float)2 };
@@ -2549,8 +2718,26 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (float)12, "2", (double)24 };
             yield return new object[] { (float)13, true, (float)(-13) };
             yield return new object[] { (float)14, null, (float)0 };
-            yield return new object[] { (float)15, float.MaxValue, double.Parse("5.1042351995779329E+39", NumberStyles.Any, CultureInfo.InvariantCulture) };
-            yield return new object[] { float.MaxValue, float.MaxValue, double.Parse("1.1579207543382391E+77", NumberStyles.Any, CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                (float)15,
+                float.MaxValue,
+                double.Parse(
+                    "5.1042351995779329E+39",
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture
+                )
+            };
+            yield return new object[]
+            {
+                float.MaxValue,
+                float.MaxValue,
+                double.Parse(
+                    "1.1579207543382391E+77",
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture
+                )
+            };
             yield return new object[] { (float)15, float.PositiveInfinity, float.PositiveInfinity };
             yield return new object[] { (float)15, float.NegativeInfinity, float.NegativeInfinity };
             yield return new object[] { (float)15, float.NaN, double.NaN };
@@ -2573,13 +2760,33 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (double)12, "2", (double)24 };
             yield return new object[] { (double)13, true, (double)(-13) };
             yield return new object[] { (double)14, null, (double)0 };
-            yield return new object[] { (double)15, double.MaxValue, double.PositiveInfinity};
+            yield return new object[] { (double)15, double.MaxValue, double.PositiveInfinity };
             yield return new object[] { double.MaxValue, double.MaxValue, double.PositiveInfinity };
-            yield return new object[] { (double)15, double.PositiveInfinity, double.PositiveInfinity };
-            yield return new object[] { (double)15, double.NegativeInfinity, double.NegativeInfinity };
+            yield return new object[]
+            {
+                (double)15,
+                double.PositiveInfinity,
+                double.PositiveInfinity
+            };
+            yield return new object[]
+            {
+                (double)15,
+                double.NegativeInfinity,
+                double.NegativeInfinity
+            };
             yield return new object[] { (double)15, double.NaN, double.NaN };
-            yield return new object[] { double.PositiveInfinity, (double)2, double.PositiveInfinity };
-            yield return new object[] { double.NegativeInfinity, (double)2, double.NegativeInfinity };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                (double)2,
+                double.PositiveInfinity
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                (double)2,
+                double.NegativeInfinity
+            };
             yield return new object[] { double.NaN, (double)2, double.NaN };
 
             // decimal.
@@ -2597,7 +2804,16 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (decimal)12, "2", (double)24 };
             yield return new object[] { (decimal)13, true, (decimal)(-13) };
             yield return new object[] { (decimal)14, null, (decimal)0 };
-            yield return new object[] { (decimal)15, decimal.MaxValue, double.Parse("1.1884224377139651E+30", NumberStyles.Any, CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                (decimal)15,
+                decimal.MaxValue,
+                double.Parse(
+                    "1.1884224377139651E+30",
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture
+                )
+            };
 
             // string + primitives
             yield return new object[] { "1", (byte)2, (double)2 };
@@ -2650,14 +2866,27 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             // object.
             yield return new object[] { new MultiplyObject(), 2, "custom" };
             yield return new object[] { 2, new MultiplyObject(), "motsuc" };
-            yield return new object[] { new MultiplyObject(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new MultiplyObject(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new MultiplyObject(),
+                new OperatorsTests(),
+                "customobject"
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new MultiplyObject(),
+                "tcejbomotsuc"
+            };
         }
 
         [Theory]
         [MemberData(nameof(MultiplyObject_Idempotent_TestData))]
-        public void MultiplyObject_Convertible_ReturnsExpected(object left, object right, object expected)
-        {
+        public void MultiplyObject_Convertible_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        ) {
             Assert.Equal(expected, Operators.MultiplyObject(left, right));
 
             if (expected is string expectedString)
@@ -2680,8 +2909,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(MultiplyObject_InvalidObjects_TestData))]
-        public void MultiplyObject_InvalidObjects_ThrowsInvalidCastException(object left, object right)
-        {
+        public void MultiplyObject_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        ) {
             Assert.Throws<InvalidCastException>(() => Operators.MultiplyObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.MultiplyObject(right, left));
         }
@@ -2696,8 +2927,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(MultiplyObject_MismatchingObjects_TestData))]
-        public void MultiplyObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void MultiplyObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.MultiplyObject(left, right));
         }
 
@@ -2706,8 +2939,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             public static string operator *(MultiplyObject left, int right) => "custom";
             public static string operator *(int left, MultiplyObject right) => "motsuc";
 
-            public static string operator *(MultiplyObject left, OperatorsTests right) => "customobject";
-            public static string operator *(OperatorsTests left, MultiplyObject right) => "tcejbomotsuc";
+            public static string operator *(MultiplyObject left, OperatorsTests right) =>
+                "customobject";
+            public static string operator *(OperatorsTests left, MultiplyObject right) =>
+                "tcejbomotsuc";
         }
 
         public static IEnumerable<object[]> ModObject_TestData()
@@ -3138,7 +3373,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [MemberData(nameof(ModObject_TestData))]
         public void ModObject_Invoke_ReturnsExpected(object left, object right, object expected)
         {
-             Assert.Equal(expected, Operators.ModObject(left, right));
+            Assert.Equal(expected, Operators.ModObject(left, right));
         }
 
         public static IEnumerable<object[]> ModObject_InvalidObject_TestData()
@@ -3331,9 +3566,14 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(ModObject_DivideByZeroObject_TestData))]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Unfixed JIT bug in the .NET Framework")]
-        public void ModObject_DivideByZeroObject_ThrowsDivideByZeroException(object left, object right)
-        {
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Unfixed JIT bug in the .NET Framework"
+        )]
+        public void ModObject_DivideByZeroObject_ThrowsDivideByZeroException(
+            object left,
+            object right
+        ) {
             Assert.Throws<DivideByZeroException>(() => Operators.ModObject(left, right));
         }
 
@@ -3369,24 +3609,26 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(ModObject_MismatchingObjects_TestData))]
-        public void ModObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void ModObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.ModObject(left, right));
         }
 
         public class ModObject
         {
-             [SpecialName]
-             public static string op_Modulus(ModObject left, int right) => "custom";
+            [SpecialName]
+            public static string op_Modulus(ModObject left, int right) => "custom";
 
-             [SpecialName]
-             public static string op_Modulus(int left, ModObject right) => "motsuc";
+            [SpecialName]
+            public static string op_Modulus(int left, ModObject right) => "motsuc";
 
-             [SpecialName]
-             public static string op_Modulus(ModObject left, OperatorsTests right) => "customobject";
+            [SpecialName]
+            public static string op_Modulus(ModObject left, OperatorsTests right) => "customobject";
 
-             [SpecialName]
-             public static string op_Modulus(OperatorsTests left, ModObject right) => "tcejbomotsuc";
+            [SpecialName]
+            public static string op_Modulus(OperatorsTests left, ModObject right) => "tcejbomotsuc";
         }
 
         public static IEnumerable<object[]> NegateObject_TestData()
@@ -3431,12 +3673,20 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (ulong)9, (decimal)(-9) };
             yield return new object[] { (ULongEnum)9, (decimal)(-9) };
             yield return new object[] { ulong.MinValue, (decimal)0 };
-            yield return new object[] { ulong.MaxValue, decimal.Parse("-18446744073709551615", CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                ulong.MaxValue,
+                decimal.Parse("-18446744073709551615", CultureInfo.InvariantCulture)
+            };
 
             // long.
             yield return new object[] { (long)9, (long)(-9) };
             yield return new object[] { (LongEnum)9, (long)(-9) };
-            yield return new object[] { long.MinValue, decimal.Parse("9223372036854775808", CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                long.MinValue,
+                decimal.Parse("9223372036854775808", CultureInfo.InvariantCulture)
+            };
             yield return new object[] { long.MaxValue, (long)(-9223372036854775807) };
 
             // float.
@@ -3472,7 +3722,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [MemberData(nameof(NegateObject_TestData))]
         public void NegateObject_Invoke_ReturnsExpected(object value, object expected)
         {
-             Assert.Equal(expected, Operators.NegateObject(value));
+            Assert.Equal(expected, Operators.NegateObject(value));
         }
 
         public static IEnumerable<object[]> NegateObject_InvalidObject_TestData()
@@ -3492,8 +3742,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         public class NegateObject
         {
-             [SpecialName]
-             public static string op_UnaryNegation(NegateObject value) => "custom";
+            [SpecialName]
+            public static string op_UnaryNegation(NegateObject value) => "custom";
         }
 
         public static IEnumerable<object[]> NotObject_TestData()
@@ -3573,7 +3823,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [MemberData(nameof(NotObject_TestData))]
         public void NotObject_Invoke_ReturnsExpected(object value, object expected)
         {
-             Assert.Equal(expected, Operators.NotObject(value));
+            Assert.Equal(expected, Operators.NotObject(value));
         }
 
         public static IEnumerable<object[]> NotObject_InvalidObject_TestData()
@@ -3610,8 +3860,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         public class NotObject
         {
-             [SpecialName]
-             public static string op_OnesComplement(NotObject value) => "custom";
+            [SpecialName]
+            public static string op_OnesComplement(NotObject value) => "custom";
         }
 
         public static IEnumerable<object[]> OrObject_TestData()
@@ -4183,8 +4433,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(OrObject_MismatchingObjects_TestData))]
-        public void OrObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void OrObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.OrObject(left, right));
         }
 
@@ -4512,14 +4764,27 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             // object.
             yield return new object[] { new RightShiftObject(), 2, "custom" };
             yield return new object[] { 2, new RightShiftObject(), "motsuc" };
-            yield return new object[] { new RightShiftObject(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new RightShiftObject(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new RightShiftObject(),
+                new OperatorsTests(),
+                "customobject"
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new RightShiftObject(),
+                "tcejbomotsuc"
+            };
         }
 
         [Theory]
         [MemberData(nameof(RightShiftObject_TestData))]
-        public void RightShiftObject_Invoke_ReturnsExpected(object left, object right, object expected)
-        {
+        public void RightShiftObject_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        ) {
             Assert.Equal(expected, Operators.RightShiftObject(left, right));
         }
 
@@ -4532,8 +4797,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(RightShiftObject_InvalidObjects_TestData))]
-        public void RightShiftObject_InvalidObjects_ThrowsInvalidCastException(object left, object right)
-        {
+        public void RightShiftObject_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        ) {
             Assert.Throws<InvalidCastException>(() => Operators.RightShiftObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.RightShiftObject(right, left));
         }
@@ -4548,8 +4815,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(RightShiftObject_MismatchingObjects_TestData))]
-        public void RightShiftObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void RightShiftObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.RightShiftObject(left, right));
         }
 
@@ -4562,10 +4831,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             public static string op_RightShift(int left, RightShiftObject right) => "motsuc";
 
             [SpecialName]
-            public static string op_RightShift(RightShiftObject left, OperatorsTests right) => "customobject";
+            public static string op_RightShift(RightShiftObject left, OperatorsTests right) =>
+                "customobject";
 
             [SpecialName]
-            public static string op_RightShift(OperatorsTests left, RightShiftObject right) => "tcejbomotsuc";
+            public static string op_RightShift(OperatorsTests left, RightShiftObject right) =>
+                "tcejbomotsuc";
         }
 
         public static IEnumerable<object[]> SubtractObject_TestData()
@@ -4687,7 +4958,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (ulong)13, "2", (double)11 };
             yield return new object[] { (ulong)14, true, (decimal)15 };
             yield return new object[] { (ulong)15, null, (ulong)15 };
-            yield return new object[] { (ulong)16, ulong.MaxValue, decimal.Parse("-18446744073709551599", CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                (ulong)16,
+                ulong.MaxValue,
+                decimal.Parse("-18446744073709551599", CultureInfo.InvariantCulture)
+            };
 
             // long.
             yield return new object[] { (long)2, (byte)2, (long)0 };
@@ -4704,7 +4980,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (long)13, "2", (double)11 };
             yield return new object[] { (long)14, true, (long)15 };
             yield return new object[] { (long)15, null, (long)15 };
-            yield return new object[] { (long)(-2), long.MaxValue, decimal.Parse("-9223372036854775809", CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                (long)(-2),
+                long.MaxValue,
+                decimal.Parse("-9223372036854775809", CultureInfo.InvariantCulture)
+            };
 
             // float.
             yield return new object[] { (float)2, (byte)2, (float)0 };
@@ -4721,7 +5002,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (float)13, "2", (double)11 };
             yield return new object[] { (float)14, true, (float)15 };
             yield return new object[] { (float)15, null, (float)15 };
-            yield return new object[] { float.MinValue, float.MaxValue, (double)float.MinValue - (double)float.MaxValue };
+            yield return new object[]
+            {
+                float.MinValue,
+                float.MaxValue,
+                (double)float.MinValue - (double)float.MaxValue
+            };
             yield return new object[] { (float)16, float.PositiveInfinity, float.NegativeInfinity };
             yield return new object[] { (float)17, float.NegativeInfinity, float.PositiveInfinity };
             yield return new object[] { (float)18, float.NaN, double.NaN };
@@ -4745,11 +5031,31 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (double)14, true, (double)15 };
             yield return new object[] { (double)15, null, (double)15 };
             yield return new object[] { double.MinValue, double.MaxValue, double.NegativeInfinity };
-            yield return new object[] { (double)16, double.PositiveInfinity, double.NegativeInfinity };
-            yield return new object[] { (double)17, double.NegativeInfinity, double.PositiveInfinity };
+            yield return new object[]
+            {
+                (double)16,
+                double.PositiveInfinity,
+                double.NegativeInfinity
+            };
+            yield return new object[]
+            {
+                (double)17,
+                double.NegativeInfinity,
+                double.PositiveInfinity
+            };
             yield return new object[] { (double)18, double.NaN, double.NaN };
-            yield return new object[] { double.PositiveInfinity, (double)2, double.PositiveInfinity };
-            yield return new object[] { double.NegativeInfinity, (double)2, double.NegativeInfinity };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                (double)2,
+                double.PositiveInfinity
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                (double)2,
+                double.NegativeInfinity
+            };
             yield return new object[] { double.NaN, (double)2, double.NaN };
 
             // decimal.
@@ -4767,7 +5073,16 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { (decimal)13, "2", (double)11 };
             yield return new object[] { (decimal)14, true, (decimal)15 };
             yield return new object[] { (decimal)15, null, (decimal)15 };
-            yield return new object[] { decimal.MinValue, decimal.MaxValue, double.Parse("-1.5845632502852868E+29", NumberStyles.Any, CultureInfo.InvariantCulture) };
+            yield return new object[]
+            {
+                decimal.MinValue,
+                decimal.MaxValue,
+                double.Parse(
+                    "-1.5845632502852868E+29",
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture
+                )
+            };
 
             // string.
             yield return new object[] { "2", (byte)2, (double)0 };
@@ -4821,8 +5136,18 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             // object.
             yield return new object[] { new SubtractObject(), 2, "custom" };
             yield return new object[] { 2, new SubtractObject(), "motsuc" };
-            yield return new object[] { new SubtractObject(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new SubtractObject(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new SubtractObject(),
+                new OperatorsTests(),
+                "customobject"
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new SubtractObject(),
+                "tcejbomotsuc"
+            };
 
             // DateTime.
             yield return new object[] { new DateTime(10), new TimeSpan(5), new DateTime(5) };
@@ -4832,8 +5157,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(SubtractObject_TestData))]
-        public void SubtractObject_Invoke_ReturnsExpected(object left, object right, object expected)
-        {
+        public void SubtractObject_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        ) {
             Assert.Equal(expected, Operators.SubtractObject(left, right));
         }
 
@@ -4846,8 +5174,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(SubtractObject_InvalidObjects_TestData))]
-        public void SubtractObject_InvalidObjects_ThrowsInvalidCastException(object left, object right)
-        {
+        public void SubtractObject_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        ) {
             Assert.Throws<InvalidCastException>(() => Operators.SubtractObject(left, right));
             Assert.Throws<InvalidCastException>(() => Operators.SubtractObject(right, left));
         }
@@ -4862,8 +5192,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(SubtractObject_MismatchingObjects_TestData))]
-        public void SubtractObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void SubtractObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.SubtractObject(left, right));
         }
 
@@ -4872,8 +5204,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             public static string operator -(SubtractObject left, int right) => "custom";
             public static string operator -(int left, SubtractObject right) => "motsuc";
 
-            public static string operator -(SubtractObject left, OperatorsTests right) => "customobject";
-            public static string operator -(OperatorsTests left, SubtractObject right) => "tcejbomotsuc";
+            public static string operator -(SubtractObject left, OperatorsTests right) =>
+                "customobject";
+            public static string operator -(OperatorsTests left, SubtractObject right) =>
+                "tcejbomotsuc";
         }
 
         public static IEnumerable<object[]> XorObject_TestData()
@@ -5437,8 +5771,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(XorObject_MismatchingObjects_TestData))]
-        public void XorObject_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
-        {
+        public void XorObject_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        ) {
             Assert.Throws<AmbiguousMatchException>(() => Operators.XorObject(left, right));
         }
 
@@ -5451,28 +5787,76 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             public static string operator ^(OperatorsTests left, XorObject right) => "tcejbomotsuc";
         }
 
-        public enum ByteEnum : byte { Value = 1 }
-        public enum ByteEnum2 : byte { Value = 1 }
+        public enum ByteEnum : byte
+        {
+            Value = 1
+        }
+        public enum ByteEnum2 : byte
+        {
+            Value = 1
+        }
 
-        public enum SByteEnum : sbyte { Value = 1 }
-        public enum SByteEnum2 : sbyte { Value = 1 }
+        public enum SByteEnum : sbyte
+        {
+            Value = 1
+        }
+        public enum SByteEnum2 : sbyte
+        {
+            Value = 1
+        }
 
-        public enum UShortEnum : ushort { Value = 1 }
-        public enum UShortEnum2 : ushort { Value = 1 }
+        public enum UShortEnum : ushort
+        {
+            Value = 1
+        }
+        public enum UShortEnum2 : ushort
+        {
+            Value = 1
+        }
 
-        public enum ShortEnum : short { Value = 1 }
-        public enum ShortEnum2 : short { Value = 1 }
+        public enum ShortEnum : short
+        {
+            Value = 1
+        }
+        public enum ShortEnum2 : short
+        {
+            Value = 1
+        }
 
-        public enum UIntEnum : uint { Value = 1 }
-        public enum UIntEnum2 : uint { Value = 1 }
+        public enum UIntEnum : uint
+        {
+            Value = 1
+        }
+        public enum UIntEnum2 : uint
+        {
+            Value = 1
+        }
 
-        public enum IntEnum : int { Value = 1 }
-        public enum IntEnum2 : int { Value = 1 }
+        public enum IntEnum : int
+        {
+            Value = 1
+        }
+        public enum IntEnum2 : int
+        {
+            Value = 1
+        }
 
-        public enum ULongEnum : ulong { Value = 1 }
-        public enum ULongEnum2 : ulong { Value = 1 }
+        public enum ULongEnum : ulong
+        {
+            Value = 1
+        }
+        public enum ULongEnum2 : ulong
+        {
+            Value = 1
+        }
 
-        public enum LongEnum : long { Value = 1 }
-        public enum LongEnum2 : long { Value = 1 }
+        public enum LongEnum : long
+        {
+            Value = 1
+        }
+        public enum LongEnum2 : long
+        {
+            Value = 1
+        }
     }
 }

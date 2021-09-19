@@ -15,12 +15,18 @@ namespace Microsoft.CodeAnalysis.Options
 {
     internal static partial class EditorConfigFileGenerator
     {
-        public static void AppendNamingStylePreferencesToEditorConfig(NamingStylePreferences namingStylePreferences, string language, StringBuilder editorconfig)
-        {
+        public static void AppendNamingStylePreferencesToEditorConfig(
+            NamingStylePreferences namingStylePreferences,
+            string language,
+            StringBuilder editorconfig
+        ) {
             editorconfig.AppendLine($"#### {CompilerExtensionsResources.Naming_styles} ####");
 
             var serializedNameMap = AssignNamesToNamingStyleElements(namingStylePreferences);
-            var ruleNameMap = AssignNamesToNamingStyleRules(namingStylePreferences, serializedNameMap);
+            var ruleNameMap = AssignNamesToNamingStyleRules(
+                namingStylePreferences,
+                serializedNameMap
+            );
             var referencedElements = new HashSet<Guid>();
 
             editorconfig.AppendLine();
@@ -32,9 +38,15 @@ namespace Microsoft.CodeAnalysis.Options
                 referencedElements.Add(namingRule.NamingStyleID);
 
                 editorconfig.AppendLine();
-                editorconfig.AppendLine($"dotnet_naming_rule.{ruleNameMap[namingRule]}.severity = {namingRule.EnforcementLevel.ToNotificationOption(defaultSeverity: DiagnosticSeverity.Hidden).ToEditorConfigString()}");
-                editorconfig.AppendLine($"dotnet_naming_rule.{ruleNameMap[namingRule]}.symbols = {serializedNameMap[namingRule.SymbolSpecificationID]}");
-                editorconfig.AppendLine($"dotnet_naming_rule.{ruleNameMap[namingRule]}.style = {serializedNameMap[namingRule.NamingStyleID]}");
+                editorconfig.AppendLine(
+                    $"dotnet_naming_rule.{ruleNameMap[namingRule]}.severity = {namingRule.EnforcementLevel.ToNotificationOption(defaultSeverity: DiagnosticSeverity.Hidden).ToEditorConfigString()}"
+                );
+                editorconfig.AppendLine(
+                    $"dotnet_naming_rule.{ruleNameMap[namingRule]}.symbols = {serializedNameMap[namingRule.SymbolSpecificationID]}"
+                );
+                editorconfig.AppendLine(
+                    $"dotnet_naming_rule.{ruleNameMap[namingRule]}.style = {serializedNameMap[namingRule.NamingStyleID]}"
+                );
             }
 
             editorconfig.AppendLine();
@@ -48,9 +60,15 @@ namespace Microsoft.CodeAnalysis.Options
                 }
 
                 editorconfig.AppendLine();
-                editorconfig.AppendLine($"dotnet_naming_symbols.{serializedNameMap[symbolSpecification.ID]}.applicable_kinds = {symbolSpecification.ApplicableSymbolKindList.ToEditorConfigString()}");
-                editorconfig.AppendLine($"dotnet_naming_symbols.{serializedNameMap[symbolSpecification.ID]}.applicable_accessibilities = {symbolSpecification.ApplicableAccessibilityList.ToEditorConfigString(language)}");
-                editorconfig.AppendLine($"dotnet_naming_symbols.{serializedNameMap[symbolSpecification.ID]}.required_modifiers = {symbolSpecification.RequiredModifierList.ToEditorConfigString(language)}");
+                editorconfig.AppendLine(
+                    $"dotnet_naming_symbols.{serializedNameMap[symbolSpecification.ID]}.applicable_kinds = {symbolSpecification.ApplicableSymbolKindList.ToEditorConfigString()}"
+                );
+                editorconfig.AppendLine(
+                    $"dotnet_naming_symbols.{serializedNameMap[symbolSpecification.ID]}.applicable_accessibilities = {symbolSpecification.ApplicableAccessibilityList.ToEditorConfigString(language)}"
+                );
+                editorconfig.AppendLine(
+                    $"dotnet_naming_symbols.{serializedNameMap[symbolSpecification.ID]}.required_modifiers = {symbolSpecification.RequiredModifierList.ToEditorConfigString(language)}"
+                );
             }
 
             editorconfig.AppendLine();
@@ -64,15 +82,24 @@ namespace Microsoft.CodeAnalysis.Options
                 }
 
                 editorconfig.AppendLine();
-                editorconfig.AppendLine($"dotnet_naming_style.{serializedNameMap[namingStyle.ID]}.required_prefix = {namingStyle.Prefix}");
-                editorconfig.AppendLine($"dotnet_naming_style.{serializedNameMap[namingStyle.ID]}.required_suffix = {namingStyle.Suffix}");
-                editorconfig.AppendLine($"dotnet_naming_style.{serializedNameMap[namingStyle.ID]}.word_separator = {namingStyle.WordSeparator}");
-                editorconfig.AppendLine($"dotnet_naming_style.{serializedNameMap[namingStyle.ID]}.capitalization = {namingStyle.CapitalizationScheme.ToEditorConfigString()}");
+                editorconfig.AppendLine(
+                    $"dotnet_naming_style.{serializedNameMap[namingStyle.ID]}.required_prefix = {namingStyle.Prefix}"
+                );
+                editorconfig.AppendLine(
+                    $"dotnet_naming_style.{serializedNameMap[namingStyle.ID]}.required_suffix = {namingStyle.Suffix}"
+                );
+                editorconfig.AppendLine(
+                    $"dotnet_naming_style.{serializedNameMap[namingStyle.ID]}.word_separator = {namingStyle.WordSeparator}"
+                );
+                editorconfig.AppendLine(
+                    $"dotnet_naming_style.{serializedNameMap[namingStyle.ID]}.capitalization = {namingStyle.CapitalizationScheme.ToEditorConfigString()}"
+                );
             }
         }
 
-        private static ImmutableDictionary<Guid, string> AssignNamesToNamingStyleElements(NamingStylePreferences namingStylePreferences)
-        {
+        private static ImmutableDictionary<Guid, string> AssignNamesToNamingStyleElements(
+            NamingStylePreferences namingStylePreferences
+        ) {
             var symbolSpecificationNames = new HashSet<string>();
             var builder = ImmutableDictionary.CreateBuilder<Guid, string>();
             foreach (var symbolSpecification in namingStylePreferences.SymbolSpecifications)
@@ -102,28 +129,39 @@ namespace Microsoft.CodeAnalysis.Options
 
             static string ToSnakeCaseName(string name)
             {
-                return new string(name
-                    .Select(ch =>
-                    {
-                        if (char.IsLetterOrDigit(ch))
-                        {
-                            return char.ToLowerInvariant(ch);
-                        }
-                        else
-                        {
-                            return '_';
-                        }
-                    })
-                    .ToArray());
+                return new string(
+                    name.Select(
+                            ch =>
+                            {
+                                if (char.IsLetterOrDigit(ch))
+                                {
+                                    return char.ToLowerInvariant(ch);
+                                }
+                                else
+                                {
+                                    return '_';
+                                }
+                            }
+                        )
+                        .ToArray()
+                );
             }
         }
 
-        private static ImmutableDictionary<SerializableNamingRule, string> AssignNamesToNamingStyleRules(NamingStylePreferences namingStylePreferences, ImmutableDictionary<Guid, string> serializedNameMap)
-        {
+        private static ImmutableDictionary<
+            SerializableNamingRule,
+            string
+        > AssignNamesToNamingStyleRules(
+            NamingStylePreferences namingStylePreferences,
+            ImmutableDictionary<Guid, string> serializedNameMap
+        ) {
             var builder = ImmutableDictionary.CreateBuilder<SerializableNamingRule, string>();
             foreach (var rule in namingStylePreferences.NamingRules)
             {
-                builder.Add(rule, $"{serializedNameMap[rule.SymbolSpecificationID]}_should_be_{serializedNameMap[rule.NamingStyleID]}");
+                builder.Add(
+                    rule,
+                    $"{serializedNameMap[rule.SymbolSpecificationID]}_should_be_{serializedNameMap[rule.NamingStyleID]}"
+                );
             }
 
             return builder.ToImmutable();

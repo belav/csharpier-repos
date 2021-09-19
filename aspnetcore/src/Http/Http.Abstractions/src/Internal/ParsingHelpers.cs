@@ -47,8 +47,11 @@ namespace Microsoft.AspNetCore.Http
             return headers.TryGetValue(key, out values) ? values : StringValues.Empty;
         }
 
-        public static void SetHeaderJoined(IHeaderDictionary headers, string key, StringValues value)
-        {
+        public static void SetHeaderJoined(
+            IHeaderDictionary headers,
+            string key,
+            StringValues value
+        ) {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));
@@ -71,10 +74,11 @@ namespace Microsoft.AspNetCore.Http
         // Quote items that contain commas and are not already quoted.
         private static string QuoteIfNeeded(string value)
         {
-            if (!string.IsNullOrEmpty(value) &&
-                value.Contains(',') &&
-                (value[0] != '"' || value[value.Length - 1] != '"'))
-            {
+            if (
+                !string.IsNullOrEmpty(value)
+                && value.Contains(',')
+                && (value[0] != '"' || value[value.Length - 1] != '"')
+            ) {
                 return $"\"{value}\"";
             }
             return value;
@@ -82,17 +86,21 @@ namespace Microsoft.AspNetCore.Http
 
         private static string DeQuote(string value)
         {
-            if (!string.IsNullOrEmpty(value) &&
-                (value.Length > 1 && value[0] == '"' && value[value.Length - 1] == '"'))
-            {
+            if (
+                !string.IsNullOrEmpty(value)
+                && (value.Length > 1 && value[0] == '"' && value[value.Length - 1] == '"')
+            ) {
                 value = value.Substring(1, value.Length - 2);
             }
 
             return value;
         }
 
-        public static void SetHeaderUnmodified(IHeaderDictionary headers, string key, StringValues? values)
-        {
+        public static void SetHeaderUnmodified(
+            IHeaderDictionary headers,
+            string key,
+            StringValues? values
+        ) {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));
@@ -112,8 +120,11 @@ namespace Microsoft.AspNetCore.Http
             }
         }
 
-        public static void AppendHeaderJoined(IHeaderDictionary headers, string key, params string[] values)
-        {
+        public static void AppendHeaderJoined(
+            IHeaderDictionary headers,
+            string key,
+            params string[] values
+        ) {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));
@@ -136,12 +147,16 @@ namespace Microsoft.AspNetCore.Http
             }
             else
             {
-                headers[key] = existing + "," + string.Join(",", values.Select(value => QuoteIfNeeded(value)));
+                headers[key] =
+                    existing + "," + string.Join(",", values.Select(value => QuoteIfNeeded(value)));
             }
         }
 
-        public static void AppendHeaderUnmodified(IHeaderDictionary headers, string key, StringValues values)
-        {
+        public static void AppendHeaderUnmodified(
+            IHeaderDictionary headers,
+            string key,
+            StringValues values
+        ) {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));

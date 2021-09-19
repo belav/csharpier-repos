@@ -19,17 +19,16 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.Compiled)]
         public void Docs_Examples_ScanningHrefs(RegexOptions options)
         {
-            const string HrefPattern =
-                @"href\s*=\s*(?:[""'](?<1>[^""']*)[""']|(?<1>\S+))";
+            const string HrefPattern = @"href\s*=\s*(?:[""'](?<1>[^""']*)[""']|(?<1>\S+))";
 
             const string InputString =
-                "My favorite web sites include:</P>" +
-                "<A HREF=\"http://msdn2.microsoft.com\">" +
-                "MSDN Home Page</A></P>" +
-                "<A HREF=\"http://www.microsoft.com\">" +
-                "Microsoft Corporation Home Page</A></P>" +
-                "<A HREF=\"http://blogs.msdn.com/bclteam\">" +
-                ".NET Base Class Library blog</A></P>";
+                "My favorite web sites include:</P>"
+                + "<A HREF=\"http://msdn2.microsoft.com\">"
+                + "MSDN Home Page</A></P>"
+                + "<A HREF=\"http://www.microsoft.com\">"
+                + "Microsoft Corporation Home Page</A></P>"
+                + "<A HREF=\"http://blogs.msdn.com/bclteam\">"
+                + ".NET Base Class Library blog</A></P>";
 
             Match m = Regex.Match(InputString, HrefPattern, options | RegexOptions.IgnoreCase);
             Assert.True(m.Success);
@@ -56,8 +55,16 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.Compiled)]
         public void Docs_Examples_MDYtoDMY(RegexOptions options)
         {
-            string dt = new DateTime(2020, 1, 8, 0, 0, 0, DateTimeKind.Utc).ToString("d", DateTimeFormatInfo.InvariantInfo);
-            string result = Regex.Replace(dt, @"\b(?<month>\d{1,2})/(?<day>\d{1,2})/(?<year>\d{2,4})\b", "${day}-${month}-${year}", options);
+            string dt = new DateTime(2020, 1, 8, 0, 0, 0, DateTimeKind.Utc).ToString(
+                "d",
+                DateTimeFormatInfo.InvariantInfo
+            );
+            string result = Regex.Replace(
+                dt,
+                @"\b(?<month>\d{1,2})/(?<day>\d{1,2})/(?<year>\d{2,4})\b",
+                "${day}-${month}-${year}",
+                options
+            );
             Assert.Equal("08-01-2020", result);
         }
 
@@ -105,7 +112,13 @@ namespace System.Text.RegularExpressions.Tests
                 try
                 {
                     // Normalize the domain
-                    email = Regex.Replace(email, @"(@)(.+)$", DomainMapper, options, TimeSpan.FromMilliseconds(200));
+                    email = Regex.Replace(
+                        email,
+                        @"(@)(.+)$",
+                        DomainMapper,
+                        options,
+                        TimeSpan.FromMilliseconds(200)
+                    );
 
                     // Examines the domain part of the email and normalizes it.
                     string DomainMapper(Match match)
@@ -130,10 +143,13 @@ namespace System.Text.RegularExpressions.Tests
 
                 try
                 {
-                    return Regex.IsMatch(email,
-                        @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
-                        @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
-                        options | RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                    return Regex.IsMatch(
+                        email,
+                        @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))"
+                            + @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                        options | RegexOptions.IgnoreCase,
+                        TimeSpan.FromMilliseconds(250)
+                    );
                 }
                 catch (RegexMatchTimeoutException)
                 {
@@ -221,13 +237,20 @@ namespace System.Text.RegularExpressions.Tests
             }
 
             string expected =
-                "Match: abc123def456" + Environment.NewLine +
-                "Group 1: 456" + Environment.NewLine +
-                "   Capture 0: 123" + Environment.NewLine +
-                "   Capture 1: 456" + Environment.NewLine +
-                "Match: abc123def" + Environment.NewLine +
-                "Group 1: 123" + Environment.NewLine +
-                "   Capture 0: 123" + Environment.NewLine;
+                "Match: abc123def456"
+                + Environment.NewLine
+                + "Group 1: 456"
+                + Environment.NewLine
+                + "   Capture 0: 123"
+                + Environment.NewLine
+                + "   Capture 1: 456"
+                + Environment.NewLine
+                + "Match: abc123def"
+                + Environment.NewLine
+                + "Group 1: 123"
+                + Environment.NewLine
+                + "   Capture 0: 123"
+                + Environment.NewLine;
 
             Assert.Equal(expected, actual.ToString());
         }
@@ -239,12 +262,12 @@ namespace System.Text.RegularExpressions.Tests
         public void Docs_GroupingConstructs_BalancingGroups(RegexOptions options)
         {
             const string Pattern =
-                "^[^<>]*" +
-                 "(" +
-                 "((?'Open'<)[^<>]*)+" +
-                 "((?'Close-Open'>)[^<>]*)+" +
-                 ")*" +
-                 "(?(Open)(?!))$";
+                "^[^<>]*"
+                + "("
+                + "((?'Open'<)[^<>]*)+"
+                + "((?'Close-Open'>)[^<>]*)+"
+                + ")*"
+                + "(?(Open)(?!))$";
             const string Input = "<abc><mno<xyz>>";
 
             var actual = new StringBuilder();
@@ -268,26 +291,46 @@ namespace System.Text.RegularExpressions.Tests
             }
 
             string expected =
-                "Input: \"<abc><mno<xyz>>\"" + Environment.NewLine +
-                "Match: \"<abc><mno<xyz>>\"" + Environment.NewLine +
-                "   Group 0: <abc><mno<xyz>>" + Environment.NewLine +
-                "      Capture 0: <abc><mno<xyz>>" + Environment.NewLine +
-                "   Group 1: <mno<xyz>>" + Environment.NewLine +
-                "      Capture 0: <abc>" + Environment.NewLine +
-                "      Capture 1: <mno<xyz>>" + Environment.NewLine +
-                "   Group 2: <xyz" + Environment.NewLine +
-                "      Capture 0: <abc" + Environment.NewLine +
-                "      Capture 1: <mno" + Environment.NewLine +
-                "      Capture 2: <xyz" + Environment.NewLine +
-                "   Group 3: >" + Environment.NewLine +
-                "      Capture 0: >" + Environment.NewLine +
-                "      Capture 1: >" + Environment.NewLine +
-                "      Capture 2: >" + Environment.NewLine +
-                "   Group 4: " + Environment.NewLine +
-                "   Group 5: mno<xyz>" + Environment.NewLine +
-                "      Capture 0: abc" + Environment.NewLine +
-                "      Capture 1: xyz" + Environment.NewLine +
-                "      Capture 2: mno<xyz>" + Environment.NewLine;
+                "Input: \"<abc><mno<xyz>>\""
+                + Environment.NewLine
+                + "Match: \"<abc><mno<xyz>>\""
+                + Environment.NewLine
+                + "   Group 0: <abc><mno<xyz>>"
+                + Environment.NewLine
+                + "      Capture 0: <abc><mno<xyz>>"
+                + Environment.NewLine
+                + "   Group 1: <mno<xyz>>"
+                + Environment.NewLine
+                + "      Capture 0: <abc>"
+                + Environment.NewLine
+                + "      Capture 1: <mno<xyz>>"
+                + Environment.NewLine
+                + "   Group 2: <xyz"
+                + Environment.NewLine
+                + "      Capture 0: <abc"
+                + Environment.NewLine
+                + "      Capture 1: <mno"
+                + Environment.NewLine
+                + "      Capture 2: <xyz"
+                + Environment.NewLine
+                + "   Group 3: >"
+                + Environment.NewLine
+                + "      Capture 0: >"
+                + Environment.NewLine
+                + "      Capture 1: >"
+                + Environment.NewLine
+                + "      Capture 2: >"
+                + Environment.NewLine
+                + "   Group 4: "
+                + Environment.NewLine
+                + "   Group 5: mno<xyz>"
+                + Environment.NewLine
+                + "      Capture 0: abc"
+                + Environment.NewLine
+                + "      Capture 1: xyz"
+                + Environment.NewLine
+                + "      Capture 2: mno<xyz>"
+                + Environment.NewLine;
 
             Assert.Equal(expected, actual.ToString());
         }
@@ -333,8 +376,9 @@ namespace System.Text.RegularExpressions.Tests
         [Theory]
         [InlineData(RegexOptions.None)]
         [InlineData(RegexOptions.Compiled)]
-        public void Docs_GroupingConstructs_ZeroWidthPositiveLookaheadAssertions(RegexOptions options)
-        {
+        public void Docs_GroupingConstructs_ZeroWidthPositiveLookaheadAssertions(
+            RegexOptions options
+        ) {
             const string Pattern = @"\b\w+(?=\sis\b)";
             Match match;
 
@@ -357,12 +401,17 @@ namespace System.Text.RegularExpressions.Tests
         [Theory]
         [InlineData(RegexOptions.None)]
         [InlineData(RegexOptions.Compiled)]
-        public void Docs_GroupingConstructs_ZeroWidthNegativeLookaheadAssertions(RegexOptions options)
-        {
+        public void Docs_GroupingConstructs_ZeroWidthNegativeLookaheadAssertions(
+            RegexOptions options
+        ) {
             const string Pattern = @"\b(?!un)\w+\b";
             const string Input = "unite one unethical ethics use untie ultimate";
 
-            MatchCollection matches = Regex.Matches(Input, Pattern, RegexOptions.IgnoreCase | options);
+            MatchCollection matches = Regex.Matches(
+                Input,
+                Pattern,
+                RegexOptions.IgnoreCase | options
+            );
             Assert.Equal("one", matches[0].Value);
             Assert.Equal("ethics", matches[1].Value);
             Assert.Equal("use", matches[2].Value);
@@ -373,12 +422,17 @@ namespace System.Text.RegularExpressions.Tests
         [Theory]
         [InlineData(RegexOptions.None)]
         [InlineData(RegexOptions.Compiled)]
-        public void Docs_GroupingConstructs_ZeroWidthPositiveLookbehindAssertions(RegexOptions options)
-        {
+        public void Docs_GroupingConstructs_ZeroWidthPositiveLookbehindAssertions(
+            RegexOptions options
+        ) {
             const string Pattern = @"(?<=\b20)\d{2}\b";
             const string Input = "2010 1999 1861 2140 2009";
 
-            MatchCollection matches = Regex.Matches(Input, Pattern, RegexOptions.IgnoreCase | options);
+            MatchCollection matches = Regex.Matches(
+                Input,
+                Pattern,
+                RegexOptions.IgnoreCase | options
+            );
             Assert.Equal("10", matches[0].Value);
             Assert.Equal("09", matches[1].Value);
         }
@@ -387,15 +441,25 @@ namespace System.Text.RegularExpressions.Tests
         [Theory]
         [InlineData(RegexOptions.None)]
         [InlineData(RegexOptions.Compiled)]
-        public void Docs_GroupingConstructs_ZeroWidthNegativeLookbehindAssertions(RegexOptions options)
-        {
+        public void Docs_GroupingConstructs_ZeroWidthNegativeLookbehindAssertions(
+            RegexOptions options
+        ) {
             const string Pattern = @"(?<!(Saturday|Sunday) )\b\w+ \d{1,2}, \d{4}\b";
 
-            Assert.Equal("February 1, 2010", Regex.Match("Monday February 1, 2010", Pattern, options).Value);
-            Assert.Equal("February 3, 2010", Regex.Match("Wednesday February 3, 2010", Pattern, options).Value);
+            Assert.Equal(
+                "February 1, 2010",
+                Regex.Match("Monday February 1, 2010", Pattern, options).Value
+            );
+            Assert.Equal(
+                "February 3, 2010",
+                Regex.Match("Wednesday February 3, 2010", Pattern, options).Value
+            );
             Assert.False(Regex.IsMatch("Saturday February 6, 2010", Pattern, options));
             Assert.False(Regex.IsMatch("Sunday February 7, 2010", Pattern, options));
-            Assert.Equal("February 8, 2010", Regex.Match("Monday, February 8, 2010", Pattern, options).Value);
+            Assert.Equal(
+                "February 8, 2010",
+                Regex.Match("Monday, February 8, 2010", Pattern, options).Value
+            );
         }
 
         // https://docs.microsoft.com/en-us/dotnet/standard/base-types/grouping-constructs-in-regular-expressions#nonbacktracking-subexpressions
@@ -408,7 +472,8 @@ namespace System.Text.RegularExpressions.Tests
             const string NoBack = @"(?>(\w)\1+).\b";
             string[] inputs = { "aaad", "aaaa" };
 
-            Match back, noback;
+            Match back,
+                noback;
 
             back = Regex.Match("cccd.", Back, options);
             noback = Regex.Match("cccd.", NoBack, options);
@@ -455,19 +520,32 @@ namespace System.Text.RegularExpressions.Tests
             }
 
             string expected =
-                "Match: 'This is a short sentence.'" + Environment.NewLine +
-                "   Group 1: 'sentence.'" + Environment.NewLine +
-                "      Capture 0: 'This '" + Environment.NewLine +
-                "      Capture 1: 'is '" + Environment.NewLine +
-                "      Capture 2: 'a '" + Environment.NewLine +
-                "      Capture 3: 'short '" + Environment.NewLine +
-                "      Capture 4: 'sentence.'" + Environment.NewLine +
-                "   Group 2: 'sentence'" + Environment.NewLine +
-                "      Capture 0: 'This'" + Environment.NewLine +
-                "      Capture 1: 'is'" + Environment.NewLine +
-                "      Capture 2: 'a'" + Environment.NewLine +
-                "      Capture 3: 'short'" + Environment.NewLine +
-                "      Capture 4: 'sentence'" + Environment.NewLine;
+                "Match: 'This is a short sentence.'"
+                + Environment.NewLine
+                + "   Group 1: 'sentence.'"
+                + Environment.NewLine
+                + "      Capture 0: 'This '"
+                + Environment.NewLine
+                + "      Capture 1: 'is '"
+                + Environment.NewLine
+                + "      Capture 2: 'a '"
+                + Environment.NewLine
+                + "      Capture 3: 'short '"
+                + Environment.NewLine
+                + "      Capture 4: 'sentence.'"
+                + Environment.NewLine
+                + "   Group 2: 'sentence'"
+                + Environment.NewLine
+                + "      Capture 0: 'This'"
+                + Environment.NewLine
+                + "      Capture 1: 'is'"
+                + Environment.NewLine
+                + "      Capture 2: 'a'"
+                + Environment.NewLine
+                + "      Capture 3: 'short'"
+                + Environment.NewLine
+                + "      Capture 4: 'sentence'"
+                + Environment.NewLine;
 
             Assert.Equal(expected, actual.ToString());
         }
@@ -491,34 +569,58 @@ namespace System.Text.RegularExpressions.Tests
                     actual.AppendLine($"   Group {groupCtr}: {group.Value}");
                     for (int captureCtr = 0; captureCtr < group.Captures.Count; captureCtr++)
                     {
-                        actual.AppendLine($"      Capture {captureCtr}: {group.Captures[captureCtr].Value}");
+                        actual.AppendLine(
+                            $"      Capture {captureCtr}: {group.Captures[captureCtr].Value}"
+                        );
                     }
                 }
             }
 
             string expected =
-                "Match: Yes." + Environment.NewLine +
-                "   Group 0: Yes." + Environment.NewLine +
-                "      Capture 0: Yes." + Environment.NewLine +
-                "   Group 1: Yes." + Environment.NewLine +
-                "      Capture 0: Yes." + Environment.NewLine +
-                "   Group 2: Yes" + Environment.NewLine +
-                "      Capture 0: Yes" + Environment.NewLine +
-                "Match: This dog is very friendly." + Environment.NewLine +
-                "   Group 0: This dog is very friendly." + Environment.NewLine +
-                "      Capture 0: This dog is very friendly." + Environment.NewLine +
-                "   Group 1: friendly." + Environment.NewLine +
-                "      Capture 0: This " + Environment.NewLine +
-                "      Capture 1: dog " + Environment.NewLine +
-                "      Capture 2: is " + Environment.NewLine +
-                "      Capture 3: very " + Environment.NewLine +
-                "      Capture 4: friendly." + Environment.NewLine +
-                "   Group 2: friendly" + Environment.NewLine +
-                "      Capture 0: This" + Environment.NewLine +
-                "      Capture 1: dog" + Environment.NewLine +
-                "      Capture 2: is" + Environment.NewLine +
-                "      Capture 3: very" + Environment.NewLine +
-                "      Capture 4: friendly" + Environment.NewLine;
+                "Match: Yes."
+                + Environment.NewLine
+                + "   Group 0: Yes."
+                + Environment.NewLine
+                + "      Capture 0: Yes."
+                + Environment.NewLine
+                + "   Group 1: Yes."
+                + Environment.NewLine
+                + "      Capture 0: Yes."
+                + Environment.NewLine
+                + "   Group 2: Yes"
+                + Environment.NewLine
+                + "      Capture 0: Yes"
+                + Environment.NewLine
+                + "Match: This dog is very friendly."
+                + Environment.NewLine
+                + "   Group 0: This dog is very friendly."
+                + Environment.NewLine
+                + "      Capture 0: This dog is very friendly."
+                + Environment.NewLine
+                + "   Group 1: friendly."
+                + Environment.NewLine
+                + "      Capture 0: This "
+                + Environment.NewLine
+                + "      Capture 1: dog "
+                + Environment.NewLine
+                + "      Capture 2: is "
+                + Environment.NewLine
+                + "      Capture 3: very "
+                + Environment.NewLine
+                + "      Capture 4: friendly."
+                + Environment.NewLine
+                + "   Group 2: friendly"
+                + Environment.NewLine
+                + "      Capture 0: This"
+                + Environment.NewLine
+                + "      Capture 1: dog"
+                + Environment.NewLine
+                + "      Capture 2: is"
+                + Environment.NewLine
+                + "      Capture 3: very"
+                + Environment.NewLine
+                + "      Capture 4: friendly"
+                + Environment.NewLine;
 
             Assert.Equal(expected, actual.ToString());
         }
@@ -543,71 +645,127 @@ namespace System.Text.RegularExpressions.Tests
                     for (int gCtr = 0; gCtr < m.Groups.Count; gCtr++)
                     {
                         Group group = m.Groups[gCtr];
-                        actual.AppendLine($"      Group {gCtr}: {(group.Value == "" ? "<empty>" : "'" + group.Value + "'")}");
+                        actual.AppendLine(
+                            $"      Group {gCtr}: {(group.Value == "" ? "<empty>" : "'" + group.Value + "'")}"
+                        );
                         actual.AppendLine($"         Number of Captures: {group.Captures.Count}");
                         for (int cCtr = 0; cCtr < group.Captures.Count; cCtr++)
                         {
-                            actual.AppendLine($"            Capture {cCtr}: {group.Captures[cCtr].Value}");
+                            actual.AppendLine(
+                                $"            Capture {cCtr}: {group.Captures[cCtr].Value}"
+                            );
                         }
                     }
                 }
                 else
                 {
-                    actual.AppendLine($"No match for {value}: Match.Value is {(m.Value == String.Empty ? "<empty>" : m.Value)}");
+                    actual.AppendLine(
+                        $"No match for {value}: Match.Value is {(m.Value == String.Empty ? "<empty>" : m.Value)}"
+                    );
                 }
             }
 
             string expected =
-                "No match for AC10: Match.Value is <empty>" + Environment.NewLine +
-                "Match: 'Za203.CYM'" + Environment.NewLine +
-                "   Number of Capturing Groups: 5" + Environment.NewLine +
-                "      Group 0: 'Za203.CYM'" + Environment.NewLine +
-                "         Number of Captures: 1" + Environment.NewLine +
-                "            Capture 0: Za203.CYM" + Environment.NewLine +
-                "      Group 1: 'Za'" + Environment.NewLine +
-                "         Number of Captures: 1" + Environment.NewLine +
-                "            Capture 0: Za" + Environment.NewLine +
-                "      Group 2: '203'" + Environment.NewLine +
-                "         Number of Captures: 1" + Environment.NewLine +
-                "            Capture 0: 203" + Environment.NewLine +
-                "      Group 3: 'CYM'" + Environment.NewLine +
-                "         Number of Captures: 1" + Environment.NewLine +
-                "            Capture 0: CYM" + Environment.NewLine +
-                "      Group 4: <empty>" + Environment.NewLine +
-                "         Number of Captures: 0" + Environment.NewLine +
-                "Match: 'XYZ.CoA'" + Environment.NewLine +
-                "   Number of Capturing Groups: 5" + Environment.NewLine +
-                "      Group 0: 'XYZ.CoA'" + Environment.NewLine +
-                "         Number of Captures: 1" + Environment.NewLine +
-                "            Capture 0: XYZ.CoA" + Environment.NewLine +
-                "      Group 1: 'XYZ'" + Environment.NewLine +
-                "         Number of Captures: 1" + Environment.NewLine +
-                "            Capture 0: XYZ" + Environment.NewLine +
-                "      Group 2: <empty>" + Environment.NewLine +
-                "         Number of Captures: 0" + Environment.NewLine +
-                "      Group 3: 'CoA'" + Environment.NewLine +
-                "         Number of Captures: 1" + Environment.NewLine +
-                "            Capture 0: CoA" + Environment.NewLine +
-                "      Group 4: <empty>" + Environment.NewLine +
-                "         Number of Captures: 0" + Environment.NewLine +
-                "Match: 'ABC.x170'" + Environment.NewLine +
-                "   Number of Capturing Groups: 5" + Environment.NewLine +
-                "      Group 0: 'ABC.x170'" + Environment.NewLine +
-                "         Number of Captures: 1" + Environment.NewLine +
-                "            Capture 0: ABC.x170" + Environment.NewLine +
-                "      Group 1: 'ABC'" + Environment.NewLine +
-                "         Number of Captures: 1" + Environment.NewLine +
-                "            Capture 0: ABC" + Environment.NewLine +
-                "      Group 2: <empty>" + Environment.NewLine +
-                "         Number of Captures: 0" + Environment.NewLine +
-                "      Group 3: 'x170'" + Environment.NewLine +
-                "         Number of Captures: 1" + Environment.NewLine +
-                "            Capture 0: x170" + Environment.NewLine +
-                "      Group 4: '0'" + Environment.NewLine +
-                "         Number of Captures: 3" + Environment.NewLine +
-                "            Capture 0: 1" + Environment.NewLine +
-                "            Capture 1: 7" + Environment.NewLine +
-                "            Capture 2: 0" + Environment.NewLine;
+                "No match for AC10: Match.Value is <empty>"
+                + Environment.NewLine
+                + "Match: 'Za203.CYM'"
+                + Environment.NewLine
+                + "   Number of Capturing Groups: 5"
+                + Environment.NewLine
+                + "      Group 0: 'Za203.CYM'"
+                + Environment.NewLine
+                + "         Number of Captures: 1"
+                + Environment.NewLine
+                + "            Capture 0: Za203.CYM"
+                + Environment.NewLine
+                + "      Group 1: 'Za'"
+                + Environment.NewLine
+                + "         Number of Captures: 1"
+                + Environment.NewLine
+                + "            Capture 0: Za"
+                + Environment.NewLine
+                + "      Group 2: '203'"
+                + Environment.NewLine
+                + "         Number of Captures: 1"
+                + Environment.NewLine
+                + "            Capture 0: 203"
+                + Environment.NewLine
+                + "      Group 3: 'CYM'"
+                + Environment.NewLine
+                + "         Number of Captures: 1"
+                + Environment.NewLine
+                + "            Capture 0: CYM"
+                + Environment.NewLine
+                + "      Group 4: <empty>"
+                + Environment.NewLine
+                + "         Number of Captures: 0"
+                + Environment.NewLine
+                + "Match: 'XYZ.CoA'"
+                + Environment.NewLine
+                + "   Number of Capturing Groups: 5"
+                + Environment.NewLine
+                + "      Group 0: 'XYZ.CoA'"
+                + Environment.NewLine
+                + "         Number of Captures: 1"
+                + Environment.NewLine
+                + "            Capture 0: XYZ.CoA"
+                + Environment.NewLine
+                + "      Group 1: 'XYZ'"
+                + Environment.NewLine
+                + "         Number of Captures: 1"
+                + Environment.NewLine
+                + "            Capture 0: XYZ"
+                + Environment.NewLine
+                + "      Group 2: <empty>"
+                + Environment.NewLine
+                + "         Number of Captures: 0"
+                + Environment.NewLine
+                + "      Group 3: 'CoA'"
+                + Environment.NewLine
+                + "         Number of Captures: 1"
+                + Environment.NewLine
+                + "            Capture 0: CoA"
+                + Environment.NewLine
+                + "      Group 4: <empty>"
+                + Environment.NewLine
+                + "         Number of Captures: 0"
+                + Environment.NewLine
+                + "Match: 'ABC.x170'"
+                + Environment.NewLine
+                + "   Number of Capturing Groups: 5"
+                + Environment.NewLine
+                + "      Group 0: 'ABC.x170'"
+                + Environment.NewLine
+                + "         Number of Captures: 1"
+                + Environment.NewLine
+                + "            Capture 0: ABC.x170"
+                + Environment.NewLine
+                + "      Group 1: 'ABC'"
+                + Environment.NewLine
+                + "         Number of Captures: 1"
+                + Environment.NewLine
+                + "            Capture 0: ABC"
+                + Environment.NewLine
+                + "      Group 2: <empty>"
+                + Environment.NewLine
+                + "         Number of Captures: 0"
+                + Environment.NewLine
+                + "      Group 3: 'x170'"
+                + Environment.NewLine
+                + "         Number of Captures: 1"
+                + Environment.NewLine
+                + "            Capture 0: x170"
+                + Environment.NewLine
+                + "      Group 4: '0'"
+                + Environment.NewLine
+                + "         Number of Captures: 3"
+                + Environment.NewLine
+                + "            Capture 0: 1"
+                + Environment.NewLine
+                + "            Capture 1: 7"
+                + Environment.NewLine
+                + "            Capture 2: 0"
+                + Environment.NewLine;
 
             Assert.Equal(expected, actual.ToString());
         }
@@ -631,8 +789,9 @@ namespace System.Text.RegularExpressions.Tests
         [Theory]
         [InlineData(RegexOptions.None)]
         [InlineData(RegexOptions.Compiled)]
-        public void Docs_Backtracking_WithOptionalQuantifiersOrAlternationConstructs(RegexOptions options)
-        {
+        public void Docs_Backtracking_WithOptionalQuantifiersOrAlternationConstructs(
+            RegexOptions options
+        ) {
             const string Pattern = ".*(es)";
             const string Input = "Essential services are provided by regular expressions.";
 
@@ -653,7 +812,9 @@ namespace System.Text.RegularExpressions.Tests
         {
             const string Input = "b51:4:1DB:9EE1:5:27d60:f44:D4:cd:E:5:0A5:4a:D24:41Ad:";
             // Assert.False(Regex.IsMatch(Input, "^(([0-9a-fA-F]{1,4}:)*([0-9a-fA-F]{1,4}))*(::)$")); // takes too long due to backtracking
-            Assert.False(Regex.IsMatch(Input, "^((?>[0-9a-fA-F]{1,4}:)*(?>[0-9a-fA-F]{1,4}))*(::)$", options)); // non-backtracking
+            Assert.False(
+                Regex.IsMatch(Input, "^((?>[0-9a-fA-F]{1,4}:)*(?>[0-9a-fA-F]{1,4}))*(::)$", options)
+            ); // non-backtracking
         }
 
         // https://docs.microsoft.com/en-us/dotnet/standard/base-types/backtracking-in-regular-expressions#lookbehind-assertions
@@ -713,7 +874,11 @@ namespace System.Text.RegularExpressions.Tests
         {
             const string Pattern = @"\b[A-Z]+\b(?=\P{P})";
             const string Input = "If so, what comes next?";
-            MatchCollection matches = Regex.Matches(Input, Pattern, RegexOptions.IgnoreCase | options);
+            MatchCollection matches = Regex.Matches(
+                Input,
+                Pattern,
+                RegexOptions.IgnoreCase | options
+            );
             Assert.Equal(3, matches.Count);
             Assert.Equal("If", matches[0].Value);
             Assert.Equal("what", matches[1].Value);
@@ -728,7 +893,11 @@ namespace System.Text.RegularExpressions.Tests
         {
             const string Pattern = @"\b(?!non)\w+\b";
             const string Input = "Nonsense is not always non-functional.";
-            MatchCollection matches = Regex.Matches(Input, Pattern, RegexOptions.IgnoreCase | options);
+            MatchCollection matches = Regex.Matches(
+                Input,
+                Pattern,
+                RegexOptions.IgnoreCase | options
+            );
             Assert.Equal(4, matches.Count);
             Assert.Equal("is", matches[0].Value);
             Assert.Equal("not", matches[1].Value);
@@ -826,14 +995,21 @@ namespace System.Text.RegularExpressions.Tests
             }
 
             string expected =
-                "Drooling dog" + Environment.NewLine +
-                "   Group 1: Drooling" + Environment.NewLine +
-                "   Group 2: dog" + Environment.NewLine +
-                Environment.NewLine +
-                "Drooling dog" + Environment.NewLine +
-                "   Group 1: 'Drooling'" + Environment.NewLine +
-                "Dreaded Deep" + Environment.NewLine +
-                "   Group 1: 'Dreaded'" + Environment.NewLine;
+                "Drooling dog"
+                + Environment.NewLine
+                + "   Group 1: Drooling"
+                + Environment.NewLine
+                + "   Group 2: dog"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "Drooling dog"
+                + Environment.NewLine
+                + "   Group 1: 'Drooling'"
+                + Environment.NewLine
+                + "Dreaded Deep"
+                + Environment.NewLine
+                + "   Group 1: 'Dreaded'"
+                + Environment.NewLine;
 
             Assert.Equal(expected, actual.ToString());
         }
@@ -844,7 +1020,8 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.Compiled)]
         public void Docs_InlineComment(RegexOptions options)
         {
-            const string Pattern = @"\b((?# case-sensitive comparison)D\w+)\s(?ixn)((?#case-insensitive comparison)d\w+)\b";
+            const string Pattern =
+                @"\b((?# case-sensitive comparison)D\w+)\s(?ixn)((?#case-insensitive comparison)d\w+)\b";
             const string Input = "double dare double Double a Drooling dog The Dreaded Deep";
 
             Match match = Regex.Match(Input, Pattern, options);
@@ -868,11 +1045,11 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.Compiled)]
         public void Docs_EndOfLineComment(RegexOptions options)
         {
-            const string Pattern = @"\{\d+(,-*\d+)*(\:\w{1,4}?)*\}(?x) # Looks for a composite format item.";
+            const string Pattern =
+                @"\{\d+(,-*\d+)*(\:\w{1,4}?)*\}(?x) # Looks for a composite format item.";
             const string Input = "{0,-3:F}";
             Assert.True(Regex.IsMatch(Input, Pattern, options));
         }
-
 
         // https://docs.microsoft.com/en-us/dotnet/standard/base-types/anchors-in-regular-expressions#contiguous-matches-g
         [Theory]
@@ -898,18 +1075,27 @@ namespace System.Text.RegularExpressions.Tests
 
             Assert.Equal(
                 ",arabypac,lerriuqs,knumpihcenipucrop",
-                Regex.Replace(Input, Pattern, m => string.Concat(m.Value.Reverse())));
+                Regex.Replace(Input, Pattern, m => string.Concat(m.Value.Reverse()))
+            );
         }
-
 
         //
         // These patterns come from real-world customer usages
         //
 
         [Theory]
-        [InlineData("https://foo.com:443/bar/17/groups/0ad1/providers/Network/public/4e-ip?version=16", "Network/public/4e-ip")]
-        [InlineData("ftp://443/notproviders/17/groups/0ad1/providers/Network/public/4e-ip?version=16", "Network/public/4e-ip")]
-        [InlineData("ftp://443/providersnot/17/groups/0ad1/providers/Network/public/4e-ip?version=16", "Network/public/4e-ip")]
+        [InlineData(
+            "https://foo.com:443/bar/17/groups/0ad1/providers/Network/public/4e-ip?version=16",
+            "Network/public/4e-ip"
+        )]
+        [InlineData(
+            "ftp://443/notproviders/17/groups/0ad1/providers/Network/public/4e-ip?version=16",
+            "Network/public/4e-ip"
+        )]
+        [InlineData(
+            "ftp://443/providersnot/17/groups/0ad1/providers/Network/public/4e-ip?version=16",
+            "Network/public/4e-ip"
+        )]
         public void RealWorld_ExtractResourceUri(string url, string expected)
         {
             foreach (RegexOptions options in new[] { RegexOptions.Compiled, RegexOptions.None })
@@ -932,16 +1118,21 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("\u0600b", false)] // \u0600 is in {Cf}
         [InlineData("a\u0300", true)] // \u0300 is in {Mn}
         [InlineData("\u0300b", false)] // \u0300 is in {Mn}
-        [InlineData("https://foo.com:443/bar/17/groups/0ad1/providers/Network/public/4e-ip?version=16", false)]
+        [InlineData(
+            "https://foo.com:443/bar/17/groups/0ad1/providers/Network/public/4e-ip?version=16",
+            false
+        )]
         [InlineData("david.jones@proseware.com", false)]
         [InlineData("~david", false)]
         [InlineData("david~", false)]
         public void RealWorld_IsValidCSharpName(string value, bool isExpectedMatch)
         {
             const string StartCharacterRegex = @"_|[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}]";
-            const string PartCharactersRegex = @"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\p{Cf}]";
+            const string PartCharactersRegex =
+                @"[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\p{Cf}]";
 
-            const string IdentifierRegex = @"^(" + StartCharacterRegex + ")(" + PartCharactersRegex + ")*$";
+            const string IdentifierRegex =
+                @"^(" + StartCharacterRegex + ")(" + PartCharactersRegex + ")*$";
 
             foreach (RegexOptions options in new[] { RegexOptions.Compiled, RegexOptions.None })
             {

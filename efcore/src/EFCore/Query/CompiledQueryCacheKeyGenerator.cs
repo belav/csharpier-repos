@@ -31,8 +31,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Initializes a new instance of the <see cref="CompiledQueryCacheKeyGenerator" /> class.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
-        public CompiledQueryCacheKeyGenerator(CompiledQueryCacheKeyGeneratorDependencies dependencies)
-        {
+        public CompiledQueryCacheKeyGenerator(
+            CompiledQueryCacheKeyGeneratorDependencies dependencies
+        ) {
             Check.NotNull(dependencies, nameof(dependencies));
 
             Dependencies = dependencies;
@@ -49,8 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="query"> The query to get the cache key for. </param>
         /// <param name="async"> A value indicating whether the query will be executed asynchronously. </param>
         /// <returns> The cache key. </returns>
-        public virtual object GenerateCacheKey(Expression query, bool async)
-            => GenerateCacheKeyCore(query, async);
+        public virtual object GenerateCacheKey(Expression query, bool async) =>
+            GenerateCacheKeyCore(query, async);
 
         /// <summary>
         ///     Generates the cache key for the given query.
@@ -58,12 +59,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="query"> The query to get the cache key for. </param>
         /// <param name="async"> A value indicating whether the query will be executed asynchronously. </param>
         /// <returns> The cache key. </returns>
-        protected CompiledQueryCacheKey GenerateCacheKeyCore(Expression query, bool async) // Intentionally non-virtual
-            => new(
+        protected CompiledQueryCacheKey GenerateCacheKeyCore(
+            Expression query,
+            bool async
+        ) // Intentionally non-virtual
+            =>
+            new(
                 Check.NotNull(query, nameof(query)),
                 Dependencies.Model,
                 Dependencies.CurrentContext.Context.ChangeTracker.QueryTrackingBehavior,
-                async);
+                async
+            );
 
         /// <summary>
         ///     <para>
@@ -93,8 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Expression query,
                 IModel model,
                 QueryTrackingBehavior queryTrackingBehavior,
-                bool async)
-            {
+                bool async
+            ) {
                 _query = query;
                 _model = model;
                 _queryTrackingBehavior = queryTrackingBehavior;
@@ -111,8 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             ///     <see langword="true" /> if the object is a <see cref="CompiledQueryCacheKey" /> and is for the same query, otherwise
             ///     <see langword="false" />.
             /// </returns>
-            public override bool Equals(object? obj)
-                => obj is CompiledQueryCacheKey other && Equals(other);
+            public override bool Equals(object? obj) =>
+                obj is CompiledQueryCacheKey other && Equals(other);
 
             /// <summary>
             ///     Indicates whether the current object is equal to another object of the same type.

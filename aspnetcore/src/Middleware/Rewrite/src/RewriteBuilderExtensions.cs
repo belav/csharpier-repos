@@ -33,8 +33,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app">The <see cref="IApplicationBuilder"/></param>
         /// <param name="options">Options for rewrite.</param>
         /// <returns></returns>
-        public static IApplicationBuilder UseRewriter(this IApplicationBuilder app, RewriteOptions options)
-        {
+        public static IApplicationBuilder UseRewriter(
+            this IApplicationBuilder app,
+            RewriteOptions options
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));

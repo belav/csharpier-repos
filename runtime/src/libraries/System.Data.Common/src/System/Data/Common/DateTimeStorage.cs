@@ -13,9 +13,7 @@ namespace System.Data.Common
         private DateTime[] _values = default!; // Late-initialized
 
         internal DateTimeStorage(DataColumn column)
-        : base(column, typeof(DateTime), s_defaultValue, StorageType.DateTime)
-        {
-        }
+            : base(column, typeof(DateTime), s_defaultValue, StorageType.DateTime) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -31,7 +29,10 @@ namespace System.Data.Common
                             int record = records[i];
                             if (HasValue(record))
                             {
-                                min = (DateTime.Compare(_values[record], min) < 0) ? _values[record] : min;
+                                min =
+                                    (DateTime.Compare(_values[record], min) < 0)
+                                        ? _values[record]
+                                        : min;
                                 hasData = true;
                             }
                         }
@@ -48,7 +49,10 @@ namespace System.Data.Common
                             int record = records[i];
                             if (HasValue(record))
                             {
-                                max = (DateTime.Compare(_values[record], max) >= 0) ? _values[record] : max;
+                                max =
+                                    (DateTime.Compare(_values[record], max) >= 0)
+                                        ? _values[record]
+                                        : max;
                                 hasData = true;
                             }
                         }
@@ -238,7 +242,10 @@ namespace System.Data.Common
             }
             else
             {
-                retValue = XmlConvert.ToString((DateTime)value, XmlDateTimeSerializationMode.RoundtripKind);
+                retValue = XmlConvert.ToString(
+                    (DateTime)value,
+                    XmlDateTimeSerializationMode.RoundtripKind
+                );
             }
             return retValue;
         }
@@ -248,8 +255,12 @@ namespace System.Data.Common
             return new DateTime[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
-        {
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        ) {
             DateTime[] typedStore = (DateTime[])store;
             bool isnull = !HasValue(record);
             if (isnull || (0 == (DateTimeMode & DataSetDateTime.Local)))
@@ -273,7 +284,10 @@ namespace System.Data.Common
                 {
                     if (HasValue(i))
                     {
-                        _values[i] = DateTime.SpecifyKind(_values[i].ToLocalTime(), DateTimeKind.Unspecified); //Strip the kind for UnspecifiedLocal.
+                        _values[i] = DateTime.SpecifyKind(
+                            _values[i].ToLocalTime(),
+                            DateTimeKind.Unspecified
+                        ); //Strip the kind for UnspecifiedLocal.
                     }
                 }
             }

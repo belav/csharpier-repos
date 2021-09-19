@@ -9,9 +9,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 {
     internal class StringArrayComparer : IEqualityComparer<string[]>
     {
-        public static readonly StringArrayComparer Ordinal = new StringArrayComparer(StringComparer.Ordinal);
+        public static readonly StringArrayComparer Ordinal = new StringArrayComparer(
+            StringComparer.Ordinal
+        );
 
-        public static readonly StringArrayComparer OrdinalIgnoreCase = new StringArrayComparer(StringComparer.OrdinalIgnoreCase);
+        public static readonly StringArrayComparer OrdinalIgnoreCase = new StringArrayComparer(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         private readonly StringComparer _valueComparer;
 

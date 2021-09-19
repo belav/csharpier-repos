@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
             bool isAtEndOfPattern,
             bool isRightSideOfNumericType,
             bool isOnArgumentListBracketOrComma,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             this.Workspace = workspace;
             this.SemanticModel = semanticModel;
             this.SyntaxTree = semanticModel.SyntaxTree;
@@ -67,7 +67,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
             this.IsPossibleTupleContext = isPossibleTupleContext;
             this.IsAtStartOfPattern = isAtStartOfPattern;
             this.IsAtEndOfPattern = isAtEndOfPattern;
-            this.InferredTypes = ComputeInferredTypes(workspace, semanticModel, position, cancellationToken);
+            this.InferredTypes = ComputeInferredTypes(
+                workspace,
+                semanticModel,
+                position,
+                cancellationToken
+            );
             this.IsRightSideOfNumericType = isRightSideOfNumericType;
             this.IsOnArgumentListBracketOrComma = isOnArgumentListBracketOrComma;
         }
@@ -117,7 +122,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
 
         private ISet<INamedTypeSymbol> ComputeOuterTypes(CancellationToken cancellationToken)
         {
-            var enclosingSymbol = this.SemanticModel.GetEnclosingSymbol(this.LeftToken.SpanStart, cancellationToken);
+            var enclosingSymbol = this.SemanticModel.GetEnclosingSymbol(
+                this.LeftToken.SpanStart,
+                cancellationToken
+            );
             if (enclosingSymbol != null)
             {
                 var containingType = enclosingSymbol.GetContainingTypeOrThis();
@@ -130,13 +138,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
             return SpecializedCollections.EmptySet<INamedTypeSymbol>();
         }
 
-        protected ImmutableArray<ITypeSymbol> ComputeInferredTypes(Workspace workspace,
+        protected ImmutableArray<ITypeSymbol> ComputeInferredTypes(
+            Workspace workspace,
             SemanticModel semanticModel,
             int position,
-            CancellationToken cancellationToken)
-        {
-            var typeInferenceService = workspace?.Services.GetLanguageService<ITypeInferenceService>(semanticModel.Language)
-                ?? GetTypeInferenceServiceWithoutWorkspace();
+            CancellationToken cancellationToken
+        ) {
+            var typeInferenceService =
+                workspace?.Services.GetLanguageService<ITypeInferenceService>(
+                    semanticModel.Language
+                ) ?? GetTypeInferenceServiceWithoutWorkspace();
             return typeInferenceService.InferTypes(semanticModel, position, cancellationToken);
         }
 
@@ -146,16 +157,20 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
         {
             if (_outerTypes == null)
             {
-                Interlocked.CompareExchange(ref _outerTypes, ComputeOuterTypes(cancellationToken), null);
+                Interlocked.CompareExchange(
+                    ref _outerTypes,
+                    ComputeOuterTypes(cancellationToken),
+                    null
+                );
             }
 
             return _outerTypes;
         }
 
-        public TService GetLanguageService<TService>() where TService : class, ILanguageService
-            => this.Workspace.Services.GetLanguageService<TService>(this.SemanticModel.Language);
+        public TService GetLanguageService<TService>() where TService : class, ILanguageService =>
+            this.Workspace.Services.GetLanguageService<TService>(this.SemanticModel.Language);
 
-        public TService GetWorkspaceService<TService>() where TService : class, IWorkspaceService
-            => this.Workspace.Services.GetService<TService>();
+        public TService GetWorkspaceService<TService>() where TService : class, IWorkspaceService =>
+            this.Workspace.Services.GetService<TService>();
     }
 }

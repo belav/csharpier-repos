@@ -9,6 +9,5 @@ namespace ControllersFromServicesClassLibrary
     [Route("/[controller]")]
     public class ResourcesController
     {
-
     }
 }

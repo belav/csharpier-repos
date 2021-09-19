@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis
         /// Create a new Solution Id
         /// </summary>
         /// <param name="debugName">An optional name to make this id easier to recognize while debugging.</param>
-        public static SolutionId CreateNewId(string debugName = null)
-            => CreateFromSerialized(Guid.NewGuid(), debugName);
+        public static SolutionId CreateNewId(string debugName = null) =>
+            CreateFromSerialized(Guid.NewGuid(), debugName);
 
         public static SolutionId CreateFromSerialized(Guid id, string debugName = null)
         {
@@ -51,27 +51,22 @@ namespace Microsoft.CodeAnalysis
 
         internal string DebugName => _debugName;
 
-        private string GetDebuggerDisplay()
-            => string.Format("({0}, #{1} - {2})", GetType().Name, this.Id, _debugName);
+        private string GetDebuggerDisplay() =>
+            string.Format("({0}, #{1} - {2})", GetType().Name, this.Id, _debugName);
 
-        public override bool Equals(object obj)
-            => this.Equals(obj as SolutionId);
+        public override bool Equals(object obj) => this.Equals(obj as SolutionId);
 
         public bool Equals(SolutionId other)
         {
-            return
-                other is object &&
-                this.Id == other.Id;
+            return other is object && this.Id == other.Id;
         }
 
-        public static bool operator ==(SolutionId left, SolutionId right)
-            => EqualityComparer<SolutionId>.Default.Equals(left, right);
+        public static bool operator ==(SolutionId left, SolutionId right) =>
+            EqualityComparer<SolutionId>.Default.Equals(left, right);
 
-        public static bool operator !=(SolutionId left, SolutionId right)
-            => !(left == right);
+        public static bool operator !=(SolutionId left, SolutionId right) => !(left == right);
 
-        public override int GetHashCode()
-            => this.Id.GetHashCode();
+        public override int GetHashCode() => this.Id.GetHashCode();
 
         bool IObjectWritable.ShouldReuseInSerialization => true;
 

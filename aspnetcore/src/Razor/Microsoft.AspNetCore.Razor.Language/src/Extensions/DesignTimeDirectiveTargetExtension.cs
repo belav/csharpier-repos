@@ -12,34 +12,44 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         private const string DirectiveTokenHelperMethodName = "__RazorDirectiveTokenHelpers__";
         private const string TypeHelper = "__typeHelper";
 
-        public void WriteDesignTimeDirective(CodeRenderingContext context, DesignTimeDirectiveIntermediateNode directiveNode)
-        {
-            context.CodeWriter
-                .WriteLine("#pragma warning disable 219")
+        public void WriteDesignTimeDirective(
+            CodeRenderingContext context,
+            DesignTimeDirectiveIntermediateNode directiveNode
+        ) {
+            context.CodeWriter.WriteLine("#pragma warning disable 219")
                 .WriteLine($"private void {DirectiveTokenHelperMethodName}() {{");
 
             for (var i = 0; i < directiveNode.Children.Count; i++)
             {
                 if (directiveNode.Children[i] is DirectiveTokenIntermediateNode directiveTokenNode)
                 {
-                    WriteDesignTimeDirectiveToken(context, directiveNode, directiveTokenNode, currentIndex: i);
+                    WriteDesignTimeDirectiveToken(
+                        context,
+                        directiveNode,
+                        directiveTokenNode,
+                        currentIndex: i
+                    );
                 }
             }
 
-            context.CodeWriter
-                .WriteLine("}")
-                .WriteLine("#pragma warning restore 219");
+            context.CodeWriter.WriteLine("}").WriteLine("#pragma warning restore 219");
         }
 
-        private void WriteDesignTimeDirectiveToken(CodeRenderingContext context, DesignTimeDirectiveIntermediateNode parent, DirectiveTokenIntermediateNode node, int currentIndex)
-        {
+        private void WriteDesignTimeDirectiveToken(
+            CodeRenderingContext context,
+            DesignTimeDirectiveIntermediateNode parent,
+            DirectiveTokenIntermediateNode node,
+            int currentIndex
+        ) {
             var tokenKind = node.DirectiveToken.Kind;
-            if (!node.Source.HasValue ||
-                !string.Equals(
+            if (
+                !node.Source.HasValue
+                || !string.Equals(
                     context.SourceDocument?.FilePath,
                     node.Source.Value.FilePath,
-                    StringComparison.OrdinalIgnoreCase))
-            {
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 // We don't want to handle directives from imports.
                 return;
             }
@@ -52,10 +62,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             }
 
             // Wrap the directive token in a lambda to isolate variable names.
-            context.CodeWriter
-                .Write("((")
-                .Write(typeof(Action).FullName)
-                .Write(")(");
+            context.CodeWriter.Write("((").Write(typeof(Action).FullName).Write(")(");
             using (context.CodeWriter.BuildLambda())
             {
                 var originalIndent = context.CodeWriter.CurrentIndent;
@@ -75,8 +82,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                         using (context.CodeWriter.BuildLinePragma(node.Source, context))
                         {
                             context.AddSourceMappingFor(node);
-                            context.CodeWriter
-                                .Write(node.Content)
+                            context.CodeWriter.Write(node.Content)
                                 .Write(" ")
                                 .WriteStartAssignment(TypeHelper)
                                 .Write("default");
@@ -102,15 +108,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                         // global::System.Object {node.content} = null;
                         using (context.CodeWriter.BuildLinePragma(node.Source, context))
                         {
-                            context.CodeWriter
-                            .Write("global::")
-                            .Write(typeof(object).FullName)
-                            .Write(" ");
+                            context.CodeWriter.Write("global::")
+                                .Write(typeof(object).FullName)
+                                .Write(" ");
 
                             context.AddSourceMappingFor(node);
-                            context.CodeWriter
-                                .Write(node.Content)
-                                .Write(" = null");
+                            context.CodeWriter.Write(node.Content).Write(" = null");
 
                             if (!context.Options.SuppressNullabilityEnforcement)
                             {
@@ -133,18 +136,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                         // global::System.Object __typeHelper = nameof({node.Content});
                         using (context.CodeWriter.BuildLinePragma(node.Source, context))
                         {
-                            context.CodeWriter
-                            .Write("global::")
-                            .Write(typeof(object).FullName)
-                            .Write(" ")
-                            .WriteStartAssignment(TypeHelper);
+                            context.CodeWriter.Write("global::")
+                                .Write(typeof(object).FullName)
+                                .Write(" ")
+                                .WriteStartAssignment(TypeHelper);
 
                             context.CodeWriter.Write("nameof(");
 
                             context.AddSourceMappingFor(node);
-                            context.CodeWriter
-                                .Write(node.Content)
-                                .WriteLine(");");
+                            context.CodeWriter.Write(node.Content).WriteLine(");");
                         }
                         break;
 
@@ -153,11 +153,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                         // global::System.Object __typeHelper = "{node.Content}";
                         using (context.CodeWriter.BuildLinePragma(node.Source, context))
                         {
-                            context.CodeWriter
-                            .Write("global::")
-                            .Write(typeof(object).FullName)
-                            .Write(" ")
-                            .WriteStartAssignment(TypeHelper);
+                            context.CodeWriter.Write("global::")
+                                .Write(typeof(object).FullName)
+                                .Write(" ")
+                                .WriteStartAssignment(TypeHelper);
 
                             if (node.Content.StartsWith("\"", StringComparison.Ordinal))
                             {
@@ -168,9 +167,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                             {
                                 context.CodeWriter.Write("\"");
                                 context.AddSourceMappingFor(node);
-                                context.CodeWriter
-                                    .Write(node.Content)
-                                    .Write("\"");
+                                context.CodeWriter.Write(node.Content).Write("\"");
                             }
 
                             context.CodeWriter.WriteLine(";");
@@ -181,11 +178,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                         // global::System.Boolean __typeHelper = {node.Content};
                         using (context.CodeWriter.BuildLinePragma(node.Source, context))
                         {
-                            context.CodeWriter
-                            .Write("global::")
-                            .Write(typeof(bool).FullName)
-                            .Write(" ")
-                            .WriteStartAssignment(TypeHelper);
+                            context.CodeWriter.Write("global::")
+                                .Write(typeof(bool).FullName)
+                                .Write(" ")
+                                .WriteStartAssignment(TypeHelper);
 
                             context.AddSourceMappingFor(node);
                             context.CodeWriter.Write(node.Content);
@@ -204,9 +200,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                         using (context.CodeWriter.BuildLinePragma(node.Source, context))
                         {
                             // It's OK to do this since a GenericTypeParameterConstraint token is always preceded by a member token.
-                            var genericTypeParamName = (DirectiveTokenIntermediateNode)parent.Children[currentIndex - 1];
-                            context.CodeWriter
-                                .Write("void __TypeConstraints_")
+                            var genericTypeParamName =
+                                (DirectiveTokenIntermediateNode)parent.Children[currentIndex - 1];
+                            context.CodeWriter.Write("void __TypeConstraints_")
                                 .Write(genericTypeParamName.Content)
                                 .Write("<")
                                 .Write(genericTypeParamName.Content)
@@ -227,8 +223,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             context.CodeWriter.WriteLine("))();");
         }
 
-        private void WriteMarkerToken(CodeRenderingContext context, DirectiveTokenIntermediateNode node)
-        {
+        private void WriteMarkerToken(
+            CodeRenderingContext context,
+            DirectiveTokenIntermediateNode node
+        ) {
             // Marker tokens exist to be filled with other content a user might write. In an end-to-end
             // scenario markers prep the Razor documents C# projections to have an empty projection that
             // can be filled with other user content. This content can trigger a multitude of other events,

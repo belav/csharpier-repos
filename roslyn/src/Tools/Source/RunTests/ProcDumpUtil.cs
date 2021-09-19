@@ -36,7 +36,8 @@ namespace RunTests
 
         internal static ProcDumpInfo? ReadFromEnvironment()
         {
-            bool validate([NotNullWhen(true)] string? s) => !string.IsNullOrEmpty(s) && Path.IsPathRooted(s);
+            bool validate([NotNullWhen(true)] string? s) =>
+                !string.IsNullOrEmpty(s) && Path.IsPathRooted(s);
 
             var procDumpFilePath = Environment.GetEnvironmentVariable(KeyProcDumpFilePath);
             var dumpDirectory = Environment.GetEnvironmentVariable(KeyProcDumpDirectory);
@@ -56,7 +57,10 @@ namespace RunTests
         {
             Debug.Assert(IsAdministrator());
 
-            using var registryKey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps", writable: true);
+            using var registryKey = Registry.LocalMachine.CreateSubKey(
+                @"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps",
+                writable: true
+            );
             registryKey.SetValue("DumpType", 2, RegistryValueKind.DWord);
             registryKey.SetValue("DumpCount", 2, RegistryValueKind.DWord);
             registryKey.SetValue("DumpFolder", dumpDirectory, RegistryValueKind.String);
@@ -66,7 +70,10 @@ namespace RunTests
         {
             Debug.Assert(IsAdministrator());
 
-            using var registryKey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps", writable: true);
+            using var registryKey = Registry.LocalMachine.CreateSubKey(
+                @"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps",
+                writable: true
+            );
             registryKey.DeleteValue("DumpType", throwOnMissingValue: false);
             registryKey.DeleteValue("DumpCount", throwOnMissingValue: false);
             registryKey.DeleteValue("DumpFolder", throwOnMissingValue: false);
@@ -84,7 +91,11 @@ namespace RunTests
     {
         internal static Process AttachProcDump(ProcDumpInfo procDumpInfo, int processId)
         {
-            return AttachProcDump(procDumpInfo.ProcDumpFilePath, processId, procDumpInfo.DumpDirectory);
+            return AttachProcDump(
+                procDumpInfo.ProcDumpFilePath,
+                processId,
+                procDumpInfo.DumpDirectory
+            );
         }
 
         internal static string GetProcDumpCommandLine(int processId, string dumpDirectory)
@@ -92,7 +103,7 @@ namespace RunTests
             // /accepteula command line option to automatically accept the Sysinternals license agreement.
             // -ma	Write a 'Full' dump file. Includes All the Image, Mapped and Private memory.
             // -e	Write a dump when the process encounters an unhandled exception. Include the 1 to create dump on first chance exceptions.
-            // -f C00000FD.STACK_OVERFLOWC Dump when a stack overflow first chance exception is encountered. 
+            // -f C00000FD.STACK_OVERFLOWC Dump when a stack overflow first chance exception is encountered.
             const string procDumpSwitches = "/accepteula -ma -e -f C00000FD.STACK_OVERFLOW";
             dumpDirectory = dumpDirectory.TrimEnd('\\');
             return $" {procDumpSwitches} {processId} \"{dumpDirectory}\"";
@@ -104,10 +115,16 @@ namespace RunTests
         /// <param name="procDumpFilePath">The path to the procdump executable</param>
         /// <param name="processId">process id</param>
         /// <param name="dumpDirectory">destination directory for dumps</param>
-        internal static Process AttachProcDump(string procDumpFilePath, int processId, string dumpDirectory)
-        {
+        internal static Process AttachProcDump(
+            string procDumpFilePath,
+            int processId,
+            string dumpDirectory
+        ) {
             Directory.CreateDirectory(dumpDirectory);
-            return Process.Start(procDumpFilePath, GetProcDumpCommandLine(processId, dumpDirectory));
+            return Process.Start(
+                procDumpFilePath,
+                GetProcDumpCommandLine(processId, dumpDirectory)
+            );
         }
     }
 }

@@ -34,13 +34,22 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmRawReturnValue ReturnValue,
             DkmCompiledVisualizationData AdditionalVisualizationData,
             DkmCompiledVisualizationDataPriority AdditionalVisualizationDataPriority,
-            ReadOnlyCollection<DkmRawReturnValueContainer> ReturnValues)
-        {
-            return new DkmInspectionContext(InspectionSession, EvaluationFlags, Radix, RuntimeInstance);
+            ReadOnlyCollection<DkmRawReturnValueContainer> ReturnValues
+        ) {
+            return new DkmInspectionContext(
+                InspectionSession,
+                EvaluationFlags,
+                Radix,
+                RuntimeInstance
+            );
         }
 
-        internal DkmInspectionContext(DkmInspectionSession inspectionSession, DkmEvaluationFlags evaluationFlags, uint radix, DkmRuntimeInstance runtimeInstance)
-        {
+        internal DkmInspectionContext(
+            DkmInspectionSession inspectionSession,
+            DkmEvaluationFlags evaluationFlags,
+            uint radix,
+            DkmRuntimeInstance runtimeInstance
+        ) {
             this.InspectionSession = inspectionSession;
             this.EvaluationFlags = evaluationFlags;
             this.Radix = radix;
@@ -60,9 +69,16 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         public readonly DkmCompiledVisualizationDataPriority AdditionalVisualizationDataPriority;
         public readonly ReadOnlyCollection<DkmRawReturnValueContainer> ReturnValues;
 
-        public string GetTypeName(DkmClrType ClrType, DkmClrCustomTypeInfo CustomTypeInfo, ReadOnlyCollection<string> FormatSpecifiers)
-        {
-            return InspectionSession.InvokeFormatter(this, MethodId.GetTypeName, f => f.GetTypeName(this, ClrType, CustomTypeInfo, FormatSpecifiers));
+        public string GetTypeName(
+            DkmClrType ClrType,
+            DkmClrCustomTypeInfo CustomTypeInfo,
+            ReadOnlyCollection<string> FormatSpecifiers
+        ) {
+            return InspectionSession.InvokeFormatter(
+                this,
+                MethodId.GetTypeName,
+                f => f.GetTypeName(this, ClrType, CustomTypeInfo, FormatSpecifiers)
+            );
         }
     }
 

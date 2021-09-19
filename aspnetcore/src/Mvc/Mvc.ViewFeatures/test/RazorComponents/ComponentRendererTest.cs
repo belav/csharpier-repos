@@ -29,12 +29,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 {
     public class ComponentRendererTest
     {
-        private const string PrerenderedComponentPattern = "^<!--Blazor:(?<preamble>.*?)-->(?<content>.+?)<!--Blazor:(?<epilogue>.*?)-->$";
+        private const string PrerenderedComponentPattern =
+            "^<!--Blazor:(?<preamble>.*?)-->(?<content>.+?)<!--Blazor:(?<epilogue>.*?)-->$";
         private const string ComponentPattern = "^<!--Blazor:(.*?)-->$";
 
-        private static readonly IDataProtectionProvider _dataprotectorProvider = new EphemeralDataProtectionProvider();
+        private static readonly IDataProtectionProvider _dataprotectorProvider =
+            new EphemeralDataProtectionProvider();
 
-        private readonly IServiceProvider _services = CreateDefaultServiceCollection().BuildServiceProvider();
+        private readonly IServiceProvider _services = CreateDefaultServiceCollection()
+            .BuildServiceProvider();
         private readonly ComponentRenderer renderer;
 
         public ComponentRendererTest()
@@ -50,14 +53,22 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var writer = new StringWriter();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(TestComponent), RenderMode.WebAssembly, null);
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(TestComponent),
+                RenderMode.WebAssembly,
+                null
+            );
             result.WriteTo(writer, HtmlEncoder.Default);
             var content = writer.ToString();
             var match = Regex.Match(content, ComponentPattern);
 
             // Assert
             Assert.True(match.Success);
-            var marker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var marker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(
+                match.Groups[1].Value,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Null(marker.PrerenderId);
             Assert.Equal("webassembly", marker.Type);
             Assert.Equal(typeof(TestComponent).Assembly.GetName().Name, marker.Assembly);
@@ -73,7 +84,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var writer = new StringWriter();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(TestComponent), RenderMode.WebAssemblyPrerendered, null);
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(TestComponent),
+                RenderMode.WebAssemblyPrerendered,
+                null
+            );
             result.WriteTo(writer, HtmlEncoder.Default);
             var content = writer.ToString();
             var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
@@ -81,7 +97,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Assert
             Assert.True(match.Success);
             var preamble = match.Groups["preamble"].Value;
-            var preambleMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var preambleMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(
+                preamble,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.NotNull(preambleMarker.PrerenderId);
             Assert.Equal("webassembly", preambleMarker.Type);
             Assert.Equal(typeof(TestComponent).Assembly.GetName().Name, preambleMarker.Assembly);
@@ -91,7 +110,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Assert.Equal("<h1>Hello world!</h1>", prerenderedContent);
 
             var epilogue = match.Groups["epilogue"].Value;
-            var epilogueMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var epilogueMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(
+                epilogue,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
             Assert.Null(epilogueMarker.Assembly);
             Assert.Null(epilogueMarker.TypeName);
@@ -111,31 +133,43 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var writer = new StringWriter();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent),
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
                 RenderMode.WebAssembly,
-                new
-                {
-                    Name = "Daniel"
-                });
+                new { Name = "Daniel" }
+            );
             result.WriteTo(writer, HtmlEncoder.Default);
             var content = writer.ToString();
             var match = Regex.Match(content, ComponentPattern);
 
             // Assert
             Assert.True(match.Success);
-            var marker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var marker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(
+                match.Groups[1].Value,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Null(marker.PrerenderId);
             Assert.Equal("webassembly", marker.Type);
             Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, marker.Assembly);
             Assert.Equal(typeof(GreetingComponent).FullName, marker.TypeName);
 
             var parameterDefinition = Assert.Single(
-                JsonSerializer.Deserialize<ComponentParameter[]>(Convert.FromBase64String(marker.ParameterDefinitions), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+                JsonSerializer.Deserialize<ComponentParameter[]>(
+                    Convert.FromBase64String(marker.ParameterDefinitions),
+                    WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+                )
+            );
             Assert.Equal("Name", parameterDefinition.Name);
             Assert.Equal("System.String", parameterDefinition.TypeName);
             Assert.Equal("System.Private.CoreLib", parameterDefinition.Assembly);
 
-            var value = Assert.Single(JsonSerializer.Deserialize<object[]>(Convert.FromBase64String(marker.ParameterValues), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+            var value = Assert.Single(
+                JsonSerializer.Deserialize<object[]>(
+                    Convert.FromBase64String(marker.ParameterValues),
+                    WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+                )
+            );
             var rawValue = Assert.IsType<JsonElement>(value);
             Assert.Equal("Daniel", rawValue.GetString());
         }
@@ -148,30 +182,43 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var writer = new StringWriter();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent),
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
                 RenderMode.WebAssembly,
-                new
-                {
-                    Name = (string)null
-                });
+                new { Name = (string)null }
+            );
             result.WriteTo(writer, HtmlEncoder.Default);
             var content = writer.ToString();
             var match = Regex.Match(content, ComponentPattern);
 
             // Assert
             Assert.True(match.Success);
-            var marker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var marker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(
+                match.Groups[1].Value,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Null(marker.PrerenderId);
             Assert.Equal("webassembly", marker.Type);
             Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, marker.Assembly);
             Assert.Equal(typeof(GreetingComponent).FullName, marker.TypeName);
 
-            var parameterDefinition = Assert.Single(JsonSerializer.Deserialize<ComponentParameter[]>(Convert.FromBase64String(marker.ParameterDefinitions), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+            var parameterDefinition = Assert.Single(
+                JsonSerializer.Deserialize<ComponentParameter[]>(
+                    Convert.FromBase64String(marker.ParameterDefinitions),
+                    WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+                )
+            );
             Assert.Equal("Name", parameterDefinition.Name);
             Assert.Null(parameterDefinition.TypeName);
             Assert.Null(parameterDefinition.Assembly);
 
-            var value = Assert.Single(JsonSerializer.Deserialize<object[]>(Convert.FromBase64String(marker.ParameterValues), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+            var value = Assert.Single(
+                JsonSerializer.Deserialize<object[]>(
+                    Convert.FromBase64String(marker.ParameterValues),
+                    WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+                )
+            );
             Assert.Null(value);
         }
 
@@ -183,12 +230,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var writer = new StringWriter();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent),
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
                 RenderMode.WebAssemblyPrerendered,
-                new
-                {
-                    Name = "Daniel"
-                });
+                new { Name = "Daniel" }
+            );
             result.WriteTo(writer, HtmlEncoder.Default);
             var content = writer.ToString();
             var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
@@ -196,18 +243,34 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Assert
             Assert.True(match.Success);
             var preamble = match.Groups["preamble"].Value;
-            var preambleMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var preambleMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(
+                preamble,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.NotNull(preambleMarker.PrerenderId);
             Assert.Equal("webassembly", preambleMarker.Type);
-            Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, preambleMarker.Assembly);
+            Assert.Equal(
+                typeof(GreetingComponent).Assembly.GetName().Name,
+                preambleMarker.Assembly
+            );
             Assert.Equal(typeof(GreetingComponent).FullName, preambleMarker.TypeName);
 
-            var parameterDefinition = Assert.Single(JsonSerializer.Deserialize<ComponentParameter[]>(Convert.FromBase64String(preambleMarker.ParameterDefinitions), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+            var parameterDefinition = Assert.Single(
+                JsonSerializer.Deserialize<ComponentParameter[]>(
+                    Convert.FromBase64String(preambleMarker.ParameterDefinitions),
+                    WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+                )
+            );
             Assert.Equal("Name", parameterDefinition.Name);
             Assert.Equal("System.String", parameterDefinition.TypeName);
             Assert.Equal("System.Private.CoreLib", parameterDefinition.Assembly);
 
-            var value = Assert.Single(JsonSerializer.Deserialize<object[]>(Convert.FromBase64String(preambleMarker.ParameterValues), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+            var value = Assert.Single(
+                JsonSerializer.Deserialize<object[]>(
+                    Convert.FromBase64String(preambleMarker.ParameterValues),
+                    WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+                )
+            );
             var rawValue = Assert.IsType<JsonElement>(value);
             Assert.Equal("Daniel", rawValue.GetString());
 
@@ -215,7 +278,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Assert.Equal("<p>Hello Daniel!</p>", prerenderedContent);
 
             var epilogue = match.Groups["epilogue"].Value;
-            var epilogueMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var epilogueMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(
+                epilogue,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
             Assert.Null(epilogueMarker.Assembly);
             Assert.Null(epilogueMarker.TypeName);
@@ -232,12 +298,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var writer = new StringWriter();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent),
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
                 RenderMode.WebAssemblyPrerendered,
-                new
-                {
-                    Name = (string)null
-                });
+                new { Name = (string)null }
+            );
             result.WriteTo(writer, HtmlEncoder.Default);
             var content = writer.ToString();
             var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
@@ -245,25 +311,44 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Assert
             Assert.True(match.Success);
             var preamble = match.Groups["preamble"].Value;
-            var preambleMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var preambleMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(
+                preamble,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.NotNull(preambleMarker.PrerenderId);
             Assert.Equal("webassembly", preambleMarker.Type);
-            Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, preambleMarker.Assembly);
+            Assert.Equal(
+                typeof(GreetingComponent).Assembly.GetName().Name,
+                preambleMarker.Assembly
+            );
             Assert.Equal(typeof(GreetingComponent).FullName, preambleMarker.TypeName);
 
-            var parameterDefinition = Assert.Single(JsonSerializer.Deserialize<ComponentParameter[]>(Convert.FromBase64String(preambleMarker.ParameterDefinitions), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+            var parameterDefinition = Assert.Single(
+                JsonSerializer.Deserialize<ComponentParameter[]>(
+                    Convert.FromBase64String(preambleMarker.ParameterDefinitions),
+                    WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+                )
+            );
             Assert.Equal("Name", parameterDefinition.Name);
             Assert.Null(parameterDefinition.TypeName);
             Assert.Null(parameterDefinition.Assembly);
 
-            var value = Assert.Single(JsonSerializer.Deserialize<object[]>(Convert.FromBase64String(preambleMarker.ParameterValues), WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+            var value = Assert.Single(
+                JsonSerializer.Deserialize<object[]>(
+                    Convert.FromBase64String(preambleMarker.ParameterValues),
+                    WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+                )
+            );
             Assert.Null(value);
 
             var prerenderedContent = match.Groups["content"].Value;
             Assert.Equal("<p>Hello (null)!</p>", prerenderedContent);
 
             var epilogue = match.Groups["epilogue"].Value;
-            var epilogueMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var epilogueMarker = JsonSerializer.Deserialize<WebAssemblyComponentMarker>(
+                epilogue,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
             Assert.Null(epilogueMarker.Assembly);
             Assert.Null(epilogueMarker.TypeName);
@@ -280,7 +365,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var writer = new StringWriter();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(TestComponent), RenderMode.Static, null);
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(TestComponent),
+                RenderMode.Static,
+                null
+            );
             result.WriteTo(writer, HtmlEncoder.Default);
             var content = writer.ToString();
 
@@ -293,30 +383,49 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var viewContext = GetViewContext();
-            var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+            var protector = _dataprotectorProvider.CreateProtector(
+                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
+                )
                 .ToTimeLimitedDataProtector();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(TestComponent), RenderMode.Server, null);
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(TestComponent),
+                RenderMode.Server,
+                null
+            );
             var content = HtmlContentUtilities.HtmlContentToString(result);
             var match = Regex.Match(content, ComponentPattern);
 
             // Assert
             Assert.True(match.Success);
-            var marker = JsonSerializer.Deserialize<ServerComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var marker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                match.Groups[1].Value,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, marker.Sequence);
             Assert.Null(marker.PrerenderId);
             Assert.NotNull(marker.Descriptor);
             Assert.Equal("server", marker.Type);
 
             var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);
-            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+                unprotectedServerComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, serverComponent.Sequence);
-            Assert.Equal(typeof(TestComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
+            Assert.Equal(
+                typeof(TestComponent).Assembly.GetName().Name,
+                serverComponent.AssemblyName
+            );
             Assert.Equal(typeof(TestComponent).FullName, serverComponent.TypeName);
             Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
-            Assert.Equal("no-cache, no-store, max-age=0", viewContext.HttpContext.Response.Headers[HeaderNames.CacheControl]);
+            Assert.Equal(
+                "no-cache, no-store, max-age=0",
+                viewContext.HttpContext.Response.Headers[HeaderNames.CacheControl]
+            );
             Assert.DoesNotContain(viewContext.Items.Values, value => value is InvokedRenderModes);
         }
 
@@ -325,28 +434,44 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var viewContext = GetViewContext();
-            var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+            var protector = _dataprotectorProvider.CreateProtector(
+                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
+                )
                 .ToTimeLimitedDataProtector();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(TestComponent), RenderMode.ServerPrerendered, null);
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(TestComponent),
+                RenderMode.ServerPrerendered,
+                null
+            );
             var content = HtmlContentUtilities.HtmlContentToString(result);
             var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
 
             // Assert
             Assert.True(match.Success);
             var preamble = match.Groups["preamble"].Value;
-            var preambleMarker = JsonSerializer.Deserialize<ServerComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var preambleMarker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                preamble,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, preambleMarker.Sequence);
             Assert.NotNull(preambleMarker.PrerenderId);
             Assert.NotNull(preambleMarker.Descriptor);
             Assert.Equal("server", preambleMarker.Type);
 
             var unprotectedServerComponent = protector.Unprotect(preambleMarker.Descriptor);
-            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+                unprotectedServerComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.NotEqual(default, serverComponent);
             Assert.Equal(0, serverComponent.Sequence);
-            Assert.Equal(typeof(TestComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
+            Assert.Equal(
+                typeof(TestComponent).Assembly.GetName().Name,
+                serverComponent.AssemblyName
+            );
             Assert.Equal(typeof(TestComponent).FullName, serverComponent.TypeName);
             Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
@@ -354,14 +479,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Assert.Equal("<h1>Hello world!</h1>", prerenderedContent);
 
             var epilogue = match.Groups["epilogue"].Value;
-            var epilogueMarker = JsonSerializer.Deserialize<ServerComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var epilogueMarker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                epilogue,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
             Assert.Null(epilogueMarker.Sequence);
             Assert.Null(epilogueMarker.Descriptor);
             Assert.Null(epilogueMarker.Type);
 
-            Assert.Equal("no-cache, no-store, max-age=0", viewContext.HttpContext.Response.Headers[HeaderNames.CacheControl]);
-            var (_, mode) = Assert.Single(viewContext.Items, (kvp) => kvp.Value is InvokedRenderModes);
+            Assert.Equal(
+                "no-cache, no-store, max-age=0",
+                viewContext.HttpContext.Response.Headers[HeaderNames.CacheControl]
+            );
+            var (_, mode) = Assert.Single(
+                viewContext.Items,
+                (kvp) => kvp.Value is InvokedRenderModes
+            );
             Assert.Equal(InvokedRenderModes.Mode.Server, ((InvokedRenderModes)mode).Value);
         }
 
@@ -372,12 +506,28 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewContext = GetViewContext();
 
             // Act
-            var server = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent), RenderMode.ServerPrerendered, new { Name = "Steve" });
-            var client = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent), RenderMode.WebAssemblyPrerendered, new { Name = "Steve" });
+            var server = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
+                RenderMode.ServerPrerendered,
+                new { Name = "Steve" }
+            );
+            var client = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
+                RenderMode.WebAssemblyPrerendered,
+                new { Name = "Steve" }
+            );
 
             // Assert
-            var (_, mode) = Assert.Single(viewContext.Items, (kvp) => kvp.Value is InvokedRenderModes);
-            Assert.Equal(InvokedRenderModes.Mode.ServerAndWebAssembly, ((InvokedRenderModes)mode).Value);
+            var (_, mode) = Assert.Single(
+                viewContext.Items,
+                (kvp) => kvp.Value is InvokedRenderModes
+            );
+            Assert.Equal(
+                InvokedRenderModes.Mode.ServerAndWebAssembly,
+                ((InvokedRenderModes)mode).Value
+            );
         }
 
         [Fact]
@@ -385,38 +535,66 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var viewContext = GetViewContext();
-            var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+            var protector = _dataprotectorProvider.CreateProtector(
+                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
+                )
                 .ToTimeLimitedDataProtector();
 
             // Act
-            var firstResult = await renderer.RenderComponentAsync(viewContext, typeof(TestComponent), RenderMode.ServerPrerendered, null);
+            var firstResult = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(TestComponent),
+                RenderMode.ServerPrerendered,
+                null
+            );
             var firstComponent = HtmlContentUtilities.HtmlContentToString(firstResult);
-            var firstMatch = Regex.Match(firstComponent, PrerenderedComponentPattern, RegexOptions.Multiline);
+            var firstMatch = Regex.Match(
+                firstComponent,
+                PrerenderedComponentPattern,
+                RegexOptions.Multiline
+            );
 
-            var secondResult = await renderer.RenderComponentAsync(viewContext, typeof(TestComponent), RenderMode.Server, null);
+            var secondResult = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(TestComponent),
+                RenderMode.Server,
+                null
+            );
             var secondComponent = HtmlContentUtilities.HtmlContentToString(secondResult);
             var secondMatch = Regex.Match(secondComponent, ComponentPattern);
 
             // Assert
             Assert.True(firstMatch.Success);
             var preamble = firstMatch.Groups["preamble"].Value;
-            var preambleMarker = JsonSerializer.Deserialize<ServerComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var preambleMarker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                preamble,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, preambleMarker.Sequence);
             Assert.NotNull(preambleMarker.Descriptor);
 
             var unprotectedFirstServerComponent = protector.Unprotect(preambleMarker.Descriptor);
-            var firstServerComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedFirstServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var firstServerComponent = JsonSerializer.Deserialize<ServerComponent>(
+                unprotectedFirstServerComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, firstServerComponent.Sequence);
             Assert.NotEqual(Guid.Empty, firstServerComponent.InvocationId);
 
             Assert.True(secondMatch.Success);
             var marker = secondMatch.Groups[1].Value;
-            var markerMarker = JsonSerializer.Deserialize<ServerComponentMarker>(marker, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var markerMarker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                marker,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(1, markerMarker.Sequence);
             Assert.NotNull(markerMarker.Descriptor);
 
             var unprotectedSecondServerComponent = protector.Unprotect(markerMarker.Descriptor);
-            var secondServerComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedSecondServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var secondServerComponent = JsonSerializer.Deserialize<ServerComponent>(
+                unprotectedSecondServerComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(1, secondServerComponent.Sequence);
 
             Assert.Equal(firstServerComponent.InvocationId, secondServerComponent.InvocationId);
@@ -429,7 +607,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewContext = GetViewContext();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent), RenderMode.Static, new { Name = "Steve" });
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
+                RenderMode.Static,
+                new { Name = "Steve" }
+            );
 
             // Assert
             var content = HtmlContentUtilities.HtmlContentToString(result);
@@ -441,26 +624,42 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var viewContext = GetViewContext();
-            var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+            var protector = _dataprotectorProvider.CreateProtector(
+                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
+                )
                 .ToTimeLimitedDataProtector();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent), RenderMode.Server, new { Name = "Daniel" });
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
+                RenderMode.Server,
+                new { Name = "Daniel" }
+            );
             var content = HtmlContentUtilities.HtmlContentToString(result);
             var match = Regex.Match(content, ComponentPattern);
 
             // Assert
             Assert.True(match.Success);
-            var marker = JsonSerializer.Deserialize<ServerComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var marker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                match.Groups[1].Value,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, marker.Sequence);
             Assert.Null(marker.PrerenderId);
             Assert.NotNull(marker.Descriptor);
             Assert.Equal("server", marker.Type);
 
             var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);
-            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+                unprotectedServerComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, serverComponent.Sequence);
-            Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
+            Assert.Equal(
+                typeof(GreetingComponent).Assembly.GetName().Name,
+                serverComponent.AssemblyName
+            );
             Assert.Equal(typeof(GreetingComponent).FullName, serverComponent.TypeName);
             Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
@@ -479,27 +678,43 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var viewContext = GetViewContext();
-            var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+            var protector = _dataprotectorProvider.CreateProtector(
+                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
+                )
                 .ToTimeLimitedDataProtector();
 
             // Act
 
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent), RenderMode.Server, new { Name = (string)null });
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
+                RenderMode.Server,
+                new { Name = (string)null }
+            );
             var content = HtmlContentUtilities.HtmlContentToString(result);
             var match = Regex.Match(content, ComponentPattern);
 
             // Assert
             Assert.True(match.Success);
-            var marker = JsonSerializer.Deserialize<ServerComponentMarker>(match.Groups[1].Value, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var marker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                match.Groups[1].Value,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, marker.Sequence);
             Assert.Null(marker.PrerenderId);
             Assert.NotNull(marker.Descriptor);
             Assert.Equal("server", marker.Type);
 
             var unprotectedServerComponent = protector.Unprotect(marker.Descriptor);
-            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+                unprotectedServerComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, serverComponent.Sequence);
-            Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
+            Assert.Equal(
+                typeof(GreetingComponent).Assembly.GetName().Name,
+                serverComponent.AssemblyName
+            );
             Assert.Equal(typeof(GreetingComponent).FullName, serverComponent.TypeName);
             Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
@@ -509,7 +724,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Assert.Null(parameterDefinition.TypeName);
             Assert.Null(parameterDefinition.Assembly);
 
-            var value = Assert.Single(serverComponent.ParameterValues); ;
+            var value = Assert.Single(serverComponent.ParameterValues);
+            ;
             Assert.Null(value);
         }
 
@@ -519,28 +735,44 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var viewContext = GetViewContext();
             var writer = new StringWriter();
-            var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+            var protector = _dataprotectorProvider.CreateProtector(
+                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
+                )
                 .ToTimeLimitedDataProtector();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent), RenderMode.ServerPrerendered, new { Name = "Daniel" });
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
+                RenderMode.ServerPrerendered,
+                new { Name = "Daniel" }
+            );
             var content = HtmlContentUtilities.HtmlContentToString(result);
             var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
 
             // Assert
             Assert.True(match.Success);
             var preamble = match.Groups["preamble"].Value;
-            var preambleMarker = JsonSerializer.Deserialize<ServerComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var preambleMarker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                preamble,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, preambleMarker.Sequence);
             Assert.NotNull(preambleMarker.PrerenderId);
             Assert.NotNull(preambleMarker.Descriptor);
             Assert.Equal("server", preambleMarker.Type);
 
             var unprotectedServerComponent = protector.Unprotect(preambleMarker.Descriptor);
-            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+                unprotectedServerComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.NotEqual(default, serverComponent);
             Assert.Equal(0, serverComponent.Sequence);
-            Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
+            Assert.Equal(
+                typeof(GreetingComponent).Assembly.GetName().Name,
+                serverComponent.AssemblyName
+            );
             Assert.Equal(typeof(GreetingComponent).FullName, serverComponent.TypeName);
             Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
@@ -557,7 +789,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Assert.Equal("<p>Hello Daniel!</p>", prerenderedContent);
 
             var epilogue = match.Groups["epilogue"].Value;
-            var epilogueMarker = JsonSerializer.Deserialize<ServerComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var epilogueMarker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                epilogue,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
             Assert.Null(epilogueMarker.Sequence);
             Assert.Null(epilogueMarker.Descriptor);
@@ -570,28 +805,44 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var viewContext = GetViewContext();
             var writer = new StringWriter();
-            var protector = _dataprotectorProvider.CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+            var protector = _dataprotectorProvider.CreateProtector(
+                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
+                )
                 .ToTimeLimitedDataProtector();
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent), RenderMode.ServerPrerendered, new { Name = (string)null });
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(GreetingComponent),
+                RenderMode.ServerPrerendered,
+                new { Name = (string)null }
+            );
             var content = HtmlContentUtilities.HtmlContentToString(result);
             var match = Regex.Match(content, PrerenderedComponentPattern, RegexOptions.Multiline);
 
             // Assert
             Assert.True(match.Success);
             var preamble = match.Groups["preamble"].Value;
-            var preambleMarker = JsonSerializer.Deserialize<ServerComponentMarker>(preamble, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var preambleMarker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                preamble,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(0, preambleMarker.Sequence);
             Assert.NotNull(preambleMarker.PrerenderId);
             Assert.NotNull(preambleMarker.Descriptor);
             Assert.Equal("server", preambleMarker.Type);
 
             var unprotectedServerComponent = protector.Unprotect(preambleMarker.Descriptor);
-            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(unprotectedServerComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var serverComponent = JsonSerializer.Deserialize<ServerComponent>(
+                unprotectedServerComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.NotEqual(default, serverComponent);
             Assert.Equal(0, serverComponent.Sequence);
-            Assert.Equal(typeof(GreetingComponent).Assembly.GetName().Name, serverComponent.AssemblyName);
+            Assert.Equal(
+                typeof(GreetingComponent).Assembly.GetName().Name,
+                serverComponent.AssemblyName
+            );
             Assert.Equal(typeof(GreetingComponent).FullName, serverComponent.TypeName);
             Assert.NotEqual(Guid.Empty, serverComponent.InvocationId);
 
@@ -608,7 +859,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Assert.Equal("<p>Hello (null)!</p>", prerenderedContent);
 
             var epilogue = match.Groups["epilogue"].Value;
-            var epilogueMarker = JsonSerializer.Deserialize<ServerComponentMarker>(epilogue, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var epilogueMarker = JsonSerializer.Deserialize<ServerComponentMarker>(
+                epilogue,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             Assert.Equal(preambleMarker.PrerenderId, epilogueMarker.PrerenderId);
             Assert.Null(epilogueMarker.Sequence);
             Assert.Null(epilogueMarker.Descriptor);
@@ -623,9 +877,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             // Act & Assert
             var ex = await ExceptionAssert.ThrowsArgumentAsync(
-                () => renderer.RenderComponentAsync(viewContext, typeof(GreetingComponent), default, new { Name = "Daniel" }),
+                () =>
+                    renderer.RenderComponentAsync(
+                        viewContext,
+                        typeof(GreetingComponent),
+                        default,
+                        new { Name = "Daniel" }
+                    ),
                 "renderMode",
-                $"Unsupported RenderMode '{(RenderMode)default}'");
+                $"Unsupported RenderMode '{(RenderMode)default}'"
+            );
         }
 
         [Fact]
@@ -636,7 +897,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             // Act
             var state = new OnAfterRenderState();
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(OnAfterRenderComponent), RenderMode.Static, new { state });
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(OnAfterRenderComponent),
+                RenderMode.Static,
+                new { state }
+            );
 
             // Assert
             var content = HtmlContentUtilities.HtmlContentToString(result);
@@ -667,7 +933,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             // Act
             var state = new AsyncDisposableState();
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(AsyncDisposableComponent), RenderMode.Static, new { state });
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(AsyncDisposableComponent),
+                RenderMode.Static,
+                new { state }
+            );
 
             // Assert
             var content = HtmlContentUtilities.HtmlContentToString(result);
@@ -684,14 +955,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewContext = GetViewContext();
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => renderer.RenderComponentAsync(
-                viewContext,
-                typeof(ExceptionComponent),
-                RenderMode.Static,
-                new
-                {
-                    IsAsync = false
-                }));
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    renderer.RenderComponentAsync(
+                        viewContext,
+                        typeof(ExceptionComponent),
+                        RenderMode.Static,
+                        new { IsAsync = false }
+                    )
+            );
 
             // Assert
             Assert.Equal("Threw an exception synchronously", exception.Message);
@@ -704,14 +976,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewContext = GetViewContext();
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => renderer.RenderComponentAsync(
-                viewContext,
-                typeof(ExceptionComponent),
-                RenderMode.Static,
-                new
-                {
-                    IsAsync = true
-                }));
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    renderer.RenderComponentAsync(
+                        viewContext,
+                        typeof(ExceptionComponent),
+                        RenderMode.Static,
+                        new { IsAsync = true }
+                    )
+            );
 
             // Assert
             Assert.Equal("Threw an exception asynchronously", exception.Message);
@@ -724,21 +997,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewContext = GetViewContext();
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => renderer.RenderComponentAsync(
-                viewContext,
-                typeof(ExceptionComponent),
-                RenderMode.Static,
-                new
-                {
-                    JsInterop = true
-                }
-            ));
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    renderer.RenderComponentAsync(
+                        viewContext,
+                        typeof(ExceptionComponent),
+                        RenderMode.Static,
+                        new { JsInterop = true }
+                    )
+            );
 
             // Assert
-            Assert.Equal("JavaScript interop calls cannot be issued during server-side prerendering, " +
-                    "because the page has not yet loaded in the browser. Prerendered components must wrap any JavaScript " +
-                    "interop calls in conditional logic to ensure those interop calls are not attempted during prerendering.",
-                exception.Message);
+            Assert.Equal(
+                "JavaScript interop calls cannot be issued during server-side prerendering, "
+                    + "because the page has not yet loaded in the browser. Prerendered components must wrap any JavaScript "
+                    + "interop calls in conditional logic to ensure those interop calls are not attempted during prerendering.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -757,19 +1032,22 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewContext = GetViewContext(ctx);
 
             // Act
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => renderer.RenderComponentAsync(
-                viewContext,
-                typeof(RedirectComponent),
-                RenderMode.Static,
-                new
-                {
-                    RedirectUri = "http://localhost/redirect"
-                }));
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    renderer.RenderComponentAsync(
+                        viewContext,
+                        typeof(RedirectComponent),
+                        RenderMode.Static,
+                        new { RedirectUri = "http://localhost/redirect" }
+                    )
+            );
 
-            Assert.Equal("A navigation command was attempted during prerendering after the server already started sending the response. " +
-                            "Navigation commands can not be issued during server-side prerendering after the response from the server has started. Applications must buffer the" +
-                            "response and avoid using features like FlushAsync() before all components on the page have been rendered to prevent failed navigation commands.",
-                exception.Message);
+            Assert.Equal(
+                "A navigation command was attempted during prerendering after the server already started sending the response. "
+                    + "Navigation commands can not be issued during server-side prerendering after the response from the server has started. Applications must buffer the"
+                    + "response and avoid using features like FlushAsync() before all components on the page have been rendered to prevent failed navigation commands.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -789,10 +1067,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 viewContext,
                 typeof(RedirectComponent),
                 RenderMode.Static,
-                new
-                {
-                    RedirectUri = "http://localhost/redirect"
-                });
+                new { RedirectUri = "http://localhost/redirect" }
+            );
 
             // Assert
             Assert.Equal(302, ctx.Response.StatusCode);
@@ -804,7 +1080,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var viewContext = GetViewContext();
-            var expectedContent = @"<table>
+            var expectedContent =
+                @"<table>
 <thead>
 <tr>
 <th>Date</th>
@@ -848,7 +1125,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 </table>";
 
             // Act
-            var result = await renderer.RenderComponentAsync(viewContext, typeof(AsyncComponent), RenderMode.Static, null);
+            var result = await renderer.RenderComponentAsync(
+                viewContext,
+                typeof(AsyncComponent),
+                RenderMode.Static,
+                null
+            );
             var content = HtmlContentUtilities.HtmlContentToString(result);
 
             // Assert
@@ -857,9 +1139,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private ComponentRenderer GetComponentRenderer(IServiceProvider services = null) =>
             new ComponentRenderer(
-                new StaticComponentRenderer(new HtmlRenderer(services ?? _services, NullLoggerFactory.Instance, HtmlEncoder.Default)),
+                new StaticComponentRenderer(
+                    new HtmlRenderer(
+                        services ?? _services,
+                        NullLoggerFactory.Instance,
+                        HtmlEncoder.Default
+                    )
+                ),
                 new ServerComponentSerializer(_dataprotectorProvider),
-                new WebAssemblyComponentSerializer());
+                new WebAssemblyComponentSerializer()
+            );
 
         private ViewContext GetViewContext(HttpContext context = null)
         {
@@ -881,9 +1170,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             services.AddSingleton<IJSRuntime, UnsupportedJavaScriptRuntime>();
             services.AddSingleton<NavigationManager, HttpNavigationManager>();
             services.AddSingleton<ILoggerFactory, NullLoggerFactory>();
-            services.AddSingleton<ILogger<ComponentApplicationLifetime>, NullLogger<ComponentApplicationLifetime>>();
+            services.AddSingleton<
+                ILogger<ComponentApplicationLifetime>,
+                NullLogger<ComponentApplicationLifetime>
+            >();
             services.AddSingleton<ComponentApplicationLifetime>();
-            services.AddSingleton(sp => sp.GetRequiredService<ComponentApplicationLifetime>().State);
+            services.AddSingleton(
+                sp => sp.GetRequiredService<ComponentApplicationLifetime>().State
+            );
             return services;
         }
 
@@ -898,24 +1192,29 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             public Task SetParametersAsync(ParameterView parameters)
             {
-                _renderHandle.Render(builder =>
-                {
-                    var s = 0;
-                    builder.OpenElement(s++, "h1");
-                    builder.AddContent(s++, "Hello world!");
-                    builder.CloseElement();
-                });
+                _renderHandle.Render(
+                    builder =>
+                    {
+                        var s = 0;
+                        builder.OpenElement(s++, "h1");
+                        builder.AddContent(s++, "Hello world!");
+                        builder.CloseElement();
+                    }
+                );
                 return Task.CompletedTask;
             }
         }
 
         private class RedirectComponent : ComponentBase
         {
-            [Inject] NavigationManager NavigationManager { get; set; }
+            [Inject]
+            NavigationManager NavigationManager { get; set; }
 
-            [Parameter] public string RedirectUri { get; set; }
+            [Parameter]
+            public string RedirectUri { get; set; }
 
-            [Parameter] public bool Force { get; set; }
+            [Parameter]
+            public bool Force { get; set; }
 
             protected override void OnInitialized()
             {
@@ -925,11 +1224,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private class ExceptionComponent : ComponentBase
         {
-            [Parameter] public bool IsAsync { get; set; }
+            [Parameter]
+            public bool IsAsync { get; set; }
 
-            [Parameter] public bool JsInterop { get; set; }
+            [Parameter]
+            public bool JsInterop { get; set; }
 
-            [Inject] IJSRuntime JsRuntime { get; set; }
+            [Inject]
+            IJSRuntime JsRuntime { get; set; }
 
             protected override async Task OnParametersSetAsync()
             {
@@ -952,7 +1254,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private class OnAfterRenderComponent : ComponentBase
         {
-            [Parameter] public OnAfterRenderState State { get; set; }
+            [Parameter]
+            public OnAfterRenderState State { get; set; }
 
             protected override void OnAfterRender(bool firstRender)
             {
@@ -972,7 +1275,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private class AsyncDisposableComponent : ComponentBase, IAsyncDisposable
         {
-            [Parameter] public AsyncDisposableState State { get; set; }
+            [Parameter]
+            public AsyncDisposableState State { get; set; }
 
             protected override void BuildRenderTree(RenderTreeBuilder builder)
             {
@@ -993,7 +1297,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private class GreetingComponent : ComponentBase
         {
-            [Parameter] public string Name { get; set; }
+            [Parameter]
+            public string Name { get; set; }
 
             protected override void OnParametersSet()
             {

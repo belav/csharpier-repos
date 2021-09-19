@@ -25,8 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             PageHandlerExecutorDelegate[] handlerExecutors,
             PageHandlerBinderDelegate[] handlerBinders,
             IReadOnlyList<Func<IRazorPage>> viewStartFactories,
-            FilterItem[] cacheableFilters)
-        {
+            FilterItem[] cacheableFilters
+        ) {
             ActionDescriptor = actionDescriptor;
             ViewDataFactory = viewDataFactory;
             PageFactory = pageFactory;
@@ -66,7 +66,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         public PageHandlerBinderDelegate[] HandlerBinders { get; }
 
-        public Func<IModelMetadataProvider, ModelStateDictionary, ViewDataDictionary> ViewDataFactory { get; }
+        public Func<
+            IModelMetadataProvider,
+            ModelStateDictionary,
+            ViewDataDictionary
+        > ViewDataFactory { get; }
 
         /// <summary>
         /// Gets the applicable ViewStart pages.
@@ -74,6 +78,5 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public IReadOnlyList<Func<IRazorPage>> ViewStartFactories { get; }
 
         public FilterItem[] CacheableFilters { get; }
-
     }
 }

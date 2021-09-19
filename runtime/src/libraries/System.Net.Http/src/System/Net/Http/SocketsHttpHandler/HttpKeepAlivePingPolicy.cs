@@ -9,7 +9,6 @@ namespace System.Net.Http
         /// Sends keep alive ping for only when there are active streams on the connection.
         /// </summary>
         WithActiveRequests,
-
         /// <summary>
         /// Sends keep alive ping for whole connection lifetime.
         /// </summary>

@@ -10,16 +10,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that configures a navigation property as having a backing field
     ///     based on the <see cref="BackingFieldAttribute" /> attribute.
     /// </summary>
-    public class NavigationBackingFieldAttributeConvention : NavigationAttributeConventionBase<BackingFieldAttribute>
+    public class NavigationBackingFieldAttributeConvention
+        : NavigationAttributeConventionBase<BackingFieldAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="NavigationBackingFieldAttributeConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public NavigationBackingFieldAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public NavigationBackingFieldAttributeConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Called after a navigation property that has an attribute is added to an entity type.
@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public override void ProcessNavigationAdded(
             IConventionNavigationBuilder navigationBuilder,
             BackingFieldAttribute attribute,
-            IConventionContext<IConventionNavigationBuilder> context)
-        {
+            IConventionContext<IConventionNavigationBuilder> context
+        ) {
             navigationBuilder.HasField(attribute.Name, fromDataAnnotation: true);
         }
 
@@ -39,8 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public override void ProcessSkipNavigationAdded(
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             BackingFieldAttribute attribute,
-            IConventionContext<IConventionSkipNavigationBuilder> context)
-        {
+            IConventionContext<IConventionSkipNavigationBuilder> context
+        ) {
             skipNavigationBuilder.HasField(attribute.Name, fromDataAnnotation: true);
         }
     }

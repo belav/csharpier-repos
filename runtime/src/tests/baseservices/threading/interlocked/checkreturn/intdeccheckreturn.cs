@@ -6,17 +6,16 @@ using System.Threading;
 
 namespace InterlockedTest
 {
-	class InterlockTest
-	{
+    class InterlockTest
+    {
+        public static int Main(string[] Args)
+        {
+            int rValue;
+            IntTest testInt = new IntTest(100, 10);
 
-		public static int Main(string[] Args)
-		{
-			int rValue;
-			IntTest testInt = new IntTest(100, 10);
-
-			Console.WriteLine("Check Inc Returnt: {0}", rValue = testInt.CheckDecReturn());
-			Console.WriteLine("Test {0}", 100 == rValue ? "Passed" : "Failed");
-			return rValue;
-		}
-	}
+            Console.WriteLine("Check Inc Returnt: {0}", rValue = testInt.CheckDecReturn());
+            Console.WriteLine("Test {0}", 100 == rValue ? "Passed" : "Failed");
+            return rValue;
+        }
+    }
 }

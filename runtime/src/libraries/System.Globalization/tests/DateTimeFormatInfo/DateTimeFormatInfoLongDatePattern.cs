@@ -8,7 +8,6 @@ namespace System.Globalization.Tests
 {
     public class DateTimeFormatInfoLongDatePattern
     {
-
         [Fact]
         public void LongDatePattern_InvariantInfo_ReturnsExpected()
         {
@@ -50,13 +49,18 @@ namespace System.Globalization.Tests
         public void LongDatePattern_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.LongDatePattern = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.LongDatePattern = null
+            );
         }
 
         [Fact]
         public void LongDatePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.LongDatePattern = "dddd, dd MMMM yyyy");
+            Assert.Throws<InvalidOperationException>(
+                () => DateTimeFormatInfo.InvariantInfo.LongDatePattern = "dddd, dd MMMM yyyy"
+            );
         }
     }
 }

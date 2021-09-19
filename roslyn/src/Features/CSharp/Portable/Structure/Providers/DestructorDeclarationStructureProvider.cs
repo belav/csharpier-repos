@@ -9,31 +9,40 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class DestructorDeclarationStructureProvider : AbstractSyntaxNodeStructureProvider<DestructorDeclarationSyntax>
+    internal class DestructorDeclarationStructureProvider
+        : AbstractSyntaxNodeStructureProvider<DestructorDeclarationSyntax>
     {
         protected override void CollectBlockSpans(
             DestructorDeclarationSyntax destructorDeclaration,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
-        {
-            CSharpStructureHelpers.CollectCommentBlockSpans(destructorDeclaration, ref spans, optionProvider);
+            CancellationToken cancellationToken
+        ) {
+            CSharpStructureHelpers.CollectCommentBlockSpans(
+                destructorDeclaration,
+                ref spans,
+                optionProvider
+            );
 
             // fault tolerance
-            if (destructorDeclaration.Body == null ||
-                destructorDeclaration.Body.OpenBraceToken.IsMissing ||
-                destructorDeclaration.Body.CloseBraceToken.IsMissing)
-            {
+            if (
+                destructorDeclaration.Body == null
+                || destructorDeclaration.Body.OpenBraceToken.IsMissing
+                || destructorDeclaration.Body.CloseBraceToken.IsMissing
+            ) {
                 return;
             }
 
-            spans.AddIfNotNull(CSharpStructureHelpers.CreateBlockSpan(
-                destructorDeclaration,
-                destructorDeclaration.ParameterList.GetLastToken(includeZeroWidth: true),
-                compressEmptyLines: false,
-                autoCollapse: true,
-                type: BlockTypes.Member,
-                isCollapsible: true));
+            spans.AddIfNotNull(
+                CSharpStructureHelpers.CreateBlockSpan(
+                    destructorDeclaration,
+                    destructorDeclaration.ParameterList.GetLastToken(includeZeroWidth: true),
+                    compressEmptyLines: false,
+                    autoCollapse: true,
+                    type: BlockTypes.Member,
+                    isCollapsible: true
+                )
+            );
         }
     }
 }

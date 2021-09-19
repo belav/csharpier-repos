@@ -27,10 +27,8 @@ namespace ILCompiler.DependencyAnalysis.X64
         R13 = 13,
         R14 = 14,
         R15 = 15,
-
         None = 16,
         RegDirect = 24,
-
         NoIndex = 128,
     }
 }

@@ -22,9 +22,15 @@ namespace System.DirectoryServices.ActiveDirectory
 
         public bool Contains(ActiveDirectoryRole role)
         {
-            if (role < ActiveDirectoryRole.SchemaRole || role > ActiveDirectoryRole.InfrastructureRole)
-            {
-                throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ActiveDirectoryRole));
+            if (
+                role < ActiveDirectoryRole.SchemaRole
+                || role > ActiveDirectoryRole.InfrastructureRole
+            ) {
+                throw new InvalidEnumArgumentException(
+                    nameof(role),
+                    (int)role,
+                    typeof(ActiveDirectoryRole)
+                );
             }
 
             for (int i = 0; i < InnerList.Count; i++)
@@ -40,9 +46,15 @@ namespace System.DirectoryServices.ActiveDirectory
 
         public int IndexOf(ActiveDirectoryRole role)
         {
-            if (role < ActiveDirectoryRole.SchemaRole || role > ActiveDirectoryRole.InfrastructureRole)
-            {
-                throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ActiveDirectoryRole));
+            if (
+                role < ActiveDirectoryRole.SchemaRole
+                || role > ActiveDirectoryRole.InfrastructureRole
+            ) {
+                throw new InvalidEnumArgumentException(
+                    nameof(role),
+                    (int)role,
+                    typeof(ActiveDirectoryRole)
+                );
             }
 
             for (int i = 0; i < InnerList.Count; i++)

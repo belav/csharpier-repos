@@ -36,7 +36,8 @@ class Program
     private double _framesPerSecond;
     private bool _parallel;
     private bool _showThreads;
-    private static int _width, _height;
+    private static int _width,
+        _height;
     private int _degreeOfParallelism = Environment.ProcessorCount;
     private int _frames;
     private CancellationTokenSource _cancellation;
@@ -102,7 +103,9 @@ class Program
             var rgbBuffer = _freeBuffers.GetObject();
 
             // Determine the new position of the sphere based on the current time elapsed
-            float dy2 = 0.8f * MathF.Abs(MathF.Sin((float)(totalTime.ElapsedMilliseconds * Math.PI / 3000)));
+            float dy2 =
+                0.8f
+                * MathF.Abs(MathF.Sin((float)(totalTime.ElapsedMilliseconds * Math.PI / 3000)));
             sphere2.Centers.Ys = Avx.Add(baseY, Vector256.Create(dy2));
 
             // Render the scene
@@ -128,9 +131,7 @@ class Program
     public bool Run()
     {
         RenderTest();
-        Console.WriteLine("{0} frames, {1} frames/sec",
-            _frames,
-            _framesPerSecond.ToString("F2"));
+        Console.WriteLine("{0} frames, {1} frames/sec", _frames, _framesPerSecond.ToString("F2"));
         return true;
     }
 
@@ -147,9 +148,13 @@ class Program
         }
         stopWatch.Stop();
         TimeSpan ts = stopWatch.Elapsed;
-        string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-           ts.Hours, ts.Minutes, ts.Seconds,
-           ts.Milliseconds / 10);
+        string elapsedTime = String.Format(
+            "{0:00}:{1:00}:{2:00}.{3:00}",
+            ts.Hours,
+            ts.Minutes,
+            ts.Seconds,
+            ts.Milliseconds / 10
+        );
         Console.WriteLine("RunTime " + elapsedTime);
 
         if (wirteToFile)
@@ -171,7 +176,6 @@ class Program
                     file.WriteLine();
                 }
             }
-
         }
     }
 }

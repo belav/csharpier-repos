@@ -5,7 +5,10 @@
         [HttpPost]
         public IActionResult EditPerson(
             [FromBody] DiagnosticsAreReturned_ForModelBoundParametersModel model,
-            [FromQuery] DiagnosticsAreReturned_ForModelBoundParametersModel /*MM*/value) => null;
+            [FromQuery]
+                DiagnosticsAreReturned_ForModelBoundParametersModel /*MM*/
+            value
+        ) => null;
     }
 
     public class DiagnosticsAreReturned_ForModelBoundParametersModel

@@ -12,8 +12,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed partial class LocalRewriter
     {
-        public override BoundNode VisitAnonymousObjectCreationExpression(BoundAnonymousObjectCreationExpression node)
-        {
+        public override BoundNode VisitAnonymousObjectCreationExpression(
+            BoundAnonymousObjectCreationExpression node
+        ) {
             // Rewrite the arguments.
             var rewrittenArguments = VisitList(node.Arguments);
 
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 defaultArguments: default(BitVector),
                 constantValueOpt: null,
                 initializerExpressionOpt: null,
-                type: node.Type);
+                type: node.Type
+            );
         }
     }
 }

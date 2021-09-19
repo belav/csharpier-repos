@@ -17,11 +17,16 @@ namespace Microsoft.AspNetCore.Routing.Matching
     /// An <see cref="MatcherPolicy"/> that implements filtering and selection by
     /// the HTTP method of a request.
     /// </summary>
-    public sealed class HttpMethodMatcherPolicy : MatcherPolicy, IEndpointComparerPolicy, INodeBuilderPolicy, IEndpointSelectorPolicy
+    public sealed class HttpMethodMatcherPolicy
+        : MatcherPolicy,
+          IEndpointComparerPolicy,
+          INodeBuilderPolicy,
+          IEndpointSelectorPolicy
     {
         // Used in tests
         internal static readonly string OriginHeader = "Origin";
-        internal static readonly string AccessControlRequestMethod = "Access-Control-Request-Method";
+        internal static readonly string AccessControlRequestMethod =
+            "Access-Control-Request-Method";
         internal static readonly string PreflightHttpMethod = HttpMethods.Options;
 
         // Used in tests
@@ -133,12 +138,16 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
                 var httpMethod = httpContext.Request.Method;
                 var headers = httpContext.Request.Headers;
-                if (metadata.AcceptCorsPreflight &&
-                    HttpMethods.Equals(httpMethod, PreflightHttpMethod) &&
-                    headers.ContainsKey(HeaderNames.Origin) &&
-                    headers.TryGetValue(HeaderNames.AccessControlRequestMethod, out var accessControlRequestMethod) &&
-                    !StringValues.IsNullOrEmpty(accessControlRequestMethod))
-                {
+                if (
+                    metadata.AcceptCorsPreflight
+                    && HttpMethods.Equals(httpMethod, PreflightHttpMethod)
+                    && headers.ContainsKey(HeaderNames.Origin)
+                    && headers.TryGetValue(
+                        HeaderNames.AccessControlRequestMethod,
+                        out var accessControlRequestMethod
+                    )
+                    && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
+                ) {
                     needs405Endpoint = false; // We don't return a 405 for a CORS preflight request when the endpoints accept CORS preflight.
                     httpMethod = accessControlRequestMethod;
                 }
@@ -168,7 +177,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             if (needs405Endpoint == true)
             {
                 // We saw some endpoints coming in, and we eliminated them all.
-                httpContext.SetEndpoint(CreateRejectionEndpoint(methods!.OrderBy(m => m, StringComparer.OrdinalIgnoreCase)));
+                httpContext.SetEndpoint(
+                    CreateRejectionEndpoint(
+                        methods!.OrderBy(m => m, StringComparer.OrdinalIgnoreCase)
+                    )
+                );
                 httpContext.Request.RouteValues = null!;
             }
 
@@ -317,7 +330,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
             (IReadOnlyList<string> httpMethods, bool acceptCorsPreflight) GetHttpMethods(Endpoint e)
             {
                 var metadata = e.Metadata.GetMetadata<IHttpMethodMetadata>();
-                return metadata == null ? (Array.Empty<string>(), false) : (metadata.HttpMethods, metadata.AcceptCorsPreflight);
+                return metadata == null
+                    ? (Array.Empty<string>(), false)
+                    : (metadata.HttpMethods, metadata.AcceptCorsPreflight);
             }
         }
 
@@ -327,8 +342,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
         /// <param name="exitDestination"></param>
         /// <param name="edges"></param>
         /// <returns></returns>
-        public PolicyJumpTable BuildJumpTable(int exitDestination, IReadOnlyList<PolicyJumpTableEdge> edges)
-        {
+        public PolicyJumpTable BuildJumpTable(
+            int exitDestination,
+            IReadOnlyList<PolicyJumpTableEdge> edges
+        ) {
             Dictionary<string, int>? destinations = null;
             Dictionary<string, int>? corsPreflightDestinations = null;
             for (var i = 0; i < edges.Count; i++)
@@ -339,7 +356,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 {
                     if (corsPreflightDestinations == null)
                     {
-                        corsPreflightDestinations = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+                        corsPreflightDestinations = new Dictionary<string, int>(
+                            StringComparer.OrdinalIgnoreCase
+                        );
                     }
 
                     corsPreflightDestinations.Add(key.HttpMethod, edges[i].Destination);
@@ -348,7 +367,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 {
                     if (destinations == null)
                     {
-                        destinations = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+                        destinations = new Dictionary<string, int>(
+                            StringComparer.OrdinalIgnoreCase
+                        );
                     }
 
                     destinations.Add(key.HttpMethod, edges[i].Destination);
@@ -356,8 +377,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
             }
 
             int corsPreflightExitDestination = exitDestination;
-            if (corsPreflightDestinations != null && corsPreflightDestinations.TryGetValue(AnyMethod, out var matchesAnyVerb))
-            {
+            if (
+                corsPreflightDestinations != null
+                && corsPreflightDestinations.TryGetValue(AnyMethod, out var matchesAnyVerb)
+            ) {
                 // If we have endpoints that match any HTTP method, use that as the exit.
                 corsPreflightExitDestination = matchesAnyVerb;
                 corsPreflightDestinations.Remove(AnyMethod);
@@ -392,7 +415,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     destination,
                     supportsCorsPreflight,
                     corsPreflightExitDestination,
-                    corsPreflightDestination);
+                    corsPreflightDestination
+                );
             }
             else
             {
@@ -400,7 +424,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     exitDestination,
                     destinations,
                     corsPreflightExitDestination,
-                    corsPreflightDestinations);
+                    corsPreflightDestinations
+                );
             }
         }
 
@@ -419,7 +444,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     return Task.CompletedTask;
                 },
                 EndpointMetadataCollection.Empty,
-                Http405EndpointDisplayName);
+                Http405EndpointDisplayName
+            );
         }
 
         private static bool ContainsHttpMethod(List<string> httpMethods, string httpMethod)
@@ -445,25 +471,33 @@ namespace Microsoft.AspNetCore.Routing.Matching
             return false;
         }
 
-        internal static bool IsCorsPreflightRequest(HttpContext httpContext, string httpMethod, out StringValues accessControlRequestMethod)
-        {
+        internal static bool IsCorsPreflightRequest(
+            HttpContext httpContext,
+            string httpMethod,
+            out StringValues accessControlRequestMethod
+        ) {
             accessControlRequestMethod = default;
             var headers = httpContext.Request.Headers;
 
-            return HttpMethods.Equals(httpMethod, PreflightHttpMethod) &&
-                headers.ContainsKey(HeaderNames.Origin) &&
-                headers.TryGetValue(HeaderNames.AccessControlRequestMethod, out accessControlRequestMethod) &&
-                !StringValues.IsNullOrEmpty(accessControlRequestMethod);
+            return HttpMethods.Equals(httpMethod, PreflightHttpMethod)
+                && headers.ContainsKey(HeaderNames.Origin)
+                && headers.TryGetValue(
+                    HeaderNames.AccessControlRequestMethod,
+                    out accessControlRequestMethod
+                )
+                && !StringValues.IsNullOrEmpty(accessControlRequestMethod);
         }
 
-        private class HttpMethodMetadataEndpointComparer : EndpointMetadataComparer<IHttpMethodMetadata>
+        private class HttpMethodMetadataEndpointComparer
+            : EndpointMetadataComparer<IHttpMethodMetadata>
         {
             protected override int CompareMetadata(IHttpMethodMetadata? x, IHttpMethodMetadata? y)
             {
                 // Ignore the metadata if it has an empty list of HTTP methods.
                 return base.CompareMetadata(
                     x?.HttpMethods.Count > 0 ? x : null,
-                    y?.HttpMethods.Count > 0 ? y : null);
+                    y?.HttpMethods.Count > 0 ? y : null
+                );
             }
         }
 
@@ -484,7 +518,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // These are comparable so they can be sorted in tests.
             public int CompareTo(EdgeKey other)
             {
-                var compare = string.Compare(HttpMethod, other.HttpMethod, StringComparison.Ordinal);
+                var compare = string.Compare(
+                    HttpMethod,
+                    other.HttpMethod,
+                    StringComparison.Ordinal
+                );
                 if (compare != 0)
                 {
                     return compare;
@@ -500,9 +538,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             public bool Equals(EdgeKey other)
             {
-                return
-                    IsCorsPreflightRequest == other.IsCorsPreflightRequest &&
-                    HttpMethods.Equals(HttpMethod, other.HttpMethod);
+                return IsCorsPreflightRequest == other.IsCorsPreflightRequest
+                    && HttpMethods.Equals(HttpMethod, other.HttpMethod);
             }
 
             public override bool Equals(object? obj)

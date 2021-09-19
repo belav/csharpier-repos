@@ -43,7 +43,14 @@ public static class Test
     public static void Eval(object obj1, object obj2)
     {
         counter++;
-        if (!((obj1 != null) && (obj2 != null) && (obj1.GetType().Equals(obj2.GetType())) && obj1.Equals(obj2)))
+        if (
+            !(
+                (obj1 != null)
+                && (obj2 != null)
+                && (obj1.GetType().Equals(obj2.GetType()))
+                && obj1.Equals(obj2)
+            )
+        )
             throw new TestException(counter, "Failure while Comparing {1} to {2}", obj1, obj2);
     }
 

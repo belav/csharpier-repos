@@ -24,8 +24,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioMetadataAsSourceFileSupportService(SVsServiceProvider serviceProvider, IMetadataAsSourceFileService metadataAsSourceFileService)
-        {
+        public VisualStudioMetadataAsSourceFileSupportService(
+            SVsServiceProvider serviceProvider,
+            IMetadataAsSourceFileService metadataAsSourceFileService
+        ) {
             _metadataAsSourceFileService = metadataAsSourceFileService;
 
             var solution = (IVsSolution)serviceProvider.GetService(typeof(SVsSolution));
@@ -39,31 +41,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return VSConstants.S_OK;
         }
 
-        public int OnAfterLoadProject(IVsHierarchy pStubHierarchy, IVsHierarchy pRealHierarchy)
-            => VSConstants.E_NOTIMPL;
+        public int OnAfterLoadProject(IVsHierarchy pStubHierarchy, IVsHierarchy pRealHierarchy) =>
+            VSConstants.E_NOTIMPL;
 
-        public int OnAfterOpenProject(IVsHierarchy pHierarchy, int fAdded)
-            => VSConstants.E_NOTIMPL;
+        public int OnAfterOpenProject(IVsHierarchy pHierarchy, int fAdded) => VSConstants.E_NOTIMPL;
 
-        public int OnAfterOpenSolution(object pUnkReserved, int fNewSolution)
-            => VSConstants.E_NOTIMPL;
+        public int OnAfterOpenSolution(object pUnkReserved, int fNewSolution) =>
+            VSConstants.E_NOTIMPL;
 
-        public int OnBeforeCloseProject(IVsHierarchy pHierarchy, int fRemoved)
-            => VSConstants.E_NOTIMPL;
+        public int OnBeforeCloseProject(IVsHierarchy pHierarchy, int fRemoved) =>
+            VSConstants.E_NOTIMPL;
 
-        public int OnBeforeCloseSolution(object pUnkReserved)
-            => VSConstants.E_NOTIMPL;
+        public int OnBeforeCloseSolution(object pUnkReserved) => VSConstants.E_NOTIMPL;
 
-        public int OnBeforeUnloadProject(IVsHierarchy pRealHierarchy, IVsHierarchy pStubHierarchy)
-            => VSConstants.E_NOTIMPL;
+        public int OnBeforeUnloadProject(
+            IVsHierarchy pRealHierarchy,
+            IVsHierarchy pStubHierarchy
+        ) => VSConstants.E_NOTIMPL;
 
-        public int OnQueryCloseProject(IVsHierarchy pHierarchy, int fRemoving, ref int pfCancel)
-            => VSConstants.E_NOTIMPL;
+        public int OnQueryCloseProject(IVsHierarchy pHierarchy, int fRemoving, ref int pfCancel) =>
+            VSConstants.E_NOTIMPL;
 
-        public int OnQueryCloseSolution(object pUnkReserved, ref int pfCancel)
-            => VSConstants.E_NOTIMPL;
+        public int OnQueryCloseSolution(object pUnkReserved, ref int pfCancel) =>
+            VSConstants.E_NOTIMPL;
 
-        public int OnQueryUnloadProject(IVsHierarchy pRealHierarchy, ref int pfCancel)
-            => VSConstants.E_NOTIMPL;
+        public int OnQueryUnloadProject(IVsHierarchy pRealHierarchy, ref int pfCancel) =>
+            VSConstants.E_NOTIMPL;
     }
 }

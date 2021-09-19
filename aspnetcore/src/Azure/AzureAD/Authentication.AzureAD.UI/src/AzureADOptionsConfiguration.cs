@@ -6,7 +6,9 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI
 {
-    [Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+    [Obsolete(
+        "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+    )]
     internal class AzureADOptionsConfiguration : IConfigureNamedOptions<AzureADOptions>
     {
         private readonly IOptions<AzureADSchemeOptions> _schemeOptions;
@@ -33,8 +35,6 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI
             }
         }
 
-        public void Configure(AzureADOptions options)
-        {
-        }
+        public void Configure(AzureADOptions options) { }
     }
 }

@@ -28,7 +28,10 @@ namespace System.Linq.Tests
         {
             Assert.Equal(new T[0], Enumerable.Empty<T>());
             Assert.Equal(0, Enumerable.Empty<T>().Count());
-            Assert.Same(Enumerable.Empty<T>().GetEnumerator(), Enumerable.Empty<T>().GetEnumerator());
+            Assert.Same(
+                Enumerable.Empty<T>().GetEnumerator(),
+                Enumerable.Empty<T>().GetEnumerator()
+            );
         }
 
         [Fact]

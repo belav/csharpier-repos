@@ -14,13 +14,16 @@ namespace Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.Test
         public void PersistKeysToEntityFrameworkCore_UsesEntityFrameworkCoreXmlRepository()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection
-                .AddDbContext<DataProtectionKeyContext>()
+            serviceCollection.AddDbContext<DataProtectionKeyContext>()
                 .AddDataProtection()
                 .PersistKeysToDbContext<DataProtectionKeyContext>();
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
-            var keyManagementOptions = serviceProvider.GetRequiredService<IOptions<KeyManagementOptions>>();
-            Assert.IsType<EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>>(keyManagementOptions.Value.XmlRepository);
+            var keyManagementOptions = serviceProvider.GetRequiredService<
+                IOptions<KeyManagementOptions>
+            >();
+            Assert.IsType<EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>>(
+                keyManagementOptions.Value.XmlRepository
+            );
         }
     }
 }

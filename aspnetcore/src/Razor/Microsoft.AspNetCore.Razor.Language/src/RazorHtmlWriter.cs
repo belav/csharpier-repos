@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             var generatedHtml = writer.Builder.ToString();
             Debug.Assert(
                 writer.Source.Length == writer.Builder.Length,
-                $"The backing HTML document should be the same length as the original document. Expected: {writer.Source.Length} Actual: {writer.Builder.Length}");
+                $"The backing HTML document should be the same length as the original document. Expected: {writer.Source.Length} Actual: {writer.Builder.Length}"
+            );
 
             var razorHtmlDocument = new DefaultRazorHtmlDocument(generatedHtml, options);
             return razorHtmlDocument;
@@ -155,7 +156,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
         }
 
-        private void WriteNode<TNode>(TNode node, bool isHtml, Action<TNode> handler) where TNode : SyntaxNode
+        private void WriteNode<TNode>(TNode node, bool isHtml, Action<TNode> handler)
+            where TNode : SyntaxNode
         {
             var old = _isHtml;
             _isHtml = isHtml;

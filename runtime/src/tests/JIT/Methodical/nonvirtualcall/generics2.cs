@@ -151,8 +151,7 @@ namespace Test
         }
     }
 
-    public sealed class SealedGrandChild<K> : GrandChild<K>
-    { }
+    public sealed class SealedGrandChild<K> : GrandChild<K> { }
 
     public static class Program
     {

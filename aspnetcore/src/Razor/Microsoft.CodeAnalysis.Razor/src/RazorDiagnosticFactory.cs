@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Razor
 
         // Razor.Language starts at 0, 1000, 2000, 3000. Therefore, we should offset by 500 to ensure we can easily
         // maintain this list of diagnostic descriptors in conjunction with the one in Razor.Language.
-         
+
         #region General Errors
 
         // General Errors ID Offset = 500
@@ -38,16 +38,20 @@ namespace Microsoft.CodeAnalysis.Razor
             new RazorDiagnosticDescriptor(
                 $"{DiagnosticPrefix}3500",
                 () => Resources.TagHelper_InvalidAttributeNameNotNullOrEmpty,
-                RazorDiagnosticSeverity.Error);
-        public static RazorDiagnostic CreateTagHelper_InvalidAttributeNameNullOrEmpty(string tagHelperDisplayName, string propertyDisplayName)
-        {
+                RazorDiagnosticSeverity.Error
+            );
+        public static RazorDiagnostic CreateTagHelper_InvalidAttributeNameNullOrEmpty(
+            string tagHelperDisplayName,
+            string propertyDisplayName
+        ) {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidAttributeNameNullOrEmpty,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
                 tagHelperDisplayName,
                 propertyDisplayName,
                 TagHelperTypes.HtmlAttributeNameAttribute,
-                TagHelperTypes.HtmlAttributeName.Name);
+                TagHelperTypes.HtmlAttributeName.Name
+            );
 
             return diagnostic;
         }
@@ -56,9 +60,12 @@ namespace Microsoft.CodeAnalysis.Razor
             new RazorDiagnosticDescriptor(
                 $"{DiagnosticPrefix}3501",
                 () => Resources.TagHelper_InvalidAttributePrefixNotNull,
-                RazorDiagnosticSeverity.Error);
-        public static RazorDiagnostic CreateTagHelper_InvalidAttributePrefixNotNull(string tagHelperDisplayName, string propertyDisplayName)
-        {
+                RazorDiagnosticSeverity.Error
+            );
+        public static RazorDiagnostic CreateTagHelper_InvalidAttributePrefixNotNull(
+            string tagHelperDisplayName,
+            string propertyDisplayName
+        ) {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidAttributePrefixNotNull,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -66,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 propertyDisplayName,
                 TagHelperTypes.HtmlAttributeNameAttribute,
                 TagHelperTypes.HtmlAttributeName.DictionaryAttributePrefix,
-                "IDictionary<string, TValue>");
+                "IDictionary<string, TValue>"
+            );
 
             return diagnostic;
         }
@@ -75,9 +83,12 @@ namespace Microsoft.CodeAnalysis.Razor
             new RazorDiagnosticDescriptor(
                 $"{DiagnosticPrefix}3502",
                 () => Resources.TagHelper_InvalidAttributePrefixNull,
-                RazorDiagnosticSeverity.Error);
-        public static RazorDiagnostic CreateTagHelper_InvalidAttributePrefixNull(string tagHelperDisplayName, string propertyDisplayName)
-        {
+                RazorDiagnosticSeverity.Error
+            );
+        public static RazorDiagnostic CreateTagHelper_InvalidAttributePrefixNull(
+            string tagHelperDisplayName,
+            string propertyDisplayName
+        ) {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidAttributePrefixNull,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
@@ -85,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 propertyDisplayName,
                 TagHelperTypes.HtmlAttributeNameAttribute,
                 TagHelperTypes.HtmlAttributeName.DictionaryAttributePrefix,
-                "IDictionary<string, TValue>");
+                "IDictionary<string, TValue>"
+            );
 
             return diagnostic;
         }
@@ -94,14 +106,18 @@ namespace Microsoft.CodeAnalysis.Razor
             new RazorDiagnosticDescriptor(
                 $"{DiagnosticPrefix}3503",
                 () => Resources.TagHelper_InvalidRequiredAttributeCharacter,
-                RazorDiagnosticSeverity.Error);
-        public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeCharacter(char invalidCharacter, string requiredAttributes)
-        {
+                RazorDiagnosticSeverity.Error
+            );
+        public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeCharacter(
+            char invalidCharacter,
+            string requiredAttributes
+        ) {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidRequiredAttributeCharacter,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
                 invalidCharacter,
-                requiredAttributes);
+                requiredAttributes
+            );
 
             return diagnostic;
         }
@@ -110,14 +126,18 @@ namespace Microsoft.CodeAnalysis.Razor
             new RazorDiagnosticDescriptor(
                 $"{DiagnosticPrefix}3504",
                 () => Resources.TagHelper_PartialRequiredAttributeOperator,
-                RazorDiagnosticSeverity.Error);
-        public static RazorDiagnostic CreateTagHelper_PartialRequiredAttributeOperator(char partialOperator, string requiredAttributes)
-        {
+                RazorDiagnosticSeverity.Error
+            );
+        public static RazorDiagnostic CreateTagHelper_PartialRequiredAttributeOperator(
+            char partialOperator,
+            string requiredAttributes
+        ) {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_PartialRequiredAttributeOperator,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
                 requiredAttributes,
-                partialOperator);
+                partialOperator
+            );
 
             return diagnostic;
         }
@@ -126,14 +146,18 @@ namespace Microsoft.CodeAnalysis.Razor
             new RazorDiagnosticDescriptor(
                 $"{DiagnosticPrefix}3505",
                 () => Resources.TagHelper_InvalidRequiredAttributeOperator,
-                RazorDiagnosticSeverity.Error);
-        public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeOperator(char invalidOperator, string requiredAttributes)
-        {
+                RazorDiagnosticSeverity.Error
+            );
+        public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeOperator(
+            char invalidOperator,
+            string requiredAttributes
+        ) {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidRequiredAttributeOperator,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
                 invalidOperator,
-                requiredAttributes);
+                requiredAttributes
+            );
 
             return diagnostic;
         }
@@ -142,14 +166,18 @@ namespace Microsoft.CodeAnalysis.Razor
             new RazorDiagnosticDescriptor(
                 $"{DiagnosticPrefix}3506",
                 () => Resources.TagHelper_InvalidRequiredAttributeMismatchedQuotes,
-                RazorDiagnosticSeverity.Error);
-        public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeMismatchedQuotes(char quote, string requiredAttributes)
-        {
+                RazorDiagnosticSeverity.Error
+            );
+        public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeMismatchedQuotes(
+            char quote,
+            string requiredAttributes
+        ) {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_InvalidRequiredAttributeMismatchedQuotes,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
                 requiredAttributes,
-                quote);
+                quote
+            );
 
             return diagnostic;
         }
@@ -158,18 +186,19 @@ namespace Microsoft.CodeAnalysis.Razor
             new RazorDiagnosticDescriptor(
                 $"{DiagnosticPrefix}3507",
                 () => Resources.TagHelper_CouldNotFindMatchingEndBrace,
-                RazorDiagnosticSeverity.Error);
-        public static RazorDiagnostic CreateTagHelper_CouldNotFindMatchingEndBrace(string requiredAttributes)
-        {
+                RazorDiagnosticSeverity.Error
+            );
+        public static RazorDiagnostic CreateTagHelper_CouldNotFindMatchingEndBrace(
+            string requiredAttributes
+        ) {
             var diagnostic = RazorDiagnostic.Create(
                 TagHelper_CouldNotFindMatchingEndBrace,
                 new SourceSpan(SourceLocation.Undefined, contentLength: 0),
-                requiredAttributes);
+                requiredAttributes
+            );
 
             return diagnostic;
         }
-
-
         #endregion
     }
 }

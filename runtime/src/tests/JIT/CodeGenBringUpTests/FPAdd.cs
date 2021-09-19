@@ -11,13 +11,18 @@ public class BringUpTest
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static float FPAdd(float x, float y) { return x+y; }
+    public static float FPAdd(float x, float y)
+    {
+        return x + y;
+    }
 
     public static int Main()
     {
         float y = FPAdd(1f, 1f);
         Console.WriteLine(y);
-        if (System.Math.Abs(y-2f) <= Single.Epsilon) return Pass;
-        else return Fail;
+        if (System.Math.Abs(y - 2f) <= Single.Epsilon)
+            return Pass;
+        else
+            return Fail;
     }
 }

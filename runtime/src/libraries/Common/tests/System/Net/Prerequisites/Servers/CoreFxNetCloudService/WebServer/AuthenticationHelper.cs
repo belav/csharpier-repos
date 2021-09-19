@@ -26,11 +26,19 @@ namespace WebServer
                     return false;
                 }
             }
-            else if (string.Equals("Negotiate", authType, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals("NTLM", authType, StringComparison.OrdinalIgnoreCase))
-            {
-                if (!HandleChallengeResponseAuthentication(context, authType, user, password, domain))
-                {
+            else if (
+                string.Equals("Negotiate", authType, StringComparison.OrdinalIgnoreCase)
+                || string.Equals("NTLM", authType, StringComparison.OrdinalIgnoreCase)
+            ) {
+                if (
+                    !HandleChallengeResponseAuthentication(
+                        context,
+                        authType,
+                        user,
+                        password,
+                        domain
+                    )
+                ) {
                     context.Response.End();
                     return false;
                 }
@@ -46,8 +54,12 @@ namespace WebServer
             return true;
         }
 
-        private static bool HandleBasicAuthentication(HttpContext context, string user, string password, string domain)
-        {
+        private static bool HandleBasicAuthentication(
+            HttpContext context,
+            string user,
+            string password,
+            string domain
+        ) {
             const string WwwAuthenticateHeaderValue = "Basic realm=\"corefx-networking\"";
 
             string authHeader = context.Request.Headers["Authorization"];
@@ -99,8 +111,8 @@ namespace WebServer
             string authType,
             string user,
             string password,
-            string domain)
-        {
+            string domain
+        ) {
             string authHeader = context.Request.Headers["Authorization"];
             if (authHeader == null)
             {
@@ -114,7 +126,8 @@ namespace WebServer
             context.Response.StatusDescription = string.Format(
                 "Attempt to use unsupported challenge/response auth type. {0}: {1}",
                 authType,
-                authHeader);
+                authHeader
+            );
             return false;
         }
     }

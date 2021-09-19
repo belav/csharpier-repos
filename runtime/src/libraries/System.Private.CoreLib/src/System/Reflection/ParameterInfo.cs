@@ -34,8 +34,12 @@ namespace System.Reflection
             return false;
         }
 
-        public virtual IEnumerable<CustomAttributeData> CustomAttributes => GetCustomAttributesData();
-        public virtual IList<CustomAttributeData> GetCustomAttributesData() { throw NotImplemented.ByDesign; }
+        public virtual IEnumerable<CustomAttributeData> CustomAttributes =>
+            GetCustomAttributesData();
+        public virtual IList<CustomAttributeData> GetCustomAttributesData()
+        {
+            throw NotImplemented.ByDesign;
+        }
 
         public virtual object[] GetCustomAttributes(bool inherit) => Array.Empty<object>();
         public virtual object[] GetCustomAttributes(Type attributeType, bool inherit)

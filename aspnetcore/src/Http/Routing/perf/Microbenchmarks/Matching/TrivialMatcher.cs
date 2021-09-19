@@ -31,8 +31,13 @@ namespace Microsoft.AspNetCore.Routing.Matching
             }
 
             var path = httpContext.Request.Path.Value;
-            if (string.Equals(_endpoint.RoutePattern.RawText, path, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                string.Equals(
+                    _endpoint.RoutePattern.RawText,
+                    path,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 httpContext.SetEndpoint(_endpoint);
                 httpContext.Request.RouteValues = new RouteValueDictionary();
             }
@@ -43,8 +48,13 @@ namespace Microsoft.AspNetCore.Routing.Matching
         // This is here so this can be tested alongside DFA matcher.
         internal Candidate[] FindCandidateSet(string path, ReadOnlySpan<PathSegment> segments)
         {
-            if (string.Equals(_endpoint.RoutePattern.RawText, path, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                string.Equals(
+                    _endpoint.RoutePattern.RawText,
+                    path,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 return _candidates;
             }
 

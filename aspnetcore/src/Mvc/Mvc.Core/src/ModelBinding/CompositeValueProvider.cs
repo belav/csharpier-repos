@@ -13,28 +13,24 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
     /// <summary>
     /// Represents a <see cref="IValueProvider"/> whose values come from a collection of <see cref="IValueProvider"/>s.
     /// </summary>
-    public class CompositeValueProvider :
-        Collection<IValueProvider>,
-        IEnumerableValueProvider,
-        IBindingSourceValueProvider,
-        IKeyRewriterValueProvider
+    public class CompositeValueProvider
+        : Collection<IValueProvider>,
+          IEnumerableValueProvider,
+          IBindingSourceValueProvider,
+          IKeyRewriterValueProvider
     {
         /// <summary>
         /// Initializes a new instance of <see cref="CompositeValueProvider"/>.
         /// </summary>
-        public CompositeValueProvider()
-        {
-        }
+        public CompositeValueProvider() { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="CompositeValueProvider"/>.
         /// </summary>
         /// <param name="valueProviders">The sequence of <see cref="IValueProvider"/> to add to this instance of
         /// <see cref="CompositeValueProvider"/>.</param>
-        public CompositeValueProvider(IList<IValueProvider> valueProviders)
-            : base(valueProviders)
-        {
-        }
+        public CompositeValueProvider(IList<IValueProvider> valueProviders) : base(valueProviders)
+        { }
 
         /// <summary>
         /// Asynchronously creates a <see cref="CompositeValueProvider"/> using the provided
@@ -45,8 +41,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// A <see cref="Task{TResult}"/> which, when completed, asynchronously returns a
         /// <see cref="CompositeValueProvider"/>.
         /// </returns>
-        public static async Task<CompositeValueProvider> CreateAsync(ControllerContext controllerContext)
-        {
+        public static async Task<CompositeValueProvider> CreateAsync(
+            ControllerContext controllerContext
+        ) {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException(nameof(controllerContext));
@@ -69,8 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </returns>
         public static async Task<CompositeValueProvider> CreateAsync(
             ActionContext actionContext,
-            IList<IValueProviderFactory> factories)
-        {
+            IList<IValueProviderFactory> factories
+        ) {
             var valueProviderFactoryContext = new ValueProviderFactoryContext(actionContext);
 
             for (var i = 0; i < factories.Count; i++)
@@ -84,8 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
         internal static async ValueTask<(bool success, CompositeValueProvider? valueProvider)> TryCreateAsync(
             ActionContext actionContext,
-            IList<IValueProviderFactory> factories)
-        {
+            IList<IValueProviderFactory> factories
+        ) {
             try
             {
                 var valueProvider = await CreateAsync(actionContext, factories);

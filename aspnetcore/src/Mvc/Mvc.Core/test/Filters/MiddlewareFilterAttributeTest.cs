@@ -16,18 +16,23 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             // Arrange
             var middlewareFilterAttribute = new MiddlewareFilterAttribute(typeof(Pipeline1));
             var services = new ServiceCollection();
-            services.AddSingleton(new MiddlewareFilterBuilder(new MiddlewareFilterConfigurationProvider()));
+            services.AddSingleton(
+                new MiddlewareFilterBuilder(new MiddlewareFilterConfigurationProvider())
+            );
             var serviceProvider = services.BuildServiceProvider();
-            var filterBuilderService = serviceProvider.GetRequiredService<MiddlewareFilterBuilder>();
+            var filterBuilderService =
+                serviceProvider.GetRequiredService<MiddlewareFilterBuilder>();
             filterBuilderService.ApplicationBuilder = new ApplicationBuilder(serviceProvider);
             var configureCallCount = 0;
             Pipeline1.ConfigurePipeline = (ab) =>
             {
                 configureCallCount++;
-                ab.Use((httpContext, next) =>
-                {
-                    return next();
-                });
+                ab.Use(
+                    (httpContext, next) =>
+                    {
+                        return next();
+                    }
+                );
             };
 
             // Act

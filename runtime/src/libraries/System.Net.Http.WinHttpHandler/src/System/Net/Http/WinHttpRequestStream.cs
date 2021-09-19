@@ -31,26 +31,17 @@ namespace System.Net.Http
 
         public override bool CanRead
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return !_disposed;
-            }
+            get { return !_disposed; }
         }
 
         public override long Length
@@ -69,7 +60,6 @@ namespace System.Net.Http
                 CheckDisposed();
                 throw new NotSupportedException();
             }
-
             set
             {
                 CheckDisposed();
@@ -84,13 +74,17 @@ namespace System.Net.Http
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
-            return cancellationToken.IsCancellationRequested ?
-                Task.FromCanceled(cancellationToken) :
-                Task.CompletedTask;
+            return cancellationToken.IsCancellationRequested
+                ? Task.FromCanceled(cancellationToken)
+                : Task.CompletedTask;
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken token)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken token
+        ) {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -120,9 +114,10 @@ namespace System.Net.Http
 
             CheckDisposed();
 
-            if (_state.TcsInternalWriteDataToRequestStream != null &&
-                !_state.TcsInternalWriteDataToRequestStream.Task.IsCompleted)
-            {
+            if (
+                _state.TcsInternalWriteDataToRequestStream != null
+                && !_state.TcsInternalWriteDataToRequestStream.Task.IsCompleted
+            ) {
                 throw new InvalidOperationException(SR.net_http_no_concurrent_io_allowed);
             }
 
@@ -134,11 +129,20 @@ namespace System.Net.Http
             WriteAsync(buffer, offset, count, CancellationToken.None).GetAwaiter().GetResult();
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? asyncCallback, object? asyncState) =>
-            TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), asyncCallback, asyncState);
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            TaskToApm.Begin(
+                WriteAsync(buffer, offset, count, CancellationToken.None),
+                asyncCallback,
+                asyncState
+            );
 
-        public override void EndWrite(IAsyncResult asyncResult) =>
-            TaskToApm.End(asyncResult);
+        public override void EndWrite(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
 
         public override long Seek(long offset, SeekOrigin origin)
         {
@@ -162,7 +166,8 @@ namespace System.Net.Http
         {
             if (_chunkedMode)
             {
-                await InternalWriteDataAsync(s_endChunk, 0, s_endChunk.Length, token).ConfigureAwait(false);
+                await InternalWriteDataAsync(s_endChunk, 0, s_endChunk.Length, token)
+                    .ConfigureAwait(false);
             }
         }
 
@@ -188,20 +193,28 @@ namespace System.Net.Http
             }
         }
 
-        private Task InternalWriteAsync(byte[] buffer, int offset, int count, CancellationToken token)
-        {
+        private Task InternalWriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken token
+        ) {
             if (count == 0)
             {
                 return Task.CompletedTask;
             }
 
-            return _chunkedMode ?
-                InternalWriteChunkedModeAsync(buffer, offset, count, token) :
-                InternalWriteDataAsync(buffer, offset, count, token);
+            return _chunkedMode
+                ? InternalWriteChunkedModeAsync(buffer, offset, count, token)
+                : InternalWriteDataAsync(buffer, offset, count, token);
         }
 
-        private async Task InternalWriteChunkedModeAsync(byte[] buffer, int offset, int count, CancellationToken token)
-        {
+        private async Task InternalWriteChunkedModeAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken token
+        ) {
             // WinHTTP does not fully support chunked uploads. It simply allows one to omit the 'Content-Length' header
             // and instead use the 'Transfer-Encoding: chunked' header. The caller is still required to encode the
             // request body according to chunking rules.
@@ -210,14 +223,20 @@ namespace System.Net.Http
 
             byte[] chunkSize = Encoding.UTF8.GetBytes($"{count:x}\r\n");
 
-            await InternalWriteDataAsync(chunkSize, 0, chunkSize.Length, token).ConfigureAwait(false);
+            await InternalWriteDataAsync(chunkSize, 0, chunkSize.Length, token)
+                .ConfigureAwait(false);
 
             await InternalWriteDataAsync(buffer, offset, count, token).ConfigureAwait(false);
-            await InternalWriteDataAsync(s_crLfTerminator, 0, s_crLfTerminator.Length, token).ConfigureAwait(false);
+            await InternalWriteDataAsync(s_crLfTerminator, 0, s_crLfTerminator.Length, token)
+                .ConfigureAwait(false);
         }
 
-        private Task<bool> InternalWriteDataAsync(byte[] buffer, int offset, int count, CancellationToken token)
-        {
+        private Task<bool> InternalWriteDataAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken token
+        ) {
             Debug.Assert(count > 0);
 
             if (!_cachedSendPinnedBuffer.IsAllocated || _cachedSendPinnedBuffer.Target != buffer)
@@ -230,19 +249,28 @@ namespace System.Net.Http
                 _cachedSendPinnedBuffer = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             }
 
-            _state.TcsInternalWriteDataToRequestStream =
-                new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            _state.TcsInternalWriteDataToRequestStream = new TaskCompletionSource<bool>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             lock (_state.Lock)
             {
-                if (!Interop.WinHttp.WinHttpWriteData(
-                    _state.RequestHandle,
-                    Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
-                    (uint)count,
-                    IntPtr.Zero))
-                {
+                if (
+                    !Interop.WinHttp.WinHttpWriteData(
+                        _state.RequestHandle,
+                        Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
+                        (uint)count,
+                        IntPtr.Zero
+                    )
+                ) {
                     _state.TcsInternalWriteDataToRequestStream.TrySetException(
-                        new IOException(SR.net_http_io_write, WinHttpException.CreateExceptionUsingLastError(nameof(Interop.WinHttp.WinHttpWriteData))));
+                        new IOException(
+                            SR.net_http_io_write,
+                            WinHttpException.CreateExceptionUsingLastError(
+                                nameof(Interop.WinHttp.WinHttpWriteData)
+                            )
+                        )
+                    );
                 }
             }
 

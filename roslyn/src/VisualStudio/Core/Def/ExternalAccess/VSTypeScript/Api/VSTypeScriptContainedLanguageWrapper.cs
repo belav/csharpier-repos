@@ -25,8 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             AbstractProject project,
             IVsHierarchy hierarchy,
             uint itemid,
-            Guid languageServiceGuid)
-        {
+            Guid languageServiceGuid
+        ) {
             var workspace = componentModel.GetService<VisualStudioWorkspace>();
             var filePath = ContainedLanguage.GetFilePathFromHierarchyAndItemId(hierarchy, itemid);
 
@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
                 project.VisualStudioProject,
                 filePath,
                 languageServiceGuid,
-                vbHelperFormattingRule: null);
+                vbHelperFormattingRule: null
+            );
         }
 
         public VSTypeScriptContainedLanguageWrapper(
@@ -47,8 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             VSTypeScriptVisualStudioProjectWrapper project,
             IVsHierarchy hierarchy,
             uint itemid,
-            Guid languageServiceGuid)
-        {
+            Guid languageServiceGuid
+        ) {
             var workspace = componentModel.GetService<VisualStudioWorkspace>();
             var filePath = ContainedLanguage.GetFilePathFromHierarchyAndItemId(hierarchy, itemid);
 
@@ -60,7 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
                 project.Project,
                 filePath,
                 languageServiceGuid,
-                vbHelperFormattingRule: null);
+                vbHelperFormattingRule: null
+            );
         }
 
         public VSTypeScriptContainedLanguageWrapper(
@@ -69,11 +71,19 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             Workspace workspace,
             IVsHierarchy hierarchy,
             uint itemid,
-            Guid languageServiceGuid)
-        {
+            Guid languageServiceGuid
+        ) {
             var filePath = ContainedLanguage.GetFilePathFromHierarchyAndItemId(hierarchy, itemid);
             var projectId = ProjectId.CreateNewId($"Project for {filePath}");
-            workspace.OnProjectAdded(ProjectInfo.Create(projectId, VersionStamp.Default, filePath, string.Empty, "TypeScript"));
+            workspace.OnProjectAdded(
+                ProjectInfo.Create(
+                    projectId,
+                    VersionStamp.Default,
+                    filePath,
+                    string.Empty,
+                    "TypeScript"
+                )
+            );
 
             _underlyingObject = new ContainedLanguage(
                 bufferCoordinator,
@@ -83,12 +93,12 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
                 null,
                 filePath,
                 languageServiceGuid,
-                vbHelperFormattingRule: null);
+                vbHelperFormattingRule: null
+            );
         }
 
         public bool IsDefault => _underlyingObject == null;
 
-        public void DisconnectHost()
-            => _underlyingObject.SetHost(null);
+        public void DisconnectHost() => _underlyingObject.SetHost(null);
     }
 }

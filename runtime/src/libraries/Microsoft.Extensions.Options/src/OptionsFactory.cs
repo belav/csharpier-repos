@@ -12,9 +12,9 @@ namespace Microsoft.Extensions.Options
     /// Implementation of <see cref="IOptionsFactory{TOptions}"/>.
     /// </summary>
     /// <typeparam name="TOptions">The type of options being requested.</typeparam>
-    public class OptionsFactory<[DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions> :
-        IOptionsFactory<TOptions>
-        where TOptions : class
+    public class OptionsFactory<
+        [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
+    > : IOptionsFactory<TOptions> where TOptions : class
     {
         private readonly IConfigureOptions<TOptions>[] _setups;
         private readonly IPostConfigureOptions<TOptions>[] _postConfigures;
@@ -25,8 +25,10 @@ namespace Microsoft.Extensions.Options
         /// </summary>
         /// <param name="setups">The configuration actions to run.</param>
         /// <param name="postConfigures">The initialization actions to run.</param>
-        public OptionsFactory(IEnumerable<IConfigureOptions<TOptions>> setups, IEnumerable<IPostConfigureOptions<TOptions>> postConfigures) : this(setups, postConfigures, validations: Array.Empty<IValidateOptions<TOptions>>())
-        { }
+        public OptionsFactory(
+            IEnumerable<IConfigureOptions<TOptions>> setups,
+            IEnumerable<IPostConfigureOptions<TOptions>> postConfigures
+        ) : this(setups, postConfigures, validations: Array.Empty<IValidateOptions<TOptions>>()) { }
 
         /// <summary>
         /// Initializes a new instance with the specified options configurations.
@@ -34,10 +36,14 @@ namespace Microsoft.Extensions.Options
         /// <param name="setups">The configuration actions to run.</param>
         /// <param name="postConfigures">The initialization actions to run.</param>
         /// <param name="validations">The validations to run.</param>
-        public OptionsFactory(IEnumerable<IConfigureOptions<TOptions>> setups, IEnumerable<IPostConfigureOptions<TOptions>> postConfigures, IEnumerable<IValidateOptions<TOptions>> validations)
-        {
+        public OptionsFactory(
+            IEnumerable<IConfigureOptions<TOptions>> setups,
+            IEnumerable<IPostConfigureOptions<TOptions>> postConfigures,
+            IEnumerable<IValidateOptions<TOptions>> validations
+        ) {
             _setups = setups as IConfigureOptions<TOptions>[] ?? setups.ToArray();
-            _postConfigures = postConfigures as IPostConfigureOptions<TOptions>[] ?? postConfigures.ToArray();
+            _postConfigures =
+                postConfigures as IPostConfigureOptions<TOptions>[] ?? postConfigures.ToArray();
             _validations = validations as IValidateOptions<TOptions>[] ?? validations.ToArray();
         }
 

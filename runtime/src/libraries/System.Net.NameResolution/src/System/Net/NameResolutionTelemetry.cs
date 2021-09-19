@@ -31,14 +31,20 @@ namespace System.Net
             if (command.Command == EventCommand.Enable)
             {
                 // The cumulative number of name resolution requests started since events were enabled
-                _lookupsRequestedCounter ??= new PollingCounter("dns-lookups-requested", this, () => Interlocked.Read(ref _lookupsRequested))
-                {
+                _lookupsRequestedCounter ??= new PollingCounter(
+                    "dns-lookups-requested",
+                    this,
+                    () => Interlocked.Read(ref _lookupsRequested)
+                ) {
                     DisplayName = "DNS Lookups Requested"
                 };
 
                 // Current number of DNS requests pending
-                _currentLookupsCounter ??= new PollingCounter("current-dns-lookups", this, () => Interlocked.Read(ref _currentLookups))
-                {
+                _currentLookupsCounter ??= new PollingCounter(
+                    "current-dns-lookups",
+                    this,
+                    () => Interlocked.Read(ref _currentLookups)
+                ) {
                     DisplayName = "Current DNS Lookups"
                 };
 
@@ -53,14 +59,14 @@ namespace System.Net
         private const int MaxIPFormattedLength = 128;
 
         [Event(ResolutionStartEventId, Level = EventLevel.Informational)]
-        private void ResolutionStart(string hostNameOrAddress) => WriteEvent(ResolutionStartEventId, hostNameOrAddress);
+        private void ResolutionStart(string hostNameOrAddress) =>
+            WriteEvent(ResolutionStartEventId, hostNameOrAddress);
 
         [Event(ResolutionStopEventId, Level = EventLevel.Informational)]
         private void ResolutionStop() => WriteEvent(ResolutionStopEventId);
 
         [Event(ResolutionFailedEventId, Level = EventLevel.Informational)]
         private void ResolutionFailed() => WriteEvent(ResolutionFailedEventId);
-
 
         [NonEvent]
         public ValueStopwatch BeforeResolution(string hostNameOrAddress)
@@ -95,7 +101,13 @@ namespace System.Net
 
                 if (IsEnabled(EventLevel.Informational, EventKeywords.None))
                 {
-                    WriteEvent(ResolutionStartEventId, FormatIPAddressNullTerminated(address, stackalloc char[MaxIPFormattedLength]));
+                    WriteEvent(
+                        ResolutionStartEventId,
+                        FormatIPAddressNullTerminated(
+                            address,
+                            stackalloc char[MaxIPFormattedLength]
+                        )
+                    );
                 }
 
                 return ValueStopwatch.StartNew();
@@ -126,8 +138,10 @@ namespace System.Net
         }
 
         [NonEvent]
-        private static Span<char> FormatIPAddressNullTerminated(IPAddress address, Span<char> destination)
-        {
+        private static Span<char> FormatIPAddressNullTerminated(
+            IPAddress address,
+            Span<char> destination
+        ) {
             Debug.Assert(address != null);
 
             bool success = address.TryFormat(destination, out int charsWritten);
@@ -139,18 +153,23 @@ namespace System.Net
             return destination.Slice(0, charsWritten + 1);
         }
 
-
         // WriteEvent overloads taking Span<char> are imitating string arguments
         // Span arguments are expected to be null-terminated
 
 #if !ES_BUILD_STANDALONE
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = "Parameters to this method are primitive and are trimmer safe")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = "Parameters to this method are primitive and are trimmer safe"
+        )]
 #endif
         [NonEvent]
         private unsafe void WriteEvent(int eventId, Span<char> arg1)
         {
-            Debug.Assert(!arg1.IsEmpty && arg1.IndexOf('\0') == arg1.Length - 1, "Expecting a null-terminated ROS<char>");
+            Debug.Assert(
+                !arg1.IsEmpty && arg1.IndexOf('\0') == arg1.Length - 1,
+                "Expecting a null-terminated ROS<char>"
+            );
 
             if (IsEnabled())
             {

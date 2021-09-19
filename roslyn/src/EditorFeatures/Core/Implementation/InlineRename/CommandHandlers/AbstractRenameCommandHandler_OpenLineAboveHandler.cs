@@ -8,18 +8,28 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler : IChainedCommandHandler<OpenLineAboveCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : IChainedCommandHandler<OpenLineAboveCommandArgs>
     {
-        public CommandState GetCommandState(OpenLineAboveCommandArgs args, Func<CommandState> nextHandler)
-            => GetCommandState(nextHandler);
+        public CommandState GetCommandState(
+            OpenLineAboveCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => GetCommandState(nextHandler);
 
-        public void ExecuteCommand(OpenLineAboveCommandArgs args, Action nextHandler, CommandExecutionContext context)
-        {
-            HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
-            {
-                activeSession.Commit();
-                nextHandler();
-            });
+        public void ExecuteCommand(
+            OpenLineAboveCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        ) {
+            HandlePossibleTypingCommand(
+                args,
+                nextHandler,
+                (activeSession, span) =>
+                {
+                    activeSession.Commit();
+                    nextHandler();
+                }
+            );
         }
     }
 }

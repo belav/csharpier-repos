@@ -62,8 +62,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         /// </summary>
         private ImmutableArray<CSharpAttributeData> _lazyCustomAttributes;
 
-        internal PEAssemblySymbol(PEAssembly assembly, DocumentationProvider documentationProvider, bool isLinked, MetadataImportOptions importOptions)
-        {
+        internal PEAssemblySymbol(
+            PEAssembly assembly,
+            DocumentationProvider documentationProvider,
+            bool isLinked,
+            MetadataImportOptions importOptions
+        ) {
             Debug.Assert(assembly != null);
             Debug.Assert(documentationProvider != null);
             _assembly = assembly;
@@ -82,18 +86,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal PEAssembly Assembly
         {
-            get
-            {
-                return _assembly;
-            }
+            get { return _assembly; }
         }
 
         public override AssemblyIdentity Identity
         {
-            get
-            {
-                return _assembly.Identity;
-            }
+            get { return _assembly.Identity; }
         }
 
         // TODO: https://github.com/dotnet/roslyn/issues/9000
@@ -101,18 +99,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         public override ImmutableArray<ModuleSymbol> Modules
         {
-            get
-            {
-                return _modules;
-            }
+            get { return _modules; }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return this.PrimaryModule.MetadataLocation.Cast<MetadataLocation, Location>();
-            }
+            get { return this.PrimaryModule.MetadataLocation.Cast<MetadataLocation, Location>(); }
         }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
@@ -121,13 +113,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 if (this.MightContainExtensionMethods)
                 {
-                    this.PrimaryModule.LoadCustomAttributesFilterExtensions(_assembly.Handle,
-                        ref _lazyCustomAttributes);
+                    this.PrimaryModule.LoadCustomAttributesFilterExtensions(
+                        _assembly.Handle,
+                        ref _lazyCustomAttributes
+                    );
                 }
                 else
                 {
-                    this.PrimaryModule.LoadCustomAttributes(_assembly.Handle,
-                        ref _lazyCustomAttributes);
+                    this.PrimaryModule.LoadCustomAttributes(
+                        _assembly.Handle,
+                        ref _lazyCustomAttributes
+                    );
                 }
             }
             return _lazyCustomAttributes;
@@ -143,8 +139,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         /// <remarks>
         /// The returned assemblies may also forward the type.
         /// </remarks>
-        internal (AssemblySymbol FirstSymbol, AssemblySymbol SecondSymbol) LookupAssembliesForForwardedMetadataType(ref MetadataTypeName emittedName)
-        {
+        internal (AssemblySymbol FirstSymbol, AssemblySymbol SecondSymbol) LookupAssembliesForForwardedMetadataType(
+            ref MetadataTypeName emittedName
+        ) {
             // Look in the type forwarders of the primary module of this assembly, clr does not honor type forwarder
             // in non-primary modules.
 
@@ -157,17 +154,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return this.PrimaryModule.GetForwardedTypes();
         }
 
-        internal override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(ref MetadataTypeName emittedName, ConsList<AssemblySymbol> visitedAssemblies)
-        {
+        internal override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(
+            ref MetadataTypeName emittedName,
+            ConsList<AssemblySymbol> visitedAssemblies
+        ) {
             // Check if it is a forwarded type.
-            (AssemblySymbol firstSymbol, AssemblySymbol secondSymbol) = LookupAssembliesForForwardedMetadataType(ref emittedName);
+            (AssemblySymbol firstSymbol, AssemblySymbol secondSymbol) =
+                LookupAssembliesForForwardedMetadataType(ref emittedName);
 
             if ((object)firstSymbol != null)
             {
                 if ((object)secondSymbol != null)
                 {
                     // Report the main module as that is the only one checked. clr does not honor type forwarders in non-primary modules.
-                    return CreateMultipleForwardingErrorTypeSymbol(ref emittedName, this.PrimaryModule, firstSymbol, secondSymbol);
+                    return CreateMultipleForwardingErrorTypeSymbol(
+                        ref emittedName,
+                        this.PrimaryModule,
+                        firstSymbol,
+                        secondSymbol
+                    );
                 }
 
                 // Don't bother to check the forwarded-to assembly if we've already seen it.
@@ -177,8 +182,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 }
                 else
                 {
-                    visitedAssemblies = new ConsList<AssemblySymbol>(this, visitedAssemblies ?? ConsList<AssemblySymbol>.Empty);
-                    return firstSymbol.LookupTopLevelMetadataTypeWithCycleDetection(ref emittedName, visitedAssemblies, digThroughForwardedTypes: true);
+                    visitedAssemblies = new ConsList<AssemblySymbol>(
+                        this,
+                        visitedAssemblies ?? ConsList<AssemblySymbol>.Empty
+                    );
+                    return firstSymbol.LookupTopLevelMetadataTypeWithCycleDetection(
+                        ref emittedName,
+                        visitedAssemblies,
+                        digThroughForwardedTypes: true
+                    );
                 }
             }
 
@@ -190,13 +202,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return _noPiaResolutionAssemblies;
         }
 
-        internal override void SetNoPiaResolutionAssemblies(ImmutableArray<AssemblySymbol> assemblies)
-        {
+        internal override void SetNoPiaResolutionAssemblies(
+            ImmutableArray<AssemblySymbol> assemblies
+        ) {
             _noPiaResolutionAssemblies = assemblies;
         }
 
-        internal override void SetLinkedReferencedAssemblies(ImmutableArray<AssemblySymbol> assemblies)
-        {
+        internal override void SetLinkedReferencedAssemblies(
+            ImmutableArray<AssemblySymbol> assemblies
+        ) {
             _linkedReferencedAssemblies = assemblies;
         }
 
@@ -207,10 +221,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override ImmutableArray<byte> PublicKey
         {
-            get
-            {
-                return Identity.PublicKey;
-            }
+            get { return Identity.PublicKey; }
         }
 
         internal override bool GetGuidString(out string guidString)
@@ -218,31 +229,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return Assembly.Modules[0].HasGuidAttribute(Assembly.Handle, out guidString);
         }
 
-        internal override bool AreInternalsVisibleToThisAssembly(AssemblySymbol potentialGiverOfAccess)
-        {
+        internal override bool AreInternalsVisibleToThisAssembly(
+            AssemblySymbol potentialGiverOfAccess
+        ) {
             IVTConclusion conclusion = MakeFinalIVTDetermination(potentialGiverOfAccess);
             return conclusion == IVTConclusion.Match || conclusion == IVTConclusion.OneSignedOneNot;
         }
 
-        internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(string simpleName)
-        {
+        internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
+            string simpleName
+        ) {
             return Assembly.GetInternalsVisibleToPublicKeys(simpleName);
         }
 
         internal DocumentationProvider DocumentationProvider
         {
-            get
-            {
-                return _documentationProvider;
-            }
+            get { return _documentationProvider; }
         }
 
         internal override bool IsLinked
         {
-            get
-            {
-                return _isLinked;
-            }
+            get { return _isLinked; }
         }
 
         public override bool MightContainExtensionMethods
@@ -259,10 +266,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal PEModuleSymbol PrimaryModule
         {
-            get
-            {
-                return (PEModuleSymbol)_modules[0];
-            }
+            get { return (PEModuleSymbol)_modules[0]; }
         }
 
         internal sealed override CSharpCompilation DeclaringCompilation // perf, not correctness

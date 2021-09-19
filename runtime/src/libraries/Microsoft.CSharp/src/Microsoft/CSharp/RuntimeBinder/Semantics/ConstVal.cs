@@ -86,8 +86,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         private static bool IsDefault(object o) =>
-            o is null ||
-            Type.GetTypeCode(o.GetType()) switch
+            o is null
+            || Type.GetTypeCode(o.GetType()) switch
             {
                 TypeCode.Boolean => default(bool).Equals(o),
                 TypeCode.SByte => default(sbyte).Equals(o),

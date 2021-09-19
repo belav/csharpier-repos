@@ -31,18 +31,25 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             Guid transactionId,
             IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
             bool transactionOwned,
-            ISqlGenerationHelper sqlGenerationHelper)
-            : base(connection, transaction, transactionId, logger, transactionOwned, sqlGenerationHelper)
-        {
-        }
+            ISqlGenerationHelper sqlGenerationHelper
+        ) : base(
+            connection,
+            transaction,
+            transactionId,
+            logger,
+            transactionOwned,
+            sqlGenerationHelper
+        ) { }
 
         /// <inheritdoc />
         public override bool SupportsSavepoints
         {
             get
             {
-                if (Connection is ISqlServerConnection sqlServerConnection && sqlServerConnection.IsMultipleActiveResultSetsEnabled)
-                {
+                if (
+                    Connection is ISqlServerConnection sqlServerConnection
+                    && sqlServerConnection.IsMultipleActiveResultSetsEnabled
+                ) {
                     Logger.SavepointsDisabledBecauseOfMARS();
 
                     return false;
@@ -58,7 +65,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         public override void ReleaseSavepoint(string name) { }
 
         /// <inheritdoc />
-        public override Task ReleaseSavepointAsync(string name, CancellationToken cancellationToken = default)
-            => Task.CompletedTask;
+        public override Task ReleaseSavepointAsync(
+            string name,
+            CancellationToken cancellationToken = default
+        ) => Task.CompletedTask;
     }
 }

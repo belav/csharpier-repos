@@ -8,7 +8,11 @@ namespace System.ComponentModel
     /// <summary>
     /// Specifies the class to use to implement design-time services.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface,
+        AllowMultiple = true,
+        Inherited = true
+    )]
     public sealed class DesignerAttribute : Attribute
     {
         private string? _typeId;
@@ -17,25 +21,36 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/> class using the name of the type that
         /// provides design-time services.
         /// </summary>
-        public DesignerAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] string designerTypeName)
-        {
-            DesignerTypeName = designerTypeName ?? throw new ArgumentNullException(nameof(designerTypeName));
-            DesignerBaseTypeName = "System.ComponentModel.Design.IDesigner, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+        public DesignerAttribute(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                string designerTypeName
+        ) {
+            DesignerTypeName =
+                designerTypeName ?? throw new ArgumentNullException(nameof(designerTypeName));
+            DesignerBaseTypeName =
+                "System.ComponentModel.Design.IDesigner, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/> class using the type that provides
         /// design-time services.
         /// </summary>
-        public DesignerAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type designerType)
-        {
+        public DesignerAttribute(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type designerType
+        ) {
             if (designerType == null)
             {
                 throw new ArgumentNullException(nameof(designerType));
             }
 
             DesignerTypeName = designerType.AssemblyQualifiedName!;
-            DesignerBaseTypeName = "System.ComponentModel.Design.IDesigner, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+            DesignerBaseTypeName =
+                "System.ComponentModel.Design.IDesigner, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
         }
 
         /// <summary>
@@ -43,10 +58,17 @@ namespace System.ComponentModel
         /// base class for the designer.
         /// </summary>
         public DesignerAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] string designerTypeName,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] string designerBaseTypeName)
-        {
-            DesignerTypeName = designerTypeName ?? throw new ArgumentNullException(nameof(designerTypeName));
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                string designerTypeName,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                string designerBaseTypeName
+        ) {
+            DesignerTypeName =
+                designerTypeName ?? throw new ArgumentNullException(nameof(designerTypeName));
             DesignerBaseTypeName = designerBaseTypeName;
         }
 
@@ -55,9 +77,15 @@ namespace System.ComponentModel
         /// class and the base class for the designer.
         /// </summary>
         public DesignerAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] string designerTypeName,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type designerBaseType)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                string designerTypeName,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type designerBaseType
+        ) {
             if (designerTypeName == null)
             {
                 throw new ArgumentNullException(nameof(designerTypeName));
@@ -76,9 +104,15 @@ namespace System.ComponentModel
         /// designer base class.
         /// </summary>
         public DesignerAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type designerType,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type designerBaseType)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type designerType,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type designerBaseType
+        ) {
             if (designerType == null)
             {
                 throw new ArgumentNullException(nameof(designerType));
@@ -142,6 +176,7 @@ namespace System.ComponentModel
                 && other.DesignerTypeName == DesignerTypeName;
         }
 
-        public override int GetHashCode() => HashCode.Combine(DesignerBaseTypeName, DesignerTypeName);
+        public override int GetHashCode() =>
+            HashCode.Combine(DesignerBaseTypeName, DesignerTypeName);
     }
 }

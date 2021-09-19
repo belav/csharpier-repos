@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
 {
     public class TemplateMatcherTests
     {
-        private static IInlineConstraintResolver _inlineConstraintResolver = GetInlineConstraintResolver();
+        private static IInlineConstraintResolver _inlineConstraintResolver =
+            GetInlineConstraintResolver();
 
         [Fact]
         public void TryMatch_Success()
@@ -118,9 +119,7 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
         [InlineData(@"{p1:regex(^\w+\@\w+\.\w+)}", "/asd@assds.com")] // email
         [InlineData(@"{p1:regex(([}}])\w+)}", "/}sda")] // Not balanced }
         [InlineData(@"{p1:regex(([{{)])\w+)}", "/})sda")] // Not balanced {
-        public void TryMatch_RegularExpressionConstraint_Valid(
-            string template,
-            string path)
+        public void TryMatch_RegularExpressionConstraint_Valid(string template, string path)
         {
             // Arrange
             var matcher = CreateMatcher(template);
@@ -153,8 +152,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
             string path,
             bool expectedMatch,
             string p1,
-            string p2)
-        {
+            string p2
+        ) {
             // Arrange
             var matcher = CreateMatcher(template);
 
@@ -188,8 +187,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
             string path,
             string p1,
             string p2,
-            string p3)
-        {
+            string p3
+        ) {
             // Arrange
             var matcher = CreateMatcher(template);
 
@@ -226,8 +225,10 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
         [InlineData("{p1}.{p2?}/{p3}", "/foo./bar")]
         [InlineData("moo/.{p2?}", "/moo/.")]
         [InlineData("{p1}.{p2}/{p3}", "/.foo/bar")]
-        public void TryMatch_OptionalParameter_FollowedByPeriod_Invalid(string template, string path)
-        {
+        public void TryMatch_OptionalParameter_FollowedByPeriod_Invalid(
+            string template,
+            string path
+        ) {
             // Arrange
             var matcher = CreateMatcher(template);
 
@@ -412,7 +413,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
             // Arrange
             var matcher = CreateMatcher(
                 "date/{y}/{m}/{d}",
-                new { controller = "blog", action = "showpost", m = (string)null, d = (string)null });
+                new { controller = "blog", action = "showpost", m = (string)null, d = (string)null }
+            );
 
             var values = new RouteValueDictionary();
 
@@ -436,7 +438,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "language/{lang}-{region}",
                 "/language/en-US",
                 null,
-                new RouteValueDictionary(new { lang = "en", region = "US" }));
+                new RouteValueDictionary(new { lang = "en", region = "US" })
+            );
         }
 
         [Fact]
@@ -446,7 +449,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "language/{lang}-{region}a",
                 "/language/en-USa",
                 null,
-                new RouteValueDictionary(new { lang = "en", region = "US" }));
+                new RouteValueDictionary(new { lang = "en", region = "US" })
+            );
         }
 
         [Fact]
@@ -456,7 +460,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "language/a{lang}-{region}",
                 "/language/aen-US",
                 null,
-                new RouteValueDictionary(new { lang = "en", region = "US" }));
+                new RouteValueDictionary(new { lang = "en", region = "US" })
+            );
         }
 
         [Fact]
@@ -466,27 +471,20 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "language/a{lang}-{region}a",
                 "/language/aen-USa",
                 null,
-                new RouteValueDictionary(new { lang = "en", region = "US" }));
+                new RouteValueDictionary(new { lang = "en", region = "US" })
+            );
         }
 
         [Fact]
         public void TryMatch_WithMultiSegmentParamsOnNeitherEndDoesNotMatch()
         {
-            RunTest(
-                "language/a{lang}-{region}a",
-                "/language/a-USa",
-                null,
-                null);
+            RunTest("language/a{lang}-{region}a", "/language/a-USa", null, null);
         }
 
         [Fact]
         public void TryMatch_WithMultiSegmentParamsOnNeitherEndDoesNotMatch2()
         {
-            RunTest(
-                "language/a{lang}-{region}a",
-                "/language/aen-a",
-                null,
-                null);
+            RunTest("language/a{lang}-{region}a", "/language/aen-a", null, null);
         }
 
         [Fact]
@@ -496,27 +494,20 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "language/{lang}",
                 "/language/en",
                 null,
-                new RouteValueDictionary(new { lang = "en" }));
+                new RouteValueDictionary(new { lang = "en" })
+            );
         }
 
         [Fact]
         public void TryMatch_WithSimpleMultiSegmentParamsOnBothEndsTrailingSlashDoesNotMatch()
         {
-            RunTest(
-                "language/{lang}",
-                "/language/",
-                null,
-                null);
+            RunTest("language/{lang}", "/language/", null, null);
         }
 
         [Fact]
         public void TryMatch_WithSimpleMultiSegmentParamsOnBothEndsDoesNotMatch()
         {
-            RunTest(
-                "language/{lang}",
-                "/language",
-                null,
-                null);
+            RunTest("language/{lang}", "/language", null, null);
         }
 
         [Fact]
@@ -526,7 +517,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "language/{lang}-",
                 "/language/en-",
                 null,
-                new RouteValueDictionary(new { lang = "en" }));
+                new RouteValueDictionary(new { lang = "en" })
+            );
         }
 
         [Fact]
@@ -536,7 +528,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "language/a{lang}",
                 "/language/aen",
                 null,
-                new RouteValueDictionary(new { lang = "en" }));
+                new RouteValueDictionary(new { lang = "en" })
+            );
         }
 
         [Fact]
@@ -546,7 +539,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "language/a{lang}a",
                 "/language/aena",
                 null,
-                new RouteValueDictionary(new { lang = "en" }));
+                new RouteValueDictionary(new { lang = "en" })
+            );
         }
 
         [Fact]
@@ -556,7 +550,10 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "{controller}.mvc/{action}/{id}",
                 "/home.mvc/index",
                 new RouteValueDictionary(new { action = "Index", id = (string)null }),
-                new RouteValueDictionary(new { controller = "home", action = "index", id = (string)null }));
+                new RouteValueDictionary(
+                    new { controller = "home", action = "index", id = (string)null }
+                )
+            );
         }
 
         [Fact]
@@ -566,7 +563,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "language/{lang}-{region}",
                 "/language/-",
                 new RouteValueDictionary(new { lang = "xx", region = "yy" }),
-                null);
+                null
+            );
         }
 
         [Fact]
@@ -576,7 +574,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "{Controller}..mvc/{id}/{Param1}",
                 "/Home..mvc/123/p1",
                 null,
-                new RouteValueDictionary(new { Controller = "Home", id = "123", Param1 = "p1" }));
+                new RouteValueDictionary(new { Controller = "Home", id = "123", Param1 = "p1" })
+            );
         }
 
         [Fact]
@@ -586,7 +585,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "{Controller}.mvc/../{action}",
                 "/Home.mvc/../index",
                 null,
-                new RouteValueDictionary(new { Controller = "Home", action = "index" }));
+                new RouteValueDictionary(new { Controller = "Home", action = "index" })
+            );
         }
 
         [Fact]
@@ -596,7 +596,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "{Controller}.mvc/.../{action}",
                 "/Home.mvc/.../index",
                 null,
-                new RouteValueDictionary(new { Controller = "Home", action = "index" }));
+                new RouteValueDictionary(new { Controller = "Home", action = "index" })
+            );
         }
 
         [Fact]
@@ -606,7 +607,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "{Controller}.mvc/../../../{action}",
                 "/Home.mvc/../../../index",
                 null,
-                new RouteValueDictionary(new { Controller = "Home", action = "index" }));
+                new RouteValueDictionary(new { Controller = "Home", action = "index" })
+            );
         }
 
         [Fact]
@@ -616,7 +618,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "{Controller}.mvc!/{action}",
                 "/Home.mvc!/index",
                 null,
-                new RouteValueDictionary(new { Controller = "Home", action = "index" }));
+                new RouteValueDictionary(new { Controller = "Home", action = "index" })
+            );
         }
 
         [Fact]
@@ -626,7 +629,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "../{Controller}.mvc",
                 "/../Home.mvc",
                 null,
-                new RouteValueDictionary(new { Controller = "Home" }));
+                new RouteValueDictionary(new { Controller = "Home" })
+            );
         }
 
         [Fact]
@@ -636,7 +640,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 @"\{Controller}.mvc",
                 @"/\Home.mvc",
                 null,
-                new RouteValueDictionary(new { Controller = "Home" }));
+                new RouteValueDictionary(new { Controller = "Home" })
+            );
         }
 
         [Fact]
@@ -646,37 +651,26 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 @"{Controller}.mvc\{id}\{Param1}",
                 @"/Home.mvc\123\p1",
                 null,
-                new RouteValueDictionary(new { Controller = "Home", id = "123", Param1 = "p1" }));
+                new RouteValueDictionary(new { Controller = "Home", id = "123", Param1 = "p1" })
+            );
         }
 
         [Fact]
         public void TryMatch_WithUrlWithParenthesesLiterals()
         {
-            RunTest(
-                @"(Controller).mvc",
-                @"/(Controller).mvc",
-                null,
-                new RouteValueDictionary());
+            RunTest(@"(Controller).mvc", @"/(Controller).mvc", null, new RouteValueDictionary());
         }
 
         [Fact]
         public void TryMatch_WithUrlWithTrailingSlashSpace()
         {
-            RunTest(
-                @"Controller.mvc/ ",
-                @"/Controller.mvc/ ",
-                null,
-                new RouteValueDictionary());
+            RunTest(@"Controller.mvc/ ", @"/Controller.mvc/ ", null, new RouteValueDictionary());
         }
 
         [Fact]
         public void TryMatch_WithUrlWithTrailingSpace()
         {
-            RunTest(
-                @"Controller.mvc ",
-                @"/Controller.mvc ",
-                null,
-                new RouteValueDictionary());
+            RunTest(@"Controller.mvc ", @"/Controller.mvc ", null, new RouteValueDictionary());
         }
 
         [Fact]
@@ -686,14 +680,25 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
             RunTest(
                 "Home/ShowPilot/{missionId}/{*name}",
                 "/Home/ShowPilot/777/12345./foobar",
-                new RouteValueDictionary(new
-                {
-                    controller = "Home",
-                    action = "ShowPilot",
-                    missionId = (string)null,
-                    name = (string)null
-                }),
-                new RouteValueDictionary(new { controller = "Home", action = "ShowPilot", missionId = "777", name = "12345./foobar" }));
+                new RouteValueDictionary(
+                    new
+                    {
+                        controller = "Home",
+                        action = "ShowPilot",
+                        missionId = (string)null,
+                        name = (string)null
+                    }
+                ),
+                new RouteValueDictionary(
+                    new
+                    {
+                        controller = "Home",
+                        action = "ShowPilot",
+                        missionId = "777",
+                        name = "12345./foobar"
+                    }
+                )
+            );
         }
 
         [Fact]
@@ -808,44 +813,28 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
         public void TryMatch_DoesNotMatchOnlyLeftLiteralMatch()
         {
             // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of the requested url
-            RunTest(
-                "foo",
-                "/fooBAR",
-                null,
-                null);
+            RunTest("foo", "/fooBAR", null, null);
         }
 
         [Fact]
         public void TryMatch_DoesNotMatchOnlyRightLiteralMatch()
         {
             // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of the requested url
-            RunTest(
-                "foo",
-                "/BARfoo",
-                null,
-                null);
+            RunTest("foo", "/BARfoo", null, null);
         }
 
         [Fact]
         public void TryMatch_DoesNotMatchMiddleLiteralMatch()
         {
             // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of the requested url
-            RunTest(
-                "foo",
-                "/BARfooBAR",
-                null,
-                null);
+            RunTest("foo", "/BARfooBAR", null, null);
         }
 
         [Fact]
         public void TryMatch_DoesMatchesExactLiteralMatch()
         {
             // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of the requested url
-            RunTest(
-                "foo",
-                "/foo",
-                null,
-                new RouteValueDictionary());
+            RunTest("foo", "/foo", null, new RouteValueDictionary());
         }
 
         [Fact]
@@ -854,8 +843,21 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
             RunTest(
                 "foo/{ }/{.!$%}/{dynamic.data}/{op.tional}",
                 "/foo/space/weimatch/omatcherid",
-                new RouteValueDictionary() { { " ", "not a space" }, { "op.tional", "default value" }, { "ran!dom", "va@lue" } },
-                new RouteValueDictionary() { { " ", "space" }, { ".!$%", "weimatch" }, { "dynamic.data", "omatcherid" }, { "op.tional", "default value" }, { "ran!dom", "va@lue" } });
+                new RouteValueDictionary()
+                {
+                    { " ", "not a space" },
+                    { "op.tional", "default value" },
+                    { "ran!dom", "va@lue" }
+                },
+                new RouteValueDictionary()
+                {
+                    { " ", "space" },
+                    { ".!$%", "weimatch" },
+                    { "dynamic.data", "omatcherid" },
+                    { "op.tional", "default value" },
+                    { "ran!dom", "va@lue" }
+                }
+            );
         }
 
         [Fact]
@@ -865,7 +867,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "{controller}/{language}-{locale}",
                 "/foo",
                 new RouteValueDictionary(new { language = "en", locale = "US" }),
-                null);
+                null
+            );
         }
 
         [Fact]
@@ -875,7 +878,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "{controller}/{language}-{locale}",
                 "/foo/xx-",
                 new RouteValueDictionary(new { language = "en", locale = "US" }),
-                null);
+                null
+            );
         }
 
         [Fact]
@@ -885,7 +889,8 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "{controller}/{language}-{locale}",
                 "/foo/-yy",
                 new RouteValueDictionary(new { language = "en", locale = "US" }),
-                null);
+                null
+            );
         }
 
         [Fact]
@@ -895,7 +900,13 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
                 "{controller}/{language}-{locale}",
                 "/foo/xx-yy",
                 new RouteValueDictionary(new { language = "en", locale = "US" }),
-                new RouteValueDictionary { { "language", "xx" }, { "locale", "yy" }, { "controller", "foo" } });
+                new RouteValueDictionary
+                {
+                    { "language", "xx" },
+                    { "locale", "yy" },
+                    { "controller", "foo" }
+                }
+            );
         }
 
         [Fact]
@@ -998,8 +1009,9 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
         [InlineData("//b//")]
         [InlineData("///c")]
         [InlineData("///c/")]
-        public void TryMatch_MultipleOptionalParameters_WithEmptyIntermediateSegmentsDoesNotMatch(string url)
-        {
+        public void TryMatch_MultipleOptionalParameters_WithEmptyIntermediateSegmentsDoesNotMatch(
+            string url
+        ) {
             // Arrange
             var route = CreateMatcher("{controller?}/{action?}/{id?}");
 
@@ -1096,19 +1108,21 @@ namespace Microsoft.AspNetCore.Routing.Template.Tests
         {
             return new TemplateMatcher(
                 TemplateParser.Parse(template),
-                new RouteValueDictionary(defaults));
+                new RouteValueDictionary(defaults)
+            );
         }
 
         private static void RunTest(
             string template,
             string path,
             RouteValueDictionary defaults,
-            IDictionary<string, object> expected)
-        {
+            IDictionary<string, object> expected
+        ) {
             // Arrange
             var matcher = new TemplateMatcher(
                 TemplateParser.Parse(template),
-                defaults ?? new RouteValueDictionary());
+                defaults ?? new RouteValueDictionary()
+            );
 
             var values = new RouteValueDictionary();
 

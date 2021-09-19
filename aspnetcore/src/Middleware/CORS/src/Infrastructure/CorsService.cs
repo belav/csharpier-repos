@@ -87,7 +87,9 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             var origin = requestHeaders[CorsConstants.Origin];
 
             var isOptionsRequest = HttpMethods.IsOptions(context.Request.Method);
-            var isPreflightRequest = isOptionsRequest && requestHeaders.ContainsKey(CorsConstants.AccessControlRequestMethod);
+            var isPreflightRequest =
+                isOptionsRequest
+                && requestHeaders.ContainsKey(CorsConstants.AccessControlRequestMethod);
 
             if (isOptionsRequest && !isPreflightRequest)
             {
@@ -112,8 +114,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             return corsResult;
         }
 
-        private static void PopulateResult(HttpContext context, CorsPolicy policy, CorsResult result)
-        {
+        private static void PopulateResult(
+            HttpContext context,
+            CorsPolicy policy,
+            CorsResult result
+        ) {
             var headers = context.Request.Headers;
             if (policy.AllowAnyOrigin)
             {
@@ -133,14 +138,19 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             // https://fetch.spec.whatwg.org/#http-new-header-syntax
             AddHeaderValues(result.AllowedExposedHeaders, policy.ExposedHeaders);
 
-            var allowedMethods = policy.AllowAnyMethod ?
-                new[] { result.IsPreflightRequest ? (string)headers[CorsConstants.AccessControlRequestMethod] : context.Request.Method } :
-                policy.Methods;
+            var allowedMethods = policy.AllowAnyMethod
+                ? new[]
+                  {
+                      result.IsPreflightRequest
+                          ? (string)headers[CorsConstants.AccessControlRequestMethod]
+                          : context.Request.Method
+                  }
+                : policy.Methods;
             AddHeaderValues(result.AllowedMethods, allowedMethods);
 
-            var allowedHeaders = policy.AllowAnyHeader ?
-                headers.GetCommaSeparatedValues(CorsConstants.AccessControlRequestHeaders) :
-                policy.Headers;
+            var allowedHeaders = policy.AllowAnyHeader
+                ? headers.GetCommaSeparatedValues(CorsConstants.AccessControlRequestHeaders)
+                : policy.Headers;
             AddHeaderValues(result.AllowedHeaders, allowedHeaders);
         }
 
@@ -150,8 +160,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         /// <param name="context">The current HTTP context.</param>
         /// <param name="policy">The <see cref="CorsPolicy"/> to evaluate.</param>
         /// <param name="result">The <see cref="CorsResult"/> to set the result on.</param>
-        public virtual void EvaluateRequest(HttpContext context, CorsPolicy policy, CorsResult result)
-        {
+        public virtual void EvaluateRequest(
+            HttpContext context,
+            CorsPolicy policy,
+            CorsResult result
+        ) {
             PopulateResult(context, policy, result);
         }
 
@@ -161,8 +174,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         /// <param name="context">The current HTTP context.</param>
         /// <param name="policy">The <see cref="CorsPolicy"/> to evaluate.</param>
         /// <param name="result">The <see cref="CorsResult"/> to set the result on.</param>
-        public virtual void EvaluatePreflightRequest(HttpContext context, CorsPolicy policy, CorsResult result)
-        {
+        public virtual void EvaluatePreflightRequest(
+            HttpContext context,
+            CorsPolicy policy,
+            CorsResult result
+        ) {
             PopulateResult(context, policy, result);
         }
 
@@ -202,17 +218,26 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
                 // `Access-Control-Allow-Methods`, `Access-Control-Allow-Headers`, `Access-Control-Max-Age`
                 if (result.AllowedHeaders.Count > 0)
                 {
-                    headers.SetCommaSeparatedValues(CorsConstants.AccessControlAllowHeaders, result.AllowedHeaders.ToArray());
+                    headers.SetCommaSeparatedValues(
+                        CorsConstants.AccessControlAllowHeaders,
+                        result.AllowedHeaders.ToArray()
+                    );
                 }
 
                 if (result.AllowedMethods.Count > 0)
                 {
-                    headers.SetCommaSeparatedValues(CorsConstants.AccessControlAllowMethods, result.AllowedMethods.ToArray());
+                    headers.SetCommaSeparatedValues(
+                        CorsConstants.AccessControlAllowMethods,
+                        result.AllowedMethods.ToArray()
+                    );
                 }
 
                 if (result.PreflightMaxAge.HasValue)
                 {
-                    headers[CorsConstants.AccessControlMaxAge] = result.PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture);
+                    headers[CorsConstants.AccessControlMaxAge] =
+                        result.PreflightMaxAge.Value.TotalSeconds.ToString(
+                            CultureInfo.InvariantCulture
+                        );
                 }
             }
             else
@@ -221,7 +246,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
                 // `Access-Control-Expose-Headers`
                 if (result.AllowedExposedHeaders.Count > 0)
                 {
-                    headers.SetCommaSeparatedValues(CorsConstants.AccessControlExposeHeaders, result.AllowedExposedHeaders.ToArray());
+                    headers.SetCommaSeparatedValues(
+                        CorsConstants.AccessControlExposeHeaders,
+                        result.AllowedExposedHeaders.ToArray()
+                    );
                 }
             }
 

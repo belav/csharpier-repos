@@ -19,9 +19,11 @@ namespace System.Text
             /// </summary>
             private const int MaxSmallInputElementCount = 32;
 
-            public UTF8EncodingSealed(bool encoderShouldEmitUTF8Identifier) : base(encoderShouldEmitUTF8Identifier) { }
+            public UTF8EncodingSealed(bool encoderShouldEmitUTF8Identifier)
+                : base(encoderShouldEmitUTF8Identifier) { }
 
-            public override ReadOnlySpan<byte> Preamble => _emitUTF8Identifier ? PreambleSpan : default;
+            public override ReadOnlySpan<byte> Preamble =>
+                _emitUTF8Identifier ? PreambleSpan : default;
 
             public override object Clone()
             {
@@ -29,10 +31,7 @@ namespace System.Text
                 // We don't want to do this because it violates the invariants we have set for the sealed type.
                 // Instead, we'll create a new instance of the base UTF8Encoding type and mark it mutable.
 
-                return new UTF8Encoding(_emitUTF8Identifier)
-                {
-                    IsReadOnly = false
-                };
+                return new UTF8Encoding(_emitUTF8Identifier) { IsReadOnly = false };
             }
 
             public override byte[] GetBytes(string s)
@@ -55,15 +54,23 @@ namespace System.Text
                 Debug.Assert(s != null);
                 Debug.Assert(s.Length <= MaxSmallInputElementCount);
 
-                byte* pDestination = stackalloc byte[MaxSmallInputElementCount * MaxUtf8BytesPerChar];
+                byte* pDestination =
+                    stackalloc byte[MaxSmallInputElementCount * MaxUtf8BytesPerChar];
 
                 int sourceLength = s.Length; // hoist this to avoid having the JIT auto-insert null checks
                 int bytesWritten;
 
                 fixed (char* pSource = s)
                 {
-                    bytesWritten = GetBytesCommon(pSource, sourceLength, pDestination, MaxSmallInputElementCount * MaxUtf8BytesPerChar);
-                    Debug.Assert(0 <= bytesWritten && bytesWritten <= s.Length * MaxUtf8BytesPerChar);
+                    bytesWritten = GetBytesCommon(
+                        pSource,
+                        sourceLength,
+                        pDestination,
+                        MaxSmallInputElementCount * MaxUtf8BytesPerChar
+                    );
+                    Debug.Assert(
+                        0 <= bytesWritten && bytesWritten <= s.Length * MaxUtf8BytesPerChar
+                    );
                 }
 
                 return new Span<byte>(ref *pDestination, bytesWritten).ToArray(); // this overload of Span ctor doesn't validate length
@@ -96,7 +103,12 @@ namespace System.Text
 
                 fixed (byte* pSource = bytes)
                 {
-                    charsWritten = GetCharsCommon(pSource, sourceLength, pDestination, MaxSmallInputElementCount);
+                    charsWritten = GetCharsCommon(
+                        pSource,
+                        sourceLength,
+                        pDestination,
+                        MaxSmallInputElementCount
+                    );
                     Debug.Assert(0 <= charsWritten && charsWritten <= sourceLength); // should never have more output chars than input bytes
                 }
 

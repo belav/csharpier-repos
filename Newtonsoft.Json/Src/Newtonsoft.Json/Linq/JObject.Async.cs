@@ -42,8 +42,11 @@ namespace Newtonsoft.Json.Linq
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous write operation.</returns>
-        public override Task WriteToAsync(JsonWriter writer, CancellationToken cancellationToken, params JsonConverter[] converters)
-        {
+        public override Task WriteToAsync(
+            JsonWriter writer,
+            CancellationToken cancellationToken,
+            params JsonConverter[] converters
+        ) {
             Task t = writer.WriteStartObjectAsync(cancellationToken);
             if (!t.IsCompletedSucessfully())
             {
@@ -62,12 +65,18 @@ namespace Newtonsoft.Json.Linq
             return writer.WriteEndObjectAsync(cancellationToken);
 
             // Local functions, params renamed (capitalized) so as not to capture and allocate when calling async
-            async Task AwaitProperties(Task task, int i, JsonWriter Writer, CancellationToken CancellationToken, JsonConverter[] Converters)
-            {
+            async Task AwaitProperties(
+                Task task,
+                int i,
+                JsonWriter Writer,
+                CancellationToken CancellationToken,
+                JsonConverter[] Converters
+            ) {
                 await task.ConfigureAwait(false);
                 for (; i < _properties.Count; i++)
                 {
-                    await _properties[i].WriteToAsync(Writer, CancellationToken, Converters).ConfigureAwait(false);
+                    await _properties[i].WriteToAsync(Writer, CancellationToken, Converters)
+                        .ConfigureAwait(false);
                 }
 
                 await Writer.WriteEndObjectAsync(CancellationToken).ConfigureAwait(false);
@@ -82,8 +91,10 @@ namespace Newtonsoft.Json.Linq
         /// <returns>
         /// A <see cref="Task{TResult}"/> that represents the asynchronous load. The <see cref="Task{TResult}.Result"/>
         /// property returns a <see cref="JObject"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static Task<JObject> LoadAsync(JsonReader reader, CancellationToken cancellationToken = default)
-        {
+        public new static Task<JObject> LoadAsync(
+            JsonReader reader,
+            CancellationToken cancellationToken = default
+        ) {
             return LoadAsync(reader, null, cancellationToken);
         }
 
@@ -97,15 +108,21 @@ namespace Newtonsoft.Json.Linq
         /// <returns>
         /// A <see cref="Task{TResult}"/> that represents the asynchronous load. The <see cref="Task{TResult}.Result"/>
         /// property returns a <see cref="JObject"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static async Task<JObject> LoadAsync(JsonReader reader, JsonLoadSettings? settings, CancellationToken cancellationToken = default)
-        {
+        public new static async Task<JObject> LoadAsync(
+            JsonReader reader,
+            JsonLoadSettings? settings,
+            CancellationToken cancellationToken = default
+        ) {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
 
             if (reader.TokenType == JsonToken.None)
             {
                 if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
                 {
-                    throw JsonReaderException.Create(reader, "Error reading JObject from JsonReader.");
+                    throw JsonReaderException.Create(
+                        reader,
+                        "Error reading JObject from JsonReader."
+                    );
                 }
             }
 
@@ -113,7 +130,13 @@ namespace Newtonsoft.Json.Linq
 
             if (reader.TokenType != JsonToken.StartObject)
             {
-                throw JsonReaderException.Create(reader, "Error reading JObject from JsonReader. Current JsonReader item is not an object: {0}".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+                throw JsonReaderException.Create(
+                    reader,
+                    "Error reading JObject from JsonReader. Current JsonReader item is not an object: {0}".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        reader.TokenType
+                    )
+                );
             }
 
             JObject o = new JObject();

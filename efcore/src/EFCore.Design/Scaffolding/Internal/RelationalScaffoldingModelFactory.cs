@@ -59,8 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             ICSharpUtilities cSharpUtilities,
             IScaffoldingTypeMapper scaffoldingTypeMapper,
             LoggingDefinitions loggingDefinitions,
-            IModelRuntimeInitializer modelRuntimeInitializer)
-        {
+            IModelRuntimeInitializer modelRuntimeInitializer
+        ) {
             Check.NotNull(reporter, nameof(reporter));
             Check.NotNull(candidateNamingService, nameof(candidateNamingService));
             Check.NotNull(pluralizer, nameof(pluralizer));
@@ -84,8 +84,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IModel Create(DatabaseModel databaseModel, ModelReverseEngineerOptions options)
-        {
+        public virtual IModel Create(
+            DatabaseModel databaseModel,
+            ModelReverseEngineerOptions options
+        ) {
             Check.NotNull(databaseModel, nameof(databaseModel));
             Check.NotNull(options, nameof(options));
 
@@ -93,26 +95,28 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             _tableNamer = new CSharpUniqueNamer<DatabaseTable>(
                 options.UseDatabaseNames
-                    ? (Func<DatabaseTable, string>)(t => t.Name)
-                    : t => _candidateNamingService.GenerateCandidateIdentifier(t),
+                  ? (Func<DatabaseTable, string>)(t => t.Name)
+                  : t => _candidateNamingService.GenerateCandidateIdentifier(t),
                 _cSharpUtilities,
-                options.NoPluralize
-                    ? (Func<string, string>?)null
-                    : _pluralizer.Singularize);
+                options.NoPluralize ? (Func<string, string>?)null : _pluralizer.Singularize
+            );
             _dbSetNamer = new CSharpUniqueNamer<DatabaseTable>(
                 options.UseDatabaseNames
-                    ? (Func<DatabaseTable, string>)(t => t.Name)
-                    : t => _candidateNamingService.GenerateCandidateIdentifier(t),
+                  ? (Func<DatabaseTable, string>)(t => t.Name)
+                  : t => _candidateNamingService.GenerateCandidateIdentifier(t),
                 _cSharpUtilities,
-                options.NoPluralize
-                    ? (Func<string, string>?)null
-                    : _pluralizer.Pluralize);
+                options.NoPluralize ? (Func<string, string>?)null : _pluralizer.Pluralize
+            );
             _columnNamers = new Dictionary<DatabaseTable, CSharpUniqueNamer<DatabaseColumn>>();
             _options = options;
 
             VisitDatabaseModel(modelBuilder, databaseModel);
 
-            return _modelRuntimeInitializer.Initialize(modelBuilder.FinalizeModel(), designTime: true, null);
+            return _modelRuntimeInitializer.Initialize(
+                modelBuilder.FinalizeModel(),
+                designTime: true,
+                null
+            );
         }
 
         /// <summary>
@@ -121,8 +125,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual string GetEntityTypeName(DatabaseTable table)
-            => _tableNamer.GetName(Check.NotNull(table, nameof(table)));
+        protected virtual string GetEntityTypeName(DatabaseTable table) =>
+            _tableNamer.GetName(Check.NotNull(table, nameof(table)));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -130,8 +134,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual string GetDbSetName(DatabaseTable table)
-            => _dbSetNamer.GetName(Check.NotNull(table, nameof(table)));
+        protected virtual string GetDbSetName(DatabaseTable table) =>
+            _dbSetNamer.GetName(Check.NotNull(table, nameof(table)));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -160,7 +164,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                             c => c.Name,
                             usedNames,
                             _cSharpUtilities,
-                            singularizePluralizer: null));
+                            singularizePluralizer: null
+                        )
+                    );
                 }
                 else
                 {
@@ -170,7 +176,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                             c => _candidateNamingService.GenerateCandidateIdentifier(c),
                             usedNames,
                             _cSharpUtilities,
-                            singularizePluralizer: null));
+                            singularizePluralizer: null
+                        )
+                    );
                 }
             }
 
@@ -183,8 +191,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual ModelBuilder VisitDatabaseModel(ModelBuilder modelBuilder, DatabaseModel databaseModel)
-        {
+        protected virtual ModelBuilder VisitDatabaseModel(
+            ModelBuilder modelBuilder,
+            DatabaseModel databaseModel
+        ) {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(databaseModel, nameof(databaseModel));
 
@@ -205,7 +215,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             VisitSequences(modelBuilder, databaseModel.Sequences);
             VisitTables(modelBuilder, databaseModel.Tables);
-            VisitForeignKeys(modelBuilder, databaseModel.Tables.SelectMany(table => table.ForeignKeys).ToList());
+            VisitForeignKeys(
+                modelBuilder,
+                databaseModel.Tables.SelectMany(table => table.ForeignKeys).ToList()
+            );
 
             modelBuilder.Model.AddAnnotations(databaseModel.GetAnnotations());
 
@@ -220,8 +233,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         protected virtual ModelBuilder VisitSequences(
             ModelBuilder modelBuilder,
-            ICollection<DatabaseSequence> sequences)
-        {
+            ICollection<DatabaseSequence> sequences
+        ) {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(sequences, nameof(sequences));
 
@@ -239,8 +252,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual SequenceBuilder? VisitSequence(ModelBuilder modelBuilder, DatabaseSequence sequence)
-        {
+        protected virtual SequenceBuilder? VisitSequence(
+            ModelBuilder modelBuilder,
+            DatabaseSequence sequence
+        ) {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(sequence, nameof(sequence));
 
@@ -254,22 +269,24 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             if (sequence.StoreType != null)
             {
                 sequenceType = _scaffoldingTypeMapper.FindMapping(
-                        sequence.StoreType,
-                        keyOrIndex: false,
-                        rowVersion: false)
-                    ?.ClrType;
+                    sequence.StoreType,
+                    keyOrIndex: false,
+                    rowVersion: false
+                )?.ClrType;
             }
 
-            if (sequenceType != null
-                && !Sequence.SupportedTypes.Contains(sequenceType))
+            if (sequenceType != null && !Sequence.SupportedTypes.Contains(sequenceType))
             {
-                _reporter.WriteWarning(DesignStrings.BadSequenceType(sequence.Name, sequence.StoreType));
+                _reporter.WriteWarning(
+                    DesignStrings.BadSequenceType(sequence.Name, sequence.StoreType)
+                );
                 return null;
             }
 
-            var builder = sequenceType != null
-                ? modelBuilder.HasSequence(sequenceType, sequence.Name, sequence.Schema)
-                : modelBuilder.HasSequence(sequence.Name, sequence.Schema);
+            var builder =
+                sequenceType != null
+                    ? modelBuilder.HasSequence(sequenceType, sequence.Name, sequence.Schema)
+                    : modelBuilder.HasSequence(sequence.Name, sequence.Schema);
 
             if (sequence.IncrementBy.HasValue)
             {
@@ -305,8 +322,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual ModelBuilder VisitTables(ModelBuilder modelBuilder, ICollection<DatabaseTable> tables)
-        {
+        protected virtual ModelBuilder VisitTables(
+            ModelBuilder modelBuilder,
+            ICollection<DatabaseTable> tables
+        ) {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(tables, nameof(tables));
 
@@ -324,8 +343,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual EntityTypeBuilder? VisitTable(ModelBuilder modelBuilder, DatabaseTable table)
-        {
+        protected virtual EntityTypeBuilder? VisitTable(
+            ModelBuilder modelBuilder,
+            DatabaseTable table
+        ) {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(table, nameof(table));
 
@@ -358,7 +379,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                 if (keyBuilder == null)
                 {
-                    var errorMessage = DesignStrings.UnableToGenerateEntityType(table.DisplayName());
+                    var errorMessage = DesignStrings.UnableToGenerateEntityType(
+                        table.DisplayName()
+                    );
                     _reporter.WriteWarning(errorMessage);
 
                     var model = modelBuilder.Model;
@@ -386,8 +409,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual EntityTypeBuilder VisitColumns(EntityTypeBuilder builder, ICollection<DatabaseColumn> columns)
-        {
+        protected virtual EntityTypeBuilder VisitColumns(
+            EntityTypeBuilder builder,
+            ICollection<DatabaseColumn> columns
+        ) {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(columns, nameof(columns));
 
@@ -405,8 +430,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual PropertyBuilder? VisitColumn(EntityTypeBuilder builder, DatabaseColumn column)
-        {
+        protected virtual PropertyBuilder? VisitColumn(
+            EntityTypeBuilder builder,
+            DatabaseColumn column
+        ) {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(column, nameof(column));
 
@@ -416,7 +443,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             {
                 _unmappedColumns.Add(column);
                 _reporter.WriteWarning(
-                    DesignStrings.CannotFindTypeMappingForColumn(column.DisplayName(), column.StoreType));
+                    DesignStrings.CannotFindTypeMappingForColumn(
+                        column.DisplayName(),
+                        column.StoreType
+                    )
+                );
                 return null;
             }
 
@@ -426,11 +457,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 clrType = clrType.MakeNullable();
             }
 
-            if (clrType == typeof(bool)
-                && column.DefaultValueSql != null)
+            if (clrType == typeof(bool) && column.DefaultValueSql != null)
             {
                 _reporter.WriteWarning(
-                    DesignStrings.NonNullableBoooleanColumnHasDefaultConstraint(column.DisplayName()));
+                    DesignStrings.NonNullableBoooleanColumnHasDefaultConstraint(
+                        column.DisplayName()
+                    )
+                );
 
                 clrType = clrType.MakeNullable();
             }
@@ -439,8 +472,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             property.HasColumnName(column.Name);
 
-            if (!typeScaffoldingInfo.IsInferred
-                && !string.IsNullOrWhiteSpace(column.StoreType))
+            if (!typeScaffoldingInfo.IsInferred && !string.IsNullOrWhiteSpace(column.StoreType))
             {
                 property.HasColumnType(column.StoreType);
             }
@@ -466,7 +498,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 {
                     property.HasPrecision(
                         typeScaffoldingInfo.ScaffoldPrecision.Value,
-                        typeScaffoldingInfo.ScaffoldScale.Value);
+                        typeScaffoldingInfo.ScaffoldScale.Value
+                    );
                 }
                 else
                 {
@@ -522,8 +555,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             property.Metadata.SetColumnOrdinal(column.Table.Columns.IndexOf(column));
 
             property.Metadata.AddAnnotations(
-                column.GetAnnotations().Where(
-                    a => a.Name != ScaffoldingAnnotationNames.ConcurrencyToken));
+                column.GetAnnotations()
+                    .Where(a => a.Name != ScaffoldingAnnotationNames.ConcurrencyToken)
+            );
 
             return property;
         }
@@ -534,15 +568,16 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual KeyBuilder? VisitPrimaryKey(EntityTypeBuilder builder, DatabaseTable table)
-        {
+        protected virtual KeyBuilder? VisitPrimaryKey(
+            EntityTypeBuilder builder,
+            DatabaseTable table
+        ) {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(table, nameof(table));
 
             var primaryKey = table.PrimaryKey!;
 
-            var unmappedColumns = primaryKey.Columns
-                .Where(c => _unmappedColumns.Contains(c))
+            var unmappedColumns = primaryKey.Columns.Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
             if (unmappedColumns.Count > 0)
@@ -550,20 +585,30 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _reporter.WriteWarning(
                     DesignStrings.PrimaryKeyErrorPropertyNotFound(
                         table.DisplayName(),
-                        string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedColumns)));
+                        string.Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            unmappedColumns
+                        )
+                    )
+                );
                 return null;
             }
 
             var keyBuilder = builder.HasKey(primaryKey.Columns.Select(GetPropertyName).ToArray());
 
-            if (primaryKey.Columns.Count == 1
+            if (
+                primaryKey.Columns.Count == 1
                 && primaryKey.Columns[0].ValueGenerated == null
-                && primaryKey.Columns[0].DefaultValueSql == null)
-            {
-                var property = builder.Metadata.FindProperty(GetPropertyName(primaryKey.Columns[0]));
+                && primaryKey.Columns[0].DefaultValueSql == null
+            ) {
+                var property = builder.Metadata.FindProperty(
+                    GetPropertyName(primaryKey.Columns[0])
+                );
                 if (property != null)
                 {
-                    var conventionalValueGenerated = ValueGenerationConvention.GetValueGenerated(property);
+                    var conventionalValueGenerated = ValueGenerationConvention.GetValueGenerated(
+                        property
+                    );
                     if (conventionalValueGenerated == ValueGenerated.OnAdd)
                     {
                         property.ValueGenerated = ValueGenerated.Never;
@@ -571,9 +616,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 }
             }
 
-            if (!string.IsNullOrEmpty(primaryKey.Name)
-                && primaryKey.Name != keyBuilder.Metadata.GetDefaultName())
-            {
+            if (
+                !string.IsNullOrEmpty(primaryKey.Name)
+                && primaryKey.Name != keyBuilder.Metadata.GetDefaultName()
+            ) {
                 keyBuilder.HasName(primaryKey.Name);
             }
 
@@ -590,8 +636,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         protected virtual EntityTypeBuilder VisitUniqueConstraints(
             EntityTypeBuilder builder,
-            ICollection<DatabaseUniqueConstraint> uniqueConstraints)
-        {
+            ICollection<DatabaseUniqueConstraint> uniqueConstraints
+        ) {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(uniqueConstraints, nameof(uniqueConstraints));
 
@@ -611,13 +657,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         protected virtual IndexBuilder? VisitUniqueConstraint(
             EntityTypeBuilder builder,
-            DatabaseUniqueConstraint uniqueConstraint)
-        {
+            DatabaseUniqueConstraint uniqueConstraint
+        ) {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(uniqueConstraint, nameof(uniqueConstraint));
 
-            var unmappedColumns = uniqueConstraint.Columns
-                .Where(c => _unmappedColumns.Contains(c))
+            var unmappedColumns = uniqueConstraint.Columns.Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
             if (unmappedColumns.Count > 0)
@@ -625,7 +670,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _reporter.WriteWarning(
                     DesignStrings.UnableToScaffoldIndexMissingProperty(
                         uniqueConstraint.Name,
-                        string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedColumns)));
+                        string.Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            unmappedColumns
+                        )
+                    )
+                );
                 return null;
             }
 
@@ -645,8 +695,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual EntityTypeBuilder VisitIndexes(EntityTypeBuilder builder, ICollection<DatabaseIndex> indexes)
-        {
+        protected virtual EntityTypeBuilder VisitIndexes(
+            EntityTypeBuilder builder,
+            ICollection<DatabaseIndex> indexes
+        ) {
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(indexes, nameof(indexes));
 
@@ -669,8 +721,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             Check.NotNull(builder, nameof(builder));
             Check.NotNull(index, nameof(index));
 
-            var unmappedColumns = index.Columns
-                .Where(c => _unmappedColumns.Contains(c))
+            var unmappedColumns = index.Columns.Where(c => _unmappedColumns.Contains(c))
                 .Select(c => c.Name)
                 .ToList();
             if (unmappedColumns.Count > 0)
@@ -678,7 +729,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _reporter.WriteWarning(
                     DesignStrings.UnableToScaffoldIndexMissingProperty(
                         index.Name,
-                        string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedColumns)));
+                        string.Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            unmappedColumns
+                        )
+                    )
+                );
                 return null;
             }
 
@@ -707,8 +763,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         protected virtual ModelBuilder VisitForeignKeys(
             ModelBuilder modelBuilder,
-            IList<DatabaseForeignKey> foreignKeys)
-        {
+            IList<DatabaseForeignKey> foreignKeys
+        ) {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(foreignKeys, nameof(foreignKeys));
 
@@ -720,8 +776,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             // Note: must completely assign all foreign keys before assigning
             // navigation properties otherwise naming of navigation properties
             // when there are multiple foreign keys does not work.
-            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(et => et.GetForeignKeys()))
-            {
+            foreach (
+                var foreignKey in modelBuilder.Model.GetEntityTypes()
+                    .SelectMany(et => et.GetForeignKeys())
+            ) {
                 AddNavigationProperties(foreignKey);
             }
 
@@ -734,15 +792,20 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual IMutableForeignKey? VisitForeignKey(ModelBuilder modelBuilder, DatabaseForeignKey foreignKey)
-        {
+        protected virtual IMutableForeignKey? VisitForeignKey(
+            ModelBuilder modelBuilder,
+            DatabaseForeignKey foreignKey
+        ) {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NotNull(foreignKey, nameof(foreignKey));
 
             if (foreignKey.PrincipalTable == null)
             {
                 _reporter.WriteWarning(
-                    DesignStrings.ForeignKeyScaffoldErrorPrincipalTableNotFound(foreignKey.DisplayName()));
+                    DesignStrings.ForeignKeyScaffoldErrorPrincipalTableNotFound(
+                        foreignKey.DisplayName()
+                    )
+                );
                 return null;
             }
 
@@ -751,14 +814,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 return null;
             }
 
-            var dependentEntityType = modelBuilder.Model.FindEntityType(GetEntityTypeName(foreignKey.Table));
+            var dependentEntityType = modelBuilder.Model.FindEntityType(
+                GetEntityTypeName(foreignKey.Table)
+            );
             if (dependentEntityType == null)
             {
                 return null;
             }
 
-            var unmappedDependentColumns = foreignKey.Columns
-                .Where(c => _unmappedColumns.Contains(c))
+            var unmappedDependentColumns = foreignKey.Columns.Where(
+                    c => _unmappedColumns.Contains(c)
+                )
                 .Select(c => c.Name)
                 .ToList();
             if (unmappedDependentColumns.Count > 0)
@@ -766,28 +832,37 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _reporter.WriteWarning(
                     DesignStrings.ForeignKeyScaffoldErrorPropertyNotFound(
                         foreignKey.DisplayName(),
-                        string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedDependentColumns)));
+                        string.Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            unmappedDependentColumns
+                        )
+                    )
+                );
                 return null;
             }
 
-            var dependentProperties = foreignKey.Columns
-                .Select(GetPropertyName)
+            var dependentProperties = foreignKey.Columns.Select(GetPropertyName)
                 .Select(name => dependentEntityType.FindProperty(name)!)
                 .ToList()
                 .AsReadOnly();
 
-            var principalEntityType = modelBuilder.Model.FindEntityType(GetEntityTypeName(foreignKey.PrincipalTable));
+            var principalEntityType = modelBuilder.Model.FindEntityType(
+                GetEntityTypeName(foreignKey.PrincipalTable)
+            );
             if (principalEntityType == null)
             {
                 _reporter.WriteWarning(
                     DesignStrings.ForeignKeyScaffoldErrorPrincipalTableScaffoldingError(
                         foreignKey.DisplayName(),
-                        foreignKey.PrincipalTable.DisplayName()));
+                        foreignKey.PrincipalTable.DisplayName()
+                    )
+                );
                 return null;
             }
 
-            var unmappedPrincipalColumns = foreignKey.PrincipalColumns
-                .Where(pc => principalEntityType.FindProperty(GetPropertyName(pc)) == null)
+            var unmappedPrincipalColumns = foreignKey.PrincipalColumns.Where(
+                    pc => principalEntityType.FindProperty(GetPropertyName(pc)) == null
+                )
                 .Select(pc => pc.Name)
                 .ToList();
             if (unmappedPrincipalColumns.Count > 0)
@@ -795,15 +870,24 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 _reporter.WriteWarning(
                     DesignStrings.ForeignKeyScaffoldErrorPropertyNotFound(
                         foreignKey.DisplayName(),
-                        string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedPrincipalColumns)));
+                        string.Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            unmappedPrincipalColumns
+                        )
+                    )
+                );
                 return null;
             }
 
-            var principalPropertiesMap = foreignKey.PrincipalColumns
-                .Select(
-                    fc => (property: principalEntityType.FindProperty(GetPropertyName(fc))!, column: fc)).ToList();
-            var principalProperties = principalPropertiesMap
-                .Select(tuple => tuple.property)
+            var principalPropertiesMap = foreignKey.PrincipalColumns.Select(
+                    fc =>
+                        (
+                            property: principalEntityType.FindProperty(GetPropertyName(fc))!,
+                            column: fc
+                        )
+                )
+                .ToList();
+            var principalProperties = principalPropertiesMap.Select(tuple => tuple.property)
                 .ToList();
 
             var principalKey = principalEntityType.FindKey(principalProperties);
@@ -816,18 +900,27 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 {
                     // ensure all principal properties are non-nullable even if the columns
                     // are nullable on the database. EF's concept of a key requires this.
-                    var nullablePrincipalProperties =
-                        principalPropertiesMap.Where(tuple => tuple.property.IsNullable).ToList();
+                    var nullablePrincipalProperties = principalPropertiesMap.Where(
+                            tuple => tuple.property.IsNullable
+                        )
+                        .ToList();
                     if (nullablePrincipalProperties.Count > 0)
                     {
                         _reporter.WriteWarning(
                             DesignStrings.ForeignKeyPrincipalEndContainsNullableColumns(
                                 foreignKey.DisplayName(),
                                 index.GetDatabaseName(),
-                                nullablePrincipalProperties.Select(tuple => tuple.column.DisplayName()).ToList()
-                                    .Aggregate((a, b) => a + "," + b)));
+                                nullablePrincipalProperties.Select(
+                                        tuple => tuple.column.DisplayName()
+                                    )
+                                    .ToList()
+                                    .Aggregate((a, b) => a + "," + b)
+                            )
+                        );
 
-                        nullablePrincipalProperties.ForEach(tuple => tuple.property.IsNullable = false);
+                        nullablePrincipalProperties.ForEach(
+                            tuple => tuple.property.IsNullable = false
+                        );
                     }
 
                     principalKey = principalEntityType.AddKey(principalProperties);
@@ -839,34 +932,50 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     _reporter.WriteWarning(
                         DesignStrings.ForeignKeyScaffoldErrorPrincipalKeyNotFound(
                             foreignKey.DisplayName(),
-                            string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, principalColumns),
-                            principalEntityType.Name));
+                            string.Join(
+                                CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                                principalColumns
+                            ),
+                            principalEntityType.Name
+                        )
+                    );
 
                     return null;
                 }
             }
 
-            var existingForeignKey = dependentEntityType.FindForeignKey(dependentProperties, principalKey, principalEntityType);
+            var existingForeignKey = dependentEntityType.FindForeignKey(
+                dependentProperties,
+                principalKey,
+                principalEntityType
+            );
             if (existingForeignKey is not null)
             {
                 _reporter.WriteWarning(
-                    DesignStrings.ForeignKeyWithSameFacetsExists(foreignKey.DisplayName(), existingForeignKey.GetConstraintName()));
+                    DesignStrings.ForeignKeyWithSameFacetsExists(
+                        foreignKey.DisplayName(),
+                        existingForeignKey.GetConstraintName()
+                    )
+                );
 
                 return null;
             }
 
             var newForeignKey = dependentEntityType.AddForeignKey(
-                dependentProperties, principalKey, principalEntityType);
+                dependentProperties,
+                principalKey,
+                principalEntityType
+            );
 
             var dependentKey = dependentEntityType.FindKey(dependentProperties);
             var dependentIndexes = dependentEntityType.GetIndexes()
                 .Where(i => i.Properties.SequenceEqual(dependentProperties));
-            newForeignKey.IsUnique = dependentKey != null
-                || dependentIndexes.Any(i => i.IsUnique);
+            newForeignKey.IsUnique = dependentKey != null || dependentIndexes.Any(i => i.IsUnique);
 
-            if (!string.IsNullOrEmpty(foreignKey.Name)
-                && foreignKey.Name != newForeignKey.GetDefaultName())
-            {
+            if (
+                !string.IsNullOrEmpty(foreignKey.Name)
+                && foreignKey.Name != newForeignKey.GetDefaultName()
+            ) {
                 newForeignKey.SetConstraintName(foreignKey.Name);
             }
 
@@ -887,15 +996,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             Check.NotNull(foreignKey, nameof(foreignKey));
 
-            var dependentEndExistingIdentifiers = ExistingIdentifiers(foreignKey.DeclaringEntityType);
+            var dependentEndExistingIdentifiers = ExistingIdentifiers(
+                foreignKey.DeclaringEntityType
+            );
             var dependentEndNavigationPropertyCandidateName =
                 _candidateNamingService.GetDependentEndCandidateNavigationPropertyName(foreignKey);
-            var dependentEndNavigationPropertyName =
-                _cSharpUtilities.GenerateCSharpIdentifier(
-                    dependentEndNavigationPropertyCandidateName,
-                    dependentEndExistingIdentifiers,
-                    singularizePluralizer: null,
-                    uniquifier: NavigationUniquifier);
+            var dependentEndNavigationPropertyName = _cSharpUtilities.GenerateCSharpIdentifier(
+                dependentEndNavigationPropertyCandidateName,
+                dependentEndExistingIdentifiers,
+                singularizePluralizer: null,
+                uniquifier: NavigationUniquifier
+            );
 
             foreignKey.SetDependentToPrincipal(dependentEndNavigationPropertyName);
 
@@ -904,36 +1015,42 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 return;
             }
 
-            var principalEndExistingIdentifiers = ExistingIdentifiers(foreignKey.PrincipalEntityType);
+            var principalEndExistingIdentifiers = ExistingIdentifiers(
+                foreignKey.PrincipalEntityType
+            );
             var principalEndNavigationPropertyCandidateName = foreignKey.IsSelfReferencing()
                 ? string.Format(
-                    CultureInfo.CurrentCulture,
-                    SelfReferencingPrincipalEndNavigationNamePattern,
-                    dependentEndNavigationPropertyName)
+                      CultureInfo.CurrentCulture,
+                      SelfReferencingPrincipalEndNavigationNamePattern,
+                      dependentEndNavigationPropertyName
+                  )
                 : _candidateNamingService.GetPrincipalEndCandidateNavigationPropertyName(
-                    foreignKey, dependentEndNavigationPropertyName);
+                      foreignKey,
+                      dependentEndNavigationPropertyName
+                  );
 
-            if (!foreignKey.IsUnique
-                && !foreignKey.IsSelfReferencing())
+            if (!foreignKey.IsUnique && !foreignKey.IsSelfReferencing())
             {
                 principalEndNavigationPropertyCandidateName = _options.NoPluralize
                     ? principalEndNavigationPropertyCandidateName
                     : _pluralizer.Pluralize(principalEndNavigationPropertyCandidateName);
             }
 
-            var principalEndNavigationPropertyName =
-                _cSharpUtilities.GenerateCSharpIdentifier(
-                    principalEndNavigationPropertyCandidateName,
-                    principalEndExistingIdentifiers,
-                    singularizePluralizer: null,
-                    uniquifier: NavigationUniquifier);
+            var principalEndNavigationPropertyName = _cSharpUtilities.GenerateCSharpIdentifier(
+                principalEndNavigationPropertyCandidateName,
+                principalEndExistingIdentifiers,
+                singularizePluralizer: null,
+                uniquifier: NavigationUniquifier
+            );
 
             foreignKey.SetPrincipalToDependent(principalEndNavigationPropertyName);
         }
 
         // Stores the names of the EntityType itself and its Properties, but does not include any Navigation Properties
-        private readonly Dictionary<IReadOnlyEntityType, List<string>> _entityTypeAndPropertyIdentifiers =
-            new();
+        private readonly Dictionary<
+            IReadOnlyEntityType,
+            List<string>
+        > _entityTypeAndPropertyIdentifiers = new();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -945,8 +1062,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             Check.NotNull(entityType, nameof(entityType));
 
-            if (!_entityTypeAndPropertyIdentifiers.TryGetValue(entityType, out var existingIdentifiers))
-            {
+            if (
+                !_entityTypeAndPropertyIdentifiers.TryGetValue(
+                    entityType,
+                    out var existingIdentifiers
+                )
+            ) {
                 existingIdentifiers = new List<string> { entityType.Name };
                 existingIdentifiers.AddRange(entityType.GetProperties().Select(p => p.Name));
                 _entityTypeAndPropertyIdentifiers[entityType] = existingIdentifiers;
@@ -972,13 +1093,14 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             return _scaffoldingTypeMapper.FindMapping(
                 column.StoreType,
                 column.IsKeyOrIndex(),
-                column.IsRowVersion());
+                column.IsRowVersion()
+            );
         }
 
         private static void AssignOnDeleteAction(
             DatabaseForeignKey databaseForeignKey,
-            IMutableForeignKey foreignKey)
-        {
+            IMutableForeignKey foreignKey
+        ) {
             Check.NotNull(databaseForeignKey, nameof(databaseForeignKey));
             Check.NotNull(foreignKey, nameof(foreignKey));
 
@@ -999,15 +1121,20 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         }
 
         // TODO use CSharpUniqueNamer
-        private static string NavigationUniquifier(string proposedIdentifier, ICollection<string>? existingIdentifiers)
-        {
+        private static string NavigationUniquifier(
+            string proposedIdentifier,
+            ICollection<string>? existingIdentifiers
+        ) {
             if (existingIdentifiers?.Contains(proposedIdentifier) != true)
             {
                 return proposedIdentifier;
             }
 
-            var finalIdentifier =
-                string.Format(CultureInfo.CurrentCulture, NavigationNameUniquifyingPattern, proposedIdentifier);
+            var finalIdentifier = string.Format(
+                CultureInfo.CurrentCulture,
+                NavigationNameUniquifyingPattern,
+                proposedIdentifier
+            );
             var suffix = 1;
             while (existingIdentifiers.Contains(finalIdentifier))
             {

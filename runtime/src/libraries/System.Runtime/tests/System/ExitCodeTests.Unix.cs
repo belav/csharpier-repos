@@ -42,8 +42,13 @@ namespace System.Tests
 
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.StartInfo.RedirectStandardOutput = true;
-            using (RemoteInvokeHandle remoteExecution = RemoteExecutor.Invoke(action, exitCodeOnSigterm?.ToString() ?? string.Empty, options))
-            {
+            using (
+                RemoteInvokeHandle remoteExecution = RemoteExecutor.Invoke(
+                    action,
+                    exitCodeOnSigterm?.ToString() ?? string.Empty,
+                    options
+                )
+            ) {
                 Process process = remoteExecution.Process;
 
                 // Wait for the process to start and register the ProcessExit handler

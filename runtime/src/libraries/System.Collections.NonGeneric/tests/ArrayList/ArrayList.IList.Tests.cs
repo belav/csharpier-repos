@@ -17,7 +17,8 @@ namespace System.Collections.Tests
         protected override bool ExpectedIsSynchronized => true;
 
         protected override IList NonGenericIListFactory() => NonGenericIListFactory(0);
-        protected override IList NonGenericIListFactory(int count) => ArrayList.Synchronized(Helpers.CreateIntArrayList(count));
+        protected override IList NonGenericIListFactory(int count) =>
+            ArrayList.Synchronized(Helpers.CreateIntArrayList(count));
     }
 
     public class ArrayListSynchronizedILstTests : ArrayListIListTestBase
@@ -25,7 +26,8 @@ namespace System.Collections.Tests
         protected override bool ExpectedIsSynchronized => true;
 
         protected override IList NonGenericIListFactory() => NonGenericIListFactory(0);
-        protected override IList NonGenericIListFactory(int count) => ArrayList.Synchronized((IList)Helpers.CreateIntArrayList(count));
+        protected override IList NonGenericIListFactory(int count) =>
+            ArrayList.Synchronized((IList)Helpers.CreateIntArrayList(count));
     }
 
     public class ArrayListFixedSizeTests : ArrayListIListTestBase
@@ -33,7 +35,8 @@ namespace System.Collections.Tests
         protected override bool ExpectedFixedSize => true;
 
         protected override IList NonGenericIListFactory() => NonGenericIListFactory(0);
-        protected override IList NonGenericIListFactory(int count) => ArrayList.FixedSize(Helpers.CreateIntArrayList(count));
+        protected override IList NonGenericIListFactory(int count) =>
+            ArrayList.FixedSize(Helpers.CreateIntArrayList(count));
     }
 
     public class ArrayListFixedIListSizeTests : ArrayListIListTestBase
@@ -41,7 +44,8 @@ namespace System.Collections.Tests
         protected override bool ExpectedFixedSize => true;
 
         protected override IList NonGenericIListFactory() => NonGenericIListFactory(0);
-        protected override IList NonGenericIListFactory(int count) => ArrayList.FixedSize((IList)Helpers.CreateIntArrayList(count));
+        protected override IList NonGenericIListFactory(int count) =>
+            ArrayList.FixedSize((IList)Helpers.CreateIntArrayList(count));
     }
 
     public class ArrayListReadOnlyTests : ArrayListIListTestBase
@@ -50,7 +54,8 @@ namespace System.Collections.Tests
         protected override bool IsReadOnly => true;
 
         protected override IList NonGenericIListFactory() => NonGenericIListFactory(0);
-        protected override IList NonGenericIListFactory(int count) => ArrayList.ReadOnly(Helpers.CreateIntArrayList(count));
+        protected override IList NonGenericIListFactory(int count) =>
+            ArrayList.ReadOnly(Helpers.CreateIntArrayList(count));
     }
 
     public class ArrayListReadOnlyIListTests : ArrayListIListTestBase
@@ -59,19 +64,22 @@ namespace System.Collections.Tests
         protected override bool IsReadOnly => true;
 
         protected override IList NonGenericIListFactory() => NonGenericIListFactory(0);
-        protected override IList NonGenericIListFactory(int count) => ArrayList.ReadOnly((IList)Helpers.CreateIntArrayList(count));
+        protected override IList NonGenericIListFactory(int count) =>
+            ArrayList.ReadOnly((IList)Helpers.CreateIntArrayList(count));
     }
 
     public class ArrayListAdapterTests : ArrayListIListTestBase
     {
         protected override IList NonGenericIListFactory() => NonGenericIListFactory(0);
-        protected override IList NonGenericIListFactory(int count) => ArrayList.Adapter(Helpers.CreateIntArrayList(count));
+        protected override IList NonGenericIListFactory(int count) =>
+            ArrayList.Adapter(Helpers.CreateIntArrayList(count));
     }
 
     public class ArrayListRangeTests : ArrayListIListTestBase
     {
         protected override IList NonGenericIListFactory() => NonGenericIListFactory(0);
-        protected override IList NonGenericIListFactory(int count) => Helpers.CreateIntArrayList(count).GetRange(0, count);
+        protected override IList NonGenericIListFactory(int count) =>
+            Helpers.CreateIntArrayList(count).GetRange(0, count);
     }
 
     public abstract class ArrayListIListTestBase : IList_NonGeneric_Tests
@@ -80,10 +88,14 @@ namespace System.Collections.Tests
         // ArrayList supports serialization, but its nested types don't
         protected override bool SupportsSerialization => false;
 
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         protected override object CreateT(int seed)
         {

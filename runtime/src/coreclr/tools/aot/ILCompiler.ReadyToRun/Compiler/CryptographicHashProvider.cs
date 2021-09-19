@@ -23,12 +23,10 @@ namespace ILCompiler
         /// No algorithm specified.
         /// </summary>
         None = 0,
-
         /// <summary>
         /// Secure Hash Algorithm 1.
         /// </summary>
         Sha1 = 1,
-
         /// <summary>
         /// Secure Hash Algorithm 2 with a hash size of 256 bits.
         /// </summary>
@@ -171,11 +169,17 @@ namespace ILCompiler
             }
         }
 
-        private ImmutableArray<byte> GetHash(ref ImmutableArray<byte> lazyHash, HashAlgorithm algorithm)
-        {
+        private ImmutableArray<byte> GetHash(
+            ref ImmutableArray<byte> lazyHash,
+            HashAlgorithm algorithm
+        ) {
             if (lazyHash.IsDefault)
             {
-                ImmutableInterlocked.InterlockedCompareExchange(ref lazyHash, ComputeHash(algorithm), default(ImmutableArray<byte>));
+                ImmutableInterlocked.InterlockedCompareExchange(
+                    ref lazyHash,
+                    ComputeHash(algorithm),
+                    default(ImmutableArray<byte>)
+                );
             }
 
             return lazyHash;
@@ -210,8 +214,10 @@ namespace ILCompiler
             }
         }
 
-        internal static ImmutableArray<byte> ComputeHash(HashAlgorithmName algorithmName, IEnumerable<Blob> bytes)
-        {
+        internal static ImmutableArray<byte> ComputeHash(
+            HashAlgorithmName algorithmName,
+            IEnumerable<Blob> bytes
+        ) {
             using (var incrementalHash = IncrementalHash.CreateHash(algorithmName))
             {
                 foreach (var blob in bytes)
@@ -222,8 +228,10 @@ namespace ILCompiler
             }
         }
 
-        internal static ImmutableArray<byte> ComputeHash(HashAlgorithmName algorithmName, IEnumerable<ArraySegment<byte>> bytes)
-        {
+        internal static ImmutableArray<byte> ComputeHash(
+            HashAlgorithmName algorithmName,
+            IEnumerable<ArraySegment<byte>> bytes
+        ) {
             using (var incrementalHash = IncrementalHash.CreateHash(algorithmName))
             {
                 foreach (var segment in bytes)
@@ -234,8 +242,10 @@ namespace ILCompiler
             }
         }
 
-        internal static ImmutableArray<byte> ComputeSourceHash(ImmutableArray<byte> bytes, SourceHashAlgorithm hashAlgorithm = SourceHashAlgorithmUtils.DefaultContentHashAlgorithm)
-        {
+        internal static ImmutableArray<byte> ComputeSourceHash(
+            ImmutableArray<byte> bytes,
+            SourceHashAlgorithm hashAlgorithm = SourceHashAlgorithmUtils.DefaultContentHashAlgorithm
+        ) {
             var algorithmName = GetAlgorithmName(hashAlgorithm);
             using (var incrementalHash = IncrementalHash.CreateHash(algorithmName))
             {
@@ -244,8 +254,10 @@ namespace ILCompiler
             }
         }
 
-        internal static ImmutableArray<byte> ComputeSourceHash(IEnumerable<Blob> bytes, SourceHashAlgorithm hashAlgorithm = SourceHashAlgorithmUtils.DefaultContentHashAlgorithm)
-        {
+        internal static ImmutableArray<byte> ComputeSourceHash(
+            IEnumerable<Blob> bytes,
+            SourceHashAlgorithm hashAlgorithm = SourceHashAlgorithmUtils.DefaultContentHashAlgorithm
+        ) {
             return ComputeHash(GetAlgorithmName(hashAlgorithm), bytes);
         }
     }

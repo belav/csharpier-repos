@@ -25,18 +25,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private readonly object _gate = new();
         private readonly IStreamingFindReferencesProgress _underlyingProgress;
 
-        private readonly Dictionary<ISymbol, List<ReferenceLocation>> _symbolToLocations =
-            new();
+        private readonly Dictionary<ISymbol, List<ReferenceLocation>> _symbolToLocations = new();
 
         public IStreamingProgressTracker ProgressTracker => _underlyingProgress.ProgressTracker;
 
-        public StreamingProgressCollector()
-            : this(NoOpStreamingFindReferencesProgress.Instance)
-        {
-        }
+        public StreamingProgressCollector() : this(NoOpStreamingFindReferencesProgress.Instance) { }
 
-        public StreamingProgressCollector(
-            IStreamingFindReferencesProgress underlyingProgress)
+        public StreamingProgressCollector(IStreamingFindReferencesProgress underlyingProgress)
         {
             _underlyingProgress = underlyingProgress;
         }
@@ -56,8 +51,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public ValueTask OnStartedAsync() => _underlyingProgress.OnStartedAsync();
         public ValueTask OnCompletedAsync() => _underlyingProgress.OnCompletedAsync();
 
-        public ValueTask OnFindInDocumentCompletedAsync(Document document) => _underlyingProgress.OnFindInDocumentCompletedAsync(document);
-        public ValueTask OnFindInDocumentStartedAsync(Document document) => _underlyingProgress.OnFindInDocumentStartedAsync(document);
+        public ValueTask OnFindInDocumentCompletedAsync(Document document) =>
+            _underlyingProgress.OnFindInDocumentCompletedAsync(document);
+        public ValueTask OnFindInDocumentStartedAsync(Document document) =>
+            _underlyingProgress.OnFindInDocumentStartedAsync(document);
 
         public ValueTask OnDefinitionFoundAsync(SymbolGroup group)
         {
@@ -70,8 +67,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             return _underlyingProgress.OnDefinitionFoundAsync(group);
         }
 
-        public ValueTask OnReferenceFoundAsync(SymbolGroup group, ISymbol definition, ReferenceLocation location)
-        {
+        public ValueTask OnReferenceFoundAsync(
+            SymbolGroup group,
+            ISymbol definition,
+            ReferenceLocation location
+        ) {
             lock (_gate)
             {
                 _symbolToLocations[definition].Add(location);

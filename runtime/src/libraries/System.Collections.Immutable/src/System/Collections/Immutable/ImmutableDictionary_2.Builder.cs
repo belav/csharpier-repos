@@ -27,8 +27,11 @@ namespace System.Collections.Immutable
         /// </para>
         /// </remarks>
         [DebuggerDisplay("Count = {Count}")]
-        [DebuggerTypeProxy(typeof(ImmutableDictionaryBuilderDebuggerProxy<,>))]
-        public sealed class Builder : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>, IDictionary
+        [DebuggerTypeProxy(typeof(ImmutableDictionaryBuilderDebuggerProxy<, >))]
+        public sealed class Builder
+            : IDictionary<TKey, TValue>,
+              IReadOnlyDictionary<TKey, TValue>,
+              IDictionary
         {
             /// <summary>
             /// The root of the binary tree that stores the collection.  Contents are typically not entirely frozen.
@@ -82,18 +85,17 @@ namespace System.Collections.Immutable
             /// </value>
             public IEqualityComparer<TKey> KeyComparer
             {
-                get
-                {
-                    return _comparers.KeyComparer;
-                }
-
+                get { return _comparers.KeyComparer; }
                 set
                 {
                     Requires.NotNull(value, nameof(value));
                     if (value != this.KeyComparer)
                     {
                         var comparers = Comparers.Get(value, this.ValueComparer);
-                        var input = new MutationInput(SortedInt32KeyNode<HashBucket>.EmptyNode, comparers);
+                        var input = new MutationInput(
+                            SortedInt32KeyNode<HashBucket>.EmptyNode,
+                            comparers
+                        );
                         var result = ImmutableDictionary<TKey, TValue>.AddRange(this, input);
 
                         _immutable = null;
@@ -112,11 +114,7 @@ namespace System.Collections.Immutable
             /// </value>
             public IEqualityComparer<TValue> ValueComparer
             {
-                get
-                {
-                    return _comparers.ValueComparer;
-                }
-
+                get { return _comparers.ValueComparer; }
                 set
                 {
                     Requires.NotNull(value, nameof(value));
@@ -257,7 +255,11 @@ namespace System.Collections.Immutable
                 {
                     if (_syncRoot == null)
                     {
-                        Threading.Interlocked.CompareExchange<object?>(ref _syncRoot, new object(), null);
+                        Threading.Interlocked.CompareExchange<object?>(
+                            ref _syncRoot,
+                            new object(),
+                            null
+                        );
                     }
 
                     return _syncRoot;
@@ -375,11 +377,7 @@ namespace System.Collections.Immutable
             /// </summary>
             private SortedInt32KeyNode<HashBucket> Root
             {
-                get
-                {
-                    return _root;
-                }
-
+                get { return _root; }
                 set
                 {
                     // We *always* increment the version number because some mutations
@@ -414,12 +412,18 @@ namespace System.Collections.Immutable
                         return value;
                     }
 
-                    throw new KeyNotFoundException(SR.Format(SR.Arg_KeyNotFoundWithKey, key.ToString()));
+                    throw new KeyNotFoundException(
+                        SR.Format(SR.Arg_KeyNotFoundWithKey, key.ToString())
+                    );
                 }
-
                 set
                 {
-                    var result = ImmutableDictionary<TKey, TValue>.Add(key, value, KeyCollisionBehavior.SetValue, this.Origin);
+                    var result = ImmutableDictionary<TKey, TValue>.Add(
+                        key,
+                        value,
+                        KeyCollisionBehavior.SetValue,
+                        this.Origin
+                    );
                     this.Apply(result);
                 }
             }
@@ -527,7 +531,12 @@ namespace System.Collections.Immutable
             /// <exception cref="NotSupportedException">The <see cref="IDictionary{TKey, TValue}"/> is read-only.</exception>
             public void Add(TKey key, TValue value)
             {
-                var result = ImmutableDictionary<TKey, TValue>.Add(key, value, KeyCollisionBehavior.ThrowIfValueDifferent, this.Origin);
+                var result = ImmutableDictionary<TKey, TValue>.Add(
+                    key,
+                    value,
+                    KeyCollisionBehavior.ThrowIfValueDifferent,
+                    this.Origin
+                );
                 this.Apply(result);
             }
 
@@ -603,7 +612,11 @@ namespace System.Collections.Immutable
             /// </summary>
             public bool TryGetKey(TKey equalKey, out TKey actualKey)
             {
-                return ImmutableDictionary<TKey, TValue>.TryGetKey(equalKey, this.Origin, out actualKey);
+                return ImmutableDictionary<TKey, TValue>.TryGetKey(
+                    equalKey,
+                    this.Origin,
+                    out actualKey
+                );
             }
 
             /// <summary>
@@ -641,8 +654,10 @@ namespace System.Collections.Immutable
             /// <summary>
             /// See the <see cref="ICollection{T}"/> interface.
             /// </summary>
-            void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
-            {
+            void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
+                KeyValuePair<TKey, TValue>[] array,
+                int arrayIndex
+            ) {
                 Requires.NotNull(array, nameof(array));
 
                 foreach (var item in this)
@@ -684,7 +699,9 @@ namespace System.Collections.Immutable
             /// <returns>
             /// A <see cref="IEnumerator{T}"/> that can be used to iterate through the collection.
             /// </returns>
-            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
+            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+                KeyValuePair<TKey, TValue>
+            >.GetEnumerator()
             {
                 return this.GetEnumerator();
             }
@@ -734,8 +751,9 @@ namespace System.Collections.Immutable
         /// Initializes a new instance of the <see cref="ImmutableDictionaryBuilderDebuggerProxy{TKey, TValue}"/> class.
         /// </summary>
         /// <param name="map">The collection to display in the debugger</param>
-        public ImmutableDictionaryBuilderDebuggerProxy(ImmutableDictionary<TKey, TValue>.Builder map)
-        {
+        public ImmutableDictionaryBuilderDebuggerProxy(
+            ImmutableDictionary<TKey, TValue>.Builder map
+        ) {
             Requires.NotNull(map, nameof(map));
             _map = map;
         }

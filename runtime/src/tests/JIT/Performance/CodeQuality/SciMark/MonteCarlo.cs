@@ -48,12 +48,9 @@ namespace SciMark2
             return ((double)Num_samples) * 4.0;
         }
 
-
-
         public static double integrate(int Num_samples)
         {
             SciMark2.Random R = new SciMark2.Random(SEED);
-
 
             int under_curve = 0;
             for (int count = 0; count < Num_samples; count++)

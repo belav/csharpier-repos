@@ -78,7 +78,6 @@ namespace System.Drawing.Imaging
         WmfCreateFontIndirect = WmfRecordBase | 0x2fb,
         WmfCreateBrushIndirect = WmfRecordBase | 0x2fc,
         WmfCreateRegion = WmfRecordBase | 0x6ff,
-
         // Since we have to enumerate GDI records right along with GDI+ records,
         // we list all the GDI records here so that they can be part of the
         // same enumeration type which is used in the enumeration callback.
@@ -180,8 +179,8 @@ namespace System.Drawing.Imaging
         EmfExtCreatePen = 95,
         EmfPolyTextOutA = 96,
         EmfPolyTextOutW = 97,
-        EmfSetIcmMode = 98,  // EMR_SETICMMODE,
-        EmfCreateColorSpace = 99,  // EMR_CREATECOLORSPACE,
+        EmfSetIcmMode = 98, // EMR_SETICMMODE,
+        EmfCreateColorSpace = 99, // EMR_CREATECOLORSPACE,
         EmfSetColorSpace = 100, // EMR_SETCOLORSPACE,
         EmfDeleteColorSpace = 101, // EMR_DELETECOLORSPACE,
         EmfGlsRecord = 102, // EMR_GLSRECORD,
@@ -207,7 +206,6 @@ namespace System.Drawing.Imaging
         EmfCreateColorSpaceW = 122, // EMR_CREATECOLORSPACEW,
         EmfMax = 122,
         EmfMin = 1,
-
         // That is the END of the GDI EMF records.
 
         // Now we start the list of EMF+ records.  We leave quite
@@ -218,15 +216,11 @@ namespace System.Drawing.Imaging
         Invalid = EmfPlusRecordBase,
         Header,
         EndOfFile,
-
         Comment,
-
-        GetDC,    // the application grabbed the metafile dc
-
+        GetDC, // the application grabbed the metafile dc
         MultiFormatStart,
         MultiFormatSection,
         MultiFormatEnd,
-
         // For all Persistent Objects
         Object,
         // Drawing Records
@@ -250,7 +244,6 @@ namespace System.Drawing.Imaging
         DrawImage,
         DrawImagePoints,
         DrawString,
-
         // Graphics State Records
         SetRenderingOrigin,
         SetAntiAliasMode,
@@ -277,11 +270,8 @@ namespace System.Drawing.Imaging
         SetClipPath,
         SetClipRegion,
         OffsetClip,
-
         DrawDriverString,
-
         Total,
-
         Max = Total - 1,
         Min = Header
     }

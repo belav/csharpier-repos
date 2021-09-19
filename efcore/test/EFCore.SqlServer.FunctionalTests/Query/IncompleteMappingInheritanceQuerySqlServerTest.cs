@@ -9,15 +9,16 @@ using Xunit.Abstractions;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class IncompleteMappingInheritanceQuerySqlServerTest : InheritanceRelationalQueryTestBase<
-        IncompleteMappingInheritanceQuerySqlServerFixture>
+    public class IncompleteMappingInheritanceQuerySqlServerTest
+        : InheritanceRelationalQueryTestBase<IncompleteMappingInheritanceQuerySqlServerFixture>
     {
 #pragma warning disable IDE0060 // Remove unused parameter
         public IncompleteMappingInheritanceQuerySqlServerTest(
             IncompleteMappingInheritanceQuerySqlServerFixture fixture,
-            ITestOutputHelper testOutputHelper)
+            ITestOutputHelper testOutputHelper
+        )
 #pragma warning restore IDE0060 // Remove unused parameter
-            : base(fixture)
+          : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -32,13 +33,19 @@ namespace Microsoft.EntityFrameworkCore.Query
             var teaType = context.Model.FindEntityType(typeof(Tea));
 
             Assert.Equal("SugarGrams", cokeType.FindProperty("SugarGrams").GetColumnBaseName());
-            Assert.Equal("CaffeineGrams", cokeType.FindProperty("CaffeineGrams").GetColumnBaseName());
+            Assert.Equal(
+                "CaffeineGrams",
+                cokeType.FindProperty("CaffeineGrams").GetColumnBaseName()
+            );
             Assert.Equal("CokeCO2", cokeType.FindProperty("Carbonation").GetColumnBaseName());
 
             Assert.Equal("SugarGrams", liltType.FindProperty("SugarGrams").GetColumnBaseName());
             Assert.Equal("LiltCO2", liltType.FindProperty("Carbonation").GetColumnBaseName());
 
-            Assert.Equal("CaffeineGrams", teaType.FindProperty("CaffeineGrams").GetColumnBaseName());
+            Assert.Equal(
+                "CaffeineGrams",
+                teaType.FindProperty("CaffeineGrams").GetColumnBaseName()
+            );
             Assert.Equal("HasMilk", teaType.FindProperty("HasMilk").GetColumnBaseName());
         }
 
@@ -57,7 +64,8 @@ WHERE [d].[Discriminator] = N'Lilt'",
                 //
                 @"SELECT TOP(2) [d].[Id], [d].[Discriminator], [d].[CaffeineGrams], [d].[HasMilk]
 FROM [Drinks] AS [d]
-WHERE [d].[Discriminator] = N'Tea'");
+WHERE [d].[Discriminator] = N'Tea'"
+            );
         }
 
         public override void FromSql_on_root()
@@ -69,7 +77,8 @@ WHERE [d].[Discriminator] = N'Tea'");
 FROM (
     select * from ""Animals""
 ) AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')"
+            );
         }
 
         public override void FromSql_on_derived()
@@ -81,7 +90,8 @@ WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
 FROM (
     select * from ""Animals""
 ) AS [a]
-WHERE [a].[Discriminator] = N'Eagle'");
+WHERE [a].[Discriminator] = N'Eagle'"
+            );
         }
 
         public override async Task Can_query_all_types_when_shared_column(bool async)
@@ -91,7 +101,8 @@ WHERE [a].[Discriminator] = N'Eagle'");
             AssertSql(
                 @"SELECT [d].[Id], [d].[Discriminator], [d].[CaffeineGrams], [d].[CokeCO2], [d].[SugarGrams], [d].[LiltCO2], [d].[HasMilk]
 FROM [Drinks] AS [d]
-WHERE [d].[Discriminator] IN (N'Drink', N'Coke', N'Lilt', N'Tea')");
+WHERE [d].[Discriminator] IN (N'Drink', N'Coke', N'Lilt', N'Tea')"
+            );
         }
 
         public override async Task Can_use_of_type_animal(bool async)
@@ -102,7 +113,8 @@ WHERE [d].[Discriminator] IN (N'Drink', N'Coke', N'Lilt', N'Tea')");
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
 FROM [Animals] AS [a]
 WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')
-ORDER BY [a].[Species]");
+ORDER BY [a].[Species]"
+            );
         }
 
         public override async Task Can_use_is_kiwi(bool async)
@@ -112,7 +124,8 @@ ORDER BY [a].[Species]");
             AssertSql(
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Kiwi')");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Kiwi')"
+            );
         }
 
         public override async Task Can_use_is_kiwi_with_cast(bool async)
@@ -125,7 +138,8 @@ WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Ki
     ELSE CAST(0 AS tinyint)
 END AS [Value]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')"
+            );
         }
 
         public override async Task Can_use_is_kiwi_with_other_predicate(bool async)
@@ -135,7 +149,8 @@ WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
             AssertSql(
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND (([a].[Discriminator] = N'Kiwi') AND ([a].[CountryId] = 1))");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND (([a].[Discriminator] = N'Kiwi') AND ([a].[CountryId] = 1))"
+            );
         }
 
         public override async Task Can_use_is_kiwi_in_projection(bool async)
@@ -148,7 +163,8 @@ WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND (([a].[Discriminator] = N'K
     ELSE CAST(0 AS bit)
 END
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')"
+            );
         }
 
         public override async Task Can_use_of_type_bird(bool async)
@@ -159,7 +175,8 @@ WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
 FROM [Animals] AS [a]
 WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')
-ORDER BY [a].[Species]");
+ORDER BY [a].[Species]"
+            );
         }
 
         public override async Task Can_use_of_type_bird_predicate(bool async)
@@ -170,7 +187,8 @@ ORDER BY [a].[Species]");
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
 FROM [Animals] AS [a]
 WHERE ([a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[CountryId] = 1)) AND [a].[Discriminator] IN (N'Eagle', N'Kiwi')
-ORDER BY [a].[Species]");
+ORDER BY [a].[Species]"
+            );
         }
 
         public override async Task Can_use_of_type_bird_with_projection(bool async)
@@ -180,7 +198,8 @@ ORDER BY [a].[Species]");
             AssertSql(
                 @"SELECT [a].[EagleId]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')"
+            );
         }
 
         public override async Task Can_use_of_type_bird_first(bool async)
@@ -191,7 +210,8 @@ WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
                 @"SELECT TOP(1) [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
 FROM [Animals] AS [a]
 WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')
-ORDER BY [a].[Species]");
+ORDER BY [a].[Species]"
+            );
         }
 
         public override async Task Can_use_of_type_kiwi(bool async)
@@ -201,7 +221,8 @@ ORDER BY [a].[Species]");
             AssertSql(
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[FoundOn]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Kiwi')");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Kiwi')"
+            );
         }
 
         public override async Task Can_use_of_type_rose(bool async)
@@ -211,7 +232,8 @@ WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Ki
             AssertSql(
                 @"SELECT [p].[Species], [p].[CountryId], [p].[Genus], [p].[Name], [p].[HasThorns]
 FROM [Plants] AS [p]
-WHERE [p].[Genus] IN (1, 0) AND ([p].[Genus] = 0)");
+WHERE [p].[Genus] IN (1, 0) AND ([p].[Genus] = 0)"
+            );
         }
 
         public override async Task Can_query_all_animals(bool async)
@@ -222,7 +244,8 @@ WHERE [p].[Genus] IN (1, 0) AND ([p].[Genus] = 0)");
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
 FROM [Animals] AS [a]
 WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')
-ORDER BY [a].[Species]");
+ORDER BY [a].[Species]"
+            );
         }
 
         public override async Task Can_query_all_animal_views(bool async)
@@ -234,7 +257,8 @@ ORDER BY [a].[Species]");
 FROM (
     SELECT * FROM Animals
 ) AS [a]
-ORDER BY [a].[CountryId]");
+ORDER BY [a].[CountryId]"
+            );
         }
 
         public override async Task Can_query_all_plants(bool async)
@@ -245,7 +269,8 @@ ORDER BY [a].[CountryId]");
                 @"SELECT [p].[Species], [p].[CountryId], [p].[Genus], [p].[Name], [p].[HasThorns]
 FROM [Plants] AS [p]
 WHERE [p].[Genus] IN (1, 0)
-ORDER BY [p].[Species]");
+ORDER BY [p].[Species]"
+            );
         }
 
         public override async Task Can_filter_all_animals(bool async)
@@ -256,7 +281,8 @@ ORDER BY [p].[Species]");
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
 FROM [Animals] AS [a]
 WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Name] = N'Great spotted kiwi')
-ORDER BY [a].[Species]");
+ORDER BY [a].[Species]"
+            );
         }
 
         public override async Task Can_query_all_birds(bool async)
@@ -267,7 +293,8 @@ ORDER BY [a].[Species]");
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[Group], [a].[FoundOn]
 FROM [Animals] AS [a]
 WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')
-ORDER BY [a].[Species]");
+ORDER BY [a].[Species]"
+            );
         }
 
         public override async Task Can_query_just_kiwis(bool async)
@@ -277,7 +304,8 @@ ORDER BY [a].[Species]");
             AssertSql(
                 @"SELECT TOP(2) [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[FoundOn]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] = N'Kiwi'");
+WHERE [a].[Discriminator] = N'Kiwi'"
+            );
         }
 
         public override async Task Can_query_just_roses(bool async)
@@ -307,7 +335,8 @@ LEFT JOIN (
     FROM [Animals] AS [a0]
     WHERE [a0].[Discriminator] IN (N'Eagle', N'Kiwi')
 ) AS [t0] ON [t].[Species] = [t0].[EagleId]
-ORDER BY [t].[Species], [t0].[Species]");
+ORDER BY [t].[Species], [t0].[Species]"
+            );
         }
 
         public override async Task Can_include_animals(bool async)
@@ -322,7 +351,8 @@ LEFT JOIN (
     FROM [Animals] AS [a]
     WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')
 ) AS [t] ON [c].[Id] = [t].[CountryId]
-ORDER BY [c].[Name], [c].[Id], [t].[Species]");
+ORDER BY [c].[Name], [c].[Id], [t].[Species]"
+            );
         }
 
         public override async Task Can_use_of_type_kiwi_where_north_on_derived_property(bool async)
@@ -332,7 +362,8 @@ ORDER BY [c].[Name], [c].[Id], [t].[Species]");
             AssertSql(
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[FoundOn]
 FROM [Animals] AS [a]
-WHERE ([a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Kiwi')) AND ([a].[FoundOn] = CAST(0 AS tinyint))");
+WHERE ([a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Kiwi')) AND ([a].[FoundOn] = CAST(0 AS tinyint))"
+            );
         }
 
         public override async Task Can_use_of_type_kiwi_where_south_on_derived_property(bool async)
@@ -342,7 +373,8 @@ WHERE ([a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'K
             AssertSql(
                 @"SELECT [a].[Species], [a].[CountryId], [a].[Discriminator], [a].[Name], [a].[EagleId], [a].[IsFlightless], [a].[FoundOn]
 FROM [Animals] AS [a]
-WHERE ([a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Kiwi')) AND ([a].[FoundOn] = CAST(1 AS tinyint))");
+WHERE ([a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Kiwi')) AND ([a].[FoundOn] = CAST(1 AS tinyint))"
+            );
         }
 
         public override async Task Discriminator_used_when_projection_over_derived_type(bool async)
@@ -352,7 +384,8 @@ WHERE ([a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'K
             AssertSql(
                 @"SELECT [a].[FoundOn]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] = N'Kiwi'");
+WHERE [a].[Discriminator] = N'Kiwi'"
+            );
         }
 
         public override async Task Discriminator_used_when_projection_over_derived_type2(bool async)
@@ -362,7 +395,8 @@ WHERE [a].[Discriminator] = N'Kiwi'");
             AssertSql(
                 @"SELECT [a].[IsFlightless], [a].[Discriminator]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')"
+            );
         }
 
         public override async Task Discriminator_used_when_projection_over_of_type(bool async)
@@ -372,7 +406,8 @@ WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
             AssertSql(
                 @"SELECT [a].[FoundOn]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Kiwi')");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a].[Discriminator] = N'Kiwi')"
+            );
         }
 
         public override void Can_insert_update_delete()
@@ -421,7 +456,8 @@ SELECT @@ROWCOUNT;",
                 //
                 @"SELECT COUNT(*)
 FROM [Animals] AS [a]
-WHERE ([a].[Discriminator] = N'Kiwi') AND ([a].[Species] LIKE N'%owenii')");
+WHERE ([a].[Discriminator] = N'Kiwi') AND ([a].[Species] LIKE N'%owenii')"
+            );
         }
 
         public override async Task Byte_enum_value_constant_used_in_projection(bool async)
@@ -434,7 +470,8 @@ WHERE ([a].[Discriminator] = N'Kiwi') AND ([a].[Species] LIKE N'%owenii')");
     ELSE CAST(1 AS tinyint)
 END
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] = N'Kiwi'");
+WHERE [a].[Discriminator] = N'Kiwi'"
+            );
         }
 
         public override async Task Union_siblings_with_duplicate_property_in_subquery(bool async)
@@ -452,7 +489,8 @@ FROM (
     FROM [Drinks] AS [d0]
     WHERE [d0].[Discriminator] = N'Tea'
 ) AS [t]
-WHERE [t].[Id] > 0");
+WHERE [t].[Id] > 0"
+            );
         }
 
         public override async Task OfType_Union_subquery(bool async)
@@ -470,7 +508,8 @@ FROM (
     FROM [Animals] AS [a0]
     WHERE [a0].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a0].[Discriminator] = N'Kiwi')
 ) AS [t]
-WHERE ([t].[FoundOn] = CAST(0 AS tinyint)) AND [t].[FoundOn] IS NOT NULL");
+WHERE ([t].[FoundOn] = CAST(0 AS tinyint)) AND [t].[FoundOn] IS NOT NULL"
+            );
         }
 
         public override async Task OfType_Union_OfType(bool async)
@@ -494,7 +533,8 @@ FROM (
     WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')
     ORDER BY [a].[Species]
 ) AS [t]
-WHERE [t].[Discriminator] = N'Kiwi'");
+WHERE [t].[Discriminator] = N'Kiwi'"
+            );
         }
 
         public override async Task Union_entity_equality(bool async)
@@ -512,7 +552,8 @@ FROM (
     FROM [Animals] AS [a0]
     WHERE [a0].[Discriminator] = N'Eagle'
 ) AS [t]
-WHERE 0 = 1");
+WHERE 0 = 1"
+            );
         }
 
         public override void Member_access_on_intermediate_type_works()
@@ -523,7 +564,8 @@ WHERE 0 = 1");
                 @"SELECT [a].[Name]
 FROM [Animals] AS [a]
 WHERE [a].[Discriminator] = N'Kiwi'
-ORDER BY [a].[Name]");
+ORDER BY [a].[Name]"
+            );
         }
 
         public override void Casting_to_base_type_joining_with_query_type_works()
@@ -536,7 +578,8 @@ FROM [Animals] AS [a]
 INNER JOIN (
     Select * from ""Animals""
 ) AS [a0] ON [a].[Name] = [a0].[Name]
-WHERE [a].[Discriminator] = N'Eagle'");
+WHERE [a].[Discriminator] = N'Eagle'"
+            );
         }
 
         public override async Task Is_operator_on_result_of_FirstOrDefault(bool async)
@@ -550,7 +593,8 @@ WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi') AND ((
     SELECT TOP(1) [a0].[Discriminator]
     FROM [Animals] AS [a0]
     WHERE [a0].[Discriminator] IN (N'Eagle', N'Kiwi') AND ([a0].[Name] = N'Great spotted kiwi')) = N'Kiwi')
-ORDER BY [a].[Species]");
+ORDER BY [a].[Species]"
+            );
         }
 
         public override async Task Selecting_only_base_properties_on_base_type(bool async)
@@ -560,7 +604,8 @@ ORDER BY [a].[Species]");
             AssertSql(
                 @"SELECT [a].[Name]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')"
+            );
         }
 
         public override async Task Selecting_only_base_properties_on_derived_type(bool async)
@@ -570,10 +615,11 @@ WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
             AssertSql(
                 @"SELECT [a].[Name]
 FROM [Animals] AS [a]
-WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')");
+WHERE [a].[Discriminator] IN (N'Eagle', N'Kiwi')"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
     }
 }

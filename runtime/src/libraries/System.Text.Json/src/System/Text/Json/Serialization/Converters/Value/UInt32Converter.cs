@@ -10,8 +10,11 @@ namespace System.Text.Json.Serialization.Converters
             IsInternalConverterForNumberType = true;
         }
 
-        public override uint Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
+        public override uint Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        ) {
             return reader.GetUInt32();
         }
 
@@ -26,24 +29,34 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetUInt32WithQuotes();
         }
 
-        internal override void WriteWithQuotes(Utf8JsonWriter writer, uint value, JsonSerializerOptions options, ref WriteStack state)
-        {
+        internal override void WriteWithQuotes(
+            Utf8JsonWriter writer,
+            uint value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        ) {
             writer.WritePropertyName(value);
         }
 
-        internal override uint ReadNumberWithCustomHandling(ref Utf8JsonReader reader, JsonNumberHandling handling)
-        {
-            if (reader.TokenType == JsonTokenType.String &&
-                (JsonNumberHandling.AllowReadingFromString & handling) != 0)
-            {
+        internal override uint ReadNumberWithCustomHandling(
+            ref Utf8JsonReader reader,
+            JsonNumberHandling handling
+        ) {
+            if (
+                reader.TokenType == JsonTokenType.String
+                && (JsonNumberHandling.AllowReadingFromString & handling) != 0
+            ) {
                 return reader.GetUInt32WithQuotes();
             }
 
             return reader.GetUInt32();
         }
 
-        internal override void WriteNumberWithCustomHandling(Utf8JsonWriter writer, uint value, JsonNumberHandling handling)
-        {
+        internal override void WriteNumberWithCustomHandling(
+            Utf8JsonWriter writer,
+            uint value,
+            JsonNumberHandling handling
+        ) {
             if ((JsonNumberHandling.WriteAsString & handling) != 0)
             {
                 writer.WriteNumberValueAsString(value);

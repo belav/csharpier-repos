@@ -52,6 +52,7 @@ class test
                     goto L;
                 }
             }
+
             finally
             {
                 Console.WriteLine("In finally2");
@@ -69,7 +70,5 @@ class test
         testLog.StopRecording();
 
         return testLog.VerifyOutput();
-
-
     }
 }

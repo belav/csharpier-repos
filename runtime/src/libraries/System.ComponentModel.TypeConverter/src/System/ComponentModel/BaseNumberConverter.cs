@@ -49,8 +49,11 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given value object to an object of Type TargetType.
         /// </summary>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
-        {
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        ) {
             if (value is string text)
             {
                 text = text.Trim();
@@ -61,9 +64,13 @@ namespace System.ComponentModel
                     {
                         return FromString(text.Substring(1), 16);
                     }
-                    else if (AllowHex && (text.StartsWith("0x", StringComparison.OrdinalIgnoreCase)
-                             || text.StartsWith("&h", StringComparison.OrdinalIgnoreCase)))
-                    {
+                    else if (
+                        AllowHex
+                        && (
+                            text.StartsWith("0x", StringComparison.OrdinalIgnoreCase)
+                            || text.StartsWith("&h", StringComparison.OrdinalIgnoreCase)
+                        )
+                    ) {
                         return FromString(text.Substring(2), 16);
                     }
                     else
@@ -73,13 +80,19 @@ namespace System.ComponentModel
                             culture = CultureInfo.CurrentCulture;
                         }
 
-                        NumberFormatInfo formatInfo = (NumberFormatInfo)culture.GetFormat(typeof(NumberFormatInfo));
+                        NumberFormatInfo formatInfo = (NumberFormatInfo)culture.GetFormat(
+                            typeof(NumberFormatInfo)
+                        );
                         return FromString(text, formatInfo);
                     }
                 }
                 catch (Exception e)
                 {
-                    throw new ArgumentException(SR.Format(SR.ConvertInvalidPrimitive, text, TargetType.Name), nameof(value), e);
+                    throw new ArgumentException(
+                        SR.Format(SR.ConvertInvalidPrimitive, text, TargetType.Name),
+                        nameof(value),
+                        e
+                    );
                 }
             }
 
@@ -89,21 +102,30 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given value object to the destination type.
         /// </summary>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        ) {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
             }
 
-            if (destinationType == typeof(string) && value != null && TargetType.IsInstanceOfType(value))
-            {
+            if (
+                destinationType == typeof(string)
+                && value != null
+                && TargetType.IsInstanceOfType(value)
+            ) {
                 if (culture == null)
                 {
                     culture = CultureInfo.CurrentCulture;
                 }
 
-                NumberFormatInfo formatInfo = (NumberFormatInfo)culture.GetFormat(typeof(NumberFormatInfo));
+                NumberFormatInfo formatInfo = (NumberFormatInfo)culture.GetFormat(
+                    typeof(NumberFormatInfo)
+                );
                 return ToString(value, formatInfo);
             }
 

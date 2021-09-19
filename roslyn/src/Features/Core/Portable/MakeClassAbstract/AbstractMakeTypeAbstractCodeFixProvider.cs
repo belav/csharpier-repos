@@ -14,34 +14,55 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.MakeTypeAbstract
 {
-    internal abstract class AbstractMakeTypeAbstractCodeFixProvider<TTypeDeclarationSyntax> : SyntaxEditorBasedCodeFixProvider
-        where TTypeDeclarationSyntax : SyntaxNode
+    internal abstract class AbstractMakeTypeAbstractCodeFixProvider<TTypeDeclarationSyntax>
+        : SyntaxEditorBasedCodeFixProvider where TTypeDeclarationSyntax : SyntaxNode
     {
-        protected abstract bool IsValidRefactoringContext(SyntaxNode? node, [NotNullWhen(true)] out TTypeDeclarationSyntax? typeDeclaration);
+        protected abstract bool IsValidRefactoringContext(
+            SyntaxNode? node,
+            [NotNullWhen(true)] out TTypeDeclarationSyntax? typeDeclaration
+        );
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.Compile;
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            if (IsValidRefactoringContext(context.Diagnostics[0].Location?.FindNode(context.CancellationToken), out _))
-            {
+            if (
+                IsValidRefactoringContext(
+                    context.Diagnostics[0].Location?.FindNode(context.CancellationToken),
+                    out _
+                )
+            ) {
                 context.RegisterCodeFix(
                     new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
-                    context.Diagnostics);
+                    context.Diagnostics
+                );
             }
 
             return Task.CompletedTask;
         }
 
-        protected sealed override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor,
-            CancellationToken cancellationToken)
-        {
+        protected sealed override Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
             for (var i = 0; i < diagnostics.Length; i++)
             {
-                if (IsValidRefactoringContext(diagnostics[i].Location?.FindNode(cancellationToken), out var typeDeclaration))
-                {
-                    editor.ReplaceNode(typeDeclaration,
-                        (currentTypeDeclaration, generator) => generator.WithModifiers(currentTypeDeclaration, DeclarationModifiers.Abstract));
+                if (
+                    IsValidRefactoringContext(
+                        diagnostics[i].Location?.FindNode(cancellationToken),
+                        out var typeDeclaration
+                    )
+                ) {
+                    editor.ReplaceNode(
+                        typeDeclaration,
+                        (currentTypeDeclaration, generator) =>
+                            generator.WithModifiers(
+                                currentTypeDeclaration,
+                                DeclarationModifiers.Abstract
+                            )
+                    );
                 }
             }
 
@@ -50,10 +71,13 @@ namespace Microsoft.CodeAnalysis.MakeTypeAbstract
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(FeaturesResources.Make_class_abstract, createChangedDocument, FeaturesResources.Make_class_abstract)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(
+                FeaturesResources.Make_class_abstract,
+                createChangedDocument,
+                FeaturesResources.Make_class_abstract
+            ) { }
         }
     }
 }

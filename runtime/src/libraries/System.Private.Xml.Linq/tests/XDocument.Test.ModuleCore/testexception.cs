@@ -15,15 +15,14 @@ namespace Microsoft.Test.ModuleCore
     public class TestSkippedException : TestException
     {
         //Constructor
-        public TestSkippedException(string message)
-            : this(message, false, true, null)
-        {
-        }
+        public TestSkippedException(string message) : this(message, false, true, null) { }
 
-        public TestSkippedException(string message, object actual, object expected, Exception inner)
-            : base(TestResult.Skipped, message, actual, expected, inner)
-        {
-        }
+        public TestSkippedException(
+            string message,
+            object actual,
+            object expected,
+            Exception inner
+        ) : base(TestResult.Skipped, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -33,15 +32,14 @@ namespace Microsoft.Test.ModuleCore
     public class TestFailedException : TestException
     {
         //Constructor
-        public TestFailedException(string message)
-            : this(message, false, true, null)
-        {
-        }
+        public TestFailedException(string message) : this(message, false, true, null) { }
 
-        public TestFailedException(string message, object actual, object expected, Exception inner)
-            : base(TestResult.Failed, message, actual, expected, inner)
-        {
-        }
+        public TestFailedException(
+            string message,
+            object actual,
+            object expected,
+            Exception inner
+        ) : base(TestResult.Failed, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -51,15 +49,14 @@ namespace Microsoft.Test.ModuleCore
     public class TestWarningException : TestException
     {
         //Constructor
-        public TestWarningException(string message)
-            : this(message, false, true, null)
-        {
-        }
+        public TestWarningException(string message) : this(message, false, true, null) { }
 
-        public TestWarningException(string message, object actual, object expected, Exception inner)
-            : base(TestResult.Warning, message, actual, expected, inner)
-        {
-        }
+        public TestWarningException(
+            string message,
+            object actual,
+            object expected,
+            Exception inner
+        ) : base(TestResult.Warning, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -76,12 +73,15 @@ namespace Microsoft.Test.ModuleCore
 
         //Constructor
         public TestException(TestResult result, string message)
-            : this(result, message, false, true, null)
-        {
-        }
+            : this(result, message, false, true, null) { }
 
-        public TestException(TestResult result, string message, object actual, object expected, Exception inner)
-            : base(message, inner)
+        public TestException(
+            TestResult result,
+            string message,
+            object actual,
+            object expected,
+            Exception inner
+        ) : base(message, inner)
         {
             //Note: iResult is the variation result (ie: TEST_PASS, TEST_FAIL, etc...)
             //Setup the exception

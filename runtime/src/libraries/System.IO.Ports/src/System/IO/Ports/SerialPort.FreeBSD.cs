@@ -16,16 +16,20 @@ namespace System.IO.Ports
 
             foreach (string name in Directory.GetFiles("/dev", "ttyd*"))
             {
-                if (!name.EndsWith(".init", StringComparison.Ordinal) && !name.EndsWith(".lock", StringComparison.Ordinal))
-                {
+                if (
+                    !name.EndsWith(".init", StringComparison.Ordinal)
+                    && !name.EndsWith(".lock", StringComparison.Ordinal)
+                ) {
                     ports.Add(name);
                 }
             }
 
             foreach (string name in Directory.GetFiles("/dev", "cuau*"))
             {
-                if (!name.EndsWith(".init", StringComparison.Ordinal) && !name.EndsWith(".lock", StringComparison.Ordinal))
-                {
+                if (
+                    !name.EndsWith(".init", StringComparison.Ordinal)
+                    && !name.EndsWith(".lock", StringComparison.Ordinal)
+                ) {
                     ports.Add(name);
                 }
             }

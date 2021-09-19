@@ -36,18 +36,27 @@ namespace System.Net
             _uri = uri;
         }
 
-        [Obsolete("Serialization is obsoleted for this type. https://go.microsoft.com/fwlink/?linkid=14202")]
-        protected FileWebRequest(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
+        [Obsolete(
+            "Serialization is obsoleted for this type. https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        protected FileWebRequest(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) : base(serializationInfo, streamingContext)
         {
             throw new PlatformNotSupportedException();
         }
 #pragma warning restore SYSLIB0014
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext) =>
-            GetObjectData(serializationInfo, streamingContext);
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) => GetObjectData(serializationInfo, streamingContext);
 
-        protected override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
+        protected override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) {
             throw new PlatformNotSupportedException();
         }
 
@@ -102,7 +111,10 @@ namespace System.Net
             {
                 if (value < 0 && value != System.Threading.Timeout.Infinite)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.net_io_timeout_use_ge_zero);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.net_io_timeout_use_ge_zero
+                    );
                 }
                 _timeout = value;
             }
@@ -111,7 +123,10 @@ namespace System.Net
         public override Uri RequestUri => _uri;
 
         private static Exception CreateRequestAbortedException() =>
-            new WebException(SR.Format(SR.net_requestaborted, WebExceptionStatus.RequestCanceled), WebExceptionStatus.RequestCanceled);
+            new WebException(
+                SR.Format(SR.net_requestaborted, WebExceptionStatus.RequestCanceled),
+                WebExceptionStatus.RequestCanceled
+            );
 
         private void CheckAndMarkAsyncGetRequestStreamPending()
         {
@@ -120,9 +135,10 @@ namespace System.Net
                 throw CreateRequestAbortedException();
             }
 
-            if (string.Equals(_method, "GET", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(_method, "HEAD", StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                string.Equals(_method, "GET", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(_method, "HEAD", StringComparison.OrdinalIgnoreCase)
+            ) {
                 throw new ProtocolViolationException(SR.net_nouploadonget);
             }
 
@@ -147,33 +163,53 @@ namespace System.Net
             {
                 if (_stream == null)
                 {
-                    _stream = new WebFileStream(this, _uri.LocalPath, FileMode.Create, FileAccess.Write, FileShare.Read);
+                    _stream = new WebFileStream(
+                        this,
+                        _uri.LocalPath,
+                        FileMode.Create,
+                        FileAccess.Write,
+                        FileShare.Read
+                    );
                     _fileAccess = FileAccess.Write;
                     _writing = true;
                 }
                 return _stream;
             }
-            catch (Exception e) { throw new WebException(e.Message, e); }
+            catch (Exception e)
+            {
+                throw new WebException(e.Message, e);
+            }
         }
 
         public override IAsyncResult BeginGetRequestStream(AsyncCallback? callback, object? state)
         {
             CheckAndMarkAsyncGetRequestStreamPending();
-            Task<Stream> t = Task.Factory.StartNew(s => ((FileWebRequest)s!).CreateWriteStream(),
-                this, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            Task<Stream> t = Task.Factory.StartNew(
+                s => ((FileWebRequest)s!).CreateWriteStream(),
+                this,
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
             return TaskToApm.Begin(t, callback, state);
         }
 
         public override Task<Stream> GetRequestStreamAsync()
         {
             CheckAndMarkAsyncGetRequestStreamPending();
-            return Task.Factory.StartNew(s =>
-            {
-                FileWebRequest thisRef = (FileWebRequest)s!;
-                Stream writeStream = thisRef.CreateWriteStream();
-                thisRef._writePending = false;
-                return writeStream;
-            }, this, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            return Task.Factory.StartNew(
+                s =>
+                {
+                    FileWebRequest thisRef = (FileWebRequest)s!;
+                    Stream writeStream = thisRef.CreateWriteStream();
+                    thisRef._writePending = false;
+                    return writeStream;
+                },
+                this,
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
 
         private void CheckAndMarkAsyncGetResponsePending()
@@ -209,7 +245,8 @@ namespace System.Net
 
             try
             {
-                return _response ?? (_response = new FileWebResponse(this, _uri, _fileAccess, !_syncHint));
+                return _response
+                    ?? (_response = new FileWebResponse(this, _uri, _fileAccess, !_syncHint));
             }
             catch (Exception e)
             {
@@ -220,21 +257,32 @@ namespace System.Net
         public override IAsyncResult BeginGetResponse(AsyncCallback? callback, object? state)
         {
             CheckAndMarkAsyncGetResponsePending();
-            Task<WebResponse> t = Task.Factory.StartNew(s => ((FileWebRequest)s!).CreateResponse(),
-                 this, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            Task<WebResponse> t = Task.Factory.StartNew(
+                s => ((FileWebRequest)s!).CreateResponse(),
+                this,
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
             return TaskToApm.Begin(t, callback, state);
         }
 
         public override Task<WebResponse> GetResponseAsync()
         {
             CheckAndMarkAsyncGetResponsePending();
-            return Task.Factory.StartNew(s =>
-            {
-                var thisRef = (FileWebRequest)s!;
-                WebResponse response = thisRef.CreateResponse();
-                _readPending = false;
-                return response;
-            }, this, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            return Task.Factory.StartNew(
+                s =>
+                {
+                    var thisRef = (FileWebRequest)s!;
+                    WebResponse response = thisRef.CreateResponse();
+                    _readPending = false;
+                    return response;
+                },
+                this,
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
 
         public override Stream EndGetRequestStream(IAsyncResult asyncResult)
@@ -255,10 +303,11 @@ namespace System.Net
         {
             IAsyncResult result = BeginGetRequestStream(null, null);
 
-            if (Timeout != Threading.Timeout.Infinite &&
-                !result.IsCompleted &&
-                (!result.AsyncWaitHandle.WaitOne(Timeout, false) || !result.IsCompleted))
-            {
+            if (
+                Timeout != Threading.Timeout.Infinite
+                && !result.IsCompleted
+                && (!result.AsyncWaitHandle.WaitOne(Timeout, false) || !result.IsCompleted)
+            ) {
                 _stream?.Close();
                 throw new WebException(SR.net_webstatus_Timeout, WebExceptionStatus.Timeout);
             }
@@ -271,10 +320,11 @@ namespace System.Net
             _syncHint = true;
             IAsyncResult result = BeginGetResponse(null, null);
 
-            if (Timeout != Threading.Timeout.Infinite &&
-                !result.IsCompleted &&
-                (!result.AsyncWaitHandle.WaitOne(Timeout, false) || !result.IsCompleted))
-            {
+            if (
+                Timeout != Threading.Timeout.Infinite
+                && !result.IsCompleted
+                && (!result.AsyncWaitHandle.WaitOne(Timeout, false) || !result.IsCompleted)
+            ) {
                 _response?.Close();
                 throw new WebException(SR.net_webstatus_Timeout, WebExceptionStatus.Timeout);
             }
@@ -284,7 +334,10 @@ namespace System.Net
 
         internal void UnblockReader()
         {
-            lock (this) { _blockReaderUntilRequestStreamDisposed?.Set(); }
+            lock (this)
+            {
+                _blockReaderUntilRequestStreamDisposed?.Set();
+            }
             _writing = false;
         }
 
@@ -313,14 +366,26 @@ namespace System.Net
     {
         private readonly FileWebRequest _request;
 
-        public WebFileStream(FileWebRequest request, string path, FileMode mode, FileAccess access, FileShare sharing) :
-            base(path, mode, access, sharing)
+        public WebFileStream(
+            FileWebRequest request,
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare sharing
+        ) : base(path, mode, access, sharing)
         {
             _request = request;
         }
 
-        public WebFileStream(FileWebRequest request, string path, FileMode mode, FileAccess access, FileShare sharing, int length, bool async) :
-            base(path, mode, access, sharing, length, async)
+        public WebFileStream(
+            FileWebRequest request,
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare sharing,
+            int length,
+            bool async
+        ) : base(path, mode, access, sharing, length, async)
         {
             _request = request;
         }
@@ -334,7 +399,11 @@ namespace System.Net
                     _request?.UnblockReader();
                 }
             }
-            finally { base.Dispose(disposing); }
+
+            finally
+            {
+                base.Dispose(disposing);
+            }
         }
 
         internal void Abort() => SafeFileHandle.Close();
@@ -367,8 +436,13 @@ namespace System.Net
             }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int size, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? callback,
+            object? state
+        ) {
             CheckAborted();
             try
             {
@@ -394,8 +468,13 @@ namespace System.Net
             }
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int size, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? callback,
+            object? state
+        ) {
             CheckAborted();
             try
             {
@@ -421,8 +500,12 @@ namespace System.Net
             }
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             CheckAborted();
             try
             {
@@ -435,8 +518,12 @@ namespace System.Net
             }
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             CheckAborted();
             try
             {
@@ -449,8 +536,11 @@ namespace System.Net
             }
         }
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
-        {
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        ) {
             CheckAborted();
             try
             {
@@ -467,7 +557,10 @@ namespace System.Net
         {
             if (_request.Aborted)
             {
-                throw new WebException(SR.Format(SR.net_requestaborted, WebExceptionStatus.RequestCanceled), WebExceptionStatus.RequestCanceled);
+                throw new WebException(
+                    SR.Format(SR.net_requestaborted, WebExceptionStatus.RequestCanceled),
+                    WebExceptionStatus.RequestCanceled
+                );
             }
         }
     }

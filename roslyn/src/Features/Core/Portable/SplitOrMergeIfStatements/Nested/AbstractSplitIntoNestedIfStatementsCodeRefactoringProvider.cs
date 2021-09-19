@@ -28,11 +28,13 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
         //            Console.WriteLine();
         //    }
 
-        protected sealed override int GetLogicalExpressionKind(ISyntaxKindsService syntaxKinds)
-            => syntaxKinds.LogicalAndExpression;
+        protected sealed override int GetLogicalExpressionKind(ISyntaxKindsService syntaxKinds) =>
+            syntaxKinds.LogicalAndExpression;
 
-        protected sealed override CodeAction CreateCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument, string ifKeywordText)
-            => new MyCodeAction(createChangedDocument, ifKeywordText);
+        protected sealed override CodeAction CreateCodeAction(
+            Func<CancellationToken, Task<Document>> createChangedDocument,
+            string ifKeywordText
+        ) => new MyCodeAction(createChangedDocument, ifKeywordText);
 
         protected sealed override Task<SyntaxNode> GetChangedRootAsync(
             Document document,
@@ -40,26 +42,39 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             SyntaxNode ifOrElseIf,
             SyntaxNode leftCondition,
             SyntaxNode rightCondition,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
             // If we have an else-if clause, we first convert it to an if statement. If there are any
             // else-if or else clauses following the outer if statement, they will be copied and placed inside too.
 
-            var innerIfStatement = ifGenerator.WithCondition(ifGenerator.ToIfStatement(ifOrElseIf), rightCondition);
-            var outerIfOrElseIf = ifGenerator.WithCondition(ifGenerator.WithStatementInBlock(ifOrElseIf, innerIfStatement), leftCondition);
+            var innerIfStatement = ifGenerator.WithCondition(
+                ifGenerator.ToIfStatement(ifOrElseIf),
+                rightCondition
+            );
+            var outerIfOrElseIf = ifGenerator.WithCondition(
+                ifGenerator.WithStatementInBlock(ifOrElseIf, innerIfStatement),
+                leftCondition
+            );
 
             return Task.FromResult(
-                root.ReplaceNode(ifOrElseIf, outerIfOrElseIf.WithAdditionalAnnotations(Formatter.Annotation)));
+                root.ReplaceNode(
+                    ifOrElseIf,
+                    outerIfOrElseIf.WithAdditionalAnnotations(Formatter.Annotation)
+                )
+            );
         }
 
         private sealed class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument, string ifKeywordText)
-                : base(string.Format(FeaturesResources.Split_into_nested_0_statements, ifKeywordText), createChangedDocument)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument,
+                string ifKeywordText
+            ) : base(
+                string.Format(FeaturesResources.Split_into_nested_0_statements, ifKeywordText),
+                createChangedDocument
+            ) { }
         }
     }
 }

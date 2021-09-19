@@ -21,20 +21,29 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestDynamicFileInfoProviderThatProducesFiles()
+        public TestDynamicFileInfoProviderThatProducesFiles() { }
+
+        event EventHandler<string> IDynamicFileInfoProvider.Updated
         {
+            add { }
+            remove { }
         }
 
-        event EventHandler<string> IDynamicFileInfoProvider.Updated { add { } remove { } }
-
-        public Task<DynamicFileInfo> GetDynamicFileInfoAsync(ProjectId projectId, string projectFilePath, string filePath, CancellationToken cancellationToken)
-        {
-            return Task.FromResult(new DynamicFileInfo(
-                filePath + ".fromdynamicfile",
-                SourceCodeKind.Regular,
-                new TestTextLoader(GetDynamicFileText(filePath)),
-                designTimeOnly: false,
-                new TestDocumentServiceProvider()));
+        public Task<DynamicFileInfo> GetDynamicFileInfoAsync(
+            ProjectId projectId,
+            string projectFilePath,
+            string filePath,
+            CancellationToken cancellationToken
+        ) {
+            return Task.FromResult(
+                new DynamicFileInfo(
+                    filePath + ".fromdynamicfile",
+                    SourceCodeKind.Regular,
+                    new TestTextLoader(GetDynamicFileText(filePath)),
+                    designTimeOnly: false,
+                    new TestDocumentServiceProvider()
+                )
+            );
         }
 
         public static string GetDynamicFileText(string filePath)
@@ -49,7 +58,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
         }
 
-        public Task RemoveDynamicFileInfoAsync(ProjectId projectId, string projectFilePath, string filePath, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public Task RemoveDynamicFileInfoAsync(
+            ProjectId projectId,
+            string projectFilePath,
+            string filePath,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
     }
 }

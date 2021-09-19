@@ -17,7 +17,12 @@ internal static partial class Interop
         // For disambiguation, see https://systemd.io/CGROUP_DELEGATION/#three-different-tree-setups-
 
         /// <summary>The supported versions of cgroup.</summary>
-        internal enum CGroupVersion { None, CGroup1, CGroup2 };
+        internal enum CGroupVersion
+        {
+            None,
+            CGroup1,
+            CGroup2
+        };
 
         /// <summary>Path to cgroup filesystem that tells us which version of cgroup is in use.</summary>
         private const string SysFsCgroupFileSystemPath = "/sys/fs/cgroup";
@@ -30,7 +35,9 @@ internal static partial class Interop
         internal static readonly CGroupVersion s_cgroupVersion = FindCGroupVersion();
 
         /// <summary>Path to the found cgroup memory limit path, or null if it couldn't be found.</summary>
-        internal static readonly string? s_cgroupMemoryLimitPath = FindCGroupMemoryLimitPath(s_cgroupVersion);
+        internal static readonly string? s_cgroupMemoryLimitPath = FindCGroupMemoryLimitPath(
+            s_cgroupVersion
+        );
 
         /// <summary>Tries to read the memory limit from the cgroup memory location.</summary>
         /// <param name="limit">The read limit, or 0 if it couldn't be read.</param>
@@ -39,8 +46,7 @@ internal static partial class Interop
         {
             string? path = s_cgroupMemoryLimitPath;
 
-            if (path != null &&
-                TryReadMemoryValueFromFile(path, out limit))
+            if (path != null && TryReadMemoryValueFromFile(path, out limit))
             {
                 return true;
             }
@@ -69,7 +75,6 @@ internal static partial class Interop
                         {
                             switch (bytes[bytesConsumed])
                             {
-
                                 case (byte)'k':
                                 case (byte)'K':
                                     multiplier = 1024;
@@ -90,7 +95,6 @@ internal static partial class Interop
                         result = checked(ulongValue * multiplier);
                         return true;
                     }
-
                     // 'max' is also a possible valid value
                     //
                     // Treat this as 'no memory limit' and let the caller
@@ -160,17 +164,30 @@ internal static partial class Interop
                 return null;
             }
 
-            if (TryFindHierarchyMount(cgroupVersion, subsystem, out string? hierarchyRoot, out string? hierarchyMount) &&
-                TryFindCGroupPathForSubsystem(cgroupVersion, subsystem, out string? cgroupPathRelativeToMount))
-            {
+            if (
+                TryFindHierarchyMount(
+                    cgroupVersion,
+                    subsystem,
+                    out string? hierarchyRoot,
+                    out string? hierarchyMount
+                )
+                && TryFindCGroupPathForSubsystem(
+                    cgroupVersion,
+                    subsystem,
+                    out string? cgroupPathRelativeToMount
+                )
+            ) {
                 return FindCGroupPath(hierarchyRoot, hierarchyMount, cgroupPathRelativeToMount);
             }
 
             return null;
         }
 
-        internal static string FindCGroupPath(string hierarchyRoot, string hierarchyMount, string cgroupPathRelativeToMount)
-        {
+        internal static string FindCGroupPath(
+            string hierarchyRoot,
+            string hierarchyMount,
+            string cgroupPathRelativeToMount
+        ) {
             // For a host cgroup, we need to append the relative path.
             // The root and cgroup path can share a common prefix of the path that should not be appended.
             // Example 1 (docker):
@@ -188,12 +205,17 @@ internal static partial class Interop
             // final cgroupPath:             /sys/fs/cgroup/cpu/my_named_cgroup
 
             int commonPathPrefixLength = hierarchyRoot.Length;
-            if ((commonPathPrefixLength == 1) || !cgroupPathRelativeToMount.StartsWith(hierarchyRoot, StringComparison.Ordinal))
-            {
+            if (
+                (commonPathPrefixLength == 1)
+                || !cgroupPathRelativeToMount.StartsWith(hierarchyRoot, StringComparison.Ordinal)
+            ) {
                 commonPathPrefixLength = 0;
             }
 
-            return string.Concat(hierarchyMount, cgroupPathRelativeToMount.AsSpan(commonPathPrefixLength));
+            return string.Concat(
+                hierarchyMount,
+                cgroupPathRelativeToMount.AsSpan(commonPathPrefixLength)
+            );
         }
 
         /// <summary>Find the cgroup mount information for the specified subsystem.</summary>
@@ -202,9 +224,19 @@ internal static partial class Interop
         /// <param name="root">The path of the directory in the filesystem which forms the root of this mount; null if not found.</param>
         /// <param name="path">The path of the mount point relative to the process's root directory; null if not found.</param>
         /// <returns>true if the mount was found; otherwise, null.</returns>
-        private static bool TryFindHierarchyMount(CGroupVersion cgroupVersion, string subsystem, [NotNullWhen(true)] out string? root, [NotNullWhen(true)] out string? path)
-        {
-            return TryFindHierarchyMount(cgroupVersion, ProcMountInfoFilePath, subsystem, out root, out path);
+        private static bool TryFindHierarchyMount(
+            CGroupVersion cgroupVersion,
+            string subsystem,
+            [NotNullWhen(true)] out string? root,
+            [NotNullWhen(true)] out string? path
+        ) {
+            return TryFindHierarchyMount(
+                cgroupVersion,
+                ProcMountInfoFilePath,
+                subsystem,
+                out root,
+                out path
+            );
         }
 
         /// <summary>Find the cgroup mount information for the specified subsystem.</summary>
@@ -214,8 +246,13 @@ internal static partial class Interop
         /// <param name="root">The path of the directory in the filesystem which forms the root of this mount; null if not found.</param>
         /// <param name="path">The path of the mount point relative to the process's root directory; null if not found.</param>
         /// <returns>true if the mount was found; otherwise, null.</returns>
-        internal static bool TryFindHierarchyMount(CGroupVersion cgroupVersion, string mountInfoFilePath, string subsystem, [NotNullWhen(true)] out string? root, [NotNullWhen(true)] out string? path)
-        {
+        internal static bool TryFindHierarchyMount(
+            CGroupVersion cgroupVersion,
+            string mountInfoFilePath,
+            string subsystem,
+            [NotNullWhen(true)] out string? root,
+            [NotNullWhen(true)] out string? path
+        ) {
             if (File.Exists(mountInfoFilePath))
             {
                 try
@@ -234,14 +271,19 @@ internal static partial class Interop
                             // the end of the optional values.
 
                             const string Separator = " - ";
-                            int endOfOptionalFields = line.IndexOf(Separator, StringComparison.Ordinal);
+                            int endOfOptionalFields = line.IndexOf(
+                                Separator,
+                                StringComparison.Ordinal
+                            );
                             if (endOfOptionalFields == -1)
                             {
                                 // Malformed line.
                                 continue;
                             }
 
-                            string postSeparatorLine = line.Substring(endOfOptionalFields + Separator.Length);
+                            string postSeparatorLine = line.Substring(
+                                endOfOptionalFields + Separator.Length
+                            );
                             string[] postSeparatorlineParts = postSeparatorLine.Split(' ');
                             if (postSeparatorlineParts.Length < 3)
                             {
@@ -251,8 +293,15 @@ internal static partial class Interop
 
                             if (cgroupVersion == CGroupVersion.CGroup1)
                             {
-                                bool validCGroup1Entry = ((postSeparatorlineParts[0] == "cgroup") &&
-                                        (Array.IndexOf(postSeparatorlineParts[2].Split(','), subsystem) >= 0));
+                                bool validCGroup1Entry = (
+                                    (postSeparatorlineParts[0] == "cgroup")
+                                    && (
+                                        Array.IndexOf(
+                                            postSeparatorlineParts[2].Split(','),
+                                            subsystem
+                                        ) >= 0
+                                    )
+                                );
                                 if (!validCGroup1Entry)
                                 {
                                     continue;
@@ -265,13 +314,11 @@ internal static partial class Interop
                                 {
                                     continue;
                                 }
-
                             }
                             else
                             {
                                 Debug.Fail($"Unexpected cgroup version \"{cgroupVersion}\"");
                             }
-
 
                             string[] lineParts = line.Substring(0, endOfOptionalFields).Split(' ');
                             root = lineParts[3];
@@ -297,9 +344,17 @@ internal static partial class Interop
         /// <param name="subsystem">The subsystem, e.g. "memory".</param>
         /// <param name="path">The found path, or null if it couldn't be found.</param>
         /// <returns>true if a cgroup path for the subsystem is found.</returns>
-        private static bool TryFindCGroupPathForSubsystem(CGroupVersion cgroupVersion, string subsystem, [NotNullWhen(true)] out string? path)
-        {
-            return TryFindCGroupPathForSubsystem(cgroupVersion, ProcCGroupFilePath, subsystem, out path);
+        private static bool TryFindCGroupPathForSubsystem(
+            CGroupVersion cgroupVersion,
+            string subsystem,
+            [NotNullWhen(true)] out string? path
+        ) {
+            return TryFindCGroupPathForSubsystem(
+                cgroupVersion,
+                ProcCGroupFilePath,
+                subsystem,
+                out path
+            );
         }
 
         /// <summary>Find the cgroup relative path for the specified subsystem.</summary>
@@ -308,8 +363,12 @@ internal static partial class Interop
         /// <param name="subsystem">The subsystem, e.g. "memory".</param>
         /// <param name="path">The found path, or null if it couldn't be found.</param>
         /// <returns>true if a cgroup path for the subsystem is found.</returns>
-        internal static bool TryFindCGroupPathForSubsystem(CGroupVersion cgroupVersion, string procCGroupFilePath, string subsystem, [NotNullWhen(true)] out string? path)
-        {
+        internal static bool TryFindCGroupPathForSubsystem(
+            CGroupVersion cgroupVersion,
+            string procCGroupFilePath,
+            string subsystem,
+            [NotNullWhen(true)] out string? path
+        ) {
             if (File.Exists(procCGroupFilePath))
             {
                 try

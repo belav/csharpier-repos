@@ -20,7 +20,6 @@ namespace System.Security.Cryptography
         ///   a signature output of 132 bytes.
         /// </remarks>
         IeeeP1363FixedFieldConcatenation,
-
         /// <summary>
         ///   The signature format from IETF RFC 3279, which produces a variably-sized signature.
         /// </summary>
@@ -38,12 +37,13 @@ namespace System.Security.Cryptography
     internal static class DSASignatureFormatHelpers
     {
         internal static bool IsKnownValue(this DSASignatureFormat signatureFormat) =>
-            signatureFormat >= DSASignatureFormat.IeeeP1363FixedFieldConcatenation &&
-            signatureFormat <= DSASignatureFormat.Rfc3279DerSequence;
+            signatureFormat >= DSASignatureFormat.IeeeP1363FixedFieldConcatenation
+            && signatureFormat <= DSASignatureFormat.Rfc3279DerSequence;
 
         internal static Exception CreateUnknownValueException(DSASignatureFormat signatureFormat) =>
             new ArgumentOutOfRangeException(
                 nameof(signatureFormat),
-                SR.Format(SR.Cryptography_UnknownSignatureFormat, signatureFormat));
+                SR.Format(SR.Cryptography_UnknownSignatureFormat, signatureFormat)
+            );
     }
 }

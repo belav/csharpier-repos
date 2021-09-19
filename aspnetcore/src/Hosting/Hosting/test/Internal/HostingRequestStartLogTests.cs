@@ -10,10 +10,18 @@ namespace Microsoft.AspNetCore.Hosting.Tests
     public class HostingRequestStartLogTests
     {
         [Theory]
-        [InlineData(",XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "Request starting GET 1.1 http://,XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//?query test 0")]
-        [InlineData(" XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "Request starting GET 1.1 http:// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//?query test 0")]
-        public void InvalidHttpContext_DoesNotThrowOnAccessingProperties(string input, string expected)
-        {
+        [InlineData(
+            ",XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+            "Request starting GET 1.1 http://,XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//?query test 0"
+        )]
+        [InlineData(
+            " XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+            "Request starting GET 1.1 http:// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//?query test 0"
+        )]
+        public void InvalidHttpContext_DoesNotThrowOnAccessingProperties(
+            string input,
+            string expected
+        ) {
             var mockRequest = new Mock<HttpRequest>();
             mockRequest.Setup(request => request.Protocol).Returns("GET");
             mockRequest.Setup(request => request.Method).Returns("1.1");

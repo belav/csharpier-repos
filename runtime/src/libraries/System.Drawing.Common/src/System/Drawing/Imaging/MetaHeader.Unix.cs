@@ -37,7 +37,6 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing.Imaging
 {
-
     [StructLayout(LayoutKind.Sequential, Pack = 2)]
     internal struct WmfMetaHeader
     {
@@ -58,12 +57,9 @@ namespace System.Drawing.Imaging
     [StructLayout(LayoutKind.Sequential)]
     public sealed class MetaHeader
     {
-
         private WmfMetaHeader wmf;
 
-        public MetaHeader()
-        {
-        }
+        public MetaHeader() { }
 
         internal MetaHeader(WmfMetaHeader header)
         {
@@ -76,7 +72,6 @@ namespace System.Drawing.Imaging
             wmf.max_record_size = header.max_record_size;
             wmf.num_of_params = header.num_of_params;
         }
-
 
         public short HeaderSize
         {

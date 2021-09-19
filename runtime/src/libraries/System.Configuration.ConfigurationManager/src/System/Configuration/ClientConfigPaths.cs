@@ -65,7 +65,10 @@ namespace System.Configuration
                     // used for local paths and "file://" for UNCs. Simply removing the prefix will make
                     // local paths relative on Unix (e.g. "file:///home" will become "home" instead of
                     // "/home").
-                    string configBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, exeAssembly.ManifestModule.Name);
+                    string configBasePath = Path.Combine(
+                        AppDomain.CurrentDomain.BaseDirectory,
+                        exeAssembly.ManifestModule.Name
+                    );
                     Uri uri = new Uri(configBasePath);
 
                     Debug.Assert(uri.IsFile);
@@ -96,8 +99,9 @@ namespace System.Configuration
                 {
                     // on Unix, we want to first append '.dll' extension and on Windows change '.exe' to '.dll'
                     // eventually, in ApplicationConfigUri we will get '{applicationName}.dll.config'
-                    applicationPath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?
-                        Path.ChangeExtension(ApplicationUri, ".dll") : ApplicationUri + ".dll";
+                    applicationPath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                        ? Path.ChangeExtension(ApplicationUri, ".dll")
+                        : ApplicationUri + ".dll";
                 }
 
                 ApplicationConfigUri = applicationPath + ConfigExtension;
@@ -105,14 +109,17 @@ namespace System.Configuration
 
             // In the case when exePath was explicitly supplied, we will not be able to
             // construct user.config paths, so quit here.
-            if (exePath != null) return;
+            if (exePath != null)
+                return;
 
             // Skip expensive initialization of user config file information if requested.
-            if (!_includesUserConfig) return;
+            if (!_includesUserConfig)
+                return;
 
             bool isHttp = StringUtil.StartsWithOrdinalIgnoreCase(ApplicationConfigUri, HttpUri);
             SetNamesAndVersion(exeAssembly, isHttp);
-            if (isHttp) return;
+            if (isHttp)
+                return;
 
             // Create a directory suffix for local and roaming config of three parts:
 
@@ -127,23 +134,28 @@ namespace System.Configuration
                 ? ApplicationUri.ToLowerInvariant()
                 : null;
             string hashSuffix = GetTypeAndHashSuffix(applicationUriLower, isSingleFile);
-            string part2 = !string.IsNullOrEmpty(namePrefix) && !string.IsNullOrEmpty(hashSuffix)
-                ? namePrefix + hashSuffix
-                : null;
+            string part2 =
+                !string.IsNullOrEmpty(namePrefix) && !string.IsNullOrEmpty(hashSuffix)
+                    ? namePrefix + hashSuffix
+                    : null;
 
             // (3) The product version
             string part3 = Validate(ProductVersion, limitSize: false);
 
             string dirSuffix = CombineIfValid(CombineIfValid(part1, part2), part3);
 
-            string roamingFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string roamingFolderPath = Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData
+            );
             if (Path.IsPathRooted(roamingFolderPath))
             {
                 RoamingConfigDirectory = CombineIfValid(roamingFolderPath, dirSuffix);
                 RoamingConfigFilename = CombineIfValid(RoamingConfigDirectory, UserConfigFilename);
             }
 
-            string localFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string localFolderPath = Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData
+            );
             if (Path.IsPathRooted(localFolderPath))
             {
                 LocalConfigDirectory = CombineIfValid(localFolderPath, dirSuffix);
@@ -189,7 +201,8 @@ namespace System.Configuration
 
                 result = s_current;
             }
-            else result = new ClientConfigPaths(exePath, includeUserConfig);
+            else
+                result = new ClientConfigPaths(exePath, includeUserConfig);
 
             return result;
         }
@@ -203,7 +216,8 @@ namespace System.Configuration
         // Combines path2 with path1 if possible, else returns null.
         private static string CombineIfValid(string path1, string path2)
         {
-            if ((path1 == null) || (path2 == null)) return null;
+            if ((path1 == null) || (path2 == null))
+                return null;
 
             try
             {
@@ -230,7 +244,12 @@ namespace System.Configuration
             if (assembly != null && !isSingleFile)
             {
                 AssemblyName assemblyName = assembly.GetName();
-                Uri codeBase = new Uri(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, assembly.ManifestModule.Name));
+                Uri codeBase = new Uri(
+                    Path.Combine(
+                        AppDomain.CurrentDomain.BaseDirectory,
+                        assembly.ManifestModule.Name
+                    )
+                );
 
                 try
                 {
@@ -266,7 +285,8 @@ namespace System.Configuration
                 catch (PlatformNotSupportedException) { }
             }
 
-            if (!string.IsNullOrEmpty(hash)) suffix = "_" + typeName + "_" + hash;
+            if (!string.IsNullOrEmpty(hash))
+                suffix = "_" + typeName + "_" + hash;
             return suffix;
         }
 
@@ -278,7 +298,10 @@ namespace System.Configuration
             // First try custom attributes on the assembly.
             if (exeAssembly != null)
             {
-                object[] attrs = exeAssembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+                object[] attrs = exeAssembly.GetCustomAttributes(
+                    typeof(AssemblyCompanyAttribute),
+                    false
+                );
                 if ((attrs != null) && (attrs.Length > 0))
                 {
                     _companyName = ((AssemblyCompanyAttribute)attrs[0]).Company?.Trim();
@@ -294,10 +317,14 @@ namespace System.Configuration
             }
 
             // If we couldn't get custom attributes, fall back on the entry type namespace
-            if (!isHttp &&
-                (string.IsNullOrEmpty(_companyName) || string.IsNullOrEmpty(ProductName) ||
-                string.IsNullOrEmpty(ProductVersion)))
-            {
+            if (
+                !isHttp
+                && (
+                    string.IsNullOrEmpty(_companyName)
+                    || string.IsNullOrEmpty(ProductName)
+                    || string.IsNullOrEmpty(ProductVersion)
+                )
+            ) {
                 if (exeAssembly != null)
                 {
                     MethodInfo entryPoint = exeAssembly.EntryPoint;
@@ -308,7 +335,8 @@ namespace System.Configuration
                 }
 
                 string ns = null;
-                if (mainType != null) ns = mainType.Namespace;
+                if (mainType != null)
+                    ns = mainType.Namespace;
 
                 if (string.IsNullOrEmpty(ProductName))
                 {
@@ -316,17 +344,21 @@ namespace System.Configuration
                     if (ns != null)
                     {
                         int lastDot = ns.LastIndexOf('.');
-                        if ((lastDot != -1) && (lastDot < ns.Length - 1)) ProductName = ns.Substring(lastDot + 1);
-                        else ProductName = ns;
+                        if ((lastDot != -1) && (lastDot < ns.Length - 1))
+                            ProductName = ns.Substring(lastDot + 1);
+                        else
+                            ProductName = ns;
 
                         ProductName = ProductName.Trim();
                     }
 
                     // Try the type of the entry assembly
-                    if (string.IsNullOrEmpty(ProductName) && (mainType != null)) ProductName = mainType.Name.Trim();
+                    if (string.IsNullOrEmpty(ProductName) && (mainType != null))
+                        ProductName = mainType.Name.Trim();
 
                     // give up, return empty string
-                    if (ProductName == null) ProductName = string.Empty;
+                    if (ProductName == null)
+                        ProductName = string.Empty;
                 }
 
                 if (string.IsNullOrEmpty(_companyName))
@@ -341,12 +373,14 @@ namespace System.Configuration
                     }
 
                     // If that doesn't work, use the product name
-                    if (string.IsNullOrEmpty(_companyName)) _companyName = ProductName;
+                    if (string.IsNullOrEmpty(_companyName))
+                        _companyName = ProductName;
                 }
             }
 
             // Desperate measures for product version - assume 1.0
-            if (string.IsNullOrEmpty(ProductVersion)) ProductVersion = "1.0.0.0";
+            if (string.IsNullOrEmpty(ProductVersion))
+                ProductVersion = "1.0.0.0";
         }
 
         // Makes the passed in string suitable to use as a path name by replacing illegal characters
@@ -356,19 +390,22 @@ namespace System.Configuration
         {
             string validated = str;
 
-            if (string.IsNullOrEmpty(validated)) return validated;
+            if (string.IsNullOrEmpty(validated))
+                return validated;
 
             // First replace all illegal characters with underscores
-            foreach (char c in Path.GetInvalidFileNameChars()) validated = validated.Replace(c, '_');
+            foreach (char c in Path.GetInvalidFileNameChars())
+                validated = validated.Replace(c, '_');
 
             // Replace all spaces with underscores
             validated = validated.Replace(' ', '_');
 
             if (limitSize)
             {
-                validated = validated.Length > MaxLengthToUse
-                    ? validated.Substring(0, MaxLengthToUse)
-                    : validated;
+                validated =
+                    validated.Length > MaxLengthToUse
+                        ? validated.Substring(0, MaxLengthToUse)
+                        : validated;
             }
 
             return validated;

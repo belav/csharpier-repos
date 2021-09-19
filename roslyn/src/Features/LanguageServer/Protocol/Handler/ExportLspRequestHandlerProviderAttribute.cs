@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     {
         public string? LanguageName { get; }
 
-        public ExportLspRequestHandlerProviderAttribute(string? languageName = null) : base(typeof(AbstractRequestHandlerProvider))
+        public ExportLspRequestHandlerProviderAttribute(string? languageName = null)
+            : base(typeof(AbstractRequestHandlerProvider))
         {
             LanguageName = languageName;
         }

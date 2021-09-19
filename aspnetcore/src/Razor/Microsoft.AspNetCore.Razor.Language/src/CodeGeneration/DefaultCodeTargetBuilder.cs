@@ -8,8 +8,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 {
     internal class DefaultCodeTargetBuilder : CodeTargetBuilder
     {
-        public DefaultCodeTargetBuilder(RazorCodeDocument codeDocument, RazorCodeGenerationOptions options)
-        {
+        public DefaultCodeTargetBuilder(
+            RazorCodeDocument codeDocument,
+            RazorCodeGenerationOptions options
+        ) {
             CodeDocument = codeDocument;
             Options = options;
 

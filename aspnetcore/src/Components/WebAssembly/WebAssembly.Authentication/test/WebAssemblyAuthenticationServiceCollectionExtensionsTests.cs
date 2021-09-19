@@ -34,7 +34,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             builder.Services.AddApiAuthorization();
             var host = builder.Build();
 
-            host.Services.GetRequiredService<IRemoteAuthenticationService<RemoteAuthenticationState>>();
+            host.Services.GetRequiredService<
+                IRemoteAuthenticationService<RemoteAuthenticationState>
+            >();
         }
 
         [Fact]
@@ -44,7 +46,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             builder.Services.AddApiAuthorization();
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
             var paths = options.Value.AuthenticationPaths;
 
@@ -61,14 +65,18 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             Assert.Equal("authentication/logged-out", paths.LogOutSucceededPath);
 
             var user = options.Value.UserOptions;
-            Assert.Equal("Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests", user.AuthenticationType);
+            Assert.Equal(
+                "Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests",
+                user.AuthenticationType
+            );
             Assert.Equal("scope", user.ScopeClaim);
             Assert.Equal("role", user.RoleClaim);
             Assert.Equal("name", user.NameClaim);
 
             Assert.Equal(
                 "_configuration/Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests",
-                options.Value.ProviderOptions.ConfigurationEndpoint);
+                options.Value.ProviderOptions.ConfigurationEndpoint
+            );
         }
 
         [Fact]
@@ -76,24 +84,32 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         {
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
             var calls = 0;
-            builder.Services.AddApiAuthorization(options =>
-            {
-                calls++;
-            });
+            builder.Services.AddApiAuthorization(
+                options =>
+                {
+                    calls++;
+                }
+            );
 
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
             var user = options.Value.UserOptions;
-            Assert.Equal("Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests", user.AuthenticationType);
+            Assert.Equal(
+                "Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests",
+                user.AuthenticationType
+            );
 
             // Make sure that the defaults are applied on this overload
             Assert.Equal("role", user.RoleClaim);
 
             Assert.Equal(
                 "_configuration/Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests",
-                options.Value.ProviderOptions.ConfigurationEndpoint);
+                options.Value.ProviderOptions.ConfigurationEndpoint
+            );
 
             Assert.Equal(1, calls);
         }
@@ -107,7 +123,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
             var user = options.Value.UserOptions;
             // Make sure that the defaults are applied on this overload
@@ -115,11 +133,20 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
             Assert.Equal(
                 "_configuration/Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests",
-                options.Value.ProviderOptions.ConfigurationEndpoint);
+                options.Value.ProviderOptions.ConfigurationEndpoint
+            );
 
-            var authenticationService = host.Services.GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
+            var authenticationService = host.Services.GetService<
+                IRemoteAuthenticationService<TestAuthenticationState>
+            >();
             Assert.NotNull(authenticationService);
-            Assert.IsType<RemoteAuthenticationService<TestAuthenticationState, RemoteUserAccount, ApiAuthorizationProviderOptions>>(authenticationService);
+            Assert.IsType<
+                RemoteAuthenticationService<
+                    TestAuthenticationState,
+                    RemoteUserAccount,
+                    ApiAuthorizationProviderOptions
+                >
+            >(authenticationService);
 
             Assert.Equal(1, calls);
         }
@@ -132,7 +159,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
             var user = options.Value.UserOptions;
             // Make sure that the defaults are applied on this overload
@@ -140,11 +169,20 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
             Assert.Equal(
                 "_configuration/Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests",
-                options.Value.ProviderOptions.ConfigurationEndpoint);
+                options.Value.ProviderOptions.ConfigurationEndpoint
+            );
 
-            var authenticationService = host.Services.GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
+            var authenticationService = host.Services.GetService<
+                IRemoteAuthenticationService<TestAuthenticationState>
+            >();
             Assert.NotNull(authenticationService);
-            Assert.IsType<RemoteAuthenticationService<TestAuthenticationState, RemoteUserAccount, ApiAuthorizationProviderOptions>>(authenticationService);
+            Assert.IsType<
+                RemoteAuthenticationService<
+                    TestAuthenticationState,
+                    RemoteUserAccount,
+                    ApiAuthorizationProviderOptions
+                >
+            >(authenticationService);
         }
 
         [Fact]
@@ -152,11 +190,15 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         {
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
             var calls = 0;
-            builder.Services.AddApiAuthorization<TestAuthenticationState, TestAccount>(options => calls++);
+            builder.Services.AddApiAuthorization<TestAuthenticationState, TestAccount>(
+                options => calls++
+            );
 
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
             var user = options.Value.UserOptions;
             // Make sure that the defaults are applied on this overload
@@ -164,11 +206,20 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
             Assert.Equal(
                 "_configuration/Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests",
-                options.Value.ProviderOptions.ConfigurationEndpoint);
+                options.Value.ProviderOptions.ConfigurationEndpoint
+            );
 
-            var authenticationService = host.Services.GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
+            var authenticationService = host.Services.GetService<
+                IRemoteAuthenticationService<TestAuthenticationState>
+            >();
             Assert.NotNull(authenticationService);
-            Assert.IsType<RemoteAuthenticationService<TestAuthenticationState, TestAccount, ApiAuthorizationProviderOptions>>(authenticationService);
+            Assert.IsType<
+                RemoteAuthenticationService<
+                    TestAuthenticationState,
+                    TestAccount,
+                    ApiAuthorizationProviderOptions
+                >
+            >(authenticationService);
 
             Assert.Equal(1, calls);
         }
@@ -181,7 +232,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
             var user = options.Value.UserOptions;
             // Make sure that the defaults are applied on this overload
@@ -189,40 +242,53 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
             Assert.Equal(
                 "_configuration/Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests",
-                options.Value.ProviderOptions.ConfigurationEndpoint);
+                options.Value.ProviderOptions.ConfigurationEndpoint
+            );
 
-            var authenticationService = host.Services.GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
+            var authenticationService = host.Services.GetService<
+                IRemoteAuthenticationService<TestAuthenticationState>
+            >();
             Assert.NotNull(authenticationService);
-            Assert.IsType<RemoteAuthenticationService<TestAuthenticationState, TestAccount, ApiAuthorizationProviderOptions>>(authenticationService);
+            Assert.IsType<
+                RemoteAuthenticationService<
+                    TestAuthenticationState,
+                    TestAccount,
+                    ApiAuthorizationProviderOptions
+                >
+            >(authenticationService);
         }
 
         [Fact]
         public void ApiAuthorizationOptions_DefaultsCanBeOverriden()
         {
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
-            builder.Services.AddApiAuthorization(options =>
-            {
-                options.AuthenticationPaths.LogInPath = "a";
-                options.AuthenticationPaths.LogInCallbackPath = "b";
-                options.AuthenticationPaths.LogInFailedPath = "c";
-                options.AuthenticationPaths.RegisterPath = "d";
-                options.AuthenticationPaths.ProfilePath = "e";
-                options.AuthenticationPaths.RemoteRegisterPath = "f";
-                options.AuthenticationPaths.RemoteProfilePath = "g";
-                options.AuthenticationPaths.LogOutPath = "h";
-                options.AuthenticationPaths.LogOutCallbackPath = "i";
-                options.AuthenticationPaths.LogOutFailedPath = "j";
-                options.AuthenticationPaths.LogOutSucceededPath = "k";
-                options.UserOptions.AuthenticationType = "l";
-                options.UserOptions.ScopeClaim = "m";
-                options.UserOptions.RoleClaim = "n";
-                options.UserOptions.NameClaim = "o";
-                options.ProviderOptions.ConfigurationEndpoint = "p";
-            });
+            builder.Services.AddApiAuthorization(
+                options =>
+                {
+                    options.AuthenticationPaths.LogInPath = "a";
+                    options.AuthenticationPaths.LogInCallbackPath = "b";
+                    options.AuthenticationPaths.LogInFailedPath = "c";
+                    options.AuthenticationPaths.RegisterPath = "d";
+                    options.AuthenticationPaths.ProfilePath = "e";
+                    options.AuthenticationPaths.RemoteRegisterPath = "f";
+                    options.AuthenticationPaths.RemoteProfilePath = "g";
+                    options.AuthenticationPaths.LogOutPath = "h";
+                    options.AuthenticationPaths.LogOutCallbackPath = "i";
+                    options.AuthenticationPaths.LogOutFailedPath = "j";
+                    options.AuthenticationPaths.LogOutSucceededPath = "k";
+                    options.UserOptions.AuthenticationType = "l";
+                    options.UserOptions.ScopeClaim = "m";
+                    options.UserOptions.RoleClaim = "n";
+                    options.UserOptions.NameClaim = "o";
+                    options.ProviderOptions.ConfigurationEndpoint = "p";
+                }
+            );
 
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
             var paths = options.Value.AuthenticationPaths;
 
@@ -251,11 +317,15 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         public void OidcOptions_ConfigurationDefaultsGetApplied()
         {
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
-            builder.Services.Replace(ServiceDescriptor.Singleton<NavigationManager, TestNavigationManager>());
+            builder.Services.Replace(
+                ServiceDescriptor.Singleton<NavigationManager, TestNavigationManager>()
+            );
             builder.Services.AddOidcAuthentication(options => { });
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
 
             var paths = options.Value.AuthenticationPaths;
 
@@ -282,42 +352,54 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             Assert.Null(provider.ClientId);
             Assert.Equal(new[] { "openid", "profile" }, provider.DefaultScopes);
             Assert.Equal(new Dictionary<string, string>(), provider.AdditionalProviderParameters);
-            Assert.Equal("https://www.example.com/base/authentication/login-callback", provider.RedirectUri);
-            Assert.Equal("https://www.example.com/base/authentication/logout-callback", provider.PostLogoutRedirectUri);
+            Assert.Equal(
+                "https://www.example.com/base/authentication/login-callback",
+                provider.RedirectUri
+            );
+            Assert.Equal(
+                "https://www.example.com/base/authentication/logout-callback",
+                provider.PostLogoutRedirectUri
+            );
         }
 
         [Fact]
         public void OidcOptions_DefaultsCanBeOverriden()
         {
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
-            builder.Services.AddOidcAuthentication(options =>
-            {
-                options.AuthenticationPaths.LogInPath = "a";
-                options.AuthenticationPaths.LogInCallbackPath = "b";
-                options.AuthenticationPaths.LogInFailedPath = "c";
-                options.AuthenticationPaths.RegisterPath = "d";
-                options.AuthenticationPaths.ProfilePath = "e";
-                options.AuthenticationPaths.RemoteRegisterPath = "f";
-                options.AuthenticationPaths.RemoteProfilePath = "g";
-                options.AuthenticationPaths.LogOutPath = "h";
-                options.AuthenticationPaths.LogOutCallbackPath = "i";
-                options.AuthenticationPaths.LogOutFailedPath = "j";
-                options.AuthenticationPaths.LogOutSucceededPath = "k";
-                options.UserOptions.AuthenticationType = "l";
-                options.UserOptions.ScopeClaim = "m";
-                options.UserOptions.RoleClaim = "n";
-                options.UserOptions.NameClaim = "o";
-                options.ProviderOptions.Authority = "p";
-                options.ProviderOptions.ClientId = "q";
-                options.ProviderOptions.DefaultScopes.Clear();
-                options.ProviderOptions.AdditionalProviderParameters.Add("r", "s");
-                options.ProviderOptions.RedirectUri = "https://www.example.com/base/custom-login";
-                options.ProviderOptions.PostLogoutRedirectUri = "https://www.example.com/base/custom-logout";
-            });
+            builder.Services.AddOidcAuthentication(
+                options =>
+                {
+                    options.AuthenticationPaths.LogInPath = "a";
+                    options.AuthenticationPaths.LogInCallbackPath = "b";
+                    options.AuthenticationPaths.LogInFailedPath = "c";
+                    options.AuthenticationPaths.RegisterPath = "d";
+                    options.AuthenticationPaths.ProfilePath = "e";
+                    options.AuthenticationPaths.RemoteRegisterPath = "f";
+                    options.AuthenticationPaths.RemoteProfilePath = "g";
+                    options.AuthenticationPaths.LogOutPath = "h";
+                    options.AuthenticationPaths.LogOutCallbackPath = "i";
+                    options.AuthenticationPaths.LogOutFailedPath = "j";
+                    options.AuthenticationPaths.LogOutSucceededPath = "k";
+                    options.UserOptions.AuthenticationType = "l";
+                    options.UserOptions.ScopeClaim = "m";
+                    options.UserOptions.RoleClaim = "n";
+                    options.UserOptions.NameClaim = "o";
+                    options.ProviderOptions.Authority = "p";
+                    options.ProviderOptions.ClientId = "q";
+                    options.ProviderOptions.DefaultScopes.Clear();
+                    options.ProviderOptions.AdditionalProviderParameters.Add("r", "s");
+                    options.ProviderOptions.RedirectUri =
+                        "https://www.example.com/base/custom-login";
+                    options.ProviderOptions.PostLogoutRedirectUri =
+                        "https://www.example.com/base/custom-logout";
+                }
+            );
 
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
 
             var paths = options.Value.AuthenticationPaths;
 
@@ -343,9 +425,15 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             Assert.Equal("p", provider.Authority);
             Assert.Equal("q", provider.ClientId);
             Assert.Equal(Array.Empty<string>(), provider.DefaultScopes);
-            Assert.Equal(new Dictionary<string, string>() { { "r", "s" } }, provider.AdditionalProviderParameters);
+            Assert.Equal(
+                new Dictionary<string, string>() { { "r", "s" } },
+                provider.AdditionalProviderParameters
+            );
             Assert.Equal("https://www.example.com/base/custom-login", provider.RedirectUri);
-            Assert.Equal("https://www.example.com/base/custom-logout", provider.PostLogoutRedirectUri);
+            Assert.Equal(
+                "https://www.example.com/base/custom-logout",
+                provider.PostLogoutRedirectUri
+            );
         }
 
         [Fact]
@@ -355,11 +443,15 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             var calls = 0;
 
             builder.Services.AddOidcAuthentication(options => calls++);
-            builder.Services.Replace(ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager()));
+            builder.Services.Replace(
+                ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
+            );
 
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
             Assert.Equal("name", options.Value.UserOptions.NameClaim);
 
             Assert.Equal(1, calls);
@@ -371,20 +463,37 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
             var calls = 0;
 
-            builder.Services.AddOidcAuthentication<TestAuthenticationState>(options => options.ProviderOptions.Authority = (++calls).ToString(CultureInfo.InvariantCulture));
-            builder.Services.Replace(ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager()));
+            builder.Services.AddOidcAuthentication<TestAuthenticationState>(
+                options =>
+                    options.ProviderOptions.Authority = (++calls).ToString(
+                        CultureInfo.InvariantCulture
+                    )
+            );
+            builder.Services.Replace(
+                ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
+            );
 
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
             // Make sure options are applied
             Assert.Equal("name", options.Value.UserOptions.NameClaim);
 
             Assert.Equal("1", options.Value.ProviderOptions.Authority);
 
-            var authenticationService = host.Services.GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
+            var authenticationService = host.Services.GetService<
+                IRemoteAuthenticationService<TestAuthenticationState>
+            >();
             Assert.NotNull(authenticationService);
-            Assert.IsType<RemoteAuthenticationService<TestAuthenticationState, RemoteUserAccount, OidcProviderOptions>>(authenticationService);
+            Assert.IsType<
+                RemoteAuthenticationService<
+                    TestAuthenticationState,
+                    RemoteUserAccount,
+                    OidcProviderOptions
+                >
+            >(authenticationService);
         }
 
         [Fact]
@@ -393,20 +502,37 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
             var calls = 0;
 
-            builder.Services.AddOidcAuthentication<TestAuthenticationState, TestAccount>(options => options.ProviderOptions.Authority = (++calls).ToString(CultureInfo.InvariantCulture));
-            builder.Services.Replace(ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager()));
+            builder.Services.AddOidcAuthentication<TestAuthenticationState, TestAccount>(
+                options =>
+                    options.ProviderOptions.Authority = (++calls).ToString(
+                        CultureInfo.InvariantCulture
+                    )
+            );
+            builder.Services.Replace(
+                ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
+            );
 
             var host = builder.Build();
 
-            var options = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>>();
+            var options = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
             // Make sure options are applied
             Assert.Equal("name", options.Value.UserOptions.NameClaim);
 
             Assert.Equal("1", options.Value.ProviderOptions.Authority);
 
-            var authenticationService = host.Services.GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
+            var authenticationService = host.Services.GetService<
+                IRemoteAuthenticationService<TestAuthenticationState>
+            >();
             Assert.NotNull(authenticationService);
-            Assert.IsType<RemoteAuthenticationService<TestAuthenticationState, TestAccount, OidcProviderOptions>>(authenticationService);
+            Assert.IsType<
+                RemoteAuthenticationService<
+                    TestAuthenticationState,
+                    TestAccount,
+                    OidcProviderOptions
+                >
+            >(authenticationService);
         }
 
         [Fact]
@@ -416,22 +542,33 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
             var calls = 0;
 
-            builder.Services.AddOidcAuthentication<TestAuthenticationState, TestAccount>(options => { });
-            builder.Services.Replace(ServiceDescriptor.Scoped(typeof(NavigationManager), _ =>
-            {
-                calls++;
-                return new TestNavigationManager();
-            }));
+            builder.Services.AddOidcAuthentication<TestAuthenticationState, TestAccount>(
+                options => { }
+            );
+            builder.Services.Replace(
+                ServiceDescriptor.Scoped(
+                    typeof(NavigationManager),
+                    _ =>
+                    {
+                        calls++;
+                        return new TestNavigationManager();
+                    }
+                )
+            );
 
             var host = builder.Build();
 
             using var scope = host.Services.CreateScope();
 
             // from the root scope.
-            var rootOptions = host.Services.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>>();
+            var rootOptions = host.Services.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
 
             // from the created scope
-            var scopedOptions = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>>();
+            var scopedOptions = scope.ServiceProvider.GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
 
             // we should have 2 navigation managers. One in the root scope, and one in the created scope.
             Assert.Equal(2, calls);
@@ -444,7 +581,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                 Initialize("https://www.example.com/base/", "https://www.example.com/base/counter");
             }
 
-            protected override void NavigateToCore(string uri, bool forceLoad) => throw new System.NotImplementedException();
+            protected override void NavigateToCore(string uri, bool forceLoad) =>
+                throw new System.NotImplementedException();
         }
 
         private class TestAuthenticationState : RemoteAuthenticationState

@@ -20,8 +20,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// Creates a new <see cref="BadRequestObjectResult"/> instance.
         /// </summary>
         /// <param name="error">Contains the errors to be returned to the client.</param>
-        public BadRequestObjectResult([ActionResultObjectValue] object? error)
-            : base(error)
+        public BadRequestObjectResult([ActionResultObjectValue] object? error) : base(error)
         {
             StatusCode = DefaultStatusCode;
         }
@@ -30,8 +29,9 @@ namespace Microsoft.AspNetCore.Mvc
         /// Creates a new <see cref="BadRequestObjectResult"/> instance.
         /// </summary>
         /// <param name="modelState"><see cref="ModelStateDictionary"/> containing the validation errors.</param>
-        public BadRequestObjectResult([ActionResultObjectValue] ModelStateDictionary modelState)
-            : base(new SerializableError(modelState))
+        public BadRequestObjectResult(
+            [ActionResultObjectValue] ModelStateDictionary modelState
+        ) : base(new SerializableError(modelState))
         {
             if (modelState == null)
             {

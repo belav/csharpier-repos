@@ -18,8 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class EnumHasFlagTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _methodInfo
-            = typeof(Enum).GetRequiredRuntimeMethod(nameof(Enum.HasFlag), new[] { typeof(Enum) });
+        private static readonly MethodInfo _methodInfo = typeof(Enum).GetRequiredRuntimeMethod(
+            nameof(Enum.HasFlag),
+            new[] { typeof(Enum) }
+        );
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -44,21 +46,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            if (Equals(method, _methodInfo)
-                && instance != null)
+            if (Equals(method, _methodInfo) && instance != null)
             {
                 var argument = arguments[0];
                 return instance.Type != argument.Type
                     ? null
                     // TODO: If argument is SelectExpression, we need to clone it.
                     // See issue#24460
-                    : (SqlExpression)_sqlExpressionFactory.Equal(_sqlExpressionFactory.And(instance, argument), argument);
+                    : (SqlExpression)_sqlExpressionFactory.Equal(
+                          _sqlExpressionFactory.And(instance, argument),
+                          argument
+                      );
             }
 
             return null;

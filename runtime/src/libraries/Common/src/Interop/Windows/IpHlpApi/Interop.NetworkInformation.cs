@@ -61,9 +61,14 @@ internal static partial class Interop
             internal IPAddress MarshalIPAddress()
             {
                 // Determine the address family used to create the IPAddress.
-                AddressFamily family = (addressLength > Internals.SocketAddress.IPv4AddressSize)
-                    ? AddressFamily.InterNetworkV6 : AddressFamily.InterNetwork;
-                Internals.SocketAddress sockAddress = new Internals.SocketAddress(family, addressLength);
+                AddressFamily family =
+                    (addressLength > Internals.SocketAddress.IPv4AddressSize)
+                        ? AddressFamily.InterNetworkV6
+                        : AddressFamily.InterNetwork;
+                Internals.SocketAddress sockAddress = new Internals.SocketAddress(
+                    family,
+                    addressLength
+                );
                 Marshal.Copy(address, sockAddress.Buffer, 0, addressLength);
 
                 return sockAddress.GetIPAddress();
@@ -89,7 +94,9 @@ internal static partial class Interop
 
                 while (ptr != IntPtr.Zero)
                 {
-                    IpAdapterAddress addressStructure = Marshal.PtrToStructure<IpAdapterAddress>(ptr);
+                    IpAdapterAddress addressStructure = Marshal.PtrToStructure<IpAdapterAddress>(
+                        ptr
+                    );
                     IPAddress address = addressStructure.address.MarshalIPAddress();
                     addressList.InternalAdd(address);
 
@@ -99,15 +106,20 @@ internal static partial class Interop
                 return addressList;
             }
 
-            internal static IPAddressInformationCollection MarshalIpAddressInformationCollection(IntPtr ptr)
-            {
+            internal static IPAddressInformationCollection MarshalIpAddressInformationCollection(
+                IntPtr ptr
+            ) {
                 IPAddressInformationCollection addressList = new IPAddressInformationCollection();
 
                 while (ptr != IntPtr.Zero)
                 {
-                    IpAdapterAddress addressStructure = Marshal.PtrToStructure<IpAdapterAddress>(ptr);
+                    IpAdapterAddress addressStructure = Marshal.PtrToStructure<IpAdapterAddress>(
+                        ptr
+                    );
                     IPAddress address = addressStructure.address.MarshalIPAddress();
-                    addressList.InternalAdd(new SystemIPAddressInformation(address, addressStructure.flags));
+                    addressList.InternalAdd(
+                        new SystemIPAddressInformation(address, addressStructure.flags)
+                    );
 
                     ptr = addressStructure.next;
                 }
@@ -183,7 +195,6 @@ internal static partial class Interop
             internal byte[] dhcpv6ClientDuid;
             internal uint dhcpv6ClientDuidLength;
             internal uint dhcpV6Iaid;
-
             /* Windows 2008 +
                   PIP_ADAPTER_DNS_SUFFIX             FirstDnsSuffix;
              * */
@@ -227,7 +238,7 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         internal struct IpAddrString
         {
-            internal IntPtr Next;      /* struct _IpAddressList* */
+            internal IntPtr Next; /* struct _IpAddressList* */
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
             internal string IpAddress;
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
@@ -444,8 +455,10 @@ internal static partial class Interop
             internal TcpState state;
             internal uint owningPid;
 
-            internal ReadOnlySpan<byte> localAddrAsSpan => MemoryMarshal.CreateSpan(ref localAddr[0], 16);
-            internal ReadOnlySpan<byte> remoteAddrAsSpan => MemoryMarshal.CreateSpan(ref remoteAddr[0], 16);
+            internal ReadOnlySpan<byte> localAddrAsSpan =>
+                MemoryMarshal.CreateSpan(ref localAddr[0], 16);
+            internal ReadOnlySpan<byte> remoteAddrAsSpan =>
+                MemoryMarshal.CreateSpan(ref remoteAddr[0], 16);
         }
 
         internal enum TcpTableClass
@@ -505,7 +518,8 @@ internal static partial class Interop
             internal byte ignoreLocalPort4;
             internal uint owningPid;
 
-            internal ReadOnlySpan<byte> localAddrAsSpan => MemoryMarshal.CreateSpan(ref localAddr[0], 16);
+            internal ReadOnlySpan<byte> localAddrAsSpan =>
+                MemoryMarshal.CreateSpan(ref localAddr[0], 16);
         }
 
         [DllImport(Interop.Libraries.IpHlpApi)]
@@ -514,7 +528,8 @@ internal static partial class Interop
             uint flags,
             IntPtr pReserved,
             IntPtr adapterAddresses,
-            ref uint outBufLen);
+            ref uint outBufLen
+        );
 
         [DllImport(Interop.Libraries.IpHlpApi)]
         internal static extern uint GetBestInterfaceEx(byte[] ipAddress, out int index);
@@ -523,36 +538,64 @@ internal static partial class Interop
         internal static extern uint GetIfEntry2(ref MibIfRow2 pIfRow);
 
         [DllImport(Interop.Libraries.IpHlpApi)]
-        internal static extern uint GetIpStatisticsEx(out MibIpStats statistics, AddressFamily family);
+        internal static extern uint GetIpStatisticsEx(
+            out MibIpStats statistics,
+            AddressFamily family
+        );
 
         [DllImport(Interop.Libraries.IpHlpApi)]
-        internal static extern uint GetTcpStatisticsEx(out MibTcpStats statistics, AddressFamily family);
+        internal static extern uint GetTcpStatisticsEx(
+            out MibTcpStats statistics,
+            AddressFamily family
+        );
 
         [DllImport(Interop.Libraries.IpHlpApi)]
-        internal static extern uint GetUdpStatisticsEx(out MibUdpStats statistics, AddressFamily family);
+        internal static extern uint GetUdpStatisticsEx(
+            out MibUdpStats statistics,
+            AddressFamily family
+        );
 
         [DllImport(Interop.Libraries.IpHlpApi)]
         internal static extern uint GetIcmpStatistics(out MibIcmpInfo statistics);
 
         [DllImport(Interop.Libraries.IpHlpApi)]
-        internal static extern uint GetIcmpStatisticsEx(out MibIcmpInfoEx statistics, AddressFamily family);
+        internal static extern uint GetIcmpStatisticsEx(
+            out MibIcmpInfoEx statistics,
+            AddressFamily family
+        );
 
         [DllImport(Interop.Libraries.IpHlpApi)]
         internal static extern uint GetTcpTable(IntPtr pTcpTable, ref uint dwOutBufLen, bool order);
 
         [DllImport(Interop.Libraries.IpHlpApi)]
-        internal static extern uint GetExtendedTcpTable(IntPtr pTcpTable, ref uint dwOutBufLen, bool order,
-                                                        uint IPVersion, TcpTableClass tableClass, uint reserved);
+        internal static extern uint GetExtendedTcpTable(
+            IntPtr pTcpTable,
+            ref uint dwOutBufLen,
+            bool order,
+            uint IPVersion,
+            TcpTableClass tableClass,
+            uint reserved
+        );
 
         [DllImport(Interop.Libraries.IpHlpApi)]
         internal static extern uint GetUdpTable(IntPtr pUdpTable, ref uint dwOutBufLen, bool order);
 
         [DllImport(Interop.Libraries.IpHlpApi)]
-        internal static extern uint GetExtendedUdpTable(IntPtr pUdpTable, ref uint dwOutBufLen, bool order,
-                                                        uint IPVersion, UdpTableClass tableClass, uint reserved);
+        internal static extern uint GetExtendedUdpTable(
+            IntPtr pUdpTable,
+            ref uint dwOutBufLen,
+            bool order,
+            uint IPVersion,
+            UdpTableClass tableClass,
+            uint reserved
+        );
 
         [DllImport(Interop.Libraries.IpHlpApi)]
-        internal static extern uint GetPerAdapterInfo(uint IfIndex, IntPtr pPerAdapterInfo, ref uint pOutBufLen);
+        internal static extern uint GetPerAdapterInfo(
+            uint IfIndex,
+            IntPtr pPerAdapterInfo,
+            ref uint pOutBufLen
+        );
 
         [DllImport(Interop.Libraries.IpHlpApi)]
         internal static extern void FreeMibTable(IntPtr handle);
@@ -566,6 +609,7 @@ internal static partial class Interop
             out SafeFreeMibTable table,
             delegate* unmanaged<IntPtr, IntPtr, void> callback,
             IntPtr context,
-            out SafeCancelMibChangeNotify notificationHandle);
+            out SafeCancelMibChangeNotify notificationHandle
+        );
     }
 }

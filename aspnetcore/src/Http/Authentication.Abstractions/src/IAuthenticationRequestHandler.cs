@@ -21,5 +21,4 @@ namespace Microsoft.AspNetCore.Authentication
         /// <returns><see langword="true" /> if request processing should stop.</returns>
         Task<bool> HandleRequestAsync();
     }
-
 }

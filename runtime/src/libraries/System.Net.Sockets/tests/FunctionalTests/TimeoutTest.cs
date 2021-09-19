@@ -12,8 +12,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void GetAndSet_Success()
         {
-            using (Socket socket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                Socket socket = new Socket(
+                    AddressFamily.InterNetworkV6,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 Assert.Equal(0, socket.ReceiveTimeout);
 
                 socket.ReceiveTimeout = 100;
@@ -27,8 +32,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SocketSendTimeout_GetAndSet_Success()
         {
-            using (Socket socket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                Socket socket = new Socket(
+                    AddressFamily.InterNetworkV6,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 Assert.Equal(0, socket.SendTimeout);
 
                 socket.SendTimeout = 100;
@@ -49,9 +59,20 @@ namespace System.Net.Sockets.Tests
         [InlineData(false)]
         public void ReceiveTimesOut_Throws(bool forceNonBlocking)
         {
-            using (Socket localSocket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp))
-            using (Socket remoteSocket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                Socket localSocket = new Socket(
+                    AddressFamily.InterNetworkV6,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                Socket remoteSocket = new Socket(
+                    AddressFamily.InterNetworkV6,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 int port = localSocket.BindToAnonymousPort(IPAddress.IPv6Loopback);
                 localSocket.Listen(1);
                 IAsyncResult localAsync = localSocket.BeginAccept(null, null);
@@ -67,10 +88,12 @@ namespace System.Net.Sockets.Tests
 
                 long start = Environment.TickCount64;
 
-                SocketException sockEx = Assert.Throws<SocketException>(() =>
-                {
-                    acceptedSocket.Receive(new byte[1]);
-                });
+                SocketException sockEx = Assert.Throws<SocketException>(
+                    () =>
+                    {
+                        acceptedSocket.Receive(new byte[1]);
+                    }
+                );
 
                 long elapsed = Environment.TickCount64 - start;
                 Assert.Equal(SocketError.TimedOut, sockEx.SocketErrorCode);
@@ -88,9 +111,20 @@ namespace System.Net.Sockets.Tests
         [InlineData(false)]
         public void SendTimesOut_Throws(bool forceNonBlocking)
         {
-            using (Socket localSocket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp))
-            using (Socket remoteSocket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                Socket localSocket = new Socket(
+                    AddressFamily.InterNetworkV6,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                Socket remoteSocket = new Socket(
+                    AddressFamily.InterNetworkV6,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 int port = localSocket.BindToAnonymousPort(IPAddress.IPv6Loopback);
                 localSocket.Listen(1);
                 IAsyncResult localAsync = localSocket.BeginAccept(null, null);
@@ -108,14 +142,18 @@ namespace System.Net.Sockets.Tests
 
                 // Force Send to timeout by filling the kernel buffer.
                 var sendBuffer = new byte[16 * 1024];
-                SocketException sockEx = Assert.Throws<SocketException>((Action) (() =>
-                {
-                    while (true)
-                    {
-                        start = Environment.TickCount64;
-                        acceptedSocket.Send(sendBuffer);
-                    }
-                }));
+                SocketException sockEx = Assert.Throws<SocketException>(
+                    (Action)(
+                        () =>
+                        {
+                            while (true)
+                            {
+                                start = Environment.TickCount64;
+                                acceptedSocket.Send(sendBuffer);
+                            }
+                        }
+                    )
+                );
 
                 long elapsed = Environment.TickCount64 - start;
                 Assert.Equal(SocketError.TimedOut, sockEx.SocketErrorCode);

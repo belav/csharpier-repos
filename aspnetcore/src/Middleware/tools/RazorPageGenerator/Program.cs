@@ -18,7 +18,8 @@ namespace RazorPageGenerator
             if (args == null || args.Length < 1)
             {
                 Console.WriteLine("Invalid argument(s).");
-                Console.WriteLine(@"Usage:
+                Console.WriteLine(
+                    @"Usage:
     dotnet razorpagegenerator <root-namespace-of-views> [directory path [#line path prefix]]
 Examples:
   dotnet razorpagegenerator Microsoft.AspNetCore.Diagnostics.RazorViews
@@ -27,13 +28,15 @@ Examples:
     - process all views in ""Views"" subfolders of c:\project directory; use filename in #line directives
   dotnet razorpagegenerator Microsoft.AspNetCore.Diagnostics.RazorViews c:\project ../Views/
     - process all views in ""Views"" subfolders of c:\project directory; use ""../Views/{filename}"" in line directives
-");
+"
+                );
 
                 return 1;
             }
 
             var rootNamespace = args[0];
-            var targetProjectDirectory = args.Length > 1 ? args[1] : Directory.GetCurrentDirectory();
+            var targetProjectDirectory =
+                args.Length > 1 ? args[1] : Directory.GetCurrentDirectory();
             var projectEngine = CreateProjectEngine(rootNamespace, targetProjectDirectory);
 
             var physicalPathPrefix = args.Length > 2 ? args[2] : string.Empty;
@@ -50,45 +53,61 @@ Examples:
             return 0;
         }
 
-        public static RazorProjectEngine CreateProjectEngine(string rootNamespace, string targetProjectDirectory, Action<RazorProjectEngineBuilder> configure = null)
-        {
+        public static RazorProjectEngine CreateProjectEngine(
+            string rootNamespace,
+            string targetProjectDirectory,
+            Action<RazorProjectEngineBuilder> configure = null
+        ) {
             var fileSystem = RazorProjectFileSystem.Create(targetProjectDirectory);
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem, builder =>
-            {
-                builder
-                    .SetNamespace(rootNamespace)
-                    .SetBaseType("Microsoft.Extensions.RazorViews.BaseView")
-                    .ConfigureClass((document, @class) =>
-                    {
-                        @class.ClassName = Path.GetFileNameWithoutExtension(document.Source.FilePath);
-                        @class.Modifiers.Clear();
-                        @class.Modifiers.Add("internal");
-                    });
-
-                SectionDirective.Register(builder);
-
-                builder.Features.Add(new SuppressChecksumOptionsFeature());
-                builder.Features.Add(new SuppressMetadataAttributesFeature());
-
-                if (configure != null)
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                fileSystem,
+                builder =>
                 {
-                    configure(builder);
-                }
+                    builder.SetNamespace(rootNamespace)
+                        .SetBaseType("Microsoft.Extensions.RazorViews.BaseView")
+                        .ConfigureClass(
+                            (document, @class) =>
+                            {
+                                @class.ClassName = Path.GetFileNameWithoutExtension(
+                                    document.Source.FilePath
+                                );
+                                @class.Modifiers.Clear();
+                                @class.Modifiers.Add("internal");
+                            }
+                        );
 
-                builder.AddDefaultImports(@"
+                    SectionDirective.Register(builder);
+
+                    builder.Features.Add(new SuppressChecksumOptionsFeature());
+                    builder.Features.Add(new SuppressMetadataAttributesFeature());
+
+                    if (configure != null)
+                    {
+                        configure(builder);
+                    }
+
+                    builder.AddDefaultImports(
+                        @"
 @using System
 @using System.Threading.Tasks
-");
-            });
+"
+                    );
+                }
+            );
             return projectEngine;
         }
 
         public static IList<RazorPageGeneratorResult> MainCore(
             RazorProjectEngine projectEngine,
             string targetProjectDirectory,
-            string physicalPathPrefix)
-        {
-            var viewDirectories = Directory.EnumerateDirectories(targetProjectDirectory, "Views", SearchOption.AllDirectories);
+            string physicalPathPrefix
+        ) {
+            var viewDirectories = Directory.EnumerateDirectories(
+                targetProjectDirectory,
+                "Views",
+                SearchOption.AllDirectories
+            );
             var fileCount = 0;
 
             var results = new List<RazorPageGeneratorResult>();
@@ -96,7 +115,8 @@ Examples:
             {
                 Console.WriteLine();
                 Console.WriteLine("  Generating code files for views in {0}", viewDir);
-                var viewDirPath = viewDir.Substring(targetProjectDirectory.Length).Replace('\\', '/');
+                var viewDirPath = viewDir.Substring(targetProjectDirectory.Length)
+                    .Replace('\\', '/');
                 var cshtmlFiles = projectEngine.FileSystem.EnumerateItems(viewDirPath);
 
                 if (!cshtmlFiles.Any())
@@ -120,18 +140,26 @@ Examples:
         private static RazorPageGeneratorResult GenerateCodeFile(
             RazorProjectEngine projectEngine,
             RazorProjectItem projectItem,
-            string physicalPathPrefix)
-        {
-            var projectItemWrapper = new FileSystemRazorProjectItemWrapper(projectItem, physicalPathPrefix);
+            string physicalPathPrefix
+        ) {
+            var projectItemWrapper = new FileSystemRazorProjectItemWrapper(
+                projectItem,
+                physicalPathPrefix
+            );
             var codeDocument = projectEngine.Process(projectItemWrapper);
             var cSharpDocument = codeDocument.GetCSharpDocument();
             if (cSharpDocument.Diagnostics.Any())
             {
                 var diagnostics = string.Join(Environment.NewLine, cSharpDocument.Diagnostics);
-                Console.WriteLine($"One or more parse errors encountered. This will not prevent the generator from continuing: {Environment.NewLine}{diagnostics}.");
+                Console.WriteLine(
+                    $"One or more parse errors encountered. This will not prevent the generator from continuing: {Environment.NewLine}{diagnostics}."
+                );
             }
 
-            var generatedCodeFilePath = Path.ChangeExtension(projectItem.PhysicalPath, ".Designer.cs");
+            var generatedCodeFilePath = Path.ChangeExtension(
+                projectItem.PhysicalPath,
+                ".Designer.cs"
+            );
             return new RazorPageGeneratorResult
             {
                 FilePath = generatedCodeFilePath,
@@ -139,7 +167,9 @@ Examples:
             };
         }
 
-        private class SuppressChecksumOptionsFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
+        private class SuppressChecksumOptionsFeature
+            : RazorEngineFeatureBase,
+              IConfigureRazorCodeGenerationOptionsFeature
         {
             public int Order { get; set; }
 
@@ -154,7 +184,9 @@ Examples:
             }
         }
 
-        private class SuppressMetadataAttributesFeature : RazorEngineFeatureBase, IConfigureRazorCodeGenerationOptionsFeature
+        private class SuppressMetadataAttributesFeature
+            : RazorEngineFeatureBase,
+              IConfigureRazorCodeGenerationOptionsFeature
         {
             public int Order { get; set; }
 
@@ -173,8 +205,10 @@ Examples:
         {
             private readonly RazorProjectItem _source;
 
-            public FileSystemRazorProjectItemWrapper(RazorProjectItem item, string physicalPathPrefix)
-            {
+            public FileSystemRazorProjectItemWrapper(
+                RazorProjectItem item,
+                string physicalPathPrefix
+            ) {
                 _source = item;
 
                 // Mask the full name since we don't want a developer's local file paths to be committed.
@@ -205,20 +239,38 @@ Examples:
                 var startIndex = 0;
                 while (startIndex < cshtmlContent.Length)
                 {
-                    startIndex = cshtmlContent.IndexOf(startMatch, startIndex, StringComparison.Ordinal);
+                    startIndex = cshtmlContent.IndexOf(
+                        startMatch,
+                        startIndex,
+                        StringComparison.Ordinal
+                    );
                     if (startIndex == -1)
                     {
                         break;
                     }
-                    var endIndex = cshtmlContent.IndexOf(endMatch, startIndex, StringComparison.Ordinal);
+                    var endIndex = cshtmlContent.IndexOf(
+                        endMatch,
+                        startIndex,
+                        StringComparison.Ordinal
+                    );
                     if (endIndex == -1)
                     {
-                        throw new InvalidOperationException($"Invalid include file format in {_source.PhysicalPath}. Usage example: <%$ include: ErrorPage.js %>");
+                        throw new InvalidOperationException(
+                            $"Invalid include file format in {_source.PhysicalPath}. Usage example: <%$ include: ErrorPage.js %>"
+                        );
                     }
-                    var includeFileName = cshtmlContent.Substring(startIndex + startMatch.Length, endIndex - (startIndex + startMatch.Length));
+                    var includeFileName = cshtmlContent.Substring(
+                        startIndex + startMatch.Length,
+                        endIndex - (startIndex + startMatch.Length)
+                    );
                     Console.WriteLine("      Inlining file {0}", includeFileName);
-                    var includeFileContent = File.ReadAllText(System.IO.Path.Combine(basePath, includeFileName));
-                    cshtmlContent = cshtmlContent.Substring(0, startIndex) + includeFileContent + cshtmlContent.Substring(endIndex + endMatch.Length);
+                    var includeFileContent = File.ReadAllText(
+                        System.IO.Path.Combine(basePath, includeFileName)
+                    );
+                    cshtmlContent =
+                        cshtmlContent.Substring(0, startIndex)
+                        + includeFileContent
+                        + cshtmlContent.Substring(endIndex + endMatch.Length);
                     startIndex = startIndex + includeFileContent.Length;
                 }
                 return cshtmlContent;

@@ -68,7 +68,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 this.alignment = (ulong)alignment;
             }
 
-            public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outArrayPtr =>
+                Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -83,7 +84,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<UInt64>>() / sizeof(UInt64);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<UInt64>>() / sizeof(UInt64);
 
         private DataTable _dataTable;
 
@@ -102,9 +104,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario));
 
-            var result = AdvSimd.Arm64.DuplicateToVector128(
-                (UInt64)31
-            );
+            var result = AdvSimd.Arm64.DuplicateToVector128((UInt64)31);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -114,10 +114,11 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(nameof(AdvSimd.Arm64.DuplicateToVector128), new Type[] { typeof(UInt64) })
-                                     .Invoke(null, new object[] {
-                                        (UInt64)31
-                                     });
+            var result = typeof(AdvSimd.Arm64).GetMethod(
+                    nameof(AdvSimd.Arm64.DuplicateToVector128),
+                    new Type[] { typeof(UInt64) }
+                )
+                .Invoke(null, new object[] { (UInt64)31 });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt64>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -147,7 +148,11 @@ namespace JIT.HardwareIntrinsics.Arm
         private void ValidateResult(void* result, [CallerMemberName] string method = "")
         {
             UInt64[] outArray = new UInt64[RetElementCount];
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt64, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt64, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
             ValidateResult(outArray, method);
         }
 
@@ -173,8 +178,12 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.DuplicateToVector128)}<UInt64>(31): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.DuplicateToVector128)}<UInt64>(31): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

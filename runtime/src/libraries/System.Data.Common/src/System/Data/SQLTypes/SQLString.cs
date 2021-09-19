@@ -14,7 +14,9 @@ namespace System.Data.SqlTypes
 {
     // Options that are used in comparison
     [Flags]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public enum SqlCompareOptions
     {
         None = 0x00000000,
@@ -32,7 +34,9 @@ namespace System.Data.SqlTypes
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     [XmlSchemaProvider("GetXsdType")]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public struct SqlString : INullable, IComparable, IXmlSerializable
     {
         private string? m_value; // Do not rename (binary serialization)
@@ -69,20 +73,25 @@ namespace System.Data.SqlTypes
         public static readonly int BinarySort2 = 0x4000;
 
         private const SqlCompareOptions s_iDefaultFlag =
-                    SqlCompareOptions.IgnoreCase | SqlCompareOptions.IgnoreKanaType |
-                    SqlCompareOptions.IgnoreWidth;
+            SqlCompareOptions.IgnoreCase
+            | SqlCompareOptions.IgnoreKanaType
+            | SqlCompareOptions.IgnoreWidth;
         private const CompareOptions s_iValidCompareOptionMask =
-                    CompareOptions.IgnoreCase | CompareOptions.IgnoreWidth |
-                    CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreKanaType;
+            CompareOptions.IgnoreCase
+            | CompareOptions.IgnoreWidth
+            | CompareOptions.IgnoreNonSpace
+            | CompareOptions.IgnoreKanaType;
 
         internal const SqlCompareOptions s_iValidSqlCompareOptionMask =
-                    SqlCompareOptions.IgnoreCase | SqlCompareOptions.IgnoreWidth |
-                    SqlCompareOptions.IgnoreNonSpace | SqlCompareOptions.IgnoreKanaType |
-                    SqlCompareOptions.BinarySort | SqlCompareOptions.BinarySort2;
+            SqlCompareOptions.IgnoreCase
+            | SqlCompareOptions.IgnoreWidth
+            | SqlCompareOptions.IgnoreNonSpace
+            | SqlCompareOptions.IgnoreKanaType
+            | SqlCompareOptions.BinarySort
+            | SqlCompareOptions.BinarySort2;
 
         internal const int s_lcidUSEnglish = 0x00000409;
         private const int s_lcidBinary = 0x00008200;
-
 
         // constructor
         // construct a Null
@@ -99,8 +108,14 @@ namespace System.Data.SqlTypes
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
-        public SqlString(int lcid, SqlCompareOptions compareOptions, byte[]? data, int index, int count, bool fUnicode)
-        {
+        public SqlString(
+            int lcid,
+            SqlCompareOptions compareOptions,
+            byte[]? data,
+            int index,
+            int count,
+            bool fUnicode
+        ) {
             m_lcid = lcid;
             ValidateSqlCompareOptions(compareOptions);
             m_flag = compareOptions;
@@ -135,26 +150,29 @@ namespace System.Data.SqlTypes
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
-        public SqlString(int lcid, SqlCompareOptions compareOptions, byte[] data, bool fUnicode)
-        : this(lcid, compareOptions, data, 0, data.Length, fUnicode)
-        {
-        }
+        public SqlString(
+            int lcid,
+            SqlCompareOptions compareOptions,
+            byte[] data,
+            bool fUnicode
+        ) : this(lcid, compareOptions, data, 0, data.Length, fUnicode) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
-        public SqlString(int lcid, SqlCompareOptions compareOptions, byte[]? data, int index, int count)
-            : this(lcid, compareOptions, data, index, count, true)
-        {
-        }
+        public SqlString(
+            int lcid,
+            SqlCompareOptions compareOptions,
+            byte[]? data,
+            int index,
+            int count
+        ) : this(lcid, compareOptions, data, index, count, true) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
         public SqlString(int lcid, SqlCompareOptions compareOptions, byte[] data)
-            : this(lcid, compareOptions, data, 0, data.Length, true)
-        {
-        }
+            : this(lcid, compareOptions, data, 0, data.Length, true) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
@@ -180,19 +198,20 @@ namespace System.Data.SqlTypes
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
-        public SqlString(string? data, int lcid) : this(data, lcid, s_iDefaultFlag)
-        {
-        }
+        public SqlString(string? data, int lcid) : this(data, lcid, s_iDefaultFlag) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
-        public SqlString(string? data) : this(data, System.Globalization.CultureInfo.CurrentCulture.LCID, s_iDefaultFlag)
-        {
-        }
+        public SqlString(string? data)
+            : this(data, System.Globalization.CultureInfo.CurrentCulture.LCID, s_iDefaultFlag) { }
 
-        private SqlString(int lcid, SqlCompareOptions compareOptions, string? data, CompareInfo? cmpInfo)
-        {
+        private SqlString(
+            int lcid,
+            SqlCompareOptions compareOptions,
+            string? data,
+            CompareInfo? cmpInfo
+        ) {
             m_lcid = lcid;
             ValidateSqlCompareOptions(compareOptions);
             m_flag = compareOptions;
@@ -209,7 +228,6 @@ namespace System.Data.SqlTypes
                 m_fNotNull = true;
             }
         }
-
 
         // INullable
         /// <summary>
@@ -349,8 +367,12 @@ namespace System.Data.SqlTypes
             if (x.m_lcid != y.m_lcid || x.m_flag != y.m_flag)
                 throw new SqlTypeException(SQLResource.ConcatDiffCollationMessage);
 
-            return new SqlString(x.m_lcid, x.m_flag, x.m_value + y.m_value,
-                    (x.m_cmpInfo == null) ? y.m_cmpInfo : x.m_cmpInfo);
+            return new SqlString(
+                x.m_lcid,
+                x.m_flag,
+                x.m_value + y.m_value,
+                (x.m_cmpInfo == null) ? y.m_cmpInfo : x.m_cmpInfo
+            );
         }
 
         // StringCompare: Common compare function which is used by Compare and CompareTo
@@ -359,16 +381,22 @@ namespace System.Data.SqlTypes
         //  Pre-requisite: the null condition of the both string needs to be checked and handled by the caller of this function
         private static int StringCompare(SqlString x, SqlString y)
         {
-            Debug.Assert(!x.IsNull && !y.IsNull,
-                           "!x.IsNull && !y.IsNull", "Null condition should be handled by the caller of StringCompare method");
+            Debug.Assert(
+                !x.IsNull && !y.IsNull,
+                "!x.IsNull && !y.IsNull",
+                "Null condition should be handled by the caller of StringCompare method"
+            );
 
             if (x.m_lcid != y.m_lcid || x.m_flag != y.m_flag)
                 throw new SqlTypeException(SQLResource.CompareDiffCollationMessage);
 
             x.SetCompareInfo();
             y.SetCompareInfo();
-            Debug.Assert(x.FBinarySort() || (x.m_cmpInfo != null && y.m_cmpInfo != null),
-                           "x.FBinarySort() || (x.m_cmpInfo != null && y.m_cmpInfo != null)", "");
+            Debug.Assert(
+                x.FBinarySort() || (x.m_cmpInfo != null && y.m_cmpInfo != null),
+                "x.FBinarySort() || (x.m_cmpInfo != null && y.m_cmpInfo != null)",
+                ""
+            );
 
             int iCmpResult;
 
@@ -394,7 +422,15 @@ namespace System.Data.SqlTypes
 
                 CompareOptions options = CompareOptionsFromSqlCompareOptions(x.m_flag);
 
-                iCmpResult = x.m_cmpInfo!.Compare(x.m_value, 0, cwchX, y.m_value, 0, cwchY, options);
+                iCmpResult = x.m_cmpInfo!.Compare(
+                    x.m_value,
+                    0,
+                    cwchX,
+                    y.m_value,
+                    0,
+                    cwchY,
+                    options
+                );
             }
 
             return iCmpResult;
@@ -439,8 +475,6 @@ namespace System.Data.SqlTypes
 
             return new SqlBoolean(fResult);
         }
-
-
 
         // Implicit conversions
 
@@ -664,9 +698,6 @@ namespace System.Data.SqlTypes
             return (SqlGuid)this;
         }
 
-
-
-
         // Utility functions and constants
 
         private static void ValidateSqlCompareOptions(SqlCompareOptions compareOptions)
@@ -675,13 +706,17 @@ namespace System.Data.SqlTypes
                 throw new ArgumentOutOfRangeException(nameof(compareOptions));
         }
 
-        public static CompareOptions CompareOptionsFromSqlCompareOptions(SqlCompareOptions compareOptions)
-        {
+        public static CompareOptions CompareOptionsFromSqlCompareOptions(
+            SqlCompareOptions compareOptions
+        ) {
             CompareOptions options = CompareOptions.None;
 
             ValidateSqlCompareOptions(compareOptions);
 
-            if ((compareOptions & (SqlCompareOptions.BinarySort | SqlCompareOptions.BinarySort2)) != 0)
+            if (
+                (compareOptions & (SqlCompareOptions.BinarySort | SqlCompareOptions.BinarySort2))
+                != 0
+            )
                 throw ADP.ArgumentOutOfRange(nameof(compareOptions));
             else
             {
@@ -700,7 +735,10 @@ namespace System.Data.SqlTypes
 
         private bool FBinarySort()
         {
-            return (!IsNull && (m_flag & (SqlCompareOptions.BinarySort | SqlCompareOptions.BinarySort2)) != 0);
+            return (
+                !IsNull
+                && (m_flag & (SqlCompareOptions.BinarySort | SqlCompareOptions.BinarySort2)) != 0
+            );
         }
 
         //    Wide-character string comparison for Binary Unicode Collation
@@ -918,7 +956,10 @@ namespace System.Data.SqlTypes
             return SqlBinary.HashByteArray(rgbSortKey, rgbSortKey.Length);
         }
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
@@ -953,7 +994,6 @@ namespace System.Data.SqlTypes
             return new XmlQualifiedName("string", XmlSchema.Namespace);
         }
     } // SqlString
-
     /*
         internal struct SLocaleMapItem {
             public int      lcid;           // the primary key, not nullable

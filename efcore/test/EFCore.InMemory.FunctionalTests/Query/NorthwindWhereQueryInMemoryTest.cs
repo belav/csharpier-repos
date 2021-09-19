@@ -9,14 +9,16 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindWhereQueryInMemoryTest : NorthwindWhereQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
+    public class NorthwindWhereQueryInMemoryTest
+        : NorthwindWhereQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
     {
         public NorthwindWhereQueryInMemoryTest(
             NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
 #pragma warning disable IDE0060 // Remove unused parameter
-            ITestOutputHelper testOutputHelper)
+            ITestOutputHelper testOutputHelper
+        )
 #pragma warning restore IDE0060 // Remove unused parameter
-            : base(fixture)
+          : base(fixture)
         {
             //TestLoggerFactory.TestOutputHelper = testOutputHelper;
         }
@@ -31,7 +33,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         // Casting int to object to string is invalid for InMemory
-        public override Task Like_with_non_string_column_using_double_cast(bool async)
-            => Task.CompletedTask;
+        public override Task Like_with_non_string_column_using_double_cast(bool async) =>
+            Task.CompletedTask;
     }
 }

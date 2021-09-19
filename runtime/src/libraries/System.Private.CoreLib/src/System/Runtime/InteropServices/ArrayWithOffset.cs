@@ -20,12 +20,16 @@ namespace System.Runtime.InteropServices
             int totalSize = 0;
             if (array != null)
             {
-                if (!(array is Array arrayObj) || (arrayObj.Rank != 1) || !Marshal.IsPinnable(arrayObj))
-                {
+                if (
+                    !(array is Array arrayObj)
+                    || (arrayObj.Rank != 1)
+                    || !Marshal.IsPinnable(arrayObj)
+                ) {
                     throw new ArgumentException(SR.ArgumentException_NotIsomorphic);
                 }
 
-                nuint nativeTotalSize = (nuint)arrayObj.LongLength * (nuint)arrayObj.GetElementSize();
+                nuint nativeTotalSize =
+                    (nuint)arrayObj.LongLength * (nuint)arrayObj.GetElementSize();
                 if (nativeTotalSize > MaxSizeForInterop)
                 {
                     throw new ArgumentException(SR.Argument_StructArrayTooLarge);

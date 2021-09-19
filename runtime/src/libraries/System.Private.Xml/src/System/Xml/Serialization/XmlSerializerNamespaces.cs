@@ -23,10 +23,7 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSerializerNamespaces()
-        {
-        }
-
+        public XmlSerializerNamespaces() { }
 
         /// <internalonly/>
         /// <devdoc>

@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
     /// </summary>
-    public class RelationalQueryTranslationPostprocessorFactory : IQueryTranslationPostprocessorFactory
+    public class RelationalQueryTranslationPostprocessorFactory
+        : IQueryTranslationPostprocessorFactory
     {
         private readonly QueryTranslationPostprocessorDependencies _dependencies;
         private readonly RelationalQueryTranslationPostprocessorDependencies _relationalDependencies;
@@ -32,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public RelationalQueryTranslationPostprocessorFactory(
             QueryTranslationPostprocessorDependencies dependencies,
-            RelationalQueryTranslationPostprocessorDependencies relationalDependencies)
-        {
+            RelationalQueryTranslationPostprocessorDependencies relationalDependencies
+        ) {
             _dependencies = dependencies;
             _relationalDependencies = relationalDependencies;
         }
@@ -44,14 +45,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual QueryTranslationPostprocessor Create(QueryCompilationContext queryCompilationContext)
-        {
+        public virtual QueryTranslationPostprocessor Create(
+            QueryCompilationContext queryCompilationContext
+        ) {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
             return new RelationalQueryTranslationPostprocessor(
                 _dependencies,
                 _relationalDependencies,
-                queryCompilationContext);
+                queryCompilationContext
+            );
         }
     }
 }

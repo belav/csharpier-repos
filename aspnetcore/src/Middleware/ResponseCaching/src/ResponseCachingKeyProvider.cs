@@ -21,8 +21,10 @@ namespace Microsoft.AspNetCore.ResponseCaching
         private readonly ObjectPool<StringBuilder> _builderPool;
         private readonly ResponseCachingOptions _options;
 
-        internal ResponseCachingKeyProvider(ObjectPoolProvider poolProvider, IOptions<ResponseCachingOptions> options)
-        {
+        internal ResponseCachingKeyProvider(
+            ObjectPoolProvider poolProvider,
+            IOptions<ResponseCachingOptions> options
+        ) {
             if (poolProvider == null)
             {
                 throw new ArgumentNullException(nameof(poolProvider));
@@ -54,8 +56,7 @@ namespace Microsoft.AspNetCore.ResponseCaching
 
             try
             {
-                builder
-                    .AppendUpperInvariant(request.Method)
+                builder.AppendUpperInvariant(request.Method)
                     .Append(KeyDelimiter)
                     .AppendUpperInvariant(request.Scheme)
                     .Append(KeyDelimiter)
@@ -63,19 +64,17 @@ namespace Microsoft.AspNetCore.ResponseCaching
 
                 if (_options.UseCaseSensitivePaths)
                 {
-                    builder
-                        .Append(request.PathBase.Value)
-                        .Append(request.Path.Value);
+                    builder.Append(request.PathBase.Value).Append(request.Path.Value);
                 }
                 else
                 {
-                    builder
-                        .AppendUpperInvariant(request.PathBase.Value)
+                    builder.AppendUpperInvariant(request.PathBase.Value)
                         .AppendUpperInvariant(request.Path.Value);
                 }
 
                 return builder.ToString();
             }
+
             finally
             {
                 _builderPool.Return(builder);
@@ -93,11 +92,15 @@ namespace Microsoft.AspNetCore.ResponseCaching
             var varyByRules = context.CachedVaryByRules;
             if (varyByRules == null)
             {
-                throw new InvalidOperationException($"{nameof(CachedVaryByRules)} must not be null on the {nameof(ResponseCachingContext)}");
+                throw new InvalidOperationException(
+                    $"{nameof(CachedVaryByRules)} must not be null on the {nameof(ResponseCachingContext)}"
+                );
             }
 
-            if (StringValues.IsNullOrEmpty(varyByRules.Headers) && StringValues.IsNullOrEmpty(varyByRules.QueryKeys))
-            {
+            if (
+                StringValues.IsNullOrEmpty(varyByRules.Headers)
+                && StringValues.IsNullOrEmpty(varyByRules.QueryKeys)
+            ) {
                 return varyByRules.VaryByKeyPrefix;
             }
 
@@ -114,17 +117,14 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 if (headersCount > 0)
                 {
                     // Append a group separator for the header segment of the cache key
-                    builder.Append(KeyDelimiter)
-                        .Append('H');
+                    builder.Append(KeyDelimiter).Append('H');
 
                     var requestHeaders = context.HttpContext.Request.Headers;
                     for (var i = 0; i < headersCount; i++)
                     {
                         var header = varyByRules!.Headers[i];
                         var headerValues = requestHeaders[header];
-                        builder.Append(KeyDelimiter)
-                            .Append(header)
-                            .Append('=');
+                        builder.Append(KeyDelimiter).Append(header).Append('=');
 
                         var headerValuesArray = headerValues.ToArray();
                         Array.Sort(headerValuesArray, StringComparer.Ordinal);
@@ -140,11 +140,12 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 if (varyByRules?.QueryKeys.Count > 0)
                 {
                     // Append a group separator for the query key segment of the cache key
-                    builder.Append(KeyDelimiter)
-                        .Append('Q');
+                    builder.Append(KeyDelimiter).Append('Q');
 
-                    if (varyByRules.QueryKeys.Count == 1 && string.Equals(varyByRules.QueryKeys[0], "*", StringComparison.Ordinal))
-                    {
+                    if (
+                        varyByRules.QueryKeys.Count == 1
+                        && string.Equals(varyByRules.QueryKeys[0], "*", StringComparison.Ordinal)
+                    ) {
                         // Vary by all available query keys
                         var queryArray = context.HttpContext.Request.Query.ToArray();
                         // Query keys are aggregated case-insensitively whereas the query values are compared ordinally.
@@ -176,9 +177,7 @@ namespace Microsoft.AspNetCore.ResponseCaching
                         {
                             var queryKey = varyByRules.QueryKeys[i];
                             var queryKeyValues = context.HttpContext.Request.Query[queryKey];
-                            builder.Append(KeyDelimiter)
-                                .Append(queryKey)
-                                .Append('=');
+                            builder.Append(KeyDelimiter).Append(queryKey).Append('=');
 
                             var queryValueArray = queryKeyValues.ToArray();
                             Array.Sort(queryValueArray, StringComparer.Ordinal);
@@ -198,6 +197,7 @@ namespace Microsoft.AspNetCore.ResponseCaching
 
                 return builder.ToString();
             }
+
             finally
             {
                 _builderPool.Return(builder);
@@ -208,14 +208,18 @@ namespace Microsoft.AspNetCore.ResponseCaching
         {
             private readonly StringComparer _stringComparer;
 
-            public static QueryKeyComparer OrdinalIgnoreCase { get; } = new QueryKeyComparer(StringComparer.OrdinalIgnoreCase);
+            public static QueryKeyComparer OrdinalIgnoreCase { get; } =
+                new QueryKeyComparer(StringComparer.OrdinalIgnoreCase);
 
             public QueryKeyComparer(StringComparer stringComparer)
             {
                 _stringComparer = stringComparer;
             }
 
-            public int Compare(KeyValuePair<string, StringValues> x, KeyValuePair<string, StringValues> y) => _stringComparer.Compare(x.Key, y.Key);
+            public int Compare(
+                KeyValuePair<string, StringValues> x,
+                KeyValuePair<string, StringValues> y
+            ) => _stringComparer.Compare(x.Key, y.Key);
         }
     }
 }

@@ -56,15 +56,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             Check.NotNull(entity, nameof(entity));
 
-            var serviceProperties = DeclaringEntityType
-                .GetDerivedTypesInclusive()
+            var serviceProperties = DeclaringEntityType.GetDerivedTypesInclusive()
                 .Where(t => t.ClrType.IsInstanceOfType(entity))
                 .SelectMany(e => e.GetServiceProperties())
                 .Where(p => p.ClrType == typeof(ILazyLoader));
 
             foreach (var serviceProperty in serviceProperties)
             {
-                ((ILazyLoader?)serviceProperty.GetGetter().GetClrValue(entity))?.SetLoaded(entity, Name);
+                ((ILazyLoader?)serviceProperty.GetGetter().GetClrValue(entity))?.SetLoaded(
+                    entity,
+                    Name
+                );
             }
         }
     }

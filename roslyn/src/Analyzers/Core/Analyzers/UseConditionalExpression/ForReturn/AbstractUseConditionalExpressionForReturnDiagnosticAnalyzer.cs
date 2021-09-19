@@ -8,22 +8,31 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.UseConditionalExpression
 {
-    internal abstract class AbstractUseConditionalExpressionForReturnDiagnosticAnalyzer<
-        TIfStatementSyntax>
+    internal abstract class AbstractUseConditionalExpressionForReturnDiagnosticAnalyzer<TIfStatementSyntax>
         : AbstractUseConditionalExpressionDiagnosticAnalyzer<TIfStatementSyntax>
         where TIfStatementSyntax : SyntaxNode
     {
         protected AbstractUseConditionalExpressionForReturnDiagnosticAnalyzer(
-            LocalizableResourceString message)
-            : base(IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId,
-                   EnforceOnBuildValues.UseConditionalExpressionForReturn,
-                   message,
-                   CodeStyleOptions2.PreferConditionalExpressionOverReturn)
-        {
-        }
+            LocalizableResourceString message
+        ) : base(
+            IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId,
+            EnforceOnBuildValues.UseConditionalExpressionForReturn,
+            message,
+            CodeStyleOptions2.PreferConditionalExpressionOverReturn
+        ) { }
 
-        protected override bool TryMatchPattern(IConditionalOperation ifOperation, ISymbol containingSymbol)
-            => UseConditionalExpressionForReturnHelpers.TryMatchPattern(
-                    GetSyntaxFacts(), ifOperation, containingSymbol, out _, out _, out _, out _);
+        protected override bool TryMatchPattern(
+            IConditionalOperation ifOperation,
+            ISymbol containingSymbol
+        ) =>
+            UseConditionalExpressionForReturnHelpers.TryMatchPattern(
+                GetSyntaxFacts(),
+                ifOperation,
+                containingSymbol,
+                out _,
+                out _,
+                out _,
+                out _
+            );
     }
 }

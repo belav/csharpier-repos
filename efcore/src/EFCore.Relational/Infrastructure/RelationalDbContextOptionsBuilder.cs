@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///         particular relational database provider.
     ///     </para>
     /// </summary>
-    public abstract class RelationalDbContextOptionsBuilder<TBuilder, TExtension> : IRelationalDbContextOptionsBuilderInfrastructure
+    public abstract class RelationalDbContextOptionsBuilder<TBuilder, TExtension>
+        : IRelationalDbContextOptionsBuilderInfrastructure
         where TBuilder : RelationalDbContextOptionsBuilder<TBuilder, TExtension>
         where TExtension : RelationalOptionsExtension, new()
     {
@@ -39,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual DbContextOptionsBuilder OptionsBuilder { get; }
 
         /// <inheritdoc />
-        DbContextOptionsBuilder IRelationalDbContextOptionsBuilderInfrastructure.OptionsBuilder
-            => OptionsBuilder;
+        DbContextOptionsBuilder IRelationalDbContextOptionsBuilderInfrastructure.OptionsBuilder =>
+            OptionsBuilder;
 
         /// <summary>
         ///     Configures the maximum number of statements that will be included in commands sent to the database
@@ -48,8 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// </summary>
         /// <param name="maxBatchSize"> The maximum number of statements. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual TBuilder MaxBatchSize(int maxBatchSize)
-            => WithOption(e => (TExtension)e.WithMaxBatchSize(maxBatchSize));
+        public virtual TBuilder MaxBatchSize(int maxBatchSize) =>
+            WithOption(e => (TExtension)e.WithMaxBatchSize(maxBatchSize));
 
         /// <summary>
         ///     Configures the minimum number of statements that are needed for a multi-statement command sent to the database
@@ -57,8 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// </summary>
         /// <param name="minBatchSize"> The minimum number of statements. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual TBuilder MinBatchSize(int minBatchSize)
-            => WithOption(e => (TExtension)e.WithMinBatchSize(minBatchSize));
+        public virtual TBuilder MinBatchSize(int minBatchSize) =>
+            WithOption(e => (TExtension)e.WithMinBatchSize(minBatchSize));
 
         /// <summary>
         ///     Configures the wait time (in seconds) before terminating the attempt to execute a command and generating an error.
@@ -70,16 +71,21 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// </remarks>
         /// <param name="commandTimeout"> The time in seconds to wait for the command to execute. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual TBuilder CommandTimeout(int? commandTimeout)
-            => WithOption(e => (TExtension)e.WithCommandTimeout(commandTimeout));
+        public virtual TBuilder CommandTimeout(int? commandTimeout) =>
+            WithOption(e => (TExtension)e.WithCommandTimeout(commandTimeout));
 
         /// <summary>
         ///     Configures the assembly where migrations are maintained for this context.
         /// </summary>
         /// <param name="assemblyName"> The name of the assembly. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual TBuilder MigrationsAssembly(string? assemblyName)
-            => WithOption(e => (TExtension)e.WithMigrationsAssembly(Check.NullButNotEmpty(assemblyName, nameof(assemblyName))));
+        public virtual TBuilder MigrationsAssembly(string? assemblyName) =>
+            WithOption(
+                e =>
+                    (TExtension)e.WithMigrationsAssembly(
+                        Check.NullButNotEmpty(assemblyName, nameof(assemblyName))
+                    )
+            );
 
         /// <summary>
         ///     Configures the name of the table used to record which migrations have been applied to the database.
@@ -92,7 +98,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Check.NotEmpty(tableName, nameof(tableName));
             Check.NullButNotEmpty(schema, nameof(schema));
 
-            return WithOption(e => (TExtension)e.WithMigrationsHistoryTableName(tableName).WithMigrationsHistoryTableSchema(schema));
+            return WithOption(
+                e =>
+                    (TExtension)e.WithMigrationsHistoryTableName(tableName)
+                        .WithMigrationsHistoryTableSchema(schema)
+            );
         }
 
         /// <summary>
@@ -101,24 +111,30 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     in how the database handles nulls.
         /// </summary>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual TBuilder UseRelationalNulls(bool useRelationalNulls = true)
-            => WithOption(e => (TExtension)e.WithUseRelationalNulls(useRelationalNulls));
+        public virtual TBuilder UseRelationalNulls(bool useRelationalNulls = true) =>
+            WithOption(e => (TExtension)e.WithUseRelationalNulls(useRelationalNulls));
 
         /// <summary>
         ///     Configures the <see cref="QuerySplittingBehavior" /> to use when loading related collections in a query.
         /// </summary>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public virtual TBuilder UseQuerySplittingBehavior(QuerySplittingBehavior querySplittingBehavior)
-            => WithOption(e => (TExtension)e.WithUseQuerySplittingBehavior(querySplittingBehavior));
+        public virtual TBuilder UseQuerySplittingBehavior(
+            QuerySplittingBehavior querySplittingBehavior
+        ) => WithOption(e => (TExtension)e.WithUseQuerySplittingBehavior(querySplittingBehavior));
 
         /// <summary>
         ///     Configures the context to use the provided <see cref="IExecutionStrategy" />.
         /// </summary>
         /// <param name="getExecutionStrategy"> A function that returns a new instance of an execution strategy. </param>
         public virtual TBuilder ExecutionStrategy(
-            Func<ExecutionStrategyDependencies, IExecutionStrategy> getExecutionStrategy)
-            => WithOption(
-                e => (TExtension)e.WithExecutionStrategyFactory(Check.NotNull(getExecutionStrategy, nameof(getExecutionStrategy))));
+            Func<ExecutionStrategyDependencies, IExecutionStrategy> getExecutionStrategy
+        ) =>
+            WithOption(
+                e =>
+                    (TExtension)e.WithExecutionStrategyFactory(
+                        Check.NotNull(getExecutionStrategy, nameof(getExecutionStrategy))
+                    )
+            );
 
         /// <summary>
         ///     Sets an option by cloning the extension used to store the settings. This ensures the builder
@@ -129,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual TBuilder WithOption(Func<TExtension, TExtension> setAction)
         {
             ((IDbContextOptionsBuilderInfrastructure)OptionsBuilder).AddOrUpdateExtension(
-                setAction(OptionsBuilder.Options.FindExtension<TExtension>() ?? new TExtension()));
+                setAction(OptionsBuilder.Options.FindExtension<TExtension>() ?? new TExtension())
+            );
 
             return (TBuilder)this;
         }
@@ -141,8 +158,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -150,17 +166,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <param name="obj"> The object to compare with the current object. </param>
         /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
         /// <returns> A hash code for the current object. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode()
-            => base.GetHashCode();
-
+        public override int GetHashCode() => base.GetHashCode();
         #endregion
     }
 }

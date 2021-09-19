@@ -11,14 +11,27 @@ namespace System.Globalization.Tests
         [Fact]
         public static IEnumerable<object[]> GetDayName_TestData()
         {
-            string[] englishDayNames = new string[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+            string[] englishDayNames = new string[]
+            {
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            };
             yield return new object[] { DateTimeFormatInfo.InvariantInfo, englishDayNames };
             yield return new object[] { new CultureInfo("en-US").DateTimeFormat, englishDayNames };
             yield return new object[] { new DateTimeFormatInfo(), englishDayNames };
 
             if (!PlatformDetection.IsUbuntu)
             {
-                yield return new object[] { new CultureInfo("fr-FR").DateTimeFormat, DateTimeFormatInfoData.FrFRDayNames() };
+                yield return new object[]
+                {
+                    new CultureInfo("fr-FR").DateTimeFormat,
+                    DateTimeFormatInfoData.FrFRDayNames()
+                };
             }
         }
 
@@ -46,10 +59,14 @@ namespace System.Globalization.Tests
         [Theory]
         [InlineData(DayOfWeek.Sunday - 1)]
         [InlineData(DayOfWeek.Saturday + 1)]
-        public void GetDayName_InvalidDayOfWeek_ThrowsArgumentOutOfRangeException(DayOfWeek dayofweek)
-        {
+        public void GetDayName_InvalidDayOfWeek_ThrowsArgumentOutOfRangeException(
+            DayOfWeek dayofweek
+        ) {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("dayofweek", () => format.GetDayName(dayofweek));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "dayofweek",
+                () => format.GetDayName(dayofweek)
+            );
         }
     }
 }

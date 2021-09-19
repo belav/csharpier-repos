@@ -15,8 +15,10 @@ namespace System.Net.Http.Mocks
             _throwInSendAsync = throwInSendAsync;
         }
 
-        public MockDelegatingHandler(HttpMessageHandler innerHandler, bool throwInSendAsync = false)
-            : base(innerHandler)
+        public MockDelegatingHandler(
+            HttpMessageHandler innerHandler,
+            bool throwInSendAsync = false
+        ) : base(innerHandler)
         {
             _throwInSendAsync = throwInSendAsync;
         }
@@ -29,8 +31,10 @@ namespace System.Net.Http.Mocks
 
         public Exception SendAsyncException { get; private set; }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             WasInvoked = true;
             Request = request;
             CancellationToken = cancellationToken;

@@ -42,14 +42,8 @@ namespace System.Runtime.CompilerServices
 
             object? IRuntimeVariables.this[int index]
             {
-                get
-                {
-                    throw new IndexOutOfRangeException();
-                }
-                set
-                {
-                    throw new IndexOutOfRangeException();
-                }
+                get { throw new IndexOutOfRangeException(); }
+                set { throw new IndexOutOfRangeException(); }
             }
         }
 
@@ -84,14 +78,8 @@ namespace System.Runtime.CompilerServices
 
             public object? this[int index]
             {
-                get
-                {
-                    return GetStrongBox(index).Value;
-                }
-                set
-                {
-                    GetStrongBox(index).Value = value;
-                }
+                get { return GetStrongBox(index).Value; }
+                set { GetStrongBox(index).Value = value; }
             }
 
             private IStrongBox GetStrongBox(int index)

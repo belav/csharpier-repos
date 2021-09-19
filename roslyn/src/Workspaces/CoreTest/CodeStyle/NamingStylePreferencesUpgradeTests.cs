@@ -17,25 +17,29 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
     {
         private static string ReserializePreferences(string serializedPreferences)
         {
-            var preferences = NamingStylePreferences.FromXElement(XElement.Parse(serializedPreferences));
+            var preferences = NamingStylePreferences.FromXElement(
+                XElement.Parse(serializedPreferences)
+            );
             return preferences.CreateXElement().ToString();
         }
 
-        private static void AssertTrimmedEqual(string expected, string actual)
-            => Assert.Equal(expected.Trim(), actual.Trim());
+        private static void AssertTrimmedEqual(string expected, string actual) =>
+            Assert.Equal(expected.Trim(), actual.Trim());
 
         [Fact, Trait(Traits.Feature, Traits.Features.NamingStyle)]
         public void TestPreserveDefaultPreferences()
         {
             AssertTrimmedEqual(
                 NamingStylePreferences.DefaultNamingPreferencesString,
-                ReserializePreferences(NamingStylePreferences.DefaultNamingPreferencesString));
+                ReserializePreferences(NamingStylePreferences.DefaultNamingPreferencesString)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.NamingStyle)]
         public void TestCannotUpgrade3To5()
         {
-            var serializedPreferences = @"
+            var serializedPreferences =
+                @"
 <NamingPreferencesInfo SerializationVersion=""3"">
   <SymbolSpecifications>
     <SymbolSpecification ID=""390caed4-f0a9-42bb-adbb-b44c4a302a22"" Name=""Method"">
@@ -65,13 +69,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
 
             AssertTrimmedEqual(
                 NamingStylePreferences.DefaultNamingPreferencesString,
-                ReserializePreferences(serializedPreferences));
+                ReserializePreferences(serializedPreferences)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.NamingStyle)]
         public void TestUpgrade4To5()
         {
-            var serializedPreferences = @"
+            var serializedPreferences =
+                @"
 <NamingPreferencesInfo SerializationVersion=""4"">
   <SymbolSpecifications>
     <SymbolSpecification ID=""390caed4-f0a9-42bb-adbb-b44c4a302a22"" Name=""Method"">
@@ -100,16 +106,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
 </NamingPreferencesInfo>";
 
             AssertTrimmedEqual(
-                serializedPreferences
-                    .Replace("SerializationVersion=\"4\"", "SerializationVersion=\"5\"")
-                    .Replace("<SymbolKind>Method</SymbolKind>", "<MethodKind>Ordinary</MethodKind>"),
-                ReserializePreferences(serializedPreferences));
+                serializedPreferences.Replace(
+                        "SerializationVersion=\"4\"",
+                        "SerializationVersion=\"5\""
+                    )
+                    .Replace(
+                        "<SymbolKind>Method</SymbolKind>",
+                        "<MethodKind>Ordinary</MethodKind>"
+                    ),
+                ReserializePreferences(serializedPreferences)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.NamingStyle)]
         public void TestPreserveLatestVersion5()
         {
-            var serializedPreferences = @"
+            var serializedPreferences =
+                @"
 <NamingPreferencesInfo SerializationVersion=""5"">
   <SymbolSpecifications>
     <SymbolSpecification ID=""390caed4-f0a9-42bb-adbb-b44c4a302a22"" Name=""Method"">
@@ -139,13 +152,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
 
             AssertTrimmedEqual(
                 serializedPreferences,
-                ReserializePreferences(serializedPreferences));
+                ReserializePreferences(serializedPreferences)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.NamingStyle)]
         public void TestCannotDowngradeHigherThanLatestVersion5()
         {
-            var serializedPreferences = @"
+            var serializedPreferences =
+                @"
 <NamingPreferencesInfo SerializationVersion=""6"">
   <SymbolSpecifications>
     <SymbolSpecification ID=""390caed4-f0a9-42bb-adbb-b44c4a302a22"" Name=""Method"">
@@ -175,7 +190,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
 
             AssertTrimmedEqual(
                 NamingStylePreferences.DefaultNamingPreferencesString,
-                ReserializePreferences(serializedPreferences));
+                ReserializePreferences(serializedPreferences)
+            );
         }
 
         /// <summary>
@@ -187,17 +203,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
         [Theory]
         [InlineData(typeof(SymbolKind))]
         [InlineData(typeof(TypeKind), nameof(TypeKind.Struct), nameof(TypeKind.Structure))]
-        [InlineData(typeof(MethodKind), nameof(MethodKind.AnonymousFunction), nameof(MethodKind.LambdaMethod), nameof(MethodKind.SharedConstructor), nameof(MethodKind.StaticConstructor))]
-        public void NoDuplicateEntriesInKindEnumerations(Type type, params string[] expectedDuplicates)
-        {
+        [InlineData(
+            typeof(MethodKind),
+            nameof(MethodKind.AnonymousFunction),
+            nameof(MethodKind.LambdaMethod),
+            nameof(MethodKind.SharedConstructor),
+            nameof(MethodKind.StaticConstructor)
+        )]
+        public void NoDuplicateEntriesInKindEnumerations(
+            Type type,
+            params string[] expectedDuplicates
+        ) {
             Assert.True(type.IsEnum);
 
-            var enumNamesAndValues = type.GetEnumNames().Zip(type.GetEnumValues().Cast<object>(), (name, value) => (name, value));
+            var enumNamesAndValues = type.GetEnumNames()
+                .Zip(type.GetEnumValues().Cast<object>(), (name, value) => (name, value));
             var duplicates = enumNamesAndValues.GroupBy(e => e.value)
-                                               .Where(group => group.Count() > 1)
-                                               .SelectMany(group => group)
-                                               .Select(e => e.name)
-                                               .OrderBy(name => name);
+                .Where(group => group.Count() > 1)
+                .SelectMany(group => group)
+                .Select(e => e.name)
+                .OrderBy(name => name);
 
             Assert.Equal(expectedDuplicates, duplicates);
         }

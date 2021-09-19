@@ -6,7 +6,14 @@ namespace System.Speech.Synthesis
     public class VisemeReachedEventArgs : PromptEventArgs
     {
         #region Constructors
-        internal VisemeReachedEventArgs(Prompt speakPrompt, int currentViseme, TimeSpan audioPosition, TimeSpan duration, SynthesizerEmphasis emphasis, int nextViseme) : base(speakPrompt)
+        internal VisemeReachedEventArgs(
+            Prompt speakPrompt,
+            int currentViseme,
+            TimeSpan audioPosition,
+            TimeSpan duration,
+            SynthesizerEmphasis emphasis,
+            int nextViseme
+        ) : base(speakPrompt)
         {
             _currentViseme = currentViseme;
             _audioPosition = audioPosition;
@@ -57,7 +64,6 @@ namespace System.Speech.Synthesis
 
         // Next Viseme to be synthesized
         private int _nextViseme;
-
         #endregion
     }
 }

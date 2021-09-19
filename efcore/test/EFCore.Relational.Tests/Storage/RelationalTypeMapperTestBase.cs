@@ -13,14 +13,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             builder.Entity<MyType>().Property(e => e.Id).HasColumnType("money");
             builder.Entity<MyRelatedType1>().Property(e => e.Id).HasMaxLength(200).IsFixedLength();
-            builder.Entity<MyRelatedType1>().Property(e => e.Relationship2Id).HasColumnType("dec(6,1)");
+            builder.Entity<MyRelatedType1>()
+                .Property(e => e.Relationship2Id)
+                .HasColumnType("dec(6,1)");
             builder.Entity<MyRelatedType2>().Property(e => e.Id).HasMaxLength(100).IsFixedLength();
             builder.Entity<MyRelatedType2>().Property(e => e.Relationship2Id).HasMaxLength(787);
             builder.Entity<MyRelatedType3>().Property(e => e.Id).IsUnicode(false);
             builder.Entity<MyRelatedType3>().Property(e => e.Relationship2Id).HasMaxLength(767);
             builder.Entity<MyRelatedType4>().Property(e => e.Relationship2Id).IsUnicode();
             builder.Entity<MyPrecisionType>().Property(e => e.PrecisionOnly).HasPrecision(16);
-            builder.Entity<MyPrecisionType>().Property(e => e.PrecisionAndScale).HasPrecision(18, 7);
+            builder.Entity<MyPrecisionType>()
+                .Property(e => e.PrecisionAndScale)
+                .HasPrecision(18, 7);
             builder.Entity<MyTypeWithIndexAttribute>();
 
             return builder.Model.FindEntityType(typeof(TEntity));

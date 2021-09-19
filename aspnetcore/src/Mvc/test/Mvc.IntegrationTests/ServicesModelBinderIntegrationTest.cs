@@ -26,7 +26,6 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                     BinderModelName = "CustomParameter",
                     BindingSource = BindingSource.Services
                 },
-
                 // Using a service type already in defaults.
                 ParameterType = typeof(ITypeActivatorCache)
             };
@@ -59,11 +58,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor
             {
                 Name = "ControllerProperty",
-                BindingInfo = new BindingInfo
-                {
-                    BindingSource = BindingSource.Services,
-                },
-
+                BindingInfo = new BindingInfo { BindingSource = BindingSource.Services, },
                 // Use a service type already in defaults.
                 ParameterType = typeof(ITypeActivatorCache),
             };
@@ -95,11 +90,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor
             {
                 Name = "ControllerProperty",
-                BindingInfo = new BindingInfo
-                {
-                    BindingSource = BindingSource.Services,
-                },
-
+                BindingInfo = new BindingInfo { BindingSource = BindingSource.Services, },
                 // Use a service type already in defaults.
                 ParameterType = typeof(IEnumerable<ITypeActivatorCache>),
             };
@@ -131,11 +122,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor
             {
                 Name = "ControllerProperty",
-                BindingInfo = new BindingInfo
-                {
-                    BindingSource = BindingSource.Services,
-                },
-
+                BindingInfo = new BindingInfo { BindingSource = BindingSource.Services, },
                 // Use a service type not available in DI.
                 ParameterType = typeof(IEnumerable<IActionResult>),
             };
@@ -167,11 +154,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor
             {
                 Name = "ControllerProperty",
-                BindingInfo = new BindingInfo
-                {
-                    BindingSource = BindingSource.Services,
-                },
-
+                BindingInfo = new BindingInfo { BindingSource = BindingSource.Services, },
                 // Use a service type not available in DI.
                 ParameterType = typeof(IActionResult),
             };
@@ -180,7 +163,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => parameterBinder.BindModelAsync(parameter, testContext));
+                () => parameterBinder.BindModelAsync(parameter, testContext)
+            );
             Assert.Contains(typeof(IActionResult).FullName, exception.Message);
         }
 
@@ -195,19 +179,23 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [Theory]
         [MemberData(
             nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-            MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+            MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+        )]
         public async Task FromServicesOnPropertyType_WithData_Succeeds(BindingInfo bindingInfo)
         {
             // Arrange
             // Similar to a custom IBindingSourceMetadata implementation or [ModelBinder] subclass on a custom service.
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider
-                .ForProperty<Person>(nameof(Person.Service))
+            metadataProvider.ForProperty<Person>(nameof(Person.Service))
                 .BindingDetails(binding => binding.BindingSource = BindingSource.Services);
 
-            var testContext = ModelBindingTestHelper.GetTestContext(metadataProvider: metadataProvider);
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                metadataProvider: metadataProvider
+            );
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor
             {
                 Name = "parameter-name",
@@ -233,19 +221,23 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [Theory]
         [MemberData(
             nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-            MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+            MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+        )]
         public async Task FromServicesOnParameterType_WithData_Succeeds(BindingInfo bindingInfo)
         {
             // Arrange
             // Similar to a custom IBindingSourceMetadata implementation or [ModelBinder] subclass on a custom service.
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider
-                .ForType<ITypeActivatorCache>()
+            metadataProvider.ForType<ITypeActivatorCache>()
                 .BindingDetails(binding => binding.BindingSource = BindingSource.Services);
 
-            var testContext = ModelBindingTestHelper.GetTestContext(metadataProvider: metadataProvider);
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                metadataProvider: metadataProvider
+            );
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor
             {
                 Name = "parameter-name",

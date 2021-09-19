@@ -15,14 +15,24 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             _lifetimeManager = lifetimeManager;
         }
 
-        public Task AddToGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default)
-        {
+        public Task AddToGroupAsync(
+            string connectionId,
+            string groupName,
+            CancellationToken cancellationToken = default
+        ) {
             return _lifetimeManager.AddToGroupAsync(connectionId, groupName, cancellationToken);
         }
 
-        public Task RemoveFromGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default)
-        {
-            return _lifetimeManager.RemoveFromGroupAsync(connectionId, groupName, cancellationToken);
+        public Task RemoveFromGroupAsync(
+            string connectionId,
+            string groupName,
+            CancellationToken cancellationToken = default
+        ) {
+            return _lifetimeManager.RemoveFromGroupAsync(
+                connectionId,
+                groupName,
+                cancellationToken
+            );
         }
     }
 }

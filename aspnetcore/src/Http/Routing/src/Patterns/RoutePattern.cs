@@ -37,11 +37,14 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         internal RoutePattern(
             string? rawText,
             IReadOnlyDictionary<string, object?> defaults,
-            IReadOnlyDictionary<string, IReadOnlyList<RoutePatternParameterPolicyReference>> parameterPolicies,
+            IReadOnlyDictionary<
+                string,
+                IReadOnlyList<RoutePatternParameterPolicyReference>
+            > parameterPolicies,
             IReadOnlyDictionary<string, object?> requiredValues,
             IReadOnlyList<RoutePatternParameterPart> parameters,
-            IReadOnlyList<RoutePatternPathSegment> pathSegments)
-        {
+            IReadOnlyList<RoutePatternPathSegment> pathSegments
+        ) {
             Debug.Assert(defaults != null);
             Debug.Assert(parameterPolicies != null);
             Debug.Assert(parameters != null);
@@ -69,7 +72,10 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         /// Gets the set of parameter policy references for the route pattern.
         /// The keys of <see cref="ParameterPolicies"/> are the route parameter names.
         /// </summary>
-        public IReadOnlyDictionary<string, IReadOnlyList<RoutePatternParameterPolicyReference>> ParameterPolicies { get; }
+        public IReadOnlyDictionary<
+            string,
+            IReadOnlyList<RoutePatternParameterPolicyReference>
+        > ParameterPolicies { get; }
 
         /// <summary>
         /// Gets a collection of route values that must be provided for this route pattern to be considered
@@ -156,7 +162,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
 
         internal string DebuggerToString()
         {
-            return RawText ?? string.Join(SeparatorString, PathSegments.Select(s => s.DebuggerToString()));
+            return RawText
+                ?? string.Join(SeparatorString, PathSegments.Select(s => s.DebuggerToString()));
         }
 
         [DebuggerDisplay("{DebuggerToString(),nq}")]

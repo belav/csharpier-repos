@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.Localization
     /// <remarks>This type is thread-safe.</remarks>
     public class ResourceManagerStringLocalizer : IStringLocalizer
     {
-        private readonly ConcurrentDictionary<string, object?> _missingManifestCache = new ConcurrentDictionary<string, object?>();
+        private readonly ConcurrentDictionary<string, object?> _missingManifestCache =
+            new ConcurrentDictionary<string, object?>();
         private readonly IResourceNamesCache _resourceNamesCache;
         private readonly ResourceManager _resourceManager;
         private readonly IResourceStringProvider _resourceStringProvider;
@@ -40,15 +41,14 @@ namespace Microsoft.Extensions.Localization
             Assembly resourceAssembly,
             string baseName,
             IResourceNamesCache resourceNamesCache,
-            ILogger logger)
-            : this(
-                resourceManager,
-                new AssemblyWrapper(resourceAssembly),
-                baseName,
-                resourceNamesCache,
-                logger)
-        {
-        }
+            ILogger logger
+        ) : this(
+            resourceManager,
+            new AssemblyWrapper(resourceAssembly),
+            baseName,
+            resourceNamesCache,
+            logger
+        ) { }
 
         /// <summary>
         /// Intended for testing purposes only.
@@ -58,19 +58,19 @@ namespace Microsoft.Extensions.Localization
             AssemblyWrapper resourceAssemblyWrapper,
             string baseName,
             IResourceNamesCache resourceNamesCache,
-            ILogger logger)
-            : this(
-                  resourceManager,
-                  new ResourceManagerStringProvider(
-                      resourceNamesCache,
-                      resourceManager,
-                      resourceAssemblyWrapper.Assembly,
-                      baseName),
-                  baseName,
-                  resourceNamesCache,
-                  logger)
-        {
-        }
+            ILogger logger
+        ) : this(
+            resourceManager,
+            new ResourceManagerStringProvider(
+                resourceNamesCache,
+                resourceManager,
+                resourceAssemblyWrapper.Assembly,
+                baseName
+            ),
+            baseName,
+            resourceNamesCache,
+            logger
+        ) { }
 
         /// <summary>
         /// Intended for testing purposes only.
@@ -80,8 +80,8 @@ namespace Microsoft.Extensions.Localization
             IResourceStringProvider resourceStringProvider,
             string baseName,
             IResourceNamesCache resourceNamesCache,
-            ILogger logger)
-        {
+            ILogger logger
+        ) {
             if (resourceManager == null)
             {
                 throw new ArgumentNullException(nameof(resourceManager));
@@ -126,7 +126,12 @@ namespace Microsoft.Extensions.Localization
 
                 var value = GetStringSafely(name, null);
 
-                return new LocalizedString(name, value ?? name, resourceNotFound: value == null, searchedLocation: _resourceBaseName);
+                return new LocalizedString(
+                    name,
+                    value ?? name,
+                    resourceNotFound: value == null,
+                    searchedLocation: _resourceBaseName
+                );
             }
         }
 
@@ -143,7 +148,12 @@ namespace Microsoft.Extensions.Localization
                 var format = GetStringSafely(name, null);
                 var value = string.Format(CultureInfo.CurrentCulture, format ?? name, arguments);
 
-                return new LocalizedString(name, value, resourceNotFound: format == null, searchedLocation: _resourceBaseName);
+                return new LocalizedString(
+                    name,
+                    value,
+                    resourceNotFound: format == null,
+                    searchedLocation: _resourceBaseName
+                );
             }
         }
 
@@ -157,8 +167,10 @@ namespace Microsoft.Extensions.Localization
         /// <param name="includeParentCultures">Whether to include parent cultures in the search for a resource.</param>
         /// <param name="culture">The <see cref="CultureInfo"/> to get strings for.</param>
         /// <returns>The strings.</returns>
-        protected IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures, CultureInfo culture)
-        {
+        protected IEnumerable<LocalizedString> GetAllStrings(
+            bool includeParentCultures,
+            CultureInfo culture
+        ) {
             if (culture == null)
             {
                 throw new ArgumentNullException(nameof(culture));
@@ -171,7 +183,12 @@ namespace Microsoft.Extensions.Localization
             foreach (var name in resourceNames ?? Enumerable.Empty<string>())
             {
                 var value = GetStringSafely(name, culture);
-                yield return new LocalizedString(name, value ?? name, resourceNotFound: value == null, searchedLocation: _resourceBaseName);
+                yield return new LocalizedString(
+                    name,
+                    value ?? name,
+                    resourceNotFound: value == null,
+                    searchedLocation: _resourceBaseName
+                );
             }
         }
 
@@ -211,8 +228,9 @@ namespace Microsoft.Extensions.Localization
             }
         }
 
-        private IEnumerable<string> GetResourceNamesFromCultureHierarchy(CultureInfo startingCulture)
-        {
+        private IEnumerable<string> GetResourceNamesFromCultureHierarchy(
+            CultureInfo startingCulture
+        ) {
             var currentCulture = startingCulture;
             var resourceNames = new HashSet<string>();
 
@@ -220,8 +238,10 @@ namespace Microsoft.Extensions.Localization
 
             while (true)
             {
-
-                var cultureResourceNames = _resourceStringProvider.GetAllResourceStrings(currentCulture, false);
+                var cultureResourceNames = _resourceStringProvider.GetAllResourceStrings(
+                    currentCulture,
+                    false
+                );
 
                 if (cultureResourceNames != null)
                 {
@@ -243,7 +263,9 @@ namespace Microsoft.Extensions.Localization
 
             if (!hasAnyCultures)
             {
-                throw new MissingManifestResourceException(Resources.Localization_MissingManifest_Parent);
+                throw new MissingManifestResourceException(
+                    Resources.Localization_MissingManifest_Parent
+                );
             }
 
             return resourceNames;

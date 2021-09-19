@@ -22,7 +22,8 @@ namespace System.ComponentModel.Composition.Hosting
         private volatile bool _isDisposed;
         private ExportProvider? _sourceProvider;
         private readonly Stack<PartManager> _recursionStateStack = new Stack<PartManager>();
-        private ConditionalWeakTable<ComposablePart, PartManager> _partManagers = new ConditionalWeakTable<ComposablePart, PartManager>();
+        private ConditionalWeakTable<ComposablePart, PartManager> _partManagers =
+            new ConditionalWeakTable<ComposablePart, PartManager>();
         private RecompositionManager _recompositionManager = new RecompositionManager();
         private readonly CompositionLock _lock;
         private readonly CompositionOptions _compositionOptions;
@@ -35,14 +36,13 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <see cref="ImportEngine"/> access to <see cref="Export"/>s.
         /// </param>
         public ImportEngine(ExportProvider sourceProvider)
-            : this(sourceProvider, CompositionOptions.Default)
-        {
-        }
+            : this(sourceProvider, CompositionOptions.Default) { }
 
         public ImportEngine(ExportProvider sourceProvider, bool isThreadSafe)
-            : this(sourceProvider, isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default)
-        {
-        }
+            : this(
+                sourceProvider,
+                isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default
+            ) { }
 
         public ImportEngine(ExportProvider sourceProvider, CompositionOptions compositionOptions)
         {
@@ -51,7 +51,9 @@ namespace System.ComponentModel.Composition.Hosting
             _compositionOptions = compositionOptions;
             _sourceProvider = sourceProvider;
             _sourceProvider.ExportsChanging += OnExportsChanging;
-            _lock = new CompositionLock(compositionOptions.HasFlag(CompositionOptions.IsThreadSafe));
+            _lock = new CompositionLock(
+                compositionOptions.HasFlag(CompositionOptions.IsThreadSafe)
+            );
         }
 
         /// <summary>
@@ -101,7 +103,9 @@ namespace System.ComponentModel.Composition.Hosting
             // We add the "release" lock to BOTH Commit and Revert queues, because they are mutually exclusive, and we need to release the lock regardless.
 
             // This will take the lock, if necesary
-            IDisposable? compositionLockHolder = _lock.IsThreadSafe ? _lock.LockComposition() : null;
+            IDisposable? compositionLockHolder = _lock.IsThreadSafe
+                ? _lock.LockComposition()
+                : null;
             bool compositionLockTaken = (compositionLockHolder != null);
             try
             {
@@ -123,6 +127,7 @@ namespace System.ComponentModel.Composition.Hosting
                     atomicComposition.AddCompleteAction(() => compositionLockHolder!.Dispose());
                 }
             }
+
             finally
             {
                 // We haven't updated the queues, so we can release the lock now
@@ -287,9 +292,11 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private CompositionResult TryPreviewImportsStateMachine(PartManager partManager,
-            ComposablePart part, AtomicComposition? atomicComposition)
-        {
+        private CompositionResult TryPreviewImportsStateMachine(
+            PartManager partManager,
+            ComposablePart part,
+            AtomicComposition? atomicComposition
+        ) {
             var result = CompositionResult.SucceededResult;
 
             if (partManager.State == ImportState.ImportsPreviewing)
@@ -307,10 +314,13 @@ namespace System.ComponentModel.Composition.Hosting
                 var requiredImports = part.ImportDefinitions.Where(IsRequiredImportForPreview);
 
                 // If this atomicComposition gets rolledback for any reason we need to reset our state
-                atomicComposition.AddRevertActionAllowNull(() => partManager.State = ImportState.NoImportsSatisfied);
+                atomicComposition.AddRevertActionAllowNull(
+                    () => partManager.State = ImportState.NoImportsSatisfied
+                );
 
                 result = result.MergeResult(
-                    TrySatisfyImportSubset(partManager, requiredImports, atomicComposition));
+                    TrySatisfyImportSubset(partManager, requiredImports, atomicComposition)
+                );
 
                 if (!result.Succeeded)
                 {
@@ -324,8 +334,10 @@ namespace System.ComponentModel.Composition.Hosting
             return result;
         }
 
-        private CompositionResult TrySatisfyImportsStateMachine(PartManager partManager, ComposablePart part)
-        {
+        private CompositionResult TrySatisfyImportsStateMachine(
+            PartManager partManager,
+            ComposablePart part
+        ) {
             var result = CompositionResult.SucceededResult;
 
             while (partManager.State < ImportState.Composed)
@@ -338,62 +350,68 @@ namespace System.ComponentModel.Composition.Hosting
                     // attempt to do a state transition
                     case ImportState.NoImportsSatisfied:
                     case ImportState.ImportsPreviewed:
-                        {
-                            partManager.State = ImportState.PreExportImportsSatisfying;
+                    {
+                        partManager.State = ImportState.PreExportImportsSatisfying;
 
-                            var prereqImports = part.ImportDefinitions.Where(import => import.IsPrerequisite);
-                            result = result.MergeResult(
-                                TrySatisfyImportSubset(partManager, prereqImports, null));
+                        var prereqImports = part.ImportDefinitions.Where(
+                            import => import.IsPrerequisite
+                        );
+                        result = result.MergeResult(
+                            TrySatisfyImportSubset(partManager, prereqImports, null)
+                        );
 
-                            partManager.State = ImportState.PreExportImportsSatisfied;
-                            break;
-                        }
+                        partManager.State = ImportState.PreExportImportsSatisfied;
+                        break;
+                    }
                     case ImportState.PreExportImportsSatisfied:
-                        {
-                            partManager.State = ImportState.PostExportImportsSatisfying;
+                    {
+                        partManager.State = ImportState.PostExportImportsSatisfying;
 
-                            var requiredImports = part.ImportDefinitions.Where(import => !import.IsPrerequisite);
+                        var requiredImports = part.ImportDefinitions.Where(
+                            import => !import.IsPrerequisite
+                        );
 
-                            result = result.MergeResult(
-                                TrySatisfyImportSubset(partManager, requiredImports, null));
+                        result = result.MergeResult(
+                            TrySatisfyImportSubset(partManager, requiredImports, null)
+                        );
 
-                            partManager.State = ImportState.PostExportImportsSatisfied;
-                            break;
-                        }
+                        partManager.State = ImportState.PostExportImportsSatisfied;
+                        break;
+                    }
                     case ImportState.PostExportImportsSatisfied:
-                        {
-                            partManager.State = ImportState.ComposedNotifying;
+                    {
+                        partManager.State = ImportState.ComposedNotifying;
 
-                            partManager.ClearSavedImports();
-                            result = result.MergeResult(partManager.TryOnComposed());
+                        partManager.ClearSavedImports();
+                        result = result.MergeResult(partManager.TryOnComposed());
 
-                            partManager.State = ImportState.Composed;
-                            break;
-                        }
+                        partManager.State = ImportState.Composed;
+                        break;
+                    }
 
                     // "ing" states which represent some sort of cycle
                     // These state should always return, error or not, instead of breaking
                     case ImportState.ImportsPreviewing:
-                        {
-                            // We shouldn't nomally ever hit this case but if we do
-                            // then we should just error with a cycle error.
-                            return new CompositionResult(ErrorBuilder.CreatePartCycle(part));
-                        }
+                    {
+                        // We shouldn't nomally ever hit this case but if we do
+                        // then we should just error with a cycle error.
+                        return new CompositionResult(ErrorBuilder.CreatePartCycle(part));
+                    }
                     case ImportState.PreExportImportsSatisfying:
                     case ImportState.PostExportImportsSatisfying:
+                    {
+                        if (InPrerequisiteLoop())
                         {
-                            if (InPrerequisiteLoop())
-                            {
-                                return result.MergeError(ErrorBuilder.CreatePartCycle(part));
-                            }
-                            // Cycles in post export imports are allowed so just return in that case
-                            return result;
+                            return result.MergeError(ErrorBuilder.CreatePartCycle(part));
                         }
+                        // Cycles in post export imports are allowed so just return in that case
+                        return result;
+                    }
                     case ImportState.ComposedNotifying:
-                        {
-                            // We are currently notifying so don't notify again just return
-                            return result;
-                        }
+                    {
+                        // We are currently notifying so don't notify again just return
+                        return result;
+                    }
                 }
 
                 // if an error occured while doing a state transition
@@ -407,8 +425,11 @@ namespace System.ComponentModel.Composition.Hosting
             return result;
         }
 
-        private CompositionResult TrySatisfyImports(PartManager partManager, ComposablePart part, bool shouldTrackImports)
-        {
+        private CompositionResult TrySatisfyImports(
+            PartManager partManager,
+            ComposablePart part,
+            bool shouldTrackImports
+        ) {
             if (part == null)
             {
                 throw new ArgumentNullException(nameof(part));
@@ -426,16 +447,17 @@ namespace System.ComponentModel.Composition.Hosting
             if (_recursionStateStack.Count >= MaximumNumberOfCompositionIterations)
             {
                 return result.MergeError(
-                    ErrorBuilder.ComposeTookTooManyIterations(MaximumNumberOfCompositionIterations));
+                    ErrorBuilder.ComposeTookTooManyIterations(MaximumNumberOfCompositionIterations)
+                );
             }
 
             // Maintain the stack to detect whether recursive loops cross prerequisites
             _recursionStateStack.Push(partManager);
             try
             {
-                result = result.MergeResult(
-                    TrySatisfyImportsStateMachine(partManager, part));
+                result = result.MergeResult(TrySatisfyImportsStateMachine(partManager, part));
             }
+
             finally
             {
                 _recursionStateStack.Pop();
@@ -449,9 +471,11 @@ namespace System.ComponentModel.Composition.Hosting
             return result;
         }
 
-        private CompositionResult TrySatisfyImportSubset(PartManager partManager,
-            IEnumerable<ImportDefinition> imports, AtomicComposition? atomicComposition)
-        {
+        private CompositionResult TrySatisfyImportSubset(
+            PartManager partManager,
+            IEnumerable<ImportDefinition> imports,
+            AtomicComposition? atomicComposition
+        ) {
             CompositionResult result = CompositionResult.SucceededResult;
 
             var part = partManager.Part;
@@ -462,7 +486,11 @@ namespace System.ComponentModel.Composition.Hosting
                 if (exports == null)
                 {
                     CompositionResult<IEnumerable<Export>> exportsResult = TryGetExports(
-                        _sourceProvider, part, import, atomicComposition);
+                        _sourceProvider,
+                        part,
+                        import,
+                        atomicComposition
+                    );
 
                     if (!exportsResult.Succeeded)
                     {
@@ -474,8 +502,7 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (atomicComposition == null)
                 {
-                    result = result.MergeResult(
-                        partManager.TrySetImport(import, exports));
+                    result = result.MergeResult(partManager.TrySetImport(import, exports));
                 }
                 else
                 {
@@ -492,7 +519,9 @@ namespace System.ComponentModel.Composition.Hosting
             // Prepare for the recomposition effort by minimizing the amount of work we'll have to do later
             AtomicComposition? atomicComposition = e.AtomicComposition;
 
-            IEnumerable<PartManager> affectedParts = _recompositionManager.GetAffectedParts(e.ChangedContractNames);
+            IEnumerable<PartManager> affectedParts = _recompositionManager.GetAffectedParts(
+                e.ChangedContractNames
+            );
 
             // When in a atomicComposition account for everything that isn't yet reflected in the
             // index
@@ -502,8 +531,9 @@ namespace System.ComponentModel.Composition.Hosting
                 {
                     // always added the new part managers to see if they will also be
                     // affected by these changes
-                    affectedParts = affectedParts.ConcatAllowingNull(engineContext!.GetAddedPartManagers())!
-                        .Except(engineContext.GetRemovedPartManagers()!);
+                    affectedParts = affectedParts.ConcatAllowingNull(
+                        engineContext!.GetAddedPartManagers()
+                    )!.Except(engineContext.GetRemovedPartManagers()!);
                 }
             }
 
@@ -511,15 +541,19 @@ namespace System.ComponentModel.Composition.Hosting
 
             foreach (var partManager in affectedParts)
             {
-                result = result.MergeResult(TryRecomposeImports(partManager, changedExports!, atomicComposition));
+                result = result.MergeResult(
+                    TryRecomposeImports(partManager, changedExports!, atomicComposition)
+                );
             }
 
             result.ThrowOnErrors(atomicComposition);
         }
 
-        private CompositionResult TryRecomposeImports(PartManager partManager,
-            IEnumerable<ExportDefinition> changedExports, AtomicComposition? atomicComposition)
-        {
+        private CompositionResult TryRecomposeImports(
+            PartManager partManager,
+            IEnumerable<ExportDefinition> changedExports,
+            AtomicComposition? atomicComposition
+        ) {
             var result = CompositionResult.SucceededResult;
 
             switch (partManager.State)
@@ -530,20 +564,26 @@ namespace System.ComponentModel.Composition.Hosting
                     break;
 
                 default:
-                    {
-                        // All other states are invalid and for recomposition.
-                        return new CompositionResult(ErrorBuilder.InvalidStateForRecompposition(partManager.Part));
-                    }
+                {
+                    // All other states are invalid and for recomposition.
+                    return new CompositionResult(
+                        ErrorBuilder.InvalidStateForRecompposition(partManager.Part)
+                    );
+                }
             }
 
-            var affectedImports = RecompositionManager.GetAffectedImports(partManager.Part, changedExports);
+            var affectedImports = RecompositionManager.GetAffectedImports(
+                partManager.Part,
+                changedExports
+            );
             bool partComposed = (partManager.State == ImportState.Composed);
 
             bool recomposedImport = false;
             foreach (var import in affectedImports)
             {
                 result = result.MergeResult(
-                    TryRecomposeImport(partManager, partComposed, import, atomicComposition));
+                    TryRecomposeImport(partManager, partComposed, import, atomicComposition)
+                );
 
                 recomposedImport = true;
             }
@@ -559,24 +599,36 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 else
                 {
-                    atomicComposition.AddCompleteAction(() => partManager.TryOnComposed().ThrowOnErrors());
+                    atomicComposition.AddCompleteAction(
+                        () => partManager.TryOnComposed().ThrowOnErrors()
+                    );
                 }
             }
 
             return result;
         }
 
-        private CompositionResult TryRecomposeImport(PartManager partManager, bool partComposed,
-            ImportDefinition import, AtomicComposition? atomicComposition)
-        {
+        private CompositionResult TryRecomposeImport(
+            PartManager partManager,
+            bool partComposed,
+            ImportDefinition import,
+            AtomicComposition? atomicComposition
+        ) {
             if (partComposed && !import.IsRecomposable)
             {
-                return new CompositionResult(ErrorBuilder.PreventedByExistingImport(partManager.Part, import));
+                return new CompositionResult(
+                    ErrorBuilder.PreventedByExistingImport(partManager.Part, import)
+                );
             }
 
             // During recomposition you must always requery with the new atomicComposition you cannot use any
             // cached value in the part manager
-            var exportsResult = TryGetExports(_sourceProvider, partManager.Part, import, atomicComposition);
+            var exportsResult = TryGetExports(
+                _sourceProvider,
+                partManager.Part,
+                import,
+                atomicComposition
+            );
             if (!exportsResult.Succeeded)
             {
                 return exportsResult.ToResult();
@@ -594,7 +646,9 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 else
                 {
-                    atomicComposition.AddCompleteAction(() => partManager.TrySetImport(import, exports).ThrowOnErrors());
+                    atomicComposition.AddCompleteAction(
+                        () => partManager.TrySetImport(import, exports).ThrowOnErrors()
+                    );
                 }
             }
             else
@@ -605,8 +659,10 @@ namespace System.ComponentModel.Composition.Hosting
             return CompositionResult.SucceededResult;
         }
 
-        private void StartSatisfyingImports(PartManager partManager, AtomicComposition? atomicComposition)
-        {
+        private void StartSatisfyingImports(
+            PartManager partManager,
+            AtomicComposition? atomicComposition
+        ) {
             // When not running in a atomicCompositional state, schedule reindexing after ensuring
             // that this isn't a redundant addition
             if (atomicComposition == null)
@@ -625,8 +681,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private void StopSatisfyingImports(PartManager partManager, AtomicComposition? atomicComposition)
-        {
+        private void StopSatisfyingImports(
+            PartManager partManager,
+            AtomicComposition? atomicComposition
+        ) {
             // When not running in a atomicCompositional state, schedule reindexing after ensuring
             // that this isn't a redundant removal
             if (atomicComposition == null)
@@ -639,7 +697,7 @@ namespace System.ComponentModel.Composition.Hosting
                     partManagers = _partManagers;
                     recompositionManager = _recompositionManager;
                 }
-                if (partManagers != null)                            // Disposal race may have been won by dispose
+                if (partManagers != null) // Disposal race may have been won by dispose
                 {
                     partManagers.Remove(partManager.Part);
 
@@ -739,9 +797,12 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private static CompositionResult<IEnumerable<Export>> TryGetExports(ExportProvider? provider,
-            ComposablePart part, ImportDefinition definition, AtomicComposition? atomicComposition)
-        {
+        private static CompositionResult<IEnumerable<Export>> TryGetExports(
+            ExportProvider? provider,
+            ComposablePart part,
+            ImportDefinition definition,
+            AtomicComposition? atomicComposition
+        ) {
             try
             {
                 IEnumerable<Export>? exports = null;
@@ -754,10 +815,13 @@ namespace System.ComponentModel.Composition.Hosting
             catch (ImportCardinalityMismatchException ex)
             {
                 // Either not enough or too many exports that match the definition
-                CompositionException exception = new CompositionException(ErrorBuilder.CreateImportCardinalityMismatch(ex, definition));
+                CompositionException exception = new CompositionException(
+                    ErrorBuilder.CreateImportCardinalityMismatch(ex, definition)
+                );
 
                 return new CompositionResult<IEnumerable<Export>>(
-                    ErrorBuilder.CreatePartCannotSetImport(part, definition, exception));
+                    ErrorBuilder.CreatePartCannotSetImport(part, definition, exception)
+                );
             }
         }
 

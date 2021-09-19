@@ -50,6 +50,7 @@ namespace RunTests
                 action();
                 Console.Out.Flush();
             }
+
             finally
             {
                 Console.ForegroundColor = saved;

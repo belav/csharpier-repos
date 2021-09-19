@@ -8,13 +8,22 @@ using System.Runtime.CompilerServices;
 
 class Test2
 {
-    public static string[] teststr2 = new string[] { "\u3F2Aarray element 0", "array element 1\uCB53", "array \u47BBelement 2" };
+    public static string[] teststr2 = new string[]
+    {
+        "\u3F2Aarray element 0",
+        "array element 1\uCB53",
+        "array \u47BBelement 2"
+    };
 
     public static bool TestSameObjRef()
     {
         Console.WriteLine();
-        Console.WriteLine("When NGEN'ed, two strings in different modules have different object reference");
-        Console.WriteLine("When NGEN'ed, two strings in the same module have same object reference");
+        Console.WriteLine(
+            "When NGEN'ed, two strings in different modules have different object reference"
+        );
+        Console.WriteLine(
+            "When NGEN'ed, two strings in the same module have same object reference"
+        );
         Console.WriteLine("When JIT'ed, two strings always have same object reference");
         Console.WriteLine();
         Console.WriteLine("Testing SameObjRef");
@@ -69,7 +78,9 @@ class Test2
             ;
         if (i != teststr2.Length)
         {
-            Console.WriteLine("for, (object)C.teststr2[i]==(object)teststr2[i] is not expected, FAILED");
+            Console.WriteLine(
+                "for, (object)C.teststr2[i]==(object)teststr2[i] is not expected, FAILED"
+            );
             passed = false;
         }
 
@@ -107,11 +118,17 @@ class Test2
                 break;
         }
 
-        for (i = 1; (i < teststr2.Length) && (object)GenC<object>.teststr2[i] != (object)C.teststr2[i]; i++)
+        for (
+            i = 1;
+            (i < teststr2.Length) && (object)GenC<object>.teststr2[i] != (object)C.teststr2[i];
+            i++
+        )
             ;
         if (i != teststr2.Length)
         {
-            Console.WriteLine("for, (object)GenC<object>.teststr2[i]!=(object)C.teststr2[i] is not expected, FAILED");
+            Console.WriteLine(
+                "for, (object)GenC<object>.teststr2[i]!=(object)C.teststr2[i] is not expected, FAILED"
+            );
             passed = false;
         }
 
@@ -121,8 +138,12 @@ class Test2
     public static bool TestDiffObjRef()
     {
         Console.WriteLine();
-        Console.WriteLine("When NGEN'ed, two strings in different modules have different object reference");
-        Console.WriteLine("When NGEN'ed, two strings in the same module have same object reference");
+        Console.WriteLine(
+            "When NGEN'ed, two strings in different modules have different object reference"
+        );
+        Console.WriteLine(
+            "When NGEN'ed, two strings in the same module have same object reference"
+        );
         Console.WriteLine("When JIT'ed, two strings always have same object reference");
         Console.WriteLine();
         Console.WriteLine("Testing DiffObjRef");
@@ -174,7 +195,9 @@ class Test2
 
         for (int i = 1; (i < teststr2.Length) && (object)C.teststr2[i] == (object)teststr2[i]; i++)
         {
-            Console.WriteLine("for, (object)C.teststr2[i]==(object)teststr2[i] is not expected, FAILED");
+            Console.WriteLine(
+                "for, (object)C.teststr2[i]==(object)teststr2[i] is not expected, FAILED"
+            );
             passed = false;
         }
 
@@ -212,9 +235,15 @@ class Test2
                 break;
         }
 
-        for (int i = 1; (i < teststr2.Length) && (object)GenC<object>.teststr2[i] == (object)"GenC array element 1\uCB53"; i++)
-        {
-            Console.WriteLine("for, (object)GenC<object>.teststr2[i]==(object)C.teststr2[i] is not expected, FAILED");
+        for (
+            int i = 1;
+            (i < teststr2.Length)
+                && (object)GenC<object>.teststr2[i] == (object)"GenC array element 1\uCB53";
+            i++
+        ) {
+            Console.WriteLine(
+                "for, (object)GenC<object>.teststr2[i]==(object)C.teststr2[i] is not expected, FAILED"
+            );
             passed = false;
         }
 
@@ -233,8 +262,12 @@ class Test2
         {
             Console.WriteLine("Usage: Test2.exe [SameObjRef|DiffObjRef]");
             Console.WriteLine();
-            Console.WriteLine("When NGEN'ed, two strings in different modules have different object reference");
-            Console.WriteLine("When NGEN'ed, two strings in the same module have same object reference");
+            Console.WriteLine(
+                "When NGEN'ed, two strings in different modules have different object reference"
+            );
+            Console.WriteLine(
+                "When NGEN'ed, two strings in the same module have same object reference"
+            );
             Console.WriteLine("When JIT'ed, two strings always have same object reference");
             Console.WriteLine();
             return 9;
@@ -251,6 +284,5 @@ class Test2
             Console.WriteLine("FAILED");
             return 1;
         }
-
     }
 }

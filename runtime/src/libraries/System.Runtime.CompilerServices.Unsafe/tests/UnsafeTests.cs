@@ -338,7 +338,7 @@ namespace System.Runtime.CompilerServices
         {
             byte* source = stackalloc byte[numBytes + 1];
             byte* destination = stackalloc byte[numBytes + 1];
-            source += 1;      // +1 = make unaligned
+            source += 1; // +1 = make unaligned
             destination += 1; // +1 = make unaligned
 
             for (int i = 0; i < numBytes; i++)
@@ -363,7 +363,7 @@ namespace System.Runtime.CompilerServices
         {
             byte* source = stackalloc byte[numBytes + 1];
             byte* destination = stackalloc byte[numBytes + 1];
-            source += 1;      // +1 = make unaligned
+            source += 1; // +1 = make unaligned
             destination += 1; // +1 = make unaligned
 
             for (int i = 0; i < numBytes; i++)
@@ -682,11 +682,36 @@ namespace System.Runtime.CompilerServices
 
             // The following tests ensure that we're using unsigned comparison logic
 
-            Assert.False(Unsafe.IsAddressGreaterThan(ref Unsafe.AsRef<byte>((void*)(1)), ref Unsafe.AsRef<byte>((void*)(-1))));
-            Assert.True(Unsafe.IsAddressGreaterThan(ref Unsafe.AsRef<byte>((void*)(-1)), ref Unsafe.AsRef<byte>((void*)(1))));
-            Assert.True(Unsafe.IsAddressGreaterThan(ref Unsafe.AsRef<byte>((void*)(int.MinValue)), ref Unsafe.AsRef<byte>((void*)(int.MaxValue))));
-            Assert.False(Unsafe.IsAddressGreaterThan(ref Unsafe.AsRef<byte>((void*)(int.MaxValue)), ref Unsafe.AsRef<byte>((void*)(int.MinValue))));
-            Assert.False(Unsafe.IsAddressGreaterThan(ref Unsafe.AsRef<byte>(null), ref Unsafe.AsRef<byte>(null)));
+            Assert.False(
+                Unsafe.IsAddressGreaterThan(
+                    ref Unsafe.AsRef<byte>((void*)(1)),
+                    ref Unsafe.AsRef<byte>((void*)(-1))
+                )
+            );
+            Assert.True(
+                Unsafe.IsAddressGreaterThan(
+                    ref Unsafe.AsRef<byte>((void*)(-1)),
+                    ref Unsafe.AsRef<byte>((void*)(1))
+                )
+            );
+            Assert.True(
+                Unsafe.IsAddressGreaterThan(
+                    ref Unsafe.AsRef<byte>((void*)(int.MinValue)),
+                    ref Unsafe.AsRef<byte>((void*)(int.MaxValue))
+                )
+            );
+            Assert.False(
+                Unsafe.IsAddressGreaterThan(
+                    ref Unsafe.AsRef<byte>((void*)(int.MaxValue)),
+                    ref Unsafe.AsRef<byte>((void*)(int.MinValue))
+                )
+            );
+            Assert.False(
+                Unsafe.IsAddressGreaterThan(
+                    ref Unsafe.AsRef<byte>(null),
+                    ref Unsafe.AsRef<byte>(null)
+                )
+            );
         }
 
         [Fact]
@@ -701,11 +726,33 @@ namespace System.Runtime.CompilerServices
 
             // The following tests ensure that we're using unsigned comparison logic
 
-            Assert.True(Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>((void*)(1)), ref Unsafe.AsRef<byte>((void*)(-1))));
-            Assert.False(Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>((void*)(-1)), ref Unsafe.AsRef<byte>((void*)(1))));
-            Assert.False(Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>((void*)(int.MinValue)), ref Unsafe.AsRef<byte>((void*)(int.MaxValue))));
-            Assert.True(Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>((void*)(int.MaxValue)), ref Unsafe.AsRef<byte>((void*)(int.MinValue))));
-            Assert.False(Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>(null), ref Unsafe.AsRef<byte>(null)));
+            Assert.True(
+                Unsafe.IsAddressLessThan(
+                    ref Unsafe.AsRef<byte>((void*)(1)),
+                    ref Unsafe.AsRef<byte>((void*)(-1))
+                )
+            );
+            Assert.False(
+                Unsafe.IsAddressLessThan(
+                    ref Unsafe.AsRef<byte>((void*)(-1)),
+                    ref Unsafe.AsRef<byte>((void*)(1))
+                )
+            );
+            Assert.False(
+                Unsafe.IsAddressLessThan(
+                    ref Unsafe.AsRef<byte>((void*)(int.MinValue)),
+                    ref Unsafe.AsRef<byte>((void*)(int.MaxValue))
+                )
+            );
+            Assert.True(
+                Unsafe.IsAddressLessThan(
+                    ref Unsafe.AsRef<byte>((void*)(int.MaxValue)),
+                    ref Unsafe.AsRef<byte>((void*)(int.MinValue))
+                )
+            );
+            Assert.False(
+                Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>(null), ref Unsafe.AsRef<byte>(null))
+            );
         }
 
         [Fact]
@@ -806,7 +853,10 @@ namespace System.Runtime.CompilerServices
         {
             byte[] unaligned = new byte[sizeof(Int32Double) + 1];
 
-            Unsafe.WriteUnaligned(ref unaligned[1], new Int32Double { Int32 = 123456789, Double = 3.42 });
+            Unsafe.WriteUnaligned(
+                ref unaligned[1],
+                new Int32Double { Int32 = 123456789, Double = 3.42 }
+            );
 
             Int32Double actual = Int32Double.Aligned(unaligned);
             Assert.Equal(123456789, actual.Int32);
@@ -978,7 +1028,15 @@ namespace System.Runtime.CompilerServices
             Assert.Equal<byte>(13, byte4Value.B2);
             Assert.Equal<byte>(14, byte4Value.B3);
 
-            Byte4Short2 byte4Short2Value = new Byte4Short2 { B0 = 15, B1 = 16, B2 = 17, B3 = 18, S4 = 19, S6 = 20 };
+            Byte4Short2 byte4Short2Value = new Byte4Short2
+            {
+                B0 = 15,
+                B1 = 16,
+                B2 = 17,
+                B3 = 18,
+                S4 = 19,
+                S6 = 20
+            };
             Unsafe.SkipInit(out byte4Short2Value);
             Assert.Equal<byte>(15, byte4Short2Value.B0);
             Assert.Equal<byte>(16, byte4Short2Value.B1);

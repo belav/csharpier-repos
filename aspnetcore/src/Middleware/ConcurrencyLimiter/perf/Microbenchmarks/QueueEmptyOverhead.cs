@@ -20,17 +20,21 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Microbenchmarks
         [GlobalSetup]
         public void GlobalSetup()
         {
-            _restOfServer = YieldsThreadInternally ? (RequestDelegate)YieldsThread : (RequestDelegate)CompletesImmediately;
+            _restOfServer = YieldsThreadInternally
+                ? (RequestDelegate)YieldsThread
+                : (RequestDelegate)CompletesImmediately;
 
             _middlewareQueue = TestUtils.CreateTestMiddleware_QueuePolicy(
                 maxConcurrentRequests: 1,
                 requestQueueLimit: 100,
-                next: _restOfServer);
+                next: _restOfServer
+            );
 
             _middlewareStack = TestUtils.CreateTestMiddleware_StackPolicy(
                 maxConcurrentRequests: 1,
                 requestQueueLimit: 100,
-                next: _restOfServer);
+                next: _restOfServer
+            );
         }
 
         [Params(false, true)]

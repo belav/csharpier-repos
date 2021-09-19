@@ -27,12 +27,14 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Microbenchmarks
             _middlewareQueue = TestUtils.CreateTestMiddleware_QueuePolicy(
                 maxConcurrentRequests: MaxConcurrentRequests,
                 requestQueueLimit: _numRequests,
-                next: IncrementAndCheck);
+                next: IncrementAndCheck
+            );
 
             _middlewareStack = TestUtils.CreateTestMiddleware_StackPolicy(
                 maxConcurrentRequests: MaxConcurrentRequests,
                 requestQueueLimit: _numRequests,
-                next: IncrementAndCheck);
+                next: IncrementAndCheck
+            );
         }
 
         [IterationSetup]

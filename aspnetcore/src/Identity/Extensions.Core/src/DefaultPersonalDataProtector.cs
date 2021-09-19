@@ -19,8 +19,10 @@ namespace Microsoft.AspNetCore.Identity
         /// </summary>
         /// <param name="keyRing"></param>
         /// <param name="protector"></param>
-        public DefaultPersonalDataProtector(ILookupProtectorKeyRing keyRing, ILookupProtector protector)
-        {
+        public DefaultPersonalDataProtector(
+            ILookupProtectorKeyRing keyRing,
+            ILookupProtector protector
+        ) {
             _keyRing = keyRing;
             _encryptor = protector;
         }
@@ -33,7 +35,7 @@ namespace Microsoft.AspNetCore.Identity
         public virtual string Unprotect(string data)
         {
             var split = data.IndexOf(':');
-            if (split == -1 || split == data.Length-1)
+            if (split == -1 || split == data.Length - 1)
             {
                 throw new InvalidOperationException("Malformed data.");
             }

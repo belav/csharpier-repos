@@ -14,15 +14,17 @@ namespace Microsoft.AspNetCore.Components.Reflection
     {
         public static IEnumerable<PropertyInfo> GetPropertiesIncludingInherited(
             [DynamicallyAccessedMembers(Component)] Type type,
-            BindingFlags bindingFlags)
-        {
+            BindingFlags bindingFlags
+        ) {
             var dictionary = new Dictionary<string, List<PropertyInfo>>();
 
             Type? currentType = type;
 
             while (currentType != null)
             {
-                var properties = currentType.GetProperties(bindingFlags  | BindingFlags.DeclaredOnly);
+                var properties = currentType.GetProperties(
+                    bindingFlags | BindingFlags.DeclaredOnly
+                );
                 foreach (var property in properties)
                 {
                     if (!dictionary.TryGetValue(property.Name, out var others))
@@ -31,8 +33,13 @@ namespace Microsoft.AspNetCore.Components.Reflection
                         dictionary.Add(property.Name, others);
                     }
 
-                    if (others.Any(other => other.GetMethod?.GetBaseDefinition() == property.GetMethod?.GetBaseDefinition()))
-                    {
+                    if (
+                        others.Any(
+                            other =>
+                                other.GetMethod?.GetBaseDefinition()
+                                == property.GetMethod?.GetBaseDefinition()
+                        )
+                    ) {
                         // This is an inheritance case. We can safely ignore the value of property since
                         // we have seen a more derived value.
                         continue;

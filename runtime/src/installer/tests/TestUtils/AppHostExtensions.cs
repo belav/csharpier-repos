@@ -70,7 +70,11 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 // Replace the hash with the managed DLL name.
                 var hash = sha256.ComputeHash(Encoding.UTF8.GetBytes("foobar"));
                 var hashStr = BitConverter.ToString(hash).Replace("-", "").ToLower();
-                BinaryUtils.SearchAndReplace(tempPath, Encoding.UTF8.GetBytes(hashStr), Encoding.UTF8.GetBytes(appDll));
+                BinaryUtils.SearchAndReplace(
+                    tempPath,
+                    Encoding.UTF8.GetBytes(hashStr),
+                    Encoding.UTF8.GetBytes(appDll)
+                );
             }
             File.Move(tempPath, appHostPath, true);
         }
@@ -82,8 +86,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         /// <param name="accessor">The memory accessor which has the apphost file opened.</param>
         /// <param name="appHostSourcePath">The path to the source apphost.</param>
         private static unsafe void SetWindowsGraphicalUserInterfaceBit(
-            MemoryMappedViewAccessor accessor)
-        {
+            MemoryMappedViewAccessor accessor
+        ) {
             byte* pointer = null;
 
             try
@@ -93,8 +97,10 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
                 // https://en.wikipedia.org/wiki/Portable_Executable
                 // Validate that we're looking at Windows PE file
-                if (((UInt16*)bytes)[0] != PEFileSignature || accessor.Capacity < PEHeaderPointerOffset + sizeof(UInt32))
-                {
+                if (
+                    ((UInt16*)bytes)[0] != PEFileSignature
+                    || accessor.Capacity < PEHeaderPointerOffset + sizeof(UInt32)
+                ) {
                     throw new Exception("apphost is not a Windows exe.");
                 }
 
@@ -117,6 +123,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 // Set the subsystem to GUI
                 subsystem[0] = WindowsGUISubsystem;
             }
+
             finally
             {
                 if (pointer != null)

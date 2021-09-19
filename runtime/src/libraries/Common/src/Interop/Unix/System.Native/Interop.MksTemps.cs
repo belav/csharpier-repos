@@ -8,9 +8,11 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_MksTemps", SetLastError = true)]
-        internal static extern IntPtr MksTemps(
-            byte[] template,
-            int suffixlen);
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_MksTemps",
+            SetLastError = true
+        )]
+        internal static extern IntPtr MksTemps(byte[] template, int suffixlen);
     }
 }

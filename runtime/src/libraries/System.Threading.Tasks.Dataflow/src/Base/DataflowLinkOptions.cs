@@ -43,7 +43,9 @@ namespace System.Threading.Tasks.Dataflow
     /// Dataflow blocks capture the state of the options at linking. Subsequent changes to the provided
     /// <see cref="DataflowLinkOptions"/> instance should not affect the behavior of a link.
     /// </remarks>
-    [DebuggerDisplay("PropagateCompletion = {PropagateCompletion}, MaxMessages = {MaxMessages}, Append = {Append}")]
+    [DebuggerDisplay(
+        "PropagateCompletion = {PropagateCompletion}, MaxMessages = {MaxMessages}, Append = {Append}"
+    )]
     public class DataflowLinkOptions
     {
         /// <summary>
@@ -69,12 +71,11 @@ namespace System.Threading.Tasks.Dataflow
         /// <remarks>
         /// Do not change the values of this instance.  It is shared by all of our blocks that need to unlink after one message has been consumed.
         /// </remarks>
-        internal static readonly DataflowLinkOptions UnlinkAfterOneAndPropagateCompletion = new DataflowLinkOptions() { MaxMessages = 1, PropagateCompletion = true };
+        internal static readonly DataflowLinkOptions UnlinkAfterOneAndPropagateCompletion =
+            new DataflowLinkOptions() { MaxMessages = 1, PropagateCompletion = true };
 
         /// <summary>Initializes the <see cref="DataflowLinkOptions"/>.</summary>
-        public DataflowLinkOptions()
-        {
-        }
+        public DataflowLinkOptions() { }
 
         /// <summary>Gets or sets whether the linked target will have completion and faulting notification propagated to it automatically.</summary>
         public bool PropagateCompletion
@@ -82,7 +83,10 @@ namespace System.Threading.Tasks.Dataflow
             get { return _propagateCompletion; }
             set
             {
-                Debug.Assert(this != Default && this != UnlinkAfterOneAndPropagateCompletion, "Default and UnlinkAfterOneAndPropagateCompletion instances are supposed to be immutable.");
+                Debug.Assert(
+                    this != Default && this != UnlinkAfterOneAndPropagateCompletion,
+                    "Default and UnlinkAfterOneAndPropagateCompletion instances are supposed to be immutable."
+                );
                 _propagateCompletion = value;
             }
         }
@@ -93,8 +97,12 @@ namespace System.Threading.Tasks.Dataflow
             get { return _maxNumberOfMessages; }
             set
             {
-                Debug.Assert(this != Default && this != UnlinkAfterOneAndPropagateCompletion, "Default and UnlinkAfterOneAndPropagateCompletion instances are supposed to be immutable.");
-                if (value < 1 && value != Unbounded) throw new ArgumentOutOfRangeException(nameof(value));
+                Debug.Assert(
+                    this != Default && this != UnlinkAfterOneAndPropagateCompletion,
+                    "Default and UnlinkAfterOneAndPropagateCompletion instances are supposed to be immutable."
+                );
+                if (value < 1 && value != Unbounded)
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 _maxNumberOfMessages = value;
             }
         }
@@ -105,7 +113,10 @@ namespace System.Threading.Tasks.Dataflow
             get { return _append; }
             set
             {
-                Debug.Assert(this != Default && this != UnlinkAfterOneAndPropagateCompletion, "Default and UnlinkAfterOneAndPropagateCompletion instances are supposed to be immutable.");
+                Debug.Assert(
+                    this != Default && this != UnlinkAfterOneAndPropagateCompletion,
+                    "Default and UnlinkAfterOneAndPropagateCompletion instances are supposed to be immutable."
+                );
                 _append = value;
             }
         }

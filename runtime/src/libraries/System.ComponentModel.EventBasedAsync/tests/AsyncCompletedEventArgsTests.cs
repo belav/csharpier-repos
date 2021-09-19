@@ -12,15 +12,13 @@ namespace System.ComponentModel.EventBasedAsync.Tests
     // so we should make derived class for access it.
     public class AsyncCompletedEventArgsTests : AsyncCompletedEventArgs
     {
-        public AsyncCompletedEventArgsTests()
-            : base(null, false, null)
-        {
-        }
+        public AsyncCompletedEventArgsTests() : base(null, false, null) { }
 
-        private AsyncCompletedEventArgsTests(Exception error, bool cancelled, object userState)
-            : base(error, cancelled, userState)
-        {
-        }
+        private AsyncCompletedEventArgsTests(
+            Exception error,
+            bool cancelled,
+            object userState
+        ) : base(error, cancelled, userState) { }
 
         public static IEnumerable<object[]> TestInput
         {
@@ -39,9 +37,16 @@ namespace System.ComponentModel.EventBasedAsync.Tests
 
         [Theory]
         [MemberData(nameof(TestInput))]
-        public static void CtorTest(Exception expectedException, bool expectedCancelled, object expectedState)
-        {
-            var target = new AsyncCompletedEventArgsTests(expectedException, expectedCancelled, expectedState);
+        public static void CtorTest(
+            Exception expectedException,
+            bool expectedCancelled,
+            object expectedState
+        ) {
+            var target = new AsyncCompletedEventArgsTests(
+                expectedException,
+                expectedCancelled,
+                expectedState
+            );
             Assert.Equal(expectedException, target.Error);
             Assert.Equal(expectedCancelled, target.Cancelled);
             Assert.Equal(expectedState, target.UserState);
@@ -49,8 +54,11 @@ namespace System.ComponentModel.EventBasedAsync.Tests
 
         [Theory]
         [MemberData(nameof(TestInput))]
-        public static void RaiseExceptionIfNecessaryTest(Exception expectedError, bool cancelled, Type expectedExceptionType)
-        {
+        public static void RaiseExceptionIfNecessaryTest(
+            Exception expectedError,
+            bool cancelled,
+            Type expectedExceptionType
+        ) {
             var target = new AsyncCompletedEventArgsTests(expectedError, cancelled, null);
 
             if (expectedExceptionType == null) // if null should NOT throw
@@ -61,7 +69,9 @@ namespace System.ComponentModel.EventBasedAsync.Tests
             {
                 if (expectedError != null)
                 {
-                    TargetInvocationException error = Assert.Throws<TargetInvocationException>(() => target.RaiseExceptionIfNecessary());
+                    TargetInvocationException error = Assert.Throws<TargetInvocationException>(
+                        () => target.RaiseExceptionIfNecessary()
+                    );
                     Assert.Equal(expectedExceptionType, error.InnerException.GetType());
                     Assert.Same(expectedError, error.InnerException);
                 }

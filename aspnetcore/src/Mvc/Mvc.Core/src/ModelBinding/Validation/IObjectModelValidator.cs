@@ -23,6 +23,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             ActionContext actionContext,
             ValidationStateDictionary? validationState,
             string prefix,
-            object? model);
+            object? model
+        );
     }
 }

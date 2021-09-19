@@ -18,13 +18,23 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void ReadUntilWithCharWithInclusiveFlagReadsAllTextUpToSpecifiedCharacterButNotPastIfInclusiveFalse()
         {
-            RunReaderTest("foo bar baz @biz", "foo bar baz ", '@', r => r.ReadUntil('@', inclusive: false));
+            RunReaderTest(
+                "foo bar baz @biz",
+                "foo bar baz ",
+                '@',
+                r => r.ReadUntil('@', inclusive: false)
+            );
         }
 
         [Fact]
         public void ReadUntilWithCharWithInclusiveFlagReadsAllTextUpToAndIncludingSpecifiedCharacterIfInclusiveTrue()
         {
-            RunReaderTest("foo bar baz @biz", "foo bar baz @", 'b', r => r.ReadUntil('@', inclusive: true));
+            RunReaderTest(
+                "foo bar baz @biz",
+                "foo bar baz @",
+                'b',
+                r => r.ReadUntil('@', inclusive: true)
+            );
         }
 
         [Fact]
@@ -43,32 +53,67 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void ReadUntilWithMultipleTerminatorsHonorsInclusiveFlagWhenFalse()
         {
             // NOTE: Using named parameters would be difficult here, hence the inline comment
-            RunReaderTest("<bar/>", "<bar", '/', r => r.ReadUntil(/* inclusive */ false, '/', '>'));
+            RunReaderTest(
+                "<bar/>",
+                "<bar",
+                '/',
+                r =>
+                    r.ReadUntil( /* inclusive */
+                        false,
+                        '/',
+                        '>'
+                    )
+            );
         }
 
         [Fact]
         public void ReadUntilWithMultipleTerminatorsHonorsInclusiveFlagWhenTrue()
         {
             // NOTE: Using named parameters would be difficult here, hence the inline comment
-            RunReaderTest("<bar/>", "<bar/", '>', r => r.ReadUntil(/* inclusive */ true, '/', '>'));
+            RunReaderTest(
+                "<bar/>",
+                "<bar/",
+                '>',
+                r =>
+                    r.ReadUntil( /* inclusive */
+                        true,
+                        '/',
+                        '>'
+                    )
+            );
         }
 
         [Fact]
         public void ReadUntilWithPredicateStopsWhenPredicateIsTrue()
         {
-            RunReaderTest("foo bar baz 0 zoop zork zoink", "foo bar baz ", '0', r => r.ReadUntil(c => Char.IsDigit(c)));
+            RunReaderTest(
+                "foo bar baz 0 zoop zork zoink",
+                "foo bar baz ",
+                '0',
+                r => r.ReadUntil(c => Char.IsDigit(c))
+            );
         }
 
         [Fact]
         public void ReadUntilWithPredicateHonorsInclusiveFlagWhenFalse()
         {
-            RunReaderTest("foo bar baz 0 zoop zork zoink", "foo bar baz ", '0', r => r.ReadUntil(c => Char.IsDigit(c), inclusive: false));
+            RunReaderTest(
+                "foo bar baz 0 zoop zork zoink",
+                "foo bar baz ",
+                '0',
+                r => r.ReadUntil(c => Char.IsDigit(c), inclusive: false)
+            );
         }
 
         [Fact]
         public void ReadUntilWithPredicateHonorsInclusiveFlagWhenTrue()
         {
-            RunReaderTest("foo bar baz 0 zoop zork zoink", "foo bar baz 0", ' ', r => r.ReadUntil(c => Char.IsDigit(c), inclusive: true));
+            RunReaderTest(
+                "foo bar baz 0 zoop zork zoink",
+                "foo bar baz 0",
+                ' ',
+                r => r.ReadUntil(c => Char.IsDigit(c), inclusive: true)
+            );
         }
 
         [Fact]
@@ -80,17 +125,31 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void ReadWhileWithPredicateHonorsInclusiveFlagWhenFalse()
         {
-            RunReaderTest("012345a67890", "012345", 'a', r => r.ReadWhile(c => Char.IsDigit(c), inclusive: false));
+            RunReaderTest(
+                "012345a67890",
+                "012345",
+                'a',
+                r => r.ReadWhile(c => Char.IsDigit(c), inclusive: false)
+            );
         }
 
         [Fact]
         public void ReadWhileWithPredicateHonorsInclusiveFlagWhenTrue()
         {
-            RunReaderTest("012345a67890", "012345a", '6', r => r.ReadWhile(c => Char.IsDigit(c), inclusive: true));
+            RunReaderTest(
+                "012345a67890",
+                "012345a",
+                '6',
+                r => r.ReadWhile(c => Char.IsDigit(c), inclusive: true)
+            );
         }
 
-        private static void RunReaderTest(string testString, string expectedOutput, int expectedPeek, Func<TextReader, string> action)
-        {
+        private static void RunReaderTest(
+            string testString,
+            string expectedOutput,
+            int expectedPeek,
+            Func<TextReader, string> action
+        ) {
             // Arrange
             var reader = new StringReader(testString);
 
@@ -102,7 +161,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             if (expectedPeek == -1)
             {
-                Assert.True(reader.Peek() == -1, "Expected that the reader would be positioned at the end of the input stream");
+                Assert.True(
+                    reader.Peek() == -1,
+                    "Expected that the reader would be positioned at the end of the input stream"
+                );
             }
             else
             {

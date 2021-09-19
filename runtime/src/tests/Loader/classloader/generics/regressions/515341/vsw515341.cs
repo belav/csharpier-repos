@@ -11,31 +11,31 @@ public struct GenS<T> : GenI<T> { }
 
 public class C
 {
-	public void Meth2<T>() where T : GenI<C> { }
-}	 
+    public void Meth2<T>() where T : GenI<C> { }
+}
 
 public class Test
 {
-	public static void RunTest()
-	{
-		C c = new C();
-		c.Meth2<GenS<C>>();	
-	}
-	
-	public static int Main()
-	{
-		try
-		{
-			RunTest();
-			
-			Console.WriteLine("PASS");
-			return 100;
-		}
-		catch (Exception e)
-		{	
-			Console.WriteLine("FAIL: Caught unexpected exception: " + e);
-			return 101;
-		}
-	}
+    public static void RunTest()
+    {
+        C c = new C();
+        c.Meth2<GenS<C>>();
+    }
+
+    public static int Main()
+    {
+        try
+        {
+            RunTest();
+
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("FAIL: Caught unexpected exception: " + e);
+            return 101;
+        }
+    }
 }
 

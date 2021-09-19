@@ -13,8 +13,11 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// Gets or creates a control flow graph for the given <paramref name="localFunction"/> defined in
         /// the given <paramref name="controlFlowGraph"/> or any of it's parent control flow graphs.
         /// </summary>
-        public static ControlFlowGraph GetLocalFunctionControlFlowGraphInScope(this ControlFlowGraph controlFlowGraph, IMethodSymbol localFunction, CancellationToken cancellationToken = default)
-        {
+        public static ControlFlowGraph GetLocalFunctionControlFlowGraphInScope(
+            this ControlFlowGraph controlFlowGraph,
+            IMethodSymbol localFunction,
+            CancellationToken cancellationToken = default
+        ) {
             if (controlFlowGraph == null)
             {
                 throw new ArgumentNullException(nameof(controlFlowGraph));
@@ -28,12 +31,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ControlFlowGraph? currentGraph = controlFlowGraph;
             do
             {
-                if (currentGraph.TryGetLocalFunctionControlFlowGraph(localFunction, cancellationToken, out ControlFlowGraph? localFunctionControlFlowGraph))
-                {
+                if (
+                    currentGraph.TryGetLocalFunctionControlFlowGraph(
+                        localFunction,
+                        cancellationToken,
+                        out ControlFlowGraph? localFunctionControlFlowGraph
+                    )
+                ) {
                     return localFunctionControlFlowGraph;
                 }
-            }
-            while ((currentGraph = currentGraph.Parent) != null);
+            } while ((currentGraph = currentGraph.Parent) != null);
 
             throw new ArgumentOutOfRangeException(nameof(localFunction));
         }
@@ -42,8 +49,11 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// Gets or creates a control flow graph for the given <paramref name="anonymousFunction"/> defined in
         /// the given <paramref name="controlFlowGraph"/> or any of it's parent control flow graphs.
         /// </summary>
-        public static ControlFlowGraph GetAnonymousFunctionControlFlowGraphInScope(this ControlFlowGraph controlFlowGraph, IFlowAnonymousFunctionOperation anonymousFunction, CancellationToken cancellationToken = default)
-        {
+        public static ControlFlowGraph GetAnonymousFunctionControlFlowGraphInScope(
+            this ControlFlowGraph controlFlowGraph,
+            IFlowAnonymousFunctionOperation anonymousFunction,
+            CancellationToken cancellationToken = default
+        ) {
             if (controlFlowGraph == null)
             {
                 throw new ArgumentNullException(nameof(controlFlowGraph));
@@ -57,12 +67,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ControlFlowGraph? currentGraph = controlFlowGraph;
             do
             {
-                if (currentGraph.TryGetAnonymousFunctionControlFlowGraph(anonymousFunction, cancellationToken, out ControlFlowGraph? localFunctionControlFlowGraph))
-                {
+                if (
+                    currentGraph.TryGetAnonymousFunctionControlFlowGraph(
+                        anonymousFunction,
+                        cancellationToken,
+                        out ControlFlowGraph? localFunctionControlFlowGraph
+                    )
+                ) {
                     return localFunctionControlFlowGraph;
                 }
-            }
-            while ((currentGraph = currentGraph.Parent) != null);
+            } while ((currentGraph = currentGraph.Parent) != null);
 
             throw new ArgumentOutOfRangeException(nameof(anonymousFunction));
         }

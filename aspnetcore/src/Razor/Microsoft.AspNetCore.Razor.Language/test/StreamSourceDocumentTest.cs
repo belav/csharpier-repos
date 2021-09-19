@@ -18,7 +18,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var stream = CreateBOMStream(content, Encoding.UTF8);
 
             // Act
-            var document = new StreamSourceDocument(stream, Encoding.UTF8, new RazorSourceDocumentProperties(filePath: "file.cshtml", relativePath: null));
+            var document = new StreamSourceDocument(
+                stream,
+                Encoding.UTF8,
+                new RazorSourceDocumentProperties(filePath: "file.cshtml", relativePath: null)
+            );
 
             // Assert
             Assert.Equal("file.cshtml", document.FilePath);
@@ -32,7 +36,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var stream = CreateBOMStream(content, Encoding.UTF8);
 
             // Act
-            var document = new StreamSourceDocument(stream, Encoding.UTF8, new RazorSourceDocumentProperties(filePath: null, relativePath: null));
+            var document = new StreamSourceDocument(
+                stream,
+                Encoding.UTF8,
+                new RazorSourceDocumentProperties(filePath: null, relativePath: null)
+            );
 
             // Assert
             Assert.Null(document.FilePath);
@@ -46,7 +54,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var stream = CreateBOMStream(content, Encoding.UTF8);
 
             // Act
-            var document = new StreamSourceDocument(stream, Encoding.UTF8, new RazorSourceDocumentProperties(filePath: null, relativePath: "file.cshtml"));
+            var document = new StreamSourceDocument(
+                stream,
+                Encoding.UTF8,
+                new RazorSourceDocumentProperties(filePath: null, relativePath: "file.cshtml")
+            );
 
             // Assert
             Assert.Equal("file.cshtml", document.RelativePath);
@@ -60,7 +72,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var stream = CreateBOMStream(content, Encoding.UTF8);
 
             // Act
-            var document = new StreamSourceDocument(stream, Encoding.UTF8, new RazorSourceDocumentProperties(filePath: null, relativePath: null));
+            var document = new StreamSourceDocument(
+                stream,
+                Encoding.UTF8,
+                new RazorSourceDocumentProperties(filePath: null, relativePath: null)
+            );
 
             // Assert
             Assert.Null(document.RelativePath);
@@ -72,7 +88,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var content = "Hello World!";
             var stream = CreateBOMStream(content, Encoding.UTF8);
-            var document = new StreamSourceDocument(stream, null, RazorSourceDocumentProperties.Default);
+            var document = new StreamSourceDocument(
+                stream,
+                null,
+                RazorSourceDocumentProperties.Default
+            );
 
             // Act
             var firstChecksum = document.GetChecksum();
@@ -89,8 +109,34 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var content = "Hello World!";
             var stream = CreateBOMStream(content, Encoding.UTF8);
-            var document = new StreamSourceDocument(stream, Encoding.UTF8, RazorSourceDocumentProperties.Default);
-            var expectedChecksum = new byte[] { 70, 180, 84, 105, 70, 79, 152, 31, 71, 157, 46, 159, 50, 83, 1, 243, 222, 48, 90, 18 };
+            var document = new StreamSourceDocument(
+                stream,
+                Encoding.UTF8,
+                RazorSourceDocumentProperties.Default
+            );
+            var expectedChecksum = new byte[]
+            {
+                70,
+                180,
+                84,
+                105,
+                70,
+                79,
+                152,
+                31,
+                71,
+                157,
+                46,
+                159,
+                50,
+                83,
+                1,
+                243,
+                222,
+                48,
+                90,
+                18
+            };
 
             // Act
             var checksum = document.GetChecksum();
@@ -105,8 +151,34 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var content = "Hello World!";
             var stream = CreateBOMStream(content, Encoding.UTF32);
-            var document = new StreamSourceDocument(stream, null, RazorSourceDocumentProperties.Default);
-            var expectedChecksum = new byte[] { 159, 154, 109, 89, 250, 163, 165, 108, 2, 112, 34, 4, 247, 161, 82, 168, 77, 213, 107, 71 };
+            var document = new StreamSourceDocument(
+                stream,
+                null,
+                RazorSourceDocumentProperties.Default
+            );
+            var expectedChecksum = new byte[]
+            {
+                159,
+                154,
+                109,
+                89,
+                250,
+                163,
+                165,
+                108,
+                2,
+                112,
+                34,
+                4,
+                247,
+                161,
+                82,
+                168,
+                77,
+                213,
+                107,
+                71
+            };
 
             // Act
             var checksum = document.GetChecksum();
@@ -122,7 +194,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var content = TestRazorSourceDocument.CreateStreamContent(encoding: Encoding.UTF32);
 
             // Act
-            var document = new StreamSourceDocument(content, null, RazorSourceDocumentProperties.Default);
+            var document = new StreamSourceDocument(
+                content,
+                null,
+                RazorSourceDocumentProperties.Default
+            );
 
             // Assert
             Assert.IsType<StreamSourceDocument>(document);
@@ -133,10 +209,17 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ConstructedWithoutEncoding_EmptyStream_DetectsEncoding()
         {
             // Arrange
-            var content = TestRazorSourceDocument.CreateStreamContent(content: string.Empty, encoding: Encoding.UTF32);
+            var content = TestRazorSourceDocument.CreateStreamContent(
+                content: string.Empty,
+                encoding: Encoding.UTF32
+            );
 
             // Act
-            var document = new StreamSourceDocument(content, null, RazorSourceDocumentProperties.Default);
+            var document = new StreamSourceDocument(
+                content,
+                null,
+                RazorSourceDocumentProperties.Default
+            );
 
             // Assert
             Assert.IsType<StreamSourceDocument>(document);
@@ -148,11 +231,20 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var content = TestRazorSourceDocument.CreateStreamContent(encoding: Encoding.UTF32);
-            var expectedMessage = Resources.FormatMismatchedContentEncoding(Encoding.UTF8.EncodingName, Encoding.UTF32.EncodingName);
+            var expectedMessage = Resources.FormatMismatchedContentEncoding(
+                Encoding.UTF8.EncodingName,
+                Encoding.UTF32.EncodingName
+            );
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(
-                () => new StreamSourceDocument(content, Encoding.UTF8, RazorSourceDocumentProperties.Default));
+                () =>
+                    new StreamSourceDocument(
+                        content,
+                        Encoding.UTF8,
+                        RazorSourceDocumentProperties.Default
+                    )
+            );
             Assert.Equal(expectedMessage, exception.Message);
         }
 
@@ -169,7 +261,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var stream = TestRazorSourceDocument.CreateStreamContent(content);
 
             // Act
-            var document = new StreamSourceDocument(stream, null, RazorSourceDocumentProperties.Default);
+            var document = new StreamSourceDocument(
+                stream,
+                null,
+                RazorSourceDocumentProperties.Default
+            );
 
             // Assert
             var streamDocument = Assert.IsType<StreamSourceDocument>(document);

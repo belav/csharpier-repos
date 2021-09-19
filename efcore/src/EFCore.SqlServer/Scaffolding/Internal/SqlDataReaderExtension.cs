@@ -24,9 +24,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
         public static T GetValueOrDefault<T>(this DbDataReader reader, string name)
         {
             var idx = reader.GetOrdinal(name);
-            return reader.IsDBNull(idx)
-                ? default
-                : reader.GetFieldValue<T>(idx);
+            return reader.IsDBNull(idx) ? default : reader.GetFieldValue<T>(idx);
         }
 
         /// <summary>
@@ -39,9 +37,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
         public static T GetValueOrDefault<T>(this DbDataRecord record, string name)
         {
             var idx = record.GetOrdinal(name);
-            return record.IsDBNull(idx)
-                ? default
-                : (T)record.GetValue(idx);
+            return record.IsDBNull(idx) ? default : (T)record.GetValue(idx);
         }
 
         /// <summary>
@@ -50,7 +46,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static T GetFieldValue<T>(this DbDataRecord record, string name)
-            => (T)record.GetValue(record.GetOrdinal(name));
+        public static T GetFieldValue<T>(this DbDataRecord record, string name) =>
+            (T)record.GetValue(record.GetOrdinal(name));
     }
 }

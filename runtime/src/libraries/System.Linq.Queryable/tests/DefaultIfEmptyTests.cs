@@ -10,7 +10,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyNullableSourceNoDefaultPassed()
         {
-            int?[] source = { };
+            int?[] source = {  };
             int?[] expected = { default(int?) };
 
             Assert.Equal(expected, source.AsQueryable().DefaultIfEmpty());
@@ -19,7 +19,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyNonNullableSourceNoDefaultPassed()
         {
-            int[] source = { };
+            int[] source = {  };
             int[] expected = { default(int) };
 
             Assert.Equal(expected, source.AsQueryable().DefaultIfEmpty());
@@ -36,7 +36,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyNullableDefaultValuePassed()
         {
-            int?[] source = { };
+            int?[] source = {  };
             int? defaultValue = 9;
             int?[] expected = { defaultValue };
 
@@ -46,7 +46,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyNonNullableDefaultValuePassed()
         {
-            int[] source = { };
+            int[] source = {  };
             int defaultValue = -10;
             int[] expected = { defaultValue };
 
@@ -59,22 +59,24 @@ namespace System.Linq.Tests
             IQueryable<int> source = null;
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.DefaultIfEmpty());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.DefaultIfEmpty(42));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.DefaultIfEmpty(42)
+            );
         }
 
         [Fact]
         public void DefaultIfEmpty1()
         {
-            var count = (new int[] { }).AsQueryable().DefaultIfEmpty().Count();
+            var count = (new int[] {  }).AsQueryable().DefaultIfEmpty().Count();
             Assert.Equal(1, count);
         }
 
         [Fact]
         public void DefaultIfEmpty2()
         {
-            var count = (new int[] { }).AsQueryable().DefaultIfEmpty(3).Count();
+            var count = (new int[] {  }).AsQueryable().DefaultIfEmpty(3).Count();
             Assert.Equal(1, count);
         }
-
     }
 }

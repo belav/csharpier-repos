@@ -20,23 +20,52 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public readonly Checksum? Checksum;
 
-        private static Task<SyntaxTreeIndex?> LoadAsync(Document document, Checksum checksum, CancellationToken cancellationToken)
-            => LoadAsync(document.Project.Solution.Workspace, DocumentKey.ToDocumentKey(document), checksum, GetStringTable(document.Project), cancellationToken);
+        private static Task<SyntaxTreeIndex?> LoadAsync(
+            Document document,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        ) =>
+            LoadAsync(
+                document.Project.Solution.Workspace,
+                DocumentKey.ToDocumentKey(document),
+                checksum,
+                GetStringTable(document.Project),
+                cancellationToken
+            );
 
         public static async Task<SyntaxTreeIndex?> LoadAsync(
-            Workspace workspace, DocumentKey documentKey, Checksum? checksum, StringTable stringTable, CancellationToken cancellationToken)
-        {
+            Workspace workspace,
+            DocumentKey documentKey,
+            Checksum? checksum,
+            StringTable stringTable,
+            CancellationToken cancellationToken
+        ) {
             try
             {
-                var persistentStorageService = (IChecksummedPersistentStorageService)workspace.Services.GetRequiredService<IPersistentStorageService>();
+                var persistentStorageService =
+                    (IChecksummedPersistentStorageService)workspace.Services.GetRequiredService<IPersistentStorageService>();
 
                 var storage = await persistentStorageService.GetStorageAsync(
-                    workspace, documentKey.Project.Solution, checkBranchId: false, cancellationToken).ConfigureAwait(false);
+                        workspace,
+                        documentKey.Project.Solution,
+                        checkBranchId: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 await using var _ = storage.ConfigureAwait(false);
 
                 // attempt to load from persisted state
-                using var stream = await storage.ReadStreamAsync(documentKey, PersistenceName, checksum, cancellationToken).ConfigureAwait(false);
-                using var reader = ObjectReader.TryGetReader(stream, cancellationToken: cancellationToken);
+                using var stream = await storage.ReadStreamAsync(
+                        documentKey,
+                        PersistenceName,
+                        checksum,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                using var reader = ObjectReader.TryGetReader(
+                    stream,
+                    cancellationToken: cancellationToken
+                );
                 if (reader != null)
                     return ReadFrom(stringTable, reader, checksum);
             }
@@ -49,8 +78,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         public static async Task<Checksum> GetChecksumAsync(
-            Document document, CancellationToken cancellationToken)
-        {
+            Document document,
+            CancellationToken cancellationToken
+        ) {
             // Since we build the SyntaxTreeIndex from a SyntaxTree, we need our checksum to change
             // any time the SyntaxTree could have changed.  Right now, that can only happen if the
             // text of the document changes, or the ParseOptions change.  So we get the checksums
@@ -61,23 +91,32 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             var project = document.Project;
             var parseOptionsChecksum = project.State.GetParseOptionsChecksum();
 
-            var documentChecksumState = await document.State.GetStateChecksumsAsync(cancellationToken).ConfigureAwait(false);
+            var documentChecksumState = await document.State.GetStateChecksumsAsync(
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var textChecksum = documentChecksumState.Text;
 
             return Checksum.Create(
                 WellKnownSynchronizationKind.SyntaxTreeIndex,
-                new[] { textChecksum, parseOptionsChecksum, SerializationFormatChecksum });
+                new[] { textChecksum, parseOptionsChecksum, SerializationFormatChecksum }
+            );
         }
 
-        private async Task<bool> SaveAsync(
-            Document document, CancellationToken cancellationToken)
+        private async Task<bool> SaveAsync(Document document, CancellationToken cancellationToken)
         {
             var solution = document.Project.Solution;
-            var persistentStorageService = (IChecksummedPersistentStorageService)solution.Workspace.Services.GetRequiredService<IPersistentStorageService>();
+            var persistentStorageService =
+                (IChecksummedPersistentStorageService)solution.Workspace.Services.GetRequiredService<IPersistentStorageService>();
 
             try
             {
-                var storage = await persistentStorageService.GetStorageAsync(solution, checkBranchId: false, cancellationToken).ConfigureAwait(false);
+                var storage = await persistentStorageService.GetStorageAsync(
+                        solution,
+                        checkBranchId: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 await using var _ = storage.ConfigureAwait(false);
                 using var stream = SerializableBytes.CreateWritableStream();
 
@@ -87,7 +126,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 }
 
                 stream.Position = 0;
-                return await storage.WriteStreamAsync(document, PersistenceName, stream, this.Checksum, cancellationToken).ConfigureAwait(false);
+                return await storage.WriteStreamAsync(
+                        document,
+                        PersistenceName,
+                        stream,
+                        this.Checksum,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             catch (Exception e) when (IOUtilities.IsNormalIOException(e))
             {
@@ -98,21 +144,35 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         private static async Task<bool> PrecalculatedAsync(
-            Document document, Checksum checksum, CancellationToken cancellationToken)
-        {
+            Document document,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        ) {
             var solution = document.Project.Solution;
-            var persistentStorageService = (IChecksummedPersistentStorageService)solution.Workspace.Services.GetRequiredService<IPersistentStorageService>();
+            var persistentStorageService =
+                (IChecksummedPersistentStorageService)solution.Workspace.Services.GetRequiredService<IPersistentStorageService>();
 
             // check whether we already have info for this document
             try
             {
-                var storage = await persistentStorageService.GetStorageAsync(solution, checkBranchId: false, cancellationToken).ConfigureAwait(false);
+                var storage = await persistentStorageService.GetStorageAsync(
+                        solution,
+                        checkBranchId: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 await using var _ = storage.ConfigureAwait(false);
-                // Check if we've already stored a checksum and it matches the checksum we 
+                // Check if we've already stored a checksum and it matches the checksum we
                 // expect.  If so, we're already precalculated and don't have to recompute
                 // this index.  Otherwise if we don't have a checksum, or the checksums don't
                 // match, go ahead and recompute it.
-                return await storage.ChecksumMatchesAsync(document, PersistenceName, checksum, cancellationToken).ConfigureAwait(false);
+                return await storage.ChecksumMatchesAsync(
+                        document,
+                        PersistenceName,
+                        checksum,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             catch (Exception e) when (IOUtilities.IsNormalIOException(e))
             {
@@ -134,21 +194,34 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         private static SyntaxTreeIndex? ReadFrom(
-            StringTable stringTable, ObjectReader reader, Checksum? checksum)
-        {
+            StringTable stringTable,
+            ObjectReader reader,
+            Checksum? checksum
+        ) {
             var literalInfo = LiteralInfo.TryReadFrom(reader);
             var identifierInfo = IdentifierInfo.TryReadFrom(reader);
             var contextInfo = ContextInfo.TryReadFrom(reader);
             var declarationInfo = DeclarationInfo.TryReadFrom(stringTable, reader);
             var extensionMethodInfo = ExtensionMethodInfo.TryReadFrom(reader);
 
-            if (literalInfo == null || identifierInfo == null || contextInfo == null || declarationInfo == null || extensionMethodInfo == null)
-            {
+            if (
+                literalInfo == null
+                || identifierInfo == null
+                || contextInfo == null
+                || declarationInfo == null
+                || extensionMethodInfo == null
+            ) {
                 return null;
             }
 
             return new SyntaxTreeIndex(
-                checksum, literalInfo.Value, identifierInfo.Value, contextInfo.Value, declarationInfo.Value, extensionMethodInfo.Value);
+                checksum,
+                literalInfo.Value,
+                identifierInfo.Value,
+                contextInfo.Value,
+                declarationInfo.Value,
+                extensionMethodInfo.Value
+            );
         }
     }
 }

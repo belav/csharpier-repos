@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 SemanticDocument document,
                 SyntaxAnnotation methodNameAnnotation,
                 SyntaxAnnotation callsiteAnnotation,
-                SyntaxAnnotation methodDefinitionAnnotation)
-            {
+                SyntaxAnnotation methodDefinitionAnnotation
+            ) {
                 Contract.ThrowIfNull(document);
                 Contract.ThrowIfNull(methodNameAnnotation);
                 Contract.ThrowIfNull(callsiteAnnotation);

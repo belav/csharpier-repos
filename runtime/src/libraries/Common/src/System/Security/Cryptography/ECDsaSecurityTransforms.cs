@@ -48,7 +48,9 @@ namespace System.Security.Cryptography
         {
             public sealed partial class ECDsaSecurityTransforms : ECDsa
             {
-                private readonly EccSecurityTransforms _ecc = new EccSecurityTransforms(nameof(ECDsa));
+                private readonly EccSecurityTransforms _ecc = new EccSecurityTransforms(
+                    nameof(ECDsa)
+                );
 
                 public ECDsaSecurityTransforms()
                 {
@@ -60,9 +62,13 @@ namespace System.Security.Cryptography
                     KeySizeValue = _ecc.SetKeyAndGetSize(SecKeyPair.PublicOnly(publicKey));
                 }
 
-                internal ECDsaSecurityTransforms(SafeSecKeyRefHandle publicKey, SafeSecKeyRefHandle privateKey)
-                {
-                    KeySizeValue = _ecc.SetKeyAndGetSize(SecKeyPair.PublicPrivatePair(publicKey, privateKey));
+                internal ECDsaSecurityTransforms(
+                    SafeSecKeyRefHandle publicKey,
+                    SafeSecKeyRefHandle privateKey
+                ) {
+                    KeySizeValue = _ecc.SetKeyAndGetSize(
+                        SecKeyPair.PublicPrivatePair(publicKey, privateKey)
+                    );
                 }
 
                 public override KeySizes[] LegalKeySizes
@@ -70,7 +76,8 @@ namespace System.Security.Cryptography
                     get
                     {
                         // Return the three sizes that can be explicitly set (for backwards compatibility)
-                        return new[] {
+                        return new[]
+                        {
                             new KeySizes(minSize: 256, maxSize: 384, skipSize: 128),
                             new KeySizes(minSize: 521, maxSize: 521, skipSize: 0),
                         };
@@ -79,10 +86,7 @@ namespace System.Security.Cryptography
 
                 public override int KeySize
                 {
-                    get
-                    {
-                        return base.KeySize;
-                    }
+                    get { return base.KeySize; }
                     set
                     {
                         if (KeySize == value)
@@ -106,26 +110,37 @@ namespace System.Security.Cryptography
                         throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                     }
 
-                    byte[] derFormatSignature = Interop.AppleCrypto.GenerateSignature(keys.PrivateKey, hash);
+                    byte[] derFormatSignature = Interop.AppleCrypto.GenerateSignature(
+                        keys.PrivateKey,
+                        hash
+                    );
                     byte[] ieeeFormatSignature = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
                         derFormatSignature.AsSpan(0, derFormatSignature.Length),
-                        KeySize);
+                        KeySize
+                    );
 
                     return ieeeFormatSignature;
                 }
 
-                public override bool TrySignHash(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
-                {
+                public override bool TrySignHash(
+                    ReadOnlySpan<byte> source,
+                    Span<byte> destination,
+                    out int bytesWritten
+                ) {
                     SecKeyPair keys = GetKeys();
                     if (keys.PrivateKey == null)
                     {
                         throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                     }
 
-                    byte[] derFormatSignature = Interop.AppleCrypto.GenerateSignature(keys.PrivateKey, source);
+                    byte[] derFormatSignature = Interop.AppleCrypto.GenerateSignature(
+                        keys.PrivateKey,
+                        source
+                    );
                     byte[] ieeeFormatSignature = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
                         derFormatSignature.AsSpan(0, derFormatSignature.Length),
-                        KeySize);
+                        KeySize
+                    );
 
                     if (ieeeFormatSignature.Length <= destination.Length)
                     {
@@ -150,8 +165,10 @@ namespace System.Security.Cryptography
                     return VerifyHash((ReadOnlySpan<byte>)hash, (ReadOnlySpan<byte>)signature);
                 }
 
-                public override bool VerifyHash(ReadOnlySpan<byte> hash, ReadOnlySpan<byte> signature)
-                {
+                public override bool VerifyHash(
+                    ReadOnlySpan<byte> hash,
+                    ReadOnlySpan<byte> signature
+                ) {
                     ThrowIfDisposed();
 
                     // The signature format for .NET is r.Concat(s). Each of r and s are of length BitsToBytes(KeySize), even
@@ -167,17 +184,32 @@ namespace System.Security.Cryptography
                     return Interop.AppleCrypto.VerifySignature(
                         GetKeys().PublicKey,
                         hash,
-                        AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(signature));
+                        AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(signature)
+                    );
                 }
 
-                protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm) =>
-                    AsymmetricAlgorithmHelpers.HashData(data, offset, count, hashAlgorithm);
+                protected override byte[] HashData(
+                    byte[] data,
+                    int offset,
+                    int count,
+                    HashAlgorithmName hashAlgorithm
+                ) => AsymmetricAlgorithmHelpers.HashData(data, offset, count, hashAlgorithm);
 
                 protected override byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
                     AsymmetricAlgorithmHelpers.HashData(data, hashAlgorithm);
 
-                protected override bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, HashAlgorithmName hashAlgorithm, out int bytesWritten) =>
-                    AsymmetricAlgorithmHelpers.TryHashData(source, destination, hashAlgorithm, out bytesWritten);
+                protected override bool TryHashData(
+                    ReadOnlySpan<byte> source,
+                    Span<byte> destination,
+                    HashAlgorithmName hashAlgorithm,
+                    out int bytesWritten
+                ) =>
+                    AsymmetricAlgorithmHelpers.TryHashData(
+                        source,
+                        destination,
+                        hashAlgorithm,
+                        out bytesWritten
+                    );
 
                 private void ThrowIfDisposed()
                 {
@@ -212,8 +244,8 @@ namespace System.Security.Cryptography
                 public override void ImportEncryptedPkcs8PrivateKey(
                     ReadOnlySpan<byte> passwordBytes,
                     ReadOnlySpan<byte> source,
-                    out int bytesRead)
-                {
+                    out int bytesRead
+                ) {
                     ThrowIfDisposed();
                     base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
                 }
@@ -221,8 +253,8 @@ namespace System.Security.Cryptography
                 public override void ImportEncryptedPkcs8PrivateKey(
                     ReadOnlySpan<char> password,
                     ReadOnlySpan<byte> source,
-                    out int bytesRead)
-                {
+                    out int bytesRead
+                ) {
                     ThrowIfDisposed();
                     base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
                 }

@@ -20,8 +20,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [EntityFrameworkInternal]
         public EntityTrackedEventArgs(
             InternalEntityEntry internalEntityEntry,
-            bool fromQuery)
-            : base(internalEntityEntry)
+            bool fromQuery
+        ) : base(internalEntityEntry)
         {
             FromQuery = fromQuery;
         }

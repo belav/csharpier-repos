@@ -54,8 +54,8 @@ namespace BasicWebSite.Controllers
             int intValue,
             IList<string> listValues,
             DateTime datetimeValue,
-            Guid guidValue)
-        {
+            Guid guidValue
+        ) {
             TempData["key1"] = value;
             TempData["key2"] = intValue;
             TempData["key3"] = listValues;
@@ -111,7 +111,9 @@ namespace BasicWebSite.Controllers
         public IActionResult UnhandledExceptionAndSettingTempData()
         {
             TempData[nameof(UnhandledExceptionAndSettingTempData)] = "James";
-            throw new InvalidOperationException($"Exception from action {nameof(UnhandledExceptionAndSettingTempData)}");
+            throw new InvalidOperationException(
+                $"Exception from action {nameof(UnhandledExceptionAndSettingTempData)}"
+            );
         }
 
         [HttpGet]

@@ -21,10 +21,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqlServerEvaluatableExpressionFilter(EvaluatableExpressionFilterDependencies dependencies, RelationalEvaluatableExpressionFilterDependencies relationalDependencies)
-            : base(dependencies, relationalDependencies)
-        {
-        }
+        public SqlServerEvaluatableExpressionFilter(
+            EvaluatableExpressionFilterDependencies dependencies,
+            RelationalEvaluatableExpressionFilterDependencies relationalDependencies
+        ) : base(dependencies, relationalDependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,9 +34,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public override bool IsEvaluatableExpression(Expression expression, IModel model)
         {
-            if (expression is MethodCallExpression methodCallExpression
-                && methodCallExpression.Method.DeclaringType == typeof(SqlServerDbFunctionsExtensions))
-            {
+            if (
+                expression is MethodCallExpression methodCallExpression
+                && methodCallExpression.Method.DeclaringType
+                    == typeof(SqlServerDbFunctionsExtensions)
+            ) {
                 return false;
             }
 

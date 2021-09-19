@@ -11,9 +11,7 @@ namespace DoubLink
     {
         internal DLinkNode[] Mv_DLink;
 
-        public DoubLink(int Num) : this(Num, false)
-        {
-        }
+        public DoubLink(int Num) : this(Num, false) { }
 
         public DoubLink(int Num, bool large)
         {
@@ -37,34 +35,26 @@ namespace DoubLink
             // all elements in between
             for (int i = 1; i < Num - 1; i++)
             {
-                Mv_DLink[i] = new DLinkNode((large ? 250 : i + 1), Mv_DLink[i - 1], Mv_DLink[i + 1]);
+                Mv_DLink[i] = new DLinkNode(
+                    (large ? 250 : i + 1),
+                    Mv_DLink[i - 1],
+                    Mv_DLink[i + 1]
+                );
             }
 
             // last element
             Mv_DLink[Num - 1] = new DLinkNode((large ? 250 : Num), Mv_DLink[Num - 2], Mv_DLink[0]);
         }
 
-
         public int NodeNum
         {
-            get
-            {
-                return Mv_DLink.Length;
-            }
+            get { return Mv_DLink.Length; }
         }
-
 
         public DLinkNode this[int index]
         {
-            get
-            {
-                return Mv_DLink[index];
-            }
-
-            set
-            {
-                Mv_DLink[index] = value;
-            }
+            get { return Mv_DLink[index]; }
+            set { Mv_DLink[index] = value; }
         }
     }
 

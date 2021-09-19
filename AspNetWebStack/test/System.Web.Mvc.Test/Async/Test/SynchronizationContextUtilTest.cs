@@ -17,17 +17,23 @@ namespace System.Web.Mvc.Async.Test
             bool sendWasCalled = false;
 
             Mock<SynchronizationContext> mockSyncContext = new Mock<SynchronizationContext>();
-            mockSyncContext
-                .Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null))
+            mockSyncContext.Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null))
                 .Callback(
                     delegate(SendOrPostCallback d, object state)
                     {
                         sendWasCalled = true;
                         d(state);
-                    });
+                    }
+                );
 
             // Act
-            SynchronizationContextUtil.Sync(mockSyncContext.Object, () => { actionWasCalled = true; });
+            SynchronizationContextUtil.Sync(
+                mockSyncContext.Object,
+                () =>
+                {
+                    actionWasCalled = true;
+                }
+            );
 
             // Assert
             Assert.True(actionWasCalled);
@@ -38,11 +44,12 @@ namespace System.Web.Mvc.Async.Test
         public void SyncWithActionCapturesException()
         {
             // Arrange
-            InvalidOperationException exception = new InvalidOperationException("Some exception text.");
+            InvalidOperationException exception = new InvalidOperationException(
+                "Some exception text."
+            );
 
             Mock<SynchronizationContext> mockSyncContext = new Mock<SynchronizationContext>();
-            mockSyncContext
-                .Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null))
+            mockSyncContext.Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null))
                 .Callback(
                     delegate(SendOrPostCallback d, object state)
                     {
@@ -54,12 +61,24 @@ namespace System.Web.Mvc.Async.Test
                         {
                             // swallow exceptions, just like AspNetSynchronizationContext
                         }
-                    });
+                    }
+                );
 
             // Act & assert
-            SynchronousOperationException thrownException = Assert.Throws<SynchronousOperationException>(
-                delegate { SynchronizationContextUtil.Sync(mockSyncContext.Object, () => { throw exception; }); },
-                @"An operation that crossed a synchronization context failed. See the inner exception for more information.");
+            SynchronousOperationException thrownException =
+                Assert.Throws<SynchronousOperationException>(
+                    delegate
+                    {
+                        SynchronizationContextUtil.Sync(
+                            mockSyncContext.Object,
+                            () =>
+                            {
+                                throw exception;
+                            }
+                        );
+                    },
+                    @"An operation that crossed a synchronization context failed. See the inner exception for more information."
+                );
 
             Assert.Equal(exception, thrownException.InnerException);
         }
@@ -71,14 +90,14 @@ namespace System.Web.Mvc.Async.Test
             bool sendWasCalled = false;
 
             Mock<SynchronizationContext> mockSyncContext = new Mock<SynchronizationContext>();
-            mockSyncContext
-                .Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null))
+            mockSyncContext.Setup(sc => sc.Send(It.IsAny<SendOrPostCallback>(), null))
                 .Callback(
                     delegate(SendOrPostCallback d, object state)
                     {
                         sendWasCalled = true;
                         d(state);
-                    });
+                    }
+                );
 
             // Act
             int retVal = SynchronizationContextUtil.Sync(mockSyncContext.Object, () => 42);

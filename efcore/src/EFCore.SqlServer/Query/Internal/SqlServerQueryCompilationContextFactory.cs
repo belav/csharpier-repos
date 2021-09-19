@@ -37,8 +37,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public SqlServerQueryCompilationContextFactory(
             QueryCompilationContextDependencies dependencies,
             RelationalQueryCompilationContextDependencies relationalDependencies,
-            ISqlServerConnection sqlServerConnection)
-        {
+            ISqlServerConnection sqlServerConnection
+        ) {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 
@@ -53,8 +53,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual QueryCompilationContext Create(bool async)
-            => new SqlServerQueryCompilationContext(
-                _dependencies, _relationalDependencies, async, _sqlServerConnection.IsMultipleActiveResultSetsEnabled);
+        public virtual QueryCompilationContext Create(bool async) =>
+            new SqlServerQueryCompilationContext(
+                _dependencies,
+                _relationalDependencies,
+                async,
+                _sqlServerConnection.IsMultipleActiveResultSetsEnabled
+            );
     }
 }

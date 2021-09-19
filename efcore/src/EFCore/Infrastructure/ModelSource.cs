@@ -55,8 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [Obsolete("Use the overload with IModelCreationDependencies")]
         public virtual IModel GetModel(
             DbContext context,
-            IConventionSetBuilder conventionSetBuilder)
-        {
+            IConventionSetBuilder conventionSetBuilder
+        ) {
             var cache = Dependencies.MemoryCache;
             var cacheKey = Dependencies.ModelCacheKeyFactory.Create(context);
             if (!cache.TryGetValue(cacheKey, out IModel model))
@@ -67,7 +67,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     if (!cache.TryGetValue(cacheKey, out model))
                     {
                         model = CreateModel(context, conventionSetBuilder);
-                        model = cache.Set(cacheKey, model, new MemoryCacheEntryOptions { Size = 100, Priority = CacheItemPriority.High });
+                        model = cache.Set(
+                            cacheKey,
+                            model,
+                            new MemoryCacheEntryOptions
+                            {
+                                Size = 100,
+                                Priority = CacheItemPriority.High
+                            }
+                        );
                     }
                 }
             }
@@ -86,8 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual IModel GetModel(
             DbContext context,
             IConventionSetBuilder conventionSetBuilder,
-            ModelDependencies modelDependencies)
-        {
+            ModelDependencies modelDependencies
+        ) {
             var cache = Dependencies.MemoryCache;
             var cacheKey = Dependencies.ModelCacheKeyFactory.Create(context);
             if (!cache.TryGetValue(cacheKey, out IModel model))
@@ -98,7 +106,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     if (!cache.TryGetValue(cacheKey, out model))
                     {
                         model = CreateModel(context, conventionSetBuilder, modelDependencies);
-                        model = cache.Set(cacheKey, model, new MemoryCacheEntryOptions { Size = 100, Priority = CacheItemPriority.High });
+                        model = cache.Set(
+                            cacheKey,
+                            model,
+                            new MemoryCacheEntryOptions
+                            {
+                                Size = 100,
+                                Priority = CacheItemPriority.High
+                            }
+                        );
                     }
                 }
             }
@@ -116,8 +132,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual IModel GetModel(
             DbContext context,
             ModelCreationDependencies modelCreationDependencies,
-            bool designTime)
-        {
+            bool designTime
+        ) {
             var cache = Dependencies.MemoryCache;
             var cacheKey = Dependencies.ModelCacheKeyFactory.Create(context, designTime);
             if (!cache.TryGetValue(cacheKey, out IModel model))
@@ -127,12 +143,27 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 {
                     if (!cache.TryGetValue(cacheKey, out model))
                     {
-                        model = CreateModel(context, modelCreationDependencies.ConventionSetBuilder, modelCreationDependencies.ModelDependencies);
+                        model = CreateModel(
+                            context,
+                            modelCreationDependencies.ConventionSetBuilder,
+                            modelCreationDependencies.ModelDependencies
+                        );
 
                         model = modelCreationDependencies.ModelRuntimeInitializer.Initialize(
-                            model, designTime, modelCreationDependencies.ValidationLogger);
+                            model,
+                            designTime,
+                            modelCreationDependencies.ValidationLogger
+                        );
 
-                        model = cache.Set(cacheKey, model, new MemoryCacheEntryOptions { Size = 100, Priority = CacheItemPriority.High });
+                        model = cache.Set(
+                            cacheKey,
+                            model,
+                            new MemoryCacheEntryOptions
+                            {
+                                Size = 100,
+                                Priority = CacheItemPriority.High
+                            }
+                        );
                     }
                 }
             }
@@ -149,8 +180,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [Obsolete("Use the overload with IModelCreationDependencies")]
         protected virtual IModel CreateModel(
             DbContext context,
-            IConventionSetBuilder conventionSetBuilder)
-        {
+            IConventionSetBuilder conventionSetBuilder
+        ) {
             Check.NotNull(context, nameof(context));
 
             var modelBuilder = new ModelBuilder(conventionSetBuilder.CreateConventionSet());
@@ -170,11 +201,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual IModel CreateModel(
             DbContext context,
             IConventionSetBuilder conventionSetBuilder,
-            ModelDependencies modelDependencies)
-        {
+            ModelDependencies modelDependencies
+        ) {
             Check.DebugAssert(context != null, "context == null");
 
-            var modelBuilder = new ModelBuilder(conventionSetBuilder.CreateConventionSet(), modelDependencies);
+            var modelBuilder = new ModelBuilder(
+                conventionSetBuilder.CreateConventionSet(),
+                modelDependencies
+            );
 
             Dependencies.ModelCustomizer.Customize(modelBuilder, context);
 

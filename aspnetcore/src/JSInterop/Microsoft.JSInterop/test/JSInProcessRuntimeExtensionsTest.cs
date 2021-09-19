@@ -16,7 +16,8 @@ namespace Microsoft.JSInterop
             var method = "someMethod";
             var args = new[] { "a", "b" };
             var jsRuntime = new Mock<IJSInProcessRuntime>(MockBehavior.Strict);
-            jsRuntime.Setup(s => s.Invoke<object>(method, args)).Returns(new ValueTask<object>(new object()));
+            jsRuntime.Setup(s => s.Invoke<object>(method, args))
+                .Returns(new ValueTask<object>(new object()));
 
             // Act
             jsRuntime.Object.InvokeVoid(method, args);

@@ -74,10 +74,7 @@ namespace System.IO.IsolatedStorage
 
         internal bool Disposed
         {
-            get
-            {
-                return _disposed;
-            }
+            get { return _disposed; }
         }
 
         internal bool IsDeleted
@@ -227,7 +224,9 @@ namespace System.IO.IsolatedStorage
             {
                 // FileSystem APIs return the complete path of the matching files however Iso store only provided the FileName
                 // and hid the IsoStore root. Hence we find all the matching files from the fileSystem and simply return the fileNames.
-                return Directory.EnumerateFiles(RootDirectory, searchPattern).Select(f => Path.GetFileName(f)).ToArray();
+                return Directory.EnumerateFiles(RootDirectory, searchPattern)
+                    .Select(f => Path.GetFileName(f))
+                    .ToArray();
             }
             catch (UnauthorizedAccessException e)
             {
@@ -252,7 +251,9 @@ namespace System.IO.IsolatedStorage
             {
                 // FileSystem APIs return the complete path of the matching directories however Iso store only provided the directory name
                 // and hid the IsoStore root. Hence we find all the matching directories from the fileSystem and simply return their names.
-                return Directory.EnumerateDirectories(RootDirectory, searchPattern).Select(m => m.Substring(Path.GetDirectoryName(m)!.Length + 1)).ToArray();
+                return Directory.EnumerateDirectories(RootDirectory, searchPattern)
+                    .Select(m => m.Substring(Path.GetDirectoryName(m)!.Length + 1))
+                    .ToArray();
             }
             catch (UnauthorizedAccessException e)
             {
@@ -274,8 +275,12 @@ namespace System.IO.IsolatedStorage
             return new IsolatedStorageFileStream(path, mode, access, this);
         }
 
-        public IsolatedStorageFileStream OpenFile(string path, FileMode mode, FileAccess access, FileShare share)
-        {
+        public IsolatedStorageFileStream OpenFile(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        ) {
             EnsureStoreIsValid();
             return new IsolatedStorageFileStream(path, mode, access, share, this);
         }
@@ -283,7 +288,13 @@ namespace System.IO.IsolatedStorage
         public IsolatedStorageFileStream CreateFile(string path)
         {
             EnsureStoreIsValid();
-            return new IsolatedStorageFileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.None, this);
+            return new IsolatedStorageFileStream(
+                path,
+                FileMode.Create,
+                FileAccess.ReadWrite,
+                FileShare.None,
+                this
+            );
         }
 
         public DateTimeOffset GetCreationTime(string path)
@@ -470,7 +481,10 @@ namespace System.IO.IsolatedStorage
 
             if (destinationDirectoryName.Length == 0)
             {
-                throw new ArgumentException(SR.Argument_EmptyPath, nameof(destinationDirectoryName));
+                throw new ArgumentException(
+                    SR.Argument_EmptyPath,
+                    nameof(destinationDirectoryName)
+                );
             }
 
             EnsureStoreIsValid();
@@ -484,7 +498,9 @@ namespace System.IO.IsolatedStorage
             }
             catch (DirectoryNotFoundException)
             {
-                throw new DirectoryNotFoundException(SR.Format(SR.PathNotFound_Path, sourceDirectoryName));
+                throw new DirectoryNotFoundException(
+                    SR.Format(SR.PathNotFound_Path, sourceDirectoryName)
+                );
             }
             catch (PathTooLongException)
             {
@@ -535,28 +551,21 @@ namespace System.IO.IsolatedStorage
 
         public override long AvailableFreeSpace
         {
-            get
-            {
-                return Quota - UsedSize;
-            }
+            get { return Quota - UsedSize; }
         }
 
         [CLSCompliant(false)]
-        [Obsolete("IsolatedStorage.MaximumSize has been deprecated because it is not CLS Compliant.  To get the maximum size use IsolatedStorage.Quota")]
+        [Obsolete(
+            "IsolatedStorage.MaximumSize has been deprecated because it is not CLS Compliant.  To get the maximum size use IsolatedStorage.Quota"
+        )]
         public override ulong MaximumSize
         {
-            get
-            {
-                return long.MaxValue;
-            }
+            get { return long.MaxValue; }
         }
 
         public override long Quota
         {
-            get
-            {
-                return long.MaxValue;
-            }
+            get { return long.MaxValue; }
         }
 
         public override long UsedSize
@@ -568,7 +577,9 @@ namespace System.IO.IsolatedStorage
         }
 
         [CLSCompliant(false)]
-        [Obsolete("IsolatedStorage.CurrentSize has been deprecated because it is not CLS Compliant.  To get the current size use IsolatedStorage.UsedSize")]
+        [Obsolete(
+            "IsolatedStorage.CurrentSize has been deprecated because it is not CLS Compliant.  To get the current size use IsolatedStorage.UsedSize"
+        )]
         public override ulong CurrentSize
         {
             get
@@ -589,7 +600,11 @@ namespace System.IO.IsolatedStorage
 
         public static IsolatedStorageFile GetUserStoreForDomain()
         {
-            return GetStore(IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain | IsolatedStorageScope.User);
+            return GetStore(
+                IsolatedStorageScope.Assembly
+                    | IsolatedStorageScope.Domain
+                    | IsolatedStorageScope.User
+            );
         }
 
         public static IsolatedStorageFile GetUserStoreForSite()
@@ -610,7 +625,11 @@ namespace System.IO.IsolatedStorage
 
         public static IsolatedStorageFile GetMachineStoreForDomain()
         {
-            return GetStore(IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain | IsolatedStorageScope.Machine);
+            return GetStore(
+                IsolatedStorageScope.Assembly
+                    | IsolatedStorageScope.Domain
+                    | IsolatedStorageScope.Machine
+            );
         }
 
         private static IsolatedStorageFile GetStore(IsolatedStorageScope scope)
@@ -636,28 +655,46 @@ namespace System.IO.IsolatedStorage
         //
         // "Known" types are Publisher, StrongName, Url, Site, and Zone.
 
-        public static IsolatedStorageFile GetStore(IsolatedStorageScope scope, Type? applicationEvidenceType)
-        {
+        public static IsolatedStorageFile GetStore(
+            IsolatedStorageScope scope,
+            Type? applicationEvidenceType
+        ) {
             // Scope MUST be Application
-            return (applicationEvidenceType == null) ? GetStore(scope) : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
+            return (applicationEvidenceType == null)
+                ? GetStore(scope)
+                : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
         }
 
-        public static IsolatedStorageFile GetStore(IsolatedStorageScope scope, object? applicationIdentity)
-        {
+        public static IsolatedStorageFile GetStore(
+            IsolatedStorageScope scope,
+            object? applicationIdentity
+        ) {
             // Scope MUST be Application
-            return (applicationIdentity == null) ? GetStore(scope) : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
+            return (applicationIdentity == null)
+                ? GetStore(scope)
+                : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
         }
 
-        public static IsolatedStorageFile GetStore(IsolatedStorageScope scope, Type? domainEvidenceType, Type? assemblyEvidenceType)
-        {
+        public static IsolatedStorageFile GetStore(
+            IsolatedStorageScope scope,
+            Type? domainEvidenceType,
+            Type? assemblyEvidenceType
+        ) {
             // Scope MUST NOT be Application (assembly is assumed otherwise)
-            return (domainEvidenceType == null && assemblyEvidenceType == null) ? GetStore(scope) : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
+            return (domainEvidenceType == null && assemblyEvidenceType == null)
+                ? GetStore(scope)
+                : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
         }
 
-        public static IsolatedStorageFile GetStore(IsolatedStorageScope scope, object? domainIdentity, object? assemblyIdentity)
-        {
+        public static IsolatedStorageFile GetStore(
+            IsolatedStorageScope scope,
+            object? domainIdentity,
+            object? assemblyIdentity
+        ) {
             // Scope MUST NOT be Application (assembly is assumed otherwise)
-            return (domainIdentity == null && assemblyIdentity == null) ? GetStore(scope) : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
+            return (domainIdentity == null && assemblyIdentity == null)
+                ? GetStore(scope)
+                : throw new PlatformNotSupportedException(SR.PlatformNotSupported_CAS); // https://github.com/dotnet/runtime/issues/18208
         }
 
         internal string GetFullPath(string partialPath)
@@ -669,8 +706,10 @@ namespace System.IO.IsolatedStorage
             // Chop off directory separator characters at the start of the string because they counfuse Path.Combine.
             for (i = 0; i < partialPath.Length; i++)
             {
-                if (partialPath[i] != Path.DirectorySeparatorChar && partialPath[i] != Path.AltDirectorySeparatorChar)
-                {
+                if (
+                    partialPath[i] != Path.DirectorySeparatorChar
+                    && partialPath[i] != Path.AltDirectorySeparatorChar
+                ) {
                     break;
                 }
             }
@@ -696,8 +735,10 @@ namespace System.IO.IsolatedStorage
             _disposed = true;
         }
 
-        internal static Exception GetIsolatedStorageException(string exceptionMsg, Exception rootCause)
-        {
+        internal static Exception GetIsolatedStorageException(
+            string exceptionMsg,
+            Exception rootCause
+        ) {
             IsolatedStorageException e = new IsolatedStorageException(exceptionMsg, rootCause);
             e._underlyingException = rootCause;
             return e;
@@ -729,7 +770,9 @@ namespace System.IO.IsolatedStorage
 
             Close();
 
-            string? parentDirectory = Path.GetDirectoryName(RootDirectory.TrimEnd(Path.DirectorySeparatorChar));
+            string? parentDirectory = Path.GetDirectoryName(
+                RootDirectory.TrimEnd(Path.DirectorySeparatorChar)
+            );
             Debug.Assert(parentDirectory != null);
 
             if (ContainsUnknownFiles(parentDirectory))
@@ -791,18 +834,19 @@ namespace System.IO.IsolatedStorage
 
         private static void VerifyGlobalScope(IsolatedStorageScope scope)
         {
-            if ((scope != IsolatedStorageScope.User) &&
-                (scope != (IsolatedStorageScope.User |
-                          IsolatedStorageScope.Roaming)) &&
-                (scope != IsolatedStorageScope.Machine))
-            {
+            if (
+                (scope != IsolatedStorageScope.User)
+                && (scope != (IsolatedStorageScope.User | IsolatedStorageScope.Roaming))
+                && (scope != IsolatedStorageScope.Machine)
+            ) {
                 throw new ArgumentException(SR.IsolatedStorage_Scope_U_R_M);
             }
         }
 
         private bool ContainsUnknownFiles(string directory)
         {
-            string[] dirs, files;
+            string[] dirs,
+                files;
 
             try
             {
@@ -830,25 +874,35 @@ namespace System.IO.IsolatedStorage
             if (Helper.IsRoaming(Scope))
                 return ((files.Length > 1) || !IsIdFile(files[0]));
 
-            return (files.Length > 2 ||
-                (
-                    (!IsIdFile(files[0]) && !IsInfoFile(files[0]))) ||
-                    (files.Length == 2 && !IsIdFile(files[1]) && !IsInfoFile(files[1]))
-                );
+            return (
+                files.Length > 2
+                || ((!IsIdFile(files[0]) && !IsInfoFile(files[0])))
+                || (files.Length == 2 && !IsIdFile(files[1]) && !IsInfoFile(files[1]))
+            );
         }
 
         private bool IsMatchingScopeDirectory(string directory)
         {
             string directoryName = Path.GetFileName(directory);
 
-            return
-                (Helper.IsApplication(Scope) && string.Equals(directoryName, s_appFiles, StringComparison.Ordinal))
-                || (Helper.IsAssembly(Scope) && string.Equals(directoryName, s_assemFiles, StringComparison.Ordinal))
-                || (Helper.IsDomain(Scope) && string.Equals(directoryName, s_files, StringComparison.Ordinal));
+            return (
+                    Helper.IsApplication(Scope)
+                    && string.Equals(directoryName, s_appFiles, StringComparison.Ordinal)
+                )
+                || (
+                    Helper.IsAssembly(Scope)
+                    && string.Equals(directoryName, s_assemFiles, StringComparison.Ordinal)
+                )
+                || (
+                    Helper.IsDomain(Scope)
+                    && string.Equals(directoryName, s_files, StringComparison.Ordinal)
+                );
         }
 
-        private static bool IsIdFile(string file) => string.Equals(Path.GetFileName(file), "identity.dat");
+        private static bool IsIdFile(string file) =>
+            string.Equals(Path.GetFileName(file), "identity.dat");
 
-        private static bool IsInfoFile(string file) => string.Equals(Path.GetFileName(file), "info.dat");
+        private static bool IsInfoFile(string file) =>
+            string.Equals(Path.GetFileName(file), "info.dat");
     }
 }

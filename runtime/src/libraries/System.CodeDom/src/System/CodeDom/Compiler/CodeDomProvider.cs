@@ -13,25 +13,35 @@ namespace System.CodeDom.Compiler
     [ToolboxItem(false)]
     public abstract class CodeDomProvider : Component
     {
-        private static readonly Dictionary<string, CompilerInfo> s_compilerLanguages = new Dictionary<string, CompilerInfo>(StringComparer.OrdinalIgnoreCase);
-        private static readonly Dictionary<string, CompilerInfo> s_compilerExtensions = new Dictionary<string, CompilerInfo>(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, CompilerInfo> s_compilerLanguages =
+            new Dictionary<string, CompilerInfo>(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, CompilerInfo> s_compilerExtensions =
+            new Dictionary<string, CompilerInfo>(StringComparer.OrdinalIgnoreCase);
         private static readonly List<CompilerInfo> s_allCompilerInfo = new List<CompilerInfo>();
 
         static CodeDomProvider()
         {
             // C#
-            AddCompilerInfo(new CompilerInfo(new CompilerParameters() { WarningLevel = 4 }, typeof(CSharpCodeProvider).FullName)
-            {
-                _compilerLanguages = new string[] { "c#", "cs", "csharp" },
-                _compilerExtensions = new string[] { ".cs", "cs" }
-            });
+            AddCompilerInfo(
+                new CompilerInfo(
+                    new CompilerParameters() { WarningLevel = 4 },
+                    typeof(CSharpCodeProvider).FullName
+                ) {
+                    _compilerLanguages = new string[] { "c#", "cs", "csharp" },
+                    _compilerExtensions = new string[] { ".cs", "cs" }
+                }
+            );
 
             // VB
-            AddCompilerInfo(new CompilerInfo(new CompilerParameters() { WarningLevel = 4 }, typeof(VBCodeProvider).FullName)
-            {
-                _compilerLanguages = new string[] { "vb", "vbs", "visualbasic", "vbscript" },
-                _compilerExtensions = new string[] { ".vb", "vb" }
-            });
+            AddCompilerInfo(
+                new CompilerInfo(
+                    new CompilerParameters() { WarningLevel = 4 },
+                    typeof(VBCodeProvider).FullName
+                ) {
+                    _compilerLanguages = new string[] { "vb", "vbs", "visualbasic", "vbscript" },
+                    _compilerExtensions = new string[] { ".vb", "vb" }
+                }
+            );
         }
 
         private static void AddCompilerInfo(CompilerInfo compilerInfo)
@@ -49,9 +59,10 @@ namespace System.CodeDom.Compiler
             s_allCompilerInfo.Add(compilerInfo);
         }
 
-
-        public static CodeDomProvider CreateProvider(string language, System.Collections.Generic.IDictionary<string, string> providerOptions)
-        {
+        public static CodeDomProvider CreateProvider(
+            string language,
+            System.Collections.Generic.IDictionary<string, string> providerOptions
+        ) {
             CompilerInfo compilerInfo = GetCompilerInfo(language);
             return compilerInfo.CreateProvider(providerOptions);
         }
@@ -72,9 +83,11 @@ namespace System.CodeDom.Compiler
             return compilerInfo._compilerLanguages[0];
         }
 
-        public static bool IsDefinedLanguage(string language) => GetCompilerInfoForLanguageNoThrow(language) != null;
+        public static bool IsDefinedLanguage(string language) =>
+            GetCompilerInfoForLanguageNoThrow(language) != null;
 
-        public static bool IsDefinedExtension(string extension) => GetCompilerInfoForExtensionNoThrow(extension) != null;
+        public static bool IsDefinedExtension(string extension) =>
+            GetCompilerInfoForExtensionNoThrow(extension) != null;
 
         public static CompilerInfo GetCompilerInfo(string language)
         {
@@ -116,7 +129,9 @@ namespace System.CodeDom.Compiler
 
         public virtual LanguageOptions LanguageOptions => LanguageOptions.None;
 
-        [Obsolete("Callers should not use the ICodeGenerator interface and should instead use the methods directly on the CodeDomProvider class. Those inheriting from CodeDomProvider must still implement this interface, and should exclude this warning or also obsolete this method.")]
+        [Obsolete(
+            "Callers should not use the ICodeGenerator interface and should instead use the methods directly on the CodeDomProvider class. Those inheriting from CodeDomProvider must still implement this interface, and should exclude this warning or also obsolete this method."
+        )]
         public abstract ICodeGenerator CreateGenerator();
 
 #pragma warning disable 618 // obsolete
@@ -125,22 +140,32 @@ namespace System.CodeDom.Compiler
         public virtual ICodeGenerator CreateGenerator(string fileName) => CreateGenerator();
 #pragma warning restore 618
 
-        [Obsolete("Callers should not use the ICodeCompiler interface and should instead use the methods directly on the CodeDomProvider class. Those inheriting from CodeDomProvider must still implement this interface, and should exclude this warning or also obsolete this method.")]
+        [Obsolete(
+            "Callers should not use the ICodeCompiler interface and should instead use the methods directly on the CodeDomProvider class. Those inheriting from CodeDomProvider must still implement this interface, and should exclude this warning or also obsolete this method."
+        )]
         public abstract ICodeCompiler CreateCompiler();
 
-        [Obsolete("Callers should not use the ICodeParser interface and should instead use the methods directly on the CodeDomProvider class. Those inheriting from CodeDomProvider must still implement this interface, and should exclude this warning or also obsolete this method.")]
+        [Obsolete(
+            "Callers should not use the ICodeParser interface and should instead use the methods directly on the CodeDomProvider class. Those inheriting from CodeDomProvider must still implement this interface, and should exclude this warning or also obsolete this method."
+        )]
         public virtual ICodeParser CreateParser() => null;
 
         public virtual TypeConverter GetConverter(Type type) => TypeDescriptor.GetConverter(type);
 
-        public virtual CompilerResults CompileAssemblyFromDom(CompilerParameters options, params CodeCompileUnit[] compilationUnits) =>
-            CreateCompilerHelper().CompileAssemblyFromDomBatch(options, compilationUnits);
+        public virtual CompilerResults CompileAssemblyFromDom(
+            CompilerParameters options,
+            params CodeCompileUnit[] compilationUnits
+        ) => CreateCompilerHelper().CompileAssemblyFromDomBatch(options, compilationUnits);
 
-        public virtual CompilerResults CompileAssemblyFromFile(CompilerParameters options, params string[] fileNames) =>
-            CreateCompilerHelper().CompileAssemblyFromFileBatch(options, fileNames);
+        public virtual CompilerResults CompileAssemblyFromFile(
+            CompilerParameters options,
+            params string[] fileNames
+        ) => CreateCompilerHelper().CompileAssemblyFromFileBatch(options, fileNames);
 
-        public virtual CompilerResults CompileAssemblyFromSource(CompilerParameters options, params string[] sources) =>
-            CreateCompilerHelper().CompileAssemblyFromSourceBatch(options, sources);
+        public virtual CompilerResults CompileAssemblyFromSource(
+            CompilerParameters options,
+            params string[] sources
+        ) => CreateCompilerHelper().CompileAssemblyFromSourceBatch(options, sources);
 
         public virtual bool IsValidIdentifier(string value) =>
             CreateGeneratorHelper().IsValidIdentifier(value);
@@ -157,23 +182,41 @@ namespace System.CodeDom.Compiler
         public virtual bool Supports(GeneratorSupport generatorSupport) =>
             CreateGeneratorHelper().Supports(generatorSupport);
 
-        public virtual void GenerateCodeFromExpression(CodeExpression expression, TextWriter writer, CodeGeneratorOptions options) =>
-            CreateGeneratorHelper().GenerateCodeFromExpression(expression, writer, options);
+        public virtual void GenerateCodeFromExpression(
+            CodeExpression expression,
+            TextWriter writer,
+            CodeGeneratorOptions options
+        ) => CreateGeneratorHelper().GenerateCodeFromExpression(expression, writer, options);
 
-        public virtual void GenerateCodeFromStatement(CodeStatement statement, TextWriter writer, CodeGeneratorOptions options) =>
-            CreateGeneratorHelper().GenerateCodeFromStatement(statement, writer, options);
+        public virtual void GenerateCodeFromStatement(
+            CodeStatement statement,
+            TextWriter writer,
+            CodeGeneratorOptions options
+        ) => CreateGeneratorHelper().GenerateCodeFromStatement(statement, writer, options);
 
-        public virtual void GenerateCodeFromNamespace(CodeNamespace codeNamespace, TextWriter writer, CodeGeneratorOptions options) =>
-            CreateGeneratorHelper().GenerateCodeFromNamespace(codeNamespace, writer, options);
+        public virtual void GenerateCodeFromNamespace(
+            CodeNamespace codeNamespace,
+            TextWriter writer,
+            CodeGeneratorOptions options
+        ) => CreateGeneratorHelper().GenerateCodeFromNamespace(codeNamespace, writer, options);
 
-        public virtual void GenerateCodeFromCompileUnit(CodeCompileUnit compileUnit, TextWriter writer, CodeGeneratorOptions options) =>
-            CreateGeneratorHelper().GenerateCodeFromCompileUnit(compileUnit, writer, options);
+        public virtual void GenerateCodeFromCompileUnit(
+            CodeCompileUnit compileUnit,
+            TextWriter writer,
+            CodeGeneratorOptions options
+        ) => CreateGeneratorHelper().GenerateCodeFromCompileUnit(compileUnit, writer, options);
 
-        public virtual void GenerateCodeFromType(CodeTypeDeclaration codeType, TextWriter writer, CodeGeneratorOptions options) =>
-            CreateGeneratorHelper().GenerateCodeFromType(codeType, writer, options);
+        public virtual void GenerateCodeFromType(
+            CodeTypeDeclaration codeType,
+            TextWriter writer,
+            CodeGeneratorOptions options
+        ) => CreateGeneratorHelper().GenerateCodeFromType(codeType, writer, options);
 
-        public virtual void GenerateCodeFromMember(CodeTypeMember member, TextWriter writer, CodeGeneratorOptions options)
-        {
+        public virtual void GenerateCodeFromMember(
+            CodeTypeMember member,
+            TextWriter writer,
+            CodeGeneratorOptions options
+        ) {
             throw new NotImplementedException(SR.NotSupported_CodeDomAPI);
         }
 
@@ -215,7 +258,10 @@ namespace System.CodeDom.Compiler
         private sealed class ConfigurationErrorsException : SystemException
         {
             public ConfigurationErrorsException(string message) : base(message) { }
-            public ConfigurationErrorsException(SerializationInfo info, StreamingContext context) : base(info, context)
+            public ConfigurationErrorsException(
+                SerializationInfo info,
+                StreamingContext context
+            ) : base(info, context)
             {
                 throw new PlatformNotSupportedException();
             }

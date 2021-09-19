@@ -13,25 +13,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class NameOfKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public NameOfKeywordRecommender()
-            : base(SyntaxKind.NameOfKeyword)
-        {
-        }
+        public NameOfKeywordRecommender() : base(SyntaxKind.NameOfKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return
-                context.IsAnyExpressionContext ||
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                IsAttributeArgumentContext(context);
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            return context.IsAnyExpressionContext
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || IsAttributeArgumentContext(context);
         }
 
         private static bool IsAttributeArgumentContext(CSharpSyntaxContext context)
         {
-            return
-                context.IsAnyExpressionContext &&
-                context.LeftToken.GetAncestor<AttributeSyntax>() != null;
+            return context.IsAnyExpressionContext
+                && context.LeftToken.GetAncestor<AttributeSyntax>() != null;
         }
     }
 }

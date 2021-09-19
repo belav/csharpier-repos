@@ -16,7 +16,10 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Proxy_Derives_From_DispatchProxy_BaseType()
         {
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
 
             Assert.NotNull(proxy);
             Assert.IsAssignableFrom<TestDispatchProxy>(proxy);
@@ -25,10 +28,14 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Proxy_Implements_All_Interfaces()
         {
-            TestType_IHelloAndGoodbyeService proxy = DispatchProxy.Create<TestType_IHelloAndGoodbyeService, TestDispatchProxy>();
+            TestType_IHelloAndGoodbyeService proxy = DispatchProxy.Create<
+                TestType_IHelloAndGoodbyeService,
+                TestDispatchProxy
+            >();
 
             Assert.NotNull(proxy);
-            Type[] implementedInterfaces = typeof(TestType_IHelloAndGoodbyeService).GetTypeInfo().ImplementedInterfaces.ToArray();
+            Type[] implementedInterfaces = typeof(TestType_IHelloAndGoodbyeService).GetTypeInfo()
+                .ImplementedInterfaces.ToArray();
             foreach (Type t in implementedInterfaces)
             {
                 Assert.IsAssignableFrom(t, proxy);
@@ -38,20 +45,29 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Proxy_Internal_Interface()
         {
-            TestType_InternalInterfaceService proxy = DispatchProxy.Create<TestType_InternalInterfaceService, TestDispatchProxy>();
+            TestType_InternalInterfaceService proxy = DispatchProxy.Create<
+                TestType_InternalInterfaceService,
+                TestDispatchProxy
+            >();
             Assert.NotNull(proxy);
         }
 
         [Fact]
         public static void Create_Proxy_Implements_Internal_Interfaces()
         {
-            TestType_InternalInterfaceService proxy = DispatchProxy.Create<TestType_PublicInterfaceService_Implements_Internal, TestDispatchProxy>();
+            TestType_InternalInterfaceService proxy = DispatchProxy.Create<
+                TestType_PublicInterfaceService_Implements_Internal,
+                TestDispatchProxy
+            >();
             Assert.NotNull(proxy);
 
             // ensure we emit a valid attribute definition
-            Type iactAttributeType = proxy.GetType().Assembly.GetType("System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute");
+            Type iactAttributeType = proxy.GetType()
+                .Assembly.GetType("System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute");
             Assert.NotNull(iactAttributeType);
-            ConstructorInfo constructor = iactAttributeType.GetConstructor(new[] { typeof(string) });
+            ConstructorInfo constructor = iactAttributeType.GetConstructor(
+                new[] { typeof(string) }
+            );
             Assert.NotNull(constructor);
             PropertyInfo propertyInfo = iactAttributeType.GetProperty("AssemblyName");
             Assert.NotNull(propertyInfo);
@@ -67,8 +83,14 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Same_Proxy_Type_And_Base_Type_Reuses_Same_Generated_Type()
         {
-            TestType_IHelloService proxy1 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
-            TestType_IHelloService proxy2 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy1 = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
+            TestType_IHelloService proxy2 = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
 
             Assert.NotNull(proxy1);
             Assert.NotNull(proxy2);
@@ -78,62 +100,109 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Proxy_Instances_Of_Same_Proxy_And_Base_Type_Are_Unique()
         {
-            TestType_IHelloService proxy1 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
-            TestType_IHelloService proxy2 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy1 = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
+            TestType_IHelloService proxy2 = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
 
             Assert.NotNull(proxy1);
             Assert.NotNull(proxy2);
-            Assert.False(object.ReferenceEquals(proxy1, proxy2),
-                        string.Format("First and second instance of proxy type {0} were the same instance", proxy1.GetType().ToString()));
+            Assert.False(
+                object.ReferenceEquals(proxy1, proxy2),
+                string.Format(
+                    "First and second instance of proxy type {0} were the same instance",
+                    proxy1.GetType().ToString()
+                )
+            );
         }
-
 
         [Fact]
         public static void Create_Same_Proxy_Type_With_Different_BaseType_Uses_Different_Generated_Type()
         {
-            TestType_IHelloService proxy1 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
-            TestType_IHelloService proxy2 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy2>();
+            TestType_IHelloService proxy1 = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
+            TestType_IHelloService proxy2 = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy2
+            >();
 
             Assert.NotNull(proxy1);
             Assert.NotNull(proxy2);
-            Assert.False(proxy1.GetType() == proxy2.GetType(),
-                        string.Format("Proxy generated for base type {0} used same for base type {1}", typeof(TestDispatchProxy).Name, typeof(TestDispatchProxy).Name));
+            Assert.False(
+                proxy1.GetType() == proxy2.GetType(),
+                string.Format(
+                    "Proxy generated for base type {0} used same for base type {1}",
+                    typeof(TestDispatchProxy).Name,
+                    typeof(TestDispatchProxy).Name
+                )
+            );
         }
 
         [Fact]
         public static void Created_Proxy_With_Different_Proxy_Type_Use_Different_Generated_Type()
         {
-            TestType_IHelloService proxy1 = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
-            TestType_IGoodbyeService proxy2 = DispatchProxy.Create<TestType_IGoodbyeService, TestDispatchProxy>();
+            TestType_IHelloService proxy1 = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
+            TestType_IGoodbyeService proxy2 = DispatchProxy.Create<
+                TestType_IGoodbyeService,
+                TestDispatchProxy
+            >();
 
             Assert.NotNull(proxy1);
             Assert.NotNull(proxy2);
-            Assert.False(proxy1.GetType() == proxy2.GetType(),
-                        string.Format("Proxy generated for type {0} used same for type {1}", typeof(TestType_IHelloService).Name, typeof(TestType_IGoodbyeService).Name));
+            Assert.False(
+                proxy1.GetType() == proxy2.GetType(),
+                string.Format(
+                    "Proxy generated for type {0} used same for type {1}",
+                    typeof(TestType_IHelloService).Name,
+                    typeof(TestType_IGoodbyeService).Name
+                )
+            );
         }
 
         [Fact]
         public static void Create_Using_Concrete_Proxy_Type_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("T", () => DispatchProxy.Create<TestType_ConcreteClass, TestDispatchProxy>());
+            AssertExtensions.Throws<ArgumentException>(
+                "T",
+                () => DispatchProxy.Create<TestType_ConcreteClass, TestDispatchProxy>()
+            );
         }
 
         [Fact]
         public static void Create_Using_Sealed_BaseType_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("TProxy", () => DispatchProxy.Create<TestType_IHelloService, Sealed_TestDispatchProxy>());
+            AssertExtensions.Throws<ArgumentException>(
+                "TProxy",
+                () => DispatchProxy.Create<TestType_IHelloService, Sealed_TestDispatchProxy>()
+            );
         }
 
         [Fact]
         public static void Create_Using_Abstract_BaseType_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("TProxy", () => DispatchProxy.Create<TestType_IHelloService, Abstract_TestDispatchProxy>());
+            AssertExtensions.Throws<ArgumentException>(
+                "TProxy",
+                () => DispatchProxy.Create<TestType_IHelloService, Abstract_TestDispatchProxy>()
+            );
         }
 
         [Fact]
         public static void Create_Using_BaseType_Without_Default_Ctor_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("TProxy", () => DispatchProxy.Create<TestType_IHelloService, NoDefaultCtor_TestDispatchProxy>());
+            AssertExtensions.Throws<ArgumentException>(
+                "TProxy",
+                () =>
+                    DispatchProxy.Create<TestType_IHelloService, NoDefaultCtor_TestDispatchProxy>()
+            );
         }
 
         [Fact]
@@ -151,43 +220,72 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Using_PrivateProxyAndInternalServiceWithExternalGenericArgument()
         {
-            Assert.NotNull(TestType_PrivateProxy.Proxy<TestType_InternalInterfaceWithNonPublicExternalGenericArgument>());
+            Assert.NotNull(
+                TestType_PrivateProxy.Proxy<TestType_InternalInterfaceWithNonPublicExternalGenericArgument>()
+            );
         }
 
         [Fact]
         public static void Create_Using_InternalProxy()
         {
-            Assert.NotNull(DispatchProxy.Create<TestType_InternalInterfaceService, InternalInvokeProxy>());
+            Assert.NotNull(
+                DispatchProxy.Create<TestType_InternalInterfaceService, InternalInvokeProxy>()
+            );
         }
 
         [Fact]
         public static void Create_Using_ExternalNonPublicService()
         {
-            Assert.NotNull(DispatchProxy.Create<DispatchProxyTestDependency.TestType_IExternalNonPublicHiService, TestDispatchProxy>());
+            Assert.NotNull(
+                DispatchProxy.Create<
+                    DispatchProxyTestDependency.TestType_IExternalNonPublicHiService,
+                    TestDispatchProxy
+                >()
+            );
         }
 
         [Fact]
         public static void Create_Using_InternalProxyWithExternalNonPublicBaseType()
         {
-            Assert.NotNull(DispatchProxy.Create<TestType_IHelloService, TestType_InternalProxyInternalBaseType>());
+            Assert.NotNull(
+                DispatchProxy.Create<
+                    TestType_IHelloService,
+                    TestType_InternalProxyInternalBaseType
+                >()
+            );
         }
 
         [Fact]
         public static void Create_Using_InternalServiceImplementingNonPublicExternalService()
         {
-            Assert.NotNull(DispatchProxy.Create<TestType_InternalInterfaceImplementsNonPublicExternalType, TestDispatchProxy>());
+            Assert.NotNull(
+                DispatchProxy.Create<
+                    TestType_InternalInterfaceImplementsNonPublicExternalType,
+                    TestDispatchProxy
+                >()
+            );
         }
 
         [Fact]
         public static void Create_Using_InternalServiceWithGenericArgumentBeingNonPublicExternalService()
         {
-            Assert.NotNull(DispatchProxy.Create<TestType_InternalInterfaceWithNonPublicExternalGenericArgument, TestDispatchProxy>());
+            Assert.NotNull(
+                DispatchProxy.Create<
+                    TestType_InternalInterfaceWithNonPublicExternalGenericArgument,
+                    TestDispatchProxy
+                >()
+            );
         }
 
         [Fact]
         public static void Create_Using_InternalProxyWithBaseTypeImplementingServiceWithgenericArgumentBeingNonPublicExternalService()
         {
-            Assert.NotNull(DispatchProxy.Create<TestType_IHelloService, TestType_InternalProxyImplementingInterfaceWithGenericArgumentBeingNonPublicExternalType>());
+            Assert.NotNull(
+                DispatchProxy.Create<
+                    TestType_IHelloService,
+                    TestType_InternalProxyImplementingInterfaceWithGenericArgumentBeingNonPublicExternalType
+                >()
+            );
         }
 
         [Fact]
@@ -204,17 +302,25 @@ namespace DispatchProxyTests
 
                 if (method == null)
                 {
-                    string error = string.Format("Proxy for {0} was called with null method", typeof(TestType_IHelloService).Name);
+                    string error = string.Format(
+                        "Proxy for {0} was called with null method",
+                        typeof(TestType_IHelloService).Name
+                    );
                     errorBuilder.AppendLine(error);
                     return null;
                 }
                 else
                 {
-                    MethodInfo expectedMethod = typeof(TestType_IHelloService).GetTypeInfo().GetDeclaredMethod("Hello");
+                    MethodInfo expectedMethod = typeof(TestType_IHelloService).GetTypeInfo()
+                        .GetDeclaredMethod("Hello");
                     if (expectedMethod != method)
                     {
-                        string error = string.Format("Proxy for {0} was called with incorrect method.  Expected = {1}, Actual = {2}",
-                                                    typeof(TestType_IHelloService).Name, expectedMethod, method);
+                        string error = string.Format(
+                            "Proxy for {0} was called with incorrect method.  Expected = {1}, Actual = {2}",
+                            typeof(TestType_IHelloService).Name,
+                            expectedMethod,
+                            method
+                        );
                         errorBuilder.AppendLine(error);
                         return null;
                     }
@@ -223,7 +329,10 @@ namespace DispatchProxyTests
                 return "success";
             };
 
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
             Assert.NotNull(proxy);
 
             TestDispatchProxy dispatchProxy = proxy as TestDispatchProxy;
@@ -244,7 +353,10 @@ namespace DispatchProxyTests
         {
             MethodInfo invokedMethod = null;
 
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedMethod = method;
@@ -253,8 +365,16 @@ namespace DispatchProxyTests
 
             proxy.Hello("testInput");
 
-            MethodInfo expectedMethod = typeof(TestType_IHelloService).GetTypeInfo().GetDeclaredMethod("Hello");
-            Assert.True(invokedMethod != null && expectedMethod == invokedMethod, string.Format("Invoke expected method {0} but actual was {1}", expectedMethod, invokedMethod));
+            MethodInfo expectedMethod = typeof(TestType_IHelloService).GetTypeInfo()
+                .GetDeclaredMethod("Hello");
+            Assert.True(
+                invokedMethod != null && expectedMethod == invokedMethod,
+                string.Format(
+                    "Invoke expected method {0} but actual was {1}",
+                    expectedMethod,
+                    invokedMethod
+                )
+            );
         }
 
         [Fact]
@@ -262,7 +382,10 @@ namespace DispatchProxyTests
         {
             object[] actualArgs = null;
 
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 actualArgs = args;
@@ -272,21 +395,35 @@ namespace DispatchProxyTests
             proxy.Hello("testInput");
 
             object[] expectedArgs = new object[] { "testInput" };
-            Assert.True(actualArgs != null && actualArgs.Length == expectedArgs.Length,
-                string.Format("Invoked expected object[] of length {0} but actual was {1}",
-                                expectedArgs.Length, (actualArgs == null ? "null" : actualArgs.Length.ToString())));
+            Assert.True(
+                actualArgs != null && actualArgs.Length == expectedArgs.Length,
+                string.Format(
+                    "Invoked expected object[] of length {0} but actual was {1}",
+                    expectedArgs.Length,
+                    (actualArgs == null ? "null" : actualArgs.Length.ToString())
+                )
+            );
             for (int i = 0; i < expectedArgs.Length; ++i)
             {
-                Assert.True(expectedArgs[i].Equals(actualArgs[i]),
-                    string.Format("Expected arg[{0}] = '{1}' but actual was '{2}'",
-                    i, expectedArgs[i], actualArgs[i]));
+                Assert.True(
+                    expectedArgs[i].Equals(actualArgs[i]),
+                    string.Format(
+                        "Expected arg[{0}] = '{1}' but actual was '{2}'",
+                        i,
+                        expectedArgs[i],
+                        actualArgs[i]
+                    )
+                );
             }
         }
 
         [Fact]
         public static void Invoke_Returns_Correct_Value()
         {
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 return "testReturn";
@@ -303,24 +440,42 @@ namespace DispatchProxyTests
             object[] invokedArgs = null;
             object[] expectedArgs = new object[] { (int)42, "testString", (double)5.0 };
 
-            TestType_IMultipleParameterService proxy = DispatchProxy.Create<TestType_IMultipleParameterService, TestDispatchProxy>();
+            TestType_IMultipleParameterService proxy = DispatchProxy.Create<
+                TestType_IMultipleParameterService,
+                TestDispatchProxy
+            >();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedArgs = args;
                 return 0.0;
             };
 
-            proxy.TestMethod((int)expectedArgs[0], (string)expectedArgs[1], (double)expectedArgs[2]);
+            proxy.TestMethod(
+                (int)expectedArgs[0],
+                (string)expectedArgs[1],
+                (double)expectedArgs[2]
+            );
 
-            Assert.True(invokedArgs != null && invokedArgs.Length == expectedArgs.Length,
-                        string.Format("Expected {0} arguments but actual was {1}",
-                        expectedArgs.Length, invokedArgs == null ? "null" : invokedArgs.Length.ToString()));
+            Assert.True(
+                invokedArgs != null && invokedArgs.Length == expectedArgs.Length,
+                string.Format(
+                    "Expected {0} arguments but actual was {1}",
+                    expectedArgs.Length,
+                    invokedArgs == null ? "null" : invokedArgs.Length.ToString()
+                )
+            );
 
             for (int i = 0; i < expectedArgs.Length; ++i)
             {
-                Assert.True(expectedArgs[i].Equals(invokedArgs[i]),
-                    string.Format("Expected arg[{0}] = '{1}' but actual was '{2}'",
-                    i, expectedArgs[i], invokedArgs[i]));
+                Assert.True(
+                    expectedArgs[i].Equals(invokedArgs[i]),
+                    string.Format(
+                        "Expected arg[{0}] = '{1}' but actual was '{2}'",
+                        i,
+                        expectedArgs[i],
+                        invokedArgs[i]
+                    )
+                );
             }
         }
 
@@ -331,30 +486,52 @@ namespace DispatchProxyTests
             object[] invokedArgs = null;
             object[] expectedArgs = new object[] { 42, "testString", 5.0 };
 
-            TestType_IMultipleParameterService proxy = DispatchProxy.Create<TestType_IMultipleParameterService, TestDispatchProxy>();
+            TestType_IMultipleParameterService proxy = DispatchProxy.Create<
+                TestType_IMultipleParameterService,
+                TestDispatchProxy
+            >();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedArgs = args;
                 return string.Empty;
             };
 
-            proxy.ParamsMethod((int)expectedArgs[0], (string)expectedArgs[1], (double)expectedArgs[2]);
+            proxy.ParamsMethod(
+                (int)expectedArgs[0],
+                (string)expectedArgs[1],
+                (double)expectedArgs[2]
+            );
 
             // All separate params should have become a single object[1] array
-            Assert.True(invokedArgs != null && invokedArgs.Length == 1,
-                        string.Format("Expected single element object[] but actual was {0}",
-                        invokedArgs == null ? "null" : invokedArgs.Length.ToString()));
+            Assert.True(
+                invokedArgs != null && invokedArgs.Length == 1,
+                string.Format(
+                    "Expected single element object[] but actual was {0}",
+                    invokedArgs == null ? "null" : invokedArgs.Length.ToString()
+                )
+            );
 
             // That object[1] should contain an object[3] containing the args
             actualArgs = invokedArgs[0] as object[];
-            Assert.True(actualArgs != null && actualArgs.Length == expectedArgs.Length,
-                string.Format("Invoked expected object[] of length {0} but actual was {1}",
-                                expectedArgs.Length, (actualArgs == null ? "null" : actualArgs.Length.ToString())));
+            Assert.True(
+                actualArgs != null && actualArgs.Length == expectedArgs.Length,
+                string.Format(
+                    "Invoked expected object[] of length {0} but actual was {1}",
+                    expectedArgs.Length,
+                    (actualArgs == null ? "null" : actualArgs.Length.ToString())
+                )
+            );
             for (int i = 0; i < expectedArgs.Length; ++i)
             {
-                Assert.True(expectedArgs[i].Equals(actualArgs[i]),
-                    string.Format("Expected arg[{0}] = '{1}' but actual was '{2}'",
-                    i, expectedArgs[i], actualArgs[i]));
+                Assert.True(
+                    expectedArgs[i].Equals(actualArgs[i]),
+                    string.Format(
+                        "Expected arg[{0}] = '{1}' but actual was '{2}'",
+                        i,
+                        expectedArgs[i],
+                        actualArgs[i]
+                    )
+                );
             }
         }
 
@@ -372,8 +549,16 @@ namespace DispatchProxyTests
 
             proxy.OneWay();
 
-            MethodInfo expectedMethod = typeof(TestType_IOneWay).GetTypeInfo().GetDeclaredMethod("OneWay");
-            Assert.True(invokedMethod != null && expectedMethod == invokedMethod, string.Format("Invoke expected method {0} but actual was {1}", expectedMethod, invokedMethod));
+            MethodInfo expectedMethod = typeof(TestType_IOneWay).GetTypeInfo()
+                .GetDeclaredMethod("OneWay");
+            Assert.True(
+                invokedMethod != null && expectedMethod == invokedMethod,
+                string.Format(
+                    "Invoke expected method {0} but actual was {1}",
+                    expectedMethod,
+                    invokedMethod
+                )
+            );
         }
 
         [Fact]
@@ -381,7 +566,10 @@ namespace DispatchProxyTests
         {
             List<MethodInfo> invokedMethods = new List<MethodInfo>();
 
-            TestType_IHelloService1And2 proxy = DispatchProxy.Create<TestType_IHelloService1And2, TestDispatchProxy>();
+            TestType_IHelloService1And2 proxy = DispatchProxy.Create<
+                TestType_IHelloService1And2,
+                TestDispatchProxy
+            >();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedMethods.Add(method);
@@ -391,22 +579,47 @@ namespace DispatchProxyTests
             ((TestType_IHelloService)proxy).Hello("calling 1");
             ((TestType_IHelloService2)proxy).Hello("calling 2");
 
-            Assert.True(invokedMethods.Count == 2, string.Format("Expected 2 method invocations but received {0}", invokedMethods.Count));
+            Assert.True(
+                invokedMethods.Count == 2,
+                string.Format(
+                    "Expected 2 method invocations but received {0}",
+                    invokedMethods.Count
+                )
+            );
 
-            MethodInfo expectedMethod = typeof(TestType_IHelloService).GetTypeInfo().GetDeclaredMethod("Hello");
-            Assert.True(invokedMethods[0] != null && expectedMethod == invokedMethods[0], string.Format("First invoke should have been TestType_IHelloService.Hello but actual was {0}", invokedMethods[0]));
+            MethodInfo expectedMethod = typeof(TestType_IHelloService).GetTypeInfo()
+                .GetDeclaredMethod("Hello");
+            Assert.True(
+                invokedMethods[0] != null && expectedMethod == invokedMethods[0],
+                string.Format(
+                    "First invoke should have been TestType_IHelloService.Hello but actual was {0}",
+                    invokedMethods[0]
+                )
+            );
 
-            expectedMethod = typeof(TestType_IHelloService2).GetTypeInfo().GetDeclaredMethod("Hello");
-            Assert.True(invokedMethods[1] != null && expectedMethod == invokedMethods[1], string.Format("Second invoke should have been TestType_IHelloService2.Hello but actual was {0}", invokedMethods[1]));
+            expectedMethod = typeof(TestType_IHelloService2).GetTypeInfo()
+                .GetDeclaredMethod("Hello");
+            Assert.True(
+                invokedMethods[1] != null && expectedMethod == invokedMethods[1],
+                string.Format(
+                    "Second invoke should have been TestType_IHelloService2.Hello but actual was {0}",
+                    invokedMethods[1]
+                )
+            );
         }
 
         [Fact]
         public static void Invoke_Thrown_Exception_Rethrown_To_Caller()
         {
             Exception actualException = null;
-            InvalidOperationException expectedException = new InvalidOperationException("testException");
+            InvalidOperationException expectedException = new InvalidOperationException(
+                "testException"
+            );
 
-            TestType_IHelloService proxy = DispatchProxy.Create<TestType_IHelloService, TestDispatchProxy>();
+            TestType_IHelloService proxy = DispatchProxy.Create<
+                TestType_IHelloService,
+                TestDispatchProxy
+            >();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 throw expectedException;
@@ -429,39 +642,64 @@ namespace DispatchProxyTests
         {
             List<MethodInfo> invokedMethods = new List<MethodInfo>();
 
-            TestType_IPropertyService proxy = DispatchProxy.Create<TestType_IPropertyService, TestDispatchProxy>();
+            TestType_IPropertyService proxy = DispatchProxy.Create<
+                TestType_IPropertyService,
+                TestDispatchProxy
+            >();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedMethods.Add(method);
                 return null;
             };
 
-
             proxy.ReadWrite = "testValue";
             string actualValue = proxy.ReadWrite;
 
-            Assert.True(invokedMethods.Count == 2, string.Format("Expected 2 method invocations but received {0}", invokedMethods.Count));
+            Assert.True(
+                invokedMethods.Count == 2,
+                string.Format(
+                    "Expected 2 method invocations but received {0}",
+                    invokedMethods.Count
+                )
+            );
 
-            PropertyInfo propertyInfo = typeof(TestType_IPropertyService).GetTypeInfo().GetDeclaredProperty("ReadWrite");
+            PropertyInfo propertyInfo = typeof(TestType_IPropertyService).GetTypeInfo()
+                .GetDeclaredProperty("ReadWrite");
             Assert.NotNull(propertyInfo);
 
             MethodInfo expectedMethod = propertyInfo.SetMethod;
-            Assert.True(invokedMethods[0] != null && expectedMethod == invokedMethods[0], string.Format("First invoke should have been {0} but actual was {1}",
-                            expectedMethod.Name, invokedMethods[0]));
+            Assert.True(
+                invokedMethods[0] != null && expectedMethod == invokedMethods[0],
+                string.Format(
+                    "First invoke should have been {0} but actual was {1}",
+                    expectedMethod.Name,
+                    invokedMethods[0]
+                )
+            );
 
             expectedMethod = propertyInfo.GetMethod;
-            Assert.True(invokedMethods[1] != null && expectedMethod == invokedMethods[1], string.Format("Second invoke should have been {0} but actual was {1}",
-                            expectedMethod.Name, invokedMethods[1]));
+            Assert.True(
+                invokedMethods[1] != null && expectedMethod == invokedMethods[1],
+                string.Format(
+                    "Second invoke should have been {0} but actual was {1}",
+                    expectedMethod.Name,
+                    invokedMethods[1]
+                )
+            );
 
             Assert.Null(actualValue);
         }
 
-
         [Fact]
         public static void Proxy_Declares_Interface_Properties()
         {
-            TestType_IPropertyService proxy = DispatchProxy.Create<TestType_IPropertyService, TestDispatchProxy>();
-            PropertyInfo propertyInfo = proxy.GetType().GetTypeInfo().GetDeclaredProperty("ReadWrite");
+            TestType_IPropertyService proxy = DispatchProxy.Create<
+                TestType_IPropertyService,
+                TestDispatchProxy
+            >();
+            PropertyInfo propertyInfo = proxy.GetType()
+                .GetTypeInfo()
+                .GetDeclaredProperty("ReadWrite");
             Assert.NotNull(propertyInfo);
         }
 
@@ -470,19 +708,49 @@ namespace DispatchProxyTests
         public static void Invoke_Event_Add_And_Remove_And_Raise_Invokes_Correct_Methods()
         {
             // C# cannot emit raise_Xxx method for the event, so we must use System.Reflection.Emit to generate such event.
-            AssemblyBuilder ab = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("EventBuilder"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder ab = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("EventBuilder"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder modb = ab.DefineDynamicModule("mod");
-            TypeBuilder tb = modb.DefineType("TestType_IEventService", TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract);
-            EventBuilder eb = tb.DefineEvent("AddRemoveRaise", EventAttributes.None, typeof(EventHandler));
-            eb.SetAddOnMethod(tb.DefineMethod("add_AddRemoveRaise", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual, typeof(void), new Type[] { typeof(EventHandler) }));
-            eb.SetRemoveOnMethod(tb.DefineMethod("remove_AddRemoveRaise", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual, typeof(void), new Type[] { typeof(EventHandler) }));
-            eb.SetRaiseMethod(tb.DefineMethod("raise_AddRemoveRaise", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual, typeof(void), new Type[] { typeof(EventArgs) }));
+            TypeBuilder tb = modb.DefineType(
+                "TestType_IEventService",
+                TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract
+            );
+            EventBuilder eb = tb.DefineEvent(
+                "AddRemoveRaise",
+                EventAttributes.None,
+                typeof(EventHandler)
+            );
+            eb.SetAddOnMethod(
+                tb.DefineMethod(
+                    "add_AddRemoveRaise",
+                    MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                    typeof(void),
+                    new Type[] { typeof(EventHandler) }
+                )
+            );
+            eb.SetRemoveOnMethod(
+                tb.DefineMethod(
+                    "remove_AddRemoveRaise",
+                    MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                    typeof(void),
+                    new Type[] { typeof(EventHandler) }
+                )
+            );
+            eb.SetRaiseMethod(
+                tb.DefineMethod(
+                    "raise_AddRemoveRaise",
+                    MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                    typeof(void),
+                    new Type[] { typeof(EventArgs) }
+                )
+            );
             TypeInfo ieventServiceTypeInfo = tb.CreateTypeInfo();
 
             List<MethodInfo> invokedMethods = new List<MethodInfo>();
-            object proxy =
-                typeof(DispatchProxy)
-                .GetRuntimeMethod("Create", Type.EmptyTypes).MakeGenericMethod(ieventServiceTypeInfo.AsType(), typeof(TestDispatchProxy))
+            object proxy = typeof(DispatchProxy).GetRuntimeMethod("Create", Type.EmptyTypes)
+                .MakeGenericMethod(ieventServiceTypeInfo.AsType(), typeof(TestDispatchProxy))
                 .Invoke(null, null);
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
@@ -492,66 +760,122 @@ namespace DispatchProxyTests
 
             EventHandler handler = new EventHandler((sender, e) => { });
 
-            proxy.GetType().GetRuntimeMethods().Single(m => m.Name == "add_AddRemoveRaise").Invoke(proxy, new object[] { handler });
-            proxy.GetType().GetRuntimeMethods().Single(m => m.Name == "raise_AddRemoveRaise").Invoke(proxy, new object[] { EventArgs.Empty });
-            proxy.GetType().GetRuntimeMethods().Single(m => m.Name == "remove_AddRemoveRaise").Invoke(proxy, new object[] { handler });
+            proxy.GetType()
+                .GetRuntimeMethods()
+                .Single(m => m.Name == "add_AddRemoveRaise")
+                .Invoke(proxy, new object[] { handler });
+            proxy.GetType()
+                .GetRuntimeMethods()
+                .Single(m => m.Name == "raise_AddRemoveRaise")
+                .Invoke(proxy, new object[] { EventArgs.Empty });
+            proxy.GetType()
+                .GetRuntimeMethods()
+                .Single(m => m.Name == "remove_AddRemoveRaise")
+                .Invoke(proxy, new object[] { handler });
 
-            Assert.True(invokedMethods.Count == 3, String.Format("Expected 3 method invocations but received {0}", invokedMethods.Count));
+            Assert.True(
+                invokedMethods.Count == 3,
+                String.Format(
+                    "Expected 3 method invocations but received {0}",
+                    invokedMethods.Count
+                )
+            );
 
             EventInfo eventInfo = ieventServiceTypeInfo.GetDeclaredEvent("AddRemoveRaise");
             Assert.NotNull(eventInfo);
 
             MethodInfo expectedMethod = eventInfo.AddMethod;
-            Assert.True(invokedMethods[0] != null && expectedMethod == invokedMethods[0], String.Format("First invoke should have been {0} but actual was {1}",
-                            expectedMethod.Name, invokedMethods[0]));
+            Assert.True(
+                invokedMethods[0] != null && expectedMethod == invokedMethods[0],
+                String.Format(
+                    "First invoke should have been {0} but actual was {1}",
+                    expectedMethod.Name,
+                    invokedMethods[0]
+                )
+            );
 
             expectedMethod = eventInfo.RaiseMethod;
-            Assert.True(invokedMethods[1] != null && expectedMethod == invokedMethods[1], String.Format("Second invoke should have been {0} but actual was {1}",
-                            expectedMethod.Name, invokedMethods[1]));
+            Assert.True(
+                invokedMethods[1] != null && expectedMethod == invokedMethods[1],
+                String.Format(
+                    "Second invoke should have been {0} but actual was {1}",
+                    expectedMethod.Name,
+                    invokedMethods[1]
+                )
+            );
 
             expectedMethod = eventInfo.RemoveMethod;
-            Assert.True(invokedMethods[2] != null && expectedMethod == invokedMethods[2], String.Format("Third invoke should have been {0} but actual was {1}",
-                            expectedMethod.Name, invokedMethods[1]));
+            Assert.True(
+                invokedMethods[2] != null && expectedMethod == invokedMethods[2],
+                String.Format(
+                    "Third invoke should have been {0} but actual was {1}",
+                    expectedMethod.Name,
+                    invokedMethods[1]
+                )
+            );
         }
 #endif
 
         [Fact]
         public static void Proxy_Declares_Interface_Events()
         {
-            TestType_IEventService proxy = DispatchProxy.Create<TestType_IEventService, TestDispatchProxy>();
+            TestType_IEventService proxy = DispatchProxy.Create<
+                TestType_IEventService,
+                TestDispatchProxy
+            >();
             EventInfo eventInfo = proxy.GetType().GetTypeInfo().GetDeclaredEvent("AddRemove");
             Assert.NotNull(eventInfo);
         }
-
 
         [Fact]
         public static void Invoke_Indexer_Setter_And_Getter_Invokes_Correct_Methods()
         {
             List<MethodInfo> invokedMethods = new List<MethodInfo>();
 
-            TestType_IIndexerService proxy = DispatchProxy.Create<TestType_IIndexerService, TestDispatchProxy>();
+            TestType_IIndexerService proxy = DispatchProxy.Create<
+                TestType_IIndexerService,
+                TestDispatchProxy
+            >();
             ((TestDispatchProxy)proxy).CallOnInvoke = (method, args) =>
             {
                 invokedMethods.Add(method);
                 return null;
             };
 
-
             proxy["key"] = "testValue";
             string actualValue = proxy["key"];
 
-            Assert.True(invokedMethods.Count == 2, string.Format("Expected 2 method invocations but received {0}", invokedMethods.Count));
+            Assert.True(
+                invokedMethods.Count == 2,
+                string.Format(
+                    "Expected 2 method invocations but received {0}",
+                    invokedMethods.Count
+                )
+            );
 
-            PropertyInfo propertyInfo = typeof(TestType_IIndexerService).GetTypeInfo().GetDeclaredProperty("Item");
+            PropertyInfo propertyInfo = typeof(TestType_IIndexerService).GetTypeInfo()
+                .GetDeclaredProperty("Item");
             Assert.NotNull(propertyInfo);
 
             MethodInfo expectedMethod = propertyInfo.SetMethod;
-            Assert.True(invokedMethods[0] != null && expectedMethod == invokedMethods[0], string.Format("First invoke should have been {0} but actual was {1}",
-                            expectedMethod.Name, invokedMethods[0]));
+            Assert.True(
+                invokedMethods[0] != null && expectedMethod == invokedMethods[0],
+                string.Format(
+                    "First invoke should have been {0} but actual was {1}",
+                    expectedMethod.Name,
+                    invokedMethods[0]
+                )
+            );
 
             expectedMethod = propertyInfo.GetMethod;
-            Assert.True(invokedMethods[1] != null && expectedMethod == invokedMethods[1], string.Format("Second invoke should have been {0} but actual was {1}",
-                            expectedMethod.Name, invokedMethods[1]));
+            Assert.True(
+                invokedMethods[1] != null && expectedMethod == invokedMethods[1],
+                string.Format(
+                    "Second invoke should have been {0} but actual was {1}",
+                    expectedMethod.Name,
+                    invokedMethods[1]
+                )
+            );
 
             Assert.Null(actualValue);
         }
@@ -559,7 +883,10 @@ namespace DispatchProxyTests
         [Fact]
         public static void Proxy_Declares_Interface_Indexers()
         {
-            TestType_IIndexerService proxy = DispatchProxy.Create<TestType_IIndexerService, TestDispatchProxy>();
+            TestType_IIndexerService proxy = DispatchProxy.Create<
+                TestType_IIndexerService,
+                TestDispatchProxy
+            >();
             PropertyInfo propertyInfo = proxy.GetType().GetTypeInfo().GetDeclaredProperty("Item");
             Assert.NotNull(propertyInfo);
         }
@@ -606,8 +933,10 @@ namespace DispatchProxyTests
             testRefOutInInvocation(p => p.In(in value), "Hello");
         }
 
-        private static void testRefOutInInvocation(Action<TestType_IOut_Ref> invocation, string expected)
-        {
+        private static void testRefOutInInvocation(
+            Action<TestType_IOut_Ref> invocation,
+            string expected
+        ) {
             var proxy = DispatchProxy.Create<TestType_IOut_Ref, TestDispatchProxy>();
 
             string result = "Failed";

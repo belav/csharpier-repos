@@ -24,22 +24,23 @@ namespace Microsoft.Web.Mvc.Resources
         /// <summary>
         /// Wraps the ModelBinders.Binders.DefaultBinder
         /// </summary>
-        public ResourceModelBinder()
-            : this(ModelBinders.Binders.DefaultBinder)
-        {
-        }
+        public ResourceModelBinder() : this(ModelBinders.Binders.DefaultBinder) { }
 
         public ResourceModelBinder(IModelBinder inner)
         {
             this._inner = inner;
         }
 
-        public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
-        {
+        public object BindModel(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext
+        ) {
             if (WebApiEnabledAttribute.IsDefined(controllerContext.Controller))
             {
-                if (!controllerContext.RouteData.Values.ContainsKey(bindingContext.ModelName) && controllerContext.HttpContext.Request.HasBody())
-                {
+                if (
+                    !controllerContext.RouteData.Values.ContainsKey(bindingContext.ModelName)
+                    && controllerContext.HttpContext.Request.HasBody()
+                ) {
                     ContentType requestFormat = controllerContext.RequestContext.GetRequestFormat();
                     object model;
                     if (TryBindModel(controllerContext, bindingContext, requestFormat, out model))
@@ -57,28 +58,58 @@ namespace Microsoft.Web.Mvc.Resources
                                     details.Add(me);
                                 }
                             }
-                            HttpException failure = new HttpException((int)HttpStatusCode.ExpectationFailed, "Invalid Model");
+                            HttpException failure = new HttpException(
+                                (int)HttpStatusCode.ExpectationFailed,
+                                "Invalid Model"
+                            );
                             failure.Data["details"] = details;
                             throw failure;
                         }
                         return model;
                     }
-                    throw new HttpException((int)HttpStatusCode.UnsupportedMediaType, String.Format(CultureInfo.CurrentCulture, MvcResources.Resources_UnsupportedMediaType, (requestFormat == null ? String.Empty : requestFormat.MediaType)));
+                    throw new HttpException(
+                        (int)HttpStatusCode.UnsupportedMediaType,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.Resources_UnsupportedMediaType,
+                            (requestFormat == null ? String.Empty : requestFormat.MediaType)
+                        )
+                    );
                 }
             }
             return this._inner.BindModel(controllerContext, bindingContext);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "This is an existing API; this would be a breaking change")]
-        public bool TryBindModel(ControllerContext controllerContext, ModelBindingContext bindingContext, ContentType requestFormat, out object model)
-        {
-            if (requestFormat != null && String.Compare(requestFormat.MediaType, FormatManager.UrlEncoded, StringComparison.OrdinalIgnoreCase) == 0)
-            {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1007:UseGenericsWhereAppropriate",
+            Justification = "This is an existing API; this would be a breaking change"
+        )]
+        public bool TryBindModel(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext,
+            ContentType requestFormat,
+            out object model
+        ) {
+            if (
+                requestFormat != null
+                && String.Compare(
+                    requestFormat.MediaType,
+                    FormatManager.UrlEncoded,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            ) {
                 model = this._inner.BindModel(controllerContext, bindingContext);
                 return true;
             }
-            if (!FormatManager.Current.TryDeserialize(controllerContext, bindingContext, requestFormat, out model))
-            {
+            if (
+                !FormatManager.Current.TryDeserialize(
+                    controllerContext,
+                    bindingContext,
+                    requestFormat,
+                    out model
+                )
+            ) {
                 model = null;
                 return false;
             }
@@ -87,8 +118,10 @@ namespace Microsoft.Web.Mvc.Resources
 
         private class MyDefaultModelBinder : DefaultModelBinder
         {
-            public void CallOnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext)
-            {
+            public void CallOnModelUpdated(
+                ControllerContext controllerContext,
+                ModelBindingContext bindingContext
+            ) {
                 OnModelUpdated(controllerContext, bindingContext);
             }
 

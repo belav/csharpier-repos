@@ -14,8 +14,11 @@ namespace Microsoft.AspNetCore.Routing.Tests
         [InlineData(3, "123", true)]
         [InlineData(3, "12", false)]
         [InlineData(3, "", false)]
-        public void MinLengthRouteConstraint_ApplyConstraint(int min, string parameterValue, bool expected)
-        {
+        public void MinLengthRouteConstraint_ApplyConstraint(
+            int min,
+            string parameterValue,
+            bool expected
+        ) {
             // Arrange
             var constraint = new MinLengthRouteConstraint(min);
 
@@ -37,7 +40,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
                 () => new MinLengthRouteConstraint(-1),
                 "minLength",
                 expectedMessage,
-                -1);
+                -1
+            );
         }
     }
 }

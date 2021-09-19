@@ -23,7 +23,8 @@ namespace XmlFormattersWebSite.Controllers
 
         public IQueryable<Person> WrappedTypes()
         {
-            return new[] {
+            return new[]
+            {
                 new Person() { Id = 10, Name = "Mike" },
                 new Person() { Id = 11, Name = "Jimmy" }
             }.AsQueryable();
@@ -31,12 +32,12 @@ namespace XmlFormattersWebSite.Controllers
 
         public IQueryable<Person> WrappedTypes_Empty()
         {
-            return (new Person[] { }).AsQueryable();
+            return (new Person[] {  }).AsQueryable();
         }
 
         public IQueryable<string> NonWrappedTypes_Empty()
         {
-            return (new string[] { }).AsQueryable();
+            return (new string[] {  }).AsQueryable();
         }
 
         public IQueryable<string> NonWrappedTypes_NullInstance()

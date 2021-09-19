@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         public void Configure(IWebHostBuilder builder)
         {
             // Add Razor services
-            builder.ConfigureServices(services => RazorRuntimeCompilationMvcCoreBuilderExtensions.AddServices(services));
+            builder.ConfigureServices(
+                services => RazorRuntimeCompilationMvcCoreBuilderExtensions.AddServices(services)
+            );
         }
     }
 }

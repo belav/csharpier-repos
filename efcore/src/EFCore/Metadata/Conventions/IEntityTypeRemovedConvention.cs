@@ -19,6 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         void ProcessEntityTypeRemoved(
             IConventionModelBuilder modelBuilder,
             IConventionEntityType entityType,
-            IConventionContext<IConventionEntityType> context);
+            IConventionContext<IConventionEntityType> context
+        );
     }
 }

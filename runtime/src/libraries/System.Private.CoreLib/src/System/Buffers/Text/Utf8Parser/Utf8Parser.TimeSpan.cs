@@ -27,8 +27,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryParse(ReadOnlySpan<byte> source, out TimeSpan value, out int bytesConsumed, char standardFormat = default)
-        {
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out TimeSpan value,
+            out int bytesConsumed,
+            char standardFormat = default
+        ) {
             switch (standardFormat)
             {
                 case default(char):
@@ -52,8 +56,11 @@ namespace System.Buffers.Text
         /// Parse the fraction portion of a TimeSpan. Must be 1..7 digits. If fewer than 7, zeroes are implied to the right. If more than 7, the TimeSpan
         /// parser rejects the string (even if the extra digits are all zeroes.)
         /// </summary>
-        private static bool TryParseTimeSpanFraction(ReadOnlySpan<byte> source, out uint value, out int bytesConsumed)
-        {
+        private static bool TryParseTimeSpanFraction(
+            ReadOnlySpan<byte> source,
+            out uint value,
+            out int bytesConsumed
+        ) {
             int srcIndex = 0;
 
             if (srcIndex == source.Length)
@@ -131,8 +138,15 @@ namespace System.Buffers.Text
         /// <summary>
         /// Overflow-safe TryCreateTimeSpan
         /// </summary>
-        private static bool TryCreateTimeSpan(bool isNegative, uint days, uint hours, uint minutes, uint seconds, uint fraction, out TimeSpan timeSpan)
-        {
+        private static bool TryCreateTimeSpan(
+            bool isNegative,
+            uint days,
+            uint hours,
+            uint minutes,
+            uint seconds,
+            uint fraction,
+            out TimeSpan timeSpan
+        ) {
             const long MaxMilliSeconds = long.MaxValue / TimeSpan.TicksPerMillisecond;
             const long MinMilliSeconds = long.MinValue / TimeSpan.TicksPerMillisecond;
 
@@ -144,7 +158,9 @@ namespace System.Buffers.Text
 
             Debug.Assert(fraction <= Utf8Constants.MaxDateTimeFraction); // This value comes from TryParseTimeSpanFraction() which already rejects any fraction string longer than 7 digits.
 
-            long millisecondsWithoutFraction = (((long)days) * 3600 * 24 + ((long)hours) * 3600 + ((long)minutes) * 60 + seconds) * 1000;
+            long millisecondsWithoutFraction =
+                (((long)days) * 3600 * 24 + ((long)hours) * 3600 + ((long)minutes) * 60 + seconds)
+                * 1000;
 
             long ticks;
             if (isNegative)
@@ -156,7 +172,8 @@ namespace System.Buffers.Text
                     return false;
                 }
 
-                long ticksWithoutFraction = millisecondsWithoutFraction * TimeSpan.TicksPerMillisecond;
+                long ticksWithoutFraction =
+                    millisecondsWithoutFraction * TimeSpan.TicksPerMillisecond;
                 if (ticksWithoutFraction < long.MinValue + fraction)
                 {
                     timeSpan = default;
@@ -173,7 +190,8 @@ namespace System.Buffers.Text
                     return false;
                 }
 
-                long ticksWithoutFraction = millisecondsWithoutFraction * TimeSpan.TicksPerMillisecond;
+                long ticksWithoutFraction =
+                    millisecondsWithoutFraction * TimeSpan.TicksPerMillisecond;
                 if (ticksWithoutFraction > long.MaxValue - fraction)
                 {
                     timeSpan = default;

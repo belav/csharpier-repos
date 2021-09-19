@@ -13,9 +13,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class NewShimTests : IISFunctionalTestBase
     {
-        public NewShimTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public NewShimTests(PublishedSitesFixture fixture) : base(fixture) { }
 
         [ConditionalFact]
         public async Task CheckNewShimIsUsed()
@@ -32,7 +30,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     return;
                 }
             }
-            throw new XunitException($"Could not find aspnetcorev2_inprocess.dll loaded in process {result.HostProcess.ProcessName}");
+            throw new XunitException(
+                $"Could not find aspnetcorev2_inprocess.dll loaded in process {result.HostProcess.ProcessName}"
+            );
         }
     }
 }

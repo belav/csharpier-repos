@@ -88,8 +88,12 @@ namespace System.Security.Cryptography
             return SignData(data, 0, data.Length, hashAlgorithm);
         }
 
-        public virtual byte[] SignData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
-        {
+        public virtual byte[] SignData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        ) {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0 || offset > data.Length)
@@ -97,7 +101,10 @@ namespace System.Security.Cryptography
             if (count < 0 || count > data.Length - offset)
                 throw new ArgumentOutOfRangeException(nameof(count));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
 
             byte[] hash = HashData(data, offset, count, hashAlgorithm);
             return SignHash(hash);
@@ -144,8 +151,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
-        {
+            DSASignatureFormat signatureFormat
+        ) {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0 || offset > data.Length)
@@ -153,11 +160,18 @@ namespace System.Security.Cryptography
             if (count < 0 || count > data.Length - offset)
                 throw new ArgumentOutOfRangeException(nameof(count));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
-            return SignDataCore(new ReadOnlySpan<byte>(data, offset, count), hashAlgorithm, signatureFormat);
+            return SignDataCore(
+                new ReadOnlySpan<byte>(data, offset, count),
+                hashAlgorithm,
+                signatureFormat
+            );
         }
 
         /// <summary>
@@ -175,8 +189,8 @@ namespace System.Security.Cryptography
         protected virtual byte[] SignDataCore(
             ReadOnlySpan<byte> data,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
-        {
+            DSASignatureFormat signatureFormat
+        ) {
             Span<byte> signature = stackalloc byte[SignatureStackBufSize];
             int maxSignatureSize = GetMaxSignatureSize(signatureFormat);
             byte[]? rented = null;
@@ -192,9 +206,18 @@ namespace System.Security.Cryptography
 
             try
             {
-                if (!TrySignDataCore(data, signature, hashAlgorithm, signatureFormat, out bytesWritten))
-                {
-                    Debug.Fail($"GetMaxSignatureSize returned insufficient size for format {signatureFormat}");
+                if (
+                    !TrySignDataCore(
+                        data,
+                        signature,
+                        hashAlgorithm,
+                        signatureFormat,
+                        out bytesWritten
+                    )
+                ) {
+                    Debug.Fail(
+                        $"GetMaxSignatureSize returned insufficient size for format {signatureFormat}"
+                    );
                     throw new CryptographicException();
                 }
 
@@ -202,6 +225,7 @@ namespace System.Security.Cryptography
                 returnArray = true;
                 return ret;
             }
+
             finally
             {
                 if (rented != null)
@@ -237,12 +261,18 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or signing operation.
         /// </exception>
-        public byte[] SignData(byte[] data, HashAlgorithmName hashAlgorithm, DSASignatureFormat signatureFormat)
-        {
+        public byte[] SignData(
+            byte[] data,
+            HashAlgorithmName hashAlgorithm,
+            DSASignatureFormat signatureFormat
+        ) {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
@@ -270,12 +300,18 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or signing operation.
         /// </exception>
-        public byte[] SignData(Stream data, HashAlgorithmName hashAlgorithm, DSASignatureFormat signatureFormat)
-        {
+        public byte[] SignData(
+            Stream data,
+            HashAlgorithmName hashAlgorithm,
+            DSASignatureFormat signatureFormat
+        ) {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
@@ -297,8 +333,8 @@ namespace System.Security.Cryptography
         protected virtual byte[] SignDataCore(
             Stream data,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
-        {
+            DSASignatureFormat signatureFormat
+        ) {
             byte[] hash = HashData(data, hashAlgorithm);
             return SignHashCore(hash, signatureFormat);
         }
@@ -341,8 +377,10 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///   An error occurred in the signing operation.
         /// </exception>
-        protected virtual byte[] SignHashCore(ReadOnlySpan<byte> hash, DSASignatureFormat signatureFormat)
-        {
+        protected virtual byte[] SignHashCore(
+            ReadOnlySpan<byte> hash,
+            DSASignatureFormat signatureFormat
+        ) {
             Span<byte> signature = stackalloc byte[SignatureStackBufSize];
             int maxSignatureSize = GetMaxSignatureSize(signatureFormat);
             byte[]? rented = null;
@@ -360,7 +398,9 @@ namespace System.Security.Cryptography
             {
                 if (!TrySignHashCore(hash, signature, signatureFormat, out bytesWritten))
                 {
-                    Debug.Fail($"GetMaxSignatureSize returned insufficient size for format {signatureFormat}");
+                    Debug.Fail(
+                        $"GetMaxSignatureSize returned insufficient size for format {signatureFormat}"
+                    );
                     throw new CryptographicException();
                 }
 
@@ -368,6 +408,7 @@ namespace System.Security.Cryptography
                 returnArray = true;
                 return ret;
             }
+
             finally
             {
                 if (rented != null)
@@ -386,10 +427,13 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> data,
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
 
             Span<byte> hashTmp = stackalloc byte[HashBufferStackSize];
             ReadOnlySpan<byte> hash = HashSpanToTmp(data, hashAlgorithm, hashTmp);
@@ -426,14 +470,23 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
-            return TrySignDataCore(data, destination, hashAlgorithm, signatureFormat, out bytesWritten);
+            return TrySignDataCore(
+                data,
+                destination,
+                hashAlgorithm,
+                signatureFormat,
+                out bytesWritten
+            );
         }
 
         /// <summary>
@@ -460,8 +513,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             DSASignatureFormat signatureFormat,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             Span<byte> hashTmp = stackalloc byte[HashBufferStackSize];
             ReadOnlySpan<byte> hash = HashSpanToTmp(data, hashAlgorithm, hashTmp);
 
@@ -473,7 +526,10 @@ namespace System.Security.Cryptography
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
 
             byte[] hash = HashData(data, hashAlgorithm);
             return SignHash(hash);
@@ -487,8 +543,13 @@ namespace System.Security.Cryptography
             return VerifyData(data, 0, data.Length, signature, hashAlgorithm);
         }
 
-        public virtual bool VerifyData(byte[] data, int offset, int count, byte[] signature, HashAlgorithmName hashAlgorithm)
-        {
+        public virtual bool VerifyData(
+            byte[] data,
+            int offset,
+            int count,
+            byte[] signature,
+            HashAlgorithmName hashAlgorithm
+        ) {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0 || offset > data.Length)
@@ -498,7 +559,10 @@ namespace System.Security.Cryptography
             if (signature == null)
                 throw new ArgumentNullException(nameof(signature));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
 
             byte[] hash = HashData(data, offset, count, hashAlgorithm);
             return VerifyHash(hash, signature);
@@ -547,8 +611,8 @@ namespace System.Security.Cryptography
             int count,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
-        {
+            DSASignatureFormat signatureFormat
+        ) {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0 || offset > data.Length)
@@ -558,7 +622,10 @@ namespace System.Security.Cryptography
             if (signature == null)
                 throw new ArgumentNullException(nameof(signature));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
@@ -566,7 +633,8 @@ namespace System.Security.Cryptography
                 new ReadOnlySpan<byte>(data, offset, count),
                 signature,
                 hashAlgorithm,
-                signatureFormat);
+                signatureFormat
+            );
         }
 
         /// <summary>
@@ -591,24 +659,37 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or verification operation.
         /// </exception>
-        public bool VerifyData(byte[] data, byte[] signature, HashAlgorithmName hashAlgorithm, DSASignatureFormat signatureFormat)
-        {
+        public bool VerifyData(
+            byte[] data,
+            byte[] signature,
+            HashAlgorithmName hashAlgorithm,
+            DSASignatureFormat signatureFormat
+        ) {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (signature == null)
                 throw new ArgumentNullException(nameof(signature));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
             return VerifyDataCore(data, signature, hashAlgorithm, signatureFormat);
         }
 
-        public virtual bool VerifyData(ReadOnlySpan<byte> data, ReadOnlySpan<byte> signature, HashAlgorithmName hashAlgorithm)
-        {
+        public virtual bool VerifyData(
+            ReadOnlySpan<byte> data,
+            ReadOnlySpan<byte> signature,
+            HashAlgorithmName hashAlgorithm
+        ) {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
 
             Span<byte> hashTmp = stackalloc byte[HashBufferStackSize];
             ReadOnlySpan<byte> hash = HashSpanToTmp(data, hashAlgorithm, hashTmp);
@@ -635,10 +716,13 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> data,
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
-        {
+            DSASignatureFormat signatureFormat
+        ) {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
@@ -662,8 +746,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> data,
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
-        {
+            DSASignatureFormat signatureFormat
+        ) {
             // SHA-2-512 is the biggest hash we know about.
             Span<byte> hashSpan = stackalloc byte[512 / 8];
 
@@ -688,7 +772,10 @@ namespace System.Security.Cryptography
             if (signature == null)
                 throw new ArgumentNullException(nameof(signature));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
 
             byte[] hash = HashData(data, hashAlgorithm);
             return VerifyHash(hash, signature);
@@ -720,14 +807,17 @@ namespace System.Security.Cryptography
             Stream data,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
-        {
+            DSASignatureFormat signatureFormat
+        ) {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (signature == null)
                 throw new ArgumentNullException(nameof(signature));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
@@ -751,8 +841,8 @@ namespace System.Security.Cryptography
             Stream data,
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm,
-            DSASignatureFormat signatureFormat)
-        {
+            DSASignatureFormat signatureFormat
+        ) {
             byte[] hash = HashData(data, hashAlgorithm);
             return VerifyHashCore(hash, signature, signatureFormat);
         }
@@ -763,8 +853,12 @@ namespace System.Security.Cryptography
         public override string? KeyExchangeAlgorithm => null;
         public override string SignatureAlgorithm => "ECDsa";
 
-        protected virtual byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
-        {
+        protected virtual byte[] HashData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        ) {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
 
@@ -773,8 +867,12 @@ namespace System.Security.Cryptography
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
 
-        protected virtual bool TryHashData(ReadOnlySpan<byte> data, Span<byte> destination, HashAlgorithmName hashAlgorithm, out int bytesWritten)
-        {
+        protected virtual bool TryHashData(
+            ReadOnlySpan<byte> data,
+            Span<byte> destination,
+            HashAlgorithmName hashAlgorithm,
+            out int bytesWritten
+        ) {
             // Use ArrayPool.Shared instead of CryptoPool because the array is passed out.
             byte[] array = ArrayPool<byte>.Shared.Rent(data.Length);
             bool returnArray = false;
@@ -797,6 +895,7 @@ namespace System.Security.Cryptography
                     return false;
                 }
             }
+
             finally
             {
                 Array.Clear(array, 0, data.Length);
@@ -808,8 +907,17 @@ namespace System.Security.Cryptography
             }
         }
 
-        public virtual bool TrySignHash(ReadOnlySpan<byte> hash, Span<byte> destination, out int bytesWritten)
-            => TrySignHashCore(hash, destination, DSASignatureFormat.IeeeP1363FixedFieldConcatenation, out bytesWritten);
+        public virtual bool TrySignHash(
+            ReadOnlySpan<byte> hash,
+            Span<byte> destination,
+            out int bytesWritten
+        ) =>
+            TrySignHashCore(
+                hash,
+                destination,
+                DSASignatureFormat.IeeeP1363FixedFieldConcatenation,
+                out bytesWritten
+            );
 
         /// <summary>
         ///   Attempts to create the ECDSA signature for the specified hash value in the indicated format
@@ -836,8 +944,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             DSASignatureFormat signatureFormat,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
@@ -866,13 +974,16 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             DSASignatureFormat signatureFormat,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             // This method is expected to be overriden with better implementation
 
             // The only available implementation here is abstract method, use it
             byte[] result = SignHash(hash.ToArray());
-            byte[] converted = AsymmetricAlgorithmHelpers.ConvertFromIeeeP1363Signature(result, signatureFormat);
+            byte[] converted = AsymmetricAlgorithmHelpers.ConvertFromIeeeP1363Signature(
+                result,
+                signatureFormat
+            );
             return Helpers.TryCopyToDestination(converted, destination, out bytesWritten);
         }
 
@@ -927,8 +1038,8 @@ namespace System.Security.Cryptography
         public bool VerifyHash(
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
-            DSASignatureFormat signatureFormat)
-        {
+            DSASignatureFormat signatureFormat
+        ) {
             if (!signatureFormat.IsKnownValue())
                 throw DSASignatureFormatHelpers.CreateUnknownValueException(signatureFormat);
 
@@ -950,8 +1061,8 @@ namespace System.Security.Cryptography
         protected virtual bool VerifyHashCore(
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
-            DSASignatureFormat signatureFormat)
-        {
+            DSASignatureFormat signatureFormat
+        ) {
             // This method is expected to be overriden with better implementation
 
             byte[]? sig = this.ConvertSignatureToIeeeP1363(signatureFormat, signature);
@@ -969,8 +1080,8 @@ namespace System.Security.Cryptography
         private ReadOnlySpan<byte> HashSpanToTmp(
             ReadOnlySpan<byte> data,
             HashAlgorithmName hashAlgorithm,
-            Span<byte> tmp)
-        {
+            Span<byte> tmp
+        ) {
             Debug.Assert(tmp.Length == HashBufferStackSize);
 
             if (TryHashData(data, tmp, hashAlgorithm, out int hashSize))
@@ -995,6 +1106,7 @@ namespace System.Security.Cryptography
                 returnArray = true;
                 return ret;
             }
+
             finally
             {
                 Array.Clear(array, 0, data.Length);
@@ -1010,15 +1122,16 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             if (pbeParameters == null)
                 throw new ArgumentNullException(nameof(pbeParameters));
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 ReadOnlySpan<char>.Empty,
-                passwordBytes);
+                passwordBytes
+            );
 
             ECParameters ecParameters = ExportParameters(true);
 
@@ -1026,15 +1139,19 @@ namespace System.Security.Cryptography
             {
                 try
                 {
-                    AsnWriter pkcs8PrivateKey = EccKeyFormatHelper.WritePkcs8PrivateKey(ecParameters);
+                    AsnWriter pkcs8PrivateKey = EccKeyFormatHelper.WritePkcs8PrivateKey(
+                        ecParameters
+                    );
 
                     AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(
                         passwordBytes,
                         pkcs8PrivateKey,
-                        pbeParameters);
+                        pbeParameters
+                    );
 
                     return writer.TryEncode(destination, out bytesWritten);
                 }
+
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -1046,15 +1163,16 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             if (pbeParameters == null)
                 throw new ArgumentNullException(nameof(pbeParameters));
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 password,
-                ReadOnlySpan<byte>.Empty);
+                ReadOnlySpan<byte>.Empty
+            );
 
             ECParameters ecParameters = ExportParameters(true);
 
@@ -1062,15 +1180,19 @@ namespace System.Security.Cryptography
             {
                 try
                 {
-                    AsnWriter pkcs8PrivateKey = EccKeyFormatHelper.WritePkcs8PrivateKey(ecParameters);
+                    AsnWriter pkcs8PrivateKey = EccKeyFormatHelper.WritePkcs8PrivateKey(
+                        ecParameters
+                    );
 
                     AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(
                         password,
                         pkcs8PrivateKey,
-                        pbeParameters);
+                        pbeParameters
+                    );
 
                     return writer.TryEncode(destination, out bytesWritten);
                 }
+
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -1080,8 +1202,8 @@ namespace System.Security.Cryptography
 
         public override unsafe bool TryExportPkcs8PrivateKey(
             Span<byte> destination,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             ECParameters ecParameters = ExportParameters(true);
 
             fixed (byte* privPtr = ecParameters.D)
@@ -1091,6 +1213,7 @@ namespace System.Security.Cryptography
                     AsnWriter writer = EccKeyFormatHelper.WritePkcs8PrivateKey(ecParameters);
                     return writer.TryEncode(destination, out bytesWritten);
                 }
+
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -1100,8 +1223,8 @@ namespace System.Security.Cryptography
 
         public override bool TryExportSubjectPublicKeyInfo(
             Span<byte> destination,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             ECParameters ecParameters = ExportParameters(false);
 
             AsnWriter writer = EccKeyFormatHelper.WriteSubjectPublicKeyInfo(ecParameters);
@@ -1111,15 +1234,16 @@ namespace System.Security.Cryptography
         public override unsafe void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
-        {
+            out int bytesRead
+        ) {
             KeyFormatHelper.ReadEncryptedPkcs8<ECParameters>(
                 s_validOids,
                 source,
                 passwordBytes,
                 EccKeyFormatHelper.FromECPrivateKey,
                 out int localRead,
-                out ECParameters ret);
+                out ECParameters ret
+            );
 
             fixed (byte* privPin = ret.D)
             {
@@ -1128,6 +1252,7 @@ namespace System.Security.Cryptography
                     ImportParameters(ret);
                     bytesRead = localRead;
                 }
+
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ret.D);
@@ -1138,15 +1263,16 @@ namespace System.Security.Cryptography
         public override unsafe void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
-        {
+            out int bytesRead
+        ) {
             KeyFormatHelper.ReadEncryptedPkcs8<ECParameters>(
                 s_validOids,
                 source,
                 password,
                 EccKeyFormatHelper.FromECPrivateKey,
                 out int localRead,
-                out ECParameters ret);
+                out ECParameters ret
+            );
 
             fixed (byte* privPin = ret.D)
             {
@@ -1155,6 +1281,7 @@ namespace System.Security.Cryptography
                     ImportParameters(ret);
                     bytesRead = localRead;
                 }
+
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ret.D);
@@ -1164,14 +1291,15 @@ namespace System.Security.Cryptography
 
         public override unsafe void ImportPkcs8PrivateKey(
             ReadOnlySpan<byte> source,
-            out int bytesRead)
-        {
+            out int bytesRead
+        ) {
             KeyFormatHelper.ReadPkcs8<ECParameters>(
                 s_validOids,
                 source,
                 EccKeyFormatHelper.FromECPrivateKey,
                 out int localRead,
-                out ECParameters key);
+                out ECParameters key
+            );
 
             fixed (byte* privPin = key.D)
             {
@@ -1180,6 +1308,7 @@ namespace System.Security.Cryptography
                     ImportParameters(key);
                     bytesRead = localRead;
                 }
+
                 finally
                 {
                     CryptographicOperations.ZeroMemory(key.D);
@@ -1189,14 +1318,15 @@ namespace System.Security.Cryptography
 
         public override void ImportSubjectPublicKeyInfo(
             ReadOnlySpan<byte> source,
-            out int bytesRead)
-        {
+            out int bytesRead
+        ) {
             KeyFormatHelper.ReadSubjectPublicKeyInfo<ECParameters>(
                 s_validOids,
                 source,
                 EccKeyFormatHelper.FromECPublicKey,
                 out int localRead,
-                out ECParameters key);
+                out ECParameters key
+            );
 
             ImportParameters(key);
             bytesRead = localRead;
@@ -1204,7 +1334,10 @@ namespace System.Security.Cryptography
 
         public virtual unsafe void ImportECPrivateKey(ReadOnlySpan<byte> source, out int bytesRead)
         {
-            ECParameters ecParameters = EccKeyFormatHelper.FromECPrivateKey(source, out int localRead);
+            ECParameters ecParameters = EccKeyFormatHelper.FromECPrivateKey(
+                source,
+                out int localRead
+            );
 
             fixed (byte* privPin = ecParameters.D)
             {
@@ -1213,6 +1346,7 @@ namespace System.Security.Cryptography
                     ImportParameters(ecParameters);
                     bytesRead = localRead;
                 }
+
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -1231,6 +1365,7 @@ namespace System.Security.Cryptography
                     AsnWriter writer = EccKeyFormatHelper.WriteECPrivateKey(ecParameters);
                     return writer.Encode();
                 }
+
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -1238,8 +1373,10 @@ namespace System.Security.Cryptography
             }
         }
 
-        public virtual unsafe bool TryExportECPrivateKey(Span<byte> destination, out int bytesWritten)
-        {
+        public virtual unsafe bool TryExportECPrivateKey(
+            Span<byte> destination,
+            out int bytesWritten
+        ) {
             ECParameters ecParameters = ExportParameters(true);
 
             fixed (byte* privPin = ecParameters.D)
@@ -1249,6 +1386,7 @@ namespace System.Security.Cryptography
                     AsnWriter writer = EccKeyFormatHelper.WriteECPrivateKey(ecParameters);
                     return writer.TryEncode(destination, out bytesWritten);
                 }
+
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -1333,24 +1471,28 @@ namespace System.Security.Cryptography
         /// </remarks>
         public override void ImportFromPem(ReadOnlySpan<char> input)
         {
-            PemKeyImportHelpers.ImportPem(input, label => {
-                if (label.SequenceEqual(PemLabels.Pkcs8PrivateKey))
+            PemKeyImportHelpers.ImportPem(
+                input,
+                label =>
                 {
-                    return ImportPkcs8PrivateKey;
+                    if (label.SequenceEqual(PemLabels.Pkcs8PrivateKey))
+                    {
+                        return ImportPkcs8PrivateKey;
+                    }
+                    else if (label.SequenceEqual(PemLabels.SpkiPublicKey))
+                    {
+                        return ImportSubjectPublicKeyInfo;
+                    }
+                    else if (label.SequenceEqual(PemLabels.EcPrivateKey))
+                    {
+                        return ImportECPrivateKey;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else if (label.SequenceEqual(PemLabels.SpkiPublicKey))
-                {
-                    return ImportSubjectPublicKeyInfo;
-                }
-                else if (label.SequenceEqual(PemLabels.EcPrivateKey))
-                {
-                    return ImportECPrivateKey;
-                }
-                else
-                {
-                    return null;
-                }
-            });
+            );
         }
 
         /// <summary>
@@ -1417,9 +1559,15 @@ namespace System.Security.Cryptography
         ///   </para>
         ///   <para>This method supports the <c>ENCRYPTED PRIVATE KEY</c> PEM label.</para>
         /// </remarks>
-        public override void ImportFromEncryptedPem(ReadOnlySpan<char> input, ReadOnlySpan<char> password)
-        {
-            PemKeyImportHelpers.ImportEncryptedPem<char>(input, password, ImportEncryptedPkcs8PrivateKey);
+        public override void ImportFromEncryptedPem(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<char> password
+        ) {
+            PemKeyImportHelpers.ImportEncryptedPem<char>(
+                input,
+                password,
+                ImportEncryptedPkcs8PrivateKey
+            );
         }
 
         /// <summary>
@@ -1487,9 +1635,15 @@ namespace System.Security.Cryptography
         ///   </para>
         ///   <para>This method supports the <c>ENCRYPTED PRIVATE KEY</c> PEM label.</para>
         /// </remarks>
-        public override void ImportFromEncryptedPem(ReadOnlySpan<char> input, ReadOnlySpan<byte> passwordBytes)
-        {
-            PemKeyImportHelpers.ImportEncryptedPem<byte>(input, passwordBytes, ImportEncryptedPkcs8PrivateKey);
+        public override void ImportFromEncryptedPem(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<byte> passwordBytes
+        ) {
+            PemKeyImportHelpers.ImportEncryptedPem<byte>(
+                input,
+                passwordBytes,
+                ImportEncryptedPkcs8PrivateKey
+            );
         }
     }
 }

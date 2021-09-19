@@ -17,9 +17,22 @@ namespace System.IO.Pipes.Tests
             string pipeName = Path.Combine("/tmp", "pipe-tests-corefx-" + Path.GetRandomFileName());
             var endPoint = new UnixDomainSocketEndPoint(pipeName);
 
-            using (var pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.CurrentUserOnly))
-            using (var sockectClient = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified))
-            {
+            using (
+                var pipeServer = new NamedPipeServerStream(
+                    pipeName,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.CurrentUserOnly
+                )
+            )
+            using (
+                var sockectClient = new Socket(
+                    AddressFamily.Unix,
+                    SocketType.Stream,
+                    ProtocolType.Unspecified
+                )
+            ) {
                 sockectClient.Connect(endPoint);
                 Assert.True(File.Exists(pipeName));
             }
@@ -35,9 +48,21 @@ namespace System.IO.Pipes.Tests
             string pipeName = Path.Combine("/tmp", "pipe-tests-corefx-" + Path.GetRandomFileName());
             var endPoint = new UnixDomainSocketEndPoint(pipeName);
 
-            using (var socketServer = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified))
-            using (var pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.None))
-            {
+            using (
+                var socketServer = new Socket(
+                    AddressFamily.Unix,
+                    SocketType.Stream,
+                    ProtocolType.Unspecified
+                )
+            )
+            using (
+                var pipeClient = new NamedPipeClientStream(
+                    ".",
+                    pipeName,
+                    PipeDirection.InOut,
+                    PipeOptions.None
+                )
+            ) {
                 socketServer.Bind(endPoint);
                 socketServer.Listen(1);
 
@@ -50,7 +75,11 @@ namespace System.IO.Pipes.Tests
             }
 
             Assert.True(File.Exists(pipeName));
-            try { File.Delete(pipeName); } catch { }
+            try
+            {
+                File.Delete(pipeName);
+            }
+            catch { }
         }
     }
 }

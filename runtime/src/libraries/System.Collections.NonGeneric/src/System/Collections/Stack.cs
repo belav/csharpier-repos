@@ -20,7 +20,9 @@ namespace System.Collections
     [DebuggerTypeProxy(typeof(System.Collections.Stack.StackDebugView))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class Stack : ICollection, ICloneable
     {
         private object?[] _array; // Storage for stack elements. Do not rename (binary serialization)
@@ -41,10 +43,13 @@ namespace System.Collections
         public Stack(int initialCapacity)
         {
             if (initialCapacity < 0)
-                throw new ArgumentOutOfRangeException(nameof(initialCapacity), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(initialCapacity),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (initialCapacity < _defaultCapacity)
-                initialCapacity = _defaultCapacity;  // Simplify doubling logic in Push.
+                initialCapacity = _defaultCapacity; // Simplify doubling logic in Push.
             _array = new object[initialCapacity];
             _size = 0;
             _version = 0;
@@ -65,10 +70,7 @@ namespace System.Collections
 
         public virtual int Count
         {
-            get
-            {
-                return _size;
-            }
+            get { return _size; }
         }
 
         public virtual bool IsSynchronized
@@ -122,7 +124,10 @@ namespace System.Collections
             if (array.Rank != 1)
                 throw new ArgumentException(SR.Arg_RankMultiDimNotSupported, nameof(array));
             if (index < 0)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (array.Length - index < _size)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -171,7 +176,7 @@ namespace System.Collections
 
             _version++;
             object? obj = _array[--_size];
-            _array[_size] = null;     // Free memory quicker.
+            _array[_size] = null; // Free memory quicker.
             return obj;
         }
 
@@ -198,7 +203,6 @@ namespace System.Collections
 
             return new SyncStack(stack);
         }
-
 
         // Copies the Stack to an array, in the same order Pop would return the items.
         public virtual object?[] ToArray()
@@ -234,10 +238,7 @@ namespace System.Collections
 
             public override object SyncRoot
             {
-                get
-                {
-                    return _root;
-                }
+                get { return _root; }
             }
 
             public override int Count
@@ -344,9 +345,10 @@ namespace System.Collections
             public bool MoveNext()
             {
                 bool retval;
-                if (_version != _stack._version) throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
+                if (_version != _stack._version)
+                    throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 if (_index == -2)
-                {  // First call to enumerator.
+                { // First call to enumerator.
                     _index = _stack._size - 1;
                     retval = (_index >= 0);
                     if (retval)
@@ -354,7 +356,7 @@ namespace System.Collections
                     return retval;
                 }
                 if (_index == -1)
-                {  // End of enumeration.
+                { // End of enumeration.
                     return false;
                 }
 
@@ -370,15 +372,18 @@ namespace System.Collections
             {
                 get
                 {
-                    if (_index == -2) throw new InvalidOperationException(SR.InvalidOperation_EnumNotStarted);
-                    if (_index == -1) throw new InvalidOperationException(SR.InvalidOperation_EnumEnded);
+                    if (_index == -2)
+                        throw new InvalidOperationException(SR.InvalidOperation_EnumNotStarted);
+                    if (_index == -1)
+                        throw new InvalidOperationException(SR.InvalidOperation_EnumEnded);
                     return _currentElement;
                 }
             }
 
             public void Reset()
             {
-                if (_version != _stack._version) throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
+                if (_version != _stack._version)
+                    throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 _index = -2;
                 _currentElement = null;
             }
@@ -399,10 +404,7 @@ namespace System.Collections
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public object?[] Items
             {
-                get
-                {
-                    return _stack.ToArray();
-                }
+                get { return _stack.ToArray(); }
             }
         }
     }

@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
             httpContext.Request.Headers.Add(CorsConstants.AccessControlRequestMethod, "PUT");
             var authorizationFilterContext = new AuthorizationFilterContext(
                 new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
-                new List<IFilterMetadata>());
+                new List<IFilterMetadata>()
+            );
 
             // Act
             await filter.OnAuthorizationAsync(authorizationFilterContext);
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
             httpContext.Request.Headers.Add(CorsConstants.Origin, "http://localhost:5000/");
             var authorizationFilterContext = new AuthorizationFilterContext(
                 new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
-                new List<IFilterMetadata>());
+                new List<IFilterMetadata>()
+            );
 
             // Act
             await filter.OnAuthorizationAsync(authorizationFilterContext);
@@ -56,8 +58,9 @@ namespace Microsoft.AspNetCore.Mvc.Cors
         [Theory]
         [InlineData("OpTions")]
         [InlineData("OPTIONS")]
-        public async Task DisableCors_CaseInsensitivePreflightMethod_ShortCircuitsRequest(string preflightMethod)
-        {
+        public async Task DisableCors_CaseInsensitivePreflightMethod_ShortCircuitsRequest(
+            string preflightMethod
+        ) {
             // Arrange
             var filter = new DisableCorsAuthorizationFilter();
             var httpContext = new DefaultHttpContext();
@@ -66,13 +69,16 @@ namespace Microsoft.AspNetCore.Mvc.Cors
             httpContext.Request.Headers.Add(CorsConstants.AccessControlRequestMethod, "PUT");
             var authorizationFilterContext = new AuthorizationFilterContext(
                 new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
-                new List<IFilterMetadata>());
+                new List<IFilterMetadata>()
+            );
 
             // Act
             await filter.OnAuthorizationAsync(authorizationFilterContext);
 
             // Assert
-            var statusCodeResult = Assert.IsType<StatusCodeResult>(authorizationFilterContext.Result);
+            var statusCodeResult = Assert.IsType<StatusCodeResult>(
+                authorizationFilterContext.Result
+            );
             Assert.Equal(StatusCodes.Status204NoContent, statusCodeResult.StatusCode);
         }
     }

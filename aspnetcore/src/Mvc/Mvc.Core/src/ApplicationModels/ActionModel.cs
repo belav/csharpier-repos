@@ -24,9 +24,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// </summary>
         /// <param name="actionMethod">The action <see cref="MethodInfo"/>.</param>
         /// <param name="attributes">The attributes associated with the action.</param>
-        public ActionModel(
-            MethodInfo actionMethod,
-            IReadOnlyList<object> attributes)
+        public ActionModel(MethodInfo actionMethod, IReadOnlyList<object> attributes)
         {
             if (actionMethod == null)
             {
@@ -71,11 +69,16 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             Attributes = new List<object>(other.Attributes);
             Filters = new List<IFilterMetadata>(other.Filters);
             Properties = new Dictionary<object, object>(other.Properties);
-            RouteValues = new Dictionary<string, string?>(other.RouteValues, StringComparer.OrdinalIgnoreCase);
+            RouteValues = new Dictionary<string, string?>(
+                other.RouteValues,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Make a deep copy of other 'model' types.
             ApiExplorer = new ApiExplorerModel(other.ApiExplorer);
-            Parameters = new List<ParameterModel>(other.Parameters.Select(p => new ParameterModel(p) { Action = this }));
+            Parameters = new List<ParameterModel>(
+                other.Parameters.Select(p => new ParameterModel(p) { Action = this })
+            );
             Selectors = new List<SelectorModel>(other.Selectors.Select(s => new SelectorModel(s)));
         }
 

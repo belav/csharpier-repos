@@ -9,7 +9,8 @@ namespace System.Drawing.Printing
 {
     partial class InvalidPrinterException
     {
-        protected InvalidPrinterException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected InvalidPrinterException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _settings = (PrinterSettings)info.GetValue("settings", typeof(PrinterSettings));
         }

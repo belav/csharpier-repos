@@ -8,27 +8,34 @@ using System.Text;
 namespace System.Reflection
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class ReflectionTypeLoadException : SystemException, ISerializable
     {
-        public ReflectionTypeLoadException(Type?[]? classes, Exception?[]? exceptions) :
-            this(classes, exceptions, null)
-        {
-        }
+        public ReflectionTypeLoadException(Type?[]? classes, Exception?[]? exceptions)
+            : this(classes, exceptions, null) { }
 
-        public ReflectionTypeLoadException(Type?[]? classes, Exception?[]? exceptions, string? message)
-            : base(message)
+        public ReflectionTypeLoadException(
+            Type?[]? classes,
+            Exception?[]? exceptions,
+            string? message
+        ) : base(message)
         {
             Types = classes ?? Type.EmptyTypes;
             LoaderExceptions = exceptions ?? Array.Empty<Exception>();
             HResult = HResults.COR_E_REFLECTIONTYPELOAD;
         }
 
-        private ReflectionTypeLoadException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
+        private ReflectionTypeLoadException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context)
         {
             Types = Type.EmptyTypes;
-            LoaderExceptions = (Exception?[]?)info.GetValue("Exceptions", typeof(Exception[])) ?? Array.Empty<Exception?>();
+            LoaderExceptions =
+                (Exception?[]?)info.GetValue("Exceptions", typeof(Exception[]))
+                ?? Array.Empty<Exception?>();
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

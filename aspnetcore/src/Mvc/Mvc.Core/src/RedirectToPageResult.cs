@@ -22,10 +22,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// provided.
         /// </summary>
         /// <param name="pageName">The page to redirect to.</param>
-        public RedirectToPageResult(string? pageName)
-            : this(pageName, routeValues: null)
-        {
-        }
+        public RedirectToPageResult(string? pageName) : this(pageName, routeValues: null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -34,9 +31,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="pageName">The page to redirect to.</param>
         /// <param name="pageHandler">The page handler to redirect to.</param>
         public RedirectToPageResult(string? pageName, string? pageHandler)
-            : this(pageName, pageHandler, routeValues: null)
-        {
-        }
+            : this(pageName, pageHandler, routeValues: null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -45,9 +40,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="pageName">The page to redirect to.</param>
         /// <param name="routeValues">The parameters for the route.</param>
         public RedirectToPageResult(string? pageName, object? routeValues)
-            : this(pageName, pageHandler: null, routeValues: routeValues, permanent: false)
-        {
-        }
+            : this(pageName, pageHandler: null, routeValues: routeValues, permanent: false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -56,10 +49,11 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="pageName">The page to redirect to.</param>
         /// <param name="pageHandler">The page handler to redirect to.</param>
         /// <param name="routeValues">The parameters for the route.</param>
-        public RedirectToPageResult(string? pageName, string? pageHandler, object? routeValues)
-            : this(pageName, pageHandler, routeValues, permanent: false)
-        {
-        }
+        public RedirectToPageResult(
+            string? pageName,
+            string? pageHandler,
+            object? routeValues
+        ) : this(pageName, pageHandler, routeValues, permanent: false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -73,10 +67,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? pageName,
             string? pageHandler,
             object? routeValues,
-            bool permanent)
-            : this(pageName, pageHandler, routeValues, permanent, fragment: null)
-        {
-        }
+            bool permanent
+        ) : this(pageName, pageHandler, routeValues, permanent, fragment: null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values provided.
@@ -91,10 +83,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? pageHandler,
             object? routeValues,
             bool permanent,
-            bool preserveMethod)
-            : this(pageName, pageHandler, routeValues, permanent, preserveMethod, fragment: null)
-        {
-        }
+            bool preserveMethod
+        ) : this(pageName, pageHandler, routeValues, permanent, preserveMethod, fragment: null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -108,10 +98,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? pageName,
             string? pageHandler,
             object? routeValues,
-            string? fragment)
-            : this(pageName, pageHandler, routeValues, permanent: false, fragment: fragment)
-        {
-        }
+            string? fragment
+        ) : this(pageName, pageHandler, routeValues, permanent: false, fragment: fragment) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -127,10 +115,15 @@ namespace Microsoft.AspNetCore.Mvc
             string? pageHandler,
             object? routeValues,
             bool permanent,
-            string? fragment)
-            : this(pageName, pageHandler, routeValues, permanent, preserveMethod: false, fragment: fragment)
-        {
-        }
+            string? fragment
+        ) : this(
+            pageName,
+            pageHandler,
+            routeValues,
+            permanent,
+            preserveMethod: false,
+            fragment: fragment
+        ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -148,8 +141,8 @@ namespace Microsoft.AspNetCore.Mvc
             object? routeValues,
             bool permanent,
             bool preserveMethod,
-            string? fragment)
-        {
+            string? fragment
+        ) {
             PageName = pageName;
             PageHandler = pageHandler;
             RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);
@@ -211,7 +204,9 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<RedirectToPageResult>>();
+            var executor = context.HttpContext.RequestServices.GetRequiredService<
+                IActionResultExecutor<RedirectToPageResult>
+            >();
             return executor.ExecuteAsync(context, this);
         }
     }

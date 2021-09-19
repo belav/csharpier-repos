@@ -10,15 +10,17 @@ namespace System.IO.MemoryMappedFiles.Tests
     public abstract partial class MemoryMappedFilesTestBase : FileCleanupTestBase
     {
         /// <summary>Gets the system's page size.</summary>
-        protected static Lazy<int> s_pageSize = new Lazy<int>(() =>
-        {
-            int pageSize;
-            SYSTEM_INFO info;
-            GetSystemInfo(out info);
-            pageSize = (int)info.dwPageSize;
-            Assert.InRange(pageSize, 1, int.MaxValue);
-            return pageSize;
-        });
+        protected static Lazy<int> s_pageSize = new Lazy<int>(
+            () =>
+            {
+                int pageSize;
+                SYSTEM_INFO info;
+                GetSystemInfo(out info);
+                pageSize = (int)info.dwPageSize;
+                Assert.InRange(pageSize, 1, int.MaxValue);
+                return pageSize;
+            }
+        );
 
         [DllImport("kernel32.dll")]
         private static extern bool GetHandleInformation(IntPtr hObject, out uint lpdwFlags);
@@ -49,13 +51,18 @@ namespace System.IO.MemoryMappedFiles.Tests
         }
 
         /// <summary>Asserts that the handle's inheritability matches the specified value.</summary>
-        protected static void AssertInheritability(SafeHandle handle, HandleInheritability inheritability)
-        {
+        protected static void AssertInheritability(
+            SafeHandle handle,
+            HandleInheritability inheritability
+        ) {
             if (OperatingSystem.IsWindows())
             {
                 uint flags;
                 Assert.True(GetHandleInformation(handle.DangerousGetHandle(), out flags));
-                Assert.Equal(inheritability == HandleInheritability.Inheritable, (flags & HANDLE_FLAG_INHERIT) != 0);
+                Assert.Equal(
+                    inheritability == HandleInheritability.Inheritable,
+                    (flags & HANDLE_FLAG_INHERIT) != 0
+                );
             }
         }
     }

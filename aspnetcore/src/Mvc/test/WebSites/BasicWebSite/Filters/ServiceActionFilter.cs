@@ -16,9 +16,7 @@ namespace BasicWebSite
             _logger = logger;
         }
 
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-        }
+        public void OnActionExecuted(ActionExecutedContext context) { }
 
         public void OnActionExecuting(ActionExecutingContext context)
         {

@@ -25,7 +25,12 @@ namespace Roslyn.Hosting.Diagnostics
         public static void Install()
         {
             // make sure TPL installs its own event source
-            Task.Factory.StartNew(() => { }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
+            Task.Factory.StartNew(
+                () => { },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                TaskScheduler.Default
+            );
 
             var local = new TPLListener();
             Interlocked.CompareExchange(ref s_listener, local, null);
@@ -50,7 +55,8 @@ namespace Roslyn.Hosting.Diagnostics
 
             public TPLListener()
             {
-                var tplEventSource = EventSource.GetSources().First(e => e.Name == "System.Threading.Tasks.TplEventSource");
+                var tplEventSource = EventSource.GetSources()
+                    .First(e => e.Name == "System.Threading.Tasks.TplEventSource");
                 EnableEvents(tplEventSource, EventLevel.LogAlways);
             }
 

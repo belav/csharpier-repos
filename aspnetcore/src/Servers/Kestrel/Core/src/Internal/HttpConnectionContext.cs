@@ -22,8 +22,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             MemoryPool<byte> memoryPool,
             IPEndPoint? localEndPoint,
             IPEndPoint? remoteEndPoint,
-            IDuplexPipe transport)
-        {
+            IDuplexPipe transport
+        ) {
             ConnectionId = connectionId;
             Protocols = protocols;
             ConnectionContext = connectionContext;

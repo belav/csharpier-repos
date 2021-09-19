@@ -54,9 +54,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 get { return CSharpParseOptions.Default; }
             }
 
-            [Obsolete("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", error: false)]
-            public override ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions
-                => throw ExceptionUtilities.Unreachable;
+            [Obsolete(
+                "Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead",
+                error: false
+            )]
+            public override ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions =>
+                throw ExceptionUtilities.Unreachable;
 
             public override string FilePath
             {
@@ -84,19 +87,31 @@ namespace Microsoft.CodeAnalysis.CSharp
                 get { return true; }
             }
 
-            public override FileLinePositionSpan GetLineSpan(TextSpan span, CancellationToken cancellationToken = default(CancellationToken))
-            {
+            public override FileLinePositionSpan GetLineSpan(
+                TextSpan span,
+                CancellationToken cancellationToken = default(CancellationToken)
+            ) {
                 return default(FileLinePositionSpan);
             }
 
             public override SyntaxTree WithRootAndOptions(SyntaxNode root, ParseOptions options)
             {
-                return SyntaxFactory.SyntaxTree(root, options: options, path: FilePath, encoding: null);
+                return SyntaxFactory.SyntaxTree(
+                    root,
+                    options: options,
+                    path: FilePath,
+                    encoding: null
+                );
             }
 
             public override SyntaxTree WithFilePath(string path)
             {
-                return SyntaxFactory.SyntaxTree(_node, options: this.Options, path: path, encoding: null);
+                return SyntaxFactory.SyntaxTree(
+                    _node,
+                    options: this.Options,
+                    path: path,
+                    encoding: null
+                );
             }
         }
     }

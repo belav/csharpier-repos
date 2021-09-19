@@ -13,12 +13,9 @@ namespace Microsoft.AspNetCore.Authorization.Test
     {
         private OperationAuthorizationRequirement CreateRequirement(string name)
         {
-            return new OperationAuthorizationRequirement()
-            {
-                Name = name
-            };
+            return new OperationAuthorizationRequirement() { Name = name };
         }
-        
+
         [Fact]
         public void ToString_ShouldReturnFormatValue()
         {

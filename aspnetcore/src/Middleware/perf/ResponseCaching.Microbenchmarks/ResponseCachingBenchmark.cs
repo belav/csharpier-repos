@@ -19,35 +19,36 @@ namespace Microsoft.AspNetCore.WebSockets.Microbenchmarks
 {
     public class ResponseCachingBenchmark
     {
-        private static readonly string _cacheControl = $"{CacheControlHeaderValue.PublicString}, {CacheControlHeaderValue.MaxAgeString}={int.MaxValue}";
+        private static readonly string _cacheControl =
+            $"{CacheControlHeaderValue.PublicString}, {CacheControlHeaderValue.MaxAgeString}={int.MaxValue}";
 
         private ResponseCachingMiddleware _middleware;
         private readonly byte[] _data = new byte[1 * 1024 * 1024];
 
-        [Params(
-            100,
-            64 * 1024,
-            1 * 1024 * 1024
-        )]
+        [Params(100, 64 * 1024, 1 * 1024 * 1024)]
         public int Size { get; set; }
 
         [GlobalSetup]
         public void Setup()
         {
             _middleware = new ResponseCachingMiddleware(
-                    async context => {
-                        context.Response.Headers[HeaderNames.CacheControl] = _cacheControl;
-                        await context.Response.BodyWriter.WriteAsync(new ReadOnlyMemory<byte>(_data, 0, Size));
-                    },
-                    Options.Create(new ResponseCachingOptions
+                async context =>
+                {
+                    context.Response.Headers[HeaderNames.CacheControl] = _cacheControl;
+                    await context.Response.BodyWriter.WriteAsync(
+                        new ReadOnlyMemory<byte>(_data, 0, Size)
+                    );
+                },
+                Options.Create(
+                    new ResponseCachingOptions
                     {
                         SizeLimit = int.MaxValue, // ~2GB
                         MaximumBodySize = 1 * 1024 * 1024,
-                    }),
-                    NullLoggerFactory.Instance,
-                    new DefaultObjectPoolProvider()
-                );
-
+                    }
+                ),
+                NullLoggerFactory.Instance,
+                new DefaultObjectPoolProvider()
+            );
             // no need to actually cache as there is a warm-up fase
         }
 
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.WebSockets.Microbenchmarks
             context.Request.Path = "/a";
 
             // don't serve from cache but store result
-            context.Request.Headers[HeaderNames.CacheControl] = CacheControlHeaderValue.NoCacheString;
+            context.Request.Headers[HeaderNames.CacheControl] =
+                CacheControlHeaderValue.NoCacheString;
 
             await _middleware.Invoke(context);
 
@@ -130,8 +132,12 @@ namespace Microsoft.AspNetCore.WebSockets.Microbenchmarks
                 throw new NotImplementedException();
             }
 
-            public Task SendFileAsync(string path, long offset, long? count, CancellationToken cancellationToken = default)
-            {
+            public Task SendFileAsync(
+                string path,
+                long offset,
+                long? count,
+                CancellationToken cancellationToken = default
+            ) {
                 throw new NotImplementedException();
             }
 

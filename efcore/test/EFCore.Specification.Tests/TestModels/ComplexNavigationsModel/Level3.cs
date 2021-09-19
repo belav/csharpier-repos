@@ -47,7 +47,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
                 return false;
             }
 
-            return ReferenceEquals(this, obj) ? true : obj.GetType() == GetType() && Equals((Level3)obj);
+            return ReferenceEquals(this, obj)
+                ? true
+                : obj.GetType() == GetType() && Equals((Level3)obj);
         }
 
         protected bool Equals(Level3 other)
@@ -58,7 +60,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
                 && Level2_Optional_Id == other.Level2_Optional_Id;
         }
 
-        public override int GetHashCode()
-            => HashCode.Combine(Id, Name, Level2_Required_Id, Level2_Optional_Id);
+        public override int GetHashCode() =>
+            HashCode.Combine(Id, Name, Level2_Required_Id, Level2_Optional_Id);
     }
 }

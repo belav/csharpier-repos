@@ -27,11 +27,9 @@ namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis
         public void GetAllElements_ReturnsAllXmlValuesForGivenKey()
         {
             var database = new Mock<IDatabase>();
-            database.Setup(d => d.ListRange("Key", 0, -1, CommandFlags.None)).Returns(new RedisValue[]
-            {
-                "<Element1/>",
-                "<Element2/>",
-            }).Verifiable();
+            database.Setup(d => d.ListRange("Key", 0, -1, CommandFlags.None))
+                .Returns(new RedisValue[] { "<Element1/>", "<Element2/>", })
+                .Verifiable();
             var repo = new RedisXmlRepository(() => database.Object, "Key");
 
             var elements = repo.GetAllElements().ToArray();
@@ -45,11 +43,9 @@ namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis
         public void GetAllElements_ThrowsParsingException()
         {
             var database = new Mock<IDatabase>();
-            database.Setup(d => d.ListRange("Key", 0, -1, CommandFlags.None)).Returns(new RedisValue[]
-            {
-                "<Element1/>",
-                "<Element2",
-            }).Verifiable();
+            database.Setup(d => d.ListRange("Key", 0, -1, CommandFlags.None))
+                .Returns(new RedisValue[] { "<Element1/>", "<Element2", })
+                .Verifiable();
             var repo = new RedisXmlRepository(() => database.Object, "Key");
 
             Assert.Throws<XmlException>(() => repo.GetAllElements());
@@ -59,7 +55,10 @@ namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis
         public void StoreElement_PushesValueToList()
         {
             var database = new Mock<IDatabase>();
-            database.Setup(d => d.ListRightPush("Key", "<Element2 />", When.Always, CommandFlags.None)).Verifiable();
+            database.Setup(
+                    d => d.ListRightPush("Key", "<Element2 />", When.Always, CommandFlags.None)
+                )
+                .Verifiable();
             var repo = new RedisXmlRepository(() => database.Object, "Key");
 
             repo.StoreElement(new XElement("Element2"), null);
@@ -80,30 +79,36 @@ namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis
 
             try
             {
-                using (var redis = await ConnectionMultiplexer.ConnectAsync(connStr).TimeoutAfter(TimeSpan.FromMinutes(1)))
-                {
+                using (
+                    var redis = await ConnectionMultiplexer.ConnectAsync(connStr)
+                        .TimeoutAfter(TimeSpan.FromMinutes(1))
+                ) {
                     var repo = new RedisXmlRepository(() => redis.GetDatabase(), key);
                     var element = new XElement("HelloRedis", guid);
                     repo.StoreElement(element, guid);
                 }
 
-                using (var redis = await ConnectionMultiplexer.ConnectAsync(connStr).TimeoutAfter(TimeSpan.FromMinutes(1)))
-                {
+                using (
+                    var redis = await ConnectionMultiplexer.ConnectAsync(connStr)
+                        .TimeoutAfter(TimeSpan.FromMinutes(1))
+                ) {
                     var repo = new RedisXmlRepository(() => redis.GetDatabase(), key);
                     var elements = repo.GetAllElements();
 
                     Assert.Contains(elements, e => e.Name == "HelloRedis" && e.Value == guid);
                 }
             }
+
             finally
             {
                 // cleanup
-                using (var redis = await ConnectionMultiplexer.ConnectAsync(connStr).TimeoutAfter(TimeSpan.FromMinutes(1)))
-                {
+                using (
+                    var redis = await ConnectionMultiplexer.ConnectAsync(connStr)
+                        .TimeoutAfter(TimeSpan.FromMinutes(1))
+                ) {
                     await redis.GetDatabase().KeyDeleteAsync(key);
                 }
             }
-
         }
     }
 }

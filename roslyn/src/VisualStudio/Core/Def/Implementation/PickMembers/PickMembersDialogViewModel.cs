@@ -23,9 +23,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
         internal PickMembersDialogViewModel(
             IGlyphService glyphService,
             ImmutableArray<ISymbol> members,
-            ImmutableArray<PickMembersOption> options)
-        {
-            MemberContainers = members.Select(m => new MemberSymbolViewModel(m, glyphService)).ToList();
+            ImmutableArray<PickMembersOption> options
+        ) {
+            MemberContainers = members.Select(m => new MemberSymbolViewModel(m, glyphService))
+                .ToList();
             Options = options.Select(o => new OptionViewModel(o)).ToList();
         }
 
@@ -48,11 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
         private int? _selectedIndex;
         public int? SelectedIndex
         {
-            get
-            {
-                return _selectedIndex;
-            }
-
+            get { return _selectedIndex; }
             set
             {
                 var newSelectedIndex = value == -1 ? null : value;
@@ -79,7 +76,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
                     return string.Empty;
                 }
 
-                return string.Format(ServicesVSResources.Move_0_above_1, MemberContainers[SelectedIndex.Value].SymbolAutomationText, MemberContainers[SelectedIndex.Value - 1].SymbolAutomationText);
+                return string.Format(
+                    ServicesVSResources.Move_0_above_1,
+                    MemberContainers[SelectedIndex.Value].SymbolAutomationText,
+                    MemberContainers[SelectedIndex.Value - 1].SymbolAutomationText
+                );
             }
         }
 
@@ -92,7 +93,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
                     return string.Empty;
                 }
 
-                return string.Format(ServicesVSResources.Move_0_below_1, MemberContainers[SelectedIndex.Value].SymbolAutomationText, MemberContainers[SelectedIndex.Value + 1].SymbolAutomationText);
+                return string.Format(
+                    ServicesVSResources.Move_0_below_1,
+                    MemberContainers[SelectedIndex.Value].SymbolAutomationText,
+                    MemberContainers[SelectedIndex.Value + 1].SymbolAutomationText
+                );
             }
         }
 
@@ -151,9 +156,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
 
         internal class MemberSymbolViewModel : SymbolViewModel<ISymbol>
         {
-            public MemberSymbolViewModel(ISymbol symbol, IGlyphService glyphService) : base(symbol, glyphService)
-            {
-            }
+            public MemberSymbolViewModel(ISymbol symbol, IGlyphService glyphService)
+                : base(symbol, glyphService) { }
         }
 
         internal class OptionViewModel : AbstractNotifyPropertyChanged
@@ -173,7 +177,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
             public bool IsChecked
             {
                 get => _isChecked;
-
                 set
                 {
                     Option.Value = value;

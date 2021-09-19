@@ -15,8 +15,12 @@ namespace System.Xml.Xsl.Runtime
         public char zeroDigit;
         public char patternSeparator;
 
-        internal DecimalFormat(NumberFormatInfo info, char digit, char zeroDigit, char patternSeparator)
-        {
+        internal DecimalFormat(
+            NumberFormatInfo info,
+            char digit,
+            char zeroDigit,
+            char patternSeparator
+        ) {
             this.info = info;
             this.digit = digit;
             this.zeroDigit = zeroDigit;
@@ -52,7 +56,10 @@ namespace System.Xml.Xsl.Runtime
             StringBuilder temp = new StringBuilder();
 
             bool integer = true;
-            bool sawPattern = false, sawZeroDigit = false, sawDigit = false, sawDecimalSeparator = false;
+            bool sawPattern = false,
+                sawZeroDigit = false,
+                sawDigit = false,
+                sawDecimalSeparator = false;
             bool digitOrZeroDigit = false;
             char decimalSeparator = _posFormatInfo.NumberDecimalSeparator[0];
             char groupSeparator = _posFormatInfo.NumberGroupSeparator[0];
@@ -218,8 +225,11 @@ namespace System.Xml.Xsl.Runtime
             }
         }
 
-        private static int RemoveTrailingComma(StringBuilder builder, int commaIndex, int decimalIndex)
-        {
+        private static int RemoveTrailingComma(
+            StringBuilder builder,
+            int commaIndex,
+            int decimalIndex
+        ) {
             if (commaIndex > 0 && commaIndex == (decimalIndex - 1))
             {
                 builder.Remove(decimalIndex - 1, 1);

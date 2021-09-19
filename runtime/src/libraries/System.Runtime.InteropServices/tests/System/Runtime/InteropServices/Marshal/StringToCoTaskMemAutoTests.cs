@@ -19,6 +19,7 @@ namespace System.Runtime.InteropServices.Tests
                 // Make sure the memory roundtrips.
                 Assert.Equal(s, Marshal.PtrToStringAuto(ptr));
             }
+
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);
@@ -43,6 +44,7 @@ namespace System.Runtime.InteropServices.Tests
                 string actual = Marshal.PtrToStringAuto(ptr, len);
                 Assert.Equal(s.Substring(0, len), actual);
             }
+
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);

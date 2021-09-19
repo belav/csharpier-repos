@@ -14,25 +14,27 @@ namespace System.ServiceModel.Syndication
         private Collection<CategoriesDocument> _categories;
         private ExtensibleSyndicationObject _extensions;
 
-        public ResourceCollectionInfo()
-        {
-        }
+        public ResourceCollectionInfo() { }
 
-        public ResourceCollectionInfo(string title, Uri link) : this((title == null) ? null : new TextSyndicationContent(title), link)
-        {
-        }
+        public ResourceCollectionInfo(string title, Uri link)
+            : this((title == null) ? null : new TextSyndicationContent(title), link) { }
 
-        public ResourceCollectionInfo(TextSyndicationContent title, Uri link) : this(title, link, null, null)
-        {
-        }
+        public ResourceCollectionInfo(TextSyndicationContent title, Uri link)
+            : this(title, link, null, null) { }
 
-        public ResourceCollectionInfo(TextSyndicationContent title, Uri link, IEnumerable<CategoriesDocument> categories, bool allowsNewEntries)
-            : this(title, link, categories, (allowsNewEntries) ? null : CreateSingleEmptyAccept())
-        {
-        }
+        public ResourceCollectionInfo(
+            TextSyndicationContent title,
+            Uri link,
+            IEnumerable<CategoriesDocument> categories,
+            bool allowsNewEntries
+        ) : this(title, link, categories, (allowsNewEntries) ? null : CreateSingleEmptyAccept()) { }
 
-        public ResourceCollectionInfo(TextSyndicationContent title, Uri link, IEnumerable<CategoriesDocument> categories, IEnumerable<string> accepts)
-        {
+        public ResourceCollectionInfo(
+            TextSyndicationContent title,
+            Uri link,
+            IEnumerable<CategoriesDocument> categories,
+            IEnumerable<string> accepts
+        ) {
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Link = link ?? throw new ArgumentNullException(nameof(link));
 
@@ -60,16 +62,19 @@ namespace System.ServiceModel.Syndication
             get => _accepts ?? (_accepts = new NullNotAllowedCollection<string>());
         }
 
-        public Dictionary<XmlQualifiedName, string> AttributeExtensions => _extensions.AttributeExtensions;
+        public Dictionary<XmlQualifiedName, string> AttributeExtensions =>
+            _extensions.AttributeExtensions;
 
         public Uri BaseUri { get; set; }
 
         public Collection<CategoriesDocument> Categories
         {
-            get => _categories ?? (_categories = new NullNotAllowedCollection<CategoriesDocument>());
+            get =>
+                _categories ?? (_categories = new NullNotAllowedCollection<CategoriesDocument>());
         }
 
-        public SyndicationElementExtensionCollection ElementExtensions => _extensions.ElementExtensions;
+        public SyndicationElementExtensionCollection ElementExtensions =>
+            _extensions.ElementExtensions;
 
         public Uri Link { get; set; }
 
@@ -85,8 +90,12 @@ namespace System.ServiceModel.Syndication
             return new ReferencedCategoriesDocument();
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
-        {
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        ) {
             return false;
         }
 
@@ -105,8 +114,10 @@ namespace System.ServiceModel.Syndication
             _extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
-        {
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        ) {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }
 

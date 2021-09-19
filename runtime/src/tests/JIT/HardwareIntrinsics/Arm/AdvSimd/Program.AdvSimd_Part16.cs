@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["Xor.Vector64.Single"] = Xor_Vector64_Single,
                 ["Xor.Vector64.UInt16"] = Xor_Vector64_UInt16,
                 ["Xor.Vector64.UInt32"] = Xor_Vector64_UInt32,
@@ -29,14 +30,21 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["ZeroExtendWideningLower.Vector64.Int16"] = ZeroExtendWideningLower_Vector64_Int16,
                 ["ZeroExtendWideningLower.Vector64.Int32"] = ZeroExtendWideningLower_Vector64_Int32,
                 ["ZeroExtendWideningLower.Vector64.SByte"] = ZeroExtendWideningLower_Vector64_SByte,
-                ["ZeroExtendWideningLower.Vector64.UInt16"] = ZeroExtendWideningLower_Vector64_UInt16,
-                ["ZeroExtendWideningLower.Vector64.UInt32"] = ZeroExtendWideningLower_Vector64_UInt32,
+                ["ZeroExtendWideningLower.Vector64.UInt16"] =
+                    ZeroExtendWideningLower_Vector64_UInt16,
+                ["ZeroExtendWideningLower.Vector64.UInt32"] =
+                    ZeroExtendWideningLower_Vector64_UInt32,
                 ["ZeroExtendWideningUpper.Vector128.Byte"] = ZeroExtendWideningUpper_Vector128_Byte,
-                ["ZeroExtendWideningUpper.Vector128.Int16"] = ZeroExtendWideningUpper_Vector128_Int16,
-                ["ZeroExtendWideningUpper.Vector128.Int32"] = ZeroExtendWideningUpper_Vector128_Int32,
-                ["ZeroExtendWideningUpper.Vector128.SByte"] = ZeroExtendWideningUpper_Vector128_SByte,
-                ["ZeroExtendWideningUpper.Vector128.UInt16"] = ZeroExtendWideningUpper_Vector128_UInt16,
-                ["ZeroExtendWideningUpper.Vector128.UInt32"] = ZeroExtendWideningUpper_Vector128_UInt32,
+                ["ZeroExtendWideningUpper.Vector128.Int16"] =
+                    ZeroExtendWideningUpper_Vector128_Int16,
+                ["ZeroExtendWideningUpper.Vector128.Int32"] =
+                    ZeroExtendWideningUpper_Vector128_Int32,
+                ["ZeroExtendWideningUpper.Vector128.SByte"] =
+                    ZeroExtendWideningUpper_Vector128_SByte,
+                ["ZeroExtendWideningUpper.Vector128.UInt16"] =
+                    ZeroExtendWideningUpper_Vector128_UInt16,
+                ["ZeroExtendWideningUpper.Vector128.UInt32"] =
+                    ZeroExtendWideningUpper_Vector128_UInt32,
             };
         }
     }

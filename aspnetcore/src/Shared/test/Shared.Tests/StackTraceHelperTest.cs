@@ -36,7 +36,8 @@ namespace Microsoft.Extensions.Internal
             var stackFrames = StackTraceHelper.GetFrames(exception, out _);
 
             // Assert
-            Assert.Collection(stackFrames,
+            Assert.Collection(
+                stackFrames,
                 frame =>
                 {
                     Assert.Contains("Thrower.cs", frame.FilePath);
@@ -45,7 +46,8 @@ namespace Microsoft.Extensions.Internal
                 frame =>
                 {
                     Assert.Contains("StackTraceHelperTest.cs", frame.FilePath);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -59,7 +61,10 @@ namespace Microsoft.Extensions.Internal
 
             // Assert
             var methods = stackFrames.Select(frame => frame.MethodDisplayInfo.ToString()).ToArray();
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.GenericMethod<T>(T val)", methods[0]);
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.GenericMethod<T>(T val)",
+                methods[0]
+            );
         }
 
         [Fact]
@@ -73,21 +78,29 @@ namespace Microsoft.Extensions.Internal
 
             // Assert
             var methods = stackFrames.Select(frame => frame.MethodDisplayInfo.ToString()).ToArray();
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.MethodWithOutParameter(out int value)", methods[0]);
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.MethodWithOutParameter(out int value)",
+                methods[0]
+            );
         }
 
         [Fact]
         public void StackTraceHelper_PrettyPrintsStackTraceForMethodsWithGenericOutParameters()
         {
             // Arrange
-            var exception = Record.Exception(() => MethodWithGenericOutParameter("Test", out int value));
+            var exception = Record.Exception(
+                () => MethodWithGenericOutParameter("Test", out int value)
+            );
 
             // Act
             var stackFrames = StackTraceHelper.GetFrames(exception, out _);
 
             // Assert
             var methods = stackFrames.Select(frame => frame.MethodDisplayInfo.ToString()).ToArray();
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.MethodWithGenericOutParameter<TVal>(string a, out TVal value)", methods[0]);
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.MethodWithGenericOutParameter<TVal>(string a, out TVal value)",
+                methods[0]
+            );
         }
 
         [Fact]
@@ -102,7 +115,10 @@ namespace Microsoft.Extensions.Internal
 
             // Assert
             var methods = stackFrames.Select(frame => frame.MethodDisplayInfo.ToString()).ToArray();
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.MethodWithRefParameter(ref int value)", methods[0]);
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.MethodWithRefParameter(ref int value)",
+                methods[0]
+            );
         }
 
         [Fact]
@@ -117,7 +133,10 @@ namespace Microsoft.Extensions.Internal
 
             // Assert
             var methods = stackFrames.Select(frame => frame.MethodDisplayInfo.ToString()).ToArray();
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.MethodWithGenericRefParameter<TVal>(ref TVal value)", methods[0]);
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.MethodWithGenericRefParameter<TVal>(ref TVal value)",
+                methods[0]
+            );
         }
 
         [Fact]
@@ -132,7 +151,10 @@ namespace Microsoft.Extensions.Internal
 
             // Assert
             var methods = stackFrames.Select(frame => frame.MethodDisplayInfo.ToString()).ToArray();
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.MethodWithNullableParameter(Nullable<int> value)", methods[0]);
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.MethodWithNullableParameter(Nullable<int> value)",
+                methods[0]
+            );
         }
 
         [Fact]
@@ -146,7 +168,10 @@ namespace Microsoft.Extensions.Internal
 
             // Assert
             var methods = stackFrames.Select(frame => frame.MethodDisplayInfo.ToString()).ToArray();
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest+GenericClass<T>.Throw(T parameter)", methods[0]);
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest+GenericClass<T>.Throw(T parameter)",
+                methods[0]
+            );
         }
 
         [Fact]
@@ -176,7 +201,10 @@ namespace Microsoft.Extensions.Internal
 
             // Act
             var stackFrames = StackTraceHelper.GetFrames(exception, out _);
-            var methodNames = stackFrames.Select(stackFrame => stackFrame.MethodDisplayInfo.ToString()).ToArray();
+            var methodNames = stackFrames.Select(
+                    stackFrame => stackFrame.MethodDisplayInfo.ToString()
+                )
+                .ToArray();
 
             // Assert
             Assert.Equal(expectedCallStack, methodNames);
@@ -186,45 +214,69 @@ namespace Microsoft.Extensions.Internal
         public void StackTraceHelper_DoesNotIncludeInstanceMethodsOnTypesWithStackTraceHiddenAttribute()
         {
             // Arrange
-            var exception = Record.Exception(() => InvokeMethodOnTypeWithStackTraceHiddenAttribute());
+            var exception = Record.Exception(
+                () => InvokeMethodOnTypeWithStackTraceHiddenAttribute()
+            );
 
             // Act
             var stackFrames = StackTraceHelper.GetFrames(exception, out _);
 
             // Assert
             var methods = stackFrames.Select(frame => frame.MethodDisplayInfo.ToString()).ToArray();
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.ThrowCore()", methods[0]);
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.InvokeMethodOnTypeWithStackTraceHiddenAttribute()", methods[1]);
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.ThrowCore()",
+                methods[0]
+            );
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.InvokeMethodOnTypeWithStackTraceHiddenAttribute()",
+                methods[1]
+            );
         }
 
         [Fact]
         public void StackTraceHelper_DoesNotIncludeStaticMethodsOnTypesWithStackTraceHiddenAttribute()
         {
             // Arrange
-            var exception = Record.Exception(() => InvokeStaticMethodOnTypeWithStackTraceHiddenAttribute());
+            var exception = Record.Exception(
+                () => InvokeStaticMethodOnTypeWithStackTraceHiddenAttribute()
+            );
 
             // Act
             var stackFrames = StackTraceHelper.GetFrames(exception, out _);
 
             // Assert
             var methods = stackFrames.Select(frame => frame.MethodDisplayInfo.ToString()).ToArray();
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.ThrowCore()", methods[0]);
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.InvokeStaticMethodOnTypeWithStackTraceHiddenAttribute()", methods[1]);
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.ThrowCore()",
+                methods[0]
+            );
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.InvokeStaticMethodOnTypeWithStackTraceHiddenAttribute()",
+                methods[1]
+            );
         }
 
         [Fact]
         public void StackTraceHelper_DoesNotIncludeMethodsWithStackTraceHiddenAttribute()
         {
             // Arrange
-            var exception = Record.Exception(() => new TypeWithMethodWithStackTraceHiddenAttribute().Throw());
+            var exception = Record.Exception(
+                () => new TypeWithMethodWithStackTraceHiddenAttribute().Throw()
+            );
 
             // Act
             var stackFrames = StackTraceHelper.GetFrames(exception, out _);
 
             // Assert
             var methods = stackFrames.Select(frame => frame.MethodDisplayInfo.ToString()).ToArray();
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest.ThrowCore()", methods[0]);
-            Assert.Equal("Microsoft.Extensions.Internal.StackTraceHelperTest+TypeWithMethodWithStackTraceHiddenAttribute.Throw()", methods[1]);
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest.ThrowCore()",
+                methods[0]
+            );
+            Assert.Equal(
+                "Microsoft.Extensions.Internal.StackTraceHelperTest+TypeWithMethodWithStackTraceHiddenAttribute.Throw()",
+                methods[1]
+            );
         }
 
         [Fact]
@@ -232,8 +284,9 @@ namespace Microsoft.Extensions.Internal
         {
             // Arrange
             var action = (Action)Expression.Lambda(
-                Expression.Throw(
-                    Expression.New(typeof(Exception)))).Compile();
+                    Expression.Throw(Expression.New(typeof(Exception)))
+                )
+                .Compile();
             var exception = Record.Exception(action);
 
             // Act
@@ -289,10 +342,12 @@ namespace Microsoft.Extensions.Internal
         void MethodWithNullableParameter(int? value) => throw new Exception();
 
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
-        void InvokeMethodOnTypeWithStackTraceHiddenAttribute() => new TypeWithStackTraceHiddenAttribute().Throw();
+        void InvokeMethodOnTypeWithStackTraceHiddenAttribute() =>
+            new TypeWithStackTraceHiddenAttribute().Throw();
 
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
-        void InvokeStaticMethodOnTypeWithStackTraceHiddenAttribute() => TypeWithStackTraceHiddenAttribute.ThrowStatic();
+        void InvokeStaticMethodOnTypeWithStackTraceHiddenAttribute() =>
+            TypeWithStackTraceHiddenAttribute.ThrowStatic();
 
         class GenericClass<T>
         {

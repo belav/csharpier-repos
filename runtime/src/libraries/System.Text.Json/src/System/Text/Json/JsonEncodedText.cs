@@ -59,8 +59,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentException">
         /// Thrown when the specified value is too large or if it contains invalid UTF-16 characters.
         /// </exception>
-        public static JsonEncodedText Encode(ReadOnlySpan<char> value, JavaScriptEncoder? encoder = null)
-        {
+        public static JsonEncodedText Encode(
+            ReadOnlySpan<char> value,
+            JavaScriptEncoder? encoder = null
+        ) {
             if (value.Length == 0)
             {
                 return new JsonEncodedText(Array.Empty<byte>());
@@ -69,8 +71,10 @@ namespace System.Text.Json
             return TranscodeAndEncode(value, encoder);
         }
 
-        private static JsonEncodedText TranscodeAndEncode(ReadOnlySpan<char> value, JavaScriptEncoder? encoder)
-        {
+        private static JsonEncodedText TranscodeAndEncode(
+            ReadOnlySpan<char> value,
+            JavaScriptEncoder? encoder
+        ) {
             JsonWriterHelper.ValidateValue(value);
 
             int expectedByteCount = JsonReaderHelper.GetUtf8ByteCount(value);
@@ -100,8 +104,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentException">
         /// Thrown when the specified value is too large or if it contains invalid UTF-8 bytes.
         /// </exception>
-        public static JsonEncodedText Encode(ReadOnlySpan<byte> utf8Value, JavaScriptEncoder? encoder = null)
-        {
+        public static JsonEncodedText Encode(
+            ReadOnlySpan<byte> utf8Value,
+            JavaScriptEncoder? encoder = null
+        ) {
             if (utf8Value.Length == 0)
             {
                 return new JsonEncodedText(Array.Empty<byte>());
@@ -111,8 +117,10 @@ namespace System.Text.Json
             return EncodeHelper(utf8Value, encoder);
         }
 
-        private static JsonEncodedText EncodeHelper(ReadOnlySpan<byte> utf8Value, JavaScriptEncoder? encoder)
-        {
+        private static JsonEncodedText EncodeHelper(
+            ReadOnlySpan<byte> utf8Value,
+            JavaScriptEncoder? encoder
+        ) {
             int idx = JsonWriterHelper.NeedsEscaping(utf8Value, encoder);
 
             if (idx != -1)
@@ -167,8 +175,7 @@ namespace System.Text.Json
         /// <returns>
         /// Returns the underlying UTF-16 encoded string.
         /// </returns>
-        public override string ToString()
-            => _value ?? string.Empty;
+        public override string ToString() => _value ?? string.Empty;
 
         /// <summary>
         /// Returns the hash code for this <see cref="JsonEncodedText"/>.
@@ -176,7 +183,6 @@ namespace System.Text.Json
         /// <remarks>
         /// Returns 0 on a default instance of <see cref="JsonEncodedText"/>.
         /// </remarks>
-        public override int GetHashCode()
-            => _value == null ? 0 : _value.GetHashCode();
+        public override int GetHashCode() => _value == null ? 0 : _value.GetHashCode();
     }
 }

@@ -50,8 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
             IDistributedCacheTagHelperStorage storage,
             IDistributedCacheTagHelperFormatter formatter,
             HtmlEncoder HtmlEncoder,
-            ILoggerFactory loggerFactory)
-        {
+            ILoggerFactory loggerFactory
+        ) {
             if (storage == null)
             {
                 throw new ArgumentNullException(nameof(storage));
@@ -80,8 +80,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
         }
 
         /// <inheritdoc />
-        public async Task<IHtmlContent> ProcessContentAsync(TagHelperOutput output, CacheTagKey key, DistributedCacheEntryOptions options)
-        {
+        public async Task<IHtmlContent> ProcessContentAsync(
+            TagHelperOutput output,
+            CacheTagKey key,
+            DistributedCacheEntryOptions options
+        ) {
             IHtmlContent content = null;
 
             while (content == null)
@@ -92,7 +95,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
                     // There is a small race condition here between TryGetValue and TryAdd that might cause the
                     // content to be computed more than once. We don't care about this race as the probability of
                     // happening is very small and the impact is not critical.
-                    var tcs = new TaskCompletionSource<IHtmlContent>(creationOptions: TaskCreationOptions.RunContinuationsAsynchronously);
+                    var tcs = new TaskCompletionSource<IHtmlContent>(
+                        creationOptions: TaskCreationOptions.RunContinuationsAsynchronously
+                    );
 
                     _workers.TryAdd(key, tcs.Task);
 
@@ -209,7 +214,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
                 // Ensure we are reading the expected key before continuing
                 if (serializedKeyBuffer.SequenceEqual(expectedKey))
                 {
-                    decoded = new byte[value.Length - keyLengthBuffer.Length - serializedKeyBuffer.Length];
+                    decoded = new byte[
+                        value.Length - keyLengthBuffer.Length - serializedKeyBuffer.Length
+                    ];
                     buffer.Read(decoded, 0, decoded.Length);
                 }
             }

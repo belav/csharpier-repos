@@ -108,8 +108,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             }
         }
 
-        public ImmutableArray<TItem> AggregateItems<TKey>(IEnumerable<IGrouping<TKey, TItem>> groupedItems)
-        {
+        public ImmutableArray<TItem> AggregateItems<TKey>(
+            IEnumerable<IGrouping<TKey, TItem>> groupedItems
+        ) {
             using var _0 = ArrayBuilder<TItem>.GetInstance(out var aggregateItems);
             using var _1 = ArrayBuilder<string>.GetInstance(out var projectNames);
             using var _2 = ArrayBuilder<Guid>.GetInstance(out var projectGuids);
@@ -117,8 +118,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             string[] stringArrayCache = null;
             Guid[] guidArrayCache = null;
 
-            static T[] GetOrCreateArray<T>(ref T[] cache, ArrayBuilder<T> value)
-                => (cache != null && Enumerable.SequenceEqual(cache, value)) ? cache : (cache = value.ToArray());
+            static T[] GetOrCreateArray<T>(ref T[] cache, ArrayBuilder<T> value) =>
+                (cache != null && Enumerable.SequenceEqual(cache, value))
+                    ? cache
+                    : (cache = value.ToArray());
 
             foreach (var (_, items) in groupedItems)
             {
@@ -156,7 +159,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     projectNames.SortAndRemoveDuplicates(StringComparer.Ordinal);
                     projectGuids.SortAndRemoveDuplicates(Comparer<Guid>.Default);
 
-                    aggregateItems.Add((TItem)firstItem.WithAggregatedData(GetOrCreateArray(ref stringArrayCache, projectNames), GetOrCreateArray(ref guidArrayCache, projectGuids)));
+                    aggregateItems.Add(
+                        (TItem)firstItem.WithAggregatedData(
+                            GetOrCreateArray(ref stringArrayCache, projectNames),
+                            GetOrCreateArray(ref guidArrayCache, projectGuids)
+                        )
+                    );
                 }
 
                 projectNames.Clear();
@@ -170,7 +178,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         public abstract IEnumerable<TItem> Order(IEnumerable<TItem> groupedItems);
 
-        public abstract AbstractTableEntriesSnapshot<TItem> CreateSnapshot(AbstractTableEntriesSource<TItem> source, int version, ImmutableArray<TItem> items, ImmutableArray<ITrackingPoint> trackingPoints);
+        public abstract AbstractTableEntriesSnapshot<TItem> CreateSnapshot(
+            AbstractTableEntriesSource<TItem> source,
+            int version,
+            ImmutableArray<TItem> items,
+            ImmutableArray<ITrackingPoint> trackingPoints
+        );
 
         /// <summary>
         /// Get unique ID per given data such as DiagnosticUpdatedArgs or TodoUpdatedArgs.
@@ -255,24 +268,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             NotifySubscriptionOnDataRemoved_NoLock(snapshot, factory);
         }
 
-        private static void NotifySubscriptionOnDataAddedOrChanged_NoLock(ImmutableArray<SubscriptionWithoutLock> snapshot, TableEntriesFactory<TItem, TData> factory, bool newFactory)
-        {
+        private static void NotifySubscriptionOnDataAddedOrChanged_NoLock(
+            ImmutableArray<SubscriptionWithoutLock> snapshot,
+            TableEntriesFactory<TItem, TData> factory,
+            bool newFactory
+        ) {
             for (var i = 0; i < snapshot.Length; i++)
             {
                 snapshot[i].AddOrUpdate(factory, newFactory);
             }
         }
 
-        private static void NotifySubscriptionOnDataRemoved_NoLock(ImmutableArray<SubscriptionWithoutLock> snapshot, TableEntriesFactory<TItem, TData> factory)
-        {
+        private static void NotifySubscriptionOnDataRemoved_NoLock(
+            ImmutableArray<SubscriptionWithoutLock> snapshot,
+            TableEntriesFactory<TItem, TData> factory
+        ) {
             for (var i = 0; i < snapshot.Length; i++)
             {
                 snapshot[i].Remove(factory);
             }
         }
 
-        private void GetOrCreateFactory_NoLock(TData data, out TableEntriesFactory<TItem, TData> factory, out bool newFactory)
-        {
+        private void GetOrCreateFactory_NoLock(
+            TData data,
+            out TableEntriesFactory<TItem, TData> factory,
+            out bool newFactory
+        ) {
             newFactory = false;
 
             var key = GetOrUpdateAggregationKey(data);
@@ -303,8 +324,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             }
         }
 
-        protected void AddAggregateKey(TData data, object aggregateKey)
-            => _aggregateKeyMap.Add(GetItemKey(data), aggregateKey);
+        protected void AddAggregateKey(TData data, object aggregateKey) =>
+            _aggregateKeyMap.Add(GetItemKey(data), aggregateKey);
 
         protected object TryGetAggregateKey(TData data)
         {
@@ -317,8 +338,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             return null;
         }
 
-        private void RemoveAggregateKey_NoLock(TData data)
-            => _aggregateKeyMap.Remove(GetItemKey(data));
+        private void RemoveAggregateKey_NoLock(TData data) =>
+            _aggregateKeyMap.Remove(GetItemKey(data));
 
         IDisposable ITableDataSource.Subscribe(ITableDataSink sink)
         {
@@ -338,8 +359,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             private readonly AbstractTableDataSource<TItem, TData> _source;
             private readonly ITableDataSink _sink;
 
-            public SubscriptionWithoutLock(AbstractTableDataSource<TItem, TData> source, ITableDataSink sink)
-            {
+            public SubscriptionWithoutLock(
+                AbstractTableDataSource<TItem, TData> source,
+                ITableDataSink sink
+            ) {
                 _source = source;
                 _sink = sink;
 
@@ -349,15 +372,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             public bool IsStable
             {
-                get
-                {
-                    return _sink.IsStable;
-                }
-
-                set
-                {
-                    _sink.IsStable = value;
-                }
+                get { return _sink.IsStable; }
+                set { _sink.IsStable = value; }
             }
 
             public void AddOrUpdate(ITableEntriesSnapshotFactory provider, bool newFactory)
@@ -371,11 +387,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 _sink.FactorySnapshotChanged(provider);
             }
 
-            public void Remove(ITableEntriesSnapshotFactory factory)
-                => _sink.RemoveFactory(factory);
+            public void Remove(ITableEntriesSnapshotFactory factory) =>
+                _sink.RemoveFactory(factory);
 
-            public void RemoveAll()
-                => _sink.RemoveAllFactories();
+            public void RemoveAll() => _sink.RemoveAllFactories();
 
             public void Dispose()
             {
@@ -393,21 +408,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IsStable = _source.IsStable;
             }
 
-            private void Register()
-                => UpdateSubscriptions(s => s.Add(this));
+            private void Register() => UpdateSubscriptions(s => s.Add(this));
 
-            private void UnRegister()
-                => UpdateSubscriptions(s => s.Remove(this));
+            private void UnRegister() => UpdateSubscriptions(s => s.Remove(this));
 
-            private void UpdateSubscriptions(Func<ImmutableArray<SubscriptionWithoutLock>, ImmutableArray<SubscriptionWithoutLock>> update)
-            {
+            private void UpdateSubscriptions(
+                Func<
+                    ImmutableArray<SubscriptionWithoutLock>,
+                    ImmutableArray<SubscriptionWithoutLock>
+                > update
+            ) {
                 while (true)
                 {
                     var current = _source._subscriptions;
                     var @new = update(current);
 
                     // try replace with new list
-                    var registered = ImmutableInterlocked.InterlockedCompareExchange(ref _source._subscriptions, @new, current);
+                    var registered = ImmutableInterlocked.InterlockedCompareExchange(
+                        ref _source._subscriptions,
+                        @new,
+                        current
+                    );
                     if (registered == current)
                     {
                         // succeeded

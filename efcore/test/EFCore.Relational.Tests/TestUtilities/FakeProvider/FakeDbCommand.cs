@@ -14,13 +14,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
     {
         private readonly FakeCommandExecutor _commandExecutor;
 
-        public FakeDbCommand()
-        {
-        }
+        public FakeDbCommand() { }
 
-        public FakeDbCommand(
-            FakeDbConnection connection,
-            FakeCommandExecutor commandExecutor)
+        public FakeDbCommand(FakeDbConnection connection, FakeCommandExecutor commandExecutor)
         {
             DbConnection = connection;
             _commandExecutor = commandExecutor;
@@ -43,11 +39,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
 
         public override CommandType CommandType { get; set; }
 
-        protected override DbParameter CreateDbParameter()
-            => new FakeDbParameter();
+        protected override DbParameter CreateDbParameter() => new FakeDbParameter();
 
-        protected override DbParameterCollection DbParameterCollection { get; }
-            = new FakeDbParameterCollection();
+        protected override DbParameterCollection DbParameterCollection { get; } =
+            new FakeDbParameterCollection();
 
         public override void Prepare()
         {
@@ -89,8 +84,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             return _commandExecutor.ExecuteScalarAsync(this, cancellationToken);
         }
 
-        protected override Task<DbDataReader> ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
-        {
+        protected override Task<DbDataReader> ExecuteDbDataReaderAsync(
+            CommandBehavior behavior,
+            CancellationToken cancellationToken
+        ) {
             AssertTransaction();
 
             return _commandExecutor.ExecuteReaderAsync(this, behavior, cancellationToken);
@@ -126,14 +123,21 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             {
                 Check.DebugAssert(
                     ((FakeDbConnection)DbConnection).ActiveTransaction == null,
-                    "((FakeDbConnection)DbConnection).ActiveTransaction is null");
+                    "((FakeDbConnection)DbConnection).ActiveTransaction is null"
+                );
             }
             else
             {
                 var transaction = (FakeDbTransaction)Transaction;
 
-                Check.DebugAssert(transaction.Connection == Connection, "transaction.Connection != Connection");
-                Check.DebugAssert(transaction.DisposeCount == 0, $"transaction.DisposeCount is {transaction.DisposeCount}");
+                Check.DebugAssert(
+                    transaction.Connection == Connection,
+                    "transaction.Connection != Connection"
+                );
+                Check.DebugAssert(
+                    transaction.DisposeCount == 0,
+                    $"transaction.DisposeCount is {transaction.DisposeCount}"
+                );
             }
         }
     }

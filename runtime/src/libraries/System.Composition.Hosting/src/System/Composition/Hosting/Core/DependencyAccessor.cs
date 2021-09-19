@@ -16,7 +16,9 @@ namespace System.Composition.Hosting.Core
         /// </summary>
         /// <param name="exportKey">The export key the definitions must supply.</param>
         /// <returns>The available promises for that export key.</returns>
-        protected abstract IEnumerable<ExportDescriptorPromise> GetPromises(CompositionContract exportKey);
+        protected abstract IEnumerable<ExportDescriptorPromise> GetPromises(
+            CompositionContract exportKey
+        );
 
         /// <summary>
         /// Resolve dependencies on all implementations of a contract.
@@ -25,8 +27,11 @@ namespace System.Composition.Hosting.Core
         /// <param name="contract">The contract required by the site.</param>
         /// <param name="isPrerequisite">True if the dependency must be satisfied before corresponding exports can be retrieved; otherwise, false.</param>
         /// <returns>Dependencies for all implementations of the contact.</returns>
-        public IEnumerable<CompositionDependency> ResolveDependencies(object site, CompositionContract contract, bool isPrerequisite)
-        {
+        public IEnumerable<CompositionDependency> ResolveDependencies(
+            object site,
+            CompositionContract contract,
+            bool isPrerequisite
+        ) {
             var all = GetPromises(contract).ToArray();
             var result = new CompositionDependency[all.Length];
             for (var i = 0; i < all.Length; ++i)
@@ -41,8 +46,11 @@ namespace System.Composition.Hosting.Core
         /// <param name="contract">The contract required by the site.</param>
         /// <param name="isPrerequisite">True if the dependency must be satisfied before corresponding exports can be retrieved; otherwise, false.</param>
         /// <returns>The dependency.</returns>
-        public CompositionDependency ResolveRequiredDependency(object site, CompositionContract contract, bool isPrerequisite)
-        {
+        public CompositionDependency ResolveRequiredDependency(
+            object site,
+            CompositionContract contract,
+            bool isPrerequisite
+        ) {
             CompositionDependency result;
             if (!TryResolveOptionalDependency(site, contract, isPrerequisite, out result))
                 return CompositionDependency.Missing(contract, site);
@@ -58,8 +66,12 @@ namespace System.Composition.Hosting.Core
         /// <param name="isPrerequisite">True if the dependency must be satisfied before corresponding exports can be retrieved; otherwise, false.</param>
         /// <param name="dependency">The dependency, or null.</param>
         /// <returns>True if the dependency could be resolved; otherwise, false.</returns>
-        public bool TryResolveOptionalDependency(object site, CompositionContract contract, bool isPrerequisite, out CompositionDependency dependency)
-        {
+        public bool TryResolveOptionalDependency(
+            object site,
+            CompositionContract contract,
+            bool isPrerequisite,
+            out CompositionDependency dependency
+        ) {
             var all = GetPromises(contract).ToArray();
             if (all.Length == 0)
             {

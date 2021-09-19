@@ -21,29 +21,37 @@ namespace Internal.Cryptography.Pal.AnyOS
                 _asn = asn;
             }
 
-            public override byte[] EncryptedKey =>
-                _asn.EncryptedKey.ToArray();
+            public override byte[] EncryptedKey => _asn.EncryptedKey.ToArray();
 
             public override AlgorithmIdentifier KeyEncryptionAlgorithm =>
                 _asn.KeyEncryptionAlgorithm.ToPresentationObject();
 
             public override SubjectIdentifier RecipientIdentifier =>
-                new SubjectIdentifier(_asn.Rid.IssuerAndSerialNumber, _asn.Rid.SubjectKeyIdentifier);
+                new SubjectIdentifier(
+                    _asn.Rid.IssuerAndSerialNumber,
+                    _asn.Rid.SubjectKeyIdentifier
+                );
 
             public override int Version => _asn.Version;
 
-            internal byte[]? DecryptCek(X509Certificate2? cert, RSA? privateKey, out Exception? exception)
-            {
+            internal byte[]? DecryptCek(
+                X509Certificate2? cert,
+                RSA? privateKey,
+                out Exception? exception
+            ) {
                 ReadOnlyMemory<byte>? parameters = _asn.KeyEncryptionAlgorithm.Parameters;
                 string? keyEncryptionAlgorithm = _asn.KeyEncryptionAlgorithm.Algorithm;
 
                 switch (keyEncryptionAlgorithm)
                 {
                     case Oids.Rsa:
-                        if (parameters != null &&
-                            !parameters.Value.Span.SequenceEqual(s_rsaPkcsParameters))
-                        {
-                            exception = new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
+                        if (
+                            parameters != null
+                            && !parameters.Value.Span.SequenceEqual(s_rsaPkcsParameters)
+                        ) {
+                            exception = new CryptographicException(
+                                SR.Cryptography_Der_Invalid_Encoding
+                            );
                             return null;
                         }
                         break;
@@ -52,12 +60,20 @@ namespace Internal.Cryptography.Pal.AnyOS
                     default:
                         exception = new CryptographicException(
                             SR.Cryptography_Cms_UnknownAlgorithm,
-                            _asn.KeyEncryptionAlgorithm.Algorithm);
+                            _asn.KeyEncryptionAlgorithm.Algorithm
+                        );
 
                         return null;
                 }
 
-                return DecryptCekCore(cert, privateKey, _asn.EncryptedKey.Span, keyEncryptionAlgorithm, parameters, out exception);
+                return DecryptCekCore(
+                    cert,
+                    privateKey,
+                    _asn.EncryptedKey.Span,
+                    keyEncryptionAlgorithm,
+                    parameters,
+                    out exception
+                );
             }
 
             internal static byte[]? DecryptCekCore(
@@ -66,8 +82,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 ReadOnlySpan<byte> encryptedKey,
                 string? keyEncryptionAlgorithm,
                 ReadOnlyMemory<byte>? algorithmParameters,
-                out Exception? exception)
-            {
+                out Exception? exception
+            ) {
                 RSAEncryptionPadding? encryptionPadding;
 
                 switch (keyEncryptionAlgorithm)
@@ -76,15 +92,21 @@ namespace Internal.Cryptography.Pal.AnyOS
                         encryptionPadding = RSAEncryptionPadding.Pkcs1;
                         break;
                     case Oids.RsaOaep:
-                        if (!PkcsHelpers.TryGetRsaOaepEncryptionPadding(algorithmParameters, out encryptionPadding, out exception))
-                        {
+                        if (
+                            !PkcsHelpers.TryGetRsaOaepEncryptionPadding(
+                                algorithmParameters,
+                                out encryptionPadding,
+                                out exception
+                            )
+                        ) {
                             return null;
                         }
                         break;
                     default:
                         exception = new CryptographicException(
                             SR.Cryptography_Cms_UnknownAlgorithm,
-                            keyEncryptionAlgorithm);
+                            keyEncryptionAlgorithm
+                        );
 
                         return null;
                 }
@@ -107,8 +129,8 @@ namespace Internal.Cryptography.Pal.AnyOS
         private KeyTransRecipientInfoAsn MakeKtri(
             byte[] cek,
             CmsRecipient recipient,
-            out bool v0Recipient)
-        {
+            out bool v0Recipient
+        ) {
             KeyTransRecipientInfoAsn ktri = default;
 
             if (recipient.RecipientIdentifierType == SubjectIdentifierType.SubjectKeyIdentifier)
@@ -116,8 +138,9 @@ namespace Internal.Cryptography.Pal.AnyOS
                 ktri.Version = 2;
                 ktri.Rid.SubjectKeyIdentifier = GetSubjectKeyIdentifier(recipient.Certificate);
             }
-            else if (recipient.RecipientIdentifierType == SubjectIdentifierType.IssuerAndSerialNumber)
-            {
+            else if (
+                recipient.RecipientIdentifierType == SubjectIdentifierType.IssuerAndSerialNumber
+            ) {
                 byte[] serial = recipient.Certificate.GetSerialNumber();
                 Array.Reverse(serial);
 
@@ -133,10 +156,12 @@ namespace Internal.Cryptography.Pal.AnyOS
             {
                 throw new CryptographicException(
                     SR.Cryptography_Cms_Invalid_Subject_Identifier_Type,
-                    recipient.RecipientIdentifierType.ToString());
+                    recipient.RecipientIdentifierType.ToString()
+                );
             }
 
-            RSAEncryptionPadding padding = recipient.RSAEncryptionPadding ?? RSAEncryptionPadding.Pkcs1;
+            RSAEncryptionPadding padding =
+                recipient.RSAEncryptionPadding ?? RSAEncryptionPadding.Pkcs1;
 
             if (padding == RSAEncryptionPadding.Pkcs1)
             {
@@ -181,11 +206,13 @@ namespace Internal.Cryptography.Pal.AnyOS
             RSA? privateKey,
             RSAEncryptionPadding encryptionPadding,
             ReadOnlySpan<byte> encryptedKey,
-            out Exception? exception)
-        {
+            out Exception? exception
+        ) {
             if (privateKey == null)
             {
-                exception = new CryptographicException(SR.Cryptography_Cms_Signing_RequiresPrivateKey);
+                exception = new CryptographicException(
+                    SR.Cryptography_Cms_Signing_RequiresPrivateKey
+                );
                 return null;
             }
 

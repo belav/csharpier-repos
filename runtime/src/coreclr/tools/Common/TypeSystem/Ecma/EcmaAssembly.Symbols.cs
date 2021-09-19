@@ -9,9 +9,20 @@ namespace Internal.TypeSystem.Ecma
     // Pluggable file that adds PDB handling functionality to EcmaAssembly
     partial class EcmaAssembly
     {
-        internal EcmaAssembly(TypeSystemContext context, PEReader peReader, MetadataReader metadataReader, PdbSymbolReader pdbReader, IModuleResolver customModuleResolver)
-            : base(context, peReader, metadataReader, containingAssembly: null, pdbReader, customModuleResolver)
-        {
+        internal EcmaAssembly(
+            TypeSystemContext context,
+            PEReader peReader,
+            MetadataReader metadataReader,
+            PdbSymbolReader pdbReader,
+            IModuleResolver customModuleResolver
+        ) : base(
+            context,
+            peReader,
+            metadataReader,
+            containingAssembly: null,
+            pdbReader,
+            customModuleResolver
+        ) {
             _assemblyDefinition = metadataReader.GetAssemblyDefinition();
         }
     }

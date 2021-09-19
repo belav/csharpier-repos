@@ -12,10 +12,15 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task
         public string AssemblyResourceName { get; set; }
 
         public bool Equals(EmbeddedItem other) =>
-            string.Equals(ManifestFilePath, other?.ManifestFilePath, StringComparison.Ordinal) &&
-            string.Equals(AssemblyResourceName, other?.AssemblyResourceName, StringComparison.Ordinal);
+            string.Equals(ManifestFilePath, other?.ManifestFilePath, StringComparison.Ordinal)
+            && string.Equals(
+                AssemblyResourceName,
+                other?.AssemblyResourceName,
+                StringComparison.Ordinal
+            );
 
         public override bool Equals(object obj) => Equals(obj as EmbeddedItem);
-        public override int GetHashCode() => ManifestFilePath.GetHashCode() ^ AssemblyResourceName.GetHashCode();
+        public override int GetHashCode() =>
+            ManifestFilePath.GetHashCode() ^ AssemblyResourceName.GetHashCode();
     }
 }

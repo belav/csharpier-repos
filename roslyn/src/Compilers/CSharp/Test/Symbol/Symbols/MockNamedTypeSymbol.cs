@@ -25,55 +25,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             _container = container;
         }
 
-        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
-            => throw new NotImplementedException();
+        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
+            throw new NotImplementedException();
 
         public override int Arity
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         internal override bool MangleName
         {
-            get
-            {
-                return Arity > 0;
-            }
+            get { return Arity > 0; }
         }
 
         public override ImmutableArray<TypeParameterSymbol> TypeParameters
         {
-            get
-            {
-                return ImmutableArray.Create<TypeParameterSymbol>();
-            }
+            get { return ImmutableArray.Create<TypeParameterSymbol>(); }
         }
 
         internal override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
         {
-            get
-            {
-                return ImmutableArray.Create<TypeWithAnnotations>();
-            }
+            get { return ImmutableArray.Create<TypeWithAnnotations>(); }
         }
 
         public override NamedTypeSymbol ConstructedFrom
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         internal override bool HasSpecialName
@@ -83,10 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public override IEnumerable<string> MemberNames
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override ImmutableArray<Symbol> GetMembers()
@@ -101,9 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public override ImmutableArray<Symbol> GetMembers(string name)
         {
-            return (from sym in _children
-                    where sym.Name == name
-                    select sym).ToArray().AsImmutableOrNull();
+            return (from sym in _children where sym.Name == name select sym).ToArray()
+                .AsImmutableOrNull();
         }
 
         internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers()
@@ -118,23 +96,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers()
         {
-            return (from sym in _children
-                    where sym is NamedTypeSymbol
-                    select (NamedTypeSymbol)sym).ToArray().AsImmutableOrNull();
+            return (
+                from sym in _children
+                where sym is NamedTypeSymbol
+                select (NamedTypeSymbol)sym
+            ).ToArray().AsImmutableOrNull();
         }
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name, int arity)
         {
-            return (from sym in _children
-                    where sym is NamedTypeSymbol && sym.Name == name && ((NamedTypeSymbol)sym).Arity == arity
-                    select (NamedTypeSymbol)sym).ToArray().AsImmutableOrNull();
+            return (
+                from sym in _children
+                where
+                    sym is NamedTypeSymbol
+                    && sym.Name == name
+                    && ((NamedTypeSymbol)sym).Arity == arity
+                select (NamedTypeSymbol)sym
+            ).ToArray().AsImmutableOrNull();
         }
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name)
         {
-            return (from sym in _children
-                    where sym is NamedTypeSymbol && sym.Name == name
-                    select (NamedTypeSymbol)sym).ToArray().AsImmutableOrNull();
+            return (
+                from sym in _children
+                where sym is NamedTypeSymbol && sym.Name == name
+                select (NamedTypeSymbol)sym
+            ).ToArray().AsImmutableOrNull();
         }
 
         public override TypeKind TypeKind
@@ -159,14 +146,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray.Create<SyntaxReference>();
-            }
+            get { return ImmutableArray.Create<SyntaxReference>(); }
         }
 
-        public MockNamedTypeSymbol(string name, IEnumerable<Symbol> children, TypeKind kind = TypeKind.Class)
-        {
+        public MockNamedTypeSymbol(
+            string name,
+            IEnumerable<Symbol> children,
+            TypeKind kind = TypeKind.Class
+        ) {
             _name = name;
             _children = children;
             _typeKind = kind;
@@ -174,72 +161,50 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.Public;
-            }
+            get { return Accessibility.Public; }
         }
 
         public override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool IsRefLikeType
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool AreLocalsZeroed
         {
-            get
-            {
-                throw ExceptionUtilities.Unreachable;
-            }
+            get { throw ExceptionUtilities.Unreachable; }
         }
 
         public override bool MightContainExtensionMethods
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
-        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics => throw new NotImplementedException();
+        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
+            throw new NotImplementedException();
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
-        {
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol> basesBeingResolved
+        ) {
             throw new NotImplementedException();
         }
 
@@ -248,19 +213,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             throw new NotImplementedException();
         }
 
-        internal override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
-        {
+        internal override NamedTypeSymbol GetDeclaredBaseType(
+            ConsList<TypeSymbol> basesBeingResolved
+        ) {
             throw new NotImplementedException();
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
-        {
+        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+            ConsList<TypeSymbol> basesBeingResolved
+        ) {
             throw new NotImplementedException();
         }
 
         internal override bool HasCodeAnalysisEmbeddedAttribute => false;
 
-        internal sealed override ManagedKind GetManagedKind(ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo) => ManagedKind.Managed;
+        internal sealed override ManagedKind GetManagedKind(
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        ) => ManagedKind.Managed;
 
         internal override bool ShouldAddWinRTMembers
         {
@@ -269,10 +238,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal override bool IsWindowsRuntimeImport
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal override bool IsComImport
@@ -320,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return AttributeUsageInfo.Null;
         }
 
-        internal sealed override NamedTypeSymbol AsNativeInteger() => throw ExceptionUtilities.Unreachable;
+        internal sealed override NamedTypeSymbol AsNativeInteger() =>
+            throw ExceptionUtilities.Unreachable;
 
         internal sealed override NamedTypeSymbol NativeIntegerUnderlyingType => null;
 

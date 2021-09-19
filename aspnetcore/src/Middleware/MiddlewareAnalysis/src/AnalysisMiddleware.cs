@@ -28,8 +28,11 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
         /// The name of the next middleware in the pipeline. This name is typically retrieved from <see cref="Builder.IApplicationBuilder.Properties"/>
         /// using the "analysis.NextMiddlewareName" key.
         /// </param>
-        public AnalysisMiddleware(RequestDelegate next, DiagnosticSource diagnosticSource, string middlewareName)
-        {
+        public AnalysisMiddleware(
+            RequestDelegate next,
+            DiagnosticSource diagnosticSource,
+            string middlewareName
+        ) {
             _next = next;
             _diagnostics = diagnosticSource;
             if (string.IsNullOrEmpty(middlewareName))
@@ -46,8 +49,9 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
         public async Task Invoke(HttpContext httpContext)
         {
             var startTimestamp = Stopwatch.GetTimestamp();
-            if (_diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareStarting"))
-            {
+            if (
+                _diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareStarting")
+            ) {
                 _diagnostics.Write(
                     "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareStarting",
                     new
@@ -56,18 +60,22 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
                         httpContext = httpContext,
                         instanceId = _instanceId,
                         timestamp = startTimestamp,
-                    });
+                    }
+                );
             }
 
             try
             {
                 await _next(httpContext);
 
-                if (_diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished"))
-                {
+                if (
+                    _diagnostics.IsEnabled(
+                        "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished"
+                    )
+                ) {
                     var currentTimestamp = Stopwatch.GetTimestamp();
                     _diagnostics.Write(
-                        "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished", 
+                        "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareFinished",
                         new
                         {
                             name = _middlewareName,
@@ -75,16 +83,20 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
                             instanceId = _instanceId,
                             timestamp = currentTimestamp,
                             duration = currentTimestamp - startTimestamp,
-                        });
+                        }
+                    );
                 }
             }
             catch (Exception ex)
             {
-                if (_diagnostics.IsEnabled("Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException"))
-                {
+                if (
+                    _diagnostics.IsEnabled(
+                        "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException"
+                    )
+                ) {
                     var currentTimestamp = Stopwatch.GetTimestamp();
                     _diagnostics.Write(
-                        "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException", 
+                        "Microsoft.AspNetCore.MiddlewareAnalysis.MiddlewareException",
                         new
                         {
                             name = _middlewareName,
@@ -93,7 +105,8 @@ namespace Microsoft.AspNetCore.MiddlewareAnalysis
                             timestamp = currentTimestamp,
                             duration = currentTimestamp - startTimestamp,
                             exception = ex,
-                        });
+                        }
+                    );
                 }
                 throw;
             }

@@ -18,7 +18,11 @@ namespace System.ServiceProcess.Tests
         private const int readTimeout = 60000;
 
         private static readonly Lazy<bool> s_runningWithElevatedPrivileges = new Lazy<bool>(
-            () => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator));
+            () =>
+                new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(
+                    WindowsBuiltInRole.Administrator
+                )
+        );
 
         private NamedPipeClientStream _client;
 
@@ -47,7 +51,6 @@ namespace System.ServiceProcess.Tests
                     _client = null;
                 }
             }
-
         }
 
         public readonly string TestServiceAssembly = typeof(TestService).Assembly.Location;
@@ -76,7 +79,7 @@ namespace System.ServiceProcess.Tests
             ControlTimeout = TimeSpan.FromSeconds(120);
             TestServiceName = serviceName;
             TestServiceDisplayName = "Test Service " + TestServiceName;
-            
+
             // Create the service
             CreateTestServices();
         }
@@ -103,7 +106,10 @@ namespace System.ServiceProcess.Tests
 
             if (_dependentServices != null)
             {
-                testServiceInstaller.ServicesDependedOn = new string[] { _dependentServices.TestServiceName };
+                testServiceInstaller.ServicesDependedOn = new string[]
+                {
+                    _dependentServices.TestServiceName
+                };
             }
 
             string processName = Process.GetCurrentProcess().MainModule.FileName;
@@ -141,6 +147,7 @@ namespace System.ServiceProcess.Tests
                 testServiceInstaller.ServiceName = TestServiceName;
                 testServiceInstaller.RemoveService();
             }
+
             finally
             {
                 // Lets be sure to try and clean up dependenct services even if something goes

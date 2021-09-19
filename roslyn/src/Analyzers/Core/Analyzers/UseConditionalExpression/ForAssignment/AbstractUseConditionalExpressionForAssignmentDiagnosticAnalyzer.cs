@@ -10,22 +10,30 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.UseConditionalExpression
 {
-    internal abstract class AbstractUseConditionalExpressionForAssignmentDiagnosticAnalyzer<
-        TIfStatementSyntax>
+    internal abstract class AbstractUseConditionalExpressionForAssignmentDiagnosticAnalyzer<TIfStatementSyntax>
         : AbstractUseConditionalExpressionDiagnosticAnalyzer<TIfStatementSyntax>
         where TIfStatementSyntax : SyntaxNode
     {
         protected AbstractUseConditionalExpressionForAssignmentDiagnosticAnalyzer(
-            LocalizableResourceString message)
-            : base(IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId,
-                   EnforceOnBuildValues.UseConditionalExpressionForAssignment,
-                   message,
-                   CodeStyleOptions2.PreferConditionalExpressionOverAssignment)
-        {
-        }
+            LocalizableResourceString message
+        ) : base(
+            IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId,
+            EnforceOnBuildValues.UseConditionalExpressionForAssignment,
+            message,
+            CodeStyleOptions2.PreferConditionalExpressionOverAssignment
+        ) { }
 
-        protected override bool TryMatchPattern(IConditionalOperation ifOperation, ISymbol containingSymbol)
-            => UseConditionalExpressionForAssignmentHelpers.TryMatchPattern(
-                GetSyntaxFacts(), ifOperation, out _, out _, out _, out _);
+        protected override bool TryMatchPattern(
+            IConditionalOperation ifOperation,
+            ISymbol containingSymbol
+        ) =>
+            UseConditionalExpressionForAssignmentHelpers.TryMatchPattern(
+                GetSyntaxFacts(),
+                ifOperation,
+                out _,
+                out _,
+                out _,
+                out _
+            );
     }
 }

@@ -36,7 +36,9 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                 var ch1 = *src;
                 Debug.Assert(ch1 == '/', "Path segment must always start with a '/'");
 
-                byte ch2, ch3, ch4;
+                byte ch2,
+                    ch3,
+                    ch4;
 
                 switch (end - src)
                 {
@@ -54,7 +56,6 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                             *src = ByteSlash;
                             continue;
                         }
-
                         break;
                     case 3:
                         ch2 = *(src + 1);
@@ -77,7 +78,6 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                                     dst--;
                                 } while (dst > start && *dst != ByteSlash);
                             }
-
                             continue;
                         }
                         else if (ch2 == ByteDot && ch3 == ByteSlash)
@@ -88,7 +88,6 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                             src += 2;
                             continue;
                         }
-
                         break;
                     default:
                         ch2 = *(src + 1);
@@ -111,7 +110,6 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                                     dst--;
                                 } while (dst > start && *dst != ByteSlash);
                             }
-
                             continue;
                         }
                         else if (ch2 == ByteDot && ch3 == ByteSlash)
@@ -122,7 +120,6 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                             src += 2;
                             continue;
                         }
-
                         break;
                 }
 
@@ -155,7 +152,9 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                 var ch1 = *src;
                 Debug.Assert(ch1 == '/', "Path segment must always start with a '/'");
 
-                byte ch2, ch3, ch4;
+                byte ch2,
+                    ch3,
+                    ch4;
 
                 switch (end - src)
                 {
@@ -168,30 +167,29 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                         {
                             return true;
                         }
-
                         break;
                     case 3:
                         ch2 = *(src + 1);
                         ch3 = *(src + 2);
 
-                        if ((ch2 == ByteDot && ch3 == ByteDot) ||
-                            (ch2 == ByteDot && ch3 == ByteSlash))
-                        {
+                        if (
+                            (ch2 == ByteDot && ch3 == ByteDot)
+                            || (ch2 == ByteDot && ch3 == ByteSlash)
+                        ) {
                             return true;
                         }
-
                         break;
                     default:
                         ch2 = *(src + 1);
                         ch3 = *(src + 2);
                         ch4 = *(src + 3);
 
-                        if ((ch2 == ByteDot && ch3 == ByteDot && ch4 == ByteSlash) ||
-                            (ch2 == ByteDot && ch3 == ByteSlash))
-                        {
+                        if (
+                            (ch2 == ByteDot && ch3 == ByteDot && ch4 == ByteSlash)
+                            || (ch2 == ByteDot && ch3 == ByteSlash)
+                        ) {
                             return true;
                         }
-
                         break;
                 }
 

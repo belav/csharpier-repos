@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             {
                 var message = Resources.FormatFormatter_NoMediaTypes(
                     GetType().FullName,
-                    nameof(SupportedMediaTypes));
+                    nameof(SupportedMediaTypes)
+                );
 
                 throw new InvalidOperationException(message);
             }
@@ -107,7 +108,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             {
                 if (context.TreatEmptyInputAsDefaultValue)
                 {
-                    return InputFormatterResult.SuccessAsync(GetDefaultValueForType(context.ModelType));
+                    return InputFormatterResult.SuccessAsync(
+                        GetDefaultValueForType(context.ModelType)
+                    );
                 }
 
                 return InputFormatterResult.NoValueAsync();
@@ -121,16 +124,21 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// </summary>
         /// <param name="context">The <see cref="InputFormatterContext"/>.</param>
         /// <returns>A <see cref="Task"/> that on completion deserializes the request body.</returns>
-        public abstract Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context);
+        public abstract Task<InputFormatterResult> ReadRequestBodyAsync(
+            InputFormatterContext context
+        );
 
         /// <inheritdoc />
-        public virtual IReadOnlyList<string>? GetSupportedContentTypes(string contentType, Type objectType)
-        {
+        public virtual IReadOnlyList<string>? GetSupportedContentTypes(
+            string contentType,
+            Type objectType
+        ) {
             if (SupportedMediaTypes.Count == 0)
             {
                 var message = Resources.FormatFormatter_NoMediaTypes(
                     GetType().FullName,
-                    nameof(SupportedMediaTypes));
+                    nameof(SupportedMediaTypes)
+                );
 
                 throw new InvalidOperationException(message);
             }

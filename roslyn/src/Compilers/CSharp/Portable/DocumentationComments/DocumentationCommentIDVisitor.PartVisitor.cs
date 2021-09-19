@@ -27,10 +27,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         private sealed class PartVisitor : CSharpSymbolVisitor<StringBuilder, object>
         {
             // Everyone outside this type uses this one.
-            internal static readonly PartVisitor Instance = new PartVisitor(inParameterOrReturnType: false);
+            internal static readonly PartVisitor Instance = new PartVisitor(
+                inParameterOrReturnType: false
+            );
 
             // Select callers within this type use this one.
-            private static readonly PartVisitor s_parameterOrReturnTypeInstance = new PartVisitor(inParameterOrReturnType: true);
+            private static readonly PartVisitor s_parameterOrReturnTypeInstance = new PartVisitor(
+                inParameterOrReturnType: true
+            );
 
             private readonly bool _inParameterOrReturnType;
 
@@ -72,8 +76,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            private void VisitParameters(ImmutableArray<ParameterSymbol> parameters, bool isVararg, StringBuilder builder)
-            {
+            private void VisitParameters(
+                ImmutableArray<ParameterSymbol> parameters,
+                bool isVararg,
+                StringBuilder builder
+            ) {
                 builder.Append('(');
                 bool needsComma = false;
 
@@ -110,7 +117,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (symbol.Parameters.Any() || symbol.IsVararg)
                 {
-                    s_parameterOrReturnTypeInstance.VisitParameters(symbol.Parameters, symbol.IsVararg, builder);
+                    s_parameterOrReturnTypeInstance.VisitParameters(
+                        symbol.Parameters,
+                        symbol.IsVararg,
+                        builder
+                    );
                 }
 
                 if (symbol.MethodKind == MethodKind.Conversion)
@@ -130,7 +141,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (symbol.Parameters.Any())
                 {
-                    s_parameterOrReturnTypeInstance.VisitParameters(symbol.Parameters, false, builder);
+                    s_parameterOrReturnTypeInstance.VisitParameters(
+                        symbol.Parameters,
+                        false,
+                        builder
+                    );
                 }
 
                 return null;
@@ -145,8 +160,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            public override object VisitTypeParameter(TypeParameterSymbol symbol, StringBuilder builder)
-            {
+            public override object VisitTypeParameter(
+                TypeParameterSymbol symbol,
+                StringBuilder builder
+            ) {
                 int ordinalOffset = 0;
 
                 // Is this a type parameter on a type?
@@ -161,8 +178,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // If the containing type is nested within other types, then we need to add their arities.
                     // e.g. A<T>.B<U>.M<V>(T t, U u, V v) should be M(`0, `1, ``0).
-                    for (NamedTypeSymbol curr = containingSymbol.ContainingType; (object)curr != null; curr = curr.ContainingType)
-                    {
+                    for (
+                        NamedTypeSymbol curr = containingSymbol.ContainingType;
+                        (object)curr != null;
+                        curr = curr.ContainingType
+                    ) {
                         ordinalOffset += curr.Arity;
                     }
                     builder.Append('`');
@@ -175,8 +195,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override object VisitNamedType(NamedTypeSymbol symbol, StringBuilder builder)
             {
-                if ((object)symbol.ContainingSymbol != null && symbol.ContainingSymbol.Name.Length != 0)
-                {
+                if (
+                    (object)symbol.ContainingSymbol != null
+                    && symbol.ContainingSymbol.Name.Length != 0
+                ) {
                     Visit(symbol.ContainingSymbol, builder);
                     builder.Append('.');
                 }
@@ -187,8 +209,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // Special case: dev11 treats types instances of the declaring type in the parameter list
                     // (and return type, for conversions) as constructed with its own type parameters.
-                    if (!_inParameterOrReturnType && TypeSymbol.Equals(symbol, symbol.ConstructedFrom, TypeCompareKind.ConsiderEverything2))
-                    {
+                    if (
+                        !_inParameterOrReturnType
+                        && TypeSymbol.Equals(
+                            symbol,
+                            symbol.ConstructedFrom,
+                            TypeCompareKind.ConsiderEverything2
+                        )
+                    ) {
                         builder.Append('`');
                         builder.Append(symbol.Arity);
                     }
@@ -198,8 +226,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         bool needsComma = false;
 
-                        foreach (var typeArgument in symbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics)
-                        {
+                        foreach (
+                            var typeArgument in symbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                        ) {
                             if (needsComma)
                             {
                                 builder.Append(',');
@@ -227,8 +256,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override object VisitNamespace(NamespaceSymbol symbol, StringBuilder builder)
             {
-                if ((object)symbol.ContainingNamespace != null && symbol.ContainingNamespace.Name.Length != 0)
-                {
+                if (
+                    (object)symbol.ContainingNamespace != null
+                    && symbol.ContainingNamespace.Name.Length != 0
+                ) {
                     Visit(symbol.ContainingNamespace, builder);
                     builder.Append('.');
                 }

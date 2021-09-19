@@ -20,7 +20,6 @@ namespace System.Reflection.Tests
             VerifyNestedType(typeof(TestNest).Project(), "NestPublic", true);
         }
 
-
         // Verify NestedTypes
         [Fact]
         public static void TestNestedTypes2()
@@ -41,7 +40,6 @@ namespace System.Reflection.Tests
         {
             VerifyNestedType(typeof(TestNestDerived).Project(), "NestPublic3", true);
         }
-
 
         // Verify NestedTypes
         [Fact]
@@ -117,7 +115,10 @@ namespace System.Reflection.Tests
             }
             else if ((!present) && found)
             {
-                Assert.False(true, string.Format("Nested Type {0} was not expected to be found", name));
+                Assert.False(
+                    true,
+                    string.Format("Nested Type {0} was not expected to be found", name)
+                );
             }
         }
     }
@@ -129,10 +130,10 @@ namespace System.Reflection.Tests
 
         public class NestPublic { }
         public class NestPublic2 { }
-        private class NestPrivate { }          // private, so not inherited
-        internal class NestInternal { }        // internal members are not inherited
+        private class NestPrivate { } // private, so not inherited
+        internal class NestInternal { } // internal members are not inherited
         protected class NestProtected { }
-        private class NestAssemblyPrivate { }  // same as private, so not inherited
+        private class NestAssemblyPrivate { } // same as private, so not inherited
     }
 
     public class TestNestDerived : TestNest

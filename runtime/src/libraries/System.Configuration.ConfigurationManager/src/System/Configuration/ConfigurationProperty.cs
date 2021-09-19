@@ -9,8 +9,10 @@ namespace System.Configuration
 {
     public sealed class ConfigurationProperty
     {
-        internal static readonly ConfigurationValidatorBase s_nonEmptyStringValidator = new StringValidator(1);
-        private static readonly ConfigurationValidatorBase s_defaultValidatorInstance = new DefaultValidator();
+        internal static readonly ConfigurationValidatorBase s_nonEmptyStringValidator =
+            new StringValidator(1);
+        private static readonly ConfigurationValidatorBase s_defaultValidatorInstance =
+            new DefaultValidator();
         internal const string DefaultCollectionPropertyName = "";
         private TypeConverter _converter;
         private volatile bool _isConfigurationElementType;
@@ -36,30 +38,33 @@ namespace System.Configuration
         }
 
         public ConfigurationProperty(string name, Type type, object defaultValue)
-            : this(name, type, defaultValue, ConfigurationPropertyOptions.None)
-        { }
+            : this(name, type, defaultValue, ConfigurationPropertyOptions.None) { }
 
-        public ConfigurationProperty(string name, Type type, object defaultValue, ConfigurationPropertyOptions options)
-            : this(name, type, defaultValue, null, null, options)
-        { }
+        public ConfigurationProperty(
+            string name,
+            Type type,
+            object defaultValue,
+            ConfigurationPropertyOptions options
+        ) : this(name, type, defaultValue, null, null, options) { }
 
-        public ConfigurationProperty(string name,
+        public ConfigurationProperty(
+            string name,
             Type type,
             object defaultValue,
             TypeConverter typeConverter,
             ConfigurationValidatorBase validator,
-            ConfigurationPropertyOptions options)
-            : this(name, type, defaultValue, typeConverter, validator, options, null)
-        { }
+            ConfigurationPropertyOptions options
+        ) : this(name, type, defaultValue, typeConverter, validator, options, null) { }
 
-        public ConfigurationProperty(string name,
+        public ConfigurationProperty(
+            string name,
             Type type,
             object defaultValue,
             TypeConverter typeConverter,
             ConfigurationValidatorBase validator,
             ConfigurationPropertyOptions options,
-            string description)
-        {
+            string description
+        ) {
             ConstructorInit(name, type, options, validator, typeConverter, description);
 
             SetDefaultValue(defaultValue);
@@ -84,7 +89,9 @@ namespace System.Configuration
             {
                 if (attribute is TypeConverterAttribute)
                 {
-                    typeConverter = TypeUtil.CreateInstance<TypeConverter>(((TypeConverterAttribute)attribute).ConverterTypeName);
+                    typeConverter = TypeUtil.CreateInstance<TypeConverter>(
+                        ((TypeConverterAttribute)attribute).ConverterTypeName
+                    );
                 }
                 else if (attribute is ConfigurationPropertyAttribute)
                 {
@@ -100,10 +107,12 @@ namespace System.Configuration
                         // list of validators and executes them all
 
                         throw new ConfigurationErrorsException(
-                            SR.Format(SR.Validator_multiple_validator_attributes, info.Name));
+                            SR.Format(SR.Validator_multiple_validator_attributes, info.Name)
+                        );
                     }
 
-                    ConfigurationValidatorAttribute validatorAttribute = (ConfigurationValidatorAttribute)attribute;
+                    ConfigurationValidatorAttribute validatorAttribute =
+                        (ConfigurationValidatorAttribute)attribute;
                     validatorAttribute.SetDeclaringType(info.DeclaringType);
                     validator = validatorAttribute.ValidatorInstance;
                 }
@@ -126,14 +135,17 @@ namespace System.Configuration
                 // Look for the ConfigurationCollection attribute on the property itself, fall back
                 // on the property type.
                 ConfigurationCollectionAttribute collectionAttribute =
-                    Attribute.GetCustomAttribute(info,
-                        typeof(ConfigurationCollectionAttribute)) as ConfigurationCollectionAttribute ??
-                    Attribute.GetCustomAttribute(propertyType,
-                        typeof(ConfigurationCollectionAttribute)) as ConfigurationCollectionAttribute;
+                    Attribute.GetCustomAttribute(info, typeof(ConfigurationCollectionAttribute))
+                        as ConfigurationCollectionAttribute
+                    ?? Attribute.GetCustomAttribute(
+                        propertyType,
+                        typeof(ConfigurationCollectionAttribute)
+                    ) as ConfigurationCollectionAttribute;
 
                 if (collectionAttribute != null)
                 {
-                    if (collectionAttribute.AddItemName.IndexOf(',') == -1) AddElementName = collectionAttribute.AddItemName; // string.Contains(char) is .NetCore2.1+ specific
+                    if (collectionAttribute.AddItemName.IndexOf(',') == -1)
+                        AddElementName = collectionAttribute.AddItemName; // string.Contains(char) is .NetCore2.1+ specific
                     RemoveElementName = collectionAttribute.RemoveItemName;
                     ClearElementName = collectionAttribute.ClearItemsName;
                 }
@@ -142,12 +154,14 @@ namespace System.Configuration
             // This constructor shouldn't be invoked if the reflection info is not for an actual config property
             Debug.Assert(propertyAttribute != null, "attribProperty != null");
 
-            ConstructorInit(propertyAttribute.Name,
+            ConstructorInit(
+                propertyAttribute.Name,
                 info.PropertyType,
                 propertyAttribute.Options,
                 validator,
                 typeConverter,
-                descriptionAttribute?.Description);
+                descriptionAttribute?.Description
+            );
 
             // Figure out the default value
             InitDefaultValueFromTypeInfo(propertyAttribute, defaultValueAttribute);
@@ -180,15 +194,17 @@ namespace System.Configuration
 
         public bool IsKey => (_options & ConfigurationPropertyOptions.IsKey) != 0;
 
-        public bool IsDefaultCollection => (_options & ConfigurationPropertyOptions.IsDefaultCollection) != 0;
+        public bool IsDefaultCollection =>
+            (_options & ConfigurationPropertyOptions.IsDefaultCollection) != 0;
 
-        public bool IsTypeStringTransformationRequired
-            => (_options & ConfigurationPropertyOptions.IsTypeStringTransformationRequired) != 0;
+        public bool IsTypeStringTransformationRequired =>
+            (_options & ConfigurationPropertyOptions.IsTypeStringTransformationRequired) != 0;
 
-        public bool IsAssemblyStringTransformationRequired
-            => (_options & ConfigurationPropertyOptions.IsAssemblyStringTransformationRequired) != 0;
+        public bool IsAssemblyStringTransformationRequired =>
+            (_options & ConfigurationPropertyOptions.IsAssemblyStringTransformationRequired) != 0;
 
-        public bool IsVersionCheckRequired => (_options & ConfigurationPropertyOptions.IsVersionCheckRequired) != 0;
+        public bool IsVersionCheckRequired =>
+            (_options & ConfigurationPropertyOptions.IsVersionCheckRequired) != 0;
 
         public TypeConverter Converter
         {
@@ -213,19 +229,25 @@ namespace System.Configuration
             ConfigurationPropertyOptions options,
             ConfigurationValidatorBase validator,
             TypeConverter converter,
-            string description)
-        {
+            string description
+        ) {
             if (typeof(ConfigurationSection).IsAssignableFrom(type))
             {
                 throw new ConfigurationErrorsException(
-                    SR.Format(SR.Config_properties_may_not_be_derived_from_configuration_section, name));
+                    SR.Format(
+                        SR.Config_properties_may_not_be_derived_from_configuration_section,
+                        name
+                    )
+                );
             }
 
             // save the provided name so we can check for default collection names
             ProvidedName = name;
 
-            if (((options & ConfigurationPropertyOptions.IsDefaultCollection) != 0) && string.IsNullOrEmpty(name))
-            {
+            if (
+                ((options & ConfigurationPropertyOptions.IsDefaultCollection) != 0)
+                && string.IsNullOrEmpty(name)
+            ) {
                 name = DefaultCollectionPropertyName;
             }
             else
@@ -249,7 +271,9 @@ namespace System.Configuration
             {
                 // Make sure the supplied validator supports the type of this property
                 if (!Validator.CanValidate(Type))
-                    throw new ConfigurationErrorsException(SR.Format(SR.Validator_does_not_support_prop_type, Name));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Validator_does_not_support_prop_type, Name)
+                    );
             }
         }
 
@@ -271,7 +295,9 @@ namespace System.Configuration
             if (!Type.IsInstanceOfType(value))
             {
                 if (!Converter.CanConvertFrom(value.GetType()))
-                    throw new ConfigurationErrorsException(SR.Format(SR.Default_value_wrong_type, Name));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Default_value_wrong_type, Name)
+                    );
 
                 value = Converter.ConvertFrom(value);
             }
@@ -282,8 +308,8 @@ namespace System.Configuration
 
         private void InitDefaultValueFromTypeInfo(
             ConfigurationPropertyAttribute configurationProperty,
-            DefaultValueAttribute defaultValueAttribute)
-        {
+            DefaultValueAttribute defaultValueAttribute
+        ) {
             object defaultValue = configurationProperty.DefaultValue;
 
             // If the ConfigurationPropertyAttribute has no default try the DefaultValueAttribute
@@ -299,8 +325,9 @@ namespace System.Configuration
                 }
                 catch (Exception ex)
                 {
-                    throw new ConfigurationErrorsException(SR.Format(SR.Default_value_conversion_error_from_string,
-                        Name, ex.Message));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Default_value_conversion_error_from_string, Name, ex.Message)
+                    );
                 }
             }
 
@@ -330,8 +357,9 @@ namespace System.Configuration
             }
             catch (Exception ex)
             {
-                throw new ConfigurationErrorsException(SR.Format(SR.Top_level_conversion_error_from_string, Name,
-                    ex.Message));
+                throw new ConfigurationErrorsException(
+                    SR.Format(SR.Top_level_conversion_error_from_string, Name, ex.Message)
+                );
             }
 
             return result;
@@ -354,7 +382,8 @@ namespace System.Configuration
             catch (Exception ex)
             {
                 throw new ConfigurationErrorsException(
-                    SR.Format(SR.Top_level_conversion_error_to_string, Name, ex.Message));
+                    SR.Format(SR.Top_level_conversion_error_to_string, Name, ex.Message)
+                );
             }
         }
 
@@ -367,13 +396,16 @@ namespace System.Configuration
             catch (Exception ex)
             {
                 throw new ConfigurationErrorsException(
-                    SR.Format(SR.Top_level_validation_error, Name, ex.Message), ex);
+                    SR.Format(SR.Top_level_validation_error, Name, ex.Message),
+                    ex
+                );
             }
         }
 
         private void CreateConverter()
         {
-            if (_converter != null) return;
+            if (_converter != null)
+                return;
 
             if (Type.IsEnum)
             {
@@ -390,12 +422,15 @@ namespace System.Configuration
             {
                 _converter = TypeDescriptor.GetConverter(Type);
 
-                if ((_converter == null) ||
-                    !_converter.CanConvertFrom(typeof(string)) ||
-                    !_converter.CanConvertTo(typeof(string)))
-                {
+                if (
+                    (_converter == null)
+                    || !_converter.CanConvertFrom(typeof(string))
+                    || !_converter.CanConvertTo(typeof(string))
+                ) {
                     // Need to be able to convert to/from string
-                    throw new ConfigurationErrorsException(SR.Format(SR.No_converter, Name, Type.Name));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.No_converter, Name, Type.Name)
+                    );
                 }
             }
         }

@@ -31,14 +31,22 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 ImmutableArray<DocumentSpan> sourceSpans,
                 ImmutableDictionary<string, string> properties,
                 ImmutableDictionary<string, string> displayableProperties,
-                bool displayIfNoReferences)
-                : base(tags, displayParts, nameDisplayParts, originationParts,
-                       sourceSpans, properties, displayableProperties, displayIfNoReferences)
-            {
-            }
+                bool displayIfNoReferences
+            ) : base(
+                tags,
+                displayParts,
+                nameDisplayParts,
+                originationParts,
+                sourceSpans,
+                properties,
+                displayableProperties,
+                displayIfNoReferences
+            ) { }
 
-            public override bool CanNavigateTo(Workspace workspace, CancellationToken cancellationToken)
-            {
+            public override bool CanNavigateTo(
+                Workspace workspace,
+                CancellationToken cancellationToken
+            ) {
                 if (Properties.ContainsKey(NonNavigable))
                 {
                     return false;
@@ -52,8 +60,12 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 return SourceSpans[0].CanNavigateTo(cancellationToken);
             }
 
-            public override bool TryNavigateTo(Workspace workspace, bool showInPreviewTab, bool activateTab, CancellationToken cancellationToken)
-            {
+            public override bool TryNavigateTo(
+                Workspace workspace,
+                bool showInPreviewTab,
+                bool activateTab,
+                CancellationToken cancellationToken
+            ) {
                 if (Properties.ContainsKey(NonNavigable))
                 {
                     return false;
@@ -64,25 +76,44 @@ namespace Microsoft.CodeAnalysis.FindUsages
                     return TryNavigateToMetadataSymbol(workspace, symbolKey);
                 }
 
-                return SourceSpans[0].TryNavigateTo(showInPreviewTab, activateTab, cancellationToken);
+                return SourceSpans[0].TryNavigateTo(
+                    showInPreviewTab,
+                    activateTab,
+                    cancellationToken
+                );
             }
 
-            private bool CanNavigateToMetadataSymbol(Workspace workspace, string symbolKey)
-                => TryNavigateToMetadataSymbol(workspace, symbolKey, action: (symbol, project, service) => true);
+            private bool CanNavigateToMetadataSymbol(Workspace workspace, string symbolKey) =>
+                TryNavigateToMetadataSymbol(
+                    workspace,
+                    symbolKey,
+                    action: (symbol, project, service) => true
+                );
 
             private bool TryNavigateToMetadataSymbol(Workspace workspace, string symbolKey)
             {
-                return TryNavigateToMetadataSymbol(workspace, symbolKey,
+                return TryNavigateToMetadataSymbol(
+                    workspace,
+                    symbolKey,
                     action: (symbol, project, service) =>
                     {
                         return service.TryNavigateToSymbol(
-                            symbol, project, project.Solution.Options.WithChangedOption(NavigationOptions.PreferProvisionalTab, true));
-                    });
+                            symbol,
+                            project,
+                            project.Solution.Options.WithChangedOption(
+                                NavigationOptions.PreferProvisionalTab,
+                                true
+                            )
+                        );
+                    }
+                );
             }
 
             private bool TryNavigateToMetadataSymbol(
-                Workspace workspace, string symbolKey, Func<ISymbol, Project, ISymbolNavigationService, bool> action)
-            {
+                Workspace workspace,
+                string symbolKey,
+                Func<ISymbol, Project, ISymbolNavigationService, bool> action
+            ) {
                 var projectAndSymbol = TryResolveSymbolInCurrentSolution(workspace, symbolKey);
 
                 var project = projectAndSymbol.project;
@@ -102,15 +133,25 @@ namespace Microsoft.CodeAnalysis.FindUsages
             }
 
             private (Project project, ISymbol symbol) TryResolveSymbolInCurrentSolution(
-                Workspace workspace, string symbolKey)
-            {
-                if (!Properties.TryGetValue(MetadataSymbolOriginatingProjectIdGuid, out var projectIdGuid) ||
-                    !Properties.TryGetValue(MetadataSymbolOriginatingProjectIdDebugName, out var projectDebugName))
-                {
+                Workspace workspace,
+                string symbolKey
+            ) {
+                if (
+                    !Properties.TryGetValue(
+                        MetadataSymbolOriginatingProjectIdGuid,
+                        out var projectIdGuid
+                    )
+                    || !Properties.TryGetValue(
+                        MetadataSymbolOriginatingProjectIdDebugName,
+                        out var projectDebugName
+                    )
+                ) {
                     return (null, null);
                 }
 
-                var project = workspace.CurrentSolution.GetProject(ProjectId.CreateFromSerialized(Guid.Parse(projectIdGuid), projectDebugName));
+                var project = workspace.CurrentSolution.GetProject(
+                    ProjectId.CreateFromSerialized(Guid.Parse(projectIdGuid), projectDebugName)
+                );
 
                 if (project == null)
                 {
@@ -118,7 +159,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 }
 
                 var compilation = project.GetCompilationAsync(CancellationToken.None)
-                                         .WaitAndGetResult(CancellationToken.None);
+                    .WaitAndGetResult(CancellationToken.None);
 
                 var symbol = SymbolKey.ResolveString(symbolKey, compilation).Symbol;
                 return (project, symbol);

@@ -11,28 +11,34 @@ namespace Microsoft.CodeAnalysis.Razor
     {
         [Theory]
         [InlineData("TItem2", "Type2")]
-
         // Unspecified argument -> System.Object
         [InlineData("TItem3", "System.Object")]
-
         // Not a type parameter
         [InlineData("TItem4", "TItem4")]
-
         // In a qualified name, not a type parameter
         [InlineData("TItem1.TItem2", "TItem1.TItem2")]
-
         // Type parameters can't have type parameters
-        [InlineData("TItem1.TItem2<TItem1, TItem2, TItem3>", "TItem1.TItem2<Type1, Type2, System.Object>")]
-        [InlineData("TItem2<TItem1<TItem3>, System.TItem2, RenderFragment<List<TItem1>>", "TItem2<TItem1<System.Object>, System.TItem2, RenderFragment<List<Type1>>")]
-        public void GenericTypeNameRewriter_CanReplaceTypeParametersWithTypeArguments(string original, string expected)
-        {
+        [InlineData(
+            "TItem1.TItem2<TItem1, TItem2, TItem3>",
+            "TItem1.TItem2<Type1, Type2, System.Object>"
+        )]
+        [InlineData(
+            "TItem2<TItem1<TItem3>, System.TItem2, RenderFragment<List<TItem1>>",
+            "TItem2<TItem1<System.Object>, System.TItem2, RenderFragment<List<Type1>>"
+        )]
+        public void GenericTypeNameRewriter_CanReplaceTypeParametersWithTypeArguments(
+            string original,
+            string expected
+        ) {
             // Arrange
-            var visitor = new GenericTypeNameRewriter(new Dictionary<string, string>()
-            {
-                { "TItem1", "Type1" },
-                { "TItem2", "Type2" },
-                { "TItem3", null },
-            });
+            var visitor = new GenericTypeNameRewriter(
+                new Dictionary<string, string>()
+                {
+                    { "TItem1", "Type1" },
+                    { "TItem2", "Type2" },
+                    { "TItem3", null },
+                }
+            );
 
             // Act
             var actual = visitor.Rewrite(original);

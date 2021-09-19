@@ -17,9 +17,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         private const string ControllerTypeNameSuffix = "Controller";
 
         /// <inheritdoc />
-        public void PopulateFeature(
-            IEnumerable<ApplicationPart> parts,
-            ControllerFeature feature)
+        public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
             foreach (var part in parts.OfType<IApplicationPartTypeProvider>())
             {
@@ -67,9 +65,12 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 return false;
             }
 
-            if (!typeInfo.Name.EndsWith(ControllerTypeNameSuffix, StringComparison.OrdinalIgnoreCase) &&
-                !typeInfo.IsDefined(typeof(ControllerAttribute)))
-            {
+            if (
+                !typeInfo.Name.EndsWith(
+                    ControllerTypeNameSuffix,
+                    StringComparison.OrdinalIgnoreCase
+                ) && !typeInfo.IsDefined(typeof(ControllerAttribute))
+            ) {
                 return false;
             }
 

@@ -40,8 +40,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _lazyTranslatedImports;
         }
 
-        public Cci.IImportScope Translate(Emit.PEModuleBuilder moduleBuilder, DiagnosticBag diagnostics)
-        {
+        public Cci.IImportScope Translate(
+            Emit.PEModuleBuilder moduleBuilder,
+            DiagnosticBag diagnostics
+        ) {
             for (var scope = this; scope != null; scope = scope.ParentOpt)
             {
                 if (!scope._lazyTranslatedImports.IsDefault)
@@ -49,14 +51,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
                 }
 
-                ImmutableInterlocked.InterlockedInitialize(ref scope._lazyTranslatedImports, scope.TranslateImports(moduleBuilder, diagnostics));
+                ImmutableInterlocked.InterlockedInitialize(
+                    ref scope._lazyTranslatedImports,
+                    scope.TranslateImports(moduleBuilder, diagnostics)
+                );
             }
 
             return this;
         }
 
-        private ImmutableArray<Cci.UsedNamespaceOrType> TranslateImports(Emit.PEModuleBuilder moduleBuilder, DiagnosticBag diagnostics)
-        {
+        private ImmutableArray<Cci.UsedNamespaceOrType> TranslateImports(
+            Emit.PEModuleBuilder moduleBuilder,
+            DiagnosticBag diagnostics
+        ) {
             var usedNamespaces = ArrayBuilder<Cci.UsedNamespaceOrType>.GetInstance();
 
             // NOTE: order based on dev12: extern aliases, then usings, then aliases namespaces and types
@@ -80,12 +87,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var ns = (NamespaceSymbol)namespaceOrType;
                         var assemblyRef = TryGetAssemblyScope(ns, moduleBuilder, diagnostics);
-                        usedNamespaces.Add(Cci.UsedNamespaceOrType.CreateNamespace(ns.GetCciAdapter(), assemblyRef));
+                        usedNamespaces.Add(
+                            Cci.UsedNamespaceOrType.CreateNamespace(ns.GetCciAdapter(), assemblyRef)
+                        );
                     }
                     else if (!namespaceOrType.ContainingAssembly.IsLinked)
                     {
                         // We skip alias imports of embedded types to be consistent with imports of aliased embedded types and with VB.
-                        var typeRef = GetTypeReference((TypeSymbol)namespaceOrType, nsOrType.UsingDirective, moduleBuilder, diagnostics);
+                        var typeRef = GetTypeReference(
+                            (TypeSymbol)namespaceOrType,
+                            nsOrType.UsingDirective,
+                            moduleBuilder,
+                            diagnostics
+                        );
                         usedNamespaces.Add(Cci.UsedNamespaceOrType.CreateType(typeRef));
                     }
                 }
@@ -110,13 +124,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var ns = (NamespaceSymbol)target;
                         var assemblyRef = TryGetAssemblyScope(ns, moduleBuilder, diagnostics);
-                        usedNamespaces.Add(Cci.UsedNamespaceOrType.CreateNamespace(ns.GetCciAdapter(), assemblyRef, alias));
+                        usedNamespaces.Add(
+                            Cci.UsedNamespaceOrType.CreateNamespace(
+                                ns.GetCciAdapter(),
+                                assemblyRef,
+                                alias
+                            )
+                        );
                     }
                     else if (!target.ContainingAssembly.IsLinked)
                     {
                         // We skip alias imports of embedded types to avoid breaking existing code that
                         // imports types that can't be embedded but doesn't use them anywhere else in the code.
-                        var typeRef = GetTypeReference((TypeSymbol)target, syntax, moduleBuilder, diagnostics);
+                        var typeRef = GetTypeReference(
+                            (TypeSymbol)target,
+                            syntax,
+                            moduleBuilder,
+                            diagnostics
+                        );
                         usedNamespaces.Add(Cci.UsedNamespaceOrType.CreateType(typeRef, alias));
                     }
                 }
@@ -127,17 +152,28 @@ namespace Microsoft.CodeAnalysis.CSharp
             return usedNamespaces.ToImmutableAndFree();
         }
 
-        private static Cci.ITypeReference GetTypeReference(TypeSymbol type, SyntaxNode syntaxNode, Emit.PEModuleBuilder moduleBuilder, DiagnosticBag diagnostics)
-        {
+        private static Cci.ITypeReference GetTypeReference(
+            TypeSymbol type,
+            SyntaxNode syntaxNode,
+            Emit.PEModuleBuilder moduleBuilder,
+            DiagnosticBag diagnostics
+        ) {
             return moduleBuilder.Translate(type, syntaxNode, diagnostics);
         }
 
-        private static Cci.IAssemblyReference TryGetAssemblyScope(NamespaceSymbol @namespace, Emit.PEModuleBuilder moduleBuilder, DiagnosticBag diagnostics)
-        {
+        private static Cci.IAssemblyReference TryGetAssemblyScope(
+            NamespaceSymbol @namespace,
+            Emit.PEModuleBuilder moduleBuilder,
+            DiagnosticBag diagnostics
+        ) {
             AssemblySymbol containingAssembly = @namespace.ContainingAssembly;
-            if ((object)containingAssembly != null && (object)containingAssembly != moduleBuilder.CommonCompilation.Assembly)
-            {
-                var referenceManager = ((CSharpCompilation)moduleBuilder.CommonCompilation).GetBoundReferenceManager();
+            if (
+                (object)containingAssembly != null
+                && (object)containingAssembly != moduleBuilder.CommonCompilation.Assembly
+            ) {
+                var referenceManager = (
+                    (CSharpCompilation)moduleBuilder.CommonCompilation
+                ).GetBoundReferenceManager();
 
                 for (int i = 0; i < referenceManager.ReferencedAssemblies.Length; i++)
                 {

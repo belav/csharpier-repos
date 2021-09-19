@@ -11,20 +11,26 @@ using System.Web.Http.Properties;
 
 namespace System.Web.Http.Filters
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public abstract class ActionFilterAttribute : FilterAttribute, IActionFilter
     {
-        public virtual void OnActionExecuting(HttpActionContext actionContext)
-        {
-        }
+        public virtual void OnActionExecuting(HttpActionContext actionContext) { }
 
-        public virtual void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
-        {
-        }
+        public virtual void OnActionExecuted(HttpActionExecutedContext actionExecutedContext) { }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "exception is flowed through the task")]
-        public virtual Task OnActionExecutingAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
-        {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "exception is flowed through the task"
+        )]
+        public virtual Task OnActionExecutingAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        ) {
             try
             {
                 OnActionExecuting(actionContext);
@@ -37,9 +43,15 @@ namespace System.Web.Http.Filters
             return TaskHelpers.Completed();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "exception is flowed through the task")]
-        public virtual Task OnActionExecutedAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
-        {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "exception is flowed through the task"
+        )]
+        public virtual Task OnActionExecutedAsync(
+            HttpActionExecutedContext actionExecutedContext,
+            CancellationToken cancellationToken
+        ) {
             try
             {
                 OnActionExecuted(actionExecutedContext);
@@ -52,8 +64,11 @@ namespace System.Web.Http.Filters
             return TaskHelpers.Completed();
         }
 
-        Task<HttpResponseMessage> IActionFilter.ExecuteActionFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
-        {
+        Task<HttpResponseMessage> IActionFilter.ExecuteActionFilterAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken,
+            Func<Task<HttpResponseMessage>> continuation
+        ) {
             if (actionContext == null)
             {
                 throw Error.ArgumentNull("actionContext");
@@ -66,9 +81,16 @@ namespace System.Web.Http.Filters
             return ExecuteActionFilterAsyncCore(actionContext, cancellationToken, continuation);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We want to intercept all exceptions")]
-        private async Task<HttpResponseMessage> ExecuteActionFilterAsyncCore(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
-        {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We want to intercept all exceptions"
+        )]
+        private async Task<HttpResponseMessage> ExecuteActionFilterAsyncCore(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken,
+            Func<Task<HttpResponseMessage>> continuation
+        ) {
             await OnActionExecutingAsync(actionContext, cancellationToken);
 
             if (actionContext.Response != null)
@@ -79,9 +101,16 @@ namespace System.Web.Http.Filters
             return await CallOnActionExecutedAsync(actionContext, cancellationToken, continuation);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We want to intercept all exceptions")]
-        private async Task<HttpResponseMessage> CallOnActionExecutedAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
-        {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We want to intercept all exceptions"
+        )]
+        private async Task<HttpResponseMessage> CallOnActionExecutedAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken,
+            Func<Task<HttpResponseMessage>> continuation
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             HttpResponseMessage response = null;
@@ -106,8 +135,10 @@ namespace System.Web.Http.Filters
                 exception = exceptionInfo.SourceException;
             }
 
-            HttpActionExecutedContext executedContext = new HttpActionExecutedContext(actionContext, exception)
-            {
+            HttpActionExecutedContext executedContext = new HttpActionExecutedContext(
+                actionContext,
+                exception
+            ) {
                 Response = response
             };
 
@@ -142,7 +173,10 @@ namespace System.Web.Http.Filters
                 }
             }
 
-            throw Error.InvalidOperation(SRResources.ActionFilterAttribute_MustSupplyResponseOrException, GetType().Name);
+            throw Error.InvalidOperation(
+                SRResources.ActionFilterAttribute_MustSupplyResponseOrException,
+                GetType().Name
+            );
         }
     }
 }

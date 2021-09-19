@@ -16,8 +16,7 @@ namespace IdentitySample
     {
         public Startup(IWebHostEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
+            var builder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
@@ -31,9 +30,13 @@ namespace IdentitySample
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(
+                options =>
+                    options.ConfigureWarnings(
+                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                        )
+                        .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
 
             services.AddMvc();
 
@@ -43,12 +46,14 @@ namespace IdentitySample
                 .AddSignInManager()
                 .AddDefaultTokenProviders();
 
-            services.AddAuthentication(o =>
-            {
-                o.DefaultScheme = IdentityConstants.ApplicationScheme;
-                o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-            })
-            .AddIdentityCookies(o => { });
+            services.AddAuthentication(
+                    o =>
+                    {
+                        o.DefaultScheme = IdentityConstants.ApplicationScheme;
+                        o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+                    }
+                )
+                .AddIdentityCookies(o => { });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -58,8 +63,11 @@ namespace IdentitySample
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
-        {
+        public void Configure(
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            ILoggerFactory loggerFactory
+        ) {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -77,11 +85,13 @@ namespace IdentitySample
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                    endpoints.MapRazorPages();
+                }
+            );
         }
     }
 }

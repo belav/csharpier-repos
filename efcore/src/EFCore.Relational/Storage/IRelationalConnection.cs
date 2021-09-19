@@ -25,7 +25,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         The implementation does not need to be thread-safe.
     ///     </para>
     /// </summary>
-    public interface IRelationalConnection : IRelationalTransactionManager, IDisposable, IAsyncDisposable
+    public interface IRelationalConnection
+        : IRelationalTransactionManager,
+          IDisposable,
+          IAsyncDisposable
     {
         /// <summary>
         ///     Gets or sets the connection string for the database.
@@ -119,7 +122,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <value>
         ///     The semaphore.
         /// </value>
-        [Obsolete("EF Core no longer uses this semaphore. It will be removed in an upcoming release.")]
+        [Obsolete(
+            "EF Core no longer uses this semaphore. It will be removed in an upcoming release."
+        )]
         SemaphoreSlim Semaphore { get; }
     }
 }

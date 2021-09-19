@@ -32,14 +32,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return Get_System_Runtime_InteropServices_NamespaceSymbol(sysNS);
         }
 
-        internal NamespaceSymbol Get_System_Runtime_InteropServices_WindowsRuntime_NamespaceSymbol(ModuleSymbol m)
-        {
+        internal NamespaceSymbol Get_System_Runtime_InteropServices_WindowsRuntime_NamespaceSymbol(
+            ModuleSymbol m
+        ) {
             NamespaceSymbol interopNS = Get_System_Runtime_InteropServices_NamespaceSymbol(m);
             return interopNS.GetMember<NamespaceSymbol>("WindowsRuntime");
         }
 
-        internal NamespaceSymbol Get_System_Runtime_InteropServices_NamespaceSymbol(NamespaceSymbol systemNamespace)
-        {
+        internal NamespaceSymbol Get_System_Runtime_InteropServices_NamespaceSymbol(
+            NamespaceSymbol systemNamespace
+        ) {
             var runtimeNS = systemNamespace.GetMember<NamespaceSymbol>("Runtime");
             return runtimeNS.GetMember<NamespaceSymbol>("InteropServices");
         }
@@ -50,8 +52,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return Get_System_Runtime_CompilerServices_NamespaceSymbol(sysNS);
         }
 
-        internal NamespaceSymbol Get_System_Runtime_CompilerServices_NamespaceSymbol(NamespaceSymbol systemNamespace)
-        {
+        internal NamespaceSymbol Get_System_Runtime_CompilerServices_NamespaceSymbol(
+            NamespaceSymbol systemNamespace
+        ) {
             var runtimeNS = systemNamespace.GetMember<NamespaceSymbol>("Runtime");
             return runtimeNS.GetMember<NamespaceSymbol>("CompilerServices");
         }
@@ -74,7 +77,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SourceAssemblySymbol sourceAssembly = assembly as SourceAssemblySymbol;
             if (sourceAssembly != null)
             {
-                return sourceAssembly.DeclaringCompilation.GlobalNamespace.GetMember<NamespaceSymbol>("System");
+                return sourceAssembly.DeclaringCompilation.GlobalNamespace.GetMember<NamespaceSymbol>(
+                    "System"
+                );
             }
             else
             {
@@ -83,13 +88,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
         }
 
-        internal static void VerifyParamArrayAttribute(ParameterSymbol parameter, bool expected = true)
-        {
+        internal static void VerifyParamArrayAttribute(
+            ParameterSymbol parameter,
+            bool expected = true
+        ) {
             Assert.Equal(expected, parameter.IsParams);
 
             var peParameter = (PEParameterSymbol)parameter;
-            var allAttributes = ((PEModuleSymbol)parameter.ContainingModule).GetCustomAttributesForToken(peParameter.Handle);
-            var paramArrayAttributes = allAttributes.Where(a => a.AttributeClass.ToTestDisplayString() == "System.ParamArrayAttribute");
+            var allAttributes = (
+                (PEModuleSymbol)parameter.ContainingModule
+            ).GetCustomAttributesForToken(peParameter.Handle);
+            var paramArrayAttributes = allAttributes.Where(
+                a => a.AttributeClass.ToTestDisplayString() == "System.ParamArrayAttribute"
+            );
 
             if (expected)
             {

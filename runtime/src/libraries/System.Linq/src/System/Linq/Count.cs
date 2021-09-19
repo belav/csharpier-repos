@@ -45,8 +45,10 @@ namespace System.Linq
             return count;
         }
 
-        public static int Count<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
+        public static int Count<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -92,8 +94,10 @@ namespace System.Linq
         ///   The method is typically a constant-time operation, but ultimately this depends on the complexity
         ///   characteristics of the underlying collection implementation.
         /// </remarks>
-        public static bool TryGetNonEnumeratedCount<TSource>(this IEnumerable<TSource> source, out int count)
-        {
+        public static bool TryGetNonEnumeratedCount<TSource>(
+            this IEnumerable<TSource> source,
+            out int count
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -147,8 +151,10 @@ namespace System.Linq
             return count;
         }
 
-        public static long LongCount<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
+        public static long LongCount<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

@@ -45,20 +45,25 @@ namespace System.Numerics
 
             uint[] bits = new uint[left.Length + 1];
 
-            fixed (uint* l = left, r = right, b = &bits[0])
-            {
-                Add(l, left.Length,
-                    r, right.Length,
-                    b, bits.Length);
+            fixed (
+                uint* l = left,
+                    r = right,
+                    b = &bits[0]
+            ) {
+                Add(l, left.Length, r, right.Length, b, bits.Length);
             }
 
             return bits;
         }
 
-        private static unsafe void Add(uint* left, int leftLength,
-                                       uint* right, int rightLength,
-                                       uint* bits, int bitsLength)
-        {
+        private static unsafe void Add(
+            uint* left,
+            int leftLength,
+            uint* right,
+            int rightLength,
+            uint* bits,
+            int bitsLength
+        ) {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -87,8 +92,7 @@ namespace System.Numerics
             bits[i] = (uint)carry;
         }
 
-        private static unsafe void AddSelf(uint* left, int leftLength,
-                                           uint* right, int rightLength)
+        private static unsafe void AddSelf(uint* left, int leftLength, uint* right, int rightLength)
         {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
@@ -155,20 +159,25 @@ namespace System.Numerics
 
             uint[] bits = new uint[left.Length];
 
-            fixed (uint* l = left, r = right, b = bits)
-            {
-                Subtract(l, left.Length,
-                         r, right.Length,
-                         b, bits.Length);
+            fixed (
+                uint* l = left,
+                    r = right,
+                    b = bits
+            ) {
+                Subtract(l, left.Length, r, right.Length, b, bits.Length);
             }
 
             return bits;
         }
 
-        private static unsafe void Subtract(uint* left, int leftLength,
-                                            uint* right, int rightLength,
-                                            uint* bits, int bitsLength)
-        {
+        private static unsafe void Subtract(
+            uint* left,
+            int leftLength,
+            uint* right,
+            int rightLength,
+            uint* bits,
+            int bitsLength
+        ) {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -199,9 +208,12 @@ namespace System.Numerics
             Debug.Assert(carry == 0);
         }
 
-        private static unsafe void SubtractSelf(uint* left, int leftLength,
-                                                uint* right, int rightLength)
-        {
+        private static unsafe void SubtractSelf(
+            uint* left,
+            int leftLength,
+            uint* right,
+            int rightLength
+        ) {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);
             Debug.Assert(leftLength >= rightLength);
@@ -251,8 +263,7 @@ namespace System.Numerics
             return 0;
         }
 
-        private static unsafe int Compare(uint* left, int leftLength,
-                                          uint* right, int rightLength)
+        private static unsafe int Compare(uint* left, int leftLength, uint* right, int rightLength)
         {
             Debug.Assert(leftLength >= 0);
             Debug.Assert(rightLength >= 0);

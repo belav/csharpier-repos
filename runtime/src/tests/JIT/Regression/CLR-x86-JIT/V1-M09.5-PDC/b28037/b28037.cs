@@ -14,7 +14,10 @@ namespace Test
     {
         static int m_nStatic1 = 0;
 
-        static void BlowUp() { throw new Exception(); }
+        static void BlowUp()
+        {
+            throw new Exception();
+        }
 
         static void Method1(int[] param1)
         {

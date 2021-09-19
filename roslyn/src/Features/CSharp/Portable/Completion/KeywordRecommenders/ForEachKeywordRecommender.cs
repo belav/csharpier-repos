@@ -11,17 +11,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ForEachKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public ForEachKeywordRecommender()
-            : base(SyntaxKind.ForEachKeyword)
-        {
-        }
+        public ForEachKeywordRecommender() : base(SyntaxKind.ForEachKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsAwaitStatementContext(position, cancellationToken);
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            return context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsAwaitStatementContext(position, cancellationToken);
         }
     }
 }

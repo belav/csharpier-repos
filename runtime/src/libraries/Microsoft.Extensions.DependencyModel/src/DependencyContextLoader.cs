@@ -18,20 +18,20 @@ namespace Microsoft.Extensions.DependencyModel
         private readonly IFileSystem _fileSystem;
         private readonly Func<IDependencyContextReader> _jsonReaderFactory;
 
-        public DependencyContextLoader() : this(
-            DependencyContextPaths.Current.Application,
-            DependencyContextPaths.Current.NonApplicationPaths,
-            FileSystemWrapper.Default,
-            () => new DependencyContextJsonReader())
-        {
-        }
+        public DependencyContextLoader()
+            : this(
+                DependencyContextPaths.Current.Application,
+                DependencyContextPaths.Current.NonApplicationPaths,
+                FileSystemWrapper.Default,
+                () => new DependencyContextJsonReader()
+            ) { }
 
         internal DependencyContextLoader(
             string entryPointDepsLocation,
             IEnumerable<string> nonEntryPointDepsPaths,
             IFileSystem fileSystem,
-            Func<IDependencyContextReader> jsonReaderFactory)
-        {
+            Func<IDependencyContextReader> jsonReaderFactory
+        ) {
             _entryPointDepsLocation = entryPointDepsLocation;
             _nonEntryPointDepsPaths = nonEntryPointDepsPaths;
             _fileSystem = fileSystem;
@@ -103,10 +103,16 @@ namespace Microsoft.Extensions.DependencyModel
             return null;
         }
 
-        private DependencyContext LoadAssemblyContext(Assembly assembly, IDependencyContextReader reader)
-        {
-            using (Stream stream = GetResourceStream(assembly, assembly.GetName().Name + DepsJsonExtension))
-            {
+        private DependencyContext LoadAssemblyContext(
+            Assembly assembly,
+            IDependencyContextReader reader
+        ) {
+            using (
+                Stream stream = GetResourceStream(
+                    assembly,
+                    assembly.GetName().Name + DepsJsonExtension
+                )
+            ) {
                 if (stream != null)
                 {
                     return reader.Read(stream);
@@ -143,24 +149,22 @@ namespace Microsoft.Extensions.DependencyModel
                 // in some cases (like .NET Framework shadow copy) the Assembly Location
                 // and CodeBase will be different, so also try the CodeBase
                 string assemblyCodeBase = GetNormalizedCodeBasePath(assembly);
-                if (!string.IsNullOrEmpty(assemblyCodeBase) &&
-                    assemblyLocation != assemblyCodeBase)
+                if (!string.IsNullOrEmpty(assemblyCodeBase) && assemblyLocation != assemblyCodeBase)
                 {
                     depsJsonFile = Path.ChangeExtension(assemblyCodeBase, DepsJsonExtension);
                     depsJsonFileExists = _fileSystem.File.Exists(depsJsonFile);
                 }
             }
 
-            return depsJsonFileExists ?
-                depsJsonFile :
-                null;
+            return depsJsonFileExists ? depsJsonFile : null;
         }
 
         private static string GetNormalizedCodeBasePath(Assembly assembly)
         {
-            if (Uri.TryCreate(assembly.CodeBase, UriKind.Absolute, out Uri codeBase)
-                && codeBase.IsFile)
-            {
+            if (
+                Uri.TryCreate(assembly.CodeBase, UriKind.Absolute, out Uri codeBase)
+                && codeBase.IsFile
+            ) {
                 return codeBase.LocalPath;
             }
             else

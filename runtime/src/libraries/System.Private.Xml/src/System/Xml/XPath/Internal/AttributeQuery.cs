@@ -11,7 +11,12 @@ namespace MS.Internal.Xml.XPath
     {
         private bool _onAttribute;
 
-        public AttributeQuery(Query qyParent, string Name, string Prefix, XPathNodeType Type) : base(qyParent, Name, Prefix, Type) { }
+        public AttributeQuery(
+            Query qyParent,
+            string Name,
+            string Prefix,
+            XPathNodeType Type
+        ) : base(qyParent, Name, Prefix, Type) { }
         private AttributeQuery(AttributeQuery other) : base(other)
         {
             _onAttribute = other._onAttribute;
@@ -71,6 +76,9 @@ namespace MS.Internal.Xml.XPath
             return null;
         }
 
-        public override XPathNodeIterator Clone() { return new AttributeQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new AttributeQuery(this);
+        }
     }
 }

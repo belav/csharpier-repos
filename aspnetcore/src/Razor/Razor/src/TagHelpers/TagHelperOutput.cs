@@ -27,9 +27,9 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             : this(
                 tagName,
                 new TagHelperAttributeList(),
-                (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()))
-        {
-        }
+                (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            ) { }
 
         /// <summary>
         /// Instantiates a new instance of <see cref="TagHelperOutput"/>.
@@ -43,8 +43,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public TagHelperOutput(
             string tagName,
             TagHelperAttributeList attributes,
-            Func<bool, HtmlEncoder, Task<TagHelperContent>> getChildContentAsync)
-        {
+            Func<bool, HtmlEncoder, Task<TagHelperContent>> getChildContentAsync
+        ) {
             if (getChildContentAsync == null)
             {
                 throw new ArgumentNullException(nameof(getChildContentAsync));
@@ -168,10 +168,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// </summary>
         public bool IsContentModified
         {
-            get
-            {
-                return _wasSuppressOutputCalled || _content?.IsModified == true;
-            }
+            get { return _wasSuppressOutputCalled || _content?.IsModified == true; }
         }
 
         /// <summary>
@@ -284,8 +281,10 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// If <c>null</c>, executes children with the page's current <see cref="HtmlEncoder"/>.
         /// </param>
         /// <returns>A <see cref="Task"/> that on completion returns content rendered by children.</returns>
-        public Task<TagHelperContent> GetChildContentAsync(bool useCachedResult, HtmlEncoder encoder)
-        {
+        public Task<TagHelperContent> GetChildContentAsync(
+            bool useCachedResult,
+            HtmlEncoder encoder
+        ) {
             return _getChildContentAsync(useCachedResult, encoder);
         }
 

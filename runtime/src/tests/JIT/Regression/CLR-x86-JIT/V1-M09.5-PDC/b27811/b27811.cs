@@ -11,8 +11,14 @@ namespace Test
         public float[] m_afField1 = new float[16];
         public int m_nField2 = 0;
 
-        public static double[] SomeAlloc(ref int param2) { return null; }
-        public static bool Static4(uint[] param1) { return false; }
+        public static double[] SomeAlloc(ref int param2)
+        {
+            return null;
+        }
+        public static bool Static4(uint[] param1)
+        {
+            return false;
+        }
 
         public static float FailingFunc(ref int param1)
         {

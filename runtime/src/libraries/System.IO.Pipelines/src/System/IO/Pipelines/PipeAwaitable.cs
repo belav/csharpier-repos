@@ -27,8 +27,13 @@ namespace System.IO.Pipelines
 
         public PipeAwaitable(bool completed, bool useSynchronizationContext)
         {
-            _awaitableState = (completed ? AwaitableState.Completed : AwaitableState.None) |
-                              (useSynchronizationContext ? AwaitableState.UseSynchronizationContext : AwaitableState.None);
+            _awaitableState =
+                (completed ? AwaitableState.Completed : AwaitableState.None)
+                | (
+                    useSynchronizationContext
+                        ? AwaitableState.UseSynchronizationContext
+                        : AwaitableState.None
+                );
             _completion = null;
             _completionState = null;
             _cancellationTokenRegistration = default;
@@ -38,13 +43,17 @@ namespace System.IO.Pipelines
 #endif
         }
 
-        public bool IsCompleted => (_awaitableState & (AwaitableState.Completed | AwaitableState.Canceled)) != 0;
+        public bool IsCompleted =>
+            (_awaitableState & (AwaitableState.Completed | AwaitableState.Canceled)) != 0;
 
         public bool IsRunning => (_awaitableState & AwaitableState.Running) != 0;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void BeginOperation(CancellationToken cancellationToken, Action<object?> callback, object? state)
-        {
+        public void BeginOperation(
+            CancellationToken cancellationToken,
+            Action<object?> callback,
+            object? state
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             _awaitableState |= AwaitableState.Running;
@@ -74,15 +83,22 @@ namespace System.IO.Pipelines
             object? currentState = _completionState;
             SchedulingContext? schedulingContext = _schedulingContext;
             ExecutionContext? executionContext = schedulingContext?.ExecutionContext;
-            SynchronizationContext? synchronizationContext = schedulingContext?.SynchronizationContext;
+            SynchronizationContext? synchronizationContext =
+                schedulingContext?.SynchronizationContext;
 
             _completion = null;
             _completionState = null;
             _schedulingContext = null;
 
-            completionData = currentCompletion != null ?
-                new CompletionData(currentCompletion, currentState, executionContext, synchronizationContext) :
-                default;
+            completionData =
+                currentCompletion != null
+                    ? new CompletionData(
+                          currentCompletion,
+                          currentState,
+                          executionContext,
+                          synchronizationContext
+                      )
+                    : default;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -95,14 +111,24 @@ namespace System.IO.Pipelines
             _awaitableState &= ~AwaitableState.Completed;
         }
 
-        public void OnCompleted(Action<object?> continuation, object? state, ValueTaskSourceOnCompletedFlags flags, out CompletionData completionData, out bool doubleCompletion)
-        {
+        public void OnCompleted(
+            Action<object?> continuation,
+            object? state,
+            ValueTaskSourceOnCompletedFlags flags,
+            out CompletionData completionData,
+            out bool doubleCompletion
+        ) {
             completionData = default;
             doubleCompletion = _completion is not null;
 
             if (IsCompleted || doubleCompletion)
             {
-                completionData = new CompletionData(continuation, state, _schedulingContext?.ExecutionContext, _schedulingContext?.SynchronizationContext);
+                completionData = new CompletionData(
+                    continuation,
+                    state,
+                    _schedulingContext?.ExecutionContext,
+                    _schedulingContext?.SynchronizationContext
+                );
                 return;
             }
 
@@ -110,9 +136,10 @@ namespace System.IO.Pipelines
             _completionState = state;
 
             // Capture the SynchronizationContext if there's any and we're allowing capture (from pipe options)
-            if ((_awaitableState & AwaitableState.UseSynchronizationContext) != 0 &&
-                (flags & ValueTaskSourceOnCompletedFlags.UseSchedulingContext) != 0)
-            {
+            if (
+                (_awaitableState & AwaitableState.UseSynchronizationContext) != 0
+                && (flags & ValueTaskSourceOnCompletedFlags.UseSchedulingContext) != 0
+            ) {
                 SynchronizationContext? sc = SynchronizationContext.Current;
                 if (sc != null && sc.GetType() != typeof(SynchronizationContext))
                 {
@@ -152,7 +179,8 @@ namespace System.IO.Pipelines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool ObserveCancellation()
         {
-            bool isCanceled = (_awaitableState & AwaitableState.Canceled) == AwaitableState.Canceled;
+            bool isCanceled =
+                (_awaitableState & AwaitableState.Canceled) == AwaitableState.Canceled;
 
             _awaitableState &= ~(AwaitableState.Canceled | AwaitableState.Running);
 
@@ -160,10 +188,12 @@ namespace System.IO.Pipelines
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CancellationTokenRegistration ReleaseCancellationTokenRegistration(out CancellationToken cancellationToken)
-        {
+        public CancellationTokenRegistration ReleaseCancellationTokenRegistration(
+            out CancellationToken cancellationToken
+        ) {
             cancellationToken = CancellationToken;
-            CancellationTokenRegistration cancellationTokenRegistration = _cancellationTokenRegistration;
+            CancellationTokenRegistration cancellationTokenRegistration =
+                _cancellationTokenRegistration;
 
 #if (NETSTANDARD2_0 || NETFRAMEWORK)
             _cancellationToken = default;

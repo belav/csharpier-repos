@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // try/finally embedded in a try catch with a nonlocal exit to the beginning of try block
-// to make sure that we don't execute the finally unnecessarily 
+// to make sure that we don't execute the finally unnecessarily
 using System;
 
 namespace hello
@@ -36,7 +36,8 @@ namespace hello
             {
                 begintry1:
                 Console.WriteLine("in try1");
-                if (i > 0) goto done;
+                if (i > 0)
+                    goto done;
                 try
                 {
                     if (args.Length == 0)
@@ -45,11 +46,13 @@ namespace hello
                         goto begintry1;
                     }
                 }
+
                 finally
                 {
                     Console.WriteLine("in finally 2");
                 }
             }
+
             finally
             {
                 Console.WriteLine("in finally 1");
@@ -63,7 +66,6 @@ namespace hello
 
             return testLog.VerifyOutput();
         }
-
     }
 }
 

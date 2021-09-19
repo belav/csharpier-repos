@@ -26,21 +26,21 @@ namespace Test
             {
                 float[] local5 = new float[] { 108.0f };
                 {
-                    byte[] local7 = new byte[] { };
+                    byte[] local7 = new byte[] {  };
                     sbyte local8 = App.m_sbFwd3;
                     long local9 = App.m_lFwd1;
                     sbyte[] local10 = (new sbyte[4]);
                     App.m_asbFwd6 = (new sbyte[111]);
                     try
                     {
-                        sbyte[] local11 = new sbyte[] { };
+                        sbyte[] local11 = new sbyte[] {  };
                         throw new Exception();
                     }
                     catch (ArgumentException) { }
                 }
                 {
                     sbyte local7 = App.m_sbFwd3;
-                    String[] local8 = new String[] { };
+                    String[] local8 = new String[] {  };
                     char[] local9 = (new char[81]);
                     BB local10 = new BB();
                     object[] local11 = new object[] { null, null, null, null, null };
@@ -50,7 +50,7 @@ namespace Test
                         sbyte local14 = App.m_sbFwd3;
                         ulong[] local15 = App.m_aulFwd7;
                         //for (new long[]{ local4 }; App.m_bFwd2; ) - not a valid statement, see VS7 #244656.
-                        for (long[] b244656 = new long[] { local4 }; App.m_bFwd2; )
+                        for (long[] b244656 = new long[] { local4 }; App.m_bFwd2;)
                         {
                             int[] local16 = (new int[30]);
                             TestEnum local17 = new TestEnum();
@@ -74,6 +74,7 @@ namespace Test
                         byte[] local13 = App.m_abFwd9;
                         throw new IndexOutOfRangeException();
                     }
+
                     finally
                     {
                         Array[] local7 = App.m_axFwd10;
@@ -106,9 +107,7 @@ namespace Test
                     double local13 = (0.0);
                     throw new NullReferenceException();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
             return 72u;
         }

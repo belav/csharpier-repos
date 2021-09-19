@@ -14,12 +14,10 @@ namespace System.Drawing
         /// right-to-left layout, the near position is right.
         /// </summary>
         Near = 0,
-
         /// <summary>
         /// Specifies that text is aligned in the center of the layout rectangle.
         /// </summary>
         Center = 1,
-
         // right or bottom in English
         /// <summary>
         /// Specifies that text is aligned far from the origin position of the layout rectangle. In a left-to-right

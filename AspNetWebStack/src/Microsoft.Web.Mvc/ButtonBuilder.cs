@@ -10,8 +10,11 @@ namespace Microsoft.Web.Mvc
 {
     public static class ButtonBuilder
     {
-        public static TagBuilder SubmitButton(string name, string buttonText, IDictionary<string, object> htmlAttributes)
-        {
+        public static TagBuilder SubmitButton(
+            string name,
+            string buttonText,
+            IDictionary<string, object> htmlAttributes
+        ) {
             TagBuilder buttonTag = new TagBuilder("input");
 
             buttonTag.MergeAttribute("type", "submit");
@@ -34,9 +37,17 @@ namespace Microsoft.Web.Mvc
             return buttonTag;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "The return value is not a regular URL since it may contain ~/ ASP.NET-specific characters")]
-        public static TagBuilder SubmitImage(string name, string sourceUrl, IDictionary<string, object> htmlAttributes)
-        {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "The return value is not a regular URL since it may contain ~/ ASP.NET-specific characters"
+        )]
+        public static TagBuilder SubmitImage(
+            string name,
+            string sourceUrl,
+            IDictionary<string, object> htmlAttributes
+        ) {
             TagBuilder buttonTag = new TagBuilder("input");
 
             buttonTag.MergeAttribute("type", "image");
@@ -59,9 +70,18 @@ namespace Microsoft.Web.Mvc
             return buttonTag;
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "This conversion is appropriate because it's for HTML, not for comparsion normalization")]
-        public static TagBuilder Button(string name, string buttonText, HtmlButtonType type, string onClickMethod, IDictionary<string, object> htmlAttributes)
-        {
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "This conversion is appropriate because it's for HTML, not for comparsion normalization"
+        )]
+        public static TagBuilder Button(
+            string name,
+            string buttonText,
+            HtmlButtonType type,
+            string onClickMethod,
+            IDictionary<string, object> htmlAttributes
+        ) {
             if (name == null)
             {
                 throw new ArgumentNullException("name");

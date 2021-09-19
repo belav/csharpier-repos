@@ -48,9 +48,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         /// <summary>
         /// Initializes a new instance of <see cref="IdentityResourceBuilder"/>.
         /// </summary>
-        public IdentityResourceBuilder() : this(new IdentityResource())
-        {
-        }
+        public IdentityResourceBuilder() : this(new IdentityResource()) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="IdentityResourceBuilder"/>.
@@ -67,7 +65,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         /// <returns>The <see cref="IdentityResourceBuilder"/>.</returns>
         public IdentityResourceBuilder AllowAllClients()
         {
-            _identityResource.Properties[ApplicationProfilesPropertyNames.Clients] = ApplicationProfilesPropertyValues.AllowAllApplications;
+            _identityResource.Properties[ApplicationProfilesPropertyNames.Clients] =
+                ApplicationProfilesPropertyValues.AllowAllApplications;
             return this;
         }
 
@@ -94,13 +93,15 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
         internal IdentityResourceBuilder FromConfiguration()
         {
-            _identityResource.Properties[ApplicationProfilesPropertyNames.Source] = ApplicationProfilesPropertyValues.Configuration;
+            _identityResource.Properties[ApplicationProfilesPropertyNames.Source] =
+                ApplicationProfilesPropertyValues.Configuration;
             return this;
         }
 
         internal IdentityResourceBuilder FromDefault()
         {
-            _identityResource.Properties[ApplicationProfilesPropertyNames.Source] = ApplicationProfilesPropertyValues.Default;
+            _identityResource.Properties[ApplicationProfilesPropertyNames.Source] =
+                ApplicationProfilesPropertyValues.Default;
             return this;
         }
 

@@ -12,12 +12,10 @@ namespace Microsoft.AspNet.Facebook
         /// User granted permission.
         /// </summary>
         Granted,
-
         /// <summary>
         /// User declined permission.
         /// </summary>
         Declined,
-
         /// <summary>
         /// Unknown status of a permission.
         /// </summary>

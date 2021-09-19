@@ -18,33 +18,42 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
     internal class DelegatePropagator<TInput, TOutput> : IPropagatorBlock<TInput, TOutput>
     {
-        public delegate TOutput ConsumeMessageFunc(DataflowMessageHeader messageHeader, ITargetBlock<TOutput> target, out bool messageConsumed);
+        public delegate TOutput ConsumeMessageFunc(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<TOutput> target,
+            out bool messageConsumed
+        );
 
-        public Func<DataflowMessageHeader, TInput, ISourceBlock<TInput>, bool, DataflowMessageStatus> OfferMessageDelegate = null;
+        public Func<
+            DataflowMessageHeader,
+            TInput,
+            ISourceBlock<TInput>,
+            bool,
+            DataflowMessageStatus
+        > OfferMessageDelegate = null;
         public Func<Task> CompletionDelegate = null;
         public Action CompleteDelegate = null;
         public Action<Exception> FaultDelegate = null;
         public Func<ITargetBlock<TOutput>, DataflowLinkOptions, IDisposable> LinkToDelegate = null;
         public ConsumeMessageFunc ConsumeMessageDelegate = null;
-        public Func<DataflowMessageHeader, ITargetBlock<TOutput>, bool> ReserveMessageDelegate = null;
+        public Func<DataflowMessageHeader, ITargetBlock<TOutput>, bool> ReserveMessageDelegate =
+            null;
         public Action<DataflowMessageHeader, ITargetBlock<TOutput>> ReleaseMessageDelegate = null;
 
         public DataflowMessageStatus OfferMessage(
-            DataflowMessageHeader messageHeader, TInput messageValue, ISourceBlock<TInput> source, bool consumeToAccept)
-        {
-            return OfferMessageDelegate != null ?
-                OfferMessageDelegate(messageHeader, messageValue, source, consumeToAccept) :
-                DataflowMessageStatus.Accepted;
+            DataflowMessageHeader messageHeader,
+            TInput messageValue,
+            ISourceBlock<TInput> source,
+            bool consumeToAccept
+        ) {
+            return OfferMessageDelegate != null
+                ? OfferMessageDelegate(messageHeader, messageValue, source, consumeToAccept)
+                : DataflowMessageStatus.Accepted;
         }
 
         public Task Completion
         {
-            get
-            {
-                return CompletionDelegate != null ?
-                    CompletionDelegate() :
-                    null;
-            }
+            get { return CompletionDelegate != null ? CompletionDelegate() : null; }
         }
 
         public void Complete()
@@ -61,34 +70,43 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
         public IDisposable LinkTo(ITargetBlock<TOutput> target, DataflowLinkOptions linkOptions)
         {
-            return LinkToDelegate != null ?
-                LinkToDelegate(target, linkOptions) :
-                new DelegateDisposable();
+            return LinkToDelegate != null
+                ? LinkToDelegate(target, linkOptions)
+                : new DelegateDisposable();
         }
 
-        public TOutput ConsumeMessage(DataflowMessageHeader messageHeader, ITargetBlock<TOutput> target, out bool messageConsumed)
-        {
+        public TOutput ConsumeMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<TOutput> target,
+            out bool messageConsumed
+        ) {
             messageConsumed = false;
-            return ConsumeMessageDelegate != null ?
-                ConsumeMessageDelegate(messageHeader, target, out messageConsumed) :
-                default(TOutput);
+            return ConsumeMessageDelegate != null
+                ? ConsumeMessageDelegate(messageHeader, target, out messageConsumed)
+                : default(TOutput);
         }
 
-        public bool ReserveMessage(DataflowMessageHeader messageHeader, ITargetBlock<TOutput> target)
-        {
-            return ReserveMessageDelegate != null ?
-                ReserveMessageDelegate(messageHeader, target) :
-                true;
+        public bool ReserveMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<TOutput> target
+        ) {
+            return ReserveMessageDelegate != null
+                ? ReserveMessageDelegate(messageHeader, target)
+                : true;
         }
 
-        public void ReleaseReservation(DataflowMessageHeader messageHeader, ITargetBlock<TOutput> target)
-        {
+        public void ReleaseReservation(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<TOutput> target
+        ) {
             if (ReleaseMessageDelegate != null)
                 ReleaseMessageDelegate(messageHeader, target);
         }
     }
 
-    internal sealed class DelegateReceivablePropagator<TInput, TOutput> : DelegatePropagator<TInput, TOutput>, IReceivableSourceBlock<TOutput>
+    internal sealed class DelegateReceivablePropagator<TInput, TOutput>
+        : DelegatePropagator<TInput, TOutput>,
+          IReceivableSourceBlock<TOutput>
     {
         public delegate bool TryReceiveFunc(Predicate<TOutput> filter, out TOutput item);
         public delegate bool TryReceiveAllFunc(out IList<TOutput> items);
@@ -148,9 +166,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
         IDisposable IObservable<T>.Subscribe(IObserver<T> observer)
         {
-            return SubscribeDelegate != null ?
-                SubscribeDelegate(observer) :
-                null;
+            return SubscribeDelegate != null ? SubscribeDelegate(observer) : null;
         }
     }
 
@@ -167,11 +183,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
         protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
         {
-            return TryExecuteTaskInlineDelegate != null ?
-                TryExecuteTaskInlineDelegate(task, taskWasPreviouslyQueued) :
-                false;
+            return TryExecuteTaskInlineDelegate != null
+                ? TryExecuteTaskInlineDelegate(task, taskWasPreviouslyQueued)
+                : false;
         }
 
-        protected override Collections.Generic.IEnumerable<Task> GetScheduledTasks() { return null; }
+        protected override Collections.Generic.IEnumerable<Task> GetScheduledTasks()
+        {
+            return null;
+        }
     }
 }

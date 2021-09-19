@@ -36,8 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 }
 
                 var symbol = _semanticModel.GetSymbolInfo(name).Symbol;
-                return symbol != null
-                    && symbol.Equals(_localSymbol);
+                return symbol != null && symbol.Equals(_localSymbol);
             }
 
             public override SyntaxNode VisitAssignmentExpression(AssignmentExpressionSyntax node)
@@ -51,9 +50,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                     // identifier standing alone, and we know we're in a local's initializer.
                     // The text can only bind to the initializer.
                     var assignment = (AssignmentExpressionSyntax)newNode;
-                    var name = assignment.Left.Kind() == SyntaxKind.IdentifierName
-                        ? (IdentifierNameSyntax)assignment.Left
-                        : null;
+                    var name =
+                        assignment.Left.Kind() == SyntaxKind.IdentifierName
+                            ? (IdentifierNameSyntax)assignment.Left
+                            : null;
 
                     if (name != null && IsReference(name))
                     {
@@ -70,10 +70,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 {
                     if (node.Parent is AssignmentExpressionSyntax assignmentExpression)
                     {
-                        if (assignmentExpression.IsCompoundAssignExpression() &&
-                            assignmentExpression.Left == node)
-                        {
-                            return node.Update(node.Identifier.WithAdditionalAnnotations(CreateConflictAnnotation()));
+                        if (
+                            assignmentExpression.IsCompoundAssignExpression()
+                            && assignmentExpression.Left == node
+                        ) {
+                            return node.Update(
+                                node.Identifier.WithAdditionalAnnotations(
+                                    CreateConflictAnnotation()
+                                )
+                            );
                         }
                     }
                 }
@@ -81,8 +86,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 return base.VisitIdentifierName(node);
             }
 
-            public override SyntaxNode VisitParenthesizedExpression(ParenthesizedExpressionSyntax node)
-            {
+            public override SyntaxNode VisitParenthesizedExpression(
+                ParenthesizedExpressionSyntax node
+            ) {
                 var newNode = base.VisitParenthesizedExpression(node);
 
                 if (node != newNode && newNode.Kind() == SyntaxKind.ParenthesizedExpression)
@@ -93,8 +99,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 return newNode;
             }
 
-            public static ExpressionSyntax Visit(ExpressionSyntax initializer, ILocalSymbol local, SemanticModel semanticModel)
-            {
+            public static ExpressionSyntax Visit(
+                ExpressionSyntax initializer,
+                ILocalSymbol local,
+                SemanticModel semanticModel
+            ) {
                 var simplifier = new InitializerRewriter(local, semanticModel);
                 return (ExpressionSyntax)simplifier.Visit(initializer);
             }

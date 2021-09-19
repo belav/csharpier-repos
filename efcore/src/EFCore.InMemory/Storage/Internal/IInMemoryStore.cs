@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         bool EnsureCreated(
             IUpdateAdapterFactory updateAdapterFactory,
             IModel designModel,
-            IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger);
+            IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -50,7 +51,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        InMemoryIntegerValueGenerator<TProperty> GetIntegerValueGenerator<TProperty>(IProperty property);
+        InMemoryIntegerValueGenerator<TProperty> GetIntegerValueGenerator<TProperty>(
+            IProperty property
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,6 +63,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
         /// </summary>
         int ExecuteTransaction(
             IList<IUpdateEntry> entries,
-            IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger);
+            IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
+        );
     }
 }

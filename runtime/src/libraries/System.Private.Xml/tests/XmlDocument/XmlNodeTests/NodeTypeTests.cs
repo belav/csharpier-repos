@@ -56,7 +56,6 @@ namespace System.Xml.Tests
             Assert.Equal(XmlNodeType.Text, item.NodeType);
         }
 
-
         [Fact]
         public static void CDataNodeTypeTest()
         {

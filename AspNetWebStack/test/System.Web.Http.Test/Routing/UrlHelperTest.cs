@@ -17,12 +17,12 @@ namespace System.Web.Http.Routing
             {
                 return new TheoryDataSet<string, int?, string>()
                 {
-                    { null, 456, "/somerootpath/people/456"}, // Just override ID, so ID is replaced
-                    { "people", 456, "/somerootpath/people/456"}, // Just override ID, so ID is replaced
-                    { null, null, "/somerootpath/people/123"}, // Override nothing, so everything the same
-                    { "people", null, "/somerootpath/people/123"}, // Override nothing, so everything the same
-                    { "customers", 456, "/somerootpath/customers/456"}, // Override everything, so everything changed
-                    { "customers", null, null}, // Override controller, which clears out the ID, so it doesn't match (i.e. null)
+                    { null, 456, "/somerootpath/people/456" }, // Just override ID, so ID is replaced
+                    { "people", 456, "/somerootpath/people/456" }, // Just override ID, so ID is replaced
+                    { null, null, "/somerootpath/people/123" }, // Override nothing, so everything the same
+                    { "people", null, "/somerootpath/people/123" }, // Override nothing, so everything the same
+                    { "customers", 456, "/somerootpath/customers/456" }, // Override everything, so everything changed
+                    { "customers", null, null }, // Override controller, which clears out the ID, so it doesn't match (i.e. null)
                 };
             }
         }
@@ -49,15 +49,16 @@ namespace System.Web.Http.Routing
         [Fact]
         public void UrlHelper_CtorThrows_WithNullContext()
         {
-            Assert.ThrowsArgumentNull(
-                () => new UrlHelper(null),
-                "request");
+            Assert.ThrowsArgumentNull(() => new UrlHelper(null), "request");
         }
 
         [Theory]
         [PropertyData("UrlGeneratorTestData")]
-        public void UrlHelper_UsesCurrentRouteDataToPopulateValues_WithObjectValues(string controller, int? id, string expectedUrl)
-        {
+        public void UrlHelper_UsesCurrentRouteDataToPopulateValues_WithObjectValues(
+            string controller,
+            int? id,
+            string expectedUrl
+        ) {
             var url = GetUrlHelperForApi();
             object routeValues = GetRouteValuesAsObject(controller, id);
 
@@ -68,8 +69,11 @@ namespace System.Web.Http.Routing
 
         [Theory]
         [PropertyData("UrlGeneratorTestData")]
-        public void UrlHelper_UsesCurrentRouteDataToPopulateValues_WithDictionaryValues(string controller, int? id, string expectedUrl)
-        {
+        public void UrlHelper_UsesCurrentRouteDataToPopulateValues_WithDictionaryValues(
+            string controller,
+            int? id,
+            string expectedUrl
+        ) {
             var url = GetUrlHelperForApi();
             Dictionary<string, object> routeValues = GetRouteValuesAsDictionary(controller, id);
 
@@ -85,7 +89,8 @@ namespace System.Web.Http.Routing
             Assert.ThrowsArgument(
                 () => url.Route("route-doesn't-exist", null),
                 "name",
-                "A route named 'route-doesn't-exist' could not be found in the route collection.");
+                "A route named 'route-doesn't-exist' could not be found in the route collection."
+            );
         }
 
         [Fact]
@@ -95,15 +100,23 @@ namespace System.Web.Http.Routing
             Assert.ThrowsArgument(
                 () => url.Route("route-doesn't-exist", (IDictionary<string, object>)null),
                 "name",
-                "A route named 'route-doesn't-exist' could not be found in the route collection.");
+                "A route named 'route-doesn't-exist' could not be found in the route collection."
+            );
         }
 
         [Theory]
         [TestDataSet(
-            typeof(UrlHelperTest), "UrlGeneratorTestData",
-            typeof(UrlHelperTest), "RequestUrlTestData")]
-        public void UrlHelper_LinkGeneration_GeneratesRightLinksWithDictionary(string controller, int? id, string expectedUrl, string requestUrl)
-        {
+            typeof(UrlHelperTest),
+            "UrlGeneratorTestData",
+            typeof(UrlHelperTest),
+            "RequestUrlTestData"
+        )]
+        public void UrlHelper_LinkGeneration_GeneratesRightLinksWithDictionary(
+            string controller,
+            int? id,
+            string expectedUrl,
+            string requestUrl
+        ) {
             var urlHelper = GetUrlHelperForApi();
             urlHelper.Request.RequestUri = new Uri(requestUrl);
             Dictionary<string, object> routeValues = GetRouteValuesAsDictionary(controller, id);
@@ -116,10 +129,17 @@ namespace System.Web.Http.Routing
 
         [Theory]
         [TestDataSet(
-            typeof(UrlHelperTest), "UrlGeneratorTestData",
-            typeof(UrlHelperTest), "RequestUrlTestData")]
-        public void UrlHelper_LinkGeneration_GeneratesRightLinksWithObject(string controller, int? id, string expectedUrl, string requestUrl)
-        {
+            typeof(UrlHelperTest),
+            "UrlGeneratorTestData",
+            typeof(UrlHelperTest),
+            "RequestUrlTestData"
+        )]
+        public void UrlHelper_LinkGeneration_GeneratesRightLinksWithObject(
+            string controller,
+            int? id,
+            string expectedUrl,
+            string requestUrl
+        ) {
             var urlHelper = GetUrlHelperForApi();
             urlHelper.Request.Method = HttpMethod.Get;
             urlHelper.Request.RequestUri = new Uri(requestUrl);
@@ -166,10 +186,7 @@ namespace System.Web.Http.Routing
         {
             // Arrange
             var request = new HttpRequestMessage();
-            request.SetRequestContext(new HttpRequestContext
-            {
-                VirtualPathRoot = "/AppPath"
-            });
+            request.SetRequestContext(new HttpRequestContext { VirtualPathRoot = "/AppPath" });
             request.RequestUri = new Uri("http://contoso.com/AppPath/api/Products");
             var urlHelper = new UrlHelper(request);
 
@@ -219,8 +236,13 @@ namespace System.Web.Http.Routing
             // Set up routes
             var routes = new HttpRouteCollection("/somerootpath");
             IHttpRoute route = routes.MapHttpRoute("route1", "{controller}/{id}");
-            request.Properties[HttpPropertyKeys.HttpConfigurationKey] = new HttpConfiguration(routes);
-            request.Properties[HttpPropertyKeys.HttpRouteDataKey] = new HttpRouteData(route, new HttpRouteValueDictionary(new { controller = "people", id = "123" }));
+            request.Properties[HttpPropertyKeys.HttpConfigurationKey] = new HttpConfiguration(
+                routes
+            );
+            request.Properties[HttpPropertyKeys.HttpRouteDataKey] = new HttpRouteData(
+                route,
+                new HttpRouteValueDictionary(new { controller = "people", id = "123" })
+            );
 
             return new UrlHelper(request);
         }
@@ -254,8 +276,10 @@ namespace System.Web.Http.Routing
             return routeValues;
         }
 
-        private static Dictionary<string, object> GetRouteValuesAsDictionary(string controller, int? id)
-        {
+        private static Dictionary<string, object> GetRouteValuesAsDictionary(
+            string controller,
+            int? id
+        ) {
             Dictionary<string, object> routeValues = new Dictionary<string, object>();
             if (controller == null)
             {

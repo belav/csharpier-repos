@@ -8,11 +8,16 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class GlobalAuthorizationFilterEndpointRoutingTest : GlobalAuthorizationFilterTestBase, IClassFixture<MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilter>>
+    public class GlobalAuthorizationFilterEndpointRoutingTest
+        : GlobalAuthorizationFilterTestBase,
+          IClassFixture<MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilter>>
     {
-        public GlobalAuthorizationFilterEndpointRoutingTest(MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilter> fixture)
-        {
-            Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        public GlobalAuthorizationFilterEndpointRoutingTest(
+            MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilter> fixture
+        ) {
+            Factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = Factory.CreateDefaultClient();
         }
 

@@ -24,7 +24,8 @@ internal class Test
 {
     public static int Main()
     {
-        int i, j;
+        int i,
+            j;
         IFoo inst = new Foo();
         GenDelegate<int> MyDelegate = new GenDelegate<int>(inst.Function<int>);
         i = MyDelegate(10, out j);

@@ -11,10 +11,17 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_create_the_proxy_once()
         {
-            var tasks = Enumerable.Range(0, 5).Select(i => Task.Factory.StartNew(() =>
-            {
-                ProxyGenerator.GetProxyType(typeof(ISomeDto));
-            })).ToArray();
+            var tasks = Enumerable.Range(0, 5)
+                .Select(
+                    i =>
+                        Task.Factory.StartNew(
+                            () =>
+                            {
+                                ProxyGenerator.GetProxyType(typeof(ISomeDto));
+                            }
+                        )
+                )
+                .ToArray();
             Task.WaitAll(tasks);
         }
 
@@ -32,6 +39,5 @@ namespace AutoMapper.UnitTests
             string Property10 { get; set; }
             string Property11 { get; set; }
         }
-
     }
 }

@@ -15,9 +15,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public virtual int Order => 0;
 
         /// <inheritdoc />
-        public virtual void Init(TagHelperContext context)
-        {
-        }
+        public virtual void Init(TagHelperContext context) { }
 
         /// <summary>
         /// Synchronously executes the <see cref="ITagHelperComponent"/> with the given <paramref name="context"/> and
@@ -25,9 +23,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// </summary>
         /// <param name="context">Contains information associated with the current HTML tag.</param>
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
-        public virtual void Process(TagHelperContext context, TagHelperOutput output)
-        {
-        }
+        public virtual void Process(TagHelperContext context, TagHelperOutput output) { }
 
         /// <inheritdoc />
         public virtual Task ProcessAsync(TagHelperContext context, TagHelperOutput output)

@@ -25,14 +25,20 @@ namespace System.Collections.Immutable.Tests
             this.EnumeratorTestHelper(emptyMap);
         }
 
-        internal override IBinaryTree GetRootNode<TKey, TValue>(IImmutableDictionary<TKey, TValue> dictionary)
-        {
+        internal override IBinaryTree GetRootNode<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> dictionary
+        ) {
             return ((ImmutableDictionary<TKey, TValue>)dictionary).Root;
         }
 
-        private void EmptyTestHelperHash<TKey, TValue>(IImmutableDictionary<TKey, TValue> empty, TKey someKey)
-        {
-            Assert.Same(EqualityComparer<TKey>.Default, ((IHashKeyCollection<TKey>)empty).KeyComparer);
+        private void EmptyTestHelperHash<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> empty,
+            TKey someKey
+        ) {
+            Assert.Same(
+                EqualityComparer<TKey>.Default,
+                ((IHashKeyCollection<TKey>)empty).KeyComparer
+            );
         }
     }
 }

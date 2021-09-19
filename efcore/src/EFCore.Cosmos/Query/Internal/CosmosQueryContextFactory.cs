@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public CosmosQueryContextFactory(
             QueryContextDependencies dependencies,
-            ICosmosClientWrapper cosmosClient)
-        {
+            ICosmosClientWrapper cosmosClient
+        ) {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(cosmosClient, nameof(cosmosClient));
 
@@ -41,7 +41,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual QueryContext Create()
-            => new CosmosQueryContext(_dependencies, _cosmosClient);
+        public virtual QueryContext Create() =>
+            new CosmosQueryContext(_dependencies, _cosmosClient);
     }
 }

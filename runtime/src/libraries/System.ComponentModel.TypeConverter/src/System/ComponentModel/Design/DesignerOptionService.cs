@@ -20,7 +20,9 @@ namespace System.ComponentModel.Design
         /// </summary>
         public DesignerOptionCollection Options
         {
-            get => _options ?? (_options = new DesignerOptionCollection(this, null, string.Empty, null));
+            get =>
+                _options
+                ?? (_options = new DesignerOptionCollection(this, null, string.Empty, null));
         }
 
         /// <summary>
@@ -32,8 +34,11 @@ namespace System.ComponentModel.Design
         /// anything into the component parameter of the property descriptor will be
         /// ignored and the value object will be substituted.
         /// </summary>
-        protected DesignerOptionCollection CreateOptionCollection(DesignerOptionCollection parent, string name, object value)
-        {
+        protected DesignerOptionCollection CreateOptionCollection(
+            DesignerOptionCollection parent,
+            string name,
+            object value
+        ) {
             if (parent == null)
             {
                 throw new ArgumentNullException(nameof(parent));
@@ -46,7 +51,10 @@ namespace System.ComponentModel.Design
 
             if (name.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.InvalidArgumentValue, "name.Length"), nameof(name));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidArgumentValue, "name.Length"),
+                    nameof(name)
+                );
             }
 
             return new DesignerOptionCollection(this, parent, name, value);
@@ -56,7 +64,9 @@ namespace System.ComponentModel.Design
         /// Retrieves the property descriptor for the given page / value name. Returns
         /// null if the property couldn't be found.
         /// </summary>
-        [RequiresUnreferencedCode("The Type of DesignerOptionCollection's value cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of DesignerOptionCollection's value cannot be statically discovered."
+        )]
         private PropertyDescriptor GetOptionProperty(string pageName, string valueName)
         {
             if (pageName == null)
@@ -88,14 +98,13 @@ namespace System.ComponentModel.Design
         /// This method is called on demand the first time a user asks for child
         /// options or properties of an options collection.
         /// </summary>
-        protected virtual void PopulateOptionCollection(DesignerOptionCollection options)
-        {
-        }
+        protected virtual void PopulateOptionCollection(DesignerOptionCollection options) { }
 
         /// <summary>
         /// This method must be implemented to show the options dialog UI for the given object.
         /// </summary>
-        protected virtual bool ShowDialog(DesignerOptionCollection options, object optionObject) => false;
+        protected virtual bool ShowDialog(DesignerOptionCollection options, object optionObject) =>
+            false;
 
         /// <summary>
         /// Gets the value of an option defined in this package.
@@ -125,7 +134,10 @@ namespace System.ComponentModel.Design
         /// properties if all the branch's children.
         /// </summary>
         [TypeConverter(typeof(DesignerOptionConverter))]
-        [Editor("", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         public sealed class DesignerOptionCollection : IList
         {
             private readonly DesignerOptionService _service;
@@ -136,8 +148,12 @@ namespace System.ComponentModel.Design
             /// <summary>
             /// Creates a new DesignerOptionCollection.
             /// </summary>
-            internal DesignerOptionCollection(DesignerOptionService service, DesignerOptionCollection parent, string name, object value)
-            {
+            internal DesignerOptionCollection(
+                DesignerOptionService service,
+                DesignerOptionCollection parent,
+                string name,
+                object value
+            ) {
                 _service = service;
                 Parent = parent;
                 Name = name;
@@ -188,7 +204,9 @@ namespace System.ComponentModel.Design
             /// </summary>
             public PropertyDescriptorCollection Properties
             {
-                [RequiresUnreferencedCode("The Type of DesignerOptionCollection's value cannot be statically discovered.")]
+                [RequiresUnreferencedCode(
+                    "The Type of DesignerOptionCollection's value cannot be statically discovered."
+                )]
                 get
                 {
                     if (_properties == null)
@@ -197,7 +215,9 @@ namespace System.ComponentModel.Design
 
                         if (_value != null)
                         {
-                            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(_value);
+                            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(
+                                _value
+                            );
                             propList = new ArrayList(props.Count);
                             foreach (PropertyDescriptor prop in props)
                             {
@@ -215,7 +235,9 @@ namespace System.ComponentModel.Design
                             propList.AddRange(child.Properties);
                         }
 
-                        PropertyDescriptor[] propArray = (PropertyDescriptor[])propList.ToArray(typeof(PropertyDescriptor));
+                        PropertyDescriptor[] propArray = (PropertyDescriptor[])propList.ToArray(
+                            typeof(PropertyDescriptor)
+                        );
                         _properties = new PropertyDescriptorCollection(propArray, true);
                     }
 
@@ -250,8 +272,10 @@ namespace System.ComponentModel.Design
                     EnsurePopulated();
                     foreach (DesignerOptionCollection child in _children)
                     {
-                        if (string.Compare(child.Name, name, true, CultureInfo.InvariantCulture) == 0)
-                        {
+                        if (
+                            string.Compare(child.Name, name, true, CultureInfo.InvariantCulture)
+                            == 0
+                        ) {
                             return child;
                         }
                     }
@@ -421,7 +445,10 @@ namespace System.ComponentModel.Design
                 private readonly object _target;
                 private readonly PropertyDescriptor _property;
 
-                internal WrappedPropertyDescriptor(PropertyDescriptor property, object target) : base(property.Name, null)
+                internal WrappedPropertyDescriptor(
+                    PropertyDescriptor property,
+                    object target
+                ) : base(property.Name, null)
                 {
                     _property = property;
                     _target = target;
@@ -435,15 +462,18 @@ namespace System.ComponentModel.Design
 
                 public override Type PropertyType => _property.PropertyType;
 
-                public override bool CanResetValue(object component) => _property.CanResetValue(_target);
+                public override bool CanResetValue(object component) =>
+                    _property.CanResetValue(_target);
 
                 public override object GetValue(object component) => _property.GetValue(_target);
 
                 public override void ResetValue(object component) => _property.ResetValue(_target);
 
-                public override void SetValue(object component, object value) => _property.SetValue(_target, value);
+                public override void SetValue(object component, object value) =>
+                    _property.SetValue(_target, value);
 
-                public override bool ShouldSerializeValue(object component) => _property.ShouldSerializeValue(_target);
+                public override bool ShouldSerializeValue(object component) =>
+                    _property.ShouldSerializeValue(_target);
             }
         }
 
@@ -454,9 +484,15 @@ namespace System.ComponentModel.Design
         {
             public override bool GetPropertiesSupported(ITypeDescriptorContext cxt) => true;
 
-            [RequiresUnreferencedCode("The Type of value cannot be statically discovered. " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
-            public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext cxt, object value, Attribute[] attributes)
-            {
+            [RequiresUnreferencedCode(
+                "The Type of value cannot be statically discovered. "
+                    + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+            )]
+            public override PropertyDescriptorCollection GetProperties(
+                ITypeDescriptorContext cxt,
+                object value,
+                Attribute[] attributes
+            ) {
                 PropertyDescriptorCollection props = new PropertyDescriptorCollection(null);
                 if (!(value is DesignerOptionCollection options))
                 {
@@ -475,8 +511,12 @@ namespace System.ComponentModel.Design
                 return props;
             }
 
-            public override object ConvertTo(ITypeDescriptorContext cxt, CultureInfo culture, object value, Type destinationType)
-            {
+            public override object ConvertTo(
+                ITypeDescriptorContext cxt,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            ) {
                 if (destinationType == typeof(string))
                 {
                     return SR.CollectionConverterText;
@@ -488,7 +528,8 @@ namespace System.ComponentModel.Design
             {
                 private readonly DesignerOptionCollection _option;
 
-                internal OptionPropertyDescriptor(DesignerOptionCollection option) : base(option.Name, null)
+                internal OptionPropertyDescriptor(DesignerOptionCollection option)
+                    : base(option.Name, null)
                 {
                     _option = option;
                 }
@@ -503,13 +544,9 @@ namespace System.ComponentModel.Design
 
                 public override object GetValue(object component) => _option;
 
-                public override void ResetValue(object component)
-                {
-                }
+                public override void ResetValue(object component) { }
 
-                public override void SetValue(object component, object value)
-                {
-                }
+                public override void SetValue(object component, object value) { }
 
                 public override bool ShouldSerializeValue(object component) => false;
             }

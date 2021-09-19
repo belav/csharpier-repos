@@ -11,35 +11,41 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.UseConditionalExpression
 {
-    internal abstract class AbstractUseConditionalExpressionDiagnosticAnalyzer<
-        TIfStatementSyntax>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
-        where TIfStatementSyntax : SyntaxNode
+    internal abstract class AbstractUseConditionalExpressionDiagnosticAnalyzer<TIfStatementSyntax>
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer where TIfStatementSyntax : SyntaxNode
     {
         private readonly PerLanguageOption2<CodeStyleOption2<bool>> _option;
 
-        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected AbstractUseConditionalExpressionDiagnosticAnalyzer(
             string descriptorId,
             EnforceOnBuild enforceOnBuild,
             LocalizableResourceString message,
-            PerLanguageOption2<CodeStyleOption2<bool>> option)
-            : base(descriptorId,
-                   enforceOnBuild,
-                   option,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Convert_to_conditional_expression), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   message)
-        {
+            PerLanguageOption2<CodeStyleOption2<bool>> option
+        ) : base(
+            descriptorId,
+            enforceOnBuild,
+            option,
+            new LocalizableResourceString(
+                nameof(AnalyzersResources.Convert_to_conditional_expression),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            ),
+            message
+        ) {
             _option = option;
         }
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
-        protected abstract bool TryMatchPattern(IConditionalOperation ifOperation, ISymbol containingSymbol);
+        protected abstract bool TryMatchPattern(
+            IConditionalOperation ifOperation,
+            ISymbol containingSymbol
+        );
 
-        protected sealed override void InitializeWorker(AnalysisContext context)
-            => context.RegisterOperationAction(AnalyzeOperation, OperationKind.Conditional);
+        protected sealed override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterOperationAction(AnalyzeOperation, OperationKind.Conditional);
 
         private void AnalyzeOperation(OperationAnalysisContext context)
         {
@@ -63,12 +69,15 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             }
 
             var additionalLocations = ImmutableArray.Create(ifStatement.GetLocation());
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                ifStatement.GetFirstToken().GetLocation(),
-                option.Notification.Severity,
-                additionalLocations,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    ifStatement.GetFirstToken().GetLocation(),
+                    option.Notification.Severity,
+                    additionalLocations,
+                    properties: null
+                )
+            );
         }
     }
 }

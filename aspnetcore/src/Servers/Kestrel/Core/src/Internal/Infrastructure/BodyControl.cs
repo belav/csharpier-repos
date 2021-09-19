@@ -12,8 +12,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 {
     internal class BodyControl
     {
-        private static readonly ThrowingWasUpgradedWriteOnlyStream _throwingResponseStream
-            = new ThrowingWasUpgradedWriteOnlyStream();
+        private static readonly ThrowingWasUpgradedWriteOnlyStream _throwingResponseStream =
+            new ThrowingWasUpgradedWriteOnlyStream();
         private readonly HttpResponseStream _response;
         private readonly HttpResponsePipeWriter _responseWriter;
         private readonly HttpRequestPipeReader _requestReader;
@@ -23,8 +23,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private readonly HttpRequestStream _emptyRequest;
         private readonly Stream _upgradeStream;
 
-        public BodyControl(IHttpBodyControlFeature bodyControl, IHttpResponseControl responseControl)
-        {
+        public BodyControl(
+            IHttpBodyControlFeature bodyControl,
+            IHttpResponseControl responseControl
+        ) {
             _requestReader = new HttpRequestPipeReader();
             _request = new HttpRequestStream(bodyControl, _requestReader);
             _emptyRequestReader = new HttpRequestPipeReader();
@@ -46,8 +48,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             return _upgradeStream;
         }
 
-        public (Stream request, Stream response, PipeReader reader, PipeWriter writer) Start(MessageBody body)
-        {
+        public (Stream request, Stream response, PipeReader reader, PipeWriter writer) Start(
+            MessageBody body
+        ) {
             CanHaveBody = !body.IsEmpty;
             _requestReader.StartAcceptingReads(body);
             _emptyRequestReader.StartAcceptingReads(MessageBody.ZeroContentLengthClose);

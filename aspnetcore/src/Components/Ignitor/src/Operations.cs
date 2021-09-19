@@ -8,15 +8,18 @@ namespace Ignitor
 {
     public sealed class Operations
     {
-        public ConcurrentQueue<CapturedAttachComponentCall> AttachComponent { get; } = new ConcurrentQueue<CapturedAttachComponentCall>();
+        public ConcurrentQueue<CapturedAttachComponentCall> AttachComponent { get; } =
+            new ConcurrentQueue<CapturedAttachComponentCall>();
 
-        public ConcurrentQueue<CapturedRenderBatch> Batches { get; } = new ConcurrentQueue<CapturedRenderBatch>();
+        public ConcurrentQueue<CapturedRenderBatch> Batches { get; } =
+            new ConcurrentQueue<CapturedRenderBatch>();
 
         public ConcurrentQueue<string> DotNetCompletions { get; } = new ConcurrentQueue<string>();
 
         public ConcurrentQueue<string> Errors { get; } = new ConcurrentQueue<string>();
 
-        public ConcurrentQueue<CapturedJSInteropCall> JSInteropCalls { get; } = new ConcurrentQueue<CapturedJSInteropCall>();
+        public ConcurrentQueue<CapturedJSInteropCall> JSInteropCalls { get; } =
+            new ConcurrentQueue<CapturedJSInteropCall>();
     }
 }
 #nullable restore

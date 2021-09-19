@@ -52,8 +52,14 @@ namespace System.Security.Cryptography
         {
             byte[] target = new byte[length];
 
-            if (value.TryWriteBytes(target, out int bytesWritten, isUnsigned: true, isBigEndian: true))
-            {
+            if (
+                value.TryWriteBytes(
+                    target,
+                    out int bytesWritten,
+                    isUnsigned: true,
+                    isBigEndian: true
+                )
+            ) {
                 if (bytesWritten < length)
                 {
                     Buffer.BlockCopy(target, 0, target, length - bytesWritten, bytesWritten);
@@ -66,8 +72,10 @@ namespace System.Security.Cryptography
             throw new CryptographicException(SR.Cryptography_NotValidPublicOrPrivateKey);
         }
 
-        internal static void WriteKeyParameterInteger(this AsnWriter writer, ReadOnlySpan<byte> integer)
-        {
+        internal static void WriteKeyParameterInteger(
+            this AsnWriter writer,
+            ReadOnlySpan<byte> integer
+        ) {
             Debug.Assert(!integer.IsEmpty);
 
             if (integer[0] == 0)

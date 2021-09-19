@@ -31,7 +31,8 @@ namespace System.CodeDom
 
         public CodeAttributeDeclarationCollection CustomAttributes
         {
-            get => _customAttributes ?? (_customAttributes = new CodeAttributeDeclarationCollection());
+            get =>
+                _customAttributes ?? (_customAttributes = new CodeAttributeDeclarationCollection());
             set => _customAttributes = value;
         }
 

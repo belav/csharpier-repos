@@ -34,7 +34,9 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             if (Engine == null)
             {
-                throw new InvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(Engine)));
+                throw new InvalidOperationException(
+                    Resources.FormatPhaseMustBeInitialized(nameof(Engine))
+                );
             }
 
             ExecuteCore(codeDocument);
@@ -44,7 +46,9 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             if (Engine == null)
             {
-                throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(Engine)));
+                throw new InvalidOperationException(
+                    Resources.FormatFeatureMustBeInitialized(nameof(Engine))
+                );
             }
 
             var feature = Engine.Features.OfType<T>().FirstOrDefault();
@@ -53,15 +57,18 @@ namespace Microsoft.AspNetCore.Razor.Language
             return feature;
         }
 
-        protected void ThrowForMissingDocumentDependency<TDocumentDependency>(TDocumentDependency value)
-        {
+        protected void ThrowForMissingDocumentDependency<TDocumentDependency>(
+            TDocumentDependency value
+        ) {
             if (value == null)
             {
                 throw new InvalidOperationException(
                     Resources.FormatPhaseDependencyMissing(
                         GetType().Name,
                         typeof(TDocumentDependency).Name,
-                        typeof(RazorCodeDocument).Name));
+                        typeof(RazorCodeDocument).Name
+                    )
+                );
             }
         }
 
@@ -73,13 +80,13 @@ namespace Microsoft.AspNetCore.Razor.Language
                     Resources.FormatPhaseDependencyMissing(
                         GetType().Name,
                         typeof(TEngineDependency).Name,
-                        typeof(RazorEngine).Name));
+                        typeof(RazorEngine).Name
+                    )
+                );
             }
         }
 
-        protected virtual void OnIntialized()
-        {
-        }
+        protected virtual void OnIntialized() { }
 
         protected abstract void ExecuteCore(RazorCodeDocument codeDocument);
     }

@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CompletionSourceProvider(
             IThreadingContext threadingContext,
-            Lazy<IStreamingFindUsagesPresenter> streamingPresenter)
-        {
+            Lazy<IStreamingFindUsagesPresenter> streamingPresenter
+        ) {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
         }

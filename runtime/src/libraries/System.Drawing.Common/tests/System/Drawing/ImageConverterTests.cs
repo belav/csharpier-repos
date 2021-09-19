@@ -9,7 +9,12 @@ using Xunit;
 
 namespace System.ComponentModel.TypeConverterTests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34755", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34755",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class ImageConverterTest
     {
         private readonly Image _image;
@@ -70,7 +75,10 @@ namespace System.ComponentModel.TypeConverterTests
         {
             Assert.True(_imgConv.CanConvertFrom(typeof(byte[])), "byte[] (no context)");
             Assert.True(_imgConv.CanConvertFrom(null, typeof(byte[])), "byte[]");
-            Assert.True(_imgConv.CanConvertFrom(null, _imageBytes.GetType()), "_imageBytes.GetType()");
+            Assert.True(
+                _imgConv.CanConvertFrom(null, _imageBytes.GetType()),
+                "_imageBytes.GetType()"
+            );
             Assert.True(_imgConv.CanConvertFrom(typeof(Icon)), "Icon (no context)");
             Assert.True(_imgConv.CanConvertFrom(null, typeof(Icon)), "Icon");
             Assert.False(_imgConv.CanConvertFrom(null, typeof(string)), "string");
@@ -85,7 +93,10 @@ namespace System.ComponentModel.TypeConverterTests
 
             Assert.True(_imgConvFrmTD.CanConvertFrom(typeof(byte[])), "TD byte[] (no context)");
             Assert.True(_imgConvFrmTD.CanConvertFrom(null, typeof(byte[])), "TD byte[]");
-            Assert.True(_imgConvFrmTD.CanConvertFrom(null, _imageBytes.GetType()), "TD _imageBytes.GetType()");
+            Assert.True(
+                _imgConvFrmTD.CanConvertFrom(null, _imageBytes.GetType()),
+                "TD _imageBytes.GetType()"
+            );
             Assert.False(_imgConvFrmTD.CanConvertFrom(null, typeof(string)), "TD string");
             Assert.False(_imgConvFrmTD.CanConvertFrom(null, typeof(Rectangle)), "TD Rectangle");
             Assert.False(_imgConvFrmTD.CanConvertFrom(null, typeof(Point)), "TD Point");
@@ -105,7 +116,10 @@ namespace System.ComponentModel.TypeConverterTests
             Assert.True(_imgConv.CanConvertTo(null, _imageStr.GetType()), "_imageStr.GetType()");
             Assert.True(_imgConv.CanConvertTo(typeof(byte[])), "byte[] (no context)");
             Assert.True(_imgConv.CanConvertTo(null, typeof(byte[])), "byte[]");
-            Assert.True(_imgConv.CanConvertTo(null, _imageBytes.GetType()), "_imageBytes.GetType()");
+            Assert.True(
+                _imgConv.CanConvertTo(null, _imageBytes.GetType()),
+                "_imageBytes.GetType()"
+            );
             Assert.False(_imgConv.CanConvertTo(null, typeof(Rectangle)), "Rectangle");
             Assert.False(_imgConv.CanConvertTo(null, typeof(Point)), "Point");
             Assert.False(_imgConv.CanConvertTo(null, typeof(PointF)), "PointF");
@@ -116,10 +130,16 @@ namespace System.ComponentModel.TypeConverterTests
 
             Assert.True(_imgConvFrmTD.CanConvertTo(typeof(string)), "TD string (no context)");
             Assert.True(_imgConvFrmTD.CanConvertTo(null, typeof(string)), "TD string");
-            Assert.True(_imgConvFrmTD.CanConvertTo(null, _imageStr.GetType()), "TD _imageStr.GetType()");
+            Assert.True(
+                _imgConvFrmTD.CanConvertTo(null, _imageStr.GetType()),
+                "TD _imageStr.GetType()"
+            );
             Assert.True(_imgConvFrmTD.CanConvertTo(typeof(byte[])), "TD byte[] (no context)");
             Assert.True(_imgConvFrmTD.CanConvertTo(null, typeof(byte[])), "TD byte[]");
-            Assert.True(_imgConvFrmTD.CanConvertTo(null, _imageBytes.GetType()), "TD _imageBytes.GetType()");
+            Assert.True(
+                _imgConvFrmTD.CanConvertTo(null, _imageBytes.GetType()),
+                "TD _imageBytes.GetType()"
+            );
             Assert.False(_imgConvFrmTD.CanConvertTo(null, typeof(Rectangle)), "TD Rectangle");
             Assert.False(_imgConvFrmTD.CanConvertTo(null, typeof(Point)), "TD Point");
             Assert.False(_imgConvFrmTD.CanConvertTo(null, typeof(PointF)), "TD PointF");
@@ -132,14 +152,25 @@ namespace System.ComponentModel.TypeConverterTests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ConvertFrom()
         {
-            Image newImage = (Image)_imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, _imageBytes);
+            Image newImage = (Image)_imgConv.ConvertFrom(
+                null,
+                CultureInfo.InvariantCulture,
+                _imageBytes
+            );
 
             Assert.Equal(_image.Height, newImage.Height);
             Assert.Equal(_image.Width, newImage.Width);
 
-            Assert.Equal("(none)", _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, null, typeof(string)));
+            Assert.Equal(
+                "(none)",
+                _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, null, typeof(string))
+            );
 
-            newImage = (Image)_imgConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, _imageBytes);
+            newImage = (Image)_imgConvFrmTD.ConvertFrom(
+                null,
+                CultureInfo.InvariantCulture,
+                _imageBytes
+            );
 
             Assert.Equal(_image.Height, newImage.Height);
             Assert.Equal(_image.Width, newImage.Width);
@@ -148,37 +179,104 @@ namespace System.ComponentModel.TypeConverterTests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ConvertFrom_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertFrom("System.Drawing.String"));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, "System.Drawing.String"));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, new Bitmap(20, 20)));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, new Point(10, 10)));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, new SizeF(10, 10)));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, new object()));
+            Assert.Throws<NotSupportedException>(
+                () => _imgConv.ConvertFrom("System.Drawing.String")
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConv.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        "System.Drawing.String"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, new Bitmap(20, 20))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, new Point(10, 10))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, new SizeF(10, 10))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgConv.ConvertFrom(null, CultureInfo.InvariantCulture, new object())
+            );
 
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertFrom("System.Drawing.String"));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, "System.Drawing.String"));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new Bitmap(20, 20)));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new Point(10, 10)));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new SizeF(10, 10)));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new object()));
+            Assert.Throws<NotSupportedException>(
+                () => _imgConvFrmTD.ConvertFrom("System.Drawing.String")
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        "System.Drawing.String"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        new Bitmap(20, 20)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new Point(10, 10))
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new SizeF(10, 10))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new object())
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ConvertTo_String()
         {
-            Assert.Equal(_imageStr, (string)_imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(string)));
+            Assert.Equal(
+                _imageStr,
+                (string)_imgConv.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    _image,
+                    typeof(string)
+                )
+            );
             Assert.Equal(_imageStr, (string)_imgConv.ConvertTo(_image, typeof(string)));
-            Assert.Equal(_imageStr, (string)_imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(string)));
+            Assert.Equal(
+                _imageStr,
+                (string)_imgConvFrmTD.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    _image,
+                    typeof(string)
+                )
+            );
             Assert.Equal(_imageStr, (string)_imgConvFrmTD.ConvertTo(_image, typeof(string)));
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ConvertTo_ByteArray()
         {
-            byte[] newImageBytes = (byte[])_imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, _imageBytes.GetType());
+            byte[] newImageBytes = (byte[])_imgConv.ConvertTo(
+                null,
+                CultureInfo.InvariantCulture,
+                _image,
+                _imageBytes.GetType()
+            );
             Assert.Equal(_imageBytes, newImageBytes);
 
-            newImageBytes = (byte[])_imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, _imageBytes.GetType());
+            newImageBytes = (byte[])_imgConvFrmTD.ConvertTo(
+                null,
+                CultureInfo.InvariantCulture,
+                _image,
+                _imageBytes.GetType()
+            );
             Assert.Equal(_imageBytes, newImageBytes);
 
             newImageBytes = (byte[])_imgConvFrmTD.ConvertTo(_image, _imageBytes.GetType());
@@ -197,23 +295,106 @@ namespace System.ComponentModel.TypeConverterTests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ConvertTo_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Rectangle)));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, _image.GetType()));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Size)));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Bitmap)));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Point)));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Metafile)));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(object)));
-            Assert.Throws<NotSupportedException>(() => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(int)));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConv.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _image,
+                        typeof(Rectangle)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, _image.GetType())
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Size))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Bitmap))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Point))
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Metafile))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(object))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _imgConv.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(int))
+            );
 
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Rectangle)));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, _image.GetType()));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Size)));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Bitmap)));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Point)));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(Metafile)));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(object)));
-            Assert.Throws<NotSupportedException>(() => _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(int)));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _image,
+                        typeof(Rectangle)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _image,
+                        _image.GetType()
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _image,
+                        typeof(Size)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _image,
+                        typeof(Bitmap)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _image,
+                        typeof(Point)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _image,
+                        typeof(Metafile)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _image,
+                        typeof(object)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _imgConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _image, typeof(int))
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -240,7 +421,6 @@ namespace System.ComponentModel.TypeConverterTests
             Assert.Equal(browsablePropertiesCount, propsColl.Count);
             propsColl = _imgConv.GetProperties(_image);
             Assert.Equal(browsablePropertiesCount, propsColl.Count);
-
 
             // Returns all properties of Image class.
             propsColl = TypeDescriptor.GetProperties(typeof(Image));

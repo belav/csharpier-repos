@@ -9,26 +9,26 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class SqliteNTSApiConsistencyTest : ApiConsistencyTestBase<SqliteNTSApiConsistencyTest.SqliteNTSApiConsistencyFixture>
+    public class SqliteNTSApiConsistencyTest
+        : ApiConsistencyTestBase<SqliteNTSApiConsistencyTest.SqliteNTSApiConsistencyFixture>
     {
-        public SqliteNTSApiConsistencyTest(SqliteNTSApiConsistencyFixture fixture)
-            : base(fixture)
-        {
-        }
+        public SqliteNTSApiConsistencyTest(SqliteNTSApiConsistencyFixture fixture) : base(fixture)
+        { }
 
-        protected override void AddServices(ServiceCollection serviceCollection)
-            => serviceCollection.AddEntityFrameworkSqliteNetTopologySuite();
+        protected override void AddServices(ServiceCollection serviceCollection) =>
+            serviceCollection.AddEntityFrameworkSqliteNetTopologySuite();
 
-        protected override Assembly TargetAssembly
-            => typeof(SqliteNetTopologySuiteServiceCollectionExtensions).Assembly;
+        protected override Assembly TargetAssembly =>
+            typeof(SqliteNetTopologySuiteServiceCollectionExtensions).Assembly;
 
         public class SqliteNTSApiConsistencyFixture : ApiConsistencyFixtureBase
         {
-            public override HashSet<Type> FluentApiTypes { get; } = new()
-            {
-                typeof(SqliteNetTopologySuiteDbContextOptionsBuilderExtensions),
-                typeof(SqliteNetTopologySuiteServiceCollectionExtensions)
-            };
+            public override HashSet<Type> FluentApiTypes { get; } =
+                new()
+                {
+                    typeof(SqliteNetTopologySuiteDbContextOptionsBuilderExtensions),
+                    typeof(SqliteNetTopologySuiteServiceCollectionExtensions)
+                };
         }
     }
 }

@@ -7,7 +7,11 @@ using Xunit;
 
 namespace Microsoft.Extensions.Options.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49568",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public class OptionsFactoryTest
     {
         [Fact]
@@ -171,9 +175,11 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanCreateOptionsFactory()
         {
-            var factory = new OptionsFactory<FakeOptions>(new IConfigureOptions<FakeOptions>[0],
-                new IPostConfigureOptions<FakeOptions>[] { });
-            
+            var factory = new OptionsFactory<FakeOptions>(
+                new IConfigureOptions<FakeOptions>[0],
+                new IPostConfigureOptions<FakeOptions>[] {  }
+            );
+
             Assert.Equal("", factory.Create("").Message);
         }
 
@@ -220,12 +226,13 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanValidateOptionsWithConfigureOptions()
         {
-            var factory = new ServiceCollection()
-                .ConfigureOptions<FakeOptionsValidation>()
+            var factory = new ServiceCollection().ConfigureOptions<FakeOptionsValidation>()
                 .BuildServiceProvider()
                 .GetRequiredService<IOptionsFactory<FakeOptions>>();
 
-            var ex = Assert.Throws<OptionsValidationException>(() => factory.Create(Options.DefaultName));
+            var ex = Assert.Throws<OptionsValidationException>(
+                () => factory.Create(Options.DefaultName)
+            );
             var message = Assert.Single(ex.Failures);
             Assert.Equal("Hello world", message);
         }
@@ -233,8 +240,7 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void ValidateOptionsChecksNullWithConfigureOptions()
         {
-            var factory = new ServiceCollection()
-                .ConfigureOptions<FakeOptionsValidationNull>()
+            var factory = new ServiceCollection().ConfigureOptions<FakeOptionsValidationNull>()
                 .BuildServiceProvider()
                 .GetRequiredService<IOptionsFactory<FakeOptions>>();
 
@@ -242,28 +248,26 @@ namespace Microsoft.Extensions.Options.Tests
         }
 
         public class UberSetup
-            : IConfigureNamedOptions<FakeOptions>
-            , IConfigureNamedOptions<FakeOptions2>
-            , IPostConfigureOptions<FakeOptions>
-            , IPostConfigureOptions<FakeOptions2>
-            , IValidateOptions<FakeOptions>
-            , IValidateOptions<FakeOptions2>
+            : IConfigureNamedOptions<FakeOptions>,
+              IConfigureNamedOptions<FakeOptions2>,
+              IPostConfigureOptions<FakeOptions>,
+              IPostConfigureOptions<FakeOptions2>,
+              IValidateOptions<FakeOptions>,
+              IValidateOptions<FakeOptions2>
         {
-            public void Configure(string name, FakeOptions options)
-                => options.Message += "[" + name;
+            public void Configure(string name, FakeOptions options) =>
+                options.Message += "[" + name;
 
             public void Configure(FakeOptions options) => Configure(Options.DefaultName, options);
 
-            public void Configure(string name, FakeOptions2 options)
-                => options.Message += "[[" + name;
+            public void Configure(string name, FakeOptions2 options) =>
+                options.Message += "[[" + name;
 
             public void Configure(FakeOptions2 options) => Configure(Options.DefaultName, options);
 
-            public void PostConfigure(string name, FakeOptions options)
-                => options.Message += "]";
+            public void PostConfigure(string name, FakeOptions options) => options.Message += "]";
 
-            public void PostConfigure(string name, FakeOptions2 options)
-                => options.Message += "]]";
+            public void PostConfigure(string name, FakeOptions2 options) => options.Message += "]]";
 
             public ValidateOptionsResult Validate(string name, FakeOptions options)
             {
@@ -319,7 +323,9 @@ namespace Microsoft.Extensions.Options.Tests
             services.ConfigureOptions<UberSetup>();
             services.Configure<FakeOptions>("#1", o => o.Message += "#");
             services.PostConfigureAll<FakeOptions2>(o => o.Message += "|");
-            services.ConfigureOptions(new PostConfigureOptions<FakeOptions>("override", o => o.Message = "override"));
+            services.ConfigureOptions(
+                new PostConfigureOptions<FakeOptions>("override", o => o.Message = "override")
+            );
             services.PostConfigure<FakeOptions>("end", o => o.Message += "_");
             services.ConfigureOptions(new ValidateOptions<FakeOptions>("fail", o => false, "fail"));
 
@@ -356,16 +362,26 @@ namespace Microsoft.Extensions.Options.Tests
         {
             var services = new ServiceCollection();
             Action<FakeOptions> act = o => o.Message = "whatev";
-            var error = Assert.Throws<InvalidOperationException>(() => services.ConfigureOptions(act));
-            Assert.Equal("No IConfigureOptions<>, IPostConfigureOptions<>, or IValidateOptions<> implementations were found, did you mean to call Configure<> or PostConfigure<>?", error.Message);
+            var error = Assert.Throws<InvalidOperationException>(
+                () => services.ConfigureOptions(act)
+            );
+            Assert.Equal(
+                "No IConfigureOptions<>, IPostConfigureOptions<>, or IValidateOptions<> implementations were found, did you mean to call Configure<> or PostConfigure<>?",
+                error.Message
+            );
         }
 
         [Fact]
         public void ConfigureOptionsThrowsIfNothingFound()
         {
             var services = new ServiceCollection();
-            var error = Assert.Throws<InvalidOperationException>(() => services.ConfigureOptions(new object()));
-            Assert.Equal("No IConfigureOptions<>, IPostConfigureOptions<>, or IValidateOptions<> implementations were found.", error.Message);
+            var error = Assert.Throws<InvalidOperationException>(
+                () => services.ConfigureOptions(new object())
+            );
+            Assert.Equal(
+                "No IConfigureOptions<>, IPostConfigureOptions<>, or IValidateOptions<> implementations were found.",
+                error.Message
+            );
         }
     }
 }

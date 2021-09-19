@@ -22,8 +22,10 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             _policyFactory = policyFactory;
         }
 
-        public override RoutePattern SubstituteRequiredValues(RoutePattern original, object requiredValues)
-        {
+        public override RoutePattern SubstituteRequiredValues(
+            RoutePattern original,
+            object requiredValues
+        ) {
             if (original == null)
             {
                 throw new ArgumentNullException(nameof(original));
@@ -32,8 +34,10 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             return SubstituteRequiredValuesCore(original, new RouteValueDictionary(requiredValues));
         }
 
-        private RoutePattern SubstituteRequiredValuesCore(RoutePattern original, RouteValueDictionary requiredValues)
-        {
+        private RoutePattern SubstituteRequiredValuesCore(
+            RoutePattern original,
+            RouteValueDictionary requiredValues
+        ) {
             // Process each required value in sequence. Bail if we find any rejection criteria. The goal
             // of rejection is to avoid creating RoutePattern instances that can't *ever* match.
             //
@@ -65,15 +69,15 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                         // Ex: {controller=Home}/{action=Index}/{id?} - with required values: { controller = "" }
                         return null;
                     }
-                    else if (original.Defaults.TryGetValue(kvp.Key, out var defaultValue) &&
-                        !RouteValueEqualityComparer.Default.Equals(kvp.Value, defaultValue))
-                    {
+                    else if (
+                        original.Defaults.TryGetValue(kvp.Key, out var defaultValue)
+                        && !RouteValueEqualityComparer.Default.Equals(kvp.Value, defaultValue)
+                    ) {
                         // Fail: this route has a non-parameter default that doesn't match.
                         //
                         // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" } - with required values: { area = "" }
                         return null;
                     }
-
                     // Success: (for this parameter at least)
                     //
                     // Ex: {controller=Home}/{action=Index}/{id?} - with required values: { area = "", ... }
@@ -83,16 +87,16 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                 {
                     // 2. Required value is *any* - this is allowed for a parameter with a default, but not
                     // a non-parameter default.
-                    if (original.GetParameter(kvp.Key) == null &&
-                        original.Defaults.TryGetValue(kvp.Key, out var defaultValue) &&
-                        !RouteValueEqualityComparer.Default.Equals(string.Empty, defaultValue))
-                    {
+                    if (
+                        original.GetParameter(kvp.Key) == null
+                        && original.Defaults.TryGetValue(kvp.Key, out var defaultValue)
+                        && !RouteValueEqualityComparer.Default.Equals(string.Empty, defaultValue)
+                    ) {
                         // Fail: this route as a non-parameter default that is stricter than *any*.
                         //
                         // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" } - with required values: { area = *any* }
                         return null;
                     }
-
                     // Success: (for this parameter at least)
                     //
                     // Ex: {controller=Home}/{action=Index}/{id?} - with required values: { controller = *any*, ... }
@@ -109,15 +113,15 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                         // Ex: Admin/{controller:regex(Home|Login)}/{action=Index}/{id?} - with required values: { controller = "Store" }
                         return null;
                     }
-
                     // Success: (for this parameter at least)
                     //
                     // Ex: {area}/{controller=Home}/{action=Index}/{id?} - with required values: { area = "", ... }
                     continue;
                 }
-                else if (original.Defaults.TryGetValue(kvp.Key, out var defaultValue) &&
-                    RouteValueEqualityComparer.Default.Equals(kvp.Value, defaultValue))
-                {
+                else if (
+                    original.Defaults.TryGetValue(kvp.Key, out var defaultValue)
+                    && RouteValueEqualityComparer.Default.Equals(kvp.Value, defaultValue)
+                ) {
                     // 4. Required value corresponds to a matching default value - check to make sure that this value matches
                     // any IRouteConstraint implementations. It's unlikely that this would happen in practice but it doesn't
                     // hurt for us to check.
@@ -125,14 +129,13 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                     {
                         // Fail: this route has a constraint that failed.
                         //
-                        // Ex: 
-                        //  Admin/Home/{action=Index}/{id?} 
+                        // Ex:
+                        //  Admin/Home/{action=Index}/{id?}
                         //  defaults: { area = "Admin" }
                         //  constraints: { area = "Blog" }
                         //  with required values: { area = "Admin" }
                         return null;
                     }
-
                     // Success: (for this parameter at least)
                     //
                     // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" }- with required values: { area = "Admin", ... }
@@ -166,16 +169,22 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                 // other cases.
                 //
                 // If the required value is *any* then don't remove the default.
-                if (parameter != null &&
-                    !RoutePattern.IsRequiredValueAny(kvp.Value) &&
-                    original.Defaults.TryGetValue(kvp.Key, out var defaultValue) && 
-                    !RouteValueEqualityComparer.Default.Equals(kvp.Value, defaultValue))
-                {
-                    if (updatedDefaults == null && updatedSegments == null && updatedParameters == null)
-                    {
+                if (
+                    parameter != null
+                    && !RoutePattern.IsRequiredValueAny(kvp.Value)
+                    && original.Defaults.TryGetValue(kvp.Key, out var defaultValue)
+                    && !RouteValueEqualityComparer.Default.Equals(kvp.Value, defaultValue)
+                ) {
+                    if (
+                        updatedDefaults == null
+                        && updatedSegments == null
+                        && updatedParameters == null
+                    ) {
                         updatedDefaults = new RouteValueDictionary(original.Defaults);
                         updatedSegments = new List<RoutePatternPathSegment>(original.PathSegments);
-                        updatedParameters = new List<RoutePatternParameterPart>(original.Parameters);
+                        updatedParameters = new List<RoutePatternParameterPart>(
+                            original.Parameters
+                        );
                     }
 
                     updatedDefaults.Remove(kvp.Key);
@@ -194,11 +203,16 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                 original.ParameterPolicies,
                 requiredValues,
                 updatedParameters ?? original.Parameters,
-                updatedSegments ?? original.PathSegments);
+                updatedSegments ?? original.PathSegments
+            );
         }
 
-        private bool MatchesConstraints(RoutePattern pattern, RoutePatternParameterPart parameter, string key, RouteValueDictionary requiredValues)
-        {
+        private bool MatchesConstraints(
+            RoutePattern pattern,
+            RoutePatternParameterPart parameter,
+            string key,
+            RouteValueDictionary requiredValues
+        ) {
             if (pattern.ParameterPolicies.TryGetValue(key, out var policies))
             {
                 for (var i = 0; i < policies.Count; i++)
@@ -206,8 +220,15 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                     var policy = _policyFactory.Create(parameter, policies[i]);
                     if (policy is IRouteConstraint constraint)
                     {
-                        if (!constraint.Match(httpContext: null, NullRouter.Instance, key, requiredValues, RouteDirection.IncomingRequest))
-                        {
+                        if (
+                            !constraint.Match(
+                                httpContext: null,
+                                NullRouter.Instance,
+                                key,
+                                requiredValues,
+                                RouteDirection.IncomingRequest
+                            )
+                        ) {
                             return false;
                         }
                     }
@@ -217,8 +238,11 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             return true;
         }
 
-        private void RemoveParameterDefault(List<RoutePatternPathSegment> segments, List<RoutePatternParameterPart> parameters, RoutePatternParameterPart parameter)
-        {
+        private void RemoveParameterDefault(
+            List<RoutePatternPathSegment> segments,
+            List<RoutePatternParameterPart> parameters,
+            RoutePatternParameterPart parameter
+        ) {
             // We know that a parameter can only appear once, so we only need to rewrite one segment and one parameter.
             for (var i = 0; i < segments.Count; i++)
             {
@@ -228,7 +252,12 @@ namespace Microsoft.AspNetCore.Routing.Patterns
                     if (object.ReferenceEquals(parameter, segment.Parts[j]))
                     {
                         // Found it!
-                        var updatedParameter = RoutePatternFactory.ParameterPart(parameter.Name, @default: null, parameter.ParameterKind, parameter.ParameterPolicies);
+                        var updatedParameter = RoutePatternFactory.ParameterPart(
+                            parameter.Name,
+                            @default: null,
+                            parameter.ParameterKind,
+                            parameter.ParameterPolicies
+                        );
 
                         var updatedParts = new List<RoutePatternPart>(segment.Parts);
                         updatedParts[j] = updatedParameter;

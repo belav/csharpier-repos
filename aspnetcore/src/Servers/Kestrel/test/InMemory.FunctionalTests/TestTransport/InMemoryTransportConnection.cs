@@ -15,21 +15,38 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
 {
     internal class InMemoryTransportConnection : TransportConnection
     {
-        private readonly CancellationTokenSource _connectionClosedTokenSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource _connectionClosedTokenSource =
+            new CancellationTokenSource();
 
         private readonly ILogger _logger;
         private bool _isClosed;
-        private readonly TaskCompletionSource _waitForCloseTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _waitForCloseTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        public InMemoryTransportConnection(MemoryPool<byte> memoryPool, ILogger logger, PipeScheduler scheduler = null)
-        {
+        public InMemoryTransportConnection(
+            MemoryPool<byte> memoryPool,
+            ILogger logger,
+            PipeScheduler scheduler = null
+        ) {
             MemoryPool = memoryPool;
             _logger = logger;
 
             LocalEndPoint = new IPEndPoint(IPAddress.Loopback, 0);
             RemoteEndPoint = new IPEndPoint(IPAddress.Loopback, 0);
 
-            var pair = DuplexPipe.CreateConnectionPair(new PipeOptions(memoryPool, readerScheduler: scheduler, useSynchronizationContext: false), new PipeOptions(memoryPool, writerScheduler: scheduler, useSynchronizationContext: false));
+            var pair = DuplexPipe.CreateConnectionPair(
+                new PipeOptions(
+                    memoryPool,
+                    readerScheduler: scheduler,
+                    useSynchronizationContext: false
+                ),
+                new PipeOptions(
+                    memoryPool,
+                    writerScheduler: scheduler,
+                    useSynchronizationContext: false
+                )
+            );
             Application = pair.Application;
             var wrapper = new ObservableDuplexPipe(pair.Transport);
             Transport = wrapper;
@@ -52,7 +69,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
 
         public override void Abort(ConnectionAbortedException abortReason)
         {
-            _logger.LogDebug(@"Connection id ""{ConnectionId}"" closing because: ""{Message}""", ConnectionId, abortReason?.Message);
+            _logger.LogDebug(
+                @"Connection id ""{ConnectionId}"" closing because: ""{Message}""",
+                ConnectionId,
+                abortReason?.Message
+            );
 
             Input.Complete(abortReason);
 
@@ -70,14 +91,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
 
             _isClosed = true;
 
-            ThreadPool.UnsafeQueueUserWorkItem(state =>
-            {
-                state._connectionClosedTokenSource.Cancel();
+            ThreadPool.UnsafeQueueUserWorkItem(
+                state =>
+                {
+                    state._connectionClosedTokenSource.Cancel();
 
-                state._waitForCloseTcs.TrySetResult();
-            },
-            this,
-            preferLocal: false);
+                    state._waitForCloseTcs.TrySetResult();
+                },
+                this,
+                preferLocal: false
+            );
         }
 
         public override async ValueTask DisposeAsync()
@@ -103,7 +126,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
 
                 Input = _reader;
                 Output = duplexPipe.Output;
-
             }
 
             public Task WaitForReadTask => _reader.WaitForReadTask;
@@ -115,7 +137,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
             private class ObservablePipeReader : PipeReader
             {
                 private readonly PipeReader _reader;
-                private readonly TaskCompletionSource _tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                private readonly TaskCompletionSource _tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
                 public Task WaitForReadTask => _tcs.Task;
 
@@ -144,8 +168,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                     _reader.Complete(exception);
                 }
 
-                public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
-                {
+                public override ValueTask<ReadResult> ReadAsync(
+                    CancellationToken cancellationToken = default
+                ) {
                     var task = _reader.ReadAsync(cancellationToken);
 
                     if (_tcs.Task.IsCompleted)
@@ -153,7 +178,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                         return task;
                     }
 
-                    return new ValueTask<ReadResult>(new ObservableValueTask<ReadResult>(task, _tcs), 0);
+                    return new ValueTask<ReadResult>(
+                        new ObservableValueTask<ReadResult>(task, _tcs),
+                        0
+                    );
                 }
 
                 public override bool TryRead(out ReadResult result)
@@ -194,8 +222,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTrans
                         return ValueTaskSourceStatus.Pending;
                     }
 
-                    public void OnCompleted(Action<object> continuation, object state, short token, ValueTaskSourceOnCompletedFlags flags)
-                    {
+                    public void OnCompleted(
+                        Action<object> continuation,
+                        object state,
+                        short token,
+                        ValueTaskSourceOnCompletedFlags flags
+                    ) {
                         _task.GetAwaiter().UnsafeOnCompleted(() => continuation(state));
 
                         _tcs.TrySetResult();

@@ -14,19 +14,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
     {
         private readonly IEditorFormatMap _editorFormatMap;
 
-        public EditorFormatMapChangedEventSource(IEditorFormatMap editorFormatMap, TaggerDelay delay)
-            : base(delay)
+        public EditorFormatMapChangedEventSource(
+            IEditorFormatMap editorFormatMap,
+            TaggerDelay delay
+        ) : base(delay)
         {
             _editorFormatMap = editorFormatMap;
         }
 
-        public override void Connect()
-            => _editorFormatMap.FormatMappingChanged += OnEditorFormatMapChanged;
+        public override void Connect() =>
+            _editorFormatMap.FormatMappingChanged += OnEditorFormatMapChanged;
 
-        public override void Disconnect()
-            => _editorFormatMap.FormatMappingChanged -= OnEditorFormatMapChanged;
+        public override void Disconnect() =>
+            _editorFormatMap.FormatMappingChanged -= OnEditorFormatMapChanged;
 
-        private void OnEditorFormatMapChanged(object sender, FormatItemsEventArgs e)
-            => this.RaiseChanged();
+        private void OnEditorFormatMapChanged(object sender, FormatItemsEventArgs e) =>
+            this.RaiseChanged();
     }
 }

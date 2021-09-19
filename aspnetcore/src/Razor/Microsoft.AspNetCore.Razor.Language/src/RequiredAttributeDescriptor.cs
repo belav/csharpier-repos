@@ -29,7 +29,9 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             get
             {
-                var errors = Diagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
+                var errors = Diagnostics.Any(
+                    diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error
+                );
 
                 return errors;
             }
@@ -64,7 +66,6 @@ namespace Microsoft.AspNetCore.Razor.Language
             /// HTML attribute name case insensitively matches <see cref="RequiredAttributeDescriptor.Name"/>.
             /// </summary>
             FullMatch,
-
             /// <summary>
             /// HTML attribute name case insensitively starts with <see cref="RequiredAttributeDescriptor.Name"/>.
             /// </summary>
@@ -80,17 +81,14 @@ namespace Microsoft.AspNetCore.Razor.Language
             /// HTML attribute value always matches <see cref="RequiredAttributeDescriptor.Value"/>.
             /// </summary>
             None,
-
             /// <summary>
             /// HTML attribute value case sensitively matches <see cref="RequiredAttributeDescriptor.Value"/>.
             /// </summary>
             FullMatch,
-
             /// <summary>
             /// HTML attribute value case sensitively starts with <see cref="RequiredAttributeDescriptor.Value"/>.
             /// </summary>
             PrefixMatch,
-
             /// <summary>
             /// HTML attribute value case sensitively ends with <see cref="RequiredAttributeDescriptor.Value"/>.
             /// </summary>

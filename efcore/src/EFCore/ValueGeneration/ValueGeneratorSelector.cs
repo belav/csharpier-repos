@@ -30,8 +30,7 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <summary>
         ///     The cache being used to store value generator instances.
         /// </summary>
-        public virtual IValueGeneratorCache Cache
-            => Dependencies.Cache;
+        public virtual IValueGeneratorCache Cache => Dependencies.Cache;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ValueGeneratorSelector" /> class.
@@ -63,7 +62,11 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
             Check.NotNull(property, nameof(property));
             Check.NotNull(entityType, nameof(entityType));
 
-            return Cache.GetOrAdd(property, entityType, (p, t) => CreateFromFactory(p, t) ?? Create(p, t));
+            return Cache.GetOrAdd(
+                property,
+                entityType,
+                (p, t) => CreateFromFactory(p, t) ?? Create(p, t)
+            );
         }
 
         private static ValueGenerator? CreateFromFactory(IProperty property, IEntityType entityType)
@@ -85,7 +88,9 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                             CoreStrings.ValueGenWithConversion(
                                 property.DeclaringEntityType.DisplayName(),
                                 property.Name,
-                                converter.GetType().ShortDisplayName()));
+                                converter.GetType().ShortDisplayName()
+                            )
+                        );
                     }
                 }
             }
@@ -125,7 +130,12 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
             }
 
             throw new NotSupportedException(
-                CoreStrings.NoValueGenerator(property.Name, property.DeclaringEntityType.DisplayName(), propertyType.ShortDisplayName()));
+                CoreStrings.NoValueGenerator(
+                    property.Name,
+                    property.DeclaringEntityType.DisplayName(),
+                    propertyType.ShortDisplayName()
+                )
+            );
         }
     }
 }

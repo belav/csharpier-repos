@@ -34,8 +34,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             return ModuleMetadata.CreateFromStream(fileStream, options);
         }
 
-        private ImmutableArray<ModuleMetadata> GetAllModules(ModuleMetadata manifestModule, string assemblyDir)
-        {
+        private ImmutableArray<ModuleMetadata> GetAllModules(
+            ModuleMetadata manifestModule,
+            string assemblyDir
+        ) {
             ArrayBuilder<ModuleMetadata>? moduleBuilder = null;
 
             foreach (string moduleName in manifestModule.GetModuleNames())
@@ -46,11 +48,16 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     moduleBuilder.Add(manifestModule);
                 }
 
-                var module = CreateModuleMetadata(PathUtilities.CombineAbsoluteAndRelativePaths(assemblyDir, moduleName)!, prefetchEntireImage: false);
+                var module = CreateModuleMetadata(
+                    PathUtilities.CombineAbsoluteAndRelativePaths(assemblyDir, moduleName)!,
+                    prefetchEntireImage: false
+                );
                 moduleBuilder.Add(module);
             }
 
-            return (moduleBuilder != null) ? moduleBuilder.ToImmutableAndFree() : ImmutableArray.Create(manifestModule);
+            return (moduleBuilder != null)
+                ? moduleBuilder.ToImmutableAndFree()
+                : ImmutableArray.Create(manifestModule);
         }
 
         internal Metadata GetMetadata(string fullPath, MetadataReferenceProperties properties)
@@ -59,8 +66,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             FileKey? fileKey = GetUniqueFileKey(fullPath);
 
             Metadata? metadata;
-            if (fileKey.HasValue && _metadataCache.TryGetValue(fileKey.Value, out metadata) && metadata != null)
-            {
+            if (
+                fileKey.HasValue
+                && _metadataCache.TryGetValue(fileKey.Value, out metadata)
+                && metadata != null
+            ) {
                 return metadata;
             }
 
@@ -115,8 +125,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
 
         public new string FilePath { get; }
 
-        public CachingMetadataReference(string fullPath, MetadataReferenceProperties properties)
-            : base(properties, fullPath)
+        public CachingMetadataReference(
+            string fullPath,
+            MetadataReferenceProperties properties
+        ) : base(properties, fullPath)
         {
             FilePath = fullPath;
         }
@@ -131,8 +143,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             return s_mdCache.GetMetadata(FilePath, Properties);
         }
 
-        protected override PortableExecutableReference WithPropertiesImpl(MetadataReferenceProperties properties)
-        {
+        protected override PortableExecutableReference WithPropertiesImpl(
+            MetadataReferenceProperties properties
+        ) {
             return new CachingMetadataReference(this.FilePath, properties);
         }
     }

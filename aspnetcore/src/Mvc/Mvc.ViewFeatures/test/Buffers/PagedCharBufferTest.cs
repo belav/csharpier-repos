@@ -38,9 +38,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             buffer.Append(charToAppend);
 
             // Assert
-            Assert.Collection(buffer.Pages,
+            Assert.Collection(
+                buffer.Pages,
                 page => Assert.Equal(stringToAppend.ToCharArray(), page),
-                page => Assert.Equal(charToAppend, page[0]));
+                page => Assert.Equal(charToAppend, page[0])
+            );
             Assert.Equal(1 + PagedCharBuffer.PageSize, buffer.Length);
         }
 
@@ -87,8 +89,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             // Arrange
             // Imitate ArrayPool<char>.Shared after it falls back from its default char[1024] Bucket to the next one.
             var bufferSource = new Mock<ICharBufferSource>();
-            bufferSource
-                .Setup(s => s.Rent(PagedCharBuffer.PageSize))
+            bufferSource.Setup(s => s.Rent(PagedCharBuffer.PageSize))
                 .Returns(() => new char[2 * PagedCharBuffer.PageSize]);
             var buffer = new PagedCharBuffer(bufferSource.Object);
 
@@ -101,9 +102,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
 
             // Assert
             Assert.Equal(2 * PagedCharBuffer.PageSize + 1, buffer.Length);
-            Assert.Collection(buffer.Pages,
+            Assert.Collection(
+                buffer.Pages,
                 page => Assert.Equal(stringToAppend.ToCharArray(), page),
-                page => Assert.Equal(charToAppend, page[0]));
+                page => Assert.Equal(charToAppend, page[0])
+            );
         }
 
         [Fact]
@@ -112,8 +115,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             // Arrange
             // Imitate ArrayPool<char>.Shared after it falls back from its default char[1024] Bucket to the next one.
             var bufferSource = new Mock<ICharBufferSource>();
-            bufferSource
-                .Setup(s => s.Rent(PagedCharBuffer.PageSize))
+            bufferSource.Setup(s => s.Rent(PagedCharBuffer.PageSize))
                 .Returns(new char[2 * PagedCharBuffer.PageSize]);
             var buffer = new PagedCharBuffer(bufferSource.Object);
 
@@ -165,7 +167,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
                 buffer.Pages,
                 page => Assert.Equal(expected, page),
                 page => Assert.Equal(expected, page),
-                page => Assert.Equal('d', page[0]));
+                page => Assert.Equal('d', page[0])
+            );
         }
 
         [Fact]
@@ -174,8 +177,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             // Arrange
             // Imitate ArrayPool<char>.Shared as it falls back from its default char[1024] Bucket to the next one.
             var bufferSource = new Mock<ICharBufferSource>();
-            bufferSource
-                .SetupSequence(s => s.Rent(PagedCharBuffer.PageSize))
+            bufferSource.SetupSequence(s => s.Rent(PagedCharBuffer.PageSize))
                 .Returns(new char[PagedCharBuffer.PageSize])
                 .Returns(new char[2 * PagedCharBuffer.PageSize]);
             var buffer = new PagedCharBuffer(bufferSource.Object);
@@ -196,7 +198,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             Assert.Collection(
                 buffer.Pages,
                 page => Assert.Equal(expected1, page),
-                page => Assert.Equal(expected2, page.Take(PagedCharBuffer.PageSize + 1)));
+                page => Assert.Equal(expected2, page.Take(PagedCharBuffer.PageSize + 1))
+            );
         }
 
         [Fact]
@@ -205,8 +208,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             // Arrange
             // Imitate ArrayPool<char>.Shared just after an entry in its default char[1024] Bucket is returned.
             var bufferSource = new Mock<ICharBufferSource>();
-            bufferSource
-                .SetupSequence(s => s.Rent(PagedCharBuffer.PageSize))
+            bufferSource.SetupSequence(s => s.Rent(PagedCharBuffer.PageSize))
                 .Returns(new char[2 * PagedCharBuffer.PageSize])
                 .Returns(new char[PagedCharBuffer.PageSize]);
             var buffer = new PagedCharBuffer(bufferSource.Object);
@@ -226,7 +228,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             Assert.Collection(
                 buffer.Pages,
                 page => Assert.Equal(expected, page),
-                page => Assert.Equal('d', page[0]));
+                page => Assert.Equal('d', page[0])
+            );
         }
 
         [Fact]
@@ -235,8 +238,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             // Arrange
             // Imitate ArrayPool<char>.Shared after it falls back from its default char[1024] Bucket to the next one.
             var bufferSource = new Mock<ICharBufferSource>();
-            bufferSource
-                .Setup(s => s.Rent(PagedCharBuffer.PageSize))
+            bufferSource.Setup(s => s.Rent(PagedCharBuffer.PageSize))
                 .Returns(() => new char[2 * PagedCharBuffer.PageSize]);
             var buffer = new PagedCharBuffer(bufferSource.Object);
 
@@ -255,7 +257,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             Assert.Collection(
                 buffer.Pages,
                 page => Assert.Equal(expected, page),
-                page => Assert.Equal('d', page[0]));
+                page => Assert.Equal('d', page[0])
+            );
         }
 
         [Fact]
@@ -307,7 +310,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
 
             // Assert
             Assert.Equal(length, buffer.Length);
-            Assert.Collection(buffer.Pages,
+            Assert.Collection(
+                buffer.Pages,
                 page => Assert.Equal(expected, page),
                 page => Assert.Equal(expected, page),
                 page =>
@@ -315,7 +319,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
                     Assert.Equal(ch, page[0]);
                     Assert.Equal(ch, page[1]);
                     Assert.Equal(ch, page[2]);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -324,8 +329,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             // Arrange
             // Imitate ArrayPool<char>.Shared as it falls back from its default char[1024] Bucket to the next one.
             var bufferSource = new Mock<ICharBufferSource>();
-            bufferSource
-                .SetupSequence(s => s.Rent(PagedCharBuffer.PageSize))
+            bufferSource.SetupSequence(s => s.Rent(PagedCharBuffer.PageSize))
                 .Returns(new char[PagedCharBuffer.PageSize])
                 .Returns(new char[2 * PagedCharBuffer.PageSize]);
             var buffer = new PagedCharBuffer(bufferSource.Object);
@@ -346,7 +350,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             Assert.Collection(
                 buffer.Pages,
                 page => Assert.Equal(expected1, page),
-                page => Assert.Equal(expected2, page.Take(PagedCharBuffer.PageSize + 1)));
+                page => Assert.Equal(expected2, page.Take(PagedCharBuffer.PageSize + 1))
+            );
         }
 
         [Fact]
@@ -355,8 +360,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             // Arrange
             // Imitate ArrayPool<char>.Shared just after an entry in its default char[1024] Bucket is returned.
             var bufferSource = new Mock<ICharBufferSource>();
-            bufferSource
-                .SetupSequence(s => s.Rent(PagedCharBuffer.PageSize))
+            bufferSource.SetupSequence(s => s.Rent(PagedCharBuffer.PageSize))
                 .Returns(new char[2 * PagedCharBuffer.PageSize])
                 .Returns(new char[PagedCharBuffer.PageSize]);
             var buffer = new PagedCharBuffer(bufferSource.Object);
@@ -376,7 +380,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             Assert.Collection(
                 buffer.Pages,
                 page => Assert.Equal(expected, page),
-                page => Assert.Equal('d', page[0]));
+                page => Assert.Equal('d', page[0])
+            );
         }
 
         [Fact]
@@ -385,8 +390,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             // Arrange
             // Imitate ArrayPool<char>.Shared after it falls back from its default char[1024] Bucket to the next one.
             var bufferSource = new Mock<ICharBufferSource>();
-            bufferSource
-                .Setup(s => s.Rent(PagedCharBuffer.PageSize))
+            bufferSource.Setup(s => s.Rent(PagedCharBuffer.PageSize))
                 .Returns(() => new char[2 * PagedCharBuffer.PageSize]);
             var buffer = new PagedCharBuffer(bufferSource.Object);
 
@@ -405,7 +409,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             Assert.Collection(
                 buffer.Pages,
                 page => Assert.Equal(expected, page),
-                page => Assert.Equal('d', page[0]));
+                page => Assert.Equal('d', page[0])
+            );
         }
 
         [Fact]

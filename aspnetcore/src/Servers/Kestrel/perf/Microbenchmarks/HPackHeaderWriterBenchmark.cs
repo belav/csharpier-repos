@@ -55,14 +55,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         public void BeginEncodeHeaders_KnownHeaders()
         {
             _http2HeadersEnumerator.Initialize(_knownResponseHeaders);
-            HPackHeaderWriter.BeginEncodeHeaders(_hpackEncoder, _http2HeadersEnumerator, _buffer, out _);
+            HPackHeaderWriter.BeginEncodeHeaders(
+                _hpackEncoder,
+                _http2HeadersEnumerator,
+                _buffer,
+                out _
+            );
         }
 
         [Benchmark]
         public void BeginEncodeHeaders_UnknownHeaders()
         {
             _http2HeadersEnumerator.Initialize(_unknownResponseHeaders);
-            HPackHeaderWriter.BeginEncodeHeaders(_hpackEncoder, _http2HeadersEnumerator, _buffer, out _);
+            HPackHeaderWriter.BeginEncodeHeaders(
+                _hpackEncoder,
+                _http2HeadersEnumerator,
+                _buffer,
+                out _
+            );
         }
     }
 }

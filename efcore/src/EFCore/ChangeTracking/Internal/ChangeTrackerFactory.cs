@@ -40,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IStateManager stateManager,
             IChangeDetector changeDetector,
             IModel model,
-            IEntityEntryGraphIterator graphIterator)
-        {
+            IEntityEntryGraphIterator graphIterator
+        ) {
             _context = currentContext.Context;
             _stateManager = stateManager;
             _changeDetector = changeDetector;
@@ -55,7 +55,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ChangeTracker Create()
-            => new(_context, _stateManager, _changeDetector, _model, _graphIterator);
+        public virtual ChangeTracker Create() =>
+            new(_context, _stateManager, _changeDetector, _model, _graphIterator);
     }
 }

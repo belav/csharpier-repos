@@ -14,18 +14,26 @@ namespace System.Net.Http.Headers
         // OK to have multiple Cache-Control headers in a request/response message. However, after parsing all
         // Cache-Control headers, only one instance of CacheControlHeaderValue is created (if all headers contain valid
         // values, otherwise we may have multiple strings containing the invalid values).
-        private CacheControlHeaderParser()
-            : base(true)
-        {
-        }
+        private CacheControlHeaderParser() : base(true) { }
 
-        protected override int GetParsedValueLength(string value, int startIndex, object? storeValue,
-            out object? parsedValue)
-        {
+        protected override int GetParsedValueLength(
+            string value,
+            int startIndex,
+            object? storeValue,
+            out object? parsedValue
+        ) {
             CacheControlHeaderValue? temp = storeValue as CacheControlHeaderValue;
-            Debug.Assert(storeValue == null || temp != null, "'storeValue' is not of type CacheControlHeaderValue");
+            Debug.Assert(
+                storeValue == null || temp != null,
+                "'storeValue' is not of type CacheControlHeaderValue"
+            );
 
-            int resultLength = CacheControlHeaderValue.GetCacheControlLength(value, startIndex, temp, out temp);
+            int resultLength = CacheControlHeaderValue.GetCacheControlLength(
+                value,
+                startIndex,
+                temp,
+                out temp
+            );
 
             parsedValue = temp;
             return resultLength;

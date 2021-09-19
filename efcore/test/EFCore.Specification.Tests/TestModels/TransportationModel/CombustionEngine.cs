@@ -9,12 +9,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel
     {
         public FuelTank FuelTank { get; set; }
 
-        public override bool Equals(object obj)
-            => obj is CombustionEngine other
-                && base.Equals(other)
-                && Equals(FuelTank, other.FuelTank);
+        public override bool Equals(object obj) =>
+            obj is CombustionEngine other && base.Equals(other) && Equals(FuelTank, other.FuelTank);
 
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), FuelTank);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), FuelTank);
     }
 }

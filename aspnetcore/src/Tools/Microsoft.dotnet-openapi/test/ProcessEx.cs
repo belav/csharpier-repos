@@ -34,7 +34,9 @@ namespace Microsoft.Extensions.Internal
             proc.BeginOutputReadLine();
             proc.BeginErrorReadLine();
 
-            _exited = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            _exited = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
         }
 
         public Task Exited => _exited.Task;
@@ -54,8 +56,13 @@ namespace Microsoft.Extensions.Internal
 
         public int ExitCode => _process.ExitCode;
 
-        public static ProcessEx Run(ITestOutputHelper output, string workingDirectory, string command, string args = null, IDictionary<string, string> envVars = null)
-        {
+        public static ProcessEx Run(
+            ITestOutputHelper output,
+            string workingDirectory,
+            string command,
+            string args = null,
+            IDictionary<string, string> envVars = null
+        ) {
             var startInfo = new ProcessStartInfo(command, args)
             {
                 RedirectStandardOutput = true,
@@ -73,7 +80,9 @@ namespace Microsoft.Extensions.Internal
                 }
             }
 
-            output.WriteLine($"==> {startInfo.FileName} {startInfo.Arguments} [{startInfo.WorkingDirectory}]");
+            output.WriteLine(
+                $"==> {startInfo.FileName} {startInfo.Arguments} [{startInfo.WorkingDirectory}]"
+            );
             var proc = Process.Start(startInfo);
 
             return new ProcessEx(output, proc);
@@ -137,7 +146,7 @@ namespace Microsoft.Extensions.Internal
             _process.Exited -= OnProcessExited;
             _process.Dispose();
 
-            if(_stdoutLines != null)
+            if (_stdoutLines != null)
             {
                 _stdoutLines.Dispose();
             }

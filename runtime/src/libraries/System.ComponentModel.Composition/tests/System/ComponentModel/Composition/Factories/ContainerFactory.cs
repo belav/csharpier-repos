@@ -44,8 +44,10 @@ namespace System.ComponentModel.Composition.Factories
             return Create(catalog);
         }
 
-        public static CompositionContainer Create(CompositionContainer parent, params ComposablePart[] parts)
-        {
+        public static CompositionContainer Create(
+            CompositionContainer parent,
+            params ComposablePart[] parts
+        ) {
             CompositionContainer container;
             if (parent == null)
             {
@@ -58,7 +60,10 @@ namespace System.ComponentModel.Composition.Factories
 
             if (parts != null)
             {
-                CompositionBatch batch = new CompositionBatch(parts, Enumerable.Empty<ComposablePart>());
+                CompositionBatch batch = new CompositionBatch(
+                    parts,
+                    Enumerable.Empty<ComposablePart>()
+                );
                 container.Compose(batch);
             }
 
@@ -72,8 +77,10 @@ namespace System.ComponentModel.Composition.Factories
             return Create(part);
         }
 
-        public static CompositionContainer Create(CompositionContainer parent, params MicroExport[] exports)
-        {
+        public static CompositionContainer Create(
+            CompositionContainer parent,
+            params MicroExport[] exports
+        ) {
             var part = PartFactory.CreateExporter(exports);
 
             return Create(parent, part);

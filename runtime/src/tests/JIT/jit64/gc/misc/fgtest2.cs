@@ -13,11 +13,11 @@ class T
         int exitcode = 94;
 
         goto L3;
-    L:
+        L:
         x = 5;
         exitcode++;
         Console.WriteLine(3);
-    L3:
+        L3:
         try
         {
             Console.WriteLine("1/4");
@@ -30,7 +30,8 @@ class T
                     exitcode++;
                     Console.WriteLine(5);
 
-                    if (x == 5) throw new Exception();
+                    if (x == 5)
+                        throw new Exception();
                 }
                 catch
                 {
@@ -54,7 +55,7 @@ class T
 
         exitcode++;
         Console.WriteLine(-1);
-    L2:
+        L2:
         exitcode++;
         Console.WriteLine(6);
         return exitcode;

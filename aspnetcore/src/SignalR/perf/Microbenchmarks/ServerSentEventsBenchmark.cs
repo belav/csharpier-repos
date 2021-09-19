@@ -17,7 +17,12 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
         private byte[] _sseFormattedData;
         private ReadOnlySequence<byte> _rawData;
 
-        [Params(Message.NoArguments, Message.FewArguments, Message.ManyArguments, Message.LargeArguments)]
+        [Params(
+            Message.NoArguments,
+            Message.FewArguments,
+            Message.ManyArguments,
+            Message.LargeArguments
+        )]
         public Message Input { get; set; }
 
         [Params("json", "json-formatted")]
@@ -51,17 +56,35 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                     hubMessage = new InvocationMessage("Target", new object[] { 1, "Foo", 2.0f });
                     break;
                 case Message.ManyArguments:
-                    hubMessage = new InvocationMessage("Target", new object[] { 1, "string", 2.0f, true, (byte)9, new[] { 5, 4, 3, 2, 1 }, 'c', 123456789101112L });
+                    hubMessage = new InvocationMessage(
+                        "Target",
+                        new object[]
+                        {
+                            1,
+                            "string",
+                            2.0f,
+                            true,
+                            (byte)9,
+                            new[] { 5, 4, 3, 2, 1 },
+                            'c',
+                            123456789101112L
+                        }
+                    );
                     break;
                 case Message.LargeArguments:
-                    hubMessage = new InvocationMessage("Target", new object[] { new string('F', 10240), new string('B', 10240) });
+                    hubMessage = new InvocationMessage(
+                        "Target",
+                        new object[] { new string('F', 10240), new string('B', 10240) }
+                    );
                     break;
             }
 
             _parser = new ServerSentEventsMessageParser();
             _rawData = new ReadOnlySequence<byte>(protocol.GetMessageBytes(hubMessage));
             var ms = new MemoryStream();
-            ServerSentEventsMessageFormatter.WriteMessageAsync(_rawData, ms, default).GetAwaiter().GetResult();
+            ServerSentEventsMessageFormatter.WriteMessageAsync(_rawData, ms, default)
+                .GetAwaiter()
+                .GetResult();
             _sseFormattedData = ms.ToArray();
         }
 
@@ -70,8 +93,10 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
         {
             var buffer = new ReadOnlySequence<byte>(_sseFormattedData);
 
-            if (_parser.ParseMessage(buffer, out _, out _, out _) != ServerSentEventsMessageParser.ParseResult.Completed)
-            {
+            if (
+                _parser.ParseMessage(buffer, out _, out _, out _)
+                != ServerSentEventsMessageParser.ParseResult.Completed
+            ) {
                 throw new InvalidOperationException("Parse failed!");
             }
 
@@ -81,7 +106,11 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
         [Benchmark]
         public Task WriteSingleMessage()
         {
-            return ServerSentEventsMessageFormatter.WriteMessageAsync(_rawData, Stream.Null, default);
+            return ServerSentEventsMessageFormatter.WriteMessageAsync(
+                _rawData,
+                Stream.Null,
+                default
+            );
         }
 
         public enum Message

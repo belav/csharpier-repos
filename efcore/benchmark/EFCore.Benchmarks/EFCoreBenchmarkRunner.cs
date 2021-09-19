@@ -15,8 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks
         {
             config ??= DefaultConfig.Instance;
 
-            config = config
-                .AddDiagnoser(MemoryDiagnoser.Default)
+            config = config.AddDiagnoser(MemoryDiagnoser.Default)
                 .AddColumn(StatisticColumn.OperationsPerSecond);
 
             BenchmarkSwitcher.FromAssembly(assembly).Run(args, config);

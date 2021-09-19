@@ -233,20 +233,28 @@ namespace System.Net.Http.QPack
                     }
                     break;
                 case State.CompressedHeaders:
-                    switch (BitOperations.LeadingZeroCount(b) - 24) // byte 'b' is extended to uint, so will have 24 extra 0s.
+                    switch (
+                        BitOperations.LeadingZeroCount(b) - 24
+                    ) // byte 'b' is extended to uint, so will have 24 extra 0s.
                     {
                         case 0: // Indexed Header Field
                             prefixInt = IndexedHeaderFieldPrefixMask & b;
 
-                            bool useStaticTable = (b & IndexedHeaderStaticMask) == IndexedHeaderStaticRepresentation;
+                            bool useStaticTable =
+                                (b & IndexedHeaderStaticMask) == IndexedHeaderStaticRepresentation;
 
                             if (!useStaticTable)
                             {
                                 ThrowDynamicTableNotSupported();
                             }
 
-                            if (_integerDecoder.BeginTryDecode((byte)prefixInt, IndexedHeaderFieldPrefix, out intResult))
-                            {
+                            if (
+                                _integerDecoder.BeginTryDecode(
+                                    (byte)prefixInt,
+                                    IndexedHeaderFieldPrefix,
+                                    out intResult
+                                )
+                            ) {
                                 OnIndexedHeaderField(intResult, handler);
                             }
                             else
@@ -255,7 +263,8 @@ namespace System.Net.Http.QPack
                             }
                             break;
                         case 1: // Literal Header Field With Name Reference
-                            useStaticTable = (LiteralHeaderFieldStaticMask & b) == LiteralHeaderFieldStaticMask;
+                            useStaticTable =
+                                (LiteralHeaderFieldStaticMask & b) == LiteralHeaderFieldStaticMask;
 
                             if (!useStaticTable)
                             {
@@ -263,8 +272,13 @@ namespace System.Net.Http.QPack
                             }
 
                             prefixInt = b & LiteralHeaderFieldPrefixMask;
-                            if (_integerDecoder.BeginTryDecode((byte)prefixInt, LiteralHeaderFieldPrefix, out intResult))
-                            {
+                            if (
+                                _integerDecoder.BeginTryDecode(
+                                    (byte)prefixInt,
+                                    LiteralHeaderFieldPrefix,
+                                    out intResult
+                                )
+                            ) {
                                 OnIndexedHeaderName(intResult);
                             }
                             else
@@ -276,11 +290,18 @@ namespace System.Net.Http.QPack
                             _huffman = (b & LiteralHeaderFieldWithoutNameReferenceHuffmanMask) != 0;
                             prefixInt = b & LiteralHeaderFieldWithoutNameReferencePrefixMask;
 
-                            if (_integerDecoder.BeginTryDecode((byte)prefixInt, LiteralHeaderFieldWithoutNameReferencePrefix, out intResult))
-                            {
+                            if (
+                                _integerDecoder.BeginTryDecode(
+                                    (byte)prefixInt,
+                                    LiteralHeaderFieldWithoutNameReferencePrefix,
+                                    out intResult
+                                )
+                            ) {
                                 if (intResult == 0)
                                 {
-                                    throw new QPackDecodingException(SR.Format(SR.net_http_invalid_header_name, ""));
+                                    throw new QPackDecodingException(
+                                        SR.Format(SR.net_http_invalid_header_name, "")
+                                    );
                                 }
                                 OnStringLength(intResult, State.HeaderName);
                             }
@@ -291,8 +312,13 @@ namespace System.Net.Http.QPack
                             break;
                         case 3: // Indexed Header Field With Post-Base Index
                             prefixInt = ~PostBaseIndexMask & b;
-                            if (_integerDecoder.BeginTryDecode((byte)prefixInt, PostBaseIndexPrefix, out intResult))
-                            {
+                            if (
+                                _integerDecoder.BeginTryDecode(
+                                    (byte)prefixInt,
+                                    PostBaseIndexPrefix,
+                                    out intResult
+                                )
+                            ) {
                                 OnPostBaseIndex(intResult, handler);
                             }
                             else
@@ -302,8 +328,13 @@ namespace System.Net.Http.QPack
                             break;
                         default: // Literal Header Field With Post-Base Name Reference (at least 4 zeroes, maybe more)
                             prefixInt = b & LiteralHeaderFieldPostBasePrefixMask;
-                            if (_integerDecoder.BeginTryDecode((byte)prefixInt, LiteralHeaderFieldPostBasePrefix, out intResult))
-                            {
+                            if (
+                                _integerDecoder.BeginTryDecode(
+                                    (byte)prefixInt,
+                                    LiteralHeaderFieldPostBasePrefix,
+                                    out intResult
+                                )
+                            ) {
                                 OnIndexedHeaderNamePostBase(intResult);
                             }
                             else
@@ -318,7 +349,9 @@ namespace System.Net.Http.QPack
                     {
                         if (intResult == 0)
                         {
-                            throw new QPackDecodingException(SR.Format(SR.net_http_invalid_header_name, ""));
+                            throw new QPackDecodingException(
+                                SR.Format(SR.net_http_invalid_header_name, "")
+                            );
                         }
                         OnStringLength(intResult, nextState: State.HeaderName);
                     }
@@ -330,7 +363,6 @@ namespace System.Net.Http.QPack
                     {
                         OnString(nextState: State.HeaderValueLength);
                     }
-
                     break;
                 case State.HeaderNameIndex:
                     if (_integerDecoder.TryDecode(b, out intResult))
@@ -348,8 +380,13 @@ namespace System.Net.Http.QPack
                     _huffman = (b & HuffmanMask) != 0;
 
                     // TODO confirm this.
-                    if (_integerDecoder.BeginTryDecode((byte)(b & ~HuffmanMask), StringLengthPrefix, out intResult))
-                    {
+                    if (
+                        _integerDecoder.BeginTryDecode(
+                            (byte)(b & ~HuffmanMask),
+                            StringLengthPrefix,
+                            out intResult
+                        )
+                    ) {
                         OnStringLength(intResult, nextState: State.HeaderValue);
                         if (intResult == 0)
                         {
@@ -401,7 +438,9 @@ namespace System.Net.Http.QPack
             {
                 if (length > _maxHeadersLength)
                 {
-                    throw new QPackDecodingException(SR.Format(SR.net_http_headers_exceeded_length, _maxHeadersLength));
+                    throw new QPackDecodingException(
+                        SR.Format(SR.net_http_headers_exceeded_length, _maxHeadersLength)
+                    );
                 }
 
                 ReturnAndGetNewPooledArray(ref _stringOctets, length);
@@ -421,7 +460,10 @@ namespace System.Net.Http.QPack
 
             if (_index is int index)
             {
-                Debug.Assert(index >= 0 && index <= H3StaticTable.Count, $"The index should be a valid static index here. {nameof(QPackDecoder)} should have previously thrown if it read a dynamic index.");
+                Debug.Assert(
+                    index >= 0 && index <= H3StaticTable.Count,
+                    $"The index should be a valid static index here. {nameof(QPackDecoder)} should have previously thrown if it read a dynamic index."
+                );
                 handler.OnStaticIndexedHeader(index, headerValueSpan);
                 _index = null;
 
@@ -441,7 +483,10 @@ namespace System.Net.Http.QPack
             {
                 if (_huffman)
                 {
-                    return Huffman.Decode(new ReadOnlySpan<byte>(_stringOctets, 0, _stringLength), ref dst);
+                    return Huffman.Decode(
+                        new ReadOnlySpan<byte>(_stringOctets, 0, _stringLength),
+                        ref dst
+                    );
                 }
                 else
                 {
@@ -474,7 +519,6 @@ namespace System.Net.Http.QPack
 
             _state = nextState;
         }
-
 
         private void OnIndexedHeaderName(int index)
         {

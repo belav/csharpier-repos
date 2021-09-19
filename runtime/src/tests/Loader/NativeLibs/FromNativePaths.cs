@@ -12,7 +12,14 @@ public class FromNativePaths
     private const string NativeLibraryNameWithoutExtension = "FromNativePaths_lib";
 
     // See src/pal/src/include/pal/module.h
-    private static readonly string[] NativeLibraryExtensions = new string[] { ".dll", ".so", ".dylib", ".a", ".sl" };
+    private static readonly string[] NativeLibraryExtensions = new string[]
+    {
+        ".dll",
+        ".so",
+        ".dylib",
+        ".a",
+        ".sl"
+    };
 
     [DllImport(NativeLibraryNameWithoutExtension)]
     private static extern bool NativeFunc();
@@ -37,13 +44,18 @@ public class FromNativePaths
         }
 
         // In case there were multiple paths in CORE_LIBRARIES, assume that the last one is the one added in the test script.
-        coreLibraries = coreLibraries.Split(new [] {TestLibrary.Utilities.IsWindows ? ';' : ':'}, StringSplitOptions.RemoveEmptyEntries).Last();
+        coreLibraries = coreLibraries.Split(
+                new[] { TestLibrary.Utilities.IsWindows ? ';' : ':' },
+                StringSplitOptions.RemoveEmptyEntries
+            )
+            .Last();
 
         if (!Directory.Exists(coreLibraries))
         {
             Console.WriteLine(
                 "FromNativePaths failed: Directory specified by CORE_LIBRARIES does not exist: {0}",
-                coreLibraries);
+                coreLibraries
+            );
             return false;
         }
 
@@ -70,7 +82,8 @@ public class FromNativePaths
             {
                 Console.WriteLine(
                     "FromNativePaths failed: Failed to move native library to CORE_ROOT: {0}",
-                    ex.Message);
+                    ex.Message
+                );
                 moveLibraryFailed = true;
                 break;
             }
@@ -91,13 +104,19 @@ public class FromNativePaths
             }
             catch (Exception ex)
             {
-                Console.WriteLine("FromNativePaths failed: Failed to load the native library: {0}", ex.Message);
+                Console.WriteLine(
+                    "FromNativePaths failed: Failed to load the native library: {0}",
+                    ex.Message
+                );
                 return false;
             }
 
-            Console.WriteLine("FromNativePaths failed: Unexpected result from native function call.");
+            Console.WriteLine(
+                "FromNativePaths failed: Unexpected result from native function call."
+            );
             return false;
         }
+
         finally
         {
             // Copy the native library back to the test folder. Don't move it, since it is loaded and the move may fail.
@@ -105,13 +124,17 @@ public class FromNativePaths
             {
                 try
                 {
-                    File.Copy(movedLibraryDestinationPath, Path.GetFileName(movedLibraryDestinationPath));
+                    File.Copy(
+                        movedLibraryDestinationPath,
+                        Path.GetFileName(movedLibraryDestinationPath)
+                    );
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(
                         "FromNativePaths failed: Failed to move the native library back to the test folder: {0}",
-                        ex.Message);
+                        ex.Message
+                    );
                 }
             }
         }

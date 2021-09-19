@@ -17,15 +17,20 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
         private const byte ByteColon = (byte)':';
 
         // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
-        private static ReadOnlySpan<byte> DataPrefix => new byte[] { (byte)'d', (byte)'a', (byte)'t', (byte)'a', (byte)':', (byte)' ' };
+        private static ReadOnlySpan<byte> DataPrefix =>
+            new byte[] { (byte)'d', (byte)'a', (byte)'t', (byte)'a', (byte)':', (byte)' ' };
         private static ReadOnlySpan<byte> SseLineEnding => new byte[] { (byte)'\r', (byte)'\n' };
         private static readonly byte[] _newLine = Encoding.UTF8.GetBytes(Environment.NewLine);
 
         private InternalParseState _internalParserState = InternalParseState.ReadMessagePayload;
         private readonly List<byte[]> _data = new List<byte[]>();
 
-        public ParseResult ParseMessage(ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined, out byte[]? message)
-        {
+        public ParseResult ParseMessage(
+            ReadOnlySequence<byte> buffer,
+            out SequencePosition consumed,
+            out SequencePosition examined,
+            out byte[]? message
+        ) {
             consumed = buffer.Start;
             examined = buffer.End;
             message = null;
@@ -70,7 +75,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 {
                     _internalParserState = InternalParseState.ReadEndOfMessage;
                 }
-
                 // To ensure that the \n was preceded by a \r
                 // since messages can't contain \n.
                 // data: foo\n\bar should be encoded as
@@ -78,7 +82,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 // data: bar\r\n
                 else if (line[line.Length - SseLineEnding.Length] != ByteCR)
                 {
-                    throw new FormatException("Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'");
+                    throw new FormatException(
+                        "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'"
+                    );
                 }
                 else
                 {
@@ -92,7 +98,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                         EnsureStartsWithDataPrefix(line);
 
                         // Slice away the 'data: '
-                        var payloadLength = line.Length - (DataPrefix.Length + SseLineEnding.Length);
+                        var payloadLength =
+                            line.Length - (DataPrefix.Length + SseLineEnding.Length);
                         var newData = line.Slice(DataPrefix.Length, payloadLength).ToArray();
                         _data.Add(newData);
 

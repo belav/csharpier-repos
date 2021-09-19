@@ -55,15 +55,22 @@ namespace Newtonsoft.Json.Tests.Issues
 
         internal class MyJsonConverter : JsonConverter
         {
-            static private readonly JsonLoadSettings _jsonLoadSettings = new JsonLoadSettings { CommentHandling = CommentHandling.Ignore };
+            static private readonly JsonLoadSettings _jsonLoadSettings = new JsonLoadSettings
+            {
+                CommentHandling = CommentHandling.Ignore
+            };
 
             public override bool CanConvert(Type objectType)
             {
                 return typeof(MyClass2).Equals(objectType);
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            {
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            ) {
                 var token = JToken.Load(reader, _jsonLoadSettings);
 
                 if (token.Type == JTokenType.Object)
@@ -85,13 +92,18 @@ namespace Newtonsoft.Json.Tests.Issues
 
             #region Do not use this converter for writing.
 
-            public override bool CanWrite { get { return false; } }
-
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            public override bool CanWrite
             {
-                throw new NotSupportedException();
+                get { return false; }
             }
 
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            ) {
+                throw new NotSupportedException();
+            }
             #endregion
 
         }
@@ -99,7 +111,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            string json = @"{
+            string json =
+                @"{
   ""instanceOfMyClass"":
     /* Comment explaining that this is a legacy data contract: */
     [ 1, 2, 3 ]

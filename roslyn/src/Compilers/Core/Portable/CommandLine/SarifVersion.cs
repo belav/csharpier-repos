@@ -13,18 +13,15 @@ namespace Microsoft.CodeAnalysis
         /// The original, non-standardized version of the SARIF format.
         /// </summary>
         Sarif1 = 1,
-
         /// <summary>
         /// The first standardized version of the SARIF format.
         /// </summary>
         Sarif2 = 2,
-
         /// <summary>
         /// The default SARIF version, which is v1.0.0 for compatibility with
         /// previous versions of the compiler.
         /// </summary>
         Default = Sarif1,
-
         /// <summary>
         /// The latest supported SARIF version.
         /// </summary>

@@ -31,12 +31,14 @@ namespace Microsoft.AspNetCore.Razor.Language
             Assert.Collection(
                 engine.Features,
                 f => Assert.Same(features[0], f),
-                f => Assert.Same(features[1], f));
+                f => Assert.Same(features[1], f)
+            );
 
             Assert.Collection(
                 engine.Phases,
                 p => Assert.Same(phases[0], p),
-                p => Assert.Same(phases[1], p));
+                p => Assert.Same(phases[1], p)
+            );
         }
     }
 }

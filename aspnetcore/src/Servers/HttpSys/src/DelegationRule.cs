@@ -26,8 +26,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public string UrlPrefix { get; }
         internal RequestQueue Queue { get; }
 
-        internal DelegationRule(UrlGroup sourceQueueUrlGroup, string queueName, string urlPrefix, ILogger logger)
-        {
+        internal DelegationRule(
+            UrlGroup sourceQueueUrlGroup,
+            string queueName,
+            string urlPrefix,
+            ILogger logger
+        ) {
             _sourceQueueUrlGroup = sourceQueueUrlGroup;
             _logger = logger;
             QueueName = queueName;
@@ -50,7 +54,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             {
                 _sourceQueueUrlGroup.UnSetDelegationProperty(Queue, throwOnError: false);
             }
-            catch (ObjectDisposedException) { /* Server may have been shutdown */ }
+            catch (ObjectDisposedException)
+            { /* Server may have been shutdown */
+            }
             _urlGroup.Dispose();
             Queue.Dispose();
         }

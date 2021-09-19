@@ -35,10 +35,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
             var model = new TestModel();
-            var source = new ViewDataDictionary<object>(metadataProvider)
-            {
-                Model = model
-            };
+            var source = new ViewDataDictionary<object>(metadataProvider) { Model = model };
             source["foo"] = "bar";
             source.TemplateInfo.HtmlFieldPrefix = "prefix";
 
@@ -117,10 +114,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
             var model = new SupremeTestModel();
-            var source = new ViewDataDictionary(metadataProvider)
-            {
-                Model = model,
-            };
+            var source = new ViewDataDictionary(metadataProvider) { Model = model, };
 
             // Act
             var viewData = new ViewDataDictionary(source);
@@ -138,10 +132,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
             var model = new SupremeTestModel();
-            var source = new ViewDataDictionary(metadataProvider)
-            {
-                Model = model,
-            };
+            var source = new ViewDataDictionary(metadataProvider) { Model = model, };
 
             // Act
             var viewData = new ViewDataDictionary<TestModel>(source);
@@ -207,19 +198,21 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void CopyConstructors_ThrowInvalidOperation_IfModelIncompatibleWithDeclaredType()
         {
             // Arrange
-            var expectedMessage = "The model item passed into the ViewDataDictionary is of type 'System.Int32', " +
-                "but this ViewDataDictionary instance requires a model item of type 'System.String'.";
+            var expectedMessage =
+                "The model item passed into the ViewDataDictionary is of type 'System.Int32', "
+                + "but this ViewDataDictionary instance requires a model item of type 'System.String'.";
             var metadataProvider = new EmptyModelMetadataProvider();
-            var source = new ViewDataDictionary<int>(metadataProvider)
-            {
-                Model = 23,
-            };
+            var source = new ViewDataDictionary<int>(metadataProvider) { Model = 23, };
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => new ViewDataDictionary<string>(source));
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => new ViewDataDictionary<string>(source)
+            );
             Assert.Equal(expectedMessage, exception.Message);
 
-            exception = Assert.Throws<InvalidOperationException>(() => new ViewDataDictionary<string>(source, model: 24));
+            exception = Assert.Throws<InvalidOperationException>(
+                () => new ViewDataDictionary<string>(source, model: 24)
+            );
             Assert.Equal(expectedMessage, exception.Message);
         }
 
@@ -245,8 +238,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [MemberData(nameof(IncompatibleModelData))]
         public void CopyConstructorToObject_DoesNotThrow_IfModelIncompatibleWithDeclaredType(
             object model,
-            Type expectedType)
-        {
+            Type expectedType
+        ) {
             // Arrange
             var source = new ViewDataDictionary<TestModel>(new EmptyModelMetadataProvider());
 
@@ -264,14 +257,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [Theory]
         [InlineData(null)]
         [InlineData(23)]
-        public void CopyConstructor_DoesNotChangeMetadata_WhenValueCompatibleWithSourceMetadata(int? model)
-        {
+        public void CopyConstructor_DoesNotChangeMetadata_WhenValueCompatibleWithSourceMetadata(
+            int? model
+        ) {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var source = new ViewDataDictionary<int?>(metadataProvider)
-            {
-                Model = -48,
-            };
+            var source = new ViewDataDictionary<int?>(metadataProvider) { Model = -48, };
 
             // Act
             var viewData = new ViewDataDictionary<int?>(source, model);
@@ -309,10 +300,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Arrange
             var model = new TestModel();
             var metadataProvider = new EmptyModelMetadataProvider();
-            var source = new ViewDataDictionary<TestModel>(metadataProvider)
-            {
-                Model = model,
-            };
+            var source = new ViewDataDictionary<TestModel>(metadataProvider) { Model = model, };
 
             // Act
             var viewData = new ViewDataDictionary<TestModel>(source, model);
@@ -376,12 +364,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void ModelSetters_ThrowInvalidOperation_IfModelIncompatibleWithDeclaredType()
         {
             // Arrange
-            var expectedMessage = "The model item passed into the ViewDataDictionary is of type 'System.Int32', " +
-                "but this ViewDataDictionary instance requires a model item of type 'System.String'.";
+            var expectedMessage =
+                "The model item passed into the ViewDataDictionary is of type 'System.Int32', "
+                + "but this ViewDataDictionary instance requires a model item of type 'System.String'.";
             var metadataProvider = new EmptyModelMetadataProvider();
             var viewData1 = (ViewDataDictionary)new ViewDataDictionary<string>(metadataProvider);
             var viewData2 = (ViewDataDictionary)new ViewDataDictionary<string>(viewData1);
-            var viewData3 = (ViewDataDictionary)new ViewDataDictionary<string>(viewData2, model: null);
+            var viewData3 = (ViewDataDictionary)new ViewDataDictionary<string>(
+                viewData2,
+                model: null
+            );
             var viewData4 = new ViewDataDictionary(viewData3);
 
             // Act & Assert
@@ -403,8 +395,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void ModelSetters_ThrowInvalidOperation_IfModelNullAndTModelNonNullable()
         {
             // Arrange
-            var expectedMessage = "The model item passed is null, " +
-                "but this ViewDataDictionary instance requires a non-null model item of type 'System.Int32'.";
+            var expectedMessage =
+                "The model item passed is null, "
+                + "but this ViewDataDictionary instance requires a non-null model item of type 'System.Int32'.";
             var metadataProvider = new EmptyModelMetadataProvider();
             var viewData1 = (ViewDataDictionary)new ViewDataDictionary<int>(metadataProvider);
             var viewData2 = (ViewDataDictionary)new ViewDataDictionary<int>(viewData1);

@@ -23,8 +23,9 @@ namespace Microsoft.AspNetCore.Builder
         /// </summary>
         /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
         /// <returns>An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with controller actions.</returns>
-        public static ControllerActionEndpointConventionBuilder MapControllers(this IEndpointRouteBuilder endpoints)
-        {
+        public static ControllerActionEndpointConventionBuilder MapControllers(
+            this IEndpointRouteBuilder endpoints
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -43,8 +44,9 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns>
         /// An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with controller actions for this route.
         /// </returns>
-        public static ControllerActionEndpointConventionBuilder MapDefaultControllerRoute(this IEndpointRouteBuilder endpoints)
-        {
+        public static ControllerActionEndpointConventionBuilder MapDefaultControllerRoute(
+            this IEndpointRouteBuilder endpoints
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -58,7 +60,8 @@ namespace Microsoft.AspNetCore.Builder
                 "{controller=Home}/{action=Index}/{id?}",
                 defaults: null,
                 constraints: null,
-                dataTokens: null);
+                dataTokens: null
+            );
         }
 
         /// <summary>
@@ -90,8 +93,8 @@ namespace Microsoft.AspNetCore.Builder
             string pattern,
             object? defaults = null,
             object? constraints = null,
-            object? dataTokens = null)
-        {
+            object? dataTokens = null
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -105,7 +108,8 @@ namespace Microsoft.AspNetCore.Builder
                 pattern,
                 new RouteValueDictionary(defaults),
                 new RouteValueDictionary(constraints),
-                new RouteValueDictionary(dataTokens));
+                new RouteValueDictionary(dataTokens)
+            );
         }
 
         /// <summary>
@@ -139,8 +143,8 @@ namespace Microsoft.AspNetCore.Builder
             string pattern,
             object? defaults = null,
             object? constraints = null,
-            object? dataTokens = null)
-        {
+            object? dataTokens = null
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -148,16 +152,26 @@ namespace Microsoft.AspNetCore.Builder
 
             if (string.IsNullOrEmpty(areaName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(areaName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(areaName)
+                );
             }
 
             var defaultsDictionary = new RouteValueDictionary(defaults);
             defaultsDictionary["area"] = defaultsDictionary["area"] ?? areaName;
 
             var constraintsDictionary = new RouteValueDictionary(constraints);
-            constraintsDictionary["area"] = constraintsDictionary["area"] ?? new StringRouteConstraint(areaName);
+            constraintsDictionary["area"] =
+                constraintsDictionary["area"] ?? new StringRouteConstraint(areaName);
 
-            return endpoints.MapControllerRoute(name, pattern, defaultsDictionary, constraintsDictionary, dataTokens);
+            return endpoints.MapControllerRoute(
+                name,
+                pattern,
+                defaultsDictionary,
+                constraintsDictionary,
+                dataTokens
+            );
         }
 
         /// <summary>
@@ -193,8 +207,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapFallbackToController(
             this IEndpointRouteBuilder endpoints,
             string action,
-            string controller)
-        {
+            string controller
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -220,12 +234,16 @@ namespace Microsoft.AspNetCore.Builder
             // Maps a fallback endpoint with an empty delegate. This is OK because
             // we don't expect the delegate to run.
             var builder = endpoints.MapFallback(context => Task.CompletedTask);
-            builder.Add(b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area: null));
-                b.Metadata.Add(new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId));
-            });
+            builder.Add(
+                b =>
+                {
+                    // MVC registers a policy that looks for this metadata.
+                    b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area: null));
+                    b.Metadata.Add(
+                        new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId)
+                    );
+                }
+            );
             return builder;
         }
 
@@ -267,8 +285,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string pattern,
             string action,
-            string controller)
-        {
+            string controller
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -299,12 +317,16 @@ namespace Microsoft.AspNetCore.Builder
             // Maps a fallback endpoint with an empty delegate. This is OK because
             // we don't expect the delegate to run.
             var builder = endpoints.MapFallback(pattern, context => Task.CompletedTask);
-            builder.Add(b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area: null));
-                b.Metadata.Add(new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId));
-            });
+            builder.Add(
+                b =>
+                {
+                    // MVC registers a policy that looks for this metadata.
+                    b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area: null));
+                    b.Metadata.Add(
+                        new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId)
+                    );
+                }
+            );
             return builder;
         }
 
@@ -343,8 +365,8 @@ namespace Microsoft.AspNetCore.Builder
             this IEndpointRouteBuilder endpoints,
             string action,
             string controller,
-            string area)
-        {
+            string area
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -370,12 +392,16 @@ namespace Microsoft.AspNetCore.Builder
             // Maps a fallback endpoint with an empty delegate. This is OK because
             // we don't expect the delegate to run.
             var builder = endpoints.MapFallback(context => Task.CompletedTask);
-            builder.Add(b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area));
-                b.Metadata.Add(new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId));
-            });
+            builder.Add(
+                b =>
+                {
+                    // MVC registers a policy that looks for this metadata.
+                    b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area));
+                    b.Metadata.Add(
+                        new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId)
+                    );
+                }
+            );
             return builder;
         }
 
@@ -419,8 +445,8 @@ namespace Microsoft.AspNetCore.Builder
             string pattern,
             string action,
             string controller,
-            string area)
-        {
+            string area
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -451,12 +477,16 @@ namespace Microsoft.AspNetCore.Builder
             // Maps a fallback endpoint with an empty delegate. This is OK because
             // we don't expect the delegate to run.
             var builder = endpoints.MapFallback(pattern, context => Task.CompletedTask);
-            builder.Add(b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area));
-                b.Metadata.Add(new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId));
-            });
+            builder.Add(
+                b =>
+                {
+                    // MVC registers a policy that looks for this metadata.
+                    b.Metadata.Add(CreateDynamicControllerMetadata(action, controller, area));
+                    b.Metadata.Add(
+                        new ControllerEndpointDataSourceIdMetadata(dataSource.DataSourceId)
+                    );
+                }
+            );
             return builder;
         }
 
@@ -477,8 +507,10 @@ namespace Microsoft.AspNetCore.Builder
         /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
         /// </para>
         /// </remarks>
-        public static void MapDynamicControllerRoute<TTransformer>(this IEndpointRouteBuilder endpoints, string pattern)
-            where TTransformer : DynamicRouteValueTransformer
+        public static void MapDynamicControllerRoute<TTransformer>(
+            this IEndpointRouteBuilder endpoints,
+            string pattern
+        ) where TTransformer : DynamicRouteValueTransformer
         {
             if (endpoints == null)
             {
@@ -507,8 +539,11 @@ namespace Microsoft.AspNetCore.Builder
         /// is required when using <paramref name="state" />.
         /// </para>
         /// </remarks>
-        public static void MapDynamicControllerRoute<TTransformer>(this IEndpointRouteBuilder endpoints, string pattern, object? state)
-            where TTransformer : DynamicRouteValueTransformer
+        public static void MapDynamicControllerRoute<TTransformer>(
+            this IEndpointRouteBuilder endpoints,
+            string pattern,
+            object? state
+        ) where TTransformer : DynamicRouteValueTransformer
         {
             if (endpoints == null)
             {
@@ -522,7 +557,12 @@ namespace Microsoft.AspNetCore.Builder
             RegisterInCache(endpoints.ServiceProvider, controllerDataSource);
 
             // The data source is just used to share the common order with conventionally routed actions.
-            controllerDataSource.AddDynamicControllerEndpoint(endpoints, pattern, typeof(TTransformer), state);
+            controllerDataSource.AddDynamicControllerEndpoint(
+                endpoints,
+                pattern,
+                typeof(TTransformer),
+                state
+            );
         }
 
         /// <summary>
@@ -545,8 +585,12 @@ namespace Microsoft.AspNetCore.Builder
         /// is required when using <paramref name="state" />.
         /// </para>
         /// </remarks>
-        public static void MapDynamicControllerRoute<TTransformer>(this IEndpointRouteBuilder endpoints, string pattern, object state, int order)
-            where TTransformer : DynamicRouteValueTransformer
+        public static void MapDynamicControllerRoute<TTransformer>(
+            this IEndpointRouteBuilder endpoints,
+            string pattern,
+            object state,
+            int order
+        ) where TTransformer : DynamicRouteValueTransformer
         {
             if (endpoints == null)
             {
@@ -560,17 +604,28 @@ namespace Microsoft.AspNetCore.Builder
             RegisterInCache(endpoints.ServiceProvider, controllerDataSource);
 
             // The data source is just used to share the common order with conventionally routed actions.
-            controllerDataSource.AddDynamicControllerEndpoint(endpoints, pattern, typeof(TTransformer), state, order);
+            controllerDataSource.AddDynamicControllerEndpoint(
+                endpoints,
+                pattern,
+                typeof(TTransformer),
+                state,
+                order
+            );
         }
 
-        private static DynamicControllerMetadata CreateDynamicControllerMetadata(string action, string controller, string? area)
-        {
-            return new DynamicControllerMetadata(new RouteValueDictionary()
-            {
-                { "action", action },
-                { "controller", controller },
-                { "area", area }
-            });
+        private static DynamicControllerMetadata CreateDynamicControllerMetadata(
+            string action,
+            string controller,
+            string? area
+        ) {
+            return new DynamicControllerMetadata(
+                new RouteValueDictionary()
+                {
+                    { "action", action },
+                    { "controller", controller },
+                    { "area", area }
+                }
+            );
         }
 
         private static void EnsureControllerServices(IEndpointRouteBuilder endpoints)
@@ -578,30 +633,42 @@ namespace Microsoft.AspNetCore.Builder
             var marker = endpoints.ServiceProvider.GetService<MvcMarkerService>();
             if (marker == null)
             {
-                throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                    nameof(IServiceCollection),
-                    "AddControllers",
-                    "ConfigureServices(...)"));
+                throw new InvalidOperationException(
+                    Resources.FormatUnableToFindServices(
+                        nameof(IServiceCollection),
+                        "AddControllers",
+                        "ConfigureServices(...)"
+                    )
+                );
             }
         }
 
-        private static ControllerActionEndpointDataSource GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
-        {
-            var dataSource = endpoints.DataSources.OfType<ControllerActionEndpointDataSource>().FirstOrDefault();
+        private static ControllerActionEndpointDataSource GetOrCreateDataSource(
+            IEndpointRouteBuilder endpoints
+        ) {
+            var dataSource = endpoints.DataSources.OfType<ControllerActionEndpointDataSource>()
+                .FirstOrDefault();
             if (dataSource == null)
             {
-                var orderProvider = endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
-                var factory = endpoints.ServiceProvider.GetRequiredService<ControllerActionEndpointDataSourceFactory>();
-                dataSource = factory.Create(orderProvider.GetOrCreateOrderedEndpointsSequenceProvider(endpoints));
+                var orderProvider =
+                    endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
+                var factory =
+                    endpoints.ServiceProvider.GetRequiredService<ControllerActionEndpointDataSourceFactory>();
+                dataSource = factory.Create(
+                    orderProvider.GetOrCreateOrderedEndpointsSequenceProvider(endpoints)
+                );
                 endpoints.DataSources.Add(dataSource);
             }
 
             return dataSource;
         }
 
-        private static void RegisterInCache(IServiceProvider serviceProvider, ControllerActionEndpointDataSource dataSource)
-        {
-            var cache = serviceProvider.GetRequiredService<DynamicControllerEndpointSelectorCache>();
+        private static void RegisterInCache(
+            IServiceProvider serviceProvider,
+            ControllerActionEndpointDataSource dataSource
+        ) {
+            var cache =
+                serviceProvider.GetRequiredService<DynamicControllerEndpointSelectorCache>();
             cache.AddDataSource(dataSource);
         }
     }

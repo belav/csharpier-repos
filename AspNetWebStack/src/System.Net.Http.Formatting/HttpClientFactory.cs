@@ -20,7 +20,11 @@ namespace System.Net.Http
         /// The handlers are invoked in a top-down fashion. That is, the first entry is invoked first for 
         /// an outbound request message but last for an inbound response message.</param>
         /// <returns>An <see cref="HttpClient"/> instance with the configured handlers.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Handler is disposed with HttpClient")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Handler is disposed with HttpClient"
+        )]
         public static HttpClient Create(params DelegatingHandler[] handlers)
         {
             return Create(new HttpClientHandler(), handlers);
@@ -37,9 +41,15 @@ namespace System.Net.Http
         /// The handlers are invoked in a top-down fashion. That is, the first entry is invoked first for 
         /// an outbound request message but last for an inbound response message.</param>
         /// <returns>An <see cref="HttpClient"/> instance with the configured handlers.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Handler is disposed with HttpClient")]
-        public static HttpClient Create(HttpMessageHandler innerHandler, params DelegatingHandler[] handlers)
-        {
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Handler is disposed with HttpClient"
+        )]
+        public static HttpClient Create(
+            HttpMessageHandler innerHandler,
+            params DelegatingHandler[] handlers
+        ) {
             HttpMessageHandler pipeline = CreatePipeline(innerHandler, handlers);
             return new HttpClient(pipeline);
         }
@@ -55,8 +65,10 @@ namespace System.Net.Http
         /// The handlers are invoked in a top-down fashion. That is, the first entry is invoked first for 
         /// an outbound request message but last for an inbound response message.</param>
         /// <returns>The HTTP message channel.</returns>
-        public static HttpMessageHandler CreatePipeline(HttpMessageHandler innerHandler, IEnumerable<DelegatingHandler> handlers)
-        {
+        public static HttpMessageHandler CreatePipeline(
+            HttpMessageHandler innerHandler,
+            IEnumerable<DelegatingHandler> handlers
+        ) {
             if (innerHandler == null)
             {
                 throw Error.ArgumentNull("innerHandler");
@@ -74,12 +86,22 @@ namespace System.Net.Http
             {
                 if (handler == null)
                 {
-                    throw Error.Argument("handlers", Properties.Resources.DelegatingHandlerArrayContainsNullItem, typeof(DelegatingHandler).Name);
+                    throw Error.Argument(
+                        "handlers",
+                        Properties.Resources.DelegatingHandlerArrayContainsNullItem,
+                        typeof(DelegatingHandler).Name
+                    );
                 }
 
                 if (handler.InnerHandler != null)
                 {
-                    throw Error.Argument("handlers", Properties.Resources.DelegatingHandlerArrayHasNonNullInnerHandler, typeof(DelegatingHandler).Name, "InnerHandler", handler.GetType().Name);
+                    throw Error.Argument(
+                        "handlers",
+                        Properties.Resources.DelegatingHandlerArrayHasNonNullInnerHandler,
+                        typeof(DelegatingHandler).Name,
+                        "InnerHandler",
+                        handler.GetType().Name
+                    );
                 }
 
                 handler.InnerHandler = pipeline;

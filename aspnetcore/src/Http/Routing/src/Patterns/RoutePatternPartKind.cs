@@ -12,12 +12,10 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         /// The <see cref="RoutePatternPartKind"/> of a <see cref="RoutePatternLiteralPart"/>.
         /// </summary>
         Literal,
-
         /// <summary>
         /// The <see cref="RoutePatternPartKind"/> of a <see cref="RoutePatternParameterPart"/>.
         /// </summary>
         Parameter,
-
         /// <summary>
         /// The <see cref="RoutePatternPartKind"/> of a <see cref="RoutePatternSeparatorPart"/>.
         /// </summary>

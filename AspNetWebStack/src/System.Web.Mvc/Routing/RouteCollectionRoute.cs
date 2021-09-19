@@ -44,8 +44,10 @@ namespace System.Web.Mvc.Routing
             return CreateDirectRouteMatch(this, matches);
         }
 
-        public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
-        {
+        public override VirtualPathData GetVirtualPath(
+            RequestContext requestContext,
+            RouteValueDictionary values
+        ) {
             // Link generation is not supported via the RouteCollectionRoute - see LinkGenerationRoute.
             return null;
         }
@@ -84,10 +86,13 @@ namespace System.Web.Mvc.Routing
                 //
                 // Inside the DefaultControllerFactory we'll double check the route data and throw if we have
                 // multiple controller matches, but for now let's just use the controller of the first match.
-                ControllerDescriptor controllerDescriptor = matches[0].GetTargetControllerDescriptor();
+                ControllerDescriptor controllerDescriptor = matches[
+                    0
+                ].GetTargetControllerDescriptor();
                 if (controllerDescriptor != null)
                 {
-                    routeData.Values[RouteDataTokenKeys.Controller] = controllerDescriptor.ControllerName;
+                    routeData.Values[RouteDataTokenKeys.Controller] =
+                        controllerDescriptor.ControllerName;
                 }
 
                 return routeData;

@@ -16,8 +16,8 @@ namespace Internal.Cryptography
             int blockSize,
             int paddingSize,
             int feedbackSize,
-            bool encrypting)
-        {
+            bool encrypting
+        ) {
             // The algorithm pointer is a static pointer, so not having any cleanup code is correct.
             IntPtr algorithm;
             switch ((cipherMode, feedbackSize))
@@ -38,7 +38,16 @@ namespace Internal.Cryptography
                     throw new NotSupportedException();
             }
 
-            BasicSymmetricCipher cipher = new OpenSslCipher(algorithm, cipherMode, blockSize, paddingSize, key, 0, iv, encrypting);
+            BasicSymmetricCipher cipher = new OpenSslCipher(
+                algorithm,
+                cipherMode,
+                blockSize,
+                paddingSize,
+                key,
+                0,
+                iv,
+                encrypting
+            );
             return UniversalCryptoTransform.Create(paddingMode, cipher, encrypting);
         }
     }

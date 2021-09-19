@@ -20,8 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Returns the nodes in the new tree that do not share the same underlying 
         /// representation in the old tree. These may be entirely new nodes or rebuilt nodes.
         /// </summary>
-        public static ImmutableArray<SyntaxNodeOrToken> GetRebuiltNodes(SyntaxTree oldTree, SyntaxTree newTree)
-        {
+        public static ImmutableArray<SyntaxNodeOrToken> GetRebuiltNodes(
+            SyntaxTree oldTree,
+            SyntaxTree newTree
+        ) {
             var hashSet = new HashSet<GreenNode>();
             GatherNodes(oldTree.GetCompilationUnitRoot(), hashSet);
 
@@ -30,8 +32,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return nodes.ToImmutableAndFree();
         }
 
-        private static void GetRebuiltNodes(SyntaxNodeOrToken newNode, HashSet<GreenNode> hashSet, ArrayBuilder<SyntaxNodeOrToken> nodes)
-        {
+        private static void GetRebuiltNodes(
+            SyntaxNodeOrToken newNode,
+            HashSet<GreenNode> hashSet,
+            ArrayBuilder<SyntaxNodeOrToken> nodes
+        ) {
             if (hashSet.Contains(newNode.UnderlyingNode))
             {
                 return;

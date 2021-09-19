@@ -8,9 +8,15 @@ namespace System.Security.Cryptography
     public partial class PasswordDeriveBytes : DeriveBytes
     {
         [SupportedOSPlatform("windows")]
-        public byte[] CryptDeriveKey(string? algname, string? alghashname, int keySize, byte[] rgbIV)
-        {
-            throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CAPI_Required, nameof(CryptDeriveKey)));
+        public byte[] CryptDeriveKey(
+            string? algname,
+            string? alghashname,
+            int keySize,
+            byte[] rgbIV
+        ) {
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.Cryptography_CAPI_Required, nameof(CryptDeriveKey))
+            );
         }
     }
 }

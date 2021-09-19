@@ -51,9 +51,7 @@ namespace System.Collections
                 throw new ArgumentNullException(nameof(obj));
             }
 
-            return _hcp != null ?
-                _hcp.GetHashCode(obj) :
-                obj.GetHashCode();
+            return _hcp != null ? _hcp.GetHashCode(obj) : obj.GetHashCode();
         }
     }
 }

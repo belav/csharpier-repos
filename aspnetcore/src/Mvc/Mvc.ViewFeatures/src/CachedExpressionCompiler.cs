@@ -21,8 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// return null.
         /// </remarks>
         public static Func<TModel, object> Process<TModel, TResult>(
-            Expression<Func<TModel, TResult>> expression)
-        {
+            Expression<Func<TModel, TResult>> expression
+        ) {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
@@ -35,14 +35,29 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             private static Func<TModel, object> _identityFunc;
 
-            private static readonly ConcurrentDictionary<MemberInfo, Func<TModel, object>> _simpleMemberAccessCache =
-                new ConcurrentDictionary<MemberInfo, Func<TModel, object>>();
+            private static readonly ConcurrentDictionary<
+                MemberInfo,
+                Func<TModel, object>
+            > _simpleMemberAccessCache = new ConcurrentDictionary<
+                MemberInfo,
+                Func<TModel, object>
+            >();
 
-            private static readonly ConcurrentDictionary<MemberExpressionCacheKey, Func<TModel, object>> _chainedMemberAccessCache =
-                new ConcurrentDictionary<MemberExpressionCacheKey, Func<TModel, object>>(MemberExpressionCacheKeyComparer.Instance);
+            private static readonly ConcurrentDictionary<
+                MemberExpressionCacheKey,
+                Func<TModel, object>
+            > _chainedMemberAccessCache = new ConcurrentDictionary<
+                MemberExpressionCacheKey,
+                Func<TModel, object>
+            >(MemberExpressionCacheKeyComparer.Instance);
 
-            private static readonly ConcurrentDictionary<MemberInfo, Func<object, TResult>> _constMemberAccessCache =
-                new ConcurrentDictionary<MemberInfo, Func<object, TResult>>();
+            private static readonly ConcurrentDictionary<
+                MemberInfo,
+                Func<object, TResult>
+            > _constMemberAccessCache = new ConcurrentDictionary<
+                MemberInfo,
+                Func<object, TResult>
+            >();
 
             public static Func<TModel, object> Compile(Expression<Func<TModel, TResult>> expression)
             {
@@ -59,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         return CompileFromConstLookup(constantExpression);
 
                     // model => CapturedConstant
-                    case MemberExpression memberExpression when memberExpression.Expression is ConstantExpression constantExpression:
+                    case MemberExpression memberExpression
+                          when memberExpression.Expression is ConstantExpression constantExpression:
                         return CompileCapturedConstant(memberExpression, constantExpression);
 
                     // model => ModelType.StaticMember
@@ -67,11 +83,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         return CompileFromStaticMemberAccess(expression, memberExpression);
 
                     // model => model.Member
-                    case MemberExpression memberExpression when memberExpression.Expression == expression.Parameters[0]:
+                    case MemberExpression memberExpression
+                          when memberExpression.Expression == expression.Parameters[0]:
                         return CompileFromSimpleMemberAccess(expression, memberExpression);
 
                     // model => model.Member1.Member2
-                    case MemberExpression memberExpression when IsChainedPropertyAccessor(memberExpression):
+                    case MemberExpression memberExpression
+                          when IsChainedPropertyAccessor(memberExpression):
                         return CompileForChainedMemberAccess(expression, memberExpression);
 
                     default:
@@ -91,7 +109,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         {
                             return true;
                         }
-
                         break;
                     }
 
@@ -100,16 +117,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             private static Func<TModel, object> CompileFromConstLookup(
-                ConstantExpression constantExpression)
-            {
+                ConstantExpression constantExpression
+            ) {
                 // model => {const}
                 var constantValue = constantExpression.Value;
                 return _ => constantValue;
             }
 
             private static Func<TModel, object> CompileFromIdentityFunc(
-                Expression<Func<TModel, TResult>> expression)
-            {
+                Expression<Func<TModel, TResult>> expression
+            ) {
                 // model => model
                 // Don't need to lock, as all identity funcs are identical.
                 if (_identityFunc == null)
@@ -123,8 +140,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             private static Func<TModel, object> CompileFromStaticMemberAccess(
                 Expression<Func<TModel, TResult>> expression,
-                MemberExpression memberExpression)
-            {
+                MemberExpression memberExpression
+            ) {
                 // model => ModelType.StaticMember
                 if (_simpleMemberAccessCache.TryGetValue(memberExpression.Member, out var result))
                 {
@@ -140,8 +157,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             private static Func<TModel, object> CompileFromSimpleMemberAccess(
                 Expression<Func<TModel, TResult>> expression,
-                MemberExpression memberExpression)
-            {
+                MemberExpression memberExpression
+            ) {
                 // Input: () => m.Member
                 // Output: () => (m == null) ? null : m.Member
                 if (_simpleMemberAccessCache.TryGetValue(memberExpression.Member, out var result))
@@ -149,14 +166,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     return result;
                 }
 
-                result = _simpleMemberAccessCache.GetOrAdd(memberExpression.Member, Rewrite(expression, memberExpression));
+                result = _simpleMemberAccessCache.GetOrAdd(
+                    memberExpression.Member,
+                    Rewrite(expression, memberExpression)
+                );
                 return result;
             }
 
             private static Func<TModel, object> CompileForChainedMemberAccess(
                 Expression<Func<TModel, TResult>> expression,
-                MemberExpression memberExpression)
-            {
+                MemberExpression memberExpression
+            ) {
                 // Input: () => m.Member1.Member2
                 // Output: () => (m == null || m.Member1 == null) ? null : m.Member1.Member2
                 var key = new MemberExpressionCacheKey(typeof(TModel), memberExpression);
@@ -166,23 +186,31 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 }
 
                 var cacheableKey = key.MakeCacheable();
-                result = _chainedMemberAccessCache.GetOrAdd(cacheableKey, Rewrite(expression, memberExpression));
+                result = _chainedMemberAccessCache.GetOrAdd(
+                    cacheableKey,
+                    Rewrite(expression, memberExpression)
+                );
                 return result;
             }
 
-            private static Func<TModel, object> CompileCapturedConstant(MemberExpression memberExpression, ConstantExpression constantExpression)
-            {
+            private static Func<TModel, object> CompileCapturedConstant(
+                MemberExpression memberExpression,
+                ConstantExpression constantExpression
+            ) {
                 // model => {const} (captured local variable)
                 if (!_constMemberAccessCache.TryGetValue(memberExpression.Member, out var result))
                 {
                     // rewrite as capturedLocal => ((TDeclaringType)capturedLocal)
                     var parameterExpression = Expression.Parameter(typeof(object), "capturedLocal");
-                    var castExpression =
-                        Expression.Convert(parameterExpression, memberExpression.Member.DeclaringType);
+                    var castExpression = Expression.Convert(
+                        parameterExpression,
+                        memberExpression.Member.DeclaringType
+                    );
                     var replacementMemberExpression = memberExpression.Update(castExpression);
                     var replacementExpression = Expression.Lambda<Func<object, TResult>>(
                         replacementMemberExpression,
-                        parameterExpression);
+                        parameterExpression
+                    );
 
                     result = replacementExpression.Compile();
                     result = _constMemberAccessCache.GetOrAdd(memberExpression.Member, result);
@@ -194,8 +222,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             private static Func<TModel, object> Rewrite(
                 Expression<Func<TModel, TResult>> expression,
-                MemberExpression memberExpression)
-            {
+                MemberExpression memberExpression
+            ) {
                 Expression combinedNullTest = null;
                 var currentExpression = memberExpression;
 
@@ -228,17 +256,24 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     body = Expression.Condition(
                         combinedNullTest,
                         Expression.Constant(value: null, body.Type),
-                        body);
+                        body
+                    );
                 }
 
-                var rewrittenExpression = Expression.Lambda<Func<TModel, object>>(body, expression.Parameters);
+                var rewrittenExpression = Expression.Lambda<Func<TModel, object>>(
+                    body,
+                    expression.Parameters
+                );
                 return rewrittenExpression.Compile();
             }
 
-            private static void AddNullCheck(Expression invokingExpression, ref Expression combinedNullTest)
-            {
+            private static void AddNullCheck(
+                Expression invokingExpression,
+                ref Expression combinedNullTest
+            ) {
                 var type = invokingExpression.Type;
-                var isNullableValueType = type.IsValueType && Nullable.GetUnderlyingType(type) != null;
+                var isNullableValueType =
+                    type.IsValueType && Nullable.GetUnderlyingType(type) != null;
                 if (type.IsValueType && !isNullableValueType)
                 {
                     // struct.Member where struct is not nullable. Do nothing.
@@ -247,9 +282,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                 // NullableStruct.Member or Class.Member
                 // type is Nullable ? (value == null) : object.ReferenceEquals(value, null)
-                var nullTest = isNullableValueType ?
-                    Expression.Equal(invokingExpression, NullExpression) :
-                    Expression.ReferenceEqual(invokingExpression, NullExpression);
+                var nullTest = isNullableValueType
+                    ? Expression.Equal(invokingExpression, NullExpression)
+                    : Expression.ReferenceEqual(invokingExpression, NullExpression);
 
                 if (combinedNullTest == null)
                 {

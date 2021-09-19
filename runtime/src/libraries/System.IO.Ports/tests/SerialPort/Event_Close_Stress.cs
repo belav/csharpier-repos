@@ -11,26 +11,40 @@ namespace System.IO.Ports.Tests
     public class Event_Close_Stress : PortsTest
     {
         //Maximum time to wait for all of the expected events to be firered
-        private static readonly TimeSpan s_testDuration = TCSupport.RunShortStressTests ? TimeSpan.FromSeconds(10) : TimeSpan.FromMinutes(3);
+        private static readonly TimeSpan s_testDuration = TCSupport.RunShortStressTests
+            ? TimeSpan.FromSeconds(10)
+            : TimeSpan.FromMinutes(3);
 
         #region Test Cases
 
         [ConditionalFact(nameof(HasNullModem))]
         public void PinChanged_Close_Stress()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 Stopwatch stopwatch = new Stopwatch();
                 int count = 0;
                 int pinChangedCount = 0;
 
-                com1.PinChanged += (sender, e) => { ++pinChangedCount; };
+                com1.PinChanged += (sender, e) =>
+                {
+                    ++pinChangedCount;
+                };
                 com2.Open();
 
                 stopwatch.Start();
-                while (count % 100 != 0 || stopwatch.ElapsedMilliseconds < s_testDuration.TotalMilliseconds)
-                {
+                while (
+                    count % 100 != 0
+                    || stopwatch.ElapsedMilliseconds < s_testDuration.TotalMilliseconds
+                ) {
                     com1.Open();
 
                     for (int j = 0; j < 10; ++j)
@@ -50,19 +64,31 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void DataReceived_Close_Stress()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 Stopwatch stopwatch = new Stopwatch();
                 int dataReceivedCount = 0;
                 int count = 0;
 
-                com1.DataReceived += (sender, e) => { ++dataReceivedCount; };
+                com1.DataReceived += (sender, e) =>
+                {
+                    ++dataReceivedCount;
+                };
                 com2.Open();
 
                 stopwatch.Start();
-                while (count % 100 != 0 || stopwatch.ElapsedMilliseconds < s_testDuration.TotalMilliseconds)
-                {
+                while (
+                    count % 100 != 0
+                    || stopwatch.ElapsedMilliseconds < s_testDuration.TotalMilliseconds
+                ) {
                     com1.Open();
 
                     for (int j = 0; j < 10; ++j)
@@ -85,16 +111,26 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ErrorReceived_Close_Stress()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            ) {
                 byte[] frameErrorBytes = new byte[1];
                 Stopwatch stopwatch = new Stopwatch();
                 int errorReceivedCount = 0;
                 int count = 0;
 
                 com1.DataBits = 7;
-                com1.ErrorReceived += (sender, e) => { ++errorReceivedCount; };
+                com1.ErrorReceived += (sender, e) =>
+                {
+                    ++errorReceivedCount;
+                };
                 com2.Open();
 
                 //This should cause a fame error since the 8th bit is not set
@@ -103,8 +139,10 @@ namespace System.IO.Ports.Tests
                 frameErrorBytes[0] = 0x01;
 
                 stopwatch.Start();
-                while (count % 100 != 0 || stopwatch.ElapsedMilliseconds < s_testDuration.TotalMilliseconds)
-                {
+                while (
+                    count % 100 != 0
+                    || stopwatch.ElapsedMilliseconds < s_testDuration.TotalMilliseconds
+                ) {
                     com1.Open();
 
                     for (int j = 0; j < 10; ++j)
@@ -122,7 +160,6 @@ namespace System.IO.Ports.Tests
                 Debug.WriteLine("ERRORReceived={0}", errorReceivedCount);
             }
         }
-
         #endregion
 
         #region Verification for Test Cases

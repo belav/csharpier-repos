@@ -10,7 +10,9 @@ using System.Xml.XPath;
 namespace System.Xml.Xsl
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class XsltException : SystemException
     {
         private readonly string _res;
@@ -23,7 +25,8 @@ namespace System.Xml.Xsl
         // message == null for created V2 exceptions; the exception message is stored in Exception._message
         private readonly string? _message;
 
-        protected XsltException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected XsltException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _res = (string)info.GetValue("res", typeof(string))!;
             _args = (string[]?)info.GetValue("args", typeof(string[]));
@@ -68,10 +71,8 @@ namespace System.Xml.Xsl
 
         public XsltException(string message) : this(message, (Exception?)null) { }
 
-        public XsltException(string message, Exception? innerException) :
-            this(SR.Xml_UserException, new string?[] { message }, null, 0, 0, innerException)
-        {
-        }
+        public XsltException(string message, Exception? innerException)
+            : this(SR.Xml_UserException, new string?[] { message }, null, 0, 0, innerException) { }
 
         internal static XsltException Create(string res, params string?[] args)
         {
@@ -83,8 +84,14 @@ namespace System.Xml.Xsl
             return new XsltException(res, args, null, 0, 0, inner);
         }
 
-        internal XsltException(string res, string?[] args, string? sourceUri, int lineNumber, int linePosition, Exception? inner)
-            : base(CreateMessage(res, args, sourceUri, lineNumber, linePosition), inner)
+        internal XsltException(
+            string res,
+            string?[] args,
+            string? sourceUri,
+            int lineNumber,
+            int linePosition,
+            Exception? inner
+        ) : base(CreateMessage(res, args, sourceUri, lineNumber, linePosition), inner)
         {
             HResult = HResults.XmlXslt;
             _res = res;
@@ -110,20 +117,29 @@ namespace System.Xml.Xsl
 
         public override string Message
         {
-            get
-            {
-                return _message ?? base.Message;
-            }
+            get { return _message ?? base.Message; }
         }
 
-        private static string CreateMessage(string res, string?[]? args, string? sourceUri, int lineNumber, int linePosition)
-        {
+        private static string CreateMessage(
+            string res,
+            string?[]? args,
+            string? sourceUri,
+            int lineNumber,
+            int linePosition
+        ) {
             try
             {
                 string message = FormatMessage(res, args);
                 if (res != SR.Xslt_CompileError && lineNumber != 0)
                 {
-                    message += " " + FormatMessage(SR.Xml_ErrorFilePosition, sourceUri, lineNumber.ToString(CultureInfo.InvariantCulture), linePosition.ToString(CultureInfo.InvariantCulture));
+                    message +=
+                        " "
+                        + FormatMessage(
+                            SR.Xml_ErrorFilePosition,
+                            sourceUri,
+                            lineNumber.ToString(CultureInfo.InvariantCulture),
+                            linePosition.ToString(CultureInfo.InvariantCulture)
+                        );
                 }
                 return message;
             }
@@ -146,12 +162,13 @@ namespace System.Xml.Xsl
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class XsltCompileException : XsltException
     {
-        protected XsltCompileException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected XsltCompileException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -162,14 +179,26 @@ namespace System.Xml.Xsl
 
         public XsltCompileException(string message) : base(message) { }
 
-        public XsltCompileException(string message, Exception innerException) : base(message, innerException) { }
+        public XsltCompileException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        public XsltCompileException(Exception inner, string sourceUri, int lineNumber, int linePosition) :
-            base(
-                lineNumber != 0 ? SR.Xslt_CompileError : SR.Xslt_CompileError2,
-                new string[] { sourceUri, lineNumber.ToString(CultureInfo.InvariantCulture), linePosition.ToString(CultureInfo.InvariantCulture) },
-                sourceUri, lineNumber, linePosition, inner
-            )
-        { }
+        public XsltCompileException(
+            Exception inner,
+            string sourceUri,
+            int lineNumber,
+            int linePosition
+        ) : base(
+            lineNumber != 0 ? SR.Xslt_CompileError : SR.Xslt_CompileError2,
+            new string[]
+            {
+                sourceUri,
+                lineNumber.ToString(CultureInfo.InvariantCulture),
+                linePosition.ToString(CultureInfo.InvariantCulture)
+            },
+            sourceUri,
+            lineNumber,
+            linePosition,
+            inner
+        ) { }
     }
 }

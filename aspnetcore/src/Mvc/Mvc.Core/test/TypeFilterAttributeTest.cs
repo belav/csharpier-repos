@@ -16,8 +16,7 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var value = "Some value";
             var uri = new Uri("http://www.asp.net");
-            var serviceProvider = new ServiceCollection()
-                .AddSingleton(value)
+            var serviceProvider = new ServiceCollection().AddSingleton(value)
                 .AddSingleton(uri)
                 .BuildServiceProvider();
 
@@ -38,8 +37,7 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var value = "Some value";
             var uri = new Uri("http://www.asp.net");
-            var serviceProvider = new ServiceCollection()
-                .AddSingleton("Value in DI")
+            var serviceProvider = new ServiceCollection().AddSingleton("Value in DI")
                 .AddSingleton(uri)
                 .BuildServiceProvider();
 
@@ -63,8 +61,7 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var value = "Some value";
             var uri = new Uri("http://www.asp.net");
-            var serviceProvider = new ServiceCollection()
-                .AddSingleton("Value in DI")
+            var serviceProvider = new ServiceCollection().AddSingleton("Value in DI")
                 .AddSingleton(uri)
                 .BuildServiceProvider();
 

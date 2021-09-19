@@ -17,37 +17,44 @@ namespace System.Configuration
         private string _seedList = string.Empty;
 
         internal ConfigurationLockCollection(ConfigurationElement thisElement)
-            : this(thisElement, ConfigurationLockCollectionType.LockedAttributes)
-        { }
+            : this(thisElement, ConfigurationLockCollectionType.LockedAttributes) { }
 
-        internal ConfigurationLockCollection(ConfigurationElement thisElement, ConfigurationLockCollectionType lockType)
-            : this(thisElement, lockType, string.Empty)
-        { }
+        internal ConfigurationLockCollection(
+            ConfigurationElement thisElement,
+            ConfigurationLockCollectionType lockType
+        ) : this(thisElement, lockType, string.Empty) { }
 
-        internal ConfigurationLockCollection(ConfigurationElement thisElement, ConfigurationLockCollectionType lockType,
-            string ignoreName)
-            : this(thisElement, lockType, ignoreName, null)
-        { }
+        internal ConfigurationLockCollection(
+            ConfigurationElement thisElement,
+            ConfigurationLockCollectionType lockType,
+            string ignoreName
+        ) : this(thisElement, lockType, ignoreName, null) { }
 
-        internal ConfigurationLockCollection(ConfigurationElement thisElement, ConfigurationLockCollectionType lockType,
-            string ignoreName, ConfigurationLockCollection parentCollection)
-        {
+        internal ConfigurationLockCollection(
+            ConfigurationElement thisElement,
+            ConfigurationLockCollectionType lockType,
+            string ignoreName,
+            ConfigurationLockCollection parentCollection
+        ) {
             _thisElement = thisElement;
             LockType = lockType;
             _internalDictionary = new HybridDictionary();
             _internalArraylist = new ArrayList();
             IsModified = false;
 
-            ExceptionList = (LockType == ConfigurationLockCollectionType.LockedExceptionList) ||
-                (LockType == ConfigurationLockCollectionType.LockedElementsExceptionList);
+            ExceptionList =
+                (LockType == ConfigurationLockCollectionType.LockedExceptionList)
+                || (LockType == ConfigurationLockCollectionType.LockedElementsExceptionList);
             _ignoreName = ignoreName;
 
-            if (parentCollection == null) return;
+            if (parentCollection == null)
+                return;
 
             foreach (string key in parentCollection) // seed the new collection
             {
                 Add(key, ConfigurationValueFlags.Inherited); // add the local copy
-                if (!ExceptionList) continue;
+                if (!ExceptionList)
+                    continue;
 
                 if (_seedList.Length != 0)
                     _seedList += ",";
@@ -69,7 +76,8 @@ namespace System.Configuration
 
                 foreach (DictionaryEntry de in _internalDictionary)
                 {
-                    if (sb.Length != 0) sb.Append(',');
+                    if (sb.Length != 0)
+                        sb.Append(',');
                     sb.Append(de.Key);
                 }
                 return sb.ToString();
@@ -87,12 +95,17 @@ namespace System.Configuration
                 // If so the there were some parent elements because empty string is invalid in config.
                 // and the only way to get an empty list is for the merged config to have no elements
                 // in common.
-                if (ExceptionList && (_internalDictionary.Count == 0) && !string.IsNullOrEmpty(_seedList))
+                if (
+                    ExceptionList
+                    && (_internalDictionary.Count == 0)
+                    && !string.IsNullOrEmpty(_seedList)
+                )
                     return true;
 
                 foreach (DictionaryEntry de in _internalDictionary)
-                    if (((ConfigurationValueFlags)de.Value & ConfigurationValueFlags.Inherited) != 0)
-                    {
+                    if (
+                        ((ConfigurationValueFlags)de.Value & ConfigurationValueFlags.Inherited) != 0
+                    ) {
                         result = true;
                         break;
                     }
@@ -124,9 +137,13 @@ namespace System.Configuration
 
         public void Add(string name)
         {
-            if (((_thisElement.ItemLocked & ConfigurationValueFlags.Locked) != 0) &&
-                ((_thisElement.ItemLocked & ConfigurationValueFlags.Inherited) != 0))
-                throw new ConfigurationErrorsException(SR.Format(SR.Config_base_attribute_locked, name));
+            if (
+                ((_thisElement.ItemLocked & ConfigurationValueFlags.Locked) != 0)
+                && ((_thisElement.ItemLocked & ConfigurationValueFlags.Inherited) != 0)
+            )
+                throw new ConfigurationErrorsException(
+                    SR.Format(SR.Config_base_attribute_locked, name)
+                );
 
             ConfigurationValueFlags flags = ConfigurationValueFlags.Modified;
 
@@ -134,24 +151,35 @@ namespace System.Configuration
             ConfigurationProperty propToLock = _thisElement.Properties[attribToLockTrim];
             if ((propToLock == null) && (attribToLockTrim != LockAll))
             {
-                ConfigurationElementCollection collection = _thisElement as ConfigurationElementCollection;
-                if ((collection == null) && (_thisElement.Properties.DefaultCollectionProperty != null))
-                {
+                ConfigurationElementCollection collection =
+                    _thisElement as ConfigurationElementCollection;
+                if (
+                    (collection == null)
+                    && (_thisElement.Properties.DefaultCollectionProperty != null)
+                ) {
                     // this is not a collection but it may contain a default collection
                     collection =
-                        _thisElement[_thisElement.Properties.DefaultCollectionProperty] as
-                            ConfigurationElementCollection;
+                        _thisElement[_thisElement.Properties.DefaultCollectionProperty]
+                        as ConfigurationElementCollection;
                 }
 
-                if ((collection == null) ||
-                    (LockType == ConfigurationLockCollectionType.LockedAttributes) ||
+                if (
+                    (collection == null)
+                    || (LockType == ConfigurationLockCollectionType.LockedAttributes)
+                    ||
                     // If the collection type is not element then the lock is bogus
-                    (LockType == ConfigurationLockCollectionType.LockedExceptionList))
+                    (LockType == ConfigurationLockCollectionType.LockedExceptionList)
+                )
                     _thisElement.ReportInvalidLock(attribToLockTrim, LockType, null, null);
                 else
                 {
                     if (!collection.IsLockableElement(attribToLockTrim))
-                        _thisElement.ReportInvalidLock(attribToLockTrim, LockType, null, collection.LockableElements);
+                        _thisElement.ReportInvalidLock(
+                            attribToLockTrim,
+                            LockType,
+                            null,
+                            collection.LockableElements
+                        );
                 }
             }
             else
@@ -159,15 +187,17 @@ namespace System.Configuration
                 // the lock is in the property bag but is it the correct type?
                 if ((propToLock != null) && propToLock.IsRequired)
                 {
-                    throw new ConfigurationErrorsException(SR.Format(SR.Config_base_required_attribute_lock_attempt,
-                        propToLock.Name));
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Config_base_required_attribute_lock_attempt, propToLock.Name)
+                    );
                 }
 
                 if (attribToLockTrim != LockAll)
                 {
-                    if ((LockType == ConfigurationLockCollectionType.LockedElements) ||
-                        (LockType == ConfigurationLockCollectionType.LockedElementsExceptionList))
-                    {
+                    if (
+                        (LockType == ConfigurationLockCollectionType.LockedElements)
+                        || (LockType == ConfigurationLockCollectionType.LockedElementsExceptionList)
+                    ) {
                         // If it is an element then it must be derived from ConfigurationElement
                         if (!typeof(ConfigurationElement).IsAssignableFrom(propToLock?.Type))
                             _thisElement.ReportInvalidLock(attribToLockTrim, LockType, null, null);
@@ -183,7 +213,9 @@ namespace System.Configuration
 
             if (_internalDictionary.Contains(name))
             {
-                flags = ConfigurationValueFlags.Modified | (ConfigurationValueFlags)_internalDictionary[name];
+                flags =
+                    ConfigurationValueFlags.Modified
+                    | (ConfigurationValueFlags)_internalDictionary[name];
                 _internalDictionary.Remove(name); // not from parent
                 _internalArraylist.Remove(name);
             }
@@ -198,7 +230,9 @@ namespace System.Configuration
             {
                 // the user has an item declared as locked below a level where it is already locked
                 // keep enough info so we can write out the lock if they save in modified mode
-                flags = ConfigurationValueFlags.Modified | (ConfigurationValueFlags)_internalDictionary[name];
+                flags =
+                    ConfigurationValueFlags.Modified
+                    | (ConfigurationValueFlags)_internalDictionary[name];
                 _internalDictionary.Remove(name);
                 _internalArraylist.Remove(name);
             }
@@ -214,28 +248,47 @@ namespace System.Configuration
 
             if (!ExceptionList)
             {
-                return _internalDictionary.Contains(name) &&
-                    (((ConfigurationValueFlags)_internalDictionary[name] & ConfigurationValueFlags.Inherited) != 0);
+                return _internalDictionary.Contains(name)
+                    && (
+                        (
+                            (ConfigurationValueFlags)_internalDictionary[name]
+                            & ConfigurationValueFlags.Inherited
+                        ) != 0
+                    );
             }
 
             string parentListEnclosed = "," + _seedList + ",";
-            if (name.Equals(_ignoreName) ||
-                (parentListEnclosed.IndexOf("," + name + ",", StringComparison.Ordinal) >= 0))
+            if (
+                name.Equals(_ignoreName)
+                || (parentListEnclosed.IndexOf("," + name + ",", StringComparison.Ordinal) >= 0)
+            )
                 return true;
-            return _internalDictionary.Contains(name) &&
-                (((ConfigurationValueFlags)_internalDictionary[name] & ConfigurationValueFlags.Inherited) != 0);
+            return _internalDictionary.Contains(name)
+                && (
+                    (
+                        (ConfigurationValueFlags)_internalDictionary[name]
+                        & ConfigurationValueFlags.Inherited
+                    ) != 0
+                );
         }
 
         internal bool IsValueModified(string name)
         {
-            return _internalDictionary.Contains(name) &&
-                (((ConfigurationValueFlags)_internalDictionary[name] & ConfigurationValueFlags.Modified) != 0);
+            return _internalDictionary.Contains(name)
+                && (
+                    (
+                        (ConfigurationValueFlags)_internalDictionary[name]
+                        & ConfigurationValueFlags.Modified
+                    ) != 0
+                );
         }
 
         internal void RemoveInheritedLocks()
         {
             StringCollection removeList = new StringCollection();
-            foreach (string key in this) if (DefinedInParent(key)) removeList.Add(key);
+            foreach (string key in this)
+                if (DefinedInParent(key))
+                    removeList.Add(key);
             foreach (string key in removeList)
             {
                 _internalDictionary.Remove(key);
@@ -246,15 +299,30 @@ namespace System.Configuration
         public void Remove(string name)
         {
             if (!_internalDictionary.Contains(name))
-                throw new ConfigurationErrorsException(SR.Format(SR.Config_base_collection_entry_not_found, name));
+                throw new ConfigurationErrorsException(
+                    SR.Format(SR.Config_base_collection_entry_not_found, name)
+                );
 
             // in a locked list you cannot remove items that were locked in the parent
             // in an exception list this is legal because it makes the list more restrictive
-            if ((ExceptionList == false) &&
-                (((ConfigurationValueFlags)_internalDictionary[name] & ConfigurationValueFlags.Inherited) != 0))
-            {
-                if (((ConfigurationValueFlags)_internalDictionary[name] & ConfigurationValueFlags.Modified) == 0)
-                    throw new ConfigurationErrorsException(SR.Format(SR.Config_base_attribute_locked, name));
+            if (
+                (ExceptionList == false)
+                && (
+                    (
+                        (ConfigurationValueFlags)_internalDictionary[name]
+                        & ConfigurationValueFlags.Inherited
+                    ) != 0
+                )
+            ) {
+                if (
+                    (
+                        (ConfigurationValueFlags)_internalDictionary[name]
+                        & ConfigurationValueFlags.Modified
+                    ) == 0
+                )
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.Config_base_attribute_locked, name)
+                    );
 
                 // allow the local one to be "removed" so it won't write out but throw if they try and remove
                 // one that is only inherited
@@ -274,8 +342,10 @@ namespace System.Configuration
         {
             ArrayList removeList = new ArrayList();
             foreach (DictionaryEntry de in _internalDictionary)
-                if ((((ConfigurationValueFlags)de.Value & ConfigurationValueFlags.Inherited) == 0)
-                    || ExceptionList)
+                if (
+                    (((ConfigurationValueFlags)de.Value & ConfigurationValueFlags.Inherited) == 0)
+                    || ExceptionList
+                )
                     removeList.Add(de.Key);
 
             foreach (object removeKey in removeList)
@@ -288,7 +358,8 @@ namespace System.Configuration
             if (useSeedIfAvailble && !string.IsNullOrEmpty(_seedList))
             {
                 string[] keys = _seedList.Split(',');
-                foreach (string key in keys) Add(key, ConfigurationValueFlags.Inherited);
+                foreach (string key in keys)
+                    Add(key, ConfigurationValueFlags.Inherited);
             }
             IsModified = true;
         }
@@ -300,7 +371,8 @@ namespace System.Configuration
 
         public bool Contains(string name)
         {
-            if (ExceptionList && name.Equals(_ignoreName)) return true;
+            if (ExceptionList && name.Equals(_ignoreName))
+                return true;
             return _internalDictionary.Contains(name);
         }
 
@@ -317,9 +389,13 @@ namespace System.Configuration
         public bool IsReadOnly(string name)
         {
             if (!_internalDictionary.Contains(name))
-                throw new ConfigurationErrorsException(SR.Format(SR.Config_base_collection_entry_not_found, name));
-            return
-                ((ConfigurationValueFlags)_internalDictionary[name] & ConfigurationValueFlags.Inherited) != 0;
+                throw new ConfigurationErrorsException(
+                    SR.Format(SR.Config_base_collection_entry_not_found, name)
+                );
+            return (
+                    (ConfigurationValueFlags)_internalDictionary[name]
+                    & ConfigurationValueFlags.Inherited
+                ) != 0;
         }
 
         public void SetFromList(string attributeList)
@@ -329,7 +405,8 @@ namespace System.Configuration
             foreach (string name in splits)
             {
                 string attribTrim = name.Trim();
-                if (!Contains(attribTrim)) Add(attribTrim);
+                if (!Contains(attribTrim))
+                    Add(attribTrim);
             }
         }
     }

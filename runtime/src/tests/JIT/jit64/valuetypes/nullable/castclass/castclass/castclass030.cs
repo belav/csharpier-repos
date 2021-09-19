@@ -3,12 +3,12 @@
 
 // <Area> Nullable - CastClass </Area>
 // <Title> Nullable type with castclass expr  </Title>
-// <Description>  
+// <Description>
 // checking type of NotEmptyStructConstrainedGenQ<int> using cast expr
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
 using System.Runtime.InteropServices;
@@ -18,17 +18,25 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ(object o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenQ<int>)(ValueType)o, Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenQ<int>)(ValueType)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenQ<int>))
+        );
     }
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenQ<int>?)(ValueType)o, Helper.Create(default(NotEmptyStructConstrainedGenQ<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenQ<int>?)(ValueType)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenQ<int>))
+        );
     }
 
     private static int Main()
     {
-        NotEmptyStructConstrainedGenQ<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenQ<int>));
+        NotEmptyStructConstrainedGenQ<int>? s = Helper.Create(
+            default(NotEmptyStructConstrainedGenQ<int>)
+        );
 
         if (BoxUnboxToNQ(s) && BoxUnboxToQ(s))
             return ExitCode.Passed;

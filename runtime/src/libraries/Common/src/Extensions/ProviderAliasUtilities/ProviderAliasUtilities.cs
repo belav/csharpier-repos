@@ -10,18 +10,22 @@ namespace Microsoft.Extensions.Logging
 {
     internal static class ProviderAliasUtilities
     {
-        private const string AliasAttibuteTypeFullName = "Microsoft.Extensions.Logging.ProviderAliasAttribute";
+        private const string AliasAttibuteTypeFullName =
+            "Microsoft.Extensions.Logging.ProviderAliasAttribute";
 
         internal static string GetAlias(Type providerType)
         {
-            IList<CustomAttributeData> attributes = CustomAttributeData.GetCustomAttributes(providerType);
+            IList<CustomAttributeData> attributes = CustomAttributeData.GetCustomAttributes(
+                providerType
+            );
 
             for (int i = 0; i < attributes.Count; i++)
             {
                 CustomAttributeData attributeData = attributes[i];
-                if (attributeData.AttributeType.FullName == AliasAttibuteTypeFullName &&
-                    attributeData.ConstructorArguments.Count > 0)
-                {
+                if (
+                    attributeData.AttributeType.FullName == AliasAttibuteTypeFullName
+                    && attributeData.ConstructorArguments.Count > 0
+                ) {
                     CustomAttributeTypedArgument arg = attributeData.ConstructorArguments[0];
 
                     Debug.Assert(arg.ArgumentType == typeof(string));

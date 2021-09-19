@@ -18,8 +18,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
         /// <param name="configureOptions">A delegate to configure the <see cref="HostFilteringOptions"/>.</param>
         /// <returns></returns>
-        public static IServiceCollection AddHostFiltering(this IServiceCollection services, Action<HostFilteringOptions> configureOptions)
-        {
+        public static IServiceCollection AddHostFiltering(
+            this IServiceCollection services,
+            Action<HostFilteringOptions> configureOptions
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

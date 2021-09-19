@@ -12,18 +12,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class FalseKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public FalseKeywordRecommender()
-            : base(SyntaxKind.FalseKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.FalseKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return
-                context.IsAnyExpressionContext ||
-                context.IsPreProcessorExpressionContext ||
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.TargetToken.IsUnaryOperatorContext();
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            return context.IsAnyExpressionContext
+                || context.IsPreProcessorExpressionContext
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.TargetToken.IsUnaryOperatorContext();
         }
     }
 }

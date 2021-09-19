@@ -21,9 +21,21 @@ namespace System.Web.Http.Tracing
         /// <param name="category">The category for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Debug(this ITraceWriter traceWriter, HttpRequestMessage request, string category, string messageFormat, params object[] messageArguments)
-        {
-            Trace(traceWriter, request, category, TraceLevel.Debug, messageFormat, messageArguments);
+        public static void Debug(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
+            Trace(
+                traceWriter,
+                request,
+                category,
+                TraceLevel.Debug,
+                messageFormat,
+                messageArguments
+            );
         }
 
         /// <summary>
@@ -34,8 +46,12 @@ namespace System.Web.Http.Tracing
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
-        public static void Debug(this ITraceWriter traceWriter, HttpRequestMessage request, string category, Exception exception)
-        {
+        public static void Debug(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            Exception exception
+        ) {
             Trace(traceWriter, request, category, TraceLevel.Debug, exception);
         }
 
@@ -49,9 +65,23 @@ namespace System.Web.Http.Tracing
         /// <param name="exception">The exception to trace</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Debug(this ITraceWriter traceWriter, HttpRequestMessage request, string category, Exception exception, string messageFormat, params object[] messageArguments)
-        {
-            Trace(traceWriter, request, category, TraceLevel.Debug, exception, messageFormat, messageArguments);
+        public static void Debug(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            Exception exception,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
+            Trace(
+                traceWriter,
+                request,
+                category,
+                TraceLevel.Debug,
+                exception,
+                messageFormat,
+                messageArguments
+            );
         }
 
         /// <summary>
@@ -63,9 +93,21 @@ namespace System.Web.Http.Tracing
         /// <param name="category">The category for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Error(this ITraceWriter traceWriter, HttpRequestMessage request, string category, string messageFormat, params object[] messageArguments)
-        {
-            Trace(traceWriter, request, category, TraceLevel.Error, messageFormat, messageArguments);
+        public static void Error(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
+            Trace(
+                traceWriter,
+                request,
+                category,
+                TraceLevel.Error,
+                messageFormat,
+                messageArguments
+            );
         }
 
         /// <summary>
@@ -76,8 +118,12 @@ namespace System.Web.Http.Tracing
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
-        public static void Error(this ITraceWriter traceWriter, HttpRequestMessage request, string category, Exception exception)
-        {
+        public static void Error(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            Exception exception
+        ) {
             Trace(traceWriter, request, category, TraceLevel.Error, exception);
         }
 
@@ -91,9 +137,23 @@ namespace System.Web.Http.Tracing
         /// <param name="exception">The exception to trace</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Error(this ITraceWriter traceWriter, HttpRequestMessage request, string category, Exception exception, string messageFormat, params object[] messageArguments)
-        {
-            Trace(traceWriter, request, category, TraceLevel.Error, exception, messageFormat, messageArguments);
+        public static void Error(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            Exception exception,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
+            Trace(
+                traceWriter,
+                request,
+                category,
+                TraceLevel.Error,
+                exception,
+                messageFormat,
+                messageArguments
+            );
         }
 
         /// <summary>
@@ -105,9 +165,21 @@ namespace System.Web.Http.Tracing
         /// <param name="category">The category for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Fatal(this ITraceWriter traceWriter, HttpRequestMessage request, string category, string messageFormat, params object[] messageArguments)
-        {
-            Trace(traceWriter, request, category, TraceLevel.Fatal, messageFormat, messageArguments);
+        public static void Fatal(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
+            Trace(
+                traceWriter,
+                request,
+                category,
+                TraceLevel.Fatal,
+                messageFormat,
+                messageArguments
+            );
         }
 
         /// <summary>
@@ -118,8 +190,12 @@ namespace System.Web.Http.Tracing
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
-        public static void Fatal(this ITraceWriter traceWriter, HttpRequestMessage request, string category, Exception exception)
-        {
+        public static void Fatal(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            Exception exception
+        ) {
             Trace(traceWriter, request, category, TraceLevel.Fatal, exception);
         }
 
@@ -133,9 +209,23 @@ namespace System.Web.Http.Tracing
         /// <param name="exception">The exception to trace</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Fatal(this ITraceWriter traceWriter, HttpRequestMessage request, string category, Exception exception, string messageFormat, params object[] messageArguments)
-        {
-            Trace(traceWriter, request, category, TraceLevel.Fatal, exception, messageFormat, messageArguments);
+        public static void Fatal(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            Exception exception,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
+            Trace(
+                traceWriter,
+                request,
+                category,
+                TraceLevel.Fatal,
+                exception,
+                messageFormat,
+                messageArguments
+            );
         }
 
         /// <summary>
@@ -147,8 +237,13 @@ namespace System.Web.Http.Tracing
         /// <param name="category">The category for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Info(this ITraceWriter traceWriter, HttpRequestMessage request, string category, string messageFormat, params object[] messageArguments)
-        {
+        public static void Info(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
             Trace(traceWriter, request, category, TraceLevel.Info, messageFormat, messageArguments);
         }
 
@@ -160,8 +255,12 @@ namespace System.Web.Http.Tracing
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
-        public static void Info(this ITraceWriter traceWriter, HttpRequestMessage request, string category, Exception exception)
-        {
+        public static void Info(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            Exception exception
+        ) {
             Trace(traceWriter, request, category, TraceLevel.Info, exception);
         }
 
@@ -175,9 +274,23 @@ namespace System.Web.Http.Tracing
         /// <param name="exception">The exception to trace</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Info(this ITraceWriter traceWriter, HttpRequestMessage request, string category, Exception exception, string messageFormat, params object[] messageArguments)
-        {
-            Trace(traceWriter, request, category, TraceLevel.Info, exception, messageFormat, messageArguments);
+        public static void Info(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            Exception exception,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
+            Trace(
+                traceWriter,
+                request,
+                category,
+                TraceLevel.Info,
+                exception,
+                messageFormat,
+                messageArguments
+            );
         }
 
         /// <summary>
@@ -190,8 +303,13 @@ namespace System.Web.Http.Tracing
         /// <param name="category">The category for the trace.</param>
         /// <param name="level">The <see cref="TraceLevel"/> for the trace.</param>
         /// <param name="exception">The <see cref="Exception"/> to trace.   It may not be null.</param>
-        public static void Trace(this ITraceWriter traceWriter, HttpRequestMessage request, string category, TraceLevel level, Exception exception)
-        {
+        public static void Trace(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            Exception exception
+        ) {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -209,7 +327,8 @@ namespace System.Web.Http.Tracing
                 (TraceRecord traceRecord) =>
                 {
                     traceRecord.Exception = exception;
-                });
+                }
+            );
         }
 
         /// <summary>
@@ -224,8 +343,15 @@ namespace System.Web.Http.Tracing
         /// <param name="exception">The <see cref="Exception"/> to trace.   It may not be null.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Trace(this ITraceWriter traceWriter, HttpRequestMessage request, string category, TraceLevel level, Exception exception, string messageFormat, params object[] messageArguments)
-        {
+        public static void Trace(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            Exception exception,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -248,8 +374,12 @@ namespace System.Web.Http.Tracing
                 (TraceRecord traceRecord) =>
                 {
                     traceRecord.Exception = exception;
-                    traceRecord.Message = System.Web.Http.Error.Format(messageFormat, messageArguments);
-                });
+                    traceRecord.Message = System.Web.Http.Error.Format(
+                        messageFormat,
+                        messageArguments
+                    );
+                }
+            );
         }
 
         /// <summary>
@@ -263,8 +393,14 @@ namespace System.Web.Http.Tracing
         /// <param name="level">The <see cref="TraceLevel"/> for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Trace(this ITraceWriter traceWriter, HttpRequestMessage request, string category, TraceLevel level, string messageFormat, params object[] messageArguments)
-        {
+        public static void Trace(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -281,8 +417,12 @@ namespace System.Web.Http.Tracing
                 level,
                 (TraceRecord traceRecord) =>
                 {
-                    traceRecord.Message = System.Web.Http.Error.Format(messageFormat, messageArguments);
-                });
+                    traceRecord.Message = System.Web.Http.Error.Format(
+                        messageFormat,
+                        messageArguments
+                    );
+                }
+            );
         }
 
         /// <summary>
@@ -301,17 +441,18 @@ namespace System.Web.Http.Tracing
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
         /// <param name="errorTrace">The <see cref="Action"/> to invoke if an error was encountered performing the operation, 
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
-        public static void TraceBeginEnd(this ITraceWriter traceWriter,
-                                        HttpRequestMessage request,
-                                        string category,
-                                        TraceLevel level,
-                                        string operatorName,
-                                        string operationName,
-                                        Action<TraceRecord> beginTrace,
-                                        Action execute,
-                                        Action<TraceRecord> endTrace,
-                                        Action<TraceRecord> errorTrace)
-        {
+        public static void TraceBeginEnd(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            string operatorName,
+            string operationName,
+            Action<TraceRecord> beginTrace,
+            Action execute,
+            Action<TraceRecord> endTrace,
+            Action<TraceRecord> errorTrace
+        ) {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -335,7 +476,8 @@ namespace System.Web.Http.Tracing
                     {
                         beginTrace(traceRecord);
                     }
-                });
+                }
+            );
             try
             {
                 execute();
@@ -353,11 +495,19 @@ namespace System.Web.Http.Tracing
                         {
                             endTrace(traceRecord);
                         }
-                    });
+                    }
+                );
             }
             catch (Exception exception)
             {
-                traceWriter.TraceError(exception, request, category, operatorName, operationName, errorTrace);
+                traceWriter.TraceError(
+                    exception,
+                    request,
+                    category,
+                    operatorName,
+                    operationName,
+                    errorTrace
+                );
                 throw;
             }
         }
@@ -382,18 +532,23 @@ namespace System.Web.Http.Tracing
         /// <param name="errorTrace">The <see cref="Action"/> to invoke if an error was encountered performing the operation, 
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
         /// <returns>The <see cref="Task"/> returned by the operation.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Nested generic required for this method.")]
-        public static Task<TResult> TraceBeginEndAsync<TResult>(this ITraceWriter traceWriter,
-                                HttpRequestMessage request,
-                                string category,
-                                TraceLevel level,
-                                string operatorName,
-                                string operationName,
-                                Action<TraceRecord> beginTrace,
-                                Func<Task<TResult>> execute,
-                                Action<TraceRecord, TResult> endTrace,
-                                Action<TraceRecord> errorTrace)
-        {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Nested generic required for this method."
+        )]
+        public static Task<TResult> TraceBeginEndAsync<TResult>(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            string operatorName,
+            string operationName,
+            Action<TraceRecord> beginTrace,
+            Func<Task<TResult>> execute,
+            Action<TraceRecord, TResult> endTrace,
+            Action<TraceRecord> errorTrace
+        ) {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -417,7 +572,8 @@ namespace System.Web.Http.Tracing
                     {
                         beginTrace(traceRecord);
                     }
-                });
+                }
+            );
             try
             {
                 Task<TResult> task = execute();
@@ -430,24 +586,42 @@ namespace System.Web.Http.Tracing
                     return task;
                 }
 
-                return traceWriter.TraceBeginEndAsyncCore<TResult>(request, category, level, operatorName, operationName, endTrace, errorTrace, task);
+                return traceWriter.TraceBeginEndAsyncCore<TResult>(
+                    request,
+                    category,
+                    level,
+                    operatorName,
+                    operationName,
+                    endTrace,
+                    errorTrace,
+                    task
+                );
             }
             catch (Exception exception)
             {
-                traceWriter.TraceError(exception, request, category, operatorName, operationName, errorTrace);
+                traceWriter.TraceError(
+                    exception,
+                    request,
+                    category,
+                    operatorName,
+                    operationName,
+                    errorTrace
+                );
                 throw;
             }
         }
 
-        private static async Task<TResult> TraceBeginEndAsyncCore<TResult>(this ITraceWriter traceWriter,
+        private static async Task<TResult> TraceBeginEndAsyncCore<TResult>(
+            this ITraceWriter traceWriter,
             HttpRequestMessage request,
-            string category, TraceLevel level,
+            string category,
+            TraceLevel level,
             string operatorName,
             string operationName,
             Action<TraceRecord, TResult> endTrace,
             Action<TraceRecord> errorTrace,
-            Task<TResult> task)
-        {
+            Task<TResult> task
+        ) {
             try
             {
                 TResult result = await task;
@@ -464,33 +638,42 @@ namespace System.Web.Http.Tracing
                         {
                             endTrace(traceRecord, result);
                         }
-                    });
+                    }
+                );
 
                 return result;
             }
             catch (OperationCanceledException)
             {
                 traceWriter.Trace(
-                        request,
-                        category,
-                        TraceLevel.Warn,
-                        (TraceRecord traceRecord) =>
+                    request,
+                    category,
+                    TraceLevel.Warn,
+                    (TraceRecord traceRecord) =>
+                    {
+                        traceRecord.Kind = TraceKind.End;
+                        traceRecord.Operator = operatorName;
+                        traceRecord.Operation = operationName;
+                        traceRecord.Message = SRResources.TraceCancelledMessage;
+                        if (errorTrace != null)
                         {
-                            traceRecord.Kind = TraceKind.End;
-                            traceRecord.Operator = operatorName;
-                            traceRecord.Operation = operationName;
-                            traceRecord.Message = SRResources.TraceCancelledMessage;
-                            if (errorTrace != null)
-                            {
-                                errorTrace(traceRecord);
-                            }
-                        });
+                            errorTrace(traceRecord);
+                        }
+                    }
+                );
 
                 throw;
             }
             catch (Exception exception)
             {
-                traceWriter.TraceError(exception, request, category, operatorName, operationName, errorTrace);
+                traceWriter.TraceError(
+                    exception,
+                    request,
+                    category,
+                    operatorName,
+                    operationName,
+                    errorTrace
+                );
                 throw;
             }
         }
@@ -513,17 +696,18 @@ namespace System.Web.Http.Tracing
         /// <param name="errorTrace">The <see cref="Action"/> to invoke if an error was encountered performing the operation, 
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
         /// <returns>The <see cref="Task"/> returned by the operation.</returns>
-        public static Task TraceBeginEndAsync(this ITraceWriter traceWriter,
-                                HttpRequestMessage request,
-                                string category,
-                                TraceLevel level,
-                                string operatorName,
-                                string operationName,
-                                Action<TraceRecord> beginTrace,
-                                Func<Task> execute,
-                                Action<TraceRecord> endTrace,
-                                Action<TraceRecord> errorTrace)
-        {
+        public static Task TraceBeginEndAsync(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            string operatorName,
+            string operationName,
+            Action<TraceRecord> beginTrace,
+            Func<Task> execute,
+            Action<TraceRecord> endTrace,
+            Action<TraceRecord> errorTrace
+        ) {
             if (traceWriter == null)
             {
                 throw System.Web.Http.Error.ArgumentNull("traceWriter");
@@ -547,7 +731,8 @@ namespace System.Web.Http.Tracing
                     {
                         beginTrace(traceRecord);
                     }
-                });
+                }
+            );
             try
             {
                 Task task = execute();
@@ -560,16 +745,33 @@ namespace System.Web.Http.Tracing
                     return task;
                 }
 
-                return traceWriter.TraceBeginEndAsyncCore(request, category, level, operatorName, operationName, endTrace, errorTrace, task);
+                return traceWriter.TraceBeginEndAsyncCore(
+                    request,
+                    category,
+                    level,
+                    operatorName,
+                    operationName,
+                    endTrace,
+                    errorTrace,
+                    task
+                );
             }
             catch (Exception exception)
             {
-                traceWriter.TraceError(exception, request, category, operatorName, operationName, errorTrace);
+                traceWriter.TraceError(
+                    exception,
+                    request,
+                    category,
+                    operatorName,
+                    operationName,
+                    errorTrace
+                );
                 throw;
             }
         }
 
-        private static async Task TraceBeginEndAsyncCore(this ITraceWriter traceWriter,
+        private static async Task TraceBeginEndAsyncCore(
+            this ITraceWriter traceWriter,
             HttpRequestMessage request,
             string category,
             TraceLevel level,
@@ -577,49 +779,58 @@ namespace System.Web.Http.Tracing
             string operationName,
             Action<TraceRecord> endTrace,
             Action<TraceRecord> errorTrace,
-            Task task)
-        {
+            Task task
+        ) {
             try
             {
                 await task;
                 traceWriter.Trace(
-                        request,
-                        category,
-                        level,
-                        (TraceRecord traceRecord) =>
+                    request,
+                    category,
+                    level,
+                    (TraceRecord traceRecord) =>
+                    {
+                        traceRecord.Kind = TraceKind.End;
+                        traceRecord.Operator = operatorName;
+                        traceRecord.Operation = operationName;
+                        if (endTrace != null)
                         {
-                            traceRecord.Kind = TraceKind.End;
-                            traceRecord.Operator = operatorName;
-                            traceRecord.Operation = operationName;
-                            if (endTrace != null)
-                            {
-                                endTrace(traceRecord);
-                            }
-                        });
+                            endTrace(traceRecord);
+                        }
+                    }
+                );
             }
             catch (OperationCanceledException)
             {
                 traceWriter.Trace(
-                        request,
-                        category,
-                        TraceLevel.Warn,
-                        (TraceRecord traceRecord) =>
+                    request,
+                    category,
+                    TraceLevel.Warn,
+                    (TraceRecord traceRecord) =>
+                    {
+                        traceRecord.Kind = TraceKind.End;
+                        traceRecord.Operator = operatorName;
+                        traceRecord.Operation = operationName;
+                        traceRecord.Message = SRResources.TraceCancelledMessage;
+                        if (errorTrace != null)
                         {
-                            traceRecord.Kind = TraceKind.End;
-                            traceRecord.Operator = operatorName;
-                            traceRecord.Operation = operationName;
-                            traceRecord.Message = SRResources.TraceCancelledMessage;
-                            if (errorTrace != null)
-                            {
-                                errorTrace(traceRecord);
-                            }
-                        });
+                            errorTrace(traceRecord);
+                        }
+                    }
+                );
 
                 throw;
             }
             catch (Exception exception)
             {
-                traceWriter.TraceError(exception, request, category, operatorName, operationName, errorTrace);
+                traceWriter.TraceError(
+                    exception,
+                    request,
+                    category,
+                    operatorName,
+                    operationName,
+                    errorTrace
+                );
                 throw;
             }
         }
@@ -633,8 +844,13 @@ namespace System.Web.Http.Tracing
         /// <param name="category">The category for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Warn(this ITraceWriter traceWriter, HttpRequestMessage request, string category, string messageFormat, params object[] messageArguments)
-        {
+        public static void Warn(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
             Trace(traceWriter, request, category, TraceLevel.Warn, messageFormat, messageArguments);
         }
 
@@ -646,8 +862,12 @@ namespace System.Web.Http.Tracing
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
-        public static void Warn(this ITraceWriter traceWriter, HttpRequestMessage request, string category, Exception exception)
-        {
+        public static void Warn(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            Exception exception
+        ) {
             Trace(traceWriter, request, category, TraceLevel.Warn, exception);
         }
 
@@ -661,16 +881,41 @@ namespace System.Web.Http.Tracing
         /// <param name="exception">The exception to trace</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
         /// <param name="messageArguments">Optional list of arguments for the <paramref name="messageFormat"/>.</param>
-        public static void Warn(this ITraceWriter traceWriter, HttpRequestMessage request, string category, Exception exception, string messageFormat, params object[] messageArguments)
-        {
-            Trace(traceWriter, request, category, TraceLevel.Warn, exception, messageFormat, messageArguments);
+        public static void Warn(
+            this ITraceWriter traceWriter,
+            HttpRequestMessage request,
+            string category,
+            Exception exception,
+            string messageFormat,
+            params object[] messageArguments
+        ) {
+            Trace(
+                traceWriter,
+                request,
+                category,
+                TraceLevel.Warn,
+                exception,
+                messageFormat,
+                messageArguments
+            );
         }
 
-        private static void TraceError(this ITraceWriter traceWriter, Exception exception, HttpRequestMessage request,
-            string category, string operatorName, string operationName, Action<TraceRecord> errorTrace)
-        {
-            TraceLevel traceLevel = TraceWriterExceptionMapper.GetMappedTraceLevel(exception) ?? TraceLevel.Error;
-            traceWriter.Trace(request, category, traceLevel, (traceRecord) =>
+        private static void TraceError(
+            this ITraceWriter traceWriter,
+            Exception exception,
+            HttpRequestMessage request,
+            string category,
+            string operatorName,
+            string operationName,
+            Action<TraceRecord> errorTrace
+        ) {
+            TraceLevel traceLevel =
+                TraceWriterExceptionMapper.GetMappedTraceLevel(exception) ?? TraceLevel.Error;
+            traceWriter.Trace(
+                request,
+                category,
+                traceLevel,
+                (traceRecord) =>
                 {
                     traceRecord.Kind = TraceKind.End;
                     traceRecord.Operator = operatorName;
@@ -681,7 +926,8 @@ namespace System.Web.Http.Tracing
                     {
                         errorTrace(traceRecord);
                     }
-                });
+                }
+            );
         }
     }
 }

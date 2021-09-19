@@ -26,6 +26,5 @@ namespace System.Security.Claims
             var claim = principal.FindFirst(claimType);
             return claim != null ? claim.Value : null;
         }
-
     }
 }

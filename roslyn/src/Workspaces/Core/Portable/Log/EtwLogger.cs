@@ -18,27 +18,38 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     {
         private readonly Lazy<Func<FunctionId, bool>> _loggingChecker;
 
-        // Due to ETW specifics, RoslynEventSource.Instance needs to be initialized during EtwLogger construction 
+        // Due to ETW specifics, RoslynEventSource.Instance needs to be initialized during EtwLogger construction
         // so that we can enable the listeners synchronously before any events are logged.
         private readonly RoslynEventSource _source = RoslynEventSource.Instance;
 
-        public EtwLogger(IGlobalOptionService optionService)
-            => _loggingChecker = new Lazy<Func<FunctionId, bool>>(() => Logger.GetLoggingChecker(optionService));
+        public EtwLogger(IGlobalOptionService optionService) =>
+            _loggingChecker = new Lazy<Func<FunctionId, bool>>(
+                () => Logger.GetLoggingChecker(optionService)
+            );
 
-        public EtwLogger(Func<FunctionId, bool> loggingChecker)
-            => _loggingChecker = new Lazy<Func<FunctionId, bool>>(() => loggingChecker);
+        public EtwLogger(Func<FunctionId, bool> loggingChecker) =>
+            _loggingChecker = new Lazy<Func<FunctionId, bool>>(() => loggingChecker);
 
-        public bool IsEnabled(FunctionId functionId)
-            => _source.IsEnabled() && _loggingChecker.Value(functionId);
+        public bool IsEnabled(FunctionId functionId) =>
+            _source.IsEnabled() && _loggingChecker.Value(functionId);
 
-        public void Log(FunctionId functionId, LogMessage logMessage)
-            => _source.Log(GetMessage(logMessage), functionId);
+        public void Log(FunctionId functionId, LogMessage logMessage) =>
+            _source.Log(GetMessage(logMessage), functionId);
 
-        public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int uniquePairId, CancellationToken cancellationToken)
-            => _source.BlockStart(GetMessage(logMessage), functionId, uniquePairId);
+        public void LogBlockStart(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            CancellationToken cancellationToken
+        ) => _source.BlockStart(GetMessage(logMessage), functionId, uniquePairId);
 
-        public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int uniquePairId, int delta, CancellationToken cancellationToken)
-        {
+        public void LogBlockEnd(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            int delta,
+            CancellationToken cancellationToken
+        ) {
             if (cancellationToken.IsCancellationRequested)
             {
                 _source.BlockCanceled(functionId, delta, uniquePairId);
@@ -55,7 +66,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             return _source.IsEnabled(EventLevel.Verbose, (EventKeywords)(-1));
         }
 
-        private string GetMessage(LogMessage logMessage)
-            => IsVerbose() ? logMessage.GetMessage() : string.Empty;
+        private string GetMessage(LogMessage logMessage) =>
+            IsVerbose() ? logMessage.GetMessage() : string.Empty;
     }
 }

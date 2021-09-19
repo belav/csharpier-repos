@@ -11,12 +11,17 @@ namespace CustomAuthorizationFailureResponse.Authentication
     {
         private readonly ClaimsPrincipal _id;
 
-        public SampleAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
+        public SampleAuthenticationHandler(
+            IOptionsMonitor<AuthenticationSchemeOptions> options,
+            ILoggerFactory logger,
+            UrlEncoder encoder,
+            ISystemClock clock
+        ) : base(options, logger, encoder, clock)
         {
             _id = new ClaimsPrincipal(new ClaimsIdentity("Api"));
         }
 
-        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
-            => Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(_id, "Api")));
+        protected override Task<AuthenticateResult> HandleAuthenticateAsync() =>
+            Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(_id, "Api")));
     }
 }

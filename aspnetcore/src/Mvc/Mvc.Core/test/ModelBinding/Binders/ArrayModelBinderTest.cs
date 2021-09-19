@@ -26,11 +26,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var metadataProvider = new TestModelMetadataProvider();
             bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithIntArrayProperty),
-                nameof(ModelWithIntArrayProperty.ArrayProperty));
+                nameof(ModelWithIntArrayProperty.ArrayProperty)
+            );
 
             var binder = new ArrayModelBinder<int>(
                 new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
-                NullLoggerFactory.Instance);
+                NullLoggerFactory.Instance
+            );
 
             // Act
             await binder.BindModelAsync(bindingContext);
@@ -51,14 +53,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(true, true)]
         public async Task ArrayModelBinder_CreatesEmptyCollection_IfIsTopLevelObject(
             bool allowValidatingTopLevelNodes,
-            bool isBindingRequired)
-        {
+            bool isBindingRequired
+        ) {
             // Arrange
             var expectedErrorCount = isBindingRequired ? 1 : 0;
             var binder = new ArrayModelBinder<string>(
                 new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
                 NullLoggerFactory.Instance,
-                allowValidatingTopLevelNodes);
+                allowValidatingTopLevelNodes
+            );
 
             var bindingContext = CreateContext();
             bindingContext.IsTopLevelObject = true;
@@ -67,11 +70,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             bindingContext.ModelName = "modelName";
 
             var metadataProvider = new TestModelMetadataProvider();
-            var parameter = typeof(ArrayModelBinderTest)
-                .GetMethod(nameof(ActionWithArrayParameter), BindingFlags.Instance | BindingFlags.NonPublic)
+            var parameter = typeof(ArrayModelBinderTest).GetMethod(
+                    nameof(ActionWithArrayParameter),
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
                 .GetParameters()[0];
-            metadataProvider
-                .ForParameter(parameter)
+            metadataProvider.ForParameter(parameter)
                 .BindingDetails(b => b.IsBindingRequired = isBindingRequired);
             bindingContext.ModelMetadata = metadataProvider.GetMetadataForParameter(parameter);
 
@@ -93,7 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var binder = new ArrayModelBinder<string>(
                 new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
                 NullLoggerFactory.Instance,
-                allowValidatingTopLevelNodes: true);
+                allowValidatingTopLevelNodes: true
+            );
 
             var bindingContext = CreateContext();
             bindingContext.IsTopLevelObject = true;
@@ -101,11 +106,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             bindingContext.ModelName = "modelName";
 
             var metadataProvider = new TestModelMetadataProvider();
-            var parameter = typeof(ArrayModelBinderTest)
-                .GetMethod(nameof(ActionWithArrayParameter), BindingFlags.Instance | BindingFlags.NonPublic)
+            var parameter = typeof(ArrayModelBinderTest).GetMethod(
+                    nameof(ActionWithArrayParameter),
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
                 .GetParameters()[0];
-            metadataProvider
-                .ForParameter(parameter)
+            metadataProvider.ForParameter(parameter)
                 .BindingDetails(b => b.IsBindingRequired = true);
             bindingContext.ModelMetadata = metadataProvider.GetMetadataForParameter(parameter);
 
@@ -121,7 +127,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var keyValuePair = Assert.Single(bindingContext.ModelState);
             Assert.Equal("modelName", keyValuePair.Key);
             var error = Assert.Single(keyValuePair.Value.Errors);
-            Assert.Equal("A value for the 'fieldName' parameter or property was not provided.", error.ErrorMessage);
+            Assert.Equal(
+                "A value for the 'fieldName' parameter or property was not provided.",
+                error.ErrorMessage
+            );
         }
 
         [Theory]
@@ -136,24 +145,28 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task ArrayModelBinder_DoesNotCreateCollection_IfNotIsTopLevelObject(
             string prefix,
             bool allowValidatingTopLevelNodes,
-            bool isBindingRequired)
-        {
+            bool isBindingRequired
+        ) {
             // Arrange
             var binder = new ArrayModelBinder<string>(
                 new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
                 NullLoggerFactory.Instance,
-                allowValidatingTopLevelNodes);
+                allowValidatingTopLevelNodes
+            );
 
             var bindingContext = CreateContext();
             bindingContext.ModelName = ModelNames.CreatePropertyModelName(prefix, "ArrayProperty");
 
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider
-                .ForProperty(typeof(ModelWithArrayProperty), nameof(ModelWithArrayProperty.ArrayProperty))
+            metadataProvider.ForProperty(
+                    typeof(ModelWithArrayProperty),
+                    nameof(ModelWithArrayProperty.ArrayProperty)
+                )
                 .BindingDetails(b => b.IsBindingRequired = isBindingRequired);
             bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithArrayProperty),
-                nameof(ModelWithArrayProperty.ArrayProperty));
+                nameof(ModelWithArrayProperty.ArrayProperty)
+            );
 
             bindingContext.ValueProvider = new TestValueProvider(new Dictionary<string, object>());
 
@@ -167,22 +180,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
         public static TheoryData<int[]> ArrayModelData
         {
-            get
-            {
-                return new TheoryData<int[]>
-                {
-                    new int[0],
-                    new [] { 357 },
-                    new [] { 357, 357 },
-                };
-            }
+            get { return new TheoryData<int[]> { new int[0], new[] { 357 }, new[] { 357, 357 }, }; }
         }
 
         // Here "fails silently" means the call does not update the array but also does not throw or set an error.
         [Theory]
         [MemberData(nameof(ArrayModelData))]
-        public async Task BindModelAsync_ModelMetadataNotReadOnly_ModelNonNull_FailsSilently(int[] model)
-        {
+        public async Task BindModelAsync_ModelMetadataNotReadOnly_ModelNonNull_FailsSilently(
+            int[] model
+        ) {
             // Arrange
             var arrayLength = model.Length;
             var valueProvider = new SimpleValueProvider
@@ -196,15 +202,19 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider.ForProperty(
-                typeof(ModelWithIntArrayProperty),
-                nameof(ModelWithIntArrayProperty.ArrayProperty)).BindingDetails(bd => bd.IsReadOnly = false);
+                    typeof(ModelWithIntArrayProperty),
+                    nameof(ModelWithIntArrayProperty.ArrayProperty)
+                )
+                .BindingDetails(bd => bd.IsReadOnly = false);
             bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelWithIntArrayProperty),
-                nameof(ModelWithIntArrayProperty.ArrayProperty));
+                nameof(ModelWithIntArrayProperty.ArrayProperty)
+            );
 
             var binder = new ArrayModelBinder<int>(
                 new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
-                NullLoggerFactory.Instance);
+                NullLoggerFactory.Instance
+            );
 
             // Act
             await binder.BindModelAsync(bindingContext);
@@ -231,10 +241,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
         private static DefaultModelBindingContext CreateContext()
         {
-            var actionContext = new ActionContext
-            {
-                HttpContext = new DefaultHttpContext(),
-            };
+            var actionContext = new ActionContext { HttpContext = new DefaultHttpContext(), };
             var modelBindingContext = new DefaultModelBindingContext
             {
                 ActionContext = actionContext,

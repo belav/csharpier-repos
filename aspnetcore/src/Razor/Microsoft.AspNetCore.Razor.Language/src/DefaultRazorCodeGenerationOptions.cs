@@ -7,15 +7,15 @@ namespace Microsoft.AspNetCore.Razor.Language
     {
         public DefaultRazorCodeGenerationOptions(
             bool indentWithTabs,
-            int indentSize, 
+            int indentSize,
             bool designTime,
             string rootNamespace,
             bool suppressChecksum,
             bool suppressMetadataAttributes,
             bool suppressPrimaryMethodBody,
             bool suppressNullabilityEnforcement,
-            bool omitMinimizedComponentAttributeValues)
-        {
+            bool omitMinimizedComponentAttributeValues
+        ) {
             IndentWithTabs = indentWithTabs;
             IndentSize = indentSize;
             DesignTime = designTime;

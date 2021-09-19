@@ -23,18 +23,26 @@ namespace Internal.Cryptography.Pal.Windows
             out AlgorithmIdentifier contentEncryptionAlgorithm,
             out X509Certificate2Collection originatorCerts,
             out CryptographicAttributeObjectCollection unprotectedAttributes
-            )
-        {
-            SafeCryptMsgHandle hCryptMsg = Interop.Crypt32.CryptMsgOpenToDecode(MsgEncodingType.All, 0, 0, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+        ) {
+            SafeCryptMsgHandle hCryptMsg = Interop.Crypt32.CryptMsgOpenToDecode(
+                MsgEncodingType.All,
+                0,
+                0,
+                IntPtr.Zero,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
             if (hCryptMsg == null || hCryptMsg.IsInvalid)
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
-            if (!Interop.Crypt32.CryptMsgUpdate(
-                hCryptMsg,
-                ref MemoryMarshal.GetReference(encodedMessage),
-                encodedMessage.Length,
-                fFinal: true))
-            {
+            if (
+                !Interop.Crypt32.CryptMsgUpdate(
+                    hCryptMsg,
+                    ref MemoryMarshal.GetReference(encodedMessage),
+                    encodedMessage.Length,
+                    fFinal: true
+                )
+            ) {
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
             }
 
@@ -47,14 +55,22 @@ namespace Internal.Cryptography.Pal.Windows
             contentInfo = hCryptMsg.GetContentInfo();
 
             AlgorithmIdentifierAsn contentEncryptionAlgorithmAsn;
-            using (SafeHandle sh = hCryptMsg.GetMsgParamAsMemory(CryptMsgParamType.CMSG_ENVELOPE_ALGORITHM_PARAM))
-            {
+            using (
+                SafeHandle sh = hCryptMsg.GetMsgParamAsMemory(
+                    CryptMsgParamType.CMSG_ENVELOPE_ALGORITHM_PARAM
+                )
+            ) {
                 unsafe
                 {
-                    CRYPT_ALGORITHM_IDENTIFIER* pCryptAlgorithmIdentifier = (CRYPT_ALGORITHM_IDENTIFIER*)(sh.DangerousGetHandle());
-                    contentEncryptionAlgorithm = (*pCryptAlgorithmIdentifier).ToAlgorithmIdentifier();
+                    CRYPT_ALGORITHM_IDENTIFIER* pCryptAlgorithmIdentifier =
+                        (CRYPT_ALGORITHM_IDENTIFIER*)(sh.DangerousGetHandle());
+                    contentEncryptionAlgorithm = (
+                        *pCryptAlgorithmIdentifier
+                    ).ToAlgorithmIdentifier();
                     contentEncryptionAlgorithmAsn.Algorithm = contentEncryptionAlgorithm.Oid.Value!;
-                    contentEncryptionAlgorithmAsn.Parameters = (*pCryptAlgorithmIdentifier).Parameters.ToByteArray();
+                    contentEncryptionAlgorithmAsn.Parameters = (
+                        *pCryptAlgorithmIdentifier
+                    ).Parameters.ToByteArray();
                 }
             }
 
@@ -62,7 +78,11 @@ namespace Internal.Cryptography.Pal.Windows
             unprotectedAttributes = hCryptMsg.GetUnprotectedAttributes();
 
             RecipientInfoCollection recipientInfos = CreateRecipientInfos(hCryptMsg);
-            return new DecryptorPalWindows(hCryptMsg, recipientInfos, contentEncryptionAlgorithmAsn);
+            return new DecryptorPalWindows(
+                hCryptMsg,
+                recipientInfos,
+                contentEncryptionAlgorithmAsn
+            );
         }
     }
 }

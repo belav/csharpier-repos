@@ -27,8 +27,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             return DeployerSelector.IsNewShimTest ? "InProcessNewShimWebSite" : "InProcessWebSite";
         }
 
-        public static async Task AssertStarts(this IISDeploymentResult deploymentResult, string path = "/HelloWorld")
-        {
+        public static async Task AssertStarts(
+            this IISDeploymentResult deploymentResult,
+            string path = "/HelloWorld"
+        ) {
             var response = await deploymentResult.HttpClient.GetAsync(path);
 
             var responseText = await response.Content.ReadAsStringAsync();
@@ -36,8 +38,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             Assert.Equal("Hello World", responseText);
         }
 
-        public static async Task StressLoad(HttpClient httpClient, string path, Action<HttpResponseMessage> action)
-        {
+        public static async Task StressLoad(
+            HttpClient httpClient,
+            string path,
+            Action<HttpResponseMessage> action
+        ) {
             async Task RunRequests()
             {
                 var connection = new HttpClient() { BaseAddress = httpClient.BaseAddress };
@@ -88,21 +93,29 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             }
         }
 
-        public static void ModifyWebConfig(this DeploymentResult deploymentResult, Action<XElement> action)
-        {
+        public static void ModifyWebConfig(
+            this DeploymentResult deploymentResult,
+            Action<XElement> action
+        ) {
             var webConfigPath = Path.Combine(deploymentResult.ContentRoot, "web.config");
             var document = XDocument.Load(webConfigPath);
             action(document.Root);
             document.Save(webConfigPath);
         }
 
-        public static Task<HttpResponseMessage> RetryRequestAsync(this HttpClient client, string uri, Func<HttpResponseMessage, bool> predicate)
-        {
+        public static Task<HttpResponseMessage> RetryRequestAsync(
+            this HttpClient client,
+            string uri,
+            Func<HttpResponseMessage, bool> predicate
+        ) {
             return RetryRequestAsync(client, uri, message => Task.FromResult(predicate(message)));
         }
 
-        public static async Task<HttpResponseMessage> RetryRequestAsync(this HttpClient client, string uri, Func<HttpResponseMessage, Task<bool>> predicate)
-        {
+        public static async Task<HttpResponseMessage> RetryRequestAsync(
+            this HttpClient client,
+            string uri,
+            Func<HttpResponseMessage, Task<bool>> predicate
+        ) {
             HttpResponseMessage response = await client.GetAsync(uri);
             var delay = RetryRequestDelay;
             for (var i = 0; i < RetryRequestCount && !await predicate(response); i++)
@@ -116,7 +129,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             if (!await predicate(response))
             {
-                throw new InvalidOperationException($"Didn't get response that satisfies predicate after {RetryRequestCount} retries");
+                throw new InvalidOperationException(
+                    $"Didn't get response that satisfies predicate after {RetryRequestCount} retries"
+                );
             }
 
             return response;
@@ -148,10 +163,16 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             throw new AggregateException(exceptions);
         }
 
-        public static void AssertWorkerProcessStop(this IISDeploymentResult deploymentResult, int? timeout = null)
-        {
+        public static void AssertWorkerProcessStop(
+            this IISDeploymentResult deploymentResult,
+            int? timeout = null
+        ) {
             var hostProcess = deploymentResult.HostProcess;
-            Assert.True(hostProcess.WaitForExit(timeout ?? (int)TimeoutExtensions.DefaultTimeoutValue.TotalMilliseconds));
+            Assert.True(
+                hostProcess.WaitForExit(
+                    timeout ?? (int)TimeoutExtensions.DefaultTimeoutValue.TotalMilliseconds
+                )
+            );
 
             if (deploymentResult.DeploymentParameters.ServerType == ServerType.IISExpress)
             {
@@ -159,9 +180,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             }
         }
 
-
-        public static async Task AssertRecycledAsync(this IISDeploymentResult deploymentResult, Func<Task> verificationAction = null)
-        {
+        public static async Task AssertRecycledAsync(
+            this IISDeploymentResult deploymentResult,
+            Func<Task> verificationAction = null
+        ) {
             if (deploymentResult.DeploymentParameters.HostingModel != HostingModel.InProcess)
             {
                 throw new NotSupportedException();
@@ -180,16 +202,21 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             return dictionary.Keys.Select(k => new[] { k });
         }
 
-        public static string GetExpectedLogName(IISDeploymentResult deploymentResult, string logFolderPath)
-        {
+        public static string GetExpectedLogName(
+            IISDeploymentResult deploymentResult,
+            string logFolderPath
+        ) {
             var startTime = deploymentResult.HostProcess.StartTime.ToUniversalTime();
 
             if (deploymentResult.DeploymentParameters.HostingModel == HostingModel.InProcess)
             {
-                return Path.Combine(logFolderPath, $"std_{startTime.Year}{startTime.Month:D2}" +
-                $"{startTime.Day:D2}{startTime.Hour:D2}" +
-                $"{startTime.Minute:D2}{startTime.Second:D2}_" +
-                $"{deploymentResult.HostProcess.Id}.log");
+                return Path.Combine(
+                    logFolderPath,
+                    $"std_{startTime.Year}{startTime.Month:D2}"
+                        + $"{startTime.Day:D2}{startTime.Hour:D2}"
+                        + $"{startTime.Minute:D2}{startTime.Second:D2}_"
+                        + $"{deploymentResult.HostProcess.Id}.log"
+                );
             }
             else
             {
@@ -197,9 +224,13 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             }
         }
 
-        public static void ModifyFrameworkVersionInRuntimeConfig(IISDeploymentResult deploymentResult)
-        {
-            var path = Path.Combine(deploymentResult.ContentRoot, "InProcessWebSite.runtimeconfig.json");
+        public static void ModifyFrameworkVersionInRuntimeConfig(
+            IISDeploymentResult deploymentResult
+        ) {
+            var path = Path.Combine(
+                deploymentResult.ContentRoot,
+                "InProcessWebSite.runtimeconfig.json"
+            );
             dynamic depsFileContent = JsonConvert.DeserializeObject(File.ReadAllText(path));
             depsFileContent["runtimeOptions"]["framework"]["version"] = "2.9.9";
             var output = JsonConvert.SerializeObject(depsFileContent);
@@ -209,8 +240,12 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public static void AllowNoLogs(this IISDeploymentResult deploymentResult)
         {
             File.AppendAllText(
-                Path.Combine(deploymentResult.DeploymentParameters.PublishedApplicationRootPath, "aspnetcore-debug.log"),
-                "Running test allowed log file to be empty." + Environment.NewLine);
+                Path.Combine(
+                    deploymentResult.DeploymentParameters.PublishedApplicationRootPath,
+                    "aspnetcore-debug.log"
+                ),
+                "Running test allowed log file to be empty." + Environment.NewLine
+            );
         }
 
         public static string ReadAllTextFromFile(string filename, ILogger logger)
@@ -231,7 +266,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
                 foreach (var hostingProcess in hostingProcesses)
                 {
-                    logger.LogError($"{hostingProcess.ProcessName} pid: {hostingProcess.Id} hasExited: {hostingProcess.HasExited.ToString()}");
+                    logger.LogError(
+                        $"{hostingProcess.ProcessName} pid: {hostingProcess.Id} hasExited: {hostingProcess.HasExited.ToString()}"
+                    );
                 }
                 throw;
             }
@@ -239,18 +276,19 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         public static string CreateEmptyApplication(XElement config, string contentRoot)
         {
-            var siteElement = config
-                .RequiredElement("system.applicationHost")
+            var siteElement = config.RequiredElement("system.applicationHost")
                 .RequiredElement("sites")
                 .RequiredElement("site");
 
-            var application = siteElement
-                .RequiredElement("application");
+            var application = siteElement.RequiredElement("application");
 
             var rootApplicationDirectory = new DirectoryInfo(contentRoot + "rootApp");
             rootApplicationDirectory.Create();
 
-            File.WriteAllText(Path.Combine(rootApplicationDirectory.FullName, "web.config"), "<configuration></configuration>");
+            File.WriteAllText(
+                Path.Combine(rootApplicationDirectory.FullName, "web.config"),
+                "<configuration></configuration>"
+            );
 
             var rootApplication = new XElement(application);
             rootApplication.SetAttributeValue("path", "/");

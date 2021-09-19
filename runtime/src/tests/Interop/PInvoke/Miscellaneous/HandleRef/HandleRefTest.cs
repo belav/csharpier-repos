@@ -26,7 +26,8 @@ class HandleRefTest
 
     public unsafe static int Main(string[] args)
     {
-        try{
+        try
+        {
             const int intManaged = 1000;
             const int intNative = 2000;
             const int intReturn = 3000;
@@ -36,25 +37,37 @@ class HandleRefTest
             int int1 = intManaged;
             int* int1Ptr = &int1;
             HandleRef hr1 = new HandleRef(new Object(), (IntPtr)int1Ptr);
-            Assert.AreEqual(intReturn, MarshalPointer_In(hr1, stackGuard), "The return value is wrong");
+            Assert.AreEqual(
+                intReturn,
+                MarshalPointer_In(hr1, stackGuard),
+                "The return value is wrong"
+            );
             Assert.AreEqual(intManaged, int1, "The parameter value is changed");
-            
+
             Console.WriteLine("MarshalPointer_InOut");
             int int2 = intManaged;
             int* int2Ptr = &int2;
             HandleRef hr2 = new HandleRef(new Object(), (IntPtr)int2Ptr);
-            Assert.AreEqual(intReturn, MarshalPointer_InOut(hr2, stackGuard), "The return value is wrong");
+            Assert.AreEqual(
+                intReturn,
+                MarshalPointer_InOut(hr2, stackGuard),
+                "The return value is wrong"
+            );
             Assert.AreEqual(intNative, int2, "The passed value is wrong");
-            
+
             Console.WriteLine("MarshalPointer_Out");
             int int3 = intManaged;
             int* int3Ptr = &int3;
             HandleRef hr3 = new HandleRef(new Object(), (IntPtr)int3Ptr);
-            Assert.AreEqual(intReturn, MarshalPointer_Out(hr3, stackGuard), "The return value is wrong");
+            Assert.AreEqual(
+                intReturn,
+                MarshalPointer_Out(hr3, stackGuard),
+                "The return value is wrong"
+            );
             Assert.AreEqual(intNative, int3, "The passed value is wrong");
 
-            // Note that this scenario will always pass in a debug build because all values 
-            // stay rooted until the end of the method. 
+            // Note that this scenario will always pass in a debug build because all values
+            // stay rooted until the end of the method.
             Console.WriteLine("TestNoGC");
 
             int* int4Ptr = (int*)Marshal.AllocHGlobal(sizeof(int)); // We don't free this memory so we don't have to worry about a GC run between freeing and return (possible in a GCStress mode).
@@ -62,7 +75,13 @@ class HandleRefTest
             *int4Ptr = intManaged;
             CollectableClass collectableClass = new CollectableClass(int4Ptr);
             HandleRef hr4 = new HandleRef(collectableClass, (IntPtr)int4Ptr);
-            Action gcCallback = () => { Console.WriteLine("GC callback now"); GC.Collect(2, GCCollectionMode.Forced); GC.WaitForPendingFinalizers(); GC.Collect(2, GCCollectionMode.Forced); };
+            Action gcCallback = () =>
+            {
+                Console.WriteLine("GC callback now");
+                GC.Collect(2, GCCollectionMode.Forced);
+                GC.WaitForPendingFinalizers();
+                GC.Collect(2, GCCollectionMode.Forced);
+            };
             Assert.AreEqual(intReturn, TestNoGC(hr4, gcCallback), "The return value is wrong");
             Console.WriteLine("Native code finished");
 
@@ -70,9 +89,11 @@ class HandleRefTest
             Assert.Throws<MarshalDirectiveException>(() => InvalidMarshalPointer_Return());
 
             return 100;
-        } catch (Exception e){
-            Console.WriteLine($"Test Failure: {e}"); 
-            return 101; 
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Test Failure: {e}");
+            return 101;
         }
     }
 

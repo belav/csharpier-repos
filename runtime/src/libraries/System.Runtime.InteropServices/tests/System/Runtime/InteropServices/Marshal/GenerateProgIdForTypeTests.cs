@@ -16,7 +16,11 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(int), typeof(int).FullName };
             yield return new object[] { typeof(NonGenericClass), typeof(NonGenericClass).FullName };
             yield return new object[] { typeof(AbstractClass), typeof(AbstractClass).FullName };
-            yield return new object[] { typeof(NonGenericStruct), typeof(NonGenericStruct).FullName };
+            yield return new object[]
+            {
+                typeof(NonGenericStruct),
+                typeof(NonGenericStruct).FullName
+            };
             yield return new object[] { typeof(ClassWithProgID), "TestProgID" };
             yield return new object[] { typeof(ClassWithNullProgID), "" };
         }
@@ -43,7 +47,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GenerateProgIdForType_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => Marshal.GenerateProgIdForType(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Marshal.GenerateProgIdForType(null)
+            );
         }
 
         public static IEnumerable<object[]> GenerateProgIdForType_Invalid_TestData()
@@ -58,9 +65,15 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(IGenericInterface<string>) };
 
             yield return new object[] { typeof(GenericClass<>) };
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0]
+            };
 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();

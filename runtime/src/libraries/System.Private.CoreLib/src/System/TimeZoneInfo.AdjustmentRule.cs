@@ -9,7 +9,10 @@ namespace System
     public sealed partial class TimeZoneInfo
     {
         [Serializable]
-        public sealed class AdjustmentRule : IEquatable<AdjustmentRule?>, ISerializable, IDeserializationCallback
+        public sealed class AdjustmentRule
+            : IEquatable<AdjustmentRule?>,
+              ISerializable,
+              IDeserializationCallback
         {
             private static readonly TimeSpan DaylightDeltaAdjustment = TimeSpan.FromHours(24.0);
             private static readonly TimeSpan MaxDaylightDelta = TimeSpan.FromHours(12.0);
@@ -18,7 +21,7 @@ namespace System
             private readonly TimeSpan _daylightDelta;
             private readonly TransitionTime _daylightTransitionStart;
             private readonly TransitionTime _daylightTransitionEnd;
-            private readonly TimeSpan _baseUtcOffsetDelta;   // delta from the default Utc offset (utcOffset = defaultUtcOffset + _baseUtcOffsetDelta)
+            private readonly TimeSpan _baseUtcOffsetDelta; // delta from the default Utc offset (utcOffset = defaultUtcOffset + _baseUtcOffsetDelta)
             private readonly bool _noDaylightTransitions;
 
             public DateTime DateStart => _dateStart;
@@ -43,18 +46,24 @@ namespace System
             internal bool NoDaylightTransitions => _noDaylightTransitions;
 
             internal bool HasDaylightSaving =>
-                DaylightDelta != TimeSpan.Zero ||
-                (DaylightTransitionStart != default && DaylightTransitionStart.TimeOfDay != DateTime.MinValue) ||
-                (DaylightTransitionEnd != default && DaylightTransitionEnd.TimeOfDay != DateTime.MinValue.AddMilliseconds(1));
+                DaylightDelta != TimeSpan.Zero
+                || (
+                    DaylightTransitionStart != default
+                    && DaylightTransitionStart.TimeOfDay != DateTime.MinValue
+                )
+                || (
+                    DaylightTransitionEnd != default
+                    && DaylightTransitionEnd.TimeOfDay != DateTime.MinValue.AddMilliseconds(1)
+                );
 
             public bool Equals([NotNullWhen(true)] AdjustmentRule? other) =>
-                other != null &&
-                _dateStart == other._dateStart &&
-                _dateEnd == other._dateEnd &&
-                _daylightDelta == other._daylightDelta &&
-                _baseUtcOffsetDelta == other._baseUtcOffsetDelta &&
-                _daylightTransitionEnd.Equals(other._daylightTransitionEnd) &&
-                _daylightTransitionStart.Equals(other._daylightTransitionStart);
+                other != null
+                && _dateStart == other._dateStart
+                && _dateEnd == other._dateEnd
+                && _daylightDelta == other._daylightDelta
+                && _baseUtcOffsetDelta == other._baseUtcOffsetDelta
+                && _daylightTransitionEnd.Equals(other._daylightTransitionEnd)
+                && _daylightTransitionStart.Equals(other._daylightTransitionStart);
 
             public override int GetHashCode() => _dateStart.GetHashCode();
 
@@ -65,10 +74,16 @@ namespace System
                 TransitionTime daylightTransitionStart,
                 TransitionTime daylightTransitionEnd,
                 TimeSpan baseUtcOffsetDelta,
-                bool noDaylightTransitions)
-            {
-                ValidateAdjustmentRule(dateStart, dateEnd, daylightDelta,
-                       daylightTransitionStart, daylightTransitionEnd, noDaylightTransitions);
+                bool noDaylightTransitions
+            ) {
+                ValidateAdjustmentRule(
+                    dateStart,
+                    dateEnd,
+                    daylightDelta,
+                    daylightTransitionStart,
+                    daylightTransitionEnd,
+                    noDaylightTransitions
+                );
 
                 _dateStart = dateStart;
                 _dateEnd = dateEnd;
@@ -95,8 +110,8 @@ namespace System
                 TimeSpan daylightDelta,
                 TransitionTime daylightTransitionStart,
                 TransitionTime daylightTransitionEnd,
-                TimeSpan baseUtcOffsetDelta)
-            {
+                TimeSpan baseUtcOffsetDelta
+            ) {
                 return new AdjustmentRule(
                     dateStart,
                     dateEnd,
@@ -104,7 +119,8 @@ namespace System
                     daylightTransitionStart,
                     daylightTransitionEnd,
                     baseUtcOffsetDelta,
-                    noDaylightTransitions: false);
+                    noDaylightTransitions: false
+                );
             }
 
             public static AdjustmentRule CreateAdjustmentRule(
@@ -112,8 +128,8 @@ namespace System
                 DateTime dateEnd,
                 TimeSpan daylightDelta,
                 TransitionTime daylightTransitionStart,
-                TransitionTime daylightTransitionEnd)
-            {
+                TransitionTime daylightTransitionEnd
+            ) {
                 return new AdjustmentRule(
                     dateStart,
                     dateEnd,
@@ -121,7 +137,8 @@ namespace System
                     daylightTransitionStart,
                     daylightTransitionEnd,
                     baseUtcOffsetDelta: TimeSpan.Zero,
-                    noDaylightTransitions: false);
+                    noDaylightTransitions: false
+                );
             }
 
             internal static AdjustmentRule CreateAdjustmentRule(
@@ -131,8 +148,8 @@ namespace System
                 TransitionTime daylightTransitionStart,
                 TransitionTime daylightTransitionEnd,
                 TimeSpan baseUtcOffsetDelta,
-                bool noDaylightTransitions)
-            {
+                bool noDaylightTransitions
+            ) {
                 AdjustDaylightDeltaToExpectedRange(ref daylightDelta, ref baseUtcOffsetDelta);
                 return new AdjustmentRule(
                     dateStart,
@@ -141,7 +158,8 @@ namespace System
                     daylightTransitionStart,
                     daylightTransitionEnd,
                     baseUtcOffsetDelta,
-                    noDaylightTransitions);
+                    noDaylightTransitions
+                );
             }
 
             //
@@ -149,18 +167,20 @@ namespace System
             // We have to special case this value and not adjust it when checking if any date is in the daylight saving period.
             //
             internal bool IsStartDateMarkerForBeginningOfYear() =>
-                !NoDaylightTransitions &&
-                DaylightTransitionStart.Month == 1 && DaylightTransitionStart.Day == 1 &&
-                DaylightTransitionStart.TimeOfDay.TimeOfDay.Ticks < TimeSpan.TicksPerSecond; // < 12:00:01 AM
+                !NoDaylightTransitions
+                && DaylightTransitionStart.Month == 1
+                && DaylightTransitionStart.Day == 1
+                && DaylightTransitionStart.TimeOfDay.TimeOfDay.Ticks < TimeSpan.TicksPerSecond; // < 12:00:01 AM
 
             //
             // When Windows sets the daylight transition end Jan 1st at 12:00 AM, it means the year ends with the daylight saving on.
             // We have to special case this value and not adjust it when checking if any date is in the daylight saving period.
             //
             internal bool IsEndDateMarkerForEndOfYear() =>
-                !NoDaylightTransitions &&
-                DaylightTransitionEnd.Month == 1 && DaylightTransitionEnd.Day == 1 &&
-                DaylightTransitionEnd.TimeOfDay.TimeOfDay.Ticks < TimeSpan.TicksPerSecond; // < 12:00:01 AM
+                !NoDaylightTransitions
+                && DaylightTransitionEnd.Month == 1
+                && DaylightTransitionEnd.Day == 1
+                && DaylightTransitionEnd.TimeOfDay.TimeOfDay.Ticks < TimeSpan.TicksPerSecond; // < 12:00:01 AM
 
             /// <summary>
             /// Helper function that performs all of the validation checks for the factory methods and deserialization callback.
@@ -171,21 +191,31 @@ namespace System
                 TimeSpan daylightDelta,
                 TransitionTime daylightTransitionStart,
                 TransitionTime daylightTransitionEnd,
-                bool noDaylightTransitions)
-            {
-                if (dateStart.Kind != DateTimeKind.Unspecified && dateStart.Kind != DateTimeKind.Utc)
-                {
-                    throw new ArgumentException(SR.Argument_DateTimeKindMustBeUnspecifiedOrUtc, nameof(dateStart));
+                bool noDaylightTransitions
+            ) {
+                if (
+                    dateStart.Kind != DateTimeKind.Unspecified && dateStart.Kind != DateTimeKind.Utc
+                ) {
+                    throw new ArgumentException(
+                        SR.Argument_DateTimeKindMustBeUnspecifiedOrUtc,
+                        nameof(dateStart)
+                    );
                 }
 
                 if (dateEnd.Kind != DateTimeKind.Unspecified && dateEnd.Kind != DateTimeKind.Utc)
                 {
-                    throw new ArgumentException(SR.Argument_DateTimeKindMustBeUnspecifiedOrUtc, nameof(dateEnd));
+                    throw new ArgumentException(
+                        SR.Argument_DateTimeKindMustBeUnspecifiedOrUtc,
+                        nameof(dateEnd)
+                    );
                 }
 
                 if (daylightTransitionStart.Equals(daylightTransitionEnd) && !noDaylightTransitions)
                 {
-                    throw new ArgumentException(SR.Argument_TransitionTimesAreIdentical, nameof(daylightTransitionEnd));
+                    throw new ArgumentException(
+                        SR.Argument_TransitionTimesAreIdentical,
+                        nameof(daylightTransitionEnd)
+                    );
                 }
 
                 if (dateStart > dateEnd)
@@ -199,21 +229,37 @@ namespace System
                 // to be -23 (what it takes to go from UTC+13 to UTC-10)
                 if (daylightDelta.TotalHours < -23.0 || daylightDelta.TotalHours > 14.0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(daylightDelta), daylightDelta, SR.ArgumentOutOfRange_UtcOffset);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(daylightDelta),
+                        daylightDelta,
+                        SR.ArgumentOutOfRange_UtcOffset
+                    );
                 }
 
                 if (daylightDelta.Ticks % TimeSpan.TicksPerMinute != 0)
                 {
-                    throw new ArgumentException(SR.Argument_TimeSpanHasSeconds, nameof(daylightDelta));
+                    throw new ArgumentException(
+                        SR.Argument_TimeSpanHasSeconds,
+                        nameof(daylightDelta)
+                    );
                 }
 
-                if (dateStart != DateTime.MinValue && dateStart.Kind == DateTimeKind.Unspecified && dateStart.TimeOfDay != TimeSpan.Zero)
-                {
-                    throw new ArgumentException(SR.Argument_DateTimeHasTimeOfDay, nameof(dateStart));
+                if (
+                    dateStart != DateTime.MinValue
+                    && dateStart.Kind == DateTimeKind.Unspecified
+                    && dateStart.TimeOfDay != TimeSpan.Zero
+                ) {
+                    throw new ArgumentException(
+                        SR.Argument_DateTimeHasTimeOfDay,
+                        nameof(dateStart)
+                    );
                 }
 
-                if (dateEnd != DateTime.MaxValue && dateEnd.Kind == DateTimeKind.Unspecified && dateEnd.TimeOfDay != TimeSpan.Zero)
-                {
+                if (
+                    dateEnd != DateTime.MaxValue
+                    && dateEnd.Kind == DateTimeKind.Unspecified
+                    && dateEnd.TimeOfDay != TimeSpan.Zero
+                ) {
                     throw new ArgumentException(SR.Argument_DateTimeHasTimeOfDay, nameof(dateEnd));
                 }
             }
@@ -221,8 +267,10 @@ namespace System
             /// <summary>
             /// Ensures the daylight delta is within [-12, 12] hours
             /// </summary>>
-            private static void AdjustDaylightDeltaToExpectedRange(ref TimeSpan daylightDelta, ref TimeSpan baseUtcOffsetDelta)
-            {
+            private static void AdjustDaylightDeltaToExpectedRange(
+                ref TimeSpan daylightDelta,
+                ref TimeSpan baseUtcOffsetDelta
+            ) {
                 if (daylightDelta > MaxDaylightDelta)
                 {
                     daylightDelta -= DaylightDeltaAdjustment;
@@ -234,8 +282,10 @@ namespace System
                     baseUtcOffsetDelta -= DaylightDeltaAdjustment;
                 }
 
-                System.Diagnostics.Debug.Assert(daylightDelta <= MaxDaylightDelta && daylightDelta >= -MaxDaylightDelta,
-                                                "DaylightDelta should not ever be more than 24h");
+                System.Diagnostics.Debug.Assert(
+                    daylightDelta <= MaxDaylightDelta && daylightDelta >= -MaxDaylightDelta,
+                    "DaylightDelta should not ever be more than 24h"
+                );
             }
 
             void IDeserializationCallback.OnDeserialization(object? sender)
@@ -245,8 +295,14 @@ namespace System
 
                 try
                 {
-                    ValidateAdjustmentRule(_dateStart, _dateEnd, _daylightDelta,
-                                           _daylightTransitionStart, _daylightTransitionEnd, _noDaylightTransitions);
+                    ValidateAdjustmentRule(
+                        _dateStart,
+                        _dateEnd,
+                        _daylightDelta,
+                        _daylightTransitionStart,
+                        _daylightTransitionEnd,
+                        _noDaylightTransitions
+                    );
                 }
                 catch (ArgumentException e)
                 {
@@ -280,8 +336,14 @@ namespace System
                 _dateStart = (DateTime)info.GetValue("DateStart", typeof(DateTime))!; // Do not rename (binary serialization)
                 _dateEnd = (DateTime)info.GetValue("DateEnd", typeof(DateTime))!; // Do not rename (binary serialization)
                 _daylightDelta = (TimeSpan)info.GetValue("DaylightDelta", typeof(TimeSpan))!; // Do not rename (binary serialization)
-                _daylightTransitionStart = (TransitionTime)info.GetValue("DaylightTransitionStart", typeof(TransitionTime))!; // Do not rename (binary serialization)
-                _daylightTransitionEnd = (TransitionTime)info.GetValue("DaylightTransitionEnd", typeof(TransitionTime))!; // Do not rename (binary serialization)
+                _daylightTransitionStart = (TransitionTime)info.GetValue(
+                    "DaylightTransitionStart",
+                    typeof(TransitionTime)
+                )!; // Do not rename (binary serialization)
+                _daylightTransitionEnd = (TransitionTime)info.GetValue(
+                    "DaylightTransitionEnd",
+                    typeof(TransitionTime)
+                )!; // Do not rename (binary serialization)
 
                 object? o = info.GetValueNoThrow("BaseUtcOffsetDelta", typeof(TimeSpan)); // Do not rename (binary serialization)
                 if (o != null)

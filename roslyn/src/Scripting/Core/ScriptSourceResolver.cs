@@ -14,18 +14,19 @@ namespace Microsoft.CodeAnalysis.Scripting
 
     public sealed class ScriptSourceResolver : SourceFileResolver, IEquatable<ScriptSourceResolver>
     {
-        public static new ScriptSourceResolver Default { get; } = new ScriptSourceResolver(ImmutableArray<string>.Empty, null);
+        public static new ScriptSourceResolver Default { get; } =
+            new ScriptSourceResolver(ImmutableArray<string>.Empty, null);
 
-        private ScriptSourceResolver(ImmutableArray<string> sourcePaths, string baseDirectory)
-            : base(sourcePaths, baseDirectory)
-        {
-        }
+        private ScriptSourceResolver(
+            ImmutableArray<string> sourcePaths,
+            string baseDirectory
+        ) : base(sourcePaths, baseDirectory) { }
 
-        public ScriptSourceResolver WithSearchPaths(params string[] searchPaths)
-            => WithSearchPaths(searchPaths.AsImmutableOrEmpty());
+        public ScriptSourceResolver WithSearchPaths(params string[] searchPaths) =>
+            WithSearchPaths(searchPaths.AsImmutableOrEmpty());
 
-        public ScriptSourceResolver WithSearchPaths(IEnumerable<string> searchPaths)
-            => WithSearchPaths(searchPaths.AsImmutableOrEmpty());
+        public ScriptSourceResolver WithSearchPaths(IEnumerable<string> searchPaths) =>
+            WithSearchPaths(searchPaths.AsImmutableOrEmpty());
 
         public ScriptSourceResolver WithSearchPaths(ImmutableArray<string> searchPaths)
         {
@@ -34,7 +35,10 @@ namespace Microsoft.CodeAnalysis.Scripting
                 return this;
             }
 
-            return new ScriptSourceResolver(ToImmutableArrayChecked(searchPaths, nameof(searchPaths)), BaseDirectory);
+            return new ScriptSourceResolver(
+                ToImmutableArrayChecked(searchPaths, nameof(searchPaths)),
+                BaseDirectory
+            );
         }
 
         public ScriptSourceResolver WithBaseDirectory(string baseDirectory)

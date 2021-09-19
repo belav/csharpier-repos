@@ -26,8 +26,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="indexBuilder"> The builder for the index being configured. </param>
         /// <param name="clustered"> A value indicating whether the index is clustered. </param>
         /// <returns> A builder to further configure the index. </returns>
-        public static IndexBuilder IsClustered(this IndexBuilder indexBuilder, bool clustered = true)
-        {
+        public static IndexBuilder IsClustered(
+            this IndexBuilder indexBuilder,
+            bool clustered = true
+        ) {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
             indexBuilder.Metadata.SetIsClustered(clustered);
@@ -43,8 +45,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> A builder to further configure the index. </returns>
         public static IndexBuilder<TEntity> IsClustered<TEntity>(
             this IndexBuilder<TEntity> indexBuilder,
-            bool clustered = true)
-            => (IndexBuilder<TEntity>)IsClustered((IndexBuilder)indexBuilder, clustered);
+            bool clustered = true
+        ) => (IndexBuilder<TEntity>)IsClustered((IndexBuilder)indexBuilder, clustered);
 
         /// <summary>
         ///     Configures whether the index is clustered when targeting SQL Server.
@@ -59,8 +61,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionIndexBuilder? IsClustered(
             this IConventionIndexBuilder indexBuilder,
             bool? clustered,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             if (indexBuilder.CanSetIsClustered(clustered, fromDataAnnotation))
             {
                 indexBuilder.Metadata.SetIsClustered(clustered, fromDataAnnotation);
@@ -80,11 +82,15 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetIsClustered(
             this IConventionIndexBuilder indexBuilder,
             bool? clustered,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
-            return indexBuilder.CanSetAnnotation(SqlServerAnnotationNames.Clustered, clustered, fromDataAnnotation);
+            return indexBuilder.CanSetAnnotation(
+                SqlServerAnnotationNames.Clustered,
+                clustered,
+                fromDataAnnotation
+            );
         }
 
         /// <summary>
@@ -93,8 +99,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="indexBuilder"> The builder for the index being configured. </param>
         /// <param name="propertyNames"> An array of property names to be used in 'include' clause. </param>
         /// <returns> A builder to further configure the index. </returns>
-        public static IndexBuilder IncludeProperties(this IndexBuilder indexBuilder, params string[] propertyNames)
-        {
+        public static IndexBuilder IncludeProperties(
+            this IndexBuilder indexBuilder,
+            params string[] propertyNames
+        ) {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
             Check.NotNull(propertyNames, nameof(propertyNames));
 
@@ -111,8 +119,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> A builder to further configure the index. </returns>
         public static IndexBuilder<TEntity> IncludeProperties<TEntity>(
             this IndexBuilder<TEntity> indexBuilder,
-            params string[] propertyNames)
-        {
+            params string[] propertyNames
+        ) {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
             Check.NotNull(propertyNames, nameof(propertyNames));
 
@@ -138,14 +146,17 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> A builder to further configure the index. </returns>
         public static IndexBuilder<TEntity> IncludeProperties<TEntity>(
             this IndexBuilder<TEntity> indexBuilder,
-            Expression<Func<TEntity, object>> includeExpression)
-        {
+            Expression<Func<TEntity, object>> includeExpression
+        ) {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
             Check.NotNull(includeExpression, nameof(includeExpression));
 
             IncludeProperties(
                 indexBuilder,
-                includeExpression.GetMemberAccessList().Select(EntityFrameworkMemberInfoExtensions.GetSimpleMemberName).ToArray());
+                includeExpression.GetMemberAccessList()
+                    .Select(EntityFrameworkMemberInfoExtensions.GetSimpleMemberName)
+                    .ToArray()
+            );
 
             return indexBuilder;
         }
@@ -163,8 +174,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionIndexBuilder? IncludeProperties(
             this IConventionIndexBuilder indexBuilder,
             IReadOnlyList<string>? propertyNames,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             if (indexBuilder.CanSetIncludeProperties(propertyNames, fromDataAnnotation))
             {
                 indexBuilder.Metadata.SetIncludeProperties(propertyNames, fromDataAnnotation);
@@ -185,15 +196,24 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetIncludeProperties(
             this IConventionIndexBuilder indexBuilder,
             IReadOnlyList<string>? propertyNames,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
-            return (fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention)
-                .Overrides(indexBuilder.Metadata.GetIncludePropertiesConfigurationSource())
+            return (
+                    fromDataAnnotation
+                        ? ConfigurationSource.DataAnnotation
+                        : ConfigurationSource.Convention
+                ).Overrides(indexBuilder.Metadata.GetIncludePropertiesConfigurationSource())
                 || indexBuilder.Metadata.GetIncludeProperties() is var currentProperties
-                && ((propertyNames is null && currentProperties is null)
-                    || (propertyNames is not null && currentProperties is not null && propertyNames.SequenceEqual(currentProperties)));
+                    && (
+                        (propertyNames is null && currentProperties is null)
+                        || (
+                            propertyNames is not null
+                            && currentProperties is not null
+                            && propertyNames.SequenceEqual(currentProperties)
+                        )
+                    );
         }
 
         /// <summary>
@@ -202,8 +222,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="indexBuilder"> The builder for the index being configured. </param>
         /// <param name="createdOnline"> A value indicating whether the index is created with online option. </param>
         /// <returns> A builder to further configure the index. </returns>
-        public static IndexBuilder IsCreatedOnline(this IndexBuilder indexBuilder, bool createdOnline = true)
-        {
+        public static IndexBuilder IsCreatedOnline(
+            this IndexBuilder indexBuilder,
+            bool createdOnline = true
+        ) {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
             indexBuilder.Metadata.SetIsCreatedOnline(createdOnline);
@@ -219,8 +241,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> A builder to further configure the index. </returns>
         public static IndexBuilder<TEntity> IsCreatedOnline<TEntity>(
             this IndexBuilder<TEntity> indexBuilder,
-            bool createdOnline = true)
-            => (IndexBuilder<TEntity>)IsCreatedOnline((IndexBuilder)indexBuilder, createdOnline);
+            bool createdOnline = true
+        ) => (IndexBuilder<TEntity>)IsCreatedOnline((IndexBuilder)indexBuilder, createdOnline);
 
         /// <summary>
         ///     Configures whether the index is created with online option when targeting SQL Server.
@@ -235,8 +257,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionIndexBuilder? IsCreatedOnline(
             this IConventionIndexBuilder indexBuilder,
             bool? createdOnline,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             if (indexBuilder.CanSetIsCreatedOnline(createdOnline, fromDataAnnotation))
             {
                 indexBuilder.Metadata.SetIsCreatedOnline(createdOnline, fromDataAnnotation);
@@ -261,11 +283,15 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetIsCreatedOnline(
             this IConventionIndexBuilder indexBuilder,
             bool? createdOnline,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
-            return indexBuilder.CanSetAnnotation(SqlServerAnnotationNames.CreatedOnline, createdOnline, fromDataAnnotation);
+            return indexBuilder.CanSetAnnotation(
+                SqlServerAnnotationNames.CreatedOnline,
+                createdOnline,
+                fromDataAnnotation
+            );
         }
 
         /// <summary>
@@ -291,8 +317,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> A builder to further configure the index. </returns>
         public static IndexBuilder<TEntity> HasFillFactor<TEntity>(
             this IndexBuilder<TEntity> indexBuilder,
-            int fillFactor)
-            => (IndexBuilder<TEntity>)HasFillFactor((IndexBuilder)indexBuilder, fillFactor);
+            int fillFactor
+        ) => (IndexBuilder<TEntity>)HasFillFactor((IndexBuilder)indexBuilder, fillFactor);
 
         /// <summary>
         ///     Configures whether the index is created with fill factor option when targeting SQL Server.
@@ -307,8 +333,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionIndexBuilder? HasFillFactor(
             this IConventionIndexBuilder indexBuilder,
             int? fillFactor,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             if (indexBuilder.CanSetFillFactor(fillFactor, fromDataAnnotation))
             {
                 indexBuilder.Metadata.SetFillFactor(fillFactor, fromDataAnnotation);
@@ -329,11 +355,15 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetFillFactor(
             this IConventionIndexBuilder indexBuilder,
             int? fillFactor,
-            bool fromDataAnnotation = false)
-        {
+            bool fromDataAnnotation = false
+        ) {
             Check.NotNull(indexBuilder, nameof(indexBuilder));
 
-            return indexBuilder.CanSetAnnotation(SqlServerAnnotationNames.FillFactor, fillFactor, fromDataAnnotation);
+            return indexBuilder.CanSetAnnotation(
+                SqlServerAnnotationNames.FillFactor,
+                fillFactor,
+                fromDataAnnotation
+            );
         }
     }
 }

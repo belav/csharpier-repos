@@ -19,8 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class RelationalCommandCache : IPrintableExpression
     {
-        private static readonly ConcurrentDictionary<object, object> _locks
-            = new();
+        private static readonly ConcurrentDictionary<object, object> _locks = new();
 
         private readonly IMemoryCache _memoryCache;
         private readonly IQuerySqlGeneratorFactory _querySqlGeneratorFactory;
@@ -39,13 +38,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IRelationalParameterBasedSqlProcessorFactory relationalParameterBasedSqlProcessorFactory,
             SelectExpression selectExpression,
             IReadOnlyList<ReaderColumn>? readerColumns,
-            bool useRelationalNulls)
-        {
+            bool useRelationalNulls
+        ) {
             _memoryCache = memoryCache;
             _querySqlGeneratorFactory = querySqlGeneratorFactory;
             _selectExpression = selectExpression;
             ReaderColumns = readerColumns;
-            _relationalParameterBasedSqlProcessor = relationalParameterBasedSqlProcessorFactory.Create(useRelationalNulls);
+            _relationalParameterBasedSqlProcessor =
+                relationalParameterBasedSqlProcessorFactory.Create(useRelationalNulls);
         }
 
         /// <summary>
@@ -62,8 +62,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IRelationalCommand GetRelationalCommand(IReadOnlyDictionary<string, object?> parameters)
-        {
+        public virtual IRelationalCommand GetRelationalCommand(
+            IReadOnlyDictionary<string, object?> parameters
+        ) {
             var cacheKey = new CommandCacheKey(_selectExpression, parameters);
 
             if (_memoryCache.TryGetValue(cacheKey, out IRelationalCommand relationalCommand))
@@ -83,18 +84,27 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     if (!_memoryCache.TryGetValue(cacheKey, out relationalCommand))
                     {
                         var selectExpression = _relationalParameterBasedSqlProcessor.Optimize(
-                            _selectExpression, parameters, out var canCache);
-                        relationalCommand = _querySqlGeneratorFactory.Create().GetCommand(selectExpression);
+                            _selectExpression,
+                            parameters,
+                            out var canCache
+                        );
+                        relationalCommand = _querySqlGeneratorFactory.Create()
+                            .GetCommand(selectExpression);
 
                         if (canCache)
                         {
-                            _memoryCache.Set(cacheKey, relationalCommand, new MemoryCacheEntryOptions { Size = 10 });
+                            _memoryCache.Set(
+                                cacheKey,
+                                relationalCommand,
+                                new MemoryCacheEntryOptions { Size = 10 }
+                            );
                         }
                     }
 
                     return relationalCommand;
                 }
             }
+
             finally
             {
                 _locks.TryRemove(cacheKey, out _);
@@ -122,15 +132,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             private readonly SelectExpression _selectExpression;
             private readonly IReadOnlyDictionary<string, object?> _parameterValues;
 
-            public CommandCacheKey(SelectExpression selectExpression, IReadOnlyDictionary<string, object?> parameterValues)
-            {
+            public CommandCacheKey(
+                SelectExpression selectExpression,
+                IReadOnlyDictionary<string, object?> parameterValues
+            ) {
                 _selectExpression = selectExpression;
                 _parameterValues = parameterValues;
             }
 
-            public override bool Equals(object? obj)
-                => obj is CommandCacheKey commandCacheKey
-                    && Equals(commandCacheKey);
+            public override bool Equals(object? obj) =>
+                obj is CommandCacheKey commandCacheKey && Equals(commandCacheKey);
 
             public bool Equals(CommandCacheKey commandCacheKey)
             {
@@ -144,8 +155,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     foreach (var parameterValue in _parameterValues)
                     {
                         var value = parameterValue.Value;
-                        if (!commandCacheKey._parameterValues.TryGetValue(parameterValue.Key, out var otherValue))
-                        {
+                        if (
+                            !commandCacheKey._parameterValues.TryGetValue(
+                                parameterValue.Key,
+                                out var otherValue
+                            )
+                        ) {
                             return false;
                         }
 
@@ -155,8 +170,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             return false;
                         }
 
-                        if (value is IEnumerable
-                            && value.GetType() == typeof(object[]))
+                        if (value is IEnumerable && value.GetType() == typeof(object[]))
                         {
                             // FromSql parameters must have the same number of elements
                             return ((object[])value).Length == (otherValue as object[])?.Length;
@@ -167,8 +181,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return true;
             }
 
-            public override int GetHashCode()
-                => 0;
+            public override int GetHashCode() => 0;
         }
     }
 }

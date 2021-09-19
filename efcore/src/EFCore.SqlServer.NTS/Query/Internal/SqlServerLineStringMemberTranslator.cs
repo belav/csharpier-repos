@@ -22,14 +22,30 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerLineStringMemberTranslator : IMemberTranslator
     {
-        private static readonly IDictionary<MemberInfo, string> _memberToFunctionName = new Dictionary<MemberInfo, string>
-        {
-            { typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.Count)), "STNumPoints" },
-            { typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.EndPoint)), "STEndPoint" },
-            { typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.IsClosed)), "STIsClosed" },
-            { typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.StartPoint)), "STStartPoint" },
-            { typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.IsRing)), "STIsRing" }
-        };
+        private static readonly IDictionary<MemberInfo, string> _memberToFunctionName =
+            new Dictionary<MemberInfo, string>
+            {
+                {
+                    typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.Count)),
+                    "STNumPoints"
+                },
+                {
+                    typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.EndPoint)),
+                    "STEndPoint"
+                },
+                {
+                    typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.IsClosed)),
+                    "STIsClosed"
+                },
+                {
+                    typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.StartPoint)),
+                    "STStartPoint"
+                },
+                {
+                    typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.IsRing)),
+                    "STIsRing"
+                }
+            };
 
         private readonly IRelationalTypeMappingSource _typeMappingSource;
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -42,8 +58,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerLineStringMemberTranslator(
             IRelationalTypeMappingSource typeMappingSource,
-            ISqlExpressionFactory sqlExpressionFactory)
-        {
+            ISqlExpressionFactory sqlExpressionFactory
+        ) {
             _typeMappingSource = typeMappingSource;
             _sqlExpressionFactory = sqlExpressionFactory;
         }
@@ -58,15 +74,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
             if (_memberToFunctionName.TryGetValue(member, out var functionName))
             {
-                Check.DebugAssert(instance!.TypeMapping != null, "Instance must have typeMapping assigned.");
+                Check.DebugAssert(
+                    instance!.TypeMapping != null,
+                    "Instance must have typeMapping assigned."
+                );
                 var storeType = instance.TypeMapping.StoreType;
                 var isGeography = storeType == "geography";
 
@@ -87,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     instancePropagatesNullability: true,
                     argumentsPropagateNullability: Enumerable.Empty<bool>(),
                     returnType,
-                    resultTypeMapping);
+                    resultTypeMapping
+                );
             }
 
             return null;

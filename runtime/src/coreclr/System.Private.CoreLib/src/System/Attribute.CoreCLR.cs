@@ -13,8 +13,11 @@ namespace System
         #region Private Statics
 
         #region PropertyInfo
-        private static Attribute[] InternalGetCustomAttributes(PropertyInfo element, Type type, bool inherit)
-        {
+        private static Attribute[] InternalGetCustomAttributes(
+            PropertyInfo element,
+            Type type,
+            bool inherit
+        ) {
             Debug.Assert(element != null);
             Debug.Assert(type != null);
             Debug.Assert(type.IsSubclassOf(typeof(Attribute)) || type == typeof(Attribute));
@@ -26,7 +29,10 @@ namespace System
                 return attributes;
 
             // create the hashtable that keeps track of inherited types
-            Dictionary<Type, AttributeUsageAttribute> types = new Dictionary<Type, AttributeUsageAttribute>(11);
+            Dictionary<Type, AttributeUsageAttribute> types = new Dictionary<
+                Type,
+                AttributeUsageAttribute
+            >(11);
 
             // create an array list to collect all the requested attibutes
             List<Attribute> attributeList = new List<Attribute>();
@@ -34,7 +40,6 @@ namespace System
 
             // if this is an index we need to get the parameter types to help disambiguate
             Type[] indexParamTypes = GetIndexParameterTypes(element);
-
 
             PropertyInfo? baseProp = GetParentDefinition(element, indexParamTypes);
             while (baseProp != null)
@@ -48,8 +53,11 @@ namespace System
             return array;
         }
 
-        private static bool InternalIsDefined(PropertyInfo element, Type attributeType, bool inherit)
-        {
+        private static bool InternalIsDefined(
+            PropertyInfo element,
+            Type attributeType,
+            bool inherit
+        ) {
             // walk up the hierarchy chain
             if (element.IsDefined(attributeType, inherit))
                 return true;
@@ -78,11 +86,16 @@ namespace System
             return false;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "rtPropAccessor.DeclaringType is guaranteed to have the specified property because " +
-                "rtPropAccessor.GetParentDefinition() returned a non-null MethodInfo.")]
-        private static PropertyInfo? GetParentDefinition(PropertyInfo property, Type[] propertyParameters)
-        {
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "rtPropAccessor.DeclaringType is guaranteed to have the specified property because "
+                + "rtPropAccessor.GetParentDefinition() returned a non-null MethodInfo."
+        )]
+        private static PropertyInfo? GetParentDefinition(
+            PropertyInfo property,
+            Type[] propertyParameters
+        ) {
             Debug.Assert(property != null);
 
             // for the current property get the base class of the getter and the setter, they might be different
@@ -101,11 +114,15 @@ namespace System
                     // However, we cannot use that because it doesn't accept null for "types".
                     return rtPropAccessor.DeclaringType!.GetProperty(
                         property.Name,
-                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly,
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Instance
+                            | BindingFlags.DeclaredOnly,
                         null, // will use default binder
                         property.PropertyType,
                         propertyParameters, // used for index properties
-                        null);
+                        null
+                    );
                 }
             }
 
@@ -115,8 +132,11 @@ namespace System
         #endregion
 
         #region EventInfo
-        private static Attribute[] InternalGetCustomAttributes(EventInfo element, Type type, bool inherit)
-        {
+        private static Attribute[] InternalGetCustomAttributes(
+            EventInfo element,
+            Type type,
+            bool inherit
+        ) {
             Debug.Assert(element != null);
             Debug.Assert(type != null);
             Debug.Assert(type.IsSubclassOf(typeof(Attribute)) || type == typeof(Attribute));
@@ -126,7 +146,10 @@ namespace System
             if (inherit)
             {
                 // create the hashtable that keeps track of inherited types
-                Dictionary<Type, AttributeUsageAttribute> types = new Dictionary<Type, AttributeUsageAttribute>(11);
+                Dictionary<Type, AttributeUsageAttribute> types = new Dictionary<
+                    Type,
+                    AttributeUsageAttribute
+                >(11);
                 // create an array list to collect all the requested attibutes
                 List<Attribute> attributeList = new List<Attribute>();
                 CopyToArrayList(attributeList, attributes, types);
@@ -146,9 +169,12 @@ namespace System
                 return attributes;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "rtAdd.DeclaringType is guaranteed to have the specified event because " +
-                "rtAdd.GetParentDefinition() returned a non-null MethodInfo.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "rtAdd.DeclaringType is guaranteed to have the specified event because "
+                + "rtAdd.GetParentDefinition() returned a non-null MethodInfo."
+        )]
         private static EventInfo? GetParentDefinition(EventInfo ev)
         {
             Debug.Assert(ev != null);
@@ -227,8 +253,11 @@ namespace System
             return null;
         }
 
-        private static Attribute[] InternalParamGetCustomAttributes(ParameterInfo param, Type? type, bool inherit)
-        {
+        private static Attribute[] InternalParamGetCustomAttributes(
+            ParameterInfo param,
+            Type? type,
+            bool inherit
+        ) {
             Debug.Assert(param != null);
 
             // For ParameterInfo's we need to make sure that we chain through all the MethodInfo's in the inheritance chain that
@@ -357,8 +386,11 @@ namespace System
         #endregion
 
         #region Utility
-        private static void CopyToArrayList(List<Attribute> attributeList, Attribute[] attributes, Dictionary<Type, AttributeUsageAttribute> types)
-        {
+        private static void CopyToArrayList(
+            List<Attribute> attributeList,
+            Attribute[] attributes,
+            Dictionary<Type, AttributeUsageAttribute> types
+        ) {
             for (int i = 0; i < attributes.Length; i++)
             {
                 attributeList.Add(attributes[i]);
@@ -387,8 +419,11 @@ namespace System
             return Type.EmptyTypes;
         }
 
-        private static void AddAttributesToList(List<Attribute> attributeList, Attribute[] attributes, Dictionary<Type, AttributeUsageAttribute> types)
-        {
+        private static void AddAttributesToList(
+            List<Attribute> attributeList,
+            Attribute[] attributes,
+            Dictionary<Type, AttributeUsageAttribute> types
+        ) {
             for (int i = 0; i < attributes.Length; i++)
             {
                 Type attrType = attributes[i].GetType();
@@ -422,8 +457,7 @@ namespace System
             if (obj.Length == 0)
                 return AttributeUsageAttribute.Default;
 
-            throw new FormatException(
-                SR.Format(SR.Format_AttributeUsage, type));
+            throw new FormatException(SR.Format(SR.Format_AttributeUsage, type));
         }
 
         private static Attribute[] CreateAttributeArrayHelper(Type elementType, int elementCount)
@@ -442,21 +476,28 @@ namespace System
             return GetCustomAttributes(element, attributeType, true);
         }
 
-        public static Attribute[] GetCustomAttributes(MemberInfo element, Type attributeType, bool inherit)
-        {
+        public static Attribute[] GetCustomAttributes(
+            MemberInfo element,
+            Type attributeType,
+            bool inherit
+        ) {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
 
             if (attributeType == null)
                 throw new ArgumentNullException(nameof(attributeType));
 
-            if (!attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute))
+            if (
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
+            )
                 throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass);
 
             return element.MemberType switch
             {
-                MemberTypes.Property => InternalGetCustomAttributes((PropertyInfo)element, attributeType, inherit),
-                MemberTypes.Event => InternalGetCustomAttributes((EventInfo)element, attributeType, inherit),
+                MemberTypes.Property
+                  => InternalGetCustomAttributes((PropertyInfo)element, attributeType, inherit),
+                MemberTypes.Event
+                  => InternalGetCustomAttributes((EventInfo)element, attributeType, inherit),
                 _ => (element.GetCustomAttributes(attributeType, inherit) as Attribute[])!,
             };
         }
@@ -473,8 +514,10 @@ namespace System
 
             return element.MemberType switch
             {
-                MemberTypes.Property => InternalGetCustomAttributes((PropertyInfo)element, typeof(Attribute), inherit),
-                MemberTypes.Event => InternalGetCustomAttributes((EventInfo)element, typeof(Attribute), inherit),
+                MemberTypes.Property
+                  => InternalGetCustomAttributes((PropertyInfo)element, typeof(Attribute), inherit),
+                MemberTypes.Event
+                  => InternalGetCustomAttributes((EventInfo)element, typeof(Attribute), inherit),
                 _ => (element.GetCustomAttributes(typeof(Attribute), inherit) as Attribute[])!,
             };
         }
@@ -493,12 +536,15 @@ namespace System
             if (attributeType == null)
                 throw new ArgumentNullException(nameof(attributeType));
 
-            if (!attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute))
+            if (
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
+            )
                 throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass);
 
             return element.MemberType switch
             {
-                MemberTypes.Property => InternalIsDefined((PropertyInfo)element, attributeType, inherit),
+                MemberTypes.Property
+                  => InternalIsDefined((PropertyInfo)element, attributeType, inherit),
                 MemberTypes.Event => InternalIsDefined((EventInfo)element, attributeType, inherit),
                 _ => element.IsDefined(attributeType, inherit),
             };
@@ -509,8 +555,11 @@ namespace System
             return GetCustomAttribute(element, attributeType, true);
         }
 
-        public static Attribute? GetCustomAttribute(MemberInfo element, Type attributeType, bool inherit)
-        {
+        public static Attribute? GetCustomAttribute(
+            MemberInfo element,
+            Type attributeType,
+            bool inherit
+        ) {
             Attribute[] attrib = GetCustomAttributes(element, attributeType, inherit);
 
             if (attrib == null || attrib.Length == 0)
@@ -535,20 +584,24 @@ namespace System
             return GetCustomAttributes(element, attributeType, true);
         }
 
-        public static Attribute[] GetCustomAttributes(ParameterInfo element, Type attributeType, bool inherit)
-        {
+        public static Attribute[] GetCustomAttributes(
+            ParameterInfo element,
+            Type attributeType,
+            bool inherit
+        ) {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
 
             if (attributeType == null)
                 throw new ArgumentNullException(nameof(attributeType));
 
-            if (!attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute))
+            if (
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
+            )
                 throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass);
 
             if (element.Member == null)
                 throw new ArgumentException(SR.Argument_InvalidParameterInfo, nameof(element));
-
 
             MemberInfo member = element.Member;
             if (member.MemberType == MemberTypes.Method && inherit)
@@ -564,7 +617,6 @@ namespace System
 
             if (element.Member == null)
                 throw new ArgumentException(SR.Argument_InvalidParameterInfo, nameof(element));
-
 
             MemberInfo member = element.Member;
             if (member.MemberType == MemberTypes.Method && inherit)
@@ -587,7 +639,9 @@ namespace System
             if (attributeType == null)
                 throw new ArgumentNullException(nameof(attributeType));
 
-            if (!attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute))
+            if (
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
+            )
                 throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass);
 
             MemberInfo member = element.Member;
@@ -614,8 +668,11 @@ namespace System
             return GetCustomAttribute(element, attributeType, true);
         }
 
-        public static Attribute? GetCustomAttribute(ParameterInfo element, Type attributeType, bool inherit)
-        {
+        public static Attribute? GetCustomAttribute(
+            ParameterInfo element,
+            Type attributeType,
+            bool inherit
+        ) {
             // Returns an Attribute of base class/inteface attributeType on the ParameterInfo or null if none exists.
             // throws an AmbiguousMatchException if there are more than one defined.
             Attribute[] attrib = GetCustomAttributes(element, attributeType, inherit);
@@ -653,15 +710,20 @@ namespace System
             return (Attribute[])element.GetCustomAttributes(typeof(Attribute), inherit);
         }
 
-        public static Attribute[] GetCustomAttributes(Module element, Type attributeType, bool inherit)
-        {
+        public static Attribute[] GetCustomAttributes(
+            Module element,
+            Type attributeType,
+            bool inherit
+        ) {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
 
             if (attributeType == null)
                 throw new ArgumentNullException(nameof(attributeType));
 
-            if (!attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute))
+            if (
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
+            )
                 throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass);
 
             return (Attribute[])element.GetCustomAttributes(attributeType, inherit);
@@ -681,7 +743,9 @@ namespace System
             if (attributeType == null)
                 throw new ArgumentNullException(nameof(attributeType));
 
-            if (!attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute))
+            if (
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
+            )
                 throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass);
 
             return element.IsDefined(attributeType, false);
@@ -692,8 +756,11 @@ namespace System
             return GetCustomAttribute(element, attributeType, true);
         }
 
-        public static Attribute? GetCustomAttribute(Module element, Type attributeType, bool inherit)
-        {
+        public static Attribute? GetCustomAttribute(
+            Module element,
+            Type attributeType,
+            bool inherit
+        ) {
             // Returns an Attribute of base class/inteface attributeType on the Module or null if none exists.
             // throws an AmbiguousMatchException if there are more than one defined.
             Attribute[] attrib = GetCustomAttributes(element, attributeType, inherit);
@@ -715,15 +782,20 @@ namespace System
             return GetCustomAttributes(element, attributeType, true);
         }
 
-        public static Attribute[] GetCustomAttributes(Assembly element, Type attributeType, bool inherit)
-        {
+        public static Attribute[] GetCustomAttributes(
+            Assembly element,
+            Type attributeType,
+            bool inherit
+        ) {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
 
             if (attributeType == null)
                 throw new ArgumentNullException(nameof(attributeType));
 
-            if (!attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute))
+            if (
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
+            )
                 throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass);
 
             return (Attribute[])element.GetCustomAttributes(attributeType, inherit);
@@ -756,7 +828,9 @@ namespace System
             if (attributeType == null)
                 throw new ArgumentNullException(nameof(attributeType));
 
-            if (!attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute))
+            if (
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
+            )
                 throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass);
 
             return element.IsDefined(attributeType, false);
@@ -767,8 +841,11 @@ namespace System
             return GetCustomAttribute(element, attributeType, true);
         }
 
-        public static Attribute? GetCustomAttribute(Assembly element, Type attributeType, bool inherit)
-        {
+        public static Attribute? GetCustomAttribute(
+            Assembly element,
+            Type attributeType,
+            bool inherit
+        ) {
             // Returns an Attribute of base class/inteface attributeType on the Assembly or null if none exists.
             // throws an AmbiguousMatchException if there are more than one defined.
             Attribute[] attrib = GetCustomAttributes(element, attributeType, inherit);
@@ -781,7 +858,6 @@ namespace System
 
             throw new AmbiguousMatchException(SR.RFLCT_AmbigCust);
         }
-
         #endregion
 
         #endregion

@@ -38,8 +38,11 @@ namespace Newtonsoft.Json.Serialization
         private readonly JsonISerializableContract _contract;
         private readonly JsonProperty? _member;
 
-        public JsonFormatterConverter(JsonSerializerInternalReader reader, JsonISerializableContract contract, JsonProperty? member)
-        {
+        public JsonFormatterConverter(
+            JsonSerializerInternalReader reader,
+            JsonISerializableContract contract,
+            JsonProperty? member
+        ) {
             ValidationUtils.ArgumentNotNull(reader, nameof(reader));
             ValidationUtils.ArgumentNotNull(contract, nameof(contract));
 

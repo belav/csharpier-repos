@@ -7,8 +7,10 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> Except<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second)
-        {
+        public static IEnumerable<TSource> Except<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second
+        ) {
             if (first == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.first);
@@ -22,8 +24,11 @@ namespace System.Linq
             return ExceptIterator(first, second, null);
         }
 
-        public static IEnumerable<TSource> Except<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource>? comparer)
-        {
+        public static IEnumerable<TSource> Except<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource>? comparer
+        ) {
             if (first == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.first);
@@ -37,10 +42,18 @@ namespace System.Linq
             return ExceptIterator(first, second, comparer);
         }
 
-        public static IEnumerable<TSource> ExceptBy<TSource, TKey>(this IEnumerable<TSource> first, IEnumerable<TKey> second, Func<TSource, TKey> keySelector) => ExceptBy(first, second, keySelector, null);
+        public static IEnumerable<TSource> ExceptBy<TSource, TKey>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TKey> second,
+            Func<TSource, TKey> keySelector
+        ) => ExceptBy(first, second, keySelector, null);
 
-        public static IEnumerable<TSource> ExceptBy<TSource, TKey>(this IEnumerable<TSource> first, IEnumerable<TKey> second, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
-        {
+        public static IEnumerable<TSource> ExceptBy<TSource, TKey>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TKey> second,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        ) {
             if (first is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.first);
@@ -57,8 +70,11 @@ namespace System.Linq
             return ExceptByIterator(first, second, keySelector, comparer);
         }
 
-        private static IEnumerable<TSource> ExceptIterator<TSource>(IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource>? comparer)
-        {
+        private static IEnumerable<TSource> ExceptIterator<TSource>(
+            IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource>? comparer
+        ) {
             var set = new HashSet<TSource>(second, comparer);
 
             foreach (TSource element in first)
@@ -70,8 +86,12 @@ namespace System.Linq
             }
         }
 
-        private static IEnumerable<TSource> ExceptByIterator<TSource, TKey>(IEnumerable<TSource> first, IEnumerable<TKey> second, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
-        {
+        private static IEnumerable<TSource> ExceptByIterator<TSource, TKey>(
+            IEnumerable<TSource> first,
+            IEnumerable<TKey> second,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        ) {
             var set = new HashSet<TKey>(second, comparer);
 
             foreach (TSource element in first)

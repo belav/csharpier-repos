@@ -26,14 +26,12 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                     Validate();
 
                     return Execute(args);
-                });
+                }
+            );
         }
 
-        protected virtual void Validate()
-        {
-        }
+        protected virtual void Validate() { }
 
-        protected virtual int Execute(string[] args)
-            => 0;
+        protected virtual int Execute(string[] args) => 0;
     }
 }

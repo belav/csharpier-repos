@@ -17,8 +17,8 @@ namespace Internal.Cryptography
             int blockSize,
             int feedbackSize,
             int paddingSize,
-            bool encrypting)
-        {
+            bool encrypting
+        ) {
             // The algorithm pointer is a static pointer, so not having any cleanup code is correct.
             IntPtr algorithm = IntPtr.Zero;
 
@@ -32,15 +32,26 @@ namespace Internal.Cryptography
                     break;
                 case CipherMode.CFB:
 
-                    Debug.Assert(feedbackSize == 1, "DES with CFB should have FeedbackSize set to 1");
+                    Debug.Assert(
+                        feedbackSize == 1,
+                        "DES with CFB should have FeedbackSize set to 1"
+                    );
                     algorithm = Interop.Crypto.EvpDesCfb8();
-
                     break;
                 default:
                     throw new NotSupportedException();
             }
 
-            BasicSymmetricCipher cipher = new OpenSslCipher(algorithm, cipherMode, blockSize, paddingSize, key, 0, iv, encrypting);
+            BasicSymmetricCipher cipher = new OpenSslCipher(
+                algorithm,
+                cipherMode,
+                blockSize,
+                paddingSize,
+                key,
+                0,
+                iv,
+                encrypting
+            );
             return UniversalCryptoTransform.Create(paddingMode, cipher, encrypting);
         }
     }

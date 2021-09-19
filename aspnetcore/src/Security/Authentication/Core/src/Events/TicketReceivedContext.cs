@@ -21,9 +21,8 @@ namespace Microsoft.AspNetCore.Authentication
             HttpContext context,
             AuthenticationScheme scheme,
             RemoteAuthenticationOptions options,
-            AuthenticationTicket ticket)
-            : base(context, scheme, options, ticket?.Properties)
-            => Principal = ticket?.Principal;
+            AuthenticationTicket ticket
+        ) : base(context, scheme, options, ticket?.Properties) => Principal = ticket?.Principal;
 
         /// <summary>
         /// Gets or sets the URL to redirect to after signin.

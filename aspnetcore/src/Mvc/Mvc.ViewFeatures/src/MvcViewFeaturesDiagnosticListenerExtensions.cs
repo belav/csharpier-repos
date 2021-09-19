@@ -15,8 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public static void BeforeViewComponent(
             this DiagnosticListener diagnosticListener,
             ViewComponentContext context,
-            object viewComponent)
-        {
+            object viewComponent
+        ) {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -24,17 +24,21 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
         }
 
-        private static void BeforeViewComponentImpl(DiagnosticListener diagnosticListener, ViewComponentContext context, object viewComponent)
-        {
+        private static void BeforeViewComponentImpl(
+            DiagnosticListener diagnosticListener,
+            ViewComponentContext context,
+            object viewComponent
+        ) {
             if (diagnosticListener.IsEnabled(Diagnostics.BeforeViewComponentEventData.EventName))
             {
                 diagnosticListener.Write(
-                Diagnostics.BeforeViewComponentEventData.EventName,
-                new BeforeViewComponentEventData(
-                    context.ViewContext.ActionDescriptor,
-                    context,
-                    viewComponent
-                ));
+                    Diagnostics.BeforeViewComponentEventData.EventName,
+                    new BeforeViewComponentEventData(
+                        context.ViewContext.ActionDescriptor,
+                        context,
+                        viewComponent
+                    )
+                );
             }
         }
 
@@ -42,8 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             this DiagnosticListener diagnosticListener,
             ViewComponentContext context,
             IViewComponentResult result,
-            object viewComponent)
-        {
+            object viewComponent
+        ) {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -51,26 +55,31 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
         }
 
-        private static void AfterViewComponentImpl(DiagnosticListener diagnosticListener, ViewComponentContext context, IViewComponentResult result, object viewComponent)
-        {
+        private static void AfterViewComponentImpl(
+            DiagnosticListener diagnosticListener,
+            ViewComponentContext context,
+            IViewComponentResult result,
+            object viewComponent
+        ) {
             if (diagnosticListener.IsEnabled(Diagnostics.AfterViewComponentEventData.EventName))
             {
                 diagnosticListener.Write(
-                Diagnostics.AfterViewComponentEventData.EventName,
-                new AfterViewComponentEventData(
-                    context.ViewContext.ActionDescriptor,
-                    context,
-                    result,
-                    viewComponent
-                ));
+                    Diagnostics.AfterViewComponentEventData.EventName,
+                    new AfterViewComponentEventData(
+                        context.ViewContext.ActionDescriptor,
+                        context,
+                        result,
+                        viewComponent
+                    )
+                );
             }
         }
 
         public static void ViewComponentBeforeViewExecute(
             this DiagnosticListener diagnosticListener,
             ViewComponentContext context,
-            IView view)
-        {
+            IView view
+        ) {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -78,25 +87,32 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
         }
 
-        private static void ViewComponentBeforeViewExecuteImpl(DiagnosticListener diagnosticListener, ViewComponentContext context, IView view)
-        {
-            if (diagnosticListener.IsEnabled(Diagnostics.ViewComponentBeforeViewExecuteEventData.EventName))
-            {
+        private static void ViewComponentBeforeViewExecuteImpl(
+            DiagnosticListener diagnosticListener,
+            ViewComponentContext context,
+            IView view
+        ) {
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.ViewComponentBeforeViewExecuteEventData.EventName
+                )
+            ) {
                 diagnosticListener.Write(
                     Diagnostics.ViewComponentBeforeViewExecuteEventData.EventName,
                     new ViewComponentBeforeViewExecuteEventData(
                         context.ViewContext.ActionDescriptor,
                         context,
                         view
-                    ));
+                    )
+                );
             }
         }
 
         public static void ViewComponentAfterViewExecute(
             this DiagnosticListener diagnosticListener,
             ViewComponentContext context,
-            IView view)
-        {
+            IView view
+        ) {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -104,25 +120,32 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
         }
 
-        private static void ViewComponentAfterViewExecuteImpl(DiagnosticListener diagnosticListener, ViewComponentContext context, IView view)
-        {
-            if (diagnosticListener.IsEnabled(Diagnostics.ViewComponentAfterViewExecuteEventData.EventName))
-            {
+        private static void ViewComponentAfterViewExecuteImpl(
+            DiagnosticListener diagnosticListener,
+            ViewComponentContext context,
+            IView view
+        ) {
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.ViewComponentAfterViewExecuteEventData.EventName
+                )
+            ) {
                 diagnosticListener.Write(
                     Diagnostics.ViewComponentAfterViewExecuteEventData.EventName,
                     new ViewComponentAfterViewExecuteEventData(
                         context.ViewContext.ActionDescriptor,
                         context,
                         view
-                    ));
+                    )
+                );
             }
         }
 
         public static void BeforeView(
             this DiagnosticListener diagnosticListener,
             IView view,
-            ViewContext viewContext)
-        {
+            ViewContext viewContext
+        ) {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -130,21 +153,25 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
         }
 
-        private static void BeforeViewImpl(DiagnosticListener diagnosticListener, IView view, ViewContext viewContext)
-        {
+        private static void BeforeViewImpl(
+            DiagnosticListener diagnosticListener,
+            IView view,
+            ViewContext viewContext
+        ) {
             if (diagnosticListener.IsEnabled(Diagnostics.BeforeViewEventData.EventName))
             {
                 diagnosticListener.Write(
                     Diagnostics.BeforeViewEventData.EventName,
-                    new BeforeViewEventData(view, viewContext));
+                    new BeforeViewEventData(view, viewContext)
+                );
             }
         }
 
         public static void AfterView(
             this DiagnosticListener diagnosticListener,
             IView view,
-            ViewContext viewContext)
-        {
+            ViewContext viewContext
+        ) {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
@@ -152,13 +179,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
         }
 
-        private static void AfterViewImpl(DiagnosticListener diagnosticListener, IView view, ViewContext viewContext)
-        {
+        private static void AfterViewImpl(
+            DiagnosticListener diagnosticListener,
+            IView view,
+            ViewContext viewContext
+        ) {
             if (diagnosticListener.IsEnabled(Diagnostics.AfterViewEventData.EventName))
             {
                 diagnosticListener.Write(
                     Diagnostics.AfterViewEventData.EventName,
-                    new AfterViewEventData(view, viewContext));
+                    new AfterViewEventData(view, viewContext)
+                );
             }
         }
 
@@ -168,28 +199,36 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             bool isMainPage,
             ActionResult viewResult,
             string viewName,
-            IView view)
-        {
+            IView view
+        ) {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
-                ViewFoundImpl(diagnosticListener, actionContext, isMainPage, viewResult, viewName, view);
+                ViewFoundImpl(
+                    diagnosticListener,
+                    actionContext,
+                    isMainPage,
+                    viewResult,
+                    viewName,
+                    view
+                );
             }
         }
 
-        private static void ViewFoundImpl(DiagnosticListener diagnosticListener, ActionContext actionContext, bool isMainPage, ActionResult viewResult, string viewName, IView view)
-        {
+        private static void ViewFoundImpl(
+            DiagnosticListener diagnosticListener,
+            ActionContext actionContext,
+            bool isMainPage,
+            ActionResult viewResult,
+            string viewName,
+            IView view
+        ) {
             if (diagnosticListener.IsEnabled(Diagnostics.ViewFoundEventData.EventName))
             {
                 diagnosticListener.Write(
                     Diagnostics.ViewFoundEventData.EventName,
-                    new ViewFoundEventData(
-                        actionContext,
-                        isMainPage,
-                        viewResult,
-                        viewName,
-                        view
-                    ));
+                    new ViewFoundEventData(actionContext, isMainPage, viewResult, viewName, view)
+                );
             }
         }
 
@@ -199,17 +238,30 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             bool isMainPage,
             ActionResult viewResult,
             string viewName,
-            IEnumerable<string> searchedLocations)
-        {
+            IEnumerable<string> searchedLocations
+        ) {
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
-                ViewNotFoundImpl(diagnosticListener, actionContext, isMainPage, viewResult, viewName, searchedLocations);
+                ViewNotFoundImpl(
+                    diagnosticListener,
+                    actionContext,
+                    isMainPage,
+                    viewResult,
+                    viewName,
+                    searchedLocations
+                );
             }
         }
 
-        private static void ViewNotFoundImpl(DiagnosticListener diagnosticListener, ActionContext actionContext, bool isMainPage, ActionResult viewResult, string viewName, IEnumerable<string> searchedLocations)
-        {
+        private static void ViewNotFoundImpl(
+            DiagnosticListener diagnosticListener,
+            ActionContext actionContext,
+            bool isMainPage,
+            ActionResult viewResult,
+            string viewName,
+            IEnumerable<string> searchedLocations
+        ) {
             if (diagnosticListener.IsEnabled(Diagnostics.ViewNotFoundEventData.EventName))
             {
                 diagnosticListener.Write(
@@ -220,7 +272,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         viewResult,
                         viewName,
                         searchedLocations
-                    ));
+                    )
+                );
             }
         }
     }

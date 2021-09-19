@@ -20,12 +20,15 @@ namespace System.Runtime.InteropServices.JavaScript
     {
         protected CoreObject(int jsHandle) : base(jsHandle, true)
         {
-            object result = Interop.Runtime.BindCoreObject(jsHandle, Int32Handle, out int exception);
+            object result = Interop.Runtime.BindCoreObject(
+                jsHandle,
+                Int32Handle,
+                out int exception
+            );
             if (exception != 0)
                 throw new JSException(SR.Format(SR.CoreObjectErrorBinding, result));
         }
 
-        internal CoreObject(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle)
-        { }
+        internal CoreObject(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle) { }
     }
 }

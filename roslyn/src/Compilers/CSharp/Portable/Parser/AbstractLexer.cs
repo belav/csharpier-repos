@@ -75,8 +75,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             this.AddError(this.MakeError(position, width, code, args));
         }
 
-        protected void AddError(int position, int width, XmlParseErrorCode code, params object[] args)
-        {
+        protected void AddError(
+            int position,
+            int width,
+            XmlParseErrorCode code,
+            params object[] args
+        ) {
             this.AddError(this.MakeError(position, width, code, args));
         }
 
@@ -119,21 +123,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return new SyntaxDiagnosticInfo(offset, width, code);
         }
 
-        protected SyntaxDiagnosticInfo MakeError(int position, int width, ErrorCode code, params object[] args)
-        {
+        protected SyntaxDiagnosticInfo MakeError(
+            int position,
+            int width,
+            ErrorCode code,
+            params object[] args
+        ) {
             int offset = GetLexemeOffsetFromPosition(position);
             return new SyntaxDiagnosticInfo(offset, width, code, args);
         }
 
-        protected XmlSyntaxDiagnosticInfo MakeError(int position, int width, XmlParseErrorCode code, params object[] args)
-        {
+        protected XmlSyntaxDiagnosticInfo MakeError(
+            int position,
+            int width,
+            XmlParseErrorCode code,
+            params object[] args
+        ) {
             int offset = GetLexemeOffsetFromPosition(position);
             return new XmlSyntaxDiagnosticInfo(offset, width, code, args);
         }
 
         private int GetLexemeOffsetFromPosition(int position)
         {
-            return position >= TextWindow.LexemeStartPosition ? position - TextWindow.LexemeStartPosition : position;
+            return position >= TextWindow.LexemeStartPosition
+                ? position - TextWindow.LexemeStartPosition
+                : position;
         }
 
         protected static SyntaxDiagnosticInfo MakeError(ErrorCode code)
@@ -151,8 +165,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return new XmlSyntaxDiagnosticInfo(0, 0, code);
         }
 
-        protected static XmlSyntaxDiagnosticInfo MakeError(XmlParseErrorCode code, params object[] args)
-        {
+        protected static XmlSyntaxDiagnosticInfo MakeError(
+            XmlParseErrorCode code,
+            params object[] args
+        ) {
             return new XmlSyntaxDiagnosticInfo(0, 0, code, args);
         }
     }

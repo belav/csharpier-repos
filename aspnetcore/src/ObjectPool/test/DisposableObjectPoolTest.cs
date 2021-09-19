@@ -61,7 +61,9 @@ namespace Microsoft.Extensions.ObjectPool
         public void DisposableObjectPoolWithOneElement_Dispose_ObjectDisposed()
         {
             // Arrange
-            var pool = new DisposableObjectPool<DisposableObject>(new DefaultPooledObjectPolicy<DisposableObject>());
+            var pool = new DisposableObjectPool<DisposableObject>(
+                new DefaultPooledObjectPolicy<DisposableObject>()
+            );
             var obj = pool.Get();
             pool.Return(obj);
 
@@ -76,7 +78,9 @@ namespace Microsoft.Extensions.ObjectPool
         public void DisposableObjectPoolWithTwoElements_Dispose_ObjectsDisposed()
         {
             // Arrange
-            var pool = new DisposableObjectPool<DisposableObject>(new DefaultPooledObjectPolicy<DisposableObject>());
+            var pool = new DisposableObjectPool<DisposableObject>(
+                new DefaultPooledObjectPolicy<DisposableObject>()
+            );
             var obj1 = pool.Get();
             var obj2 = pool.Get();
             pool.Return(obj1);
@@ -94,7 +98,9 @@ namespace Microsoft.Extensions.ObjectPool
         public void DisposableObjectPool_DisposeAndGet_ThrowsObjectDisposed()
         {
             // Arrange
-            var pool = new DisposableObjectPool<DisposableObject>(new DefaultPooledObjectPolicy<DisposableObject>());
+            var pool = new DisposableObjectPool<DisposableObject>(
+                new DefaultPooledObjectPolicy<DisposableObject>()
+            );
             var obj1 = pool.Get();
             var obj2 = pool.Get();
             pool.Return(obj1);
@@ -111,7 +117,9 @@ namespace Microsoft.Extensions.ObjectPool
         public void DisposableObjectPool_DisposeAndReturn_DisposesObject()
         {
             // Arrange
-            var pool = new DisposableObjectPool<DisposableObject>(new DefaultPooledObjectPolicy<DisposableObject>());
+            var pool = new DisposableObjectPool<DisposableObject>(
+                new DefaultPooledObjectPolicy<DisposableObject>()
+            );
             var obj = pool.Get();
 
             // Act

@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -59,23 +59,30 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(8, 13, "Result", 6)]
         [InlineData(null, 4, "ts¡", 4)]
         [InlineData(8, null, "ResultTestFile contents¡", 25)]
-        public async Task WriteFileAsync_WritesRangeRequested(long? start, long? end, string expectedString, long contentLength)
-        {
+        public async Task WriteFileAsync_WritesRangeRequested(
+            long? start,
+            long? end,
+            string expectedString,
+            long contentLength
+        ) {
             // Arrange
             var path = Path.GetFullPath("helllo.txt");
             var contentType = "text/plain; charset=us-ascii; p1=p1-value";
             var result = new TestVirtualFileResult(path, contentType);
             result.EnableRangeProcessing = true;
             var appEnvironment = new Mock<IWebHostEnvironment>();
-            appEnvironment.Setup(app => app.WebRootFileProvider)
-                .Returns(GetFileProvider(path));
+            appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection()
-                .AddSingleton(appEnvironment.Object)
-                .AddTransient<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>()
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    appEnvironment.Object
+                )
+                .AddTransient<
+                    IActionResultExecutor<VirtualFileResult>,
+                    TestVirtualFileResultExecutor
+                >()
                 .AddTransient<ILoggerFactory, LoggerFactory>()
                 .BuildServiceProvider();
 
@@ -83,7 +90,11 @@ namespace Microsoft.AspNetCore.Mvc
             requestHeaders.Range = new RangeHeaderValue(start, end);
             requestHeaders.IfUnmodifiedSince = DateTimeOffset.MinValue.AddDays(1);
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -112,15 +123,18 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new TestVirtualFileResult(path, contentType);
             result.EnableRangeProcessing = true;
             var appEnvironment = new Mock<IWebHostEnvironment>();
-            appEnvironment.Setup(app => app.WebRootFileProvider)
-                .Returns(GetFileProvider(path));
+            appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection()
-                .AddSingleton(appEnvironment.Object)
-                .AddTransient<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>()
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    appEnvironment.Object
+                )
+                .AddTransient<
+                    IActionResultExecutor<VirtualFileResult>,
+                    TestVirtualFileResultExecutor
+                >()
                 .AddTransient<ILoggerFactory, LoggerFactory>()
                 .BuildServiceProvider();
 
@@ -128,9 +142,15 @@ namespace Microsoft.AspNetCore.Mvc
             var requestHeaders = httpContext.Request.GetTypedHeaders();
             requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
             requestHeaders.Range = new RangeHeaderValue(0, 3);
-            requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"Etag\""));
+            requestHeaders.IfRange = new RangeConditionHeaderValue(
+                new EntityTagHeaderValue("\"Etag\"")
+            );
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -156,15 +176,18 @@ namespace Microsoft.AspNetCore.Mvc
             var contentType = "text/plain; charset=us-ascii; p1=p1-value";
             var result = new TestVirtualFileResult(path, contentType);
             var appEnvironment = new Mock<IWebHostEnvironment>();
-            appEnvironment.Setup(app => app.WebRootFileProvider)
-                .Returns(GetFileProvider(path));
+            appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection()
-                .AddSingleton(appEnvironment.Object)
-                .AddTransient<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>()
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    appEnvironment.Object
+                )
+                .AddTransient<
+                    IActionResultExecutor<VirtualFileResult>,
+                    TestVirtualFileResultExecutor
+                >()
                 .AddTransient<ILoggerFactory, LoggerFactory>()
                 .BuildServiceProvider();
 
@@ -172,9 +195,15 @@ namespace Microsoft.AspNetCore.Mvc
             var requestHeaders = httpContext.Request.GetTypedHeaders();
             requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
             requestHeaders.Range = new RangeHeaderValue(0, 3);
-            requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"Etag\""));
+            requestHeaders.IfRange = new RangeConditionHeaderValue(
+                new EntityTagHeaderValue("\"Etag\"")
+            );
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -197,15 +226,18 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new TestVirtualFileResult(path, contentType);
             result.EnableRangeProcessing = true;
             var appEnvironment = new Mock<IWebHostEnvironment>();
-            appEnvironment.Setup(app => app.WebRootFileProvider)
-                .Returns(GetFileProvider(path));
+            appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection()
-                .AddSingleton(appEnvironment.Object)
-                .AddTransient<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>()
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    appEnvironment.Object
+                )
+                .AddTransient<
+                    IActionResultExecutor<VirtualFileResult>,
+                    TestVirtualFileResultExecutor
+                >()
                 .AddTransient<ILoggerFactory, LoggerFactory>()
                 .BuildServiceProvider();
 
@@ -213,9 +245,15 @@ namespace Microsoft.AspNetCore.Mvc
             var requestHeaders = httpContext.Request.GetTypedHeaders();
             requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
             requestHeaders.Range = new RangeHeaderValue(0, 3);
-            requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"NotEtag\""));
+            requestHeaders.IfRange = new RangeConditionHeaderValue(
+                new EntityTagHeaderValue("\"NotEtag\"")
+            );
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -233,31 +271,39 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("0-5")]
         [InlineData("bytes = ")]
         [InlineData("bytes = 1-4, 5-11")]
-        public async Task WriteFileAsync_RangeHeaderMalformed_RangeRequestIgnored(string rangeString)
-        {
+        public async Task WriteFileAsync_RangeHeaderMalformed_RangeRequestIgnored(
+            string rangeString
+        ) {
             // Arrange
             var path = Path.GetFullPath("helllo.txt");
             var contentType = "text/plain; charset=us-ascii; p1=p1-value";
             var result = new TestVirtualFileResult(path, contentType);
             result.EnableRangeProcessing = true;
             var appEnvironment = new Mock<IWebHostEnvironment>();
-            appEnvironment.Setup(app => app.WebRootFileProvider)
-                    .Returns(GetFileProvider(path));
+            appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection()
-                    .AddSingleton(appEnvironment.Object)
-                    .AddTransient<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>()
-                    .AddTransient<ILoggerFactory, LoggerFactory>()
-                    .BuildServiceProvider();
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    appEnvironment.Object
+                )
+                .AddTransient<
+                    IActionResultExecutor<VirtualFileResult>,
+                    TestVirtualFileResultExecutor
+                >()
+                .AddTransient<ILoggerFactory, LoggerFactory>()
+                .BuildServiceProvider();
 
             var requestHeaders = httpContext.Request.GetTypedHeaders();
             httpContext.Request.Headers[HeaderNames.Range] = rangeString;
             requestHeaders.IfUnmodifiedSince = DateTimeOffset.MinValue.AddDays(1);
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -283,23 +329,30 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new TestVirtualFileResult(path, contentType);
             result.EnableRangeProcessing = true;
             var appEnvironment = new Mock<IWebHostEnvironment>();
-            appEnvironment.Setup(app => app.WebRootFileProvider)
-                    .Returns(GetFileProvider(path));
+            appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
             var httpContext = GetHttpContext();
             httpContext.Response.Body = new MemoryStream();
-            httpContext.RequestServices = new ServiceCollection()
-                    .AddSingleton(appEnvironment.Object)
-                    .AddTransient<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>()
-                    .AddTransient<ILoggerFactory, LoggerFactory>()
-                    .BuildServiceProvider();
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    appEnvironment.Object
+                )
+                .AddTransient<
+                    IActionResultExecutor<VirtualFileResult>,
+                    TestVirtualFileResultExecutor
+                >()
+                .AddTransient<ILoggerFactory, LoggerFactory>()
+                .BuildServiceProvider();
 
             var requestHeaders = httpContext.Request.GetTypedHeaders();
             httpContext.Request.Headers[HeaderNames.Range] = rangeString;
             requestHeaders.IfUnmodifiedSince = DateTimeOffset.MinValue.AddDays(1);
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -327,15 +380,18 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new TestVirtualFileResult(path, contentType);
             result.EnableRangeProcessing = true;
             var appEnvironment = new Mock<IWebHostEnvironment>();
-            appEnvironment.Setup(app => app.WebRootFileProvider)
-                .Returns(GetFileProvider(path));
+            appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection()
-                .AddSingleton(appEnvironment.Object)
-                .AddTransient<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>()
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    appEnvironment.Object
+                )
+                .AddTransient<
+                    IActionResultExecutor<VirtualFileResult>,
+                    TestVirtualFileResultExecutor
+                >()
                 .AddTransient<ILoggerFactory, LoggerFactory>()
                 .BuildServiceProvider();
 
@@ -343,7 +399,11 @@ namespace Microsoft.AspNetCore.Mvc
             requestHeaders.IfUnmodifiedSince = DateTimeOffset.MinValue;
             httpContext.Request.Headers[HeaderNames.Range] = "bytes = 0-6";
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -366,15 +426,18 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new TestVirtualFileResult(path, contentType);
             result.EnableRangeProcessing = true;
             var appEnvironment = new Mock<IWebHostEnvironment>();
-            appEnvironment.Setup(app => app.WebRootFileProvider)
-                .Returns(GetFileProvider(path));
+            appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection()
-                .AddSingleton(appEnvironment.Object)
-                .AddTransient<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>()
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    appEnvironment.Object
+                )
+                .AddTransient<
+                    IActionResultExecutor<VirtualFileResult>,
+                    TestVirtualFileResultExecutor
+                >()
                 .AddTransient<ILoggerFactory, LoggerFactory>()
                 .BuildServiceProvider();
 
@@ -382,7 +445,11 @@ namespace Microsoft.AspNetCore.Mvc
             requestHeaders.IfModifiedSince = DateTimeOffset.MinValue.AddDays(1);
             httpContext.Request.Headers[HeaderNames.Range] = "bytes = 0-6";
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -405,15 +472,18 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new TestVirtualFileResult(path, "text/plain");
 
             var appEnvironment = new Mock<IWebHostEnvironment>();
-            appEnvironment.Setup(app => app.WebRootFileProvider)
-                .Returns(GetFileProvider(path));
+            appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
 
             var sendFileFeature = new TestSendFileFeature();
             var httpContext = GetHttpContext();
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFileFeature);
-            httpContext.RequestServices = new ServiceCollection()
-                .AddSingleton(appEnvironment.Object)
-                .AddTransient<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>()
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    appEnvironment.Object
+                )
+                .AddTransient<
+                    IActionResultExecutor<VirtualFileResult>,
+                    TestVirtualFileResultExecutor
+                >()
                 .AddTransient<ILoggerFactory, LoggerFactory>()
                 .BuildServiceProvider();
             var context = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
@@ -438,8 +508,7 @@ namespace Microsoft.AspNetCore.Mvc
             };
 
             var sendFileMock = new Mock<IHttpResponseBodyFeature>();
-            sendFileMock
-                .Setup(s => s.SendFileAsync(path, 0, null, CancellationToken.None))
+            sendFileMock.Setup(s => s.SendFileAsync(path, 0, null, CancellationToken.None))
                 .Returns(Task.FromResult<int>(0));
 
             var httpContext = GetHttpContext();
@@ -458,8 +527,12 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(8, 13, "Result", 6)]
         [InlineData(null, 3, "ts¡", 3)]
         [InlineData(8, null, "ResultTestFile contents¡", 25)]
-        public async Task ExecuteResultAsync_CallsSendFileAsyncWithRequestedRange_IfIHttpSendFilePresent(long? start, long? end, string expectedString, long contentLength)
-        {
+        public async Task ExecuteResultAsync_CallsSendFileAsyncWithRequestedRange_IfIHttpSendFilePresent(
+            long? start,
+            long? end,
+            string expectedString,
+            long contentLength
+        ) {
             // Arrange
             var path = Path.Combine("TestFiles", "FilePathResultTestFile.txt");
             var result = new TestVirtualFileResult(path, "text/plain")
@@ -473,11 +546,14 @@ namespace Microsoft.AspNetCore.Mvc
             httpContext.Features.Set<IHttpResponseBodyFeature>(sendFile);
             var context = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
             var appEnvironment = new Mock<IWebHostEnvironment>();
-            appEnvironment.Setup(app => app.WebRootFileProvider)
-                .Returns(GetFileProvider(path));
-            httpContext.RequestServices = new ServiceCollection()
-                .AddSingleton(appEnvironment.Object)
-                .AddTransient<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>()
+            appEnvironment.Setup(app => app.WebRootFileProvider).Returns(GetFileProvider(path));
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    appEnvironment.Object
+                )
+                .AddTransient<
+                    IActionResultExecutor<VirtualFileResult>,
+                    TestVirtualFileResultExecutor
+                >()
                 .AddTransient<ILoggerFactory, LoggerFactory>()
                 .BuildServiceProvider();
 
@@ -485,7 +561,11 @@ namespace Microsoft.AspNetCore.Mvc
             requestHeaders.Range = new RangeHeaderValue(start, end);
             requestHeaders.IfUnmodifiedSince = DateTimeOffset.MinValue.AddDays(1);
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -512,8 +592,9 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var expectedContentType = "text/foo; charset=us-ascii";
             var result = new TestVirtualFileResult(
-                "FilePathResultTestFile_ASCII.txt", expectedContentType)
-            {
+                "FilePathResultTestFile_ASCII.txt",
+                expectedContentType
+            ) {
                 FileProvider = GetFileProvider("FilePathResultTestFile_ASCII.txt"),
             };
 
@@ -616,7 +697,11 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var httpContext = GetHttpContext(typeof(VirtualFileResultExecutor));
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var expectedData = "This is an embedded resource";
             var sourceStream = new MemoryStream(Encoding.UTF8.GetBytes(expectedData));
 
@@ -625,7 +710,8 @@ namespace Microsoft.AspNetCore.Mvc
             nonDiskFileInfo.SetupGet(fi => fi.PhysicalPath).Returns(() => null); // set null to indicate non-disk file
             nonDiskFileInfo.Setup(fi => fi.CreateReadStream()).Returns(sourceStream);
             var nonDiskFileProvider = new Mock<IFileProvider>();
-            nonDiskFileProvider.Setup(fp => fp.GetFileInfo(It.IsAny<string>())).Returns(nonDiskFileInfo.Object);
+            nonDiskFileProvider.Setup(fp => fp.GetFileInfo(It.IsAny<string>()))
+                .Returns(nonDiskFileInfo.Object);
 
             var filePathResult = new VirtualFileResult("/SampleEmbeddedFile.txt", "text/plain")
             {
@@ -656,10 +742,16 @@ namespace Microsoft.AspNetCore.Mvc
             };
 
             var expectedMessage = "Could not find file: " + path;
-            var context = new ActionContext(GetHttpContext(), new RouteData(), new ActionDescriptor());
+            var context = new ActionContext(
+                GetHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
-            var ex = await Assert.ThrowsAsync<FileNotFoundException>(() => filePathResult.ExecuteResultAsync(context));
+            var ex = await Assert.ThrowsAsync<FileNotFoundException>(
+                () => filePathResult.ExecuteResultAsync(context)
+            );
 
             // Assert
             Assert.Equal(expectedMessage, ex.Message);
@@ -672,10 +764,16 @@ namespace Microsoft.AspNetCore.Mvc
 
             var hostingEnvironment = new Mock<IWebHostEnvironment>();
 
-            services.AddSingleton<IActionResultExecutor<VirtualFileResult>, TestVirtualFileResultExecutor>();
+            services.AddSingleton<
+                IActionResultExecutor<VirtualFileResult>,
+                TestVirtualFileResultExecutor
+            >();
             if (executorType != null)
             {
-                services.AddSingleton(typeof(IActionResultExecutor<VirtualFileResult>), executorType);
+                services.AddSingleton(
+                    typeof(IActionResultExecutor<VirtualFileResult>),
+                    executorType
+                );
             }
 
             services.AddSingleton<IWebHostEnvironment>(hostingEnvironment.Object);
@@ -700,13 +798,19 @@ namespace Microsoft.AspNetCore.Mvc
             fileInfo.SetupGet(fi => fi.Length).Returns(33);
             fileInfo.SetupGet(fi => fi.Exists).Returns(true);
             var lastModified = DateTimeOffset.MinValue.AddDays(1);
-            lastModified = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0));
+            lastModified = new DateTimeOffset(
+                lastModified.Year,
+                lastModified.Month,
+                lastModified.Day,
+                lastModified.Hour,
+                lastModified.Minute,
+                lastModified.Second,
+                TimeSpan.FromSeconds(0)
+            );
             fileInfo.SetupGet(fi => fi.LastModified).Returns(lastModified);
             fileInfo.SetupGet(fi => fi.PhysicalPath).Returns(path);
             var fileProvider = new Mock<IFileProvider>();
-            fileProvider.Setup(fp => fp.GetFileInfo(path))
-                .Returns(fileInfo.Object)
-                .Verifiable();
+            fileProvider.Setup(fp => fp.GetFileInfo(path)).Returns(fileInfo.Object).Verifiable();
 
             return fileProvider.Object;
         }
@@ -714,23 +818,24 @@ namespace Microsoft.AspNetCore.Mvc
         private class TestVirtualFileResult : VirtualFileResult
         {
             public TestVirtualFileResult(string filePath, string contentType)
-                : base(filePath, contentType)
-            {
-            }
+                : base(filePath, contentType) { }
 
             public override Task ExecuteResultAsync(ActionContext context)
             {
-                var executor = (TestVirtualFileResultExecutor)context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<VirtualFileResult>>();
+                var executor =
+                    (TestVirtualFileResultExecutor)context.HttpContext.RequestServices.GetRequiredService<
+                        IActionResultExecutor<VirtualFileResult>
+                    >();
                 return executor.ExecuteAsync(context, this);
             }
         }
 
         private class TestVirtualFileResultExecutor : VirtualFileResultExecutor
         {
-            public TestVirtualFileResultExecutor(ILoggerFactory loggerFactory, IWebHostEnvironment hostingEnvironment)
-                : base(loggerFactory, hostingEnvironment)
-            {
-            }
+            public TestVirtualFileResultExecutor(
+                ILoggerFactory loggerFactory,
+                IWebHostEnvironment hostingEnvironment
+            ) : base(loggerFactory, hostingEnvironment) { }
         }
 
         private class TestSendFileFeature : IHttpResponseBodyFeature
@@ -754,8 +859,12 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new NotImplementedException();
             }
 
-            public Task SendFileAsync(string path, long offset, long? length, CancellationToken cancellation)
-            {
+            public Task SendFileAsync(
+                string path,
+                long offset,
+                long? length,
+                CancellationToken cancellation
+            ) {
                 Name = path;
                 Offset = offset;
                 Length = length;

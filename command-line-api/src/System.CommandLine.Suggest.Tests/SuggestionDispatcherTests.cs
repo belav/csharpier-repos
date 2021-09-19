@@ -16,22 +16,23 @@ namespace System.CommandLine.Suggest.Tests
     public class SuggestionDispatcherTests
     {
         private static readonly string _currentExeName = RootCommand.ExecutableName;
-        
-        private static readonly string _dotnetExeFullPath = 
-            DotnetMuxer.Path.FullName;
 
-        private static readonly string _dotnetFormatExeFullPath =
-            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? @"C:\Program Files\dotnet-format.exe"
-                : "/bin/dotnet-format";
+        private static readonly string _dotnetExeFullPath = DotnetMuxer.Path.FullName;
 
-        private static readonly string _netExeFullPath =
-            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? @"C:\Windows\System32\net.exe"
-                : "/bin/net";
+        private static readonly string _dotnetFormatExeFullPath = RuntimeInformation.IsOSPlatform(
+            OSPlatform.Windows
+        )
+            ? @"C:\Program Files\dotnet-format.exe"
+            : "/bin/dotnet-format";
 
-        private static Registration CurrentExeRegistrationPair()
-            => new Registration(CurrentExeFullPath());
+        private static readonly string _netExeFullPath = RuntimeInformation.IsOSPlatform(
+            OSPlatform.Windows
+        )
+            ? @"C:\Windows\System32\net.exe"
+            : "/bin/net";
+
+        private static Registration CurrentExeRegistrationPair() =>
+            new Registration(CurrentExeFullPath());
 
         private static string CurrentExeFullPath() => Path.GetFullPath(_currentExeName);
 
@@ -40,7 +41,10 @@ namespace System.CommandLine.Suggest.Tests
         {
             string receivedTargetExeName = null;
 
-            string[] args = CommandLineStringSplitter.Instance.Split($@"get -p 12 -e ""{CurrentExeFullPath()}"" -- ""{_currentExeName} add""").ToArray();
+            string[] args = CommandLineStringSplitter.Instance.Split(
+                    $@"get -p 12 -e ""{CurrentExeFullPath()}"" -- ""{_currentExeName} add"""
+                )
+                .ToArray();
 
             await InvokeAsync(
                 args,
@@ -51,7 +55,9 @@ namespace System.CommandLine.Suggest.Tests
                         receivedTargetExeName = targetExeName;
 
                         return "";
-                    }));
+                    }
+                )
+            );
 
             receivedTargetExeName.Should().Be(CurrentExeFullPath());
         }
@@ -61,7 +67,9 @@ namespace System.CommandLine.Suggest.Tests
         {
             string receivedTargetExeArgs = null;
 
-            var args = PrepareArgs($@"get -p 58 -e ""{CurrentExeFullPath()}"" -- ""{_currentExeName} add""");
+            var args = PrepareArgs(
+                $@"get -p 58 -e ""{CurrentExeFullPath()}"" -- ""{_currentExeName} add"""
+            );
 
             await InvokeAsync(
                 args,
@@ -72,12 +80,13 @@ namespace System.CommandLine.Suggest.Tests
                         receivedTargetExeArgs = targetExeArgs;
 
                         return "";
-                    }));
+                    }
+                )
+            );
 
             var expectedPosition = 57 - _currentExeName.Length;
 
-            receivedTargetExeArgs.Should()
-                                 .Be($"[suggest:{expectedPosition}] \"add\"");
+            receivedTargetExeArgs.Should().Be($"[suggest:{expectedPosition}] \"add\"");
         }
 
         [Theory]
@@ -89,11 +98,13 @@ namespace System.CommandLine.Suggest.Tests
         public async Task InvokeAsync_executes_suggestion_command_for_executable_called_via_dotnet_muxer(
             string scriptSendsCommand,
             int scriptSendsPosition,
-            string expectToReceive)
-        {
+            string expectToReceive
+        ) {
             string receivedTargetExeArgs = null;
 
-            var args = PrepareArgs($@"get -p {scriptSendsPosition} -e ""{_dotnetExeFullPath}"" -- ""{scriptSendsCommand}""");
+            var args = PrepareArgs(
+                $@"get -p {scriptSendsPosition} -e ""{_dotnetExeFullPath}"" -- ""{scriptSendsCommand}"""
+            );
 
             await InvokeAsync(
                 args,
@@ -104,10 +115,11 @@ namespace System.CommandLine.Suggest.Tests
                         receivedTargetExeArgs = targetExeArgs;
 
                         return "";
-                    }));
+                    }
+                )
+            );
 
-            receivedTargetExeArgs.Should()
-                                 .Be(expectToReceive);
+            receivedTargetExeArgs.Should().Be(expectToReceive);
         }
 
         private static string[] PrepareArgs(string args)
@@ -119,10 +131,14 @@ namespace System.CommandLine.Suggest.Tests
         [Fact]
         public async Task InvokeAsync_with_unknown_suggestion_provider_returns_empty_string()
         {
-            string[] args = Enumerable.ToArray(( CommandLineStringSplitter.Instance.Split(@"get -p 10 -e ""testcli.exe"" -- command op")));
-            (await InvokeAsync(args, new TestSuggestionRegistration()))
-                .Should()
-                .BeEmpty();
+            string[] args = Enumerable.ToArray(
+                (
+                    CommandLineStringSplitter.Instance.Split(
+                        @"get -p 10 -e ""testcli.exe"" -- command op"
+                    )
+                )
+            );
+            (await InvokeAsync(args, new TestSuggestionRegistration())).Should().BeEmpty();
         }
 
         [Fact]
@@ -133,7 +149,10 @@ namespace System.CommandLine.Suggest.Tests
             dispatcher.Timeout = TimeSpan.FromMilliseconds(1);
             var testConsole = new TestConsole();
 
-            var args = CommandLineStringSplitter.Instance.Split($@"get -p 0 -e ""{_currentExeName}"" -- {_currentExeName} add").ToArray();
+            var args = CommandLineStringSplitter.Instance.Split(
+                    $@"get -p 0 -e ""{_currentExeName}"" -- {_currentExeName} add"
+                )
+                .ToArray();
 
             await dispatcher.InvokeAsync(args, testConsole);
 
@@ -143,24 +162,25 @@ namespace System.CommandLine.Suggest.Tests
         [Fact]
         public async Task List_command_gets_all_executable_names()
         {
-            string _kiwiFruitExeFullPath =
-                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                    ? @"C:\Program Files\kiwi-fruit.exe"
-                    : "/bin/kiwi-fruit";
+            string _kiwiFruitExeFullPath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? @"C:\Program Files\kiwi-fruit.exe"
+                : "/bin/kiwi-fruit";
 
             var testSuggestionProvider = new TestSuggestionRegistration(
                 new Registration(_dotnetFormatExeFullPath),
-                new Registration(_kiwiFruitExeFullPath));
+                new Registration(_kiwiFruitExeFullPath)
+            );
 
             var dispatcher = new SuggestionDispatcher(testSuggestionProvider);
             var testConsole = new TestConsole();
 
             await dispatcher.InvokeAsync(new[] { "list" }, testConsole);
 
-            testConsole.Out
-                       .ToString()
-                       .Should()
-                       .Be($"dotnet-format{Environment.NewLine}dotnet format{Environment.NewLine}kiwi-fruit{Environment.NewLine}");
+            testConsole.Out.ToString()
+                .Should()
+                .Be(
+                    $"dotnet-format{Environment.NewLine}dotnet format{Environment.NewLine}kiwi-fruit{Environment.NewLine}"
+                );
         }
 
         [Fact]
@@ -169,7 +189,10 @@ namespace System.CommandLine.Suggest.Tests
             var provider = new TestSuggestionRegistration();
             var dispatcher = new SuggestionDispatcher(provider);
 
-            var args = CommandLineStringSplitter.Instance.Split($"register --command-path \"{_netExeFullPath}\" --suggestion-command \"net-suggestions complete\"").ToArray();
+            var args = CommandLineStringSplitter.Instance.Split(
+                    $"register --command-path \"{_netExeFullPath}\" --suggestion-command \"net-suggestions complete\""
+                )
+                .ToArray();
 
             await dispatcher.InvokeAsync(args);
 
@@ -183,7 +206,10 @@ namespace System.CommandLine.Suggest.Tests
             var provider = new TestSuggestionRegistration();
             var dispatcher = new SuggestionDispatcher(provider);
 
-            var args = CommandLineStringSplitter.Instance.Split($"register --command-path \"{_netExeFullPath}\" --suggestion-command \"net-suggestions complete\"").ToArray();
+            var args = CommandLineStringSplitter.Instance.Split(
+                    $"register --command-path \"{_netExeFullPath}\" --suggestion-command \"net-suggestions complete\""
+                )
+                .ToArray();
 
             await dispatcher.InvokeAsync(args);
             await dispatcher.InvokeAsync(args);
@@ -194,9 +220,12 @@ namespace System.CommandLine.Suggest.Tests
         private static async Task<string> InvokeAsync(
             string[] args,
             ISuggestionRegistration suggestionProvider,
-            ISuggestionStore suggestionStore = null)
-        {
-            var dispatcher = new SuggestionDispatcher(suggestionProvider, suggestionStore ?? new TestSuggestionStore());
+            ISuggestionStore suggestionStore = null
+        ) {
+            var dispatcher = new SuggestionDispatcher(
+                suggestionProvider,
+                suggestionStore ?? new TestSuggestionStore()
+            );
             var testConsole = new TestConsole();
             await dispatcher.InvokeAsync(args, testConsole);
             return testConsole.Out.ToString();
@@ -204,8 +233,11 @@ namespace System.CommandLine.Suggest.Tests
 
         private class TestSuggestionStore : ISuggestionStore
         {
-            public string GetSuggestions(string exeFileName, string suggestionTargetArguments, TimeSpan timeout)
-            {
+            public string GetSuggestions(
+                string exeFileName,
+                string suggestionTargetArguments,
+                TimeSpan timeout
+            ) {
                 if (timeout <= TimeSpan.FromMilliseconds(100))
                 {
                     return "";
@@ -234,8 +266,11 @@ namespace System.CommandLine.Suggest.Tests
                 _getSuggestions = getSuggestions;
             }
 
-            public string GetSuggestions(string exeFileName, string suggestionTargetArguments, TimeSpan timeout)
-            {
+            public string GetSuggestions(
+                string exeFileName,
+                string suggestionTargetArguments,
+                TimeSpan timeout
+            ) {
                 return _getSuggestions(exeFileName, suggestionTargetArguments, timeout);
             }
         }

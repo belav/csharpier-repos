@@ -6,7 +6,7 @@ namespace System.Data
     [Flags]
     public enum DataRowAction
     {
-        Nothing = 0,        //  0 0x00
+        Nothing = 0, //  0 0x00
         Delete = (1 << 0), //  1 0x01
         Change = (1 << 1), //  2 0x02
         Rollback = (1 << 2), //  4 0x04

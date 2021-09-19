@@ -65,13 +65,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             get { return false; }
         }
 
-        internal override void SetLinkedReferencedAssemblies(ImmutableArray<AssemblySymbol> assemblies)
-        {
+        internal override void SetLinkedReferencedAssemblies(
+            ImmutableArray<AssemblySymbol> assemblies
+        ) {
             throw new NotImplementedException();
         }
 
-        internal override void SetNoPiaResolutionAssemblies(ImmutableArray<AssemblySymbol> assemblies)
-        {
+        internal override void SetNoPiaResolutionAssemblies(
+            ImmutableArray<AssemblySymbol> assemblies
+        ) {
             throw new NotImplementedException();
         }
 
@@ -80,25 +82,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             throw new NotImplementedException();
         }
 
-        internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(string simpleName)
-        {
+        internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
+            string simpleName
+        ) {
             throw new NotImplementedException();
         }
 
         public override ICollection<string> TypeNames
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override ICollection<string> NamespaceNames
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool MightContainExtensionMethods
@@ -106,8 +103,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             get { return true; }
         }
 
-        internal override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(ref MetadataTypeName emittedName, ConsList<AssemblySymbol> visitedAssemblies)
-        {
+        internal override NamedTypeSymbol TryLookupForwardedMetadataTypeWithCycleDetection(
+            ref MetadataTypeName emittedName,
+            ConsList<AssemblySymbol> visitedAssemblies
+        ) {
             return null;
         }
 

@@ -24,8 +24,11 @@ namespace Roslyn.Test.Utilities
         public override string? FullPath => null;
         public override object Id => this;
 
-        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language) => ImmutableArray<DiagnosticAnalyzer>.Empty;
-        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() => ImmutableArray<DiagnosticAnalyzer>.Empty;
-        public override ImmutableArray<ISourceGenerator> GetGenerators(string language) => ImmutableArray.Create(_generator);
+        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language) =>
+            ImmutableArray<DiagnosticAnalyzer>.Empty;
+        public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() =>
+            ImmutableArray<DiagnosticAnalyzer>.Empty;
+        public override ImmutableArray<ISourceGenerator> GetGenerators(string language) =>
+            ImmutableArray.Create(_generator);
     }
 }

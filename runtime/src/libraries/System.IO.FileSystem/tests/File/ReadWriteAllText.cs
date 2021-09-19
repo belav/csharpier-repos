@@ -34,7 +34,10 @@ namespace System.IO.Tests
         [Fact]
         public void NonExistentPath()
         {
-            Assert.Throws<DirectoryNotFoundException>(() => Write(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), "Text"));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    Write(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), "Text")
+            );
         }
 
         [Fact]
@@ -127,12 +130,12 @@ namespace System.IO.Tests
                 else
                     Assert.Throws<UnauthorizedAccessException>(() => Write(path, "text"));
             }
+
             finally
             {
                 File.SetAttributes(path, FileAttributes.Normal);
             }
         }
-
         #endregion
     }
 

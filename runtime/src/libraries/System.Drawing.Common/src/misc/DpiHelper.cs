@@ -40,8 +40,14 @@ namespace System.Windows.Forms
             IntPtr hDC = Interop.User32.GetDC(IntPtr.Zero);
             if (hDC != IntPtr.Zero)
             {
-                s_deviceDpiX = Interop.Gdi32.GetDeviceCaps(hDC, Interop.Gdi32.DeviceCapability.LOGPIXELSX);
-                s_deviceDpiY = Interop.Gdi32.GetDeviceCaps(hDC, Interop.Gdi32.DeviceCapability.LOGPIXELSY);
+                s_deviceDpiX = Interop.Gdi32.GetDeviceCaps(
+                    hDC,
+                    Interop.Gdi32.DeviceCapability.LOGPIXELSX
+                );
+                s_deviceDpiY = Interop.Gdi32.GetDeviceCaps(
+                    hDC,
+                    Interop.Gdi32.DeviceCapability.LOGPIXELSY
+                );
 
                 Interop.User32.ReleaseDC(IntPtr.Zero, hDC);
             }
@@ -110,14 +116,28 @@ namespace System.Windows.Forms
 
         private static Bitmap ScaleBitmapToSize(Bitmap logicalImage, Size deviceImageSize)
         {
-            Bitmap deviceImage = new Bitmap(deviceImageSize.Width, deviceImageSize.Height, logicalImage.PixelFormat);
+            Bitmap deviceImage = new Bitmap(
+                deviceImageSize.Width,
+                deviceImageSize.Height,
+                logicalImage.PixelFormat
+            );
 
             using (Graphics graphics = Graphics.FromImage(deviceImage))
             {
                 graphics.InterpolationMode = InterpolationMode;
 
-                RectangleF sourceRect = new RectangleF(0, 0, logicalImage.Size.Width, logicalImage.Size.Height);
-                RectangleF destRect = new RectangleF(0, 0, deviceImageSize.Width, deviceImageSize.Height);
+                RectangleF sourceRect = new RectangleF(
+                    0,
+                    0,
+                    logicalImage.Size.Width,
+                    logicalImage.Size.Height
+                );
+                RectangleF destRect = new RectangleF(
+                    0,
+                    0,
+                    deviceImageSize.Width,
+                    deviceImageSize.Height
+                );
 
                 // Specify a source rectangle shifted by half of pixel to account for GDI+ considering the source origin the center of top-left pixel
                 // Failing to do so will result in the right and bottom of the bitmap lines being interpolated with the graphics' background color,
@@ -184,8 +204,10 @@ namespace System.Windows.Forms
         /// <returns>Size in device units</returns>
         public static Size LogicalToDeviceUnits(Size logicalSize)
         {
-            return new Size(LogicalToDeviceUnitsX(logicalSize.Width),
-                            LogicalToDeviceUnitsY(logicalSize.Height));
+            return new Size(
+                LogicalToDeviceUnitsX(logicalSize.Width),
+                LogicalToDeviceUnitsY(logicalSize.Height)
+            );
         }
 
         /// <summary>
@@ -211,8 +233,9 @@ namespace System.Windows.Forms
         /// Note: this method should be called only inside an if (DpiHelper.IsScalingRequired) clause
         /// </summary>
         /// <param name="logicalBitmap">The image to scale from logical units to device units</param>
-        public static void ScaleBitmapLogicalToDevice([NotNullIfNotNull("logicalBitmap")]ref Bitmap? logicalBitmap)
-        {
+        public static void ScaleBitmapLogicalToDevice(
+            [NotNullIfNotNull("logicalBitmap")] ref Bitmap? logicalBitmap
+        ) {
             if (logicalBitmap == null)
             {
                 return;

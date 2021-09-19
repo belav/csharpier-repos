@@ -35,7 +35,13 @@ namespace SecurityWebSite
 
         public static string GetTokenText(IEnumerable<Claim> claims)
         {
-            var token = new JwtSecurityToken(Issuer, Audience, claims, expires: DateTime.Now.AddMinutes(30), signingCredentials: Credentials);
+            var token = new JwtSecurityToken(
+                Issuer,
+                Audience,
+                claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: Credentials
+            );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }

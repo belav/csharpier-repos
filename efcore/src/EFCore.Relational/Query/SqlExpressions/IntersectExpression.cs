@@ -29,10 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             string alias,
             SelectExpression source1,
             SelectExpression source2,
-            bool distinct)
-            : base(alias, source1, source2, distinct)
-        {
-        }
+            bool distinct
+        ) : base(alias, source1, source2, distinct) { }
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -52,8 +50,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <param name="source1"> The <see cref="P:Source1" /> property of the result. </param>
         /// <param name="source2"> The <see cref="P:Source2" /> property of the result. </param>
         /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
-        public virtual IntersectExpression Update(SelectExpression source1, SelectExpression source2)
-        {
+        public virtual IntersectExpression Update(
+            SelectExpression source1,
+            SelectExpression source2
+        ) {
             Check.NotNull(source1, nameof(source1));
             Check.NotNull(source2, nameof(source2));
 
@@ -81,22 +81,21 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 expressionPrinter.Visit(Source2);
             }
 
-            expressionPrinter.AppendLine()
-                .AppendLine($") AS {Alias}");
+            expressionPrinter.AppendLine().AppendLine($") AS {Alias}");
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is IntersectExpression intersectExpression
-                    && Equals(intersectExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is IntersectExpression intersectExpression && Equals(intersectExpression)
+            );
 
-        private bool Equals(IntersectExpression intersectExpression)
-            => base.Equals(intersectExpression);
+        private bool Equals(IntersectExpression intersectExpression) =>
+            base.Equals(intersectExpression);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), GetType());
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), GetType());
     }
 }

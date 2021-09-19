@@ -15,7 +15,9 @@ namespace BuildValidator
         private static string GetIldasmPath()
         {
             var ildasmExeName = PlatformInformation.IsWindows ? "ildasm.exe" : "ildasm";
-            var directory = Path.GetDirectoryName(typeof(IldasmUtilities).GetTypeInfo().Assembly.Location) ?? throw new DirectoryNotFoundException();
+            var directory =
+                Path.GetDirectoryName(typeof(IldasmUtilities).GetTypeInfo().Assembly.Location)
+                ?? throw new DirectoryNotFoundException();
             string ridName;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -31,7 +33,9 @@ namespace BuildValidator
             }
             else
             {
-                throw new PlatformNotSupportedException("Runtime platform not supported for testing");
+                throw new PlatformNotSupportedException(
+                    "Runtime platform not supported for testing"
+                );
             }
 
             return Path.Combine(directory, "runtimes", ridName, "native", ildasmExeName);

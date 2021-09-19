@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
     internal class TransportConnectionManager
     {
         private readonly ConnectionManager _connectionManager;
-        private readonly ConcurrentDictionary<long, ConnectionReference> _connectionReferences = new ConcurrentDictionary<long, ConnectionReference>();
+        private readonly ConcurrentDictionary<long, ConnectionReference> _connectionReferences =
+            new ConcurrentDictionary<long, ConnectionReference>();
 
         public TransportConnectionManager(ConnectionManager connectionManager)
         {
@@ -68,7 +69,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             }
 
             var allClosedTask = Task.WhenAll(closeTasks.ToArray());
-            return await Task.WhenAny(allClosedTask, CancellationTokenAsTask(token)).ConfigureAwait(false) == allClosedTask;
+            return await Task.WhenAny(allClosedTask, CancellationTokenAsTask(token))
+                    .ConfigureAwait(false) == allClosedTask;
         }
 
         public async Task<bool> AbortAllConnectionsAsync()
@@ -79,13 +81,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             {
                 if (kvp.Value.TryGetConnection(out var connection))
                 {
-                    connection.TransportConnection.Abort(new ConnectionAbortedException(CoreStrings.ConnectionAbortedDuringServerShutdown));
+                    connection.TransportConnection.Abort(
+                        new ConnectionAbortedException(
+                            CoreStrings.ConnectionAbortedDuringServerShutdown
+                        )
+                    );
                     abortTasks.Add(connection.ExecutionTask);
                 }
             }
 
             var allAbortedTask = Task.WhenAll(abortTasks.ToArray());
-            return await Task.WhenAny(allAbortedTask, Task.Delay(1000)).ConfigureAwait(false) == allAbortedTask;
+            return await Task.WhenAny(allAbortedTask, Task.Delay(1000)).ConfigureAwait(false)
+                == allAbortedTask;
         }
 
         private static Task CancellationTokenAsTask(CancellationToken token)

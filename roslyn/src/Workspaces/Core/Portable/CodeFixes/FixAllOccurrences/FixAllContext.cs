@@ -88,10 +88,20 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             string codeActionEquivalenceKey,
             IEnumerable<string> diagnosticIds,
             DiagnosticProvider fixAllDiagnosticProvider,
-            CancellationToken cancellationToken)
-            : this(new FixAllState(null, document, codeFixProvider, scope, codeActionEquivalenceKey, diagnosticIds, fixAllDiagnosticProvider),
-                  new ProgressTracker(), cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) : this(
+            new FixAllState(
+                null,
+                document,
+                codeFixProvider,
+                scope,
+                codeActionEquivalenceKey,
+                diagnosticIds,
+                fixAllDiagnosticProvider
+            ),
+            new ProgressTracker(),
+            cancellationToken
+        ) {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
@@ -118,10 +128,20 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             string codeActionEquivalenceKey,
             IEnumerable<string> diagnosticIds,
             DiagnosticProvider fixAllDiagnosticProvider,
-            CancellationToken cancellationToken)
-            : this(new FixAllState(null, project, codeFixProvider, scope, codeActionEquivalenceKey, diagnosticIds, fixAllDiagnosticProvider),
-                  new ProgressTracker(), cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) : this(
+            new FixAllState(
+                null,
+                project,
+                codeFixProvider,
+                scope,
+                codeActionEquivalenceKey,
+                diagnosticIds,
+                fixAllDiagnosticProvider
+            ),
+            new ProgressTracker(),
+            cancellationToken
+        ) {
             if (project == null)
             {
                 throw new ArgumentNullException(nameof(project));
@@ -131,8 +151,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         internal FixAllContext(
             FixAllState state,
             IProgressTracker progressTracker,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             State = state;
             this.ProgressTracker = progressTracker;
             this.CancellationToken = cancellationToken;
@@ -153,18 +173,25 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 return ImmutableArray<Diagnostic>.Empty;
             }
 
-            var getDiagnosticsTask = State.DiagnosticProvider.GetDocumentDiagnosticsAsync(document, this.CancellationToken);
-            return await GetFilteredDiagnosticsAsync(getDiagnosticsTask, this.DiagnosticIds).ConfigureAwait(false);
+            var getDiagnosticsTask = State.DiagnosticProvider.GetDocumentDiagnosticsAsync(
+                document,
+                this.CancellationToken
+            );
+            return await GetFilteredDiagnosticsAsync(getDiagnosticsTask, this.DiagnosticIds)
+                .ConfigureAwait(false);
         }
 
-        private static async Task<ImmutableArray<Diagnostic>> GetFilteredDiagnosticsAsync(Task<IEnumerable<Diagnostic>> getDiagnosticsTask, ImmutableHashSet<string> diagnosticIds)
-        {
+        private static async Task<ImmutableArray<Diagnostic>> GetFilteredDiagnosticsAsync(
+            Task<IEnumerable<Diagnostic>> getDiagnosticsTask,
+            ImmutableHashSet<string> diagnosticIds
+        ) {
             if (getDiagnosticsTask != null)
             {
                 var diagnostics = await getDiagnosticsTask.ConfigureAwait(false);
                 if (diagnostics != null)
                 {
-                    return diagnostics.Where(d => d != null && diagnosticIds.Contains(d.Id)).ToImmutableArray();
+                    return diagnostics.Where(d => d != null && diagnosticIds.Contains(d.Id))
+                        .ToImmutableArray();
                 }
             }
 
@@ -203,8 +230,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// If <paramref name="includeAllDocumentDiagnostics"/> is false, then returns only project-level diagnostics which have no source location.
         /// Otherwise, returns all diagnostics in the project, including the document diagnostics for all documents in the given project.
         /// </summary>
-        private async Task<ImmutableArray<Diagnostic>> GetProjectDiagnosticsAsync(Project project, bool includeAllDocumentDiagnostics)
-        {
+        private async Task<ImmutableArray<Diagnostic>> GetProjectDiagnosticsAsync(
+            Project project,
+            bool includeAllDocumentDiagnostics
+        ) {
             Contract.ThrowIfNull(project);
 
             if (this.Project.Language != project.Language)
@@ -215,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             var getDiagnosticsTask = includeAllDocumentDiagnostics
                 ? State.DiagnosticProvider.GetAllDiagnosticsAsync(project, CancellationToken)
                 : State.DiagnosticProvider.GetProjectDiagnosticsAsync(project, CancellationToken);
-            return await GetFilteredDiagnosticsAsync(getDiagnosticsTask, this.DiagnosticIds).ConfigureAwait(false);
+            return await GetFilteredDiagnosticsAsync(getDiagnosticsTask, this.DiagnosticIds)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -232,22 +262,28 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             return new FixAllContext(State, this.ProgressTracker, cancellationToken);
         }
 
-        internal FixAllContext WithScope(FixAllScope scope)
-            => this.WithState(State.WithScope(scope));
+        internal FixAllContext WithScope(FixAllScope scope) =>
+            this.WithState(State.WithScope(scope));
 
-        internal FixAllContext WithProject(Project project)
-            => this.WithState(State.WithProject(project));
+        internal FixAllContext WithProject(Project project) =>
+            this.WithState(State.WithProject(project));
 
-        internal FixAllContext WithDocument(Document? document)
-            => this.WithState(State.WithDocument(document));
+        internal FixAllContext WithDocument(Document? document) =>
+            this.WithState(State.WithDocument(document));
 
-        private FixAllContext WithState(FixAllState state)
-            => this.State == state ? this : new FixAllContext(state, ProgressTracker, CancellationToken);
+        private FixAllContext WithState(FixAllState state) =>
+            this.State == state
+                ? this
+                : new FixAllContext(state, ProgressTracker, CancellationToken);
 
-        internal Task<ImmutableDictionary<Document, ImmutableArray<Diagnostic>>> GetDocumentDiagnosticsToFixAsync()
-            => DiagnosticProvider.GetDocumentDiagnosticsToFixAsync(this);
+        internal Task<
+            ImmutableDictionary<Document, ImmutableArray<Diagnostic>>
+        > GetDocumentDiagnosticsToFixAsync() =>
+            DiagnosticProvider.GetDocumentDiagnosticsToFixAsync(this);
 
-        internal Task<ImmutableDictionary<Project, ImmutableArray<Diagnostic>>> GetProjectDiagnosticsToFixAsync()
-            => DiagnosticProvider.GetProjectDiagnosticsToFixAsync(this);
+        internal Task<
+            ImmutableDictionary<Project, ImmutableArray<Diagnostic>>
+        > GetProjectDiagnosticsToFixAsync() =>
+            DiagnosticProvider.GetProjectDiagnosticsToFixAsync(this);
     }
 }

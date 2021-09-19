@@ -17,7 +17,11 @@ namespace Internal.TypeSystem.Ecma
     public sealed class UnmanagedPdbSymbolReader : PdbSymbolReader
     {
         [DllImport("mscoree.dll")]
-        private static extern int CLRCreateInstance([In] ref Guid clsid, [In] ref Guid riid, [Out, MarshalAs(UnmanagedType.Interface)] out ICLRMetaHost ppInterface);
+        private static extern int CLRCreateInstance(
+            [In] ref Guid clsid,
+            [In] ref Guid riid,
+            [Out, MarshalAs(UnmanagedType.Interface)] out ICLRMetaHost ppInterface
+        );
 
         [Guid("d332db9e-b9b3-4125-8207-a14884f53216")]
         [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
@@ -25,8 +29,11 @@ namespace Internal.TypeSystem.Ecma
         interface ICLRMetaHost
         {
             [PreserveSig]
-            int GetRuntime([In, MarshalAs(UnmanagedType.LPWStr)] String pwzVersion, [In] ref Guid riid, [Out, MarshalAs(UnmanagedType.Interface)] out ICLRRuntimeInfo ppRuntime);
-
+            int GetRuntime(
+                [In, MarshalAs(UnmanagedType.LPWStr)] String pwzVersion,
+                [In] ref Guid riid,
+                [Out, MarshalAs(UnmanagedType.Interface)] out ICLRRuntimeInfo ppRuntime
+            );
             // Don't need any other methods.
         }
 
@@ -43,7 +50,11 @@ namespace Internal.TypeSystem.Ecma
             void GetProcAddress_Placeholder();
 
             [PreserveSig]
-            int GetInterface([In] ref Guid rclsid, [In] ref Guid riid, [Out, MarshalAs(UnmanagedType.IUnknown)] out Object ppUnk);
+            int GetInterface(
+                [In] ref Guid rclsid,
+                [In] ref Guid riid,
+                [Out, MarshalAs(UnmanagedType.IUnknown)] out Object ppUnk
+            );
 
             void IsLoadable_Placeholder();
             void SetDefaultStartupFlags_Placeholder();
@@ -51,7 +62,6 @@ namespace Internal.TypeSystem.Ecma
 
             [PreserveSig]
             int BindAsLegacyV2Runtime();
-
             // Don't need any other methods.
         }
 
@@ -63,16 +73,23 @@ namespace Internal.TypeSystem.Ecma
             void DefineScope_Placeholder();
 
             [PreserveSig]
-            int OpenScope([In, MarshalAs(UnmanagedType.LPWStr)] String szScope, [In] Int32 dwOpenFlags, [In] ref Guid riid, [Out, MarshalAs(UnmanagedType.IUnknown)] out Object punk);
-
+            int OpenScope(
+                [In, MarshalAs(UnmanagedType.LPWStr)] String szScope,
+                [In] Int32 dwOpenFlags,
+                [In] ref Guid riid,
+                [Out, MarshalAs(UnmanagedType.IUnknown)] out Object punk
+            );
             // Don't need any other methods.
         }
 
         [DllImport("ole32.dll")]
-        private static extern int CoCreateInstance(ref Guid rclsid, IntPtr pUnkOuter,
-                                           Int32 dwClsContext,
-                                           ref Guid riid,
-                                           [MarshalAs(UnmanagedType.Interface)] out object ppv);
+        private static extern int CoCreateInstance(
+            ref Guid rclsid,
+            IntPtr pUnkOuter,
+            Int32 dwClsContext,
+            ref Guid riid,
+            [MarshalAs(UnmanagedType.Interface)] out object ppv
+        );
 
         private void ThrowExceptionForHR(int hr)
         {
@@ -85,17 +102,74 @@ namespace Internal.TypeSystem.Ecma
             {
                 try
                 {
-                    Guid IID_IUnknown = new Guid(0x00000000, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46);
+                    Guid IID_IUnknown = new Guid(
+                        0x00000000,
+                        0x0000,
+                        0x0000,
+                        0xc0,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x46
+                    );
 
                     ICLRMetaHost objMetaHost;
-                    Guid CLSID_CLRMetaHost = new Guid(0x9280188d, 0x0e8e, 0x4867, 0xb3, 0x0c, 0x7f, 0xa8, 0x38, 0x84, 0xe8, 0xde);
-                    Guid IID_CLRMetaHost = new Guid(0xd332db9e, 0xb9b3, 0x4125, 0x82, 0x07, 0xa1, 0x48, 0x84, 0xf5, 0x32, 0x16);
-                    if (CLRCreateInstance(ref CLSID_CLRMetaHost, ref IID_CLRMetaHost, out objMetaHost) < 0)
+                    Guid CLSID_CLRMetaHost = new Guid(
+                        0x9280188d,
+                        0x0e8e,
+                        0x4867,
+                        0xb3,
+                        0x0c,
+                        0x7f,
+                        0xa8,
+                        0x38,
+                        0x84,
+                        0xe8,
+                        0xde
+                    );
+                    Guid IID_CLRMetaHost = new Guid(
+                        0xd332db9e,
+                        0xb9b3,
+                        0x4125,
+                        0x82,
+                        0x07,
+                        0xa1,
+                        0x48,
+                        0x84,
+                        0xf5,
+                        0x32,
+                        0x16
+                    );
+                    if (
+                        CLRCreateInstance(
+                            ref CLSID_CLRMetaHost,
+                            ref IID_CLRMetaHost,
+                            out objMetaHost
+                        ) < 0
+                    )
                         return;
 
                     ICLRRuntimeInfo objRuntime;
-                    Guid IID_CLRRuntimeInfo = new Guid(0xbd39d1d2, 0xba2f, 0x486a, 0x89, 0xb0, 0xb4, 0xb0, 0xcb, 0x46, 0x68, 0x91);
-                    if (objMetaHost.GetRuntime("v4.0.30319", ref IID_CLRRuntimeInfo, out objRuntime) < 0)
+                    Guid IID_CLRRuntimeInfo = new Guid(
+                        0xbd39d1d2,
+                        0xba2f,
+                        0x486a,
+                        0x89,
+                        0xb0,
+                        0xb4,
+                        0xb0,
+                        0xcb,
+                        0x46,
+                        0x68,
+                        0x91
+                    );
+                    if (
+                        objMetaHost.GetRuntime("v4.0.30319", ref IID_CLRRuntimeInfo, out objRuntime)
+                        < 0
+                    )
                         return;
 
                     // To get everything from the v4 runtime
@@ -103,48 +177,109 @@ namespace Internal.TypeSystem.Ecma
 
                     // Create a COM Metadata dispenser
                     object objDispenser;
-                    Guid CLSID_CorMetaDataDispenser = new Guid(0xe5cb7a31, 0x7512, 0x11d2, 0x89, 0xce, 0x00, 0x80, 0xc7, 0x92, 0xe5, 0xd8);
-                    if (objRuntime.GetInterface(ref CLSID_CorMetaDataDispenser, ref IID_IUnknown, out objDispenser) < 0)
+                    Guid CLSID_CorMetaDataDispenser = new Guid(
+                        0xe5cb7a31,
+                        0x7512,
+                        0x11d2,
+                        0x89,
+                        0xce,
+                        0x00,
+                        0x80,
+                        0xc7,
+                        0x92,
+                        0xe5,
+                        0xd8
+                    );
+                    if (
+                        objRuntime.GetInterface(
+                            ref CLSID_CorMetaDataDispenser,
+                            ref IID_IUnknown,
+                            out objDispenser
+                        ) < 0
+                    )
                         return;
                     s_metadataDispenser = (IMetaDataDispenser)objDispenser;
 
                     // Create a SymBinder
                     object objBinder;
-                    Guid CLSID_CorSymBinder = new Guid(0x0a29ff9e, 0x7f9c, 0x4437, 0x8b, 0x11, 0xf4, 0x24, 0x49, 0x1e, 0x39, 0x31);
-                    if (CoCreateInstance(ref CLSID_CorSymBinder,
-                                         IntPtr.Zero, // pUnkOuter
-                                         1, // CLSCTX_INPROC_SERVER
-                                         ref IID_IUnknown,
-                                         out objBinder) < 0)
+                    Guid CLSID_CorSymBinder = new Guid(
+                        0x0a29ff9e,
+                        0x7f9c,
+                        0x4437,
+                        0x8b,
+                        0x11,
+                        0xf4,
+                        0x24,
+                        0x49,
+                        0x1e,
+                        0x39,
+                        0x31
+                    );
+                    if (
+                        CoCreateInstance(
+                            ref CLSID_CorSymBinder,
+                            IntPtr.Zero, // pUnkOuter
+                            1, // CLSCTX_INPROC_SERVER
+                            ref IID_IUnknown,
+                            out objBinder
+                        ) < 0
+                    )
                         return;
                     s_symBinder = (ISymUnmanagedBinder)objBinder;
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 
         private static IMetaDataDispenser s_metadataDispenser;
         private static ISymUnmanagedBinder s_symBinder;
 
-        public static PdbSymbolReader TryOpenSymbolReaderForMetadataFile(string metadataFileName, string searchPath)
-        {
+        public static PdbSymbolReader TryOpenSymbolReaderForMetadataFile(
+            string metadataFileName,
+            string searchPath
+        ) {
             try
             {
                 if (s_metadataDispenser == null || s_symBinder == null)
                     return null;
 
-                Guid IID_IMetaDataImport = new Guid(0x7dac8207, 0xd3ae, 0x4c75, 0x9b, 0x67, 0x92, 0x80, 0x1a, 0x49, 0x7d, 0x44);
+                Guid IID_IMetaDataImport = new Guid(
+                    0x7dac8207,
+                    0xd3ae,
+                    0x4c75,
+                    0x9b,
+                    0x67,
+                    0x92,
+                    0x80,
+                    0x1a,
+                    0x49,
+                    0x7d,
+                    0x44
+                );
 
                 // Open an metadata importer on the given filename. We'll end up passing this importer straight
                 // through to the Binder.
                 object objImporter;
-                if (s_metadataDispenser.OpenScope(metadataFileName, 0x00000010 /* read only */, ref IID_IMetaDataImport, out objImporter) < 0)
+                if (
+                    s_metadataDispenser.OpenScope(
+                        metadataFileName,
+                        0x00000010 /* read only */
+                        ,
+                        ref IID_IMetaDataImport,
+                        out objImporter
+                    ) < 0
+                )
                     return null;
 
                 ISymUnmanagedReader reader;
-                if (s_symBinder.GetReaderForFile(objImporter, metadataFileName, searchPath, out reader) < 0)
+                if (
+                    s_symBinder.GetReaderForFile(
+                        objImporter,
+                        metadataFileName,
+                        searchPath,
+                        out reader
+                    ) < 0
+                )
                     return null;
 
                 return new UnmanagedPdbSymbolReader(reader);
@@ -206,7 +341,18 @@ namespace Internal.TypeSystem.Ecma
             int[] lineNumbers = new int[count];
             int[] ilOffsets = new int[count];
 
-            ThrowExceptionForHR(symbolMethod.GetSequencePoints(count, out count, ilOffsets, docs, lineNumbers, null, null, null));
+            ThrowExceptionForHR(
+                symbolMethod.GetSequencePoints(
+                    count,
+                    out count,
+                    ilOffsets,
+                    docs,
+                    lineNumbers,
+                    null,
+                    null,
+                    null
+                )
+            );
 
             for (int i = 0; i < count; i++)
             {
@@ -245,7 +391,13 @@ namespace Internal.TypeSystem.Ecma
                 int attributes;
                 ThrowExceptionForHR(local.GetAttributes(out attributes));
 
-                variables.Add(new ILLocalVariable(slot, new String(nameBuffer, 0, nameLength - 1), (attributes & 0x1) != 0));
+                variables.Add(
+                    new ILLocalVariable(
+                        slot,
+                        new String(nameBuffer, 0, nameLength - 1),
+                        (attributes & 0x1) != 0
+                    )
+                );
             }
 
             int childrenCount;

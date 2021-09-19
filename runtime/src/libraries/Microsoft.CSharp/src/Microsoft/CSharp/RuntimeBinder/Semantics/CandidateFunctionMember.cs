@@ -6,8 +6,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     // Used to string together methods in the pool of available methods...
     internal sealed class CandidateFunctionMember
     {
-        public CandidateFunctionMember(MethPropWithInst mpwi, TypeArray @params, byte ctypeLift, bool fExpanded)
-        {
+        public CandidateFunctionMember(
+            MethPropWithInst mpwi,
+            TypeArray @params,
+            byte ctypeLift,
+            bool fExpanded
+        ) {
             this.mpwi = mpwi;
             this.@params = @params;
             this.ctypeLift = ctypeLift;

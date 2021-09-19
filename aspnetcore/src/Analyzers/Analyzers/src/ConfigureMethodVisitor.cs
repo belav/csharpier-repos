@@ -8,8 +8,10 @@ namespace Microsoft.AspNetCore.Analyzers
 {
     internal class ConfigureMethodVisitor : SymbolVisitor
     {
-        public static List<IMethodSymbol> FindConfigureMethods(StartupSymbols symbols, IAssemblySymbol assembly)
-        {
+        public static List<IMethodSymbol> FindConfigureMethods(
+            StartupSymbols symbols,
+            IAssemblySymbol assembly
+        ) {
             var visitor = new ConfigureMethodVisitor(symbols);
             visitor.Visit(assembly);
             return visitor._methods;

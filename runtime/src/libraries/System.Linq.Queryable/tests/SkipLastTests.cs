@@ -21,7 +21,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipLastThrowsOnNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<DateTime>)null).SkipLast(3));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<DateTime>)null).SkipLast(3)
+            );
         }
     }
 }

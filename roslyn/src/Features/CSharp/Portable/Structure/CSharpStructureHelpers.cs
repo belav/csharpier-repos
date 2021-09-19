@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
 
             if (firstToken.HasTrailingTrivia)
             {
-                var lastTrailingCommentOrWhitespaceTrivia = firstToken.TrailingTrivia.GetLastCommentOrWhitespace();
+                var lastTrailingCommentOrWhitespaceTrivia =
+                    firstToken.TrailingTrivia.GetLastCommentOrWhitespace();
                 if (lastTrailingCommentOrWhitespaceTrivia != null)
                 {
                     start = lastTrailingCommentOrWhitespaceTrivia.Value.Span.End;
@@ -55,8 +56,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             return start;
         }
 
-        private static (int spanEnd, int hintEnd) GetCollapsibleEnd(SyntaxToken lastToken, bool compressEmptyLines)
-        {
+        private static (int spanEnd, int hintEnd) GetCollapsibleEnd(
+            SyntaxToken lastToken,
+            bool compressEmptyLines
+        ) {
             // If the token has any trailing comments, we use the end of the token;
             // otherwise, the behavior depends on 'compressEmptyLines':
             //   false: skip to the start of the first new line trivia
@@ -65,7 +68,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             // The hint span never includes the compressed empty lines.
 
             var trailingTrivia = lastToken.TrailingTrivia;
-            var nextLeadingTrivia = compressEmptyLines ? lastToken.GetNextToken(includeZeroWidth: true, includeSkipped: true).LeadingTrivia : default;
+            var nextLeadingTrivia = compressEmptyLines
+                ? lastToken.GetNextToken(includeZeroWidth: true, includeSkipped: true).LeadingTrivia
+                : default;
 
             var end = lastToken.Span.End;
             int? hintEnd = null;
@@ -85,8 +90,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             return (end, hintEnd ?? end);
 
             // Return true to keep processing trivia; otherwise, false to return the current 'end'
-            static bool ProcessTrivia(SyntaxTrivia trivia, bool compressEmptyLines, ref int end, ref int? hintEnd)
-            {
+            static bool ProcessTrivia(
+                SyntaxTrivia trivia,
+                bool compressEmptyLines,
+                ref int end,
+                ref int? hintEnd
+            ) {
                 if (trivia.IsKind(SyntaxKind.EndOfLineTrivia))
                 {
                     end = trivia.SpanStart;
@@ -115,8 +124,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             // If the next token is a semicolon, and we aren't in the initializer of a for-loop, use that token as the end.
 
             var nextToken = lastToken.GetNextToken(includeSkipped: true);
-            if (nextToken.Kind() != SyntaxKind.None && nextToken.Kind() == SyntaxKind.SemicolonToken)
-            {
+            if (
+                nextToken.Kind() != SyntaxKind.None && nextToken.Kind() == SyntaxKind.SemicolonToken
+            ) {
                 var forStatement = nextToken.GetAncestor<ForStatementSyntax>();
                 if (forStatement != null && forStatement.FirstSemicolonToken == nextToken)
                 {
@@ -157,9 +167,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 }
                 else
                 {
-                    text = text.Length >= "/**/".Length && text.EndsWith(MultiLineCommentSuffix)
-                        ? text.Substring(0, text.Length - MultiLineCommentSuffix.Length)
-                        : text;
+                    text =
+                        text.Length >= "/**/".Length && text.EndsWith(MultiLineCommentSuffix)
+                            ? text.Substring(0, text.Length - MultiLineCommentSuffix.Length)
+                            : text;
                 }
 
                 return CreateCommentBannerTextWithPrefix(text, "/*");
@@ -171,8 +182,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
         }
 
         private static BlockSpan CreateCommentBlockSpan(
-            SyntaxTrivia startComment, SyntaxTrivia endComment)
-        {
+            SyntaxTrivia startComment,
+            SyntaxTrivia endComment
+        ) {
             var span = TextSpan.FromBounds(startComment.SpanStart, endComment.Span.End);
 
             return new BlockSpan(
@@ -181,21 +193,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 hintSpan: span,
                 type: BlockTypes.Comment,
                 bannerText: GetCommentBannerText(startComment),
-                autoCollapse: true);
+                autoCollapse: true
+            );
         }
 
         // For testing purposes
         internal static ImmutableArray<BlockSpan> CreateCommentBlockSpan(
-            SyntaxTriviaList triviaList)
-        {
+            SyntaxTriviaList triviaList
+        ) {
             using var result = TemporaryArray<BlockSpan>.Empty;
             CollectCommentBlockSpans(triviaList, ref result.AsRef());
             return result.ToImmutableAndClear();
         }
 
         public static void CollectCommentBlockSpans(
-            SyntaxTriviaList triviaList, ref TemporaryArray<BlockSpan> spans)
-        {
+            SyntaxTriviaList triviaList,
+            ref TemporaryArray<BlockSpan> spans
+        ) {
             if (triviaList.Count > 0)
             {
                 SyntaxTrivia? startComment = null;
@@ -205,7 +219,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 {
                     if (startComment != null)
                     {
-                        var singleLineCommentGroupRegion = CreateCommentBlockSpan(startComment.Value, endComment.Value);
+                        var singleLineCommentGroupRegion = CreateCommentBlockSpan(
+                            startComment.Value,
+                            endComment.Value
+                        );
                         spans.Add(singleLineCommentGroupRegion);
                         startComment = null;
                         endComment = null;
@@ -229,10 +246,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         var multilineCommentRegion = CreateCommentBlockSpan(trivia, trivia);
                         spans.Add(multilineCommentRegion);
                     }
-                    else if (!trivia.MatchesKind(SyntaxKind.WhitespaceTrivia,
-                                                 SyntaxKind.EndOfLineTrivia,
-                                                 SyntaxKind.EndOfFileToken))
-                    {
+                    else if (
+                        !trivia.MatchesKind(
+                            SyntaxKind.WhitespaceTrivia,
+                            SyntaxKind.EndOfLineTrivia,
+                            SyntaxKind.EndOfFileToken
+                        )
+                    ) {
                         completeSingleLineCommentGroup(ref spans);
                     }
                 }
@@ -244,15 +264,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
         public static void CollectCommentBlockSpans(
             SyntaxNode node,
             ref TemporaryArray<BlockSpan> spans,
-            BlockStructureOptionProvider optionProvider)
-        {
+            BlockStructureOptionProvider optionProvider
+        ) {
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node));
             }
 
-            if (optionProvider.IsMetadataAsSource && TryGetLeadingCollapsibleSpan(node, out var span))
-            {
+            if (
+                optionProvider.IsMetadataAsSource
+                && TryGetLeadingCollapsibleSpan(node, out var span)
+            ) {
                 spans.Add(span);
             }
             else
@@ -275,9 +297,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                     return false;
                 }
 
-                var firstComment = startToken.LeadingTrivia.FirstOrNull(t => t.IsKind(SyntaxKind.SingleLineCommentTrivia));
+                var firstComment = startToken.LeadingTrivia.FirstOrNull(
+                    t => t.IsKind(SyntaxKind.SingleLineCommentTrivia)
+                );
 
-                var startPosition = firstComment.HasValue ? firstComment.Value.SpanStart : startToken.SpanStart;
+                var startPosition = firstComment.HasValue
+                    ? firstComment.Value.SpanStart
+                    : startToken.SpanStart;
                 var endPosition = endToken.SpanStart;
 
                 // TODO (tomescht): Mark the regions to be collapsed by default.
@@ -290,7 +316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         textSpan: TextSpan.FromBounds(startPosition, endPosition),
                         hintSpan: TextSpan.FromBounds(startPosition, hintTextEndToken.Span.End),
                         bannerText: Ellipsis,
-                        autoCollapse: true);
+                        autoCollapse: true
+                    );
                     return true;
                 }
 
@@ -300,63 +327,129 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
 
             static SyntaxToken GetEndToken(SyntaxNode node)
             {
-                if (node.IsKind(SyntaxKind.ConstructorDeclaration, out ConstructorDeclarationSyntax constructorDeclaration))
-                {
-                    return constructorDeclaration.Modifiers.FirstOrNull() ?? constructorDeclaration.Identifier;
+                if (
+                    node.IsKind(
+                        SyntaxKind.ConstructorDeclaration,
+                        out ConstructorDeclarationSyntax constructorDeclaration
+                    )
+                ) {
+                    return constructorDeclaration.Modifiers.FirstOrNull()
+                        ?? constructorDeclaration.Identifier;
                 }
-                else if (node.IsKind(SyntaxKind.ConversionOperatorDeclaration, out ConversionOperatorDeclarationSyntax conversionOperatorDeclaration))
-                {
-                    return conversionOperatorDeclaration.Modifiers.FirstOrNull() ?? conversionOperatorDeclaration.ImplicitOrExplicitKeyword;
+                else if (
+                    node.IsKind(
+                        SyntaxKind.ConversionOperatorDeclaration,
+                        out ConversionOperatorDeclarationSyntax conversionOperatorDeclaration
+                    )
+                ) {
+                    return conversionOperatorDeclaration.Modifiers.FirstOrNull()
+                        ?? conversionOperatorDeclaration.ImplicitOrExplicitKeyword;
                 }
-                else if (node.IsKind(SyntaxKind.DelegateDeclaration, out DelegateDeclarationSyntax delegateDeclaration))
-                {
-                    return delegateDeclaration.Modifiers.FirstOrNull() ?? delegateDeclaration.DelegateKeyword;
+                else if (
+                    node.IsKind(
+                        SyntaxKind.DelegateDeclaration,
+                        out DelegateDeclarationSyntax delegateDeclaration
+                    )
+                ) {
+                    return delegateDeclaration.Modifiers.FirstOrNull()
+                        ?? delegateDeclaration.DelegateKeyword;
                 }
-                else if (node.IsKind(SyntaxKind.DestructorDeclaration, out DestructorDeclarationSyntax destructorDeclaration))
-                {
+                else if (
+                    node.IsKind(
+                        SyntaxKind.DestructorDeclaration,
+                        out DestructorDeclarationSyntax destructorDeclaration
+                    )
+                ) {
                     return destructorDeclaration.TildeToken;
                 }
-                else if (node.IsKind(SyntaxKind.EnumDeclaration, out EnumDeclarationSyntax enumDeclaration))
-                {
+                else if (
+                    node.IsKind(
+                        SyntaxKind.EnumDeclaration,
+                        out EnumDeclarationSyntax enumDeclaration
+                    )
+                ) {
                     return enumDeclaration.Modifiers.FirstOrNull() ?? enumDeclaration.EnumKeyword;
                 }
-                else if (node.IsKind(SyntaxKind.EnumMemberDeclaration, out EnumMemberDeclarationSyntax enumMemberDeclaration))
-                {
+                else if (
+                    node.IsKind(
+                        SyntaxKind.EnumMemberDeclaration,
+                        out EnumMemberDeclarationSyntax enumMemberDeclaration
+                    )
+                ) {
                     return enumMemberDeclaration.Identifier;
                 }
-                else if (node.IsKind(SyntaxKind.EventDeclaration, out EventDeclarationSyntax eventDeclaration))
-                {
-                    return eventDeclaration.Modifiers.FirstOrNull() ?? eventDeclaration.EventKeyword;
+                else if (
+                    node.IsKind(
+                        SyntaxKind.EventDeclaration,
+                        out EventDeclarationSyntax eventDeclaration
+                    )
+                ) {
+                    return eventDeclaration.Modifiers.FirstOrNull()
+                        ?? eventDeclaration.EventKeyword;
                 }
-                else if (node.IsKind(SyntaxKind.EventFieldDeclaration, out EventFieldDeclarationSyntax eventFieldDeclaration))
-                {
-                    return eventFieldDeclaration.Modifiers.FirstOrNull() ?? eventFieldDeclaration.EventKeyword;
+                else if (
+                    node.IsKind(
+                        SyntaxKind.EventFieldDeclaration,
+                        out EventFieldDeclarationSyntax eventFieldDeclaration
+                    )
+                ) {
+                    return eventFieldDeclaration.Modifiers.FirstOrNull()
+                        ?? eventFieldDeclaration.EventKeyword;
                 }
-                else if (node.IsKind(SyntaxKind.FieldDeclaration, out FieldDeclarationSyntax fieldDeclaration))
-                {
-                    return fieldDeclaration.Modifiers.FirstOrNull() ?? fieldDeclaration.Declaration.GetFirstToken();
+                else if (
+                    node.IsKind(
+                        SyntaxKind.FieldDeclaration,
+                        out FieldDeclarationSyntax fieldDeclaration
+                    )
+                ) {
+                    return fieldDeclaration.Modifiers.FirstOrNull()
+                        ?? fieldDeclaration.Declaration.GetFirstToken();
                 }
-                else if (node.IsKind(SyntaxKind.IndexerDeclaration, out IndexerDeclarationSyntax indexerDeclaration))
-                {
-                    return indexerDeclaration.Modifiers.FirstOrNull() ?? indexerDeclaration.Type.GetFirstToken();
+                else if (
+                    node.IsKind(
+                        SyntaxKind.IndexerDeclaration,
+                        out IndexerDeclarationSyntax indexerDeclaration
+                    )
+                ) {
+                    return indexerDeclaration.Modifiers.FirstOrNull()
+                        ?? indexerDeclaration.Type.GetFirstToken();
                 }
-                else if (node.IsKind(SyntaxKind.MethodDeclaration, out MethodDeclarationSyntax methodDeclaration))
-                {
-                    return methodDeclaration.Modifiers.FirstOrNull() ?? methodDeclaration.ReturnType.GetFirstToken();
+                else if (
+                    node.IsKind(
+                        SyntaxKind.MethodDeclaration,
+                        out MethodDeclarationSyntax methodDeclaration
+                    )
+                ) {
+                    return methodDeclaration.Modifiers.FirstOrNull()
+                        ?? methodDeclaration.ReturnType.GetFirstToken();
                 }
-                else if (node.IsKind(SyntaxKind.OperatorDeclaration, out OperatorDeclarationSyntax operatorDeclaration))
-                {
-                    return operatorDeclaration.Modifiers.FirstOrNull() ?? operatorDeclaration.ReturnType.GetFirstToken();
+                else if (
+                    node.IsKind(
+                        SyntaxKind.OperatorDeclaration,
+                        out OperatorDeclarationSyntax operatorDeclaration
+                    )
+                ) {
+                    return operatorDeclaration.Modifiers.FirstOrNull()
+                        ?? operatorDeclaration.ReturnType.GetFirstToken();
                 }
-                else if (node.IsKind(SyntaxKind.PropertyDeclaration, out PropertyDeclarationSyntax propertyDeclaration))
-                {
-                    return propertyDeclaration.Modifiers.FirstOrNull() ?? propertyDeclaration.Type.GetFirstToken();
+                else if (
+                    node.IsKind(
+                        SyntaxKind.PropertyDeclaration,
+                        out PropertyDeclarationSyntax propertyDeclaration
+                    )
+                ) {
+                    return propertyDeclaration.Modifiers.FirstOrNull()
+                        ?? propertyDeclaration.Type.GetFirstToken();
                 }
-                else if (node.IsKind(SyntaxKind.ClassDeclaration, out TypeDeclarationSyntax typeDeclaration)
+                else if (
+                    node.IsKind(
+                        SyntaxKind.ClassDeclaration,
+                        out TypeDeclarationSyntax typeDeclaration
+                    )
                     || node.IsKind(SyntaxKind.RecordDeclaration, out typeDeclaration)
                     || node.IsKind(SyntaxKind.StructDeclaration, out typeDeclaration)
-                    || node.IsKind(SyntaxKind.InterfaceDeclaration, out typeDeclaration))
-                {
+                    || node.IsKind(SyntaxKind.InterfaceDeclaration, out typeDeclaration)
+                ) {
                     return typeDeclaration.Modifiers.FirstOrNull() ?? typeDeclaration.Keyword;
                 }
                 else
@@ -367,15 +460,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
 
             static SyntaxToken GetHintTextEndToken(SyntaxNode node)
             {
-                if (node.IsKind(SyntaxKind.EnumDeclaration, out EnumDeclarationSyntax enumDeclaration))
-                {
+                if (
+                    node.IsKind(
+                        SyntaxKind.EnumDeclaration,
+                        out EnumDeclarationSyntax enumDeclaration
+                    )
+                ) {
                     return enumDeclaration.OpenBraceToken.GetPreviousToken();
                 }
-                else if (node.IsKind(SyntaxKind.ClassDeclaration, out TypeDeclarationSyntax typeDeclaration)
+                else if (
+                    node.IsKind(
+                        SyntaxKind.ClassDeclaration,
+                        out TypeDeclarationSyntax typeDeclaration
+                    )
                     || node.IsKind(SyntaxKind.RecordDeclaration, out typeDeclaration)
                     || node.IsKind(SyntaxKind.StructDeclaration, out typeDeclaration)
-                    || node.IsKind(SyntaxKind.InterfaceDeclaration, out typeDeclaration))
-                {
+                    || node.IsKind(SyntaxKind.InterfaceDeclaration, out typeDeclaration)
+                ) {
                     return typeDeclaration.OpenBraceToken.GetPreviousToken();
                 }
                 else
@@ -386,54 +487,81 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
         }
 
         private static BlockSpan CreateBlockSpan(
-            TextSpan textSpan, string bannerText, bool autoCollapse,
-            string type, bool isCollapsible)
-        {
+            TextSpan textSpan,
+            string bannerText,
+            bool autoCollapse,
+            string type,
+            bool isCollapsible
+        ) {
             return CreateBlockSpan(
-                textSpan, textSpan, bannerText, autoCollapse, type, isCollapsible);
+                textSpan,
+                textSpan,
+                bannerText,
+                autoCollapse,
+                type,
+                isCollapsible
+            );
         }
 
         private static BlockSpan CreateBlockSpan(
-            TextSpan textSpan, TextSpan hintSpan,
-            string bannerText, bool autoCollapse,
-            string type, bool isCollapsible)
-        {
+            TextSpan textSpan,
+            TextSpan hintSpan,
+            string bannerText,
+            bool autoCollapse,
+            string type,
+            bool isCollapsible
+        ) {
             return new BlockSpan(
                 textSpan: textSpan,
                 hintSpan: hintSpan,
                 bannerText: bannerText,
                 autoCollapse: autoCollapse,
                 type: type,
-                isCollapsible: isCollapsible);
+                isCollapsible: isCollapsible
+            );
         }
 
         public static BlockSpan CreateBlockSpan(
-            SyntaxNode node, string bannerText, bool autoCollapse,
-            string type, bool isCollapsible)
-        {
+            SyntaxNode node,
+            string bannerText,
+            bool autoCollapse,
+            string type,
+            bool isCollapsible
+        ) {
+            return CreateBlockSpan(node.Span, bannerText, autoCollapse, type, isCollapsible);
+        }
+
+        public static BlockSpan? CreateBlockSpan(
+            SyntaxNode node,
+            SyntaxToken syntaxToken,
+            bool compressEmptyLines,
+            string bannerText,
+            bool autoCollapse,
+            string type,
+            bool isCollapsible
+        ) {
             return CreateBlockSpan(
-                node.Span,
+                node,
+                syntaxToken,
+                node.GetLastToken(),
+                compressEmptyLines,
                 bannerText,
                 autoCollapse,
                 type,
-                isCollapsible);
+                isCollapsible
+            );
         }
 
         public static BlockSpan? CreateBlockSpan(
-            SyntaxNode node, SyntaxToken syntaxToken, bool compressEmptyLines,
-            string bannerText, bool autoCollapse,
-            string type, bool isCollapsible)
-        {
-            return CreateBlockSpan(
-                node, syntaxToken, node.GetLastToken(), compressEmptyLines,
-                bannerText, autoCollapse, type, isCollapsible);
-        }
-
-        public static BlockSpan? CreateBlockSpan(
-            SyntaxNode node, SyntaxToken startToken,
-            int spanEndPos, int hintEndPos, string bannerText, bool autoCollapse,
-            string type, bool isCollapsible)
-        {
+            SyntaxNode node,
+            SyntaxToken startToken,
+            int spanEndPos,
+            int hintEndPos,
+            string bannerText,
+            bool autoCollapse,
+            string type,
+            bool isCollapsible
+        ) {
             // If the SyntaxToken is actually missing, don't attempt to create an outlining region.
             if (startToken.IsMissing)
             {
@@ -447,13 +575,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             var span = TextSpan.FromBounds(GetCollapsibleStart(startToken), spanEndPos);
             var hintSpan = GetHintSpan(node, hintEndPos);
 
-            return CreateBlockSpan(
-                span,
-                hintSpan,
-                bannerText,
-                autoCollapse,
-                type,
-                isCollapsible);
+            return CreateBlockSpan(span, hintSpan, bannerText, autoCollapse, type, isCollapsible);
         }
 
         private static TextSpan GetHintSpan(SyntaxNode node, int endPos)
@@ -474,78 +596,112 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
         }
 
         public static BlockSpan? CreateBlockSpan(
-            SyntaxNode node, SyntaxToken startToken,
-            SyntaxToken endToken, bool compressEmptyLines, string bannerText, bool autoCollapse,
-            string type, bool isCollapsible)
-        {
+            SyntaxNode node,
+            SyntaxToken startToken,
+            SyntaxToken endToken,
+            bool compressEmptyLines,
+            string bannerText,
+            bool autoCollapse,
+            string type,
+            bool isCollapsible
+        ) {
             var (spanEnd, hintEnd) = GetCollapsibleEnd(endToken, compressEmptyLines);
             return CreateBlockSpan(
-                node, startToken, spanEnd, hintEnd,
-                bannerText, autoCollapse, type, isCollapsible);
+                node,
+                startToken,
+                spanEnd,
+                hintEnd,
+                bannerText,
+                autoCollapse,
+                type,
+                isCollapsible
+            );
         }
 
         public static BlockSpan CreateBlockSpan(
-            SyntaxNode node, bool autoCollapse, string type, bool isCollapsible)
-        {
+            SyntaxNode node,
+            bool autoCollapse,
+            string type,
+            bool isCollapsible
+        ) {
             return CreateBlockSpan(
                 node,
                 bannerText: Ellipsis,
                 autoCollapse: autoCollapse,
                 type: type,
-                isCollapsible: isCollapsible);
+                isCollapsible: isCollapsible
+            );
         }
 
-        // Adds everything after 'syntaxToken' up to and including the end 
+        // Adds everything after 'syntaxToken' up to and including the end
         // of node as a region.  The snippet to display is just "..."
         public static BlockSpan? CreateBlockSpan(
-            SyntaxNode node, SyntaxToken syntaxToken, bool compressEmptyLines,
-            bool autoCollapse, string type, bool isCollapsible)
-        {
+            SyntaxNode node,
+            SyntaxToken syntaxToken,
+            bool compressEmptyLines,
+            bool autoCollapse,
+            string type,
+            bool isCollapsible
+        ) {
             return CreateBlockSpan(
-                node, syntaxToken, compressEmptyLines,
+                node,
+                syntaxToken,
+                compressEmptyLines,
                 bannerText: Ellipsis,
                 autoCollapse: autoCollapse,
                 type: type,
-                isCollapsible: isCollapsible);
+                isCollapsible: isCollapsible
+            );
         }
 
-        // Adds everything after 'syntaxToken' up to and including the end 
+        // Adds everything after 'syntaxToken' up to and including the end
         // of node as a region.  The snippet to display is just "..."
         public static BlockSpan? CreateBlockSpan(
-            SyntaxNode node, SyntaxToken startToken, SyntaxToken endToken, bool compressEmptyLines,
-            bool autoCollapse, string type, bool isCollapsible)
-        {
+            SyntaxNode node,
+            SyntaxToken startToken,
+            SyntaxToken endToken,
+            bool compressEmptyLines,
+            bool autoCollapse,
+            string type,
+            bool isCollapsible
+        ) {
             return CreateBlockSpan(
-                node, startToken, endToken, compressEmptyLines,
+                node,
+                startToken,
+                endToken,
+                compressEmptyLines,
                 bannerText: Ellipsis,
                 autoCollapse: autoCollapse,
                 type: type,
-                isCollapsible: isCollapsible);
+                isCollapsible: isCollapsible
+            );
         }
 
         // Adds the span surrounding the syntax list as a region.  The
-        // snippet shown is the text from the first line of the first 
+        // snippet shown is the text from the first line of the first
         // node in the list.
         public static BlockSpan? CreateBlockSpan(
-            IEnumerable<SyntaxNode> syntaxList, bool compressEmptyLines, bool autoCollapse,
-            string type, bool isCollapsible)
-        {
+            IEnumerable<SyntaxNode> syntaxList,
+            bool compressEmptyLines,
+            bool autoCollapse,
+            string type,
+            bool isCollapsible
+        ) {
             if (syntaxList.IsEmpty())
             {
                 return null;
             }
 
-            var (end, hintEnd) = GetCollapsibleEnd(syntaxList.Last().GetLastToken(), compressEmptyLines);
+            var (end, hintEnd) = GetCollapsibleEnd(
+                syntaxList.Last().GetLastToken(),
+                compressEmptyLines
+            );
 
             var spanStart = syntaxList.First().GetFirstToken().FullSpan.End;
-            var spanEnd = end >= spanStart
-                ? end
-                : spanStart;
+            var spanEnd = end >= spanStart ? end : spanStart;
 
             var hintSpanStart = syntaxList.First().SpanStart;
-            var hintSpanEnd = hintEnd >= hintSpanStart
-                ? hintEnd
-                : hintSpanStart;
+            var hintSpanEnd = hintEnd >= hintSpanStart ? hintEnd : hintSpanStart;
 
             return CreateBlockSpan(
                 textSpan: TextSpan.FromBounds(spanStart, spanEnd),
@@ -553,7 +709,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 bannerText: Ellipsis,
                 autoCollapse: autoCollapse,
                 type: type,
-                isCollapsible: isCollapsible);
+                isCollapsible: isCollapsible
+            );
         }
     }
 }

@@ -10,11 +10,15 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class AuthMiddlewareUsingRequireAuthTest : IClassFixture<MvcTestFixture<SecurityWebSite.StartupWithRequireAuth>>
+    public class AuthMiddlewareUsingRequireAuthTest
+        : IClassFixture<MvcTestFixture<SecurityWebSite.StartupWithRequireAuth>>
     {
-        public AuthMiddlewareUsingRequireAuthTest(MvcTestFixture<SecurityWebSite.StartupWithRequireAuth> fixture)
-        {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        public AuthMiddlewareUsingRequireAuthTest(
+            MvcTestFixture<SecurityWebSite.StartupWithRequireAuth> fixture
+        ) {
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = factory.CreateDefaultClient();
         }
 
@@ -77,4 +81,4 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         }
     }
 }
- 
+

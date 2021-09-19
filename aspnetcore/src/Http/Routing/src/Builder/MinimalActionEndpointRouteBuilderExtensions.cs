@@ -33,8 +33,8 @@ namespace Microsoft.AspNetCore.Builder
         public static MinimalActionEndpointConventionBuilder MapGet(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            Delegate action)
-        {
+            Delegate action
+        ) {
             return MapMethods(endpoints, pattern, GetVerb, action);
         }
 
@@ -49,8 +49,8 @@ namespace Microsoft.AspNetCore.Builder
         public static MinimalActionEndpointConventionBuilder MapPost(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            Delegate action)
-        {
+            Delegate action
+        ) {
             return MapMethods(endpoints, pattern, PostVerb, action);
         }
 
@@ -65,8 +65,8 @@ namespace Microsoft.AspNetCore.Builder
         public static MinimalActionEndpointConventionBuilder MapPut(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            Delegate action)
-        {
+            Delegate action
+        ) {
             return MapMethods(endpoints, pattern, PutVerb, action);
         }
 
@@ -81,8 +81,8 @@ namespace Microsoft.AspNetCore.Builder
         public static MinimalActionEndpointConventionBuilder MapDelete(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            Delegate action)
-        {
+            Delegate action
+        ) {
             return MapMethods(endpoints, pattern, DeleteVerb, action);
         }
 
@@ -96,11 +96,11 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="httpMethods">HTTP methods that the endpoint will match.</param>
         /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the endpoint.</returns>
         public static MinimalActionEndpointConventionBuilder MapMethods(
-           this IEndpointRouteBuilder endpoints,
-           string pattern,
-           IEnumerable<string> httpMethods,
-           Delegate action)
-        {
+            this IEndpointRouteBuilder endpoints,
+            string pattern,
+            IEnumerable<string> httpMethods,
+            Delegate action
+        ) {
             if (httpMethods is null)
             {
                 throw new ArgumentNullException(nameof(httpMethods));
@@ -123,8 +123,8 @@ namespace Microsoft.AspNetCore.Builder
         public static MinimalActionEndpointConventionBuilder Map(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            Delegate action)
-        {
+            Delegate action
+        ) {
             return Map(endpoints, RoutePatternFactory.Parse(pattern), action);
         }
 
@@ -139,8 +139,8 @@ namespace Microsoft.AspNetCore.Builder
         public static MinimalActionEndpointConventionBuilder Map(
             this IEndpointRouteBuilder endpoints,
             RoutePattern pattern,
-            Delegate action)
-        {
+            Delegate action
+        ) {
             if (endpoints is null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -161,8 +161,8 @@ namespace Microsoft.AspNetCore.Builder
             var builder = new RouteEndpointBuilder(
                 RequestDelegateFactory.Create(action),
                 pattern,
-                defaultOrder)
-            {
+                defaultOrder
+            ) {
                 DisplayName = pattern.RawText ?? pattern.DebuggerToString(),
             };
 
@@ -178,14 +178,17 @@ namespace Microsoft.AspNetCore.Builder
                 }
             }
 
-            var dataSource = endpoints.DataSources.OfType<ModelEndpointDataSource>().FirstOrDefault();
+            var dataSource = endpoints.DataSources.OfType<ModelEndpointDataSource>()
+                .FirstOrDefault();
             if (dataSource is null)
             {
                 dataSource = new ModelEndpointDataSource();
                 endpoints.DataSources.Add(dataSource);
             }
 
-            return new MinimalActionEndpointConventionBuilder(dataSource.AddEndpointBuilder(builder));
+            return new MinimalActionEndpointConventionBuilder(
+                dataSource.AddEndpointBuilder(builder)
+            );
         }
     }
 }

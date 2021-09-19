@@ -27,8 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            bool interfaces)
-        {
+            bool interfaces
+        ) {
             var collection = new BasesCollection(state, parent, fileCodeModel, nodeKey, interfaces);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
@@ -41,8 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            bool interfaces)
-            : base(state, parent)
+            bool interfaces
+        ) : base(state, parent)
         {
             Debug.Assert(fileCodeModel != null);
 
@@ -56,8 +56,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             get { return _fileCodeModel.Object; }
         }
 
-        private SyntaxNode LookupNode()
-            => FileCodeModel.LookupNode(_nodeKey);
+        private SyntaxNode LookupNode() => FileCodeModel.LookupNode(_nodeKey);
 
         private ITypeSymbol LookupSymbol()
         {

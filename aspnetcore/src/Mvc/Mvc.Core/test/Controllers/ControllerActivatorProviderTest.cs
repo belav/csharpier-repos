@@ -48,15 +48,11 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             {
                 ControllerTypeInfo = typeof(TestController).GetTypeInfo(),
             };
-            var serviceProvider = new ServiceCollection()
-                .AddSingleton(expected)
+            var serviceProvider = new ServiceCollection().AddSingleton(expected)
                 .BuildServiceProvider();
             var context = new ControllerContext
             {
-                HttpContext = new DefaultHttpContext
-                {
-                    RequestServices = serviceProvider,
-                },
+                HttpContext = new DefaultHttpContext { RequestServices = serviceProvider, },
             };
 
             // Act
@@ -74,8 +70,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             // Arrange
             var expected = new object();
             var activator = new Mock<IControllerActivator>();
-            activator.Setup(a => a.Release(It.IsAny<ControllerContext>(), expected))
-                .Verifiable();
+            activator.Setup(a => a.Release(It.IsAny<ControllerContext>(), expected)).Verifiable();
             var activatorProvider = new ControllerActivatorProvider(activator.Object);
             var descriptor = new ControllerActionDescriptor
             {
@@ -151,7 +146,6 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 
         private class TestService
         {
-
         }
     }
 }

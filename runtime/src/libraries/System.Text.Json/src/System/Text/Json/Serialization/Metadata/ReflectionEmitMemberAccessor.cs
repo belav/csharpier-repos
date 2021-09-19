@@ -15,7 +15,12 @@ namespace System.Text.Json.Serialization.Metadata
         public override JsonTypeInfo.ConstructorDelegate? CreateConstructor(Type type)
         {
             Debug.Assert(type != null);
-            ConstructorInfo? realMethod = type.GetConstructor(BindingFlags.Public | BindingFlags.Instance, binder: null, Type.EmptyTypes, modifiers: null);
+            ConstructorInfo? realMethod = type.GetConstructor(
+                BindingFlags.Public | BindingFlags.Instance,
+                binder: null,
+                Type.EmptyTypes,
+                modifiers: null
+            );
 
             if (type.IsAbstract)
             {
@@ -32,7 +37,8 @@ namespace System.Text.Json.Serialization.Metadata
                 JsonTypeInfo.ObjectType,
                 Type.EmptyTypes,
                 typeof(ReflectionEmitMemberAccessor).Module,
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
@@ -52,11 +58,17 @@ namespace System.Text.Json.Serialization.Metadata
 
             generator.Emit(OpCodes.Ret);
 
-            return (JsonTypeInfo.ConstructorDelegate)dynamicMethod.CreateDelegate(typeof(JsonTypeInfo.ConstructorDelegate));
+            return (JsonTypeInfo.ConstructorDelegate)dynamicMethod.CreateDelegate(
+                typeof(JsonTypeInfo.ConstructorDelegate)
+            );
         }
 
-        public override JsonTypeInfo.ParameterizedConstructorDelegate<T>? CreateParameterizedConstructor<T>(ConstructorInfo constructor) =>
-            CreateDelegate<JsonTypeInfo.ParameterizedConstructorDelegate<T>>(CreateParameterizedConstructor(constructor));
+        public override JsonTypeInfo.ParameterizedConstructorDelegate<T>? CreateParameterizedConstructor<T>(
+            ConstructorInfo constructor
+        ) =>
+            CreateDelegate<JsonTypeInfo.ParameterizedConstructorDelegate<T>>(
+                CreateParameterizedConstructor(constructor)
+            );
 
         private static DynamicMethod? CreateParameterizedConstructor(ConstructorInfo constructor)
         {
@@ -64,7 +76,12 @@ namespace System.Text.Json.Serialization.Metadata
 
             Debug.Assert(type != null);
             Debug.Assert(!type.IsAbstract);
-            Debug.Assert(Array.IndexOf(type.GetConstructors(BindingFlags.Public | BindingFlags.Instance), constructor) >= 0);
+            Debug.Assert(
+                Array.IndexOf(
+                    type.GetConstructors(BindingFlags.Public | BindingFlags.Instance),
+                    constructor
+                ) >= 0
+            );
 
             ParameterInfo[] parameters = constructor.GetParameters();
             int parameterCount = parameters.Length;
@@ -79,7 +96,8 @@ namespace System.Text.Json.Serialization.Metadata
                 type,
                 new[] { typeof(object[]) },
                 typeof(ReflectionEmitMemberAccessor).Module,
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
@@ -99,18 +117,48 @@ namespace System.Text.Json.Serialization.Metadata
             return dynamicMethod;
         }
 
-        public override JsonTypeInfo.ParameterizedConstructorDelegate<T, TArg0, TArg1, TArg2, TArg3>?
-            CreateParameterizedConstructor<T, TArg0, TArg1, TArg2, TArg3>(ConstructorInfo constructor) =>
-            CreateDelegate<JsonTypeInfo.ParameterizedConstructorDelegate<T, TArg0, TArg1, TArg2, TArg3>>(
-                CreateParameterizedConstructor(constructor, typeof(TArg0), typeof(TArg1), typeof(TArg2), typeof(TArg3)));
+        public override JsonTypeInfo.ParameterizedConstructorDelegate<
+            T,
+            TArg0,
+            TArg1,
+            TArg2,
+            TArg3
+        >? CreateParameterizedConstructor<T, TArg0, TArg1, TArg2, TArg3>(
+            ConstructorInfo constructor
+        ) =>
+            CreateDelegate<JsonTypeInfo.ParameterizedConstructorDelegate<
+                    T,
+                    TArg0,
+                    TArg1,
+                    TArg2,
+                    TArg3
+                >>(
+                CreateParameterizedConstructor(
+                    constructor,
+                    typeof(TArg0),
+                    typeof(TArg1),
+                    typeof(TArg2),
+                    typeof(TArg3)
+                )
+            );
 
-        private static DynamicMethod? CreateParameterizedConstructor(ConstructorInfo constructor, Type parameterType1, Type parameterType2, Type parameterType3, Type parameterType4)
-        {
+        private static DynamicMethod? CreateParameterizedConstructor(
+            ConstructorInfo constructor,
+            Type parameterType1,
+            Type parameterType2,
+            Type parameterType3,
+            Type parameterType4
+        ) {
             Type? type = constructor.DeclaringType;
 
             Debug.Assert(type != null);
             Debug.Assert(!type.IsAbstract);
-            Debug.Assert(Array.IndexOf(type.GetConstructors(BindingFlags.Public | BindingFlags.Instance), constructor) >= 0);
+            Debug.Assert(
+                Array.IndexOf(
+                    type.GetConstructors(BindingFlags.Public | BindingFlags.Instance),
+                    constructor
+                ) >= 0
+            );
 
             ParameterInfo[] parameters = constructor.GetParameters();
             int parameterCount = parameters.Length;
@@ -120,7 +168,8 @@ namespace System.Text.Json.Serialization.Metadata
                 type,
                 new[] { parameterType1, parameterType2, parameterType3, parameterType4 },
                 typeof(ReflectionEmitMemberAccessor).Module,
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
@@ -136,7 +185,8 @@ namespace System.Text.Json.Serialization.Metadata
                         2 => OpCodes.Ldarg_2,
                         3 => OpCodes.Ldarg_3,
                         _ => throw new InvalidOperationException()
-                    });
+                    }
+                );
             }
 
             generator.Emit(OpCodes.Newobj, constructor);
@@ -146,19 +196,24 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         public override Action<TCollection, object?> CreateAddMethodDelegate<TCollection>() =>
-            CreateDelegate<Action<TCollection, object?>>(CreateAddMethodDelegate(typeof(TCollection)));
+            CreateDelegate<Action<TCollection, object?>>(
+                CreateAddMethodDelegate(typeof(TCollection))
+            );
 
         private static DynamicMethod CreateAddMethodDelegate(Type collectionType)
         {
             // We verified this won't be null when we created the converter that calls this method.
-            MethodInfo realMethod = (collectionType.GetMethod("Push") ?? collectionType.GetMethod("Enqueue"))!;
+            MethodInfo realMethod = (
+                collectionType.GetMethod("Push") ?? collectionType.GetMethod("Enqueue")
+            )!;
 
             var dynamicMethod = new DynamicMethod(
                 realMethod.Name,
                 typeof(void),
                 new[] { collectionType, JsonTypeInfo.ObjectType },
                 typeof(ReflectionEmitMemberAccessor).Module,
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
@@ -170,20 +225,34 @@ namespace System.Text.Json.Serialization.Metadata
             return dynamicMethod;
         }
 
-        public override Func<IEnumerable<TElement>, TCollection> CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>() =>
+        public override Func<
+            IEnumerable<TElement>,
+            TCollection
+        > CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>() =>
             CreateDelegate<Func<IEnumerable<TElement>, TCollection>>(
-                CreateImmutableEnumerableCreateRangeDelegate(typeof(TCollection), typeof(TElement), typeof(IEnumerable<TElement>)));
+                CreateImmutableEnumerableCreateRangeDelegate(
+                    typeof(TCollection),
+                    typeof(TElement),
+                    typeof(IEnumerable<TElement>)
+                )
+            );
 
-        private static DynamicMethod CreateImmutableEnumerableCreateRangeDelegate(Type collectionType, Type elementType, Type enumerableType)
-        {
-            MethodInfo realMethod = collectionType.GetImmutableEnumerableCreateRangeMethod(elementType);
+        private static DynamicMethod CreateImmutableEnumerableCreateRangeDelegate(
+            Type collectionType,
+            Type elementType,
+            Type enumerableType
+        ) {
+            MethodInfo realMethod = collectionType.GetImmutableEnumerableCreateRangeMethod(
+                elementType
+            );
 
             var dynamicMethod = new DynamicMethod(
                 realMethod.Name,
                 collectionType,
                 new[] { enumerableType },
                 typeof(ReflectionEmitMemberAccessor).Module,
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
@@ -194,20 +263,37 @@ namespace System.Text.Json.Serialization.Metadata
             return dynamicMethod;
         }
 
-        public override Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection> CreateImmutableDictionaryCreateRangeDelegate<TCollection, TKey, TValue>() =>
+        public override Func<
+            IEnumerable<KeyValuePair<TKey, TValue>>,
+            TCollection
+        > CreateImmutableDictionaryCreateRangeDelegate<TCollection, TKey, TValue>() =>
             CreateDelegate<Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection>>(
-                CreateImmutableDictionaryCreateRangeDelegate(typeof(TCollection), typeof(TKey), typeof(TValue), typeof(IEnumerable<KeyValuePair<TKey, TValue>>)));
+                CreateImmutableDictionaryCreateRangeDelegate(
+                    typeof(TCollection),
+                    typeof(TKey),
+                    typeof(TValue),
+                    typeof(IEnumerable<KeyValuePair<TKey, TValue>>)
+                )
+            );
 
-        private static DynamicMethod CreateImmutableDictionaryCreateRangeDelegate(Type collectionType, Type keyType, Type valueType, Type enumerableType)
-        {
-            MethodInfo realMethod = collectionType.GetImmutableDictionaryCreateRangeMethod(keyType, valueType);
+        private static DynamicMethod CreateImmutableDictionaryCreateRangeDelegate(
+            Type collectionType,
+            Type keyType,
+            Type valueType,
+            Type enumerableType
+        ) {
+            MethodInfo realMethod = collectionType.GetImmutableDictionaryCreateRangeMethod(
+                keyType,
+                valueType
+            );
 
             var dynamicMethod = new DynamicMethod(
                 realMethod.Name,
                 collectionType,
                 new[] { enumerableType },
                 typeof(ReflectionEmitMemberAccessor).Module,
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
@@ -218,11 +304,17 @@ namespace System.Text.Json.Serialization.Metadata
             return dynamicMethod;
         }
 
-        public override Func<object, TProperty> CreatePropertyGetter<TProperty>(PropertyInfo propertyInfo) =>
-            CreateDelegate<Func<object, TProperty>>(CreatePropertyGetter(propertyInfo, typeof(TProperty)));
+        public override Func<object, TProperty> CreatePropertyGetter<TProperty>(
+            PropertyInfo propertyInfo
+        ) =>
+            CreateDelegate<Func<object, TProperty>>(
+                CreatePropertyGetter(propertyInfo, typeof(TProperty))
+            );
 
-        private static DynamicMethod CreatePropertyGetter(PropertyInfo propertyInfo, Type runtimePropertyType)
-        {
+        private static DynamicMethod CreatePropertyGetter(
+            PropertyInfo propertyInfo,
+            Type runtimePropertyType
+        ) {
             MethodInfo? realMethod = propertyInfo.GetMethod;
             Debug.Assert(realMethod != null);
 
@@ -231,7 +323,10 @@ namespace System.Text.Json.Serialization.Metadata
 
             Type declaredPropertyType = propertyInfo.PropertyType;
 
-            DynamicMethod dynamicMethod = CreateGetterMethod(propertyInfo.Name, runtimePropertyType);
+            DynamicMethod dynamicMethod = CreateGetterMethod(
+                propertyInfo.Name,
+                runtimePropertyType
+            );
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
             generator.Emit(OpCodes.Ldarg_0);
@@ -260,11 +355,17 @@ namespace System.Text.Json.Serialization.Metadata
             return dynamicMethod;
         }
 
-        public override Action<object, TProperty> CreatePropertySetter<TProperty>(PropertyInfo propertyInfo) =>
-            CreateDelegate<Action<object, TProperty>>(CreatePropertySetter(propertyInfo, typeof(TProperty)));
+        public override Action<object, TProperty> CreatePropertySetter<TProperty>(
+            PropertyInfo propertyInfo
+        ) =>
+            CreateDelegate<Action<object, TProperty>>(
+                CreatePropertySetter(propertyInfo, typeof(TProperty))
+            );
 
-        private static DynamicMethod CreatePropertySetter(PropertyInfo propertyInfo, Type runtimePropertyType)
-        {
+        private static DynamicMethod CreatePropertySetter(
+            PropertyInfo propertyInfo,
+            Type runtimePropertyType
+        ) {
             MethodInfo? realMethod = propertyInfo.SetMethod;
             Debug.Assert(realMethod != null);
 
@@ -273,11 +374,17 @@ namespace System.Text.Json.Serialization.Metadata
 
             Type declaredPropertyType = propertyInfo.PropertyType;
 
-            DynamicMethod dynamicMethod = CreateSetterMethod(propertyInfo.Name, runtimePropertyType);
+            DynamicMethod dynamicMethod = CreateSetterMethod(
+                propertyInfo.Name,
+                runtimePropertyType
+            );
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
             generator.Emit(OpCodes.Ldarg_0);
-            generator.Emit(declaringType.IsValueType ? OpCodes.Unbox : OpCodes.Castclass, declaringType);
+            generator.Emit(
+                declaringType.IsValueType ? OpCodes.Unbox : OpCodes.Castclass,
+                declaringType
+            );
             generator.Emit(OpCodes.Ldarg_1);
 
             // declaredPropertyType: Type of the property
@@ -295,7 +402,9 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         public override Func<object, TProperty> CreateFieldGetter<TProperty>(FieldInfo fieldInfo) =>
-            CreateDelegate<Func<object, TProperty>>(CreateFieldGetter(fieldInfo, typeof(TProperty)));
+            CreateDelegate<Func<object, TProperty>>(
+                CreateFieldGetter(fieldInfo, typeof(TProperty))
+            );
 
         private static DynamicMethod CreateFieldGetter(FieldInfo fieldInfo, Type runtimeFieldType)
         {
@@ -309,10 +418,9 @@ namespace System.Text.Json.Serialization.Metadata
 
             generator.Emit(OpCodes.Ldarg_0);
             generator.Emit(
-                declaringType.IsValueType
-                    ? OpCodes.Unbox
-                    : OpCodes.Castclass,
-                declaringType);
+                declaringType.IsValueType ? OpCodes.Unbox : OpCodes.Castclass,
+                declaringType
+            );
             generator.Emit(OpCodes.Ldfld, fieldInfo);
 
             // declaredFieldType: Type of the field
@@ -328,8 +436,12 @@ namespace System.Text.Json.Serialization.Metadata
             return dynamicMethod;
         }
 
-        public override Action<object, TProperty> CreateFieldSetter<TProperty>(FieldInfo fieldInfo) =>
-            CreateDelegate<Action<object, TProperty>>(CreateFieldSetter(fieldInfo, typeof(TProperty)));
+        public override Action<object, TProperty> CreateFieldSetter<TProperty>(
+            FieldInfo fieldInfo
+        ) =>
+            CreateDelegate<Action<object, TProperty>>(
+                CreateFieldSetter(fieldInfo, typeof(TProperty))
+            );
 
         private static DynamicMethod CreateFieldSetter(FieldInfo fieldInfo, Type runtimeFieldType)
         {
@@ -342,7 +454,10 @@ namespace System.Text.Json.Serialization.Metadata
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
             generator.Emit(OpCodes.Ldarg_0);
-            generator.Emit(declaringType.IsValueType ? OpCodes.Unbox : OpCodes.Castclass, declaringType);
+            generator.Emit(
+                declaringType.IsValueType ? OpCodes.Unbox : OpCodes.Castclass,
+                declaringType
+            );
             generator.Emit(OpCodes.Ldarg_1);
 
             // declaredFieldType: Type of the field
@@ -365,7 +480,8 @@ namespace System.Text.Json.Serialization.Metadata
                 memberType,
                 new[] { JsonTypeInfo.ObjectType },
                 typeof(ReflectionEmitMemberAccessor).Module,
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
         private static DynamicMethod CreateSetterMethod(string memberName, Type memberType) =>
             new DynamicMethod(
@@ -373,7 +489,8 @@ namespace System.Text.Json.Serialization.Metadata
                 typeof(void),
                 new[] { JsonTypeInfo.ObjectType, memberType },
                 typeof(ReflectionEmitMemberAccessor).Module,
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
         [return: NotNullIfNotNull("method")]
         private static T? CreateDelegate<T>(DynamicMethod? method) where T : Delegate =>

@@ -20,7 +20,9 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             var httpContext = CreateHttpContext();
-            httpContext.SetEndpoint(new Endpoint((_) => Task.CompletedTask, new EndpointMetadataCollection(), "Test"));
+            httpContext.SetEndpoint(
+                new Endpoint((_) => Task.CompletedTask, new EndpointMetadataCollection(), "Test")
+            );
             httpContext.Request.RouteValues["John"] = "Doe";
 
             var optionsAccessor = CreateOptionsAccessor(
@@ -29,8 +31,12 @@ namespace Microsoft.AspNetCore.Diagnostics
                     Assert.Empty(context.Request.RouteValues);
                     Assert.Null(context.GetEndpoint());
                     return Task.CompletedTask;
-                });
-            var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor);
+                }
+            );
+            var middleware = CreateMiddleware(
+                _ => throw new InvalidOperationException(),
+                optionsAccessor
+            );
 
             // Act & Assert
             await middleware.Invoke(httpContext);
@@ -48,22 +54,24 @@ namespace Microsoft.AspNetCore.Diagnostics
 
         private IOptions<ExceptionHandlerOptions> CreateOptionsAccessor(
             RequestDelegate exceptionHandler = null,
-            string exceptionHandlingPath = null)
-        {
+            string exceptionHandlingPath = null
+        ) {
             exceptionHandler ??= c => Task.CompletedTask;
             var options = new ExceptionHandlerOptions()
             {
                 ExceptionHandler = exceptionHandler,
                 ExceptionHandlingPath = exceptionHandlingPath,
             };
-            var optionsAccessor = Mock.Of<IOptions<ExceptionHandlerOptions>>(o => o.Value == options);
+            var optionsAccessor = Mock.Of<IOptions<ExceptionHandlerOptions>>(
+                o => o.Value == options
+            );
             return optionsAccessor;
         }
 
         private ExceptionHandlerMiddleware CreateMiddleware(
             RequestDelegate next,
-            IOptions<ExceptionHandlerOptions> options)
-        {
+            IOptions<ExceptionHandlerOptions> options
+        ) {
             next ??= c => Task.CompletedTask;
             var listener = new DiagnosticListener("Microsoft.AspNetCore");
 
@@ -71,7 +79,8 @@ namespace Microsoft.AspNetCore.Diagnostics
                 next,
                 NullLoggerFactory.Instance,
                 options,
-                listener);
+                listener
+            );
 
             return middleware;
         }

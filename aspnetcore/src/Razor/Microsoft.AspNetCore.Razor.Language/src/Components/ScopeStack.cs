@@ -17,12 +17,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private readonly Stack<ScopeEntry> _stack = new Stack<ScopeEntry>();
         private int _builderVarNumber = 1;
 
-        public string BuilderVarName { get; private set; } = ComponentsApi.RenderTreeBuilder.BuilderParameter;
+        public string BuilderVarName { get; private set; } =
+            ComponentsApi.RenderTreeBuilder.BuilderParameter;
 
         public int Depth => _stack.Count;
 
-        public void OpenComponentScope(CodeRenderingContext context, string name, string parameterName)
-        {
+        public void OpenComponentScope(
+            CodeRenderingContext context,
+            string name,
+            string parameterName
+        ) {
             var scope = new ScopeEntry(name, ScopeKind.Component);
             _stack.Push(scope);
 
@@ -62,9 +66,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         private void OffsetBuilderVarNumber(int delta)
         {
             _builderVarNumber += delta;
-            BuilderVarName = _builderVarNumber == 1
-                ? ComponentsApi.RenderTreeBuilder.BuilderParameter
-                : $"{ComponentsApi.RenderTreeBuilder.BuilderParameter}{_builderVarNumber}";
+            BuilderVarName =
+                _builderVarNumber == 1
+                    ? ComponentsApi.RenderTreeBuilder.BuilderParameter
+                    : $"{ComponentsApi.RenderTreeBuilder.BuilderParameter}{_builderVarNumber}";
         }
 
         private class ScopeEntry

@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.AddObsoleteAttribute
 
         protected AbstractAddObsoleteAttributeCodeFixProvider(
             ISyntaxFacts syntaxFacts,
-            string title)
-        {
+            string title
+        ) {
             _syntaxFacts = syntaxFacts;
             _title = title;
         }
@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.AddObsoleteAttribute
             var cancellationToken = context.CancellationToken;
             var document = context.Document;
 
-            var attribute = await GetObsoleteAttributeAsync(document, cancellationToken).ConfigureAwait(false);
+            var attribute = await GetObsoleteAttributeAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             if (attribute == null)
             {
                 return;
@@ -58,50 +59,59 @@ namespace Microsoft.CodeAnalysis.AddObsoleteAttribute
             }
 
             context.RegisterCodeFix(
-                new MyCodeAction(
-                    _title,
-                    c => FixAsync(document, diagnotic, c)),
-                context.Diagnostics);
+                new MyCodeAction(_title, c => FixAsync(document, diagnotic, c)),
+                context.Diagnostics
+            );
         }
 
-        private static async Task<INamedTypeSymbol> GetObsoleteAttributeAsync(Document document, CancellationToken cancellationToken)
-        {
-            var compilation = await document.Project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+        private static async Task<INamedTypeSymbol> GetObsoleteAttributeAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) {
+            var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             var attribute = compilation.GetTypeByMetadataName(typeof(ObsoleteAttribute).FullName);
             return attribute;
         }
 
         private SyntaxNode GetContainer(SyntaxNode root, SyntaxNode node)
         {
-            return _syntaxFacts.GetContainingMemberDeclaration(root, node.SpanStart) ??
-                   _syntaxFacts.GetContainingTypeDeclaration(root, node.SpanStart);
+            return _syntaxFacts.GetContainingMemberDeclaration(root, node.SpanStart)
+                ?? _syntaxFacts.GetContainingTypeDeclaration(root, node.SpanStart);
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
-        {
-            var obsoleteAttribute = await GetObsoleteAttributeAsync(document, cancellationToken).ConfigureAwait(false);
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
+            var obsoleteAttribute = await GetObsoleteAttributeAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
-            var containers = diagnostics.Select(d => GetContainer(root, d.Location.FindNode(cancellationToken)))
-                                        .WhereNotNull()
-                                        .ToSet();
+            var containers = diagnostics.Select(
+                    d => GetContainer(root, d.Location.FindNode(cancellationToken))
+                )
+                .WhereNotNull()
+                .ToSet();
 
             var generator = editor.Generator;
             foreach (var container in containers)
             {
-                editor.AddAttribute(container,
-                    generator.Attribute(editor.Generator.TypeExpression(obsoleteAttribute)));
+                editor.AddAttribute(
+                    container,
+                    generator.Attribute(editor.Generator.TypeExpression(obsoleteAttribute))
+                );
             }
         }
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument, title)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument, title) { }
         }
     }
 }

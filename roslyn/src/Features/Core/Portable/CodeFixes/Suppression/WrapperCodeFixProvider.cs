@@ -16,8 +16,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         private readonly ImmutableArray<string> _originalDiagnosticIds;
         private readonly IConfigurationFixProvider _suppressionFixProvider;
 
-        public WrapperCodeFixProvider(IConfigurationFixProvider suppressionFixProvider, IEnumerable<string> diagnosticIds)
-        {
+        public WrapperCodeFixProvider(
+            IConfigurationFixProvider suppressionFixProvider,
+            IEnumerable<string> diagnosticIds
+        ) {
             _suppressionFixProvider = suppressionFixProvider;
             _originalDiagnosticIds = diagnosticIds.Distinct().ToImmutableArray();
         }
@@ -27,25 +29,42 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var diagnostics = context.Diagnostics.Where(_suppressionFixProvider.IsFixableDiagnostic);
+            var diagnostics = context.Diagnostics.Where(
+                _suppressionFixProvider.IsFixableDiagnostic
+            );
 
-            var documentDiagnostics = diagnostics.Where(d => d.Location.IsInSource).ToImmutableArray();
+            var documentDiagnostics = diagnostics.Where(d => d.Location.IsInSource)
+                .ToImmutableArray();
             if (!documentDiagnostics.IsEmpty)
             {
-                var suppressionFixes = await _suppressionFixProvider.GetFixesAsync(context.Document, context.Span, documentDiagnostics, context.CancellationToken).ConfigureAwait(false);
+                var suppressionFixes = await _suppressionFixProvider.GetFixesAsync(
+                        context.Document,
+                        context.Span,
+                        documentDiagnostics,
+                        context.CancellationToken
+                    )
+                    .ConfigureAwait(false);
                 RegisterSuppressionFixes(context, suppressionFixes);
             }
 
-            var projectDiagnostics = diagnostics.Where(d => !d.Location.IsInSource).ToImmutableArray();
+            var projectDiagnostics = diagnostics.Where(d => !d.Location.IsInSource)
+                .ToImmutableArray();
             if (!projectDiagnostics.IsEmpty)
             {
-                var suppressionFixes = await _suppressionFixProvider.GetFixesAsync(context.Project, projectDiagnostics, context.CancellationToken).ConfigureAwait(false);
+                var suppressionFixes = await _suppressionFixProvider.GetFixesAsync(
+                        context.Project,
+                        projectDiagnostics,
+                        context.CancellationToken
+                    )
+                    .ConfigureAwait(false);
                 RegisterSuppressionFixes(context, suppressionFixes);
             }
         }
 
-        private static void RegisterSuppressionFixes(CodeFixContext context, ImmutableArray<CodeFix> suppressionFixes)
-        {
+        private static void RegisterSuppressionFixes(
+            CodeFixContext context,
+            ImmutableArray<CodeFix> suppressionFixes
+        ) {
             if (!suppressionFixes.IsDefault)
             {
                 foreach (var suppressionFix in suppressionFixes)
@@ -55,7 +74,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             }
         }
 
-        public override FixAllProvider GetFixAllProvider()
-            => _suppressionFixProvider.GetFixAllProvider();
+        public override FixAllProvider GetFixAllProvider() =>
+            _suppressionFixProvider.GetFixAllProvider();
     }
 }

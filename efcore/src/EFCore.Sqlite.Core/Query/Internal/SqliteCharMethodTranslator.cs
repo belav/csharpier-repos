@@ -20,11 +20,24 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteCharMethodTranslator : IMethodCallTranslator
     {
-        private static readonly Dictionary<MethodInfo, string> _supportedMethods = new()
-        {
-            { typeof(char).GetRequiredRuntimeMethod(nameof(char.ToLower), new[] { typeof(char) }), "lower" },
-            { typeof(char).GetRequiredRuntimeMethod(nameof(char.ToUpper), new[] { typeof(char) }), "upper" }
-        };
+        private static readonly Dictionary<MethodInfo, string> _supportedMethods =
+            new()
+            {
+                {
+                    typeof(char).GetRequiredRuntimeMethod(
+                        nameof(char.ToLower),
+                        new[] { typeof(char) }
+                    ),
+                    "lower"
+                },
+                {
+                    typeof(char).GetRequiredRuntimeMethod(
+                        nameof(char.ToUpper),
+                        new[] { typeof(char) }
+                    ),
+                    "upper"
+                }
+            };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -49,8 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -63,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     nullable: true,
                     argumentsPropagateNullability: arguments.Select(a => true).ToList(),
                     method.ReturnType,
-                    arguments[0].TypeMapping);
+                    arguments[0].TypeMapping
+                );
             }
 
             return null;

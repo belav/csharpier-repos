@@ -11,9 +11,11 @@ namespace System.Runtime.InteropServices
 
         public static string OSDescription => s_osDescription ??= Interop.Sys.GetUnixVersion();
 
-        public static Architecture OSArchitecture { get; } = Map((Interop.Sys.ProcessorArchitecture)Interop.Sys.GetOSArchitecture());
+        public static Architecture OSArchitecture { get; } =
+            Map((Interop.Sys.ProcessorArchitecture)Interop.Sys.GetOSArchitecture());
 
-        public static Architecture ProcessArchitecture { get; } = Map((Interop.Sys.ProcessorArchitecture)Interop.Sys.GetProcessArchitecture());
+        public static Architecture ProcessArchitecture { get; } =
+            Map((Interop.Sys.ProcessorArchitecture)Interop.Sys.GetProcessArchitecture());
 
         private static Architecture Map(Interop.Sys.ProcessorArchitecture arch)
         {
@@ -29,7 +31,10 @@ namespace System.Runtime.InteropServices
                     return Architecture.Wasm;
                 case Interop.Sys.ProcessorArchitecture.x86:
                 default:
-                    Debug.Assert(arch == Interop.Sys.ProcessorArchitecture.x86, "Unidentified Architecture");
+                    Debug.Assert(
+                        arch == Interop.Sys.ProcessorArchitecture.x86,
+                        "Unidentified Architecture"
+                    );
                     return Architecture.X86;
             }
         }

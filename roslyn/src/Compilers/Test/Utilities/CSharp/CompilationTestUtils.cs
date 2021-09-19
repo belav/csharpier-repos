@@ -26,12 +26,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public static class CompilationUtils
     {
-        internal static void CheckISymbols<TSymbol>(ImmutableArray<TSymbol> symbols, params string[] descriptions)
-            where TSymbol : ISymbol
+        internal static void CheckISymbols<TSymbol>(
+            ImmutableArray<TSymbol> symbols,
+            params string[] descriptions
+        ) where TSymbol : ISymbol
         {
             Assert.Equal(descriptions.Length, symbols.Length);
 
-            string[] symbolDescriptions = (from s in symbols select s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)).ToArray();
+            string[] symbolDescriptions = (
+                from s in symbols
+                select s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            ).ToArray();
             Array.Sort(descriptions);
             Array.Sort(symbolDescriptions);
 
@@ -41,12 +46,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
         }
 
-        internal static void CheckSymbols<TSymbol>(ImmutableArray<TSymbol> symbols, params string[] descriptions)
-            where TSymbol : Symbol
+        internal static void CheckSymbols<TSymbol>(
+            ImmutableArray<TSymbol> symbols,
+            params string[] descriptions
+        ) where TSymbol : Symbol
         {
             Assert.Equal(descriptions.Length, symbols.Length);
 
-            string[] symbolDescriptions = (from s in symbols select s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)).ToArray();
+            string[] symbolDescriptions = (
+                from s in symbols
+                select s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            ).ToArray();
             Array.Sort(descriptions);
             Array.Sort(symbolDescriptions);
 
@@ -56,11 +66,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
         }
 
-        public static void CheckSymbolsUnordered<TSymbol>(ImmutableArray<TSymbol> symbols, params string[] descriptions)
-            where TSymbol : ISymbol
+        public static void CheckSymbolsUnordered<TSymbol>(
+            ImmutableArray<TSymbol> symbols,
+            params string[] descriptions
+        ) where TSymbol : ISymbol
         {
             Assert.Equal(descriptions.Length, symbols.Length);
-            AssertEx.SetEqual(symbols.Select(s => s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)), descriptions);
+            AssertEx.SetEqual(
+                symbols.Select(
+                    s => s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                ),
+                descriptions
+            );
         }
 
         public static void CheckSymbols<TSymbol>(TSymbol[] symbols, params string[] descriptions)
@@ -71,16 +88,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public static void CheckSymbol(ISymbol symbol, string description)
         {
-            Assert.Equal(symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat), description);
+            Assert.Equal(
+                symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                description
+            );
         }
 
         internal static void CheckSymbol(Symbol symbol, string description)
         {
-            Assert.Equal(symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat), description);
+            Assert.Equal(
+                symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                description
+            );
         }
 
-        internal static void CheckConstraints(ITypeParameterSymbol symbol, TypeParameterConstraintKind constraints, params string[] constraintTypes)
-        {
+        internal static void CheckConstraints(
+            ITypeParameterSymbol symbol,
+            TypeParameterConstraintKind constraints,
+            params string[] constraintTypes
+        ) {
             Assert.Equal(constraints, GetTypeParameterConstraints(symbol));
             CheckISymbols(symbol.ConstraintTypes, constraintTypes);
         }
@@ -90,11 +116,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string reducedMethodDescription,
             string reducedFromDescription,
             string constructedFromDescription,
-            string reducedAndConstructedFromDescription)
-        {
+            string reducedAndConstructedFromDescription
+        ) {
             var reducedFrom = reducedMethod.ReducedFrom;
             CheckReducedExtensionMethod(reducedMethod, reducedFrom);
-            Assert.Equal(reducedMethod.CallsiteReducedFromMethod.Parameters[0].Type, reducedMethod.ReceiverType);
+            Assert.Equal(
+                reducedMethod.CallsiteReducedFromMethod.Parameters[0].Type,
+                reducedMethod.ReceiverType
+            );
 
             var constructedFrom = reducedMethod.ConstructedFrom;
             CheckConstructedMethod(reducedMethod, constructedFrom);
@@ -113,8 +142,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CheckSymbol(constructedAndExtendedFrom, reducedAndConstructedFromDescription);
         }
 
-        public static void CheckReducedExtensionMethod(IMethodSymbol reducedMethod, IMethodSymbol reducedFrom)
-        {
+        public static void CheckReducedExtensionMethod(
+            IMethodSymbol reducedMethod,
+            IMethodSymbol reducedFrom
+        ) {
             Assert.NotNull(reducedFrom);
             Assert.Equal(reducedMethod.ReducedFrom, reducedFrom);
             Assert.Null(reducedFrom.ReducedFrom);
@@ -131,13 +162,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CheckTypeParameters(reducedFrom);
         }
 
-        internal static void CheckReducedExtensionMethod(MethodSymbol reducedMethod, MethodSymbol reducedFrom)
-        {
-            CheckReducedExtensionMethod(reducedMethod.GetPublicSymbol(), reducedFrom.GetPublicSymbol());
+        internal static void CheckReducedExtensionMethod(
+            MethodSymbol reducedMethod,
+            MethodSymbol reducedFrom
+        ) {
+            CheckReducedExtensionMethod(
+                reducedMethod.GetPublicSymbol(),
+                reducedFrom.GetPublicSymbol()
+            );
         }
 
-        public static void CheckConstructedMethod(IMethodSymbol constructedMethod, IMethodSymbol constructedFrom)
-        {
+        public static void CheckConstructedMethod(
+            IMethodSymbol constructedMethod,
+            IMethodSymbol constructedFrom
+        ) {
             Assert.NotNull(constructedFrom);
 
             Assert.Same(constructedFrom, constructedMethod.ConstructedFrom);
@@ -150,9 +188,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CheckTypeParameters(constructedFrom);
         }
 
-        internal static void CheckConstructedMethod(MethodSymbol constructedMethod, MethodSymbol constructedFrom)
-        {
-            CheckConstructedMethod(constructedMethod.GetPublicSymbol(), constructedFrom.GetPublicSymbol());
+        internal static void CheckConstructedMethod(
+            MethodSymbol constructedMethod,
+            MethodSymbol constructedFrom
+        ) {
+            CheckConstructedMethod(
+                constructedMethod.GetPublicSymbol(),
+                constructedFrom.GetPublicSymbol()
+            );
         }
 
         private static void CheckTypeParameters(IMethodSymbol method)
@@ -166,8 +209,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
         }
 
-        internal static TypeParameterConstraintKind GetTypeParameterConstraints(ITypeParameterSymbol typeParameter)
-        {
+        internal static TypeParameterConstraintKind GetTypeParameterConstraints(
+            ITypeParameterSymbol typeParameter
+        ) {
             var constraints = TypeParameterConstraintKind.None;
             if (typeParameter.HasConstructorConstraint)
             {
@@ -184,8 +228,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return constraints;
         }
 
-        internal static TypeParameterConstraintKind GetTypeParameterConstraints(TypeParameterSymbol typeParameter)
-        {
+        internal static TypeParameterConstraintKind GetTypeParameterConstraints(
+            TypeParameterSymbol typeParameter
+        ) {
             var constraints = TypeParameterConstraintKind.None;
             if (typeParameter.HasConstructorConstraint)
             {
@@ -214,17 +259,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             public Conversion ImplicitConversion = default(Conversion);
             public IAliasSymbol Alias;
             public Optional<object> ConstantValue = default(Optional<object>);
-            public bool IsCompileTimeConstant { get { return ConstantValue.HasValue; } }
+            public bool IsCompileTimeConstant
+            {
+                get { return ConstantValue.HasValue; }
+            }
             public ImmutableArray<ISymbol> MemberGroup = ImmutableArray.Create<ISymbol>();
 
             public ImmutableArray<IMethodSymbol> MethodGroup
             {
-                get { return this.MemberGroup.WhereAsArray(s => s.Kind == SymbolKind.Method).SelectAsArray(s => (IMethodSymbol)s); }
+                get
+                {
+                    return this.MemberGroup.WhereAsArray(s => s.Kind == SymbolKind.Method)
+                        .SelectAsArray(s => (IMethodSymbol)s);
+                }
             }
         }
 
-        public static SemanticInfoSummary GetSemanticInfoSummary(this SemanticModel semanticModel, SyntaxNode node)
-        {
+        public static SemanticInfoSummary GetSemanticInfoSummary(
+            this SemanticModel semanticModel,
+            SyntaxNode node
+        ) {
             SemanticInfoSummary summary = new SemanticInfoSummary();
 
             // The information that is available varies by the type of the syntax node.
@@ -296,8 +350,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return summary;
         }
 
-        public static SemanticInfoSummary GetSpeculativeSemanticInfoSummary(this SemanticModel semanticModel, int position, SyntaxNode node, SpeculativeBindingOption bindingOption)
-        {
+        public static SemanticInfoSummary GetSpeculativeSemanticInfoSummary(
+            this SemanticModel semanticModel,
+            int position,
+            SyntaxNode node,
+            SpeculativeBindingOption bindingOption
+        ) {
             SemanticInfoSummary summary = new SemanticInfoSummary();
 
             // The information that is available varies by the type of the syntax node.
@@ -313,7 +371,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 summary.ConvertedType = typeInfo.ConvertedType;
                 summary.Nullability = typeInfo.Nullability;
                 summary.ConvertedNullability = typeInfo.ConvertedNullability;
-                summary.ImplicitConversion = semanticModel.GetSpeculativeConversion(position, expr, bindingOption);
+                summary.ImplicitConversion = semanticModel.GetSpeculativeConversion(
+                    position,
+                    expr,
+                    bindingOption
+                );
                 //summary.MethodGroup = semanticModel.GetSpeculativeMethodGroup(expr);
             }
             else if (node is ConstructorInitializerSyntax)
@@ -323,7 +385,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             else
             {
-                throw new NotSupportedException("Type of syntax node is not supported by GetSemanticInfoSummary");
+                throw new NotSupportedException(
+                    "Type of syntax node is not supported by GetSemanticInfoSummary"
+                );
             }
 
             summary.Symbol = symbolInfo.Symbol;
@@ -332,14 +396,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             if (node is IdentifierNameSyntax)
             {
-                summary.Alias = semanticModel.GetSpeculativeAliasInfo(position, (IdentifierNameSyntax)node, bindingOption);
+                summary.Alias = semanticModel.GetSpeculativeAliasInfo(
+                    position,
+                    (IdentifierNameSyntax)node,
+                    bindingOption
+                );
             }
 
             return summary;
         }
 
-        public static List<string> LookupNames(this SemanticModel model, int position, INamespaceOrTypeSymbol container = null, bool namespacesAndTypesOnly = false, bool useBaseReferenceAccessibility = false)
-        {
+        public static List<string> LookupNames(
+            this SemanticModel model,
+            int position,
+            INamespaceOrTypeSymbol container = null,
+            bool namespacesAndTypesOnly = false,
+            bool useBaseReferenceAccessibility = false
+        ) {
             Assert.True(!useBaseReferenceAccessibility || (object)container == null);
             Assert.True(!useBaseReferenceAccessibility || !namespacesAndTypesOnly);
             var symbols = useBaseReferenceAccessibility
@@ -350,8 +423,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return symbols.Select(s => s.Name).Distinct().ToList();
         }
 
-        internal static TypeInfo GetTypeInfoAndVerifyIOperation(this SemanticModel model, SyntaxNode expression)
-        {
+        internal static TypeInfo GetTypeInfoAndVerifyIOperation(
+            this SemanticModel model,
+            SyntaxNode expression
+        ) {
             var typeInfo = model.GetTypeInfo(expression);
             var iop = getOperation(model, expression);
             if (typeInfo.Type is null)
@@ -366,11 +441,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 Assert.True(isValidDeclaration(expression));
 
-                static bool isValidDeclaration(SyntaxNode expression)
-                    => (expression.Parent is VariableDeclarationSyntax decl && decl.Type == expression) ||
-                       (expression.Parent is ForEachStatementSyntax forEach && forEach.Type == expression) ||
-                       (expression.Parent is DeclarationExpressionSyntax declExpr && declExpr.Type == expression) ||
-                       (expression.Parent is RefTypeSyntax refType && isValidDeclaration(refType));
+                static bool isValidDeclaration(SyntaxNode expression) =>
+                    (expression.Parent is VariableDeclarationSyntax decl && decl.Type == expression)
+                    || (
+                        expression.Parent is ForEachStatementSyntax forEach
+                        && forEach.Type == expression
+                    )
+                    || (
+                        expression.Parent is DeclarationExpressionSyntax declExpr
+                        && declExpr.Type == expression
+                    )
+                    || (expression.Parent is RefTypeSyntax refType && isValidDeclaration(refType));
             }
 
             if (iop is { Parent: IConversionOperation parentConversion })
@@ -384,7 +465,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             else if (iop is { Type: { } })
             {
-                Assert.Equal(typeInfo.ConvertedType.NullableAnnotation, iop.Type.NullableAnnotation);
+                Assert.Equal(
+                    typeInfo.ConvertedType.NullableAnnotation,
+                    iop.Type.NullableAnnotation
+                );
             }
 
             return typeInfo;
@@ -399,7 +483,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     // the expression.
                     switch (expression)
                     {
-                        case PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKind.SuppressNullableWarningExpression, Operand: { } operand }:
+                        case PostfixUnaryExpressionSyntax
+                        {
+                            RawKind: (int)SyntaxKind.SuppressNullableWarningExpression,
+                            Operand: { } operand
+                        }:
                             expression = operand;
                             continue;
 
@@ -412,7 +500,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
 
-getOperation:
+                getOperation:
                 return model.GetOperation(expression);
             }
 
@@ -425,7 +513,10 @@ getOperation:
                     // `TypeInfo.Type` property represents the natural type of the switch expression.
                     case ITupleOperation { NaturalType: null }:
                     case ISwitchExpressionOperation _:
-                        Assert.True(iop.Type?.NullableAnnotation == typeInfo.ConvertedType?.NullableAnnotation);
+                        Assert.True(
+                            iop.Type?.NullableAnnotation
+                                == typeInfo.ConvertedType?.NullableAnnotation
+                        );
                         break;
 
                     default:
@@ -451,7 +542,12 @@ getOperation:
                 return;
             }
 
-            Assert.True(compilation.IsNullableAnalysisEnabledIn((CSharpSyntaxTree)tree, new TextSpan(0, tree.Length)));
+            Assert.True(
+                compilation.IsNullableAnalysisEnabledIn(
+                    (CSharpSyntaxTree)tree,
+                    new TextSpan(0, tree.Length)
+                )
+            );
 
             var root = tree.GetRoot();
             var allAnnotations = getAnnotations();
@@ -461,23 +557,42 @@ getOperation:
             }
 
             var model = compilation.GetSemanticModel(tree);
-            var annotationsByMethod = allAnnotations.GroupBy(annotation => annotation.Expression.Ancestors().OfType<BaseMethodDeclarationSyntax>().First()).ToArray();
+            var annotationsByMethod = allAnnotations.GroupBy(
+                    annotation =>
+                        annotation.Expression.Ancestors()
+                            .OfType<BaseMethodDeclarationSyntax>()
+                            .First()
+                )
+                .ToArray();
             foreach (var annotations in annotationsByMethod)
             {
                 var methodSyntax = annotations.Key;
                 var method = model.GetDeclaredSymbol(methodSyntax);
 
                 var expectedTypes = annotations.SelectAsArray(annotation => annotation.Text);
-                var actualTypes = annotations.SelectAsArray(annotation =>
+                var actualTypes = annotations.SelectAsArray(
+                    annotation =>
                     {
                         var typeInfo = model.GetTypeInfoAndVerifyIOperation(annotation.Expression);
-                        Assert.NotEqual(CodeAnalysis.NullableFlowState.None, typeInfo.Nullability.FlowState);
+                        Assert.NotEqual(
+                            CodeAnalysis.NullableFlowState.None,
+                            typeInfo.Nullability.FlowState
+                        );
                         // https://github.com/dotnet/roslyn/issues/35035: After refactoring symboldisplay, we should be able to just call something like typeInfo.Type.ToDisplayString(typeInfo.Nullability.FlowState, TypeWithState.TestDisplayFormat)
                         var type = TypeWithState.Create(
-                            (annotation.IsConverted ? typeInfo.ConvertedType : typeInfo.Type).GetSymbol(),
-                            (annotation.IsConverted ? typeInfo.ConvertedNullability : typeInfo.Nullability).FlowState.ToInternalFlowState()).ToTypeWithAnnotations(compilation);
+                                (
+                                    annotation.IsConverted ? typeInfo.ConvertedType : typeInfo.Type
+                                ).GetSymbol(),
+                                (
+                                    annotation.IsConverted
+                                        ? typeInfo.ConvertedNullability
+                                        : typeInfo.Nullability
+                                ).FlowState.ToInternalFlowState()
+                            )
+                            .ToTypeWithAnnotations(compilation);
                         return type.ToDisplayString(TypeWithAnnotations.TestDisplayFormat);
-                    });
+                    }
+                );
                 // Consider reporting the correct source with annotations on mismatch.
                 AssertEx.Equal(expectedTypes, actualTypes, message: method.ToTestDisplayString());
             }
@@ -496,13 +611,21 @@ getOperation:
                             const string convertedPrefix = "/*CT:";
                             const string suffix = "*/";
                             bool startsWithTypePrefix = text.StartsWith(typePrefix);
-                            if (text.EndsWith(suffix) && (startsWithTypePrefix || text.StartsWith(convertedPrefix)))
-                            {
+                            if (
+                                text.EndsWith(suffix)
+                                && (startsWithTypePrefix || text.StartsWith(convertedPrefix))
+                            ) {
                                 var prefix = startsWithTypePrefix ? typePrefix : convertedPrefix;
                                 var expr = getEnclosingExpression(token);
-                                Assert.True(expr != null, $"VerifyTypes could not find a matching expression for annotation '{text}'.");
+                                Assert.True(
+                                    expr != null,
+                                    $"VerifyTypes could not find a matching expression for annotation '{text}'."
+                                );
 
-                                var content = text.Substring(prefix.Length, text.Length - prefix.Length - suffix.Length);
+                                var content = text.Substring(
+                                    prefix.Length,
+                                    text.Length - prefix.Length - suffix.Length
+                                );
                                 builder.Add((expr, content, !startsWithTypePrefix));
                             }
                         }
@@ -540,10 +663,14 @@ getOperation:
                             return null;
                         case ParenthesizedExpressionSyntax paren:
                             return paren.Expression;
-                        case IdentifierNameSyntax id when id.Parent is MemberAccessExpressionSyntax memberAccess && memberAccess.Name == node:
+                        case IdentifierNameSyntax id
+                              when id.Parent is MemberAccessExpressionSyntax memberAccess
+                                  && memberAccess.Name == node:
                             node = memberAccess;
                             continue;
-                        case ExpressionSyntax expr when expr.Parent is ConditionalAccessExpressionSyntax cond && cond.WhenNotNull == node:
+                        case ExpressionSyntax expr
+                              when expr.Parent is ConditionalAccessExpressionSyntax cond
+                                  && cond.WhenNotNull == node:
                             node = cond;
                             continue;
                         case ExpressionSyntax expr:

@@ -24,18 +24,28 @@ namespace Microsoft.CodeAnalysis.Rebuild
         protected abstract ParseOptions CommonParseOptions { get; }
         protected abstract CompilationOptions CommonCompilationOptions { get; }
 
-        protected CompilationFactory(string assemblyFileName, CompilationOptionsReader optionsReader)
-        {
+        protected CompilationFactory(
+            string assemblyFileName,
+            CompilationOptionsReader optionsReader
+        ) {
             AssemblyFileName = assemblyFileName;
             OptionsReader = optionsReader;
         }
 
-        public static CompilationFactory Create(string assemblyFileName, CompilationOptionsReader optionsReader)
-            => optionsReader.GetLanguageName() switch
+        public static CompilationFactory Create(
+            string assemblyFileName,
+            CompilationOptionsReader optionsReader
+        ) =>
+            optionsReader.GetLanguageName() switch
             {
-                LanguageNames.CSharp => CSharpCompilationFactory.Create(assemblyFileName, optionsReader),
-                LanguageNames.VisualBasic => VisualBasicCompilationFactory.Create(assemblyFileName, optionsReader),
-                var language => throw new InvalidDataException($"{assemblyFileName} has unsupported language {language}")
+                LanguageNames.CSharp
+                  => CSharpCompilationFactory.Create(assemblyFileName, optionsReader),
+                LanguageNames.VisualBasic
+                  => VisualBasicCompilationFactory.Create(assemblyFileName, optionsReader),
+                var language
+                  => throw new InvalidDataException(
+                      $"{assemblyFileName} has unsupported language {language}"
+                  )
             };
 
         public abstract SyntaxTree CreateSyntaxTree(string filePath, SourceText sourceText);
@@ -48,49 +58,56 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
         public abstract Compilation CreateCompilation(
             ImmutableArray<SyntaxTree> syntaxTrees,
-            ImmutableArray<MetadataReference> metadataReferences);
+            ImmutableArray<MetadataReference> metadataReferences
+        );
 
         public EmitResult Emit(
             Stream rebuildPeStream,
             Stream? rebuildPdbStream,
             IRebuildArtifactResolver rebuildArtifactResolver,
-            CancellationToken cancellationToken)
-            => Emit(
+            CancellationToken cancellationToken
+        ) =>
+            Emit(
                 rebuildPeStream,
                 rebuildPdbStream,
                 CreateCompilation(rebuildArtifactResolver),
-                cancellationToken);
+                cancellationToken
+            );
 
         public EmitResult Emit(
             Stream rebuildPeStream,
             Stream? rebuildPdbStream,
             ImmutableArray<SyntaxTree> syntaxTrees,
             ImmutableArray<MetadataReference> metadataReferences,
-            CancellationToken cancellationToken)
-            => Emit(
+            CancellationToken cancellationToken
+        ) =>
+            Emit(
                 rebuildPeStream,
                 rebuildPdbStream,
                 CreateCompilation(syntaxTrees, metadataReferences),
-                cancellationToken);
+                cancellationToken
+            );
 
         public EmitResult Emit(
             Stream rebuildPeStream,
             Stream? rebuildPdbStream,
             Compilation rebuildCompilation,
-            CancellationToken cancellationToken)
-        {
-            var embeddedTexts = rebuildCompilation.SyntaxTrees
-                    .Select(st => (path: st.FilePath, text: st.GetText()))
-                    .Where(pair => pair.text.CanBeEmbedded)
-                    .Select(pair => EmbeddedText.FromSource(pair.path, pair.text))
-                    .ToImmutableArray();
+            CancellationToken cancellationToken
+        ) {
+            var embeddedTexts = rebuildCompilation.SyntaxTrees.Select(
+                    st => (path: st.FilePath, text: st.GetText())
+                )
+                .Where(pair => pair.text.CanBeEmbedded)
+                .Select(pair => EmbeddedText.FromSource(pair.path, pair.text))
+                .ToImmutableArray();
 
             return Emit(
                 rebuildPeStream,
                 rebuildPdbStream,
                 rebuildCompilation,
                 embeddedTexts,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         public unsafe EmitResult Emit(
@@ -98,13 +115,16 @@ namespace Microsoft.CodeAnalysis.Rebuild
             Stream? rebuildPdbStream,
             Compilation rebuildCompilation,
             ImmutableArray<EmbeddedText> embeddedTexts,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             var peHeader = OptionsReader.PeReader.PEHeaders.PEHeader!;
-            var win32Resources = OptionsReader.PeReader.GetSectionData(peHeader.ResourceTableDirectory.RelativeVirtualAddress);
-            using var win32ResourceStream = win32Resources.Pointer != null
-                ? new UnmanagedMemoryStream(win32Resources.Pointer, win32Resources.Length)
-                : null;
+            var win32Resources = OptionsReader.PeReader.GetSectionData(
+                peHeader.ResourceTableDirectory.RelativeVirtualAddress
+            );
+            using var win32ResourceStream =
+                win32Resources.Pointer != null
+                    ? new UnmanagedMemoryStream(win32Resources.Pointer, win32Resources.Length)
+                    : null;
 
             var sourceLink = OptionsReader.GetSourceLinkUTF8();
 
@@ -115,7 +135,10 @@ namespace Microsoft.CodeAnalysis.Rebuild
             {
                 if (rebuildPdbStream is object)
                 {
-                    throw new ArgumentException("PDB stream must be null because the compilation has an embedded PDB", nameof(rebuildPdbStream));
+                    throw new ArgumentException(
+                        "PDB stream must be null because the compilation has an embedded PDB",
+                        nameof(rebuildPdbStream)
+                    );
                 }
 
                 debugInformationFormat = DebugInformationFormat.Embedded;
@@ -125,13 +148,19 @@ namespace Microsoft.CodeAnalysis.Rebuild
             {
                 if (rebuildPdbStream is null)
                 {
-                    throw new ArgumentException("A non-null PDB stream must be provided because the compilation does not have an embedded PDB", nameof(rebuildPdbStream));
+                    throw new ArgumentException(
+                        "A non-null PDB stream must be provided because the compilation does not have an embedded PDB",
+                        nameof(rebuildPdbStream)
+                    );
                 }
 
                 debugInformationFormat = DebugInformationFormat.PortablePdb;
-                var codeViewEntry = OptionsReader.PeReader.ReadDebugDirectory().Single(entry => entry.Type == DebugDirectoryEntryType.CodeView);
+                var codeViewEntry = OptionsReader.PeReader.ReadDebugDirectory()
+                    .Single(entry => entry.Type == DebugDirectoryEntryType.CodeView);
                 var codeView = OptionsReader.PeReader.ReadCodeViewDebugDirectoryData(codeViewEntry);
-                pdbFilePath = codeView.Path ?? throw new InvalidOperationException("Could not get PDB file path");
+                pdbFilePath =
+                    codeView.Path
+                    ?? throw new InvalidOperationException("Could not get PDB file path");
             }
 
             var emitResult = rebuildCompilation.Emit(
@@ -144,26 +173,36 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 options: new EmitOptions(
                     debugInformationFormat: debugInformationFormat,
                     pdbFilePath: pdbFilePath,
-                    highEntropyVirtualAddressSpace: (peHeader.DllCharacteristics & DllCharacteristics.HighEntropyVirtualAddressSpace) != 0,
-                    subsystemVersion: SubsystemVersion.Create(peHeader.MajorSubsystemVersion, peHeader.MinorSubsystemVersion)),
+                    highEntropyVirtualAddressSpace: (
+                        peHeader.DllCharacteristics
+                        & DllCharacteristics.HighEntropyVirtualAddressSpace
+                    ) != 0,
+                    subsystemVersion: SubsystemVersion.Create(
+                        peHeader.MajorSubsystemVersion,
+                        peHeader.MinorSubsystemVersion
+                    )
+                ),
                 debugEntryPoint: debugEntryPoint,
                 metadataPEStream: null,
                 pdbOptionsBlobReader: OptionsReader.GetMetadataCompilationOptionsBlobReader(),
                 sourceLinkStream: sourceLink != null ? new MemoryStream(sourceLink) : null,
                 embeddedTexts: embeddedTexts,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
 
             return emitResult;
 
             IMethodSymbol? getDebugEntryPoint()
             {
-                if (OptionsReader.GetMainMethodInfo() is (string mainTypeName, string mainMethodName))
-                {
+                if (
+                    OptionsReader.GetMainMethodInfo() is
+
+                    (string mainTypeName, string mainMethodName)
+                ) {
                     var typeSymbol = rebuildCompilation.GetTypeByMetadataName(mainTypeName);
                     if (typeSymbol is object)
                     {
-                        var methodSymbols = typeSymbol
-                            .GetMembers(mainMethodName)
+                        var methodSymbols = typeSymbol.GetMembers(mainMethodName)
                             .OfType<IMethodSymbol>();
                         return methodSymbols.FirstOrDefault();
                     }
@@ -173,24 +212,28 @@ namespace Microsoft.CodeAnalysis.Rebuild
             }
         }
 
-        protected static (OptimizationLevel OptimizationLevel, bool DebugPlus) GetOptimizationLevel(string? value)
-        {
+        protected static (OptimizationLevel OptimizationLevel, bool DebugPlus) GetOptimizationLevel(
+            string? value
+        ) {
             if (value is null)
             {
                 return OptimizationLevelFacts.DefaultValues;
             }
 
-            if (!OptimizationLevelFacts.TryParsePdbSerializedString(value, out OptimizationLevel optimizationLevel, out bool debugPlus))
-            {
+            if (
+                !OptimizationLevelFacts.TryParsePdbSerializedString(
+                    value,
+                    out OptimizationLevel optimizationLevel,
+                    out bool debugPlus
+                )
+            ) {
                 throw new InvalidOperationException();
             }
 
             return (optimizationLevel, debugPlus);
         }
 
-        protected static Platform GetPlatform(string? platform)
-            => platform is null
-                ? Platform.AnyCpu
-                : (Platform)Enum.Parse(typeof(Platform), platform);
+        protected static Platform GetPlatform(string? platform) =>
+            platform is null ? Platform.AnyCpu : (Platform)Enum.Parse(typeof(Platform), platform);
     }
 }

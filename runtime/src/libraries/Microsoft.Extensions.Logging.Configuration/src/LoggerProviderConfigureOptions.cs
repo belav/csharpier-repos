@@ -8,11 +8,11 @@ namespace Microsoft.Extensions.Logging.Configuration
     /// <summary>
     /// Loads settings for <typeparamref name="TProvider"/> into <typeparamref name="TOptions"/> type.
     /// </summary>
-    internal sealed class LoggerProviderConfigureOptions<TOptions, TProvider> : ConfigureFromConfigurationOptions<TOptions> where TOptions : class
+    internal sealed class LoggerProviderConfigureOptions<TOptions, TProvider>
+        : ConfigureFromConfigurationOptions<TOptions> where TOptions : class
     {
-        public LoggerProviderConfigureOptions(ILoggerProviderConfiguration<TProvider> providerConfiguration)
-            : base(providerConfiguration.Configuration)
-        {
-        }
+        public LoggerProviderConfigureOptions(
+            ILoggerProviderConfiguration<TProvider> providerConfiguration
+        ) : base(providerConfiguration.Configuration) { }
     }
 }

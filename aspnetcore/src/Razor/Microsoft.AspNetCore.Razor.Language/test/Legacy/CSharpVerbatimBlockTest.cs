@@ -31,7 +31,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void InnerImplicitExprWithOnlySingleAtAcceptsSingleSpaceOrNewlineAtDesignTime()
         {
-            ParseDocumentTest("@{" + Environment.NewLine + "    @" + Environment.NewLine + "}", designTime: true);
+            ParseDocumentTest(
+                "@{" + Environment.NewLine + "    @" + Environment.NewLine + "}",
+                designTime: true
+            );
         }
 
         [Fact]

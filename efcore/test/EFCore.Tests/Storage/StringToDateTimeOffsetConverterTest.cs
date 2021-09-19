@@ -18,10 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 new DateTimeOffset(1973, 9, 3, 0, 10, 15, new TimeSpan(7, 30, 0)),
-                converter("1973-09-03 00:10:15+07:30"));
+                converter("1973-09-03 00:10:15+07:30")
+            );
 
-            Assert.Equal(
-                new DateTimeOffset(), converter("0001-01-01 00:00:00+00:00"));
+            Assert.Equal(new DateTimeOffset(), converter("0001-01-01 00:00:00+00:00"));
         }
 
         [ConditionalFact]
@@ -31,11 +31,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "1973-09-03 00:10:15+07:30",
-                converter(new DateTimeOffset(1973, 9, 3, 0, 10, 15, new TimeSpan(7, 30, 0))));
+                converter(new DateTimeOffset(1973, 9, 3, 0, 10, 15, new TimeSpan(7, 30, 0)))
+            );
 
-            Assert.Equal(
-                "0001-01-01 00:00:00+00:00",
-                converter(new DateTimeOffset()));
+            Assert.Equal("0001-01-01 00:00:00+00:00", converter(new DateTimeOffset()));
         }
     }
 }

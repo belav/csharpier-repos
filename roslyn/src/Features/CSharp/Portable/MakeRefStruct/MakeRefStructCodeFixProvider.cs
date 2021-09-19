@@ -19,20 +19,28 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeRefStruct
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.MakeRefStruct), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.MakeRefStruct
+        ),
+        Shared
+    ]
     internal class MakeRefStructCodeFixProvider : CodeFixProvider
     {
         // Error CS8345: Field or auto-implemented property cannot be of certain type unless it is an instance member of a ref struct.
         private const string CS8345 = nameof(CS8345);
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public MakeRefStructCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public MakeRefStructCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(CS8345);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS8345);
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -48,15 +56,20 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeRefStruct
                 return;
             }
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var structDeclarationSymbol = semanticModel.GetDeclaredSymbol(structDeclaration, cancellationToken);
+            var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var structDeclarationSymbol = semanticModel.GetDeclaredSymbol(
+                structDeclaration,
+                cancellationToken
+            );
 
             // CS8345 could be triggered when struct is already marked with `ref` but a property is static
             if (!structDeclarationSymbol.IsRefLikeType)
             {
                 context.RegisterCodeFix(
                     new MyCodeAction(c => FixCodeAsync(document, structDeclaration, c)),
-                    context.Diagnostics);
+                    context.Diagnostics
+                );
             }
         }
 
@@ -69,14 +82,15 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeRefStruct
         private static async Task<Document> FixCodeAsync(
             Document document,
             StructDeclarationSyntax structDeclaration,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var generator = SyntaxGenerator.GetGenerator(document);
 
             var newStruct = generator.WithModifiers(
                 structDeclaration,
-                generator.GetModifiers(structDeclaration).WithIsRef(true));
+                generator.GetModifiers(structDeclaration).WithIsRef(true)
+            );
             var newRoot = root.ReplaceNode(structDeclaration, newStruct);
 
             return document.WithSyntaxRoot(newRoot);
@@ -92,12 +106,13 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeRefStruct
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpFeaturesResources.Make_ref_struct,
-                    createChangedDocument,
-                    CSharpFeaturesResources.Make_ref_struct)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(
+                CSharpFeaturesResources.Make_ref_struct,
+                createChangedDocument,
+                CSharpFeaturesResources.Make_ref_struct
+            ) { }
         }
     }
 }

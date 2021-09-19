@@ -93,8 +93,10 @@ public class Program
             Reader.MoveToContent();
             if (Reader.NodeType == XmlNodeType.Element)
             {
-                if ((object)Reader.LocalName != id1_MyClass || (object)Reader.NamespaceURI != id2_Item)
-                {
+                if (
+                    (object)Reader.LocalName != id1_MyClass
+                    || (object)Reader.NamespaceURI != id2_Item
+                ) {
                     throw CreateUnknownNodeException();
                 }
                 result = Read2_MyClass(isNullable: true, checkType: true);
@@ -114,8 +116,14 @@ public class Program
             {
                 flag = ReadNull();
             }
-            if (checkType && !(xmlQualifiedName == null) && ((object)xmlQualifiedName.Name != id1_MyClass || (object)xmlQualifiedName.Namespace != id2_Item))
-            {
+            if (
+                checkType
+                && !(xmlQualifiedName == null)
+                && (
+                    (object)xmlQualifiedName.Name != id1_MyClass
+                    || (object)xmlQualifiedName.Namespace != id2_Item
+                )
+            ) {
                 throw CreateUnknownTypeException(xmlQualifiedName);
             }
             if (flag)
@@ -145,10 +153,22 @@ public class Program
             {
                 if (Reader.NodeType == XmlNodeType.Element)
                 {
-                    if (!array[0] && (object)Reader.LocalName == id3_Element && (object)Reader.NamespaceURI == id2_Item)
-                    {
+                    if (
+                        !array[0]
+                        && (object)Reader.LocalName == id3_Element
+                        && (object)Reader.NamespaceURI == id2_Item
+                    ) {
                         // This line would fail if the XElement ctor needed was trimmed out.
-                        myClass.Element = (XElement)ReadSerializable((IXmlSerializable)Activator.CreateInstance(typeof(XElement), (BindingFlags)564, (Binder)null, new object[0], (CultureInfo)null), true);
+                        myClass.Element = (XElement)ReadSerializable(
+                            (IXmlSerializable)Activator.CreateInstance(
+                                typeof(XElement),
+                                (BindingFlags)564,
+                                (Binder)null,
+                                new object[0],
+                                (CultureInfo)null
+                            ),
+                            true
+                        );
                         array[0] = true;
                     }
                     else
@@ -167,9 +187,7 @@ public class Program
             return myClass;
         }
 
-        protected override void InitCallbacks()
-        {
-        }
+        protected override void InitCallbacks() { }
 
         protected override void InitIDs()
         {
@@ -178,8 +196,6 @@ public class Program
             id1_MyClass = Reader.NameTable.Add("MyClass");
         }
 
-        public XmlSerializationReaderMyClass()
-        {
-        }
+        public XmlSerializationReaderMyClass() { }
     }
 }

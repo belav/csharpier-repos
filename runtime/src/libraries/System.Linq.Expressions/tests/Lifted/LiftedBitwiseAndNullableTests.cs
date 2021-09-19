@@ -117,7 +117,13 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedBitwiseAndNullableNumberTest(bool useInterpreter)
         {
-            Number?[] values = new Number?[] { null, new Number(0), new Number(1), Number.MaxValue };
+            Number?[] values = new Number?[]
+            {
+                null,
+                new Number(0),
+                new Number(1),
+                Number.MaxValue
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -177,12 +183,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyBitwiseAndNullableByte(byte? a, byte? b, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(byte?)),
-                        typeof(LiftedBitwiseAndNullableTests).GetTypeInfo().GetDeclaredMethod("AndNullableByte")));
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(byte?)),
+                    Expression.Constant(b, typeof(byte?)),
+                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("AndNullableByte")
+                )
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a & b, f());
@@ -190,12 +198,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyBitwiseAndNullableInt(int? a, int? b, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?)),
-                        typeof(LiftedBitwiseAndNullableTests).GetTypeInfo().GetDeclaredMethod("AndNullableInt")));
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(int?)),
+                    Expression.Constant(b, typeof(int?)),
+                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("AndNullableInt")
+                )
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a & b, f());
@@ -203,12 +213,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyBitwiseAndNullableLong(long? a, long? b, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?)),
-                        typeof(LiftedBitwiseAndNullableTests).GetTypeInfo().GetDeclaredMethod("AndNullableLong")));
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(long?)),
+                    Expression.Constant(b, typeof(long?)),
+                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("AndNullableLong")
+                )
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a & b, f());
@@ -216,12 +228,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyBitwiseAndNullableSByte(sbyte? a, sbyte? b, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(sbyte?)),
-                        typeof(LiftedBitwiseAndNullableTests).GetTypeInfo().GetDeclaredMethod("AndNullableSByte")));
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(sbyte?)),
+                    Expression.Constant(b, typeof(sbyte?)),
+                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("AndNullableSByte")
+                )
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a & b, f());
@@ -229,12 +243,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyBitwiseAndNullableShort(short? a, short? b, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?)),
-                        typeof(LiftedBitwiseAndNullableTests).GetTypeInfo().GetDeclaredMethod("AndNullableShort")));
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(short?)),
+                    Expression.Constant(b, typeof(short?)),
+                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("AndNullableShort")
+                )
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a & b, f());
@@ -242,12 +258,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyBitwiseAndNullableUInt(uint? a, uint? b, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?)),
-                        typeof(LiftedBitwiseAndNullableTests).GetTypeInfo().GetDeclaredMethod("AndNullableUInt")));
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(uint?)),
+                    Expression.Constant(b, typeof(uint?)),
+                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("AndNullableUInt")
+                )
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a & b, f());
@@ -255,44 +273,54 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyBitwiseAndNullableULong(ulong? a, ulong? b, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?)),
-                        typeof(LiftedBitwiseAndNullableTests).GetTypeInfo().GetDeclaredMethod("AndNullableULong")));
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(ulong?)),
+                    Expression.Constant(b, typeof(ulong?)),
+                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("AndNullableULong")
+                )
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a & b, f());
         }
 
-        private static void VerifyBitwiseAndNullableUShort(ushort? a, ushort? b, bool useInterpreter)
-        {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?)),
-                        typeof(LiftedBitwiseAndNullableTests).GetTypeInfo().GetDeclaredMethod("AndNullableUShort")));
+        private static void VerifyBitwiseAndNullableUShort(
+            ushort? a,
+            ushort? b,
+            bool useInterpreter
+        ) {
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(ushort?)),
+                    Expression.Constant(b, typeof(ushort?)),
+                    typeof(LiftedBitwiseAndNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("AndNullableUShort")
+                )
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a & b, f());
         }
 
-        private static void VerifyBitwiseAndNullableNumber(Number? a, Number? b, bool useInterpreter)
-        {
-            Expression<Func<Number?>> e =
-                Expression.Lambda<Func<Number?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(Number?)),
-                        Expression.Constant(b, typeof(Number?))));
+        private static void VerifyBitwiseAndNullableNumber(
+            Number? a,
+            Number? b,
+            bool useInterpreter
+        ) {
+            Expression<Func<Number?>> e = Expression.Lambda<Func<Number?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(Number?)),
+                    Expression.Constant(b, typeof(Number?))
+                )
+            );
             Assert.Equal(typeof(Number?), e.Body.Type);
             Func<Number?> f = e.Compile(useInterpreter);
 
             Number? expected = a & b;
             Assert.Equal(expected, f());
         }
-
         #endregion
     }
 }

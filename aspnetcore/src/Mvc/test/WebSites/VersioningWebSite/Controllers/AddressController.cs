@@ -33,8 +33,9 @@ namespace VersioningWebSite
         public IActionResult GetAllV1(string version)
         {
             return _generator.Generate(
-                Url.Action("GetAllV1",
-                new { version = version }), Url.RouteUrl(new { version = version }));
+                Url.Action("GetAllV1", new { version = version }),
+                Url.RouteUrl(new { version = version })
+            );
         }
 
         [VersionRoute("api/addresses/all", versionRange: "[1-2]", Order = 1)]
@@ -42,7 +43,8 @@ namespace VersioningWebSite
         {
             return _generator.Generate(
                 Url.Action("GetAllV2", new { version = version }),
-                Url.RouteUrl(new { version = version }));
+                Url.RouteUrl(new { version = version })
+            );
         }
     }
 }

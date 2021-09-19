@@ -28,10 +28,7 @@ namespace System.Diagnostics
                 throw new ArgumentOutOfRangeException(nameof(pid));
             }
 
-            ProcessInfo procInfo = new ProcessInfo()
-            {
-                ProcessId = pid
-            };
+            ProcessInfo procInfo = new ProcessInfo() { ProcessId = pid };
 
             // Try to get the task info. This can fail if the user permissions don't permit
             // this user context to query the specified process
@@ -49,7 +46,6 @@ namespace System.Diagnostics
 
             return procInfo;
         }
-
         // ----------------------------------
         // ---- Unix PAL layer ends here ----
         // ----------------------------------

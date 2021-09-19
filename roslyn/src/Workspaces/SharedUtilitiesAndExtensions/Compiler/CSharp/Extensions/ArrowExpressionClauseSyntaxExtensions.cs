@@ -16,10 +16,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ArrowExpressionClauseSyntax arrowExpression,
             SyntaxToken semicolonToken,
             bool createReturnStatementForExpression,
-            out BlockSyntax block)
-        {
-            if (!arrowExpression.TryConvertToStatement(semicolonToken, createReturnStatementForExpression, out var statement))
-            {
+            out BlockSyntax block
+        ) {
+            if (
+                !arrowExpression.TryConvertToStatement(
+                    semicolonToken,
+                    createReturnStatementForExpression,
+                    out var statement
+                )
+            ) {
                 block = null;
                 return false;
             }
@@ -32,17 +37,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ArrowExpressionClauseSyntax arrowExpression,
             SyntaxToken semicolonToken,
             bool createReturnStatementForExpression,
-            out StatementSyntax statement)
-        {
-            if (!arrowExpression.Expression.TryConvertToStatement(
-                    semicolonToken, createReturnStatementForExpression, out statement))
-            {
+            out StatementSyntax statement
+        ) {
+            if (
+                !arrowExpression.Expression.TryConvertToStatement(
+                    semicolonToken,
+                    createReturnStatementForExpression,
+                    out statement
+                )
+            ) {
                 return false;
             }
 
             if (arrowExpression.ArrowToken.TrailingTrivia.Any(t => t.IsSingleOrMultiLineComment()))
             {
-                statement = statement.WithPrependedLeadingTrivia(arrowExpression.ArrowToken.TrailingTrivia);
+                statement = statement.WithPrependedLeadingTrivia(
+                    arrowExpression.ArrowToken.TrailingTrivia
+                );
             }
 
             return true;

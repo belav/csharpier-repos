@@ -13,9 +13,13 @@ namespace System.Speech.Internal.SapiInterop
     {
         #region Constructors
 
-        private SpeechEvent(SPEVENTENUM eEventId, SPEVENTLPARAMTYPE elParamType,
-            ulong ullAudioStreamOffset, IntPtr wParam, IntPtr lParam)
-        {
+        private SpeechEvent(
+            SPEVENTENUM eEventId,
+            SPEVENTLPARAMTYPE elParamType,
+            ulong ullAudioStreamOffset,
+            IntPtr wParam,
+            IntPtr lParam
+        ) {
             // We make a copy of the SPEVENTEX data but that's okay because the lParam will only be deleted once.
             _eventId = eEventId;
             _paramType = elParamType;
@@ -24,27 +28,48 @@ namespace System.Speech.Internal.SapiInterop
             _lParam = (ulong)lParam;
 
             // Let the GC know if we have a unmanaged object with a given size
-            if (_paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_POINTER || _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_STRING)
-            {
+            if (
+                _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_POINTER
+                || _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_STRING
+            ) {
                 GC.AddMemoryPressure(_sizeMemoryPressure = Marshal.SizeOf(_lParam));
             }
         }
 
         private SpeechEvent(SPEVENT sapiEvent, SpeechAudioFormatInfo audioFormat)
-            : this(sapiEvent.eEventId, sapiEvent.elParamType, sapiEvent.ullAudioStreamOffset, sapiEvent.wParam, sapiEvent.lParam)
-        {
+            : this(
+                sapiEvent.eEventId,
+                sapiEvent.elParamType,
+                sapiEvent.ullAudioStreamOffset,
+                sapiEvent.wParam,
+                sapiEvent.lParam
+            ) {
             if (audioFormat == null || audioFormat.EncodingFormat == 0)
             {
                 _audioPosition = TimeSpan.Zero;
             }
             else
             {
-                _audioPosition = audioFormat.AverageBytesPerSecond > 0 ? new TimeSpan((long)((sapiEvent.ullAudioStreamOffset * TimeSpan.TicksPerSecond) / (ulong)audioFormat.AverageBytesPerSecond)) : TimeSpan.Zero;
+                _audioPosition =
+                    audioFormat.AverageBytesPerSecond > 0
+                        ? new TimeSpan(
+                              (long)(
+                                  (sapiEvent.ullAudioStreamOffset * TimeSpan.TicksPerSecond)
+                                  / (ulong)audioFormat.AverageBytesPerSecond
+                              )
+                          )
+                        : TimeSpan.Zero;
             }
         }
 
-        private SpeechEvent(SPEVENTEX sapiEventEx) : this(sapiEventEx.eEventId, sapiEventEx.elParamType, sapiEventEx.ullAudioStreamOffset, sapiEventEx.wParam, sapiEventEx.lParam)
-        {
+        private SpeechEvent(SPEVENTEX sapiEventEx)
+            : this(
+                sapiEventEx.eEventId,
+                sapiEventEx.elParamType,
+                sapiEventEx.ullAudioStreamOffset,
+                sapiEventEx.wParam,
+                sapiEventEx.lParam
+            ) {
             _audioPosition = new TimeSpan((long)sapiEventEx.ullAudioTimeOffset);
         }
 
@@ -58,14 +83,18 @@ namespace System.Speech.Internal.SapiInterop
             // General code to free event data
             if (_lParam != 0)
             {
-                if (_paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_TOKEN || _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_OBJECT)
-                {
+                if (
+                    _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_TOKEN
+                    || _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_OBJECT
+                ) {
                     Marshal.Release((IntPtr)_lParam);
                 }
                 else
                 {
-                    if (_paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_POINTER || _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_STRING)
-                    {
+                    if (
+                        _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_POINTER
+                        || _paramType == SPEVENTLPARAMTYPE.SPET_LPARAM_IS_STRING
+                    ) {
                         Marshal.FreeCoTaskMem((IntPtr)_lParam);
                     }
                 }
@@ -90,8 +119,11 @@ namespace System.Speech.Internal.SapiInterop
         // This tries to get an event from the ISpEventSource.
         // If there are no events queued then null is returned.
         // Otherwise a new SpeechEvent is created and returned.
-        internal static SpeechEvent TryCreateSpeechEvent(ISpEventSource sapiEventSource, bool additionalSapiFeatures, SpeechAudioFormatInfo audioFormat)
-        {
+        internal static SpeechEvent TryCreateSpeechEvent(
+            ISpEventSource sapiEventSource,
+            bool additionalSapiFeatures,
+            SpeechAudioFormatInfo audioFormat
+        ) {
             uint fetched;
             SpeechEvent speechEvent = null;
             if (additionalSapiFeatures)
@@ -157,7 +189,6 @@ namespace System.Speech.Internal.SapiInterop
         private ulong _lParam;
         private TimeSpan _audioPosition;
         private int _sizeMemoryPressure;
-
         #endregion
     }
 

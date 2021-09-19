@@ -31,6 +31,11 @@ namespace Microsoft.AspNetCore.DataProtection
         /// Implementations should throw CryptographicException if the protected data is
         /// invalid or malformed.
         /// </remarks>
-        byte[] DangerousUnprotect(byte[] protectedData, bool ignoreRevocationErrors, out bool requiresMigration, out bool wasRevoked);
+        byte[] DangerousUnprotect(
+            byte[] protectedData,
+            bool ignoreRevocationErrors,
+            out bool requiresMigration,
+            out bool wasRevoked
+        );
     }
 }

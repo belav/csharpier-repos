@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
     /// </summary>
     public class XmlDataContractSerializerOutputFormatter : TextOutputFormatter
     {
-        private readonly ConcurrentDictionary<Type, object> _serializerCache = new ConcurrentDictionary<Type, object>();
+        private readonly ConcurrentDictionary<Type, object> _serializerCache =
+            new ConcurrentDictionary<Type, object>();
         private readonly ILogger _logger;
         private DataContractSerializerSettings _serializerSettings;
         private MvcOptions _mvcOptions;
@@ -34,9 +35,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// with default <see cref="XmlWriterSettings"/>.
         /// </summary>
         public XmlDataContractSerializerOutputFormatter()
-            : this(FormattingUtilities.GetDefaultXmlWriterSettings())
-        {
-        }
+            : this(FormattingUtilities.GetDefaultXmlWriterSettings()) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="XmlDataContractSerializerOutputFormatter"/>
@@ -44,26 +43,24 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// </summary>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
         public XmlDataContractSerializerOutputFormatter(ILoggerFactory loggerFactory)
-            : this(FormattingUtilities.GetDefaultXmlWriterSettings(), loggerFactory)
-        {
-        }
+            : this(FormattingUtilities.GetDefaultXmlWriterSettings(), loggerFactory) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="XmlDataContractSerializerOutputFormatter"/>.
         /// </summary>
         /// <param name="writerSettings">The settings to be used by the <see cref="DataContractSerializer"/>.</param>
         public XmlDataContractSerializerOutputFormatter(XmlWriterSettings writerSettings)
-            : this(writerSettings, loggerFactory: null)
-        {
-        }
+            : this(writerSettings, loggerFactory: null) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="XmlDataContractSerializerOutputFormatter"/>.
         /// </summary>
         /// <param name="writerSettings">The settings to be used by the <see cref="DataContractSerializer"/>.</param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-        public XmlDataContractSerializerOutputFormatter(XmlWriterSettings writerSettings, ILoggerFactory loggerFactory)
-        {
+        public XmlDataContractSerializerOutputFormatter(
+            XmlWriterSettings writerSettings,
+            ILoggerFactory loggerFactory
+        ) {
             if (writerSettings == null)
             {
                 throw new ArgumentNullException(nameof(writerSettings));
@@ -84,7 +81,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             {
                 new SerializableErrorWrapperProviderFactory(),
             };
-            WrapperProviderFactories.Add(new EnumerableWrapperProviderFactory(WrapperProviderFactories));
+            WrapperProviderFactories.Add(
+                new EnumerableWrapperProviderFactory(WrapperProviderFactories)
+            );
 
             _logger = loggerFactory?.CreateLogger(GetType());
         }
@@ -130,9 +129,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 throw new ArgumentNullException(nameof(type));
             }
 
-            var wrapperProvider = WrapperProviderFactories.GetWrapperProvider(new WrapperProviderContext(
-                type,
-                isSerialization: true));
+            var wrapperProvider = WrapperProviderFactories.GetWrapperProvider(
+                new WrapperProviderContext(type, isSerialization: true)
+            );
 
             return wrapperProvider?.WrappingType ?? type;
         }
@@ -191,8 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// <returns>A new instance of <see cref="XmlWriter"/></returns>
         public virtual XmlWriter CreateXmlWriter(
             TextWriter writer,
-            XmlWriterSettings xmlWriterSettings)
-        {
+            XmlWriterSettings xmlWriterSettings
+        ) {
             if (writer == null)
             {
                 throw new ArgumentNullException(nameof(writer));
@@ -224,14 +223,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public virtual XmlWriter CreateXmlWriter(
             OutputFormatterWriteContext context,
             TextWriter writer,
-            XmlWriterSettings xmlWriterSettings)
-        {
+            XmlWriterSettings xmlWriterSettings
+        ) {
             return CreateXmlWriter(writer, xmlWriterSettings);
         }
 
         /// <inheritdoc />
-        public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
-        {
+        public override async Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding selectedEncoding
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -250,9 +251,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var wrappingType = GetSerializableType(context.ObjectType);
             if (wrappingType != null && wrappingType != context.ObjectType)
             {
-                var wrapperProvider = WrapperProviderFactories.GetWrapperProvider(new WrapperProviderContext(
-                    declaredType: context.ObjectType,
-                    isSerialization: true));
+                var wrapperProvider = WrapperProviderFactories.GetWrapperProvider(
+                    new WrapperProviderContext(
+                        declaredType: context.ObjectType,
+                        isSerialization: true
+                    )
+                );
 
                 value = wrapperProvider.Wrap(value);
             }
@@ -262,7 +266,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var httpContext = context.HttpContext;
             var response = httpContext.Response;
 
-            _mvcOptions ??= httpContext.RequestServices.GetRequiredService<IOptions<MvcOptions>>().Value;
+            _mvcOptions ??=
+                httpContext.RequestServices.GetRequiredService<IOptions<MvcOptions>>().Value;
 
             var responseStream = response.Body;
             FileBufferingWriteStream fileBufferingWriteStream = null;
@@ -274,8 +279,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             try
             {
-                await using (var textWriter = context.WriterFactory(responseStream, writerSettings.Encoding))
-                {
+                await using (
+                    var textWriter = context.WriterFactory(responseStream, writerSettings.Encoding)
+                ) {
                     using (var xmlWriter = CreateXmlWriter(context, textWriter, writerSettings))
                     {
                         dataContractSerializer.WriteObject(xmlWriter, value);
@@ -288,6 +294,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                     await fileBufferingWriteStream.DrainBufferAsync(response.Body);
                 }
             }
+
             finally
             {
                 if (fileBufferingWriteStream != null)

@@ -23,12 +23,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 return null;
             };
 
-
             if (id == 0)
             {
                 return NotFound();
             }
-
 
             if (id == 1)
             {

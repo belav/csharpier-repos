@@ -69,7 +69,8 @@ namespace System.Text.Json
             int indent = Indentation;
             Debug.Assert(indent <= 2 * JsonConstants.MaxWriterDepth);
 
-            int maxRequired = indent + JsonConstants.MaximumFormatDoubleLength + 1 + s_newLineLength; // Optionally, 1 list separator and 1-2 bytes for new line
+            int maxRequired =
+                indent + JsonConstants.MaximumFormatDoubleLength + 1 + s_newLineLength; // Optionally, 1 list separator and 1-2 bytes for new line
 
             if (_memory.Length - BytesPending < maxRequired)
             {
@@ -98,8 +99,11 @@ namespace System.Text.Json
             BytesPending += bytesWritten;
         }
 
-        private static bool TryFormatDouble(double value, Span<byte> destination, out int bytesWritten)
-        {
+        private static bool TryFormatDouble(
+            double value,
+            Span<byte> destination,
+            out int bytesWritten
+        ) {
             // Frameworks that are not .NET Core 3.0 or higher do not produce roundtrippable strings by
             // default. Further, the Utf8Formatter on older frameworks does not support taking a precision
             // specifier for 'G' nor does it represent other formats such as 'R'. As such, we duplicate

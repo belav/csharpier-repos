@@ -6,12 +6,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindIncludeQueryInMemoryTest : NorthwindIncludeQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
+    public class NorthwindIncludeQueryInMemoryTest
+        : NorthwindIncludeQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
     {
         public NorthwindIncludeQueryInMemoryTest(
             NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             //TestLoggerFactory.TestOutputHelper = testOutputHelper;
         }

@@ -22,8 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new instance of the <see cref="DistinctExpression" /> class.
         /// </summary>
         /// <param name="operand"> An expression on which DISTINCT is applied. </param>
-        public DistinctExpression(SqlExpression operand)
-            : base(operand.Type, operand.TypeMapping)
+        public DistinctExpression(SqlExpression operand) : base(operand.Type, operand.TypeMapping)
         {
             Check.NotNull(operand, nameof(operand));
 
@@ -53,9 +52,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(operand, nameof(operand));
 
-            return operand != Operand
-                ? new DistinctExpression(operand)
-                : this;
+            return operand != Operand ? new DistinctExpression(operand) : this;
         }
 
         /// <inheritdoc />
@@ -69,18 +66,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is DistinctExpression distinctExpression
-                    && Equals(distinctExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is DistinctExpression distinctExpression && Equals(distinctExpression)
+            );
 
-        private bool Equals(DistinctExpression distinctExpression)
-            => base.Equals(distinctExpression)
-                && Operand.Equals(distinctExpression.Operand);
+        private bool Equals(DistinctExpression distinctExpression) =>
+            base.Equals(distinctExpression) && Operand.Equals(distinctExpression.Operand);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Operand);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Operand);
     }
 }

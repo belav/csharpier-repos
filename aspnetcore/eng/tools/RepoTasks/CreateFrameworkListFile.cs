@@ -33,36 +33,47 @@ namespace RepoTasks
 
         public override bool Execute()
         {
-            XAttribute[] rootAttributes = RootAttributes
-                ?.Select(item => new XAttribute(item.ItemSpec, item.GetMetadata("Value")))
+            XAttribute[] rootAttributes = RootAttributes?.Select(
+                    item => new XAttribute(item.ItemSpec, item.GetMetadata("Value"))
+                )
                 .ToArray();
 
             var frameworkManifest = new XElement("FileList", rootAttributes);
 
             var usedFileProfiles = new HashSet<string>();
 
-            foreach (var f in Files
-                .Select(item => new
-                {
-                    Item = item,
-                    Filename = Path.GetFileName(item.ItemSpec),
-                    AssemblyName = FileUtilities.GetAssemblyName(item.ItemSpec),
-                    FileVersion = FileUtilities.GetFileVersion(item.ItemSpec),
-                    IsNative = item.GetMetadata("IsNativeImage") == "true",
-                    IsSymbolFile = item.GetMetadata("IsSymbolFile") == "true",
-                    PackagePath = item.GetMetadata("PackagePath")
-                })
-                .Where(f =>
-                    !f.IsSymbolFile &&
-                    (f.Filename.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) || f.IsNative))
-                .OrderBy(f => f.Filename, StringComparer.Ordinal))
-            {
+            foreach (
+                var f in Files.Select(
+                        item =>
+                            new
+                            {
+                                Item = item,
+                                Filename = Path.GetFileName(item.ItemSpec),
+                                AssemblyName = FileUtilities.GetAssemblyName(item.ItemSpec),
+                                FileVersion = FileUtilities.GetFileVersion(item.ItemSpec),
+                                IsNative = item.GetMetadata("IsNativeImage") == "true",
+                                IsSymbolFile = item.GetMetadata("IsSymbolFile") == "true",
+                                PackagePath = item.GetMetadata("PackagePath")
+                            }
+                    )
+                    .Where(
+                        f =>
+                            !f.IsSymbolFile
+                            && (
+                                f.Filename.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
+                                || f.IsNative
+                            )
+                    )
+                    .OrderBy(f => f.Filename, StringComparer.Ordinal)
+            ) {
                 var element = new XElement(
                     "File",
                     new XAttribute("Type", f.IsNative ? "Native" : "Managed"),
                     new XAttribute(
                         "Path",
-                        Path.Combine(f.PackagePath, f.Filename).Replace('\\', '/')));
+                        Path.Combine(f.PackagePath, f.Filename).Replace('\\', '/')
+                    )
+                );
 
                 if (f.AssemblyName != null)
                 {
@@ -84,7 +95,8 @@ namespace RepoTasks
                     element.Add(
                         new XAttribute("AssemblyName", f.AssemblyName.Name),
                         new XAttribute("PublicKeyToken", publicKeyTokenHex),
-                        new XAttribute("AssemblyVersion", f.AssemblyName.Version));
+                        new XAttribute("AssemblyVersion", f.AssemblyName.Version)
+                    );
                 }
                 else if (!f.IsNative)
                 {

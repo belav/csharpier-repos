@@ -11,8 +11,11 @@ namespace System.Numerics
     internal static class VectorMath
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<float> ConditionalSelectBitwise(Vector128<float> selector, Vector128<float> ifTrue, Vector128<float> ifFalse)
-        {
+        public static Vector128<float> ConditionalSelectBitwise(
+            Vector128<float> selector,
+            Vector128<float> ifTrue,
+            Vector128<float> ifFalse
+        ) {
             // This implementation is based on the DirectX Math Library XMVector4NotEqual method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
 
@@ -32,8 +35,11 @@ namespace System.Numerics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<double> ConditionalSelectBitwise(Vector128<double> selector, Vector128<double> ifTrue, Vector128<double> ifFalse)
-        {
+        public static Vector128<double> ConditionalSelectBitwise(
+            Vector128<double> selector,
+            Vector128<double> ifTrue,
+            Vector128<double> ifFalse
+        ) {
             // This implementation is based on the DirectX Math Library XMVector4NotEqual method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
 
@@ -68,7 +74,10 @@ namespace System.Numerics
                 Vector64<byte> vTemp10 = AdvSimd.Arm64.ZipLow(vResult0, vResult1);
                 Vector64<byte> vTemp11 = AdvSimd.Arm64.ZipHigh(vResult0, vResult1);
 
-                Vector64<ushort> vTemp21 = AdvSimd.Arm64.ZipHigh(vTemp10.AsUInt16(), vTemp11.AsUInt16());
+                Vector64<ushort> vTemp21 = AdvSimd.Arm64.ZipHigh(
+                    vTemp10.AsUInt16(),
+                    vTemp11.AsUInt16()
+                );
                 return vTemp21.AsUInt32().GetElement(1) == 0xFFFFFFFF;
             }
             else if (Sse.IsSupported)
@@ -83,8 +92,11 @@ namespace System.Numerics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<float> Lerp(Vector128<float> a, Vector128<float> b, Vector128<float> t)
-        {
+        public static Vector128<float> Lerp(
+            Vector128<float> a,
+            Vector128<float> b,
+            Vector128<float> t
+        ) {
             // This implementation is based on the DirectX Math Library XMVectorLerp method
             // https://github.com/microsoft/DirectXMath/blob/master/Inc/DirectXMathVector.inl
 
@@ -98,7 +110,10 @@ namespace System.Numerics
             }
             else if (Sse.IsSupported)
             {
-                return Sse.Add(Sse.Multiply(a, Sse.Subtract(Vector128.Create(1.0f), t)), Sse.Multiply(b, t));
+                return Sse.Add(
+                    Sse.Multiply(a, Sse.Subtract(Vector128.Create(1.0f), t)),
+                    Sse.Multiply(b, t)
+                );
             }
             else
             {
@@ -123,7 +138,10 @@ namespace System.Numerics
                 Vector64<byte> vTemp10 = AdvSimd.Arm64.ZipLow(vResult0, vResult1);
                 Vector64<byte> vTemp11 = AdvSimd.Arm64.ZipHigh(vResult0, vResult1);
 
-                Vector64<ushort> vTemp21 = AdvSimd.Arm64.ZipHigh(vTemp10.AsUInt16(), vTemp11.AsUInt16());
+                Vector64<ushort> vTemp21 = AdvSimd.Arm64.ZipHigh(
+                    vTemp10.AsUInt16(),
+                    vTemp11.AsUInt16()
+                );
                 return vTemp21.AsUInt32().GetElement(1) != 0xFFFFFFFF;
             }
             else if (Sse.IsSupported)

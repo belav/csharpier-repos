@@ -11,76 +11,32 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         public int Field = 0;
         public static MyEnum?[] operator -(MyClass p1, dynamic[] p2)
         {
-            return new MyEnum?[]
-            {
-            MyEnum.First, null
-            }
-
-            ;
+            return new MyEnum?[] { MyEnum.First, null };
         }
 
         public static MyStruct operator ^(MyClass p1, float p2)
         {
-            return new MyStruct()
-            {
-                Number = 4
-            }
-
-            ;
+            return new MyStruct() { Number = 4 };
         }
 
         public static MyClass[] operator /(MyClass p1, float? p2)
         {
-            return new MyClass[]
-            {
-            new MyClass()
-            {
-            Field = 1
-            }
-
-            , new MyClass()
-            {
-            Field = 4
-            }
-            }
-
-            ;
+            return new MyClass[] { new MyClass() { Field = 1 }, new MyClass() { Field = 4 } };
         }
 
         public static MyStruct?[] operator <=(MyClass p1, int p2)
         {
-            return new MyStruct?[]
-            {
-            null, new MyStruct()
-            {
-            Number = int.MinValue
-            }
-            }
-
-            ;
+            return new MyStruct?[] { null, new MyStruct() { Number = int.MinValue } };
         }
 
         public static MyStruct?[] operator >=(MyClass p1, int p2)
         {
-            return new MyStruct?[]
-            {
-            null, new MyStruct()
-            {
-            Number = int.MaxValue
-            }
-            }
-
-            ;
+            return new MyStruct?[] { null, new MyStruct() { Number = int.MaxValue } };
         }
 
         public static MyClass operator >>(MyClass p1, int p2)
         {
-            return new MyClass()
-            {
-                Field = int.MinValue
-            }
-
-            ;
+            return new MyClass() { Field = int.MinValue };
         }
 
         public static bool operator +(MyClass p1, int?[] p2)
@@ -95,12 +51,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static decimal[] operator |(bool? p1, MyClass p2)
         {
-            return new decimal[]
-            {
-            decimal.MaxValue
-            }
-
-            ;
+            return new decimal[] { decimal.MaxValue };
         }
 
         public static MyEnum? operator <(byte?[] p1, MyClass p2)
@@ -135,12 +86,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static decimal[] operator -(dynamic p1, MyClass p2)
         {
-            return new decimal[]
-            {
-            decimal.MaxValue
-            }
-
-            ;
+            return new decimal[] { decimal.MaxValue };
         }
 
         public static string operator *(dynamic[] p1, MyClass p2)
@@ -150,35 +96,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyStruct[] operator |(MyClass p1, short[] p2)
         {
-            return new MyStruct[]
-            {
-            new MyStruct()
-            {
-            Number = 3
-            }
-            }
-
-            ;
+            return new MyStruct[] { new MyStruct() { Number = 3 } };
         }
 
         public static dynamic[] operator &(MyClass p1, string p2)
         {
-            return new dynamic[]
-            {
-            p1
-            }
-
-            ;
+            return new dynamic[] { p1 };
         }
 
         public static int?[] operator -(MyClass p1, ulong[] p2)
         {
-            return new int?[]
-            {
-            null, int.MinValue
-            }
-
-            ;
+            return new int?[] { null, int.MinValue };
         }
 
         public static MyEnum operator +(MyClass p1)
@@ -198,12 +126,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyClass operator ++(MyClass p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
         public static bool operator true(MyClass p1)
@@ -223,132 +146,74 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static dynamic[] operator -(MyClass p1)
         {
-            return new dynamic[]
-            {
-            p1
-            }
-
-            ;
+            return new dynamic[] { p1 };
         }
 
         public static MyClass operator --(MyClass p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
         public static explicit operator MyClass(char p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
         public static explicit operator MyClass(char? p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
         public static implicit operator MyClass(double[] p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
         // public static implicit operator MyClass(dynamic p1) { return new MyClass() { Field = 4 }; }
         public static implicit operator MyClass(dynamic[] p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
-        public static implicit operator float (MyClass p1)
+        public static implicit operator float(MyClass p1)
         {
             return float.Epsilon;
         }
 
-        public static implicit operator int?[] (MyClass p1)
+        public static implicit operator int?[](MyClass p1)
         {
             return null;
         }
 
         // public static implicit operator dynamic(MyClass p1) { return p1; }
-        public static implicit operator MyStruct[] (MyClass p1)
+        public static implicit operator MyStruct[](MyClass p1)
         {
-            return new MyStruct[]
-            {
-            new MyStruct()
-            {
-            Number = 4
-            }
-            }
-
-            ;
+            return new MyStruct[] { new MyStruct() { Number = 4 } };
         }
 
-        public static implicit operator int? (MyClass p1)
+        public static implicit operator int?(MyClass p1)
         {
             return int.MinValue;
         }
 
-        public static explicit operator object[] (MyClass p1)
+        public static explicit operator object[](MyClass p1)
         {
-            return new object[]
-            {
-            p1
-            }
-
-            ;
+            return new object[] { p1 };
         }
 
-        public static explicit operator MyEnum[] (MyClass p1)
+        public static explicit operator MyEnum[](MyClass p1)
         {
-            return new MyEnum[]
-            {
-            MyEnum.First
-            }
-
-            ;
+            return new MyEnum[] { MyEnum.First };
         }
 
-        public static implicit operator short[] (MyClass p1)
+        public static implicit operator short[](MyClass p1)
         {
-            return new short[]
-            {
-            short.MaxValue
-            }
-
-            ;
+            return new short[] { short.MaxValue };
         }
 
         public static explicit operator MyClass(MyStruct?[] p1)
         {
-            return new MyClass()
-            {
-                Field = 3
-            }
-
-            ;
+            return new MyClass() { Field = 3 };
         }
     }
 
@@ -379,12 +244,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         // ---
         public static MyEnum?[] operator <<(MyStruct p1, int p2)
         {
-            return new MyEnum?[]
-            {
-            null, MyEnum.First
-            }
-
-            ;
+            return new MyEnum?[] { null, MyEnum.First };
         }
 
         public static MyEnum? operator +(MyStruct p1, MyClass[] p2)
@@ -399,12 +259,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyClass operator |(MyStruct p1, MyEnum[] p2)
         {
-            return new MyClass()
-            {
-                Field = int.MinValue
-            }
-
-            ;
+            return new MyClass() { Field = int.MinValue };
         }
 
         public static MyEnum operator +(char p1, MyStruct p2)
@@ -424,52 +279,27 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyStruct? operator /(MyEnum?[] p1, MyStruct p2)
         {
-            return new MyStruct
-            {
-                Number = 5
-            }
-
-            ;
+            return new MyStruct { Number = 5 };
         }
 
         public static double[] operator <(MyStruct?[] p1, MyStruct p2)
         {
-            return new double[]
-            {
-            double.MinValue
-            }
-
-            ;
+            return new double[] { double.MinValue };
         }
 
         public static double[] operator >(MyStruct?[] p1, MyStruct p2)
         {
-            return new double[]
-            {
-            double.MaxValue
-            }
-
-            ;
+            return new double[] { double.MaxValue };
         }
 
         public static object[] operator |(MyStruct p1, MyStruct? p2)
         {
-            return new object[]
-            {
-            p1, p2
-            }
-
-            ;
+            return new object[] { p1, p2 };
         }
 
         public static MyEnum[] operator &(MyStruct p1, MyStruct[] p2)
         {
-            return new MyEnum[]
-            {
-            MyEnum.First, MyEnum.Third
-            }
-
-            ;
+            return new MyEnum[] { MyEnum.First, MyEnum.Third };
         }
 
         public static float? operator %(MyStruct p1, object[] p2)
@@ -479,22 +309,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static object[] operator -(MyStruct p1)
         {
-            return new object[]
-            {
-            p1
-            }
-
-            ;
+            return new object[] { p1 };
         }
 
         public static MyStruct operator ++(MyStruct p1)
         {
-            return new MyStruct()
-            {
-                Number = 4
-            }
-
-            ;
+            return new MyStruct() { Number = 4 };
         }
 
         public static dynamic operator ~(MyStruct p1)
@@ -524,119 +344,66 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static implicit operator MyStruct(bool p1)
         {
-            return new MyStruct()
-            {
-                Number = 3
-            }
-
-            ;
+            return new MyStruct() { Number = 3 };
         }
 
         public static implicit operator MyStruct(bool? p1)
         {
-            return new MyStruct()
-            {
-                Number = 4
-            }
-
-            ;
+            return new MyStruct() { Number = 4 };
         }
 
         public static implicit operator MyStruct(byte p1)
         {
-            return new MyStruct()
-            {
-                Number = 5
-            }
-
-            ;
+            return new MyStruct() { Number = 5 };
         }
 
         public static implicit operator MyStruct(byte?[] p1)
         {
-            return new MyStruct()
-            {
-                Number = 6
-            }
-
-            ;
+            return new MyStruct() { Number = 6 };
         }
 
         public static explicit operator MyStruct(decimal? p1)
         {
-            return new MyStruct()
-            {
-                Number = 7
-            }
-
-            ;
+            return new MyStruct() { Number = 7 };
         }
 
         public static explicit operator MyStruct(decimal[] p1)
         {
-            return new MyStruct()
-            {
-                Number = 8
-            }
-
-            ;
+            return new MyStruct() { Number = 8 };
         }
 
         public static implicit operator MyStruct(MyEnum? p1)
         {
-            return new MyStruct()
-            {
-                Number = 9
-            }
-
-            ;
+            return new MyStruct() { Number = 9 };
         }
 
         public static implicit operator MyStruct(MyEnum?[] p1)
         {
-            return new MyStruct()
-            {
-                Number = 10
-            }
-
-            ;
+            return new MyStruct() { Number = 10 };
         }
 
-        public static explicit operator MyClass[] (MyStruct p1)
+        public static explicit operator MyClass[](MyStruct p1)
         {
-            return new MyClass[]
-            {
-            new MyClass()
-            {
-            Field = 3
-            }
-            }
-
-            ;
+            return new MyClass[] { new MyClass() { Field = 3 } };
         }
 
-        public static implicit operator ulong[] (MyStruct p1)
+        public static implicit operator ulong[](MyStruct p1)
         {
-            return new ulong[]
-            {
-            ulong.MaxValue
-            }
-
-            ;
+            return new ulong[] { ulong.MaxValue };
         }
 
-        public static explicit operator int (MyStruct p1)
+        public static explicit operator int(MyStruct p1)
         {
             return int.MinValue;
         }
 
-        public static implicit operator string (MyStruct p1)
+        public static implicit operator string(MyStruct p1)
         {
             return string.Empty;
         }
 
         // public static explicit operator dynamic(MyStruct p1) { return p1; }
-        public static implicit operator float? (MyStruct p1)
+        public static implicit operator float?(MyStruct p1)
         {
             return null;
         }
@@ -646,14 +413,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             return MyEnum.First;
         }
 
-        public static implicit operator dynamic[] (MyStruct p1)
+        public static implicit operator dynamic[](MyStruct p1)
         {
-            return new dynamic[]
-            {
-            p1
-            }
-
-            ;
+            return new dynamic[] { p1 };
         }
     }
 
@@ -664,8 +426,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         Third = 3
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass001.regclass001
 {
@@ -688,12 +448,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             MyClass mc = new MyClass();
             dynamic dy = mc;
-            dynamic[] p2 = new dynamic[]
-            {
-            dy, dy, null
-            }
-
-            ;
+            dynamic[] p2 = new dynamic[] { dy, dy, null };
             MyEnum?[] result = dy - p2;
             if (result.Length == 2 && result[0] == MyEnum.First && result[1] == null)
                 return 0;
@@ -702,8 +457,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass002.regclass002
 {
@@ -740,8 +493,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass002a.regclass002a
 {
     // <Title> Tests regular class operator used in static method body.</Title>
@@ -775,8 +526,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass003.regclass003
 {
@@ -812,8 +561,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass004.regclass004
 {
@@ -852,8 +599,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass007.regclass007
 {
@@ -896,8 +641,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass007a.regclass007a
 {
     // <Title> Tests regular class operator used in arguments to method invocation.</Title>
@@ -938,8 +681,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass008.regclass008
 {
     // <Title> Tests regular class operator used in arguments to method invocation.</Title>
@@ -977,15 +718,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             }
 
             // op == is overridden
-            if (msa.Length == 2 && (!msa[0].HasValue) && (msa[1].HasValue && (msa[1].Value == null) == decimal.MaxValue))
+            if (
+                msa.Length == 2
+                && (!msa[0].HasValue)
+                && (msa[1].HasValue && (msa[1].Value == null) == decimal.MaxValue)
+            )
                 return 0;
             return 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass008a.regclass008a
 {
@@ -1023,15 +766,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             }
 
             // op == is overridden
-            if (msa.Length == 2 && (!msa[0].HasValue) && (msa[1].HasValue && (msa[1].Value == null) == decimal.MaxValue))
+            if (
+                msa.Length == 2
+                && (!msa[0].HasValue)
+                && (msa[1].HasValue && (msa[1].Value == null) == decimal.MaxValue)
+            )
                 return 0;
             return 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass009.regclass009
 {
@@ -1055,15 +800,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             MyClass mc = new MyClass();
             dynamic dy = mc;
             var result = dy >= int.MaxValue;
-            if (result.Length == 2 && !((MyStruct?)result[0]).HasValue && ((MyStruct?)result[1]).Value.Number == int.MaxValue)
+            if (
+                result.Length == 2
+                && !((MyStruct?)result[0]).HasValue
+                && ((MyStruct?)result[1]).Value.Number == int.MaxValue
+            )
                 return 0;
             return 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass009a.regclass009a
 {
@@ -1087,15 +834,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             MyClass mc = new MyClass();
             dynamic dy = mc;
             var result = dy >= 2147483647;
-            if (result.Length == 2 && !((MyStruct?)result[0]).HasValue && ((MyStruct?)result[1]).Value.Number == int.MaxValue)
+            if (
+                result.Length == 2
+                && !((MyStruct?)result[0]).HasValue
+                && ((MyStruct?)result[1]).Value.Number == int.MaxValue
+            )
                 return 0;
             return 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass010.regclass010
 {
@@ -1118,12 +867,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             MyClass mc = new MyClass();
             dynamic dy = mc;
-            MyClass[] result = new MyClass[]
-            {
-            dy >> 10
-            }
-
-            ;
+            MyClass[] result = new MyClass[] { dy >> 10 };
             if (result.Length == 1 && result[0].Field == int.MinValue)
                 return 0;
             else
@@ -1132,8 +876,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass011.regclass011
 {
@@ -1156,12 +898,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             MyClass mc = new MyClass();
             dynamic dy = mc;
-            var result = new MyClass[]
-            {
-            dy >> 10
-            }
-
-            ;
+            var result = new MyClass[] { dy >> 10 };
             if (result.Length == 1 && result[0].Field == int.MinValue)
                 return 0;
             else
@@ -1170,8 +907,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass012.regclass012
 {
@@ -1187,11 +922,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         public class InnerTest
         {
             public bool? Field;
-            public byte MyProp
-            {
-                get;
-                set;
-            }
+            public byte MyProp { get; set; }
         }
 
         [Fact]
@@ -1204,20 +935,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             MyClass mc = new MyClass();
             dynamic dy = mc;
-            int?[] p2 = new int?[]
-            {
-            int.MinValue, null
-            }
-
-            ;
+            int?[] p2 = new int?[] { int.MinValue, null };
             decimal[] p1 = null;
-            var result = new InnerTest()
-            {
-                Field = dy + p2,
-                MyProp = p1 + dy
-            }
-
-            ;
+            var result = new InnerTest() { Field = dy + p2, MyProp = p1 + dy };
             if (result.Field == false && result.MyProp == byte.MinValue)
                 return 0;
             return 1;
@@ -1225,8 +945,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass013.regclass013
 {
@@ -1249,20 +967,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             MyClass mc = new MyClass();
             dynamic dy = mc;
-            int?[] p2 = new int?[]
-            {
-            int.MinValue, null
-            }
-
-            ;
+            int?[] p2 = new int?[] { int.MinValue, null };
             decimal[] p1 = null;
-            var result = new
-            {
-                Field = dy + p2,
-                MyProp = p1 + dy
-            }
-
-            ;
+            var result = new { Field = dy + p2, MyProp = p1 + dy };
             if (result.Field == false && result.MyProp == byte.MinValue)
                 return 0;
             return 1;
@@ -1270,8 +977,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass014.regclass014
 {
@@ -1301,8 +1006,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass015.regclass015
 {
@@ -1335,20 +1038,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             {
                 MyClass mc = new MyClass();
                 dynamic dy = mc;
-                byte?[] p1 = new byte?[]
-                {
-                1, null
-                }
-
-                ;
+                byte?[] p1 = new byte?[] { 1, null };
                 return p1 > dy;
             }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass016.regclass016
 {
@@ -1382,20 +1078,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             {
                 MyClass mc = new MyClass();
                 dynamic dy = mc;
-                byte?[] p1 = new byte?[]
-                {
-                1, null
-                }
-
-                ;
+                byte?[] p1 = new byte?[] { 1, null };
                 s_result = p1 > dy;
             }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass017.regclass017
 {
@@ -1436,7 +1125,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
                 decimal? p1 = decimal.MaxValue;
                 _field = p1 ^ dy;
             }
-
             get
             {
                 dynamic dy = s_mc;
@@ -1447,8 +1135,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass018.regclass018
 {
@@ -1498,8 +1184,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass019.regclass019
 {
     // <Title> Tests regular class operator used in collection initializer list.</Title>
@@ -1520,25 +1204,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            dynamic dy1 = new MyClass()
-            {
-                Field = 3
-            }
-
-            ;
-            dynamic dy2 = new MyClass()
-            {
-                Field = 3
-            }
-
-            ;
+            dynamic dy1 = new MyClass() { Field = 3 };
+            dynamic dy2 = new MyClass() { Field = 3 };
             double[] ds = null;
-            List<MyClass> list = new List<MyClass>()
-            {
-            dy1++, ++dy2, ds
-            }
-
-            ;
+            List<MyClass> list = new List<MyClass>() { dy1++, ++dy2, ds };
             if (list.Count == 3 && list[0].Field == 3 && list[1].Field == 4 && list[2].Field == 4)
                 return 0;
             return 1;
@@ -1546,8 +1215,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass020.regclass020
 {
@@ -1563,18 +1230,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         private MyClass _result;
         public Test()
         {
-            dynamic dy1 = new MyClass()
-            {
-                Field = 1
-            }
-
-            ;
-            dynamic dy2 = new MyClass()
-            {
-                Field = 2
-            }
-
-            ;
+            dynamic dy1 = new MyClass() { Field = 1 };
+            dynamic dy2 = new MyClass() { Field = 2 };
             _result = dy1 && dy2; //T.false(x) ? x : T.&(x, y)
         }
 
@@ -1595,8 +1252,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass021.regclass021
 {
     // <Title> Tests regular class operator used in static ctor.</Title>
@@ -1611,18 +1266,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         private static MyClass s_result;
         static Test()
         {
-            dynamic dy1 = new MyClass()
-            {
-                Field = 1
-            }
-
-            ;
-            dynamic dy2 = new MyClass()
-            {
-                Field = 2
-            }
-
-            ;
+            dynamic dy1 = new MyClass() { Field = 1 };
+            dynamic dy2 = new MyClass() { Field = 2 };
             s_result = dy1 || dy2; //T.true(x) ? x : T.|(x, y),
         }
 
@@ -1641,8 +1286,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass022.regclass022
 {
@@ -1687,8 +1330,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass024.regclass024
 {
     // <Title> Tests regular class operator used in short-circuit boolean expression.</Title>
@@ -1725,8 +1366,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass025.regclass025
 {
@@ -1799,8 +1438,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass026.regclass026
 {
     // <Title> Tests regular class operator used in unsafe.</Title>
@@ -1825,8 +1462,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass027.regclass027
 {
     // <Title> Tests regular class operator used in foreach expression.</Title>
@@ -1848,12 +1483,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             MyClass mc = new MyClass();
             dynamic dy = mc;
-            short[] p2 = new short[]
-            {
-            1, 2, 3, 4
-            }
-
-            ;
+            short[] p2 = new short[] { 1, 2, 3, 4 };
             int index = 0;
             foreach (MyStruct i in dy | p2)
             {
@@ -1869,8 +1499,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass028.regclass028
 {
@@ -1895,12 +1523,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             dynamic dy = mc;
             int?[] result = new int?[10];
             int index = 0;
-            for (int i = (new dynamic[]
-            {
-            dy
-            }
-
-            * dy).Length; i < 10; i++)
+            for (int i = (new dynamic[] { dy } * dy).Length; i < 10; i++)
             {
                 result = dy;
                 index++;
@@ -1913,8 +1536,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass029.regclass029
 {
@@ -1935,12 +1556,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            MyClass mc = new MyClass()
-            {
-                Field = 10
-            }
-
-            ;
+            MyClass mc = new MyClass() { Field = 10 };
             dynamic dy = mc;
             dynamic[] result = null;
             lock (--dy) // set Field=4
@@ -1955,8 +1571,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass030.regclass030
 {
@@ -1992,8 +1606,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass031.regclass031
 {
     // <Title> Tests regular class operator used in while loop body.</Title>
@@ -2013,12 +1625,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            dynamic dy = new double[]
-            {
-            double.Epsilon, double.NaN
-            }
-
-            ;
+            dynamic dy = new double[] { double.Epsilon, double.NaN };
             int index = 0;
             MyClass result = default(MyClass);
             while (index < 10)
@@ -2034,8 +1641,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass032.regclass032
 {
@@ -2067,8 +1672,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass034.regclass034
 {
     // <Title> Tests regular class operator used in the for-condition.</Title>
@@ -2092,23 +1695,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             dynamic dy = mc;
             MyClass[] array = new MyClass[]
             {
-            new MyClass()
-            {
-            Field = 0
-            }
-
-            , new MyClass()
-            {
-            Field = 1
-            }
-
-            , new MyClass()
-            {
-            Field = 2
-            }
-            }
-
-            ;
+                new MyClass() { Field = 0 },
+                new MyClass() { Field = 1 },
+                new MyClass() { Field = 2 }
+            };
             int index = 0;
             for (int i = 0; (dynamic)array[i] < 2; i++)
             {
@@ -2122,8 +1712,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass035.regclass035
 {
@@ -2164,8 +1752,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass035a.regclass035a
 {
     // <Title> Tests regular class operator used in the for-iterator.</Title>
@@ -2205,8 +1791,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass036.regclass036
 {
     // <Title> Tests regular class operator used in while/do expression.</Title>
@@ -2233,8 +1817,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             do
             {
                 index++;
-            }
-            while (dy + p2);
+            } while (dy + p2);
             if (index == 1)
                 return 0;
             return 1;
@@ -2242,8 +1825,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass038.regclass038
 {
@@ -2267,20 +1848,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            List<float> list = new List<float>()
-            {
-            float.Epsilon, 1.2f, 1.33f, float.NaN
-            }
-
-            ;
+            List<float> list = new List<float>() { float.Epsilon, 1.2f, 1.33f, float.NaN };
             dynamic dy = new MyClass();
-            var result = list.Where(p => p == (float)dy).Select(p => new
-            {
-                A = (MyStruct[])dy,
-                B = (int?)dy
-            }
-
-            ).ToList();
+            var result = list.Where(p => p == (float)dy)
+                .Select(p => new { A = (MyStruct[])dy, B = (int?)dy })
+                .ToList();
             if (result.Count != 1)
                 return 1;
             MyStruct[] msa = result[0].A;
@@ -2292,8 +1864,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass039.regclass039
 {
@@ -2317,34 +1887,24 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            dynamic dy = new MyClass()
-            {
-                Field = 10
-            }
-
-            ;
+            dynamic dy = new MyClass() { Field = 10 };
             MyStruct?[] p1 = null;
             List<Test> list = new List<Test>()
             {
-            new Test()
-            {
-            _field1 = (object[])dy, _field2 = (MyClass)p1
-            }
-            }
-
-            ;
+                new Test() { _field1 = (object[])dy, _field2 = (MyClass)p1 }
+            };
             if (list.Count != 1)
                 return 1;
             Test t = list[0];
-            if (t._field1.Length == 1 && ((MyClass)t._field1[0]).Field == 10 && t._field2.Field == 3)
+            if (
+                t._field1.Length == 1 && ((MyClass)t._field1[0]).Field == 10 && t._field2.Field == 3
+            )
                 return 0;
             return 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct001.regstrct001
 {
@@ -2377,8 +1937,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct002.regstrct002
 {
     // <Title> Tests regular struct operator used in query expression.</Title>
@@ -2405,29 +1963,28 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             var list = new List<Test>()
             {
-            new Test()
-            {
-            _field1 = decimal.MinValue, _field2 = int.MaxValue, _field3 = byte.MaxValue
-            }
-
-            , new Test(), new Test()
-            {
-            _field1 = null, _field2 = null, _field3 = 0
-            }
-
-            , new Test()
-            {
-            _field1 = decimal.MinValue, _field2 = int.MaxValue, _field3 = 10
-            }
-
-            , }
-
-            ;
+                new Test()
+                {
+                    _field1 = decimal.MinValue,
+                    _field2 = int.MaxValue,
+                    _field3 = byte.MaxValue
+                },
+                new Test(),
+                new Test() { _field1 = null, _field2 = null, _field3 = 0 },
+                new Test() { _field1 = decimal.MinValue, _field2 = int.MaxValue, _field3 = 10 },
+            };
             MyStruct mc = new MyStruct();
             dynamic dy = mc;
             char? c = 'a';
             double[] d = new double[0];
-            var result = list.Where(p => p._field1 == ((decimal?)(mc != dy)).Value && p._field2 == ((int?)(c ^ dy)).Value).Where(p => p._field3 == (d & dy)).Select(p => p._field3).ToArray();
+            var result = list.Where(
+                    p =>
+                        p._field1 == ((decimal?)(mc != dy)).Value
+                        && p._field2 == ((int?)(c ^ dy)).Value
+                )
+                .Where(p => p._field3 == (d & dy))
+                .Select(p => p._field3)
+                .ToArray();
             if (result.Length == 1 && result[0] == byte.MaxValue)
                 return 0;
             return 1;
@@ -2435,8 +1992,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct003.regstrct003
 {
@@ -2466,8 +2021,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct004.regstrct004
 {
     // <Title> Tests regular struct operator used inside #if, #else block.</Title>
@@ -2489,19 +2042,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             MyStruct mc = new MyStruct();
             dynamic dy = mc;
-            MyStruct?[] p1 = new MyStruct?[]
-            {
-            new MyStruct()
-            {
-            Number = 10
-            }
-            }
-
-            ;
+            MyStruct?[] p1 = new MyStruct?[] { new MyStruct() { Number = 10 } };
             double[] result;
 #if c1
-result = p1 < dy;
- #else
+            result = p1 < dy;
+#else
             result = p1 > dy;
 #endif
             if (result.Length == 1 && result[0] == double.MaxValue)
@@ -2511,8 +2056,6 @@ result = p1 < dy;
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct005.regstrct005
 {
@@ -2562,8 +2105,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct006.regstrct006
 {
     // <Title> Tests regular struct operator used in static ctor.</Title>
@@ -2602,8 +2143,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct007.regstrct007
 {
     // <Title> Tests regular struct operator used in variable named dynamic.</Title>
@@ -2635,8 +2174,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct008.regstrct008
 {
     // <Title> Tests regular struct operator used in this-argument of extension method.</Title>
@@ -2658,12 +2195,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             MyStruct mc = new MyStruct();
             dynamic dy = mc;
-            return ((MyEnum[])(dy & new MyStruct[]
-            {
-            mc
-            }
-
-            )).Method();
+            return ((MyEnum[])(dy & new MyStruct[] { mc })).Method();
         }
     }
 
@@ -2678,8 +2210,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct009.regstrct009
 {
@@ -2701,19 +2231,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            MyStruct mc = new MyStruct()
-            {
-                Number = 10
-            }
-
-            ;
+            MyStruct mc = new MyStruct() { Number = 10 };
             dynamic dy = mc;
-            Func<MyStruct?, object[]> func = delegate (MyStruct? p2)
-           {
-               return dy | p2;
-           }
-
-            ;
+            Func<MyStruct?, object[]> func = delegate(MyStruct? p2)
+            {
+                return dy | p2;
+            };
             MyEnum?[] p1 = new MyEnum?[10];
             object[] result = func(p1 / dy);
             if (result.Length != 2)
@@ -2725,8 +2248,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct010.regstrct010
 {
@@ -2748,19 +2269,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            MyStruct mc = new MyStruct()
-            {
-                Number = 10
-            }
-
-            ;
+            MyStruct mc = new MyStruct() { Number = 10 };
             dynamic dy = mc;
-            int[] array = new int[]
-            {
-            int.MaxValue, int.MinValue, int.MinValue, 0
-            }
-
-            ;
+            int[] array = new int[] { int.MaxValue, int.MinValue, int.MinValue, 0 };
             var result = array.Where(p => p == (int)dy).ToArray();
             if (result.Length == 2 && result[0] == int.MinValue && result[1] == int.MinValue)
                 return 0;
@@ -2769,8 +2280,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct011.regstrct011
 {
@@ -2804,8 +2313,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct012.regstrct012
 {
     // <Title> Tests regular struct operator used in field initializer outside of ctor.</Title>
@@ -2836,8 +2343,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct013.regstrct013
 {
     // <Title> Tests regular struct operator used in volatile field initializer.</Title>
@@ -2849,12 +2354,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
     public class Test
     {
-        private static dynamic s_dy = new MyStruct()
-        {
-            Number = 5
-        }
-
-        ;
+        private static dynamic s_dy = new MyStruct() { Number = 5 };
         private volatile byte _result = !s_dy;
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -2872,8 +2372,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct014.regstrct014
 {
@@ -2914,8 +2412,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct016.regstrct016
 {
     // <Title> Tests regular struct operator used in iterator that calls to a lambda expression.</Title>
@@ -2933,22 +2429,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         private static dynamic s_dy = new MyStruct();
         private static dynamic[] s_array = new dynamic[]
         {
-        new MyStruct()
-        {
-        Number = 1
-        }
-
-        , new MyStruct()
-        {
-        Number = 2
-        }
-
-        , new MyStruct()
-        {
-        Number = 3
-        }
+            new MyStruct() { Number = 1 },
+            new MyStruct() { Number = 2 },
+            new MyStruct() { Number = 3 }
         };
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -2978,8 +2462,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct018.regstrct018
 {
@@ -3016,8 +2498,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct019.regstrct019
 {
     // <Title> Tests regular struct operator used in implicitly-typed variable initializer.</Title>
@@ -3037,18 +2517,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            dynamic dy1 = new MyStruct()
-            {
-                Number = 1
-            }
-
-            ;
-            dynamic dy2 = new MyStruct()
-            {
-                Number = 2
-            }
-
-            ;
+            dynamic dy1 = new MyStruct() { Number = 1 };
+            dynamic dy2 = new MyStruct() { Number = 2 };
             var result = dy1 && dy2; //T.false(x) ? x : T.&(x, y)
             if (result.Number == 1)
                 return 0;
@@ -3057,8 +2527,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct020.regstrct020
 {
@@ -3079,18 +2547,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            dynamic dy = new MyStruct()
-            {
-                Number = 100
-            }
-
-            ;
-            dynamic[] array = new dynamic[]
-            {
-            ~dy, +dy
-            }
-
-            ;
+            dynamic dy = new MyStruct() { Number = 100 };
+            dynamic[] array = new dynamic[] { ~dy, +dy };
             if (array.Length != 2)
                 return 1;
             MyStruct m1 = array[0];
@@ -3102,8 +2560,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct021.regstrct021
 {
@@ -3124,18 +2580,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            dynamic dy = new MyStruct()
-            {
-                Number = 100
-            }
-
-            ;
-            var array = new dynamic[]
-            {
-            ~dy, +dy
-            }
-
-            ;
+            dynamic dy = new MyStruct() { Number = 100 };
+            var array = new dynamic[] { ~dy, +dy };
             if (array.Length != 2)
                 return 1;
             MyStruct m1 = array[0];
@@ -3147,8 +2593,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct022.regstrct022
 {
@@ -3179,12 +2623,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             get
             {
-                MyStruct mc = new MyStruct()
-                {
-                    Number = 10
-                }
-
-                ;
+                MyStruct mc = new MyStruct() { Number = 10 };
                 dynamic result = (dynamic)mc;
                 return result;
             }
@@ -3192,8 +2631,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct024.regstrct024
 {
@@ -3214,12 +2651,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            MyStruct mc = new MyStruct()
-            {
-                Number = 10
-            }
-
-            ;
+            MyStruct mc = new MyStruct() { Number = 10 };
             dynamic dy = mc;
             object[] result = -dy;
             if (result.Length == 1 && ((MyStruct)result[0]).Number == 10)
@@ -3229,8 +2661,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct025.regstrct025
 {
@@ -3270,7 +2700,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
                 bool p = false;
                 _result = (MyStruct)p;
             }
-
             get
             {
                 bool? p = null;
@@ -3281,8 +2710,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct026.regstrct026
 {
@@ -3332,8 +2759,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct027.regstrct027
 {
     // <Title> Tests regular struct operator used in ctor.</Title>
@@ -3369,8 +2794,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct028.regstrct028
 {
     // <Title> Tests regular struct operator used in ctor.</Title>
@@ -3404,8 +2827,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct029.regstrct029
 {
@@ -3477,8 +2898,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct030.regstrct030
 {
     // <Title> Tests regular struct operator used in for body.</Title>
@@ -3517,8 +2936,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct031.regstrct031
 {
     // <Title> Tests regular struct operator used in while\do body.</Title>
@@ -3542,15 +2959,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             int i = 0;
             do
             {
-                MyEnum?[] p1 = new MyEnum?[]
-                {
-                null, MyEnum.Third
-                }
-
-                ;
+                MyEnum?[] p1 = new MyEnum?[] { null, MyEnum.Third };
                 array[i] = (MyStruct)p1;
-            }
-            while (++i < array.Length);
+            } while (++i < array.Length);
             i = 0;
             while (true)
             {
@@ -3565,8 +2976,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct032.regstrct032
 {
@@ -3587,12 +2996,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            dynamic dy = new MyStruct()
-            {
-                Number = 10
-            }
-
-            ;
+            dynamic dy = new MyStruct() { Number = 10 };
             int index = 0;
             foreach (var m in (MyClass[])dy)
             {
@@ -3609,8 +3013,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrctoperate.regstrctoperate
 {
     public struct MyClass
@@ -3618,76 +3020,32 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         public int Field;
         public static MyEnum?[] operator -(MyClass p1, dynamic[] p2)
         {
-            return new MyEnum?[]
-            {
-            MyEnum.First, null
-            }
-
-            ;
+            return new MyEnum?[] { MyEnum.First, null };
         }
 
         public static MyStruct operator ^(MyClass p1, float p2)
         {
-            return new MyStruct()
-            {
-                Number = 4
-            }
-
-            ;
+            return new MyStruct() { Number = 4 };
         }
 
         public static MyClass[] operator /(MyClass p1, float? p2)
         {
-            return new MyClass[]
-            {
-            new MyClass()
-            {
-            Field = 1
-            }
-
-            , new MyClass()
-            {
-            Field = 4
-            }
-            }
-
-            ;
+            return new MyClass[] { new MyClass() { Field = 1 }, new MyClass() { Field = 4 } };
         }
 
         public static MyStruct?[] operator <=(MyClass p1, int p2)
         {
-            return new MyStruct?[]
-            {
-            null, new MyStruct()
-            {
-            Number = int.MinValue
-            }
-            }
-
-            ;
+            return new MyStruct?[] { null, new MyStruct() { Number = int.MinValue } };
         }
 
         public static MyStruct?[] operator >=(MyClass p1, int p2)
         {
-            return new MyStruct?[]
-            {
-            null, new MyStruct()
-            {
-            Number = int.MaxValue
-            }
-            }
-
-            ;
+            return new MyStruct?[] { null, new MyStruct() { Number = int.MaxValue } };
         }
 
         public static MyClass operator >>(MyClass p1, int p2)
         {
-            return new MyClass()
-            {
-                Field = int.MinValue
-            }
-
-            ;
+            return new MyClass() { Field = int.MinValue };
         }
 
         public static bool operator +(MyClass p1, int?[] p2)
@@ -3702,12 +3060,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static decimal[] operator |(bool? p1, MyClass p2)
         {
-            return new decimal[]
-            {
-            decimal.MaxValue
-            }
-
-            ;
+            return new decimal[] { decimal.MaxValue };
         }
 
         public static MyEnum? operator <(byte?[] p1, MyClass p2)
@@ -3732,12 +3085,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static decimal[] operator -(dynamic p1, MyClass p2)
         {
-            return new decimal[]
-            {
-            decimal.MaxValue
-            }
-
-            ;
+            return new decimal[] { decimal.MaxValue };
         }
 
         public static string operator *(dynamic[] p1, MyClass p2)
@@ -3747,35 +3095,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyStruct[] operator |(MyClass p1, short[] p2)
         {
-            return new MyStruct[]
-            {
-            new MyStruct()
-            {
-            Number = 3
-            }
-            }
-
-            ;
+            return new MyStruct[] { new MyStruct() { Number = 3 } };
         }
 
         public static dynamic[] operator &(MyClass p1, string p2)
         {
-            return new dynamic[]
-            {
-            p1
-            }
-
-            ;
+            return new dynamic[] { p1 };
         }
 
         public static int?[] operator -(MyClass p1, ulong[] p2)
         {
-            return new int?[]
-            {
-            null, int.MinValue
-            }
-
-            ;
+            return new int?[] { null, int.MinValue };
         }
 
         public static bool operator <(MyClass p1, int p2)
@@ -3805,12 +3135,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyClass operator ++(MyClass p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
         public static bool operator true(MyClass p1)
@@ -3830,131 +3155,73 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static dynamic[] operator -(MyClass p1)
         {
-            return new dynamic[]
-            {
-            p1
-            }
-
-            ;
+            return new dynamic[] { p1 };
         }
 
         public static MyClass operator --(MyClass p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
         public static explicit operator MyClass(char p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
         public static explicit operator MyClass(char? p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
         public static implicit operator MyClass(double[] p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
         public static implicit operator MyClass(dynamic[] p1)
         {
-            return new MyClass()
-            {
-                Field = 4
-            }
-
-            ;
+            return new MyClass() { Field = 4 };
         }
 
-        public static implicit operator float (MyClass p1)
+        public static implicit operator float(MyClass p1)
         {
             return float.Epsilon;
         }
 
-        public static implicit operator int?[] (MyClass p1)
+        public static implicit operator int?[](MyClass p1)
         {
             return null;
         }
 
         // public static implicit operator dynamic(MyClass p1) { return p1; }
-        public static implicit operator MyStruct[] (MyClass p1)
+        public static implicit operator MyStruct[](MyClass p1)
         {
-            return new MyStruct[]
-            {
-            new MyStruct()
-            {
-            Number = 4
-            }
-            }
-
-            ;
+            return new MyStruct[] { new MyStruct() { Number = 4 } };
         }
 
-        public static implicit operator int? (MyClass p1)
+        public static implicit operator int?(MyClass p1)
         {
             return int.MinValue;
         }
 
-        public static explicit operator object[] (MyClass p1)
+        public static explicit operator object[](MyClass p1)
         {
-            return new object[]
-            {
-            p1
-            }
-
-            ;
+            return new object[] { p1 };
         }
 
-        public static explicit operator MyEnum[] (MyClass p1)
+        public static explicit operator MyEnum[](MyClass p1)
         {
-            return new MyEnum[]
-            {
-            MyEnum.First
-            }
-
-            ;
+            return new MyEnum[] { MyEnum.First };
         }
 
-        public static implicit operator short[] (MyClass p1)
+        public static implicit operator short[](MyClass p1)
         {
-            return new short[]
-            {
-            short.MaxValue
-            }
-
-            ;
+            return new short[] { short.MaxValue };
         }
 
         public static explicit operator MyClass(MyStruct?[] p1)
         {
-            return new MyClass()
-            {
-                Field = 3
-            }
-
-            ;
+            return new MyClass() { Field = 3 };
         }
     }
 
@@ -3985,12 +3252,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         // ---
         public static MyEnum?[] operator <<(MyStruct p1, int p2)
         {
-            return new MyEnum?[]
-            {
-            null, MyEnum.First
-            }
-
-            ;
+            return new MyEnum?[] { null, MyEnum.First };
         }
 
         public static MyEnum? operator +(MyStruct p1, MyClass[] p2)
@@ -4005,12 +3267,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyClass operator |(MyStruct p1, MyEnum[] p2)
         {
-            return new MyClass()
-            {
-                Field = int.MinValue
-            }
-
-            ;
+            return new MyClass() { Field = int.MinValue };
         }
 
         public static MyEnum operator +(char p1, MyStruct p2)
@@ -4030,52 +3287,27 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static MyStruct? operator /(MyEnum?[] p1, MyStruct p2)
         {
-            return new MyStruct
-            {
-                Number = 5
-            }
-
-            ;
+            return new MyStruct { Number = 5 };
         }
 
         public static double[] operator <(MyStruct?[] p1, MyStruct p2)
         {
-            return new double[]
-            {
-            double.MinValue
-            }
-
-            ;
+            return new double[] { double.MinValue };
         }
 
         public static double[] operator >(MyStruct?[] p1, MyStruct p2)
         {
-            return new double[]
-            {
-            double.MaxValue
-            }
-
-            ;
+            return new double[] { double.MaxValue };
         }
 
         public static object[] operator |(MyStruct p1, MyStruct? p2)
         {
-            return new object[]
-            {
-            p1, p2
-            }
-
-            ;
+            return new object[] { p1, p2 };
         }
 
         public static MyEnum[] operator &(MyStruct p1, MyStruct[] p2)
         {
-            return new MyEnum[]
-            {
-            MyEnum.First, MyEnum.Third
-            }
-
-            ;
+            return new MyEnum[] { MyEnum.First, MyEnum.Third };
         }
 
         public static float? operator %(MyStruct p1, object[] p2)
@@ -4085,22 +3317,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static object[] operator -(MyStruct p1)
         {
-            return new object[]
-            {
-            p1
-            }
-
-            ;
+            return new object[] { p1 };
         }
 
         public static MyStruct operator ++(MyStruct p1)
         {
-            return new MyStruct()
-            {
-                Number = 4
-            }
-
-            ;
+            return new MyStruct() { Number = 4 };
         }
 
         public static dynamic operator ~(MyStruct p1)
@@ -4130,119 +3352,66 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static implicit operator MyStruct(bool p1)
         {
-            return new MyStruct()
-            {
-                Number = 3
-            }
-
-            ;
+            return new MyStruct() { Number = 3 };
         }
 
         public static implicit operator MyStruct(bool? p1)
         {
-            return new MyStruct()
-            {
-                Number = 4
-            }
-
-            ;
+            return new MyStruct() { Number = 4 };
         }
 
         public static implicit operator MyStruct(byte p1)
         {
-            return new MyStruct()
-            {
-                Number = 5
-            }
-
-            ;
+            return new MyStruct() { Number = 5 };
         }
 
         public static implicit operator MyStruct(byte?[] p1)
         {
-            return new MyStruct()
-            {
-                Number = 6
-            }
-
-            ;
+            return new MyStruct() { Number = 6 };
         }
 
         public static explicit operator MyStruct(decimal? p1)
         {
-            return new MyStruct()
-            {
-                Number = 7
-            }
-
-            ;
+            return new MyStruct() { Number = 7 };
         }
 
         public static explicit operator MyStruct(decimal[] p1)
         {
-            return new MyStruct()
-            {
-                Number = 8
-            }
-
-            ;
+            return new MyStruct() { Number = 8 };
         }
 
         public static implicit operator MyStruct(MyEnum? p1)
         {
-            return new MyStruct()
-            {
-                Number = 9
-            }
-
-            ;
+            return new MyStruct() { Number = 9 };
         }
 
         public static implicit operator MyStruct(MyEnum?[] p1)
         {
-            return new MyStruct()
-            {
-                Number = 10
-            }
-
-            ;
+            return new MyStruct() { Number = 10 };
         }
 
-        public static explicit operator MyClass[] (MyStruct p1)
+        public static explicit operator MyClass[](MyStruct p1)
         {
-            return new MyClass[]
-            {
-            new MyClass()
-            {
-            Field = 3
-            }
-            }
-
-            ;
+            return new MyClass[] { new MyClass() { Field = 3 } };
         }
 
-        public static implicit operator ulong[] (MyStruct p1)
+        public static implicit operator ulong[](MyStruct p1)
         {
-            return new ulong[]
-            {
-            ulong.MaxValue
-            }
-
-            ;
+            return new ulong[] { ulong.MaxValue };
         }
 
-        public static explicit operator int (MyStruct p1)
+        public static explicit operator int(MyStruct p1)
         {
             return int.MinValue;
         }
 
-        public static implicit operator string (MyStruct p1)
+        public static implicit operator string(MyStruct p1)
         {
             return string.Empty;
         }
 
         // public static explicit operator dynamic(MyStruct p1) { return p1; }
-        public static implicit operator float? (MyStruct p1)
+        public static implicit operator float?(MyStruct p1)
         {
             return null;
         }
@@ -4252,14 +3421,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             return MyEnum.First;
         }
 
-        public static implicit operator dynamic[] (MyStruct p1)
+        public static implicit operator dynamic[](MyStruct p1)
         {
-            return new dynamic[]
-            {
-            p1
-            }
-
-            ;
+            return new dynamic[] { p1 };
         }
     }
 
@@ -4270,8 +3434,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         Third = 3
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct023.regstrct023
 {
@@ -4305,20 +3467,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             set
             {
-                MyStruct mc = new MyStruct()
-                {
-                    Number = 10
-                }
-
-                ;
+                MyStruct mc = new MyStruct() { Number = 10 };
                 _result = mc;
             }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.void001.void001
 {
@@ -4355,8 +3510,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message))
-                {
+                if (
+                    ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message)
+                ) {
                     flag = 0;
                 }
             }
@@ -4370,8 +3526,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message))
-                {
+                if (
+                    ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message)
+                ) {
                     flag = 0;
                 }
             }
@@ -4384,8 +3541,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message))
-                {
+                if (
+                    ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message)
+                ) {
                     flag = 0;
                 }
             }
@@ -4398,8 +3556,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message))
-                {
+                if (
+                    ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message)
+                ) {
                     flag = 0;
                 }
             }
@@ -4412,8 +3571,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message))
-                {
+                if (
+                    ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message)
+                ) {
                     flag = 0;
                 }
             }
@@ -4422,13 +3582,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             return result;
         }
 
-        public static void Foo(string x)
-        {
-        }
+        public static void Foo(string x) { }
 
-        public void Foo2()
-        {
-        }
+        public void Foo2() { }
     }
     // </Code>
 }

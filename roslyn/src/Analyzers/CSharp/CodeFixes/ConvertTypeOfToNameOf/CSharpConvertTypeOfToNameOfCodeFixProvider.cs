@@ -13,23 +13,40 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertTypeOfToNameOf
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ConvertTypeOfToNameOf), Shared]
-    internal class CSharpConvertTypeOfToNameOfCodeFixProvider : AbstractConvertTypeOfToNameOfCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ConvertTypeOfToNameOf
+        ),
+        Shared
+    ]
+    internal class CSharpConvertTypeOfToNameOfCodeFixProvider
+        : AbstractConvertTypeOfToNameOfCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpConvertTypeOfToNameOfCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpConvertTypeOfToNameOfCodeFixProvider() { }
 
-        protected override string GetCodeFixTitle()
-            => CSharpCodeFixesResources.Convert_typeof_to_nameof;
+        protected override string GetCodeFixTitle() =>
+            CSharpCodeFixesResources.Convert_typeof_to_nameof;
 
-        protected override SyntaxNode? GetSymbolTypeExpression(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken)
-        {
-            if (node is MemberAccessExpressionSyntax { Expression: TypeOfExpressionSyntax typeOfExpression })
-            {
-                var typeSymbol = model.GetSymbolInfo(typeOfExpression.Type, cancellationToken).Symbol.GetSymbolType();
+        protected override SyntaxNode? GetSymbolTypeExpression(
+            SemanticModel model,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) {
+            if (
+                node is MemberAccessExpressionSyntax
+                {
+                    Expression: TypeOfExpressionSyntax typeOfExpression
+                }
+            ) {
+                var typeSymbol = model.GetSymbolInfo(typeOfExpression.Type, cancellationToken)
+                    .Symbol.GetSymbolType();
                 return typeSymbol?.GenerateTypeSyntax();
             }
 

@@ -20,9 +20,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public IStreamingProgressTracker ProgressTracker { get; } = new NoOpProgressTracker();
 
-        private NoOpStreamingFindReferencesProgress()
-        {
-        }
+        private NoOpStreamingFindReferencesProgress() { }
 
 #pragma warning disable IDE0060 // Remove unused parameter
         public static Task ReportProgressAsync(int current, int maximum) => Task.CompletedTask;
@@ -31,7 +29,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public ValueTask OnCompletedAsync() => default;
         public ValueTask OnStartedAsync() => default;
         public ValueTask OnDefinitionFoundAsync(SymbolGroup group) => default;
-        public ValueTask OnReferenceFoundAsync(SymbolGroup group, ISymbol symbol, ReferenceLocation location) => default;
+        public ValueTask OnReferenceFoundAsync(
+            SymbolGroup group,
+            ISymbol symbol,
+            ReferenceLocation location
+        ) => default;
         public ValueTask OnFindInDocumentStartedAsync(Document document) => default;
         public ValueTask OnFindInDocumentCompletedAsync(Document document) => default;
 

@@ -35,8 +35,8 @@ namespace Microsoft.AspNetCore.Rewrite
             RequestDelegate next,
             IWebHostEnvironment hostingEnvironment,
             ILoggerFactory loggerFactory,
-            IOptions<RewriteOptions> options)
-        {
+            IOptions<RewriteOptions> options
+        ) {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -79,18 +79,23 @@ namespace Microsoft.AspNetCore.Rewrite
                 switch (rewriteContext.Result)
                 {
                     case RuleResult.ContinueRules:
-                        _logger.RewriteMiddlewareRequestContinueResults(context.Request.GetEncodedUrl());
+                        _logger.RewriteMiddlewareRequestContinueResults(
+                            context.Request.GetEncodedUrl()
+                        );
                         break;
                     case RuleResult.EndResponse:
                         _logger.RewriteMiddlewareRequestResponseComplete(
                             context.Response.Headers[HeaderNames.Location],
-                            context.Response.StatusCode);
+                            context.Response.StatusCode
+                        );
                         return Task.CompletedTask;
                     case RuleResult.SkipRemainingRules:
                         _logger.RewriteMiddlewareRequestStopRules(context.Request.GetEncodedUrl());
                         return _next(context);
                     default:
-                        throw new ArgumentOutOfRangeException($"Invalid rule termination {rewriteContext.Result}");
+                        throw new ArgumentOutOfRangeException(
+                            $"Invalid rule termination {rewriteContext.Result}"
+                        );
                 }
             }
             return _next(context);

@@ -24,25 +24,26 @@ namespace Internal.Cryptography.Pal
         public X509ContentType GetCertContentType(ReadOnlySpan<byte> rawData)
         {
             ContentType contentType;
-
             unsafe
             {
                 fixed (byte* pRawData = rawData)
                 {
                     CRYPTOAPI_BLOB certBlob = new CRYPTOAPI_BLOB(rawData.Length, pRawData);
-                    if (!Interop.crypt32.CryptQueryObject(
-                        CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
-                        &certBlob,
-                        ExpectedContentTypeFlags.CERT_QUERY_CONTENT_FLAG_ALL,
-                        ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
-                        0,
-                        IntPtr.Zero,
-                        out contentType,
-                        IntPtr.Zero,
-                        IntPtr.Zero,
-                        IntPtr.Zero,
-                        IntPtr.Zero))
-                    {
+                    if (
+                        !Interop.crypt32.CryptQueryObject(
+                            CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
+                            &certBlob,
+                            ExpectedContentTypeFlags.CERT_QUERY_CONTENT_FLAG_ALL,
+                            ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
+                            0,
+                            IntPtr.Zero,
+                            out contentType,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            IntPtr.Zero
+                        )
+                    ) {
                         throw Marshal.GetLastWin32Error().ToCryptographicException();
                     }
                 }
@@ -54,24 +55,25 @@ namespace Internal.Cryptography.Pal
         public X509ContentType GetCertContentType(string fileName)
         {
             ContentType contentType;
-
             unsafe
             {
                 fixed (char* pFileName = fileName)
                 {
-                    if (!Interop.crypt32.CryptQueryObject(
-                        CertQueryObjectType.CERT_QUERY_OBJECT_FILE,
-                        pFileName,
-                        ExpectedContentTypeFlags.CERT_QUERY_CONTENT_FLAG_ALL,
-                        ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
-                        0,
-                        IntPtr.Zero,
-                        out contentType,
-                        IntPtr.Zero,
-                        IntPtr.Zero,
-                        IntPtr.Zero,
-                        IntPtr.Zero))
-                    {
+                    if (
+                        !Interop.crypt32.CryptQueryObject(
+                            CertQueryObjectType.CERT_QUERY_OBJECT_FILE,
+                            pFileName,
+                            ExpectedContentTypeFlags.CERT_QUERY_CONTENT_FLAG_ALL,
+                            ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
+                            0,
+                            IntPtr.Zero,
+                            out contentType,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            IntPtr.Zero
+                        )
+                    ) {
                         throw Marshal.GetLastWin32Error().ToCryptographicException();
                     }
                 }

@@ -11,8 +11,10 @@ namespace System.Reflection.TypeLoading.Ecma
     /// </summary>
     internal sealed class EcmaGenericMethodParameterType : EcmaGenericParameterType
     {
-        internal EcmaGenericMethodParameterType(GenericParameterHandle handle, EcmaModule module)
-            : base(handle, module)
+        internal EcmaGenericMethodParameterType(
+            GenericParameterHandle handle,
+            EcmaModule module
+        ) : base(handle, module)
         {
             Debug.Assert(!handle.IsNil);
         }
@@ -20,11 +22,17 @@ namespace System.Reflection.TypeLoading.Ecma
         public sealed override bool IsGenericTypeParameter => false;
         public sealed override bool IsGenericMethodParameter => true;
 
-        protected sealed override RoType ComputeDeclaringType() => GetRoDeclaringMethod().GetRoDeclaringType();
+        protected sealed override RoType ComputeDeclaringType() =>
+            GetRoDeclaringMethod().GetRoDeclaringType();
 
         public sealed override MethodBase DeclaringMethod => GetRoDeclaringMethod();
-        private RoMethod GetRoDeclaringMethod() => _lazyDeclaringMethod ?? (_lazyDeclaringMethod = ComputeDeclaringMethod());
-        private RoMethod ComputeDeclaringMethod() => ((MethodDefinitionHandle)(GenericParameter.Parent)).ResolveMethod<RoMethod>(GetEcmaModule(), default);
+        private RoMethod GetRoDeclaringMethod() =>
+            _lazyDeclaringMethod ?? (_lazyDeclaringMethod = ComputeDeclaringMethod());
+        private RoMethod ComputeDeclaringMethod() =>
+            ((MethodDefinitionHandle)(GenericParameter.Parent)).ResolveMethod<RoMethod>(
+                GetEcmaModule(),
+                default
+            );
         private volatile RoMethod? _lazyDeclaringMethod;
 
         protected sealed override TypeContext TypeContext => GetRoDeclaringMethod().TypeContext;

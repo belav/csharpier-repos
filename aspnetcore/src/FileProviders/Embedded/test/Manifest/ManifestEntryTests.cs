@@ -51,7 +51,10 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
         public void TraversingWithDotDot_ReturnsParent()
         {
             // Arrange
-            var childDirectory = ManifestDirectory.CreateDirectory("b", Array.Empty<ManifestEntry>());
+            var childDirectory = ManifestDirectory.CreateDirectory(
+                "b",
+                Array.Empty<ManifestEntry>()
+            );
             var directory = ManifestDirectory.CreateDirectory("a", new[] { childDirectory });
 
             // Act
@@ -78,11 +81,19 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
         public void ScopingAFolderAndTryingToGetAScopedFile_ReturnsSinkDirectory()
         {
             // Arrange
-            var directory = ManifestDirectory.CreateRootDirectory(new[] {
-                ManifestDirectory.CreateDirectory("a",
-                    new[] { new ManifestFile("test1.txt", "text.txt") }),
-                ManifestDirectory.CreateDirectory("b",
-                    new[] { new ManifestFile("test2.txt", "test2.txt") }) });
+            var directory = ManifestDirectory.CreateRootDirectory(
+                new[]
+                {
+                    ManifestDirectory.CreateDirectory(
+                        "a",
+                        new[] { new ManifestFile("test1.txt", "text.txt") }
+                    ),
+                    ManifestDirectory.CreateDirectory(
+                        "b",
+                        new[] { new ManifestFile("test2.txt", "test2.txt") }
+                    )
+                }
+            );
 
             var newRoot = ((ManifestDirectory)directory.Traverse("a")).ToRootDirectory();
 

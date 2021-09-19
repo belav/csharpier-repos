@@ -12,8 +12,12 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
     /// </summary>
     internal sealed class SuppressOperation
     {
-        internal SuppressOperation(SyntaxToken startToken, SyntaxToken endToken, TextSpan textSpan, SuppressOption option)
-        {
+        internal SuppressOperation(
+            SyntaxToken startToken,
+            SyntaxToken endToken,
+            TextSpan textSpan,
+            SuppressOption option
+        ) {
             Contract.ThrowIfTrue(textSpan.Start < 0 || textSpan.Length < 0);
             Contract.ThrowIfTrue(startToken.RawKind == 0);
             Contract.ThrowIfTrue(endToken.RawKind == 0);
@@ -32,8 +36,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
         public SyntaxToken EndToken { get; }
 
 #if DEBUG
-        public override string ToString()
-            => $"Suppress {TextSpan} from '{StartToken}' to '{EndToken}' with '{Option}'";
+        public override string ToString() =>
+            $"Suppress {TextSpan} from '{StartToken}' to '{EndToken}' with '{Option}'";
 #endif
     }
 }

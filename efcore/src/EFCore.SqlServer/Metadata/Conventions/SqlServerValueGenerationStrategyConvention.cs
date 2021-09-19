@@ -12,7 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that configures the default model <see cref="SqlServerValueGenerationStrategy" /> as
     ///     <see cref="SqlServerValueGenerationStrategy.IdentityColumn" />.
     /// </summary>
-    public class SqlServerValueGenerationStrategyConvention : IModelInitializedConvention, IModelFinalizingConvention
+    public class SqlServerValueGenerationStrategyConvention
+        : IModelInitializedConvention,
+          IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerValueGenerationStrategyConvention" />.
@@ -21,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
         public SqlServerValueGenerationStrategyConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-        {
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) {
             Dependencies = dependencies;
         }
 
@@ -35,16 +37,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
-        {
-            modelBuilder.HasValueGenerationStrategy(SqlServerValueGenerationStrategy.IdentityColumn);
+            IConventionContext<IConventionModelBuilder> context
+        ) {
+            modelBuilder.HasValueGenerationStrategy(
+                SqlServerValueGenerationStrategy.IdentityColumn
+            );
         }
 
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
-        {
+            IConventionContext<IConventionModelBuilder> context
+        ) {
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 foreach (var property in entityType.GetDeclaredProperties())
@@ -53,11 +57,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     var table = entityType.GetTableName();
                     if (table != null)
                     {
-                        var storeObject = StoreObjectIdentifier.Table(table, entityType.GetSchema());
-                        strategy = property.GetValueGenerationStrategy(storeObject, Dependencies.TypeMappingSource);
-                        if (strategy == SqlServerValueGenerationStrategy.None
-                            && !IsStrategyNoneNeeded(property, storeObject))
-                        {
+                        var storeObject = StoreObjectIdentifier.Table(
+                            table,
+                            entityType.GetSchema()
+                        );
+                        strategy = property.GetValueGenerationStrategy(
+                            storeObject,
+                            Dependencies.TypeMappingSource
+                        );
+                        if (
+                            strategy == SqlServerValueGenerationStrategy.None
+                            && !IsStrategyNoneNeeded(property, storeObject)
+                        ) {
                             strategy = null;
                         }
                     }
@@ -66,11 +77,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         var view = entityType.GetViewName();
                         if (view != null)
                         {
-                            var storeObject = StoreObjectIdentifier.View(view, entityType.GetViewSchema());
-                            strategy = property.GetValueGenerationStrategy(storeObject, Dependencies.TypeMappingSource);
-                            if (strategy == SqlServerValueGenerationStrategy.None
-                                && !IsStrategyNoneNeeded(property, storeObject))
-                            {
+                            var storeObject = StoreObjectIdentifier.View(
+                                view,
+                                entityType.GetViewSchema()
+                            );
+                            strategy = property.GetValueGenerationStrategy(
+                                storeObject,
+                                Dependencies.TypeMappingSource
+                            );
+                            if (
+                                strategy == SqlServerValueGenerationStrategy.None
+                                && !IsStrategyNoneNeeded(property, storeObject)
+                            ) {
                                 strategy = null;
                             }
                         }
@@ -86,16 +104,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             bool IsStrategyNoneNeeded(IReadOnlyProperty property, StoreObjectIdentifier storeObject)
             {
-                if (property.ValueGenerated == ValueGenerated.OnAdd
+                if (
+                    property.ValueGenerated == ValueGenerated.OnAdd
                     && property.GetDefaultValue(storeObject) == null
                     && property.GetDefaultValueSql(storeObject) == null
                     && property.GetComputedColumnSql(storeObject) == null
-                    && property.DeclaringEntityType.Model.GetValueGenerationStrategy() == SqlServerValueGenerationStrategy.IdentityColumn)
-                {
-                    var providerClrType = (property.GetValueConverter()
-                        ?? (property.FindRelationalTypeMapping(storeObject)
-                            ?? Dependencies.TypeMappingSource.FindMapping((IProperty)property))?.Converter)
-                        ?.ProviderClrType.UnwrapNullableType();
+                    && property.DeclaringEntityType.Model.GetValueGenerationStrategy()
+                        == SqlServerValueGenerationStrategy.IdentityColumn
+                ) {
+                    var providerClrType = (
+                        property.GetValueConverter()
+                        ?? (
+                            property.FindRelationalTypeMapping(storeObject)
+                            ?? Dependencies.TypeMappingSource.FindMapping((IProperty)property)
+                        )?.Converter
+                    )?.ProviderClrType.UnwrapNullableType();
 
                     return providerClrType != null
                         && (providerClrType.IsInteger() || providerClrType == typeof(decimal));

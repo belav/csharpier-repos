@@ -18,10 +18,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         {
             private static readonly char[] LineSeparators = { '\r', '\n' };
 
-            public Verifier(InteractiveWindow_OutOfProc interactiveWindow, VisualStudioInstance instance)
-                : base(interactiveWindow, instance)
-            {
-            }
+            public Verifier(
+                InteractiveWindow_OutOfProc interactiveWindow,
+                VisualStudioInstance instance
+            ) : base(interactiveWindow, instance) { }
 
             public void LastReplInput(string expectedReplInput)
             {
@@ -32,7 +32,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             public void ReplPromptConsistency(string prompt, string output)
             {
                 var replText = _textViewWindow.GetReplText();
-                var replTextLines = replText.Split(LineSeparators, StringSplitOptions.RemoveEmptyEntries);
+                var replTextLines = replText.Split(
+                    LineSeparators,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
 
                 foreach (var replTextLine in replTextLines)
                 {
@@ -50,7 +53,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
                     if (promptIndex >= 0)
                     {
                         Assert.StartsWith(prompt + "#prompt", replTextLine);
-                        Assert.False(replTextLine.IndexOf(prompt, promptIndex + prompt.Length) >= 0);
+                        Assert.False(
+                            replTextLine.IndexOf(prompt, promptIndex + prompt.Length) >= 0
+                        );
                     }
 
                     // There must be no output on a prompt line.

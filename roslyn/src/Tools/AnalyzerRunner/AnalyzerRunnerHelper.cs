@@ -19,7 +19,9 @@ namespace AnalyzerRunner
         {
             // QueryVisualStudioInstances returns Visual Studio installations on .NET Framework, and .NET Core SDK
             // installations on .NET Core. We use the one with the most recent version.
-            var msBuildInstance = MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(x => x.Version).First();
+            var msBuildInstance = MSBuildLocator.QueryVisualStudioInstances()
+                .OrderByDescending(x => x.Version)
+                .First();
 
 #if NETCOREAPP
             // Since we do not inherit msbuild.deps.json when referencing the SDK copy
@@ -46,7 +48,10 @@ namespace AnalyzerRunner
                 { "LangVersion", "latest" },
             };
 
-            return MSBuildWorkspace.Create(properties, AnalyzerRunnerMefHostServices.DefaultServices);
+            return MSBuildWorkspace.Create(
+                properties,
+                AnalyzerRunnerMefHostServices.DefaultServices
+            );
         }
     }
 }

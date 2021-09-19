@@ -9,10 +9,20 @@ namespace Internal.Cryptography
 {
     internal static class AesBCryptModes
     {
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCbc = OpenAesAlgorithm(Cng.BCRYPT_CHAIN_MODE_CBC);
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgEcb = OpenAesAlgorithm(Cng.BCRYPT_CHAIN_MODE_ECB);
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCfb128 = OpenAesAlgorithm(Cng.BCRYPT_CHAIN_MODE_CFB, 16);
-        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCfb8 = OpenAesAlgorithm(Cng.BCRYPT_CHAIN_MODE_CFB, 1);
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCbc = OpenAesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_CBC
+        );
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgEcb = OpenAesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_ECB
+        );
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCfb128 = OpenAesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_CFB,
+            16
+        );
+        private static readonly Lazy<SafeAlgorithmHandle> s_hAlgCfb8 = OpenAesAlgorithm(
+            Cng.BCRYPT_CHAIN_MODE_CFB,
+            1
+        );
 
         internal static SafeAlgorithmHandle GetSharedHandle(CipherMode cipherMode, int feedback) =>
             // Windows 8 added support to set the CipherMode value on a key,
@@ -26,33 +36,43 @@ namespace Internal.Cryptography
                 _ => throw new NotSupportedException(),
             };
 
-        internal static Lazy<SafeAlgorithmHandle> OpenAesAlgorithm(string cipherMode, int feedback = 0)
-        {
-            return new Lazy<SafeAlgorithmHandle>(() =>
-            {
-                SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(Cng.BCRYPT_AES_ALGORITHM, null,
-                    Cng.OpenAlgorithmProviderFlags.NONE);
-                hAlg.SetCipherMode(cipherMode);
-
-                // feedback is in bytes!
-                // The default feedback size is 1 (CFB8) on Windows. Do not set the CNG property
-                // if we would be setting it to the default. Windows 7 only supports CFB8 and
-                // does not permit setting the feedback size, so we don't call the property
-                // setter at all in that case.
-                if (feedback > 0 && feedback != 1)
+        internal static Lazy<SafeAlgorithmHandle> OpenAesAlgorithm(
+            string cipherMode,
+            int feedback = 0
+        ) {
+            return new Lazy<SafeAlgorithmHandle>(
+                () =>
                 {
-                    try
-                    {
-                        hAlg.SetFeedbackSize(feedback);
-                    }
-                    catch (CryptographicException ex)
-                    {
-                        throw new CryptographicException(SR.Cryptography_FeedbackSizeNotSupported, ex);
-                    }
-                }
+                    SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(
+                        Cng.BCRYPT_AES_ALGORITHM,
+                        null,
+                        Cng.OpenAlgorithmProviderFlags.NONE
+                    );
+                    hAlg.SetCipherMode(cipherMode);
 
-                return hAlg;
-            });
+                    // feedback is in bytes!
+                    // The default feedback size is 1 (CFB8) on Windows. Do not set the CNG property
+                    // if we would be setting it to the default. Windows 7 only supports CFB8 and
+                    // does not permit setting the feedback size, so we don't call the property
+                    // setter at all in that case.
+                    if (feedback > 0 && feedback != 1)
+                    {
+                        try
+                        {
+                            hAlg.SetFeedbackSize(feedback);
+                        }
+                        catch (CryptographicException ex)
+                        {
+                            throw new CryptographicException(
+                                SR.Cryptography_FeedbackSizeNotSupported,
+                                ex
+                            );
+                        }
+                    }
+
+                    return hAlg;
+                }
+            );
         }
     }
 }

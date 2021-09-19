@@ -78,7 +78,6 @@ namespace BenchmarksGame
                             break;
                         }
                     }
-
                 } while (--j > 0);
 
                 res = (res << 2) + b;
@@ -98,7 +97,13 @@ namespace BenchmarksGame
             Console.Out.Write("P4\n{0} {0}\n", size);
             Console.OpenStandardOutput().Write(data, 0, dataLength);
 
-            return MatchesChecksum(data, dataLength, "3B-EF-65-05-1D-39-7F-9B-96-8D-EF-98-BF-06-CE-74") ? 100 : -1;
+            return MatchesChecksum(
+                data,
+                dataLength,
+                "3B-EF-65-05-1D-39-7F-9B-96-8D-EF-98-BF-06-CE-74"
+            )
+                ? 100
+                : -1;
         }
 
         // Commented out data left in source to provide checksums for each case
@@ -116,9 +121,12 @@ namespace BenchmarksGame
         {
             byte[] bytes = null;
 
-            Benchmark.Iterate(() => {
-                bytes = DoBench(size, lineLength);
-            });
+            Benchmark.Iterate(
+                () =>
+                {
+                    bytes = DoBench(size, lineLength);
+                }
+            );
 
             Assert.True(MatchesChecksum(bytes, size * lineLength, checksum));
         }
@@ -140,8 +148,7 @@ namespace BenchmarksGame
             var Crb = new double[adjustedSize];
             var Cib = new double[adjustedSize];
 
-            fixed (double* pCrb = &Crb[0])
-            fixed (double* pCib = &Cib[0])
+            fixed (double* pCrb = &Crb[0])fixed (double* pCib = &Cib[0])
             {
                 var invN = new Vector<double>(2.0 / size);
 
@@ -154,23 +161,17 @@ namespace BenchmarksGame
                 {
                     // Software implementation should hit this path too
 
-                    value = new Vector<double>(new double[] {
-                        0, 1
-                    });
+                    value = new Vector<double>(new double[] { 0, 1 });
                 }
                 else if (Vector<double>.Count == 4)
                 {
-                    value = new Vector<double>(new double[] {
-                        0, 1, 2, 3
-                    });
+                    value = new Vector<double>(new double[] { 0, 1, 2, 3 });
                 }
                 else
                 {
                     // No hardware supports about 'Count == 8' today
 
-                    value = new Vector<double>(new double[] {
-                        0, 1, 2, 3, 4, 5, 6, 7
-                    });
+                    value = new Vector<double>(new double[] { 0, 1, 2, 3, 4, 5, 6, 7 });
                 }
 
                 for (var i = 0; i < size; i += Vector<double>.Count)
@@ -191,14 +192,19 @@ namespace BenchmarksGame
                 // C# doesn't let us pass a pinned variable to a lambda directly
                 var _Crb = pCrb;
 
-                Parallel.For(0, size, y => {
-                    var offset = y * lineLength;
-
-                    for (var x = 0; x < lineLength; x++)
+                Parallel.For(
+                    0,
+                    size,
+                    y =>
                     {
-                        data[offset + x] = GetByte(_Crb, Cib[y], x * 8, y);
+                        var offset = y * lineLength;
+
+                        for (var x = 0; x < lineLength; x++)
+                        {
+                            data[offset + x] = GetByte(_Crb, Cib[y], x * 8, y);
+                        }
                     }
-                });
+                );
             }
 
             return data;

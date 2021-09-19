@@ -47,7 +47,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
         public void Example()
         {
             #region Usage
-            string xml = @"<?xml version='1.0' standalone='no'?>
+            string xml =
+                @"<?xml version='1.0' standalone='no'?>
             <root>
               <person id='1'>
               <name>Alan</name>
@@ -87,7 +88,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
             // }
             #endregion
 
-            Assert.AreEqual(@"{""?xml"":{""@version"":""1.0"",""@standalone"":""no""},""root"":{""person"":[{""@id"":""1"",""name"":""Alan"",""url"":""http://www.google.com""},{""@id"":""2"",""name"":""Louis"",""url"":""http://www.yahoo.com""}]}}", json);
+            Assert.AreEqual(
+                @"{""?xml"":{""@version"":""1.0"",""@standalone"":""no""},""root"":{""person"":[{""@id"":""1"",""name"":""Alan"",""url"":""http://www.google.com""},{""@id"":""2"",""name"":""Louis"",""url"":""http://www.yahoo.com""}]}}",
+                json
+            );
         }
     }
 }

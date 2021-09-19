@@ -16,8 +16,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.GoToBase
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGoToBaseService()
-        {
-        }
+        public CSharpGoToBaseService() { }
     }
 }

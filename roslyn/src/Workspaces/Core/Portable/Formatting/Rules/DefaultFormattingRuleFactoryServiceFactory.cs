@@ -11,31 +11,36 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Formatting.Rules
 {
-    [ExportWorkspaceServiceFactory(typeof(IHostDependentFormattingRuleFactoryService), ServiceLayer.Default), Shared]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(IHostDependentFormattingRuleFactoryService),
+            ServiceLayer.Default
+        ),
+        Shared
+    ]
     internal sealed class DefaultFormattingRuleFactoryServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultFormattingRuleFactoryServiceFactory()
-        {
-        }
+        public DefaultFormattingRuleFactoryServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new Factory();
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new Factory();
 
         private sealed class Factory : IHostDependentFormattingRuleFactoryService
         {
-            public bool ShouldUseBaseIndentation(Document document)
-                => false;
+            public bool ShouldUseBaseIndentation(Document document) => false;
 
-            public AbstractFormattingRule CreateRule(Document document, int position)
-                => NoOpFormattingRule.Instance;
+            public AbstractFormattingRule CreateRule(Document document, int position) =>
+                NoOpFormattingRule.Instance;
 
-            public IEnumerable<TextChange> FilterFormattedChanges(Document document, TextSpan span, IList<TextChange> changes)
-                => changes;
+            public IEnumerable<TextChange> FilterFormattedChanges(
+                Document document,
+                TextSpan span,
+                IList<TextChange> changes
+            ) => changes;
 
-            public bool ShouldNotFormatOrCommitOnPaste(Document document)
-                => false;
+            public bool ShouldNotFormatOrCommitOnPaste(Document document) => false;
         }
     }
 }

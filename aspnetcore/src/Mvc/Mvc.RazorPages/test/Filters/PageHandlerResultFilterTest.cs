@@ -18,30 +18,39 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public async Task OnResultExecutionAsync_ExecutesAsyncFilters()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var model = new Mock<PageModel>();
 
-
             var modelAsFilter = model.As<IAsyncResultFilter>();
-            modelAsFilter
-                .Setup(f => f.OnResultExecutionAsync(It.IsAny<ResultExecutingContext>(), It.IsAny<ResultExecutionDelegate>()))
+            modelAsFilter.Setup(
+                    f =>
+                        f.OnResultExecutionAsync(
+                            It.IsAny<ResultExecutingContext>(),
+                            It.IsAny<ResultExecutionDelegate>()
+                        )
+                )
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 
             var resultExecutingContext = new ResultExecutingContext(
-               pageContext,
-               Array.Empty<IFilterMetadata>(),
-               new PageResult(),
-               model.Object);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new PageResult(),
+                model.Object
+            );
             var resultExecutedContext = new ResultExecutedContext(
                 pageContext,
                 Array.Empty<IFilterMetadata>(),
                 resultExecutingContext.Result,
-                model.Object);
+                model.Object
+            );
             ResultExecutionDelegate next = () => Task.FromResult(resultExecutedContext);
 
             var pageHandlerResultFilter = new PageHandlerResultFilter();
@@ -57,32 +66,35 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public async Task OnResultExecutionAsync_ExecutesSyncFilters()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var model = new Mock<object>();
 
             var modelAsFilter = model.As<IResultFilter>();
-            modelAsFilter
-                .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            modelAsFilter.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
                 .Verifiable();
 
-            modelAsFilter
-                .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
+            modelAsFilter.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
                 .Verifiable();
 
             var resultExecutingContext = new ResultExecutingContext(
-               pageContext,
-               Array.Empty<IFilterMetadata>(),
-               new PageResult(),
-               model.Object);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new PageResult(),
+                model.Object
+            );
             var resultExecutedContext = new ResultExecutedContext(
                 pageContext,
                 Array.Empty<IFilterMetadata>(),
                 resultExecutingContext.Result,
-                model.Object);
+                model.Object
+            );
             ResultExecutionDelegate next = () => Task.FromResult(resultExecutedContext);
 
             var pageHandlerResultFilter = new PageHandlerResultFilter();
@@ -98,33 +110,36 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public async Task OnPageHandlerExecutionAsync_DoesNotInvokeResultExecuted_IfCancelled()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var model = new Mock<object>();
 
             var modelAsFilter = model.As<IResultFilter>();
-            modelAsFilter
-                .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            modelAsFilter.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
                 .Callback((ResultExecutingContext context) => context.Cancel = true)
                 .Verifiable();
 
-            modelAsFilter
-                .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
+            modelAsFilter.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
                 .Throws(new Exception("Shouldn't be called"));
 
             var resultExecutingContext = new ResultExecutingContext(
-               pageContext,
-               Array.Empty<IFilterMetadata>(),
-               new PageResult(),
-               model.Object);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new PageResult(),
+                model.Object
+            );
             var resultExecutedContext = new ResultExecutedContext(
                 pageContext,
                 Array.Empty<IFilterMetadata>(),
                 resultExecutingContext.Result,
-                model.Object);
+                model.Object
+            );
             ResultExecutionDelegate next = () => Task.FromResult(resultExecutedContext);
 
             var pageHandlerResultFilter = new PageHandlerResultFilter();
@@ -140,23 +155,28 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public async Task OnPageHandlerExecutionAsync_InvokesNextDelegateIfHandlerDoesNotImplementFilter()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var model = new object();
 
             var resultExecutingContext = new ResultExecutingContext(
-               pageContext,
-               Array.Empty<IFilterMetadata>(),
-               new PageResult(),
-               model);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new PageResult(),
+                model
+            );
             var resultExecutedContext = new ResultExecutedContext(
                 pageContext,
                 Array.Empty<IFilterMetadata>(),
                 resultExecutingContext.Result,
-                model);
+                model
+            );
             var invoked = false;
             ResultExecutionDelegate next = () =>
             {

@@ -24,10 +24,7 @@ namespace System.Security.Cryptography.Xml
 
         private bool CacheValid
         {
-            get
-            {
-                return (_cachedXml != null);
-            }
+            get { return (_cachedXml != null); }
         }
 
         public int KeySize
@@ -36,7 +33,10 @@ namespace System.Security.Cryptography.Xml
             set
             {
                 if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Cryptography_Xml_InvalidKeySize);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Cryptography_Xml_InvalidKeySize
+                    );
                 _keySize = value;
                 _cachedXml = null;
             }
@@ -54,7 +54,8 @@ namespace System.Security.Cryptography.Xml
 
         public XmlElement GetXml()
         {
-            if (CacheValid) return (_cachedXml);
+            if (CacheValid)
+                return (_cachedXml);
 
             XmlDocument document = new XmlDocument();
             document.PreserveWhitespace = true;
@@ -64,13 +65,19 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the EncryptionMethod element
-            XmlElement encryptionMethodElement = (XmlElement)document.CreateElement("EncryptionMethod", EncryptedXml.XmlEncNamespaceUrl);
+            XmlElement encryptionMethodElement = (XmlElement)document.CreateElement(
+                "EncryptionMethod",
+                EncryptedXml.XmlEncNamespaceUrl
+            );
             if (!string.IsNullOrEmpty(_algorithm))
                 encryptionMethodElement.SetAttribute("Algorithm", _algorithm);
             if (_keySize > 0)
             {
                 // Construct a KeySize element
-                XmlElement keySizeElement = document.CreateElement("KeySize", EncryptedXml.XmlEncNamespaceUrl);
+                XmlElement keySizeElement = document.CreateElement(
+                    "KeySize",
+                    EncryptedXml.XmlEncNamespaceUrl
+                );
                 keySizeElement.AppendChild(document.CreateTextNode(_keySize.ToString(null, null)));
                 encryptionMethodElement.AppendChild(keySizeElement);
             }
@@ -86,7 +93,11 @@ namespace System.Security.Cryptography.Xml
             nsm.AddNamespace("enc", EncryptedXml.XmlEncNamespaceUrl);
 
             XmlElement encryptionMethodElement = value;
-            _algorithm = Utils.GetAttribute(encryptionMethodElement, "Algorithm", EncryptedXml.XmlEncNamespaceUrl);
+            _algorithm = Utils.GetAttribute(
+                encryptionMethodElement,
+                "Algorithm",
+                EncryptedXml.XmlEncNamespaceUrl
+            );
 
             XmlNode keySizeNode = value.SelectSingleNode("enc:KeySize", nsm);
             if (keySizeNode != null)

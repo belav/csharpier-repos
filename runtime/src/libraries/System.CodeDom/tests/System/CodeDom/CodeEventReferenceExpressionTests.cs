@@ -6,7 +6,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public class CodeEventReferenceExpressionTests : CodeObjectTestBase<CodeEventReferenceExpression>
+    public class CodeEventReferenceExpressionTests
+        : CodeObjectTestBase<CodeEventReferenceExpression>
     {
         [Fact]
         public void Ctor_Default()

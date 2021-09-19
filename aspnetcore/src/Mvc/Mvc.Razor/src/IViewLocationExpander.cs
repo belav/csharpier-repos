@@ -39,7 +39,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         /// expansion operation.</param>
         /// <param name="viewLocations">The sequence of view locations to expand.</param>
         /// <returns>A list of expanded view locations.</returns>
-        IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context,
-                                                IEnumerable<string> viewLocations);
+        IEnumerable<string> ExpandViewLocations(
+            ViewLocationExpanderContext context,
+            IEnumerable<string> viewLocations
+        );
     }
 }

@@ -16,9 +16,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal sealed class InheritedByGraphQuery : IGraphQuery
     {
-        public async Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken)
-        {
-            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken).ConfigureAwait(false);
+        public async Task<GraphBuilder> GetGraphAsync(
+            Solution solution,
+            IGraphContext context,
+            CancellationToken cancellationToken
+        ) {
+            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
+                    solution,
+                    context.InputNodes,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var node in context.InputNodes)
             {
@@ -29,24 +37,47 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 if (namedType.TypeKind == TypeKind.Class)
                 {
                     var derivedTypes = await SymbolFinder.FindDerivedClassesArrayAsync(
-                        namedType, solution, transitive: false, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            namedType,
+                            solution,
+                            transitive: false,
+                            cancellationToken: cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     foreach (var derivedType in derivedTypes)
                     {
                         var symbolNode = await graphBuilder.AddNodeAsync(
-                            derivedType, relatedNode: node).ConfigureAwait(false);
+                                derivedType,
+                                relatedNode: node
+                            )
+                            .ConfigureAwait(false);
                         graphBuilder.AddLink(symbolNode, CodeLinkCategories.InheritsFrom, node);
                     }
                 }
                 else if (namedType.TypeKind == TypeKind.Interface)
                 {
-                    var implementingClassesAndStructs = await SymbolFinder.FindImplementationsArrayAsync(
-                        namedType, solution, transitive: false, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var implementingClassesAndStructs =
+                        await SymbolFinder.FindImplementationsArrayAsync(
+                                namedType,
+                                solution,
+                                transitive: false,
+                                cancellationToken: cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     var derivedInterfaces = await SymbolFinder.FindDerivedInterfacesArrayAsync(
-                        namedType, solution, transitive: false, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    foreach (var derivedType in implementingClassesAndStructs.Concat(derivedInterfaces))
-                    {
+                            namedType,
+                            solution,
+                            transitive: false,
+                            cancellationToken: cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    foreach (
+                        var derivedType in implementingClassesAndStructs.Concat(derivedInterfaces)
+                    ) {
                         var symbolNode = await graphBuilder.AddNodeAsync(
-                            derivedType, relatedNode: node).ConfigureAwait(false);
+                                derivedType,
+                                relatedNode: node
+                            )
+                            .ConfigureAwait(false);
                         graphBuilder.AddLink(symbolNode, CodeLinkCategories.InheritsFrom, node);
                     }
                 }

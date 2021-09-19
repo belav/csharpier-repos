@@ -9,7 +9,8 @@ namespace Test.Cryptography
 {
     internal abstract partial class CertLoader
     {
-        private static readonly X509KeyStorageFlags s_defaultKeyStorageFlags = GetBestKeyStorageFlags();
+        private static readonly X509KeyStorageFlags s_defaultKeyStorageFlags =
+            GetBestKeyStorageFlags();
 
         // Prefer ephemeral when available
         private static X509KeyStorageFlags GetBestKeyStorageFlags()
@@ -59,10 +60,12 @@ namespace Test.Cryptography
         /// If this method does return a certificate, the test must Dispose() it manually and as soon it no longer needs the certificate.
         /// Due to the way PFX loading works on Windows, failure to dispose may leave an artifact on the test machine's disk.
         /// </summary>
-        public X509Certificate2 TryGetCertificateWithPrivateKey(bool exportable=false)
+        public X509Certificate2 TryGetCertificateWithPrivateKey(bool exportable = false)
         {
             if (PfxData == null)
-                throw new Exception("Cannot call TryGetCertificateWithPrivateKey() on this CertLoader: No PfxData provided.");
+                throw new Exception(
+                    "Cannot call TryGetCertificateWithPrivateKey() on this CertLoader: No PfxData provided."
+                );
 
             if (!_alreadySearchedMyStore)
             {
@@ -84,19 +87,27 @@ namespace Test.Cryptography
                     return new X509Certificate2(
                         PfxData,
                         Password,
-                        KeyStorageFlags | (exportable ? X509KeyStorageFlags.Exportable : 0));
+                        KeyStorageFlags | (exportable ? X509KeyStorageFlags.Exportable : 0)
+                    );
 
                 case CertLoadMode.LoadFromStore:
-                    {
-                        X509Certificate2Collection matches = FindMatches(CertLoader.StoreName, StoreLocation.CurrentUser);
-                        if (matches.Count == 1)
-                            return matches[0];
+                {
+                    X509Certificate2Collection matches = FindMatches(
+                        CertLoader.StoreName,
+                        StoreLocation.CurrentUser
+                    );
+                    if (matches.Count == 1)
+                        return matches[0];
 
-                        if (matches.Count == 0)
-                            throw new Exception($"No matching certificate found in store {CertLoader.StoreName}");
-                        else
-                            throw new Exception($"Multiple matching certificates found in store {CertLoader.StoreName}");
-                    }
+                    if (matches.Count == 0)
+                        throw new Exception(
+                            $"No matching certificate found in store {CertLoader.StoreName}"
+                        );
+                    else
+                        throw new Exception(
+                            $"Multiple matching certificates found in store {CertLoader.StoreName}"
+                        );
+                }
 
                 default:
                     throw new Exception($"Unexpected CertLoader.TestMode value: {testMode}");
@@ -121,12 +132,16 @@ namespace Test.Cryptography
                 string issuer = cer.Issuer;
                 string serial = cer.SerialNumber;
 
-                throw new Exception($"A certificate issued to {issuer} with serial number {serial} was found in your Personal certificate store. This will cause some tests to fail due to machine configuration. Please remove these.");
+                throw new Exception(
+                    $"A certificate issued to {issuer} with serial number {serial} was found in your Personal certificate store. This will cause some tests to fail due to machine configuration. Please remove these."
+                );
             }
         }
 
-        private X509Certificate2Collection FindMatches(string storeName, StoreLocation storeLocation)
-        {
+        private X509Certificate2Collection FindMatches(
+            string storeName,
+            StoreLocation storeLocation
+        ) {
             using (X509Certificate2 cer = new X509Certificate2(CerData))
             {
                 X509Certificate2Collection matches = new X509Certificate2Collection();
@@ -200,14 +215,12 @@ namespace Test.Cryptography
         // Disable all tests that rely on private keys. Unfortunately, this has to be the default for checked in tests to avoid cluttering
         // people's machines with leaked keys on disk every time they build.
         Disable = 1,
-
         // Load certs from PFX data. This is convenient as it requires no preparatory steps. The downside is that every time you open a CNG .PFX,
         // a temporarily key is permanently leaked to your disk. (And every time you open a CAPI PFX, a key is leaked if the test aborts before
         // Disposing the certificate.)
         //
         // Only use if you're testing on a VM or if you just don't care about your machine accumulating leaked keys.
         LoadFromPfx = 2,
-
         // Load certs from the certificate store (set StoreName to the name you want to use.) This requires that you preinstall the certificates
         // into the cert store (say by File.WriteAllByte()'ing the PFX blob into a "foo.pfx" file, then launching it and following the wizard.)
         // but then you don't need to worry about key leaks.

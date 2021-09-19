@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         /// <summary>
         /// Gets the appropriate <see cref="QuickInfoService"/> for the specified document.
         /// </summary>
-        public static QuickInfoService? GetService(Document? document)
-            => document?.GetLanguageService<QuickInfoService>();
+        public static QuickInfoService? GetService(Document? document) =>
+            document?.GetLanguageService<QuickInfoService>();
 
         /// <summary>
         /// Gets the <see cref="QuickInfoItem"/> associated with position in the document.
@@ -27,8 +27,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         public virtual Task<QuickInfoItem?> GetQuickInfoAsync(
             Document document,
             int position,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default
+        ) {
             return SpecializedTasks.Null<QuickInfoItem>();
         }
     }

@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class InMemoryShapedQueryCompilingExpressionVisitorFactory : IShapedQueryCompilingExpressionVisitorFactory
+    public class InMemoryShapedQueryCompilingExpressionVisitorFactory
+        : IShapedQueryCompilingExpressionVisitorFactory
     {
         private readonly ShapedQueryCompilingExpressionVisitorDependencies _dependencies;
 
@@ -23,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public InMemoryShapedQueryCompilingExpressionVisitorFactory(
-            ShapedQueryCompilingExpressionVisitorDependencies dependencies)
-        {
+            ShapedQueryCompilingExpressionVisitorDependencies dependencies
+        ) {
             _dependencies = dependencies;
         }
 
@@ -34,11 +35,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ShapedQueryCompilingExpressionVisitor Create(QueryCompilationContext queryCompilationContext)
-        {
+        public virtual ShapedQueryCompilingExpressionVisitor Create(
+            QueryCompilationContext queryCompilationContext
+        ) {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
-            return new InMemoryShapedQueryCompilingExpressionVisitor(_dependencies, queryCompilationContext);
+            return new InMemoryShapedQueryCompilingExpressionVisitor(
+                _dependencies,
+                queryCompilationContext
+            );
         }
     }
 }

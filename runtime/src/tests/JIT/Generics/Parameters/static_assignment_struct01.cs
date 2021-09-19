@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public struct Gen<T>
 {
     public static void AssignRef(T tin, ref T tref)
@@ -47,12 +46,10 @@ public class Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-
         int _int1 = 1;
         int _int2 = 2;
         Gen<int>.AssignRef(_int1, ref _int2);
@@ -104,5 +101,4 @@ public class Test
             return 1;
         }
     }
-
 }

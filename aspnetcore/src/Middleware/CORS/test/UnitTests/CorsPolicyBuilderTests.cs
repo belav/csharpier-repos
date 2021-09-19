@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -125,7 +125,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             // Assert
             var corsPolicy = builder.Build();
             Assert.False(corsPolicy.AllowAnyOrigin);
-            Assert.Equal(new List<string>() { "http://example.com", "http://example2.com" }, corsPolicy.Origins);
+            Assert.Equal(
+                new List<string>() { "http://example.com", "http://example2.com" },
+                corsPolicy.Origins
+            );
         }
 
         [Fact]
@@ -136,7 +139,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
 
             // Assert
             var corsPolicy = builder.Build();
-            Assert.Equal(new List<string>() { "http://www.example.com", "https://example2.com" }, corsPolicy.Origins);
+            Assert.Equal(
+                new List<string>() { "http://www.example.com", "https://example2.com" },
+                corsPolicy.Origins
+            );
         }
 
         [Fact]
@@ -339,9 +345,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void Build_ThrowsIfConfiguredToAllowAnyOriginWithCredentials()
         {
             // Arrange
-            var builder = new CorsPolicyBuilder()
-                .AllowAnyOrigin()
-                .AllowCredentials();
+            var builder = new CorsPolicyBuilder().AllowAnyOrigin().AllowCredentials();
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(() => builder.Build());
@@ -354,8 +358,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         [InlineData("Some-String", "some-string")]
         [InlineData("x:\\Test", "x:\\test")]
         [InlineData("FTP://Some-url", "ftp://some-url")]
-        public void GetNormalizedOrigin_ReturnsLowerCasedValue_IfStringIsNotHttpOrHttpsUrl(string origin, string expected)
-        {
+        public void GetNormalizedOrigin_ReturnsLowerCasedValue_IfStringIsNotHttpOrHttpsUrl(
+            string origin,
+            string expected
+        ) {
             // Act
             var normalizedOrigin = CorsPolicyBuilder.GetNormalizedOrigin(origin);
 

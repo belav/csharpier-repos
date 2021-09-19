@@ -26,8 +26,11 @@ namespace Microsoft.CodeAnalysis.Emit
 
         private readonly Func<ISymbol, bool> _isAddedSymbol;
 
-        protected SymbolChanges(DefinitionMap definitionMap, IEnumerable<SemanticEdit> edits, Func<ISymbol, bool> isAddedSymbol)
-        {
+        protected SymbolChanges(
+            DefinitionMap definitionMap,
+            IEnumerable<SemanticEdit> edits,
+            Func<ISymbol, bool> isAddedSymbol
+        ) {
             _definitionMap = definitionMap;
             _isAddedSymbol = isAddedSymbol;
             _changes = CalculateChanges(edits);
@@ -68,8 +71,11 @@ namespace Microsoft.CodeAnalysis.Emit
 
                         // The container of the synthesized symbol doesn't exist, we need to add the symbol.
                         // This may happen e.g. for members of a state machine type when a non-iterator method is changed to an iterator.
-                        if (!_definitionMap.DefinitionExists((IDefinition)synthesizedSymbol.ContainingType.GetCciAdapter()))
-                        {
+                        if (
+                            !_definitionMap.DefinitionExists(
+                                (IDefinition)synthesizedSymbol.ContainingType.GetCciAdapter()
+                            )
+                        ) {
                             return SymbolChange.Added;
                         }
 
@@ -82,7 +88,7 @@ namespace Microsoft.CodeAnalysis.Emit
 
                         // The existing symbol should be reused when the generator is updated,
                         // not updated since it's form doesn't depend on the content of the generator.
-                        // For example, when an iterator method changes all methods that implement IEnumerable 
+                        // For example, when an iterator method changes all methods that implement IEnumerable
                         // but MoveNext can be reused as they are.
                         if (!synthesizedDef.HasMethodBodyDependency)
                         {
@@ -183,14 +189,18 @@ namespace Microsoft.CodeAnalysis.Emit
                     if (adapter is IDefinition definition)
                     {
                         // If the definition did not exist in the previous generation, it was added.
-                        return _definitionMap.DefinitionExists(definition) ? SymbolChange.None : SymbolChange.Added;
+                        return _definitionMap.DefinitionExists(definition)
+                            ? SymbolChange.None
+                            : SymbolChange.Added;
                     }
 
                     if (adapter is INamespace @namespace)
                     {
                         // If the namespace did not exist in the previous generation, it was added.
                         // Otherwise the namespace may contain changes.
-                        return _definitionMap.NamespaceExists(@namespace) ? SymbolChange.ContainsChanges : SymbolChange.Added;
+                        return _definitionMap.NamespaceExists(@namespace)
+                            ? SymbolChange.ContainsChanges
+                            : SymbolChange.Added;
                     }
 
                     return SymbolChange.None;
@@ -202,11 +212,14 @@ namespace Microsoft.CodeAnalysis.Emit
 
         protected abstract ISymbolInternal? GetISymbolInternalOrNull(ISymbol symbol);
 
-        public IEnumerable<INamespaceTypeDefinition> GetTopLevelSourceTypeDefinitions(EmitContext context)
-        {
+        public IEnumerable<INamespaceTypeDefinition> GetTopLevelSourceTypeDefinitions(
+            EmitContext context
+        ) {
             foreach (var symbol in _changes.Keys)
             {
-                var namespaceTypeDef = (GetISymbolInternalOrNull(symbol)?.GetCciAdapter() as ITypeDefinition)?.AsNamespaceTypeDefinition(context);
+                var namespaceTypeDef = (
+                    GetISymbolInternalOrNull(symbol)?.GetCciAdapter() as ITypeDefinition
+                )?.AsNamespaceTypeDefinition(context);
                 if (namespaceTypeDef != null)
                 {
                     yield return namespaceTypeDef;
@@ -221,8 +234,9 @@ namespace Microsoft.CodeAnalysis.Emit
         /// Note that these changes only include user-defined source symbols, not synthesized symbols since those will be 
         /// generated during lowering of the changed user-defined symbols.
         /// </summary>
-        private static IReadOnlyDictionary<ISymbol, SymbolChange> CalculateChanges(IEnumerable<SemanticEdit> edits)
-        {
+        private static IReadOnlyDictionary<ISymbol, SymbolChange> CalculateChanges(
+            IEnumerable<SemanticEdit> edits
+        ) {
             var changes = new Dictionary<ISymbol, SymbolChange>();
 
             foreach (var edit in edits)
@@ -258,7 +272,10 @@ namespace Microsoft.CodeAnalysis.Emit
 
                     // Partial methods should be implementations, not definitions.
                     Debug.Assert(method.PartialImplementationPart == null);
-                    Debug.Assert((edit.OldSymbol == null) || (((IMethodSymbol)edit.OldSymbol).PartialImplementationPart == null));
+                    Debug.Assert(
+                        (edit.OldSymbol == null)
+                            || (((IMethodSymbol)edit.OldSymbol).PartialImplementationPart == null)
+                    );
 
                     var definitionPart = method.PartialDefinitionPart;
                     if (definitionPart != null)
@@ -274,8 +291,10 @@ namespace Microsoft.CodeAnalysis.Emit
             return changes;
         }
 
-        private static void AddContainingTypesAndNamespaces(Dictionary<ISymbol, SymbolChange> changes, ISymbol symbol)
-        {
+        private static void AddContainingTypesAndNamespaces(
+            Dictionary<ISymbol, SymbolChange> changes,
+            ISymbol symbol
+        ) {
             while (true)
             {
                 var containingSymbol = GetContainingSymbol(symbol);
@@ -284,8 +303,9 @@ namespace Microsoft.CodeAnalysis.Emit
                     return;
                 }
 
-                var change = containingSymbol.Kind is SymbolKind.Property or SymbolKind.Event ?
-                    SymbolChange.Updated : SymbolChange.ContainsChanges;
+                var change = containingSymbol.Kind is SymbolKind.Property or SymbolKind.Event
+                    ? SymbolChange.Updated
+                    : SymbolChange.ContainsChanges;
 
                 changes.Add(containingSymbol, change);
                 symbol = containingSymbol;
@@ -309,6 +329,7 @@ namespace Microsoft.CodeAnalysis.Emit
             switch (symbol.Kind)
             {
                 case SymbolKind.Field:
+
                     {
                         var associated = ((IFieldSymbol)symbol).AssociatedSymbol;
                         if (associated != null)
@@ -319,6 +340,7 @@ namespace Microsoft.CodeAnalysis.Emit
                     break;
 
                 case SymbolKind.Method:
+
                     {
                         var associated = ((IMethodSymbol)symbol).AssociatedSymbol;
                         if (associated != null)

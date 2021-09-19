@@ -49,8 +49,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { collection.Add(null); },
-                "item");
+                delegate
+                {
+                    collection.Add(null);
+                },
+                "item"
+            );
         }
 
         [Fact]
@@ -108,7 +112,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             };
 
             // Act
-            collection.RegisterBinderForGenericType(typeof(List<>), typeof(CollectionModelBinder<>));
+            collection.RegisterBinderForGenericType(
+                typeof(List<>),
+                typeof(CollectionModelBinder<>)
+            );
 
             // Assert
             var genericProvider = Assert.IsType<GenericModelBinderProvider>(collection[0]);
@@ -176,7 +183,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Assert
             Assert.Equal(
                 new[] { typeof(ProviderAtFront), typeof(SimpleModelBinderProvider) },
-                collection.Select(o => o.GetType()).ToArray());
+                collection.Select(o => o.GetType()).ToArray()
+            );
         }
 
         [Fact]
@@ -207,8 +215,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { collection[0] = null; },
-                "item");
+                delegate
+                {
+                    collection[0] = null;
+                },
+                "item"
+            );
         }
 
         [Fact]
@@ -218,15 +230,22 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(ModelWithProviderAttribute_BadAttribute))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(ModelWithProviderAttribute_BadAttribute)
+                )
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { providers.GetBinder(controllerContext, bindingContext); },
-                @"The type 'System.Object' does not subclass Microsoft.Web.Mvc.ModelBinding.ModelBinderProvider or implement the interface Microsoft.Web.Mvc.ModelBinding.IExtensibleModelBinder.");
+                delegate
+                {
+                    providers.GetBinder(controllerContext, bindingContext);
+                },
+                @"The type 'System.Object' does not subclass Microsoft.Web.Mvc.ModelBinding.ModelBinderProvider or implement the interface Microsoft.Web.Mvc.ModelBinding.IExtensibleModelBinder."
+            );
         }
 
         [Fact]
@@ -236,16 +255,20 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(ModelWithProviderAttribute_Binder_Generic<int>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(ModelWithProviderAttribute_Binder_Generic<int>)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo", "fooValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo", "fooValue" } }
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
-            providers.RegisterBinderForType(typeof(ModelWithProviderAttribute_Binder_Generic<int>), new Mock<IExtensibleModelBinder>().Object, true /* suppressPrefix */);
+            providers.RegisterBinderForType(
+                typeof(ModelWithProviderAttribute_Binder_Generic<int>),
+                new Mock<IExtensibleModelBinder>().Object,
+                true /* suppressPrefix */
+            );
 
             // Act
             IExtensibleModelBinder binder = providers.GetBinder(controllerContext, bindingContext);
@@ -261,16 +284,20 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(ModelWithProviderAttribute_Binder_SuppressPrefix)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(ModelWithProviderAttribute_Binder_SuppressPrefix)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "bar", "barValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "bar", "barValue" } }
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
-            providers.RegisterBinderForType(typeof(ModelWithProviderAttribute_Binder_SuppressPrefix), new Mock<IExtensibleModelBinder>().Object, true /* suppressPrefix */);
+            providers.RegisterBinderForType(
+                typeof(ModelWithProviderAttribute_Binder_SuppressPrefix),
+                new Mock<IExtensibleModelBinder>().Object,
+                true /* suppressPrefix */
+            );
 
             // Act
             IExtensibleModelBinder binder = providers.GetBinder(controllerContext, bindingContext);
@@ -286,16 +313,20 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(ModelWithProviderAttribute_Binder)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(ModelWithProviderAttribute_Binder)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "bar", "barValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "bar", "barValue" } }
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
-            providers.RegisterBinderForType(typeof(ModelWithProviderAttribute_Binder), new Mock<IExtensibleModelBinder>().Object, true /* suppressPrefix */);
+            providers.RegisterBinderForType(
+                typeof(ModelWithProviderAttribute_Binder),
+                new Mock<IExtensibleModelBinder>().Object,
+                true /* suppressPrefix */
+            );
 
             // Act
             IExtensibleModelBinder binder = providers.GetBinder(controllerContext, bindingContext);
@@ -311,16 +342,20 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(ModelWithProviderAttribute_Binder)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(ModelWithProviderAttribute_Binder)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo", "fooValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo", "fooValue" } }
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
-            providers.RegisterBinderForType(typeof(ModelWithProviderAttribute_Binder), new Mock<IExtensibleModelBinder>().Object, true /* suppressPrefix */);
+            providers.RegisterBinderForType(
+                typeof(ModelWithProviderAttribute_Binder),
+                new Mock<IExtensibleModelBinder>().Object,
+                true /* suppressPrefix */
+            );
 
             // Act
             IExtensibleModelBinder binder = providers.GetBinder(controllerContext, bindingContext);
@@ -336,11 +371,18 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(ModelWithProviderAttribute_Provider))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(ModelWithProviderAttribute_Provider)
+                )
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
-            providers.RegisterBinderForType(typeof(ModelWithProviderAttribute_Provider), new Mock<IExtensibleModelBinder>().Object, true /* suppressPrefix */);
+            providers.RegisterBinderForType(
+                typeof(ModelWithProviderAttribute_Provider),
+                new Mock<IExtensibleModelBinder>().Object,
+                true /* suppressPrefix */
+            );
 
             // Act
             IExtensibleModelBinder binder = providers.GetBinder(controllerContext, bindingContext);
@@ -356,22 +398,31 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(object))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(object)
+                )
             };
             IExtensibleModelBinder expectedBinder = new Mock<IExtensibleModelBinder>().Object;
 
             Mock<ModelBinderProvider> mockProvider = new Mock<ModelBinderProvider>();
-            mockProvider.Setup(p => p.GetBinder(controllerContext, bindingContext)).Returns(expectedBinder);
+            mockProvider.Setup(p => p.GetBinder(controllerContext, bindingContext))
+                .Returns(expectedBinder);
 
-            ModelBinderProviderCollection collection = new ModelBinderProviderCollection(new[]
-            {
-                new Mock<ModelBinderProvider>().Object,
-                mockProvider.Object,
-                new Mock<ModelBinderProvider>().Object
-            });
+            ModelBinderProviderCollection collection = new ModelBinderProviderCollection(
+                new[]
+                {
+                    new Mock<ModelBinderProvider>().Object,
+                    mockProvider.Object,
+                    new Mock<ModelBinderProvider>().Object
+                }
+            );
 
             // Act
-            IExtensibleModelBinder returned = collection.GetBinder(controllerContext, bindingContext);
+            IExtensibleModelBinder returned = collection.GetBinder(
+                controllerContext,
+                bindingContext
+            );
 
             // Assert
             Assert.Equal(expectedBinder, returned);
@@ -384,16 +435,21 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(object))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(object)
+                )
             };
 
-            ModelBinderProviderCollection collection = new ModelBinderProviderCollection(new[]
-            {
-                new Mock<ModelBinderProvider>().Object,
-            });
+            ModelBinderProviderCollection collection = new ModelBinderProviderCollection(
+                new[] { new Mock<ModelBinderProvider>().Object, }
+            );
 
             // Act
-            IExtensibleModelBinder returned = collection.GetBinder(controllerContext, bindingContext);
+            IExtensibleModelBinder returned = collection.GetBinder(
+                controllerContext,
+                bindingContext
+            );
 
             // Assert
             Assert.Null(returned);
@@ -407,7 +463,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { collection.GetBinder(new ControllerContext(), null); }, "bindingContext");
+                delegate
+                {
+                    collection.GetBinder(new ControllerContext(), null);
+                },
+                "bindingContext"
+            );
         }
 
         [Fact]
@@ -418,7 +479,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { collection.GetBinder(null, new ExtensibleModelBindingContext()); }, "controllerContext");
+                delegate
+                {
+                    collection.GetBinder(null, new ExtensibleModelBindingContext());
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -428,14 +494,21 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(ModelWithBindAttribute))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(ModelWithBindAttribute)
+                )
             };
             ModelBinderProviderCollection collection = new ModelBinderProviderCollection();
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { collection.GetBinder(controllerContext, bindingContext); },
-                @"The model of type 'Microsoft.Web.Mvc.ModelBinding.Test.ModelBinderProviderCollectionTest+ModelWithBindAttribute' has a [Bind] attribute. The new model binding system cannot be used with models that have type-level [Bind] attributes. Use the [BindRequired] and [BindNever] attributes on the model type or its properties instead.");
+                delegate
+                {
+                    collection.GetBinder(controllerContext, bindingContext);
+                },
+                @"The model of type 'Microsoft.Web.Mvc.ModelBinding.Test.ModelBinderProviderCollectionTest+ModelWithBindAttribute' has a [Bind] attribute. The new model binding system cannot be used with models that have type-level [Bind] attributes. Use the [BindRequired] and [BindNever] attributes on the model type or its properties instead."
+            );
         }
 
         [Fact]
@@ -448,13 +521,15 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             {
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
-                    typeof(ModelWithProviderAttribute_ProviderHasNoParameterlessConstructor)),
+                    typeof(ModelWithProviderAttribute_ProviderHasNoParameterlessConstructor)
+                ),
             };
 
             // Act & Assert, confirming type name and full stack are available in Exception
             MissingMethodException exception = Assert.Throws<MissingMethodException>(
                 () => collection.GetBinder(controllerContext, bindingContext),
-                "No parameterless constructor defined for this object. Object type 'Microsoft.Web.Mvc.ModelBinding.Test.ModelBinderProviderCollectionTest+NoParameterlessCtorProvider'.");
+                "No parameterless constructor defined for this object. Object type 'Microsoft.Web.Mvc.ModelBinding.Test.ModelBinderProviderCollectionTest+NoParameterlessCtorProvider'."
+            );
             Assert.Contains("System.Activator.CreateInstance(", exception.ToString());
         }
 
@@ -468,13 +543,15 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             {
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
-                    typeof(ModelWithProviderAttribute_ProviderHasNoParameterlessConstructor<int>)),
+                    typeof(ModelWithProviderAttribute_ProviderHasNoParameterlessConstructor<int>)
+                ),
             };
 
             // Act & Assert, confirming type name and full stack are available in Exception
             MissingMethodException exception = Assert.Throws<MissingMethodException>(
                 () => collection.GetBinder(controllerContext, bindingContext),
-                "No parameterless constructor defined for this object. Object type 'Microsoft.Web.Mvc.ModelBinding.Test.ModelBinderProviderCollectionTest+NoParameterlessCtorBinder`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]'.");
+                "No parameterless constructor defined for this object. Object type 'Microsoft.Web.Mvc.ModelBinding.Test.ModelBinderProviderCollectionTest+NoParameterlessCtorBinder`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]'."
+            );
             Assert.Contains("System.Activator.CreateInstance(", exception.ToString());
         }
 
@@ -485,18 +562,24 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                )
             };
 
-            ModelBinderProviderCollection collection = new ModelBinderProviderCollection(new[]
-            {
-                new Mock<ModelBinderProvider>().Object,
-            });
+            ModelBinderProviderCollection collection = new ModelBinderProviderCollection(
+                new[] { new Mock<ModelBinderProvider>().Object, }
+            );
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { collection.GetRequiredBinder(controllerContext, bindingContext); },
-                @"A binder for type System.Int32 could not be located.");
+                delegate
+                {
+                    collection.GetRequiredBinder(controllerContext, bindingContext);
+                },
+                @"A binder for type System.Int32 could not be located."
+            );
         }
 
         [MetadataType(typeof(ModelWithBindAttribute_Buddy))]
@@ -511,8 +594,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         [ModelBinderProviderOptions(FrontOfList = true)]
         private class ProviderAtFront : ModelBinderProvider
         {
-            public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
-            {
+            public override IExtensibleModelBinder GetBinder(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            ) {
                 throw new NotImplementedException();
             }
         }
@@ -554,48 +639,54 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private class CustomProvider : ModelBinderProvider
         {
-            public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
-            {
+            public override IExtensibleModelBinder GetBinder(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            ) {
                 return new CustomBinder();
             }
         }
 
         private class CustomBinder : IExtensibleModelBinder
         {
-            public bool BindModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
-            {
+            public bool BindModel(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            ) {
                 throw new NotImplementedException();
             }
         }
 
         private class CustomGenericBinder<T> : IExtensibleModelBinder
         {
-            public bool BindModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
-            {
+            public bool BindModel(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            ) {
                 throw new NotImplementedException();
             }
         }
 
         private class NoParameterlessCtorProvider : ModelBinderProvider
         {
-            public NoParameterlessCtorProvider(int parameter)
-            {
-            }
+            public NoParameterlessCtorProvider(int parameter) { }
 
-            public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
-            {
+            public override IExtensibleModelBinder GetBinder(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            ) {
                 throw new NotImplementedException();
             }
         }
 
         private class NoParameterlessCtorBinder<T> : IExtensibleModelBinder
         {
-            public NoParameterlessCtorBinder(int parameter)
-            {
-            }
+            public NoParameterlessCtorBinder(int parameter) { }
 
-            public bool BindModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
-            {
+            public bool BindModel(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            ) {
                 throw new NotImplementedException();
             }
         }

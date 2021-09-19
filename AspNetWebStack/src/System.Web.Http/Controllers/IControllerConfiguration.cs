@@ -14,6 +14,9 @@ namespace System.Web.Http.Controllers
         /// </summary>
         /// <param name="controllerSettings">The controller settings to initialize.</param>
         /// <param name="controllerDescriptor">The controller descriptor. Note that the <see cref="HttpControllerDescriptor"/> can be associated with the derived controller type given that <see cref="IControllerConfiguration"/> is inherited.</param>
-        void Initialize(HttpControllerSettings controllerSettings, HttpControllerDescriptor controllerDescriptor);
+        void Initialize(
+            HttpControllerSettings controllerSettings,
+            HttpControllerDescriptor controllerDescriptor
+        );
     }
 }

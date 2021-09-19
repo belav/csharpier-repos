@@ -119,15 +119,14 @@ namespace System.Linq.Expressions.Tests
         private const int ELEMENT_TYPE_PINNED = 0x45; // Denotes a local variable that points at a pinned object
 
         private const int SIG_METHOD_DEFAULT = 0x0; // default calling convention
-        private const int SIG_METHOD_C = 0x1;// C calling convention
-        private const int SIG_METHOD_STDCALL = 0x2;// Stdcall calling convention
+        private const int SIG_METHOD_C = 0x1; // C calling convention
+        private const int SIG_METHOD_STDCALL = 0x2; // Stdcall calling convention
         private const int SIG_METHOD_THISCALL = 0x3; // thiscall  calling convention
         private const int SIG_METHOD_FASTCALL = 0x4; // fastcall calling convention
-        private const int SIG_METHOD_VARARG = 0x5;// vararg calling convention
+        private const int SIG_METHOD_VARARG = 0x5; // vararg calling convention
         private const int SIG_FIELD = 0x6; // encodes a field
         private const int SIG_LOCAL_SIG = 0x7; // used for the .locals directive
         private const int SIG_PROPERTY = 0x8; // used to encode a property
-
 
         private const int SIG_GENERIC = 0x10; // used to indicate that the method has one or more generic parameters.
         private const int SIG_HASTHIS = 0x20; // used to encode the keyword instance in the calling convention
@@ -215,14 +214,23 @@ namespace System.Linq.Expressions.Tests
         protected virtual void NotifyVoid() { }
 
         // the type has the indicated custom modifiers (which can be optional or required)
-        protected virtual void NotifyCustomMod(sig_elem_type cmod, sig_index token, sig_index_type indexType, sig_index index) { }
+        protected virtual void NotifyCustomMod(
+            sig_elem_type cmod,
+            sig_index token,
+            sig_index_type indexType,
+            sig_index index
+        ) { }
 
         // the type is a simple type, the elem_type defines it fully
         protected virtual void NotifyTypeSimple(sig_elem_type elem_type) { }
 
         // the type is specified by the given index of the given index type (normally a type index in the type metadata)
         // this callback is normally qualified by other ones such as NotifyTypeClass or NotifyTypeValueType
-        protected virtual void NotifyTypeDefOrRef(sig_index token, sig_index_type indexType, int index) { }
+        protected virtual void NotifyTypeDefOrRef(
+            sig_index token,
+            sig_index_type indexType,
+            int index
+        ) { }
 
         // number indicates the number of type specifications for the generic types that will follow
         protected virtual void NotifyTypeGenericInst(sig_mem_number number) { }
@@ -267,21 +275,21 @@ namespace System.Linq.Expressions.Tests
 
             switch (elem_type & 0xf)
             {
-                case SIG_METHOD_DEFAULT:  // default calling convention
-                case SIG_METHOD_C:    // C calling convention
+                case SIG_METHOD_DEFAULT: // default calling convention
+                case SIG_METHOD_C: // C calling convention
                 case SIG_METHOD_STDCALL: // Stdcall calling convention
                 case SIG_METHOD_THISCALL: // thiscall  calling convention
                 case SIG_METHOD_FASTCALL: // fastcall calling convention
-                case SIG_METHOD_VARARG:   // vararg calling convention
+                case SIG_METHOD_VARARG: // vararg calling convention
                     return ParseMethod(elem_type);
 
-                case SIG_FIELD:           // encodes a field
+                case SIG_FIELD: // encodes a field
                     return ParseField(elem_type);
 
-                case SIG_LOCAL_SIG:       // used for the .locals directive
+                case SIG_LOCAL_SIG: // used for the .locals directive
                     return ParseLocals(elem_type);
 
-                case SIG_PROPERTY:        // used to encode a property
+                case SIG_PROPERTY: // used to encode a property
                     return ParseProperty(elem_type);
 
                 default:
@@ -291,7 +299,6 @@ namespace System.Linq.Expressions.Tests
 
             return false;
         }
-
 
         bool ParseByte(out sig_byte pbOut)
         {
@@ -747,7 +754,6 @@ namespace System.Linq.Expressions.Tests
 
                     if (!ParseType())
                         return false;
-
                     break;
 
                 case ELEMENT_TYPE_CLASS:
@@ -784,7 +790,6 @@ namespace System.Linq.Expressions.Tests
 
                     if (!ParseMethod(elem_type))
                         return false;
-
                     break;
 
                 case ELEMENT_TYPE_ARRAY:
@@ -808,7 +813,6 @@ namespace System.Linq.Expressions.Tests
 
                     if (!ParseType())
                         return false;
-
                     break;
 
                 case ELEMENT_TYPE_GENERICINST:
@@ -827,7 +831,6 @@ namespace System.Linq.Expressions.Tests
                     }
 
                     NotifyTypeGenericInst(number);
-
                     break;
 
                 case ELEMENT_TYPE_VAR:
@@ -865,8 +868,11 @@ namespace System.Linq.Expressions.Tests
             return true;
         }
 
-        bool ParseTypeDefOrRefEncoded(out sig_index pEncoded, out sig_index_type pIndexTypeOut, out sig_index pIndexOut)
-        {
+        bool ParseTypeDefOrRefEncoded(
+            out sig_index pEncoded,
+            out sig_index_type pIndexTypeOut,
+            out sig_index pIndexOut
+        ) {
             pIndexTypeOut = 0;
             pIndexOut = 0;
 
@@ -886,7 +892,10 @@ namespace System.Linq.Expressions.Tests
 
             // parse the variable length number format (0-4 bytes)
 
-            sig_byte b1 = 0, b2 = 0, b3 = 0, b4 = 0;
+            sig_byte b1 = 0,
+                b2 = 0,
+                b3 = 0,
+                b4 = 0;
 
             // at least one byte in the encoding, read that
 

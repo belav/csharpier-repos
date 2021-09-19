@@ -22,10 +22,7 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles
 
         public IntPtr Length
         {
-            get
-            {
-                return _cb;
-            }
+            get { return _cb; }
         }
 
         /// <summary>

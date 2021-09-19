@@ -23,21 +23,24 @@ namespace System.Net.Sockets
         private bool Disposed => _disposed != 0;
 
         // Initializes a new instance of the System.Net.Sockets.TcpClient class.
-        public TcpClient() : this(AddressFamily.Unknown)
-        {
-        }
+        public TcpClient() : this(AddressFamily.Unknown) { }
 
         // Initializes a new instance of the System.Net.Sockets.TcpClient class.
         public TcpClient(AddressFamily family)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, family);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, family);
 
             // Validate parameter
-            if (family != AddressFamily.InterNetwork &&
-                family != AddressFamily.InterNetworkV6 &&
-                family != AddressFamily.Unknown)
-            {
-                throw new ArgumentException(SR.Format(SR.net_protocol_invalid_family, "TCP"), nameof(family));
+            if (
+                family != AddressFamily.InterNetwork
+                && family != AddressFamily.InterNetworkV6
+                && family != AddressFamily.Unknown
+            ) {
+                throw new ArgumentException(
+                    SR.Format(SR.net_protocol_invalid_family, "TCP"),
+                    nameof(family)
+                );
             }
 
             _family = family;
@@ -47,7 +50,8 @@ namespace System.Net.Sockets
         // Initializes a new instance of the System.Net.Sockets.TcpClient class with the specified end point.
         public TcpClient(IPEndPoint localEP)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, localEP);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, localEP);
 
             if (localEP == null)
             {
@@ -63,7 +67,8 @@ namespace System.Net.Sockets
         // the specified host.
         public TcpClient(string hostname, int port)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, hostname);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, hostname);
 
             if (hostname == null)
             {
@@ -131,7 +136,6 @@ namespace System.Net.Sockets
         // Connects the Client to the specified port on the specified host.
         public void Connect(string hostname, int port)
         {
-
             ThrowIfDisposed();
 
             if (hostname == null)
@@ -169,10 +173,21 @@ namespace System.Net.Sockets
                         {
                             // We came via the <hostname,port> constructor. Set the address family appropriately,
                             // create the socket and try to connect.
-                            Debug.Assert(address.AddressFamily == AddressFamily.InterNetwork || address.AddressFamily == AddressFamily.InterNetworkV6);
-                            if ((address.AddressFamily == AddressFamily.InterNetwork && Socket.OSSupportsIPv4) || Socket.OSSupportsIPv6)
-                            {
-                                var socket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                            Debug.Assert(
+                                address.AddressFamily == AddressFamily.InterNetwork
+                                    || address.AddressFamily == AddressFamily.InterNetworkV6
+                            );
+                            if (
+                                (
+                                    address.AddressFamily == AddressFamily.InterNetwork
+                                    && Socket.OSSupportsIPv4
+                                ) || Socket.OSSupportsIPv6
+                            ) {
+                                var socket = new Socket(
+                                    address.AddressFamily,
+                                    SocketType.Stream,
+                                    ProtocolType.Tcp
+                                );
                                 if (address.IsIPv4MappedToIPv6)
                                 {
                                     socket.DualMode = true;
@@ -201,8 +216,9 @@ namespace System.Net.Sockets
                             _active = true;
                             break;
                         }
-                        else if (address.AddressFamily == _family || _family == AddressFamily.Unknown)
-                        {
+                        else if (
+                            address.AddressFamily == _family || _family == AddressFamily.Unknown
+                        ) {
                             // Only use addresses with a matching family
                             Connect(new IPEndPoint(address, port));
                             _active = true;
@@ -215,6 +231,7 @@ namespace System.Net.Sockets
                     }
                 }
             }
+
             finally
             {
                 if (!_active)
@@ -289,14 +306,20 @@ namespace System.Net.Sockets
             _active = true;
         }
 
-        public ValueTask ConnectAsync(IPAddress address, int port, CancellationToken cancellationToken) =>
-            CompleteConnectAsync(Client.ConnectAsync(address, port, cancellationToken));
+        public ValueTask ConnectAsync(
+            IPAddress address,
+            int port,
+            CancellationToken cancellationToken
+        ) => CompleteConnectAsync(Client.ConnectAsync(address, port, cancellationToken));
 
         public ValueTask ConnectAsync(string host, int port, CancellationToken cancellationToken) =>
             CompleteConnectAsync(Client.ConnectAsync(host, port, cancellationToken));
 
-        public ValueTask ConnectAsync(IPAddress[] addresses, int port, CancellationToken cancellationToken) =>
-            CompleteConnectAsync(Client.ConnectAsync(addresses, port, cancellationToken));
+        public ValueTask ConnectAsync(
+            IPAddress[] addresses,
+            int port,
+            CancellationToken cancellationToken
+        ) => CompleteConnectAsync(Client.ConnectAsync(addresses, port, cancellationToken));
 
         /// <summary>
         /// Connects the client to a remote TCP host using the specified endpoint as an asynchronous operation.
@@ -313,20 +336,31 @@ namespace System.Net.Sockets
             _active = true;
         }
 
-        public IAsyncResult BeginConnect(IPAddress address, int port, AsyncCallback? requestCallback, object? state) =>
-            Client.BeginConnect(address, port, requestCallback, state);
+        public IAsyncResult BeginConnect(
+            IPAddress address,
+            int port,
+            AsyncCallback? requestCallback,
+            object? state
+        ) => Client.BeginConnect(address, port, requestCallback, state);
 
-        public IAsyncResult BeginConnect(string host, int port, AsyncCallback? requestCallback, object? state) =>
-            Client.BeginConnect(host, port, requestCallback, state);
+        public IAsyncResult BeginConnect(
+            string host,
+            int port,
+            AsyncCallback? requestCallback,
+            object? state
+        ) => Client.BeginConnect(host, port, requestCallback, state);
 
-        public IAsyncResult BeginConnect(IPAddress[] addresses, int port, AsyncCallback? requestCallback, object? state) =>
-            Client.BeginConnect(addresses, port, requestCallback, state);
+        public IAsyncResult BeginConnect(
+            IPAddress[] addresses,
+            int port,
+            AsyncCallback? requestCallback,
+            object? state
+        ) => Client.BeginConnect(addresses, port, requestCallback, state);
 
         public void EndConnect(IAsyncResult asyncResult)
         {
             _clientSocket.EndConnect(asyncResult);
             _active = true;
-
         }
 
         // Returns the stream used to read and write data to the remote host.
@@ -374,6 +408,7 @@ namespace System.Net.Sockets
                             {
                                 chkClientSocket.InternalShutdown(SocketShutdown.Both);
                             }
+
                             finally
                             {
                                 chkClientSocket.Close();
@@ -393,29 +428,81 @@ namespace System.Net.Sockets
         // Gets or sets the size of the receive buffer in bytes.
         public int ReceiveBufferSize
         {
-            get { return (int)Client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer)!; }
-            set { Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, value); }
+            get
+            {
+                return (int)Client.GetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.ReceiveBuffer
+                )!;
+            }
+            set
+            {
+                Client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.ReceiveBuffer,
+                    value
+                );
+            }
         }
 
         // Gets or sets the size of the send buffer in bytes.
         public int SendBufferSize
         {
-            get { return (int)Client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendBuffer)!; }
-            set { Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendBuffer, value); }
+            get
+            {
+                return (int)Client.GetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.SendBuffer
+                )!;
+            }
+            set
+            {
+                Client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.SendBuffer,
+                    value
+                );
+            }
         }
 
         // Gets or sets the receive time out value of the connection in milliseconds.
         public int ReceiveTimeout
         {
-            get { return (int)Client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout)!; }
-            set { Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, value); }
+            get
+            {
+                return (int)Client.GetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.ReceiveTimeout
+                )!;
+            }
+            set
+            {
+                Client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.ReceiveTimeout,
+                    value
+                );
+            }
         }
 
         // Gets or sets the send time out value of the connection in milliseconds.
         public int SendTimeout
         {
-            get { return (int)Client.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout)!; }
-            set { Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, value); }
+            get
+            {
+                return (int)Client.GetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.SendTimeout
+                )!;
+            }
+            set
+            {
+                Client.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.SendTimeout,
+                    value
+                );
+            }
         }
 
         // Gets or sets the value of the connection's linger option.
@@ -458,7 +545,8 @@ namespace System.Net.Sockets
                 ThrowObjectDisposedException();
             }
 
-            void ThrowObjectDisposedException() => throw new ObjectDisposedException(GetType().FullName);
+            void ThrowObjectDisposedException() =>
+                throw new ObjectDisposedException(GetType().FullName);
         }
     }
 }

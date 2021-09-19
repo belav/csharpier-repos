@@ -14,8 +14,10 @@ namespace Internal.TypeSystem
 
         private MethodSignature _signature;
 
-        internal MethodForInstantiatedType(MethodDesc typicalMethodDef, InstantiatedType instantiatedType)
-        {
+        internal MethodForInstantiatedType(
+            MethodDesc typicalMethodDef,
+            InstantiatedType instantiatedType
+        ) {
             Debug.Assert(typicalMethodDef.GetTypicalMethodDefinition() == typicalMethodDef);
             _typicalMethodDef = typicalMethodDef;
             _instantiatedType = instantiatedType;
@@ -24,26 +26,23 @@ namespace Internal.TypeSystem
         // This constructor is a performance optimization - it allows supplying the hash code if it has already
         // been computed prior to the allocation of this type. The supplied hash code still has to match the
         // hash code this type would compute on it's own (and we assert to enforce that).
-        internal MethodForInstantiatedType(MethodDesc typicalMethodDef, InstantiatedType instantiatedType, int hashcode)
-            : this(typicalMethodDef, instantiatedType)
+        internal MethodForInstantiatedType(
+            MethodDesc typicalMethodDef,
+            InstantiatedType instantiatedType,
+            int hashcode
+        ) : this(typicalMethodDef, instantiatedType)
         {
             SetHashCode(hashcode);
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _typicalMethodDef.Context;
-            }
+            get { return _typicalMethodDef.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _instantiatedType;
-            }
+            get { return _instantiatedType; }
         }
 
         private TypeDesc Instantiate(TypeDesc type)
@@ -73,42 +72,27 @@ namespace Internal.TypeSystem
 
         public override Instantiation Instantiation
         {
-            get
-            {
-                return _typicalMethodDef.Instantiation;
-            }
+            get { return _typicalMethodDef.Instantiation; }
         }
 
         public override bool IsVirtual
         {
-            get
-            {
-                return _typicalMethodDef.IsVirtual;
-            }
+            get { return _typicalMethodDef.IsVirtual; }
         }
 
         public override bool IsNewSlot
         {
-            get
-            {
-                return _typicalMethodDef.IsNewSlot;
-            }
+            get { return _typicalMethodDef.IsNewSlot; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return _typicalMethodDef.IsAbstract;
-            }
+            get { return _typicalMethodDef.IsAbstract; }
         }
 
         public override bool IsFinal
         {
-            get
-            {
-                return _typicalMethodDef.IsFinal;
-            }
+            get { return _typicalMethodDef.IsFinal; }
         }
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)
@@ -123,18 +107,12 @@ namespace Internal.TypeSystem
 
         public override bool IsDefaultConstructor
         {
-            get
-            {
-                return _typicalMethodDef.IsDefaultConstructor;
-            }
+            get { return _typicalMethodDef.IsDefaultConstructor; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _typicalMethodDef.Name;
-            }
+            get { return _typicalMethodDef.Name; }
         }
     }
 }

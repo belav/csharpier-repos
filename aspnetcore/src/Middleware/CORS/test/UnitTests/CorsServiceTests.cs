@@ -18,17 +18,14 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             // Arrange
             var corsService = GetCorsService();
             var requestContext = GetHttpContext("POST", origin: null);
-            var policy = new CorsPolicy
-            {
-                Origins = { "*" },
-                SupportsCredentials = true,
-            };
+            var policy = new CorsPolicy { Origins = { "*" }, SupportsCredentials = true, };
 
             // Act & Assert
             ExceptionAssert.ThrowsArgument(
                 () => corsService.EvaluatePolicy(requestContext, policy),
                 "policy",
-                Resources.InsecureConfiguration);
+                Resources.InsecureConfiguration
+            );
         }
 
         [Fact]
@@ -83,10 +80,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             // Arrange
             var corsService = GetCorsService();
             var requestContext = GetHttpContext(origin: "http://example.com");
-            var policy = new CorsPolicy()
-            {
-                IsOriginAllowed = origin => false
-            };
+            var policy = new CorsPolicy() { IsOriginAllowed = origin => false };
             policy.Origins.Add("example.com");
 
             // Act
@@ -103,10 +97,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             var corsService = GetCorsService();
             var requestContext = GetHttpContext(origin: "http://example.com");
 
-            var policy = new CorsPolicy
-            {
-                SupportsCredentials = false
-            };
+            var policy = new CorsPolicy { SupportsCredentials = false };
 
             policy.Origins.Add(CorsConstants.AnyOrigin);
 
@@ -139,10 +130,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             // Arrange
             var corsService = GetCorsService();
             var requestContext = GetHttpContext(origin: "http://example.com");
-            var policy = new CorsPolicy
-            {
-                SupportsCredentials = false
-            };
+            var policy = new CorsPolicy { SupportsCredentials = false };
             policy.Origins.Add(CorsConstants.AnyOrigin);
 
             // Act
@@ -158,10 +146,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             // Arrange
             var corsService = GetCorsService();
             var requestContext = GetHttpContext(origin: "http://example.com");
-            var policy = new CorsPolicy
-            {
-                SupportsCredentials = true
-            };
+            var policy = new CorsPolicy { SupportsCredentials = true };
             policy.Origins.Add("http://example.com");
 
             // Act
@@ -297,7 +282,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         {
             // Arrange
             var corsService = GetCorsService();
-            var requestContext = GetHttpContext(method: "OPTIONS", origin: "http://example.com", accessControlRequestMethod: "PUT");
+            var requestContext = GetHttpContext(
+                method: "OPTIONS",
+                origin: "http://example.com",
+                accessControlRequestMethod: "PUT"
+            );
             var policy = new CorsPolicy();
             policy.Origins.Add(CorsConstants.AnyOrigin);
             policy.Methods.Add("GET");
@@ -314,7 +303,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         {
             // Arrange
             var corsService = GetCorsService();
-            var requestContext = GetHttpContext(method: "OPTIONS", origin: "http://example.com", accessControlRequestMethod: "PUT");
+            var requestContext = GetHttpContext(
+                method: "OPTIONS",
+                origin: "http://example.com",
+                accessControlRequestMethod: "PUT"
+            );
             var policy = new CorsPolicy();
             policy.Origins.Add(CorsConstants.AnyOrigin);
             policy.Methods.Add("PUT");
@@ -330,14 +323,16 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         [Theory]
         [InlineData("OpTions")]
         [InlineData("OPTIONS")]
-        public void EvaluatePolicy_CaseInsensitivePreflightRequest_OriginAllowed_ReturnsOrigin(string preflightMethod)
-        {
+        public void EvaluatePolicy_CaseInsensitivePreflightRequest_OriginAllowed_ReturnsOrigin(
+            string preflightMethod
+        ) {
             // Arrange
             var corsService = GetCorsService();
             var requestContext = GetHttpContext(
                 method: preflightMethod,
                 origin: "http://example.com",
-                accessControlRequestMethod: "PUT");
+                accessControlRequestMethod: "PUT"
+            );
             var policy = new CorsPolicy();
             policy.Origins.Add(CorsConstants.AnyOrigin);
             policy.Origins.Add("http://example.com");
@@ -358,11 +353,9 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             var requestContext = GetHttpContext(
                 method: "OPTIONS",
                 origin: "http://example.com",
-                accessControlRequestMethod: "PUT");
-            var policy = new CorsPolicy
-            {
-                IsOriginAllowed = origin => true
-            };
+                accessControlRequestMethod: "PUT"
+            );
+            var policy = new CorsPolicy { IsOriginAllowed = origin => true };
             policy.Methods.Add("*");
 
             // Act
@@ -377,11 +370,12 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         {
             // Arrange
             var corsService = GetCorsService();
-            var requestContext = GetHttpContext(method: "OPTIONS", origin: "http://example.com", accessControlRequestMethod: "PUT");
-            var policy = new CorsPolicy
-            {
-                SupportsCredentials = true
-            };
+            var requestContext = GetHttpContext(
+                method: "OPTIONS",
+                origin: "http://example.com",
+                accessControlRequestMethod: "PUT"
+            );
+            var policy = new CorsPolicy { SupportsCredentials = true };
             policy.Origins.Add("http://example.com");
             policy.Methods.Add("*");
 
@@ -397,11 +391,12 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         {
             // Arrange
             var corsService = GetCorsService();
-            var requestContext = GetHttpContext(method: "OPTIONS", origin: "http://example.com", accessControlRequestMethod: "PUT");
-            var policy = new CorsPolicy
-            {
-                PreflightMaxAge = null
-            };
+            var requestContext = GetHttpContext(
+                method: "OPTIONS",
+                origin: "http://example.com",
+                accessControlRequestMethod: "PUT"
+            );
+            var policy = new CorsPolicy { PreflightMaxAge = null };
             policy.Origins.Add(CorsConstants.AnyOrigin);
             policy.Methods.Add("*");
 
@@ -417,11 +412,12 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         {
             // Arrange
             var corsService = GetCorsService();
-            var requestContext = GetHttpContext(method: "OPTIONS", origin: "http://example.com", accessControlRequestMethod: "PUT");
-            var policy = new CorsPolicy
-            {
-                PreflightMaxAge = TimeSpan.FromSeconds(10)
-            };
+            var requestContext = GetHttpContext(
+                method: "OPTIONS",
+                origin: "http://example.com",
+                accessControlRequestMethod: "PUT"
+            );
+            var policy = new CorsPolicy { PreflightMaxAge = TimeSpan.FromSeconds(10) };
             policy.Origins.Add(CorsConstants.AnyOrigin);
             policy.Methods.Add("*");
 
@@ -437,7 +433,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         {
             // Arrange
             var corsService = GetCorsService();
-            var requestContext = GetHttpContext(method: "OPTIONS", origin: "http://example.com", accessControlRequestMethod: "GET");
+            var requestContext = GetHttpContext(
+                method: "OPTIONS",
+                origin: "http://example.com",
+                accessControlRequestMethod: "GET"
+            );
             var policy = new CorsPolicy();
             policy.Origins.Add(CorsConstants.AnyOrigin);
             policy.Methods.Add("*");
@@ -452,14 +452,16 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         [Theory]
         [InlineData("Put")]
         [InlineData("PUT")]
-        public void EvaluatePolicy_CaseInsensitivePreflightRequest_ReturnsAllowedMethods(string method)
-        {
+        public void EvaluatePolicy_CaseInsensitivePreflightRequest_ReturnsAllowedMethods(
+            string method
+        ) {
             // Arrange
             var corsService = GetCorsService();
             var requestContext = GetHttpContext(
                 method: "OPTIONS",
                 origin: "http://example.com",
-                accessControlRequestMethod: method);
+                accessControlRequestMethod: method
+            );
             var policy = new CorsPolicy();
             policy.Origins.Add(CorsConstants.AnyOrigin);
             policy.Methods.Add("PUT");
@@ -477,7 +479,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         {
             // Arrange
             var corsService = GetCorsService();
-            var requestContext = GetHttpContext(method: "OPTIONS", origin: "http://example.com", accessControlRequestMethod: "PUT");
+            var requestContext = GetHttpContext(
+                method: "OPTIONS",
+                origin: "http://example.com",
+                accessControlRequestMethod: "PUT"
+            );
             var policy = new CorsPolicy();
             policy.Origins.Add(CorsConstants.AnyOrigin);
             policy.Methods.Add("*");
@@ -500,7 +506,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
                 method: "OPTIONS",
                 origin: "http://example.com",
                 accessControlRequestMethod: "PUT",
-                accessControlRequestHeaders: new[] { "foo", "bar" });
+                accessControlRequestHeaders: new[] { "foo", "bar" }
+            );
             var policy = new CorsPolicy();
             policy.Origins.Add(CorsConstants.AnyOrigin);
             policy.Methods.Add("*");
@@ -523,7 +530,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
                 method: "OPTIONS",
                 origin: "http://example.com",
                 accessControlRequestMethod: "PUT",
-                accessControlRequestHeaders: new[] { "match", "noMatch" });
+                accessControlRequestHeaders: new[] { "match", "noMatch" }
+            );
             var policy = new CorsPolicy();
             policy.Origins.Add(CorsConstants.AnyOrigin);
             policy.Methods.Add("*");
@@ -543,7 +551,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         {
             // Arrange
             var corsService = GetCorsService();
-            var httpContext = GetHttpContext(method: "OPTIONS", origin: "http://example.com", accessControlRequestMethod: "PUT");
+            var httpContext = GetHttpContext(
+                method: "OPTIONS",
+                origin: "http://example.com",
+                accessControlRequestMethod: "PUT"
+            );
             var policy = new CorsPolicy();
             policy.Origins.Add("http://example.com");
             policy.Methods.Add("*");
@@ -592,18 +604,17 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             service.ApplyResult(result, httpContext.Response);
 
             // Assert
-            Assert.Equal("http://example.com", httpContext.Response.Headers["Access-Control-Allow-Origin"]);
+            Assert.Equal(
+                "http://example.com",
+                httpContext.Response.Headers["Access-Control-Allow-Origin"]
+            );
         }
 
         [Fact]
         public void ApplyResult_NoAllowOrigin_AllowOriginHeaderNotAdded()
         {
             // Arrange
-            var result = new CorsResult
-            {
-                IsOriginAllowed = true,
-                AllowedOrigin = null
-            };
+            var result = new CorsResult { IsOriginAllowed = true, AllowedOrigin = null };
 
             var httpContext = new DefaultHttpContext();
             var service = GetCorsService();
@@ -619,11 +630,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void ApplyResult_AllowCredentials_AllowCredentialsHeaderAdded()
         {
             // Arrange
-            var result = new CorsResult
-            {
-                IsOriginAllowed = true,
-                SupportsCredentials = true
-            };
+            var result = new CorsResult { IsOriginAllowed = true, SupportsCredentials = true };
 
             var service = GetCorsService();
 
@@ -639,11 +646,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void ApplyResult_AddVaryHeader_VaryHeaderAdded()
         {
             // Arrange
-            var result = new CorsResult
-            {
-                IsOriginAllowed = true,
-                VaryByOrigin = true
-            };
+            var result = new CorsResult { IsOriginAllowed = true, VaryByOrigin = true };
 
             var httpContext = new DefaultHttpContext();
             var service = GetCorsService();
@@ -659,11 +662,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void ApplyResult_AppendsVaryHeader()
         {
             // Arrange
-            var result = new CorsResult
-            {
-                IsOriginAllowed = true,
-                VaryByOrigin = true
-            };
+            var result = new CorsResult { IsOriginAllowed = true, VaryByOrigin = true };
 
             var httpContext = new DefaultHttpContext();
             httpContext.Response.Headers["Vary"] = "Cookie";
@@ -680,11 +679,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         public void ApplyResult_NoAllowCredentials_AllowCredentialsHeaderNotAdded()
         {
             // Arrange
-            var result = new CorsResult
-            {
-                IsOriginAllowed = true,
-                SupportsCredentials = false
-            };
+            var result = new CorsResult { IsOriginAllowed = true, SupportsCredentials = false };
 
             var httpContext = new DefaultHttpContext();
             var service = GetCorsService();
@@ -693,7 +688,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             service.ApplyResult(result, httpContext.Response);
 
             // Assert
-            Assert.DoesNotContain("Access-Control-Allow-Credentials", httpContext.Response.Headers.Keys);
+            Assert.DoesNotContain(
+                "Access-Control-Allow-Credentials",
+                httpContext.Response.Headers.Keys
+            );
         }
 
         [Fact]
@@ -713,7 +711,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             service.ApplyResult(result, httpContext.Response);
 
             // Assert
-            Assert.DoesNotContain("Access-Control-Allow-Methods", httpContext.Response.Headers.Keys);
+            Assert.DoesNotContain(
+                "Access-Control-Allow-Methods",
+                httpContext.Response.Headers.Keys
+            );
         }
 
         [Fact]
@@ -754,7 +755,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             service.ApplyResult(result, httpContext.Response);
 
             // Assert
-            Assert.DoesNotContain("Access-Control-Allow-Headers", httpContext.Response.Headers.Keys);
+            Assert.DoesNotContain(
+                "Access-Control-Allow-Headers",
+                httpContext.Response.Headers.Keys
+            );
         }
 
         [Fact]
@@ -778,7 +782,6 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             Assert.Equal("foo", httpContext.Response.Headers["Access-Control-Allow-Headers"]);
         }
 
-
         [Fact]
         public void ApplyResult_NoAllowExposedHeaders_ExposedHeadersHeaderNotAdded()
         {
@@ -796,7 +799,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             service.ApplyResult(result, httpContext.Response);
 
             // Assert
-            Assert.DoesNotContain("Access-Control-Expose-Headers", httpContext.Response.Headers.Keys);
+            Assert.DoesNotContain(
+                "Access-Control-Expose-Headers",
+                httpContext.Response.Headers.Keys
+            );
         }
 
         [Fact]
@@ -817,7 +823,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             service.ApplyResult(result, httpContext.Response);
 
             // Assert
-            Assert.DoesNotContain("Access-Control-Expose-Headers", httpContext.Response.Headers.Keys);
+            Assert.DoesNotContain(
+                "Access-Control-Expose-Headers",
+                httpContext.Response.Headers.Keys
+            );
         }
 
         [Fact]
@@ -838,9 +847,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             service.ApplyResult(result, httpContext.Response);
 
             // Assert
-            Assert.Equal("foo,bar", httpContext.Response.Headers[CorsConstants.AccessControlExposeHeaders]);
+            Assert.Equal(
+                "foo,bar",
+                httpContext.Response.Headers[CorsConstants.AccessControlExposeHeaders]
+            );
         }
-
 
         [Fact]
         public void ApplyResult_OneAllowExposedHeaders_ExposedHeadersHeaderAdded()
@@ -948,8 +959,8 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             string method = null,
             string origin = null,
             string accessControlRequestMethod = null,
-            string[] accessControlRequestHeaders = null)
-        {
+            string[] accessControlRequestHeaders = null
+        ) {
             var context = new DefaultHttpContext();
 
             if (method != null)
@@ -964,12 +975,18 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
 
             if (accessControlRequestMethod != null)
             {
-                context.Request.Headers.Add(CorsConstants.AccessControlRequestMethod, new[] { accessControlRequestMethod });
+                context.Request.Headers.Add(
+                    CorsConstants.AccessControlRequestMethod,
+                    new[] { accessControlRequestMethod }
+                );
             }
 
             if (accessControlRequestHeaders != null)
             {
-                context.Request.Headers.Add(CorsConstants.AccessControlRequestHeaders, accessControlRequestHeaders);
+                context.Request.Headers.Add(
+                    CorsConstants.AccessControlRequestHeaders,
+                    accessControlRequestHeaders
+                );
             }
 
             return context;

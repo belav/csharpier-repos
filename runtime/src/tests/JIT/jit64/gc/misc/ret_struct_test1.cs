@@ -22,10 +22,14 @@ class T
         Console.WriteLine(mvc.i2);
         Console.WriteLine(mvc.S3);
         Console.WriteLine(mvc.S4);
-        if (mvc.S1 != "Hello") return -1;
-        if (mvc.S3 != "this") return -1;
-        if (mvc.S4 != "works!") return -1;
-        if (mvc.i2 != 7) return -1;
+        if (mvc.S1 != "Hello")
+            return -1;
+        if (mvc.S3 != "this")
+            return -1;
+        if (mvc.S4 != "works!")
+            return -1;
+        if (mvc.i2 != 7)
+            return -1;
         return 100;
     }
 

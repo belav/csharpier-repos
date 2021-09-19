@@ -24,9 +24,16 @@ namespace Microsoft.AspNetCore.Testing
             IMessageBus messageBus,
             ITestCaseOrderer testCaseOrderer,
             ExceptionAggregator aggregator,
-            CancellationTokenSource cancellationTokenSource)
-            : base(testCollection, testCases, diagnosticMessageSink, messageBus, testCaseOrderer, aggregator, cancellationTokenSource)
-        {
+            CancellationTokenSource cancellationTokenSource
+        ) : base(
+            testCollection,
+            testCases,
+            diagnosticMessageSink,
+            messageBus,
+            testCaseOrderer,
+            aggregator,
+            cancellationTokenSource
+        ) {
             _assemblyFixtureMappings = assemblyFixtureMappings;
             _diagnosticMessageSink = diagnosticMessageSink;
         }
@@ -57,8 +64,11 @@ namespace Microsoft.AspNetCore.Testing
             return base.BeforeTestCollectionFinishedAsync();
         }
 
-        protected override Task<RunSummary> RunTestClassAsync(ITestClass testClass, IReflectionTypeInfo @class, IEnumerable<IXunitTestCase> testCases)
-        {
+        protected override Task<RunSummary> RunTestClassAsync(
+            ITestClass testClass,
+            IReflectionTypeInfo @class,
+            IEnumerable<IXunitTestCase> testCases
+        ) {
             var runner = new AspNetTestClassRunner(
                 testClass,
                 @class,
@@ -68,7 +78,8 @@ namespace Microsoft.AspNetCore.Testing
                 TestCaseOrderer,
                 new ExceptionAggregator(Aggregator),
                 CancellationTokenSource,
-                CollectionFixtureMappings);
+                CollectionFixtureMappings
+            );
             return runner.RunAsync();
         }
     }

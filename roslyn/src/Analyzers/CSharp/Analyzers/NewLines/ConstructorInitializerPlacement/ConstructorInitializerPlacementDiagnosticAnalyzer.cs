@@ -14,35 +14,50 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class ConstructorInitializerPlacementDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class ConstructorInitializerPlacementDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ConstructorInitializerPlacementDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.ConstructorInitializerPlacementDiagnosticId,
-                   EnforceOnBuildValues.ConsecutiveBracePlacement,
-                   CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
-                   LanguageNames.CSharp,
-                   new LocalizableResourceString(
-                       nameof(CSharpAnalyzersResources.Blank_line_not_allowed_after_constructor_initializer_colon), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.ConstructorInitializerPlacementDiagnosticId,
+                EnforceOnBuildValues.ConsecutiveBracePlacement,
+                CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                LanguageNames.CSharp,
+                new LocalizableResourceString(
+                    nameof(
+                        CSharpAnalyzersResources.Blank_line_not_allowed_after_constructor_initializer_colon
+                    ),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxTreeAction(AnalyzeTree);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxTreeAction(AnalyzeTree);
 
         private void AnalyzeTree(SyntaxTreeAnalysisContext context)
         {
-            var option = context.GetOption(CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer);
+            var option = context.GetOption(
+                CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer
+            );
             if (option.Value)
                 return;
 
-            Recurse(context, option.Notification.Severity, context.Tree.GetRoot(context.CancellationToken));
+            Recurse(
+                context,
+                option.Notification.Severity,
+                context.Tree.GetRoot(context.CancellationToken)
+            );
         }
 
-        private void Recurse(SyntaxTreeAnalysisContext context, ReportDiagnostic severity, SyntaxNode node)
-        {
+        private void Recurse(
+            SyntaxTreeAnalysisContext context,
+            ReportDiagnostic severity,
+            SyntaxNode node
+        ) {
             context.CancellationToken.ThrowIfCancellationRequested();
 
             // Don't bother analyzing nodes that have syntax errors in them.
@@ -60,8 +75,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
         }
 
         private void ProcessConstructorInitializer(
-            SyntaxTreeAnalysisContext context, ReportDiagnostic severity, ConstructorInitializerSyntax initializer)
-        {
+            SyntaxTreeAnalysisContext context,
+            ReportDiagnostic severity,
+            ConstructorInitializerSyntax initializer
+        ) {
             var sourceText = context.Tree.GetText(context.CancellationToken);
 
             var colonToken = initializer.ColonToken;
@@ -81,15 +98,22 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             if (colonToken.TrailingTrivia.Any(t => !t.IsWhitespaceOrEndOfLine()))
                 return;
 
-            if (thisOrBaseKeyword.LeadingTrivia.Any(t => !t.IsWhitespaceOrEndOfLine() && !t.IsSingleOrMultiLineComment()))
+            if (
+                thisOrBaseKeyword.LeadingTrivia.Any(
+                    t => !t.IsWhitespaceOrEndOfLine() && !t.IsSingleOrMultiLineComment()
+                )
+            )
                 return;
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                this.Descriptor,
-                colonToken.GetLocation(),
-                severity,
-                additionalLocations: ImmutableArray.Create(initializer.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    this.Descriptor,
+                    colonToken.GetLocation(),
+                    severity,
+                    additionalLocations: ImmutableArray.Create(initializer.GetLocation()),
+                    properties: null
+                )
+            );
         }
     }
 }

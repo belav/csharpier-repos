@@ -9,16 +9,18 @@ using System.Linq;
 
 namespace Roslyn.Utilities
 {
-    internal sealed class ImmutableSetWithInsertionOrder<T> : IEnumerable<T>
-        where T : notnull
+    internal sealed class ImmutableSetWithInsertionOrder<T> : IEnumerable<T> where T : notnull
     {
-        public static readonly ImmutableSetWithInsertionOrder<T> Empty = new ImmutableSetWithInsertionOrder<T>(ImmutableDictionary.Create<T, uint>(), 0u);
+        public static readonly ImmutableSetWithInsertionOrder<T> Empty =
+            new ImmutableSetWithInsertionOrder<T>(ImmutableDictionary.Create<T, uint>(), 0u);
 
         private readonly ImmutableDictionary<T, uint> _map;
         private readonly uint _nextElementValue;
 
-        private ImmutableSetWithInsertionOrder(ImmutableDictionary<T, uint> map, uint nextElementValue)
-        {
+        private ImmutableSetWithInsertionOrder(
+            ImmutableDictionary<T, uint> map,
+            uint nextElementValue
+        ) {
             _map = map;
             _nextElementValue = nextElementValue;
         }
@@ -41,7 +43,10 @@ namespace Roslyn.Utilities
                 return this;
             }
 
-            return new ImmutableSetWithInsertionOrder<T>(_map.Add(value, _nextElementValue), _nextElementValue + 1u);
+            return new ImmutableSetWithInsertionOrder<T>(
+                _map.Add(value, _nextElementValue),
+                _nextElementValue + 1u
+            );
         }
 
         public ImmutableSetWithInsertionOrder<T> Remove(T value)
@@ -53,7 +58,9 @@ namespace Roslyn.Utilities
                 return this;
             }
 
-            return this.Count == 1 ? Empty : new ImmutableSetWithInsertionOrder<T>(modifiedMap, _nextElementValue);
+            return this.Count == 1
+                ? Empty
+                : new ImmutableSetWithInsertionOrder<T>(modifiedMap, _nextElementValue);
         }
 
         public IEnumerable<T> InInsertionOrder

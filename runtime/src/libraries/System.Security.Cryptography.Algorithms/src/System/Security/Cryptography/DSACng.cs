@@ -55,9 +55,9 @@ namespace System.Security.Cryptography
             private byte[] ExportKeyBlob(bool includePrivateParameters)
             {
                 // Use generic blob type for multiple version support
-                string blobType = includePrivateParameters ?
-                    Interop.BCrypt.KeyBlobType.BCRYPT_PRIVATE_KEY_BLOB :
-                    Interop.BCrypt.KeyBlobType.BCRYPT_PUBLIC_KEY_BLOB;
+                string blobType = includePrivateParameters
+                    ? Interop.BCrypt.KeyBlobType.BCRYPT_PRIVATE_KEY_BLOB
+                    : Interop.BCrypt.KeyBlobType.BCRYPT_PUBLIC_KEY_BLOB;
 
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
                 {
@@ -77,8 +77,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> pkcs8Password,
                 int kdfCount,
                 Span<byte> destination,
-                out int bytesWritten)
-            {
+                out int bytesWritten
+            ) {
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
                 {
                     return CngKeyLite.TryExportPkcs8KeyBlob(
@@ -86,7 +86,8 @@ namespace System.Security.Cryptography
                         pkcs8Password,
                         kdfCount,
                         destination,
-                        out bytesWritten);
+                        out bytesWritten
+                    );
                 }
             }
 
@@ -95,9 +96,9 @@ namespace System.Security.Cryptography
                 ThrowIfDisposed();
 
                 // Use generic blob type for multiple version support
-                string blobType = includePrivate ?
-                    Interop.BCrypt.KeyBlobType.BCRYPT_PRIVATE_KEY_BLOB :
-                    Interop.BCrypt.KeyBlobType.BCRYPT_PUBLIC_KEY_BLOB;
+                string blobType = includePrivate
+                    ? Interop.BCrypt.KeyBlobType.BCRYPT_PRIVATE_KEY_BLOB
+                    : Interop.BCrypt.KeyBlobType.BCRYPT_PUBLIC_KEY_BLOB;
 
                 SafeNCryptKeyHandle keyHandle = CngKeyLite.ImportKeyBlob(blobType, dsaBlob);
                 SetKeyHandle(keyHandle);
@@ -140,7 +141,6 @@ namespace System.Security.Cryptography
                     _keyHandle = null;
                     _disposed = true;
                 }
-
 
                 base.Dispose(disposing);
             }

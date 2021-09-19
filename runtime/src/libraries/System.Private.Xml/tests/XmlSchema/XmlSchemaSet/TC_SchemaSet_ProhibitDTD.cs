@@ -52,7 +52,9 @@ namespace System.Xml.Tests
 
             if (args.Exception.InnerException != null)
             {
-                _output.WriteLine("InnerException Message:" + args.Exception.InnerException.Message + "\n");
+                _output.WriteLine(
+                    "InnerException Message:" + args.Exception.InnerException.Message + "\n"
+                );
             }
             else
             {
@@ -95,10 +97,11 @@ namespace System.Xml.Tests
             settings.Schemas.ValidationEventHandler += ValidationCallback;
             settings.Schemas.Add(ss);
             settings.ValidationType = ValidationType.Schema;
-            settings.ValidationFlags = XmlSchemaValidationFlags.ReportValidationWarnings |
-                               XmlSchemaValidationFlags.ProcessSchemaLocation |
-                               XmlSchemaValidationFlags.ProcessIdentityConstraints |
-                               XmlSchemaValidationFlags.ProcessInlineSchema;
+            settings.ValidationFlags =
+                XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessSchemaLocation
+                | XmlSchemaValidationFlags.ProcessIdentityConstraints
+                | XmlSchemaValidationFlags.ProcessInlineSchema;
 
             settings.ValidationEventHandler += ValidationCallback;
 
@@ -114,10 +117,11 @@ namespace System.Xml.Tests
             settings.Schemas.ValidationEventHandler += ValidationCallback;
             settings.Schemas.Add(ss);
             settings.ValidationType = ValidationType.Schema;
-            settings.ValidationFlags = XmlSchemaValidationFlags.ReportValidationWarnings |
-                               XmlSchemaValidationFlags.ProcessSchemaLocation |
-                               XmlSchemaValidationFlags.ProcessIdentityConstraints |
-                               XmlSchemaValidationFlags.ProcessInlineSchema;
+            settings.ValidationFlags =
+                XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessSchemaLocation
+                | XmlSchemaValidationFlags.ProcessIdentityConstraints
+                | XmlSchemaValidationFlags.ProcessInlineSchema;
             settings.ValidationEventHandler += ValidationCallback;
             return XmlReader.Create(reader, settings);
         }
@@ -215,7 +219,16 @@ namespace System.Xml.Tests
             XmlSchemaSet xss = new XmlSchemaSet();
             xss.XmlResolver = new XmlUrlResolver();
             xss.ValidationEventHandler += ValidationCallback;
-            XmlSchema schema = XmlSchema.Read(new StreamReader(new FileStream(Path.Combine(TestData._Root, param0.ToString()), FileMode.Open, FileAccess.Read)), ValidationCallback);
+            XmlSchema schema = XmlSchema.Read(
+                new StreamReader(
+                    new FileStream(
+                        Path.Combine(TestData._Root, param0.ToString()),
+                        FileMode.Open,
+                        FileAccess.Read
+                    )
+                ),
+                ValidationCallback
+            );
 #pragma warning disable 0618
             schema.Compile(ValidationCallback, new XmlUrlResolver());
 #pragma warning restore 0618
@@ -266,7 +279,10 @@ namespace System.Xml.Tests
 
             try
             {
-                XmlSchema schema = XmlSchema.Read(CreateReader(Path.Combine(TestData._Root, param0.ToString())), ValidationCallback);
+                XmlSchema schema = XmlSchema.Read(
+                    CreateReader(Path.Combine(TestData._Root, param0.ToString())),
+                    ValidationCallback
+                );
 #pragma warning disable 0618
                 schema.Compile(ValidationCallback);
 #pragma warning restore 0618
@@ -289,7 +305,10 @@ namespace System.Xml.Tests
 
             try
             {
-                XmlSchema schema = XmlSchema.Read(CreateReader(Path.Combine(TestData._Root, param0.ToString())), ValidationCallback);
+                XmlSchema schema = XmlSchema.Read(
+                    CreateReader(Path.Combine(TestData._Root, param0.ToString())),
+                    ValidationCallback
+                );
 #pragma warning disable 0618
                 schema.Compile(ValidationCallback);
 #pragma warning restore 0618
@@ -341,7 +360,10 @@ namespace System.Xml.Tests
 
             try
             {
-                XmlSchema schema = XmlSchema.Read(CreateReader(Path.Combine(TestData._Root, param0.ToString()), false), ValidationCallback);
+                XmlSchema schema = XmlSchema.Read(
+                    CreateReader(Path.Combine(TestData._Root, param0.ToString()), false),
+                    ValidationCallback
+                );
 #pragma warning disable 0618
                 schema.Compile(ValidationCallback);
 #pragma warning restore 0618
@@ -484,8 +506,13 @@ namespace System.Xml.Tests
 
             try
             {
-                XmlReader reader = CreateReader(Path.Combine(TestData._Root, param0.ToString()), xss, true);
-                while (reader.Read()) ;
+                XmlReader reader = CreateReader(
+                    Path.Combine(TestData._Root, param0.ToString()),
+                    xss,
+                    true
+                );
+                while (reader.Read())
+                    ;
             }
             catch (XmlException)
             {
@@ -507,7 +534,9 @@ namespace System.Xml.Tests
 
             try
             {
-                using (var r1 = CreateReader(Path.Combine(TestData._Root, "bug356711_1.xml"), false))
+                using (
+                    var r1 = CreateReader(Path.Combine(TestData._Root, "bug356711_1.xml"), false)
+                )
                 using (var r2 = CreateReader(r1, xss, true))
                 {
                     while (r2.Read()) { }
@@ -541,8 +570,13 @@ namespace System.Xml.Tests
 
             try
             {
-                XmlReader reader = CreateReader(Path.Combine(TestData._Root, param0.ToString()), xss, false);
-                while (reader.Read()) ;
+                XmlReader reader = CreateReader(
+                    Path.Combine(TestData._Root, param0.ToString()),
+                    xss,
+                    false
+                );
+                while (reader.Read())
+                    ;
             }
             catch (XmlException)
             {
@@ -565,7 +599,8 @@ namespace System.Xml.Tests
             {
                 XmlReader r1 = CreateReader(Path.Combine(TestData._Root, "bug356711_1.xml"), true);
                 XmlReader r2 = CreateReader(r1, xss, false);
-                while (r2.Read()) ;
+                while (r2.Read())
+                    ;
             }
             catch (XmlException)
             {

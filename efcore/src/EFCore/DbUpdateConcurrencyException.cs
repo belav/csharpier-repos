@@ -19,18 +19,13 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
         /// </summary>
-        public DbUpdateConcurrencyException()
-        {
-        }
+        public DbUpdateConcurrencyException() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
         /// </summary>
         /// <param name="message"> The error message that explains the reason for the exception. </param>
-        public DbUpdateConcurrencyException(string message)
-            : base(message)
-        {
-        }
+        public DbUpdateConcurrencyException(string message) : base(message) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
@@ -38,9 +33,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="message"> The error message that explains the reason for the exception. </param>
         /// <param name="innerException"> The exception that is the cause of the current exception. </param>
         public DbUpdateConcurrencyException(string message, Exception? innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
@@ -51,10 +44,8 @@ namespace Microsoft.EntityFrameworkCore
         public DbUpdateConcurrencyException(
             string message,
             Exception? innerException,
-            IReadOnlyList<IUpdateEntry> entries)
-            : base(message, innerException, entries)
-        {
-        }
+            IReadOnlyList<IUpdateEntry> entries
+        ) : base(message, innerException, entries) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
@@ -63,19 +54,17 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="entries"> The entries that were involved in the concurrency violation. </param>
         public DbUpdateConcurrencyException(
             string message,
-            IReadOnlyList<IUpdateEntry> entries)
-            : base(message, entries)
-        {
-        }
+            IReadOnlyList<IUpdateEntry> entries
+        ) : base(message, entries) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbUpdateException" /> class from a serialized form.
         /// </summary>
         /// <param name="info"> The serialization info. </param>
         /// <param name="context"> The streaming context being used. </param>
-        public DbUpdateConcurrencyException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        public DbUpdateConcurrencyException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
     }
 }

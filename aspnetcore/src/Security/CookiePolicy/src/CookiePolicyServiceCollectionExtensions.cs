@@ -17,8 +17,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
         /// <param name="configureOptions">A delegate to configure the <see cref="CookiePolicyOptions"/>.</param>
         /// <returns></returns>
-        public static IServiceCollection AddCookiePolicy(this IServiceCollection services, Action<CookiePolicyOptions> configureOptions)
-        {
+        public static IServiceCollection AddCookiePolicy(
+            this IServiceCollection services,
+            Action<CookiePolicyOptions> configureOptions
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -37,7 +39,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
         /// <param name="configureOptions">A delegate to configure the <see cref="CookiePolicyOptions"/>.</param>
         /// <returns></returns>
-        public static IServiceCollection AddCookiePolicy<TService>(this IServiceCollection services, Action<CookiePolicyOptions, TService> configureOptions) where TService : class
+        public static IServiceCollection AddCookiePolicy<TService>(
+            this IServiceCollection services,
+            Action<CookiePolicyOptions, TService> configureOptions
+        ) where TService : class
         {
             if (services == null)
             {

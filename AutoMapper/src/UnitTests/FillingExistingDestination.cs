@@ -22,10 +22,14 @@ namespace AutoMapper.UnitTests
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().ForMember(d => d.Child, o => o.MapAtRuntime());
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .ForMember(d => d.Child, o => o.MapAtRuntime());
+                }
+            );
 
         [Fact]
         public void Should_overwrite_the_existing_child_destination()
@@ -52,18 +56,17 @@ namespace AutoMapper.UnitTests
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _source = new Source
-            {
-                Value = 10,
-            };
+            _source = new Source { Value = 10, };
             _originalDest = new Destination { Value = 1111 };
             _dest = Mapper.Map<Source, Destination>(_source, _originalDest);
         }
@@ -80,7 +83,7 @@ namespace AutoMapper.UnitTests
             _originalDest.ShouldBeSameAs(_dest);
         }
     }
-       
+
     public class When_the_destination_object_is_specified_with_child_objects : AutoMapperSpecBase
     {
         private Source _source;
@@ -111,32 +114,25 @@ namespace AutoMapper.UnitTests
             public string Name { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>(MemberList.Source)
-                .ForMember(d => d.Child, opt => opt.UseDestinationValue());
-            cfg.CreateMap<ChildSource, ChildDestination>(MemberList.Source)
-                .ForMember(d => d.Name, opt => opt.UseDestinationValue());
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>(MemberList.Source)
+                        .ForMember(d => d.Child, opt => opt.UseDestinationValue());
+                    cfg.CreateMap<ChildSource, ChildDestination>(MemberList.Source)
+                        .ForMember(d => d.Name, opt => opt.UseDestinationValue());
+                }
+            );
 
         protected override void Because_of()
         {
-            _source = new Source
-            {
-                Value = 10,
-                Child = new ChildSource
-                {
-                    Value = 20
-                }
-            };
+            _source = new Source { Value = 10, Child = new ChildSource { Value = 20 } };
             _originalDest = new Destination
             {
                 Value = 1111,
                 Name = "foo",
-                Child = new ChildDestination
-                {
-                    Name = "bar"
-                }
+                Child = new ChildDestination { Name = "bar" }
             };
             _dest = Mapper.Map<Source, Destination>(_source, _originalDest);
         }
@@ -183,29 +179,20 @@ namespace AutoMapper.UnitTests
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-            cfg.CreateMap<ChildSource, ChildDestination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                    cfg.CreateMap<ChildSource, ChildDestination>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _source = new Source
-            {
-                Child = new ChildSource
-                {
-                    Value = 20
-                }
-            };
-            _originalDestChild = new ChildDestination
-            {
-                Value = 10
-            };
-            _originalDest = new Destination
-            {
-                Child = _originalDestChild
-            };
+            _source = new Source { Child = new ChildSource { Value = 20 } };
+            _originalDestChild = new ChildDestination { Value = 10 };
+            _originalDest = new Destination { Child = _originalDestChild };
             _dest = Mapper.Map(_source, _originalDest);
         }
 
@@ -218,8 +205,8 @@ namespace AutoMapper.UnitTests
         }
     }
 
-
-    public class When_the_destination_object_is_specified_and_you_are_converting_an_enum : NonValidatingSpecBase
+    public class When_the_destination_object_is_specified_and_you_are_converting_an_enum
+        : NonValidatingSpecBase
     {
         private string _result;
 
@@ -230,8 +217,8 @@ namespace AutoMapper.UnitTests
             Three
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => { });
-
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(cfg => { });
 
         protected override void Because_of()
         {

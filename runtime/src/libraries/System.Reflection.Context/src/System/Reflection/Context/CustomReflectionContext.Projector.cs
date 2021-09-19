@@ -128,7 +128,9 @@ namespace System.Reflection.Context
                 if (constructor != null)
                     return ProjectConstructor(constructor);
 
-                throw new InvalidOperationException(SR.Format(SR.InvalidOperation_InvalidMethodType, value.GetType()));
+                throw new InvalidOperationException(
+                    SR.Format(SR.InvalidOperation_InvalidMethodType, value.GetType())
+                );
             }
 
             public override PropertyInfo ProjectProperty(PropertyInfo value)
@@ -171,8 +173,9 @@ namespace System.Reflection.Context
                 return new ProjectingLocalVariableInfo(value, this);
             }
 
-            public override ExceptionHandlingClause ProjectExceptionHandlingClause(ExceptionHandlingClause value)
-            {
+            public override ExceptionHandlingClause ProjectExceptionHandlingClause(
+                ExceptionHandlingClause value
+            ) {
                 if (value == null)
                     return null;
 
@@ -181,8 +184,9 @@ namespace System.Reflection.Context
                 return new ProjectingExceptionHandlingClause(value, this);
             }
 
-            public override CustomAttributeData ProjectCustomAttributeData(CustomAttributeData value)
-            {
+            public override CustomAttributeData ProjectCustomAttributeData(
+                CustomAttributeData value
+            ) {
                 if (value == null)
                     return null;
 
@@ -235,21 +239,29 @@ namespace System.Reflection.Context
                         break;
 
                     default:
-                        throw new InvalidOperationException(SR.Format(SR.InvalidOperation_InvalidMemberType, value.Name, value.MemberType));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.InvalidOperation_InvalidMemberType,
+                                value.Name,
+                                value.MemberType
+                            )
+                        );
                 }
 
                 return output;
             }
 
-            public override CustomAttributeTypedArgument ProjectTypedArgument(CustomAttributeTypedArgument value)
-            {
+            public override CustomAttributeTypedArgument ProjectTypedArgument(
+                CustomAttributeTypedArgument value
+            ) {
                 Type argumentType = ProjectType(value.ArgumentType);
 
                 return new CustomAttributeTypedArgument(argumentType, value.Value);
             }
 
-            public override CustomAttributeNamedArgument ProjectNamedArgument(CustomAttributeNamedArgument value)
-            {
+            public override CustomAttributeNamedArgument ProjectNamedArgument(
+                CustomAttributeNamedArgument value
+            ) {
                 MemberInfo member = ProjectMember(value.MemberInfo);
                 CustomAttributeTypedArgument typedArgument = ProjectTypedArgument(value.TypedValue);
 

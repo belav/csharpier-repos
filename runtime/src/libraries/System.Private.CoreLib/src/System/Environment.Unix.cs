@@ -52,12 +52,14 @@ namespace System
                         }
                     }
                 }
-
             }
         }
 
-        private static unsafe bool TryGetUserNameFromPasswd(byte* buf, int bufLen, out string? username)
-        {
+        private static unsafe bool TryGetUserNameFromPasswd(
+            byte* buf,
+            int bufLen,
+            out string? username
+        ) {
             // Call getpwuid_r to get the passwd struct
             Interop.Sys.Passwd passwd;
             int error = Interop.Sys.GetPwUidR(Interop.Sys.GetEUid(), out passwd, buf, bufLen);

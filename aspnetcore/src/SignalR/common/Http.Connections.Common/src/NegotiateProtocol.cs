@@ -17,27 +17,62 @@ namespace Microsoft.AspNetCore.Http.Connections
     public static class NegotiateProtocol
     {
         private const string ConnectionIdPropertyName = "connectionId";
-        private static JsonEncodedText ConnectionIdPropertyNameBytes = JsonEncodedText.Encode(ConnectionIdPropertyName);
+        private static JsonEncodedText ConnectionIdPropertyNameBytes = JsonEncodedText.Encode(
+            ConnectionIdPropertyName
+        );
         private const string ConnectionTokenPropertyName = "connectionToken";
-        private static JsonEncodedText ConnectionTokenPropertyNameBytes = JsonEncodedText.Encode(ConnectionTokenPropertyName);
+        private static JsonEncodedText ConnectionTokenPropertyNameBytes = JsonEncodedText.Encode(
+            ConnectionTokenPropertyName
+        );
         private const string UrlPropertyName = "url";
-        private static JsonEncodedText UrlPropertyNameBytes = JsonEncodedText.Encode(UrlPropertyName);
+        private static JsonEncodedText UrlPropertyNameBytes = JsonEncodedText.Encode(
+            UrlPropertyName
+        );
         private const string AccessTokenPropertyName = "accessToken";
-        private static JsonEncodedText AccessTokenPropertyNameBytes = JsonEncodedText.Encode(AccessTokenPropertyName);
+        private static JsonEncodedText AccessTokenPropertyNameBytes = JsonEncodedText.Encode(
+            AccessTokenPropertyName
+        );
         private const string AvailableTransportsPropertyName = "availableTransports";
-        private static JsonEncodedText AvailableTransportsPropertyNameBytes = JsonEncodedText.Encode(AvailableTransportsPropertyName);
+        private static JsonEncodedText AvailableTransportsPropertyNameBytes =
+            JsonEncodedText.Encode(AvailableTransportsPropertyName);
         private const string TransportPropertyName = "transport";
-        private static JsonEncodedText TransportPropertyNameBytes = JsonEncodedText.Encode(TransportPropertyName);
+        private static JsonEncodedText TransportPropertyNameBytes = JsonEncodedText.Encode(
+            TransportPropertyName
+        );
         private const string TransferFormatsPropertyName = "transferFormats";
-        private static JsonEncodedText TransferFormatsPropertyNameBytes = JsonEncodedText.Encode(TransferFormatsPropertyName);
+        private static JsonEncodedText TransferFormatsPropertyNameBytes = JsonEncodedText.Encode(
+            TransferFormatsPropertyName
+        );
         private const string ErrorPropertyName = "error";
-        private static JsonEncodedText ErrorPropertyNameBytes = JsonEncodedText.Encode(ErrorPropertyName);
+        private static JsonEncodedText ErrorPropertyNameBytes = JsonEncodedText.Encode(
+            ErrorPropertyName
+        );
         private const string NegotiateVersionPropertyName = "negotiateVersion";
-        private static JsonEncodedText NegotiateVersionPropertyNameBytes = JsonEncodedText.Encode(NegotiateVersionPropertyName);
+        private static JsonEncodedText NegotiateVersionPropertyNameBytes = JsonEncodedText.Encode(
+            NegotiateVersionPropertyName
+        );
 
         // Use C#7.3's ReadOnlySpan<byte> optimization for static data https://vcsjones.com/2019/02/01/csharp-readonly-span-bytes-static/
         // Used to detect ASP.NET SignalR Server connection attempt
-        private static ReadOnlySpan<byte> ProtocolVersionPropertyNameBytes => new byte[] { (byte)'P', (byte)'r', (byte)'o', (byte)'t', (byte)'o', (byte)'c', (byte)'o', (byte)'l', (byte)'V', (byte)'e', (byte)'r', (byte)'s', (byte)'i', (byte)'o', (byte)'n' };
+        private static ReadOnlySpan<byte> ProtocolVersionPropertyNameBytes =>
+            new byte[]
+            {
+                (byte)'P',
+                (byte)'r',
+                (byte)'o',
+                (byte)'t',
+                (byte)'o',
+                (byte)'c',
+                (byte)'o',
+                (byte)'l',
+                (byte)'V',
+                (byte)'e',
+                (byte)'r',
+                (byte)'s',
+                (byte)'i',
+                (byte)'o',
+                (byte)'n'
+            };
 
         /// <summary>
         /// Writes the <paramref name="response"/> to the <paramref name="output"/>.
@@ -97,7 +132,10 @@ namespace Microsoft.AspNetCore.Http.Connections
                         writer.WriteStartObject();
                         if (availableTransport.Transport != null)
                         {
-                            writer.WriteString(TransportPropertyNameBytes, availableTransport.Transport);
+                            writer.WriteString(
+                                TransportPropertyNameBytes,
+                                availableTransport.Transport
+                            );
                         }
                         else
                         {
@@ -126,6 +164,7 @@ namespace Microsoft.AspNetCore.Http.Connections
                 writer.Flush();
                 Debug.Assert(writer.CurrentDepth == 0);
             }
+
             finally
             {
                 ReusableUtf8JsonWriter.Return(reusableWriter);
@@ -164,24 +203,40 @@ namespace Microsoft.AspNetCore.Http.Connections
                             {
                                 url = reader.ReadAsString(UrlPropertyName);
                             }
-                            else if (reader.ValueTextEquals(AccessTokenPropertyNameBytes.EncodedUtf8Bytes))
-                            {
+                            else if (
+                                reader.ValueTextEquals(
+                                    AccessTokenPropertyNameBytes.EncodedUtf8Bytes
+                                )
+                            ) {
                                 accessToken = reader.ReadAsString(AccessTokenPropertyName);
                             }
-                            else if (reader.ValueTextEquals(ConnectionIdPropertyNameBytes.EncodedUtf8Bytes))
-                            {
+                            else if (
+                                reader.ValueTextEquals(
+                                    ConnectionIdPropertyNameBytes.EncodedUtf8Bytes
+                                )
+                            ) {
                                 connectionId = reader.ReadAsString(ConnectionIdPropertyName);
                             }
-                            else if (reader.ValueTextEquals(ConnectionTokenPropertyNameBytes.EncodedUtf8Bytes))
-                            {
+                            else if (
+                                reader.ValueTextEquals(
+                                    ConnectionTokenPropertyNameBytes.EncodedUtf8Bytes
+                                )
+                            ) {
                                 connectionToken = reader.ReadAsString(ConnectionTokenPropertyName);
                             }
-                            else if (reader.ValueTextEquals(NegotiateVersionPropertyNameBytes.EncodedUtf8Bytes))
-                            {
-                                version = reader.ReadAsInt32(NegotiateVersionPropertyName).GetValueOrDefault();
+                            else if (
+                                reader.ValueTextEquals(
+                                    NegotiateVersionPropertyNameBytes.EncodedUtf8Bytes
+                                )
+                            ) {
+                                version = reader.ReadAsInt32(NegotiateVersionPropertyName)
+                                    .GetValueOrDefault();
                             }
-                            else if (reader.ValueTextEquals(AvailableTransportsPropertyNameBytes.EncodedUtf8Bytes))
-                            {
+                            else if (
+                                reader.ValueTextEquals(
+                                    AvailableTransportsPropertyNameBytes.EncodedUtf8Bytes
+                                )
+                            ) {
                                 reader.CheckRead();
                                 reader.EnsureArrayStart();
 
@@ -190,7 +245,9 @@ namespace Microsoft.AspNetCore.Http.Connections
                                 {
                                     if (reader.TokenType == JsonTokenType.StartObject)
                                     {
-                                        availableTransports.Add(ParseAvailableTransport(ref reader));
+                                        availableTransports.Add(
+                                            ParseAvailableTransport(ref reader)
+                                        );
                                     }
                                     else if (reader.TokenType == JsonTokenType.EndArray)
                                     {
@@ -198,13 +255,16 @@ namespace Microsoft.AspNetCore.Http.Connections
                                     }
                                 }
                             }
-                            else if (reader.ValueTextEquals(ErrorPropertyNameBytes.EncodedUtf8Bytes))
-                            {
+                            else if (
+                                reader.ValueTextEquals(ErrorPropertyNameBytes.EncodedUtf8Bytes)
+                            ) {
                                 error = reader.ReadAsString(ErrorPropertyName);
                             }
                             else if (reader.ValueTextEquals(ProtocolVersionPropertyNameBytes))
                             {
-                                throw new InvalidOperationException("Detected a connection attempt to an ASP.NET SignalR Server. This client only supports connecting to an ASP.NET Core SignalR Server. See https://aka.ms/signalr-core-differences for details.");
+                                throw new InvalidOperationException(
+                                    "Detected a connection attempt to an ASP.NET SignalR Server. This client only supports connecting to an ASP.NET Core SignalR Server. See https://aka.ms/signalr-core-differences for details."
+                                );
                             }
                             else
                             {
@@ -215,7 +275,9 @@ namespace Microsoft.AspNetCore.Http.Connections
                             completed = true;
                             break;
                         default:
-                            throw new InvalidDataException($"Unexpected token '{reader.TokenType}' when reading negotiation response JSON.");
+                            throw new InvalidDataException(
+                                $"Unexpected token '{reader.TokenType}' when reading negotiation response JSON."
+                            );
                     }
                 }
 
@@ -224,20 +286,26 @@ namespace Microsoft.AspNetCore.Http.Connections
                     // if url isn't specified or there isn't an error, connectionId and available transports are required
                     if (connectionId == null)
                     {
-                        throw new InvalidDataException($"Missing required property '{ConnectionIdPropertyName}'.");
+                        throw new InvalidDataException(
+                            $"Missing required property '{ConnectionIdPropertyName}'."
+                        );
                     }
 
                     if (version > 0)
                     {
                         if (connectionToken == null)
                         {
-                            throw new InvalidDataException($"Missing required property '{ConnectionTokenPropertyName}'.");
+                            throw new InvalidDataException(
+                                $"Missing required property '{ConnectionTokenPropertyName}'."
+                            );
                         }
                     }
 
                     if (availableTransports == null)
                     {
-                        throw new InvalidDataException($"Missing required property '{AvailableTransportsPropertyName}'.");
+                        throw new InvalidDataException(
+                            $"Missing required property '{AvailableTransportsPropertyName}'."
+                        );
                     }
                 }
 
@@ -269,10 +337,15 @@ namespace Microsoft.AspNetCore.Http.Connections
                     case JsonTokenType.PropertyName:
                         if (reader.ValueTextEquals(TransportPropertyNameBytes.EncodedUtf8Bytes))
                         {
-                            availableTransport.Transport = reader.ReadAsString(TransportPropertyName);
+                            availableTransport.Transport = reader.ReadAsString(
+                                TransportPropertyName
+                            );
                         }
-                        else if (reader.ValueTextEquals(TransferFormatsPropertyNameBytes.EncodedUtf8Bytes))
-                        {
+                        else if (
+                            reader.ValueTextEquals(
+                                TransferFormatsPropertyNameBytes.EncodedUtf8Bytes
+                            )
+                        ) {
                             reader.CheckRead();
                             reader.EnsureArrayStart();
 
@@ -290,7 +363,9 @@ namespace Microsoft.AspNetCore.Http.Connections
                                         completed = true;
                                         break;
                                     default:
-                                        throw new InvalidDataException($"Unexpected token '{reader.TokenType}' when reading transfer formats JSON.");
+                                        throw new InvalidDataException(
+                                            $"Unexpected token '{reader.TokenType}' when reading transfer formats JSON."
+                                        );
                                 }
                             }
                         }
@@ -302,17 +377,23 @@ namespace Microsoft.AspNetCore.Http.Connections
                     case JsonTokenType.EndObject:
                         if (availableTransport.Transport == null)
                         {
-                            throw new InvalidDataException($"Missing required property '{TransportPropertyName}'.");
+                            throw new InvalidDataException(
+                                $"Missing required property '{TransportPropertyName}'."
+                            );
                         }
 
                         if (availableTransport.TransferFormats == null)
                         {
-                            throw new InvalidDataException($"Missing required property '{TransferFormatsPropertyName}'.");
+                            throw new InvalidDataException(
+                                $"Missing required property '{TransferFormatsPropertyName}'."
+                            );
                         }
 
                         return availableTransport;
                     default:
-                        throw new InvalidDataException($"Unexpected token '{reader.TokenType}' when reading available transport JSON.");
+                        throw new InvalidDataException(
+                            $"Unexpected token '{reader.TokenType}' when reading available transport JSON."
+                        );
                 }
             }
 

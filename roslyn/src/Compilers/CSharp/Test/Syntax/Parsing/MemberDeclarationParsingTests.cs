@@ -19,8 +19,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         public MemberDeclarationParsingTests(ITestOutputHelper output) : base(output) { }
 
-        private MemberDeclarationSyntax ParseDeclaration(string text, int offset = 0, ParseOptions options = null)
-        {
+        private MemberDeclarationSyntax ParseDeclaration(
+            string text,
+            int offset = 0,
+            ParseOptions options = null
+        ) {
             return SyntaxFactory.ParseMemberDeclaration(text, offset, options);
         }
 
@@ -28,11 +31,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [WorkItem(367, "https://github.com/dotnet/roslyn/issues/367")]
         public void ParsePrivate()
         {
-            UsingDeclaration("private", options: null,
+            UsingDeclaration(
+                "private",
+                options: null,
                 // (1,8): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 // private
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(1, 8)
-                );
+            );
             N(SyntaxKind.IncompleteMember);
             {
                 N(SyntaxKind.PrivateKeyword);
@@ -72,9 +77,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var d = SyntaxFactory.ParseMemberDeclaration(sb.ToString());
             if (d.GetDiagnostics().Any()) // some platforms have extra deep stacks and can parse this
             {
-                d.GetDiagnostics().Verify(
-                    // error CS8078: An expression is too long or complex to compile
-                    Diagnostic(ErrorCode.ERR_InsufficientStack, "")
+                d.GetDiagnostics()
+                    .Verify(
+                        // error CS8078: An expression is too long or complex to compile
+                        Diagnostic(ErrorCode.ERR_InsufficientStack, "")
                     );
             }
         }
@@ -98,10 +104,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var cu = SyntaxFactory.ParseCompilationUnit(sb.ToString());
             if (cu.GetDiagnostics().Any()) // some platforms have extra deep stacks and can parse this
             {
-                cu.GetDiagnostics().Verify(
-                    // error CS8078: An expression is too long or complex to compile
-                    Diagnostic(ErrorCode.ERR_InsufficientStack, "")
-                );
+                cu.GetDiagnostics()
+                    .Verify(
+                        // error CS8078: An expression is too long or complex to compile
+                        Diagnostic(ErrorCode.ERR_InsufficientStack, "")
+                    );
             }
         }
 
@@ -111,14 +118,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
             {
-                UsingDeclaration("x = x + 1;", offset: 0, options: options, consumeFullText: true,
+                UsingDeclaration(
+                    "x = x + 1;",
+                    offset: 0,
+                    options: options,
+                    consumeFullText: true,
                     // (1,3): error CS1519: Invalid token '=' in class, record, struct, or interface member declaration
                     // x = x + 1;
-                    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=").WithArguments("=").WithLocation(1, 3),
+                    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=")
+                        .WithArguments("=")
+                        .WithLocation(1, 3),
                     // (1,1): error CS1073: Unexpected token '='
                     // x = x + 1;
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "x").WithArguments("=").WithLocation(1, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "x")
+                        .WithArguments("=")
+                        .WithLocation(1, 1)
+                );
                 N(SyntaxKind.IncompleteMember);
                 {
                     N(SyntaxKind.IdentifierName);
@@ -421,11 +436,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [WorkItem(367, "https://github.com/dotnet/roslyn/issues/367")]
         public void TrashAfterDeclaration()
         {
-            UsingDeclaration("public int x; public int y", offset: 0, options: null, consumeFullText: true,
+            UsingDeclaration(
+                "public int x; public int y",
+                offset: 0,
+                options: null,
+                consumeFullText: true,
                 // (1,1): error CS1073: Unexpected token 'public'
                 // public int x; public int y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "public int x;").WithArguments("public").WithLocation(1, 1)
-                );
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "public int x;")
+                    .WithArguments("public")
+                    .WithLocation(1, 1)
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.PublicKeyword);
@@ -444,7 +465,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             EOF();
 
-            UsingDeclaration("public int x; public int y", offset: 0, options: null, consumeFullText: false);
+            UsingDeclaration(
+                "public int x; public int y",
+                offset: 0,
+                options: null,
+                consumeFullText: false
+            );
             N(SyntaxKind.FieldDeclaration);
             {
                 N(SyntaxKind.PublicKeyword);
@@ -470,17 +496,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
             {
-                UsingDeclaration("async Task<SomeNamespace.SomeType Method();", options: options,
+                UsingDeclaration(
+                    "async Task<SomeNamespace.SomeType Method();",
+                    options: options,
                     // (1,1): error CS1073: Unexpected token '('
                     // async Task<SomeNamespace.SomeType Method();
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "async Task<SomeNamespace.SomeType Method").WithArguments("(").WithLocation(1, 1),
+                    Diagnostic(
+                            ErrorCode.ERR_UnexpectedToken,
+                            "async Task<SomeNamespace.SomeType Method"
+                        )
+                        .WithArguments("(")
+                        .WithLocation(1, 1),
                     // (1,35): error CS1003: Syntax error, ',' expected
                     // async Task<SomeNamespace.SomeType Method();
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "Method").WithArguments(",", "").WithLocation(1, 35),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "Method")
+                        .WithArguments(",", "")
+                        .WithLocation(1, 35),
                     // (1,41): error CS1003: Syntax error, '>' expected
                     // async Task<SomeNamespace.SomeType Method();
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments(">", "(").WithLocation(1, 41)
-                    );
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments(">", "(")
+                        .WithLocation(1, 41)
+                );
                 N(SyntaxKind.IncompleteMember);
                 {
                     N(SyntaxKind.AsyncKeyword);
@@ -521,17 +558,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
             {
-                UsingDeclaration("public Task<SomeNamespace.SomeType Method();", options: options,
+                UsingDeclaration(
+                    "public Task<SomeNamespace.SomeType Method();",
+                    options: options,
                     // (1,1): error CS1073: Unexpected token '('
                     // public Task<SomeNamespace.SomeType Method();
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "public Task<SomeNamespace.SomeType Method").WithArguments("(").WithLocation(1, 1),
+                    Diagnostic(
+                            ErrorCode.ERR_UnexpectedToken,
+                            "public Task<SomeNamespace.SomeType Method"
+                        )
+                        .WithArguments("(")
+                        .WithLocation(1, 1),
                     // (1,36): error CS1003: Syntax error, ',' expected
                     // public Task<SomeNamespace.SomeType Method();
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "Method").WithArguments(",", "").WithLocation(1, 36),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "Method")
+                        .WithArguments(",", "")
+                        .WithLocation(1, 36),
                     // (1,42): error CS1003: Syntax error, '>' expected
                     // public Task<SomeNamespace.SomeType Method();
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments(">", "(").WithLocation(1, 42)
-                    );
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments(">", "(")
+                        .WithLocation(1, 42)
+                );
                 N(SyntaxKind.IncompleteMember);
                 {
                     N(SyntaxKind.PublicKeyword);
@@ -572,14 +620,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
             {
-                UsingDeclaration("async Task<SomeNamespace. Method();", options: options,
+                UsingDeclaration(
+                    "async Task<SomeNamespace. Method();",
+                    options: options,
                     // (1,1): error CS1073: Unexpected token '('
                     // async Task<SomeNamespace. Method();
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "async Task<SomeNamespace. Method").WithArguments("(").WithLocation(1, 1),
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "async Task<SomeNamespace. Method")
+                        .WithArguments("(")
+                        .WithLocation(1, 1),
                     // (1,33): error CS1003: Syntax error, '>' expected
                     // async Task<SomeNamespace. Method();
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments(">", "(").WithLocation(1, 33)
-                    );
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments(">", "(")
+                        .WithLocation(1, 33)
+                );
                 N(SyntaxKind.IncompleteMember);
                 {
                     N(SyntaxKind.AsyncKeyword);
@@ -615,14 +669,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
             {
-                UsingDeclaration("public Task<SomeNamespace. Method();", options: options,
+                UsingDeclaration(
+                    "public Task<SomeNamespace. Method();",
+                    options: options,
                     // (1,1): error CS1073: Unexpected token '('
                     // public Task<SomeNamespace. Method();
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "public Task<SomeNamespace. Method").WithArguments("(").WithLocation(1, 1),
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "public Task<SomeNamespace. Method")
+                        .WithArguments("(")
+                        .WithLocation(1, 1),
                     // (1,34): error CS1003: Syntax error, '>' expected
                     // public Task<SomeNamespace. Method();
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments(">", "(").WithLocation(1, 34)
-                    );
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments(">", "(")
+                        .WithLocation(1, 34)
+                );
                 N(SyntaxKind.IncompleteMember);
                 {
                     N(SyntaxKind.PublicKeyword);
@@ -658,11 +718,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
             {
-                UsingDeclaration("async Task<SomeNamespace.> Method();", options: options,
+                UsingDeclaration(
+                    "async Task<SomeNamespace.> Method();",
+                    options: options,
                     // (1,26): error CS1001: Identifier expected
                     // async Task<SomeNamespace.> Method();
                     Diagnostic(ErrorCode.ERR_IdentifierExpected, ">").WithLocation(1, 26)
-                    );
+                );
                 N(SyntaxKind.MethodDeclaration);
                 {
                     N(SyntaxKind.AsyncKeyword);
@@ -705,11 +767,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
             {
-                UsingDeclaration("public Task<SomeNamespace.> Method();", options: options,
+                UsingDeclaration(
+                    "public Task<SomeNamespace.> Method();",
+                    options: options,
                     // (1,27): error CS1001: Identifier expected
                     // public Task<SomeNamespace.> Method();
                     Diagnostic(ErrorCode.ERR_IdentifierExpected, ">").WithLocation(1, 27)
-                    );
+                );
                 N(SyntaxKind.MethodDeclaration);
                 {
                     N(SyntaxKind.PublicKeyword);
@@ -786,14 +850,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
             {
-                UsingDeclaration("string Property { init set; }", options: options,
+                UsingDeclaration(
+                    "string Property { init set; }",
+                    options: options,
                     // (1,24): error CS8180: { or ; or => expected
                     // string Property { init set; }
-                    Diagnostic(ErrorCode.ERR_SemiOrLBraceOrArrowExpected, "set").WithLocation(1, 24),
+                    Diagnostic(ErrorCode.ERR_SemiOrLBraceOrArrowExpected, "set")
+                        .WithLocation(1, 24),
                     // (1,30): error CS1513: } expected
                     // string Property { init set; }
                     Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 30)
-                    );
+                );
                 N(SyntaxKind.PropertyDeclaration);
                 {
                     N(SyntaxKind.PredefinedType);

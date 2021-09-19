@@ -44,7 +44,9 @@ namespace Microsoft.AspNetCore.Authentication
         {
             if (HandlerType is null)
             {
-                throw new InvalidOperationException($"{nameof(HandlerType)} must be configured to build an {nameof(AuthenticationScheme)}.");
+                throw new InvalidOperationException(
+                    $"{nameof(HandlerType)} must be configured to build an {nameof(AuthenticationScheme)}."
+                );
             }
 
             return new AuthenticationScheme(Name, DisplayName, HandlerType);

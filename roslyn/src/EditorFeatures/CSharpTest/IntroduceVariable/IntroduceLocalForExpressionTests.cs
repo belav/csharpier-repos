@@ -19,14 +19,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 {
     public partial class IntroduceLocalForExpressionTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpIntroduceLocalForExpressionCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpIntroduceLocalForExpressionCodeRefactoringProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_NoSemicolon()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -36,7 +38,7 @@ class C
         new DateTime()[||]
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -45,14 +47,15 @@ class C
     {
         DateTime {|Rename:dateTime|} = new DateTime();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_NoSemicolon_BlankLineAfter()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -63,7 +66,7 @@ class C
 
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -73,14 +76,15 @@ class C
         DateTime {|Rename:dateTime|} = new DateTime();
 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_NoSemicolon_SelectExpression()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -90,7 +94,7 @@ class C
         [|new DateTime()|]
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -99,7 +103,8 @@ class C
     {
         DateTime {|Rename:dateTime|} = new DateTime();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
@@ -107,7 +112,7 @@ class C
         public async Task IntroduceLocal_Inside_Expression()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -117,7 +122,7 @@ class C
         new TimeSpan() +[||] new TimeSpan();
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -126,14 +131,15 @@ class C
     {
         TimeSpan {|Rename:timeSpan|} = new TimeSpan() + new TimeSpan();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_Semicolon()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -143,7 +149,7 @@ class C
         new DateTime();[||]
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -152,14 +158,15 @@ class C
     {
         DateTime {|Rename:dateTime|} = new DateTime();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_Semicolon_BlankLineAfter()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -170,7 +177,7 @@ class C
 
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -180,14 +187,15 @@ class C
         DateTime {|Rename:dateTime|} = new DateTime();
 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_Semicolon_SelectExpression()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -197,7 +205,7 @@ class C
         [|new DateTime()|];
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -206,14 +214,15 @@ class C
     {
         DateTime {|Rename:dateTime|} = new DateTime();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_Semicolon_SelectStatement()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -223,7 +232,7 @@ class C
         [|new DateTime();|]
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -232,14 +241,15 @@ class C
     {
         DateTime {|Rename:dateTime|} = new DateTime();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task MissingOnAssignmentExpressionStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -249,14 +259,15 @@ class C
         int a = 42;
         [||]a = 42;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_Space()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -266,7 +277,7 @@ class C
         new DateTime(); [||]
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -275,14 +286,15 @@ class C
     {
         DateTime {|Rename:dateTime|} = new DateTime(); 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_LeadingTrivia()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -293,7 +305,7 @@ class C
         new DateTime();[||]
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -303,14 +315,15 @@ class C
         // Comment
         DateTime {|Rename:dateTime|} = new DateTime();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_PreferVar()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -320,7 +333,7 @@ class C
         new DateTime();[||]
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -329,18 +342,26 @@ class C
     {
         var {|Rename:dateTime|} = new DateTime();
     }
-}", options: new OptionsCollection(GetLanguage())
-    {
-        { CSharpCodeStyleOptions.VarElsewhere, CodeStyleOptions2.TrueWithSuggestionEnforcement },
-        { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOptions2.TrueWithSuggestionEnforcement },
-    });
+}",
+                options: new OptionsCollection(GetLanguage())
+                {
+                    {
+                        CSharpCodeStyleOptions.VarElsewhere,
+                        CodeStyleOptions2.TrueWithSuggestionEnforcement
+                    },
+                    {
+                        CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                        CodeStyleOptions2.TrueWithSuggestionEnforcement
+                    },
+                }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task MissingOnVoidCall()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -349,14 +370,15 @@ class C
     {
         Console.WriteLine();[||]
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task MissingOnDeclaration()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -365,14 +387,15 @@ class C
     {
         var v = new DateTime()[||]
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceLocalForExpression)]
         public async Task IntroduceLocal_ArithmeticExpression()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -382,7 +405,7 @@ class C
         1 + 1[||]
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -391,7 +414,8 @@ class C
     {
         int {|Rename:v|} = 1 + 1;
     }
-}");
+}"
+            );
         }
     }
 }

@@ -24,10 +24,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerParameterBasedSqlProcessor(
             RelationalParameterBasedSqlProcessorDependencies dependencies,
-            bool useRelationalNulls)
-            : base(dependencies, useRelationalNulls)
-        {
-        }
+            bool useRelationalNulls
+        ) : base(dependencies, useRelationalNulls) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,20 +36,26 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public override SelectExpression Optimize(
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parametersValues,
-            out bool canCache)
-        {
+            out bool canCache
+        ) {
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(parametersValues, nameof(parametersValues));
 
-            var optimizedSelectExpression = base.Optimize(selectExpression, parametersValues, out canCache);
+            var optimizedSelectExpression = base.Optimize(
+                selectExpression,
+                parametersValues,
+                out canCache
+            );
 
-            optimizedSelectExpression = new SkipTakeCollapsingExpressionVisitor(Dependencies.SqlExpressionFactory)
-                .Process(optimizedSelectExpression, parametersValues, out var canCache2);
+            optimizedSelectExpression = new SkipTakeCollapsingExpressionVisitor(
+                Dependencies.SqlExpressionFactory
+            ).Process(optimizedSelectExpression, parametersValues, out var canCache2);
 
             canCache &= canCache2;
 
-            return (SelectExpression)new SearchConditionConvertingExpressionVisitor(Dependencies.SqlExpressionFactory)
-                .Visit(optimizedSelectExpression);
+            return (SelectExpression)new SearchConditionConvertingExpressionVisitor(
+                Dependencies.SqlExpressionFactory
+            ).Visit(optimizedSelectExpression);
         }
     }
 }

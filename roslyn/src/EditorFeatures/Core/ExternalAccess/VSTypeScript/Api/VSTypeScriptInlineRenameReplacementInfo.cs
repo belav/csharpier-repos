@@ -15,8 +15,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         private readonly IVSTypeScriptInlineRenameReplacementInfo _info;
 
-        public VSTypeScriptInlineRenameReplacementInfo(IVSTypeScriptInlineRenameReplacementInfo info)
-        {
+        public VSTypeScriptInlineRenameReplacementInfo(
+            IVSTypeScriptInlineRenameReplacementInfo info
+        ) {
             Contract.ThrowIfNull(info);
             _info = info;
         }
@@ -29,8 +30,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 
         public IEnumerable<InlineRenameReplacement> GetReplacements(DocumentId documentId)
         {
-            return _info.GetReplacements(documentId)?.Select(x =>
-                new InlineRenameReplacement(VSTypeScriptInlineRenameReplacementKindHelpers.ConvertTo(x.Kind), x.OriginalSpan, x.NewSpan));
+            return _info.GetReplacements(documentId)?.Select(
+                x =>
+                    new InlineRenameReplacement(
+                        VSTypeScriptInlineRenameReplacementKindHelpers.ConvertTo(x.Kind),
+                        x.OriginalSpan,
+                        x.NewSpan
+                    )
+            );
         }
     }
 }

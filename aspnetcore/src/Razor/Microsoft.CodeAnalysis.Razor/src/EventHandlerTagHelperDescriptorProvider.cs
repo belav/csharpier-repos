@@ -28,8 +28,10 @@ namespace Microsoft.CodeAnalysis.Razor
                 return;
             }
 
-            if (compilation.GetTypeByMetadataName(ComponentsApi.EventHandlerAttribute.FullTypeName) is not INamedTypeSymbol eventHandlerAttribute)
-            {
+            if (
+                compilation.GetTypeByMetadataName(ComponentsApi.EventHandlerAttribute.FullTypeName)
+                is not INamedTypeSymbol eventHandlerAttribute
+            ) {
                 // If we can't find EventHandlerAttribute, then just bail. We won't discover anything.
                 return;
             }
@@ -42,8 +44,11 @@ namespace Microsoft.CodeAnalysis.Razor
             }
         }
 
-        private List<EventHandlerData> GetEventHandlerData(TagHelperDescriptorProviderContext context, Compilation compilation, INamedTypeSymbol eventHandlerAttribute)
-        {
+        private List<EventHandlerData> GetEventHandlerData(
+            TagHelperDescriptorProviderContext context,
+            Compilation compilation,
+            INamedTypeSymbol eventHandlerAttribute
+        ) {
             var types = new List<INamedTypeSymbol>();
             var visitor = new EventHandlerDataVisitor(types);
 
@@ -57,8 +62,9 @@ namespace Microsoft.CodeAnalysis.Razor
                 visitor.Visit(compilation.Assembly.GlobalNamespace);
                 foreach (var reference in compilation.References)
                 {
-                    if (compilation.GetAssemblyOrModuleSymbol(reference) is IAssemblySymbol assembly)
-                    {
+                    if (
+                        compilation.GetAssemblyOrModuleSymbol(reference) is IAssemblySymbol assembly
+                    ) {
                         visitor.Visit(assembly.GlobalNamespace);
                     }
                 }
@@ -78,8 +84,12 @@ namespace Microsoft.CodeAnalysis.Razor
                 {
                     var attribute = attributes[j];
 
-                    if (SymbolEqualityComparer.Default.Equals(attribute.AttributeClass, eventHandlerAttribute))
-                    {
+                    if (
+                        SymbolEqualityComparer.Default.Equals(
+                            attribute.AttributeClass,
+                            eventHandlerAttribute
+                        )
+                    ) {
                         var enablePreventDefault = false;
                         var enableStopPropagation = false;
                         if (attribute.ConstructorArguments.Length == 4)
@@ -88,13 +98,16 @@ namespace Microsoft.CodeAnalysis.Razor
                             enableStopPropagation = (bool)attribute.ConstructorArguments[3].Value;
                         }
 
-                        results.Add(new EventHandlerData(
-                            type.ContainingAssembly.Name,
-                            type.ToDisplayString(),
-                            (string)attribute.ConstructorArguments[0].Value,
-                            (INamedTypeSymbol)attribute.ConstructorArguments[1].Value,
-                            enablePreventDefault,
-                            enableStopPropagation));
+                        results.Add(
+                            new EventHandlerData(
+                                type.ContainingAssembly.Name,
+                                type.ToDisplayString(),
+                                (string)attribute.ConstructorArguments[0].Value,
+                                (INamedTypeSymbol)attribute.ConstructorArguments[1].Value,
+                                enablePreventDefault,
+                                enableStopPropagation
+                            )
+                        );
                     }
                 }
             }
@@ -112,114 +125,158 @@ namespace Microsoft.CodeAnalysis.Razor
                 var attributeName = "@" + entry.Attribute;
                 var eventArgType = entry.EventArgsType.ToDisplayString();
 
-                var builder = TagHelperDescriptorBuilder.Create(ComponentMetadata.EventHandler.TagHelperKind, entry.Attribute, ComponentsApi.AssemblyName);
+                var builder = TagHelperDescriptorBuilder.Create(
+                    ComponentMetadata.EventHandler.TagHelperKind,
+                    entry.Attribute,
+                    ComponentsApi.AssemblyName
+                );
                 builder.CaseSensitive = true;
                 builder.Documentation = string.Format(
                     CultureInfo.CurrentCulture,
                     ComponentResources.EventHandlerTagHelper_Documentation,
                     attributeName,
-                    eventArgType);
+                    eventArgType
+                );
 
-                builder.Metadata.Add(ComponentMetadata.SpecialKindKey, ComponentMetadata.EventHandler.TagHelperKind);
+                builder.Metadata.Add(
+                    ComponentMetadata.SpecialKindKey,
+                    ComponentMetadata.EventHandler.TagHelperKind
+                );
                 builder.Metadata.Add(ComponentMetadata.EventHandler.EventArgsType, eventArgType);
-                builder.Metadata.Add(TagHelperMetadata.Common.ClassifyAttributesOnly, bool.TrueString);
-                builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata.EventHandler.RuntimeName;
+                builder.Metadata.Add(
+                    TagHelperMetadata.Common.ClassifyAttributesOnly,
+                    bool.TrueString
+                );
+                builder.Metadata[TagHelperMetadata.Runtime.Name] =
+                    ComponentMetadata.EventHandler.RuntimeName;
 
                 // WTE has a bug in 15.7p1 where a Tag Helper without a display-name that looks like
                 // a C# property will crash trying to create the tooltips.
                 builder.SetTypeName(entry.TypeName);
 
-                builder.TagMatchingRule(rule =>
-                {
-                    rule.TagName = "*";
-
-                    rule.Attribute(a =>
-                    {
-                        a.Name = attributeName;
-                        a.NameComparisonMode = RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
-                        a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
-                    });
-                });
-
-                if (entry.EnablePreventDefault)
-                {
-                    builder.TagMatchingRule(rule =>
+                builder.TagMatchingRule(
+                    rule =>
                     {
                         rule.TagName = "*";
 
-                        rule.Attribute(a =>
+                        rule.Attribute(
+                            a =>
+                            {
+                                a.Name = attributeName;
+                                a.NameComparisonMode =
+                                    RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                                a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
+                                    bool.TrueString;
+                            }
+                        );
+                    }
+                );
+
+                if (entry.EnablePreventDefault)
+                {
+                    builder.TagMatchingRule(
+                        rule =>
                         {
-                            a.Name = attributeName + ":preventDefault";
-                            a.NameComparisonMode = RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
-                            a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
-                        });
-                    });
+                            rule.TagName = "*";
+
+                            rule.Attribute(
+                                a =>
+                                {
+                                    a.Name = attributeName + ":preventDefault";
+                                    a.NameComparisonMode =
+                                        RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                                    a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
+                                        bool.TrueString;
+                                }
+                            );
+                        }
+                    );
                 }
 
                 if (entry.EnableStopPropagation)
                 {
-                    builder.TagMatchingRule(rule =>
-                    {
-                        rule.TagName = "*";
-
-                        rule.Attribute(a =>
+                    builder.TagMatchingRule(
+                        rule =>
                         {
-                            a.Name = attributeName + ":stopPropagation";
-                            a.NameComparisonMode = RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
-                            a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
-                        });
-                    });
+                            rule.TagName = "*";
+
+                            rule.Attribute(
+                                a =>
+                                {
+                                    a.Name = attributeName + ":stopPropagation";
+                                    a.NameComparisonMode =
+                                        RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                                    a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
+                                        bool.TrueString;
+                                }
+                            );
+                        }
+                    );
                 }
 
-                builder.BindAttribute(a =>
-                {
-                    a.Documentation = string.Format(
-                        CultureInfo.CurrentCulture,
-                        ComponentResources.EventHandlerTagHelper_Documentation,
-                        attributeName,
-                        eventArgType);
-
-                    a.Name = attributeName;
-
-                    // We want event handler directive attributes to default to C# context.
-                    a.TypeName = $"Microsoft.AspNetCore.Components.EventCallback<{eventArgType}>";
-
-                    // But make this weakly typed (don't type check) - delegates have their own type-checking
-                    // logic that we don't want to interfere with.
-                    a.Metadata.Add(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString);
-
-                    a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
-
-                    // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
-                    // a C# property will crash trying to create the tooltips.
-                    a.SetPropertyName(entry.Attribute);
-
-                    if (entry.EnablePreventDefault)
+                builder.BindAttribute(
+                    a =>
                     {
-                        a.BindAttributeParameter(parameter =>
+                        a.Documentation = string.Format(
+                            CultureInfo.CurrentCulture,
+                            ComponentResources.EventHandlerTagHelper_Documentation,
+                            attributeName,
+                            eventArgType
+                        );
+
+                        a.Name = attributeName;
+
+                        // We want event handler directive attributes to default to C# context.
+                        a.TypeName =
+                            $"Microsoft.AspNetCore.Components.EventCallback<{eventArgType}>";
+
+                        // But make this weakly typed (don't type check) - delegates have their own type-checking
+                        // logic that we don't want to interfere with.
+                        a.Metadata.Add(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString);
+
+                        a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
+
+                        // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
+                        // a C# property will crash trying to create the tooltips.
+                        a.SetPropertyName(entry.Attribute);
+
+                        if (entry.EnablePreventDefault)
                         {
-                            parameter.Name = "preventDefault";
-                            parameter.TypeName = typeof(bool).FullName;
-                            parameter.Documentation = string.Format(
-                                CultureInfo.CurrentCulture, ComponentResources.EventHandlerTagHelper_PreventDefault_Documentation, attributeName);
+                            a.BindAttributeParameter(
+                                parameter =>
+                                {
+                                    parameter.Name = "preventDefault";
+                                    parameter.TypeName = typeof(bool).FullName;
+                                    parameter.Documentation = string.Format(
+                                        CultureInfo.CurrentCulture,
+                                        ComponentResources.EventHandlerTagHelper_PreventDefault_Documentation,
+                                        attributeName
+                                    );
 
-                            parameter.SetPropertyName("PreventDefault");
-                        });
-                    }
+                                    parameter.SetPropertyName("PreventDefault");
+                                }
+                            );
+                        }
 
-                    if (entry.EnableStopPropagation)
-                    {
-                        a.BindAttributeParameter(parameter =>
+                        if (entry.EnableStopPropagation)
                         {
-                            parameter.Name = "stopPropagation";
-                            parameter.TypeName = typeof(bool).FullName;
-                            parameter.Documentation = string.Format(
-                                CultureInfo.CurrentCulture, ComponentResources.EventHandlerTagHelper_StopPropagation_Documentation, attributeName);
+                            a.BindAttributeParameter(
+                                parameter =>
+                                {
+                                    parameter.Name = "stopPropagation";
+                                    parameter.TypeName = typeof(bool).FullName;
+                                    parameter.Documentation = string.Format(
+                                        CultureInfo.CurrentCulture,
+                                        ComponentResources.EventHandlerTagHelper_StopPropagation_Documentation,
+                                        attributeName
+                                    );
 
-                            parameter.SetPropertyName("StopPropagation");
-                        });
+                                    parameter.SetPropertyName("StopPropagation");
+                                }
+                            );
+                        }
                     }
-                });
+                );
 
                 results.Add(builder.Build());
             }
@@ -235,8 +292,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 string element,
                 INamedTypeSymbol eventArgsType,
                 bool enablePreventDefault,
-                bool enableStopPropagation)
-            {
+                bool enableStopPropagation
+            ) {
                 Assembly = assembly;
                 TypeName = typeName;
                 Attribute = element;
@@ -269,8 +326,10 @@ namespace Microsoft.CodeAnalysis.Razor
 
             public override void VisitNamedType(INamedTypeSymbol symbol)
             {
-                if (symbol.Name == "EventHandlers" && symbol.DeclaredAccessibility == Accessibility.Public)
-                {
+                if (
+                    symbol.Name == "EventHandlers"
+                    && symbol.DeclaredAccessibility == Accessibility.Public
+                ) {
                     _results.Add(symbol);
                 }
             }
@@ -287,8 +346,10 @@ namespace Microsoft.CodeAnalysis.Razor
             {
                 // This as a simple yet high-value optimization that excludes the vast majority of
                 // assemblies that (by definition) can't contain a component.
-                if (symbol.Name != null && !symbol.Name.StartsWith("System.", StringComparison.Ordinal))
-                {
+                if (
+                    symbol.Name != null
+                    && !symbol.Name.StartsWith("System.", StringComparison.Ordinal)
+                ) {
                     Visit(symbol.GlobalNamespace);
                 }
             }

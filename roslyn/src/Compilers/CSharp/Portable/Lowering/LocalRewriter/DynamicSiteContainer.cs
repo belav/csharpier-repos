@@ -10,12 +10,17 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed class DynamicSiteContainer : SynthesizedContainer, ISynthesizedMethodBodyImplementationSymbol
+    internal sealed class DynamicSiteContainer
+        : SynthesizedContainer,
+          ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly MethodSymbol _topLevelMethod;
 
-        internal DynamicSiteContainer(string name, MethodSymbol topLevelMethod, MethodSymbol containingMethod)
-            : base(name, containingMethod)
+        internal DynamicSiteContainer(
+            string name,
+            MethodSymbol topLevelMethod,
+            MethodSymbol containingMethod
+        ) : base(name, containingMethod)
         {
             Debug.Assert(topLevelMethod != null);
             _topLevelMethod = topLevelMethod;

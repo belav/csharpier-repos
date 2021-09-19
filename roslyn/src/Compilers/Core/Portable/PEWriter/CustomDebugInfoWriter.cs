@@ -39,8 +39,12 @@ namespace Microsoft.Cci
         /// Returns non-null <paramref name="forwardToMethod"/> if the forwarding should be done directly via UsingNamespace,
         /// null if the forwarding is done via custom debug info.
         /// </summary>
-        public bool ShouldForwardNamespaceScopes(EmitContext context, IMethodBody methodBody, MethodDefinitionHandle methodHandle, out IMethodDefinition forwardToMethod)
-        {
+        public bool ShouldForwardNamespaceScopes(
+            EmitContext context,
+            IMethodBody methodBody,
+            MethodDefinitionHandle methodHandle,
+            out IMethodDefinition forwardToMethod
+        ) {
             if (ShouldForwardToPreviousMethodWithUsingInfo(context, methodBody))
             {
                 // SerializeNamespaceScopeMetadata will do the actual forwarding in case this is a CSharp method.
@@ -63,8 +67,14 @@ namespace Microsoft.Cci
             return false;
         }
 
-        public byte[] SerializeMethodDebugInfo(EmitContext context, IMethodBody methodBody, MethodDefinitionHandle methodHandle, bool emitEncInfo, bool suppressNewCustomDebugInfo, out bool emitExternNamespaces)
-        {
+        public byte[] SerializeMethodDebugInfo(
+            EmitContext context,
+            IMethodBody methodBody,
+            MethodDefinitionHandle methodHandle,
+            bool emitEncInfo,
+            bool suppressNewCustomDebugInfo,
+            out bool emitExternNamespaces
+        ) {
             emitExternNamespaces = false;
 
             // CONSIDER: this may not be the same "first" method as in Dev10, but
@@ -96,7 +106,9 @@ namespace Microsoft.Cci
             {
                 SerializeNamespaceScopeMetadata(ref encoder, context, methodBody);
 
-                encoder.AddStateMachineHoistedLocalScopes(methodBody.StateMachineHoistedLocalScopes);
+                encoder.AddStateMachineHoistedLocalScopes(
+                    methodBody.StateMachineHoistedLocalScopes
+                );
             }
 
             if (!suppressNewCustomDebugInfo)
@@ -117,17 +129,20 @@ namespace Microsoft.Cci
         }
 
         // internal for testing
-        internal static void SerializeCustomDebugInformation(ref CustomDebugInfoEncoder encoder, EditAndContinueMethodDebugInformation debugInfo)
-        {
+        internal static void SerializeCustomDebugInformation(
+            ref CustomDebugInfoEncoder encoder,
+            EditAndContinueMethodDebugInformation debugInfo
+        ) {
             // PERF: note that we pass debugInfo as explicit parameter
-            //       that is intentional to avoid capturing debugInfo as that 
+            //       that is intentional to avoid capturing debugInfo as that
             //       would result in a lot of delegate allocations here that are otherwise can be avoided.
             if (!debugInfo.LocalSlots.IsDefaultOrEmpty)
             {
                 encoder.AddRecord(
                     CustomDebugInfoKind.EditAndContinueLocalSlotMap,
                     debugInfo,
-                    (info, builder) => info.SerializeLocalSlots(builder));
+                    (info, builder) => info.SerializeLocalSlots(builder)
+                );
             }
 
             if (!debugInfo.Lambdas.IsDefaultOrEmpty)
@@ -135,15 +150,16 @@ namespace Microsoft.Cci
                 encoder.AddRecord(
                     CustomDebugInfoKind.EditAndContinueLambdaMap,
                     debugInfo,
-                    (info, builder) => info.SerializeLambdaMap(builder));
+                    (info, builder) => info.SerializeLambdaMap(builder)
+                );
             }
         }
 
         private static ArrayBuilder<T> GetLocalInfoToSerialize<T>(
             IMethodBody methodBody,
             Func<ILocalDefinition, bool> filter,
-            Func<LocalScope, ILocalDefinition, T> getInfo)
-        {
+            Func<LocalScope, ILocalDefinition, T> getInfo
+        ) {
             ArrayBuilder<T> builder = null;
 
             foreach (var currentScope in methodBody.LocalScopes)
@@ -178,8 +194,10 @@ namespace Microsoft.Cci
             return builder;
         }
 
-        private static void SerializeDynamicLocalInfo(ref CustomDebugInfoEncoder encoder, IMethodBody methodBody)
-        {
+        private static void SerializeDynamicLocalInfo(
+            ref CustomDebugInfoEncoder encoder,
+            IMethodBody methodBody
+        ) {
             if (!methodBody.HasDynamicLocalVariables)
             {
                 return;
@@ -205,11 +223,19 @@ namespace Microsoft.Cci
                 local =>
                 {
                     var dynamicTransformFlags = local.DynamicTransformFlags;
-                    return !dynamicTransformFlags.IsEmpty &&
-                        dynamicTransformFlags.Length <= CustomDebugInfoEncoder.DynamicAttributeSize &&
-                        local.Name.Length < CustomDebugInfoEncoder.IdentifierSize;
+                    return !dynamicTransformFlags.IsEmpty
+                        && dynamicTransformFlags.Length
+                            <= CustomDebugInfoEncoder.DynamicAttributeSize
+                        && local.Name.Length < CustomDebugInfoEncoder.IdentifierSize;
                 },
-                (scope, local) => (local.Name, GetDynamicFlags(local), local.DynamicTransformFlags.Length, (local.SlotIndex < 0) ? 0 : local.SlotIndex));
+                (scope, local) =>
+                    (
+                        local.Name,
+                        GetDynamicFlags(local),
+                        local.DynamicTransformFlags.Length,
+                        (local.SlotIndex < 0) ? 0 : local.SlotIndex
+                    )
+            );
 
             if (dynamicLocals == null)
             {
@@ -220,12 +246,22 @@ namespace Microsoft.Cci
             dynamicLocals.Free();
         }
 
-        private static void SerializeTupleElementNames(ref CustomDebugInfoEncoder encoder, IMethodBody methodBody)
-        {
+        private static void SerializeTupleElementNames(
+            ref CustomDebugInfoEncoder encoder,
+            IMethodBody methodBody
+        ) {
             var locals = GetLocalInfoToSerialize(
                 methodBody,
                 local => !local.TupleElementNames.IsEmpty,
-                (scope, local) => (local.Name, local.SlotIndex, scope.StartOffset, scope.EndOffset, local.TupleElementNames));
+                (scope, local) =>
+                    (
+                        local.Name,
+                        local.SlotIndex,
+                        scope.StartOffset,
+                        scope.EndOffset,
+                        local.TupleElementNames
+                    )
+            );
 
             if (locals == null)
             {
@@ -237,8 +273,11 @@ namespace Microsoft.Cci
             locals.Free();
         }
 
-        private void SerializeNamespaceScopeMetadata(ref CustomDebugInfoEncoder encoder, EmitContext context, IMethodBody methodBody)
-        {
+        private void SerializeNamespaceScopeMetadata(
+            ref CustomDebugInfoEncoder encoder,
+            EmitContext context,
+            IMethodBody methodBody
+        ) {
             if (context.Module.GenerateVisualBasicStylePdb)
             {
                 return;
@@ -260,26 +299,36 @@ namespace Microsoft.Cci
             encoder.AddUsingGroups(usingCounts);
             usingCounts.Free();
 
-            if (_methodBodyWithModuleInfo != null && !ReferenceEquals(_methodBodyWithModuleInfo, methodBody))
-            {
+            if (
+                _methodBodyWithModuleInfo != null
+                && !ReferenceEquals(_methodBodyWithModuleInfo, methodBody)
+            ) {
                 encoder.AddForwardModuleInfo(_methodWithModuleInfo);
             }
         }
 
-        private bool ShouldForwardToPreviousMethodWithUsingInfo(EmitContext context, IMethodBody methodBody)
-        {
-            if (_previousMethodBodyWithUsingInfo == null ||
-                ReferenceEquals(_previousMethodBodyWithUsingInfo, methodBody))
-            {
+        private bool ShouldForwardToPreviousMethodWithUsingInfo(
+            EmitContext context,
+            IMethodBody methodBody
+        ) {
+            if (
+                _previousMethodBodyWithUsingInfo == null
+                || ReferenceEquals(_previousMethodBodyWithUsingInfo, methodBody)
+            ) {
                 return false;
             }
 
             // VB includes method namespace in namespace scopes:
             if (context.Module.GenerateVisualBasicStylePdb)
             {
-                if (_pdbWriter.GetOrCreateSerializedNamespaceName(_previousMethodBodyWithUsingInfo.MethodDefinition.ContainingNamespace) !=
-                    _pdbWriter.GetOrCreateSerializedNamespaceName(methodBody.MethodDefinition.ContainingNamespace))
-                {
+                if (
+                    _pdbWriter.GetOrCreateSerializedNamespaceName(
+                        _previousMethodBodyWithUsingInfo.MethodDefinition.ContainingNamespace
+                    )
+                    != _pdbWriter.GetOrCreateSerializedNamespaceName(
+                        methodBody.MethodDefinition.ContainingNamespace
+                    )
+                ) {
                     return false;
                 }
             }

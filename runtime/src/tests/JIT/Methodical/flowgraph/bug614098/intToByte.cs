@@ -37,7 +37,14 @@ internal class Program
         ushort value = obj.value;
         byte lowByte = (byte)(value & 0xff);
         int lowByteInt = lowByte; // here is the bug !
-        Console.WriteLine(String.Format("value : {0}, lowByte : {1}, lowByteInt : {2}", value, lowByte, lowByteInt));
+        Console.WriteLine(
+            String.Format(
+                "value : {0}, lowByte : {1}, lowByteInt : {2}",
+                value,
+                lowByte,
+                lowByteInt
+            )
+        );
         return (lowByteInt == 0) ? 100 : 101;
     }
 }

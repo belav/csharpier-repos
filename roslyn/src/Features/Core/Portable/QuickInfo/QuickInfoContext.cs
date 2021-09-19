@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         public QuickInfoContext(
             Document document,
             int position,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             Document = document ?? throw new ArgumentNullException(nameof(document));
             Position = position;
             CancellationToken = cancellationToken;

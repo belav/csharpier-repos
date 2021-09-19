@@ -19,16 +19,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ReadyToRunFixupKind fixupKind,
             MethodWithToken method,
             MethodWithGCInfo localMethod,
-            bool isInstantiatingStub)
-            : base(
-                  factory,
-                  factory.MethodImports,
-                  ReadyToRunHelper.DelayLoad_MethodCall,
-                  factory.MethodSignature(
-                      fixupKind,
-                      method,
-                      isInstantiatingStub))
-        {
+            bool isInstantiatingStub
+        ) : base(
+            factory,
+            factory.MethodImports,
+            ReadyToRunHelper.DelayLoad_MethodCall,
+            factory.MethodSignature(fixupKind, method, isInstantiatingStub)
+        ) {
             _localMethod = localMethod;
             _method = method;
         }
@@ -52,7 +49,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if ((_localMethod != null) && (((DelayLoadMethodImport)other)._localMethod != null))
             {
-                int result = comparer.Compare(_localMethod, ((DelayLoadMethodImport)other)._localMethod);
+                int result = comparer.Compare(
+                    _localMethod,
+                    ((DelayLoadMethodImport)other)._localMethod
+                );
                 if (result != 0)
                     return result;
             }

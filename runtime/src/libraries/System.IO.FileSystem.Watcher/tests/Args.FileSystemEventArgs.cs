@@ -12,12 +12,19 @@ namespace System.IO.Tests
         [InlineData(WatcherChangeTypes.All, "C:", "foo.txt")]
         [InlineData((WatcherChangeTypes)0, "", "")]
         [InlineData((WatcherChangeTypes)0, "", null)]
-        public static void FileSystemEventArgs_ctor(WatcherChangeTypes changeType, string directory, string name)
-        {
+        public static void FileSystemEventArgs_ctor(
+            WatcherChangeTypes changeType,
+            string directory,
+            string name
+        ) {
             FileSystemEventArgs args = new FileSystemEventArgs(changeType, directory, name);
 
-            if (!directory.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal))
-            {
+            if (
+                !directory.EndsWith(
+                    Path.DirectorySeparatorChar.ToString(),
+                    StringComparison.Ordinal
+                )
+            ) {
                 directory += Path.DirectorySeparatorChar;
             }
 
@@ -29,7 +36,9 @@ namespace System.IO.Tests
         [Fact]
         public static void FileSystemEventArgs_ctor_Invalid()
         {
-            Assert.Throws<NullReferenceException>(() => new FileSystemEventArgs((WatcherChangeTypes)0, null, string.Empty));
+            Assert.Throws<NullReferenceException>(
+                () => new FileSystemEventArgs((WatcherChangeTypes)0, null, string.Empty)
+            );
         }
     }
 }

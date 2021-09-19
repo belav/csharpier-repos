@@ -75,7 +75,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             var requiredAttributes = Array.Empty<RequiredAttributeDescriptor>();
             if (_requiredAttributeBuilders != null)
             {
-                var requiredAttributeSet = new HashSet<RequiredAttributeDescriptor>(RequiredAttributeDescriptorComparer.Default);
+                var requiredAttributeSet = new HashSet<RequiredAttributeDescriptor>(
+                    RequiredAttributeDescriptorComparer.Default
+                );
                 for (var i = 0; i < _requiredAttributeBuilders.Count; i++)
                 {
                     requiredAttributeSet.Add(_requiredAttributeBuilders[i].Build());
@@ -90,7 +92,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 TagStructure,
                 CaseSensitive,
                 requiredAttributes,
-                diagnostics.ToArray());
+                diagnostics.ToArray()
+            );
 
             return rule;
         }
@@ -99,7 +102,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             if (string.IsNullOrWhiteSpace(TagName))
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedTagNameNullOrWhitespace();
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedTagNameNullOrWhitespace();
 
                 yield return diagnostic;
             }
@@ -107,9 +111,15 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 foreach (var character in TagName)
                 {
-                    if (char.IsWhiteSpace(character) || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character))
-                    {
-                        var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedTagName(TagName, character);
+                    if (
+                        char.IsWhiteSpace(character)
+                        || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character)
+                    ) {
+                        var diagnostic =
+                            RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedTagName(
+                                TagName,
+                                character
+                            );
 
                         yield return diagnostic;
                     }
@@ -120,7 +130,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 if (string.IsNullOrWhiteSpace(ParentTag))
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedParentTagNameNullOrWhitespace();
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedParentTagNameNullOrWhitespace();
 
                     yield return diagnostic;
                 }
@@ -128,9 +139,17 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     foreach (var character in ParentTag)
                     {
-                        if (char.IsWhiteSpace(character) || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character))
-                        {
-                            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedParentTagName(ParentTag, character);
+                        if (
+                            char.IsWhiteSpace(character)
+                            || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(
+                                character
+                            )
+                        ) {
+                            var diagnostic =
+                                RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedParentTagName(
+                                    ParentTag,
+                                    character
+                                );
 
                             yield return diagnostic;
                         }

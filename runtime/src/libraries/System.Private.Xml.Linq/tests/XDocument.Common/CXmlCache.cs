@@ -41,8 +41,13 @@ public abstract class CXmlBase
     //
     // Constructors
     //
-    public CXmlBase(string strPrefix, string strName, string strLocalName, XmlNodeType NodeType, string strNamespace)
-    {
+    public CXmlBase(
+        string strPrefix,
+        string strName,
+        string strLocalName,
+        XmlNodeType NodeType,
+        string strNamespace
+    ) {
         pstrPrefix = strPrefix;
         pstrName = strName;
         pstrLocalName = strLocalName;
@@ -50,16 +55,17 @@ public abstract class CXmlBase
         pstrNamespace = strNamespace;
     }
 
-    public CXmlBase(string strPrefix, string strName, XmlNodeType NodeType, string strNamespace)
-        : this(strPrefix, strName, strName, NodeType, strNamespace)
-    { }
+    public CXmlBase(
+        string strPrefix,
+        string strName,
+        XmlNodeType NodeType,
+        string strNamespace
+    ) : this(strPrefix, strName, strName, NodeType, strNamespace) { }
 
     public CXmlBase(string strPrefix, string strName, XmlNodeType NodeType)
-        : this(strPrefix, strName, strName, NodeType, "")
-    { }
+        : this(strPrefix, strName, strName, NodeType, "") { }
 
-    public CXmlBase(string strName, XmlNodeType NodeType)
-        : this("", strName, strName, NodeType, "")
+    public CXmlBase(string strName, XmlNodeType NodeType) : this("", strName, strName, NodeType, "")
     { }
 
     //
@@ -147,7 +153,8 @@ public abstract class CXmlBase
         {
             if ((rChild.peFlags & NodeFlags.IsWhitespace) == 0)
             {
-                if (j++ == n) break;
+                if (j++ == n)
+                    break;
             }
         }
 
@@ -159,7 +166,8 @@ public abstract class CXmlBase
         CXmlBase rChild;
 
         for (rChild = prFirstChildNode; rChild != null; rChild = rChild.prNextNode)
-            if (rChild.Name == str) break;
+            if (rChild.Name == str)
+                break;
 
         return rChild;
     }
@@ -171,8 +179,13 @@ public class CXmlAttribute : CXmlBase
     // Constructor
     //
     public CXmlAttribute(XmlReader rXmlReader)
-        : base(rXmlReader.Prefix, rXmlReader.Name, rXmlReader.LocalName, rXmlReader.NodeType, rXmlReader.NamespaceURI)
-    {
+        : base(
+            rXmlReader.Prefix,
+            rXmlReader.Name,
+            rXmlReader.LocalName,
+            rXmlReader.NodeType,
+            rXmlReader.NamespaceURI
+        ) {
         if (rXmlReader.IsDefault)
             peFlags |= NodeFlags.DefaultAttribute;
     }
@@ -247,7 +260,13 @@ public class CXmlAttribute : CXmlBase
     public char Quote
     {
         get { return ((base.peFlags & NodeFlags.SingleQuote) != 0 ? '\'' : '"'); }
-        set { if (value == '\'') base.peFlags |= NodeFlags.SingleQuote; else base.peFlags &= ~NodeFlags.SingleQuote; }
+        set
+        {
+            if (value == '\'')
+                base.peFlags |= NodeFlags.SingleQuote;
+            else
+                base.peFlags &= ~NodeFlags.SingleQuote;
+        }
     }
 
     public CXmlNode FirstChild
@@ -277,16 +296,19 @@ public class CXmlNode : CXmlBase
     // Constructors
     //
     public CXmlNode(string strPrefix, string strName, XmlNodeType NodeType)
-        : base(strPrefix, strName, NodeType)
-    { }
+        : base(strPrefix, strName, NodeType) { }
 
     public CXmlNode(XmlReader rXmlReader)
-        : base(rXmlReader.Prefix, rXmlReader.Name, rXmlReader.LocalName, rXmlReader.NodeType, rXmlReader.NamespaceURI)
-    {
+        : base(
+            rXmlReader.Prefix,
+            rXmlReader.Name,
+            rXmlReader.LocalName,
+            rXmlReader.NodeType,
+            rXmlReader.NamespaceURI
+        ) {
         peFlags |= CXmlCache._eDefaultFlags;
 
-        if (NodeType == XmlNodeType.Whitespace ||
-            NodeType == XmlNodeType.SignificantWhitespace)
+        if (NodeType == XmlNodeType.Whitespace || NodeType == XmlNodeType.SignificantWhitespace)
         {
             peFlags |= NodeFlags.IsWhitespace;
         }
@@ -324,10 +346,19 @@ public class CXmlNode : CXmlBase
                 break;
 
             case XmlNodeType.DocumentType:
-                for (rAttribute = _rFirstAttribute; rAttribute != null; rAttribute = rAttribute.NextAttribute)
-                {
-                    if (rAttribute.Name == "PUBLIC") { DocTypePublic = rAttribute.Value; }
-                    if (rAttribute.Name == "SYSTEM") { DocTypeSystem = rAttribute.Value; }
+                for (
+                    rAttribute = _rFirstAttribute;
+                    rAttribute != null;
+                    rAttribute = rAttribute.NextAttribute
+                ) {
+                    if (rAttribute.Name == "PUBLIC")
+                    {
+                        DocTypePublic = rAttribute.Value;
+                    }
+                    if (rAttribute.Name == "SYSTEM")
+                    {
+                        DocTypeSystem = rAttribute.Value;
+                    }
                 }
                 rXmlWriter.WriteDocType(this.Name, DocTypePublic, DocTypeSystem, _strValue);
                 break;
@@ -372,8 +403,11 @@ public class CXmlNode : CXmlBase
             case XmlNodeType.Element:
                 rXmlWriter.WriteStartElement(this.Prefix, this.LocalName, null);
 
-                for (rAttribute = _rFirstAttribute; rAttribute != null; rAttribute = rAttribute.NextAttribute)
-                {
+                for (
+                    rAttribute = _rFirstAttribute;
+                    rAttribute != null;
+                    rAttribute = rAttribute.NextAttribute
+                ) {
                     rAttribute.Write(rXmlWriter);
                 }
 
@@ -390,7 +424,6 @@ public class CXmlNode : CXmlBase
                     rXmlWriter.WriteFullEndElement();
                 else
                     rXmlWriter.WriteEndElement();
-
                 break;
 
             case XmlNodeType.XmlDeclaration:
@@ -398,7 +431,9 @@ public class CXmlNode : CXmlBase
                 break;
 
             default:
-                throw (new Exception("Node.Write: Unhandled node type " + this.NodeType.ToString()));
+                throw (
+                    new Exception("Node.Write: Unhandled node type " + this.NodeType.ToString())
+                );
         }
     }
 
@@ -449,8 +484,11 @@ public class CXmlNode : CXmlBase
                 rTW.Write('<' + strXml);
 
                 //Put in all the Attributes
-                for (rAttribute = _rFirstAttribute; rAttribute != null; rAttribute = rAttribute.NextAttribute)
-                {
+                for (
+                    rAttribute = _rFirstAttribute;
+                    rAttribute != null;
+                    rAttribute = rAttribute.NextAttribute
+                ) {
                     rAttribute.WriteXml(rTW);
                 }
 
@@ -470,7 +508,6 @@ public class CXmlNode : CXmlBase
                 {
                     rTW.Write(" />");
                 }
-
                 break;
 
             case XmlNodeType.EntityReference:
@@ -528,10 +565,15 @@ public class CXmlNode : CXmlBase
                 while ((nIndexAmp = strValue.IndexOf('&', nIndexAmp)) != -1)
                 {
                     nIndexSem = strValue.IndexOf(';', nIndexAmp);
-                    chEnt = ResolveCharEntity(strValue.Substring(nIndexAmp + 1, nIndexSem - nIndexAmp - 1));
+                    chEnt = ResolveCharEntity(
+                        strValue.Substring(nIndexAmp + 1, nIndexSem - nIndexAmp - 1)
+                    );
                     if (chEnt != char.MinValue)
                     {
-                        strValue = strValue.Substring(0, nIndexAmp) + chEnt + strValue.Substring(nIndexSem + 1);
+                        strValue =
+                            strValue.Substring(0, nIndexAmp)
+                            + chEnt
+                            + strValue.Substring(nIndexSem + 1);
                         nIndexAmp++;
                     }
                     else
@@ -540,8 +582,11 @@ public class CXmlNode : CXmlBase
                 return strValue;
             }
 
-            for (rChild = (CXmlNode)this.prFirstChildNode; rChild != null; rChild = (CXmlNode)rChild.prNextNode)
-            {
+            for (
+                rChild = (CXmlNode)this.prFirstChildNode;
+                rChild != null;
+                rChild = (CXmlNode)rChild.prNextNode
+            ) {
                 strValue = strValue + rChild.Value;
             }
 
@@ -555,8 +600,7 @@ public class CXmlNode : CXmlBase
         {
             CXmlBase rNode = this.prNextNode;
 
-            while (rNode != null &&
-                   (rNode.Flags & NodeFlags.IsWhitespace) != 0)
+            while (rNode != null && (rNode.Flags & NodeFlags.IsWhitespace) != 0)
                 rNode = rNode.prNextNode;
             return (CXmlNode)rNode;
         }
@@ -568,8 +612,7 @@ public class CXmlNode : CXmlBase
         {
             CXmlBase rNode = this.prFirstChildNode;
 
-            while (rNode != null &&
-                   (rNode.Flags & NodeFlags.IsWhitespace) != 0)
+            while (rNode != null && (rNode.Flags & NodeFlags.IsWhitespace) != 0)
                 rNode = rNode.prNextNode;
             return (CXmlNode)rNode;
         }
@@ -582,7 +625,8 @@ public class CXmlNode : CXmlBase
 
         i = 0;
         for (rChild = FirstChild; rChild != null; rChild = rChild.NextNode)
-            if (i++ == n) break;
+            if (i++ == n)
+                break;
 
         return rChild;
     }
@@ -613,8 +657,13 @@ public class CXmlNode : CXmlBase
         CXmlAttribute rAttribute;
 
         i = 0;
-        for (rAttribute = _rFirstAttribute; rAttribute != null; rAttribute = rAttribute.NextAttribute)
-            if (i++ == n) break;
+        for (
+            rAttribute = _rFirstAttribute;
+            rAttribute != null;
+            rAttribute = rAttribute.NextAttribute
+        )
+            if (i++ == n)
+                break;
         return rAttribute;
     }
 
@@ -622,9 +671,13 @@ public class CXmlNode : CXmlBase
     {
         CXmlAttribute rAttribute;
 
-        for (rAttribute = _rFirstAttribute; rAttribute != null; rAttribute = rAttribute.NextAttribute)
-        {
-            if (rAttribute.Name == str) break;
+        for (
+            rAttribute = _rFirstAttribute;
+            rAttribute != null;
+            rAttribute = rAttribute.NextAttribute
+        ) {
+            if (rAttribute.Name == str)
+                break;
         }
 
         return rAttribute;
@@ -708,7 +761,12 @@ public class CXmlCache
             prDocumentRootNode = new CXmlNode("", "", XmlNodeType.Element);
             prDocumentRootNode.peFlags = NodeFlags.DocumentRoot | NodeFlags.Indent;
             Process(prDocumentRootNode);
-            for (prRootNode = prDocumentRootNode.FirstChild; prRootNode != null && prRootNode.NodeType != XmlNodeType.Element; prRootNode = prRootNode.NextNode) ;
+            for (
+                prRootNode = prDocumentRootNode.FirstChild;
+                prRootNode != null && prRootNode.NodeType != XmlNodeType.Element;
+                prRootNode = prRootNode.NextNode
+            )
+                ;
         }
         catch (Exception e)
         {
@@ -763,8 +821,11 @@ public class CXmlCache
         {
             rXmlTextWriter = XmlWriter.Create(FilePathUtil.getStream(strName));
 
-            for (rNode = prDocumentRootNode.prFirstChildNode; rNode != null; rNode = rNode.prNextNode)
-            {
+            for (
+                rNode = prDocumentRootNode.prFirstChildNode;
+                rNode != null;
+                rNode = rNode.prNextNode
+            ) {
                 rNode.Write(rXmlTextWriter);
             }
             rXmlTextWriter.Dispose();
@@ -915,9 +976,10 @@ public class CXmlCache
             DebugTrace(prXmlReader);
 
             //We also want to pop if we get an EndElement or EndEntity
-            if (prXmlReader.NodeType == XmlNodeType.EndElement ||
-                 prXmlReader.NodeType == XmlNodeType.EndEntity)
-            {
+            if (
+                prXmlReader.NodeType == XmlNodeType.EndElement
+                || prXmlReader.NodeType == XmlNodeType.EndEntity
+            ) {
                 DebugTrace("NodeType == EndElement or EndEntity");
                 return;
             }
@@ -933,18 +995,17 @@ public class CXmlCache
             }
             else
             {
-                rNewNode.peFlags |= NodeFlags.Indent;        // Turn on Indent for current Node
+                rNewNode.peFlags |= NodeFlags.Indent; // Turn on Indent for current Node
             }
 
             // Set all Depth 0 nodes to No Mixed Content and Indent True
             if (prXmlReader.Depth == 0)
             {
-                rNewNode.peFlags |= NodeFlags.Indent;        // Turn on Indent
+                rNewNode.peFlags |= NodeFlags.Indent; // Turn on Indent
                 rNewNode.peFlags &= ~NodeFlags.MixedContent; // Turn off MixedContent
             }
 
             rParentNode.InsertNode(rNewNode);
-
 
             //Do some special stuff based on NodeType
             switch (prXmlReader.NodeType)
@@ -980,7 +1041,6 @@ public class CXmlCache
 
                     if ((rNewNode.Flags & NodeFlags.EmptyElement) == 0)
                         Process(rNewNode);
-
                     break;
 
                 case XmlNodeType.XmlDeclaration:
@@ -990,9 +1050,9 @@ public class CXmlCache
                     {
                         int nEnd;
 
-                        nPos = strValue.IndexOf("=", nPos);         //Find the = sign
-                        nEnd = strValue.IndexOf("\"", nPos) + 1;    //Find the next " character
-                        nPos = strValue.IndexOf("'", nPos) + 1;     //Find the next ' character
+                        nPos = strValue.IndexOf("=", nPos); //Find the = sign
+                        nEnd = strValue.IndexOf("\"", nPos) + 1; //Find the next " character
+                        nPos = strValue.IndexOf("'", nPos) + 1; //Find the next ' character
                         if (nEnd == 0 || (nPos < nEnd && nPos > 0)) //Pick the one that's closer to the = sign
                         {
                             nEnd = strValue.IndexOf("'", nPos);
@@ -1020,16 +1080,16 @@ public class CXmlCache
                     {
                         rNewNode.peFlags = _eDefaultFlags | NodeFlags.AttributeTextNode;
                     }
-                    rNewNode.peFlags |= NodeFlags.MixedContent;    // turn on Mixed Content for current node
-                    rNewNode.peFlags &= ~NodeFlags.Indent;         // turn off Indent for current node
+                    rNewNode.peFlags |= NodeFlags.MixedContent; // turn on Mixed Content for current node
+                    rNewNode.peFlags &= ~NodeFlags.Indent; // turn off Indent for current node
                     rParentNode.peFlags |= NodeFlags.MixedContent; // turn on Mixed Content for Parent Node
                     break;
 
                 case XmlNodeType.Whitespace:
                 case XmlNodeType.SignificantWhitespace:
                 case XmlNodeType.CDATA:
-                    rNewNode.peFlags |= NodeFlags.MixedContent;    // turn on Mixed Content for current node
-                    rNewNode.peFlags &= ~NodeFlags.Indent;         // turn off Indent for current node
+                    rNewNode.peFlags |= NodeFlags.MixedContent; // turn on Mixed Content for current node
+                    rNewNode.peFlags &= ~NodeFlags.Indent; // turn off Indent for current node
                     rParentNode.peFlags |= NodeFlags.MixedContent; // turn on Mixed Content for Parent Node
                     break;
 
@@ -1050,11 +1110,12 @@ public class CXmlCache
                             rNewAttribute.InsertNode(rValueNode);
                         } while (prXmlReader.MoveToNextAttribute());
                     }
-
                     break;
 
                 default:
-                    TestLog.WriteLine("UNHANDLED TYPE, " + prXmlReader.NodeType.ToString() + " IN Process()!");
+                    TestLog.WriteLine(
+                        "UNHANDLED TYPE, " + prXmlReader.NodeType.ToString() + " IN Process()!"
+                    );
                     break;
             }
         }
@@ -1173,7 +1234,6 @@ public class BufferWriter : TextWriter
     {
         get { return _encoding; }
     }
-
 
     // --------------------------------------------------------------------------------------------------
     //    Public methods

@@ -32,7 +32,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (factory.RuntimeFunctionsGCInfo.Deduplicator == null)
             {
-                factory.RuntimeFunctionsGCInfo.Deduplicator = new HashSet<MethodGCInfoNode>(new MethodGCInfoNodeDeduplicatingComparer(factory));
+                factory.RuntimeFunctionsGCInfo.Deduplicator = new HashSet<MethodGCInfoNode>(
+                    new MethodGCInfoNodeDeduplicatingComparer(factory)
+                );
             }
             factory.RuntimeFunctionsGCInfo.AddEmbeddedObject(this);
         }
@@ -40,13 +42,20 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public int[] CalculateFuncletOffsets(NodeFactory factory)
         {
             int[] offsets = new int[_methodNode.FrameInfos.Length];
-            if (!factory.RuntimeFunctionsGCInfo.Deduplicator.TryGetValue(this, out var deduplicatedResult))
-            {
+            if (
+                !factory.RuntimeFunctionsGCInfo.Deduplicator.TryGetValue(
+                    this,
+                    out var deduplicatedResult
+                )
+            ) {
                 throw new Exception("Did not properly initialize deduplicator");
             }
             int offset = deduplicatedResult.OffsetFromBeginningOfArray;
-            for (int frameInfoIndex = 0; frameInfoIndex < deduplicatedResult._methodNode.FrameInfos.Length; frameInfoIndex++)
-            {
+            for (
+                int frameInfoIndex = 0;
+                frameInfoIndex < deduplicatedResult._methodNode.FrameInfos.Length;
+                frameInfoIndex++
+            ) {
                 offsets[frameInfoIndex] = offset;
                 offset += deduplicatedResult._methodNode.FrameInfos[frameInfoIndex].BlobData.Length;
                 offset += (-offset & 3); // 4-alignment for the personality routine
@@ -110,7 +119,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     if (other.Bytes == null)
                         return false;
-                    
+
                     return Bytes.SequenceEqual(other.Bytes);
                 }
                 else
@@ -124,8 +133,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             TargetArchitecture targetArch = factory.Target.Architecture;
 
-            for (int frameInfoIndex = 0; frameInfoIndex < _methodNode.FrameInfos.Length; frameInfoIndex++)
-            {
+            for (
+                int frameInfoIndex = 0;
+                frameInfoIndex < _methodNode.FrameInfos.Length;
+                frameInfoIndex++
+            ) {
                 byte[] unwindInfo = _methodNode.FrameInfos[frameInfoIndex].BlobData;
 
                 if (targetArch == TargetArchitecture.X64)
@@ -138,8 +150,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                     unwindInfo[0] |= (byte)((UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER) << FlagsShift);
                 }
-                else if ((targetArch == TargetArchitecture.ARM) || (targetArch == TargetArchitecture.ARM64))
-                {
+                else if (
+                    (targetArch == TargetArchitecture.ARM)
+                    || (targetArch == TargetArchitecture.ARM64)
+                ) {
                     // Set the 'X' bit to indicate that there is a personality routine associated with this method
                     unwindInfo[2] |= 1 << 4;
                 }
@@ -148,8 +162,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                 if (targetArch != TargetArchitecture.X86)
                 {
-                    bool isFilterFunclet = (_methodNode.FrameInfos[frameInfoIndex].Flags & FrameInfoFlags.Filter) != 0;
-                    ISymbolNode personalityRoutine = (isFilterFunclet ? factory.FilterFuncletPersonalityRoutine : factory.PersonalityRoutine);
+                    bool isFilterFunclet =
+                        (_methodNode.FrameInfos[frameInfoIndex].Flags & FrameInfoFlags.Filter) != 0;
+                    ISymbolNode personalityRoutine = (
+                        isFilterFunclet
+                            ? factory.FilterFuncletPersonalityRoutine
+                            : factory.PersonalityRoutine
+                    );
                     int codeDelta = 0;
                     if (targetArch == TargetArchitecture.ARM)
                     {
@@ -189,14 +208,20 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
-        {
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        ) {
             if (relocsOnly)
             {
                 return;
             }
 
-            bool isFound = factory.RuntimeFunctionsGCInfo.Deduplicator.TryGetValue(this, out var found);
+            bool isFound = factory.RuntimeFunctionsGCInfo.Deduplicator.TryGetValue(
+                this,
+                out var found
+            );
 
             if (isFound && (found != this))
             {
@@ -216,7 +241,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
                 else
                 {
-                    dataBuilder.EmitReloc(item.Symbol, RelocType.IMAGE_REL_BASED_ADDR32NB, item.SymbolDelta);
+                    dataBuilder.EmitReloc(
+                        item.Symbol,
+                        RelocType.IMAGE_REL_BASED_ADDR32NB,
+                        item.SymbolDelta
+                    );
                 }
             }
         }
@@ -229,7 +258,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return sb.ToString();
         }
 
-        public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory context) => null;
+        public override IEnumerable<DependencyListEntry> GetStaticDependencies(
+            NodeFactory context
+        ) => null;
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {

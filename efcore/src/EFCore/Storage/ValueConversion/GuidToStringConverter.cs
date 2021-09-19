@@ -20,17 +20,17 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public GuidToStringConverter(ConverterMappingHints? mappingHints = null)
-            : base(
-                ToString(),
-                ToGuid(),
-                _defaultHints.With(mappingHints))
-        {
-        }
+            : base(ToString(), ToGuid(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(Guid), typeof(string), i => new GuidToStringConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(Guid),
+                typeof(string),
+                i => new GuidToStringConverter(i.MappingHints),
+                _defaultHints
+            );
     }
 }

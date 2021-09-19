@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 "projectDir",
                 "RootNamespace",
                 "C#",
-                args: null);
+                args: null
+            );
         }
 
         private class TestContext : DbContext

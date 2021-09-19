@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                     Assert.Equal(1, incrementer);
 
                     incrementer++;
-                });
+                }
+            );
             executionContext.Add(callbackTagHelper);
 
             // Act
@@ -48,35 +49,19 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 // tagHelperOrders, expectedTagHelperOrders
                 return new TheoryData<int[], int[]>
                 {
-                    {
-                        new[] { 1000, int.MaxValue, 0 },
-                        new[] { 0, 1000, int.MaxValue }
-                    },
+                    { new[] { 1000, int.MaxValue, 0 }, new[] { 0, 1000, int.MaxValue } },
                     {
                         new[] { int.MaxValue, int.MaxValue, int.MinValue },
                         new[] { int.MinValue, int.MaxValue, int.MaxValue }
                     },
-                    {
-                        new[] { 0, 0, int.MinValue },
-                        new[] { int.MinValue, 0, 0 }
-                    },
-                    {
-                        new[] { int.MinValue, -1000, 0 },
-                        new[] { int.MinValue, -1000, 0 }
-                    },
-                    {
-                        new[] { 0, 1000, int.MaxValue },
-                        new[] { 0, 1000, int.MaxValue }
-                    },
+                    { new[] { 0, 0, int.MinValue }, new[] { int.MinValue, 0, 0 } },
+                    { new[] { int.MinValue, -1000, 0 }, new[] { int.MinValue, -1000, 0 } },
+                    { new[] { 0, 1000, int.MaxValue }, new[] { 0, 1000, int.MaxValue } },
                     {
                         new[] { int.MaxValue, int.MinValue, int.MaxValue, -1000, int.MaxValue, 0 },
                         new[] { int.MinValue, -1000, 0, int.MaxValue, int.MaxValue, int.MaxValue }
                     },
-                    {
-                        new[] { 0, 0, 0, 0 },
-                        new[] { 0, 0, 0, 0 }
-                    },
-
+                    { new[] { 0, 0, 0, 0 }, new[] { 0, 0, 0, 0 } },
                     {
                         new[] { 1000, int.MaxValue, 0, -1000, int.MinValue },
                         new[] { int.MinValue, -1000, 0, 1000, int.MaxValue }
@@ -89,8 +74,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         [MemberData(nameof(TagHelperOrderData))]
         public async Task RunAsync_OrdersTagHelpers(
             int[] tagHelperOrders,
-            int[] expectedTagHelperOrders)
-        {
+            int[] expectedTagHelperOrders
+        ) {
             // Arrange
             var runner = new TagHelperRunner();
             var executionContext = new TagHelperExecutionContext("p", TagMode.StartTagAndEndTag);
@@ -124,7 +109,11 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             var tagHelper = new TagHelperContextTouchingTagHelper();
 
             executionContext.Add(tagHelper);
-            executionContext.AddTagHelperAttribute("foo", true, HtmlAttributeValueStyle.DoubleQuotes);
+            executionContext.AddTagHelperAttribute(
+                "foo",
+                true,
+                HtmlAttributeValueStyle.DoubleQuotes
+            );
 
             // Act
             await runner.RunAsync(executionContext);
@@ -183,7 +172,11 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
 
             // Act
             executionContext.Add(tagHelper);
-            executionContext.AddTagHelperAttribute("foo", true, HtmlAttributeValueStyle.DoubleQuotes);
+            executionContext.AddTagHelperAttribute(
+                "foo",
+                true,
+                HtmlAttributeValueStyle.DoubleQuotes
+            );
             await runner.RunAsync(executionContext);
 
             // Assert
@@ -220,7 +213,10 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 var classIndex = output.Attributes.IndexOfName("class");
                 if (classIndex != -1)
                 {
-                    output.Attributes[classIndex] = new TagHelperAttribute("class", "somethingelse");
+                    output.Attributes[classIndex] = new TagHelperAttribute(
+                        "class",
+                        "somethingelse"
+                    );
                 }
 
                 output.Attributes.Add("hello", "world");

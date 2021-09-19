@@ -22,8 +22,8 @@ namespace Microsoft.AspNetCore.Components.Routing
     {
         static readonly char[] _queryOrHashStartChar = new[] { '?', '#' };
         // Dictionary is intentionally used instead of ReadOnlyDictionary to reduce Blazor size
-        static readonly IReadOnlyDictionary<string, object> _emptyParametersDictionary
-            = new Dictionary<string, object>();
+        static readonly IReadOnlyDictionary<string, object> _emptyParametersDictionary =
+            new Dictionary<string, object>();
 
         RenderHandle _renderHandle;
         string _baseUri;
@@ -39,49 +39,59 @@ namespace Microsoft.AspNetCore.Components.Routing
 
         private bool _onNavigateCalled = false;
 
-        [Inject] private NavigationManager NavigationManager { get; set; }
+        [Inject]
+        private NavigationManager NavigationManager { get; set; }
 
-        [Inject] private INavigationInterception NavigationInterception { get; set; }
+        [Inject]
+        private INavigationInterception NavigationInterception { get; set; }
 
-        [Inject] private ILoggerFactory LoggerFactory { get; set; }
+        [Inject]
+        private ILoggerFactory LoggerFactory { get; set; }
 
         /// <summary>
         /// Gets or sets the assembly that should be searched for components matching the URI.
         /// </summary>
-        [Parameter] public Assembly AppAssembly { get; set; }
+        [Parameter]
+        public Assembly AppAssembly { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of additional assemblies that should be searched for components
         /// that can match URIs.
         /// </summary>
-        [Parameter] public IEnumerable<Assembly> AdditionalAssemblies { get; set; }
+        [Parameter]
+        public IEnumerable<Assembly> AdditionalAssemblies { get; set; }
 
         /// <summary>
         /// Gets or sets the content to display when no match is found for the requested route.
         /// </summary>
-        [Parameter] public RenderFragment NotFound { get; set; }
+        [Parameter]
+        public RenderFragment NotFound { get; set; }
 
         /// <summary>
         /// Gets or sets the content to display when a match is found for the requested route.
         /// </summary>
-        [Parameter] public RenderFragment<RouteData> Found { get; set; }
+        [Parameter]
+        public RenderFragment<RouteData> Found { get; set; }
 
         /// <summary>
         /// Get or sets the content to display when asynchronous navigation is in progress.
         /// </summary>
-        [Parameter] public RenderFragment? Navigating { get; set; }
+        [Parameter]
+        public RenderFragment? Navigating { get; set; }
 
         /// <summary>
         /// Gets or sets a handler that should be called before navigating to a new page.
         /// </summary>
-        [Parameter] public EventCallback<NavigationContext> OnNavigateAsync { get; set; }
+        [Parameter]
+        public EventCallback<NavigationContext> OnNavigateAsync { get; set; }
 
         /// <summary>
         /// Gets or sets a flag to indicate whether route matching should prefer exact matches
         /// over wildcards.
         /// <para>This property is obsolete and configuring it does nothing.</para>
         /// </summary>
-        [Parameter] public bool PreferExactMatches { get; set; }
+        [Parameter]
+        public bool PreferExactMatches { get; set; }
 
         private RouteTable Routes { get; set; }
 
@@ -102,7 +112,9 @@ namespace Microsoft.AspNetCore.Components.Routing
 
             if (AppAssembly == null)
             {
-                throw new InvalidOperationException($"The {nameof(Router)} component requires a value for the parameter {nameof(AppAssembly)}.");
+                throw new InvalidOperationException(
+                    $"The {nameof(Router)} component requires a value for the parameter {nameof(AppAssembly)}."
+                );
             }
 
             // Found content is mandatory, because even though we could use something like <RouteView ...> as a
@@ -110,20 +122,27 @@ namespace Microsoft.AspNetCore.Components.Routing
             // to discover how to customize this (e.g., to add authorization).
             if (Found == null)
             {
-                throw new InvalidOperationException($"The {nameof(Router)} component requires a value for the parameter {nameof(Found)}.");
+                throw new InvalidOperationException(
+                    $"The {nameof(Router)} component requires a value for the parameter {nameof(Found)}."
+                );
             }
 
             // NotFound content is mandatory, because even though we could display a default message like "Not found",
             // it has to be specified explicitly so that it can also be wrapped in a specific layout
             if (NotFound == null)
             {
-                throw new InvalidOperationException($"The {nameof(Router)} component requires a value for the parameter {nameof(NotFound)}.");
+                throw new InvalidOperationException(
+                    $"The {nameof(Router)} component requires a value for the parameter {nameof(NotFound)}."
+                );
             }
 
             if (!_onNavigateCalled)
             {
                 _onNavigateCalled = true;
-                await RunOnNavigateAsync(NavigationManager.ToBaseRelativePath(_locationAbsolute), isNavigationIntercepted: false);
+                await RunOnNavigateAsync(
+                    NavigationManager.ToBaseRelativePath(_locationAbsolute),
+                    isNavigationIntercepted: false
+                );
             }
 
             Refresh(isNavigationIntercepted: false);
@@ -138,14 +157,15 @@ namespace Microsoft.AspNetCore.Components.Routing
         private static string StringUntilAny(string str, char[] chars)
         {
             var firstIndex = str.IndexOfAny(chars);
-            return firstIndex < 0
-                ? str
-                : str.Substring(0, firstIndex);
+            return firstIndex < 0 ? str : str.Substring(0, firstIndex);
         }
 
         private void RefreshRouteTable()
         {
-            var assemblies = AdditionalAssemblies == null ? new[] { AppAssembly } : new[] { AppAssembly }.Concat(AdditionalAssemblies);
+            var assemblies =
+                AdditionalAssemblies == null
+                    ? new[] { AppAssembly }
+                    : new[] { AppAssembly }.Concat(AdditionalAssemblies);
             var assembliesSet = new HashSet<Assembly>(assemblies);
 
             if (!_assemblies.SetEquals(assembliesSet))
@@ -182,15 +202,18 @@ namespace Microsoft.AspNetCore.Components.Routing
             {
                 if (!typeof(IComponent).IsAssignableFrom(context.Handler))
                 {
-                    throw new InvalidOperationException($"The type {context.Handler.FullName} " +
-                        $"does not implement {typeof(IComponent).FullName}.");
+                    throw new InvalidOperationException(
+                        $"The type {context.Handler.FullName} "
+                            + $"does not implement {typeof(IComponent).FullName}."
+                    );
                 }
 
                 Log.NavigatingToComponent(_logger, context.Handler, locationPath, _baseUri);
 
                 var routeData = new RouteData(
                     context.Handler,
-                    context.Parameters ?? _emptyParametersDictionary);
+                    context.Parameters ?? _emptyParametersDictionary
+                );
                 _renderHandle.Render(Found(routeData));
             }
             else
@@ -235,14 +258,21 @@ namespace Microsoft.AspNetCore.Components.Routing
             _onNavigateCts = new CancellationTokenSource();
             var navigateContext = new NavigationContext(path, _onNavigateCts.Token);
 
-            var cancellationTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            navigateContext.CancellationToken.Register(state =>
-                ((TaskCompletionSource)state).SetResult(), cancellationTcs);
+            var cancellationTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            navigateContext.CancellationToken.Register(
+                state => ((TaskCompletionSource)state).SetResult(),
+                cancellationTcs
+            );
 
             try
             {
                 // Task.WhenAny returns a Task<Task> so we need to await twice to unwrap the exception
-                var task = await Task.WhenAny(OnNavigateAsync.InvokeAsync(navigateContext), cancellationTcs.Task);
+                var task = await Task.WhenAny(
+                    OnNavigateAsync.InvokeAsync(navigateContext),
+                    cancellationTcs.Task
+                );
                 await task;
                 tcs.SetResult();
                 Refresh(isNavigationIntercepted);
@@ -258,7 +288,11 @@ namespace Microsoft.AspNetCore.Components.Routing
             _locationAbsolute = args.Location;
             if (_renderHandle.IsInitialized && Routes != null)
             {
-                _ = RunOnNavigateAsync(NavigationManager.ToBaseRelativePath(_locationAbsolute), args.IsNavigationIntercepted).Preserve();
+                _ = RunOnNavigateAsync(
+                        NavigationManager.ToBaseRelativePath(_locationAbsolute),
+                        args.IsNavigationIntercepted
+                    )
+                    .Preserve();
             }
         }
 
@@ -276,26 +310,56 @@ namespace Microsoft.AspNetCore.Components.Routing
         private static class Log
         {
             private static readonly Action<ILogger, string, string, Exception> _displayingNotFound =
-                LoggerMessage.Define<string, string>(LogLevel.Debug, new EventId(1, "DisplayingNotFound"), $"Displaying {nameof(NotFound)} because path '{{Path}}' with base URI '{{BaseUri}}' does not match any component route");
+                LoggerMessage.Define<string, string>(
+                    LogLevel.Debug,
+                    new EventId(1, "DisplayingNotFound"),
+                    $"Displaying {nameof(NotFound)} because path '{{Path}}' with base URI '{{BaseUri}}' does not match any component route"
+                );
 
-            private static readonly Action<ILogger, Type, string, string, Exception> _navigatingToComponent =
-                LoggerMessage.Define<Type, string, string>(LogLevel.Debug, new EventId(2, "NavigatingToComponent"), "Navigating to component {ComponentType} in response to path '{Path}' with base URI '{BaseUri}'");
+            private static readonly Action<
+                ILogger,
+                Type,
+                string,
+                string,
+                Exception
+            > _navigatingToComponent = LoggerMessage.Define<Type, string, string>(
+                LogLevel.Debug,
+                new EventId(2, "NavigatingToComponent"),
+                "Navigating to component {ComponentType} in response to path '{Path}' with base URI '{BaseUri}'"
+            );
 
-            private static readonly Action<ILogger, string, string, string, Exception> _navigatingToExternalUri =
-                LoggerMessage.Define<string, string, string>(LogLevel.Debug, new EventId(3, "NavigatingToExternalUri"), "Navigating to non-component URI '{ExternalUri}' in response to path '{Path}' with base URI '{BaseUri}'");
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                string,
+                Exception
+            > _navigatingToExternalUri = LoggerMessage.Define<string, string, string>(
+                LogLevel.Debug,
+                new EventId(3, "NavigatingToExternalUri"),
+                "Navigating to non-component URI '{ExternalUri}' in response to path '{Path}' with base URI '{BaseUri}'"
+            );
 
             internal static void DisplayingNotFound(ILogger logger, string path, string baseUri)
             {
                 _displayingNotFound(logger, path, baseUri, null);
             }
 
-            internal static void NavigatingToComponent(ILogger logger, Type componentType, string path, string baseUri)
-            {
+            internal static void NavigatingToComponent(
+                ILogger logger,
+                Type componentType,
+                string path,
+                string baseUri
+            ) {
                 _navigatingToComponent(logger, componentType, path, baseUri, null);
             }
 
-            internal static void NavigatingToExternalUri(ILogger logger, string externalUri, string path, string baseUri)
-            {
+            internal static void NavigatingToExternalUri(
+                ILogger logger,
+                string externalUri,
+                string path,
+                string baseUri
+            ) {
                 _navigatingToExternalUri(logger, externalUri, path, baseUri, null);
             }
         }

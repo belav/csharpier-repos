@@ -15,23 +15,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DocumentChanges
 {
     [ExportLspRequestHandlerProvider, Shared]
     [ProvidesMethod(LSP.Methods.TextDocumentDidOpenName)]
-    internal class DidOpenHandler : AbstractStatelessRequestHandler<LSP.DidOpenTextDocumentParams, object?>
+    internal class DidOpenHandler
+        : AbstractStatelessRequestHandler<LSP.DidOpenTextDocumentParams, object?>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DidOpenHandler()
-        {
-        }
+        public DidOpenHandler() { }
 
         public override string Method => LSP.Methods.TextDocumentDidOpenName;
 
         public override bool MutatesSolutionState => true;
         public override bool RequiresLSPSolution => false;
 
-        public override LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.DidOpenTextDocumentParams request) => new() { Uri = request.TextDocument.Uri };
+        public override LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.DidOpenTextDocumentParams request
+        ) => new() { Uri = request.TextDocument.Uri };
 
-        public override Task<object?> HandleRequestAsync(LSP.DidOpenTextDocumentParams request, RequestContext context, CancellationToken cancellationToken)
-        {
+        public override Task<object?> HandleRequestAsync(
+            LSP.DidOpenTextDocumentParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        ) {
             // GetTextDocumentIdentifier returns null to avoid creating the solution, so the queue is not able to log the uri.
             context.TraceInformation($"didOpen for {request.TextDocument.Uri}");
 

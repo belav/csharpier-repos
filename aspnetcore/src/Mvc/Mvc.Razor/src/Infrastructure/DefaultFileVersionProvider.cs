@@ -18,12 +18,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure
     internal class DefaultFileVersionProvider : IFileVersionProvider
     {
         private const string VersionKey = "v";
-        private static readonly char[] QueryStringAndFragmentTokens = new [] { '?', '#' };
+        private static readonly char[] QueryStringAndFragmentTokens = new[] { '?', '#' };
 
         public DefaultFileVersionProvider(
             IWebHostEnvironment hostingEnvironment,
-            TagHelperMemoryCacheProvider cacheProvider)
-        {
+            TagHelperMemoryCacheProvider cacheProvider
+        ) {
             if (hostingEnvironment == null)
             {
                 throw new ArgumentNullException(nameof(hostingEnvironment));
@@ -72,12 +72,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure
             cacheEntryOptions.AddExpirationToken(FileProvider.Watch(resolvedPath));
             var fileInfo = FileProvider.GetFileInfo(resolvedPath);
 
-            if (!fileInfo.Exists &&
-                requestPathBase.HasValue &&
-                resolvedPath.StartsWith(requestPathBase.Value, StringComparison.OrdinalIgnoreCase))
-            {
-                var requestPathBaseRelativePath = resolvedPath.Substring(requestPathBase.Value.Length);
-                cacheEntryOptions.AddExpirationToken(FileProvider.Watch(requestPathBaseRelativePath));
+            if (
+                !fileInfo.Exists
+                && requestPathBase.HasValue
+                && resolvedPath.StartsWith(
+                    requestPathBase.Value,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
+                var requestPathBaseRelativePath = resolvedPath.Substring(
+                    requestPathBase.Value.Length
+                );
+                cacheEntryOptions.AddExpirationToken(
+                    FileProvider.Watch(requestPathBaseRelativePath)
+                );
                 fileInfo = FileProvider.GetFileInfo(requestPathBaseRelativePath);
             }
 

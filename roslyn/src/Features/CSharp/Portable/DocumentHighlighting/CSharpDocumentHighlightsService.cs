@@ -22,13 +22,13 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentHighlighting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDocumentHighlightsService()
-        {
-        }
+        public CSharpDocumentHighlightsService() { }
 
         protected override async Task<ImmutableArray<Location>> GetAdditionalReferencesAsync(
-            Document document, ISymbol symbol, CancellationToken cancellationToken)
-        {
+            Document document,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        ) {
             // The FindRefs engine won't find references through 'var' for performance reasons.
             // Also, they are not needed for things like rename/sig change, and the normal find refs
             // feature.  However, we would like the results to be highlighted to get a good experience
@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentHighlighting
             if (symbol is INamedTypeSymbol && symbol.Name != "var")
             {
                 var originalSymbol = symbol.OriginalDefinition;
-                var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document.GetSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 var descendents = root.DescendantNodes();
                 var semanticModel = (SemanticModel)null;
@@ -55,10 +56,12 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentHighlighting
                     {
                         if (semanticModel == null)
                         {
-                            semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                            semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                                .ConfigureAwait(false);
                         }
 
-                        var boundSymbol = semanticModel.GetSymbolInfo(type, cancellationToken).Symbol;
+                        var boundSymbol =
+                            semanticModel.GetSymbolInfo(type, cancellationToken).Symbol;
                         boundSymbol = boundSymbol?.OriginalDefinition;
 
                         if (originalSymbol.Equals(boundSymbol))

@@ -13,10 +13,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.Controllers
     {
         private const string ErrorViewName = "Error";
 
-        public HelpController()
-            : this(GlobalConfiguration.Configuration)
-        {
-        }
+        public HelpController() : this(GlobalConfiguration.Configuration) { }
 
         public HelpController(HttpConfiguration config)
         {
@@ -49,10 +46,15 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.Controllers
         {
             if (!String.IsNullOrEmpty(modelName))
             {
-                ModelDescriptionGenerator modelDescriptionGenerator = Configuration.GetModelDescriptionGenerator();
+                ModelDescriptionGenerator modelDescriptionGenerator =
+                    Configuration.GetModelDescriptionGenerator();
                 ModelDescription modelDescription;
-                if (modelDescriptionGenerator.GeneratedModels.TryGetValue(modelName, out modelDescription))
-                {
+                if (
+                    modelDescriptionGenerator.GeneratedModels.TryGetValue(
+                        modelName,
+                        out modelDescription
+                    )
+                ) {
                     return View(modelDescription);
                 }
             }

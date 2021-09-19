@@ -27,16 +27,13 @@ namespace Roslyn.Test.Utilities.TestGenerators
             context.AddSource(this._hintName, SourceText.From(_content, Encoding.UTF8));
         }
 
-        public void Initialize(GeneratorInitializationContext context)
-        {
-        }
+        public void Initialize(GeneratorInitializationContext context) { }
     }
 
     internal class SingleFileTestGenerator2 : SingleFileTestGenerator
     {
-        public SingleFileTestGenerator2(string content, string hintName = "generatedFile") : base(content, hintName)
-        {
-        }
+        public SingleFileTestGenerator2(string content, string hintName = "generatedFile")
+            : base(content, hintName) { }
     }
 
     internal class CallbackGenerator : ISourceGenerator
@@ -45,8 +42,11 @@ namespace Roslyn.Test.Utilities.TestGenerators
         private readonly Action<GeneratorExecutionContext> _onExecute;
         private readonly string? _source;
 
-        public CallbackGenerator(Action<GeneratorInitializationContext> onInit, Action<GeneratorExecutionContext> onExecute, string? source = "")
-        {
+        public CallbackGenerator(
+            Action<GeneratorInitializationContext> onInit,
+            Action<GeneratorExecutionContext> onExecute,
+            string? source = ""
+        ) {
             _onInit = onInit;
             _onExecute = onExecute;
             _source = source;
@@ -65,9 +65,11 @@ namespace Roslyn.Test.Utilities.TestGenerators
 
     internal class CallbackGenerator2 : CallbackGenerator
     {
-        public CallbackGenerator2(Action<GeneratorInitializationContext> onInit, Action<GeneratorExecutionContext> onExecute, string? source = "") : base(onInit, onExecute, source)
-        {
-        }
+        public CallbackGenerator2(
+            Action<GeneratorInitializationContext> onInit,
+            Action<GeneratorExecutionContext> onExecute,
+            string? source = ""
+        ) : base(onInit, onExecute, source) { }
     }
 
     internal class AdditionalFileAddedGenerator : ISourceGenerator
@@ -78,7 +80,10 @@ namespace Roslyn.Test.Utilities.TestGenerators
         {
             foreach (var file in context.AdditionalFiles)
             {
-                context.AddSource(GetGeneratedFileName(file.Path), SourceText.From("", Encoding.UTF8));
+                context.AddSource(
+                    GetGeneratedFileName(file.Path),
+                    SourceText.From("", Encoding.UTF8)
+                );
             }
         }
 
@@ -91,13 +96,17 @@ namespace Roslyn.Test.Utilities.TestGenerators
         {
             if (edit is AdditionalFileAddedEdit add && CanApplyChanges)
             {
-                context.AdditionalSources.Add(GetGeneratedFileName(add.AddedText.Path), SourceText.From("", Encoding.UTF8));
+                context.AdditionalSources.Add(
+                    GetGeneratedFileName(add.AddedText.Path),
+                    SourceText.From("", Encoding.UTF8)
+                );
                 return true;
             }
             return false;
         }
 
-        private string GetGeneratedFileName(string path) => $"{Path.GetFileNameWithoutExtension(path.Replace('\\', Path.DirectorySeparatorChar))}.generated";
+        private string GetGeneratedFileName(string path) =>
+            $"{Path.GetFileNameWithoutExtension(path.Replace('\\', Path.DirectorySeparatorChar))}.generated";
     }
 
     internal class InMemoryAdditionalText : AdditionalText
@@ -112,7 +121,7 @@ namespace Roslyn.Test.Utilities.TestGenerators
 
         public override string Path { get; }
 
-        public override SourceText GetText(CancellationToken cancellationToken = default) => _content;
-
+        public override SourceText GetText(CancellationToken cancellationToken = default) =>
+            _content;
     }
 }

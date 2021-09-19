@@ -27,21 +27,37 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         private const ulong _http10VersionLong = 3471766442030158920; // GetAsciiStringAsLong("HTTP/1.0"); const results in better codegen
         private const ulong _http11VersionLong = 3543824036068086856; // GetAsciiStringAsLong("HTTP/1.1"); const results in better codegen
 
-        private static readonly UTF8EncodingSealed DefaultRequestHeaderEncoding = new UTF8EncodingSealed();
+        private static readonly UTF8EncodingSealed DefaultRequestHeaderEncoding =
+            new UTF8EncodingSealed();
         private static readonly SpanAction<char, IntPtr> _getHeaderName = GetHeaderName;
-        private static readonly SpanAction<char, IntPtr> _getAsciiStringNonNullCharacters = GetAsciiStringNonNullCharacters;
+        private static readonly SpanAction<char, IntPtr> _getAsciiStringNonNullCharacters =
+            GetAsciiStringNonNullCharacters;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void SetKnownMethod(ulong mask, ulong knownMethodUlong, HttpMethod knownMethod, int length)
-        {
-            _knownMethods[GetKnownMethodIndex(knownMethodUlong)] = new Tuple<ulong, ulong, HttpMethod, int>(mask, knownMethodUlong, knownMethod, length);
+        private static void SetKnownMethod(
+            ulong mask,
+            ulong knownMethodUlong,
+            HttpMethod knownMethod,
+            int length
+        ) {
+            _knownMethods[GetKnownMethodIndex(knownMethodUlong)] = new Tuple<
+                ulong,
+                ulong,
+                HttpMethod,
+                int
+            >(mask, knownMethodUlong, knownMethod, length);
         }
 
         private static void FillKnownMethodsGaps()
         {
             var knownMethods = _knownMethods;
             var length = knownMethods.Length;
-            var invalidHttpMethod = new Tuple<ulong, ulong, HttpMethod, int>(_mask8Chars, 0ul, HttpMethod.Custom, 0);
+            var invalidHttpMethod = new Tuple<ulong, ulong, HttpMethod, int>(
+                _mask8Chars,
+                0ul,
+                HttpMethod.Custom,
+                0
+            );
             for (int i = 0; i < length; i++)
             {
                 if (knownMethods[i] == null)
@@ -96,15 +112,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             {
                 // This version if AsciiUtilities returns null if there are any null (0 byte) characters
                 // in the string
-                if (!StringUtilities.TryGetAsciiString((byte*)state.ToPointer(), output, buffer.Length))
-                {
-                    KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidCharactersInHeaderName);
+                if (
+                    !StringUtilities.TryGetAsciiString(
+                        (byte*)state.ToPointer(),
+                        output,
+                        buffer.Length
+                    )
+                ) {
+                    KestrelBadHttpRequestException.Throw(
+                        RequestRejectionReason.InvalidCharactersInHeaderName
+                    );
                 }
             }
         }
 
-        public static string GetAsciiStringNonNullCharacters(this Span<byte> span)
-            => GetAsciiStringNonNullCharacters((ReadOnlySpan<byte>)span);
+        public static string GetAsciiStringNonNullCharacters(this Span<byte> span) =>
+            GetAsciiStringNonNullCharacters((ReadOnlySpan<byte>)span);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe string GetAsciiStringNonNullCharacters(this ReadOnlySpan<byte> span)
@@ -116,12 +139,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
             fixed (byte* source = &MemoryMarshal.GetReference(span))
             {
-                return string.Create(span.Length, new IntPtr(source), _getAsciiStringNonNullCharacters);
+                return string.Create(
+                    span.Length,
+                    new IntPtr(source),
+                    _getAsciiStringNonNullCharacters
+                );
             }
         }
 
-        public static string GetAsciiOrUTF8StringNonNullCharacters(this ReadOnlySpan<byte> span)
-            => StringUtilities.GetAsciiOrUTF8StringNonNullCharacters(span, DefaultRequestHeaderEncoding);
+        public static string GetAsciiOrUTF8StringNonNullCharacters(this ReadOnlySpan<byte> span) =>
+            StringUtilities.GetAsciiOrUTF8StringNonNullCharacters(
+                span,
+                DefaultRequestHeaderEncoding
+            );
 
         private static unsafe void GetAsciiStringNonNullCharacters(Span<char> buffer, IntPtr state)
         {
@@ -129,17 +159,29 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             {
                 // StringUtilities.TryGetAsciiString returns null if there are any null (0 byte) characters
                 // in the string
-                if (!StringUtilities.TryGetAsciiString((byte*)state.ToPointer(), output, buffer.Length))
-                {
+                if (
+                    !StringUtilities.TryGetAsciiString(
+                        (byte*)state.ToPointer(),
+                        output,
+                        buffer.Length
+                    )
+                ) {
                     throw new InvalidOperationException();
                 }
             }
         }
 
-        public static string GetRequestHeaderString(this ReadOnlySpan<byte> span, string name, Func<string, Encoding?> encodingSelector)
-        {
-            if (ReferenceEquals(KestrelServerOptions.DefaultRequestHeaderEncodingSelector, encodingSelector))
-            {
+        public static string GetRequestHeaderString(
+            this ReadOnlySpan<byte> span,
+            string name,
+            Func<string, Encoding?> encodingSelector
+        ) {
+            if (
+                ReferenceEquals(
+                    KestrelServerOptions.DefaultRequestHeaderEncodingSelector,
+                    encodingSelector
+                )
+            ) {
                 return span.GetAsciiOrUTF8StringNonNullCharacters(DefaultRequestHeaderEncoding);
             }
 
@@ -195,8 +237,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         /// To optimize performance the GET method will be checked first.
         /// </remarks>
         /// <returns><c>true</c> if the input matches a known string, <c>false</c> otherwise.</returns>
-        public static bool GetKnownMethod(this ReadOnlySpan<byte> span, out HttpMethod method, out int length)
-        {
+        public static bool GetKnownMethod(
+            this ReadOnlySpan<byte> span,
+            out HttpMethod method,
+            out int length
+        ) {
             method = GetKnownMethod(span, out length);
             return method != HttpMethod.Custom;
         }
@@ -261,52 +306,70 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             var firstChar = value[0];
             if (length == 3)
             {
-                if (firstChar == 'G' && string.Equals(value, HttpMethods.Get, StringComparison.Ordinal))
-                {
+                if (
+                    firstChar == 'G'
+                    && string.Equals(value, HttpMethods.Get, StringComparison.Ordinal)
+                ) {
                     method = HttpMethod.Get;
                 }
-                else if (firstChar == 'P' && string.Equals(value, HttpMethods.Put, StringComparison.Ordinal))
-                {
+                else if (
+                    firstChar == 'P'
+                    && string.Equals(value, HttpMethods.Put, StringComparison.Ordinal)
+                ) {
                     method = HttpMethod.Put;
                 }
             }
             else if (length == 4)
             {
-                if (firstChar == 'H' && string.Equals(value, HttpMethods.Head, StringComparison.Ordinal))
-                {
+                if (
+                    firstChar == 'H'
+                    && string.Equals(value, HttpMethods.Head, StringComparison.Ordinal)
+                ) {
                     method = HttpMethod.Head;
                 }
-                else if (firstChar == 'P' && string.Equals(value, HttpMethods.Post, StringComparison.Ordinal))
-                {
+                else if (
+                    firstChar == 'P'
+                    && string.Equals(value, HttpMethods.Post, StringComparison.Ordinal)
+                ) {
                     method = HttpMethod.Post;
                 }
             }
             else if (length == 5)
             {
-                if (firstChar == 'T' && string.Equals(value, HttpMethods.Trace, StringComparison.Ordinal))
-                {
+                if (
+                    firstChar == 'T'
+                    && string.Equals(value, HttpMethods.Trace, StringComparison.Ordinal)
+                ) {
                     method = HttpMethod.Trace;
                 }
-                else if (firstChar == 'P' && string.Equals(value, HttpMethods.Patch, StringComparison.Ordinal))
-                {
+                else if (
+                    firstChar == 'P'
+                    && string.Equals(value, HttpMethods.Patch, StringComparison.Ordinal)
+                ) {
                     method = HttpMethod.Patch;
                 }
             }
             else if (length == 6)
             {
-                if (firstChar == 'D' && string.Equals(value, HttpMethods.Delete, StringComparison.Ordinal))
-                {
+                if (
+                    firstChar == 'D'
+                    && string.Equals(value, HttpMethods.Delete, StringComparison.Ordinal)
+                ) {
                     method = HttpMethod.Delete;
                 }
             }
             else if (length == 7)
             {
-                if (firstChar == 'C' && string.Equals(value, HttpMethods.Connect, StringComparison.Ordinal))
-                {
+                if (
+                    firstChar == 'C'
+                    && string.Equals(value, HttpMethods.Connect, StringComparison.Ordinal)
+                ) {
                     method = HttpMethod.Connect;
                 }
-                else if (firstChar == 'O' && string.Equals(value, HttpMethods.Options, StringComparison.Ordinal))
-                {
+                else if (
+                    firstChar == 'O'
+                    && string.Equals(value, HttpMethods.Options, StringComparison.Ordinal)
+                ) {
                     method = HttpMethod.Options;
                 }
             }
@@ -325,8 +388,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         /// To optimize performance the HTTP/1.1 will be checked first.
         /// </remarks>
         /// <returns><c>true</c> if the input matches a known string, <c>false</c> otherwise.</returns>
-        public static bool GetKnownVersion(this ReadOnlySpan<byte> span, out HttpVersion knownVersion, out byte length)
-        {
+        public static bool GetKnownVersion(
+            this ReadOnlySpan<byte> span,
+            out HttpVersion knownVersion,
+            out byte length
+        ) {
             knownVersion = GetKnownVersionAndConfirmCR(span);
             if (knownVersion != HttpVersion.Unknown)
             {
@@ -418,7 +484,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                 default:
                     Debug.Fail("Unexpected HttpVersion: " + httpVersion);
                     return null;
-            };
+            }
+            ;
         }
 
         public static string? MethodToString(HttpMethod method)
@@ -556,7 +623,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         // Allow for de-virtualization (see https://github.com/dotnet/coreclr/pull/9230)
         private sealed class UTF8EncodingSealed : UTF8Encoding
         {
-            public UTF8EncodingSealed() : base(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true) { }
+            public UTF8EncodingSealed()
+                : base(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true) { }
 
             public override byte[] GetPreamble() => Array.Empty<byte>();
         }

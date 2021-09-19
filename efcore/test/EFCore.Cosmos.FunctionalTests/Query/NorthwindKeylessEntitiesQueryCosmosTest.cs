@@ -10,13 +10,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindKeylessEntitiesQueryCosmosTest : NorthwindKeylessEntitiesQueryTestBase<
-        NorthwindQueryCosmosFixture<NoopModelCustomizer>>
+    public class NorthwindKeylessEntitiesQueryCosmosTest
+        : NorthwindKeylessEntitiesQueryTestBase<NorthwindQueryCosmosFixture<NoopModelCustomizer>>
     {
         public NorthwindKeylessEntitiesQueryCosmosTest(
             NorthwindQueryCosmosFixture<NoopModelCustomizer> fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             ClearLog();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory]
@@ -41,17 +42,14 @@ WHERE (c[""Discriminator""] = ""Customer"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))"
+            );
         }
 
         [ConditionalFact] // views are not supported
-        public override void KeylessEntity_by_database_view()
-        {
-        }
+        public override void KeylessEntity_by_database_view() { }
 
-        public override void Entity_mapped_to_view_on_right_side_of_join()
-        {
-        }
+        public override void Entity_mapped_to_view_on_right_side_of_join() { }
 
         [ConditionalFact(Skip = "See issue#17246")]
         public override void Auto_initialized_view_set()
@@ -64,8 +62,7 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
         {
             base.KeylessEntity_with_nav_defining_query();
 
-            AssertSql(
-                @"");
+            AssertSql(@"");
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -73,20 +70,23 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
         {
             await AssertQuery(
                 async,
-                ss => from c in ss.Set<Customer>().Where(ct => ct.City == "London")
-                      from o in ss.Set<OrderQuery>().Where(ov => ov.CustomerID == c.CustomerID)
-                      select new { c, o },
+                ss =>
+                    from c in ss.Set<Customer>().Where(ct => ct.City == "London")
+                    from o in ss.Set<OrderQuery>().Where(ov => ov.CustomerID == c.CustomerID)
+                    select new { c, o },
                 elementSorter: e => (e.c.CustomerID, e.o.CustomerID),
                 elementAsserter: (e, a) =>
                 {
                     AssertEqual(e.c, a.c);
                     AssertEqual(e.o, a.o);
-                });
+                }
+            );
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
@@ -102,18 +102,21 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""City""] = ""London""))");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))");
+WHERE ((c[""Discriminator""] = ""Order"") AND (c[""CustomerID""] = ""ALFKI""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task KeylessEntity_with_defining_query_and_correlated_collection(bool async)
-        {
+        public override async Task KeylessEntity_with_defining_query_and_correlated_collection(
+            bool async
+        ) {
             await base.KeylessEntity_with_defining_query_and_correlated_collection(async);
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""Customer"")");
+WHERE (c[""Discriminator""] = ""Customer"")"
+            );
         }
 
         [ConditionalTheory(Skip = "issue#17314")] // left join translation
@@ -129,9 +132,11 @@ WHERE (c[""Discriminator""] = ""Customer"")");
         {
             await AssertQuery(
                 async,
-                ss => from ov in ss.Set<OrderQuery>().Where(o => o.CustomerID == "ALFKI")
-                      where ov.Customer.Orders.Any()
-                      select ov);
+                ss =>
+                    from ov in ss.Set<OrderQuery>().Where(o => o.CustomerID == "ALFKI")
+                    where ov.Customer.Orders.Any()
+                    select ov
+            );
 
             AssertSql(@"");
         }
@@ -145,17 +150,17 @@ WHERE (c[""Discriminator""] = ""Customer"")");
         }
 
         [ConditionalTheory(Skip = "Issue #17246")]
-        public override async Task Collection_correlated_with_keyless_entity_in_predicate_works(bool async)
-        {
+        public override async Task Collection_correlated_with_keyless_entity_in_predicate_works(
+            bool async
+        ) {
             await base.Collection_correlated_with_keyless_entity_in_predicate_works(async);
 
             AssertSql(@"");
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-        protected override void ClearLog()
-            => Fixture.TestSqlLoggerFactory.Clear();
+        protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
     }
 }

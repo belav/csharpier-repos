@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis
         protected PortableExecutableReference(
             MetadataReferenceProperties properties,
             string? fullPath = null,
-            DocumentationProvider? initialDocumentation = null)
-            : base(properties)
+            DocumentationProvider? initialDocumentation = null
+        ) : base(properties)
         {
             _filePath = fullPath;
             _lazyDocumentation = initialDocumentation;
@@ -54,7 +54,11 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_lazyDocumentation == null)
                 {
-                    Interlocked.CompareExchange(ref _lazyDocumentation, CreateDocumentationProvider(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyDocumentation,
+                        CreateDocumentationProvider(),
+                        null
+                    );
                 }
 
                 return _lazyDocumentation;
@@ -75,7 +79,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns an instance of the reference with specified aliases.
         /// </summary>
         /// <param name="aliases">The new aliases for the reference.</param>
-        /// <exception cref="ArgumentException">Alias is invalid for the metadata kind.</exception> 
+        /// <exception cref="ArgumentException">Alias is invalid for the metadata kind.</exception>
         public new PortableExecutableReference WithAliases(IEnumerable<string> aliases)
         {
             return this.WithAliases(ImmutableArray.CreateRange(aliases));
@@ -85,7 +89,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns an instance of the reference with specified aliases.
         /// </summary>
         /// <param name="aliases">The new aliases for the reference.</param>
-        /// <exception cref="ArgumentException">Alias is invalid for the metadata kind.</exception> 
+        /// <exception cref="ArgumentException">Alias is invalid for the metadata kind.</exception>
         public new PortableExecutableReference WithAliases(ImmutableArray<string> aliases)
         {
             return WithProperties(Properties.WithAliases(aliases));
@@ -95,7 +99,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns an instance of the reference with specified interop types embedding.
         /// </summary>
         /// <param name="value">The new value for <see cref="MetadataReferenceProperties.EmbedInteropTypes"/>.</param>
-        /// <exception cref="ArgumentException">Interop types can't be embedded from modules.</exception> 
+        /// <exception cref="ArgumentException">Interop types can't be embedded from modules.</exception>
         public new PortableExecutableReference WithEmbedInteropTypes(bool value)
         {
             return WithProperties(Properties.WithEmbedInteropTypes(value));
@@ -105,9 +109,10 @@ namespace Microsoft.CodeAnalysis
         /// Returns an instance of the reference with specified properties, or this instance if properties haven't changed.
         /// </summary>
         /// <param name="properties">The new properties for the reference.</param>
-        /// <exception cref="ArgumentException">Specified values not valid for this reference.</exception> 
-        public new PortableExecutableReference WithProperties(MetadataReferenceProperties properties)
-        {
+        /// <exception cref="ArgumentException">Specified values not valid for this reference.</exception>
+        public new PortableExecutableReference WithProperties(
+            MetadataReferenceProperties properties
+        ) {
             if (properties == this.Properties)
             {
                 return this;
@@ -116,8 +121,9 @@ namespace Microsoft.CodeAnalysis
             return WithPropertiesImpl(properties);
         }
 
-        internal sealed override MetadataReference WithPropertiesImplReturningMetadataReference(MetadataReferenceProperties properties)
-        {
+        internal sealed override MetadataReference WithPropertiesImplReturningMetadataReference(
+            MetadataReferenceProperties properties
+        ) {
             return WithPropertiesImpl(properties);
         }
 
@@ -127,7 +133,9 @@ namespace Microsoft.CodeAnalysis
         /// <param name="properties">The new properties for the reference.</param>
         /// <exception cref="NotSupportedException">Specified values not supported.</exception> 
         /// <remarks>Only invoked if the properties changed.</remarks>
-        protected abstract PortableExecutableReference WithPropertiesImpl(MetadataReferenceProperties properties);
+        protected abstract PortableExecutableReference WithPropertiesImpl(
+            MetadataReferenceProperties properties
+        );
 
         /// <summary>
         /// Get metadata representation for the PE file.
@@ -183,22 +191,37 @@ namespace Microsoft.CodeAnalysis
             return GetMetadataNoCopy().Id;
         }
 
-        internal static Diagnostic ExceptionToDiagnostic(Exception e, CommonMessageProvider messageProvider, Location location, string display, MetadataImageKind kind)
-        {
+        internal static Diagnostic ExceptionToDiagnostic(
+            Exception e,
+            CommonMessageProvider messageProvider,
+            Location location,
+            string display,
+            MetadataImageKind kind
+        ) {
             if (e is BadImageFormatException)
             {
-                int errorCode = (kind == MetadataImageKind.Assembly) ? messageProvider.ERR_InvalidAssemblyMetadata : messageProvider.ERR_InvalidModuleMetadata;
+                int errorCode =
+                    (kind == MetadataImageKind.Assembly)
+                        ? messageProvider.ERR_InvalidAssemblyMetadata
+                        : messageProvider.ERR_InvalidModuleMetadata;
                 return messageProvider.CreateDiagnostic(errorCode, location, display, e.Message);
             }
 
             var fileNotFound = e as FileNotFoundException;
             if (fileNotFound != null)
             {
-                return messageProvider.CreateDiagnostic(messageProvider.ERR_MetadataFileNotFound, location, fileNotFound.FileName ?? string.Empty);
+                return messageProvider.CreateDiagnostic(
+                    messageProvider.ERR_MetadataFileNotFound,
+                    location,
+                    fileNotFound.FileName ?? string.Empty
+                );
             }
             else
             {
-                int errorCode = (kind == MetadataImageKind.Assembly) ? messageProvider.ERR_ErrorOpeningAssemblyFile : messageProvider.ERR_ErrorOpeningModuleFile;
+                int errorCode =
+                    (kind == MetadataImageKind.Assembly)
+                        ? messageProvider.ERR_ErrorOpeningAssemblyFile
+                        : messageProvider.ERR_ErrorOpeningModuleFile;
                 return messageProvider.CreateDiagnostic(errorCode, location, display, e.Message);
             }
         }

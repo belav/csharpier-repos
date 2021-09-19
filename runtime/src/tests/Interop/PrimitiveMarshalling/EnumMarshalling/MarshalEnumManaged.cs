@@ -26,7 +26,6 @@ namespace EnumRoundtrip
         [return: MarshalAs(UnmanagedType.FunctionPtr)]
         public static extern CdeclEnumDelegate GetFptrCdeclEnum();
 
-
         #endregion
 
         #region delegate pinvoke
@@ -48,7 +47,10 @@ namespace EnumRoundtrip
             r = CdeclEnum(DialogResult.None | DialogResult.OK, ref result);
             if ((!result) || (r != 3))
             {
-                TestFramework.LogError("02", "Main : Returned value of enum doesn't match with the value passed in to pinvoke call");
+                TestFramework.LogError(
+                    "02",
+                    "Main : Returned value of enum doesn't match with the value passed in to pinvoke call"
+                );
                 return 101;
             }
 
@@ -58,7 +60,10 @@ namespace EnumRoundtrip
             r = cdecdel(DialogResult.None | DialogResult.OK, ref result);
             if ((!result) || (r != 3))
             {
-                TestFramework.LogError("04", "Main : Returned value of enum doesn't match with the value passed in to pinvoke call");
+                TestFramework.LogError(
+                    "04",
+                    "Main : Returned value of enum doesn't match with the value passed in to pinvoke call"
+                );
                 return 101;
             }
 

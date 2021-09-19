@@ -10,25 +10,20 @@ using System.Runtime.InteropServices;
 
 namespace SuperPMICollection
 {
-
     public class SpmiException : Exception
     {
-        public SpmiException() : base()
-        { }
+        public SpmiException() : base() { }
 
-        public SpmiException(string message)
-            : base(message)
-        { }
+        public SpmiException(string message) : base(message) { }
 
         public SpmiException(string message, Exception innerException)
-            : base(message, innerException)
-        { }
+            : base(message, innerException) { }
     }
 
     internal class Global
     {
         // Arguments to the program. These should not be touched by Initialize(), as they are set earlier than that.
-        internal static bool SkipCleanup = false;          // Should we skip all cleanup? That is, should we keep all temporary files? Useful for debugging.
+        internal static bool SkipCleanup = false; // Should we skip all cleanup? That is, should we keep all temporary files? Useful for debugging.
 
         // Computed values based on the environment and platform.
         internal static bool IsWindows { get; private set; }
@@ -40,9 +35,9 @@ namespace SuperPMICollection
         internal static string CollectorShimName { get; private set; }
         internal static string SuperPmiToolName { get; private set; }
         internal static string McsToolName { get; private set; }
-        internal static string JitPath { get; private set; }             // Path to the standalone JIT
-        internal static string SuperPmiPath { get; private set; }        // Path to superpmi.exe
-        internal static string McsPath { get; private set; }             // Path to mcs.exe
+        internal static string JitPath { get; private set; } // Path to the standalone JIT
+        internal static string SuperPmiPath { get; private set; } // Path to superpmi.exe
+        internal static string McsPath { get; private set; } // Path to mcs.exe
 
         // Initialize the global state. Don't use a class constructor, because we might throw exceptions
         // that we want to catch.
@@ -60,56 +55,61 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                throw new SpmiException("Illegal CORE_ROOT environment variable (" + core_root_raw + "), exception: " + ex.Message);
+                throw new SpmiException(
+                    "Illegal CORE_ROOT environment variable ("
+                        + core_root_raw
+                        + "), exception: "
+                        + ex.Message
+                );
             }
 
             IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-            IsOSX     = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
-            IsLinux   = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+            IsOSX = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+            IsLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
 
             if (IsWindows)
             {
                 StandaloneJitName = "clrjit.dll";
                 CollectorShimName = "superpmi-shim-collector.dll";
-                SuperPmiToolName  = "superpmi.exe";
-                McsToolName       = "mcs.exe";
+                SuperPmiToolName = "superpmi.exe";
+                McsToolName = "mcs.exe";
             }
             else if (IsLinux)
             {
                 StandaloneJitName = "libclrjit.so";
                 CollectorShimName = "libsuperpmi-shim-collector.so";
-                SuperPmiToolName  = "superpmi";
-                McsToolName       = "mcs";
+                SuperPmiToolName = "superpmi";
+                McsToolName = "mcs";
             }
             else if (IsOSX)
             {
                 StandaloneJitName = "libclrjit.dylib";
                 CollectorShimName = "libsuperpmi-shim-collector.dylib";
-                SuperPmiToolName  = "superpmi";
-                McsToolName       = "mcs";
+                SuperPmiToolName = "superpmi";
+                McsToolName = "mcs";
             }
             else
             {
                 throw new SpmiException("Unknown platform");
             }
 
-            JitPath      = Path.Combine(CoreRoot, StandaloneJitName);
+            JitPath = Path.Combine(CoreRoot, StandaloneJitName);
             SuperPmiPath = Path.Combine(CoreRoot, SuperPmiToolName);
-            McsPath      = Path.Combine(CoreRoot, McsToolName);
+            McsPath = Path.Combine(CoreRoot, McsToolName);
         }
     }
 
     internal class SuperPMICollectionClass
     {
-        private static string s_tempDir = null;             // Temporary directory where we will put the MC files, MCH files, MCL files, and TOC.
-        private static string s_baseFailMclFile = null;     // Pathname for a temporary .MCL file used for noticing superpmi replay failures against preliminary MCH.
-        private static string s_finalFailMclFile = null;    // Pathname for a temporary .MCL file used for noticing superpmi replay failures against final MCH.
-        private static string s_baseMchFile = null;         // The base .MCH file path
-        private static string s_finalMchFile = null;        // The clean thin unique .MCH file path
-        private static string s_tocFile = null;             // The .TOC file path for the clean thin unique .MCH file
-        private static string s_errors = "";                // Collect non-fatal file delete errors to display at the end of the collection process.
+        private static string s_tempDir = null; // Temporary directory where we will put the MC files, MCH files, MCL files, and TOC.
+        private static string s_baseFailMclFile = null; // Pathname for a temporary .MCL file used for noticing superpmi replay failures against preliminary MCH.
+        private static string s_finalFailMclFile = null; // Pathname for a temporary .MCL file used for noticing superpmi replay failures against final MCH.
+        private static string s_baseMchFile = null; // The base .MCH file path
+        private static string s_finalMchFile = null; // The clean thin unique .MCH file path
+        private static string s_tocFile = null; // The .TOC file path for the clean thin unique .MCH file
+        private static string s_errors = ""; // Collect non-fatal file delete errors to display at the end of the collection process.
 
-        private static bool s_saveFinalMchFile = false;     // Should we save the final MCH file, or delete it?
+        private static bool s_saveFinalMchFile = false; // Should we save the final MCH file, or delete it?
 
         private static void SafeFileDelete(string filePath)
         {
@@ -119,7 +119,11 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                string err = string.Format("Error deleting file \"{0}\": {1}", filePath, ex.Message);
+                string err = string.Format(
+                    "Error deleting file \"{0}\": {1}",
+                    filePath,
+                    ex.Message
+                );
                 s_errors += err + System.Environment.NewLine;
                 Console.Error.WriteLine(err);
             }
@@ -141,9 +145,9 @@ namespace SuperPMICollection
 
         private static void ChooseFilePaths(string outputMchPath)
         {
-            s_baseFailMclFile  = Path.Combine(s_tempDir, "basefail.mcl");
+            s_baseFailMclFile = Path.Combine(s_tempDir, "basefail.mcl");
             s_finalFailMclFile = Path.Combine(s_tempDir, "finalfail.mcl");
-            s_baseMchFile      = Path.Combine(s_tempDir, "base.mch");
+            s_baseMchFile = Path.Combine(s_tempDir, "base.mch");
 
             if (outputMchPath == null)
             {
@@ -201,7 +205,9 @@ namespace SuperPMICollection
                 int lastIndex = testName.LastIndexOf("\\");
                 if (lastIndex == -1)
                 {
-                    throw new SpmiException("test path doesn't have any directory separators? " + testName);
+                    throw new SpmiException(
+                        "test path doesn't have any directory separators? " + testName
+                    );
                 }
                 testDir = testName.Substring(0, lastIndex);
             }
@@ -219,7 +225,10 @@ namespace SuperPMICollection
                 // more than once. This same transformation is done in runtest.sh.
                 // Review: RunProgram doesn't seem to work if the program isn't a full path.
 
-                RunProgram("/usr/bin/perl", @"-pi -e 's/\r\n|\n|\r/\n/g' " + "\"" + testName + "\"");
+                RunProgram(
+                    "/usr/bin/perl",
+                    @"-pi -e 's/\r\n|\n|\r/\n/g' " + "\"" + testName + "\""
+                );
                 RunProgram("/bin/chmod", "+x \"" + testName + "\"");
 
                 // Now, figure out how to run the test.
@@ -227,7 +236,9 @@ namespace SuperPMICollection
                 int lastIndex = testName.LastIndexOf("/");
                 if (lastIndex == -1)
                 {
-                    throw new SpmiException("test path doesn't have any directory separators? " + testName);
+                    throw new SpmiException(
+                        "test path doesn't have any directory separators? " + testName
+                    );
                 }
                 testDir = testName.Substring(0, lastIndex);
             }
@@ -240,6 +251,7 @@ namespace SuperPMICollection
             {
                 RunProgram(testName, "");
             }
+
             finally
             {
                 // Restore the original current directory from before the test run.
@@ -251,14 +263,21 @@ namespace SuperPMICollection
         {
             var spmiTestFullPaths = new List<string>();
 
-            using (var resourceStream = typeof(SuperPMICollectionClass).GetTypeInfo().Assembly.GetManifestResourceStream("SpmiTestNames"))
+            using (
+                var resourceStream = typeof(SuperPMICollectionClass).GetTypeInfo()
+                    .Assembly.GetManifestResourceStream("SpmiTestNames")
+            )
             using (var streamReader = new StreamReader(resourceStream))
             {
                 string currentDirectory = Directory.GetCurrentDirectory();
                 string spmiTestName;
                 while ((spmiTestName = streamReader.ReadLine()) != null)
                 {
-                    string spmiTestFullPath = Path.Combine(currentDirectory, spmiTestName, Path.ChangeExtension(spmiTestName, ".cmd"));
+                    string spmiTestFullPath = Path.Combine(
+                        currentDirectory,
+                        spmiTestName,
+                        Path.ChangeExtension(spmiTestName, ".cmd")
+                    );
                     spmiTestFullPaths.Add(spmiTestFullPath);
                 }
             }
@@ -269,7 +288,6 @@ namespace SuperPMICollection
         // Run all the programs from the CoreCLR test binary drop we wish to run while collecting MC files.
         private static void RunTestProgramsWhileCollecting()
         {
-
             // Run the tests
             foreach (string spmiTestPath in GetSpmiTestFullPaths())
             {
@@ -289,8 +307,10 @@ namespace SuperPMICollection
         }
 
         // Run all the programs we wish to run while collecting MC files.
-        private static void RunProgramsWhileCollecting(string runProgramPath, string runProgramArguments)
-        {
+        private static void RunProgramsWhileCollecting(
+            string runProgramPath,
+            string runProgramArguments
+        ) {
             if (runProgramPath == null)
             {
                 // No program was given to use for collection, so use our default set.
@@ -339,7 +359,10 @@ namespace SuperPMICollection
         private static void MergeMCFiles()
         {
             string pattern = Path.Combine(s_tempDir, "*.mc");
-            RunProgram(Global.McsPath, "-merge " + s_baseMchFile + " " + pattern + " -recursive -dedup -thin");
+            RunProgram(
+                Global.McsPath,
+                "-merge " + s_baseMchFile + " " + pattern + " -recursive -dedup -thin"
+            );
             if (!File.Exists(s_baseMchFile))
             {
                 throw new SpmiException("file missing: " + s_baseMchFile);
@@ -365,10 +388,15 @@ namespace SuperPMICollection
         //      del <s_baseFailMclFile>
         private static void CreateCleanMCHFile()
         {
-            RunProgram(Global.SuperPmiPath, "-p -f " + s_baseFailMclFile + " " + s_baseMchFile + " " + Global.JitPath);
+            RunProgram(
+                Global.SuperPmiPath,
+                "-p -f " + s_baseFailMclFile + " " + s_baseMchFile + " " + Global.JitPath
+            );
 
-            if (File.Exists(s_baseFailMclFile) && !String.IsNullOrEmpty(File.ReadAllText(s_baseFailMclFile)))
-            {
+            if (
+                File.Exists(s_baseFailMclFile)
+                && !String.IsNullOrEmpty(File.ReadAllText(s_baseFailMclFile))
+            ) {
                 RunProgram(Global.McsPath, "-strip " + s_baseMchFile + " " + s_finalMchFile);
             }
             else
@@ -376,12 +404,17 @@ namespace SuperPMICollection
                 try
                 {
                     Console.WriteLine("Moving {0} to {1}", s_baseMchFile, s_finalMchFile);
-                    File.Move(s_baseMchFile, s_finalMchFile, overwrite:true);
+                    File.Move(s_baseMchFile, s_finalMchFile, overwrite: true);
                     s_baseMchFile = null; // This file no longer exists.
                 }
                 catch (Exception ex)
                 {
-                    string err = string.Format("Error moving file \"{0}\" to \"{1}\": {2}", s_baseMchFile, s_finalMchFile, ex.Message);
+                    string err = string.Format(
+                        "Error moving file \"{0}\" to \"{1}\": {2}",
+                        s_baseMchFile,
+                        s_finalMchFile,
+                        ex.Message
+                    );
                     s_errors += err + System.Environment.NewLine;
                     Console.Error.WriteLine(err);
                 }
@@ -428,10 +461,15 @@ namespace SuperPMICollection
         //           // error!
         private static void VerifyFinalMCH()
         {
-            RunProgram(Global.SuperPmiPath, "-p -f " + s_finalFailMclFile + " " + s_finalMchFile + " " + Global.JitPath);
+            RunProgram(
+                Global.SuperPmiPath,
+                "-p -f " + s_finalFailMclFile + " " + s_finalMchFile + " " + Global.JitPath
+            );
 
-            if (!File.Exists(s_finalFailMclFile) || !String.IsNullOrEmpty(File.ReadAllText(s_finalFailMclFile)))
-            {
+            if (
+                !File.Exists(s_finalFailMclFile)
+                || !String.IsNullOrEmpty(File.ReadAllText(s_finalFailMclFile))
+            ) {
                 throw new SpmiException("replay of final file is not error free");
             }
 
@@ -495,7 +533,10 @@ namespace SuperPMICollection
 
                 if ((s_tempDir != null) && Directory.Exists(s_tempDir))
                 {
-                    Directory.Delete(s_tempDir, /* delete recursively */ true);
+                    Directory.Delete(
+                        s_tempDir, /* delete recursively */
+                        true
+                    );
                 }
             }
             catch (Exception ex)
@@ -504,8 +545,12 @@ namespace SuperPMICollection
             }
         }
 
-        public static int Collect(string outputMchPath, string runProgramPath, string runProgramArguments, string tempPath)
-        {
+        public static int Collect(
+            string outputMchPath,
+            string runProgramPath,
+            string runProgramArguments,
+            string tempPath
+        ) {
             // Do a basic SuperPMI collect and validation:
             // 1. Collect MC files by running a set of sample apps.
             // 2. Merge the MC files into a single MCH using "mcs -merge *.mc -recursive -dedup -thin".
@@ -521,7 +566,7 @@ namespace SuperPMICollection
             string thisTask = "SuperPMI collection and playback";
             Console.WriteLine(thisTask + " - BEGIN");
 
-            int result = 101;           // assume error (!= 100)
+            int result = 101; // assume error (!= 100)
 
             try
             {
@@ -543,7 +588,9 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine("ERROR: unknown exception running collection: " + ex.Message);
+                Console.Error.WriteLine(
+                    "ERROR: unknown exception running collection: " + ex.Message
+                );
                 result = 101;
             }
             finally
@@ -583,27 +630,63 @@ namespace SuperPMICollection
             Console.WriteLine("Usage: {0} [arguments]", thisProgram);
             Console.WriteLine("  where [arguments] is zero or more of:");
             Console.WriteLine("  -? | -help                     : Display this help text.");
-            Console.WriteLine("  -mch <file>                    : Specify the name of the generated clean/thin/unique MCH file.");
-            Console.WriteLine("                                   The MCH file is retained (by default, the final MCH file is deleted).");
-            Console.WriteLine("  -run <program> [arguments...]  : This program (or script) is invoked to run any number");
-            Console.WriteLine("                                   of programs during MC collection. All arguments after");
-            Console.WriteLine("                                   <program> are passed to <program> as its arguments.");
-            Console.WriteLine("                                   Thus, -run must be the last argument.");
-            Console.WriteLine("  -skipCleanup                   : Do not delete any intermediate files created during processing.");
-            Console.WriteLine("  -temp <dir>                    : A newly created, randomly-named, subdirectory of this");
-            Console.WriteLine("                                   directory will be used to store all temporary files.");
-            Console.WriteLine("                                   By default, the user temporary directory is used");
-            Console.WriteLine("                                   (%TEMP% on Windows, /tmp on Unix).");
-            Console.WriteLine("                                   Since SuperPMI collections generate a lot of data, this option");
-            Console.WriteLine("                                   is useful if the normal temporary directory doesn't have enough space.");
+            Console.WriteLine(
+                "  -mch <file>                    : Specify the name of the generated clean/thin/unique MCH file."
+            );
+            Console.WriteLine(
+                "                                   The MCH file is retained (by default, the final MCH file is deleted)."
+            );
+            Console.WriteLine(
+                "  -run <program> [arguments...]  : This program (or script) is invoked to run any number"
+            );
+            Console.WriteLine(
+                "                                   of programs during MC collection. All arguments after"
+            );
+            Console.WriteLine(
+                "                                   <program> are passed to <program> as its arguments."
+            );
+            Console.WriteLine(
+                "                                   Thus, -run must be the last argument."
+            );
+            Console.WriteLine(
+                "  -skipCleanup                   : Do not delete any intermediate files created during processing."
+            );
+            Console.WriteLine(
+                "  -temp <dir>                    : A newly created, randomly-named, subdirectory of this"
+            );
+            Console.WriteLine(
+                "                                   directory will be used to store all temporary files."
+            );
+            Console.WriteLine(
+                "                                   By default, the user temporary directory is used"
+            );
+            Console.WriteLine(
+                "                                   (%TEMP% on Windows, /tmp on Unix)."
+            );
+            Console.WriteLine(
+                "                                   Since SuperPMI collections generate a lot of data, this option"
+            );
+            Console.WriteLine(
+                "                                   is useful if the normal temporary directory doesn't have enough space."
+            );
             Console.WriteLine("");
-            Console.WriteLine("This program performs a collection of SuperPMI data. With no arguments, a hard-coded list of");
-            Console.WriteLine("programs are run during collection. With the -run argument, the user species which apps are run.");
+            Console.WriteLine(
+                "This program performs a collection of SuperPMI data. With no arguments, a hard-coded list of"
+            );
+            Console.WriteLine(
+                "programs are run during collection. With the -run argument, the user species which apps are run."
+            );
             Console.WriteLine("");
-            Console.WriteLine("If -mch is not given, all generated files are deleted, and the result is simply the exit code");
-            Console.WriteLine("indicating whether the collection succeeded. This is useful as a test.");
+            Console.WriteLine(
+                "If -mch is not given, all generated files are deleted, and the result is simply the exit code"
+            );
+            Console.WriteLine(
+                "indicating whether the collection succeeded. This is useful as a test."
+            );
             Console.WriteLine("");
-            Console.WriteLine("If the COMPlus_JitName variable is already set, it is assumed SuperPMI collection is already happening,");
+            Console.WriteLine(
+                "If the COMPlus_JitName variable is already set, it is assumed SuperPMI collection is already happening,"
+            );
             Console.WriteLine("and the program exits with success.");
             Console.WriteLine("");
             Console.WriteLine("On success, the return code is 100.");
@@ -668,7 +751,10 @@ namespace SuperPMICollection
                             runProgramPath = Path.GetFullPath(args[i]);
                             if (!File.Exists(runProgramPath))
                             {
-                                Console.Error.WriteLine("Error: couldn't find program {0}", runProgramPath);
+                                Console.Error.WriteLine(
+                                    "Error: couldn't find program {0}",
+                                    runProgramPath
+                                );
                                 return 101;
                             }
                             // The rest of the arguments, if any, are passed as arguments to the run program.
@@ -707,7 +793,9 @@ namespace SuperPMICollection
                 // that. Perhaps someone is already doing a SuperPMI collection and invokes this
                 // program as part of a full test path in which this program exists.
 
-                Console.WriteLine("COMPlus_JitName already exists: skipping SuperPMI collection and returning success");
+                Console.WriteLine(
+                    "COMPlus_JitName already exists: skipping SuperPMI collection and returning success"
+                );
                 return 100;
             }
 
@@ -716,7 +804,12 @@ namespace SuperPMICollection
             try
             {
                 Global.Initialize();
-                result = SuperPMICollectionClass.Collect(outputMchPath, runProgramPath, runProgramArguments, tempPath);
+                result = SuperPMICollectionClass.Collect(
+                    outputMchPath,
+                    runProgramPath,
+                    runProgramArguments,
+                    tempPath
+                );
             }
             catch (SpmiException ex)
             {
@@ -725,12 +818,13 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine("ERROR: unknown exception running collection: " + ex.Message);
+                Console.Error.WriteLine(
+                    "ERROR: unknown exception running collection: " + ex.Message
+                );
                 result = 101;
             }
 
             return result;
         }
     }
-
 }

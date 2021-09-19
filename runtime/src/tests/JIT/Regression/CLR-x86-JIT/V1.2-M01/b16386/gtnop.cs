@@ -9,8 +9,14 @@ public class gtnop
     {
         byte[] arr = new byte[1];
         short i = 3;
-        try { arr[(byte)(20u) * i] = 0; }
-        catch (IndexOutOfRangeException) { return 100; }
+        try
+        {
+            arr[(byte)(20u) * i] = 0;
+        }
+        catch (IndexOutOfRangeException)
+        {
+            return 100;
+        }
         return 1;
     }
 }

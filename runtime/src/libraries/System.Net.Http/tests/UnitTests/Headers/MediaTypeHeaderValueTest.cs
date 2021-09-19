@@ -16,14 +16,26 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_MediaTypeNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentException>("mediaType", () => { new MediaTypeHeaderValue(null); });
+            AssertExtensions.Throws<ArgumentException>(
+                "mediaType",
+                () =>
+                {
+                    new MediaTypeHeaderValue(null);
+                }
+            );
         }
 
         [Fact]
         public void Ctor_MediaTypeEmpty_Throw()
         {
             // null and empty should be treated the same. So we also throw for empty strings.
-            AssertExtensions.Throws<ArgumentException>("mediaType", () => { new MediaTypeHeaderValue(string.Empty); });
+            AssertExtensions.Throws<ArgumentException>(
+                "mediaType",
+                () =>
+                {
+                    new MediaTypeHeaderValue(string.Empty);
+                }
+            );
         }
 
         [Fact]
@@ -61,7 +73,12 @@ namespace System.Net.Http.Tests
         {
             MediaTypeHeaderValue mediaType = new MediaTypeHeaderValue("text/plain");
 
-            Assert.Throws<ArgumentNullException>(() => { mediaType.Parameters.Add(null); });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    mediaType.Parameters.Add(null);
+                }
+            );
         }
 
         [Fact]
@@ -119,7 +136,10 @@ namespace System.Net.Http.Tests
             Assert.Equal("text/plain; charset=utf-8", mediaType.ToString());
 
             mediaType.Parameters.Add(new NameValueHeaderValue("custom", "\"custom value\""));
-            Assert.Equal("text/plain; charset=utf-8; custom=\"custom value\"", mediaType.ToString());
+            Assert.Equal(
+                "text/plain; charset=utf-8; custom=\"custom value\"",
+                mediaType.ToString()
+            );
 
             mediaType.CharSet = null;
             Assert.Equal("text/plain; custom=\"custom value\"", mediaType.ToString());
@@ -199,37 +219,75 @@ namespace System.Net.Http.Tests
         {
             MediaTypeHeaderValue result = null;
 
-            Assert.Equal(11, MediaTypeHeaderValue.GetMediaTypeLength("text/plain , other/charset", 0,
-                DummyCreator, out result));
+            Assert.Equal(
+                11,
+                MediaTypeHeaderValue.GetMediaTypeLength(
+                    "text/plain , other/charset",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("text/plain", result.MediaType);
             Assert.Equal(0, result.Parameters.Count);
 
-            Assert.Equal(10, MediaTypeHeaderValue.GetMediaTypeLength("text/plain", 0, DummyCreator, out result));
+            Assert.Equal(
+                10,
+                MediaTypeHeaderValue.GetMediaTypeLength("text/plain", 0, DummyCreator, out result)
+            );
             Assert.Equal("text/plain", result.MediaType);
             Assert.Equal(0, result.Parameters.Count);
 
-            Assert.Equal(30, MediaTypeHeaderValue.GetMediaTypeLength("text/plain; charset=iso-8859-1", 0,
-                DummyCreator, out result));
+            Assert.Equal(
+                30,
+                MediaTypeHeaderValue.GetMediaTypeLength(
+                    "text/plain; charset=iso-8859-1",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("text/plain", result.MediaType);
             Assert.Equal("iso-8859-1", result.CharSet);
             Assert.Equal(1, result.Parameters.Count);
 
-            Assert.Equal(38, MediaTypeHeaderValue.GetMediaTypeLength(" text/plain; custom=value;charset=utf-8",
-                1, DummyCreator, out result));
+            Assert.Equal(
+                38,
+                MediaTypeHeaderValue.GetMediaTypeLength(
+                    " text/plain; custom=value;charset=utf-8",
+                    1,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("text/plain", result.MediaType);
             Assert.Equal("utf-8", result.CharSet);
             Assert.Equal(2, result.Parameters.Count);
 
-            Assert.Equal(18, MediaTypeHeaderValue.GetMediaTypeLength(" text/plain; custom, next/mediatype",
-                1, DummyCreator, out result));
+            Assert.Equal(
+                18,
+                MediaTypeHeaderValue.GetMediaTypeLength(
+                    " text/plain; custom, next/mediatype",
+                    1,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("text/plain", result.MediaType);
             Assert.Null(result.CharSet);
             Assert.Equal(1, result.Parameters.Count);
             Assert.Equal("custom", result.Parameters.ElementAt(0).Name);
             Assert.Null(result.Parameters.ElementAt(0).Value);
 
-            Assert.Equal(48, MediaTypeHeaderValue.GetMediaTypeLength(
-                "text / plain ; custom =\r\n \"x\" ; charset = utf-8 , next/mediatype", 0, DummyCreator, out result));
+            Assert.Equal(
+                48,
+                MediaTypeHeaderValue.GetMediaTypeLength(
+                    "text / plain ; custom =\r\n \"x\" ; charset = utf-8 , next/mediatype",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("text/plain", result.MediaType);
             Assert.Equal("utf-8", result.CharSet);
             Assert.Equal(2, result.Parameters.Count);
@@ -238,8 +296,15 @@ namespace System.Net.Http.Tests
             Assert.Equal("charset", result.Parameters.ElementAt(1).Name);
             Assert.Equal("utf-8", result.Parameters.ElementAt(1).Value);
 
-            Assert.Equal(35, MediaTypeHeaderValue.GetMediaTypeLength(
-                "text/plain;custom=\"x\";charset=utf-8,next/mediatype", 0, DummyCreator, out result));
+            Assert.Equal(
+                35,
+                MediaTypeHeaderValue.GetMediaTypeLength(
+                    "text/plain;custom=\"x\";charset=utf-8,next/mediatype",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("text/plain", result.MediaType);
             Assert.Equal("utf-8", result.CharSet);
             Assert.Equal(2, result.Parameters.Count);
@@ -255,15 +320,35 @@ namespace System.Net.Http.Tests
             MediaTypeHeaderValue result = null;
 
             // Path: media-type only
-            Assert.Equal(10, MediaTypeHeaderValue.GetMediaTypeLength("text/plain", 0,
-                () => { return new MediaTypeWithQualityHeaderValue(); }, out result));
+            Assert.Equal(
+                10,
+                MediaTypeHeaderValue.GetMediaTypeLength(
+                    "text/plain",
+                    0,
+                    () =>
+                    {
+                        return new MediaTypeWithQualityHeaderValue();
+                    },
+                    out result
+                )
+            );
             Assert.Equal("text/plain", result.MediaType);
             Assert.Equal(0, result.Parameters.Count);
             Assert.IsType<MediaTypeWithQualityHeaderValue>(result);
 
             // Path: media-type and parameters
-            Assert.Equal(25, MediaTypeHeaderValue.GetMediaTypeLength("text/plain; charset=utf-8", 0,
-                () => { return new MediaTypeWithQualityHeaderValue(); }, out result));
+            Assert.Equal(
+                25,
+                MediaTypeHeaderValue.GetMediaTypeLength(
+                    "text/plain; charset=utf-8",
+                    0,
+                    () =>
+                    {
+                        return new MediaTypeWithQualityHeaderValue();
+                    },
+                    out result
+                )
+            );
             Assert.Equal("text/plain", result.MediaType);
             Assert.Equal(1, result.Parameters.Count);
             Assert.Equal("utf-8", result.CharSet);
@@ -275,19 +360,50 @@ namespace System.Net.Http.Tests
         {
             MediaTypeHeaderValue result = null;
 
-            Assert.Equal(0, MediaTypeHeaderValue.GetMediaTypeLength(" text/plain", 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                MediaTypeHeaderValue.GetMediaTypeLength(" text/plain", 0, DummyCreator, out result)
+            );
             Assert.Null(result);
-            Assert.Equal(0, MediaTypeHeaderValue.GetMediaTypeLength("text/plain;", 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                MediaTypeHeaderValue.GetMediaTypeLength("text/plain;", 0, DummyCreator, out result)
+            );
             Assert.Null(result);
-            Assert.Equal(0, MediaTypeHeaderValue.GetMediaTypeLength("text/plain;name=", 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                MediaTypeHeaderValue.GetMediaTypeLength(
+                    "text/plain;name=",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Null(result);
-            Assert.Equal(0, MediaTypeHeaderValue.GetMediaTypeLength("text/plain;name=value;", 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                MediaTypeHeaderValue.GetMediaTypeLength(
+                    "text/plain;name=value;",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Null(result);
-            Assert.Equal(0, MediaTypeHeaderValue.GetMediaTypeLength("text/plain;", 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                MediaTypeHeaderValue.GetMediaTypeLength("text/plain;", 0, DummyCreator, out result)
+            );
             Assert.Null(result);
-            Assert.Equal(0, MediaTypeHeaderValue.GetMediaTypeLength(null, 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                MediaTypeHeaderValue.GetMediaTypeLength(null, 0, DummyCreator, out result)
+            );
             Assert.Null(result);
-            Assert.Equal(0, MediaTypeHeaderValue.GetMediaTypeLength(string.Empty, 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                MediaTypeHeaderValue.GetMediaTypeLength(string.Empty, 0, DummyCreator, out result)
+            );
             Assert.Null(result);
         }
 
@@ -361,7 +477,12 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { MediaTypeHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    MediaTypeHeaderValue.Parse(input);
+                }
+            );
         }
 
         private void CheckValidTryParse(string input, MediaTypeHeaderValue expectedResult)
@@ -380,7 +501,12 @@ namespace System.Net.Http.Tests
 
         private static void AssertFormatException(string mediaType)
         {
-            Assert.Throws<FormatException>(() => { new MediaTypeHeaderValue(mediaType); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new MediaTypeHeaderValue(mediaType);
+                }
+            );
         }
 
         private static MediaTypeHeaderValue DummyCreator()

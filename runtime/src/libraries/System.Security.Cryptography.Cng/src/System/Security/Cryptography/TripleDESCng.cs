@@ -13,7 +13,11 @@ using Internal.NativeCrypto;
 
 namespace System.Security.Cryptography
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "We are providing the implementation for TripleDES, not consuming it")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Security",
+        "CA5350",
+        Justification = "We are providing the implementation for TripleDES, not consuming it"
+    )]
     public sealed class TripleDESCng : TripleDES, ICngSymmetricAlgorithm
     {
         public TripleDESCng()
@@ -22,14 +26,10 @@ namespace System.Security.Cryptography
         }
 
         public TripleDESCng(string keyName)
-            : this(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider)
-        {
-        }
+            : this(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider) { }
 
         public TripleDESCng(string keyName, CngProvider provider)
-            : this(keyName, provider, CngKeyOpenOptions.None)
-        {
-        }
+            : this(keyName, provider, CngKeyOpenOptions.None) { }
 
         public TripleDESCng(string keyName, CngProvider provider, CngKeyOpenOptions openOptions)
         {
@@ -38,27 +38,14 @@ namespace System.Security.Cryptography
 
         public override byte[] Key
         {
-            get
-            {
-                return _core.GetKeyIfExportable();
-            }
-            set
-            {
-                _core.SetKey(value);
-            }
+            get { return _core.GetKeyIfExportable(); }
+            set { _core.SetKey(value); }
         }
 
         public override int KeySize
         {
-            get
-            {
-                return base.KeySize;
-            }
-
-            set
-            {
-                _core.SetKeySize(value, this);
-            }
+            get { return base.KeySize; }
+            set { _core.SetKeySize(value, this); }
         }
 
         public override ICryptoTransform CreateDecryptor()
@@ -98,8 +85,16 @@ namespace System.Security.Cryptography
             base.Dispose(disposing);
         }
 
-        byte[] ICngSymmetricAlgorithm.BaseKey { get { return base.Key; } set { base.Key = value; } }
-        int ICngSymmetricAlgorithm.BaseKeySize { get { return base.KeySize; } set { base.KeySize = value; } }
+        byte[] ICngSymmetricAlgorithm.BaseKey
+        {
+            get { return base.Key; }
+            set { base.Key = value; }
+        }
+        int ICngSymmetricAlgorithm.BaseKeySize
+        {
+            get { return base.KeySize; }
+            set { base.KeySize = value; }
+        }
 
         bool ICngSymmetricAlgorithm.IsWeakKey(byte[] key)
         {

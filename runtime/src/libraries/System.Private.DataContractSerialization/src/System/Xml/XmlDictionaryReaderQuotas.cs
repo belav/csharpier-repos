@@ -4,7 +4,6 @@
 using System.Runtime.Serialization;
 using System.ComponentModel;
 
-
 namespace System.Xml
 {
     [Flags]
@@ -31,8 +30,19 @@ namespace System.Xml
         private const int DefaultMaxArrayLength = 16384;
         private const int DefaultMaxBytesPerRead = 4096;
         private const int DefaultMaxNameTableCharCount = 16384;
-        private static readonly XmlDictionaryReaderQuotas s_maxQuota = new XmlDictionaryReaderQuotas(int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue,
-            XmlDictionaryReaderQuotaTypes.MaxDepth | XmlDictionaryReaderQuotaTypes.MaxStringContentLength | XmlDictionaryReaderQuotaTypes.MaxArrayLength | XmlDictionaryReaderQuotaTypes.MaxBytesPerRead | XmlDictionaryReaderQuotaTypes.MaxNameTableCharCount);
+        private static readonly XmlDictionaryReaderQuotas s_maxQuota =
+            new XmlDictionaryReaderQuotas(
+                int.MaxValue,
+                int.MaxValue,
+                int.MaxValue,
+                int.MaxValue,
+                int.MaxValue,
+                XmlDictionaryReaderQuotaTypes.MaxDepth
+                    | XmlDictionaryReaderQuotaTypes.MaxStringContentLength
+                    | XmlDictionaryReaderQuotaTypes.MaxArrayLength
+                    | XmlDictionaryReaderQuotaTypes.MaxBytesPerRead
+                    | XmlDictionaryReaderQuotaTypes.MaxNameTableCharCount
+            );
 
         public XmlDictionaryReaderQuotas()
         {
@@ -43,8 +53,14 @@ namespace System.Xml
             _maxNameTableCharCount = DefaultMaxNameTableCharCount;
         }
 
-        private XmlDictionaryReaderQuotas(int maxDepth, int maxStringContentLength, int maxArrayLength, int maxBytesPerRead, int maxNameTableCharCount, XmlDictionaryReaderQuotaTypes modifiedQuotas)
-        {
+        private XmlDictionaryReaderQuotas(
+            int maxDepth,
+            int maxStringContentLength,
+            int maxArrayLength,
+            int maxBytesPerRead,
+            int maxNameTableCharCount,
+            XmlDictionaryReaderQuotaTypes modifiedQuotas
+        ) {
             _maxDepth = maxDepth;
             _maxStringContentLength = maxStringContentLength;
             _maxArrayLength = maxArrayLength;
@@ -56,18 +72,19 @@ namespace System.Xml
 
         public static XmlDictionaryReaderQuotas Max
         {
-            get
-            {
-                return s_maxQuota;
-            }
+            get { return s_maxQuota; }
         }
 
         public void CopyTo(XmlDictionaryReaderQuotas quotas)
         {
             if (quotas == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException(nameof(quotas)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException(nameof(quotas))
+                );
             if (quotas._readOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.QuotaCopyReadOnly));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.QuotaCopyReadOnly)
+                );
 
             InternalCopyTo(quotas);
         }
@@ -85,16 +102,19 @@ namespace System.Xml
         [DefaultValue(DefaultMaxStringContentLength)]
         public int MaxStringContentLength
         {
-            get
-            {
-                return _maxStringContentLength;
-            }
+            get { return _maxStringContentLength; }
             set
             {
                 if (_readOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.Format(SR.QuotaIsReadOnly, "MaxStringContentLength")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.Format(SR.QuotaIsReadOnly, "MaxStringContentLength")
+                        )
+                    );
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.QuotaMustBePositive, nameof(value)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.QuotaMustBePositive, nameof(value))
+                    );
                 _maxStringContentLength = value;
                 _modifiedQuotas |= XmlDictionaryReaderQuotaTypes.MaxStringContentLength;
             }
@@ -103,16 +123,19 @@ namespace System.Xml
         [DefaultValue(DefaultMaxArrayLength)]
         public int MaxArrayLength
         {
-            get
-            {
-                return _maxArrayLength;
-            }
+            get { return _maxArrayLength; }
             set
             {
                 if (_readOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.Format(SR.QuotaIsReadOnly, "MaxArrayLength")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.Format(SR.QuotaIsReadOnly, "MaxArrayLength")
+                        )
+                    );
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.QuotaMustBePositive, nameof(value)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.QuotaMustBePositive, nameof(value))
+                    );
                 _maxArrayLength = value;
                 _modifiedQuotas |= XmlDictionaryReaderQuotaTypes.MaxArrayLength;
             }
@@ -121,16 +144,19 @@ namespace System.Xml
         [DefaultValue(DefaultMaxBytesPerRead)]
         public int MaxBytesPerRead
         {
-            get
-            {
-                return _maxBytesPerRead;
-            }
+            get { return _maxBytesPerRead; }
             set
             {
                 if (_readOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.Format(SR.QuotaIsReadOnly, "MaxBytesPerRead")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.Format(SR.QuotaIsReadOnly, "MaxBytesPerRead")
+                        )
+                    );
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.QuotaMustBePositive, nameof(value)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.QuotaMustBePositive, nameof(value))
+                    );
 
                 _maxBytesPerRead = value;
                 _modifiedQuotas |= XmlDictionaryReaderQuotaTypes.MaxBytesPerRead;
@@ -140,16 +166,17 @@ namespace System.Xml
         [DefaultValue(DefaultMaxDepth)]
         public int MaxDepth
         {
-            get
-            {
-                return _maxDepth;
-            }
+            get { return _maxDepth; }
             set
             {
                 if (_readOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.Format(SR.QuotaIsReadOnly, "MaxDepth")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.Format(SR.QuotaIsReadOnly, "MaxDepth"))
+                    );
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.QuotaMustBePositive, nameof(value)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.QuotaMustBePositive, nameof(value))
+                    );
 
                 _maxDepth = value;
                 _modifiedQuotas |= XmlDictionaryReaderQuotaTypes.MaxDepth;
@@ -159,16 +186,19 @@ namespace System.Xml
         [DefaultValue(DefaultMaxNameTableCharCount)]
         public int MaxNameTableCharCount
         {
-            get
-            {
-                return _maxNameTableCharCount;
-            }
+            get { return _maxNameTableCharCount; }
             set
             {
                 if (_readOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.Format(SR.QuotaIsReadOnly, "MaxNameTableCharCount")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.Format(SR.QuotaIsReadOnly, "MaxNameTableCharCount")
+                        )
+                    );
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.QuotaMustBePositive, nameof(value)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.QuotaMustBePositive, nameof(value))
+                    );
 
                 _maxNameTableCharCount = value;
                 _modifiedQuotas |= XmlDictionaryReaderQuotaTypes.MaxNameTableCharCount;
@@ -177,10 +207,7 @@ namespace System.Xml
 
         public XmlDictionaryReaderQuotaTypes ModifiedQuotas
         {
-            get
-            {
-                return _modifiedQuotas;
-            }
+            get { return _modifiedQuotas; }
         }
 
         internal void MakeReadOnly()

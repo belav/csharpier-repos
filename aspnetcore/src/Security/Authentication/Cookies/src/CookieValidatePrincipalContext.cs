@@ -19,8 +19,12 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
         /// <param name="scheme"></param>
         /// <param name="ticket">Contains the initial values for identity and extra data</param>
         /// <param name="options"></param>
-        public CookieValidatePrincipalContext(HttpContext context, AuthenticationScheme scheme, CookieAuthenticationOptions options, AuthenticationTicket ticket)
-            : base(context, scheme, options, ticket?.Properties)
+        public CookieValidatePrincipalContext(
+            HttpContext context,
+            AuthenticationScheme scheme,
+            CookieAuthenticationOptions options,
+            AuthenticationTicket ticket
+        ) : base(context, scheme, options, ticket?.Properties)
         {
             if (ticket == null)
             {

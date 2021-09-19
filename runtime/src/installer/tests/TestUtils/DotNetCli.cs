@@ -12,15 +12,25 @@ namespace Microsoft.DotNet.Cli.Build
     {
         public string BinPath { get; }
         public string GreatestVersionSharedFxPath { get; }
-        public string GreatestVersionHostFxrPath { get; } 
-        public string GreatestVersionHostFxrFilePath { get => Path.Combine(
-            GreatestVersionHostFxrPath,
-            RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostfxr")); }
+        public string GreatestVersionHostFxrPath { get; }
+        public string GreatestVersionHostFxrFilePath
+        {
+            get =>
+                Path.Combine(
+                    GreatestVersionHostFxrPath,
+                    RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                        "hostfxr"
+                    )
+                );
+        }
         public string DotnetExecutablePath
         {
             get
             {
-                return Path.Combine(BinPath, RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("dotnet"));
+                return Path.Combine(
+                    BinPath,
+                    RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("dotnet")
+                );
             }
         }
 
@@ -45,13 +55,15 @@ namespace Microsoft.DotNet.Cli.Build
 
             var sharedFxVersionDirectories = Directory.EnumerateDirectories(sharedFxBaseDirectory);
 
-            GreatestVersionSharedFxPath = sharedFxVersionDirectories
-                .OrderByDescending(p => p.ToLower())
+            GreatestVersionSharedFxPath = sharedFxVersionDirectories.OrderByDescending(
+                    p => p.ToLower()
+                )
                 .First();
 
             var hostFxrVersionDirectories = Directory.EnumerateDirectories(hostFxrBaseDirectory);
-            GreatestVersionHostFxrPath = hostFxrVersionDirectories
-                .OrderByDescending(p => p.ToLower())
+            GreatestVersionHostFxrPath = hostFxrVersionDirectories.OrderByDescending(
+                    p => p.ToLower()
+                )
                 .First();
         }
 

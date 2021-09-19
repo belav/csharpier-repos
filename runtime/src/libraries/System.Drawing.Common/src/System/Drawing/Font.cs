@@ -14,11 +14,15 @@ namespace System.Drawing
     /// <summary>
     /// Defines a particular format for text, including font face, size, and style attributes.
     /// </summary>
-    [Editor("System.Drawing.Design.FontEditor, System.Drawing.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Editor(
+        "System.Drawing.Design.FontEditor, System.Drawing.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     [TypeConverter(typeof(FontConverter))]
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public sealed partial class Font : MarshalByRefObject, ICloneable, IDisposable, ISerializable
     {
         private IntPtr _nativeFont;
@@ -77,8 +81,10 @@ namespace System.Drawing
         /// Gets the face name of this <see cref='Font'/> .
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [Editor("System.Drawing.Design.FontNameEditor, System.Drawing.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "System.Drawing.Design.FontNameEditor, System.Drawing.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         [TypeConverter(typeof(FontConverter.FontNameConverter))]
         public string Name => FontFamily.Name;
 
@@ -149,7 +155,14 @@ namespace System.Drawing
             GraphicsUnit unit = (GraphicsUnit)info.GetValue("Unit", typeof(GraphicsUnit))!; // Do not rename (binary serialization)
             float size = info.GetSingle("Size"); // Do not rename (binary serialization)
 
-            Initialize(name, size, style, unit, SafeNativeMethods.DEFAULT_CHARSET, IsVerticalName(name));
+            Initialize(
+                name,
+                size,
+                style,
+                unit,
+                SafeNativeMethods.DEFAULT_CHARSET,
+                IsVerticalName(name)
+            );
         }
 
         void ISerializable.GetObjectData(SerializationInfo si, StreamingContext context)
@@ -161,7 +174,8 @@ namespace System.Drawing
             si.AddValue("Unit", Unit); // Do not rename (binary serialization)
         }
 
-        private static bool IsVerticalName(string familyName) => familyName?.Length > 0 && familyName[0] == '@';
+        private static bool IsVerticalName(string familyName) =>
+            familyName?.Length > 0 && familyName[0] == '@';
 
         /// <summary>
         /// Cleans up Windows resources for this <see cref='Font'/>.
@@ -179,16 +193,20 @@ namespace System.Drawing
                 try
                 {
 #if DEBUG
-                    int status = !Gdip.Initialized ? Gdip.Ok :
+                    int status = !Gdip.Initialized
+                        ? Gdip.Ok
+                        :
 #endif
-                    Gdip.GdipDeleteFont(new HandleRef(this, _nativeFont));
+                          Gdip.GdipDeleteFont(new HandleRef(this, _nativeFont));
 #if DEBUG
-                    Debug.Assert(status == Gdip.Ok, "GDI+ returned an error status: " + status.ToString(CultureInfo.InvariantCulture));
+                    Debug.Assert(
+                        status == Gdip.Ok,
+                        "GDI+ returned an error status: "
+                            + status.ToString(CultureInfo.InvariantCulture)
+                    );
 #endif
                 }
-                catch (Exception ex) when (!ClientUtils.IsCriticalException(ex))
-                {
-                }
+                catch (Exception ex) when (!ClientUtils.IsCriticalException(ex)) { }
                 finally
                 {
                     _nativeFont = IntPtr.Zero;
@@ -207,7 +225,11 @@ namespace System.Drawing
             }
 
             float height;
-            int status = Gdip.GdipGetFontHeight(new HandleRef(this, NativeFont), new HandleRef(graphics, graphics.NativeGraphics), out height);
+            int status = Gdip.GdipGetFontHeight(
+                new HandleRef(this, NativeFont),
+                new HandleRef(graphics, graphics.NativeGraphics),
+                out height
+            );
             Gdip.CheckStatus(status);
 
             return height;
@@ -216,7 +238,11 @@ namespace System.Drawing
         public float GetHeight(float dpi)
         {
             float size;
-            int status = Gdip.GdipGetFontHeightGivenDPI(new HandleRef(this, NativeFont), dpi, out size);
+            int status = Gdip.GdipGetFontHeightGivenDPI(
+                new HandleRef(this, NativeFont),
+                dpi,
+                out size
+            );
             Gdip.CheckStatus(status);
             return size;
         }
@@ -241,12 +267,12 @@ namespace System.Drawing
             // here.
             // We need to call properties on the passed-in object since it could be a proxy in a remoting scenario and proxies don't
             // have access to private/internal fields.
-            return font.FontFamily.Equals(FontFamily) &&
-                font.GdiVerticalFont == GdiVerticalFont &&
-                font.GdiCharSet == GdiCharSet &&
-                font.Style == Style &&
-                font.Size == Size &&
-                font.Unit == Unit;
+            return font.FontFamily.Equals(FontFamily)
+                && font.GdiVerticalFont == GdiVerticalFont
+                && font.GdiCharSet == GdiCharSet
+                && font.Style == Style
+                && font.Size == Size
+                && font.Unit == Unit;
         }
 
         /// <summary>
@@ -254,9 +280,13 @@ namespace System.Drawing
         /// </summary>
         public override int GetHashCode()
         {
-            return unchecked((int)((((uint)_fontStyle << 13) | ((uint)_fontStyle >> 19)) ^
-                         (((uint)_fontUnit << 26) | ((uint)_fontUnit >> 6)) ^
-                         (((uint)_fontSize << 7) | ((uint)_fontSize >> 25))));
+            return unchecked(
+                (int)(
+                    (((uint)_fontStyle << 13) | ((uint)_fontStyle >> 19))
+                    ^ (((uint)_fontUnit << 26) | ((uint)_fontUnit >> 6))
+                    ^ (((uint)_fontSize << 7) | ((uint)_fontSize >> 25))
+                )
+            );
         }
 
         /// <summary>
@@ -294,7 +324,12 @@ namespace System.Drawing
             else
             {
                 GCHandle handle = GCHandle.Alloc(logFont, GCHandleType.Pinned);
-                Buffer.MemoryCopy(&nativeLogFont, (byte*)handle.AddrOfPinnedObject(), nativeSize, nativeSize);
+                Buffer.MemoryCopy(
+                    &nativeLogFont,
+                    (byte*)handle.AddrOfPinnedObject(),
+                    nativeSize,
+                    nativeSize
+                );
                 handle.Free();
             }
         }
@@ -307,8 +342,13 @@ namespace System.Drawing
             }
 
             Interop.User32.LOGFONT logFont = default;
-            Gdip.CheckStatus(Gdip.GdipGetLogFontW(
-                new HandleRef(this, NativeFont), new HandleRef(graphics, graphics.NativeGraphics), ref logFont));
+            Gdip.CheckStatus(
+                Gdip.GdipGetLogFontW(
+                    new HandleRef(this, NativeFont),
+                    new HandleRef(graphics, graphics.NativeGraphics),
+                    ref logFont
+                )
+            );
 
             // Prefix the string with '@' if this is a gdiVerticalFont.
             if (_gdiVerticalFont)

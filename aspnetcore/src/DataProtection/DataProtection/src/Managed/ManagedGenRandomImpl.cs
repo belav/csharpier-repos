@@ -13,9 +13,7 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
 #endif
         public static readonly ManagedGenRandomImpl Instance = new ManagedGenRandomImpl();
 
-        private ManagedGenRandomImpl()
-        {
-        }
+        private ManagedGenRandomImpl() { }
 
         public byte[] GenRandom(int numBytes)
         {

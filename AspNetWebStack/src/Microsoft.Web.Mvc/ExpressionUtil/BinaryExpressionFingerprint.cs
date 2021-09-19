@@ -13,11 +13,18 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
     // BinaryExpression fingerprint class
     // Useful for things like array[index]
 
-    [SuppressMessage("Microsoft.Usage", "CA2218:OverrideGetHashCodeOnOverridingEquals", Justification = "Overrides AddToHashCodeCombiner() instead.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2218:OverrideGetHashCodeOnOverridingEquals",
+        Justification = "Overrides AddToHashCodeCombiner() instead."
+    )]
     internal sealed class BinaryExpressionFingerprint : ExpressionFingerprint
     {
-        public BinaryExpressionFingerprint(ExpressionType nodeType, Type type, MethodInfo method)
-            : base(nodeType, type)
+        public BinaryExpressionFingerprint(
+            ExpressionType nodeType,
+            Type type,
+            MethodInfo method
+        ) : base(nodeType, type)
         {
             // Other properties on BinaryExpression (like IsLifted / IsLiftedToNull) are simply derived
             // from Type and NodeType, so they're not necessary for inclusion in the fingerprint.
@@ -31,9 +38,7 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         public override bool Equals(object obj)
         {
             BinaryExpressionFingerprint other = obj as BinaryExpressionFingerprint;
-            return (other != null)
-                   && Equals(this.Method, other.Method)
-                   && this.Equals(other);
+            return (other != null) && Equals(this.Method, other.Method) && this.Equals(other);
         }
 
         internal override void AddToHashCodeCombiner(HashCodeCombiner combiner)

@@ -15,9 +15,35 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(InvalidAddIntoXDocument1) { Attribute = new VariationAttribute("XDocument invalid add - double DTD") { Priority = 1 } });
-            AddChild(new TestVariation(InvalidAddIntoXDocument3) { Attribute = new VariationAttribute("XDocument invalid add - multiple root elements") { Priority = 1 } });
-            AddChild(new TestVariation(InvalidAddIntoXDocument5) { Attribute = new VariationAttribute("XDocument invalid add - CData, attribute, text (no whitespace)") { Priority = 1 } });
+            AddChild(
+                new TestVariation(InvalidAddIntoXDocument1)
+                {
+                    Attribute = new VariationAttribute("XDocument invalid add - double DTD")
+                    {
+                        Priority = 1
+                    }
+                }
+            );
+            AddChild(
+                new TestVariation(InvalidAddIntoXDocument3)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument invalid add - multiple root elements"
+                    ) {
+                        Priority = 1
+                    }
+                }
+            );
+            AddChild(
+                new TestVariation(InvalidAddIntoXDocument5)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument invalid add - CData, attribute, text (no whitespace)"
+                    ) {
+                        Priority = 1
+                    }
+                }
+            );
         }
 
         public void InvalidAddIntoXDocument1()
@@ -25,7 +51,10 @@ namespace XLinqTests
             _runWithEvents = (bool)Params[0];
             try
             {
-                var doc = new XDocument(new XDocumentType("root", null, null, null), new XElement("A"));
+                var doc = new XDocument(
+                    new XDocumentType("root", null, null, null),
+                    new XElement("A")
+                );
                 var o = new XDocumentType("D", null, null, null);
                 if (_runWithEvents)
                 {
@@ -38,9 +67,7 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
         }
 
         public void InvalidAddIntoXDocument3()
@@ -48,7 +75,10 @@ namespace XLinqTests
             _runWithEvents = (bool)Params[0];
             try
             {
-                var doc = new XDocument(new XProcessingInstruction("pi", "halala"), new XElement("A"));
+                var doc = new XDocument(
+                    new XProcessingInstruction("pi", "halala"),
+                    new XElement("A")
+                );
                 var o = new XElement("C");
                 if (_runWithEvents)
                 {
@@ -61,16 +91,22 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
         }
 
         public void InvalidAddIntoXDocument5()
         {
             _runWithEvents = (bool)Params[0];
-            foreach (object o in new object[] { new XCData("CD"), new XAttribute("a1", "avalue"), "text1", new XText("text2"), new XDocument() })
-            {
+            foreach (
+                object o in new object[]
+                {
+                    new XCData("CD"),
+                    new XAttribute("a1", "avalue"),
+                    "text1",
+                    new XText("text2"),
+                    new XDocument()
+                }
+            ) {
                 try
                 {
                     var doc = new XDocument(new XElement("A"));
@@ -85,9 +121,7 @@ namespace XLinqTests
                     }
                     TestLog.Compare(false, "Exception expected");
                 }
-                catch (ArgumentException)
-                {
-                }
+                catch (ArgumentException) { }
             }
         }
     }

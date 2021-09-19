@@ -11,16 +11,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class LockKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public LockKeywordRecommender()
-            : base(SyntaxKind.LockKeyword)
-        {
-        }
+        public LockKeywordRecommender() : base(SyntaxKind.LockKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext;
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            return context.IsStatementContext || context.IsGlobalStatementContext;
         }
     }
 }

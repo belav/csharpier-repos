@@ -123,11 +123,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections.Immutable.Maps
 
         private class PathologicalComparer<T> : IEqualityComparer<T>
         {
-            public bool Equals(T x, T y)
-                => EqualityComparer<T>.Default.Equals(x, y);
+            public bool Equals(T x, T y) => EqualityComparer<T>.Default.Equals(x, y);
 
-            public int GetHashCode(T obj)
-                => 0;
+            public int GetHashCode(T obj) => 0;
         }
     }
 }

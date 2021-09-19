@@ -53,11 +53,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 #region Usage
                 // settings will automatically be used by JsonConvert.SerializeObject/DeserializeObject
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
+                JsonConvert.DefaultSettings = () =>
+                    new JsonSerializerSettings
+                    {
+                        Formatting = Formatting.Indented,
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    };
 
                 Staff s = new Staff
                 {
@@ -78,18 +79,22 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 // }
                 #endregion
             }
+
             finally
             {
                 JsonConvert.DefaultSettings = null;
             }
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""firstName"": ""Eric"",
   ""lastName"": ""Example"",
   ""birthDate"": ""1980-04-20T00:00:00Z"",
   ""department"": ""IT"",
   ""jobTitle"": ""Web Dude""
-}", json);
+}",
+                json
+            );
         }
     }
 }

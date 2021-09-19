@@ -11,7 +11,9 @@ namespace System.Security.Cryptography.Cng.Tests
 
         private static readonly CngAlgorithm s_cngAlgorithm = new CngAlgorithm("AES");
 
-        [OuterLoop(/* Creates/Deletes a persisted key, limit exposure to key leaking */)]
+        [OuterLoop( /* Creates/Deletes a persisted key, limit exposure to key leaking */
+
+        )]
         [ConditionalTheory(nameof(SupportsPersistedSymmetricKeys))]
         // AES128-ECB-NoPadding 2 blocks.
         [InlineData(128, 2 * BlockSizeBytes, CipherMode.ECB, PaddingMode.None)]
@@ -25,8 +27,8 @@ namespace System.Security.Cryptography.Cng.Tests
             int keySize,
             int plainBytesCount,
             CipherMode cipherMode,
-            PaddingMode paddingMode)
-        {
+            PaddingMode paddingMode
+        ) {
             SymmetricCngTestHelpers.VerifyPersistedKey(
                 s_cngAlgorithm,
                 keySize,
@@ -34,29 +36,37 @@ namespace System.Security.Cryptography.Cng.Tests
                 keyName => new AesCng(keyName),
                 () => new AesCng(),
                 cipherMode,
-                paddingMode);
-
+                paddingMode
+            );
         }
 
-        [OuterLoop(/* Creates/Deletes a persisted key, limit exposure to key leaking */)]
+        [OuterLoop( /* Creates/Deletes a persisted key, limit exposure to key leaking */
+
+        )]
         [ConditionalFact(nameof(SupportsPersistedSymmetricKeys))]
         public static void GetKey_NonExportable()
         {
             SymmetricCngTestHelpers.GetKey_NonExportable(
                 s_cngAlgorithm,
-                keyName => new AesCng(keyName));
+                keyName => new AesCng(keyName)
+            );
         }
 
-        [OuterLoop(/* Creates/Deletes a persisted key, limit exposure to key leaking */)]
+        [OuterLoop( /* Creates/Deletes a persisted key, limit exposure to key leaking */
+
+        )]
         [ConditionalFact(nameof(SupportsPersistedSymmetricKeys))]
         public static void SetKey_DetachesFromPersistedKey()
         {
             SymmetricCngTestHelpers.SetKey_DetachesFromPersistedKey(
                 s_cngAlgorithm,
-                keyName => new AesCng(keyName));
+                keyName => new AesCng(keyName)
+            );
         }
 
-        [OuterLoop(/* Creates/Deletes a persisted key, limit exposure to key leaking */)]
+        [OuterLoop( /* Creates/Deletes a persisted key, limit exposure to key leaking */
+
+        )]
         [ConditionalFact(nameof(SupportsPersistedSymmetricKeys))]
         public static void LoadWrongKeyType()
         {
@@ -67,21 +77,30 @@ namespace System.Security.Cryptography.Cng.Tests
             {
                 Assert.Throws<CryptographicException>(() => new AesCng(keyName));
             }
+
             finally
             {
                 cngKey.Delete();
             }
         }
 
-        [OuterLoop(/* Creates/Deletes a persisted key, limit exposure to key leaking */)]
+        [OuterLoop( /* Creates/Deletes a persisted key, limit exposure to key leaking */
+
+        )]
         [ConditionalFact(nameof(SupportsPersistedSymmetricKeys), nameof(IsAdministrator))]
         public static void VerifyMachineKey()
         {
             SymmetricCngTestHelpers.VerifyMachineKey(
                 s_cngAlgorithm,
                 8 * BlockSizeBytes,
-                keyName => new AesCng(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider, CngKeyOpenOptions.MachineKey),
-                () => new AesCng());
+                keyName =>
+                    new AesCng(
+                        keyName,
+                        CngProvider.MicrosoftSoftwareKeyStorageProvider,
+                        CngKeyOpenOptions.MachineKey
+                    ),
+                () => new AesCng()
+            );
         }
 
         public static bool SupportsPersistedSymmetricKeys

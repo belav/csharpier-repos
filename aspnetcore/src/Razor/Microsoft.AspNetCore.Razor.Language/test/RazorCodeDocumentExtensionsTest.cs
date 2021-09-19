@@ -64,7 +64,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var codeDocument = TestRazorCodeDocument.CreateEmpty();
 
-            var expected = new[] { TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build() };
+            var expected = new[]
+            {
+                TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build()
+            };
             codeDocument.SetTagHelpers(expected);
 
             // Act
@@ -111,7 +114,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var codeDocument = TestRazorCodeDocument.CreateEmpty();
 
-            var expected = RazorCSharpDocument.Create("", RazorCodeGenerationOptions.CreateDefault(), Array.Empty<RazorDiagnostic>());
+            var expected = RazorCSharpDocument.Create(
+                "",
+                RazorCodeGenerationOptions.CreateDefault(),
+                Array.Empty<RazorDiagnostic>()
+            );
             codeDocument.Items[typeof(RazorCSharpDocument)] = expected;
 
             // Act
@@ -127,7 +134,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var codeDocument = TestRazorCodeDocument.CreateEmpty();
 
-            var expected = RazorCSharpDocument.Create("", RazorCodeGenerationOptions.CreateDefault(), Array.Empty<RazorDiagnostic>());
+            var expected = RazorCSharpDocument.Create(
+                "",
+                RazorCodeGenerationOptions.CreateDefault(),
+                Array.Empty<RazorDiagnostic>()
+            );
 
             // Act
             codeDocument.SetCSharpDocument(expected);
@@ -233,8 +244,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void TryComputeNamespace_RootNamespaceNotSet_ReturnsNull()
         {
             // Arrange
-            var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Test.cshtml", relativePath: "Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+            var sourceDocument = TestRazorSourceDocument.Create(
+                filePath: "C:\\Hello\\Test.cshtml",
+                relativePath: "Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
 
             // Act
             codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var @namespace);
@@ -247,8 +264,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void TryComputeNamespace_RelativePathNull_ReturnsNull()
         {
             // Arrange
-            var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Test.cshtml", relativePath: null);
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+            var sourceDocument = TestRazorSourceDocument.Create(
+                filePath: "C:\\Hello\\Test.cshtml",
+                relativePath: null
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
 
             // Act
             codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var @namespace);
@@ -261,8 +284,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void TryComputeNamespace_FilePathNull_ReturnsNull()
         {
             // Arrange
-            var sourceDocument = TestRazorSourceDocument.Create(filePath: null, relativePath: "Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+            var sourceDocument = TestRazorSourceDocument.Create(
+                filePath: null,
+                relativePath: "Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
 
             // Act
             codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var @namespace);
@@ -275,8 +304,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void TryComputeNamespace_RelativePathLongerThanFilePath_ReturnsNull()
         {
             // Arrange
-            var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Test.cshtml", relativePath: "Some\\invalid\\relative\\path\\Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+            var sourceDocument = TestRazorSourceDocument.Create(
+                filePath: "C:\\Hello\\Test.cshtml",
+                relativePath: "Some\\invalid\\relative\\path\\Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
 
             // Act
             codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var @namespace);
@@ -289,12 +324,22 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void TryComputeNamespace_ComputesNamespace()
         {
             // Arrange
-            var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Components\\Test.cshtml", relativePath: "\\Components\\Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
-            codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(c =>
-            {
-                c.RootNamespace = "Hello";
-            }));
+            var sourceDocument = TestRazorSourceDocument.Create(
+                filePath: "C:\\Hello\\Components\\Test.cshtml",
+                relativePath: "\\Components\\Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
+            codeDocument.SetCodeGenerationOptions(
+                RazorCodeGenerationOptions.Create(
+                    c =>
+                    {
+                        c.RootNamespace = "Hello";
+                    }
+                )
+            );
 
             // Act
             codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var @namespace);
@@ -307,14 +352,22 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void TryComputeNamespace_UsesIROptions_ComputesNamespace()
         {
             // Arrange
-            var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Components\\Test.cshtml", relativePath: "\\Components\\Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+            var sourceDocument = TestRazorSourceDocument.Create(
+                filePath: "C:\\Hello\\Components\\Test.cshtml",
+                relativePath: "\\Components\\Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
             var documentNode = new DocumentIntermediateNode()
             {
-                Options = RazorCodeGenerationOptions.Create(c =>
-                {
-                    c.RootNamespace = "Hello";
-                })
+                Options = RazorCodeGenerationOptions.Create(
+                    c =>
+                    {
+                        c.RootNamespace = "Hello";
+                    }
+                )
             };
             codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -329,14 +382,22 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void TryComputeNamespace_NoRootNamespaceFallback_ReturnsNull()
         {
             // Arrange
-            var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Components\\Test.cshtml", relativePath: "\\Components\\Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+            var sourceDocument = TestRazorSourceDocument.Create(
+                filePath: "C:\\Hello\\Components\\Test.cshtml",
+                relativePath: "\\Components\\Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
             var documentNode = new DocumentIntermediateNode()
             {
-                Options = RazorCodeGenerationOptions.Create(c =>
-                {
-                    c.RootNamespace = "Hello";
-                })
+                Options = RazorCodeGenerationOptions.Create(
+                    c =>
+                    {
+                        c.RootNamespace = "Hello";
+                    }
+                )
             };
             codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -351,18 +412,30 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void TryComputeNamespace_PrefersOptionsFromCodeDocument_ComputesNamespace()
         {
             // Arrange
-            var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Components\\Test.cshtml", relativePath: "\\Components\\Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
-            codeDocument.SetCodeGenerationOptions(RazorCodeGenerationOptions.Create(c =>
-            {
-                c.RootNamespace = "World";
-            }));
+            var sourceDocument = TestRazorSourceDocument.Create(
+                filePath: "C:\\Hello\\Components\\Test.cshtml",
+                relativePath: "\\Components\\Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
+            codeDocument.SetCodeGenerationOptions(
+                RazorCodeGenerationOptions.Create(
+                    c =>
+                    {
+                        c.RootNamespace = "World";
+                    }
+                )
+            );
             var documentNode = new DocumentIntermediateNode()
             {
-                Options = RazorCodeGenerationOptions.Create(c =>
-                {
-                    c.RootNamespace = "Hello";
-                })
+                Options = RazorCodeGenerationOptions.Create(
+                    c =>
+                    {
+                        c.RootNamespace = "Hello";
+                    }
+                )
             };
             codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -377,14 +450,22 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void TryComputeNamespace_SanitizesNamespaceName()
         {
             // Arrange
-            var sourceDocument = TestRazorSourceDocument.Create(filePath: "C:\\Hello\\Components with space\\Test$name.cshtml", relativePath: "\\Components with space\\Test$name.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+            var sourceDocument = TestRazorSourceDocument.Create(
+                filePath: "C:\\Hello\\Components with space\\Test$name.cshtml",
+                relativePath: "\\Components with space\\Test$name.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
             var documentNode = new DocumentIntermediateNode()
             {
-                Options = RazorCodeGenerationOptions.Create(c =>
-                {
-                    c.RootNamespace = "Hel?o.World";
-                })
+                Options = RazorCodeGenerationOptions.Create(
+                    c =>
+                    {
+                        c.RootNamespace = "Hel?o.World";
+                    }
+                )
             };
             codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -402,20 +483,33 @@ namespace Microsoft.AspNetCore.Razor.Language
             var sourceDocument = TestRazorSourceDocument.Create(
                 content: "@namespace My.Custom.NS",
                 filePath: "C:\\Hello\\Components\\Test.cshtml",
-                relativePath: "\\Components\\Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+                relativePath: "\\Components\\Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
             codeDocument.SetFileKind(FileKinds.Component);
-            codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
-            {
-                options.Directives.Add(NamespaceDirective.Directive);
-            })));
+            codeDocument.SetSyntaxTree(
+                RazorSyntaxTree.Parse(
+                    sourceDocument,
+                    RazorParserOptions.Create(
+                        options =>
+                        {
+                            options.Directives.Add(NamespaceDirective.Directive);
+                        }
+                    )
+                )
+            );
 
             var documentNode = new DocumentIntermediateNode()
             {
-                Options = RazorCodeGenerationOptions.Create(c =>
-                {
-                    c.RootNamespace = "Hello.World";
-                })
+                Options = RazorCodeGenerationOptions.Create(
+                    c =>
+                    {
+                        c.RootNamespace = "Hello.World";
+                    }
+                )
             };
             codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -432,32 +526,53 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var sourceDocument = TestRazorSourceDocument.Create(
                 filePath: "C:\\Hello\\Components\\Test.cshtml",
-                relativePath: "\\Components\\Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+                relativePath: "\\Components\\Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
             codeDocument.SetFileKind(FileKinds.Component);
-            codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
-            {
-                options.Directives.Add(NamespaceDirective.Directive);
-            })));
+            codeDocument.SetSyntaxTree(
+                RazorSyntaxTree.Parse(
+                    sourceDocument,
+                    RazorParserOptions.Create(
+                        options =>
+                        {
+                            options.Directives.Add(NamespaceDirective.Directive);
+                        }
+                    )
+                )
+            );
 
             var importSourceDocument = TestRazorSourceDocument.Create(
                 content: "@namespace My.Custom.NS",
                 filePath: "C:\\Hello\\_Imports.razor",
-                relativePath: "\\_Imports.razor");
-            codeDocument.SetImportSyntaxTrees(new[]
-            {
-                RazorSyntaxTree.Parse(importSourceDocument, RazorParserOptions.Create(options =>
+                relativePath: "\\_Imports.razor"
+            );
+            codeDocument.SetImportSyntaxTrees(
+                new[]
                 {
-                    options.Directives.Add(NamespaceDirective.Directive);
-                }))
-            });
+                    RazorSyntaxTree.Parse(
+                        importSourceDocument,
+                        RazorParserOptions.Create(
+                            options =>
+                            {
+                                options.Directives.Add(NamespaceDirective.Directive);
+                            }
+                        )
+                    )
+                }
+            );
 
             var documentNode = new DocumentIntermediateNode()
             {
-                Options = RazorCodeGenerationOptions.Create(c =>
-                {
-                    c.RootNamespace = "Hello.World";
-                })
+                Options = RazorCodeGenerationOptions.Create(
+                    c =>
+                    {
+                        c.RootNamespace = "Hello.World";
+                    }
+                )
             };
             codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -474,32 +589,53 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var sourceDocument = TestRazorSourceDocument.Create(
                 filePath: "C:\\Hello\\Components\\Test.cshtml",
-                relativePath: "\\Components\\Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+                relativePath: "\\Components\\Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
             codeDocument.SetFileKind(FileKinds.Component);
-            codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
-            {
-                options.Directives.Add(NamespaceDirective.Directive);
-            })));
+            codeDocument.SetSyntaxTree(
+                RazorSyntaxTree.Parse(
+                    sourceDocument,
+                    RazorParserOptions.Create(
+                        options =>
+                        {
+                            options.Directives.Add(NamespaceDirective.Directive);
+                        }
+                    )
+                )
+            );
 
             var importSourceDocument = TestRazorSourceDocument.Create(
                 content: "@namespace My.Custom.NS",
                 filePath: "C:\\Hello\\Components\\_Imports.razor",
-                relativePath: "\\Components\\_Imports.razor");
-            codeDocument.SetImportSyntaxTrees(new[]
-            {
-                RazorSyntaxTree.Parse(importSourceDocument, RazorParserOptions.Create(options =>
+                relativePath: "\\Components\\_Imports.razor"
+            );
+            codeDocument.SetImportSyntaxTrees(
+                new[]
                 {
-                    options.Directives.Add(NamespaceDirective.Directive);
-                }))
-            });
+                    RazorSyntaxTree.Parse(
+                        importSourceDocument,
+                        RazorParserOptions.Create(
+                            options =>
+                            {
+                                options.Directives.Add(NamespaceDirective.Directive);
+                            }
+                        )
+                    )
+                }
+            );
 
             var documentNode = new DocumentIntermediateNode()
             {
-                Options = RazorCodeGenerationOptions.Create(c =>
-                {
-                    c.RootNamespace = "Hello.World";
-                })
+                Options = RazorCodeGenerationOptions.Create(
+                    c =>
+                    {
+                        c.RootNamespace = "Hello.World";
+                    }
+                )
             };
             codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -517,32 +653,53 @@ namespace Microsoft.AspNetCore.Razor.Language
             var sourceDocument = TestRazorSourceDocument.Create(
                 content: "@namespace My.Custom.OverrideNS",
                 filePath: "C:\\Hello\\Components\\Test.cshtml",
-                relativePath: "\\Components\\Test.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
+                relativePath: "\\Components\\Test.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
             codeDocument.SetFileKind(FileKinds.Component);
-            codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
-            {
-                options.Directives.Add(NamespaceDirective.Directive);
-            })));
+            codeDocument.SetSyntaxTree(
+                RazorSyntaxTree.Parse(
+                    sourceDocument,
+                    RazorParserOptions.Create(
+                        options =>
+                        {
+                            options.Directives.Add(NamespaceDirective.Directive);
+                        }
+                    )
+                )
+            );
 
             var importSourceDocument = TestRazorSourceDocument.Create(
                 content: "@namespace My.Custom.NS",
                 filePath: "C:\\Hello\\_Imports.razor",
-                relativePath: "\\_Imports.razor");
-            codeDocument.SetImportSyntaxTrees(new[]
-            {
-                RazorSyntaxTree.Parse(importSourceDocument, RazorParserOptions.Create(options =>
+                relativePath: "\\_Imports.razor"
+            );
+            codeDocument.SetImportSyntaxTrees(
+                new[]
                 {
-                    options.Directives.Add(NamespaceDirective.Directive);
-                }))
-            });
+                    RazorSyntaxTree.Parse(
+                        importSourceDocument,
+                        RazorParserOptions.Create(
+                            options =>
+                            {
+                                options.Directives.Add(NamespaceDirective.Directive);
+                            }
+                        )
+                    )
+                }
+            );
 
             var documentNode = new DocumentIntermediateNode()
             {
-                Options = RazorCodeGenerationOptions.Create(c =>
-                {
-                    c.RootNamespace = "Hello.World";
-                })
+                Options = RazorCodeGenerationOptions.Create(
+                    c =>
+                    {
+                        c.RootNamespace = "Hello.World";
+                    }
+                )
             };
             codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -564,30 +721,52 @@ namespace Microsoft.AspNetCore.Razor.Language
         [InlineData("c:\\", "foo\\bar\\baz.cshtml", "Base.foo.bar")]
         [InlineData("c:\\foo\\", "bar\\baz.cshtml", "Base.bar")]
         [InlineData("c:\\Foo\\", "bar\\baz.cshtml", "Base.bar")]
-        public void TryComputeNamespace_ComputesNamespaceWithSuffix(string basePath, string relativePath, string expectedNamespace)
-        {
+        public void TryComputeNamespace_ComputesNamespaceWithSuffix(
+            string basePath,
+            string relativePath,
+            string expectedNamespace
+        ) {
             // Arrange
             var sourceDocument = TestRazorSourceDocument.Create(
                 filePath: Path.Combine(basePath, relativePath),
-                relativePath: relativePath);
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
-            codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
-            {
-                options.Directives.Add(NamespaceDirective.Directive);
-            })));
+                relativePath: relativePath
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
+            codeDocument.SetSyntaxTree(
+                RazorSyntaxTree.Parse(
+                    sourceDocument,
+                    RazorParserOptions.Create(
+                        options =>
+                        {
+                            options.Directives.Add(NamespaceDirective.Directive);
+                        }
+                    )
+                )
+            );
 
             var importRelativePath = "_ViewImports.cshtml";
             var importSourceDocument = TestRazorSourceDocument.Create(
                 content: "@namespace Base",
                 filePath: Path.Combine(basePath, importRelativePath),
-                relativePath: importRelativePath);
-            codeDocument.SetImportSyntaxTrees(new[]
-            {
-                RazorSyntaxTree.Parse(importSourceDocument, RazorParserOptions.Create(options =>
+                relativePath: importRelativePath
+            );
+            codeDocument.SetImportSyntaxTrees(
+                new[]
                 {
-                    options.Directives.Add(NamespaceDirective.Directive);
-                }))
-            });
+                    RazorSyntaxTree.Parse(
+                        importSourceDocument,
+                        RazorParserOptions.Create(
+                            options =>
+                            {
+                                options.Directives.Add(NamespaceDirective.Directive);
+                            }
+                        )
+                    )
+                }
+            );
 
             // Act
             codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var @namespace);
@@ -602,24 +781,43 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var sourceDocument = TestRazorSourceDocument.Create(
                 filePath: "c:\\foo\\bar\\bleh.cshtml",
-                relativePath: "bar\\bleh.cshtml");
-            var codeDocument = TestRazorCodeDocument.Create(sourceDocument, Array.Empty<RazorSourceDocument>());
-            codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(sourceDocument, RazorParserOptions.Create(options =>
-            {
-                options.Directives.Add(NamespaceDirective.Directive);
-            })));
+                relativePath: "bar\\bleh.cshtml"
+            );
+            var codeDocument = TestRazorCodeDocument.Create(
+                sourceDocument,
+                Array.Empty<RazorSourceDocument>()
+            );
+            codeDocument.SetSyntaxTree(
+                RazorSyntaxTree.Parse(
+                    sourceDocument,
+                    RazorParserOptions.Create(
+                        options =>
+                        {
+                            options.Directives.Add(NamespaceDirective.Directive);
+                        }
+                    )
+                )
+            );
 
             var importSourceDocument = TestRazorSourceDocument.Create(
                 content: "@namespace Base",
                 filePath: "c:\\foo\\baz\\bleh.cshtml",
-                relativePath: "baz\\bleh.cshtml");
-            codeDocument.SetImportSyntaxTrees(new[]
-            {
-                RazorSyntaxTree.Parse(importSourceDocument, RazorParserOptions.Create(options =>
+                relativePath: "baz\\bleh.cshtml"
+            );
+            codeDocument.SetImportSyntaxTrees(
+                new[]
                 {
-                    options.Directives.Add(NamespaceDirective.Directive);
-                }))
-            });
+                    RazorSyntaxTree.Parse(
+                        importSourceDocument,
+                        RazorParserOptions.Create(
+                            options =>
+                            {
+                                options.Directives.Add(NamespaceDirective.Directive);
+                            }
+                        )
+                    )
+                }
+            );
 
             // Act
             codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var @namespace);

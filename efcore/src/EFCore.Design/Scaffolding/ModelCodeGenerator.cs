@@ -15,8 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         ///     Initializes a new instance of the <see cref="ModelCodeGenerator" /> class.
         /// </summary>
         /// <param name="dependencies"> The dependencies. </param>
-        protected ModelCodeGenerator(ModelCodeGeneratorDependencies dependencies)
-            => Dependencies = Check.NotNull(dependencies, nameof(dependencies));
+        protected ModelCodeGenerator(ModelCodeGeneratorDependencies dependencies) =>
+            Dependencies = Check.NotNull(dependencies, nameof(dependencies));
 
         /// <summary>
         ///     Gets the programming language supported by this service.
@@ -37,6 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         /// <returns> The generated model. </returns>
         public abstract ScaffoldedModel GenerateModel(
             IModel model,
-            ModelCodeGenerationOptions options);
+            ModelCodeGenerationOptions options
+        );
     }
 }

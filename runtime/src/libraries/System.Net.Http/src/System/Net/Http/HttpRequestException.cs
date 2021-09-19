@@ -10,16 +10,11 @@ namespace System.Net.Http
     {
         internal RequestRetryType AllowRetry { get; } = RequestRetryType.NoRetry;
 
-        public HttpRequestException()
-            : this(null, null)
-        { }
+        public HttpRequestException() : this(null, null) { }
 
-        public HttpRequestException(string? message)
-            : this(message, null)
-        { }
+        public HttpRequestException(string? message) : this(message, null) { }
 
-        public HttpRequestException(string? message, Exception? inner)
-            : base(message, inner)
+        public HttpRequestException(string? message, Exception? inner) : base(message, inner)
         {
             if (inner != null)
             {
@@ -33,8 +28,11 @@ namespace System.Net.Http
         /// <param name="message">A message that describes the current exception.</param>
         /// <param name="inner">The inner exception.</param>
         /// <param name="statusCode">The HTTP status code.</param>
-        public HttpRequestException(string? message, Exception? inner, HttpStatusCode? statusCode)
-            : this(message, inner)
+        public HttpRequestException(
+            string? message,
+            Exception? inner,
+            HttpStatusCode? statusCode
+        ) : this(message, inner)
         {
             StatusCode = statusCode;
         }
@@ -49,8 +47,11 @@ namespace System.Net.Http
 
         // This constructor is used internally to indicate that a request was not successfully sent due to an IOException,
         // and the exception occurred early enough so that the request may be retried on another connection.
-        internal HttpRequestException(string? message, Exception? inner, RequestRetryType allowRetry)
-            : this(message, inner)
+        internal HttpRequestException(
+            string? message,
+            Exception? inner,
+            RequestRetryType allowRetry
+        ) : this(message, inner)
         {
             AllowRetry = allowRetry;
         }

@@ -16,9 +16,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpSquigglesDesktop : CSharpSquigglesCommon
     {
         public CSharpSquigglesDesktop(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.ClassLibrary)
-        {
-        }
+            : base(instanceFactory, WellKnownProjectTemplates.ClassLibrary) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ErrorSquiggles)]
         public override void VerifySyntaxErrorSquiggles()

@@ -13,8 +13,11 @@ namespace System.Xml.XmlResolver.Tests
 {
     public class XmlPreloadedResolverGetEntity
     {
-        private XmlPreloadedResolver GetResolverWithStringData(XmlKnownDtds dtd, string data, Uri uri)
-        {
+        private XmlPreloadedResolver GetResolverWithStringData(
+            XmlKnownDtds dtd,
+            string data,
+            Uri uri
+        ) {
             var xmlResolver = new XmlPreloadedResolver(dtd);
             xmlResolver.Add(uri, data);
             return xmlResolver;
@@ -31,26 +34,54 @@ namespace System.Xml.XmlResolver.Tests
         public void XmlResolverGetEntityWithInvalidData()
         {
             var xmlResolver = new XmlPreloadedResolver(XmlKnownDtds.Xhtml10);
-            Assert.Throws<XmlException>(() => xmlResolver.GetEntity(new Uri("https://JustAUri"), null, typeof(string)));
+            Assert.Throws<XmlException>(
+                () => xmlResolver.GetEntity(new Uri("https://JustAUri"), null, typeof(string))
+            );
 
-            xmlResolver = new XmlPreloadedResolver(new XmlPreloadedResolver(), XmlKnownDtds.Xhtml10);
-            Assert.Throws<XmlException>(() => xmlResolver.GetEntity(new Uri("https://JustAUri"), null, typeof(string)));
+            xmlResolver = new XmlPreloadedResolver(
+                new XmlPreloadedResolver(),
+                XmlKnownDtds.Xhtml10
+            );
+            Assert.Throws<XmlException>(
+                () => xmlResolver.GetEntity(new Uri("https://JustAUri"), null, typeof(string))
+            );
 
             xmlResolver = new XmlPreloadedResolver(XmlKnownDtds.Xhtml10);
-            Assert.Throws<XmlException>(() => xmlResolver.GetEntity(new Uri("-//W3C//DTD XHTML 1.0 Transitional//EN", UriKind.RelativeOrAbsolute)
-                , null, typeof(string)));
+            Assert.Throws<XmlException>(
+                () =>
+                    xmlResolver.GetEntity(
+                        new Uri(
+                            "-//W3C//DTD XHTML 1.0 Transitional//EN",
+                            UriKind.RelativeOrAbsolute
+                        ),
+                        null,
+                        typeof(string)
+                    )
+            );
 
-            xmlResolver = new XmlPreloadedResolver(new XmlPreloadedResolver(), XmlKnownDtds.Xhtml10);
-            Assert.Throws<XmlException>(() => xmlResolver.GetEntity(new Uri("-//W3C//Invalid URI ", UriKind.RelativeOrAbsolute)
-                , null, typeof(string)));
+            xmlResolver = new XmlPreloadedResolver(
+                new XmlPreloadedResolver(),
+                XmlKnownDtds.Xhtml10
+            );
+            Assert.Throws<XmlException>(
+                () =>
+                    xmlResolver.GetEntity(
+                        new Uri("-//W3C//Invalid URI ", UriKind.RelativeOrAbsolute),
+                        null,
+                        typeof(string)
+                    )
+            );
         }
 
         [Fact]
         public void XmlResolverGetEntityWithValidUserSuppliedData()
         {
             var uri = new Uri("-//W3C//DTD FAKE 1.0 Not Real//EN", UriKind.RelativeOrAbsolute);
-            XmlPreloadedResolver xmlResolver =
-                GetResolverWithStringData(XmlKnownDtds.Xhtml10, "Sample String Data", uri);
+            XmlPreloadedResolver xmlResolver = GetResolverWithStringData(
+                XmlKnownDtds.Xhtml10,
+                "Sample String Data",
+                uri
+            );
             Stream streamResult = xmlResolver.GetEntity(uri, null, null) as Stream;
             Assert.NotNull(streamResult);
             byte[] data = new byte[streamResult.Length];
@@ -58,8 +89,13 @@ namespace System.Xml.XmlResolver.Tests
             Assert.Equal("Sample String Data", NormalizeContent(Encoding.ASCII.GetString(data)));
 
             uri = new Uri("-//W3C//DTD FAKE 1.0 Not Real//EN", UriKind.RelativeOrAbsolute);
-            xmlResolver = GetResolverWithStringData(XmlKnownDtds.Xhtml10, "Sample String Data", uri);
-            TextReader textResult = xmlResolver.GetEntity(uri, null, typeof(TextReader)) as TextReader;
+            xmlResolver = GetResolverWithStringData(
+                XmlKnownDtds.Xhtml10,
+                "Sample String Data",
+                uri
+            );
+            TextReader textResult =
+                xmlResolver.GetEntity(uri, null, typeof(TextReader)) as TextReader;
             Assert.NotNull(textResult);
             Assert.Equal("Sample String Data", textResult.ReadLine());
         }
@@ -92,17 +128,48 @@ namespace System.Xml.XmlResolver.Tests
         public void XmlResolverGetEntityAsyncWithInvalidData()
         {
             var xmlResolver = new XmlPreloadedResolver(XmlKnownDtds.Xhtml10);
-            Assert.ThrowsAsync<ArgumentNullException>(() => xmlResolver.GetEntityAsync(null, null, null));
-            Assert.ThrowsAsync<XmlException>(() => xmlResolver.GetEntityAsync(new Uri("https://DummyUri"), null, null));
-            Assert.ThrowsAsync<XmlException>(() =>
-                xmlResolver.GetEntityAsync(new Uri("-//W3C//ENTITIES Latin 1 for XHTML//EN", UriKind.RelativeOrAbsolute), null, typeof(string)));
+            Assert.ThrowsAsync<ArgumentNullException>(
+                () => xmlResolver.GetEntityAsync(null, null, null)
+            );
+            Assert.ThrowsAsync<XmlException>(
+                () => xmlResolver.GetEntityAsync(new Uri("https://DummyUri"), null, null)
+            );
+            Assert.ThrowsAsync<XmlException>(
+                () =>
+                    xmlResolver.GetEntityAsync(
+                        new Uri(
+                            "-//W3C//ENTITIES Latin 1 for XHTML//EN",
+                            UriKind.RelativeOrAbsolute
+                        ),
+                        null,
+                        typeof(string)
+                    )
+            );
 
-            xmlResolver = new XmlPreloadedResolver(new XmlPreloadedResolver(), XmlKnownDtds.Xhtml10);
-            Assert.ThrowsAsync<XmlException>(() =>
-                xmlResolver.GetEntityAsync(new Uri("https://DummyUri", UriKind.RelativeOrAbsolute), null, typeof(string)));
+            xmlResolver = new XmlPreloadedResolver(
+                new XmlPreloadedResolver(),
+                XmlKnownDtds.Xhtml10
+            );
+            Assert.ThrowsAsync<XmlException>(
+                () =>
+                    xmlResolver.GetEntityAsync(
+                        new Uri("https://DummyUri", UriKind.RelativeOrAbsolute),
+                        null,
+                        typeof(string)
+                    )
+            );
 
-            Assert.ThrowsAsync<XmlException>(() =>
-                xmlResolver.GetEntityAsync(new Uri("-//W3C//ENTITIES Latin 1 for XHTML//EN", UriKind.RelativeOrAbsolute), null, typeof(TextReader)));
+            Assert.ThrowsAsync<XmlException>(
+                () =>
+                    xmlResolver.GetEntityAsync(
+                        new Uri(
+                            "-//W3C//ENTITIES Latin 1 for XHTML//EN",
+                            UriKind.RelativeOrAbsolute
+                        ),
+                        null,
+                        typeof(TextReader)
+                    )
+            );
         }
 
         [Fact]
@@ -110,9 +177,15 @@ namespace System.Xml.XmlResolver.Tests
         {
             byte[] inpData = Encoding.ASCII.GetBytes("hello world");
             var xmlResolver = new XmlPreloadedResolver(XmlKnownDtds.Xhtml10);
-            xmlResolver.Add(new Uri("-//W3C//DTD FAKE 1.0 Not Real//EN", UriKind.RelativeOrAbsolute), inpData);
-            Task<object> output = xmlResolver.GetEntityAsync(new Uri("-//W3C//DTD FAKE 1.0 Not Real//EN",
-                UriKind.RelativeOrAbsolute), null, typeof(Stream));
+            xmlResolver.Add(
+                new Uri("-//W3C//DTD FAKE 1.0 Not Real//EN", UriKind.RelativeOrAbsolute),
+                inpData
+            );
+            Task<object> output = xmlResolver.GetEntityAsync(
+                new Uri("-//W3C//DTD FAKE 1.0 Not Real//EN", UriKind.RelativeOrAbsolute),
+                null,
+                typeof(Stream)
+            );
             var result = new byte[inpData.Length];
             (output.Result as Stream).Read(result, 0, result.Length);
             Assert.Equal(inpData, result);
@@ -161,16 +234,34 @@ namespace System.Xml.XmlResolver.Tests
             string dtdFolderRoot = Path.Combine("Utils", "DTDs");
 
             return Enumerable.Concat(
-                GetKnownDtds(xhtmlDtds, "http://www.w3.org/TR/xhtml1/DTD/", Path.Combine(dtdFolderRoot, "XHTML10", "no_comments")),
-                GetKnownDtds(rssDtds, "http://my.netscape.com/publish/formats/", Path.Combine(dtdFolderRoot, "RSS091", "no_comments")));
+                GetKnownDtds(
+                    xhtmlDtds,
+                    "http://www.w3.org/TR/xhtml1/DTD/",
+                    Path.Combine(dtdFolderRoot, "XHTML10", "no_comments")
+                ),
+                GetKnownDtds(
+                    rssDtds,
+                    "http://my.netscape.com/publish/formats/",
+                    Path.Combine(dtdFolderRoot, "RSS091", "no_comments")
+                )
+            );
 
             IEnumerable<(string PublicId, string SystemId, string SourcePath)> GetKnownDtds(
                 IEnumerable<(string PublicId, string RelativeId)> ids,
                 string systemUrlPrefix,
-                string pathPrefix) =>
-                ids.Select(x => (x.PublicId, systemUrlPrefix + x.RelativeId, Path.Combine(pathPrefix, x.RelativeId)));
+                string pathPrefix
+            ) =>
+                ids.Select(
+                    x =>
+                        (
+                            x.PublicId,
+                            systemUrlPrefix + x.RelativeId,
+                            Path.Combine(pathPrefix, x.RelativeId)
+                        )
+                );
         }
 
-        private static string NormalizeContent(string content) => content.Replace("\0", "").Replace("\r\n", "\n");
+        private static string NormalizeContent(string content) =>
+            content.Replace("\0", "").Replace("\r\n", "\n");
     }
 }

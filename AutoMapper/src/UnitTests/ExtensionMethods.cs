@@ -16,20 +16,24 @@ namespace AutoMapper.UnitTests
         {
             public int Value { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(c=>
-        {
-            c.IncludeSourceExtensionMethods(typeof(BarExtensions));
-            c.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                c =>
+                {
+                    c.IncludeSourceExtensionMethods(typeof(BarExtensions));
+                    c.CreateMap<Source, Destination>();
+                }
+            );
         [Fact]
         public void It_should_be_used() => Map<Destination>(new Source()).Value.ShouldBe(12);
     }
     public static class BarExtensions
     {
         public static int GetValue(this object obj) => 12;
-        public static string GetSimpleName(this When_null_is_passed_to_an_extension_method.Bar source)
-        {
-            if(source == null)
+        public static string GetSimpleName(
+            this When_null_is_passed_to_an_extension_method.Bar source
+        ) {
+            if (source == null)
                 throw new ArgumentNullException("source");
             return "SimpleName";
         }
@@ -53,11 +57,15 @@ namespace AutoMapper.UnitTests
             public Guid Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.IncludeSourceExtensionMethods(typeof(BarExtensions));
-            cfg.CreateMap<Foo, FooDto>().ForMember(d=>d.Value, o=>o.MapFrom(s=>Guid.NewGuid()));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.IncludeSourceExtensionMethods(typeof(BarExtensions));
+                    cfg.CreateMap<Foo, FooDto>()
+                        .ForMember(d => d.Value, o => o.MapFrom(s => Guid.NewGuid()));
+                }
+            );
 
         [Fact]
         public void Should_work()
@@ -68,7 +76,10 @@ namespace AutoMapper.UnitTests
 
     public static class When_extension_method_returns_value_type_SourceExtensions
     {
-        public static string GetValue2(this When_extension_method_returns_value_type.Source source) { return "hello from extension"; }
+        public static string GetValue2(this When_extension_method_returns_value_type.Source source)
+        {
+            return "hello from extension";
+        }
     }
 
     public class When_extension_method_returns_value_type : AutoMapperSpecBase
@@ -86,11 +97,16 @@ namespace AutoMapper.UnitTests
             public string Value2 { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.IncludeSourceExtensionMethods(typeof(When_extension_method_returns_value_type_SourceExtensions));
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.IncludeSourceExtensionMethods(
+                        typeof(When_extension_method_returns_value_type_SourceExtensions)
+                    );
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
@@ -112,9 +128,13 @@ namespace AutoMapper.UnitTests
 
     public static class When_extension_method_returns_object_SourceExtensions
     {
-        public static When_extension_method_returns_object.Nested GetInsideThing(this When_extension_method_returns_object.Source source)
-        {
-            return new When_extension_method_returns_object.Nested { Property = source.Value1 + 10 };
+        public static When_extension_method_returns_object.Nested GetInsideThing(
+            this When_extension_method_returns_object.Source source
+        ) {
+            return new When_extension_method_returns_object.Nested
+            {
+                Property = source.Value1 + 10
+            };
         }
     }
 
@@ -138,11 +158,16 @@ namespace AutoMapper.UnitTests
             public int Property { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.IncludeSourceExtensionMethods(typeof(When_extension_method_returns_object_SourceExtensions));
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.IncludeSourceExtensionMethods(
+                        typeof(When_extension_method_returns_object_SourceExtensions)
+                    );
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
@@ -176,14 +201,19 @@ namespace AutoMapper.UnitTests
             public int ValuesCount { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Source, Destination>(new Source { Values = Enumerable.Repeat(1, 10) });
+            _destination = Mapper.Map<Source, Destination>(
+                new Source { Values = Enumerable.Repeat(1, 10) }
+            );
         }
 
         [Fact]
@@ -208,17 +238,23 @@ namespace AutoMapper.UnitTests
             public string StringValue;
             public string AnotherStringValue;
         }
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.Internal().FieldMappingEnabled = false;
-            cfg.Internal().MethodMappingEnabled = false;
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.Internal().FieldMappingEnabled = false;
+                    cfg.Internal().MethodMappingEnabled = false;
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
         [Fact]
         public void Should_fail_validation()
         {
-            new Action(Configuration.AssertConfigurationIsValid).ShouldThrow<AutoMapperConfigurationException>().Errors[0]
-                .UnmappedPropertyNames.ShouldBe(new[] { "ValuesCount", "OtherValue" });
+            new Action(
+                Configuration.AssertConfigurationIsValid
+            ).ShouldThrow<AutoMapperConfigurationException>().Errors[
+                0
+            ].UnmappedPropertyNames.ShouldBe(new[] { "ValuesCount", "OtherValue" });
             Mapper.Map<Destination>(new Source { StringValue = "42" }).StringValue.ShouldBeNull();
         }
     }
@@ -247,11 +283,17 @@ namespace AutoMapper.UnitTests
             public LastName Last;
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
-        {
-            cfg.CreateMap<CombinedNames, FullName>()
-                .ForMember(dst => dst.Name, o => o.MapFrom(src => string.Concat(src.First.Name, src.Last.Name)));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<CombinedNames, FullName>()
+                        .ForMember(
+                            dst => dst.Name,
+                            o => o.MapFrom(src => string.Concat(src.First.Name, src.Last.Name))
+                        );
+                }
+            );
 
         [Fact]
         public void It_should_not_be_null_checked()

@@ -13,7 +13,10 @@ namespace System.Linq.Tests
         {
             IQueryable<int> source = null;
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.Where(i => true));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Where((v, i) => true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Where((v, i) => true)
+            );
         }
 
         [Fact]
@@ -23,8 +26,14 @@ namespace System.Linq.Tests
             Expression<Func<int, bool>> simplePredicate = null;
             Expression<Func<int, int, bool>> complexPredicate = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => source.Where(simplePredicate));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => source.Where(complexPredicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => source.Where(simplePredicate)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => source.Where(complexPredicate)
+            );
         }
 
         [Fact]
@@ -65,7 +74,9 @@ namespace System.Linq.Tests
         [Fact]
         public void Where2()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable().Where((n, i) => n > 1 || i == 0).Count();
+            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+                .Where((n, i) => n > 1 || i == 0)
+                .Count();
             Assert.Equal(2, count);
         }
     }

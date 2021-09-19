@@ -44,9 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 get
                 {
-                    return
-                        this.CurrentNodeOrToken.Kind() == SyntaxKind.None ||
-                        this.CurrentNodeOrToken.Kind() == SyntaxKind.EndOfFileToken;
+                    return this.CurrentNodeOrToken.Kind() == SyntaxKind.None
+                        || this.CurrentNodeOrToken.Kind() == SyntaxKind.EndOfFileToken;
                 }
             }
 
@@ -94,7 +93,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
 
                 var children = node.Parent.ChildNodesAndTokens();
-                var index = SyntaxNodeOrToken.GetFirstChildIndexSpanningPosition(children, ((CSharp.CSharpSyntaxNode)node).Position);
+                var index = SyntaxNodeOrToken.GetFirstChildIndexSpanningPosition(
+                    children,
+                    ((CSharp.CSharpSyntaxNode)node).Position
+                );
                 for (int i = index, n = children.Count; i < n; i++)
                 {
                     var child = children[i];
@@ -125,8 +127,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // interpolated string token.
                 if (node.Kind() == SyntaxKind.InterpolatedStringExpression)
                 {
-                    var greenToken = Lexer.RescanInterpolatedString((InterpolatedStringExpressionSyntax)node.Green);
-                    var redToken = new CodeAnalysis.SyntaxToken(node.Parent, greenToken, node.Position, _indexInParent);
+                    var greenToken = Lexer.RescanInterpolatedString(
+                        (InterpolatedStringExpressionSyntax)node.Green
+                    );
+                    var redToken = new CodeAnalysis.SyntaxToken(
+                        node.Parent,
+                        greenToken,
+                        node.Position,
+                        _indexInParent
+                    );
                     return new Cursor(redToken, _indexInParent);
                 }
 
@@ -159,8 +168,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var cursor = this;
                 if (!cursor.IsFinished)
                 {
-                    for (var node = cursor.CurrentNodeOrToken; node.Kind() != SyntaxKind.None && !SyntaxFacts.IsAnyToken(node.Kind()); node = cursor.CurrentNodeOrToken)
-                    {
+                    for (
+                        var node = cursor.CurrentNodeOrToken;
+                        node.Kind() != SyntaxKind.None && !SyntaxFacts.IsAnyToken(node.Kind());
+                        node = cursor.CurrentNodeOrToken
+                    ) {
                         cursor = cursor.MoveToFirstChild();
                     }
                 }

@@ -22,9 +22,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         /// </summary>
         private abstract partial class Chunk
         {
-            protected Chunk()
-            {
-            }
+            protected Chunk() { }
 
             public abstract int Length { get; }
             public abstract VirtualChar this[int index] { get; }
@@ -39,8 +37,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         {
             private readonly ImmutableArray<VirtualChar> _array;
 
-            public ImmutableArrayChunk(ImmutableArray<VirtualChar> array)
-                => _array = array;
+            public ImmutableArrayChunk(ImmutableArray<VirtualChar> array) => _array = array;
 
             public override int Length => _array.Length;
             public override VirtualChar this[int index] => _array[index];
@@ -80,8 +77,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
                     // when the string has the same number of chars as there are VirtualChars.
                     if (char.IsHighSurrogate(_underlyingData[index]))
                     {
-                        Debug.Assert(index + 1 >= _underlyingData.Length ||
-                                     !char.IsLowSurrogate(_underlyingData[index + 1]));
+                        Debug.Assert(
+                            index + 1 >= _underlyingData.Length
+                                || !char.IsLowSurrogate(_underlyingData[index + 1])
+                        );
                     }
 #endif
 

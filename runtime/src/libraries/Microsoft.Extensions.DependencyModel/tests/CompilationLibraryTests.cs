@@ -18,21 +18,24 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         {
             var fail = new Mock<ICompilationAssemblyResolver>();
             var success = new Mock<ICompilationAssemblyResolver>();
-            success.Setup(r => r.TryResolveAssemblyPaths(It.IsAny<CompilationLibrary>(), It.IsAny<List<string>>()))
-                .Callback((CompilationLibrary l, List<string> a) =>
-                {
-                    a.Add("Assembly");
-                })
+            success.Setup(
+                    r =>
+                        r.TryResolveAssemblyPaths(
+                            It.IsAny<CompilationLibrary>(),
+                            It.IsAny<List<string>>()
+                        )
+                )
+                .Callback(
+                    (CompilationLibrary l, List<string> a) =>
+                    {
+                        a.Add("Assembly");
+                    }
+                )
                 .Returns(true);
 
             var failTwo = new Mock<ICompilationAssemblyResolver>();
 
-            var resolvers = new[]
-            {
-                fail.Object,
-                success.Object,
-                failTwo.Object
-            };
+            var resolvers = new[] { fail.Object, success.Object, failTwo.Object };
 
             var library = TestLibraryFactory.Create();
 
@@ -40,19 +43,41 @@ namespace Microsoft.Extensions.DependencyModel.Tests
 
             result.ShouldBeEquivalentTo(new[] { "Assembly" });
 
-            fail.Verify(r => r.TryResolveAssemblyPaths(It.IsAny<CompilationLibrary>(), It.IsAny<List<string>>()),
-                Times.Once());
-            success.Verify(r => r.TryResolveAssemblyPaths(It.IsAny<CompilationLibrary>(), It.IsAny<List<string>>()),
-                Times.Once());
-            failTwo.Verify(r => r.TryResolveAssemblyPaths(It.IsAny<CompilationLibrary>(), It.IsAny<List<string>>()),
-                Times.Never());
+            fail.Verify(
+                r =>
+                    r.TryResolveAssemblyPaths(
+                        It.IsAny<CompilationLibrary>(),
+                        It.IsAny<List<string>>()
+                    ),
+                Times.Once()
+            );
+            success.Verify(
+                r =>
+                    r.TryResolveAssemblyPaths(
+                        It.IsAny<CompilationLibrary>(),
+                        It.IsAny<List<string>>()
+                    ),
+                Times.Once()
+            );
+            failTwo.Verify(
+                r =>
+                    r.TryResolveAssemblyPaths(
+                        It.IsAny<CompilationLibrary>(),
+                        It.IsAny<List<string>>()
+                    ),
+                Times.Never()
+            );
         }
 
         [Fact]
         public void ResolveReferencePathsAcceptsNullCustomResolvers()
         {
             var library = TestLibraryFactory.Create();
-            var assemblyPath = Path.Combine(AppContext.BaseDirectory, "refs", library.Name + ".dll");
+            var assemblyPath = Path.Combine(
+                AppContext.BaseDirectory,
+                "refs",
+                library.Name + ".dll"
+            );
             Directory.CreateDirectory(Path.GetDirectoryName(assemblyPath));
             File.WriteAllText(assemblyPath, "hello");
 
@@ -61,6 +86,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 var result = library.ResolveReferencePaths(null);
                 result.ShouldBeEquivalentTo(new[] { assemblyPath });
             }
+
             finally
             {
                 File.Delete(assemblyPath);

@@ -19,10 +19,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
             Http2FrameWriter frameWriter,
             InputFlowControl connectionLevelFlowControl,
             uint initialWindowSize,
-            uint minWindowSizeIncrement)
-        {
+            uint minWindowSizeIncrement
+        ) {
             _connectionLevelFlowControl = connectionLevelFlowControl;
-            _streamLevelFlowControl = new InputFlowControl(initialWindowSize, minWindowSizeIncrement);
+            _streamLevelFlowControl = new InputFlowControl(
+                initialWindowSize,
+                minWindowSizeIncrement
+            );
             _stream = stream;
             _frameWriter = frameWriter;
         }
@@ -36,7 +39,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
         {
             var connectionSuccess = _connectionLevelFlowControl.TryAdvance(bytes);
 
-            Debug.Assert(connectionSuccess, "Connection-level input flow control should never be aborted.");
+            Debug.Assert(
+                connectionSuccess,
+                "Connection-level input flow control should never be aborted."
+            );
 
             if (!_streamLevelFlowControl.TryAdvance(bytes))
             {
@@ -57,7 +63,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
             if (streamWindowUpdateSize > 0)
             {
                 // Writing with the FrameWriter should only fail if given a canceled token, so just fire and forget.
-                _ = _frameWriter.WriteWindowUpdateAsync(StreamId, streamWindowUpdateSize).Preserve();
+                _ = _frameWriter.WriteWindowUpdateAsync(StreamId, streamWindowUpdateSize)
+                    .Preserve();
             }
 
             UpdateConnectionWindow(bytes);
@@ -83,9 +90,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
 
         private void UpdateConnectionWindow(int bytes)
         {
-            var connectionSuccess = _connectionLevelFlowControl.TryUpdateWindow(bytes, out var connectionWindowUpdateSize);
+            var connectionSuccess = _connectionLevelFlowControl.TryUpdateWindow(
+                bytes,
+                out var connectionWindowUpdateSize
+            );
 
-            Debug.Assert(connectionSuccess, "Connection-level input flow control should never be aborted.");
+            Debug.Assert(
+                connectionSuccess,
+                "Connection-level input flow control should never be aborted."
+            );
 
             if (connectionWindowUpdateSize > 0)
             {

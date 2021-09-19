@@ -85,7 +85,7 @@ namespace System.Runtime
         // a factor of 100.
         private static long s_hiddenLastKnownFreeAddressSpace;
         private static long s_hiddenLastTimeCheckingAddressSpace;
-        private const int CheckThreshold = 10 * 1000;  // 10 seconds
+        private const int CheckThreshold = 10 * 1000; // 10 seconds
 
         private static long LastKnownFreeAddressSpace
         {
@@ -130,7 +130,7 @@ namespace System.Runtime
         // in the critical finalizer.
         private static long s_failPointReservedMemory;
 
-        private readonly ulong _reservedMemory;  // The size of this request (from user)
+        private readonly ulong _reservedMemory; // The size of this request (from user)
         private bool _mustSubtractReservation; // Did we add data to SharedStatics?
 
         // We can remove this link demand in a future version - we will
@@ -140,7 +140,10 @@ namespace System.Runtime
         public MemoryFailPoint(int sizeInMegabytes)
         {
             if (sizeInMegabytes <= 0)
-                throw new ArgumentOutOfRangeException(nameof(sizeInMegabytes), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(sizeInMegabytes),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             ulong size = ((ulong)sizeInMegabytes) << 20;
             _reservedMemory = size;
@@ -151,11 +154,16 @@ namespace System.Runtime
             // size, not the amount of memory the user wants to allocate.
             // Consider correcting this to reflect free memory within the GC
             // heap, and to check both the normal & large object heaps.
-            ulong segmentSize = (ulong)(Math.Ceiling((double)size / s_GCSegmentSize) * s_GCSegmentSize);
+            ulong segmentSize = (ulong)(
+                Math.Ceiling((double)size / s_GCSegmentSize) * s_GCSegmentSize
+            );
             if (segmentSize >= s_topOfMemory)
                 throw new InsufficientMemoryException(SR.InsufficientMemory_MemFailPoint_TooBig);
 
-            ulong requestedSizeRounded = (ulong)(Math.Ceiling((double)sizeInMegabytes / MemoryCheckGranularity) * MemoryCheckGranularity);
+            ulong requestedSizeRounded = (ulong)(
+                Math.Ceiling((double)sizeInMegabytes / MemoryCheckGranularity)
+                * MemoryCheckGranularity
+            );
             // re-convert into bytes
             requestedSizeRounded <<= 20;
 
@@ -173,8 +181,8 @@ namespace System.Runtime
             // would probably work, but do some thinking first.)
             for (int stage = 0; stage < 3; stage++)
             {
-                ulong availPageFile;  // available VM (physical + page file)
-                ulong totalAddressSpaceFree;  // non-contiguous free address space
+                ulong availPageFile; // available VM (physical + page file)
+                ulong totalAddressSpaceFree; // non-contiguous free address space
 
                 if (!CheckForAvailableMemory(out availPageFile, out totalAddressSpaceFree))
                 {
@@ -188,14 +196,18 @@ namespace System.Runtime
                 ulong reserved = MemoryFailPointReservedMemory;
                 ulong segPlusReserved = segmentSize + reserved;
                 bool overflow = segPlusReserved < segmentSize || segPlusReserved < reserved;
-                bool needPageFile = availPageFile < (requestedSizeRounded + reserved + LowMemoryFudgeFactor) || overflow;
+                bool needPageFile =
+                    availPageFile < (requestedSizeRounded + reserved + LowMemoryFudgeFactor)
+                    || overflow;
                 bool needAddressSpace = totalAddressSpaceFree < segPlusReserved || overflow;
 
                 // Ensure our cached amount of free address space is not stale.
-                long now = Environment.TickCount;  // Handle wraparound.
-                if (now > LastTimeCheckingAddressSpace + CheckThreshold || now < LastTimeCheckingAddressSpace ||
-                    LastKnownFreeAddressSpace < (long)segmentSize)
-                {
+                long now = Environment.TickCount; // Handle wraparound.
+                if (
+                    now > LastTimeCheckingAddressSpace + CheckThreshold
+                    || now < LastTimeCheckingAddressSpace
+                    || LastKnownFreeAddressSpace < (long)segmentSize
+                ) {
                     CheckForFreeAddressSpace(segmentSize, false);
                 }
                 bool needContiguousVASpace = (ulong)LastKnownFreeAddressSpace < segmentSize;
@@ -243,28 +255,45 @@ namespace System.Runtime
                         // state.
                         if (needPageFile || needAddressSpace)
                         {
-                            InsufficientMemoryException e = new InsufficientMemoryException(SR.InsufficientMemory_MemFailPoint);
+                            InsufficientMemoryException e = new InsufficientMemoryException(
+                                SR.InsufficientMemory_MemFailPoint
+                            );
 #if DEBUG
-                            e.Data["MemFailPointState"] = new MemoryFailPointState(sizeInMegabytes, segmentSize,
-                                 needPageFile, needAddressSpace, needContiguousVASpace,
-                                 availPageFile >> 20, totalAddressSpaceFree >> 20,
-                                 LastKnownFreeAddressSpace >> 20, reserved);
+                            e.Data["MemFailPointState"] = new MemoryFailPointState(
+                                sizeInMegabytes,
+                                segmentSize,
+                                needPageFile,
+                                needAddressSpace,
+                                needContiguousVASpace,
+                                availPageFile >> 20,
+                                totalAddressSpaceFree >> 20,
+                                LastKnownFreeAddressSpace >> 20,
+                                reserved
+                            );
 #endif
                             throw e;
                         }
 
                         if (needContiguousVASpace)
                         {
-                            InsufficientMemoryException e = new InsufficientMemoryException(SR.InsufficientMemory_MemFailPoint_VAFrag);
+                            InsufficientMemoryException e = new InsufficientMemoryException(
+                                SR.InsufficientMemory_MemFailPoint_VAFrag
+                            );
 #if DEBUG
-                            e.Data["MemFailPointState"] = new MemoryFailPointState(sizeInMegabytes, segmentSize,
-                                 needPageFile, needAddressSpace, needContiguousVASpace,
-                                 availPageFile >> 20, totalAddressSpaceFree >> 20,
-                                 LastKnownFreeAddressSpace >> 20, reserved);
+                            e.Data["MemFailPointState"] = new MemoryFailPointState(
+                                sizeInMegabytes,
+                                segmentSize,
+                                needPageFile,
+                                needAddressSpace,
+                                needContiguousVASpace,
+                                availPageFile >> 20,
+                                totalAddressSpaceFree >> 20,
+                                LastKnownFreeAddressSpace >> 20,
+                                reserved
+                            );
 #endif
                             throw e;
                         }
-
                         break;
 
                     default:
@@ -312,7 +341,6 @@ namespace System.Runtime
                 AddMemoryFailPointReservation(-((long)_reservedMemory));
                 _mustSubtractReservation = false;
             }
-
             /*
             // Prototype performance
             // Let's pretend that we returned at least some free memory to
@@ -335,7 +363,10 @@ namespace System.Runtime
         {
             get
             {
-                Debug.Assert(Volatile.Read(ref s_failPointReservedMemory) >= 0, "Process-wide MemoryFailPoint reserved memory was negative!");
+                Debug.Assert(
+                    Volatile.Read(ref s_failPointReservedMemory) >= 0,
+                    "Process-wide MemoryFailPoint reserved memory was negative!"
+                );
                 return (ulong)Volatile.Read(ref s_failPointReservedMemory);
             }
         }
@@ -353,10 +384,19 @@ namespace System.Runtime
             private readonly ulong _totalFreeAddressSpace;
             private readonly long _lastKnownFreeAddressSpace;
             private readonly ulong _reservedMem;
-            private readonly string _stackTrace;  // Where did we fail, for additional debugging.
+            private readonly string _stackTrace; // Where did we fail, for additional debugging.
 
-            internal MemoryFailPointState(int allocationSizeInMB, ulong segmentSize, bool needPageFile, bool needAddressSpace, bool needContiguousVASpace, ulong availPageFile, ulong totalFreeAddressSpace, long lastKnownFreeAddressSpace, ulong reservedMem)
-            {
+            internal MemoryFailPointState(
+                int allocationSizeInMB,
+                ulong segmentSize,
+                bool needPageFile,
+                bool needAddressSpace,
+                bool needContiguousVASpace,
+                ulong availPageFile,
+                ulong totalFreeAddressSpace,
+                long lastKnownFreeAddressSpace,
+                ulong reservedMem
+            ) {
                 _allocationSizeInMB = allocationSizeInMB;
                 _segmentSize = segmentSize;
                 _needPageFile = needPageFile;
@@ -382,11 +422,19 @@ namespace System.Runtime
 
             public override string ToString()
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "MemoryFailPoint detected insufficient memory to guarantee an operation could complete.  Checked for {0} MB, for allocation size of {1} MB.  Need page file? {2}  Need Address Space? {3}  Need Contiguous address space? {4}  Avail page file: {5} MB  Total free VA space: {6} MB  Contiguous free address space (found): {7} MB  Space reserved by process's MemoryFailPoints: {8} MB",
-                    _segmentSize >> 20, _allocationSizeInMB, _needPageFile,
-                    _needAddressSpace, _needContiguousVASpace,
-                    _availPageFile >> 20, _totalFreeAddressSpace >> 20,
-                    _lastKnownFreeAddressSpace >> 20, _reservedMem);
+                return string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    "MemoryFailPoint detected insufficient memory to guarantee an operation could complete.  Checked for {0} MB, for allocation size of {1} MB.  Need page file? {2}  Need Address Space? {3}  Need Contiguous address space? {4}  Avail page file: {5} MB  Total free VA space: {6} MB  Contiguous free address space (found): {7} MB  Space reserved by process's MemoryFailPoints: {8} MB",
+                    _segmentSize >> 20,
+                    _allocationSizeInMB,
+                    _needPageFile,
+                    _needAddressSpace,
+                    _needContiguousVASpace,
+                    _availPageFile >> 20,
+                    _totalFreeAddressSpace >> 20,
+                    _lastKnownFreeAddressSpace >> 20,
+                    _reservedMem
+                );
             }
         }
 #endif

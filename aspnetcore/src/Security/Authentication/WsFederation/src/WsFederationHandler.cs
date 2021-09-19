@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
     /// <summary>
     /// A per-request authentication handler for the WsFederation.
     /// </summary>
-    public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptions>, IAuthenticationSignOutHandler
+    public class WsFederationHandler
+        : RemoteAuthenticationHandler<WsFederationOptions>,
+          IAuthenticationSignOutHandler
     {
         private const string CorrelationProperty = ".xsrf";
         private WsFederationConfiguration? _configuration;
@@ -30,10 +32,12 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// <param name="encoder"></param>
         /// <param name="clock"></param>
         /// <param name="logger"></param>
-        public WsFederationHandler(IOptionsMonitor<WsFederationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-            : base(options, logger, encoder, clock)
-        {
-        }
+        public WsFederationHandler(
+            IOptionsMonitor<WsFederationOptions> options,
+            ILoggerFactory logger,
+            UrlEncoder encoder,
+            ISystemClock clock
+        ) : base(options, logger, encoder, clock) { }
 
         /// <summary>
         /// The handler calls methods on the events which give the application control at certain points where processing is occurring.
@@ -49,7 +53,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// Creates a new instance of the events instance.
         /// </summary>
         /// <returns>A new instance of the events instance.</returns>
-        protected override Task<object> CreateEventsAsync() => Task.FromResult<object>(new WsFederationEvents());
+        protected override Task<object> CreateEventsAsync() =>
+            Task.FromResult<object>(new WsFederationEvents());
 
         /// <summary>
         /// Overridden to handle remote signout requests
@@ -58,10 +63,16 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         public override Task<bool> HandleRequestAsync()
         {
             // RemoteSignOutPath and CallbackPath may be the same, fall through if the message doesn't match.
-            if (Options.RemoteSignOutPath.HasValue && Options.RemoteSignOutPath == Request.Path && HttpMethods.IsGet(Request.Method)
-                && string.Equals(Request.Query[WsFederationConstants.WsFederationParameterNames.Wa],
-                    WsFederationConstants.WsFederationActions.SignOutCleanup, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                Options.RemoteSignOutPath.HasValue
+                && Options.RemoteSignOutPath == Request.Path
+                && HttpMethods.IsGet(Request.Method)
+                && string.Equals(
+                    Request.Query[WsFederationConstants.WsFederationParameterNames.Wa],
+                    WsFederationConstants.WsFederationActions.SignOutCleanup,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 // We've received a remote sign-out request
                 return HandleRemoteSignOutAsync();
             }
@@ -77,7 +88,9 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         {
             if (_configuration == null)
             {
-                _configuration = await Options.ConfigurationManager.GetConfigurationAsync(Context.RequestAborted);
+                _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
+                    Context.RequestAborted
+                );
             }
 
             // Save the original challenge URI so we can redirect back to it when we're done.
@@ -119,10 +132,13 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
 
             if (!string.IsNullOrEmpty(wsFederationMessage.Wctx))
             {
-                properties.Items[WsFederationDefaults.UserstatePropertiesKey] = wsFederationMessage.Wctx;
+                properties.Items[WsFederationDefaults.UserstatePropertiesKey] =
+                    wsFederationMessage.Wctx;
             }
 
-            wsFederationMessage.Wctx = Uri.EscapeDataString(Options.StateDataFormat.Protect(properties));
+            wsFederationMessage.Wctx = Uri.EscapeDataString(
+                Options.StateDataFormat.Protect(properties)
+            );
 
             var redirectUri = wsFederationMessage.CreateSignInUrl();
             if (!Uri.IsWellFormedUriString(redirectUri, UriKind.Absolute))
@@ -142,15 +158,21 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
             AuthenticationProperties? properties = null;
 
             // assumption: if the ContentType is "application/x-www-form-urlencoded" it should be safe to read as it is small.
-            if (HttpMethods.IsPost(Request.Method)
-              && !string.IsNullOrEmpty(Request.ContentType)
-              // May have media/type; charset=utf-8, allow partial match.
-              && Request.ContentType.StartsWith("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase)
-              && Request.Body.CanRead)
-            {
+            if (
+                HttpMethods.IsPost(Request.Method)
+                && !string.IsNullOrEmpty(Request.ContentType)
+                // May have media/type; charset=utf-8, allow partial match.
+                && Request.ContentType.StartsWith(
+                    "application/x-www-form-urlencoded",
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && Request.Body.CanRead
+            ) {
                 var form = await Request.ReadFormAsync(Context.RequestAborted);
 
-                wsFederationMessage = new WsFederationMessage(form.Select(pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value)));
+                wsFederationMessage = new WsFederationMessage(
+                    form.Select(pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value))
+                );
             }
 
             if (wsFederationMessage == null || !wsFederationMessage.IsSignInMessage)
@@ -181,12 +203,19 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                 else
                 {
                     // Extract the user state from properties and reset.
-                    properties.Items.TryGetValue(WsFederationDefaults.UserstatePropertiesKey, out var userState);
+                    properties.Items.TryGetValue(
+                        WsFederationDefaults.UserstatePropertiesKey,
+                        out var userState
+                    );
                     wsFederationMessage.Wctx = userState;
                 }
 
-                var messageReceivedContext = new MessageReceivedContext(Context, Scheme, Options, properties)
-                {
+                var messageReceivedContext = new MessageReceivedContext(
+                    Context,
+                    Scheme,
+                    Options,
+                    properties
+                ) {
                     ProtocolMessage = wsFederationMessage
                 };
                 await Events.MessageReceived(messageReceivedContext);
@@ -198,27 +227,38 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                 properties = messageReceivedContext.Properties!; // Provides a new instance if not set.
 
                 // If state did flow from the challenge then validate it. See AllowUnsolicitedLogins above.
-                if (properties.Items.TryGetValue(CorrelationProperty, out string? correlationId)
-                    && !ValidateCorrelationId(properties))
-                {
+                if (
+                    properties.Items.TryGetValue(CorrelationProperty, out string? correlationId)
+                    && !ValidateCorrelationId(properties)
+                ) {
                     return HandleRequestResult.Fail("Correlation failed.", properties);
                 }
 
                 if (wsFederationMessage.Wresult == null)
                 {
                     Logger.SignInWithoutWResult();
-                    return HandleRequestResult.Fail(Resources.SignInMessageWresultIsMissing, properties);
+                    return HandleRequestResult.Fail(
+                        Resources.SignInMessageWresultIsMissing,
+                        properties
+                    );
                 }
 
                 var token = wsFederationMessage.GetToken();
                 if (string.IsNullOrEmpty(token))
                 {
                     Logger.SignInWithoutToken();
-                    return HandleRequestResult.Fail(Resources.SignInMessageTokenIsMissing, properties);
+                    return HandleRequestResult.Fail(
+                        Resources.SignInMessageTokenIsMissing,
+                        properties
+                    );
                 }
 
-                var securityTokenReceivedContext = new SecurityTokenReceivedContext(Context, Scheme, Options, properties)
-                {
+                var securityTokenReceivedContext = new SecurityTokenReceivedContext(
+                    Context,
+                    Scheme,
+                    Options,
+                    properties
+                ) {
                     ProtocolMessage = wsFederationMessage
                 };
                 await Events.SecurityTokenReceived(securityTokenReceivedContext);
@@ -231,14 +271,22 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
 
                 if (_configuration == null)
                 {
-                    _configuration = await Options.ConfigurationManager.GetConfigurationAsync(Context.RequestAborted);
+                    _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
+                        Context.RequestAborted
+                    );
                 }
 
                 // Copy and augment to avoid cross request race conditions for updated configurations.
                 var tvp = Options.TokenValidationParameters.Clone();
                 var issuers = new[] { _configuration.Issuer };
-                tvp.ValidIssuers = (tvp.ValidIssuers == null ? issuers : tvp.ValidIssuers.Concat(issuers));
-                tvp.IssuerSigningKeys = (tvp.IssuerSigningKeys == null ? _configuration.SigningKeys : tvp.IssuerSigningKeys.Concat(_configuration.SigningKeys));
+                tvp.ValidIssuers = (
+                    tvp.ValidIssuers == null ? issuers : tvp.ValidIssuers.Concat(issuers)
+                );
+                tvp.IssuerSigningKeys = (
+                    tvp.IssuerSigningKeys == null
+                        ? _configuration.SigningKeys
+                        : tvp.IssuerSigningKeys.Concat(_configuration.SigningKeys)
+                );
 
                 ClaimsPrincipal? principal = null;
                 SecurityToken? parsedToken = null;
@@ -272,8 +320,13 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                     properties.AllowRefresh = false;
                 }
 
-                var securityTokenValidatedContext = new SecurityTokenValidatedContext(Context, Scheme, Options, principal, properties)
-                {
+                var securityTokenValidatedContext = new SecurityTokenValidatedContext(
+                    Context,
+                    Scheme,
+                    Options,
+                    principal,
+                    properties
+                ) {
                     ProtocolMessage = wsFederationMessage,
                     SecurityToken = parsedToken,
                 };
@@ -288,20 +341,27 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                 principal = securityTokenValidatedContext.Principal!;
                 properties = securityTokenValidatedContext.Properties;
 
-                return HandleRequestResult.Success(new AuthenticationTicket(principal, properties, Scheme.Name));
+                return HandleRequestResult.Success(
+                    new AuthenticationTicket(principal, properties, Scheme.Name)
+                );
             }
             catch (Exception exception)
             {
                 Logger.ExceptionProcessingMessage(exception);
 
                 // Refresh the configuration for exceptions that may be caused by key rollovers. The user can also request a refresh in the notification.
-                if (Options.RefreshOnIssuerKeyNotFound && exception is SecurityTokenSignatureKeyNotFoundException)
-                {
+                if (
+                    Options.RefreshOnIssuerKeyNotFound
+                    && exception is SecurityTokenSignatureKeyNotFoundException
+                ) {
                     Options.ConfigurationManager.RequestRefresh();
                 }
 
-                var authenticationFailedContext = new AuthenticationFailedContext(Context, Scheme, Options)
-                {
+                var authenticationFailedContext = new AuthenticationFailedContext(
+                    Context,
+                    Scheme,
+                    Options
+                ) {
                     ProtocolMessage = wsFederationMessage,
                     Exception = exception
                 };
@@ -330,7 +390,9 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
 
             if (_configuration == null)
             {
-                _configuration = await Options.ConfigurationManager.GetConfigurationAsync(Context.RequestAborted);
+                _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
+                    Context.RequestAborted
+                );
             }
 
             var wsFederationMessage = new WsFederationMessage()
@@ -380,7 +442,11 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// <returns></returns>
         protected virtual async Task<bool> HandleRemoteSignOutAsync()
         {
-            var message = new WsFederationMessage(Request.Query.Select(pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value)));
+            var message = new WsFederationMessage(
+                Request.Query.Select(
+                    pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value)
+                )
+            );
             var remoteSignOutContext = new RemoteSignOutContext(Context, Scheme, Options, message);
             await Events.RemoteSignOut(remoteSignOutContext);
 

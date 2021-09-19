@@ -9,7 +9,6 @@ struct S
     public String str;
 }
 
-
 class Test
 {
     public static void c(S s1)

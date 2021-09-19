@@ -74,7 +74,6 @@ namespace Microsoft.Data.Sqlite
                 [ForeignKeysKeyword] = Keywords.ForeignKeys,
                 [RecursiveTriggersKeyword] = Keywords.RecursiveTriggers,
                 [DefaultTimeoutKeyword] = Keywords.DefaultTimeout,
-
                 // aliases
                 [FilenameKeyword] = Keywords.DataSource,
                 [DataSourceNoSpaceKeyword] = Keywords.DataSource,
@@ -85,9 +84,7 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteConnectionStringBuilder" /> class.
         /// </summary>
-        public SqliteConnectionStringBuilder()
-        {
-        }
+        public SqliteConnectionStringBuilder() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteConnectionStringBuilder" /> class.
@@ -95,8 +92,8 @@ namespace Microsoft.Data.Sqlite
         /// <param name="connectionString">
         ///     The initial connection string the builder will represent. Can be null.
         /// </param>
-        public SqliteConnectionStringBuilder(string? connectionString)
-            => ConnectionString = connectionString;
+        public SqliteConnectionStringBuilder(string? connectionString) =>
+            ConnectionString = connectionString;
 
         /// <summary>
         ///     Gets or sets the database file.
@@ -123,8 +120,8 @@ namespace Microsoft.Data.Sqlite
         ///     Gets a collection containing the keys used by the connection string.
         /// </summary>
         /// <value>A collection containing the keys used by the connection string.</value>
-        public override ICollection Keys
-            => new ReadOnlyCollection<string>((string[])_validKeywords);
+        public override ICollection Keys =>
+            new ReadOnlyCollection<string>((string[])_validKeywords);
 
         /// <summary>
         ///     Gets a collection containing the values used by the connection string.
@@ -258,8 +255,7 @@ namespace Microsoft.Data.Sqlite
             }
         }
 
-        private static TEnum ConvertToEnum<TEnum>(object value)
-            where TEnum : struct
+        private static TEnum ConvertToEnum<TEnum>(object value) where TEnum : struct
         {
             if (value is string stringValue)
             {
@@ -273,7 +269,9 @@ namespace Microsoft.Data.Sqlite
             }
             else if (value.GetType().IsEnum)
             {
-                throw new ArgumentException(Resources.ConvertFailed(value.GetType(), typeof(TEnum)));
+                throw new ArgumentException(
+                    Resources.ConvertFailed(value.GetType(), typeof(TEnum))
+                );
             }
             else
             {
@@ -285,7 +283,8 @@ namespace Microsoft.Data.Sqlite
                 throw new ArgumentOutOfRangeException(
                     nameof(value),
                     value,
-                    Resources.InvalidEnumValue(typeof(TEnum), enumValue));
+                    Resources.InvalidEnumValue(typeof(TEnum), enumValue)
+                );
             }
 
             return enumValue;
@@ -293,8 +292,7 @@ namespace Microsoft.Data.Sqlite
 
         private static bool? ConvertToNullableBoolean(object value)
         {
-            if (value == null
-                || (value is string stringValue && stringValue.Length == 0))
+            if (value == null || (value is string stringValue && stringValue.Length == 0))
             {
                 return null;
             }
@@ -320,8 +318,7 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="keyword">The key to look for.</param>
         /// <returns> <see langword="true" /> if it is used; otherwise, <see langword="false" />. </returns>
-        public override bool ContainsKey(string keyword)
-            => _keywords.ContainsKey(keyword);
+        public override bool ContainsKey(string keyword) => _keywords.ContainsKey(keyword);
 
         /// <summary>
         ///     Removes the specified key and its value from the connection string.
@@ -330,9 +327,10 @@ namespace Microsoft.Data.Sqlite
         /// <returns> <see langword="true" /> if the key was used; otherwise, <see langword="false" />. </returns>
         public override bool Remove(string keyword)
         {
-            if (!_keywords.TryGetValue(keyword, out var index)
-                || !base.Remove(_validKeywords[(int)index]))
-            {
+            if (
+                !_keywords.TryGetValue(keyword, out var index)
+                || !base.Remove(_validKeywords[(int)index])
+            ) {
                 return false;
             }
 
@@ -346,8 +344,9 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="keyword">The key to check.</param>
         /// <returns><see langword="true" /> if it should be serialized; otherwise, <see langword="false" />. </returns>
-        public override bool ShouldSerialize(string keyword)
-            => _keywords.TryGetValue(keyword, out var index) && base.ShouldSerialize(_validKeywords[(int)index]);
+        public override bool ShouldSerialize(string keyword) =>
+            _keywords.TryGetValue(keyword, out var index)
+            && base.ShouldSerialize(_validKeywords[(int)index]);
 
         /// <summary>
         ///     Gets the value of the specified key if it is used.
@@ -402,8 +401,8 @@ namespace Microsoft.Data.Sqlite
             }
         }
 
-        private static Keywords GetIndex(string keyword)
-            => !_keywords.TryGetValue(keyword, out var index)
+        private static Keywords GetIndex(string keyword) =>
+            !_keywords.TryGetValue(keyword, out var index)
                 ? throw new ArgumentException(Resources.KeywordNotSupported(keyword))
                 : index;
 

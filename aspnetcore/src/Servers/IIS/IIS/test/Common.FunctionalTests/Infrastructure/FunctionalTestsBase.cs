@@ -16,38 +16,41 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
     {
         private const string DebugEnvironmentVariable = "ASPNETCORE_MODULE_DEBUG";
 
-        public FunctionalTestsBase(ITestOutputHelper output = null) : base(output)
-        {
-        }
+        public FunctionalTestsBase(ITestOutputHelper output = null) : base(output) { }
 
         protected IISDeployerBase _deployer;
 
         protected ApplicationDeployer CreateDeployer(IISDeploymentParameters parameters)
         {
-            if (parameters.ServerType == ServerType.IISExpress &&
-                !parameters.EnvironmentVariables.ContainsKey(DebugEnvironmentVariable))
-            {
+            if (
+                parameters.ServerType == ServerType.IISExpress
+                && !parameters.EnvironmentVariables.ContainsKey(DebugEnvironmentVariable)
+            ) {
                 parameters.EnvironmentVariables[DebugEnvironmentVariable] = "console";
             }
 
             return IISApplicationDeployerFactory.Create(parameters, LoggerFactory);
         }
 
-        protected virtual async Task<IISDeploymentResult> DeployAsync(IISDeploymentParameters parameters)
-        {
+        protected virtual async Task<IISDeploymentResult> DeployAsync(
+            IISDeploymentParameters parameters
+        ) {
             _deployer = (IISDeployerBase)CreateDeployer(parameters);
             return (IISDeploymentResult)await _deployer.DeployAsync();
         }
 
-        protected virtual async Task<IISDeploymentResult> StartAsync(IISDeploymentParameters parameters)
-        {
+        protected virtual async Task<IISDeploymentResult> StartAsync(
+            IISDeploymentParameters parameters
+        ) {
             var result = await DeployAsync(parameters);
             await result.AssertStarts();
             return result;
         }
 
-        protected virtual async Task<string> GetStringAsync(IISDeploymentParameters parameters, string path)
-        {
+        protected virtual async Task<string> GetStringAsync(
+            IISDeploymentParameters parameters,
+            string path
+        ) {
             var result = await DeployAsync(parameters);
             return await result.HttpClient.GetStringAsync(path);
         }

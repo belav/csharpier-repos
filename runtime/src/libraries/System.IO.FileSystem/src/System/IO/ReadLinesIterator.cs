@@ -82,6 +82,7 @@ namespace System.IO
                     }
                 }
             }
+
             finally
             {
                 _reader = null!;
@@ -94,9 +95,16 @@ namespace System.IO
             return CreateIterator(path, encoding, (StreamReader?)null);
         }
 
-        private static ReadLinesIterator CreateIterator(string path, Encoding encoding, StreamReader? reader)
-        {
-            return new ReadLinesIterator(path, encoding, reader ?? new StreamReader(path, encoding));
+        private static ReadLinesIterator CreateIterator(
+            string path,
+            Encoding encoding,
+            StreamReader? reader
+        ) {
+            return new ReadLinesIterator(
+                path,
+                encoding,
+                reader ?? new StreamReader(path, encoding)
+            );
         }
     }
 }

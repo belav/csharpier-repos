@@ -9,8 +9,7 @@ namespace System.Xml.Tests
         private Uri _baseUri;
         private string _relativeUri;
 
-        internal CalledResolveUriEventArgs(Uri baseUri, string relativeUri)
-            : base()
+        internal CalledResolveUriEventArgs(Uri baseUri, string relativeUri) : base()
         {
             _baseUri = baseUri;
             _relativeUri = relativeUri;
@@ -39,8 +38,11 @@ namespace System.Xml.Tests
         private string _role;
         private Type _ofObjectToReturn;
 
-        internal CalledGetEntityEventArgs(Uri absoluteUri, string role, Type ofObjectToReturn)
-            : base()
+        internal CalledGetEntityEventArgs(
+            Uri absoluteUri,
+            string role,
+            Type ofObjectToReturn
+        ) : base()
         {
             _absoluteUri = absoluteUri;
             _role = role;
@@ -80,14 +82,12 @@ namespace System.Xml.Tests
         // -----------------
         // Constructors
         // -----------------
-        public CXmlTestResolver()
-            : base()
+        public CXmlTestResolver() : base()
         {
             _resolver = new XmlUrlResolver();
         }
 
-        public CXmlTestResolver(string securityUri)
-            : base()
+        public CXmlTestResolver(string securityUri) : base()
         {
             _resolver = new XmlSecureResolver(new XmlUrlResolver(), securityUri);
         }
@@ -116,7 +116,10 @@ namespace System.Xml.Tests
         public override object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
         {
             // Fire the CalledGetEntity event
-            CalledGetEntity(this, new CalledGetEntityEventArgs(absoluteUri, role, ofObjectToReturn));
+            CalledGetEntity(
+                this,
+                new CalledGetEntityEventArgs(absoluteUri, role, ofObjectToReturn)
+            );
 
             return _resolver.GetEntity(absoluteUri, role, ofObjectToReturn);
         }

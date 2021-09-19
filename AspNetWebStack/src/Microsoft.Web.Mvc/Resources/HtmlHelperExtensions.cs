@@ -16,8 +16,11 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="controllerName"></param>
         /// <param name="routeValues"></param>
         /// <returns></returns>
-        public static MvcForm BeginResourceForm(this HtmlHelper html, string controllerName, object routeValues)
-        {
+        public static MvcForm BeginResourceForm(
+            this HtmlHelper html,
+            string controllerName,
+            object routeValues
+        ) {
             return html.BeginResourceForm(controllerName, routeValues, ActionType.Retrieve);
         }
 
@@ -29,8 +32,12 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="routeValues"></param>
         /// <param name="actionType"></param>
         /// <returns></returns>
-        public static MvcForm BeginResourceForm(this HtmlHelper html, string controllerName, object routeValues, ActionType actionType)
-        {
+        public static MvcForm BeginResourceForm(
+            this HtmlHelper html,
+            string controllerName,
+            object routeValues,
+            ActionType actionType
+        ) {
             return html.BeginResourceForm(controllerName, routeValues, null, actionType);
         }
 
@@ -43,22 +50,49 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="htmlAttributes"></param>
         /// <param name="actionType"></param>
         /// <returns></returns>
-        public static MvcForm BeginResourceForm(this HtmlHelper html, string controllerName, object routeValues, object htmlAttributes, ActionType actionType)
-        {
+        public static MvcForm BeginResourceForm(
+            this HtmlHelper html,
+            string controllerName,
+            object routeValues,
+            object htmlAttributes,
+            ActionType actionType
+        ) {
             switch (actionType)
             {
                 case ActionType.GetUpdateForm:
-                    return html.BeginRouteForm(controllerName + "-editForm", routeValues, FormMethod.Post, htmlAttributes);
+                    return html.BeginRouteForm(
+                        controllerName + "-editForm",
+                        routeValues,
+                        FormMethod.Post,
+                        htmlAttributes
+                    );
                 case ActionType.GetCreateForm:
-                    return html.BeginRouteForm(controllerName + "-createForm", FormMethod.Post, htmlAttributes);
+                    return html.BeginRouteForm(
+                        controllerName + "-createForm",
+                        FormMethod.Post,
+                        htmlAttributes
+                    );
                 case ActionType.Retrieve:
                 case ActionType.Delete:
                 case ActionType.Update:
-                    return html.BeginRouteForm(controllerName, routeValues, FormMethod.Post, htmlAttributes);
+                    return html.BeginRouteForm(
+                        controllerName,
+                        routeValues,
+                        FormMethod.Post,
+                        htmlAttributes
+                    );
                 case ActionType.Create:
-                    return html.BeginRouteForm(controllerName + "-create", FormMethod.Post, htmlAttributes);
+                    return html.BeginRouteForm(
+                        controllerName + "-create",
+                        FormMethod.Post,
+                        htmlAttributes
+                    );
                 case ActionType.Index:
-                    return html.BeginRouteForm(controllerName + "-index", FormMethod.Post, htmlAttributes);
+                    return html.BeginRouteForm(
+                        controllerName + "-index",
+                        FormMethod.Post,
+                        htmlAttributes
+                    );
                 default:
                     throw new ArgumentOutOfRangeException("actionType");
             }
@@ -71,9 +105,17 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="controllerName"></param>
         /// <param name="routeValues"></param>
         /// <returns></returns>
-        public static MvcHtmlString ResourceLink(this HtmlHelper html, string controllerName, object routeValues)
-        {
-            return html.ResourceLink(controllerName, controllerName, routeValues, ActionType.Retrieve);
+        public static MvcHtmlString ResourceLink(
+            this HtmlHelper html,
+            string controllerName,
+            object routeValues
+        ) {
+            return html.ResourceLink(
+                controllerName,
+                controllerName,
+                routeValues,
+                ActionType.Retrieve
+            );
         }
 
         /// <summary>
@@ -84,8 +126,12 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="linkText"></param>
         /// <param name="routeValues"></param>
         /// <returns></returns>
-        public static MvcHtmlString ResourceLink(this HtmlHelper html, string controllerName, string linkText, object routeValues)
-        {
+        public static MvcHtmlString ResourceLink(
+            this HtmlHelper html,
+            string controllerName,
+            string linkText,
+            object routeValues
+        ) {
             return html.ResourceLink(controllerName, linkText, routeValues, ActionType.Retrieve);
         }
 
@@ -98,8 +144,13 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="routeValues"></param>
         /// <param name="actionType"></param>
         /// <returns></returns>
-        public static MvcHtmlString ResourceLink(this HtmlHelper html, string controllerName, string linkText, object routeValues, ActionType actionType)
-        {
+        public static MvcHtmlString ResourceLink(
+            this HtmlHelper html,
+            string controllerName,
+            string linkText,
+            object routeValues,
+            ActionType actionType
+        ) {
             switch (actionType)
             {
                 case ActionType.GetUpdateForm:

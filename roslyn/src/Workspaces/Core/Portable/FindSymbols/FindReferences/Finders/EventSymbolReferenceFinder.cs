@@ -9,32 +9,43 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal class EventSymbolReferenceFinder : AbstractMethodOrPropertyOrEventSymbolReferenceFinder<IEventSymbol>
+    internal class EventSymbolReferenceFinder
+        : AbstractMethodOrPropertyOrEventSymbolReferenceFinder<IEventSymbol>
     {
-        protected override bool CanFind(IEventSymbol symbol)
-            => true;
+        protected override bool CanFind(IEventSymbol symbol) => true;
 
-        protected override async Task<ImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>> DetermineCascadedSymbolsAsync(
+        protected override async Task<
+            ImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>
+        > DetermineCascadedSymbolsAsync(
             IEventSymbol symbol,
             Solution solution,
             IImmutableSet<Project>? projects,
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             var baseSymbols = await base.DetermineCascadedSymbolsAsync(
-                symbol, solution, projects, options, cascadeDirection, cancellationToken).ConfigureAwait(false);
+                    symbol,
+                    solution,
+                    projects,
+                    options,
+                    cascadeDirection,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var backingFields = symbol.ContainingType.GetMembers()
-                                                     .OfType<IFieldSymbol>()
-                                                     .Where(f => symbol.Equals(f.AssociatedSymbol))
-                                                     .ToImmutableArray();
+                .OfType<IFieldSymbol>()
+                .Where(f => symbol.Equals(f.AssociatedSymbol))
+                .ToImmutableArray();
 
             var associatedNamedTypes = symbol.ContainingType.GetTypeMembers()
-                                                            .WhereAsArray(n => symbol.Equals(n.AssociatedSymbol));
+                .WhereAsArray(n => symbol.Equals(n.AssociatedSymbol));
 
-            return baseSymbols.Concat(backingFields.SelectAsArray(f => ((ISymbol)f, cascadeDirection)))
-                              .Concat(associatedNamedTypes.SelectAsArray(n => ((ISymbol)n, cascadeDirection)));
+            return baseSymbols.Concat(
+                    backingFields.SelectAsArray(f => ((ISymbol)f, cascadeDirection))
+                )
+                .Concat(associatedNamedTypes.SelectAsArray(n => ((ISymbol)n, cascadeDirection)));
         }
 
         protected override Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
@@ -42,9 +53,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
-        {
-            return FindDocumentsAsync(project, documents, findInGlobalSuppressions: true, cancellationToken, symbol.Name);
+            CancellationToken cancellationToken
+        ) {
+            return FindDocumentsAsync(
+                project,
+                documents,
+                findInGlobalSuppressions: true,
+                cancellationToken,
+                symbol.Name
+            );
         }
 
         protected override ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
@@ -52,9 +69,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
-        {
-            return FindReferencesInDocumentUsingSymbolNameAsync(symbol, document, semanticModel, cancellationToken);
+            CancellationToken cancellationToken
+        ) {
+            return FindReferencesInDocumentUsingSymbolNameAsync(
+                symbol,
+                document,
+                semanticModel,
+                cancellationToken
+            );
         }
     }
 }

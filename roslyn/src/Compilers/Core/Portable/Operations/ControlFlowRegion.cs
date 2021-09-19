@@ -60,14 +60,17 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// </summary>
         public ImmutableArray<CaptureId> CaptureIds { get; }
 
-        internal ControlFlowRegion(ControlFlowRegionKind kind, int firstBlockOrdinal, int lastBlockOrdinal,
-                        ImmutableArray<ControlFlowRegion> nestedRegions,
-                        ImmutableArray<ILocalSymbol> locals,
-                        ImmutableArray<IMethodSymbol> methods,
-                        ImmutableArray<CaptureId> captureIds,
-                        ITypeSymbol? exceptionType,
-                        ControlFlowRegion? enclosingRegion)
-        {
+        internal ControlFlowRegion(
+            ControlFlowRegionKind kind,
+            int firstBlockOrdinal,
+            int lastBlockOrdinal,
+            ImmutableArray<ControlFlowRegion> nestedRegions,
+            ImmutableArray<ILocalSymbol> locals,
+            ImmutableArray<IMethodSymbol> methods,
+            ImmutableArray<CaptureId> captureIds,
+            ITypeSymbol? exceptionType,
+            ControlFlowRegion? enclosingRegion
+        ) {
             Debug.Assert(firstBlockOrdinal >= 0);
             Debug.Assert(lastBlockOrdinal >= firstBlockOrdinal);
 
@@ -94,11 +97,27 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 case ControlFlowRegionKind.TryAndFinally:
                 case ControlFlowRegionKind.FilterAndHandler:
                     Debug.Assert(NestedRegions.Length == 2);
-                    Debug.Assert(NestedRegions[0].Kind == (kind == ControlFlowRegionKind.TryAndFinally ? ControlFlowRegionKind.Try : ControlFlowRegionKind.Filter));
-                    Debug.Assert(NestedRegions[1].Kind == (kind == ControlFlowRegionKind.TryAndFinally ? ControlFlowRegionKind.Finally : ControlFlowRegionKind.Catch));
+                    Debug.Assert(
+                        NestedRegions[0].Kind
+                            == (
+                                kind == ControlFlowRegionKind.TryAndFinally
+                                    ? ControlFlowRegionKind.Try
+                                    : ControlFlowRegionKind.Filter
+                            )
+                    );
+                    Debug.Assert(
+                        NestedRegions[1].Kind
+                            == (
+                                kind == ControlFlowRegionKind.TryAndFinally
+                                    ? ControlFlowRegionKind.Finally
+                                    : ControlFlowRegionKind.Catch
+                            )
+                    );
                     Debug.Assert(NestedRegions[0].FirstBlockOrdinal == firstBlockOrdinal);
                     Debug.Assert(NestedRegions[1].LastBlockOrdinal == lastBlockOrdinal);
-                    Debug.Assert(NestedRegions[0].LastBlockOrdinal + 1 == NestedRegions[1].FirstBlockOrdinal);
+                    Debug.Assert(
+                        NestedRegions[0].LastBlockOrdinal + 1 == NestedRegions[1].FirstBlockOrdinal
+                    );
                     break;
 
                 case ControlFlowRegionKind.TryAndCatch:
@@ -113,7 +132,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         Debug.Assert(previousLast + 1 == r.FirstBlockOrdinal);
                         previousLast = r.LastBlockOrdinal;
 
-                        Debug.Assert(r.Kind == ControlFlowRegionKind.FilterAndHandler || r.Kind == ControlFlowRegionKind.Catch);
+                        Debug.Assert(
+                            r.Kind == ControlFlowRegionKind.FilterAndHandler
+                                || r.Kind == ControlFlowRegionKind.Catch
+                        );
                     }
 
                     Debug.Assert(previousLast == lastBlockOrdinal);
@@ -146,7 +168,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
         internal bool ContainsBlock(int destinationOrdinal)
         {
-            return FirstBlockOrdinal <= destinationOrdinal && LastBlockOrdinal >= destinationOrdinal;
+            return FirstBlockOrdinal <= destinationOrdinal
+                && LastBlockOrdinal >= destinationOrdinal;
         }
     }
 }

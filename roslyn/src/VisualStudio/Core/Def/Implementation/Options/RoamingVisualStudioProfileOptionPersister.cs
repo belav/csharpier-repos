@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
     /// <summary>
     /// Serializes settings marked with <see cref="RoamingProfileStorageLocation"/> to and from the user's roaming profile.
     /// </summary>
-    internal sealed class RoamingVisualStudioProfileOptionPersister : ForegroundThreadAffinitizedObject, IOptionPersister
+    internal sealed class RoamingVisualStudioProfileOptionPersister
+        : ForegroundThreadAffinitizedObject,
+          IOptionPersister
     {
         // NOTE: This service is not public or intended for use by teams/individuals outside of Microsoft. Any data stored is subject to deletion without warning.
         [Guid("9B164E40-C3A2-4363-9BC5-EB4039DEF653")]
@@ -43,8 +45,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         /// <remarks>
         /// We make sure this code is from the UI by asking for all <see cref="IOptionPersister"/> in <see cref="RoslynPackage.InitializeAsync"/>
         /// </remarks>
-        public RoamingVisualStudioProfileOptionPersister(IThreadingContext threadingContext, IGlobalOptionService globalOptionService, ISettingsManager? settingsManager)
-            : base(threadingContext, assertIsForeground: true)
+        public RoamingVisualStudioProfileOptionPersister(
+            IThreadingContext threadingContext,
+            IGlobalOptionService globalOptionService,
+            ISettingsManager? settingsManager
+        ) : base(threadingContext, assertIsForeground: true)
         {
             Contract.ThrowIfNull(globalOptionService);
 
@@ -61,14 +66,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        private System.Threading.Tasks.Task OnSettingChangedAsync(object sender, PropertyChangedEventArgs args)
-        {
+        private System.Threading.Tasks.Task OnSettingChangedAsync(
+            object sender,
+            PropertyChangedEventArgs args
+        ) {
             List<OptionKey>? optionsToRefresh = null;
 
             lock (_optionsToMonitorForChangesGate)
             {
-                if (_optionsToMonitorForChanges.TryGetValue(args.PropertyName, out var optionsToRefreshInsideLock))
-                {
+                if (
+                    _optionsToMonitorForChanges.TryGetValue(
+                        args.PropertyName,
+                        out var optionsToRefreshInsideLock
+                    )
+                ) {
                     // Make a copy of the list so we aren't using something that might mutate underneath us.
                     optionsToRefresh = optionsToRefreshInsideLock.ToList();
                 }
@@ -93,8 +104,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             return System.Threading.Tasks.Task.CompletedTask;
         }
 
-        private object? GetFirstOrDefaultValue(OptionKey optionKey, IEnumerable<RoamingProfileStorageLocation> roamingSerializations)
-        {
+        private object? GetFirstOrDefaultValue(
+            OptionKey optionKey,
+            IEnumerable<RoamingProfileStorageLocation> roamingSerializations
+        ) {
             Contract.ThrowIfNull(_settingManager);
 
             // There can be more than 1 roaming location in the order of their priority.
@@ -111,8 +124,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
                 RecordObservedValueToWatchForChanges(optionKey, storageKey);
 
-                if (_settingManager.TryGetValue(storageKey, out object value) == GetValueResult.Success)
-                {
+                if (
+                    _settingManager.TryGetValue(storageKey, out object value)
+                    == GetValueResult.Success
+                ) {
                     return value;
                 }
             }
@@ -130,7 +145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
 
             // Do we roam this at all?
-            var roamingSerializations = optionKey.Option.StorageLocations.OfType<RoamingProfileStorageLocation>();
+            var roamingSerializations =
+                optionKey.Option.StorageLocations.OfType<RoamingProfileStorageLocation>();
 
             if (!roamingSerializations.Any())
             {
@@ -141,7 +157,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             value = GetFirstOrDefaultValue(optionKey, roamingSerializations);
 
             // VS's ISettingsManager has some quirks around storing enums.  Specifically,
-            // it *can* persist and retrieve enums, but only if you properly call 
+            // it *can* persist and retrieve enums, but only if you properly call
             // GetValueOrDefault<EnumType>.  This is because it actually stores enums just
             // as ints and depends on the type parameter passed in to convert the integral
             // value back to an enum value.  Unfortunately, we call GetValueOrDefault<object>
@@ -167,7 +183,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 {
                     try
                     {
-                        value = NamingStylePreferences.FromXElement(XElement.Parse(serializedValue));
+                        value = NamingStylePreferences.FromXElement(
+                            XElement.Parse(serializedValue)
+                        );
                     }
                     catch (Exception)
                     {
@@ -215,14 +233,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             {
                 try
                 {
-                    var fromXElement = type.GetMethod(nameof(CodeStyleOption<object>.FromXElement), BindingFlags.Public | BindingFlags.Static);
+                    var fromXElement = type.GetMethod(
+                        nameof(CodeStyleOption<object>.FromXElement),
+                        BindingFlags.Public | BindingFlags.Static
+                    );
 
-                    value = fromXElement.Invoke(null, new object[] { XElement.Parse(serializedValue) });
+                    value = fromXElement.Invoke(
+                        null,
+                        new object[] { XElement.Parse(serializedValue) }
+                    );
                     return true;
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
 
             value = null;
@@ -234,7 +256,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             // We're about to fetch the value, so make sure that if it changes we'll know about it
             lock (_optionsToMonitorForChangesGate)
             {
-                var optionKeysToMonitor = _optionsToMonitorForChanges.GetOrAdd(storageKey, _ => new List<OptionKey>());
+                var optionKeysToMonitor = _optionsToMonitorForChanges.GetOrAdd(
+                    storageKey,
+                    _ => new List<OptionKey>()
+                );
 
                 if (!optionKeysToMonitor.Contains(optionKey))
                 {
@@ -252,7 +277,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
 
             // Do we roam this at all?
-            var roamingSerialization = optionKey.Option.StorageLocations.OfType<RoamingProfileStorageLocation>().FirstOrDefault();
+            var roamingSerialization =
+                optionKey.Option.StorageLocations.OfType<RoamingProfileStorageLocation>()
+                    .FirstOrDefault();
 
             if (roamingSerialization == null)
             {

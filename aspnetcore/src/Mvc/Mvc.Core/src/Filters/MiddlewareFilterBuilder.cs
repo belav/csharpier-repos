@@ -17,8 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         // 'GetOrAdd' call on the dictionary is not thread safe and we might end up creating the pipeline more than
         // once. To prevent this Lazy<> is used. In the worst case multiple Lazy<> objects are created for multiple
         // threads but only one of the objects succeeds in creating a pipeline.
-        private readonly ConcurrentDictionary<Type, Lazy<RequestDelegate>> _pipelinesCache
-            = new ConcurrentDictionary<Type, Lazy<RequestDelegate>>();
+        private readonly ConcurrentDictionary<Type, Lazy<RequestDelegate>> _pipelinesCache =
+            new ConcurrentDictionary<Type, Lazy<RequestDelegate>>();
         private readonly MiddlewareFilterConfigurationProvider _configurationProvider;
 
         public IApplicationBuilder? ApplicationBuilder { get; set; }
@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
             var requestDelegate = _pipelinesCache.GetOrAdd(
                 configurationType,
-                key => new Lazy<RequestDelegate>(() => BuildPipeline(key)));
+                key => new Lazy<RequestDelegate>(() => BuildPipeline(key))
+            );
 
             return requestDelegate.Value;
         }
@@ -44,13 +45,18 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             if (ApplicationBuilder == null)
             {
                 throw new InvalidOperationException(
-                    Resources.FormatMiddlewareFilterBuilder_NullApplicationBuilder(nameof(ApplicationBuilder)));
+                    Resources.FormatMiddlewareFilterBuilder_NullApplicationBuilder(
+                        nameof(ApplicationBuilder)
+                    )
+                );
             }
 
             var nestedAppBuilder = ApplicationBuilder.New();
 
             // Get the 'Configure' method from the user provided type.
-            var configureDelegate = _configurationProvider.CreateConfigureDelegate(middlewarePipelineProviderType);
+            var configureDelegate = _configurationProvider.CreateConfigureDelegate(
+                middlewarePipelineProviderType
+            );
             configureDelegate(nestedAppBuilder);
 
             // The middleware resource filter, after receiving the request executes the user configured middleware
@@ -59,35 +65,40 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             // this flow.
             // Example:
             // middleware filter -> user-middleware1 -> user-middleware2 -> end-middleware -> resource filters or model binding
-            nestedAppBuilder.Run(async (httpContext) =>
-            {
-                var feature = httpContext.Features.Get<IMiddlewareFilterFeature>();
-                if (feature == null)
+            nestedAppBuilder.Run(
+                async (httpContext) =>
                 {
-                    throw new InvalidOperationException(
-                        Resources.FormatMiddlewareFilterBuilder_NoMiddlewareFeature(nameof(IMiddlewareFilterFeature)));
-                }
+                    var feature = httpContext.Features.Get<IMiddlewareFilterFeature>();
+                    if (feature == null)
+                    {
+                        throw new InvalidOperationException(
+                            Resources.FormatMiddlewareFilterBuilder_NoMiddlewareFeature(
+                                nameof(IMiddlewareFilterFeature)
+                            )
+                        );
+                    }
 
-                var resourceExecutionDelegate = feature.ResourceExecutionDelegate!;
+                    var resourceExecutionDelegate = feature.ResourceExecutionDelegate!;
 
-                var resourceExecutedContext = await resourceExecutionDelegate();
-                if (resourceExecutedContext.ExceptionHandled)
-                {
-                    return;
-                }
+                    var resourceExecutedContext = await resourceExecutionDelegate();
+                    if (resourceExecutedContext.ExceptionHandled)
+                    {
+                        return;
+                    }
 
-                // Ideally we want the experience of a middleware pipeline to behave the same as if it was registered
-                // in Startup. In this scenario, an Exception thrown in a middleware later in the pipeline gets
-                // propagated back to earlier middleware. So, check if a later resource filter threw an Exception and
-                // propagate that back to the middleware pipeline.
-                resourceExecutedContext.ExceptionDispatchInfo?.Throw();
-                if (resourceExecutedContext.Exception != null)
-                {
-                    // This line is rarely reachable because ResourceInvoker captures thrown Exceptions using
-                    // ExceptionDispatchInfo. That said, filters could set only resourceExecutedContext.Exception.
-                    throw resourceExecutedContext.Exception;
+                    // Ideally we want the experience of a middleware pipeline to behave the same as if it was registered
+                    // in Startup. In this scenario, an Exception thrown in a middleware later in the pipeline gets
+                    // propagated back to earlier middleware. So, check if a later resource filter threw an Exception and
+                    // propagate that back to the middleware pipeline.
+                    resourceExecutedContext.ExceptionDispatchInfo?.Throw();
+                    if (resourceExecutedContext.Exception != null)
+                    {
+                        // This line is rarely reachable because ResourceInvoker captures thrown Exceptions using
+                        // ExceptionDispatchInfo. That said, filters could set only resourceExecutedContext.Exception.
+                        throw resourceExecutedContext.Exception;
+                    }
                 }
-            });
+            );
 
             return nestedAppBuilder.Build();
         }

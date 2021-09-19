@@ -112,8 +112,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void Constructor_OpenFlags()
         {
-            using (X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser, OpenFlags.ReadOnly))
-            {
+            using (
+                X509Store store = new X509Store(
+                    StoreName.My,
+                    StoreLocation.CurrentUser,
+                    OpenFlags.ReadOnly
+                )
+            ) {
                 Assert.True(store.IsOpen);
             }
         }
@@ -121,8 +126,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void Constructor_OpenFlags_StoreName()
         {
-            using (X509Store store = new X509Store("My", StoreLocation.CurrentUser, OpenFlags.ReadOnly))
-            {
+            using (
+                X509Store store = new X509Store("My", StoreLocation.CurrentUser, OpenFlags.ReadOnly)
+            ) {
                 Assert.True(store.IsOpen);
             }
         }
@@ -130,8 +136,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void Constructor_OpenFlags_OpenAnyway()
         {
-            using (X509Store store = new X509Store("My", StoreLocation.CurrentUser, OpenFlags.ReadOnly))
-            {
+            using (
+                X509Store store = new X509Store("My", StoreLocation.CurrentUser, OpenFlags.ReadOnly)
+            ) {
                 store.Open(OpenFlags.ReadOnly);
                 Assert.True(store.IsOpen);
             }
@@ -140,8 +147,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void Constructor_OpenFlags_NonExistingStoreName_Throws()
         {
-            Assert.ThrowsAny<CryptographicException>(() =>
-                new X509Store(new Guid().ToString("D"), StoreLocation.CurrentUser, OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly)
+            Assert.ThrowsAny<CryptographicException>(
+                () =>
+                    new X509Store(
+                        new Guid().ToString("D"),
+                        StoreLocation.CurrentUser,
+                        OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly
+                    )
             );
         }
 #endif
@@ -181,9 +193,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void OpenNotExistent()
         {
-            using (X509Store store = new X509Store(Guid.NewGuid().ToString("N"), StoreLocation.CurrentUser))
-            {
-                Assert.ThrowsAny<CryptographicException>(() => store.Open(OpenFlags.OpenExistingOnly));
+            using (
+                X509Store store = new X509Store(
+                    Guid.NewGuid().ToString("N"),
+                    StoreLocation.CurrentUser
+                )
+            ) {
+                Assert.ThrowsAny<CryptographicException>(
+                    () => store.Open(OpenFlags.OpenExistingOnly)
+                );
             }
         }
 
@@ -397,7 +415,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (X509Store store = new X509Store(StoreName.My, StoreLocation.LocalMachine))
             {
-                Exception e = Assert.Throws<CryptographicException>(() => store.Open(OpenFlags.ReadOnly));
+                Exception e = Assert.Throws<CryptographicException>(
+                    () => store.Open(OpenFlags.ReadOnly)
+                );
                 Assert.NotNull(e.InnerException);
                 Assert.IsType<PlatformNotSupportedException>(e.InnerException);
             }
@@ -414,7 +434,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 if (shouldThrow)
                 {
-                    Exception e = Assert.Throws<CryptographicException>(() => store.Open(permissions));
+                    Exception e = Assert.Throws<CryptographicException>(
+                        () => store.Open(permissions)
+                    );
                     Assert.NotNull(e.InnerException);
                     Assert.IsType<PlatformNotSupportedException>(e.InnerException);
                 }
@@ -562,16 +584,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             var psi = new ProcessStartInfo();
             psi.Environment.Add("SSL_CERT_DIR", sslCertDir);
             psi.Environment.Add("SSL_CERT_FILE", "/nonexisting");
-            RemoteExecutor.Invoke(() =>
-            {
-                using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
-                {
-                    store.Open(OpenFlags.OpenExistingOnly);
+            RemoteExecutor.Invoke(
+                    () =>
+                    {
+                        using (
+                            var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine)
+                        ) {
+                            store.Open(OpenFlags.OpenExistingOnly);
 
-                    // Check nr of certificates in store.
-                    Assert.Equal(2, store.Certificates.Count);
-                }
-            }, new RemoteInvokeOptions { StartInfo = psi }).Dispose();
+                            // Check nr of certificates in store.
+                            Assert.Equal(2, store.Certificates.Count);
+                        }
+                    },
+                    new RemoteInvokeOptions { StartInfo = psi }
+                )
+                .Dispose();
         }
 
         [DllImport("libc")]
@@ -579,7 +606,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [DllImport("libc")]
         private static extern uint geteuid();
 
-        public static bool NotRunningAsRootAndRemoteExecutorSupported => geteuid() != 0 && RemoteExecutor.IsSupported;
+        public static bool NotRunningAsRootAndRemoteExecutorSupported =>
+            geteuid() != 0 && RemoteExecutor.IsSupported;
 #endif
     }
 }

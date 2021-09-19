@@ -56,7 +56,8 @@ namespace System.Xml.Linq
         /// </summary>
         public override string ToString()
         {
-            if (_ns.NamespaceName.Length == 0) return _localName;
+            if (_ns.NamespaceName.Length == 0)
+                return _localName;
             return "{" + _ns.NamespaceName + "}" + _localName;
         }
 
@@ -71,13 +72,21 @@ namespace System.Xml.Linq
         /// </returns>
         public static XName Get(string expandedName)
         {
-            if (expandedName == null) throw new ArgumentNullException(nameof(expandedName));
-            if (expandedName.Length == 0) throw new ArgumentException(SR.Format(SR.Argument_InvalidExpandedName, expandedName));
+            if (expandedName == null)
+                throw new ArgumentNullException(nameof(expandedName));
+            if (expandedName.Length == 0)
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_InvalidExpandedName, expandedName)
+                );
             if (expandedName[0] == '{')
             {
                 int i = expandedName.LastIndexOf('}');
-                if (i <= 1 || i == expandedName.Length - 1) throw new ArgumentException(SR.Format(SR.Argument_InvalidExpandedName, expandedName));
-                return XNamespace.Get(expandedName, 1, i - 1).GetName(expandedName, i + 1, expandedName.Length - i - 1);
+                if (i <= 1 || i == expandedName.Length - 1)
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_InvalidExpandedName, expandedName)
+                    );
+                return XNamespace.Get(expandedName, 1, i - 1)
+                    .GetName(expandedName, i + 1, expandedName.Length - i - 1);
             }
             else
             {

@@ -19,7 +19,13 @@ internal static partial class Interop
             NI_DGRAM = 0x10, /* Service is a datagram service */
         }
 
-        [DllImport(Interop.Libraries.Ws2_32, CharSet = CharSet.Unicode, BestFitMapping = false, ThrowOnUnmappableChar = true, SetLastError = true)]
+        [DllImport(
+            Interop.Libraries.Ws2_32,
+            CharSet = CharSet.Unicode,
+            BestFitMapping = false,
+            ThrowOnUnmappableChar = true,
+            SetLastError = true
+        )]
         internal static extern unsafe SocketError GetNameInfoW(
             byte* pSockaddr,
             int SockaddrLength,
@@ -27,6 +33,7 @@ internal static partial class Interop
             int NodeBufferSize,
             char* pServiceBuffer,
             int ServiceBufferSize,
-            int Flags);
+            int Flags
+        );
     }
 }

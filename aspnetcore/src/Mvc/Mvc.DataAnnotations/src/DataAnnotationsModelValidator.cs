@@ -29,8 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public DataAnnotationsModelValidator(
             IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
             ValidationAttribute attribute,
-            IStringLocalizer? stringLocalizer)
-        {
+            IStringLocalizer? stringLocalizer
+        ) {
             if (validationAttributeAdapterProvider == null)
             {
                 throw new ArgumentNullException(nameof(validationAttributeAdapterProvider));
@@ -67,16 +67,20 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 throw new ArgumentException(
                     Resources.FormatPropertyOfTypeCannotBeNull(
                         nameof(validationContext.ModelMetadata),
-                        typeof(ModelValidationContext)),
-                    nameof(validationContext));
+                        typeof(ModelValidationContext)
+                    ),
+                    nameof(validationContext)
+                );
             }
             if (validationContext.MetadataProvider == null)
             {
                 throw new ArgumentException(
                     Resources.FormatPropertyOfTypeCannotBeNull(
                         nameof(validationContext.MetadataProvider),
-                        typeof(ModelValidationContext)),
-                    nameof(validationContext));
+                        typeof(ModelValidationContext)
+                    ),
+                    nameof(validationContext)
+                );
             }
 
             var metadata = validationContext.ModelMetadata;
@@ -86,8 +90,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var context = new ValidationContext(
                 instance: container ?? validationContext.Model ?? _emptyValidationContextInstance,
                 serviceProvider: validationContext.ActionContext?.HttpContext?.RequestServices,
-                items: null)
-            {
+                items: null
+            ) {
                 DisplayName = metadata.GetDisplayName(),
                 MemberName = memberName
             };
@@ -96,11 +100,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             if (result is not null)
             {
                 string? errorMessage;
-                if (_stringLocalizer != null &&
-                    !string.IsNullOrEmpty(Attribute.ErrorMessage) &&
-                    string.IsNullOrEmpty(Attribute.ErrorMessageResourceName) &&
-                    Attribute.ErrorMessageResourceType == null)
-                {
+                if (
+                    _stringLocalizer != null
+                    && !string.IsNullOrEmpty(Attribute.ErrorMessage)
+                    && string.IsNullOrEmpty(Attribute.ErrorMessageResourceName)
+                    && Attribute.ErrorMessageResourceType == null
+                ) {
                     errorMessage = GetErrorMessage(validationContext) ?? result.ErrorMessage;
                 }
                 else
@@ -120,10 +125,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         // MemberName (we don't want "person.Name.Name"). However the invoking validator does not have
                         // a way to distinguish between these two cases. Consequently we'll only set MemberName if this
                         // validation returns a MemberName that is different from the property being validated.
-                        var newMemberName = string.Equals(resultMemberName, memberName, StringComparison.Ordinal) ?
-                            null :
-                            resultMemberName;
-                        var validationResult = new ModelValidationResult(newMemberName, errorMessage);
+                        var newMemberName = string.Equals(
+                            resultMemberName,
+                            memberName,
+                            StringComparison.Ordinal
+                        )
+                            ? null
+                            : resultMemberName;
+                        var validationResult = new ModelValidationResult(
+                            newMemberName,
+                            errorMessage
+                        );
 
                         validationResults.Add(validationResult);
                     }
@@ -132,7 +144,9 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 if (validationResults.Count == 0)
                 {
                     // result.MemberNames was null or empty.
-                    validationResults.Add(new ModelValidationResult(memberName: null, message: errorMessage));
+                    validationResults.Add(
+                        new ModelValidationResult(memberName: null, message: errorMessage)
+                    );
                 }
 
                 return validationResults;
@@ -143,7 +157,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
         private string? GetErrorMessage(ModelValidationContextBase validationContext)
         {
-            var adapter = _validationAttributeAdapterProvider.GetAttributeAdapter(Attribute, _stringLocalizer);
+            var adapter = _validationAttributeAdapterProvider.GetAttributeAdapter(
+                Attribute,
+                _stringLocalizer
+            );
             return adapter?.GetErrorMessage(validationContext);
         }
     }

@@ -41,7 +41,7 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var items = new ItemCollection();
-            
+
             items["foo"] = "bar";
 
             // Act

@@ -69,7 +69,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
                 Log(CSharpEditorResources.Found_single_assembly_0, assemblies[0]);
                 if (assemblies[0].Identity.Version != name.Version)
                 {
-                    Log(CSharpEditorResources.WARN_Version_mismatch_Expected_0_Got_1, name.Version, assemblies[0].Identity.Version);
+                    Log(
+                        CSharpEditorResources.WARN_Version_mismatch_Expected_0_Got_1,
+                        name.Version,
+                        assemblies[0].Identity.Version
+                    );
                 }
                 return MakePEFile(assemblies[0]);
             }
@@ -132,7 +136,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
             return new PEFile(moduleFileName, PEStreamOptions.PrefetchMetadata);
         }
 
-        private void Log(string format, params object[] args)
-            => _logger.AppendFormat(format + Environment.NewLine, args);
+        private void Log(string format, params object[] args) =>
+            _logger.AppendFormat(format + Environment.NewLine, args);
     }
 }

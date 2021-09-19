@@ -18,9 +18,13 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         // due to the fact that is not part of .NET Standard. This value is only used with non-windows
         // platforms (all .NET Core) for which the value is defined on the underlying platform.
         private const X509KeyStorageFlags UnsafeEphemeralKeySet = (X509KeyStorageFlags)32;
-        private static readonly X509KeyStorageFlags DefaultFlags = OperatingSystem.IsLinux() ?
-            UnsafeEphemeralKeySet : (OperatingSystem.IsMacOS() ? X509KeyStorageFlags.PersistKeySet :
-            X509KeyStorageFlags.DefaultKeySet);
+        private static readonly X509KeyStorageFlags DefaultFlags = OperatingSystem.IsLinux()
+            ? UnsafeEphemeralKeySet
+            : (
+                  OperatingSystem.IsMacOS()
+                      ? X509KeyStorageFlags.PersistKeySet
+                      : X509KeyStorageFlags.DefaultKeySet
+              );
 
         [ConditionalFact]
         [FrameworkSkipCondition(RuntimeFrameworks.CLR)]
@@ -30,14 +34,15 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             try
             {
                 // Arrange
-                var configuration = new ConfigurationBuilder()
-                    .AddInMemoryCollection(new Dictionary<string, string>()
-                    {
-                    }).Build();
+                var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+                        new Dictionary<string, string>() {  }
+                    )
+                    .Build();
 
                 var configureSigningCredentials = new ConfigureSigningCredentials(
                     configuration,
-                    new TestLogger<ConfigureSigningCredentials>());
+                    new TestLogger<ConfigureSigningCredentials>()
+                );
 
                 var options = new ApiAuthorizationOptions();
 
@@ -49,6 +54,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 Assert.False(File.Exists(expectedKeyPath));
                 Assert.Null(options.SigningCredential);
             }
+
             finally
             {
                 if (File.Exists(expectedKeyPath))
@@ -66,16 +72,19 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             try
             {
                 // Arrange
-                var configuration = new ConfigurationBuilder()
-                    .AddInMemoryCollection(new Dictionary<string, string>()
-                    {
-                        ["Type"] = "Development",
-                        ["FilePath"] = "testkey.json"
-                    }).Build();
+                var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+                        new Dictionary<string, string>()
+                        {
+                            ["Type"] = "Development",
+                            ["FilePath"] = "testkey.json"
+                        }
+                    )
+                    .Build();
 
                 var configureSigningCredentials = new ConfigureSigningCredentials(
                     configuration,
-                    new TestLogger<ConfigureSigningCredentials>());
+                    new TestLogger<ConfigureSigningCredentials>()
+                );
 
                 var options = new ApiAuthorizationOptions();
 
@@ -89,6 +98,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 Assert.Equal("Development", options.SigningCredential.Kid);
                 Assert.IsType<RsaSecurityKey>(options.SigningCredential.Key);
             }
+
             finally
             {
                 if (File.Exists(expectedKeyPath))
@@ -103,17 +113,20 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public void Configure_LoadsPfxCertificateCredentialFromConfiguration()
         {
             // Arrange
-            var configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string>()
-                {
-                    ["Type"] = "File",
-                    ["FilePath"] = "test.pfx",
-                    ["Password"] = "aspnetcore"
-                }).Build();
+            var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+                    new Dictionary<string, string>()
+                    {
+                        ["Type"] = "File",
+                        ["FilePath"] = "test.pfx",
+                        ["Password"] = "aspnetcore"
+                    }
+                )
+                .Build();
 
             var configureSigningCredentials = new ConfigureSigningCredentials(
                 configuration,
-                new TestLogger<ConfigureSigningCredentials>());
+                new TestLogger<ConfigureSigningCredentials>()
+            );
 
             var options = new ApiAuthorizationOptions();
 
@@ -138,18 +151,21 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 var x509Certificate = new X509Certificate2("test.pfx", "aspnetcore", DefaultFlags);
                 SetupTestCertificate(x509Certificate);
 
-                var configuration = new ConfigurationBuilder()
-                    .AddInMemoryCollection(new Dictionary<string, string>()
-                    {
-                        ["Type"] = "Store",
-                        ["StoreLocation"] = "CurrentUser",
-                        ["StoreName"] = "My",
-                        ["Name"] = "CN=Test"
-                    }).Build();
+                var configuration = new ConfigurationBuilder().AddInMemoryCollection(
+                        new Dictionary<string, string>()
+                        {
+                            ["Type"] = "Store",
+                            ["StoreLocation"] = "CurrentUser",
+                            ["StoreName"] = "My",
+                            ["Name"] = "CN=Test"
+                        }
+                    )
+                    .Build();
 
                 var configureSigningCredentials = new ConfigureSigningCredentials(
                     configuration,
-                    new TestLogger<ConfigureSigningCredentials>());
+                    new TestLogger<ConfigureSigningCredentials>()
+                );
 
                 var options = new ApiAuthorizationOptions();
 
@@ -161,8 +177,12 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 Assert.NotNull(options.SigningCredential);
                 var key = Assert.IsType<X509SecurityKey>(options.SigningCredential.Key);
                 Assert.NotNull(key.Certificate);
-                Assert.Equal("AC8FDF4BD4C10841BD24DC88D983225D10B43BB2", key.Certificate.Thumbprint);
+                Assert.Equal(
+                    "AC8FDF4BD4C10841BD24DC88D983225D10B43BB2",
+                    key.Certificate.Thumbprint
+                );
             }
+
             finally
             {
                 CleanupTestCertificate();
@@ -174,9 +194,11 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
             {
                 store.Open(OpenFlags.ReadWrite);
-                var certificates = store
-                    .Certificates
-                    .Find(X509FindType.FindByThumbprint, "1646CFBEE354788D7116DF86EFC35C0075A9C05D", validOnly: false);
+                var certificates = store.Certificates.Find(
+                    X509FindType.FindByThumbprint,
+                    "1646CFBEE354788D7116DF86EFC35C0075A9C05D",
+                    validOnly: false
+                );
 
                 foreach (var certificate in certificates)
                 {
@@ -196,9 +218,11 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
             {
                 store.Open(OpenFlags.ReadWrite);
-                var certificates = store
-                    .Certificates
-                    .Find(X509FindType.FindByThumbprint, "AC8FDF4BD4C10841BD24DC88D983225D10B43BB2", validOnly: false);
+                var certificates = store.Certificates.Find(
+                    X509FindType.FindByThumbprint,
+                    "AC8FDF4BD4C10841BD24DC88D983225D10B43BB2",
+                    validOnly: false
+                );
                 if (certificates.Count == 0)
                 {
                     store.Add(x509Certificate);

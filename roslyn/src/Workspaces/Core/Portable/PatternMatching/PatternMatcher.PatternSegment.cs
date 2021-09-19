@@ -18,12 +18,12 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// </summary>
         private struct PatternSegment : IDisposable
         {
-            // Information about the entire piece of text between the dots.  For example, if the 
-            // text between the dots is 'Get-Keyword', then TotalTextChunk.Text will be 'Get-Keyword' and 
+            // Information about the entire piece of text between the dots.  For example, if the
+            // text between the dots is 'Get-Keyword', then TotalTextChunk.Text will be 'Get-Keyword' and
             // TotalTextChunk.CharacterSpans will correspond to 'G', 'et', 'K' and 'eyword'.
             public readonly TextChunk TotalTextChunk;
 
-            // Information about the subwords compromising the total word.  For example, if the 
+            // Information about the subwords compromising the total word.  For example, if the
             // text between the dots is 'Get-Keyword', then the subwords will be 'Get' and 'Keyword'
             // Those individual words will have CharacterSpans of ('G' and 'et') and ('K' and 'eyword')
             // respectively.
@@ -75,8 +75,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 return count;
             }
 
-            private static TextChunk[] BreakPatternIntoSubWords(string pattern, bool allowFuzzyMatching)
-            {
+            private static TextChunk[] BreakPatternIntoSubWords(
+                string pattern,
+                bool allowFuzzyMatching
+            ) {
                 var partCount = CountTextChunks(pattern);
 
                 if (partCount == 0)
@@ -103,7 +105,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                     {
                         if (wordLength > 0)
                         {
-                            result[resultIndex++] = new TextChunk(pattern.Substring(wordStart, wordLength), allowFuzzyMatching);
+                            result[resultIndex++] = new TextChunk(
+                                pattern.Substring(wordStart, wordLength),
+                                allowFuzzyMatching
+                            );
                             wordLength = 0;
                         }
                     }
@@ -111,7 +116,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
 
                 if (wordLength > 0)
                 {
-                    result[resultIndex++] = new TextChunk(pattern.Substring(wordStart, wordLength), allowFuzzyMatching);
+                    result[resultIndex++] = new TextChunk(
+                        pattern.Substring(wordStart, wordLength),
+                        allowFuzzyMatching
+                    );
                 }
 
                 return result;

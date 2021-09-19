@@ -52,36 +52,10 @@ struct S
     {
         str = s;
         str2 = s + str;
-        pad.d1 =
-        pad.d2 =
-        pad.d3 =
-        pad.d4 =
-        pad.d5 =
-        pad.d6 =
-        pad.d7 =
-        pad.d8 =
-        pad.d9 =
-        pad.d10 =
-        pad.d11 =
-        pad.d12 =
-        pad.d13 =
-        pad.d14 =
-        pad.d15 =
-        pad.d16 =
-        pad.d17 =
-        pad.d18 =
-        pad.d19 =
-        pad.d20 =
-        pad.d21 =
-        pad.d22 =
-        pad.d23 =
-        pad.d24 =
-        pad.d25 =
-        pad.d26 =
-        pad.d27 =
-        pad.d28 =
-        pad.d29 =
-        pad.d30 = 3.3;
+        pad.d1 = pad.d2 = pad.d3 = pad.d4 = pad.d5 = pad.d6 = pad.d7 = pad.d8 = pad.d9 = pad.d10 =
+            pad.d11 = pad.d12 = pad.d13 = pad.d14 = pad.d15 = pad.d16 = pad.d17 = pad.d18 =
+                pad.d19 = pad.d20 = pad.d21 = pad.d22 = pad.d23 = pad.d24 = pad.d25 = pad.d26 =
+                    pad.d27 = pad.d28 = pad.d29 = pad.d30 = 3.3;
     }
 }
 
@@ -95,6 +69,7 @@ class Test
         {
             Console.WriteLine("t:");
         }
+
         finally
         {
             Console.WriteLine(s1.str + s2.str + s3.str + s4.str);

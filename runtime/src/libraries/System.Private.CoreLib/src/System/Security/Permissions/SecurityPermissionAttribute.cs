@@ -3,7 +3,11 @@
 
 namespace System.Security.Permissions
 {
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class SecurityPermissionAttribute : CodeAccessSecurityAttribute
     {
@@ -23,6 +27,9 @@ namespace System.Security.Permissions
         public bool SerializationFormatter { get; set; }
         public bool SkipVerification { get; set; }
         public bool UnmanagedCode { get; set; }
-        public override IPermission? CreatePermission() { return null; }
+        public override IPermission? CreatePermission()
+        {
+            return null;
+        }
     }
 }

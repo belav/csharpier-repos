@@ -47,7 +47,8 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
         public static void RegressionTestsTest554()
         {
             var xml = "dummy.xml";
-            var testExpression = @"translate('1.2.3.4.5.6.7.8.9.', '112233445566778899', 'axaxaxaxaxaxaxaxax')";
+            var testExpression =
+                @"translate('1.2.3.4.5.6.7.8.9.', '112233445566778899', 'axaxaxaxaxaxaxaxax')";
             var expected = @"a.a.a.a.a.a.a.a.a.";
 
             Utils.XPathStringTest(xml, testExpression, expected);
@@ -87,7 +88,8 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
         {
             var xml = "t98598.xml";
             var testExpression = @"//namespace::*";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Namespace,
@@ -112,7 +114,12 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
                     HasNameTable = true,
                     Value = "f1"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Namespace, HasNameTable = true, Value = "f0" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Namespace,
+                    HasNameTable = true,
+                    Value = "f0"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Namespace,
@@ -137,7 +144,12 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
                     HasNameTable = true,
                     Value = "b1"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Namespace, HasNameTable = true, Value = "b0" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Namespace,
+                    HasNameTable = true,
+                    Value = "b0"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Namespace,
@@ -145,7 +157,8 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
                     Name = "xml",
                     HasNameTable = true,
                     Value = "http://www.w3.org/XML/1998/namespace"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -200,7 +213,8 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
         {
             var xml = "books.xml";
             var testExpression = @"//book[starts-with(@stype,'')]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -264,7 +278,8 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
                 },
                 new XPathResultToken
                 {
@@ -276,7 +291,8 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
                     HasNameTable = true,
                     Value =
                         "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -345,7 +361,8 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
         public static void RegressionTestsTest5516()
         {
             var xml = "t114730.xml";
-            var testExpression = @"/child::MyComputer/descendant::UIntData/descendant::Value//@value";
+            var testExpression =
+                @"/child::MyComputer/descendant::UIntData/descendant::Value//@value";
             var expected = new XPathResult(0);
             ;
 

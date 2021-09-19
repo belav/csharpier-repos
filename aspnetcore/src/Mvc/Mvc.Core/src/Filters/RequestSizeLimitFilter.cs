@@ -42,11 +42,16 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var effectivePolicy = context.FindEffectivePolicy<IRequestSizePolicy>();
             if (effectivePolicy != null && effectivePolicy != this)
             {
-                _logger.NotMostEffectiveFilter(GetType(), effectivePolicy.GetType(), typeof(IRequestSizePolicy));
+                _logger.NotMostEffectiveFilter(
+                    GetType(),
+                    effectivePolicy.GetType(),
+                    typeof(IRequestSizePolicy)
+                );
                 return;
             }
 
-            var maxRequestBodySizeFeature = context.HttpContext.Features.Get<IHttpMaxRequestBodySizeFeature>();
+            var maxRequestBodySizeFeature =
+                context.HttpContext.Features.Get<IHttpMaxRequestBodySizeFeature>();
 
             if (maxRequestBodySizeFeature == null)
             {

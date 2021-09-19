@@ -15,14 +15,16 @@ namespace Microsoft.CodeAnalysis.Editor
 
         internal WrappedNavigationBarItem(RoslynNavigationBarItem underlyingItem)
             : base(
-                  underlyingItem.Text,
-                  underlyingItem.Glyph,
-                  underlyingItem.Spans,
-                  underlyingItem.ChildItems.SelectAsArray(v => (NavigationBarItem)new WrappedNavigationBarItem(v)),
-                  underlyingItem.Indent,
-                  underlyingItem.Bolded,
-                  underlyingItem.Grayed)
-        {
+                underlyingItem.Text,
+                underlyingItem.Glyph,
+                underlyingItem.Spans,
+                underlyingItem.ChildItems.SelectAsArray(
+                    v => (NavigationBarItem)new WrappedNavigationBarItem(v)
+                ),
+                underlyingItem.Indent,
+                underlyingItem.Bolded,
+                underlyingItem.Grayed
+            ) {
             UnderlyingItem = underlyingItem;
         }
     }

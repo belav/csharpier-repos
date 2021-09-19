@@ -19,7 +19,10 @@ namespace Microsoft.Extensions.SecretManager.Tools
             DebugHelper.HandleDebugSwitch(ref args);
 
             int rc;
-            new Program(PhysicalConsole.Singleton, Directory.GetCurrentDirectory()).TryRun(args, out rc);
+            new Program(PhysicalConsole.Singleton, Directory.GetCurrentDirectory()).TryRun(
+                args,
+                out rc
+            );
             return rc;
         }
 
@@ -82,7 +85,8 @@ namespace Microsoft.Extensions.SecretManager.Tools
             {
                 userSecretsId = ResolveId(options, reporter);
             }
-            catch (Exception ex) when (ex is InvalidOperationException || ex is FileNotFoundException)
+            catch (Exception ex)
+                when (ex is InvalidOperationException || ex is FileNotFoundException)
             {
                 reporter.Error(ex.Message);
                 return 1;
@@ -94,8 +98,8 @@ namespace Microsoft.Extensions.SecretManager.Tools
             return 0;
         }
 
-        private IReporter CreateReporter(bool verbose)
-            => new ConsoleReporter(_console, verbose, quiet: false);
+        private IReporter CreateReporter(bool verbose) =>
+            new ConsoleReporter(_console, verbose, quiet: false);
 
         internal string ResolveId(CommandLineOptions options, IReporter reporter)
         {

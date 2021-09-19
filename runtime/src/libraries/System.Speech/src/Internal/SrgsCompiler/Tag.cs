@@ -6,7 +6,9 @@ using System.Diagnostics;
 namespace System.Speech.Internal.SrgsCompiler
 {
 #if DEBUG
-    [DebuggerDisplay("{_be.Symbols.FromOffset (_cfgTag._nameOffset == 0 ? _cfgTag._valueOffset : _cfgTag._nameOffset)}")]
+    [DebuggerDisplay(
+        "{_be.Symbols.FromOffset (_cfgTag._nameOffset == 0 ? _cfgTag._valueOffset : _cfgTag._nameOffset)}"
+    )]
 #endif
     internal sealed class Tag : IComparable<Tag>
     {
@@ -55,7 +57,6 @@ namespace System.Speech.Internal.SrgsCompiler
         internal CfgSemanticTag _cfgTag;
 
         internal Backend _be;
-
         #endregion
     }
 }

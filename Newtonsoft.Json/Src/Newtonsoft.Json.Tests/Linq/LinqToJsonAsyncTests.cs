@@ -49,18 +49,20 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task CommentsAndReadFromAsync()
         {
-            StringReader textReader = new StringReader(@"[
+            StringReader textReader = new StringReader(
+                @"[
     // hi
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JArray a = (JArray)await JToken.ReadFromAsync(jsonReader, new JsonLoadSettings
-            {
-                CommentHandling = CommentHandling.Load
-            });
+            JArray a = (JArray)await JToken.ReadFromAsync(
+                jsonReader,
+                new JsonLoadSettings { CommentHandling = CommentHandling.Load }
+            );
 
             Assert.AreEqual(4, a.Count);
             Assert.AreEqual(JTokenType.Comment, a[0].Type);
@@ -70,12 +72,14 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task CommentsAndReadFrom_IgnoreCommentsAsync()
         {
-            StringReader textReader = new StringReader(@"[
+            StringReader textReader = new StringReader(
+                @"[
     // hi
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JArray a = (JArray)await JToken.ReadFromAsync(jsonReader);
@@ -88,19 +92,21 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task StartingCommentAndReadFromAsync()
         {
-            StringReader textReader = new StringReader(@"
+            StringReader textReader = new StringReader(
+                @"
 // hi
 [
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JValue v = (JValue)await JToken.ReadFromAsync(jsonReader, new JsonLoadSettings
-            {
-                CommentHandling = CommentHandling.Load
-            });
+            JValue v = (JValue)await JToken.ReadFromAsync(
+                jsonReader,
+                new JsonLoadSettings { CommentHandling = CommentHandling.Load }
+            );
 
             Assert.AreEqual(JTokenType.Comment, v.Type);
 
@@ -113,19 +119,21 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task StartingCommentAndReadFrom_IgnoreCommentsAsync()
         {
-            StringReader textReader = new StringReader(@"
+            StringReader textReader = new StringReader(
+                @"
 // hi
 [
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
-            JArray a = (JArray)await JToken.ReadFromAsync(jsonReader, new JsonLoadSettings
-            {
-                CommentHandling = CommentHandling.Ignore
-            });
+            JArray a = (JArray)await JToken.ReadFromAsync(
+                jsonReader,
+                new JsonLoadSettings { CommentHandling = CommentHandling.Ignore }
+            );
 
             Assert.AreEqual(JTokenType.Array, a.Type);
 
@@ -138,13 +146,15 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task StartingUndefinedAndReadFromAsync()
         {
-            StringReader textReader = new StringReader(@"
+            StringReader textReader = new StringReader(
+                @"
 undefined
 [
     1,
     2,
     3
-]");
+]"
+            );
 
             JsonTextReader jsonReader = new JsonTextReader(textReader);
             JValue v = (JValue)await JToken.ReadFromAsync(jsonReader);
@@ -166,7 +176,10 @@ undefined
             await jsonReader.ReadAsync();
             await jsonReader.ReadAsync();
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await JToken.ReadFromAsync(jsonReader), @"Error reading JToken from JsonReader. Unexpected token: EndArray. Path '', line 1, position 2.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await JToken.ReadFromAsync(jsonReader),
+                @"Error reading JToken from JsonReader. Unexpected token: EndArray. Path '', line 1, position 2."
+            );
         }
     }
 }

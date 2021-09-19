@@ -28,13 +28,16 @@ namespace System.Xml
                 return _reader.DtdParserProxy_ReadDataAsync();
             }
 
-            Task<int> IDtdParserAdapter.ParseNumericCharRefAsync(StringBuilder? internalSubsetBuilder)
-            {
+            Task<int> IDtdParserAdapter.ParseNumericCharRefAsync(
+                StringBuilder? internalSubsetBuilder
+            ) {
                 return _reader.DtdParserProxy_ParseNumericCharRefAsync(internalSubsetBuilder);
             }
 
-            Task<int> IDtdParserAdapter.ParseNamedCharRefAsync(bool expand, StringBuilder? internalSubsetBuilder)
-            {
+            Task<int> IDtdParserAdapter.ParseNamedCharRefAsync(
+                bool expand,
+                StringBuilder? internalSubsetBuilder
+            ) {
                 return _reader.DtdParserProxy_ParseNamedCharRefAsync(expand, internalSubsetBuilder);
             }
 

@@ -22,22 +22,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        ) : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         internal AbstractCodeMember(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        ) : base(state, fileCodeModel, nodeKind, name) { }
 
-        protected SyntaxNode GetContainingTypeNode()
-            => LookupNode().Ancestors().Where(CodeModelService.IsType).FirstOrDefault();
+        protected SyntaxNode GetContainingTypeNode() =>
+            LookupNode().Ancestors().Where(CodeModelService.IsType).FirstOrDefault();
 
         public override object Parent
         {
@@ -60,19 +56,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = LookupNode();
                 return CodeModelService.GetAccess(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateAccess, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateAccess, value); }
         }
 
         public EnvDTE.CodeElements Attributes
         {
-            get
-            {
-                return AttributeCollection.Create(this.State, this);
-            }
+            get { return AttributeCollection.Create(this.State, this); }
         }
 
         public string Comment
@@ -82,11 +71,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = CodeModelService.GetNodeWithModifiers(LookupNode());
                 return CodeModelService.GetComment(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateComment, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateComment, value); }
         }
 
         public string DocComment
@@ -96,11 +81,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = CodeModelService.GetNodeWithModifiers(LookupNode());
                 return CodeModelService.GetDocComment(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateDocComment, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateDocComment, value); }
         }
 
         public bool IsGeneric
@@ -119,11 +100,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = CodeModelService.GetNodeWithModifiers(LookupNode());
                 return CodeModelService.GetIsShared(node, LookupSymbol());
             }
-
-            set
-            {
-                UpdateNodeAndReacquireNodeKey(FileCodeModel.UpdateIsShared, value);
-            }
+            set { UpdateNodeAndReacquireNodeKey(FileCodeModel.UpdateIsShared, value); }
         }
 
         public bool MustImplement
@@ -133,11 +110,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = CodeModelService.GetNodeWithModifiers(LookupNode());
                 return CodeModelService.GetMustImplement(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateMustImplement, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateMustImplement, value); }
         }
 
         public EnvDTE80.vsCMOverrideKind OverrideKind
@@ -147,15 +120,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var node = CodeModelService.GetNodeWithModifiers(LookupNode());
                 return CodeModelService.GetOverrideKind(node);
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateOverrideKind, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateOverrideKind, value); }
         }
 
-        internal virtual ImmutableArray<SyntaxNode> GetParameters()
-            => throw Exceptions.ThrowEFail();
+        internal virtual ImmutableArray<SyntaxNode> GetParameters() =>
+            throw Exceptions.ThrowEFail();
 
         public EnvDTE.CodeElements Parameters
         {
@@ -164,54 +133,67 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public EnvDTE.CodeParameter AddParameter(string name, object type, object position)
         {
-            return FileCodeModel.EnsureEditor(() =>
-            {
-                // The parameters are part of the node key, so we need to update it
-                // after adding a parameter.
-                var node = LookupNode();
-                var nodePath = new SyntaxPath(node);
+            return FileCodeModel.EnsureEditor(
+                () =>
+                {
+                    // The parameters are part of the node key, so we need to update it
+                    // after adding a parameter.
+                    var node = LookupNode();
+                    var nodePath = new SyntaxPath(node);
 
-                var parameter = FileCodeModel.AddParameter(this, node, name, type, position);
+                    var parameter = FileCodeModel.AddParameter(this, node, name, type, position);
 
-                ReacquireNodeKey(nodePath, CancellationToken.None);
+                    ReacquireNodeKey(nodePath, CancellationToken.None);
 
-                return parameter;
-            });
+                    return parameter;
+                }
+            );
         }
 
         public void RemoveParameter(object element)
         {
-            FileCodeModel.EnsureEditor(() =>
-            {
-                // The parameters are part of the node key, so we need to update it
-                // after removing a parameter.
-                var node = LookupNode();
-                var nodePath = new SyntaxPath(node);
-
-                var codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(element);
-
-                if (codeElement == null)
+            FileCodeModel.EnsureEditor(
+                () =>
                 {
-                    codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(this.Parameters.Item(element));
+                    // The parameters are part of the node key, so we need to update it
+                    // after removing a parameter.
+                    var node = LookupNode();
+                    var nodePath = new SyntaxPath(node);
+
+                    var codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
+                        element
+                    );
+
+                    if (codeElement == null)
+                    {
+                        codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
+                            this.Parameters.Item(element)
+                        );
+                    }
+
+                    if (codeElement == null)
+                    {
+                        throw new ArgumentException(
+                            ServicesVSResources.Element_is_not_valid,
+                            nameof(element)
+                        );
+                    }
+
+                    codeElement.Delete();
+
+                    ReacquireNodeKey(nodePath, CancellationToken.None);
                 }
-
-                if (codeElement == null)
-                {
-                    throw new ArgumentException(ServicesVSResources.Element_is_not_valid, nameof(element));
-                }
-
-                codeElement.Delete();
-
-                ReacquireNodeKey(nodePath, CancellationToken.None);
-            });
+            );
         }
 
         public EnvDTE.CodeAttribute AddAttribute(string name, string value, object position)
         {
-            return FileCodeModel.EnsureEditor(() =>
-            {
-                return FileCodeModel.AddAttribute(LookupNode(), name, value, position);
-            });
+            return FileCodeModel.EnsureEditor(
+                () =>
+                {
+                    return FileCodeModel.AddAttribute(LookupNode(), name, value, position);
+                }
+            );
         }
     }
 }

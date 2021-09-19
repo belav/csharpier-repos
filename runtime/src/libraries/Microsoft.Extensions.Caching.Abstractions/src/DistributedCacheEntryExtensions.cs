@@ -14,8 +14,8 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// <param name="relative">The expiration time, relative to now.</param>
         public static DistributedCacheEntryOptions SetAbsoluteExpiration(
             this DistributedCacheEntryOptions options,
-            TimeSpan relative)
-        {
+            TimeSpan relative
+        ) {
             options.AbsoluteExpirationRelativeToNow = relative;
             return options;
         }
@@ -27,8 +27,8 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// <param name="absolute">The expiration time, in absolute terms.</param>
         public static DistributedCacheEntryOptions SetAbsoluteExpiration(
             this DistributedCacheEntryOptions options,
-            DateTimeOffset absolute)
-        {
+            DateTimeOffset absolute
+        ) {
             options.AbsoluteExpiration = absolute;
             return options;
         }
@@ -41,8 +41,8 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// <param name="offset">The sliding expiration time.</param>
         public static DistributedCacheEntryOptions SetSlidingExpiration(
             this DistributedCacheEntryOptions options,
-            TimeSpan offset)
-        {
+            TimeSpan offset
+        ) {
             options.SlidingExpiration = offset;
             return options;
         }

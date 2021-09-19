@@ -17,9 +17,7 @@ namespace Microsoft.Extensions.Localization
         /// <param name="stringLocalizer">The <see cref="IStringLocalizer"/>.</param>
         /// <param name="name">The name of the string resource.</param>
         /// <returns>The string resource as a <see cref="LocalizedString"/>.</returns>
-        public static LocalizedString GetString(
-            this IStringLocalizer stringLocalizer,
-            string name)
+        public static LocalizedString GetString(this IStringLocalizer stringLocalizer, string name)
         {
             if (stringLocalizer == null)
             {
@@ -44,8 +42,8 @@ namespace Microsoft.Extensions.Localization
         public static LocalizedString GetString(
             this IStringLocalizer stringLocalizer,
             string name,
-            params object[] arguments)
-        {
+            params object[] arguments
+        ) {
             if (stringLocalizer == null)
             {
                 throw new ArgumentNullException(nameof(stringLocalizer));
@@ -64,8 +62,9 @@ namespace Microsoft.Extensions.Localization
         /// </summary>
         /// <param name="stringLocalizer">The <see cref="IStringLocalizer"/>.</param>
         /// <returns>The string resources.</returns>
-        public static IEnumerable<LocalizedString> GetAllStrings(this IStringLocalizer stringLocalizer)
-        {
+        public static IEnumerable<LocalizedString> GetAllStrings(
+            this IStringLocalizer stringLocalizer
+        ) {
             if (stringLocalizer == null)
             {
                 throw new ArgumentNullException(nameof(stringLocalizer));

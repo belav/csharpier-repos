@@ -9,7 +9,8 @@ namespace Templates.Test.Helpers
     {
         public ProcessResult(ProcessEx process)
         {
-            Process = process.Process.StartInfo.FileName + " " + process.Process.StartInfo.Arguments;
+            Process =
+                process.Process.StartInfo.FileName + " " + process.Process.StartInfo.Arguments;
             ExitCode = process.ExitCode;
             Output = process.Output;
             Error = process.Error;

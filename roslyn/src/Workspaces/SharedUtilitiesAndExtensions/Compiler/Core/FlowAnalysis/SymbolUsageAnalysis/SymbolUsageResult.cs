@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
     {
         public SymbolUsageResult(
             ImmutableDictionary<(ISymbol symbol, IOperation write), bool> symbolWritesMap,
-            ImmutableHashSet<ISymbol> symbolsRead)
-        {
+            ImmutableHashSet<ISymbol> symbolsRead
+        ) {
             SymbolWritesMap = symbolWritesMap;
             SymbolsRead = symbolsRead;
         }
@@ -37,22 +37,24 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
         ///        Value = 'true', because value assigned to 'x' here **may be** read on
         ///        some control flow path.
         /// </summary>
-        public ImmutableDictionary<(ISymbol symbol, IOperation write), bool> SymbolWritesMap { get; }
+        public ImmutableDictionary<
+            (ISymbol symbol, IOperation write),
+            bool
+        > SymbolWritesMap { get; }
 
         /// <summary>
         /// Set of locals/parameters that are read at least once.
         /// </summary>
         public ImmutableHashSet<ISymbol> SymbolsRead { get; }
 
-        public bool HasUnreadSymbolWrites()
-            => SymbolWritesMap.Values.Any(value => !value);
+        public bool HasUnreadSymbolWrites() => SymbolWritesMap.Values.Any(value => !value);
 
         /// <summary>
         /// Gets symbol writes that have are never read.
         /// WriteOperation will be null for the initial value write to parameter symbols from the callsite.
         /// </summary>
-        public IEnumerable<(ISymbol Symbol, IOperation WriteOperation)> GetUnreadSymbolWrites()
-            => SymbolWritesMap.Where(kvp => !kvp.Value).Select(kvp => kvp.Key);
+        public IEnumerable<(ISymbol Symbol, IOperation WriteOperation)> GetUnreadSymbolWrites() =>
+            SymbolWritesMap.Where(kvp => !kvp.Value).Select(kvp => kvp.Key);
 
         /// <summary>
         /// Returns true if the initial value of the parameter from the caller is used.

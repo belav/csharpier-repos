@@ -3,31 +3,31 @@
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	/// Covariant interface for <see cref="Mock{T}"/> such that casts between IMock&lt;Employee&gt; to IMock&lt;Person&gt;
 	/// are possible. Only covers the covariant members of <see cref="Mock{T}"/>.
 	/// </summary>
-	public interface IMock<out T> where T : class
-	{
-		/// <summary>
+    public interface IMock<out T> where T : class
+    {
+        /// <summary>
 		///   Exposes the mocked object instance.
 		/// </summary>
-		T Object { get; }
+        T Object { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Behavior of the mock, according to the value set in the constructor.
 		/// </summary>
-		MockBehavior Behavior { get; }
+        MockBehavior Behavior { get; }
 
-		/// <summary>
+        /// <summary>
 		///   Whether the base member virtual implementation will be called for mocked classes if no setup is matched.
 		///   Defaults to <see langword="false"/>.
 		/// </summary>
-		bool CallBase { get; set; }
+        bool CallBase { get; set; }
 
-		/// <summary>
+        /// <summary>
 		///   Specifies the behavior to use when returning default values for unexpected invocations on loose mocks.
 		/// </summary>
-		DefaultValue DefaultValue { get; set; }
-	}
+        DefaultValue DefaultValue { get; set; }
+    }
 }

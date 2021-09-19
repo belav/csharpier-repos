@@ -14,35 +14,34 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit
     /// </summary>
     public class ConditionalTheoryDiscoverer : TheoryDiscoverer
     {
-        public ConditionalTheoryDiscoverer(IMessageSink messageSink)
-            : base(messageSink)
-        {
-        }
+        public ConditionalTheoryDiscoverer(IMessageSink messageSink) : base(messageSink) { }
 
         protected override IEnumerable<IXunitTestCase> CreateTestCasesForTheory(
             ITestFrameworkDiscoveryOptions discoveryOptions,
             ITestMethod testMethod,
-            IAttributeInfo theoryAttribute)
-        {
+            IAttributeInfo theoryAttribute
+        ) {
             yield return new ConditionalTheoryTestCase(
                 DiagnosticMessageSink,
                 discoveryOptions.MethodDisplayOrDefault(),
                 discoveryOptions.MethodDisplayOptionsOrDefault(),
-                testMethod);
+                testMethod
+            );
         }
 
         protected override IEnumerable<IXunitTestCase> CreateTestCasesForDataRow(
             ITestFrameworkDiscoveryOptions discoveryOptions,
             ITestMethod testMethod,
             IAttributeInfo theoryAttribute,
-            object[] dataRow)
-        {
+            object[] dataRow
+        ) {
             yield return new ConditionalFactTestCase(
                 DiagnosticMessageSink,
                 discoveryOptions.MethodDisplayOrDefault(),
                 discoveryOptions.MethodDisplayOptionsOrDefault(),
                 testMethod,
-                dataRow);
+                dataRow
+            );
         }
     }
 }

@@ -22,8 +22,8 @@ namespace Microsoft.AspNetCore.Authentication
             HttpContext context,
             AuthenticationScheme scheme,
             RemoteAuthenticationOptions options,
-            Exception failure)
-            : base(context, scheme, options)
+            Exception failure
+        ) : base(context, scheme, options)
         {
             Failure = failure;
         }

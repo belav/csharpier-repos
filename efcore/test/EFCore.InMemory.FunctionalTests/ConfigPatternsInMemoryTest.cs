@@ -17,8 +17,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = new ImplicitServicesAndConfigBlogContext())
             {
-                context.Blogs.Add(
-                    new Blog { Name = "The Waffle Cart" });
+                context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                 context.SaveChanges();
             }
 
@@ -40,9 +39,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             public DbSet<Blog> Blogs { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseInMemoryDatabase(nameof(ImplicitServicesAndConfigBlogContext));
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseInMemoryDatabase(nameof(ImplicitServicesAndConfigBlogContext));
         }
 
         [ConditionalFact]
@@ -51,15 +49,16 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseInMemoryDatabase(nameof(ImplicitServicesExplicitConfigBlogContext));
 
-            using (var context = new ImplicitServicesExplicitConfigBlogContext(optionsBuilder.Options))
-            {
-                context.Blogs.Add(
-                    new Blog { Name = "The Waffle Cart" });
+            using (
+                var context = new ImplicitServicesExplicitConfigBlogContext(optionsBuilder.Options)
+            ) {
+                context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                 context.SaveChanges();
             }
 
-            using (var context = new ImplicitServicesExplicitConfigBlogContext(optionsBuilder.Options))
-            {
+            using (
+                var context = new ImplicitServicesExplicitConfigBlogContext(optionsBuilder.Options)
+            ) {
                 var blog = context.Blogs.SingleOrDefault();
 
                 Assert.NotEqual(0, blog.Id);
@@ -75,9 +74,7 @@ namespace Microsoft.EntityFrameworkCore
         private class ImplicitServicesExplicitConfigBlogContext : DbContext
         {
             public ImplicitServicesExplicitConfigBlogContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+                : base(options) { }
 
             public DbSet<Blog> Blogs { get; set; }
         }
@@ -91,8 +88,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new ExplicitServicesImplicitConfigBlogContext(serviceProvider))
             {
-                context.Blogs.Add(
-                    new Blog { Name = "The Waffle Cart" });
+                context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                 context.SaveChanges();
             }
 
@@ -121,25 +117,25 @@ namespace Microsoft.EntityFrameworkCore
 
             public DbSet<Blog> Blogs { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseInternalServiceProvider(_serviceProvider)
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseInternalServiceProvider(_serviceProvider)
                     .UseInMemoryDatabase(nameof(ExplicitServicesImplicitConfigBlogContext));
         }
 
         [ConditionalFact]
         public void Can_save_and_query_with_explicit_services_and_explicit_config()
         {
-            var optionsBuilder = new DbContextOptionsBuilder()
-                .UseInMemoryDatabase(nameof(ExplicitServicesAndConfigBlogContext))
+            var optionsBuilder = new DbContextOptionsBuilder().UseInMemoryDatabase(
+                    nameof(ExplicitServicesAndConfigBlogContext)
+                )
                 .UseInternalServiceProvider(
-                    new ServiceCollection()
-                        .AddEntityFrameworkInMemoryDatabase().BuildServiceProvider());
+                    new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                        .BuildServiceProvider()
+                );
 
             using (var context = new ExplicitServicesAndConfigBlogContext(optionsBuilder.Options))
             {
-                context.Blogs.Add(
-                    new Blog { Name = "The Waffle Cart" });
+                context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                 context.SaveChanges();
             }
 
@@ -159,10 +155,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private class ExplicitServicesAndConfigBlogContext : DbContext
         {
-            public ExplicitServicesAndConfigBlogContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public ExplicitServicesAndConfigBlogContext(DbContextOptions options) : base(options)
+            { }
 
             public DbSet<Blog> Blogs { get; set; }
         }
@@ -176,18 +170,19 @@ namespace Microsoft.EntityFrameworkCore
                     () =>
                     {
                         using var context = new NoServicesAndNoConfigBlogContext();
-                        context.Blogs.Add(
-                            new Blog { Name = "The Waffle Cart" });
+                        context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                         context.SaveChanges();
-                    }).Message);
+                    }
+                ).Message
+            );
         }
 
         private class NoServicesAndNoConfigBlogContext : DbContext
         {
             public DbSet<Blog> Blogs { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.EnableServiceProviderCaching(false);
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.EnableServiceProviderCaching(false);
         }
 
         [ConditionalFact]
@@ -202,11 +197,14 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Throws<InvalidOperationException>(
                     () =>
                     {
-                        using var context = new ImplicitConfigButNoServicesBlogContext(serviceProvider);
-                        context.Blogs.Add(
-                            new Blog { Name = "The Waffle Cart" });
+                        using var context = new ImplicitConfigButNoServicesBlogContext(
+                            serviceProvider
+                        );
+                        context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                         context.SaveChanges();
-                    }).Message);
+                    }
+                ).Message
+            );
         }
 
         private class ImplicitConfigButNoServicesBlogContext : DbContext
@@ -220,9 +218,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public DbSet<Blog> Blogs { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseInMemoryDatabase(nameof(ImplicitConfigButNoServicesBlogContext))
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseInMemoryDatabase(nameof(ImplicitConfigButNoServicesBlogContext))
                     .UseInternalServiceProvider(_serviceProvider);
         }
 
@@ -252,8 +249,7 @@ namespace Microsoft.EntityFrameworkCore
 
             public void Test()
             {
-                _context.Blogs.Add(
-                    new Blog { Name = "The Waffle Cart" });
+                _context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                 _context.SaveChanges();
 
                 var blog = _context.Blogs.SingleOrDefault();
@@ -273,9 +269,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.NotNull(serviceProvider);
             }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseInMemoryDatabase(nameof(InjectContextBlogContext))
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseInMemoryDatabase(nameof(InjectContextBlogContext))
                     .UseInternalServiceProvider(_serviceProvider);
 
             public DbSet<Blog> Blogs { get; set; }
@@ -284,15 +279,16 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_register_context_and_configuration_with_DI_container_and_have_both_injected()
         {
-            var optionsBuilder = new DbContextOptionsBuilder()
-                .UseInMemoryDatabase(nameof(InjectContextAndConfigurationBlogContext));
+            var optionsBuilder = new DbContextOptionsBuilder().UseInMemoryDatabase(
+                nameof(InjectContextAndConfigurationBlogContext)
+            );
 
-            var serviceProvider = new ServiceCollection()
-                .AddTransient<InjectContextAndConfigurationBlogContext>()
-                .AddTransient<InjectContextAndConfigurationController>()
-                .AddSingleton(p => optionsBuilder.UseInternalServiceProvider(p).Options)
-                .AddEntityFrameworkInMemoryDatabase()
-                .BuildServiceProvider();
+            var serviceProvider =
+                new ServiceCollection().AddTransient<InjectContextAndConfigurationBlogContext>()
+                    .AddTransient<InjectContextAndConfigurationController>()
+                    .AddSingleton(p => optionsBuilder.UseInternalServiceProvider(p).Options)
+                    .AddEntityFrameworkInMemoryDatabase()
+                    .BuildServiceProvider();
 
             serviceProvider.GetRequiredService<InjectContextAndConfigurationController>().Test();
         }
@@ -301,8 +297,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             private readonly InjectContextAndConfigurationBlogContext _context;
 
-            public InjectContextAndConfigurationController(InjectContextAndConfigurationBlogContext context)
-            {
+            public InjectContextAndConfigurationController(
+                InjectContextAndConfigurationBlogContext context
+            ) {
                 Assert.NotNull(context);
 
                 _context = context;
@@ -310,8 +307,7 @@ namespace Microsoft.EntityFrameworkCore
 
             public void Test()
             {
-                _context.Blogs.Add(
-                    new Blog { Name = "The Waffle Cart" });
+                _context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                 _context.SaveChanges();
 
                 var blog = _context.Blogs.SingleOrDefault();
@@ -336,8 +332,7 @@ namespace Microsoft.EntityFrameworkCore
         public void Can_register_configuration_with_DI_container_and_have_it_injected()
         {
             var optionsBuilder = new DbContextOptionsBuilder();
-            optionsBuilder
-                .EnableServiceProviderCaching(false)
+            optionsBuilder.EnableServiceProviderCaching(false)
                 .UseInMemoryDatabase(nameof(InjectConfigurationBlogContext));
 
             var services = new ServiceCollection();
@@ -364,8 +359,7 @@ namespace Microsoft.EntityFrameworkCore
 
             public void Test()
             {
-                _context.Blogs.Add(
-                    new Blog { Name = "The Waffle Cart" });
+                _context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                 _context.SaveChanges();
 
                 var blog = _context.Blogs.SingleOrDefault();
@@ -380,8 +374,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class InjectConfigurationBlogContext : DbContext
         {
-            public InjectConfigurationBlogContext(DbContextOptions options)
-                : base(options)
+            public InjectConfigurationBlogContext(DbContextOptions options) : base(options)
             {
                 Assert.NotNull(options);
             }
@@ -392,32 +385,39 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_inject_different_configurations_into_different_contexts()
         {
-            var blogOptions = new DbContextOptionsBuilder<InjectDifferentConfigurationsBlogContext>()
-                .UseInMemoryDatabase(nameof(InjectDifferentConfigurationsBlogContext));
+            var blogOptions =
+                new DbContextOptionsBuilder<InjectDifferentConfigurationsBlogContext>().UseInMemoryDatabase(
+                    nameof(InjectDifferentConfigurationsBlogContext)
+                );
 
-            var accountOptions = new DbContextOptionsBuilder<InjectDifferentConfigurationsAccountContext>()
-                .UseInMemoryDatabase(nameof(InjectDifferentConfigurationsAccountContext));
+            var accountOptions =
+                new DbContextOptionsBuilder<InjectDifferentConfigurationsAccountContext>().UseInMemoryDatabase(
+                    nameof(InjectDifferentConfigurationsAccountContext)
+                );
 
-            var serviceProvider = new ServiceCollection()
-                .AddTransient<InjectDifferentConfigurationsBlogContext>()
-                .AddTransient<InjectDifferentConfigurationsAccountContext>()
-                .AddTransient<InjectDifferentConfigurationsBlogController>()
-                .AddTransient<InjectDifferentConfigurationsAccountController>()
-                .AddSingleton(p => blogOptions.UseInternalServiceProvider(p).Options)
-                .AddSingleton(p => accountOptions.UseInternalServiceProvider(p).Options)
-                .AddEntityFrameworkInMemoryDatabase()
-                .BuildServiceProvider();
+            var serviceProvider =
+                new ServiceCollection().AddTransient<InjectDifferentConfigurationsBlogContext>()
+                    .AddTransient<InjectDifferentConfigurationsAccountContext>()
+                    .AddTransient<InjectDifferentConfigurationsBlogController>()
+                    .AddTransient<InjectDifferentConfigurationsAccountController>()
+                    .AddSingleton(p => blogOptions.UseInternalServiceProvider(p).Options)
+                    .AddSingleton(p => accountOptions.UseInternalServiceProvider(p).Options)
+                    .AddEntityFrameworkInMemoryDatabase()
+                    .BuildServiceProvider();
 
-            serviceProvider.GetRequiredService<InjectDifferentConfigurationsBlogController>().Test();
-            serviceProvider.GetRequiredService<InjectDifferentConfigurationsAccountController>().Test();
+            serviceProvider.GetRequiredService<InjectDifferentConfigurationsBlogController>()
+                .Test();
+            serviceProvider.GetRequiredService<InjectDifferentConfigurationsAccountController>()
+                .Test();
         }
 
         private class InjectDifferentConfigurationsBlogController
         {
             private readonly InjectDifferentConfigurationsBlogContext _context;
 
-            public InjectDifferentConfigurationsBlogController(InjectDifferentConfigurationsBlogContext context)
-            {
+            public InjectDifferentConfigurationsBlogController(
+                InjectDifferentConfigurationsBlogContext context
+            ) {
                 Assert.NotNull(context);
 
                 _context = context;
@@ -426,10 +426,10 @@ namespace Microsoft.EntityFrameworkCore
             public void Test()
             {
                 Assert.IsType<DbContextOptions<InjectDifferentConfigurationsBlogContext>>(
-                    _context.GetService<IDbContextOptions>());
+                    _context.GetService<IDbContextOptions>()
+                );
 
-                _context.Blogs.Add(
-                    new Blog { Name = "The Waffle Cart" });
+                _context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                 _context.SaveChanges();
 
                 var blog = _context.Blogs.SingleOrDefault();
@@ -443,8 +443,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             private readonly InjectDifferentConfigurationsAccountContext _context;
 
-            public InjectDifferentConfigurationsAccountController(InjectDifferentConfigurationsAccountContext context)
-            {
+            public InjectDifferentConfigurationsAccountController(
+                InjectDifferentConfigurationsAccountContext context
+            ) {
                 Assert.NotNull(context);
 
                 _context = context;
@@ -453,10 +454,10 @@ namespace Microsoft.EntityFrameworkCore
             public void Test()
             {
                 Assert.IsType<DbContextOptions<InjectDifferentConfigurationsAccountContext>>(
-                    _context.GetService<IDbContextOptions>());
+                    _context.GetService<IDbContextOptions>()
+                );
 
-                _context.Accounts.Add(
-                    new Account { Name = "Eeky Bear" });
+                _context.Accounts.Add(new Account { Name = "Eeky Bear" });
                 _context.SaveChanges();
 
                 var account = _context.Accounts.SingleOrDefault();
@@ -468,8 +469,9 @@ namespace Microsoft.EntityFrameworkCore
 
         private class InjectDifferentConfigurationsBlogContext : DbContext
         {
-            public InjectDifferentConfigurationsBlogContext(DbContextOptions<InjectDifferentConfigurationsBlogContext> options)
-                : base(options)
+            public InjectDifferentConfigurationsBlogContext(
+                DbContextOptions<InjectDifferentConfigurationsBlogContext> options
+            ) : base(options)
             {
                 Assert.NotNull(options);
             }
@@ -479,8 +481,9 @@ namespace Microsoft.EntityFrameworkCore
 
         private class InjectDifferentConfigurationsAccountContext : DbContext
         {
-            public InjectDifferentConfigurationsAccountContext(DbContextOptions<InjectDifferentConfigurationsAccountContext> options)
-                : base(options)
+            public InjectDifferentConfigurationsAccountContext(
+                DbContextOptions<InjectDifferentConfigurationsAccountContext> options
+            ) : base(options)
             {
                 Assert.NotNull(options);
             }

@@ -27,14 +27,19 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// </remarks>
         public ImmutableArray<(CodeAction action, TextSpan? applicableToSpan)> CodeActions { get; }
 
-        public CodeRefactoring(CodeRefactoringProvider provider, ImmutableArray<(CodeAction, TextSpan?)> actions)
-        {
+        public CodeRefactoring(
+            CodeRefactoringProvider provider,
+            ImmutableArray<(CodeAction, TextSpan?)> actions
+        ) {
             Provider = provider;
             CodeActions = actions.NullToEmpty();
 
             if (CodeActions.IsEmpty)
             {
-                throw new ArgumentException(FeaturesResources.Actions_can_not_be_empty, nameof(actions));
+                throw new ArgumentException(
+                    FeaturesResources.Actions_can_not_be_empty,
+                    nameof(actions)
+                );
             }
         }
     }

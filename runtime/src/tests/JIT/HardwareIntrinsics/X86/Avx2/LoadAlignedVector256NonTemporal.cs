@@ -32,7 +32,9 @@ namespace IntelHardwareIntrinsicTest
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Avx2 LoadAlignedVector256NonTemporal failed on int:");
+                            Console.WriteLine(
+                                "Avx2 LoadAlignedVector256NonTemporal failed on int:"
+                            );
                             for (var n = 0; n < 8; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -56,7 +58,9 @@ namespace IntelHardwareIntrinsicTest
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Avx2 LoadAlignedVector256NonTemporal failed on long:");
+                            Console.WriteLine(
+                                "Avx2 LoadAlignedVector256NonTemporal failed on long:"
+                            );
                             for (var n = 0; n < 4; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -80,7 +84,9 @@ namespace IntelHardwareIntrinsicTest
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Avx2 LoadAlignedVector256NonTemporal failed on uint:");
+                            Console.WriteLine(
+                                "Avx2 LoadAlignedVector256NonTemporal failed on uint:"
+                            );
                             for (var n = 0; n < 8; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -104,7 +110,9 @@ namespace IntelHardwareIntrinsicTest
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Avx2 LoadAlignedVector256NonTemporal failed on ulong:");
+                            Console.WriteLine(
+                                "Avx2 LoadAlignedVector256NonTemporal failed on ulong:"
+                            );
                             for (var n = 0; n < 4; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -128,7 +136,9 @@ namespace IntelHardwareIntrinsicTest
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Avx2 LoadAlignedVector256NonTemporal failed on short:");
+                            Console.WriteLine(
+                                "Avx2 LoadAlignedVector256NonTemporal failed on short:"
+                            );
                             for (var n = 0; n < 16; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -152,7 +162,9 @@ namespace IntelHardwareIntrinsicTest
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Avx2 LoadAlignedVector256NonTemporal failed on ushort:");
+                            Console.WriteLine(
+                                "Avx2 LoadAlignedVector256NonTemporal failed on ushort:"
+                            );
                             for (var n = 0; n < 16; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -176,7 +188,9 @@ namespace IntelHardwareIntrinsicTest
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Avx2 LoadAlignedVector256NonTemporal failed on sbyte:");
+                            Console.WriteLine(
+                                "Avx2 LoadAlignedVector256NonTemporal failed on sbyte:"
+                            );
                             for (var n = 0; n < 32; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -200,7 +214,9 @@ namespace IntelHardwareIntrinsicTest
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Avx2 LoadAlignedVector256NonTemporal failed on byte:");
+                            Console.WriteLine(
+                                "Avx2 LoadAlignedVector256NonTemporal failed on byte:"
+                            );
                             for (var n = 0; n < 32; n++)
                             {
                                 Console.Write(outArray[n] + ", ");

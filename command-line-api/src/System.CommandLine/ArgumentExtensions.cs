@@ -13,8 +13,8 @@ namespace System.CommandLine
     {
         public static TArgument AddSuggestions<TArgument>(
             this TArgument argument,
-            params string[] values)
-            where TArgument : Argument
+            params string[] values
+        ) where TArgument : Argument
         {
             argument.Suggestions.Add(values);
 
@@ -23,8 +23,8 @@ namespace System.CommandLine
 
         public static TArgument AddSuggestions<TArgument>(
             this TArgument argument,
-            SuggestDelegate suggest)
-            where TArgument : Argument
+            SuggestDelegate suggest
+        ) where TArgument : Argument
         {
             argument.Suggestions.Add(suggest);
 
@@ -33,8 +33,8 @@ namespace System.CommandLine
 
         public static TArgument FromAmong<TArgument>(
             this TArgument argument,
-            params string[] values)
-            where TArgument : Argument
+            params string[] values
+        ) where TArgument : Argument
         {
             argument.AddAllowedValues(values);
             argument.Suggestions.Add(values);
@@ -44,34 +44,37 @@ namespace System.CommandLine
 
         public static Argument<FileInfo> ExistingOnly(this Argument<FileInfo> argument)
         {
-            argument.AddValidator(symbol =>
-                                      symbol.Tokens
-                                            .Select(t => t.Value)
-                                            .Where(filePath => !File.Exists(filePath))
-                                            .Select(symbol.ValidationMessages.FileDoesNotExist)
-                                            .FirstOrDefault());
+            argument.AddValidator(
+                symbol =>
+                    symbol.Tokens.Select(t => t.Value)
+                        .Where(filePath => !File.Exists(filePath))
+                        .Select(symbol.ValidationMessages.FileDoesNotExist)
+                        .FirstOrDefault()
+            );
             return argument;
         }
 
         public static Argument<DirectoryInfo> ExistingOnly(this Argument<DirectoryInfo> argument)
         {
-            argument.AddValidator(symbol =>
-                                      symbol.Tokens
-                                            .Select(t => t.Value)
-                                            .Where(filePath => !Directory.Exists(filePath))
-                                            .Select(symbol.ValidationMessages.DirectoryDoesNotExist)
-                                            .FirstOrDefault());
+            argument.AddValidator(
+                symbol =>
+                    symbol.Tokens.Select(t => t.Value)
+                        .Where(filePath => !Directory.Exists(filePath))
+                        .Select(symbol.ValidationMessages.DirectoryDoesNotExist)
+                        .FirstOrDefault()
+            );
             return argument;
         }
 
         public static Argument<FileSystemInfo> ExistingOnly(this Argument<FileSystemInfo> argument)
         {
-            argument.AddValidator(symbol =>
-                                      symbol.Tokens
-                                            .Select(t => t.Value)
-                                            .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
-                                            .Select(symbol.ValidationMessages.FileOrDirectoryDoesNotExist)
-                                            .FirstOrDefault());
+            argument.AddValidator(
+                symbol =>
+                    symbol.Tokens.Select(t => t.Value)
+                        .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
+                        .Select(symbol.ValidationMessages.FileOrDirectoryDoesNotExist)
+                        .FirstOrDefault()
+            );
             return argument;
         }
 
@@ -81,98 +84,101 @@ namespace System.CommandLine
             if (typeof(IEnumerable<FileInfo>).IsAssignableFrom(typeof(T)))
             {
                 argument.AddValidator(
-                    a => a.Tokens
-                          .Select(t => t.Value)
-                          .Where(filePath => !File.Exists(filePath))
-                          .Select(a.ValidationMessages.FileDoesNotExist)
-                          .FirstOrDefault());
+                    a =>
+                        a.Tokens.Select(t => t.Value)
+                            .Where(filePath => !File.Exists(filePath))
+                            .Select(a.ValidationMessages.FileDoesNotExist)
+                            .FirstOrDefault()
+                );
             }
             else if (typeof(IEnumerable<DirectoryInfo>).IsAssignableFrom(typeof(T)))
             {
                 argument.AddValidator(
-                    a => a.Tokens
-                          .Select(t => t.Value)
-                          .Where(filePath => !Directory.Exists(filePath))
-                          .Select(a.ValidationMessages.DirectoryDoesNotExist)
-                          .FirstOrDefault());
+                    a =>
+                        a.Tokens.Select(t => t.Value)
+                            .Where(filePath => !Directory.Exists(filePath))
+                            .Select(a.ValidationMessages.DirectoryDoesNotExist)
+                            .FirstOrDefault()
+                );
             }
             else
             {
                 argument.AddValidator(
-                    a => a.Tokens
-                          .Select(t => t.Value)
-                          .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
-                          .Select(a.ValidationMessages.FileOrDirectoryDoesNotExist)
-                          .FirstOrDefault());
+                    a =>
+                        a.Tokens.Select(t => t.Value)
+                            .Where(
+                                filePath => !Directory.Exists(filePath) && !File.Exists(filePath)
+                            )
+                            .Select(a.ValidationMessages.FileOrDirectoryDoesNotExist)
+                            .FirstOrDefault()
+                );
             }
 
             return argument;
         }
 
-        public static TArgument LegalFilePathsOnly<TArgument>(
-            this TArgument argument)
+        public static TArgument LegalFilePathsOnly<TArgument>(this TArgument argument)
             where TArgument : Argument
         {
             var invalidPathChars = Path.GetInvalidPathChars();
 
-            argument.AddValidator(symbol =>
-            {
-                for (var i = 0; i < symbol.Tokens.Count; i++)
+            argument.AddValidator(
+                symbol =>
                 {
-                    var token = symbol.Tokens[i];
-
-                    // File class no longer check invalid character
-                    // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
-                    var invalidCharactersIndex = token.Value.IndexOfAny(invalidPathChars);
-
-                    if (invalidCharactersIndex >= 0)
+                    for (var i = 0; i < symbol.Tokens.Count; i++)
                     {
-                        return symbol.ValidationMessages.InvalidCharactersInPath(token.Value[invalidCharactersIndex]);
-                    }
-                }
+                        var token = symbol.Tokens[i];
 
-                return null;
-            });
+                        // File class no longer check invalid character
+                        // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
+                        var invalidCharactersIndex = token.Value.IndexOfAny(invalidPathChars);
+
+                        if (invalidCharactersIndex >= 0)
+                        {
+                            return symbol.ValidationMessages.InvalidCharactersInPath(
+                                token.Value[invalidCharactersIndex]
+                            );
+                        }
+                    }
+
+                    return null;
+                }
+            );
 
             return argument;
         }
 
-        public static TArgument LegalFileNamesOnly<TArgument>(
-            this TArgument argument)
+        public static TArgument LegalFileNamesOnly<TArgument>(this TArgument argument)
             where TArgument : Argument
         {
             var invalidFileNameChars = Path.GetInvalidFileNameChars();
 
-            argument.AddValidator(symbol =>
-            {
-                for (var i = 0; i < symbol.Tokens.Count; i++)
+            argument.AddValidator(
+                symbol =>
                 {
-                    var token = symbol.Tokens[i];
-                    var invalidCharactersIndex = token.Value.IndexOfAny(invalidFileNameChars);
-
-                    if (invalidCharactersIndex >= 0)
+                    for (var i = 0; i < symbol.Tokens.Count; i++)
                     {
-                        return symbol.ValidationMessages.InvalidCharactersInFileName(token.Value[invalidCharactersIndex]);
-                    }
-                }
+                        var token = symbol.Tokens[i];
+                        var invalidCharactersIndex = token.Value.IndexOfAny(invalidFileNameChars);
 
-                return null;
-            });
+                        if (invalidCharactersIndex >= 0)
+                        {
+                            return symbol.ValidationMessages.InvalidCharactersInFileName(
+                                token.Value[invalidCharactersIndex]
+                            );
+                        }
+                    }
+
+                    return null;
+                }
+            );
 
             return argument;
         }
 
-        public static ParseResult Parse(
-            this Argument argument,
-            string commandLine) =>
-            new Parser(
-                new CommandLineConfiguration(
-                    new[]
-                    {
-                        new RootCommand
-                        {
-                            argument
-                        },
-                    })).Parse(commandLine);
+        public static ParseResult Parse(this Argument argument, string commandLine) =>
+            new Parser(new CommandLineConfiguration(new[] { new RootCommand { argument }, })).Parse(
+                commandLine
+            );
     }
 }

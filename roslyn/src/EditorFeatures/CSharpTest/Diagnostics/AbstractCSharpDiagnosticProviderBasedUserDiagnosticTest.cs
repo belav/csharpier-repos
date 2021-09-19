@@ -13,18 +13,19 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics
 {
-    public abstract partial class AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest : AbstractDiagnosticProviderBasedUserDiagnosticTest
+    public abstract partial class AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+        : AbstractDiagnosticProviderBasedUserDiagnosticTest
     {
-        protected AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        protected AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest(
+            ITestOutputHelper logger
+        ) : base(logger) { }
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
         protected internal override string GetLanguage() => LanguageNames.CSharp;
 
-        protected const string IAsyncEnumerable = @"
+        protected const string IAsyncEnumerable =
+            @"
 namespace System
 {
     public interface IAsyncDisposable
@@ -147,11 +148,17 @@ namespace System.Collections.Generic
     }
 }";
 
-        internal OptionsCollection RequireArithmeticBinaryParenthesesForClarity => ParenthesesOptionsProvider.RequireArithmeticBinaryParenthesesForClarity;
-        internal OptionsCollection RequireRelationalBinaryParenthesesForClarity => ParenthesesOptionsProvider.RequireRelationalBinaryParenthesesForClarity;
-        internal OptionsCollection RequireOtherBinaryParenthesesForClarity => ParenthesesOptionsProvider.RequireOtherBinaryParenthesesForClarity;
-        internal OptionsCollection IgnoreAllParentheses => ParenthesesOptionsProvider.IgnoreAllParentheses;
-        internal OptionsCollection RemoveAllUnnecessaryParentheses => ParenthesesOptionsProvider.RemoveAllUnnecessaryParentheses;
-        internal OptionsCollection RequireAllParenthesesForClarity => ParenthesesOptionsProvider.RequireAllParenthesesForClarity;
+        internal OptionsCollection RequireArithmeticBinaryParenthesesForClarity =>
+            ParenthesesOptionsProvider.RequireArithmeticBinaryParenthesesForClarity;
+        internal OptionsCollection RequireRelationalBinaryParenthesesForClarity =>
+            ParenthesesOptionsProvider.RequireRelationalBinaryParenthesesForClarity;
+        internal OptionsCollection RequireOtherBinaryParenthesesForClarity =>
+            ParenthesesOptionsProvider.RequireOtherBinaryParenthesesForClarity;
+        internal OptionsCollection IgnoreAllParentheses =>
+            ParenthesesOptionsProvider.IgnoreAllParentheses;
+        internal OptionsCollection RemoveAllUnnecessaryParentheses =>
+            ParenthesesOptionsProvider.RemoveAllUnnecessaryParentheses;
+        internal OptionsCollection RequireAllParenthesesForClarity =>
+            ParenthesesOptionsProvider.RequireAllParenthesesForClarity;
     }
 }

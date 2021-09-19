@@ -25,12 +25,15 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
         {
             // Arrange
             var controller = new AccountController(
-                new OptionsMonitor(AzureADDefaults.AuthenticationScheme, new AzureADOptions()
-                {
-                    OpenIdConnectSchemeName = AzureADDefaults.OpenIdScheme,
-                    CookieSchemeName = AzureADDefaults.CookieScheme
-                }))
-            {
+                new OptionsMonitor(
+                    AzureADDefaults.AuthenticationScheme,
+                    new AzureADOptions()
+                    {
+                        OpenIdConnectSchemeName = AzureADDefaults.OpenIdScheme,
+                        CookieSchemeName = AzureADDefaults.CookieScheme
+                    }
+                )
+            ) {
                 Url = new TestUrlHelper("~/", "https://localhost/")
             };
 
@@ -49,7 +52,9 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
         public void SignInProvidedScheme_ChallengesCustomScheme()
         {
             // Arrange
-            var controller = new AccountController(new OptionsMonitor("Custom", new AzureADOptions()));
+            var controller = new AccountController(
+                new OptionsMonitor("Custom", new AzureADOptions())
+            );
             controller.Url = new TestUrlHelper("~/", "https://localhost/");
 
             // Act
@@ -68,25 +73,29 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
         {
             principal = principal ?? new ClaimsPrincipal(new ClaimsIdentity());
             var mock = new Mock<IAuthenticationService>();
-            mock.Setup(authS => authS.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>()))
+            mock.Setup(
+                    authS => authS.AuthenticateAsync(It.IsAny<HttpContext>(), It.IsAny<string>())
+                )
                 .ReturnsAsync<HttpContext, string, IAuthenticationService, AuthenticateResult>(
                     (ctx, scheme) =>
                     {
                         if (principal.Identity.IsAuthenticated)
                         {
-                            return AuthenticateResult.Success(new AuthenticationTicket(principal, scheme));
+                            return AuthenticateResult.Success(
+                                new AuthenticationTicket(principal, scheme)
+                            );
                         }
                         else
                         {
                             return AuthenticateResult.NoResult();
                         }
-                    });
+                    }
+                );
             return new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext()
                 {
-                    RequestServices = new ServiceCollection()
-                        .AddSingleton(mock.Object)
+                    RequestServices = new ServiceCollection().AddSingleton(mock.Object)
                         .BuildServiceProvider()
                 }
             };
@@ -103,23 +112,23 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
             };
 
             var controllerContext = CreateControllerContext(
-                CreateAuthenticatedPrincipal(AzureADDefaults.AuthenticationScheme));
+                CreateAuthenticatedPrincipal(AzureADDefaults.AuthenticationScheme)
+            );
 
             var descriptor = new PageActionDescriptor()
             {
-                AttributeRouteInfo = new AttributeRouteInfo()
-                {
-                    Template = "/Account/SignedOut"
-                }
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Account/SignedOut" }
             };
-            var controller = new AccountController(new OptionsMonitor(AzureADDefaults.AuthenticationScheme, options))
-            {
+            var controller = new AccountController(
+                new OptionsMonitor(AzureADDefaults.AuthenticationScheme, options)
+            ) {
                 Url = new TestUrlHelper(
                     controllerContext.HttpContext,
                     new RouteData(),
                     descriptor,
                     "/Account/SignedOut",
-                    "https://localhost/Account/SignedOut"),
+                    "https://localhost/Account/SignedOut"
+                ),
                 ControllerContext = new ControllerContext()
                 {
                     HttpContext = controllerContext.HttpContext
@@ -132,7 +141,10 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
 
             // Assert
             var signOut = Assert.IsAssignableFrom<SignOutResult>(result);
-            Assert.Equal(new[] { AzureADDefaults.CookieScheme, AzureADDefaults.OpenIdScheme }, signOut.AuthenticationSchemes);
+            Assert.Equal(
+                new[] { AzureADDefaults.CookieScheme, AzureADDefaults.OpenIdScheme },
+                signOut.AuthenticationSchemes
+            );
             Assert.NotNull(signOut.Properties.RedirectUri);
             Assert.Equal("https://localhost/Account/SignedOut", signOut.Properties.RedirectUri);
         }
@@ -148,13 +160,11 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
             };
 
             var controllerContext = CreateControllerContext(
-                CreateAuthenticatedPrincipal(AzureADDefaults.AuthenticationScheme));
+                CreateAuthenticatedPrincipal(AzureADDefaults.AuthenticationScheme)
+            );
             var descriptor = new PageActionDescriptor()
             {
-                AttributeRouteInfo = new AttributeRouteInfo()
-                {
-                    Template = "/Account/SignedOut"
-                }
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Account/SignedOut" }
             };
 
             var controller = new AccountController(new OptionsMonitor("Custom", options))
@@ -164,7 +174,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
                     new RouteData(),
                     descriptor,
                     "/Account/SignedOut",
-                    "https://localhost/Account/SignedOut"),
+                    "https://localhost/Account/SignedOut"
+                ),
                 ControllerContext = new ControllerContext()
                 {
                     HttpContext = controllerContext.HttpContext
@@ -222,8 +233,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
                 RouteData routeData,
                 ActionDescriptor descriptor,
                 string contentPath,
-                string url)
-            {
+                string url
+            ) {
                 HttpContext = context;
                 RouteData = routeData;
                 ActionDescriptor = descriptor;
@@ -266,11 +277,12 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
 
             public string RouteUrl(UrlRouteContext routeContext)
             {
-                if (routeContext.Values is RouteValueDictionary dicionary &&
-                    dicionary.TryGetValue("page", out var page) &&
-                    page is string pagePath &&
-                    ContentPath == pagePath)
-                {
+                if (
+                    routeContext.Values is RouteValueDictionary dicionary
+                    && dicionary.TryGetValue("page", out var page)
+                    && page is string pagePath
+                    && ContentPath == pagePath
+                ) {
                     return Url;
                 }
 

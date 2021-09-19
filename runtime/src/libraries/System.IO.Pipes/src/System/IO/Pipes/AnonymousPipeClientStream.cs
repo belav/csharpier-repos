@@ -13,9 +13,7 @@ namespace System.IO.Pipes
     public sealed partial class AnonymousPipeClientStream : PipeStream
     {
         public AnonymousPipeClientStream(string pipeHandleAsString)
-            : this(PipeDirection.In, pipeHandleAsString)
-        {
-        }
+            : this(PipeDirection.In, pipeHandleAsString) { }
 
         public AnonymousPipeClientStream(PipeDirection direction, string pipeHandleAsString)
             : base(direction, 0)
@@ -47,8 +45,10 @@ namespace System.IO.Pipes
             Init(direction, safePipeHandle);
         }
 
-        public AnonymousPipeClientStream(PipeDirection direction, SafePipeHandle safePipeHandle)
-            : base(direction, 0)
+        public AnonymousPipeClientStream(
+            PipeDirection direction,
+            SafePipeHandle safePipeHandle
+        ) : base(direction, 0)
         {
             if (direction == PipeDirection.InOut)
             {
@@ -68,8 +68,14 @@ namespace System.IO.Pipes
 
         private void Init(PipeDirection direction, SafePipeHandle safePipeHandle)
         {
-            Debug.Assert(direction != PipeDirection.InOut, "anonymous pipes are unidirectional, caller should have verified before calling Init");
-            Debug.Assert(safePipeHandle != null && !safePipeHandle.IsInvalid, "safePipeHandle must be valid");
+            Debug.Assert(
+                direction != PipeDirection.InOut,
+                "anonymous pipes are unidirectional, caller should have verified before calling Init"
+            );
+            Debug.Assert(
+                safePipeHandle != null && !safePipeHandle.IsInvalid,
+                "safePipeHandle must be valid"
+            );
             ValidateHandleIsPipe(safePipeHandle);
 
             InitializeHandle(safePipeHandle, true, false);
@@ -96,11 +102,16 @@ namespace System.IO.Pipes
 
                 if (value < PipeTransmissionMode.Byte || value > PipeTransmissionMode.Message)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_TransmissionModeByteOrMsg);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_TransmissionModeByteOrMsg
+                    );
                 }
                 if (value == PipeTransmissionMode.Message)
                 {
-                    throw new NotSupportedException(SR.NotSupported_AnonymousPipeMessagesNotSupported);
+                    throw new NotSupportedException(
+                        SR.NotSupported_AnonymousPipeMessagesNotSupported
+                    );
                 }
             }
         }

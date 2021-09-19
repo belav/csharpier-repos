@@ -39,9 +39,11 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int VectorElementCount = Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
+        private static readonly int VectorElementCount =
+            Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
 
-        private static readonly int NumericsElementCount = Unsafe.SizeOf<Vector4>() / sizeof(Single);
+        private static readonly int NumericsElementCount =
+            Unsafe.SizeOf<Vector4>() / sizeof(Single);
 
         public bool Succeeded { get; set; } = true;
 
@@ -64,19 +66,24 @@ namespace JIT.HardwareIntrinsics.General
             Vector128<Single> value;
 
             value = Vector128.Create(TestLibrary.Generator.GetSingle());
-            object Result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.AsVector4))
-                                .Invoke(null, new object[] { value });
+            object Result = typeof(Vector128).GetMethod(nameof(Vector128.AsVector4))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector4)(Result), value);
 
-            value = (Vector128<Single>)typeof(Vector128)
-                                .GetMethod(nameof(Vector128.AsVector128), new Type[] { typeof(Vector4) })
-                                .Invoke(null, new object[] { Result });
+            value =
+                (Vector128<Single>)typeof(Vector128).GetMethod(
+                        nameof(Vector128.AsVector128),
+                        new Type[] { typeof(Vector4) }
+                    )
+                    .Invoke(null, new object[] { Result });
             ValidateResult(value, (Vector4)(Result));
         }
 
-        private void ValidateResult(Vector4 result, Vector128<Single> value, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector4 result,
+            Vector128<Single> value,
+            [CallerMemberName] string method = ""
+        ) {
             Single[] resultElements = new Single[NumericsElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref resultElements[0]), result);
 
@@ -86,8 +93,11 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, valueElements, method);
         }
 
-        private void ValidateResult(Vector128<Single> result, Vector4 value, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<Single> result,
+            Vector4 value,
+            [CallerMemberName] string method = ""
+        ) {
             Single[] resultElements = new Single[VectorElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref resultElements[0]), result);
 
@@ -97,8 +107,11 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, valueElements, method);
         }
 
-        private void ValidateResult(Single[] resultElements, Single[] valueElements, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Single[] resultElements,
+            Single[] valueElements,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             if (resultElements.Length <= valueElements.Length)
@@ -135,9 +148,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Single>.AsVector4: {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", valueElements)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Single>.AsVector4: {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", valueElements)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

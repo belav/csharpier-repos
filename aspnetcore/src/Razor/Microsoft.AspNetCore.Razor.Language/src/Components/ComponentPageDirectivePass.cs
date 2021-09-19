@@ -7,10 +7,14 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components
 {
-    internal class ComponentPageDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+    internal class ComponentPageDirectivePass
+        : IntermediateNodePassBase,
+          IRazorDirectiveClassifierPass
     {
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
-        {
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) {
             if (codeDocument == null)
             {
                 throw new ArgumentNullException(nameof(codeDocument));
@@ -38,9 +42,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             for (var i = 0; i < directives.Count; i++)
             {
                 var directive = directives[i];
-                if (FileKinds.IsComponentImport(codeDocument.GetFileKind()) || directive.Node.IsImported())
-                {
-                    directive.Node.Diagnostics.Add(ComponentDiagnosticFactory.CreatePageDirective_CannotBeImported(directive.Node.Source.Value));
+                if (
+                    FileKinds.IsComponentImport(codeDocument.GetFileKind())
+                    || directive.Node.IsImported()
+                ) {
+                    directive.Node.Diagnostics.Add(
+                        ComponentDiagnosticFactory.CreatePageDirective_CannotBeImported(
+                            directive.Node.Source.Value
+                        )
+                    );
                 }
             }
 
@@ -61,18 +71,23 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 // The parser also adds errors for invalid syntax, we just need to not crash.
                 var routeToken = pageDirective.Tokens.FirstOrDefault();
 
-                if (routeToken != null &&
-                    routeToken.Content.Length >= 3 &&
-                    routeToken.Content[0] == '\"' &&
-                    routeToken.Content[1] == '/' &&
-                    routeToken.Content[routeToken.Content.Length - 1] == '\"')
-                {
+                if (
+                    routeToken != null
+                    && routeToken.Content.Length >= 3
+                    && routeToken.Content[0] == '\"'
+                    && routeToken.Content[1] == '/'
+                    && routeToken.Content[routeToken.Content.Length - 1] == '\"'
+                ) {
                     var template = routeToken.Content.Substring(1, routeToken.Content.Length - 2);
                     @namespace.Children.Insert(index++, new RouteAttributeExtensionNode(template));
                 }
                 else
                 {
-                    pageDirective.Diagnostics.Add(ComponentDiagnosticFactory.CreatePageDirective_MustSpecifyRoute(pageDirective.Source));
+                    pageDirective.Diagnostics.Add(
+                        ComponentDiagnosticFactory.CreatePageDirective_MustSpecifyRoute(
+                            pageDirective.Source
+                        )
+                    );
                 }
             }
         }

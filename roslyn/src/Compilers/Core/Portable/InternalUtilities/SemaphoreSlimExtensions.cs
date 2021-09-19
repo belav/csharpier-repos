@@ -10,15 +10,22 @@ namespace Roslyn.Utilities
 {
     internal static class SemaphoreSlimExtensions
     {
-        public static SemaphoreDisposer DisposableWait(this SemaphoreSlim semaphore, CancellationToken cancellationToken = default)
-        {
+        public static SemaphoreDisposer DisposableWait(
+            this SemaphoreSlim semaphore,
+            CancellationToken cancellationToken = default
+        ) {
             semaphore.Wait(cancellationToken);
             return new SemaphoreDisposer(semaphore);
         }
 
-        [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/36114", OftenCompletesSynchronously = true)]
-        public static async ValueTask<SemaphoreDisposer> DisposableWaitAsync(this SemaphoreSlim semaphore, CancellationToken cancellationToken = default)
-        {
+        [PerformanceSensitive(
+            "https://github.com/dotnet/roslyn/issues/36114",
+            OftenCompletesSynchronously = true
+        )]
+        public static async ValueTask<SemaphoreDisposer> DisposableWaitAsync(
+            this SemaphoreSlim semaphore,
+            CancellationToken cancellationToken = default
+        ) {
             await semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
             return new SemaphoreDisposer(semaphore);
         }

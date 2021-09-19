@@ -9,16 +9,14 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
 {
     public class FakeSqlGenerator : UpdateSqlGenerator
     {
-        public FakeSqlGenerator(UpdateSqlGeneratorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public FakeSqlGenerator(UpdateSqlGeneratorDependencies dependencies) : base(dependencies)
+        { }
 
         public override ResultSetMapping AppendInsertOperation(
             StringBuilder commandStringBuilder,
             ModificationCommand command,
-            int commandPosition)
-        {
+            int commandPosition
+        ) {
             AppendInsertOperationCalls++;
             return base.AppendInsertOperation(commandStringBuilder, command, commandPosition);
         }
@@ -26,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
         public override ResultSetMapping AppendUpdateOperation(
             StringBuilder commandStringBuilder,
             ModificationCommand command,
-            int commandPosition)
-        {
+            int commandPosition
+        ) {
             AppendUpdateOperationCalls++;
             return base.AppendUpdateOperation(commandStringBuilder, command, commandPosition);
         }
@@ -35,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
         public override ResultSetMapping AppendDeleteOperation(
             StringBuilder commandStringBuilder,
             ModificationCommand command,
-            int commandPosition)
-        {
+            int commandPosition
+        ) {
             AppendDeleteOperationCalls++;
             return base.AppendDeleteOperation(commandStringBuilder, command, commandPosition);
         }
@@ -52,9 +50,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             base.AppendBatchHeader(commandStringBuilder);
         }
 
-        protected override void AppendIdentityWhereCondition(StringBuilder commandStringBuilder, ColumnModification columnModification)
-            => commandStringBuilder
-                .Append(SqlGenerationHelper.DelimitIdentifier(columnModification.ColumnName))
+        protected override void AppendIdentityWhereCondition(
+            StringBuilder commandStringBuilder,
+            ColumnModification columnModification
+        ) =>
+            commandStringBuilder.Append(
+                    SqlGenerationHelper.DelimitIdentifier(columnModification.ColumnName)
+                )
                 .Append(" = ")
                 .Append("provider_specific_identity()");
 
@@ -62,16 +64,20 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
             StringBuilder commandStringBuilder,
             string name,
             string schema,
-            int commandPosition)
-        {
-            commandStringBuilder
-                .Append("SELECT provider_specific_rowcount();").Append(Environment.NewLine).Append(Environment.NewLine);
+            int commandPosition
+        ) {
+            commandStringBuilder.Append("SELECT provider_specific_rowcount();")
+                .Append(Environment.NewLine)
+                .Append(Environment.NewLine);
 
             return ResultSetMapping.LastInResultSet;
         }
 
-        protected override void AppendRowsAffectedWhereCondition(StringBuilder commandStringBuilder, int expectedRowsAffected)
-            => commandStringBuilder
-                .Append("provider_specific_rowcount() = ").Append(expectedRowsAffected);
+        protected override void AppendRowsAffectedWhereCondition(
+            StringBuilder commandStringBuilder,
+            int expectedRowsAffected
+        ) =>
+            commandStringBuilder.Append("provider_specific_rowcount() = ")
+                .Append(expectedRowsAffected);
     }
 }

@@ -29,9 +29,7 @@ namespace System.Runtime.InteropServices
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
 
-        public static void CleanupUnusedObjectsInCurrentContext()
-        {
-        }
+        public static void CleanupUnusedObjectsInCurrentContext() { }
 
         [SupportedOSPlatform("windows")]
         public static IntPtr CreateAggregatedObject<T>(IntPtr pOuter, T o) where T : notnull
@@ -70,8 +68,11 @@ namespace System.Runtime.InteropServices
         }
 
         [SupportedOSPlatform("windows")]
-        public static IntPtr GetComInterfaceForObject(object o, Type T, CustomQueryInterfaceMode mode)
-        {
+        public static IntPtr GetComInterfaceForObject(
+            object o,
+            Type T,
+            CustomQueryInterfaceMode mode
+        ) {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
 

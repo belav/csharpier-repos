@@ -15,7 +15,8 @@ internal static partial class Interop
             out IO_STATUS_BLOCK IoStatusBlock,
             void* FileInformation,
             uint Length,
-            uint FileInformationClass);
+            uint FileInformationClass
+        );
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct IO_STATUS_BLOCK

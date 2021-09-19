@@ -12,8 +12,11 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract class RoFatMethodParameter : RoMethodParameter
     {
-        protected RoFatMethodParameter(IRoMethodBase roMethodBase, int position, Type parameterType)
-            : base(roMethodBase, position, parameterType)
+        protected RoFatMethodParameter(
+            IRoMethodBase roMethodBase,
+            int position,
+            Type parameterType
+        ) : base(roMethodBase, position, parameterType)
         {
             Debug.Assert(roMethodBase != null);
             Debug.Assert(parameterType != null);
@@ -23,7 +26,10 @@ namespace System.Reflection.TypeLoading
         protected abstract string? ComputeName();
         private volatile string? _lazyName;
 
-        public sealed override ParameterAttributes Attributes => (_lazyParameterAttributes == ParameterAttributesSentinel) ? (_lazyParameterAttributes = ComputeAttributes()) : _lazyParameterAttributes;
+        public sealed override ParameterAttributes Attributes =>
+            (_lazyParameterAttributes == ParameterAttributesSentinel)
+                ? (_lazyParameterAttributes = ComputeAttributes())
+                : _lazyParameterAttributes;
         protected abstract ParameterAttributes ComputeAttributes();
         private const ParameterAttributes ParameterAttributesSentinel = (ParameterAttributes)(-1);
         private volatile ParameterAttributes _lazyParameterAttributes = ParameterAttributesSentinel;
@@ -59,7 +65,11 @@ namespace System.Reflection.TypeLoading
 
                 if (0 != (attributes & ParameterAttributes.HasFieldMarshal))
                 {
-                    CustomAttributeData? cad = CustomAttributeHelpers.TryComputeMarshalAsCustomAttributeData(ComputeMarshalAsAttribute, Loader);
+                    CustomAttributeData? cad =
+                        CustomAttributeHelpers.TryComputeMarshalAsCustomAttributeData(
+                            ComputeMarshalAsAttribute,
+                            Loader
+                        );
                     if (cad != null)
                         yield return cad;
                 }

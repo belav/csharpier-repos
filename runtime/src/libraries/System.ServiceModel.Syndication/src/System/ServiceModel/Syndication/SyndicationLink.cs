@@ -12,12 +12,15 @@ namespace System.ServiceModel.Syndication
         private ExtensibleSyndicationObject _extensions;
         private long _length;
 
-        public SyndicationLink(Uri uri) : this(uri, null, null, null, 0)
-        {
-        }
+        public SyndicationLink(Uri uri) : this(uri, null, null, null, 0) { }
 
-        public SyndicationLink(Uri uri, string relationshipType, string title, string mediaType, long length)
-        {
+        public SyndicationLink(
+            Uri uri,
+            string relationshipType,
+            string title,
+            string mediaType,
+            long length
+        ) {
             if (length < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(length));
@@ -31,9 +34,7 @@ namespace System.ServiceModel.Syndication
             _length = length;
         }
 
-        public SyndicationLink() : this(null, null, null, null, 0)
-        {
-        }
+        public SyndicationLink() : this(null, null, null, null, 0) { }
 
         protected SyndicationLink(SyndicationLink source)
         {
@@ -51,11 +52,13 @@ namespace System.ServiceModel.Syndication
             _extensions = source._extensions.Clone();
         }
 
-        public Dictionary<XmlQualifiedName, string> AttributeExtensions => _extensions.AttributeExtensions;
+        public Dictionary<XmlQualifiedName, string> AttributeExtensions =>
+            _extensions.AttributeExtensions;
 
         public Uri BaseUri { get; set; }
 
-        public SyndicationElementExtensionCollection ElementExtensions => _extensions.ElementExtensions;
+        public SyndicationElementExtensionCollection ElementExtensions =>
+            _extensions.ElementExtensions;
 
         public long Length
         {
@@ -89,8 +92,11 @@ namespace System.ServiceModel.Syndication
             return new SyndicationLink(uri, Atom10Constants.AlternateTag, null, mediaType, 0);
         }
 
-        public static SyndicationLink CreateMediaEnclosureLink(Uri uri, string mediaType, long length)
-        {
+        public static SyndicationLink CreateMediaEnclosureLink(
+            Uri uri,
+            string mediaType,
+            long length
+        ) {
             return new SyndicationLink(uri, Rss20Constants.EnclosureTag, null, mediaType, length);
         }
 
@@ -129,8 +135,12 @@ namespace System.ServiceModel.Syndication
             }
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
-        {
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        ) {
             return false;
         }
 
@@ -149,8 +159,10 @@ namespace System.ServiceModel.Syndication
             _extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
-        {
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        ) {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }
 

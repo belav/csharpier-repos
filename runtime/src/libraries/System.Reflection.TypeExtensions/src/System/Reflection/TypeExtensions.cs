@@ -8,24 +8,30 @@ namespace System.Reflection
     public static class TypeExtensions
     {
         public static ConstructorInfo? GetConstructor(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] this Type type,
-            Type[] types)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                this Type type,
+            Type[] types
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetConstructor(types);
         }
 
         public static ConstructorInfo[] GetConstructors(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] this Type type)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                this Type type
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetConstructors();
         }
 
         public static ConstructorInfo[] GetConstructors(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] this Type type,
-            BindingFlags bindingAttr)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetConstructors(bindingAttr);
         }
@@ -33,76 +39,96 @@ namespace System.Reflection
         public static MemberInfo[] GetDefaultMembers(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicFields
-                | DynamicallyAccessedMemberTypes.PublicMethods
-                | DynamicallyAccessedMemberTypes.PublicEvents
-                | DynamicallyAccessedMemberTypes.PublicProperties
-                | DynamicallyAccessedMemberTypes.PublicConstructors
-                | DynamicallyAccessedMemberTypes.PublicNestedTypes)] this Type type)
-        {
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.PublicNestedTypes
+            )]
+                this Type type
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetDefaultMembers();
         }
 
         public static EventInfo? GetEvent(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] this Type type,
-            string name)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+                this Type type,
+            string name
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetEvent(name);
         }
 
         public static EventInfo? GetEvent(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.NonPublicEvents
+            )]
+                this Type type,
             string name,
-            BindingFlags bindingAttr)
-        {
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetEvent(name, bindingAttr);
         }
 
         public static EventInfo[] GetEvents(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] this Type type)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] this Type type
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetEvents();
         }
 
         public static EventInfo[] GetEvents(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)] this Type type,
-            BindingFlags bindingAttr)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.NonPublicEvents
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetEvents(bindingAttr);
         }
 
         public static FieldInfo? GetField(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] this Type type,
-            string name)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                this Type type,
+            string name
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetField(name);
         }
 
         public static FieldInfo? GetField(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.NonPublicFields
+            )]
+                this Type type,
             string name,
-            BindingFlags bindingAttr)
-        {
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetField(name, bindingAttr);
         }
 
         public static FieldInfo[] GetFields(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] this Type type)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] this Type type
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetFields();
         }
 
         public static FieldInfo[] GetFields(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)] this Type type,
-            BindingFlags bindingAttr)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.NonPublicFields
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetFields(bindingAttr);
         }
@@ -122,13 +148,15 @@ namespace System.Reflection
         public static MemberInfo[] GetMember(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicFields
-                | DynamicallyAccessedMemberTypes.PublicMethods
-                | DynamicallyAccessedMemberTypes.PublicEvents
-                | DynamicallyAccessedMemberTypes.PublicProperties
-                | DynamicallyAccessedMemberTypes.PublicConstructors
-                | DynamicallyAccessedMemberTypes.PublicNestedTypes)] this Type type,
-            string name)
-        {
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.PublicNestedTypes
+            )]
+                this Type type,
+            string name
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetMember(name);
         }
@@ -136,8 +164,8 @@ namespace System.Reflection
         public static MemberInfo[] GetMember(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] this Type type,
             string name,
-            BindingFlags bindingAttr)
-        {
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetMember(name, bindingAttr);
         }
@@ -145,141 +173,178 @@ namespace System.Reflection
         public static MemberInfo[] GetMembers(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicFields
-                | DynamicallyAccessedMemberTypes.PublicMethods
-                | DynamicallyAccessedMemberTypes.PublicEvents
-                | DynamicallyAccessedMemberTypes.PublicProperties
-                | DynamicallyAccessedMemberTypes.PublicConstructors
-                | DynamicallyAccessedMemberTypes.PublicNestedTypes)] this Type type)
-        {
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.PublicNestedTypes
+            )]
+                this Type type
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetMembers();
         }
 
         public static MemberInfo[] GetMembers(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] this Type type,
-            BindingFlags bindingAttr)
-        {
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetMembers(bindingAttr);
         }
 
         public static MethodInfo? GetMethod(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] this Type type,
-            string name)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                this Type type,
+            string name
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetMethod(name);
         }
 
         public static MethodInfo? GetMethod(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                this Type type,
             string name,
-            BindingFlags bindingAttr)
-        {
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetMethod(name, bindingAttr);
         }
 
         public static MethodInfo? GetMethod(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] this Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                this Type type,
             string name,
-            Type[] types)
-        {
+            Type[] types
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetMethod(name, types);
         }
 
         public static MethodInfo[] GetMethods(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] this Type type)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                this Type type
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetMethods();
         }
 
         public static MethodInfo[] GetMethods(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] this Type type,
-            BindingFlags bindingAttr)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetMethods(bindingAttr);
         }
 
         public static Type? GetNestedType(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicNestedTypes
+                    | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+            )]
+                this Type type,
             string name,
-            BindingFlags bindingAttr)
-        {
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetNestedType(name, bindingAttr);
         }
 
         public static Type[] GetNestedTypes(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)] this Type type,
-            BindingFlags bindingAttr)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicNestedTypes
+                    | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetNestedTypes(bindingAttr);
         }
 
         public static PropertyInfo[] GetProperties(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] this Type type)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                this Type type
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetProperties();
         }
 
         public static PropertyInfo[] GetProperties(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] this Type type,
-            BindingFlags bindingAttr)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.NonPublicProperties
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetProperties(bindingAttr);
         }
 
         public static PropertyInfo? GetProperty(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] this Type type,
-            string name)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                this Type type,
+            string name
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetProperty(name);
         }
 
         public static PropertyInfo? GetProperty(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.NonPublicProperties
+            )]
+                this Type type,
             string name,
-            BindingFlags bindingAttr)
-        {
+            BindingFlags bindingAttr
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetProperty(name, bindingAttr);
         }
 
         public static PropertyInfo? GetProperty(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] this Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                this Type type,
             string name,
-            Type? returnType)
-        {
+            Type? returnType
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetProperty(name, returnType);
         }
 
         public static PropertyInfo? GetProperty(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] this Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                this Type type,
             string name,
             Type? returnType,
-            Type[] types)
-        {
+            Type[] types
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.GetProperty(name, returnType, types);
         }
 
-        public static bool IsAssignableFrom(this Type type, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] Type? c)
-        {
+        public static bool IsAssignableFrom(
+            this Type type,
+            [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] Type? c
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.IsAssignableFrom(c);
         }
 
-        public static bool IsInstanceOfType(this Type type, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? o)
-        {
+        public static bool IsInstanceOfType(
+            this Type type,
+            [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? o
+        ) {
             Requires.NotNull(type, nameof(type));
             return type.IsInstanceOfType(o);
         }
@@ -349,7 +414,6 @@ namespace System.Reflection
 
     public static class MemberInfoExtensions
     {
-
         /// <summary>
         /// Determines if there is a metadata token available for the given member.
         /// <see cref="GetMetadataToken(MemberInfo)"/> throws <see cref="InvalidOperationException"/> otherwise.

@@ -24,7 +24,7 @@ namespace DefaultNamespace
         {
             try
             {
-                new BB().Method1()[2].m_field2 = BB.m_static1;		//Normally, must throw NullReferenceException
+                new BB().Method1()[2].m_field2 = BB.m_static1; //Normally, must throw NullReferenceException
             }
             catch (NullReferenceException)
             {

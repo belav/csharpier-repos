@@ -9,10 +9,7 @@ namespace RazorWebSite.Controllers
     {
         public IActionResult Index()
         {
-            var model = new Person
-            {
-                Name = "John Doe"
-            };
+            var model = new Person { Name = "John Doe" };
 
             return View(model);
         }

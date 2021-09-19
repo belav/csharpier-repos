@@ -35,13 +35,18 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             writer.PopSequence(tag);
         }
 
-        internal static AccessDescriptionAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static AccessDescriptionAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static AccessDescriptionAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static AccessDescriptionAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -56,13 +61,20 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out AccessDescriptionAsn decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out AccessDescriptionAsn decoded
+        ) {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out AccessDescriptionAsn decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out AccessDescriptionAsn decoded
+        ) {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -73,13 +85,21 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out AccessDescriptionAsn decoded)
-        {
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out AccessDescriptionAsn decoded
+        ) {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
 
             decoded.AccessMethod = sequenceReader.ReadObjectIdentifier();
-            System.Security.Cryptography.Asn1.GeneralNameAsn.Decode(ref sequenceReader, rebind, out decoded.AccessLocation);
+            System.Security.Cryptography.Asn1.GeneralNameAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.AccessLocation
+            );
 
             sequenceReader.ThrowIfNotEmpty();
         }

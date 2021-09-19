@@ -50,9 +50,13 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
                 {
                     try
                     {
-                        kdk.WriteSecretIntoBuffer(pbPlaintextSecret, checked((int)secretLengthInBytes));
+                        kdk.WriteSecretIntoBuffer(
+                            pbPlaintextSecret,
+                            checked((int)secretLengthInBytes)
+                        );
                         return CreateProvider(pbPlaintextSecret, secretLengthInBytes);
                     }
+
                     finally
                     {
                         UnsafeBufferUtil.SecureZeroMemory(pbPlaintextSecret, secretLengthInBytes);

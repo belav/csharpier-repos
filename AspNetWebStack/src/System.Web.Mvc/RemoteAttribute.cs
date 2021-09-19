@@ -11,21 +11,27 @@ using System.Web.Routing;
 namespace System.Web.Mvc
 {
     [AttributeUsage(AttributeTargets.Property)]
-    [SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification = "The constructor parameters are used to feed RouteData, which is public.")]
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is designed to be a base class for other attributes.")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1019:DefineAccessorsForAttributeArguments",
+        Justification = "The constructor parameters are used to feed RouteData, which is public."
+    )]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "This attribute is designed to be a base class for other attributes."
+    )]
     public class RemoteAttribute : ValidationAttribute, IClientValidatable
     {
         private string _additionalFields;
         private string[] _additonalFieldsSplit = new string[0];
 
-        protected RemoteAttribute()
-            : base(MvcResources.RemoteAttribute_RemoteValidationFailed)
+        protected RemoteAttribute() : base(MvcResources.RemoteAttribute_RemoteValidationFailed)
         {
             RouteData = new RouteValueDictionary();
         }
 
-        public RemoteAttribute(string routeName)
-            : this()
+        public RemoteAttribute(string routeName) : this()
         {
             if (String.IsNullOrWhiteSpace(routeName))
             {
@@ -36,13 +42,13 @@ namespace System.Web.Mvc
         }
 
         public RemoteAttribute(string action, string controller)
-            :
-                this(action, controller, null /* areaName */)
-        {
-        }
+            : this(
+                action,
+                controller,
+                null /* areaName */
+            ) { }
 
-        public RemoteAttribute(string action, string controller, string areaName)
-            : this()
+        public RemoteAttribute(string action, string controller, string areaName) : this()
         {
             if (String.IsNullOrWhiteSpace(action))
             {
@@ -70,8 +76,11 @@ namespace System.Web.Mvc
         /// <param name="areaReference">
         /// Find the controller in the root if <see cref="AreaReference.UseRoot"/>. Otherwise look in the current area.
         /// </param>
-        public RemoteAttribute(string action, string controller, AreaReference areaReference)
-            : this(action, controller)
+        public RemoteAttribute(
+            string action,
+            string controller,
+            AreaReference areaReference
+        ) : this(action, controller)
         {
             if (areaReference == AreaReference.UseRoot)
             {
@@ -126,12 +135,18 @@ namespace System.Web.Mvc
             return "*." + property;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "The value is a not a regular URL since it may contain ~/ ASP.NET-specific characters")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "The value is a not a regular URL since it may contain ~/ ASP.NET-specific characters"
+        )]
         protected virtual string GetUrl(ControllerContext controllerContext)
         {
-            var pathData = Routes.GetVirtualPathForArea(controllerContext.RequestContext,
-                                                        RouteName,
-                                                        RouteData);
+            var pathData = Routes.GetVirtualPathForArea(
+                controllerContext.RequestContext,
+                RouteName,
+                RouteData
+            );
 
             if (pathData == null)
             {
@@ -151,9 +166,16 @@ namespace System.Web.Mvc
             return true;
         }
 
-        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
-        {
-            yield return new ModelClientValidationRemoteRule(FormatErrorMessage(metadata.GetDisplayName()), GetUrl(context), HttpMethod, FormatAdditionalFieldsForClientValidation(metadata.PropertyName));
+        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(
+            ModelMetadata metadata,
+            ControllerContext context
+        ) {
+            yield return new ModelClientValidationRemoteRule(
+                FormatErrorMessage(metadata.GetDisplayName()),
+                GetUrl(context),
+                HttpMethod,
+                FormatAdditionalFieldsForClientValidation(metadata.PropertyName)
+            );
         }
     }
 }
