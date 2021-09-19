@@ -218,21 +218,21 @@ namespace System.Xml.Schema
                 switch (derivedType.Datatype.TypeCode)
                 {
                     case XmlTypeCode.NmToken:
-                        listContent.ItemType = listContent.BaseItemType = s_enumToTypeCode[
-                            (int)XmlTypeCode.NmToken
-                        ];
+                        listContent.ItemType =
+                            listContent.BaseItemType =
+                                s_enumToTypeCode[(int)XmlTypeCode.NmToken];
                         break;
 
                     case XmlTypeCode.Entity:
-                        listContent.ItemType = listContent.BaseItemType = s_enumToTypeCode[
-                            (int)XmlTypeCode.Entity
-                        ];
+                        listContent.ItemType =
+                            listContent.BaseItemType =
+                                s_enumToTypeCode[(int)XmlTypeCode.Entity];
                         break;
 
                     case XmlTypeCode.Idref:
-                        listContent.ItemType = listContent.BaseItemType = s_enumToTypeCode[
-                            (int)XmlTypeCode.Idref
-                        ];
+                        listContent.ItemType =
+                            listContent.BaseItemType =
+                                s_enumToTypeCode[(int)XmlTypeCode.Idref];
                         break;
                 }
                 derivedType.Content = listContent;

@@ -819,8 +819,10 @@ namespace System.Runtime.Serialization
                     XmlDictionary dictionary = new XmlDictionary(2);
                     this.Name = dictionary.Add(StableName.Name);
                     this.Namespace = dictionary.Add(StableName.Namespace);
-                    this.ContractNamespaces = this.MemberNames = this.MemberNamespaces =
-                        Array.Empty<XmlDictionaryString>();
+                    this.ContractNamespaces =
+                        this.MemberNames =
+                        this.MemberNamespaces =
+                            Array.Empty<XmlDictionaryString>();
                     EnsureMethodsImported();
                     return;
                 }

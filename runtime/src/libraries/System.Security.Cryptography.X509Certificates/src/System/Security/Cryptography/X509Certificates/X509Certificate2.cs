@@ -281,11 +281,13 @@ namespace System.Security.Cryptography.X509Certificates
                     byte[] parameters = GetKeyAlgorithmParameters();
                     byte[] keyValue = GetPublicKey();
                     Oid oid = new Oid(keyAlgorithmOid);
-                    publicKey = _lazyPublicKey = new PublicKey(
-                        oid,
-                        new AsnEncodedData(oid, parameters),
-                        new AsnEncodedData(oid, keyValue)
-                    );
+                    publicKey =
+                        _lazyPublicKey =
+                            new PublicKey(
+                                oid,
+                                new AsnEncodedData(oid, parameters),
+                                new AsnEncodedData(oid, keyValue)
+                            );
                 }
                 return publicKey;
             }
@@ -321,10 +323,9 @@ namespace System.Security.Cryptography.X509Certificates
                 if (signatureAlgorithm == null)
                 {
                     string oidValue = Pal.SignatureAlgorithm;
-                    signatureAlgorithm = _lazySignatureAlgorithm = Oid.FromOidValue(
-                        oidValue,
-                        OidGroup.SignatureAlgorithm
-                    );
+                    signatureAlgorithm =
+                        _lazySignatureAlgorithm =
+                            Oid.FromOidValue(oidValue, OidGroup.SignatureAlgorithm);
                 }
                 return signatureAlgorithm;
             }

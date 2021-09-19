@@ -35,14 +35,16 @@ namespace System.Net.Mail
                             return null;
                         }
 
-                        _sessions[sessionCookie] = clientContext = new NTAuthentication(
-                            false,
-                            "Negotiate",
-                            credential,
-                            spn,
-                            ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity,
-                            channelBindingToken
-                        );
+                        _sessions[sessionCookie] =
+                            clientContext =
+                                new NTAuthentication(
+                                    false,
+                                    "Negotiate",
+                                    credential,
+                                    spn,
+                                    ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity,
+                                    channelBindingToken
+                                );
                     }
 
                     byte[]? byteResp;

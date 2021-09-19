@@ -317,9 +317,9 @@ namespace System.Net.Sockets
                     break;
 
                 case AddressFamily.InterNetworkV6:
-                    csep = s_cachedAnyV6EndPoint ??= new CachedSerializedEndPoint(
-                        IPAddress.IPv6Any
-                    );
+                    csep =
+                        s_cachedAnyV6EndPoint ??=
+                            new CachedSerializedEndPoint(IPAddress.IPv6Any);
                     break;
 
                 default:

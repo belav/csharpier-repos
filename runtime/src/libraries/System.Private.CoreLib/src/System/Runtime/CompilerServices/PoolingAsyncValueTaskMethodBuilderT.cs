@@ -96,8 +96,9 @@ namespace System.Runtime.CompilerServices
                 // "work" but in a degraded mode, as we don't know the TStateMachine type here, and thus we use a box around
                 // the interface instead.
 
-                PoolingAsyncValueTaskMethodBuilder<TResult>.StateMachineBox? box = m_task ??=
-                    CreateWeaklyTypedStateMachineBox();
+                PoolingAsyncValueTaskMethodBuilder<TResult>.StateMachineBox? box =
+                    m_task ??=
+                        CreateWeaklyTypedStateMachineBox();
                 return new ValueTask<TResult>(box, box.Version);
             }
         }

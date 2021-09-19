@@ -701,10 +701,9 @@ namespace System.Diagnostics.Eventing.Reader
                 {
                     while (true)
                     {
-                        EventLogHandle emHandle = emHandle = NativeWrapper.EvtNextEventMetadata(
-                            emEnumHandle,
-                            0
-                        );
+                        EventLogHandle emHandle =
+                            emHandle =
+                                NativeWrapper.EvtNextEventMetadata(emEnumHandle, 0);
                         if (emHandle == null)
                             break;
 

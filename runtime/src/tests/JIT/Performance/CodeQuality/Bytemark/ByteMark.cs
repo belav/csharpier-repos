@@ -721,8 +721,9 @@ public class ByteMark
                     break;
 
                 case PF.DONUM: /* DONUMSORT */
-                    global.numsortstruct_jagged.bRunTest = global.numsortstruct_rect.bRunTest =
-                        getflag(eptr);
+                    global.numsortstruct_jagged.bRunTest =
+                        global.numsortstruct_rect.bRunTest =
+                            getflag(eptr);
                     break;
 
                 case PF.NUMNUMA: /* NUMNUMARRAYS */
@@ -777,8 +778,9 @@ public class ByteMark
                     break;
 
                 case PF.DOEMF: /* DOEMF */
-                    global.emfloatstruct_struct.bRunTest = global.emfloatstruct_class.bRunTest =
-                        getflag(eptr);
+                    global.emfloatstruct_struct.bRunTest =
+                        global.emfloatstruct_class.bRunTest =
+                            getflag(eptr);
                     break;
 
                 case PF.EMFASIZE: /* EMFARRAYSIZE */
@@ -810,8 +812,9 @@ public class ByteMark
                     break;
 
                 case PF.DOASSIGN: /* DOASSIGN */
-                    global.assignstruct_jagged.bRunTest = global.assignstruct_rect.bRunTest =
-                        getflag(eptr);
+                    global.assignstruct_jagged.bRunTest =
+                        global.assignstruct_rect.bRunTest =
+                            getflag(eptr);
                     break;
 
                 case PF.AARRAYS: /* ASSIGNARRAYS */

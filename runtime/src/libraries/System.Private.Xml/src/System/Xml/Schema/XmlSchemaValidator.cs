@@ -1652,8 +1652,9 @@ namespace System.Xml.Schema
                     { //ContentModel all group error
                         SendValidationEvent(SR.Sch_AllElement, elementName.ToString());
                         invalidElementInContext = true;
-                        _processContents = _context.ProcessContents =
-                            XmlSchemaContentProcessing.Skip;
+                        _processContents =
+                            _context.ProcessContents =
+                                XmlSchemaContentProcessing.Skip;
                         return null;
                     }
                     //Match not found; check for substitutionGroup
@@ -1685,8 +1686,9 @@ namespace System.Xml.Schema
                             BuildElementName(matchedElem.QualifiedName)
                         );
                         invalidElementInContext = true;
-                        _processContents = _context.ProcessContents =
-                            XmlSchemaContentProcessing.Skip;
+                        _processContents =
+                            _context.ProcessContents =
+                                XmlSchemaContentProcessing.Skip;
                     }
                     else
                     { //Correct substitution head found

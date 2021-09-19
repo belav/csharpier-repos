@@ -1054,9 +1054,9 @@ namespace System.IO
                     }
                 }
 
-                byte[] byteBuffer = _byteBuffer ??= new byte[
-                    _encoding.GetMaxByteCount(_charBuffer.Length)
-                ];
+                byte[] byteBuffer =
+                    _byteBuffer ??=
+                        new byte[_encoding.GetMaxByteCount(_charBuffer.Length)];
 
                 int count = _encoder.GetBytes(
                     new ReadOnlySpan<char>(_charBuffer, 0, _charPos),

@@ -587,10 +587,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(node.Syntax.IsKind(SyntaxKind.CatchClause));
                 var tryStatementSyntax = (TryStatementSyntax)node.Syntax.Parent;
 
-                currentAwaitCatchFrame = _currentAwaitCatchFrame = new AwaitCatchFrame(
-                    _F,
-                    tryStatementSyntax
-                );
+                currentAwaitCatchFrame =
+                    _currentAwaitCatchFrame =
+                        new AwaitCatchFrame(_F, tryStatementSyntax);
             }
 
             var catchType = node.ExceptionTypeOpt ?? _F.SpecialType(SpecialType.System_Object);
@@ -869,10 +868,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var labelsInInterestingTry = _labelsInInterestingTry;
                     if (labelsInInterestingTry == null)
                     {
-                        _labelsInInterestingTry = labelsInInterestingTry = new Dictionary<
-                            BoundTryStatement,
-                            HashSet<LabelSymbol>
-                        >();
+                        _labelsInInterestingTry =
+                            labelsInInterestingTry =
+                                new Dictionary<BoundTryStatement, HashSet<LabelSymbol>>();
                     }
 
                     labelsInInterestingTry.Add(node, currentLabels);
@@ -909,8 +907,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var awaitContainingCatches = _awaitContainingCatches;
                     if (awaitContainingCatches == null)
                     {
-                        _awaitContainingCatches = awaitContainingCatches =
-                            new HashSet<BoundCatchBlock>();
+                        _awaitContainingCatches =
+                            awaitContainingCatches =
+                                new HashSet<BoundCatchBlock>();
                     }
 
                     _awaitContainingCatches.Add(node);
@@ -1083,12 +1082,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (returnValue == null)
                     {
                         Debug.Assert(_statementSyntaxOpt != null);
-                        this.returnValue = returnValue = new SynthesizedLocal(
-                            containingMethod,
-                            TypeWithAnnotations.Create(valueOpt.Type),
-                            SynthesizedLocalKind.AsyncMethodReturnValue,
-                            _statementSyntaxOpt
-                        );
+                        this.returnValue =
+                            returnValue =
+                                new SynthesizedLocal(
+                                    containingMethod,
+                                    TypeWithAnnotations.Create(valueOpt.Type),
+                                    SynthesizedLocalKind.AsyncMethodReturnValue,
+                                    _statementSyntaxOpt
+                                );
                     }
                 }
 

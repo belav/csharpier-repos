@@ -735,33 +735,34 @@ namespace System.Diagnostics.Tests
                         using ActivityListener listener2 = new ActivityListener(); // will have parent id  callback only
                         using ActivityListener listener3 = new ActivityListener(); // will have both context and parent Id callbacks
 
-                        listener1.ShouldListenTo = listener2.ShouldListenTo =
-                            listener3.ShouldListenTo = (activitySource) =>
-                                activitySource.Name == "ParentIdsTest";
-                        listener1.Sample = listener3.Sample = (
-                            ref ActivityCreationOptions<ActivityContext> activityOptions
-                        ) =>
-                        {
-                            callingByContext++;
+                        listener1.ShouldListenTo =
+                            listener2.ShouldListenTo =
+                            listener3.ShouldListenTo =
+                                (activitySource) => activitySource.Name == "ParentIdsTest";
+                        listener1.Sample =
+                            listener3.Sample =
+                                (ref ActivityCreationOptions<ActivityContext> activityOptions) =>
+                                {
+                                    callingByContext++;
 
-                            Assert.Equal(
-                                new ActivityContext(
-                                    ActivityTraceId.CreateFromString(w3cId.AsSpan(3, 32)),
-                                    ActivitySpanId.CreateFromString(w3cId.AsSpan(36, 16)),
-                                    ActivityTraceFlags.Recorded
-                                ),
-                                activityOptions.Parent
-                            );
+                                    Assert.Equal(
+                                        new ActivityContext(
+                                            ActivityTraceId.CreateFromString(w3cId.AsSpan(3, 32)),
+                                            ActivitySpanId.CreateFromString(w3cId.AsSpan(36, 16)),
+                                            ActivityTraceFlags.Recorded
+                                        ),
+                                        activityOptions.Parent
+                                    );
 
-                            return ActivitySamplingResult.AllData;
-                        };
-                        listener2.SampleUsingParentId = listener3.SampleUsingParentId = (
-                            ref ActivityCreationOptions<string> activityOptions
-                        ) =>
-                        {
-                            callingByParentId++;
-                            return ActivitySamplingResult.AllData;
-                        };
+                                    return ActivitySamplingResult.AllData;
+                                };
+                        listener2.SampleUsingParentId =
+                            listener3.SampleUsingParentId =
+                                (ref ActivityCreationOptions<string> activityOptions) =>
+                                {
+                                    callingByParentId++;
+                                    return ActivitySamplingResult.AllData;
+                                };
 
                         ActivitySource.AddActivityListener(listener1);
                         ActivitySource.AddActivityListener(listener2);
@@ -1143,17 +1144,17 @@ namespace System.Diagnostics.Tests
                         listener2.ShouldListenTo = (activitySource) =>
                             activitySource.Name == "SamplerTags5";
 
-                        listener1.Sample = listener2.Sample = (
-                            ref ActivityCreationOptions<ActivityContext> activityOptions
-                        ) =>
-                        {
-                            if (activityOptions.SamplingTags.Count == 0)
-                                activityOptions.SamplingTags.Add("tag1", "value1");
-                            else
-                                activityOptions.SamplingTags.Add("tag2", "value2");
+                        listener1.Sample =
+                            listener2.Sample =
+                                (ref ActivityCreationOptions<ActivityContext> activityOptions) =>
+                                {
+                                    if (activityOptions.SamplingTags.Count == 0)
+                                        activityOptions.SamplingTags.Add("tag1", "value1");
+                                    else
+                                        activityOptions.SamplingTags.Add("tag2", "value2");
 
-                            return ActivitySamplingResult.AllData;
-                        };
+                                    return ActivitySamplingResult.AllData;
+                                };
 
                         ActivitySource.AddActivityListener(listener1);
                         ActivitySource.AddActivityListener(listener2);

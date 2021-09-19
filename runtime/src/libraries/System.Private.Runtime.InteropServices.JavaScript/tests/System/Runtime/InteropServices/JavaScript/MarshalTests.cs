@@ -160,8 +160,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static void CSObjectKeepIdentityAcrossCalls()
         {
-            HelperMarshal._marshalledObject = HelperMarshal._object1 = HelperMarshal._object2 =
-                null;
+            HelperMarshal._marshalledObject =
+                HelperMarshal._object1 =
+                HelperMarshal._object2 =
+                    null;
             Runtime.InvokeJS(
                 @"
                 var obj = App.call_test_method (""InvokeMarshalObj"");
@@ -238,8 +240,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [InlineData(double.MinValue)]
         public static void InvokeUnboxStringNumber(object o, object expected = null)
         {
-            HelperMarshal._marshalledObject = HelperMarshal._object1 = HelperMarshal._object2 =
-                null;
+            HelperMarshal._marshalledObject =
+                HelperMarshal._object1 =
+                HelperMarshal._object2 =
+                    null;
             Runtime.InvokeJS(
                 String.Format(
                     @"

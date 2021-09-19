@@ -60,8 +60,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 int count = value.Count;
                 if (count == 0)
                 {
-                    _optionalParameterIndex = _defaultParameterIndex = _marshalAsIndex =
-                        Array.Empty<bool>();
+                    _optionalParameterIndex =
+                        _defaultParameterIndex =
+                        _marshalAsIndex =
+                            Array.Empty<bool>();
                     _defaultParameters = Array.Empty<ConstVal>();
                     _defaultParameterConstValTypes = Array.Empty<CType>();
                     _marshalAsBuffer = Array.Empty<UnmanagedType>();

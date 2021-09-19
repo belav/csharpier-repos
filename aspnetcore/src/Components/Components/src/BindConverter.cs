@@ -1921,10 +1921,12 @@ namespace Microsoft.AspNetCore.Components
                     else if (typeof(T).IsEnum)
                     {
                         // We have to deal invoke this dynamically to work around the type constraint on Enum.TryParse.
-                        var method = _convertToEnum ??= typeof(BindConverter).GetMethod(
-                            nameof(ConvertToEnum),
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        )!;
+                        var method =
+                            _convertToEnum ??=
+                                typeof(BindConverter).GetMethod(
+                                    nameof(ConvertToEnum),
+                                    BindingFlags.NonPublic | BindingFlags.Static
+                                )!;
                         parser = method.MakeGenericMethod(typeof(T))
                             .CreateDelegate(typeof(BindParser<T>), target: null);
                     }
@@ -1932,10 +1934,12 @@ namespace Microsoft.AspNetCore.Components
                         Nullable.GetUnderlyingType(typeof(T)) is Type innerType && innerType.IsEnum
                     ) {
                         // We have to deal invoke this dynamically to work around the type constraint on Enum.TryParse.
-                        var method = _convertToNullableEnum ??= typeof(BindConverter).GetMethod(
-                            nameof(ConvertToNullableEnum),
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        )!;
+                        var method =
+                            _convertToNullableEnum ??=
+                                typeof(BindConverter).GetMethod(
+                                    nameof(ConvertToNullableEnum),
+                                    BindingFlags.NonPublic | BindingFlags.Static
+                                )!;
                         parser = method.MakeGenericMethod(innerType)
                             .CreateDelegate(typeof(BindParser<T>), target: null);
                     }

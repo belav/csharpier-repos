@@ -46,11 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             QueryTranslationState state = new QueryTranslationState();
             state.fromExpression = MakeMemberAccessValue(boundFromExpression, diagnostics);
 
-            var x = state.rangeVariable = state.AddRangeVariable(
-                this,
-                fromClause.Identifier,
-                diagnostics
-            );
+            var x =
+                state.rangeVariable =
+                    state.AddRangeVariable(this, fromClause.Identifier, diagnostics);
             for (int i = node.Body.Clauses.Count - 1; i >= 0; i--)
             {
                 state.clauses.Push(node.Body.Clauses[i]);
@@ -95,11 +93,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //     from x in ( from ... ) ...
                 state.Clear();
                 state.fromExpression = result;
-                x = state.rangeVariable = state.AddRangeVariable(
-                    this,
-                    continuation.Identifier,
-                    diagnostics
-                );
+                x =
+                    state.rangeVariable =
+                        state.AddRangeVariable(this, continuation.Identifier, diagnostics);
                 Debug.Assert(state.clauses.IsEmpty());
                 var clauses = continuation.Body.Clauses;
                 for (int i = clauses.Count - 1; i >= 0; i--)

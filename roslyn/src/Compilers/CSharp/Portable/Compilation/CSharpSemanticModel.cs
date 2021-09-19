@@ -4544,30 +4544,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.DynamicInvocation:
                     var dynamicInvocation = (BoundDynamicInvocation)boundNode;
                     Debug.Assert(dynamicInvocation.ExpressionSymbol is null);
-                    symbols = memberGroup = dynamicInvocation.ApplicableMethods.Cast<
-                        MethodSymbol,
-                        Symbol
-                    >();
+                    symbols =
+                        memberGroup =
+                            dynamicInvocation.ApplicableMethods.Cast<MethodSymbol, Symbol>();
                     isDynamic = true;
                     break;
 
                 case BoundKind.DynamicCollectionElementInitializer:
                     var collectionInit = (BoundDynamicCollectionElementInitializer)boundNode;
                     Debug.Assert(collectionInit.ExpressionSymbol is null);
-                    symbols = memberGroup = collectionInit.ApplicableMethods.Cast<
-                        MethodSymbol,
-                        Symbol
-                    >();
+                    symbols =
+                        memberGroup =
+                            collectionInit.ApplicableMethods.Cast<MethodSymbol, Symbol>();
                     isDynamic = true;
                     break;
 
                 case BoundKind.DynamicIndexerAccess:
                     var dynamicIndexer = (BoundDynamicIndexerAccess)boundNode;
                     Debug.Assert(dynamicIndexer.ExpressionSymbol is null);
-                    symbols = memberGroup = dynamicIndexer.ApplicableIndexers.Cast<
-                        PropertySymbol,
-                        Symbol
-                    >();
+                    symbols =
+                        memberGroup =
+                            dynamicIndexer.ApplicableIndexers.Cast<PropertySymbol, Symbol>();
                     isDynamic = true;
                     break;
 
@@ -4578,10 +4575,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.DynamicObjectCreationExpression:
                     var objectCreation = (BoundDynamicObjectCreationExpression)boundNode;
-                    symbols = memberGroup = objectCreation.ApplicableMethods.Cast<
-                        MethodSymbol,
-                        Symbol
-                    >();
+                    symbols =
+                        memberGroup =
+                            objectCreation.ApplicableMethods.Cast<MethodSymbol, Symbol>();
                     isDynamic = true;
                     break;
 

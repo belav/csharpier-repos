@@ -1149,8 +1149,7 @@ namespace System.Xml
                 return;
             }
             // write text
-            fixed (char* pSrcBegin = text)
-            fixed (byte* pDstBegin = _bufBytes)
+            fixed (char* pSrcBegin = text)fixed (byte* pDstBegin = _bufBytes)
             {
                 char* pSrc = pSrcBegin;
 
@@ -1302,8 +1301,7 @@ namespace System.Xml
 
             // write text
 
-            fixed (char* pSrcBegin = text)
-            fixed (byte* pDstBegin = _bufBytes)
+            fixed (char* pSrcBegin = text)fixed (byte* pDstBegin = _bufBytes)
             {
                 char* pSrc = pSrcBegin;
 

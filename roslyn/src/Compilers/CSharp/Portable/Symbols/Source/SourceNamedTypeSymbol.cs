@@ -233,8 +233,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (name == null)
                     {
                         name = typeParameterNames[i] = tp.Identifier.ValueText;
-                        varianceKind = typeParameterVarianceKeywords[i] =
-                            tp.VarianceKeyword.ValueText;
+                        varianceKind =
+                            typeParameterVarianceKeywords[i] =
+                                tp.VarianceKeyword.ValueText;
                         for (int j = 0; j < i; j++)
                         {
                             if (name == typeParameterNames[j])

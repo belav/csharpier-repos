@@ -1768,11 +1768,9 @@ namespace System.Data.OleDb
                     ) {
                         bindingCount++;
                     }
-                    dbbindings[indexToBinding[index]] = bindings = new Bindings(
-                        (OleDbDataReader)this,
-                        (null != _irowset),
-                        bindingCount
-                    );
+                    dbbindings[indexToBinding[index]] =
+                        bindings =
+                            new Bindings((OleDbDataReader)this, (null != _irowset), bindingCount);
                     // runningTotal is buffered to start values on 16-byte boundary
                     // the first columnCount * 8 bytes are for the length and status fields
                     //bindings.DataBufferSize = (bindingCount + (bindingCount % 2)) * sizeof_int64;

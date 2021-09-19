@@ -279,10 +279,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 }
             }
 
-            pData[0].Image = pData[0].SelectedImage =
-                document.Project.Language == LanguageNames.CSharp
-                    ? (ushort)StandardGlyphGroup.GlyphCSharpFile
-                    : (ushort)StandardGlyphGroup.GlyphGroupClass;
+            pData[0].Image =
+                pData[0].SelectedImage =
+                    document.Project.Language == LanguageNames.CSharp
+                        ? (ushort)StandardGlyphGroup.GlyphCSharpFile
+                        : (ushort)StandardGlyphGroup.GlyphGroupClass;
         }
 
         private static IHierarchicalDifferenceCollection ComputeDiffSpans(

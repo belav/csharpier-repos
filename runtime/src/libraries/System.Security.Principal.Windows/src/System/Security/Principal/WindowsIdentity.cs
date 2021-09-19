@@ -182,15 +182,17 @@ namespace System.Security.Principal
                         pKerbS4uLogin->MessageType = KERB_LOGON_SUBMIT_TYPE.KerbS4ULogon;
                         pKerbS4uLogin->Flags = KerbS4uLogonFlags.None;
 
-                        pKerbS4uLogin->ClientUpn.Length = pKerbS4uLogin->ClientUpn.MaximumLength =
-                            checked((ushort)upnBytes.Length);
+                        pKerbS4uLogin->ClientUpn.Length =
+                            pKerbS4uLogin->ClientUpn.MaximumLength =
+                                checked((ushort)upnBytes.Length);
 
                         IntPtr pUpnOffset = (IntPtr)(pKerbS4uLogin + 1);
                         pKerbS4uLogin->ClientUpn.Buffer = pUpnOffset;
                         Marshal.Copy(upnBytes, 0, pKerbS4uLogin->ClientUpn.Buffer, upnBytes.Length);
 
                         pKerbS4uLogin->ClientRealm.Length =
-                            pKerbS4uLogin->ClientRealm.MaximumLength = 0;
+                            pKerbS4uLogin->ClientRealm.MaximumLength =
+                                0;
                         pKerbS4uLogin->ClientRealm.Buffer = IntPtr.Zero;
 
                         ushort sourceNameLength = checked((ushort)(sourceName.Length));

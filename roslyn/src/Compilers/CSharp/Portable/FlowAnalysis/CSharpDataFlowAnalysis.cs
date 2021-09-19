@@ -336,8 +336,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                readInside = writtenInside = readOutside = writtenOutside = captured =
-                    unsafeAddressTaken = capturedInside = capturedOutside =
+                readInside =
+                    writtenInside =
+                    readOutside =
+                    writtenOutside =
+                    captured =
+                    unsafeAddressTaken =
+                    capturedInside =
+                    capturedOutside =
                         Enumerable.Empty<Symbol>();
                 usedLocalFunctions = Enumerable.Empty<MethodSymbol>();
             }

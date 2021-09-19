@@ -496,10 +496,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // creation of a display class.
                         VarianceSafety.GetEnclosingVariantInterface(_topLevelMethod) is object
                     ) {
-                        translatedLambdaContainer = containerAsFrame = GetStaticFrame(
-                            Diagnostics,
-                            syntax
-                        );
+                        translatedLambdaContainer =
+                            containerAsFrame =
+                                GetStaticFrame(Diagnostics, syntax);
                         closureKind = ClosureKind.Singleton;
                         closureOrdinal = LambdaDebugInfo.StaticClosureOrdinal;
                     }

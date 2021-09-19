@@ -99,8 +99,9 @@ namespace System.Web.WebPages.Scope
                         (IDictionary<object, object>)HttpContext.Items[_requestScopeKey];
                     if (requestContext == null)
                     {
-                        HttpContext.Items[_requestScopeKey] = requestContext =
-                            new ScopeStorageDictionary(ApplicationScope);
+                        HttpContext.Items[_requestScopeKey] =
+                            requestContext =
+                                new ScopeStorageDictionary(ApplicationScope);
                     }
                     return requestContext;
                 }

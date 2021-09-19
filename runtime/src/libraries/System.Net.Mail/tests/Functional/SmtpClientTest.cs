@@ -473,8 +473,10 @@ namespace System.Net.Mail.Tests
                 subjectText,
                 "hello \u9ad8\u575a\u679c"
             );
-            msg.HeadersEncoding = msg.BodyEncoding = msg.SubjectEncoding =
-                System.Text.Encoding.UTF8;
+            msg.HeadersEncoding =
+                msg.BodyEncoding =
+                msg.SubjectEncoding =
+                    System.Text.Encoding.UTF8;
 
             if (useAsyncSend)
             {

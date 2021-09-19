@@ -271,9 +271,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 }
                 catch (Exception exception)
                 {
-                    info.DataSource = info.DatabaseName = DesignStrings.BadConnection(
-                        exception.Message
-                    );
+                    info.DataSource =
+                        info.DatabaseName =
+                            DesignStrings.BadConnection(exception.Message);
                 }
             }
             else

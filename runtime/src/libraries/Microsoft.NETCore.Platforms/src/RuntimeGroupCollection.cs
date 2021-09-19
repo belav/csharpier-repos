@@ -159,8 +159,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
 
             if (!runtimeGroupsByBaseRID.TryGetValue(runtimeGroup.BaseRID, out baseRuntimeGroups))
             {
-                runtimeGroupsByBaseRID[runtimeGroup.BaseRID] = baseRuntimeGroups =
-                    new List<RuntimeGroup>();
+                runtimeGroupsByBaseRID[runtimeGroup.BaseRID] =
+                    baseRuntimeGroups =
+                        new List<RuntimeGroup>();
             }
 
             baseRuntimeGroups.Add(runtimeGroup);

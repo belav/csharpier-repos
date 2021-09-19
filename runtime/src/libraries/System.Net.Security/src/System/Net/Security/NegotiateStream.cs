@@ -687,12 +687,9 @@ namespace System.Net.Security
 
                     // Decrypt into internal buffer, change "readBytes" to count now _Decrypted Bytes_
                     // Decrypted data start from zero offset, the size can be shrunk after decryption.
-                    _readBufferCount = readBytes = DecryptData(
-                        _readBuffer!,
-                        0,
-                        readBytes,
-                        out _readBufferOffset
-                    );
+                    _readBufferCount =
+                        readBytes =
+                            DecryptData(_readBuffer!, 0, readBytes, out _readBufferOffset);
                     if (readBytes == 0 && buffer.Length != 0)
                     {
                         // Read again.

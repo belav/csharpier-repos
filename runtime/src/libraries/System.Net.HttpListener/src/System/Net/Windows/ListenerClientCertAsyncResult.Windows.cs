@@ -149,8 +149,9 @@ namespace System.Net
                                     0,
                                     certEncoded.Length
                                 );
-                                result = httpListenerRequest.ClientCertificate =
-                                    new X509Certificate2(certEncoded);
+                                result =
+                                    httpListenerRequest.ClientCertificate =
+                                        new X509Certificate2(certEncoded);
                             }
                             catch (CryptographicException exception)
                             {

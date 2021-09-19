@@ -134,11 +134,12 @@ namespace System.Net.WebSockets
                 CancellationTokenSource externalAndAbortCancellation;
                 if (cancellationToken.CanBeCanceled) // avoid allocating linked source if external token is not cancelable
                 {
-                    linkedCancellation = externalAndAbortCancellation =
-                        CancellationTokenSource.CreateLinkedTokenSource(
-                            cancellationToken,
-                            _abortSource.Token
-                        );
+                    linkedCancellation =
+                        externalAndAbortCancellation =
+                            CancellationTokenSource.CreateLinkedTokenSource(
+                                cancellationToken,
+                                _abortSource.Token
+                            );
                 }
                 else
                 {

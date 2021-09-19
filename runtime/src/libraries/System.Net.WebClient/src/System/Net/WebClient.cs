@@ -963,8 +963,9 @@ namespace System.Net
             Exception? exception = null;
             try
             {
-                WebResponse response = _webResponse = await GetWebResponseTaskAsync(request)
-                    .ConfigureAwait(false);
+                WebResponse response =
+                    _webResponse =
+                        await GetWebResponseTaskAsync(request).ConfigureAwait(false);
 
                 long contentLength = response.ContentLength;
                 byte[] copyBuffer = new byte[

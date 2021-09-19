@@ -770,27 +770,31 @@ namespace System.Net.Sockets
                             // based on this address' address family (and then reuse for subsequent addresses for the same family).
                             if (address.AddressFamily == AddressFamily.InterNetworkV6)
                             {
-                                attemptSocket = tempSocketIPv6 ??= (
-                                    Socket.OSSupportsIPv6
-                                        ? new Socket(
-                                              AddressFamily.InterNetworkV6,
-                                              socketType,
-                                              protocolType
-                                          )
-                                        : null
-                                );
+                                attemptSocket =
+                                    tempSocketIPv6 ??=
+                                        (
+                                            Socket.OSSupportsIPv6
+                                                ? new Socket(
+                                                      AddressFamily.InterNetworkV6,
+                                                      socketType,
+                                                      protocolType
+                                                  )
+                                                : null
+                                        );
                             }
                             else if (address.AddressFamily == AddressFamily.InterNetwork)
                             {
-                                attemptSocket = tempSocketIPv4 ??= (
-                                    Socket.OSSupportsIPv4
-                                        ? new Socket(
-                                              AddressFamily.InterNetwork,
-                                              socketType,
-                                              protocolType
-                                          )
-                                        : null
-                                );
+                                attemptSocket =
+                                    tempSocketIPv4 ??=
+                                        (
+                                            Socket.OSSupportsIPv4
+                                                ? new Socket(
+                                                      AddressFamily.InterNetwork,
+                                                      socketType,
+                                                      protocolType
+                                                  )
+                                                : null
+                                        );
                             }
 
                             // If we were unable to get a socket to use for this address, move on to the next address.

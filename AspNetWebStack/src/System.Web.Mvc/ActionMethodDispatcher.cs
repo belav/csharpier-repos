@@ -63,11 +63,9 @@ namespace System.Web.Mvc
                 (!methodInfo.IsStatic)
                     ? Expression.Convert(controllerParameter, methodInfo.ReflectedType)
                     : null;
-            MethodCallExpression methodCall = methodCall = Expression.Call(
-                instanceCast,
-                methodInfo,
-                parameters
-            );
+            MethodCallExpression methodCall =
+                methodCall =
+                    Expression.Call(instanceCast, methodInfo, parameters);
 
             // methodCall is "((TController) controller) method((T0) parameters[0], (T1) parameters[1], ...)"
             // Create function

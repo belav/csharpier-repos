@@ -214,9 +214,10 @@ namespace Microsoft.CodeAnalysis.Host
                     long length
                 ) {
                     _accessor = accessor;
-                    _current = _start =
-                        (byte*)_accessor.Target.SafeMemoryMappedViewHandle.DangerousGetHandle()
-                        + _accessor.Target.PointerOffset;
+                    _current =
+                        _start =
+                            (byte*)_accessor.Target.SafeMemoryMappedViewHandle.DangerousGetHandle()
+                            + _accessor.Target.PointerOffset;
                     _end = checked(_start + length);
                 }
 
