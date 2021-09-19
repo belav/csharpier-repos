@@ -423,14 +423,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 else
                 {
                     var path = target[..pathLength];
-                    Path =
-                        _parsedPath =
-                            PathNormalizer.DecodePath(
-                                path,
-                                targetPath.IsEncoded,
-                                RawTarget,
-                                queryLength
-                            );
+                    Path = _parsedPath = PathNormalizer.DecodePath(
+                        path,
+                        targetPath.IsEncoded,
+                        RawTarget,
+                        queryLength
+                    );
                 }
             }
             catch (InvalidOperationException)

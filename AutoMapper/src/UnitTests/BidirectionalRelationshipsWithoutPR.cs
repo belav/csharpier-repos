@@ -134,9 +134,12 @@ namespace AutoMapper.UnitTests
                 ComponentDefinition = component,
                 DataType = type
             };
-            type.FieldDefinitionList =
-                component.FieldDefinitionList =
-                    new List<CFieldDefinitionDTO<int>> { field };
+            type.FieldDefinitionList = component.FieldDefinitionList = new List<
+                CFieldDefinitionDTO<int>
+            >
+            {
+                field
+            };
             var fieldModel = Mapper.Map<CFieldDefinitionModel<int>>(field);
             fieldModel.ShouldBeSameAs(fieldModel.ComponentDefinition.FieldDefinitionList[0]);
             fieldModel.ShouldBeSameAs(fieldModel.DataType.FieldDefinitionList[0]);

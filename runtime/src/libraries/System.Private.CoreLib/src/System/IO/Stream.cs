@@ -760,9 +760,8 @@ namespace System.IO
                 {
                     _context = null;
 
-                    ContextCallback? invokeAsyncCallback =
-                        s_invokeAsyncCallback ??=
-                            InvokeAsyncCallback;
+                    ContextCallback? invokeAsyncCallback = s_invokeAsyncCallback ??=
+                        InvokeAsyncCallback;
 
                     ExecutionContext.RunInternal(context, invokeAsyncCallback, this);
                 }

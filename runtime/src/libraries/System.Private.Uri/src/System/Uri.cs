@@ -1650,9 +1650,10 @@ namespace System
             else
             {
                 MoreInfo info = EnsureUriInfo().MoreInfo;
-                string remoteUrl =
-                    info.RemoteUrl ??=
-                        GetParts(UriComponents.HttpRequestUrl, UriFormat.SafeUnescaped);
+                string remoteUrl = info.RemoteUrl ??= GetParts(
+                    UriComponents.HttpRequestUrl,
+                    UriFormat.SafeUnescaped
+                );
 
                 if (IsUncOrDosPath)
                 {
@@ -1869,12 +1870,14 @@ namespace System
             MoreInfo otherInfo = obj._info.MoreInfo;
 
             // Fragment AND UserInfo are ignored
-            string selfUrl =
-                selfInfo.RemoteUrl ??=
-                    GetParts(UriComponents.HttpRequestUrl, UriFormat.SafeUnescaped);
-            string otherUrl =
-                otherInfo.RemoteUrl ??=
-                    obj.GetParts(UriComponents.HttpRequestUrl, UriFormat.SafeUnescaped);
+            string selfUrl = selfInfo.RemoteUrl ??= GetParts(
+                UriComponents.HttpRequestUrl,
+                UriFormat.SafeUnescaped
+            );
+            string otherUrl = otherInfo.RemoteUrl ??= obj.GetParts(
+                UriComponents.HttpRequestUrl,
+                UriFormat.SafeUnescaped
+            );
 
             // if IsUncOrDosPath is true then we ignore case in the path comparison
             return string.Equals(

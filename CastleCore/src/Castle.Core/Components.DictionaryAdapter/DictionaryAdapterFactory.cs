@@ -492,9 +492,10 @@ namespace Castle.Components.DictionaryAdapter
             out object[] typeBehaviors
         ) {
             var propertyMap = new Dictionary<string, PropertyDescriptor>();
-            var interfaceBehaviors =
-                typeBehaviors =
-                    ExpandBehaviors(InterfaceAttributeUtil.GetAttributes(type, true)).ToArray();
+            var interfaceBehaviors = typeBehaviors = ExpandBehaviors(
+                    InterfaceAttributeUtil.GetAttributes(type, true)
+                )
+                .ToArray();
             var defaultFetch = typeBehaviors.OfType<FetchAttribute>()
                 .Select(b => (bool?)b.Fetch)
                 .FirstOrDefault()

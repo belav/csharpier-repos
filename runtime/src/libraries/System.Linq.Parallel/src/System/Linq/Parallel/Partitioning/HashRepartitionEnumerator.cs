@@ -261,11 +261,9 @@ namespace System.Linq.Parallel
                 if (buffer == null)
                 {
                     const int INITIAL_PRIVATE_BUFFER_SIZE = 128;
-                    privateBuffers[destinationIndex] =
-                        buffer =
-                            new ListChunk<Pair<TInputOutput, THashKey>>(
-                                INITIAL_PRIVATE_BUFFER_SIZE
-                            );
+                    privateBuffers[destinationIndex] = buffer = new ListChunk<
+                        Pair<TInputOutput, THashKey>
+                    >(INITIAL_PRIVATE_BUFFER_SIZE);
                 }
 
                 buffer.Add(new Pair<TInputOutput, THashKey>(element, elementHashKey));

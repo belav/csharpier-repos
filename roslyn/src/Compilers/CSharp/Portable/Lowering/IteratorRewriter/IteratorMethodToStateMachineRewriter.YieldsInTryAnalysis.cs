@@ -75,9 +75,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var yieldingTryLabels = _labelsInYieldingTrys;
                     if (yieldingTryLabels == null)
                     {
-                        _labelsInYieldingTrys =
-                            yieldingTryLabels =
-                                new Dictionary<BoundTryStatement, HashSet<LabelSymbol>>();
+                        _labelsInYieldingTrys = yieldingTryLabels = new Dictionary<
+                            BoundTryStatement,
+                            HashSet<LabelSymbol>
+                        >();
                     }
 
                     yieldingTryLabels.Add(node, currentLabels);

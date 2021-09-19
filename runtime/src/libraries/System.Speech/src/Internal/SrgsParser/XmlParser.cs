@@ -391,9 +391,9 @@ namespace System.Speech.Internal.SrgsParser
                                     int pos = reader.Value.IndexOf("-", StringComparison.Ordinal);
                                     if (pos > 0)
                                     {
-                                        grammar.Culture =
-                                            _langId =
-                                                new CultureInfo(reader.Value.Substring(0, pos));
+                                        grammar.Culture = _langId = new CultureInfo(
+                                            reader.Value.Substring(0, pos)
+                                        );
                                     }
                                     else
                                     {

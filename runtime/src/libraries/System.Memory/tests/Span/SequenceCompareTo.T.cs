@@ -129,9 +129,10 @@ namespace System.SpanTests
 
                 for (int i = 0; i < length; i++)
                 {
-                    first[GuardLength + i] =
-                        second[GuardLength + i] =
-                            new TInt(10 * (i + 1), checkForOutOfRangeAccess);
+                    first[GuardLength + i] = second[GuardLength + i] = new TInt(
+                        10 * (i + 1),
+                        checkForOutOfRangeAccess
+                    );
                 }
 
                 Span<TInt> firstSpan = new Span<TInt>(first, GuardLength, length);

@@ -499,9 +499,8 @@ namespace System.Xml.Xsl.IlGen
                 {
                     // Build a standalone tree, with this constructor as its root
                     if (ndConstr.NodeType != QilNodeType.Choice)
-                        this.parentInfo.InitialStates =
-                            this.parentInfo.FinalStates =
-                                PossibleXmlStates.WithinSequence;
+                        this.parentInfo.InitialStates = this.parentInfo.FinalStates =
+                            PossibleXmlStates.WithinSequence;
 
                     // Don't stream Rtf; fully cache the Rtf and copy it into any containing tree in order to simplify XmlILVisitor.VisitRtfCtor
                     if (ndConstr.NodeType != QilNodeType.RtfCtor)

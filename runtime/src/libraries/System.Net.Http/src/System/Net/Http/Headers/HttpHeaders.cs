@@ -155,9 +155,10 @@ namespace System.Net.Http.Headers
                     // The header store contained a single raw string value, so promote it
                     // to being a HeaderStoreItemInfo and add to it.
                     Debug.Assert(currentValue is string);
-                    _headerStore[descriptor] =
-                        info =
-                            new HeaderStoreItemInfo() { RawValue = currentValue };
+                    _headerStore[descriptor] = info = new HeaderStoreItemInfo()
+                    {
+                        RawValue = currentValue
+                    };
                     AddValue(info, value, StoreLocation.Raw);
                 }
             }
@@ -349,9 +350,10 @@ namespace System.Net.Http.Headers
                     // the only collection that can be enumerated concurrently is HttpClient.DefaultRequestHeaders,
                     // and all values in it will be HeaderStoreItemInfo.
                     Debug.Assert(!_forceHeaderStoreItems);
-                    _headerStore[descriptor] =
-                        info =
-                            new HeaderStoreItemInfo() { RawValue = value };
+                    _headerStore[descriptor] = info = new HeaderStoreItemInfo()
+                    {
+                        RawValue = value
+                    };
                 }
 
                 // Make sure we parse all raw values before returning the result. Note that this has to be
@@ -751,9 +753,10 @@ namespace System.Net.Http.Headers
                     else
                     {
                         Debug.Assert(value is string);
-                        _headerStore![descriptor] =
-                            result =
-                                new HeaderStoreItemInfo { RawValue = value };
+                        _headerStore![descriptor] = result = new HeaderStoreItemInfo
+                        {
+                            RawValue = value
+                        };
                     }
                 }
             }

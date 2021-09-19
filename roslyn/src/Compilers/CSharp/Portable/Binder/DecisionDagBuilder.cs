@@ -613,15 +613,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             var inputType = recursive.DeclaredType?.Type ?? input.Type.StrippedType();
             var tests = ArrayBuilder<Tests>.GetInstance(5);
-            output =
-                input =
-                    MakeConvertToType(
-                        input,
-                        recursive.Syntax,
-                        inputType,
-                        isExplicitTest: recursive.IsExplicitNotNullTest,
-                        tests
-                    );
+            output = input = MakeConvertToType(
+                input,
+                recursive.Syntax,
+                inputType,
+                isExplicitTest: recursive.IsExplicitNotNullTest,
+                tests
+            );
 
             if (!recursive.Deconstruction.IsDefault)
             {

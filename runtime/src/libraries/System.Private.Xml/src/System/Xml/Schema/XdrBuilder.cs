@@ -992,9 +992,9 @@ namespace System.Xml.Schema
             object obj,
             string prefix
         ) {
-            builder._ElementDef._OrderAttr =
-                builder._GroupDef._Order =
-                    builder.GetOrder((XmlQualifiedName)obj);
+            builder._ElementDef._OrderAttr = builder._GroupDef._Order = builder.GetOrder(
+                (XmlQualifiedName)obj
+            );
         }
 
         private static void XDR_BuildElementType_DtType(

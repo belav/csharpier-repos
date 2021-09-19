@@ -653,9 +653,8 @@ namespace BenchmarkConsoleApplication
             benchmarkRootDirectoryName = Controls.BenchmarksRootDirectory;
             if (benchmarkRootDirectoryName == "")
             {
-                benchmarkRootDirectoryName =
-                    Controls.BenchmarksRootDirectory =
-                        benchmarkRootDirectoryName;
+                benchmarkRootDirectoryName = Controls.BenchmarksRootDirectory =
+                    benchmarkRootDirectoryName;
             }
             benchmarkRootDirectoryName = PlatformSpecificDirectoryName(benchmarkRootDirectoryName);
             Controls.BenchmarksRootDirectory = benchmarkRootDirectoryName;

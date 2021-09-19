@@ -22,11 +22,9 @@ namespace System.Runtime.InteropServices
                     Version v = os.Version;
 
                     const string Version = "Microsoft Windows";
-                    s_osDescription =
-                        osDescription =
-                            string.IsNullOrEmpty(os.ServicePack)
-                                ? $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build}"
-                                : $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build} {os.ServicePack}";
+                    s_osDescription = osDescription = string.IsNullOrEmpty(os.ServicePack)
+                        ? $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build}"
+                        : $"{Version} {(uint)v.Major}.{(uint)v.Minor}.{(uint)v.Build} {os.ServicePack}";
                 }
 
                 return osDescription;
@@ -44,11 +42,9 @@ namespace System.Runtime.InteropServices
                 if (osArch == -1)
                 {
                     Interop.Kernel32.GetNativeSystemInfo(out Interop.Kernel32.SYSTEM_INFO sysInfo);
-                    osArch =
-                        s_osArch =
-                            (int)Map(
-                                (Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture
-                            );
+                    osArch = s_osArch = (int)Map(
+                        (Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture
+                    );
                 }
 
                 return (Architecture)osArch;
@@ -66,11 +62,9 @@ namespace System.Runtime.InteropServices
                 if (processArch == -1)
                 {
                     Interop.Kernel32.GetSystemInfo(out Interop.Kernel32.SYSTEM_INFO sysInfo);
-                    processArch =
-                        s_processArch =
-                            (int)Map(
-                                (Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture
-                            );
+                    processArch = s_processArch = (int)Map(
+                        (Interop.Kernel32.ProcessorArchitecture)sysInfo.wProcessorArchitecture
+                    );
                 }
 
                 return (Architecture)processArch;

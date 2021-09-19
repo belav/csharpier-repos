@@ -1147,23 +1147,19 @@ namespace System.Data.Common
 
                     if (null != localKeychain)
                     {
-                        localKeychain =
-                            localKeychain.Next =
-                                new NameValuePair(
-                                    realkeyname,
-                                    keyvalue,
-                                    nextStartPosition - startPosition
-                                );
+                        localKeychain = localKeychain.Next = new NameValuePair(
+                            realkeyname,
+                            keyvalue,
+                            nextStartPosition - startPosition
+                        );
                     }
                     else if (buildChain)
                     { // first time only - don't contain modified chain from UDL file
-                        keychain =
-                            localKeychain =
-                                new NameValuePair(
-                                    realkeyname,
-                                    keyvalue,
-                                    nextStartPosition - startPosition
-                                );
+                        keychain = localKeychain = new NameValuePair(
+                            realkeyname,
+                            keyvalue,
+                            nextStartPosition - startPosition
+                        );
                     }
                 }
 #if DEBUG

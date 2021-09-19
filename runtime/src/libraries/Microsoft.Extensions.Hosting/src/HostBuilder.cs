@@ -193,9 +193,8 @@ namespace Microsoft.Extensions.Hosting
                 _hostingEnvironment.ApplicationName = Assembly.GetEntryAssembly()?.GetName().Name;
             }
 
-            _hostingEnvironment.ContentRootFileProvider =
-                _defaultProvider =
-                    new PhysicalFileProvider(_hostingEnvironment.ContentRootPath);
+            _hostingEnvironment.ContentRootFileProvider = _defaultProvider =
+                new PhysicalFileProvider(_hostingEnvironment.ContentRootPath);
         }
 
         private string ResolveContentRootPath(string contentRootPath, string basePath)

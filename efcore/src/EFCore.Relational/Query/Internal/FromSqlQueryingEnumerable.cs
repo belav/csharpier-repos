@@ -241,9 +241,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         enumerator._relationalQueryContext.ParameterValues
                     );
 
-                var relationalCommand =
-                    enumerator._relationalCommand =
-                        enumerator._relationalQueryContext.Connection.RentCommand();
+                var relationalCommand = enumerator._relationalCommand =
+                    enumerator._relationalQueryContext.Connection.RentCommand();
                 relationalCommand.PopulateFromTemplate(relationalCommandTemplate);
 
                 enumerator._dataReader = relationalCommand.ExecuteReader(
@@ -375,9 +374,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         enumerator._relationalQueryContext.ParameterValues
                     );
 
-                var relationalCommand =
-                    enumerator._relationalCommand =
-                        enumerator._relationalQueryContext.Connection.RentCommand();
+                var relationalCommand = enumerator._relationalCommand =
+                    enumerator._relationalQueryContext.Connection.RentCommand();
                 relationalCommand.PopulateFromTemplate(relationalCommandTemplate);
 
                 enumerator._dataReader = await relationalCommand.ExecuteReaderAsync(

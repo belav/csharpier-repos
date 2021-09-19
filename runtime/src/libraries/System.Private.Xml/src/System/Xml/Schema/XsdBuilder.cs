@@ -2450,9 +2450,8 @@ namespace System.Xml.Schema
             {
                 builder.SendValidationEvent(SR.Sch_ComplexContentContentModel, "extension");
             }
-            builder._xso =
-                builder._complexContentExtension =
-                    new XmlSchemaComplexContentExtension();
+            builder._xso = builder._complexContentExtension =
+                new XmlSchemaComplexContentExtension();
             builder._complexContent.Content = builder._complexContentExtension;
         }
 
@@ -2471,9 +2470,8 @@ namespace System.Xml.Schema
         */
         private static void InitComplexContentRestriction(XsdBuilder builder, string? value)
         {
-            builder._xso =
-                builder._complexContentRestriction =
-                    new XmlSchemaComplexContentRestriction();
+            builder._xso = builder._complexContentRestriction =
+                new XmlSchemaComplexContentRestriction();
             builder._complexContent!.Content = builder._complexContentRestriction;
         }
 
@@ -2543,9 +2541,8 @@ namespace System.Xml.Schema
             {
                 builder.SendValidationEvent(SR.Sch_DupElement, "restriction");
             }
-            builder._xso =
-                builder._simpleContentRestriction =
-                    new XmlSchemaSimpleContentRestriction();
+            builder._xso = builder._simpleContentRestriction =
+                new XmlSchemaSimpleContentRestriction();
             builder._simpleContent.Content = builder._simpleContentRestriction;
         }
 

@@ -694,12 +694,11 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     // First request, no auth header, challenge Basic
-                    List<string> headers =
-                        headers =
-                            await server.AcceptConnectionSendResponseAndCloseAsync(
-                                HttpStatusCode.Unauthorized,
-                                "WWW-Authenticate: Basic realm=\"hello\"\r\n"
-                            );
+                    List<string> headers = headers =
+                        await server.AcceptConnectionSendResponseAndCloseAsync(
+                            HttpStatusCode.Unauthorized,
+                            "WWW-Authenticate: Basic realm=\"hello\"\r\n"
+                        );
                     Assert.All(headers, header => Assert.DoesNotContain("Authorization", header));
 
                     // Second request, contains Basic auth header
@@ -709,12 +708,10 @@ namespace System.Net.Http.Functional.Tests
                     Assert.Contains(headers, header => header.Contains("Authorization"));
 
                     // Third request, contains Basic auth header but challenges anyway
-                    headers =
-                        headers =
-                            await server.AcceptConnectionSendResponseAndCloseAsync(
-                                HttpStatusCode.Unauthorized,
-                                "WWW-Authenticate: Basic realm=\"hello\"\r\n"
-                            );
+                    headers = headers = await server.AcceptConnectionSendResponseAndCloseAsync(
+                        HttpStatusCode.Unauthorized,
+                        "WWW-Authenticate: Basic realm=\"hello\"\r\n"
+                    );
                     Assert.Contains(headers, header => header.Contains("Authorization"));
                 }
             );
@@ -747,12 +744,11 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     // First request, no auth header, challenge Basic
-                    List<string> headers =
-                        headers =
-                            await server.AcceptConnectionSendResponseAndCloseAsync(
-                                HttpStatusCode.Unauthorized,
-                                "WWW-Authenticate: Basic realm=\"hello\"\r\n"
-                            );
+                    List<string> headers = headers =
+                        await server.AcceptConnectionSendResponseAndCloseAsync(
+                            HttpStatusCode.Unauthorized,
+                            "WWW-Authenticate: Basic realm=\"hello\"\r\n"
+                        );
                     Assert.All(headers, header => Assert.DoesNotContain("Authorization", header));
 
                     // Second request, contains Basic auth header, success

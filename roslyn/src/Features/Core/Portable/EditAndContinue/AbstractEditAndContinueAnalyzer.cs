@@ -4144,15 +4144,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Dictionary<INamedTypeSymbol, ConstructorEdit> constructorEdits;
             if (isStatic)
             {
-                constructorEdits =
-                    staticConstructorEdits ??=
-                        PooledDictionary<INamedTypeSymbol, ConstructorEdit>.GetInstance();
+                constructorEdits = staticConstructorEdits ??= PooledDictionary<
+                    INamedTypeSymbol,
+                    ConstructorEdit
+                >.GetInstance();
             }
             else
             {
-                constructorEdits =
-                    instanceConstructorEdits ??=
-                        PooledDictionary<INamedTypeSymbol, ConstructorEdit>.GetInstance();
+                constructorEdits = instanceConstructorEdits ??= PooledDictionary<
+                    INamedTypeSymbol,
+                    ConstructorEdit
+                >.GetInstance();
             }
 
             if (!constructorEdits.TryGetValue(newType, out var constructorEdit))

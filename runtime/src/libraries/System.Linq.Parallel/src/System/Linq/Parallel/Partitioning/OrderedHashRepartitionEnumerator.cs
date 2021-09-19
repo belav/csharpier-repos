@@ -291,14 +291,12 @@ namespace System.Linq.Parallel
                 {
                     const int INITIAL_PRIVATE_BUFFER_SIZE = 128;
                     Debug.Assert(keyBuffer == null);
-                    privateBuffers[destinationIndex] =
-                        buffer =
-                            new ListChunk<Pair<TInputOutput, THashKey>>(
-                                INITIAL_PRIVATE_BUFFER_SIZE
-                            );
-                    privateKeyBuffers[destinationIndex] =
-                        keyBuffer =
-                            new ListChunk<TOrderKey>(INITIAL_PRIVATE_BUFFER_SIZE);
+                    privateBuffers[destinationIndex] = buffer = new ListChunk<
+                        Pair<TInputOutput, THashKey>
+                    >(INITIAL_PRIVATE_BUFFER_SIZE);
+                    privateKeyBuffers[destinationIndex] = keyBuffer = new ListChunk<TOrderKey>(
+                        INITIAL_PRIVATE_BUFFER_SIZE
+                    );
                 }
 
                 buffer.Add(new Pair<TInputOutput, THashKey>(element, elementHashKey));

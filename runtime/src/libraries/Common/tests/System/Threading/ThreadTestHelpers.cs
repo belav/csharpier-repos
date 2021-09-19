@@ -44,16 +44,15 @@ namespace System.Threading.Tests
                     }
                 }
             );
-            Action localCheckForThreadErrors =
-                checkForThreadErrors = // cannot use ref or out parameters in lambda
-                    () =>
-                    {
-                        Interlocked.MemoryBarrier();
-                        if (backgroundEx != null)
-                        {
-                            throw new AggregateException(backgroundEx);
-                        }
-                    };
+            Action localCheckForThreadErrors = checkForThreadErrors = // cannot use ref or out parameters in lambda
+            () =>
+            {
+                Interlocked.MemoryBarrier();
+                if (backgroundEx != null)
+                {
+                    throw new AggregateException(backgroundEx);
+                }
+            };
             waitForThread = () =>
             {
                 Assert.True(t.Join(UnexpectedThreadTimeoutMilliseconds));
@@ -88,16 +87,15 @@ namespace System.Threading.Tests
                     }
                 }
             );
-            Action localCheckForThreadErrors =
-                checkForThreadErrors = // cannot use ref or out parameters in lambda
-                    () =>
-                    {
-                        Interlocked.MemoryBarrier();
-                        if (backgroundEx != null)
-                        {
-                            throw new AggregateException(backgroundEx);
-                        }
-                    };
+            Action localCheckForThreadErrors = checkForThreadErrors = // cannot use ref or out parameters in lambda
+            () =>
+            {
+                Interlocked.MemoryBarrier();
+                if (backgroundEx != null)
+                {
+                    throw new AggregateException(backgroundEx);
+                }
+            };
             waitForThread = () =>
             {
                 Assert.True(t.Join(UnexpectedThreadTimeoutMilliseconds));

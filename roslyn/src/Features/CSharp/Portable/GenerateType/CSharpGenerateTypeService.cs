@@ -212,8 +212,7 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
             else
             {
                 nameOrMemberAccessExpression =
-                    generateTypeServiceStateOptions.NameOrMemberAccessExpression =
-                        simpleName;
+                    generateTypeServiceStateOptions.NameOrMemberAccessExpression = simpleName;
             }
 
             // BUG(5712): Don't offer generate type in an enum's base list.

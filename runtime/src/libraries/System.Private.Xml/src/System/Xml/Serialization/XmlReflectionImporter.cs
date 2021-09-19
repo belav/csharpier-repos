@@ -726,13 +726,11 @@ namespace System.Xml.Serialization
                     nameof(provider.MethodName)
                 );
 
-            MethodInfo? getMethod =
-                getMethod =
-                    type.GetMethod(
-                        provider.MethodName, /* BindingFlags.DeclaredOnly | */
-                        BindingFlags.Static | BindingFlags.Public,
-                        new Type[] { typeof(XmlSchemaSet) }
-                    );
+            MethodInfo? getMethod = getMethod = type.GetMethod(
+                provider.MethodName, /* BindingFlags.DeclaredOnly | */
+                BindingFlags.Static | BindingFlags.Public,
+                new Type[] { typeof(XmlSchemaSet) }
+            );
             if (getMethod == null)
                 throw new InvalidOperationException(
                     SR.Format(
@@ -1481,9 +1479,9 @@ namespace System.Xml.Serialization
             if (ns == null)
                 ns = defaultNs;
 
-            string uniqueName =
-                name =
-                    generateTypeName ? "ArrayOf" + CodeIdentifier.MakePascal(name) : name;
+            string uniqueName = name = generateTypeName
+                ? "ArrayOf" + CodeIdentifier.MakePascal(name)
+                : name;
             int i = 1;
             TypeMapping? existingMapping = (TypeMapping?)_types[uniqueName, ns];
             while (existingMapping != null)

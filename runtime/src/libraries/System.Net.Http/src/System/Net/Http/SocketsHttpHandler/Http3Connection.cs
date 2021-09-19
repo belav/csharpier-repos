@@ -108,9 +108,8 @@ namespace System.Net.Http
                     altUsedValue
                 );
 
-            _maximumRequestStreams =
-                _requestStreamsRemaining =
-                    connection.GetRemoteAvailableBidirectionalStreamCount();
+            _maximumRequestStreams = _requestStreamsRemaining =
+                connection.GetRemoteAvailableBidirectionalStreamCount();
 
             // Errors are observed via Abort().
             _ = SendSettingsAsync();

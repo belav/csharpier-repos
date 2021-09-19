@@ -1564,13 +1564,12 @@ namespace System.Diagnostics
             private StringBuilder? _stringBuilder;
 
             public TagsLinkedList(KeyValuePair<string, object?> firstValue, bool set = false) =>
-                _last =
-                    _first =
-                        (
-                            (set && firstValue.Value == null)
-                                ? null
-                                : new LinkedListNode<KeyValuePair<string, object?>>(firstValue)
-                        );
+                _last = _first =
+                    (
+                        (set && firstValue.Value == null)
+                            ? null
+                            : new LinkedListNode<KeyValuePair<string, object?>>(firstValue)
+                    );
 
             public TagsLinkedList(IEnumerator<KeyValuePair<string, object?>> e)
             {

@@ -25,9 +25,8 @@ namespace System.Net
             if (IPAddress.TryParse(hostString, out IPAddress? hostAddress))
             {
                 EnsureNetworkChangeRegistration();
-                IPAddress[] localAddresses =
-                    s_localAddresses ??=
-                        Dns.GetHostEntry(Dns.GetHostName()).AddressList;
+                IPAddress[] localAddresses = s_localAddresses ??=
+                    Dns.GetHostEntry(Dns.GetHostName()).AddressList;
                 return Array.IndexOf(localAddresses, hostAddress) != -1;
             }
 
@@ -40,9 +39,8 @@ namespace System.Net
 
             // If it matches the primary domain, it's local (whether or not the hostname matches).
             EnsureNetworkChangeRegistration();
-            string local =
-                s_domainName ??=
-                    "." + IPGlobalProperties.GetIPGlobalProperties().DomainName;
+            string local = s_domainName ??=
+                "." + IPGlobalProperties.GetIPGlobalProperties().DomainName;
             return local.Length == (hostString.Length - dot)
                 && string.Compare(
                     local,

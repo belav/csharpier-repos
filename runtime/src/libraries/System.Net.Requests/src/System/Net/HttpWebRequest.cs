@@ -1519,9 +1519,8 @@ namespace System.Net
                         socket.NoDelay = true;
                         if (parameters.ReadWriteTimeout > 0) // default is 5 minutes, so this is generally going to be true
                         {
-                            socket.SendTimeout =
-                                socket.ReceiveTimeout =
-                                    parameters.ReadWriteTimeout;
+                            socket.SendTimeout = socket.ReceiveTimeout =
+                                parameters.ReadWriteTimeout;
                         }
 
                         if (parameters.Async)

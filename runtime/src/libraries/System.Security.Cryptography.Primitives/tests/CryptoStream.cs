@@ -443,27 +443,25 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
             using (Aes aes = Aes.Create())
             {
                 aes.Mode = CipherMode.CBC;
-                aes.Key =
-                    aes.IV =
-                        new byte[]
-                        {
-                            0x0,
-                            0x1,
-                            0x2,
-                            0x3,
-                            0x4,
-                            0x5,
-                            0x6,
-                            0x7,
-                            0x8,
-                            0x9,
-                            0xA,
-                            0xB,
-                            0xC,
-                            0xD,
-                            0xE,
-                            0xF,
-                        };
+                aes.Key = aes.IV = new byte[]
+                {
+                    0x0,
+                    0x1,
+                    0x2,
+                    0x3,
+                    0x4,
+                    0x5,
+                    0x6,
+                    0x7,
+                    0x8,
+                    0x9,
+                    0xA,
+                    0xB,
+                    0xC,
+                    0xD,
+                    0xE,
+                    0xF,
+                };
 
                 var memoryStream = new MemoryStream();
                 using (

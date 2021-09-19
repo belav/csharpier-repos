@@ -1208,17 +1208,15 @@ namespace System.DirectoryServices.Protocols
             NetworkCredential tempCredential = null;
             if (needSetCredential)
             {
-                _directoryCredential =
-                    tempCredential =
-                        (
-                            newCredential != null
-                                ? new NetworkCredential(
-                                      newCredential.UserName,
-                                      newCredential.Password,
-                                      newCredential.Domain
-                                  )
-                                : null
-                        );
+                _directoryCredential = tempCredential = (
+                    newCredential != null
+                        ? new NetworkCredential(
+                              newCredential.UserName,
+                              newCredential.Password,
+                              newCredential.Domain
+                          )
+                        : null
+                );
             }
             else
             {

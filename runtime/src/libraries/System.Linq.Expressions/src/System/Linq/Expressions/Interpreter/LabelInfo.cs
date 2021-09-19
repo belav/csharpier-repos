@@ -211,9 +211,10 @@ namespace System.Linq.Expressions.Interpreter
                 HashSet<LabelScopeInfo>? set = _definitions as HashSet<LabelScopeInfo>;
                 if (set == null)
                 {
-                    _definitions =
-                        set =
-                            new HashSet<LabelScopeInfo>() { (LabelScopeInfo)_definitions };
+                    _definitions = set = new HashSet<LabelScopeInfo>()
+                    {
+                        (LabelScopeInfo)_definitions
+                    };
                 }
                 set.Add(scope);
             }

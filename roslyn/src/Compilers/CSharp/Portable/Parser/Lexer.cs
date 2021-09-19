@@ -1713,9 +1713,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         // done.
                         var length = currentOffset - startOffset;
                         TextWindow.AdvanceChar(length);
-                        info.Text =
-                            info.StringValue =
-                                TextWindow.Intern(characterWindow, startOffset, length);
+                        info.Text = info.StringValue = TextWindow.Intern(
+                            characterWindow,
+                            startOffset,
+                            length
+                        );
                         info.IsVerbatim = false;
                         return true;
                     case '0':

@@ -765,9 +765,8 @@ namespace System.Reflection.Tests
                     {
                         strHashLength = h.Length.ToString();
                     }
-                    _setValue =
-                        _setValue =
-                            index.ToString() + index2.ToString() + myStr + strHashLength + value;
+                    _setValue = _setValue =
+                        index.ToString() + index2.ToString() + myStr + strHashLength + value;
                 }
             }
         }

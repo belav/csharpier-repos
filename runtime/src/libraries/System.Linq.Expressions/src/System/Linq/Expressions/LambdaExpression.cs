@@ -709,18 +709,16 @@ namespace System.Linq.Expressions
             >? factories = s_lambdaFactories;
             if (factories == null)
             {
-                s_lambdaFactories =
-                    factories =
-                        new CacheDict<
-                            Type,
-                            Func<
-                                Expression,
-                                string?,
-                                bool,
-                                ReadOnlyCollection<ParameterExpression>,
-                                LambdaExpression
-                            >
-                        >(50);
+                s_lambdaFactories = factories = new CacheDict<
+                    Type,
+                    Func<
+                        Expression,
+                        string?,
+                        bool,
+                        ReadOnlyCollection<ParameterExpression>,
+                        LambdaExpression
+                    >
+                >(50);
             }
 
             if (!factories.TryGetValue(delegateType, out fastPath))
@@ -740,23 +738,22 @@ namespace System.Linq.Expressions
                     )!;
                 }
 
-                factories[delegateType] =
-                    fastPath =
-                        (Func<
+                factories[delegateType] = fastPath =
+                    (Func<
+                        Expression,
+                        string?,
+                        bool,
+                        ReadOnlyCollection<ParameterExpression>,
+                        LambdaExpression
+                    >)create.CreateDelegate(
+                        typeof(Func<
                             Expression,
                             string?,
                             bool,
                             ReadOnlyCollection<ParameterExpression>,
                             LambdaExpression
-                        >)create.CreateDelegate(
-                            typeof(Func<
-                                Expression,
-                                string?,
-                                bool,
-                                ReadOnlyCollection<ParameterExpression>,
-                                LambdaExpression
-                            >)
-                        );
+                        >)
+                    );
             }
 
             return fastPath(body, name, tailCall, parameters);
