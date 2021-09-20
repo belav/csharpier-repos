@@ -128,7 +128,7 @@ namespace System
                     );
 
             fixed (int* pLengths = &lengths[0])
-            return InternalCreate((void*)t.TypeHandle.Value, lengths.Length, pLengths, null);
+                return InternalCreate((void*)t.TypeHandle.Value, lengths.Length, pLengths, null);
         }
 
         public static unsafe Array CreateInstance(
@@ -168,12 +168,12 @@ namespace System
 
             fixed (int* pLengths = &lengths[0])
             fixed (int* pLowerBounds = &lowerBounds[0])
-            return InternalCreate(
-                (void*)t.TypeHandle.Value,
-                lengths.Length,
-                pLengths,
-                pLowerBounds
-            );
+                return InternalCreate(
+                    (void*)t.TypeHandle.Value,
+                    lengths.Length,
+                    pLengths,
+                    pLowerBounds
+                );
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -452,7 +452,7 @@ namespace System
 
             TypedReference elemref = default;
             fixed (int* pIndices = &indices[0])
-            InternalGetReference(&elemref, indices.Length, pIndices);
+                InternalGetReference(&elemref, indices.Length, pIndices);
             return TypedReference.InternalToObject(&elemref);
         }
 
@@ -543,7 +543,7 @@ namespace System
 
             TypedReference elemref = default;
             fixed (int* pIndices = &indices[0])
-            InternalGetReference(&elemref, indices.Length, pIndices);
+                InternalGetReference(&elemref, indices.Length, pIndices);
             InternalSetValue(&elemref, value);
         }
 

@@ -184,7 +184,7 @@ namespace System.Reflection
                     return largeResult[index];
 
                 fixed (int* p = smallResult)
-                return p[index];
+                    return p[index];
             }
         }
     }

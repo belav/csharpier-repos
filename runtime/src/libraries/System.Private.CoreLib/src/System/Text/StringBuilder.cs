@@ -1523,7 +1523,7 @@ namespace System.Text
                 unsafe
                 {
                     fixed (char* sourcePtr = value)
-                    Insert(index, sourcePtr, value.Length);
+                        Insert(index, sourcePtr, value.Length);
                 }
             }
             return this;
@@ -1607,7 +1607,7 @@ namespace System.Text
                 unsafe
                 {
                     fixed (char* sourcePtr = &value[startIndex])
-                    Insert(index, sourcePtr, charCount);
+                        Insert(index, sourcePtr, charCount);
                 }
             }
             return this;
@@ -1647,7 +1647,7 @@ namespace System.Text
                 unsafe
                 {
                     fixed (char* sourcePtr = &MemoryMarshal.GetReference(value))
-                    Insert(index, sourcePtr, value.Length);
+                        Insert(index, sourcePtr, value.Length);
                 }
             }
             return this;
@@ -2456,12 +2456,12 @@ namespace System.Text
                         {
                             // Copy the gap data between the current replacement and the next replacement
                             fixed (char* sourcePtr = &sourceChunk.m_ChunkChars[gapStart])
-                            ReplaceInPlaceAtChunk(
-                                ref targetChunk!,
-                                ref targetIndexInChunk,
-                                sourcePtr,
-                                gapEnd - gapStart
-                            );
+                                ReplaceInPlaceAtChunk(
+                                    ref targetChunk!,
+                                    ref targetIndexInChunk,
+                                    sourcePtr,
+                                    gapEnd - gapStart
+                                );
                         }
                         else
                         {

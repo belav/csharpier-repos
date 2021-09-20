@@ -26,14 +26,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () =>
                 {
                     fixed (byte* ptr = new byte[] { 1, 2, 3 })
-                    ModuleMetadata.CreateFromMetadata((IntPtr)ptr, 0);
+                        ModuleMetadata.CreateFromMetadata((IntPtr)ptr, 0);
                 }
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
                 {
                     fixed (byte* ptr = new byte[] { 1, 2, 3 })
-                    ModuleMetadata.CreateFromMetadata((IntPtr)ptr, -1);
+                        ModuleMetadata.CreateFromMetadata((IntPtr)ptr, -1);
                 }
             );
 
@@ -82,14 +82,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 () =>
                 {
                     fixed (byte* ptr = new byte[] { 1, 2, 3 })
-                    ModuleMetadata.CreateFromImage((IntPtr)ptr, 0);
+                        ModuleMetadata.CreateFromImage((IntPtr)ptr, 0);
                 }
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
                 {
                     fixed (byte* ptr = new byte[] { 1, 2, 3 })
-                    ModuleMetadata.CreateFromImage((IntPtr)ptr, -1);
+                        ModuleMetadata.CreateFromImage((IntPtr)ptr, -1);
                 }
             );
 

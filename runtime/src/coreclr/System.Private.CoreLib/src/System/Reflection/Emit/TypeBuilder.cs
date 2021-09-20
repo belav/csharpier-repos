@@ -513,19 +513,19 @@ namespace System.Reflection.Emit
                     case CorElementType.ELEMENT_TYPE_U8:
                     case CorElementType.ELEMENT_TYPE_R8:
                         fixed (byte* pData = &value.GetRawData())
-                        SetConstantValue(new QCallModule(ref module), tk, (int)corType, pData);
+                            SetConstantValue(new QCallModule(ref module), tk, (int)corType, pData);
                         break;
 
                     default:
                         if (type == typeof(string))
                         {
                             fixed (char* pString = (string)value)
-                            SetConstantValue(
-                                new QCallModule(ref module),
-                                tk,
-                                (int)CorElementType.ELEMENT_TYPE_STRING,
-                                pString
-                            );
+                                SetConstantValue(
+                                    new QCallModule(ref module),
+                                    tk,
+                                    (int)CorElementType.ELEMENT_TYPE_STRING,
+                                    pString
+                                );
                         }
                         else if (type == typeof(DateTime))
                         {

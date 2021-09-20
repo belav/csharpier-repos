@@ -14,7 +14,7 @@ namespace System.Security.Cryptography
             if (data.Length > 0)
             {
                 fixed (byte* ptr = data)
-                GetBytes(ptr, data.Length);
+                    GetBytes(ptr, data.Length);
             }
         }
 
@@ -36,7 +36,7 @@ namespace System.Security.Cryptography
             if (data.Length > 0)
             {
                 fixed (byte* ptr = data)
-                GetBytes(ptr, data.Length);
+                    GetBytes(ptr, data.Length);
             }
         }
 

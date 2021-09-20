@@ -57,7 +57,7 @@ namespace System.Reflection
             var token = new byte[8];
             fixed (byte* pkt = token)
             fixed (byte* pk = _publicKey)
-            get_public_token(pkt, pk, _publicKey.Length);
+                get_public_token(pkt, pk, _publicKey.Length);
             return token;
         }
 

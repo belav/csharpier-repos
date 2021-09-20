@@ -798,7 +798,7 @@ namespace System
                 return false;
             }
             fixed (byte* pBytes = &regValue[0])
-            dtzi = *(REG_TZI_FORMAT*)pBytes;
+                dtzi = *(REG_TZI_FORMAT*)pBytes;
             return true;
         }
 

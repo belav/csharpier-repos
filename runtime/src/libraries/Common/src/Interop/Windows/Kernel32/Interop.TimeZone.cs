@@ -45,7 +45,7 @@ internal static partial class Interop
             internal string GetTimeZoneKeyName()
             {
                 fixed (char* p = TimeZoneKeyName)
-                return new string(p);
+                    return new string(p);
             }
         }
 
@@ -65,19 +65,19 @@ internal static partial class Interop
                 // The start of TIME_DYNAMIC_ZONE_INFORMATION has identical layout as TIME_ZONE_INFORMATION
                 fixed (TIME_ZONE_INFORMATION* pTo = &this)
                 fixed (TIME_DYNAMIC_ZONE_INFORMATION* pFrom = &dtzi)
-                *pTo = *(TIME_ZONE_INFORMATION*)pFrom;
+                    *pTo = *(TIME_ZONE_INFORMATION*)pFrom;
             }
 
             internal string GetStandardName()
             {
                 fixed (char* p = StandardName)
-                return new string(p);
+                    return new string(p);
             }
 
             internal string GetDaylightName()
             {
                 fixed (char* p = DaylightName)
-                return new string(p);
+                    return new string(p);
             }
         }
 

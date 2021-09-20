@@ -352,7 +352,7 @@ namespace System.Threading
         private static unsafe void SetName(Thread thread, string? name)
         {
             fixed (char* fixed_name = name)
-            SetName_icall(thread, fixed_name, name?.Length ?? 0);
+                SetName_icall(thread, fixed_name, name?.Length ?? 0);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

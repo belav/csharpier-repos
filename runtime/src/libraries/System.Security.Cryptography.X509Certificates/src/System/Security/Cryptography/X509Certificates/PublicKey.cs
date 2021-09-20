@@ -171,30 +171,31 @@ namespace System.Security.Cryptography.X509Certificates
             out AsnEncodedData keyValue
         ) {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
-            using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
-            {
-                AsnValueReader reader = new AsnValueReader(source, AsnEncodingRules.DER);
+                using (
+                    MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
+                ) {
+                    AsnValueReader reader = new AsnValueReader(source, AsnEncodingRules.DER);
 
-                int read;
-                SubjectPublicKeyInfoAsn spki;
+                    int read;
+                    SubjectPublicKeyInfoAsn spki;
 
-                try
-                {
-                    read = reader.PeekEncodedValue().Length;
-                    SubjectPublicKeyInfoAsn.Decode(ref reader, manager.Memory, out spki);
+                    try
+                    {
+                        read = reader.PeekEncodedValue().Length;
+                        SubjectPublicKeyInfoAsn.Decode(ref reader, manager.Memory, out spki);
+                    }
+                    catch (AsnContentException e)
+                    {
+                        throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding, e);
+                    }
+
+                    oid = new Oid(spki.Algorithm.Algorithm, null);
+                    parameters = new AsnEncodedData(
+                        spki.Algorithm.Parameters?.ToArray() ?? Array.Empty<byte>()
+                    );
+                    keyValue = new AsnEncodedData(spki.SubjectPublicKey.ToArray());
+                    return read;
                 }
-                catch (AsnContentException e)
-                {
-                    throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding, e);
-                }
-
-                oid = new Oid(spki.Algorithm.Algorithm, null);
-                parameters = new AsnEncodedData(
-                    spki.Algorithm.Parameters?.ToArray() ?? Array.Empty<byte>()
-                );
-                keyValue = new AsnEncodedData(spki.SubjectPublicKey.ToArray());
-                return read;
-            }
         }
     }
 }

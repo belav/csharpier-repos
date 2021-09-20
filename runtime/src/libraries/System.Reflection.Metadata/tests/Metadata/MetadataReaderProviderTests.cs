@@ -42,7 +42,7 @@ namespace System.Reflection.Metadata.Tests
                 () =>
                 {
                     fixed (byte* p = new byte[] { 0 })
-                    MetadataReaderProvider.FromMetadataImage(p, -1);
+                        MetadataReaderProvider.FromMetadataImage(p, -1);
                 }
             );
 

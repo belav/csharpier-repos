@@ -482,7 +482,7 @@ namespace System
         {
             fixed (byte* pDest = &dest)
             fixed (byte* pSrc = &src)
-            __Memmove(pDest, pSrc, len);
+                __Memmove(pDest, pSrc, len);
         }
 
 #if HAS_CUSTOM_BLOCKS

@@ -33,7 +33,7 @@ namespace System.IO
             // But I also need to get a pointer to that block of memory...
             int len = array.Length;
             fixed (byte* ptr = &MemoryMarshal.GetReference((Span<byte>)array))
-            Initialize(ptr, len, len, FileAccess.Read);
+                Initialize(ptr, len, len, FileAccess.Read);
         }
 
 #if (!NETSTANDARD2_0 && !NETFRAMEWORK)

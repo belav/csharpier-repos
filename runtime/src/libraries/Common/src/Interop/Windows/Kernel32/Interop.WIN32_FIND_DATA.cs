@@ -27,7 +27,7 @@ internal static partial class Interop
                 get
                 {
                     fixed (char* c = _cFileName)
-                    return new ReadOnlySpan<char>(c, MAX_PATH);
+                        return new ReadOnlySpan<char>(c, MAX_PATH);
                 }
             }
         }

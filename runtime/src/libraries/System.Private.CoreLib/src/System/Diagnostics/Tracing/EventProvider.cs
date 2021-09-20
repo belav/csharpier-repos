@@ -1238,12 +1238,12 @@ namespace System.Diagnostics.Tracing
                         if (dataRefObj[i] is string)
                         {
                             fixed (char* p = (string?)dataRefObj[i])
-                            userDataPtr[refObjPosition[i]].Ptr = (ulong)p;
+                                userDataPtr[refObjPosition[i]].Ptr = (ulong)p;
                         }
                         else
                         {
                             fixed (byte* p = (byte[]?)dataRefObj[i])
-                            userDataPtr[refObjPosition[i]].Ptr = (ulong)p;
+                                userDataPtr[refObjPosition[i]].Ptr = (ulong)p;
                         }
                     }
 

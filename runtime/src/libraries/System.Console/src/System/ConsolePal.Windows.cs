@@ -860,13 +860,13 @@ namespace System
 
             bool r;
             fixed (Interop.Kernel32.CHAR_INFO* pCharInfo = data)
-            r = Interop.Kernel32.ReadConsoleOutput(
-                OutputHandle,
-                pCharInfo,
-                bufferSize,
-                bufferCoord,
-                ref readRegion
-            );
+                r = Interop.Kernel32.ReadConsoleOutput(
+                    OutputHandle,
+                    pCharInfo,
+                    bufferSize,
+                    bufferCoord,
+                    ref readRegion
+                );
             if (!r)
                 throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastWin32Error());
 
@@ -913,13 +913,13 @@ namespace System
             writeRegion.Bottom = (short)(targetTop + sourceHeight);
 
             fixed (Interop.Kernel32.CHAR_INFO* pCharInfo = data)
-            Interop.Kernel32.WriteConsoleOutput(
-                OutputHandle,
-                pCharInfo,
-                bufferSize,
-                bufferCoord,
-                ref writeRegion
-            );
+                Interop.Kernel32.WriteConsoleOutput(
+                    OutputHandle,
+                    pCharInfo,
+                    bufferSize,
+                    bufferCoord,
+                    ref writeRegion
+                );
         }
 
         public static void Clear()
